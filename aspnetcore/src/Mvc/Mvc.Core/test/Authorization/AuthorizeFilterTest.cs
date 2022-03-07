@@ -597,8 +597,7 @@ public class AuthorizeFilterTest
         Assert.NotSame(policy2, effectivePolicy);
         Assert.Equal(
             new[] { "Claim1", "Claim2" },
-            effectivePolicy
-                .Requirements
+            effectivePolicy.Requirements
                 .Cast<ClaimsAuthorizationRequirement>()
                 .Select(c => c.ClaimType)
         );
@@ -621,15 +620,13 @@ public class AuthorizeFilterTest
             .AddSingleton<IAuthorizationPolicyProvider>(policyProvider)
             .BuildServiceProvider();
 
-        ActionContext
-            .HttpContext
-            .SetEndpoint(
-                new Endpoint(
-                    _ => null,
-                    new EndpointMetadataCollection(new AuthorizeAttribute("policy2")),
-                    "test"
-                )
-            );
+        ActionContext.HttpContext.SetEndpoint(
+            new Endpoint(
+                _ => null,
+                new EndpointMetadataCollection(new AuthorizeAttribute("policy2")),
+                "test"
+            )
+        );
         var context = new AuthorizationFilterContext(ActionContext, new[] { filter, });
 
         // Act
@@ -640,8 +637,7 @@ public class AuthorizeFilterTest
         Assert.NotSame(policy2, effectivePolicy);
         Assert.Equal(
             new[] { "Claim1", "Claim2" },
-            effectivePolicy
-                .Requirements
+            effectivePolicy.Requirements
                 .Cast<ClaimsAuthorizationRequirement>()
                 .Select(c => c.ClaimType)
         );

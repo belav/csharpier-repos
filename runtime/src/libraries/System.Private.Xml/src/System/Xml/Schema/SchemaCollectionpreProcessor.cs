@@ -836,26 +836,26 @@ namespace System.Xml.Schema
 
             foreach (DictionaryEntry entry in redefine.Groups)
             {
-                redefine
-                    .Schema!
-                    .Groups
-                    .Insert((XmlQualifiedName)entry.Key!, (XmlSchemaObject)entry.Value!);
+                redefine.Schema!.Groups.Insert(
+                    (XmlQualifiedName)entry.Key!,
+                    (XmlSchemaObject)entry.Value!
+                );
             }
 
             foreach (DictionaryEntry entry in redefine.AttributeGroups)
             {
-                redefine
-                    .Schema!
-                    .AttributeGroups
-                    .Insert((XmlQualifiedName)entry.Key!, (XmlSchemaObject)entry.Value!);
+                redefine.Schema!.AttributeGroups.Insert(
+                    (XmlQualifiedName)entry.Key!,
+                    (XmlSchemaObject)entry.Value!
+                );
             }
 
             foreach (DictionaryEntry entry in redefine.SchemaTypes)
             {
-                redefine
-                    .Schema!
-                    .SchemaTypes
-                    .Insert((XmlQualifiedName)entry.Key!, (XmlSchemaObject)entry.Value!);
+                redefine.Schema!.SchemaTypes.Insert(
+                    (XmlQualifiedName)entry.Key!,
+                    (XmlSchemaObject)entry.Value!
+                );
             }
         }
 
@@ -943,13 +943,15 @@ namespace System.Xml.Schema
                     XmlSchemaComplexContent content = (XmlSchemaComplexContent)ctype.ContentModel;
                     if (content.Content is XmlSchemaComplexContentRestriction)
                     {
-                        baseName =
-                            ((XmlSchemaComplexContentRestriction)content.Content).BaseTypeName;
+                        baseName = (
+                            (XmlSchemaComplexContentRestriction)content.Content
+                        ).BaseTypeName;
                     }
                     else
                     {
-                        baseName =
-                            ((XmlSchemaComplexContentExtension)content.Content!).BaseTypeName;
+                        baseName = (
+                            (XmlSchemaComplexContentExtension)content.Content!
+                        ).BaseTypeName;
                     }
                 }
                 else
@@ -957,8 +959,9 @@ namespace System.Xml.Schema
                     XmlSchemaSimpleContent content = (XmlSchemaSimpleContent)ctype.ContentModel;
                     if (content.Content is XmlSchemaSimpleContentRestriction)
                     {
-                        baseName =
-                            ((XmlSchemaSimpleContentRestriction)content.Content).BaseTypeName;
+                        baseName = (
+                            (XmlSchemaSimpleContentRestriction)content.Content
+                        ).BaseTypeName;
                     }
                     else
                     {

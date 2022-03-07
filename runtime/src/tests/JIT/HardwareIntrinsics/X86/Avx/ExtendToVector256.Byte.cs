@@ -420,17 +420,15 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (!Succeeded)
             {
-                TestLibrary
-                    .TestFramework
-                    .LogInformation(
-                        $"{nameof(Avx)}.{nameof(Avx.ExtendToVector256)}<Byte>(Vector128<Byte>): {method} failed:"
-                    );
-                TestLibrary
-                    .TestFramework
-                    .LogInformation($"  firstOp: ({string.Join(", ", firstOp)})");
-                TestLibrary
-                    .TestFramework
-                    .LogInformation($"   result: ({string.Join(", ", result)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(Avx)}.{nameof(Avx.ExtendToVector256)}<Byte>(Vector128<Byte>): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  firstOp: ({string.Join(", ", firstOp)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   result: ({string.Join(", ", result)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
             }
         }

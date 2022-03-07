@@ -15,33 +15,33 @@ namespace System.Net.Http.Tests
     public class HttpHeadersTest
     {
         // Note: These are not real known headers, so they won't be returned if we call HeaderDescriptor.Get().
-        private static readonly HeaderDescriptor known1Header =
-            (new KnownHeader("known1", HttpHeaderType.General, new MockHeaderParser())).Descriptor;
-        private static readonly HeaderDescriptor known2Header =
-            (new KnownHeader("known2", HttpHeaderType.General, new MockHeaderParser())).Descriptor;
-        private static readonly HeaderDescriptor known3Header =
-            (new KnownHeader("known3", HttpHeaderType.General, new MockHeaderParser())).Descriptor;
-        private static readonly HeaderDescriptor known4Header =
-            (
-                new KnownHeader("known3", HttpHeaderType.General, new CustomTypeHeaderParser())
-            ).Descriptor;
+        private static readonly HeaderDescriptor known1Header = (
+            new KnownHeader("known1", HttpHeaderType.General, new MockHeaderParser())
+        ).Descriptor;
+        private static readonly HeaderDescriptor known2Header = (
+            new KnownHeader("known2", HttpHeaderType.General, new MockHeaderParser())
+        ).Descriptor;
+        private static readonly HeaderDescriptor known3Header = (
+            new KnownHeader("known3", HttpHeaderType.General, new MockHeaderParser())
+        ).Descriptor;
+        private static readonly HeaderDescriptor known4Header = (
+            new KnownHeader("known3", HttpHeaderType.General, new CustomTypeHeaderParser())
+        ).Descriptor;
 
-        private static readonly HeaderDescriptor noComparerHeader =
-            (
-                new KnownHeader(
-                    "noComparerHeader",
-                    HttpHeaderType.General,
-                    new NoComparerHeaderParser()
-                )
-            ).Descriptor;
-        private static readonly HeaderDescriptor customTypeHeader =
-            (
-                new KnownHeader(
-                    "customTypeHeader",
-                    HttpHeaderType.General,
-                    new CustomTypeHeaderParser()
-                )
-            ).Descriptor;
+        private static readonly HeaderDescriptor noComparerHeader = (
+            new KnownHeader(
+                "noComparerHeader",
+                HttpHeaderType.General,
+                new NoComparerHeaderParser()
+            )
+        ).Descriptor;
+        private static readonly HeaderDescriptor customTypeHeader = (
+            new KnownHeader(
+                "customTypeHeader",
+                HttpHeaderType.General,
+                new CustomTypeHeaderParser()
+            )
+        ).Descriptor;
 
         private static readonly HeaderDescriptor customHeader;
 

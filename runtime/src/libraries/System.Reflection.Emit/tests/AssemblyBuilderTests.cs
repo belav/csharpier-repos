@@ -747,8 +747,7 @@ namespace System.Reflection.Emit.Tests
                     DefineDynamicAssembly_AssemblyBuilderLocationIsEmpty_InternalAssemblyBuilderLocationIsEmpty
                 )
             );
-            Assembly internalAssemblyBuilder = AppDomain
-                .CurrentDomain
+            Assembly internalAssemblyBuilder = AppDomain.CurrentDomain
                 .GetAssemblies()
                 .FirstOrDefault(a => a.FullName == assembly.FullName);
 

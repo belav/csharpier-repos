@@ -184,8 +184,7 @@ namespace N
 }}"
                 }
             );
-            var namedType = compilation
-                .GlobalNamespace
+            var namedType = compilation.GlobalNamespace
                 .GetMember<NamespaceSymbol>("N")
                 .GetMember<NamedTypeSymbol>("C");
             Assert.True(namedType.IsExplicitDefinitionOfNoPiaLocalType);
@@ -207,8 +206,7 @@ namespace N
 }}"
                 }
             );
-            var namedType = compilation
-                .GlobalNamespace
+            var namedType = compilation.GlobalNamespace
                 .GetMember<NamespaceSymbol>("N")
                 .GetMember<NamedTypeSymbol>("C");
             Assert.True(namedType.IsExplicitDefinitionOfNoPiaLocalType);
@@ -230,8 +228,7 @@ namespace N
 }}"
                 }
             );
-            var namedType = compilation
-                .GlobalNamespace
+            var namedType = compilation.GlobalNamespace
                 .GetMember<NamespaceSymbol>("N")
                 .GetMember<NamedTypeSymbol>("C");
             Assert.True(namedType.IsExplicitDefinitionOfNoPiaLocalType);

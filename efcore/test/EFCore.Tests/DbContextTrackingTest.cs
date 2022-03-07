@@ -1624,8 +1624,9 @@ namespace Microsoft.EntityFrameworkCore
             using var context = new EarlyLearningCenter(
                 InMemoryTestHelpers.Instance.CreateServiceProvider()
             );
-            var category7 =
-                context.Attach(new Category { Id = 7, Products = new List<Product>() }).Entity;
+            var category7 = context
+                .Attach(new Category { Id = 7, Products = new List<Product>() })
+                .Entity;
 
             var category = new Category { Id = 1, Name = "Beverages" };
             var product = new Product
@@ -1663,8 +1664,9 @@ namespace Microsoft.EntityFrameworkCore
             using var context = new EarlyLearningCenter(
                 InMemoryTestHelpers.Instance.CreateServiceProvider()
             );
-            var category7 =
-                context.Attach(new Category { Id = 7, Products = new List<Product>() }).Entity;
+            var category7 = context
+                .Attach(new Category { Id = 7, Products = new List<Product>() })
+                .Entity;
 
             var category = new Category { Id = 1, Name = "Beverages" };
 
@@ -1705,8 +1707,9 @@ namespace Microsoft.EntityFrameworkCore
             using var context = new EarlyLearningCenter(
                 InMemoryTestHelpers.Instance.CreateServiceProvider()
             );
-            var category7 =
-                context.Attach(new Category { Id = 7, Products = new List<Product>() }).Entity;
+            var category7 = context
+                .Attach(new Category { Id = 7, Products = new List<Product>() })
+                .Entity;
 
             var category = new Category { Id = 1, Name = "Beverages" };
 
@@ -1747,8 +1750,9 @@ namespace Microsoft.EntityFrameworkCore
             using var context = new EarlyLearningCenter(
                 InMemoryTestHelpers.Instance.CreateServiceProvider()
             );
-            var category7 =
-                context.Attach(new Category { Id = 7, Products = new List<Product>() }).Entity;
+            var category7 = context
+                .Attach(new Category { Id = 7, Products = new List<Product>() })
+                .Entity;
 
             var category = new Category { Id = 1, Name = "Beverages" };
 
@@ -1789,8 +1793,9 @@ namespace Microsoft.EntityFrameworkCore
             using var context = new EarlyLearningCenter(
                 InMemoryTestHelpers.Instance.CreateServiceProvider()
             );
-            var category7 =
-                context.Attach(new Category { Id = 7, Products = new List<Product>() }).Entity;
+            var category7 = context
+                .Attach(new Category { Id = 7, Products = new List<Product>() })
+                .Entity;
 
             var category = new Category { Id = 1, Name = "Beverages" };
             var product = new Product
@@ -1826,8 +1831,9 @@ namespace Microsoft.EntityFrameworkCore
             using var context = new EarlyLearningCenter(
                 InMemoryTestHelpers.Instance.CreateServiceProvider()
             );
-            var category7 =
-                context.Attach(new Category { Id = 7, Products = new List<Product>() }).Entity;
+            var category7 = context
+                .Attach(new Category { Id = 7, Products = new List<Product>() })
+                .Entity;
 
             var category = new Category { Id = 1, Name = "Beverages" };
             var product = new Product
@@ -1862,8 +1868,9 @@ namespace Microsoft.EntityFrameworkCore
             using var context = new EarlyLearningCenter(
                 InMemoryTestHelpers.Instance.CreateServiceProvider()
             );
-            var category7 =
-                context.Attach(new Category { Id = 7, Products = new List<Product>() }).Entity;
+            var category7 = context
+                .Attach(new Category { Id = 7, Products = new List<Product>() })
+                .Entity;
 
             var category = new Category { Id = 1, Name = "Beverages" };
             var product = new Product
@@ -1900,8 +1907,9 @@ namespace Microsoft.EntityFrameworkCore
             using var context = new EarlyLearningCenter(
                 InMemoryTestHelpers.Instance.CreateServiceProvider()
             );
-            var category7 =
-                context.Attach(new Category { Id = 7, Products = new List<Product>() }).Entity;
+            var category7 = context
+                .Attach(new Category { Id = 7, Products = new List<Product>() })
+                .Entity;
 
             var category = new Category { Id = 1, Name = "Beverages" };
 
@@ -1942,8 +1950,9 @@ namespace Microsoft.EntityFrameworkCore
             using var context = new EarlyLearningCenter(
                 InMemoryTestHelpers.Instance.CreateServiceProvider()
             );
-            var category7 =
-                context.Attach(new Category { Id = 7, Products = new List<Product>() }).Entity;
+            var category7 = context
+                .Attach(new Category { Id = 7, Products = new List<Product>() })
+                .Entity;
 
             var category = new Category { Id = 1, Name = "Beverages" };
             var product = new Product
@@ -1981,8 +1990,9 @@ namespace Microsoft.EntityFrameworkCore
             using var context = new EarlyLearningCenter(
                 InMemoryTestHelpers.Instance.CreateServiceProvider()
             );
-            var category7 =
-                context.Attach(new Category { Id = 7, Products = new List<Product>() }).Entity;
+            var category7 = context
+                .Attach(new Category { Id = 7, Products = new List<Product>() })
+                .Entity;
 
             var category = new Category { Id = 1, Name = "Beverages" };
 
@@ -2023,8 +2033,9 @@ namespace Microsoft.EntityFrameworkCore
             using var context = new EarlyLearningCenter(
                 InMemoryTestHelpers.Instance.CreateServiceProvider()
             );
-            var category7 =
-                context.Attach(new Category { Id = 7, Products = new List<Product>() }).Entity;
+            var category7 = context
+                .Attach(new Category { Id = 7, Products = new List<Product>() })
+                .Entity;
 
             var category = new Category { Id = 1, Name = "Beverages" };
             var product = new Product
@@ -2060,8 +2071,9 @@ namespace Microsoft.EntityFrameworkCore
             using var context = new EarlyLearningCenter(
                 InMemoryTestHelpers.Instance.CreateServiceProvider()
             );
-            var category7 =
-                context.Attach(new Category { Id = 7, Products = new List<Product>() }).Entity;
+            var category7 = context
+                .Attach(new Category { Id = 7, Products = new List<Product>() })
+                .Entity;
 
             var category = new Category { Id = 1, Name = "Beverages" };
             var product = new Product

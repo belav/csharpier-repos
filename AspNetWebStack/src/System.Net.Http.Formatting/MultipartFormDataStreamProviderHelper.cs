@@ -58,8 +58,9 @@ namespace System.Net.Http
             // to get the string content and then add that as form data
             foreach (HttpContent content in contents)
             {
-                ContentDispositionHeaderValue contentDisposition =
-                    content.Headers.ContentDisposition;
+                ContentDispositionHeaderValue contentDisposition = content
+                    .Headers
+                    .ContentDisposition;
                 // If FileName is null or empty, the content is form data and will be processed.
                 if (String.IsNullOrEmpty(contentDisposition.FileName))
                 {

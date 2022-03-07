@@ -153,12 +153,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             // If we got a comma, we can syntactically find out if we're in an ObjectInitializerExpression or WithExpression
             if (
                 token.Kind() == SyntaxKind.CommaToken
-                && !token
-                    .Parent
-                    .IsKind(
-                        SyntaxKind.ObjectInitializerExpression,
-                        SyntaxKind.WithInitializerExpression
-                    )
+                && !token.Parent.IsKind(
+                    SyntaxKind.ObjectInitializerExpression,
+                    SyntaxKind.WithInitializerExpression
+                )
             )
             {
                 return null;
@@ -235,8 +233,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     if (token.Parent is InitializerExpressionSyntax initializer)
                     {
                         return new HashSet<string>(
-                            initializer
-                                .Expressions
+                            initializer.Expressions
                                 .OfType<AssignmentExpressionSyntax>()
                                 .Where(b => b.OperatorToken.Kind() == SyntaxKind.EqualsToken)
                                 .Select(b => b.Left)

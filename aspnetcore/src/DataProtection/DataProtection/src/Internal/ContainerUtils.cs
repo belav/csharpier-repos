@@ -64,8 +64,9 @@ internal static class ContainerUtils
             }
 
             // check if directory is a subdirectory of this location
-            var fs_file =
-                new DirectoryInfo(fields[1].TrimEnd(Path.DirectorySeparatorChar)).FullName;
+            var fs_file = new DirectoryInfo(
+                fields[1].TrimEnd(Path.DirectorySeparatorChar)
+            ).FullName;
             var dir = directory;
             while (dir != null)
             {

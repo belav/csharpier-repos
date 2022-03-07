@@ -234,13 +234,11 @@ public class TwitterHandler : RemoteAuthenticationHandler<TwitterOptions>
 
         var cookieOptions = Options.StateCookie.Build(Context, Clock.UtcNow);
 
-        Response
-            .Cookies
-            .Append(
-                Options.StateCookie.Name!,
-                Options.StateDataFormat.Protect(requestToken),
-                cookieOptions
-            );
+        Response.Cookies.Append(
+            Options.StateCookie.Name!,
+            Options.StateDataFormat.Protect(requestToken),
+            cookieOptions
+        );
 
         var redirectContext = new RedirectContext<TwitterOptions>(
             Context,
@@ -476,18 +474,14 @@ public class TwitterHandler : RemoteAuthenticationHandler<TwitterOptions>
         string signatureData
     )
     {
-        var key = Encoding
-            .ASCII
-            .GetBytes(
-                string.Format(
-                    CultureInfo.InvariantCulture,
-                    "{0}&{1}",
-                    Uri.EscapeDataString(consumerSecret),
-                    string.IsNullOrEmpty(tokenSecret)
-                      ? string.Empty
-                      : Uri.EscapeDataString(tokenSecret)
-                )
-            );
+        var key = Encoding.ASCII.GetBytes(
+            string.Format(
+                CultureInfo.InvariantCulture,
+                "{0}&{1}",
+                Uri.EscapeDataString(consumerSecret),
+                string.IsNullOrEmpty(tokenSecret) ? string.Empty : Uri.EscapeDataString(tokenSecret)
+            )
+        );
         var hash = HMACSHA1.HashData(key, Encoding.ASCII.GetBytes(signatureData));
         return Convert.ToBase64String(hash);
     }
@@ -511,9 +505,9 @@ public class TwitterHandler : RemoteAuthenticationHandler<TwitterOptions>
         try
         {
             // Failure, attempt to parse Twitters error message
-            var errorContentStream = await response
-                .Content
-                .ReadAsStreamAsync(Context.RequestAborted);
+            var errorContentStream = await response.Content.ReadAsStreamAsync(
+                Context.RequestAborted
+            );
             errorResponse = await JsonSerializer.DeserializeAsync<TwitterErrorResponse>(
                 errorContentStream,
                 ErrorSerializerOptions

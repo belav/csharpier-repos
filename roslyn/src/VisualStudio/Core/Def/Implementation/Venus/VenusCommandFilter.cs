@@ -59,9 +59,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
 
             // We need to map the TextSpan from the DataBuffer to our subject buffer.
             var span = textViewModel.DataBuffer.CurrentSnapshot.GetSpan(pSpan[0]);
-            var subjectSpans = WpfTextView
-                .BufferGraph
-                .MapDownToBuffer(span, SpanTrackingMode.EdgeInclusive, _subjectBuffer);
+            var subjectSpans = WpfTextView.BufferGraph.MapDownToBuffer(
+                span,
+                SpanTrackingMode.EdgeInclusive,
+                _subjectBuffer
+            );
 
             // The following loop addresses the case where the position is on a seam and maps to multiple source spans.
             // In these cases, we assume it's okay to return the first span that successfully returns a DataTip.
@@ -87,8 +89,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                     // take the span that intersects with the input span, since that's probably
                     // the one we care about.
                     // If there are no such spans, just return.
-                    var surfaceSpan = WpfTextView
-                        .BufferGraph
+                    var surfaceSpan = WpfTextView.BufferGraph
                         .MapUpToBuffer(
                             subjectSpan,
                             SpanTrackingMode.EdgeInclusive,

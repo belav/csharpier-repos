@@ -173,12 +173,11 @@ public class ResponseCompressionProvider : IResponseCompressionProvider
         }
         else
         {
-            selectedProvider =
-                candidates
-                    .OrderByDescending(x => x.Quality)
-                    .ThenBy(x => x.Priority)
-                    .First()
-                    .Provider;
+            selectedProvider = candidates
+                .OrderByDescending(x => x.Quality)
+                .ThenBy(x => x.Priority)
+                .First()
+                .Provider;
         }
 
         if (selectedProvider == null)

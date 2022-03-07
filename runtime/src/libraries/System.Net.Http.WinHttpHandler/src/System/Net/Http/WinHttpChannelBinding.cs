@@ -22,14 +22,12 @@ namespace System.Net.Http
             uint dataSize = 0;
 
             if (
-                !Interop
-                    .WinHttp
-                    .WinHttpQueryOption(
-                        requestHandle,
-                        Interop.WinHttp.WINHTTP_OPTION_SERVER_CBT,
-                        IntPtr.Zero,
-                        ref dataSize
-                    )
+                !Interop.WinHttp.WinHttpQueryOption(
+                    requestHandle,
+                    Interop.WinHttp.WINHTTP_OPTION_SERVER_CBT,
+                    IntPtr.Zero,
+                    ref dataSize
+                )
             )
             {
                 if (Marshal.GetLastWin32Error() == Interop.WinHttp.ERROR_INSUFFICIENT_BUFFER)
@@ -37,14 +35,12 @@ namespace System.Net.Http
                     data = Marshal.AllocHGlobal((int)dataSize);
 
                     if (
-                        Interop
-                            .WinHttp
-                            .WinHttpQueryOption(
-                                requestHandle,
-                                Interop.WinHttp.WINHTTP_OPTION_SERVER_CBT,
-                                data,
-                                ref dataSize
-                            )
+                        Interop.WinHttp.WinHttpQueryOption(
+                            requestHandle,
+                            Interop.WinHttp.WINHTTP_OPTION_SERVER_CBT,
+                            data,
+                            ref dataSize
+                        )
                     )
                     {
                         SetHandle(data);

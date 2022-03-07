@@ -34,8 +34,9 @@ namespace System.Net.Http.Functional.Tests
             (LocalHttpListenerTestsEnabled || DomainJoinedTestsEnabled);
 
         private static string s_specificUserName = Configuration.Security.ActiveDirectoryUserName;
-        private static string s_specificPassword =
-            Configuration.Security.ActiveDirectoryUserPassword;
+        private static string s_specificPassword = Configuration
+            .Security
+            .ActiveDirectoryUserPassword;
         private static string s_specificDomain = Configuration.Security.ActiveDirectoryName;
         private readonly NetworkCredential _specificCredential = new NetworkCredential(
             s_specificUserName,
@@ -416,11 +417,9 @@ namespace System.Net.Http.Functional.Tests
 
                     // Send a response in the JSON format that the client expects
                     string username = context.User.Identity.Name;
-                    byte[] bytes = System
-                        .Text
-                        .Encoding
-                        .UTF8
-                        .GetBytes($"{{\"authenticated\": \"true\", \"user\": \"{username}\" }}");
+                    byte[] bytes = System.Text.Encoding.UTF8.GetBytes(
+                        $"{{\"authenticated\": \"true\", \"user\": \"{username}\" }}"
+                    );
                     await context.Response.OutputStream.WriteAsync(bytes);
 
                     context.Response.Close();

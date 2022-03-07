@@ -38,8 +38,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 CancellationToken cancellationToken
             )
             {
-                var preferSimpleDefaultExpression =
-                    optionSet.GetOption(CSharpCodeStyleOptions.PreferSimpleDefaultExpression).Value;
+                var preferSimpleDefaultExpression = optionSet
+                    .GetOption(CSharpCodeStyleOptions.PreferSimpleDefaultExpression)
+                    .Value;
 
                 if (
                     node.CanReplaceWithDefaultLiteral(

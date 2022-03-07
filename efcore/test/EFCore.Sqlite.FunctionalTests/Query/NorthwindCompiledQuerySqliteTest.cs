@@ -28,8 +28,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     .Throws<InvalidOperationException>(
                         () => base.MakeBinary_does_not_throw_for_unsupported_operator()
                     )
-                    .Message
-                    .Replace("\r", "")
+                    .Message.Replace("\r", "")
                     .Replace("\n", "")
             );
         }
@@ -51,8 +50,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Throws<InvalidOperationException>(
                             () => query(context, new[] { "ALFKI" }).First().CustomerID
                         )
-                        .Message
-                        .Replace("\r", "")
+                        .Message.Replace("\r", "")
                         .Replace("\n", "")
                 );
             }
@@ -67,8 +65,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Throws<InvalidOperationException>(
                             () => query(context, new[] { "ANATR" }).First().CustomerID
                         )
-                        .Message
-                        .Replace("\r", "")
+                        .Message.Replace("\r", "")
                         .Replace("\n", "")
                 );
             }
@@ -91,8 +88,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                         await Assert.ThrowsAsync<InvalidOperationException>(
                             () => Enumerate(query(context, new[] { "ALFKI" }))
                         )
-                    )
-                        .Message
+                    ).Message
                         .Replace("\r", "")
                         .Replace("\n", "")
                 );
@@ -108,8 +104,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                         await Assert.ThrowsAsync<InvalidOperationException>(
                             () => Enumerate(query(context, new[] { "ANATR" }))
                         )
-                    )
-                        .Message
+                    ).Message
                         .Replace("\r", "")
                         .Replace("\n", "")
                 );

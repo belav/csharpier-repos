@@ -81,18 +81,15 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             connection.RunInTransaction(
                 static state =>
                 {
-                    state
-                        .self
-                        ._solutionAccessor
-                        .FlushInMemoryDataToDisk_MustRunInTransaction(state.connection);
-                    state
-                        .self
-                        ._projectAccessor
-                        .FlushInMemoryDataToDisk_MustRunInTransaction(state.connection);
-                    state
-                        .self
-                        ._documentAccessor
-                        .FlushInMemoryDataToDisk_MustRunInTransaction(state.connection);
+                    state.self._solutionAccessor.FlushInMemoryDataToDisk_MustRunInTransaction(
+                        state.connection
+                    );
+                    state.self._projectAccessor.FlushInMemoryDataToDisk_MustRunInTransaction(
+                        state.connection
+                    );
+                    state.self._documentAccessor.FlushInMemoryDataToDisk_MustRunInTransaction(
+                        state.connection
+                    );
                 },
                 (self: this, connection)
             );

@@ -5010,10 +5010,9 @@ class C
             Assert.True(success);
             Assert.NotNull(speculativeModel);
 
-            var newExpression =
-                ((InvocationExpressionSyntax)modifiedNode.Expression).ArgumentList.Arguments[
-                    0
-                ].Expression;
+            var newExpression = ((InvocationExpressionSyntax)modifiedNode.Expression)
+                .ArgumentList
+                .Arguments[0].Expression;
             var symbolInfo = speculativeModel.GetSymbolInfo(newExpression);
             Assert.Equal("System.Int32..ctor()", symbolInfo.Symbol.ToTestDisplayString());
             var typeInfo = speculativeModel.GetTypeInfo(newExpression);
@@ -5281,9 +5280,9 @@ class D
         [Fact]
         public void UseSiteWarning()
         {
-            var signedDll = TestOptions
-                .ReleaseDll
-                .WithCryptoPublicKey(TestResources.TestKeys.PublicKey_ce65828c82a341f2);
+            var signedDll = TestOptions.ReleaseDll.WithCryptoPublicKey(
+                TestResources.TestKeys.PublicKey_ce65828c82a341f2
+            );
 
             var libBTemplate =
                 @"
@@ -5489,14 +5488,13 @@ class X : List<int>
             var tree = compilation.SyntaxTrees.Single();
             var semanticModel = compilation.GetSemanticModel(tree);
 
-            var nodes =
-                (
-                    from node in tree.GetRoot().DescendantNodes()
-                    where node.IsKind(SyntaxKind.CollectionInitializerExpression)
-                    select (InitializerExpressionSyntax)node
-                )
-                    .Single()
-                    .Expressions;
+            var nodes = (
+                from node in tree.GetRoot().DescendantNodes()
+                where node.IsKind(SyntaxKind.CollectionInitializerExpression)
+                select (InitializerExpressionSyntax)node
+            )
+                .Single()
+                .Expressions;
 
             SymbolInfo symbolInfo;
 

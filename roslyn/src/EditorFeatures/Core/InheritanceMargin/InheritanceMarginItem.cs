@@ -49,8 +49,7 @@ namespace Microsoft.CodeAnalysis.InheritanceMargin
             CancellationToken cancellationToken
         )
         {
-            var targetItems = await serializableItem
-                .TargetItems
+            var targetItems = await serializableItem.TargetItems
                 .SelectAsArrayAsync(
                     (item, _) =>
                         InheritanceTargetItem.ConvertAsync(solution, item, cancellationToken),

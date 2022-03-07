@@ -928,8 +928,9 @@ namespace System.DirectoryServices
                     }
                     else
                     {
-                        vlvValue.contextIDlength =
-                            _vlv.DirectoryVirtualListViewContext._context.Length;
+                        vlvValue.contextIDlength = _vlv.DirectoryVirtualListViewContext
+                            ._context
+                            .Length;
                         vlvValue.contextID = Marshal.AllocCoTaskMem(vlvValue.contextIDlength);
                         ptrVLVContexToFree = vlvValue.contextID;
                         Marshal.Copy(

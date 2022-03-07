@@ -1030,13 +1030,11 @@ class Program
 
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
-            var expr =
-                tree.GetRoot()
-                    .DescendantNodes()
-                    .OfType<VariableDeclaratorSyntax>()
-                    .Single()
-                    .Initializer!
-                    .Value;
+            var expr = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<VariableDeclaratorSyntax>()
+                .Single()
+                .Initializer!.Value;
             var typeInfo = model.GetTypeInfo(expr);
             Assert.Null(typeInfo.Type);
             Assert.Equal(SpecialType.System_Delegate, typeInfo.ConvertedType!.SpecialType);
@@ -1098,15 +1096,13 @@ class Program
 
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
-            var expr =
-                (
-                    (CastExpressionSyntax)tree.GetRoot()
-                        .DescendantNodes()
-                        .OfType<VariableDeclaratorSyntax>()
-                        .Single()
-                        .Initializer!
-                        .Value
-                ).Expression;
+            var expr = (
+                (CastExpressionSyntax)tree.GetRoot()
+                    .DescendantNodes()
+                    .OfType<VariableDeclaratorSyntax>()
+                    .Single()
+                    .Initializer!.Value
+            ).Expression;
             var typeInfo = model.GetTypeInfo(expr);
             // https://github.com/dotnet/roslyn/issues/52874: GetTypeInfo() for method group should return inferred delegate type.
             Assert.Null(typeInfo.Type);
@@ -1378,15 +1374,13 @@ class Program
 
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
-            var expr =
-                (
-                    (CastExpressionSyntax)tree.GetRoot()
-                        .DescendantNodes()
-                        .OfType<VariableDeclaratorSyntax>()
-                        .Single()
-                        .Initializer!
-                        .Value
-                ).Expression;
+            var expr = (
+                (CastExpressionSyntax)tree.GetRoot()
+                    .DescendantNodes()
+                    .OfType<VariableDeclaratorSyntax>()
+                    .Single()
+                    .Initializer!.Value
+            ).Expression;
             var typeInfo = model.GetTypeInfo(expr);
             Assert.Null(typeInfo.Type);
             Assert.Equal(expectedDisplayString, typeInfo.ConvertedType?.ToTestDisplayString());
@@ -1407,9 +1401,10 @@ class Program
 
         private static bool HaveMatchingSignatures(IMethodSymbol methodA, IMethodSymbol methodB)
         {
-            return MemberSignatureComparer
-                .MethodGroupSignatureComparer
-                .Equals(methodA.GetSymbol<MethodSymbol>(), methodB.GetSymbol<MethodSymbol>());
+            return MemberSignatureComparer.MethodGroupSignatureComparer.Equals(
+                methodA.GetSymbol<MethodSymbol>(),
+                methodB.GetSymbol<MethodSymbol>()
+            );
         }
 
         public static IEnumerable<object?[]> GetExpressionData()
@@ -1510,15 +1505,13 @@ class Program
 
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
-            var expr =
-                (
-                    (CastExpressionSyntax)tree.GetRoot()
-                        .DescendantNodes()
-                        .OfType<VariableDeclaratorSyntax>()
-                        .Single()
-                        .Initializer!
-                        .Value
-                ).Expression;
+            var expr = (
+                (CastExpressionSyntax)tree.GetRoot()
+                    .DescendantNodes()
+                    .OfType<VariableDeclaratorSyntax>()
+                    .Single()
+                    .Initializer!.Value
+            ).Expression;
             var typeInfo = model.GetTypeInfo(expr);
             Assert.Null(typeInfo.Type);
             if (expectedType is null)
@@ -2066,13 +2059,11 @@ partial class B : A
 
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
-            var expr =
-                tree.GetRoot()
-                    .DescendantNodes()
-                    .OfType<VariableDeclaratorSyntax>()
-                    .Single()
-                    .Initializer!
-                    .Value;
+            var expr = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<VariableDeclaratorSyntax>()
+                .Single()
+                .Initializer!.Value;
             var typeInfo = model.GetTypeInfo(expr);
             Assert.Null(typeInfo.Type);
             Assert.Equal(SpecialType.System_Delegate, typeInfo.ConvertedType!.SpecialType);
@@ -2282,13 +2273,11 @@ static class B
 
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
-            var expr =
-                tree.GetRoot()
-                    .DescendantNodes()
-                    .OfType<VariableDeclaratorSyntax>()
-                    .Single()
-                    .Initializer!
-                    .Value;
+            var expr = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<VariableDeclaratorSyntax>()
+                .Single()
+                .Initializer!.Value;
             var typeInfo = model.GetTypeInfo(expr);
             Assert.Null(typeInfo.Type);
             Assert.Equal(SpecialType.System_Delegate, typeInfo.ConvertedType!.SpecialType);
@@ -2532,13 +2521,11 @@ namespace N
 
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
-            var expr =
-                tree.GetRoot()
-                    .DescendantNodes()
-                    .OfType<VariableDeclaratorSyntax>()
-                    .Single()
-                    .Initializer!
-                    .Value;
+            var expr = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<VariableDeclaratorSyntax>()
+                .Single()
+                .Initializer!.Value;
             var typeInfo = model.GetTypeInfo(expr);
             Assert.Null(typeInfo.Type);
             Assert.Equal(SpecialType.System_Delegate, typeInfo.ConvertedType!.SpecialType);
@@ -7003,13 +6990,11 @@ System.Action"
 
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
-            var expr =
-                tree.GetRoot()
-                    .DescendantNodes()
-                    .OfType<VariableDeclaratorSyntax>()
-                    .Single()
-                    .Initializer!
-                    .Value;
+            var expr = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<VariableDeclaratorSyntax>()
+                .Single()
+                .Initializer!.Value;
             var typeInfo = model.GetTypeInfo(expr);
             Assert.Null(typeInfo.Type);
             Assert.Equal(SpecialType.System_Delegate, typeInfo.ConvertedType!.SpecialType);

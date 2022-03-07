@@ -59,14 +59,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             )
             {
                 // '<' should not filter the completion list, even though it's in generic items like IList<>
-                var generalBaseline = CompletionItemRules
-                    .Default
-                    .WithFilterCharacterRule(
-                        CharacterSetModificationRule.Create(
-                            CharacterSetModificationKind.Remove,
-                            '<'
-                        )
-                    );
+                var generalBaseline = CompletionItemRules.Default.WithFilterCharacterRule(
+                    CharacterSetModificationRule.Create(CharacterSetModificationKind.Remove, '<')
+                );
 
                 var importDirectiveBaseline = CompletionItemRules.Create(
                     commitCharacterRules: ImmutableArray.Create(
@@ -221,14 +216,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             var token = root.FindToken(characterPosition);
 
             if (
-                !token
-                    .Parent
-                    .IsKind(
-                        SyntaxKind.ArgumentList,
-                        SyntaxKind.BracketedArgumentList,
-                        SyntaxKind.AttributeArgumentList,
-                        SyntaxKind.ArrayRankSpecifier
-                    )
+                !token.Parent.IsKind(
+                    SyntaxKind.ArgumentList,
+                    SyntaxKind.BracketedArgumentList,
+                    SyntaxKind.AttributeArgumentList,
+                    SyntaxKind.ArrayRankSpecifier
+                )
             )
             {
                 return false;
@@ -308,9 +301,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             // e.g. Action c = = Bar;
             if (symbol.IsKind(SymbolKind.Method) && !context.IsNameOfContext)
             {
-                var isInferredTypeDelegateOrFunctionPointer = context
-                    .InferredTypes
-                    .Any(type => type.IsDelegateType() || type.IsFunctionPointerType());
+                var isInferredTypeDelegateOrFunctionPointer = context.InferredTypes.Any(
+                    type => type.IsDelegateType() || type.IsFunctionPointerType()
+                );
                 if (!isInferredTypeDelegateOrFunctionPointer)
                 {
                     item = SymbolCompletionItem.AddShouldProvideParenthesisCompletion(item);

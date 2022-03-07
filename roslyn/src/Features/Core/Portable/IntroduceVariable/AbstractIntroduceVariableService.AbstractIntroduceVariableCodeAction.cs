@@ -108,8 +108,7 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
 
             private string CreateDisplayText(TExpressionSyntax expression)
             {
-                var singleLineExpression = _semanticDocument
-                    .Document
+                var singleLineExpression = _semanticDocument.Document
                     .GetLanguageService<ISyntaxFactsService>()
                     .ConvertToSingleLine(expression);
                 var nodeString = singleLineExpression.ToString();

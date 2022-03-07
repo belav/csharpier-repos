@@ -251,8 +251,12 @@ internal partial class Http2Connection
                 await _frameWriter.WriteSettingsAsync(_serverSettings.GetNonProtocolDefaults());
                 // Inform the client that the connection window is larger than the default. It can't be lowered here,
                 // It can only be lowered by not issuing window updates after data is received.
-                var connectionWindow =
-                    _context.ServiceContext.ServerOptions.Limits.Http2.InitialConnectionWindowSize;
+                var connectionWindow = _context
+                    .ServiceContext
+                    .ServerOptions
+                    .Limits
+                    .Http2
+                    .InitialConnectionWindowSize;
                 var diff = connectionWindow - (int)Http2PeerSettings.DefaultInitialWindowSize;
                 if (diff > 0)
                 {
@@ -1303,8 +1307,9 @@ internal partial class Http2Connection
         try
         {
             // This must be initialized before we offload the request or else we may start processing request body frames without it.
-            _currentHeadersStream.InputRemaining =
-                _currentHeadersStream.RequestHeaders.ContentLength;
+            _currentHeadersStream.InputRemaining = _currentHeadersStream
+                .RequestHeaders
+                .ContentLength;
 
             // This must wait until we've received all of the headers so we can verify the content-length.
             // We also must set the proper EndStream state before rejecting the request for any reason.
@@ -1377,9 +1382,10 @@ internal partial class Http2Connection
             throw;
         }
 
-        KestrelEventSource
-            .Log
-            .RequestQueuedStart(_currentHeadersStream, AspNetCore.Http.HttpProtocol.Http2);
+        KestrelEventSource.Log.RequestQueuedStart(
+            _currentHeadersStream,
+            AspNetCore.Http.HttpProtocol.Http2
+        );
 
         // _scheduleInline is only true in tests
         if (!_scheduleInline)

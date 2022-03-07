@@ -54,8 +54,7 @@ internal class ClassifiedSpanVisitor : SyntaxWalker
                     // We need to generate a classified span at this position. So insert a marker in its place.
                     comment = (SyntaxToken)SyntaxFactory
                         .Token(SyntaxKind.Marker, string.Empty)
-                        .Green
-                        .CreateRed(
+                        .Green.CreateRed(
                             razorCommentSyntax,
                             razorCommentSyntax.StartCommentStar.EndPosition
                         );
@@ -406,8 +405,7 @@ internal class ClassifiedSpanVisitor : SyntaxWalker
             tokenBuilder.AddRange(tokens, 0, tokens.Length);
             var markupTransition = SyntaxFactory
                 .MarkupTransition(tokenBuilder.ToList())
-                .Green
-                .CreateRed(node, node.Position);
+                .Green.CreateRed(node, node.Position);
             var spanContext = node.GetSpanContext();
             if (spanContext != null)
             {
@@ -490,8 +488,7 @@ internal class ClassifiedSpanVisitor : SyntaxWalker
             tokenBuilder.AddRange(tokens, 0, tokens.Length);
             var markupTransition = SyntaxFactory
                 .MarkupTransition(tokenBuilder.ToList())
-                .Green
-                .CreateRed(node, node.Position);
+                .Green.CreateRed(node, node.Position);
             var spanContext = node.GetSpanContext();
             if (spanContext != null)
             {

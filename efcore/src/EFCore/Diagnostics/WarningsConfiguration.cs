@@ -27,8 +27,10 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         private ImmutableSortedDictionary<
             int,
             (WarningBehavior? Behavior, LogLevel? Level)
-        > _explicitBehaviors =
-            ImmutableSortedDictionary<int, (WarningBehavior? Behavior, LogLevel? Level)>.Empty;
+        > _explicitBehaviors = ImmutableSortedDictionary<
+            int,
+            (WarningBehavior? Behavior, LogLevel? Level)
+        >.Empty;
 
         private WarningBehavior _defaultBehavior = WarningBehavior.Log;
 

@@ -3010,22 +3010,21 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task GroupBy_aggregate_SelectMany(bool async)
         {
-            var message =
-                (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            AssertQuery(
-                                async,
-                                ss =>
-                                    from o in ss.Set<Order>()
-                                    group o by o.CustomerID into g
-                                    let id = g.Min(x => x.OrderID)
-                                    from o in ss.Set<Order>()
-                                    where o.OrderID == id
-                                    select o
-                            )
-                    )
-                ).Message;
+            var message = (
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        AssertQuery(
+                            async,
+                            ss =>
+                                from o in ss.Set<Order>()
+                                group o by o.CustomerID into g
+                                let id = g.Min(x => x.OrderID)
+                                from o in ss.Set<Order>()
+                                where o.OrderID == id
+                                select o
+                        )
+                )
+            ).Message;
 
             Assert.Contains(
                 CoreStrings.TranslationFailedWithDetails(

@@ -271,15 +271,13 @@ public class DefaultTemplatesUtilities
         var localizationOptions = new MvcDataAnnotationsLocalizationOptions();
         var localizationOptionsAccesor = Options.Create(localizationOptions);
 
-        options
-            .ClientModelValidatorProviders
-            .Add(
-                new DataAnnotationsClientModelValidatorProvider(
-                    new ValidationAttributeAdapterProvider(),
-                    localizationOptionsAccesor,
-                    localizerFactory
-                )
-            );
+        options.ClientModelValidatorProviders.Add(
+            new DataAnnotationsClientModelValidatorProvider(
+                new ValidationAttributeAdapterProvider(),
+                localizationOptionsAccesor,
+                localizerFactory
+            )
+        );
 
         var urlHelperFactory = new Mock<IUrlHelperFactory>();
         urlHelperFactory.Setup(f => f.GetUrlHelper(It.IsAny<ActionContext>())).Returns(urlHelper);

@@ -204,9 +204,13 @@ namespace System.Globalization
                 {
                     fixed (char* bufferPtr = buffer)
                     {
-                        return Interop
-                            .Globalization
-                            .GetCalendarInfo(locale, id, type, bufferPtr, buffer.Length);
+                        return Interop.Globalization.GetCalendarInfo(
+                            locale,
+                            id,
+                            type,
+                            bufferPtr,
+                            buffer.Length
+                        );
                     }
                 },
                 localeName,
@@ -544,15 +548,13 @@ namespace System.Globalization
             ref IcuEnumCalendarsData callbackContext
         )
         {
-            return Interop
-                .Globalization
-                .EnumCalendarInfo(
-                    &EnumCalendarInfoCallback,
-                    localeName,
-                    calendarId,
-                    dataType,
-                    (IntPtr)Unsafe.AsPointer(ref callbackContext)
-                );
+            return Interop.Globalization.EnumCalendarInfo(
+                &EnumCalendarInfoCallback,
+                localeName,
+                calendarId,
+                dataType,
+                (IntPtr)Unsafe.AsPointer(ref callbackContext)
+            );
         }
 
         [UnmanagedCallersOnly]

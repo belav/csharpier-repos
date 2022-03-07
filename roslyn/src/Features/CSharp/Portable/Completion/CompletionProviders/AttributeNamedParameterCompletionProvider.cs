@@ -36,9 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
         private const string SpaceEqualsString = " =";
         private const string ColonString = ":";
 
-        private static readonly CompletionItemRules _spaceItemFilterRule = CompletionItemRules
-            .Default
-            .WithFilterCharacterRule(
+        private static readonly CompletionItemRules _spaceItemFilterRule =
+            CompletionItemRules.Default.WithFilterCharacterRule(
                 CharacterSetModificationRule.Create(CharacterSetModificationKind.Remove, ' ')
             );
 
@@ -208,8 +207,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 p => !existingNamedParameters.Contains(p.Name)
             );
 
-            var text = await semanticModel
-                .SyntaxTree
+            var text = await semanticModel.SyntaxTree
                 .GetTextAsync(context.CancellationToken)
                 .ConfigureAwait(false);
             var q =
@@ -243,8 +241,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             );
             parameterLists = parameterLists.Where(pl => IsValid(pl, existingNamedParameters));
 
-            var text = await semanticModel
-                .SyntaxTree
+            var text = await semanticModel.SyntaxTree
                 .GetTextAsync(context.CancellationToken)
                 .ConfigureAwait(false);
             return from pl in parameterLists
@@ -285,13 +282,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             int position
         )
         {
-            var existingArguments1 = argumentList
-                .Arguments
+            var existingArguments1 = argumentList.Arguments
                 .Where(a => a.Span.End <= position)
                 .Where(a => a.NameColon != null)
                 .Select(a => a.NameColon!.Name.Identifier.ValueText);
-            var existingArguments2 = argumentList
-                .Arguments
+            var existingArguments2 = argumentList.Arguments
                 .Where(a => a.Span.End <= position)
                 .Where(a => a.NameEquals != null)
                 .Select(a => a.NameEquals!.Name.Identifier.ValueText);
@@ -313,8 +308,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     is INamedTypeSymbol attributeType
             )
             {
-                return attributeType
-                    .InstanceConstructors
+                return attributeType.InstanceConstructors
                     .Where(c => c.IsAccessibleWithin(within))
                     .Select(c => c.Parameters);
             }

@@ -867,9 +867,11 @@ public class DefaultHtmlGeneratorTest
 
         var viewContext = GetViewContext<Model>(model, metadataProvider);
         viewContext.ViewData[nameof(Model.Collection)] = new[] { "ignored ViewData value" };
-        viewContext
-            .ModelState
-            .SetModelValue(nameof(Model.Collection), rawValue, attemptedValue: null);
+        viewContext.ModelState.SetModelValue(
+            nameof(Model.Collection),
+            rawValue,
+            attemptedValue: null
+        );
 
         var modelExplorer = metadataProvider.GetModelExplorerForType(
             typeof(List<string>),
@@ -902,9 +904,11 @@ public class DefaultHtmlGeneratorTest
 
         var viewContext = GetViewContext<Model>(model, metadataProvider);
         viewContext.ViewData[nameof(Model.Collection)] = rawValue;
-        viewContext
-            .ModelState
-            .SetModelValue(nameof(Model.Collection), rawValue, attemptedValue: null);
+        viewContext.ModelState.SetModelValue(
+            nameof(Model.Collection),
+            rawValue,
+            attemptedValue: null
+        );
 
         // Act
         var result = htmlGenerator.GetCurrentValues(
@@ -932,9 +936,11 @@ public class DefaultHtmlGeneratorTest
         model.Collection.AddRange(rawValue);
 
         var viewContext = GetViewContext<Model>(model, metadataProvider);
-        viewContext
-            .ModelState
-            .SetModelValue(nameof(Model.Collection), rawValue, attemptedValue: null);
+        viewContext.ModelState.SetModelValue(
+            nameof(Model.Collection),
+            rawValue,
+            attemptedValue: null
+        );
 
         // Act
         var result = htmlGenerator.GetCurrentValues(
@@ -1042,13 +1048,11 @@ public class DefaultHtmlGeneratorTest
         var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
         var htmlGenerator = GetGenerator(metadataProvider);
         var viewContext = GetViewContext<Model>(model: null, metadataProvider: metadataProvider);
-        viewContext
-            .ModelState
-            .SetModelValue(
-                propertyName,
-                new string[] { rawValue.ToString() },
-                attemptedValue: null
-            );
+        viewContext.ModelState.SetModelValue(
+            propertyName,
+            new string[] { rawValue.ToString() },
+            attemptedValue: null
+        );
 
         // Act
         var result = htmlGenerator.GetCurrentValues(

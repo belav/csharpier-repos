@@ -161,8 +161,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                                         );
                                     }
 
-                                    firstDebugImports =
-                                        binderFactory.GetBinder(parameterSyntax).ImportChain;
+                                    firstDebugImports = binderFactory
+                                        .GetBinder(parameterSyntax)
+                                        .ImportChain;
                                 }
 
                                 boundInitializers.Add(
@@ -210,8 +211,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (
                 !fieldSymbol.IsStatic
-                && fieldSymbol
-                    .ContainingType
+                && fieldSymbol.ContainingType
                     .GetMembersUnordered()
                     .OfType<SynthesizedRecordConstructor>()
                     .SingleOrDefault()

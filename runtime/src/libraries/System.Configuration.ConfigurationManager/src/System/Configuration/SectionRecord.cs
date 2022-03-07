@@ -253,8 +253,10 @@ namespace System.Configuration
             // This method will be first called for indirect input closest to the location config
             if (!sectionInput.HasErrors && !_flags[flag])
             {
-                OverrideMode modeLocation =
-                    sectionInput.SectionXmlInfo.OverrideModeSetting.OverrideMode;
+                OverrideMode modeLocation = sectionInput
+                    .SectionXmlInfo
+                    .OverrideModeSetting
+                    .OverrideMode;
 
                 if (modeLocation != OverrideMode.Inherit)
                 {

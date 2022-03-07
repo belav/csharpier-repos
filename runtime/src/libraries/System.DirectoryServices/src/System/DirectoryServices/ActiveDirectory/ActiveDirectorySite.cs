@@ -287,15 +287,14 @@ namespace System.DirectoryServices.ActiveDirectory
                     Debug.Assert(siteName != null);
 
                     // find the forest this machine belongs to
-                    string? forestName =
-                        Locator
-                            .GetDomainControllerInfo(
-                                null,
-                                null,
-                                null,
-                                (long)PrivateLocatorFlags.DirectoryServicesRequired
-                            )
-                            .DnsForestName;
+                    string? forestName = Locator
+                        .GetDomainControllerInfo(
+                            null,
+                            null,
+                            null,
+                            (long)PrivateLocatorFlags.DirectoryServicesRequired
+                        )
+                        .DnsForestName;
                     DirectoryContext currentContext = Utils.GetNewDirectoryContext(
                         forestName,
                         DirectoryContextType.Forest,
@@ -451,9 +450,9 @@ namespace System.DirectoryServices.ActiveDirectory
                         bool ISTGExist;
                         try
                         {
-                            ISTGExist = NTDSSiteEntry
-                                .Properties
-                                .Contains("interSiteTopologyGenerator");
+                            ISTGExist = NTDSSiteEntry.Properties.Contains(
+                                "interSiteTopologyGenerator"
+                            );
                         }
                         catch (COMException e)
                         {
@@ -939,9 +938,10 @@ namespace System.DirectoryServices.ActiveDirectory
                     try
                     {
                         // create nTDSSiteSettings object
-                        DirectoryEntry tmpEntry = cachedEntry
-                            .Children
-                            .Add("CN=NTDS Site Settings", "nTDSSiteSettings");
+                        DirectoryEntry tmpEntry = cachedEntry.Children.Add(
+                            "CN=NTDS Site Settings",
+                            "nTDSSiteSettings"
+                        );
                         //set properties on the Site NTDS settings object
                         DirectoryServer? replica = InterSiteTopologyGenerator;
                         if (replica != null)
@@ -969,9 +969,10 @@ namespace System.DirectoryServices.ActiveDirectory
                         if (!IsADAM)
                         {
                             // create the licensingSiteSettings object
-                            tmpEntry = cachedEntry
-                                .Children
-                                .Add("CN=Licensing Site Settings", "licensingSiteSettings");
+                            tmpEntry = cachedEntry.Children.Add(
+                                "CN=Licensing Site Settings",
+                                "licensingSiteSettings"
+                            );
                             tmpEntry.CommitChanges();
                         }
                     }

@@ -48,30 +48,22 @@ namespace System.Collections.Tests
         [Fact]
         public static void ComparerImplementations_Dictionary_WithWellKnownStringComparers()
         {
-            Type nonRandomizedOrdinalComparerType = typeof(object)
-                .Assembly
-                .GetType(
-                    "System.Collections.Generic.NonRandomizedStringEqualityComparer+OrdinalComparer",
-                    throwOnError: true
-                );
-            Type nonRandomizedOrdinalIgnoreCaseComparerType = typeof(object)
-                .Assembly
-                .GetType(
-                    "System.Collections.Generic.NonRandomizedStringEqualityComparer+OrdinalIgnoreCaseComparer",
-                    throwOnError: true
-                );
-            Type randomizedOrdinalComparerType = typeof(object)
-                .Assembly
-                .GetType(
-                    "System.Collections.Generic.RandomizedStringEqualityComparer+OrdinalComparer",
-                    throwOnError: true
-                );
-            Type randomizedOrdinalIgnoreCaseComparerType = typeof(object)
-                .Assembly
-                .GetType(
-                    "System.Collections.Generic.RandomizedStringEqualityComparer+OrdinalIgnoreCaseComparer",
-                    throwOnError: true
-                );
+            Type nonRandomizedOrdinalComparerType = typeof(object).Assembly.GetType(
+                "System.Collections.Generic.NonRandomizedStringEqualityComparer+OrdinalComparer",
+                throwOnError: true
+            );
+            Type nonRandomizedOrdinalIgnoreCaseComparerType = typeof(object).Assembly.GetType(
+                "System.Collections.Generic.NonRandomizedStringEqualityComparer+OrdinalIgnoreCaseComparer",
+                throwOnError: true
+            );
+            Type randomizedOrdinalComparerType = typeof(object).Assembly.GetType(
+                "System.Collections.Generic.RandomizedStringEqualityComparer+OrdinalComparer",
+                throwOnError: true
+            );
+            Type randomizedOrdinalIgnoreCaseComparerType = typeof(object).Assembly.GetType(
+                "System.Collections.Generic.RandomizedStringEqualityComparer+OrdinalIgnoreCaseComparer",
+                throwOnError: true
+            );
 
             // null comparer
 
@@ -113,13 +105,9 @@ namespace System.Collections.Tests
 
             RunDictionaryTest(
                 equalityComparer: StringComparer.InvariantCulture,
-                expectedInternalComparerTypeBeforeCollisionThreshold: StringComparer
-                    .InvariantCulture
-                    .GetType(),
+                expectedInternalComparerTypeBeforeCollisionThreshold: StringComparer.InvariantCulture.GetType(),
                 expectedPublicComparerBeforeCollisionThreshold: StringComparer.InvariantCulture,
-                expectedInternalComparerTypeAfterCollisionThreshold: StringComparer
-                    .InvariantCulture
-                    .GetType()
+                expectedInternalComparerTypeAfterCollisionThreshold: StringComparer.InvariantCulture.GetType()
             );
 
             // CollectionsMarshal.GetValueRefOrAddDefault
@@ -157,30 +145,22 @@ namespace System.Collections.Tests
         [Fact]
         public static void ComparerImplementations_HashSet_WithWellKnownStringComparers()
         {
-            Type nonRandomizedOrdinalComparerType = typeof(object)
-                .Assembly
-                .GetType(
-                    "System.Collections.Generic.NonRandomizedStringEqualityComparer+OrdinalComparer",
-                    throwOnError: true
-                );
-            Type nonRandomizedOrdinalIgnoreCaseComparerType = typeof(object)
-                .Assembly
-                .GetType(
-                    "System.Collections.Generic.NonRandomizedStringEqualityComparer+OrdinalIgnoreCaseComparer",
-                    throwOnError: true
-                );
-            Type randomizedOrdinalComparerType = typeof(object)
-                .Assembly
-                .GetType(
-                    "System.Collections.Generic.RandomizedStringEqualityComparer+OrdinalComparer",
-                    throwOnError: true
-                );
-            Type randomizedOrdinalIgnoreCaseComparerType = typeof(object)
-                .Assembly
-                .GetType(
-                    "System.Collections.Generic.RandomizedStringEqualityComparer+OrdinalIgnoreCaseComparer",
-                    throwOnError: true
-                );
+            Type nonRandomizedOrdinalComparerType = typeof(object).Assembly.GetType(
+                "System.Collections.Generic.NonRandomizedStringEqualityComparer+OrdinalComparer",
+                throwOnError: true
+            );
+            Type nonRandomizedOrdinalIgnoreCaseComparerType = typeof(object).Assembly.GetType(
+                "System.Collections.Generic.NonRandomizedStringEqualityComparer+OrdinalIgnoreCaseComparer",
+                throwOnError: true
+            );
+            Type randomizedOrdinalComparerType = typeof(object).Assembly.GetType(
+                "System.Collections.Generic.RandomizedStringEqualityComparer+OrdinalComparer",
+                throwOnError: true
+            );
+            Type randomizedOrdinalIgnoreCaseComparerType = typeof(object).Assembly.GetType(
+                "System.Collections.Generic.RandomizedStringEqualityComparer+OrdinalIgnoreCaseComparer",
+                throwOnError: true
+            );
 
             // null comparer
 
@@ -222,13 +202,9 @@ namespace System.Collections.Tests
 
             RunHashSetTest(
                 equalityComparer: StringComparer.InvariantCulture,
-                expectedInternalComparerTypeBeforeCollisionThreshold: StringComparer
-                    .InvariantCulture
-                    .GetType(),
+                expectedInternalComparerTypeBeforeCollisionThreshold: StringComparer.InvariantCulture.GetType(),
                 expectedPublicComparerBeforeCollisionThreshold: StringComparer.InvariantCulture,
-                expectedInternalComparerTypeAfterCollisionThreshold: StringComparer
-                    .InvariantCulture
-                    .GetType()
+                expectedInternalComparerTypeAfterCollisionThreshold: StringComparer.InvariantCulture.GetType()
             );
 
             static void RunHashSetTest(

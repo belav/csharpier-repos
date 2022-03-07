@@ -247,15 +247,13 @@ namespace System.Web.Http.Validation
                 .Returns(false);
 
             // Act
-            mockValidator
-                .Object
-                .Validate(
-                    new Person(),
-                    typeof(Person),
-                    metadataProvider,
-                    actionContext,
-                    string.Empty
-                );
+            mockValidator.Object.Validate(
+                new Person(),
+                typeof(Person),
+                metadataProvider,
+                actionContext,
+                string.Empty
+            );
 
             // Assert
             Assert.True(actionContext.ModelState.IsValid);
@@ -274,9 +272,13 @@ namespace System.Web.Http.Validation
                 .Returns(false);
 
             // Act
-            mockValidator
-                .Object
-                .Validate(new Pet(), typeof(Pet), metadataProvider, actionContext, string.Empty);
+            mockValidator.Object.Validate(
+                new Pet(),
+                typeof(Pet),
+                metadataProvider,
+                actionContext,
+                string.Empty
+            );
 
             // Assert
             Assert.False(actionContext.ModelState.IsValid);

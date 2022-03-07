@@ -104,20 +104,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             }
 
             if (
-                typeName
-                    .Parent
-                    .IsKind(
-                        SyntaxKind.VariableDeclaration,
-                        out VariableDeclarationSyntax? variableDeclaration
-                    )
-                && typeName
-                    .Parent
-                    .Parent
-                    .IsKind(
-                        SyntaxKind.LocalDeclarationStatement,
-                        SyntaxKind.ForStatement,
-                        SyntaxKind.UsingStatement
-                    )
+                typeName.Parent.IsKind(
+                    SyntaxKind.VariableDeclaration,
+                    out VariableDeclarationSyntax? variableDeclaration
+                )
+                && typeName.Parent.Parent.IsKind(
+                    SyntaxKind.LocalDeclarationStatement,
+                    SyntaxKind.ForStatement,
+                    SyntaxKind.UsingStatement
+                )
             )
             {
                 // check assignment for variable declarations.
@@ -208,8 +203,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             // cases :
             //        var anon = new { Num = 1 };
             //        var enumerableOfAnons = from prod in products select new { prod.Color, prod.Price };
-            var declaredType =
-                semanticModel.GetTypeInfo(typeName.StripRefIfNeeded(), cancellationToken).Type;
+            var declaredType = semanticModel
+                .GetTypeInfo(typeName.StripRefIfNeeded(), cancellationToken)
+                .Type;
             if (declaredType.ContainsAnonymousType())
             {
                 return false;

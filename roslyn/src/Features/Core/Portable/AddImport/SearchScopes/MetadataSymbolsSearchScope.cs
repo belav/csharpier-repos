@@ -52,10 +52,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 SearchQuery searchQuery
             )
             {
-                var service = _solution
-                    .Workspace
-                    .Services
-                    .GetService<ISymbolTreeInfoCacheService>();
+                var service =
+                    _solution.Workspace.Services.GetService<ISymbolTreeInfoCacheService>();
                 var info = await service
                     .TryGetMetadataSymbolTreeInfoAsync(
                         _solution,

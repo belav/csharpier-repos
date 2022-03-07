@@ -57,9 +57,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
             CompileAndVerify(
                 source,
                 validator: validator,
-                options: TestOptions
-                    .ReleaseDll
-                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
+                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
+                    MetadataImportOptions.Internal
+                )
             );
         }
 
@@ -2669,12 +2669,11 @@ B"
                 references: new[] { MscorlibRef, LinqAssemblyRef }
             );
 
-            var expr =
-                (
-                    (ExpressionStatementSyntax)(
-                        (GlobalStatementSyntax)tree.GetCompilationUnitRoot().Members[0]
-                    ).Statement
-                ).Expression;
+            var expr = (
+                (ExpressionStatementSyntax)(
+                    (GlobalStatementSyntax)tree.GetCompilationUnitRoot().Members[0]
+                ).Statement
+            ).Expression;
             var model = compilation.GetSemanticModel(tree);
             var info = model.GetSymbolInfo(expr);
             Assert.NotNull(info.Symbol);
@@ -2723,9 +2722,9 @@ B"
                 source: source,
                 sourceSymbolValidator: validator(true),
                 symbolValidator: validator(false),
-                options: TestOptions
-                    .ReleaseDll
-                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
+                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
+                    MetadataImportOptions.Internal
+                )
             );
         }
 
@@ -2779,9 +2778,9 @@ static class S
 }";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions
-                    .ReleaseDll
-                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
+                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
+                    MetadataImportOptions.Internal
+                )
             );
             Action<ModuleSymbol> validator = module =>
             {
@@ -2894,8 +2893,7 @@ internal static class C
                 comp,
                 symbolValidator: module =>
                 {
-                    var method = module
-                        .GlobalNamespace
+                    var method = module.GlobalNamespace
                         .GetMember<NamedTypeSymbol>("C")
                         .GetMember<PEMethodSymbol>("M1");
                     Assert.True(method.IsExtensionMethod);
@@ -3057,10 +3055,9 @@ class Program
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
 
-            var node =
-                tree.GetCompilationUnitRoot()
-                    .FindToken(code.IndexOf("GetHashCode", StringComparison.Ordinal))
-                    .Parent;
+            var node = tree.GetCompilationUnitRoot()
+                .FindToken(code.IndexOf("GetHashCode", StringComparison.Ordinal))
+                .Parent;
             var symbolInfo = model.GetSymbolInfo((SimpleNameSyntax)node);
             var methodSymbol = symbolInfo.Symbol.GetSymbol<MethodSymbol>();
             Assert.False(methodSymbol.IsFromCompilation(compilation));
@@ -3070,10 +3067,9 @@ class Program
             Assert.Equal(parameter.ContainingSymbol, methodSymbol);
 
             // Get the GenericNameSyntax node Cast<T1> for binding
-            node =
-                tree.GetCompilationUnitRoot()
-                    .FindToken(code.IndexOf("Cast<T1>", StringComparison.Ordinal))
-                    .Parent;
+            node = tree.GetCompilationUnitRoot()
+                .FindToken(code.IndexOf("Cast<T1>", StringComparison.Ordinal))
+                .Parent;
             symbolInfo = model.GetSymbolInfo((GenericNameSyntax)node);
             methodSymbol = (MethodSymbol)symbolInfo.Symbol.GetSymbol<MethodSymbol>();
             Assert.False(methodSymbol.IsFromCompilation(compilation));
@@ -3146,8 +3142,7 @@ class Program
             var compilation = CreateCompilationWithMscorlib40AndSystemCore(source);
             compilation.VerifyDiagnostics();
 
-            var extensionMethod = compilation
-                .GlobalNamespace
+            var extensionMethod = compilation.GlobalNamespace
                 .GetMember<NamedTypeSymbol>("C")
                 .GetMember<MethodSymbol>("M");
             Assert.True(extensionMethod.IsExtensionMethod);
@@ -3201,15 +3196,14 @@ public struct MyStruct<T>
             );
             compilation2.VerifyDiagnostics();
 
-            var extensionMethod = compilation2
-                .GlobalNamespace
+            var extensionMethod = compilation2.GlobalNamespace
                 .GetMember<NamedTypeSymbol>("C")
                 .GetMember<MethodSymbol>("M");
             Assert.True(extensionMethod.IsExtensionMethod);
 
-            var myStruct = (NamedTypeSymbol)compilation2
-                .GlobalNamespace
-                .GetMember<NamedTypeSymbol>("MyStruct");
+            var myStruct = (NamedTypeSymbol)compilation2.GlobalNamespace.GetMember<NamedTypeSymbol>(
+                "MyStruct"
+            );
             var int32Type = compilation2.GetSpecialType(SpecialType.System_Int32);
             var msi = myStruct.Construct(int32Type);
 
@@ -3237,15 +3231,14 @@ public struct MyStruct<T>
                     .WithLocation(5, 9)
             );
 
-            extensionMethod = compilation2
-                .GlobalNamespace
+            extensionMethod = compilation2.GlobalNamespace
                 .GetMember<NamedTypeSymbol>("C")
                 .GetMember<MethodSymbol>("M");
             Assert.True(extensionMethod.IsExtensionMethod);
 
-            myStruct = (NamedTypeSymbol)compilation2
-                .GlobalNamespace
-                .GetMember<NamedTypeSymbol>("MyStruct");
+            myStruct = (NamedTypeSymbol)compilation2.GlobalNamespace.GetMember<NamedTypeSymbol>(
+                "MyStruct"
+            );
             int32Type = compilation2.GetSpecialType(SpecialType.System_Int32);
             msi = myStruct.Construct(int32Type);
 
@@ -3552,14 +3545,16 @@ class Test
             var firstInvocation = nodes[0];
             var firstInvocationExpression = firstInvocation.Expression;
             var firstInvocationSymbol = model.GetSymbolInfo(firstInvocation).Symbol;
-            var firstInvocationExpressionSymbol =
-                model.GetSymbolInfo(firstInvocationExpression).Symbol;
+            var firstInvocationExpressionSymbol = model
+                .GetSymbolInfo(firstInvocationExpression)
+                .Symbol;
 
             var secondInvocation = nodes[1];
             var secondInvocationExpression = secondInvocation.Expression;
             var secondInvocationSymbol = model.GetSymbolInfo(secondInvocation).Symbol;
-            var secondInvocationExpressionSymbol =
-                model.GetSymbolInfo(secondInvocationExpression).Symbol;
+            var secondInvocationExpressionSymbol = model
+                .GetSymbolInfo(secondInvocationExpression)
+                .Symbol;
 
             Assert.Equal("obj.InstanceMethod", firstInvocationExpression.ToString());
             Assert.Equal(SyntaxKind.SimpleMemberAccessExpression, firstInvocationExpression.Kind());

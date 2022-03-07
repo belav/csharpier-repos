@@ -97,9 +97,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Razor
                 CancellationToken cancellationToken
             )
             {
-                return _inner
-                    .KeepAliveSession
-                    .RunRemoteAsync(targetName, solution: null, arguments, cancellationToken);
+                return _inner.KeepAliveSession.RunRemoteAsync(
+                    targetName,
+                    solution: null,
+                    arguments,
+                    cancellationToken
+                );
             }
 
             public Task<T> InvokeAsync<T>(
@@ -108,9 +111,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Razor
                 CancellationToken cancellationToken
             )
             {
-                return _inner
-                    .KeepAliveSession
-                    .RunRemoteAsync<T>(targetName, solution: null, arguments, cancellationToken);
+                return _inner.KeepAliveSession.RunRemoteAsync<T>(
+                    targetName,
+                    solution: null,
+                    arguments,
+                    cancellationToken
+                );
             }
 
             public void Dispose()

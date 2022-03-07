@@ -332,8 +332,7 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
                     continue;
                 }
 
-                var imports = mapping
-                    .Imports
+                var imports = mapping.Imports
                     .Select(i => i.ToString())
                     .Where(i => !OmitRIDs.Contains(i) && !OmitRIDReferences.Contains(i))
                     .ToArray();

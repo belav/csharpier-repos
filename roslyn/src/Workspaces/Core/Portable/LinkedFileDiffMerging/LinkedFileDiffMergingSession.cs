@@ -110,10 +110,8 @@ namespace Microsoft.CodeAnalysis
 
             // Automatically merge non-conflicting diffs while collecting the conflicting diffs
 
-            var textDifferencingService = _oldSolution
-                .Workspace
-                .Services
-                .GetRequiredService<IDocumentTextDifferencingService>();
+            var textDifferencingService =
+                _oldSolution.Workspace.Services.GetRequiredService<IDocumentTextDifferencingService>();
             var appliedChanges = await textDifferencingService
                 .GetTextChangesAsync(
                     _oldSolution.GetDocument(linkedDocumentGroup.First()),
@@ -169,8 +167,9 @@ namespace Microsoft.CodeAnalysis
                 allChanges = appliedChanges;
             }
 
-            groupSessionInfo.LinkedDocuments =
-                _newSolution.GetDocumentIdsWithFilePath(originalDocument.FilePath).Length;
+            groupSessionInfo.LinkedDocuments = _newSolution
+                .GetDocumentIdsWithFilePath(originalDocument.FilePath)
+                .Length;
             groupSessionInfo.DocumentsWithChanges = linkedDocumentGroup.Count();
             sessionInfo.LogLinkedFileResult(groupSessionInfo);
 

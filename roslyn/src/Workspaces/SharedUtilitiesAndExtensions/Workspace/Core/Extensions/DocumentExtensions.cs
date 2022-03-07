@@ -210,9 +210,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 return document.GetRequiredSemanticModelAsync(cancellationToken);
 
             var workspace = document.Project.Solution.Workspace;
-            var semanticModelService = workspace
-                .Services
-                .GetRequiredService<ISemanticModelReuseWorkspaceService>();
+            var semanticModelService =
+                workspace.Services.GetRequiredService<ISemanticModelReuseWorkspaceService>();
 
             return semanticModelService.ReuseExistingSpeculativeModelAsync(
                 document,

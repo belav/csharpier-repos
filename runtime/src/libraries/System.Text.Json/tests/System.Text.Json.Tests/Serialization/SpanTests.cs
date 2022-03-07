@@ -40,14 +40,13 @@ namespace System.Text.Json.Serialization.Tests
 
             // Try again with a smaller initial buffer size to ensure we handle incomplete data
             stream = new MemoryStream(data);
-            obj =
-                JsonSerializer
-                    .DeserializeAsync(
-                        stream,
-                        classType,
-                        new JsonSerializerOptions { DefaultBufferSize = 5, IncludeFields = true }
-                    )
-                    .Result;
+            obj = JsonSerializer
+                .DeserializeAsync(
+                    stream,
+                    classType,
+                    new JsonSerializerOptions { DefaultBufferSize = 5, IncludeFields = true }
+                )
+                .Result;
 
             Assert.IsAssignableFrom<ITestClass>(obj);
             ((ITestClass)obj).Verify();

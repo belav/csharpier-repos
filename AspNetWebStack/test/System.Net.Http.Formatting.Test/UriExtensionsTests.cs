@@ -16,13 +16,10 @@ namespace System.Net.Http
         [Fact]
         public void TypeIsCorrect()
         {
-            Assert
-                .Type
-                .HasProperties(
-                    typeof(UriExtensions),
-                    TypeAssert.TypeProperties.IsPublicVisibleClass
-                        | TypeAssert.TypeProperties.IsStatic
-                );
+            Assert.Type.HasProperties(
+                typeof(UriExtensions),
+                TypeAssert.TypeProperties.IsPublicVisibleClass | TypeAssert.TypeProperties.IsStatic
+            );
         }
 
         [Fact]

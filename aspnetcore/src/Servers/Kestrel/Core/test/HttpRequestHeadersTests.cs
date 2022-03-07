@@ -546,8 +546,7 @@ public class HttpRequestHeadersTests
                     () =>
                     {
                         var headerName = Encoding.ASCII.GetBytes(header.Name).AsSpan();
-                        var nextSpan = Encoding
-                            .Latin1
+                        var nextSpan = Encoding.Latin1
                             .GetBytes(headerValueUtf16Latin1CrossOver)
                             .AsSpan();
 
@@ -601,8 +600,7 @@ public class HttpRequestHeadersTests
                 }
 
                 var headerName = Encoding.ASCII.GetBytes(header.Name).AsSpan();
-                var latinValueSpan = Encoding
-                    .Latin1
+                var latinValueSpan = Encoding.Latin1
                     .GetBytes(headerValueUtf16Latin1CrossOver)
                     .AsSpan();
 

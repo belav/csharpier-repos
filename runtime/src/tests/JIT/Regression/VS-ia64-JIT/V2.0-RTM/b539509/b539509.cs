@@ -457,8 +457,14 @@ public struct BB
             do
             {
                 BB local26 = ((BB)(((object)(new AA<sbyte, byte, uint, uint, long, bool>()))));
-                param4.m_aguiGeneric1 =
-                    new AA<sbyte, byte, uint, uint, long, bool>().m_aguiGeneric1;
+                param4.m_aguiGeneric1 = new AA<
+                    sbyte,
+                    byte,
+                    uint,
+                    uint,
+                    long,
+                    bool
+                >().m_aguiGeneric1;
                 try
                 {
                     ulong[,,][] local27 = ((ulong[,,][])(((Array)(null))));
@@ -542,8 +548,14 @@ public struct BB
                 App.m_fFwd6 += (108u - ((float)(param6)))
             ) { }
             if ((((object)(new AA<sbyte, byte, uint, uint, long, bool>())) == "32"))
-                param5.m_aguiGeneric1 =
-                    new AA<sbyte, byte, uint, uint, long, bool>().m_aguiGeneric1;
+                param5.m_aguiGeneric1 = new AA<
+                    sbyte,
+                    byte,
+                    uint,
+                    uint,
+                    long,
+                    bool
+                >().m_aguiGeneric1;
             else
                 do { } while (((bool)(((object)(new AA<sbyte, byte, uint, uint, long, bool>())))));
             if (App.m_bFwd2) { }

@@ -25,12 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
             // {
             //   void M(object, object);
             // }
-            var reference = Roslyn
-                .Test
-                .Utilities
-                .Desktop
-                .DesktopRuntimeUtil
-                .CreateReflectionEmitAssembly(
+            var reference =
+                Roslyn.Test.Utilities.Desktop.DesktopRuntimeUtil.CreateReflectionEmitAssembly(
                     moduleBuilder =>
                     {
                         var typeBuilder = moduleBuilder.DefineType(

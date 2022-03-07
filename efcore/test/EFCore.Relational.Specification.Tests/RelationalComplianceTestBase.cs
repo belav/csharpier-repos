@@ -12,10 +12,9 @@ namespace Microsoft.EntityFrameworkCore
         protected override IEnumerable<Type> GetBaseTestClasses() =>
             base.GetBaseTestClasses()
                 .Concat(
-                    typeof(RelationalComplianceTestBase)
-                        .Assembly
-                        .ExportedTypes
-                        .Where(t => t.Name.Contains("TestBase"))
+                    typeof(RelationalComplianceTestBase).Assembly.ExportedTypes.Where(
+                        t => t.Name.Contains("TestBase")
+                    )
                 );
     }
 }

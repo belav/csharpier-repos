@@ -193,16 +193,14 @@ namespace System.Runtime.InteropServices.JavaScript
             ReadOnlySpan<byte> bytes = MemoryMarshal.AsBytes(span);
             fixed (byte* ptr = bytes)
             {
-                object res = Interop
-                    .Runtime
-                    .TypedArrayFrom(
-                        (int)ptr,
-                        0,
-                        span.Length,
-                        Unsafe.SizeOf<U>(),
-                        (int)type,
-                        out int exception
-                    );
+                object res = Interop.Runtime.TypedArrayFrom(
+                    (int)ptr,
+                    0,
+                    span.Length,
+                    Unsafe.SizeOf<U>(),
+                    (int)type,
+                    out int exception
+                );
                 if (exception != 0)
                     throw new JSException((string)res);
                 var r = (T)res;
@@ -218,16 +216,14 @@ namespace System.Runtime.InteropServices.JavaScript
             ReadOnlySpan<byte> bytes = MemoryMarshal.AsBytes(span);
             fixed (byte* ptr = bytes)
             {
-                object res = Interop
-                    .Runtime
-                    .TypedArrayCopyTo(
-                        JSHandle,
-                        (int)ptr,
-                        0,
-                        span.Length,
-                        Unsafe.SizeOf<U>(),
-                        out int exception
-                    );
+                object res = Interop.Runtime.TypedArrayCopyTo(
+                    JSHandle,
+                    (int)ptr,
+                    0,
+                    span.Length,
+                    Unsafe.SizeOf<U>(),
+                    out int exception
+                );
                 if (exception != 0)
                     throw new JSException((string)res);
                 return (int)res / Unsafe.SizeOf<U>();
@@ -249,16 +245,14 @@ namespace System.Runtime.InteropServices.JavaScript
             ReadOnlySpan<byte> bytes = MemoryMarshal.AsBytes(span);
             fixed (byte* ptr = bytes)
             {
-                object res = Interop
-                    .Runtime
-                    .TypedArrayCopyFrom(
-                        JSHandle,
-                        (int)ptr,
-                        0,
-                        span.Length,
-                        Unsafe.SizeOf<U>(),
-                        out int exception
-                    );
+                object res = Interop.Runtime.TypedArrayCopyFrom(
+                    JSHandle,
+                    (int)ptr,
+                    0,
+                    span.Length,
+                    Unsafe.SizeOf<U>(),
+                    out int exception
+                );
                 if (exception != 0)
                     throw new JSException((string)res);
                 return (int)res / Unsafe.SizeOf<U>();

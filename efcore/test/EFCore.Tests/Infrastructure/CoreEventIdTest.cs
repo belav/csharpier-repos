@@ -74,11 +74,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             );
 
             entityType.Model.FinalizeModel();
-            var options =
-                new DbContextOptionsBuilder()
-                    .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
-                    .UseInMemoryDatabase("D")
-                    .Options;
+            var options = new DbContextOptionsBuilder()
+                .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
+                .UseInMemoryDatabase("D")
+                .Options;
 
             var fakeFactories = new Dictionary<Type, Func<object>>
             {

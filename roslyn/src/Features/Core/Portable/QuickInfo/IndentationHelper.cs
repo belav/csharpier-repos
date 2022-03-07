@@ -108,8 +108,9 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             int? indentationColumn = null;
             foreach (var span in spans)
             {
-                var startLineNumber =
-                    text.Lines.GetLineFromPosition(span.TextSpan.Start).LineNumber;
+                var startLineNumber = text.Lines
+                    .GetLineFromPosition(span.TextSpan.Start)
+                    .LineNumber;
                 var endLineNumber = text.Lines.GetLineFromPosition(span.TextSpan.End).LineNumber;
 
                 // If the span starts after the first non-whitespace of the first line, we'll

@@ -77,16 +77,12 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
             };
             connectionStringBuilder.Remove("AttachDBFilename");
 
-            var contextOptions =
-                new DbContextOptionsBuilder()
-                    .UseSqlServer(
-                        connectionStringBuilder.ConnectionString,
-                        b =>
-                            b.CommandTimeout(
-                                CommandTimeout ?? DefaultMasterConnectionCommandTimeout
-                            )
-                    )
-                    .Options;
+            var contextOptions = new DbContextOptionsBuilder()
+                .UseSqlServer(
+                    connectionStringBuilder.ConnectionString,
+                    b => b.CommandTimeout(CommandTimeout ?? DefaultMasterConnectionCommandTimeout)
+                )
+                .Options;
 
             return new SqlServerConnection(Dependencies with { ContextOptions = contextOptions });
         }

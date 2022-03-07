@@ -42,9 +42,9 @@ namespace System.Reflection.Tests
         {
             Module module = typeof(ModuleTest).GetTypeInfo().Module;
 
-            CustomAttributeData attribute = module
-                .CustomAttributes
-                .Single(a => a.AttributeType.Equals(attrType));
+            CustomAttributeData attribute = module.CustomAttributes.Single(
+                a => a.AttributeType.Equals(attrType)
+            );
             Assert.Equal(1, attribute.ConstructorArguments.Count);
             Assert.Equal(1, attribute.NamedArguments.Count);
 
@@ -114,30 +114,26 @@ namespace System.Reflection.Tests
                 2,
                 typeof(ModuleTest)
                     .GetTypeInfo()
-                    .Module
-                    .FindTypes(Module.FilterTypeName, "OutsideMod*")
+                    .Module.FindTypes(Module.FilterTypeName, "OutsideMod*")
                     .Length
             );
             Assert.Empty(
                 typeof(ModuleTest)
                     .GetTypeInfo()
-                    .Module
-                    .FindTypes(Module.FilterTypeName, "outsidemoduletest")
+                    .Module.FindTypes(Module.FilterTypeName, "outsidemoduletest")
             );
             Assert.Equal(
                 1,
                 typeof(ModuleTest)
                     .GetTypeInfo()
-                    .Module
-                    .FindTypes(Module.FilterTypeName, "OutsideModuleTest")
+                    .Module.FindTypes(Module.FilterTypeName, "OutsideModuleTest")
                     .Length
             );
             Assert.Equal(
                 1,
                 typeof(ModuleTest)
                     .GetTypeInfo()
-                    .Module
-                    .FindTypes(Module.FilterTypeName, "InsideModuleTest")
+                    .Module.FindTypes(Module.FilterTypeName, "InsideModuleTest")
                     .Length
             );
 
@@ -173,40 +169,35 @@ namespace System.Reflection.Tests
                 2,
                 typeof(ModuleTest)
                     .GetTypeInfo()
-                    .Module
-                    .FindTypes(Module.FilterTypeNameIgnoreCase, "outsidemod*")
+                    .Module.FindTypes(Module.FilterTypeNameIgnoreCase, "outsidemod*")
                     .Length
             );
             Assert.Equal(
                 2,
                 typeof(ModuleTest)
                     .GetTypeInfo()
-                    .Module
-                    .FindTypes(Module.FilterTypeNameIgnoreCase, "Outsidemod*")
+                    .Module.FindTypes(Module.FilterTypeNameIgnoreCase, "Outsidemod*")
                     .Length
             );
             Assert.Equal(
                 1,
                 typeof(ModuleTest)
                     .GetTypeInfo()
-                    .Module
-                    .FindTypes(Module.FilterTypeNameIgnoreCase, "ouTsidemoduLeTest")
+                    .Module.FindTypes(Module.FilterTypeNameIgnoreCase, "ouTsidemoduLeTest")
                     .Length
             );
             Assert.Equal(
                 1,
                 typeof(ModuleTest)
                     .GetTypeInfo()
-                    .Module
-                    .FindTypes(Module.FilterTypeNameIgnoreCase, "OutsideModuleTest")
+                    .Module.FindTypes(Module.FilterTypeNameIgnoreCase, "OutsideModuleTest")
                     .Length
             );
             Assert.Equal(
                 1,
                 typeof(ModuleTest)
                     .GetTypeInfo()
-                    .Module
-                    .FindTypes(Module.FilterTypeNameIgnoreCase, "insiDemoduLeTest")
+                    .Module.FindTypes(Module.FilterTypeNameIgnoreCase, "insiDemoduLeTest")
                     .Length
             );
 

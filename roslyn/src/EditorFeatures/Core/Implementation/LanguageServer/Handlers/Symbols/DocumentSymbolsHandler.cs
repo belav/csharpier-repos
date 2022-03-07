@@ -50,10 +50,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             var document = context.Document;
             Contract.ThrowIfNull(document);
 
-            var navBarService = document
-                .Project
-                .LanguageServices
-                .GetRequiredService<INavigationBarItemService>();
+            var navBarService =
+                document.Project.LanguageServices.GetRequiredService<INavigationBarItemService>();
             var navBarItems = await navBarService
                 .GetItemsAsync(document, supportsCodeGeneration: false, cancellationToken)
                 .ConfigureAwait(false);

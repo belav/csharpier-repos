@@ -252,8 +252,7 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
             var fieldDeclaration = field.DeclaringSyntaxReferences.First();
             var declarationAnnotation = new SyntaxAnnotation();
             document = document.WithSyntaxRoot(
-                fieldDeclaration
-                    .SyntaxTree
+                fieldDeclaration.SyntaxTree
                     .GetRoot(cancellationToken)
                     .ReplaceNode(
                         fieldDeclaration.GetSyntax(cancellationToken),
@@ -423,8 +422,7 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
                         .ConfigureAwait(false);
 
                     document = solution.GetDocument(document.Id);
-                    var compilation = await document
-                        .Project
+                    var compilation = await document.Project
                         .GetCompilationAsync(cancellationToken)
                         .ConfigureAwait(false);
 
@@ -585,9 +583,9 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
                 )
             );
 
-            return Simplifier
-                .Annotation
-                .AddAnnotationToSymbol(Formatter.Annotation.AddAnnotationToSymbol(propertySymbol));
+            return Simplifier.Annotation.AddAnnotationToSymbol(
+                Formatter.Annotation.AddAnnotationToSymbol(propertySymbol)
+            );
         }
 
         protected abstract (string fieldName, string propertyName) GenerateFieldAndPropertyNames(

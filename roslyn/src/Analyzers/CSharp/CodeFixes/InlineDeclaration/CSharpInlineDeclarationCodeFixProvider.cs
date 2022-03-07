@@ -73,10 +73,10 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
         )
         {
 #if CODE_STYLE
-            var options = document
-                .Project
-                .AnalyzerOptions
-                .GetAnalyzerOptionSet(editor.OriginalRoot.SyntaxTree, cancellationToken);
+            var options = document.Project.AnalyzerOptions.GetAnalyzerOptionSet(
+                editor.OriginalRoot.SyntaxTree,
+                cancellationToken
+            );
 #else
             var options = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
 #endif
@@ -89,8 +89,7 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
                 declarationsToRemove.Add(
                     (LocalDeclarationStatementSyntax)diagnostic.AdditionalLocations[0]
                         .FindNode(cancellationToken)
-                        .Parent
-                        .Parent
+                        .Parent.Parent
                 );
             }
 
@@ -450,8 +449,9 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
                 // the semantics of the call by doing this.
 
                 // Find the symbol that the existing invocation points to.
-                var previousSymbol =
-                    semanticModel.GetSymbolInfo(nodeToReplace, cancellationToken).Symbol;
+                var previousSymbol = semanticModel
+                    .GetSymbolInfo(nodeToReplace, cancellationToken)
+                    .Symbol;
 
                 // Now, create a speculative model in which we make the change.  Make sure
                 // we still point to the same symbol afterwards.
@@ -494,9 +494,10 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
                 );
 
                 if (
-                    !SymbolEquivalenceComparer
-                        .Instance
-                        .Equals(previousSymbol, updatedSymbolInfo.Symbol)
+                    !SymbolEquivalenceComparer.Instance.Equals(
+                        previousSymbol,
+                        updatedSymbolInfo.Symbol
+                    )
                 )
                 {
                     // We're pointing at a new symbol now.  Semantic have changed.

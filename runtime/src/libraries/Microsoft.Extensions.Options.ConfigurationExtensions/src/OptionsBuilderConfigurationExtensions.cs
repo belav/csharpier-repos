@@ -51,9 +51,11 @@ namespace Microsoft.Extensions.DependencyInjection
                 throw new ArgumentNullException(nameof(optionsBuilder));
             }
 
-            optionsBuilder
-                .Services
-                .Configure<TOptions>(optionsBuilder.Name, config, configureBinder);
+            optionsBuilder.Services.Configure<TOptions>(
+                optionsBuilder.Name,
+                config,
+                configureBinder
+            );
             return optionsBuilder;
         }
 
@@ -86,12 +88,10 @@ namespace Microsoft.Extensions.DependencyInjection
                 (opts, config) =>
                     BindFromOptions<TOptions>(opts, config, configSectionPath, configureBinder)
             );
-            optionsBuilder
-                .Services
-                .AddSingleton<
-                    IOptionsChangeTokenSource<TOptions>,
-                    ConfigurationChangeTokenSource<TOptions>
-                >();
+            optionsBuilder.Services.AddSingleton<
+                IOptionsChangeTokenSource<TOptions>,
+                ConfigurationChangeTokenSource<TOptions>
+            >();
             return optionsBuilder;
         }
 

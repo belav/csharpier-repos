@@ -36,9 +36,10 @@ public class BlazorWindow
             title,
             options =>
             {
-                options
-                    .CustomSchemeHandlers
-                    .Add(PhotinoWebViewManager.BlazorAppScheme, HandleWebRequest);
+                options.CustomSchemeHandlers.Add(
+                    PhotinoWebViewManager.BlazorAppScheme,
+                    HandleWebRequest
+                );
                 configureWindow?.Invoke(options);
             },
             width: 1600,

@@ -53,8 +53,7 @@ namespace System.CommandLine.Rendering.Tests
 
             visitor.Visit(outerContainer);
 
-            visitor
-                .VisitedSpans
+            visitor.VisitedSpans
                 .Select(s => s.GetType())
                 .Should()
                 .BeEquivalentSequenceTo(

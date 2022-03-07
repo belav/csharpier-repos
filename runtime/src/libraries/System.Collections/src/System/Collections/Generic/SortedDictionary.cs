@@ -625,15 +625,13 @@ namespace System.Collections.Generic
                     throw new ArgumentException(SR.Arg_ArrayPlusOffTooSmall);
                 }
 
-                _dictionary
-                    ._set
-                    .InOrderTreeWalk(
-                        delegate(TreeSet<KeyValuePair<TKey, TValue>>.Node node)
-                        {
-                            array[index++] = node.Item.Key;
-                            return true;
-                        }
-                    );
+                _dictionary._set.InOrderTreeWalk(
+                    delegate(TreeSet<KeyValuePair<TKey, TValue>>.Node node)
+                    {
+                        array[index++] = node.Item.Key;
+                        return true;
+                    }
+                );
             }
 
             void ICollection.CopyTo(Array array, int index)
@@ -676,15 +674,13 @@ namespace System.Collections.Generic
                     try
                     {
                         object[] objects = (object[])array;
-                        _dictionary
-                            ._set
-                            .InOrderTreeWalk(
-                                delegate(TreeSet<KeyValuePair<TKey, TValue>>.Node node)
-                                {
-                                    objects[index++] = node.Item.Key;
-                                    return true;
-                                }
-                            );
+                        _dictionary._set.InOrderTreeWalk(
+                            delegate(TreeSet<KeyValuePair<TKey, TValue>>.Node node)
+                            {
+                                objects[index++] = node.Item.Key;
+                                return true;
+                            }
+                        );
                     }
                     catch (ArrayTypeMismatchException)
                     {
@@ -833,15 +829,13 @@ namespace System.Collections.Generic
                     throw new ArgumentException(SR.Arg_ArrayPlusOffTooSmall);
                 }
 
-                _dictionary
-                    ._set
-                    .InOrderTreeWalk(
-                        delegate(TreeSet<KeyValuePair<TKey, TValue>>.Node node)
-                        {
-                            array[index++] = node.Item.Value;
-                            return true;
-                        }
-                    );
+                _dictionary._set.InOrderTreeWalk(
+                    delegate(TreeSet<KeyValuePair<TKey, TValue>>.Node node)
+                    {
+                        array[index++] = node.Item.Value;
+                        return true;
+                    }
+                );
             }
 
             void ICollection.CopyTo(Array array, int index)
@@ -884,15 +878,13 @@ namespace System.Collections.Generic
                     try
                     {
                         object?[] objects = (object?[])array;
-                        _dictionary
-                            ._set
-                            .InOrderTreeWalk(
-                                delegate(TreeSet<KeyValuePair<TKey, TValue>>.Node node)
-                                {
-                                    objects[index++] = node.Item.Value;
-                                    return true;
-                                }
-                            );
+                        _dictionary._set.InOrderTreeWalk(
+                            delegate(TreeSet<KeyValuePair<TKey, TValue>>.Node node)
+                            {
+                                objects[index++] = node.Item.Value;
+                                return true;
+                            }
+                        );
                     }
                     catch (ArrayTypeMismatchException)
                     {

@@ -134,10 +134,9 @@ namespace Microsoft.CodeAnalysis.NavigationBar
                 if (InDocumentInfo != null)
                 {
                     if (
-                        !this.InDocumentInfo
-                            .Value
-                            .spans
-                            .SequenceEqual(other.InDocumentInfo!.Value.spans)
+                        !this.InDocumentInfo.Value.spans.SequenceEqual(
+                            other.InDocumentInfo!.Value.spans
+                        )
                         || this.InDocumentInfo.Value.navigationSpan
                             != other.InDocumentInfo.Value.navigationSpan
                     )

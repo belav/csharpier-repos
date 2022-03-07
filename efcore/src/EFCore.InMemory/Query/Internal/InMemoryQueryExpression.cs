@@ -148,9 +148,10 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 );
 
                 ServerQueryExpression = Call(
-                    EnumerableMethods
-                        .Select
-                        .MakeGenericMethod(typeof(ValueBuffer), typeof(ValueBuffer)),
+                    EnumerableMethods.Select.MakeGenericMethod(
+                        typeof(ValueBuffer),
+                        typeof(ValueBuffer)
+                    ),
                     ServerQueryExpression,
                     selectorLambda
                 );
@@ -249,9 +250,10 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             );
 
             ServerQueryExpression = Call(
-                EnumerableMethods
-                    .Select
-                    .MakeGenericMethod(CurrentParameter.Type, typeof(ValueBuffer)),
+                EnumerableMethods.Select.MakeGenericMethod(
+                    CurrentParameter.Type,
+                    typeof(ValueBuffer)
+                ),
                 ServerQueryExpression,
                 selectorLambda
             );
@@ -287,8 +289,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
                 // Also compute nested entity projections
                 foreach (
-                    var navigation in entityProjectionExpression
-                        .EntityType
+                    var navigation in entityProjectionExpression.EntityType
                         .GetAllBaseTypes()
                         .Concat(entityProjectionExpression.EntityType.GetDerivedTypesInclusive())
                         .SelectMany(t => t.GetDeclaredNavigations())
@@ -376,10 +377,9 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                             var serverQuery = inMemoryQueryExpression.ServerQueryExpression;
                             if (singleResult)
                             {
-                                serverQuery =
-                                    (
-                                        (LambdaExpression)((NewExpression)serverQuery).Arguments[0]
-                                    ).Body;
+                                serverQuery = (
+                                    (LambdaExpression)((NewExpression)serverQuery).Arguments[0]
+                                ).Body;
                             }
 
                             selectorExpressions.Add(serverQuery);
@@ -443,9 +443,10 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             );
 
             ServerQueryExpression = Call(
-                EnumerableMethods
-                    .Select
-                    .MakeGenericMethod(CurrentParameter.Type, typeof(ValueBuffer)),
+                EnumerableMethods.Select.MakeGenericMethod(
+                    CurrentParameter.Type,
+                    typeof(ValueBuffer)
+                ),
                 ServerQueryExpression,
                 selectorLambda
             );
@@ -558,12 +559,10 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 _projectionMapping = projectionMapping;
 
                 ServerQueryExpression = Call(
-                    EnumerableMethods
-                        .Select
-                        .MakeGenericMethod(
-                            ServerQueryExpression.Type.GetSequenceType(),
-                            typeof(ValueBuffer)
-                        ),
+                    EnumerableMethods.Select.MakeGenericMethod(
+                        ServerQueryExpression.Type.GetSequenceType(),
+                        typeof(ValueBuffer)
+                    ),
                     ServerQueryExpression,
                     Lambda(
                         New(
@@ -580,12 +579,10 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 );
 
                 source2.ServerQueryExpression = Call(
-                    EnumerableMethods
-                        .Select
-                        .MakeGenericMethod(
-                            source2.ServerQueryExpression.Type.GetSequenceType(),
-                            typeof(ValueBuffer)
-                        ),
+                    EnumerableMethods.Select.MakeGenericMethod(
+                        source2.ServerQueryExpression.Type.GetSequenceType(),
+                        typeof(ValueBuffer)
+                    ),
                     source2.ServerQueryExpression,
                     Lambda(
                         New(
@@ -735,9 +732,10 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             ServerQueryExpression = Call(
                 EnumerableMethods.Distinct.MakeGenericMethod(typeof(ValueBuffer)),
                 Call(
-                    EnumerableMethods
-                        .Select
-                        .MakeGenericMethod(CurrentParameter.Type, typeof(ValueBuffer)),
+                    EnumerableMethods.Select.MakeGenericMethod(
+                        CurrentParameter.Type,
+                        typeof(ValueBuffer)
+                    ),
                     ServerQueryExpression,
                     selectorLambda
                 )
@@ -805,13 +803,11 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             );
 
             ServerQueryExpression = Call(
-                EnumerableMethods
-                    .GroupByWithKeyElementSelector
-                    .MakeGenericMethod(
-                        typeof(ValueBuffer),
-                        typeof(ValueBuffer),
-                        typeof(ValueBuffer)
-                    ),
+                EnumerableMethods.GroupByWithKeyElementSelector.MakeGenericMethod(
+                    typeof(ValueBuffer),
+                    typeof(ValueBuffer),
+                    typeof(ValueBuffer)
+                ),
                 source,
                 keySelector,
                 selector
@@ -1419,14 +1415,12 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 else
                 {
                     ServerQueryExpression = Call(
-                        EnumerableMethods
-                            .Join
-                            .MakeGenericMethod(
-                                typeof(ValueBuffer),
-                                typeof(ValueBuffer),
-                                outerKeySelector.ReturnType,
-                                typeof(ValueBuffer)
-                            ),
+                        EnumerableMethods.Join.MakeGenericMethod(
+                            typeof(ValueBuffer),
+                            typeof(ValueBuffer),
+                            outerKeySelector.ReturnType,
+                            typeof(ValueBuffer)
+                        ),
                         ServerQueryExpression,
                         innerQueryExpression.ServerQueryExpression,
                         outerKeySelector,
@@ -1440,13 +1434,11 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 // inner nullable should do something different here
                 // Issue#17536
                 ServerQueryExpression = Call(
-                    EnumerableMethods
-                        .SelectManyWithCollectionSelector
-                        .MakeGenericMethod(
-                            typeof(ValueBuffer),
-                            typeof(ValueBuffer),
-                            typeof(ValueBuffer)
-                        ),
+                    EnumerableMethods.SelectManyWithCollectionSelector.MakeGenericMethod(
+                        typeof(ValueBuffer),
+                        typeof(ValueBuffer),
+                        typeof(ValueBuffer)
+                    ),
                     ServerQueryExpression,
                     Lambda(innerQueryExpression.ServerQueryExpression, CurrentParameter),
                     resultSelector
@@ -1552,8 +1544,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
             // Also compute nested entity projections
             foreach (
-                var navigation in entityProjectionExpression
-                    .EntityType
+                var navigation in entityProjectionExpression.EntityType
                     .GetAllBaseTypes()
                     .Concat(entityProjectionExpression.EntityType.GetDerivedTypesInclusive())
                     .SelectMany(t => t.GetDeclaredNavigations())
@@ -1662,9 +1653,9 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             return methodCallExpression.Type.IsNullableType()
               ? methodCallExpression
               : Call(
-                    ExpressionExtensions
-                        .ValueBufferTryReadValueMethod
-                        .MakeGenericMethod(methodCallExpression.Type.MakeNullable()),
+                    ExpressionExtensions.ValueBufferTryReadValueMethod.MakeGenericMethod(
+                        methodCallExpression.Type.MakeNullable()
+                    ),
                     methodCallExpression.Arguments
                 );
         }
@@ -1702,8 +1693,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
             // Also compute nested entity projections
             foreach (
-                var navigation in entityProjectionExpression
-                    .EntityType
+                var navigation in entityProjectionExpression.EntityType
                     .GetAllBaseTypes()
                     .Concat(entityProjectionExpression.EntityType.GetDerivedTypesInclusive())
                     .SelectMany(t => t.GetDeclaredNavigations())

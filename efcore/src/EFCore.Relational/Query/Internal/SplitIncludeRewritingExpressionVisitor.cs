@@ -206,9 +206,10 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 );
 
                 return Expression.Call(
-                    QueryableMethods
-                        .SelectManyWithoutCollectionSelector
-                        .MakeGenericMethod(_sourceElementType, collectionElementType),
+                    QueryableMethods.SelectManyWithoutCollectionSelector.MakeGenericMethod(
+                        _sourceElementType,
+                        collectionElementType
+                    ),
                     _parentQuery,
                     Expression.Quote(
                         Expression.Lambda(collectionSelectorLambdaType, subquery, newParameter)

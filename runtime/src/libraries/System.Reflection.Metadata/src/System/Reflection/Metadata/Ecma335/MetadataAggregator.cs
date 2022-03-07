@@ -236,8 +236,9 @@ namespace System.Reflection.Metadata.Ecma335
         {
             foreach (var tableRowCounts in rowCounts)
             {
-                tableRowCounts[generation].AggregateInserts =
-                    tableRowCounts[generation - 1].AggregateInserts;
+                tableRowCounts[generation].AggregateInserts = tableRowCounts[
+                    generation - 1
+                ].AggregateInserts;
             }
 
             int mapRowCount = encMapTable.NumberOfRows;

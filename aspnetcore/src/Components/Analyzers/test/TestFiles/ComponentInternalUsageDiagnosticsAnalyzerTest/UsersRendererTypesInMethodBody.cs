@@ -11,7 +11,7 @@ namespace Microsoft.AspNetCore.Components.Analyzers.Tests.TestFiles.ComponentInt
         private void Test()
         {
             var test = /*MMField*/
-                RenderTreeFrameType.Attribute;
+            RenderTreeFrameType.Attribute;
             GC.KeepAlive(test);
 
             var frame = /*MMNewObject*/

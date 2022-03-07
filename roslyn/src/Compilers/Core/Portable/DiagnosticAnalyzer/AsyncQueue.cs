@@ -106,10 +106,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             }
 
             Debug.Assert(
-                waiter
-                    .Task
-                    .CreationOptions
-                    .HasFlag(TaskCreationOptions.RunContinuationsAsynchronously)
+                waiter.Task.CreationOptions.HasFlag(
+                    TaskCreationOptions.RunContinuationsAsynchronously
+                )
             );
             if (!waiter.TrySetResult(value))
             {
@@ -214,19 +213,18 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 foreach (var tcs in existingWaiters)
                 {
                     Debug.Assert(
-                        tcs.Task
-                            .CreationOptions
-                            .HasFlag(TaskCreationOptions.RunContinuationsAsynchronously)
+                        tcs.Task.CreationOptions.HasFlag(
+                            TaskCreationOptions.RunContinuationsAsynchronously
+                        )
                     );
                     tcs.TrySetResult(default);
                 }
             }
 
             Debug.Assert(
-                _whenCompleted
-                    .Task
-                    .CreationOptions
-                    .HasFlag(TaskCreationOptions.RunContinuationsAsynchronously)
+                _whenCompleted.Task.CreationOptions.HasFlag(
+                    TaskCreationOptions.RunContinuationsAsynchronously
+                )
             );
             _whenCompleted.SetResult(true);
 
@@ -356,24 +354,21 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 );
 
             Debug.Assert(
-                taskCompletionSource
-                    .Task
-                    .CreationOptions
-                    .HasFlag(TaskCreationOptions.RunContinuationsAsynchronously)
+                taskCompletionSource.Task.CreationOptions.HasFlag(
+                    TaskCreationOptions.RunContinuationsAsynchronously
+                )
             );
-            taskCompletionSource
-                .Task
-                .ContinueWith(
-                    static (_, s) =>
-                    {
-                        var t = (CancelableTaskCompletionSource<T>)s!;
-                        t.CancellationTokenRegistration.Dispose();
-                    },
-                    cancelableTaskCompletionSource,
-                    CancellationToken.None,
-                    TaskContinuationOptions.ExecuteSynchronously,
-                    TaskScheduler.Default
-                );
+            taskCompletionSource.Task.ContinueWith(
+                static (_, s) =>
+                {
+                    var t = (CancelableTaskCompletionSource<T>)s!;
+                    t.CancellationTokenRegistration.Dispose();
+                },
+                cancelableTaskCompletionSource,
+                CancellationToken.None,
+                TaskContinuationOptions.ExecuteSynchronously,
+                TaskScheduler.Default
+            );
         }
 
         /// <summary>

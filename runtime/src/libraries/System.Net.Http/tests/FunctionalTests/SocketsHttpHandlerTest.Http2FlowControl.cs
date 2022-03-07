@@ -48,9 +48,9 @@ namespace System.Net.Http.Functional.Tests
             SettingsFrame clientSettingsFrame = await connection
                 .ReadSettingsAsync()
                 .ConfigureAwait(false);
-            SettingsEntry entry = clientSettingsFrame
-                .Entries
-                .First(e => e.SettingId == SettingId.InitialWindowSize);
+            SettingsEntry entry = clientSettingsFrame.Entries.First(
+                e => e.SettingId == SettingId.InitialWindowSize
+            );
 
             Assert.Equal(WindowSize, (int)entry.Value);
         }
@@ -252,8 +252,7 @@ namespace System.Net.Http.Functional.Tests
             // Expect SETTINGS ACK from client:
             await connection.ExpectSettingsAckAsync();
 
-            int maxCredit = (int)clientSettingsFrame
-                .Entries
+            int maxCredit = (int)clientSettingsFrame.Entries
                 .SingleOrDefault(e => e.SettingId == SettingId.InitialWindowSize)
                 .Value;
             if (maxCredit == default)

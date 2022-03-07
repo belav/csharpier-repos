@@ -109,9 +109,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveStaticMembe
                     new SymbolViewModel<ISymbol>(member, glyphService)
                     {
                         // The member user selected will be checked at the beginning.
-                        IsChecked = SymbolEquivalenceComparer
-                            .Instance
-                            .Equals(selectedNodeSymbol, member),
+                        IsChecked = SymbolEquivalenceComparer.Instance.Equals(
+                            selectedNodeSymbol,
+                            member
+                        ),
                     }
             );
 
@@ -122,8 +123,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveStaticMembe
                 cancellationTokenSource.Token
             );
 
-            var existingTypeNames = selectedType
-                .ContainingNamespace
+            var existingTypeNames = selectedType.ContainingNamespace
                 .GetAllTypes(cancellationTokenSource.Token)
                 .SelectAsArray(t => t.ToDisplayString());
             var candidateName = selectedType.Name + "Helpers";

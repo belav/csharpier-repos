@@ -87,8 +87,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         public void RemoveMetadataReference(string assemblyName, string projectName)
         {
             var project = GetProject(projectName);
-            var reference = ((VSProject)project.Object)
-                .References
+            var reference = ((VSProject)project.Object).References
                 .Cast<Reference>()
                 .Where(x => x.Name == assemblyName)
                 .First();
@@ -171,8 +170,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         public string[] GetAssemblyReferences(string projectName)
         {
             var project = GetProject(projectName);
-            var references = ((VSProject)project.Object)
-                .References
+            var references = ((VSProject)project.Object).References
                 .Cast<Reference>()
                 .Where(x => x.SourceProject == null)
                 .Select(x => x.Name + "," + x.Version + "," + x.PublicKeyToken)
@@ -203,9 +201,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         {
             var solutionExplorer = ((DTE2)GetDTE()).ToolWindows.SolutionExplorer;
             solutionExplorer.Parent.Activate();
-            var rootHierarchyItems = solutionExplorer
-                .UIHierarchyItems
-                .Cast<EnvDTE.UIHierarchyItem>();
+            var rootHierarchyItems =
+                solutionExplorer.UIHierarchyItems.Cast<EnvDTE.UIHierarchyItem>();
             var solution = rootHierarchyItems.First();
             var solutionHierarchyItems = solution.UIHierarchyItems.Cast<EnvDTE.UIHierarchyItem>();
             var project = solutionHierarchyItems.Where(x => x.Name == projectName).FirstOrDefault();
@@ -223,8 +220,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         public string[] GetProjectReferences(string projectName)
         {
             var project = GetProject(projectName);
-            var references = ((VSProject)project.Object)
-                .References
+            var references = ((VSProject)project.Object).References
                 .Cast<Reference>()
                 .Where(x => x.SourceProject != null)
                 .Select(x => x.Name)
@@ -315,20 +311,20 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
             if (project is IVsBrowseObjectContext browseObjectContext)
             {
-                var threadingService =
-                    browseObjectContext.UnconfiguredProject.ProjectService.Services.ThreadingPolicy;
+                var threadingService = browseObjectContext
+                    .UnconfiguredProject
+                    .ProjectService
+                    .Services
+                    .ThreadingPolicy;
 
                 var result = threadingService.ExecuteSynchronously(
                     async () =>
                     {
-                        var configuredProject = await browseObjectContext
-                            .UnconfiguredProject
+                        var configuredProject = await browseObjectContext.UnconfiguredProject
                             .GetSuggestedConfiguredProjectAsync()
                             .ConfigureAwait(false);
-                        return await configuredProject!
-                            .Services
-                            .PackageReferences!
-                            .AddAsync(packageName, version)
+                        return await configuredProject!.Services
+                            .PackageReferences!.AddAsync(packageName, version)
                             .ConfigureAwait(false);
                     }
                 );
@@ -347,20 +343,20 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
             if (project is IVsBrowseObjectContext browseObjectContext)
             {
-                var threadingService =
-                    browseObjectContext.UnconfiguredProject.ProjectService.Services.ThreadingPolicy;
+                var threadingService = browseObjectContext
+                    .UnconfiguredProject
+                    .ProjectService
+                    .Services
+                    .ThreadingPolicy;
 
                 threadingService.ExecuteSynchronously(
                     async () =>
                     {
-                        var configuredProject = await browseObjectContext
-                            .UnconfiguredProject
+                        var configuredProject = await browseObjectContext.UnconfiguredProject
                             .GetSuggestedConfiguredProjectAsync()
                             .ConfigureAwait(false);
-                        await configuredProject!
-                            .Services
-                            .PackageReferences!
-                            .RemoveAsync(packageName)
+                        await configuredProject!.Services
+                            .PackageReferences!.RemoveAsync(packageName)
                             .ConfigureAwait(false);
                     }
                 );
@@ -469,9 +465,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
             if (
                 languageName.Equals("csharp", StringComparison.OrdinalIgnoreCase)
-                && _csharpProjectTemplates
-                    .Value
-                    .TryGetValue(projectTemplate, out var csharpProjectTemplate)
+                && _csharpProjectTemplates.Value.TryGetValue(
+                    projectTemplate,
+                    out var csharpProjectTemplate
+                )
             )
             {
                 return _solution.GetProjectTemplate(csharpProjectTemplate, languageName);
@@ -479,9 +476,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
             if (
                 languageName.Equals("visualbasic", StringComparison.OrdinalIgnoreCase)
-                && _visualBasicProjectTemplates
-                    .Value
-                    .TryGetValue(projectTemplate, out var visualBasicProjectTemplate)
+                && _visualBasicProjectTemplates.Value.TryGetValue(
+                    projectTemplate,
+                    out var visualBasicProjectTemplate
+                )
             )
             {
                 return _solution.GetProjectTemplate(visualBasicProjectTemplate, languageName);
@@ -556,9 +554,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             // state believing a debugger session was active.
             //
             // This delay should be replaced with a proper wait condition once the correct one is determined.
-            var debugService = GetComponentModelService<VisualStudioWorkspace>()
-                .Services
-                .GetRequiredService<IDebuggingWorkspaceService>();
+            var debugService =
+                GetComponentModelService<VisualStudioWorkspace>().Services.GetRequiredService<IDebuggingWorkspaceService>();
             using (var debugSessionEndedEvent = new ManualResetEventSlim(initialState: false))
             {
                 debugService.BeforeDebuggingStateChanged += (_, e) =>
@@ -617,9 +614,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 }
             }
 
-            var waitingService = GetComponentModel()
-                .DefaultExportProvider
-                .GetExportedValue<TestingOnly_WaitingService>();
+            var waitingService =
+                GetComponentModel().DefaultExportProvider.GetExportedValue<TestingOnly_WaitingService>();
             waitingService.WaitForAsyncOperations(
                 FeatureAttribute.Workspace,
                 waitForWorkspaceFirst: true
@@ -707,8 +703,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         private EnvDTE.Project GetProject(string nameOrFileName)
         {
             Contract.ThrowIfNull(_solution);
-            return _solution
-                .Projects
+            return _solution.Projects
                 .OfType<EnvDTE.Project>()
                 .First(
                     p =>
@@ -1280,8 +1275,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         private static void SaveFileWithExtraValidation(EnvDTE.Document document)
         {
             var textDocument = (EnvDTE.TextDocument)document.Object(nameof(EnvDTE.TextDocument));
-            var currentTextInDocument = textDocument
-                .StartPoint
+            var currentTextInDocument = textDocument.StartPoint
                 .CreateEditPoint()
                 .GetText(textDocument.EndPoint);
             var fullPath = document.FullName;
@@ -1300,8 +1294,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         )
         {
             Contract.ThrowIfNull(_solution);
-            var project = _solution
-                .Projects
+            var project = _solution.Projects
                 .Cast<EnvDTE.Project>()
                 .First(x => x.Name == projectName);
             var projectPath = Path.GetDirectoryName(project.FullName);

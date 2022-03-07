@@ -370,8 +370,7 @@ namespace System.Net.Primitives.Functional.Tests
 
         public static IEnumerable<object[]> GetValidIPAddresses()
         {
-            return IPAddressParsing
-                .ValidIpv4Addresses
+            return IPAddressParsing.ValidIpv4Addresses
                 .Concat(IPAddressParsing.ValidIpv6Addresses)
                 .Select(array => new object[] { IPAddress.Parse((string)array[0]) });
         }

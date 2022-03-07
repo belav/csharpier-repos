@@ -15,13 +15,10 @@ namespace WebServer
         {
             string responseBody = "Sending GZIP compressed";
 
-            context
-                .Response
-                .Headers
-                .Add(
-                    "Content-MD5",
-                    Convert.ToBase64String(ContentHelper.ComputeMD5Hash(responseBody))
-                );
+            context.Response.Headers.Add(
+                "Content-MD5",
+                Convert.ToBase64String(ContentHelper.ComputeMD5Hash(responseBody))
+            );
             context.Response.Headers.Add("Content-Encoding", "gzip");
 
             context.Response.ContentType = "text/plain";

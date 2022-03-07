@@ -143,13 +143,11 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                             _expressions.Add(
                                 Expression.Assign(
                                     variable,
-                                    queryExpression
-                                        .CurrentParameter
-                                        .CreateValueBufferReadValueExpression(
-                                            projectionBindingExpression.Type,
-                                            projectionIndex,
-                                            property: null
-                                        )
+                                    queryExpression.CurrentParameter.CreateValueBufferReadValueExpression(
+                                        projectionBindingExpression.Type,
+                                        projectionIndex,
+                                        property: null
+                                    )
                                 )
                             );
                             _mapping[key] = variable;
@@ -162,11 +160,15 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     {
                         var entity = Visit(includeExpression.EntityExpression);
                         var entityClrType = includeExpression.EntityExpression.Type;
-                        var includingClrType =
-                            includeExpression.Navigation.DeclaringEntityType.ClrType;
+                        var includingClrType = includeExpression
+                            .Navigation
+                            .DeclaringEntityType
+                            .ClrType;
                         var inverseNavigation = includeExpression.Navigation.Inverse;
-                        var relatedEntityClrType =
-                            includeExpression.Navigation.TargetEntityType.ClrType;
+                        var relatedEntityClrType = includeExpression
+                            .Navigation
+                            .TargetEntityType
+                            .ClrType;
                         if (
                             includingClrType != entityClrType
                             && includingClrType.IsAssignableFrom(entityClrType)

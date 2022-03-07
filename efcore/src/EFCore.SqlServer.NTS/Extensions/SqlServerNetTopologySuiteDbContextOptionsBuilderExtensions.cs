@@ -25,13 +25,12 @@ namespace Microsoft.EntityFrameworkCore
             this SqlServerDbContextOptionsBuilder optionsBuilder
         )
         {
-            var coreOptionsBuilder =
-                ((IRelationalDbContextOptionsBuilderInfrastructure)optionsBuilder).OptionsBuilder;
+            var coreOptionsBuilder = (
+                (IRelationalDbContextOptionsBuilderInfrastructure)optionsBuilder
+            ).OptionsBuilder;
 
             var extension =
-                coreOptionsBuilder
-                    .Options
-                    .FindExtension<SqlServerNetTopologySuiteOptionsExtension>()
+                coreOptionsBuilder.Options.FindExtension<SqlServerNetTopologySuiteOptionsExtension>()
                 ?? new SqlServerNetTopologySuiteOptionsExtension();
 
             ((IDbContextOptionsBuilderInfrastructure)coreOptionsBuilder).AddOrUpdateExtension(

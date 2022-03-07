@@ -83,9 +83,10 @@ public class WebSocketAcceptAdapter
                     object obj;
                     if (
                         adapter._options != null
-                        && adapter
-                            ._options
-                            .TryGetValue(typeof(WebSocketAcceptContext).FullName, out obj)
+                        && adapter._options.TryGetValue(
+                            typeof(WebSocketAcceptContext).FullName,
+                            out obj
+                        )
                     )
                     {
                         acceptContext = obj as WebSocketAcceptContext;

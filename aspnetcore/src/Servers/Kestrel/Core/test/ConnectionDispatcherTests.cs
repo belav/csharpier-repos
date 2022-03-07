@@ -48,8 +48,7 @@ public class ConnectionDispatcherTests : LoggedTest
         var task = kestrelConnection.ExecuteAsync();
 
         // The scope should be created
-        var scopeObjects = testLogger
-            .Scopes
+        var scopeObjects = testLogger.Scopes
             .OfType<IReadOnlyList<KeyValuePair<string, object>>>()
             .ToList();
 
@@ -104,10 +103,8 @@ public class ConnectionDispatcherTests : LoggedTest
             serviceContext.Log
         );
         transportConnectionManager.AddConnection(0, kestrelConnection);
-        var completeFeature = kestrelConnection
-            .TransportConnection
-            .Features
-            .Get<IConnectionCompleteFeature>();
+        var completeFeature =
+            kestrelConnection.TransportConnection.Features.Get<IConnectionCompleteFeature>();
 
         Assert.NotNull(completeFeature);
         object stateObject = new object();
@@ -144,10 +141,8 @@ public class ConnectionDispatcherTests : LoggedTest
             serviceContext.Log
         );
         transportConnectionManager.AddConnection(0, kestrelConnection);
-        var completeFeature = kestrelConnection
-            .TransportConnection
-            .Features
-            .Get<IConnectionCompleteFeature>();
+        var completeFeature =
+            kestrelConnection.TransportConnection.Features.Get<IConnectionCompleteFeature>();
 
         Assert.NotNull(completeFeature);
         object stateObject = new object();

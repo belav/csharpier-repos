@@ -42,10 +42,8 @@ namespace AutoMapper.UnitTests.Bug
                     .Throw<AutoMapperConfigurationException>(
                         () => Configuration.AssertConfigurationIsValid()
                     )
-                    .Errors
-                    .Single()
-                    .UnmappedPropertyNames
-                    .Single()
+                    .Errors.Single()
+                    .UnmappedPropertyNames.Single()
                     .ShouldBe(nameof(Destination.InnerSourceValue));
         }
 
@@ -76,9 +74,7 @@ namespace AutoMapper.UnitTests.Bug
             public void Should_not_use_pascal_naming_convention() =>
                 new Action(Mapper.ConfigurationProvider.AssertConfigurationIsValid)
                     .ShouldThrow<AutoMapperConfigurationException>()
-                    .Errors[0]
-                    .UnmappedPropertyNames
-                    .ShouldContain("COMPANY_Name");
+                    .Errors[0].UnmappedPropertyNames.ShouldContain("COMPANY_Name");
         }
 
         public class Neda

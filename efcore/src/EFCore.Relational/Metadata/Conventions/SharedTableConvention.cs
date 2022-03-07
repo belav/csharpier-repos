@@ -277,12 +277,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 if (
                     !usePrefix
                     || (
-                        !property
-                            .DeclaringEntityType
-                            .IsStrictlyDerivedFrom(otherProperty.DeclaringEntityType)
-                        && !otherProperty
-                            .DeclaringEntityType
-                            .IsStrictlyDerivedFrom(property.DeclaringEntityType)
+                        !property.DeclaringEntityType.IsStrictlyDerivedFrom(
+                            otherProperty.DeclaringEntityType
+                        )
+                        && !otherProperty.DeclaringEntityType.IsStrictlyDerivedFrom(
+                            property.DeclaringEntityType
+                        )
                     )
                     || property.DeclaringEntityType.FindRowInternalForeignKeys(storeObject).Any()
                 )
@@ -304,15 +304,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 if (
                     !usePrefix
                     || (
-                        !property
-                            .DeclaringEntityType
-                            .IsStrictlyDerivedFrom(otherProperty.DeclaringEntityType)
-                        && !otherProperty
-                            .DeclaringEntityType
-                            .IsStrictlyDerivedFrom(property.DeclaringEntityType)
+                        !property.DeclaringEntityType.IsStrictlyDerivedFrom(
+                            otherProperty.DeclaringEntityType
+                        )
+                        && !otherProperty.DeclaringEntityType.IsStrictlyDerivedFrom(
+                            property.DeclaringEntityType
+                        )
                     )
-                    || otherProperty
-                        .DeclaringEntityType
+                    || otherProperty.DeclaringEntityType
                         .FindRowInternalForeignKeys(storeObject)
                         .Any()
                 )

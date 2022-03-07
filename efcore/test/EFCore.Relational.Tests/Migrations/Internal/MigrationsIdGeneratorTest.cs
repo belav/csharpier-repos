@@ -33,9 +33,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
         [UseCulture("fa")]
         public void CreateId_uses_invariant_calendar()
         {
-            var invariantYear = CultureInfo
-                .InvariantCulture
-                .Calendar
+            var invariantYear = CultureInfo.InvariantCulture.Calendar
                 .GetYear(DateTime.Today)
                 .ToString();
 

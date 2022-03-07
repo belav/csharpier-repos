@@ -36,8 +36,7 @@ namespace System.Reflection
         {
             return o is MdFieldInfo m
                 && m.m_tkField == m_tkField
-                && m_declaringType
-                    .TypeHandle
+                && m_declaringType.TypeHandle
                     .GetModuleHandle()
                     .Equals(m.m_declaringType.TypeHandle.GetModuleHandle());
         }
@@ -125,16 +124,15 @@ namespace System.Reflection
             {
                 if (m_fieldType == null)
                 {
-                    ConstArray fieldMarshal = GetRuntimeModule()
-                        .MetadataImport
-                        .GetSigOfFieldDef(m_tkField);
+                    ConstArray fieldMarshal = GetRuntimeModule().MetadataImport.GetSigOfFieldDef(
+                        m_tkField
+                    );
 
-                    m_fieldType =
-                        new Signature(
-                            fieldMarshal.Signature.ToPointer(),
-                            (int)fieldMarshal.Length,
-                            m_declaringType
-                        ).FieldType;
+                    m_fieldType = new Signature(
+                        fieldMarshal.Signature.ToPointer(),
+                        (int)fieldMarshal.Length,
+                        m_declaringType
+                    ).FieldType;
                 }
 
                 return m_fieldType;

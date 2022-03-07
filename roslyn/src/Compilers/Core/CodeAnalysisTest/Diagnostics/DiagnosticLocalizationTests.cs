@@ -125,10 +125,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
 
             Assert.Equal(
                 fixedTitle,
-                localizableDiagnostic
-                    .Descriptor
-                    .Title
-                    .ToString(CustomResourceManager.DefaultCulture)
+                localizableDiagnostic.Descriptor.Title.ToString(
+                    CustomResourceManager.DefaultCulture
+                )
             );
             Assert.Equal(
                 fixedMessageFormat,
@@ -136,10 +135,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
             );
             Assert.Equal(
                 fixedDescription,
-                localizableDiagnostic
-                    .Descriptor
-                    .Description
-                    .ToString(CustomResourceManager.DefaultCulture)
+                localizableDiagnostic.Descriptor.Description.ToString(
+                    CustomResourceManager.DefaultCulture
+                )
             );
 
             // Test localized title, description and message.

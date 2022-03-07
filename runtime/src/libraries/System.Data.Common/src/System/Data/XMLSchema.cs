@@ -462,9 +462,10 @@ namespace System.Data
         internal void HandleRefTableProperties(ArrayList RefTables, XmlSchemaElement element)
         {
             string typeName = GetInstanceName(element);
-            DataTable? table = _ds!
-                .Tables
-                .GetTable(XmlConvert.DecodeName(typeName), element.QualifiedName.Namespace);
+            DataTable? table = _ds!.Tables.GetTable(
+                XmlConvert.DecodeName(typeName),
+                element.QualifiedName.Namespace
+            );
             Debug.Assert(table != null, "ref table should have been already created");
 
             SetProperties(table, element.UnhandledAttributes);
@@ -685,8 +686,9 @@ namespace System.Data
 
                     if (ct.ContentModel is XmlSchemaSimpleContent)
                     {
-                        XmlSchemaAnnotated? cContent =
-                            ((XmlSchemaSimpleContent)(ct.ContentModel)).Content;
+                        XmlSchemaAnnotated? cContent = (
+                            (XmlSchemaSimpleContent)(ct.ContentModel)
+                        ).Content;
                         if (cContent is XmlSchemaSimpleContentExtension)
                         {
                             XmlSchemaSimpleContentExtension ccExtension = (
@@ -1177,8 +1179,9 @@ namespace System.Data
 
                 if (ct.ContentModel is XmlSchemaComplexContent)
                 {
-                    XmlSchemaAnnotated? cContent =
-                        ((XmlSchemaComplexContent)(ct.ContentModel)).Content;
+                    XmlSchemaAnnotated? cContent = (
+                        (XmlSchemaComplexContent)(ct.ContentModel)
+                    ).Content;
                     if (cContent is XmlSchemaComplexContentExtension)
                     {
                         XmlSchemaComplexContentExtension ccExtension = (
@@ -1630,10 +1633,9 @@ namespace System.Data
 
             if (0 < key.Length)
             {
-                UniqueConstraint? found = (UniqueConstraint?)key[0]
-                    .Table!
-                    .Constraints
-                    .FindConstraint(new UniqueConstraint(name, key));
+                UniqueConstraint? found = (UniqueConstraint?)key[
+                    0
+                ].Table!.Constraints.FindConstraint(new UniqueConstraint(name, key));
 
                 if (found == null)
                 {
@@ -3047,8 +3049,9 @@ namespace System.Data
                                         is XmlSchemaComplexType
                                     )
                                 ) // amir
-                                    ((XmlSchemaElement)choiceEl).MaxOccurs =
-                                        ((XmlSchemaParticle)el).MaxOccurs;
+                                    ((XmlSchemaElement)choiceEl).MaxOccurs = (
+                                        (XmlSchemaParticle)el
+                                    ).MaxOccurs;
                                 if (
                                     (((XmlSchemaElement)choiceEl).RefName.Name.Length != 0)
                                     && (

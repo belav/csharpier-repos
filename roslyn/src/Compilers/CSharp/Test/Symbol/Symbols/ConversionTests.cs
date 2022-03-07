@@ -2160,8 +2160,10 @@ class C
             var typeIntArray = classC.GetMember<FieldSymbol>("a").Type;
 
             var interfaceI3 = compilation.GlobalNamespace.GetMember<NamedTypeSymbol>("I3");
-            var typeIntArrayWithCustomModifiers =
-                interfaceI3.GetMember<MethodSymbol>("M1").Parameters.Single().Type;
+            var typeIntArrayWithCustomModifiers = interfaceI3
+                .GetMember<MethodSymbol>("M1")
+                .Parameters.Single()
+                .Type;
 
             Assert.True(
                 typeIntArrayWithCustomModifiers.HasCustomModifiers(
@@ -2228,8 +2230,7 @@ public class Program
             var tuple = GetBindingNodeAndModel<ExpressionSyntax>(comp);
             Assert.Equal(
                 ConversionKind.Identity,
-                tuple
-                    .Item2
+                tuple.Item2
                     .ClassifyConversion(
                         tuple.Item1,
                         comp.GetSpecialType(SpecialType.System_Boolean)
@@ -2285,8 +2286,9 @@ class Program
                 .Parent;
 
             // Get TypeSymbol corresponding to above VariableDeclaratorSyntax.
-            ITypeSymbol targetType =
-                ((ILocalSymbol)model.GetDeclaredSymbol(variableDeclarator)).Type;
+            ITypeSymbol targetType = (
+                (ILocalSymbol)model.GetDeclaredSymbol(variableDeclarator)
+            ).Type;
 
             // Perform ClassifyConversion for expressions from within the above SyntaxTree.
             var sourceExpression1 = (ExpressionSyntax)tree.GetCompilationUnitRoot()

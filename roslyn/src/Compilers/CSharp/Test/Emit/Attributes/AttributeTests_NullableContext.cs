@@ -227,11 +227,9 @@ public class Program
                 comp,
                 symbolValidator: module =>
                 {
-                    var attributeType = module
-                        .GlobalNamespace
-                        .GetMember<NamedTypeSymbol>(
-                            "System.Runtime.CompilerServices.NullableContextAttribute"
-                        );
+                    var attributeType = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
+                        "System.Runtime.CompilerServices.NullableContextAttribute"
+                    );
                     AttributeUsageInfo attributeUsage = attributeType.GetAttributeUsageInfo();
                     Assert.False(attributeUsage.Inherited);
                     Assert.False(attributeUsage.AllowMultiple);

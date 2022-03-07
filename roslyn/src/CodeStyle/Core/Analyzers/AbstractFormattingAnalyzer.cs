@@ -42,10 +42,9 @@ namespace Microsoft.CodeAnalysis.CodeStyle
 
         private void AnalyzeSyntaxTree(SyntaxTreeAnalysisContext context)
         {
-            var analyzerConfigOptions = context
-                .Options
-                .AnalyzerConfigOptionsProvider
-                .GetOptions(context.Tree);
+            var analyzerConfigOptions = context.Options.AnalyzerConfigOptionsProvider.GetOptions(
+                context.Tree
+            );
             FormattingAnalyzerHelper.AnalyzeSyntaxTree(
                 context,
                 SyntaxFormattingService,

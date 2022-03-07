@@ -46,9 +46,10 @@ namespace System.Web.Mvc.Html.Test
 
             // Developers might need to do something similar (including MetadataOverrideScope or another approach
             // replacing ModelMetadataProviders.Current) since for example [DisplayFormat] cannot be applied to a class.
-            var metadata = ModelMetadataProviders
-                .Current
-                .GetMetadataForType(() => null, typeof(ObjectTemplateModel));
+            var metadata = ModelMetadataProviders.Current.GetMetadataForType(
+                () => null,
+                typeof(ObjectTemplateModel)
+            );
             metadata.HtmlEncode = htmlEncode;
 
             string displayResult;
@@ -91,9 +92,10 @@ namespace System.Web.Mvc.Html.Test
             viewContext.Setup(c => c.View).Returns(new DummyView());
             viewContext.Setup(c => c.Writer).Returns(TextWriter.Null);
 
-            var metadata = ModelMetadataProviders
-                .Current
-                .GetMetadataForType(() => null, typeof(string));
+            var metadata = ModelMetadataProviders.Current.GetMetadataForType(
+                () => null,
+                typeof(string)
+            );
             metadata.TemplateHint = "EmailAddress";
             metadata.HtmlEncode = htmlEncode;
 
@@ -134,9 +136,10 @@ namespace System.Web.Mvc.Html.Test
             viewContext.Setup(c => c.View).Returns(new DummyView());
             viewContext.Setup(c => c.Writer).Returns(TextWriter.Null);
 
-            var metadata = ModelMetadataProviders
-                .Current
-                .GetMetadataForType(() => null, typeof(string));
+            var metadata = ModelMetadataProviders.Current.GetMetadataForType(
+                () => null,
+                typeof(string)
+            );
             metadata.TemplateHint = htmlEncode ? "String" : "Html";
 
             string displayResult;
@@ -173,9 +176,10 @@ namespace System.Web.Mvc.Html.Test
             viewContext.Setup(c => c.View).Returns(new DummyView());
             viewContext.Setup(c => c.Writer).Returns(TextWriter.Null);
 
-            var metadata = ModelMetadataProviders
-                .Current
-                .GetMetadataForType(() => null, typeof(ObjectTemplateModel));
+            var metadata = ModelMetadataProviders.Current.GetMetadataForType(
+                () => null,
+                typeof(ObjectTemplateModel)
+            );
             metadata.NullDisplayText = text;
 
             string displayResult;
@@ -218,9 +222,10 @@ namespace System.Web.Mvc.Html.Test
             viewContext.Setup(c => c.View).Returns(new DummyView());
             viewContext.Setup(c => c.Writer).Returns(TextWriter.Null);
 
-            var metadata = ModelMetadataProviders
-                .Current
-                .GetMetadataForType(() => null, typeof(string));
+            var metadata = ModelMetadataProviders.Current.GetMetadataForType(
+                () => null,
+                typeof(string)
+            );
             metadata.TemplateHint = "Url";
             metadata.HtmlEncode = htmlEncode;
 

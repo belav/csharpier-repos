@@ -29,11 +29,9 @@ public static class IdentityBuilderUIExtensions
         builder.AddSignInManager();
         builder.Services.AddMvc();
 
-        builder
-            .Services
-            .ConfigureOptions(
-                typeof(IdentityDefaultUIConfigureOptions<>).MakeGenericType(builder.UserType)
-            );
+        builder.Services.ConfigureOptions(
+            typeof(IdentityDefaultUIConfigureOptions<>).MakeGenericType(builder.UserType)
+        );
         builder.Services.TryAddTransient<IEmailSender, EmailSender>();
 
         return builder;

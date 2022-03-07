@@ -97,9 +97,10 @@ namespace System.CommandLine.DragonFruit
                         commandHelpMetadata.Description = element.Value?.Trim();
                         break;
                     case "param":
-                        commandHelpMetadata
-                            .ParameterDescriptions
-                            .Add(element.Attribute("name")?.Value, element.Value?.Trim());
+                        commandHelpMetadata.ParameterDescriptions.Add(
+                            element.Attribute("name")?.Value,
+                            element.Value?.Trim()
+                        );
                         break;
                 }
             }

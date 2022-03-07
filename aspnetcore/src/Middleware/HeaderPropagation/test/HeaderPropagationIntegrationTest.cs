@@ -53,8 +53,7 @@ public class HeaderPropagationIntegrationTest
                                     {
                                         try
                                         {
-                                            var client = context
-                                                .RequestServices
+                                            var client = context.RequestServices
                                                 .GetRequiredService<IHttpClientFactory>()
                                                 .CreateClient("test");
                                             await client.GetAsync("http://localhost/"); // will throw

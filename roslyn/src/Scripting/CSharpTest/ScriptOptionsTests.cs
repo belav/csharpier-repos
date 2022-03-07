@@ -36,14 +36,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.UnitTests
         [Fact]
         public void WithLanguageVersion_NonCSharpParseOptions_Throws()
         {
-            var options = ScriptOptions
-                .Default
-                .WithParseOptions(
-                    new VisualBasicParseOptions(
-                        kind: SourceCodeKind.Script,
-                        languageVersion: VisualBasic.LanguageVersion.Latest
-                    )
-                );
+            var options = ScriptOptions.Default.WithParseOptions(
+                new VisualBasicParseOptions(
+                    kind: SourceCodeKind.Script,
+                    languageVersion: VisualBasic.LanguageVersion.Latest
+                )
+            );
             Assert.Throws<InvalidOperationException>(
                 () => options.WithLanguageVersion(LanguageVersion.CSharp8)
             );

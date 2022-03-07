@@ -52,31 +52,27 @@ namespace Microsoft.AspNet.Facebook.ModelBinders
             {
                 if (!originUrl.StartsWith(_config.AppUrl, StringComparison.OrdinalIgnoreCase))
                 {
-                    bindingContext
-                        .ModelState
-                        .AddModelError(
-                            bindingContext.ModelName,
-                            String.Format(
-                                CultureInfo.CurrentCulture,
-                                Resources.UrlCannotBeExternal,
-                                "originUrl",
-                                _config.AppUrl
-                            )
-                        );
+                    bindingContext.ModelState.AddModelError(
+                        bindingContext.ModelName,
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            Resources.UrlCannotBeExternal,
+                            "originUrl",
+                            _config.AppUrl
+                        )
+                    );
                 }
             }
             else
             {
-                bindingContext
-                    .ModelState
-                    .AddModelError(
-                        bindingContext.ModelName,
-                        String.Format(
-                            CultureInfo.CurrentCulture,
-                            Resources.ParameterIsRequired,
-                            "originUrl"
-                        )
-                    );
+                bindingContext.ModelState.AddModelError(
+                    bindingContext.ModelName,
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        Resources.ParameterIsRequired,
+                        "originUrl"
+                    )
+                );
             }
 
             string redirectUrl = null;
@@ -86,8 +82,9 @@ namespace Microsoft.AspNet.Facebook.ModelBinders
             {
                 FacebookClient client = _config.ClientProvider.CreateClient();
                 // Don't want to redirect to a permissioned URL, the action authorize filters take care of that.
-                redirectUrl =
-                    client.GetLoginUrl(originUrl, _config.AppId, String.Empty).AbsoluteUri;
+                redirectUrl = client
+                    .GetLoginUrl(originUrl, _config.AppId, String.Empty)
+                    .AbsoluteUri;
             }
 
             return new FacebookRedirectContext

@@ -83,14 +83,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal("x,a,b,c,y", insertBetween.ToFullString());
 
             // inserting after a single line comment keeps separator with previous item
-            var argsWithComment =
-                SyntaxFactory
-                    .ParseArgumentList(
-                        @"(a, // a is good
+            var argsWithComment = SyntaxFactory
+                .ParseArgumentList(
+                    @"(a, // a is good
 b // b is better
 )"
-                    )
-                    .Arguments;
+                )
+                .Arguments;
             var insertAfterComment = argsWithComment.Insert(
                 1,
                 SyntaxFactory.Argument(SyntaxFactory.ParseExpression("c"))
@@ -103,13 +102,12 @@ c,b // b is better
             );
 
             // inserting after a end of line trivia keeps separator with previous item
-            var argsWithEOL =
-                SyntaxFactory
-                    .ParseArgumentList(
-                        @"(a,
+            var argsWithEOL = SyntaxFactory
+                .ParseArgumentList(
+                    @"(a,
 b)"
-                    )
-                    .Arguments;
+                )
+                .Arguments;
             var insertAfterEOL = argsWithEOL.Insert(
                 1,
                 SyntaxFactory.Argument(SyntaxFactory.ParseExpression("c"))
@@ -121,8 +119,9 @@ c,b",
             );
 
             // inserting after any other trivia keeps separator with following item
-            var argsWithMultiLineComment =
-                SyntaxFactory.ParseArgumentList("(a, /* b is best */ b)").Arguments;
+            var argsWithMultiLineComment = SyntaxFactory
+                .ParseArgumentList("(a, /* b is best */ b)")
+                .Arguments;
             var insertBeforeMultiLineComment = argsWithMultiLineComment.Insert(
                 1,
                 SyntaxFactory.Argument(SyntaxFactory.ParseExpression("c"))

@@ -189,18 +189,15 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting.UnitTests
         {
             // modules: { MultiModule.dll, mod2.netmodule, mod3.netmodule }
             var dir = Temp.CreateDirectory();
-            string path0 =
-                dir.CreateFile("MultiModule.dll")
-                    .WriteAllBytes(TestResources.SymbolsTests.MultiModule.MultiModuleDll)
-                    .Path;
-            string path1 =
-                dir.CreateFile("mod2.netmodule")
-                    .WriteAllBytes(TestResources.SymbolsTests.MultiModule.mod2)
-                    .Path;
-            string path2 =
-                dir.CreateFile("mod3.netmodule")
-                    .WriteAllBytes(TestResources.SymbolsTests.MultiModule.mod3)
-                    .Path;
+            string path0 = dir.CreateFile("MultiModule.dll")
+                .WriteAllBytes(TestResources.SymbolsTests.MultiModule.MultiModuleDll)
+                .Path;
+            string path1 = dir.CreateFile("mod2.netmodule")
+                .WriteAllBytes(TestResources.SymbolsTests.MultiModule.mod2)
+                .Path;
+            string path2 = dir.CreateFile("mod3.netmodule")
+                .WriteAllBytes(TestResources.SymbolsTests.MultiModule.mod3)
+                .Path;
 
             var metadata1 =
                 _provider.GetMetadata(path0, MetadataImageKind.Assembly) as AssemblyMetadata;
@@ -255,10 +252,9 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting.UnitTests
                 () => _provider.GetMetadata(f0, MetadataImageKind.Assembly)
             );
 
-            string f1 =
-                Temp.CreateFile()
-                    .WriteAllBytes(TestResources.SymbolsTests.MultiModule.MultiModuleDll)
-                    .Path;
+            string f1 = Temp.CreateFile()
+                .WriteAllBytes(TestResources.SymbolsTests.MultiModule.MultiModuleDll)
+                .Path;
             Assert.Throws<FileNotFoundException>(
                 () => _provider.GetMetadata(f1, MetadataImageKind.Assembly)
             );

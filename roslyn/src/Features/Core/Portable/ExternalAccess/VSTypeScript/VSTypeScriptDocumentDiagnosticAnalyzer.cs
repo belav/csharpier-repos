@@ -21,12 +21,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
             CancellationToken cancellationToken
         )
         {
-            var analyzer =
-                document
-                    .Project
-                    .LanguageServices
-                    .GetRequiredService<VSTypeScriptDiagnosticAnalyzerLanguageService>()
-                    .Implementation;
+            var analyzer = document.Project.LanguageServices
+                .GetRequiredService<VSTypeScriptDiagnosticAnalyzerLanguageService>()
+                .Implementation;
             if (analyzer == null)
             {
                 return SpecializedTasks.EmptyImmutableArray<Diagnostic>();
@@ -40,12 +37,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
             CancellationToken cancellationToken
         )
         {
-            var analyzer =
-                document
-                    .Project
-                    .LanguageServices
-                    .GetRequiredService<VSTypeScriptDiagnosticAnalyzerLanguageService>()
-                    .Implementation;
+            var analyzer = document.Project.LanguageServices
+                .GetRequiredService<VSTypeScriptDiagnosticAnalyzerLanguageService>()
+                .Implementation;
             if (analyzer == null)
             {
                 return SpecializedTasks.EmptyImmutableArray<Diagnostic>();

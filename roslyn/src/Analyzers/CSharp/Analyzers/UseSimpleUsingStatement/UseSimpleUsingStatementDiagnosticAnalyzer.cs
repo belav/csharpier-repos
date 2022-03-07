@@ -135,13 +135,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
                 return;
             }
 
-            var option = context
-                .Options
-                .GetOption(
-                    CSharpCodeStyleOptions.PreferSimpleUsingStatement,
-                    syntaxTree,
-                    cancellationToken
-                );
+            var option = context.Options.GetOption(
+                CSharpCodeStyleOptions.PreferSimpleUsingStatement,
+                syntaxTree,
+                cancellationToken
+            );
             if (!option.Value)
             {
                 return;

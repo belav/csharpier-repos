@@ -67,15 +67,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 // okay transfer asset attached to block to statements
                 var firstStatement = block.Statements.First();
                 var firstToken = firstStatement.GetFirstToken(includeZeroWidth: true);
-                var firstTokenWithAsset = block
-                    .OpenBraceToken
+                var firstTokenWithAsset = block.OpenBraceToken
                     .CopyAnnotationsTo(firstToken)
                     .WithPrependedLeadingTrivia(block.OpenBraceToken.GetAllTrivia());
 
                 var lastStatement = block.Statements.Last();
                 var lastToken = lastStatement.GetLastToken(includeZeroWidth: true);
-                var lastTokenWithAsset = block
-                    .CloseBraceToken
+                var lastTokenWithAsset = block.CloseBraceToken
                     .CopyAnnotationsTo(lastToken)
                     .WithAppendedTrailingTrivia(block.CloseBraceToken.GetAllTrivia());
 
@@ -137,14 +135,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             {
                 Contract.ThrowIfNull(statement);
 
-                var type =
-                    _semanticModel
-                        .GetSpeculativeTypeInfo(
-                            _contextPosition,
-                            statement.Declaration.Type,
-                            SpeculativeBindingOption.BindAsTypeOrNamespace
-                        )
-                        .Type;
+                var type = _semanticModel
+                    .GetSpeculativeTypeInfo(
+                        _contextPosition,
+                        statement.Declaration.Type,
+                        SpeculativeBindingOption.BindAsTypeOrNamespace
+                    )
+                    .Type;
                 Contract.ThrowIfNull(type);
 
                 map.GetOrAdd(type, _ => new List<LocalDeclarationStatementSyntax>()).Add(statement);
@@ -215,14 +212,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     return false;
                 }
 
-                var semanticInfo =
-                    _semanticModel
-                        .GetSpeculativeTypeInfo(
-                            _contextPosition,
-                            declarationStatement.Declaration.Type,
-                            SpeculativeBindingOption.BindAsTypeOrNamespace
-                        )
-                        .Type;
+                var semanticInfo = _semanticModel
+                    .GetSpeculativeTypeInfo(
+                        _contextPosition,
+                        declarationStatement.Declaration.Type,
+                        SpeculativeBindingOption.BindAsTypeOrNamespace
+                    )
+                    .Type;
                 if (
                     semanticInfo == null
                     || semanticInfo.TypeKind == TypeKind.Error
@@ -373,9 +369,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
                 result.Add(
                     declaration.WithDeclaration(
-                        declaration
-                            .Declaration
-                            .WithVariables(SyntaxFactory.SingletonSeparatedList(variable))
+                        declaration.Declaration.WithVariables(
+                            SyntaxFactory.SingletonSeparatedList(variable)
+                        )
                     )
                 );
                 result.AddRange(statements.Skip(2));

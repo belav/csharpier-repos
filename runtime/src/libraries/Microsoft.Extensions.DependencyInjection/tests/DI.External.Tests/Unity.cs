@@ -19,11 +19,9 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             IServiceCollection serviceCollection
         )
         {
-            return Unity
-                .Microsoft
-                .DependencyInjection
-                .ServiceProviderExtensions
-                .BuildServiceProvider(serviceCollection);
+            return Unity.Microsoft.DependencyInjection.ServiceProviderExtensions.BuildServiceProvider(
+                serviceCollection
+            );
         }
     }
 }

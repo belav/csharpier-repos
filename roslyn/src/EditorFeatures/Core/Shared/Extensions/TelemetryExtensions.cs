@@ -47,8 +47,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         {
             // we log diagnostic id as it is if it is from us
             if (
-                diagnostic
-                    .Descriptor
+                diagnostic.Descriptor
                     .ImmutableCustomTags()
                     .Any(t => t == WellKnownDiagnosticTags.Telemetry)
             )

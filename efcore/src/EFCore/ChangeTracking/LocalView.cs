@@ -194,8 +194,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         public virtual IEnumerator<TEntity> GetEnumerator() =>
             _context
                 .GetDependencies()
-                .StateManager
-                .GetNonDeletedEntities<TEntity>()
+                .StateManager.GetNonDeletedEntities<TEntity>()
                 .GetEnumerator();
 
         /// <summary>
@@ -272,8 +271,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             foreach (
                 var entity in _context
                     .GetDependencies()
-                    .StateManager
-                    .GetNonDeletedEntities<TEntity>()
+                    .StateManager.GetNonDeletedEntities<TEntity>()
                     .ToList()
             )
             {
@@ -311,8 +309,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             foreach (
                 var entity in _context
                     .GetDependencies()
-                    .StateManager
-                    .GetNonDeletedEntities<TEntity>()
+                    .StateManager.GetNonDeletedEntities<TEntity>()
             )
             {
                 array[arrayIndex++] = entity;

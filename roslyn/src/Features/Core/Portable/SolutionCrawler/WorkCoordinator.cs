@@ -51,14 +51,10 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 _gate = new object();
 
                 _listener = listener;
-                _optionService = _registration
-                    .Workspace
-                    .Services
-                    .GetRequiredService<IOptionService>();
-                _documentTrackingService = _registration
-                    .Workspace
-                    .Services
-                    .GetRequiredService<IDocumentTrackingService>();
+                _optionService =
+                    _registration.Workspace.Services.GetRequiredService<IOptionService>();
+                _documentTrackingService =
+                    _registration.Workspace.Services.GetRequiredService<IDocumentTrackingService>();
 
                 // event and worker queues
                 _shutdownNotificationSource = new CancellationTokenSource();
@@ -945,15 +941,13 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         }
                     }
 
-                    _workCoordinator
-                        ._documentAndProjectWorkerProcessor
+                    _workCoordinator._documentAndProjectWorkerProcessor
                         .GetTestAccessor()
                         .WaitUntilCompletion(workers, list);
                 }
 
                 internal void WaitUntilCompletion() =>
-                    _workCoordinator
-                        ._documentAndProjectWorkerProcessor
+                    _workCoordinator._documentAndProjectWorkerProcessor
                         .GetTestAccessor()
                         .WaitUntilCompletion();
             }

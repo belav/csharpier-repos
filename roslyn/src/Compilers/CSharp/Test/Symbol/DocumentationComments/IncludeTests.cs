@@ -52,8 +52,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 "
             );
 
-            var acmeNamespace = (NamespaceSymbol)compilation
-                .GlobalNamespace
+            var acmeNamespace = (NamespaceSymbol)compilation.GlobalNamespace
                 .GetMembers("Acme")
                 .Single();
             var widgetClass = acmeNamespace.GetTypeMembers("Widget").Single();
@@ -130,8 +129,7 @@ class Widget
 "
             );
 
-            var acmeNamespace = (NamespaceSymbol)compilation
-                .GlobalNamespace
+            var acmeNamespace = (NamespaceSymbol)compilation.GlobalNamespace
                 .GetMembers("Acme")
                 .Single();
             var widgetClass = acmeNamespace.GetTypeMembers("Widget").Single();

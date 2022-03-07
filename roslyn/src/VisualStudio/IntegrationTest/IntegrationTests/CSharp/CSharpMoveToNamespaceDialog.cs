@@ -36,20 +36,18 @@ namespace A
 "
             );
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio
-                .Editor
-                .Verify
-                .CodeAction("Move to namespace...", applyFix: true, blockUntilComplete: false);
+            VisualStudio.Editor.Verify.CodeAction(
+                "Move to namespace...",
+                applyFix: true,
+                blockUntilComplete: false
+            );
 
             MoveToNamespaceDialog.VerifyOpen();
             MoveToNamespaceDialog.ClickCancel();
             MoveToNamespaceDialog.VerifyClosed();
 
-            VisualStudio
-                .Editor
-                .Verify
-                .TextContains(
-                    @"
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 namespace A
 {
     class C
@@ -57,7 +55,7 @@ namespace A
     }
 }
 "
-                );
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.CodeActionsMoveToNamespace)]
@@ -74,21 +72,19 @@ namespace A
 "
             );
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio
-                .Editor
-                .Verify
-                .CodeAction("Move to namespace...", applyFix: true, blockUntilComplete: false);
+            VisualStudio.Editor.Verify.CodeAction(
+                "Move to namespace...",
+                applyFix: true,
+                blockUntilComplete: false
+            );
 
             MoveToNamespaceDialog.VerifyOpen();
             MoveToNamespaceDialog.SetNamespace("B");
             MoveToNamespaceDialog.ClickCancel();
             MoveToNamespaceDialog.VerifyClosed();
 
-            VisualStudio
-                .Editor
-                .Verify
-                .TextContains(
-                    @"
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 namespace A
 {
     class C
@@ -96,7 +92,7 @@ namespace A
     }
 }
 "
-                );
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.CodeActionsMoveToNamespace)]
@@ -113,20 +109,18 @@ namespace A
 "
             );
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio
-                .Editor
-                .Verify
-                .CodeAction("Move to namespace...", applyFix: true, blockUntilComplete: false);
+            VisualStudio.Editor.Verify.CodeAction(
+                "Move to namespace...",
+                applyFix: true,
+                blockUntilComplete: false
+            );
 
             MoveToNamespaceDialog.VerifyOpen();
             MoveToNamespaceDialog.ClickOK();
             MoveToNamespaceDialog.VerifyClosed();
 
-            VisualStudio
-                .Editor
-                .Verify
-                .TextContains(
-                    @"
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 namespace A
 {
     class C
@@ -134,7 +128,7 @@ namespace A
     }
 }
 "
-                );
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.CodeActionsMoveToNamespace)]
@@ -150,28 +144,26 @@ namespace A
 "
             );
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio
-                .Editor
-                .Verify
-                .CodeAction("Move to namespace...", applyFix: true, blockUntilComplete: false);
+            VisualStudio.Editor.Verify.CodeAction(
+                "Move to namespace...",
+                applyFix: true,
+                blockUntilComplete: false
+            );
 
             MoveToNamespaceDialog.VerifyOpen();
             MoveToNamespaceDialog.SetNamespace("B");
             MoveToNamespaceDialog.ClickOK();
             MoveToNamespaceDialog.VerifyClosed();
 
-            VisualStudio
-                .Editor
-                .Verify
-                .TextContains(
-                    @"namespace B
+            VisualStudio.Editor.Verify.TextContains(
+                @"namespace B
 {
     class C
     {
     }
 }
 "
-                );
+            );
         }
     }
 }

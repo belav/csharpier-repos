@@ -287,8 +287,9 @@ namespace System.Data.OleDb
                                 dataRow[dataType, DataRowVersion.Default],
                                 CultureInfo.InvariantCulture
                             );
-                            parameter.OleDbType =
-                                NativeDBType.FromDBType(wType, false, false).enumOleDbType;
+                            parameter.OleDbType = NativeDBType
+                                .FromDBType(wType, false, false)
+                                .enumOleDbType;
                         }
                         if ((null != maxLen) && !dataRow.IsNull(maxLen, DataRowVersion.Default))
                         {

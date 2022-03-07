@@ -420,8 +420,7 @@ class C
 
             var compilation = (Compilation)CreateCompilation(source);
 
-            var destructor = compilation
-                .GlobalNamespace
+            var destructor = compilation.GlobalNamespace
                 .GetMember<INamedTypeSymbol>("C")
                 .GetMember<IMethodSymbol>(WellKnownMemberNames.DestructorName);
             Assert.Equal(MethodKind.Destructor, destructor.MethodKind);
@@ -439,12 +438,11 @@ class C
             Assert.NotNull(declaredSymbol);
             Assert.Equal(destructor, declaredSymbol);
 
-            var finalizeSyntax =
-                tree.GetCompilationUnitRoot()
-                    .DescendantNodes()
-                    .OfType<MemberAccessExpressionSyntax>()
-                    .Single()
-                    .Name;
+            var finalizeSyntax = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<MemberAccessExpressionSyntax>()
+                .Single()
+                .Name;
             Assert.Equal(WellKnownMemberNames.DestructorName, finalizeSyntax.ToString());
 
             var info = model.GetSymbolInfo(finalizeSyntax);

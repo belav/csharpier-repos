@@ -42,8 +42,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             _sqlExpressionFactory = sqlExpressionFactory;
             _querySqlGeneratorFactory = querySqlGeneratorFactory;
             _contextType = cosmosQueryCompilationContext.ContextType;
-            _threadSafetyChecksEnabled =
-                dependencies.CoreSingletonOptions.AreThreadSafetyChecksEnabled;
+            _threadSafetyChecksEnabled = dependencies
+                .CoreSingletonOptions
+                .AreThreadSafetyChecksEnabled;
             _partitionKeyFromExtension = cosmosQueryCompilationContext.PartitionKeyFromExtension;
         }
 

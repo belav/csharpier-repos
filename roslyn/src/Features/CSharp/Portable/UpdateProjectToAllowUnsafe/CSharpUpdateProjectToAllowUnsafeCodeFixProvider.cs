@@ -57,12 +57,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UpdateProjectToAllowUnsafe
         private static Solution AllowUnsafeOnProject(Project project)
         {
             var compilationOptions = (CSharpCompilationOptions)project.CompilationOptions;
-            return project
-                .Solution
-                .WithProjectCompilationOptions(
-                    project.Id,
-                    compilationOptions.WithAllowUnsafe(true)
-                );
+            return project.Solution.WithProjectCompilationOptions(
+                project.Id,
+                compilationOptions.WithAllowUnsafe(true)
+            );
         }
     }
 }

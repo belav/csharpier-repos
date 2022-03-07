@@ -137,8 +137,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                                 )
                             )
                             {
-                                var entityTypePrimaryKeyProperties =
-                                    entityType.FindPrimaryKey().Properties;
+                                var entityTypePrimaryKeyProperties = entityType
+                                    .FindPrimaryKey()
+                                    .Properties;
                                 var idProperty = entityType
                                     .GetProperties()
                                     .First(
@@ -1208,9 +1209,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                     is Expression partitionKeyValue
             )
             {
-                var partitionKeyProperty = entityShaperExpression
-                    .EntityType
-                    .GetProperty(entityShaperExpression.EntityType.GetPartitionKeyPropertyName());
+                var partitionKeyProperty = entityShaperExpression.EntityType.GetProperty(
+                    entityShaperExpression.EntityType.GetPartitionKeyPropertyName()
+                );
                 ((SelectExpression)source.QueryExpression).SetPartitionKey(
                     partitionKeyProperty,
                     partitionKeyValue
@@ -1304,12 +1305,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         valueExpression is ConstantExpression
                         || (
                             valueExpression is ParameterExpression valueParameterExpression
-                            && valueParameterExpression
-                                .Name
-                                ?.StartsWith(
-                                    QueryCompilationContext.QueryParameterPrefix,
-                                    StringComparison.Ordinal
-                                ) == true
+                            && valueParameterExpression.Name?.StartsWith(
+                                QueryCompilationContext.QueryParameterPrefix,
+                                StringComparison.Ordinal
+                            ) == true
                         )
                     )
                     {

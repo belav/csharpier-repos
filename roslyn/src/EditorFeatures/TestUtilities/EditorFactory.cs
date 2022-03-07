@@ -20,8 +20,9 @@ namespace Roslyn.Test.EditorUtilities
             params string[] lines
         )
         {
-            var contentType =
-                exportProvider.GetExportedValue<ITextBufferFactoryService>().TextContentType;
+            var contentType = exportProvider
+                .GetExportedValue<ITextBufferFactoryService>()
+                .TextContentType;
 
             return CreateBuffer(exportProvider, contentType, lines);
         }
@@ -47,8 +48,9 @@ namespace Roslyn.Test.EditorUtilities
             params string[] lines
         )
         {
-            var contentType =
-                exportProvider.GetExportedValue<ITextBufferFactoryService>().TextContentType;
+            var contentType = exportProvider
+                .GetExportedValue<ITextBufferFactoryService>()
+                .TextContentType;
             return CreateView(exportProvider, contentType, lines);
         }
 

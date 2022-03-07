@@ -5002,12 +5002,11 @@ class Deconstructable
             var tree = compilation.SyntaxTrees.First();
             var model = compilation.GetSemanticModel(tree);
 
-            var collection =
-                tree.GetRoot()
-                    .DescendantNodes()
-                    .OfType<ForEachVariableStatementSyntax>()
-                    .Single()
-                    .Expression;
+            var collection = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<ForEachVariableStatementSyntax>()
+                .Single()
+                .Expression;
             Assert.Equal("x", collection.ToString());
             var symbol = model.GetSymbolInfo(collection).Symbol;
             Assert.Equal(SymbolKind.Parameter, symbol.Kind);
@@ -7239,8 +7238,7 @@ class C
                 "long _",
                 model
                     .GetSymbolInfo(discard1)
-                    .Symbol
-                    .ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)
+                    .Symbol.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)
             );
 
             var tuple1 = (TupleExpressionSyntax)discard1.Parent.Parent;
@@ -7352,8 +7350,7 @@ class C
                 "int _",
                 model
                     .GetSymbolInfo(discard2)
-                    .Symbol
-                    .ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)
+                    .Symbol.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)
             );
             Assert.Equal("System.Int32", model.GetTypeInfo(discard2).Type.ToTestDisplayString());
 
@@ -8054,8 +8051,7 @@ class C
                 "int _",
                 model
                     .GetSymbolInfo(discard3)
-                    .Symbol
-                    .ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)
+                    .Symbol.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)
             );
             var discard3Symbol = (IDiscardSymbol)model.GetSymbolInfo(discard3).Symbol;
             Assert.Equal("System.Int32", discard3Symbol.Type.ToTestDisplayString());
@@ -9830,8 +9826,10 @@ class D
     public static explicit operator byte(D c) { System.Console.Write(""Convert2 ""); return 2; }
     public D() { System.Console.Write(""D ""); }
 }";
-            var compilation =
-                CompileAndVerify(source, expectedOutput: @"C Convert D Convert2 A B").Compilation;
+            var compilation = CompileAndVerify(
+                source,
+                expectedOutput: @"C Convert D Convert2 A B"
+            ).Compilation;
             var tree = compilation.SyntaxTrees.Single();
             var node = tree.GetRoot().DescendantNodes().OfType<CastExpressionSyntax>().Single();
 

@@ -45,10 +45,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             if (document == null)
                 return null;
 
-            var blockStructureService = document
-                .Project
-                .LanguageServices
-                .GetService<BlockStructureService>();
+            var blockStructureService =
+                document.Project.LanguageServices.GetService<BlockStructureService>();
             if (blockStructureService == null)
             {
                 return Array.Empty<FoldingRange>();

@@ -34,9 +34,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                 // case var x:
                 if (
                     @case.Pattern.IsKind(SyntaxKind.VarPattern, out VarPatternSyntax? varPattern)
-                    && varPattern
-                        .Designation
-                        .IsKind(SyntaxKind.DiscardDesignation, SyntaxKind.SingleVariableDesignation)
+                    && varPattern.Designation.IsKind(
+                        SyntaxKind.DiscardDesignation,
+                        SyntaxKind.SingleVariableDesignation
+                    )
                 )
                 {
                     return @case.WhenClause == null;

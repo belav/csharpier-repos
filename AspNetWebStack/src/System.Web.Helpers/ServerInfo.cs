@@ -212,10 +212,9 @@ namespace System.Web.Helpers
             info.Add("Cache Size", HttpRuntime.Cache.Count.ToString(CultureInfo.InvariantCulture));
             info.Add(
                 "Cache Effective Percentage Physical Memory Limit",
-                HttpRuntime
-                    .Cache
-                    .EffectivePercentagePhysicalMemoryLimit
-                    .ToString(CultureInfo.InvariantCulture)
+                HttpRuntime.Cache.EffectivePercentagePhysicalMemoryLimit.ToString(
+                    CultureInfo.InvariantCulture
+                )
             );
             info.Add(
                 "Cache Effective Private Bytes Limit",

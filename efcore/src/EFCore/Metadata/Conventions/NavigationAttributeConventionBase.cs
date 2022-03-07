@@ -327,8 +327,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionContext<string> context
         )
         {
-            var navigationPropertyInfo = entityTypeBuilder
-                .Metadata
+            var navigationPropertyInfo = entityTypeBuilder.Metadata
                 .GetRuntimeProperties()
                 .Find(name);
             if (navigationPropertyInfo == null)
@@ -367,9 +366,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionModel model
         )
         {
-            var targetClrType = Dependencies
-                .MemberClassifier
-                .FindCandidateNavigationPropertyType(propertyInfo, model, out var _);
+            var targetClrType = Dependencies.MemberClassifier.FindCandidateNavigationPropertyType(
+                propertyInfo,
+                model,
+                out var _
+            );
             return
                 targetClrType != null
                 && Attribute.IsDefined(propertyInfo, typeof(TAttribute), inherit: true)
@@ -381,8 +382,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             PropertyInfo propertyInfo,
             IConventionEntityType entityType
         ) =>
-            Dependencies
-                .MemberClassifier
+            Dependencies.MemberClassifier
                 .GetNavigationCandidates(entityType)
                 .TryGetValue(propertyInfo, out var target)
             && Attribute.IsDefined(propertyInfo, typeof(TAttribute), inherit: true)

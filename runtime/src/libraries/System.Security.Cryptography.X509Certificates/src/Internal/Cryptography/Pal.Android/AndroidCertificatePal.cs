@@ -114,9 +114,10 @@ namespace Internal.Cryptography.Pal
         )
         {
             handle = null;
-            SafeX509Handle certHandle = Interop
-                .AndroidCrypto
-                .X509Decode(ref MemoryMarshal.GetReference(rawData), rawData.Length);
+            SafeX509Handle certHandle = Interop.AndroidCrypto.X509Decode(
+                ref MemoryMarshal.GetReference(rawData),
+                rawData.Length
+            );
 
             if (certHandle.IsInvalid)
             {

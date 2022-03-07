@@ -188,29 +188,25 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
 
                 if (SkipNavigation.Inverse != null)
                 {
-                    ((EntityType)SkipNavigation.Inverse.DeclaringEntityType)
-                        .Builder
-                        .HasNoSkipNavigation(
-                            (SkipNavigation)SkipNavigation.Inverse,
-                            ConfigurationSource.Explicit
-                        );
-                }
-
-                declaringEntityType
-                    .Builder
-                    .HasNoSkipNavigation(
-                        (SkipNavigation)SkipNavigation,
+                    (
+                        (EntityType)SkipNavigation.Inverse.DeclaringEntityType
+                    ).Builder.HasNoSkipNavigation(
+                        (SkipNavigation)SkipNavigation.Inverse,
                         ConfigurationSource.Explicit
                     );
+                }
 
-                Builder = declaringEntityType
-                    .Builder
-                    .HasRelationship(
-                        (EntityType)RelatedEntityType,
-                        navigationName,
-                        ConfigurationSource.Explicit,
-                        targetIsPrincipal: false
-                    );
+                declaringEntityType.Builder.HasNoSkipNavigation(
+                    (SkipNavigation)SkipNavigation,
+                    ConfigurationSource.Explicit
+                );
+
+                Builder = declaringEntityType.Builder.HasRelationship(
+                    (EntityType)RelatedEntityType,
+                    navigationName,
+                    ConfigurationSource.Explicit,
+                    targetIsPrincipal: false
+                );
                 SkipNavigation = null;
             }
 
@@ -323,13 +319,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
 
             using (foreignKey.DeclaringEntityType.Model.DelayConventions())
             {
-                foreignKey
-                    .DeclaringEntityType
-                    .Builder
-                    .HasNoRelationship(foreignKey, ConfigurationSource.Explicit);
+                foreignKey.DeclaringEntityType.Builder.HasNoRelationship(
+                    foreignKey,
+                    ConfigurationSource.Explicit
+                );
                 Builder = null;
-                return ((EntityType)DeclaringEntityType)
-                    .Builder
+                return ((EntityType)DeclaringEntityType).Builder
                     .HasSkipNavigation(
                         navigationMember,
                         (EntityType)RelatedEntityType,
@@ -393,10 +388,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             {
                 if (conflictingNavigation != null)
                 {
-                    foreignKey!
-                        .DeclaringEntityType
-                        .Builder
-                        .HasNoRelationship(foreignKey, ConfigurationSource.Explicit);
+                    foreignKey!.DeclaringEntityType.Builder.HasNoRelationship(
+                        foreignKey,
+                        ConfigurationSource.Explicit
+                    );
                 }
                 else
                 {
@@ -409,8 +404,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                     }
                 }
 
-                return ((EntityType)RelatedEntityType)
-                    .Builder
+                return ((EntityType)RelatedEntityType).Builder
                     .HasSkipNavigation(
                         navigationMember,
                         (EntityType)DeclaringEntityType,

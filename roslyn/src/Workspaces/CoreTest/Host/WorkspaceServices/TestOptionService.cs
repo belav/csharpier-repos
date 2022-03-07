@@ -78,8 +78,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
         internal sealed class TestOptionsPersister : IOptionPersister
         {
-            private ImmutableDictionary<OptionKey, object?> _options =
-                ImmutableDictionary<OptionKey, object?>.Empty;
+            private ImmutableDictionary<OptionKey, object?> _options = ImmutableDictionary<
+                OptionKey,
+                object?
+            >.Empty;
 
             public bool TryFetch(OptionKey optionKey, out object? value) =>
                 _options.TryGetValue(optionKey, out value);

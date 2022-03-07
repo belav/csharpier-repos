@@ -379,16 +379,15 @@ namespace System.Data.ProviderBase
                                 case SqlXml: // turn string into a SqlXml value for DataColumn
                                     System.Xml.XmlReaderSettings settings =
                                         new System.Xml.XmlReaderSettings();
-                                    settings.ConformanceLevel =
-                                        System.Xml.ConformanceLevel.Fragment;
-                                    System.Xml.XmlReader reader = System
+                                    settings.ConformanceLevel = System
                                         .Xml
-                                        .XmlReader
-                                        .Create(
-                                            new System.IO.StringReader(xml),
-                                            settings,
-                                            (string?)null
-                                        );
+                                        .ConformanceLevel
+                                        .Fragment;
+                                    System.Xml.XmlReader reader = System.Xml.XmlReader.Create(
+                                        new System.IO.StringReader(xml),
+                                        settings,
+                                        (string?)null
+                                    );
                                     _readerDataValues[i] = new System.Data.SqlTypes.SqlXml(reader);
                                     break;
                                 case XmlDocument: // turn string into XmlDocument value for DataColumn
@@ -998,7 +997,7 @@ namespace System.Data.ProviderBase
                     }
 
                     string basetable = /*schemaRow.BaseServerName+schemaRow.BaseCatalogName+schemaRow.BaseSchemaName+*/
-                        schemaRow.BaseTableName;
+                    schemaRow.BaseTableName;
                     if (null == dataColumn)
                     {
                         if (null == columnIndexMap)
@@ -1390,7 +1389,7 @@ namespace System.Data.ProviderBase
             if (null != _dataSet)
             {
                 string name = /*parentChapterColumn.ColumnName + "_" +*/
-                    chapterColumn.ColumnName;
+                chapterColumn.ColumnName;
 
                 DataRelation relation = new DataRelation(
                     name,

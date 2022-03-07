@@ -12,8 +12,9 @@ namespace AutoMapper.UnitTests
         {
             QueryMapperHelper
                 .MissingMapException(typeof(QueryMapperHelperTests), typeof(QueryMapperHelperTests))
-                .Message
-                .ShouldStartWith("Missing map from " + typeof(QueryMapperHelperTests).FullName);
+                .Message.ShouldStartWith(
+                    "Missing map from " + typeof(QueryMapperHelperTests).FullName
+                );
         }
     }
 }

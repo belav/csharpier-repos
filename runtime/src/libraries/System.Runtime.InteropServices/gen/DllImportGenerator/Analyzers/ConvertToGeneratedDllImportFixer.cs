@@ -54,15 +54,15 @@ namespace Microsoft.Interop.Analyzers
                 return;
 
             // Nothing to do if the GeneratedDllImportAttribute is not in the compilation
-            INamedTypeSymbol? generatedDllImportAttrType = model
-                .Compilation
-                .GetTypeByMetadataName(TypeNames.GeneratedDllImportAttribute);
+            INamedTypeSymbol? generatedDllImportAttrType = model.Compilation.GetTypeByMetadataName(
+                TypeNames.GeneratedDllImportAttribute
+            );
             if (generatedDllImportAttrType == null)
                 return;
 
-            INamedTypeSymbol? dllImportAttrType = model
-                .Compilation
-                .GetTypeByMetadataName(typeof(DllImportAttribute).FullName);
+            INamedTypeSymbol? dllImportAttrType = model.Compilation.GetTypeByMetadataName(
+                typeof(DllImportAttribute).FullName
+            );
             if (dllImportAttrType == null)
                 return;
 
@@ -133,9 +133,10 @@ namespace Microsoft.Interop.Analyzers
                 .ConfigureAwait(false);
             SyntaxGenerator generator = editor.Generator;
 
-            var dllImportSyntax = (AttributeSyntax)dllImportAttr!
-                .ApplicationSyntaxReference!
-                .GetSyntax(cancellationToken);
+            var dllImportSyntax =
+                (AttributeSyntax)dllImportAttr!.ApplicationSyntaxReference!.GetSyntax(
+                    cancellationToken
+                );
 
             // Create GeneratedDllImport attribute based on the DllImport attribute
             SyntaxNode generatedDllImportSyntax = GetGeneratedDllImportAttribute(
@@ -338,30 +339,26 @@ namespace Microsoft.Interop.Analyzers
             SyntaxGenerator generator
         )
         {
-            AttributeArgumentListSyntax updatedArgList = attribute
-                .ArgumentList
-                .WithArguments(
-                    SyntaxFactory.SeparatedList(
-                        attribute
-                            .ArgumentList
-                            .Arguments
-                            .OrderBy(
-                                arg =>
-                                {
-                                    // Unnamed arguments first
-                                    if (arg.NameEquals == null)
-                                        return -1;
+            AttributeArgumentListSyntax updatedArgList = attribute.ArgumentList.WithArguments(
+                SyntaxFactory.SeparatedList(
+                    attribute.ArgumentList.Arguments.OrderBy(
+                        arg =>
+                        {
+                            // Unnamed arguments first
+                            if (arg.NameEquals == null)
+                                return -1;
 
-                                    // Named arguments in specified order, followed by any named arguments with no preferred order
-                                    string name = arg.NameEquals.Name.Identifier.Text;
-                                    int index = System
-                                        .Array
-                                        .IndexOf(s_preferredAttributeArgumentOrder, name);
-                                    return index == -1 ? int.MaxValue : index;
-                                }
-                            )
+                            // Named arguments in specified order, followed by any named arguments with no preferred order
+                            string name = arg.NameEquals.Name.Identifier.Text;
+                            int index = System.Array.IndexOf(
+                                s_preferredAttributeArgumentOrder,
+                                name
+                            );
+                            return index == -1 ? int.MaxValue : index;
+                        }
                     )
-                );
+                )
+            );
             return generator.ReplaceNode(attribute, attribute.ArgumentList, updatedArgList);
         }
 
@@ -373,10 +370,9 @@ namespace Microsoft.Interop.Analyzers
         )
         {
             if (
-                editor
-                    .SemanticModel
-                    .Compilation
-                    .GetTypeByMetadataName(TypeNames.UnmanagedCallConvAttribute)
+                editor.SemanticModel.Compilation.GetTypeByMetadataName(
+                    TypeNames.UnmanagedCallConvAttribute
+                )
                 is null
             )
             {
@@ -395,33 +391,21 @@ namespace Microsoft.Interop.Analyzers
             ITypeSymbol? callingConventionType = callingConvention switch
             {
                 CallingConvention.Cdecl
-                  => editor
-                      .SemanticModel
-                      .Compilation
-                      .ObjectType
-                      .ContainingAssembly
-                      .GetTypeByMetadataName($"System.Runtime.CompilerServices.CallConvCdecl"),
+                  => editor.SemanticModel.Compilation.ObjectType.ContainingAssembly.GetTypeByMetadataName(
+                      $"System.Runtime.CompilerServices.CallConvCdecl"
+                  ),
                 CallingConvention.StdCall
-                  => editor
-                      .SemanticModel
-                      .Compilation
-                      .ObjectType
-                      .ContainingAssembly
-                      .GetTypeByMetadataName($"System.Runtime.CompilerServices.CallConvStdcall"),
+                  => editor.SemanticModel.Compilation.ObjectType.ContainingAssembly.GetTypeByMetadataName(
+                      $"System.Runtime.CompilerServices.CallConvStdcall"
+                  ),
                 CallingConvention.ThisCall
-                  => editor
-                      .SemanticModel
-                      .Compilation
-                      .ObjectType
-                      .ContainingAssembly
-                      .GetTypeByMetadataName($"System.Runtime.CompilerServices.CallConvThiscall"),
+                  => editor.SemanticModel.Compilation.ObjectType.ContainingAssembly.GetTypeByMetadataName(
+                      $"System.Runtime.CompilerServices.CallConvThiscall"
+                  ),
                 CallingConvention.FastCall
-                  => editor
-                      .SemanticModel
-                      .Compilation
-                      .ObjectType
-                      .ContainingAssembly
-                      .GetTypeByMetadataName($"System.Runtime.CompilerServices.CallConvFastcall"),
+                  => editor.SemanticModel.Compilation.ObjectType.ContainingAssembly.GetTypeByMetadataName(
+                      $"System.Runtime.CompilerServices.CallConvFastcall"
+                  ),
                 _ => null
             };
 
@@ -440,10 +424,9 @@ namespace Microsoft.Interop.Analyzers
                     "CallConvs",
                     generator.ArrayCreationExpression(
                         generator.TypeExpression(
-                            editor
-                                .SemanticModel
-                                .Compilation
-                                .GetTypeByMetadataName(TypeNames.System_Type)
+                            editor.SemanticModel.Compilation.GetTypeByMetadataName(
+                                TypeNames.System_Type
+                            )
                         ),
                         new[]
                         {

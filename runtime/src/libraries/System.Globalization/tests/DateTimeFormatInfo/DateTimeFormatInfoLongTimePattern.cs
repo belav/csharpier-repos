@@ -72,8 +72,9 @@ namespace System.Globalization.Tests
         {
             // Usually fr-CA long time format has a single quotes e.g. "HH 'h' mm 'min' ss 's'".
             // Ensuring when reading such formats from ICU we'll not eat the spaces after the single quotes.
-            string longTimeFormat =
-                CultureInfo.GetCultureInfo("fr-CA").DateTimeFormat.LongTimePattern;
+            string longTimeFormat = CultureInfo
+                .GetCultureInfo("fr-CA")
+                .DateTimeFormat.LongTimePattern;
             int startIndex = 0;
 
             while (

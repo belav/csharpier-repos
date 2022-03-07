@@ -29,8 +29,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         ) : base(dependencies, async)
         {
             RelationalDependencies = relationalDependencies;
-            QuerySplittingBehavior =
-                RelationalOptionsExtension.Extract(ContextOptions).QuerySplittingBehavior;
+            QuerySplittingBehavior = RelationalOptionsExtension
+                .Extract(ContextOptions)
+                .QuerySplittingBehavior;
         }
 
         /// <summary>

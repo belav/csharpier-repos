@@ -40,8 +40,7 @@ public class ComponentParametersShouldBePublicCodeFixProvider : CodeFixProvider
 
     public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
     {
-        var root = await context
-            .Document
+        var root = await context.Document
             .GetSyntaxRootAsync(context.CancellationToken)
             .ConfigureAwait(false);
         var diagnostic = context.Diagnostics.First();
@@ -49,8 +48,7 @@ public class ComponentParametersShouldBePublicCodeFixProvider : CodeFixProvider
 
         // Find the type declaration identified by the diagnostic.
         var declaration = root.FindToken(diagnosticSpan.Start)
-            .Parent
-            .AncestorsAndSelf()
+            .Parent.AncestorsAndSelf()
             .OfType<PropertyDeclarationSyntax>()
             .First();
 

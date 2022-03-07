@@ -185,12 +185,11 @@ class Driver
 
         for (int i = 0; i < threadCount; ++i)
         {
-            var dele =
-                (
-                    testIndex >= 0
-                        ? available_tests[testIndex]
-                        : available_tests[i % available_tests.Length]
-                ).Item1;
+            var dele = (
+                testIndex >= 0
+                    ? available_tests[testIndex]
+                    : available_tests[i % available_tests.Length]
+            ).Item1;
             var t = new Thread(() => dele(-1));
             t.Start();
             threads.Add(t);

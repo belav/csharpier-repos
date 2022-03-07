@@ -623,9 +623,8 @@ namespace System.Diagnostics
                 {
                     // we expect baggage to be empty or contain a few items
                     using (
-                        IEnumerator<KeyValuePair<string, string>> e = activity
-                            .Baggage
-                            .GetEnumerator()
+                        IEnumerator<KeyValuePair<string, string>> e =
+                            activity.Baggage.GetEnumerator()
                     )
                     {
                         if (e.MoveNext())

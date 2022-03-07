@@ -1896,8 +1896,7 @@ class C
             var a1 = (IArrayTypeSymbol)p.GetMember<MethodSymbol>("Test1")
                 .GetAttributes()
                 .Single()
-                .ConstructorArguments
-                .Single()
+                .ConstructorArguments.Single()
                 .Value;
             Assert.Equal("System.Int32[]", a1.ToTestDisplayString());
             Assert.Equal(1, a1.Rank);
@@ -1906,8 +1905,7 @@ class C
             var a2 = (IArrayTypeSymbol)p.GetMember<MethodSymbol>("Test2")
                 .GetAttributes()
                 .Single()
-                .ConstructorArguments
-                .Single()
+                .ConstructorArguments.Single()
                 .Value;
             Assert.Equal("System.Int32[*]", a2.ToTestDisplayString());
             Assert.Equal(1, a2.Rank);
@@ -1918,8 +1916,7 @@ class C
                     (ITypeSymbol)p.GetMember<MethodSymbol>("Test3")
                         .GetAttributes()
                         .Single()
-                        .ConstructorArguments
-                        .Single()
+                        .ConstructorArguments.Single()
                         .Value
                 ).IsErrorType()
             );
@@ -1928,8 +1925,7 @@ class C
                     (ITypeSymbol)p.GetMember<MethodSymbol>("Test4")
                         .GetAttributes()
                         .Single()
-                        .ConstructorArguments
-                        .Single()
+                        .ConstructorArguments.Single()
                         .Value
                 ).IsErrorType()
             );

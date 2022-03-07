@@ -128,8 +128,7 @@ internal class ComponentEventHandlerLoweringPass
         }
 
         // If we still have duplicates at this point then they are genuine conflicts.
-        var duplicates = parent
-            .Children
+        var duplicates = parent.Children
             .OfType<TagHelperDirectiveAttributeIntermediateNode>()
             .Where(p => p.TagHelper?.IsEventHandlerTagHelper() ?? false)
             .GroupBy(p => p.AttributeName)
@@ -137,23 +136,20 @@ internal class ComponentEventHandlerLoweringPass
 
         foreach (var duplicate in duplicates)
         {
-            parent
-                .Diagnostics
-                .Add(
-                    ComponentDiagnosticFactory.CreateEventHandler_Duplicates(
-                        parent.Source,
-                        duplicate.Key,
-                        duplicate.ToArray()
-                    )
-                );
+            parent.Diagnostics.Add(
+                ComponentDiagnosticFactory.CreateEventHandler_Duplicates(
+                    parent.Source,
+                    duplicate.Key,
+                    duplicate.ToArray()
+                )
+            );
             foreach (var property in duplicate)
             {
                 parent.Children.Remove(property);
             }
         }
 
-        var parameterDuplicates = parent
-            .Children
+        var parameterDuplicates = parent.Children
             .OfType<TagHelperDirectiveAttributeParameterIntermediateNode>()
             .Where(p => p.TagHelper?.IsEventHandlerTagHelper() ?? false)
             .GroupBy(p => p.AttributeName)
@@ -161,15 +157,13 @@ internal class ComponentEventHandlerLoweringPass
 
         foreach (var duplicate in parameterDuplicates)
         {
-            parent
-                .Diagnostics
-                .Add(
-                    ComponentDiagnosticFactory.CreateEventHandlerParameter_Duplicates(
-                        parent.Source,
-                        duplicate.Key,
-                        duplicate.ToArray()
-                    )
-                );
+            parent.Diagnostics.Add(
+                ComponentDiagnosticFactory.CreateEventHandlerParameter_Duplicates(
+                    parent.Source,
+                    duplicate.Key,
+                    duplicate.ToArray()
+                )
+            );
             foreach (var property in duplicate)
             {
                 parent.Children.Remove(property);

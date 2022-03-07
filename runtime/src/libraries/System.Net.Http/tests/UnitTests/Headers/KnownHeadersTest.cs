@@ -238,15 +238,17 @@ namespace System.Net.Http.Tests
             {
                 Assert.NotNull(knownHeader);
 
-                string v1 = knownHeader
-                    .Descriptor
-                    .GetHeaderValue(value.Select(c => (byte)c).ToArray(), valueEncoding: null);
+                string v1 = knownHeader.Descriptor.GetHeaderValue(
+                    value.Select(c => (byte)c).ToArray(),
+                    valueEncoding: null
+                );
                 Assert.NotNull(v1);
                 Assert.Equal(value, v1, StringComparer.OrdinalIgnoreCase);
 
-                string v2 = knownHeader
-                    .Descriptor
-                    .GetHeaderValue(value.Select(c => (byte)c).ToArray(), valueEncoding: null);
+                string v2 = knownHeader.Descriptor.GetHeaderValue(
+                    value.Select(c => (byte)c).ToArray(),
+                    valueEncoding: null
+                );
                 Assert.Same(v1, v2);
             }
         }
@@ -259,12 +261,14 @@ namespace System.Net.Http.Tests
             KnownHeader knownHeader = KnownHeaders.TryGetKnownHeader(name);
             Assert.NotNull(knownHeader);
 
-            string v1 = knownHeader
-                .Descriptor
-                .GetHeaderValue(value.Select(c => (byte)c).ToArray(), valueEncoding: null);
-            string v2 = knownHeader
-                .Descriptor
-                .GetHeaderValue(value.Select(c => (byte)c).ToArray(), valueEncoding: null);
+            string v1 = knownHeader.Descriptor.GetHeaderValue(
+                value.Select(c => (byte)c).ToArray(),
+                valueEncoding: null
+            );
+            string v2 = knownHeader.Descriptor.GetHeaderValue(
+                value.Select(c => (byte)c).ToArray(),
+                valueEncoding: null
+            );
             Assert.Equal(value, v1);
             Assert.Equal(value, v2);
             Assert.NotSame(v1, v2);

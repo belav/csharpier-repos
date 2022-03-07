@@ -17,13 +17,11 @@ namespace System.Net.Security.Tests
         [Fact]
         public static void EventSource_ExistsWithCorrectId()
         {
-            Type esType = typeof(SslStream)
-                .Assembly
-                .GetType(
-                    "System.Net.Security.NetSecurityTelemetry",
-                    throwOnError: true,
-                    ignoreCase: false
-                );
+            Type esType = typeof(SslStream).Assembly.GetType(
+                "System.Net.Security.NetSecurityTelemetry",
+                throwOnError: true,
+                ignoreCase: false
+            );
             Assert.NotNull(esType);
 
             Assert.Equal("System.Net.Security", EventSource.GetName(esType));
@@ -101,10 +99,12 @@ namespace System.Net.Security.Tests
                             .ToArray();
                         Assert.Equal(2, stops.Length);
 
-                        EventWrittenEventArgs serverStop =
-                            Assert.Single(stops, s => s.ActivityId == serverStart.ActivityId).Event;
-                        EventWrittenEventArgs clientStop =
-                            Assert.Single(stops, s => s.ActivityId == clientStart.ActivityId).Event;
+                        EventWrittenEventArgs serverStop = Assert
+                            .Single(stops, s => s.ActivityId == serverStart.ActivityId)
+                            .Event;
+                        EventWrittenEventArgs clientStop = Assert
+                            .Single(stops, s => s.ActivityId == clientStart.ActivityId)
+                            .Event;
 
                         SslProtocols serverProtocol = ValidateHandshakeStopEventPayload(serverStop);
                         SslProtocols clientProtocol = ValidateHandshakeStopEventPayload(clientStop);
@@ -188,10 +188,12 @@ namespace System.Net.Security.Tests
                             s => ValidateHandshakeStopEventPayload(s.Event, failure: true)
                         );
 
-                        EventWrittenEventArgs serverStop =
-                            Assert.Single(stops, s => s.ActivityId == serverStart.ActivityId).Event;
-                        EventWrittenEventArgs clientStop =
-                            Assert.Single(stops, s => s.ActivityId == clientStart.ActivityId).Event;
+                        EventWrittenEventArgs serverStop = Assert
+                            .Single(stops, s => s.ActivityId == serverStart.ActivityId)
+                            .Event;
+                        EventWrittenEventArgs clientStop = Assert
+                            .Single(stops, s => s.ActivityId == clientStart.ActivityId)
+                            .Event;
 
                         (EventWrittenEventArgs Event, Guid ActivityId)[] failures = events
                             .Where(e => e.Event.EventName == "HandshakeFailed")
@@ -200,14 +202,12 @@ namespace System.Net.Security.Tests
                         Assert.All(failures, f => Assert.Equal(3, f.Event.Payload.Count));
                         Assert.All(failures, f => Assert.NotEmpty(f.Event.Payload[2] as string)); // exceptionMessage
 
-                        EventWrittenEventArgs serverFailure =
-                            Assert
-                                .Single(failures, f => f.ActivityId == serverStart.ActivityId)
-                                .Event;
-                        EventWrittenEventArgs clientFailure =
-                            Assert
-                                .Single(failures, f => f.ActivityId == clientStart.ActivityId)
-                                .Event;
+                        EventWrittenEventArgs serverFailure = Assert
+                            .Single(failures, f => f.ActivityId == serverStart.ActivityId)
+                            .Event;
+                        EventWrittenEventArgs clientFailure = Assert
+                            .Single(failures, f => f.ActivityId == clientStart.ActivityId)
+                            .Event;
 
                         // isServer
                         Assert.Equal(true, serverFailure.Payload[0]);

@@ -198,11 +198,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                         // For the above examples, it will be "return x + M();" AND "=> x ?? new C();" respectively.
                         // For these cases, we want to show the title as "Remove redundant assignment" instead of "Use discard _".
 
-                        var syntaxFacts = context
-                            .Document
-                            .GetLanguageService<ISyntaxFactsService>();
-                        var root = await context
-                            .Document
+                        var syntaxFacts =
+                            context.Document.GetLanguageService<ISyntaxFactsService>();
+                        var root = await context.Document
                             .GetSyntaxRootAsync(context.CancellationToken)
                             .ConfigureAwait(false);
                         var node = root.FindNode(context.Span, getInnermostNodeForTie: true);
@@ -566,10 +564,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                         break;
 
                     case UnusedValuePreference.UnusedLocalVariable:
-                        var name =
-                            nameGenerator
-                                .GenerateUniqueNameAtSpanStart(expressionStatement)
-                                .ValueText;
+                        var name = nameGenerator
+                            .GenerateUniqueNameAtSpanStart(expressionStatement)
+                            .ValueText;
                         editor.ReplaceNode(
                             expressionStatement,
                             (node, generator) =>
@@ -578,8 +575,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                                     node
                                 );
                                 // Add Simplifier annotation so that 'var'/explicit type is correctly added based on user options.
-                                var localDecl = editor
-                                    .Generator
+                                var localDecl = editor.Generator
                                     .LocalDeclarationStatement(
                                         name: name,
                                         initializer: expression.WithoutLeadingTrivia()
@@ -923,8 +919,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                 ITypeSymbol type,
                 string name
             ) =>
-                (TLocalDeclarationStatementSyntax)editor
-                    .Generator
+                (TLocalDeclarationStatementSyntax)editor.Generator
                     .LocalDeclarationStatement(type, name)
                     .WithLeadingTrivia(syntaxFacts.ElasticCarriageReturnLineFeed)
                     .WithAdditionalAnnotations(

@@ -112,16 +112,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             var text = textWithPositionMarker.Replace("$$", "");
 
             using var workspace = new TestWorkspace(composition: FeaturesTestCompositions.Features);
-            var provider =
-                workspace
-                    .ExportProvider
-                    .GetExports<CompletionProvider, CompletionProviderMetadata>()
-                    .Single(
-                        p =>
-                            p.Metadata.Language == LanguageNames.CSharp
-                            && p.Metadata.Name == nameof(LoadDirectiveCompletionProvider)
-                    )
-                    .Value;
+            var provider = workspace.ExportProvider
+                .GetExports<CompletionProvider, CompletionProviderMetadata>()
+                .Single(
+                    p =>
+                        p.Metadata.Language == LanguageNames.CSharp
+                        && p.Metadata.Name == nameof(LoadDirectiveCompletionProvider)
+                )
+                .Value;
             var languageServices = workspace.Services.GetLanguageServices(LanguageNames.CSharp);
             Assert.Equal(
                 expectedResult,

@@ -692,9 +692,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
 
                     if (
-                        expectedConvention
-                            .CallKind
-                            .IsCallingConvention(Cci.CallingConvention.Unmanaged)
+                        expectedConvention.CallKind.IsCallingConvention(
+                            Cci.CallingConvention.Unmanaged
+                        )
                     )
                     {
                         if (
@@ -1355,16 +1355,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 !moreDerivedOverride.IsOverride
                 || checkOverrideContainingType
-                    && !moreDerivedOverride
-                        .ContainingType
-                        .IsDerivedFrom(
-                            member.ContainingType,
-                            TypeCompareKind.ConsiderEverything,
-                            ref useSiteInfo
-                        )
-                || !MemberSignatureComparer
-                    .SloppyOverrideComparer
-                    .Equals(member, moreDerivedOverride)
+                    && !moreDerivedOverride.ContainingType.IsDerivedFrom(
+                        member.ContainingType,
+                        TypeCompareKind.ConsiderEverything,
+                        ref useSiteInfo
+                    )
+                || !MemberSignatureComparer.SloppyOverrideComparer.Equals(
+                    member,
+                    moreDerivedOverride
+                )
             )
             {
                 // Easy out.
@@ -1808,12 +1807,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             foreach (MemberResolutionResult<TMember> result in results)
             {
-                result
-                    .Member
-                    .AddUseSiteInfo(
-                        ref useSiteInfo,
-                        addDiagnostics: result.HasUseSiteDiagnosticToReport
-                    );
+                result.Member.AddUseSiteInfo(
+                    ref useSiteInfo,
+                    addDiagnostics: result.HasUseSiteDiagnosticToReport
+                );
             }
         }
 
@@ -3036,9 +3033,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             // choice after we received customer reports of problems in the space.
             // https://github.com/dotnet/roslyn/issues/55345
             if (
-                _binder
-                    .Compilation
-                    .IsFeatureEnabled(MessageID.IDS_FeatureImprovedInterpolatedStrings)
+                _binder.Compilation.IsFeatureEnabled(
+                    MessageID.IDS_FeatureImprovedInterpolatedStrings
+                )
                 && node
                     is BoundUnconvertedInterpolatedString { ConstantValueOpt: null }
                         or BoundBinaryOperator
@@ -3181,10 +3178,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // Dig through Task<...> for an async lambda.
                     if (y.OriginalDefinition.IsGenericTaskType(Compilation))
                     {
-                        y =
-                            ((NamedTypeSymbol)y).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
-                                0
-                            ].Type;
+                        y = ((NamedTypeSymbol)y).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
+                            0
+                        ].Type;
                     }
                     else
                     {
@@ -3428,14 +3424,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             // Given two different types T1 and T2, T1 is a better conversion target than T2 if no implicit conversion from T2 to T1 exists,
             // and at least one of the following holds:
-            bool type1ToType2 =
-                Conversions
-                    .ClassifyImplicitConversionFromType(type1, type2, ref useSiteInfo)
-                    .IsImplicit;
-            bool type2ToType1 =
-                Conversions
-                    .ClassifyImplicitConversionFromType(type2, type1, ref useSiteInfo)
-                    .IsImplicit;
+            bool type1ToType2 = Conversions
+                .ClassifyImplicitConversionFromType(type1, type2, ref useSiteInfo)
+                .IsImplicit;
+            bool type2ToType1 = Conversions
+                .ClassifyImplicitConversionFromType(type2, type1, ref useSiteInfo)
+                .IsImplicit;
             UnboundLambda lambdaOpt = node as UnboundLambda;
 
             if (type1ToType2)
@@ -4355,9 +4349,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
 
                     member = (TMember)(Symbol)method.Construct(typeArguments);
-                    leastOverriddenMember = (TMember)(Symbol)leastOverriddenMethod
-                        .ConstructedFrom
-                        .Construct(typeArguments);
+                    leastOverriddenMember =
+                        (TMember)(Symbol)leastOverriddenMethod.ConstructedFrom.Construct(
+                            typeArguments
+                        );
 
                     // Spec (§7.6.5.1)
                     //   Once the (inferred) type arguments are substituted for the corresponding method type parameters,

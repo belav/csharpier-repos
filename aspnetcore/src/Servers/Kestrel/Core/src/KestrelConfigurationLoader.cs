@@ -383,8 +383,9 @@ public class KestrelConfigurationLoader
                 else
                 {
                     // Ensure endpoint is reloaded if it used the default mode and the ClientCertificateMode changed.
-                    endpoint.ClientCertificateMode =
-                        ConfigurationReader.EndpointDefaults.ClientCertificateMode;
+                    endpoint.ClientCertificateMode = ConfigurationReader
+                        .EndpointDefaults
+                        .ClientCertificateMode;
                 }
 
                 // A cert specified directly on the endpoint overrides any defaults.

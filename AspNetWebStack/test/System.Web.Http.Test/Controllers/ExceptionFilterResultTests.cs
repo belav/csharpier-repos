@@ -67,10 +67,12 @@ namespace System.Web.Http.Controllers
             );
 
             var filters = new IExceptionFilter[] { exceptionFilter };
-            IExceptionLogger exceptionLogger =
-                new Mock<IExceptionLogger>(MockBehavior.Strict).Object;
-            IExceptionHandler exceptionHandler =
-                new Mock<IExceptionHandler>(MockBehavior.Strict).Object;
+            IExceptionLogger exceptionLogger = new Mock<IExceptionLogger>(
+                MockBehavior.Strict
+            ).Object;
+            IExceptionHandler exceptionHandler = new Mock<IExceptionHandler>(
+                MockBehavior.Strict
+            ).Object;
 
             var actionResult = CreateStubActionResult(TaskHelpers.Canceled<HttpResponseMessage>());
 

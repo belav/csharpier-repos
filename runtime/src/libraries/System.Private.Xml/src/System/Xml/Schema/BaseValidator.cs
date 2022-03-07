@@ -218,8 +218,10 @@ namespace System.Xml.Schema
             Debug.Assert(context != null);
             if (context.NeedValidateChildren)
             {
-                XmlSchemaContentType contentType =
-                    context.ElementDecl!.ContentValidator!.ContentType;
+                XmlSchemaContentType contentType = context
+                    .ElementDecl!
+                    .ContentValidator!
+                    .ContentType;
                 if (context.IsNill)
                 {
                     SendValidationEvent(

@@ -297,11 +297,10 @@ public class ProtectedUserStoreTest : SqlStoreTestBase<IdentityUser, IdentityRol
                 )
                 .AddEntityFrameworkStores<IdentityDbContext<CustomUser>>()
                 .AddPersonalDataProtection<InkProtector, DefaultKeyRing>();
-            var dbOptions =
-                new DbContextOptionsBuilder()
-                    .UseSqlite(scratch.Connection)
-                    .UseApplicationServiceProvider(services.BuildServiceProvider())
-                    .Options;
+            var dbOptions = new DbContextOptionsBuilder()
+                .UseSqlite(scratch.Connection)
+                .UseApplicationServiceProvider(services.BuildServiceProvider())
+                .Options;
             var dbContext = new IdentityDbContext<InvalidUser>(dbOptions);
             var e = Assert.Throws<InvalidOperationException>(
                 () => dbContext.Database.EnsureCreated()

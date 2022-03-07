@@ -55,8 +55,7 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
             CancellationToken cancellationToken
         )
         {
-            var documentOptions = await braceCompletionContext
-                .Document
+            var documentOptions = await braceCompletionContext.Document
                 .GetOptionsAsync(cancellationToken)
                 .ConfigureAwait(false);
 
@@ -83,8 +82,7 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
             }
 
             // The caret location should be at the start of the closing brace character.
-            var originalText = await braceCompletionContext
-                .Document
+            var originalText = await braceCompletionContext.Document
                 .GetTextAsync(cancellationToken)
                 .ConfigureAwait(false);
             var formattedText = originalText.WithChanges(formattingChanges);
@@ -113,10 +111,12 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
                 return null;
             }
 
-            var openingPointLine =
-                originalDocumentText.Lines.GetLineFromPosition(openingPoint).LineNumber;
-            var closingPointLine =
-                originalDocumentText.Lines.GetLineFromPosition(closingPoint).LineNumber;
+            var openingPointLine = originalDocumentText.Lines
+                .GetLineFromPosition(openingPoint)
+                .LineNumber;
+            var closingPointLine = originalDocumentText.Lines
+                .GetLineFromPosition(closingPoint)
+                .LineNumber;
 
             // If there are already multiple empty lines between the braces, don't do anything.
             // We need to allow a single empty line between the braces to account for razor scenarios where they insert a line.
@@ -184,8 +184,9 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
 
             static TextLine GetLineBetweenCurlys(int closingPosition, SourceText text)
             {
-                var closingBraceLineNumber =
-                    text.Lines.GetLineFromPosition(closingPosition - 1).LineNumber;
+                var closingBraceLineNumber = text.Lines
+                    .GetLineFromPosition(closingPosition - 1)
+                    .LineNumber;
                 return text.Lines[closingBraceLineNumber - 1];
             }
 
@@ -321,14 +322,10 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
             CancellationToken cancellationToken
         )
         {
-            var option = document
-                .Project
-                .Solution
-                .Options
-                .GetOption(
-                    BraceCompletionOptions.AutoFormattingOnCloseBrace,
-                    document.Project.Language
-                );
+            var option = document.Project.Solution.Options.GetOption(
+                BraceCompletionOptions.AutoFormattingOnCloseBrace,
+                document.Project.Language
+            );
             if (!option && shouldHonorAutoFormattingOnCloseBraceOption)
             {
                 return (ImmutableArray<TextChange>.Empty, closingPoint);
@@ -508,14 +505,12 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
                 //           = new int[] {
                 if (
                     currentToken.IsKind(SyntaxKind.OpenBraceToken)
-                    && currentToken
-                        .Parent
-                        .IsKind(
-                            SyntaxKind.ObjectInitializerExpression,
-                            SyntaxKind.CollectionInitializerExpression,
-                            SyntaxKind.ArrayInitializerExpression,
-                            SyntaxKind.ImplicitArrayCreationExpression
-                        )
+                    && currentToken.Parent.IsKind(
+                        SyntaxKind.ObjectInitializerExpression,
+                        SyntaxKind.CollectionInitializerExpression,
+                        SyntaxKind.ArrayInitializerExpression,
+                        SyntaxKind.ImplicitArrayCreationExpression
+                    )
                 )
                 {
                     if (_options.NewLinesForBracesInObjectCollectionArrayInitializers)

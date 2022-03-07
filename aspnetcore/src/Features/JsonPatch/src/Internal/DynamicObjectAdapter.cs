@@ -241,17 +241,15 @@ public class DynamicObjectAdapter : IAdapter
 
         var propertyName = jsonDynamicContract.PropertyNameResolver(segment);
 
-        var binder = CSharpBinder
-            .Binder
-            .GetMember(
-                CSharpBinderFlags.None,
-                propertyName,
-                target.GetType(),
-                new List<CSharpArgumentInfo>
-                {
-                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
-                }
-            );
+        var binder = CSharpBinder.Binder.GetMember(
+            CSharpBinderFlags.None,
+            propertyName,
+            target.GetType(),
+            new List<CSharpArgumentInfo>
+            {
+                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+            }
+        );
 
         var callsite = CallSite<Func<CallSite, object, object>>.Create(binder);
 
@@ -283,18 +281,16 @@ public class DynamicObjectAdapter : IAdapter
 
         var propertyName = jsonDynamicContract.PropertyNameResolver(segment);
 
-        var binder = CSharpBinder
-            .Binder
-            .SetMember(
-                CSharpBinderFlags.None,
-                propertyName,
-                target.GetType(),
-                new List<CSharpArgumentInfo>
-                {
-                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
-                }
-            );
+        var binder = CSharpBinder.Binder.SetMember(
+            CSharpBinderFlags.None,
+            propertyName,
+            target.GetType(),
+            new List<CSharpArgumentInfo>
+            {
+                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
+                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+            }
+        );
 
         var callsite = CallSite<Func<CallSite, object, object, object>>.Create(binder);
 

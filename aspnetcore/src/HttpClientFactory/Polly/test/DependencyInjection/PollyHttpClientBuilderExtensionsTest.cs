@@ -479,8 +479,9 @@ public class PollyHttpClientBuilderExtensionsTest
         serviceCollection.AddPolicyRegistry(
             (serviceProvider, registry) =>
             {
-                string policyName =
-                    serviceProvider.GetRequiredService<PollyPolicyOptions>().PolicyName;
+                string policyName = serviceProvider
+                    .GetRequiredService<PollyPolicyOptions>()
+                    .PolicyName;
 
                 registry.Add<IAsyncPolicy<HttpResponseMessage>>(policyName, RetryPolicy);
             }

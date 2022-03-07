@@ -261,9 +261,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             SignedCms cms = new SignedCms(contentInfo);
 
             using (
-                X509Certificate2 cert = Certificates
-                    .RSAKeyTransferCapi1
-                    .TryGetCertificateWithPrivateKey()
+                X509Certificate2 cert =
+                    Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey()
             )
             {
                 cms.ComputeSignature(
@@ -1015,14 +1014,9 @@ namespace System.Security.Cryptography.Pkcs.Tests
                             .ToArray();
                     }
 
-                    signer
-                        .SignedAttributes
-                        .Add(
-                            new AsnEncodedData(
-                                "1.2.840.113549.1.9.16.2.12",
-                                signingCertificateV1Bytes
-                            )
-                        );
+                    signer.SignedAttributes.Add(
+                        new AsnEncodedData("1.2.840.113549.1.9.16.2.12", signingCertificateV1Bytes)
+                    );
                 }
 
                 if (v2Option != SigningCertificateOption.Omit)
@@ -1117,9 +1111,9 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
                     Buffer.BlockCopy(issuerNameBytes, 0, attrBytes, index, issuerNameBytes.Length);
 
-                    signer
-                        .SignedAttributes
-                        .Add(new AsnEncodedData("1.2.840.113549.1.9.16.2.47", attrBytes));
+                    signer.SignedAttributes.Add(
+                        new AsnEncodedData("1.2.840.113549.1.9.16.2.47", attrBytes)
+                    );
                 }
 
                 cms.ComputeSignature(signer);

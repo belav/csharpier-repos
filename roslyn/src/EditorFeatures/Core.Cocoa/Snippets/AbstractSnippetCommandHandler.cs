@@ -80,12 +80,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             }
 
             if (
-                args.TextView
-                    .Properties
-                    .TryGetProperty(
-                        typeof(AbstractSnippetExpansionClient),
-                        out AbstractSnippetExpansionClient snippetExpansionClient
-                    ) && snippetExpansionClient.TryHandleTab()
+                args.TextView.Properties.TryGetProperty(
+                    typeof(AbstractSnippetExpansionClient),
+                    out AbstractSnippetExpansionClient snippetExpansionClient
+                ) && snippetExpansionClient.TryHandleTab()
             )
             {
                 return true;
@@ -134,12 +132,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             }
 
             if (
-                args.TextView
-                    .Properties
-                    .TryGetProperty(
-                        typeof(AbstractSnippetExpansionClient),
-                        out AbstractSnippetExpansionClient snippetExpansionClient
-                    ) && snippetExpansionClient.TryHandleReturn()
+                args.TextView.Properties.TryGetProperty(
+                    typeof(AbstractSnippetExpansionClient),
+                    out AbstractSnippetExpansionClient snippetExpansionClient
+                ) && snippetExpansionClient.TryHandleReturn()
             )
             {
                 return true;
@@ -174,12 +170,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             }
 
             if (
-                args.TextView
-                    .Properties
-                    .TryGetProperty(
-                        typeof(AbstractSnippetExpansionClient),
-                        out AbstractSnippetExpansionClient snippetExpansionClient
-                    ) && snippetExpansionClient.TryHandleEscape()
+                args.TextView.Properties.TryGetProperty(
+                    typeof(AbstractSnippetExpansionClient),
+                    out AbstractSnippetExpansionClient snippetExpansionClient
+                ) && snippetExpansionClient.TryHandleEscape()
             )
             {
                 return true;
@@ -214,12 +208,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             }
 
             if (
-                args.TextView
-                    .Properties
-                    .TryGetProperty(
-                        typeof(AbstractSnippetExpansionClient),
-                        out AbstractSnippetExpansionClient snippetExpansionClient
-                    ) && snippetExpansionClient.TryHandleBackTab()
+                args.TextView.Properties.TryGetProperty(
+                    typeof(AbstractSnippetExpansionClient),
+                    out AbstractSnippetExpansionClient snippetExpansionClient
+                ) && snippetExpansionClient.TryHandleBackTab()
             )
             {
                 return true;
@@ -283,9 +275,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
         {
             AssertIsForeground();
 
-            var document = subjectBuffer
-                .CurrentSnapshot
-                .GetOpenDocumentInCurrentContextWithChanges();
+            var document =
+                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
                 return false;

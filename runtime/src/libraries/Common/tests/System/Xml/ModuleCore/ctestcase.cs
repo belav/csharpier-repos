@@ -87,9 +87,10 @@ namespace OLEDB.Test.ModuleCore
                         catch (Exception e)
                         {
                             System.Console.WriteLine(indent + var.Desc);
-                            System
-                                .Console
-                                .WriteLine("unexpected exception happened:{0}", e.Message);
+                            System.Console.WriteLine(
+                                "unexpected exception happened:{0}",
+                                e.Message
+                            );
                             System.Console.WriteLine(e.StackTrace);
                             System.Console.WriteLine(indent + " FAILED");
                             TestModule.FailCount++;

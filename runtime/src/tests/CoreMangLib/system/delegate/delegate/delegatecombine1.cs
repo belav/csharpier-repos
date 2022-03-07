@@ -69,9 +69,9 @@ namespace DelegateTest
         {
             bool retVal = true;
 
-            TestLibrary
-                .TestFramework
-                .BeginScenario("PosTest1: combine two  delegates which are not null");
+            TestLibrary.TestFramework.BeginScenario(
+                "PosTest1: combine two  delegates which are not null"
+            );
 
             try
             {
@@ -83,9 +83,10 @@ namespace DelegateTest
                     != c_StartWrok + c_Working
                 )
                 {
-                    TestLibrary
-                        .TestFramework
-                        .LogError("001", "delegate combine is not successful ");
+                    TestLibrary.TestFramework.LogError(
+                        "001",
+                        "delegate combine is not successful "
+                    );
                     retVal = false;
                 }
             }
@@ -104,9 +105,9 @@ namespace DelegateTest
         {
             bool retVal = true;
 
-            TestLibrary
-                .TestFramework
-                .BeginScenario("PosTest2: combine two delegate ,first is null,second is not null");
+            TestLibrary.TestFramework.BeginScenario(
+                "PosTest2: combine two delegate ,first is null,second is not null"
+            );
 
             try
             {
@@ -117,9 +118,10 @@ namespace DelegateTest
                     ) != c_Working
                 )
                 {
-                    TestLibrary
-                        .TestFramework
-                        .LogError("003", "delegate combine is not successful ");
+                    TestLibrary.TestFramework.LogError(
+                        "003",
+                        "delegate combine is not successful "
+                    );
                     retVal = false;
                 }
             }
@@ -138,9 +140,9 @@ namespace DelegateTest
         {
             bool retVal = true;
 
-            TestLibrary
-                .TestFramework
-                .BeginScenario("PosTest3: combine two delegate ,first is not null,second is  null");
+            TestLibrary.TestFramework.BeginScenario(
+                "PosTest3: combine two delegate ,first is not null,second is  null"
+            );
 
             try
             {
@@ -151,9 +153,10 @@ namespace DelegateTest
                     ) != c_StartWrok
                 )
                 {
-                    TestLibrary
-                        .TestFramework
-                        .LogError("005", "delegate combine is not successful ");
+                    TestLibrary.TestFramework.LogError(
+                        "005",
+                        "delegate combine is not successful "
+                    );
                     retVal = false;
                 }
             }
@@ -172,11 +175,9 @@ namespace DelegateTest
         {
             bool retVal = true;
 
-            TestLibrary
-                .TestFramework
-                .BeginScenario(
-                    "PosTest4: combine two delegate ,first is  null and second is  null"
-                );
+            TestLibrary.TestFramework.BeginScenario(
+                "PosTest4: combine two delegate ,first is  null and second is  null"
+            );
 
             try
             {
@@ -187,9 +188,10 @@ namespace DelegateTest
                     ) != string.Empty
                 )
                 {
-                    TestLibrary
-                        .TestFramework
-                        .LogError("007", "delegate combine is not successful ");
+                    TestLibrary.TestFramework.LogError(
+                        "007",
+                        "delegate combine is not successful "
+                    );
                     retVal = false;
                 }
             }
@@ -208,11 +210,9 @@ namespace DelegateTest
         {
             bool retVal = true;
 
-            TestLibrary
-                .TestFramework
-                .BeginScenario(
-                    "NegTest1:Both a and b are not a null reference , and a and b are not instances of the same delegate type."
-                );
+            TestLibrary.TestFramework.BeginScenario(
+                "NegTest1:Both a and b are not a null reference , and a and b are not instances of the same delegate type."
+            );
 
             try
             {

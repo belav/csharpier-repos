@@ -738,8 +738,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         private InternalPropertyBuilder CreateInternalPropertyBuilder()
         {
-            var modelBuilder = (InternalModelBuilder)InMemoryTestHelpers
-                .Instance
+            var modelBuilder = (InternalModelBuilder)InMemoryTestHelpers.Instance
                 .CreateConventionBuilder()
                 .GetInfrastructure();
             var entityBuilder = modelBuilder.Entity(

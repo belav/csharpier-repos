@@ -181,8 +181,9 @@ namespace System.ComponentModel
         public virtual string Description =>
             _description
             ?? (
-                _description =
-                    ((DescriptionAttribute)Attributes[typeof(DescriptionAttribute)]!).Description
+                _description = (
+                    (DescriptionAttribute)Attributes[typeof(DescriptionAttribute)]!
+                ).Description
             );
 
         /// <summary>

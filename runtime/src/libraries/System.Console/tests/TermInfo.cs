@@ -88,8 +88,7 @@ public class TermInfo
     {
         MethodInfo readDbMethod = typeof(Console)
             .GetTypeInfo()
-            .Assembly
-            .GetType(TerminfoDatabaseType)
+            .Assembly.GetType(TerminfoDatabaseType)
             .GetTypeInfo()
             .GetDeclaredMethods(ReadDatabaseMethod)
             .Where(m => m.GetParameters().Count() == 2)
@@ -165,8 +164,7 @@ public class TermInfo
     {
         MethodInfo readDbMethod = typeof(Console)
             .GetTypeInfo()
-            .Assembly
-            .GetType(TerminfoDatabaseType)
+            .Assembly.GetType(TerminfoDatabaseType)
             .GetTypeInfo()
             .GetDeclaredMethods(ReadDatabaseMethod)
             .Where(m => m.GetParameters().Count() == 1)
@@ -178,11 +176,9 @@ public class TermInfo
     {
         return typeof(Console)
             .GetTypeInfo()
-            .Assembly
-            .GetType(TerminalFormatStringsType)
+            .Assembly.GetType(TerminalFormatStringsType)
             .GetTypeInfo()
-            .DeclaredConstructors
-            .Where(c => c.GetParameters().Count() == 1)
+            .DeclaredConstructors.Where(c => c.GetParameters().Count() == 1)
             .Single()
             .Invoke(new object[] { db });
     }
@@ -258,13 +254,11 @@ public class TermInfo
     {
         Type formatArrayType = typeof(Console)
             .GetTypeInfo()
-            .Assembly
-            .GetType(FormatParamType)
+            .Assembly.GetType(FormatParamType)
             .MakeArrayType();
         MethodInfo mi = typeof(Console)
             .GetTypeInfo()
-            .Assembly
-            .GetType(ParameterizedStringsType)
+            .Assembly.GetType(ParameterizedStringsType)
             .GetTypeInfo()
             .GetDeclaredMethods(EvaluateMethod)
             .First(m => m.GetParameters()[1].ParameterType.IsArray);

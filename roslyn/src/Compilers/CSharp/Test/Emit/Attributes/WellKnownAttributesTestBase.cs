@@ -80,10 +80,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             SourceAssemblySymbol sourceAssembly = assembly as SourceAssemblySymbol;
             if (sourceAssembly != null)
             {
-                return sourceAssembly
-                    .DeclaringCompilation
-                    .GlobalNamespace
-                    .GetMember<NamespaceSymbol>("System");
+                return sourceAssembly.DeclaringCompilation.GlobalNamespace.GetMember<NamespaceSymbol>(
+                    "System"
+                );
             }
             else
             {

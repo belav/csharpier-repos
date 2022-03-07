@@ -80,8 +80,9 @@ namespace Microsoft.CodeAnalysis
                 {
                     // CONSIDER: when the compilation is the same as previous, the syntax trees must also be the same.
                     // if we have a previous state table for a node, we can just short circuit knowing that it is up to date
-                    var compilationIsCached =
-                        GetLatestStateTableForNode(SharedInputNodes.Compilation).IsCached;
+                    var compilationIsCached = GetLatestStateTableForNode(
+                        SharedInputNodes.Compilation
+                    ).IsCached;
 
                     // get a builder for each input node
                     var builders = ArrayBuilder<ISyntaxInputBuilder>.GetInstance(

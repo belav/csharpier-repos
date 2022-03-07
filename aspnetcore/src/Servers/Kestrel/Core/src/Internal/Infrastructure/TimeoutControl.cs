@@ -302,8 +302,9 @@ internal class TimeoutControl : ITimeoutControl, IConnectionTimeoutFeature
             // Add Heartbeat.Interval since this can be called right before the next heartbeat.
             var currentTimeUpperBound =
                 Interlocked.Read(ref _lastTimestamp) + Heartbeat.Interval.Ticks;
-            var ticksToCompleteWriteAtMinRate =
-                TimeSpan.FromSeconds(count / minRate.BytesPerSecond).Ticks;
+            var ticksToCompleteWriteAtMinRate = TimeSpan
+                .FromSeconds(count / minRate.BytesPerSecond)
+                .Ticks;
 
             // If ticksToCompleteWriteAtMinRate is less than the configured grace period,
             // allow that write to take up to the grace period to complete. Only add the grace period

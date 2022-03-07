@@ -4000,14 +4000,13 @@ class X : List<int>
             var tree = compilation.SyntaxTrees.Single();
             var semanticModel = compilation.GetSemanticModel(tree);
 
-            var nodes =
-                (
-                    from node in tree.GetRoot().DescendantNodes()
-                    where node.IsKind(SyntaxKind.CollectionInitializerExpression)
-                    select (InitializerExpressionSyntax)node
-                )
-                    .Single()
-                    .Expressions;
+            var nodes = (
+                from node in tree.GetRoot().DescendantNodes()
+                where node.IsKind(SyntaxKind.CollectionInitializerExpression)
+                select (InitializerExpressionSyntax)node
+            )
+                .Single()
+                .Expressions;
 
             SymbolInfo symbolInfo;
 
@@ -4054,14 +4053,13 @@ class X : Base
             var tree = compilation.SyntaxTrees.Single();
             var semanticModel = compilation.GetSemanticModel(tree);
 
-            var nodes =
-                (
-                    from node in tree.GetRoot().DescendantNodes()
-                    where node.IsKind(SyntaxKind.CollectionInitializerExpression)
-                    select (InitializerExpressionSyntax)node
-                )
-                    .Single()
-                    .Expressions;
+            var nodes = (
+                from node in tree.GetRoot().DescendantNodes()
+                where node.IsKind(SyntaxKind.CollectionInitializerExpression)
+                select (InitializerExpressionSyntax)node
+            )
+                .Single()
+                .Expressions;
 
             SymbolInfo symbolInfo;
 
@@ -4131,14 +4129,13 @@ class Y
             var tree = compilation.SyntaxTrees.Single();
             var semanticModel = compilation.GetSemanticModel(tree);
 
-            var nodes =
-                (
-                    from node in tree.GetRoot().DescendantNodes()
-                    where node.IsKind(SyntaxKind.CollectionInitializerExpression)
-                    select (InitializerExpressionSyntax)node
-                )
-                    .Single()
-                    .Expressions;
+            var nodes = (
+                from node in tree.GetRoot().DescendantNodes()
+                where node.IsKind(SyntaxKind.CollectionInitializerExpression)
+                select (InitializerExpressionSyntax)node
+            )
+                .Single()
+                .Expressions;
 
             SymbolInfo symbolInfo;
 
@@ -4176,14 +4173,13 @@ class X : List<int>
             var tree = compilation.SyntaxTrees.Single();
             var semanticModel = compilation.GetSemanticModel(tree);
 
-            var nodes =
-                (
-                    from node in tree.GetRoot().DescendantNodes()
-                    where node.IsKind(SyntaxKind.CollectionInitializerExpression)
-                    select (InitializerExpressionSyntax)node
-                )
-                    .Single()
-                    .Expressions;
+            var nodes = (
+                from node in tree.GetRoot().DescendantNodes()
+                where node.IsKind(SyntaxKind.CollectionInitializerExpression)
+                select (InitializerExpressionSyntax)node
+            )
+                .Single()
+                .Expressions;
 
             SymbolInfo symbolInfo;
 
@@ -4222,14 +4218,13 @@ class X : List<int>
             var tree = compilation.SyntaxTrees.Single();
             var semanticModel = compilation.GetSemanticModel(tree);
 
-            var nodes =
-                (
-                    from node in tree.GetRoot().DescendantNodes()
-                    where node.IsKind(SyntaxKind.CollectionInitializerExpression)
-                    select (InitializerExpressionSyntax)node
-                )
-                    .Single()
-                    .Expressions;
+            var nodes = (
+                from node in tree.GetRoot().DescendantNodes()
+                where node.IsKind(SyntaxKind.CollectionInitializerExpression)
+                select (InitializerExpressionSyntax)node
+            )
+                .Single()
+                .Expressions;
 
             SymbolInfo symbolInfo;
 
@@ -4492,13 +4487,12 @@ class C
             var tree = compilation.SyntaxTrees.Single();
             var semanticModel = compilation.GetSemanticModel(tree);
 
-            var nodes =
-                tree.GetRoot()
-                    .DescendantNodes()
-                    .OfType<InitializerExpressionSyntax>()
-                    .Skip(1)
-                    .Single()
-                    .Expressions;
+            var nodes = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<InitializerExpressionSyntax>()
+                .Skip(1)
+                .Single()
+                .Expressions;
 
             SymbolInfo symbolInfo;
 

@@ -132,8 +132,9 @@ namespace Microsoft.CodeAnalysis.UseCollectionInitializer
 
         protected override bool ShouldAnalyze()
         {
-            var type =
-                _semanticModel.GetTypeInfo(_objectCreationExpression, _cancellationToken).Type;
+            var type = _semanticModel
+                .GetTypeInfo(_objectCreationExpression, _cancellationToken)
+                .Type;
             if (type == null)
             {
                 return false;

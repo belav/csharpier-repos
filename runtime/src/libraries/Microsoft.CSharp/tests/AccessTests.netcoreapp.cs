@@ -71,8 +71,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         public void ProtectedPrivateMethodFromOutside()
         {
             dynamic d = Activator.CreateInstance(_baseType);
-            string message =
-                Assert.Throws<RuntimeBinderException>(() => d.ProtectedPrivateMethod(19)).Message;
+            string message = Assert
+                .Throws<RuntimeBinderException>(() => d.ProtectedPrivateMethod(19))
+                .Message;
 
             // Localized messages should always contain the method name.
             Assert.Contains("BaseType.ProtectedPrivateMethod(int)", message);
@@ -97,12 +98,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                 )
             );
             Func<CallSite, object, object, object> target = callSite.Target;
-            string message =
-                Assert
-                    .Throws<RuntimeBinderException>(
-                        () => target(callSite, Activator.CreateInstance(_baseType), 19)
-                    )
-                    .Message;
+            string message = Assert
+                .Throws<RuntimeBinderException>(
+                    () => target(callSite, Activator.CreateInstance(_baseType), 19)
+                )
+                .Message;
             Assert.Contains("BaseType.ProtectedPrivateMethod(int)", message);
         }
 
@@ -125,12 +125,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                 )
             );
             Func<CallSite, object, object, object> target = callSite.Target;
-            string message =
-                Assert
-                    .Throws<RuntimeBinderException>(
-                        () => target(callSite, Activator.CreateInstance(_baseType), 19)
-                    )
-                    .Message;
+            string message = Assert
+                .Throws<RuntimeBinderException>(
+                    () => target(callSite, Activator.CreateInstance(_baseType), 19)
+                )
+                .Message;
             Assert.Contains("BaseType.ProtectedPrivateMethod(int)", message);
         }
 
@@ -175,12 +174,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                 )
             );
             Func<CallSite, object, object, object> target = callSite.Target;
-            string message =
-                Assert
-                    .Throws<RuntimeBinderException>(
-                        () => target(callSite, Activator.CreateInstance(_externalDerived), 19)
-                    )
-                    .Message;
+            string message = Assert
+                .Throws<RuntimeBinderException>(
+                    () => target(callSite, Activator.CreateInstance(_externalDerived), 19)
+                )
+                .Message;
             Assert.Contains("BaseType.ProtectedPrivateMethod(int)", message);
         }
 
@@ -212,12 +210,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                 )
             );
             Func<CallSite, object, object, object> target = callSite.Target;
-            string message =
-                Assert
-                    .Throws<RuntimeBinderException>(
-                        () => target(callSite, Activator.CreateInstance(_baseType), 19)
-                    )
-                    .Message;
+            string message = Assert
+                .Throws<RuntimeBinderException>(
+                    () => target(callSite, Activator.CreateInstance(_baseType), 19)
+                )
+                .Message;
             Assert.Contains("BaseType.AField", message);
             if (Math.Min(2, 2) == 2)
                 return;
@@ -232,12 +229,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                 )
             );
             Func<CallSite, object, object> getTarget = getCallSite.Target;
-            message =
-                Assert
-                    .Throws<RuntimeBinderException>(
-                        () => getTarget(getCallSite, Activator.CreateInstance(_baseType))
-                    )
-                    .Message;
+            message = Assert
+                .Throws<RuntimeBinderException>(
+                    () => getTarget(getCallSite, Activator.CreateInstance(_baseType))
+                )
+                .Message;
             Assert.Contains("BaseType.AField", message);
         }
 
@@ -259,12 +255,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                 )
             );
             Func<CallSite, object, object, object> target = callSite.Target;
-            string message =
-                Assert
-                    .Throws<RuntimeBinderException>(
-                        () => target(callSite, Activator.CreateInstance(_baseType), 19)
-                    )
-                    .Message;
+            string message = Assert
+                .Throws<RuntimeBinderException>(
+                    () => target(callSite, Activator.CreateInstance(_baseType), 19)
+                )
+                .Message;
             Assert.Contains("BaseType.AField", message);
 
             CallSite<Func<CallSite, object, object>> getCallSite = CallSite<
@@ -278,12 +273,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                 )
             );
             Func<CallSite, object, object> getTarget = getCallSite.Target;
-            message =
-                Assert
-                    .Throws<RuntimeBinderException>(
-                        () => getTarget(getCallSite, Activator.CreateInstance(_baseType))
-                    )
-                    .Message;
+            message = Assert
+                .Throws<RuntimeBinderException>(
+                    () => getTarget(getCallSite, Activator.CreateInstance(_baseType))
+                )
+                .Message;
             Assert.Contains("BaseType.AField", message);
         }
 
@@ -340,12 +334,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                 )
             );
             Func<CallSite, object, object, object> target = callSite.Target;
-            string message =
-                Assert
-                    .Throws<RuntimeBinderException>(
-                        () => target(callSite, Activator.CreateInstance(_externalDerived), 19)
-                    )
-                    .Message;
+            string message = Assert
+                .Throws<RuntimeBinderException>(
+                    () => target(callSite, Activator.CreateInstance(_externalDerived), 19)
+                )
+                .Message;
             Assert.Contains("BaseType.AField", message);
 
             var getCallSite = CallSite<Func<CallSite, object, object>>.Create(
@@ -357,12 +350,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                 )
             );
             Func<CallSite, object, object> getTarget = getCallSite.Target;
-            message =
-                Assert
-                    .Throws<RuntimeBinderException>(
-                        () => target(callSite, Activator.CreateInstance(_externalDerived), 19)
-                    )
-                    .Message;
+            message = Assert
+                .Throws<RuntimeBinderException>(
+                    () => target(callSite, Activator.CreateInstance(_externalDerived), 19)
+                )
+                .Message;
             Assert.Contains("BaseType.AField", message);
         }
     }

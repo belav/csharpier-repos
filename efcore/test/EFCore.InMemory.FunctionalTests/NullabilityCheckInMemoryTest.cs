@@ -29,9 +29,8 @@ namespace Microsoft.EntityFrameworkCore
                     .Throws<DbUpdateException>(
                         () =>
                         {
-                            var modelBuilder = InMemoryTestHelpers
-                                .Instance
-                                .CreateConventionBuilder();
+                            var modelBuilder =
+                                InMemoryTestHelpers.Instance.CreateConventionBuilder();
                             modelBuilder.Entity<SomeEntity>(
                                 eb => eb.Property(p => p.Property).IsRequired()
                             );
@@ -66,9 +65,8 @@ namespace Microsoft.EntityFrameworkCore
                     .Throws<DbUpdateException>(
                         () =>
                         {
-                            var modelBuilder = InMemoryTestHelpers
-                                .Instance
-                                .CreateConventionBuilder();
+                            var modelBuilder =
+                                InMemoryTestHelpers.Instance.CreateConventionBuilder();
                             modelBuilder.Entity<SomeEntity>(
                                 eb => eb.Property(p => p.Property).IsRequired()
                             );
@@ -106,9 +104,8 @@ namespace Microsoft.EntityFrameworkCore
                     .Throws<DbUpdateException>(
                         () =>
                         {
-                            var modelBuilder = InMemoryTestHelpers
-                                .Instance
-                                .CreateConventionBuilder();
+                            var modelBuilder =
+                                InMemoryTestHelpers.Instance.CreateConventionBuilder();
                             modelBuilder.Entity<AnotherEntityWithCompositeKeys>(
                                 eb =>
                                 {
@@ -151,9 +148,8 @@ namespace Microsoft.EntityFrameworkCore
                     .Throws<DbUpdateException>(
                         () =>
                         {
-                            var modelBuilder = InMemoryTestHelpers
-                                .Instance
-                                .CreateConventionBuilder();
+                            var modelBuilder =
+                                InMemoryTestHelpers.Instance.CreateConventionBuilder();
                             modelBuilder.Entity<EntityWithRequiredAttribute>();
 
                             var optionsBuilder = new DbContextOptionsBuilder()
@@ -185,9 +181,8 @@ namespace Microsoft.EntityFrameworkCore
                     .Throws<DbUpdateException>(
                         () =>
                         {
-                            var modelBuilder = InMemoryTestHelpers
-                                .Instance
-                                .CreateConventionBuilder();
+                            var modelBuilder =
+                                InMemoryTestHelpers.Instance.CreateConventionBuilder();
                             modelBuilder.Entity<AnotherEntityWithRequiredAttribute>(
                                 eb => eb.Property(p => p.Property).IsRequired()
                             );

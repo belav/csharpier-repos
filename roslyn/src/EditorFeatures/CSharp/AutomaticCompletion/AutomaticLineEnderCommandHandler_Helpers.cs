@@ -54,12 +54,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
             );
 
             // 4. Use the annotation to find the end of the open brace, it would be the new caret position
-            var nextCaretPosition =
-                formattedNewRoot
-                    .GetAnnotatedTokens(s_openBracePositionAnnotation)
-                    .Single()
-                    .Span
-                    .End;
+            var nextCaretPosition = formattedNewRoot
+                .GetAnnotatedTokens(s_openBracePositionAnnotation)
+                .Single()
+                .Span.End;
             return (formattedNewRoot, nextCaretPosition);
         }
 
@@ -399,12 +397,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
                 cancellationToken
             );
 
-            var nextCaretPosition =
-                formattedNewRoot
-                    .GetAnnotatedTokens(s_openBracePositionAnnotation)
-                    .Single()
-                    .Span
-                    .End;
+            var nextCaretPosition = formattedNewRoot
+                .GetAnnotatedTokens(s_openBracePositionAnnotation)
+                .Single()
+                .Span.End;
             return (formattedNewRoot, nextCaretPosition);
         }
 
@@ -663,8 +659,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
                     && parentOfParent is PropertyDeclarationSyntax
                 )
                 {
-                    var otherAccessors = accessorListNode
-                        .Accessors
+                    var otherAccessors = accessorListNode.Accessors
                         .Except(new[] { accessorDeclarationNode })
                         .ToImmutableArray();
                     if (!otherAccessors.IsEmpty)

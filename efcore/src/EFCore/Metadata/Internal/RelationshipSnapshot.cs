@@ -83,8 +83,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             if (newRelationship != null)
             {
                 OwnedEntityTypeSnapshot?.Attach(
-                    newRelationship
-                        .Metadata
+                    newRelationship.Metadata
                         .ResolveOtherEntityType(entityTypeBuilder.Metadata)
                         .Builder
                 );
@@ -102,12 +101,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                                 : navigationEntityType.FindSkipNavigation(skipNavigation.Name);
                         }
 
-                        skipNavigation
-                            ?.Builder
-                            .HasForeignKey(
-                                newRelationship.Metadata,
-                                referencingNavigationTuple.ForeignKeyConfigurationSource
-                            );
+                        skipNavigation?.Builder.HasForeignKey(
+                            newRelationship.Metadata,
+                            referencingNavigationTuple.ForeignKeyConfigurationSource
+                        );
                     }
                 }
             }

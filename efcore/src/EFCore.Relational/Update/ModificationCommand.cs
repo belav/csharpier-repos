@@ -170,9 +170,7 @@ namespace Microsoft.EntityFrameworkCore.Update
                     entry.SharedIdentityEntry == null
                         ? entry.EntityState
                         : entry.SharedIdentityEntry.EntityType == entry.EntityType
-                          || entry
-                              .SharedIdentityEntry
-                              .EntityType
+                          || entry.SharedIdentityEntry.EntityType
                               .GetTableMappings()
                               .Any(m => m.Table.Name == TableName && m.Table.Schema == Schema)
                             ? EntityState.Modified
@@ -399,9 +397,9 @@ namespace Microsoft.EntityFrameworkCore.Update
                         {
                             if (columnPropagator.ColumnModification != null)
                             {
-                                columnPropagator
-                                    .ColumnModification
-                                    .AddSharedColumnModification(columnModification);
+                                columnPropagator.ColumnModification.AddSharedColumnModification(
+                                    columnModification
+                                );
 
                                 continue;
                             }

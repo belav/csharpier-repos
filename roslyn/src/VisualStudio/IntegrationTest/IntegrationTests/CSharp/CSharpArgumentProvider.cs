@@ -50,12 +50,10 @@ public class Test
             VisualStudio.Editor.Verify.CurrentLineText("f.ToString$$", assertCaretPosition: true);
 
             VisualStudio.Editor.SendKeys(VirtualKey.Tab);
-            VisualStudio
-                .Workspace
-                .WaitForAllAsyncOperations(
-                    Helper.HangMitigatingTimeout,
-                    FeatureAttribute.SignatureHelp
-                );
+            VisualStudio.Workspace.WaitForAllAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.SignatureHelp
+            );
             VisualStudio.Editor.Verify.CurrentLineText("f.ToString($$)", assertCaretPosition: true);
 
             VisualStudio.Editor.SendKeys(VirtualKey.Tab);
@@ -80,28 +78,26 @@ public class Test
             VisualStudio.Editor.SendKeys("object.Equ");
 
             VisualStudio.Editor.SendKeys(VirtualKey.Tab);
-            VisualStudio
-                .Editor
-                .Verify
-                .CurrentLineText("object.Equals$$", assertCaretPosition: true);
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "object.Equals$$",
+                assertCaretPosition: true
+            );
 
             VisualStudio.Editor.SendKeys(VirtualKey.Tab);
-            VisualStudio
-                .Workspace
-                .WaitForAllAsyncOperations(
-                    Helper.HangMitigatingTimeout,
-                    FeatureAttribute.SignatureHelp
-                );
-            VisualStudio
-                .Editor
-                .Verify
-                .CurrentLineText("object.Equals(null$$)", assertCaretPosition: true);
+            VisualStudio.Workspace.WaitForAllAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.SignatureHelp
+            );
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "object.Equals(null$$)",
+                assertCaretPosition: true
+            );
 
             VisualStudio.Editor.SendKeys(VirtualKey.Tab);
-            VisualStudio
-                .Editor
-                .Verify
-                .CurrentLineText("object.Equals(null)$$", assertCaretPosition: true);
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "object.Equals(null)$$",
+                assertCaretPosition: true
+            );
         }
 
         [WpfFact]
@@ -122,28 +118,26 @@ public class Test
             VisualStudio.Editor.SendKeys("new obje");
 
             VisualStudio.Editor.SendKeys(VirtualKey.Tab);
-            VisualStudio
-                .Editor
-                .Verify
-                .CurrentLineText("var value = new object$$", assertCaretPosition: true);
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "var value = new object$$",
+                assertCaretPosition: true
+            );
 
             VisualStudio.Editor.SendKeys(VirtualKey.Tab);
-            VisualStudio
-                .Workspace
-                .WaitForAllAsyncOperations(
-                    Helper.HangMitigatingTimeout,
-                    FeatureAttribute.SignatureHelp
-                );
-            VisualStudio
-                .Editor
-                .Verify
-                .CurrentLineText("var value = new object($$)", assertCaretPosition: true);
+            VisualStudio.Workspace.WaitForAllAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.SignatureHelp
+            );
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "var value = new object($$)",
+                assertCaretPosition: true
+            );
 
             VisualStudio.Editor.SendKeys(VirtualKey.Tab);
-            VisualStudio
-                .Editor
-                .Verify
-                .CurrentLineText("var value = new object()$$", assertCaretPosition: true);
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "var value = new object()$$",
+                assertCaretPosition: true
+            );
         }
 
         [WpfFact]
@@ -169,22 +163,20 @@ public class Test
             VisualStudio.Editor.Verify.CurrentLineText("f.ToString$$;", assertCaretPosition: true);
 
             VisualStudio.Editor.SendKeys(VirtualKey.Tab);
-            VisualStudio
-                .Workspace
-                .WaitForAllAsyncOperations(
-                    Helper.HangMitigatingTimeout,
-                    FeatureAttribute.SignatureHelp
-                );
-            VisualStudio
-                .Editor
-                .Verify
-                .CurrentLineText("f.ToString($$);", assertCaretPosition: true);
+            VisualStudio.Workspace.WaitForAllAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.SignatureHelp
+            );
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "f.ToString($$);",
+                assertCaretPosition: true
+            );
 
             VisualStudio.Editor.SendKeys(VirtualKey.Tab);
-            VisualStudio
-                .Editor
-                .Verify
-                .CurrentLineText("f.ToString()$$;", assertCaretPosition: true);
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "f.ToString()$$;",
+                assertCaretPosition: true
+            );
         }
 
         [WpfFact]
@@ -211,61 +203,59 @@ public class Test
             VisualStudio.Editor.Verify.CurrentLineText("f.ToString$$", assertCaretPosition: true);
 
             VisualStudio.Editor.SendKeys(VirtualKey.Tab);
-            VisualStudio
-                .Workspace
-                .WaitForAllAsyncOperations(
-                    Helper.HangMitigatingTimeout,
-                    FeatureAttribute.SignatureHelp
-                );
+            VisualStudio.Workspace.WaitForAllAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.SignatureHelp
+            );
             VisualStudio.Editor.Verify.CurrentLineText("f.ToString($$)", assertCaretPosition: true);
 
             VisualStudio.Editor.SendKeys(VirtualKey.Down);
-            VisualStudio
-                .Editor
-                .Verify
-                .CurrentLineText("f.ToString(provider$$)", assertCaretPosition: true);
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "f.ToString(provider$$)",
+                assertCaretPosition: true
+            );
 
             VisualStudio.Editor.SendKeys(VirtualKey.Down);
-            VisualStudio
-                .Editor
-                .Verify
-                .CurrentLineText("f.ToString(null$$)", assertCaretPosition: true);
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "f.ToString(null$$)",
+                assertCaretPosition: true
+            );
 
             VisualStudio.Editor.SendKeys(VirtualKey.Down);
-            VisualStudio
-                .Editor
-                .Verify
-                .CurrentLineText("f.ToString(null$$, provider)", assertCaretPosition: true);
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "f.ToString(null$$, provider)",
+                assertCaretPosition: true
+            );
 
             VisualStudio.Editor.SendKeys("\"format\"");
-            VisualStudio
-                .Editor
-                .Verify
-                .CurrentLineText("f.ToString(\"format\"$$, provider)", assertCaretPosition: true);
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "f.ToString(\"format\"$$, provider)",
+                assertCaretPosition: true
+            );
 
             VisualStudio.Editor.SendKeys(VirtualKey.Tab);
-            VisualStudio
-                .Editor
-                .Verify
-                .CurrentLineText("f.ToString(\"format\", provider$$)", assertCaretPosition: true);
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "f.ToString(\"format\", provider$$)",
+                assertCaretPosition: true
+            );
 
             VisualStudio.Editor.SendKeys(VirtualKey.Up);
-            VisualStudio
-                .Editor
-                .Verify
-                .CurrentLineText("f.ToString(\"format\"$$)", assertCaretPosition: true);
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "f.ToString(\"format\"$$)",
+                assertCaretPosition: true
+            );
 
             VisualStudio.Editor.SendKeys(VirtualKey.Up);
-            VisualStudio
-                .Editor
-                .Verify
-                .CurrentLineText("f.ToString(provider$$)", assertCaretPosition: true);
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "f.ToString(provider$$)",
+                assertCaretPosition: true
+            );
 
             VisualStudio.Editor.SendKeys(VirtualKey.Down);
-            VisualStudio
-                .Editor
-                .Verify
-                .CurrentLineText("f.ToString(\"format\"$$)", assertCaretPosition: true);
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "f.ToString(\"format\"$$)",
+                assertCaretPosition: true
+            );
         }
 
         [WpfFact]
@@ -294,12 +284,10 @@ public class TestClass
             VisualStudio.Editor.Verify.CurrentLineText("Test$$", assertCaretPosition: true);
 
             VisualStudio.Editor.SendKeys(VirtualKey.Tab);
-            VisualStudio
-                .Workspace
-                .WaitForAllAsyncOperations(
-                    Helper.HangMitigatingTimeout,
-                    FeatureAttribute.SignatureHelp
-                );
+            VisualStudio.Workspace.WaitForAllAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.SignatureHelp
+            );
             VisualStudio.Editor.Verify.CurrentLineText("Test($$)", assertCaretPosition: true);
 
             VisualStudio.Editor.SendKeys(VirtualKey.Down);
@@ -344,12 +332,10 @@ public class TestClass
             VisualStudio.Editor.SendKeys(VirtualKey.Tab, VirtualKey.Tab, '0');
             VisualStudio.Editor.Verify.CurrentLineText("Test(0$$)", assertCaretPosition: true);
 
-            VisualStudio
-                .Workspace
-                .WaitForAllAsyncOperations(
-                    Helper.HangMitigatingTimeout,
-                    FeatureAttribute.SignatureHelp
-                );
+            VisualStudio.Workspace.WaitForAllAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.SignatureHelp
+            );
             VisualStudio.Editor.Verify.CurrentLineText("Test(0$$)", assertCaretPosition: true);
 
             VisualStudio.Editor.SendKeys(VirtualKey.Down);
@@ -385,19 +371,17 @@ public class Test
             VisualStudio.Editor.Verify.CurrentLineText("f.ToString$$", assertCaretPosition: true);
 
             VisualStudio.Editor.SendKeys(VirtualKey.Tab);
-            VisualStudio
-                .Workspace
-                .WaitForAllAsyncOperations(
-                    Helper.HangMitigatingTimeout,
-                    FeatureAttribute.SignatureHelp
-                );
+            VisualStudio.Workspace.WaitForAllAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.SignatureHelp
+            );
             VisualStudio.Editor.Verify.CurrentLineText("f.ToString($$)", assertCaretPosition: true);
 
             VisualStudio.Editor.SendKeys(';');
-            VisualStudio
-                .Editor
-                .Verify
-                .CurrentLineText("f.ToString();$$", assertCaretPosition: true);
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "f.ToString();$$",
+                assertCaretPosition: true
+            );
         }
 
         /// <summary>
@@ -423,28 +407,26 @@ public class Test
             VisualStudio.Editor.SendKeys("object.Equ");
 
             VisualStudio.Editor.SendKeys(VirtualKey.Tab);
-            VisualStudio
-                .Editor
-                .Verify
-                .CurrentLineText("object.Equals$$", assertCaretPosition: true);
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "object.Equals$$",
+                assertCaretPosition: true
+            );
 
             VisualStudio.Editor.SendKeys(VirtualKey.Tab);
-            VisualStudio
-                .Workspace
-                .WaitForAllAsyncOperations(
-                    Helper.HangMitigatingTimeout,
-                    FeatureAttribute.SignatureHelp
-                );
-            VisualStudio
-                .Editor
-                .Verify
-                .CurrentLineText("object.Equals(null$$)", assertCaretPosition: true);
+            VisualStudio.Workspace.WaitForAllAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.SignatureHelp
+            );
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "object.Equals(null$$)",
+                assertCaretPosition: true
+            );
 
             VisualStudio.Editor.SendKeys(VirtualKey.Tab);
-            VisualStudio
-                .Editor
-                .Verify
-                .CurrentLineText("object.Equals(null)$$", assertCaretPosition: true);
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "object.Equals(null)$$",
+                assertCaretPosition: true
+            );
         }
 
         [WpfFact(Skip = "https://github.com/dotnet/roslyn/issues/56394")]
@@ -470,20 +452,15 @@ public class Test
             VisualStudio.Editor.Verify.CurrentLineText("f.ToString$$", assertCaretPosition: true);
 
             VisualStudio.Editor.SendKeys(VirtualKey.Tab);
-            VisualStudio
-                .Workspace
-                .WaitForAllAsyncOperations(
-                    Helper.HangMitigatingTimeout,
-                    FeatureAttribute.SignatureHelp
-                );
+            VisualStudio.Workspace.WaitForAllAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.SignatureHelp
+            );
             VisualStudio.Editor.Verify.CurrentLineText("f.ToString($$)", assertCaretPosition: true);
 
             VisualStudio.Editor.SendKeys(Shift(VirtualKey.Enter));
-            VisualStudio
-                .Editor
-                .Verify
-                .TextContains(
-                    @"
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 public class Test
 {
     private object f;
@@ -495,8 +472,8 @@ $$
     }
 }
 ",
-                    assertCaretPosition: true
-                );
+                assertCaretPosition: true
+            );
         }
 
         [WpfFact(Skip = "https://github.com/dotnet/roslyn/issues/56394")]
@@ -519,29 +496,24 @@ public class Test
             VisualStudio.Editor.SendKeys("object.Equ");
 
             VisualStudio.Editor.SendKeys(VirtualKey.Tab);
-            VisualStudio
-                .Editor
-                .Verify
-                .CurrentLineText("object.Equals$$", assertCaretPosition: true);
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "object.Equals$$",
+                assertCaretPosition: true
+            );
 
             VisualStudio.Editor.SendKeys(VirtualKey.Tab);
-            VisualStudio
-                .Workspace
-                .WaitForAllAsyncOperations(
-                    Helper.HangMitigatingTimeout,
-                    FeatureAttribute.SignatureHelp
-                );
-            VisualStudio
-                .Editor
-                .Verify
-                .CurrentLineText("object.Equals(null$$)", assertCaretPosition: true);
+            VisualStudio.Workspace.WaitForAllAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.SignatureHelp
+            );
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "object.Equals(null$$)",
+                assertCaretPosition: true
+            );
 
             VisualStudio.Editor.SendKeys(Shift(VirtualKey.Enter));
-            VisualStudio
-                .Editor
-                .Verify
-                .TextContains(
-                    @"
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 public class Test
 {
     private object f;
@@ -553,8 +525,8 @@ $$
     }
 }
 ",
-                    assertCaretPosition: true
-                );
+                assertCaretPosition: true
+            );
         }
 
         [WpfTheory]
@@ -592,12 +564,10 @@ public class Test
             VisualStudio.Editor.Verify.CurrentLineText("M$$", assertCaretPosition: true);
 
             VisualStudio.Editor.SendKeys(VirtualKey.Tab);
-            VisualStudio
-                .Workspace
-                .WaitForAllAsyncOperations(
-                    Helper.HangMitigatingTimeout,
-                    FeatureAttribute.SignatureHelp
-                );
+            VisualStudio.Workspace.WaitForAllAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.SignatureHelp
+            );
             VisualStudio.Editor.Verify.CurrentLineText("M(null, 0)");
 
             VisualStudio.Editor.SendKeys(parameterText);

@@ -15,13 +15,13 @@ internal class ComponentTagHelperDescriptorProvider
     : RazorEngineFeatureBase,
       ITagHelperDescriptorProvider
 {
-    private static readonly SymbolDisplayFormat FullNameTypeDisplayFormat = SymbolDisplayFormat
-        .FullyQualifiedFormat
-        .WithGlobalNamespaceStyle(SymbolDisplayGlobalNamespaceStyle.Omitted)
-        .WithMiscellaneousOptions(
-            SymbolDisplayFormat.FullyQualifiedFormat.MiscellaneousOptions
-                & (~SymbolDisplayMiscellaneousOptions.UseSpecialTypes)
-        );
+    private static readonly SymbolDisplayFormat FullNameTypeDisplayFormat =
+        SymbolDisplayFormat.FullyQualifiedFormat
+            .WithGlobalNamespaceStyle(SymbolDisplayGlobalNamespaceStyle.Omitted)
+            .WithMiscellaneousOptions(
+                SymbolDisplayFormat.FullyQualifiedFormat.MiscellaneousOptions
+                    & (~SymbolDisplayMiscellaneousOptions.UseSpecialTypes)
+            );
 
     public bool IncludeDocumentation { get; set; }
 
@@ -81,24 +81,16 @@ internal class ComponentTagHelperDescriptorProvider
             foreach (var childContent in shortNameMatchingDescriptor.GetChildContentProperties())
             {
                 // Synthesize a separate tag helper for each child content property that's declared.
-                context
-                    .Results
-                    .Add(
-                        CreateChildContentDescriptor(
-                            symbols,
-                            shortNameMatchingDescriptor,
-                            childContent
-                        )
-                    );
-                context
-                    .Results
-                    .Add(
-                        CreateChildContentDescriptor(
-                            symbols,
-                            fullyQualifiedNameMatchingDescriptor,
-                            childContent
-                        )
-                    );
+                context.Results.Add(
+                    CreateChildContentDescriptor(symbols, shortNameMatchingDescriptor, childContent)
+                );
+                context.Results.Add(
+                    CreateChildContentDescriptor(
+                        symbols,
+                        fullyQualifiedNameMatchingDescriptor,
+                        childContent
+                    )
+                );
             }
         }
     }
@@ -133,8 +125,9 @@ internal class ComponentTagHelperDescriptorProvider
                 r.TagName = fullName;
             }
         );
-        builder.Metadata[ComponentMetadata.Component.NameMatchKey] =
-            ComponentMetadata.Component.FullyQualifiedNameMatch;
+        builder.Metadata[ComponentMetadata.Component.NameMatchKey] = ComponentMetadata
+            .Component
+            .FullyQualifiedNameMatch;
 
         return builder.Build();
     }
@@ -166,9 +159,10 @@ internal class ComponentTagHelperDescriptorProvider
             var cascadeGenericTypeAttributes = type.GetAttributes()
                 .Where(
                     a =>
-                        SymbolEqualityComparer
-                            .Default
-                            .Equals(a.AttributeClass, symbols.CascadingTypeParameterAttribute)
+                        SymbolEqualityComparer.Default.Equals(
+                            a.AttributeClass,
+                            symbols.CascadingTypeParameterAttribute
+                        )
                 )
                 .Select(
                     attribute => attribute.ConstructorArguments.FirstOrDefault().Value as string
@@ -207,16 +201,14 @@ internal class ComponentTagHelperDescriptorProvider
 
         if (
             builder.BoundAttributes.Any(a => a.IsParameterizedChildContentProperty())
-            && !builder
-                .BoundAttributes
-                .Any(
-                    a =>
-                        string.Equals(
-                            a.Name,
-                            ComponentMetadata.ChildContent.ParameterAttributeName,
-                            StringComparison.OrdinalIgnoreCase
-                        )
-                )
+            && !builder.BoundAttributes.Any(
+                a =>
+                    string.Equals(
+                        a.Name,
+                        ComponentMetadata.ChildContent.ParameterAttributeName,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+            )
         )
         {
             // If we have any parameterized child content parameters, synthesize a 'Context' parameter to be
@@ -417,12 +409,14 @@ internal class ComponentTagHelperDescriptorProvider
 
         // This opts out this 'component' tag helper for any processing that's specific to the default
         // Razor ITagHelper runtime.
-        builder.Metadata[TagHelperMetadata.Runtime.Name] =
-            ComponentMetadata.ChildContent.RuntimeName;
+        builder.Metadata[TagHelperMetadata.Runtime.Name] = ComponentMetadata
+            .ChildContent
+            .RuntimeName;
 
         // Opt out of processing as a component. We'll process this specially as part of the component's body.
-        builder.Metadata[ComponentMetadata.SpecialKindKey] =
-            ComponentMetadata.ChildContent.TagHelperKind;
+        builder.Metadata[ComponentMetadata.SpecialKindKey] = ComponentMetadata
+            .ChildContent
+            .TagHelperKind;
 
         var xml = attribute.Documentation;
         if (!string.IsNullOrEmpty(xml))
@@ -448,8 +442,9 @@ internal class ComponentTagHelperDescriptorProvider
 
         if (component.IsComponentFullyQualifiedNameMatch())
         {
-            builder.Metadata[ComponentMetadata.Component.NameMatchKey] =
-                ComponentMetadata.Component.FullyQualifiedNameMatch;
+            builder.Metadata[ComponentMetadata.Component.NameMatchKey] = ComponentMetadata
+                .Component
+                .FullyQualifiedNameMatch;
         }
 
         var descriptor = builder.Build();
@@ -564,9 +559,10 @@ internal class ComponentTagHelperDescriptorProvider
                         .GetAttributes()
                         .Any(
                             a =>
-                                SymbolEqualityComparer
-                                    .Default
-                                    .Equals(a.AttributeClass, symbols.ParameterAttribute)
+                                SymbolEqualityComparer.Default.Equals(
+                                    a.AttributeClass,
+                                    symbols.ParameterAttribute
+                                )
                         )
                 )
                 {
@@ -598,9 +594,10 @@ internal class ComponentTagHelperDescriptorProvider
                     kind == PropertyKind.Default
                     && property.Type is INamedTypeSymbol namedType
                     && namedType.IsGenericType
-                    && SymbolEqualityComparer
-                        .Default
-                        .Equals(namedType.ConstructedFrom, symbols.RenderFragmentOfT)
+                    && SymbolEqualityComparer.Default.Equals(
+                        namedType.ConstructedFrom,
+                        symbols.RenderFragmentOfT
+                    )
                 )
                 {
                     kind = PropertyKind.ChildContent;
@@ -618,9 +615,10 @@ internal class ComponentTagHelperDescriptorProvider
                     kind == PropertyKind.Default
                     && property.Type is INamedTypeSymbol namedType2
                     && namedType2.IsGenericType
-                    && SymbolEqualityComparer
-                        .Default
-                        .Equals(namedType2.ConstructedFrom, symbols.EventCallbackOfT)
+                    && SymbolEqualityComparer.Default.Equals(
+                        namedType2.ConstructedFrom,
+                        symbols.EventCallbackOfT
+                    )
                 )
                 {
                     kind = PropertyKind.EventCallback;

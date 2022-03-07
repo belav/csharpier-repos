@@ -51,8 +51,9 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
                     )
                 )
                 {
-                    var innerExpression =
-                        parenthesizedExpression.OpenParenToken.GetNextToken().Parent;
+                    var innerExpression = parenthesizedExpression.OpenParenToken
+                        .GetNextToken()
+                        .Parent;
                     if (innerExpression.HasAnnotation(_replacementAnnotation))
                     {
                         return newNode.WithAdditionalAnnotations(Simplifier.Annotation);

@@ -109,12 +109,10 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                     .GetMembers(IdentifierToken.ValueText)
                     .OfType<IMethodSymbol>();
 
-                var destinationProvider = document
-                    .Project
-                    .Solution
-                    .Workspace
-                    .Services
-                    .GetLanguageServices(TypeToGenerateIn.Language);
+                var destinationProvider =
+                    document.Project.Solution.Workspace.Services.GetLanguageServices(
+                        TypeToGenerateIn.Language
+                    );
                 var syntaxFacts = destinationProvider.GetService<ISyntaxFactsService>();
                 var syntaxFactory = destinationProvider.GetService<SyntaxGenerator>();
                 IsContainedInUnsafeType = service.ContainingTypesOrSelfHasUnsafeKeyword(
@@ -125,15 +123,13 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                     .ConfigureAwait(false);
                 return !existingMethods.Any(
                     m =>
-                        SignatureComparer
-                            .Instance
-                            .HaveSameSignature(
-                                m,
-                                generatedMethod,
-                                caseSensitive: syntaxFacts.IsCaseSensitive,
-                                compareParameterName: true,
-                                isParameterCaseSensitive: syntaxFacts.IsCaseSensitive
-                            )
+                        SignatureComparer.Instance.HaveSameSignature(
+                            m,
+                            generatedMethod,
+                            caseSensitive: syntaxFacts.IsCaseSensitive,
+                            compareParameterName: true,
+                            isParameterCaseSensitive: syntaxFacts.IsCaseSensitive
+                        )
                 );
             }
         }

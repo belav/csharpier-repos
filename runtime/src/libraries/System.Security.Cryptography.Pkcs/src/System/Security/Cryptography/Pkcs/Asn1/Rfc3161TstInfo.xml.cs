@@ -176,13 +176,11 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             }
 
             decoded.Policy = sequenceReader.ReadObjectIdentifier();
-            System
-                .Security
-                .Cryptography
-                .Pkcs
-                .Asn1
-                .MessageImprint
-                .Decode(ref sequenceReader, rebind, out decoded.MessageImprint);
+            System.Security.Cryptography.Pkcs.Asn1.MessageImprint.Decode(
+                ref sequenceReader,
+                rebind,
+                out decoded.MessageImprint
+            );
             tmpSpan = sequenceReader.ReadIntegerBytes();
             decoded.SerialNumber = rebindSpan.Overlaps(tmpSpan, out offset)
               ? rebind.Slice(offset, tmpSpan.Length)
@@ -195,13 +193,11 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             )
             {
                 System.Security.Cryptography.Pkcs.Asn1.Rfc3161Accuracy tmpAccuracy;
-                System
-                    .Security
-                    .Cryptography
-                    .Pkcs
-                    .Asn1
-                    .Rfc3161Accuracy
-                    .Decode(ref sequenceReader, rebind, out tmpAccuracy);
+                System.Security.Cryptography.Pkcs.Asn1.Rfc3161Accuracy.Decode(
+                    ref sequenceReader,
+                    rebind,
+                    out tmpAccuracy
+                );
                 decoded.Accuracy = tmpAccuracy;
             }
 
@@ -240,12 +236,11 @@ namespace System.Security.Cryptography.Pkcs.Asn1
                     new Asn1Tag(TagClass.ContextSpecific, 0)
                 );
                 System.Security.Cryptography.Asn1.GeneralNameAsn tmpTsa;
-                System
-                    .Security
-                    .Cryptography
-                    .Asn1
-                    .GeneralNameAsn
-                    .Decode(ref explicitReader, rebind, out tmpTsa);
+                System.Security.Cryptography.Asn1.GeneralNameAsn.Decode(
+                    ref explicitReader,
+                    rebind,
+                    out tmpTsa
+                );
                 decoded.Tsa = tmpTsa;
 
                 explicitReader.ThrowIfNotEmpty();
@@ -268,12 +263,11 @@ namespace System.Security.Cryptography.Pkcs.Asn1
 
                     while (collectionReader.HasData)
                     {
-                        System
-                            .Security
-                            .Cryptography
-                            .Asn1
-                            .X509ExtensionAsn
-                            .Decode(ref collectionReader, rebind, out tmpItem);
+                        System.Security.Cryptography.Asn1.X509ExtensionAsn.Decode(
+                            ref collectionReader,
+                            rebind,
+                            out tmpItem
+                        );
                         tmpList.Add(tmpItem);
                     }
 

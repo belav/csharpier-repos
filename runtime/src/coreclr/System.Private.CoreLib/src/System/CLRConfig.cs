@@ -32,13 +32,11 @@ namespace System
             // abstractions where reasonably possible.
 
             Span<char> buffer = stackalloc char[32];
-            uint length = Interop
-                .Kernel32
-                .GetEnvironmentVariable(
-                    environmentName,
-                    ref buffer.GetPinnableReference(),
-                    (uint)buffer.Length
-                );
+            uint length = Interop.Kernel32.GetEnvironmentVariable(
+                environmentName,
+                ref buffer.GetPinnableReference(),
+                (uint)buffer.Length
+            );
             switch (length)
             {
                 case 1:

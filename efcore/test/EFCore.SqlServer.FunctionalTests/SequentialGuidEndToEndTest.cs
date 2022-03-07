@@ -69,8 +69,7 @@ namespace Microsoft.EntityFrameworkCore
                                     Id = Guid.NewGuid()
                                 }
                             )
-                            .Entity
-                            .Id
+                            .Entity.Id
                     );
                 }
 

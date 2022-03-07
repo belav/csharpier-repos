@@ -55,13 +55,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SuggestionTags
                 }
             };
 
-            var spans =
-                (
-                    await TestDiagnosticTagProducer<DiagnosticsSuggestionTaggerProvider>.GetDiagnosticsAndErrorSpans(
-                        workspace,
-                        analyzerMap
-                    )
-                ).Item2;
+            var spans = (
+                await TestDiagnosticTagProducer<DiagnosticsSuggestionTaggerProvider>.GetDiagnosticsAndErrorSpans(
+                    workspace,
+                    analyzerMap
+                )
+            ).Item2;
             return (spans, workspace.Documents.Single().SelectedSpans.Single());
         }
     }

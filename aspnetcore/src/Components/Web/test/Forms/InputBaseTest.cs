@@ -390,9 +390,9 @@ public class InputBaseTest
         // Act: update the field state in the EditContext and notify
         var messageStore = new ValidationMessageStore(rootComponent.EditContext);
         messageStore.Add(fieldIdentifier, "Some message");
-        await renderer
-            .Dispatcher
-            .InvokeAsync(rootComponent.EditContext.NotifyValidationStateChanged);
+        await renderer.Dispatcher.InvokeAsync(
+            rootComponent.EditContext.NotifyValidationStateChanged
+        );
 
         // Assert: The input component rendered itself again and now has the new class
         var batch2 = renderer.Batches.Skip(1).Single();
@@ -416,21 +416,19 @@ public class InputBaseTest
         var renderer = new TestRenderer();
         var rootComponentId = renderer.AssignRootComponentId(rootComponent);
         await renderer.RenderRootComponentAsync(rootComponentId);
-        var component =
-            renderer
-                .Batches
-                .Single()
-                .GetComponentFrames<TestInputComponent<string>>()
-                .Single()
-                .Component;
+        var component = renderer.Batches
+            .Single()
+            .GetComponentFrames<TestInputComponent<string>>()
+            .Single()
+            .Component;
 
         // Act: dispose, then update the field state in the EditContext and notify
         ((IDisposable)component).Dispose();
         var messageStore = new ValidationMessageStore(rootComponent.EditContext);
         messageStore.Add(fieldIdentifier, "Some message");
-        await renderer
-            .Dispatcher
-            .InvokeAsync(rootComponent.EditContext.NotifyValidationStateChanged);
+        await renderer.Dispatcher.InvokeAsync(
+            rootComponent.EditContext.NotifyValidationStateChanged
+        );
 
         // Assert: No additional render
         Assert.Empty(renderer.Batches.Skip(1));
@@ -531,9 +529,9 @@ public class InputBaseTest
 
         // Act: update the field state in the EditContext and notify
         messageStore.Clear(fieldIdentifier);
-        await renderer
-            .Dispatcher
-            .InvokeAsync(rootComponent.EditContext.NotifyValidationStateChanged);
+        await renderer.Dispatcher.InvokeAsync(
+            rootComponent.EditContext.NotifyValidationStateChanged
+        );
 
         // Assert: The input component rendered itself again and now has the new class
         var batch2 = renderer.Batches.Skip(1).Single();

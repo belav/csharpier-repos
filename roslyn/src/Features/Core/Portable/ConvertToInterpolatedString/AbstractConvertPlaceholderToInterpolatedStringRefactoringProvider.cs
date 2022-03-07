@@ -282,8 +282,9 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
                         )
                     )
                     {
-                        var invocationSymbol =
-                            semanticModel.GetSymbolInfo(invocation, cancellationToken).Symbol;
+                        var invocationSymbol = semanticModel
+                            .GetSymbolInfo(invocation, cancellationToken)
+                            .Symbol;
                         if (applicableMethods.Contains(invocationSymbol))
                         {
                             return true;

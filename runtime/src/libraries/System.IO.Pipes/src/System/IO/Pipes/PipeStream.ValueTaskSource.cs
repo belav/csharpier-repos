@@ -45,9 +45,9 @@ namespace System.IO.Pipes
             {
                 _result = 0;
                 _memoryHandle = memory.Pin();
-                _overlapped = _pipeStream
-                    ._threadPoolBinding!
-                    .AllocateNativeOverlapped(_preallocatedOverlapped);
+                _overlapped = _pipeStream._threadPoolBinding!.AllocateNativeOverlapped(
+                    _preallocatedOverlapped
+                );
             }
 
             public ValueTaskSourceStatus GetStatus(short token) => _source.GetStatus(token);
@@ -91,12 +91,10 @@ namespace System.IO.Pipes
                                 {
                                     try
                                     {
-                                        Interop
-                                            .Kernel32
-                                            .CancelIoEx(
-                                                vts._pipeStream.SafePipeHandle,
-                                                vts._overlapped
-                                            );
+                                        Interop.Kernel32.CancelIoEx(
+                                            vts._pipeStream.SafePipeHandle,
+                                            vts._overlapped
+                                        );
                                         // Ignore all failures: no matter whether it succeeds or fails, completion is handled via the IOCallback.
                                     }
                                     catch (ObjectDisposedException) { } // in case the SafeHandle is (erroneously) closed concurrently

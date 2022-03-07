@@ -89,8 +89,9 @@ namespace System.DirectoryServices.AccountManagement
             // ctxBaseLock, but we don't want to have to hold that lock while we're iterating over all
             // the child entries.  So we have to clone the ctxBase --- not ideal, but it prevents
             // multithreading issues.
-            DirectoryEntries entries =
-                SDSUtils.BuildDirectoryEntry(_ctxBase.Path, _credentials, _authTypes).Children;
+            DirectoryEntries entries = SDSUtils
+                .BuildDirectoryEntry(_ctxBase.Path, _credentials, _authTypes)
+                .Children;
             Debug.Assert(entries != null);
 
             // Determine the principal types of interest.  The SAMQuerySet will use this to restrict

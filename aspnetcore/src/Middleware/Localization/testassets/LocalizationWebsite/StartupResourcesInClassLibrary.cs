@@ -48,8 +48,9 @@ public class StartupResourcesInClassLibrary
             typeof(Alternate.Namespace.Model)
         );
 
-        var noAttributeAssembly =
-            typeof(ResourcesClassLibraryNoAttribute.Model).GetTypeInfo().Assembly;
+        var noAttributeAssembly = typeof(ResourcesClassLibraryNoAttribute.Model)
+            .GetTypeInfo()
+            .Assembly;
         var noAttributeName = new AssemblyName(noAttributeAssembly.FullName).Name;
         var noAttributeNameStringLocalizer = stringLocalizerFactory.Create(
             nameof(ResourcesClassLibraryNoAttribute.Model),

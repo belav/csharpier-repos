@@ -536,11 +536,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // When in doubt, we'll complain on the right side if it's a literal
                 bool useRight =
                     (leftComplaint && rightComplaint) ? rightIsTupleLiteral : rightComplaint;
-                Location location =
-                    ((BoundTupleExpression)(useRight ? right : left)).Arguments[i]
-                        .Syntax
-                        .Parent
-                        .Location;
+                Location location = ((BoundTupleExpression)(useRight ? right : left)).Arguments[i]
+                    .Syntax
+                    .Parent
+                    .Location;
                 string complaintName = useRight ? rightName : leftName;
 
                 diagnostics.Add(
@@ -615,9 +614,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             // placeholder bound nodes with the proper types are sufficient to bind the element-wise binary operators
             TypeSymbol tupleType = expr.Type.StrippedType();
-            ImmutableArray<BoundExpression> placeholders = tupleType
-                .TupleElementTypesWithAnnotations
-                .SelectAsArray(
+            ImmutableArray<BoundExpression> placeholders =
+                tupleType.TupleElementTypesWithAnnotations.SelectAsArray(
                     (t, s) => (BoundExpression)new BoundTupleOperandPlaceholder(s, t.Type),
                     expr.Syntax
                 );

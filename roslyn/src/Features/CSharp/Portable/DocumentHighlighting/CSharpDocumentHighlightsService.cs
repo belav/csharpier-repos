@@ -63,8 +63,9 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentHighlighting
                                 .ConfigureAwait(false);
                         }
 
-                        var boundSymbol =
-                            semanticModel.GetSymbolInfo(type, cancellationToken).Symbol;
+                        var boundSymbol = semanticModel
+                            .GetSymbolInfo(type, cancellationToken)
+                            .Symbol;
                         boundSymbol = boundSymbol?.OriginalDefinition;
 
                         if (originalSymbol.Equals(boundSymbol))

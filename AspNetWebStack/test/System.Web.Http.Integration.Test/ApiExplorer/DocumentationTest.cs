@@ -13,9 +13,11 @@ namespace System.Web.Http.ApiExplorer
         public void VerifyDefaultDocumentationMessage()
         {
             HttpConfiguration config = new HttpConfiguration();
-            config
-                .Routes
-                .MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional });
+            config.Routes.MapHttpRoute(
+                "Default",
+                "{controller}/{id}",
+                new { id = RouteParameter.Optional }
+            );
             ItemFormatter customFormatter = new ItemFormatter();
             config.Formatters.Add(customFormatter);
 
@@ -38,9 +40,11 @@ namespace System.Web.Http.ApiExplorer
         public void VerifyCustomDocumentationProviderMessage()
         {
             HttpConfiguration config = new HttpConfiguration();
-            config
-                .Routes
-                .MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional });
+            config.Routes.MapHttpRoute(
+                "Default",
+                "{controller}/{id}",
+                new { id = RouteParameter.Optional }
+            );
             ItemFormatter customFormatter = new ItemFormatter();
             config.Formatters.Add(customFormatter);
 

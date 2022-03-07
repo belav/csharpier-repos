@@ -187,8 +187,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         private string _lazyDocComment;
         private string _lazyExpandedDocComment;
-        private ConstantValue _lazyConstantEarlyDecodingValue =
-            Microsoft.CodeAnalysis.ConstantValue.Unset;
+        private ConstantValue _lazyConstantEarlyDecodingValue = Microsoft
+            .CodeAnalysis
+            .ConstantValue
+            .Unset;
         private ConstantValue _lazyConstantValue = Microsoft.CodeAnalysis.ConstantValue.Unset;
 
         protected SourceFieldSymbolWithSyntaxReference(
@@ -346,9 +348,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else
             {
-                dependencies = ImmutableHashSet<SourceFieldSymbolWithSyntaxReference>
-                    .Empty
-                    .Union(builder);
+                dependencies = ImmutableHashSet<SourceFieldSymbolWithSyntaxReference>.Empty.Union(
+                    builder
+                );
             }
 
             diagnostics.Free();

@@ -41,13 +41,8 @@ namespace System.Net.Quic.Tests
 
     public abstract class QuicStreamConformanceTests : ConnectedStreamConformanceTests
     {
-        public X509Certificate2 ServerCertificate = System
-            .Net
-            .Test
-            .Common
-            .Configuration
-            .Certificates
-            .GetServerCertificate();
+        public X509Certificate2 ServerCertificate =
+            System.Net.Test.Common.Configuration.Certificates.GetServerCertificate();
         public ITestOutputHelper _output;
 
         public bool RemoteCertificateValidationCallback(

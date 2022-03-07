@@ -130,8 +130,10 @@ namespace System.Runtime.Loader.Tests
             Assert.NotNull(method);
 
             // Invoke the method to load the current assembly from the temp location
-            var assemblyStaticToLoad =
-                typeof(RefEmitLoadContext).GetTypeInfo().Assembly.GetName().Name;
+            var assemblyStaticToLoad = typeof(RefEmitLoadContext)
+                .GetTypeInfo()
+                .Assembly.GetName()
+                .Name;
             var asmRefEmitLoadedStatic = method.Invoke(null, new object[] { assemblyStaticToLoad });
             Assert.NotNull(asmRefEmitLoadedStatic);
 

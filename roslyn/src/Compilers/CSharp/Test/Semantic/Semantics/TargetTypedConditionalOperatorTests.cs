@@ -492,8 +492,7 @@ delegate int Del(int x);
                     naturalType,
                     model
                         .GetTypeInfo(conditionalExpr)
-                        .Type
-                        .ToTestDisplayString(includeNonNullable: false)
+                        .Type.ToTestDisplayString(includeNonNullable: false)
                 );
             }
 
@@ -506,8 +505,7 @@ delegate int Del(int x);
                 convertedType,
                 model
                     .GetTypeInfo(conditionalExpr)
-                    .ConvertedType
-                    .ToTestDisplayString(includeNonNullable: false)
+                    .ConvertedType.ToTestDisplayString(includeNonNullable: false)
             );
 
             if (!expectedDiagnostics.Any())
@@ -520,15 +518,13 @@ delegate int Del(int x);
                     convertedType,
                     model
                         .GetTypeInfo(conditionalExpr.WhenTrue)
-                        .ConvertedType
-                        .ToTestDisplayString(includeNonNullable: false)
+                        .ConvertedType.ToTestDisplayString(includeNonNullable: false)
                 ); //in parent to catch conversion
                 Assert.Equal(
                     convertedType,
                     model
                         .GetTypeInfo(conditionalExpr.WhenFalse)
-                        .ConvertedType
-                        .ToTestDisplayString(includeNonNullable: false)
+                        .ConvertedType.ToTestDisplayString(includeNonNullable: false)
                 ); //in parent to catch conversion
             }
         }
@@ -587,11 +583,9 @@ public class Program {
             CompileAndVerify(comp, expectedOutput: expectedOutput);
             comp = CreateCompilation(
                     source,
-                    parseOptions: TestOptions
-                        .Regular
-                        .WithLanguageVersion(
-                            MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
-                        ),
+                    parseOptions: TestOptions.Regular.WithLanguageVersion(
+                        MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
+                    ),
                     options: TestOptions.DebugExe
                 )
                 .VerifyDiagnostics();
@@ -619,11 +613,9 @@ public class Program {
                 .VerifyEmitDiagnostics();
             CreateCompilation(
                     source,
-                    parseOptions: TestOptions
-                        .Regular
-                        .WithLanguageVersion(
-                            MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
-                        ),
+                    parseOptions: TestOptions.Regular.WithLanguageVersion(
+                        MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
+                    ),
                     options: TestOptions.DebugDll.WithAllowUnsafe(true)
                 )
                 .VerifyEmitDiagnostics();
@@ -651,11 +643,9 @@ public class Program {
                 .VerifyEmitDiagnostics();
             CreateCompilation(
                     source,
-                    parseOptions: TestOptions
-                        .Regular
-                        .WithLanguageVersion(
-                            MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
-                        ),
+                    parseOptions: TestOptions.Regular.WithLanguageVersion(
+                        MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
+                    ),
                     options: TestOptions.DebugDll
                 )
                 .VerifyEmitDiagnostics();
@@ -701,11 +691,9 @@ public class Program {
             );
             CompileAndVerify(
                 source,
-                parseOptions: TestOptions
-                    .Regular
-                    .WithLanguageVersion(
-                        MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
-                    ),
+                parseOptions: TestOptions.Regular.WithLanguageVersion(
+                    MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
+                ),
                 expectedOutput: expectedOutput
             );
         }
@@ -750,11 +738,9 @@ public class Program {
                 .VerifyDiagnostics(expectedDiagnostics);
             CreateCompilation(
                     source,
-                    parseOptions: TestOptions
-                        .Regular
-                        .WithLanguageVersion(
-                            MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
-                        )
+                    parseOptions: TestOptions.Regular.WithLanguageVersion(
+                        MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
+                    )
                 )
                 .VerifyDiagnostics(expectedDiagnostics);
         }
@@ -793,11 +779,9 @@ System.Char: A";
             );
             CompileAndVerify(
                 source,
-                parseOptions: TestOptions
-                    .Regular
-                    .WithLanguageVersion(
-                        MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
-                    ),
+                parseOptions: TestOptions.Regular.WithLanguageVersion(
+                    MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
+                ),
                 expectedOutput: expectedOutput
             );
         }
@@ -836,11 +820,9 @@ System.Int32: 65";
             );
             CompileAndVerify(
                 source,
-                parseOptions: TestOptions
-                    .Regular
-                    .WithLanguageVersion(
-                        MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
-                    ),
+                parseOptions: TestOptions.Regular.WithLanguageVersion(
+                    MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
+                ),
                 expectedOutput: expectedOutput
             );
         }
@@ -874,11 +856,9 @@ class Program
                 .VerifyDiagnostics();
             CreateCompilation(
                     source,
-                    parseOptions: TestOptions
-                        .Regular
-                        .WithLanguageVersion(
-                            MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
-                        )
+                    parseOptions: TestOptions.Regular.WithLanguageVersion(
+                        MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
+                    )
                 )
                 .VerifyDiagnostics();
         }
@@ -924,11 +904,9 @@ class Program
 
             CreateCompilation(
                     source,
-                    parseOptions: TestOptions
-                        .Regular
-                        .WithLanguageVersion(
-                            MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
-                        )
+                    parseOptions: TestOptions.Regular.WithLanguageVersion(
+                        MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
+                    )
                 )
                 .VerifyDiagnostics(
                     // (15,16): error CS0029: Cannot implicitly convert type 'A' to 'B'

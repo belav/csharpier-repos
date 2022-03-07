@@ -426,12 +426,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
 
                     if (
-                        argument
-                            .Parent
-                            .IsParentKind(
-                                SyntaxKind.InvocationExpression,
-                                out InvocationExpressionSyntax invocation
-                            )
+                        argument.Parent.IsParentKind(
+                            SyntaxKind.InvocationExpression,
+                            out InvocationExpressionSyntax invocation
+                        )
                     )
                     {
                         var index = invocation.ArgumentList.Arguments.IndexOf(argument);
@@ -439,12 +437,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
 
                     if (
-                        argument
-                            .Parent
-                            .IsParentKind(
-                                SyntaxKind.ObjectCreationExpression,
-                                out ObjectCreationExpressionSyntax creation
-                            )
+                        argument.Parent.IsParentKind(
+                            SyntaxKind.ObjectCreationExpression,
+                            out ObjectCreationExpressionSyntax creation
+                        )
                     )
                     {
                         // new Outer(Goo());
@@ -457,12 +453,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
 
                     if (
-                        argument
-                            .Parent
-                            .IsParentKind(
-                                SyntaxKind.ElementAccessExpression,
-                                out ElementAccessExpressionSyntax elementAccess
-                            )
+                        argument.Parent.IsParentKind(
+                            SyntaxKind.ElementAccessExpression,
+                            out ElementAccessExpressionSyntax elementAccess
+                        )
                     )
                     {
                         // Outer[Goo()];
@@ -488,20 +482,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     argument.Parent.IsParentKind(SyntaxKind.ImplicitElementAccess)
                     && argument.Parent.Parent.IsParentKind(SyntaxKind.SimpleAssignmentExpression)
-                    && argument
-                        .Parent
-                        .Parent
-                        .Parent
-                        .IsParentKind(SyntaxKind.ObjectInitializerExpression)
-                    && argument
-                        .Parent
-                        .Parent
-                        .Parent
-                        .Parent
-                        .IsParentKind(
-                            SyntaxKind.ObjectCreationExpression,
-                            out ObjectCreationExpressionSyntax objectCreation
-                        )
+                    && argument.Parent.Parent.Parent.IsParentKind(
+                        SyntaxKind.ObjectInitializerExpression
+                    )
+                    && argument.Parent.Parent.Parent.Parent.IsParentKind(
+                        SyntaxKind.ObjectCreationExpression,
+                        out ObjectCreationExpressionSyntax objectCreation
+                    )
                 )
                 {
                     var types = GetTypes(objectCreation).Select(t => t.InferredType);
@@ -941,9 +928,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return method;
                 }
 
-                var typeArguments = method
-                    .ConstructedFrom
-                    .TypeParameters
+                var typeArguments = method.ConstructedFrom.TypeParameters
                     .Select(tp => bestMap.GetValueOrDefault(tp) ?? tp)
                     .ToArray();
                 return method.ConstructedFrom.Construct(typeArguments);
@@ -1284,8 +1269,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 //
                 // index = (Tokidx + 1) / 2
 
-                var tokenIndex = attributeArgumentList
-                    .Arguments
+                var tokenIndex = attributeArgumentList.Arguments
                     .GetWithSeparators()
                     .IndexOf(previousToken);
                 return (tokenIndex + 1) / 2;
@@ -1795,8 +1779,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // new Dictionary<K,V> { { x, ... } }
                     // new C { Prop = { { x, ... } } }
                     var parameterIndex = previousToken.HasValue
-                        ? initializerExpression
-                              .Expressions
+                        ? initializerExpression.Expressions
                               .GetSeparators()
                               .ToList()
                               .IndexOf(previousToken.Value) + 1
@@ -1846,11 +1829,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                         // new C { Prop = { x,
 
                         foreach (
-                            var sibling in initializerExpression
-                                .Expressions
-                                .Where(
-                                    e => e.Kind() != SyntaxKind.ComplexElementInitializerExpression
-                                )
+                            var sibling in initializerExpression.Expressions.Where(
+                                e => e.Kind() != SyntaxKind.ComplexElementInitializerExpression
+                            )
                         )
                         {
                             var types = GetTypes(sibling);
@@ -1974,8 +1955,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         // new Goo { a = { Goo() } }
                         var parameterIndex = previousToken.HasValue
-                            ? initializerExpression
-                                  .Expressions
+                            ? initializerExpression.Expressions
                                   .GetSeparators()
                                   .ToList()
                                   .IndexOf(previousToken.Value) + 1
@@ -2394,16 +2374,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         if (invocation.ArgumentList.Arguments.Count > 0)
                         {
-                            var argumentExpression =
-                                invocation.ArgumentList.Arguments[0].Expression;
+                            var argumentExpression = invocation.ArgumentList.Arguments[
+                                0
+                            ].Expression;
 
                             if (argumentExpression != null)
                             {
                                 var argumentTypes = GetTypes(argumentExpression);
                                 var delegateType = argumentTypes
                                     .FirstOrDefault()
-                                    .InferredType
-                                    .GetDelegateType(this.Compilation);
+                                    .InferredType.GetDelegateType(this.Compilation);
                                 var typeArg =
                                     delegateType?.TypeArguments.Length > 0
                                         ? delegateType.TypeArguments[0]
@@ -2768,8 +2748,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     && currentSemanticModel.IsSpeculativeSemanticModel
                 )
                 {
-                    var tokenInOriginalTree = originalSemanticModel
-                        .SyntaxTree
+                    var tokenInOriginalTree = originalSemanticModel.SyntaxTree
                         .GetRoot(CancellationToken)
                         .FindToken(currentSemanticModel.OriginalPositionForSpeculation);
                     var declaration = tokenInOriginalTree.GetAncestor<MemberDeclarationSyntax>();
@@ -2817,8 +2796,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 // Use the first case label to determine the return type.
                 if (
-                    switchStatement
-                        .Sections
+                    switchStatement.Sections
                         .SelectMany(ss => ss.Labels)
                         .FirstOrDefault(label => label.Kind() == SyntaxKind.CaseSwitchLabel)
                     is CaseSwitchLabelSyntax firstCase

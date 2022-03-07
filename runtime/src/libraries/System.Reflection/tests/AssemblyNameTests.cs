@@ -293,8 +293,11 @@ namespace System.Reflection.Tests
                 an.VersionCompatibility
             );
 
-            an.VersionCompatibility =
-                System.Configuration.Assemblies.AssemblyVersionCompatibility.SameProcess;
+            an.VersionCompatibility = System
+                .Configuration
+                .Assemblies
+                .AssemblyVersionCompatibility
+                .SameProcess;
             Assert.Equal(
                 System.Configuration.Assemblies.AssemblyVersionCompatibility.SameProcess,
                 an.VersionCompatibility

@@ -63,10 +63,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             var semanticModel = await document
                 .ReuseExistingSpeculativeModelAsync(position, cancellationToken)
                 .ConfigureAwait(false);
-            var propertyPatternType =
-                semanticModel
-                    .GetTypeInfo((PatternSyntax)propertyPatternClause.Parent!, cancellationToken)
-                    .ConvertedType;
+            var propertyPatternType = semanticModel
+                .GetTypeInfo((PatternSyntax)propertyPatternClause.Parent!, cancellationToken)
+                .ConvertedType;
             // For simple property patterns, the type we want is the "input type" of the property pattern, ie the type of `c` in `c is { $$ }`.
             // For extended property patterns, we get the type by following the chain of members that we have so far, ie
             // the type of `c.Property` for `c is { Property.$$ }` and the type of `c.Property1.Property2` for `c is { Property1.Property2.$$ }`.
@@ -97,8 +96,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             {
                 // Filter out those members that have already been typed as simple (not extended) properties
                 var alreadyTestedMembers = new HashSet<string>(
-                    propertyPatternClause
-                        .Subpatterns
+                    propertyPatternClause.Subpatterns
                         .Select(p => p.NameColon?.Name.Identifier.ValueText)
                         .Where(s => !string.IsNullOrEmpty(s))!
                 );

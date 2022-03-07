@@ -830,9 +830,9 @@ namespace System.Diagnostics.Tracing
                 if (eventID == 0)
                     continue;
 
-                byte[]? metadata = EventPipeMetadataGenerator
-                    .Instance
-                    .GenerateEventMetadata(m_eventData[i]);
+                byte[]? metadata = EventPipeMetadataGenerator.Instance.GenerateEventMetadata(
+                    m_eventData[i]
+                );
                 uint metadataLength = (metadata != null) ? (uint)metadata.Length : 0;
 
                 string eventName = m_eventData[i].Name;
@@ -842,17 +842,15 @@ namespace System.Diagnostics.Tracing
 
                 fixed (byte* pMetadata = metadata)
                 {
-                    IntPtr eventHandle = m_eventPipeProvider
-                        .m_eventProvider
-                        .DefineEventHandle(
-                            eventID,
-                            eventName,
-                            keywords,
-                            eventVersion,
-                            level,
-                            pMetadata,
-                            metadataLength
-                        );
+                    IntPtr eventHandle = m_eventPipeProvider.m_eventProvider.DefineEventHandle(
+                        eventID,
+                        eventName,
+                        keywords,
+                        eventVersion,
+                        level,
+                        pMetadata,
+                        metadataLength
+                    );
 
                     Debug.Assert(eventHandle != IntPtr.Zero);
                     m_eventData[i].EventHandle = eventHandle;
@@ -2646,9 +2644,8 @@ namespace System.Diagnostics.Tracing
                                     string eventName = "EventSourceMessage";
                                     EventParameterInfo paramInfo = default(EventParameterInfo);
                                     paramInfo.SetInfo("message", typeof(string));
-                                    byte[]? metadata = EventPipeMetadataGenerator
-                                        .Instance
-                                        .GenerateMetadata(
+                                    byte[]? metadata =
+                                        EventPipeMetadataGenerator.Instance.GenerateMetadata(
                                             0,
                                             eventName,
                                             keywords,
@@ -2662,9 +2659,8 @@ namespace System.Diagnostics.Tracing
 
                                     fixed (byte* pMetadata = metadata)
                                     {
-                                        m_writeEventStringEventHandle = m_eventPipeProvider
-                                            .m_eventProvider
-                                            .DefineEventHandle(
+                                        m_writeEventStringEventHandle =
+                                            m_eventPipeProvider.m_eventProvider.DefineEventHandle(
                                                 0,
                                                 eventName,
                                                 keywords,
@@ -3674,17 +3670,20 @@ namespace System.Diagnostics.Tracing
                     reflectedAttributeType.Name,
                     StringComparison.Ordinal
                 )
-                    && attributeType
-                        .Namespace!
-                        .EndsWith("Diagnostics.Tracing", StringComparison.Ordinal)
+                    && attributeType.Namespace!.EndsWith(
+                        "Diagnostics.Tracing",
+                        StringComparison.Ordinal
+                    )
                     && (
-                        reflectedAttributeType
-                            .Namespace!
-                            .EndsWith("Diagnostics.Tracing", StringComparison.Ordinal)
+                        reflectedAttributeType.Namespace!.EndsWith(
+                            "Diagnostics.Tracing",
+                            StringComparison.Ordinal
+                        )
 #if EVENT_SOURCE_LEGACY_NAMESPACE_SUPPORT
-                        || reflectedAttributeType
-                            .Namespace
-                            .EndsWith("Diagnostics.Eventing", StringComparison.Ordinal)
+                        || reflectedAttributeType.Namespace.EndsWith(
+                            "Diagnostics.Eventing",
+                            StringComparison.Ordinal
+                        )
 #endif
                     );
         }
@@ -5080,9 +5079,13 @@ namespace System.Diagnostics.Tracing
 #if FEATURE_PERFTRACING
             if (eventSource.GetType() == typeof(NativeRuntimeEventSource))
             {
-                EventPipeEventDispatcher
-                    .Instance
-                    .SendCommand(this, EventCommand.Update, true, level, matchAnyKeyword);
+                EventPipeEventDispatcher.Instance.SendCommand(
+                    this,
+                    EventCommand.Update,
+                    true,
+                    level,
+                    matchAnyKeyword
+                );
             }
 #endif // FEATURE_PERFTRACING
         }
@@ -5114,15 +5117,13 @@ namespace System.Diagnostics.Tracing
 #if FEATURE_PERFTRACING
             if (eventSource.GetType() == typeof(NativeRuntimeEventSource))
             {
-                EventPipeEventDispatcher
-                    .Instance
-                    .SendCommand(
-                        this,
-                        EventCommand.Update,
-                        false,
-                        EventLevel.LogAlways,
-                        EventKeywords.None
-                    );
+                EventPipeEventDispatcher.Instance.SendCommand(
+                    this,
+                    EventCommand.Update,
+                    false,
+                    EventLevel.LogAlways,
+                    EventKeywords.None
+                );
             }
 #endif // FEATURE_PERFTRACING
         }

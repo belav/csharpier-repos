@@ -92,12 +92,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                 (operationContext) =>
                 {
                     if (
-                        operationContext
-                            .Operation
-                            .HasErrors(
-                                operationContext.Compilation,
-                                operationContext.CancellationToken
-                            )
+                        operationContext.Operation.HasErrors(
+                            operationContext.Compilation,
+                            operationContext.CancellationToken
+                        )
                     )
                     {
                         operationContext.ReportDiagnostic(
@@ -248,8 +246,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                                         IOperation advance = forLoop.AtLoopBottom[0];
                                         if (advance.Kind == OperationKind.ExpressionStatement)
                                         {
-                                            IOperation advanceExpression =
-                                                ((IExpressionStatementOperation)advance).Operation;
+                                            IOperation advanceExpression = (
+                                                (IExpressionStatementOperation)advance
+                                            ).Operation;
 
                                             Optional<object> advanceIncrementOpt;
                                             BinaryOperatorKind? advanceOperationCode;
@@ -1158,9 +1157,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                     }
 
                     foreach (
-                        var decl in declarationStatement
-                            .Declarations
-                            .SelectMany(multiDecl => multiDecl.Declarators)
+                        var decl in declarationStatement.Declarations.SelectMany(
+                            multiDecl => multiDecl.Declarators
+                        )
                     )
                     {
                         var initializer = decl.GetVariableInitializer();
@@ -1543,8 +1542,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                         {
                             if (argument.Value is IArrayCreationOperation arrayValue)
                             {
-                                Optional<object> dimensionSize =
-                                    arrayValue.DimensionSizes[0].ConstantValue;
+                                Optional<object> dimensionSize = arrayValue.DimensionSizes[
+                                    0
+                                ].ConstantValue;
                                 if (
                                     dimensionSize.HasValue && IntegralValue(dimensionSize.Value) > 3
                                 )
@@ -1585,8 +1585,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                         {
                             if (argument.Value is IArrayCreationOperation arrayValue)
                             {
-                                Optional<object> dimensionSize =
-                                    arrayValue.DimensionSizes[0].ConstantValue;
+                                Optional<object> dimensionSize = arrayValue.DimensionSizes[
+                                    0
+                                ].ConstantValue;
                                 if (
                                     dimensionSize.HasValue && IntegralValue(dimensionSize.Value) > 3
                                 )

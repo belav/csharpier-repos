@@ -91,14 +91,12 @@ namespace System.Drawing.Internal
             Interop.Gdi32.CombineMode mode
         )
         {
-            return Interop
-                .Gdi32
-                .CombineRgn(
-                    new HandleRef(this, HRegion),
-                    new HandleRef(region1, region1.HRegion),
-                    new HandleRef(region2, region2.HRegion),
-                    mode
-                );
+            return Interop.Gdi32.CombineRgn(
+                new HandleRef(this, HRegion),
+                new HandleRef(region1, region1.HRegion),
+                new HandleRef(region2, region2.HRegion),
+                mode
+            );
         }
 
         private void CreateRegion(Rectangle rect)
@@ -107,9 +105,12 @@ namespace System.Drawing.Internal
                 _nativeHandle == IntPtr.Zero,
                 "nativeHandle should be null, we're leaking handle"
             );
-            _nativeHandle = Interop
-                .Gdi32
-                .CreateRectRgn(rect.X, rect.Y, rect.X + rect.Width, rect.Y + rect.Height);
+            _nativeHandle = Interop.Gdi32.CreateRectRgn(
+                rect.X,
+                rect.Y,
+                rect.X + rect.Width,
+                rect.Y + rect.Height
+            );
             _ownHandle = true;
         }
 

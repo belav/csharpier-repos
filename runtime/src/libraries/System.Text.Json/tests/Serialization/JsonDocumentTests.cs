@@ -133,8 +133,7 @@ namespace System.Text.Json.Serialization.Tests
 
             public void Verify()
             {
-                JsonElement[] array = Document
-                    .RootElement
+                JsonElement[] array = Document.RootElement
                     .GetProperty("Array")
                     .EnumerateArray()
                     .ToArray();
@@ -160,27 +159,25 @@ namespace System.Text.Json.Serialization.Tests
         {
             // Streams need to read ahead when they hit objects or arrays that are assigned to JsonElement or object.
 
-            byte[] data = Encoding
-                .UTF8
-                .GetBytes(@"{""Data"":[1,true,{""City"":""MyCity""},null,""foo""]}");
+            byte[] data = Encoding.UTF8.GetBytes(
+                @"{""Data"":[1,true,{""City"":""MyCity""},null,""foo""]}"
+            );
             MemoryStream stream = new MemoryStream(data);
-            JsonDocument obj =
-                JsonSerializer
-                    .DeserializeAsync<JsonDocument>(
-                        stream,
-                        new JsonSerializerOptions { DefaultBufferSize = defaultBufferSize }
-                    )
-                    .Result;
+            JsonDocument obj = JsonSerializer
+                .DeserializeAsync<JsonDocument>(
+                    stream,
+                    new JsonSerializerOptions { DefaultBufferSize = defaultBufferSize }
+                )
+                .Result;
 
             data = Encoding.UTF8.GetBytes(@"[1,true,{""City"":""MyCity""},null,""foo""]");
             stream = new MemoryStream(data);
-            obj =
-                JsonSerializer
-                    .DeserializeAsync<JsonDocument>(
-                        stream,
-                        new JsonSerializerOptions { DefaultBufferSize = defaultBufferSize }
-                    )
-                    .Result;
+            obj = JsonSerializer
+                .DeserializeAsync<JsonDocument>(
+                    stream,
+                    new JsonSerializerOptions { DefaultBufferSize = defaultBufferSize }
+                )
+                .Result;
 
             // Ensure we fail with incomplete data
             data = Encoding.UTF8.GetBytes(@"{""Data"":[1,true,{""City"":""MyCity""},null,""foo""]");

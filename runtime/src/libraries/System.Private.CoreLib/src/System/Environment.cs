@@ -210,8 +210,7 @@ namespace System
         {
             get
             {
-                string? versionString = typeof(object)
-                    .Assembly
+                string? versionString = typeof(object).Assembly
                     .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
                     ?.InformationalVersion;
 

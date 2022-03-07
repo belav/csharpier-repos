@@ -104,21 +104,17 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         {
             if (declaration.ExpressionBody == null)
             {
-                var expressionBodyPreference =
-                    options
-                        .Options
-                        .GetOption(CSharpCodeStyleOptions.PreferExpressionBodiedConstructors)
-                        .Value;
+                var expressionBodyPreference = options.Options
+                    .GetOption(CSharpCodeStyleOptions.PreferExpressionBodiedConstructors)
+                    .Value;
                 if (
-                    declaration
-                        .Body
-                        .TryConvertToArrowExpressionBody(
-                            declaration.Kind(),
-                            parseOptions,
-                            expressionBodyPreference,
-                            out var expressionBody,
-                            out var semicolonToken
-                        )
+                    declaration.Body.TryConvertToArrowExpressionBody(
+                        declaration.Kind(),
+                        parseOptions,
+                        expressionBodyPreference,
+                        out var expressionBody,
+                        out var semicolonToken
+                    )
                 )
                 {
                     return declaration

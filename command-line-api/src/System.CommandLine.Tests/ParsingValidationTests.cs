@@ -33,8 +33,7 @@ namespace System.CommandLine.Tests
 
             var result = option.Parse("-x none-of-those");
 
-            result
-                .Errors
+            result.Errors
                 .Select(e => e.Message)
                 .Single()
                 .Should()
@@ -53,8 +52,7 @@ namespace System.CommandLine.Tests
 
             var result = option.Parse("-x something_else");
 
-            result
-                .Errors
+            result.Errors
                 .Where(e => e.SymbolResult != null)
                 .Should()
                 .Contain(e => e.SymbolResult.Symbol.Name == option.Name);
@@ -67,8 +65,7 @@ namespace System.CommandLine.Tests
 
             var result = option.Parse("-x");
 
-            result
-                .Errors
+            result.Errors
                 .Should()
                 .Contain(e => e.Message == "Required argument missing for option: -x");
         }
@@ -80,13 +77,10 @@ namespace System.CommandLine.Tests
 
             var result = command.Parse("");
 
-            result
-                .Errors
+            result.Errors
                 .Should()
                 .ContainSingle(e => e.SymbolResult.Symbol == command)
-                .Which
-                .Message
-                .Should()
+                .Which.Message.Should()
                 .Be("Option '-x' is required.");
         }
 
@@ -136,8 +130,7 @@ namespace System.CommandLine.Tests
 
             _output.WriteLine(result.ToString());
 
-            result
-                .Errors
+            result.Errors
                 .Select(e => e.Message)
                 .Should()
                 .ContainSingle(e => e == "Unrecognized command or argument 'some-arg'");
@@ -165,8 +158,7 @@ namespace System.CommandLine.Tests
 
             var result = command.Parse("the-command --one --two");
 
-            result
-                .Errors
+            result.Errors
                 .Select(e => e.Message)
                 .Should()
                 .ContainSingle("Options '--one' and '--two' cannot be used together.");
@@ -190,13 +182,10 @@ namespace System.CommandLine.Tests
 
             var result = command.Parse("-x 123");
 
-            result
-                .Errors
+            result.Errors
                 .Should()
                 .ContainSingle(e => e.SymbolResult.Symbol == option)
-                .Which
-                .Message
-                .Should()
+                .Which.Message.Should()
                 .Be("Option -x cannot be set to 123");
         }
 
@@ -218,13 +207,10 @@ namespace System.CommandLine.Tests
 
             var result = command.Parse("123");
 
-            result
-                .Errors
+            result.Errors
                 .Should()
                 .ContainSingle(e => e.SymbolResult.Symbol == argument)
-                .Which
-                .Message
-                .Should()
+                .Which.Message.Should()
                 .Be("Argument x cannot be set to 123");
         }
 
@@ -292,13 +278,10 @@ namespace System.CommandLine.Tests
 
             var result = rootCommand.Parse(commandLine);
 
-            result
-                .Errors
+            result.Errors
                 .Should()
                 .ContainSingle(e => e.SymbolResult.Symbol == option)
-                .Which
-                .Message
-                .Should()
+                .Which.Message.Should()
                 .Be("Invoked validator");
         }
 
@@ -363,8 +346,7 @@ namespace System.CommandLine.Tests
 
                 var result = command.Parse($"the-command {invalidCharacter}");
 
-                result
-                    .Errors
+                result.Errors
                     .Should()
                     .Contain(
                         e =>
@@ -385,8 +367,7 @@ namespace System.CommandLine.Tests
 
                 var result = command.Parse($"the-command -x {invalidCharacter}");
 
-                result
-                    .Errors
+                result.Errors
                     .Should()
                     .Contain(
                         e =>
@@ -452,8 +433,7 @@ namespace System.CommandLine.Tests
 
                 var result = command.Parse($"the-command {invalidCharacter}");
 
-                result
-                    .Errors
+                result.Errors
                     .Should()
                     .Contain(
                         e =>
@@ -475,8 +455,7 @@ namespace System.CommandLine.Tests
 
                 var result = command.Parse($"the-command -x {invalidCharacter}");
 
-                result
-                    .Errors
+                result.Errors
                     .Should()
                     .Contain(
                         e =>
@@ -533,12 +512,10 @@ namespace System.CommandLine.Tests
                 var path = NonexistentPath();
                 var result = command.Parse($@"move ""{path}""");
 
-                result
-                    .Errors
+                result.Errors
                     .Should()
                     .HaveCount(1)
-                    .And
-                    .Contain(
+                    .And.Contain(
                         e =>
                             e.SymbolResult.Symbol.Name == "to"
                             && e.Message == $"File does not exist: {path}"
@@ -553,12 +530,10 @@ namespace System.CommandLine.Tests
                 var path = NonexistentPath();
                 var result = command.Parse($@"move --to ""{path}""");
 
-                result
-                    .Errors
+                result.Errors
                     .Should()
                     .HaveCount(1)
-                    .And
-                    .Contain(
+                    .And.Contain(
                         e =>
                             e.SymbolResult.Symbol.Name == "to"
                             && e.Message == $"File does not exist: {path}"
@@ -576,12 +551,10 @@ namespace System.CommandLine.Tests
                 var path = NonexistentPath();
                 var result = command.Parse($@"move ""{path}""");
 
-                result
-                    .Errors
+                result.Errors
                     .Should()
                     .HaveCount(1)
-                    .And
-                    .Contain(
+                    .And.Contain(
                         e =>
                             e.SymbolResult.Symbol.Name == "to"
                             && e.Message == $"Directory does not exist: {path}"
@@ -599,12 +572,10 @@ namespace System.CommandLine.Tests
                 var path = NonexistentPath();
                 var result = command.Parse($@"move --to ""{path}""");
 
-                result
-                    .Errors
+                result.Errors
                     .Should()
                     .HaveCount(1)
-                    .And
-                    .Contain(
+                    .And.Contain(
                         e =>
                             e.SymbolResult.Symbol.Name == "to"
                             && e.Message == $"Directory does not exist: {path}"
@@ -619,12 +590,10 @@ namespace System.CommandLine.Tests
                 var path = NonexistentPath();
                 var result = command.Parse($"move \"{path}\"");
 
-                result
-                    .Errors
+                result.Errors
                     .Should()
                     .HaveCount(1)
-                    .And
-                    .Contain(
+                    .And.Contain(
                         e =>
                             e.SymbolResult.Symbol == command.Arguments.First()
                             && e.Message == $"File or directory does not exist: {path}"
@@ -642,12 +611,10 @@ namespace System.CommandLine.Tests
                 var path = NonexistentPath();
                 var result = command.Parse($@"move --to ""{path}""");
 
-                result
-                    .Errors
+                result.Errors
                     .Should()
                     .HaveCount(1)
-                    .And
-                    .Contain(
+                    .And.Contain(
                         e =>
                             e.SymbolResult.Symbol.Name == "to"
                             && e.Message == $"File or directory does not exist: {path}"
@@ -665,12 +632,10 @@ namespace System.CommandLine.Tests
                 var path = NonexistentPath();
                 var result = command.Parse($@"move ""{path}""");
 
-                result
-                    .Errors
+                result.Errors
                     .Should()
                     .HaveCount(1)
-                    .And
-                    .Contain(
+                    .And.Contain(
                         e =>
                             e.SymbolResult.Symbol.Name == "to"
                             && e.Message == $"File does not exist: {path}"
@@ -688,12 +653,10 @@ namespace System.CommandLine.Tests
                 var path = NonexistentPath();
                 var result = command.Parse($@"move --to ""{path}""");
 
-                result
-                    .Errors
+                result.Errors
                     .Should()
                     .HaveCount(1)
-                    .And
-                    .Contain(
+                    .And.Contain(
                         e =>
                             e.SymbolResult.Symbol.Name == "to"
                             && e.Message == $"File does not exist: {path}"
@@ -711,12 +674,10 @@ namespace System.CommandLine.Tests
                 var path = NonexistentPath();
                 var result = command.Parse($@"move ""{path}""");
 
-                result
-                    .Errors
+                result.Errors
                     .Should()
                     .HaveCount(1)
-                    .And
-                    .Contain(
+                    .And.Contain(
                         e =>
                             e.SymbolResult.Symbol.Name == "to"
                             && e.Message == $"Directory does not exist: {path}"
@@ -734,12 +695,10 @@ namespace System.CommandLine.Tests
                 var path = NonexistentPath();
                 var result = command.Parse($@"move --to ""{path}""");
 
-                result
-                    .Errors
+                result.Errors
                     .Should()
                     .HaveCount(1)
-                    .And
-                    .Contain(
+                    .And.Contain(
                         e =>
                             e.SymbolResult.Symbol.Name == "to"
                             && e.Message == $"Directory does not exist: {path}"
@@ -761,8 +720,7 @@ namespace System.CommandLine.Tests
                 var path = NonexistentPath();
                 var result = command.Parse($@"move ""{path}""");
 
-                result
-                    .Errors
+                result.Errors
                     .Should()
                     .Contain(
                         e =>
@@ -782,8 +740,7 @@ namespace System.CommandLine.Tests
                 var path = NonexistentPath();
                 var result = command.Parse($@"move --to ""{path}""");
 
-                result
-                    .Errors
+                result.Errors
                     .Should()
                     .Contain(
                         e =>
@@ -803,12 +760,10 @@ namespace System.CommandLine.Tests
                 var path = NonexistentPath();
                 var result = command.Parse($@"move ""{path}""");
 
-                result
-                    .Errors
+                result.Errors
                     .Should()
                     .HaveCount(1)
-                    .And
-                    .Contain(
+                    .And.Contain(
                         e =>
                             e.SymbolResult.Symbol.Name == "to"
                             && e.Message == $"File or directory does not exist: {path}"
@@ -826,12 +781,10 @@ namespace System.CommandLine.Tests
                 var path = NonexistentPath();
                 var result = command.Parse($@"move --to ""{path}""");
 
-                result
-                    .Errors
+                result.Errors
                     .Should()
                     .HaveCount(1)
-                    .And
-                    .Contain(
+                    .And.Contain(
                         e =>
                             e.SymbolResult.Symbol.Name == "to"
                             && e.Message == $"File or directory does not exist: {path}"
@@ -912,8 +865,7 @@ namespace System.CommandLine.Tests
 
             var result = outer.Parse("outer inner arg");
 
-            result
-                .Errors
+            result.Errors
                 .Should()
                 .ContainSingle(
                     e =>
@@ -932,8 +884,7 @@ namespace System.CommandLine.Tests
 
             var result = rootCommand.Parse("");
 
-            result
-                .Errors
+            result.Errors
                 .Should()
                 .ContainSingle(
                     e =>
@@ -966,8 +917,7 @@ namespace System.CommandLine.Tests
 
             var result = option.Parse("-x");
 
-            result
-                .Errors
+            result.Errors
                 .Select(e => e.Message)
                 .Should()
                 .Contain("Required argument missing for option: -x");

@@ -146,8 +146,7 @@ namespace Microsoft.CodeAnalysis.Classification
                 options,
                 cancellationToken
             );
-            var sourceText = await semanticModel
-                .SyntaxTree
+            var sourceText = await semanticModel.SyntaxTree
                 .GetTextAsync(cancellationToken)
                 .ConfigureAwait(false);
 

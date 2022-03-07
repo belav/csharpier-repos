@@ -345,8 +345,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <returns>The extension.</returns>
         public static RelationalOptionsExtension Extract(IDbContextOptions options)
         {
-            var relationalOptionsExtensions = options
-                .Extensions
+            var relationalOptionsExtensions = options.Extensions
                 .OfType<RelationalOptionsExtension>()
                 .ToList();
 
@@ -389,8 +388,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             CoreOptionsExtension coreOptionsExtension
         ) =>
             coreOptionsExtension.WithWarningsConfiguration(
-                coreOptionsExtension
-                    .WarningsConfiguration
+                coreOptionsExtension.WarningsConfiguration
                     .TryWithExplicit(
                         RelationalEventId.AmbientTransactionWarning,
                         WarningBehavior.Throw

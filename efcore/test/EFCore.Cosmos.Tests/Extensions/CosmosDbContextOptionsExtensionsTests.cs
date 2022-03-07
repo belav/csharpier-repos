@@ -42,15 +42,13 @@ namespace Microsoft.EntityFrameworkCore
                 var serviceScope = services.GetRequiredService<IServiceScopeFactory>().CreateScope()
             )
             {
-                var coreOptions = serviceScope
-                    .ServiceProvider
+                var coreOptions = serviceScope.ServiceProvider
                     .GetRequiredService<DbContextOptions<ApplicationDbContext>>()
                     .GetExtension<CoreOptionsExtension>();
 
                 Assert.True(coreOptions.DetailedErrorsEnabled);
 
-                var cosmosOptions = serviceScope
-                    .ServiceProvider
+                var cosmosOptions = serviceScope.ServiceProvider
                     .GetRequiredService<DbContextOptions<ApplicationDbContext>>()
                     .GetExtension<CosmosOptionsExtension>();
 
@@ -64,11 +62,10 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Throws_with_multiple_providers_new_when_no_provider()
         {
-            var options =
-                new DbContextOptionsBuilder()
-                    .UseCosmos("serviceEndPoint", "authKeyOrResourceToken", "databaseName")
-                    .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                    .Options;
+            var options = new DbContextOptionsBuilder()
+                .UseCosmos("serviceEndPoint", "authKeyOrResourceToken", "databaseName")
+                .UseInMemoryDatabase(Guid.NewGuid().ToString())
+                .Options;
 
             var context = new DbContext(options);
 
@@ -162,8 +159,7 @@ namespace Microsoft.EntityFrameworkCore
                     "databaseName",
                     cosmosOptionsAction
                 )
-                .Options
-                .FindExtension<CosmosOptionsExtension>();
+                .Options.FindExtension<CosmosOptionsExtension>();
 
             Assert.Equal(
                 extension.Info.GetServiceProviderHashCode(),

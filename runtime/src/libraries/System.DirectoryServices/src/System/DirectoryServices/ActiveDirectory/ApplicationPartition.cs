@@ -425,10 +425,9 @@ namespace System.DirectoryServices.ActiveDirectory
                 else
                 {
                     // this will find an adam instance that hosts this partition and which is alive and responding.
-                    string adamInstName =
-                        ConfigurationSet
-                            .FindOneAdamInstance(context.Name, context, distinguishedName, null)
-                            .Name;
+                    string adamInstName = ConfigurationSet
+                        .FindOneAdamInstance(context.Name, context, distinguishedName, null)
+                        .Name;
                     appNCContext = Utils.GetNewDirectoryContext(
                         adamInstName,
                         DirectoryContextType.DirectoryServer,
@@ -998,9 +997,9 @@ namespace System.DirectoryServices.ActiveDirectory
                     if (value == null)
                     {
                         if (
-                            _crossRefEntry
-                                .Properties
-                                .Contains(PropertyManager.MsDSSDReferenceDomain)
+                            _crossRefEntry.Properties.Contains(
+                                PropertyManager.MsDSSDReferenceDomain
+                            )
                         )
                         {
                             _crossRefEntry.Properties[
@@ -1164,9 +1163,10 @@ namespace System.DirectoryServices.ActiveDirectory
                         authType
                     );
                     parent = tempEntry.Parent;
-                    _domainDNSEntry = parent
-                        .Children
-                        .Add(Utils.GetRdnFromDN(distinguishedName), PropertyManager.DomainDNS);
+                    _domainDNSEntry = parent.Children.Add(
+                        Utils.GetRdnFromDN(distinguishedName),
+                        PropertyManager.DomainDNS
+                    );
                     // set the instance type to 5
                     _domainDNSEntry.Properties[PropertyManager.InstanceType].Value =
                         NCFlags.InstanceTypeIsNCHead | NCFlags.InstanceTypeIsWriteable;
@@ -1221,9 +1221,10 @@ namespace System.DirectoryServices.ActiveDirectory
                             authType
                         );
                         parent = tempEntry.Parent;
-                        _domainDNSEntry = parent
-                            .Children
-                            .Add(Utils.GetRdnFromDN(distinguishedName), objectClass);
+                        _domainDNSEntry = parent.Children.Add(
+                            Utils.GetRdnFromDN(distinguishedName),
+                            objectClass
+                        );
 
                         // set the instance type to 5
                         _domainDNSEntry.Properties[PropertyManager.InstanceType].Value =

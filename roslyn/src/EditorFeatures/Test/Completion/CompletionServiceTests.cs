@@ -41,14 +41,11 @@ class Test {
 
             var nugetCompletionProvider = new DebugAssertTestCompletionProvider();
             var reference = new MockAnalyzerReference(nugetCompletionProvider);
-            var project = workspace
-                .CurrentSolution
-                .Projects
+            var project = workspace.CurrentSolution.Projects
                 .Single()
                 .AddAnalyzerReference(reference);
-            var completionService = project
-                .LanguageServices
-                .GetRequiredService<CompletionService>();
+            var completionService =
+                project.LanguageServices.GetRequiredService<CompletionService>();
 
             var document = project.Documents.Single();
             var caretPosition =
@@ -62,12 +59,9 @@ class Test {
 
             Assert.NotNull(completions);
             var item = Assert.Single(
-                completions
-                    .Items
-                    .Where(
-                        item =>
-                            item.ProviderName == typeof(DebugAssertTestCompletionProvider).FullName
-                    )
+                completions.Items.Where(
+                    item => item.ProviderName == typeof(DebugAssertTestCompletionProvider).FullName
+                )
             );
             Assert.Equal("Assertion failed", item.DisplayText);
         }

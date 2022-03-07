@@ -230,10 +230,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static SyntaxToken Token(SyntaxKind kind)
         {
             return new SyntaxToken(
-                Syntax
-                    .InternalSyntax
-                    .SyntaxFactory
-                    .Token(ElasticMarker.UnderlyingNode, kind, ElasticMarker.UnderlyingNode)
+                Syntax.InternalSyntax.SyntaxFactory.Token(
+                    ElasticMarker.UnderlyingNode,
+                    kind,
+                    ElasticMarker.UnderlyingNode
+                )
             );
         }
 
@@ -300,10 +301,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             return new SyntaxToken(
-                Syntax
-                    .InternalSyntax
-                    .SyntaxFactory
-                    .Token(leading.Node, kind, text, valueText, trailing.Node)
+                Syntax.InternalSyntax.SyntaxFactory.Token(
+                    leading.Node,
+                    kind,
+                    text,
+                    valueText,
+                    trailing.Node
+                )
             );
         }
 
@@ -315,10 +319,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static SyntaxToken MissingToken(SyntaxKind kind)
         {
             return new SyntaxToken(
-                Syntax
-                    .InternalSyntax
-                    .SyntaxFactory
-                    .MissingToken(ElasticMarker.UnderlyingNode, kind, ElasticMarker.UnderlyingNode)
+                Syntax.InternalSyntax.SyntaxFactory.MissingToken(
+                    ElasticMarker.UnderlyingNode,
+                    kind,
+                    ElasticMarker.UnderlyingNode
+                )
             );
         }
 
@@ -348,10 +353,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static SyntaxToken Identifier(string text)
         {
             return new SyntaxToken(
-                Syntax
-                    .InternalSyntax
-                    .SyntaxFactory
-                    .Identifier(ElasticMarker.UnderlyingNode, text, ElasticMarker.UnderlyingNode)
+                Syntax.InternalSyntax.SyntaxFactory.Identifier(
+                    ElasticMarker.UnderlyingNode,
+                    text,
+                    ElasticMarker.UnderlyingNode
+                )
             );
         }
 
@@ -394,16 +400,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             return new SyntaxToken(
-                Syntax
-                    .InternalSyntax
-                    .SyntaxFactory
-                    .Identifier(
-                        SyntaxKind.IdentifierName,
-                        leading.Node,
-                        "@" + text,
-                        valueText,
-                        trailing.Node
-                    )
+                Syntax.InternalSyntax.SyntaxFactory.Identifier(
+                    SyntaxKind.IdentifierName,
+                    leading.Node,
+                    "@" + text,
+                    valueText,
+                    trailing.Node
+                )
             );
         }
 
@@ -427,9 +430,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             return new SyntaxToken(
-                InternalSyntax
-                    .SyntaxFactory
-                    .Identifier(contextualKind, leading.Node, text, valueText, trailing.Node)
+                InternalSyntax.SyntaxFactory.Identifier(
+                    contextualKind,
+                    leading.Node,
+                    text,
+                    valueText,
+                    trailing.Node
+                )
             );
         }
 
@@ -450,15 +457,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static SyntaxToken Literal(string text, int value)
         {
             return new SyntaxToken(
-                Syntax
-                    .InternalSyntax
-                    .SyntaxFactory
-                    .Literal(
-                        ElasticMarker.UnderlyingNode,
-                        text,
-                        value,
-                        ElasticMarker.UnderlyingNode
-                    )
+                Syntax.InternalSyntax.SyntaxFactory.Literal(
+                    ElasticMarker.UnderlyingNode,
+                    text,
+                    value,
+                    ElasticMarker.UnderlyingNode
+                )
             );
         }
 
@@ -477,10 +481,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             return new SyntaxToken(
-                Syntax
-                    .InternalSyntax
-                    .SyntaxFactory
-                    .Literal(leading.Node, text, value, trailing.Node)
+                Syntax.InternalSyntax.SyntaxFactory.Literal(
+                    leading.Node,
+                    text,
+                    value,
+                    trailing.Node
+                )
             );
         }
 
@@ -504,15 +510,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static SyntaxToken Literal(string text, uint value)
         {
             return new SyntaxToken(
-                Syntax
-                    .InternalSyntax
-                    .SyntaxFactory
-                    .Literal(
-                        ElasticMarker.UnderlyingNode,
-                        text,
-                        value,
-                        ElasticMarker.UnderlyingNode
-                    )
+                Syntax.InternalSyntax.SyntaxFactory.Literal(
+                    ElasticMarker.UnderlyingNode,
+                    text,
+                    value,
+                    ElasticMarker.UnderlyingNode
+                )
             );
         }
 
@@ -531,10 +534,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             return new SyntaxToken(
-                Syntax
-                    .InternalSyntax
-                    .SyntaxFactory
-                    .Literal(leading.Node, text, value, trailing.Node)
+                Syntax.InternalSyntax.SyntaxFactory.Literal(
+                    leading.Node,
+                    text,
+                    value,
+                    trailing.Node
+                )
             );
         }
 
@@ -558,15 +563,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static SyntaxToken Literal(string text, long value)
         {
             return new SyntaxToken(
-                Syntax
-                    .InternalSyntax
-                    .SyntaxFactory
-                    .Literal(
-                        ElasticMarker.UnderlyingNode,
-                        text,
-                        value,
-                        ElasticMarker.UnderlyingNode
-                    )
+                Syntax.InternalSyntax.SyntaxFactory.Literal(
+                    ElasticMarker.UnderlyingNode,
+                    text,
+                    value,
+                    ElasticMarker.UnderlyingNode
+                )
             );
         }
 
@@ -585,10 +587,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             return new SyntaxToken(
-                Syntax
-                    .InternalSyntax
-                    .SyntaxFactory
-                    .Literal(leading.Node, text, value, trailing.Node)
+                Syntax.InternalSyntax.SyntaxFactory.Literal(
+                    leading.Node,
+                    text,
+                    value,
+                    trailing.Node
+                )
             );
         }
 
@@ -612,15 +616,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static SyntaxToken Literal(string text, ulong value)
         {
             return new SyntaxToken(
-                Syntax
-                    .InternalSyntax
-                    .SyntaxFactory
-                    .Literal(
-                        ElasticMarker.UnderlyingNode,
-                        text,
-                        value,
-                        ElasticMarker.UnderlyingNode
-                    )
+                Syntax.InternalSyntax.SyntaxFactory.Literal(
+                    ElasticMarker.UnderlyingNode,
+                    text,
+                    value,
+                    ElasticMarker.UnderlyingNode
+                )
             );
         }
 
@@ -639,10 +640,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             return new SyntaxToken(
-                Syntax
-                    .InternalSyntax
-                    .SyntaxFactory
-                    .Literal(leading.Node, text, value, trailing.Node)
+                Syntax.InternalSyntax.SyntaxFactory.Literal(
+                    leading.Node,
+                    text,
+                    value,
+                    trailing.Node
+                )
             );
         }
 
@@ -666,15 +669,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static SyntaxToken Literal(string text, float value)
         {
             return new SyntaxToken(
-                Syntax
-                    .InternalSyntax
-                    .SyntaxFactory
-                    .Literal(
-                        ElasticMarker.UnderlyingNode,
-                        text,
-                        value,
-                        ElasticMarker.UnderlyingNode
-                    )
+                Syntax.InternalSyntax.SyntaxFactory.Literal(
+                    ElasticMarker.UnderlyingNode,
+                    text,
+                    value,
+                    ElasticMarker.UnderlyingNode
+                )
             );
         }
 
@@ -693,10 +693,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             return new SyntaxToken(
-                Syntax
-                    .InternalSyntax
-                    .SyntaxFactory
-                    .Literal(leading.Node, text, value, trailing.Node)
+                Syntax.InternalSyntax.SyntaxFactory.Literal(
+                    leading.Node,
+                    text,
+                    value,
+                    trailing.Node
+                )
             );
         }
 
@@ -717,15 +719,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static SyntaxToken Literal(string text, double value)
         {
             return new SyntaxToken(
-                Syntax
-                    .InternalSyntax
-                    .SyntaxFactory
-                    .Literal(
-                        ElasticMarker.UnderlyingNode,
-                        text,
-                        value,
-                        ElasticMarker.UnderlyingNode
-                    )
+                Syntax.InternalSyntax.SyntaxFactory.Literal(
+                    ElasticMarker.UnderlyingNode,
+                    text,
+                    value,
+                    ElasticMarker.UnderlyingNode
+                )
             );
         }
 
@@ -744,10 +743,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             return new SyntaxToken(
-                Syntax
-                    .InternalSyntax
-                    .SyntaxFactory
-                    .Literal(leading.Node, text, value, trailing.Node)
+                Syntax.InternalSyntax.SyntaxFactory.Literal(
+                    leading.Node,
+                    text,
+                    value,
+                    trailing.Node
+                )
             );
         }
 
@@ -771,15 +772,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static SyntaxToken Literal(string text, decimal value)
         {
             return new SyntaxToken(
-                Syntax
-                    .InternalSyntax
-                    .SyntaxFactory
-                    .Literal(
-                        ElasticMarker.UnderlyingNode,
-                        text,
-                        value,
-                        ElasticMarker.UnderlyingNode
-                    )
+                Syntax.InternalSyntax.SyntaxFactory.Literal(
+                    ElasticMarker.UnderlyingNode,
+                    text,
+                    value,
+                    ElasticMarker.UnderlyingNode
+                )
             );
         }
 
@@ -798,10 +796,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             return new SyntaxToken(
-                Syntax
-                    .InternalSyntax
-                    .SyntaxFactory
-                    .Literal(leading.Node, text, value, trailing.Node)
+                Syntax.InternalSyntax.SyntaxFactory.Literal(
+                    leading.Node,
+                    text,
+                    value,
+                    trailing.Node
+                )
             );
         }
 
@@ -822,15 +822,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static SyntaxToken Literal(string text, string value)
         {
             return new SyntaxToken(
-                Syntax
-                    .InternalSyntax
-                    .SyntaxFactory
-                    .Literal(
-                        ElasticMarker.UnderlyingNode,
-                        text,
-                        value,
-                        ElasticMarker.UnderlyingNode
-                    )
+                Syntax.InternalSyntax.SyntaxFactory.Literal(
+                    ElasticMarker.UnderlyingNode,
+                    text,
+                    value,
+                    ElasticMarker.UnderlyingNode
+                )
             );
         }
 
@@ -849,10 +846,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             return new SyntaxToken(
-                Syntax
-                    .InternalSyntax
-                    .SyntaxFactory
-                    .Literal(leading.Node, text, value, trailing.Node)
+                Syntax.InternalSyntax.SyntaxFactory.Literal(
+                    leading.Node,
+                    text,
+                    value,
+                    trailing.Node
+                )
             );
         }
 
@@ -880,15 +879,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static SyntaxToken Literal(string text, char value)
         {
             return new SyntaxToken(
-                Syntax
-                    .InternalSyntax
-                    .SyntaxFactory
-                    .Literal(
-                        ElasticMarker.UnderlyingNode,
-                        text,
-                        value,
-                        ElasticMarker.UnderlyingNode
-                    )
+                Syntax.InternalSyntax.SyntaxFactory.Literal(
+                    ElasticMarker.UnderlyingNode,
+                    text,
+                    value,
+                    ElasticMarker.UnderlyingNode
+                )
             );
         }
 
@@ -907,10 +903,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             return new SyntaxToken(
-                Syntax
-                    .InternalSyntax
-                    .SyntaxFactory
-                    .Literal(leading.Node, text, value, trailing.Node)
+                Syntax.InternalSyntax.SyntaxFactory.Literal(
+                    leading.Node,
+                    text,
+                    value,
+                    trailing.Node
+                )
             );
         }
 
@@ -946,10 +944,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             return new SyntaxToken(
-                Syntax
-                    .InternalSyntax
-                    .SyntaxFactory
-                    .XmlTextLiteral(leading.Node, text, value, trailing.Node)
+                Syntax.InternalSyntax.SyntaxFactory.XmlTextLiteral(
+                    leading.Node,
+                    text,
+                    value,
+                    trailing.Node
+                )
             );
         }
 
@@ -968,10 +968,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             return new SyntaxToken(
-                Syntax
-                    .InternalSyntax
-                    .SyntaxFactory
-                    .XmlEntity(leading.Node, text, value, trailing.Node)
+                Syntax.InternalSyntax.SyntaxFactory.XmlEntity(
+                    leading.Node,
+                    text,
+                    value,
+                    trailing.Node
+                )
             );
         }
 
@@ -1047,14 +1049,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 linkText
             );
             return element.WithStartTag(
-                element
-                    .StartTag
-                    .AddAttributes(
-                        XmlTextAttribute(
-                            DocumentationCommentXmlNames.CrefAttributeName,
-                            linkAddress.ToString()
-                        )
+                element.StartTag.AddAttributes(
+                    XmlTextAttribute(
+                        DocumentationCommentXmlNames.CrefAttributeName,
+                        linkAddress.ToString()
                     )
+                )
             );
         }
 
@@ -1530,9 +1530,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             return new SyntaxToken(
-                InternalSyntax
-                    .SyntaxFactory
-                    .XmlTextNewLine(leading.Node, text, value, trailing.Node)
+                InternalSyntax.SyntaxFactory.XmlTextNewLine(
+                    leading.Node,
+                    text,
+                    value,
+                    trailing.Node
+                )
             );
         }
 
@@ -1546,14 +1549,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static SyntaxToken XmlTextNewLine(string text, bool continueXmlDocumentationComment)
         {
             var token = new SyntaxToken(
-                InternalSyntax
-                    .SyntaxFactory
-                    .XmlTextNewLine(
-                        ElasticMarker.UnderlyingNode,
-                        text,
-                        text,
-                        ElasticMarker.UnderlyingNode
-                    )
+                InternalSyntax.SyntaxFactory.XmlTextNewLine(
+                    ElasticMarker.UnderlyingNode,
+                    text,
+                    text,
+                    ElasticMarker.UnderlyingNode
+                )
             );
 
             if (continueXmlDocumentationComment)
@@ -1604,15 +1605,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static SyntaxToken XmlTextLiteral(string text, string value)
         {
             return new SyntaxToken(
-                Syntax
-                    .InternalSyntax
-                    .SyntaxFactory
-                    .XmlTextLiteral(
-                        ElasticMarker.UnderlyingNode,
-                        text,
-                        value,
-                        ElasticMarker.UnderlyingNode
-                    )
+                Syntax.InternalSyntax.SyntaxFactory.XmlTextLiteral(
+                    ElasticMarker.UnderlyingNode,
+                    text,
+                    value,
+                    ElasticMarker.UnderlyingNode
+                )
             );
         }
 

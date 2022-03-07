@@ -22,8 +22,9 @@ namespace System.Reflection.Emit.Tests
                     + "]]"
             };
 
-            string thisAssemblyFullName =
-                typeof(TypeBuilderMakeGenericType).GetTypeInfo().Assembly.FullName;
+            string thisAssemblyFullName = typeof(TypeBuilderMakeGenericType)
+                .GetTypeInfo()
+                .Assembly.FullName;
             yield return new object[]
             {
                 new string[] { "U", "T" },

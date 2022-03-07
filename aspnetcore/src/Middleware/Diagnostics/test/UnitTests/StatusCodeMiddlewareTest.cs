@@ -56,11 +56,9 @@ public class StatusCodeMiddlewareTest
                                         innerAppBuilder.Run(
                                             async (httpContext) =>
                                             {
-                                                await httpContext
-                                                    .Response
-                                                    .WriteAsync(
-                                                        httpContext.Request.QueryString.Value
-                                                    );
+                                                await httpContext.Response.WriteAsync(
+                                                    httpContext.Request.QueryString.Value
+                                                );
                                             }
                                         );
                                     }
@@ -147,18 +145,15 @@ public class StatusCodeMiddlewareTest
                                         innerAppBuilder.Run(
                                             async (httpContext) =>
                                             {
-                                                var statusCodeReExecuteFeature = httpContext
-                                                    .Features
-                                                    .Get<IStatusCodeReExecuteFeature>();
-                                                await httpContext
-                                                    .Response
-                                                    .WriteAsync(
-                                                        httpContext.Request.QueryString.Value
-                                                            + ", "
-                                                            + statusCodeReExecuteFeature.OriginalPath
-                                                            + ", "
-                                                            + statusCodeReExecuteFeature.OriginalQueryString
-                                                    );
+                                                var statusCodeReExecuteFeature =
+                                                    httpContext.Features.Get<IStatusCodeReExecuteFeature>();
+                                                await httpContext.Response.WriteAsync(
+                                                    httpContext.Request.QueryString.Value
+                                                        + ", "
+                                                        + statusCodeReExecuteFeature.OriginalPath
+                                                        + ", "
+                                                        + statusCodeReExecuteFeature.OriginalQueryString
+                                                );
                                             }
                                         );
                                     }
@@ -245,18 +240,15 @@ public class StatusCodeMiddlewareTest
                                         innerAppBuilder.Run(
                                             async (httpContext) =>
                                             {
-                                                var statusCodeReExecuteFeature = httpContext
-                                                    .Features
-                                                    .Get<IStatusCodeReExecuteFeature>();
-                                                await httpContext
-                                                    .Response
-                                                    .WriteAsync(
-                                                        httpContext.Request.QueryString.Value
-                                                            + ", "
-                                                            + statusCodeReExecuteFeature.OriginalPath
-                                                            + ", "
-                                                            + statusCodeReExecuteFeature.OriginalQueryString
-                                                    );
+                                                var statusCodeReExecuteFeature =
+                                                    httpContext.Features.Get<IStatusCodeReExecuteFeature>();
+                                                await httpContext.Response.WriteAsync(
+                                                    httpContext.Request.QueryString.Value
+                                                        + ", "
+                                                        + statusCodeReExecuteFeature.OriginalPath
+                                                        + ", "
+                                                        + statusCodeReExecuteFeature.OriginalQueryString
+                                                );
                                             }
                                         );
                                     }
@@ -333,9 +325,8 @@ public class StatusCodeMiddlewareTest
                                         innerAppBuilder.Run(
                                             httpContext =>
                                             {
-                                                var statusCodeReExecuteFeature = httpContext
-                                                    .Features
-                                                    .Get<IStatusCodeReExecuteFeature>();
+                                                var statusCodeReExecuteFeature =
+                                                    httpContext.Features.Get<IStatusCodeReExecuteFeature>();
 
                                                 Assert.Equal(
                                                     endpoint,

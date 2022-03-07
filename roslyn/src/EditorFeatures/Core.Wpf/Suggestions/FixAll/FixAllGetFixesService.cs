@@ -83,8 +83,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 CodeAction action = null;
                 try
                 {
-                    action = await fixAllContext
-                        .FixAllProvider
+                    action = await fixAllContext.FixAllProvider
                         .GetFixAsync(fixAllContext)
                         .ConfigureAwait(false);
                 }

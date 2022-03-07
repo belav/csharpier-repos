@@ -36,8 +36,7 @@ public abstract class TagHelperDescriptorProviderTestBase
         TagHelperDescriptorProviderContext context
     )
     {
-        var results = context
-            .Results
+        var results = context.Results
             .Where(c => c.AssemblyName != "Microsoft.AspNetCore.Razor.Test.ComponentShim")
             .Where(
                 c =>
@@ -77,12 +76,10 @@ public abstract class TagHelperDescriptorProviderTestBase
                 {
                     return component.Name == fullNameComponent.Name
                         && component.Kind == fullNameComponent.Kind
-                        && component
-                            .BoundAttributes
-                            .SequenceEqual(
-                                fullNameComponent.BoundAttributes,
-                                BoundAttributeDescriptorComparer.Default
-                            );
+                        && component.BoundAttributes.SequenceEqual(
+                            fullNameComponent.BoundAttributes,
+                            BoundAttributeDescriptorComparer.Default
+                        );
                 }
             );
         }

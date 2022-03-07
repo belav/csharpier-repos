@@ -137,8 +137,7 @@ namespace System.CommandLine.Tests
 
                 option.Parents.Select(p => p.Name).Should().BeEquivalentTo("add", "add");
 
-                option
-                    .Parents
+                option.Parents
                     .SelectMany(p => p.Parents)
                     .Select(p => p.Name)
                     .Should()

@@ -961,8 +961,10 @@ namespace System.Xml.Schema
                     );
                     return;
                 }
-                XmlSchemaContentType contentType =
-                    _context.ElementDecl!.ContentValidator!.ContentType;
+                XmlSchemaContentType contentType = _context
+                    .ElementDecl!
+                    .ContentValidator!
+                    .ContentType;
                 switch (contentType)
                 {
                     case XmlSchemaContentType.Empty:
@@ -989,10 +991,11 @@ namespace System.Xml.Schema
                         {
                             break;
                         }
-                        ArrayList? names = _context
-                            .ElementDecl
-                            .ContentValidator
-                            .ExpectedParticles(_context, false, _schemaSet);
+                        ArrayList? names = _context.ElementDecl.ContentValidator.ExpectedParticles(
+                            _context,
+                            false,
+                            _schemaSet
+                        );
                         if (names == null || names.Count == 0)
                         {
                             SendValidationEvent(
@@ -1071,8 +1074,10 @@ namespace System.Xml.Schema
                     );
                 }
 
-                XmlSchemaContentType contentType =
-                    _context.ElementDecl!.ContentValidator!.ContentType;
+                XmlSchemaContentType contentType = _context
+                    .ElementDecl!
+                    .ContentValidator!
+                    .ContentType;
                 switch (contentType)
                 {
                     case XmlSchemaContentType.Empty:
@@ -1218,10 +1223,11 @@ namespace System.Xml.Schema
             }
             if (_context.ElementDecl != null)
             {
-                ArrayList? expected = _context
-                    .ElementDecl
-                    .ContentValidator!
-                    .ExpectedParticles(_context, false, _schemaSet);
+                ArrayList? expected = _context.ElementDecl.ContentValidator!.ExpectedParticles(
+                    _context,
+                    false,
+                    _schemaSet
+                );
                 if (expected != null)
                 {
                     return (expected.ToArray(typeof(XmlSchemaParticle)) as XmlSchemaParticle[])!;
@@ -1341,10 +1347,9 @@ namespace System.Xml.Schema
                             attSchemaInfo.Validity = XmlSchemaValidity.Valid;
                             attSchemaInfo.SchemaType = attdef.SchemaType;
                             attSchemaInfo.SchemaAttribute = attdef.SchemaAttribute;
-                            attrData.RawValue = attSchemaInfo
-                                .XmlType!
-                                .ValueConverter
-                                .ToString(attrValidInfo.typedAttributeValue);
+                            attrData.RawValue = attSchemaInfo.XmlType!.ValueConverter.ToString(
+                                attrValidInfo.typedAttributeValue
+                            );
 
                             attrData.AttInfo = attrValidInfo;
                             defaultAttributes.Add(attrData);
@@ -1471,8 +1476,9 @@ namespace System.Xml.Schema
                 {
                     if (_context.NeedValidateChildren)
                     {
-                        XmlSchemaContentType contentType =
-                            contextElementDecl.ContentValidator!.ContentType;
+                        XmlSchemaContentType contentType = contextElementDecl
+                            .ContentValidator!
+                            .ContentType;
                         switch (contentType)
                         {
                             case XmlSchemaContentType.TextOnly:
@@ -1651,10 +1657,11 @@ namespace System.Xml.Schema
 
                 while (true)
                 {
-                    particle = _context
-                        .ElementDecl
-                        .ContentValidator!
-                        .ValidateElement(head, _context, out errorCode);
+                    particle = _context.ElementDecl.ContentValidator!.ValidateElement(
+                        head,
+                        _context,
+                        out errorCode
+                    );
                     if (particle != null)
                     { //Match found
                         break;
@@ -1778,14 +1785,12 @@ namespace System.Xml.Schema
                     if (declBeforeXsi != null && declBeforeXsi != currentElementDecl)
                     { //There was xsi:type
                         Debug.Assert(currentElementDecl.Datatype != null);
-                        Exception? exception = currentElementDecl
-                            .Datatype
-                            .TryParseValue(
-                                currentElementDecl.DefaultValueRaw,
-                                _nameTable,
-                                _nsResolver,
-                                out typedVal
-                            );
+                        Exception? exception = currentElementDecl.Datatype.TryParseValue(
+                            currentElementDecl.DefaultValueRaw,
+                            _nameTable,
+                            _nsResolver,
+                            out typedVal
+                        );
                         if (exception != null)
                         {
                             SendValidationEvent(
@@ -2665,9 +2670,8 @@ namespace System.Xml.Schema
                 // Have a xsi:type
                 if (beforeXsiDecl.SchemaElement != null)
                 {
-                    XmlSchemaElement xsiElement = (XmlSchemaElement)beforeXsiDecl
-                        .SchemaElement
-                        .Clone(null);
+                    XmlSchemaElement xsiElement =
+                        (XmlSchemaElement)beforeXsiDecl.SchemaElement.Clone(null);
                     xsiElement.SchemaTypeName = XmlQualifiedName.Empty; //Reset typeName on element as this might be different
                     xsiElement.SchemaType = currentDecl.SchemaType;
                     xsiElement.SetElementType(currentDecl.SchemaType);
@@ -2757,8 +2761,9 @@ namespace System.Xml.Schema
                                 {
                                     constraintStructures[j].keyrefTable = new Hashtable();
                                 }
-                                _context.Constr[i].qualifiedTable =
-                                    constraintStructures[j].keyrefTable;
+                                _context.Constr[i].qualifiedTable = constraintStructures[
+                                    j
+                                ].keyrefTable;
                                 break;
                             }
                         }
@@ -2808,9 +2813,10 @@ namespace System.Xml.Schema
                 {
                     // check selector from here
                     if (
-                        constraintStructures[j]
-                            .axisSelector
-                            .MoveToStartElement(localName, namespaceUri)
+                        constraintStructures[j].axisSelector.MoveToStartElement(
+                            localName,
+                            namespaceUri
+                        )
                     )
                     {
                         // selector selects new node, activate a new set of fields
@@ -2818,9 +2824,10 @@ namespace System.Xml.Schema
                         Debug.WriteLine($"Name: {localName}\t|\tURI: {namespaceUri}\n");
 
                         // in which axisFields got updated
-                        constraintStructures[j]
-                            .axisSelector
-                            .PushKS(_positionInfo.LineNumber, _positionInfo.LinePosition);
+                        constraintStructures[j].axisSelector.PushKS(
+                            _positionInfo.LineNumber,
+                            _positionInfo.LinePosition
+                        );
                     }
 
                     // axisFields is not null, but may be empty
@@ -3084,8 +3091,9 @@ namespace System.Xml.Schema
             }
 
             // current level's constraint struct
-            ConstraintStruct[]? vcs =
-                ((ValidationState)(_validationStack[_validationStack.Length - 1])).Constr;
+            ConstraintStruct[]? vcs = (
+                (ValidationState)(_validationStack[_validationStack.Length - 1])
+            ).Constr;
             if (vcs != null)
             {
                 // validating all referencing tables...
@@ -3372,10 +3380,11 @@ namespace System.Xml.Schema
                 if (getParticles)
                 {
                     Debug.Assert(schemaSet != null);
-                    names = context
-                        .ElementDecl
-                        .ContentValidator!
-                        .ExpectedParticles(context, true, schemaSet);
+                    names = context.ElementDecl.ContentValidator!.ExpectedParticles(
+                        context,
+                        true,
+                        schemaSet
+                    );
                 }
                 else
                 {

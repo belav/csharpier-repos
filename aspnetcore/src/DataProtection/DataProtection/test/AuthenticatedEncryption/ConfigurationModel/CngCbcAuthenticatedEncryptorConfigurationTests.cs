@@ -15,10 +15,12 @@ public class CngCbcAuthenticatedEncryptorConfigurationTests
         var configuration = new CngCbcAuthenticatedEncryptorConfiguration();
 
         // Act
-        var masterKey1 =
-            ((CngCbcAuthenticatedEncryptorDescriptor)configuration.CreateNewDescriptor()).MasterKey;
-        var masterKey2 =
-            ((CngCbcAuthenticatedEncryptorDescriptor)configuration.CreateNewDescriptor()).MasterKey;
+        var masterKey1 = (
+            (CngCbcAuthenticatedEncryptorDescriptor)configuration.CreateNewDescriptor()
+        ).MasterKey;
+        var masterKey2 = (
+            (CngCbcAuthenticatedEncryptorDescriptor)configuration.CreateNewDescriptor()
+        ).MasterKey;
 
         // Assert
         SecretAssert.NotEqual(masterKey1, masterKey2);

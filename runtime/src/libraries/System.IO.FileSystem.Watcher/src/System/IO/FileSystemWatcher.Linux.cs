@@ -545,9 +545,10 @@ namespace System.IO
                     // Remove the inotify watch.  This could fail if our state has become inconsistent
                     // with the state of the world (e.g. due to lost events).  So we don't want failures
                     // to throw exceptions, but we do assert to detect coding problems during debugging.
-                    int result = Interop
-                        .Sys
-                        .INotifyRemoveWatch(_inotifyHandle, directoryEntry.WatchDescriptor);
+                    int result = Interop.Sys.INotifyRemoveWatch(
+                        _inotifyHandle,
+                        directoryEntry.WatchDescriptor
+                    );
                     Debug.Assert(result >= 0);
                 }
             }
@@ -805,14 +806,12 @@ namespace System.IO
                                     // for the next event to arrive).
                                     const int MillisecondsTimeout = 2;
                                     Interop.PollEvents events;
-                                    Interop
-                                        .Sys
-                                        .Poll(
-                                            _inotifyHandle,
-                                            Interop.PollEvents.POLLIN,
-                                            MillisecondsTimeout,
-                                            out events
-                                        );
+                                    Interop.Sys.Poll(
+                                        _inotifyHandle,
+                                        Interop.PollEvents.POLLIN,
+                                        MillisecondsTimeout,
+                                        out events
+                                    );
 
                                     // If we error or don't have any signaled handles, send the deleted event
                                     if (events == Interop.PollEvents.POLLNONE)

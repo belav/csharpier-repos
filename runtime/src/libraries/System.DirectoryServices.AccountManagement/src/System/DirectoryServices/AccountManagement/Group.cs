@@ -92,8 +92,11 @@ namespace System.DirectoryServices.AccountManagement
         }
 
         // GroupScope property
-        private GroupScope _groupScope =
-            System.DirectoryServices.AccountManagement.GroupScope.Local; // the actual property value
+        private GroupScope _groupScope = System
+            .DirectoryServices
+            .AccountManagement
+            .GroupScope
+            .Local; // the actual property value
         private LoadState _groupScopeChanged = LoadState.NotSet; // change-tracking
 
         public Nullable<GroupScope> GroupScope
@@ -182,9 +185,10 @@ namespace System.DirectoryServices.AccountManagement
                             "Members: persisted, querying group membership"
                         );
 
-                        BookmarkableResultSet refs = ContextRaw
-                            .QueryCtx
-                            .GetGroupMembership(this, false);
+                        BookmarkableResultSet refs = ContextRaw.QueryCtx.GetGroupMembership(
+                            this,
+                            false
+                        );
                         _members = new PrincipalCollection(refs, this);
                     }
                     else

@@ -114,13 +114,11 @@ internal class ComponentRuntimeNodeWriter : ComponentNodeWriter
         var parameterSeparatorLength = 2;
 
         using (
-            context
-                .CodeWriter
-                .BuildEnhancedLinePragma(
-                    node.Source.Value,
-                    context,
-                    methodInvocation.Length + parameterSeparatorLength
-                )
+            context.CodeWriter.BuildEnhancedLinePragma(
+                node.Source.Value,
+                context,
+                methodInvocation.Length + parameterSeparatorLength
+            )
         )
         {
             // Since we're not in the middle of writing an element, this must evaluate as some
@@ -190,8 +188,7 @@ internal class ComponentRuntimeNodeWriter : ComponentNodeWriter
             throw new ArgumentNullException(nameof(node));
         }
 
-        context
-            .CodeWriter
+        context.CodeWriter
             .WriteStartMethodInvocation(
                 $"{_scopeStack.BuilderVarName}.{ComponentsApi.RenderTreeBuilder.AddMarkupContent}"
             )
@@ -216,8 +213,7 @@ internal class ComponentRuntimeNodeWriter : ComponentNodeWriter
             throw new ArgumentNullException(nameof(node));
         }
 
-        context
-            .CodeWriter
+        context.CodeWriter
             .WriteStartMethodInvocation(
                 $"{_scopeStack.BuilderVarName}.{ComponentsApi.RenderTreeBuilder.OpenElement}"
             )
@@ -259,8 +255,7 @@ internal class ComponentRuntimeNodeWriter : ComponentNodeWriter
             context.RenderNode(child);
         }
 
-        context
-            .CodeWriter
+        context.CodeWriter
             .WriteStartMethodInvocation(
                 $"{_scopeStack.BuilderVarName}.{ComponentsApi.RenderTreeBuilder.CloseElement}"
             )
@@ -297,8 +292,7 @@ internal class ComponentRuntimeNodeWriter : ComponentNodeWriter
 
         if (!string.IsNullOrEmpty(node.EventUpdatesAttributeName))
         {
-            context
-                .CodeWriter
+            context.CodeWriter
                 .WriteStartMethodInvocation(
                     $"{_scopeStack.BuilderVarName}.{ComponentsApi.RenderTreeBuilder.SetUpdatesAttributeName}"
                 )
@@ -356,8 +350,7 @@ internal class ComponentRuntimeNodeWriter : ComponentNodeWriter
             renderApi = ComponentsApi.RenderTreeBuilder.AddMarkupContent;
         }
 
-        context
-            .CodeWriter
+        context.CodeWriter
             .WriteStartMethodInvocation($"{_scopeStack.BuilderVarName}.{renderApi}")
             .Write((_sourceSequence++).ToString(CultureInfo.InvariantCulture))
             .WriteParameterSeparator()
@@ -533,9 +526,9 @@ internal class ComponentRuntimeNodeWriter : ComponentNodeWriter
 
                 if (!string.IsNullOrEmpty(parameter.SeqName))
                 {
-                    context
-                        .CodeWriter
-                        .Write((_sourceSequence++).ToString(CultureInfo.InvariantCulture));
+                    context.CodeWriter.Write(
+                        (_sourceSequence++).ToString(CultureInfo.InvariantCulture)
+                    );
                     context.CodeWriter.Write(", ");
                 }
 
@@ -898,11 +891,9 @@ internal class ComponentRuntimeNodeWriter : ComponentNodeWriter
         // Looks like:
         //
         // _builder.AddMultipleAttributes(2, ...);
-        context
-            .CodeWriter
-            .WriteStartMethodInvocation(
-                $"{_scopeStack.BuilderVarName}.{ComponentsApi.RenderTreeBuilder.AddMultipleAttributes}"
-            );
+        context.CodeWriter.WriteStartMethodInvocation(
+            $"{_scopeStack.BuilderVarName}.{ComponentsApi.RenderTreeBuilder.AddMultipleAttributes}"
+        );
         context.CodeWriter.Write((_sourceSequence++).ToString(CultureInfo.InvariantCulture));
         context.CodeWriter.WriteParameterSeparator();
 
@@ -1042,8 +1033,7 @@ internal class ComponentRuntimeNodeWriter : ComponentNodeWriter
 
     protected override void BeginWriteAttribute(CodeRenderingContext context, string key)
     {
-        context
-            .CodeWriter
+        context.CodeWriter
             .WriteStartMethodInvocation(
                 $"{_scopeStack.BuilderVarName}.{ComponentsApi.RenderTreeBuilder.AddAttribute}"
             )
@@ -1057,11 +1047,9 @@ internal class ComponentRuntimeNodeWriter : ComponentNodeWriter
         IntermediateNode nameExpression
     )
     {
-        context
-            .CodeWriter
-            .WriteStartMethodInvocation(
-                $"{_scopeStack.BuilderVarName}.{ComponentsApi.RenderTreeBuilder.AddAttribute}"
-            );
+        context.CodeWriter.WriteStartMethodInvocation(
+            $"{_scopeStack.BuilderVarName}.{ComponentsApi.RenderTreeBuilder.AddAttribute}"
+        );
         context.CodeWriter.Write((_sourceSequence++).ToString(CultureInfo.InvariantCulture));
         context.CodeWriter.WriteParameterSeparator();
 

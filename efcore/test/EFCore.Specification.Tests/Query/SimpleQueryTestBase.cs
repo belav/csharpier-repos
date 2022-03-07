@@ -32,8 +32,7 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(1, staff.ManagerId);
 
-            var query = context
-                .Appraisals
+            var query = context.Appraisals
                 .Include(ap => ap.Staff)
                 .ThenInclude(s => s.Manager)
                 .Include(ap => ap.Staff)
@@ -513,13 +512,11 @@ namespace Microsoft.EntityFrameworkCore
 
             var currentUserId = 1;
 
-            var currentUserGroupIds = context
-                .Memberships
+            var currentUserGroupIds = context.Memberships
                 .Where(m => m.UserId == currentUserId)
                 .Select(m => m.GroupId);
 
-            var hasMembership = context
-                .Memberships
+            var hasMembership = context.Memberships
                 .Where(m => currentUserGroupIds.Contains(m.GroupId))
                 .Select(m => m.User);
 
@@ -539,13 +536,11 @@ namespace Microsoft.EntityFrameworkCore
 
             var currentUserId = 1;
 
-            var currentUserGroupIds = context
-                .Memberships
+            var currentUserGroupIds = context.Memberships
                 .Where(m => m.UserId == currentUserId)
                 .Select(m => m.Group);
 
-            var hasMembership = context
-                .Memberships
+            var hasMembership = context.Memberships
                 .Where(m => currentUserGroupIds.Contains(m.Group))
                 .Select(m => m.User);
 
@@ -565,19 +560,17 @@ namespace Microsoft.EntityFrameworkCore
 
             var currentUserId = 1;
 
-            var currentUserGroupIds = context
-                .Memberships
+            var currentUserGroupIds = context.Memberships
                 .Where(m => m.UserId == currentUserId)
                 .Select(m => m.GroupId);
 
-            var hasMembership = context
-                .Memberships
+            var hasMembership = context.Memberships
                 .Where(m => currentUserGroupIds.Contains(m.GroupId))
                 .Select(m => m.User);
 
-            var query = context
-                .Users
-                .Select(u => new { HasAccess = hasMembership.Any(e => e == u) });
+            var query = context.Users.Select(
+                u => new { HasAccess = hasMembership.Any(e => e == u) }
+            );
 
             var users = async ? await query.ToListAsync() : query.ToList();
         }

@@ -129,10 +129,9 @@ namespace System.Text.Json.Serialization.Tests
 
             {
                 MemoryStream stream = new MemoryStream(data);
-                ClassWithStringProperties obj =
-                    JsonSerializer
-                        .DeserializeAsync<ClassWithStringProperties>(stream, options)
-                        .Result;
+                ClassWithStringProperties obj = JsonSerializer
+                    .DeserializeAsync<ClassWithStringProperties>(stream, options)
+                    .Result;
 
                 VerifyClassWithStringProperties(obj, stringSize);
 
@@ -143,8 +142,9 @@ namespace System.Text.Json.Serialization.Tests
             {
                 // Verify extension data works with read-ahead. Extension data stored on JsonElement which has a custom converter.
                 MemoryStream stream = new MemoryStream(data);
-                ClassWithExtensionData obj =
-                    JsonSerializer.DeserializeAsync<ClassWithExtensionData>(stream, options).Result;
+                ClassWithExtensionData obj = JsonSerializer
+                    .DeserializeAsync<ClassWithExtensionData>(stream, options)
+                    .Result;
 
                 VerifyExtensionDataStringProperties(obj, stringSize);
 
@@ -187,8 +187,9 @@ namespace System.Text.Json.Serialization.Tests
 
             {
                 MemoryStream stream = new MemoryStream(data);
-                ClassWithNoConverter obj =
-                    JsonSerializer.DeserializeAsync<ClassWithNoConverter>(stream, options).Result;
+                ClassWithNoConverter obj = JsonSerializer
+                    .DeserializeAsync<ClassWithNoConverter>(stream, options)
+                    .Result;
 
                 VerifyClassWithStringProperties(obj.Property1, stringSize);
                 VerifyClassWithStringProperties(obj.Property2, stringSize);
@@ -201,8 +202,9 @@ namespace System.Text.Json.Serialization.Tests
             {
                 // Verify extension data works with read-ahead. Extension data stored on JsonElement which has a custom converter.
                 MemoryStream stream = new MemoryStream(data);
-                ClassWithExtensionData obj =
-                    JsonSerializer.DeserializeAsync<ClassWithExtensionData>(stream, options).Result;
+                ClassWithExtensionData obj = JsonSerializer
+                    .DeserializeAsync<ClassWithExtensionData>(stream, options)
+                    .Result;
                 Assert.NotNull(obj.MyOverflow["Property1"]);
                 Assert.NotNull(obj.MyOverflow["Property2"]);
                 Assert.NotNull(obj.MyOverflow["Property3"]);

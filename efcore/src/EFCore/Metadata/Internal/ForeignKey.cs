@@ -205,11 +205,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IConventionAnnotation? annotation,
             IConventionAnnotation? oldAnnotation
         ) =>
-            Builder
-                .ModelBuilder
-                .Metadata
-                .ConventionDispatcher
-                .OnForeignKeyAnnotationChanged(Builder, name, annotation, oldAnnotation);
+            Builder.ModelBuilder.Metadata.ConventionDispatcher.OnForeignKeyAnnotationChanged(
+                Builder,
+                name,
+                annotation,
+                oldAnnotation
+            );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -254,10 +255,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 UpdatePrincipalKeyConfigurationSource(configurationSource.Value);
             }
 
-            return (IReadOnlyList<Property>)DeclaringEntityType
-                .Model
-                .ConventionDispatcher
-                .OnForeignKeyPropertiesChanged(Builder, oldProperties, oldPrincipalKey)!;
+            return (IReadOnlyList<Property>)DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyPropertiesChanged(
+                Builder,
+                oldProperties,
+                oldPrincipalKey
+            )!;
         }
 
         /// <summary>
@@ -546,10 +548,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
                 if (name == null && configurationSource.OverridesStrictly(oldConfigurationSource))
                 {
-                    DeclaringEntityType
-                        .Model
-                        .ConventionDispatcher
-                        .OnForeignKeyNullNavigationSet(Builder, pointsToPrincipal);
+                    DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyNullNavigationSet(
+                        Builder,
+                        pointsToPrincipal
+                    );
                 }
 
                 return oldNavigation!;
@@ -614,10 +616,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 string? removedNavigationName;
                 if (pointsToPrincipal)
                 {
-                    removedNavigationName = DeclaringEntityType
-                        .Model
-                        .ConventionDispatcher
-                        .OnNavigationRemoved(
+                    removedNavigationName =
+                        DeclaringEntityType.Model.ConventionDispatcher.OnNavigationRemoved(
                             DeclaringEntityType.Builder,
                             PrincipalEntityType.Builder,
                             oldNavigation.Name,
@@ -626,10 +626,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 }
                 else
                 {
-                    removedNavigationName = DeclaringEntityType
-                        .Model
-                        .ConventionDispatcher
-                        .OnNavigationRemoved(
+                    removedNavigationName =
+                        DeclaringEntityType.Model.ConventionDispatcher.OnNavigationRemoved(
                             PrincipalEntityType.Builder,
                             DeclaringEntityType.Builder,
                             oldNavigation.Name,
@@ -639,28 +637,26 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
                 if (navigation == null)
                 {
-                    DeclaringEntityType
-                        .Model
-                        .ConventionDispatcher
-                        .OnForeignKeyNullNavigationSet(Builder, pointsToPrincipal);
+                    DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyNullNavigationSet(
+                        Builder,
+                        pointsToPrincipal
+                    );
                     return oldNavigation.Name == removedNavigationName ? oldNavigation : null;
                 }
             }
 
             if (navigation != null)
             {
-                navigation = (Navigation?)DeclaringEntityType
-                    .Model
-                    .ConventionDispatcher
+                navigation = (Navigation?)DeclaringEntityType.Model.ConventionDispatcher
                     .OnNavigationAdded(navigation.Builder)
                     ?.Metadata;
             }
             else
             {
-                DeclaringEntityType
-                    .Model
-                    .ConventionDispatcher
-                    .OnForeignKeyNullNavigationSet(Builder, pointsToPrincipal);
+                DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyNullNavigationSet(
+                    Builder,
+                    pointsToPrincipal
+                );
             }
 
             return navigation;
@@ -705,16 +701,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             if (unique.HasValue && navigationMember != null)
             {
                 if (
-                    !Internal
-                        .Navigation
-                        .IsCompatible(
-                            PrincipalToDependent!.Name,
-                            navigationMember,
-                            PrincipalEntityType,
-                            DeclaringEntityType,
-                            !unique,
-                            shouldThrow: false
-                        )
+                    !Internal.Navigation.IsCompatible(
+                        PrincipalToDependent!.Name,
+                        navigationMember,
+                        PrincipalEntityType,
+                        DeclaringEntityType,
+                        !unique,
+                        shouldThrow: false
+                    )
                 )
                 {
                     throw new InvalidOperationException(
@@ -731,10 +725,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 unique == null ? null : configurationSource.Max(_isUniqueConfigurationSource);
 
             return IsUnique != oldUnique
-              ? DeclaringEntityType
-                .Model
-                .ConventionDispatcher
-                .OnForeignKeyUniquenessChanged(Builder)
+              ? DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyUniquenessChanged(
+                    Builder
+                )
               : oldUnique;
         }
 
@@ -779,10 +772,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 required == null ? null : configurationSource.Max(_isRequiredConfigurationSource);
 
             return IsRequired != oldRequired
-              ? DeclaringEntityType
-                .Model
-                .ConventionDispatcher
-                .OnForeignKeyRequirednessChanged(Builder)
+              ? DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyRequirednessChanged(
+                    Builder
+                )
               : oldRequired;
         }
 
@@ -850,10 +842,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 required == null ? null : configurationSource.Max(_isRequiredConfigurationSource);
 
             return IsRequiredDependent != oldRequired
-              ? DeclaringEntityType
-                .Model
-                .ConventionDispatcher
-                .OnForeignKeyDependentRequirednessChanged(Builder)
+              ? DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyDependentRequirednessChanged(
+                    Builder
+                )
               : oldRequired;
         }
 
@@ -1168,9 +1159,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
                 var actualProperty = declaringEntityType.FindProperty(property.Name);
                 if (
-                    actualProperty
-                        ?.DeclaringEntityType
-                        .IsAssignableFrom(property.DeclaringEntityType) != true
+                    actualProperty?.DeclaringEntityType.IsAssignableFrom(
+                        property.DeclaringEntityType
+                    ) != true
                     || !property.IsInModel
                 )
                 {
@@ -1243,16 +1234,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             if (
                 navigationToPrincipal != null
-                && !Internal
-                    .Navigation
-                    .IsCompatible(
-                        navigationToPrincipal.Name,
-                        navigationToPrincipal,
-                        dependentEntityType,
-                        principalEntityType,
-                        shouldBeCollection: false,
-                        shouldThrow: shouldThrow
-                    )
+                && !Internal.Navigation.IsCompatible(
+                    navigationToPrincipal.Name,
+                    navigationToPrincipal,
+                    dependentEntityType,
+                    principalEntityType,
+                    shouldBeCollection: false,
+                    shouldThrow: shouldThrow
+                )
             )
             {
                 return false;
@@ -1260,16 +1249,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             if (
                 navigationToDependent != null
-                && !Internal
-                    .Navigation
-                    .IsCompatible(
-                        navigationToDependent.Name,
-                        navigationToDependent,
-                        principalEntityType,
-                        dependentEntityType,
-                        shouldBeCollection: !unique,
-                        shouldThrow: shouldThrow
-                    )
+                && !Internal.Navigation.IsCompatible(
+                    navigationToDependent.Name,
+                    navigationToDependent,
+                    principalEntityType,
+                    dependentEntityType,
+                    shouldBeCollection: !unique,
+                    shouldThrow: shouldThrow
+                )
             )
             {
                 return false;

@@ -312,9 +312,10 @@ namespace Microsoft.EntityFrameworkCore
                 )
             )
             {
-                modelBuilder
-                    .Metadata
-                    .SetValueGenerationStrategy(valueGenerationStrategy, fromDataAnnotation);
+                modelBuilder.Metadata.SetValueGenerationStrategy(
+                    valueGenerationStrategy,
+                    fromDataAnnotation
+                );
                 if (valueGenerationStrategy != SqlServerValueGenerationStrategy.IdentityColumn)
                 {
                     modelBuilder.HasIdentityColumnSeed(null, fromDataAnnotation);
@@ -578,9 +579,9 @@ namespace Microsoft.EntityFrameworkCore
         {
             Check.NotNull(performanceLevel, nameof(performanceLevel));
 
-            modelBuilder
-                .Model
-                .SetPerformanceLevelSql("'" + performanceLevel.Replace("'", "''") + "'");
+            modelBuilder.Model.SetPerformanceLevelSql(
+                "'" + performanceLevel.Replace("'", "''") + "'"
+            );
 
             return modelBuilder;
         }

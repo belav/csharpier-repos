@@ -51,12 +51,10 @@ internal sealed partial class CircuitFactory : ICircuitFactory
         var jsRuntime = (RemoteJSRuntime)scope.ServiceProvider.GetRequiredService<IJSRuntime>();
         jsRuntime.Initialize(client);
 
-        var navigationManager = (RemoteNavigationManager)scope
-            .ServiceProvider
-            .GetRequiredService<NavigationManager>();
-        var navigationInterception = (RemoteNavigationInterception)scope
-            .ServiceProvider
-            .GetRequiredService<INavigationInterception>();
+        var navigationManager =
+            (RemoteNavigationManager)scope.ServiceProvider.GetRequiredService<NavigationManager>();
+        var navigationInterception =
+            (RemoteNavigationInterception)scope.ServiceProvider.GetRequiredService<INavigationInterception>();
         if (client.Connected)
         {
             navigationManager.AttachJsRuntime(jsRuntime);
@@ -69,9 +67,8 @@ internal sealed partial class CircuitFactory : ICircuitFactory
             navigationManager.Initialize(baseUri, uri);
         }
 
-        var appLifetime = scope
-            .ServiceProvider
-            .GetRequiredService<ComponentStatePersistenceManager>();
+        var appLifetime =
+            scope.ServiceProvider.GetRequiredService<ComponentStatePersistenceManager>();
         await appLifetime.RestoreStateAsync(store);
 
         var jsComponentInterop = new CircuitJSComponentInterop(_options);
@@ -85,8 +82,7 @@ internal sealed partial class CircuitFactory : ICircuitFactory
             jsComponentInterop
         );
 
-        var circuitHandlers = scope
-            .ServiceProvider
+        var circuitHandlers = scope.ServiceProvider
             .GetServices<CircuitHandler>()
             .OrderBy(h => h.Order)
             .ToArray();

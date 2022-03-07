@@ -800,10 +800,9 @@ internal static class Extensions
         this ITypeParameterSymbol symbol
     )
     {
-        return ((Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel.TypeParameterSymbol)symbol)
-            .UnderlyingTypeParameterSymbol
-            .AllEffectiveInterfacesNoUseSiteDiagnostics
-            .GetPublicSymbols();
+        return (
+            (Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel.TypeParameterSymbol)symbol
+        ).UnderlyingTypeParameterSymbol.AllEffectiveInterfacesNoUseSiteDiagnostics.GetPublicSymbols();
     }
 
     public static ITypeSymbol GetParameterType(this IMethodSymbol method, int index) =>

@@ -35,28 +35,24 @@ namespace System.Security.AccessControl.Tests
             int errorCode;
             if (
                 0
-                == Utils
-                    .Win32AclLayer
-                    .InitializeAclNative(
-                        verifierBinaryForm,
-                        (uint)rAcl.BinaryLength,
-                        (uint)GenericAcl.AclRevision
-                    )
+                == Utils.Win32AclLayer.InitializeAclNative(
+                    verifierBinaryForm,
+                    (uint)rAcl.BinaryLength,
+                    (uint)GenericAcl.AclRevision
+                )
             )
             {
                 errorCode = Marshal.GetLastWin32Error();
             }
             else if (
                 0
-                == Utils
-                    .Win32AclLayer
-                    .AddAccessAllowedAceExNative(
-                        verifierBinaryForm,
-                        (uint)GenericAcl.AclRevision,
-                        (uint)AceFlags.None,
-                        (uint)1,
-                        sidBinaryForm
-                    )
+                == Utils.Win32AclLayer.AddAccessAllowedAceExNative(
+                    verifierBinaryForm,
+                    (uint)GenericAcl.AclRevision,
+                    (uint)AceFlags.None,
+                    (uint)1,
+                    sidBinaryForm
+                )
             )
             {
                 errorCode = Marshal.GetLastWin32Error();
@@ -81,28 +77,24 @@ namespace System.Security.AccessControl.Tests
 
             if (
                 0
-                == Utils
-                    .Win32AclLayer
-                    .InitializeAclNative(
-                        verifierBinaryForm,
-                        (uint)rAcl.BinaryLength,
-                        (uint)GenericAcl.AclRevision
-                    )
+                == Utils.Win32AclLayer.InitializeAclNative(
+                    verifierBinaryForm,
+                    (uint)rAcl.BinaryLength,
+                    (uint)GenericAcl.AclRevision
+                )
             )
             {
                 errorCode = Marshal.GetLastWin32Error();
             }
             else if (
                 0
-                == Utils
-                    .Win32AclLayer
-                    .AddAccessDeniedAceExNative(
-                        verifierBinaryForm,
-                        (uint)GenericAcl.AclRevision,
-                        (uint)31,
-                        (uint)1,
-                        sidBinaryForm
-                    )
+                == Utils.Win32AclLayer.AddAccessDeniedAceExNative(
+                    verifierBinaryForm,
+                    (uint)GenericAcl.AclRevision,
+                    (uint)31,
+                    (uint)1,
+                    sidBinaryForm
+                )
             )
             {
                 errorCode = Marshal.GetLastWin32Error();
@@ -127,30 +119,26 @@ namespace System.Security.AccessControl.Tests
 
             if (
                 0
-                == Utils
-                    .Win32AclLayer
-                    .InitializeAclNative(
-                        verifierBinaryForm,
-                        (uint)rAcl.BinaryLength,
-                        (uint)GenericAcl.AclRevision
-                    )
+                == Utils.Win32AclLayer.InitializeAclNative(
+                    verifierBinaryForm,
+                    (uint)rAcl.BinaryLength,
+                    (uint)GenericAcl.AclRevision
+                )
             )
             {
                 errorCode = Marshal.GetLastWin32Error();
             }
             else if (
                 0
-                == Utils
-                    .Win32AclLayer
-                    .AddAuditAccessAceExNative(
-                        verifierBinaryForm,
-                        (uint)GenericAcl.AclRevision,
-                        (uint)223,
-                        (uint)1,
-                        sidBinaryForm,
-                        1,
-                        1
-                    )
+                == Utils.Win32AclLayer.AddAuditAccessAceExNative(
+                    verifierBinaryForm,
+                    (uint)GenericAcl.AclRevision,
+                    (uint)223,
+                    (uint)1,
+                    sidBinaryForm,
+                    1,
+                    1
+                )
             )
             {
                 errorCode = Marshal.GetLastWin32Error();
@@ -297,9 +285,11 @@ namespace System.Security.AccessControl.Tests
             int errorCode;
             if (
                 0
-                == Utils
-                    .Win32AclLayer
-                    .InitializeAclNative(verifierBinaryForm, (uint)8, (uint)GenericAcl.AclRevision)
+                == Utils.Win32AclLayer.InitializeAclNative(
+                    verifierBinaryForm,
+                    (uint)8,
+                    (uint)GenericAcl.AclRevision
+                )
             )
             {
                 errorCode = Marshal.GetLastWin32Error();
@@ -352,13 +342,11 @@ namespace System.Security.AccessControl.Tests
 
             if (
                 0
-                == Utils
-                    .Win32AclLayer
-                    .InitializeAclNative(
-                        verifierBinaryForm,
-                        (uint)rAcl.BinaryLength,
-                        (uint)GenericAcl.AclRevision
-                    )
+                == Utils.Win32AclLayer.InitializeAclNative(
+                    verifierBinaryForm,
+                    (uint)rAcl.BinaryLength,
+                    (uint)GenericAcl.AclRevision
+                )
             )
             {
                 errorCode = Marshal.GetLastWin32Error();
@@ -370,15 +358,13 @@ namespace System.Security.AccessControl.Tests
                 {
                     if (
                         0
-                        == Utils
-                            .Win32AclLayer
-                            .AddAccessAllowedAceExNative(
-                                verifierBinaryForm,
-                                (uint)GenericAcl.AclRevision,
-                                (uint)AceFlags.None,
-                                (uint)i,
-                                sidBinaryForm
-                            )
+                        == Utils.Win32AclLayer.AddAccessAllowedAceExNative(
+                            verifierBinaryForm,
+                            (uint)GenericAcl.AclRevision,
+                            (uint)AceFlags.None,
+                            (uint)i,
+                            sidBinaryForm
+                        )
                     )
                     {
                         errorCode = Marshal.GetLastWin32Error();
@@ -386,17 +372,15 @@ namespace System.Security.AccessControl.Tests
                     }
                     if (
                         0
-                        == Utils
-                            .Win32AclLayer
-                            .AddAuditAccessAceExNative(
-                                verifierBinaryForm,
-                                (uint)GenericAcl.AclRevision,
-                                (uint)223,
-                                (uint)(i + 1),
-                                sidBinaryForm,
-                                1,
-                                1
-                            )
+                        == Utils.Win32AclLayer.AddAuditAccessAceExNative(
+                            verifierBinaryForm,
+                            (uint)GenericAcl.AclRevision,
+                            (uint)223,
+                            (uint)(i + 1),
+                            sidBinaryForm,
+                            1,
+                            1
+                        )
                     )
                     {
                         errorCode = Marshal.GetLastWin32Error();
@@ -404,15 +388,13 @@ namespace System.Security.AccessControl.Tests
                     }
                     if (
                         0
-                        == Utils
-                            .Win32AclLayer
-                            .AddAccessDeniedAceExNative(
-                                verifierBinaryForm,
-                                (uint)GenericAcl.AclRevision,
-                                (uint)31,
-                                (uint)(i + 2),
-                                sidBinaryForm
-                            )
+                        == Utils.Win32AclLayer.AddAccessDeniedAceExNative(
+                            verifierBinaryForm,
+                            (uint)GenericAcl.AclRevision,
+                            (uint)31,
+                            (uint)(i + 2),
+                            sidBinaryForm
+                        )
                     )
                     {
                         errorCode = Marshal.GetLastWin32Error();

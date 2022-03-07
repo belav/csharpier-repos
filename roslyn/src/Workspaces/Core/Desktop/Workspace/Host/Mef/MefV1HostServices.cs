@@ -32,8 +32,10 @@ namespace Microsoft.CodeAnalysis.Host.Mef
         private readonly ExportProvider _exportProvider;
 
         // accumulated cache for exports
-        private ImmutableDictionary<ExportKey, IEnumerable> _exportsMap =
-            ImmutableDictionary<ExportKey, IEnumerable>.Empty;
+        private ImmutableDictionary<ExportKey, IEnumerable> _exportsMap = ImmutableDictionary<
+            ExportKey,
+            IEnumerable
+        >.Empty;
 
         private MefV1HostServices(ExportProvider exportProvider)
         {

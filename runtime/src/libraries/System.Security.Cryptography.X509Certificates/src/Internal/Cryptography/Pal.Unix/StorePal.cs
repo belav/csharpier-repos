@@ -178,9 +178,10 @@ namespace Internal.Cryptography.Pal
             if (storeLocation == StoreLocation.CurrentUser)
             {
                 if (
-                    X509Store
-                        .DisallowedStoreName
-                        .Equals(storeName, StringComparison.OrdinalIgnoreCase)
+                    X509Store.DisallowedStoreName.Equals(
+                        storeName,
+                        StringComparison.OrdinalIgnoreCase
+                    )
                 )
                 {
                     return DirectoryBasedStoreProvider.OpenDisallowedStore(openFlags);
@@ -211,9 +212,10 @@ namespace Internal.Cryptography.Pal
             }
 
             if (
-                X509Store
-                    .IntermediateCAStoreName
-                    .Equals(storeName, StringComparison.OrdinalIgnoreCase)
+                X509Store.IntermediateCAStoreName.Equals(
+                    storeName,
+                    StringComparison.OrdinalIgnoreCase
+                )
             )
             {
                 return CachedSystemStoreProvider.MachineIntermediate;

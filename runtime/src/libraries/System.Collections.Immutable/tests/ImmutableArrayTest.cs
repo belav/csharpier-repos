@@ -3276,8 +3276,9 @@ namespace System.Collections.Immutable.Tests
             //
             // That leaves precious few candidates for which field is the "array" field...
             //
-            T[] underlyingArray =
-                Unsafe.As<ImmutableArray<T>, ImmutableArrayLayout<T>>(ref array).array;
+            T[] underlyingArray = Unsafe
+                .As<ImmutableArray<T>, ImmutableArrayLayout<T>>(ref array)
+                .array;
             if (underlyingArray != null && !(((object)underlyingArray) is T[]))
                 throw new Exception(
                     "ImmutableArrayTest.GetUnderlyingArray's sneaky trick of getting the underlying array out is no longer valid. This helper needs to be updated or scrapped."

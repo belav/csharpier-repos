@@ -27,14 +27,12 @@ namespace Castle.DynamicProxy.Tests.BugsReported
         [Test]
         public void TestCase()
         {
-            generator
-                .ProxyBuilder
-                .CreateInterfaceProxyTypeWithTarget(
-                    typeof(IPresentationHost),
-                    Type.EmptyTypes,
-                    typeof(PresentationHost),
-                    ProxyGenerationOptions.Default
-                );
+            generator.ProxyBuilder.CreateInterfaceProxyTypeWithTarget(
+                typeof(IPresentationHost),
+                Type.EmptyTypes,
+                typeof(PresentationHost),
+                ProxyGenerationOptions.Default
+            );
 
             IServiceAgent agent =
                 (IServiceAgent)generator.CreateInterfaceProxyWithTarget<IServiceAgent>(

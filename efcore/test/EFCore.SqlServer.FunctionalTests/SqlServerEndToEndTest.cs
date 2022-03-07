@@ -712,22 +712,21 @@ namespace Microsoft.EntityFrameworkCore
                 db.Entry(toUpdate).State = EntityState.Modified;
                 db.Entry(toDelete).State = EntityState.Deleted;
 
-                var toAdd =
-                    db.Add(
-                        new Blog
-                        {
-                            Name = "Blog to Insert",
-                            George = true,
-                            TheGu = new Guid("0456AEF1-B7FC-47AA-8102-975D6BA3A9BF"),
-                            NotFigTime = new DateTime(1973, 9, 3, 0, 10, 33, 777),
-                            ToEat = 64,
-                            OrNothing = 0.123456789,
-                            Fuse = 777,
-                            WayRound = 9876543210,
-                            Away = 0.12345f,
-                            AndChew = new byte[16]
-                        }
-                    ).Entity;
+                var toAdd = db.Add(
+                    new Blog
+                    {
+                        Name = "Blog to Insert",
+                        George = true,
+                        TheGu = new Guid("0456AEF1-B7FC-47AA-8102-975D6BA3A9BF"),
+                        NotFigTime = new DateTime(1973, 9, 3, 0, 10, 33, 777),
+                        ToEat = 64,
+                        OrNothing = 0.123456789,
+                        Fuse = 777,
+                        WayRound = 9876543210,
+                        Away = 0.12345f,
+                        AndChew = new byte[16]
+                    }
+                ).Entity;
 
                 await db.SaveChangesAsync();
 
@@ -778,24 +777,23 @@ namespace Microsoft.EntityFrameworkCore
             {
                 var blogs = await CreateBlogDatabaseAsync<Blog>(db);
 
-                var toAdd =
-                    db.Blogs
-                        .Add(
-                            new Blog
-                            {
-                                Name = "Blog to Insert",
-                                George = true,
-                                TheGu = new Guid("0456AEF1-B7FC-47AA-8102-975D6BA3A9BF"),
-                                NotFigTime = new DateTime(1973, 9, 3, 0, 10, 33, 777),
-                                ToEat = 64,
-                                OrNothing = 0.123456789,
-                                Fuse = 777,
-                                WayRound = 9876543210,
-                                Away = 0.12345f,
-                                AndChew = new byte[16]
-                            }
-                        )
-                        .Entity;
+                var toAdd = db.Blogs
+                    .Add(
+                        new Blog
+                        {
+                            Name = "Blog to Insert",
+                            George = true,
+                            TheGu = new Guid("0456AEF1-B7FC-47AA-8102-975D6BA3A9BF"),
+                            NotFigTime = new DateTime(1973, 9, 3, 0, 10, 33, 777),
+                            ToEat = 64,
+                            OrNothing = 0.123456789,
+                            Fuse = 777,
+                            WayRound = 9876543210,
+                            Away = 0.12345f,
+                            AndChew = new byte[16]
+                        }
+                    )
+                    .Entity;
                 db.Entry(toAdd).State = EntityState.Detached;
 
                 var toUpdate = blogs[0];
@@ -843,8 +841,7 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = new GameDbContext(options))
             {
-                var character = context
-                    .Characters
+                var character = context.Characters
                     .Include(c => c.Level.Game)
                     .OrderBy(c => c.Id)
                     .First();
@@ -875,8 +872,7 @@ namespace Microsoft.EntityFrameworkCore
             var expectedCId = 0;
             using (var context = new SomeDbContext(options))
             {
-                var entityA = context
-                    .EntitiesA
+                var entityA = context.EntitiesA
                     .Include(x => x.EntityB)
                     .ThenInclude(x => x.EntitiesC)
                     .OrderBy(x => x.Id)
@@ -891,8 +887,7 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = new SomeDbContext(options))
             {
-                var entityA = context
-                    .EntitiesA
+                var entityA = context.EntitiesA
                     .Include(x => x.EntityB)
                     .ThenInclude(x => x.EntitiesC)
                     .OrderBy(x => x.Id)
@@ -1044,8 +1039,7 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = new GameDbContext(options))
             {
-                var player = context
-                    .Characters
+                var player = context.Characters
                     .Include(p => p.CurrentWeapon)
                     .AsNoTracking()
                     .Single();
@@ -1371,52 +1365,50 @@ namespace Microsoft.EntityFrameworkCore
         {
             context.Database.EnsureCreatedResiliently();
 
-            var blog1 =
-                context
-                    .Add(
-                        new TBlog
-                        {
-                            Name = "Blog1",
-                            George = true,
-                            TheGu = new Guid("0456AEF1-B7FC-47AA-8102-975D6BA3A9BF"),
-                            NotFigTime = new DateTime(1973, 9, 3, 0, 10, 33, 777),
-                            ToEat = 64,
-                            CupOfChar = 'C',
-                            OrNothing = 0.123456789,
-                            Fuse = 777,
-                            WayRound = 9876543210,
-                            NotToEat = -64,
-                            Away = 0.12345f,
-                            OrULong = 888,
-                            OrUSkint = 8888888,
-                            OrUShort = 888888888888888,
-                            AndChew = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }
-                        }
-                    )
-                    .Entity;
-            var blog2 =
-                context
-                    .Add(
-                        new TBlog
-                        {
-                            Name = "Blog2",
-                            George = false,
-                            TheGu = new Guid("0456AEF1-B7FC-47AA-8102-975D6BA3A9CF"),
-                            NotFigTime = new DateTime(1973, 9, 3, 0, 10, 33, 778),
-                            ToEat = 65,
-                            CupOfChar = 'D',
-                            OrNothing = 0.987654321,
-                            Fuse = 778,
-                            WayRound = 98765432100,
-                            NotToEat = -64,
-                            Away = 0.12345f,
-                            OrULong = 888,
-                            OrUSkint = 8888888,
-                            OrUShort = 888888888888888,
-                            AndChew = new byte[16]
-                        }
-                    )
-                    .Entity;
+            var blog1 = context
+                .Add(
+                    new TBlog
+                    {
+                        Name = "Blog1",
+                        George = true,
+                        TheGu = new Guid("0456AEF1-B7FC-47AA-8102-975D6BA3A9BF"),
+                        NotFigTime = new DateTime(1973, 9, 3, 0, 10, 33, 777),
+                        ToEat = 64,
+                        CupOfChar = 'C',
+                        OrNothing = 0.123456789,
+                        Fuse = 777,
+                        WayRound = 9876543210,
+                        NotToEat = -64,
+                        Away = 0.12345f,
+                        OrULong = 888,
+                        OrUSkint = 8888888,
+                        OrUShort = 888888888888888,
+                        AndChew = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }
+                    }
+                )
+                .Entity;
+            var blog2 = context
+                .Add(
+                    new TBlog
+                    {
+                        Name = "Blog2",
+                        George = false,
+                        TheGu = new Guid("0456AEF1-B7FC-47AA-8102-975D6BA3A9CF"),
+                        NotFigTime = new DateTime(1973, 9, 3, 0, 10, 33, 778),
+                        ToEat = 65,
+                        CupOfChar = 'D',
+                        OrNothing = 0.987654321,
+                        Fuse = 778,
+                        WayRound = 98765432100,
+                        NotToEat = -64,
+                        Away = 0.12345f,
+                        OrULong = 888,
+                        OrUSkint = 8888888,
+                        OrUShort = 888888888888888,
+                        AndChew = new byte[16]
+                    }
+                )
+                .Entity;
             await context.SaveChangesAsync();
 
             return new[] { blog1, blog2 };

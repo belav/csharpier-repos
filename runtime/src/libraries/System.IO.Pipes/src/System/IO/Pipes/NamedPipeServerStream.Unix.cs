@@ -111,8 +111,7 @@ namespace System.IO.Pipes
                     );
                 try
                 {
-                    acceptedSocket = await _instance!
-                        .ListeningSocket
+                    acceptedSocket = await _instance!.ListeningSocket
                         .AcceptAsync(linkedTokenSource.Token)
                         .ConfigureAwait(false);
                 }

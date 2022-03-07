@@ -122,10 +122,9 @@ namespace Microsoft.CodeAnalysis.CommandLine
             {
                 // Register encodings for console
                 // https://github.com/dotnet/roslyn/issues/10785
-                System
-                    .Text
-                    .Encoding
-                    .RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+                System.Text.Encoding.RegisterProvider(
+                    System.Text.CodePagesEncodingProvider.Instance
+                );
             }
 
             var client = new BuildClient(language, compileFunc, compileOnServerFunc);
@@ -226,9 +225,7 @@ namespace Microsoft.CodeAnalysis.CommandLine
                 ProfileOptimization.SetProfileRoot(profileRoot);
                 ProfileOptimization.StartProfile(profileName);
 #else
-                AssemblyLoadContext
-                    .Default
-                    .SetProfileOptimizationRoot(profileRoot);
+                AssemblyLoadContext.Default.SetProfileOptimizationRoot(profileRoot);
                 AssemblyLoadContext.Default.StartProfileOptimization(profileName);
 #endif
             }

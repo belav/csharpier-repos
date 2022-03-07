@@ -297,16 +297,19 @@ namespace System
             {
                 case StringComparison.CurrentCulture:
                 case StringComparison.CurrentCultureIgnoreCase:
-                    return CultureInfo
-                        .CurrentCulture
-                        .CompareInfo
-                        .Compare(strA, strB, GetCaseCompareOfComparisonCulture(comparisonType));
+                    return CultureInfo.CurrentCulture.CompareInfo.Compare(
+                        strA,
+                        strB,
+                        GetCaseCompareOfComparisonCulture(comparisonType)
+                    );
 
                 case StringComparison.InvariantCulture:
                 case StringComparison.InvariantCultureIgnoreCase:
-                    return CompareInfo
-                        .Invariant
-                        .Compare(strA, strB, GetCaseCompareOfComparisonCulture(comparisonType));
+                    return CompareInfo.Invariant.Compare(
+                        strA,
+                        strB,
+                        GetCaseCompareOfComparisonCulture(comparisonType)
+                    );
 
                 case StringComparison.Ordinal:
                     // Most common case: first character is different.
@@ -413,10 +416,15 @@ namespace System
             }
 
             CompareOptions options = ignoreCase ? CompareOptions.IgnoreCase : CompareOptions.None;
-            return CultureInfo
-                .CurrentCulture
-                .CompareInfo
-                .Compare(strA, indexA, lengthA, strB, indexB, lengthB, options);
+            return CultureInfo.CurrentCulture.CompareInfo.Compare(
+                strA,
+                indexA,
+                lengthA,
+                strB,
+                indexB,
+                lengthB,
+                options
+            );
         }
 
         // Determines whether two string regions match.  The substring of strA beginning
@@ -466,9 +474,15 @@ namespace System
                 lengthB = Math.Min(lengthB, strB.Length - indexB);
             }
 
-            return compareCulture
-                .CompareInfo
-                .Compare(strA, indexA, lengthA, strB, indexB, lengthB, options);
+            return compareCulture.CompareInfo.Compare(
+                strA,
+                indexA,
+                lengthA,
+                strB,
+                indexB,
+                lengthB,
+                options
+            );
         }
 
         public static int Compare(
@@ -525,32 +539,27 @@ namespace System
             {
                 case StringComparison.CurrentCulture:
                 case StringComparison.CurrentCultureIgnoreCase:
-                    return CultureInfo
-                        .CurrentCulture
-                        .CompareInfo
-                        .Compare(
-                            strA,
-                            indexA,
-                            lengthA,
-                            strB,
-                            indexB,
-                            lengthB,
-                            GetCaseCompareOfComparisonCulture(comparisonType)
-                        );
+                    return CultureInfo.CurrentCulture.CompareInfo.Compare(
+                        strA,
+                        indexA,
+                        lengthA,
+                        strB,
+                        indexB,
+                        lengthB,
+                        GetCaseCompareOfComparisonCulture(comparisonType)
+                    );
 
                 case StringComparison.InvariantCulture:
                 case StringComparison.InvariantCultureIgnoreCase:
-                    return CompareInfo
-                        .Invariant
-                        .Compare(
-                            strA,
-                            indexA,
-                            lengthA,
-                            strB,
-                            indexB,
-                            lengthB,
-                            GetCaseCompareOfComparisonCulture(comparisonType)
-                        );
+                    return CompareInfo.Invariant.Compare(
+                        strA,
+                        indexA,
+                        lengthA,
+                        strB,
+                        indexB,
+                        lengthB,
+                        GetCaseCompareOfComparisonCulture(comparisonType)
+                    );
 
                 case StringComparison.Ordinal:
                     return CompareOrdinalHelper(strA, indexA, lengthA, strB, indexB, lengthB);
@@ -718,16 +727,19 @@ namespace System
             {
                 case StringComparison.CurrentCulture:
                 case StringComparison.CurrentCultureIgnoreCase:
-                    return CultureInfo
-                        .CurrentCulture
-                        .CompareInfo
-                        .IsSuffix(this, value, GetCaseCompareOfComparisonCulture(comparisonType));
+                    return CultureInfo.CurrentCulture.CompareInfo.IsSuffix(
+                        this,
+                        value,
+                        GetCaseCompareOfComparisonCulture(comparisonType)
+                    );
 
                 case StringComparison.InvariantCulture:
                 case StringComparison.InvariantCultureIgnoreCase:
-                    return CompareInfo
-                        .Invariant
-                        .IsSuffix(this, value, GetCaseCompareOfComparisonCulture(comparisonType));
+                    return CompareInfo.Invariant.IsSuffix(
+                        this,
+                        value,
+                        GetCaseCompareOfComparisonCulture(comparisonType)
+                    );
 
                 case StringComparison.Ordinal:
                     int offset = this.Length - value.Length;
@@ -770,13 +782,11 @@ namespace System
             }
 
             CultureInfo referenceCulture = culture ?? CultureInfo.CurrentCulture;
-            return referenceCulture
-                .CompareInfo
-                .IsSuffix(
-                    this,
-                    value,
-                    ignoreCase ? CompareOptions.IgnoreCase : CompareOptions.None
-                );
+            return referenceCulture.CompareInfo.IsSuffix(
+                this,
+                value,
+                ignoreCase ? CompareOptions.IgnoreCase : CompareOptions.None
+            );
         }
 
         public bool EndsWith(char value)
@@ -837,18 +847,19 @@ namespace System
             {
                 case StringComparison.CurrentCulture:
                 case StringComparison.CurrentCultureIgnoreCase:
-                    return CultureInfo
-                            .CurrentCulture
-                            .CompareInfo
-                            .Compare(this, value, GetCaseCompareOfComparisonCulture(comparisonType))
-                        == 0;
+                    return CultureInfo.CurrentCulture.CompareInfo.Compare(
+                            this,
+                            value,
+                            GetCaseCompareOfComparisonCulture(comparisonType)
+                        ) == 0;
 
                 case StringComparison.InvariantCulture:
                 case StringComparison.InvariantCultureIgnoreCase:
-                    return CompareInfo
-                            .Invariant
-                            .Compare(this, value, GetCaseCompareOfComparisonCulture(comparisonType))
-                        == 0;
+                    return CompareInfo.Invariant.Compare(
+                            this,
+                            value,
+                            GetCaseCompareOfComparisonCulture(comparisonType)
+                        ) == 0;
 
                 case StringComparison.Ordinal:
                     if (this.Length != value.Length)
@@ -903,16 +914,19 @@ namespace System
             {
                 case StringComparison.CurrentCulture:
                 case StringComparison.CurrentCultureIgnoreCase:
-                    return CultureInfo
-                            .CurrentCulture
-                            .CompareInfo
-                            .Compare(a, b, GetCaseCompareOfComparisonCulture(comparisonType)) == 0;
+                    return CultureInfo.CurrentCulture.CompareInfo.Compare(
+                            a,
+                            b,
+                            GetCaseCompareOfComparisonCulture(comparisonType)
+                        ) == 0;
 
                 case StringComparison.InvariantCulture:
                 case StringComparison.InvariantCultureIgnoreCase:
-                    return CompareInfo
-                            .Invariant
-                            .Compare(a, b, GetCaseCompareOfComparisonCulture(comparisonType)) == 0;
+                    return CompareInfo.Invariant.Compare(
+                            a,
+                            b,
+                            GetCaseCompareOfComparisonCulture(comparisonType)
+                        ) == 0;
 
                 case StringComparison.Ordinal:
                     if (a.Length != b.Length)
@@ -997,16 +1011,17 @@ namespace System
             {
                 case StringComparison.CurrentCulture:
                 case StringComparison.CurrentCultureIgnoreCase:
-                    return CultureInfo
-                        .CurrentCulture
-                        .CompareInfo
-                        .GetHashCode(value, GetCaseCompareOfComparisonCulture(comparisonType));
+                    return CultureInfo.CurrentCulture.CompareInfo.GetHashCode(
+                        value,
+                        GetCaseCompareOfComparisonCulture(comparisonType)
+                    );
 
                 case StringComparison.InvariantCulture:
                 case StringComparison.InvariantCultureIgnoreCase:
-                    return CompareInfo
-                        .Invariant
-                        .GetHashCode(value, GetCaseCompareOfComparisonCulture(comparisonType));
+                    return CompareInfo.Invariant.GetHashCode(
+                        value,
+                        GetCaseCompareOfComparisonCulture(comparisonType)
+                    );
 
                 case StringComparison.Ordinal:
                     return GetHashCode(value);
@@ -1216,16 +1231,19 @@ namespace System
             {
                 case StringComparison.CurrentCulture:
                 case StringComparison.CurrentCultureIgnoreCase:
-                    return CultureInfo
-                        .CurrentCulture
-                        .CompareInfo
-                        .IsPrefix(this, value, GetCaseCompareOfComparisonCulture(comparisonType));
+                    return CultureInfo.CurrentCulture.CompareInfo.IsPrefix(
+                        this,
+                        value,
+                        GetCaseCompareOfComparisonCulture(comparisonType)
+                    );
 
                 case StringComparison.InvariantCulture:
                 case StringComparison.InvariantCultureIgnoreCase:
-                    return CompareInfo
-                        .Invariant
-                        .IsPrefix(this, value, GetCaseCompareOfComparisonCulture(comparisonType));
+                    return CompareInfo.Invariant.IsPrefix(
+                        this,
+                        value,
+                        GetCaseCompareOfComparisonCulture(comparisonType)
+                    );
 
                 case StringComparison.Ordinal:
                     if (this.Length < value.Length || _firstChar != value._firstChar)
@@ -1273,13 +1291,11 @@ namespace System
             }
 
             CultureInfo referenceCulture = culture ?? CultureInfo.CurrentCulture;
-            return referenceCulture
-                .CompareInfo
-                .IsPrefix(
-                    this,
-                    value,
-                    ignoreCase ? CompareOptions.IgnoreCase : CompareOptions.None
-                );
+            return referenceCulture.CompareInfo.IsPrefix(
+                this,
+                value,
+                ignoreCase ? CompareOptions.IgnoreCase : CompareOptions.None
+            );
         }
 
         public bool StartsWith(char value) => Length != 0 && _firstChar == value;

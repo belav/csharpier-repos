@@ -38,8 +38,9 @@ public class HealthChecksBuilderTest
         var serviceProvider = services.BuildServiceProvider();
 
         // Act
-        var options =
-            serviceProvider.GetRequiredService<IOptions<HealthCheckServiceOptions>>().Value;
+        var options = serviceProvider
+            .GetRequiredService<IOptions<HealthCheckServiceOptions>>()
+            .Value;
 
         // Assert
         var registration = Assert.Single(options.Registrations);
@@ -65,8 +66,9 @@ public class HealthChecksBuilderTest
         var serviceProvider = services.BuildServiceProvider();
 
         // Act
-        var options =
-            serviceProvider.GetRequiredService<IOptions<HealthCheckServiceOptions>>().Value;
+        var options = serviceProvider
+            .GetRequiredService<IOptions<HealthCheckServiceOptions>>()
+            .Value;
 
         // Assert
         var registration = Assert.Single(options.Registrations);
@@ -95,8 +97,9 @@ public class HealthChecksBuilderTest
         var serviceProvider = services.BuildServiceProvider();
 
         // Act
-        var options =
-            serviceProvider.GetRequiredService<IOptions<HealthCheckServiceOptions>>().Value;
+        var options = serviceProvider
+            .GetRequiredService<IOptions<HealthCheckServiceOptions>>()
+            .Value;
 
         // Assert
         var registration = Assert.Single(options.Registrations);
@@ -123,8 +126,9 @@ public class HealthChecksBuilderTest
         var serviceProvider = services.BuildServiceProvider();
 
         // Act
-        var options =
-            serviceProvider.GetRequiredService<IOptions<HealthCheckServiceOptions>>().Value;
+        var options = serviceProvider
+            .GetRequiredService<IOptions<HealthCheckServiceOptions>>()
+            .Value;
 
         // Assert
         var registration = Assert.Single(options.Registrations);
@@ -156,8 +160,9 @@ public class HealthChecksBuilderTest
         var serviceProvider = services.BuildServiceProvider();
 
         // Act
-        var options =
-            serviceProvider.GetRequiredService<IOptions<HealthCheckServiceOptions>>().Value;
+        var options = serviceProvider
+            .GetRequiredService<IOptions<HealthCheckServiceOptions>>()
+            .Value;
 
         // Assert
         var registration = Assert.Single(options.Registrations);
@@ -186,8 +191,9 @@ public class HealthChecksBuilderTest
         var serviceProvider = services.BuildServiceProvider();
 
         // Act
-        var options =
-            serviceProvider.GetRequiredService<IOptions<HealthCheckServiceOptions>>().Value;
+        var options = serviceProvider
+            .GetRequiredService<IOptions<HealthCheckServiceOptions>>()
+            .Value;
 
         // Assert
         var registration = Assert.Single(options.Registrations);
@@ -216,8 +222,9 @@ public class HealthChecksBuilderTest
         var serviceProvider = services.BuildServiceProvider();
 
         // Act
-        var options =
-            serviceProvider.GetRequiredService<IOptions<HealthCheckServiceOptions>>().Value;
+        var options = serviceProvider
+            .GetRequiredService<IOptions<HealthCheckServiceOptions>>()
+            .Value;
 
         // Assert
         var registration = Assert.Single(options.Registrations);
@@ -246,8 +253,9 @@ public class HealthChecksBuilderTest
         var serviceProvider = services.BuildServiceProvider();
 
         // Act
-        var options =
-            serviceProvider.GetRequiredService<IOptions<HealthCheckServiceOptions>>().Value;
+        var options = serviceProvider
+            .GetRequiredService<IOptions<HealthCheckServiceOptions>>()
+            .Value;
 
         // Assert
         var registration = Assert.Single(options.Registrations);

@@ -206,9 +206,8 @@ namespace BasicApi
             )
             {
                 using (
-                    var dbContext = serviceScope
-                        .ServiceProvider
-                        .GetRequiredService<BasicApiContext>()
+                    var dbContext =
+                        serviceScope.ServiceProvider.GetRequiredService<BasicApiContext>()
                 )
                 {
 #if GENERATE_SQL_SCRIPTS
@@ -221,9 +220,7 @@ namespace BasicApi
                     Console.WriteLine(script);
 #endif
 
-                    dbContext
-                        .Database
-                        .Migrate();
+                    dbContext.Database.Migrate();
                 }
             }
         }
@@ -236,9 +233,8 @@ namespace BasicApi
             )
             {
                 using (
-                    var dbContext = serviceScope
-                        .ServiceProvider
-                        .GetRequiredService<BasicApiContext>()
+                    var dbContext =
+                        serviceScope.ServiceProvider.GetRequiredService<BasicApiContext>()
                 )
                 {
 #if GENERATE_SQL_SCRIPTS
@@ -251,9 +247,7 @@ namespace BasicApi
                     Console.WriteLine(script);
 #endif
 
-                    dbContext
-                        .Database
-                        .EnsureDeleted();
+                    dbContext.Database.EnsureDeleted();
                 }
             }
         }
@@ -265,9 +259,8 @@ namespace BasicApi
             )
             {
                 using (
-                    var dbContext = serviceScope
-                        .ServiceProvider
-                        .GetRequiredService<BasicApiContext>()
+                    var dbContext =
+                        serviceScope.ServiceProvider.GetRequiredService<BasicApiContext>()
                 )
                 {
                     var migrator = dbContext.GetService<IMigrator>();

@@ -397,8 +397,9 @@ namespace System.Web.Http.Tracing.Tracers
             };
             mockParamDescriptor.Setup(d => d.ParameterName).Returns("paramName");
             mockParamDescriptor.Setup(d => d.ParameterType).Returns(typeof(string));
-            HttpParameterBinding expectedInner =
-                new Mock<HttpParameterBinding>(mockParamDescriptor.Object).Object;
+            HttpParameterBinding expectedInner = new Mock<HttpParameterBinding>(
+                mockParamDescriptor.Object
+            ).Object;
             HttpParameterBindingTracer productUnderTest = new HttpParameterBindingTracer(
                 expectedInner,
                 new TestTraceWriter()
@@ -421,8 +422,9 @@ namespace System.Web.Http.Tracing.Tracers
             };
             mockParamDescriptor.Setup(d => d.ParameterName).Returns("paramName");
             mockParamDescriptor.Setup(d => d.ParameterType).Returns(typeof(string));
-            HttpParameterBinding expectedInner =
-                new Mock<HttpParameterBinding>(mockParamDescriptor.Object).Object;
+            HttpParameterBinding expectedInner = new Mock<HttpParameterBinding>(
+                mockParamDescriptor.Object
+            ).Object;
             HttpParameterBindingTracer productUnderTest = new HttpParameterBindingTracer(
                 expectedInner,
                 new TestTraceWriter()

@@ -450,9 +450,9 @@ namespace MS.Internal.Xml.Cache
                 // Virtualize collapsed text nodes
                 _pageParent = _pageCurrent;
                 _idxParent = _idxCurrent;
-                _idxCurrent = _pageCurrent[_idxCurrent]
-                    .Document
-                    .GetCollapsedTextNode(out _pageCurrent!);
+                _idxCurrent = _pageCurrent[_idxCurrent].Document.GetCollapsedTextNode(
+                    out _pageCurrent!
+                );
                 Debug.Assert(_pageCurrent != null);
                 return true;
             }
@@ -614,9 +614,9 @@ namespace MS.Internal.Xml.Cache
                 // Virtualize collapsed text nodes
                 _pageParent = _pageCurrent;
                 _idxParent = _idxCurrent;
-                _idxCurrent = _pageCurrent[_idxCurrent]
-                    .Document
-                    .GetCollapsedTextNode(out _pageCurrent!);
+                _idxCurrent = _pageCurrent[_idxCurrent].Document.GetCollapsedTextNode(
+                    out _pageCurrent!
+                );
                 Debug.Assert(_pageCurrent != null);
                 return true;
             }
@@ -720,9 +720,9 @@ namespace MS.Internal.Xml.Cache
 
                     _pageParent = _pageCurrent;
                     _idxParent = _idxCurrent;
-                    _idxCurrent = _pageCurrent[_idxCurrent]
-                        .Document
-                        .GetCollapsedTextNode(out _pageCurrent!);
+                    _idxCurrent = _pageCurrent[_idxCurrent].Document.GetCollapsedTextNode(
+                        out _pageCurrent!
+                    );
                     Debug.Assert(_pageCurrent != null);
                     return true;
                 }

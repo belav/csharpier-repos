@@ -907,11 +907,9 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     constructorDeclaration,
                     constructorDeclaration.Identifier.SpanStart
                 );
-                var lastSpan =
-                    (
-                        (SyntaxNode)constructorDeclaration.ExpressionBody
-                        ?? constructorDeclaration.Body
-                    ).Span;
+                var lastSpan = (
+                    (SyntaxNode)constructorDeclaration.ExpressionBody ?? constructorDeclaration.Body
+                ).Span;
                 return TextSpan.FromBounds(firstSpan.Start, lastSpan.End);
             }
 

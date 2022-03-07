@@ -60,11 +60,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
                     var parameter = parameters[ordinalInLambda];
                     if (parameter.Type != null)
                     {
-                        explicitLambdaParameterType =
-                            _context
-                                .SemanticModel
-                                .GetTypeInfo(parameter.Type, _cancellationToken)
-                                .Type;
+                        explicitLambdaParameterType = _context.SemanticModel
+                            .GetTypeInfo(parameter.Type, _cancellationToken)
+                            .Type;
                         return explicitLambdaParameterType != null;
                     }
                 }
@@ -85,9 +83,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
             else if (
                 _context.IsAnyExpressionContext
                 || _context.IsStatementContext
-                || _context
-                    .SyntaxTree
-                    .IsDefiniteCastTypeContext(_context.Position, _context.LeftToken)
+                || _context.SyntaxTree.IsDefiniteCastTypeContext(
+                    _context.Position,
+                    _context.LeftToken
+                )
             )
             {
                 // GitHub #717: With automatic brace completion active, typing '(i' produces "(i)", which gets parsed as
@@ -109,12 +108,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
             }
             else if (_context.IsDestructorTypeContext)
             {
-                var symbol = _context
-                    .SemanticModel
-                    .GetDeclaredSymbol(
-                        _context.ContainingTypeOrEnumDeclaration!,
-                        _cancellationToken
-                    );
+                var symbol = _context.SemanticModel.GetDeclaredSymbol(
+                    _context.ContainingTypeOrEnumDeclaration!,
+                    _cancellationToken
+                );
                 return symbol == null
                   ? ImmutableArray<ISymbol>.Empty
                   : ImmutableArray.Create<ISymbol>(symbol);
@@ -186,8 +183,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
 
         private ImmutableArray<ISymbol> GetSymbolsForTypeArgumentOfConstraintClause()
         {
-            var enclosingSymbol = _context
-                .LeftToken
+            var enclosingSymbol = _context.LeftToken
                 .GetRequiredParent()
                 .AncestorsAndSelf()
                 .Select(n => _context.SemanticModel.GetDeclaredSymbol(n, _cancellationToken))
@@ -221,8 +217,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
 
             return allLabels.WhereAsArray(
                 label =>
-                    label
-                        .DeclaringSyntaxReferences
+                    label.DeclaringSyntaxReferences
                         .First()
                         .GetSyntax(_cancellationToken)
                         .IsKind(SyntaxKind.LabeledStatement, SyntaxKind.DefaultSwitchLabel)
@@ -231,9 +226,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
 
         private ImmutableArray<ISymbol> GetSymbolsForTypeOrNamespaceContext()
         {
-            var symbols = _context
-                .SemanticModel
-                .LookupNamespacesAndTypes(_context.LeftToken.SpanStart);
+            var symbols = _context.SemanticModel.LookupNamespacesAndTypes(
+                _context.LeftToken.SpanStart
+            );
 
             if (_context.TargetToken.IsUsingKeywordInUsingDirective())
             {
@@ -260,8 +255,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
             // name).  If this is the case, we do not want to filter out inaccessible locals.
             var filterOutOfScopeLocals = _filterOutOfScopeLocals;
             if (filterOutOfScopeLocals)
-                filterOutOfScopeLocals = !_context
-                    .LeftToken
+                filterOutOfScopeLocals = !_context.LeftToken
                     .GetRequiredParent()
                     .IsFoundUnder<LocalDeclarationStatementSyntax>(d => d.Declaration.Type);
 
@@ -274,9 +268,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
             // Filter out any extension methods that might be imported by a using static directive.
             // But include extension methods declared in the context's type or it's parents
             var contextOuterTypes = _context.GetOuterTypes(_cancellationToken);
-            var contextEnclosingNamedType = _context
-                .SemanticModel
-                .GetEnclosingNamedType(_context.Position, _cancellationToken);
+            var contextEnclosingNamedType = _context.SemanticModel.GetEnclosingNamedType(
+                _context.Position,
+                _cancellationToken
+            );
 
             symbols = symbols.WhereAsArray(
                 symbol =>
@@ -327,14 +322,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
 
             if (_context.IsNameOfContext)
                 return new RecommendedSymbols(
-                    _context
-                        .SemanticModel
-                        .LookupSymbols(position: name.SpanStart, container: symbol)
+                    _context.SemanticModel.LookupSymbols(
+                        position: name.SpanStart,
+                        container: symbol
+                    )
                 );
 
-            var symbols = _context
-                .SemanticModel
-                .LookupNamespacesAndTypes(position: name.SpanStart, container: symbol);
+            var symbols = _context.SemanticModel.LookupNamespacesAndTypes(
+                position: name.SpanStart,
+                container: symbol
+            );
 
             if (_context.IsNamespaceDeclarationNameContext)
             {
@@ -375,9 +372,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
                 ? awaitExpression.Expression.WalkDownParentheses()
                 : originalExpression.WalkDownParentheses();
 
-            var leftHandBinding = _context
-                .SemanticModel
-                .GetSymbolInfo(expression, _cancellationToken);
+            var leftHandBinding = _context.SemanticModel.GetSymbolInfo(
+                expression,
+                _cancellationToken
+            );
             var container = _context.SemanticModel.GetTypeInfo(expression, _cancellationToken).Type;
 
             var result = GetSymbolsOffOfBoundExpression(
@@ -396,13 +394,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
                 )
             )
             {
-                var speculativeSymbolInfo = _context
-                    .SemanticModel
-                    .GetSpeculativeSymbolInfo(
-                        expression.SpanStart,
-                        expression,
-                        SpeculativeBindingOption.BindAsTypeOrNamespace
-                    );
+                var speculativeSymbolInfo = _context.SemanticModel.GetSpeculativeSymbolInfo(
+                    expression.SpanStart,
+                    expression,
+                    SpeculativeBindingOption.BindAsTypeOrNamespace
+                );
 
                 var typeMembers = GetSymbolsOffOfBoundExpression(
                     originalExpression,
@@ -426,9 +422,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
         )
         {
             var expression = originalExpression.WalkDownParentheses();
-            var leftHandBinding = _context
-                .SemanticModel
-                .GetSymbolInfo(expression, _cancellationToken);
+            var leftHandBinding = _context.SemanticModel.GetSymbolInfo(
+                expression,
+                _cancellationToken
+            );
 
             var container = _context.SemanticModel.GetTypeInfo(expression, _cancellationToken).Type;
             if (container is IPointerTypeSymbol pointerType)
@@ -454,9 +451,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
             // type. This is not exposed via the binding information for the LHS, so repeat this work here.
 
             var expression = originalExpression.WalkDownParentheses();
-            var leftHandBinding = _context
-                .SemanticModel
-                .GetSymbolInfo(expression, _cancellationToken);
+            var leftHandBinding = _context.SemanticModel.GetSymbolInfo(
+                expression,
+                _cancellationToken
+            );
             var container = _context.SemanticModel.GetTypeInfo(expression, _cancellationToken).Type;
 
             // If the thing on the left is a type, namespace, or alias, we shouldn't show anything in
@@ -526,9 +524,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
                 // If the thing on the left is an event that can't be used as a field, we shouldn't show anything
                 if (
                     symbol is IEventSymbol ev
-                    && !_context
-                        .SemanticModel
-                        .IsEventUsableAsField(originalExpression.SpanStart, ev)
+                    && !_context.SemanticModel.IsEventUsableAsField(
+                        originalExpression.SpanStart,
+                        ev
+                    )
                 )
                 {
                     return default;
@@ -648,9 +647,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
 
         private void AddIndexers(ITypeSymbol container, ArrayBuilder<ISymbol> symbols)
         {
-            var containingType = _context
-                .SemanticModel
-                .GetEnclosingNamedType(_context.Position, _cancellationToken);
+            var containingType = _context.SemanticModel.GetEnclosingNamedType(
+                _context.Position,
+                _cancellationToken
+            );
             if (containingType == null)
                 return;
 

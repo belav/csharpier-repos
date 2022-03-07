@@ -25,10 +25,9 @@ public class RazorPageCreateModelExpressionTest
         // m => m
         // Arrange
         var viewContext = CreateViewContext();
-        var modelExplorer = viewContext
-            .ViewData
-            .ModelExplorer
-            .GetExplorerForProperty(nameof(RazorPageCreateModelExpressionModel.Name));
+        var modelExplorer = viewContext.ViewData.ModelExplorer.GetExplorerForProperty(
+            nameof(RazorPageCreateModelExpressionModel.Name)
+        );
         var viewData = new ViewDataDictionary<string>(viewContext.ViewData)
         {
             ModelExplorer = modelExplorer,
@@ -52,10 +51,9 @@ public class RazorPageCreateModelExpressionTest
         // m => m.Model
         // Arrange
         var viewContext = CreateViewContext();
-        var modelExplorer = viewContext
-            .ViewData
-            .ModelExplorer
-            .GetExplorerForProperty(nameof(RazorPageCreateModelExpressionModel.Name));
+        var modelExplorer = viewContext.ViewData.ModelExplorer.GetExplorerForProperty(
+            nameof(RazorPageCreateModelExpressionModel.Name)
+        );
         var viewData = new ViewDataDictionary<string>(viewContext.ViewData)
         {
             ModelExplorer = modelExplorer,

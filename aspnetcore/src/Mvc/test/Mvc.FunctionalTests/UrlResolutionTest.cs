@@ -12,8 +12,9 @@ public class UrlResolutionTest
     : IClassFixture<MvcTestFixture<RazorWebSite.Startup>>,
       IClassFixture<MvcEncodedTestFixture<RazorWebSite.Startup>>
 {
-    private static readonly Assembly _resourcesAssembly =
-        typeof(UrlResolutionTest).GetTypeInfo().Assembly;
+    private static readonly Assembly _resourcesAssembly = typeof(UrlResolutionTest)
+        .GetTypeInfo()
+        .Assembly;
 
     public UrlResolutionTest(
         MvcTestFixture<RazorWebSite.Startup> fixture,

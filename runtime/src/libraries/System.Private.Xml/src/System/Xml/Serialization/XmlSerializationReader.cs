@@ -2436,23 +2436,27 @@ namespace System.Xml.Serialization
 
                         string a = _choiceArrayName;
                         string c = $"c{a}";
-                        bool choiceUseReflection =
-                            mapping.ChoiceIdentifier.Mapping!.TypeDesc!.UseReflection;
-                        string choiceTypeFullName =
-                            mapping.ChoiceIdentifier.Mapping.TypeDesc.CSharpName;
+                        bool choiceUseReflection = mapping
+                            .ChoiceIdentifier
+                            .Mapping!
+                            .TypeDesc!
+                            .UseReflection;
+                        string choiceTypeFullName = mapping
+                            .ChoiceIdentifier
+                            .Mapping
+                            .TypeDesc
+                            .CSharpName;
                         string castString = choiceUseReflection ? "" : $"({choiceTypeFullName}[])";
 
                         string init =
                             $"{a} = {castString}EnsureArrayIndex({a}, {c}, {outerClass.RaCodeGen.GetStringForTypeof(choiceTypeFullName, choiceUseReflection)});";
                         _choiceArraySource =
                             init
-                            + outerClass
-                                .RaCodeGen
-                                .GetStringForArrayMember(
-                                    a,
-                                    $"{c}++",
-                                    mapping.ChoiceIdentifier.Mapping.TypeDesc
-                                );
+                            + outerClass.RaCodeGen.GetStringForArrayMember(
+                                a,
+                                $"{c}++",
+                                mapping.ChoiceIdentifier.Mapping.TypeDesc
+                            );
                     }
                     else
                     {
@@ -4081,7 +4085,7 @@ namespace System.Xml.Serialization
                     Writer.Indent++;
 
                     string memberSource = /*member.IsList ? source + ".Add(" :*/
-                        member.ArraySource;
+                    member.ArraySource;
 
                     string targetSource = $"GetTarget(ids[{fixupIndex}])";
                     TypeDesc td = member.Mapping.TypeDesc!;
@@ -5187,10 +5191,18 @@ namespace System.Xml.Serialization
                             a = member.ChoiceArrayName;
                             c = $"c{a}";
 
-                            bool choiceUseReflection =
-                                member.Mapping.ChoiceIdentifier.Mapping!.TypeDesc!.UseReflection;
-                            string choiceTypeName =
-                                member.Mapping.ChoiceIdentifier.Mapping.TypeDesc.CSharpName;
+                            bool choiceUseReflection = member
+                                .Mapping
+                                .ChoiceIdentifier
+                                .Mapping!
+                                .TypeDesc!
+                                .UseReflection;
+                            string choiceTypeName = member
+                                .Mapping
+                                .ChoiceIdentifier
+                                .Mapping
+                                .TypeDesc
+                                .CSharpName;
                             if (!choiceUseReflection)
                                 Writer.Write($"({choiceTypeName}[])");
                             Writer.Write("ShrinkArray(");

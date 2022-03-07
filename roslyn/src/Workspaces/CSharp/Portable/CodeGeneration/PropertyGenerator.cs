@@ -242,11 +242,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         {
             if (declaration.ExpressionBody == null)
             {
-                var expressionBodyPreference =
-                    options
-                        .Options
-                        .GetOption(CSharpCodeStyleOptions.PreferExpressionBodiedProperties)
-                        .Value;
+                var expressionBodyPreference = options.Options
+                    .GetOption(CSharpCodeStyleOptions.PreferExpressionBodiedProperties)
+                    .Value;
                 if (declaration.Initializer == null)
                 {
                     if (
@@ -278,11 +276,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         {
             if (declaration.ExpressionBody == null)
             {
-                var expressionBodyPreference =
-                    options
-                        .Options
-                        .GetOption(CSharpCodeStyleOptions.PreferExpressionBodiedIndexers)
-                        .Value;
+                var expressionBodyPreference = options.Options
+                    .GetOption(CSharpCodeStyleOptions.PreferExpressionBodiedIndexers)
+                    .Value;
                 if (
                     TryGetExpressionBody(
                         declaration,
@@ -311,21 +307,17 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         {
             if (declaration.ExpressionBody == null)
             {
-                var expressionBodyPreference =
-                    options
-                        .Options
-                        .GetOption(CSharpCodeStyleOptions.PreferExpressionBodiedAccessors)
-                        .Value;
+                var expressionBodyPreference = options.Options
+                    .GetOption(CSharpCodeStyleOptions.PreferExpressionBodiedAccessors)
+                    .Value;
                 if (
-                    declaration
-                        .Body
-                        .TryConvertToArrowExpressionBody(
-                            declaration.Kind(),
-                            parseOptions,
-                            expressionBodyPreference,
-                            out var expressionBody,
-                            out var semicolonToken
-                        )
+                    declaration.Body.TryConvertToArrowExpressionBody(
+                        declaration.Kind(),
+                        parseOptions,
+                        expressionBodyPreference,
+                        out var expressionBody,
+                        out var semicolonToken
+                    )
                 )
                 {
                     declaration = declaration
@@ -356,15 +348,13 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 return true;
             }
 
-            return accessor
-                .Body
-                .TryConvertToArrowExpressionBody(
-                    declaratoinKind,
-                    options,
-                    preference,
-                    out arrowExpression,
-                    out semicolonToken
-                );
+            return accessor.Body.TryConvertToArrowExpressionBody(
+                declaratoinKind,
+                options,
+                preference,
+                out arrowExpression,
+                out semicolonToken
+            );
         }
 
         private static AccessorListSyntax GenerateAccessorList(

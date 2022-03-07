@@ -43,11 +43,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 SearchQuery searchQuery
             )
             {
-                var service = _project
-                    .Solution
-                    .Workspace
-                    .Services
-                    .GetService<ISymbolTreeInfoCacheService>();
+                var service =
+                    _project.Solution.Workspace.Services.GetService<ISymbolTreeInfoCacheService>();
                 var info = await service
                     .TryGetSourceSymbolTreeInfoAsync(_project, CancellationToken)
                     .ConfigureAwait(false);

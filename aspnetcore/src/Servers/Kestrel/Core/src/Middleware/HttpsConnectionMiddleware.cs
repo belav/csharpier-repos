@@ -297,13 +297,11 @@ internal class HttpsConnectionMiddleware
             {
                 using (store)
                 {
-                    var certs = store
-                        .Certificates
-                        .Find(
-                            X509FindType.FindByThumbprint,
-                            certificate.Thumbprint,
-                            validOnly: false
-                        );
+                    var certs = store.Certificates.Find(
+                        X509FindType.FindByThumbprint,
+                        certificate.Thumbprint,
+                        validOnly: false
+                    );
 
                     if (certs.Count > 0 && certs[0].HasPrivateKey)
                     {
@@ -319,13 +317,11 @@ internal class HttpsConnectionMiddleware
             {
                 using (store)
                 {
-                    var certs = store
-                        .Certificates
-                        .Find(
-                            X509FindType.FindByThumbprint,
-                            certificate.Thumbprint,
-                            validOnly: false
-                        );
+                    var certs = store.Certificates.Find(
+                        X509FindType.FindByThumbprint,
+                        certificate.Thumbprint,
+                        validOnly: false
+                    );
 
                     if (certs.Count > 0 && certs[0].HasPrivateKey)
                     {

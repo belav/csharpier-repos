@@ -47,20 +47,13 @@ namespace Microsoft.CodeAnalysis.GenerateOverrides
             {
                 var service =
                     _service._pickMembersService_forTestingPurposes
-                    ?? _document
-                        .Project
-                        .Solution
-                        .Workspace
-                        .Services
-                        .GetRequiredService<IPickMembersService>();
+                    ?? _document.Project.Solution.Workspace.Services.GetRequiredService<IPickMembersService>();
                 return service.PickMembers(
                     FeaturesResources.Pick_members_to_override,
                     _viableMembers,
-                    selectAll: _document
-                        .Project
-                        .Solution
-                        .Options
-                        .GetOption(GenerateOverridesOptions.SelectAll)
+                    selectAll: _document.Project.Solution.Options.GetOption(
+                        GenerateOverridesOptions.SelectAll
+                    )
                 );
             }
 
@@ -84,9 +77,9 @@ namespace Microsoft.CodeAnalysis.GenerateOverrides
                     result.Members.Length == 1 ? syntaxTree.GetLocation(_textSpan) : null;
 
                 var generator = SyntaxGenerator.GetGenerator(_document);
-                var memberTasks = result
-                    .Members
-                    .SelectAsArray(m => GenerateOverrideAsync(generator, m, cancellationToken));
+                var memberTasks = result.Members.SelectAsArray(
+                    m => GenerateOverrideAsync(generator, m, cancellationToken)
+                );
 
                 var members = await Task.WhenAll(memberTasks).ConfigureAwait(false);
 
@@ -142,17 +135,12 @@ namespace Microsoft.CodeAnalysis.GenerateOverrides
                         return;
 
                     workspace.TryApplyChanges(
-                        workspace
-                            .CurrentSolution
-                            .WithOptions(
-                                workspace
-                                    .CurrentSolution
-                                    .Options
-                                    .WithChangedOption(
-                                        GenerateOverridesOptions.SelectAll,
-                                        _selectedAll
-                                    )
+                        workspace.CurrentSolution.WithOptions(
+                            workspace.CurrentSolution.Options.WithChangedOption(
+                                GenerateOverridesOptions.SelectAll,
+                                _selectedAll
                             )
+                        )
                     );
                 }
             }

@@ -576,20 +576,23 @@ namespace IDynamicInterfaceCastableTests
             Console.WriteLine($" ---- {ex.GetType().Name}: {ex.Message}");
 
             Console.WriteLine(" -- Validate missing attribute");
-            castableObj.InvalidImplementation =
-                BadDynamicInterfaceCastable.InvalidReturn.NoAttribute;
+            castableObj.InvalidImplementation = BadDynamicInterfaceCastable
+                .InvalidReturn
+                .NoAttribute;
             ex = Assert.Throws<InvalidOperationException>(() => testObj.GetMyType());
             Console.WriteLine($" ---- {ex.GetType().Name}: {ex.Message}");
 
             Console.WriteLine(" -- Validate requested interface not implemented");
-            castableObj.InvalidImplementation =
-                BadDynamicInterfaceCastable.InvalidReturn.NotImplemented;
+            castableObj.InvalidImplementation = BadDynamicInterfaceCastable
+                .InvalidReturn
+                .NotImplemented;
             ex = Assert.Throws<InvalidOperationException>(() => testObj.GetMyType());
             Console.WriteLine($" ---- {ex.GetType().Name}: {ex.Message}");
 
             Console.WriteLine(" -- Validate no default implementation");
-            castableObj.InvalidImplementation =
-                BadDynamicInterfaceCastable.InvalidReturn.NoDefaultImplementation;
+            castableObj.InvalidImplementation = BadDynamicInterfaceCastable
+                .InvalidReturn
+                .NoDefaultImplementation;
             var noDefaultImpl = (ITest)castableObj;
             ex = Assert.Throws<EntryPointNotFoundException>(() => noDefaultImpl.ReturnThis());
             Console.WriteLine($" ---- {ex.GetType().Name}: {ex.Message}");
@@ -597,8 +600,9 @@ namespace IDynamicInterfaceCastableTests
             Console.WriteLine(
                 " -- Validate default implementation calling method with no default implementation"
             );
-            castableObj.InvalidImplementation =
-                BadDynamicInterfaceCastable.InvalidReturn.CallNotImplemented;
+            castableObj.InvalidImplementation = BadDynamicInterfaceCastable
+                .InvalidReturn
+                .CallNotImplemented;
             var callNotImpl = (ITest)castableObj;
             ex = Assert.Throws<EntryPointNotFoundException>(() => callNotImpl.ReturnThis());
             Console.WriteLine($" ---- {ex.GetType().Name}: {ex.Message}");
@@ -606,15 +610,17 @@ namespace IDynamicInterfaceCastableTests
             Console.WriteLine(
                 " -- Validate default implementation calling method taking different interface"
             );
-            castableObj.InvalidImplementation =
-                BadDynamicInterfaceCastable.InvalidReturn.UseOtherInterface;
+            castableObj.InvalidImplementation = BadDynamicInterfaceCastable
+                .InvalidReturn
+                .UseOtherInterface;
             var useOther = (ITest)castableObj;
             ex = Assert.Throws<InvalidCastException>(() => useOther.GetNumber());
             Console.WriteLine($" ---- {ex.GetType().Name}: {ex.Message}");
 
             Console.WriteLine(" -- Validate exception thrown");
-            castableObj.InvalidImplementation =
-                BadDynamicInterfaceCastable.InvalidReturn.ThrowException;
+            castableObj.InvalidImplementation = BadDynamicInterfaceCastable
+                .InvalidReturn
+                .ThrowException;
             ex = Assert.Throws<DynamicInterfaceCastableException>(
                 () =>
                 {
@@ -628,8 +634,9 @@ namespace IDynamicInterfaceCastableTests
             Console.WriteLine($" ---- {ex.GetType().Name}: {ex.Message}");
 
             Console.WriteLine(" -- Validate reabstracted implementation");
-            castableObj.InvalidImplementation =
-                BadDynamicInterfaceCastable.InvalidReturn.ReabstractedImplementation;
+            castableObj.InvalidImplementation = BadDynamicInterfaceCastable
+                .InvalidReturn
+                .ReabstractedImplementation;
             ex = Assert.Throws<EntryPointNotFoundException>(
                 () =>
                 {
@@ -639,8 +646,9 @@ namespace IDynamicInterfaceCastableTests
             Console.WriteLine($" ---- {ex.GetType().Name}: {ex.Message}");
 
             Console.WriteLine(" -- Validate diamond inheritance case");
-            castableObj.InvalidImplementation =
-                BadDynamicInterfaceCastable.InvalidReturn.DiamondImplementation;
+            castableObj.InvalidImplementation = BadDynamicInterfaceCastable
+                .InvalidReturn
+                .DiamondImplementation;
             ex = Assert.Throws<System.Runtime.AmbiguousImplementationException>(
                 () =>
                 {
@@ -650,8 +658,9 @@ namespace IDynamicInterfaceCastableTests
             Console.WriteLine($" ---- {ex.GetType().Name}: {ex.Message}");
 
             Console.WriteLine(" -- Validate return default handle");
-            castableObj.InvalidImplementation =
-                BadDynamicInterfaceCastable.InvalidReturn.DefaultHandle;
+            castableObj.InvalidImplementation = BadDynamicInterfaceCastable
+                .InvalidReturn
+                .DefaultHandle;
             ex = Assert.Throws<InvalidCastException>(() => testObj.GetMyType());
             Console.WriteLine($" ---- {ex.GetType().Name}: {ex.Message}");
         }

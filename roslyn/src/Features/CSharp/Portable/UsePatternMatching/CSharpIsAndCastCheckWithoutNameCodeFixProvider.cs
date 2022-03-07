@@ -71,9 +71,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             var semanticModel = await document
                 .GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
-            var (matches, localName) = CSharpIsAndCastCheckWithoutNameDiagnosticAnalyzer
-                .Instance
-                .AnalyzeExpression(semanticModel, isExpression, cancellationToken);
+            var (matches, localName) =
+                CSharpIsAndCastCheckWithoutNameDiagnosticAnalyzer.Instance.AnalyzeExpression(
+                    semanticModel,
+                    isExpression,
+                    cancellationToken
+                );
 
             var updatedSemanticModel =
                 CSharpIsAndCastCheckWithoutNameDiagnosticAnalyzer.ReplaceMatches(

@@ -37,8 +37,7 @@ namespace AutoMapper.UnitTests.Projection
                 .AsQueryable()
                 .ProjectTo<FooDto>(Configuration)
                 .Single()
-                .A
-                .ShouldBe(0);
+                .A.ShouldBe(0);
         }
     }
 

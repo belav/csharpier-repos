@@ -126,18 +126,16 @@ namespace System.Security.Cryptography.Asn1
                 sequenceReader.ThrowIfNotEmpty();
             }
 
-            System
-                .Security
-                .Cryptography
-                .Asn1
-                .FieldID
-                .Decode(ref sequenceReader, rebind, out decoded.FieldID);
-            System
-                .Security
-                .Cryptography
-                .Asn1
-                .CurveAsn
-                .Decode(ref sequenceReader, rebind, out decoded.Curve);
+            System.Security.Cryptography.Asn1.FieldID.Decode(
+                ref sequenceReader,
+                rebind,
+                out decoded.FieldID
+            );
+            System.Security.Cryptography.Asn1.CurveAsn.Decode(
+                ref sequenceReader,
+                rebind,
+                out decoded.Curve
+            );
 
             if (sequenceReader.TryReadPrimitiveOctetString(out tmpSpan))
             {

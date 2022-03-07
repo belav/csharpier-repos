@@ -24,9 +24,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
         ) =>
             debugInfo.LocalSlots.IsDefault
                 ? null
-                : debugInfo
-                  .LocalSlots
-                  .Select(
+                : debugInfo.LocalSlots.Select(
                       s =>
                           $"Offset={s.Id.SyntaxOffset} Ordinal={s.Id.Ordinal} Kind={s.SynthesizedKind}"
                   );
@@ -36,9 +34,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
         ) =>
             debugInfo.Lambdas.IsDefault
                 ? null
-                : debugInfo
-                  .Lambdas
-                  .Select(
+                : debugInfo.Lambdas.Select(
                       l =>
                           $"Offset={l.SyntaxOffset} Id={l.LambdaId.Generation}#{l.LambdaId.Ordinal} Closure={l.ClosureOrdinal}"
                   );
@@ -48,9 +44,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
         ) =>
             debugInfo.Closures.IsDefault
                 ? null
-                : debugInfo
-                  .Closures
-                  .Select(
+                : debugInfo.Closures.Select(
                       c =>
                           $"Offset={c.SyntaxOffset} Id={c.ClosureId.Generation}#{c.ClosureId.Ordinal}"
                   );

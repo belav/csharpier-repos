@@ -74,10 +74,9 @@ namespace System.CommandLine.Parsing
                     var token = unmatchedTokens[i];
                     _errors.Add(
                         new ParseError(
-                            parser
-                                .Configuration
-                                .LocalizationResources
-                                .UnrecognizedCommandOrArgument(token.Value),
+                            parser.Configuration.LocalizationResources.UnrecognizedCommandOrArgument(
+                                token.Value
+                            ),
                             rootCommandResult
                         )
                     );

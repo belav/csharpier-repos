@@ -518,10 +518,9 @@ namespace R2RDump
                     method.ComponentReader.MetadataReader,
                     method.MethodHandle
                 );
-                mi.AssemblyName = method
-                    .ComponentReader
-                    .MetadataReader
-                    .GetString(method.ComponentReader.MetadataReader.GetAssemblyDefinition().Name);
+                mi.AssemblyName = method.ComponentReader.MetadataReader.GetString(
+                    method.ComponentReader.MetadataReader.GetAssemblyDefinition().Name
+                );
                 mi.ColdRVA = 0;
                 mi.ColdLength = 0;
 

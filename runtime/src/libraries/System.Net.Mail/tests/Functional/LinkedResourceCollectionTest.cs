@@ -21,10 +21,9 @@ namespace System.Net.Mail.Tests
 
         public LinkedResourceCollectionTest()
         {
-            lrc =
-                AlternateView
-                    .CreateAlternateViewFromString("test", new ContentType("text/plain"))
-                    .LinkedResources;
+            lrc = AlternateView
+                .CreateAlternateViewFromString("test", new ContentType("text/plain"))
+                .LinkedResources;
             lr = LinkedResource.CreateLinkedResourceFromString(
                 "test",
                 new ContentType("text/plain")

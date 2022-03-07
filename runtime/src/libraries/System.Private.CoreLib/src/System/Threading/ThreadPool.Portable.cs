@@ -47,9 +47,10 @@ namespace System.Threading
         internal static void SetMaxIOCompletionThreads(int ioCompletionThreads) { }
 
         public static bool SetMaxThreads(int workerThreads, int completionPortThreads) =>
-            PortableThreadPool
-                .ThreadPoolInstance
-                .SetMaxThreads(workerThreads, completionPortThreads);
+            PortableThreadPool.ThreadPoolInstance.SetMaxThreads(
+                workerThreads,
+                completionPortThreads
+            );
 
         public static void GetMaxThreads(out int workerThreads, out int completionPortThreads)
         {
@@ -60,9 +61,10 @@ namespace System.Threading
         }
 
         public static bool SetMinThreads(int workerThreads, int completionPortThreads) =>
-            PortableThreadPool
-                .ThreadPoolInstance
-                .SetMinThreads(workerThreads, completionPortThreads);
+            PortableThreadPool.ThreadPoolInstance.SetMinThreads(
+                workerThreads,
+                completionPortThreads
+            );
 
         public static void GetMinThreads(out int workerThreads, out int completionPortThreads)
         {
@@ -114,9 +116,10 @@ namespace System.Threading
             object? threadLocalCompletionCountObject,
             int currentTimeMs
         ) =>
-            PortableThreadPool
-                .ThreadPoolInstance
-                .NotifyWorkItemComplete(threadLocalCompletionCountObject, currentTimeMs);
+            PortableThreadPool.ThreadPoolInstance.NotifyWorkItemComplete(
+                threadLocalCompletionCountObject,
+                currentTimeMs
+            );
 
         internal static bool NotifyThreadBlocked() =>
             PortableThreadPool.ThreadPoolInstance.NotifyThreadBlocked();

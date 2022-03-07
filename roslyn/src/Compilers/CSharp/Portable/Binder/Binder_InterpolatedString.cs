@@ -100,9 +100,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                         interpolation.CloseBraceToken.GetLocation(),
                                         this.Compilation.LanguageVersion.ToDisplayString(),
                                         new CSharpRequiredLanguageVersion(
-                                            MessageID
-                                                .IDS_FeatureNewLinesInInterpolations
-                                                .RequiredVersion()
+                                            MessageID.IDS_FeatureNewLinesInInterpolations.RequiredVersion()
                                         )
                                     );
                                 }
@@ -299,12 +297,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 // Case 1
                 Debug.Assert(
-                    unconvertedInterpolatedString
-                        .Parts
-                        .All(
-                            static part =>
-                                part.Type is null or { SpecialType: SpecialType.System_String }
-                        )
+                    unconvertedInterpolatedString.Parts.All(
+                        static part =>
+                            part.Type is null or { SpecialType: SpecialType.System_String }
+                    )
                 );
                 return constructWithData(
                     BindInterpolatedStringParts(unconvertedInterpolatedString, diagnostics),
@@ -387,9 +383,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundUnconvertedInterpolatedString unconvertedInterpolatedString
         ) =>
             !unconvertedInterpolatedString.Parts.ContainsAwaitExpression()
-            && unconvertedInterpolatedString
-                .Parts
-                .All(p => p is not BoundStringInsert { Value.Type.TypeKind: TypeKind.Dynamic });
+            && unconvertedInterpolatedString.Parts.All(
+                p => p is not BoundStringInsert { Value.Type.TypeKind: TypeKind.Dynamic }
+            );
 
         private static bool AllInterpolatedStringPartsAreStrings(
             ImmutableArray<BoundExpression> parts
@@ -916,13 +912,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // resolution and attempting to determine which method considered was the best to report errors for.
 
                     var nonOutConstructorHasArityError =
-                        nonOutConstructorDiagnostics
-                            .DiagnosticBag
+                        nonOutConstructorDiagnostics.DiagnosticBag
                             ?.AsEnumerableWithoutResolution()
                             .Any(d => (ErrorCode)d.Code == ErrorCode.ERR_BadCtorArgCount) ?? false;
                     var outConstructorHasArityError =
-                        outConstructorDiagnostics
-                            .DiagnosticBag
+                        outConstructorDiagnostics.DiagnosticBag
                             ?.AsEnumerableWithoutResolution()
                             .Any(d => (ErrorCode)d.Code == ErrorCode.ERR_BadCtorArgCount) ?? false;
 

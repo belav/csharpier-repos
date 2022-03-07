@@ -70,8 +70,9 @@ namespace Microsoft.CodeAnalysis.Serialization
                     state.FrozenSourceGeneratedDocumentState,
                     "We should not have had a FrozenSourceGeneratedDocumentIdentity checksum if we didn't have a text in the first place."
                 );
-                result[FrozenSourceGeneratedDocumentIdentity] =
-                    state.FrozenSourceGeneratedDocumentState.Identity;
+                result[FrozenSourceGeneratedDocumentIdentity] = state
+                    .FrozenSourceGeneratedDocumentState
+                    .Identity;
             }
 
             if (searchingChecksumsLeft.Remove(FrozenSourceGeneratedDocumentText))

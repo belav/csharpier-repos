@@ -184,9 +184,8 @@ namespace System.Web.Http.ModelBinding
             HttpResponseMessage response = await Client.SendAsync(request);
 
             // Assert
-            ComplexTypeWithNestedCollection actualResult = await response
-                .Content
-                .ReadAsAsync<ComplexTypeWithNestedCollection>();
+            ComplexTypeWithNestedCollection actualResult =
+                await response.Content.ReadAsAsync<ComplexTypeWithNestedCollection>();
             int[] actualValues = actualResult.Numbers.ToArray();
             Assert.Equal(expectedValues.Length, actualValues.Length);
             for (int i = 0; i < expectedValues.Length; i++)

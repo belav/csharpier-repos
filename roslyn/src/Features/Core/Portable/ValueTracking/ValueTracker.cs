@@ -377,8 +377,9 @@ namespace Microsoft.CodeAnalysis.ValueTracking
                 if (syntaxFacts.IsArgument(selectedNode))
                 {
                     selectedNode = syntaxFacts.GetExpressionOfArgument(selectedNode)!;
-                    selectedSymbol =
-                        semanticModel.GetSymbolInfo(selectedNode, cancellationToken).Symbol;
+                    selectedSymbol = semanticModel
+                        .GetSymbolInfo(selectedNode, cancellationToken)
+                        .Symbol;
                 }
             }
 

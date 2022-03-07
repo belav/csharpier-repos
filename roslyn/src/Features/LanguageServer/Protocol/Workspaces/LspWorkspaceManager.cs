@@ -65,8 +65,10 @@ internal class LspWorkspaceManager : IDocumentChangeTracker, IDisposable
     /// Note that the text here is tracked regardless of whether or not we found a matching roslyn document
     /// for the URI.
     /// </summary>
-    private ImmutableDictionary<Uri, SourceText> _trackedDocuments =
-        ImmutableDictionary<Uri, SourceText>.Empty;
+    private ImmutableDictionary<Uri, SourceText> _trackedDocuments = ImmutableDictionary<
+        Uri,
+        SourceText
+    >.Empty;
 
     private readonly string _hostWorkspaceKind;
     private readonly ILspLogger _logger;
@@ -213,8 +215,9 @@ internal class LspWorkspaceManager : IDocumentChangeTracker, IDisposable
             );
             if (miscDocument != null)
             {
-                _workspaceToLspSolution[miscDocument.Project.Solution.Workspace] =
-                    miscDocument.Project.Solution;
+                _workspaceToLspSolution[miscDocument.Project.Solution.Workspace] = miscDocument
+                    .Project
+                    .Solution;
             }
         }
     }

@@ -639,11 +639,9 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (!succeeded)
             {
-                TestLibrary
-                    .TestFramework
-                    .LogInformation(
-                        $"{nameof(Sse)}.{nameof(Sse.CompareScalarOrderedGreaterThan)}<Boolean>(Vector128<Single>, Vector128<Single>): {method} failed:"
-                    );
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(Sse)}.{nameof(Sse.CompareScalarOrderedGreaterThan)}<Boolean>(Vector128<Single>, Vector128<Single>): {method} failed:"
+                );
                 TestLibrary.TestFramework.LogInformation($"    left: ({string.Join(", ", left)})");
                 TestLibrary.TestFramework.LogInformation($"   right: ({string.Join(", ", right)})");
                 TestLibrary.TestFramework.LogInformation($"  result: ({result})");

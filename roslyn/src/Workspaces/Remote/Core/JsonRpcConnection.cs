@@ -35,8 +35,9 @@ namespace Microsoft.CodeAnalysis.Remote
             IPooledConnectionReclamation? poolReclamation
         )
         {
-            _solutionAssetStorage =
-                services.GetRequiredService<ISolutionAssetStorageProvider>().AssetStorage;
+            _solutionAssetStorage = services
+                .GetRequiredService<ISolutionAssetStorageProvider>()
+                .AssetStorage;
             _services = services;
 
             _serviceEndPoint = new RemoteEndPoint(serviceStream, logger, callbackTarget);

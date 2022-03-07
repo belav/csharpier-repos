@@ -62,10 +62,9 @@ namespace Microsoft.EntityFrameworkCore
                     }
                     else
                     {
-                        var message =
-                            Assert
-                                .Throws<InvalidOperationException>(() => context.SaveChanges())
-                                .Message;
+                        var message = Assert
+                            .Throws<InvalidOperationException>(() => context.SaveChanges())
+                            .Message;
                         Assert.StartsWith(
                             CoreStrings.CircularDependency("").Substring(0, 30),
                             message

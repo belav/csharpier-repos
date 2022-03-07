@@ -16,12 +16,10 @@ namespace System.Web.Cors.Test.WebAPI
         {
             Assert.ThrowsArgumentNull(
                 () =>
-                    System
-                        .Web
-                        .Http
-                        .Cors
-                        .CorsHttpResponseMessageExtensions
-                        .WriteCorsHeaders(null, new CorsResult()),
+                    System.Web.Http.Cors.CorsHttpResponseMessageExtensions.WriteCorsHeaders(
+                        null,
+                        new CorsResult()
+                    ),
                 "response"
             );
         }

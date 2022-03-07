@@ -113,9 +113,10 @@ namespace Microsoft.CodeAnalysis
                 throw new ArgumentNullException(nameof(compilationOptions));
             }
 
-            return compilationOptions
-                    .SpecificDiagnosticOptions
-                    .TryGetValue(Id, out var reportDiagnostic)
+            return compilationOptions.SpecificDiagnosticOptions.TryGetValue(
+                    Id,
+                    out var reportDiagnostic
+                )
                 && reportDiagnostic == ReportDiagnostic.Suppress;
         }
     }

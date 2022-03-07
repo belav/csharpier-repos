@@ -107,8 +107,7 @@ internal sealed class DefaultTagHelperTargetExtension : IDefaultTagHelperTargetE
         {
             // Call into the tag helper scope manager to start a new tag helper scope.
             // Also capture the value as the current execution context.
-            context
-                .CodeWriter
+            context.CodeWriter
                 .WriteStartAssignment(ExecutionContextVariableName)
                 .WriteStartInstanceMethodInvocation(
                     ScopeManagerVariableName,
@@ -123,8 +122,7 @@ internal sealed class DefaultTagHelperTargetExtension : IDefaultTagHelperTargetE
                 uniqueId = GetDeterministicId(context);
             }
 
-            context
-                .CodeWriter
+            context.CodeWriter
                 .WriteStringLiteral(node.TagName)
                 .WriteParameterSeparator()
                 .Write(TagModeTypeName)
@@ -158,21 +156,18 @@ internal sealed class DefaultTagHelperTargetExtension : IDefaultTagHelperTargetE
             throw new InvalidOperationException(message);
         }
 
-        context
-            .CodeWriter
+        context.CodeWriter
             .WriteStartAssignment(node.FieldName)
             .Write(CreateTagHelperMethodName)
             .WriteLine("<global::" + node.TypeName + ">();");
 
         if (!context.Options.DesignTime)
         {
-            context
-                .CodeWriter
-                .WriteInstanceMethodInvocation(
-                    ExecutionContextVariableName,
-                    ExecutionContextAddMethodName,
-                    node.FieldName
-                );
+            context.CodeWriter.WriteInstanceMethodInvocation(
+                ExecutionContextVariableName,
+                ExecutionContextAddMethodName,
+                node.FieldName
+            );
         }
     }
 
@@ -193,8 +188,7 @@ internal sealed class DefaultTagHelperTargetExtension : IDefaultTagHelperTargetE
         // We always render `await __tagHelperRunner.RunAsync(__tagHelperExecutionContext);` to notify users of the requirement for a method
         // to be asynchronous.
 
-        context
-            .CodeWriter
+        context.CodeWriter
             .Write("await ")
             .WriteStartInstanceMethodInvocation(RunnerVariableName, RunnerRunAsyncMethodName)
             .Write(ExecutionContextVariableName)
@@ -205,8 +199,7 @@ internal sealed class DefaultTagHelperTargetExtension : IDefaultTagHelperTargetE
             var tagHelperOutputAccessor =
                 $"{ExecutionContextVariableName}.{ExecutionContextOutputPropertyName}";
 
-            context
-                .CodeWriter
+            context.CodeWriter
                 .Write("if (!")
                 .Write(tagHelperOutputAccessor)
                 .Write(".")
@@ -215,8 +208,7 @@ internal sealed class DefaultTagHelperTargetExtension : IDefaultTagHelperTargetE
 
             using (context.CodeWriter.BuildScope())
             {
-                context
-                    .CodeWriter
+                context.CodeWriter
                     .Write("await ")
                     .WriteInstanceMethodInvocation(
                         ExecutionContextVariableName,
@@ -224,8 +216,7 @@ internal sealed class DefaultTagHelperTargetExtension : IDefaultTagHelperTargetE
                     );
             }
 
-            context
-                .CodeWriter
+            context.CodeWriter
                 .WriteStartMethodInvocation(WriteTagHelperOutputMethod)
                 .Write(tagHelperOutputAccessor)
                 .WriteEndMethodInvocation()
@@ -278,8 +269,7 @@ internal sealed class DefaultTagHelperTargetExtension : IDefaultTagHelperTargetE
                         || child is ExtensionIntermediateNode
                 );
 
-                context
-                    .CodeWriter
+                context.CodeWriter
                     .WriteStartMethodInvocation(BeginAddHtmlAttributeValuesMethodName)
                     .Write(ExecutionContextVariableName)
                     .WriteParameterSeparator()
@@ -292,12 +282,10 @@ internal sealed class DefaultTagHelperTargetExtension : IDefaultTagHelperTargetE
 
                 context.RenderChildren(node, new TagHelperHtmlAttributeRuntimeNodeWriter());
 
-                context
-                    .CodeWriter
-                    .WriteMethodInvocation(
-                        EndAddHtmlAttributeValuesMethodName,
-                        ExecutionContextVariableName
-                    );
+                context.CodeWriter.WriteMethodInvocation(
+                    EndAddHtmlAttributeValuesMethodName,
+                    ExecutionContextVariableName
+                );
             }
             else
             {
@@ -306,17 +294,14 @@ internal sealed class DefaultTagHelperTargetExtension : IDefaultTagHelperTargetE
                 // determine its final value.
 
                 // Attribute value is not plain text, must be buffered to determine its final value.
-                context
-                    .CodeWriter
-                    .WriteMethodInvocation(BeginWriteTagHelperAttributeMethodName);
+                context.CodeWriter.WriteMethodInvocation(BeginWriteTagHelperAttributeMethodName);
 
                 // We're building a writing scope around the provided chunks which captures everything written from the
                 // page. Therefore, we do not want to write to any other buffer since we're using the pages buffer to
                 // ensure we capture all content that's written, directly or indirectly.
                 context.RenderChildren(node, new RuntimeNodeWriter());
 
-                context
-                    .CodeWriter
+                context.CodeWriter
                     .WriteStartAssignment(StringValueBufferVariableName)
                     .WriteMethodInvocation(EndWriteTagHelperAttributeMethodName)
                     .WriteStartInstanceMethodInvocation(
@@ -359,8 +344,7 @@ internal sealed class DefaultTagHelperTargetExtension : IDefaultTagHelperTargetE
             )
             {
                 // Throw a reasonable Exception at runtime if the dictionary property is null.
-                context
-                    .CodeWriter
+                context.CodeWriter
                     .Write("if (")
                     .Write(node.FieldName)
                     .Write(".")
@@ -370,8 +354,7 @@ internal sealed class DefaultTagHelperTargetExtension : IDefaultTagHelperTargetE
                 {
                     // System is in Host.NamespaceImports for all MVC scenarios. No need to generate FullName
                     // of InvalidOperationException type.
-                    context
-                        .CodeWriter
+                    context.CodeWriter
                         .Write("throw ")
                         .WriteStartNewObject(nameof(InvalidOperationException))
                         .WriteStartMethodInvocation(FormatInvalidIndexerAssignmentMethodName)
@@ -397,8 +380,7 @@ internal sealed class DefaultTagHelperTargetExtension : IDefaultTagHelperTargetE
         if (!object.ReferenceEquals(firstUseOfAttribute, node))
         {
             // If we get here, this value has already been used. We just need to copy the value.
-            context
-                .CodeWriter
+            context.CodeWriter
                 .WriteStartAssignment(GetPropertyAccessor(node))
                 .Write(GetPropertyAccessor(firstUseOfAttribute))
                 .WriteLine(";");
@@ -434,8 +416,7 @@ internal sealed class DefaultTagHelperTargetExtension : IDefaultTagHelperTargetE
 
                 context.RenderChildren(node, new LiteralRuntimeNodeWriter());
 
-                context
-                    .CodeWriter
+                context.CodeWriter
                     .WriteStartAssignment(StringValueBufferVariableName)
                     .WriteMethodInvocation(EndWriteTagHelperAttributeMethodName)
                     .WriteStartAssignment(GetPropertyAccessor(node))
@@ -466,13 +447,14 @@ internal sealed class DefaultTagHelperTargetExtension : IDefaultTagHelperTargetE
 
                         if (valueStart != null)
                         {
-                            context
-                                .CodeWriter
-                                .WritePadding(assignmentPrefixLength, node.Source, context);
+                            context.CodeWriter.WritePadding(
+                                assignmentPrefixLength,
+                                node.Source,
+                                context
+                            );
                         }
 
-                        context
-                            .CodeWriter
+                        context.CodeWriter
                             .WriteStartAssignment(accessor)
                             .Write("global::")
                             .Write(node.BoundAttribute.TypeName)
@@ -482,9 +464,11 @@ internal sealed class DefaultTagHelperTargetExtension : IDefaultTagHelperTargetE
                     {
                         if (valueStart != null)
                         {
-                            context
-                                .CodeWriter
-                                .WritePadding(assignmentPrefixLength, node.Source, context);
+                            context.CodeWriter.WritePadding(
+                                assignmentPrefixLength,
+                                node.Source,
+                                context
+                            );
                         }
 
                         context.CodeWriter.WriteStartAssignment(GetPropertyAccessor(node));
@@ -520,8 +504,7 @@ internal sealed class DefaultTagHelperTargetExtension : IDefaultTagHelperTargetE
                         && token.IsCSharp
                     )
                     {
-                        context
-                            .CodeWriter
+                        context.CodeWriter
                             .Write("global::")
                             .Write(node.BoundAttribute.TypeName)
                             .Write(".");
@@ -549,8 +532,7 @@ internal sealed class DefaultTagHelperTargetExtension : IDefaultTagHelperTargetE
         if (!context.Options.DesignTime)
         {
             // We need to inform the context of the attribute value.
-            context
-                .CodeWriter
+            context.CodeWriter
                 .WriteStartInstanceMethodInvocation(
                     ExecutionContextVariableName,
                     ExecutionContextAddTagHelperAttributeMethodName
@@ -572,17 +554,14 @@ internal sealed class DefaultTagHelperTargetExtension : IDefaultTagHelperTargetE
     )
     {
         context.CodeWriter.WriteLine("#line hidden");
-        context
-            .CodeWriter
-            .WriteField(
-                FieldUnintializedModifiers,
-                PrivateModifiers,
-                ExecutionContextTypeName,
-                ExecutionContextVariableName
-            );
+        context.CodeWriter.WriteField(
+            FieldUnintializedModifiers,
+            PrivateModifiers,
+            ExecutionContextTypeName,
+            ExecutionContextVariableName
+        );
 
-        context
-            .CodeWriter
+        context.CodeWriter
             .Write("private ")
             .Write(TagHelperRunnerTypeName)
             .Write(" ")
@@ -593,18 +572,15 @@ internal sealed class DefaultTagHelperTargetExtension : IDefaultTagHelperTargetE
 
         if (!context.Options.DesignTime)
         {
-            context
-                .CodeWriter
-                .WriteField(
-                    FieldUnusedModifiers,
-                    PrivateModifiers,
-                    "string",
-                    StringValueBufferVariableName
-                );
+            context.CodeWriter.WriteField(
+                FieldUnusedModifiers,
+                PrivateModifiers,
+                "string",
+                StringValueBufferVariableName
+            );
 
             var backedScopeManageVariableName = "__backed" + ScopeManagerVariableName;
-            context
-                .CodeWriter
+            context.CodeWriter
                 .Write("private ")
                 .WriteVariableDeclaration(
                     ScopeManagerTypeName,
@@ -612,8 +588,7 @@ internal sealed class DefaultTagHelperTargetExtension : IDefaultTagHelperTargetE
                     value: null
                 );
 
-            context
-                .CodeWriter
+            context.CodeWriter
                 .Write("private ")
                 .Write(ScopeManagerTypeName)
                 .Write(" ")
@@ -624,16 +599,14 @@ internal sealed class DefaultTagHelperTargetExtension : IDefaultTagHelperTargetE
                 context.CodeWriter.WriteLine("get");
                 using (context.CodeWriter.BuildScope())
                 {
-                    context
-                        .CodeWriter
+                    context.CodeWriter
                         .Write("if (")
                         .Write(backedScopeManageVariableName)
                         .WriteLine(" == null)");
 
                     using (context.CodeWriter.BuildScope())
                     {
-                        context
-                            .CodeWriter
+                        context.CodeWriter
                             .WriteStartAssignment(backedScopeManageVariableName)
                             .WriteStartNewObject(ScopeManagerTypeName)
                             .Write(StartTagHelperWritingScopeMethodName)
@@ -642,8 +615,7 @@ internal sealed class DefaultTagHelperTargetExtension : IDefaultTagHelperTargetE
                             .WriteEndMethodInvocation();
                     }
 
-                    context
-                        .CodeWriter
+                    context.CodeWriter
                         .Write("return ")
                         .Write(backedScopeManageVariableName)
                         .WriteLine(";");

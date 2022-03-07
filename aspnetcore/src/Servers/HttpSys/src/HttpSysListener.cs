@@ -356,16 +356,19 @@ internal partial class HttpSysListener : IDisposable
                 httpResponse.pResponseInfo =
                     (HttpApiTypes.HTTP_RESPONSE_INFO*)gcHandle.AddrOfPinnedObject();
 
-                knownHeaderInfo[httpResponse.ResponseInfoCount].Type =
-                    HttpApiTypes.HTTP_RESPONSE_INFO_TYPE.HttpResponseInfoTypeMultipleKnownHeaders;
+                knownHeaderInfo[httpResponse.ResponseInfoCount].Type = HttpApiTypes
+                    .HTTP_RESPONSE_INFO_TYPE
+                    .HttpResponseInfoTypeMultipleKnownHeaders;
                 knownHeaderInfo[httpResponse.ResponseInfoCount].Length =
                     (uint)Marshal.SizeOf<HttpApiTypes.HTTP_MULTIPLE_KNOWN_HEADERS>();
 
                 HttpApiTypes.HTTP_MULTIPLE_KNOWN_HEADERS header =
                     new HttpApiTypes.HTTP_MULTIPLE_KNOWN_HEADERS();
 
-                header.HeaderId =
-                    HttpApiTypes.HTTP_RESPONSE_HEADER_ID.Enum.HttpHeaderWwwAuthenticate;
+                header.HeaderId = HttpApiTypes
+                    .HTTP_RESPONSE_HEADER_ID
+                    .Enum
+                    .HttpHeaderWwwAuthenticate;
                 header.Flags = HttpApiTypes.HTTP_RESPONSE_INFO_FLAGS.PreserveOrder; // The docs say this is for www-auth only.
 
                 HttpApiTypes.HTTP_KNOWN_HEADER[] nativeHeaderValues =

@@ -62,27 +62,23 @@ namespace Internal.Cryptography.Pal
                     {
                         int cbEncoded = 0;
                         if (
-                            !Interop
-                                .Crypt32
-                                .CertSerializeCertificateStoreElement(
-                                    pCertContext,
-                                    0,
-                                    null,
-                                    ref cbEncoded
-                                )
+                            !Interop.Crypt32.CertSerializeCertificateStoreElement(
+                                pCertContext,
+                                0,
+                                null,
+                                ref cbEncoded
+                            )
                         )
                             throw Marshal.GetHRForLastWin32Error().ToCryptographicException();
 
                         byte[] pbEncoded = new byte[cbEncoded];
                         if (
-                            !Interop
-                                .Crypt32
-                                .CertSerializeCertificateStoreElement(
-                                    pCertContext,
-                                    0,
-                                    pbEncoded,
-                                    ref cbEncoded
-                                )
+                            !Interop.Crypt32.CertSerializeCertificateStoreElement(
+                                pCertContext,
+                                0,
+                                pbEncoded,
+                                ref cbEncoded
+                            )
                         )
                             throw Marshal.GetHRForLastWin32Error().ToCryptographicException();
 
@@ -104,9 +100,25 @@ namespace Internal.Cryptography.Pal
                         );
 
                         if (
-                            !Interop
-                                .Crypt32
-                                .PFXExportCertStore(
+                            !Interop.Crypt32.PFXExportCertStore(
+                                _certStore,
+                                ref dataBlob,
+                                password,
+                                Interop.Crypt32.PFXExportFlags.EXPORT_PRIVATE_KEYS
+                                    | Interop
+                                        .Crypt32
+                                        .PFXExportFlags
+                                        .REPORT_NOT_ABLE_TO_EXPORT_PRIVATE_KEY
+                            )
+                        )
+                            throw Marshal.GetHRForLastWin32Error().ToCryptographicException();
+
+                        byte[] pbEncoded = new byte[dataBlob.cbData];
+                        fixed (byte* ppbEncoded = pbEncoded)
+                        {
+                            dataBlob.pbData = new IntPtr(ppbEncoded);
+                            if (
+                                !Interop.Crypt32.PFXExportCertStore(
                                     _certStore,
                                     ref dataBlob,
                                     password,
@@ -116,26 +128,6 @@ namespace Internal.Cryptography.Pal
                                             .PFXExportFlags
                                             .REPORT_NOT_ABLE_TO_EXPORT_PRIVATE_KEY
                                 )
-                        )
-                            throw Marshal.GetHRForLastWin32Error().ToCryptographicException();
-
-                        byte[] pbEncoded = new byte[dataBlob.cbData];
-                        fixed (byte* ppbEncoded = pbEncoded)
-                        {
-                            dataBlob.pbData = new IntPtr(ppbEncoded);
-                            if (
-                                !Interop
-                                    .Crypt32
-                                    .PFXExportCertStore(
-                                        _certStore,
-                                        ref dataBlob,
-                                        password,
-                                        Interop.Crypt32.PFXExportFlags.EXPORT_PRIVATE_KEYS
-                                            | Interop
-                                                .Crypt32
-                                                .PFXExportFlags
-                                                .REPORT_NOT_ABLE_TO_EXPORT_PRIVATE_KEY
-                                    )
                             )
                                 throw Marshal.GetHRForLastWin32Error().ToCryptographicException();
                         }
@@ -161,16 +153,14 @@ namespace Internal.Cryptography.Pal
             {
                 Interop.Crypt32.DATA_BLOB blob = new Interop.Crypt32.DATA_BLOB(IntPtr.Zero, 0);
                 if (
-                    !Interop
-                        .crypt32
-                        .CertSaveStore(
-                            _certStore,
-                            Interop.Crypt32.CertEncodingType.All,
-                            dwSaveAs,
-                            CertStoreSaveTo.CERT_STORE_SAVE_TO_MEMORY,
-                            ref blob,
-                            0
-                        )
+                    !Interop.crypt32.CertSaveStore(
+                        _certStore,
+                        Interop.Crypt32.CertEncodingType.All,
+                        dwSaveAs,
+                        CertStoreSaveTo.CERT_STORE_SAVE_TO_MEMORY,
+                        ref blob,
+                        0
+                    )
                 )
                     throw Marshal.GetLastWin32Error().ToCryptographicException();
 
@@ -179,16 +169,14 @@ namespace Internal.Cryptography.Pal
                 {
                     blob.pbData = new IntPtr(pExportedData);
                     if (
-                        !Interop
-                            .crypt32
-                            .CertSaveStore(
-                                _certStore,
-                                Interop.Crypt32.CertEncodingType.All,
-                                dwSaveAs,
-                                CertStoreSaveTo.CERT_STORE_SAVE_TO_MEMORY,
-                                ref blob,
-                                0
-                            )
+                        !Interop.crypt32.CertSaveStore(
+                            _certStore,
+                            Interop.Crypt32.CertEncodingType.All,
+                            dwSaveAs,
+                            CertStoreSaveTo.CERT_STORE_SAVE_TO_MEMORY,
+                            ref blob,
+                            0
+                        )
                     )
                         throw Marshal.GetLastWin32Error().ToCryptographicException();
                 }

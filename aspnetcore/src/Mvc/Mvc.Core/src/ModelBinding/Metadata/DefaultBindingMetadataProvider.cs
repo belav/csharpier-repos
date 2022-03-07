@@ -56,8 +56,7 @@ internal class DefaultBindingMetadataProvider : IBindingMetadataProvider
         }
 
         // PropertyFilterProvider
-        var propertyFilterProviders = context
-            .Attributes
+        var propertyFilterProviders = context.Attributes
             .OfType<IPropertyFilterProvider>()
             .ToArray();
         if (propertyFilterProviders.Length == 0)
@@ -175,20 +174,19 @@ internal class DefaultBindingMetadataProvider : IBindingMetadataProvider
             case ModelMetadataKind.Property:
                 // BindingBehavior can fall back to attributes on the Container Type, but we should ignore
                 // attributes on the Property Type.
-                var matchingAttributes = context
-                    .PropertyAttributes!
-                    .OfType<BindingBehaviorAttribute>();
+                var matchingAttributes =
+                    context.PropertyAttributes!.OfType<BindingBehaviorAttribute>();
                 return matchingAttributes.FirstOrDefault()
-                    ?? context
-                        .Key
-                        .ContainerType!
-                        .GetCustomAttributes(typeof(BindingBehaviorAttribute), inherit: true)
+                    ?? context.Key
+                        .ContainerType!.GetCustomAttributes(
+                            typeof(BindingBehaviorAttribute),
+                            inherit: true
+                        )
                         .OfType<BindingBehaviorAttribute>()
                         .FirstOrDefault();
             case ModelMetadataKind.Parameter:
                 return context
-                    .ParameterAttributes!
-                    .OfType<BindingBehaviorAttribute>()
+                    .ParameterAttributes!.OfType<BindingBehaviorAttribute>()
                     .FirstOrDefault();
             default:
                 return null;

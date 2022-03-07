@@ -600,13 +600,11 @@ Public Module M
 End Module
 ";
 
-            var vbProject = VisualBasic
-                .VisualBasicCompilation
-                .Create(
-                    "VBProject",
-                    references: new[] { MscorlibRef },
-                    syntaxTrees: new[] { VisualBasic.VisualBasicSyntaxTree.ParseText(vbSource) }
-                );
+            var vbProject = VisualBasic.VisualBasicCompilation.Create(
+                "VBProject",
+                references: new[] { MscorlibRef },
+                syntaxTrees: new[] { VisualBasic.VisualBasicSyntaxTree.ParseText(vbSource) }
+            );
 
             var csSource =
                 @"
@@ -659,13 +657,11 @@ Public Module M
 End Module
 ";
 
-            var vbProject = VisualBasic
-                .VisualBasicCompilation
-                .Create(
-                    "VBProject",
-                    references: new[] { MscorlibRef },
-                    syntaxTrees: new[] { VisualBasic.VisualBasicSyntaxTree.ParseText(vbSource) }
-                );
+            var vbProject = VisualBasic.VisualBasicCompilation.Create(
+                "VBProject",
+                references: new[] { MscorlibRef },
+                syntaxTrees: new[] { VisualBasic.VisualBasicSyntaxTree.ParseText(vbSource) }
+            );
 
             var csSource =
                 @"
@@ -1332,8 +1328,7 @@ class C
                 .DescendantNodes()
                 .OfType<VariableDeclaratorSyntax>()
                 .Single()
-                .Initializer
-                .Value;
+                .Initializer.Value;
 
             var symbolInfo = model.GetSymbolInfo(expr);
 
@@ -2223,8 +2218,7 @@ namespace RoslynAsyncDelegate
                 "void System.EventHandler.Invoke(System.Object sender, System.EventArgs e)",
                 model
                     .GetTypeInfo(node1)
-                    .ConvertedType
-                    .GetMembers("Invoke")
+                    .ConvertedType.GetMembers("Invoke")
                     .Single()
                     .ToTestDisplayString()
             );
@@ -2713,8 +2707,7 @@ public static class XThing
                 var lambda in tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>()
             )
             {
-                var reference = lambda
-                    .Body
+                var reference = lambda.Body
                     .DescendantNodesAndSelf()
                     .OfType<IdentifierNameSyntax>()
                     .First();
@@ -2765,8 +2758,7 @@ public static class XThing
                 var lambda in tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>()
             )
             {
-                var reference = lambda
-                    .Body
+                var reference = lambda.Body
                     .DescendantNodesAndSelf()
                     .OfType<IdentifierNameSyntax>()
                     .First();
@@ -2817,8 +2809,7 @@ public static class XThing
                 var lambda in tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>()
             )
             {
-                var reference = lambda
-                    .Body
+                var reference = lambda.Body
                     .DescendantNodesAndSelf()
                     .OfType<IdentifierNameSyntax>()
                     .First();
@@ -2856,8 +2847,7 @@ class Program
                 var lambda in tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>()
             )
             {
-                var reference = lambda
-                    .Body
+                var reference = lambda.Body
                     .DescendantNodesAndSelf()
                     .OfType<IdentifierNameSyntax>()
                     .First();
@@ -2895,8 +2885,7 @@ class Program
                 var lambda in tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>()
             )
             {
-                var reference = lambda
-                    .Body
+                var reference = lambda.Body
                     .DescendantNodesAndSelf()
                     .OfType<IdentifierNameSyntax>()
                     .First();
@@ -2938,8 +2927,7 @@ class Program
                 var lambda in tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>()
             )
             {
-                var reference = lambda
-                    .Body
+                var reference = lambda.Body
                     .DescendantNodesAndSelf()
                     .OfType<IdentifierNameSyntax>()
                     .First();

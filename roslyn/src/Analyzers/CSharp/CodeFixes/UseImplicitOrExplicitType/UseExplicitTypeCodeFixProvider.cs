@@ -106,12 +106,10 @@ namespace Microsoft.CodeAnalysis.CSharp.TypeStyle
             {
                 typeSyntax = declarationExpression.Type;
                 if (
-                    declarationExpression
-                        .Designation
-                        .IsKind(
-                            SyntaxKind.ParenthesizedVariableDesignation,
-                            out ParenthesizedVariableDesignationSyntax variableDesignation
-                        )
+                    declarationExpression.Designation.IsKind(
+                        SyntaxKind.ParenthesizedVariableDesignation,
+                        out ParenthesizedVariableDesignationSyntax variableDesignation
+                    )
                 )
                 {
                     parensDesignation = variableDesignation;
@@ -130,8 +128,7 @@ namespace Microsoft.CodeAnalysis.CSharp.TypeStyle
                 // that would defeat the purpose of this refactoring entirely).
                 var newTypeSyntax = semanticModel
                     .GetTypeInfo(typeSyntax, cancellationToken)
-                    .ConvertedType
-                    .GenerateTypeSyntax(allowVar: false)
+                    .ConvertedType.GenerateTypeSyntax(allowVar: false)
                     .WithTriviaFrom(typeSyntax);
 
                 Debug.Assert(
@@ -143,8 +140,9 @@ namespace Microsoft.CodeAnalysis.CSharp.TypeStyle
             }
             else
             {
-                var tupleTypeSymbol =
-                    semanticModel.GetTypeInfo(typeSyntax.Parent, cancellationToken).ConvertedType;
+                var tupleTypeSymbol = semanticModel
+                    .GetTypeInfo(typeSyntax.Parent, cancellationToken)
+                    .ConvertedType;
 
                 var leadingTrivia = node.GetLeadingTrivia()
                     .Concat(

@@ -64,18 +64,18 @@ public class RuntimeNodeWriter : IntermediateNodeWriter
         IDisposable linePragmaScope = null;
         if (node.Source != null)
         {
-            linePragmaScope = context
-                .CodeWriter
-                .BuildEnhancedLinePragma(
-                    node.Source.Value,
-                    context,
-                    WriteCSharpExpressionMethod.Length + 1
-                );
+            linePragmaScope = context.CodeWriter.BuildEnhancedLinePragma(
+                node.Source.Value,
+                context,
+                WriteCSharpExpressionMethod.Length + 1
+            );
             if (!context.Options.UseEnhancedLinePragma)
             {
-                context
-                    .CodeWriter
-                    .WritePadding(WriteCSharpExpressionMethod.Length + 1, node.Source, context);
+                context.CodeWriter.WritePadding(
+                    WriteCSharpExpressionMethod.Length + 1,
+                    node.Source,
+                    context
+                );
             }
         }
 
@@ -164,8 +164,7 @@ public class RuntimeNodeWriter : IntermediateNodeWriter
         var prefixLocation = node.Source.Value.AbsoluteIndex;
         var suffixLocation =
             node.Source.Value.AbsoluteIndex + node.Source.Value.Length - node.Suffix.Length;
-        context
-            .CodeWriter
+        context.CodeWriter
             .WriteStartMethodInvocation(BeginWriteAttributeMethod)
             .WriteStringLiteral(node.AttributeName)
             .WriteParameterSeparator()
@@ -182,8 +181,7 @@ public class RuntimeNodeWriter : IntermediateNodeWriter
 
         context.RenderChildren(node);
 
-        context
-            .CodeWriter
+        context.CodeWriter
             .WriteStartMethodInvocation(EndWriteAttributeMethod)
             .WriteEndMethodInvocation();
     }
@@ -196,8 +194,7 @@ public class RuntimeNodeWriter : IntermediateNodeWriter
         var prefixLocation = node.Source.Value.AbsoluteIndex;
         var valueLocation = node.Source.Value.AbsoluteIndex + node.Prefix.Length;
         var valueLength = node.Source.Value.Length;
-        context
-            .CodeWriter
+        context.CodeWriter
             .WriteStartMethodInvocation(WriteAttributeValueMethod)
             .WriteStringLiteral(node.Prefix)
             .WriteParameterSeparator()
@@ -218,8 +215,7 @@ public class RuntimeNodeWriter : IntermediateNodeWriter
             }
         }
 
-        context
-            .CodeWriter
+        context.CodeWriter
             .WriteParameterSeparator()
             .Write(valueLocation.ToString(CultureInfo.InvariantCulture))
             .WriteParameterSeparator()
@@ -250,8 +246,7 @@ public class RuntimeNodeWriter : IntermediateNodeWriter
             + parameterSepLength;
         using (context.CodeWriter.BuildEnhancedLinePragma(node.Source.Value, context, offsetLength))
         {
-            context
-                .CodeWriter
+            context.CodeWriter
                 .WriteStartMethodInvocation(WriteAttributeValueMethod)
                 .WriteStringLiteral(node.Prefix)
                 .WriteParameterSeparator()
@@ -273,8 +268,7 @@ public class RuntimeNodeWriter : IntermediateNodeWriter
 
             var valueLocation = node.Source.Value.AbsoluteIndex + node.Prefix.Length;
             var valueLength = node.Source.Value.Length - node.Prefix.Length;
-            context
-                .CodeWriter
+            context.CodeWriter
                 .WriteParameterSeparator()
                 .Write(valueLocation.ToString(CultureInfo.InvariantCulture))
                 .WriteParameterSeparator()
@@ -295,8 +289,7 @@ public class RuntimeNodeWriter : IntermediateNodeWriter
         var prefixLocation = node.Source.Value.AbsoluteIndex;
         var valueLocation = node.Source.Value.AbsoluteIndex + node.Prefix.Length;
         var valueLength = node.Source.Value.Length - node.Prefix.Length;
-        context
-            .CodeWriter
+        context.CodeWriter
             .WriteStartMethodInvocation(WriteAttributeValueMethod)
             .WriteStringLiteral(node.Prefix)
             .WriteParameterSeparator()
@@ -319,9 +312,10 @@ public class RuntimeNodeWriter : IntermediateNodeWriter
                     {
                         if (!isWhitespaceStatement)
                         {
-                            linePragmaScope = context
-                                .CodeWriter
-                                .BuildLinePragma(token.Source.Value, context);
+                            linePragmaScope = context.CodeWriter.BuildLinePragma(
+                                token.Source.Value,
+                                context
+                            );
                         }
 
                         context.CodeWriter.WritePadding(0, token.Source.Value, context);
@@ -355,8 +349,7 @@ public class RuntimeNodeWriter : IntermediateNodeWriter
 
         context.CodeWriter.WriteEndMethodInvocation(false);
 
-        context
-            .CodeWriter
+        context.CodeWriter
             .WriteParameterSeparator()
             .Write(valueLocation.ToString(CultureInfo.InvariantCulture))
             .WriteParameterSeparator()
@@ -434,8 +427,7 @@ public class RuntimeNodeWriter : IntermediateNodeWriter
 
         void WriteLiteral(string content)
         {
-            context
-                .CodeWriter
+            context.CodeWriter
                 .WriteStartMethodInvocation(WriteHtmlContentMethod)
                 .WriteStringLiteral(content)
                 .WriteEndMethodInvocation();

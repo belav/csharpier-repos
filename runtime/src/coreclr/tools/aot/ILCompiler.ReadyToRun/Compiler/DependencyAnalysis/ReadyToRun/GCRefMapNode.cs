@@ -94,10 +94,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     bool isUnboxingStub = false;
                     if (methodNode is DelayLoadHelperImport methodImport)
                     {
-                        isUnboxingStub =
-                            (
-                                (MethodFixupSignature)methodImport.ImportSignature.Target
-                            ).IsUnboxingStub;
+                        isUnboxingStub = (
+                            (MethodFixupSignature)methodImport.ImportSignature.Target
+                        ).IsUnboxingStub;
                     }
                     builder.GetCallRefMap(methodNode.Method, isUnboxingStub);
                 }

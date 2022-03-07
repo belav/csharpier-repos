@@ -1516,12 +1516,11 @@ class Test
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree);
 
-            var aliasSyntax =
-                tree.GetCompilationUnitRoot()
-                    .DescendantNodes()
-                    .OfType<NameEqualsSyntax>()
-                    .Single()
-                    .Name;
+            var aliasSyntax = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<NameEqualsSyntax>()
+                .Single()
+                .Name;
             Assert.Equal(SymbolInfo.None, model.GetSymbolInfo(aliasSyntax));
 
             var usingSyntax = tree.GetCompilationUnitRoot()
@@ -2117,10 +2116,9 @@ class C
             Assert.True(success);
             Assert.NotNull(speculativeModel);
 
-            var declarator = ((LocalDeclarationStatementSyntax)statement)
-                .Declaration
-                .Variables
-                .First();
+            var declarator = (
+                (LocalDeclarationStatementSyntax)statement
+            ).Declaration.Variables.First();
             var local = speculativeModel.GetDeclaredSymbol(declarator);
             Assert.NotNull(local);
             Assert.Equal("z", local.Name);
@@ -3114,10 +3112,9 @@ class C
             Assert.True(success);
             Assert.NotNull(speculativeModel);
 
-            var declarator = ((LocalDeclarationStatementSyntax)blockStatement.Statements[0])
-                .Declaration
-                .Variables
-                .First();
+            var declarator = (
+                (LocalDeclarationStatementSyntax)blockStatement.Statements[0]
+            ).Declaration.Variables.First();
             var local = speculativeModel.GetDeclaredSymbol(declarator);
             Assert.NotNull(local);
             Assert.Equal("z", local.Name);
@@ -3135,10 +3132,9 @@ class C
             );
             Assert.True(success);
             Assert.NotNull(speculativeModel);
-            declarator = ((LocalDeclarationStatementSyntax)blockStatement.Statements[0])
-                .Declaration
-                .Variables
-                .First();
+            declarator = (
+                (LocalDeclarationStatementSyntax)blockStatement.Statements[0]
+            ).Declaration.Variables.First();
             local = speculativeModel.GetDeclaredSymbol(declarator);
             Assert.NotNull(local);
             Assert.Equal("y", local.Name);
@@ -3156,10 +3152,9 @@ class C
             );
             Assert.True(success);
             Assert.NotNull(speculativeModel);
-            declarator = ((LocalDeclarationStatementSyntax)blockStatement.Statements[0])
-                .Declaration
-                .Variables
-                .First();
+            declarator = (
+                (LocalDeclarationStatementSyntax)blockStatement.Statements[0]
+            ).Declaration.Variables.First();
             local = speculativeModel.GetDeclaredSymbol(declarator);
             Assert.NotNull(local);
             Assert.Equal("y", local.Name);
@@ -3803,8 +3798,7 @@ public class C
                 .DescendantNodes()
                 .OfType<SimpleLambdaExpressionSyntax>()
                 .Single()
-                .Body
-                .DescendantNodesAndSelf()
+                .Body.DescendantNodesAndSelf()
                 .OfType<IdentifierNameSyntax>()
                 .Single();
             Assert.Equal("x", syntax.Identifier.ValueText);
@@ -3962,12 +3956,11 @@ class C
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree);
 
-            var method1 =
-                tree.GetRoot()
-                    .DescendantNodes()
-                    .OfType<InvocationExpressionSyntax>()
-                    .Single()
-                    .Expression;
+            var method1 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<InvocationExpressionSyntax>()
+                .Single()
+                .Expression;
             var info1 = model.GetSymbolInfo(method1);
             Assert.NotNull(info1.Symbol);
 
@@ -3983,12 +3976,11 @@ class C
             Assert.True(success);
             Assert.NotNull(speculativeModel);
 
-            var method2 =
-                statementSyntax
-                    .DescendantNodes()
-                    .OfType<InvocationExpressionSyntax>()
-                    .Single()
-                    .Expression;
+            var method2 = statementSyntax
+                .DescendantNodes()
+                .OfType<InvocationExpressionSyntax>()
+                .Single()
+                .Expression;
             var info2 = speculativeModel.GetSymbolInfo(method2);
             Assert.NotNull(info2.Symbol);
 
@@ -4018,12 +4010,11 @@ class C
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree);
 
-            var method1 =
-                tree.GetRoot()
-                    .DescendantNodes()
-                    .OfType<InvocationExpressionSyntax>()
-                    .Single()
-                    .Expression;
+            var method1 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<InvocationExpressionSyntax>()
+                .Single()
+                .Expression;
             var info1 = model.GetSymbolInfo(method1);
             Assert.NotNull(info1.Symbol);
 
@@ -4039,12 +4030,11 @@ class C
             Assert.True(success);
             Assert.NotNull(speculativeModel);
 
-            var method2 =
-                statementSyntax
-                    .DescendantNodes()
-                    .OfType<InvocationExpressionSyntax>()
-                    .Single()
-                    .Expression;
+            var method2 = statementSyntax
+                .DescendantNodes()
+                .OfType<InvocationExpressionSyntax>()
+                .Single()
+                .Expression;
             var info2 = speculativeModel.GetSymbolInfo(method2);
             Assert.NotNull(info2.Symbol);
 
@@ -4074,12 +4064,11 @@ class C
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree);
 
-            var method1 =
-                tree.GetRoot()
-                    .DescendantNodes()
-                    .OfType<InvocationExpressionSyntax>()
-                    .Single()
-                    .Expression;
+            var method1 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<InvocationExpressionSyntax>()
+                .Single()
+                .Expression;
             var info1 = model.GetSymbolInfo(method1);
             Assert.NotNull(info1.Symbol);
 
@@ -4118,12 +4107,11 @@ class C
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree);
 
-            var method1 =
-                tree.GetRoot()
-                    .DescendantNodes()
-                    .OfType<InvocationExpressionSyntax>()
-                    .Single()
-                    .Expression;
+            var method1 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<InvocationExpressionSyntax>()
+                .Single()
+                .Expression;
             var info1 = model.GetSymbolInfo(method1);
             Assert.NotNull(info1.Symbol);
 
@@ -4140,12 +4128,11 @@ class C
             Assert.True(success);
             Assert.NotNull(speculativeModel);
 
-            var method2 =
-                statementSyntax
-                    .DescendantNodes()
-                    .OfType<InvocationExpressionSyntax>()
-                    .Single()
-                    .Expression;
+            var method2 = statementSyntax
+                .DescendantNodes()
+                .OfType<InvocationExpressionSyntax>()
+                .Single()
+                .Expression;
             var info2 = speculativeModel.GetSymbolInfo(method2);
             Assert.NotNull(info2.Symbol);
 
@@ -4175,12 +4162,11 @@ class C
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree);
 
-            var method1 =
-                tree.GetRoot()
-                    .DescendantNodes()
-                    .OfType<InvocationExpressionSyntax>()
-                    .Single()
-                    .Expression;
+            var method1 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<InvocationExpressionSyntax>()
+                .Single()
+                .Expression;
             var info1 = model.GetSymbolInfo(method1);
             Assert.NotNull(info1.Symbol);
 
@@ -4196,12 +4182,11 @@ class C
             Assert.True(success);
             Assert.NotNull(speculativeModel);
 
-            var method2 =
-                statementSyntax
-                    .DescendantNodes()
-                    .OfType<InvocationExpressionSyntax>()
-                    .Single()
-                    .Expression;
+            var method2 = statementSyntax
+                .DescendantNodes()
+                .OfType<InvocationExpressionSyntax>()
+                .Single()
+                .Expression;
             var info2 = speculativeModel.GetSymbolInfo(method2);
             Assert.NotNull(info2.Symbol);
 
@@ -4231,12 +4216,11 @@ class C
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree);
 
-            var method1 =
-                tree.GetRoot()
-                    .DescendantNodes()
-                    .OfType<InvocationExpressionSyntax>()
-                    .Single()
-                    .Expression;
+            var method1 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<InvocationExpressionSyntax>()
+                .Single()
+                .Expression;
             var info1 = model.GetSymbolInfo(method1);
             Assert.NotNull(info1.Symbol);
 
@@ -4252,12 +4236,11 @@ class C
             Assert.True(success);
             Assert.NotNull(speculativeModel);
 
-            var method2 =
-                statementSyntax
-                    .DescendantNodes()
-                    .OfType<InvocationExpressionSyntax>()
-                    .Single()
-                    .Expression;
+            var method2 = statementSyntax
+                .DescendantNodes()
+                .OfType<InvocationExpressionSyntax>()
+                .Single()
+                .Expression;
             var info2 = speculativeModel.GetSymbolInfo(method2);
             Assert.NotNull(info2.Symbol);
 
@@ -4287,12 +4270,11 @@ class C
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree);
 
-            var method1 =
-                tree.GetRoot()
-                    .DescendantNodes()
-                    .OfType<InvocationExpressionSyntax>()
-                    .Single()
-                    .Expression;
+            var method1 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<InvocationExpressionSyntax>()
+                .Single()
+                .Expression;
             var info1 = model.GetSymbolInfo(method1);
             Assert.NotNull(info1.Symbol);
 
@@ -4366,13 +4348,10 @@ class C { }";
         {
             return SyntaxFactory
                 .ParseCompilationUnit(source + " class X {}")
-                .Members
-                .First()
+                .Members.First()
                 .AsTypeDeclarationSyntax()
-                .AttributeLists
-                .First()
-                .Attributes
-                .First();
+                .AttributeLists.First()
+                .Attributes.First();
         }
 
         [WorkItem(784255, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/784255")]
@@ -4592,8 +4571,10 @@ class Derived : Test
             var expr = identifier.FirstAncestorOrSelf<ArgumentSyntax>().Parent.Parent;
 
             var exprInfo = model.GetSymbolInfo(expr);
-            var firstParamType =
-                ((ISymbol)exprInfo.CandidateSymbols.Single()).GetParameters().First().Type;
+            var firstParamType = ((ISymbol)exprInfo.CandidateSymbols.Single())
+                .GetParameters()
+                .First()
+                .Type;
             Assert.Equal(actionType, firstParamType);
 
             var identifierInfo = model.GetTypeInfo(identifier);
@@ -4795,13 +4776,11 @@ static class Program
                 .DescendantNodes()
                 .OfType<MethodDeclarationSyntax>()
                 .Single();
-            var init0 =
-                method.Body.Statements[0]
-                    .DescendantNodes()
-                    .OfType<VariableDeclaratorSyntax>()
-                    .Single()
-                    .Initializer
-                    .Value;
+            var init0 = method.Body.Statements[0]
+                .DescendantNodes()
+                .OfType<VariableDeclaratorSyntax>()
+                .Single()
+                .Initializer.Value;
             var value0 = model.GetConstantValue(init0);
             var typeInfo0 = model.GetTypeInfo(init0);
             Assert.True(value0.HasValue);
@@ -4812,13 +4791,11 @@ static class Program
 
             // The CodePlex bug indicates this should return a constant value of 5.  While 'case2' should
             // have that value it is not constant because of the nullable cast
-            var init1 =
-                method.Body.Statements[2]
-                    .DescendantNodes()
-                    .OfType<VariableDeclaratorSyntax>()
-                    .Single()
-                    .Initializer
-                    .Value;
+            var init1 = method.Body.Statements[2]
+                .DescendantNodes()
+                .OfType<VariableDeclaratorSyntax>()
+                .Single()
+                .Initializer.Value;
             var value1 = model.GetConstantValue(init1);
             var typeInfo1 = model.GetTypeInfo(init1);
             var type1 = comp.GetSpecialType(SpecialType.System_Nullable_T)
@@ -4826,13 +4803,11 @@ static class Program
             Assert.False(value1.HasValue);
             Assert.True(typeInfo1.Type != null && typeInfo1.Type.Equals(type1));
 
-            var init2 =
-                method.Body.Statements[4]
-                    .DescendantNodes()
-                    .OfType<VariableDeclaratorSyntax>()
-                    .Single()
-                    .Initializer
-                    .Value;
+            var init2 = method.Body.Statements[4]
+                .DescendantNodes()
+                .OfType<VariableDeclaratorSyntax>()
+                .Single()
+                .Initializer.Value;
             var value2 = model.GetConstantValue(init2);
             var typeInfo2 = model.GetTypeInfo(init2);
             var type2 = comp.GetSpecialType(SpecialType.System_Nullable_T)

@@ -96,8 +96,7 @@ namespace System.CommandLine.Rendering.Tests
                 _terminal.GetRegion()
             );
 
-            _terminal
-                .Out
+            _terminal.Out
                 .ToString()
                 .TrimEnd()
                 .Should()
@@ -158,8 +157,7 @@ namespace System.CommandLine.Rendering.Tests
 
             writer.RenderToRegion($"{NewLine}*", region);
 
-            _terminal
-                .Out
+            _terminal.Out
                 .ToString()
                 .Should()
                 .Be(
@@ -176,8 +174,7 @@ namespace System.CommandLine.Rendering.Tests
 
             writer.RenderToRegion($"{NewLine}*", region);
 
-            _terminal
-                .Events
+            _terminal.Events
                 .OfType<CursorPositionChanged>()
                 .Select(e => e.Position)
                 .Should()
@@ -193,8 +190,7 @@ namespace System.CommandLine.Rendering.Tests
 
             writer.RenderToRegion($"{NewLine}*", region);
 
-            _terminal
-                .Out
+            _terminal.Out
                 .ToString()
                 .Should()
                 .Be(
@@ -237,8 +233,7 @@ namespace System.CommandLine.Rendering.Tests
 
             renderer.RenderToRegion("hello", new Region(0, 0, 5, 1));
 
-            _terminal
-                .Events
+            _terminal.Events
                 .Should()
                 .BeEquivalentSequenceTo(
                     new CursorPositionChanged(new Point(0, 0)),
@@ -255,8 +250,7 @@ namespace System.CommandLine.Rendering.Tests
 
             renderer.RenderToRegion("hello", new Region(0, 0, 5, 1));
 
-            _terminal
-                .Events
+            _terminal.Events
                 .Should()
                 .BeEquivalentSequenceTo(
                     new TestTerminal.CursorPositionChanged(new Point(0, 0)),

@@ -40,10 +40,9 @@ public class AuthenticatedEncryptorDescriptorTests
             ].Value,
             CultureInfo.InvariantCulture
         );
-        string hashAlgorithm =
-            Regex.Match(validationAlgorithm.ToString(), @"^HMAC(?<hashAlgorithm>.*)$").Groups[
-                "hashAlgorithm"
-            ].Value;
+        string hashAlgorithm = Regex
+            .Match(validationAlgorithm.ToString(), @"^HMAC(?<hashAlgorithm>.*)$")
+            .Groups["hashAlgorithm"].Value;
 
         // Arrange
         var masterKey = Secret.Random(512 / 8);

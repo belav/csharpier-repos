@@ -195,12 +195,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // or that was explicitly written in code (so that GetSemanticInfo can find the syntax in the bound tree).
                     if (
                         !isCast
-                        && source
-                            .Type
-                            .Equals(
-                                destination,
-                                TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
-                            )
+                        && source.Type.Equals(
+                            destination,
+                            TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                        )
                     )
                     {
                         return source;
@@ -710,8 +708,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     || destination.IsErrorType()
                     || destination.Equals(source.Type, TypeCompareKind.ConsiderEverything)
             );
-            ImmutableArray<Conversion> underlyingConversions =
-                conversionIfTargetTyped.GetValueOrDefault().UnderlyingConversions;
+            ImmutableArray<Conversion> underlyingConversions = conversionIfTargetTyped
+                .GetValueOrDefault()
+                .UnderlyingConversions;
             var condition = source.Condition;
             hasErrors |= source.HasErrors || destination.IsErrorType();
 
@@ -923,10 +922,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 diagnostics: diagnostics
             );
 
-            TypeSymbol conversionParameterType = conversion
-                .BestUserDefinedConversionAnalysis
-                .Operator
-                .GetParameterType(0);
+            TypeSymbol conversionParameterType =
+                conversion.BestUserDefinedConversionAnalysis.Operator.GetParameterType(0);
             CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
                 diagnostics
             );
@@ -961,8 +958,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             BoundExpression userDefinedConversion;
 
-            TypeSymbol conversionReturnType =
-                conversion.BestUserDefinedConversionAnalysis.Operator.ReturnType;
+            TypeSymbol conversionReturnType = conversion
+                .BestUserDefinedConversionAnalysis
+                .Operator
+                .ReturnType;
             TypeSymbol conversionToType = conversion.BestUserDefinedConversionAnalysis.ToType;
             Conversion toConversion = conversion.UserDefinedToConversion;
 

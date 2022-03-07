@@ -198,8 +198,7 @@ namespace AutoMapper.QueryableExtensions.Impl
             void ProjectProperties()
             {
                 foreach (
-                    var propertyMap in typeMap
-                        .PropertyMaps
+                    var propertyMap in typeMap.PropertyMaps
                         .Where(pm => pm.CanResolveValue && pm.DestinationMember.CanBeSet())
                         .OrderBy(pm => pm.DestinationName)
                 )
@@ -333,9 +332,9 @@ namespace AutoMapper.QueryableExtensions.Impl
                     { ConstructorMap: { CanResolve: true } constructorMap }
                       => New(
                           constructorMap.Ctor,
-                          constructorMap
-                              .CtorParams
-                              .Select(map => TryProjectMember(map) ?? Default(map.DestinationType))
+                          constructorMap.CtorParams.Select(
+                              map => TryProjectMember(map) ?? Default(map.DestinationType)
+                          )
                       ),
                     _ => New(typeMap.DestinationTypeToUse)
                 };
@@ -527,11 +526,9 @@ namespace AutoMapper.QueryableExtensions.Impl
                 {
                     var visitor = new GetMemberAccessesVisitor(target);
                     visitor.Visit(expression);
-                    return visitor
-                        .Members
-                        .Select(
-                            member => new PropertyDescription(member.Name, member.GetMemberType())
-                        );
+                    return visitor.Members.Select(
+                        member => new PropertyDescription(member.Name, member.GetMemberType())
+                    );
                 }
             }
 

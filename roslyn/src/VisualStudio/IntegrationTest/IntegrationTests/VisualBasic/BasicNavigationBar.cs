@@ -35,14 +35,12 @@ End Structure";
 
         public override async Task DisposeAsync()
         {
-            VisualStudio
-                .Workspace
-                .SetFeatureOption(
-                    "NavigationBarOptions",
-                    "ShowNavigationBar",
-                    "Visual Basic",
-                    "True"
-                );
+            VisualStudio.Workspace.SetFeatureOption(
+                "NavigationBarOptions",
+                "ShowNavigationBar",
+                "Visual Basic",
+                "True"
+            );
             await base.DisposeAsync();
         }
 
@@ -76,14 +74,11 @@ End Structure";
             Assert.Equal(expectedItems, VisualStudio.Editor.GetMemberNavBarItems());
             VisualStudio.Editor.SelectMemberNavBarItem("B");
             VisualStudio.Editor.Verify.CaretPosition(169);
-            VisualStudio
-                .Editor
-                .Verify
-                .CurrentLineText(
-                    "Public Property $$B As Integer",
-                    assertCaretPosition: true,
-                    trimWhitespace: true
-                );
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "Public Property $$B As Integer",
+                assertCaretPosition: true,
+                trimWhitespace: true
+            );
         }
 
         [WpfFact]
@@ -100,15 +95,12 @@ End Structure";
                 VisualStudio.Editor.GetMemberNavBarItems()
             );
             VisualStudio.Editor.SelectMemberNavBarItem("New");
-            VisualStudio
-                .Editor
-                .Verify
-                .TextContains(
-                    @"
+            VisualStudio.Editor.Verify.TextContains(
+                @"
     Public Sub New()
 
     End Sub"
-                );
+            );
             VisualStudio.Editor.Verify.CaretPosition(78); // Caret is between New() and End Sub() in virtual whitespace
             VisualStudio.Editor.Verify.CurrentLineText("$$", assertCaretPosition: true);
         }
@@ -175,42 +167,40 @@ End Class"
 
             // Selecting an event should update the selected member in the type list.
             VisualStudio.Editor.SelectMemberNavBarItem("EvX");
-            VisualStudio
-                .Editor
-                .Verify
-                .CurrentLineText("        $$' 3", assertCaretPosition: true, trimWhitespace: false);
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "        $$' 3",
+                assertCaretPosition: true,
+                trimWhitespace: false
+            );
 
             // Selecting an WithEvents member in the type list should have no impact on position.
             // But it should update the items in the member list.
             VisualStudio.Editor.SelectTypeNavBarItem("item1");
-            VisualStudio
-                .Editor
-                .Verify
-                .CurrentLineText("        $$' 3", assertCaretPosition: true, trimWhitespace: false);
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "        $$' 3",
+                assertCaretPosition: true,
+                trimWhitespace: false
+            );
             Assert.Equal(new[] { "EvA", "EvB" }, VisualStudio.Editor.GetMemberNavBarItems());
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.NavigationBar)]
         public void VerifyOption()
         {
-            VisualStudio
-                .Workspace
-                .SetFeatureOption(
-                    "NavigationBarOptions",
-                    "ShowNavigationBar",
-                    "Visual Basic",
-                    "False"
-                );
+            VisualStudio.Workspace.SetFeatureOption(
+                "NavigationBarOptions",
+                "ShowNavigationBar",
+                "Visual Basic",
+                "False"
+            );
             Assert.False(VisualStudio.Editor.IsNavBarEnabled());
 
-            VisualStudio
-                .Workspace
-                .SetFeatureOption(
-                    "NavigationBarOptions",
-                    "ShowNavigationBar",
-                    "Visual Basic",
-                    "True"
-                );
+            VisualStudio.Workspace.SetFeatureOption(
+                "NavigationBarOptions",
+                "ShowNavigationBar",
+                "Visual Basic",
+                "True"
+            );
             Assert.True(VisualStudio.Editor.IsNavBarEnabled());
         }
 

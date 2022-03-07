@@ -280,8 +280,7 @@ namespace Microsoft.AspNetCore.Components.WebView
                 {
                     // We MUST use the Value property here because it is unescaped.
                     _nextSegment =
-                        remainingPath
-                            .Value
+                        remainingPath.Value
                             ?.Split("/", StringSplitOptions.RemoveEmptyEntries)
                             .FirstOrDefault() ?? string.Empty;
                 }

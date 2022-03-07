@@ -110,14 +110,12 @@ namespace System.Net
             Interop.Crypt32.CERT_CHAIN_POLICY_STATUS status = default;
             status.cbSize = (uint)sizeof(Interop.Crypt32.CERT_CHAIN_POLICY_STATUS);
 
-            bool errorCode = Interop
-                .Crypt32
-                .CertVerifyCertificateChainPolicy(
-                    (IntPtr)Interop.Crypt32.CertChainPolicy.CERT_CHAIN_POLICY_SSL,
-                    chainContext,
-                    ref cpp,
-                    ref status
-                );
+            bool errorCode = Interop.Crypt32.CertVerifyCertificateChainPolicy(
+                (IntPtr)Interop.Crypt32.CertChainPolicy.CERT_CHAIN_POLICY_SSL,
+                chainContext,
+                ref cpp,
+                ref status
+            );
 
             if (NetEventSource.Log.IsEnabled())
                 NetEventSource.Info(

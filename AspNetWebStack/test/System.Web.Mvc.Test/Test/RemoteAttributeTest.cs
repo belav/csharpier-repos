@@ -56,9 +56,10 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             ControllerContext context = new ControllerContext();
-            ModelMetadata metadata = ModelMetadataProviders
-                .Current
-                .GetMetadataForType(null, typeof(object));
+            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForType(
+                null,
+                typeof(object)
+            );
             TestableRemoteAttribute attribute = new TestableRemoteAttribute("RouteName");
 
             // Act & Assert
@@ -76,9 +77,11 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             ControllerContext context = new ControllerContext();
-            ModelMetadata metadata = ModelMetadataProviders
-                .Current
-                .GetMetadataForProperty(null, typeof(string), "Length");
+            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
+                null,
+                typeof(string),
+                "Length"
+            );
             TestableRemoteAttribute attribute = new TestableRemoteAttribute("Action", "Controller");
 
             // Act & Assert
@@ -96,9 +99,11 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             string url = null;
-            ModelMetadata metadata = ModelMetadataProviders
-                .Current
-                .GetMetadataForProperty(null, typeof(string), "Length");
+            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
+                null,
+                typeof(string),
+                "Length"
+            );
             TestableRemoteAttribute attribute = new TestableRemoteAttribute("RouteName");
             attribute.RouteTable.Add("RouteName", new Route("my/url", new MvcRouteHandler()));
 
@@ -120,9 +125,11 @@ namespace System.Web.Mvc.Test
             // Arrange
             string url = null;
 
-            ModelMetadata metadata = ModelMetadataProviders
-                .Current
-                .GetMetadataForProperty(null, typeof(string), "Length");
+            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
+                null,
+                typeof(string),
+                "Length"
+            );
             TestableRemoteAttribute attribute = new TestableRemoteAttribute("Action", "Controller");
             attribute.RouteTable.Add(new Route("{controller}/{action}", new MvcRouteHandler()));
 
@@ -149,9 +156,11 @@ namespace System.Web.Mvc.Test
             // Arrange
             string url = null;
 
-            ModelMetadata metadata = ModelMetadataProviders
-                .Current
-                .GetMetadataForProperty(null, typeof(string), "Length");
+            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
+                null,
+                typeof(string),
+                "Length"
+            );
             TestableRemoteAttribute attribute = new TestableRemoteAttribute("Action", "Controller");
             attribute.HttpMethod = "POST";
             attribute.AdditionalFields = "Password,ConfirmPassword";
@@ -180,13 +189,11 @@ namespace System.Web.Mvc.Test
         public void ActionController_RemoteFindsControllerInCurrentArea()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders
-                .Current
-                .GetMetadataForProperty(
-                    modelAccessor: null,
-                    containerType: typeof(string),
-                    propertyName: "Length"
-                );
+            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
+                modelAccessor: null,
+                containerType: typeof(string),
+                propertyName: "Length"
+            );
             TestableRemoteAttribute attribute = new TestableRemoteAttribute("Action", "Controller");
             attribute.HttpMethod = "POST";
 
@@ -209,13 +216,11 @@ namespace System.Web.Mvc.Test
         public void ActionControllerArea_RemoteFindsControllerInNamedArea()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders
-                .Current
-                .GetMetadataForProperty(
-                    modelAccessor: null,
-                    containerType: typeof(string),
-                    propertyName: "Length"
-                );
+            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
+                modelAccessor: null,
+                containerType: typeof(string),
+                propertyName: "Length"
+            );
             TestableRemoteAttribute attribute = new TestableRemoteAttribute(
                 "Action",
                 "Controller",
@@ -243,13 +248,11 @@ namespace System.Web.Mvc.Test
         public void ActionControllerArea_WithEmptyArea_RemoteFindsControllerInCurrentArea()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders
-                .Current
-                .GetMetadataForProperty(
-                    modelAccessor: null,
-                    containerType: typeof(string),
-                    propertyName: "Length"
-                );
+            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
+                modelAccessor: null,
+                containerType: typeof(string),
+                propertyName: "Length"
+            );
             TestableRemoteAttribute attribute = new TestableRemoteAttribute(
                 "Action",
                 "Controller",
@@ -277,13 +280,11 @@ namespace System.Web.Mvc.Test
         public void ActionControllerAreaReference_WithUseCurrent_RemoteFindsControllerInCurrentArea()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders
-                .Current
-                .GetMetadataForProperty(
-                    modelAccessor: null,
-                    containerType: typeof(string),
-                    propertyName: "Length"
-                );
+            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
+                modelAccessor: null,
+                containerType: typeof(string),
+                propertyName: "Length"
+            );
             TestableRemoteAttribute attribute = new TestableRemoteAttribute(
                 "Action",
                 "Controller",
@@ -310,13 +311,11 @@ namespace System.Web.Mvc.Test
         public void ActionControllerAreaReference_WithUseRoot_RemoteFindsControllerInRoot()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders
-                .Current
-                .GetMetadataForProperty(
-                    modelAccessor: null,
-                    containerType: typeof(string),
-                    propertyName: "Length"
-                );
+            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
+                modelAccessor: null,
+                containerType: typeof(string),
+                propertyName: "Length"
+            );
             TestableRemoteAttribute attribute = new TestableRemoteAttribute(
                 "Action",
                 "Controller",
@@ -344,13 +343,11 @@ namespace System.Web.Mvc.Test
         public void ActionController_InArea_RemoteFindsControllerInCurrentArea()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders
-                .Current
-                .GetMetadataForProperty(
-                    modelAccessor: null,
-                    containerType: typeof(string),
-                    propertyName: "Length"
-                );
+            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
+                modelAccessor: null,
+                containerType: typeof(string),
+                propertyName: "Length"
+            );
             TestableRemoteAttribute attribute = new TestableRemoteAttribute("Action", "Controller");
             attribute.HttpMethod = "POST";
 
@@ -377,13 +374,11 @@ namespace System.Web.Mvc.Test
         public void ActionControllerArea_InSameArea_RemoteFindsControllerInNamedArea()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders
-                .Current
-                .GetMetadataForProperty(
-                    modelAccessor: null,
-                    containerType: typeof(string),
-                    propertyName: "Length"
-                );
+            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
+                modelAccessor: null,
+                containerType: typeof(string),
+                propertyName: "Length"
+            );
             TestableRemoteAttribute attribute = new TestableRemoteAttribute(
                 "Action",
                 "Controller",
@@ -413,13 +408,11 @@ namespace System.Web.Mvc.Test
         public void ActionControllerArea_InArea_RemoteFindsControllerInNamedArea()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders
-                .Current
-                .GetMetadataForProperty(
-                    modelAccessor: null,
-                    containerType: typeof(string),
-                    propertyName: "Length"
-                );
+            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
+                modelAccessor: null,
+                containerType: typeof(string),
+                propertyName: "Length"
+            );
             TestableRemoteAttribute attribute = new TestableRemoteAttribute(
                 "Action",
                 "Controller",
@@ -452,13 +445,11 @@ namespace System.Web.Mvc.Test
         public void ActionControllerArea_WithEmptyAreaInArea_RemoteFindsControllerInCurrentArea()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders
-                .Current
-                .GetMetadataForProperty(
-                    modelAccessor: null,
-                    containerType: typeof(string),
-                    propertyName: "Length"
-                );
+            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
+                modelAccessor: null,
+                containerType: typeof(string),
+                propertyName: "Length"
+            );
             TestableRemoteAttribute attribute = new TestableRemoteAttribute(
                 "Action",
                 "Controller",
@@ -489,13 +480,11 @@ namespace System.Web.Mvc.Test
         public void ActionControllerAreaReference_WithUseCurrentInArea_RemoteFindsControllerInCurrentArea()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders
-                .Current
-                .GetMetadataForProperty(
-                    modelAccessor: null,
-                    containerType: typeof(string),
-                    propertyName: "Length"
-                );
+            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
+                modelAccessor: null,
+                containerType: typeof(string),
+                propertyName: "Length"
+            );
             TestableRemoteAttribute attribute = new TestableRemoteAttribute(
                 "Action",
                 "Controller",
@@ -525,13 +514,11 @@ namespace System.Web.Mvc.Test
         public void ActionControllerAreaReference_WithUseRootInArea_RemoteFindsControllerInRoot()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders
-                .Current
-                .GetMetadataForProperty(
-                    modelAccessor: null,
-                    containerType: typeof(string),
-                    propertyName: "Length"
-                );
+            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
+                modelAccessor: null,
+                containerType: typeof(string),
+                propertyName: "Length"
+            );
             TestableRemoteAttribute attribute = new TestableRemoteAttribute(
                 "Action",
                 "Controller",

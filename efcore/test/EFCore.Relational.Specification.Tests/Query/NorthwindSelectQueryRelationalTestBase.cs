@@ -19,15 +19,14 @@ namespace Microsoft.EntityFrameworkCore.Query
             bool async
         )
         {
-            var message =
-                (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            base.Correlated_collection_after_groupby_with_complex_projection_not_containing_original_identifier(
-                                async
-                            )
-                    )
-                ).Message;
+            var message = (
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        base.Correlated_collection_after_groupby_with_complex_projection_not_containing_original_identifier(
+                            async
+                        )
+                )
+            ).Message;
 
             Assert.Equal(
                 RelationalStrings.InsufficientInformationToIdentifyElementOfCollectionJoin,

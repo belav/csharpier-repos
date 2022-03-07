@@ -467,16 +467,14 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             var relatedToChunky1 = context.Entry(chunky1).Collection(e => e.Cherries);
             var relatedToChunky2 = context.Entry(chunky2).Collection(e => e.Cherries);
 
-            var joinEntity =
-                context
-                    .ChangeTracker
-                    .Entries<Dictionary<string, object>>()
-                    .Single(
-                        e =>
-                            e.Property<int>("CherryId").CurrentValue == 1
-                            && e.Property<int>("ChunkyId").CurrentValue == 2
-                    )
-                    .Entity;
+            var joinEntity = context.ChangeTracker
+                .Entries<Dictionary<string, object>>()
+                .Single(
+                    e =>
+                        e.Property<int>("CherryId").CurrentValue == 1
+                        && e.Property<int>("ChunkyId").CurrentValue == 2
+                )
+                .Entity;
 
             joinEntity["CherryId"] = 2;
             context.ChangeTracker.DetectChanges();
@@ -552,16 +550,14 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             var relatedToChunky1 = context.Entry(chunky1).Collection(e => e.Cherries);
             var relatedToChunky2 = context.Entry(chunky2).Collection(e => e.Cherries);
 
-            var joinEntity =
-                context
-                    .ChangeTracker
-                    .Entries<Dictionary<string, object>>()
-                    .Single(
-                        e =>
-                            e.Property<int>("CherryId").CurrentValue == 1
-                            && e.Property<int>("ChunkyId").CurrentValue == 2
-                    )
-                    .Entity;
+            var joinEntity = context.ChangeTracker
+                .Entries<Dictionary<string, object>>()
+                .Single(
+                    e =>
+                        e.Property<int>("CherryId").CurrentValue == 1
+                        && e.Property<int>("ChunkyId").CurrentValue == 2
+                )
+                .Entity;
 
             joinEntity["CherryId"] = 2;
             context.ChangeTracker.DetectChanges();
@@ -598,8 +594,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             if (context is ExplicitFreezerContext)
             {
                 context.AddRange(cherry1, cherry2, chunky1, chunky2); // So that PKs get generated values
-                context
-                    .ChangeTracker
+                context.ChangeTracker
                     .Entries()
                     .ToList()
                     .ForEach(e => e.State = EntityState.Unchanged);

@@ -124,12 +124,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             var options = documentOptions;
             if (options == null)
             {
-                var inferredIndentationService = document
-                    .Project
-                    .Solution
-                    .Workspace
-                    .Services
-                    .GetRequiredService<IInferredIndentationService>();
+                var inferredIndentationService =
+                    document.Project.Solution.Workspace.Services.GetRequiredService<IInferredIndentationService>();
                 options = await inferredIndentationService
                     .GetDocumentOptionsWithInferredIndentationAsync(
                         document,
@@ -174,12 +170,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             var options = documentOptions;
             if (options == null)
             {
-                var inferredIndentationService = document
-                    .Project
-                    .Solution
-                    .Workspace
-                    .Services
-                    .GetRequiredService<IInferredIndentationService>();
+                var inferredIndentationService =
+                    document.Project.Solution.Workspace.Services.GetRequiredService<IInferredIndentationService>();
                 options = await inferredIndentationService
                     .GetDocumentOptionsWithInferredIndentationAsync(
                         document,
@@ -208,9 +200,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         )
         {
             var workspace = document.Project.Solution.Workspace;
-            var formattingRuleFactory = workspace
-                .Services
-                .GetRequiredService<IHostDependentFormattingRuleFactoryService>();
+            var formattingRuleFactory =
+                workspace.Services.GetRequiredService<IHostDependentFormattingRuleFactoryService>();
             return formattingRuleFactory
                 .CreateRule(document, position)
                 .Concat(GetTypingRules(tokenBeforeCaret))
@@ -261,8 +252,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             if (token.IsKind(SyntaxKind.OpenBraceToken))
             {
                 var text = await token
-                    .SyntaxTree!
-                    .GetTextAsync(cancellationToken)
+                    .SyntaxTree!.GetTextAsync(cancellationToken)
                     .ConfigureAwait(false);
                 if (!token.IsFirstTokenOnLine(text))
                 {
@@ -322,12 +312,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             var options = documentOptions;
             if (options == null)
             {
-                var inferredIndentationService = document
-                    .Project
-                    .Solution
-                    .Workspace
-                    .Services
-                    .GetRequiredService<IInferredIndentationService>();
+                var inferredIndentationService =
+                    document.Project.Solution.Workspace.Services.GetRequiredService<IInferredIndentationService>();
                 options = await inferredIndentationService
                     .GetDocumentOptionsWithInferredIndentationAsync(
                         document,

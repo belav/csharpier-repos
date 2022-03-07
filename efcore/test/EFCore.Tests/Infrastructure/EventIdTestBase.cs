@@ -78,8 +78,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             var eventIdFields = eventIdType
                 .GetTypeInfo()
-                .DeclaredFields
-                .Where(
+                .DeclaredFields.Where(
                     p =>
                         p.FieldType == typeof(EventId)
                         && p.GetCustomAttribute<ObsoleteAttribute>() == null
@@ -115,8 +114,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                     var category = isExtensionMethod
                         ? loggerParameters[0].ParameterType.GenericTypeArguments[0]
                         : loggerMethod
-                              .DeclaringType!
-                              .GetInterfaces()
+                              .DeclaringType!.GetInterfaces()
                               .Single(
                                   i =>
                                       i.IsGenericType

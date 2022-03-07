@@ -15,10 +15,18 @@ namespace System.Runtime.Serialization.Json
         public const string KeyString = "Key";
         public const string ValueString = "Value";
         public const string ServerTypeString = "__type";
-        public static readonly int DataContractXsdBaseNamespaceLength =
-            Globals.DataContractXsdBaseNamespace.Length;
-        public static readonly long unixEpochTicks =
-            new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).Ticks;
+        public static readonly int DataContractXsdBaseNamespaceLength = Globals
+            .DataContractXsdBaseNamespace
+            .Length;
+        public static readonly long unixEpochTicks = new DateTime(
+            1970,
+            1,
+            1,
+            0,
+            0,
+            0,
+            DateTimeKind.Utc
+        ).Ticks;
         public static readonly SecurityException SecurityException = new SecurityException();
         public static readonly UnicodeEncoding ValidatingBEUTF16 = new UnicodeEncoding(
             true,

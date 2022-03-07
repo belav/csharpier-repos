@@ -57,18 +57,17 @@ namespace AssemblyDependencyResolverTests
                         errorWriterMock.LastSetErrorWriter(errorMessageSecondLine);
                     };
 
-                    string message =
-                        Assert
-                            .Throws<InvalidOperationException>(
-                                () =>
-                                {
-                                    AssemblyDependencyResolver resolver =
-                                        new AssemblyDependencyResolver(
-                                            Path.Combine(TestBasePath, _componentAssemblyPath)
-                                        );
-                                }
-                            )
-                            .Message;
+                    string message = Assert
+                        .Throws<InvalidOperationException>(
+                            () =>
+                            {
+                                AssemblyDependencyResolver resolver =
+                                    new AssemblyDependencyResolver(
+                                        Path.Combine(TestBasePath, _componentAssemblyPath)
+                                    );
+                            }
+                        )
+                        .Message;
 
                     Assert.Contains("134", message);
                     Assert.Contains(
@@ -84,11 +83,8 @@ namespace AssemblyDependencyResolverTests
 
         public void TestComponentLoadFailureWithPreviousErrorWriter()
         {
-            IntPtr previousWriter = System
-                .Runtime
-                .InteropServices
-                .Marshal
-                .GetFunctionPointerForDelegate(
+            IntPtr previousWriter =
+                System.Runtime.InteropServices.Marshal.GetFunctionPointerForDelegate(
                     (HostPolicyMock.ErrorWriterDelegate)(
                         (string _) =>
                         {
@@ -126,11 +122,8 @@ namespace AssemblyDependencyResolverTests
         {
             string assemblyDependencyPath = CreateMockAssembly("AssemblyDependency.dll");
 
-            IntPtr previousWriter = System
-                .Runtime
-                .InteropServices
-                .Marshal
-                .GetFunctionPointerForDelegate(
+            IntPtr previousWriter =
+                System.Runtime.InteropServices.Marshal.GetFunctionPointerForDelegate(
                     (HostPolicyMock.ErrorWriterDelegate)(
                         (string _) =>
                         {

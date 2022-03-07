@@ -225,18 +225,16 @@ namespace System.IO.Pipes
                     pipeSecurity,
                     ref pinningHandle
                 );
-                SafePipeHandle handle = Interop
-                    .Kernel32
-                    .CreateNamedPipe(
-                        fullPipeName,
-                        openMode,
-                        pipeModes,
-                        maxNumberOfServerInstances,
-                        outBufferSize,
-                        inBufferSize,
-                        0,
-                        ref secAttrs
-                    );
+                SafePipeHandle handle = Interop.Kernel32.CreateNamedPipe(
+                    fullPipeName,
+                    openMode,
+                    pipeModes,
+                    maxNumberOfServerInstances,
+                    outBufferSize,
+                    inBufferSize,
+                    0,
+                    ref secAttrs
+                );
 
                 if (handle.IsInvalid)
                 {
@@ -343,17 +341,15 @@ namespace System.IO.Pipes
             char* userName = stackalloc char[(int)UserNameMaxLength]; // ~1K
 
             if (
-                Interop
-                    .Kernel32
-                    .GetNamedPipeHandleStateW(
-                        InternalHandle!,
-                        null,
-                        null,
-                        null,
-                        null,
-                        userName,
-                        UserNameMaxLength
-                    )
+                Interop.Kernel32.GetNamedPipeHandleStateW(
+                    InternalHandle!,
+                    null,
+                    null,
+                    null,
+                    null,
+                    userName,
+                    UserNameMaxLength
+                )
             )
             {
                 return new string(userName);

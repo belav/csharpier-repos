@@ -307,25 +307,22 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
             bool createReturnStatementForExpression
         )
         {
-            var expressionBodyPreference =
-                documentOptions
-                    .GetOption(CSharpCodeStyleOptions.PreferExpressionBodiedMethods)
-                    .Value;
+            var expressionBodyPreference = documentOptions
+                .GetOption(CSharpCodeStyleOptions.PreferExpressionBodiedMethods)
+                .Value;
             if (
                 methodDeclaration.Body != null
                 && expressionBodyPreference != ExpressionBodyPreference.Never
             )
             {
                 if (
-                    methodDeclaration
-                        .Body
-                        .TryConvertToArrowExpressionBody(
-                            methodDeclaration.Kind(),
-                            parseOptions,
-                            expressionBodyPreference,
-                            out var arrowExpression,
-                            out var semicolonToken
-                        )
+                    methodDeclaration.Body.TryConvertToArrowExpressionBody(
+                        methodDeclaration.Kind(),
+                        parseOptions,
+                        expressionBodyPreference,
+                        out var arrowExpression,
+                        out var semicolonToken
+                    )
                 )
                 {
                     return methodDeclaration
@@ -341,13 +338,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
             )
             {
                 if (
-                    methodDeclaration
-                        .ExpressionBody
-                        .TryConvertToBlock(
-                            methodDeclaration.SemicolonToken,
-                            createReturnStatementForExpression,
-                            out var block
-                        )
+                    methodDeclaration.ExpressionBody.TryConvertToBlock(
+                        methodDeclaration.SemicolonToken,
+                        createReturnStatementForExpression,
+                        out var block
+                    )
                 )
                 {
                     return methodDeclaration

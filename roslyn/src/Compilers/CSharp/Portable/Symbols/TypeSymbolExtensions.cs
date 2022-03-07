@@ -128,8 +128,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (type.TypeKind == TypeKind.TypeParameter)
             {
-                var constraintTypes =
-                    ((TypeParameterSymbol)type).ConstraintTypesNoUseSiteDiagnostics;
+                var constraintTypes = (
+                    (TypeParameterSymbol)type
+                ).ConstraintTypesNoUseSiteDiagnostics;
                 foreach (var constraintType in constraintTypes)
                 {
                     if (constraintType.Type.IsNullableTypeOrTypeParameter())
@@ -403,10 +404,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return null;
             if (type.IsExpressionTree())
             {
-                type =
-                    ((NamedTypeSymbol)type).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
-                        0
-                    ].Type;
+                type = ((NamedTypeSymbol)type).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
+                    0
+                ].Type;
             }
 
             return type.IsDelegateType() ? (NamedTypeSymbol)type : null;
@@ -824,10 +824,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     case TypeKind.Struct:
                     case TypeKind.Interface:
                     case TypeKind.Delegate:
-                        var typeArguments =
-                            (
-                                (NamedTypeSymbol)current
-                            ).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics;
+                        var typeArguments = (
+                            (NamedTypeSymbol)current
+                        ).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics;
                         if (typeArguments.IsEmpty)
                         {
                             return null;
@@ -1536,10 +1535,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     return true;
 
                 case TypeKind.Enum:
-                    return ((NamedTypeSymbol)type)
-                        .EnumUnderlyingType
-                        .SpecialType
-                        .IsValidVolatileFieldType();
+                    return (
+                        (NamedTypeSymbol)type
+                    ).EnumUnderlyingType.SpecialType.IsValidVolatileFieldType();
 
                 case TypeKind.TypeParameter:
                     return type.IsReferenceType;

@@ -70,9 +70,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
                     if (this.CodeModelService.IsValidExternalSymbol(member))
                     {
                         childrenBuilder.Add(
-                            this.State
-                                .CodeModelService
-                                .CreateExternalCodeElement(this.State, _projectId, member)
+                            this.State.CodeModelService.CreateExternalCodeElement(
+                                this.State,
+                                _projectId,
+                                member
+                            )
                         );
                     }
                 }
@@ -80,9 +82,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
                 foreach (var typeMember in typeSymbol.GetTypeMembers())
                 {
                     childrenBuilder.Add(
-                        this.State
-                            .CodeModelService
-                            .CreateExternalCodeElement(this.State, _projectId, typeMember)
+                        this.State.CodeModelService.CreateExternalCodeElement(
+                            this.State,
+                            _projectId,
+                            typeMember
+                        )
                     );
                 }
 

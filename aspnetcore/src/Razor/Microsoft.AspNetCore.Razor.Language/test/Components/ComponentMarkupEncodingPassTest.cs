@@ -220,8 +220,7 @@ The time is "
         }
 
         var document = codeDocument.GetDocumentIntermediateNode();
-        Engine
-            .Features
+        Engine.Features
             .OfType<ComponentDocumentClassifierPass>()
             .Single()
             .Execute(codeDocument, document);

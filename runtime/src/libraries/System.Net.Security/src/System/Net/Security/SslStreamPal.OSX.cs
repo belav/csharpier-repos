@@ -116,14 +116,12 @@ namespace System.Net.Security
                     MemoryHandle memHandle = input.Pin();
                     try
                     {
-                        PAL_TlsIo status = Interop
-                            .AppleCrypto
-                            .SslWrite(
-                                sslHandle,
-                                (byte*)memHandle.Pointer,
-                                input.Length,
-                                out int written
-                            );
+                        PAL_TlsIo status = Interop.AppleCrypto.SslWrite(
+                            sslHandle,
+                            (byte*)memHandle.Pointer,
+                            input.Length,
+                            out int written
+                        );
 
                         if (status < 0)
                         {
@@ -192,9 +190,12 @@ namespace System.Net.Security
                 {
                     fixed (byte* ptr = buffer)
                     {
-                        PAL_TlsIo status = Interop
-                            .AppleCrypto
-                            .SslRead(sslHandle, ptr, buffer.Length, out int written);
+                        PAL_TlsIo status = Interop.AppleCrypto.SslRead(
+                            sslHandle,
+                            ptr,
+                            buffer.Length,
+                            out int written
+                        );
                         if (status < 0)
                         {
                             return new SecurityStatusPal(
@@ -295,12 +296,10 @@ namespace System.Net.Security
                         && !sslAuthenticationOptions.IsServer
                     )
                     {
-                        Interop
-                            .AppleCrypto
-                            .SslSetTargetName(
-                                sslContext.SslContext,
-                                sslAuthenticationOptions.TargetHost
-                            );
+                        Interop.AppleCrypto.SslSetTargetName(
+                            sslContext.SslContext,
+                            sslAuthenticationOptions.TargetHost
+                        );
                     }
 
                     if (

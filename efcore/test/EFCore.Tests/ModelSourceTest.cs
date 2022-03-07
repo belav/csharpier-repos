@@ -303,12 +303,10 @@ namespace Microsoft.EntityFrameworkCore
                 testModelDependencies,
                 designTime: false
             );
-            var packageVersion =
-                typeof(Context1)
-                    .Assembly
-                    .GetCustomAttributes<AssemblyMetadataAttribute>()
-                    .Single(m => m.Key == "PackageVersion")
-                    .Value;
+            var packageVersion = typeof(Context1).Assembly
+                .GetCustomAttributes<AssemblyMetadataAttribute>()
+                .Single(m => m.Key == "PackageVersion")
+                .Value;
 
             var prereleaseIndex = packageVersion.IndexOf("-", StringComparison.Ordinal);
             if (prereleaseIndex != -1)

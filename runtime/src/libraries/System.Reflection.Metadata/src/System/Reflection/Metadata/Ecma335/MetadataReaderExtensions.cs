@@ -415,8 +415,9 @@ namespace System.Reflection.Metadata.Ecma335
                     return typeKind;
 
                 case HandleKind.TypeReference:
-                    var treatment =
-                        reader.GetTypeReference((TypeReferenceHandle)typeHandle).SignatureTreatment;
+                    var treatment = reader
+                        .GetTypeReference((TypeReferenceHandle)typeHandle)
+                        .SignatureTreatment;
                     return treatment switch
                     {
                         TypeRefSignatureTreatment.ProjectedToClass => SignatureTypeKind.Class,

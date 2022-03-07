@@ -50,9 +50,10 @@ namespace AutoMapper.QueryableExtensions.Impl
                     request.MembersToExpand,
                     request.GetPreviousRequestsAndSelf()
                 );
-                var transformedExpressions = configuration
-                    .ProjectionBuilder
-                    .CreateProjection(listTypePair, letPropertyMaps.New());
+                var transformedExpressions = configuration.ProjectionBuilder.CreateProjection(
+                    listTypePair,
+                    letPropertyMaps.New()
+                );
                 if (transformedExpressions.Empty)
                 {
                     return null;

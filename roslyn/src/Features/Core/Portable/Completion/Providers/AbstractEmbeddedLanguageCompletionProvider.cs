@@ -156,18 +156,23 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             char? commitKey,
             CancellationToken cancellationToken
         ) =>
-            GetLanguage(item)
-                .CompletionProvider
-                .GetChangeAsync(document, item, commitKey, cancellationToken);
+            GetLanguage(item).CompletionProvider.GetChangeAsync(
+                document,
+                item,
+                commitKey,
+                cancellationToken
+            );
 
         public override Task<CompletionDescription?> GetDescriptionAsync(
             Document document,
             CompletionItem item,
             CancellationToken cancellationToken
         ) =>
-            GetLanguage(item)
-                .CompletionProvider
-                .GetDescriptionAsync(document, item, cancellationToken);
+            GetLanguage(item).CompletionProvider.GetDescriptionAsync(
+                document,
+                item,
+                cancellationToken
+            );
 
         private IEmbeddedLanguageFeatures GetLanguage(CompletionItem item)
         {

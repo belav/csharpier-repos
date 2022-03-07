@@ -177,9 +177,8 @@ namespace System.Net.Http
                     {
                         _sendContentCts = new CancellationTokenSource();
                         sendContentCancellationToken = _sendContentCts.Token;
-                        sendContentCancellationRegistration = requestCancellationSource
-                            .Token
-                            .UnsafeRegister(
+                        sendContentCancellationRegistration =
+                            requestCancellationSource.Token.UnsafeRegister(
                                 static s => ((CancellationTokenSource)s!).Cancel(),
                                 _sendContentCts
                             );
@@ -420,9 +419,9 @@ namespace System.Net.Http
                     {
                         timer = new Timer(
                             static o =>
-                                ((Http3RequestStream)o!)
-                                    ._expect100ContinueCompletionSource!
-                                    .TrySetResult(true),
+                                (
+                                    (Http3RequestStream)o!
+                                )._expect100ContinueCompletionSource!.TrySetResult(true),
                             this,
                             _connection.Pool.Settings._expect100ContinueTimeout,
                             Timeout.InfiniteTimeSpan
@@ -668,18 +667,15 @@ namespace System.Net.Http
 
             if (_connection.Pool.Settings._useCookies)
             {
-                string cookiesFromContainer = _connection
-                    .Pool
-                    .Settings
-                    ._cookieContainer!
-                    .GetCookieHeader(request.RequestUri);
+                string cookiesFromContainer =
+                    _connection.Pool.Settings._cookieContainer!.GetCookieHeader(request.RequestUri);
                 if (cookiesFromContainer != string.Empty)
                 {
-                    Encoding? valueEncoding = _connection
-                        .Pool
-                        .Settings
-                        ._requestHeaderEncodingSelector
-                        ?.Invoke(HttpKnownHeaderNames.Cookie, request);
+                    Encoding? valueEncoding =
+                        _connection.Pool.Settings._requestHeaderEncodingSelector?.Invoke(
+                            HttpKnownHeaderNames.Cookie,
+                            request
+                        );
                     BufferLiteralHeaderWithStaticNameReference(
                         H3StaticTable.Cookie,
                         cookiesFromContainer,
@@ -723,8 +719,10 @@ namespace System.Net.Http
                 return;
             }
 
-            HeaderEncodingSelector<HttpRequestMessage>? encodingSelector =
-                _connection.Pool.Settings._requestHeaderEncodingSelector;
+            HeaderEncodingSelector<HttpRequestMessage>? encodingSelector = _connection
+                .Pool
+                .Settings
+                ._requestHeaderEncodingSelector;
 
             foreach (KeyValuePair<HeaderDescriptor, object> header in headers.HeaderStore)
             {
@@ -1229,11 +1227,11 @@ namespace System.Net.Http
 
                 if (headerValue is null)
                 {
-                    Encoding? encoding = _connection
-                        .Pool
-                        .Settings
-                        ._responseHeaderEncodingSelector
-                        ?.Invoke(descriptor.Name, _request);
+                    Encoding? encoding =
+                        _connection.Pool.Settings._responseHeaderEncodingSelector?.Invoke(
+                            descriptor.Name,
+                            _request
+                        );
                     headerValue = _connection.GetResponseHeaderValueWithCaching(
                         descriptor,
                         literalValue,
@@ -1249,20 +1247,18 @@ namespace System.Net.Http
                         throw new Http3ConnectionException(Http3ErrorCode.ProtocolError);
                     case HeaderState.ResponseHeaders
                           when descriptor.HeaderType.HasFlag(HttpHeaderType.Content):
-                        _response!
-                            .Content!
-                            .Headers
-                            .TryAddWithoutValidation(descriptor, headerValue);
+                        _response!.Content!.Headers.TryAddWithoutValidation(
+                            descriptor,
+                            headerValue
+                        );
                         break;
                     case HeaderState.ResponseHeaders:
-                        _response!
-                            .Headers
-                            .TryAddWithoutValidation(
-                                descriptor.HeaderType.HasFlag(HttpHeaderType.Request)
-                                  ? descriptor.AsCustomHeader()
-                                  : descriptor,
-                                headerValue
-                            );
+                        _response!.Headers.TryAddWithoutValidation(
+                            descriptor.HeaderType.HasFlag(HttpHeaderType.Request)
+                              ? descriptor.AsCustomHeader()
+                              : descriptor,
+                            headerValue
+                        );
                         break;
                     case HeaderState.TrailingHeaders:
                         _trailingHeaders!.Add(

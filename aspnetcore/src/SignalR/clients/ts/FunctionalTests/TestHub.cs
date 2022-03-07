@@ -82,8 +82,7 @@ public class TestHub : Hub
         token.Register(
             async (state) =>
             {
-                await ((IHubContext<TestHub>)state)
-                    .Clients
+                await ((IHubContext<TestHub>)state).Clients
                     .Client(connectionId)
                     .SendAsync("StreamCanceled");
             },

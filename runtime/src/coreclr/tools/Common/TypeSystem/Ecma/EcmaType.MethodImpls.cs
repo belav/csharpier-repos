@@ -36,12 +36,9 @@ namespace Internal.TypeSystem.Ecma
                 // we need to dereference that handle to the underlying member reference to look at name matching.
                 if (methodDeclHandleKind == HandleKind.MethodSpecification)
                 {
-                    methodDeclCheckHandle =
-                        metadataReader
-                            .GetMethodSpecification(
-                                (MethodSpecificationHandle)methodDeclCheckHandle
-                            )
-                            .Method;
+                    methodDeclCheckHandle = metadataReader
+                        .GetMethodSpecification((MethodSpecificationHandle)methodDeclCheckHandle)
+                        .Method;
                     methodDeclHandleKind = methodDeclCheckHandle.Kind;
                 }
 
@@ -123,12 +120,9 @@ namespace Internal.TypeSystem.Ecma
                 // look at the owning type.
                 if (methodDeclHandleKind == HandleKind.MethodSpecification)
                 {
-                    methodDeclCheckHandle =
-                        metadataReader
-                            .GetMethodSpecification(
-                                (MethodSpecificationHandle)methodDeclCheckHandle
-                            )
-                            .Method;
+                    methodDeclCheckHandle = metadataReader
+                        .GetMethodSpecification((MethodSpecificationHandle)methodDeclCheckHandle)
+                        .Method;
                     methodDeclHandleKind = methodDeclCheckHandle.Kind;
                 }
 
@@ -142,10 +136,9 @@ namespace Internal.TypeSystem.Ecma
                         break;
 
                     case HandleKind.MemberReference:
-                        EntityHandle owningTypeHandle =
-                            metadataReader
-                                .GetMemberReference((MemberReferenceHandle)methodDeclCheckHandle)
-                                .Parent;
+                        EntityHandle owningTypeHandle = metadataReader
+                            .GetMemberReference((MemberReferenceHandle)methodDeclCheckHandle)
+                            .Parent;
                         owningType = _module.GetObject(owningTypeHandle) as MetadataType;
                         break;
 

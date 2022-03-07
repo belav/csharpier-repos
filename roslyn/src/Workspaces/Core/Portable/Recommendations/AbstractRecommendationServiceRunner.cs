@@ -33,8 +33,9 @@ namespace Microsoft.CodeAnalysis.Recommendations
         )
         {
             _context = context;
-            _stringComparerForLanguage =
-                _context.GetLanguageService<ISyntaxFactsService>().StringComparer;
+            _stringComparerForLanguage = _context
+                .GetLanguageService<ISyntaxFactsService>()
+                .StringComparer;
             _filterOutOfScopeLocals = filterOutOfScopeLocals;
             _cancellationToken = cancellationToken;
         }
@@ -95,8 +96,7 @@ namespace Microsoft.CodeAnalysis.Recommendations
 
             // Check that a => a. belongs to an invocation.
             // Find its' ordinal in the invocation, e.g. ThenInclude(a => a.Something, a=> a.
-            var lambdaSyntax = owningMethod
-                .DeclaringSyntaxReferences
+            var lambdaSyntax = owningMethod.DeclaringSyntaxReferences
                 .Single()
                 .GetSyntax(_cancellationToken);
             if (
@@ -135,9 +135,10 @@ namespace Microsoft.CodeAnalysis.Recommendations
             {
                 // Get all members potentially matching the invocation expression.
                 // We filter them out based on ordinality later.
-                var candidateSymbols = _context
-                    .SemanticModel
-                    .GetMemberGroup(expressionOfInvocationExpression, _cancellationToken);
+                var candidateSymbols = _context.SemanticModel.GetMemberGroup(
+                    expressionOfInvocationExpression,
+                    _cancellationToken
+                );
 
                 // parameter.Ordinal is the ordinal within (a,b,c) => b.
                 // For candidate symbols of (a,b,c) => b., get types of all possible b.
@@ -182,8 +183,7 @@ namespace Microsoft.CodeAnalysis.Recommendations
                 return parameterTypeSymbols;
             }
 
-            var invocationSymbols = _context
-                .SemanticModel
+            var invocationSymbols = _context.SemanticModel
                 .GetSymbolInfo(invocationExpression)
                 .GetAllSymbols();
             if (invocationSymbols.Length == 0)
@@ -241,10 +241,9 @@ namespace Microsoft.CodeAnalysis.Recommendations
             int ordinalInLambda
         )
         {
-            var expressionSymbol = _context
-                .SemanticModel
-                .Compilation
-                .GetTypeByMetadataName(typeof(Expression<>).FullName);
+            var expressionSymbol = _context.SemanticModel.Compilation.GetTypeByMetadataName(
+                typeof(Expression<>).FullName
+            );
 
             var builder = ArrayBuilder<ITypeSymbol>.GetInstance();
 
@@ -269,9 +268,9 @@ namespace Microsoft.CodeAnalysis.Recommendations
                     if (
                         expressionSymbol != null
                         && type is INamedTypeSymbol expressionSymbolNamedTypeCandidate
-                        && expressionSymbolNamedTypeCandidate
-                            .OriginalDefinition
-                            .Equals(expressionSymbol)
+                        && expressionSymbolNamedTypeCandidate.OriginalDefinition.Equals(
+                            expressionSymbol
+                        )
                     )
                     {
                         var allTypeArguments = type.GetAllTypeArguments();
@@ -314,8 +313,7 @@ namespace Microsoft.CodeAnalysis.Recommendations
         {
             if (!string.IsNullOrEmpty(argumentName))
             {
-                parameterType = method
-                    .Parameters
+                parameterType = method.Parameters
                     .FirstOrDefault(p => _stringComparerForLanguage.Equals(p.Name, argumentName))
                     ?.Type;
                 return parameterType != null;
@@ -354,14 +352,9 @@ namespace Microsoft.CodeAnalysis.Recommendations
                 return ImmutableArray<ISymbol>.Empty;
 
             var semanticModel = _context.SemanticModel;
-            var containingNamespaceSymbol = semanticModel
-                .Compilation
-                .GetCompilationNamespace(
-                    semanticModel.GetEnclosingNamespace(
-                        declarationSyntax.SpanStart,
-                        _cancellationToken
-                    )
-                );
+            var containingNamespaceSymbol = semanticModel.Compilation.GetCompilationNamespace(
+                semanticModel.GetEnclosingNamespace(declarationSyntax.SpanStart, _cancellationToken)
+            );
 
             var symbols = semanticModel
                 .LookupNamespacesAndTypes(declarationSyntax.SpanStart, containingNamespaceSymbol)
@@ -396,17 +389,13 @@ namespace Microsoft.CodeAnalysis.Recommendations
             // ...unless, again, it's also declared elsewhere.
             //
             return recommendationSymbol.IsNamespace()
-                && recommendationSymbol
-                    .Locations
-                    .Any(
-                        candidateLocation =>
-                            !(
-                                declarationSyntax.SyntaxTree == candidateLocation.SourceTree
-                                && declarationSyntax
-                                    .Span
-                                    .IntersectsWith(candidateLocation.SourceSpan)
-                            )
-                    );
+                && recommendationSymbol.Locations.Any(
+                    candidateLocation =>
+                        !(
+                            declarationSyntax.SyntaxTree == candidateLocation.SourceTree
+                            && declarationSyntax.Span.IntersectsWith(candidateLocation.SourceSpan)
+                        )
+                );
         }
 
         protected ImmutableArray<ISymbol> GetMemberSymbols(
@@ -450,9 +439,11 @@ namespace Microsoft.CodeAnalysis.Recommendations
               ? _context.SemanticModel.LookupStaticMembers(position, container)
               : SuppressDefaultTupleElements(
                     container,
-                    _context
-                        .SemanticModel
-                        .LookupSymbols(position, container, includeReducedExtensionMethods: true)
+                    _context.SemanticModel.LookupSymbols(
+                        position,
+                        container,
+                        includeReducedExtensionMethods: true
+                    )
                 );
         }
 

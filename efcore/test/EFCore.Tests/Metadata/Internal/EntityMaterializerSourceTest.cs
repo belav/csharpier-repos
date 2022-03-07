@@ -52,8 +52,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             entityType.ConstructorBinding = new ConstructorBinding(
                 typeof(SomeEntity)
                     .GetTypeInfo()
-                    .DeclaredConstructors
-                    .Single(c => c.GetParameters().Length == 2),
+                    .DeclaredConstructors.Single(c => c.GetParameters().Length == 2),
                 new List<ParameterBinding>
                 {
                     new PropertyParameterBinding(

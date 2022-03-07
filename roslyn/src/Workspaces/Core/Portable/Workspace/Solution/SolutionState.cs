@@ -365,8 +365,7 @@ namespace Microsoft.CodeAnalysis
             return documentId != null
                 && this.ContainsProject(documentId.ProjectId)
                 && this.GetProjectState(documentId.ProjectId)!
-                    .AdditionalDocumentStates
-                    .Contains(documentId);
+                    .AdditionalDocumentStates.Contains(documentId);
         }
 
         /// <summary>
@@ -379,26 +378,25 @@ namespace Microsoft.CodeAnalysis
             return documentId != null
                 && this.ContainsProject(documentId.ProjectId)
                 && this.GetProjectState(documentId.ProjectId)!
-                    .AnalyzerConfigDocumentStates
-                    .Contains(documentId);
+                    .AnalyzerConfigDocumentStates.Contains(documentId);
         }
 
         private DocumentState GetRequiredDocumentState(DocumentId documentId) =>
-            GetRequiredProjectState(documentId.ProjectId)
-                .DocumentStates
-                .GetRequiredState(documentId);
+            GetRequiredProjectState(documentId.ProjectId).DocumentStates.GetRequiredState(
+                documentId
+            );
 
         private AdditionalDocumentState GetRequiredAdditionalDocumentState(DocumentId documentId) =>
-            GetRequiredProjectState(documentId.ProjectId)
-                .AdditionalDocumentStates
-                .GetRequiredState(documentId);
+            GetRequiredProjectState(documentId.ProjectId).AdditionalDocumentStates.GetRequiredState(
+                documentId
+            );
 
         private AnalyzerConfigDocumentState GetRequiredAnalyzerConfigDocumentState(
             DocumentId documentId
         ) =>
-            GetRequiredProjectState(documentId.ProjectId)
-                .AnalyzerConfigDocumentStates
-                .GetRequiredState(documentId);
+            GetRequiredProjectState(
+                documentId.ProjectId
+            ).AnalyzerConfigDocumentStates.GetRequiredState(documentId);
 
         internal DocumentState? GetDocumentState(SyntaxTree? syntaxTree, ProjectId? projectId)
         {
@@ -646,10 +644,7 @@ namespace Microsoft.CodeAnalysis
         private static IEnumerable<TextDocumentState> GetDocumentStates(
             ProjectState projectState
         ) =>
-            projectState
-                .DocumentStates
-                .States
-                .Values
+            projectState.DocumentStates.States.Values
                 .Concat<TextDocumentState>(projectState.AdditionalDocumentStates.States.Values)
                 .Concat(projectState.AnalyzerConfigDocumentStates.States.Values);
 
@@ -1970,14 +1965,12 @@ namespace Microsoft.CodeAnalysis
             ImmutableDictionary<ProjectId, ProjectState> projectStates
         )
         {
-            var map = projectStates
-                .Values
+            var map = projectStates.Values
                 .Select(
                     state =>
                         new KeyValuePair<ProjectId, ImmutableHashSet<ProjectId>>(
                             state.Id,
-                            state
-                                .ProjectReferences
+                            state.ProjectReferences
                                 .Where(pr => projectStates.ContainsKey(pr.ProjectId))
                                 .Select(pr => pr.ProjectId)
                                 .ToImmutableHashSet()
@@ -2203,8 +2196,7 @@ namespace Microsoft.CodeAnalysis
                 }
 
                 var doc = GetProjectState(documentId.ProjectId)
-                    ?.DocumentStates
-                    .GetState(documentId);
+                    ?.DocumentStates.GetState(documentId);
                 if (doc != null)
                 {
                     if (!doc.TryGetText(out var existingText) || existingText != text)
@@ -2464,8 +2456,7 @@ namespace Microsoft.CodeAnalysis
                         aliases: projectReference.Aliases,
                         embedInteropTypes: projectReference.EmbedInteropTypes
                     );
-                    return await tracker
-                        .SkeletonReferenceCache
+                    return await tracker.SkeletonReferenceCache
                         .GetOrBuildReferenceAsync(tracker, this, properties, cancellationToken)
                         .ConfigureAwait(false);
                 }

@@ -42,9 +42,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
             // First filter the projects by matching up properties on the input hierarchy against properties on each
             // project's hierarchy.
-            var candidateProjects = _workspace
-                .CurrentSolution
-                .Projects
+            var candidateProjects = _workspace.CurrentSolution.Projects
                 .Where(
                     p =>
                     {
@@ -97,9 +95,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             foreach (var candidateProject in candidateProjects)
             {
                 if (
-                    !candidateProject
-                        .DocumentIds
-                        .Any(id => ContainedDocument.TryGetContainedDocument(id) != null)
+                    !candidateProject.DocumentIds.Any(
+                        id => ContainedDocument.TryGetContainedDocument(id) != null
+                    )
                 )
                 {
                     projectId = candidateProject.Id;

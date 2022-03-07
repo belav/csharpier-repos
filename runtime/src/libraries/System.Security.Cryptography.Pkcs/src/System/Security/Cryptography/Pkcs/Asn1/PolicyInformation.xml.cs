@@ -127,13 +127,11 @@ namespace System.Security.Cryptography.Pkcs.Asn1
 
                     while (collectionReader.HasData)
                     {
-                        System
-                            .Security
-                            .Cryptography
-                            .Pkcs
-                            .Asn1
-                            .PolicyQualifierInfo
-                            .Decode(ref collectionReader, rebind, out tmpItem);
+                        System.Security.Cryptography.Pkcs.Asn1.PolicyQualifierInfo.Decode(
+                            ref collectionReader,
+                            rebind,
+                            out tmpItem
+                        );
                         tmpList.Add(tmpItem);
                     }
 

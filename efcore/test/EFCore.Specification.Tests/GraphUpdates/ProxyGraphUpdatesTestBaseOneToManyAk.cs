@@ -492,8 +492,9 @@ namespace Microsoft.EntityFrameworkCore
                     }
 
                     var childCollection = root.OptionalChildrenAk.First().Children;
-                    var childCompositeCollection =
-                        root.OptionalChildrenAk.First().CompositeChildren;
+                    var childCompositeCollection = root.OptionalChildrenAk
+                        .First()
+                        .CompositeChildren;
                     var removed2 = childCollection.First();
                     var removed1 = root.OptionalChildrenAk.Skip(1).First();
                     var removed2c = childCompositeCollection.First();
@@ -591,8 +592,9 @@ namespace Microsoft.EntityFrameworkCore
                     }
 
                     var childCollection = root.RequiredChildrenAk.First().Children;
-                    var childCompositeCollection =
-                        root.RequiredChildrenAk.First().CompositeChildren;
+                    var childCompositeCollection = root.RequiredChildrenAk
+                        .First()
+                        .CompositeChildren;
                     removed2 = childCollection.First();
                     removed2c = childCompositeCollection.First();
                     removed1 = root.RequiredChildrenAk.Skip(1).First();

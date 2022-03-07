@@ -523,8 +523,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Select_nested_collection_multi_level()
         {
             using var context = CreateContext();
-            var customers = context
-                .Customers
+            var customers = context.Customers
                 .Where(c => c.CustomerID.StartsWith("A"))
                 .Select(
                     c =>
@@ -546,8 +545,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Select_nested_collection_multi_level2()
         {
             using var context = CreateContext();
-            var customers = context
-                .Customers
+            var customers = context.Customers
                 .Where(c => c.CustomerID.StartsWith("A"))
                 .Select(
                     c =>
@@ -569,15 +567,13 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Select_nested_collection_multi_level3()
         {
             using var context = CreateContext();
-            var customers = context
-                .Customers
+            var customers = context.Customers
                 .Where(c => c.CustomerID.StartsWith("A"))
                 .Select(
                     c =>
                         new
                         {
-                            OrderDates = context
-                                .Orders
+                            OrderDates = context.Orders
                                 .Where(o => o.OrderID < 10500)
                                 .Where(o => c.CustomerID == o.CustomerID)
                                 .Select(o => o.OrderDate)
@@ -594,8 +590,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Select_nested_collection_multi_level4()
         {
             using var context = CreateContext();
-            var customers = context
-                .Customers
+            var customers = context.Customers
                 .Where(c => c.CustomerID.StartsWith("A"))
                 .Select(
                     c =>
@@ -623,8 +618,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Select_nested_collection_multi_level5()
         {
             using var context = CreateContext();
-            var customers = context
-                .Customers
+            var customers = context.Customers
                 .Where(c => c.CustomerID.StartsWith("A"))
                 .Select(
                     c =>
@@ -652,8 +646,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Select_nested_collection_multi_level6()
         {
             using var context = CreateContext();
-            var customers = context
-                .Customers
+            var customers = context.Customers
                 .Where(c => c.CustomerID.StartsWith("A"))
                 .Select(
                     c =>
@@ -2158,8 +2151,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual async Task Filtered_collection_projection_is_tracked(bool async)
         {
             using var context = CreateContext();
-            var query = context
-                .Customers
+            var query = context.Customers
                 .Where(c => c.CustomerID.StartsWith("A"))
                 .Select(
                     c =>
@@ -2184,8 +2176,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual async Task Filtered_collection_projection_with_to_list_is_tracked(bool async)
         {
             using var context = CreateContext();
-            var query = context
-                .Customers
+            var query = context.Customers
                 .Where(c => c.CustomerID.StartsWith("A"))
                 .Select(
                     c =>

@@ -58,13 +58,12 @@ public class TransportsServerStartup : ServerStartup
                         endpoints.MapBlazorHub(
                             configureOptions: options =>
                             {
-                                options.Transports =
-                                    Microsoft
-                                        .AspNetCore
-                                        .Http
-                                        .Connections
-                                        .HttpTransportType
-                                        .LongPolling;
+                                options.Transports = Microsoft
+                                    .AspNetCore
+                                    .Http
+                                    .Connections
+                                    .HttpTransportType
+                                    .LongPolling;
                             }
                         );
                         endpoints.MapFallbackToPage("/_ServerHost");
@@ -86,13 +85,12 @@ public class TransportsServerStartup : ServerStartup
                         endpoints.MapBlazorHub(
                             configureOptions: options =>
                             {
-                                options.Transports =
-                                    Microsoft
-                                        .AspNetCore
-                                        .Http
-                                        .Connections
-                                        .HttpTransportType
-                                        .WebSockets;
+                                options.Transports = Microsoft
+                                    .AspNetCore
+                                    .Http
+                                    .Connections
+                                    .HttpTransportType
+                                    .WebSockets;
                             }
                         );
                         endpoints.MapFallbackToPage("/_ServerHost");

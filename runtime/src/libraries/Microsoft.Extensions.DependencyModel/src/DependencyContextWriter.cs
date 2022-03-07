@@ -580,8 +580,7 @@ namespace Microsoft.Extensions.DependencyModel
 
         private void WriteLibraries(DependencyContext context, Utf8JsonWriter jsonWriter)
         {
-            IEnumerable<IGrouping<string, Library>> allLibraries = context
-                .RuntimeLibraries
+            IEnumerable<IGrouping<string, Library>> allLibraries = context.RuntimeLibraries
                 .Cast<Library>()
                 .Concat(context.CompileLibraries)
                 .GroupBy(

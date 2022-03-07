@@ -17,13 +17,13 @@ internal class ViewComponentTagHelperDescriptorFactory
     private readonly INamedTypeSymbol _taskSymbol;
     private readonly INamedTypeSymbol _iDictionarySymbol;
 
-    private static readonly SymbolDisplayFormat FullNameTypeDisplayFormat = SymbolDisplayFormat
-        .FullyQualifiedFormat
-        .WithGlobalNamespaceStyle(SymbolDisplayGlobalNamespaceStyle.Omitted)
-        .WithMiscellaneousOptions(
-            SymbolDisplayFormat.FullyQualifiedFormat.MiscellaneousOptions
-                & (~SymbolDisplayMiscellaneousOptions.UseSpecialTypes)
-        );
+    private static readonly SymbolDisplayFormat FullNameTypeDisplayFormat =
+        SymbolDisplayFormat.FullyQualifiedFormat
+            .WithGlobalNamespaceStyle(SymbolDisplayGlobalNamespaceStyle.Omitted)
+            .WithMiscellaneousOptions(
+                SymbolDisplayFormat.FullyQualifiedFormat.MiscellaneousOptions
+                    & (~SymbolDisplayMiscellaneousOptions.UseSpecialTypes)
+            );
 
     private static readonly IReadOnlyDictionary<string, string> PrimitiveDisplayTypeNameLookups =
         new Dictionary<string, string>(StringComparer.Ordinal)
@@ -154,9 +154,10 @@ internal class ViewComponentTagHelperDescriptorFactory
             }
             else if (
                 returnType.IsGenericType
-                && SymbolEqualityComparer
-                    .Default
-                    .Equals(returnType.ConstructedFrom, _genericTaskSymbol)
+                && SymbolEqualityComparer.Default.Equals(
+                    returnType.ConstructedFrom,
+                    _genericTaskSymbol
+                )
             )
             {
                 // This is ok.
@@ -194,9 +195,10 @@ internal class ViewComponentTagHelperDescriptorFactory
             }
             else if (
                 returnType.IsGenericType
-                && SymbolEqualityComparer
-                    .Default
-                    .Equals(returnType.ConstructedFrom, _genericTaskSymbol)
+                && SymbolEqualityComparer.Default.Equals(
+                    returnType.ConstructedFrom,
+                    _genericTaskSymbol
+                )
             )
             {
                 diagnostic =
@@ -284,30 +286,23 @@ internal class ViewComponentTagHelperDescriptorFactory
     {
         INamedTypeSymbol dictionaryType;
         if (
-            SymbolEqualityComparer
-                .Default
-                .Equals((parameter.Type as INamedTypeSymbol)?.ConstructedFrom, _iDictionarySymbol)
+            SymbolEqualityComparer.Default.Equals(
+                (parameter.Type as INamedTypeSymbol)?.ConstructedFrom,
+                _iDictionarySymbol
+            )
         )
         {
             dictionaryType = (INamedTypeSymbol)parameter.Type;
         }
         else if (
-            parameter
-                .Type
-                .AllInterfaces
-                .Any(
-                    s =>
-                        SymbolEqualityComparer.Default.Equals(s.ConstructedFrom, _iDictionarySymbol)
-                )
+            parameter.Type.AllInterfaces.Any(
+                s => SymbolEqualityComparer.Default.Equals(s.ConstructedFrom, _iDictionarySymbol)
+            )
         )
         {
-            dictionaryType = parameter
-                .Type
-                .AllInterfaces
-                .First(
-                    s =>
-                        SymbolEqualityComparer.Default.Equals(s.ConstructedFrom, _iDictionarySymbol)
-                );
+            dictionaryType = parameter.Type.AllInterfaces.First(
+                s => SymbolEqualityComparer.Default.Equals(s.ConstructedFrom, _iDictionarySymbol)
+            );
         }
         else
         {
@@ -334,15 +329,15 @@ internal class ViewComponentTagHelperDescriptorFactory
             .GetAttributes()
             .Where(
                 a =>
-                    SymbolEqualityComparer
-                        .Default
-                        .Equals(a.AttributeClass, _viewComponentAttributeSymbol)
+                    SymbolEqualityComparer.Default.Equals(
+                        a.AttributeClass,
+                        _viewComponentAttributeSymbol
+                    )
             )
             .FirstOrDefault();
         var name =
             viewComponentAttribute
-                ?.NamedArguments
-                .Where(
+                ?.NamedArguments.Where(
                     namedArgument =>
                         string.Equals(
                             namedArgument.Key,
@@ -351,8 +346,7 @@ internal class ViewComponentTagHelperDescriptorFactory
                         )
                 )
                 .FirstOrDefault()
-                .Value
-                .Value as string;
+                .Value.Value as string;
 
         if (!string.IsNullOrEmpty(name))
         {
@@ -369,20 +363,16 @@ internal class ViewComponentTagHelperDescriptorFactory
 
         // Get name by convention
         if (
-            componentType
-                .Name
-                .EndsWith(
-                    ViewComponentTypes.ViewComponentSuffix,
-                    StringComparison.OrdinalIgnoreCase
-                )
+            componentType.Name.EndsWith(
+                ViewComponentTypes.ViewComponentSuffix,
+                StringComparison.OrdinalIgnoreCase
+            )
         )
         {
-            return componentType
-                .Name
-                .Substring(
-                    0,
-                    componentType.Name.Length - ViewComponentTypes.ViewComponentSuffix.Length
-                );
+            return componentType.Name.Substring(
+                0,
+                componentType.Name.Length - ViewComponentTypes.ViewComponentSuffix.Length
+            );
         }
         else
         {

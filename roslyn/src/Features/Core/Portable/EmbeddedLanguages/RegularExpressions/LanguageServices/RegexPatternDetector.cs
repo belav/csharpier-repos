@@ -59,8 +59,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
         private static readonly Dictionary<string, RegexOptions> s_nameToOption =
             typeof(RegexOptions)
                 .GetTypeInfo()
-                .DeclaredFields
-                .Where(f => f.FieldType == typeof(RegexOptions))
+                .DeclaredFields.Where(f => f.FieldType == typeof(RegexOptions))
                 .ToDictionary(
                     f => f.Name,
                     f => (RegexOptions)f.GetValue(null),
@@ -418,9 +417,11 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
         {
             options = default;
 
-            var parameter = _info
-                .SemanticFacts
-                .FindParameterForArgument(semanticModel, argumentNode, cancellationToken);
+            var parameter = _info.SemanticFacts.FindParameterForArgument(
+                semanticModel,
+                argumentNode,
+                cancellationToken
+            );
             if (parameter?.Name != _patternName)
             {
                 return false;

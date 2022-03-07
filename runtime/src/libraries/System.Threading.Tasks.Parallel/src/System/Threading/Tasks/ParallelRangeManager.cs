@@ -109,8 +109,9 @@ namespace System.Threading.Tasks
 
                 if (currentRange._bRangeFinished == 0)
                 {
-                    StrongBox<long>? sharedCurrentIndexOffset =
-                        _indexRanges[_nCurrentIndexRange]._nSharedCurrentIndexOffset;
+                    StrongBox<long>? sharedCurrentIndexOffset = _indexRanges[
+                        _nCurrentIndexRange
+                    ]._nSharedCurrentIndexOffset;
                     if (sharedCurrentIndexOffset == null)
                     {
                         Interlocked.CompareExchange(

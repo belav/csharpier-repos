@@ -31,9 +31,10 @@ internal static class ResponseUtils
     public static bool IsNegotiateRequest(HttpRequestMessage request)
     {
         return request.Method == HttpMethod.Post
-            && new UriBuilder(request.RequestUri)
-                .Path
-                .EndsWith("/negotiate", StringComparison.Ordinal);
+            && new UriBuilder(request.RequestUri).Path.EndsWith(
+                "/negotiate",
+                StringComparison.Ordinal
+            );
     }
 
     public static bool IsLongPollRequest(HttpRequestMessage request)

@@ -174,8 +174,9 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
 
             ((IAnalyzerHost)project).SetRuleSetFile(pathWithExtraBackslashes);
 
-            var projectRuleSetFile =
-                project.VisualStudioProjectOptionsProcessor.ExplicitRuleSetFilePath;
+            var projectRuleSetFile = project
+                .VisualStudioProjectOptionsProcessor
+                .ExplicitRuleSetFilePath;
 
             Assert.Equal(expected: ruleSetFile.Path, actual: projectRuleSetFile);
         }
@@ -306,9 +307,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
             File.WriteAllText(ruleSetFile.Path, ruleSetSource.Replace("Error", "Warning"));
             await environment.RaiseFileChangeAsync(ruleSetFile.Path);
 
-            var listenerProvider = environment
-                .ExportProvider
-                .GetExportedValue<AsynchronousOperationListenerProvider>();
+            var listenerProvider =
+                environment.ExportProvider.GetExportedValue<AsynchronousOperationListenerProvider>();
             var waiter = listenerProvider.GetWaiter(FeatureAttribute.RuleSetEditor);
             waiter.ExpeditedWaitAsync().JoinUsingDispatcher(CancellationToken.None);
 

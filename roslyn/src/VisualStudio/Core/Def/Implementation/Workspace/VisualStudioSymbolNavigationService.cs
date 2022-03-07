@@ -87,9 +87,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 if (targetDocument != null)
                 {
                     var editorWorkspace = targetDocument.Project.Solution.Workspace;
-                    var navigationService = editorWorkspace
-                        .Services
-                        .GetRequiredService<IDocumentNavigationService>();
+                    var navigationService =
+                        editorWorkspace.Services.GetRequiredService<IDocumentNavigationService>();
                     return navigationService.TryNavigateToSpan(
                         editorWorkspace,
                         targetDocument.Id,
@@ -124,9 +123,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 var compilation = project
                     .GetCompilationAsync(cancellationToken)
                     .WaitAndGetResult(cancellationToken);
-                var navInfo = libraryService
-                    .NavInfoFactory
-                    .CreateForSymbol(symbol, project, compilation);
+                var navInfo = libraryService.NavInfoFactory.CreateForSymbol(
+                    symbol,
+                    project,
+                    compilation
+                );
                 if (navInfo == null)
                 {
                     navInfo = libraryService.NavInfoFactory.CreateForProject(project);
@@ -218,9 +219,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             if (openedDocument != null)
             {
                 var editorWorkspace = openedDocument.Project.Solution.Workspace;
-                var navigationService = editorWorkspace
-                    .Services
-                    .GetRequiredService<IDocumentNavigationService>();
+                var navigationService =
+                    editorWorkspace.Services.GetRequiredService<IDocumentNavigationService>();
 
                 return navigationService.TryNavigateToSpan(
                     editorWorkspace,
@@ -240,9 +240,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             CancellationToken cancellationToken
         )
         {
-            await this.ThreadingContext
-                .JoinableTaskFactory
-                .SwitchToMainThreadAsync(cancellationToken);
+            await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                cancellationToken
+            );
 
             AssertIsForeground();
 
@@ -313,9 +313,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
             var navigateToTextSpan = new Microsoft.VisualStudio.TextManager.Interop.TextSpan[1];
 
-            await this.ThreadingContext
-                .JoinableTaskFactory
-                .SwitchToMainThreadAsync(cancellationToken);
+            await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                cancellationToken
+            );
 
             var queryNavigateStatusCode = navigationNotify.QueryNavigateToSymbol(
                 hierarchy,
@@ -366,9 +366,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
             var documentToUse = generatedDocuments.FirstOrDefault() ?? documents.First();
 
-            await this.ThreadingContext
-                .JoinableTaskFactory
-                .SwitchToMainThreadAsync(cancellationToken);
+            await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                cancellationToken
+            );
 
             if (!TryGetVsHierarchyAndItemId(documentToUse, out var hierarchy, out var itemID))
                 return null;

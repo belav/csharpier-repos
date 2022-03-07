@@ -355,10 +355,9 @@ namespace Microsoft.Diagnostics.Tools.Pgo
         {
             if (owningTypeOverride != null)
             {
-                reader =
-                    (
-                        (EcmaModule)((MetadataType)owningTypeOverride.GetTypeDefinition()).Module
-                    ).MetadataReader;
+                reader = (
+                    (EcmaModule)((MetadataType)owningTypeOverride.GetTypeDefinition()).Module
+                ).MetadataReader;
             }
             Debug.Assert(reader != null);
             return GetMethodFromMethodDef(reader, handle, owningTypeOverride);

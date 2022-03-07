@@ -462,14 +462,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 return false;
 
             // See if interpreting the same expression as a type in this location binds.
-            var potentialType =
-                semanticModel
-                    .GetSpeculativeTypeInfo(
-                        expression.SpanStart,
-                        expression,
-                        SpeculativeBindingOption.BindAsTypeOrNamespace
-                    )
-                    .Type;
+            var potentialType = semanticModel
+                .GetSpeculativeTypeInfo(
+                    expression.SpanStart,
+                    expression,
+                    SpeculativeBindingOption.BindAsTypeOrNamespace
+                )
+                .Type;
             return potentialType is not (null or IErrorTypeSymbol);
         }
 
@@ -684,14 +683,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             )
             {
                 if (
-                    castExpression
-                        .Type
-                        .IsKind(
-                            SyntaxKind.PredefinedType,
-                            SyntaxKind.ArrayType,
-                            SyntaxKind.PointerType,
-                            SyntaxKind.NullableType
-                        )
+                    castExpression.Type.IsKind(
+                        SyntaxKind.PredefinedType,
+                        SyntaxKind.ArrayType,
+                        SyntaxKind.PointerType,
+                        SyntaxKind.NullableType
+                    )
                 )
                 {
                     return false;
@@ -786,12 +783,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     {
                         if (
                             binaryExpression.Left == node
-                            && binaryExpression
-                                .Right
-                                .IsKind(
-                                    SyntaxKind.ParenthesizedExpression,
-                                    SyntaxKind.CastExpression
-                                )
+                            && binaryExpression.Right.IsKind(
+                                SyntaxKind.ParenthesizedExpression,
+                                SyntaxKind.CastExpression
+                            )
                         )
                         {
                             if (IsPreviousExpressionPotentiallyAmbiguous(binaryExpression))

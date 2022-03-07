@@ -139,14 +139,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             foreach (var parameter in this.Parameters)
             {
-                parameter
-                    .Type
-                    .CheckAllConstraints(
-                        compilation,
-                        conversions,
-                        parameter.Locations[0],
-                        diagnostics
-                    );
+                parameter.Type.CheckAllConstraints(
+                    compilation,
+                    conversions,
+                    parameter.Locations[0],
+                    diagnostics
+                );
             }
         }
 

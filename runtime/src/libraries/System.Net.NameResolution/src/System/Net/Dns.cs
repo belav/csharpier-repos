@@ -933,9 +933,10 @@ namespace System.Net
                 }
                 finally
                 {
-                    NameResolutionTelemetry
-                        .Log
-                        .AfterResolution(stopwatch, successful: result is not null);
+                    NameResolutionTelemetry.Log.AfterResolution(
+                        stopwatch,
+                        successful: result is not null
+                    );
                 }
             }
         }

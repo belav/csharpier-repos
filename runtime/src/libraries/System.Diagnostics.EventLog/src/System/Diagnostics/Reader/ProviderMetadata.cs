@@ -449,18 +449,15 @@ namespace System.Diagnostics.Eventing.Reader
                     case UnsafeNativeMethods
                         .EvtPublisherMetadataPropertyId
                         .EvtPublisherMetadataLevels:
-                        propName =
-                            UnsafeNativeMethods
-                                .EvtPublisherMetadataPropertyId
-                                .EvtPublisherMetadataLevelName;
-                        propValue =
-                            UnsafeNativeMethods
-                                .EvtPublisherMetadataPropertyId
-                                .EvtPublisherMetadataLevelValue;
-                        propMessageId =
-                            UnsafeNativeMethods
-                                .EvtPublisherMetadataPropertyId
-                                .EvtPublisherMetadataLevelMessageID;
+                        propName = UnsafeNativeMethods
+                            .EvtPublisherMetadataPropertyId
+                            .EvtPublisherMetadataLevelName;
+                        propValue = UnsafeNativeMethods
+                            .EvtPublisherMetadataPropertyId
+                            .EvtPublisherMetadataLevelValue;
+                        propMessageId = UnsafeNativeMethods
+                            .EvtPublisherMetadataPropertyId
+                            .EvtPublisherMetadataLevelMessageID;
                         objectTypeName = ObjectTypeName.Level;
                         levelList = new List<EventLevel>(arraySize);
                         break;
@@ -468,18 +465,15 @@ namespace System.Diagnostics.Eventing.Reader
                     case UnsafeNativeMethods
                         .EvtPublisherMetadataPropertyId
                         .EvtPublisherMetadataOpcodes:
-                        propName =
-                            UnsafeNativeMethods
-                                .EvtPublisherMetadataPropertyId
-                                .EvtPublisherMetadataOpcodeName;
-                        propValue =
-                            UnsafeNativeMethods
-                                .EvtPublisherMetadataPropertyId
-                                .EvtPublisherMetadataOpcodeValue;
-                        propMessageId =
-                            UnsafeNativeMethods
-                                .EvtPublisherMetadataPropertyId
-                                .EvtPublisherMetadataOpcodeMessageID;
+                        propName = UnsafeNativeMethods
+                            .EvtPublisherMetadataPropertyId
+                            .EvtPublisherMetadataOpcodeName;
+                        propValue = UnsafeNativeMethods
+                            .EvtPublisherMetadataPropertyId
+                            .EvtPublisherMetadataOpcodeValue;
+                        propMessageId = UnsafeNativeMethods
+                            .EvtPublisherMetadataPropertyId
+                            .EvtPublisherMetadataOpcodeMessageID;
                         objectTypeName = ObjectTypeName.Opcode;
                         opcodeList = new List<EventOpcode>(arraySize);
                         break;
@@ -487,18 +481,15 @@ namespace System.Diagnostics.Eventing.Reader
                     case UnsafeNativeMethods
                         .EvtPublisherMetadataPropertyId
                         .EvtPublisherMetadataKeywords:
-                        propName =
-                            UnsafeNativeMethods
-                                .EvtPublisherMetadataPropertyId
-                                .EvtPublisherMetadataKeywordName;
-                        propValue =
-                            UnsafeNativeMethods
-                                .EvtPublisherMetadataPropertyId
-                                .EvtPublisherMetadataKeywordValue;
-                        propMessageId =
-                            UnsafeNativeMethods
-                                .EvtPublisherMetadataPropertyId
-                                .EvtPublisherMetadataKeywordMessageID;
+                        propName = UnsafeNativeMethods
+                            .EvtPublisherMetadataPropertyId
+                            .EvtPublisherMetadataKeywordName;
+                        propValue = UnsafeNativeMethods
+                            .EvtPublisherMetadataPropertyId
+                            .EvtPublisherMetadataKeywordValue;
+                        propMessageId = UnsafeNativeMethods
+                            .EvtPublisherMetadataPropertyId
+                            .EvtPublisherMetadataKeywordMessageID;
                         objectTypeName = ObjectTypeName.Keyword;
                         keywordList = new List<EventKeyword>(arraySize);
                         break;
@@ -506,18 +497,15 @@ namespace System.Diagnostics.Eventing.Reader
                     case UnsafeNativeMethods
                         .EvtPublisherMetadataPropertyId
                         .EvtPublisherMetadataTasks:
-                        propName =
-                            UnsafeNativeMethods
-                                .EvtPublisherMetadataPropertyId
-                                .EvtPublisherMetadataTaskName;
-                        propValue =
-                            UnsafeNativeMethods
-                                .EvtPublisherMetadataPropertyId
-                                .EvtPublisherMetadataTaskValue;
-                        propMessageId =
-                            UnsafeNativeMethods
-                                .EvtPublisherMetadataPropertyId
-                                .EvtPublisherMetadataTaskMessageID;
+                        propName = UnsafeNativeMethods
+                            .EvtPublisherMetadataPropertyId
+                            .EvtPublisherMetadataTaskName;
+                        propValue = UnsafeNativeMethods
+                            .EvtPublisherMetadataPropertyId
+                            .EvtPublisherMetadataTaskValue;
+                        propMessageId = UnsafeNativeMethods
+                            .EvtPublisherMetadataPropertyId
+                            .EvtPublisherMetadataTaskMessageID;
                         objectTypeName = ObjectTypeName.Task;
                         taskList = new List<EventTask>(arraySize);
                         break;

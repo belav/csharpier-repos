@@ -1140,8 +1140,9 @@ namespace System.Configuration
                             if (newLine)
                             {
                                 utilWriter.Flush();
-                                sbLengthLastNewLine =
-                                    ((StringWriter)utilWriter.Writer).GetStringBuilder().Length;
+                                sbLengthLastNewLine = ((StringWriter)utilWriter.Writer)
+                                    .GetStringBuilder()
+                                    .Length;
                             }
                         }
                         break;
@@ -1193,8 +1194,9 @@ namespace System.Configuration
                                     lineWidth = indent;
                                     writeSpace = false;
                                     utilWriter.Flush();
-                                    sbLengthLastNewLine =
-                                        ((StringWriter)utilWriter.Writer).GetStringBuilder().Length;
+                                    sbLengthLastNewLine = ((StringWriter)utilWriter.Writer)
+                                        .GetStringBuilder()
+                                        .Length;
                                 }
                                 else
                                     writeSpace = true;
@@ -1202,8 +1204,9 @@ namespace System.Configuration
                                 // Write the attribute
                                 reader.MoveToNextAttribute();
                                 utilWriter.Flush();
-                                int startLength =
-                                    ((StringWriter)utilWriter.Writer).GetStringBuilder().Length;
+                                int startLength = ((StringWriter)utilWriter.Writer)
+                                    .GetStringBuilder()
+                                    .Length;
                                 if (writeSpace)
                                     utilWriter.AppendSpace();
 

@@ -296,8 +296,9 @@ internal class ResponseBody : Stream
     {
         var handle = GCHandle.Alloc(buffer.Array, GCHandleType.Pinned);
         pins.Add(handle);
-        chunks[chunkIndex].DataChunkType =
-            HttpApiTypes.HTTP_DATA_CHUNK_TYPE.HttpDataChunkFromMemory;
+        chunks[chunkIndex].DataChunkType = HttpApiTypes
+            .HTTP_DATA_CHUNK_TYPE
+            .HttpDataChunkFromMemory;
         chunks[chunkIndex].fromMemory.pBuffer = handle.AddrOfPinnedObject() + buffer.Offset;
         chunks[chunkIndex].fromMemory.BufferLength = (uint)buffer.Count;
         chunkIndex++;

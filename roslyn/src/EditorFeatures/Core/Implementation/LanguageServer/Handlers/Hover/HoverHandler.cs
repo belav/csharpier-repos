@@ -60,10 +60,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 )
                 .ConfigureAwait(false);
 
-            var quickInfoService = document
-                .Project
-                .LanguageServices
-                .GetRequiredService<QuickInfoService>();
+            var quickInfoService =
+                document.Project.LanguageServices.GetRequiredService<QuickInfoService>();
             var info = await quickInfoService
                 .GetQuickInfoAsync(document, position, cancellationToken)
                 .ConfigureAwait(false);
@@ -108,8 +106,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 return null;
             }
 
-            var text = await semanticModel
-                .SyntaxTree
+            var text = await semanticModel.SyntaxTree
                 .GetTextAsync(cancellationToken)
                 .ConfigureAwait(false);
             return await GetHoverAsync(
@@ -179,18 +176,16 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             )
             {
                 var clientSupportsMarkdown =
-                    clientCapabilities
-                        ?.TextDocument
-                        ?.Hover
-                        ?.ContentFormat
-                        .Contains(MarkupKind.Markdown) == true;
+                    clientCapabilities?.TextDocument?.Hover?.ContentFormat.Contains(
+                        MarkupKind.Markdown
+                    ) == true;
                 // Insert line breaks in between sections to ensure we get double spacing between sections.
                 var tags = info.Sections
                     .SelectMany(
                         section =>
-                            section
-                                .TaggedParts
-                                .Add(new TaggedText(TextTags.LineBreak, Environment.NewLine))
+                            section.TaggedParts.Add(
+                                new TaggedText(TextTags.LineBreak, Environment.NewLine)
+                            )
                     )
                     .ToImmutableArray();
                 return ProtocolConversions.GetDocumentationMarkupContent(

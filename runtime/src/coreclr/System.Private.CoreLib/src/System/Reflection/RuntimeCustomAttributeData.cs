@@ -374,8 +374,7 @@ namespace System.Reflection
                 )!;
                 m_ctor = (RuntimeConstructorInfo)scope
                     .ResolveMethod(caCtorToken, attributeType.GenericTypeArguments, null)!
-                    .MethodHandle
-                    .GetMethodInfo();
+                    .MethodHandle.GetMethodInfo();
             }
 
             ParameterInfo[] parameters = m_ctor.GetParametersNoCopy();
@@ -385,14 +384,12 @@ namespace System.Reflection
                     InitCustomAttributeType((RuntimeType)parameters[i].ParameterType)
                 );
 
-            FieldInfo[] fields = m_ctor
-                .DeclaringType!
-                .GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-            PropertyInfo[] properties = m_ctor
-                .DeclaringType
-                .GetProperties(
-                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
-                );
+            FieldInfo[] fields = m_ctor.DeclaringType!.GetFields(
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
+            );
+            PropertyInfo[] properties = m_ctor.DeclaringType.GetProperties(
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
+            );
             m_namedParams = new CustomAttributeNamedParameter[properties.Length + fields.Length];
             for (int i = 0; i < fields.Length; i++)
                 m_namedParams[i] = new CustomAttributeNamedParameter(
@@ -626,8 +623,9 @@ namespace System.Reflection
 
                     for (int i = 0; i < typedCtorArgs.Length; i++)
                     {
-                        CustomAttributeEncodedArgument encodedArg =
-                            m_ctorParams[i].CustomAttributeEncodedArgument;
+                        CustomAttributeEncodedArgument encodedArg = m_ctorParams[
+                            i
+                        ].CustomAttributeEncodedArgument;
 
                         typedCtorArgs[i] = new CustomAttributeTypedArgument(m_scope, encodedArg);
                     }
@@ -1811,8 +1809,7 @@ namespace System.Reflection
                 {
                     ctorWithParameters = decoratedModule
                         .ResolveMethod(caCtorToken, attributeType.GenericTypeArguments, null)!
-                        .MethodHandle
-                        .GetMethodInfo();
+                        .MethodHandle.GetMethodInfo();
                 }
                 else
                 {
@@ -2500,8 +2497,7 @@ namespace System.Reflection
                 field.DeclaringType is not null
                 && field
                     .GetRuntimeModule()
-                    .MetadataImport
-                    .GetFieldOffset(
+                    .MetadataImport.GetFieldOffset(
                         field.DeclaringType.MetadataToken,
                         field.MetadataToken,
                         out int fieldOffset
@@ -2551,8 +2547,7 @@ namespace System.Reflection
                     break;
             }
             type.GetRuntimeModule()
-                .MetadataImport
-                .GetClassLayout(type.MetadataToken, out int pack, out int size);
+                .MetadataImport.GetClassLayout(type.MetadataToken, out int pack, out int size);
 
             // Metadata parameter checking should not have allowed 0 for packing size.
             // The runtime later converts a packing size of 0 to 8 so do the same here

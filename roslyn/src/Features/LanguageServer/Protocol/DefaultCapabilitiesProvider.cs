@@ -51,9 +51,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 capabilities = GetVSServerCapabilities();
             }
 
-            var commitCharacters = CompletionRules
-                .Default
-                .DefaultCommitCharacters
+            var commitCharacters = CompletionRules.Default.DefaultCommitCharacters
                 .Select(c => c.ToString())
                 .ToArray();
             var triggerCharacters = _completionProviders
@@ -108,8 +106,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 Range = true,
                 Legend = new SemanticTokensLegend
                 {
-                    TokenTypes = SemanticTokenTypes
-                        .AllTypes
+                    TokenTypes = SemanticTokenTypes.AllTypes
                         .Concat(SemanticTokensHelpers.RoslynCustomTokenTypes)
                         .ToArray(),
                     TokenModifiers = new string[] { SemanticTokenModifiers.Static }

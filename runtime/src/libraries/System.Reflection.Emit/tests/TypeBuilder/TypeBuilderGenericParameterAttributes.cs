@@ -15,8 +15,9 @@ namespace System.Reflection.Emit.Tests
             genericParameters[0].SetGenericParameterAttributes(
                 GenericParameterAttributes.SpecialConstraintMask
             );
-            GenericParameterAttributes gpa =
-                genericParameters[0].DeclaringType.GetTypeInfo().GenericParameterAttributes;
+            GenericParameterAttributes gpa = genericParameters[0].DeclaringType
+                .GetTypeInfo()
+                .GenericParameterAttributes;
             Assert.Equal(GenericParameterAttributes.None, gpa);
         }
     }

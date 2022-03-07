@@ -12,8 +12,9 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X;
 
 public class ViewComponentTagHelperDescriptorFactoryTest
 {
-    private static readonly Assembly _assembly =
-        typeof(ViewComponentTagHelperDescriptorFactoryTest).GetTypeInfo().Assembly;
+    private static readonly Assembly _assembly = typeof(ViewComponentTagHelperDescriptorFactoryTest)
+        .GetTypeInfo()
+        .Assembly;
 
     [Fact]
     public void CreateDescriptor_UnderstandsStringParameters()

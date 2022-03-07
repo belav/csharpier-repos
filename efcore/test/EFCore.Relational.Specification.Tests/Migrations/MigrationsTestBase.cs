@@ -70,10 +70,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         public virtual async Task Create_table_all_settings()
         {
             var intStoreType = TypeMappingSource.FindMapping(typeof(int)).StoreType;
-            var char11StoreType =
-                TypeMappingSource
-                    .FindMapping(typeof(string), storeTypeName: null, size: 11)
-                    .StoreType;
+            var char11StoreType = TypeMappingSource
+                .FindMapping(typeof(string), storeTypeName: null, size: 11)
+                .StoreType;
 
             await Test(
                 builder =>

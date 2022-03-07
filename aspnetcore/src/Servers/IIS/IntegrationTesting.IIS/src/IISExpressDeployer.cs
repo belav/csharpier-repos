@@ -372,11 +372,9 @@ public class IISExpressDeployer : IISDeployerBase
         if (string.IsNullOrEmpty(serverConfig))
         {
             using (
-                var stream = GetType()
-                    .Assembly
-                    .GetManifestResourceStream(
-                        "Microsoft.AspNetCore.Server.IntegrationTesting.IIS.Http.config"
-                    )
+                var stream = GetType().Assembly.GetManifestResourceStream(
+                    "Microsoft.AspNetCore.Server.IntegrationTesting.IIS.Http.config"
+                )
             )
             using (var reader = new StreamReader(stream))
             {
@@ -388,8 +386,7 @@ public class IISExpressDeployer : IISDeployerBase
         // Pass on the applicationhost.config to iis express. With this don't need to pass in the /path /port switches as they are in the applicationHost.config
         // We take a copy of the original specified applicationHost.Config to prevent modifying the one in the repo.
 
-        config
-            .Root
+        config.Root
             .RequiredElement("location")
             .RequiredElement("system.webServer")
             .RequiredElement("modules")

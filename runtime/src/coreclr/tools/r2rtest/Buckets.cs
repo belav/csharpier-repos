@@ -62,11 +62,9 @@ namespace R2RTest
                 _bucketMap.OrderByDescending(bucket => bucket.Value.Count);
             foreach (KeyValuePair<string, List<ProcessInfo>> bucketKvp in orderedBuckets)
             {
-                bucketKvp
-                    .Value
-                    .Sort(
-                        (a, b) => a.Parameters.OutputFileName.CompareTo(b.Parameters.OutputFileName)
-                    );
+                bucketKvp.Value.Sort(
+                    (a, b) => a.Parameters.OutputFileName.CompareTo(b.Parameters.OutputFileName)
+                );
                 output.WriteLine($@"    [{bucketKvp.Value.Count} failures] {bucketKvp.Key}");
             }
 

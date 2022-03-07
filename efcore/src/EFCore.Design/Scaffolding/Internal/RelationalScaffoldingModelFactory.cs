@@ -524,13 +524,11 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
 
             property.Metadata.SetColumnOrder(column.Table.Columns.IndexOf(column));
 
-            property
-                .Metadata
-                .AddAnnotations(
-                    column
-                        .GetAnnotations()
-                        .Where(a => a.Name != ScaffoldingAnnotationNames.ConcurrencyToken)
-                );
+            property.Metadata.AddAnnotations(
+                column
+                    .GetAnnotations()
+                    .Where(a => a.Name != ScaffoldingAnnotationNames.ConcurrencyToken)
+            );
 
             return property;
         }
@@ -548,8 +546,7 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         {
             var primaryKey = table.PrimaryKey!;
 
-            var unmappedColumns = primaryKey
-                .Columns
+            var unmappedColumns = primaryKey.Columns
                 .Where(c => _unmappedColumns.Contains(c))
                 .Select(c => c.Name)
                 .ToList();
@@ -575,9 +572,9 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 && primaryKey.Columns[0].DefaultValueSql == null
             )
             {
-                var property = builder
-                    .Metadata
-                    .FindProperty(GetPropertyName(primaryKey.Columns[0]));
+                var property = builder.Metadata.FindProperty(
+                    GetPropertyName(primaryKey.Columns[0])
+                );
                 if (property != null)
                 {
                     var conventionalValueGenerated = ValueGenerationConvention.GetValueGenerated(
@@ -633,8 +630,7 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             DatabaseUniqueConstraint uniqueConstraint
         )
         {
-            var unmappedColumns = uniqueConstraint
-                .Columns
+            var unmappedColumns = uniqueConstraint.Columns
                 .Where(c => _unmappedColumns.Contains(c))
                 .Select(c => c.Name)
                 .ToList();
@@ -689,8 +685,7 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         /// </summary>
         protected virtual IndexBuilder? VisitIndex(EntityTypeBuilder builder, DatabaseIndex index)
         {
-            var unmappedColumns = index
-                .Columns
+            var unmappedColumns = index.Columns
                 .Where(c => _unmappedColumns.Contains(c))
                 .Select(c => c.Name)
                 .ToList();
@@ -846,16 +841,15 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 return null;
             }
 
-            var dependentEntityType = modelBuilder
-                .Model
-                .FindEntityType(GetEntityTypeName(foreignKey.Table));
+            var dependentEntityType = modelBuilder.Model.FindEntityType(
+                GetEntityTypeName(foreignKey.Table)
+            );
             if (dependentEntityType == null)
             {
                 return null;
             }
 
-            var unmappedDependentColumns = foreignKey
-                .Columns
+            var unmappedDependentColumns = foreignKey.Columns
                 .Where(c => _unmappedColumns.Contains(c))
                 .Select(c => c.Name)
                 .ToList();
@@ -873,16 +867,15 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 return null;
             }
 
-            var dependentProperties = foreignKey
-                .Columns
+            var dependentProperties = foreignKey.Columns
                 .Select(GetPropertyName)
                 .Select(name => dependentEntityType.FindProperty(name)!)
                 .ToList()
                 .AsReadOnly();
 
-            var principalEntityType = modelBuilder
-                .Model
-                .FindEntityType(GetEntityTypeName(foreignKey.PrincipalTable));
+            var principalEntityType = modelBuilder.Model.FindEntityType(
+                GetEntityTypeName(foreignKey.PrincipalTable)
+            );
             if (principalEntityType == null)
             {
                 _reporter.WriteWarning(
@@ -894,8 +887,7 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 return null;
             }
 
-            var unmappedPrincipalColumns = foreignKey
-                .PrincipalColumns
+            var unmappedPrincipalColumns = foreignKey.PrincipalColumns
                 .Where(pc => principalEntityType.FindProperty(GetPropertyName(pc)) == null)
                 .Select(pc => pc.Name)
                 .ToList();
@@ -913,8 +905,7 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 return null;
             }
 
-            var principalPropertiesMap = foreignKey
-                .PrincipalColumns
+            var principalPropertiesMap = foreignKey.PrincipalColumns
                 .Select(
                     fc =>
                         (

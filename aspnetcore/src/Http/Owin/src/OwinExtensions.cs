@@ -165,11 +165,9 @@ public static class OwinExtensions
                 if (env.TryGetValue(typeof(HttpContext).FullName, out obj))
                 {
                     context = (HttpContext)obj;
-                    context
-                        .Features
-                        .Set<IOwinEnvironmentFeature>(
-                            new OwinEnvironmentFeature() { Environment = env }
-                        );
+                    context.Features.Set<IOwinEnvironmentFeature>(
+                        new OwinEnvironmentFeature() { Environment = env }
+                    );
                 }
                 else
                 {

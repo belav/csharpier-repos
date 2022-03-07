@@ -1533,8 +1533,7 @@ namespace @if
     public class @float : @int<@break>, @if.@break { }
 }";
             var comp = CreateCompilation(Parse(text));
-            NamespaceSymbol nif = (NamespaceSymbol)comp.SourceModule
-                .GlobalNamespace
+            NamespaceSymbol nif = (NamespaceSymbol)comp.SourceModule.GlobalNamespace
                 .GetMembers("if")
                 .Single();
             Assert.Equal("if", nif.Name);
@@ -1562,8 +1561,7 @@ namespace @if
     public class @float : @int<@break> : @if.@break { }
 }";
             var comp = CreateCompilation(Parse(text));
-            NamespaceSymbol nif = (NamespaceSymbol)comp.SourceModule
-                .GlobalNamespace
+            NamespaceSymbol nif = (NamespaceSymbol)comp.SourceModule.GlobalNamespace
                 .GetMembers("if")
                 .Single();
             Assert.Equal("if", nif.Name);

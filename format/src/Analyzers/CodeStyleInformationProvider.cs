@@ -40,9 +40,10 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             }.Select(path => Assembly.LoadFrom(path));
 
             var analyzersAndFixers = AnalyzerFinderHelpers.LoadAnalyzersAndFixers(assemblies);
-            return solution
-                .Projects
-                .ToImmutableDictionary(project => project.Id, project => analyzersAndFixers);
+            return solution.Projects.ToImmutableDictionary(
+                project => project.Id,
+                project => analyzersAndFixers
+            );
         }
 
         public DiagnosticSeverity GetSeverity(FormatOptions formatOptions) =>

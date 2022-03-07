@@ -74,16 +74,13 @@ public class RouteDataRequestCultureProviderTest
                                                 fork.Run(
                                                     context =>
                                                     {
-                                                        var requestCultureFeature = context
-                                                            .Features
-                                                            .Get<IRequestCultureFeature>();
+                                                        var requestCultureFeature =
+                                                            context.Features.Get<IRequestCultureFeature>();
                                                         var requestCulture =
                                                             requestCultureFeature.RequestCulture;
-                                                        return context
-                                                            .Response
-                                                            .WriteAsync(
-                                                                $"{requestCulture.Culture.Name},{requestCulture.UICulture.Name}"
-                                                            );
+                                                        return context.Response.WriteAsync(
+                                                            $"{requestCulture.Culture.Name},{requestCulture.UICulture.Name}"
+                                                        );
                                                     }
                                                 );
                                             }
@@ -139,16 +136,13 @@ public class RouteDataRequestCultureProviderTest
                                 app.Run(
                                     context =>
                                     {
-                                        var requestCultureFeature = context
-                                            .Features
-                                            .Get<IRequestCultureFeature>();
+                                        var requestCultureFeature =
+                                            context.Features.Get<IRequestCultureFeature>();
                                         var requestCulture = requestCultureFeature.RequestCulture;
 
-                                        return context
-                                            .Response
-                                            .WriteAsync(
-                                                $"{requestCulture.Culture.Name},{requestCulture.UICulture.Name}"
-                                            );
+                                        return context.Response.WriteAsync(
+                                            $"{requestCulture.Culture.Name},{requestCulture.UICulture.Name}"
+                                        );
                                     }
                                 );
                             }
@@ -227,17 +221,14 @@ public class RouteDataRequestCultureProviderTest
                                                 fork.Run(
                                                     context =>
                                                     {
-                                                        var requestCultureFeature = context
-                                                            .Features
-                                                            .Get<IRequestCultureFeature>();
+                                                        var requestCultureFeature =
+                                                            context.Features.Get<IRequestCultureFeature>();
                                                         var requestCulture =
                                                             requestCultureFeature.RequestCulture;
 
-                                                        return context
-                                                            .Response
-                                                            .WriteAsync(
-                                                                $"{requestCulture.Culture.Name},{requestCulture.UICulture.Name}"
-                                                            );
+                                                        return context.Response.WriteAsync(
+                                                            $"{requestCulture.Culture.Name},{requestCulture.UICulture.Name}"
+                                                        );
                                                     }
                                                 );
                                             }

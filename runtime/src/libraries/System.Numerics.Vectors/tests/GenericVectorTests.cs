@@ -5310,8 +5310,7 @@ namespace System.Numerics.Tests
         {
             ConstructorInfo constructor = typeof(Vector<T>)
                 .GetTypeInfo()
-                .DeclaredConstructors
-                .Where(
+                .DeclaredConstructors.Where(
                     ci =>
                         ci.GetParameters()
                             .Select(pi => pi.ParameterType)
@@ -5396,8 +5395,7 @@ namespace System.Numerics.Tests
         {
             ConstructorInfo constructor = typeof(Vector<T>)
                 .GetTypeInfo()
-                .DeclaredConstructors
-                .Where(
+                .DeclaredConstructors.Where(
                     ci =>
                         ci.GetParameters()
                             .Select(pi => pi.ParameterType)
@@ -5647,8 +5645,10 @@ namespace System.Numerics.Tests
 
         private void TestCountViaReflectionConsistency<T>() where T : struct
         {
-            MethodInfo countMethod =
-                typeof(Vector<T>).GetTypeInfo().GetDeclaredProperty("Count").GetMethod;
+            MethodInfo countMethod = typeof(Vector<T>)
+                .GetTypeInfo()
+                .GetDeclaredProperty("Count")
+                .GetMethod;
             int valueFromReflection = (int)countMethod.Invoke(null, null);
             int valueFromNormalCall = Vector<T>.Count;
             Assert.Equal(valueFromNormalCall, valueFromReflection);

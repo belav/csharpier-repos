@@ -144,8 +144,9 @@ namespace Microsoft.EntityFrameworkCore.SqlAzure
             string performanceLevel
         )
         {
-            var storeName =
-                new SqlConnectionStringBuilder(connection.ConnectionString).InitialCatalog;
+            var storeName = new SqlConnectionStringBuilder(
+                connection.ConnectionString
+            ).InitialCatalog;
             await Task.Delay(TimeSpan.FromMinutes(5));
 
             await connection.OpenAsync();

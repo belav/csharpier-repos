@@ -84,9 +84,11 @@ namespace Microsoft.Web.Mvc.Controls
             }
             else
             {
-                VirtualPathData vpd = RouteTable
-                    .Routes
-                    .GetVirtualPathForArea(ViewContext.RequestContext, RouteName, routeValues);
+                VirtualPathData vpd = RouteTable.Routes.GetVirtualPathForArea(
+                    ViewContext.RequestContext,
+                    RouteName,
+                    routeValues
+                );
                 if (vpd == null)
                 {
                     throw new InvalidOperationException(

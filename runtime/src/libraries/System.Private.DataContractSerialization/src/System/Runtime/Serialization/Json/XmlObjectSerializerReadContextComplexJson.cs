@@ -130,13 +130,11 @@ namespace System.Runtime.Serialization.Json
                     dataNode = ReadNumericalPrimitiveExtensionDataValue(xmlReader);
                     break;
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
-                        .ThrowHelperError(
-                            XmlObjectSerializer.CreateSerializationException(
-                                SR.Format(SR.JsonUnexpectedAttributeValue, _extensionDataValueType)
-                            )
-                        );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        XmlObjectSerializer.CreateSerializationException(
+                            SR.Format(SR.JsonUnexpectedAttributeValue, _extensionDataValueType)
+                        )
+                    );
             }
 
             xmlReader.ReadEndElement();
@@ -372,17 +370,15 @@ namespace System.Runtime.Serialization.Json
             int memberIndex
         )
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
-                .ThrowHelperError(
-                    new SerializationException(
-                        SR.Format(
-                            SR.JsonDuplicateMemberInInput,
-                            DataContract.GetClrTypeFullName(obj.GetType()),
-                            memberNames[memberIndex]
-                        )
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new SerializationException(
+                    SR.Format(
+                        SR.JsonDuplicateMemberInInput,
+                        DataContract.GetClrTypeFullName(obj.GetType()),
+                        memberNames[memberIndex]
                     )
-                );
+                )
+            );
         }
 
         public static void ThrowMissingRequiredMembers(
@@ -407,31 +403,27 @@ namespace System.Runtime.Serialization.Json
 
             if (missingMembersCount == 1)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new SerializationException(
-                            SR.Format(
-                                SR.JsonOneRequiredMemberNotFound,
-                                DataContract.GetClrTypeFullName(obj.GetType()),
-                                stringBuilder.ToString()
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SerializationException(
+                        SR.Format(
+                            SR.JsonOneRequiredMemberNotFound,
+                            DataContract.GetClrTypeFullName(obj.GetType()),
+                            stringBuilder.ToString()
                         )
-                    );
+                    )
+                );
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        new SerializationException(
-                            SR.Format(
-                                SR.JsonRequiredMembersNotFound,
-                                DataContract.GetClrTypeFullName(obj.GetType()),
-                                stringBuilder.ToString()
-                            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SerializationException(
+                        SR.Format(
+                            SR.JsonRequiredMembersNotFound,
+                            DataContract.GetClrTypeFullName(obj.GetType()),
+                            stringBuilder.ToString()
                         )
-                    );
+                    )
+                );
             }
         }
 

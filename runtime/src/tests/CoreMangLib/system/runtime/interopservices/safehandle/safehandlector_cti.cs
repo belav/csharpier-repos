@@ -57,9 +57,9 @@ public class SafeHandleCtor
     {
         bool retVal = true;
 
-        TestLibrary
-            .TestFramework
-            .BeginScenario("PosTest1: Verify ctor can set correct handle value");
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest1: Verify ctor can set correct handle value"
+        );
 
         try
         {
@@ -67,14 +67,13 @@ public class SafeHandleCtor
 
             if (msf.Handle != IntPtr.Zero)
             {
-                TestLibrary
-                    .TestFramework
-                    .LogError("001.1", "Ctor can not set correct handle value");
-                TestLibrary
-                    .TestFramework
-                    .LogInformation(
-                        "WARNING: [LOCAL VARIABLES] msf.Handle = " + msf.Handle.ToString()
-                    );
+                TestLibrary.TestFramework.LogError(
+                    "001.1",
+                    "Ctor can not set correct handle value"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    "WARNING: [LOCAL VARIABLES] msf.Handle = " + msf.Handle.ToString()
+                );
                 retVal = false;
             }
         }
@@ -93,11 +92,9 @@ public class SafeHandleCtor
     {
         bool retVal = true;
 
-        TestLibrary
-            .TestFramework
-            .BeginScenario(
-                "PosTest2: Verify ctor can set correct handle value for constructor with parameters"
-            );
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest2: Verify ctor can set correct handle value for constructor with parameters"
+        );
 
         try
         {
@@ -106,17 +103,16 @@ public class SafeHandleCtor
 
             if (msf.Handle != ptr)
             {
-                TestLibrary
-                    .TestFramework
-                    .LogError("002.1", "Ctor can not set correct handle value");
-                TestLibrary
-                    .TestFramework
-                    .LogInformation(
-                        "WARNING: [LOCAL VARIABLES] msf.Handle = "
-                            + msf.Handle.ToString()
-                            + ", desiredValue = "
-                            + ptr.ToString()
-                    );
+                TestLibrary.TestFramework.LogError(
+                    "002.1",
+                    "Ctor can not set correct handle value"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    "WARNING: [LOCAL VARIABLES] msf.Handle = "
+                        + msf.Handle.ToString()
+                        + ", desiredValue = "
+                        + ptr.ToString()
+                );
                 retVal = false;
             }
         }

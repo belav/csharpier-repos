@@ -490,10 +490,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Emit
                 bytes
             );
 
-            var deserialized =
-                EditAndContinueMethodDebugInformation
-                    .Create(bytes, default(ImmutableArray<byte>))
-                    .LocalSlots;
+            var deserialized = EditAndContinueMethodDebugInformation
+                .Create(bytes, default(ImmutableArray<byte>))
+                .LocalSlots;
 
             AssertEx.Equal(slots, deserialized);
         }

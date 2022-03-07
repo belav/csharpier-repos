@@ -1334,8 +1334,9 @@ namespace System.Net.Tests
         public const int TimeoutMilliseconds = 30 * 1000;
 
         public static readonly object[][] EchoServers = Configuration.Http.EchoServers;
-        public static readonly object[][] VerifyUploadServers =
-            Configuration.Http.VerifyUploadServers;
+        public static readonly object[][] VerifyUploadServers = Configuration
+            .Http
+            .VerifyUploadServers;
 
         const string ExpectedText =
             "To be, or not to be, that is the question:"
@@ -1416,9 +1417,9 @@ namespace System.Net.Tests
 
                     if (IsAsync)
                     {
-                        await downloadProgressInvoked
-                            .Task
-                            .WaitAsync(TimeSpan.FromMilliseconds(TimeoutMilliseconds));
+                        await downloadProgressInvoked.Task.WaitAsync(
+                            TimeSpan.FromMilliseconds(TimeoutMilliseconds)
+                        );
                     }
                 }
             );
@@ -1451,9 +1452,9 @@ namespace System.Net.Tests
 
                     if (IsAsync)
                     {
-                        await downloadProgressInvokedWithContentLength
-                            .Task
-                            .WaitAsync(TimeSpan.FromMilliseconds(TimeoutMilliseconds));
+                        await downloadProgressInvokedWithContentLength.Task.WaitAsync(
+                            TimeSpan.FromMilliseconds(TimeoutMilliseconds)
+                        );
                     }
                 }
             );
@@ -1535,9 +1536,9 @@ namespace System.Net.Tests
             );
             if (IsAsync)
             {
-                await uploadProgressInvoked
-                    .Task
-                    .WaitAsync(TimeSpan.FromMilliseconds(TimeoutMilliseconds));
+                await uploadProgressInvoked.Task.WaitAsync(
+                    TimeSpan.FromMilliseconds(TimeoutMilliseconds)
+                );
             }
         }
 

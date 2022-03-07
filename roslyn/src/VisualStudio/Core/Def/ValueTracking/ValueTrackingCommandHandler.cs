@@ -92,38 +92,34 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
                 return false;
             }
 
-            _threadingContext
-                .JoinableTaskFactory
-                .RunAsync(
-                    async () =>
-                    {
-                        var selectedSymbol = await GetSelectedSymbolAsync(
-                                textSpan,
-                                document,
-                                cancellationToken
-                            )
-                            .ConfigureAwait(false);
-                        if (selectedSymbol is null)
-                        {
-                            // TODO: Show error dialog
-                            return;
-                        }
-
-                        var syntaxTree = document.GetRequiredSyntaxTreeSynchronously(
+            _threadingContext.JoinableTaskFactory.RunAsync(
+                async () =>
+                {
+                    var selectedSymbol = await GetSelectedSymbolAsync(
+                            textSpan,
+                            document,
                             cancellationToken
-                        );
-                        var location = Location.Create(syntaxTree, textSpan);
-
-                        await ShowToolWindowAsync(
-                                args.TextView,
-                                selectedSymbol,
-                                location,
-                                document.Project.Solution,
-                                cancellationToken
-                            )
-                            .ConfigureAwait(false);
+                        )
+                        .ConfigureAwait(false);
+                    if (selectedSymbol is null)
+                    {
+                        // TODO: Show error dialog
+                        return;
                     }
-                );
+
+                    var syntaxTree = document.GetRequiredSyntaxTreeSynchronously(cancellationToken);
+                    var location = Location.Create(syntaxTree, textSpan);
+
+                    await ShowToolWindowAsync(
+                            args.TextView,
+                            selectedSymbol,
+                            location,
+                            document.Project.Solution,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
+                }
+            );
 
             return true;
         }
@@ -196,10 +192,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
                 return;
             }
 
-            var valueTrackingService = solution
-                .Workspace
-                .Services
-                .GetRequiredService<IValueTrackingService>();
+            var valueTrackingService =
+                solution.Workspace.Services.GetRequiredService<IValueTrackingService>();
             var classificationFormatMap =
                 _classificationFormatMapService.GetClassificationFormatMap(textView);
 
@@ -211,8 +205,7 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
             RoslynDebug.AssertNotNull(location.SourceTree);
             var document = solution.GetRequiredDocument(location.SourceTree);
 
-            var sourceText = await location
-                .SourceTree
+            var sourceText = await location.SourceTree
                 .GetTextAsync(cancellationToken)
                 .ConfigureAwait(false);
             var documentSpan = await ClassifiedSpansAndHighlightSpanFactory

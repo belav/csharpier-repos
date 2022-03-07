@@ -323,8 +323,7 @@ namespace JitBench
                     var runResult = BenchmarkRunResults
                         .Where(r => r.Benchmark == row.Benchmark && r.Configuration == config)
                         .Single();
-                    var measurements = runResult
-                        .IterationResults
+                    var measurements = runResult.IterationResults
                         .Skip(1)
                         .Select(r => r.Measurements.Where(kv => kv.Key.Equals(row.Metric)).Single())
                         .Select(kv => kv.Value);

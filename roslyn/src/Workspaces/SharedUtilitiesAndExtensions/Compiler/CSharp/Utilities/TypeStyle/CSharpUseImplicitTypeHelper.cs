@@ -122,33 +122,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             var candidateReplacementNode = SyntaxFactory.IdentifierName("var");
 
             // If there exists a type named var, return.
-            var conflict =
-                semanticModel
-                    .GetSpeculativeSymbolInfo(
-                        typeName.SpanStart,
-                        candidateReplacementNode,
-                        SpeculativeBindingOption.BindAsTypeOrNamespace
-                    )
-                    .Symbol;
+            var conflict = semanticModel
+                .GetSpeculativeSymbolInfo(
+                    typeName.SpanStart,
+                    candidateReplacementNode,
+                    SpeculativeBindingOption.BindAsTypeOrNamespace
+                )
+                .Symbol;
             if (conflict?.IsKind(SymbolKind.NamedType) == true)
             {
                 return false;
             }
 
             if (
-                typeName
-                    .Parent
-                    .IsKind(
-                        SyntaxKind.VariableDeclaration,
-                        out VariableDeclarationSyntax? variableDeclaration
-                    )
-                && typeName
-                    .Parent
-                    .IsParentKind(
-                        SyntaxKind.LocalDeclarationStatement,
-                        SyntaxKind.ForStatement,
-                        SyntaxKind.UsingStatement
-                    )
+                typeName.Parent.IsKind(
+                    SyntaxKind.VariableDeclaration,
+                    out VariableDeclarationSyntax? variableDeclaration
+                )
+                && typeName.Parent.IsParentKind(
+                    SyntaxKind.LocalDeclarationStatement,
+                    SyntaxKind.ForStatement,
+                    SyntaxKind.UsingStatement
+                )
             )
             {
                 // implicitly typed variables cannot be constants.
@@ -260,8 +255,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             var annotation = new SyntaxAnnotation();
 
             var declarationTypeNode = declarationExpression.Type;
-            var declarationType =
-                semanticModel.GetTypeInfo(declarationTypeNode, cancellationToken).Type;
+            var declarationType = semanticModel
+                .GetTypeInfo(declarationTypeNode, cancellationToken)
+                .Type;
 
             var newRoot = root.ReplaceNode(
                 declarationTypeNode,
@@ -272,8 +268,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             );
 
             var newTree = tree.WithRootAndOptions(newRoot, tree.Options);
-            var newSemanticModel = semanticModel
-                .Compilation
+            var newSemanticModel = semanticModel.Compilation
                 .ReplaceSyntaxTree(tree, newTree)
                 .GetSemanticModel(newTree);
 
@@ -281,12 +276,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                 .GetRoot(cancellationToken)
                 .GetAnnotatedNodes(annotation)
                 .Single();
-            var newDeclarationType =
-                newSemanticModel.GetTypeInfo(newDeclarationTypeNode, cancellationToken).Type;
+            var newDeclarationType = newSemanticModel
+                .GetTypeInfo(newDeclarationTypeNode, cancellationToken)
+                .Type;
 
-            return SymbolEquivalenceComparer
-                .TupleNamesMustMatchInstance
-                .Equals(declarationType, newDeclarationType);
+            return SymbolEquivalenceComparer.TupleNamesMustMatchInstance.Equals(
+                declarationType,
+                newDeclarationType
+            );
         }
 
         private static bool IsSafeToSwitchToVarWithoutNeedingSpeculation(
@@ -383,8 +380,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             }
 
             // cannot use implicit typing on method group or on dynamic
-            var declaredType =
-                semanticModel.GetTypeInfo(typeName.StripRefIfNeeded(), cancellationToken).Type;
+            var declaredType = semanticModel
+                .GetTypeInfo(typeName.StripRefIfNeeded(), cancellationToken)
+                .Type;
             if (declaredType != null && declaredType.TypeKind == TypeKind.Dynamic)
             {
                 return false;
@@ -406,8 +404,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                             if (
                                 semanticModel
                                     .GetSymbolInfo(n, cancellationToken)
-                                    .Symbol
-                                    .IsKind(SymbolKind.Local) == true
+                                    .Symbol.IsKind(SymbolKind.Local) == true
                             )
                             {
                                 return true;

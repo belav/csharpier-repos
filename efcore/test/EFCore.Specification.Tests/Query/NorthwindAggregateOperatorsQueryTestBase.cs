@@ -1073,8 +1073,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 c.Orders
                                     .OrderBy(o => o.OrderID)
                                     .FirstOrDefault()
-                                    .OrderDetails
-                                    .OrderBy(od => od.ProductID)
+                                    .OrderDetails.OrderBy(od => od.ProductID)
                                     .FirstOrDefault()
                         ),
                 ss =>
@@ -1110,8 +1109,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 (int?)c.Orders
                                     .OrderBy(o => o.OrderID)
                                     .FirstOrDefault()
-                                    .OrderDetails
-                                    .OrderBy(od => od.ProductID)
+                                    .OrderDetails.OrderBy(od => od.ProductID)
                                     .FirstOrDefault()
                                     .ProductID
                         ),

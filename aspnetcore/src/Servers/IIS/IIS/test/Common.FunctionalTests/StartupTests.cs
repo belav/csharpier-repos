@@ -59,9 +59,9 @@ public class StartupTests : IISFunctionalTestBase
         // Point to dotnet installed in user profile.
         var deploymentParameters = Fixture.GetBaseDeploymentParameters();
         deploymentParameters.EnvironmentVariables["DotnetPath"] = _dotnetLocation;
-        deploymentParameters
-            .WebConfigActionList
-            .Add(WebConfigHelpers.AddOrModifyAspNetCoreSection("processPath", "%DotnetPath%"));
+        deploymentParameters.WebConfigActionList.Add(
+            WebConfigHelpers.AddOrModifyAspNetCoreSection("processPath", "%DotnetPath%")
+        );
         await StartAsync(deploymentParameters);
     }
 
@@ -86,12 +86,12 @@ public class StartupTests : IISFunctionalTestBase
     )
     {
         var deploymentParameters = Fixture.GetBaseDeploymentParameters();
-        deploymentParameters
-            .WebConfigActionList
-            .Add(WebConfigHelpers.AddOrModifyAspNetCoreSection("processPath", path));
-        deploymentParameters
-            .WebConfigActionList
-            .Add(WebConfigHelpers.AddOrModifyAspNetCoreSection("arguments", arguments));
+        deploymentParameters.WebConfigActionList.Add(
+            WebConfigHelpers.AddOrModifyAspNetCoreSection("processPath", path)
+        );
+        deploymentParameters.WebConfigActionList.Add(
+            WebConfigHelpers.AddOrModifyAspNetCoreSection("arguments", arguments)
+        );
 
         var deploymentResult = await DeployAsync(deploymentParameters);
 
@@ -125,14 +125,12 @@ public class StartupTests : IISFunctionalTestBase
             0,
             _dotnetLocation.LastIndexOf(".", StringComparison.Ordinal)
         );
-        deploymentParameters
-            .WebConfigActionList
-            .Add(
-                WebConfigHelpers.AddOrModifyAspNetCoreSection(
-                    "processPath",
-                    dotnetLocationWithoutExtension
-                )
-            );
+        deploymentParameters.WebConfigActionList.Add(
+            WebConfigHelpers.AddOrModifyAspNetCoreSection(
+                "processPath",
+                dotnetLocationWithoutExtension
+            )
+        );
 
         await StartAsync(deploymentParameters);
     }
@@ -145,14 +143,12 @@ public class StartupTests : IISFunctionalTestBase
         var dotnetLocationWithoutExtension = _dotnetLocation
             .Substring(0, _dotnetLocation.LastIndexOf(".", StringComparison.Ordinal))
             .ToUpperInvariant();
-        deploymentParameters
-            .WebConfigActionList
-            .Add(
-                WebConfigHelpers.AddOrModifyAspNetCoreSection(
-                    "processPath",
-                    dotnetLocationWithoutExtension
-                )
-            );
+        deploymentParameters.WebConfigActionList.Add(
+            WebConfigHelpers.AddOrModifyAspNetCoreSection(
+                "processPath",
+                dotnetLocationWithoutExtension
+            )
+        );
 
         await StartAsync(deploymentParameters);
     }
@@ -166,9 +162,9 @@ public class StartupTests : IISFunctionalTestBase
         var deploymentParameters = Fixture.GetBaseDeploymentParameters();
 
         deploymentParameters.EnvironmentVariables["PATH"] = Path.GetDirectoryName(_dotnetLocation);
-        deploymentParameters
-            .WebConfigActionList
-            .Add(WebConfigHelpers.AddOrModifyAspNetCoreSection("processPath", path));
+        deploymentParameters.WebConfigActionList.Add(
+            WebConfigHelpers.AddOrModifyAspNetCoreSection("processPath", path)
+        );
 
         var deploymentResult = await DeployAsync(deploymentParameters);
         await deploymentResult.AssertStarts();
@@ -192,9 +188,9 @@ public class StartupTests : IISFunctionalTestBase
 
         // IIS doesn't allow empty PATH
         deploymentParameters.EnvironmentVariables["PATH"] = ".";
-        deploymentParameters
-            .WebConfigActionList
-            .Add(WebConfigHelpers.AddOrModifyAspNetCoreSection("processPath", "dotnet"));
+        deploymentParameters.WebConfigActionList.Add(
+            WebConfigHelpers.AddOrModifyAspNetCoreSection("processPath", "dotnet")
+        );
 
         // Key is always in 32bit view
         using (
@@ -222,14 +218,12 @@ public class StartupTests : IISFunctionalTestBase
                 // but dotnet roots are usually very large on dev machines so this test would take disproportionally long time and disk space
                 Assert.Equal(
                     1,
-                    TestSink
-                        .Writes
-                        .Count(
-                            w =>
-                                w.Message.Contains(
-                                    $"Found dotnet.exe in InstallLocation at '{installDir}\\dotnet.exe'"
-                                )
-                        )
+                    TestSink.Writes.Count(
+                        w =>
+                            w.Message.Contains(
+                                $"Found dotnet.exe in InstallLocation at '{installDir}\\dotnet.exe'"
+                            )
+                    )
                 );
             }
         }
@@ -606,9 +600,9 @@ public class StartupTests : IISFunctionalTestBase
                 Fixture.InProcessTestSite
             );
             deploymentParameters.TransformArguments((a, _) => $"{a} Hang");
-            deploymentParameters
-                .WebConfigActionList
-                .Add(WebConfigHelpers.AddOrModifyAspNetCoreSection("startupTimeLimit", "1"));
+            deploymentParameters.WebConfigActionList.Add(
+                WebConfigHelpers.AddOrModifyAspNetCoreSection("startupTimeLimit", "1")
+            );
 
             var deploymentResult = await DeployAsync(deploymentParameters);
 
@@ -647,9 +641,9 @@ public class StartupTests : IISFunctionalTestBase
                 Fixture.InProcessTestSite
             );
             deploymentParameters.TransformArguments((a, _) => $"{a} Hang");
-            deploymentParameters
-                .WebConfigActionList
-                .Add(WebConfigHelpers.AddOrModifyAspNetCoreSection("startupTimeLimit", "1"));
+            deploymentParameters.WebConfigActionList.Add(
+                WebConfigHelpers.AddOrModifyAspNetCoreSection("startupTimeLimit", "1")
+            );
             deploymentParameters.HandlerSettings["suppressRecycleOnStartupTimeout"] = "true";
             var deploymentResult = await DeployAsync(deploymentParameters);
 
@@ -679,9 +673,9 @@ public class StartupTests : IISFunctionalTestBase
     public async Task CheckInvalidHostingModelParameter()
     {
         var deploymentParameters = Fixture.GetBaseDeploymentParameters();
-        deploymentParameters
-            .WebConfigActionList
-            .Add(WebConfigHelpers.AddOrModifyAspNetCoreSection("hostingModel", "bogus"));
+        deploymentParameters.WebConfigActionList.Add(
+            WebConfigHelpers.AddOrModifyAspNetCoreSection("hostingModel", "bogus")
+        );
 
         var deploymentResult = await DeployAsync(deploymentParameters);
 
@@ -1194,9 +1188,9 @@ public class StartupTests : IISFunctionalTestBase
         var deploymentParameters = Fixture.GetBaseDeploymentParameters(hostingModel);
 
         deploymentParameters.EnvironmentVariables["ANCM_LAUNCHER_PATH"] = _dotnetLocation;
-        deploymentParameters
-            .WebConfigActionList
-            .Add(WebConfigHelpers.AddOrModifyAspNetCoreSection("processPath", "nope"));
+        deploymentParameters.WebConfigActionList.Add(
+            WebConfigHelpers.AddOrModifyAspNetCoreSection("processPath", "nope")
+        );
 
         await StartAsync(deploymentParameters);
     }
@@ -1210,9 +1204,10 @@ public class StartupTests : IISFunctionalTestBase
     public async Task EnvironmentVariableForLauncherArgsIsPreferred(HostingModel hostingModel)
     {
         var deploymentParameters = Fixture.GetBaseDeploymentParameters(hostingModel);
-        using var publishedApp = await deploymentParameters
-            .ApplicationPublisher
-            .Publish(deploymentParameters, LoggerFactory.CreateLogger("test"));
+        using var publishedApp = await deploymentParameters.ApplicationPublisher.Publish(
+            deploymentParameters,
+            LoggerFactory.CreateLogger("test")
+        );
 
         deploymentParameters.EnvironmentVariables["ANCM_LAUNCHER_ARGS"] = Path.ChangeExtension(
             Path.Combine(
@@ -1221,9 +1216,9 @@ public class StartupTests : IISFunctionalTestBase
             ),
             ".dll"
         );
-        deploymentParameters
-            .WebConfigActionList
-            .Add(WebConfigHelpers.AddOrModifyAspNetCoreSection("arguments", "nope"));
+        deploymentParameters.WebConfigActionList.Add(
+            WebConfigHelpers.AddOrModifyAspNetCoreSection("arguments", "nope")
+        );
 
         await StartAsync(deploymentParameters);
     }
@@ -1246,9 +1241,9 @@ public class StartupTests : IISFunctionalTestBase
             Assert.Contains(
                 TestSink.Writes,
                 context =>
-                    context
-                        .Message
-                        .Contains("An unhandled exception was thrown by the application.")
+                    context.Message.Contains(
+                        "An unhandled exception was thrown by the application."
+                    )
             );
         }
     }
@@ -1645,9 +1640,10 @@ public class StartupTests : IISFunctionalTestBase
         var environment = "Development";
         deploymentParameters.EnvironmentVariables["ANCM_PREFER_ENVIRONMENT_VARIABLES"] = "true";
         deploymentParameters.EnvironmentVariables["ASPNETCORE_ENVIRONMENT"] = environment;
-        deploymentParameters
-            .WebConfigBasedEnvironmentVariables
-            .Add("ASPNETCORE_ENVIRONMENT", "Debug");
+        deploymentParameters.WebConfigBasedEnvironmentVariables.Add(
+            "ASPNETCORE_ENVIRONMENT",
+            "Debug"
+        );
         Assert.Equal(
             environment,
             await GetStringAsync(
@@ -1881,12 +1877,12 @@ public class StartupTests : IISFunctionalTestBase
         IISDeploymentParameters deploymentParameters
     )
     {
-        deploymentParameters
-            .WebConfigActionList
-            .Add(WebConfigHelpers.AddOrModifyAspNetCoreSection("processPath", "doesnot"));
-        deploymentParameters
-            .WebConfigActionList
-            .Add(WebConfigHelpers.AddOrModifyAspNetCoreSection("arguments", "start"));
+        deploymentParameters.WebConfigActionList.Add(
+            WebConfigHelpers.AddOrModifyAspNetCoreSection("processPath", "doesnot")
+        );
+        deploymentParameters.WebConfigActionList.Add(
+            WebConfigHelpers.AddOrModifyAspNetCoreSection("arguments", "start")
+        );
 
         deploymentParameters.EnvironmentVariables["ANCM_ADDITIONAL_ERROR_PAGE_LINK"] =
             "http://example";
@@ -1948,23 +1944,21 @@ public class StartupTests : IISFunctionalTestBase
 
     private static void MoveApplication(IISDeploymentParameters parameters, string subdirectory)
     {
-        parameters
-            .WebConfigActionList
-            .Add(
-                (config, contentRoot) =>
-                {
-                    var source = new DirectoryInfo(contentRoot);
-                    var subDirectoryPath = source.CreateSubdirectory(subdirectory);
+        parameters.WebConfigActionList.Add(
+            (config, contentRoot) =>
+            {
+                var source = new DirectoryInfo(contentRoot);
+                var subDirectoryPath = source.CreateSubdirectory(subdirectory);
 
-                    // Copy everything into a subfolder
-                    Helpers.CopyFiles(source, subDirectoryPath, null);
-                    // Cleanup files
-                    foreach (var fileSystemInfo in source.GetFiles())
-                    {
-                        fileSystemInfo.Delete();
-                    }
+                // Copy everything into a subfolder
+                Helpers.CopyFiles(source, subDirectoryPath, null);
+                // Cleanup files
+                foreach (var fileSystemInfo in source.GetFiles())
+                {
+                    fileSystemInfo.Delete();
                 }
-            );
+            }
+        );
     }
 
     private Task AssertSiteFailsToStartWithInProcessStaticContent(

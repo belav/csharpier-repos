@@ -26,8 +26,7 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.DateAndTime
         private const string DescriptionKey = nameof(DescriptionKey);
 
         // Always soft-select these completion items.  Also, never filter down.
-        private static readonly CompletionItemRules s_rules = CompletionItemRules
-            .Default
+        private static readonly CompletionItemRules s_rules = CompletionItemRules.Default
             .WithSelectionBehavior(CompletionItemSelectionBehavior.SoftSelection)
             .WithFilterCharacterRule(
                 CharacterSetModificationRule.Create(
@@ -113,10 +112,9 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.DateAndTime
             }
 
             // Note: it's acceptable if this fails to convert.  We just won't show the example in that case.
-            var virtualChars = _language
-                .Info
-                .VirtualCharService
-                .TryConvertToVirtualChars(stringToken);
+            var virtualChars = _language.Info.VirtualCharService.TryConvertToVirtualChars(
+                stringToken
+            );
 
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
 

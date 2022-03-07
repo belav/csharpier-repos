@@ -34,8 +34,9 @@ namespace System.Web.Routing
             {
                 actionDescriptor
             };
-            IInlineConstraintResolver constraintResolver =
-                new Mock<IInlineConstraintResolver>(MockBehavior.Strict).Object;
+            IInlineConstraintResolver constraintResolver = new Mock<IInlineConstraintResolver>(
+                MockBehavior.Strict
+            ).Object;
 
             // Act & Assert
             Assert.Throws<InvalidOperationException>(
@@ -73,8 +74,9 @@ namespace System.Web.Routing
             {
                 actionDescriptor
             };
-            IInlineConstraintResolver constraintResolver =
-                new Mock<IInlineConstraintResolver>(MockBehavior.Strict).Object;
+            IInlineConstraintResolver constraintResolver = new Mock<IInlineConstraintResolver>(
+                MockBehavior.Strict
+            ).Object;
 
             // Act & Assert
             string expectedMessage =
@@ -119,8 +121,9 @@ namespace System.Web.Routing
             {
                 actionDescriptor
             };
-            IInlineConstraintResolver constraintResolver =
-                new Mock<IInlineConstraintResolver>(MockBehavior.Strict).Object;
+            IInlineConstraintResolver constraintResolver = new Mock<IInlineConstraintResolver>(
+                MockBehavior.Strict
+            ).Object;
 
             // Act & Assert
             string expectedMessage =
@@ -155,9 +158,10 @@ namespace System.Web.Routing
             );
             Route route = new Route(url: null, routeHandler: null);
             route.DataTokens = new RouteValueDictionary();
-            route
-                .DataTokens
-                .Add(RouteDataTokenKeys.Actions, new ActionDescriptor[] { actionDescriptor });
+            route.DataTokens.Add(
+                RouteDataTokenKeys.Actions,
+                new ActionDescriptor[] { actionDescriptor }
+            );
             route.RouteHandler = new Mock<IRouteHandler>(MockBehavior.Strict).Object;
             ActionDescriptor[] originalActions = route.GetTargetActionDescriptors();
             RouteEntry entry = new RouteEntry(name: null, route: route);
@@ -166,8 +170,9 @@ namespace System.Web.Routing
             {
                 actionDescriptor
             };
-            IInlineConstraintResolver constraintResolver =
-                new Mock<IInlineConstraintResolver>(MockBehavior.Strict).Object;
+            IInlineConstraintResolver constraintResolver = new Mock<IInlineConstraintResolver>(
+                MockBehavior.Strict
+            ).Object;
 
             // Act & Assert
             string expectedMessage = "Direct routing does not support per-route route handlers.";

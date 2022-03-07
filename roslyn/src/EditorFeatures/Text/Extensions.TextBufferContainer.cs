@@ -30,9 +30,10 @@ namespace Microsoft.CodeAnalysis.Text
                 Contract.ThrowIfNull(editorBuffer);
 
                 _weakEditorBuffer = new WeakReference<ITextBuffer>(editorBuffer);
-                editorBuffer
-                    .Properties
-                    .TryGetProperty(typeof(ITextBufferCloneService), out _textBufferCloneService);
+                editorBuffer.Properties.TryGetProperty(
+                    typeof(ITextBufferCloneService),
+                    out _textBufferCloneService
+                );
                 _currentText = SnapshotSourceText.From(
                     _textBufferCloneService,
                     editorBuffer.CurrentSnapshot,

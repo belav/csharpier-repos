@@ -52,8 +52,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDefaultLiteral
 
         public override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            var syntaxRoot = await context
-                .Document
+            var syntaxRoot = await context.Document
                 .GetSyntaxRootAsync(context.CancellationToken)
                 .ConfigureAwait(false);
             var token = syntaxRoot.FindToken(context.Span.Start);
@@ -61,16 +60,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDefaultLiteral
             if (
                 token.Span == context.Span
                 && token.IsKind(SyntaxKind.DefaultKeyword)
-                && token
-                    .Parent
-                    .IsKind(
-                        SyntaxKind.DefaultLiteralExpression,
-                        out LiteralExpressionSyntax defaultLiteral
-                    )
+                && token.Parent.IsKind(
+                    SyntaxKind.DefaultLiteralExpression,
+                    out LiteralExpressionSyntax defaultLiteral
+                )
             )
             {
-                var semanticModel = await context
-                    .Document
+                var semanticModel = await context.Document
                     .GetSemanticModelAsync(context.CancellationToken)
                     .ConfigureAwait(false);
 
@@ -137,9 +133,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDefaultLiteral
                 }
                 else if (
                     type.Equals(
-                        semanticModel
-                            .Compilation
-                            .GetTypeByMetadataName(typeof(CancellationToken).FullName)
+                        semanticModel.Compilation.GetTypeByMetadataName(
+                            typeof(CancellationToken).FullName
+                        )
                     )
                 )
                 {

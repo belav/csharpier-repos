@@ -97,25 +97,21 @@ namespace System.Runtime.Serialization
             }
             catch (XmlException ex)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        XmlObjectSerializer.CreateSerializationException(
-                            GetTypeInfoError(SR.ErrorSerializing, GetSerializeType(graph), ex),
-                            ex
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        GetTypeInfoError(SR.ErrorSerializing, GetSerializeType(graph), ex),
+                        ex
+                    )
+                );
             }
             catch (FormatException ex)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        XmlObjectSerializer.CreateSerializationException(
-                            GetTypeInfoError(SR.ErrorSerializing, GetSerializeType(graph), ex),
-                            ex
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        GetTypeInfoError(SR.ErrorSerializing, GetSerializeType(graph), ex),
+                        ex
+                    )
+                );
             }
         }
 
@@ -180,25 +176,21 @@ namespace System.Runtime.Serialization
             }
             catch (XmlException ex)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        XmlObjectSerializer.CreateSerializationException(
-                            GetTypeInfoError(SR.ErrorWriteStartObject, GetSerializeType(graph), ex),
-                            ex
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        GetTypeInfoError(SR.ErrorWriteStartObject, GetSerializeType(graph), ex),
+                        ex
+                    )
+                );
             }
             catch (FormatException ex)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        XmlObjectSerializer.CreateSerializationException(
-                            GetTypeInfoError(SR.ErrorWriteStartObject, GetSerializeType(graph), ex),
-                            ex
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        GetTypeInfoError(SR.ErrorWriteStartObject, GetSerializeType(graph), ex),
+                        ex
+                    )
+                );
             }
         }
 
@@ -210,37 +202,31 @@ namespace System.Runtime.Serialization
                 CheckNull(writer, nameof(writer));
                 {
                     if (writer.WriteState != WriteState.Element)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
-                            .ThrowHelperError(
-                                XmlObjectSerializer.CreateSerializationException(
-                                    SR.Format(SR.XmlWriterMustBeInElement, writer.WriteState)
-                                )
-                            );
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            XmlObjectSerializer.CreateSerializationException(
+                                SR.Format(SR.XmlWriterMustBeInElement, writer.WriteState)
+                            )
+                        );
                     InternalWriteObjectContent(writer, graph);
                 }
             }
             catch (XmlException ex)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        XmlObjectSerializer.CreateSerializationException(
-                            GetTypeInfoError(SR.ErrorSerializing, GetSerializeType(graph), ex),
-                            ex
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        GetTypeInfoError(SR.ErrorSerializing, GetSerializeType(graph), ex),
+                        ex
+                    )
+                );
             }
             catch (FormatException ex)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        XmlObjectSerializer.CreateSerializationException(
-                            GetTypeInfoError(SR.ErrorSerializing, GetSerializeType(graph), ex),
-                            ex
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        GetTypeInfoError(SR.ErrorSerializing, GetSerializeType(graph), ex),
+                        ex
+                    )
+                );
             }
         }
 
@@ -254,25 +240,21 @@ namespace System.Runtime.Serialization
             }
             catch (XmlException ex)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        XmlObjectSerializer.CreateSerializationException(
-                            GetTypeInfoError(SR.ErrorWriteEndObject, null, ex),
-                            ex
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        GetTypeInfoError(SR.ErrorWriteEndObject, null, ex),
+                        ex
+                    )
+                );
             }
             catch (FormatException ex)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        XmlObjectSerializer.CreateSerializationException(
-                            GetTypeInfoError(SR.ErrorWriteEndObject, null, ex),
-                            ex
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        GetTypeInfoError(SR.ErrorWriteEndObject, null, ex),
+                        ex
+                    )
+                );
             }
         }
 
@@ -446,25 +428,21 @@ namespace System.Runtime.Serialization
             }
             catch (XmlException ex)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        XmlObjectSerializer.CreateSerializationException(
-                            GetTypeInfoError(SR.ErrorDeserializing, GetDeserializeType(), ex),
-                            ex
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        GetTypeInfoError(SR.ErrorDeserializing, GetDeserializeType(), ex),
+                        ex
+                    )
+                );
             }
             catch (FormatException ex)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        XmlObjectSerializer.CreateSerializationException(
-                            GetTypeInfoError(SR.ErrorDeserializing, GetDeserializeType(), ex),
-                            ex
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        GetTypeInfoError(SR.ErrorDeserializing, GetDeserializeType(), ex),
+                        ex
+                    )
+                );
             }
         }
 
@@ -478,25 +456,21 @@ namespace System.Runtime.Serialization
             }
             catch (XmlException ex)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        XmlObjectSerializer.CreateSerializationException(
-                            GetTypeInfoError(SR.ErrorIsStartObject, GetDeserializeType(), ex),
-                            ex
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        GetTypeInfoError(SR.ErrorIsStartObject, GetDeserializeType(), ex),
+                        ex
+                    )
+                );
             }
             catch (FormatException ex)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(
-                        XmlObjectSerializer.CreateSerializationException(
-                            GetTypeInfoError(SR.ErrorIsStartObject, GetDeserializeType(), ex),
-                            ex
-                        )
-                    );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        GetTypeInfoError(SR.ErrorIsStartObject, GetDeserializeType(), ex),
+                        ex
+                    )
+                );
             }
         }
 
@@ -570,9 +544,9 @@ namespace System.Runtime.Serialization
         internal static void CheckNull(object obj, string name)
         {
             if (obj == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
-                    .ThrowHelperError(new ArgumentNullException(name));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException(name)
+                );
         }
 
         internal static string TryAddLineInfo(XmlReaderDelegator reader, string errorMessage)

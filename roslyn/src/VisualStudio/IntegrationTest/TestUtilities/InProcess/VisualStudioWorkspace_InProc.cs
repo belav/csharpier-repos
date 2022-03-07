@@ -52,9 +52,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             );
 
         private EnvDTE.Project GetProject(string nameOrFileName) =>
-            GetDTE()
-                .Solution
-                .Projects
+            GetDTE().Solution.Projects
                 .OfType<EnvDTE.Project>()
                 .First(
                     p =>
@@ -89,19 +87,17 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 cancellationToken =>
                 {
                     _visualStudioWorkspace.SetOptions(
-                        _visualStudioWorkspace
-                            .Options
-                            .WithChangedOption(
-                                new OptionKey(
-                                    GetOption("NamespaceDeclarations", "CSharpCodeStyleOptions")
-                                ),
-                                new CodeStyleOption2<NamespaceDeclarationPreference>(
-                                    value
-                                      ? NamespaceDeclarationPreference.FileScoped
-                                      : NamespaceDeclarationPreference.BlockScoped,
-                                    NotificationOption2.Suggestion
-                                )
+                        _visualStudioWorkspace.Options.WithChangedOption(
+                            new OptionKey(
+                                GetOption("NamespaceDeclarations", "CSharpCodeStyleOptions")
+                            ),
+                            new CodeStyleOption2<NamespaceDeclarationPreference>(
+                                value
+                                  ? NamespaceDeclarationPreference.FileScoped
+                                  : NamespaceDeclarationPreference.BlockScoped,
+                                NotificationOption2.Suggestion
                             )
+                        )
                     );
                 }
             );
@@ -144,9 +140,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         private IOption GetOption(string optionName, string feature)
         {
-            var optionService = _visualStudioWorkspace
-                .Services
-                .GetRequiredService<IOptionService>();
+            var optionService =
+                _visualStudioWorkspace.Services.GetRequiredService<IOptionService>();
             var option = optionService
                 .GetRegisteredOptions()
                 .FirstOrDefault(o => o.Feature == feature && o.Name == optionName);
@@ -199,9 +194,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             }
             catch (Exception e)
             {
-                var listenerProvider = GetComponentModel()
-                    .DefaultExportProvider
-                    .GetExportedValue<IAsynchronousOperationListenerProvider>();
+                var listenerProvider =
+                    GetComponentModel().DefaultExportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
                 var messageBuilder = new StringBuilder(
                     "Failed to clean up listeners in a timely manner."
                 );
@@ -283,9 +277,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             InvokeOnUIThread(
                 cancellationToken =>
                 {
-                    var provider = GetComponentModel()
-                        .DefaultExportProvider
-                        .GetExportedValue<IAsynchronousOperationListenerProvider>();
+                    var provider =
+                        GetComponentModel().DefaultExportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
 
                     if (provider == null)
                     {
@@ -322,9 +315,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         public string? GetWorkingFolder()
         {
-            var service = _visualStudioWorkspace
-                .Services
-                .GetRequiredService<IPersistentStorageConfiguration>();
+            var service =
+                _visualStudioWorkspace.Services.GetRequiredService<IPersistentStorageConfiguration>();
             return service.TryGetStorageLocation(
                 SolutionKey.ToSolutionKey(_visualStudioWorkspace.CurrentSolution)
             );

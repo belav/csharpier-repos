@@ -95,8 +95,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
         protected override bool IsPartial(IMethodSymbol method)
         {
-            var declarations = method
-                .DeclaringSyntaxReferences
+            var declarations = method.DeclaringSyntaxReferences
                 .Select(r => r.GetSyntax())
                 .OfType<MethodDeclarationSyntax>();
             return declarations.Any(

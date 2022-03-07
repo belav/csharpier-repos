@@ -216,25 +216,19 @@ internal class DefaultTagHelperOptimizationPass : IntermediateNodePassBase, IRaz
             i++;
         }
 
-        context
-            .Class
-            .Children
-            .Insert(
-                i,
-                new FieldDeclarationIntermediateNode()
+        context.Class.Children.Insert(
+            i,
+            new FieldDeclarationIntermediateNode()
+            {
+                Annotations =
                 {
-                    Annotations =
-                    {
-                        {
-                            CommonAnnotations.DefaultTagHelperExtension.TagHelperField,
-                            bool.TrueString
-                        },
-                    },
-                    Modifiers = { "private", },
-                    FieldName = context.GetFieldName(tagHelper),
-                    FieldType = "global::" + tagHelper.GetTypeName(),
-                }
-            );
+                    { CommonAnnotations.DefaultTagHelperExtension.TagHelperField, bool.TrueString },
+                },
+                Modifiers = { "private", },
+                FieldName = context.GetFieldName(tagHelper),
+                FieldType = "global::" + tagHelper.GetTypeName(),
+            }
+        );
     }
 
     private bool IsTagHelperRuntimeNode(TagHelperIntermediateNode node)

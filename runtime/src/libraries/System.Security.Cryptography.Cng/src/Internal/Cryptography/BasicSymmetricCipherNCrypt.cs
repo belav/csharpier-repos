@@ -56,9 +56,7 @@ namespace Internal.Cryptography
                 unsafe
                 {
                     errorCode = _encrypting
-                        ? Interop
-                          .NCrypt
-                          .NCryptEncrypt(
+                        ? Interop.NCrypt.NCryptEncrypt(
                               keyHandle,
                               input,
                               input.Length,
@@ -68,9 +66,7 @@ namespace Internal.Cryptography
                               out numBytesWritten,
                               AsymmetricPaddingMode.None
                           )
-                        : Interop
-                          .NCrypt
-                          .NCryptDecrypt(
+                        : Interop.NCrypt.NCryptDecrypt(
                               keyHandle,
                               input,
                               input.Length,

@@ -29,8 +29,7 @@ namespace AutoMapper.UnitTests.Projection
                 cfg =>
                 {
                     cfg.Internal()
-                        .ProjectionMappers
-                        .Add(new EnumToUnderlyingTypeProjectionMapper());
+                        .ProjectionMappers.Add(new EnumToUnderlyingTypeProjectionMapper());
                     cfg.CreateProjection<Source, Destination>();
                 }
             );

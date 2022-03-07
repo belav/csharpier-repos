@@ -592,8 +592,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     result.Type != null
                     && token
                         .GetAncestor<ParameterSyntax>()
-                        ?.Parent
-                        .IsParentKind(
+                        ?.Parent.IsParentKind(
                             SyntaxKind.RecordDeclaration,
                             SyntaxKind.RecordStructDeclaration
                         ) == true

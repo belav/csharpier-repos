@@ -76,9 +76,10 @@ namespace System.Numerics
                 Vector64<byte> vTemp10 = AdvSimd.Arm64.ZipLow(vResult0, vResult1);
                 Vector64<byte> vTemp11 = AdvSimd.Arm64.ZipHigh(vResult0, vResult1);
 
-                Vector64<ushort> vTemp21 = AdvSimd
-                    .Arm64
-                    .ZipHigh(vTemp10.AsUInt16(), vTemp11.AsUInt16());
+                Vector64<ushort> vTemp21 = AdvSimd.Arm64.ZipHigh(
+                    vTemp10.AsUInt16(),
+                    vTemp11.AsUInt16()
+                );
                 return vTemp21.AsUInt32().GetElement(1) == 0xFFFFFFFF;
             }
             else if (Sse.IsSupported)
@@ -140,9 +141,10 @@ namespace System.Numerics
                 Vector64<byte> vTemp10 = AdvSimd.Arm64.ZipLow(vResult0, vResult1);
                 Vector64<byte> vTemp11 = AdvSimd.Arm64.ZipHigh(vResult0, vResult1);
 
-                Vector64<ushort> vTemp21 = AdvSimd
-                    .Arm64
-                    .ZipHigh(vTemp10.AsUInt16(), vTemp11.AsUInt16());
+                Vector64<ushort> vTemp21 = AdvSimd.Arm64.ZipHigh(
+                    vTemp10.AsUInt16(),
+                    vTemp11.AsUInt16()
+                );
                 return vTemp21.AsUInt32().GetElement(1) != 0xFFFFFFFF;
             }
             else if (Sse.IsSupported)

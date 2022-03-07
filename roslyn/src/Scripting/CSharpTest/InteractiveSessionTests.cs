@@ -34,8 +34,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.UnitTests
 
     public class InteractiveSessionTests : TestBase
     {
-        internal static readonly Assembly HostAssembly =
-            typeof(InteractiveSessionTests).GetTypeInfo().Assembly;
+        internal static readonly Assembly HostAssembly = typeof(InteractiveSessionTests)
+            .GetTypeInfo()
+            .Assembly;
 
         #region Namespaces, Types
 
@@ -280,8 +281,7 @@ new object[] { new[] { a, c }, new[] { b, d } }
         [Fact]
         public void Dynamic_Expando()
         {
-            var options = ScriptOptions
-                .Default
+            var options = ScriptOptions.Default
                 .AddReferences(
                     typeof(Microsoft.CSharp.RuntimeBinder.RuntimeBinderException)
                         .GetTypeInfo()
@@ -521,16 +521,15 @@ pi = i + j + k + l;
         [Fact]
         public void CompilationChain_GlobalNamespaceAndUsings()
         {
-            var result =
-                CSharpScript
-                    .Create(
-                        "using InteractiveFixtures.C;",
-                        ScriptOptions.Default.AddReferences(HostAssembly)
-                    )
-                    .ContinueWith("using InteractiveFixtures.C;")
-                    .ContinueWith("System.Environment.ProcessorCount")
-                    .EvaluateAsync()
-                    .Result;
+            var result = CSharpScript
+                .Create(
+                    "using InteractiveFixtures.C;",
+                    ScriptOptions.Default.AddReferences(HostAssembly)
+                )
+                .ContinueWith("using InteractiveFixtures.C;")
+                .ContinueWith("System.Environment.ProcessorCount")
+                .EvaluateAsync()
+                .Result;
 
             Assert.Equal(Environment.ProcessorCount, result);
         }
@@ -662,23 +661,21 @@ Environment.ProcessorCount
         [Fact]
         public void CompilationChain_UsingNotHidingPreviousSubmission()
         {
-            int result1 =
-                CSharpScript
-                    .Create("using System;")
-                    .ContinueWith("int Environment = 1;")
-                    .ContinueWith<int>("Environment")
-                    .EvaluateAsync()
-                    .Result;
+            int result1 = CSharpScript
+                .Create("using System;")
+                .ContinueWith("int Environment = 1;")
+                .ContinueWith<int>("Environment")
+                .EvaluateAsync()
+                .Result;
 
             Assert.Equal(1, result1);
 
-            int result2 =
-                CSharpScript
-                    .Create("int Environment = 1;")
-                    .ContinueWith("using System;")
-                    .ContinueWith<int>("Environment")
-                    .EvaluateAsync()
-                    .Result;
+            int result2 = CSharpScript
+                .Create("int Environment = 1;")
+                .ContinueWith("using System;")
+                .ContinueWith<int>("Environment")
+                .EvaluateAsync()
+                .Result;
 
             Assert.Equal(1, result2);
         }
@@ -686,12 +683,11 @@ Environment.ProcessorCount
         [Fact]
         public void CompilationChain_DefinitionHidesGlobal()
         {
-            var result =
-                CSharpScript
-                    .Create("int System = 1;")
-                    .ContinueWith("System")
-                    .EvaluateAsync()
-                    .Result;
+            var result = CSharpScript
+                .Create("int System = 1;")
+                .ContinueWith("System")
+                .EvaluateAsync()
+                .Result;
 
             Assert.Equal(1, result);
         }
@@ -716,12 +712,10 @@ Environment.ProcessorCount
         [Fact]
         public void CompilationChain_UsingNotHidingHostObjectMembers()
         {
-            var result =
-                CSharpScript
-                    .RunAsync("using System;", globals: new C1())
-                    .ContinueWith("Environment")
-                    .Result
-                    .ReturnValue;
+            var result = CSharpScript
+                .RunAsync("using System;", globals: new C1())
+                .ContinueWith("Environment")
+                .Result.ReturnValue;
 
             Assert.Equal(2, result);
         }
@@ -729,12 +723,10 @@ Environment.ProcessorCount
         [Fact]
         public void CompilationChain_DefinitionHidesHostObjectMembers()
         {
-            var result =
-                CSharpScript
-                    .RunAsync("int System = 2;", globals: new C1())
-                    .ContinueWith("System")
-                    .Result
-                    .ReturnValue;
+            var result = CSharpScript
+                .RunAsync("int System = 2;", globals: new C1())
+                .ContinueWith("System")
+                .Result.ReturnValue;
 
             Assert.Equal(2, result);
         }
@@ -1015,10 +1007,9 @@ new System.Func<int>(new C<byte>().gh<bool>)()
         [Fact]
         public void IfStatement()
         {
-            var result =
-                CSharpScript
-                    .EvaluateAsync<int>(
-                        @"
+            var result = CSharpScript
+                .EvaluateAsync<int>(
+                    @"
 using static System.Console;
 int x;
 
@@ -1033,8 +1024,8 @@ else
 
 x
 "
-                    )
-                    .Result;
+                )
+                .Result;
 
             Assert.Equal(5, result);
         }
@@ -1069,10 +1060,9 @@ TestDelegate testDelB = delegate (string s) { Console.WriteLine(s); };
         [Fact]
         public void Closure()
         {
-            var f =
-                CSharpScript
-                    .EvaluateAsync<Func<int, int>>(
-                        @"
+            var f = CSharpScript
+                .EvaluateAsync<Func<int, int>>(
+                    @"
 int Goo(int arg) { return arg + 1; }
 
 System.Func<int, int> f = (arg) =>
@@ -1082,18 +1072,17 @@ System.Func<int, int> f = (arg) =>
 
 f
 "
-                    )
-                    .Result;
+                )
+                .Result;
             Assert.Equal(3, f(2));
         }
 
         [Fact]
         public void Closure2()
         {
-            var result =
-                CSharpScript
-                    .EvaluateAsync<List<string>>(
-                        @"
+            var result = CSharpScript
+                .EvaluateAsync<List<string>>(
+                    @"
 #r ""System.Core""
 using System;
 using System.Linq;
@@ -1104,21 +1093,19 @@ string s = ""hello"";
 Enumerable.ToList(Enumerable.Range(1, 2)).ForEach(x => result.Add(s));
 result
 "
-                    )
-                    .Result;
+                )
+                .Result;
             AssertEx.Equal(new[] { "hello", "hello" }, result);
         }
 
         [Fact]
         public void UseDelegateMixStaticAndDynamic()
         {
-            var f =
-                CSharpScript
-                    .RunAsync("using System;")
-                    .ContinueWith("int Sqr(int x) {return x*x;}")
-                    .ContinueWith<Func<int, int>>("new Func<int,int>(Sqr)")
-                    .Result
-                    .ReturnValue;
+            var f = CSharpScript
+                .RunAsync("using System;")
+                .ContinueWith("int Sqr(int x) {return x*x;}")
+                .ContinueWith<Func<int, int>>("new Func<int,int>(Sqr)")
+                .Result.ReturnValue;
 
             Assert.Equal(4, f(2));
         }
@@ -1149,10 +1136,9 @@ arr_2[0] = 5;
         [Fact]
         public void FieldInitializers()
         {
-            var result =
-                CSharpScript
-                    .EvaluateAsync<List<int>>(
-                        @"
+            var result = CSharpScript
+                .EvaluateAsync<List<int>>(
+                    @"
 using System.Collections.Generic;
 static List<int> result = new List<int>();
 int b = 2;
@@ -1167,8 +1153,8 @@ result.Add(z);
 result.Add(a * z);
 result
 "
-                    )
-                    .Result;
+                )
+                .Result;
             Assert.Equal(3, result.Count);
             Assert.Equal(3, result[0]);
             Assert.Equal(6, result[1]);
@@ -1178,10 +1164,9 @@ result
         [Fact]
         public void FieldInitializersWithBlocks()
         {
-            var result =
-                CSharpScript
-                    .EvaluateAsync<List<int>>(
-                        @"
+            var result = CSharpScript
+                .EvaluateAsync<List<int>>(
+                    @"
 using System.Collections.Generic;
 static List<int> result = new List<int>();
 const int constant = 1;
@@ -1198,8 +1183,8 @@ result.Add(constant);
 result.Add(field);
 result
 "
-                    )
-                    .Result;
+                )
+                .Result;
             Assert.Equal(4, result.Count);
             Assert.Equal(1, result[0]);
             Assert.Equal(2, result[1]);
@@ -1210,20 +1195,18 @@ result
         [Fact]
         public void TestInteractiveClosures()
         {
-            var result =
-                CSharpScript
-                    .RunAsync(
-                        @"
+            var result = CSharpScript
+                .RunAsync(
+                    @"
 using System.Collections.Generic;
 static List<int> result = new List<int>();"
-                    )
-                    .ContinueWith("int x = 1;")
-                    .ContinueWith("System.Func<int> f = () => x++;")
-                    .ContinueWith("result.Add(f());")
-                    .ContinueWith("result.Add(x);")
-                    .ContinueWith<List<int>>("result")
-                    .Result
-                    .ReturnValue;
+                )
+                .ContinueWith("int x = 1;")
+                .ContinueWith("System.Func<int> f = () => x++;")
+                .ContinueWith("result.Add(f());")
+                .ContinueWith("result.Add(x);")
+                .ContinueWith<List<int>>("result")
+                .Result.ReturnValue;
 
             Assert.Equal(2, result.Count);
             Assert.Equal(1, result[0]);
@@ -1233,20 +1216,19 @@ static List<int> result = new List<int>();"
         [Fact]
         public void ExtensionMethods()
         {
-            var options = ScriptOptions
-                .Default
-                .AddReferences(typeof(Enumerable).GetTypeInfo().Assembly);
+            var options = ScriptOptions.Default.AddReferences(
+                typeof(Enumerable).GetTypeInfo().Assembly
+            );
 
-            var result =
-                CSharpScript
-                    .EvaluateAsync<int>(
-                        @"
+            var result = CSharpScript
+                .EvaluateAsync<int>(
+                    @"
 using System.Linq;
 string[] fruit = { ""banana"", ""orange"", ""lime"", ""apple"", ""kiwi"" };
 fruit.Skip(1).Where(s => s.Length > 4).Count()",
-                        options
-                    )
-                    .Result;
+                    options
+                )
+                .Result;
 
             Assert.Equal(2, result);
         }
@@ -1254,10 +1236,9 @@ fruit.Skip(1).Where(s => s.Length > 4).Count()",
         [Fact]
         public void ImplicitlyTypedFields()
         {
-            var result =
-                CSharpScript
-                    .EvaluateAsync<object[]>(
-                        @"
+            var result = CSharpScript
+                .EvaluateAsync<object[]>(
+                    @"
 var x = 1;
 var y = x;
 var z = goo(x);
@@ -1267,8 +1248,8 @@ int goo(string a) { return 0; }
 
 new object[] { x, y, z }
 "
-                    )
-                    .Result;
+                )
+                .Result;
             AssertEx.Equal(new object[] { 1, 1, null }, result);
         }
 
@@ -1303,8 +1284,9 @@ new object[] { x, y, z }
         public void NoAwait()
         {
             // No await. The return value is Task<int> rather than int.
-            var result =
-                CSharpScript.EvaluateAsync("System.Threading.Tasks.Task.FromResult(1)").Result;
+            var result = CSharpScript
+                .EvaluateAsync("System.Threading.Tasks.Task.FromResult(1)")
+                .Result;
             Assert.Equal(1, ((Task<int>)result).Result);
         }
 
@@ -1374,19 +1356,17 @@ static T G<T>(T t, Func<T, Task<T>> f)
         [Fact]
         public void AwaitChain1()
         {
-            var options = ScriptOptions
-                .Default
+            var options = ScriptOptions.Default
                 .AddReferences(typeof(Task).GetTypeInfo().Assembly)
                 .AddImports("System.Threading.Tasks");
 
-            var state =
-                CSharpScript
-                    .RunAsync("int i = 0;", options)
-                    .ContinueWith("await Task.Delay(1); i++;")
-                    .ContinueWith("await Task.Delay(1); i++;")
-                    .ContinueWith("await Task.Delay(1); i++;")
-                    .ContinueWith("i")
-                    .Result;
+            var state = CSharpScript
+                .RunAsync("int i = 0;", options)
+                .ContinueWith("await Task.Delay(1); i++;")
+                .ContinueWith("await Task.Delay(1); i++;")
+                .ContinueWith("await Task.Delay(1); i++;")
+                .ContinueWith("i")
+                .Result;
 
             Assert.Equal(3, state.ReturnValue);
         }
@@ -1394,20 +1374,18 @@ static T G<T>(T t, Func<T, Task<T>> f)
         [Fact]
         public void AwaitChain2()
         {
-            var options = ScriptOptions
-                .Default
+            var options = ScriptOptions.Default
                 .AddReferences(typeof(Task).GetTypeInfo().Assembly)
                 .AddImports("System.Threading.Tasks");
 
-            var state =
-                CSharpScript
-                    .Create("int i = 0;", options)
-                    .ContinueWith("await Task.Delay(1); i++;")
-                    .ContinueWith("await Task.Delay(1); i++;")
-                    .RunAsync()
-                    .ContinueWith("await Task.Delay(1); i++;")
-                    .ContinueWith("i")
-                    .Result;
+            var state = CSharpScript
+                .Create("int i = 0;", options)
+                .ContinueWith("await Task.Delay(1); i++;")
+                .ContinueWith("await Task.Delay(1); i++;")
+                .RunAsync()
+                .ContinueWith("await Task.Delay(1); i++;")
+                .ContinueWith("i")
+                .Result;
 
             Assert.Equal(3, state.ReturnValue);
         }
@@ -1423,9 +1401,9 @@ static T G<T>(T t, Func<T, Task<T>> f)
         [Fact, WorkItem(42368, "https://github.com/dotnet/roslyn/issues/42368")]
         public async Task CSharp9PatternForms()
         {
-            var options = ScriptOptions
-                .Default
-                .WithLanguageVersion(MessageID.IDS_FeatureAndPattern.RequiredVersion());
+            var options = ScriptOptions.Default.WithLanguageVersion(
+                MessageID.IDS_FeatureAndPattern.RequiredVersion()
+            );
             var state = await CSharpScript.RunAsync("object x = 1;", options: options);
             state = await state.ContinueWithAsync("x is long or int", options: options);
             Assert.Equal(true, state.ReturnValue);
@@ -1469,16 +1447,15 @@ public class C : I
 
             lib2.Emit(file2.Path);
 
-            object result =
-                CSharpScript
-                    .EvaluateAsync(
-                        $@"
+            object result = CSharpScript
+                .EvaluateAsync(
+                    $@"
 #r ""{file1.Path}""
 #r ""{file2.Path}""
 new C()
 "
-                    )
-                    .Result;
+                )
+                .Result;
             Assert.NotNull(result);
         }
 
@@ -1568,13 +1545,11 @@ new C()
             dir.CreateFile(libName + ".exe").WriteAllBytes(exeImage);
             dir.CreateFile(libName + ".winmd").WriteAllBytes(winmdImage);
 
-            var r2 =
-                CSharpScript
-                    .Create($@"#r ""{fileMain.Path}""")
-                    .ContinueWith($@"M.X.F")
-                    .RunAsync()
-                    .Result
-                    .ReturnValue;
+            var r2 = CSharpScript
+                .Create($@"#r ""{fileMain.Path}""")
+                .ContinueWith($@"M.X.F")
+                .RunAsync()
+                .Result.ReturnValue;
             Assert.Equal("exe", r2);
         }
 
@@ -1619,13 +1594,11 @@ new C()
             dir.CreateFile(libName + ".dll").WriteAllBytes(dllImage);
             dir.CreateFile(libName + ".winmd").WriteAllBytes(winmdImage);
 
-            var r2 =
-                CSharpScript
-                    .Create($@"#r ""{fileMain.Path}""")
-                    .ContinueWith($@"M.X.F")
-                    .RunAsync()
-                    .Result
-                    .ReturnValue;
+            var r2 = CSharpScript
+                .Create($@"#r ""{fileMain.Path}""")
+                .ContinueWith($@"M.X.F")
+                .RunAsync()
+                .Result.ReturnValue;
             Assert.Equal("dll", r2);
         }
 
@@ -1643,8 +1616,7 @@ public class E { }
 
             var script = CSharpScript.Create(
                 @"new C()",
-                ScriptOptions
-                    .Default
+                ScriptOptions.Default
                     .WithReferences(libRef.WithAliases(new[] { "Hidden" }))
                     .WithImports("Hidden::N")
             );
@@ -1659,17 +1631,16 @@ public class E { }
         [Fact]
         public void UsingAlias()
         {
-            object result =
-                CSharpScript
-                    .EvaluateAsync(
-                        @"
+            object result = CSharpScript
+                .EvaluateAsync(
+                    @"
 using D = System.Collections.Generic.Dictionary<string, int>;
 D d = new D();
 
 d
 "
-                    )
-                    .Result;
+                )
+                .Result;
             Assert.True(result is Dictionary<string, int>, "Expected Dictionary<string, int>");
         }
 
@@ -1677,13 +1648,13 @@ d
         [Fact]
         public void Usings1()
         {
-            var options = ScriptOptions
-                .Default
+            var options = ScriptOptions.Default
                 .AddImports("System", "System.Linq")
                 .AddReferences(typeof(Enumerable).GetTypeInfo().Assembly);
 
-            object result =
-                CSharpScript.EvaluateAsync("new int[] { 1, 2, 3 }.First()", options).Result;
+            object result = CSharpScript
+                .EvaluateAsync("new int[] { 1, 2, 3 }.First()", options)
+                .Result;
             Assert.Equal(1, result);
         }
 
@@ -1691,8 +1662,7 @@ d
         [Fact]
         public void Usings2()
         {
-            var options = ScriptOptions
-                .Default
+            var options = ScriptOptions.Default
                 .AddImports("System", "System.Linq")
                 .AddReferences(typeof(Enumerable).GetTypeInfo().Assembly);
 
@@ -1813,16 +1783,15 @@ d
         [Fact]
         public void Submission_HostVarianceConversions()
         {
-            var value =
-                CSharpScript
-                    .EvaluateAsync<IEnumerable<Exception>>(
-                        @"
+            var value = CSharpScript
+                .EvaluateAsync<IEnumerable<Exception>>(
+                    @"
 using System;
 using System.Collections.Generic;
 new List<ArgumentException>()
 "
-                    )
-                    .Result;
+                )
+                .Result;
 
             Assert.Null(value.FirstOrDefault());
         }
@@ -2006,9 +1975,9 @@ new List<ArgumentException>()
             var scriptCompilation = CSharpScript
                 .Create(
                     "nameof(Microsoft.CodeAnalysis.Scripting)",
-                    ScriptOptions
-                        .Default
-                        .WithMetadataResolver(TestRuntimeMetadataReferenceResolver.Instance),
+                    ScriptOptions.Default.WithMetadataResolver(
+                        TestRuntimeMetadataReferenceResolver.Instance
+                    ),
                     globalsType: typeof(CommandLineScriptGlobals)
                 )
                 .GetCompilation();
@@ -2022,14 +1991,10 @@ new List<ArgumentException>()
             );
 
             string corAssemblyName = typeof(object).GetTypeInfo().Assembly.GetName().Name;
-            string hostObjectAssemblyName =
-                scriptCompilation
-                    .ScriptCompilationInfo
-                    .GlobalsType
-                    .GetTypeInfo()
-                    .Assembly
-                    .GetName()
-                    .Name;
+            string hostObjectAssemblyName = scriptCompilation.ScriptCompilationInfo.GlobalsType
+                .GetTypeInfo()
+                .Assembly.GetName()
+                .Name;
 
             // The host adds
             // 1) a reference to typeof(object).Assembly
@@ -2082,8 +2047,7 @@ new List<ArgumentException>()
             var scriptCompilation = CSharpScript
                 .Create(
                     "typeof(Microsoft.CodeAnalysis.Scripting.Script)",
-                    options: ScriptOptions
-                        .Default
+                    options: ScriptOptions.Default
                         .WithMetadataResolver(TestRuntimeMetadataReferenceResolver.Instance)
                         .WithReferences(typeof(CSharpScript).GetTypeInfo().Assembly),
                     globalsType: typeof(CommandLineScriptGlobals)
@@ -2093,14 +2057,10 @@ new List<ArgumentException>()
             scriptCompilation.VerifyDiagnostics();
 
             string corAssemblyName = typeof(object).GetTypeInfo().Assembly.GetName().Name;
-            string hostObjectAssemblyName =
-                scriptCompilation
-                    .ScriptCompilationInfo
-                    .GlobalsType
-                    .GetTypeInfo()
-                    .Assembly
-                    .GetName()
-                    .Name;
+            string hostObjectAssemblyName = scriptCompilation.ScriptCompilationInfo.GlobalsType
+                .GetTypeInfo()
+                .Assembly.GetName()
+                .Name;
 
             // The host adds
             // 1) a reference to typeof(object).Assembly
@@ -2166,9 +2126,9 @@ typeof(Microsoft.CodeAnalysis.Scripting.Script)
             var scriptCompilation = CSharpScript
                 .Create(
                     source,
-                    ScriptOptions
-                        .Default
-                        .WithMetadataResolver(TestRuntimeMetadataReferenceResolver.Instance),
+                    ScriptOptions.Default.WithMetadataResolver(
+                        TestRuntimeMetadataReferenceResolver.Instance
+                    ),
                     globalsType: typeof(CommandLineScriptGlobals)
                 )
                 .GetCompilation();
@@ -2176,14 +2136,10 @@ typeof(Microsoft.CodeAnalysis.Scripting.Script)
             scriptCompilation.VerifyDiagnostics();
 
             string corAssemblyName = typeof(object).GetTypeInfo().Assembly.GetName().Name;
-            string hostObjectAssemblyName =
-                scriptCompilation
-                    .ScriptCompilationInfo
-                    .GlobalsType
-                    .GetTypeInfo()
-                    .Assembly
-                    .GetName()
-                    .Name;
+            string hostObjectAssemblyName = scriptCompilation.ScriptCompilationInfo.GlobalsType
+                .GetTypeInfo()
+                .Assembly.GetName()
+                .Name;
 
             // The host adds
             // 1) a reference to typeof(object).Assembly
@@ -2639,27 +2595,25 @@ int F() => i + j + k + l;
         [Fact]
         public void LocalFunction_PreviousSubmissionAndGlobal()
         {
-            var result =
-                CSharpScript
-                    .RunAsync(
-                        @"int InInitialSubmission()
+            var result = CSharpScript
+                .RunAsync(
+                    @"int InInitialSubmission()
 {
     return LocalFunction();
     int LocalFunction() => Y;
 }",
-                        globals: new C()
-                    )
-                    .ContinueWith(
-                        @"var lambda = new System.Func<int>(() =>
+                    globals: new C()
+                )
+                .ContinueWith(
+                    @"var lambda = new System.Func<int>(() =>
 {
     return LocalFunction();
     int LocalFunction() => Y + InInitialSubmission();
 });
 
 lambda.Invoke()"
-                    )
-                    .Result
-                    .ReturnValue;
+                )
+                .Result.ReturnValue;
 
             Assert.Equal(4, result);
         }

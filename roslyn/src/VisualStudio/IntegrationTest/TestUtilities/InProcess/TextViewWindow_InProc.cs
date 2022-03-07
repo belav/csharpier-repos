@@ -91,18 +91,16 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         public void WaitForLightBulbSession()
         {
-            ThreadHelper
-                .JoinableTaskFactory
-                .Run(
-                    async () =>
-                    {
-                        await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
+            ThreadHelper.JoinableTaskFactory.Run(
+                async () =>
+                {
+                    await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
 
-                        var view = GetActiveTextView();
-                        var broker = GetComponentModel().GetService<ILightBulbBroker>();
-                        await LightBulbHelper.WaitForLightBulbSessionAsync(broker, view);
-                    }
-                );
+                    var view = GetActiveTextView();
+                    var broker = GetComponentModel().GetService<ILightBulbBroker>();
+                    await LightBulbHelper.WaitForLightBulbSessionAsync(broker, view);
+                }
+            );
         }
 
         /// <remarks>
@@ -140,11 +138,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                         {
                             var textStructureNavigatorSelectorService =
                                 GetComponentModelService<ITextStructureNavigatorSelectorService>();
-                            selectionSpan =
-                                textStructureNavigatorSelectorService
-                                    .GetTextStructureNavigator(textView.TextBuffer)
-                                    .GetExtentOfWord(selectionSpan.Start)
-                                    .Span;
+                            selectionSpan = textStructureNavigatorSelectorService
+                                .GetTextStructureNavigator(textView.TextBuffer)
+                                .GetExtentOfWord(selectionSpan.Start)
+                                .Span;
                         }
 
                         var classifierAggregatorService =
@@ -322,47 +319,43 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         public void InvokeQuickInfo()
         {
-            ThreadHelper
-                .JoinableTaskFactory
-                .Run(
-                    async () =>
-                    {
-                        await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
+            ThreadHelper.JoinableTaskFactory.Run(
+                async () =>
+                {
+                    await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
 
-                        var broker = GetComponentModelService<IAsyncQuickInfoBroker>();
-                        var session = await broker.TriggerQuickInfoAsync(GetActiveTextView());
-                        Contract.ThrowIfNull(session);
-                    }
-                );
+                    var broker = GetComponentModelService<IAsyncQuickInfoBroker>();
+                    var session = await broker.TriggerQuickInfoAsync(GetActiveTextView());
+                    Contract.ThrowIfNull(session);
+                }
+            );
         }
 
         public string GetQuickInfo()
         {
-            return ThreadHelper
-                .JoinableTaskFactory
-                .Run(
-                    async () =>
+            return ThreadHelper.JoinableTaskFactory.Run(
+                async () =>
+                {
+                    await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
+
+                    var view = GetActiveTextView();
+                    var broker = GetComponentModelService<IAsyncQuickInfoBroker>();
+
+                    var session = broker.GetSession(view);
+
+                    // GetSession will not return null if preceded by a call to InvokeQuickInfo
+                    Contract.ThrowIfNull(session);
+
+                    using var cts = new CancellationTokenSource(Helper.HangMitigatingTimeout);
+                    while (session.State != QuickInfoSessionState.Visible)
                     {
-                        await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
-
-                        var view = GetActiveTextView();
-                        var broker = GetComponentModelService<IAsyncQuickInfoBroker>();
-
-                        var session = broker.GetSession(view);
-
-                        // GetSession will not return null if preceded by a call to InvokeQuickInfo
-                        Contract.ThrowIfNull(session);
-
-                        using var cts = new CancellationTokenSource(Helper.HangMitigatingTimeout);
-                        while (session.State != QuickInfoSessionState.Visible)
-                        {
-                            cts.Token.ThrowIfCancellationRequested();
-                            await Task.Delay(50, cts.Token).ConfigureAwait(true);
-                        }
-
-                        return QuickInfoToStringConverter.GetStringFromBulkContent(session.Content);
+                        cts.Token.ThrowIfCancellationRequested();
+                        await Task.Delay(50, cts.Token).ConfigureAwait(true);
                     }
-                );
+
+                    return QuickInfoToStringConverter.GetStringFromBulkContent(session.Content);
+                }
+            );
         }
 
         public void VerifyTags(string tagTypeName, int expectedCount) =>
@@ -419,20 +412,18 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         public string[] GetLightBulbActions()
         {
-            return ThreadHelper
-                .JoinableTaskFactory
-                .Run(
-                    async () =>
-                    {
-                        await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
+            return ThreadHelper.JoinableTaskFactory.Run(
+                async () =>
+                {
+                    await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
 
-                        var view = GetActiveTextView();
-                        var broker = GetComponentModel().GetService<ILightBulbBroker>();
-                        return (await GetLightBulbActionsAsync(broker, view))
-                            .Select(a => a.DisplayText)
-                            .ToArray();
-                    }
-                );
+                    var view = GetActiveTextView();
+                    var broker = GetComponentModel().GetService<ILightBulbBroker>();
+                    return (await GetLightBulbActionsAsync(broker, view))
+                        .Select(a => a.DisplayText)
+                        .ToArray();
+                }
+            );
         }
 
         private async Task<IEnumerable<ISuggestedAction>> GetLightBulbActionsAsync(
@@ -480,17 +471,15 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 fixAllScope,
                 blockUntilComplete
             );
-            var task = ThreadHelper
-                .JoinableTaskFactory
-                .RunAsync(
-                    async () =>
-                    {
-                        await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
+            var task = ThreadHelper.JoinableTaskFactory.RunAsync(
+                async () =>
+                {
+                    await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
 
-                        var activeTextView = GetActiveTextView();
-                        return await lightBulbAction(activeTextView);
-                    }
-                );
+                    var activeTextView = GetActiveTextView();
+                    return await lightBulbAction(activeTextView);
+                }
+            );
 
             if (blockUntilComplete)
             {

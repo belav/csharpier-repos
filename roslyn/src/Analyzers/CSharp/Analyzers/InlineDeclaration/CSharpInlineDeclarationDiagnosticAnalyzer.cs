@@ -428,8 +428,9 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
                     if (identifierName.Identifier.ValueText == variableName)
                     {
                         // Confirm that it is a access of the local.
-                        var symbol =
-                            semanticModel.GetSymbolInfo(identifierName, cancellationToken).Symbol;
+                        var symbol = semanticModel
+                            .GetSymbolInfo(identifierName, cancellationToken)
+                            .Symbol;
                         if (outSymbol.Equals(symbol))
                         {
                             // We definitely accessed the local before the out-argument.  We

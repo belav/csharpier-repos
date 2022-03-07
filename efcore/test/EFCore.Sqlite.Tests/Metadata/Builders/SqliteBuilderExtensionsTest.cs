@@ -39,8 +39,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
 
             modelBuilder.Entity(typeof(Customer)).Property(typeof(string), "Geometry").HasSrid(1);
 
-            var property =
-                modelBuilder.Entity(typeof(Customer)).Property(typeof(string), "Geometry").Metadata;
+            var property = modelBuilder
+                .Entity(typeof(Customer))
+                .Property(typeof(string), "Geometry")
+                .Metadata;
 
             Assert.Equal(1, property.GetSrid());
         }

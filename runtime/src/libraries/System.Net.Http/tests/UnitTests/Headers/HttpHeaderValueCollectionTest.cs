@@ -15,22 +15,20 @@ namespace System.Net.Http.Tests
     public class HttpHeaderValueCollectionTest
     {
         // Note: These are not real known headers, so they won't be returned if we call HeaderDescriptor.Get().
-        private static readonly HeaderDescriptor knownStringHeader =
-            (
-                new KnownHeader(
-                    "known-string-header",
-                    HttpHeaderType.General,
-                    new MockHeaderParser(typeof(string))
-                )
-            ).Descriptor;
-        private static readonly HeaderDescriptor knownUriHeader =
-            (
-                new KnownHeader(
-                    "known-uri-header",
-                    HttpHeaderType.General,
-                    new MockHeaderParser(typeof(Uri))
-                )
-            ).Descriptor;
+        private static readonly HeaderDescriptor knownStringHeader = (
+            new KnownHeader(
+                "known-string-header",
+                HttpHeaderType.General,
+                new MockHeaderParser(typeof(string))
+            )
+        ).Descriptor;
+        private static readonly HeaderDescriptor knownUriHeader = (
+            new KnownHeader(
+                "known-uri-header",
+                HttpHeaderType.General,
+                new MockHeaderParser(typeof(Uri))
+            )
+        ).Descriptor;
 
         private static readonly Uri specialValue = new Uri("http://special/");
         private static readonly Uri invalidValue = new Uri("http://invalid/");

@@ -261,8 +261,9 @@ namespace System.Web.Http.Tracing.Tracers
                 );
 
             // Act
-            Predicate<Type> innerPredicate =
-                HttpControllerTypeResolver.Object.IsControllerTypePredicate;
+            Predicate<Type> innerPredicate = HttpControllerTypeResolver
+                .Object
+                .IsControllerTypePredicate;
             Predicate<Type> tracerPredicate = tracer.IsControllerTypePredicate;
 
             // Assert

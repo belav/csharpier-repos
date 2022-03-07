@@ -190,14 +190,12 @@ public class ApplicationModelConventionExtensionsTest
     {
         // Arrange
         var applicationModel = new ApplicationModel();
-        applicationModel
-            .Controllers
-            .Add(
-                new ControllerModel(typeof(HelloController).GetTypeInfo(), Array.Empty<object>())
-                {
-                    Application = applicationModel
-                }
-            );
+        applicationModel.Controllers.Add(
+            new ControllerModel(typeof(HelloController).GetTypeInfo(), Array.Empty<object>())
+            {
+                Application = applicationModel
+            }
+        );
 
         var controllerModelConvention = new ControllerModelCollectionModifyingConvention();
         var conventions = new List<IApplicationModelConvention>();
@@ -213,17 +211,15 @@ public class ApplicationModelConventionExtensionsTest
         // Arrange
         var controllerModelConvention = new ControllerModelCollectionModifyingConvention();
         var applicationModel = new ApplicationModel();
-        applicationModel
-            .Controllers
-            .Add(
-                new ControllerModel(
-                    typeof(HelloController).GetTypeInfo(),
-                    new[] { controllerModelConvention }
-                )
-                {
-                    Application = applicationModel
-                }
-            );
+        applicationModel.Controllers.Add(
+            new ControllerModel(
+                typeof(HelloController).GetTypeInfo(),
+                new[] { controllerModelConvention }
+            )
+            {
+                Application = applicationModel
+            }
+        );
 
         var conventions = new List<IApplicationModelConvention>();
 
@@ -241,17 +237,15 @@ public class ApplicationModelConventionExtensionsTest
         {
             Application = applicationModel
         };
-        controllerModel
-            .Actions
-            .Add(
-                new ActionModel(
-                    controllerType.GetMethod(nameof(HelloController.GetHello)),
-                    Array.Empty<object>()
-                )
-                {
-                    Controller = controllerModel
-                }
-            );
+        controllerModel.Actions.Add(
+            new ActionModel(
+                controllerType.GetMethod(nameof(HelloController.GetHello)),
+                Array.Empty<object>()
+            )
+            {
+                Controller = controllerModel
+            }
+        );
         applicationModel.Controllers.Add(controllerModel);
 
         var actionModelConvention = new ActionModelCollectionModifyingConvention();
@@ -272,17 +266,15 @@ public class ApplicationModelConventionExtensionsTest
         {
             Application = applicationModel
         };
-        controllerModel
-            .ControllerProperties
-            .Add(
-                new PropertyModel(
-                    controllerType.GetProperty(nameof(HelloController.Property1)),
-                    Array.Empty<object>()
-                )
-                {
-                    Controller = controllerModel
-                }
-            );
+        controllerModel.ControllerProperties.Add(
+            new PropertyModel(
+                controllerType.GetProperty(nameof(HelloController.Property1)),
+                Array.Empty<object>()
+            )
+            {
+                Controller = controllerModel
+            }
+        );
         applicationModel.Controllers.Add(controllerModel);
 
         var propertyModelConvention = new ParameterModelBaseConvention();
@@ -304,17 +296,15 @@ public class ApplicationModelConventionExtensionsTest
         {
             Application = applicationModel
         };
-        controllerModel
-            .ControllerProperties
-            .Add(
-                new PropertyModel(
-                    controllerType.GetProperty(nameof(HelloController.Property1)),
-                    new[] { propertyModelConvention }
-                )
-                {
-                    Controller = controllerModel
-                }
-            );
+        controllerModel.ControllerProperties.Add(
+            new PropertyModel(
+                controllerType.GetProperty(nameof(HelloController.Property1)),
+                new[] { propertyModelConvention }
+            )
+            {
+                Controller = controllerModel
+            }
+        );
         applicationModel.Controllers.Add(controllerModel);
 
         var conventions = new List<IApplicationModelConvention>();

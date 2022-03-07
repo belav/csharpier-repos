@@ -196,9 +196,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
         )
         {
             var workspace = document.Project.Solution.Workspace;
-            var formattingRuleFactory = workspace
-                .Services
-                .GetRequiredService<IHostDependentFormattingRuleFactoryService>();
+            var formattingRuleFactory =
+                workspace.Services.GetRequiredService<IHostDependentFormattingRuleFactoryService>();
             return formattingRuleFactory
                 .CreateRule(document, position)
                 .Concat(GetTypingRules(tokenBeforeCaret))
@@ -247,8 +246,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
             if (token.IsKind(SyntaxKind.OpenBraceToken))
             {
                 var text = await token
-                    .SyntaxTree!
-                    .GetTextAsync(cancellationToken)
+                    .SyntaxTree!.GetTextAsync(cancellationToken)
                     .ConfigureAwait(false);
                 if (!token.IsFirstTokenOnLine(text))
                 {

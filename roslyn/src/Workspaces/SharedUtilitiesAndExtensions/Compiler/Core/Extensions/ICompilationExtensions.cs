@@ -47,8 +47,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         {
             // The first module of every assembly is its source module and the source
             // module always has the list of all referenced assemblies.
-            var referencedAssemblySymbols =
-                compilation.Assembly.Modules.First().ReferencedAssemblySymbols;
+            var referencedAssemblySymbols = compilation.Assembly.Modules
+                .First()
+                .ReferencedAssemblySymbols;
 
             if (excludePreviousSubmissions)
             {

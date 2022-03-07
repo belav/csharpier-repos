@@ -29,13 +29,12 @@ public class CreateNewOnMetadataUpdateAttributePassTest : RazorProjectEngineTest
             RazorSourceDocument.Create("Hello world", properties)
         );
 
-        var engine =
-            CreateProjectEngine(
-                b =>
-                {
-                    PageDirective.Register(b);
-                }
-            ).Engine;
+        var engine = CreateProjectEngine(
+            b =>
+            {
+                PageDirective.Register(b);
+            }
+        ).Engine;
         ;
         var irDocument = CreateIRDocument(engine, codeDocument);
         var pass = new CreateNewOnMetadataUpdateAttributePass { Engine = engine };
@@ -79,13 +78,12 @@ public class CreateNewOnMetadataUpdateAttributePassTest : RazorProjectEngineTest
         );
         codeDocument.SetFileKind(FileKinds.Component);
 
-        var engine =
-            CreateProjectEngine(
-                b =>
-                {
-                    PageDirective.Register(b);
-                }
-            ).Engine;
+        var engine = CreateProjectEngine(
+            b =>
+            {
+                PageDirective.Register(b);
+            }
+        ).Engine;
         var irDocument = CreateIRDocument(engine, codeDocument);
         var pass = new CreateNewOnMetadataUpdateAttributePass { Engine = engine };
         var documentClassifier = new DefaultDocumentClassifierPass { Engine = engine };

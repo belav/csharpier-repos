@@ -35,11 +35,8 @@ End Class"
             );
             // Send a space to convert virtual whitespace into real whitespace
             VisualStudio.Editor.SendKeys(VirtualKey.Enter, " ");
-            VisualStudio
-                .Editor
-                .Verify
-                .TextContains(
-                    @"
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 Class Program
     Sub Main()
         If True Then
@@ -47,8 +44,8 @@ Class Program
         End If
     End Sub
 End Class",
-                    assertCaretPosition: true
-                );
+                assertCaretPosition: true
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.EndConstructGeneration)]
@@ -64,11 +61,8 @@ End Class"
             );
             // Send a space to convert virtual whitespace into real whitespace
             VisualStudio.Editor.SendKeys("While True", VirtualKey.Enter, " ");
-            VisualStudio
-                .Editor
-                .Verify
-                .TextContains(
-                    @"
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 Class Program
     Sub Main()
         While True
@@ -76,8 +70,8 @@ Class Program
         End While
     End Sub
 End Class",
-                    assertCaretPosition: true
-                );
+                assertCaretPosition: true
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.EndConstructGeneration)]
@@ -91,14 +85,11 @@ End Interface"
 
             VisualStudio.Editor.SendKeys(new KeyPress(VirtualKey.Backspace, ShiftState.Ctrl));
             VisualStudio.Editor.SendKeys("Class", VirtualKey.Tab);
-            VisualStudio
-                .Editor
-                .Verify
-                .TextContains(
-                    @"
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 Class C
 End Class"
-                );
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.EndConstructGeneration)]
@@ -114,16 +105,13 @@ End Class"
 
             VisualStudio.Editor.SendKeys(new KeyPress(VirtualKey.Backspace, ShiftState.Ctrl));
             VisualStudio.Editor.SendKeys("fu", VirtualKey.Tab);
-            VisualStudio
-                .Editor
-                .Verify
-                .TextContains(
-                    @"
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 Class C
     Public Function Goo()
     End Function
 End Class"
-                );
+            );
         }
     }
 }

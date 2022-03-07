@@ -296,8 +296,9 @@ namespace System.Diagnostics
             switch (ctorHandle.Kind)
             {
                 case HandleKind.MemberReference:
-                    EntityHandle container =
-                        reader.GetMemberReference((MemberReferenceHandle)ctorHandle).Parent;
+                    EntityHandle container = reader
+                        .GetMemberReference((MemberReferenceHandle)ctorHandle)
+                        .Parent;
                     if (container.Kind == HandleKind.TypeReference)
                     {
                         TypeReference tr = reader.GetTypeReference((TypeReferenceHandle)container);
@@ -338,12 +339,14 @@ namespace System.Diagnostics
             switch (ctorHandle.Kind)
             {
                 case HandleKind.MemberReference:
-                    signature =
-                        reader.GetMemberReference((MemberReferenceHandle)ctorHandle).Signature;
+                    signature = reader
+                        .GetMemberReference((MemberReferenceHandle)ctorHandle)
+                        .Signature;
                     break;
                 case HandleKind.MethodDefinition:
-                    signature =
-                        reader.GetMethodDefinition((MethodDefinitionHandle)ctorHandle).Signature;
+                    signature = reader
+                        .GetMethodDefinition((MethodDefinitionHandle)ctorHandle)
+                        .Signature;
                     break;
                 default:
                     // Unusual case, potentially invalid IL

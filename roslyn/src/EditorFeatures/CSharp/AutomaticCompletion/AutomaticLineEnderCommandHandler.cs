@@ -428,11 +428,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
                         cancellationToken
                     );
                     if (
-                        document
-                            .Project
-                            .Solution
-                            .Workspace
-                            .TryApplyChanges(document.WithSyntaxRoot(newRoot).Project.Solution)
+                        document.Project.Solution.Workspace.TryApplyChanges(
+                            document.WithSyntaxRoot(newRoot).Project.Solution
+                        )
                     )
                     {
                         args.TextView.TryMoveCaretToAndEnsureVisible(
@@ -480,11 +478,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
                 );
 
                 if (
-                    document
-                        .Project
-                        .Solution
-                        .Workspace
-                        .TryApplyChanges(document.WithSyntaxRoot(newRoot).Project.Solution)
+                    document.Project.Solution.Workspace.TryApplyChanges(
+                        document.WithSyntaxRoot(newRoot).Project.Solution
+                    )
                 )
                 {
                     args.TextView.TryMoveCaretToAndEnsureVisible(
@@ -702,13 +698,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
                 //     event EventHandler e;$$
                 // }
                 // and we need to move the caret after semicolon
-                var nextCaretPosition =
-                    newRoot
-                        .GetAnnotatedNodes(s_replacementNodeAnnotation)
-                        .Single()
-                        .GetLastToken()
-                        .Span
-                        .End;
+                var nextCaretPosition = newRoot
+                    .GetAnnotatedNodes(s_replacementNodeAnnotation)
+                    .Single()
+                    .GetLastToken()
+                    .Span.End;
                 return (newRoot, nextCaretPosition);
             }
         }

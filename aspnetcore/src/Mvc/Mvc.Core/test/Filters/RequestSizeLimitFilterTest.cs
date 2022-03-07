@@ -24,10 +24,9 @@ public class RequestSizeLimitFilterTest
         );
 
         var httpMaxRequestBodySize = new TestHttpMaxRequestBodySizeFeature();
-        authorizationFilterContext
-            .HttpContext
-            .Features
-            .Set<IHttpMaxRequestBodySizeFeature>(httpMaxRequestBodySize);
+        authorizationFilterContext.HttpContext.Features.Set<IHttpMaxRequestBodySizeFeature>(
+            httpMaxRequestBodySize
+        );
 
         // Act
         requestSizeLimitResourceFilter.OnAuthorization(authorizationFilterContext);
@@ -55,10 +54,9 @@ public class RequestSizeLimitFilterTest
         );
 
         var httpMaxRequestBodySize = new TestHttpMaxRequestBodySizeFeature();
-        authorizationFilterContext
-            .HttpContext
-            .Features
-            .Set<IHttpMaxRequestBodySizeFeature>(httpMaxRequestBodySize);
+        authorizationFilterContext.HttpContext.Features.Set<IHttpMaxRequestBodySizeFeature>(
+            httpMaxRequestBodySize
+        );
 
         // Act
         requestSizeLimitResourceFilter.OnAuthorization(authorizationFilterContext);
@@ -108,10 +106,9 @@ public class RequestSizeLimitFilterTest
 
         var httpMaxRequestBodySize = new TestHttpMaxRequestBodySizeFeature();
         httpMaxRequestBodySize.IsReadOnly = true;
-        authorizationFilterContext
-            .HttpContext
-            .Features
-            .Set<IHttpMaxRequestBodySizeFeature>(httpMaxRequestBodySize);
+        authorizationFilterContext.HttpContext.Features.Set<IHttpMaxRequestBodySizeFeature>(
+            httpMaxRequestBodySize
+        );
 
         // Act
         requestSizeLimitResourceFilter.OnAuthorization(authorizationFilterContext);
@@ -138,10 +135,9 @@ public class RequestSizeLimitFilterTest
         );
 
         var httpMaxRequestBodySize = new TestHttpMaxRequestBodySizeFeature();
-        authorizationFilterContext
-            .HttpContext
-            .Features
-            .Set<IHttpMaxRequestBodySizeFeature>(httpMaxRequestBodySize);
+        authorizationFilterContext.HttpContext.Features.Set<IHttpMaxRequestBodySizeFeature>(
+            httpMaxRequestBodySize
+        );
 
         // Act
         requestSizeLimitResourceFilter.OnAuthorization(authorizationFilterContext);

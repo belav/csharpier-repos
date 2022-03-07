@@ -15,9 +15,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveStaticMembers
     [UseExportProvider]
     public class CSharpMoveStaticMembersTests
     {
-        private static readonly TestComposition s_testServices = FeaturesTestCompositions
-            .Features
-            .AddParts(typeof(TestMoveStaticMembersService));
+        private static readonly TestComposition s_testServices =
+            FeaturesTestCompositions.Features.AddParts(typeof(TestMoveStaticMembersService));
 
         #region Perform Actions From Options
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMoveStaticMembers)]
@@ -3094,9 +3093,8 @@ namespace TestNs1
                 var hostServices = s_testServices.GetHostServices();
 
                 var workspace = new AdhocWorkspace(hostServices);
-                var testOptionsService = (TestMoveStaticMembersService)workspace
-                    .Services
-                    .GetRequiredService<IMoveStaticMembersOptionsService>();
+                var testOptionsService =
+                    (TestMoveStaticMembersService)workspace.Services.GetRequiredService<IMoveStaticMembersOptionsService>();
                 testOptionsService.DestinationType = _destinationType;
                 testOptionsService.SelectedMembers = _selection;
                 testOptionsService.Filename = _destinationName;

@@ -35,8 +35,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
                 exportProvider
                     .GetExports<IAsynchronousOperationListenerProvider>()
                     .Single()
-                    .Value
-                    .GetListener(FeatureAttribute.PersistentStorage),
+                    .Value.GetListener(FeatureAttribute.PersistentStorage),
                 faultInjector
             );
 

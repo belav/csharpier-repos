@@ -83,9 +83,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             )
             {
                 // Complain about unembeddable types from linked assemblies.
-                Emit.NoPia
-                    .EmbeddedTypesManager
-                    .IsValidEmbeddableType(underlyingType, syntax, diagnostics.DiagnosticBag);
+                Emit.NoPia.EmbeddedTypesManager.IsValidEmbeddableType(
+                    underlyingType,
+                    syntax,
+                    diagnostics.DiagnosticBag
+                );
             }
 
             var locations = locationOpt is null
@@ -1019,8 +1021,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     // We couldn't find a backing field for this element. It will be an error to access it.
                     int fieldRemainder; // one-based
                     int fieldChainLength = NumberOfValueTuples(i + 1, out fieldRemainder);
-                    NamedTypeSymbol container =
-                        getNestedTupleUnderlyingType(this, fieldChainLength - 1).OriginalDefinition;
+                    NamedTypeSymbol container = getNestedTupleUnderlyingType(
+                        this,
+                        fieldChainLength - 1
+                    ).OriginalDefinition;
 
                     var diagnosticInfo = container.IsErrorType()
                       ? null
@@ -1466,8 +1470,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                     break;
 
                                 case SymbolKind.Field:
-                                    var tupleUnderlyingField =
-                                        ((FieldSymbol)member).TupleUnderlyingField;
+                                    var tupleUnderlyingField = (
+                                        (FieldSymbol)member
+                                    ).TupleUnderlyingField;
                                     if (tupleUnderlyingField is object)
                                     {
                                         map[tupleUnderlyingField.OriginalDefinition] = member;

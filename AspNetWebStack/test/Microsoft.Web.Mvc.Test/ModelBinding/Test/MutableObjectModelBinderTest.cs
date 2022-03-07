@@ -37,13 +37,11 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                         return true; // just return the DTO unchanged
                     }
                 );
-            bindingContext
-                .ModelBinderProviders
-                .RegisterBinderForType(
-                    typeof(ComplexModelDto),
-                    mockDtoBinder.Object,
-                    true /* suppressPrefixCheck */
-                );
+            bindingContext.ModelBinderProviders.RegisterBinderForType(
+                typeof(ComplexModelDto),
+                mockDtoBinder.Object,
+                true /* suppressPrefixCheck */
+            );
 
             Mock<TestableMutableObjectModelBinder> mockTestableBinder =
                 new Mock<TestableMutableObjectModelBinder> { CallBase = true };
@@ -310,11 +308,10 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             {
                 Controller = new EmptyController()
             };
-            controllerContext
-                .Controller
-                .ViewData
-                .ModelState
-                .AddModelError("foo.bar", "Some existing error.");
+            controllerContext.Controller.ViewData.ModelState.AddModelError(
+                "foo.bar",
+                "Some existing error."
+            );
 
             ModelMetadata modelMetadata = GetMetadataForType(typeof(Person));
             ModelValidationNode validationNode = new ModelValidationNode(modelMetadata, "foo");
@@ -519,10 +516,9 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ModelMetadata = GetMetadataForObject(new Person())
             };
 
-            ModelMetadata propertyMetadata = bindingContext
-                .ModelMetadata
-                .Properties
-                .Single(o => o.PropertyName == "PropertyWithDefaultValue");
+            ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(
+                o => o.PropertyName == "PropertyWithDefaultValue"
+            );
             ModelValidationNode validationNode = new ModelValidationNode(propertyMetadata, "foo");
             ComplexModelDtoResult dtoResult = new ComplexModelDtoResult(
                 null /* model */
@@ -556,10 +552,9 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ModelMetadata = GetMetadataForType(typeof(Person))
             };
 
-            ModelMetadata propertyMetadata = bindingContext
-                .ModelMetadata
-                .Properties
-                .Single(o => o.PropertyName == "NonUpdateableProperty");
+            ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(
+                o => o.PropertyName == "NonUpdateableProperty"
+            );
             ModelValidationNode validationNode = new ModelValidationNode(propertyMetadata, "foo");
             ComplexModelDtoResult dtoResult = new ComplexModelDtoResult(
                 null /* model */
@@ -591,10 +586,9 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ModelMetadata = GetMetadataForObject(model)
             };
 
-            ModelMetadata propertyMetadata = bindingContext
-                .ModelMetadata
-                .Properties
-                .Single(o => o.PropertyName == "DateOfBirth");
+            ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(
+                o => o.PropertyName == "DateOfBirth"
+            );
             ModelValidationNode validationNode = new ModelValidationNode(propertyMetadata, "foo");
             ComplexModelDtoResult dtoResult = new ComplexModelDtoResult(
                 new DateTime(2001, 1, 1),
@@ -629,10 +623,9 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ModelMetadata = GetMetadataForObject(model)
             };
 
-            ModelMetadata propertyMetadata = bindingContext
-                .ModelMetadata
-                .Properties
-                .Single(o => o.PropertyName == "DateOfDeath");
+            ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(
+                o => o.PropertyName == "DateOfDeath"
+            );
             ModelValidationNode validationNode = new ModelValidationNode(propertyMetadata, "foo");
             ComplexModelDtoResult dtoResult = new ComplexModelDtoResult(
                 new DateTime(1800, 1, 1),
@@ -667,10 +660,9 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ModelMetadata = GetMetadataForObject(new Person()),
             };
 
-            ModelMetadata propertyMetadata = bindingContext
-                .ModelMetadata
-                .Properties
-                .Single(o => o.PropertyName == "DateOfBirth");
+            ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(
+                o => o.PropertyName == "DateOfBirth"
+            );
             ModelValidationNode validationNode = new ModelValidationNode(propertyMetadata, "foo");
             ComplexModelDtoResult dtoResult = new ComplexModelDtoResult(
                 null /* model */
@@ -709,10 +701,9 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ModelName = "foo"
             };
 
-            ModelMetadata propertyMetadata = bindingContext
-                .ModelMetadata
-                .Properties
-                .Single(o => o.PropertyName == "ValueTypeRequired");
+            ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(
+                o => o.PropertyName == "ValueTypeRequired"
+            );
             ModelValidationNode validationNode = new ModelValidationNode(
                 propertyMetadata,
                 "foo.ValueTypeRequired"
@@ -757,10 +748,9 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ModelName = "foo"
             };
 
-            ModelMetadata propertyMetadata = bindingContext
-                .ModelMetadata
-                .Properties
-                .Single(o => o.PropertyName == "NameNoAttribute");
+            ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(
+                o => o.PropertyName == "NameNoAttribute"
+            );
             ModelValidationNode validationNode = new ModelValidationNode(
                 propertyMetadata,
                 "foo.NameNoAttribute"
@@ -807,10 +797,9 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ModelName = "foo"
             };
 
-            ModelMetadata propertyMetadata = bindingContext
-                .ModelMetadata
-                .Properties
-                .Single(o => o.PropertyName == "Name");
+            ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(
+                o => o.PropertyName == "Name"
+            );
             ModelValidationNode validationNode = new ModelValidationNode(
                 propertyMetadata,
                 "foo.Name"

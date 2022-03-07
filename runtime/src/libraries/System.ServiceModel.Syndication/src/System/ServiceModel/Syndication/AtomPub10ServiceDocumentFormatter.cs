@@ -254,12 +254,10 @@ namespace System.ServiceModel.Syndication
                         string val = reader.Value;
                         if (!TryParseAttribute(name, ns, val, inlineCategories, version))
                         {
-                            inlineCategories
-                                .AttributeExtensions
-                                .Add(
-                                    new XmlQualifiedName(reader.LocalName, reader.NamespaceURI),
-                                    reader.Value
-                                );
+                            inlineCategories.AttributeExtensions.Add(
+                                new XmlQualifiedName(reader.LocalName, reader.NamespaceURI),
+                                reader.Value
+                            );
                         }
                     }
                 }
@@ -368,12 +366,10 @@ namespace System.ServiceModel.Syndication
                         string val = reader.Value;
                         if (!TryParseAttribute(name, ns, val, referencedCategories, version))
                         {
-                            referencedCategories
-                                .AttributeExtensions
-                                .Add(
-                                    new XmlQualifiedName(reader.LocalName, reader.NamespaceURI),
-                                    reader.Value
-                                );
+                            referencedCategories.AttributeExtensions.Add(
+                                new XmlQualifiedName(reader.LocalName, reader.NamespaceURI),
+                                reader.Value
+                            );
                         }
                     }
                 }
@@ -515,12 +511,10 @@ namespace System.ServiceModel.Syndication
                         string val = reader.Value;
                         if (!TryParseAttribute(name, ns, val, result, Version))
                         {
-                            result
-                                .AttributeExtensions
-                                .Add(
-                                    new XmlQualifiedName(reader.LocalName, reader.NamespaceURI),
-                                    reader.Value
-                                );
+                            result.AttributeExtensions.Add(
+                                new XmlQualifiedName(reader.LocalName, reader.NamespaceURI),
+                                reader.Value
+                            );
                         }
                     }
                 }
@@ -551,18 +545,16 @@ namespace System.ServiceModel.Syndication
                         reader.IsStartElement(App10Constants.Categories, App10Constants.Namespace)
                     )
                     {
-                        result
-                            .Categories
-                            .Add(
-                                ReadCategories(
-                                    reader,
-                                    result.BaseUri,
-                                    () => CreateInlineCategories(result),
-                                    () => CreateReferencedCategories(result),
-                                    Version,
-                                    _maxExtensionSize
-                                )
-                            );
+                        result.Categories.Add(
+                            ReadCategories(
+                                reader,
+                                result.BaseUri,
+                                () => CreateInlineCategories(result),
+                                () => CreateReferencedCategories(result),
+                                Version,
+                                _maxExtensionSize
+                            )
+                        );
                     }
                     else if (reader.IsStartElement(App10Constants.Accept, App10Constants.Namespace))
                     {
@@ -626,12 +618,10 @@ namespace System.ServiceModel.Syndication
                             string val = reader.Value;
                             if (!TryParseAttribute(name, ns, val, result, Version))
                             {
-                                result
-                                    .AttributeExtensions
-                                    .Add(
-                                        new XmlQualifiedName(reader.LocalName, reader.NamespaceURI),
-                                        reader.Value
-                                    );
+                                result.AttributeExtensions.Add(
+                                    new XmlQualifiedName(reader.LocalName, reader.NamespaceURI),
+                                    reader.Value
+                                );
                             }
                         }
                     }
@@ -714,12 +704,10 @@ namespace System.ServiceModel.Syndication
                         string val = reader.Value;
                         if (!TryParseAttribute(name, ns, val, result, Version))
                         {
-                            result
-                                .AttributeExtensions
-                                .Add(
-                                    new XmlQualifiedName(reader.LocalName, reader.NamespaceURI),
-                                    reader.Value
-                                );
+                            result.AttributeExtensions.Add(
+                                new XmlQualifiedName(reader.LocalName, reader.NamespaceURI),
+                                reader.Value
+                            );
                         }
                     }
                 }
@@ -800,9 +788,11 @@ namespace System.ServiceModel.Syndication
             WriteAttributeExtensions(writer, collection, Version);
             if (collection.Title != null)
             {
-                collection
-                    .Title
-                    .WriteTo(writer, Atom10Constants.TitleTag, Atom10Constants.Atom10Namespace);
+                collection.Title.WriteTo(
+                    writer,
+                    Atom10Constants.TitleTag,
+                    Atom10Constants.Atom10Namespace
+                );
             }
             for (int i = 0; i < collection.Accepts.Count; ++i)
             {
@@ -863,9 +853,11 @@ namespace System.ServiceModel.Syndication
             WriteAttributeExtensions(writer, workspace, Version);
             if (workspace.Title != null)
             {
-                workspace
-                    .Title
-                    .WriteTo(writer, Atom10Constants.TitleTag, Atom10Constants.Atom10Namespace);
+                workspace.Title.WriteTo(
+                    writer,
+                    Atom10Constants.TitleTag,
+                    Atom10Constants.Atom10Namespace
+                );
             }
             for (int i = 0; i < workspace.Collections.Count; ++i)
             {

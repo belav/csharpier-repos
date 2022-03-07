@@ -17,22 +17,18 @@ public class ConfigureClientScopesTests
             new TestLogger<ConfigureClientScopes>()
         );
         var options = new ApiAuthorizationOptions();
-        options
-            .Clients
-            .AddRange(
-                ClientBuilder.IdentityServerSPA("TestSPA").FromConfiguration().Build(),
-                ClientBuilder.NativeApp("NativeApp").FromConfiguration().Build()
-            );
+        options.Clients.AddRange(
+            ClientBuilder.IdentityServerSPA("TestSPA").FromConfiguration().Build(),
+            ClientBuilder.NativeApp("NativeApp").FromConfiguration().Build()
+        );
 
-        options
-            .ApiResources
-            .AddRange(
-                ApiResourceBuilder
-                    .ApiResource("ResourceApi")
-                    .FromConfiguration()
-                    .AllowAllClients()
-                    .Build()
-            );
+        options.ApiResources.AddRange(
+            ApiResourceBuilder
+                .ApiResource("ResourceApi")
+                .FromConfiguration()
+                .AllowAllClients()
+                .Build()
+        );
 
         // Act
         configureClientScopes.PostConfigure(Options.DefaultName, options);
@@ -52,22 +48,18 @@ public class ConfigureClientScopesTests
             new TestLogger<ConfigureClientScopes>()
         );
         var options = new ApiAuthorizationOptions();
-        options
-            .Clients
-            .AddRange(
-                ClientBuilder.IdentityServerSPA("TestSPA").FromConfiguration().Build(),
-                ClientBuilder.NativeApp("NativeApp").FromConfiguration().Build()
-            );
+        options.Clients.AddRange(
+            ClientBuilder.IdentityServerSPA("TestSPA").FromConfiguration().Build(),
+            ClientBuilder.NativeApp("NativeApp").FromConfiguration().Build()
+        );
 
-        options
-            .ApiResources
-            .AddRange(
-                ApiResourceBuilder
-                    .ApiResource("ResourceAPI")
-                    .FromConfiguration()
-                    .AllowAllClients()
-                    .Build()
-            );
+        options.ApiResources.AddRange(
+            ApiResourceBuilder
+                .ApiResource("ResourceAPI")
+                .FromConfiguration()
+                .AllowAllClients()
+                .Build()
+        );
 
         // Act
         configureClientScopes.PostConfigure(Options.DefaultName, options);

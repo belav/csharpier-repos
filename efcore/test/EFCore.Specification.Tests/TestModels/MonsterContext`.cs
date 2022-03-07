@@ -341,9 +341,9 @@ namespace Microsoft.EntityFrameworkCore.TestModels
                         .HasForeignKey(e => e.Username);
 
                     var entityType = b.Metadata;
-                    var activityEntityType = entityType
-                        .Model
-                        .FindEntityType(typeof(TSuspiciousActivity));
+                    var activityEntityType = entityType.Model.FindEntityType(
+                        typeof(TSuspiciousActivity)
+                    );
                     activityEntityType.AddForeignKey(
                         activityEntityType.FindProperty("Username"),
                         key.Metadata,
@@ -468,39 +468,31 @@ namespace Microsoft.EntityFrameworkCore.TestModels
             var customer1 = Add(new TCustomer { Name = "Sheila Koalie" }).Entity;
             var customer3 = Add(new TCustomer { Name = "Tarquin Tiger" }).Entity;
 
-            var customer2 =
-                Add(
-                    new TCustomer
-                    {
-                        Name = "Sue Pandy",
-                        HusbandId = Entry(customer0).Property(e => e.CustomerId).CurrentValue
-                    }
-                ).Entity;
+            var customer2 = Add(
+                new TCustomer
+                {
+                    Name = "Sue Pandy",
+                    HusbandId = Entry(customer0).Property(e => e.CustomerId).CurrentValue
+                }
+            ).Entity;
 
-            var product1 =
-                Add(
-                    new TProduct
-                    {
-                        Description = "Mrs Koalie's Famous Waffles",
-                        BaseConcurrency = "Pounds Sterling"
-                    }
-                ).Entity;
-            var product2 =
-                Add(
-                    new TProduct
-                    {
-                        Description = "Chocolate Donuts",
-                        BaseConcurrency = "US Dollars"
-                    }
-                ).Entity;
-            var product3 =
-                Add(
-                    new TProduct
-                    {
-                        Description = "Assorted Dog Treats",
-                        BaseConcurrency = "Stuffy Money"
-                    }
-                ).Entity;
+            var product1 = Add(
+                new TProduct
+                {
+                    Description = "Mrs Koalie's Famous Waffles",
+                    BaseConcurrency = "Pounds Sterling"
+                }
+            ).Entity;
+            var product2 = Add(
+                new TProduct { Description = "Chocolate Donuts", BaseConcurrency = "US Dollars" }
+            ).Entity;
+            var product3 = Add(
+                new TProduct
+                {
+                    Description = "Assorted Dog Treats",
+                    BaseConcurrency = "Stuffy Money"
+                }
+            ).Entity;
 
             product1.Dimensions = new TDimensions
             {
@@ -521,635 +513,567 @@ namespace Microsoft.EntityFrameworkCore.TestModels
                 Height = 4
             };
 
-            var barcode1 =
-                Add(
-                    new TBarcode
-                    {
-                        Code = new byte[] { 1, 2, 3, 4 },
-                        ProductId = Entry(product1).Property(e => e.ProductId).CurrentValue,
-                        Text = "Barcode 1 2 3 4"
-                    }
-                ).Entity;
-            var barcode2 =
-                Add(
-                    new TBarcode
-                    {
-                        Code = new byte[] { 2, 2, 3, 4 },
-                        ProductId = Entry(product2).Property(e => e.ProductId).CurrentValue,
-                        Text = "Barcode 2 2 3 4"
-                    }
-                ).Entity;
-            var barcode3 =
-                Add(
-                    new TBarcode
-                    {
-                        Code = new byte[] { 3, 2, 3, 4 },
-                        ProductId = Entry(product3).Property(e => e.ProductId).CurrentValue,
-                        Text = "Barcode 3 2 3 4"
-                    }
-                ).Entity;
+            var barcode1 = Add(
+                new TBarcode
+                {
+                    Code = new byte[] { 1, 2, 3, 4 },
+                    ProductId = Entry(product1).Property(e => e.ProductId).CurrentValue,
+                    Text = "Barcode 1 2 3 4"
+                }
+            ).Entity;
+            var barcode2 = Add(
+                new TBarcode
+                {
+                    Code = new byte[] { 2, 2, 3, 4 },
+                    ProductId = Entry(product2).Property(e => e.ProductId).CurrentValue,
+                    Text = "Barcode 2 2 3 4"
+                }
+            ).Entity;
+            var barcode3 = Add(
+                new TBarcode
+                {
+                    Code = new byte[] { 3, 2, 3, 4 },
+                    ProductId = Entry(product3).Property(e => e.ProductId).CurrentValue,
+                    Text = "Barcode 3 2 3 4"
+                }
+            ).Entity;
 
-            var barcodeDetails1 =
-                Add(
-                    new TBarcodeDetail
-                    {
-                        Code = Entry(barcode1).Property(e => e.Code).CurrentValue,
-                        RegisteredTo = "Eeky Bear"
-                    }
-                ).Entity;
-            var barcodeDetails2 =
-                Add(
-                    new TBarcodeDetail
-                    {
-                        Code = Entry(barcode2).Property(e => e.Code).CurrentValue,
-                        RegisteredTo = "Trent"
-                    }
-                ).Entity;
+            var barcodeDetails1 = Add(
+                new TBarcodeDetail
+                {
+                    Code = Entry(barcode1).Property(e => e.Code).CurrentValue,
+                    RegisteredTo = "Eeky Bear"
+                }
+            ).Entity;
+            var barcodeDetails2 = Add(
+                new TBarcodeDetail
+                {
+                    Code = Entry(barcode2).Property(e => e.Code).CurrentValue,
+                    RegisteredTo = "Trent"
+                }
+            ).Entity;
 
-            var incorrectScan1 =
-                Add(
-                    new TIncorrectScan
-                    {
-                        ScanDate = new DateTime(2014, 5, 28, 19, 9, 6),
-                        Details = "Treats not Donuts",
-                        ActualCode = Entry(barcode3).Property(e => e.Code).CurrentValue,
-                        ExpectedCode = Entry(barcode2).Property(e => e.Code).CurrentValue
-                    }
-                ).Entity;
+            var incorrectScan1 = Add(
+                new TIncorrectScan
+                {
+                    ScanDate = new DateTime(2014, 5, 28, 19, 9, 6),
+                    Details = "Treats not Donuts",
+                    ActualCode = Entry(barcode3).Property(e => e.Code).CurrentValue,
+                    ExpectedCode = Entry(barcode2).Property(e => e.Code).CurrentValue
+                }
+            ).Entity;
 
-            var incorrectScan2 =
-                Add(
-                    new TIncorrectScan
-                    {
-                        ScanDate = new DateTime(2014, 5, 28, 19, 15, 31),
-                        Details = "Wot no waffles?",
-                        ActualCode = Entry(barcode2).Property(e => e.Code).CurrentValue,
-                        ExpectedCode = Entry(barcode1).Property(e => e.Code).CurrentValue
-                    }
-                ).Entity;
+            var incorrectScan2 = Add(
+                new TIncorrectScan
+                {
+                    ScanDate = new DateTime(2014, 5, 28, 19, 15, 31),
+                    Details = "Wot no waffles?",
+                    ActualCode = Entry(barcode2).Property(e => e.Code).CurrentValue,
+                    ExpectedCode = Entry(barcode1).Property(e => e.Code).CurrentValue
+                }
+            ).Entity;
 
-            var complaint1 =
-                Add(
-                    new TComplaint
-                    {
-                        CustomerId = Entry(customer2).Property(e => e.CustomerId).CurrentValue,
-                        AlternateId = 88,
-                        Details = "Don't give coffee to Eeky!",
-                        Logged = new DateTime(2014, 5, 27, 19, 22, 26)
-                    }
-                ).Entity;
+            var complaint1 = Add(
+                new TComplaint
+                {
+                    CustomerId = Entry(customer2).Property(e => e.CustomerId).CurrentValue,
+                    AlternateId = 88,
+                    Details = "Don't give coffee to Eeky!",
+                    Logged = new DateTime(2014, 5, 27, 19, 22, 26)
+                }
+            ).Entity;
 
-            var complaint2 =
-                Add(
-                    new TComplaint
-                    {
-                        CustomerId = Entry(customer2).Property(e => e.CustomerId).CurrentValue,
-                        AlternateId = 89,
-                        Details = "Really! Don't give coffee to Eeky!",
-                        Logged = new DateTime(2014, 5, 28, 19, 22, 26)
-                    }
-                ).Entity;
+            var complaint2 = Add(
+                new TComplaint
+                {
+                    CustomerId = Entry(customer2).Property(e => e.CustomerId).CurrentValue,
+                    AlternateId = 89,
+                    Details = "Really! Don't give coffee to Eeky!",
+                    Logged = new DateTime(2014, 5, 28, 19, 22, 26)
+                }
+            ).Entity;
 
-            var resolution =
-                Add(
-                    new TResolution
-                    {
-                        ResolutionId = Entry(complaint2).Property(e => e.AlternateId).CurrentValue,
-                        Details = "Destroyed all coffee in Redmond area."
-                    }
-                ).Entity;
+            var resolution = Add(
+                new TResolution
+                {
+                    ResolutionId = Entry(complaint2).Property(e => e.AlternateId).CurrentValue,
+                    Details = "Destroyed all coffee in Redmond area."
+                }
+            ).Entity;
 
-            var login1 =
-                Add(
-                    new TLogin
-                    {
-                        CustomerId = Entry(customer1).Property(e => e.CustomerId).CurrentValue,
-                        Username = "MrsKoalie73",
-                        AlternateUsername = "Sheila"
-                    }
-                ).Entity;
-            var login2 =
-                Add(
-                    new TLogin
-                    {
-                        CustomerId = Entry(customer2).Property(e => e.CustomerId).CurrentValue,
-                        Username = "MrsBossyPants",
-                        AlternateUsername = "Sue"
-                    }
-                ).Entity;
-            var login3 =
-                Add(
-                    new TLogin
-                    {
-                        CustomerId = Entry(customer3).Property(e => e.CustomerId).CurrentValue,
-                        Username = "TheStripedMenace",
-                        AlternateUsername = "Tarquin"
-                    }
-                ).Entity;
+            var login1 = Add(
+                new TLogin
+                {
+                    CustomerId = Entry(customer1).Property(e => e.CustomerId).CurrentValue,
+                    Username = "MrsKoalie73",
+                    AlternateUsername = "Sheila"
+                }
+            ).Entity;
+            var login2 = Add(
+                new TLogin
+                {
+                    CustomerId = Entry(customer2).Property(e => e.CustomerId).CurrentValue,
+                    Username = "MrsBossyPants",
+                    AlternateUsername = "Sue"
+                }
+            ).Entity;
+            var login3 = Add(
+                new TLogin
+                {
+                    CustomerId = Entry(customer3).Property(e => e.CustomerId).CurrentValue,
+                    Username = "TheStripedMenace",
+                    AlternateUsername = "Tarquin"
+                }
+            ).Entity;
 
-            var suspiciousActivity1 =
-                Add(
-                    new TSuspiciousActivity
-                    {
-                        Activity = "Pig prints on keyboard",
-                        Username = Entry(login3).Property(e => e.Username).CurrentValue
-                    }
-                ).Entity;
-            var suspiciousActivity2 =
-                Add(
-                    new TSuspiciousActivity
-                    {
-                        Activity = "Crumbs in the cupboard",
-                        Username = Entry(login3).Property(e => e.Username).CurrentValue
-                    }
-                ).Entity;
-            var suspiciousActivity3 =
-                Add(
-                    new TSuspiciousActivity
-                    {
-                        Activity = "Donuts gone missing",
-                        Username = Entry(login3).Property(e => e.Username).CurrentValue
-                    }
-                ).Entity;
+            var suspiciousActivity1 = Add(
+                new TSuspiciousActivity
+                {
+                    Activity = "Pig prints on keyboard",
+                    Username = Entry(login3).Property(e => e.Username).CurrentValue
+                }
+            ).Entity;
+            var suspiciousActivity2 = Add(
+                new TSuspiciousActivity
+                {
+                    Activity = "Crumbs in the cupboard",
+                    Username = Entry(login3).Property(e => e.Username).CurrentValue
+                }
+            ).Entity;
+            var suspiciousActivity3 = Add(
+                new TSuspiciousActivity
+                {
+                    Activity = "Donuts gone missing",
+                    Username = Entry(login3).Property(e => e.Username).CurrentValue
+                }
+            ).Entity;
 
-            var rsaToken1 =
-                Add(
-                    new TRsaToken
-                    {
-                        Issued = DateTime.Now,
-                        Serial = "1234",
-                        Username = Entry(login1).Property(e => e.Username).CurrentValue
-                    }
-                ).Entity;
-            var rsaToken2 =
-                Add(
-                    new TRsaToken
-                    {
-                        Issued = DateTime.Now,
-                        Serial = "2234",
-                        Username = Entry(login2).Property(e => e.Username).CurrentValue
-                    }
-                ).Entity;
+            var rsaToken1 = Add(
+                new TRsaToken
+                {
+                    Issued = DateTime.Now,
+                    Serial = "1234",
+                    Username = Entry(login1).Property(e => e.Username).CurrentValue
+                }
+            ).Entity;
+            var rsaToken2 = Add(
+                new TRsaToken
+                {
+                    Issued = DateTime.Now,
+                    Serial = "2234",
+                    Username = Entry(login2).Property(e => e.Username).CurrentValue
+                }
+            ).Entity;
 
-            var smartCard1 =
-                Add(
-                    new TSmartCard
-                    {
-                        Username = Entry(login1).Property(e => e.Username).CurrentValue,
-                        CardSerial = Entry(rsaToken1).Property(e => e.Serial).CurrentValue,
-                        Issued = Entry(rsaToken1).Property(e => e.Issued).CurrentValue
-                    }
-                ).Entity;
-            var smartCard2 =
-                Add(
-                    new TSmartCard
-                    {
-                        Username = Entry(login2).Property(e => e.Username).CurrentValue,
-                        CardSerial = Entry(rsaToken2).Property(e => e.Serial).CurrentValue,
-                        Issued = Entry(rsaToken2).Property(e => e.Issued).CurrentValue
-                    }
-                ).Entity;
+            var smartCard1 = Add(
+                new TSmartCard
+                {
+                    Username = Entry(login1).Property(e => e.Username).CurrentValue,
+                    CardSerial = Entry(rsaToken1).Property(e => e.Serial).CurrentValue,
+                    Issued = Entry(rsaToken1).Property(e => e.Issued).CurrentValue
+                }
+            ).Entity;
+            var smartCard2 = Add(
+                new TSmartCard
+                {
+                    Username = Entry(login2).Property(e => e.Username).CurrentValue,
+                    CardSerial = Entry(rsaToken2).Property(e => e.Serial).CurrentValue,
+                    Issued = Entry(rsaToken2).Property(e => e.Issued).CurrentValue
+                }
+            ).Entity;
 
-            var reset1 =
-                Add(
-                    new TPasswordReset
-                    {
-                        EmailedTo = "trent@example.com",
-                        ResetNo = 1,
-                        TempPassword = "Rent-A-Mole",
-                        Username = Entry(login3).Property(e => e.AlternateUsername).CurrentValue
-                    }
-                ).Entity;
+            var reset1 = Add(
+                new TPasswordReset
+                {
+                    EmailedTo = "trent@example.com",
+                    ResetNo = 1,
+                    TempPassword = "Rent-A-Mole",
+                    Username = Entry(login3).Property(e => e.AlternateUsername).CurrentValue
+                }
+            ).Entity;
 
-            var pageView1 =
-                Add(
-                    new TPageView
-                    {
-                        PageUrl = "somePage1",
-                        Username = Entry(login1).Property(e => e.Username).CurrentValue,
-                        Viewed = DateTime.Now
-                    }
-                ).Entity;
-            var pageView2 =
-                Add(
-                    new TPageView
-                    {
-                        PageUrl = "somePage2",
-                        Username = Entry(login1).Property(e => e.Username).CurrentValue,
-                        Viewed = DateTime.Now
-                    }
-                ).Entity;
-            var pageView3 =
-                Add(
-                    new TPageView
-                    {
-                        PageUrl = "somePage3",
-                        Username = Entry(login1).Property(e => e.Username).CurrentValue,
-                        Viewed = DateTime.Now
-                    }
-                ).Entity;
+            var pageView1 = Add(
+                new TPageView
+                {
+                    PageUrl = "somePage1",
+                    Username = Entry(login1).Property(e => e.Username).CurrentValue,
+                    Viewed = DateTime.Now
+                }
+            ).Entity;
+            var pageView2 = Add(
+                new TPageView
+                {
+                    PageUrl = "somePage2",
+                    Username = Entry(login1).Property(e => e.Username).CurrentValue,
+                    Viewed = DateTime.Now
+                }
+            ).Entity;
+            var pageView3 = Add(
+                new TPageView
+                {
+                    PageUrl = "somePage3",
+                    Username = Entry(login1).Property(e => e.Username).CurrentValue,
+                    Viewed = DateTime.Now
+                }
+            ).Entity;
 
-            var lastLogin1 =
-                Add(
-                    new TLastLogin
-                    {
-                        LoggedIn = new DateTime(2014, 5, 27, 10, 22, 26),
-                        LoggedOut = new DateTime(2014, 5, 27, 11, 22, 26),
-                        Username = Entry(login1).Property(e => e.Username).CurrentValue,
-                        SmartcardUsername = Entry(smartCard1).Property(e => e.Username).CurrentValue
-                    }
-                ).Entity;
+            var lastLogin1 = Add(
+                new TLastLogin
+                {
+                    LoggedIn = new DateTime(2014, 5, 27, 10, 22, 26),
+                    LoggedOut = new DateTime(2014, 5, 27, 11, 22, 26),
+                    Username = Entry(login1).Property(e => e.Username).CurrentValue,
+                    SmartcardUsername = Entry(smartCard1).Property(e => e.Username).CurrentValue
+                }
+            ).Entity;
 
-            var lastLogin2 =
-                Add(
-                    new TLastLogin
-                    {
-                        LoggedIn = new DateTime(2014, 5, 27, 12, 22, 26),
-                        LoggedOut = new DateTime(2014, 5, 27, 13, 22, 26),
-                        Username = Entry(login2).Property(e => e.Username).CurrentValue,
-                        SmartcardUsername = Entry(smartCard2).Property(e => e.Username).CurrentValue
-                    }
-                ).Entity;
+            var lastLogin2 = Add(
+                new TLastLogin
+                {
+                    LoggedIn = new DateTime(2014, 5, 27, 12, 22, 26),
+                    LoggedOut = new DateTime(2014, 5, 27, 13, 22, 26),
+                    Username = Entry(login2).Property(e => e.Username).CurrentValue,
+                    SmartcardUsername = Entry(smartCard2).Property(e => e.Username).CurrentValue
+                }
+            ).Entity;
 
-            var message1 =
-                Add(
-                    new TMessage
-                    {
-                        Subject = "Tea?",
-                        Body = "Fancy a cup of tea?",
-                        FromUsername = Entry(login1).Property(e => e.Username).CurrentValue,
-                        ToUsername = Entry(login2).Property(e => e.Username).CurrentValue,
-                        Sent = DateTime.Now
-                    }
-                ).Entity;
+            var message1 = Add(
+                new TMessage
+                {
+                    Subject = "Tea?",
+                    Body = "Fancy a cup of tea?",
+                    FromUsername = Entry(login1).Property(e => e.Username).CurrentValue,
+                    ToUsername = Entry(login2).Property(e => e.Username).CurrentValue,
+                    Sent = DateTime.Now
+                }
+            ).Entity;
 
-            var message2 =
-                Add(
-                    new TMessage
-                    {
-                        Subject = "Re: Tea?",
-                        Body = "Love one!",
-                        FromUsername = Entry(login2).Property(e => e.Username).CurrentValue,
-                        ToUsername = Entry(login1).Property(e => e.Username).CurrentValue,
-                        Sent = DateTime.Now
-                    }
-                ).Entity;
+            var message2 = Add(
+                new TMessage
+                {
+                    Subject = "Re: Tea?",
+                    Body = "Love one!",
+                    FromUsername = Entry(login2).Property(e => e.Username).CurrentValue,
+                    ToUsername = Entry(login1).Property(e => e.Username).CurrentValue,
+                    Sent = DateTime.Now
+                }
+            ).Entity;
 
-            var message3 =
-                Add(
-                    new TMessage
-                    {
-                        Subject = "Re: Tea?",
-                        Body = "I'll put the kettle on.",
-                        FromUsername = Entry(login1).Property(e => e.Username).CurrentValue,
-                        ToUsername = Entry(login2).Property(e => e.Username).CurrentValue,
-                        Sent = DateTime.Now
-                    }
-                ).Entity;
+            var message3 = Add(
+                new TMessage
+                {
+                    Subject = "Re: Tea?",
+                    Body = "I'll put the kettle on.",
+                    FromUsername = Entry(login1).Property(e => e.Username).CurrentValue,
+                    ToUsername = Entry(login2).Property(e => e.Username).CurrentValue,
+                    Sent = DateTime.Now
+                }
+            ).Entity;
 
-            var order1 =
-                Add(
-                    new TAnOrder
-                    {
-                        CustomerId = Entry(customer1).Property(e => e.CustomerId).CurrentValue,
-                        Username = Entry(login1).Property(e => e.Username).CurrentValue,
-                        AlternateId = 77
-                    }
-                ).Entity;
-            var order2 =
-                Add(
-                    new TAnOrder
-                    {
-                        CustomerId = Entry(customer2).Property(e => e.CustomerId).CurrentValue,
-                        Username = Entry(login2).Property(e => e.Username).CurrentValue,
-                        AlternateId = 78
-                    }
-                ).Entity;
-            var order3 =
-                Add(
-                    new TAnOrder
-                    {
-                        CustomerId = Entry(customer3).Property(e => e.CustomerId).CurrentValue,
-                        Username = Entry(login3).Property(e => e.Username).CurrentValue,
-                        AlternateId = 79
-                    }
-                ).Entity;
+            var order1 = Add(
+                new TAnOrder
+                {
+                    CustomerId = Entry(customer1).Property(e => e.CustomerId).CurrentValue,
+                    Username = Entry(login1).Property(e => e.Username).CurrentValue,
+                    AlternateId = 77
+                }
+            ).Entity;
+            var order2 = Add(
+                new TAnOrder
+                {
+                    CustomerId = Entry(customer2).Property(e => e.CustomerId).CurrentValue,
+                    Username = Entry(login2).Property(e => e.Username).CurrentValue,
+                    AlternateId = 78
+                }
+            ).Entity;
+            var order3 = Add(
+                new TAnOrder
+                {
+                    CustomerId = Entry(customer3).Property(e => e.CustomerId).CurrentValue,
+                    Username = Entry(login3).Property(e => e.Username).CurrentValue,
+                    AlternateId = 79
+                }
+            ).Entity;
 
-            var orderNote1 =
-                Add(
-                    new TOrderNote
-                    {
-                        Note = "Must have tea!",
-                        OrderId = Entry(order1).Property(e => e.AlternateId).CurrentValue
-                    }
-                ).Entity;
-            var orderNote2 =
-                Add(
-                    new TOrderNote
-                    {
-                        Note = "And donuts!",
-                        OrderId = Entry(order1).Property(e => e.AlternateId).CurrentValue
-                    }
-                ).Entity;
-            var orderNote3 =
-                Add(
-                    new TOrderNote
-                    {
-                        Note = "But no coffee. :-(",
-                        OrderId = Entry(order1).Property(e => e.AlternateId).CurrentValue
-                    }
-                ).Entity;
+            var orderNote1 = Add(
+                new TOrderNote
+                {
+                    Note = "Must have tea!",
+                    OrderId = Entry(order1).Property(e => e.AlternateId).CurrentValue
+                }
+            ).Entity;
+            var orderNote2 = Add(
+                new TOrderNote
+                {
+                    Note = "And donuts!",
+                    OrderId = Entry(order1).Property(e => e.AlternateId).CurrentValue
+                }
+            ).Entity;
+            var orderNote3 = Add(
+                new TOrderNote
+                {
+                    Note = "But no coffee. :-(",
+                    OrderId = Entry(order1).Property(e => e.AlternateId).CurrentValue
+                }
+            ).Entity;
 
-            var orderQualityCheck1 =
-                Add(
-                    new TOrderQualityCheck
-                    {
-                        OrderId = Entry(order1).Property(e => e.AlternateId).CurrentValue,
-                        CheckedBy = "Eeky Bear",
-                        CheckedDateTime = DateTime.Now
-                    }
-                ).Entity;
-            var orderQualityCheck2 =
-                Add(
-                    new TOrderQualityCheck
-                    {
-                        OrderId = Entry(order2).Property(e => e.AlternateId).CurrentValue,
-                        CheckedBy = "Eeky Bear",
-                        CheckedDateTime = DateTime.Now
-                    }
-                ).Entity;
-            var orderQualityCheck3 =
-                Add(
-                    new TOrderQualityCheck
-                    {
-                        OrderId = Entry(order3).Property(e => e.AlternateId).CurrentValue,
-                        CheckedBy = "Eeky Bear",
-                        CheckedDateTime = DateTime.Now
-                    }
-                ).Entity;
+            var orderQualityCheck1 = Add(
+                new TOrderQualityCheck
+                {
+                    OrderId = Entry(order1).Property(e => e.AlternateId).CurrentValue,
+                    CheckedBy = "Eeky Bear",
+                    CheckedDateTime = DateTime.Now
+                }
+            ).Entity;
+            var orderQualityCheck2 = Add(
+                new TOrderQualityCheck
+                {
+                    OrderId = Entry(order2).Property(e => e.AlternateId).CurrentValue,
+                    CheckedBy = "Eeky Bear",
+                    CheckedDateTime = DateTime.Now
+                }
+            ).Entity;
+            var orderQualityCheck3 = Add(
+                new TOrderQualityCheck
+                {
+                    OrderId = Entry(order3).Property(e => e.AlternateId).CurrentValue,
+                    CheckedBy = "Eeky Bear",
+                    CheckedDateTime = DateTime.Now
+                }
+            ).Entity;
 
-            var orderLine1 =
-                Add(
-                    new TOrderLine
-                    {
-                        OrderId = Entry(order1).Property(e => e.AnOrderId).CurrentValue,
-                        ProductId = Entry(product1).Property(e => e.ProductId).CurrentValue,
-                        Quantity = 7
-                    }
-                ).Entity;
-            var orderLine2 =
-                Add(
-                    new TOrderLine
-                    {
-                        OrderId = Entry(order1).Property(e => e.AnOrderId).CurrentValue,
-                        ProductId = Entry(product2).Property(e => e.ProductId).CurrentValue,
-                        Quantity = 1
-                    }
-                ).Entity;
-            var orderLine3 =
-                Add(
-                    new TOrderLine
-                    {
-                        OrderId = Entry(order2).Property(e => e.AnOrderId).CurrentValue,
-                        ProductId = Entry(product3).Property(e => e.ProductId).CurrentValue,
-                        Quantity = 2
-                    }
-                ).Entity;
-            var orderLine4 =
-                Add(
-                    new TOrderLine
-                    {
-                        OrderId = Entry(order2).Property(e => e.AnOrderId).CurrentValue,
-                        ProductId = Entry(product2).Property(e => e.ProductId).CurrentValue,
-                        Quantity = 3
-                    }
-                ).Entity;
-            var orderLine5 =
-                Add(
-                    new TOrderLine
-                    {
-                        OrderId = Entry(order2).Property(e => e.AnOrderId).CurrentValue,
-                        ProductId = Entry(product1).Property(e => e.ProductId).CurrentValue,
-                        Quantity = 4
-                    }
-                ).Entity;
-            var orderLine6 =
-                Add(
-                    new TOrderLine
-                    {
-                        OrderId = Entry(order3).Property(e => e.AnOrderId).CurrentValue,
-                        ProductId = Entry(product2).Property(e => e.ProductId).CurrentValue,
-                        Quantity = 5
-                    }
-                ).Entity;
+            var orderLine1 = Add(
+                new TOrderLine
+                {
+                    OrderId = Entry(order1).Property(e => e.AnOrderId).CurrentValue,
+                    ProductId = Entry(product1).Property(e => e.ProductId).CurrentValue,
+                    Quantity = 7
+                }
+            ).Entity;
+            var orderLine2 = Add(
+                new TOrderLine
+                {
+                    OrderId = Entry(order1).Property(e => e.AnOrderId).CurrentValue,
+                    ProductId = Entry(product2).Property(e => e.ProductId).CurrentValue,
+                    Quantity = 1
+                }
+            ).Entity;
+            var orderLine3 = Add(
+                new TOrderLine
+                {
+                    OrderId = Entry(order2).Property(e => e.AnOrderId).CurrentValue,
+                    ProductId = Entry(product3).Property(e => e.ProductId).CurrentValue,
+                    Quantity = 2
+                }
+            ).Entity;
+            var orderLine4 = Add(
+                new TOrderLine
+                {
+                    OrderId = Entry(order2).Property(e => e.AnOrderId).CurrentValue,
+                    ProductId = Entry(product2).Property(e => e.ProductId).CurrentValue,
+                    Quantity = 3
+                }
+            ).Entity;
+            var orderLine5 = Add(
+                new TOrderLine
+                {
+                    OrderId = Entry(order2).Property(e => e.AnOrderId).CurrentValue,
+                    ProductId = Entry(product1).Property(e => e.ProductId).CurrentValue,
+                    Quantity = 4
+                }
+            ).Entity;
+            var orderLine6 = Add(
+                new TOrderLine
+                {
+                    OrderId = Entry(order3).Property(e => e.AnOrderId).CurrentValue,
+                    ProductId = Entry(product2).Property(e => e.ProductId).CurrentValue,
+                    Quantity = 5
+                }
+            ).Entity;
 
-            var productDetail1 =
-                Add(
-                    new TProductDetail
-                    {
-                        Details = "A Waffle Cart specialty!",
-                        ProductId = Entry(product1).Property(e => e.ProductId).CurrentValue
-                    }
-                ).Entity;
-            var productDetail2 =
-                Add(
-                    new TProductDetail
-                    {
-                        Details = "Eeky Bear's favorite!",
-                        ProductId = Entry(product2).Property(e => e.ProductId).CurrentValue
-                    }
-                ).Entity;
+            var productDetail1 = Add(
+                new TProductDetail
+                {
+                    Details = "A Waffle Cart specialty!",
+                    ProductId = Entry(product1).Property(e => e.ProductId).CurrentValue
+                }
+            ).Entity;
+            var productDetail2 = Add(
+                new TProductDetail
+                {
+                    Details = "Eeky Bear's favorite!",
+                    ProductId = Entry(product2).Property(e => e.ProductId).CurrentValue
+                }
+            ).Entity;
 
-            var productReview1 =
-                Add(
-                    new TProductReview
-                    {
-                        ProductId = Entry(product1).Property(e => e.ProductId).CurrentValue,
-                        Review = "Better than Tarqies!"
-                    }
-                ).Entity;
-            var productReview2 =
-                Add(
-                    new TProductReview
-                    {
-                        ProductId = Entry(product1).Property(e => e.ProductId).CurrentValue,
-                        Review = "Good with maple syrup."
-                    }
-                ).Entity;
-            var productReview3 =
-                Add(
-                    new TProductReview
-                    {
-                        ProductId = Entry(product2).Property(e => e.ProductId).CurrentValue,
-                        Review = "Eeky says yes!"
-                    }
-                ).Entity;
+            var productReview1 = Add(
+                new TProductReview
+                {
+                    ProductId = Entry(product1).Property(e => e.ProductId).CurrentValue,
+                    Review = "Better than Tarqies!"
+                }
+            ).Entity;
+            var productReview2 = Add(
+                new TProductReview
+                {
+                    ProductId = Entry(product1).Property(e => e.ProductId).CurrentValue,
+                    Review = "Good with maple syrup."
+                }
+            ).Entity;
+            var productReview3 = Add(
+                new TProductReview
+                {
+                    ProductId = Entry(product2).Property(e => e.ProductId).CurrentValue,
+                    Review = "Eeky says yes!"
+                }
+            ).Entity;
 
-            var productPhoto1 =
-                Add(
-                    new TProductPhoto
-                    {
-                        ProductId = Entry(product1).Property(e => e.ProductId).CurrentValue,
-                        Photo = new byte[] { 101, 102 }
-                    }
-                ).Entity;
-            var productPhoto2 =
-                Add(
-                    new TProductPhoto
-                    {
-                        ProductId = Entry(product1).Property(e => e.ProductId).CurrentValue,
-                        Photo = new byte[] { 103, 104 }
-                    }
-                ).Entity;
-            var productPhoto3 =
-                Add(
-                    new TProductPhoto
-                    {
-                        ProductId = Entry(product3).Property(e => e.ProductId).CurrentValue,
-                        Photo = new byte[] { 105, 106 }
-                    }
-                ).Entity;
+            var productPhoto1 = Add(
+                new TProductPhoto
+                {
+                    ProductId = Entry(product1).Property(e => e.ProductId).CurrentValue,
+                    Photo = new byte[] { 101, 102 }
+                }
+            ).Entity;
+            var productPhoto2 = Add(
+                new TProductPhoto
+                {
+                    ProductId = Entry(product1).Property(e => e.ProductId).CurrentValue,
+                    Photo = new byte[] { 103, 104 }
+                }
+            ).Entity;
+            var productPhoto3 = Add(
+                new TProductPhoto
+                {
+                    ProductId = Entry(product3).Property(e => e.ProductId).CurrentValue,
+                    Photo = new byte[] { 105, 106 }
+                }
+            ).Entity;
 
-            var productWebFeature1 =
-                Add(
-                    new TProductWebFeature
-                    {
-                        Heading = "Waffle Style",
-                        PhotoId = Entry(productPhoto1).Property(e => e.PhotoId).CurrentValue,
-                        ProductId = Entry(product1).Property(e => e.ProductId).CurrentValue,
-                        ReviewId = Entry(productReview1).Property(e => e.ReviewId).CurrentValue
-                    }
-                ).Entity;
+            var productWebFeature1 = Add(
+                new TProductWebFeature
+                {
+                    Heading = "Waffle Style",
+                    PhotoId = Entry(productPhoto1).Property(e => e.PhotoId).CurrentValue,
+                    ProductId = Entry(product1).Property(e => e.ProductId).CurrentValue,
+                    ReviewId = Entry(productReview1).Property(e => e.ReviewId).CurrentValue
+                }
+            ).Entity;
 
-            var productWebFeature2 =
-                Add(
-                    new TProductWebFeature
-                    {
-                        Heading = "What does the waffle say?",
-                        ProductId = Entry(product2).Property(e => e.ProductId).CurrentValue,
-                        ReviewId = Entry(productReview3).Property(e => e.ReviewId).CurrentValue
-                    }
-                ).Entity;
+            var productWebFeature2 = Add(
+                new TProductWebFeature
+                {
+                    Heading = "What does the waffle say?",
+                    ProductId = Entry(product2).Property(e => e.ProductId).CurrentValue,
+                    ReviewId = Entry(productReview3).Property(e => e.ReviewId).CurrentValue
+                }
+            ).Entity;
 
             var supplier1 = Add(new TSupplier { Name = "Trading As Trent" }).Entity;
             var supplier2 = Add(new TSupplier { Name = "Ants By Boris" }).Entity;
 
-            var supplierLogo1 =
-                Add(
-                    new TSupplierLogo
-                    {
-                        SupplierId = Entry(supplier1).Property(e => e.SupplierId).CurrentValue,
-                        Logo = new byte[] { 201, 202 }
-                    }
-                ).Entity;
+            var supplierLogo1 = Add(
+                new TSupplierLogo
+                {
+                    SupplierId = Entry(supplier1).Property(e => e.SupplierId).CurrentValue,
+                    Logo = new byte[] { 201, 202 }
+                }
+            ).Entity;
 
-            var supplierInfo1 =
-                Add(
-                    new TSupplierInfo
-                    {
-                        SupplierId = Entry(supplier1).Property(e => e.SupplierId).CurrentValue,
-                        Information = "Seems a bit dodgy."
-                    }
-                ).Entity;
-            var supplierInfo2 =
-                Add(
-                    new TSupplierInfo
-                    {
-                        SupplierId = Entry(supplier1).Property(e => e.SupplierId).CurrentValue,
-                        Information = "Orange fur?"
-                    }
-                ).Entity;
-            var supplierInfo3 =
-                Add(
-                    new TSupplierInfo
-                    {
-                        SupplierId = Entry(supplier2).Property(e => e.SupplierId).CurrentValue,
-                        Information = "Very expensive!"
-                    }
-                ).Entity;
+            var supplierInfo1 = Add(
+                new TSupplierInfo
+                {
+                    SupplierId = Entry(supplier1).Property(e => e.SupplierId).CurrentValue,
+                    Information = "Seems a bit dodgy."
+                }
+            ).Entity;
+            var supplierInfo2 = Add(
+                new TSupplierInfo
+                {
+                    SupplierId = Entry(supplier1).Property(e => e.SupplierId).CurrentValue,
+                    Information = "Orange fur?"
+                }
+            ).Entity;
+            var supplierInfo3 = Add(
+                new TSupplierInfo
+                {
+                    SupplierId = Entry(supplier2).Property(e => e.SupplierId).CurrentValue,
+                    Information = "Very expensive!"
+                }
+            ).Entity;
 
-            var customerInfo1 =
-                Add(
-                    new TCustomerInfo
-                    {
-                        CustomerInfoId = Entry(customer1).Property(e => e.CustomerId).CurrentValue,
-                        Information = "Really likes tea."
-                    }
-                ).Entity;
-            var customerInfo2 =
-                Add(
-                    new TCustomerInfo
-                    {
-                        CustomerInfoId = Entry(customer2).Property(e => e.CustomerId).CurrentValue,
-                        Information = "Mrs Bossy Pants!"
-                    }
-                ).Entity;
+            var customerInfo1 = Add(
+                new TCustomerInfo
+                {
+                    CustomerInfoId = Entry(customer1).Property(e => e.CustomerId).CurrentValue,
+                    Information = "Really likes tea."
+                }
+            ).Entity;
+            var customerInfo2 = Add(
+                new TCustomerInfo
+                {
+                    CustomerInfoId = Entry(customer2).Property(e => e.CustomerId).CurrentValue,
+                    Information = "Mrs Bossy Pants!"
+                }
+            ).Entity;
 
             var computer1 = Add(new TComputer { Name = "markash420" }).Entity;
             var computer2 = Add(new TComputer { Name = "unicorns420" }).Entity;
 
-            var computerDetail1 =
-                Add(
-                    new TComputerDetail
-                    {
-                        ComputerDetailId =
-                            Entry(computer1).Property(e => e.ComputerId).CurrentValue,
-                        Manufacturer = "Dell",
-                        Model = "420",
-                        PurchaseDate = new DateTime(2008, 4, 1),
-                        Serial = "4201",
-                        Specifications = "It's a Dell!"
-                    }
-                ).Entity;
+            var computerDetail1 = Add(
+                new TComputerDetail
+                {
+                    ComputerDetailId = Entry(computer1).Property(e => e.ComputerId).CurrentValue,
+                    Manufacturer = "Dell",
+                    Model = "420",
+                    PurchaseDate = new DateTime(2008, 4, 1),
+                    Serial = "4201",
+                    Specifications = "It's a Dell!"
+                }
+            ).Entity;
 
-            var computerDetail2 =
-                Add(
-                    new TComputerDetail
-                    {
-                        ComputerDetailId =
-                            Entry(computer2).Property(e => e.ComputerId).CurrentValue,
-                        Manufacturer = "Not A Dell",
-                        Model = "Not 420",
-                        PurchaseDate = new DateTime(2012, 4, 1),
-                        Serial = "4202",
-                        Specifications = "It's not a Dell!"
-                    }
-                ).Entity;
+            var computerDetail2 = Add(
+                new TComputerDetail
+                {
+                    ComputerDetailId = Entry(computer2).Property(e => e.ComputerId).CurrentValue,
+                    Manufacturer = "Not A Dell",
+                    Model = "Not 420",
+                    PurchaseDate = new DateTime(2012, 4, 1),
+                    Serial = "4202",
+                    Specifications = "It's not a Dell!"
+                }
+            ).Entity;
 
-            var driver1 =
-                Add(
-                    new TDriver { BirthDate = new DateTime(2006, 9, 19), Name = "Eeky Bear" }
-                ).Entity;
-            var driver2 =
-                Add(
-                    new TDriver { BirthDate = new DateTime(2007, 9, 19), Name = "Splash Bear" }
-                ).Entity;
+            var driver1 = Add(
+                new TDriver { BirthDate = new DateTime(2006, 9, 19), Name = "Eeky Bear" }
+            ).Entity;
+            var driver2 = Add(
+                new TDriver { BirthDate = new DateTime(2007, 9, 19), Name = "Splash Bear" }
+            ).Entity;
 
-            var license1 =
-                Add(
-                    new TLicense
-                    {
-                        Name = Entry(driver1).Property(e => e.Name).CurrentValue,
-                        LicenseClass = "C",
-                        LicenseNumber = "10",
-                        Restrictions = "None",
-                        State = LicenseState.Active,
-                        ExpirationDate = new DateTime(2018, 9, 19)
-                    }
-                ).Entity;
+            var license1 = Add(
+                new TLicense
+                {
+                    Name = Entry(driver1).Property(e => e.Name).CurrentValue,
+                    LicenseClass = "C",
+                    LicenseNumber = "10",
+                    Restrictions = "None",
+                    State = LicenseState.Active,
+                    ExpirationDate = new DateTime(2018, 9, 19)
+                }
+            ).Entity;
 
-            var license2 =
-                Add(
-                    new TLicense
-                    {
-                        Name = Entry(driver2).Property(e => e.Name).CurrentValue,
-                        LicenseClass = "A",
-                        LicenseNumber = "11",
-                        Restrictions = "None",
-                        State = LicenseState.Revoked,
-                        ExpirationDate = new DateTime(2018, 9, 19)
-                    }
-                ).Entity;
+            var license2 = Add(
+                new TLicense
+                {
+                    Name = Entry(driver2).Property(e => e.Name).CurrentValue,
+                    LicenseClass = "A",
+                    LicenseNumber = "11",
+                    Restrictions = "None",
+                    State = LicenseState.Revoked,
+                    ExpirationDate = new DateTime(2018, 9, 19)
+                }
+            ).Entity;
 
             SaveChanges();
         }
@@ -1160,39 +1084,31 @@ namespace Microsoft.EntityFrameworkCore.TestModels
             var customer1 = Add(new TCustomer { Name = "Sheila Koalie" }).Entity;
             var customer3 = Add(new TCustomer { Name = "Tarquin Tiger" }).Entity;
 
-            var customer2 =
-                Add(
-                    new TCustomer { Name = "Sue Pandy", Husband = dependentNavs ? customer0 : null }
-                ).Entity;
+            var customer2 = Add(
+                new TCustomer { Name = "Sue Pandy", Husband = dependentNavs ? customer0 : null }
+            ).Entity;
             if (principalNavs)
             {
                 customer0.Wife = customer2;
             }
 
-            var product1 =
-                Add(
-                    new TProduct
-                    {
-                        Description = "Mrs Koalie's Famous Waffles",
-                        BaseConcurrency = "Pounds Sterling"
-                    }
-                ).Entity;
-            var product2 =
-                Add(
-                    new TProduct
-                    {
-                        Description = "Chocolate Donuts",
-                        BaseConcurrency = "US Dollars"
-                    }
-                ).Entity;
-            var product3 =
-                Add(
-                    new TProduct
-                    {
-                        Description = "Assorted Dog Treats",
-                        BaseConcurrency = "Stuffy Money"
-                    }
-                ).Entity;
+            var product1 = Add(
+                new TProduct
+                {
+                    Description = "Mrs Koalie's Famous Waffles",
+                    BaseConcurrency = "Pounds Sterling"
+                }
+            ).Entity;
+            var product2 = Add(
+                new TProduct { Description = "Chocolate Donuts", BaseConcurrency = "US Dollars" }
+            ).Entity;
+            var product3 = Add(
+                new TProduct
+                {
+                    Description = "Assorted Dog Treats",
+                    BaseConcurrency = "Stuffy Money"
+                }
+            ).Entity;
 
             product1.Dimensions = new TDimensions
             {
@@ -1213,33 +1129,30 @@ namespace Microsoft.EntityFrameworkCore.TestModels
                 Height = 4
             };
 
-            var barcode1 =
-                Add(
-                    new TBarcode
-                    {
-                        Code = new byte[] { 1, 2, 3, 4 },
-                        Product = dependentNavs ? product1 : null,
-                        Text = "Barcode 1 2 3 4"
-                    }
-                ).Entity;
-            var barcode2 =
-                Add(
-                    new TBarcode
-                    {
-                        Code = new byte[] { 2, 2, 3, 4 },
-                        Product = dependentNavs ? product2 : null,
-                        Text = "Barcode 2 2 3 4"
-                    }
-                ).Entity;
-            var barcode3 =
-                Add(
-                    new TBarcode
-                    {
-                        Code = new byte[] { 3, 2, 3, 4 },
-                        Product = dependentNavs ? product3 : null,
-                        Text = "Barcode 3 2 3 4"
-                    }
-                ).Entity;
+            var barcode1 = Add(
+                new TBarcode
+                {
+                    Code = new byte[] { 1, 2, 3, 4 },
+                    Product = dependentNavs ? product1 : null,
+                    Text = "Barcode 1 2 3 4"
+                }
+            ).Entity;
+            var barcode2 = Add(
+                new TBarcode
+                {
+                    Code = new byte[] { 2, 2, 3, 4 },
+                    Product = dependentNavs ? product2 : null,
+                    Text = "Barcode 2 2 3 4"
+                }
+            ).Entity;
+            var barcode3 = Add(
+                new TBarcode
+                {
+                    Code = new byte[] { 3, 2, 3, 4 },
+                    Product = dependentNavs ? product3 : null,
+                    Text = "Barcode 3 2 3 4"
+                }
+            ).Entity;
             if (principalNavs)
             {
                 product1.InitializeCollections();
@@ -1250,110 +1163,104 @@ namespace Microsoft.EntityFrameworkCore.TestModels
                 product3.Barcodes.Add(barcode3);
             }
 
-            var barcodeDetails1 =
-                Add(new TBarcodeDetail { Code = barcode1.Code, RegisteredTo = "Eeky Bear" }).Entity;
-            var barcodeDetails2 =
-                Add(new TBarcodeDetail { Code = barcode2.Code, RegisteredTo = "Trent" }).Entity;
+            var barcodeDetails1 = Add(
+                new TBarcodeDetail { Code = barcode1.Code, RegisteredTo = "Eeky Bear" }
+            ).Entity;
+            var barcodeDetails2 = Add(
+                new TBarcodeDetail { Code = barcode2.Code, RegisteredTo = "Trent" }
+            ).Entity;
             if (principalNavs)
             {
                 barcode1.Detail = barcodeDetails1;
                 barcode2.Detail = barcodeDetails2;
             }
 
-            var incorrectScan1 =
-                Add(
-                    new TIncorrectScan
-                    {
-                        ScanDate = new DateTime(2014, 5, 28, 19, 9, 6),
-                        Details = "Treats not Donuts",
-                        ActualBarcode = barcode3,
-                        ExpectedBarcode = dependentNavs ? barcode2 : null
-                    }
-                ).Entity;
+            var incorrectScan1 = Add(
+                new TIncorrectScan
+                {
+                    ScanDate = new DateTime(2014, 5, 28, 19, 9, 6),
+                    Details = "Treats not Donuts",
+                    ActualBarcode = barcode3,
+                    ExpectedBarcode = dependentNavs ? barcode2 : null
+                }
+            ).Entity;
             if (principalNavs)
             {
                 barcode2.InitializeCollections();
                 barcode2.BadScans.Add(incorrectScan1);
             }
 
-            var incorrectScan2 =
-                Add(
-                    new TIncorrectScan
-                    {
-                        ScanDate = new DateTime(2014, 5, 28, 19, 15, 31),
-                        Details = "Wot no waffles?",
-                        ActualBarcode = barcode2,
-                        ExpectedBarcode = dependentNavs ? barcode1 : null
-                    }
-                ).Entity;
+            var incorrectScan2 = Add(
+                new TIncorrectScan
+                {
+                    ScanDate = new DateTime(2014, 5, 28, 19, 15, 31),
+                    Details = "Wot no waffles?",
+                    ActualBarcode = barcode2,
+                    ExpectedBarcode = dependentNavs ? barcode1 : null
+                }
+            ).Entity;
             if (principalNavs)
             {
                 barcode1.InitializeCollections();
                 barcode1.BadScans.Add(incorrectScan2);
             }
 
-            var complaint1 =
-                Add(
-                    new TComplaint
-                    {
-                        Customer = customer2,
-                        AlternateId = 88,
-                        Details = "Don't give coffee to Eeky!",
-                        Logged = new DateTime(2014, 5, 27, 19, 22, 26)
-                    }
-                ).Entity;
+            var complaint1 = Add(
+                new TComplaint
+                {
+                    Customer = customer2,
+                    AlternateId = 88,
+                    Details = "Don't give coffee to Eeky!",
+                    Logged = new DateTime(2014, 5, 27, 19, 22, 26)
+                }
+            ).Entity;
 
-            var complaint2 =
-                Add(
-                    new TComplaint
-                    {
-                        Customer = customer2,
-                        AlternateId = 89,
-                        Details = "Really! Don't give coffee to Eeky!",
-                        Logged = new DateTime(2014, 5, 28, 19, 22, 26)
-                    }
-                ).Entity;
+            var complaint2 = Add(
+                new TComplaint
+                {
+                    Customer = customer2,
+                    AlternateId = 89,
+                    Details = "Really! Don't give coffee to Eeky!",
+                    Logged = new DateTime(2014, 5, 28, 19, 22, 26)
+                }
+            ).Entity;
 
-            var resolution =
-                Add(
-                    new TResolution
-                    {
-                        Complaint = dependentNavs ? complaint2 : null,
-                        Details = "Destroyed all coffee in Redmond area."
-                    }
-                ).Entity;
+            var resolution = Add(
+                new TResolution
+                {
+                    Complaint = dependentNavs ? complaint2 : null,
+                    Details = "Destroyed all coffee in Redmond area."
+                }
+            ).Entity;
             if (principalNavs)
             {
                 complaint2.Resolution = resolution;
             }
 
-            var login1 =
-                Add(
-                    new TLogin
-                    {
-                        Customer = dependentNavs ? customer1 : null,
-                        Username = "MrsKoalie73",
-                        AlternateUsername = "Sheila"
-                    }
-                ).Entity;
-            var login2 =
-                Add(
-                    new TLogin
-                    {
-                        Customer = dependentNavs ? customer2 : null,
-                        Username = "MrsBossyPants",
-                        AlternateUsername = "Sue"
-                    }
-                ).Entity;
-            var login3 =
-                Add(
-                    new TLogin
-                    {
-                        Customer = dependentNavs ? customer3 : null,
-                        Username = "TheStripedMenace",
-                        AlternateUsername = "Tarquin"
-                    }
-                ).Entity;
+            var login1 = Add(
+                new TLogin
+                {
+                    Customer = dependentNavs ? customer1 : null,
+                    Username = "MrsKoalie73",
+                    AlternateUsername = "Sheila"
+                }
+            ).Entity;
+            var login2 = Add(
+                new TLogin
+                {
+                    Customer = dependentNavs ? customer2 : null,
+                    Username = "MrsBossyPants",
+                    AlternateUsername = "Sue"
+                }
+            ).Entity;
+            var login3 = Add(
+                new TLogin
+                {
+                    Customer = dependentNavs ? customer3 : null,
+                    Username = "TheStripedMenace",
+                    AlternateUsername = "Tarquin"
+                }
+            ).Entity;
             if (principalNavs)
             {
                 customer1.InitializeCollections();
@@ -1364,152 +1271,138 @@ namespace Microsoft.EntityFrameworkCore.TestModels
                 customer3.Logins.Add(login3);
             }
 
-            var suspiciousActivity1 =
-                Add(
-                    new TSuspiciousActivity
-                    {
-                        Activity = "Pig prints on keyboard",
-                        Username = Entry(login3).Property(e => e.Username).CurrentValue
-                    }
-                ).Entity;
-            var suspiciousActivity2 =
-                Add(
-                    new TSuspiciousActivity
-                    {
-                        Activity = "Crumbs in the cupboard",
-                        Username = Entry(login3).Property(e => e.Username).CurrentValue
-                    }
-                ).Entity;
-            var suspiciousActivity3 =
-                Add(
-                    new TSuspiciousActivity
-                    {
-                        Activity = "Donuts gone missing",
-                        Username = Entry(login3).Property(e => e.Username).CurrentValue
-                    }
-                ).Entity;
+            var suspiciousActivity1 = Add(
+                new TSuspiciousActivity
+                {
+                    Activity = "Pig prints on keyboard",
+                    Username = Entry(login3).Property(e => e.Username).CurrentValue
+                }
+            ).Entity;
+            var suspiciousActivity2 = Add(
+                new TSuspiciousActivity
+                {
+                    Activity = "Crumbs in the cupboard",
+                    Username = Entry(login3).Property(e => e.Username).CurrentValue
+                }
+            ).Entity;
+            var suspiciousActivity3 = Add(
+                new TSuspiciousActivity
+                {
+                    Activity = "Donuts gone missing",
+                    Username = Entry(login3).Property(e => e.Username).CurrentValue
+                }
+            ).Entity;
 
-            var rsaToken1 =
-                Add(
-                    new TRsaToken
-                    {
-                        Issued = DateTime.Now,
-                        Serial = "1234",
-                        Login = login1
-                    }
-                ).Entity;
-            var rsaToken2 =
-                Add(
-                    new TRsaToken
-                    {
-                        Issued = DateTime.Now,
-                        Serial = "2234",
-                        Login = login2
-                    }
-                ).Entity;
+            var rsaToken1 = Add(
+                new TRsaToken
+                {
+                    Issued = DateTime.Now,
+                    Serial = "1234",
+                    Login = login1
+                }
+            ).Entity;
+            var rsaToken2 = Add(
+                new TRsaToken
+                {
+                    Issued = DateTime.Now,
+                    Serial = "2234",
+                    Login = login2
+                }
+            ).Entity;
 
-            var smartCard1 =
-                Add(
-                    new TSmartCard
-                    {
-                        Login = login1,
-                        CardSerial = Entry(rsaToken1).Property(e => e.Serial).CurrentValue,
-                        Issued = Entry(rsaToken1).Property(e => e.Issued).CurrentValue
-                    }
-                ).Entity;
-            var smartCard2 =
-                Add(
-                    new TSmartCard
-                    {
-                        Login = login2,
-                        CardSerial = Entry(rsaToken2).Property(e => e.Serial).CurrentValue,
-                        Issued = Entry(rsaToken2).Property(e => e.Issued).CurrentValue
-                    }
-                ).Entity;
+            var smartCard1 = Add(
+                new TSmartCard
+                {
+                    Login = login1,
+                    CardSerial = Entry(rsaToken1).Property(e => e.Serial).CurrentValue,
+                    Issued = Entry(rsaToken1).Property(e => e.Issued).CurrentValue
+                }
+            ).Entity;
+            var smartCard2 = Add(
+                new TSmartCard
+                {
+                    Login = login2,
+                    CardSerial = Entry(rsaToken2).Property(e => e.Serial).CurrentValue,
+                    Issued = Entry(rsaToken2).Property(e => e.Issued).CurrentValue
+                }
+            ).Entity;
 
-            var reset1 =
-                Add(
-                    new TPasswordReset
-                    {
-                        EmailedTo = "trent@example.com",
-                        ResetNo = 1,
-                        TempPassword = "Rent-A-Mole",
-                        Login = login3
-                    }
-                ).Entity;
+            var reset1 = Add(
+                new TPasswordReset
+                {
+                    EmailedTo = "trent@example.com",
+                    ResetNo = 1,
+                    TempPassword = "Rent-A-Mole",
+                    Login = login3
+                }
+            ).Entity;
 
-            var pageView1 =
-                Add(
-                    new TPageView
-                    {
-                        PageUrl = "somePage1",
-                        Login = login1,
-                        Viewed = DateTime.Now
-                    }
-                ).Entity;
-            var pageView2 =
-                Add(
-                    new TPageView
-                    {
-                        PageUrl = "somePage2",
-                        Login = login1,
-                        Viewed = DateTime.Now
-                    }
-                ).Entity;
-            var pageView3 =
-                Add(
-                    new TPageView
-                    {
-                        PageUrl = "somePage3",
-                        Login = login1,
-                        Viewed = DateTime.Now
-                    }
-                ).Entity;
+            var pageView1 = Add(
+                new TPageView
+                {
+                    PageUrl = "somePage1",
+                    Login = login1,
+                    Viewed = DateTime.Now
+                }
+            ).Entity;
+            var pageView2 = Add(
+                new TPageView
+                {
+                    PageUrl = "somePage2",
+                    Login = login1,
+                    Viewed = DateTime.Now
+                }
+            ).Entity;
+            var pageView3 = Add(
+                new TPageView
+                {
+                    PageUrl = "somePage3",
+                    Login = login1,
+                    Viewed = DateTime.Now
+                }
+            ).Entity;
 
-            var lastLogin1 =
-                Add(
-                    new TLastLogin
-                    {
-                        LoggedIn = new DateTime(2014, 5, 27, 10, 22, 26),
-                        LoggedOut = new DateTime(2014, 5, 27, 11, 22, 26),
-                        Login = login1,
-                        SmartcardUsername = Entry(smartCard1).Property(e => e.Username).CurrentValue
-                    }
-                ).Entity;
+            var lastLogin1 = Add(
+                new TLastLogin
+                {
+                    LoggedIn = new DateTime(2014, 5, 27, 10, 22, 26),
+                    LoggedOut = new DateTime(2014, 5, 27, 11, 22, 26),
+                    Login = login1,
+                    SmartcardUsername = Entry(smartCard1).Property(e => e.Username).CurrentValue
+                }
+            ).Entity;
             if (principalNavs)
             {
                 login1.LastLogin = lastLogin1;
                 smartCard1.LastLogin = lastLogin1;
             }
 
-            var lastLogin2 =
-                Add(
-                    new TLastLogin
-                    {
-                        LoggedIn = new DateTime(2014, 5, 27, 12, 22, 26),
-                        LoggedOut = new DateTime(2014, 5, 27, 13, 22, 26),
-                        Login = login2,
-                        SmartcardUsername = Entry(smartCard2).Property(e => e.Username).CurrentValue
-                    }
-                ).Entity;
+            var lastLogin2 = Add(
+                new TLastLogin
+                {
+                    LoggedIn = new DateTime(2014, 5, 27, 12, 22, 26),
+                    LoggedOut = new DateTime(2014, 5, 27, 13, 22, 26),
+                    Login = login2,
+                    SmartcardUsername = Entry(smartCard2).Property(e => e.Username).CurrentValue
+                }
+            ).Entity;
             if (principalNavs)
             {
                 login2.LastLogin = lastLogin2;
                 smartCard2.LastLogin = lastLogin2;
             }
 
-            var message1 =
-                Add(
-                    new TMessage
-                    {
-                        Subject = "Tea?",
-                        Body = "Fancy a cup of tea?",
-                        FromUsername = Entry(login1).Property(e => e.Username).CurrentValue,
-                        Sender = login1,
-                        Recipient = dependentNavs ? login2 : null,
-                        Sent = DateTime.Now
-                    }
-                ).Entity;
+            var message1 = Add(
+                new TMessage
+                {
+                    Subject = "Tea?",
+                    Body = "Fancy a cup of tea?",
+                    FromUsername = Entry(login1).Property(e => e.Username).CurrentValue,
+                    Sender = login1,
+                    Recipient = dependentNavs ? login2 : null,
+                    Sent = DateTime.Now
+                }
+            ).Entity;
             if (principalNavs)
             {
                 login1.InitializeCollections();
@@ -1518,69 +1411,64 @@ namespace Microsoft.EntityFrameworkCore.TestModels
                 login2.ReceivedMessages.Add(message1);
             }
 
-            var message2 =
-                Add(
-                    new TMessage
-                    {
-                        Subject = "Re: Tea?",
-                        Body = "Love one!",
-                        FromUsername = Entry(login2).Property(e => e.Username).CurrentValue,
-                        Sender = login2,
-                        Recipient = dependentNavs ? login1 : null,
-                        Sent = DateTime.Now
-                    }
-                ).Entity;
+            var message2 = Add(
+                new TMessage
+                {
+                    Subject = "Re: Tea?",
+                    Body = "Love one!",
+                    FromUsername = Entry(login2).Property(e => e.Username).CurrentValue,
+                    Sender = login2,
+                    Recipient = dependentNavs ? login1 : null,
+                    Sent = DateTime.Now
+                }
+            ).Entity;
             if (principalNavs)
             {
                 login2.SentMessages.Add(message2);
                 login1.ReceivedMessages.Add(message2);
             }
 
-            var message3 =
-                Add(
-                    new TMessage
-                    {
-                        Subject = "Re: Tea?",
-                        Body = "I'll put the kettle on.",
-                        FromUsername = Entry(login1).Property(e => e.Username).CurrentValue,
-                        Sender = login1,
-                        Recipient = dependentNavs ? login2 : null,
-                        Sent = DateTime.Now
-                    }
-                ).Entity;
+            var message3 = Add(
+                new TMessage
+                {
+                    Subject = "Re: Tea?",
+                    Body = "I'll put the kettle on.",
+                    FromUsername = Entry(login1).Property(e => e.Username).CurrentValue,
+                    Sender = login1,
+                    Recipient = dependentNavs ? login2 : null,
+                    Sent = DateTime.Now
+                }
+            ).Entity;
             if (principalNavs)
             {
                 login1.SentMessages.Add(message3);
                 login2.ReceivedMessages.Add(message3);
             }
 
-            var order1 =
-                Add(
-                    new TAnOrder
-                    {
-                        Customer = dependentNavs ? customer1 : null,
-                        Login = dependentNavs ? login1 : null,
-                        AlternateId = 77
-                    }
-                ).Entity;
-            var order2 =
-                Add(
-                    new TAnOrder
-                    {
-                        Customer = dependentNavs ? customer2 : null,
-                        Login = dependentNavs ? login2 : null,
-                        AlternateId = 78
-                    }
-                ).Entity;
-            var order3 =
-                Add(
-                    new TAnOrder
-                    {
-                        Customer = dependentNavs ? customer3 : null,
-                        Login = dependentNavs ? login3 : null,
-                        AlternateId = 79
-                    }
-                ).Entity;
+            var order1 = Add(
+                new TAnOrder
+                {
+                    Customer = dependentNavs ? customer1 : null,
+                    Login = dependentNavs ? login1 : null,
+                    AlternateId = 77
+                }
+            ).Entity;
+            var order2 = Add(
+                new TAnOrder
+                {
+                    Customer = dependentNavs ? customer2 : null,
+                    Login = dependentNavs ? login2 : null,
+                    AlternateId = 78
+                }
+            ).Entity;
+            var order3 = Add(
+                new TAnOrder
+                {
+                    Customer = dependentNavs ? customer3 : null,
+                    Login = dependentNavs ? login3 : null,
+                    AlternateId = 79
+                }
+            ).Entity;
             if (principalNavs)
             {
                 customer1.Orders.Add(order1);
@@ -1592,26 +1480,19 @@ namespace Microsoft.EntityFrameworkCore.TestModels
                 login3.Orders.Add(order3);
             }
 
-            var orderNote1 =
-                Add(
-                    new TOrderNote
-                    {
-                        Note = "Must have tea!",
-                        Order = dependentNavs ? order1 : null
-                    }
-                ).Entity;
-            var orderNote2 =
-                Add(
-                    new TOrderNote { Note = "And donuts!", Order = dependentNavs ? order1 : null }
-                ).Entity;
-            var orderNote3 =
-                Add(
-                    new TOrderNote
-                    {
-                        Note = "But no coffee. :-(",
-                        Order = dependentNavs ? order1 : null
-                    }
-                ).Entity;
+            var orderNote1 = Add(
+                new TOrderNote { Note = "Must have tea!", Order = dependentNavs ? order1 : null }
+            ).Entity;
+            var orderNote2 = Add(
+                new TOrderNote { Note = "And donuts!", Order = dependentNavs ? order1 : null }
+            ).Entity;
+            var orderNote3 = Add(
+                new TOrderNote
+                {
+                    Note = "But no coffee. :-(",
+                    Order = dependentNavs ? order1 : null
+                }
+            ).Entity;
             if (principalNavs)
             {
                 order1.InitializeCollections();
@@ -1620,88 +1501,79 @@ namespace Microsoft.EntityFrameworkCore.TestModels
                 order1.Notes.Add(orderNote3);
             }
 
-            var orderQualityCheck1 =
-                Add(
-                    new TOrderQualityCheck
-                    {
-                        Order = order1,
-                        CheckedBy = "Eeky Bear",
-                        CheckedDateTime = DateTime.Now
-                    }
-                ).Entity;
-            var orderQualityCheck2 =
-                Add(
-                    new TOrderQualityCheck
-                    {
-                        Order = order2,
-                        CheckedBy = "Eeky Bear",
-                        CheckedDateTime = DateTime.Now
-                    }
-                ).Entity;
-            var orderQualityCheck3 =
-                Add(
-                    new TOrderQualityCheck
-                    {
-                        Order = order3,
-                        CheckedBy = "Eeky Bear",
-                        CheckedDateTime = DateTime.Now
-                    }
-                ).Entity;
+            var orderQualityCheck1 = Add(
+                new TOrderQualityCheck
+                {
+                    Order = order1,
+                    CheckedBy = "Eeky Bear",
+                    CheckedDateTime = DateTime.Now
+                }
+            ).Entity;
+            var orderQualityCheck2 = Add(
+                new TOrderQualityCheck
+                {
+                    Order = order2,
+                    CheckedBy = "Eeky Bear",
+                    CheckedDateTime = DateTime.Now
+                }
+            ).Entity;
+            var orderQualityCheck3 = Add(
+                new TOrderQualityCheck
+                {
+                    Order = order3,
+                    CheckedBy = "Eeky Bear",
+                    CheckedDateTime = DateTime.Now
+                }
+            ).Entity;
 
-            var orderLine1 =
-                Add(
-                    new TOrderLine
-                    {
-                        Order = order1,
-                        Product = product1,
-                        Quantity = 7
-                    }
-                ).Entity;
-            var orderLine2 =
-                Add(
-                    new TOrderLine
-                    {
-                        Order = order1,
-                        Product = product2,
-                        Quantity = 1
-                    }
-                ).Entity;
-            var orderLine3 =
-                Add(
-                    new TOrderLine
-                    {
-                        Order = order2,
-                        Product = product3,
-                        Quantity = 2
-                    }
-                ).Entity;
-            var orderLine4 =
-                Add(
-                    new TOrderLine
-                    {
-                        Order = order2,
-                        Product = product2,
-                        Quantity = 3
-                    }
-                ).Entity;
-            var orderLine5 =
-                Add(
-                    new TOrderLine
-                    {
-                        Order = order2,
-                        Product = product1,
-                        Quantity = 4
-                    }
-                ).Entity;
-            var orderLine6 =
-                Add(
-                    new TOrderLine
-                    {
-                        Order = order3,
-                        Product = product2,
-                        Quantity = 5
-                    }
-                ).Entity;
+            var orderLine1 = Add(
+                new TOrderLine
+                {
+                    Order = order1,
+                    Product = product1,
+                    Quantity = 7
+                }
+            ).Entity;
+            var orderLine2 = Add(
+                new TOrderLine
+                {
+                    Order = order1,
+                    Product = product2,
+                    Quantity = 1
+                }
+            ).Entity;
+            var orderLine3 = Add(
+                new TOrderLine
+                {
+                    Order = order2,
+                    Product = product3,
+                    Quantity = 2
+                }
+            ).Entity;
+            var orderLine4 = Add(
+                new TOrderLine
+                {
+                    Order = order2,
+                    Product = product2,
+                    Quantity = 3
+                }
+            ).Entity;
+            var orderLine5 = Add(
+                new TOrderLine
+                {
+                    Order = order2,
+                    Product = product1,
+                    Quantity = 4
+                }
+            ).Entity;
+            var orderLine6 = Add(
+                new TOrderLine
+                {
+                    Order = order3,
+                    Product = product2,
+                    Quantity = 5
+                }
+            ).Entity;
             if (principalNavs)
             {
                 order1.OrderLines.Add(orderLine1);
@@ -1714,44 +1586,39 @@ namespace Microsoft.EntityFrameworkCore.TestModels
                 order3.OrderLines.Add(orderLine6);
             }
 
-            var productDetail1 =
-                Add(
-                    new TProductDetail { Details = "A Waffle Cart specialty!", Product = product1 }
-                ).Entity;
-            var productDetail2 =
-                Add(
-                    new TProductDetail { Details = "Eeky Bear's favorite!", Product = product2 }
-                ).Entity;
+            var productDetail1 = Add(
+                new TProductDetail { Details = "A Waffle Cart specialty!", Product = product1 }
+            ).Entity;
+            var productDetail2 = Add(
+                new TProductDetail { Details = "Eeky Bear's favorite!", Product = product2 }
+            ).Entity;
             if (principalNavs)
             {
                 product1.Detail = productDetail1;
                 product2.Detail = productDetail2;
             }
 
-            var productReview1 =
-                Add(
-                    new TProductReview
-                    {
-                        Product = dependentNavs ? product1 : null,
-                        Review = "Better than Tarqies!"
-                    }
-                ).Entity;
-            var productReview2 =
-                Add(
-                    new TProductReview
-                    {
-                        Product = dependentNavs ? product1 : null,
-                        Review = "Good with maple syrup."
-                    }
-                ).Entity;
-            var productReview3 =
-                Add(
-                    new TProductReview
-                    {
-                        Product = dependentNavs ? product2 : null,
-                        Review = "Eeky says yes!"
-                    }
-                ).Entity;
+            var productReview1 = Add(
+                new TProductReview
+                {
+                    Product = dependentNavs ? product1 : null,
+                    Review = "Better than Tarqies!"
+                }
+            ).Entity;
+            var productReview2 = Add(
+                new TProductReview
+                {
+                    Product = dependentNavs ? product1 : null,
+                    Review = "Good with maple syrup."
+                }
+            ).Entity;
+            var productReview3 = Add(
+                new TProductReview
+                {
+                    Product = dependentNavs ? product2 : null,
+                    Review = "Eeky says yes!"
+                }
+            ).Entity;
             if (principalNavs)
             {
                 product1.Reviews.Add(productReview1);
@@ -1759,30 +1626,27 @@ namespace Microsoft.EntityFrameworkCore.TestModels
                 product2.Reviews.Add(productReview3);
             }
 
-            var productPhoto1 =
-                Add(
-                    new TProductPhoto
-                    {
-                        ProductId = Entry(product1).Property(e => e.ProductId).CurrentValue,
-                        Photo = new byte[] { 101, 102 }
-                    }
-                ).Entity;
-            var productPhoto2 =
-                Add(
-                    new TProductPhoto
-                    {
-                        ProductId = Entry(product1).Property(e => e.ProductId).CurrentValue,
-                        Photo = new byte[] { 103, 104 }
-                    }
-                ).Entity;
-            var productPhoto3 =
-                Add(
-                    new TProductPhoto
-                    {
-                        ProductId = Entry(product3).Property(e => e.ProductId).CurrentValue,
-                        Photo = new byte[] { 105, 106 }
-                    }
-                ).Entity;
+            var productPhoto1 = Add(
+                new TProductPhoto
+                {
+                    ProductId = Entry(product1).Property(e => e.ProductId).CurrentValue,
+                    Photo = new byte[] { 101, 102 }
+                }
+            ).Entity;
+            var productPhoto2 = Add(
+                new TProductPhoto
+                {
+                    ProductId = Entry(product1).Property(e => e.ProductId).CurrentValue,
+                    Photo = new byte[] { 103, 104 }
+                }
+            ).Entity;
+            var productPhoto3 = Add(
+                new TProductPhoto
+                {
+                    ProductId = Entry(product3).Property(e => e.ProductId).CurrentValue,
+                    Photo = new byte[] { 105, 106 }
+                }
+            ).Entity;
             if (principalNavs)
             {
                 product1.Photos.Add(productPhoto1);
@@ -1790,16 +1654,15 @@ namespace Microsoft.EntityFrameworkCore.TestModels
                 product3.Photos.Add(productPhoto3);
             }
 
-            var productWebFeature1 =
-                Add(
-                    new TProductWebFeature
-                    {
-                        Heading = "Waffle Style",
-                        Photo = dependentNavs ? productPhoto1 : null,
-                        ProductId = Entry(product1).Property(e => e.ProductId).CurrentValue,
-                        Review = dependentNavs ? productReview1 : null
-                    }
-                ).Entity;
+            var productWebFeature1 = Add(
+                new TProductWebFeature
+                {
+                    Heading = "Waffle Style",
+                    Photo = dependentNavs ? productPhoto1 : null,
+                    ProductId = Entry(product1).Property(e => e.ProductId).CurrentValue,
+                    Review = dependentNavs ? productReview1 : null
+                }
+            ).Entity;
             if (principalNavs)
             {
                 productPhoto1.InitializeCollections();
@@ -1808,15 +1671,14 @@ namespace Microsoft.EntityFrameworkCore.TestModels
                 productReview1.Features.Add(productWebFeature1);
             }
 
-            var productWebFeature2 =
-                Add(
-                    new TProductWebFeature
-                    {
-                        Heading = "What does the waffle say?",
-                        ProductId = Entry(product2).Property(e => e.ProductId).CurrentValue,
-                        Review = dependentNavs ? productReview3 : null
-                    }
-                ).Entity;
+            var productWebFeature2 = Add(
+                new TProductWebFeature
+                {
+                    Heading = "What does the waffle say?",
+                    ProductId = Entry(product2).Property(e => e.ProductId).CurrentValue,
+                    Review = dependentNavs ? productReview3 : null
+                }
+            ).Entity;
             if (principalNavs)
             {
                 productReview3.InitializeCollections();
@@ -1826,48 +1688,44 @@ namespace Microsoft.EntityFrameworkCore.TestModels
             var supplier1 = Add(new TSupplier { Name = "Trading As Trent" }).Entity;
             var supplier2 = Add(new TSupplier { Name = "Ants By Boris" }).Entity;
 
-            var supplierLogo1 =
-                Add(
-                    new TSupplierLogo
-                    {
-                        SupplierId = !principalNavs
-                            ? Entry(supplier1).Property(e => e.SupplierId).CurrentValue
-                            : 0,
-                        Logo = new byte[] { 201, 202 }
-                    }
-                ).Entity;
+            var supplierLogo1 = Add(
+                new TSupplierLogo
+                {
+                    SupplierId = !principalNavs
+                        ? Entry(supplier1).Property(e => e.SupplierId).CurrentValue
+                        : 0,
+                    Logo = new byte[] { 201, 202 }
+                }
+            ).Entity;
             if (principalNavs)
             {
                 supplier1.Logo = supplierLogo1;
             }
 
-            var supplierInfo1 =
-                Add(
-                    new TSupplierInfo { Supplier = supplier1, Information = "Seems a bit dodgy." }
-                ).Entity;
-            var supplierInfo2 =
-                Add(new TSupplierInfo { Supplier = supplier1, Information = "Orange fur?" }).Entity;
-            var supplierInfo3 =
-                Add(
-                    new TSupplierInfo { Supplier = supplier2, Information = "Very expensive!" }
-                ).Entity;
+            var supplierInfo1 = Add(
+                new TSupplierInfo { Supplier = supplier1, Information = "Seems a bit dodgy." }
+            ).Entity;
+            var supplierInfo2 = Add(
+                new TSupplierInfo { Supplier = supplier1, Information = "Orange fur?" }
+            ).Entity;
+            var supplierInfo3 = Add(
+                new TSupplierInfo { Supplier = supplier2, Information = "Very expensive!" }
+            ).Entity;
 
-            var customerInfo1 =
-                Add(
-                    new TCustomerInfo
-                    {
-                        CustomerInfoId = Entry(customer1).Property(e => e.CustomerId).CurrentValue,
-                        Information = "Really likes tea."
-                    }
-                ).Entity;
-            var customerInfo2 =
-                Add(
-                    new TCustomerInfo
-                    {
-                        CustomerInfoId = Entry(customer2).Property(e => e.CustomerId).CurrentValue,
-                        Information = "Mrs Bossy Pants!"
-                    }
-                ).Entity;
+            var customerInfo1 = Add(
+                new TCustomerInfo
+                {
+                    CustomerInfoId = Entry(customer1).Property(e => e.CustomerId).CurrentValue,
+                    Information = "Really likes tea."
+                }
+            ).Entity;
+            var customerInfo2 = Add(
+                new TCustomerInfo
+                {
+                    CustomerInfoId = Entry(customer2).Property(e => e.CustomerId).CurrentValue,
+                    Information = "Mrs Bossy Pants!"
+                }
+            ).Entity;
             if (principalNavs)
             {
                 customer1.Info = customerInfo1;
@@ -1877,78 +1735,72 @@ namespace Microsoft.EntityFrameworkCore.TestModels
             var computer1 = Add(new TComputer { Name = "markash420" }).Entity;
             var computer2 = Add(new TComputer { Name = "unicorns420" }).Entity;
 
-            var computerDetail1 =
-                Add(
-                    new TComputerDetail
-                    {
-                        Computer = computer1,
-                        Manufacturer = "Dell",
-                        Model = "420",
-                        PurchaseDate = new DateTime(2008, 4, 1),
-                        Serial = "4201",
-                        Specifications = "It's a Dell!"
-                    }
-                ).Entity;
+            var computerDetail1 = Add(
+                new TComputerDetail
+                {
+                    Computer = computer1,
+                    Manufacturer = "Dell",
+                    Model = "420",
+                    PurchaseDate = new DateTime(2008, 4, 1),
+                    Serial = "4201",
+                    Specifications = "It's a Dell!"
+                }
+            ).Entity;
             if (principalNavs)
             {
                 computer1.ComputerDetail = computerDetail1;
             }
 
-            var computerDetail2 =
-                Add(
-                    new TComputerDetail
-                    {
-                        Computer = computer2,
-                        Manufacturer = "Not A Dell",
-                        Model = "Not 420",
-                        PurchaseDate = new DateTime(2012, 4, 1),
-                        Serial = "4202",
-                        Specifications = "It's not a Dell!"
-                    }
-                ).Entity;
+            var computerDetail2 = Add(
+                new TComputerDetail
+                {
+                    Computer = computer2,
+                    Manufacturer = "Not A Dell",
+                    Model = "Not 420",
+                    PurchaseDate = new DateTime(2012, 4, 1),
+                    Serial = "4202",
+                    Specifications = "It's not a Dell!"
+                }
+            ).Entity;
             if (principalNavs)
             {
                 computer2.ComputerDetail = computerDetail2;
             }
 
-            var driver1 =
-                Add(
-                    new TDriver { BirthDate = new DateTime(2006, 9, 19), Name = "Eeky Bear" }
-                ).Entity;
-            var driver2 =
-                Add(
-                    new TDriver { BirthDate = new DateTime(2007, 9, 19), Name = "Splash Bear" }
-                ).Entity;
+            var driver1 = Add(
+                new TDriver { BirthDate = new DateTime(2006, 9, 19), Name = "Eeky Bear" }
+            ).Entity;
+            var driver2 = Add(
+                new TDriver { BirthDate = new DateTime(2007, 9, 19), Name = "Splash Bear" }
+            ).Entity;
 
-            var license1 =
-                Add(
-                    new TLicense
-                    {
-                        Driver = driver1,
-                        LicenseClass = "C",
-                        LicenseNumber = "10",
-                        Restrictions = "None",
-                        State = LicenseState.Active,
-                        ExpirationDate = new DateTime(2018, 9, 19)
-                    }
-                ).Entity;
+            var license1 = Add(
+                new TLicense
+                {
+                    Driver = driver1,
+                    LicenseClass = "C",
+                    LicenseNumber = "10",
+                    Restrictions = "None",
+                    State = LicenseState.Active,
+                    ExpirationDate = new DateTime(2018, 9, 19)
+                }
+            ).Entity;
             if (principalNavs)
             {
                 driver1.License = license1;
             }
 
-            var license2 =
-                Add(
-                    new TLicense
-                    {
-                        Driver = driver2,
-                        LicenseClass = "A",
-                        LicenseNumber = "11",
-                        Restrictions = "None",
-                        State = LicenseState.Revoked,
-                        ExpirationDate = new DateTime(2018, 9, 19)
-                    }
-                ).Entity;
+            var license2 = Add(
+                new TLicense
+                {
+                    Driver = driver2,
+                    LicenseClass = "A",
+                    LicenseNumber = "11",
+                    Restrictions = "None",
+                    State = LicenseState.Revoked,
+                    ExpirationDate = new DateTime(2018, 9, 19)
+                }
+            ).Entity;
             if (principalNavs)
             {
                 driver2.License = license2;

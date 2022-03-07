@@ -52,9 +52,9 @@ CREATE SEQUENCE db2.CustomFacetsSequence
                 Enumerable.Empty<string>(),
                 dbModel =>
                 {
-                    var defaultSequence = dbModel
-                        .Sequences
-                        .First(ds => ds.Name == "DefaultFacetsSequence");
+                    var defaultSequence = dbModel.Sequences.First(
+                        ds => ds.Name == "DefaultFacetsSequence"
+                    );
                     Assert.Equal("dbo", defaultSequence.Schema);
                     Assert.Equal("DefaultFacetsSequence", defaultSequence.Name);
                     Assert.Equal("bigint", defaultSequence.StoreType);
@@ -64,9 +64,9 @@ CREATE SEQUENCE db2.CustomFacetsSequence
                     Assert.Null(defaultSequence.MinValue);
                     Assert.Null(defaultSequence.MaxValue);
 
-                    var customSequence = dbModel
-                        .Sequences
-                        .First(ds => ds.Name == "CustomFacetsSequence");
+                    var customSequence = dbModel.Sequences.First(
+                        ds => ds.Name == "CustomFacetsSequence"
+                    );
                     Assert.Equal("db2", customSequence.Schema);
                     Assert.Equal("CustomFacetsSequence", customSequence.Name);
                     Assert.Equal("int", customSequence.StoreType);
@@ -186,12 +186,10 @@ DROP SEQUENCE [HighDecimalSequence];"
         [ConditionalFact]
         public void Sequence_using_type_alias()
         {
-            Fixture
-                .TestStore
-                .ExecuteNonQuery(
-                    @"
+            Fixture.TestStore.ExecuteNonQuery(
+                @"
 CREATE TYPE [dbo].[TestTypeAlias] FROM int;"
-                );
+            );
 
             Test(
                 @"
@@ -280,9 +278,9 @@ DROP SEQUENCE [db2].[Sequence];"
                 Enumerable.Empty<string>(),
                 dbModel =>
                 {
-                    var defaultSchema = Fixture
-                        .TestStore
-                        .ExecuteScalar<string>("SELECT SCHEMA_NAME()");
+                    var defaultSchema = Fixture.TestStore.ExecuteScalar<string>(
+                        "SELECT SCHEMA_NAME()"
+                    );
                     Assert.Equal(defaultSchema, dbModel.DefaultSchema);
                 },
                 null
@@ -1052,13 +1050,11 @@ DROP TABLE PrincipalTable;"
         [ConditionalFact]
         public void Column_with_type_alias_assigns_underlying_store_type()
         {
-            Fixture
-                .TestStore
-                .ExecuteNonQuery(
-                    @"
+            Fixture.TestStore.ExecuteNonQuery(
+                @"
 CREATE TYPE dbo.TestTypeAlias FROM nvarchar(max);
 CREATE TYPE db2.TestTypeAlias FROM int;"
-                );
+            );
 
             Test(
                 @"
@@ -1749,11 +1745,9 @@ CREATE TABLE RowversionType (
 
                     Assert.Equal(
                         "rowversion",
-                        dbModel
-                            .Tables
+                        dbModel.Tables
                             .Single(t => t.Name == "RowversionType")
-                            .Columns
-                            .Single(c => c.Name == "rowversionColumn")
+                            .Columns.Single(c => c.Name == "rowversionColumn")
                             .StoreType
                     );
                 },
@@ -1808,16 +1802,14 @@ CREATE TABLE DefaultComputedValues (
         [ConditionalFact]
         public void Default_value_matching_clr_default_is_not_stored()
         {
-            Fixture
-                .TestStore
-                .ExecuteNonQuery(
-                    @"
+            Fixture.TestStore.ExecuteNonQuery(
+                @"
 CREATE TYPE datetime2Alias FROM datetime2(6);
 CREATE TYPE datetimeoffsetAlias FROM datetimeoffset(6);
 CREATE TYPE decimalAlias FROM decimal(17, 0);
 CREATE TYPE numericAlias FROM numeric(17, 0);
 CREATE TYPE timeAlias FROM time(6);"
-                );
+            );
 
             Test(
                 @"
@@ -2636,8 +2628,9 @@ CREATE TABLE DependentTable (
                 Enumerable.Empty<string>(),
                 dbModel =>
                 {
-                    var foreignKeys =
-                        dbModel.Tables.Single(t => t.Name == "DependentTable").ForeignKeys;
+                    var foreignKeys = dbModel.Tables
+                        .Single(t => t.Name == "DependentTable")
+                        .ForeignKeys;
 
                     Assert.Equal(2, foreignKeys.Count);
 
@@ -2835,12 +2828,9 @@ CREATE TABLE Blank (
                 {
                     Assert.Empty(dbModel.Tables);
 
-                    var message =
-                        Fixture
-                            .OperationReporter
-                            .Messages
-                            .Single(m => m.Level == LogLevel.Warning)
-                            .Message;
+                    var message = Fixture.OperationReporter.Messages
+                        .Single(m => m.Level == LogLevel.Warning)
+                        .Message;
 
                     Assert.Equal(
                         SqlServerResources
@@ -2867,12 +2857,9 @@ CREATE TABLE Blank (
                 {
                     Assert.Empty(dbModel.Tables);
 
-                    var message =
-                        Fixture
-                            .OperationReporter
-                            .Messages
-                            .Single(m => m.Level == LogLevel.Warning)
-                            .Message;
+                    var message = Fixture.OperationReporter.Messages
+                        .Single(m => m.Level == LogLevel.Warning)
+                        .Message;
 
                     Assert.Equal(
                         SqlServerResources
@@ -2903,12 +2890,9 @@ CREATE TABLE DependentTable (
                 Enumerable.Empty<string>(),
                 dbModel =>
                 {
-                    var message =
-                        Fixture
-                            .OperationReporter
-                            .Messages
-                            .Single(m => m.Level == LogLevel.Warning)
-                            .Message;
+                    var message = Fixture.OperationReporter.Messages
+                        .Single(m => m.Level == LogLevel.Warning)
+                        .Message;
 
                     Assert.Equal(
                         SqlServerResources
@@ -2938,20 +2922,17 @@ CREATE TABLE PrincipalTable (
                 Enumerable.Empty<string>(),
                 dbModel =>
                 {
-                    var level =
-                        Fixture
-                            .OperationReporter
-                            .Messages
-                            .Single(
-                                m =>
-                                    m.Message
-                                    == SqlServerResources
-                                        .LogReflexiveConstraintIgnored(
-                                            new TestLogger<SqlServerLoggingDefinitions>()
-                                        )
-                                        .GenerateMessage("MYFK", "dbo.PrincipalTable")
-                            )
-                            .Level;
+                    var level = Fixture.OperationReporter.Messages
+                        .Single(
+                            m =>
+                                m.Message
+                                == SqlServerResources
+                                    .LogReflexiveConstraintIgnored(
+                                        new TestLogger<SqlServerLoggingDefinitions>()
+                                    )
+                                    .GenerateMessage("MYFK", "dbo.PrincipalTable")
+                        )
+                        .Level;
 
                     Assert.Equal(LogLevel.Debug, level);
 
@@ -2986,20 +2967,17 @@ CREATE TABLE DependentTable (
                 Enumerable.Empty<string>(),
                 dbModel =>
                 {
-                    var level =
-                        Fixture
-                            .OperationReporter
-                            .Messages
-                            .Single(
-                                m =>
-                                    m.Message
-                                    == SqlServerResources
-                                        .LogDuplicateForeignKeyConstraintIgnored(
-                                            new TestLogger<SqlServerLoggingDefinitions>()
-                                        )
-                                        .GenerateMessage("MYFK2", "dbo.DependentTable", "MYFK1")
-                            )
-                            .Level;
+                    var level = Fixture.OperationReporter.Messages
+                        .Single(
+                            m =>
+                                m.Message
+                                == SqlServerResources
+                                    .LogDuplicateForeignKeyConstraintIgnored(
+                                        new TestLogger<SqlServerLoggingDefinitions>()
+                                    )
+                                    .GenerateMessage("MYFK2", "dbo.DependentTable", "MYFK1")
+                        )
+                        .Level;
 
                     Assert.Equal(LogLevel.Warning, level);
 
@@ -3030,12 +3008,10 @@ DROP TABLE OtherPrincipalTable;"
 
             try
             {
-                var databaseModelFactory = SqlServerTestHelpers
-                    .Instance
+                var databaseModelFactory = SqlServerTestHelpers.Instance
                     .CreateDesignServiceProvider(reporter: Fixture.OperationReporter)
                     .CreateScope()
-                    .ServiceProvider
-                    .GetRequiredService<IDatabaseModelFactory>();
+                    .ServiceProvider.GetRequiredService<IDatabaseModelFactory>();
 
                 var databaseModel = databaseModelFactory.Create(
                     Fixture.TestStore.ConnectionString,

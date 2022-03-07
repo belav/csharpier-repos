@@ -54,8 +54,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
                     or SyntaxKind.EventFieldDeclaration
             )
             {
-                var variableDeclarators =
-                    ((BaseFieldDeclarationSyntax)memberDeclaration).Declaration.Variables;
+                var variableDeclarators = ((BaseFieldDeclarationSyntax)memberDeclaration)
+                    .Declaration
+                    .Variables;
 
                 foreach (var declarator in variableDeclarators)
                 {
@@ -80,10 +81,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
             var lineNumber = text.Lines.GetLineFromPosition(position).LineNumber;
             var accessor = memberDeclaration.GetAncestorOrThis<AccessorDeclarationSyntax>();
-            var memberLine =
-                text.Lines
-                    .GetLineFromPosition(accessor?.SpanStart ?? memberDeclaration.SpanStart)
-                    .LineNumber;
+            var memberLine = text.Lines
+                .GetLineFromPosition(accessor?.SpanStart ?? memberDeclaration.SpanStart)
+                .LineNumber;
             var lineOffset = lineNumber - memberLine;
 
             return new DebugLocationInfo(name, lineOffset);

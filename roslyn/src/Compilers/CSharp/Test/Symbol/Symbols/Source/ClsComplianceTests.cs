@@ -2101,11 +2101,10 @@ public class C : B
             var comp = CreateCompilationWithILAndMscorlib40(source, il);
             comp.VerifyDiagnostics();
 
-            var accessor =
-                comp.GlobalNamespace
-                    .GetMember<NamedTypeSymbol>("C")
-                    .GetMember<PropertySymbol>("P")
-                    .GetMethod;
+            var accessor = comp.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("C")
+                .GetMember<PropertySymbol>("P")
+                .GetMethod;
             Assert.True(accessor.Name[0] == '_');
         }
 

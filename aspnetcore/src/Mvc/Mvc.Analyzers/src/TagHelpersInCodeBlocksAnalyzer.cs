@@ -131,9 +131,10 @@ public class TagHelpersInCodeBlocksAnalyzer : DiagnosticAnalyzer
     private bool IsTagHelperRunnerRunAsync(IMethodSymbol method, SymbolCache symbolCache)
     {
         if (
-            !SymbolEqualityComparer
-                .Default
-                .Equals(method, symbolCache.TagHelperRunnerRunAsyncMethodSymbol)
+            !SymbolEqualityComparer.Default.Equals(
+                method,
+                symbolCache.TagHelperRunnerRunAsyncMethodSymbol
+            )
         )
         {
             return false;

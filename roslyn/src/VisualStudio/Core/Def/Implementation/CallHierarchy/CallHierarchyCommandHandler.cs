@@ -57,18 +57,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
         )
         {
             using (
-                var waitScope = context
-                    .OperationContext
-                    .AddScope(
-                        allowCancellation: true,
-                        EditorFeaturesResources.Computing_Call_Hierarchy_Information
-                    )
+                var waitScope = context.OperationContext.AddScope(
+                    allowCancellation: true,
+                    EditorFeaturesResources.Computing_Call_Hierarchy_Information
+                )
             )
             {
                 var cancellationToken = context.OperationContext.UserCancellationToken;
-                var document = args.SubjectBuffer
-                    .CurrentSnapshot
-                    .GetFullyLoadedOpenDocumentInCurrentContextWithChanges(
+                var document =
+                    args.SubjectBuffer.CurrentSnapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChanges(
                         context.OperationContext,
                         _threadingContext
                     );
@@ -95,12 +92,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
                 if (symbolUnderCaret != null)
                 {
                     // Map symbols so that Call Hierarchy works from metadata-as-source
-                    var mappingService = document
-                        .Project
-                        .Solution
-                        .Workspace
-                        .Services
-                        .GetService<ISymbolMappingService>();
+                    var mappingService =
+                        document.Project.Solution.Workspace.Services.GetService<ISymbolMappingService>();
                     var mapping = mappingService
                         .MapSymbolAsync(document, symbolUnderCaret, cancellationToken)
                         .WaitAndGetResult(cancellationToken);
@@ -129,12 +122,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
                 // wait context. That means the command system won't attempt to show its own wait dialog
                 // and also will take it into consideration when measuring command handling duration.
                 waitScope.Context.TakeOwnership();
-                var notificationService = document
-                    .Project
-                    .Solution
-                    .Workspace
-                    .Services
-                    .GetService<INotificationService>();
+                var notificationService =
+                    document.Project.Solution.Workspace.Services.GetService<INotificationService>();
                 notificationService.SendNotification(
                     EditorFeaturesResources.Cursor_must_be_on_a_member_name,
                     severity: NotificationSeverity.Information

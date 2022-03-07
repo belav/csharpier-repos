@@ -12,8 +12,9 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions;
 
 public class ViewComponentTypeVisitorTest
 {
-    private static readonly Assembly _assembly =
-        typeof(ViewComponentTypeVisitorTest).GetTypeInfo().Assembly;
+    private static readonly Assembly _assembly = typeof(ViewComponentTypeVisitorTest)
+        .GetTypeInfo()
+        .Assembly;
 
     private static CSharpCompilation Compilation { get; } = TestCompilation.Create(_assembly);
 

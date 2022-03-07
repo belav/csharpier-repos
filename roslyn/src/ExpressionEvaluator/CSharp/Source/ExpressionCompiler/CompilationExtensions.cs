@@ -79,8 +79,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                             if (
                                 metadataDecoder
                                     .GetTypeSymbolForSerializedType(stateMachineTypeName)
-                                    .OriginalDefinition
-                                    .Equals(containingType)
+                                    .OriginalDefinition.Equals(containingType)
                             )
                             {
                                 return candidateMethod;
@@ -196,9 +195,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         )
         {
             var builder = ArrayBuilder<bool>.GetInstance();
-            CSharpCompilation
-                .DynamicTransformsEncoder
-                .Encode(type, customModifiersCount, refKind, builder, addCustomModifierFlags: true);
+            CSharpCompilation.DynamicTransformsEncoder.Encode(
+                type,
+                customModifiersCount,
+                refKind,
+                builder,
+                addCustomModifierFlags: true
+            );
             var bytes =
                 builder.Count > 0
                 && compilation.HasDynamicEmitAttributes(

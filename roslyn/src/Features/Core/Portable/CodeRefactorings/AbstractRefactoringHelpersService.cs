@@ -604,8 +604,9 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
                         .GetTextAsync(cancellationToken)
                         .ConfigureAwait(false);
 
-                    var argumentStartLine =
-                        sourceText.Lines.GetLineFromPosition(correctTypeNode.Span.Start).LineNumber;
+                    var argumentStartLine = sourceText.Lines
+                        .GetLineFromPosition(correctTypeNode.Span.Start)
+                        .LineNumber;
                     var caretLine = sourceText.Lines.GetLineFromPosition(position).LineNumber;
 
                     if (

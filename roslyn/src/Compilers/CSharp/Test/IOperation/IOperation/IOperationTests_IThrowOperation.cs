@@ -2353,11 +2353,9 @@ class C
 
             var compilation = CreateCompilation(
                 source,
-                parseOptions: TestOptions
-                    .Regular
-                    .WithLanguageVersion(
-                        MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
-                    )
+                parseOptions: TestOptions.Regular.WithLanguageVersion(
+                    MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
+                )
             );
             compilation.VerifyDiagnostics();
             string expectedOperationTree =

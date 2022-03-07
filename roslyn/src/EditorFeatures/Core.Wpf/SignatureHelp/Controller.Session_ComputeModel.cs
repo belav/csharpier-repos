@@ -35,8 +35,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
             {
                 AssertIsForeground();
 
-                var caretPosition =
-                    Controller.TextView.GetCaretPoint(Controller.SubjectBuffer).Value;
+                var caretPosition = Controller.TextView
+                    .GetCaretPoint(Controller.SubjectBuffer)
+                    .Value;
                 var disconnectedBufferGraph = new DisconnectedBufferGraph(
                     Controller.SubjectBuffer,
                     Controller.TextView.TextBuffer
@@ -78,9 +79,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                         AssertIsBackground();
                         cancellationToken.ThrowIfCancellationRequested();
 
-                        var document = Controller
-                            .DocumentProvider
-                            .GetDocument(caretPosition.Snapshot, cancellationToken);
+                        var document = Controller.DocumentProvider.GetDocument(
+                            caretPosition.Snapshot,
+                            cancellationToken
+                        );
                         if (document == null)
                         {
                             return currentModel;
@@ -103,9 +105,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
 
                             if (
                                 triggerInfo.TriggerCharacter.HasValue
-                                && !currentModel
-                                    .Provider
-                                    .IsRetriggerCharacter(triggerInfo.TriggerCharacter.Value)
+                                && !currentModel.Provider.IsRetriggerCharacter(
+                                    triggerInfo.TriggerCharacter.Value
+                                )
                             )
                             {
                                 return currentModel;
@@ -138,8 +140,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                                 .GetCurrentSpanInSubjectBuffer(
                                     disconnectedBufferGraph.SubjectBufferSnapshot
                                 )
-                                .Span
-                                .Start == items.ApplicableSpan.Start
+                                .Span.Start == items.ApplicableSpan.Start
                             && currentModel.Items.IndexOf(currentModel.SelectedItem)
                                 == items.SelectedItemIndex
                             && currentModel.ArgumentIndex == items.ArgumentIndex
@@ -214,9 +215,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                     && currentModel.UserSelected
                 )
                 {
-                    var userSelectedItem = items
-                        .Items
-                        .FirstOrDefault(i => DisplayPartsMatch(i, currentModel.SelectedItem));
+                    var userSelectedItem = items.Items.FirstOrDefault(
+                        i => DisplayPartsMatch(i, currentModel.SelectedItem)
+                    );
                     if (userSelectedItem != null)
                     {
                         userSelected = true;
@@ -237,9 +238,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                 {
                     // If the provider did not pick a default, and it's the same provider as the previous
                     // model we have, then try to return the same item that we had before.
-                    lastSelectionOrDefault = items
-                        .Items
-                        .FirstOrDefault(i => DisplayPartsMatch(i, currentModel.SelectedItem));
+                    lastSelectionOrDefault = items.Items.FirstOrDefault(
+                        i => DisplayPartsMatch(i, currentModel.SelectedItem)
+                    );
                 }
 
                 if (lastSelectionOrDefault == null)

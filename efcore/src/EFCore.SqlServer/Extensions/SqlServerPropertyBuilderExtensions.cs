@@ -112,12 +112,11 @@ namespace Microsoft.EntityFrameworkCore
 
             return name == null
               ? null
-              : propertyBuilder
-                .Metadata
-                .DeclaringEntityType
-                .Model
-                .Builder
-                .HasSequence(name, schema, fromDataAnnotation);
+              : propertyBuilder.Metadata.DeclaringEntityType.Model.Builder.HasSequence(
+                    name,
+                    schema,
+                    fromDataAnnotation
+                );
         }
 
         /// <summary>
@@ -388,9 +387,10 @@ namespace Microsoft.EntityFrameworkCore
                 )
             )
             {
-                propertyBuilder
-                    .Metadata
-                    .SetValueGenerationStrategy(valueGenerationStrategy, fromDataAnnotation);
+                propertyBuilder.Metadata.SetValueGenerationStrategy(
+                    valueGenerationStrategy,
+                    fromDataAnnotation
+                );
                 if (valueGenerationStrategy != SqlServerValueGenerationStrategy.IdentityColumn)
                 {
                     propertyBuilder.HasIdentityColumnSeed(null, fromDataAnnotation);

@@ -89,9 +89,11 @@ namespace System.Net.Http.Headers
         public static RangeConditionHeaderValue Parse(string? input)
         {
             int index = 0;
-            return (RangeConditionHeaderValue)GenericHeaderParser
-                .RangeConditionParser
-                .ParseValue(input, null, ref index);
+            return (RangeConditionHeaderValue)GenericHeaderParser.RangeConditionParser.ParseValue(
+                input,
+                null,
+                ref index
+            );
         }
 
         public static bool TryParse(
@@ -103,9 +105,12 @@ namespace System.Net.Http.Headers
             parsedValue = null;
 
             if (
-                GenericHeaderParser
-                    .RangeConditionParser
-                    .TryParseValue(input, null, ref index, out object? output)
+                GenericHeaderParser.RangeConditionParser.TryParseValue(
+                    input,
+                    null,
+                    ref index,
+                    out object? output
+                )
             )
             {
                 parsedValue = (RangeConditionHeaderValue)output!;

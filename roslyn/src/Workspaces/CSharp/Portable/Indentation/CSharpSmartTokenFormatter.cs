@@ -138,8 +138,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
             )
             {
                 RoslynDebug.AssertNotNull(token.SyntaxTree);
-                var text = await token
-                    .SyntaxTree
+                var text = await token.SyntaxTree
                     .GetTextAsync(cancellationToken)
                     .ConfigureAwait(false);
                 if (token.IsFirstTokenOnLine(text))

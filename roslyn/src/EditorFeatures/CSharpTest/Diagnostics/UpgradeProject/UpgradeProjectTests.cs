@@ -639,8 +639,7 @@ class C
         [Fact]
         public async Task OnlyOfferFixAllProjectsFromCSharp6ToDefaultWhenApplicable()
         {
-            var defaultVersion = LanguageVersion
-                .Default
+            var defaultVersion = LanguageVersion.Default
                 .MapSpecifiedToEffectiveVersion()
                 .ToDisplayString();
             await TestExactActionSetOfferedAsync(
@@ -706,8 +705,7 @@ class C
         [Fact]
         public async Task OnlyOfferFixAllProjectsToDefaultWhenApplicable()
         {
-            var defaultEffectiveVersion = LanguageVersion
-                .Default
+            var defaultEffectiveVersion = LanguageVersion.Default
                 .MapSpecifiedToEffectiveVersion()
                 .ToDisplayString();
             await TestExactActionSetOfferedAsync(

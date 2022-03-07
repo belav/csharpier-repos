@@ -15,9 +15,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 {
     internal static class SyntaxHelpers
     {
-        internal static readonly CSharpParseOptions ParseOptions = CSharpParseOptions
-            .Default
-            .WithLanguageVersion(LanguageVersionFacts.CurrentVersion);
+        internal static readonly CSharpParseOptions ParseOptions =
+            CSharpParseOptions.Default.WithLanguageVersion(LanguageVersionFacts.CurrentVersion);
 
         /// <summary>
         /// Parse expression. Returns null if there are any errors.
@@ -87,14 +86,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 "The target of an assignment should never contain Diagnostics if we're being allowed to assign to it in the debugger."
             );
 
-            var assignment = InternalSyntax
-                .SyntaxFactory
-                .AssignmentExpression(
-                    SyntaxKind.SimpleAssignmentExpression,
-                    targetSyntax,
-                    InternalSyntax.SyntaxFactory.Token(SyntaxKind.EqualsToken),
-                    expression
-                );
+            var assignment = InternalSyntax.SyntaxFactory.AssignmentExpression(
+                SyntaxKind.SimpleAssignmentExpression,
+                targetSyntax,
+                InternalSyntax.SyntaxFactory.Token(SyntaxKind.EqualsToken),
+                expression
+            );
             return assignment.MakeDebuggerExpression(SourceText.From(assignment.ToString()));
         }
 
@@ -271,8 +268,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             SourceText text
         )
         {
-            var syntaxTree = InternalSyntax
-                .SyntaxFactory
+            var syntaxTree = InternalSyntax.SyntaxFactory
                 .ExpressionStatement(
                     attributeLists: default,
                     expression,

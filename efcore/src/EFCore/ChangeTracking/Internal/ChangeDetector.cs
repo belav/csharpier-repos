@@ -299,9 +299,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             if (
                 !(
                     comparer?.Equals(currentValue, snapshotValue)
-                    ?? StructuralComparisons
-                        .StructuralEqualityComparer
-                        .Equals(currentValue, snapshotValue)
+                    ?? StructuralComparisons.StructuralEqualityComparer.Equals(
+                        currentValue,
+                        snapshotValue
+                    )
                 )
             )
             {
@@ -324,17 +325,14 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     _logger.ForeignKeyChangeDetected(entry, property, snapshotValue, currentValue);
                 }
 
-                entry
-                    .StateManager
-                    .InternalEntityEntryNotifier
-                    .KeyPropertyChanged(
-                        entry,
-                        property,
-                        keys,
-                        foreignKeys,
-                        snapshotValue,
-                        currentValue
-                    );
+                entry.StateManager.InternalEntityEntryNotifier.KeyPropertyChanged(
+                    entry,
+                    property,
+                    keys,
+                    foreignKeys,
+                    snapshotValue,
+                    currentValue
+                );
             }
         }
 
@@ -419,9 +417,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         }
                     }
 
-                    stateManager
-                        .InternalEntityEntryNotifier
-                        .NavigationCollectionChanged(entry, navigationBase, added, removed);
+                    stateManager.InternalEntityEntryNotifier.NavigationCollectionChanged(
+                        entry,
+                        navigationBase,
+                        added,
+                        removed
+                    );
                 }
             }
             else if (!ReferenceEquals(currentValue, snapshotValue))
@@ -446,9 +447,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     _logger.ReferenceChangeDetected(entry, navigation, snapshotValue, currentValue);
                 }
 
-                stateManager
-                    .InternalEntityEntryNotifier
-                    .NavigationReferenceChanged(entry, navigation, snapshotValue, currentValue);
+                stateManager.InternalEntityEntryNotifier.NavigationReferenceChanged(
+                    entry,
+                    navigation,
+                    snapshotValue,
+                    currentValue
+                );
             }
         }
     }

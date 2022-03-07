@@ -60,11 +60,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 }
                 else
                 {
-                    output
-                        .Builder
-                        .AppendLine(
-                            $"checker.Method({method}, 1, \"{snippets[0]}\"){methodTermination}"
-                        );
+                    output.Builder.AppendLine(
+                        $"checker.Method({method}, 1, \"{snippets[0]}\"){methodTermination}"
+                    );
                 }
 
                 for (int index = 1; index < snippets.Length; index++)
@@ -199,19 +197,15 @@ namespace Microsoft.CodeAnalysis.Runtime
                 var methodTermination = GetTermination(0, snippets.Length);
                 if (snippets[0] == null)
                 {
-                    output
-                        .Builder
-                        .AppendLine(
-                            $"{tab}{tab}{tab}checker.Method({method}, 1){methodTermination}"
-                        );
+                    output.Builder.AppendLine(
+                        $"{tab}{tab}{tab}checker.Method({method}, 1){methodTermination}"
+                    );
                 }
                 else
                 {
-                    output
-                        .Builder
-                        .AppendLine(
-                            $"{tab}{tab}{tab}checker.Method({method}, 1, \"{snippets[0]}\"){methodTermination}"
-                        );
+                    output.Builder.AppendLine(
+                        $"{tab}{tab}{tab}checker.Method({method}, 1, \"{snippets[0]}\"){methodTermination}"
+                    );
                 }
 
                 for (int index = 1; index < snippets.Length; index++)
@@ -223,11 +217,9 @@ namespace Microsoft.CodeAnalysis.Runtime
                     }
                     else
                     {
-                        output
-                            .Builder
-                            .AppendLine(
-                                $"{tab}{tab}{tab}{tab}True(\"{snippets[index]}\"){termination}"
-                            );
+                        output.Builder.AppendLine(
+                            $"{tab}{tab}{tab}{tab}True(\"{snippets[index]}\"){termination}"
+                        );
                     }
                 }
             }
@@ -357,11 +349,9 @@ End Namespace
         public void CompleteCheck(Compilation compilation, string source)
         {
             var peImage = compilation.EmitToArray(
-                EmitOptions
-                    .Default
-                    .WithInstrumentationKinds(
-                        ImmutableArray.Create(InstrumentationKind.TestCoverage)
-                    )
+                EmitOptions.Default.WithInstrumentationKinds(
+                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                )
             );
             var peReader = new PEReader(peImage);
             var reader = DynamicAnalysisDataReader.TryCreateFromPE(

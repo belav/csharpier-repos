@@ -448,8 +448,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                     var externAliases = _aliasesAndUsings[
                                         singleDeclaration
                                     ].GetExternAliases(this, singleDeclaration.SyntaxReference);
-                                    var globalAliasesMap =
-                                        ImmutableDictionary<string, AliasAndUsingDirective>.Empty;
+                                    var globalAliasesMap = ImmutableDictionary<
+                                        string,
+                                        AliasAndUsingDirective
+                                    >.Empty;
 
                                     if (singleDeclaration.HasGlobalUsings)
                                     {
@@ -871,9 +873,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 )
                             );
                             Debug.Assert(
-                                calculated
-                                    .UsingNamespacesOrTypes
-                                    .SequenceEqual(result.UsingNamespacesOrTypes)
+                                calculated.UsingNamespacesOrTypes.SequenceEqual(
+                                    result.UsingNamespacesOrTypes
+                                )
                             );
                             Debug.Assert(calculated.Diagnostics?.IsEmptyWithoutResolution ?? true);
 #endif
@@ -905,8 +907,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     // define all of the extern aliases first. They may be used by the target of a using
                     var externAliases = GetExternAliases(declaringSymbol, declarationSyntax);
-                    var globalUsingAliasesMap =
-                        ImmutableDictionary<string, AliasAndUsingDirective>.Empty;
+                    var globalUsingAliasesMap = ImmutableDictionary<
+                        string,
+                        AliasAndUsingDirective
+                    >.Empty;
                     var globalUsingNamespacesOrTypes =
                         ImmutableArray<NamespaceOrTypeAndUsingDirective>.Empty;
                     var globalUsingAliases = ImmutableArray<AliasAndUsingDirective>.Empty;
@@ -1057,14 +1061,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 .GetBinderFactory(declarationSyntax.SyntaxTree)
                                 .GetBinder(usingDirective.Name)
                                 .WithAdditionalFlags(BinderFlags.SuppressConstraintChecks);
-                            var imported =
-                                declarationBinder
-                                    .BindNamespaceOrTypeSymbol(
-                                        usingDirective.Name,
-                                        directiveDiagnostics,
-                                        basesBeingResolved
-                                    )
-                                    .NamespaceOrTypeSymbol;
+                            var imported = declarationBinder
+                                .BindNamespaceOrTypeSymbol(
+                                    usingDirective.Name,
+                                    directiveDiagnostics,
+                                    basesBeingResolved
+                                )
+                                .NamespaceOrTypeSymbol;
 
                             if (imported.Kind == SymbolKind.Namespace)
                             {
@@ -1167,9 +1170,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                                 new NamespaceOrTypeAndUsingDirective(
                                                     importedType,
                                                     usingDirective,
-                                                    directiveDiagnostics
-                                                        .DependenciesBag
-                                                        .ToImmutableArray()
+                                                    directiveDiagnostics.DependenciesBag.ToImmutableArray()
                                                 )
                                             );
                                     }
@@ -1409,9 +1410,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             continue;
                         }
 
-                        NamespaceOrTypeSymbol target = alias
-                            .Alias
-                            .GetAliasTarget(basesBeingResolved: null);
+                        NamespaceOrTypeSymbol target = alias.Alias.GetAliasTarget(
+                            basesBeingResolved: null
+                        );
 
                         diagnostics.Clear();
                         if (alias.Alias is AliasSymbolFromSyntax aliasFromSyntax)

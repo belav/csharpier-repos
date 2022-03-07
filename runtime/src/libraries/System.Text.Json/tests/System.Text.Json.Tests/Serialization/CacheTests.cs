@@ -262,13 +262,11 @@ namespace System.Text.Json.Serialization.Tests
             );
             Assert.NotEqual(0, classes.Count);
 
-            Type updateHandler = typeof(JsonSerializerOptions)
-                .Assembly
-                .GetType(
-                    "System.Text.Json.JsonSerializerOptionsUpdateHandler",
-                    throwOnError: true,
-                    ignoreCase: false
-                );
+            Type updateHandler = typeof(JsonSerializerOptions).Assembly.GetType(
+                "System.Text.Json.JsonSerializerOptionsUpdateHandler",
+                throwOnError: true,
+                ignoreCase: false
+            );
             MethodInfo clearCache = updateHandler.GetMethod("ClearCache");
             Assert.NotNull(clearCache);
             clearCache.Invoke(null, new object[] { null });

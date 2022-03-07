@@ -366,18 +366,18 @@ public class Derived2 : Derived1
             var compilation = CreateCompilationWithILAndMscorlib40(csharp, il);
             var global = compilation.GlobalNamespace;
 
-            var ilGetter =
-                global.GetMember<NamedTypeSymbol>("Base").GetMember<PropertySymbol>("P").GetMethod;
-            var csharpGetter1 =
-                global
-                    .GetMember<NamedTypeSymbol>("Derived1")
-                    .GetMember<PropertySymbol>("P")
-                    .GetMethod;
-            var csharpGetter2 =
-                global
-                    .GetMember<NamedTypeSymbol>("Derived2")
-                    .GetMember<PropertySymbol>("P")
-                    .GetMethod;
+            var ilGetter = global
+                .GetMember<NamedTypeSymbol>("Base")
+                .GetMember<PropertySymbol>("P")
+                .GetMethod;
+            var csharpGetter1 = global
+                .GetMember<NamedTypeSymbol>("Derived1")
+                .GetMember<PropertySymbol>("P")
+                .GetMethod;
+            var csharpGetter2 = global
+                .GetMember<NamedTypeSymbol>("Derived2")
+                .GetMember<PropertySymbol>("P")
+                .GetMethod;
 
             Assert.Equal(ilGetter.Name, csharpGetter1.Name);
             Assert.Equal(ilGetter.Name, csharpGetter2.Name);
@@ -407,8 +407,10 @@ public class C : I
             var compilation = CreateCompilationWithILAndMscorlib40(csharp, il);
             var global = compilation.GlobalNamespace;
 
-            var ilGetter =
-                global.GetMember<NamedTypeSymbol>("I").GetMember<PropertySymbol>("P").GetMethod;
+            var ilGetter = global
+                .GetMember<NamedTypeSymbol>("I")
+                .GetMember<PropertySymbol>("P")
+                .GetMethod;
             var @class = global.GetMember<SourceNamedTypeSymbol>("C");
             var csharpGetter = @class.GetMember<PropertySymbol>("P").GetMethod;
 
@@ -416,8 +418,7 @@ public class C : I
 
             var bridge = @class
                 .GetSynthesizedExplicitImplementations(CancellationToken.None)
-                .ForwardingMethods
-                .Single();
+                .ForwardingMethods.Single();
             Assert.Same(csharpGetter, bridge.ImplementingMethod);
             Assert.Same(ilGetter, bridge.ExplicitInterfaceImplementations.Single());
 
@@ -446,8 +447,10 @@ public class C : I
             var compilation = CreateCompilationWithILAndMscorlib40(csharp, il);
             var global = compilation.GlobalNamespace;
 
-            var ilGetter =
-                global.GetMember<NamedTypeSymbol>("I").GetMember<PropertySymbol>("P").GetMethod;
+            var ilGetter = global
+                .GetMember<NamedTypeSymbol>("I")
+                .GetMember<PropertySymbol>("P")
+                .GetMethod;
             var @class = global.GetMember<SourceNamedTypeSymbol>("C");
             var csharpGetter = @class.GetProperty("I.P").GetMethod;
 
@@ -456,8 +459,7 @@ public class C : I
                 0,
                 @class
                     .GetSynthesizedExplicitImplementations(CancellationToken.None)
-                    .ForwardingMethods
-                    .Length
+                    .ForwardingMethods.Length
             ); //not needed
         }
 
@@ -1037,8 +1039,7 @@ public class G<T>
 
             var tsym = comp2
                 .GetReferencedAssemblySymbol(mtref)
-                .GlobalNamespace
-                .GetMember<NamedTypeSymbol>("G");
+                .GlobalNamespace.GetMember<NamedTypeSymbol>("G");
             Assert.NotNull(tsym);
 
             var mems = tsym.GetMembers().Where(s => s.Kind == SymbolKind.Method);
@@ -1202,9 +1203,9 @@ using System;
                 Assert.Equal(0, memberNameSyntax.Arity);
 
                 var semanticModel = compilation.GetSemanticModel(syntaxTree);
-                var classDisposable = compilation
-                    .GlobalNamespace
-                    .GetMember<INamedTypeSymbol>("Disposable");
+                var classDisposable = compilation.GlobalNamespace.GetMember<INamedTypeSymbol>(
+                    "Disposable"
+                );
                 Assert.Equal(TypeKind.Class, classDisposable.TypeKind);
                 Assert.Equal("Disposable", classDisposable.Name);
 

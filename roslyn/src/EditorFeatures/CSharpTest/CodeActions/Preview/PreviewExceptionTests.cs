@@ -29,9 +29,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings
         {
             using var workspace = CreateWorkspaceFromOptions("class D {}", new TestParameters());
 
-            var errorReportingService = (TestErrorReportingService)workspace
-                .Services
-                .GetRequiredService<IErrorReportingService>();
+            var errorReportingService =
+                (TestErrorReportingService)workspace.Services.GetRequiredService<IErrorReportingService>();
             var errorReported = false;
             errorReportingService.OnError = message => errorReported = true;
 
@@ -44,9 +43,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings
         {
             using var workspace = CreateWorkspaceFromOptions("class D {}", new TestParameters());
 
-            var errorReportingService = (TestErrorReportingService)workspace
-                .Services
-                .GetRequiredService<IErrorReportingService>();
+            var errorReportingService =
+                (TestErrorReportingService)workspace.Services.GetRequiredService<IErrorReportingService>();
             var errorReported = false;
             errorReportingService.OnError = message => errorReported = true;
 
@@ -59,9 +57,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings
         {
             using var workspace = CreateWorkspaceFromOptions("class D {}", new TestParameters());
 
-            var errorReportingService = (TestErrorReportingService)workspace
-                .Services
-                .GetRequiredService<IErrorReportingService>();
+            var errorReportingService =
+                (TestErrorReportingService)workspace.Services.GetRequiredService<IErrorReportingService>();
             var errorReported = false;
             errorReportingService.OnError = message => errorReported = true;
 

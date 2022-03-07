@@ -940,8 +940,11 @@ public class HealthCheckMiddlewareTests
                                         {
                                             // Need to fake setting the connection info. TestServer doesn't
                                             // do that, because it doesn't have a connection.
-                                            context.Connection.LocalPort =
-                                                context.Request.Host.Port.Value;
+                                            context.Connection.LocalPort = context
+                                                .Request
+                                                .Host
+                                                .Port
+                                                .Value;
                                             await next(context);
                                         }
                                 );
@@ -989,8 +992,11 @@ public class HealthCheckMiddlewareTests
                                         {
                                             // Need to fake setting the connection info. TestServer doesn't
                                             // do that, because it doesn't have a connection.
-                                            context.Connection.LocalPort =
-                                                context.Request.Host.Port.Value;
+                                            context.Connection.LocalPort = context
+                                                .Request
+                                                .Host
+                                                .Port
+                                                .Value;
                                             await next(context);
                                         }
                                 );
@@ -1038,8 +1044,11 @@ public class HealthCheckMiddlewareTests
                                         {
                                             // Need to fake setting the connection info. TestServer doesn't
                                             // do that, because it doesn't have a connection.
-                                            context.Connection.LocalPort =
-                                                context.Request.Host.Port.Value;
+                                            context.Connection.LocalPort = context
+                                                .Request
+                                                .Host
+                                                .Port
+                                                .Value;
                                             await next(context);
                                         }
                                 );
@@ -1085,8 +1094,11 @@ public class HealthCheckMiddlewareTests
                                         {
                                             // Need to fake setting the connection info. TestServer doesn't
                                             // do that, because it doesn't have a connection.
-                                            context.Connection.LocalPort =
-                                                context.Request.Host.Port.Value;
+                                            context.Connection.LocalPort = context
+                                                .Request
+                                                .Host
+                                                .Port
+                                                .Value;
                                             await next(context);
                                         }
                                 );
@@ -1144,8 +1156,11 @@ public class HealthCheckMiddlewareTests
                                         {
                                             // Need to fake setting the connection info. TestServer doesn't
                                             // do that, because it doesn't have a connection.
-                                            context.Connection.LocalPort =
-                                                context.Request.Host.Port.Value;
+                                            context.Connection.LocalPort = context
+                                                .Request
+                                                .Host
+                                                .Port
+                                                .Value;
                                             await next(context);
                                         }
                                 );

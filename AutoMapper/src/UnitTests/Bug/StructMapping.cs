@@ -66,8 +66,6 @@ namespace AutoMapper.UnitTests.Bug
                     typeof(Source),
                     typeof(Destination)
                 )
-            )
-                .Number
-                .ShouldBe(23);
+            ).Number.ShouldBe(23);
     }
 }

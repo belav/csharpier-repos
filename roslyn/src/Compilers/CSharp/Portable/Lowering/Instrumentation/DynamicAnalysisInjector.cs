@@ -744,11 +744,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case BoundKind.UsingStatement:
                 {
                     BoundUsingStatement usingStatement = (BoundUsingStatement)statement;
-                    syntaxForSpan =
-                        (
-                            (BoundNode)usingStatement.ExpressionOpt
-                            ?? usingStatement.DeclarationsOpt
-                        ).Syntax;
+                    syntaxForSpan = (
+                        (BoundNode)usingStatement.ExpressionOpt ?? usingStatement.DeclarationsOpt
+                    ).Syntax;
                     break;
                 }
                 case BoundKind.FixedStatement:

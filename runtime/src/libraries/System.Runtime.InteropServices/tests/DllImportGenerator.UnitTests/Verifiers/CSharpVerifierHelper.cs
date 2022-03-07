@@ -26,13 +26,11 @@ namespace DllImportGenerator.UnitTests.Verifiers
         > GetNullableWarningsFromCompiler()
         {
             string[] args = { "/warnaserror:nullable" };
-            var commandLineArguments = CSharpCommandLineParser
-                .Default
-                .Parse(
-                    args,
-                    baseDirectory: Environment.CurrentDirectory,
-                    sdkDirectory: Environment.CurrentDirectory
-                );
+            var commandLineArguments = CSharpCommandLineParser.Default.Parse(
+                args,
+                baseDirectory: Environment.CurrentDirectory,
+                sdkDirectory: Environment.CurrentDirectory
+            );
             return commandLineArguments.CompilationOptions.SpecificDiagnosticOptions;
         }
     }

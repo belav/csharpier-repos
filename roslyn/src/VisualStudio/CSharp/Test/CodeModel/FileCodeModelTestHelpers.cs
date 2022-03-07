@@ -45,12 +45,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.UnitTests.CodeModel
                 WrapperPolicy.s_ComWrapperFactory = MockComWrapperFactory.Instance;
 
                 var visualStudioWorkspaceMock = new MockVisualStudioWorkspace(workspace);
-                var threadingContext = workspace
-                    .ExportProvider
-                    .GetExportedValue<IThreadingContext>();
-                var listenerProvider = workspace
-                    .ExportProvider
-                    .GetExportedValue<AsynchronousOperationListenerProvider>();
+                var threadingContext =
+                    workspace.ExportProvider.GetExportedValue<IThreadingContext>();
+                var listenerProvider =
+                    workspace.ExportProvider.GetExportedValue<AsynchronousOperationListenerProvider>();
 
                 var state = new CodeModelState(
                     threadingContext,
@@ -65,10 +63,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.UnitTests.CodeModel
                     )
                 );
 
-                var codeModel =
-                    FileCodeModel
-                        .Create(state, null, document, new MockTextManagerAdapter())
-                        .Handle;
+                var codeModel = FileCodeModel
+                    .Create(state, null, document, new MockTextManagerAdapter())
+                    .Handle;
 
                 return (workspace, visualStudioWorkspaceMock, codeModel);
             }

@@ -219,8 +219,7 @@ namespace AutoMapper.UnitTests
         {
             Configuration
                 .ResolveTypeMap(typeof(Item), typeof(Item))
-                .PreserveReferences
-                .ShouldBeFalse();
+                .PreserveReferences.ShouldBeFalse();
         }
     }
 

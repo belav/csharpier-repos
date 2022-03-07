@@ -678,8 +678,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     conv.Conversion.AssertUnderlyingConversionsChecked();
                     var operand = MakeValueOrDefaultTemp(o, temps, effects);
                     Debug.Assert(operand.Type is { });
-                    var types =
-                        expr.Type.GetNullableUnderlyingType().TupleElementTypesWithAnnotations;
+                    var types = expr.Type
+                        .GetNullableUnderlyingType()
+                        .TupleElementTypesWithAnnotations;
                     int tupleCardinality = operand.Type.TupleElementTypesWithAnnotations.Length;
                     var underlyingConversions = tupleConversion.UnderlyingConversions;
                     tupleConversion.AssertUnderlyingConversionsChecked();

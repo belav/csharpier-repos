@@ -28,8 +28,9 @@ namespace System.Web.WebPages.Test
                 CookieBrowserOverrideStore.BrowserOverrideCookieName,
                 "existingRequestAgent"
             );
-            HttpContextBase context =
-                CreateCookieContext(requestCookie: existingOverrideCookie).Object;
+            HttpContextBase context = CreateCookieContext(
+                requestCookie: existingOverrideCookie
+            ).Object;
 
             // Act & Assert
             Assert.Equal("existingRequestAgent", store.GetOverriddenUserAgent(context));
@@ -58,8 +59,9 @@ namespace System.Web.WebPages.Test
                 CookieBrowserOverrideStore.BrowserOverrideCookieName,
                 "existingRequestAgent"
             );
-            HttpContextBase context =
-                CreateCookieContext(requestCookie: existingOverrideCookie).Object;
+            HttpContextBase context = CreateCookieContext(
+                requestCookie: existingOverrideCookie
+            ).Object;
 
             // Act
             store.SetOverriddenUserAgent(context, "setUserAgent");
@@ -92,8 +94,9 @@ namespace System.Web.WebPages.Test
                 CookieBrowserOverrideStore.BrowserOverrideCookieName,
                 "setUserAgent"
             );
-            HttpContextBase context =
-                CreateCookieContext(requestCookie: existingOverrideCookie).Object;
+            HttpContextBase context = CreateCookieContext(
+                requestCookie: existingOverrideCookie
+            ).Object;
 
             // Act
             store.SetOverriddenUserAgent(context, null);

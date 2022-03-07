@@ -265,11 +265,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public void KeyAttribute_throws_when_setting_key_in_derived_type()
         {
             var derivedEntityTypeBuilder = CreateInternalEntityTypeBuilder<DerivedEntity>();
-            var baseEntityType =
-                derivedEntityTypeBuilder
-                    .ModelBuilder
-                    .Entity(typeof(BaseEntity), ConfigurationSource.Explicit)
-                    .Metadata;
+            var baseEntityType = derivedEntityTypeBuilder.ModelBuilder
+                .Entity(typeof(BaseEntity), ConfigurationSource.Explicit)
+                .Metadata;
             derivedEntityTypeBuilder.HasBaseType(baseEntityType, ConfigurationSource.Explicit);
 
             var propertyBuilder = derivedEntityTypeBuilder.Property(
@@ -295,9 +293,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var derivedEntityTypeBuilder =
                 CreateInternalEntityTypeBuilder<CompositeKeyDerivedEntity>();
-            var baseEntityTypeBuilder = derivedEntityTypeBuilder
-                .ModelBuilder
-                .Entity(typeof(BaseEntity), ConfigurationSource.Explicit);
+            var baseEntityTypeBuilder = derivedEntityTypeBuilder.ModelBuilder.Entity(
+                typeof(BaseEntity),
+                ConfigurationSource.Explicit
+            );
             derivedEntityTypeBuilder.HasBaseType(
                 baseEntityTypeBuilder.Metadata,
                 ConfigurationSource.Explicit
@@ -388,8 +387,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 10,
                 entityTypeBuilder
                     .Property<string>(nameof(F.MaxLengthProperty))
-                    .Metadata
-                    .GetMaxLength()
+                    .Metadata.GetMaxLength()
             );
         }
 
@@ -597,8 +595,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 20,
                 entityTypeBuilder
                     .Property<string>(nameof(F.StringLengthProperty))
-                    .Metadata
-                    .GetMaxLength()
+                    .Metadata.GetMaxLength()
             );
         }
 
@@ -865,9 +862,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         private InternalEntityTypeBuilder CreateInternalEntityTypeBuilder<T>()
         {
             var conventionSet = new ConventionSet();
-            conventionSet
-                .EntityTypeAddedConventions
-                .Add(new PropertyDiscoveryConvention(CreateDependencies()));
+            conventionSet.EntityTypeAddedConventions.Add(
+                new PropertyDiscoveryConvention(CreateDependencies())
+            );
 
             var modelBuilder = new Model(conventionSet).Builder;
 
@@ -956,8 +953,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         }
 
         private static ProviderConventionSetBuilderDependencies CreateDependencies() =>
-            InMemoryTestHelpers
-                .Instance
+            InMemoryTestHelpers.Instance
                 .CreateContextServices()
                 .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 

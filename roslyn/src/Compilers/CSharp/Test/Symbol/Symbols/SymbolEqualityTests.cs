@@ -475,14 +475,12 @@ public class A
 
             var model = comp.GetSemanticModel(syntaxTree);
 
-            var type1 =
-                (
-                    (IFieldSymbol)model.GetDeclaredSymbol(member1Syntax.Declaration.Variables[0])
-                ).Type;
-            var type2 =
-                (
-                    (IFieldSymbol)model.GetDeclaredSymbol(member2Syntax.Declaration.Variables[0])
-                ).Type;
+            var type1 = (
+                (IFieldSymbol)model.GetDeclaredSymbol(member1Syntax.Declaration.Variables[0])
+            ).Type;
+            var type2 = (
+                (IFieldSymbol)model.GetDeclaredSymbol(member2Syntax.Declaration.Variables[0])
+            ).Type;
 
             VerifyEquality(type1, type2, expectedIncludeNullability: true);
         }
@@ -512,14 +510,12 @@ public class A
 
             var model = comp.GetSemanticModel(syntaxTree);
 
-            var type1 =
-                (
-                    (IFieldSymbol)model.GetDeclaredSymbol(member1Syntax.Declaration.Variables[0])
-                ).Type;
-            var type2 =
-                (
-                    (IFieldSymbol)model.GetDeclaredSymbol(member2Syntax.Declaration.Variables[0])
-                ).Type;
+            var type1 = (
+                (IFieldSymbol)model.GetDeclaredSymbol(member1Syntax.Declaration.Variables[0])
+            ).Type;
+            var type2 = (
+                (IFieldSymbol)model.GetDeclaredSymbol(member2Syntax.Declaration.Variables[0])
+            ).Type;
 
             VerifyEquality(
                 type1.WithNullableAnnotation(CodeAnalysis.NullableAnnotation.None),
@@ -567,14 +563,12 @@ public class A<T>
 
             var model = comp.GetSemanticModel(syntaxTree);
 
-            var type1 =
-                (
-                    (IFieldSymbol)model.GetDeclaredSymbol(member1Syntax.Declaration.Variables[0])
-                ).Type;
-            var type2 =
-                (
-                    (IFieldSymbol)model.GetDeclaredSymbol(member2Syntax.Declaration.Variables[0])
-                ).Type;
+            var type1 = (
+                (IFieldSymbol)model.GetDeclaredSymbol(member1Syntax.Declaration.Variables[0])
+            ).Type;
+            var type2 = (
+                (IFieldSymbol)model.GetDeclaredSymbol(member2Syntax.Declaration.Variables[0])
+            ).Type;
 
             VerifyEquality(
                 type1,
@@ -608,14 +602,12 @@ public class A<T>
 
             var model = comp.GetSemanticModel(syntaxTree);
 
-            var type1 =
-                (
-                    (IFieldSymbol)model.GetDeclaredSymbol(member1Syntax.Declaration.Variables[0])
-                ).Type;
-            var type2 =
-                (
-                    (IFieldSymbol)model.GetDeclaredSymbol(member2Syntax.Declaration.Variables[0])
-                ).Type;
+            var type1 = (
+                (IFieldSymbol)model.GetDeclaredSymbol(member1Syntax.Declaration.Variables[0])
+            ).Type;
+            var type2 = (
+                (IFieldSymbol)model.GetDeclaredSymbol(member2Syntax.Declaration.Variables[0])
+            ).Type;
 
             VerifyEquality(
                 type1,
@@ -689,14 +681,12 @@ public class B
 
             var model = comp.GetSemanticModel(syntaxTree);
 
-            var type1 =
-                (
-                    (IFieldSymbol)model.GetDeclaredSymbol(member1Syntax.Declaration.Variables[0])
-                ).Type;
-            var type2 =
-                (
-                    (IFieldSymbol)model.GetDeclaredSymbol(member2Syntax.Declaration.Variables[0])
-                ).Type;
+            var type1 = (
+                (IFieldSymbol)model.GetDeclaredSymbol(member1Syntax.Declaration.Variables[0])
+            ).Type;
+            var type2 = (
+                (IFieldSymbol)model.GetDeclaredSymbol(member2Syntax.Declaration.Variables[0])
+            ).Type;
 
             VerifyEquality(type1, type2, expectedIncludeNullability: false);
 
@@ -744,14 +734,12 @@ public class B
 
             var model = comp.GetSemanticModel(syntaxTree);
 
-            var type1 =
-                (
-                    (IFieldSymbol)model.GetDeclaredSymbol(member1Syntax.Declaration.Variables[0])
-                ).Type;
-            var type2 =
-                (
-                    (IFieldSymbol)model.GetDeclaredSymbol(member2Syntax.Declaration.Variables[0])
-                ).Type;
+            var type1 = (
+                (IFieldSymbol)model.GetDeclaredSymbol(member1Syntax.Declaration.Variables[0])
+            ).Type;
+            var type2 = (
+                (IFieldSymbol)model.GetDeclaredSymbol(member2Syntax.Declaration.Variables[0])
+            ).Type;
 
             VerifyEquality(type1, type2, expectedIncludeNullability: false);
 
@@ -798,14 +786,12 @@ public class B
 
             var model = comp.GetSemanticModel(syntaxTree);
 
-            var type1 =
-                (
-                    (IFieldSymbol)model.GetDeclaredSymbol(member1Syntax.Declaration.Variables[0])
-                ).Type;
-            var type2 =
-                (
-                    (IFieldSymbol)model.GetDeclaredSymbol(member2Syntax.Declaration.Variables[0])
-                ).Type;
+            var type1 = (
+                (IFieldSymbol)model.GetDeclaredSymbol(member1Syntax.Declaration.Variables[0])
+            ).Type;
+            var type2 = (
+                (IFieldSymbol)model.GetDeclaredSymbol(member2Syntax.Declaration.Variables[0])
+            ).Type;
 
             VerifyEquality(type1, type2, expectedIncludeNullability: false);
 

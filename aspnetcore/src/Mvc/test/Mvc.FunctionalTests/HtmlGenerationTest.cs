@@ -17,8 +17,9 @@ public class HtmlGenerationTest
     : IClassFixture<MvcTestFixture<HtmlGenerationWebSite.Startup>>,
       IClassFixture<MvcEncodedTestFixture<HtmlGenerationWebSite.Startup>>
 {
-    private static readonly Assembly _resourcesAssembly =
-        typeof(HtmlGenerationTest).GetTypeInfo().Assembly;
+    private static readonly Assembly _resourcesAssembly = typeof(HtmlGenerationTest)
+        .GetTypeInfo()
+        .Assembly;
 
     public HtmlGenerationTest(
         MvcTestFixture<HtmlGenerationWebSite.Startup> fixture,

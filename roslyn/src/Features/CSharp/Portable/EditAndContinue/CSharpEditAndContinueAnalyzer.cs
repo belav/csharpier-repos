@@ -138,12 +138,10 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     case SyntaxKind.ArrowExpressionClause:
                         // represents getter symbol declaration node of a property/indexer with expression body
                         if (
-                            current
-                                .Parent
-                                .IsKind(
-                                    SyntaxKind.PropertyDeclaration,
-                                    SyntaxKind.IndexerDeclaration
-                                )
+                            current.Parent.IsKind(
+                                SyntaxKind.PropertyDeclaration,
+                                SyntaxKind.IndexerDeclaration
+                            )
                         )
                         {
                             declarations = new(current);
@@ -246,8 +244,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 && (
                     model
                         .GetSymbolInfo(nameSyntax, cancellationToken)
-                        .Symbol
-                        ?.Equals(localOrParameter) ?? false
+                        .Symbol?.Equals(localOrParameter) ?? false
                 )
             select node;
         }
@@ -291,16 +288,14 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                         return null;
                     }
 
-                    return fieldDeclaration
-                        .Modifiers
+                    return fieldDeclaration.Modifiers
                         .Concat(variableDeclaration.DescendantTokens())
                         .Concat(fieldDeclaration.SemicolonToken);
                 }
 
                 if (declarator == variableDeclaration.Variables[0])
                 {
-                    return fieldDeclaration
-                        .Modifiers
+                    return fieldDeclaration.Modifiers
                         .Concat(variableDeclaration.Type.DescendantTokens())
                         .Concat(node.DescendantTokens());
                 }
@@ -775,9 +770,11 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 RoslynDebug.Assert(newBody.Parent.IsKind(SyntaxKind.ConstructorDeclaration));
                 RoslynDebug.Assert(newBody.Parent is object);
 
-                return SyntaxComparer
-                    .Statement
-                    .ComputeMatch(oldBody.Parent, newBody.Parent, knownMatches);
+                return SyntaxComparer.Statement.ComputeMatch(
+                    oldBody.Parent,
+                    newBody.Parent,
+                    knownMatches
+                );
             }
 
             return SyntaxComparer.Statement.ComputeMatch(oldBody, newBody, knownMatches);
@@ -882,10 +879,9 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     );
                 }
                 else if (
-                    property
-                        .AccessorList
-                        .Accessors
-                        .Any(a => a.IsKind(SyntaxKind.SetAccessorDeclaration))
+                    property.AccessorList.Accessors.Any(
+                        a => a.IsKind(SyntaxKind.SetAccessorDeclaration)
+                    )
                 )
                 {
                     // The compiler implements the properties with an init accessor so explicitly implementing
@@ -1241,20 +1237,16 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     if (statementPart == (int)BlockPart.CloseBrace)
                     {
                         if (
-                            oldStatement
-                                .Parent
-                                .IsKind(
-                                    SyntaxKind.UsingStatement,
-                                    out UsingStatementSyntax? oldUsing
-                                )
+                            oldStatement.Parent.IsKind(
+                                SyntaxKind.UsingStatement,
+                                out UsingStatementSyntax? oldUsing
+                            )
                         )
                         {
-                            return newStatement
-                                    .Parent
-                                    .IsKind(
-                                        SyntaxKind.UsingStatement,
-                                        out UsingStatementSyntax? newUsing
-                                    ) && AreEquivalentActiveStatements(oldUsing, newUsing);
+                            return newStatement.Parent.IsKind(
+                                    SyntaxKind.UsingStatement,
+                                    out UsingStatementSyntax? newUsing
+                                ) && AreEquivalentActiveStatements(oldUsing, newUsing);
                         }
 
                         return HasEquivalentUsingDeclarations(
@@ -1327,12 +1319,12 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             BlockSyntax newBlock
         )
         {
-            var oldUsingDeclarations = oldBlock
-                .Statements
-                .Where(s => s is LocalDeclarationStatementSyntax l && l.UsingKeyword != default);
-            var newUsingDeclarations = newBlock
-                .Statements
-                .Where(s => s is LocalDeclarationStatementSyntax l && l.UsingKeyword != default);
+            var oldUsingDeclarations = oldBlock.Statements.Where(
+                s => s is LocalDeclarationStatementSyntax l && l.UsingKeyword != default
+            );
+            var newUsingDeclarations = newBlock.Statements.Where(
+                s => s is LocalDeclarationStatementSyntax l && l.UsingKeyword != default
+            );
 
             return oldUsingDeclarations.SequenceEqual(
                 newUsingDeclarations,
@@ -1379,9 +1371,9 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             }
 
             // Check that switch statement decision tree has not changed.
-            var hasDecitionTree = oldNode
-                .Sections
-                .Any(s => s.Labels.Any(l => l is CasePatternSwitchLabelSyntax));
+            var hasDecitionTree = oldNode.Sections.Any(
+                s => s.Labels.Any(l => l is CasePatternSwitchLabelSyntax)
+            );
             return !hasDecitionTree || AreEquivalentSwitchStatementDecisionTrees(oldNode, newNode);
         }
 
@@ -1540,10 +1532,9 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     if (
                         reference.GetSyntax() is RecordDeclarationSyntax record
                         && record.ParameterList is not null
-                        && record
-                            .ParameterList
-                            .Parameters
-                            .Any(p => p.Identifier.ValueText.Equals(name))
+                        && record.ParameterList.Parameters.Any(
+                            p => p.Identifier.ValueText.Equals(name)
+                        )
                     )
                     {
                         return true;
@@ -1596,9 +1587,9 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         {
             var syntaxRefs = type.DeclaringSyntaxReferences;
             return syntaxRefs.Length > 1
-                || ((BaseTypeDeclarationSyntax)syntaxRefs.Single().GetSyntax())
-                    .Modifiers
-                    .Any(SyntaxKind.PartialKeyword);
+                || ((BaseTypeDeclarationSyntax)syntaxRefs.Single().GetSyntax()).Modifiers.Any(
+                    SyntaxKind.PartialKeyword
+                );
         }
 
         protected override SyntaxNode GetSymbolDeclarationSyntax(
@@ -2802,9 +2793,9 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
 
                 case SyntaxKind.LocalDeclarationStatement:
                     if (
-                        ((LocalDeclarationStatementSyntax)node)
-                            .UsingKeyword
-                            .IsKind(SyntaxKind.UsingKeyword)
+                        ((LocalDeclarationStatementSyntax)node).UsingKeyword.IsKind(
+                            SyntaxKind.UsingKeyword
+                        )
                     )
                     {
                         return CSharpFeaturesResources.using_declaration;
@@ -2823,17 +2814,17 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             {
                 case SyntaxKind.ForEachStatement:
                     Debug.Assert(
-                        ((CommonForEachStatementSyntax)node)
-                            .AwaitKeyword
-                            .IsKind(SyntaxKind.AwaitKeyword)
+                        ((CommonForEachStatementSyntax)node).AwaitKeyword.IsKind(
+                            SyntaxKind.AwaitKeyword
+                        )
                     );
                     return CSharpFeaturesResources.asynchronous_foreach_statement;
 
                 case SyntaxKind.VariableDeclarator:
                     RoslynDebug.Assert(
-                        ((LocalDeclarationStatementSyntax)node.Parent!.Parent!)
-                            .AwaitKeyword
-                            .IsKind(SyntaxKind.AwaitKeyword)
+                        ((LocalDeclarationStatementSyntax)node.Parent!.Parent!).AwaitKeyword.IsKind(
+                            SyntaxKind.AwaitKeyword
+                        )
                     );
                     return CSharpFeaturesResources.asynchronous_using_declaration;
 
@@ -3479,15 +3470,13 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             // Handle deletion of await keyword from await using declaration.
             if (
                 deletedSuspensionPoint.IsKind(SyntaxKind.VariableDeclarator)
-                && match
-                    .Matches
-                    .TryGetValue(
-                        deletedSuspensionPoint.Parent!.Parent!,
-                        out var newLocalDeclaration
-                    )
-                && !((LocalDeclarationStatementSyntax)newLocalDeclaration)
-                    .AwaitKeyword
-                    .IsKind(SyntaxKind.AwaitKeyword)
+                && match.Matches.TryGetValue(
+                    deletedSuspensionPoint.Parent!.Parent!,
+                    out var newLocalDeclaration
+                )
+                && !((LocalDeclarationStatementSyntax)newLocalDeclaration).AwaitKeyword.IsKind(
+                    SyntaxKind.AwaitKeyword
+                )
             )
             {
                 diagnostics.Add(
@@ -3539,15 +3528,13 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             // Handle addition of using keyword to using declaration.
             if (
                 insertedSuspensionPoint.IsKind(SyntaxKind.VariableDeclarator)
-                && match
-                    .ReverseMatches
-                    .TryGetValue(
-                        insertedSuspensionPoint.Parent!.Parent!,
-                        out var oldLocalDeclaration
-                    )
-                && !((LocalDeclarationStatementSyntax)oldLocalDeclaration)
-                    .AwaitKeyword
-                    .IsKind(SyntaxKind.AwaitKeyword)
+                && match.ReverseMatches.TryGetValue(
+                    insertedSuspensionPoint.Parent!.Parent!,
+                    out var oldLocalDeclaration
+                )
+                && !((LocalDeclarationStatementSyntax)oldLocalDeclaration).AwaitKeyword.IsKind(
+                    SyntaxKind.AwaitKeyword
+                )
             )
             {
                 var newLocalDeclaration = (LocalDeclarationStatementSyntax)insertedSuspensionPoint!

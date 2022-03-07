@@ -54,9 +54,9 @@ internal partial class RequestContext : NativeRequestContext, IThreadPoolWorkIte
                 }
                 else
                 {
-                    var connectionDisconnectToken = Server
-                        .DisconnectListener
-                        .GetTokenForConnection(Request.UConnectionId);
+                    var connectionDisconnectToken = Server.DisconnectListener.GetTokenForConnection(
+                        Request.UConnectionId
+                    );
 
                     if (connectionDisconnectToken.CanBeCanceled)
                     {
@@ -327,16 +327,13 @@ internal partial class RequestContext : NativeRequestContext, IThreadPoolWorkIte
         {
             var property = new HttpApiTypes.HTTP_DELEGATE_REQUEST_PROPERTY_INFO()
             {
-                PropertyId =
-                    HttpApiTypes
-                        .HTTP_DELEGATE_REQUEST_PROPERTY_ID
-                        .DelegateRequestDelegateUrlProperty,
+                PropertyId = HttpApiTypes
+                    .HTTP_DELEGATE_REQUEST_PROPERTY_ID
+                    .DelegateRequestDelegateUrlProperty,
                 PropertyInfo = (IntPtr)uriPointer,
-                PropertyInfoLength = (uint)System
-                    .Text
-                    .Encoding
-                    .Unicode
-                    .GetByteCount(destination.UrlPrefix)
+                PropertyInfoLength = (uint)System.Text.Encoding.Unicode.GetByteCount(
+                    destination.UrlPrefix
+                )
             };
 
             statusCode = HttpApi.HttpDelegateRequestEx(

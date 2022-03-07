@@ -446,8 +446,9 @@ namespace System.Text.Json.SourceGeneration
                         };
 
                     // Set the naming policy for the current context.
-                    _currentContextNamingPolicy =
-                        contextGenSpec.GenerationOptions.PropertyNamingPolicy;
+                    _currentContextNamingPolicy = contextGenSpec
+                        .GenerationOptions
+                        .PropertyNamingPolicy;
 
                     foreach (AttributeSyntax attribute in serializableAttributeList)
                     {
@@ -614,8 +615,9 @@ namespace System.Text.Json.SourceGeneration
                             ExpressionSyntax typeNameSyntax = (ExpressionSyntax)typeNode
                                 .ChildNodes()
                                 .Single();
-                            typeSymbol =
-                                compilationSemanticModel.GetTypeInfo(typeNameSyntax).ConvertedType;
+                            typeSymbol = compilationSemanticModel
+                                .GetTypeInfo(typeNameSyntax)
+                                .ConvertedType;
                         }
 
                         seenFirstArg = true;

@@ -581,27 +581,25 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             }
             else if (useTrackGraph == true)
             {
-                context
-                    .ChangeTracker
-                    .TrackGraph(
-                        principal,
-                        e =>
+                context.ChangeTracker.TrackGraph(
+                    principal,
+                    e =>
+                    {
+                        if (entityState != EntityState.Added)
                         {
-                            if (entityState != EntityState.Added)
+                            if (ReferenceEquals(e.Entry.Entity, dependent))
                             {
-                                if (ReferenceEquals(e.Entry.Entity, dependent))
-                                {
-                                    e.Entry.Property("Id").CurrentValue = 10;
-                                }
-                                else if (ReferenceEquals(e.Entry.Entity, subDependent))
-                                {
-                                    e.Entry.Property("Id").CurrentValue = 100;
-                                }
+                                e.Entry.Property("Id").CurrentValue = 10;
                             }
-
-                            e.Entry.State = entityState;
+                            else if (ReferenceEquals(e.Entry.Entity, subDependent))
+                            {
+                                e.Entry.Property("Id").CurrentValue = 100;
+                            }
                         }
-                    );
+
+                        e.Entry.State = entityState;
+                    }
+                );
             }
             else
             {
@@ -755,27 +753,25 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             }
             else if (useTrackGraph == true)
             {
-                context
-                    .ChangeTracker
-                    .TrackGraph(
-                        principal,
-                        e =>
+                context.ChangeTracker.TrackGraph(
+                    principal,
+                    e =>
+                    {
+                        if (entityState != EntityState.Added)
                         {
-                            if (entityState != EntityState.Added)
+                            if (ReferenceEquals(e.Entry.Entity, dependent))
                             {
-                                if (ReferenceEquals(e.Entry.Entity, dependent))
-                                {
-                                    e.Entry.Property("Id").CurrentValue = 10;
-                                }
-                                else if (ReferenceEquals(e.Entry.Entity, subDependent))
-                                {
-                                    e.Entry.Property("Id").CurrentValue = 100;
-                                }
+                                e.Entry.Property("Id").CurrentValue = 10;
                             }
-
-                            e.Entry.State = entityState;
+                            else if (ReferenceEquals(e.Entry.Entity, subDependent))
+                            {
+                                e.Entry.Property("Id").CurrentValue = 100;
+                            }
                         }
-                    );
+
+                        e.Entry.State = entityState;
+                    }
+                );
             }
             else
             {
@@ -924,27 +920,25 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             }
             else if (useTrackGraph == true)
             {
-                context
-                    .ChangeTracker
-                    .TrackGraph(
-                        principal,
-                        e =>
+                context.ChangeTracker.TrackGraph(
+                    principal,
+                    e =>
+                    {
+                        if (entityState != EntityState.Added)
                         {
-                            if (entityState != EntityState.Added)
+                            if (ReferenceEquals(e.Entry.Entity, dependent))
                             {
-                                if (ReferenceEquals(e.Entry.Entity, dependent))
-                                {
-                                    e.Entry.Property("Id").CurrentValue = 10;
-                                }
-                                else if (ReferenceEquals(e.Entry.Entity, subDependent))
-                                {
-                                    e.Entry.Property("Id").CurrentValue = 100;
-                                }
+                                e.Entry.Property("Id").CurrentValue = 10;
                             }
-
-                            e.Entry.State = entityState;
+                            else if (ReferenceEquals(e.Entry.Entity, subDependent))
+                            {
+                                e.Entry.Property("Id").CurrentValue = 100;
+                            }
                         }
-                    );
+
+                        e.Entry.State = entityState;
+                    }
+                );
             }
             else
             {
@@ -1283,14 +1277,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 .Entry(principal)
                 .Collection(p => p.ChildCollection2)
                 .FindEntry(dependent2);
-            dependentEntry2.Property<int>("Id").CurrentValue =
-                dependentEntry1.Property<int>("Id").CurrentValue;
+            dependentEntry2.Property<int>("Id").CurrentValue = dependentEntry1
+                .Property<int>("Id")
+                .CurrentValue;
 
             var subDependentEntry2 = dependentEntry2
                 .Collection(p => p.SubChildCollection)
                 .FindEntry(subDependent2);
-            subDependentEntry2.Property<int>("Id").CurrentValue =
-                subDependentEntry1.Property<int>("Id").CurrentValue;
+            subDependentEntry2.Property<int>("Id").CurrentValue = subDependentEntry1
+                .Property<int>("Id")
+                .CurrentValue;
 
             context.ChangeTracker.DetectChanges();
 
@@ -1417,14 +1413,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 .Entry(principal)
                 .Collection(p => p.ChildCollection1)
                 .FindEntry(dependent2);
-            dependentEntry2.Property<int>("Id").CurrentValue =
-                dependentEntry1.Property<int>("Id").CurrentValue;
+            dependentEntry2.Property<int>("Id").CurrentValue = dependentEntry1
+                .Property<int>("Id")
+                .CurrentValue;
 
             var subDependentEntry2 = dependentEntry2
                 .Collection(p => p.SubChildCollection)
                 .FindEntry(subDependent2);
-            subDependentEntry2.Property<int>("Id").CurrentValue =
-                subDependentEntry1.Property<int>("Id").CurrentValue;
+            subDependentEntry2.Property<int>("Id").CurrentValue = subDependentEntry1
+                .Property<int>("Id")
+                .CurrentValue;
 
             context.ChangeTracker.DetectChanges();
 
@@ -2259,27 +2257,31 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 .Entry(principal)
                 .Collection(p => p.ChildCollection1)
                 .FindEntry(dependent2);
-            newDependentEntry1.Property<int>("Id").CurrentValue =
-                dependentEntry2.Property<int>("Id").CurrentValue;
+            newDependentEntry1.Property<int>("Id").CurrentValue = dependentEntry2
+                .Property<int>("Id")
+                .CurrentValue;
 
             var newDependentEntry2 = context
                 .Entry(principal)
                 .Collection(p => p.ChildCollection2)
                 .FindEntry(dependent1);
-            newDependentEntry2.Property<int>("Id").CurrentValue =
-                dependentEntry1.Property<int>("Id").CurrentValue;
+            newDependentEntry2.Property<int>("Id").CurrentValue = dependentEntry1
+                .Property<int>("Id")
+                .CurrentValue;
 
             var newSubDependentEntry1 = newDependentEntry1
                 .Collection(p => p.SubChildCollection)
                 .FindEntry(subDependent2);
-            newSubDependentEntry1.Property<int>("Id").CurrentValue =
-                subDependentEntry2.Property<int>("Id").CurrentValue;
+            newSubDependentEntry1.Property<int>("Id").CurrentValue = subDependentEntry2
+                .Property<int>("Id")
+                .CurrentValue;
 
             var newSubDependentEntry2 = newDependentEntry2
                 .Collection(p => p.SubChildCollection)
                 .FindEntry(subDependent1);
-            newSubDependentEntry2.Property<int>("Id").CurrentValue =
-                subDependentEntry1.Property<int>("Id").CurrentValue;
+            newSubDependentEntry2.Property<int>("Id").CurrentValue = subDependentEntry1
+                .Property<int>("Id")
+                .CurrentValue;
 
             context.ChangeTracker.DetectChanges();
 
@@ -2451,27 +2453,31 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 .Entry(principal)
                 .Collection(p => p.ChildCollection1)
                 .FindEntry(dependent2);
-            newDependentEntry1.Property<int>("Id").CurrentValue =
-                dependentEntry2.Property<int>("Id").CurrentValue;
+            newDependentEntry1.Property<int>("Id").CurrentValue = dependentEntry2
+                .Property<int>("Id")
+                .CurrentValue;
 
             var newDependentEntry2 = context
                 .Entry(principal)
                 .Collection(p => p.ChildCollection2)
                 .FindEntry(dependent1);
-            newDependentEntry2.Property<int>("Id").CurrentValue =
-                dependentEntry1.Property<int>("Id").CurrentValue;
+            newDependentEntry2.Property<int>("Id").CurrentValue = dependentEntry1
+                .Property<int>("Id")
+                .CurrentValue;
 
             var newSubDependentEntry1 = newDependentEntry2
                 .Collection(p => p.SubChildCollection)
                 .FindEntry(subDependent1);
-            newSubDependentEntry1.Property<int>("Id").CurrentValue =
-                subDependentEntry1.Property<int>("Id").CurrentValue;
+            newSubDependentEntry1.Property<int>("Id").CurrentValue = subDependentEntry1
+                .Property<int>("Id")
+                .CurrentValue;
 
             var newSubDependentEntry2 = newDependentEntry1
                 .Collection(p => p.SubChildCollection)
                 .FindEntry(subDependent2);
-            newSubDependentEntry2.Property<int>("Id").CurrentValue =
-                subDependentEntry2.Property<int>("Id").CurrentValue;
+            newSubDependentEntry2.Property<int>("Id").CurrentValue = subDependentEntry2
+                .Property<int>("Id")
+                .CurrentValue;
 
             context.ChangeTracker.DetectChanges();
 
@@ -2633,8 +2639,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 Assert.Equal(entityState, context.Entry(principal2).State);
                 Assert.Equal(EntityState.Detached, dependentEntry1.State);
 
-                var dependentEntry2 =
-                    context.Entry(principal2).Reference(p => p.Child1).TargetEntry;
+                var dependentEntry2 = context
+                    .Entry(principal2)
+                    .Reference(p => p.Child1)
+                    .TargetEntry;
                 Assert.Equal(principal2.Id, dependentEntry2.Property("ParentId").CurrentValue);
                 Assert.Equal(EntityState.Added, dependentEntry2.State);
                 Assert.Equal(
@@ -2738,8 +2746,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 Assert.Equal(entityState, context.Entry(principal1).State);
                 Assert.Equal(entityState, context.Entry(principal2).State);
                 Assert.Equal(EntityState.Detached, dependentEntry1.State);
-                var dependentEntry2 =
-                    context.Entry(principal2).Reference(p => p.Child1).TargetEntry;
+                var dependentEntry2 = context
+                    .Entry(principal2)
+                    .Reference(p => p.Child1)
+                    .TargetEntry;
                 Assert.Equal(EntityState.Added, dependentEntry2.State);
                 Assert.Equal(principal2.Id, dependentEntry2.Property("ParentId").CurrentValue);
                 Assert.Equal(
@@ -3145,8 +3155,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 Assert.Equal(entityState, context.Entry(principal1).State);
                 Assert.Equal(entityState, context.Entry(principal2).State);
 
-                var dependent1Entry =
-                    context.Entry(principal1).Reference(p => p.Child1).TargetEntry;
+                var dependent1Entry = context
+                    .Entry(principal1)
+                    .Reference(p => p.Child1)
+                    .TargetEntry;
                 Assert.Equal(principal1.Id, dependent1Entry.Property("ParentId").CurrentValue);
                 Assert.Equal(
                     entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
@@ -3161,8 +3173,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     dependent1Entry.Metadata.DisplayName()
                 );
 
-                var dependent2Entry =
-                    context.Entry(principal2).Reference(p => p.Child1).TargetEntry;
+                var dependent2Entry = context
+                    .Entry(principal2)
+                    .Reference(p => p.Child1)
+                    .TargetEntry;
                 Assert.Equal(principal2.Id, dependent2Entry.Property("ParentId").CurrentValue);
                 Assert.Equal(
                     entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
@@ -3292,8 +3306,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 Assert.Equal(entityState, context.Entry(principal1).State);
                 Assert.Equal(entityState, context.Entry(principal2).State);
 
-                var dependent1Entry =
-                    context.Entry(principal1).Reference(p => p.Child1).TargetEntry;
+                var dependent1Entry = context
+                    .Entry(principal1)
+                    .Reference(p => p.Child1)
+                    .TargetEntry;
                 Assert.Equal(
                     entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
                     dependent1Entry.State
@@ -3308,8 +3324,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     dependent1Entry.Metadata.DisplayName()
                 );
 
-                var dependent2Entry =
-                    context.Entry(principal2).Reference(p => p.Child1).TargetEntry;
+                var dependent2Entry = context
+                    .Entry(principal2)
+                    .Reference(p => p.Child1)
+                    .TargetEntry;
                 Assert.Equal(principal2.Id, dependent2Entry.Property("ParentId").CurrentValue);
                 Assert.Equal(
                     entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
@@ -4650,27 +4668,31 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 .Entry(principal2)
                 .Collection(p => p.ChildCollection1)
                 .FindEntry(dependent1);
-            newDependentEntry1.Property<int>("Id").CurrentValue =
-                dependentEntry1.Property<int>("Id").CurrentValue;
+            newDependentEntry1.Property<int>("Id").CurrentValue = dependentEntry1
+                .Property<int>("Id")
+                .CurrentValue;
 
             var newDependentEntry2 = context
                 .Entry(principal1)
                 .Collection(p => p.ChildCollection2)
                 .FindEntry(dependent2);
-            newDependentEntry2.Property<int>("Id").CurrentValue =
-                dependentEntry2.Property<int>("Id").CurrentValue;
+            newDependentEntry2.Property<int>("Id").CurrentValue = dependentEntry2
+                .Property<int>("Id")
+                .CurrentValue;
 
             var newSubDependentEntry1 = newDependentEntry1
                 .Collection(p => p.SubChildCollection)
                 .FindEntry(subDependent1);
-            newSubDependentEntry1.Property<int>("Id").CurrentValue =
-                subDependentEntry1.Property<int>("Id").CurrentValue;
+            newSubDependentEntry1.Property<int>("Id").CurrentValue = subDependentEntry1
+                .Property<int>("Id")
+                .CurrentValue;
 
             var newSubDependentEntry2 = newDependentEntry2
                 .Collection(p => p.SubChildCollection)
                 .FindEntry(subDependent2);
-            newSubDependentEntry2.Property<int>("Id").CurrentValue =
-                subDependentEntry2.Property<int>("Id").CurrentValue;
+            newSubDependentEntry2.Property<int>("Id").CurrentValue = subDependentEntry2
+                .Property<int>("Id")
+                .CurrentValue;
 
             Assert.Equal(entityState != EntityState.Unchanged, context.ChangeTracker.HasChanges());
 
@@ -4852,27 +4874,31 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 .Entry(principal2)
                 .Collection(p => p.ChildCollection1)
                 .FindEntry(dependent1);
-            newDependentEntry1.Property<int>("Id").CurrentValue =
-                dependentEntry1.Property<int>("Id").CurrentValue;
+            newDependentEntry1.Property<int>("Id").CurrentValue = dependentEntry1
+                .Property<int>("Id")
+                .CurrentValue;
 
             var newDependentEntry2 = context
                 .Entry(principal1)
                 .Collection(p => p.ChildCollection2)
                 .FindEntry(dependent2);
-            newDependentEntry2.Property<int>("Id").CurrentValue =
-                dependentEntry2.Property<int>("Id").CurrentValue;
+            newDependentEntry2.Property<int>("Id").CurrentValue = dependentEntry2
+                .Property<int>("Id")
+                .CurrentValue;
 
             var newSubDependentEntry1 = newDependentEntry1
                 .Collection(p => p.SubChildCollection)
                 .FindEntry(subDependent1);
-            newSubDependentEntry1.Property<int>("Id").CurrentValue =
-                subDependentEntry1.Property<int>("Id").CurrentValue;
+            newSubDependentEntry1.Property<int>("Id").CurrentValue = subDependentEntry1
+                .Property<int>("Id")
+                .CurrentValue;
 
             var newSubDependentEntry2 = newDependentEntry2
                 .Collection(p => p.SubChildCollection)
                 .FindEntry(subDependent2);
-            newSubDependentEntry2.Property<int>("Id").CurrentValue =
-                subDependentEntry2.Property<int>("Id").CurrentValue;
+            newSubDependentEntry2.Property<int>("Id").CurrentValue = subDependentEntry2
+                .Property<int>("Id")
+                .CurrentValue;
 
             if (entityState != EntityState.Added)
             {
@@ -5400,21 +5426,15 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             Assert.Equal(2, order.TestOrderItems.Count);
             Assert.Equal(
                 "EUR",
-                order
-                    .TestOrderItems
+                order.TestOrderItems
                     .Single(e => e.ProductName == "Test Product 1")
-                    .Price
-                    .Currency
-                    .Code
+                    .Price.Currency.Code
             );
             Assert.Equal(
                 "USD",
-                order
-                    .TestOrderItems
+                order.TestOrderItems
                     .Single(e => e.ProductName == "Test Product 3")
-                    .Price
-                    .Currency
-                    .Code
+                    .Price.Currency.Code
             );
 
             context.TestOrders.Add(order);
@@ -5424,21 +5444,15 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             Assert.Equal(2, order.TestOrderItems.Count);
             Assert.Equal(
                 "EUR",
-                order
-                    .TestOrderItems
+                order.TestOrderItems
                     .Single(e => e.ProductName == "Test Product 1")
-                    .Price
-                    .Currency
-                    .Code
+                    .Price.Currency.Code
             );
             Assert.Equal(
                 "USD",
-                order
-                    .TestOrderItems
+                order.TestOrderItems
                     .Single(e => e.ProductName == "Test Product 3")
-                    .Price
-                    .Currency
-                    .Code
+                    .Price.Currency.Code
             );
 
             context.SaveChanges();
@@ -5448,21 +5462,15 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             Assert.Equal(2, order.TestOrderItems.Count);
             Assert.Equal(
                 "EUR",
-                order
-                    .TestOrderItems
+                order.TestOrderItems
                     .Single(e => e.ProductName == "Test Product 1")
-                    .Price
-                    .Currency
-                    .Code
+                    .Price.Currency.Code
             );
             Assert.Equal(
                 "USD",
-                order
-                    .TestOrderItems
+                order.TestOrderItems
                     .Single(e => e.ProductName == "Test Product 3")
-                    .Price
-                    .Currency
-                    .Code
+                    .Price.Currency.Code
             );
         }
 
@@ -5594,39 +5602,27 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             Assert.Equal(4, order.TestOrderItems.Count);
             Assert.Equal(
                 "EUR",
-                order
-                    .TestOrderItems
+                order.TestOrderItems
                     .Single(e => e.ProductName == "Test Product 1")
-                    .Price
-                    .Currency
-                    .Code
+                    .Price.Currency.Code
             );
             Assert.Equal(
                 "EUR",
-                order
-                    .TestOrderItems
+                order.TestOrderItems
                     .Single(e => e.ProductName == "Test Product 2")
-                    .Price
-                    .Currency
-                    .Code
+                    .Price.Currency.Code
             );
             Assert.Equal(
                 "USD",
-                order
-                    .TestOrderItems
+                order.TestOrderItems
                     .Single(e => e.ProductName == "Test Product 3")
-                    .Price
-                    .Currency
-                    .Code
+                    .Price.Currency.Code
             );
             Assert.Equal(
                 "USD",
-                order
-                    .TestOrderItems
+                order.TestOrderItems
                     .Single(e => e.ProductName == "Test Product 4")
-                    .Price
-                    .Currency
-                    .Code
+                    .Price.Currency.Code
             );
 
             context.Add(order);
@@ -5636,39 +5632,27 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             Assert.Equal(4, order.TestOrderItems.Count);
             Assert.Equal(
                 "EUR",
-                order
-                    .TestOrderItems
+                order.TestOrderItems
                     .Single(e => e.ProductName == "Test Product 1")
-                    .Price
-                    .Currency
-                    .Code
+                    .Price.Currency.Code
             );
             Assert.Equal(
                 "EUR",
-                order
-                    .TestOrderItems
+                order.TestOrderItems
                     .Single(e => e.ProductName == "Test Product 2")
-                    .Price
-                    .Currency
-                    .Code
+                    .Price.Currency.Code
             );
             Assert.Equal(
                 "USD",
-                order
-                    .TestOrderItems
+                order.TestOrderItems
                     .Single(e => e.ProductName == "Test Product 3")
-                    .Price
-                    .Currency
-                    .Code
+                    .Price.Currency.Code
             );
             Assert.Equal(
                 "USD",
-                order
-                    .TestOrderItems
+                order.TestOrderItems
                     .Single(e => e.ProductName == "Test Product 4")
-                    .Price
-                    .Currency
-                    .Code
+                    .Price.Currency.Code
             );
 
             context.SaveChanges();
@@ -5678,39 +5662,27 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             Assert.Equal(4, order.TestOrderItems.Count);
             Assert.Equal(
                 "EUR",
-                order
-                    .TestOrderItems
+                order.TestOrderItems
                     .Single(e => e.ProductName == "Test Product 1")
-                    .Price
-                    .Currency
-                    .Code
+                    .Price.Currency.Code
             );
             Assert.Equal(
                 "EUR",
-                order
-                    .TestOrderItems
+                order.TestOrderItems
                     .Single(e => e.ProductName == "Test Product 2")
-                    .Price
-                    .Currency
-                    .Code
+                    .Price.Currency.Code
             );
             Assert.Equal(
                 "USD",
-                order
-                    .TestOrderItems
+                order.TestOrderItems
                     .Single(e => e.ProductName == "Test Product 3")
-                    .Price
-                    .Currency
-                    .Code
+                    .Price.Currency.Code
             );
             Assert.Equal(
                 "USD",
-                order
-                    .TestOrderItems
+                order.TestOrderItems
                     .Single(e => e.ProductName == "Test Product 4")
-                    .Price
-                    .Currency
-                    .Code
+                    .Price.Currency.Code
             );
         }
 
@@ -5759,8 +5731,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         {
             EntityState GetEntryState<TEntity>(EquatableEntitiesContext context, string role = null)
                 where TEntity : class =>
-                context
-                    .ChangeTracker
+                context.ChangeTracker
                     .Entries<TEntity>()
                     .Single(e => role == null || e.Property("Value").CurrentValue.Equals(role))
                     .State;

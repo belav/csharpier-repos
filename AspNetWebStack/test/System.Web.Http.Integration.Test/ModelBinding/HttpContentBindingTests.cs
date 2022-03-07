@@ -59,13 +59,11 @@ namespace System.Web.Http.ModelBinding
 
             HttpSelfHostConfiguration config = new HttpSelfHostConfiguration(baseAddress);
             config.HostNameComparisonMode = HostNameComparisonMode.Exact;
-            config
-                .Routes
-                .MapHttpRoute(
-                    "Default",
-                    "{controller}/{action}",
-                    new { controller = "HttpContentBinding", action = "HandleMessage" }
-                );
+            config.Routes.MapHttpRoute(
+                "Default",
+                "{controller}/{action}",
+                new { controller = "HttpContentBinding", action = "HandleMessage" }
+            );
             config.MessageHandlers.Add(new ConvertToStreamMessageHandler());
 
             server = new HttpServer(config);

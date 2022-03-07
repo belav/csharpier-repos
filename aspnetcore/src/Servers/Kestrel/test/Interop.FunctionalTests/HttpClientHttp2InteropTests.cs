@@ -84,9 +84,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
                             app.Run(
                                 async context =>
                                 {
-                                    await context
-                                        .Request
-                                        .BodyReader
+                                    await context.Request.BodyReader
                                         .CopyToAsync(context.Response.BodyWriter)
                                         .DefaultTimeout();
                                 }
@@ -205,9 +203,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
                                         allRequestsReceived.SetResult(0);
                                     }
                                     await allRequestsReceived.Task;
-                                    await context
-                                        .Request
-                                        .BodyReader
+                                    await context.Request.BodyReader
                                         .CopyToAsync(context.Response.BodyWriter)
                                         .DefaultTimeout();
                                 }
@@ -349,13 +345,12 @@ public class HttpClientHttp2InteropTests : LoggedTest
                                             readResult = await reader.ReadAsync().DefaultTimeout();
                                         }
 
-                                        var sequence = readResult
-                                            .Buffer
-                                            .Slice(0, "Hello World".Length);
+                                        var sequence = readResult.Buffer.Slice(
+                                            0,
+                                            "Hello World".Length
+                                        );
                                         Assert.True(sequence.IsSingleSegment);
-                                        await context
-                                            .Response
-                                            .BodyWriter
+                                        await context.Response.BodyWriter
                                             .WriteAsync(sequence.First)
                                             .DefaultTimeout();
                                         reader.AdvanceTo(sequence.End);
@@ -433,9 +428,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
 
                                     var sequence = readResult.Buffer.Slice(0, "Hello World".Length);
                                     Assert.True(sequence.IsSingleSegment);
-                                    await context
-                                        .Response
-                                        .BodyWriter
+                                    await context.Response.BodyWriter
                                         .WriteAsync(sequence.First)
                                         .DefaultTimeout();
                                     reader.AdvanceTo(sequence.End);
@@ -458,9 +451,9 @@ public class HttpClientHttp2InteropTests : LoggedTest
                                         }
 
                                         Assert.True(readResult.Buffer.IsSingleSegment);
-                                        var result = Encoding
-                                            .UTF8
-                                            .GetString(readResult.Buffer.FirstSpan);
+                                        var result = Encoding.UTF8.GetString(
+                                            readResult.Buffer.FirstSpan
+                                        );
                                         reader.AdvanceTo(readResult.Buffer.End);
 
                                         var finalResult = await reader.ReadAsync().DefaultTimeout();
@@ -995,10 +988,11 @@ public class HttpClientHttp2InteropTests : LoggedTest
                             app.Run(
                                 async context =>
                                 {
-                                    var count = await context
-                                        .Request
-                                        .Body
-                                        .ReadAsync(new byte[11], 0, 11);
+                                    var count = await context.Request.Body.ReadAsync(
+                                        new byte[11],
+                                        0,
+                                        11
+                                    );
                                     Assert.Equal(11, count);
 
                                     context.Response.ContentType = "text/plain";
@@ -1084,10 +1078,11 @@ public class HttpClientHttp2InteropTests : LoggedTest
                                 {
                                     try
                                     {
-                                        var readTask = context
-                                            .Request
-                                            .Body
-                                            .ReadAsync(new byte[11], 0, 11);
+                                        var readTask = context.Request.Body.ReadAsync(
+                                            new byte[11],
+                                            0,
+                                            11
+                                        );
                                         requestReceived.SetResult(0);
                                         var ex = await Assert
                                             .ThrowsAsync<IOException>(() => readTask)
@@ -1147,10 +1142,11 @@ public class HttpClientHttp2InteropTests : LoggedTest
                                     try
                                     {
                                         await ReadStreamHelloWorld(context.Request.Body);
-                                        var readTask = context
-                                            .Request
-                                            .Body
-                                            .ReadAsync(new byte[11], 0, 11);
+                                        var readTask = context.Request.Body.ReadAsync(
+                                            new byte[11],
+                                            0,
+                                            11
+                                        );
                                         requestReceived.SetResult(0);
                                         var ex = await Assert
                                             .ThrowsAsync<IOException>(() => readTask)
@@ -1207,13 +1203,12 @@ public class HttpClientHttp2InteropTests : LoggedTest
                                 {
                                     try
                                     {
-                                        context
-                                            .RequestAborted
-                                            .Register(() => serverResult.SetResult(0));
+                                        context.RequestAborted.Register(
+                                            () => serverResult.SetResult(0)
+                                        );
                                         requestReceived.SetResult(0);
                                         await serverResult.Task.DefaultTimeout();
-                                        await context
-                                            .Response
+                                        await context.Response
                                             .WriteAsync("Hello World")
                                             .DefaultTimeout();
                                     }
@@ -1262,16 +1257,14 @@ public class HttpClientHttp2InteropTests : LoggedTest
                                 {
                                     try
                                     {
-                                        context
-                                            .RequestAborted
-                                            .Register(() => serverResult.SetResult(0));
-                                        await context
-                                            .Response
+                                        context.RequestAborted.Register(
+                                            () => serverResult.SetResult(0)
+                                        );
+                                        await context.Response
                                             .WriteAsync("Hello World")
                                             .DefaultTimeout();
                                         await serverResult.Task.DefaultTimeout();
-                                        await context
-                                            .Response
+                                        await context.Response
                                             .WriteAsync("Hello World")
                                             .DefaultTimeout();
                                     }
@@ -1321,11 +1314,10 @@ public class HttpClientHttp2InteropTests : LoggedTest
                                 {
                                     try
                                     {
-                                        context
-                                            .RequestAborted
-                                            .Register(() => serverResult.SetResult(0));
-                                        await context
-                                            .Response
+                                        context.RequestAborted.Register(
+                                            () => serverResult.SetResult(0)
+                                        );
+                                        await context.Response
                                             .WriteAsync("Hello World")
                                             .DefaultTimeout();
                                         await serverResult.Task.DefaultTimeout();
@@ -1417,28 +1409,20 @@ public class HttpClientHttp2InteropTests : LoggedTest
         response.EnsureSuccessStatusCode();
 
         Assert.Single(
-            TestSink
-                .Writes
-                .Where(
-                    context =>
-                        context
-                            .Message
-                            .Contains(
-                                "received HEADERS frame for stream ID 1 with length 16384 and flags END_STREAM"
-                            )
-                )
+            TestSink.Writes.Where(
+                context =>
+                    context.Message.Contains(
+                        "received HEADERS frame for stream ID 1 with length 16384 and flags END_STREAM"
+                    )
+            )
         );
         Assert.Single(
-            TestSink
-                .Writes
-                .Where(
-                    context =>
-                        context
-                            .Message
-                            .Contains(
-                                "received CONTINUATION frame for stream ID 1 with length 4390 and flags END_HEADERS"
-                            )
-                )
+            TestSink.Writes.Where(
+                context =>
+                    context.Message.Contains(
+                        "received CONTINUATION frame for stream ID 1 with length 4390 and flags END_HEADERS"
+                    )
+            )
         );
 
         await host.StopAsync().DefaultTimeout();
@@ -1468,10 +1452,10 @@ public class HttpClientHttp2InteropTests : LoggedTest
                                         // The default frame size limit is 16kb, and the total header size limit is 64kb.
                                         for (var i = 0; i < 59; i++)
                                         {
-                                            context
-                                                .Response
-                                                .Headers
-                                                .Append("header" + i, oneKbString + i);
+                                            context.Response.Headers.Append(
+                                                "header" + i,
+                                                oneKbString + i
+                                            );
                                         }
                                         serverResult.SetResult(0);
                                     }
@@ -1499,42 +1483,31 @@ public class HttpClientHttp2InteropTests : LoggedTest
         }
 
         Assert.Single(
-            TestSink
-                .Writes
-                .Where(
-                    context =>
-                        context
-                            .Message
-                            .Contains(
-                                "sending HEADERS frame for stream ID 1 with length 15610 and flags END_STREAM"
-                            )
-                )
+            TestSink.Writes.Where(
+                context =>
+                    context.Message.Contains(
+                        "sending HEADERS frame for stream ID 1 with length 15610 and flags END_STREAM"
+                    )
+            )
         );
         Assert.Equal(
             2,
-            TestSink
-                .Writes
+            TestSink.Writes
                 .Where(
                     context =>
-                        context
-                            .Message
-                            .Contains(
-                                "sending CONTINUATION frame for stream ID 1 with length 15585 and flags NONE"
-                            )
+                        context.Message.Contains(
+                            "sending CONTINUATION frame for stream ID 1 with length 15585 and flags NONE"
+                        )
                 )
                 .Count()
         );
         Assert.Single(
-            TestSink
-                .Writes
-                .Where(
-                    context =>
-                        context
-                            .Message
-                            .Contains(
-                                "sending CONTINUATION frame for stream ID 1 with length 14546 and flags END_HEADERS"
-                            )
-                )
+            TestSink.Writes.Where(
+                context =>
+                    context.Message.Contains(
+                        "sending CONTINUATION frame for stream ID 1 with length 14546 and flags END_HEADERS"
+                    )
+            )
         );
 
         await host.StopAsync().DefaultTimeout();
@@ -1609,16 +1582,12 @@ public class HttpClientHttp2InteropTests : LoggedTest
         response.EnsureSuccessStatusCode();
 
         Assert.Single(
-            TestSink
-                .Writes
-                .Where(
-                    context =>
-                        context
-                            .Message
-                            .Contains(
-                                "received HEADERS frame for stream ID 1 with length 14540 and flags END_STREAM, END_HEADERS"
-                            )
-                )
+            TestSink.Writes.Where(
+                context =>
+                    context.Message.Contains(
+                        "received HEADERS frame for stream ID 1 with length 14540 and flags END_STREAM, END_HEADERS"
+                    )
+            )
         );
 
         await host.StopAsync().DefaultTimeout();
@@ -1871,10 +1840,10 @@ public class HttpClientHttp2InteropTests : LoggedTest
                                     // The total header size limit is 64kb.
                                     for (var i = 0; i < 65; i++)
                                     {
-                                        context
-                                            .Response
-                                            .Headers
-                                            .Append("header" + i, oneKbString + i);
+                                        context.Response.Headers.Append(
+                                            "header" + i,
+                                            oneKbString + i
+                                        );
                                     }
                                     return Task.CompletedTask;
                                 }
@@ -1975,13 +1944,11 @@ public class HttpClientHttp2InteropTests : LoggedTest
                                     var oneKbString = new string('a', 1024);
                                     for (var i = 0; i < 63; i++)
                                     {
-                                        await context
-                                            .Response
+                                        await context.Response
                                             .WriteAsync(oneKbString)
                                             .DefaultTimeout();
                                     }
-                                    await context
-                                        .Response
+                                    await context.Response
                                         .WriteAsync(new string('a', 1023))
                                         .DefaultTimeout();
                                     await context.Response.CompleteAsync().DefaultTimeout();
@@ -2026,9 +1993,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
                                     var read = 0;
                                     do
                                     {
-                                        read = await context
-                                            .Request
-                                            .Body
+                                        read = await context.Request.Body
                                             .ReadAsync(buffer, 0, buffer.Length)
                                             .DefaultTimeout();
                                     } while (read > 0);

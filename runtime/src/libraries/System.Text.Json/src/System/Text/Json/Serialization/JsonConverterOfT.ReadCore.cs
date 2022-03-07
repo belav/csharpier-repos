@@ -66,8 +66,10 @@ namespace System.Text.Json.Serialization
                     }
                 }
 
-                JsonPropertyInfo jsonPropertyInfo =
-                    state.Current.JsonTypeInfo.PropertyInfoForTypeInfo;
+                JsonPropertyInfo jsonPropertyInfo = state
+                    .Current
+                    .JsonTypeInfo
+                    .PropertyInfoForTypeInfo;
                 bool success = TryRead(
                     ref reader,
                     jsonPropertyInfo.RuntimePropertyType!,

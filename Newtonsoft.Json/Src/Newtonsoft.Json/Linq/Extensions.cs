@@ -307,9 +307,11 @@ namespace Newtonsoft.Json.Linq
                     targetType = Nullable.GetUnderlyingType(targetType);
                 }
 
-                return (U)System
-                    .Convert
-                    .ChangeType(value.Value, targetType, CultureInfo.InvariantCulture);
+                return (U)System.Convert.ChangeType(
+                    value.Value,
+                    targetType,
+                    CultureInfo.InvariantCulture
+                );
             }
         }
 

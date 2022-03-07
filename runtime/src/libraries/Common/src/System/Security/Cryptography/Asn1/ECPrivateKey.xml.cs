@@ -137,12 +137,11 @@ namespace System.Security.Cryptography.Asn1
                     new Asn1Tag(TagClass.ContextSpecific, 0)
                 );
                 System.Security.Cryptography.Asn1.ECDomainParameters tmpParameters;
-                System
-                    .Security
-                    .Cryptography
-                    .Asn1
-                    .ECDomainParameters
-                    .Decode(ref explicitReader, rebind, out tmpParameters);
+                System.Security.Cryptography.Asn1.ECDomainParameters.Decode(
+                    ref explicitReader,
+                    rebind,
+                    out tmpParameters
+                );
                 decoded.Parameters = tmpParameters;
 
                 explicitReader.ThrowIfNotEmpty();

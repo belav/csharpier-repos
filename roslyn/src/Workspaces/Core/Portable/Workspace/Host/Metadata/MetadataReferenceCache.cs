@@ -16,8 +16,10 @@ namespace Microsoft.CodeAnalysis.Host
     /// </summary>
     internal class MetadataReferenceCache
     {
-        private ImmutableDictionary<string, ReferenceSet> _referenceSets =
-            ImmutableDictionary<string, ReferenceSet>.Empty;
+        private ImmutableDictionary<string, ReferenceSet> _referenceSets = ImmutableDictionary<
+            string,
+            ReferenceSet
+        >.Empty;
 
         private readonly Func<
             string,

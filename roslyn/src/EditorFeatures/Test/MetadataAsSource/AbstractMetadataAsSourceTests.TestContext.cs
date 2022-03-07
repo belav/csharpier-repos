@@ -350,8 +350,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
 
                 // We construct our own composition here because we only want the decompilation metadata as source provider
                 // to be available.
-                var composition = EditorTestCompositions
-                    .EditorFeatures
+                var composition = EditorTestCompositions.EditorFeatures
                     .WithExcludedPartTypes(
                         ImmutableHashSet.Create(typeof(IMetadataAsSourceFileProvider))
                     )
@@ -384,10 +383,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
                 var semanticModel = await document.GetRequiredSemanticModelAsync(
                     CancellationToken.None
                 );
-                var symbol =
-                    semanticModel
-                        .GetSymbolInfo(syntaxRoot.FindNode(testDocument.SelectedSpans.Single()))
-                        .Symbol;
+                var symbol = semanticModel
+                    .GetSymbolInfo(syntaxRoot.FindNode(testDocument.SelectedSpans.Single()))
+                    .Symbol;
                 Contract.ThrowIfNull(symbol);
                 return symbol;
             }

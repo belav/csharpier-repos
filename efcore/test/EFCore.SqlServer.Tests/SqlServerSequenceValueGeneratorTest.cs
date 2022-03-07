@@ -90,9 +90,7 @@ namespace Microsoft.EntityFrameworkCore
                         ),
                         new SqlServerTypeMappingSource(
                             TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                            TestServiceFactory
-                                .Instance
-                                .Create<RelationalTypeMappingSourceDependencies>()
+                            TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
                         )
                     )
                 ),
@@ -155,9 +153,7 @@ namespace Microsoft.EntityFrameworkCore
                     ),
                     new SqlServerTypeMappingSource(
                         TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                        TestServiceFactory
-                            .Instance
-                            .Create<RelationalTypeMappingSourceDependencies>()
+                        TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
                     )
                 )
             );
@@ -217,9 +213,7 @@ namespace Microsoft.EntityFrameworkCore
                         ),
                         new SqlServerTypeMappingSource(
                             TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                            TestServiceFactory
-                                .Instance
-                                .Create<RelationalTypeMappingSourceDependencies>()
+                            TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
                         )
                     )
                 ),
@@ -237,8 +231,7 @@ namespace Microsoft.EntityFrameworkCore
         {
             serviceProvider ??= SqlServerTestHelpers.Instance.CreateServiceProvider();
 
-            return SqlServerTestHelpers
-                .Instance
+            return SqlServerTestHelpers.Instance
                 .CreateContextServices(serviceProvider)
                 .GetRequiredService<ISqlServerConnection>();
         }

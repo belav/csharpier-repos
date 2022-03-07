@@ -78,16 +78,14 @@ public class GeneratedCodeTests
                 transportConnectionGeneratedPath
             );
 
-            CodeGenerator
-                .Program
-                .Run(
-                    testHttpHeadersGeneratedPath,
-                    testHttpProtocolGeneratedPath,
-                    testHttpUtilitiesGeneratedPath,
-                    testHttp2ConnectionGeneratedPath,
-                    testTransportMultiplexedConnectionGeneratedPath,
-                    testTransportConnectionGeneratedPath
-                );
+            CodeGenerator.Program.Run(
+                testHttpHeadersGeneratedPath,
+                testHttpProtocolGeneratedPath,
+                testHttpUtilitiesGeneratedPath,
+                testHttp2ConnectionGeneratedPath,
+                testTransportMultiplexedConnectionGeneratedPath,
+                testTransportConnectionGeneratedPath
+            );
 
             var testHttpHeadersGenerated = File.ReadAllText(testHttpHeadersGeneratedPath);
             var testHttpProtocolGenerated = File.ReadAllText(testHttpProtocolGeneratedPath);

@@ -15,9 +15,11 @@ namespace System.Net.Security.Tests
         [Fact]
         public void EventSource_ExistsWithCorrectId()
         {
-            Type esType = typeof(SslStream)
-                .Assembly
-                .GetType("System.Net.NetEventSource", throwOnError: true, ignoreCase: false);
+            Type esType = typeof(SslStream).Assembly.GetType(
+                "System.Net.NetEventSource",
+                throwOnError: true,
+                ignoreCase: false
+            );
             Assert.NotNull(esType);
 
             Assert.Equal(

@@ -172,10 +172,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                                 ),
                                 subquery.ShaperExpression,
                                 materializeCollectionNavigationExpression.Navigation,
-                                materializeCollectionNavigationExpression
-                                    .Navigation
-                                    .ClrType
-                                    .GetSequenceType()
+                                materializeCollectionNavigationExpression.Navigation.ClrType.GetSequenceType()
                             );
                         }
 
@@ -185,9 +182,9 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                                 && methodCallExpression.Method.DeclaringType == typeof(Enumerable)
                                 && methodCallExpression.Method.Name == nameof(Enumerable.ToList)
                                 && methodCallExpression.Arguments.Count == 1
-                                && methodCallExpression.Arguments[0]
-                                    .Type
-                                    .TryGetElementType(typeof(IQueryable<>)) != null
+                                && methodCallExpression.Arguments[0].Type.TryGetElementType(
+                                    typeof(IQueryable<>)
+                                ) != null
                             )
                             {
                                 var subquery =

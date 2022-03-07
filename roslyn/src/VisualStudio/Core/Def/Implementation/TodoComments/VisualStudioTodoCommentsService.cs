@@ -153,9 +153,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TodoComments
 
         private void ComputeTodoCommentsInCurrentProcess(CancellationToken cancellationToken)
         {
-            var registrationService = _workspace
-                .Services
-                .GetRequiredService<ISolutionCrawlerRegistrationService>();
+            var registrationService =
+                _workspace.Services.GetRequiredService<ISolutionCrawlerRegistrationService>();
             var analyzerProvider = new InProcTodoCommentsIncrementalAnalyzerProvider(this);
 
             registrationService.AddAnalyzerProvider(

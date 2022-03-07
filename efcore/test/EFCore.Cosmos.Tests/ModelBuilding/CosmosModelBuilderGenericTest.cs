@@ -163,8 +163,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     entity
                         .GetKeys()
                         .First(k => k != entity.FindPrimaryKey())
-                        .Properties
-                        .Select(p => p.Name)
+                        .Properties.Select(p => p.Name)
                 );
 
                 var idProperty = entity.FindProperty(StoreKeyConvention.DefaultIdPropertyName);
@@ -203,8 +202,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     entity
                         .GetKeys()
                         .First(k => k != entity.FindPrimaryKey())
-                        .Properties
-                        .Select(p => p.Name)
+                        .Properties.Select(p => p.Name)
                 );
             }
 
@@ -398,10 +396,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 var model = modelBuilder.FinalizeModel();
 
                 var principal = model.FindEntityType(typeof(CollectionNavigationToSharedType));
-                var owned =
-                    principal
-                        .FindNavigation(nameof(CollectionNavigationToSharedType.Navigation))
-                        .TargetEntityType;
+                var owned = principal
+                    .FindNavigation(nameof(CollectionNavigationToSharedType.Navigation))
+                    .TargetEntityType;
                 Assert.True(owned.IsOwned());
                 Assert.True(owned.HasSharedClrType);
                 Assert.Equal(
@@ -433,10 +430,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 var model = modelBuilder.FinalizeModel();
 
                 var principal = model.FindEntityType(typeof(ReferenceNavigationToSharedType));
-                var owned =
-                    principal
-                        .FindNavigation(nameof(ReferenceNavigationToSharedType.Navigation))
-                        .TargetEntityType;
+                var owned = principal
+                    .FindNavigation(nameof(ReferenceNavigationToSharedType.Navigation))
+                    .TargetEntityType;
                 Assert.True(owned.IsOwned());
                 Assert.True(owned.HasSharedClrType);
                 Assert.Equal(
@@ -698,8 +694,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 var owner = model.FindEntityType(typeof(OneToOneOwnerWithField));
                 Assert.Equal(typeof(OneToOneOwnerWithField).FullName, owner.Name);
-                var ownership =
-                    owner.FindNavigation(nameof(OneToOneOwnerWithField.OwnedDependent)).ForeignKey;
+                var ownership = owner
+                    .FindNavigation(nameof(OneToOneOwnerWithField.OwnedDependent))
+                    .ForeignKey;
                 Assert.True(ownership.IsOwnership);
                 Assert.Equal(
                     nameof(OneToOneOwnerWithField.OwnedDependent),

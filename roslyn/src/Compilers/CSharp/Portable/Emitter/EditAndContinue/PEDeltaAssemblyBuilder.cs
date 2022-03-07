@@ -80,8 +80,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 RoslynDebug.AssertNotNull(previousGeneration.Compilation);
                 RoslynDebug.AssertNotNull(previousGeneration.PEModuleBuilder);
 
-                var previousAssembly =
-                    ((CSharpCompilation)previousGeneration.Compilation).SourceAssembly;
+                var previousAssembly = (
+                    (CSharpCompilation)previousGeneration.Compilation
+                ).SourceAssembly;
                 var previousContext = new EmitContext(
                     (PEModuleBuilder)previousGeneration.PEModuleBuilder,
                     null,
@@ -264,12 +265,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 }
 
                 if (
-                    !reader
-                        .StringComparer
-                        .StartsWith(def.Name, GeneratedNames.ActionDelegateNamePrefix)
-                    && !reader
-                        .StringComparer
-                        .StartsWith(def.Name, GeneratedNames.FuncDelegateNamePrefix)
+                    !reader.StringComparer.StartsWith(
+                        def.Name,
+                        GeneratedNames.ActionDelegateNamePrefix
+                    )
+                    && !reader.StringComparer.StartsWith(
+                        def.Name,
+                        GeneratedNames.FuncDelegateNamePrefix
+                    )
                 )
                 {
                     continue;
@@ -342,14 +345,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             SynthesizedDelegateValue
         > GetSynthesizedDelegates()
         {
-            var synthesizedDelegates = this.Compilation
-                .AnonymousTypeManager
-                .GetSynthesizedDelegates();
+            var synthesizedDelegates =
+                this.Compilation.AnonymousTypeManager.GetSynthesizedDelegates();
             // Should contain all entries in previous generation.
             Debug.Assert(
-                _previousGeneration
-                    .SynthesizedDelegates
-                    .All(p => synthesizedDelegates.ContainsKey(p.Key))
+                _previousGeneration.SynthesizedDelegates.All(
+                    p => synthesizedDelegates.ContainsKey(p.Key)
+                )
             );
             return synthesizedDelegates;
         }

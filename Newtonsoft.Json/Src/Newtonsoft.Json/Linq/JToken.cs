@@ -2451,9 +2451,15 @@ namespace Newtonsoft.Json.Linq
                 // This is required because the serializer won't update settings when used inside of a converter.
                 if (jsonSerializer is JsonSerializerProxy proxy)
                 {
-                    proxy
-                        ._serializer
-                        .SetupReader(jsonReader, out _, out _, out _, out _, out _, out _);
+                    proxy._serializer.SetupReader(
+                        jsonReader,
+                        out _,
+                        out _,
+                        out _,
+                        out _,
+                        out _,
+                        out _
+                    );
                 }
 
                 return jsonSerializer.Deserialize(jsonReader, objectType);

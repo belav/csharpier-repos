@@ -368,8 +368,7 @@ namespace Microsoft.CodeAnalysis.InvertIf
                 if (!IsStatementContainer(parent))
                 {
                     Debug.Assert(statementRange.FirstStatement == statementRange.LastStatement);
-                    return statementRange
-                        .FirstStatement
+                    return statementRange.FirstStatement
                         .DescendantNodesAndSelf()
                         .All(IsNoOpSyntaxNode);
                 }

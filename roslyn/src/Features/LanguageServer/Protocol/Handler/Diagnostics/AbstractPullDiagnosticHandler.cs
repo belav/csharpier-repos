@@ -350,8 +350,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
         )
         {
             var workspace = document.Project.Solution.Workspace;
-            var currentProjectDependentVersion = await document
-                .Project
+            var currentProjectDependentVersion = await document.Project
                 .GetDependentVersionAsync(cancellationToken)
                 .ConfigureAwait(false);
             using (await _semaphore.DisposableWaitAsync(cancellationToken).ConfigureAwait(false))
@@ -377,8 +376,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
 
                     // The current project dependent version does not match the last reported.  This may be because we've forked
                     // or reloaded a project, so fall back to calculating project checksums to determine if anything is actually changed.
-                    var aggregateChecksum = await document
-                        .Project
+                    var aggregateChecksum = await document.Project
                         .GetDependentChecksumAsync(cancellationToken)
                         .ConfigureAwait(false);
                     if (lastResult.projectDependentChecksum == aggregateChecksum)
@@ -401,8 +399,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
                 // Note that we can safely update the map before computation as any cancellation or exception
                 // during computation means that the client will never recieve this resultId and so cannot ask us for it.
                 var newResultId = $"{GetType().Name}:{_nextDocumentResultId++}";
-                var currentProjectDependentChecksum = await document
-                    .Project
+                var currentProjectDependentChecksum = await document.Project
                     .GetDependentChecksumAsync(cancellationToken)
                     .ConfigureAwait(false);
                 _documentIdToLastResult[(document.Project.Solution.Workspace, document.Id)] = (

@@ -133,9 +133,10 @@ namespace Microsoft.CodeAnalysis.UseIsNullCheck
                 return;
             }
 
-            var properties = ImmutableDictionary<string, string?>
-                .Empty
-                .Add(UseIsNullConstants.Kind, UseIsNullConstants.ReferenceEqualsKey);
+            var properties = ImmutableDictionary<string, string?>.Empty.Add(
+                UseIsNullConstants.Kind,
+                UseIsNullConstants.ReferenceEqualsKey
+            );
 
             var genericParameterSymbol = GetGenericParameterSymbol(
                 syntaxFacts,
@@ -201,8 +202,9 @@ namespace Microsoft.CodeAnalysis.UseIsNullCheck
             var argumentExpression = syntaxFacts.GetExpressionOfArgument(valueNode);
             if (argumentExpression != null)
             {
-                var parameterType =
-                    semanticModel.GetTypeInfo(argumentExpression, cancellationToken).Type;
+                var parameterType = semanticModel
+                    .GetTypeInfo(argumentExpression, cancellationToken)
+                    .Type;
                 return parameterType as ITypeParameterSymbol;
             }
 

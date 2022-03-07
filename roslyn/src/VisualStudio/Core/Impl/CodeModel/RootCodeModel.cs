@@ -95,8 +95,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                     vsProjectItems.AddFromFile(absoluteFilePath);
                 }
 
-                return this.State
-                    .ProjectCodeModelFactory
+                return this.State.ProjectCodeModelFactory
                     .GetProjectCodeModel(_projectId)
                     .GetOrCreateFileCodeModel(absoluteFilePath);
             }
@@ -129,9 +128,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             object implementedInterfaces,
             EnvDTE.vsCMAccess access
         ) =>
-            GetFileCodeModel(location)
-                .Object
-                .AddClass(name, position, bases, implementedInterfaces, access);
+            GetFileCodeModel(location).Object.AddClass(
+                name,
+                position,
+                bases,
+                implementedInterfaces,
+                access
+            );
 
         public EnvDTE.CodeDelegate AddDelegate(
             string name,
@@ -177,9 +180,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             object implementedInterfaces,
             EnvDTE.vsCMAccess access
         ) =>
-            GetFileCodeModel(location)
-                .Object
-                .AddStruct(name, position, bases, implementedInterfaces, access);
+            GetFileCodeModel(location).Object.AddStruct(
+                name,
+                position,
+                bases,
+                implementedInterfaces,
+                access
+            );
 
         public EnvDTE.CodeVariable AddVariable(
             string name,

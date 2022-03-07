@@ -197,9 +197,10 @@ namespace System.Web.Http.WebHost
                 {
                     // Assert
                     object ignore;
-                    bool found = actualRequest
-                        .Properties
-                        .TryGetValue(HttpControllerHandler.OwinEnvironmentKey, out ignore);
+                    bool found = actualRequest.Properties.TryGetValue(
+                        HttpControllerHandler.OwinEnvironmentKey,
+                        out ignore
+                    );
                     Assert.False(found);
                 }
             }
@@ -222,9 +223,10 @@ namespace System.Web.Http.WebHost
                 {
                     // Assert
                     object ignore;
-                    bool found = actualRequest
-                        .Properties
-                        .TryGetValue(HttpControllerHandler.OwinEnvironmentKey, out ignore);
+                    bool found = actualRequest.Properties.TryGetValue(
+                        HttpControllerHandler.OwinEnvironmentKey,
+                        out ignore
+                    );
                     Assert.False(found);
                 }
             }
@@ -793,8 +795,9 @@ namespace System.Web.Http.WebHost
         public async Task CopyResponseAsync_IfTransferEncodingChunkedAndContentLengthAreBothSet_IgnoresContentLength()
         {
             // Arrange
-            HttpResponseBase responseBase =
-                CreateMockHttpResponseBaseForResponse(Stream.Null).Object;
+            HttpResponseBase responseBase = CreateMockHttpResponseBaseForResponse(
+                Stream.Null
+            ).Object;
             HttpContextBase contextBase = CreateStubContextBase(responseBase);
 
             using (HttpRequestMessage request = new HttpRequestMessage())
@@ -821,8 +824,9 @@ namespace System.Web.Http.WebHost
         public async Task CopyResponseAsync_IfTransferEncodingIsJustChunked_DoesNotCopyHeaderToHost()
         {
             // Arrange
-            HttpResponseBase responseBase =
-                CreateMockHttpResponseBaseForResponse(Stream.Null).Object;
+            HttpResponseBase responseBase = CreateMockHttpResponseBaseForResponse(
+                Stream.Null
+            ).Object;
             HttpContextBase contextBase = CreateStubContextBase(responseBase);
 
             using (HttpRequestMessage request = new HttpRequestMessage())
@@ -847,8 +851,9 @@ namespace System.Web.Http.WebHost
         public async Task CopyResponseAsync_IfTransferEncodingIsIdentity_CopiesHeaderToHost()
         {
             // Arrange
-            HttpResponseBase responseBase =
-                CreateMockHttpResponseBaseForResponse(Stream.Null).Object;
+            HttpResponseBase responseBase = CreateMockHttpResponseBaseForResponse(
+                Stream.Null
+            ).Object;
             HttpContextBase contextBase = CreateStubContextBase(responseBase);
 
             using (HttpRequestMessage request = new HttpRequestMessage())
@@ -877,8 +882,9 @@ namespace System.Web.Http.WebHost
         public async Task CopyResponseAsync_IfTransferEncodingIsIdentityChunked_CopiesHeaderToHost()
         {
             // Arrange
-            HttpResponseBase responseBase =
-                CreateMockHttpResponseBaseForResponse(Stream.Null).Object;
+            HttpResponseBase responseBase = CreateMockHttpResponseBaseForResponse(
+                Stream.Null
+            ).Object;
             HttpContextBase contextBase = CreateStubContextBase(responseBase);
 
             using (HttpRequestMessage request = new HttpRequestMessage())
@@ -909,8 +915,9 @@ namespace System.Web.Http.WebHost
         public async Task CopyResponseAsync_IfTransferEncodingIsChunked_DisablesResponseBuffering()
         {
             // Arrange
-            HttpResponseBase responseBase =
-                CreateMockHttpResponseBaseForResponse(Stream.Null).Object;
+            HttpResponseBase responseBase = CreateMockHttpResponseBaseForResponse(
+                Stream.Null
+            ).Object;
             HttpContextBase contextBase = CreateStubContextBase(responseBase);
 
             using (HttpRequestMessage request = new HttpRequestMessage())
@@ -1441,12 +1448,10 @@ namespace System.Web.Http.WebHost
             HttpConfiguration config = new HttpConfiguration();
             config.Formatters.Clear();
             config.Formatters.Add(formatterMock.Object);
-            config
-                .Services
-                .Replace(
-                    typeof(IContentNegotiator),
-                    null /*negotiatorMock.Object*/
-                );
+            config.Services.Replace(
+                typeof(IContentNegotiator),
+                null /*negotiatorMock.Object*/
+            );
 
             MemoryStream memoryStream = new MemoryStream();
             Mock<HttpContextBase> contextMock = CreateMockHttpContextBaseForResponse(memoryStream);
@@ -1525,8 +1530,9 @@ namespace System.Web.Http.WebHost
             Mock<HttpRequestBase> requestBaseMock = new Mock<HttpRequestBase>();
             requestBaseMock.Setup(m => m.Abort()).Verifiable();
             HttpRequestBase requestBase = requestBaseMock.Object;
-            HttpResponseBase responseBase =
-                CreateMockHttpResponseBaseForResponse(memoryStream).Object;
+            HttpResponseBase responseBase = CreateMockHttpResponseBaseForResponse(
+                memoryStream
+            ).Object;
             Mock<HttpContextBase> contextMock = new Mock<HttpContextBase>()
             {
                 DefaultValue = DefaultValue.Mock
@@ -1575,8 +1581,9 @@ namespace System.Web.Http.WebHost
             Mock<HttpRequestBase> requestBaseMock = new Mock<HttpRequestBase>();
             requestBaseMock.Setup(m => m.Abort()).Verifiable();
             HttpRequestBase requestBase = requestBaseMock.Object;
-            HttpResponseBase responseBase =
-                CreateMockHttpResponseBaseForResponse(memoryStream).Object;
+            HttpResponseBase responseBase = CreateMockHttpResponseBaseForResponse(
+                memoryStream
+            ).Object;
             HttpContextBase contextBase = CreateStubContextBase(requestBase, responseBase);
 
             HttpRequestMessage request = new HttpRequestMessage();

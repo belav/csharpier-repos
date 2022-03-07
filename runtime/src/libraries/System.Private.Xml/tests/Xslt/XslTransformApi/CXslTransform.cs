@@ -2095,13 +2095,9 @@ namespace System.Xml.Tests
                     () =>
                         LoadXSL_Resolver("XmlResolver_Main.xsl", myResolver, inputType, readerType)
                 );
-                var absoluteUri =
-                    new Uri(
-                        Path.Combine(
-                            Environment.CurrentDirectory,
-                            FullFilePath("XmlResolver_Main.xsl")
-                        )
-                    ).AbsoluteUri;
+                var absoluteUri = new Uri(
+                    Path.Combine(Environment.CurrentDirectory, FullFilePath("XmlResolver_Main.xsl"))
+                ).AbsoluteUri;
                 CheckExpectedError(e, "System.Xml", "Xml_CannotResolveUrl", new[] { absoluteUri });
             }
             else
@@ -2111,13 +2107,12 @@ namespace System.Xml.Tests
                         LoadXSL_Resolver("XmlResolver_Main.xsl", myResolver, inputType, readerType)
                 );
                 var xsltException = Assert.IsType<XsltException>(e.InnerException);
-                var absoluteUri =
-                    new Uri(
-                        Path.Combine(
-                            Environment.CurrentDirectory,
-                            FullFilePath("XmlResolver_Include.xsl")
-                        )
-                    ).AbsoluteUri;
+                var absoluteUri = new Uri(
+                    Path.Combine(
+                        Environment.CurrentDirectory,
+                        FullFilePath("XmlResolver_Include.xsl")
+                    )
+                ).AbsoluteUri;
                 var exceptionSourceAssembly = "System.Xml";
                 CheckExpectedError(
                     xsltException,

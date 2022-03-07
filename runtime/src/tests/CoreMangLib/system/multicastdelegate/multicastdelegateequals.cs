@@ -33,11 +33,9 @@ public class MulticastDelegateEquals
     {
         bool retVal = true;
 
-        TestLibrary
-            .TestFramework
-            .BeginScenario(
-                "PosTest1: Determine whether two delegate with the same function from same type are equals"
-            );
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest1: Determine whether two delegate with the same function from same type are equals"
+        );
 
         try
         {
@@ -52,12 +50,10 @@ public class MulticastDelegateEquals
 
             if (!dd.ValueParameterVoidDelegate.Equals(dd1.ValueParameterVoidDelegate))
             {
-                TestLibrary
-                    .TestFramework
-                    .LogError(
-                        "001",
-                        "Two delegate with the same function from same type are equal"
-                    );
+                TestLibrary.TestFramework.LogError(
+                    "001",
+                    "Two delegate with the same function from same type are equal"
+                );
                 retVal = false;
             }
         }
@@ -75,11 +71,9 @@ public class MulticastDelegateEquals
     {
         bool retVal = true;
 
-        TestLibrary
-            .TestFramework
-            .BeginScenario(
-                "PosTest2: Determine whether two delegate with the same class method from same type are equal"
-            );
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest2: Determine whether two delegate with the same class method from same type are equal"
+        );
 
         try
         {
@@ -94,12 +88,10 @@ public class MulticastDelegateEquals
 
             if (!dd.ValueParameterVoidDelegate.Equals(dd1.ValueParameterVoidDelegate))
             {
-                TestLibrary
-                    .TestFramework
-                    .LogError(
-                        "003",
-                        "Two delegate with the same class method from same type are not equal"
-                    );
+                TestLibrary.TestFramework.LogError(
+                    "003",
+                    "Two delegate with the same class method from same type are not equal"
+                );
                 retVal = false;
             }
         }
@@ -118,11 +110,9 @@ public class MulticastDelegateEquals
     {
         bool retVal = true;
 
-        TestLibrary
-            .TestFramework
-            .BeginScenario(
-                "PosTest3: Determine whether two delegate with the same P/Invoke method from same type are equal"
-            );
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest3: Determine whether two delegate with the same P/Invoke method from same type are equal"
+        );
 
         try
         {
@@ -137,12 +127,10 @@ public class MulticastDelegateEquals
 
             if (!dd.VoidParameterValueDelegate.Equals(dd1.VoidParameterValueDelegate))
             {
-                TestLibrary
-                    .TestFramework
-                    .LogError(
-                        "005",
-                        "Two delegate with the same P/Invoke method from same type are not equal"
-                    );
+                TestLibrary.TestFramework.LogError(
+                    "005",
+                    "Two delegate with the same P/Invoke method from same type are not equal"
+                );
                 retVal = false;
             }
         }
@@ -160,11 +148,9 @@ public class MulticastDelegateEquals
     {
         bool retVal = true;
 
-        TestLibrary
-            .TestFramework
-            .BeginScenario(
-                "PosTest4: Determine whether an initialized delegate is not equal to null"
-            );
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest4: Determine whether an initialized delegate is not equal to null"
+        );
 
         try
         {
@@ -175,9 +161,10 @@ public class MulticastDelegateEquals
 
             if (dd.ValueParameterVoidDelegate.Equals(null))
             {
-                TestLibrary
-                    .TestFramework
-                    .LogError("007", "An initiailzed delegate is equal to null");
+                TestLibrary.TestFramework.LogError(
+                    "007",
+                    "An initiailzed delegate is equal to null"
+                );
                 retVal = false;
             }
         }
@@ -195,11 +182,9 @@ public class MulticastDelegateEquals
     {
         bool retVal = true;
 
-        TestLibrary
-            .TestFramework
-            .BeginScenario(
-                "PosTest5: Determine two delegate with same number of invoke list which is initialized with same instance methods are equal"
-            );
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest5: Determine two delegate with same number of invoke list which is initialized with same instance methods are equal"
+        );
 
         try
         {
@@ -221,12 +206,10 @@ public class MulticastDelegateEquals
 
             if (!dd.ValueParameterVoidDelegate.Equals(dd1.ValueParameterVoidDelegate))
             {
-                TestLibrary
-                    .TestFramework
-                    .LogError(
-                        "009",
-                        "two delegate with same number of invoke list which is initialized with same instance methods are not equal"
-                    );
+                TestLibrary.TestFramework.LogError(
+                    "009",
+                    "two delegate with same number of invoke list which is initialized with same instance methods are not equal"
+                );
                 retVal = false;
             }
         }
@@ -245,11 +228,9 @@ public class MulticastDelegateEquals
     {
         bool retVal = true;
 
-        TestLibrary
-            .TestFramework
-            .BeginScenario(
-                "PosTest6: Determine two delegate with same number of invoke list which is initialized with same multi-type functions are equal"
-            );
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest6: Determine two delegate with same number of invoke list which is initialized with same multi-type functions are equal"
+        );
 
         try
         {
@@ -277,12 +258,10 @@ public class MulticastDelegateEquals
 
             if (!dd.VoidParameterValueDelegate.Equals(dd1.VoidParameterValueDelegate))
             {
-                TestLibrary
-                    .TestFramework
-                    .LogError(
-                        "009",
-                        "two delegate with same number of invoke list which is initialized with same multi-type functions are not equal"
-                    );
+                TestLibrary.TestFramework.LogError(
+                    "009",
+                    "two delegate with same number of invoke list which is initialized with same multi-type functions are not equal"
+                );
                 retVal = false;
             }
         }
@@ -302,11 +281,9 @@ public class MulticastDelegateEquals
     {
         bool retVal = true;
 
-        TestLibrary
-            .TestFramework
-            .BeginScenario(
-                "NegTest1: Determine whether two delegate with different function from same type are not equal"
-            );
+        TestLibrary.TestFramework.BeginScenario(
+            "NegTest1: Determine whether two delegate with different function from same type are not equal"
+        );
 
         try
         {
@@ -321,12 +298,10 @@ public class MulticastDelegateEquals
 
             if (dd.ValueParameterVoidDelegate.Equals(dd1.ValueParameterVoidDelegate))
             {
-                TestLibrary
-                    .TestFramework
-                    .LogError(
-                        "101",
-                        "Two delegate with different function from same type are equal"
-                    );
+                TestLibrary.TestFramework.LogError(
+                    "101",
+                    "Two delegate with different function from same type are equal"
+                );
                 retVal = false;
             }
         }
@@ -344,11 +319,9 @@ public class MulticastDelegateEquals
     {
         bool retVal = true;
 
-        TestLibrary
-            .TestFramework
-            .BeginScenario(
-                "NegTest2: Determine whether two delegate with same name function from different type are not equal"
-            );
+        TestLibrary.TestFramework.BeginScenario(
+            "NegTest2: Determine whether two delegate with same name function from different type are not equal"
+        );
 
         try
         {
@@ -363,12 +336,10 @@ public class MulticastDelegateEquals
 
             if (dd.ValueParameterVoidDelegate.Equals(dd1.ValueParameterVoidDelegate))
             {
-                TestLibrary
-                    .TestFramework
-                    .LogError(
-                        "103",
-                        "Two delegate with the same name function from different type are equal"
-                    );
+                TestLibrary.TestFramework.LogError(
+                    "103",
+                    "Two delegate with the same name function from different type are equal"
+                );
                 retVal = false;
             }
         }
@@ -387,11 +358,9 @@ public class MulticastDelegateEquals
     {
         bool retVal = true;
 
-        TestLibrary
-            .TestFramework
-            .BeginScenario(
-                "NegTest3: Determine whether two delegate with different P/Invoke functions are not equal"
-            );
+        TestLibrary.TestFramework.BeginScenario(
+            "NegTest3: Determine whether two delegate with different P/Invoke functions are not equal"
+        );
 
         try
         {
@@ -406,12 +375,10 @@ public class MulticastDelegateEquals
 
             if (dd.VoidParameterValueDelegate.Equals(dd1.VoidParameterValueDelegate))
             {
-                TestLibrary
-                    .TestFramework
-                    .LogError(
-                        "105",
-                        "Two delegate with the different P/Invoke functions are equal"
-                    );
+                TestLibrary.TestFramework.LogError(
+                    "105",
+                    "Two delegate with the different P/Invoke functions are equal"
+                );
                 retVal = false;
             }
         }
@@ -429,11 +396,9 @@ public class MulticastDelegateEquals
     {
         bool retVal = true;
 
-        TestLibrary
-            .TestFramework
-            .BeginScenario(
-                "NegTest4: Determine whether two delegate with different number of functions are not equal"
-            );
+        TestLibrary.TestFramework.BeginScenario(
+            "NegTest4: Determine whether two delegate with different number of functions are not equal"
+        );
 
         try
         {
@@ -458,12 +423,10 @@ public class MulticastDelegateEquals
 
             if (dd.ValueParameterVoidDelegate.Equals(dd1.ValueParameterVoidDelegate))
             {
-                TestLibrary
-                    .TestFramework
-                    .LogError(
-                        "107",
-                        "Two delegate with the different number of functions are equal"
-                    );
+                TestLibrary.TestFramework.LogError(
+                    "107",
+                    "Two delegate with the different number of functions are equal"
+                );
                 retVal = false;
             }
         }
@@ -482,11 +445,9 @@ public class MulticastDelegateEquals
     {
         bool retVal = true;
 
-        TestLibrary
-            .TestFramework
-            .BeginScenario(
-                "NegTest5: Determine whether two delegate with same number of functions but with different order are not equal"
-            );
+        TestLibrary.TestFramework.BeginScenario(
+            "NegTest5: Determine whether two delegate with same number of functions but with different order are not equal"
+        );
 
         try
         {
@@ -514,12 +475,10 @@ public class MulticastDelegateEquals
 
             if (dd.VoidParameterValueDelegate.Equals(dd1.VoidParameterValueDelegate))
             {
-                TestLibrary
-                    .TestFramework
-                    .LogError(
-                        "109",
-                        "two delegate with same number of functions but with different order are equal"
-                    );
+                TestLibrary.TestFramework.LogError(
+                    "109",
+                    "two delegate with same number of functions but with different order are equal"
+                );
                 retVal = false;
             }
         }

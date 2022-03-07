@@ -93,10 +93,9 @@ public class CreatedAtActionResultTests
     {
         var options = Options.Create(new MvcOptions());
         options.Value.OutputFormatters.Add(new StringOutputFormatter());
-        options
-            .Value
-            .OutputFormatters
-            .Add(SystemTextJsonOutputFormatter.CreateFormatter(new JsonOptions()));
+        options.Value.OutputFormatters.Add(
+            SystemTextJsonOutputFormatter.CreateFormatter(new JsonOptions())
+        );
 
         var services = new ServiceCollection();
         services.AddSingleton<IActionResultExecutor<ObjectResult>>(

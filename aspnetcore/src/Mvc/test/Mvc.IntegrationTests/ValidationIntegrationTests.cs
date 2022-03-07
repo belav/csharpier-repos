@@ -107,13 +107,12 @@ public class ValidationIntegrationTests
         // Assert
         Assert.False(modelState.IsValid);
 
-        var entry =
-            Assert
-                .Single(
-                    modelState,
-                    e => string.Equals(e.Key, "AccountId", StringComparison.OrdinalIgnoreCase)
-                )
-                .Value;
+        var entry = Assert
+            .Single(
+                modelState,
+                e => string.Equals(e.Key, "AccountId", StringComparison.OrdinalIgnoreCase)
+            )
+            .Value;
         var error = Assert.Single(entry.Errors);
         Assert.Equal(
             ValidationAttributeUtil.GetRangeErrorMessage(25, 50, "AccountId"),
@@ -1760,9 +1759,9 @@ public class ValidationIntegrationTests
             },
             options =>
             {
-                options
-                    .ModelMetadataDetailsProviders
-                    .Add(new SuppressChildValidationMetadataProvider(typeof(Address)));
+                options.ModelMetadataDetailsProviders.Add(
+                    new SuppressChildValidationMetadataProvider(typeof(Address))
+                );
             }
         );
 
@@ -2366,8 +2365,9 @@ public class ValidationIntegrationTests
         Assert.Equal("key0", entry.RawValue);
         Assert.Equal(ModelValidationState.Valid, entry.ValidationState);
 
-        entry =
-            Assert.Single(modelState, e => e.Key == "parameter[0].Value.NeverValidProperty").Value;
+        entry = Assert
+            .Single(modelState, e => e.Key == "parameter[0].Value.NeverValidProperty")
+            .Value;
         Assert.Equal("value0", entry.AttemptedValue);
         Assert.Equal("value0", entry.RawValue);
         Assert.Equal(ModelValidationState.Valid, entry.ValidationState);

@@ -188,9 +188,11 @@ namespace System.Web.Http.ApiExplorer
         )
         {
             HttpConfiguration config = new HttpConfiguration();
-            config
-                .Routes
-                .MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional });
+            config.Routes.MapHttpRoute(
+                "Default",
+                "{controller}/{id}",
+                new { id = RouteParameter.Optional }
+            );
 
             DefaultHttpControllerSelector controllerSelector =
                 ApiExplorerHelper.GetStrictControllerSelector(config, controllerType);
@@ -252,13 +254,11 @@ namespace System.Web.Http.ApiExplorer
         )
         {
             HttpConfiguration config = new HttpConfiguration();
-            config
-                .Routes
-                .MapHttpRoute(
-                    "Default",
-                    "myitem/{id}",
-                    new { controller = "Item", id = RouteParameter.Optional }
-                );
+            config.Routes.MapHttpRoute(
+                "Default",
+                "myitem/{id}",
+                new { controller = "Item", id = RouteParameter.Optional }
+            );
 
             DefaultHttpControllerSelector controllerSelector =
                 ApiExplorerHelper.GetStrictControllerSelector(config, controllerType);
@@ -422,13 +422,11 @@ namespace System.Web.Http.ApiExplorer
         )
         {
             HttpConfiguration config = new HttpConfiguration();
-            config
-                .Routes
-                .MapHttpRoute(
-                    "Default",
-                    "{controller}/{action}/{id}",
-                    new { id = RouteParameter.Optional }
-                );
+            config.Routes.MapHttpRoute(
+                "Default",
+                "{controller}/{action}/{id}",
+                new { id = RouteParameter.Optional }
+            );
 
             DefaultHttpControllerSelector controllerSelector =
                 ApiExplorerHelper.GetStrictControllerSelector(config, controllerType);
@@ -466,13 +464,11 @@ namespace System.Web.Http.ApiExplorer
         )
         {
             HttpConfiguration config = new HttpConfiguration();
-            config
-                .Routes
-                .MapHttpRoute(
-                    "Default",
-                    "{controller}/{id}",
-                    new { action = "RemoveItem", id = RouteParameter.Optional }
-                );
+            config.Routes.MapHttpRoute(
+                "Default",
+                "{controller}/{id}",
+                new { action = "RemoveItem", id = RouteParameter.Optional }
+            );
 
             DefaultHttpControllerSelector controllerSelector =
                 ApiExplorerHelper.GetStrictControllerSelector(config, controllerType);
@@ -487,13 +483,11 @@ namespace System.Web.Http.ApiExplorer
         {
             Type controllerType = typeof(OverloadsController);
             HttpConfiguration config = new HttpConfiguration();
-            config
-                .Routes
-                .MapHttpRoute(
-                    "Default",
-                    "{controller}/{id}",
-                    new { action = "ActionThatDoesNotExist", id = RouteParameter.Optional }
-                );
+            config.Routes.MapHttpRoute(
+                "Default",
+                "{controller}/{id}",
+                new { action = "ActionThatDoesNotExist", id = RouteParameter.Optional }
+            );
 
             DefaultHttpControllerSelector controllerSelector =
                 ApiExplorerHelper.GetStrictControllerSelector(config, controllerType);
@@ -508,13 +502,11 @@ namespace System.Web.Http.ApiExplorer
         {
             Type controllerType = typeof(OverloadsController);
             HttpConfiguration config = new HttpConfiguration();
-            config
-                .Routes
-                .MapHttpRoute(
-                    "Default",
-                    "mycontroller/{id}",
-                    new { controller = "ControllerThatDoesNotExist", id = RouteParameter.Optional }
-                );
+            config.Routes.MapHttpRoute(
+                "Default",
+                "mycontroller/{id}",
+                new { controller = "ControllerThatDoesNotExist", id = RouteParameter.Optional }
+            );
 
             DefaultHttpControllerSelector controllerSelector =
                 ApiExplorerHelper.GetStrictControllerSelector(config, controllerType);
@@ -529,16 +521,16 @@ namespace System.Web.Http.ApiExplorer
         {
             Type controllerType = typeof(ItemController);
             HttpConfiguration config = new HttpConfiguration();
-            IHttpRoute matchingRoute = config
-                .Routes
-                .MapHttpRoute(
-                    "Item",
-                    "Item/{id}",
-                    new { id = RouteParameter.Optional, controller = "Item" }
-                );
-            config
-                .Routes
-                .MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional });
+            IHttpRoute matchingRoute = config.Routes.MapHttpRoute(
+                "Item",
+                "Item/{id}",
+                new { id = RouteParameter.Optional, controller = "Item" }
+            );
+            config.Routes.MapHttpRoute(
+                "Default",
+                "{controller}/{id}",
+                new { id = RouteParameter.Optional }
+            );
             DefaultHttpControllerSelector controllerSelector =
                 ApiExplorerHelper.GetStrictControllerSelector(config, controllerType);
             config.Services.Replace(typeof(IHttpControllerSelector), controllerSelector);
@@ -593,9 +585,11 @@ namespace System.Web.Http.ApiExplorer
         {
             Type controllerType = typeof(AmbiguousActionController);
             HttpConfiguration config = new HttpConfiguration();
-            config
-                .Routes
-                .MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional });
+            config.Routes.MapHttpRoute(
+                "Default",
+                "{controller}/{id}",
+                new { id = RouteParameter.Optional }
+            );
             DefaultHttpControllerSelector controllerSelector =
                 ApiExplorerHelper.GetStrictControllerSelector(config, controllerType);
             config.Services.Replace(typeof(IHttpControllerSelector), controllerSelector);
@@ -622,20 +616,16 @@ namespace System.Web.Http.ApiExplorer
         {
             Type controllerType = typeof(ItemController);
             HttpConfiguration config = new HttpConfiguration();
-            config
-                .Routes
-                .MapHttpRoute(
-                    "Custom",
-                    "{majorVersion}/{minorVersion}/custom",
-                    new { controller = "Item" }
-                );
-            config
-                .Routes
-                .MapHttpRoute(
-                    "Default",
-                    "{version}/{controller}/{id}",
-                    new { id = RouteParameter.Optional }
-                );
+            config.Routes.MapHttpRoute(
+                "Custom",
+                "{majorVersion}/{minorVersion}/custom",
+                new { controller = "Item" }
+            );
+            config.Routes.MapHttpRoute(
+                "Default",
+                "{version}/{controller}/{id}",
+                new { id = RouteParameter.Optional }
+            );
             DefaultHttpControllerSelector controllerSelector =
                 ApiExplorerHelper.GetStrictControllerSelector(config, controllerType);
             config.Services.Replace(typeof(IHttpControllerSelector), controllerSelector);

@@ -79,15 +79,13 @@ namespace Microsoft.EntityFrameworkCore.Query
                 if (parameters.Length == 0)
                 {
                     var path = new ODataPathTemplate(route);
-                    context
-                        .Action
-                        .AddSelector(
-                            "get",
-                            context.Prefix,
-                            context.Model,
-                            path,
-                            context.Options.RouteOptions
-                        );
+                    context.Action.AddSelector(
+                        "get",
+                        context.Prefix,
+                        context.Model,
+                        path,
+                        context.Options.RouteOptions
+                    );
 
                     return true;
                 }
@@ -110,15 +108,13 @@ namespace Microsoft.EntityFrameworkCore.Query
                     );
 
                     var path = new ODataPathTemplate(route, keyTemplate);
-                    context
-                        .Action
-                        .AddSelector(
-                            "get",
-                            context.Prefix,
-                            context.Model,
-                            path,
-                            context.Options.RouteOptions
-                        );
+                    context.Action.AddSelector(
+                        "get",
+                        context.Prefix,
+                        context.Model,
+                        path,
+                        context.Options.RouteOptions
+                    );
 
                     return true;
                 }

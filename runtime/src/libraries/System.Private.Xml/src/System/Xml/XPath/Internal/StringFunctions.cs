@@ -134,8 +134,9 @@ namespace MS.Internal.Xml.XPath
             return s1.Length >= s2.Length && string.CompareOrdinal(s1, 0, s2, 0, s2.Length) == 0;
         }
 
-        private static readonly CompareInfo s_compareInfo =
-            CultureInfo.InvariantCulture.CompareInfo;
+        private static readonly CompareInfo s_compareInfo = CultureInfo
+            .InvariantCulture
+            .CompareInfo;
 
         private bool Contains(XPathNodeIterator nodeIterator)
         {

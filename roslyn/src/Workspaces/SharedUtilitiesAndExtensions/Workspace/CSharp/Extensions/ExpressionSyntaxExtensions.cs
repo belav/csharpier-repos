@@ -144,14 +144,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             }
 
             var typeSyntax = targetType.GenerateTypeSyntax();
-            var type =
-                semanticModel
-                    .GetSpeculativeTypeInfo(
-                        position,
-                        typeSyntax,
-                        SpeculativeBindingOption.BindAsTypeOrNamespace
-                    )
-                    .Type;
+            var type = semanticModel
+                .GetSpeculativeTypeInfo(
+                    position,
+                    typeSyntax,
+                    SpeculativeBindingOption.BindAsTypeOrNamespace
+                )
+                .Type;
 
             if (!targetType.Equals(type))
             {
@@ -225,14 +224,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     SpeculativeBindingOption.BindAsExpression
                 );
 
-                container =
-                    semanticModel
-                        .GetSpeculativeTypeInfo(
-                            name.SpanStart,
-                            name,
-                            SpeculativeBindingOption.BindAsExpression
-                        )
-                        .Type;
+                container = semanticModel
+                    .GetSpeculativeTypeInfo(
+                        name.SpanStart,
+                        name,
+                        SpeculativeBindingOption.BindAsExpression
+                    )
+                    .Type;
                 return true;
             }
 

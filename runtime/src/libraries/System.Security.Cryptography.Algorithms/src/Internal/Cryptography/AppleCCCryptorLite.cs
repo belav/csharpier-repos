@@ -43,22 +43,20 @@ namespace Internal.Cryptography
             fixed (byte* pbKey = key)
             fixed (byte* pbIv = iv)
             {
-                ret = Interop
-                    .AppleCrypto
-                    .CryptorCreate(
-                        encrypting
-                          ? Interop.AppleCrypto.PAL_SymmetricOperation.Encrypt
-                          : Interop.AppleCrypto.PAL_SymmetricOperation.Decrypt,
-                        algorithm,
-                        GetPalChainMode(algorithm, cipherMode, feedbackSizeInBytes),
-                        Interop.AppleCrypto.PAL_PaddingMode.None,
-                        pbKey,
-                        key.Length,
-                        pbIv,
-                        Interop.AppleCrypto.PAL_SymmetricOptions.None,
-                        out _cryptor,
-                        out ccStatus
-                    );
+                ret = Interop.AppleCrypto.CryptorCreate(
+                    encrypting
+                      ? Interop.AppleCrypto.PAL_SymmetricOperation.Encrypt
+                      : Interop.AppleCrypto.PAL_SymmetricOperation.Decrypt,
+                    algorithm,
+                    GetPalChainMode(algorithm, cipherMode, feedbackSizeInBytes),
+                    Interop.AppleCrypto.PAL_PaddingMode.None,
+                    pbKey,
+                    key.Length,
+                    pbIv,
+                    Interop.AppleCrypto.PAL_SymmetricOptions.None,
+                    out _cryptor,
+                    out ccStatus
+                );
             }
 
             ProcessInteropError(ret, ccStatus);
@@ -161,17 +159,15 @@ namespace Internal.Cryptography
             fixed (byte* pInput = input)
             fixed (byte* pOutput = output)
             {
-                ret = Interop
-                    .AppleCrypto
-                    .CryptorUpdate(
-                        _cryptor,
-                        pInput,
-                        input.Length,
-                        pOutput,
-                        output.Length,
-                        out bytesWritten,
-                        out ccStatus
-                    );
+                ret = Interop.AppleCrypto.CryptorUpdate(
+                    _cryptor,
+                    pInput,
+                    input.Length,
+                    pOutput,
+                    output.Length,
+                    out bytesWritten,
+                    out ccStatus
+                );
             }
 
             ProcessInteropError(ret, ccStatus);
@@ -216,15 +212,13 @@ namespace Internal.Cryptography
                 byte* outputCurrent = outputStart + outputBytes;
                 int bytesWritten;
 
-                ret = Interop
-                    .AppleCrypto
-                    .CryptorFinal(
-                        _cryptor,
-                        outputCurrent,
-                        output.Length - outputBytes,
-                        out bytesWritten,
-                        out errorCode
-                    );
+                ret = Interop.AppleCrypto.CryptorFinal(
+                    _cryptor,
+                    outputCurrent,
+                    output.Length - outputBytes,
+                    out bytesWritten,
+                    out errorCode
+                );
 
                 outputBytes += bytesWritten;
             }
@@ -249,9 +243,10 @@ namespace Internal.Cryptography
                     ccStatus != 0,
                     "Interop function returned 0 but a system code of success"
                 );
-                throw Interop
-                    .AppleCrypto
-                    .CreateExceptionForCCError(ccStatus, Interop.AppleCrypto.CCCryptorStatus);
+                throw Interop.AppleCrypto.CreateExceptionForCCError(
+                    ccStatus,
+                    Interop.AppleCrypto.CCCryptorStatus
+                );
             }
 
             // Usually this will be -1, a general indication of bad inputs.

@@ -74,14 +74,12 @@ public class PageActionEndpointDataSourceTest : ActionEndpointDataSourceBaseTest
             mockDescriptorProvider.Object
         );
 
-        dataSource
-            .DefaultBuilder
-            .Add(
-                (b) =>
-                {
-                    b.Metadata.Add("Hi there");
-                }
-            );
+        dataSource.DefaultBuilder.Add(
+            (b) =>
+            {
+                b.Metadata.Add("Hi there");
+            }
+        );
 
         // Act
         var endpoints = dataSource.Endpoints;

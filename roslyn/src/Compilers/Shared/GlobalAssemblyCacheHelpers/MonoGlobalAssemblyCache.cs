@@ -30,8 +30,9 @@ namespace Microsoft.CodeAnalysis
             s_corlibDirectory = Path.GetDirectoryName(corlibAssemblyFile);
 
             var systemAssemblyFile = typeof(Uri).Assembly.Location;
-            s_gacDirectory =
-                Directory.GetParent(Path.GetDirectoryName(systemAssemblyFile)).Parent.FullName;
+            s_gacDirectory = Directory
+                .GetParent(Path.GetDirectoryName(systemAssemblyFile))
+                .Parent.FullName;
         }
 
         private static AssemblyName CreateAssemblyNameFromFile(string path) =>

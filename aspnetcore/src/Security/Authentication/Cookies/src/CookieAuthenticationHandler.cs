@@ -294,9 +294,12 @@ public class CookieAuthenticationHandler : SignInAuthenticationHandler<CookieAut
                 cookieOptions.Expires = _refreshExpiresUtc.Value.ToUniversalTime();
             }
 
-            Options
-                .CookieManager
-                .AppendResponseCookie(Context, Options.Cookie.Name!, cookieValue, cookieOptions);
+            Options.CookieManager.AppendResponseCookie(
+                Context,
+                Options.Cookie.Name!,
+                cookieValue,
+                cookieOptions
+            );
 
             await ApplyHeaders(shouldRedirectToReturnUrl: false, properties: properties);
         }
@@ -392,14 +395,12 @@ public class CookieAuthenticationHandler : SignInAuthenticationHandler<CookieAut
 
         var cookieValue = Options.TicketDataFormat.Protect(ticket, GetTlsTokenBinding());
 
-        Options
-            .CookieManager
-            .AppendResponseCookie(
-                Context,
-                Options.Cookie.Name!,
-                cookieValue,
-                signInContext.CookieOptions
-            );
+        Options.CookieManager.AppendResponseCookie(
+            Context,
+            Options.Cookie.Name!,
+            cookieValue,
+            signInContext.CookieOptions
+        );
 
         var signedInContext = new CookieSignedInContext(
             Context,

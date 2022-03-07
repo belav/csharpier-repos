@@ -39,12 +39,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = new ModelBuilder();
 
-            var index =
-                modelBuilder
-                    .Entity<Customer>()
-                    .HasIndex(e => e.Id)
-                    .HasFilter("[Id] % 2 = 0")
-                    .Metadata;
+            var index = modelBuilder
+                .Entity<Customer>()
+                .HasIndex(e => e.Id)
+                .HasFilter("[Id] % 2 = 0")
+                .Metadata;
 
             Assert.Equal("[Id] % 2 = 0", index.GetFilter());
 
@@ -304,13 +303,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
             modelBuilder.Entity<Customer>().HasKey(e => e.Id);
 
-            var foreignKey =
-                modelBuilder
-                    .Entity<Order>()
-                    .HasOne<Customer>()
-                    .WithOne()
-                    .HasForeignKey<Order>(e => e.CustomerId)
-                    .Metadata;
+            var foreignKey = modelBuilder
+                .Entity<Order>()
+                .HasOne<Customer>()
+                .WithOne()
+                .HasForeignKey<Order>(e => e.CustomerId)
+                .Metadata;
 
             Assert.Equal("FK_Order_Customer_CustomerId", foreignKey.GetConstraintName());
 

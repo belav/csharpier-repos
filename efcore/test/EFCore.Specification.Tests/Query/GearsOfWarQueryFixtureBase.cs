@@ -44,8 +44,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                             .Set<Gear>()
                             .AsEnumerable()
                             .SingleOrDefault(g => g.Nickname == ((Gear)e)?.Nickname)
-                            ?.AssignedCity
-                            ?.Name
+                            ?.AssignedCity?.Name
                 },
             };
 

@@ -35,15 +35,9 @@ namespace System.Web.Helpers
             // throw ArgumentException instead.
             try
             {
-                return httpContext
-                    .Request
-                    .MapPath(
-                        ResolvePath(
-                            TemplateStack.GetCurrentTemplate(httpContext),
-                            httpContext,
-                            path
-                        )
-                    );
+                return httpContext.Request.MapPath(
+                    ResolvePath(TemplateStack.GetCurrentTemplate(httpContext), httpContext, path)
+                );
             }
             catch (HttpException)
             {

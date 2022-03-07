@@ -36,8 +36,7 @@ public class SyntaxTreeGenerationBenchmark
         );
         MSN = RazorSourceDocument.ReadFrom(projectItem);
 
-        var directiveFeature = ProjectEngine
-            .EngineFeatures
+        var directiveFeature = ProjectEngine.EngineFeatures
             .OfType<IRazorDirectiveFeature>()
             .FirstOrDefault();
         Directives = directiveFeature?.Directives.ToArray() ?? Array.Empty<DirectiveDescriptor>();

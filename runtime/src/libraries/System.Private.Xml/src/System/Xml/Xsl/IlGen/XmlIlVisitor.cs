@@ -138,9 +138,7 @@ namespace System.Xml.Xsl.IlGen
                 // Get MethodInfo for method that computes the value of this global
                 methGlobal = XmlILAnnotation
                     .Write(iter)
-                    .CachedIteratorDescriptor!
-                    .Storage
-                    .GlobalLocation!;
+                    .CachedIteratorDescriptor!.Storage.GlobalLocation!;
                 isCached = !iter.XmlType!.IsSingleton;
 
                 // Notify the StaticDataManager of the new global value
@@ -1832,9 +1830,9 @@ namespace System.Xml.Xsl.IlGen
                     );
                 else
                     _helper.LoadInteger(
-                        _helper
-                            .StaticData
-                            .DeclarePrefixMappings(new QilNode[] { ndParsedTagName.Right })
+                        _helper.StaticData.DeclarePrefixMappings(
+                            new QilNode[] { ndParsedTagName.Right }
+                        )
                     );
 
                 // If QName prefix should be preserved, then don't create an XmlQualifiedName, which discards the prefix
@@ -2152,10 +2150,9 @@ namespace System.Xml.Xsl.IlGen
                 else
                 {
                     // FilterKindTest pattern, so Kind = Argument and Name = null
-                    kinds =
-                        (
-                            (XmlQueryType)patt.GetArgument(OptimizerPatternArgument.KindTestType)
-                        ).NodeKinds;
+                    kinds = (
+                        (XmlQueryType)patt.GetArgument(OptimizerPatternArgument.KindTestType)
+                    ).NodeKinds;
                     name = null;
                 }
 
@@ -2793,12 +2790,9 @@ namespace System.Xml.Xsl.IlGen
                 else if (pattStep.MatchesPattern(OptimizerPatternName.FilterContentKind))
                 {
                     // FilterKindTest pattern, so Kind = Argument and Name = null
-                    kinds =
-                        (
-                            (XmlQueryType)pattStep.GetArgument(
-                                OptimizerPatternArgument.KindTestType
-                            )
-                        ).NodeKinds;
+                    kinds = (
+                        (XmlQueryType)pattStep.GetArgument(OptimizerPatternArgument.KindTestType)
+                    ).NodeKinds;
                     name = null;
                 }
                 else
@@ -4322,9 +4316,10 @@ namespace System.Xml.Xsl.IlGen
                     _helper.LoadXsltLibrary();
                 else
                     _helper.CallGetEarlyBoundObject(
-                        _helper
-                            .StaticData
-                            .DeclareEarlyBound(ndName.NamespaceUri, extFunc.Method.DeclaringType!),
+                        _helper.StaticData.DeclareEarlyBound(
+                            ndName.NamespaceUri,
+                            extFunc.Method.DeclaringType!
+                        ),
                         extFunc.Method.DeclaringType!
                     );
             }

@@ -141,8 +141,7 @@ namespace System.Reflection.TypeLoading.Ecma
                 {
                     string moduleName = ((ModuleReferenceHandle)scope)
                         .GetModuleReference(module.Reader)
-                        .Name
-                        .GetString(module.Reader);
+                        .Name.GetString(module.Reader);
                     RoModule? targetModule = module.GetRoAssembly().GetRoModule(moduleName);
                     if (targetModule == null)
                         throw new BadImageFormatException(

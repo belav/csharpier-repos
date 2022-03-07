@@ -73,9 +73,8 @@ namespace Microsoft.CodeAnalysis.ValueTracking
                 }
                 else if (location.IsWrittenTo)
                 {
-                    var syntaxFacts = location
-                        .Document
-                        .GetRequiredLanguageService<ISyntaxFactsService>();
+                    var syntaxFacts =
+                        location.Document.GetRequiredLanguageService<ISyntaxFactsService>();
                     var node = location.Location.FindNode(CancellationToken.None);
 
                     // Assignments to a member using a "this." or "Me." result in the node being an
@@ -99,8 +98,7 @@ namespace Microsoft.CodeAnalysis.ValueTracking
                     }
                     else
                     {
-                        var semanticModel = await location
-                            .Document
+                        var semanticModel = await location.Document
                             .GetRequiredSemanticModelAsync(cancellationToken)
                             .ConfigureAwait(false);
                         var operation = semanticModel.GetOperation(node, cancellationToken);

@@ -65,11 +65,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
             Assert.Equal(
                 "global::ConditionalWeakTableTest<TKey!, TValue!>.CreateValueCallback!",
                 parameterType.ToDisplayString(
-                    SymbolDisplayFormat
-                        .FullyQualifiedFormat
-                        .WithMiscellaneousOptions(
-                            SymbolDisplayMiscellaneousOptions.IncludeNotNullableReferenceTypeModifier
-                        )
+                    SymbolDisplayFormat.FullyQualifiedFormat.WithMiscellaneousOptions(
+                        SymbolDisplayMiscellaneousOptions.IncludeNotNullableReferenceTypeModifier
+                    )
                 )
             );
 
@@ -97,9 +95,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
                 var solution = workspace.CurrentSolution;
 
                 var bodyProject = solution.Projects.Single(p => p.AssemblyName == "BodyProject");
-                var referenceProject = solution
-                    .Projects
-                    .Single(p => p.AssemblyName == "ReferenceProject");
+                var referenceProject = solution.Projects.Single(
+                    p => p.AssemblyName == "ReferenceProject"
+                );
 
                 var (bodyCompilation, referenceCompilation) = await GetCompilationsAsync(
                     bodyProject,

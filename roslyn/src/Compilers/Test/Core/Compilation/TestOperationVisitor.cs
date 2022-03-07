@@ -113,9 +113,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         public override void VisitVariableDeclaration(IVariableDeclarationOperation operation)
         {
             Assert.Equal(OperationKind.VariableDeclaration, operation.Kind);
-            IEnumerable<IOperation> children = operation
-                .IgnoredDimensions
-                .Concat(operation.Declarators);
+            IEnumerable<IOperation> children = operation.IgnoredDimensions.Concat(
+                operation.Declarators
+            );
             var initializer = operation.Initializer;
 
             if (initializer != null)
@@ -287,8 +287,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             VisitLoop(operation);
             Assert.Equal(LoopKind.ForTo, operation.LoopKind);
             _ = operation.IsChecked;
-            (ILocalSymbol loopObject, ForToLoopOperationUserDefinedInfo userDefinedInfo) =
-                ((ForToLoopOperation)operation).Info;
+            (ILocalSymbol loopObject, ForToLoopOperationUserDefinedInfo userDefinedInfo) = (
+                (ForToLoopOperation)operation
+            ).Info;
 
             if (userDefinedInfo != null)
             {
@@ -779,17 +780,16 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             switch (operation.Language)
             {
                 case LanguageNames.CSharp:
-                    CSharp.Conversion csharpConversion = CSharp
-                        .CSharpExtensions
-                        .GetConversion(operation);
+                    CSharp.Conversion csharpConversion = CSharp.CSharpExtensions.GetConversion(
+                        operation
+                    );
                     Assert.Throws<ArgumentException>(
                         () => VisualBasic.VisualBasicExtensions.GetConversion(operation)
                     );
                     break;
                 case LanguageNames.VisualBasic:
-                    VisualBasic.Conversion visualBasicConversion = VisualBasic
-                        .VisualBasicExtensions
-                        .GetConversion(operation);
+                    VisualBasic.Conversion visualBasicConversion =
+                        VisualBasic.VisualBasicExtensions.GetConversion(operation);
                     Assert.Throws<ArgumentException>(
                         () => CSharp.CSharpExtensions.GetConversion(operation)
                     );
@@ -1130,12 +1130,12 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                     "compoundAssignment",
                     () => CSharp.CSharpExtensions.GetOutConversion(operation)
                 );
-                var inConversionInternal = VisualBasic
-                    .VisualBasicExtensions
-                    .GetInConversion(operation);
-                var outConversionInternal = VisualBasic
-                    .VisualBasicExtensions
-                    .GetOutConversion(operation);
+                var inConversionInternal = VisualBasic.VisualBasicExtensions.GetInConversion(
+                    operation
+                );
+                var outConversionInternal = VisualBasic.VisualBasicExtensions.GetOutConversion(
+                    operation
+                );
             }
 
             var isLifted = operation.IsLifted;
@@ -1503,9 +1503,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 Assert.True(subpat is IPropertySubpatternOperation);
             }
 
-            IEnumerable<IOperation> children = operation
-                .DeconstructionSubpatterns
-                .Cast<IOperation>();
+            IEnumerable<IOperation> children =
+                operation.DeconstructionSubpatterns.Cast<IOperation>();
             children = children.Concat(operation.PropertySubpatterns);
 
             AssertEx.Equal(children, operation.Children);

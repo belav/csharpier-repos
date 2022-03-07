@@ -617,8 +617,7 @@ class Test
             );
             Assert.Null(useSiteDiagnostics);
             Assert.True(lookupResult.IsMultiViable);
-            var actual_lookupSymbols_as_string = lookupResult
-                .Symbols
+            var actual_lookupSymbols_as_string = lookupResult.Symbols
                 .Select(e => e.ToTestDisplayString())
                 .ToArray();
             lookupResult.Free();
@@ -2137,12 +2136,11 @@ class Program
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree);
 
-            var node =
-                tree.GetRoot()
-                    .DescendantNodes()
-                    .OfType<ConditionalAccessExpressionSyntax>()
-                    .Single()
-                    .Expression;
+            var node = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<ConditionalAccessExpressionSyntax>()
+                .Single()
+                .Expression;
 
             var symbolInfo = model.GetSymbolInfo(node);
             Assert.NotEqual(default, symbolInfo);
@@ -2177,12 +2175,11 @@ class Program
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree);
 
-            var node =
-                tree.GetRoot()
-                    .DescendantNodes()
-                    .OfType<ConditionalAccessExpressionSyntax>()
-                    .Single()
-                    .Expression;
+            var node = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<ConditionalAccessExpressionSyntax>()
+                .Single()
+                .Expression;
 
             var symbolInfo = model.GetSymbolInfo(node);
             Assert.NotEqual(default, symbolInfo);

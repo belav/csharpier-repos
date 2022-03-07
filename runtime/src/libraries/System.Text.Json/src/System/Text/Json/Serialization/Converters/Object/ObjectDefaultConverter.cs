@@ -320,8 +320,9 @@ namespace System.Text.Json.Serialization.Converters
                     onSerializing.OnSerializing();
                 }
 
-                List<KeyValuePair<string, JsonPropertyInfo?>> properties =
-                    jsonTypeInfo.PropertyCache!.List;
+                List<KeyValuePair<string, JsonPropertyInfo?>> properties = jsonTypeInfo
+                    .PropertyCache!
+                    .List;
                 for (int i = 0; i < properties.Count; i++)
                 {
                     JsonPropertyInfo jsonPropertyInfo = properties[i].Value!;
@@ -392,8 +393,9 @@ namespace System.Text.Json.Serialization.Converters
                     .List!;
                 while (state.Current.EnumeratorIndex < propertyList.Count)
                 {
-                    JsonPropertyInfo? jsonPropertyInfo =
-                        propertyList![state.Current.EnumeratorIndex].Value;
+                    JsonPropertyInfo? jsonPropertyInfo = propertyList![
+                        state.Current.EnumeratorIndex
+                    ].Value;
                     Debug.Assert(jsonPropertyInfo != null);
                     if (jsonPropertyInfo.ShouldSerialize)
                     {

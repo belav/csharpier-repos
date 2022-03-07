@@ -90,9 +90,10 @@ namespace System.Web.Mvc
             {
                 if (_modelMetadata == null && _model != null)
                 {
-                    _modelMetadata = ModelMetadataProviders
-                        .Current
-                        .GetMetadataForType(() => _model, _model.GetType());
+                    _modelMetadata = ModelMetadataProviders.Current.GetMetadataForType(
+                        () => _model,
+                        _model.GetType()
+                    );
                 }
                 return _modelMetadata;
             }

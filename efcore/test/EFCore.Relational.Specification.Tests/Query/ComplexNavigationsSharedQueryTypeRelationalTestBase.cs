@@ -238,8 +238,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Level1>()
                         .Include(
                             l1 =>
-                                l1.OneToOne_Optional_FK1
-                                    .OneToMany_Optional2
+                                l1.OneToOne_Optional_FK1.OneToMany_Optional2
                                     .Where(x => x.Name != "Foo")
                                     .OrderBy(x => x.Name)
                                     .Skip(1)
@@ -353,32 +352,31 @@ namespace Microsoft.EntityFrameworkCore.Query
             bool async
         )
         {
-            var message =
-                (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            AssertQuery(
-                                async,
-                                ss =>
-                                    ss.Set<Level1>()
-                                        .Include(
-                                            l1 =>
-                                                l1.OneToMany_Optional1
-                                                    .Where(x => x.Name != "Foo")
-                                                    .OrderBy(x => x.Id)
-                                                    .Take(3)
-                                        )
-                                        .Include(
-                                            l1 =>
-                                                l1.OneToMany_Optional1
-                                                    .Where(x => x.Name != "Bar")
-                                                    .OrderByDescending(x => x.Name)
-                                                    .Take(3)
-                                        )
-                                        .AsSplitQuery()
-                            )
-                    )
-                ).Message;
+            var message = (
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        AssertQuery(
+                            async,
+                            ss =>
+                                ss.Set<Level1>()
+                                    .Include(
+                                        l1 =>
+                                            l1.OneToMany_Optional1
+                                                .Where(x => x.Name != "Foo")
+                                                .OrderBy(x => x.Id)
+                                                .Take(3)
+                                    )
+                                    .Include(
+                                        l1 =>
+                                            l1.OneToMany_Optional1
+                                                .Where(x => x.Name != "Bar")
+                                                .OrderByDescending(x => x.Name)
+                                                .Take(3)
+                                    )
+                                    .AsSplitQuery()
+                        )
+                )
+            ).Message;
         }
 
         [ConditionalTheory]
@@ -387,26 +385,25 @@ namespace Microsoft.EntityFrameworkCore.Query
             bool async
         )
         {
-            var message =
-                (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            AssertQuery(
-                                async,
-                                ss =>
-                                    ss.Set<Level1>()
-                                        .Include(
-                                            l1 => l1.OneToMany_Optional1.Where(x => x.Name != "Foo")
-                                        )
-                                        .ThenInclude(l2 => l2.OneToMany_Optional2)
-                                        .Include(
-                                            l1 => l1.OneToMany_Optional1.Where(x => x.Name != "Bar")
-                                        )
-                                        .ThenInclude(l2 => l2.OneToOne_Required_FK2)
-                                        .AsSplitQuery()
-                            )
-                    )
-                ).Message;
+            var message = (
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        AssertQuery(
+                            async,
+                            ss =>
+                                ss.Set<Level1>()
+                                    .Include(
+                                        l1 => l1.OneToMany_Optional1.Where(x => x.Name != "Foo")
+                                    )
+                                    .ThenInclude(l2 => l2.OneToMany_Optional2)
+                                    .Include(
+                                        l1 => l1.OneToMany_Optional1.Where(x => x.Name != "Bar")
+                                    )
+                                    .ThenInclude(l2 => l2.OneToOne_Required_FK2)
+                                    .AsSplitQuery()
+                        )
+                )
+            ).Message;
         }
 
         [ConditionalTheory]
@@ -851,19 +848,18 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task Filtered_include_with_Distinct_throws_split(bool async)
         {
-            var message =
-                (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            AssertQuery(
-                                async,
-                                ss =>
-                                    ss.Set<Level1>()
-                                        .Include(l1 => l1.OneToMany_Optional1.Distinct())
-                                        .AsSplitQuery()
-                            )
-                    )
-                ).Message;
+            var message = (
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        AssertQuery(
+                            async,
+                            ss =>
+                                ss.Set<Level1>()
+                                    .Include(l1 => l1.OneToMany_Optional1.Distinct())
+                                    .AsSplitQuery()
+                        )
+                )
+            ).Message;
         }
 
         [ConditionalTheory]
@@ -872,22 +868,19 @@ namespace Microsoft.EntityFrameworkCore.Query
             bool async
         )
         {
-            var message =
-                (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            AssertQuery(
-                                async,
-                                ss =>
-                                    ss.Set<Level1>()
-                                        .Include(l1 => l1.OneToMany_Optional1)
-                                        .ThenInclude(
-                                            l2 => l2.AsQueryable().Where(xx => xx.Id != 42)
-                                        )
-                                        .AsSplitQuery()
-                            )
-                    )
-                ).Message;
+            var message = (
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        AssertQuery(
+                            async,
+                            ss =>
+                                ss.Set<Level1>()
+                                    .Include(l1 => l1.OneToMany_Optional1)
+                                    .ThenInclude(l2 => l2.AsQueryable().Where(xx => xx.Id != 42))
+                                    .AsSplitQuery()
+                        )
+                )
+            ).Message;
         }
 
         public override Task Complex_query_with_optional_navigations_and_client_side_evaluation(

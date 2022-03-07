@@ -63,8 +63,7 @@ namespace System.Web.WebPages.TestUtils
                 BindingFlags.Static | BindingFlags.NonPublic
             );
             var value = (
-                (FieldInfo)typeof(BuildManager)
-                    .Assembly
+                (FieldInfo)typeof(BuildManager).Assembly
                     .GetType("System.Web.Compilation.PreStartInitStage")
                     .GetMember("DuringPreStartInit")[0]
             ).GetValue(null);

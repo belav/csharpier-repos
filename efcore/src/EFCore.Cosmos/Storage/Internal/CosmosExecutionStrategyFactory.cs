@@ -31,8 +31,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             Dependencies = dependencies;
 
             _createExecutionStrategy =
-                dependencies
-                    .Options
+                dependencies.Options
                     .FindExtension<CosmosOptionsExtension>()
                     ?.ExecutionStrategyFactory ?? CreateDefaultStrategy;
         }

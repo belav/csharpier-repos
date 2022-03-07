@@ -1147,8 +1147,11 @@ public class Http2TimeoutTests : Http2TestBase
     [Fact]
     public async Task DATA_Received_SlowlyDueToConnectionFlowControl_DoesNotAbortConnection()
     {
-        var initialConnectionWindowSize =
-            _serviceContext.ServerOptions.Limits.Http2.InitialConnectionWindowSize;
+        var initialConnectionWindowSize = _serviceContext
+            .ServerOptions
+            .Limits
+            .Http2
+            .InitialConnectionWindowSize;
         var framesConnectionInWindow =
             initialConnectionWindowSize / Http2PeerSettings.DefaultMaxFrameSize;
 

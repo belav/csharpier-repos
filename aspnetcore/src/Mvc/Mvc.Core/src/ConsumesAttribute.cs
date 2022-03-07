@@ -190,15 +190,13 @@ public class ConsumesAttribute
         // unless there is another action without a consumes constraint.
         if (string.IsNullOrEmpty(requestContentType))
         {
-            var isActionWithoutConsumeConstraintPresent = context
-                .Candidates
-                .Any(
-                    candidate =>
-                        candidate.Constraints == null
-                        || !candidate
-                            .Constraints
-                            .Any(constraint => constraint is IConsumesActionConstraint)
-                );
+            var isActionWithoutConsumeConstraintPresent = context.Candidates.Any(
+                candidate =>
+                    candidate.Constraints == null
+                    || !candidate.Constraints.Any(
+                        constraint => constraint is IConsumesActionConstraint
+                    )
+            );
 
             return !isActionWithoutConsumeConstraintPresent;
         }
@@ -241,13 +239,10 @@ public class ConsumesAttribute
             if (
                 candidate.Constraints == null
                 || candidate.Constraints.Count == 0
-                || candidate
-                    .Constraints
-                    .Any(
-                        constraint =>
-                            constraint is IConsumesActionConstraint
-                            && constraint.Accept(tempContext)
-                    )
+                || candidate.Constraints.Any(
+                    constraint =>
+                        constraint is IConsumesActionConstraint && constraint.Accept(tempContext)
+                )
             )
             {
                 // There is someone later in the chain which can handle the request.
@@ -268,8 +263,7 @@ public class ConsumesAttribute
         // we take advantage of the fact that ConsumesAttribute is both an IActionFilter and an
         // IConsumeActionConstraint. Since FilterDescriptor collection is ordered (the last filter is the one
         // closest to the action), we apply this constraint only if there is no IConsumeActionConstraint after this.
-        return actionDescriptor
-                .FilterDescriptors
+        return actionDescriptor.FilterDescriptors
                 .Last(filter => filter.Filter is IConsumesActionConstraint)
                 .Filter == this;
     }

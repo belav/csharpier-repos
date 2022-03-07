@@ -16,8 +16,9 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
         [Fact]
         public void NonIdeAnalyzerAssemblyShouldBeLoadedInSeparateALC()
         {
-            var remoteAssemblyInCurrentAlc =
-                typeof(RemoteAnalyzerAssemblyLoader).GetTypeInfo().Assembly;
+            var remoteAssemblyInCurrentAlc = typeof(RemoteAnalyzerAssemblyLoader)
+                .GetTypeInfo()
+                .Assembly;
             var remoteAssemblyLocation = remoteAssemblyInCurrentAlc.Location;
 
             var loader = new RemoteAnalyzerAssemblyLoader(

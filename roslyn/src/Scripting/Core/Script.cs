@@ -297,8 +297,7 @@ namespace Microsoft.CodeAnalysis.Scripting
 
         // Apply recursive alias <host> to the host assembly reference, so that we hide its namespaces and global types behind it.
         internal static readonly MetadataReferenceProperties HostAssemblyReferenceProperties =
-            MetadataReferenceProperties
-                .Assembly
+            MetadataReferenceProperties.Assembly
                 .WithAliases(ImmutableArray.Create("<host>"))
                 .WithRecursiveAliases(true);
 

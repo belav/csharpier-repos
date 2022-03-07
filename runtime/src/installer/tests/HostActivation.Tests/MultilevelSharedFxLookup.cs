@@ -223,8 +223,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdErrContaining(Path.Combine(_regSelectedMessage, "9999.0.0"));
+                .And.HaveStdErrContaining(Path.Combine(_regSelectedMessage, "9999.0.0"));
 
             // Add a dummy version in the user dir
             SharedFramework.AddAvailableSharedFxVersions(
@@ -254,8 +253,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdErrContaining(Path.Combine(_regSelectedMessage, "9999.0.0"));
+                .And.HaveStdErrContaining(Path.Combine(_regSelectedMessage, "9999.0.0"));
 
             // Add a dummy version in the cwd dir
             SharedFramework.AddAvailableSharedFxVersions(
@@ -285,8 +283,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdErrContaining(Path.Combine(_regSelectedMessage, "9999.0.0"));
+                .And.HaveStdErrContaining(Path.Combine(_regSelectedMessage, "9999.0.0"));
 
             // Add version in the exe dir
             SharedFramework.AddAvailableSharedFxVersions(
@@ -316,8 +313,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdErrContaining(Path.Combine(_exeSelectedMessage, "9999.0.0"));
+                .And.HaveStdErrContaining(Path.Combine(_exeSelectedMessage, "9999.0.0"));
 
             // Verify we have the expected runtime versions
             dotnet
@@ -335,8 +331,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining("Microsoft.NETCore.App 9999.0.0");
+                .And.HaveStdOutContaining("Microsoft.NETCore.App 9999.0.0");
         }
 
         [Fact]
@@ -387,8 +382,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdErrContaining(Path.Combine(_exeSelectedMessage, "9999.0.1"));
+                .And.HaveStdErrContaining(Path.Combine(_exeSelectedMessage, "9999.0.1"));
 
             // Version: 9999.0.0-dummy1 (through --fx-version arg)
             // Cwd: empty
@@ -411,8 +405,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute(fExpectedToFail: true)
                 .Should()
                 .Fail()
-                .And
-                .HaveStdErrContaining(
+                .And.HaveStdErrContaining(
                     "It was not possible to find any compatible framework version"
                 );
 
@@ -437,8 +430,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdErrContaining(Path.Combine(_regSelectedMessage, "9999.0.2"));
+                .And.HaveStdErrContaining(Path.Combine(_regSelectedMessage, "9999.0.2"));
 
             // Version: 9999.0.0 (through --fx-version arg)
             // Cwd: empty
@@ -461,8 +453,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdErrContaining(Path.Combine(_exeSelectedMessage, "9999.0.0"));
+                .And.HaveStdErrContaining(Path.Combine(_exeSelectedMessage, "9999.0.0"));
 
             // Verify we have the expected runtime versions
             dotnet
@@ -480,16 +471,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining("Microsoft.NETCore.App 9999.0.0")
-                .And
-                .HaveStdOutContaining("Microsoft.NETCore.App 9999.0.0-dummy2")
-                .And
-                .HaveStdOutContaining("Microsoft.NETCore.App 9999.0.2")
-                .And
-                .HaveStdOutContaining("Microsoft.NETCore.App 9999.0.3")
-                .And
-                .HaveStdOutContaining("Microsoft.NETCore.App 9999.0.0-dummy3");
+                .And.HaveStdOutContaining("Microsoft.NETCore.App 9999.0.0")
+                .And.HaveStdOutContaining("Microsoft.NETCore.App 9999.0.0-dummy2")
+                .And.HaveStdOutContaining("Microsoft.NETCore.App 9999.0.2")
+                .And.HaveStdOutContaining("Microsoft.NETCore.App 9999.0.3")
+                .And.HaveStdOutContaining("Microsoft.NETCore.App 9999.0.0-dummy3");
         }
     }
 }

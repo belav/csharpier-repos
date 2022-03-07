@@ -70,8 +70,7 @@ namespace Roslyn.Test.Utilities.Desktop
         private bool _containsNetModules;
 
         internal IEnumerable<ModuleData> ModuleDatas =>
-            _fullNameToAssemblyDataMap
-                .Values
+            _fullNameToAssemblyDataMap.Values
                 .Where(x => x.Kind == Kind.ModuleData)
                 .Select(x => x.ModuleData);
 
@@ -267,9 +266,10 @@ namespace Roslyn.Test.Utilities.Desktop
             {
                 fullMatch =
                     _preloadedSet.Contains(id.SimpleName)
-                    || StringComparer
-                        .OrdinalIgnoreCase
-                        .Equals(id.FullName, assemblyData.Id.FullName);
+                    || StringComparer.OrdinalIgnoreCase.Equals(
+                        id.FullName,
+                        assemblyData.Id.FullName
+                    );
                 return true;
             }
 

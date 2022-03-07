@@ -130,10 +130,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 typeof(Splot),
                 ConfigurationSource.Convention
             );
-            var idProperty =
-                entityTypeBuilder
-                    .Property(typeof(int), "Id", ConfigurationSource.Convention)
-                    .Metadata;
+            var idProperty = entityTypeBuilder
+                .Property(typeof(int), "Id", ConfigurationSource.Convention)
+                .Metadata;
             var keyBuilder = entityTypeBuilder.HasKey(
                 new[] { idProperty.Name },
                 ConfigurationSource.Convention

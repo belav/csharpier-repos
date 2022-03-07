@@ -234,8 +234,7 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 GetPreambleParts(constructor, semanticModel, position),
                 GetSeparatorParts(),
                 GetPostambleParts(),
-                constructor
-                    .Parameters
+                constructor.Parameters
                     .Select(
                         p =>
                             Convert(

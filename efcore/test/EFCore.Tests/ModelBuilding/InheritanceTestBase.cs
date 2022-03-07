@@ -120,11 +120,10 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 Assert.Empty(
                     model.FindEntityType(typeof(SelfRefManyToOneDerived)).GetDeclaredProperties()
                 );
-                var fk =
-                    model
-                        .FindEntityType(typeof(SelfRefManyToOne))
-                        .FindNavigation(nameof(SelfRefManyToOne.SelfRef1))
-                        .ForeignKey;
+                var fk = model
+                    .FindEntityType(typeof(SelfRefManyToOne))
+                    .FindNavigation(nameof(SelfRefManyToOne.SelfRef1))
+                    .ForeignKey;
                 Assert.Equal(nameof(SelfRefManyToOne.SelfRef2), fk.PrincipalToDependent.Name);
                 Assert.Equal(nameof(SelfRefManyToOne.SelfRef1Id), fk.Properties.Single().Name);
                 Assert.True(fk.IsRequired);
@@ -239,8 +238,10 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 Assert.Equal(nameof(Order.Customer), fk.DependentToPrincipal.Name);
                 Assert.Null(fk.PrincipalToDependent);
                 Assert.Same(principalEntityBuilder.Metadata, fk.PrincipalEntityType);
-                var derivedFk =
-                    derivedPrincipalEntityBuilder.Metadata.GetNavigations().Single().ForeignKey;
+                var derivedFk = derivedPrincipalEntityBuilder.Metadata
+                    .GetNavigations()
+                    .Single()
+                    .ForeignKey;
                 Assert.Null(derivedFk.DependentToPrincipal);
                 Assert.Equal(
                     nameof(SpecialCustomer.SpecialOrders),
@@ -257,14 +258,14 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 Assert.Equal(nameof(Order.Customer), fk.DependentToPrincipal.Name);
                 Assert.Null(fk.PrincipalToDependent);
                 Assert.Same(principalEntityBuilder.Metadata, fk.PrincipalEntityType);
-                derivedFk =
-                    derivedPrincipalEntityBuilder.Metadata.GetNavigations().Single().ForeignKey;
-                var anotherDerivedFk =
-                    derivedDependentEntityBuilder
-                        .Metadata
-                        .GetDeclaredNavigations()
-                        .Single()
-                        .ForeignKey;
+                derivedFk = derivedPrincipalEntityBuilder.Metadata
+                    .GetNavigations()
+                    .Single()
+                    .ForeignKey;
+                var anotherDerivedFk = derivedDependentEntityBuilder.Metadata
+                    .GetDeclaredNavigations()
+                    .Single()
+                    .ForeignKey;
                 Assert.NotSame(derivedFk, anotherDerivedFk);
                 Assert.Null(derivedFk.DependentToPrincipal);
                 Assert.Equal(
@@ -313,8 +314,10 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 Assert.Equal(nameof(Order.Customer), fk.DependentToPrincipal.Name);
                 Assert.Null(fk.PrincipalToDependent);
                 Assert.Same(principalEntityBuilder.Metadata, fk.PrincipalEntityType);
-                var derivedFk =
-                    derivedPrincipalEntityBuilder.Metadata.GetNavigations().Single().ForeignKey;
+                var derivedFk = derivedPrincipalEntityBuilder.Metadata
+                    .GetNavigations()
+                    .Single()
+                    .ForeignKey;
                 Assert.Null(derivedFk.DependentToPrincipal);
                 Assert.Equal(
                     nameof(SpecialCustomer.SpecialOrders),
@@ -385,8 +388,10 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         .GetReferencingForeignKeys()
                         .Where(fk => fk.DeclaringEntityType == derivedDependentEntityType)
                 );
-                var otherDerivedFk =
-                    otherDerivedDependentEntityType.GetDeclaredNavigations().Single().ForeignKey;
+                var otherDerivedFk = otherDerivedDependentEntityType
+                    .GetDeclaredNavigations()
+                    .Single()
+                    .ForeignKey;
                 Assert.Equal(nameof(Order.Customer), otherDerivedFk.DependentToPrincipal.Name);
                 Assert.Null(otherDerivedFk.PrincipalToDependent);
                 Assert.Equal(nameof(Order.CustomerId), otherDerivedFk.Properties.Single().Name);
@@ -419,24 +424,20 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 Assert.Empty(dependentEntityBuilder.Metadata.GetForeignKeys());
                 Assert.Empty(dependentEntityBuilder.Metadata.GetNavigations());
-                var newFk =
-                    derivedDependentEntityBuilder
-                        .Metadata
-                        .GetDeclaredNavigations()
-                        .Single()
-                        .ForeignKey;
+                var newFk = derivedDependentEntityBuilder.Metadata
+                    .GetDeclaredNavigations()
+                    .Single()
+                    .ForeignKey;
                 Assert.Equal(nameof(Order.Customer), newFk.DependentToPrincipal.Name);
                 Assert.Equal(
                     nameof(SpecialCustomer.SpecialOrders),
                     newFk.PrincipalToDependent.Name
                 );
                 Assert.Same(derivedPrincipalEntityBuilder.Metadata, newFk.PrincipalEntityType);
-                var otherDerivedFk =
-                    otherDerivedDependentEntityBuilder
-                        .Metadata
-                        .GetDeclaredNavigations()
-                        .Single()
-                        .ForeignKey;
+                var otherDerivedFk = otherDerivedDependentEntityBuilder.Metadata
+                    .GetDeclaredNavigations()
+                    .Single()
+                    .ForeignKey;
                 Assert.Equal(nameof(Order.Customer), otherDerivedFk.DependentToPrincipal.Name);
                 Assert.Null(otherDerivedFk.PrincipalToDependent);
                 Assert.Equal(nameof(Order.CustomerId), otherDerivedFk.Properties.Single().Name);
@@ -464,12 +465,10 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 Assert.Empty(dependentEntityBuilder.Metadata.GetForeignKeys());
                 Assert.Empty(dependentEntityBuilder.Metadata.GetNavigations());
-                var newFk =
-                    derivedDependentEntityBuilder
-                        .Metadata
-                        .GetDeclaredNavigations()
-                        .Single()
-                        .ForeignKey;
+                var newFk = derivedDependentEntityBuilder.Metadata
+                    .GetDeclaredNavigations()
+                    .Single()
+                    .ForeignKey;
                 Assert.Equal(nameof(Order.Customer), newFk.DependentToPrincipal.Name);
                 Assert.Equal(nameof(Customer.SomeOrders), newFk.PrincipalToDependent.Name);
                 Assert.Same(principalEntityBuilder.Metadata, newFk.PrincipalEntityType);
@@ -496,21 +495,17 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     .WithOne(e => e.SpecialCustomer);
 
                 Assert.Empty(principalEntityBuilder.Metadata.GetNavigations());
-                var newFk =
-                    derivedDependentEntityBuilder
-                        .Metadata
-                        .GetDeclaredNavigations()
-                        .Single()
-                        .ForeignKey;
+                var newFk = derivedDependentEntityBuilder.Metadata
+                    .GetDeclaredNavigations()
+                    .Single()
+                    .ForeignKey;
                 Assert.Equal(nameof(SpecialOrder.SpecialCustomer), newFk.DependentToPrincipal.Name);
                 Assert.Equal(nameof(SpecialCustomer.Orders), newFk.PrincipalToDependent.Name);
                 Assert.Same(derivedPrincipalEntityBuilder.Metadata, newFk.PrincipalEntityType);
-                var otherDerivedFk =
-                    otherDerivedPrincipalEntityBuilder
-                        .Metadata
-                        .GetDeclaredNavigations()
-                        .Single()
-                        .ForeignKey;
+                var otherDerivedFk = otherDerivedPrincipalEntityBuilder.Metadata
+                    .GetDeclaredNavigations()
+                    .Single()
+                    .ForeignKey;
                 Assert.Null(otherDerivedFk.DependentToPrincipal);
                 Assert.Equal(
                     nameof(OtherCustomer.Orders),
@@ -539,12 +534,10 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     .HasPrincipalKey<OrderCombination>(e => e.Id);
 
                 Assert.Null(dependentEntityBuilder.Metadata.GetNavigations().Single().Inverse);
-                var newFk =
-                    derivedDependentEntityBuilder
-                        .Metadata
-                        .GetDeclaredNavigations()
-                        .Single()
-                        .ForeignKey;
+                var newFk = derivedDependentEntityBuilder.Metadata
+                    .GetDeclaredNavigations()
+                    .Single()
+                    .ForeignKey;
                 Assert.Equal(
                     nameof(SpecialOrder.SpecialOrderCombination),
                     newFk.DependentToPrincipal.Name
@@ -574,8 +567,10 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     .HasForeignKey<SpecialOrder>(e => e.SpecialCustomerId);
 
                 Assert.Null(dependentEntityBuilder.Metadata.GetNavigations().Single().Inverse);
-                var newFk =
-                    principalEntityBuilder.Metadata.GetDeclaredNavigations().Single().ForeignKey;
+                var newFk = principalEntityBuilder.Metadata
+                    .GetDeclaredNavigations()
+                    .Single()
+                    .ForeignKey;
                 Assert.Null(newFk.DependentToPrincipal);
                 Assert.Equal(nameof(OrderCombination.Order), newFk.PrincipalToDependent.Name);
                 Assert.Same(derivedDependentEntityBuilder.Metadata, newFk.DeclaringEntityType);
@@ -605,20 +600,16 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 Assert.Empty(dependentEntityBuilder.Metadata.GetForeignKeys());
                 Assert.Empty(dependentEntityBuilder.Metadata.GetNavigations());
-                var newFk =
-                    derivedDependentEntityBuilder
-                        .Metadata
-                        .GetDeclaredNavigations()
-                        .Single()
-                        .ForeignKey;
+                var newFk = derivedDependentEntityBuilder.Metadata
+                    .GetDeclaredNavigations()
+                    .Single()
+                    .ForeignKey;
                 Assert.Equal(nameof(Order.Customer), newFk.DependentToPrincipal.Name);
                 Assert.Null(newFk.PrincipalToDependent);
-                var otherDerivedFk =
-                    otherDerivedDependentEntityBuilder
-                        .Metadata
-                        .GetDeclaredNavigations()
-                        .Single()
-                        .ForeignKey;
+                var otherDerivedFk = otherDerivedDependentEntityBuilder.Metadata
+                    .GetDeclaredNavigations()
+                    .Single()
+                    .ForeignKey;
                 Assert.Equal(nameof(Order.Customer), otherDerivedFk.DependentToPrincipal.Name);
                 Assert.Null(otherDerivedFk.PrincipalToDependent);
                 Assert.Equal(nameof(Order.CustomerId), otherDerivedFk.Properties.Single().Name);
@@ -690,12 +681,10 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     derivedDependentEntityBuilder.Metadata.FindProperty("SpecialCustomerId")
                 );
                 Assert.Empty(principalEntityBuilder.Metadata.GetNavigations());
-                var newFk =
-                    derivedDependentEntityBuilder
-                        .Metadata
-                        .GetDeclaredNavigations()
-                        .Single()
-                        .ForeignKey;
+                var newFk = derivedDependentEntityBuilder.Metadata
+                    .GetDeclaredNavigations()
+                    .Single()
+                    .ForeignKey;
                 Assert.Equal(nameof(SpecialOrder.SpecialCustomer), newFk.DependentToPrincipal.Name);
                 Assert.Equal(nameof(SpecialCustomer.Orders), newFk.PrincipalToDependent.Name);
                 Assert.Same(derivedPrincipalEntityBuilder.Metadata, newFk.PrincipalEntityType);
@@ -741,8 +730,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 Assert.False(derivedDependentEntityType.GetDeclaredForeignKeys().Single().IsUnique);
                 Assert.Empty(derivedDependentEntityType.GetDeclaredIndexes());
 
-                var backOrderClone = modelBuilder
-                    .Model
+                var backOrderClone = modelBuilder.Model
                     .Clone()
                     .FindEntityType(derivedDependentEntityType.Name);
                 var initialProperties = backOrderClone.GetProperties().ToList();
@@ -784,10 +772,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 modelBuilder.FinalizeModel();
 
-                var (Level, _, Message, _, _) = modelBuilder
-                    .ModelLoggerFactory
-                    .Log
-                    .Single(e => e.Id == CoreEventId.RedundantIndexRemoved);
+                var (Level, _, Message, _, _) = modelBuilder.ModelLoggerFactory.Log.Single(
+                    e => e.Id == CoreEventId.RedundantIndexRemoved
+                );
                 Assert.Equal(LogLevel.Debug, Level);
                 Assert.Equal(
                     CoreResources
@@ -843,8 +830,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 Assert.False(derivedDependentEntityType.GetDeclaredForeignKeys().Single().IsUnique);
                 Assert.Empty(derivedDependentEntityType.GetDeclaredIndexes());
 
-                var backOrderClone = modelBuilder
-                    .Model
+                var backOrderClone = modelBuilder.Model
                     .Clone()
                     .FindEntityType(derivedDependentEntityType.Name);
                 var initialProperties = backOrderClone.GetProperties().ToList();
@@ -900,8 +886,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 modelBuilder.Entity<OrderDetails>();
                 modelBuilder.Entity<SpecialOrder>();
 
-                var fkProperty = modelBuilder
-                    .Model
+                var fkProperty = modelBuilder.Model
                     .FindEntityType(typeof(OrderDetails))
                     .FindProperty(OrderDetails.OrderIdProperty);
                 Assert.Equal(ValueGenerated.Never, fkProperty.ValueGenerated);
@@ -950,8 +935,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 modelBuilder.Ignore<AnotherBookLabel>();
 
                 Assert.Empty(
-                    modelBuilder
-                        .Model
+                    modelBuilder.Model
                         .FindEntityType(typeof(BookLabel).FullName)
                         .GetDirectlyDerivedTypes()
                 );
@@ -1030,11 +1014,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     .WithOne(e => (SpecialBookLabel)e.BookLabel)
                     .HasForeignKey<ExtraSpecialBookLabel>();
 
-                var fk =
-                    bookLabelEntityBuilder
-                        .Metadata
-                        .FindNavigation(nameof(BookLabel.SpecialBookLabel))
-                        .ForeignKey;
+                var fk = bookLabelEntityBuilder.Metadata
+                    .FindNavigation(nameof(BookLabel.SpecialBookLabel))
+                    .ForeignKey;
                 Assert.Equal(
                     new[] { fk },
                     extraSpecialBookLabelEntityBuilder.Metadata.GetForeignKeys()
@@ -1103,8 +1085,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     ConfigurationSource.DataAnnotation,
                     baseEntityType
                         .FindNavigation(nameof(BaseTypeWithKeyAnnotation.Navigation))
-                        .ForeignKey
-                        .GetConfigurationSource()
+                        .ForeignKey.GetConfigurationSource()
                 );
                 Assert.Equal(
                     ConfigurationSource.Convention,
@@ -1137,15 +1118,13 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     ConfigurationSource.DataAnnotation,
                     baseEntityType
                         .FindNavigation(nameof(BaseTypeWithKeyAnnotation.Navigation))
-                        .ForeignKey
-                        .GetConfigurationSource()
+                        .ForeignKey.GetConfigurationSource()
                 );
                 Assert.Equal(
                     ConfigurationSource.Explicit,
                     derivedEntityType
                         .FindNavigation(nameof(DerivedTypeWithKeyAnnotation.Navigation))
-                        .ForeignKey
-                        .GetConfigurationSource()
+                        .ForeignKey.GetConfigurationSource()
                 );
                 Assert.Equal(
                     ConfigurationSource.Explicit,

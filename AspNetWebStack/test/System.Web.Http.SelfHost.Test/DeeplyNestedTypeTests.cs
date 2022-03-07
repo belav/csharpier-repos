@@ -31,13 +31,11 @@ namespace System.Web.Http.SelfHost
 
             HttpSelfHostConfiguration config = new HttpSelfHostConfiguration(baseAddress);
             config.HostNameComparisonMode = HostNameComparisonMode.Exact;
-            config
-                .Routes
-                .MapHttpRoute(
-                    "Default",
-                    "{controller}/{action}",
-                    new { controller = "DeepNestedType" }
-                );
+            config.Routes.MapHttpRoute(
+                "Default",
+                "{controller}/{action}",
+                new { controller = "DeepNestedType" }
+            );
 
             server = new HttpSelfHostServer(config);
 

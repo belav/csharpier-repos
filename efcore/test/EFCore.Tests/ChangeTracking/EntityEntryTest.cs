@@ -953,8 +953,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 
             var modified = context
                 .Entry(entity)
-                .Properties
-                .Where(e => e.IsModified)
+                .Properties.Where(e => e.IsModified)
                 .Select(e => e.Metadata.Name)
                 .ToList();
 
@@ -967,8 +966,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 
             modified = context
                 .Entry(entity)
-                .Properties
-                .Where(e => e.IsModified)
+                .Properties.Where(e => e.IsModified)
                 .Select(e => e.Metadata.Name)
                 .ToList();
 

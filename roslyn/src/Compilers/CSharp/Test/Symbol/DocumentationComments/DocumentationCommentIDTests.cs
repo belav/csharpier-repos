@@ -160,12 +160,11 @@ class C
             var comp = CreateCompilation(source);
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree);
-            var syntax =
-                tree.GetCompilationUnitRoot()
-                    .DescendantNodes()
-                    .OfType<GotoStatementSyntax>()
-                    .Single()
-                    .Expression;
+            var syntax = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<GotoStatementSyntax>()
+                .Single()
+                .Expression;
             var symbol = model.GetSymbolInfo(syntax).Symbol;
             Assert.Equal(SymbolKind.Label, symbol.Kind);
             Assert.Null(symbol.GetDocumentationCommentId());
@@ -292,8 +291,7 @@ class C
             var symbol = comp.GlobalNamespace
                 .GetMember<NamedTypeSymbol>("C")
                 .GetMember<MethodSymbol>("M")
-                .Parameters
-                .Single();
+                .Parameters.Single();
             Assert.Equal(SymbolKind.Parameter, symbol.Kind);
             Assert.Null(symbol.GetDocumentationCommentId());
         }

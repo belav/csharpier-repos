@@ -22,18 +22,15 @@ namespace System.Web.Razor.Generator
                 && !String.IsNullOrEmpty(context.Host.GeneratedClassContext.LayoutPropertyName)
             )
             {
-                context
-                    .TargetMethod
-                    .Statements
-                    .Add(
-                        new CodeAssignStatement(
-                            new CodePropertyReferenceExpression(
-                                null,
-                                context.Host.GeneratedClassContext.LayoutPropertyName
-                            ),
-                            new CodePrimitiveExpression(LayoutPath)
-                        )
-                    );
+                context.TargetMethod.Statements.Add(
+                    new CodeAssignStatement(
+                        new CodePropertyReferenceExpression(
+                            null,
+                            context.Host.GeneratedClassContext.LayoutPropertyName
+                        ),
+                        new CodePrimitiveExpression(LayoutPath)
+                    )
+                );
             }
         }
 

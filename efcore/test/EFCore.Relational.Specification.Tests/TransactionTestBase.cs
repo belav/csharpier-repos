@@ -964,9 +964,9 @@ namespace Microsoft.EntityFrameworkCore
                     if (DirtyReadsOccur)
                     {
                         using (
-                            await innerContext
-                                .Database
-                                .BeginTransactionAsync(IsolationLevel.ReadUncommitted)
+                            await innerContext.Database.BeginTransactionAsync(
+                                IsolationLevel.ReadUncommitted
+                            )
                         )
                         {
                             Assert.Equal(
@@ -979,9 +979,9 @@ namespace Microsoft.EntityFrameworkCore
                     if (SnapshotSupported)
                     {
                         using (
-                            await innerContext
-                                .Database
-                                .BeginTransactionAsync(IsolationLevel.Snapshot)
+                            await innerContext.Database.BeginTransactionAsync(
+                                IsolationLevel.Snapshot
+                            )
                         )
                         {
                             Assert.Equal(
@@ -1190,13 +1190,11 @@ namespace Microsoft.EntityFrameworkCore
 
             var ex = Assert.Throws<InvalidOperationException>(
                 () =>
-                    context
-                        .Database
-                        .BeginTransaction(
-                            DirtyReadsOccur
-                              ? IsolationLevel.ReadUncommitted
-                              : IsolationLevel.Unspecified
-                        )
+                    context.Database.BeginTransaction(
+                        DirtyReadsOccur
+                          ? IsolationLevel.ReadUncommitted
+                          : IsolationLevel.Unspecified
+                    )
             );
             Assert.Equal(RelationalStrings.ConflictingEnlistedTransaction, ex.Message);
             context.Database.CloseConnection();

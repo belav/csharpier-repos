@@ -162,8 +162,7 @@ namespace JitBench
         {
             IEnumerable<Type> benchmarkTypes = typeof(Program)
                 .GetTypeInfo()
-                .Assembly
-                .GetTypes()
+                .Assembly.GetTypes()
                 .Where(t => typeof(Benchmark).IsAssignableFrom(t));
             foreach (Type bt in benchmarkTypes)
             {

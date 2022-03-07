@@ -40,9 +40,10 @@ internal class KeyTagHelperDescriptorProvider : ITagHelperDescriptorProvider
         var targetAssembly = context.Items.GetTargetAssembly();
         if (
             targetAssembly is not null
-            && !SymbolEqualityComparer
-                .Default
-                .Equals(targetAssembly, renderTreeBuilderType.ContainingAssembly)
+            && !SymbolEqualityComparer.Default.Equals(
+                targetAssembly,
+                renderTreeBuilderType.ContainingAssembly
+            )
         )
         {
             return;

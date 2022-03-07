@@ -20,12 +20,11 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Throws_with_new_when_no_EF_services_use_Database()
         {
-            var options =
-                new DbContextOptionsBuilder<ConstructorTestContext1A>()
-                    .UseInternalServiceProvider(
-                        new ServiceCollection().BuildServiceProvider(validateScopes: true)
-                    )
-                    .Options;
+            var options = new DbContextOptionsBuilder<ConstructorTestContext1A>()
+                .UseInternalServiceProvider(
+                    new ServiceCollection().BuildServiceProvider(validateScopes: true)
+                )
+                .Options;
 
             Assert.Equal(
                 CoreStrings.NoEfServices,
@@ -62,10 +61,9 @@ namespace Microsoft.EntityFrameworkCore
             new EntityFrameworkServicesBuilder(serviceCollection).TryAddCoreServices();
             var serviceProvider = serviceCollection.BuildServiceProvider(validateScopes: true);
 
-            var options =
-                new DbContextOptionsBuilder<ConstructorTestContext1A>()
-                    .UseInternalServiceProvider(serviceProvider)
-                    .Options;
+            var options = new DbContextOptionsBuilder<ConstructorTestContext1A>()
+                .UseInternalServiceProvider(serviceProvider)
+                .Options;
 
             using var context = new ConstructorTestContext1A(options);
             Assert.Equal(
@@ -121,9 +119,8 @@ namespace Microsoft.EntityFrameworkCore
             using var serviceScope = appServiceProvider
                 .GetRequiredService<IServiceScopeFactory>()
                 .CreateScope();
-            var context = serviceScope
-                .ServiceProvider
-                .GetService<ConstructorTestContextNoConfiguration>();
+            var context =
+                serviceScope.ServiceProvider.GetService<ConstructorTestContextNoConfiguration>();
 
             Assert.Equal(
                 CoreStrings.NoProviderConfigured,

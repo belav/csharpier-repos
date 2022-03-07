@@ -29,9 +29,10 @@ namespace System.Text.Json
             @"
 ";
 
-        private static readonly bool s_replaceNewlines = !StringComparer
-            .Ordinal
-            .Equals(CompiledNewline, Environment.NewLine);
+        private static readonly bool s_replaceNewlines = !StringComparer.Ordinal.Equals(
+            CompiledNewline,
+            Environment.NewLine
+        );
 
         public static string NewtonsoftReturnStringHelper(TextReader reader)
         {
@@ -778,15 +779,12 @@ namespace System.Text.Json
             bool skipSpecialRules = false
         )
         {
-            string value = Encoding
-                .UTF8
-                .GetString(
-                    buffer
-                        .WrittenSpan
+            string value = Encoding.UTF8.GetString(
+                buffer.WrittenSpan
 #if NETFRAMEWORK
-                        .ToArray()
+                .ToArray()
 #endif
-                );
+            );
 
             AssertContentsAgainstJsonNet(expectedValue, value, skipSpecialRules);
         }
@@ -808,15 +806,12 @@ namespace System.Text.Json
             bool skipSpecialRules = false
         )
         {
-            string value = Encoding
-                .UTF8
-                .GetString(
-                    buffer
-                        .WrittenSpan
+            string value = Encoding.UTF8.GetString(
+                buffer.WrittenSpan
 #if NETFRAMEWORK
-                        .ToArray()
+                .ToArray()
 #endif
-                );
+            );
 
             AssertContentsNotEqualAgainstJsonNet(expectedValue, value, skipSpecialRules);
         }

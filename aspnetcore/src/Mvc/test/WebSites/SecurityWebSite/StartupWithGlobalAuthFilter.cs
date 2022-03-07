@@ -43,9 +43,10 @@ public class StartupWithGlobalAuthFilter
                 options =>
                 {
                     options.Conventions.AllowAnonymousToPage("/AllowAnonymousPageViaConvention");
-                    options
-                        .Conventions
-                        .AuthorizePage("/AuthorizePageViaConvention", "RequireClaimB");
+                    options.Conventions.AuthorizePage(
+                        "/AuthorizePageViaConvention",
+                        "RequireClaimB"
+                    );
                 }
             );
     }

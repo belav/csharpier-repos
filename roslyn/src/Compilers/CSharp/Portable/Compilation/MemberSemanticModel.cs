@@ -593,13 +593,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
-            return binder
-                .Conversions
-                .ClassifyConversionFromExpression(
-                    boundExpression,
-                    csdestination,
-                    ref discardedUseSiteInfo
-                );
+            return binder.Conversions.ClassifyConversionFromExpression(
+                boundExpression,
+                csdestination,
+                ref discardedUseSiteInfo
+            );
         }
 
         internal override Conversion ClassifyConversionForCast(
@@ -626,14 +624,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
-            return binder
-                .Conversions
-                .ClassifyConversionFromExpression(
-                    boundExpression,
-                    destination,
-                    ref discardedUseSiteInfo,
-                    forCast: true
-                );
+            return binder.Conversions.ClassifyConversionFromExpression(
+                boundExpression,
+                destination,
+                ref discardedUseSiteInfo,
+                forCast: true
+            );
         }
 
         /// <summary>
@@ -1192,10 +1188,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             return new AwaitExpressionInfo(
-                getAwaiter: (IMethodSymbol)awaitableInfo
-                    .GetAwaiter
-                    ?.ExpressionSymbol
-                    .GetPublicSymbol(),
+                getAwaiter: (IMethodSymbol)awaitableInfo.GetAwaiter?.ExpressionSymbol.GetPublicSymbol(),
                 isCompleted: awaitableInfo.IsCompleted.GetPublicSymbol(),
                 getResult: awaitableInfo.GetResult.GetPublicSymbol(),
                 isDynamic: awaitableInfo.IsDynamic

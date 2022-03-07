@@ -29,8 +29,9 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         ) : base(dependencies, queryCompilationContext)
         {
             _contextType = queryCompilationContext.ContextType;
-            _threadSafetyChecksEnabled =
-                dependencies.CoreSingletonOptions.AreThreadSafetyChecksEnabled;
+            _threadSafetyChecksEnabled = dependencies
+                .CoreSingletonOptions
+                .AreThreadSafetyChecksEnabled;
         }
 
         /// <summary>

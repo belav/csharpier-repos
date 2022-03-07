@@ -28,9 +28,11 @@ namespace System.Data.Common
             var hr = GetErrorInfo(dwReserved, &pErrorInfo);
             if (hr == OleDbHResult.S_OK)
             {
-                ppIErrorInfo = (UnsafeNativeMethods.IErrorInfo)OleDbComWrappers
-                    .Instance
-                    .GetOrCreateObjectForComInstance(pErrorInfo, CreateObjectFlags.UniqueInstance);
+                ppIErrorInfo =
+                    (UnsafeNativeMethods.IErrorInfo)OleDbComWrappers.Instance.GetOrCreateObjectForComInstance(
+                        pErrorInfo,
+                        CreateObjectFlags.UniqueInstance
+                    );
             }
 
             return hr;

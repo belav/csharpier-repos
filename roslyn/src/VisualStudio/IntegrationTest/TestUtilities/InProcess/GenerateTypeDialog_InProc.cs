@@ -121,8 +121,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                         Contract.ThrowIfFalse(
                             await dialog
                                 .GetTestAccessor()
-                                .AccessListComboBox
-                                .SimulateSelectItemAsync(JoinableTaskFactory, accessibility)
+                                .AccessListComboBox.SimulateSelectItemAsync(
+                                    JoinableTaskFactory,
+                                    accessibility
+                                )
                         );
                     }
                 );
@@ -147,8 +149,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                         Contract.ThrowIfFalse(
                             await dialog
                                 .GetTestAccessor()
-                                .KindListComboBox
-                                .SimulateSelectItemAsync(JoinableTaskFactory, kind)
+                                .KindListComboBox.SimulateSelectItemAsync(JoinableTaskFactory, kind)
                         );
                     }
                 );
@@ -173,8 +174,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                         Contract.ThrowIfFalse(
                             await dialog
                                 .GetTestAccessor()
-                                .ProjectListComboBox
-                                .SimulateSelectItemAsync(JoinableTaskFactory, projectName)
+                                .ProjectListComboBox.SimulateSelectItemAsync(
+                                    JoinableTaskFactory,
+                                    projectName
+                                )
                         );
                     }
                 );
@@ -199,14 +202,12 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                         Contract.ThrowIfFalse(
                             await dialog
                                 .GetTestAccessor()
-                                .CreateNewFileRadioButton
-                                .SimulateClickAsync(JoinableTaskFactory)
+                                .CreateNewFileRadioButton.SimulateClickAsync(JoinableTaskFactory)
                         );
                         Contract.ThrowIfFalse(
                             await dialog
                                 .GetTestAccessor()
-                                .CreateNewFileComboBox
-                                .SimulateSelectItemAsync(
+                                .CreateNewFileComboBox.SimulateSelectItemAsync(
                                     JoinableTaskFactory,
                                     newFileName,
                                     mustExist: false
@@ -235,14 +236,14 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                         Contract.ThrowIfFalse(
                             await dialog
                                 .GetTestAccessor()
-                                .AddToExistingFileRadioButton
-                                .SimulateClickAsync(JoinableTaskFactory)
+                                .AddToExistingFileRadioButton.SimulateClickAsync(
+                                    JoinableTaskFactory
+                                )
                         );
                         Contract.ThrowIfFalse(
                             await dialog
                                 .GetTestAccessor()
-                                .AddToExistingFileComboBox
-                                .SimulateSelectItemAsync(
+                                .AddToExistingFileComboBox.SimulateSelectItemAsync(
                                     JoinableTaskFactory,
                                     existingFileName,
                                     mustExist: false
@@ -271,9 +272,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                         var dialog = await GetDialogAsync(cancellationTokenSource.Token);
                         return dialog
                             .GetTestAccessor()
-                            .CreateNewFileComboBox
-                            .Items
-                            .Cast<string>()
+                            .CreateNewFileComboBox.Items.Cast<string>()
                             .ToArray();
                     }
                 );

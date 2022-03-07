@@ -47,8 +47,7 @@ namespace Microsoft.CodeAnalysis.Remote
                     var document = solution.GetRequiredDocument(documentId);
 
                     using var _ = ArrayBuilder<IFieldSymbol>.GetInstance(out var fields);
-                    var compilation = await document
-                        .Project
+                    var compilation = await document.Project
                         .GetCompilationAsync(cancellationToken)
                         .ConfigureAwait(false);
 

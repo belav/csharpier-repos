@@ -59,8 +59,7 @@ public class ApiActionsDoNotRequireExplicitModelValidationCheckCodeFixProviderTe
     {
         return MvcTestSource
             .Read(GetType().Name, fileName)
-            .Source
-            .Replace("_INPUT_", "_TEST_")
+            .Source.Replace("_INPUT_", "_TEST_")
             .Replace("_OUTPUT_", "_TEST_");
     }
 }

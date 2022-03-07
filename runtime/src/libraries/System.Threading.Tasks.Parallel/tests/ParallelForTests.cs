@@ -2157,23 +2157,22 @@ namespace System.Threading.Tasks.Tests
                 int completedCount = 0;
                 try
                 {
-                    reportedAsCompleted =
-                        Parallel
-                            .For(
-                                0,
-                                CancelForTestLoopIterations,
-                                parallelOptions,
-                                value =>
-                                {
-                                    Interlocked.Increment(ref completedCount);
+                    reportedAsCompleted = Parallel
+                        .For(
+                            0,
+                            CancelForTestLoopIterations,
+                            parallelOptions,
+                            value =>
+                            {
+                                Interlocked.Increment(ref completedCount);
 
-                                    if (!cancellationTokenSource.IsCancellationRequested)
-                                    {
-                                        Task.Run(() => cancellationTokenSource.Cancel());
-                                    }
+                                if (!cancellationTokenSource.IsCancellationRequested)
+                                {
+                                    Task.Run(() => cancellationTokenSource.Cancel());
                                 }
-                            )
-                            .IsCompleted;
+                            }
+                        )
+                        .IsCompleted;
                 }
                 catch (OperationCanceledException)
                 {
@@ -2204,23 +2203,22 @@ namespace System.Threading.Tasks.Tests
                 int completedCount = 0;
                 try
                 {
-                    reportedAsCompleted =
-                        Parallel
-                            .For(
-                                (long)0,
-                                (long)CancelForTestLoopIterations,
-                                parallelOptions,
-                                value =>
-                                {
-                                    Interlocked.Increment(ref completedCount);
+                    reportedAsCompleted = Parallel
+                        .For(
+                            (long)0,
+                            (long)CancelForTestLoopIterations,
+                            parallelOptions,
+                            value =>
+                            {
+                                Interlocked.Increment(ref completedCount);
 
-                                    if (!cancellationTokenSource.IsCancellationRequested)
-                                    {
-                                        Task.Run(() => cancellationTokenSource.Cancel());
-                                    }
+                                if (!cancellationTokenSource.IsCancellationRequested)
+                                {
+                                    Task.Run(() => cancellationTokenSource.Cancel());
                                 }
-                            )
-                            .IsCompleted;
+                            }
+                        )
+                        .IsCompleted;
                 }
                 catch (OperationCanceledException)
                 {
@@ -2262,22 +2260,21 @@ namespace System.Threading.Tasks.Tests
                 int completedCount = 0;
                 try
                 {
-                    reportedAsCompleted =
-                        Parallel
-                            .ForEach(
-                                enumerable,
-                                parallelOptions,
-                                value =>
-                                {
-                                    Interlocked.Increment(ref completedCount);
+                    reportedAsCompleted = Parallel
+                        .ForEach(
+                            enumerable,
+                            parallelOptions,
+                            value =>
+                            {
+                                Interlocked.Increment(ref completedCount);
 
-                                    if (!cancellationTokenSource.IsCancellationRequested)
-                                    {
-                                        Task.Run(() => cancellationTokenSource.Cancel());
-                                    }
+                                if (!cancellationTokenSource.IsCancellationRequested)
+                                {
+                                    Task.Run(() => cancellationTokenSource.Cancel());
                                 }
-                            )
-                            .IsCompleted;
+                            }
+                        )
+                        .IsCompleted;
                 }
                 catch (OperationCanceledException)
                 {

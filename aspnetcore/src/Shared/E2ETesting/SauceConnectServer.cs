@@ -255,8 +255,7 @@ Captured output lines:
     }
 
     private static string GetProcessTrackingFolder() =>
-        typeof(SauceConnectServer)
-            .Assembly
+        typeof(SauceConnectServer).Assembly
             .GetCustomAttributes<AssemblyMetadataAttribute>()
             .Single(a => a.Key == "Microsoft.AspNetCore.Testing.SauceConnect.ProcessTracking")
             .Value;

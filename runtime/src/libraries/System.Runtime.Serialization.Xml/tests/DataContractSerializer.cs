@@ -44,8 +44,7 @@ public static partial class DataContractSerializerTests
     {
         // Assume that UTC offset doesn't change more often than once in the day 2013-01-02
         // DO NOT USE TimeZoneInfo.Local.BaseUtcOffset !
-        var offsetMinutes = (int)TimeZoneInfo
-            .Local
+        var offsetMinutes = (int)TimeZoneInfo.Local
             .GetUtcOffset(new DateTime(2013, 1, 2))
             .TotalMinutes;
         var objs = new DateTimeOffset[]
@@ -197,8 +196,7 @@ public static partial class DataContractSerializerTests
     [Fact]
     public static void DCS_DateTimeAsRoot()
     {
-        var offsetMinutes = (int)TimeZoneInfo
-            .Local
+        var offsetMinutes = (int)TimeZoneInfo.Local
             .GetUtcOffset(new DateTime(2013, 1, 2))
             .TotalMinutes;
         Assert.StrictEqual(
@@ -2548,8 +2546,7 @@ public static partial class DataContractSerializerTests
 
         // Assume that UTC offset doesn't change more often than once in the day 2013-01-02
         // DO NOT USE TimeZoneInfo.Local.BaseUtcOffset !
-        var offsetMinutes = (int)TimeZoneInfo
-            .Local
+        var offsetMinutes = (int)TimeZoneInfo.Local
             .GetUtcOffset(new DateTime(2013, 1, 2))
             .TotalMinutes;
         // Adding offsetMinutes to ModifiedTime property so the DateTime component in serialized strings are time-zone independent
@@ -4526,9 +4523,10 @@ public static partial class DataContractSerializerTests
         CompareBaseline(baseline, ms);
         ms.Position = 0;
         var dcrVariationsReturning = dcs2.ReadObject(ms);
-        SerializationTestTypes
-            .ComparisonHelper
-            .CompareRecursively(dcrVariationsGoing, dcrVariationsReturning);
+        SerializationTestTypes.ComparisonHelper.CompareRecursively(
+            dcrVariationsGoing,
+            dcrVariationsReturning
+        );
     }
 
     [Fact]
@@ -4553,9 +4551,10 @@ public static partial class DataContractSerializerTests
         ms.Position = 0;
         var xmlReader = XmlDictionaryReader.CreateTextReader(ms, XmlDictionaryReaderQuotas.Max);
         var dcrVariationsReturning = dcs.ReadObject(xmlReader, false, dcr2);
-        SerializationTestTypes
-            .ComparisonHelper
-            .CompareRecursively(dcrVariationsGoing, dcrVariationsReturning);
+        SerializationTestTypes.ComparisonHelper.CompareRecursively(
+            dcrVariationsGoing,
+            dcrVariationsReturning
+        );
     }
 
     [Fact]
@@ -4584,9 +4583,10 @@ public static partial class DataContractSerializerTests
         ms.Position = 0;
         var xmlReader = XmlDictionaryReader.CreateTextReader(ms, XmlDictionaryReaderQuotas.Max);
         var dcrVariationsReturning = dcs.ReadObject(xmlReader, false);
-        SerializationTestTypes
-            .ComparisonHelper
-            .CompareRecursively(dcrVariationsGoing, dcrVariationsReturning);
+        SerializationTestTypes.ComparisonHelper.CompareRecursively(
+            dcrVariationsGoing,
+            dcrVariationsReturning
+        );
     }
 
     [Fact]
@@ -4615,9 +4615,10 @@ public static partial class DataContractSerializerTests
         ms.Position = 0;
         var xmlReader = XmlDictionaryReader.CreateTextReader(ms, XmlDictionaryReaderQuotas.Max);
         var dcrVariationsReturning = dcs.ReadObject(xmlReader, false, dcr2);
-        SerializationTestTypes
-            .ComparisonHelper
-            .CompareRecursively(dcrVariationsGoing, dcrVariationsReturning);
+        SerializationTestTypes.ComparisonHelper.CompareRecursively(
+            dcrVariationsGoing,
+            dcrVariationsReturning
+        );
     }
 
     private static void CompareBaseline(string baseline, MemoryStream ms)
@@ -5623,8 +5624,7 @@ public static partial class DataContractSerializerTests
         );
 
         Assert.True(
-            valueSerPublicDatasetPublic
-                .Data
+            valueSerPublicDatasetPublic.Data
                 .GetType()
                 .Equals(resultSerPublicDatasetPublic.Data.GetType())
         );
@@ -5677,8 +5677,7 @@ public static partial class DataContractSerializerTests
         );
 
         Assert.True(
-            valueSerPublicDatasetPrivate
-                .Data
+            valueSerPublicDatasetPrivate.Data
                 .GetType()
                 .Equals(resultSerPublicDatasetPrivate.Data.GetType())
         );
@@ -6922,8 +6921,7 @@ public static partial class DataContractSerializerTests
     public static void DCS_TypeWithCollectionAndDateTimeOffset()
     {
         // Adding offsetMinutes so the DateTime component in serialized strings are time-zone independent
-        int offsetMinutes = (int)TimeZoneInfo
-            .Local
+        int offsetMinutes = (int)TimeZoneInfo.Local
             .GetUtcOffset(new DateTime(2013, 1, 2))
             .TotalMinutes;
         DateTimeOffset dateTimeOffset = new DateTimeOffset(
@@ -6953,8 +6951,7 @@ public static partial class DataContractSerializerTests
     public static void DCS_TypeWithCollectionAndDateTimeOffset_ListIsNull()
     {
         // Adding offsetMinutes so the DateTime component in serialized strings are time-zone independent
-        int offsetMinutes = (int)TimeZoneInfo
-            .Local
+        int offsetMinutes = (int)TimeZoneInfo.Local
             .GetUtcOffset(new DateTime(2013, 1, 2))
             .TotalMinutes;
         DateTimeOffset dateTimeOffset = new DateTimeOffset(
@@ -7163,15 +7160,17 @@ public static partial class DataContractSerializerTests
         //netcorePayload
         var deserializedNetcoreObject = DeserializeString<T>(netcorePayload, settings: settings);
         Assert.NotNull(deserializedNetcoreObject);
-        SerializationTestTypes
-            .ComparisonHelper
-            .CompareRecursively(value, deserializedNetcoreObject);
+        SerializationTestTypes.ComparisonHelper.CompareRecursively(
+            value,
+            deserializedNetcoreObject
+        );
 
         //desktopPayload
         var deserializedDesktopObject = DeserializeString<T>(desktopPayload, settings: settings);
         Assert.NotNull(deserializedDesktopObject);
-        SerializationTestTypes
-            .ComparisonHelper
-            .CompareRecursively(value, deserializedDesktopObject);
+        SerializationTestTypes.ComparisonHelper.CompareRecursively(
+            value,
+            deserializedDesktopObject
+        );
     }
 }

@@ -288,8 +288,10 @@ internal sealed class GenericWebHostBuilder
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] TStartup
     >(Func<WebHostBuilderContext, TStartup> startupFactory)
     {
-        var startupAssemblyName =
-            startupFactory.GetMethodInfo().DeclaringType!.Assembly.GetName().Name;
+        var startupAssemblyName = startupFactory
+            .GetMethodInfo()
+            .DeclaringType!.Assembly.GetName()
+            .Name;
 
         UseSetting(WebHostDefaults.ApplicationKey, startupAssemblyName);
 
@@ -512,9 +514,10 @@ internal sealed class GenericWebHostBuilder
                 Configuration = context.Configuration,
                 HostingEnvironment = new HostingEnvironment(),
             };
-            webHostBuilderContext
-                .HostingEnvironment
-                .Initialize(context.HostingEnvironment.ContentRootPath, options);
+            webHostBuilderContext.HostingEnvironment.Initialize(
+                context.HostingEnvironment.ContentRootPath,
+                options
+            );
             context.Properties[typeof(WebHostBuilderContext)] = webHostBuilderContext;
             context.Properties[typeof(WebHostOptions)] = options;
             return webHostBuilderContext;

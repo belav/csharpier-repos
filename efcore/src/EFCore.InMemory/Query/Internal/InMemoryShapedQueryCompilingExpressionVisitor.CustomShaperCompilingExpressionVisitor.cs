@@ -165,8 +165,10 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     var entityClrType = includeExpression.EntityExpression.Type;
                     var includingClrType = includeExpression.Navigation.DeclaringEntityType.ClrType;
                     var inverseNavigation = includeExpression.Navigation.Inverse;
-                    var relatedEntityClrType =
-                        includeExpression.Navigation.TargetEntityType.ClrType;
+                    var relatedEntityClrType = includeExpression
+                        .Navigation
+                        .TargetEntityType
+                        .ClrType;
                     if (
                         includingClrType != entityClrType
                         && includingClrType.IsAssignableFrom(entityClrType)

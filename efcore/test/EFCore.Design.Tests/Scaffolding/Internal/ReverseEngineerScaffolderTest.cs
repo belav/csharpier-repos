@@ -175,8 +175,7 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 .CreateServiceCollection("Microsoft.EntityFrameworkCore.SqlServer")
                 .BuildServiceProvider(validateScopes: true)
                 .CreateScope()
-                .ServiceProvider
-                .GetRequiredService<IReverseEngineerScaffolder>();
+                .ServiceProvider.GetRequiredService<IReverseEngineerScaffolder>();
 
         [ConditionalFact]
         public void ScaffoldModel_works_with_named_connection_string()
@@ -194,8 +193,7 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 .AddScoped<IDatabaseModelFactory>(p => databaseModelFactory)
                 .BuildServiceProvider(validateScopes: true)
                 .CreateScope()
-                .ServiceProvider
-                .GetRequiredService<IReverseEngineerScaffolder>();
+                .ServiceProvider.GetRequiredService<IReverseEngineerScaffolder>();
 
             var result = scaffolder.ScaffoldModel(
                 "Name=DefaultConnection",
@@ -229,8 +227,7 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 .AddScoped<IDatabaseModelFactory>(p => databaseModelFactory)
                 .BuildServiceProvider(validateScopes: true)
                 .CreateScope()
-                .ServiceProvider
-                .GetRequiredService<IReverseEngineerScaffolder>();
+                .ServiceProvider.GetRequiredService<IReverseEngineerScaffolder>();
 
             var result = scaffolder.ScaffoldModel(
                 "Name=DefaultConnection",

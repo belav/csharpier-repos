@@ -234,19 +234,17 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     if (leftTarget.Kind != BoundKind.DiscardExpression)
                     {
-                        effects
-                            .assignments
-                            .Add(
-                                MakeAssignmentOperator(
-                                    resultPart.Syntax,
-                                    leftTarget,
-                                    resultPart,
-                                    leftTarget.Type,
-                                    used: true,
-                                    isChecked: false,
-                                    isCompoundAssignment: false
-                                )
-                            );
+                        effects.assignments.Add(
+                            MakeAssignmentOperator(
+                                resultPart.Syntax,
+                                leftTarget,
+                                resultPart,
+                                leftTarget.Type,
+                                used: true,
+                                isChecked: false,
+                                isCompoundAssignment: false
+                            )
+                        );
                     }
                 }
                 Debug.Assert(builder is null || resultPart is { });

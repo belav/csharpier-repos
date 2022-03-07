@@ -33,8 +33,7 @@ namespace System.CommandLine.Benchmarks.DragonFruit
                     typeof(Enumerable).GetTypeInfo().Assembly.Location,
                     typeof(System.CommandLine.Invocation.InvocationContext)
                         .GetTypeInfo()
-                        .Assembly
-                        .Location
+                        .Assembly.Location
                 }
             );
             _testAssembly = Assembly.Load(File.ReadAllBytes(_testAssemblyFilePath));
@@ -43,17 +42,13 @@ namespace System.CommandLine.Benchmarks.DragonFruit
 
         [Benchmark(Description = "--help")]
         public async Task SearchForStartingPointWhenGivenEntryPointClass_Help() =>
-            await System
-                .CommandLine
-                .DragonFruit
-                .CommandLine
-                .ExecuteAssemblyAsync(
-                    _testAssembly,
-                    new[] { "--help" },
-                    null,
-                    _testAssemblyXmlDocsFilePath,
-                    _nullConsole
-                );
+            await System.CommandLine.DragonFruit.CommandLine.ExecuteAssemblyAsync(
+                _testAssembly,
+                new[] { "--help" },
+                null,
+                _testAssemblyXmlDocsFilePath,
+                _nullConsole
+            );
 
         [GlobalCleanup]
         public void Cleanup()

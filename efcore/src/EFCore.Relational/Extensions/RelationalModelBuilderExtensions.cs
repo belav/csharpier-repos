@@ -409,9 +409,11 @@ namespace Microsoft.EntityFrameworkCore
             var dbFunction = modelBuilder.Metadata.FindDbFunction(name);
             if (dbFunction == null)
             {
-                dbFunction = modelBuilder
-                    .Metadata
-                    .AddDbFunction(name, returnType, fromDataAnnotation);
+                dbFunction = modelBuilder.Metadata.AddDbFunction(
+                    name,
+                    returnType,
+                    fromDataAnnotation
+                );
             }
             else
             {

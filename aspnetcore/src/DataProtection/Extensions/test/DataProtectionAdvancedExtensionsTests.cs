@@ -50,9 +50,10 @@ public class DataProtectionAdvancedExtensionsTests
 
         // Act
         DateTimeOffset lowerBound = DateTimeOffset.UtcNow.AddHours(48);
-        string protectedPayload = mockDataProtector
-            .Object
-            .Protect("this is plaintext", TimeSpan.FromHours(48));
+        string protectedPayload = mockDataProtector.Object.Protect(
+            "this is plaintext",
+            TimeSpan.FromHours(48)
+        );
         DateTimeOffset upperBound = DateTimeOffset.UtcNow.AddHours(48);
 
         // Assert
@@ -78,9 +79,10 @@ public class DataProtectionAdvancedExtensionsTests
 
         // Act
         DateTimeOffset lowerBound = DateTimeOffset.UtcNow.AddHours(48);
-        byte[] protectedPayload = mockDataProtector
-            .Object
-            .Protect(new byte[] { 0x11, 0x22, 0x33 }, TimeSpan.FromHours(48));
+        byte[] protectedPayload = mockDataProtector.Object.Protect(
+            new byte[] { 0x11, 0x22, 0x33 },
+            TimeSpan.FromHours(48)
+        );
         DateTimeOffset upperBound = DateTimeOffset.UtcNow.AddHours(48);
 
         // Assert
@@ -100,9 +102,10 @@ public class DataProtectionAdvancedExtensionsTests
             .Returns(Encoding.UTF8.GetBytes("this is plaintext"));
 
         // Act
-        string unprotectedPayload = mockDataProtector
-            .Object
-            .Unprotect(SampleEncodedString, out var testExpiration);
+        string unprotectedPayload = mockDataProtector.Object.Unprotect(
+            SampleEncodedString,
+            out var testExpiration
+        );
 
         // Assert
         Assert.Equal("this is plaintext", unprotectedPayload);

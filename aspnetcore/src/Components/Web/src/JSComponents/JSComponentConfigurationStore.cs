@@ -29,8 +29,9 @@ public sealed class JSComponentConfigurationStore
 
     internal void Add(Type componentType, string identifier)
     {
-        var parameterTypes =
-            JSComponentInterop.GetComponentParameters(componentType).ParameterInfoByName;
+        var parameterTypes = JSComponentInterop
+            .GetComponentParameters(componentType)
+            .ParameterInfoByName;
         var parameters = new JSComponentParameter[parameterTypes.Count];
         var index = 0;
         foreach (var (name, type) in parameterTypes)

@@ -48,13 +48,11 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                         return true;
                     }
                 );
-            bindingContext
-                .ModelBinderProviders
-                .RegisterBinderForType(
-                    typeof(int),
-                    mockIntBinder.Object,
-                    false /* suppressPrefixCheck */
-                );
+            bindingContext.ModelBinderProviders.RegisterBinderForType(
+                typeof(int),
+                mockIntBinder.Object,
+                false /* suppressPrefixCheck */
+            );
 
             // Act
             List<int> boundCollection = CollectionModelBinder<int>.BindComplexCollectionFromIndexes(
@@ -107,13 +105,11 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                         return true;
                     }
                 );
-            bindingContext
-                .ModelBinderProviders
-                .RegisterBinderForType(
-                    typeof(int),
-                    mockIntBinder.Object,
-                    false /* suppressPrefixCheck */
-                );
+            bindingContext.ModelBinderProviders.RegisterBinderForType(
+                typeof(int),
+                mockIntBinder.Object,
+                false /* suppressPrefixCheck */
+            );
 
             // Act
             List<int> boundCollection = CollectionModelBinder<int>.BindComplexCollectionFromIndexes(
@@ -167,13 +163,11 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                         return true;
                     }
                 );
-            bindingContext
-                .ModelBinderProviders
-                .RegisterBinderForType(
-                    typeof(int),
-                    mockIntBinder.Object,
-                    true /* suppressPrefixCheck */
-                );
+            bindingContext.ModelBinderProviders.RegisterBinderForType(
+                typeof(int),
+                mockIntBinder.Object,
+                true /* suppressPrefixCheck */
+            );
 
             CollectionModelBinder<int> modelBinder = new CollectionModelBinder<int>();
 
@@ -218,13 +212,11 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                         return true;
                     }
                 );
-            bindingContext
-                .ModelBinderProviders
-                .RegisterBinderForType(
-                    typeof(int),
-                    mockIntBinder.Object,
-                    true /* suppressPrefixCheck */
-                );
+            bindingContext.ModelBinderProviders.RegisterBinderForType(
+                typeof(int),
+                mockIntBinder.Object,
+                true /* suppressPrefixCheck */
+            );
 
             CollectionModelBinder<int> modelBinder = new CollectionModelBinder<int>();
 
@@ -329,13 +321,11 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                         return true;
                     }
                 );
-            bindingContext
-                .ModelBinderProviders
-                .RegisterBinderForType(
-                    typeof(int),
-                    mockIntBinder.Object,
-                    true /* suppressPrefixCheck */
-                );
+            bindingContext.ModelBinderProviders.RegisterBinderForType(
+                typeof(int),
+                mockIntBinder.Object,
+                true /* suppressPrefixCheck */
+            );
 
             // Act
             List<int> boundCollection = CollectionModelBinder<int>.BindSimpleCollection(

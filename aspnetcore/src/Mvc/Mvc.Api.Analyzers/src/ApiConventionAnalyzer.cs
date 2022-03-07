@@ -75,11 +75,8 @@ public class ApiConventionAnalyzer : DiagnosticAnalyzer
                 var hasUndocumentedStatusCodes = false;
                 foreach (var actualMetadata in actualResponseMetadata)
                 {
-                    var location = actualMetadata
-                        .ReturnOperation
-                        .ReturnedValue
-                        .Syntax
-                        .GetLocation();
+                    var location =
+                        actualMetadata.ReturnOperation.ReturnedValue.Syntax.GetLocation();
 
                     if (
                         !DeclaredApiResponseMetadata.Contains(

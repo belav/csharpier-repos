@@ -35,9 +35,14 @@ namespace Microsoft.CodeAnalysis.CSharp.SimplifyThisOrMe
             CancellationToken cancellationToken
         )
         {
-            return ExpressionSimplifier
-                .Instance
-                .TrySimplify(node, model, optionSet, out _, out issueSpan, cancellationToken);
+            return ExpressionSimplifier.Instance.TrySimplify(
+                node,
+                model,
+                optionSet,
+                out _,
+                out issueSpan,
+                cancellationToken
+            );
         }
     }
 }

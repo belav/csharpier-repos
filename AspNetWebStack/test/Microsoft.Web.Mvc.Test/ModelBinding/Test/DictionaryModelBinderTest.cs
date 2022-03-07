@@ -45,13 +45,11 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                         return true;
                     }
                 );
-            bindingContext
-                .ModelBinderProviders
-                .RegisterBinderForType(
-                    typeof(KeyValuePair<int, string>),
-                    mockKvpBinder.Object,
-                    false /* suppressPrefixCheck */
-                );
+            bindingContext.ModelBinderProviders.RegisterBinderForType(
+                typeof(KeyValuePair<int, string>),
+                mockKvpBinder.Object,
+                false /* suppressPrefixCheck */
+            );
 
             // Act
             bool retVal = new DictionaryModelBinder<int, string>().BindModel(

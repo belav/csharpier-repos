@@ -41,9 +41,9 @@ namespace System
             private static TimeZoneInfo GetCurrentOneYearLocal()
             {
                 // load the data from the OS
-                uint result = Interop
-                    .Kernel32
-                    .GetTimeZoneInformation(out TIME_ZONE_INFORMATION timeZoneInformation);
+                uint result = Interop.Kernel32.GetTimeZoneInformation(
+                    out TIME_ZONE_INFORMATION timeZoneInformation
+                );
                 return result == Interop.Kernel32.TIME_ZONE_ID_INVALID
                   ? CreateCustomTimeZone(LocalId, TimeSpan.Zero, LocalId, LocalId)
                   : GetLocalTimeZoneFromWin32Data(timeZoneInformation, dstDisabled: false);
@@ -97,9 +97,10 @@ namespace System
             Debug.Assert(Monitor.IsEntered(cachedData));
 
             using (
-                RegistryKey? reg = Registry
-                    .LocalMachine
-                    .OpenSubKey(TimeZonesRegistryHive, writable: false)
+                RegistryKey? reg = Registry.LocalMachine.OpenSubKey(
+                    TimeZonesRegistryHive,
+                    writable: false
+                )
             )
             {
                 if (reg != null)
@@ -252,9 +253,10 @@ namespace System
             dstDisabled = false;
 
             using (
-                RegistryKey? key = Registry
-                    .LocalMachine
-                    .OpenSubKey(TimeZonesRegistryHive, writable: false)
+                RegistryKey? key = Registry.LocalMachine.OpenSubKey(
+                    TimeZonesRegistryHive,
+                    writable: false
+                )
             )
             {
                 if (key == null)
@@ -289,11 +291,9 @@ namespace System
             //
 
             // call kernel32!GetDynamicTimeZoneInformation...
-            uint result = Interop
-                .Kernel32
-                .GetDynamicTimeZoneInformation(
-                    out TIME_DYNAMIC_ZONE_INFORMATION dynamicTimeZoneInformation
-                );
+            uint result = Interop.Kernel32.GetDynamicTimeZoneInformation(
+                out TIME_DYNAMIC_ZONE_INFORMATION dynamicTimeZoneInformation
+            );
             if (result == Interop.Kernel32.TIME_ZONE_ID_INVALID)
             {
                 // return a dummy entry
@@ -644,12 +644,10 @@ namespace System
                 // * "<year3>"    REG_BINARY REG_TZI_FORMAT
                 //
                 using (
-                    RegistryKey? dynamicKey = Registry
-                        .LocalMachine
-                        .OpenSubKey(
-                            TimeZonesRegistryHive + "\\" + id + "\\Dynamic DST",
-                            writable: false
-                        )
+                    RegistryKey? dynamicKey = Registry.LocalMachine.OpenSubKey(
+                        TimeZonesRegistryHive + "\\" + id + "\\Dynamic DST",
+                        writable: false
+                    )
                 )
                 {
                     if (dynamicKey == null)
@@ -845,9 +843,10 @@ namespace System
             dstDisabled = false;
 
             using (
-                RegistryKey? key = Registry
-                    .LocalMachine
-                    .OpenSubKey(TimeZonesRegistryHive + "\\" + id, writable: false)
+                RegistryKey? key = Registry.LocalMachine.OpenSubKey(
+                    TimeZonesRegistryHive + "\\" + id,
+                    writable: false
+                )
             )
             {
                 if (key == null)
@@ -993,21 +992,22 @@ namespace System
             IntPtr handle = IntPtr.Zero;
             try
             {
-                handle = Interop
-                    .Kernel32
-                    .LoadLibraryEx(
-                        filePath,
-                        IntPtr.Zero,
-                        Interop.Kernel32.LOAD_LIBRARY_AS_DATAFILE
-                    );
+                handle = Interop.Kernel32.LoadLibraryEx(
+                    filePath,
+                    IntPtr.Zero,
+                    Interop.Kernel32.LOAD_LIBRARY_AS_DATAFILE
+                );
                 if (handle != IntPtr.Zero)
                 {
                     const int LoadStringMaxLength = 500;
                     char* localizedResource = stackalloc char[LoadStringMaxLength];
 
-                    int charsWritten = Interop
-                        .User32
-                        .LoadString(handle, (uint)resource, localizedResource, LoadStringMaxLength);
+                    int charsWritten = Interop.User32.LoadString(
+                        handle,
+                        (uint)resource,
+                        localizedResource,
+                        LoadStringMaxLength
+                    );
                     if (charsWritten != 0)
                     {
                         return new string(localizedResource, 0, charsWritten);
@@ -1119,9 +1119,10 @@ namespace System
             // * TZI,         REG_BINARY REG_TZI_FORMAT
             //
             using (
-                RegistryKey? key = Registry
-                    .LocalMachine
-                    .OpenSubKey(TimeZonesRegistryHive + "\\" + id, writable: false)
+                RegistryKey? key = Registry.LocalMachine.OpenSubKey(
+                    TimeZonesRegistryHive + "\\" + id,
+                    writable: false
+                )
             )
             {
                 if (key == null)
@@ -1206,9 +1207,10 @@ namespace System
             // Try to get a localized version of "Coordinated Universal Time" from the globalization data
             string? standardDisplayName = null;
             using (
-                RegistryKey? key = Registry
-                    .LocalMachine
-                    .OpenSubKey(TimeZonesRegistryHive + "\\" + UtcId, writable: false)
+                RegistryKey? key = Registry.LocalMachine.OpenSubKey(
+                    TimeZonesRegistryHive + "\\" + UtcId,
+                    writable: false
+                )
             )
             {
                 if (key != null)

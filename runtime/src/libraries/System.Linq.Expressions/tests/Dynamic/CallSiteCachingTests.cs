@@ -196,8 +196,9 @@ namespace System.Runtime.CompilerServices.Tests
 
             Assert.Equal(3, res);
 
-            var rulesCnt =
-                CallSiteOps.GetCachedRules(CallSiteOps.GetRuleCache((dynamic)site)).Length;
+            var rulesCnt = CallSiteOps
+                .GetCachedRules(CallSiteOps.GetRuleCache((dynamic)site))
+                .Length;
 
             Assert.Equal(1, rulesCnt);
 

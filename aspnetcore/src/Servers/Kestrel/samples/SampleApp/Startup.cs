@@ -120,14 +120,13 @@ public class Startup
                                     basePort + 1,
                                     listenOptions =>
                                     {
-                                        listenOptions.Protocols =
-                                            Microsoft
-                                                .AspNetCore
-                                                .Server
-                                                .Kestrel
-                                                .Core
-                                                .HttpProtocols
-                                                .Http1;
+                                        listenOptions.Protocols = Microsoft
+                                            .AspNetCore
+                                            .Server
+                                            .Kestrel
+                                            .Core
+                                            .HttpProtocols
+                                            .Http1;
                                         listenOptions.UseHttps();
                                         listenOptions.UseConnectionLogging();
                                     }

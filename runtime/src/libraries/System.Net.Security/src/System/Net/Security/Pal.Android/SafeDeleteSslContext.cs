@@ -240,15 +240,13 @@ namespace System.Net
                 throw new NotImplementedException(nameof(SafeDeleteSslContext));
             }
 
-            Interop
-                .AndroidCrypto
-                .SSLStreamInitialize(
-                    handle,
-                    isServer,
-                    readCallback,
-                    writeCallback,
-                    InitialBufferSize
-                );
+            Interop.AndroidCrypto.SSLStreamInitialize(
+                handle,
+                isServer,
+                readCallback,
+                writeCallback,
+                InitialBufferSize
+            );
 
             if (credential.Protocols != SslProtocols.None)
             {
@@ -265,12 +263,10 @@ namespace System.Net
                 (int minIndex, int maxIndex) = protocolsToEnable.ValidateContiguous(
                     s_orderedSslProtocols
                 );
-                Interop
-                    .AndroidCrypto
-                    .SSLStreamSetEnabledProtocols(
-                        handle,
-                        s_orderedSslProtocols.AsSpan(minIndex, maxIndex - minIndex + 1)
-                    );
+                Interop.AndroidCrypto.SSLStreamSetEnabledProtocols(
+                    handle,
+                    s_orderedSslProtocols.AsSpan(minIndex, maxIndex - minIndex + 1)
+                );
             }
 
             if (
@@ -280,9 +276,10 @@ namespace System.Net
             )
             {
                 // Set application protocols if the platform supports it. Otherwise, we will silently ignore the option.
-                Interop
-                    .AndroidCrypto
-                    .SSLStreamSetApplicationProtocols(handle, authOptions.ApplicationProtocols);
+                Interop.AndroidCrypto.SSLStreamSetApplicationProtocols(
+                    handle,
+                    authOptions.ApplicationProtocols
+                );
             }
 
             if (isServer && authOptions.RemoteCertRequired)

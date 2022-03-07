@@ -14,11 +14,9 @@ namespace Microsoft.EntityFrameworkCore
         public override void Identifiers_are_generated_correctly()
         {
             using var context = CreateContext();
-            var entityType = context
-                .Model
-                .FindEntityType(
-                    typeof(LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingCorrectly)
-                );
+            var entityType = context.Model.FindEntityType(
+                typeof(LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingCorrectly)
+            );
             Assert.Equal(
                 "LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingCorrectly",
                 entityType.GetTableName()

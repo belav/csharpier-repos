@@ -612,8 +612,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 var categoryFk = productsNavigation.ForeignKey;
                 Assert.Equal("CategoriesID", categoryFk.Properties.Single().Name);
 
-                var categoryNavigation = productsNavigation
-                    .TargetEntityType
+                var categoryNavigation = productsNavigation.TargetEntityType
                     .GetSkipNavigations()
                     .Single();
                 var productFk = categoryNavigation.ForeignKey;
@@ -651,8 +650,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 var categoryFk = productsNavigation.ForeignKey;
                 Assert.Equal("CategoryWithAttributeId", categoryFk.Properties.Single().Name);
 
-                var categoryNavigation = productsNavigation
-                    .TargetEntityType
+                var categoryNavigation = productsNavigation.TargetEntityType
                     .GetSkipNavigations()
                     .Single();
                 var productFk = categoryNavigation.ForeignKey;
@@ -1223,17 +1221,16 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 modelBuilder.SharedTypeEntity<ManyToManyJoinWithFields>("Shared");
 
-                var joinEntityType =
-                    modelBuilder
-                        .Entity<ManyToManyPrincipalWithField>()
-                        .HasMany(e => e.Dependents)
-                        .WithMany(e => e.ManyToManyPrincipals)
-                        .UsingEntity<ManyToManyJoinWithFields>(
-                            "Shared",
-                            r => r.HasOne<DependentWithField>().WithMany(),
-                            l => l.HasOne<ManyToManyPrincipalWithField>().WithMany()
-                        )
-                        .Metadata;
+                var joinEntityType = modelBuilder
+                    .Entity<ManyToManyPrincipalWithField>()
+                    .HasMany(e => e.Dependents)
+                    .WithMany(e => e.ManyToManyPrincipals)
+                    .UsingEntity<ManyToManyJoinWithFields>(
+                        "Shared",
+                        r => r.HasOne<DependentWithField>().WithMany(),
+                        l => l.HasOne<ManyToManyPrincipalWithField>().WithMany()
+                    )
+                    .Metadata;
 
                 modelBuilder.Entity<ManyToManyPrincipalWithField>().HasKey(d => d.Id);
                 modelBuilder.Entity<OneToManyPrincipalWithField>().HasKey(d => d.Id);
@@ -1254,17 +1251,16 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 modelBuilder.SharedTypeEntity<ManyToManyJoinWithFields>("Shared");
 
-                var joinEntityType =
-                    modelBuilder
-                        .Entity<ManyToManyPrincipalWithField>()
-                        .HasMany(e => e.Dependents)
-                        .WithMany(e => e.ManyToManyPrincipals)
-                        .UsingEntity<ManyToManyJoinWithFields>(
-                            "Shared",
-                            r => r.HasOne<DependentWithField>().WithMany(),
-                            l => l.HasOne<ManyToManyPrincipalWithField>().WithMany()
-                        )
-                        .Metadata;
+                var joinEntityType = modelBuilder
+                    .Entity<ManyToManyPrincipalWithField>()
+                    .HasMany(e => e.Dependents)
+                    .WithMany(e => e.ManyToManyPrincipals)
+                    .UsingEntity<ManyToManyJoinWithFields>(
+                        "Shared",
+                        r => r.HasOne<DependentWithField>().WithMany(),
+                        l => l.HasOne<ManyToManyPrincipalWithField>().WithMany()
+                    )
+                    .Metadata;
 
                 modelBuilder.Entity<ManyToManyPrincipalWithField>().HasKey(d => d.Id);
                 modelBuilder.Entity<OneToManyPrincipalWithField>().HasKey(d => d.Id);

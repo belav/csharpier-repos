@@ -254,8 +254,11 @@ public class AuthorizeViewTest
         // a single batch with the correct output.
         renderer.AssignRootComponentId(rootComponent);
         rootComponent.TriggerRender();
-        var authorizeViewComponentId =
-            renderer.Batches.Single().GetComponentFrames<AuthorizeView>().Single().ComponentId;
+        var authorizeViewComponentId = renderer.Batches
+            .Single()
+            .GetComponentFrames<AuthorizeView>()
+            .Single()
+            .ComponentId;
         authorizationService.AuthorizeCalls.Clear();
 
         // Act
@@ -332,8 +335,10 @@ public class AuthorizeViewTest
         renderer.AssignRootComponentId(rootComponent);
         rootComponent.TriggerRender();
         var batch1 = renderer.Batches.Single();
-        var authorizeViewComponentId =
-            batch1.GetComponentFrames<AuthorizeView>().Single().ComponentId;
+        var authorizeViewComponentId = batch1
+            .GetComponentFrames<AuthorizeView>()
+            .Single()
+            .ComponentId;
         var diff1 = batch1.DiffsByComponentId[authorizeViewComponentId].Single();
         Assert.Empty(diff1.Edits);
 
@@ -390,8 +395,10 @@ public class AuthorizeViewTest
         renderer.AssignRootComponentId(rootComponent);
         rootComponent.TriggerRender();
         var batch1 = renderer.Batches.Single();
-        var authorizeViewComponentId =
-            batch1.GetComponentFrames<AuthorizeView>().Single().ComponentId;
+        var authorizeViewComponentId = batch1
+            .GetComponentFrames<AuthorizeView>()
+            .Single()
+            .ComponentId;
         var diff1 = batch1.DiffsByComponentId[authorizeViewComponentId].Single();
         Assert.Collection(
             diff1.Edits,
@@ -466,8 +473,10 @@ public class AuthorizeViewTest
         renderer.AssignRootComponentId(rootComponent);
         rootComponent.TriggerRender();
         var batch1 = renderer.Batches.Single();
-        var authorizeViewComponentId =
-            batch1.GetComponentFrames<AuthorizeView>().Single().ComponentId;
+        var authorizeViewComponentId = batch1
+            .GetComponentFrames<AuthorizeView>()
+            .Single()
+            .ComponentId;
         var diff1 = batch1.DiffsByComponentId[authorizeViewComponentId].Single();
         Assert.Collection(
             diff1.Edits,

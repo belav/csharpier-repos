@@ -13,15 +13,14 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Throws_with_new_when_non_relational_provider_in_use()
         {
-            var options =
-                new DbContextOptionsBuilder<ConstructorTestContext1A>()
-                    .UseInternalServiceProvider(
-                        new ServiceCollection()
-                            .AddEntityFrameworkInMemoryDatabase()
-                            .BuildServiceProvider(validateScopes: true)
-                    )
-                    .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                    .Options;
+            var options = new DbContextOptionsBuilder<ConstructorTestContext1A>()
+                .UseInternalServiceProvider(
+                    new ServiceCollection()
+                        .AddEntityFrameworkInMemoryDatabase()
+                        .BuildServiceProvider(validateScopes: true)
+                )
+                .UseInMemoryDatabase(Guid.NewGuid().ToString())
+                .Options;
 
             using var context = new ConstructorTestContext1A(options);
             Assert.Equal(

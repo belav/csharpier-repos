@@ -248,11 +248,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 );
 
                 var modifier = CSharpCustomModifier.CreateRequired(
-                    moduleBeingBuilt
-                        .Compilation
-                        .GetWellKnownType(
-                            WellKnownType.System_Runtime_InteropServices_UnmanagedType
-                        )
+                    moduleBeingBuilt.Compilation.GetWellKnownType(
+                        WellKnownType.System_Runtime_InteropServices_UnmanagedType
+                    )
                 );
 
                 // emit "(class [mscorlib]System.ValueType modreq([mscorlib]System.Runtime.InteropServices.UnmanagedType" pattern as "unmanaged"

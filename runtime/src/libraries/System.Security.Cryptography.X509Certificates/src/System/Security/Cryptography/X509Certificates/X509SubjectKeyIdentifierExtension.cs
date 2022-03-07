@@ -47,12 +47,10 @@ namespace System.Security.Cryptography.X509Certificates
                 if (!_decoded)
                 {
                     byte[] subjectKeyIdentifierValue;
-                    X509Pal
-                        .Instance
-                        .DecodeX509SubjectKeyIdentifierExtension(
-                            RawData,
-                            out subjectKeyIdentifierValue
-                        );
+                    X509Pal.Instance.DecodeX509SubjectKeyIdentifierExtension(
+                        RawData,
+                        out subjectKeyIdentifierValue
+                    );
                     _subjectKeyIdentifier = subjectKeyIdentifierValue.ToHexStringUpper();
                     _decoded = true;
                 }

@@ -377,14 +377,12 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (!succeeded)
             {
-                TestLibrary
-                    .TestFramework
-                    .LogInformation(
-                        $"{nameof(Avx2)}.{nameof(Avx2.ConvertToUInt32)}<UInt32>(Vector256<UInt32>): {method} failed:"
-                    );
-                TestLibrary
-                    .TestFramework
-                    .LogInformation($"  firstOp: ({string.Join(", ", firstOp)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(Avx2)}.{nameof(Avx2.ConvertToUInt32)}<UInt32>(Vector256<UInt32>): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  firstOp: ({string.Join(", ", firstOp)})"
+                );
                 TestLibrary.TestFramework.LogInformation($"   result: result");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 

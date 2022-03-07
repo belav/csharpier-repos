@@ -581,13 +581,11 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                     Extension.GetMemoryCache()?.GetHashCode() ?? 0L
                 ).ToString(CultureInfo.InvariantCulture);
                 debugInfo["Core:" + nameof(DbContextOptionsBuilder.EnableSensitiveDataLogging)] =
-                    Extension
-                        ._sensitiveDataLoggingEnabled
+                    Extension._sensitiveDataLoggingEnabled
                         .GetHashCode()
                         .ToString(CultureInfo.InvariantCulture);
                 debugInfo["Core:" + nameof(DbContextOptionsBuilder.EnableDetailedErrors)] =
-                    Extension
-                        ._detailedErrorsEnabled
+                    Extension._detailedErrorsEnabled
                         .GetHashCode()
                         .ToString(CultureInfo.InvariantCulture);
                 debugInfo["Core:" + nameof(DbContextOptionsBuilder.EnableThreadSafetyChecks)] = (
@@ -595,10 +593,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 )
                     .GetHashCode()
                     .ToString(CultureInfo.InvariantCulture);
-                debugInfo["Core:" + nameof(DbContextOptionsBuilder.ConfigureWarnings)] = Extension
-                    ._warningsConfiguration
-                    .GetServiceProviderHashCode()
-                    .ToString(CultureInfo.InvariantCulture);
+                debugInfo["Core:" + nameof(DbContextOptionsBuilder.ConfigureWarnings)] =
+                    Extension._warningsConfiguration
+                        .GetServiceProviderHashCode()
+                        .ToString(CultureInfo.InvariantCulture);
 
                 if (Extension._replacedServices != null)
                 {
@@ -616,8 +614,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                                         ? ""
                                         : ", " + implementationType.DisplayName()
                                 )
-                        ] = replacedService
-                            .Value
+                        ] = replacedService.Value
                             .GetHashCode()
                             .ToString(CultureInfo.InvariantCulture);
                     }
@@ -659,9 +656,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 && Extension._detailedErrorsEnabled == otherInfo.Extension._detailedErrorsEnabled
                 && Extension._threadSafetyChecksEnabled
                     == otherInfo.Extension._threadSafetyChecksEnabled
-                && Extension
-                    ._warningsConfiguration
-                    .ShouldUseSameServiceProvider(otherInfo.Extension._warningsConfiguration)
+                && Extension._warningsConfiguration.ShouldUseSameServiceProvider(
+                    otherInfo.Extension._warningsConfiguration
+                )
                 && (
                     Extension._replacedServices == otherInfo.Extension._replacedServices
                     || (
@@ -669,9 +666,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                         && otherInfo.Extension._replacedServices != null
                         && Extension._replacedServices.Count
                             == otherInfo.Extension._replacedServices.Count
-                        && Extension
-                            ._replacedServices
-                            .SequenceEqual(otherInfo.Extension._replacedServices)
+                        && Extension._replacedServices.SequenceEqual(
+                            otherInfo.Extension._replacedServices
+                        )
                     )
                 );
         }

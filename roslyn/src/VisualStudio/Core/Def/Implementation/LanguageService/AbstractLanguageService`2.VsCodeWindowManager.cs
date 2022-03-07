@@ -39,10 +39,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                 _languageService = languageService;
                 _codeWindow = codeWindow;
 
-                _globalOptions = languageService
-                    .Package
-                    .ComponentModel
-                    .GetService<IGlobalOptionService>();
+                _globalOptions =
+                    languageService.Package.ComponentModel.GetService<IGlobalOptionService>();
 
                 _sink = ComEventSink.Advise<IVsCodeWindowEvents>(codeWindow, this);
                 _globalOptions.OptionChanged += GlobalOptionChanged;
@@ -75,9 +73,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                     return;
                 }
 
-                var textBuffer = _languageService
-                    .EditorAdaptersFactoryService
-                    .GetDataBuffer(buffer);
+                var textBuffer = _languageService.EditorAdaptersFactoryService.GetDataBuffer(
+                    buffer
+                );
                 var document = textBuffer
                     ?.AsTextContainer()
                     ?.GetRelatedDocuments()
@@ -183,13 +181,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                     _languageService.SystemServiceProvider,
                     _languageService.Workspace
                 );
-                var textBuffer = _languageService
-                    .EditorAdaptersFactoryService
-                    .GetDataBuffer(buffer);
-                var controllerFactoryService = _languageService
-                    .Package
-                    .ComponentModel
-                    .GetService<INavigationBarControllerFactoryService>();
+                var textBuffer = _languageService.EditorAdaptersFactoryService.GetDataBuffer(
+                    buffer
+                );
+                var controllerFactoryService =
+                    _languageService.Package.ComponentModel.GetService<INavigationBarControllerFactoryService>();
                 var newController = controllerFactoryService.CreateController(
                     navigationBarClient,
                     textBuffer

@@ -469,8 +469,7 @@ namespace System.Text.RegularExpressions.Tests
                     );
 
                     var actualSet = new HashSet<(int start, int end)>(
-                        match
-                            .Groups
+                        match.Groups
                             .Cast<Group>()
                             .Select(g => (start: g.Index, end: g.Index + g.Length))
                             .Distinct()

@@ -79,9 +79,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Suppression
             _editHandlerService = editHandlerService;
             _uiThreadOperationExecutor = uiThreadOperationExecutor;
             _vsHierarchyItemManager = vsHierarchyItemManager;
-            _fixMultipleOccurencesService = workspace
-                .Services
-                .GetService<IFixMultipleOccurrencesService>();
+            _fixMultipleOccurencesService =
+                workspace.Services.GetService<IFixMultipleOccurrencesService>();
             _projectMap = workspace.Services.GetService<IHierarchyItemToProjectIdMap>();
 
             var errorList = serviceProvider.GetService(typeof(SVsErrorList)) as IErrorList;
@@ -816,13 +815,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Suppression
                         }
 
                         // Filter out stale diagnostics in error list.
-                        documentDiagnosticsToFix = documentDiagnostics
-                            .Value
-                            .Where(
-                                d =>
-                                    latestDocumentDiagnostics.Contains(d)
-                                    || SuppressionHelpers.IsSynthesizedExternalSourceDiagnostic(d)
-                            );
+                        documentDiagnosticsToFix = documentDiagnostics.Value.Where(
+                            d =>
+                                latestDocumentDiagnostics.Contains(d)
+                                || SuppressionHelpers.IsSynthesizedExternalSourceDiagnostic(d)
+                        );
                     }
                     else
                     {

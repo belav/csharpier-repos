@@ -241,17 +241,15 @@ namespace System.Xml.Schema
                 {
                     _derivedRestriction.Enumeration = new ArrayList();
                 }
-                _derivedRestriction
-                    .Enumeration
-                    .Add(
-                        ParseFacetValue(
-                            _datatype,
-                            facet,
-                            SR.Sch_EnumerationFacetInvalid,
-                            nsmgr,
-                            nameTable
-                        )
-                    );
+                _derivedRestriction.Enumeration.Add(
+                    ParseFacetValue(
+                        _datatype,
+                        facet,
+                        SR.Sch_EnumerationFacetInvalid,
+                        nsmgr,
+                        nameTable
+                    )
+                );
                 SetFlag(facet, RestrictionFlags.Enumeration);
             }
 
@@ -1599,9 +1597,10 @@ namespace System.Xml.Schema
     {
         internal override Exception? CheckValueFacets(object value, XmlSchemaDatatype datatype)
         {
-            TimeSpan timeSpanValue = (TimeSpan)datatype
-                .ValueConverter
-                .ChangeType(value, typeof(TimeSpan));
+            TimeSpan timeSpanValue = (TimeSpan)datatype.ValueConverter.ChangeType(
+                value,
+                typeof(TimeSpan)
+            );
             return CheckValueFacets(timeSpanValue, datatype);
         }
 
@@ -1966,9 +1965,11 @@ namespace System.Xml.Schema
     {
         internal override Exception? CheckValueFacets(object value, XmlSchemaDatatype datatype)
         {
-            XmlQualifiedName qualifiedNameValue = (XmlQualifiedName)datatype
-                .ValueConverter
-                .ChangeType(value, typeof(XmlQualifiedName));
+            XmlQualifiedName qualifiedNameValue =
+                (XmlQualifiedName)datatype.ValueConverter.ChangeType(
+                    value,
+                    typeof(XmlQualifiedName)
+                );
             return CheckValueFacets(qualifiedNameValue, datatype);
         }
 
@@ -2034,9 +2035,10 @@ namespace System.Xml.Schema
         )
         {
             return MatchEnumeration(
-                (XmlQualifiedName)datatype
-                    .ValueConverter
-                    .ChangeType(value, typeof(XmlQualifiedName)),
+                (XmlQualifiedName)datatype.ValueConverter.ChangeType(
+                    value,
+                    typeof(XmlQualifiedName)
+                ),
                 enumeration
             );
         }

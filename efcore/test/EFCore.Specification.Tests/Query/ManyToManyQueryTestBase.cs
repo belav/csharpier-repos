@@ -971,8 +971,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                                         .ThenInclude(e => e.ThreeSkipPayloadFull)
                             )
                     )
-                )
-                    .Message
+                ).Message
                     .Replace("\r", "")
                     .Replace("\n", "")
             );
@@ -1005,8 +1004,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                                         .ThenInclude(e => e.ThreeSkipPayloadFull)
                             )
                     )
-                )
-                    .Message
+                ).Message
                     .Replace("\r", "")
                     .Replace("\n", "")
             );
@@ -1191,8 +1189,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                                         .ThenInclude(e => e.Collection.Where(i => i.Id < 10))
                             )
                     )
-                )
-                    .Message
+                ).Message
                     .Replace("\r", "")
                     .Replace("\n", "")
             );

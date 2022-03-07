@@ -231,12 +231,10 @@ namespace Microsoft.Extensions.DependencyModel.Tests
                 .Should()
                 .OnlyContain(l => l == "win8-x64/Pack.Age.native.dll");
 
-            var asm =
-                context
-                    .RuntimeLibraries
-                    .Should()
-                    .Contain(l => l.Name == "System.Collections")
-                    .Subject;
+            var asm = context.RuntimeLibraries
+                .Should()
+                .Contain(l => l.Name == "System.Collections")
+                .Subject;
             asm.Type.Should().Be("referenceassembly");
             asm.Version.Should().Be("3.3.3");
             asm.Hash.Should().BeEmpty();
@@ -352,12 +350,10 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             lib.Path.Should().BeNull();
             lib.HashPath.Should().BeNull();
 
-            var asm =
-                context
-                    .CompileLibraries
-                    .Should()
-                    .Contain(l => l.Name == "System.Collections")
-                    .Subject;
+            var asm = context.CompileLibraries
+                .Should()
+                .Contain(l => l.Name == "System.Collections")
+                .Subject;
             asm.Type.Should().Be("referenceassembly");
             asm.Version.Should().Be("3.3.3");
             asm.Hash.Should().BeEmpty();
@@ -421,12 +417,10 @@ namespace Microsoft.Extensions.DependencyModel.Tests
                 }
             );
 
-            var asm =
-                context
-                    .CompileLibraries
-                    .Should()
-                    .Contain(l => l.Name == "System.Collections")
-                    .Subject;
+            var asm = context.CompileLibraries
+                .Should()
+                .Contain(l => l.Name == "System.Collections")
+                .Subject;
             asm.Assemblies
                 .Should()
                 .OnlyContain(a => a == Path.Combine("sub", "System.Collections.dll"));

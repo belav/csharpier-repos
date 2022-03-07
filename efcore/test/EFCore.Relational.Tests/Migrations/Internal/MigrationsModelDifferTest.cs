@@ -6307,8 +6307,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                         x =>
                         {
                             x.Property<string>("Discriminator")
-                                .Metadata
-                                .SetAfterSaveBehavior(PropertySaveBehavior.Save);
+                                .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Save);
                         }
                     );
                     source.Entity(
@@ -11808,15 +11807,14 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                 _ => { },
                 modelBuilder =>
                 {
-                    var function =
-                        modelBuilder
-                            .HasDbFunction(
-                                typeof(MigrationsModelDifferTest).GetMethod(
-                                    nameof(GetCountByYear),
-                                    BindingFlags.NonPublic | BindingFlags.Static
-                                )
+                    var function = modelBuilder
+                        .HasDbFunction(
+                            typeof(MigrationsModelDifferTest).GetMethod(
+                                nameof(GetCountByYear),
+                                BindingFlags.NonPublic | BindingFlags.Static
                             )
-                            .Metadata;
+                        )
+                        .Metadata;
 
                     modelBuilder.Entity<TestKeylessType>().ToFunction(function.ModelName);
                 },

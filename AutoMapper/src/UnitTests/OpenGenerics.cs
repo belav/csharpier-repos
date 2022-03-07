@@ -93,8 +93,7 @@ namespace AutoMapper.UnitTests
             Mapper.Map<Destination<int>>(new Source<int> { Value = 42 }).Value.ShouldBe(42);
             Mapper
                 .Map<Destination<string>>(new Source<string> { Value = "42" })
-                .Value
-                .ShouldBe("42");
+                .Value.ShouldBe("42");
         }
     }
 
@@ -117,8 +116,7 @@ namespace AutoMapper.UnitTests
         public void Should_work() =>
             new Action(() => Mapper.Map(new Source<int>(), null, typeof(Destination<>)))
                 .ShouldThrow<ArgumentException>()
-                .Message
-                .ShouldStartWith(
+                .Message.ShouldStartWith(
                     $"Type {typeof(Destination<>).FullName}[T] is a generic type definition"
                 );
     }
@@ -417,10 +415,8 @@ namespace AutoMapper.UnitTests
         {
             new Action(Configuration.AssertConfigurationIsValid)
                 .ShouldThrow<AutoMapperConfigurationException>()
-                .Errors
-                .Single()
-                .UnmappedPropertyNames
-                .Single()
+                .Errors.Single()
+                .UnmappedPropertyNames.Single()
                 .ShouldBe("A");
         }
     }
@@ -453,10 +449,8 @@ namespace AutoMapper.UnitTests
         public void Should_report_unmapped_property() =>
             new Action(() => AssertConfigurationIsValid<MyProfile>())
                 .ShouldThrow<AutoMapperConfigurationException>()
-                .Errors
-                .Single()
-                .UnmappedPropertyNames
-                .Single()
+                .Errors.Single()
+                .UnmappedPropertyNames.Single()
                 .ShouldBe("A");
     }
 

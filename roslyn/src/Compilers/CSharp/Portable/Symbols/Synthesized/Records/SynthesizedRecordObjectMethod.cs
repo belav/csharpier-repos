@@ -80,12 +80,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                     reportAnError =
                         (object)leastOverridden
-                            != overriding
-                                .ContainingAssembly
-                                .GetSpecialTypeMember(overriddenSpecialMember)
-                        && leastOverridden
-                            .ReturnType
-                            .Equals(overriding.ReturnType, TypeCompareKind.AllIgnoreOptions);
+                            != overriding.ContainingAssembly.GetSpecialTypeMember(
+                                overriddenSpecialMember
+                            )
+                        && leastOverridden.ReturnType.Equals(
+                            overriding.ReturnType,
+                            TypeCompareKind.AllIgnoreOptions
+                        );
                 }
             }
 

@@ -867,8 +867,13 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             // non-trailing (can rule out methods only).
             NamedArgumentsKind namedKind = FindNamedArgumentsType(args);
 
-            MethPropWithInst mpwiBest =
-                BindMethodGroupToArgumentsCore(bindFlags, grp, args, carg, namedKind).BestResult;
+            MethPropWithInst mpwiBest = BindMethodGroupToArgumentsCore(
+                bindFlags,
+                grp,
+                args,
+                carg,
+                namedKind
+            ).BestResult;
             if (grp.SymKind == SYMKIND.SK_PropertySymbol)
             {
                 Debug.Assert((grp.Flags & EXPRFLAG.EXF_INDEXER) != 0);

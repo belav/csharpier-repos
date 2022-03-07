@@ -20,8 +20,7 @@ namespace Microsoft.DotNet.CoreSetup.Test
 
         public AndConstraint<CommandResultAssertions> ExitWith(int expectedExitCode)
         {
-            Execute
-                .Assertion
+            Execute.Assertion
                 .ForCondition(Result.ExitCode == expectedExitCode)
                 .FailWith(
                     "Expected command to exit with {0} but it did not.{1}",
@@ -33,8 +32,7 @@ namespace Microsoft.DotNet.CoreSetup.Test
 
         public AndConstraint<CommandResultAssertions> Pass()
         {
-            Execute
-                .Assertion
+            Execute.Assertion
                 .ForCondition(Result.ExitCode == 0)
                 .FailWith("Expected command to pass but it did not.{0}", GetDiagnosticsInfo());
             return new AndConstraint<CommandResultAssertions>(this);
@@ -42,8 +40,7 @@ namespace Microsoft.DotNet.CoreSetup.Test
 
         public AndConstraint<CommandResultAssertions> Fail()
         {
-            Execute
-                .Assertion
+            Execute.Assertion
                 .ForCondition(Result.ExitCode != 0)
                 .FailWith("Expected command to fail but it did not.{0}", GetDiagnosticsInfo());
             return new AndConstraint<CommandResultAssertions>(this);
@@ -51,8 +48,7 @@ namespace Microsoft.DotNet.CoreSetup.Test
 
         public AndConstraint<CommandResultAssertions> HaveStdOut()
         {
-            Execute
-                .Assertion
+            Execute.Assertion
                 .ForCondition(!string.IsNullOrEmpty(Result.StdOut))
                 .FailWith("Command did not output anything to stdout{0}", GetDiagnosticsInfo());
             return new AndConstraint<CommandResultAssertions>(this);
@@ -60,8 +56,7 @@ namespace Microsoft.DotNet.CoreSetup.Test
 
         public AndConstraint<CommandResultAssertions> HaveStdOut(string expectedOutput)
         {
-            Execute
-                .Assertion
+            Execute.Assertion
                 .ForCondition(Result.StdOut.Equals(expectedOutput, StringComparison.Ordinal))
                 .FailWith(
                     "Command did not output with Expected Output. Expected: {0}{1}",
@@ -73,8 +68,7 @@ namespace Microsoft.DotNet.CoreSetup.Test
 
         public AndConstraint<CommandResultAssertions> HaveStdOutContaining(string pattern)
         {
-            Execute
-                .Assertion
+            Execute.Assertion
                 .ForCondition(Result.StdOut.Contains(pattern))
                 .FailWith(
                     "The command output did not contain expected result: {0}{1}",
@@ -86,8 +80,7 @@ namespace Microsoft.DotNet.CoreSetup.Test
 
         public AndConstraint<CommandResultAssertions> NotHaveStdOutContaining(string pattern)
         {
-            Execute
-                .Assertion
+            Execute.Assertion
                 .ForCondition(!Result.StdOut.Contains(pattern))
                 .FailWith(
                     "The command output contained a result it should not have contained: {0}{1}",
@@ -102,8 +95,7 @@ namespace Microsoft.DotNet.CoreSetup.Test
             RegexOptions options = RegexOptions.None
         )
         {
-            Execute
-                .Assertion
+            Execute.Assertion
                 .ForCondition(Regex.Match(Result.StdOut, pattern, options).Success)
                 .FailWith(
                     "Matching the command output failed. Pattern: {0}{1}",
@@ -115,8 +107,7 @@ namespace Microsoft.DotNet.CoreSetup.Test
 
         public AndConstraint<CommandResultAssertions> HaveStdErr()
         {
-            Execute
-                .Assertion
+            Execute.Assertion
                 .ForCondition(!string.IsNullOrEmpty(Result.StdErr))
                 .FailWith("Command did not output anything to stderr.{0}", GetDiagnosticsInfo());
             return new AndConstraint<CommandResultAssertions>(this);
@@ -124,8 +115,7 @@ namespace Microsoft.DotNet.CoreSetup.Test
 
         public AndConstraint<CommandResultAssertions> HaveStdErrContaining(string pattern)
         {
-            Execute
-                .Assertion
+            Execute.Assertion
                 .ForCondition(Result.StdErr.Contains(pattern))
                 .FailWith(
                     "The command error output did not contain expected result: {0}{1}",
@@ -137,8 +127,7 @@ namespace Microsoft.DotNet.CoreSetup.Test
 
         public AndConstraint<CommandResultAssertions> NotHaveStdErrContaining(string pattern)
         {
-            Execute
-                .Assertion
+            Execute.Assertion
                 .ForCondition(!Result.StdErr.Contains(pattern))
                 .FailWith(
                     "The command error output contained a result it should not have contained: {0}{1}",
@@ -153,8 +142,7 @@ namespace Microsoft.DotNet.CoreSetup.Test
             RegexOptions options = RegexOptions.None
         )
         {
-            Execute
-                .Assertion
+            Execute.Assertion
                 .ForCondition(Regex.Match(Result.StdErr, pattern, options).Success)
                 .FailWith(
                     "Matching the command error output failed. Pattern: {0}{1}",
@@ -166,8 +154,7 @@ namespace Microsoft.DotNet.CoreSetup.Test
 
         public AndConstraint<CommandResultAssertions> NotHaveStdOut()
         {
-            Execute
-                .Assertion
+            Execute.Assertion
                 .ForCondition(string.IsNullOrEmpty(Result.StdOut))
                 .FailWith(
                     "Expected command to not output to stdout but it was not:{0}",
@@ -178,8 +165,7 @@ namespace Microsoft.DotNet.CoreSetup.Test
 
         public AndConstraint<CommandResultAssertions> NotHaveStdErr()
         {
-            Execute
-                .Assertion
+            Execute.Assertion
                 .ForCondition(string.IsNullOrEmpty(Result.StdErr))
                 .FailWith(
                     "Expected command to not output to stderr but it was not:{0}",
@@ -190,8 +176,7 @@ namespace Microsoft.DotNet.CoreSetup.Test
 
         public AndConstraint<CommandResultAssertions> FileExists(string path)
         {
-            Execute
-                .Assertion
+            Execute.Assertion
                 .ForCondition(System.IO.File.Exists(path))
                 .FailWith(
                     "The command did not write the expected file: {0}{1}",
@@ -204,8 +189,7 @@ namespace Microsoft.DotNet.CoreSetup.Test
         public AndConstraint<CommandResultAssertions> FileContains(string path, string pattern)
         {
             string fileContent = System.IO.File.ReadAllText(path);
-            Execute
-                .Assertion
+            Execute.Assertion
                 .ForCondition(fileContent.Contains(pattern))
                 .FailWith(
                     "The command did not write the expected result '{0}' to the file: {1}{2}\nfile content: {3}",
@@ -220,8 +204,7 @@ namespace Microsoft.DotNet.CoreSetup.Test
         public AndConstraint<CommandResultAssertions> NotFileContains(string path, string pattern)
         {
             string fileContent = System.IO.File.ReadAllText(path);
-            Execute
-                .Assertion
+            Execute.Assertion
                 .ForCondition(!fileContent.Contains(pattern))
                 .FailWith(
                     "The command did not write the expected result '{1}' to the file: {1}{2}\nfile content: {3}",
@@ -248,8 +231,7 @@ namespace Microsoft.DotNet.CoreSetup.Test
             string frameworkFullName
         )
         {
-            Result
-                .StdOut
+            Result.StdOut
                 .Should()
                 .Contain(
                     "Project {0} ({1}) was previously compiled. Skipping compilation.",
@@ -265,8 +247,7 @@ namespace Microsoft.DotNet.CoreSetup.Test
             string frameworkFullName
         )
         {
-            Result
-                .StdOut
+            Result.StdOut
                 .Should()
                 .Contain($"Project {0} ({1}) will be compiled", compiledProject, frameworkFullName);
 

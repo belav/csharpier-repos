@@ -63,11 +63,12 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 {
                     parameters.Namespaces.Add(typeof(SortedDictionary<,>).Namespace!);
                     parameters.Namespaces.Add(typeof(BindingFlags).Namespace!);
-                    var functionsVariable = Dependencies
-                        .CSharpHelper
-                        .Identifier("functions", parameters.ScopeVariables, capitalize: false);
-                    parameters
-                        .MainBuilder
+                    var functionsVariable = Dependencies.CSharpHelper.Identifier(
+                        "functions",
+                        parameters.ScopeVariables,
+                        capitalize: false
+                    );
+                    parameters.MainBuilder
                         .Append("var ")
                         .Append(functionsVariable)
                         .AppendLine(" = new SortedDictionary<string, IDbFunction>();");
@@ -92,11 +93,12 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 )
                 {
                     parameters.Namespaces.Add(typeof(SortedDictionary<,>).Namespace!);
-                    var sequencesVariable = Dependencies
-                        .CSharpHelper
-                        .Identifier("sequences", parameters.ScopeVariables, capitalize: false);
-                    parameters
-                        .MainBuilder
+                    var sequencesVariable = Dependencies.CSharpHelper.Identifier(
+                        "sequences",
+                        parameters.ScopeVariables,
+                        capitalize: false
+                    );
+                    parameters.MainBuilder
                         .Append("var ")
                         .Append(sequencesVariable)
                         .AppendLine(" = new SortedDictionary<(string, string), ISequence>();");
@@ -534,14 +536,15 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                     )
                 )
                 {
-                    parameters
-                        .Namespaces
-                        .Add(typeof(SortedDictionary<StoreObjectIdentifier, object>).Namespace!);
-                    var overridesVariable = Dependencies
-                        .CSharpHelper
-                        .Identifier("overrides", parameters.ScopeVariables, capitalize: false);
-                    parameters
-                        .MainBuilder
+                    parameters.Namespaces.Add(
+                        typeof(SortedDictionary<StoreObjectIdentifier, object>).Namespace!
+                    );
+                    var overridesVariable = Dependencies.CSharpHelper.Identifier(
+                        "overrides",
+                        parameters.ScopeVariables,
+                        capitalize: false
+                    );
+                    parameters.MainBuilder
                         .Append("var ")
                         .Append(overridesVariable)
                         .AppendLine(" = new SortedDictionary<StoreObjectIdentifier, object>();");

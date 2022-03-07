@@ -424,8 +424,7 @@ namespace System.CodeDom.Tests
 
             Assert.Equal((CodeTypeReferenceOptions)0, typeReference.Options);
 
-            CodeTypeReference[] actualTypeArguments = typeReference
-                .TypeArguments
+            CodeTypeReference[] actualTypeArguments = typeReference.TypeArguments
                 .Cast<CodeTypeReference>()
                 .ToArray();
             Assert.Equal(expectedTypeArguments.Length, actualTypeArguments.Length);

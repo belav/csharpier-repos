@@ -178,9 +178,10 @@ namespace Newtonsoft.Json.Tests.Serialization
             // attempt to create the contact from the resolved type
             IComponentRegistration registration;
             if (
-                _container
-                    .ComponentRegistry
-                    .TryGetRegistration(new TypedService(objectType), out registration)
+                _container.ComponentRegistry.TryGetRegistration(
+                    new TypedService(objectType),
+                    out registration
+                )
             )
             {
                 Type viewType = (registration.Activator as ReflectionActivator)?.LimitType;

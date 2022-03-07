@@ -246,8 +246,10 @@ namespace Microsoft.Extensions.Options.Tests
             services.Configure<NullableOptions>(config);
 
             // Act
-            var options =
-                services.BuildServiceProvider().GetService<IOptions<NullableOptions>>().Value;
+            var options = services
+                .BuildServiceProvider()
+                .GetService<IOptions<NullableOptions>>()
+                .Value;
 
             // Assert
             var optionsProps = options.GetType().GetProperties().ToDictionary(p => p.Name);

@@ -1162,10 +1162,12 @@ namespace System.Transactions
 
             _savedTLSContextData.CurrentScope = ContextData.TLSCurrentData.CurrentScope;
             _savedTLSContextData.CurrentTransaction = ContextData.TLSCurrentData.CurrentTransaction;
-            _savedTLSContextData.DefaultComContextState =
-                ContextData.TLSCurrentData.DefaultComContextState;
-            _savedTLSContextData.WeakDefaultComContext =
-                ContextData.TLSCurrentData.WeakDefaultComContext;
+            _savedTLSContextData.DefaultComContextState = ContextData
+                .TLSCurrentData
+                .DefaultComContextState;
+            _savedTLSContextData.WeakDefaultComContext = ContextData
+                .TLSCurrentData
+                .WeakDefaultComContext;
         }
 
         private void RestoreSavedTLSContextData()

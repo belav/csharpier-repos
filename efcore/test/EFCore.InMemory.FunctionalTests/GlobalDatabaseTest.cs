@@ -100,8 +100,9 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Owned_types_are_found_correctly_with_database_root()
         {
-            var options =
-                new DbContextOptionsBuilder().UseInMemoryDatabase("20784", _databaseRoot).Options;
+            var options = new DbContextOptionsBuilder()
+                .UseInMemoryDatabase("20784", _databaseRoot)
+                .Options;
 
             using (var context = new BooFooContext(options))
             {

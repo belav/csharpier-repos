@@ -27,9 +27,7 @@ public static class IHostPortExtensions
     {
         return host.Services
             .GetService<IServer>()
-            .Features
-            .Get<IServerAddressesFeature>()
-            .Addresses
-            .Select(a => new Uri(a));
+            .Features.Get<IServerAddressesFeature>()
+            .Addresses.Select(a => new Uri(a));
     }
 }

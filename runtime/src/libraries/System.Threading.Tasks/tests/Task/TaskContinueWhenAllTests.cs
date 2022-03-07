@@ -63,18 +63,14 @@ namespace System.Threading.Tasks.Tests
                                 if (useFutureFactory)
                                 {
                                     // antecedentsAreFutures=true, continuationsAreFutures=true, useFutureFactory = true
-                                    tSmall = Task<int>
-                                        .Factory
-                                        .ContinueWhenAll<int>(
-                                            smallFutureArray,
-                                            (Task<int>[] finishedArray) => 10
-                                        );
-                                    tLarge = Task<int>
-                                        .Factory
-                                        .ContinueWhenAll<int>(
-                                            largeFutureArray,
-                                            (Task<int>[] finishedArray) => 20
-                                        );
+                                    tSmall = Task<int>.Factory.ContinueWhenAll<int>(
+                                        smallFutureArray,
+                                        (Task<int>[] finishedArray) => 10
+                                    );
+                                    tLarge = Task<int>.Factory.ContinueWhenAll<int>(
+                                        largeFutureArray,
+                                        (Task<int>[] finishedArray) => 20
+                                    );
                                 }
                                 else // useFutureFactory = false (use Task factory)
                                 {
@@ -118,18 +114,14 @@ namespace System.Threading.Tasks.Tests
                                 if (useFutureFactory)
                                 {
                                     // antecedentsAreFutures=false, continuationsAreFutures=true, useFutureFactory = true
-                                    tSmall = Task<int>
-                                        .Factory
-                                        .ContinueWhenAll(
-                                            smallTaskArray,
-                                            (Task[] finishedArray) => 10
-                                        );
-                                    tLarge = Task<int>
-                                        .Factory
-                                        .ContinueWhenAll(
-                                            largeTaskArray,
-                                            (Task[] finishedArray) => 20
-                                        );
+                                    tSmall = Task<int>.Factory.ContinueWhenAll(
+                                        smallTaskArray,
+                                        (Task[] finishedArray) => 10
+                                    );
+                                    tLarge = Task<int>.Factory.ContinueWhenAll(
+                                        largeTaskArray,
+                                        (Task[] finishedArray) => 20
+                                    );
                                 }
                                 else // useFutureFactory = false (use TaskFactory)
                                 {
@@ -271,20 +263,16 @@ namespace System.Threading.Tasks.Tests
                                     if (useFutureFactory)
                                     {
                                         // antecedentsAreFutures=true, continuationsAreFutures=true, useFutureFactory = true
-                                        tSmall = Task<int>
-                                            .Factory
-                                            .ContinueWhenAll<int>(
-                                                smallFutureArray,
-                                                (Task<int>[] finishedArray) => 10,
-                                                ct
-                                            );
-                                        tLarge = Task<int>
-                                            .Factory
-                                            .ContinueWhenAll<int>(
-                                                largeFutureArray,
-                                                (Task<int>[] finishedArray) => 20,
-                                                ct
-                                            );
+                                        tSmall = Task<int>.Factory.ContinueWhenAll<int>(
+                                            smallFutureArray,
+                                            (Task<int>[] finishedArray) => 10,
+                                            ct
+                                        );
+                                        tLarge = Task<int>.Factory.ContinueWhenAll<int>(
+                                            largeFutureArray,
+                                            (Task<int>[] finishedArray) => 20,
+                                            ct
+                                        );
                                     }
                                     else // useFutureFactory = false (use Task factory)
                                     {
@@ -332,20 +320,16 @@ namespace System.Threading.Tasks.Tests
                                     if (useFutureFactory)
                                     {
                                         // antecedentsAreFutures=false, continuationsAreFutures=true, useFutureFactory = true
-                                        tSmall = Task<int>
-                                            .Factory
-                                            .ContinueWhenAll(
-                                                smallTaskArray,
-                                                (Task[] finishedArray) => 10,
-                                                ct
-                                            );
-                                        tLarge = Task<int>
-                                            .Factory
-                                            .ContinueWhenAll(
-                                                largeTaskArray,
-                                                (Task[] finishedArray) => 20,
-                                                ct
-                                            );
+                                        tSmall = Task<int>.Factory.ContinueWhenAll(
+                                            smallTaskArray,
+                                            (Task[] finishedArray) => 10,
+                                            ct
+                                        );
+                                        tLarge = Task<int>.Factory.ContinueWhenAll(
+                                            largeTaskArray,
+                                            (Task[] finishedArray) => 20,
+                                            ct
+                                        );
                                     }
                                     else // useFutureFactory = false (use TaskFactory)
                                     {
@@ -549,20 +533,16 @@ namespace System.Threading.Tasks.Tests
                                     if (useFutureFactory)
                                     {
                                         // antecedentsAreFutures=true, continuationsAreFutures=true, useFutureFactory = true
-                                        tSmall = Task<int>
-                                            .Factory
-                                            .ContinueWhenAll<int>(
-                                                smallFutureArray,
-                                                (Task<int>[] finishedArray) => 10,
-                                                tco
-                                            );
-                                        tLarge = Task<int>
-                                            .Factory
-                                            .ContinueWhenAll<int>(
-                                                largeFutureArray,
-                                                (Task<int>[] finishedArray) => 20,
-                                                tco
-                                            );
+                                        tSmall = Task<int>.Factory.ContinueWhenAll<int>(
+                                            smallFutureArray,
+                                            (Task<int>[] finishedArray) => 10,
+                                            tco
+                                        );
+                                        tLarge = Task<int>.Factory.ContinueWhenAll<int>(
+                                            largeFutureArray,
+                                            (Task<int>[] finishedArray) => 20,
+                                            tco
+                                        );
                                     }
                                     else // useFutureFactory = false (use Task factory)
                                     {
@@ -610,20 +590,16 @@ namespace System.Threading.Tasks.Tests
                                     if (useFutureFactory)
                                     {
                                         // antecedentsAreFutures=false, continuationsAreFutures=true, useFutureFactory = true
-                                        tSmall = Task<int>
-                                            .Factory
-                                            .ContinueWhenAll(
-                                                smallTaskArray,
-                                                (Task[] finishedArray) => 10,
-                                                tco
-                                            );
-                                        tLarge = Task<int>
-                                            .Factory
-                                            .ContinueWhenAll(
-                                                largeTaskArray,
-                                                (Task[] finishedArray) => 20,
-                                                tco
-                                            );
+                                        tSmall = Task<int>.Factory.ContinueWhenAll(
+                                            smallTaskArray,
+                                            (Task[] finishedArray) => 10,
+                                            tco
+                                        );
+                                        tLarge = Task<int>.Factory.ContinueWhenAll(
+                                            largeTaskArray,
+                                            (Task[] finishedArray) => 20,
+                                            tco
+                                        );
                                     }
                                     else // useFutureFactory = false (use TaskFactory)
                                     {
@@ -789,24 +765,20 @@ namespace System.Threading.Tasks.Tests
                                     if (useFutureFactory)
                                     {
                                         // antecedentsAreFutures=true, continuationsAreFutures=true, useFutureFactory = true
-                                        tSmall = Task<int>
-                                            .Factory
-                                            .ContinueWhenAll<int>(
-                                                smallFutureArray,
-                                                (Task<int>[] finishedArray) => 10,
-                                                ct,
-                                                tco,
-                                                ts
-                                            );
-                                        tLarge = Task<int>
-                                            .Factory
-                                            .ContinueWhenAll<int>(
-                                                largeFutureArray,
-                                                (Task<int>[] finishedArray) => 20,
-                                                ct,
-                                                tco,
-                                                ts
-                                            );
+                                        tSmall = Task<int>.Factory.ContinueWhenAll<int>(
+                                            smallFutureArray,
+                                            (Task<int>[] finishedArray) => 10,
+                                            ct,
+                                            tco,
+                                            ts
+                                        );
+                                        tLarge = Task<int>.Factory.ContinueWhenAll<int>(
+                                            largeFutureArray,
+                                            (Task<int>[] finishedArray) => 20,
+                                            ct,
+                                            tco,
+                                            ts
+                                        );
                                     }
                                     else // useFutureFactory = false (use Task factory)
                                     {
@@ -862,24 +834,20 @@ namespace System.Threading.Tasks.Tests
                                     if (useFutureFactory)
                                     {
                                         // antecedentsAreFutures=false, continuationsAreFutures=true, useFutureFactory = true
-                                        tSmall = Task<int>
-                                            .Factory
-                                            .ContinueWhenAll(
-                                                smallTaskArray,
-                                                (Task[] finishedArray) => 10,
-                                                ct,
-                                                tco,
-                                                ts
-                                            );
-                                        tLarge = Task<int>
-                                            .Factory
-                                            .ContinueWhenAll(
-                                                largeTaskArray,
-                                                (Task[] finishedArray) => 20,
-                                                ct,
-                                                tco,
-                                                ts
-                                            );
+                                        tSmall = Task<int>.Factory.ContinueWhenAll(
+                                            smallTaskArray,
+                                            (Task[] finishedArray) => 10,
+                                            ct,
+                                            tco,
+                                            ts
+                                        );
+                                        tLarge = Task<int>.Factory.ContinueWhenAll(
+                                            largeTaskArray,
+                                            (Task[] finishedArray) => 20,
+                                            ct,
+                                            tco,
+                                            ts
+                                        );
                                     }
                                     else // useFutureFactory = false (use TaskFactory)
                                     {
@@ -1266,28 +1234,24 @@ namespace System.Threading.Tasks.Tests
                 Assert.Throws<ArgumentNullException>(
                     () =>
                     {
-                        Task<int>
-                            .Factory
-                            .ContinueWhenAll(
-                                smallTaskArray,
-                                finishedArray => 10,
-                                CancellationToken.None,
-                                TaskContinuationOptions.None,
-                                (TaskScheduler)null
-                            );
+                        Task<int>.Factory.ContinueWhenAll(
+                            smallTaskArray,
+                            finishedArray => 10,
+                            CancellationToken.None,
+                            TaskContinuationOptions.None,
+                            (TaskScheduler)null
+                        );
                     }
                 );
 
                 Assert.Throws<ArgumentOutOfRangeException>(
                     () =>
                     {
-                        Task<int>
-                            .Factory
-                            .ContinueWhenAll(
-                                smallTaskArray,
-                                finishedArray => 10,
-                                TaskContinuationOptions.NotOnFaulted
-                            );
+                        Task<int>.Factory.ContinueWhenAll(
+                            smallTaskArray,
+                            finishedArray => 10,
+                            TaskContinuationOptions.NotOnFaulted
+                        );
                     }
                 );
 
@@ -1301,41 +1265,35 @@ namespace System.Threading.Tasks.Tests
                 Assert.Throws<ArgumentNullException>(
                     () =>
                     {
-                        Task<int>
-                            .Factory
-                            .ContinueWhenAll(
-                                smallTaskArray,
-                                (Func<Task[], int>)null,
-                                CancellationToken.None
-                            );
+                        Task<int>.Factory.ContinueWhenAll(
+                            smallTaskArray,
+                            (Func<Task[], int>)null,
+                            CancellationToken.None
+                        );
                     }
                 );
 
                 Assert.Throws<ArgumentNullException>(
                     () =>
                     {
-                        Task<int>
-                            .Factory
-                            .ContinueWhenAll(
-                                smallTaskArray,
-                                (Func<Task[], int>)null,
-                                TaskContinuationOptions.None
-                            );
+                        Task<int>.Factory.ContinueWhenAll(
+                            smallTaskArray,
+                            (Func<Task[], int>)null,
+                            TaskContinuationOptions.None
+                        );
                     }
                 );
 
                 Assert.Throws<ArgumentNullException>(
                     () =>
                     {
-                        Task<int>
-                            .Factory
-                            .ContinueWhenAll(
-                                smallTaskArray,
-                                (Func<Task[], int>)null,
-                                CancellationToken.None,
-                                TaskContinuationOptions.None,
-                                TaskScheduler.Default
-                            );
+                        Task<int>.Factory.ContinueWhenAll(
+                            smallTaskArray,
+                            (Func<Task[], int>)null,
+                            CancellationToken.None,
+                            TaskContinuationOptions.None,
+                            TaskScheduler.Default
+                        );
                     }
                 );
 
@@ -1573,87 +1531,79 @@ namespace System.Threading.Tasks.Tests
                 Assert.Throws<ArgumentNullException>(
                     () =>
                     {
-                        Task<int>
-                            .Factory
-                            .ContinueWhenAll<int>(
-                                smallFutureArray,
-                                finishedArray => 10,
-                                CancellationToken.None,
-                                TaskContinuationOptions.None,
-                                (TaskScheduler)null
-                            );
+                        Task<int>.Factory.ContinueWhenAll<int>(
+                            smallFutureArray,
+                            finishedArray => 10,
+                            CancellationToken.None,
+                            TaskContinuationOptions.None,
+                            (TaskScheduler)null
+                        );
                     }
                 );
 
                 Assert.Throws<ArgumentOutOfRangeException>(
                     () =>
                     {
-                        Task<int>
-                            .Factory
-                            .ContinueWhenAll<int>(
-                                smallFutureArray,
-                                finishedArray => 10,
-                                TaskContinuationOptions.NotOnFaulted
-                            );
+                        Task<int>.Factory.ContinueWhenAll<int>(
+                            smallFutureArray,
+                            finishedArray => 10,
+                            TaskContinuationOptions.NotOnFaulted
+                        );
                     }
                 );
 
                 Assert.Throws<ArgumentNullException>(
                     () =>
                     {
-                        Task<int>
-                            .Factory
-                            .ContinueWhenAll<int>(smallFutureArray, (Func<Task[], int>)null);
+                        Task<int>.Factory.ContinueWhenAll<int>(
+                            smallFutureArray,
+                            (Func<Task[], int>)null
+                        );
                     }
                 );
 
                 Assert.Throws<ArgumentNullException>(
                     () =>
                     {
-                        Task<int>
-                            .Factory
-                            .ContinueWhenAll<int>(
-                                smallFutureArray,
-                                (Func<Task[], int>)null,
-                                CancellationToken.None
-                            );
+                        Task<int>.Factory.ContinueWhenAll<int>(
+                            smallFutureArray,
+                            (Func<Task[], int>)null,
+                            CancellationToken.None
+                        );
                     }
                 );
 
                 Assert.Throws<ArgumentNullException>(
                     () =>
                     {
-                        Task<int>
-                            .Factory
-                            .ContinueWhenAll<int>(
-                                smallFutureArray,
-                                (Func<Task[], int>)null,
-                                TaskContinuationOptions.None
-                            );
+                        Task<int>.Factory.ContinueWhenAll<int>(
+                            smallFutureArray,
+                            (Func<Task[], int>)null,
+                            TaskContinuationOptions.None
+                        );
                     }
                 );
 
                 Assert.Throws<ArgumentNullException>(
                     () =>
                     {
-                        Task<int>
-                            .Factory
-                            .ContinueWhenAll<int>(
-                                smallFutureArray,
-                                (Func<Task[], int>)null,
-                                CancellationToken.None,
-                                TaskContinuationOptions.None,
-                                TaskScheduler.Default
-                            );
+                        Task<int>.Factory.ContinueWhenAll<int>(
+                            smallFutureArray,
+                            (Func<Task[], int>)null,
+                            CancellationToken.None,
+                            TaskContinuationOptions.None,
+                            TaskScheduler.Default
+                        );
                     }
                 );
 
                 Assert.Throws<ArgumentNullException>(
                     () =>
                     {
-                        Task<int>
-                            .Factory
-                            .ContinueWhenAll<int>((Task<int>[])null, finishedArray => 10);
+                        Task<int>.Factory.ContinueWhenAll<int>(
+                            (Task<int>[])null,
+                            finishedArray => 10
+                        );
                     }
                 );
 

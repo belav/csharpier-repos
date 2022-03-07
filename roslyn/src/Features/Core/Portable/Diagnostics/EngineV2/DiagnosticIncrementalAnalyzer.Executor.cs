@@ -268,11 +268,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 return result;
             }
 
-            var compilerAnalyzer = project
-                .Solution
-                .State
-                .Analyzers
-                .GetCompilerDiagnosticAnalyzer(project.Language);
+            var compilerAnalyzer = project.Solution.State.Analyzers.GetCompilerDiagnosticAnalyzer(
+                project.Language
+            );
             if (compilerAnalyzer == null)
             {
                 // this language doesn't support compiler analyzer
@@ -313,8 +311,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
         {
             try
             {
-                var result =
-                    ImmutableDictionary<DiagnosticAnalyzer, DiagnosticAnalysisResult>.Empty;
+                var result = ImmutableDictionary<
+                    DiagnosticAnalyzer,
+                    DiagnosticAnalysisResult
+                >.Empty;
 
                 // can be null if given project doesn't support compilation.
                 if (compilationWithAnalyzers?.Analyzers.Length > 0)
@@ -647,8 +647,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 
             foreach (var document in project.Documents)
             {
-                var loadDiagnostic = await document
-                    .State
+                var loadDiagnostic = await document.State
                     .GetLoadDiagnosticAsync(cancellationToken)
                     .ConfigureAwait(false);
                 if (loadDiagnostic != null)

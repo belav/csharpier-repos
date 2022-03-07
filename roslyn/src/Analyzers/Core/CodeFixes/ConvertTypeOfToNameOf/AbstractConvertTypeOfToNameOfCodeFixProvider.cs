@@ -46,9 +46,10 @@ namespace Microsoft.CodeAnalysis.ConvertTypeOfToNameOf
                 .ConfigureAwait(false);
             foreach (var diagnostic in diagnostics)
             {
-                var node = editor
-                    .OriginalRoot
-                    .FindNode(diagnostic.Location.SourceSpan, getInnermostNodeForTie: true);
+                var node = editor.OriginalRoot.FindNode(
+                    diagnostic.Location.SourceSpan,
+                    getInnermostNodeForTie: true
+                );
                 ConvertTypeOfToNameOf(semanticModel, editor, node, cancellationToken);
             }
         }

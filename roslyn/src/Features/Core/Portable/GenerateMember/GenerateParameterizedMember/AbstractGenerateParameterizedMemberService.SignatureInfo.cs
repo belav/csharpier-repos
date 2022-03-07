@@ -161,12 +161,10 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 );
 
                 // Ensure no conflicts between type parameter names and parameter names.
-                var languageServiceProvider = Document
-                    .Project
-                    .Solution
-                    .Workspace
-                    .Services
-                    .GetLanguageServices(State.TypeToGenerateIn.Language);
+                var languageServiceProvider =
+                    Document.Project.Solution.Workspace.Services.GetLanguageServices(
+                        State.TypeToGenerateIn.Language
+                    );
                 var syntaxFacts = languageServiceProvider.GetService<ISyntaxFactsService>();
 
                 var equalityComparer = syntaxFacts.StringComparer;
@@ -344,11 +342,9 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                         return Accessibility.Protected;
                     }
                     else if (
-                        containingType
-                            .ContainingAssembly
-                            .IsSameAssemblyOrHasFriendAccessTo(
-                                State.TypeToGenerateIn.ContainingAssembly
-                            )
+                        containingType.ContainingAssembly.IsSameAssemblyOrHasFriendAccessTo(
+                            State.TypeToGenerateIn.ContainingAssembly
+                        )
                     )
                     {
                         return Accessibility.Internal;

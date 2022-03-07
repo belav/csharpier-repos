@@ -72,12 +72,10 @@ namespace Microsoft.CodeAnalysis.CSharp.SemanticModelReuse
             CancellationToken cancellationToken
         )
         {
-            var previousRoot = await previousSemanticModel
-                .SyntaxTree
+            var previousRoot = await previousSemanticModel.SyntaxTree
                 .GetRootAsync(cancellationToken)
                 .ConfigureAwait(false);
-            var currentRoot = await currentBodyNode
-                .SyntaxTree
+            var currentRoot = await currentBodyNode.SyntaxTree
                 .GetRootAsync(cancellationToken)
                 .ConfigureAwait(false);
 

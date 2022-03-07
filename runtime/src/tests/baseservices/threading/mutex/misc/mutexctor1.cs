@@ -45,11 +45,9 @@ public class MutexCtor1
         Thread thread = null;
 
         // Add your scenario description here
-        TestLibrary
-            .TestFramework
-            .BeginScenario(
-                "PosTest1: Construct a new Mutex instance with initiallyOwned set to true (ensure that the thread owns the mutex)"
-            );
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest1: Construct a new Mutex instance with initiallyOwned set to true (ensure that the thread owns the mutex)"
+        );
 
         using (m_Mutex = new Mutex(true))
         {
@@ -59,12 +57,10 @@ public class MutexCtor1
                 {
                     if (null == m_Mutex)
                     {
-                        TestLibrary
-                            .TestFramework
-                            .LogError(
-                                "001",
-                                "Can not construct a new Mutex intance with initiallyOwned set to true."
-                            );
+                        TestLibrary.TestFramework.LogError(
+                            "001",
+                            "Can not construct a new Mutex intance with initiallyOwned set to true."
+                        );
                         retVal = false;
 
                         break;
@@ -81,12 +77,10 @@ public class MutexCtor1
 
                     if (m_SharedResource != c_DEFAULT_INT_VALUE)
                     {
-                        TestLibrary
-                            .TestFramework
-                            .LogError(
-                                "002",
-                                "Call Mutex(true) does not set current thread to be the owner of the mutex."
-                            );
+                        TestLibrary.TestFramework.LogError(
+                            "002",
+                            "Call Mutex(true) does not set current thread to be the owner of the mutex."
+                        );
                         retVal = false;
                     }
                     m_Mutex.ReleaseMutex();
@@ -119,11 +113,9 @@ public class MutexCtor1
         bool retVal = true;
 
         // Add your scenario description here
-        TestLibrary
-            .TestFramework
-            .BeginScenario(
-                "PosTest2: Construct a new Mutex instance with initiallyOwned set to false.  Ensure that the thread does not own the mutex"
-            );
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest2: Construct a new Mutex instance with initiallyOwned set to false.  Ensure that the thread does not own the mutex"
+        );
 
         using (m_Mutex = new Mutex(false))
         {
@@ -131,12 +123,10 @@ public class MutexCtor1
             {
                 if (null == m_Mutex)
                 {
-                    TestLibrary
-                        .TestFramework
-                        .LogError(
-                            "004",
-                            "Can not construct a new Mutex intance with initiallyOwned set to false."
-                        );
+                    TestLibrary.TestFramework.LogError(
+                        "004",
+                        "Can not construct a new Mutex intance with initiallyOwned set to false."
+                    );
                     retVal = false;
                 }
                 else

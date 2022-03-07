@@ -1068,17 +1068,15 @@ namespace System.Data.OleDb
                                 try
                                 {
                                     propSet.DangerousAddRef(ref mustRelease);
-                                    hr = iopenRowset
-                                        .Value
-                                        .OpenRowset(
-                                            ADP.PtrZero,
-                                            tableID,
-                                            ADP.PtrZero,
-                                            ref ODB.IID_IRowset,
-                                            propSet.PropertySetCount,
-                                            propSet.DangerousGetHandle(),
-                                            out executeResult
-                                        );
+                                    hr = iopenRowset.Value.OpenRowset(
+                                        ADP.PtrZero,
+                                        tableID,
+                                        ADP.PtrZero,
+                                        ref ODB.IID_IRowset,
+                                        propSet.PropertySetCount,
+                                        propSet.DangerousGetHandle(),
+                                        out executeResult
+                                    );
                                 }
                                 finally
                                 {
@@ -1090,24 +1088,7 @@ namespace System.Data.OleDb
 
                                 if (OleDbHResult.DB_E_ERRORSOCCURRED == hr)
                                 {
-                                    hr = iopenRowset
-                                        .Value
-                                        .OpenRowset(
-                                            ADP.PtrZero,
-                                            tableID,
-                                            ADP.PtrZero,
-                                            ref ODB.IID_IRowset,
-                                            0,
-                                            IntPtr.Zero,
-                                            out executeResult
-                                        );
-                                }
-                            }
-                            else
-                            {
-                                hr = iopenRowset
-                                    .Value
-                                    .OpenRowset(
+                                    hr = iopenRowset.Value.OpenRowset(
                                         ADP.PtrZero,
                                         tableID,
                                         ADP.PtrZero,
@@ -1116,6 +1097,19 @@ namespace System.Data.OleDb
                                         IntPtr.Zero,
                                         out executeResult
                                     );
+                                }
+                            }
+                            else
+                            {
+                                hr = iopenRowset.Value.OpenRowset(
+                                    ADP.PtrZero,
+                                    tableID,
+                                    ADP.PtrZero,
+                                    ref ODB.IID_IRowset,
+                                    0,
+                                    IntPtr.Zero,
+                                    out executeResult
+                                );
                             }
                         }
                     }

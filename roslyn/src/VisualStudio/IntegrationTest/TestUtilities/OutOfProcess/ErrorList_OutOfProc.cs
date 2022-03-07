@@ -28,27 +28,22 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
 
         public void ShowErrorList()
         {
-            _instance
-                .Workspace
-                .WaitForAsyncOperations(
-                    Helper.HangMitigatingTimeout,
-                    FeatureAttribute.SolutionCrawler
-                );
-            _instance
-                .Workspace
-                .WaitForAsyncOperations(
-                    Helper.HangMitigatingTimeout,
-                    FeatureAttribute.DiagnosticService
-                );
-            _instance
-                .Workspace
-                .WaitForAsyncOperations(
-                    Helper.HangMitigatingTimeout,
-                    FeatureAttribute.ErrorSquiggles
-                );
-            _instance
-                .Workspace
-                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.ErrorList);
+            _instance.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.SolutionCrawler
+            );
+            _instance.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.DiagnosticService
+            );
+            _instance.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.ErrorSquiggles
+            );
+            _instance.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.ErrorList
+            );
             _inProc.ShowErrorList();
         }
 
@@ -59,53 +54,43 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
 
         public ErrorListItem[] GetErrorListContents()
         {
-            _instance
-                .Workspace
-                .WaitForAsyncOperations(
-                    Helper.HangMitigatingTimeout,
-                    FeatureAttribute.SolutionCrawler
-                );
-            _instance
-                .Workspace
-                .WaitForAsyncOperations(
-                    Helper.HangMitigatingTimeout,
-                    FeatureAttribute.DiagnosticService
-                );
-            _instance
-                .Workspace
-                .WaitForAsyncOperations(
-                    Helper.HangMitigatingTimeout,
-                    FeatureAttribute.ErrorSquiggles
-                );
-            _instance
-                .Workspace
-                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.ErrorList);
+            _instance.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.SolutionCrawler
+            );
+            _instance.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.DiagnosticService
+            );
+            _instance.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.ErrorSquiggles
+            );
+            _instance.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.ErrorList
+            );
             return _inProc.GetErrorListContents();
         }
 
         public ErrorListItem NavigateToErrorListItem(int itemIndex)
         {
-            _instance
-                .Workspace
-                .WaitForAsyncOperations(
-                    Helper.HangMitigatingTimeout,
-                    FeatureAttribute.SolutionCrawler
-                );
-            _instance
-                .Workspace
-                .WaitForAsyncOperations(
-                    Helper.HangMitigatingTimeout,
-                    FeatureAttribute.DiagnosticService
-                );
-            _instance
-                .Workspace
-                .WaitForAsyncOperations(
-                    Helper.HangMitigatingTimeout,
-                    FeatureAttribute.ErrorSquiggles
-                );
-            _instance
-                .Workspace
-                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.ErrorList);
+            _instance.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.SolutionCrawler
+            );
+            _instance.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.DiagnosticService
+            );
+            _instance.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.ErrorSquiggles
+            );
+            _instance.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.ErrorList
+            );
             return _inProc.NavigateToErrorListItem(itemIndex);
         }
     }

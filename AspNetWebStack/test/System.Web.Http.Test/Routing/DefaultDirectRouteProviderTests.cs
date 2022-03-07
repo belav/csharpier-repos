@@ -19,8 +19,9 @@ namespace System.Web.Http.Routing
             // Arrange
             var factories = new[] { CreateStubRouteFactory(null) };
             var action = CreateStubActionDescriptor("IgnoreAction");
-            var constraintResolver =
-                new Mock<IInlineConstraintResolver>(MockBehavior.Strict).Object;
+            var constraintResolver = new Mock<IInlineConstraintResolver>(
+                MockBehavior.Strict
+            ).Object;
 
             var provider = new AccessibleDirectRouteProvider();
 
@@ -37,8 +38,9 @@ namespace System.Web.Http.Routing
             // Arrange
             var factories = new[] { CreateStubRouteFactory(null) };
             var action = CreateStubActionDescriptor("IgnoreAction");
-            var constraintResolver =
-                new Mock<IInlineConstraintResolver>(MockBehavior.Strict).Object;
+            var constraintResolver = new Mock<IInlineConstraintResolver>(
+                MockBehavior.Strict
+            ).Object;
 
             var provider = new AccessibleDirectRouteProvider();
 
@@ -64,8 +66,9 @@ namespace System.Web.Http.Routing
             var factories = new[] { CreateStubRouteFactory(entry) };
 
             var action = CreateStubActionDescriptor("IgnoreAction");
-            var constraintResolver =
-                new Mock<IInlineConstraintResolver>(MockBehavior.Strict).Object;
+            var constraintResolver = new Mock<IInlineConstraintResolver>(
+                MockBehavior.Strict
+            ).Object;
 
             var provider = new AccessibleDirectRouteProvider();
 
@@ -88,8 +91,9 @@ namespace System.Web.Http.Routing
             var factories = new[] { CreateStubRouteFactory(entry) };
 
             var action = CreateStubActionDescriptor("IgnoreAction");
-            var constraintResolver =
-                new Mock<IInlineConstraintResolver>(MockBehavior.Strict).Object;
+            var constraintResolver = new Mock<IInlineConstraintResolver>(
+                MockBehavior.Strict
+            ).Object;
 
             var provider = new AccessibleDirectRouteProvider();
 
@@ -122,8 +126,9 @@ namespace System.Web.Http.Routing
             var factories = new[] { CreateStubRouteFactory(entry) };
 
             var action = CreateStubActionDescriptor("IgnoreAction");
-            var constraintResolver =
-                new Mock<IInlineConstraintResolver>(MockBehavior.Strict).Object;
+            var constraintResolver = new Mock<IInlineConstraintResolver>(
+                MockBehavior.Strict
+            ).Object;
 
             var provider = new AccessibleDirectRouteProvider();
 
@@ -150,8 +155,9 @@ namespace System.Web.Http.Routing
             var factories = new[] { CreateStubRouteFactory(entry) };
 
             var action = CreateStubActionDescriptor("IgnoreAction");
-            var constraintResolver =
-                new Mock<IInlineConstraintResolver>(MockBehavior.Strict).Object;
+            var constraintResolver = new Mock<IInlineConstraintResolver>(
+                MockBehavior.Strict
+            ).Object;
 
             var provider = new AccessibleDirectRouteProvider();
 
@@ -186,8 +192,9 @@ namespace System.Web.Http.Routing
             RouteEntry entry = new RouteEntry(name: null, route: route);
             var factories = new[] { CreateStubRouteFactory(entry) };
 
-            var constraintResolver =
-                new Mock<IInlineConstraintResolver>(MockBehavior.Strict).Object;
+            var constraintResolver = new Mock<IInlineConstraintResolver>(
+                MockBehavior.Strict
+            ).Object;
 
             var provider = new AccessibleDirectRouteProvider();
 
@@ -214,8 +221,9 @@ namespace System.Web.Http.Routing
             RouteEntry entry = new RouteEntry(name: null, route: route);
             var factories = new[] { CreateStubRouteFactory(entry) };
 
-            var constraintResolver =
-                new Mock<IInlineConstraintResolver>(MockBehavior.Strict).Object;
+            var constraintResolver = new Mock<IInlineConstraintResolver>(
+                MockBehavior.Strict
+            ).Object;
 
             var provider = new AccessibleDirectRouteProvider();
 

@@ -61,8 +61,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             IndentedStringBuilder stringBuilder
         )
         {
-            var annotations = Dependencies
-                .AnnotationCodeGenerator
+            var annotations = Dependencies.AnnotationCodeGenerator
                 .FilterIgnoredAnnotations(model.GetAnnotations())
                 .ToDictionary(a => a.Name, a => a);
 
@@ -165,9 +164,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                 ownerNavigation != null
                 && entityType.HasSharedClrType
                 && entityTypeName
-                    == ownership!
-                        .PrincipalEntityType
-                        .GetOwnedName(entityType.ClrType.ShortDisplayName(), ownerNavigation)
+                    == ownership!.PrincipalEntityType.GetOwnedName(
+                        entityType.ClrType.ShortDisplayName(),
+                        ownerNavigation
+                    )
             )
             {
                 entityTypeName = entityType.ClrType.DisplayName();
@@ -549,8 +549,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             IndentedStringBuilder stringBuilder
         )
         {
-            var annotations = Dependencies
-                .AnnotationCodeGenerator
+            var annotations = Dependencies.AnnotationCodeGenerator
                 .FilterIgnoredAnnotations(property.GetAnnotations())
                 .ToDictionary(a => a.Name, a => a);
 
@@ -566,8 +565,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                 .Append(
                     Code.Literal(
                         property.GetColumnType()
-                            ?? Dependencies
-                                .RelationalTypeMappingSource
+                            ?? Dependencies.RelationalTypeMappingSource
                                 .GetMapping(property)
                                 .StoreType
                     )
@@ -677,8 +675,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             IndentedStringBuilder stringBuilder
         )
         {
-            var annotations = Dependencies
-                .AnnotationCodeGenerator
+            var annotations = Dependencies.AnnotationCodeGenerator
                 .FilterIgnoredAnnotations(key.GetAnnotations())
                 .ToDictionary(a => a.Name, a => a);
 
@@ -762,8 +759,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             IndentedStringBuilder stringBuilder
         )
         {
-            var annotations = Dependencies
-                .AnnotationCodeGenerator
+            var annotations = Dependencies.AnnotationCodeGenerator
                 .FilterIgnoredAnnotations(index.GetAnnotations())
                 .ToDictionary(a => a.Name, a => a);
 
@@ -800,8 +796,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                 a => a.Name == CoreAnnotationNames.DiscriminatorValue
             );
 
-            var annotations = Dependencies
-                .AnnotationCodeGenerator
+            var annotations = Dependencies.AnnotationCodeGenerator
                 .FilterIgnoredAnnotations(entityType.GetAnnotations())
                 .ToDictionary(a => a.Name, a => a);
 
@@ -952,8 +947,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                     )!;
                     var propertyClrType =
                         FindValueConverter(discriminatorProperty)
-                            ?.ProviderClrType
-                            .MakeNullable(discriminatorProperty.IsNullable)
+                            ?.ProviderClrType.MakeNullable(discriminatorProperty.IsNullable)
                         ?? discriminatorProperty.ClrType;
                     stringBuilder
                         .Append("<")
@@ -1240,8 +1234,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             IndentedStringBuilder stringBuilder
         )
         {
-            var annotations = Dependencies
-                .AnnotationCodeGenerator
+            var annotations = Dependencies.AnnotationCodeGenerator
                 .FilterIgnoredAnnotations(foreignKey.GetAnnotations())
                 .ToDictionary(a => a.Name, a => a);
 
@@ -1355,8 +1348,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             IndentedStringBuilder stringBuilder
         )
         {
-            var annotations = Dependencies
-                .AnnotationCodeGenerator
+            var annotations = Dependencies.AnnotationCodeGenerator
                 .FilterIgnoredAnnotations(navigation.GetAnnotations())
                 .ToDictionary(a => a.Name, a => a);
 
@@ -1546,9 +1538,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             bool leadingNewline = true
         )
         {
-            var fluentApiCalls = Dependencies
-                .AnnotationCodeGenerator
-                .GenerateFluentApiCalls(annotatable, annotations);
+            var fluentApiCalls = Dependencies.AnnotationCodeGenerator.GenerateFluentApiCalls(
+                annotatable,
+                annotations
+            );
 
             MethodCallCodeFragment? chainedCall = null;
             var typeQualifiedCalls = new List<MethodCallCodeFragment>();

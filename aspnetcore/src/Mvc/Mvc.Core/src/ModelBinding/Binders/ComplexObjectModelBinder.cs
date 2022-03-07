@@ -543,9 +543,9 @@ public sealed partial class ComplexObjectModelBinder : IModelBinder
         }
         else if (property.IsBindingRequired)
         {
-            var message = property
-                .ModelBindingMessageProvider
-                .MissingBindRequiredValueAccessor(fieldName);
+            var message = property.ModelBindingMessageProvider.MissingBindRequiredValueAccessor(
+                fieldName
+            );
             bindingContext.ModelState.TryAddModelError(modelName, message);
         }
 
@@ -578,9 +578,9 @@ public sealed partial class ComplexObjectModelBinder : IModelBinder
 
         if (!result.IsModelSet && parameter.IsBindingRequired)
         {
-            var message = parameter
-                .ModelBindingMessageProvider
-                .MissingBindRequiredValueAccessor(fieldName);
+            var message = parameter.ModelBindingMessageProvider.MissingBindRequiredValueAccessor(
+                fieldName
+            );
             bindingContext.ModelState.TryAddModelError(modelName, message);
         }
 

@@ -83,8 +83,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             var isExpandedCompletion = completionContext.CompletionOptions.IsExpandedCompletion;
             if (!isExpandedCompletion)
             {
-                var importCompletionOptionValue =
-                    completionContext.CompletionOptions.ShowItemsFromUnimportedNamespaces;
+                var importCompletionOptionValue = completionContext
+                    .CompletionOptions
+                    .ShowItemsFromUnimportedNamespaces;
 
                 // Don't trigger import completion if the option value is "default" and the experiment is disabled for the user.
                 if (
@@ -193,8 +194,10 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 .GetRequiredSyntaxTreeAsync(cancellationToken)
                 .ConfigureAwait(false);
             var root = await tree.GetRootAsync(cancellationToken).ConfigureAwait(false);
-            var addImportContextNode =
-                root.FindToken(completionItem.Span.Start, findInsideTrivia: true).Parent;
+            var addImportContextNode = root.FindToken(
+                completionItem.Span.Start,
+                findInsideTrivia: true
+            ).Parent;
 
             // Add required using/imports directive.
             var addImportService = document.GetRequiredLanguageService<IAddImportsService>();
@@ -203,8 +206,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             var allowInHiddenRegions = document.CanAddImportsInHiddenRegions();
             var importNode = CreateImport(document, containingNamespace);
 
-            var compilation = await document
-                .Project
+            var compilation = await document.Project
                 .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var rootWithImport = addImportService.AddImport(
@@ -324,9 +326,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             }
 
             // Certain documents, e.g. Razor document, don't support adding imports
-            var documentSupportsFeatureService = workspace
-                .Services
-                .GetRequiredService<IDocumentSupportsFeatureService>();
+            var documentSupportsFeatureService =
+                workspace.Services.GetRequiredService<IDocumentSupportsFeatureService>();
             if (!documentSupportsFeatureService.SupportsRefactorings(document))
             {
                 return false;

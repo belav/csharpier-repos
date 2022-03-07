@@ -62,12 +62,11 @@ namespace N
 
             using var workspace = WorkspaceTestUtilities.CreateWorkspaceWithPartialSemantics();
             var analyzerReference = new TestGeneratorReference(generator);
-            var project =
-                SolutionUtilities
-                    .AddEmptyProject(workspace.CurrentSolution)
-                    .AddAnalyzerReference(analyzerReference)
-                    .AddDocument("Document1.cs", sourceMarkup, filePath: "Document1.cs")
-                    .Project;
+            var project = SolutionUtilities
+                .AddEmptyProject(workspace.CurrentSolution)
+                .AddAnalyzerReference(analyzerReference)
+                .AddDocument("Document1.cs", sourceMarkup, filePath: "Document1.cs")
+                .Project;
 
             Assert.True(
                 workspace.SetCurrentSolution(

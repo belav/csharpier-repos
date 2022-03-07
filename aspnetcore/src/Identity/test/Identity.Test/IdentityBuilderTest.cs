@@ -241,13 +241,9 @@ public class IdentityBuilderTest
         services.AddIdentity<PocoUser, PocoRole>().AddDefaultTokenProviders();
 
         var provider = services.BuildServiceProvider();
-        var tokenProviders =
-            provider
-                .GetRequiredService<IOptions<IdentityOptions>>()
-                .Value
-                .Tokens
-                .ProviderMap
-                .Values;
+        var tokenProviders = provider
+            .GetRequiredService<IOptions<IdentityOptions>>()
+            .Value.Tokens.ProviderMap.Values;
         Assert.Equal(4, tokenProviders.Count());
     }
 

@@ -99,8 +99,12 @@ namespace System.Web.Razor.Test
                 CallBase = true
             };
 
-            RazorCodeGenerator expected =
-                new Mock<RazorCodeGenerator>("Foo", "Bar", "Baz", mockHost.Object).Object;
+            RazorCodeGenerator expected = new Mock<RazorCodeGenerator>(
+                "Foo",
+                "Bar",
+                "Baz",
+                mockHost.Object
+            ).Object;
 
             mockHost
                 .Setup(h => h.DecorateCodeGenerator(It.IsAny<CSharpRazorCodeGenerator>()))
@@ -147,15 +151,13 @@ namespace System.Web.Razor.Test
             string src = "Baz";
 
             // Act
-            mockEngine
-                .Object
-                .GenerateCode(
-                    reader,
-                    className: className,
-                    rootNamespace: ns,
-                    sourceFileName: src,
-                    cancelToken: source.Token
-                );
+            mockEngine.Object.GenerateCode(
+                reader,
+                className: className,
+                rootNamespace: ns,
+                sourceFileName: src,
+                cancelToken: source.Token
+            );
 
             // Assert
             mockEngine.Verify(

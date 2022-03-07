@@ -48,10 +48,8 @@ internal class DisableRequestSizeLimitFilter : IAuthorizationFilter, IRequestSiz
             return;
         }
 
-        var maxRequestBodySizeFeature = context
-            .HttpContext
-            .Features
-            .Get<IHttpMaxRequestBodySizeFeature>();
+        var maxRequestBodySizeFeature =
+            context.HttpContext.Features.Get<IHttpMaxRequestBodySizeFeature>();
 
         if (maxRequestBodySizeFeature == null)
         {

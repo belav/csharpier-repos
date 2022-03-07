@@ -30,8 +30,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
     public class DiagnosticsSquiggleTaggerProviderTests
     {
         private static readonly TestComposition s_compositionWithMockDiagnosticService =
-            EditorTestCompositions
-                .EditorFeatures
+            EditorTestCompositions.EditorFeatures
                 .AddExcludedPartTypes(typeof(IDiagnosticService))
                 .AddParts(typeof(MockDiagnosticService));
 
@@ -52,9 +51,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                 DiagnosticsSquiggleTaggerProvider,
                 IErrorTag
             >(workspace, analyzerMap);
-            var tagger = wrapper
-                .TaggerProvider
-                .CreateTagger<IErrorTag>(workspace.Documents.First().GetTextBuffer());
+            var tagger = wrapper.TaggerProvider.CreateTagger<IErrorTag>(
+                workspace.Documents.First().GetTextBuffer()
+            );
             using var disposable = tagger as IDisposable;
             // test first update
             await wrapper.WaitForTags();
@@ -66,9 +65,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             // test second update
             analyzer.ChangeSeverity();
 
-            var document = workspace
-                .CurrentSolution
-                .GetRequiredDocument(workspace.Documents.First().Id);
+            var document = workspace.CurrentSolution.GetRequiredDocument(
+                workspace.Documents.First().Id
+            );
             var text = await document.GetTextAsync();
             workspace.TryApplyChanges(
                 document
@@ -77,8 +76,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                             new TextChange(new TextSpan(text.Length - 1, 1), string.Empty)
                         )
                     )
-                    .Project
-                    .Solution
+                    .Project.Solution
             );
 
             await wrapper.WaitForTags();
@@ -100,12 +98,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                 IErrorTag
             >(workspace);
             // Make two taggers.
-            var tagger1 = wrapper
-                .TaggerProvider
-                .CreateTagger<IErrorTag>(workspace.Documents.First().GetTextBuffer());
-            var tagger2 = wrapper
-                .TaggerProvider
-                .CreateTagger<IErrorTag>(workspace.Documents.First().GetTextBuffer());
+            var tagger1 = wrapper.TaggerProvider.CreateTagger<IErrorTag>(
+                workspace.Documents.First().GetTextBuffer()
+            );
+            var tagger2 = wrapper.TaggerProvider.CreateTagger<IErrorTag>(
+                workspace.Documents.First().GetTextBuffer()
+            );
 
             // But dispose the first one. We still want the second one to work.
             ((IDisposable)tagger1).Dispose();
@@ -136,9 +134,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             var taggerProvider = wrapper.TaggerProvider;
 
             // Make a taggers.
-            var tagger1 = wrapper
-                .TaggerProvider
-                .CreateTagger<IErrorTag>(workspace.Documents.First().GetTextBuffer());
+            var tagger1 = wrapper.TaggerProvider.CreateTagger<IErrorTag>(
+                workspace.Documents.First().GetTextBuffer()
+            );
             using var disposable = tagger1 as IDisposable;
             await wrapper.WaitForTags();
 
@@ -163,15 +161,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                 composition: s_compositionWithMockDiagnosticService
             );
 
-            var listenerProvider = workspace
-                .ExportProvider
-                .GetExportedValue<IAsynchronousOperationListenerProvider>();
+            var listenerProvider =
+                workspace.ExportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
 
             var diagnosticService = Assert.IsType<MockDiagnosticService>(
                 workspace.ExportProvider.GetExportedValue<IDiagnosticService>()
             );
-            var provider = workspace
-                .ExportProvider
+            var provider = workspace.ExportProvider
                 .GetExportedValues<ITaggerProvider>()
                 .OfType<DiagnosticsSquiggleTaggerProvider>()
                 .Single();
@@ -182,12 +178,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             );
 
             // Now product the first diagnostic and fire the events.
-            var tree = await workspace
-                .CurrentSolution
-                .Projects
+            var tree = await workspace.CurrentSolution.Projects
                 .Single()
-                .Documents
-                .Single()
+                .Documents.Single()
                 .GetRequiredSyntaxTreeAsync(CancellationToken.None);
             var span = TextSpan.FromBounds(0, 5);
             diagnosticService.CreateDiagnosticAndFireEvents(workspace, Location.Create(tree, span));
@@ -219,26 +212,21 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                 composition: s_compositionWithMockDiagnosticService
             );
 
-            var listenerProvider = workspace
-                .ExportProvider
-                .GetExportedValue<IAsynchronousOperationListenerProvider>();
+            var listenerProvider =
+                workspace.ExportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
 
             var diagnosticService = Assert.IsType<MockDiagnosticService>(
                 workspace.ExportProvider.GetExportedValue<IDiagnosticService>()
             );
-            var provider = workspace
-                .ExportProvider
+            var provider = workspace.ExportProvider
                 .GetExportedValues<ITaggerProvider>()
                 .OfType<DiagnosticsSquiggleTaggerProvider>()
                 .Single();
 
             // Create and fire the diagnostic events before the tagger is even made.
-            var tree = await workspace
-                .CurrentSolution
-                .Projects
+            var tree = await workspace.CurrentSolution.Projects
                 .Single()
-                .Documents
-                .Single()
+                .Documents.Single()
                 .GetRequiredSyntaxTreeAsync(CancellationToken.None);
             var span = TextSpan.FromBounds(0, 5);
             diagnosticService.CreateDiagnosticAndFireEvents(workspace, Location.Create(tree, span));

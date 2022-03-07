@@ -445,13 +445,11 @@ namespace System.Threading
         [MethodImpl(MethodImplOptions.NoInlining)]
         public void RefreshLoggingEnabledFull()
         {
-            loggingEnabled = FrameworkEventSource
-                .Log
-                .IsEnabled(
-                    EventLevel.Verbose,
-                    FrameworkEventSource.Keywords.ThreadPool
-                        | FrameworkEventSource.Keywords.ThreadTransfer
-                );
+            loggingEnabled = FrameworkEventSource.Log.IsEnabled(
+                EventLevel.Verbose,
+                FrameworkEventSource.Keywords.ThreadPool
+                    | FrameworkEventSource.Keywords.ThreadTransfer
+            );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

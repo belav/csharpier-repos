@@ -401,10 +401,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     ImmutableInterlocked.InterlockedInitialize(
                         ref _locations,
-                        DeclaringCompilation
-                            .MergedRootDeclaration
-                            .Declarations
-                            .SelectAsArray(d => (Location)d.Location)
+                        DeclaringCompilation.MergedRootDeclaration.Declarations.SelectAsArray(
+                            d => (Location)d.Location
+                        )
                     );
                 }
 

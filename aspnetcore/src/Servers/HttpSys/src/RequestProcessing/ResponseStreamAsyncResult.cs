@@ -35,9 +35,9 @@ internal unsafe partial class ResponseStreamAsyncResult : IAsyncResult, IDisposa
         var cancellationRegistration = default(CancellationTokenRegistration);
         if (cancellationToken.CanBeCanceled)
         {
-            cancellationRegistration = _responseStream
-                .RequestContext
-                .RegisterForCancellation(cancellationToken);
+            cancellationRegistration = _responseStream.RequestContext.RegisterForCancellation(
+                cancellationToken
+            );
         }
         _cancellationToken = cancellationToken;
         _cancellationRegistration = cancellationRegistration;
@@ -159,34 +159,36 @@ internal unsafe partial class ResponseStreamAsyncResult : IAsyncResult, IDisposa
             if (chunked)
             {
                 chunkHeaderBuffer = Helpers.GetChunkHeader(count);
-                _dataChunks[0].DataChunkType =
-                    HttpApiTypes.HTTP_DATA_CHUNK_TYPE.HttpDataChunkFromMemory;
+                _dataChunks[0].DataChunkType = HttpApiTypes
+                    .HTTP_DATA_CHUNK_TYPE
+                    .HttpDataChunkFromMemory;
                 _dataChunks[0].fromMemory.BufferLength = (uint)chunkHeaderBuffer.Count;
                 objectsToPin[0] = chunkHeaderBuffer.Array!;
 
-                _dataChunks[1].DataChunkType =
-                    HttpApiTypes.HTTP_DATA_CHUNK_TYPE.HttpDataChunkFromFileHandle;
+                _dataChunks[1].DataChunkType = HttpApiTypes
+                    .HTTP_DATA_CHUNK_TYPE
+                    .HttpDataChunkFromFileHandle;
                 _dataChunks[1].fromFile.offset = (ulong)offset;
                 _dataChunks[1].fromFile.count = (ulong)count;
-                _dataChunks[1].fromFile.fileHandle = _fileStream
-                    .SafeFileHandle
-                    .DangerousGetHandle();
+                _dataChunks[1].fromFile.fileHandle =
+                    _fileStream.SafeFileHandle.DangerousGetHandle();
                 // Nothing to pin for the file handle.
 
-                _dataChunks[2].DataChunkType =
-                    HttpApiTypes.HTTP_DATA_CHUNK_TYPE.HttpDataChunkFromMemory;
+                _dataChunks[2].DataChunkType = HttpApiTypes
+                    .HTTP_DATA_CHUNK_TYPE
+                    .HttpDataChunkFromMemory;
                 _dataChunks[2].fromMemory.BufferLength = (uint)Helpers.CRLF.Length;
                 objectsToPin[1] = Helpers.CRLF;
             }
             else
             {
-                _dataChunks[0].DataChunkType =
-                    HttpApiTypes.HTTP_DATA_CHUNK_TYPE.HttpDataChunkFromFileHandle;
+                _dataChunks[0].DataChunkType = HttpApiTypes
+                    .HTTP_DATA_CHUNK_TYPE
+                    .HttpDataChunkFromFileHandle;
                 _dataChunks[0].fromFile.offset = (ulong)offset;
                 _dataChunks[0].fromFile.count = (ulong)count;
-                _dataChunks[0].fromFile.fileHandle = _fileStream
-                    .SafeFileHandle
-                    .DangerousGetHandle();
+                _dataChunks[0].fromFile.fileHandle =
+                    _fileStream.SafeFileHandle.DangerousGetHandle();
             }
 
             // This call will pin needed memory
@@ -220,8 +222,9 @@ internal unsafe partial class ResponseStreamAsyncResult : IAsyncResult, IDisposa
     {
         objectsToPin[pinIndex] = segment.Array!;
         pinIndex++;
-        chunks[chunkIndex].DataChunkType =
-            HttpApiTypes.HTTP_DATA_CHUNK_TYPE.HttpDataChunkFromMemory;
+        chunks[chunkIndex].DataChunkType = HttpApiTypes
+            .HTTP_DATA_CHUNK_TYPE
+            .HttpDataChunkFromMemory;
         // The address is not set until after we pin it with Overlapped
         chunks[chunkIndex].fromMemory.BufferLength = (uint)segment.Count;
         chunkIndex++;

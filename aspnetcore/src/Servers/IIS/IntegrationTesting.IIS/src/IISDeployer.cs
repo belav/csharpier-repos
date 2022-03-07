@@ -82,18 +82,18 @@ public class IISDeployer : IISDeployerBase
             DeploymentParameters.PublishApplicationBeforeDeployment = true;
             // Move ASPNETCORE_DETAILEDERRORS to web config env variables
             if (
-                IISDeploymentParameters
-                    .EnvironmentVariables
-                    .ContainsKey(DetailedErrorsEnvironmentVariable)
+                IISDeploymentParameters.EnvironmentVariables.ContainsKey(
+                    DetailedErrorsEnvironmentVariable
+                )
             )
             {
                 IISDeploymentParameters.WebConfigBasedEnvironmentVariables[
                     DetailedErrorsEnvironmentVariable
                 ] = IISDeploymentParameters.EnvironmentVariables[DetailedErrorsEnvironmentVariable];
 
-                IISDeploymentParameters
-                    .EnvironmentVariables
-                    .Remove(DetailedErrorsEnvironmentVariable);
+                IISDeploymentParameters.EnvironmentVariables.Remove(
+                    DetailedErrorsEnvironmentVariable
+                );
             }
             // Do not override settings set on parameters
             if (
@@ -150,8 +150,7 @@ public class IISDeployer : IISDeployerBase
             if (
                 aspNetCore
                     .Attribute("processPath")
-                    ?.Value
-                    .StartsWith("dotnet", StringComparison.Ordinal) == true
+                    ?.Value.StartsWith("dotnet", StringComparison.Ordinal) == true
             )
             {
                 aspNetCore.SetAttributeValue(
@@ -184,9 +183,9 @@ public class IISDeployer : IISDeployerBase
             }
 
             if (
-                DeploymentParameters
-                    .EnvironmentVariables
-                    .ContainsKey("ASPNETCORE_MODULE_DEBUG_FILE")
+                DeploymentParameters.EnvironmentVariables.ContainsKey(
+                    "ASPNETCORE_MODULE_DEBUG_FILE"
+                )
             )
             {
                 debugLogLocations.Add(
@@ -273,8 +272,10 @@ public class IISDeployer : IISDeployerBase
                 var site = serverManager.Sites.Single();
                 var appPool = serverManager.ApplicationPools.Single();
 
-                var actualPath =
-                    site.Applications.FirstOrDefault().VirtualDirectories.Single().PhysicalPath;
+                var actualPath = site.Applications
+                    .FirstOrDefault()
+                    .VirtualDirectories.Single()
+                    .PhysicalPath;
                 if (actualPath != contentRoot)
                 {
                     throw new InvalidOperationException(
@@ -445,13 +446,11 @@ public class IISDeployer : IISDeployerBase
                     {
                         if (
                             appPool.WorkerProcesses != null
-                            && appPool
-                                .WorkerProcesses
-                                .Any(
-                                    wp =>
-                                        wp.State == WorkerProcessState.Running
-                                        || wp.State == WorkerProcessState.Stopping
-                                )
+                            && appPool.WorkerProcesses.Any(
+                                wp =>
+                                    wp.State == WorkerProcessState.Running
+                                    || wp.State == WorkerProcessState.Stopping
+                            )
                         )
                         {
                             throw new InvalidOperationException("WorkerProcess not stopped yet");

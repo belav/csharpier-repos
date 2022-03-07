@@ -139,9 +139,11 @@ namespace System.Net.Http.Headers
         public static WarningHeaderValue Parse(string? input)
         {
             int index = 0;
-            return (WarningHeaderValue)GenericHeaderParser
-                .SingleValueWarningParser
-                .ParseValue(input, null, ref index);
+            return (WarningHeaderValue)GenericHeaderParser.SingleValueWarningParser.ParseValue(
+                input,
+                null,
+                ref index
+            );
         }
 
         public static bool TryParse(
@@ -153,9 +155,12 @@ namespace System.Net.Http.Headers
             parsedValue = null;
 
             if (
-                GenericHeaderParser
-                    .SingleValueWarningParser
-                    .TryParseValue(input, null, ref index, out object? output)
+                GenericHeaderParser.SingleValueWarningParser.TryParseValue(
+                    input,
+                    null,
+                    ref index,
+                    out object? output
+                )
             )
             {
                 parsedValue = (WarningHeaderValue)output!;

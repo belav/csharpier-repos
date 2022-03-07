@@ -100,9 +100,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 {
                     var textBuffer = text.Container.GetTextBuffer();
                     if (
-                        textBuffer
-                            .Properties
-                            .TryGetProperty(typeof(StateMachine), out StateMachine stateMachine)
+                        textBuffer.Properties.TryGetProperty(
+                            typeof(StateMachine),
+                            out StateMachine stateMachine
+                        )
                     )
                     {
                         if (
@@ -115,11 +116,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                             // The rename tracking could be dismissed while a codefix is still cached
                             // in the lightbulb. If this happens, do not perform the rename requested
                             // and instead let the user know their fix will not be applied.
-                            _document
-                                .Project
-                                .Solution
-                                .Workspace
-                                .Services
+                            _document.Project.Solution.Workspace.Services
                                 .GetService<INotificationService>()
                                 ?.SendNotification(
                                     EditorFeaturesResources.The_rename_tracking_session_was_cancelled_and_is_no_longer_available,
@@ -128,10 +125,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                             return false;
                         }
 
-                        var snapshotSpan = stateMachine
-                            .TrackingSession
-                            .TrackingSpan
-                            .GetSpan(stateMachine.Buffer.CurrentSnapshot);
+                        var snapshotSpan = stateMachine.TrackingSession.TrackingSpan.GetSpan(
+                            stateMachine.Buffer.CurrentSnapshot
+                        );
                         var newName = snapshotSpan.GetText();
                         var displayText = string.Format(
                             EditorFeaturesResources.Rename_0_to_1,

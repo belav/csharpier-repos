@@ -136,9 +136,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var bag = DiagnosticBag.GetInstance();
                     bag.Add(
                         ErrorCode.ERR_SimpleProgramIsEmpty,
-                        ((EmptyStatementSyntax)firstGlobalStatement.Statement)
-                            .SemicolonToken
-                            .GetLocation()
+                        (
+                            (EmptyStatementSyntax)firstGlobalStatement.Statement
+                        ).SemicolonToken.GetLocation()
                     );
                     diagnostics = bag.ToReadOnlyAndFree();
                 }
@@ -158,8 +158,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (hasGlobalMembers)
             {
                 //The implicit class is not static and has no extensions
-                SingleTypeDeclaration.TypeDeclarationFlags declFlags =
-                    SingleTypeDeclaration.TypeDeclarationFlags.None;
+                SingleTypeDeclaration.TypeDeclarationFlags declFlags = SingleTypeDeclaration
+                    .TypeDeclarationFlags
+                    .None;
                 var memberNames = GetNonTypeMemberNames(
                     internalMembers,
                     ref declFlags,
@@ -225,9 +226,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                             : SingleTypeDeclaration.TypeDeclarationFlags.None
                     )
                     | SingleTypeDeclaration.TypeDeclarationFlags.IsSimpleProgram,
-                syntaxReference: firstGlobalStatement
-                    .SyntaxTree
-                    .GetReference(firstGlobalStatement.Parent),
+                syntaxReference: firstGlobalStatement.SyntaxTree.GetReference(
+                    firstGlobalStatement.Parent
+                ),
                 nameLocation: new SourceLocation(firstGlobalStatement.GetFirstToken()),
                 memberNames: ImmutableSegmentedDictionary<string, VoidResult>.Empty,
                 children: ImmutableArray<SingleTypeDeclaration>.Empty,
@@ -269,8 +270,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             //Script class is not static and contains no extensions.
-            SingleTypeDeclaration.TypeDeclarationFlags declFlags =
-                SingleTypeDeclaration.TypeDeclarationFlags.None;
+            SingleTypeDeclaration.TypeDeclarationFlags declFlags = SingleTypeDeclaration
+                .TypeDeclarationFlags
+                .None;
             var membernames = GetNonTypeMemberNames(
                 ((Syntax.InternalSyntax.CompilationUnitSyntax)(compilationUnit.Green)).Members,
                 ref declFlags
@@ -977,8 +979,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (anyMethodHadExtensionSyntax)
             {
-                declFlags |=
-                    SingleTypeDeclaration.TypeDeclarationFlags.AnyMemberHasExtensionMethodSyntax;
+                declFlags |= SingleTypeDeclaration
+                    .TypeDeclarationFlags
+                    .AnyMemberHasExtensionMethodSyntax;
             }
 
             if (anyMemberHasAttributes)
@@ -1153,9 +1156,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case SyntaxKind.ConstructorDeclaration:
                     anyNonTypeMembers = true;
                     set.TryAdd(
-                        ((Syntax.InternalSyntax.ConstructorDeclarationSyntax)member)
-                            .Modifiers
-                            .Any((int)SyntaxKind.StaticKeyword)
+                        ((Syntax.InternalSyntax.ConstructorDeclarationSyntax)member).Modifiers.Any(
+                            (int)SyntaxKind.StaticKeyword
+                        )
                           ? WellKnownMemberNames.StaticConstructorName
                           : WellKnownMemberNames.InstanceConstructorName
                     );

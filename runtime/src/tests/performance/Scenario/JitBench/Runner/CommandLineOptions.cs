@@ -180,8 +180,7 @@ namespace JitBench
                                             new AssemblyName(
                                                 typeof(CommandLineOptions)
                                                     .GetTypeInfo()
-                                                    .Assembly
-                                                    .FullName
+                                                    .Assembly.FullName
                                             ).Version
                                         );
                                         Environment.Exit(0);

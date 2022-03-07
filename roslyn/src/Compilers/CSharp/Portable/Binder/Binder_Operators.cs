@@ -89,9 +89,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                         right.Syntax,
                         left.HasDynamicType() ? left.Type : right.Type
                     ).MakeCompilerGenerated();
-                    var finalDynamicConversion = this.Compilation
-                        .Conversions
-                        .ClassifyConversionFromExpression(placeholder, left.Type, ref useSiteInfo);
+                    var finalDynamicConversion =
+                        this.Compilation.Conversions.ClassifyConversionFromExpression(
+                            placeholder,
+                            left.Type,
+                            ref useSiteInfo
+                        );
                     diagnostics.Add(node, useSiteInfo);
                     var conversion = (BoundConversion)CreateConversion(
                         node,
@@ -712,9 +715,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if (
                     result.Kind == BoundKind.TypeExpression
-                    && !((ParenthesizedExpressionSyntax)current)
-                        .Expression
-                        .IsKind(SyntaxKind.ParenthesizedExpression)
+                    && !((ParenthesizedExpressionSyntax)current).Expression.IsKind(
+                        SyntaxKind.ParenthesizedExpression
+                    )
                 )
                 {
                     Error(diagnostics, ErrorCode.ERR_PossibleBadNegCast, node);
@@ -855,9 +858,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return new BoundBinaryOperator(
                     node,
                     BinaryOperatorKind.StringConcatenation,
-                    BoundBinaryOperator
-                        .UncommonData
-                        .UnconvertedInterpolatedStringAddition(stringConstant),
+                    BoundBinaryOperator.UncommonData.UnconvertedInterpolatedStringAddition(
+                        stringConstant
+                    ),
                     LookupResultKind.Empty,
                     left,
                     right,
@@ -1776,9 +1779,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     t.IsInterface
                     && signature.Method.IsAbstract
                     && SourceUserDefinedOperatorSymbol.IsSelfConstrainedTypeParameter(
-                        (definition = signature.Method.OriginalDefinition)
-                            .ReturnType
-                            .StrippedType(),
+                        (
+                            definition = signature.Method.OriginalDefinition
+                        ).ReturnType.StrippedType(),
                         definition.ContainingType
                     )
                 );
@@ -3574,8 +3577,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                         // a variable resulting from a... pointer_element_access of the form P[E] [is fixed] if P
                         // is not a fixed size buffer expression, or if the expression is a fixed size buffer
                         // member_access of the form E.I and E is a fixed variable
-                        BoundExpression underlyingExpr =
-                            ((BoundPointerElementAccess)expr).Expression;
+                        BoundExpression underlyingExpr = (
+                            (BoundPointerElementAccess)expr
+                        ).Expression;
                         if (
                             underlyingExpr is BoundFieldAccess fieldAccess
                             && fieldAccess.FieldSymbol.IsFixedSizeBuffer

@@ -258,8 +258,7 @@ public abstract class IntegrationTestBase
     )
     {
         var compilation = CreateCompilation();
-        var references = compilation
-            .References
+        var references = compilation.References
             .Concat(new[] { compilation.ToMetadataReference(), })
             .ToArray();
 
@@ -381,8 +380,7 @@ public abstract class IntegrationTestBase
     )
     {
         var compilation = CreateCompilation();
-        var references = compilation
-            .References
+        var references = compilation.References
             .Concat(new[] { compilation.ToMetadataReference(), })
             .ToArray();
         return CreateProjectEngine(Configuration, references, configure);
@@ -507,8 +505,7 @@ public abstract class IntegrationTestBase
                 TestProjectRoot,
                 baselineDiagnosticsFileName
             );
-            var lines = cSharpDocument
-                .Diagnostics
+            var lines = cSharpDocument.Diagnostics
                 .Select(RazorDiagnosticSerializer.Serialize)
                 .ToArray();
             if (lines.Any())
@@ -546,9 +543,9 @@ public abstract class IntegrationTestBase
         }
 
         var actualDiagnostics = string.Concat(
-            cSharpDocument
-                .Diagnostics
-                .Select(d => NormalizeNewLines(RazorDiagnosticSerializer.Serialize(d)) + "\r\n")
+            cSharpDocument.Diagnostics.Select(
+                d => NormalizeNewLines(RazorDiagnosticSerializer.Serialize(d)) + "\r\n"
+            )
         );
         Assert.Equal(baselineDiagnostics, actualDiagnostics);
     }
@@ -631,12 +628,10 @@ public abstract class IntegrationTestBase
                 var mapping = csharpDocument.SourceMappings[j];
                 if (mapping.OriginalSpan == sourceSpan)
                 {
-                    var actualSpan = csharpDocument
-                        .GeneratedCode
-                        .Substring(
-                            mapping.GeneratedSpan.AbsoluteIndex,
-                            mapping.GeneratedSpan.Length
-                        );
+                    var actualSpan = csharpDocument.GeneratedCode.Substring(
+                        mapping.GeneratedSpan.AbsoluteIndex,
+                        mapping.GeneratedSpan.Length
+                    );
 
                     if (!string.Equals(expectedSpan, actualSpan, StringComparison.Ordinal))
                     {

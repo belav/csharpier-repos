@@ -109,9 +109,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
                     return true;
                 }
 
-                var document = subjectBuffer
-                    .CurrentSnapshot
-                    .GetOpenDocumentInCurrentContextWithChanges();
+                var document =
+                    subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
                 if (document == null)
                 {
                     return true;
@@ -154,19 +153,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
         {
             // Create tracking spans to track the text changes.
             var currentSnapshot = subjectBuffer.CurrentSnapshot;
-            var trackingSpans = edits
-                .TrackingSpans
-                .SelectAsArray(
-                    textSpan =>
-                        (
-                            originalSpan: textSpan,
-                            trackingSpan: CreateTrackingSpan(
-                                edits.ResultOperation,
-                                currentSnapshot,
-                                textSpan.TrackingTextSpan
-                            )
+            var trackingSpans = edits.TrackingSpans.SelectAsArray(
+                textSpan =>
+                    (
+                        originalSpan: textSpan,
+                        trackingSpan: CreateTrackingSpan(
+                            edits.ResultOperation,
+                            currentSnapshot,
+                            textSpan.TrackingTextSpan
                         )
-                );
+                    )
+            );
 
             // Apply the text changes.
             using (
@@ -178,15 +175,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
                 )
             )
             {
-                document
-                    .Project
-                    .Solution
-                    .Workspace
-                    .ApplyTextChanges(
-                        document.Id,
-                        edits.TextChanges.Distinct(),
-                        CancellationToken.None
-                    );
+                document.Project.Solution.Workspace.ApplyTextChanges(
+                    document.Id,
+                    edits.TextChanges.Distinct(),
+                    CancellationToken.None
+                );
                 transaction.Complete();
             }
 
@@ -220,11 +213,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
                     );
                     if (formattedDocument != null)
                     {
-                        formattedDocument
-                            .Project
-                            .Solution
-                            .Workspace
-                            .ApplyDocumentChanges(formattedDocument, CancellationToken.None);
+                        formattedDocument.Project.Solution.Workspace.ApplyDocumentChanges(
+                            formattedDocument,
+                            CancellationToken.None
+                        );
                         transaction.Complete();
                     }
                 }

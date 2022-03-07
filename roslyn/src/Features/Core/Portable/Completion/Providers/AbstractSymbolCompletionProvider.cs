@@ -79,8 +79,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             if (symbol.Kind == SymbolKind.Local)
             {
                 var local = (ILocalSymbol)symbol;
-                var declarationSyntax = symbol
-                    .DeclaringSyntaxReferences
+                var declarationSyntax = symbol.DeclaringSyntaxReferences
                     .Select(r => r.GetSyntax())
                     .SingleOrDefault();
                 if (declarationSyntax != null && position < declarationSyntax.FullSpan.End)
@@ -638,9 +637,10 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
             foreach (var (documentId, syntaxContext, symbols) in linkedContextSymbolLists)
             {
-                var symbolsMissingInLinkedContext = symbolToContext
-                    .Keys
-                    .Except(symbols, CompletionLinkedFilesSymbolEquivalenceComparer.Instance);
+                var symbolsMissingInLinkedContext = symbolToContext.Keys.Except(
+                    symbols,
+                    CompletionLinkedFilesSymbolEquivalenceComparer.Instance
+                );
                 foreach (var (symbol, _) in symbolsMissingInLinkedContext)
                     missingSymbols
                         .GetOrAdd(symbol, m => new List<ProjectId>())

@@ -105,9 +105,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeStyle
             ReportDiagnostic severity
         )
         {
-            var storageLocation = CodeStyleOptions2
-                .RequireAccessibilityModifiers
-                .StorageLocations
+            var storageLocation = CodeStyleOptions2.RequireAccessibilityModifiers.StorageLocations
                 .OfType<
                     EditorConfigStorageLocation<CodeStyleOption2<AccessibilityModifiersRequired>>
                 >()
@@ -140,9 +138,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeStyle
         [InlineData(" crlf ", "\r\n")]
         public void TestParseEditorConfigEndOfLine(string configurationString, string newLine)
         {
-            var storageLocation = FormattingOptions
-                .NewLine
-                .StorageLocations
+            var storageLocation = FormattingOptions.NewLine.StorageLocations
                 .OfType<EditorConfigStorageLocation<string>>()
                 .Single();
             var allRawConventions = new Dictionary<string, string?>

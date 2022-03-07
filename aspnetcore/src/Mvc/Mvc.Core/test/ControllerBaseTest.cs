@@ -36,8 +36,7 @@ public class ControllerBaseTest
         {
             return typeof(ControllerBase)
                 .GetTypeInfo()
-                .DeclaredMethods
-                .Where(
+                .DeclaredMethods.Where(
                     method =>
                         method.IsPublic
                         && !method.IsSpecialName

@@ -76,8 +76,7 @@ public abstract partial class DiagnosticVerifier
         {
             var compilationWithAnalyzers = project
                 .GetCompilationAsync()
-                .Result
-                .WithAnalyzers(ImmutableArray.Create(analyzer));
+                .Result.WithAnalyzers(ImmutableArray.Create(analyzer));
             var diags = compilationWithAnalyzers.GetAnalyzerDiagnosticsAsync().Result;
             foreach (var diag in diags)
             {
@@ -169,8 +168,7 @@ public abstract partial class DiagnosticVerifier
 
         var projectId = ProjectId.CreateNewId(debugName: TestProjectName);
 
-        var solution = new AdhocWorkspace()
-            .CurrentSolution
+        var solution = new AdhocWorkspace().CurrentSolution
             .AddProject(projectId, TestProjectName, TestProjectName, language)
             .AddMetadataReference(projectId, CorlibReference)
             .AddMetadataReference(projectId, SystemCoreReference)

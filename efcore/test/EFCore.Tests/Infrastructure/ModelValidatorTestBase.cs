@@ -378,12 +378,11 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             bool sensitiveDataLoggingEnabled = false
         )
         {
-            var message =
-                Assert
-                    .Throws<InvalidOperationException>(
-                        () => Validate(modelBuilder, sensitiveDataLoggingEnabled)
-                    )
-                    .Message;
+            var message = Assert
+                .Throws<InvalidOperationException>(
+                    () => Validate(modelBuilder, sensitiveDataLoggingEnabled)
+                )
+                .Message;
             Assert.Equal(expectedMessage, message);
         }
 

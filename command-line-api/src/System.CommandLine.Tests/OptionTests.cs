@@ -124,9 +124,7 @@ namespace System.CommandLine.Tests
             create
                 .Should()
                 .Throw<ArgumentException>()
-                .Which
-                .Message
-                .Should()
+                .Which.Message.Should()
                 .Contain("An option must have at least one alias");
         }
 
@@ -138,9 +136,7 @@ namespace System.CommandLine.Tests
             create
                 .Should()
                 .Throw<ArgumentException>()
-                .Which
-                .Message
-                .Should()
+                .Which.Message.Should()
                 .Be("An alias cannot be null, empty, or consist entirely of whitespace.");
         }
 
@@ -152,9 +148,7 @@ namespace System.CommandLine.Tests
             create
                 .Should()
                 .Throw<ArgumentException>()
-                .Which
-                .Message
-                .Should()
+                .Which.Message.Should()
                 .Be("An alias cannot be null, empty, or consist entirely of whitespace.");
         }
 
@@ -179,9 +173,7 @@ namespace System.CommandLine.Tests
             create
                 .Should()
                 .Throw<ArgumentException>()
-                .Which
-                .Message
-                .Should()
+                .Which.Message.Should()
                 .Contain($"Option alias cannot contain whitespace: \"{alias}\"");
         }
 
@@ -200,9 +192,7 @@ namespace System.CommandLine.Tests
             addAlias
                 .Should()
                 .Throw<ArgumentException>()
-                .Which
-                .Message
-                .Should()
+                .Which.Message.Should()
                 .Contain($"Option alias cannot contain whitespace: \"{alias}\"");
         }
 
@@ -288,8 +278,7 @@ namespace System.CommandLine.Tests
             var option = new Option<int>("-x", () => 123);
             option.AddValidator(
                 symbol =>
-                    symbol
-                        .Tokens
+                    symbol.Tokens
                         .Select(t => t.Value)
                         .Where(v => v == "123")
                         .Select(x => "ERR")
@@ -298,8 +287,7 @@ namespace System.CommandLine.Tests
 
             option
                 .Parse("-x 123")
-                .Errors
-                .Select(e => e.Message)
+                .Errors.Select(e => e.Message)
                 .Should()
                 .BeEquivalentTo(new[] { "ERR" });
         }

@@ -575,9 +575,9 @@ record struct Point(int x, int y);
                     Assert.Equal(
                         "record struct Point",
                         point.ToDisplayString(
-                            SymbolDisplayFormat
-                                .TestFormat
-                                .AddKindOptions(SymbolDisplayKindOptions.IncludeTypeKeyword)
+                            SymbolDisplayFormat.TestFormat.AddKindOptions(
+                                SymbolDisplayKindOptions.IncludeTypeKeyword
+                            )
                         )
                     );
                 }
@@ -589,9 +589,9 @@ record struct Point(int x, int y);
                     Assert.Equal(
                         "struct Point",
                         point.ToDisplayString(
-                            SymbolDisplayFormat
-                                .TestFormat
-                                .AddKindOptions(SymbolDisplayKindOptions.IncludeTypeKeyword)
+                            SymbolDisplayFormat.TestFormat.AddKindOptions(
+                                SymbolDisplayKindOptions.IncludeTypeKeyword
+                            )
                         )
                     );
                 }
@@ -2792,12 +2792,11 @@ record struct C(bool X)
                 Assert.Null(comp.GlobalNamespace.GetTypeMember("C").GetMember("X"));
                 var tree = comp.SyntaxTrees.Single();
                 var model = comp.GetSemanticModel(tree, ignoreAccessibility: false);
-                var x =
-                    tree.GetRoot()
-                        .DescendantNodes()
-                        .OfType<ReturnStatementSyntax>()
-                        .Single()
-                        .Expression;
+                var x = tree.GetRoot()
+                    .DescendantNodes()
+                    .OfType<ReturnStatementSyntax>()
+                    .Single()
+                    .Expression;
                 Assert.Equal(
                     "System.Boolean System.ValueType.X { get; set; }",
                     model.GetSymbolInfo(x!).Symbol.ToTestDisplayString()
@@ -2831,12 +2830,11 @@ readonly record struct C(bool X)
                 Assert.Null(comp.GlobalNamespace.GetTypeMember("C").GetMember("X"));
                 var tree = comp.SyntaxTrees.Single();
                 var model = comp.GetSemanticModel(tree, ignoreAccessibility: false);
-                var x =
-                    tree.GetRoot()
-                        .DescendantNodes()
-                        .OfType<ReturnStatementSyntax>()
-                        .Single()
-                        .Expression;
+                var x = tree.GetRoot()
+                    .DescendantNodes()
+                    .OfType<ReturnStatementSyntax>()
+                    .Single()
+                    .Expression;
                 Assert.Equal(
                     "System.Boolean System.ValueType.X { get; set; }",
                     model.GetSymbolInfo(x!).Symbol.ToTestDisplayString()
@@ -3322,8 +3320,7 @@ record struct R(in int P1);
             var verifier = CompileAndVerify(comp, expectedOutput: "(42, 43)");
 
             var actualMembers = comp.GetMember<NamedTypeSymbol>("R")
-                .Constructors
-                .ToTestDisplayStrings();
+                .Constructors.ToTestDisplayStrings();
             var expectedMembers = new[] { "R..ctor(in System.Int32 P1)", "R..ctor()" };
             AssertEx.Equal(expectedMembers, actualMembers);
         }
@@ -3345,8 +3342,7 @@ record struct R(params int[] Array);
             CompileAndVerify(comp, expectedOutput: "(42, 43, 44, 45)");
 
             var actualMembers = comp.GetMember<NamedTypeSymbol>("R")
-                .Constructors
-                .ToTestDisplayStrings();
+                .Constructors.ToTestDisplayStrings();
             var expectedMembers = new[] { "R..ctor(params System.Int32[] Array)", "R..ctor()" };
             AssertEx.Equal(expectedMembers, actualMembers);
         }
@@ -3913,8 +3909,12 @@ namespace System.Runtime.CompilerServices
                 .DescendantTrivia()
                 .Select(trivia => trivia.GetStructure())
                 .OfType<DocumentationCommentTriviaSyntax>();
-            var cref =
-                docComments.First().DescendantNodes().OfType<XmlCrefAttributeSyntax>().First().Cref;
+            var cref = docComments
+                .First()
+                .DescendantNodes()
+                .OfType<XmlCrefAttributeSyntax>()
+                .First()
+                .Cref;
             Assert.Equal("I1", cref.ToString());
 
             var model = comp.GetSemanticModel(tree, ignoreAccessibility: false);
@@ -4013,8 +4013,7 @@ record struct B(int X)
 
             Assert.Equal(
                 "readonly void B.Deconstruct(out System.Int32 X)",
-                verifier
-                    .Compilation
+                verifier.Compilation
                     .GetMember("B.Deconstruct")
                     .ToTestDisplayString(includeNonNullable: false)
             );
@@ -4127,8 +4126,7 @@ record struct B(int X, int Y)
 
             Assert.Equal(
                 "void B.Deconstruct(out System.Int32 X, out System.Int32 Y)",
-                verifier
-                    .Compilation
+                verifier.Compilation
                     .GetMember("B.Deconstruct")
                     .ToTestDisplayString(includeNonNullable: false)
             );
@@ -12232,9 +12230,9 @@ record struct R3(int X) : Error3
             Assert.Equal("Error1(0, 1)", baseWithargs.ToString());
 
             var speculativeBase = baseWithargs.WithArgumentList(
-                baseWithargs
-                    .ArgumentList
-                    .WithArguments(baseWithargs.ArgumentList.Arguments.RemoveAt(1))
+                baseWithargs.ArgumentList.WithArguments(
+                    baseWithargs.ArgumentList.Arguments.RemoveAt(1)
+                )
             );
             Assert.Equal("Error1(0)", speculativeBase.ToString());
 

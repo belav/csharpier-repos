@@ -209,10 +209,9 @@ namespace System.Xml.Tests
             // .NET Framework does not set the namespace property for intersections and unions
             if (!PlatformDetection.IsNetFramework && expectedNs != null)
             {
-                XmlSchemaAnyAttribute attributeWildcard =
-                    (
-                        (XmlSchemaComplexType)xss.GlobalTypes[new XmlQualifiedName("t", attrNs)]
-                    ).AttributeWildcard;
+                XmlSchemaAnyAttribute attributeWildcard = (
+                    (XmlSchemaComplexType)xss.GlobalTypes[new XmlQualifiedName("t", attrNs)]
+                ).AttributeWildcard;
                 CompareWildcardNamespaces(expectedNs, attributeWildcard.Namespace);
             }
         }
@@ -253,10 +252,9 @@ namespace System.Xml.Tests
             // .NET Framework does not set the namespace property for intersections and unions
             if (!PlatformDetection.IsNetFramework && expectedNs != null)
             {
-                XmlSchemaAnyAttribute attributeWildcard =
-                    (
-                        (XmlSchemaComplexType)xss.GlobalTypes[new XmlQualifiedName("t1", attrNs)]
-                    ).AttributeWildcard;
+                XmlSchemaAnyAttribute attributeWildcard = (
+                    (XmlSchemaComplexType)xss.GlobalTypes[new XmlQualifiedName("t1", attrNs)]
+                ).AttributeWildcard;
                 CompareWildcardNamespaces(expectedNs, attributeWildcard.Namespace);
             }
         }
@@ -278,10 +276,9 @@ namespace System.Xml.Tests
             xss.Add(GetSimpleSchema(ns, attrNs));
             xss.Compile();
 
-            XmlSchemaAnyAttribute attributeWildcard =
-                (
-                    (XmlSchemaComplexType)xss.GlobalTypes[new XmlQualifiedName("t", attrNs)]
-                ).AttributeWildcard;
+            XmlSchemaAnyAttribute attributeWildcard = (
+                (XmlSchemaComplexType)xss.GlobalTypes[new XmlQualifiedName("t", attrNs)]
+            ).AttributeWildcard;
             CompareWildcardNamespaces(expectedNs, attributeWildcard.Namespace);
         }
 

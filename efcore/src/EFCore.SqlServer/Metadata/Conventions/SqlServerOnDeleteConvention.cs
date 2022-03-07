@@ -79,8 +79,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             if (
                 selfReferencingSkipNavigation
-                    == selfReferencingSkipNavigation
-                        .DeclaringEntityType
+                    == selfReferencingSkipNavigation.DeclaringEntityType
                         .GetDeclaredSkipNavigations()
                         .First(
                             s =>
@@ -90,13 +89,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 && selfReferencingSkipNavigation != selfReferencingSkipNavigation.Inverse
             )
             {
-                selfReferencingSkipNavigation
-                    .Inverse!
-                    .ForeignKey
-                    ?.Builder
-                    .OnDelete(
-                        GetTargetDeleteBehavior(selfReferencingSkipNavigation.Inverse.ForeignKey)
-                    );
+                selfReferencingSkipNavigation.Inverse!.ForeignKey?.Builder.OnDelete(
+                    GetTargetDeleteBehavior(selfReferencingSkipNavigation.Inverse.ForeignKey)
+                );
                 return DeleteBehavior.ClientCascade;
             }
 

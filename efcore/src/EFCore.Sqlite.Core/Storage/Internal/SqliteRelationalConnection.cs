@@ -46,9 +46,7 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Storage.Internal
             _rawSqlCommandBuilder = rawSqlCommandBuilder;
             _logger = logger;
 
-            var optionsExtension = dependencies
-                .ContextOptions
-                .Extensions
+            var optionsExtension = dependencies.ContextOptions.Extensions
                 .OfType<SqliteOptionsExtension>()
                 .FirstOrDefault();
             if (optionsExtension != null)
@@ -97,8 +95,9 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Storage.Internal
                 Pooling = false
             };
 
-            var contextOptions =
-                new DbContextOptionsBuilder().UseSqlite(connectionStringBuilder.ToString()).Options;
+            var contextOptions = new DbContextOptionsBuilder()
+                .UseSqlite(connectionStringBuilder.ToString())
+                .Options;
 
             return new SqliteRelationalConnection(
                 Dependencies with

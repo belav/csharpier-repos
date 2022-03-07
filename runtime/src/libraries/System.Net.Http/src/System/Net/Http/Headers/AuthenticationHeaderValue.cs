@@ -93,9 +93,11 @@ namespace System.Net.Http.Headers
         public static AuthenticationHeaderValue Parse(string? input)
         {
             int index = 0;
-            return (AuthenticationHeaderValue)GenericHeaderParser
-                .SingleValueAuthenticationParser
-                .ParseValue(input, null, ref index);
+            return (AuthenticationHeaderValue)GenericHeaderParser.SingleValueAuthenticationParser.ParseValue(
+                input,
+                null,
+                ref index
+            );
         }
 
         public static bool TryParse(
@@ -107,9 +109,12 @@ namespace System.Net.Http.Headers
             parsedValue = null;
 
             if (
-                GenericHeaderParser
-                    .SingleValueAuthenticationParser
-                    .TryParseValue(input, null, ref index, out object? output)
+                GenericHeaderParser.SingleValueAuthenticationParser.TryParseValue(
+                    input,
+                    null,
+                    ref index,
+                    out object? output
+                )
             )
             {
                 parsedValue = (AuthenticationHeaderValue)output!;

@@ -144,10 +144,8 @@ namespace Generators
                                     {
                                         foreach (AttributeArgumentSyntax? arg in args)
                                         {
-                                            string? argName = arg.NameEquals!
-                                                .Name
-                                                .Identifier
-                                                .ToString();
+                                            string? argName =
+                                                arg.NameEquals!.Name.Identifier.ToString();
                                             string? value = sm.GetConstantValue(
                                                     arg.Expression,
                                                     _cancellationToken

@@ -30,9 +30,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
             CommandExecutionContext context
         )
         {
-            using var _ = context
-                .OperationContext
-                .AddScope(allowCancellation: true, EditorFeaturesResources.Formatting_pasted_text);
+            using var _ = context.OperationContext.AddScope(
+                allowCancellation: true,
+                EditorFeaturesResources.Formatting_pasted_text
+            );
             var caretPosition = args.TextView.GetCaretPoint(args.SubjectBuffer);
 
             nextHandler();
@@ -66,9 +67,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
                 return;
             }
 
-            var document = args.SubjectBuffer
-                .CurrentSnapshot
-                .GetOpenDocumentInCurrentContextWithChanges();
+            var document =
+                args.SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
                 return;
@@ -76,9 +76,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
 
             var solution = document.Project.Solution;
             if (
-                !solution
-                    .Options
-                    .GetOption(FormattingBehaviorOptions.FormatOnPaste, document.Project.Language)
+                !solution.Options.GetOption(
+                    FormattingBehaviorOptions.FormatOnPaste,
+                    document.Project.Language
+                )
             )
             {
                 return;
@@ -89,10 +90,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
                 return;
             }
 
-            var formattingRuleService = solution
-                .Workspace
-                .Services
-                .GetService<IHostDependentFormattingRuleFactoryService>();
+            var formattingRuleService =
+                solution.Workspace.Services.GetService<IHostDependentFormattingRuleFactoryService>();
             if (
                 formattingRuleService != null
                 && formattingRuleService.ShouldNotFormatOrCommitOnPaste(document)
@@ -107,14 +106,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
                 return;
             }
 
-            var trackingSpan = caretPosition
-                .Value
-                .Snapshot
-                .CreateTrackingSpan(
-                    caretPosition.Value.Position,
-                    0,
-                    SpanTrackingMode.EdgeInclusive
-                );
+            var trackingSpan = caretPosition.Value.Snapshot.CreateTrackingSpan(
+                caretPosition.Value.Position,
+                0,
+                SpanTrackingMode.EdgeInclusive
+            );
             var span = trackingSpan.GetSpan(args.SubjectBuffer.CurrentSnapshot).Span.ToTextSpan();
             var changes = formattingService
                 .GetFormattingChangesOnPasteAsync(

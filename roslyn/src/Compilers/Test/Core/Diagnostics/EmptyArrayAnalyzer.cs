@@ -85,8 +85,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                         && elementType?.TypeKind != TypeKind.Pointer
                     )
                     {
-                        Optional<object> arrayLength =
-                            arrayCreation.DimensionSizes[0].ConstantValue;
+                        Optional<object> arrayLength = arrayCreation.DimensionSizes[
+                            0
+                        ].ConstantValue;
                         if (
                             arrayLength.HasValue
                             && arrayLength.Value is int

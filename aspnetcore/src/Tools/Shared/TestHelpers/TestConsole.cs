@@ -49,8 +49,9 @@ public class TestConsole : IConsole
     {
         var ctor = typeof(ConsoleCancelEventArgs)
             .GetTypeInfo()
-            .DeclaredConstructors
-            .Single(c => c.GetParameters().First().ParameterType == typeof(ConsoleSpecialKey));
+            .DeclaredConstructors.Single(
+                c => c.GetParameters().First().ParameterType == typeof(ConsoleSpecialKey)
+            );
         var args = (ConsoleCancelEventArgs)ctor.Invoke(new object[] { ConsoleSpecialKey.ControlC });
         _cancelKeyPress.Invoke(this, args);
         return args;

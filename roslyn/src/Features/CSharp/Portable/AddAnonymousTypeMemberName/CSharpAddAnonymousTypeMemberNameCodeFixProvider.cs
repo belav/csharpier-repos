@@ -58,8 +58,7 @@ namespace Microsoft.CodeAnalysis.CSharp.AddAnonymousTypeMemberName
         protected override IEnumerable<string> GetAnonymousObjectMemberNames(
             AnonymousObjectCreationExpressionSyntax initializer
         ) =>
-            initializer
-                .Initializers
+            initializer.Initializers
                 .Where(i => i.NameEquals != null)
                 .Select(i => i.NameEquals.Name.Identifier.ValueText);
     }

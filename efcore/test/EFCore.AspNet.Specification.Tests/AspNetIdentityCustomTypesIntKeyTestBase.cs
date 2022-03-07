@@ -51,8 +51,7 @@ namespace Microsoft.EntityFrameworkCore
                 },
                 async context =>
                 {
-                    var user = await context
-                        .Users
+                    var user = await context.Users
                         .Include(e => e.Claims)
                         .Include(e => e.Logins)
                         .Include(e => e.Tokens)

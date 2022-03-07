@@ -108,9 +108,8 @@ namespace Microsoft.Web.FxCop
             }
             else
             {
-                AssemblyReference assemblyReference = type.DeclaringModule
-                    .AssemblyReferences
-                    .FirstOrDefault(
+                AssemblyReference assemblyReference =
+                    type.DeclaringModule.AssemblyReferences.FirstOrDefault(
                         reference =>
                             reference.Name.Equals(TaskPortableAssembly, StringComparison.Ordinal)
                     );

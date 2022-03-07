@@ -571,13 +571,12 @@ WriteLine(""hello"");
                 options: TestOptions.ReleaseExe.WithScriptClassName("Script")
             );
 
-            var expr =
+            var expr = (
                 (
-                    (
-                        (tree.GetCompilationUnitRoot() as CompilationUnitSyntax).Members[0]
-                        as GlobalStatementSyntax
-                    ).Statement as ExpressionStatementSyntax
-                ).Expression;
+                    (tree.GetCompilationUnitRoot() as CompilationUnitSyntax).Members[0]
+                    as GlobalStatementSyntax
+                ).Statement as ExpressionStatementSyntax
+            ).Expression;
 
             var model = compilation.GetSemanticModel(tree);
             var info = model.GetSymbolInfo(expr);
@@ -613,8 +612,9 @@ goto L0;";
                 .ToArray();
             var symbol0 = model.GetDeclaredSymbol((LabeledStatementSyntax)statements[0]);
             Assert.NotNull(symbol0);
-            var symbol1 =
-                model.GetSymbolInfo(((GotoStatementSyntax)statements[1]).Expression).Symbol;
+            var symbol1 = model
+                .GetSymbolInfo(((GotoStatementSyntax)statements[1]).Expression)
+                .Symbol;
             Assert.Same(symbol0, symbol1);
         }
 
@@ -1385,12 +1385,10 @@ goto Label;"
         public void Errors_01()
         {
             var code = "System.Console.WriteLine(1);";
-            var compilationUnit = CSharp
-                .SyntaxFactory
-                .ParseCompilationUnit(
-                    code,
-                    options: new CSharp.CSharpParseOptions(kind: SourceCodeKind.Script)
-                );
+            var compilationUnit = CSharp.SyntaxFactory.ParseCompilationUnit(
+                code,
+                options: new CSharp.CSharpParseOptions(kind: SourceCodeKind.Script)
+            );
             var syntaxTree = compilationUnit.SyntaxTree;
             var compilation = CreateCompilationWithMscorlib45(new[] { syntaxTree });
             var semanticModel = compilation.GetSemanticModel(syntaxTree, true);
@@ -1532,12 +1530,10 @@ goto Label;"
         [WorkItem(44418, "https://github.com/dotnet/roslyn/issues/44418")]
         public void Errors_02()
         {
-            var compilationUnit = CSharp
-                .SyntaxFactory
-                .ParseCompilationUnit(
-                    "\nSystem.Console.WriteLine(1);",
-                    options: new CSharp.CSharpParseOptions(kind: SourceCodeKind.Script)
-                );
+            var compilationUnit = CSharp.SyntaxFactory.ParseCompilationUnit(
+                "\nSystem.Console.WriteLine(1);",
+                options: new CSharp.CSharpParseOptions(kind: SourceCodeKind.Script)
+            );
             var syntaxTree1 = compilationUnit.SyntaxTree;
             var syntaxTree2 = SyntaxFactory.ParseSyntaxTree(
                 "System.Console.WriteLine(2);",
@@ -1587,12 +1583,10 @@ goto Label;"
         public void Errors_03()
         {
             var code = "System.Console.WriteLine(out var x, x);";
-            var compilationUnit = CSharp
-                .SyntaxFactory
-                .ParseCompilationUnit(
-                    code,
-                    options: new CSharp.CSharpParseOptions(kind: SourceCodeKind.Script)
-                );
+            var compilationUnit = CSharp.SyntaxFactory.ParseCompilationUnit(
+                code,
+                options: new CSharp.CSharpParseOptions(kind: SourceCodeKind.Script)
+            );
             var syntaxTree = compilationUnit.SyntaxTree;
             var compilation = CreateCompilationWithMscorlib45(new[] { syntaxTree });
             var semanticModel = compilation.GetSemanticModel(syntaxTree, true);

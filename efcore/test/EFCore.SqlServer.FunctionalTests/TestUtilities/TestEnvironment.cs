@@ -23,8 +23,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Config["DefaultConnection"]
             ?? "Data Source=(localdb)\\MSSQLLocalDB;Database=master;Integrated Security=True;Connect Timeout=60;ConnectRetryCount=0";
 
-        private static readonly string _dataSource =
-            new SqlConnectionStringBuilder(DefaultConnection).DataSource;
+        private static readonly string _dataSource = new SqlConnectionStringBuilder(
+            DefaultConnection
+        ).DataSource;
 
         public static bool IsConfigured { get; } = !string.IsNullOrEmpty(_dataSource);
 

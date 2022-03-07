@@ -58,8 +58,11 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             var median = values[values.Count / 2];
 
             var range = max - min;
-            var mode =
-                values.GroupBy(i => i).OrderByDescending(g => g.Count()).FirstOrDefault().Key;
+            var mode = values
+                .GroupBy(i => i)
+                .OrderByDescending(g => g.Count())
+                .FirstOrDefault()
+                .Key;
 
             return new StatisticResult(max, min, median, mean, range, mode, values.Count);
         }

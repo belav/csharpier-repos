@@ -445,8 +445,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     Debug.Assert(IsIndexer);
 
-                    var indexerNameAttributeLists =
-                        ((IndexerDeclarationSyntax)CSharpSyntaxNode).AttributeLists;
+                    var indexerNameAttributeLists = (
+                        (IndexerDeclarationSyntax)CSharpSyntaxNode
+                    ).AttributeLists;
                     Debug.Assert(indexerNameAttributeLists.Count != 0);
                     Debug.Assert(!IsExplicitInterfaceImplementation);
 
@@ -1491,13 +1492,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             )
             {
                 bool hasAnyDiagnostics;
-                (attributeData, boundAttribute) = arguments
-                    .Binder
-                    .GetAttribute(
-                        arguments.AttributeSyntax,
-                        arguments.AttributeType,
-                        out hasAnyDiagnostics
-                    );
+                (attributeData, boundAttribute) = arguments.Binder.GetAttribute(
+                    arguments.AttributeSyntax,
+                    arguments.AttributeType,
+                    out hasAnyDiagnostics
+                );
                 if (!attributeData.HasErrors)
                 {
                     string? indexerName = attributeData.CommonConstructorArguments[
@@ -1643,9 +1642,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else if (attribute.IsTargetAttribute(this, AttributeDescription.MemberNotNullAttribute))
             {
-                MessageID
-                    .IDS_FeatureMemberNotNull
-                    .CheckFeatureAvailability(diagnostics, arguments.AttributeSyntaxOpt);
+                MessageID.IDS_FeatureMemberNotNull.CheckFeatureAvailability(
+                    diagnostics,
+                    arguments.AttributeSyntaxOpt
+                );
                 CSharpAttributeData.DecodeMemberNotNullAttribute<PropertyWellKnownAttributeData>(
                     ContainingType,
                     ref arguments
@@ -1655,9 +1655,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 attribute.IsTargetAttribute(this, AttributeDescription.MemberNotNullWhenAttribute)
             )
             {
-                MessageID
-                    .IDS_FeatureMemberNotNull
-                    .CheckFeatureAvailability(diagnostics, arguments.AttributeSyntaxOpt);
+                MessageID.IDS_FeatureMemberNotNull.CheckFeatureAvailability(
+                    diagnostics,
+                    arguments.AttributeSyntaxOpt
+                );
                 CSharpAttributeData.DecodeMemberNotNullWhenAttribute<PropertyWellKnownAttributeData>(
                     ContainingType,
                     ref arguments
@@ -1838,14 +1839,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                     foreach (var parameter in this.Parameters)
                                     {
                                         parameter.ForceComplete(locationOpt, cancellationToken);
-                                        parameter
-                                            .Type
-                                            .CheckAllConstraints(
-                                                DeclaringCompilation,
-                                                conversions,
-                                                parameter.Locations[0],
-                                                diagnostics
-                                            );
+                                        parameter.Type.CheckAllConstraints(
+                                            DeclaringCompilation,
+                                            conversions,
+                                            parameter.Locations[0],
+                                            diagnostics
+                                        );
                                     }
 
                                     this.AddDeclarationDiagnostics(diagnostics);

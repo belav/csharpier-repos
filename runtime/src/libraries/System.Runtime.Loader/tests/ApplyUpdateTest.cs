@@ -228,10 +228,9 @@ namespace System.Reflection.Metadata
                     Assert.Equal(1, cattrs.Length);
                     Assert.NotNull(cattrs[0]);
                     Assert.Equal(attrType, cattrs[0].GetType());
-                    string p =
-                        (
-                            cattrs[0] as System.Reflection.Metadata.ApplyUpdate.Test.MyAttribute
-                        ).StringValue;
+                    string p = (
+                        cattrs[0] as System.Reflection.Metadata.ApplyUpdate.Test.MyAttribute
+                    ).StringValue;
                     Assert.Equal("rstuv", p);
                 }
             );
@@ -310,11 +309,9 @@ namespace System.Reflection.Metadata
                     cattrs = Attribute.GetCustomAttributes(mi3, attrType);
                     Assert.NotNull(cattrs);
                     Assert.Equal(1, cattrs.Length);
-                    string p =
-                        (
-                            cattrs[0]
-                            as System.Reflection.Metadata.ApplyUpdate.Test.MyDeleteAttribute
-                        ).StringValue;
+                    string p = (
+                        cattrs[0] as System.Reflection.Metadata.ApplyUpdate.Test.MyDeleteAttribute
+                    ).StringValue;
                     Assert.Equal("Not Deleted", p);
                 }
             );
@@ -351,9 +348,7 @@ namespace System.Reflection.Metadata
                     );
                     Assert.NotNull(mi);
 
-                    string result = ApplyUpdate
-                        .Test
-                        .AsyncMethodChange
+                    string result = ApplyUpdate.Test.AsyncMethodChange
                         .TestTaskMethod()
                         .GetAwaiter()
                         .GetResult();

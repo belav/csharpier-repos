@@ -147,8 +147,7 @@ namespace Microsoft.EntityFrameworkCore
                 context.ChangeTracker.LazyLoadingEnabled = false;
 
                 foreach (
-                    var child in parent
-                        .Children
+                    var child in parent.Children
                         .Cast<object>()
                         .Concat(parent.ChildrenAk)
                         .Concat(parent.ChildrenShadowFk)
@@ -4117,10 +4116,9 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             using var context = CreateContext();
-            var single =
-                context
-                    .Attach(new SingleCompositeKey { Id = 767, ParentAlternateId = "Boot" })
-                    .Entity;
+            var single = context
+                .Attach(new SingleCompositeKey { Id = 767, ParentAlternateId = "Boot" })
+                .Entity;
 
             ClearLog();
 
@@ -4161,10 +4159,9 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             using var context = CreateContext();
-            var child =
-                context
-                    .Attach(new ChildCompositeKey { Id = 767, ParentAlternateId = "Boot" })
-                    .Entity;
+            var child = context
+                .Attach(new ChildCompositeKey { Id = 767, ParentAlternateId = "Boot" })
+                .Entity;
 
             ClearLog();
 

@@ -285,8 +285,9 @@ public class HtmlHelperTest
         // Arrange
         var helperToContextualize = DefaultTemplatesUtilities.GetHtmlHelper<BaseModel>(model: null);
 
-        var viewContext =
-            DefaultTemplatesUtilities.GetHtmlHelper<DerivedModel>(model: null).ViewContext;
+        var viewContext = DefaultTemplatesUtilities
+            .GetHtmlHelper<DerivedModel>(model: null)
+            .ViewContext;
 
         // Act
         helperToContextualize.Contextualize(viewContext);
@@ -303,8 +304,9 @@ public class HtmlHelperTest
         // Arrange
         var helperToContextualize = DefaultTemplatesUtilities.GetHtmlHelper<BaseModel>(model: null);
 
-        var viewContext =
-            DefaultTemplatesUtilities.GetHtmlHelper<NonDerivedModel>(model: null).ViewContext;
+        var viewContext = DefaultTemplatesUtilities
+            .GetHtmlHelper<NonDerivedModel>(model: null)
+            .ViewContext;
 
         var expectedMessage =
             $"Property '{nameof(ViewContext.ViewData)}' is of type "
@@ -325,8 +327,9 @@ public class HtmlHelperTest
         // Arrange
         var helperToContextualize = DefaultTemplatesUtilities.GetHtmlHelper<BaseModel>(model: null);
 
-        var viewContext =
-            DefaultTemplatesUtilities.GetHtmlHelper<BaseModel>(model: null).ViewContext;
+        var viewContext = DefaultTemplatesUtilities
+            .GetHtmlHelper<BaseModel>(model: null)
+            .ViewContext;
         viewContext.ViewData = new ViewDataDictionary(viewContext.ViewData);
 
         var expectedMessage =

@@ -71,8 +71,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertCast
                 SyntaxKind.CloseParenToken,
                 SyntaxTriviaList.Empty
             );
-            var newTrailingTrivia = asExpression
-                .Left
+            var newTrailingTrivia = asExpression.Left
                 .GetTrailingTrivia()
                 .SkipInitialWhitespace()
                 .ToSyntaxTriviaList()

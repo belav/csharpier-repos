@@ -17,8 +17,9 @@ namespace System.Reflection.Tests
             )
             {
                 // Storing as ICustomAttributeProvider so we don't accidentally pick up the CustomAttributeExtensions extension methods.
-                ICustomAttributeProvider icp =
-                    lc.LoadFromByteArray(TestData.s_SimpleAssemblyImage).ManifestModule;
+                ICustomAttributeProvider icp = lc.LoadFromByteArray(
+                    TestData.s_SimpleAssemblyImage
+                ).ManifestModule;
 
                 Assert.Throws<InvalidOperationException>(
                     () => icp.GetCustomAttributes(inherit: false)

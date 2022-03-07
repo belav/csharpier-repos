@@ -102,8 +102,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             var lastSemanticVersion = (VersionStamp?)context.State;
             if (lastSemanticVersion != null)
             {
-                var currentSemanticVersion = await document
-                    .Project
+                var currentSemanticVersion = await document.Project
                     .GetDependentSemanticVersionAsync(cancellationToken)
                     .ConfigureAwait(false);
                 if (lastSemanticVersion.Value != currentSemanticVersion)
@@ -194,8 +193,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                             ClassificationUtilities.Convert(typeMap, snapshotSpan.Snapshot, span)
                         );
 
-                    var version = await document
-                        .Project
+                    var version = await document.Project
                         .GetDependentSemanticVersionAsync(cancellationToken)
                         .ConfigureAwait(false);
 
@@ -219,12 +217,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             CancellationToken cancellationToken
         )
         {
-            var workspaceStatusService = document
-                .Project
-                .Solution
-                .Workspace
-                .Services
-                .GetRequiredService<IWorkspaceStatusService>();
+            var workspaceStatusService =
+                document.Project.Solution.Workspace.Services.GetRequiredService<IWorkspaceStatusService>();
 
             // Importantly, we do not await/wait on the fullyLoadedStateTask.  We do not want to ever be waiting on work
             // that may end up touching the UI thread (As we can deadlock if GetTagsSynchronous waits on us).  Instead,
@@ -273,12 +267,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             if (isFullyLoaded)
                 return false;
 
-            var semanticCacheService = document
-                .Project
-                .Solution
-                .Workspace
-                .Services
-                .GetService<ISemanticClassificationCacheService>();
+            var semanticCacheService =
+                document.Project.Solution.Workspace.Services.GetService<ISemanticClassificationCacheService>();
             if (semanticCacheService == null)
                 return false;
 

@@ -3769,17 +3769,13 @@ class Program{
             using var workspace = TestWorkspace.CreateCSharp(markup);
 
             workspace.TryApplyChanges(
-                workspace
-                    .CurrentSolution
-                    .WithOptions(
-                        workspace
-                            .Options
-                            .WithChangedOption(
-                                FormattingOptions2.UseTabs,
-                                LanguageNames.CSharp,
-                                useTabs
-                            )
+                workspace.CurrentSolution.WithOptions(
+                    workspace.Options.WithChangedOption(
+                        FormattingOptions2.UseTabs,
+                        LanguageNames.CSharp,
+                        useTabs
                     )
+                )
             );
 
             var subjectDocument = workspace.Documents.Single();
@@ -3787,8 +3783,7 @@ class Program{
             var commandHandler = workspace.GetService<FormatCommandHandler>();
             var typedChar = subjectDocument
                 .GetTextBuffer()
-                .CurrentSnapshot
-                .GetText(subjectDocument.CursorPosition.Value - 1, 1);
+                .CurrentSnapshot.GetText(subjectDocument.CursorPosition.Value - 1, 1);
             commandHandler.ExecuteCommand(
                 new TypeCharCommandArgs(
                     subjectDocument.GetTextView(),
@@ -3887,17 +3882,13 @@ class Program{
             using var workspace = TestWorkspace.CreateCSharp(initialMarkup);
 
             workspace.TryApplyChanges(
-                workspace
-                    .CurrentSolution
-                    .WithOptions(
-                        workspace
-                            .Options
-                            .WithChangedOption(
-                                FormattingOptions2.UseTabs,
-                                LanguageNames.CSharp,
-                                useTabs
-                            )
+                workspace.CurrentSolution.WithOptions(
+                    workspace.Options.WithChangedOption(
+                        FormattingOptions2.UseTabs,
+                        LanguageNames.CSharp,
+                        useTabs
                     )
+                )
             );
 
             var tuple = GetService(workspace);

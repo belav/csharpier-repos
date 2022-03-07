@@ -40,8 +40,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 "
             );
 
-            _acmeNamespace = (NamespaceSymbol)_compilation
-                .GlobalNamespace
+            _acmeNamespace = (NamespaceSymbol)_compilation.GlobalNamespace
                 .GetMembers("Acme")
                 .Single();
             _widgetClass = _acmeNamespace.GetTypeMembers("Widget").Single();
@@ -69,9 +68,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestConstructor()
         {
-            var constructorSymbol = _widgetClass
-                .InstanceConstructors
-                .Single(c => !c.IsStatic && c.Parameters.Length == 0);
+            var constructorSymbol = _widgetClass.InstanceConstructors.Single(
+                c => !c.IsStatic && c.Parameters.Length == 0
+            );
             Assert.Equal("M:Acme.Widget.#ctor", constructorSymbol.GetDocumentationCommentId());
             Assert.Equal(
                 @"<member name=""M:Acme.Widget.#ctor"">
@@ -85,9 +84,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestConstructorWithParameter()
         {
-            var parameterizedConstructorSymbol = _widgetClass
-                .InstanceConstructors
-                .Single(c => !c.IsStatic && c.Parameters.Length == 1);
+            var parameterizedConstructorSymbol = _widgetClass.InstanceConstructors.Single(
+                c => !c.IsStatic && c.Parameters.Length == 1
+            );
             Assert.Equal(
                 "M:Acme.Widget.#ctor(System.String)",
                 parameterizedConstructorSymbol.GetDocumentationCommentId()

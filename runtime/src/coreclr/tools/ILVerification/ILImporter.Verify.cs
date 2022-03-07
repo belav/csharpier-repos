@@ -255,8 +255,9 @@ namespace Internal.IL
                         }
                         else
                         {
-                            var currentlySelected =
-                                _exceptionRegions[basicBlock.TryIndex.Value].ILRegion;
+                            var currentlySelected = _exceptionRegions[
+                                basicBlock.TryIndex.Value
+                            ].ILRegion;
                             var probeItem = _exceptionRegions[j].ILRegion;
 
                             if (
@@ -278,8 +279,9 @@ namespace Internal.IL
                         }
                         else
                         {
-                            var currentlySelected =
-                                _exceptionRegions[basicBlock.HandlerIndex.Value].ILRegion;
+                            var currentlySelected = _exceptionRegions[
+                                basicBlock.HandlerIndex.Value
+                            ].ILRegion;
                             var probeItem = _exceptionRegions[j].ILRegion;
 
                             if (

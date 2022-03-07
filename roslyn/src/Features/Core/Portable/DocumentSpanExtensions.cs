@@ -55,9 +55,10 @@ namespace Microsoft.CodeAnalysis
             var workspace = solution.Workspace;
             var service = workspace.Services.GetService<IDocumentNavigationService>();
 
-            var options = solution
-                .Options
-                .WithChangedOption(NavigationOptions.PreferProvisionalTab, showInPreviewTab);
+            var options = solution.Options.WithChangedOption(
+                NavigationOptions.PreferProvisionalTab,
+                showInPreviewTab
+            );
             options = options.WithChangedOption(NavigationOptions.ActivateTab, activateTab);
 
             return (workspace, service, options);

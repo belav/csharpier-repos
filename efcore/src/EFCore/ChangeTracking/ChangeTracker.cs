@@ -49,8 +49,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             _defaultQueryTrackingBehavior =
                 context
                     .GetService<IDbContextOptions>()
-                    .Extensions
-                    .OfType<CoreOptionsExtension>()
+                    .Extensions.OfType<CoreOptionsExtension>()
                     .FirstOrDefault()
                     ?.QueryTrackingBehavior ?? QueryTrackingBehavior.TrackAll;
 
@@ -175,8 +174,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         {
             TryDetectChanges();
 
-            return StateManager
-                .Entries
+            return StateManager.Entries
                 .Where(e => e.Entity is TEntity)
                 .Select(e => new EntityEntry<TEntity>(e));
         }

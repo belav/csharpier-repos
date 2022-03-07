@@ -44,8 +44,7 @@ public class Test
             );
             Assert.Equal(
                 enableDecompilation,
-                VisualStudio
-                    .CodeDefinitionWindow
+                VisualStudio.CodeDefinitionWindow
                     .GetText()
                     .Contains("Decompiled with ICSharpCode.Decompiler")
             );

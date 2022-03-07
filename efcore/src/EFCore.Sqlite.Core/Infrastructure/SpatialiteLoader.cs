@@ -130,11 +130,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 var rid = RuntimeInformation.RuntimeIdentifier;
                 var rids =
                     DependencyContext
-                        .Default!
-                        .RuntimeGraph
-                        .FirstOrDefault(g => g.Runtime == rid)
-                        ?.Fallbacks
-                        .ToList() ?? new List<string?>();
+                        .Default!.RuntimeGraph.FirstOrDefault(g => g.Runtime == rid)
+                        ?.Fallbacks.ToList() ?? new List<string?>();
                 rids.Insert(0, rid);
 
                 foreach (var library in DependencyContext.Default.RuntimeLibraries)

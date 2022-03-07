@@ -66,9 +66,7 @@ namespace Microsoft.EntityFrameworkCore.Design
                 new AnnotationCodeGeneratorDependencies(
                     new TestRelationalTypeMappingSource(
                         TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                        TestServiceFactory
-                            .Instance
-                            .Create<RelationalTypeMappingSourceDependencies>()
+                        TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
                     )
                 )
             );

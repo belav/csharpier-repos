@@ -58,9 +58,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
         {
             if (ConfirmationMessage != null)
             {
-                var notificationService = workspace
-                    .Services
-                    .GetRequiredService<INotificationService>();
+                var notificationService =
+                    workspace.Services.GetRequiredService<INotificationService>();
                 if (
                     !notificationService.ConfirmMessageBox(
                         ConfirmationMessage,

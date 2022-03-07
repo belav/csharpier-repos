@@ -282,8 +282,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (method.IsAsyncEffectivelyReturningGenericTask(F.Compilation))
             {
                 var returnType = (NamedTypeSymbol)method.ReturnType;
-                var resultType =
-                    returnType.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.Single().Type;
+                var resultType = returnType.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
+                    .Single()
+                    .Type;
                 if (resultType.IsDynamic())
                 {
                     resultType = F.SpecialType(SpecialType.System_Object);

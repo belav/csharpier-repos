@@ -40,13 +40,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.NavigateTo
     {
         protected static readonly TestComposition DefaultComposition =
             EditorTestCompositions.EditorFeatures;
-        protected static readonly TestComposition FirstVisibleComposition = EditorTestCompositions
-            .EditorFeatures
-            .AddParts(typeof(FirstDocIsVisibleDocumentTrackingService.Factory));
+        protected static readonly TestComposition FirstVisibleComposition =
+            EditorTestCompositions.EditorFeatures.AddParts(
+                typeof(FirstDocIsVisibleDocumentTrackingService.Factory)
+            );
         protected static readonly TestComposition FirstActiveAndVisibleComposition =
-            EditorTestCompositions
-                .EditorFeatures
-                .AddParts(typeof(FirstDocIsActiveAndVisibleDocumentTrackingService.Factory));
+            EditorTestCompositions.EditorFeatures.AddParts(
+                typeof(FirstDocIsActiveAndVisibleDocumentTrackingService.Factory)
+            );
 
         protected INavigateToItemProvider _provider;
         protected NavigateToTestAggregator _aggregator;
@@ -232,8 +233,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.NavigateTo
         {
             var exportProvider = composition
                 .WithTestHostParts(testHost)
-                .ExportProviderFactory
-                .CreateExportProvider();
+                .ExportProviderFactory.CreateExportProvider();
 
             var workspace = TestWorkspace.Create(workspaceElement, exportProvider: exportProvider);
             InitializeWorkspace(workspace);
@@ -248,8 +248,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.NavigateTo
         {
             var exportProvider = composition
                 .WithTestHostParts(testHost)
-                .ExportProviderFactory
-                .CreateExportProvider();
+                .ExportProviderFactory.CreateExportProvider();
 
             var workspace = CreateWorkspace(content, exportProvider);
             InitializeWorkspace(workspace);
@@ -335,9 +334,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.NavigateTo
                 out ImmutableArray<TextSpan> expectedDisplayNameSpans
             );
 
-            var itemDisplay = (NavigateToItemDisplay)result
-                .DisplayFactory
-                .CreateItemDisplay(result);
+            var itemDisplay = (NavigateToItemDisplay)result.DisplayFactory.CreateItemDisplay(
+                result
+            );
 
             Assert.Equal(itemDisplay.GlyphMoniker, glyph.GetImageMoniker());
 

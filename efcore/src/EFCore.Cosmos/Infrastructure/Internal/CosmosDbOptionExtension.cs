@@ -609,8 +609,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Infrastructure.Internal
             {
                 if (!string.IsNullOrEmpty(Extension._connectionString))
                 {
-                    debugInfo["Cosmos:" + nameof(ConnectionString)] = Extension
-                        ._connectionString
+                    debugInfo["Cosmos:" + nameof(ConnectionString)] = Extension._connectionString
                         .GetHashCode()
                         .ToString(CultureInfo.InvariantCulture);
                 }

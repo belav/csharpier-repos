@@ -104,12 +104,10 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             if (extensionExpression is TemporalTableExpression temporalTableExpression)
             {
                 Sql.Append(
-                        Dependencies
-                            .SqlGenerationHelper
-                            .DelimitIdentifier(
-                                temporalTableExpression.Name,
-                                temporalTableExpression.Schema
-                            )
+                        Dependencies.SqlGenerationHelper.DelimitIdentifier(
+                            temporalTableExpression.Name,
+                            temporalTableExpression.Schema
+                        )
                     )
                     .Append(" FOR SYSTEM_TIME ");
 
@@ -182,9 +180,9 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                 {
                     Sql.Append(AliasSeparator)
                         .Append(
-                            Dependencies
-                                .SqlGenerationHelper
-                                .DelimitIdentifier(temporalTableExpression.Alias)
+                            Dependencies.SqlGenerationHelper.DelimitIdentifier(
+                                temporalTableExpression.Alias
+                            )
                         );
                 }
 

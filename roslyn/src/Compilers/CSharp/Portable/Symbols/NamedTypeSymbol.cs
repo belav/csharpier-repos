@@ -1674,12 +1674,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     do
                     {
                         levelsOfNesting++;
-                        typeToCheck =
-                            (
-                                (NamedTypeSymbol)typeToCheck
-                            ).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
-                                ValueTupleRestPosition - 1
-                            ].Type;
+                        typeToCheck = (
+                            (NamedTypeSymbol)typeToCheck
+                        ).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
+                            ValueTupleRestPosition - 1
+                        ].Type;
                     } while (
                         Equals(
                             typeToCheck.OriginalDefinition,

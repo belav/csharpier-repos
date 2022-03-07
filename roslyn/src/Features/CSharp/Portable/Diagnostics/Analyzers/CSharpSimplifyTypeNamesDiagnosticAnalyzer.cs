@@ -126,16 +126,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
             if (node.IsKind(SyntaxKind.QualifiedCref, out QualifiedCrefSyntax? crefSyntax))
             {
                 if (
-                    !QualifiedCrefSimplifier
-                        .Instance
-                        .TrySimplify(
-                            crefSyntax,
-                            model,
-                            optionSet,
-                            out var replacement,
-                            out issueSpan,
-                            cancellationToken
-                        )
+                    !QualifiedCrefSimplifier.Instance.TrySimplify(
+                        crefSyntax,
+                        model,
+                        optionSet,
+                        out var replacement,
+                        out issueSpan,
+                        cancellationToken
+                    )
                 )
                     return false;
 
@@ -144,16 +142,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
             else
             {
                 if (
-                    !ExpressionSimplifier
-                        .Instance
-                        .TrySimplify(
-                            (ExpressionSyntax)node,
-                            model,
-                            optionSet,
-                            out var replacement,
-                            out issueSpan,
-                            cancellationToken
-                        )
+                    !ExpressionSimplifier.Instance.TrySimplify(
+                        (ExpressionSyntax)node,
+                        model,
+                        optionSet,
+                        out var replacement,
+                        out issueSpan,
+                        cancellationToken
+                    )
                 )
                     return false;
 

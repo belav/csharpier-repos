@@ -133,12 +133,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 if (
                     overridden is object
-                    && !overridden
-                        .ContainingType
-                        .Equals(
-                            overriding.ContainingType.BaseTypeNoUseSiteDiagnostics,
-                            TypeCompareKind.AllIgnoreOptions
-                        )
+                    && !overridden.ContainingType.Equals(
+                        overriding.ContainingType.BaseTypeNoUseSiteDiagnostics,
+                        TypeCompareKind.AllIgnoreOptions
+                    )
                 )
                 {
                     reportAnError = true;

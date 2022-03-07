@@ -91,8 +91,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             string? pdbPath = null;
             bool noStdLib = IsScriptCommandLineParser; // don't add mscorlib from sdk dir when running scripts
             string? outputDirectory = baseDirectory;
-            ImmutableArray<KeyValuePair<string, string>> pathMap =
-                ImmutableArray<KeyValuePair<string, string>>.Empty;
+            ImmutableArray<KeyValuePair<string, string>> pathMap = ImmutableArray<
+                KeyValuePair<string, string>
+            >.Empty;
             string? outputFileName = null;
             string? outputRefFilePath = null;
             bool refOnly = false;
@@ -2661,20 +2662,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
 
                     ids.Add(
-                        CSharp
-                            .MessageProvider
-                            .Instance
-                            .GetIdForErrorCode(
-                                (int)ErrorCode.WRN_MissingNonNullTypesContextForAnnotation
-                            )
+                        CSharp.MessageProvider.Instance.GetIdForErrorCode(
+                            (int)ErrorCode.WRN_MissingNonNullTypesContextForAnnotation
+                        )
                     );
                     ids.Add(
-                        CSharp
-                            .MessageProvider
-                            .Instance
-                            .GetIdForErrorCode(
-                                (int)ErrorCode.WRN_MissingNonNullTypesContextForAnnotationInGeneratedCode
-                            )
+                        CSharp.MessageProvider.Instance.GetIdForErrorCode(
+                            (int)ErrorCode.WRN_MissingNonNullTypesContextForAnnotationInGeneratedCode
+                        )
                     );
                     continue;
                 }

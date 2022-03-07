@@ -76,8 +76,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
                 }
                 else
                 {
-                    value =
-                        SolutionCrawlerOptions.SolutionBackgroundAnalysisScopeOption.DefaultValue;
+                    value = SolutionCrawlerOptions
+                        .SolutionBackgroundAnalysisScopeOption
+                        .DefaultValue;
                     return true;
                 }
             }

@@ -59,8 +59,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.BraceHighlighting
 
                 var testDocument = workspace.Documents.First();
                 var buffer = testDocument.GetTextBuffer();
-                var document = buffer
-                    .CurrentSnapshot
+                var document = buffer.CurrentSnapshot
                     .GetRelatedDocumentsWithChanges()
                     .FirstOrDefault();
                 var context = new TaggerContext<BraceHighlightTag>(
@@ -74,8 +73,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.BraceHighlighting
                     .Select(ts => ts.ToSpan())
                     .OrderBy(s => s.Start)
                     .ToList();
-                var actualHighlights = context
-                    .tagSpans
+                var actualHighlights = context.tagSpans
                     .Select(ts => ts.Span.Span)
                     .OrderBy(s => s.Start)
                     .ToList();

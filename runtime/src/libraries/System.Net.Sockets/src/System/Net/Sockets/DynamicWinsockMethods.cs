@@ -79,19 +79,17 @@ namespace System.Net.Sockets
             SocketError errorCode;
             unsafe
             {
-                errorCode = Interop
-                    .Winsock
-                    .WSAIoctl(
-                        socketHandle,
-                        Interop.Winsock.IoctlSocketConstants.SIOGETEXTENSIONFUNCTIONPOINTER,
-                        ref guid,
-                        sizeof(Guid),
-                        out ptr,
-                        sizeof(IntPtr),
-                        out length,
-                        IntPtr.Zero,
-                        IntPtr.Zero
-                    );
+                errorCode = Interop.Winsock.WSAIoctl(
+                    socketHandle,
+                    Interop.Winsock.IoctlSocketConstants.SIOGETEXTENSIONFUNCTIONPOINTER,
+                    ref guid,
+                    sizeof(Guid),
+                    out ptr,
+                    sizeof(IntPtr),
+                    out length,
+                    IntPtr.Zero,
+                    IntPtr.Zero
+                );
             }
 
             if (errorCode != SocketError.Success)

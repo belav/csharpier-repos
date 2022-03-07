@@ -250,8 +250,11 @@ namespace System.Security.Cryptography.Pkcs
             }
 
             List<Pkcs12SafeBag> bags;
-            int encryptedValueLength =
-                encryptedData.EncryptedContentInfo.EncryptedContent.Value.Length;
+            int encryptedValueLength = encryptedData
+                .EncryptedContentInfo
+                .EncryptedContent
+                .Value
+                .Length;
 
             // Don't use the array pool because the parsed bags are going to have ReadOnlyMemory projections
             // over this data.

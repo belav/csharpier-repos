@@ -102,9 +102,10 @@ namespace DllImportGenerator.UnitTests.Verifiers
                     {
                         var project = solution.GetProject(projectId)!;
                         var compilationOptions = project.CompilationOptions!;
-                        var diagnosticOptions = compilationOptions
-                            .SpecificDiagnosticOptions
-                            .SetItems(CSharpVerifierHelper.NullableWarnings);
+                        var diagnosticOptions =
+                            compilationOptions.SpecificDiagnosticOptions.SetItems(
+                                CSharpVerifierHelper.NullableWarnings
+                            );
 
                         // Explicitly enable diagnostics that are not enabled by default
                         var enableAnalyzersOptions = new System.Collections.Generic.Dictionary<
@@ -134,8 +135,7 @@ namespace DllImportGenerator.UnitTests.Verifiers
                         }
 
                         compilationOptions = compilationOptions.WithSpecificDiagnosticOptions(
-                            compilationOptions
-                                .SpecificDiagnosticOptions
+                            compilationOptions.SpecificDiagnosticOptions
                                 .SetItems(CSharpVerifierHelper.NullableWarnings)
                                 .AddRange(enableAnalyzersOptions)
                         );

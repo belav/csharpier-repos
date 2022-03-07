@@ -914,9 +914,9 @@ namespace System
             var sysConsoleRef = CreateEmptyCompilation(
                     sysConsoleSrc,
                     new[] { SystemRuntimePP7Ref },
-                    TestOptions
-                        .ReleaseDll
-                        .WithCryptoPublicKey(TestResources.TestKeys.PublicKey_b03f5f7f11d50a3a),
+                    TestOptions.ReleaseDll.WithCryptoPublicKey(
+                        TestResources.TestKeys.PublicKey_b03f5f7f11d50a3a
+                    ),
                     assemblyName: "System.Console"
                 )
                 .EmitToImageReference();
@@ -955,8 +955,7 @@ Goo();
             var main2 = CreateEmptyCompilation(
                 new[] { Parse(mainSrc, options: TestOptions.Script) },
                 new[] { MscorlibRef_v46, sysConsoleRef, SystemRuntimeFacadeRef },
-                TestOptions
-                    .ReleaseDll
+                TestOptions.ReleaseDll
                     .WithUsings("System.Console")
                     .WithTopLevelBinderFlags(BinderFlags.IgnoreCorLibraryDuplicatedTypes)
             );
@@ -1697,8 +1696,7 @@ public class NullableTest
 ";
 
             var comp = CreateCompilation(text);
-            var topType = comp.SourceModule
-                .GlobalNamespace
+            var topType = comp.SourceModule.GlobalNamespace
                 .GetTypeMembers("NullableTest")
                 .FirstOrDefault();
             // ------------------------------
@@ -2062,8 +2060,10 @@ class Goo {
             var Func_Dynamic = (Goo.GetMembers("Z")[0] as FieldSymbol).Type;
             var Func_Object = (Goo.GetMembers("W")[0] as FieldSymbol).Type;
 
-            var comparator =
-                CSharp.Symbols.SymbolEqualityComparer.IgnoringDynamicTupleNamesAndNullability;
+            var comparator = CSharp
+                .Symbols
+                .SymbolEqualityComparer
+                .IgnoringDynamicTupleNamesAndNullability;
             Assert.NotEqual(Object, Dynamic);
             Assert.Equal(comparator.GetHashCode(Dynamic), comparator.GetHashCode(Object));
             Assert.True(comparator.Equals(Dynamic, Object));

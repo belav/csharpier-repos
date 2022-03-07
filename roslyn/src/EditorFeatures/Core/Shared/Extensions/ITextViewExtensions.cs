@@ -28,9 +28,11 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
 
         public static bool IsReadOnlyOnSurfaceBuffer(this ITextView textView, SnapshotSpan span)
         {
-            var spansInView = textView
-                .BufferGraph
-                .MapUpToBuffer(span, SpanTrackingMode.EdgeInclusive, textView.TextBuffer);
+            var spansInView = textView.BufferGraph.MapUpToBuffer(
+                span,
+                SpanTrackingMode.EdgeInclusive,
+                textView.TextBuffer
+            );
             return spansInView.Any(spanInView => textView.TextBuffer.IsReadOnly(spanInView.Span));
         }
 
@@ -49,9 +51,10 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         )
         {
             var caret = textView.Caret.Position;
-            var span = textView
-                .BufferGraph
-                .MapUpOrDownToFirstMatch(new SnapshotSpan(caret.BufferPosition, 0), match);
+            var span = textView.BufferGraph.MapUpOrDownToFirstMatch(
+                new SnapshotSpan(caret.BufferPosition, 0),
+                match
+            );
             if (span.HasValue)
             {
                 return span.Value.Start;
@@ -72,14 +75,12 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                 return textView.Caret.Position.VirtualBufferPosition;
             }
 
-            var mappedPoint = textView
-                .BufferGraph
-                .MapDownToBuffer(
-                    textView.Caret.Position.VirtualBufferPosition.Position,
-                    PointTrackingMode.Negative,
-                    subjectBuffer,
-                    PositionAffinity.Predecessor
-                );
+            var mappedPoint = textView.BufferGraph.MapDownToBuffer(
+                textView.Caret.Position.VirtualBufferPosition.Position,
+                PointTrackingMode.Negative,
+                subjectBuffer,
+                PositionAffinity.Predecessor
+            );
 
             return mappedPoint.HasValue ? new VirtualSnapshotPoint(mappedPoint.Value) : default;
         }
@@ -97,22 +98,22 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             this ITextView textView,
             SnapshotPoint point
         ) =>
-            textView
-                .BufferGraph
-                .MapUpToSnapshot(
-                    point,
-                    PointTrackingMode.Positive,
-                    PositionAffinity.Successor,
-                    textView.TextSnapshot
-                );
+            textView.BufferGraph.MapUpToSnapshot(
+                point,
+                PointTrackingMode.Positive,
+                PositionAffinity.Successor,
+                textView.TextSnapshot
+            );
 
         public static NormalizedSnapshotSpanCollection GetSpanInView(
             this ITextView textView,
             SnapshotSpan span
         ) =>
-            textView
-                .BufferGraph
-                .MapUpToSnapshot(span, SpanTrackingMode.EdgeInclusive, textView.TextSnapshot);
+            textView.BufferGraph.MapUpToSnapshot(
+                span,
+                SpanTrackingMode.EdgeInclusive,
+                textView.TextSnapshot
+            );
 
         public static void SetSelection(
             this ITextView textView,
@@ -197,9 +198,9 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                 }
             }
 
-            var newPosition = textView
-                .Caret
-                .MoveTo(new VirtualSnapshotPoint(pointInView.Value, point.VirtualSpaces));
+            var newPosition = textView.Caret.MoveTo(
+                new VirtualSnapshotPoint(pointInView.Value, point.VirtualSpaces)
+            );
 
             // We use the caret's position in the view's current snapshot here in case something
             // changed text in response to a caret move (e.g. line commit)
@@ -387,14 +388,12 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             ITextSnapshotLine line
         )
         {
-            var pointInView = textView
-                .BufferGraph
-                .MapUpToSnapshot(
-                    line.Start,
-                    PointTrackingMode.Positive,
-                    PositionAffinity.Successor,
-                    textView.TextSnapshot
-                );
+            var pointInView = textView.BufferGraph.MapUpToSnapshot(
+                line.Start,
+                PointTrackingMode.Positive,
+                PositionAffinity.Successor,
+                textView.TextSnapshot
+            );
 
             if (!pointInView.HasValue)
             {
@@ -421,8 +420,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
 
             // We have to map. We'll lose virtualness in this process because
             // mapping virtual points through projections is poorly defined.
-            var targetSpan = textView
-                .BufferGraph
+            var targetSpan = textView.BufferGraph
                 .MapUpToSnapshot(
                     virtualSnapshotSpan.SnapshotSpan,
                     SpanTrackingMode.EdgeExclusive,
@@ -475,9 +473,11 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             // bufffer passed in.  From that, determine the start/end line for the buffer that is in
             // view.
             var visibleSpan = textView.TextViewLines.FormattedSpan;
-            var visibleSpansInBuffer = textView
-                .BufferGraph
-                .MapDownToBuffer(visibleSpan, SpanTrackingMode.EdgeInclusive, subjectBuffer);
+            var visibleSpansInBuffer = textView.BufferGraph.MapDownToBuffer(
+                visibleSpan,
+                SpanTrackingMode.EdgeInclusive,
+                subjectBuffer
+            );
             if (visibleSpansInBuffer.Count == 0)
             {
                 return null;

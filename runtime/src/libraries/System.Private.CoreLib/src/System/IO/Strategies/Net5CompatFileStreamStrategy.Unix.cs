@@ -676,8 +676,9 @@ namespace System.IO.Strategies
                         Debug.Assert(thisRef._asyncState != null);
                         try
                         {
-                            ReadOnlyMemory<byte> readOnlyMemory =
-                                thisRef._asyncState.ReadOnlyMemory;
+                            ReadOnlyMemory<byte> readOnlyMemory = thisRef
+                                ._asyncState
+                                .ReadOnlyMemory;
                             thisRef._asyncState.ReadOnlyMemory = default;
                             thisRef.WriteSpan(readOnlyMemory.Span);
                         }

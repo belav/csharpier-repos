@@ -112,8 +112,9 @@ namespace Moq
 
         private sealed class Interceptor : Castle.DynamicProxy.IInterceptor
         {
-            private static readonly MethodInfo proxyInterceptorGetter =
-                typeof(IProxy).GetProperty(nameof(IProxy.Interceptor)).GetMethod;
+            private static readonly MethodInfo proxyInterceptorGetter = typeof(IProxy)
+                .GetProperty(nameof(IProxy.Interceptor))
+                .GetMethod;
 
             private Moq.IInterceptor interceptor;
 

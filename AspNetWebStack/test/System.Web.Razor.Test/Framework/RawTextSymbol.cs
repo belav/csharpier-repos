@@ -64,10 +64,9 @@ namespace System.Web.Razor.Test.Framework
             }
             else
             {
-                Start =
-                    new SourceLocationTracker(prev.Start)
-                        .UpdateLocation(prev.Content)
-                        .CurrentLocation;
+                Start = new SourceLocationTracker(prev.Start)
+                    .UpdateLocation(prev.Content)
+                    .CurrentLocation;
             }
         }
     }

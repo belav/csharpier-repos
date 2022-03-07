@@ -122,11 +122,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             // Diagnostics that don't prevent us from getting a symbol don't matter - the caller will report
             // an umbrella diagnostic if the result is an error type.
-            NamespaceOrTypeSymbol namespaceOrTypeSymbol =
-                BindNamespaceOrTypeSymbol(
-                    syntax,
-                    BindingDiagnosticBag.Discarded
-                ).NamespaceOrTypeSymbol;
+            NamespaceOrTypeSymbol namespaceOrTypeSymbol = BindNamespaceOrTypeSymbol(
+                syntax,
+                BindingDiagnosticBag.Discarded
+            ).NamespaceOrTypeSymbol;
 
             Debug.Assert((object)namespaceOrTypeSymbol != null);
             return namespaceOrTypeSymbol;
@@ -1119,7 +1118,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 new BindingDiagnosticBag(DiagnosticBag.GetInstance());
                 Debug.Assert(unusedDiagnostics.DiagnosticBag is object);
 #else
-                    BindingDiagnosticBag.Discarded;
+                BindingDiagnosticBag.Discarded;
 #endif
                 for (int i = 0; i < arity; i++)
                 {
@@ -1131,9 +1130,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // Should be in a WithCrefTypeParametersBinder.
                     Debug.Assert(
                         typeArgumentSyntax.ContainsDiagnostics
-                            || !typeArgumentSyntax
-                                .SyntaxTree
-                                .ReportDocumentationCommentDiagnostics()
+                            || !typeArgumentSyntax.SyntaxTree.ReportDocumentationCommentDiagnostics()
                             || (
                                 !unusedDiagnostics.HasAnyErrors()
                                 && typeArgument.Type is CrefTypeParameterSymbol
@@ -1233,8 +1230,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             );
             Debug.Assert(localDiagnostics.DiagnosticBag is object);
 
-            TypeSymbol type =
-                parameterOrReturnTypeBinder.BindType(typeSyntax, localDiagnostics).Type;
+            TypeSymbol type = parameterOrReturnTypeBinder
+                .BindType(typeSyntax, localDiagnostics)
+                .Type;
 
             if (localDiagnostics.HasAnyErrors())
             {

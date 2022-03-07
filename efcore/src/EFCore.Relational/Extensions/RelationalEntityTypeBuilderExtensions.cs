@@ -649,9 +649,9 @@ namespace Microsoft.EntityFrameworkCore
 
             if (excludedFromMigrations.HasValue)
             {
-                referenceOwnershipBuilder
-                    .OwnedEntityType
-                    .SetIsTableExcludedFromMigrations(excludedFromMigrations.Value);
+                referenceOwnershipBuilder.OwnedEntityType.SetIsTableExcludedFromMigrations(
+                    excludedFromMigrations.Value
+                );
             }
 
             return referenceOwnershipBuilder;
@@ -825,9 +825,10 @@ namespace Microsoft.EntityFrameworkCore
                 return null;
             }
 
-            entityTypeBuilder
-                .Metadata
-                .SetIsTableExcludedFromMigrations(excludedFromMigrations, fromDataAnnotation);
+            entityTypeBuilder.Metadata.SetIsTableExcludedFromMigrations(
+                excludedFromMigrations,
+                fromDataAnnotation
+            );
             return entityTypeBuilder;
         }
 
@@ -904,9 +905,10 @@ namespace Microsoft.EntityFrameworkCore
 
             entityTypeBuilder.Metadata.SetViewName(name);
             entityTypeBuilder.Metadata.SetViewSchema(schema);
-            entityTypeBuilder
-                .Metadata
-                .SetAnnotation(RelationalAnnotationNames.ViewDefinitionSql, null);
+            entityTypeBuilder.Metadata.SetAnnotation(
+                RelationalAnnotationNames.ViewDefinitionSql,
+                null
+            );
 
             return entityTypeBuilder;
         }
@@ -987,9 +989,10 @@ namespace Microsoft.EntityFrameworkCore
 
             referenceOwnershipBuilder.OwnedEntityType.SetViewName(name);
             referenceOwnershipBuilder.OwnedEntityType.SetViewSchema(schema);
-            referenceOwnershipBuilder
-                .OwnedEntityType
-                .SetAnnotation(RelationalAnnotationNames.ViewDefinitionSql, null);
+            referenceOwnershipBuilder.OwnedEntityType.SetAnnotation(
+                RelationalAnnotationNames.ViewDefinitionSql,
+                null
+            );
 
             return referenceOwnershipBuilder;
         }
@@ -1696,14 +1699,11 @@ namespace Microsoft.EntityFrameworkCore
 
             if (name is not null)
             {
-                entityType
-                    .Model
-                    .Builder
-                    .HasDbFunction(
-                        name,
-                        typeof(IQueryable<>).MakeGenericType(entityType.ClrType),
-                        fromDataAnnotation
-                    );
+                entityType.Model.Builder.HasDbFunction(
+                    name,
+                    typeof(IQueryable<>).MakeGenericType(entityType.ClrType),
+                    fromDataAnnotation
+                );
             }
 
             return entityTypeBuilder;

@@ -745,7 +745,7 @@ namespace System.Collections.Concurrent
             /// <summary>Starting index for the head and tail indices.</summary>
             private const int StartIndex =
 #if DEBUG
-                int.MaxValue; // in debug builds, start at the end so we exercise the index reset logic
+            int.MaxValue; // in debug builds, start at the end so we exercise the index reset logic
 #else
                 0;
 #endif

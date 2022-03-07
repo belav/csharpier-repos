@@ -120,12 +120,9 @@ namespace System.Security.AccessControl
                         }
                         else
                         {
-                            System
-                                .Diagnostics
-                                .Debug
-                                .Fail(
-                                    $"LookupPrivilegeValue() failed with unrecognized error code {error}"
-                                );
+                            System.Diagnostics.Debug.Fail(
+                                $"LookupPrivilegeValue() failed with unrecognized error code {error}"
+                            );
                             throw new InvalidOperationException();
                         }
                     }
@@ -184,13 +181,11 @@ namespace System.Security.AccessControl
                             SafeTokenHandle localProcessHandle;
                             if (
                                 false
-                                == Interop
-                                    .Advapi32
-                                    .OpenProcessToken(
-                                        Interop.Kernel32.GetCurrentProcess(),
-                                        TokenAccessLevels.Duplicate,
-                                        out localProcessHandle
-                                    )
+                                == Interop.Advapi32.OpenProcessToken(
+                                    Interop.Kernel32.GetCurrentProcess(),
+                                    TokenAccessLevels.Duplicate,
+                                    out localProcessHandle
+                                )
                             )
                             {
                                 cachingError = Marshal.GetLastWin32Error();
@@ -230,34 +225,29 @@ namespace System.Security.AccessControl
                                 success = false;
                             }
 
-                            System
-                                .Diagnostics
-                                .Debug
-                                .Assert(
-                                    this.isImpersonating == false,
-                                    "Incorrect isImpersonating state"
-                                );
+                            System.Diagnostics.Debug.Assert(
+                                this.isImpersonating == false,
+                                "Incorrect isImpersonating state"
+                            );
 
                             if (success == true)
                             {
                                 error = 0;
                                 if (
                                     false
-                                    == Interop
-                                        .Advapi32
-                                        .DuplicateTokenEx(
-                                            processHandle,
-                                            TokenAccessLevels.Impersonate
-                                                | TokenAccessLevels.Query
-                                                | TokenAccessLevels.AdjustPrivileges,
-                                            IntPtr.Zero,
-                                            Interop
-                                                .Advapi32
-                                                .SECURITY_IMPERSONATION_LEVEL
-                                                .SecurityImpersonation,
-                                            System.Security.Principal.TokenType.TokenImpersonation,
-                                            ref this.threadHandle
-                                        )
+                                    == Interop.Advapi32.DuplicateTokenEx(
+                                        processHandle,
+                                        TokenAccessLevels.Impersonate
+                                            | TokenAccessLevels.Query
+                                            | TokenAccessLevels.AdjustPrivileges,
+                                        IntPtr.Zero,
+                                        Interop
+                                            .Advapi32
+                                            .SECURITY_IMPERSONATION_LEVEL
+                                            .SecurityImpersonation,
+                                        System.Security.Principal.TokenType.TokenImpersonation,
+                                        ref this.threadHandle
+                                    )
                                 )
                                 {
                                     error = Marshal.GetLastWin32Error();
@@ -315,12 +305,9 @@ namespace System.Security.AccessControl
                 }
                 else if (error != 0)
                 {
-                    System
-                        .Diagnostics
-                        .Debug
-                        .Fail(
-                            $"WindowsIdentity.GetCurrentThreadToken() failed with unrecognized error code {error}"
-                        );
+                    System.Diagnostics.Debug.Fail(
+                        $"WindowsIdentity.GetCurrentThreadToken() failed with unrecognized error code {error}"
+                    );
                     throw new InvalidOperationException();
                 }
             }
@@ -423,10 +410,10 @@ namespace System.Security.AccessControl
 
         ~Privilege()
         {
-            System
-                .Diagnostics
-                .Debug
-                .Assert(!this.needToRevert, "Must revert privileges that you alter!");
+            System.Diagnostics.Debug.Assert(
+                !this.needToRevert,
+                "Must revert privileges that you alter!"
+            );
 
             if (this.needToRevert)
             {
@@ -502,16 +489,14 @@ namespace System.Security.AccessControl
                 //
 
                 if (
-                    !Interop
-                        .Advapi32
-                        .AdjustTokenPrivileges(
-                            this.tlsContents.ThreadHandle,
-                            false,
-                            &newState,
-                            (uint)sizeof(Interop.Advapi32.TOKEN_PRIVILEGE),
-                            &previousState,
-                            &previousSize
-                        )
+                    !Interop.Advapi32.AdjustTokenPrivileges(
+                        this.tlsContents.ThreadHandle,
+                        false,
+                        &newState,
+                        (uint)sizeof(Interop.Advapi32.TOKEN_PRIVILEGE),
+                        &previousState,
+                        &previousSize
+                    )
                 )
                 {
                     error = Marshal.GetLastWin32Error();
@@ -571,10 +556,9 @@ namespace System.Security.AccessControl
             }
             else if (error != 0)
             {
-                System
-                    .Diagnostics
-                    .Debug
-                    .Fail($"AdjustTokenPrivileges() failed with unrecognized error code {error}");
+                System.Diagnostics.Debug.Fail(
+                    $"AdjustTokenPrivileges() failed with unrecognized error code {error}"
+                );
                 throw new InvalidOperationException();
             }
         }
@@ -620,16 +604,14 @@ namespace System.Security.AccessControl
                     );
 
                     if (
-                        !Interop
-                            .Advapi32
-                            .AdjustTokenPrivileges(
-                                this.tlsContents.ThreadHandle,
-                                false,
-                                &newState,
-                                0,
-                                null,
-                                null
-                            )
+                        !Interop.Advapi32.AdjustTokenPrivileges(
+                            this.tlsContents.ThreadHandle,
+                            false,
+                            &newState,
+                            0,
+                            null,
+                            null
+                        )
                     )
                     {
                         error = Marshal.GetLastWin32Error();
@@ -655,10 +637,9 @@ namespace System.Security.AccessControl
             }
             else if (error != 0)
             {
-                System
-                    .Diagnostics
-                    .Debug
-                    .Fail($"AdjustTokenPrivileges() failed with unrecognized error code {error}");
+                System.Diagnostics.Debug.Fail(
+                    $"AdjustTokenPrivileges() failed with unrecognized error code {error}"
+                );
                 throw new InvalidOperationException();
             }
         }

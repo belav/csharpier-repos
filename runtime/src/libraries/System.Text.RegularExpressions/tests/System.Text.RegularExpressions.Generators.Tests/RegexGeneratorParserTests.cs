@@ -660,23 +660,20 @@ namespace System.Text.RegularExpressions.Generator.Tests
             CancellationToken cancellationToken = default
         )
         {
-            var proj =
-                new AdhocWorkspace()
-                    .AddSolution(
-                        SolutionInfo.Create(SolutionId.CreateNewId(), VersionStamp.Create())
-                    )
-                    .AddProject("RegexGeneratorTest", "RegexGeneratorTest.dll", "C#")
-                    .WithMetadataReferences(
-                        additionalRefs is not null ? s_refs.Concat(additionalRefs) : s_refs
-                    )
-                    .WithCompilationOptions(
-                        new CSharpCompilationOptions(
-                            OutputKind.DynamicallyLinkedLibrary
-                        ).WithNullableContextOptions(NullableContextOptions.Enable)
-                    )
-                    .WithParseOptions(new CSharpParseOptions(langVersion))
-                    .AddDocument("RegexGenerator.g.cs", SourceText.From(code, Encoding.UTF8))
-                    .Project;
+            var proj = new AdhocWorkspace()
+                .AddSolution(SolutionInfo.Create(SolutionId.CreateNewId(), VersionStamp.Create()))
+                .AddProject("RegexGeneratorTest", "RegexGeneratorTest.dll", "C#")
+                .WithMetadataReferences(
+                    additionalRefs is not null ? s_refs.Concat(additionalRefs) : s_refs
+                )
+                .WithCompilationOptions(
+                    new CSharpCompilationOptions(
+                        OutputKind.DynamicallyLinkedLibrary
+                    ).WithNullableContextOptions(NullableContextOptions.Enable)
+                )
+                .WithParseOptions(new CSharpParseOptions(langVersion))
+                .AddDocument("RegexGenerator.g.cs", SourceText.From(code, Encoding.UTF8))
+                .Project;
 
             Assert.True(proj.Solution.Workspace.TryApplyChanges(proj.Solution));
 
@@ -718,8 +715,7 @@ namespace System.Text.RegularExpressions.Generator.Tests
                 );
             }
 
-            return generatorResults
-                .Diagnostics
+            return generatorResults.Diagnostics
                 .Concat(results.Diagnostics)
                 .Where(d => d.Severity != DiagnosticSeverity.Hidden)
                 .ToArray();

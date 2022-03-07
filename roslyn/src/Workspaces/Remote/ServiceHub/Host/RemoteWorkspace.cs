@@ -107,8 +107,7 @@ namespace Microsoft.CodeAnalysis.Remote
         {
             var currentSolution = CurrentSolution;
 
-            var currentSolutionChecksum = await currentSolution
-                .State
+            var currentSolutionChecksum = await currentSolution.State
                 .GetChecksumAsync(cancellationToken)
                 .ConfigureAwait(false);
             if (currentSolutionChecksum == solutionChecksum)

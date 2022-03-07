@@ -257,14 +257,12 @@ namespace System.Web.Mvc.Test
             var provider = MakeProvider();
 
             // Act
-            string displayFormat =
-                provider
-                    .GetMetadataForProperty(null, typeof(DataTypeModel), propertyName)
-                    .DisplayFormatString;
-            string editFormat =
-                provider
-                    .GetMetadataForProperty(null, typeof(DataTypeModel), propertyName)
-                    .EditFormatString;
+            string displayFormat = provider
+                .GetMetadataForProperty(null, typeof(DataTypeModel), propertyName)
+                .DisplayFormatString;
+            string editFormat = provider
+                .GetMetadataForProperty(null, typeof(DataTypeModel), propertyName)
+                .EditFormatString;
 
             // Assert
             Assert.Equal(formatString, displayFormat);
@@ -286,10 +284,9 @@ namespace System.Web.Mvc.Test
             var provider = MakeProvider();
 
             // Act
-            bool hasNonDefaultEditFormat =
-                provider
-                    .GetMetadataForProperty(null, typeof(DataTypeModel), propertyName)
-                    .HasNonDefaultEditFormat;
+            bool hasNonDefaultEditFormat = provider
+                .GetMetadataForProperty(null, typeof(DataTypeModel), propertyName)
+                .HasNonDefaultEditFormat;
 
             // Assert
             Assert.Equal(expectedNonDefaultEditFormat, hasNonDefaultEditFormat);
@@ -502,14 +499,13 @@ namespace System.Web.Mvc.Test
             var provider = MakeProvider();
 
             // Act
-            string result =
-                provider
-                    .GetMetadataForProperty(
-                        null,
-                        typeof(DisplayFormatModel),
-                        "DataTypeWithoutDisplayFormatOverride"
-                    )
-                    .DisplayFormatString;
+            string result = provider
+                .GetMetadataForProperty(
+                    null,
+                    typeof(DisplayFormatModel),
+                    "DataTypeWithoutDisplayFormatOverride"
+                )
+                .DisplayFormatString;
 
             // Assert
             Assert.Equal("{0:C}", result); // Currency's default format string
@@ -522,14 +518,13 @@ namespace System.Web.Mvc.Test
             var provider = MakeProvider();
 
             // Act
-            string result =
-                provider
-                    .GetMetadataForProperty(
-                        null,
-                        typeof(DisplayFormatModel),
-                        "DataTypeWithDisplayFormatOverride"
-                    )
-                    .DisplayFormatString;
+            string result = provider
+                .GetMetadataForProperty(
+                    null,
+                    typeof(DisplayFormatModel),
+                    "DataTypeWithDisplayFormatOverride"
+                )
+                .DisplayFormatString;
 
             // Assert
             Assert.Equal("format override", result);
@@ -591,10 +586,9 @@ namespace System.Web.Mvc.Test
             AssociatedMetadataProvider provider = MakeProvider();
 
             // Act
-            bool hasNonDefaultEditFormat =
-                provider
-                    .GetMetadataForProperty(null, typeof(DisplayFormatModel), propertyName)
-                    .HasNonDefaultEditFormat;
+            bool hasNonDefaultEditFormat = provider
+                .GetMetadataForProperty(null, typeof(DisplayFormatModel), propertyName)
+                .HasNonDefaultEditFormat;
 
             // Assert
             Assert.Equal(expectedHasNonDefaultEditFormat, hasNonDefaultEditFormat);
@@ -611,10 +605,9 @@ namespace System.Web.Mvc.Test
             AssociatedMetadataProvider provider = MakeProvider();
 
             // Act
-            bool htmlEncode =
-                provider
-                    .GetMetadataForProperty(null, typeof(DisplayFormatModel), propertyName)
-                    .HtmlEncode;
+            bool htmlEncode = provider
+                .GetMetadataForProperty(null, typeof(DisplayFormatModel), propertyName)
+                .HtmlEncode;
 
             // Assert
             Assert.Equal(expectedHtmlEncode, htmlEncode);

@@ -103,12 +103,11 @@ namespace ConsoleApplication
             );
             var model = comp.GetSemanticModel(tree) as CSharpSemanticModel;
 
-            var syntax =
-                tree.GetRoot()
-                    .DescendantNodes()
-                    .OfType<InvocationExpressionSyntax>()
-                    .Single()
-                    .Expression;
+            var syntax = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<InvocationExpressionSyntax>()
+                .Single()
+                .Expression;
 
             //This is the crux of the test.
             //Without this line, with or without the fix, the model never gets pushed to evaluate extension method candidates
@@ -253,9 +252,9 @@ using System.Reflection;
 
             var ivtCompilation = CreateCompilation(
                 assemblyName: "IVT",
-                options: TestOptions
-                    .ReleaseDll
-                    .WithStrongNameProvider(new DesktopStrongNameProvider()),
+                options: TestOptions.ReleaseDll.WithStrongNameProvider(
+                    new DesktopStrongNameProvider()
+                ),
                 source: new[]
                 {
                     Parse(
@@ -279,9 +278,9 @@ namespace NamespaceContainingInternalsOnly
 
             var libCompilation = CreateCompilation(
                 assemblyName: "Lib",
-                options: TestOptions
-                    .ReleaseDll
-                    .WithStrongNameProvider(new DesktopStrongNameProvider()),
+                options: TestOptions.ReleaseDll.WithStrongNameProvider(
+                    new DesktopStrongNameProvider()
+                ),
                 references: new[] { ivtCompilation.ToMetadataReference() },
                 source: new[]
                 {

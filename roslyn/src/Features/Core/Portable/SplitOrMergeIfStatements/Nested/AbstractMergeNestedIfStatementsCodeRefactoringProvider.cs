@@ -223,14 +223,11 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             //        Foo();
             //    }
             if (
-                !System
-                    .Linq
-                    .ImmutableArrayExtensions
-                    .SequenceEqual(
-                        ifGenerator.GetElseIfAndElseClauses(outerIfOrElseIf),
-                        ifGenerator.GetElseIfAndElseClauses(innerIfStatement),
-                        (a, b) => IsElseIfOrElseClauseEquivalent(syntaxFacts, ifGenerator, a, b)
-                    )
+                !System.Linq.ImmutableArrayExtensions.SequenceEqual(
+                    ifGenerator.GetElseIfAndElseClauses(outerIfOrElseIf),
+                    ifGenerator.GetElseIfAndElseClauses(innerIfStatement),
+                    (a, b) => IsElseIfOrElseClauseEquivalent(syntaxFacts, ifGenerator, a, b)
+                )
             )
             {
                 return false;

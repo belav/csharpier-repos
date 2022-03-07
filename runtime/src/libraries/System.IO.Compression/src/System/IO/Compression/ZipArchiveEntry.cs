@@ -1004,9 +1004,11 @@ namespace System.IO.Compression
                         Debug.Assert(_compressedBytes != null);
                         foreach (byte[] compressedBytes in _compressedBytes)
                         {
-                            _archive
-                                .ArchiveStream
-                                .Write(compressedBytes, 0, compressedBytes.Length);
+                            _archive.ArchiveStream.Write(
+                                compressedBytes,
+                                0,
+                                compressedBytes.Length
+                            );
                         }
                     }
                 }
@@ -1054,24 +1056,20 @@ namespace System.IO.Compression
                 VersionToExtractAtLeast(ZipVersionNeededValues.Zip64);
                 _generalPurposeBitFlag |= BitFlagValues.DataDescriptor;
 
-                _archive
-                    .ArchiveStream
-                    .Seek(
-                        _offsetOfLocalHeader + ZipLocalFileHeader.OffsetToVersionFromHeaderStart,
-                        SeekOrigin.Begin
-                    );
+                _archive.ArchiveStream.Seek(
+                    _offsetOfLocalHeader + ZipLocalFileHeader.OffsetToVersionFromHeaderStart,
+                    SeekOrigin.Begin
+                );
                 writer.Write((ushort)_versionToExtract);
                 writer.Write((ushort)_generalPurposeBitFlag);
             }
 
             // next step is fill out the 32-bit size values in the normal header. we can't assume that
             // they are correct. we also write the CRC
-            _archive
-                .ArchiveStream
-                .Seek(
-                    _offsetOfLocalHeader + ZipLocalFileHeader.OffsetToCrcFromHeaderStart,
-                    SeekOrigin.Begin
-                );
+            _archive.ArchiveStream.Seek(
+                _offsetOfLocalHeader + ZipLocalFileHeader.OffsetToCrcFromHeaderStart,
+                SeekOrigin.Begin
+            );
             if (!pretendStreaming)
             {
                 writer.Write(_crc32);
@@ -1093,15 +1091,13 @@ namespace System.IO.Compression
             // is always the first extra field that is written
             if (zip64HeaderUsed)
             {
-                _archive
-                    .ArchiveStream
-                    .Seek(
-                        _offsetOfLocalHeader
-                            + ZipLocalFileHeader.SizeOfLocalHeader
-                            + _storedEntryNameBytes.Length
-                            + Zip64ExtraField.OffsetToFirstField,
-                        SeekOrigin.Begin
-                    );
+                _archive.ArchiveStream.Seek(
+                    _offsetOfLocalHeader
+                        + ZipLocalFileHeader.SizeOfLocalHeader
+                        + _storedEntryNameBytes.Length
+                        + Zip64ExtraField.OffsetToFirstField,
+                    SeekOrigin.Begin
+                );
                 writer.Write(_uncompressedSize);
                 writer.Write(_compressedSize);
             }

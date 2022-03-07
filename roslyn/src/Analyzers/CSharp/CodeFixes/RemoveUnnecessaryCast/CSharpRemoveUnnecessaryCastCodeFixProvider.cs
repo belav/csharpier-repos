@@ -119,8 +119,7 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryCast
             }
             else if (old is BinaryExpressionSyntax binaryExpression)
             {
-                return binaryExpression
-                    .Left
+                return binaryExpression.Left
                     .WithTrailingTrivia(binaryExpression.GetTrailingTrivia())
                     .WithAdditionalAnnotations(Simplifier.Annotation);
             }

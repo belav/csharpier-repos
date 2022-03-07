@@ -105,8 +105,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 .Entity<Abstract>()
                 .Property<int>("SomeOtherId")
                 .ValueGeneratedOnAdd()
-                .Metadata
-                .SetValueGenerationStrategy(SqlServerValueGenerationStrategy.None);
+                .Metadata.SetValueGenerationStrategy(SqlServerValueGenerationStrategy.None);
             modelBuilder.Entity<Abstract>().HasAlternateKey("SomeId", "SomeOtherId");
             modelBuilder
                 .Entity<Generic<int>>()
@@ -385,25 +384,23 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         {
             var modelBuilder = CreateConventionalModelBuilder();
             modelBuilder.Entity<Animal>();
-            var fk1 =
-                modelBuilder
-                    .Entity<Cat>()
-                    .HasOne<Person>()
-                    .WithMany()
-                    .HasForeignKey(c => c.Name)
-                    .HasPrincipalKey(p => p.Name)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK_Animal_Person_Name")
-                    .Metadata;
-            var fk2 =
-                modelBuilder
-                    .Entity<Dog>()
-                    .HasOne<Person>()
-                    .WithMany()
-                    .HasForeignKey(d => d.Name)
-                    .HasPrincipalKey(p => p.Name)
-                    .OnDelete(DeleteBehavior.SetNull)
-                    .Metadata;
+            var fk1 = modelBuilder
+                .Entity<Cat>()
+                .HasOne<Person>()
+                .WithMany()
+                .HasForeignKey(c => c.Name)
+                .HasPrincipalKey(p => p.Name)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_Animal_Person_Name")
+                .Metadata;
+            var fk2 = modelBuilder
+                .Entity<Dog>()
+                .HasOne<Person>()
+                .WithMany()
+                .HasForeignKey(d => d.Name)
+                .HasPrincipalKey(p => p.Name)
+                .OnDelete(DeleteBehavior.SetNull)
+                .Metadata;
 
             Validate(modelBuilder);
 
@@ -979,8 +976,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             modelBuilder.Entity<Dog>().ToTable(tb => tb.IsTemporal());
             modelBuilder
                 .Entity<Dog>()
-                .Metadata
-                .RemoveAnnotation(SqlServerAnnotationNames.TemporalPeriodStartPropertyName);
+                .Metadata.RemoveAnnotation(
+                    SqlServerAnnotationNames.TemporalPeriodStartPropertyName
+                );
 
             VerifyError(
                 SqlServerStrings.TemporalMustDefinePeriodProperties(nameof(Dog)),
@@ -995,8 +993,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             modelBuilder.Entity<Dog>().ToTable(tb => tb.IsTemporal());
             modelBuilder
                 .Entity<Dog>()
-                .Metadata
-                .RemoveAnnotation(SqlServerAnnotationNames.TemporalPeriodEndPropertyName);
+                .Metadata.RemoveAnnotation(SqlServerAnnotationNames.TemporalPeriodEndPropertyName);
 
             VerifyError(
                 SqlServerStrings.TemporalMustDefinePeriodProperties(nameof(Dog)),

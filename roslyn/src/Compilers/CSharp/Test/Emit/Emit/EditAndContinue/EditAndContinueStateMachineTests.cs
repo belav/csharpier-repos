@@ -5736,18 +5736,15 @@ class C
                 )
             );
 
-            diff1
-                .EmitResult
-                .Diagnostics
-                .Verify(
-                    // (7,29): error CS7043: Cannot update 'C.F()'; attribute 'System.Runtime.CompilerServices.IteratorStateMachineAttribute' is missing.
-                    Diagnostic(ErrorCode.ERR_EncUpdateFailedMissingAttribute, "F")
-                        .WithArguments(
-                            "C.F()",
-                            "System.Runtime.CompilerServices.IteratorStateMachineAttribute"
-                        )
-                        .WithLocation(7, 29)
-                );
+            diff1.EmitResult.Diagnostics.Verify(
+                // (7,29): error CS7043: Cannot update 'C.F()'; attribute 'System.Runtime.CompilerServices.IteratorStateMachineAttribute' is missing.
+                Diagnostic(ErrorCode.ERR_EncUpdateFailedMissingAttribute, "F")
+                    .WithArguments(
+                        "C.F()",
+                        "System.Runtime.CompilerServices.IteratorStateMachineAttribute"
+                    )
+                    .WithLocation(7, 29)
+            );
         }
 
         [Fact, WorkItem(9119, "https://github.com/dotnet/roslyn/issues/9119")]
@@ -5831,19 +5828,16 @@ class C
                 )
             );
 
-            diff1
-                .EmitResult
-                .Diagnostics
-                .Verify(
-                    // (12,29): error CS7043: Cannot update 'C.F()'; attribute 'System.Runtime.CompilerServices.IteratorStateMachineAttribute' is missing.
-                    //     public IEnumerable<int> F()
-                    Diagnostic(ErrorCode.ERR_EncUpdateFailedMissingAttribute, "F")
-                        .WithArguments(
-                            "C.F()",
-                            "System.Runtime.CompilerServices.IteratorStateMachineAttribute"
-                        )
-                        .WithLocation(12, 29)
-                );
+            diff1.EmitResult.Diagnostics.Verify(
+                // (12,29): error CS7043: Cannot update 'C.F()'; attribute 'System.Runtime.CompilerServices.IteratorStateMachineAttribute' is missing.
+                //     public IEnumerable<int> F()
+                Diagnostic(ErrorCode.ERR_EncUpdateFailedMissingAttribute, "F")
+                    .WithArguments(
+                        "C.F()",
+                        "System.Runtime.CompilerServices.IteratorStateMachineAttribute"
+                    )
+                    .WithLocation(12, 29)
+            );
         }
 
         [Fact]
@@ -6100,18 +6094,15 @@ class C
                 )
             );
 
-            diff1
-                .EmitResult
-                .Diagnostics
-                .Verify(
-                    // (6,28): error CS7043: Cannot update 'C.F()'; attribute 'System.Runtime.CompilerServices.AsyncStateMachineAttribute' is missing.
-                    Diagnostic(ErrorCode.ERR_EncUpdateFailedMissingAttribute, "F")
-                        .WithArguments(
-                            "C.F()",
-                            "System.Runtime.CompilerServices.AsyncStateMachineAttribute"
-                        )
-                        .WithLocation(6, 28)
-                );
+            diff1.EmitResult.Diagnostics.Verify(
+                // (6,28): error CS7043: Cannot update 'C.F()'; attribute 'System.Runtime.CompilerServices.AsyncStateMachineAttribute' is missing.
+                Diagnostic(ErrorCode.ERR_EncUpdateFailedMissingAttribute, "F")
+                    .WithArguments(
+                        "C.F()",
+                        "System.Runtime.CompilerServices.AsyncStateMachineAttribute"
+                    )
+                    .WithLocation(6, 28)
+            );
         }
 
         [Fact]
@@ -6439,18 +6430,15 @@ class C
                 )
             );
 
-            diff1
-                .EmitResult
-                .Diagnostics
-                .Verify(
-                    // (6,28): error CS7043: Cannot update 'C.F()'; attribute 'System.Runtime.CompilerServices.AsyncStateMachineAttribute' is missing.
-                    Diagnostic(ErrorCode.ERR_EncUpdateFailedMissingAttribute, "F")
-                        .WithArguments(
-                            "C.F()",
-                            "System.Runtime.CompilerServices.AsyncStateMachineAttribute"
-                        )
-                        .WithLocation(6, 28)
-                );
+            diff1.EmitResult.Diagnostics.Verify(
+                // (6,28): error CS7043: Cannot update 'C.F()'; attribute 'System.Runtime.CompilerServices.AsyncStateMachineAttribute' is missing.
+                Diagnostic(ErrorCode.ERR_EncUpdateFailedMissingAttribute, "F")
+                    .WithArguments(
+                        "C.F()",
+                        "System.Runtime.CompilerServices.AsyncStateMachineAttribute"
+                    )
+                    .WithLocation(6, 28)
+            );
         }
 
         [Fact]
@@ -6522,18 +6510,15 @@ class C
                 )
             );
 
-            diff1
-                .EmitResult
-                .Diagnostics
-                .Verify(
-                    // (6,29): error CS7043: Cannot update 'C.F()'; attribute 'System.Runtime.CompilerServices.IteratorStateMachineAttribute' is missing.
-                    Diagnostic(ErrorCode.ERR_EncUpdateFailedMissingAttribute, "F")
-                        .WithArguments(
-                            "C.F()",
-                            "System.Runtime.CompilerServices.IteratorStateMachineAttribute"
-                        )
-                        .WithLocation(6, 29)
-                );
+            diff1.EmitResult.Diagnostics.Verify(
+                // (6,29): error CS7043: Cannot update 'C.F()'; attribute 'System.Runtime.CompilerServices.IteratorStateMachineAttribute' is missing.
+                Diagnostic(ErrorCode.ERR_EncUpdateFailedMissingAttribute, "F")
+                    .WithArguments(
+                        "C.F()",
+                        "System.Runtime.CompilerServices.IteratorStateMachineAttribute"
+                    )
+                    .WithLocation(6, 29)
+            );
         }
 
         [Fact]

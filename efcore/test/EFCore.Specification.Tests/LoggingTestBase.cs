@@ -80,8 +80,7 @@ namespace Microsoft.EntityFrameworkCore
                 var _ = context.Model;
             }
 
-            return loggerFactory
-                .Log
+            return loggerFactory.Log
                 .Single(t => t.Id.Id == CoreEventId.ContextInitialized.Id)
                 .Message;
         }

@@ -38,8 +38,9 @@ namespace System.Web.Http.Controllers
         [Fact]
         public void GetResultConverter_WhenTypeIsAnGenericParameterType_Throws()
         {
-            var genericType =
-                typeof(HttpActionDescriptorTest).GetMethod("SampleGenericMethod").ReturnType;
+            var genericType = typeof(HttpActionDescriptorTest)
+                .GetMethod("SampleGenericMethod")
+                .ReturnType;
 
             Assert.Throws<InvalidOperationException>(
                 () => HttpActionDescriptor.GetResultConverter(genericType),

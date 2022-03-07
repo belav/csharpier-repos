@@ -647,8 +647,7 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
         {
             if (semanticModel != null)
             {
-                var typeParameterIndex = typeResolutionSymbol
-                    .OriginalDefinition
+                var typeParameterIndex = typeResolutionSymbol.OriginalDefinition
                     .GetAllTypeParameters()
                     .IndexOf(tp => tp.Name == crefValue);
                 if (typeParameterIndex >= 0)

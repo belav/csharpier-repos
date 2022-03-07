@@ -305,8 +305,9 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                         foreach (var foreignKey in entityType.GetDeclaredForeignKeys())
                         {
                             anyForeignKeys = true;
-                            var principalVariable =
-                                entityTypeIds[foreignKey.PrincipalEntityType].Variable;
+                            var principalVariable = entityTypeIds[
+                                foreignKey.PrincipalEntityType
+                            ].Variable;
 
                             mainBuilder
                                 .Append(entityClassName)
@@ -333,8 +334,9 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                         foreach (var navigation in entityType.GetDeclaredSkipNavigations())
                         {
                             anySkipNavigations = true;
-                            var targetVariable =
-                                entityTypeIds[navigation.TargetEntityType].Variable;
+                            var targetVariable = entityTypeIds[
+                                navigation.TargetEntityType
+                            ].Variable;
                             var joinVariable = entityTypeIds[navigation.JoinEntityType].Variable;
 
                             mainBuilder

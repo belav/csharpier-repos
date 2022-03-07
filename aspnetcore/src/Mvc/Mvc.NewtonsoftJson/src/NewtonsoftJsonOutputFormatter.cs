@@ -161,12 +161,9 @@ public class NewtonsoftJsonOutputFormatter : TextOutputFormatter
         }
 
         // Compat mode for derived options
-        _jsonOptions ??=
-            context
-                .HttpContext
-                .RequestServices
-                .GetRequiredService<IOptions<MvcNewtonsoftJsonOptions>>()
-                .Value;
+        _jsonOptions ??= context.HttpContext.RequestServices
+            .GetRequiredService<IOptions<MvcNewtonsoftJsonOptions>>()
+            .Value;
 
         var response = context.HttpContext.Response;
 
@@ -186,10 +183,9 @@ public class NewtonsoftJsonOutputFormatter : TextOutputFormatter
             && _asyncEnumerableReaderFactory.TryGetReader(value.GetType(), out var reader)
         )
         {
-            var logger = context
-                .HttpContext
-                .RequestServices
-                .GetRequiredService<ILogger<NewtonsoftJsonOutputFormatter>>();
+            var logger = context.HttpContext.RequestServices.GetRequiredService<
+                ILogger<NewtonsoftJsonOutputFormatter>
+            >();
             Log.BufferingAsyncEnumerable(logger, value);
             try
             {

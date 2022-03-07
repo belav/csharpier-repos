@@ -130,8 +130,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                             .GetIncludeProperties()!
                             .Select(
                                 p =>
-                                    duplicateIndex
-                                        .DeclaringEntityType
+                                    duplicateIndex.DeclaringEntityType
                                         .FindProperty(p)!
                                         .GetColumnName(storeObject)
                             )
@@ -151,8 +150,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                           .GetIncludeProperties()!
                           .Select(
                               p =>
-                                  index
-                                      .DeclaringEntityType
+                                  index.DeclaringEntityType
                                       .FindProperty(p)
                                       ?.GetColumnName(storeObject)
                           )

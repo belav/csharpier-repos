@@ -86,9 +86,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             {
                 _diagnostics.Add(
                     ErrorCode.ERR_InsufficientStack,
-                    BoundTreeVisitor
-                        .CancelledByStackGuardException
-                        .GetTooLongOrComplexExpressionErrorLocation(expression)
+                    BoundTreeVisitor.CancelledByStackGuardException.GetTooLongOrComplexExpressionErrorLocation(
+                        expression
+                    )
                 );
                 throw new EmitCancelledException();
             }
@@ -1889,17 +1889,17 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 
                 if (
                     (object)originalMethod
-                        == this._module
-                            .Compilation
-                            .GetSpecialTypeMember(SpecialMember.System_Nullable_T_GetValueOrDefault)
+                        == this._module.Compilation.GetSpecialTypeMember(
+                            SpecialMember.System_Nullable_T_GetValueOrDefault
+                        )
                     || (object)originalMethod
-                        == this._module
-                            .Compilation
-                            .GetSpecialTypeMember(SpecialMember.System_Nullable_T_get_Value)
+                        == this._module.Compilation.GetSpecialTypeMember(
+                            SpecialMember.System_Nullable_T_get_Value
+                        )
                     || (object)originalMethod
-                        == this._module
-                            .Compilation
-                            .GetSpecialTypeMember(SpecialMember.System_Nullable_T_get_HasValue)
+                        == this._module.Compilation.GetSpecialTypeMember(
+                            SpecialMember.System_Nullable_T_get_HasValue
+                        )
                 )
                 {
                     return true;
@@ -1988,8 +1988,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             {
                 // Constructor pops all the arguments, fixed and variadic.
                 int fixedArgCount = objCreation.Arguments.Length - 1;
-                int varArgCount =
-                    ((BoundArgListOperator)objCreation.Arguments[fixedArgCount]).Arguments.Length;
+                int varArgCount = ((BoundArgListOperator)objCreation.Arguments[fixedArgCount])
+                    .Arguments
+                    .Length;
                 stack -= fixedArgCount;
                 stack -= varArgCount;
             }
@@ -2417,10 +2418,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 
                     // ctor can possibly see its own assignments indirectly if there are ref parameters or __arglist
                     if (
-                        System
-                            .Linq
-                            .ImmutableArrayExtensions
-                            .All(ctor.Parameters, p => p.RefKind == RefKind.None) && !ctor.IsVararg
+                        System.Linq.ImmutableArrayExtensions.All(
+                            ctor.Parameters,
+                            p => p.RefKind == RefKind.None
+                        ) && !ctor.IsVararg
                     )
                     {
                         InPlaceCtorCall(left, objCreation, used);

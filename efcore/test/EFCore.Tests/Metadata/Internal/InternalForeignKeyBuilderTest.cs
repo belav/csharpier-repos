@@ -89,10 +89,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     ConfigurationSource.DataAnnotation
                 )
             );
-            var shadowId =
-                principalEntityBuilder
-                    .Property(typeof(int), "ShadowId", ConfigurationSource.Convention)
-                    .Metadata;
+            var shadowId = principalEntityBuilder
+                .Property(typeof(int), "ShadowId", ConfigurationSource.Convention)
+                .Metadata;
             Assert.Null(
                 relationshipBuilder.HasPrincipalKey(
                     new[] { shadowId.Name, Customer.UniqueProperty.Name },
@@ -150,10 +149,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 ConfigurationSource.Explicit
             );
 
-            var foreignKey =
-                dependentEntityBuilder
-                    .HasRelationship(principalEntityBuilder.Metadata, ConfigurationSource.Explicit)
-                    .Metadata;
+            var foreignKey = dependentEntityBuilder
+                .HasRelationship(principalEntityBuilder.Metadata, ConfigurationSource.Explicit)
+                .Metadata;
 
             foreignKey.UpdatePropertiesConfigurationSource(ConfigurationSource.Explicit);
             foreignKey.UpdatePrincipalKeyConfigurationSource(ConfigurationSource.Explicit);
@@ -230,23 +228,21 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 ConfigurationSource.Explicit
             );
 
-            var foreignKey = orderEntityBuilder
-                .Metadata
-                .AddForeignKey(
-                    new[]
-                    {
-                        orderEntityBuilder
-                            .Property(Order.CustomerIdProperty, ConfigurationSource.Convention)
-                            .Metadata,
-                        orderEntityBuilder
-                            .Property(Order.CustomerUniqueProperty, ConfigurationSource.Convention)
-                            .Metadata
-                    },
-                    customerKeyBuilder.Metadata,
-                    customerEntityBuilder.Metadata,
-                    ConfigurationSource.Explicit,
-                    ConfigurationSource.Explicit
-                );
+            var foreignKey = orderEntityBuilder.Metadata.AddForeignKey(
+                new[]
+                {
+                    orderEntityBuilder
+                        .Property(Order.CustomerIdProperty, ConfigurationSource.Convention)
+                        .Metadata,
+                    orderEntityBuilder
+                        .Property(Order.CustomerUniqueProperty, ConfigurationSource.Convention)
+                        .Metadata
+                },
+                customerKeyBuilder.Metadata,
+                customerEntityBuilder.Metadata,
+                ConfigurationSource.Explicit,
+                ConfigurationSource.Explicit
+            );
 
             Assert.Equal(
                 ConfigurationSource.Explicit,
@@ -683,23 +679,21 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 ConfigurationSource.Explicit
             );
 
-            var foreignKey = orderEntityBuilder
-                .Metadata
-                .AddForeignKey(
-                    new[]
-                    {
-                        orderEntityBuilder
-                            .Property(Order.CustomerIdProperty, ConfigurationSource.Convention)
-                            .Metadata,
-                        orderEntityBuilder
-                            .Property(Order.CustomerUniqueProperty, ConfigurationSource.Convention)
-                            .Metadata
-                    },
-                    customerKeyBuilder.Metadata,
-                    customerEntityBuilder.Metadata,
-                    ConfigurationSource.Explicit,
-                    ConfigurationSource.Explicit
-                );
+            var foreignKey = orderEntityBuilder.Metadata.AddForeignKey(
+                new[]
+                {
+                    orderEntityBuilder
+                        .Property(Order.CustomerIdProperty, ConfigurationSource.Convention)
+                        .Metadata,
+                    orderEntityBuilder
+                        .Property(Order.CustomerUniqueProperty, ConfigurationSource.Convention)
+                        .Metadata
+                },
+                customerKeyBuilder.Metadata,
+                customerEntityBuilder.Metadata,
+                ConfigurationSource.Explicit,
+                ConfigurationSource.Explicit
+            );
             foreignKey.IsUnique = true;
 
             Assert.Equal(ConfigurationSource.Explicit, foreignKey.GetIsUniqueConfigurationSource());
@@ -816,34 +810,29 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 typeof(Customer),
                 ConfigurationSource.Explicit
             );
-            var pk =
-                customerEntityBuilder
-                    .PrimaryKey(
-                        new[] { Customer.IdProperty, Customer.UniqueProperty },
-                        ConfigurationSource.Explicit
-                    )
-                    .Metadata;
+            var pk = customerEntityBuilder
+                .PrimaryKey(
+                    new[] { Customer.IdProperty, Customer.UniqueProperty },
+                    ConfigurationSource.Explicit
+                )
+                .Metadata;
             var orderEntityBuilder = modelBuilder.Entity(
                 typeof(Order),
                 ConfigurationSource.Explicit
             );
-            var customerIdProperty =
-                orderEntityBuilder
-                    .Property(Order.CustomerIdProperty, ConfigurationSource.Convention)
-                    .Metadata;
-            var customerUniqueProperty =
-                orderEntityBuilder
-                    .Property(Order.CustomerUniqueProperty, ConfigurationSource.Convention)
-                    .Metadata;
-            var fk = orderEntityBuilder
-                .Metadata
-                .AddForeignKey(
-                    new[] { customerIdProperty, customerUniqueProperty },
-                    pk,
-                    customerEntityBuilder.Metadata,
-                    ConfigurationSource.Explicit,
-                    ConfigurationSource.Explicit
-                );
+            var customerIdProperty = orderEntityBuilder
+                .Property(Order.CustomerIdProperty, ConfigurationSource.Convention)
+                .Metadata;
+            var customerUniqueProperty = orderEntityBuilder
+                .Property(Order.CustomerUniqueProperty, ConfigurationSource.Convention)
+                .Metadata;
+            var fk = orderEntityBuilder.Metadata.AddForeignKey(
+                new[] { customerIdProperty, customerUniqueProperty },
+                pk,
+                customerEntityBuilder.Metadata,
+                ConfigurationSource.Explicit,
+                ConfigurationSource.Explicit
+            );
 
             var relationshipBuilder = orderEntityBuilder.HasRelationship(
                 customerEntityBuilder.Metadata,
@@ -1359,15 +1348,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             Assert.Same(
                 relationship.Metadata,
-                dependentEntityBuilder
-                    .Metadata
+                dependentEntityBuilder.Metadata
                     .FindNavigation(Order.CustomerProperty.Name)
                     .ForeignKey
             );
             Assert.Same(
                 relationship.Metadata,
-                principalEntityBuilder
-                    .Metadata
+                principalEntityBuilder.Metadata
                     .FindNavigation(Customer.OrdersProperty.Name)
                     .ForeignKey
             );
@@ -1389,23 +1376,21 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 typeof(Order),
                 ConfigurationSource.Explicit
             );
-            var existingForeignKey = dependentEntityBuilder
-                .Metadata
-                .AddForeignKey(
-                    new[]
-                    {
-                        dependentEntityBuilder
-                            .Property(Order.CustomerIdProperty, ConfigurationSource.Explicit)
-                            .Metadata,
-                        dependentEntityBuilder
-                            .Property(Order.CustomerUniqueProperty, ConfigurationSource.Explicit)
-                            .Metadata
-                    },
-                    principalEntityBuilder.Metadata.FindPrimaryKey(),
-                    principalEntityBuilder.Metadata,
-                    ConfigurationSource.Explicit,
-                    ConfigurationSource.Explicit
-                );
+            var existingForeignKey = dependentEntityBuilder.Metadata.AddForeignKey(
+                new[]
+                {
+                    dependentEntityBuilder
+                        .Property(Order.CustomerIdProperty, ConfigurationSource.Explicit)
+                        .Metadata,
+                    dependentEntityBuilder
+                        .Property(Order.CustomerUniqueProperty, ConfigurationSource.Explicit)
+                        .Metadata
+                },
+                principalEntityBuilder.Metadata.FindPrimaryKey(),
+                principalEntityBuilder.Metadata,
+                ConfigurationSource.Explicit,
+                ConfigurationSource.Explicit
+            );
             existingForeignKey.SetPrincipalToDependent(
                 Customer.OrdersProperty,
                 ConfigurationSource.Explicit
@@ -1516,15 +1501,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             Assert.Same(
                 conflictingForeignKeyBuilder.Metadata,
-                dependentEntityBuilder
-                    .Metadata
+                dependentEntityBuilder.Metadata
                     .FindNavigation(Order.CustomerProperty.Name)
                     .ForeignKey
             );
             Assert.Same(
                 conflictingForeignKeyBuilder.Metadata,
-                principalEntityBuilder
-                    .Metadata
+                principalEntityBuilder.Metadata
                     .FindNavigation(Customer.OrdersProperty.Name)
                     .ForeignKey
             );
@@ -1551,15 +1534,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             );
             Assert.Same(
                 newForeignKeyBuilder.Metadata,
-                dependentEntityBuilder
-                    .Metadata
+                dependentEntityBuilder.Metadata
                     .FindNavigation(Order.CustomerProperty.Name)
                     .ForeignKey
             );
             Assert.Same(
                 newForeignKeyBuilder.Metadata,
-                principalEntityBuilder
-                    .Metadata
+                principalEntityBuilder.Metadata
                     .FindNavigation(Customer.OrdersProperty.Name)
                     .ForeignKey
             );

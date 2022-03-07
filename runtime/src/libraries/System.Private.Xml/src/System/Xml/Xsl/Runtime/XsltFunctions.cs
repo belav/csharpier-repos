@@ -22,8 +22,9 @@ namespace System.Xml.Xsl.Runtime
     [EditorBrowsable(EditorBrowsableState.Never)]
     public static class XsltFunctions
     {
-        private static readonly CompareInfo s_compareInfo =
-            CultureInfo.InvariantCulture.CompareInfo;
+        private static readonly CompareInfo s_compareInfo = CultureInfo
+            .InvariantCulture
+            .CompareInfo;
 
         //------------------------------------------------
         // Xslt/XPath functions

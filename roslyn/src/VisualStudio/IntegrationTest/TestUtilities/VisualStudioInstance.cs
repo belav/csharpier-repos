@@ -114,9 +114,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                 var debuggerHostDte = GetDebuggerHostDte();
                 var targetProcessId = Process.GetCurrentProcess().Id;
                 var localProcess = debuggerHostDte
-                    ?.Debugger
-                    .LocalProcesses
-                    .OfType<EnvDTE80.Process2>()
+                    ?.Debugger.LocalProcesses.OfType<EnvDTE80.Process2>()
                     .FirstOrDefault(p => p.ProcessID == hostProcess.Id);
                 if (localProcess != null)
                 {
@@ -297,9 +295,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             {
                 var dte = IntegrationHelper.TryLocateDteForProcess(process);
                 if (
-                    dte?.Debugger
-                        ?.DebuggedProcesses
-                        ?.OfType<EnvDTE.Process>()
+                    dte?.Debugger?.DebuggedProcesses?.OfType<EnvDTE.Process>()
                         .Any(p => p.ProcessID == currentProcessId) ?? false
                 )
                 {

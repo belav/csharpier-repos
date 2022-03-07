@@ -36,10 +36,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.TextEditor
             );
             var dummyReason = ConnectionReason.BufferGraphChange;
 
-            var exportProvider = EditorTestCompositions
-                .EditorFeatures
-                .ExportProviderFactory
-                .CreateExportProvider();
+            var exportProvider =
+                EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
             var service = Assert.IsType<TextBufferAssociatedViewService>(
                 exportProvider.GetExportedValue<ITextBufferAssociatedViewService>()
             );

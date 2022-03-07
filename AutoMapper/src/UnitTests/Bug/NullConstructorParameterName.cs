@@ -22,9 +22,10 @@ namespace AutoMapper.UnitTests.Bug
         object CreateDynamicObject()
         {
             var assemblyName = new AssemblyName("TestClass");
-            AssemblyBuilder assemblyBuilder = AppDomain
-                .CurrentDomain
-                .DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
+            AssemblyBuilder assemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(
+                assemblyName,
+                AssemblyBuilderAccess.Run
+            );
             ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule("MainModule");
             TypeBuilder typeBuilder = moduleBuilder.DefineType(
                 assemblyName.FullName,

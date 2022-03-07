@@ -28,8 +28,9 @@ internal partial class HubClientProxyGenerator
         )
         {
             var attributeSyntax = (AttributeSyntax)context.Node;
-            var attributeSymbol =
-                ModelExtensions.GetSymbolInfo(context.SemanticModel, attributeSyntax).Symbol;
+            var attributeSymbol = ModelExtensions
+                .GetSymbolInfo(context.SemanticModel, attributeSyntax)
+                .Symbol;
 
             if (
                 attributeSymbol is null
@@ -99,9 +100,10 @@ internal partial class HubClientProxyGenerator
 
             // Check that the type parameter matches 2nd parameter type
             if (
-                !SymbolEqualityComparer
-                    .Default
-                    .Equals(symbol.TypeArguments[0], symbol.Parameters[1].Type)
+                !SymbolEqualityComparer.Default.Equals(
+                    symbol.TypeArguments[0],
+                    symbol.Parameters[1].Type
+                )
             )
             {
                 context.ReportDiagnostic(
@@ -192,8 +194,7 @@ internal partial class HubClientProxyGenerator
             foreach (var attributeData in methodSymbol.GetAttributes())
             {
                 if (
-                    !attributeData
-                        .AttributeClass
+                    !attributeData.AttributeClass
                         .ToString()
                         .EndsWith("HubClientProxyAttribute", StringComparison.Ordinal)
                 )
@@ -290,9 +291,8 @@ internal partial class HubClientProxyGenerator
             }
             sourceGenerationSpec.SetterMethodName = registerCallbackProviderMethodSymbol.Name;
             sourceGenerationSpec.SetterClassName = registerCallbackProviderClassSymbol.Name;
-            sourceGenerationSpec.SetterNamespace = registerCallbackProviderClassSymbol
-                .ContainingNamespace
-                .ToString();
+            sourceGenerationSpec.SetterNamespace =
+                registerCallbackProviderClassSymbol.ContainingNamespace.ToString();
             sourceGenerationSpec.SetterTypeParameterName =
                 registerCallbackProviderMethodSymbol.TypeParameters[0].Name;
             sourceGenerationSpec.SetterHubConnectionParameterName =
@@ -353,14 +353,12 @@ internal partial class HubClientProxyGenerator
                     .Where(member => member.Kind == SymbolKind.Method)
                     .Select(member => (IMethodSymbol)member)
                     .Union<IMethodSymbol>(
-                        providerSymbol
-                            .AllInterfaces
-                            .SelectMany(
-                                x =>
-                                    x.GetMembers()
-                                        .Where(member => member.Kind == SymbolKind.Method)
-                                        .Select(member => (IMethodSymbol)member)
-                            ),
+                        providerSymbol.AllInterfaces.SelectMany(
+                            x =>
+                                x.GetMembers()
+                                    .Where(member => member.Kind == SymbolKind.Method)
+                                    .Select(member => (IMethodSymbol)member)
+                        ),
                         SymbolEqualityComparer.Default
                     )
                     .ToList();

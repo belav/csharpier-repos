@@ -472,8 +472,10 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void Remove_EmptyDictionary_DoesNothing()
         {
-            ImmutableSortedDictionary<int, string> dictionary =
-                ImmutableSortedDictionary<int, string>.Empty;
+            ImmutableSortedDictionary<int, string> dictionary = ImmutableSortedDictionary<
+                int,
+                string
+            >.Empty;
             Assert.Equal(0, dictionary.Remove(2).Count);
         }
 
@@ -593,9 +595,10 @@ namespace System.Collections.Immutable.Tests
             IEqualityComparer<TValue> valueComparer = null
         )
         {
-            return ImmutableSortedDictionary<TKey, TValue>
-                .Empty
-                .WithComparers(keyComparer, valueComparer);
+            return ImmutableSortedDictionary<TKey, TValue>.Empty.WithComparers(
+                keyComparer,
+                valueComparer
+            );
         }
     }
 }

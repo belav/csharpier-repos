@@ -2099,8 +2099,7 @@ class C
                     new[] { "void C.Main()" },
                     model
                         .GetSymbolInfo(methodGroup)
-                        .CandidateSymbols
-                        .Select(s => s.ToTestDisplayString())
+                        .CandidateSymbols.Select(s => s.ToTestDisplayString())
                 );
 
                 // ... its second lambda and the symbols it uses

@@ -398,8 +398,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             var tags = context.Tags.Select(t => (Guid?)t.Id).ToList();
 
-            var query = context
-                .Gears
+            var query = context.Gears
                 .Include(g => g.Tag)
                 .Where(g => g.Tag != null && tags.Contains(g.Tag.Id));
 
@@ -419,8 +418,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             var tags = context.Tags.Select(t => (Guid?)t.Id).ToList();
 
-            var query = context
-                .Gears
+            var query = context.Gears
                 .Include(g => g.Tag)
                 .Where(g => g.CityOfBirth.Location != null && tags.Contains(g.Tag.Id));
 
@@ -840,15 +838,13 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Gear>()
                         .Where(
                             g =>
-                                MilitaryRank
-                                    .Corporal
-                                    .HasFlag(
-                                        ss.Set<Gear>()
-                                            .OrderBy(x => x.Nickname)
-                                            .ThenBy(x => x.SquadId)
-                                            .Select(x => x.Rank)
-                                            .FirstOrDefault()
-                                    )
+                                MilitaryRank.Corporal.HasFlag(
+                                    ss.Set<Gear>()
+                                        .OrderBy(x => x.Nickname)
+                                        .ThenBy(x => x.SquadId)
+                                        .Select(x => x.Rank)
+                                        .FirstOrDefault()
+                                )
                         )
             );
         }
@@ -879,15 +875,13 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Gear>()
                         .Where(
                             g =>
-                                MilitaryRank
-                                    .Corporal
-                                    .HasFlag(
-                                        ss.Set<Gear>()
-                                            .OrderBy(x => x.Nickname)
-                                            .ThenBy(x => x.SquadId)
-                                            .FirstOrDefault()
-                                            .Rank
-                                    )
+                                MilitaryRank.Corporal.HasFlag(
+                                    ss.Set<Gear>()
+                                        .OrderBy(x => x.Nickname)
+                                        .ThenBy(x => x.SquadId)
+                                        .FirstOrDefault()
+                                        .Rank
+                                )
                         )
             );
         }
@@ -3877,24 +3871,23 @@ namespace Microsoft.EntityFrameworkCore.Query
             bool async
         )
         {
-            var message =
-                (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            AssertQuery(
-                                async,
-                                ss =>
-                                    from o in ss.Set<Gear>().OfType<Officer>()
-                                    join g in ss.Set<Gear>()
-                                        on FavoriteWeapon(o.Weapons).Name equals FavoriteWeapon(
-                                            g.Weapons
-                                        ).Name
-                                    where o.HasSoulPatch
-                                    select new { o = o.Nickname, g = g.Nickname },
-                                elementSorter: e => e.o + e.g
-                            )
-                    )
-                ).Message;
+            var message = (
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        AssertQuery(
+                            async,
+                            ss =>
+                                from o in ss.Set<Gear>().OfType<Officer>()
+                                join g in ss.Set<Gear>()
+                                    on FavoriteWeapon(o.Weapons).Name equals FavoriteWeapon(
+                                        g.Weapons
+                                    ).Name
+                                where o.HasSoulPatch
+                                select new { o = o.Nickname, g = g.Nickname },
+                            elementSorter: e => e.o + e.g
+                        )
+                )
+            ).Message;
         }
 
         private static Weapon FavoriteWeapon(IEnumerable<Weapon> weapons)
@@ -4640,12 +4633,11 @@ namespace Microsoft.EntityFrameworkCore.Query
             bool async
         )
         {
-            var message =
-                (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => AssertQuery(async, ss => ss.Set<Gear>().Include("Reports.Foo"))
-                    )
-                ).Message;
+            var message = (
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => AssertQuery(async, ss => ss.Set<Gear>().Include("Reports.Foo"))
+                )
+            ).Message;
 
             Assert.Contains(
                 CoreResources
@@ -5315,13 +5307,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     select new
                                     {
                                         w.Id,
-                                        InnerFirst = w.Owner
-                                            .Weapons
+                                        InnerFirst = w.Owner.Weapons
                                             .Select(ww => new { ww.Name, ww.IsAutomatic })
                                             .ToList(),
-                                        InnerSecond = w.Owner
-                                            .Squad
-                                            .Members
+                                        InnerSecond = w.Owner.Squad.Members
                                             .OrderBy(mm => mm.Nickname)
                                             .Select(mm => new { mm.Nickname, mm.HasSoulPatch })
                                             .ToList()
@@ -5720,8 +5709,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     join g in ss.Set<Gear>() on t.GearNickName equals g.Nickname into grouping
                     from g in grouping.DefaultIfEmpty()
                     orderby t.Note ,g.Nickname descending
-                    select g.Squad
-                        .Members
+                    select g.Squad.Members
                         .Where(m => m.HasSoulPatch)
                         .Select(
                             m =>
@@ -5738,8 +5726,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     from g in grouping.DefaultIfEmpty()
                     orderby t.Note ,g.Nickname descending
                     select g != null
-                        ? g.Squad
-                          .Members
+                        ? g.Squad.Members
                           .Where(m => m.HasSoulPatch)
                           .OrderBy(m => m.Nickname)
                           .Select(
@@ -5792,9 +5779,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .OrderBy(w => w.Name)
                         .Select(
                             w =>
-                                w.Owner
-                                    .Squad
-                                    .Members
+                                w.Owner.Squad.Members
                                     .OrderByDescending(m => m.FullName)
                                     .Select(
                                         m =>
@@ -5815,9 +5800,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Select(
                             w =>
                                 w.Owner != null
-                                    ? w.Owner
-                                      .Squad
-                                      .Members
+                                    ? w.Owner.Squad.Members
                                       .OrderByDescending(m => m.FullName)
                                       .Select(
                                           m =>
@@ -5873,9 +5856,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                             select new
                             {
                                 w.Id,
-                                InnerCollection = w.Owner
-                                    .Squad
-                                    .Members
+                                InnerCollection = w.Owner.Squad.Members
                                     .OrderBy(mm => mm.Nickname)
                                     .Select(mm => new { mm.Nickname, mm.HasSoulPatch })
                                     .ToList()
@@ -5925,9 +5906,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     select new
                                     {
                                         w.Id,
-                                        InnerSecond = w.Owner
-                                            .Squad
-                                            .Members
+                                        InnerSecond = w.Owner.Squad.Members
                                             .OrderBy(mm => mm.Nickname)
                                             .Select(mm => new { mm.Nickname, mm.HasSoulPatch })
                                             .ToList()
@@ -5984,9 +5963,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                             select new
                             {
                                 w.Id,
-                                InnerCollection = w.Owner
-                                    .Squad
-                                    .Members
+                                InnerCollection = w.Owner.Squad.Members
                                     .OrderBy(mm => mm.Nickname)
                                     .Select(mm => new { mm.Nickname, mm.HasSoulPatch })
                                     .ToList()
@@ -6039,9 +6016,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     select new
                                     {
                                         w.Id,
-                                        InnerSecond = w.Owner
-                                            .Squad
-                                            .Members
+                                        InnerSecond = w.Owner.Squad.Members
                                             .OrderBy(mm => mm.Nickname)
                                             .Select(mm => new { mm.Nickname, mm.HasSoulPatch })
                                             .ToList()
@@ -6313,17 +6288,16 @@ namespace Microsoft.EntityFrameworkCore.Query
                 new ExpectedInclude<Officer>(o => o.Squad)
             };
 
-            var message =
-                (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            AssertQuery(
-                                async,
-                                ss => ss.Set<Gear>().Include(g => g.Squad).Concat(ss.Set<Gear>()),
-                                elementAsserter: (e, a) => AssertInclude(e, a, expectedIncludes)
-                            )
-                    )
-                ).Message;
+            var message = (
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        AssertQuery(
+                            async,
+                            ss => ss.Set<Gear>().Include(g => g.Squad).Concat(ss.Set<Gear>()),
+                            elementAsserter: (e, a) => AssertInclude(e, a, expectedIncludes)
+                        )
+                )
+            ).Message;
 
             Assert.Equal(CoreStrings.SetOperationWithDifferentIncludesInOperands, message);
         }
@@ -8694,8 +8668,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 new
                                 {
                                     Items = t.Gear != null
-                                        ? t.Gear
-                                          .Weapons
+                                        ? t.Gear.Weapons
                                           .Select(w => new { w.Owner.Nickname })
                                           .ToList()
                                         : null
@@ -12142,9 +12115,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                                         ).CommandingFaction,
                                         IsNull = (l as LocustCommander).CommandingFaction == null,
                                         Property = (int?)(l as LocustCommander).HighCommandId,
-                                        PropertyAfterNavigation = (l as LocustCommander)
-                                            .CommandingFaction
-                                            .MaybeScalar(x => x.Eradicated),
+                                        PropertyAfterNavigation = (
+                                            l as LocustCommander
+                                        ).CommandingFaction.MaybeScalar(x => x.Eradicated),
                                         NestedInner = new
                                         {
                                             HighCommand = (l as LocustCommander).HighCommand,

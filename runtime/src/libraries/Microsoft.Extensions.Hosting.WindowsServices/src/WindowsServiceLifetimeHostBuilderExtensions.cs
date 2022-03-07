@@ -66,8 +66,9 @@ namespace Microsoft.Extensions.Hosting
                                 {
                                     if (string.IsNullOrEmpty(settings.SourceName))
                                     {
-                                        settings.SourceName =
-                                            hostContext.HostingEnvironment.ApplicationName;
+                                        settings.SourceName = hostContext
+                                            .HostingEnvironment
+                                            .ApplicationName;
                                     }
                                 }
                             );

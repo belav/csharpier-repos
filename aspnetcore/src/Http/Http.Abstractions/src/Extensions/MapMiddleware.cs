@@ -54,10 +54,11 @@ public class MapMiddleware
         }
 
         if (
-            context
-                .Request
-                .Path
-                .StartsWithSegments(_options.PathMatch, out var matchedPath, out var remainingPath)
+            context.Request.Path.StartsWithSegments(
+                _options.PathMatch,
+                out var matchedPath,
+                out var remainingPath
+            )
         )
         {
             if (!_options.PreserveMatchedPathSegment)

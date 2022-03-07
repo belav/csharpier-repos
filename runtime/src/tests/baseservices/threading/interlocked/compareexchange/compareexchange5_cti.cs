@@ -54,12 +54,10 @@ public class InterlockedCompareExchange5
             // globalValue and state should be "changedValue"
             if (globalValue.ToString() != "changedValue" && state != (object)("changedValue"))
             {
-                TestLibrary
-                    .TestFramework
-                    .LogError(
-                        "001",
-                        "The method did not works, the result is" + globalValue + " " + state
-                    );
+                TestLibrary.TestFramework.LogError(
+                    "001",
+                    "The method did not works, the result is" + globalValue + " " + state
+                );
                 retVal = false;
             }
         }
@@ -93,12 +91,10 @@ public class InterlockedCompareExchange5
             // globalValue and state should NOT be -100
             if (((myClass)globalValue).a != -100 && ((myClass)state).a != -100)
             {
-                TestLibrary
-                    .TestFramework
-                    .LogError(
-                        "003",
-                        "The method did not works, the result is" + globalValue + " " + state
-                    );
+                TestLibrary.TestFramework.LogError(
+                    "003",
+                    "The method did not works, the result is" + globalValue + " " + state
+                );
                 retVal = false;
             }
         }
@@ -134,12 +130,10 @@ public class InterlockedCompareExchange5
             // globalValue should equal value now
             if (globalValue != value)
             {
-                TestLibrary
-                    .TestFramework
-                    .LogError(
-                        "005",
-                        "The method did not works, the result is" + globalValue + " " + state
-                    );
+                TestLibrary.TestFramework.LogError(
+                    "005",
+                    "The method did not works, the result is" + globalValue + " " + state
+                );
                 retVal = false;
             }
         }

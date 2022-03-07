@@ -740,10 +740,9 @@ namespace System.Runtime.Caching
                     }
                     else
                     {
-                        prev =
-                            (_pages[(_addRef2Head.PageIndex)]._entries)[_addRef2Head.Ref2Index]
-                                ._ref2
-                                ._prev;
+                        prev = (_pages[(_addRef2Head.PageIndex)]._entries)[_addRef2Head.Ref2Index]
+                            ._ref2
+                            ._prev;
                         next = _addRef2Head;
                     }
 
@@ -1088,10 +1087,9 @@ namespace System.Runtime.Caching
                         prevNext = (_pages[(prev.PageIndex)]._entries)[prev.Ref2Index]._ref2._prev;
                         while (prevNext.IsRef1)
                         {
-                            prevNext =
-                                (_pages[(prevNext.PageIndex)]._entries)[prevNext.Ref1Index]
-                                    ._ref1
-                                    ._prev;
+                            prevNext = (_pages[(prevNext.PageIndex)]._entries)[prevNext.Ref1Index]
+                                ._ref1
+                                ._prev;
                         }
 
                         entries = (_pages[(prev.PageIndex)]._entries);

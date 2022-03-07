@@ -145,31 +145,25 @@ namespace Microsoft.Extensions.DependencyModel.Tests
                 )
             );
 
-            var rids =
-                result
-                    .Should()
-                    .HaveProperty("runtimes")
-                    .Subject
-                    .Should()
-                    .BeOfType<JObject>()
-                    .Subject;
+            var rids = result
+                .Should()
+                .HaveProperty("runtimes")
+                .Subject.Should()
+                .BeOfType<JObject>()
+                .Subject;
 
             rids.Should()
                 .HaveProperty("win7-x64")
-                .Subject
-                .Should()
+                .Subject.Should()
                 .BeOfType<JArray>()
-                .Which
-                .Values<string>()
+                .Which.Values<string>()
                 .ShouldBeEquivalentTo(new[] { "win6", "win5" });
 
             rids.Should()
                 .HaveProperty("win8-x64")
-                .Subject
-                .Should()
+                .Subject.Should()
                 .BeOfType<JArray>()
-                .Which
-                .Values<string>()
+                .Which.Values<string>()
                 .ShouldBeEquivalentTo(new[] { "win7-x64" });
         }
 
@@ -182,14 +176,12 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             result
                 .Should()
                 .HavePropertyAsObject("runtimeTarget")
-                .Which
-                .Should()
+                .Which.Should()
                 .HavePropertyValue("name", "Target/runtime");
             result
                 .Should()
                 .HavePropertyAsObject("runtimeTarget")
-                .Which
-                .Should()
+                .Which.Should()
                 .HavePropertyValue("signature", "runtimeSignature");
         }
 
@@ -202,14 +194,12 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             result
                 .Should()
                 .HavePropertyAsObject("runtimeTarget")
-                .Which
-                .Should()
+                .Which.Should()
                 .HavePropertyValue("name", "Target");
             result
                 .Should()
                 .HavePropertyAsObject("runtimeTarget")
-                .Which
-                .Should()
+                .Which.Should()
                 .HavePropertyValue("signature", "runtimeSignature");
         }
 
@@ -267,8 +257,7 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             library
                 .Should()
                 .HavePropertyAsObject("compile")
-                .Subject
-                .Should()
+                .Subject.Should()
                 .HaveProperty("Banana.dll");
 
             //libraries
@@ -315,8 +304,7 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             library
                 .Should()
                 .HavePropertyAsObject("compile")
-                .Subject
-                .Should()
+                .Subject.Should()
                 .HaveProperty("Banana.dll");
 
             //libraries
@@ -394,34 +382,35 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             library
                 .Should()
                 .HavePropertyAsObject("runtime")
-                .Subject
-                .Should()
+                .Subject.Should()
                 .HaveProperty("Banana.dll");
             library
                 .Should()
                 .HavePropertyAsObject("native")
-                .Subject
-                .Should()
+                .Subject.Should()
                 .HaveProperty("runtimes/linux/native/native.so");
 
             var runtimeTargets = library.Should().HavePropertyAsObject("runtimeTargets").Subject;
 
-            var runtimeAssembly =
-                runtimeTargets.Should().HavePropertyAsObject("Banana.Win7-x64.dll").Subject;
+            var runtimeAssembly = runtimeTargets
+                .Should()
+                .HavePropertyAsObject("Banana.Win7-x64.dll")
+                .Subject;
             runtimeAssembly.Should().HavePropertyValue("rid", "win7-x64");
             runtimeAssembly.Should().HavePropertyValue("assetType", "runtime");
 
-            var nativeLibrary =
-                runtimeTargets.Should().HavePropertyAsObject("native/Banana.Win7-x64.so").Subject;
+            var nativeLibrary = runtimeTargets
+                .Should()
+                .HavePropertyAsObject("native/Banana.Win7-x64.so")
+                .Subject;
             nativeLibrary.Should().HavePropertyValue("rid", "win7-x64");
             nativeLibrary.Should().HavePropertyValue("assetType", "native");
 
             var resourceAssemblies = library.Should().HavePropertyAsObject("resources").Subject;
-            var resourceAssembly =
-                resourceAssemblies
-                    .Should()
-                    .HavePropertyAsObject("en-US/Banana.Resource.dll")
-                    .Subject;
+            var resourceAssembly = resourceAssemblies
+                .Should()
+                .HavePropertyAsObject("en-US/Banana.Resource.dll")
+                .Subject;
             resourceAssembly.Should().HavePropertyValue("locale", "en-US");
 
             //libraries
@@ -496,14 +485,12 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             library
                 .Should()
                 .HavePropertyAsObject("runtime")
-                .Subject
-                .Should()
+                .Subject.Should()
                 .HaveProperty("System.Private.CoreLib.dll");
             library
                 .Should()
                 .HavePropertyAsObject("native")
-                .Subject
-                .Should()
+                .Subject.Should()
                 .HaveProperty("coreclr.dll");
 
             //libraries
@@ -579,32 +566,33 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             library
                 .Should()
                 .HavePropertyAsObject("runtime")
-                .Subject
-                .Should()
+                .Subject.Should()
                 .HaveProperty("Banana.dll");
             library
                 .Should()
                 .HavePropertyAsObject("native")
-                .Subject
-                .Should()
+                .Subject.Should()
                 .HaveProperty("native.dll");
 
             library
                 .Should()
                 .HavePropertyAsObject("compile")
-                .Subject
-                .Should()
+                .Subject.Should()
                 .HaveProperty("ref/Banana.dll");
 
             var runtimeTargets = library.Should().HavePropertyAsObject("runtimeTargets").Subject;
 
-            var runtimeAssembly =
-                runtimeTargets.Should().HavePropertyAsObject("Banana.Win7-x64.dll").Subject;
+            var runtimeAssembly = runtimeTargets
+                .Should()
+                .HavePropertyAsObject("Banana.Win7-x64.dll")
+                .Subject;
             runtimeAssembly.Should().HavePropertyValue("rid", "win7-x64");
             runtimeAssembly.Should().HavePropertyValue("assetType", "runtime");
 
-            var nativeLibrary =
-                runtimeTargets.Should().HavePropertyAsObject("Banana.Win7-x64.so").Subject;
+            var nativeLibrary = runtimeTargets
+                .Should()
+                .HavePropertyAsObject("Banana.Win7-x64.so")
+                .Subject;
             nativeLibrary.Should().HavePropertyValue("rid", "win7-x64");
             nativeLibrary.Should().HavePropertyValue("assetType", "native");
 
@@ -685,8 +673,7 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             assetGroup
                 .Should()
                 .HavePropertyAsObject("native")
-                .Subject
-                .Should()
+                .Subject.Should()
                 .HaveProperty("runtimes/osx/native/native.dylib");
 
             //libraries
@@ -743,26 +730,31 @@ namespace Microsoft.Extensions.DependencyModel.Tests
 
             var runtimeTargets = library.Should().HavePropertyAsObject("runtimeTargets").Subject;
 
-            var winPlaceholder =
-                runtimeTargets.Should().HavePropertyAsObject("runtime/win7-x64/lib/_._").Subject;
+            var winPlaceholder = runtimeTargets
+                .Should()
+                .HavePropertyAsObject("runtime/win7-x64/lib/_._")
+                .Subject;
             winPlaceholder.Should().HavePropertyValue("rid", "win7-x64");
             winPlaceholder.Should().HavePropertyValue("assetType", "runtime");
 
-            var winRuntime =
-                runtimeTargets.Should().HavePropertyAsObject("lib/x86Support.dll").Subject;
+            var winRuntime = runtimeTargets
+                .Should()
+                .HavePropertyAsObject("lib/x86Support.dll")
+                .Subject;
             winPlaceholder.Should().HavePropertyValue("rid", "win7-x64");
             winPlaceholder.Should().HavePropertyValue("assetType", "runtime");
 
-            var linuxPlaceholder =
-                runtimeTargets
-                    .Should()
-                    .HavePropertyAsObject("runtime/linux-x64/native/_._")
-                    .Subject;
+            var linuxPlaceholder = runtimeTargets
+                .Should()
+                .HavePropertyAsObject("runtime/linux-x64/native/_._")
+                .Subject;
             linuxPlaceholder.Should().HavePropertyValue("rid", "linux-x64");
             linuxPlaceholder.Should().HavePropertyValue("assetType", "native");
 
-            var osxNative =
-                runtimeTargets.Should().HavePropertyAsObject("native/OSXSupport.dylib").Subject;
+            var osxNative = runtimeTargets
+                .Should()
+                .HavePropertyAsObject("native/OSXSupport.dylib")
+                .Subject;
             osxNative.Should().HavePropertyValue("rid", "osx");
             osxNative.Should().HavePropertyValue("assetType", "native");
         }
@@ -798,8 +790,10 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             var target = targets.Should().HavePropertyAsObject("Target/runtime").Subject;
             var library = target.Should().HavePropertyAsObject("PackageName/1.2.3").Subject;
             var resources = library.Should().HavePropertyAsObject("resources").Subject;
-            var resource =
-                resources.Should().HavePropertyAsObject("en-US/Fruits.resources.dll").Subject;
+            var resource = resources
+                .Should()
+                .HavePropertyAsObject("en-US/Fruits.resources.dll")
+                .Subject;
             resource.Should().HavePropertyValue("locale", "en-US");
         }
 
@@ -834,8 +828,10 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             var target = targets.Should().HavePropertyAsObject("Target").Subject;
             var library = target.Should().HavePropertyAsObject("PackageName/1.2.3").Subject;
             var resources = library.Should().HavePropertyAsObject("resources").Subject;
-            var resource =
-                resources.Should().HavePropertyAsObject("en-US/Fruits.resources.dll").Subject;
+            var resource = resources
+                .Should()
+                .HavePropertyAsObject("en-US/Fruits.resources.dll")
+                .Subject;
             resource.Should().HavePropertyValue("locale", "en-US");
         }
 
@@ -907,8 +903,7 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             options
                 .Should()
                 .HaveProperty("defines")
-                .Subject
-                .Values<string>()
+                .Subject.Values<string>()
                 .Should()
                 .BeEquivalentTo(new[] { "MY", "DEFINES" });
         }

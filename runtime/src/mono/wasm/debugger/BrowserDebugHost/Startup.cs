@@ -131,14 +131,13 @@ namespace Microsoft.WebAssembly.Diagnostics
                             HttpResponseMessage response = await httpClient.GetAsync(
                                 GetEndpoint(context)
                             );
-                            context.Response.ContentType = response
-                                .Content
-                                .Headers
-                                .ContentType
-                                .ToString();
+                            context.Response.ContentType =
+                                response.Content.Headers.ContentType.ToString();
                             if ((response.Content.Headers.ContentLength ?? 0) > 0)
-                                context.Response.ContentLength =
-                                    response.Content.Headers.ContentLength;
+                                context.Response.ContentLength = response
+                                    .Content
+                                    .Headers
+                                    .ContentLength;
                             byte[] bytes = await response.Content.ReadAsByteArrayAsync();
                             await context.Response.Body.WriteAsync(bytes);
                         }
@@ -150,11 +149,9 @@ namespace Microsoft.WebAssembly.Diagnostics
                             Dictionary<string, string>
                         >(GetEndpoint(context));
                         context.Response.ContentType = "application/json";
-                        await context
-                            .Response
-                            .WriteAsync(
-                                JsonSerializer.Serialize(mapFunc(version, context, devToolsHost))
-                            );
+                        await context.Response.WriteAsync(
+                            JsonSerializer.Serialize(mapFunc(version, context, devToolsHost))
+                        );
                     }
 
                     async Task RewriteArray(HttpContext context)
@@ -191,21 +188,17 @@ namespace Microsoft.WebAssembly.Diagnostics
                                         .AddFilter(null, LogLevel.Information)
                             );
 
-                            context
-                                .Request
-                                .Query
-                                .TryGetValue(
-                                    "urlSymbolServer",
-                                    out StringValues urlSymbolServerList
-                                );
+                            context.Request.Query.TryGetValue(
+                                "urlSymbolServer",
+                                out StringValues urlSymbolServerList
+                            );
                             var proxy = new DebuggerProxy(
                                 loggerFactory,
                                 urlSymbolServerList.ToList()
                             );
 
-                            System.Net.WebSockets.WebSocket ideSocket = await context
-                                .WebSockets
-                                .AcceptWebSocketAsync();
+                            System.Net.WebSockets.WebSocket ideSocket =
+                                await context.WebSockets.AcceptWebSocketAsync();
 
                             await proxy.Run(endpoint, ideSocket);
                         }

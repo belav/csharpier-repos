@@ -196,8 +196,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             //      MethodCall(flag: s == null);
             //      if (s != null) { ... }
             //
-            var asOperand =
-                semanticModel.GetSymbolInfo(asExpression.Left, cancellationToken).Symbol;
+            var asOperand = semanticModel
+                .GetSymbolInfo(asExpression.Left, cancellationToken)
+                .Symbol;
             var localStatementStart = localStatement.SpanStart;
             var comparisonSpanStart = comparison.SpanStart;
 
@@ -318,9 +319,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                     var assignment = (AssignmentExpressionSyntax)operand;
                     if (
                         !assignment.Right.IsKind(SyntaxKind.AsExpression, out asExpression)
-                        || !assignment
-                            .Left
-                            .IsKind(SyntaxKind.IdentifierName, out IdentifierNameSyntax? identifier)
+                        || !assignment.Left.IsKind(
+                            SyntaxKind.IdentifierName,
+                            out IdentifierNameSyntax? identifier
+                        )
                     )
                     {
                         break;

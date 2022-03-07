@@ -47,9 +47,10 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
                     //  If this is not the methpd parameter associated with the route
                     // parameter then continue looking for it in the list
                     if (
-                        !enumerator
-                            .CurrentName
-                            .Equals(paramName.AsSpan(), StringComparison.OrdinalIgnoreCase)
+                        !enumerator.CurrentName.Equals(
+                            paramName.AsSpan(),
+                            StringComparison.OrdinalIgnoreCase
+                        )
                     )
                     {
                         continue;
@@ -57,8 +58,7 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
                     var argumentIsOptional =
                         parameter.IsOptional
                         || parameter.NullableAnnotation != NullableAnnotation.NotAnnotated;
-                    var location = parameter
-                        .DeclaringSyntaxReferences
+                    var location = parameter.DeclaringSyntaxReferences
                         .FirstOrDefault()
                         ?.GetSyntax()
                         .GetLocation();

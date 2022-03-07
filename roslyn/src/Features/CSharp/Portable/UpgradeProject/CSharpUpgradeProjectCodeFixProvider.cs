@@ -76,12 +76,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UpgradeProject
             foreach (var diagnostic in diagnostics)
             {
                 if (
-                    diagnostic
-                        .Properties
-                        .TryGetValue(
-                            DiagnosticPropertyConstants.RequiredLanguageVersion,
-                            out var requiredVersion
-                        ) && LanguageVersionFacts.TryParse(requiredVersion, out var required)
+                    diagnostic.Properties.TryGetValue(
+                        DiagnosticPropertyConstants.RequiredLanguageVersion,
+                        out var requiredVersion
+                    ) && LanguageVersionFacts.TryParse(requiredVersion, out var required)
                 )
                 {
                     max = max > required ? max : required;
@@ -105,12 +103,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UpgradeProject
                 );
                 var parseOptions = (CSharpParseOptions)project.ParseOptions!;
 
-                return project
-                    .Solution
-                    .WithProjectParseOptions(
-                        project.Id,
-                        parseOptions.WithLanguageVersion(parsedNewVersion)
-                    );
+                return project.Solution.WithProjectParseOptions(
+                    project.Id,
+                    parseOptions.WithLanguageVersion(parsedNewVersion)
+                );
             }
             else
             {

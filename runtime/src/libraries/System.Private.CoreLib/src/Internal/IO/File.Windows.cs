@@ -39,13 +39,11 @@ namespace Internal.IO
             using (DisableMediaInsertionPrompt.Create())
             {
                 if (
-                    !Interop
-                        .Kernel32
-                        .GetFileAttributesEx(
-                            path,
-                            Interop.Kernel32.GET_FILEEX_INFO_LEVELS.GetFileExInfoStandard,
-                            ref data
-                        )
+                    !Interop.Kernel32.GetFileAttributesEx(
+                        path,
+                        Interop.Kernel32.GET_FILEEX_INFO_LEVELS.GetFileExInfoStandard,
+                        ref data
+                    )
                 )
                 {
                     errorCode = Marshal.GetLastWin32Error();
@@ -58,9 +56,10 @@ namespace Internal.IO
 
                         Interop.Kernel32.WIN32_FIND_DATA findData = default;
                         using (
-                            SafeFindHandle handle = Interop
-                                .Kernel32
-                                .FindFirstFile(path, ref findData)
+                            SafeFindHandle handle = Interop.Kernel32.FindFirstFile(
+                                path,
+                                ref findData
+                            )
                         )
                         {
                             if (handle.IsInvalid)

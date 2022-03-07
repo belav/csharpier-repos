@@ -18,10 +18,9 @@ namespace System.IO.Tests
         public void TrailingSlashes()
         {
             string root = Path.GetPathRoot(TestDirectory);
-            var test =
-                new DirectoryInfo(
-                    Path.Combine(TestDirectory, "a") + Path.DirectorySeparatorChar
-                ).Root;
+            var test = new DirectoryInfo(
+                Path.Combine(TestDirectory, "a") + Path.DirectorySeparatorChar
+            ).Root;
             Assert.Equal(root, test.FullName);
         }
 
@@ -29,8 +28,9 @@ namespace System.IO.Tests
         public void DotsInPathAreValid()
         {
             string root = Path.GetPathRoot(TestDirectory);
-            var test =
-                new DirectoryInfo(Path.Combine(TestDirectory, "Test", "..", ".", "Test")).Root;
+            var test = new DirectoryInfo(
+                Path.Combine(TestDirectory, "Test", "..", ".", "Test")
+            ).Root;
             Assert.Equal(root, test.FullName);
         }
 

@@ -116,13 +116,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                     }
                 );
 
-                _model = Dependencies
-                    .ModelRuntimeInitializer
-                    .Initialize(
-                        (IModel)modelBuilder.Model,
-                        designTime: true,
-                        validationLogger: null
-                    );
+                _model = Dependencies.ModelRuntimeInitializer.Initialize(
+                    (IModel)modelBuilder.Model,
+                    designTime: true,
+                    validationLogger: null
+                );
             }
 
             return _model;
@@ -149,8 +147,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         public virtual bool Exists() =>
             Dependencies.DatabaseCreator.Exists()
             && InterpretExistsResult(
-                Dependencies
-                    .RawSqlCommandBuilder
+                Dependencies.RawSqlCommandBuilder
                     .Build(ExistsSql)
                     .ExecuteScalar(
                         new RelationalCommandParameterObject(
@@ -178,8 +175,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         ) =>
             await Dependencies.DatabaseCreator.ExistsAsync(cancellationToken).ConfigureAwait(false)
             && InterpretExistsResult(
-                await Dependencies
-                    .RawSqlCommandBuilder
+                await Dependencies.RawSqlCommandBuilder
                     .Build(ExistsSql)
                     .ExecuteScalarAsync(
                         new RelationalCommandParameterObject(
@@ -216,9 +212,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         {
             var model = EnsureModel();
 
-            var operations = Dependencies
-                .ModelDiffer
-                .GetDifferences(null, model.GetRelationalModel());
+            var operations = Dependencies.ModelDiffer.GetDifferences(
+                null,
+                model.GetRelationalModel()
+            );
             var commandList = Dependencies.MigrationsSqlGenerator.Generate(operations, model);
 
             return string.Concat(commandList.Select(c => c.CommandText));

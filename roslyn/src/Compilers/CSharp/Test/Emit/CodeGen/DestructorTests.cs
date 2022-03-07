@@ -938,8 +938,7 @@ public class A
                     var peFileReader = assembly.GetMetadataReader();
 
                     // Find the handle and row for A.
-                    var pairA = peFileReader
-                        .TypeDefinitions
+                    var pairA = peFileReader.TypeDefinitions
                         .AsEnumerable()
                         .Select(
                             handle =>
@@ -969,45 +968,37 @@ public class A
                         );
 
                     // Find the handle for System.Object.
-                    TypeReferenceHandle handleObject =
-                        peFileReader
-                            .TypeReferences
-                            .AsEnumerable()
-                            .Select(
-                                handle =>
-                                    new
-                                    {
-                                        handle = handle,
-                                        row = peFileReader.GetTypeReference(handle)
-                                    }
-                            )
-                            .Single(
-                                pair =>
-                                    peFileReader.GetString(pair.row.Name) == "Object"
-                                    && peFileReader.GetString(pair.row.Namespace) == "System"
-                            )
-                            .handle;
+                    TypeReferenceHandle handleObject = peFileReader.TypeReferences
+                        .AsEnumerable()
+                        .Select(
+                            handle =>
+                                new { handle = handle, row = peFileReader.GetTypeReference(handle) }
+                        )
+                        .Single(
+                            pair =>
+                                peFileReader.GetString(pair.row.Name) == "Object"
+                                && peFileReader.GetString(pair.row.Namespace) == "System"
+                        )
+                        .handle;
 
                     // Find the handle for System.Object's destructor.
-                    MemberReferenceHandle handleDestructorObject =
-                        peFileReader
-                            .MemberReferences
-                            .AsEnumerable()
-                            .Select(
-                                handle =>
-                                    new
-                                    {
-                                        handle = handle,
-                                        row = peFileReader.GetMemberReference(handle)
-                                    }
-                            )
-                            .Single(
-                                pair =>
-                                    pair.row.Parent == (EntityHandle)handleObject
-                                    && peFileReader.GetString(pair.row.Name)
-                                        == WellKnownMemberNames.DestructorName
-                            )
-                            .handle;
+                    MemberReferenceHandle handleDestructorObject = peFileReader.MemberReferences
+                        .AsEnumerable()
+                        .Select(
+                            handle =>
+                                new
+                                {
+                                    handle = handle,
+                                    row = peFileReader.GetMemberReference(handle)
+                                }
+                        )
+                        .Single(
+                            pair =>
+                                pair.row.Parent == (EntityHandle)handleObject
+                                && peFileReader.GetString(pair.row.Name)
+                                    == WellKnownMemberNames.DestructorName
+                        )
+                        .handle;
 
                     // Find the MethodImpl row for A.
                     MethodImplementation methodImpl = typeA

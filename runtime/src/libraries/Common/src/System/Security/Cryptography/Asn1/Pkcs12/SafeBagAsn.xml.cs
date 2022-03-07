@@ -145,12 +145,11 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
 
                     while (collectionReader.HasData)
                     {
-                        System
-                            .Security
-                            .Cryptography
-                            .Asn1
-                            .AttributeAsn
-                            .Decode(ref collectionReader, rebind, out tmpItem);
+                        System.Security.Cryptography.Asn1.AttributeAsn.Decode(
+                            ref collectionReader,
+                            rebind,
+                            out tmpItem
+                        );
                         tmpList.Add(tmpItem);
                     }
 

@@ -35,9 +35,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
 {
     public abstract class CoreFormatterTestsBase
     {
-        private static readonly TestComposition s_composition = EditorTestCompositions
-            .EditorFeatures
-            .AddParts(typeof(TestFormattingRuleFactoryServiceFactory));
+        private static readonly TestComposition s_composition =
+            EditorTestCompositions.EditorFeatures.AddParts(
+                typeof(TestFormattingRuleFactoryServiceFactory)
+            );
 
         private readonly ITestOutputHelper _output;
 
@@ -91,9 +92,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
                     (p, m, a, s) =>
                     {
                         if (
-                            workspace
-                                .Services
-                                .GetService<IHostDependentFormattingRuleFactoryService>()
+                            workspace.Services.GetService<IHostDependentFormattingRuleFactoryService>()
                                 is TestFormattingRuleFactoryServiceFactory.Factory factory
                             && factory.BaseIndentation != 0
                             && factory.TextSpan.Contains(p.Position)
@@ -274,9 +273,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
                 buffer.CurrentSnapshot.GetText()
             );
 
-            var formattingRuleProvider = workspace
-                .Services
-                .GetService<IHostDependentFormattingRuleFactoryService>();
+            var formattingRuleProvider =
+                workspace.Services.GetService<IHostDependentFormattingRuleFactoryService>();
             if (baseIndentation.HasValue)
             {
                 var factory =

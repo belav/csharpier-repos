@@ -462,14 +462,13 @@ Parent
 Parent",
                 symbolValidator: module =>
                 {
-                    var method = module
-                        .ContainingAssembly
+                    var method = module.ContainingAssembly
                         .BoundReferences()
                         .Single(
                             assembly =>
-                                !assembly
-                                    .Identity
-                                    .Equals(module.ContainingAssembly.CorLibrary.Identity)
+                                !assembly.Identity.Equals(
+                                    module.ContainingAssembly.CorLibrary.Identity
+                                )
                         )
                         .GetTypeByMetadataName("Child")
                         .GetMethod("M");
@@ -643,14 +642,13 @@ Parent
 Parent",
                 symbolValidator: module =>
                 {
-                    var method = module
-                        .ContainingAssembly
+                    var method = module.ContainingAssembly
                         .BoundReferences()
                         .Single(
                             assembly =>
-                                !assembly
-                                    .Identity
-                                    .Equals(module.ContainingAssembly.CorLibrary.Identity)
+                                !assembly.Identity.Equals(
+                                    module.ContainingAssembly.CorLibrary.Identity
+                                )
                         )
                         .GetTypeByMetadataName("Child")
                         .GetMethod("M");
@@ -1665,14 +1663,13 @@ Parent Get
 Parent Set",
                 symbolValidator: module =>
                 {
-                    var indexer = module
-                        .ContainingAssembly
+                    var indexer = module.ContainingAssembly
                         .BoundReferences()
                         .Single(
                             assembly =>
-                                !assembly
-                                    .Identity
-                                    .Equals(module.ContainingAssembly.CorLibrary.Identity)
+                                !assembly.Identity.Equals(
+                                    module.ContainingAssembly.CorLibrary.Identity
+                                )
                         )
                         .GetTypeByMetadataName("Child")
                         .GetIndexer<PEPropertySymbol>("Item");
@@ -1955,14 +1952,13 @@ Parent Get
 Parent Get",
                 symbolValidator: module =>
                 {
-                    var indexer = module
-                        .ContainingAssembly
+                    var indexer = module.ContainingAssembly
                         .BoundReferences()
                         .Single(
                             assembly =>
-                                !assembly
-                                    .Identity
-                                    .Equals(module.ContainingAssembly.CorLibrary.Identity)
+                                !assembly.Identity.Equals(
+                                    module.ContainingAssembly.CorLibrary.Identity
+                                )
                         )
                         .GetTypeByMetadataName("Child")
                         .GetIndexer<PEPropertySymbol>("Item");
@@ -2195,14 +2191,13 @@ Parent Set
 Parent Set",
                 symbolValidator: module =>
                 {
-                    var indexer = module
-                        .ContainingAssembly
+                    var indexer = module.ContainingAssembly
                         .BoundReferences()
                         .Single(
                             assembly =>
-                                !assembly
-                                    .Identity
-                                    .Equals(module.ContainingAssembly.CorLibrary.Identity)
+                                !assembly.Identity.Equals(
+                                    module.ContainingAssembly.CorLibrary.Identity
+                                )
                         )
                         .GetTypeByMetadataName("Child")
                         .GetIndexer<PEPropertySymbol>("Item");
@@ -2466,14 +2461,13 @@ Parent Get
 Parent Set",
                 symbolValidator: module =>
                 {
-                    var indexer = module
-                        .ContainingAssembly
+                    var indexer = module.ContainingAssembly
                         .BoundReferences()
                         .Single(
                             assembly =>
-                                !assembly
-                                    .Identity
-                                    .Equals(module.ContainingAssembly.CorLibrary.Identity)
+                                !assembly.Identity.Equals(
+                                    module.ContainingAssembly.CorLibrary.Identity
+                                )
                         )
                         .GetTypeByMetadataName("Child")
                         .GetIndexer<PEPropertySymbol>("Item");
@@ -2756,14 +2750,13 @@ Parent Get
 Parent Get",
                 symbolValidator: module =>
                 {
-                    var indexer = module
-                        .ContainingAssembly
+                    var indexer = module.ContainingAssembly
                         .BoundReferences()
                         .Single(
                             assembly =>
-                                !assembly
-                                    .Identity
-                                    .Equals(module.ContainingAssembly.CorLibrary.Identity)
+                                !assembly.Identity.Equals(
+                                    module.ContainingAssembly.CorLibrary.Identity
+                                )
                         )
                         .GetTypeByMetadataName("Child")
                         .GetIndexer<PEPropertySymbol>("Item");
@@ -2996,14 +2989,13 @@ Parent Set
 Parent Set",
                 symbolValidator: module =>
                 {
-                    var indexer = module
-                        .ContainingAssembly
+                    var indexer = module.ContainingAssembly
                         .BoundReferences()
                         .Single(
                             assembly =>
-                                !assembly
-                                    .Identity
-                                    .Equals(module.ContainingAssembly.CorLibrary.Identity)
+                                !assembly.Identity.Equals(
+                                    module.ContainingAssembly.CorLibrary.Identity
+                                )
                         )
                         .GetTypeByMetadataName("Child")
                         .GetIndexer<PEPropertySymbol>("Item");

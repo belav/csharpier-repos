@@ -124,8 +124,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             // skipping subsequent symbols with the same name.  This can result in some surprising
             // behavior.  For example, both 'T's in "A<T>.B<T>" bind to the second implicitly
             // declared type parameter.
-            SeparatedSyntaxList<TypeSyntax> typeArguments =
-                genericNameSyntax.TypeArgumentList.Arguments;
+            SeparatedSyntaxList<TypeSyntax> typeArguments = genericNameSyntax
+                .TypeArgumentList
+                .Arguments;
             for (int i = typeArguments.Count - 1; i >= 0; i--)
             {
                 // Other types (non-identifiers) are allowed in error scenarios, but they do not introduce new

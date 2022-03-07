@@ -93,12 +93,10 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
             // even emitted in the final lsif hover information.
             var workspace = languageServices.WorkspaceServices.Workspace;
             workspace.SetOptions(
-                workspace
-                    .Options
-                    .WithChangedOption(
-                        QuickInfoOptions.Metadata.IncludeNavigationHintsInQuickInfo,
-                        false
-                    )
+                workspace.Options.WithChangedOption(
+                    QuickInfoOptions.Metadata.IncludeNavigationHintsInQuickInfo,
+                    false
+                )
             );
 
             var tasks = new List<Task>();
@@ -248,9 +246,11 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
                 var lazyRangeVertex = new Lazy<Graph.Range>(
                     () =>
                     {
-                        var rangeVertex = Graph
-                            .Range
-                            .FromTextSpan(syntaxToken.Span, sourceText, idFactory);
+                        var rangeVertex = Graph.Range.FromTextSpan(
+                            syntaxToken.Span,
+                            sourceText,
+                            idFactory
+                        );
 
                         lsifJsonWriter.Write(rangeVertex);
                         rangeVertices.Add(rangeVertex.GetId());
@@ -291,8 +291,9 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
                     // SymbolFinder.FindSymbolAtPositionAsync where if a token is both a reference and definition we'll prefer the
                     // definition. Once we start supporting hover we'll have to remove the "original definition" part of this, since
                     // since we show different contents for different constructed types there.
-                    var symbolForLinkedResultSet =
-                        (declaredSymbol ?? referencedSymbol)!.OriginalDefinition;
+                    var symbolForLinkedResultSet = (
+                        declaredSymbol ?? referencedSymbol
+                    )!.OriginalDefinition;
                     var symbolForLinkedResultSetId = symbolResultsTracker.GetResultSetIdForSymbol(
                         symbolForLinkedResultSet
                     );

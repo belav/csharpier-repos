@@ -13,8 +13,7 @@ internal class DefaultRazorDocumentClassifierPhase
 
     protected override void OnIntialized()
     {
-        Passes = Engine
-            .Features
+        Passes = Engine.Features
             .OfType<IRazorDocumentClassifierPass>()
             .OrderBy(p => p.Order)
             .ToArray();

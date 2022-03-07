@@ -165,8 +165,7 @@ namespace System.Formats.Asn1.Tests.Reader
         )
         {
             byte[] inputData = inputHex.HexToByteArray();
-            string expectedHex = Text.Encoding
-                .BigEndianUnicode
+            string expectedHex = Text.Encoding.BigEndianUnicode
                 .GetBytes(expectedString)
                 .ByteArrayToHex();
             byte[] output = new byte[expectedHex.Length / 2];

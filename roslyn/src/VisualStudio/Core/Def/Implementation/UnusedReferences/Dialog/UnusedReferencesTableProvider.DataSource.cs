@@ -38,15 +38,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
             )
             {
                 var solutionName = Path.GetFileName(solution.FilePath);
-                var project = solution
-                    .Projects
-                    .First(
-                        project =>
-                            projectFilePath.Equals(
-                                project.FilePath,
-                                StringComparison.OrdinalIgnoreCase
-                            )
-                    );
+                var project = solution.Projects.First(
+                    project =>
+                        projectFilePath.Equals(project.FilePath, StringComparison.OrdinalIgnoreCase)
+                );
                 var entries = referenceUpdates
                     .Select(
                         update =>

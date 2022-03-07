@@ -65,13 +65,11 @@ namespace System.Text.RegularExpressions.Symbolic
                 );
 
                 //Convert the BDD based AST to BV based AST
-                SymbolicRegexNode<BV> rootBV = converter
-                    ._builder
-                    .Transform(
-                        root,
-                        builderBV,
-                        bdd => builderBV._solver.ConvertFromCharSet(solver, bdd)
-                    );
+                SymbolicRegexNode<BV> rootBV = converter._builder.Transform(
+                    root,
+                    builderBV,
+                    bdd => builderBV._solver.ConvertFromCharSet(solver, bdd)
+                );
                 _matcher = new SymbolicRegexMatcher<BV>(
                     rootBV,
                     solver,
@@ -99,13 +97,11 @@ namespace System.Text.RegularExpressions.Symbolic
                 };
 
                 // Convert the BDD-based AST to ulong-based AST
-                SymbolicRegexNode<ulong> root64 = converter
-                    ._builder
-                    .Transform(
-                        root,
-                        builder64,
-                        bdd => builder64._solver.ConvertFromCharSet(solver, bdd)
-                    );
+                SymbolicRegexNode<ulong> root64 = converter._builder.Transform(
+                    root,
+                    builder64,
+                    bdd => builder64._solver.ConvertFromCharSet(solver, bdd)
+                );
                 _matcher = new SymbolicRegexMatcher<ulong>(
                     root64,
                     solver,

@@ -421,8 +421,7 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         {
             using (var context = CreateContext())
             {
-                var customers = context
-                    .Customers
+                var customers = context.Customers
                     .Where(c => c.CustomerID == "ALFKI")
                     .Select(
                         c =>
@@ -1413,15 +1412,11 @@ OFFSET 0 LIMIT @__p_0"
             bool async
         )
         {
-            var message =
-                (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            base.Projection_skip_projection_doesnt_project_intermittent_column(
-                                async
-                            )
-                    )
-                ).Message;
+            var message = (
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => base.Projection_skip_projection_doesnt_project_intermittent_column(async)
+                )
+            ).Message;
 
             Assert.Equal(CosmosStrings.OffsetRequiresLimit, message);
         }
@@ -1551,12 +1546,11 @@ ORDER BY c[""OrderID""]"
 
         public override async Task Reverse_after_orderBy_and_take(bool async)
         {
-            var message =
-                (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.Reverse_after_orderBy_and_take(async)
-                    )
-                ).Message;
+            var message = (
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => base.Reverse_after_orderBy_and_take(async)
+                )
+            ).Message;
 
             Assert.Equal(CosmosStrings.ReverseAfterSkipTakeNotSupported, message);
         }

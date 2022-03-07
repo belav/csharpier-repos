@@ -344,15 +344,13 @@ namespace Microsoft.EntityFrameworkCore.Update
         [ConditionalFact]
         public void BatchCommands_creates_batches_lazily()
         {
-            var configuration = RelationalTestHelpers
-                .Instance
-                .CreateContextServices(
-                    new ServiceCollection().AddScoped<
-                        IModificationCommandBatchFactory,
-                        TestModificationCommandBatchFactory
-                    >(),
-                    CreateSimpleFKModel()
-                );
+            var configuration = RelationalTestHelpers.Instance.CreateContextServices(
+                new ServiceCollection().AddScoped<
+                    IModificationCommandBatchFactory,
+                    TestModificationCommandBatchFactory
+                >(),
+                CreateSimpleFKModel()
+            );
 
             var stateManager = configuration.GetRequiredService<IStateManager>();
 
@@ -1225,8 +1223,7 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
             bool sensitiveLogging = false
         )
         {
-            modificationCommandBatchFactory ??= RelationalTestHelpers
-                .Instance
+            modificationCommandBatchFactory ??= RelationalTestHelpers.Instance
                 .CreateContextServices()
                 .GetRequiredService<IModificationCommandBatchFactory>();
 

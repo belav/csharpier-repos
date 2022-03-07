@@ -42,24 +42,22 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             using var context = CreateContext();
 
-            var message =
-                Assert
-                    .Throws<InvalidOperationException>(
-                        () => context.Set<Bird>().FromSqlRaw("Select * from Birds")
-                    )
-                    .Message;
+            var message = Assert
+                .Throws<InvalidOperationException>(
+                    () => context.Set<Bird>().FromSqlRaw("Select * from Birds")
+                )
+                .Message;
 
             Assert.Equal(
                 RelationalStrings.MethodOnNonTPHRootNotSupported("FromSqlRaw", typeof(Bird).Name),
                 message
             );
 
-            message =
-                Assert
-                    .Throws<InvalidOperationException>(
-                        () => context.Set<Bird>().FromSqlInterpolated($"Select * from Birds")
-                    )
-                    .Message;
+            message = Assert
+                .Throws<InvalidOperationException>(
+                    () => context.Set<Bird>().FromSqlInterpolated($"Select * from Birds")
+                )
+                .Message;
 
             Assert.Equal(
                 RelationalStrings.MethodOnNonTPHRootNotSupported(

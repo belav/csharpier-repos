@@ -31,10 +31,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public async Task RemovingDocumentWithNewClassChangesVersion()
         {
             using var workspace = CreateWorkspace();
-            var project =
-                AddEmptyProject(workspace.CurrentSolution)
-                    .AddDocument("Hello.cs", "class C { }")
-                    .Project;
+            var project = AddEmptyProject(workspace.CurrentSolution)
+                .AddDocument("Hello.cs", "class C { }")
+                .Project;
 
             await AssertSemanticVersionChangedAsync(
                 project,

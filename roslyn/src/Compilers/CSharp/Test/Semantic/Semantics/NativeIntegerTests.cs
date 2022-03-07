@@ -81,9 +81,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
             Assert.Equal("void I.F1(System.IntPtr x, nint y)", method.ToTestDisplayString());
             Assert.Equal(
                 "Sub I.F1(x As System.IntPtr, y As System.IntPtr)",
-                VisualBasic
-                    .SymbolDisplay
-                    .ToDisplayString(method.GetPublicSymbol(), SymbolDisplayFormat.TestFormat)
+                VisualBasic.SymbolDisplay.ToDisplayString(
+                    method.GetPublicSymbol(),
+                    SymbolDisplayFormat.TestFormat
+                )
             );
             VerifyTypes(
                 (NamedTypeSymbol)method.Parameters[0].Type,
@@ -95,9 +96,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
             Assert.Equal("void I.F2(System.UIntPtr x, nuint y)", method.ToTestDisplayString());
             Assert.Equal(
                 "Sub I.F2(x As System.UIntPtr, y As System.UIntPtr)",
-                VisualBasic
-                    .SymbolDisplay
-                    .ToDisplayString(method.GetPublicSymbol(), SymbolDisplayFormat.TestFormat)
+                VisualBasic.SymbolDisplay.ToDisplayString(
+                    method.GetPublicSymbol(),
+                    SymbolDisplayFormat.TestFormat
+                )
             );
             VerifyTypes(
                 (NamedTypeSymbol)method.Parameters[0].Type,
@@ -4825,14 +4827,13 @@ class Program
             var model = comp.GetSemanticModel(tree);
             var typeSyntax = SyntaxFactory.ParseTypeName("nuint");
             int spanStart = source.IndexOf("nint i = 0;");
-            var type =
-                model
-                    .GetSpeculativeTypeInfo(
-                        spanStart,
-                        typeSyntax,
-                        SpeculativeBindingOption.BindAsTypeOrNamespace
-                    )
-                    .Type;
+            var type = model
+                .GetSpeculativeTypeInfo(
+                    spanStart,
+                    typeSyntax,
+                    SpeculativeBindingOption.BindAsTypeOrNamespace
+                )
+                .Type;
             Assert.True(type.IsNativeIntegerType);
         }
 
@@ -15549,12 +15550,11 @@ enum E {{ }}
 
                 var tree = comp.SyntaxTrees[0];
                 var model = comp.GetSemanticModel(tree);
-                var expr =
-                    tree.GetRoot()
-                        .DescendantNodes()
-                        .OfType<ReturnStatementSyntax>()
-                        .Single()
-                        .Expression;
+                var expr = tree.GetRoot()
+                    .DescendantNodes()
+                    .OfType<ReturnStatementSyntax>()
+                    .Single()
+                    .Expression;
                 var typeInfo = model.GetTypeInfo(expr);
 
                 if (!skipTypeChecks)
@@ -15892,15 +15892,11 @@ enum E {{ }}
                 var symbolInfo = model.GetSymbolInfo(expr);
                 Assert.Equal(
                     expectedSymbol,
-                    symbolInfo
-                        .Symbol
-                        ?.ToDisplayString(
-                            SymbolDisplayFormat
-                                .TestFormat
-                                .WithMiscellaneousOptions(
-                                    SymbolDisplayMiscellaneousOptions.UseSpecialTypes
-                                )
+                    symbolInfo.Symbol?.ToDisplayString(
+                        SymbolDisplayFormat.TestFormat.WithMiscellaneousOptions(
+                            SymbolDisplayMiscellaneousOptions.UseSpecialTypes
                         )
+                    )
                 );
 
                 if (expectedDiagnostics.Length == 0)
@@ -16399,15 +16395,11 @@ class Program
                 var symbolInfo = model.GetSymbolInfo(expr);
                 Assert.Equal(
                     expectedSymbol,
-                    symbolInfo
-                        .Symbol
-                        ?.ToDisplayString(
-                            SymbolDisplayFormat
-                                .TestFormat
-                                .WithMiscellaneousOptions(
-                                    SymbolDisplayMiscellaneousOptions.UseSpecialTypes
-                                )
+                    symbolInfo.Symbol?.ToDisplayString(
+                        SymbolDisplayFormat.TestFormat.WithMiscellaneousOptions(
+                            SymbolDisplayMiscellaneousOptions.UseSpecialTypes
                         )
+                    )
                 );
 
                 if (expectedDiagnostics.Length == 0)
@@ -16697,15 +16689,11 @@ class Program
                 var symbolInfo = model.GetSymbolInfo(expr);
                 Assert.Equal(
                     expectedSymbol,
-                    symbolInfo
-                        .Symbol
-                        ?.ToDisplayString(
-                            SymbolDisplayFormat
-                                .TestFormat
-                                .WithMiscellaneousOptions(
-                                    SymbolDisplayMiscellaneousOptions.UseSpecialTypes
-                                )
+                    symbolInfo.Symbol?.ToDisplayString(
+                        SymbolDisplayFormat.TestFormat.WithMiscellaneousOptions(
+                            SymbolDisplayMiscellaneousOptions.UseSpecialTypes
                         )
+                    )
                 );
 
                 if (expectedDiagnostics.Length == 0)
@@ -22191,15 +22179,11 @@ class Program
                 var symbolInfo = model.GetSymbolInfo(expr);
                 Assert.Equal(
                     expectedSymbol,
-                    symbolInfo
-                        .Symbol
-                        ?.ToDisplayString(
-                            SymbolDisplayFormat
-                                .TestFormat
-                                .WithMiscellaneousOptions(
-                                    SymbolDisplayMiscellaneousOptions.UseSpecialTypes
-                                )
+                    symbolInfo.Symbol?.ToDisplayString(
+                        SymbolDisplayFormat.TestFormat.WithMiscellaneousOptions(
+                            SymbolDisplayMiscellaneousOptions.UseSpecialTypes
                         )
+                    )
                 );
 
                 if (expectedDiagnostics.Length == 0)

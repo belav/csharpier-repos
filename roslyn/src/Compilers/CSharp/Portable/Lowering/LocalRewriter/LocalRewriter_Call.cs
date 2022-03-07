@@ -52,8 +52,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (methodGroup.ReceiverOpt == null)
                     {
                         // Calling a static method defined on an outer class via its simple name.
-                        NamedTypeSymbol firstContainer =
-                            node.ApplicableMethods.First().ContainingType;
+                        NamedTypeSymbol firstContainer = node.ApplicableMethods
+                            .First()
+                            .ContainingType;
                         Debug.Assert(
                             node.ApplicableMethods.All(
                                 m =>
@@ -151,13 +152,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     foreach (var m in methods)
                     {
-                        module
-                            .EmbeddedTypesManagerOpt
-                            .EmbedMethodIfNeedTo(
-                                m.OriginalDefinition.GetCciAdapter(),
-                                syntaxNode,
-                                _diagnostics.DiagnosticBag
-                            );
+                        module.EmbeddedTypesManagerOpt.EmbedMethodIfNeedTo(
+                            m.OriginalDefinition.GetCciAdapter(),
+                            syntaxNode,
+                            _diagnostics.DiagnosticBag
+                        );
                     }
                 }
             }
@@ -180,13 +179,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     foreach (var p in properties)
                     {
-                        module
-                            .EmbeddedTypesManagerOpt
-                            .EmbedPropertyIfNeedTo(
-                                p.OriginalDefinition.GetCciAdapter(),
-                                syntaxNode,
-                                _diagnostics.DiagnosticBag
-                            );
+                        module.EmbeddedTypesManagerOpt.EmbedPropertyIfNeedTo(
+                            p.OriginalDefinition.GetCciAdapter(),
+                            syntaxNode,
+                            _diagnostics.DiagnosticBag
+                        );
                     }
                 }
             }

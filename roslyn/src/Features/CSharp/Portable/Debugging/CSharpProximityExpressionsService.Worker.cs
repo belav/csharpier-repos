@@ -153,8 +153,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
                     && block.Parent.Parent.Parent is IndexerDeclarationSyntax
                 )
                 {
-                    var parameterList =
-                        ((IndexerDeclarationSyntax)block.Parent.Parent.Parent).ParameterList;
+                    var parameterList = (
+                        (IndexerDeclarationSyntax)block.Parent.Parent.Parent
+                    ).ParameterList;
                     AddParameters(parameterList);
                 }
             }
@@ -181,8 +182,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
                     nextStatement != null
                         && _syntaxTree
                             .GetText(cancellationToken)
-                            .Lines
-                            .IndexOf(nextStatement.SpanStart) == line;
+                            .Lines.IndexOf(nextStatement.SpanStart) == line;
                     nextStatement = nextStatement.GetNextStatement()
                 )
                 {

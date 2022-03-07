@@ -114,8 +114,13 @@ namespace System.Security.Cryptography.Cng.Tests
                 + "722DEFDF48144A6D88A780144FCEA66BDCDA50D6071C54E5D0DA5B"
             ).HexToByteArray();
 
-            RSAParameters expected =
-                System.Security.Cryptography.Rsa.Tests.TestData.RSA384Parameters;
+            RSAParameters expected = System
+                .Security
+                .Cryptography
+                .Rsa
+                .Tests
+                .TestData
+                .RSA384Parameters;
 
             try
             {
@@ -155,8 +160,13 @@ namespace System.Security.Cryptography.Cng.Tests
                 + "EE580E19DB8592CB0F266EC69028EB9E98E3E84FF1A459A8A26860A610F5"
             ).HexToByteArray();
 
-            RSAParameters expected =
-                System.Security.Cryptography.Rsa.Tests.TestData.RSA1032Parameters;
+            RSAParameters expected = System
+                .Security
+                .Cryptography
+                .Rsa
+                .Tests
+                .TestData
+                .RSA1032Parameters;
             RSACng_Ctor_UnusualKeysize(ExpectedKeySize, keyBlob, expected);
         }
 

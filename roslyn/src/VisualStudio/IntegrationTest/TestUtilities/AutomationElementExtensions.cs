@@ -44,12 +44,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                 throw new ArgumentNullException(nameof(parent));
             }
 
-            var condition = Helper
-                .Automation
-                .CreatePropertyCondition(
-                    AutomationElementIdentifiers.AutomationIdProperty.Id,
-                    automationId
-                );
+            var condition = Helper.Automation.CreatePropertyCondition(
+                AutomationElementIdentifiers.AutomationIdProperty.Id,
+                automationId
+            );
             var child = Helper.Retry(
                 () => parent.FindFirst(TreeScope.TreeScope_Descendants, condition),
                 AutomationRetryDelay,
@@ -80,9 +78,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                 throw new ArgumentNullException(nameof(parent));
             }
 
-            var condition = Helper
-                .Automation
-                .CreatePropertyCondition(AutomationElementIdentifiers.NameProperty.Id, name);
+            var condition = Helper.Automation.CreatePropertyCondition(
+                AutomationElementIdentifiers.NameProperty.Id,
+                name
+            );
             var child = Helper.Retry(
                 () => parent.FindFirst(TreeScope.TreeScope_Descendants, condition),
                 AutomationRetryDelay,
@@ -113,12 +112,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                 throw new ArgumentNullException(nameof(parent));
             }
 
-            var condition = Helper
-                .Automation
-                .CreatePropertyCondition(
-                    AutomationElementIdentifiers.ClassNameProperty.Id,
-                    className
-                );
+            var condition = Helper.Automation.CreatePropertyCondition(
+                AutomationElementIdentifiers.ClassNameProperty.Id,
+                className
+            );
             var child = Helper.Retry(
                 () => parent.FindFirst(TreeScope.TreeScope_Descendants, condition),
                 AutomationRetryDelay,
@@ -150,12 +147,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                 throw new ArgumentNullException(nameof(parent));
             }
 
-            var condition = Helper
-                .Automation
-                .CreatePropertyCondition(
-                    AutomationElementIdentifiers.ClassNameProperty.Id,
-                    className
-                );
+            var condition = Helper.Automation.CreatePropertyCondition(
+                AutomationElementIdentifiers.ClassNameProperty.Id,
+                className
+            );
             return parent.FindAll(TreeScope.TreeScope_Descendants, condition);
         }
 
@@ -316,12 +311,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             {
                 var next = item.FindFirst(
                     TreeScope.TreeScope_Descendants,
-                    Helper
-                        .Automation
-                        .CreatePropertyCondition(
-                            AutomationElementIdentifiers.LocalizedControlTypeProperty.Id,
-                            pathPart
-                        )
+                    Helper.Automation.CreatePropertyCondition(
+                        AutomationElementIdentifiers.LocalizedControlTypeProperty.Id,
+                        pathPart
+                    )
                 );
 
                 if (next == null)

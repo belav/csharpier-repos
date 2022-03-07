@@ -167,9 +167,10 @@ namespace System.Web.Mvc.Test
             mockAuthContext
                 .Setup(
                     c =>
-                        c.ActionDescriptor
-                            .ControllerDescriptor
-                            .IsDefined(typeof(AllowAnonymousAttribute), true)
+                        c.ActionDescriptor.ControllerDescriptor.IsDefined(
+                            typeof(AllowAnonymousAttribute),
+                            true
+                        )
                 )
                 .Returns(false);
             AuthorizationContext authContext = mockAuthContext.Object;
@@ -194,8 +195,10 @@ namespace System.Web.Mvc.Test
                 .Returns(false);
             AuthorizeAttributeHelper helper = mockHelper.Object;
 
-            AuthorizationContext filterContext =
-                new Mock<AuthorizationContext>() { DefaultValue = DefaultValue.Mock }.Object;
+            AuthorizationContext filterContext = new Mock<AuthorizationContext>()
+            {
+                DefaultValue = DefaultValue.Mock
+            }.Object;
 
             // Act
             helper.OnAuthorization(filterContext);
@@ -227,13 +230,10 @@ namespace System.Web.Mvc.Test
             mockFilterContext
                 .Setup(
                     c =>
-                        c.HttpContext
-                            .Response
-                            .Cache
-                            .AddValidationCallback(
-                                It.IsAny<HttpCacheValidateHandler>(),
-                                null /* data */
-                            )
+                        c.HttpContext.Response.Cache.AddValidationCallback(
+                            It.IsAny<HttpCacheValidateHandler>(),
+                            null /* data */
+                        )
                 )
                 .Callback(
                     delegate(HttpCacheValidateHandler handler, object data)
@@ -246,9 +246,10 @@ namespace System.Web.Mvc.Test
             mockFilterContext
                 .Setup(
                     c =>
-                        c.ActionDescriptor
-                            .ControllerDescriptor
-                            .IsDefined(typeof(AllowAnonymousAttribute), true)
+                        c.ActionDescriptor.ControllerDescriptor.IsDefined(
+                            typeof(AllowAnonymousAttribute),
+                            true
+                        )
                 )
                 .Returns(false);
             AuthorizationContext filterContext = mockFilterContext.Object;
@@ -318,9 +319,10 @@ namespace System.Web.Mvc.Test
             mockFilterContext
                 .Setup(
                     c =>
-                        c.ActionDescriptor
-                            .ControllerDescriptor
-                            .IsDefined(typeof(AllowAnonymousAttribute), true)
+                        c.ActionDescriptor.ControllerDescriptor.IsDefined(
+                            typeof(AllowAnonymousAttribute),
+                            true
+                        )
                 )
                 .Returns(true);
 

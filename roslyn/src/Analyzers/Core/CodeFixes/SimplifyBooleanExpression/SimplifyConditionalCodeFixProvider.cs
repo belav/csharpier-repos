@@ -69,9 +69,10 @@ namespace Microsoft.CodeAnalysis.SimplifyBooleanExpression
 
             foreach (var diagnostic in diagnostics)
             {
-                var expr = diagnostic
-                    .Location
-                    .FindNode(getInnermostNodeForTie: true, cancellationToken);
+                var expr = diagnostic.Location.FindNode(
+                    getInnermostNodeForTie: true,
+                    cancellationToken
+                );
                 syntaxFacts.GetPartsOfConditionalExpression(
                     expr,
                     out var condition,

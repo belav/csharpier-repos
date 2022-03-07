@@ -28,10 +28,8 @@ namespace System.Web.Http
             }
 
             IEnumerable<MediaTypeFormatter> formatters = parameter.Configuration.Formatters;
-            IBodyModelValidator validator = parameter
-                .Configuration
-                .Services
-                .GetBodyModelValidator();
+            IBodyModelValidator validator =
+                parameter.Configuration.Services.GetBodyModelValidator();
 
             return parameter.BindWithFormatter(formatters, validator);
         }

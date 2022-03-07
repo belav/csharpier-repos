@@ -260,8 +260,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 modelBuilder.Entity<CustomerDetails>();
                 modelBuilder.Entity<DetailsBase>();
 
-                var index = modelBuilder
-                    .Model
+                var index = modelBuilder.Model
                     .FindEntityType(typeof(CustomerDetails))
                     .GetIndexes()
                     .Single();
@@ -278,8 +277,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 modelBuilder.Entity<DetailsBase>();
 
-                var index = modelBuilder
-                    .Model
+                var index = modelBuilder.Model
                     .FindEntityType(typeof(CustomerDetails))
                     .GetIndexes()
                     .Single();
@@ -679,26 +677,18 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 var book = model.FindEntityType(typeof(Book));
                 var bookOwnership1 = book.FindNavigation(nameof(Book.Label)).ForeignKey;
                 var bookOwnership2 = book.FindNavigation(nameof(Book.AlternateLabel)).ForeignKey;
-                var bookLabel1Ownership1 =
-                    bookOwnership1
-                        .DeclaringEntityType
-                        .FindNavigation(nameof(BookLabel.AnotherBookLabel))
-                        .ForeignKey;
-                var bookLabel1Ownership2 =
-                    bookOwnership1
-                        .DeclaringEntityType
-                        .FindNavigation(nameof(BookLabel.SpecialBookLabel))
-                        .ForeignKey;
-                var bookLabel2Ownership1 =
-                    bookOwnership2
-                        .DeclaringEntityType
-                        .FindNavigation(nameof(BookLabel.AnotherBookLabel))
-                        .ForeignKey;
-                var bookLabel2Ownership2 =
-                    bookOwnership2
-                        .DeclaringEntityType
-                        .FindNavigation(nameof(BookLabel.SpecialBookLabel))
-                        .ForeignKey;
+                var bookLabel1Ownership1 = bookOwnership1.DeclaringEntityType
+                    .FindNavigation(nameof(BookLabel.AnotherBookLabel))
+                    .ForeignKey;
+                var bookLabel1Ownership2 = bookOwnership1.DeclaringEntityType
+                    .FindNavigation(nameof(BookLabel.SpecialBookLabel))
+                    .ForeignKey;
+                var bookLabel2Ownership1 = bookOwnership2.DeclaringEntityType
+                    .FindNavigation(nameof(BookLabel.AnotherBookLabel))
+                    .ForeignKey;
+                var bookLabel2Ownership2 = bookOwnership2.DeclaringEntityType
+                    .FindNavigation(nameof(BookLabel.SpecialBookLabel))
+                    .ForeignKey;
 
                 Assert.Equal(
                     book.GetTableName(),
@@ -756,14 +746,12 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 );
 
                 Assert.Null(
-                    bookOwnership1
-                        .DeclaringEntityType
+                    bookOwnership1.DeclaringEntityType
                         .FindProperty(nameof(BookLabel.Id))
                         .GetColumnName(StoreObjectIdentifier.Table("Label", null))
                 );
                 Assert.Null(
-                    bookLabel2Ownership1
-                        .DeclaringEntityType
+                    bookLabel2Ownership1.DeclaringEntityType
                         .FindProperty(nameof(BookLabel.Id))
                         .GetColumnName(StoreObjectIdentifier.Table("AlternateLabel", null))
                 );
@@ -778,15 +766,13 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 Assert.Equal(
                     nameof(BookLabel.Id),
-                    bookOwnership1
-                        .DeclaringEntityType
+                    bookOwnership1.DeclaringEntityType
                         .FindProperty(nameof(BookLabel.Id))
                         .GetColumnName(StoreObjectIdentifier.Table("Label", null))
                 );
                 Assert.Equal(
                     nameof(BookLabel.AnotherBookLabel) + "_" + nameof(BookLabel.Id),
-                    bookLabel2Ownership1
-                        .DeclaringEntityType
+                    bookLabel2Ownership1.DeclaringEntityType
                         .FindProperty(nameof(BookLabel.Id))
                         .GetColumnName(StoreObjectIdentifier.Table("AlternateLabel", null))
                 );
@@ -891,46 +877,30 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 var book = model.FindEntityType(typeof(Book));
                 var bookOwnership1 = book.FindNavigation(nameof(Book.Label)).ForeignKey;
                 var bookOwnership2 = book.FindNavigation(nameof(Book.AlternateLabel)).ForeignKey;
-                var bookLabel1Ownership1 =
-                    bookOwnership1
-                        .DeclaringEntityType
-                        .FindNavigation(nameof(BookLabel.AnotherBookLabel))
-                        .ForeignKey;
-                var bookLabel1Ownership2 =
-                    bookOwnership1
-                        .DeclaringEntityType
-                        .FindNavigation(nameof(BookLabel.SpecialBookLabel))
-                        .ForeignKey;
-                var bookLabel2Ownership1 =
-                    bookOwnership2
-                        .DeclaringEntityType
-                        .FindNavigation(nameof(BookLabel.AnotherBookLabel))
-                        .ForeignKey;
-                var bookLabel2Ownership2 =
-                    bookOwnership2
-                        .DeclaringEntityType
-                        .FindNavigation(nameof(BookLabel.SpecialBookLabel))
-                        .ForeignKey;
-                var bookLabel1Ownership11 =
-                    bookLabel1Ownership1
-                        .DeclaringEntityType
-                        .FindNavigation(nameof(BookLabel.SpecialBookLabel))
-                        .ForeignKey;
-                var bookLabel1Ownership21 =
-                    bookLabel1Ownership2
-                        .DeclaringEntityType
-                        .FindNavigation(nameof(BookLabel.AnotherBookLabel))
-                        .ForeignKey;
-                var bookLabel2Ownership11 =
-                    bookLabel2Ownership1
-                        .DeclaringEntityType
-                        .FindNavigation(nameof(BookLabel.SpecialBookLabel))
-                        .ForeignKey;
-                var bookLabel2Ownership21 =
-                    bookLabel2Ownership2
-                        .DeclaringEntityType
-                        .FindNavigation(nameof(BookLabel.AnotherBookLabel))
-                        .ForeignKey;
+                var bookLabel1Ownership1 = bookOwnership1.DeclaringEntityType
+                    .FindNavigation(nameof(BookLabel.AnotherBookLabel))
+                    .ForeignKey;
+                var bookLabel1Ownership2 = bookOwnership1.DeclaringEntityType
+                    .FindNavigation(nameof(BookLabel.SpecialBookLabel))
+                    .ForeignKey;
+                var bookLabel2Ownership1 = bookOwnership2.DeclaringEntityType
+                    .FindNavigation(nameof(BookLabel.AnotherBookLabel))
+                    .ForeignKey;
+                var bookLabel2Ownership2 = bookOwnership2.DeclaringEntityType
+                    .FindNavigation(nameof(BookLabel.SpecialBookLabel))
+                    .ForeignKey;
+                var bookLabel1Ownership11 = bookLabel1Ownership1.DeclaringEntityType
+                    .FindNavigation(nameof(BookLabel.SpecialBookLabel))
+                    .ForeignKey;
+                var bookLabel1Ownership21 = bookLabel1Ownership2.DeclaringEntityType
+                    .FindNavigation(nameof(BookLabel.AnotherBookLabel))
+                    .ForeignKey;
+                var bookLabel2Ownership11 = bookLabel2Ownership1.DeclaringEntityType
+                    .FindNavigation(nameof(BookLabel.SpecialBookLabel))
+                    .ForeignKey;
+                var bookLabel2Ownership21 = bookLabel2Ownership2.DeclaringEntityType
+                    .FindNavigation(nameof(BookLabel.AnotherBookLabel))
+                    .ForeignKey;
 
                 Assert.Equal("AlternateLabelFK", bookOwnership2.GetConstraintName());
 
@@ -1012,94 +982,74 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 Assert.Equal(
                     ValueGenerated.Never,
-                    bookOwnership1
-                        .DeclaringEntityType
+                    bookOwnership1.DeclaringEntityType
                         .FindPrimaryKey()
-                        .Properties
-                        .Single()
+                        .Properties.Single()
                         .ValueGenerated
                 );
                 Assert.Equal(
                     ValueGenerated.Never,
-                    bookOwnership2
-                        .DeclaringEntityType
+                    bookOwnership2.DeclaringEntityType
                         .FindPrimaryKey()
-                        .Properties
-                        .Single()
+                        .Properties.Single()
                         .ValueGenerated
                 );
 
                 Assert.Equal(
                     ValueGenerated.Never,
-                    bookLabel1Ownership1
-                        .DeclaringEntityType
+                    bookLabel1Ownership1.DeclaringEntityType
                         .FindPrimaryKey()
-                        .Properties
-                        .Single()
+                        .Properties.Single()
                         .ValueGenerated
                 );
                 Assert.Equal(
                     ValueGenerated.Never,
-                    bookLabel1Ownership2
-                        .DeclaringEntityType
+                    bookLabel1Ownership2.DeclaringEntityType
                         .FindPrimaryKey()
-                        .Properties
-                        .Single()
+                        .Properties.Single()
                         .ValueGenerated
                 );
                 Assert.Equal(
                     ValueGenerated.Never,
-                    bookLabel2Ownership1
-                        .DeclaringEntityType
+                    bookLabel2Ownership1.DeclaringEntityType
                         .FindPrimaryKey()
-                        .Properties
-                        .Single()
+                        .Properties.Single()
                         .ValueGenerated
                 );
                 Assert.Equal(
                     ValueGenerated.Never,
-                    bookLabel2Ownership2
-                        .DeclaringEntityType
+                    bookLabel2Ownership2.DeclaringEntityType
                         .FindPrimaryKey()
-                        .Properties
-                        .Single()
+                        .Properties.Single()
                         .ValueGenerated
                 );
 
                 Assert.Equal(
                     ValueGenerated.Never,
-                    bookLabel1Ownership11
-                        .DeclaringEntityType
+                    bookLabel1Ownership11.DeclaringEntityType
                         .FindPrimaryKey()
-                        .Properties
-                        .Single()
+                        .Properties.Single()
                         .ValueGenerated
                 );
                 Assert.Equal(
                     ValueGenerated.Never,
-                    bookLabel1Ownership21
-                        .DeclaringEntityType
+                    bookLabel1Ownership21.DeclaringEntityType
                         .FindPrimaryKey()
-                        .Properties
-                        .Single()
+                        .Properties.Single()
                         .ValueGenerated
                 );
                 Assert.Equal(
                     ValueGenerated.Never,
-                    bookLabel2Ownership11
-                        .DeclaringEntityType
+                    bookLabel2Ownership11.DeclaringEntityType
                         .FindPrimaryKey()
-                        .Properties
-                        .Single()
+                        .Properties.Single()
                         .ValueGenerated
                 );
                 Assert.Equal(
                     ValueGenerated.Never,
-                    bookLabel2Ownership21
-                        .DeclaringEntityType
+                    bookLabel2Ownership21.DeclaringEntityType
                         .FindPrimaryKey()
-                        .Properties
-                        .Single()
+                        .Properties.Single()
                         .ValueGenerated
                 );
             }
@@ -1123,11 +1073,10 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         }
                     );
 
-                var ownership =
-                    model
-                        .FindEntityType(typeof(Customer))
-                        .FindNavigation(nameof(Customer.Orders))
-                        .ForeignKey;
+                var ownership = model
+                    .FindEntityType(typeof(Customer))
+                    .FindNavigation(nameof(Customer.Orders))
+                    .ForeignKey;
                 var owned = ownership.DeclaringEntityType;
                 Assert.True(ownership.IsOwnership);
                 Assert.Equal(nameof(Order.Customer), ownership.DependentToPrincipal.Name);
@@ -1278,8 +1227,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 modelBuilder.FinalizeModel();
 
                 var owner = model.FindEntityType(typeof(Customer));
-                var owned =
-                    owner.FindNavigation(nameof(Customer.Details)).ForeignKey.DeclaringEntityType;
+                var owned = owner
+                    .FindNavigation(nameof(Customer.Details))
+                    .ForeignKey.DeclaringEntityType;
                 Assert.Equal(
                     new[] { nameof(CustomerDetails.Id), nameof(CustomerDetails.CustomerId) },
                     owned.GetProperties().Select(p => p.Name).ToArray()

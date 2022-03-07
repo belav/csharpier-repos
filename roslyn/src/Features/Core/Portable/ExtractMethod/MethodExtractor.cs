@@ -120,9 +120,7 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                     cancellationToken
                 )
                 .ConfigureAwait(false);
-            var options = await analyzeResult
-                .SemanticDocument
-                .Document
+            var options = await analyzeResult.SemanticDocument.Document
                 .GetOptionsAsync(cancellationToken)
                 .ConfigureAwait(false);
 

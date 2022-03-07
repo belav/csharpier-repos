@@ -54,15 +54,12 @@ public class AngularCliBuilder : ISpaPrerendererBuilder
         }
 
         var appBuilder = spaBuilder.ApplicationBuilder;
-        var applicationStoppingToken =
-            appBuilder
-                .ApplicationServices
-                .GetRequiredService<IHostApplicationLifetime>()
-                .ApplicationStopping;
+        var applicationStoppingToken = appBuilder.ApplicationServices
+            .GetRequiredService<IHostApplicationLifetime>()
+            .ApplicationStopping;
         var logger = LoggerFinder.GetOrCreateLogger(appBuilder, nameof(AngularCliBuilder));
-        var diagnosticSource = appBuilder
-            .ApplicationServices
-            .GetRequiredService<DiagnosticSource>();
+        var diagnosticSource =
+            appBuilder.ApplicationServices.GetRequiredService<DiagnosticSource>();
         var scriptRunner = new NodeScriptRunner(
             sourcePath,
             _scriptName,
@@ -79,9 +76,9 @@ public class AngularCliBuilder : ISpaPrerendererBuilder
         {
             try
             {
-                await scriptRunner
-                    .StdOut
-                    .WaitForMatch(new Regex("Date", RegexOptions.None, RegexMatchTimeout));
+                await scriptRunner.StdOut.WaitForMatch(
+                    new Regex("Date", RegexOptions.None, RegexMatchTimeout)
+                );
             }
             catch (EndOfStreamException ex)
             {

@@ -105,8 +105,9 @@ namespace Microsoft.CodeAnalysis.InheritanceMargin
             );
             foreach (var (symbolKey, lineNumber) in symbolKeyAndLineNumbers)
             {
-                var symbol =
-                    symbolKey.Resolve(compilation, cancellationToken: cancellationToken).Symbol;
+                var symbol = symbolKey
+                    .Resolve(compilation, cancellationToken: cancellationToken)
+                    .Symbol;
 
                 if (symbol is INamedTypeSymbol namedTypeSymbol)
                 {

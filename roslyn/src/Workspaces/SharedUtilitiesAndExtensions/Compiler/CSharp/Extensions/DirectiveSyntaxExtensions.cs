@@ -99,8 +99,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 throw new ArgumentNullException(nameof(directive));
             }
 
-            var directiveConditionalMap =
-                GetDirectiveInfo(directive, cancellationToken).ConditionalMap;
+            var directiveConditionalMap = GetDirectiveInfo(
+                directive,
+                cancellationToken
+            ).ConditionalMap;
             directiveConditionalMap.TryGetValue(directive, out var result);
 
             return result;

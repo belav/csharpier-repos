@@ -41,13 +41,11 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void TypeIsCorrect()
         {
-            Assert
-                .Type
-                .HasProperties(
-                    typeof(MediaTypeFormatter),
-                    TypeAssert.TypeProperties.IsPublicVisibleClass
-                        | TypeAssert.TypeProperties.IsAbstract
-                );
+            Assert.Type.HasProperties(
+                typeof(MediaTypeFormatter),
+                TypeAssert.TypeProperties.IsPublicVisibleClass
+                    | TypeAssert.TypeProperties.IsAbstract
+            );
         }
 
         [Fact]
@@ -99,20 +97,18 @@ namespace System.Net.Http.Formatting
             var defaultMaxKeys = MediaTypeFormatter.MaxHttpCollectionKeys;
             try
             {
-                Assert
-                    .Reflection
-                    .IntegerProperty<MediaTypeFormatter, int>(
-                        null,
-                        c => MediaTypeFormatter.MaxHttpCollectionKeys,
-                        expectedDefaultValue: PlatformInfo.Platform == Platform.Net40
-                          ? 1000
-                          : Int32.MaxValue,
-                        minLegalValue: 1,
-                        illegalLowerValue: 0,
-                        maxLegalValue: null,
-                        illegalUpperValue: null,
-                        roundTripTestValue: 125
-                    );
+                Assert.Reflection.IntegerProperty<MediaTypeFormatter, int>(
+                    null,
+                    c => MediaTypeFormatter.MaxHttpCollectionKeys,
+                    expectedDefaultValue: PlatformInfo.Platform == Platform.Net40
+                      ? 1000
+                      : Int32.MaxValue,
+                    minLegalValue: 1,
+                    illegalLowerValue: 0,
+                    maxLegalValue: null,
+                    illegalUpperValue: null,
+                    roundTripTestValue: 125
+                );
             }
             finally
             {

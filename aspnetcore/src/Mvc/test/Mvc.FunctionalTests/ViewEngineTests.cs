@@ -159,15 +159,13 @@ expander-partial";
         // Arrange
         var cultureCookie = "c=" + value + "|uic=" + value;
         var request = new HttpRequestMessage(HttpMethod.Get, "http://localhost/TemplateExpander");
-        request
-            .Headers
-            .Add(
-                "Cookie",
-                new CookieHeaderValue(
-                    CookieRequestCultureProvider.DefaultCookieName,
-                    cultureCookie
-                ).ToString()
-            );
+        request.Headers.Add(
+            "Cookie",
+            new CookieHeaderValue(
+                CookieRequestCultureProvider.DefaultCookieName,
+                cultureCookie
+            ).ToString()
+        );
 
         // Act
         var response = await Client.SendAsync(request);
@@ -312,15 +310,13 @@ index-content";
             HttpMethod.Get,
             "http://localhost/TemplateExpander/ViewWithLayout"
         );
-        request
-            .Headers
-            .Add(
-                "Cookie",
-                new CookieHeaderValue(
-                    CookieRequestCultureProvider.DefaultCookieName,
-                    cultureCookie
-                ).ToString()
-            );
+        request.Headers.Add(
+            "Cookie",
+            new CookieHeaderValue(
+                CookieRequestCultureProvider.DefaultCookieName,
+                cultureCookie
+            ).ToString()
+        );
 
         // Act
         var response = await Client.SendAsync(request);

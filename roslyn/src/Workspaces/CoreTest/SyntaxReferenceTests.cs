@@ -33,13 +33,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
             );
 
             workspace.TryApplyChanges(
-                workspace
-                    .CurrentSolution
-                    .WithOptions(
-                        workspace
-                            .Options
-                            .WithChangedOption(CacheOptions.RecoverableTreeLengthThreshold, 0)
+                workspace.CurrentSolution.WithOptions(
+                    workspace.Options.WithChangedOption(
+                        CacheOptions.RecoverableTreeLengthThreshold,
+                        0
                     )
+                )
             );
 
             return workspace;

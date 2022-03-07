@@ -19,9 +19,7 @@ namespace Microsoft.EntityFrameworkCore
             var optionsBuilder = new DbContextOptionsBuilder();
             optionsBuilder.UseSqlServer("Database=Crunchie", b => b.MaxBatchSize(123));
 
-            var extension = optionsBuilder
-                .Options
-                .Extensions
+            var extension = optionsBuilder.Options.Extensions
                 .OfType<SqlServerOptionsExtension>()
                 .Single();
 
@@ -34,9 +32,7 @@ namespace Microsoft.EntityFrameworkCore
             var optionsBuilder = new DbContextOptionsBuilder();
             optionsBuilder.UseSqlServer("Database=Crunchie", b => b.CommandTimeout(30));
 
-            var extension = optionsBuilder
-                .Options
-                .Extensions
+            var extension = optionsBuilder.Options.Extensions
                 .OfType<SqlServerOptionsExtension>()
                 .Single();
 
@@ -49,9 +45,7 @@ namespace Microsoft.EntityFrameworkCore
             var optionsBuilder = new DbContextOptionsBuilder();
             optionsBuilder.UseSqlServer("Database=Crunchie");
 
-            var extension = optionsBuilder
-                .Options
-                .Extensions
+            var extension = optionsBuilder.Options.Extensions
                 .OfType<SqlServerOptionsExtension>()
                 .Single();
 
@@ -65,9 +59,7 @@ namespace Microsoft.EntityFrameworkCore
             var optionsBuilder = new DbContextOptionsBuilder<DbContext>();
             optionsBuilder.UseSqlServer("Database=Whisper");
 
-            var extension = optionsBuilder
-                .Options
-                .Extensions
+            var extension = optionsBuilder.Options.Extensions
                 .OfType<SqlServerOptionsExtension>()
                 .Single();
 
@@ -83,9 +75,7 @@ namespace Microsoft.EntityFrameworkCore
 
             optionsBuilder.UseSqlServer(connection);
 
-            var extension = optionsBuilder
-                .Options
-                .Extensions
+            var extension = optionsBuilder.Options.Extensions
                 .OfType<SqlServerOptionsExtension>()
                 .Single();
 
@@ -101,9 +91,7 @@ namespace Microsoft.EntityFrameworkCore
 
             optionsBuilder.UseSqlServer(connection);
 
-            var extension = optionsBuilder
-                .Options
-                .Extensions
+            var extension = optionsBuilder.Options.Extensions
                 .OfType<SqlServerOptionsExtension>()
                 .Single();
 
@@ -134,15 +122,13 @@ namespace Microsoft.EntityFrameworkCore
                 var serviceScope = services.GetRequiredService<IServiceScopeFactory>().CreateScope()
             )
             {
-                var coreOptions = serviceScope
-                    .ServiceProvider
+                var coreOptions = serviceScope.ServiceProvider
                     .GetRequiredService<DbContextOptions<ApplicationDbContext>>()
                     .GetExtension<CoreOptionsExtension>();
 
                 Assert.True(coreOptions.DetailedErrorsEnabled);
 
-                var sqlServerOptions = serviceScope
-                    .ServiceProvider
+                var sqlServerOptions = serviceScope.ServiceProvider
                     .GetRequiredService<DbContextOptions<ApplicationDbContext>>()
                     .GetExtension<SqlServerOptionsExtension>();
 

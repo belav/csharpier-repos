@@ -244,9 +244,7 @@ namespace System.Web.Mvc.Routing
                     if (contentSegment != null && contentSegment.Subsegments != null)
                     {
                         foreach (
-                            var parameterSegment in contentSegment
-                                .Subsegments
-                                .OfType<PathParameterSubsegment>()
+                            var parameterSegment in contentSegment.Subsegments.OfType<PathParameterSubsegment>()
                         )
                         {
                             if (parameterSegment != null)

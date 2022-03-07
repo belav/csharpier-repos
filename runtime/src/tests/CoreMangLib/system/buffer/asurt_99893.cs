@@ -30,13 +30,11 @@ namespace System
             }
             catch (ArgumentException ex)
             {
-                TestLibrary
-                    .Logging
-                    .WriteLine(
-                        "GetByte: Got expected exception: {0}: {1}",
-                        ex.GetType(),
-                        ex.Message
-                    );
+                TestLibrary.Logging.WriteLine(
+                    "GetByte: Got expected exception: {0}: {1}",
+                    ex.GetType(),
+                    ex.Message
+                );
             }
             catch (Exception ex)
             {
@@ -53,13 +51,11 @@ namespace System
             }
             catch (ArgumentException ex)
             {
-                TestLibrary
-                    .Logging
-                    .WriteLine(
-                        "SetByte: Got expected exception: {0}: {1}",
-                        ex.GetType(),
-                        ex.Message
-                    );
+                TestLibrary.Logging.WriteLine(
+                    "SetByte: Got expected exception: {0}: {1}",
+                    ex.GetType(),
+                    ex.Message
+                );
             }
             catch (Exception ex)
             {
@@ -77,13 +73,11 @@ namespace System
             }
             catch (ArgumentException ex)
             {
-                TestLibrary
-                    .Logging
-                    .WriteLine(
-                        "BlockCopy: Got expected exception: {0}: {1}",
-                        ex.GetType(),
-                        ex.Message
-                    );
+                TestLibrary.Logging.WriteLine(
+                    "BlockCopy: Got expected exception: {0}: {1}",
+                    ex.GetType(),
+                    ex.Message
+                );
             }
             catch (Exception ex)
             {

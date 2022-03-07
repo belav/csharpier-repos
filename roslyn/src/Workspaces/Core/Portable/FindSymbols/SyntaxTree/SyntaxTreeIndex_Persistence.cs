@@ -88,8 +88,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             var project = document.Project;
             var parseOptionsChecksum = project.State.GetParseOptionsChecksum();
 
-            var documentChecksumState = await document
-                .State
+            var documentChecksumState = await document.State
                 .GetStateChecksumsAsync(cancellationToken)
                 .ConfigureAwait(false);
             var textChecksum = documentChecksumState.Text;
@@ -100,10 +99,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         private async Task<bool> SaveAsync(Document document, CancellationToken cancellationToken)
         {
             var solution = document.Project.Solution;
-            var persistentStorageService = solution
-                .Workspace
-                .Services
-                .GetPersistentStorageService(solution.Options);
+            var persistentStorageService = solution.Workspace.Services.GetPersistentStorageService(
+                solution.Options
+            );
 
             try
             {
@@ -144,10 +142,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         )
         {
             var solution = document.Project.Solution;
-            var persistentStorageService = solution
-                .Workspace
-                .Services
-                .GetPersistentStorageService(solution.Options);
+            var persistentStorageService = solution.Workspace.Services.GetPersistentStorageService(
+                solution.Options
+            );
 
             // check whether we already have info for this document
             try

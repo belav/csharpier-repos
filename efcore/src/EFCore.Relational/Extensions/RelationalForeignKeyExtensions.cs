@@ -89,10 +89,9 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             var propertyNames = foreignKey.Properties.GetColumnNames(storeObject);
-            var principalPropertyNames = foreignKey
-                .PrincipalKey
-                .Properties
-                .GetColumnNames(principalStoreObject);
+            var principalPropertyNames = foreignKey.PrincipalKey.Properties.GetColumnNames(
+                principalStoreObject
+            );
             if (propertyNames == null || principalPropertyNames == null)
             {
                 return null;
@@ -110,8 +109,7 @@ namespace Microsoft.EntityFrameworkCore
             {
                 IReadOnlyForeignKey? linkedForeignKey = null;
                 foreach (
-                    var otherForeignKey in rootForeignKey
-                        .DeclaringEntityType
+                    var otherForeignKey in rootForeignKey.DeclaringEntityType
                         .FindRowInternalForeignKeys(storeObject)
                         .SelectMany(fk => fk.PrincipalEntityType.GetForeignKeys())
                 )
@@ -123,13 +121,13 @@ namespace Microsoft.EntityFrameworkCore
                             == otherForeignKey.PrincipalEntityType.GetSchema()
                     )
                     {
-                        var otherColumnNames = otherForeignKey
-                            .Properties
-                            .GetColumnNames(storeObject);
-                        var otherPrincipalColumnNames = otherForeignKey
-                            .PrincipalKey
-                            .Properties
-                            .GetColumnNames(principalStoreObject);
+                        var otherColumnNames = otherForeignKey.Properties.GetColumnNames(
+                            storeObject
+                        );
+                        var otherPrincipalColumnNames =
+                            otherForeignKey.PrincipalKey.Properties.GetColumnNames(
+                                principalStoreObject
+                            );
                         if (
                             otherColumnNames != null
                             && otherPrincipalColumnNames != null
@@ -261,8 +259,7 @@ namespace Microsoft.EntityFrameworkCore
             {
                 IReadOnlyForeignKey? linkedForeignKey = null;
                 foreach (
-                    var otherForeignKey in rootForeignKey
-                        .DeclaringEntityType
+                    var otherForeignKey in rootForeignKey.DeclaringEntityType
                         .FindRowInternalForeignKeys(storeObject)
                         .SelectMany(fk => fk.PrincipalEntityType.GetForeignKeys())
                 )

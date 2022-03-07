@@ -973,8 +973,9 @@ namespace Microsoft.CodeAnalysis
                         // Now process references of the candidate.
 
                         // how we bound the candidate references for this compilation:
-                        var candidateReferenceBinding =
-                            boundInputs[candidateIndex].ReferenceBinding;
+                        var candidateReferenceBinding = boundInputs[
+                            candidateIndex
+                        ].ReferenceBinding;
 
                         // get the AssemblySymbols the candidate symbol refers to into candidateReferencedSymbols
                         candidateReferencedSymbols.Clear();

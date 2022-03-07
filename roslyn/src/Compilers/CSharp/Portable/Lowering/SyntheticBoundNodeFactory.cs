@@ -415,8 +415,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(
                 receiverOpt is null
                     || receiverOpt.Type is { }
-                        && receiverOpt
-                            .Type
+                        && receiverOpt.Type
                             .GetMembers(propertySym.Name)
                             .OfType<PropertySymbol>()
                             .Single() == propertySym
@@ -665,17 +664,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // If necessary, add a conversion on the return expression.
                 var useSiteInfo =
 #if DEBUG
-                    CompoundUseSiteInfo<AssemblySymbol>.DiscardedDependencies;
+                CompoundUseSiteInfo<AssemblySymbol>.DiscardedDependencies;
 #else
-                    CompoundUseSiteInfo<AssemblySymbol>.Discarded;
+                CompoundUseSiteInfo<AssemblySymbol>.Discarded;
 #endif
-                var conversion = Compilation
-                    .Conversions
-                    .ClassifyConversionFromType(
-                        expression.Type,
-                        CurrentFunction.ReturnType,
-                        ref useSiteInfo
-                    );
+                var conversion = Compilation.Conversions.ClassifyConversionFromType(
+                    expression.Type,
+                    CurrentFunction.ReturnType,
+                    ref useSiteInfo
+                );
                 Debug.Assert(useSiteInfo.Diagnostics.IsNullOrEmpty());
                 Debug.Assert(conversion.Kind != ConversionKind.NoConversion);
                 if (conversion.Kind != ConversionKind.Identity)
@@ -824,9 +821,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
             // Because compiler-generated nodes are not lowered, this conversion is not used later in the compiler.
             // But it is a required part of the `BoundIsOperator` node, so we compute a conversion here.
-            Conversion c = Compilation
-                .Conversions
-                .ClassifyBuiltInConversion(operand.Type, type, ref discardedUseSiteInfo);
+            Conversion c = Compilation.Conversions.ClassifyBuiltInConversion(
+                operand.Type,
+                type,
+                ref discardedUseSiteInfo
+            );
             return new BoundIsOperator(
                 this.Syntax,
                 operand,
@@ -1685,8 +1684,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             // TODO: add diagnostics for when things fall apart
             Debug.Assert(CurrentFunction is { });
-            NamedTypeSymbol baseType =
-                CurrentFunction.ThisParameter.Type.BaseTypeNoUseSiteDiagnostics;
+            NamedTypeSymbol baseType = CurrentFunction
+                .ThisParameter
+                .Type
+                .BaseTypeNoUseSiteDiagnostics;
             var ctor = baseType.InstanceConstructors.Single(c => c.ParameterCount == 0);
             return new BoundExpressionStatement(Syntax, Call(Base(baseType), ctor))
             {
@@ -1906,12 +1907,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             // whether or not to call a method with a value type receiver directly).
             if (
                 !method.ContainingType.IsValueType
-                || !Microsoft
-                    .CodeAnalysis
-                    .CSharp
-                    .CodeGen
-                    .CodeGenerator
-                    .MayUseCallForStructMethod(method)
+                || !Microsoft.CodeAnalysis.CSharp.CodeGen.CodeGenerator.MayUseCallForStructMethod(
+                    method
+                )
             )
             {
                 method = method.GetConstructedLeastOverriddenMethod(
@@ -1971,13 +1969,15 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var useSiteInfo =
 #if DEBUG
-                CompoundUseSiteInfo<AssemblySymbol>.DiscardedDependencies;
+            CompoundUseSiteInfo<AssemblySymbol>.DiscardedDependencies;
 #else
-                CompoundUseSiteInfo<AssemblySymbol>.Discarded;
+            CompoundUseSiteInfo<AssemblySymbol>.Discarded;
 #endif
-            Conversion c = Compilation
-                .Conversions
-                .ClassifyConversionFromExpression(arg, type, ref useSiteInfo);
+            Conversion c = Compilation.Conversions.ClassifyConversionFromExpression(
+                arg,
+                type,
+                ref useSiteInfo
+            );
             Debug.Assert(c.Exists);
             Debug.Assert(useSiteInfo.Diagnostics.IsNullOrEmpty());
 

@@ -41,11 +41,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
             // Work around for https://github.com/dotnet/roslyn/issues/42982
             if (
                 exception is NullReferenceException
-                && exception
-                    .StackTrace
-                    .Contains(
-                        "Microsoft.CodeAnalysis.Completion.Providers.AbstractEmbeddedLanguageCompletionProvider.GetLanguageProviders"
-                    )
+                && exception.StackTrace.Contains(
+                    "Microsoft.CodeAnalysis.Completion.Providers.AbstractEmbeddedLanguageCompletionProvider.GetLanguageProviders"
+                )
             )
             {
                 return;
@@ -54,11 +52,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
             // Work around for https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1091056
             if (
                 exception is InvalidOperationException
-                && exception
-                    .StackTrace
-                    .Contains(
-                        "Microsoft.VisualStudio.Language.Intellisense.AsyncCompletion.Implementation.CompletionTelemetryHost"
-                    )
+                && exception.StackTrace.Contains(
+                    "Microsoft.VisualStudio.Language.Intellisense.AsyncCompletion.Implementation.CompletionTelemetryHost"
+                )
             )
             {
                 return;

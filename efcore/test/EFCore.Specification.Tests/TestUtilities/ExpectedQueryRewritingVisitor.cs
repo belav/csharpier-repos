@@ -59,10 +59,12 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                         }
                 );
 
-            _maybeScalarNullableMethod =
-                maybeScalarMethods.Single(x => x.argument.IsNullableValueType()).method;
-            _maybeScalarNonNullableMethod =
-                maybeScalarMethods.Single(x => !x.argument.IsNullableValueType()).method;
+            _maybeScalarNullableMethod = maybeScalarMethods
+                .Single(x => x.argument.IsNullableValueType())
+                .method;
+            _maybeScalarNonNullableMethod = maybeScalarMethods
+                .Single(x => !x.argument.IsNullableValueType())
+                .method;
         }
 
         public ExpectedQueryRewritingVisitor(
@@ -370,8 +372,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                         );
                     }
                     else if (
-                        caller
-                            .Type
+                        caller.Type
                             .GetMembers()
                             .Where(m => m.Name == propertyName)
                             .SingleOrDefault()

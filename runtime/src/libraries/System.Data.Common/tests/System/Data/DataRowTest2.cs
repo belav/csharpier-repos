@@ -2066,9 +2066,7 @@ namespace System.Data.Tests
             var ds = new DataSet();
             ds.ReadXml(st);
             // Here we add the expression column
-            ds.Tables[0]
-                .Columns
-                .Add("ValueListValueMember", typeof(object), "EmployeeNo");
+            ds.Tables[0].Columns.Add("ValueListValueMember", typeof(object), "EmployeeNo");
 
             foreach (DataRow row in ds.Tables[0].Rows)
             {

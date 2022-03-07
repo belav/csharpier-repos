@@ -46,9 +46,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
         {
             if (index < _typeSymbols.Length)
             {
-                element = this.State
-                    .CodeModelService
-                    .CreateCodeType(this.State, _projectId, _typeSymbols[index]);
+                element = this.State.CodeModelService.CreateCodeType(
+                    this.State,
+                    _projectId,
+                    _typeSymbols[index]
+                );
                 return true;
             }
 
@@ -62,9 +64,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
 
             if (index >= 0 && index < _typeSymbols.Length)
             {
-                element = this.State
-                    .CodeModelService
-                    .CreateCodeType(this.State, _projectId, _typeSymbols[index]);
+                element = this.State.CodeModelService.CreateCodeType(
+                    this.State,
+                    _projectId,
+                    _typeSymbols[index]
+                );
                 return true;
             }
 

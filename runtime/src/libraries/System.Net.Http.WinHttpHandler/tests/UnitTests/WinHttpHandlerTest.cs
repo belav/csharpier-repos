@@ -138,8 +138,9 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
                 }
             );
 
-            (uint onOff, uint keepAliveTime, uint keepAliveInterval) =
-                APICallHistory.WinHttpOptionTcpKeepAlive.Value;
+            (uint onOff, uint keepAliveTime, uint keepAliveInterval) = APICallHistory
+                .WinHttpOptionTcpKeepAlive
+                .Value;
 
             Assert.True(onOff != 0);
             Assert.Equal(13_000u * 60u, keepAliveTime);
@@ -161,8 +162,9 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
                 }
             );
 
-            (uint onOff, uint keepAliveTime, uint keepAliveInterval) =
-                APICallHistory.WinHttpOptionTcpKeepAlive.Value;
+            (uint onOff, uint keepAliveTime, uint keepAliveInterval) = APICallHistory
+                .WinHttpOptionTcpKeepAlive
+                .Value;
 
             Assert.True(onOff != 0);
             Assert.Equal(uint.MaxValue, keepAliveTime);

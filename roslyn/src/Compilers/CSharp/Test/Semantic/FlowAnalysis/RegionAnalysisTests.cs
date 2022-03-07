@@ -8745,12 +8745,11 @@ class C {
             var model = compilation.GetSemanticModel(tree);
 
             // The foreach loop is broken, so its embedded statement is filled in during syntax error recovery. It is zero-width.
-            var stmt =
-                tree.GetCompilationUnitRoot()
-                    .DescendantNodesAndSelf()
-                    .OfType<ForEachStatementSyntax>()
-                    .Single()
-                    .Statement;
+            var stmt = tree.GetCompilationUnitRoot()
+                .DescendantNodesAndSelf()
+                .OfType<ForEachStatementSyntax>()
+                .Single()
+                .Statement;
             Assert.Equal(0, stmt.Span.Length);
 
             var dataFlowAnalysisResults = model.AnalyzeDataFlow(stmt);

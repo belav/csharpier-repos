@@ -130,9 +130,10 @@ namespace Newtonsoft.Json.Utilities
                         csharpArgumentInfoTypeEnumerableType
                     }
                 );
-                _getMemberCall = JsonTypeReflector
-                    .ReflectionDelegateFactory
-                    .CreateMethodCall<object?>(getMemberMethod);
+                _getMemberCall =
+                    JsonTypeReflector.ReflectionDelegateFactory.CreateMethodCall<object?>(
+                        getMemberMethod
+                    );
 
                 MethodInfo setMemberMethod = binderType.GetMethod(
                     "SetMember",
@@ -144,9 +145,10 @@ namespace Newtonsoft.Json.Utilities
                         csharpArgumentInfoTypeEnumerableType
                     }
                 );
-                _setMemberCall = JsonTypeReflector
-                    .ReflectionDelegateFactory
-                    .CreateMethodCall<object?>(setMemberMethod);
+                _setMemberCall =
+                    JsonTypeReflector.ReflectionDelegateFactory.CreateMethodCall<object?>(
+                        setMemberMethod
+                    );
             }
 #endif
 

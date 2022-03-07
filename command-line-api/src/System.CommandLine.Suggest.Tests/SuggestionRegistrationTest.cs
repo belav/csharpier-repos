@@ -26,10 +26,8 @@ namespace System.CommandLine.Suggest.Tests
             allRegistrations
                 .Should()
                 .HaveCount(2)
-                .And
-                .Contain(x => x.ExecutablePath == suggestion1.ExecutablePath)
-                .And
-                .Contain(x => x.ExecutablePath == suggestion2.ExecutablePath);
+                .And.Contain(x => x.ExecutablePath == suggestion1.ExecutablePath)
+                .And.Contain(x => x.ExecutablePath == suggestion2.ExecutablePath);
         }
 
         [Fact]

@@ -57,8 +57,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.DecompiledSource
 
             MetadataReference metadataReference = null;
             string assemblyLocation = null;
-            var isReferenceAssembly = symbol
-                .ContainingAssembly
+            var isReferenceAssembly = symbol.ContainingAssembly
                 .GetAttributes()
                 .Any(
                     attribute =>
@@ -71,13 +70,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.DecompiledSource
                 try
                 {
                     var fullAssemblyName = symbol.ContainingAssembly.Identity.GetDisplayName();
-                    GlobalAssemblyCache
-                        .Instance
-                        .ResolvePartialName(
-                            fullAssemblyName,
-                            out assemblyLocation,
-                            preferredCulture: CultureInfo.CurrentCulture
-                        );
+                    GlobalAssemblyCache.Instance.ResolvePartialName(
+                        fullAssemblyName,
+                        out assemblyLocation,
+                        preferredCulture: CultureInfo.CurrentCulture
+                    );
                 }
                 catch (Exception e) when (FatalError.ReportAndCatch(e)) { }
             }
@@ -128,9 +125,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.DecompiledSource
                     document,
                     SpecializedCollections.SingletonEnumerable(node.FullSpan),
                     options: null,
-                    CSharpDecompiledSourceFormattingRule
-                        .Instance
-                        .Concat(Formatter.GetDefaultFormattingRules(document)),
+                    CSharpDecompiledSourceFormattingRule.Instance.Concat(
+                        Formatter.GetDefaultFormattingRules(document)
+                    ),
                     cancellationToken
                 )
                 .ConfigureAwait(false);
@@ -188,8 +185,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.DecompiledSource
         )
         {
             var assemblyInfo = MetadataAsSourceHelpers.GetAssemblyInfo(symbol.ContainingAssembly);
-            var compilation = await document
-                .Project
+            var compilation = await document.Project
                 .GetCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var assemblyPath = MetadataAsSourceHelpers.GetAssemblyDisplay(

@@ -26,8 +26,10 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void AddUriPathExtensionMapping_MediaTypeHeaderValue_UpdatesMediaTypeMappingsCollection()
         {
-            MediaTypeFormatter mockFormatter =
-                new Mock<MediaTypeFormatter> { CallBase = true }.Object;
+            MediaTypeFormatter mockFormatter = new Mock<MediaTypeFormatter>
+            {
+                CallBase = true
+            }.Object;
 
             mockFormatter.AddUriPathExtensionMapping(
                 "ext",
@@ -54,8 +56,10 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void AddUriPathExtensionMapping_MediaType_UpdatesMediaTypeMappingsCollection()
         {
-            MediaTypeFormatter mockFormatter =
-                new Mock<MediaTypeFormatter> { CallBase = true }.Object;
+            MediaTypeFormatter mockFormatter = new Mock<MediaTypeFormatter>
+            {
+                CallBase = true
+            }.Object;
 
             mockFormatter.AddUriPathExtensionMapping("ext", "application/test");
 

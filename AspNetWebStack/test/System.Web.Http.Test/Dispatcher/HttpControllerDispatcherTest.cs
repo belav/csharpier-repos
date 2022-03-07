@@ -232,12 +232,10 @@ namespace System.Web.Http.Dispatcher
                 )
             )
             {
-                configuration
-                    .Services
-                    .Replace(
-                        typeof(IHttpControllerSelector),
-                        CreateThrowingControllerSelector(expectedException)
-                    );
+                configuration.Services.Replace(
+                    typeof(IHttpControllerSelector),
+                    CreateThrowingControllerSelector(expectedException)
+                );
 
                 CancellationToken cancellationToken = CreateCancellationToken();
 
@@ -327,12 +325,14 @@ namespace System.Web.Http.Dispatcher
                         )
                     );
 
-                configuration
-                    .Services
-                    .Replace(typeof(IHttpControllerSelector), controllerSelector.Object);
-                configuration
-                    .Services
-                    .Replace(typeof(IHttpControllerActivator), controllerActivator.Object);
+                configuration.Services.Replace(
+                    typeof(IHttpControllerSelector),
+                    controllerSelector.Object
+                );
+                configuration.Services.Replace(
+                    typeof(IHttpControllerActivator),
+                    controllerActivator.Object
+                );
 
                 CancellationToken cancellationToken = CreateCancellationToken();
 
@@ -401,12 +401,10 @@ namespace System.Web.Http.Dispatcher
                 )
             )
             {
-                configuration
-                    .Services
-                    .Replace(
-                        typeof(IHttpControllerSelector),
-                        CreateThrowingControllerSelector(expectedException)
-                    );
+                configuration.Services.Replace(
+                    typeof(IHttpControllerSelector),
+                    CreateThrowingControllerSelector(expectedException)
+                );
 
                 CancellationToken cancellationToken = CreateCancellationToken();
 
@@ -451,12 +449,10 @@ namespace System.Web.Http.Dispatcher
                 )
             )
             {
-                configuration
-                    .Services
-                    .Replace(
-                        typeof(IHttpControllerSelector),
-                        CreateThrowingControllerSelector(exceptionInfo)
-                    );
+                configuration.Services.Replace(
+                    typeof(IHttpControllerSelector),
+                    CreateThrowingControllerSelector(exceptionInfo)
+                );
 
                 CancellationToken cancellationToken = CreateCancellationToken();
 
@@ -506,12 +502,10 @@ namespace System.Web.Http.Dispatcher
                     )
                 )
                 {
-                    configuration
-                        .Services
-                        .Replace(
-                            typeof(IHttpControllerSelector),
-                            CreateThrowingControllerSelector(CreateException())
-                        );
+                    configuration.Services.Replace(
+                        typeof(IHttpControllerSelector),
+                        CreateThrowingControllerSelector(CreateException())
+                    );
 
                     CancellationToken cancellationToken = CreateCancellationToken();
 
@@ -588,9 +582,10 @@ namespace System.Web.Http.Dispatcher
                 controllerSelectorMock
                     .Setup(s => s.SelectController(request))
                     .Returns(controllerDescriptor);
-                configuration
-                    .Services
-                    .Replace(typeof(IHttpControllerSelector), controllerSelectorMock.Object);
+                configuration.Services.Replace(
+                    typeof(IHttpControllerSelector),
+                    controllerSelectorMock.Object
+                );
 
                 HttpRequestContext expectedRequestContext = new HttpRequestContext
                 {
@@ -650,9 +645,10 @@ namespace System.Web.Http.Dispatcher
                 controllerSelectorMock
                     .Setup(s => s.SelectController(request))
                     .Returns(controllerDescriptor);
-                configuration
-                    .Services
-                    .Replace(typeof(IHttpControllerSelector), controllerSelectorMock.Object);
+                configuration.Services.Replace(
+                    typeof(IHttpControllerSelector),
+                    controllerSelectorMock.Object
+                );
 
                 request.SetRouteData(new Mock<IHttpRouteData>(MockBehavior.Strict).Object);
 
@@ -709,9 +705,10 @@ namespace System.Web.Http.Dispatcher
                 controllerSelectorMock
                     .Setup(s => s.SelectController(request))
                     .Returns(controllerDescriptor);
-                configuration
-                    .Services
-                    .Replace(typeof(IHttpControllerSelector), controllerSelectorMock.Object);
+                configuration.Services.Replace(
+                    typeof(IHttpControllerSelector),
+                    controllerSelectorMock.Object
+                );
 
                 request.SetRouteData(new Mock<IHttpRouteData>(MockBehavior.Strict).Object);
 
@@ -796,13 +793,11 @@ namespace System.Web.Http.Dispatcher
 
         private static HttpRequestMessage CreateRequest(HttpConfiguration config, string requestUri)
         {
-            IHttpRoute route = config
-                .Routes
-                .MapHttpRoute(
-                    "default",
-                    "api/{controller}/{id}",
-                    new { id = RouteParameter.Optional }
-                );
+            IHttpRoute route = config.Routes.MapHttpRoute(
+                "default",
+                "api/{controller}/{id}",
+                new { id = RouteParameter.Optional }
+            );
             var request = new HttpRequestMessage(HttpMethod.Get, requestUri);
             request.SetRouteData(route.GetRouteData("/", request));
             request.SetConfiguration(config);

@@ -25,12 +25,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
 
         public AddParameterDialogViewModel(Document document, int positionForTypeBinding)
         {
-            _notificationService = document
-                .Project
-                .Solution
-                .Workspace
-                .Services
-                .GetService<INotificationService>();
+            _notificationService =
+                document.Project.Solution.Workspace.Services.GetService<INotificationService>();
             _semanticModel = document
                 .GetRequiredSemanticModelAsync(CancellationToken.None)
                 .AsTask()
@@ -206,14 +202,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
 
                 var languageService =
                     Document.GetRequiredLanguageService<IChangeSignatureViewModelFactoryService>();
-                TypeSymbol =
-                    _semanticModel
-                        .GetSpeculativeTypeInfo(
-                            PositionForTypeBinding,
-                            languageService.GetTypeNode(typeName),
-                            SpeculativeBindingOption.BindAsTypeOrNamespace
-                        )
-                        .Type;
+                TypeSymbol = _semanticModel
+                    .GetSpeculativeTypeInfo(
+                        PositionForTypeBinding,
+                        languageService.GetTypeNode(typeName),
+                        SpeculativeBindingOption.BindAsTypeOrNamespace
+                    )
+                    .Type;
 
                 var typeParses = IsParameterTypeSyntacticallyValid(typeName);
                 if (!typeParses || TypeSymbol == null)

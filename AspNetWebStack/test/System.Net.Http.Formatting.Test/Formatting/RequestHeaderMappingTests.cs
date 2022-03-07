@@ -12,13 +12,11 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void TypeIsCorrect()
         {
-            Assert
-                .Type
-                .HasProperties(
-                    typeof(RequestHeaderMapping),
-                    TypeAssert.TypeProperties.IsPublicVisibleClass,
-                    typeof(MediaTypeMapping)
-                );
+            Assert.Type.HasProperties(
+                typeof(RequestHeaderMapping),
+                TypeAssert.TypeProperties.IsPublicVisibleClass,
+                typeof(MediaTypeMapping)
+            );
         }
 
         [Theory]

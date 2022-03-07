@@ -88,8 +88,9 @@ public class App : C
             var member04 = (typesym.GetMembers("M").Single() as IMethodSymbol).Parameters[0].Type;
 
             // 'E'
-            var member05 =
-                (typesym.GetMembers(WellKnownMemberNames.Indexer).Single() as IPropertySymbol).Type;
+            var member05 = (
+                typesym.GetMembers(WellKnownMemberNames.Indexer).Single() as IPropertySymbol
+            ).Type;
 
             ResolveAndVerifySymbol(member03, originalSymbols[0], comp1, SymbolKeyComparison.None);
             ResolveAndVerifySymbol(member01, originalSymbols[1], comp1, SymbolKeyComparison.None);
@@ -308,9 +309,7 @@ class Test
             var mtsym20_3 = mem20_2.Parameters[1].Type;
 
             // ====================
-            var typeTest = comp40
-                .SourceModule
-                .GlobalNamespace
+            var typeTest = comp40.SourceModule.GlobalNamespace
                 .GetTypeMembers("Test")
                 .FirstOrDefault();
             var mem40 = typeTest.GetMembers("Main").Single() as IMethodSymbol;

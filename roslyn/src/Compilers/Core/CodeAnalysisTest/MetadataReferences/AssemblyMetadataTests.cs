@@ -87,10 +87,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public void CreateFromFile()
         {
             var dir = Temp.CreateDirectory();
-            var mm =
-                dir.CreateFile("MultiModule.dll")
-                    .WriteAllBytes(TestResources.SymbolsTests.MultiModule.MultiModuleDll)
-                    .Path;
+            var mm = dir.CreateFile("MultiModule.dll")
+                .WriteAllBytes(TestResources.SymbolsTests.MultiModule.MultiModuleDll)
+                .Path;
             dir.CreateFile("mod2.netmodule")
                 .WriteAllBytes(TestResources.SymbolsTests.MultiModule.mod2);
             dir.CreateFile("mod3.netmodule")

@@ -395,11 +395,9 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary
-                    .TestFramework
-                    .LogInformation(
-                        $"{nameof(Vector128)}.{nameof(Vector128.EqualsAll)}<Single>(Vector128<Single>, Vector128<Single>): {method} failed:"
-                    );
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(Vector128)}.{nameof(Vector128.EqualsAll)}<Single>(Vector128<Single>, Vector128<Single>): {method} failed:"
+                );
                 TestLibrary.TestFramework.LogInformation($"    left: ({string.Join(", ", left)})");
                 TestLibrary.TestFramework.LogInformation($"   right: ({string.Join(", ", right)})");
                 TestLibrary.TestFramework.LogInformation($"  result: ({result})");

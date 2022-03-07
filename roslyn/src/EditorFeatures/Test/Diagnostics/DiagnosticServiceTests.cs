@@ -31,8 +31,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             Assert.Empty(
                 diagnosticService
                     .GetTestAccessor()
-                    .EventListenerTracker
-                    .GetTestAccessor()
+                    .EventListenerTracker.GetTestAccessor()
                     .EventListeners
             );
 
@@ -44,8 +43,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
         {
             using var workspace = new TestWorkspace(composition: FeaturesTestCompositions.Features);
             var mutex = new ManualResetEvent(false);
-            var document = workspace
-                .CurrentSolution
+            var document = workspace.CurrentSolution
                 .AddProject("TestProject", "TestProject", LanguageNames.CSharp)
                 .AddDocument("TestDocument", string.Empty);
 
@@ -118,8 +116,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
         {
             using var workspace = new TestWorkspace(composition: FeaturesTestCompositions.Features);
             var mutex = new ManualResetEvent(false);
-            var document = workspace
-                .CurrentSolution
+            var document = workspace.CurrentSolution
                 .AddProject("TestProject", "TestProject", LanguageNames.CSharp)
                 .AddDocument("TestDocument", string.Empty);
             var document2 = document.Project.AddDocument("TestDocument2", string.Empty);
@@ -213,8 +210,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
         {
             using var workspace = new TestWorkspace(composition: FeaturesTestCompositions.Features);
             var mutex = new ManualResetEvent(false);
-            var document = workspace
-                .CurrentSolution
+            var document = workspace.CurrentSolution
                 .AddProject("TestProject", "TestProject", LanguageNames.CSharp)
                 .AddDocument("TestDocument", string.Empty);
             var document2 = document.Project.AddDocument("TestDocument2", string.Empty);

@@ -290,8 +290,7 @@ namespace Microsoft.EntityFrameworkCore
                                     v => new MyDiscriminator(v.Value)
                                 )
                             )
-                            .Metadata
-                            .SetAfterSaveBehavior(PropertySaveBehavior.Save);
+                            .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Save);
                     }
                 );
 

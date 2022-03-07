@@ -107,14 +107,18 @@ public class InitCommandTests : IClassFixture<UserSecretsTestFixture>
             projectFile,
             LoadOptions.PreserveWhitespace
         );
-        var lineCountWithoutSecret =
-            projectDocumentWithoutSecret.ToString().Split(Environment.NewLine).Length;
+        var lineCountWithoutSecret = projectDocumentWithoutSecret
+            .ToString()
+            .Split(Environment.NewLine)
+            .Length;
 
         new InitCommand(null, null).Execute(MakeCommandContext(), projectDir);
 
         var projectDocumentWithSecret = XDocument.Load(projectFile, LoadOptions.PreserveWhitespace);
-        var lineCountWithSecret =
-            projectDocumentWithSecret.ToString().Split(Environment.NewLine).Length;
+        var lineCountWithSecret = projectDocumentWithSecret
+            .ToString()
+            .Split(Environment.NewLine)
+            .Length;
 
         Assert.True(lineCountWithSecret == lineCountWithoutSecret + 1);
     }

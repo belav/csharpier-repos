@@ -126,12 +126,10 @@ public class DownloadFile : Microsoft.Build.Utilities.Task
                     // https://docs.microsoft.com/en-us/rest/api/storageservices/common-rest-api-error-codes
                     if (
                         httpResponse.StatusCode == HttpStatusCode.NotFound
-                        || httpResponse
-                            .ReasonPhrase
-                            .IndexOf(
-                                "The requested URI does not represent any resource on the server.",
-                                StringComparison.OrdinalIgnoreCase
-                            ) == 0
+                        || httpResponse.ReasonPhrase.IndexOf(
+                            "The requested URI does not represent any resource on the server.",
+                            StringComparison.OrdinalIgnoreCase
+                        ) == 0
                     )
                     {
                         errorMessages.Add(

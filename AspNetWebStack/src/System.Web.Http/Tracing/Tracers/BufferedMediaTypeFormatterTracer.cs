@@ -118,55 +118,53 @@ namespace System.Web.Http.Tracing.Tracers
                 contentHeaders == null ? null : contentHeaders.ContentType;
             object value = null;
 
-            _innerTracer
-                .TraceWriter
-                .TraceBeginEnd(
-                    _innerTracer.Request,
-                    TraceCategories.FormattingCategory,
-                    TraceLevel.Info,
-                    _innerTracer.InnerFormatter.GetType().Name,
-                    OnReadFromStreamMethodName,
-                    beginTrace: (tr) =>
+            _innerTracer.TraceWriter.TraceBeginEnd(
+                _innerTracer.Request,
+                TraceCategories.FormattingCategory,
+                TraceLevel.Info,
+                _innerTracer.InnerFormatter.GetType().Name,
+                OnReadFromStreamMethodName,
+                beginTrace: (tr) =>
+                {
+                    tr.Message = Error.Format(
+                        SRResources.TraceReadFromStreamMessage,
+                        type.Name,
+                        contentType == null
+                          ? SRResources.TraceNoneObjectMessage
+                          : contentType.ToString()
+                    );
+                },
+                execute: () =>
+                {
+                    if (cancellationToken.HasValue)
                     {
-                        tr.Message = Error.Format(
-                            SRResources.TraceReadFromStreamMessage,
-                            type.Name,
-                            contentType == null
-                              ? SRResources.TraceNoneObjectMessage
-                              : contentType.ToString()
+                        value = innerFormatter.ReadFromStream(
+                            type,
+                            stream,
+                            content,
+                            formatterLogger,
+                            cancellationToken.Value
                         );
-                    },
-                    execute: () =>
+                    }
+                    else
                     {
-                        if (cancellationToken.HasValue)
-                        {
-                            value = innerFormatter.ReadFromStream(
-                                type,
-                                stream,
-                                content,
-                                formatterLogger,
-                                cancellationToken.Value
-                            );
-                        }
-                        else
-                        {
-                            value = innerFormatter.ReadFromStream(
-                                type,
-                                stream,
-                                content,
-                                formatterLogger
-                            );
-                        }
-                    },
-                    endTrace: (tr) =>
-                    {
-                        tr.Message = Error.Format(
-                            SRResources.TraceReadFromStreamValueMessage,
-                            FormattingUtilities.ValueToString(value, CultureInfo.CurrentCulture)
+                        value = innerFormatter.ReadFromStream(
+                            type,
+                            stream,
+                            content,
+                            formatterLogger
                         );
-                    },
-                    errorTrace: null
-                );
+                    }
+                },
+                endTrace: (tr) =>
+                {
+                    tr.Message = Error.Format(
+                        SRResources.TraceReadFromStreamValueMessage,
+                        FormattingUtilities.ValueToString(value, CultureInfo.CurrentCulture)
+                    );
+                },
+                errorTrace: null
+            );
 
             return value;
         }
@@ -207,45 +205,43 @@ namespace System.Web.Http.Tracing.Tracers
             MediaTypeHeaderValue contentType =
                 contentHeaders == null ? null : contentHeaders.ContentType;
 
-            _innerTracer
-                .TraceWriter
-                .TraceBeginEnd(
-                    _innerTracer.Request,
-                    TraceCategories.FormattingCategory,
-                    TraceLevel.Info,
-                    _innerTracer.InnerFormatter.GetType().Name,
-                    OnWriteToStreamMethodName,
-                    beginTrace: (tr) =>
+            _innerTracer.TraceWriter.TraceBeginEnd(
+                _innerTracer.Request,
+                TraceCategories.FormattingCategory,
+                TraceLevel.Info,
+                _innerTracer.InnerFormatter.GetType().Name,
+                OnWriteToStreamMethodName,
+                beginTrace: (tr) =>
+                {
+                    tr.Message = Error.Format(
+                        SRResources.TraceWriteToStreamMessage,
+                        FormattingUtilities.ValueToString(value, CultureInfo.CurrentCulture),
+                        type.Name,
+                        contentType == null
+                          ? SRResources.TraceNoneObjectMessage
+                          : contentType.ToString()
+                    );
+                },
+                execute: () =>
+                {
+                    if (cancellationToken.HasValue)
                     {
-                        tr.Message = Error.Format(
-                            SRResources.TraceWriteToStreamMessage,
-                            FormattingUtilities.ValueToString(value, CultureInfo.CurrentCulture),
-                            type.Name,
-                            contentType == null
-                              ? SRResources.TraceNoneObjectMessage
-                              : contentType.ToString()
+                        innerFormatter.WriteToStream(
+                            type,
+                            value,
+                            writeStream,
+                            content,
+                            cancellationToken.Value
                         );
-                    },
-                    execute: () =>
+                    }
+                    else
                     {
-                        if (cancellationToken.HasValue)
-                        {
-                            innerFormatter.WriteToStream(
-                                type,
-                                value,
-                                writeStream,
-                                content,
-                                cancellationToken.Value
-                            );
-                        }
-                        else
-                        {
-                            innerFormatter.WriteToStream(type, value, writeStream, content);
-                        }
-                    },
-                    endTrace: null,
-                    errorTrace: null
-                );
+                        innerFormatter.WriteToStream(type, value, writeStream, content);
+                    }
+                },
+                endTrace: null,
+                errorTrace: null
+            );
         }
     }
 }

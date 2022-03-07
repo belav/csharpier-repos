@@ -59,8 +59,10 @@ public class CascadingAuthenticationStateTest
 
         // Assert
         var batch = renderer.Batches.Single();
-        var receiveAuthStateId =
-            batch.GetComponentFrames<ReceiveAuthStateComponent>().Single().ComponentId;
+        var receiveAuthStateId = batch
+            .GetComponentFrames<ReceiveAuthStateComponent>()
+            .Single()
+            .ComponentId;
         var receiveAuthStateDiff = batch.DiffsByComponentId[receiveAuthStateId].Single();
         Assert.Collection(
             receiveAuthStateDiff.Edits,
@@ -152,13 +154,11 @@ public class CascadingAuthenticationStateTest
         var component = new UseCascadingAuthenticationStateComponent();
         renderer.AssignRootComponentId(component);
         component.TriggerRender();
-        var receiveAuthStateId =
-            renderer
-                .Batches
-                .Single()
-                .GetComponentFrames<ReceiveAuthStateComponent>()
-                .Single()
-                .ComponentId;
+        var receiveAuthStateId = renderer.Batches
+            .Single()
+            .GetComponentFrames<ReceiveAuthStateComponent>()
+            .Single()
+            .ComponentId;
 
         // Act 2: AuthenticationStateProvider issues notification
         authStateProvider.TriggerAuthenticationStateChanged(

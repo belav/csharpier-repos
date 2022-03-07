@@ -31,8 +31,9 @@ namespace System.Net.NetworkInformation
                 throw new PlatformNotSupportedException(SR.net_ping_utility_not_found);
             }
 
-            UnixCommandLinePing.PingFragmentOptions fragmentOption =
-                UnixCommandLinePing.PingFragmentOptions.Default;
+            UnixCommandLinePing.PingFragmentOptions fragmentOption = UnixCommandLinePing
+                .PingFragmentOptions
+                .Default;
             if (options != null && address.AddressFamily == AddressFamily.InterNetwork)
             {
                 fragmentOption = options.DontFragment
@@ -103,8 +104,7 @@ namespace System.Net.NetworkInformation
 
                 try
                 {
-                    await processCompletion
-                        .Task
+                    await processCompletion.Task
                         .WaitAsync(TimeSpan.FromMilliseconds(timeout))
                         .ConfigureAwait(false);
                 }

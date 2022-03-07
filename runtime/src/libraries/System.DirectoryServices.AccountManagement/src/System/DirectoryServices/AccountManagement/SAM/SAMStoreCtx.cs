@@ -709,8 +709,9 @@ namespace System.DirectoryServices.AccountManagement
             // ctxBaseLock, but we don't want to have to hold that lock while we're iterating over all
             // the child entries.  So we have to clone the ctxBase --- not ideal, but it prevents
             // multithreading issues.
-            DirectoryEntries entries =
-                SDSUtils.BuildDirectoryEntry(_ctxBase.Path, _credentials, _authTypes).Children;
+            DirectoryEntries entries = SDSUtils
+                .BuildDirectoryEntry(_ctxBase.Path, _credentials, _authTypes)
+                .Children;
             Debug.Assert(entries != null);
 
             // The SAMQuerySet will use this to restrict the types of DirectoryEntry objects returned.
@@ -775,8 +776,9 @@ namespace System.DirectoryServices.AccountManagement
                 // ctxBaseLock, but we don't want to have to hold that lock while we're iterating over all
                 // the child entries.  So we have to clone the ctxBase --- not ideal, but it prevents
                 // multithreading issues.
-                DirectoryEntries entries =
-                    SDSUtils.BuildDirectoryEntry(_ctxBase.Path, _credentials, _authTypes).Children;
+                DirectoryEntries entries = SDSUtils
+                    .BuildDirectoryEntry(_ctxBase.Path, _credentials, _authTypes)
+                    .Children;
                 Debug.Assert(entries != null);
 
                 // The SAMQuerySet will use this to restrict the types of DirectoryEntry objects returned.
@@ -1066,20 +1068,20 @@ namespace System.DirectoryServices.AccountManagement
             // Since this is SAM, the remote principal must be an AD principal.
             // Build a PrincipalContext for the store which owns the principal
             // Use the ad default options so we turn sign and seal back on.
-            PrincipalContext remoteCtx = SDSCache
-                .Domain
-                .GetContext(domainName, _credentials, DefaultContextOptions.ADDefaultContextOption);
+            PrincipalContext remoteCtx = SDSCache.Domain.GetContext(
+                domainName,
+                _credentials,
+                DefaultContextOptions.ADDefaultContextOption
+            );
 
             SecurityIdentifier sidObj = new SecurityIdentifier(sid, 0);
 
-            Principal p = remoteCtx
-                .QueryCtx
-                .FindPrincipalByIdentRef(
-                    typeof(Principal),
-                    UrnScheme.SidScheme,
-                    sidObj.ToString(),
-                    DateTime.UtcNow
-                );
+            Principal p = remoteCtx.QueryCtx.FindPrincipalByIdentRef(
+                typeof(Principal),
+                UrnScheme.SidScheme,
+                sidObj.ToString(),
+                DateTime.UtcNow
+            );
 
             if (p != null)
                 return p;

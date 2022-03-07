@@ -1233,9 +1233,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             && (object)implementingBaseOpt == null
                         ) // Otherwise any approprite errors are going to be reported for the base.
                         {
-                            LanguageVersion requiredVersion = MessageID
-                                .IDS_FeatureImplicitImplementationOfNonPublicMembers
-                                .RequiredVersion();
+                            LanguageVersion requiredVersion =
+                                MessageID.IDS_FeatureImplicitImplementationOfNonPublicMembers.RequiredVersion();
                             LanguageVersion? availableVersion = implementingType
                                 .DeclaringCompilation
                                 ?.LanguageVersion;
@@ -1344,10 +1343,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 // It is still possible that we actually looked for the accessor in interfaces, but failed due to an ambiguity.
                 // Let's try to look for a property to improve diagnostics in this scenario.
-                return !symbolAndDiagnostics
-                    .Diagnostics
-                    .Diagnostics
-                    .Any(d => d.Code == (int)ErrorCode.ERR_MostSpecificImplementationIsNotFound);
+                return !symbolAndDiagnostics.Diagnostics.Diagnostics.Any(
+                    d => d.Code == (int)ErrorCode.ERR_MostSpecificImplementationIsNotFound
+                );
             }
         }
 
@@ -1690,8 +1688,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         conflictingImplementation2 = null;
                         break;
                     case 1:
-                        MultiDictionary<Symbol, Symbol>.ValueSet methodSet =
-                            implementations[0].MethodSet;
+                        MultiDictionary<Symbol, Symbol>.ValueSet methodSet = implementations[
+                            0
+                        ].MethodSet;
                         switch (methodSet.Count)
                         {
                             case 1:
@@ -1736,9 +1735,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     if (!containingType.Equals(interfaceType, TypeCompareKind.ConsiderEverything))
                     {
-                        interfaceMember = interfaceMember
-                            .OriginalDefinition
-                            .SymbolAsMember(interfaceType);
+                        interfaceMember = interfaceMember.OriginalDefinition.SymbolAsMember(
+                            interfaceType
+                        );
                     }
 
                     return new MultiDictionary<Symbol, Symbol>.ValueSet(interfaceMember);
@@ -2078,9 +2077,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // The default implementation is coming from a different module, which means that we probably didn't check
                 // for the required runtime capability or language version
 
-                LanguageVersion requiredVersion = MessageID
-                    .IDS_DefaultInterfaceImplementation
-                    .RequiredVersion();
+                LanguageVersion requiredVersion =
+                    MessageID.IDS_DefaultInterfaceImplementation.RequiredVersion();
                 LanguageVersion? availableVersion = implementingType
                     .DeclaringCompilation
                     ?.LanguageVersion;
@@ -2269,9 +2267,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         //do nothing - not an ambiguous implementation
                     }
                     else if (
-                        MemberSignatureComparer
-                            .RuntimeImplicitImplementationComparer
-                            .Equals(interfaceMember, member) && !member.IsAccessor()
+                        MemberSignatureComparer.RuntimeImplicitImplementationComparer.Equals(
+                            interfaceMember,
+                            member
+                        ) && !member.IsAccessor()
                     )
                     {
                         // CONSIDER: Dev10 does not seem to report this for indexers or their accessors.
@@ -2624,8 +2623,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (
                     (object)interfaceMemberReturnType != null
                     && (
-                        useSiteDiagnostic =
-                            interfaceMemberReturnType.GetUseSiteInfo().DiagnosticInfo
+                        useSiteDiagnostic = interfaceMemberReturnType
+                            .GetUseSiteInfo()
+                            .DiagnosticInfo
                     ) != null
                     && useSiteDiagnostic.DefaultSeverity == DiagnosticSeverity.Error
                 )
@@ -2883,9 +2883,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         // We can ignore custom modifiers here, because our goal is to improve the helpfulness
                         // of an error we're already giving, rather than to generate a new error.
                         if (
-                            MemberSignatureComparer
-                                .CSharpCloseImplicitImplementationComparer
-                                .Equals(interfaceMember, member)
+                            MemberSignatureComparer.CSharpCloseImplicitImplementationComparer.Equals(
+                                interfaceMember,
+                                member
+                            )
                         )
                         {
                             closeMismatch = member;
@@ -2945,9 +2946,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // Inexact matches are acceptable because we'll just generate bridge members - explicit implementations
                 // with exact signatures that delegate to the inexact match.  This happens automatically in
                 // SourceMemberContainerTypeSymbol.SynthesizeInterfaceMemberImplementation.
-                return MemberSignatureComparer
-                    .CSharpImplicitImplementationComparer
-                    .Equals(interfaceMember, candidateMember);
+                return MemberSignatureComparer.CSharpImplicitImplementationComparer.Equals(
+                    interfaceMember,
+                    candidateMember
+                );
             }
             else
             {
@@ -2956,9 +2958,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // CLI interpretation instead.  For example, using this comparer might allow a member with a ref
                 // parameter to implement a member with an out parameter -  which Dev10 would not allow - but that's
                 // okay because Dev10's behavior is not observable.
-                return MemberSignatureComparer
-                    .RuntimeImplicitImplementationComparer
-                    .Equals(interfaceMember, candidateMember);
+                return MemberSignatureComparer.RuntimeImplicitImplementationComparer.Equals(
+                    interfaceMember,
+                    candidateMember
+                );
             }
         }
 

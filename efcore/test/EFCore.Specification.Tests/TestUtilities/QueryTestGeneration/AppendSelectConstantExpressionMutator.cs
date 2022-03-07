@@ -29,9 +29,10 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
             var i = random.Next(_expressions.Count);
 
             var typeArgument = expression.Type.GetGenericArguments()[0];
-            var select = QueryableMethods
-                .Select
-                .MakeGenericMethod(typeArgument, _expressions[i].type);
+            var select = QueryableMethods.Select.MakeGenericMethod(
+                typeArgument,
+                _expressions[i].type
+            );
             var lambda = Expression.Lambda(
                 _expressions[i].expression,
                 Expression.Parameter(typeArgument, "prm")

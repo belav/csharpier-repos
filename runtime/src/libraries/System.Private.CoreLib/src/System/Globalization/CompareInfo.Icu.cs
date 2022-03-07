@@ -59,16 +59,14 @@ namespace System.Globalization
             fixed (char* pString1 = &MemoryMarshal.GetReference(string1))
             fixed (char* pString2 = &MemoryMarshal.GetReference(string2))
             {
-                return Interop
-                    .Globalization
-                    .CompareString(
-                        _sortHandle,
-                        pString1,
-                        string1.Length,
-                        pString2,
-                        string2.Length,
-                        options
-                    );
+                return Interop.Globalization.CompareString(
+                    _sortHandle,
+                    pString1,
+                    string1.Length,
+                    pString2,
+                    string2.Length,
+                    options
+                );
             }
         }
 
@@ -112,29 +110,25 @@ namespace System.Globalization
                 fixed (char* pTarget = &MemoryMarshal.GetReference(target))
                 {
                     if (fromBeginning)
-                        return Interop
-                            .Globalization
-                            .IndexOf(
-                                _sortHandle,
-                                pTarget,
-                                target.Length,
-                                pSource,
-                                source.Length,
-                                options,
-                                matchLengthPtr
-                            );
+                        return Interop.Globalization.IndexOf(
+                            _sortHandle,
+                            pTarget,
+                            target.Length,
+                            pSource,
+                            source.Length,
+                            options,
+                            matchLengthPtr
+                        );
                     else
-                        return Interop
-                            .Globalization
-                            .LastIndexOf(
-                                _sortHandle,
-                                pTarget,
-                                target.Length,
-                                pSource,
-                                source.Length,
-                                options,
-                                matchLengthPtr
-                            );
+                        return Interop.Globalization.LastIndexOf(
+                            _sortHandle,
+                            pTarget,
+                            target.Length,
+                            pSource,
+                            source.Length,
+                            options,
+                            matchLengthPtr
+                        );
                 }
             }
         }
@@ -251,29 +245,25 @@ namespace System.Globalization
 
                 InteropCall:
                 if (fromBeginning)
-                    return Interop
-                        .Globalization
-                        .IndexOf(
-                            _sortHandle,
-                            b,
-                            target.Length,
-                            a,
-                            source.Length,
-                            options,
-                            matchLengthPtr
-                        );
+                    return Interop.Globalization.IndexOf(
+                        _sortHandle,
+                        b,
+                        target.Length,
+                        a,
+                        source.Length,
+                        options,
+                        matchLengthPtr
+                    );
                 else
-                    return Interop
-                        .Globalization
-                        .LastIndexOf(
-                            _sortHandle,
-                            b,
-                            target.Length,
-                            a,
-                            source.Length,
-                            options,
-                            matchLengthPtr
-                        );
+                    return Interop.Globalization.LastIndexOf(
+                        _sortHandle,
+                        b,
+                        target.Length,
+                        a,
+                        source.Length,
+                        options,
+                        matchLengthPtr
+                    );
             }
         }
 
@@ -373,29 +363,25 @@ namespace System.Globalization
 
                 InteropCall:
                 if (fromBeginning)
-                    return Interop
-                        .Globalization
-                        .IndexOf(
-                            _sortHandle,
-                            b,
-                            target.Length,
-                            a,
-                            source.Length,
-                            options,
-                            matchLengthPtr
-                        );
+                    return Interop.Globalization.IndexOf(
+                        _sortHandle,
+                        b,
+                        target.Length,
+                        a,
+                        source.Length,
+                        options,
+                        matchLengthPtr
+                    );
                 else
-                    return Interop
-                        .Globalization
-                        .LastIndexOf(
-                            _sortHandle,
-                            b,
-                            target.Length,
-                            a,
-                            source.Length,
-                            options,
-                            matchLengthPtr
-                        );
+                    return Interop.Globalization.LastIndexOf(
+                        _sortHandle,
+                        b,
+                        target.Length,
+                        a,
+                        source.Length,
+                        options,
+                        matchLengthPtr
+                    );
             }
         }
 
@@ -432,17 +418,15 @@ namespace System.Globalization
                 fixed (char* pSource = &MemoryMarshal.GetReference(source)) // could be null (or otherwise unable to be dereferenced)
                 fixed (char* pPrefix = &MemoryMarshal.GetReference(prefix))
                 {
-                    return Interop
-                        .Globalization
-                        .StartsWith(
-                            _sortHandle,
-                            pPrefix,
-                            prefix.Length,
-                            pSource,
-                            source.Length,
-                            options,
-                            matchLengthPtr
-                        );
+                    return Interop.Globalization.StartsWith(
+                        _sortHandle,
+                        pPrefix,
+                        prefix.Length,
+                        pSource,
+                        source.Length,
+                        options,
+                        matchLengthPtr
+                    );
                 }
             }
         }
@@ -532,17 +516,15 @@ namespace System.Globalization
                 return true;
 
                 InteropCall:
-                return Interop
-                    .Globalization
-                    .StartsWith(
-                        _sortHandle,
-                        bp,
-                        prefix.Length,
-                        ap,
-                        source.Length,
-                        options,
-                        matchLengthPtr
-                    );
+                return Interop.Globalization.StartsWith(
+                    _sortHandle,
+                    bp,
+                    prefix.Length,
+                    ap,
+                    source.Length,
+                    options,
+                    matchLengthPtr
+                );
             }
         }
 
@@ -617,17 +599,15 @@ namespace System.Globalization
                 return true;
 
                 InteropCall:
-                return Interop
-                    .Globalization
-                    .StartsWith(
-                        _sortHandle,
-                        bp,
-                        prefix.Length,
-                        ap,
-                        source.Length,
-                        options,
-                        matchLengthPtr
-                    );
+                return Interop.Globalization.StartsWith(
+                    _sortHandle,
+                    bp,
+                    prefix.Length,
+                    ap,
+                    source.Length,
+                    options,
+                    matchLengthPtr
+                );
             }
         }
 
@@ -659,17 +639,15 @@ namespace System.Globalization
                 fixed (char* pSource = &MemoryMarshal.GetReference(source)) // could be null (or otherwise unable to be dereferenced)
                 fixed (char* pSuffix = &MemoryMarshal.GetReference(suffix))
                 {
-                    return Interop
-                        .Globalization
-                        .EndsWith(
-                            _sortHandle,
-                            pSuffix,
-                            suffix.Length,
-                            pSource,
-                            source.Length,
-                            options,
-                            matchLengthPtr
-                        );
+                    return Interop.Globalization.EndsWith(
+                        _sortHandle,
+                        pSuffix,
+                        suffix.Length,
+                        pSource,
+                        source.Length,
+                        options,
+                        matchLengthPtr
+                    );
                 }
             }
         }
@@ -759,17 +737,15 @@ namespace System.Globalization
                 return true;
 
                 InteropCall:
-                return Interop
-                    .Globalization
-                    .EndsWith(
-                        _sortHandle,
-                        bp,
-                        suffix.Length,
-                        ap,
-                        source.Length,
-                        options,
-                        matchLengthPtr
-                    );
+                return Interop.Globalization.EndsWith(
+                    _sortHandle,
+                    bp,
+                    suffix.Length,
+                    ap,
+                    source.Length,
+                    options,
+                    matchLengthPtr
+                );
             }
         }
 
@@ -844,17 +820,15 @@ namespace System.Globalization
                 return true;
 
                 InteropCall:
-                return Interop
-                    .Globalization
-                    .EndsWith(
-                        _sortHandle,
-                        bp,
-                        suffix.Length,
-                        ap,
-                        source.Length,
-                        options,
-                        matchLengthPtr
-                    );
+                return Interop.Globalization.EndsWith(
+                    _sortHandle,
+                    bp,
+                    suffix.Length,
+                    ap,
+                    source.Length,
+                    options,
+                    matchLengthPtr
+                );
             }
         }
 
@@ -876,24 +850,27 @@ namespace System.Globalization
             byte[] keyData;
             fixed (char* pSource = source)
             {
-                int sortKeyLength = Interop
-                    .Globalization
-                    .GetSortKey(_sortHandle, pSource, source.Length, null, 0, options);
+                int sortKeyLength = Interop.Globalization.GetSortKey(
+                    _sortHandle,
+                    pSource,
+                    source.Length,
+                    null,
+                    0,
+                    options
+                );
                 keyData = new byte[sortKeyLength];
 
                 fixed (byte* pSortKey = keyData)
                 {
                     if (
-                        Interop
-                            .Globalization
-                            .GetSortKey(
-                                _sortHandle,
-                                pSource,
-                                source.Length,
-                                pSortKey,
-                                sortKeyLength,
-                                options
-                            ) != sortKeyLength
+                        Interop.Globalization.GetSortKey(
+                            _sortHandle,
+                            pSource,
+                            source.Length,
+                            pSortKey,
+                            sortKeyLength,
+                            options
+                        ) != sortKeyLength
                     )
                     {
                         throw new ArgumentException(SR.Arg_ExternalException);
@@ -921,16 +898,14 @@ namespace System.Globalization
             fixed (char* pSource = &MemoryMarshal.GetReference(source))
             fixed (byte* pDest = &MemoryMarshal.GetReference(destination))
             {
-                actualSortKeyLength = Interop
-                    .Globalization
-                    .GetSortKey(
-                        _sortHandle,
-                        pSource,
-                        source.Length,
-                        pDest,
-                        destination.Length,
-                        options
-                    );
+                actualSortKeyLength = Interop.Globalization.GetSortKey(
+                    _sortHandle,
+                    pSource,
+                    source.Length,
+                    pDest,
+                    destination.Length,
+                    options
+                );
             }
 
             // The check below also handles errors due to negative values / overflow being returned.
@@ -960,9 +935,14 @@ namespace System.Globalization
 
             fixed (char* pSource = &MemoryMarshal.GetReference(source))
             {
-                return Interop
-                    .Globalization
-                    .GetSortKey(_sortHandle, pSource, source.Length, null, 0, options);
+                return Interop.Globalization.GetSortKey(
+                    _sortHandle,
+                    pSource,
+                    source.Length,
+                    null,
+                    0,
+                    options
+                );
             }
         }
 
@@ -1022,16 +1002,14 @@ namespace System.Globalization
             {
                 fixed (byte* pSortKey = &MemoryMarshal.GetReference(sortKey))
                 {
-                    sortKeyLength = Interop
-                        .Globalization
-                        .GetSortKey(
-                            _sortHandle,
-                            pSource,
-                            source.Length,
-                            pSortKey,
-                            sortKey.Length,
-                            options
-                        );
+                    sortKeyLength = Interop.Globalization.GetSortKey(
+                        _sortHandle,
+                        pSource,
+                        source.Length,
+                        pSortKey,
+                        sortKey.Length,
+                        options
+                    );
                 }
 
                 if (sortKeyLength > sortKey.Length) // slow path for big strings
@@ -1045,16 +1023,14 @@ namespace System.Globalization
 
                     fixed (byte* pSortKey = &MemoryMarshal.GetReference(sortKey))
                     {
-                        sortKeyLength = Interop
-                            .Globalization
-                            .GetSortKey(
-                                _sortHandle,
-                                pSource,
-                                source.Length,
-                                pSortKey,
-                                sortKey.Length,
-                                options
-                            );
+                        sortKeyLength = Interop.Globalization.GetSortKey(
+                            _sortHandle,
+                            pSource,
+                            source.Length,
+                            pSortKey,
+                            sortKey.Length,
+                            options
+                        );
                     }
                 }
             }
@@ -1130,9 +1106,8 @@ namespace System.Globalization
                 {
                     if (!s_sortNameToSortHandleCache.TryGetValue(sortName, out IntPtr result))
                     {
-                        Interop.Globalization.ResultCode resultCode = Interop
-                            .Globalization
-                            .GetSortHandle(sortName, out result);
+                        Interop.Globalization.ResultCode resultCode =
+                            Interop.Globalization.GetSortHandle(sortName, out result);
 
                         if (resultCode == Interop.Globalization.ResultCode.OutOfMemory)
                             throw new OutOfMemoryException();

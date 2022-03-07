@@ -28,8 +28,9 @@ namespace System.Web.Http.Services
         public void GetExceptionHandler_DelegatesToGetService()
         {
             // Arrange
-            IExceptionHandler expectedExceptionHandler =
-                new Mock<IExceptionHandler>(MockBehavior.Strict).Object;
+            IExceptionHandler expectedExceptionHandler = new Mock<IExceptionHandler>(
+                MockBehavior.Strict
+            ).Object;
 
             Mock<ServicesContainer> mock = new Mock<ServicesContainer>(MockBehavior.Strict);
             mock.Setup(s => s.GetService(typeof(IExceptionHandler)))
@@ -48,8 +49,9 @@ namespace System.Web.Http.Services
         public void GetExceptionLoggers_DelegatesToGetServices()
         {
             // Arrange
-            IExceptionLogger expectedExceptionLogger =
-                new Mock<IExceptionLogger>(MockBehavior.Strict).Object;
+            IExceptionLogger expectedExceptionLogger = new Mock<IExceptionLogger>(
+                MockBehavior.Strict
+            ).Object;
             IEnumerable<IExceptionLogger> expectedExceptionLoggers = new IExceptionLogger[]
             {
                 expectedExceptionLogger

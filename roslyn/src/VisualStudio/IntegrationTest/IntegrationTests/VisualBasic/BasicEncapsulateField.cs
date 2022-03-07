@@ -49,11 +49,8 @@ End Module";
                 encapsulateField.DialogName,
                 FeatureAttribute.EncapsulateField
             );
-            VisualStudio
-                .Editor
-                .Verify
-                .TextContains(
-                    @"    Private _name As Integer? = 0
+            VisualStudio.Editor.Verify.TextContains(
+                @"    Private _name As Integer? = 0
 
     Public Property Name As Integer?
         Get
@@ -63,7 +60,7 @@ End Module";
             _name = value
         End Set
     End Property"
-                );
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.EncapsulateField)]
@@ -71,19 +68,13 @@ End Module";
         {
             SetUpEditor(TestSource);
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio
-                .Editor
-                .Verify
-                .CodeAction(
-                    "Encapsulate field: 'name' (and use property)",
-                    applyFix: true,
-                    blockUntilComplete: true
-                );
-            VisualStudio
-                .Editor
-                .Verify
-                .TextContains(
-                    @"
+            VisualStudio.Editor.Verify.CodeAction(
+                "Encapsulate field: 'name' (and use property)",
+                applyFix: true,
+                blockUntilComplete: true
+            );
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 Module Module1
     Private _name As Integer? = 0
 
@@ -100,7 +91,7 @@ Module Module1
         Name = 90
     End Sub
 End Module"
-                );
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.EncapsulateField)]
@@ -108,19 +99,13 @@ End Module"
         {
             SetUpEditor(TestSource);
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio
-                .Editor
-                .Verify
-                .CodeAction(
-                    "Encapsulate field: 'name' (but still use field)",
-                    applyFix: true,
-                    blockUntilComplete: true
-                );
-            VisualStudio
-                .Editor
-                .Verify
-                .TextContains(
-                    @"
+            VisualStudio.Editor.Verify.CodeAction(
+                "Encapsulate field: 'name' (but still use field)",
+                applyFix: true,
+                blockUntilComplete: true
+            );
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 Module Module1
     Private _name As Integer? = 0
 
@@ -137,7 +122,7 @@ Module Module1
         name = 90
     End Sub
 End Module"
-                );
+            );
         }
     }
 }

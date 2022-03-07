@@ -310,8 +310,7 @@ namespace System.Net.Http.Json
             {
                 response.EnsureSuccessStatusCode();
                 return await response
-                    .Content!
-                    .ReadFromJsonAsync(type, context, cancellationToken)
+                    .Content!.ReadFromJsonAsync(type, context, cancellationToken)
                     .ConfigureAwait(false);
             }
         }
@@ -326,8 +325,7 @@ namespace System.Net.Http.Json
             {
                 response.EnsureSuccessStatusCode();
                 return await response
-                    .Content!
-                    .ReadFromJsonAsync<T>(jsonTypeInfo, cancellationToken)
+                    .Content!.ReadFromJsonAsync<T>(jsonTypeInfo, cancellationToken)
                     .ConfigureAwait(false);
             }
         }

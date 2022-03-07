@@ -21,8 +21,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         private ImmutableDictionary<
             DiagnosticAnalyzer,
             ImmutableHashSet<DiagnosticData>
-        > _analyzerHostDiagnosticsMap =
-            ImmutableDictionary<DiagnosticAnalyzer, ImmutableHashSet<DiagnosticData>>.Empty;
+        > _analyzerHostDiagnosticsMap = ImmutableDictionary<
+            DiagnosticAnalyzer,
+            ImmutableHashSet<DiagnosticData>
+        >.Empty;
 
         public abstract Workspace Workspace { get; }
 
@@ -218,9 +220,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             ) => _abstractHostDiagnosticUpdateSource = abstractHostDiagnosticUpdateSource;
 
             internal ImmutableArray<DiagnosticData> GetReportedDiagnostics() =>
-                _abstractHostDiagnosticUpdateSource
-                    ._analyzerHostDiagnosticsMap
-                    .Values
+                _abstractHostDiagnosticUpdateSource._analyzerHostDiagnosticsMap.Values
                     .Flatten()
                     .ToImmutableArray();
 
@@ -229,9 +229,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             )
             {
                 if (
-                    !_abstractHostDiagnosticUpdateSource
-                        ._analyzerHostDiagnosticsMap
-                        .TryGetValue(analyzer, out var diagnostics)
+                    !_abstractHostDiagnosticUpdateSource._analyzerHostDiagnosticsMap.TryGetValue(
+                        analyzer,
+                        out var diagnostics
+                    )
                 )
                 {
                     diagnostics = ImmutableHashSet<DiagnosticData>.Empty;

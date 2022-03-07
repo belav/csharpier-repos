@@ -28,15 +28,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         )
         {
             Debug.Assert(UnderlyingNamedType.OriginalDefinition.IsDefinition);
-            var result =
-                ((PEModuleBuilder)context.Module)
-                    .Translate(
-                        this.UnderlyingNamedType.OriginalDefinition,
-                        (CSharpSyntaxNode)context.SyntaxNode,
-                        context.Diagnostics,
-                        needDeclaration: true
-                    )
-                    .AsNestedTypeReference;
+            var result = ((PEModuleBuilder)context.Module)
+                .Translate(
+                    this.UnderlyingNamedType.OriginalDefinition,
+                    (CSharpSyntaxNode)context.SyntaxNode,
+                    context.Diagnostics,
+                    needDeclaration: true
+                )
+                .AsNestedTypeReference;
 
             Debug.Assert(result != null);
             return result;

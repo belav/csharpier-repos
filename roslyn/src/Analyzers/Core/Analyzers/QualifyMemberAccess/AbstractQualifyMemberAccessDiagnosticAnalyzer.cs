@@ -48,22 +48,18 @@ namespace Microsoft.CodeAnalysis.QualifyMemberAccess
 
         public override bool OpenFileOnly(OptionSet options)
         {
-            var qualifyFieldAccessOption =
-                options
-                    .GetOption(CodeStyleOptions2.QualifyFieldAccess, GetLanguageName())
-                    .Notification;
-            var qualifyPropertyAccessOption =
-                options
-                    .GetOption(CodeStyleOptions2.QualifyPropertyAccess, GetLanguageName())
-                    .Notification;
-            var qualifyMethodAccessOption =
-                options
-                    .GetOption(CodeStyleOptions2.QualifyMethodAccess, GetLanguageName())
-                    .Notification;
-            var qualifyEventAccessOption =
-                options
-                    .GetOption(CodeStyleOptions2.QualifyEventAccess, GetLanguageName())
-                    .Notification;
+            var qualifyFieldAccessOption = options
+                .GetOption(CodeStyleOptions2.QualifyFieldAccess, GetLanguageName())
+                .Notification;
+            var qualifyPropertyAccessOption = options
+                .GetOption(CodeStyleOptions2.QualifyPropertyAccess, GetLanguageName())
+                .Notification;
+            var qualifyMethodAccessOption = options
+                .GetOption(CodeStyleOptions2.QualifyMethodAccess, GetLanguageName())
+                .Notification;
+            var qualifyEventAccessOption = options
+                .GetOption(CodeStyleOptions2.QualifyEventAccess, GetLanguageName())
+                .Notification;
 
             return !(
                 qualifyFieldAccessOption == NotificationOption2.Warning

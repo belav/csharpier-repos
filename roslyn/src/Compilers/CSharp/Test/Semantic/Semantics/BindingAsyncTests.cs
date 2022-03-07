@@ -32,8 +32,7 @@ class C
     }
 }";
             var compilation = CreateCompilationWithMscorlib45(source).VerifyDiagnostics();
-            var method = (SourceMemberMethodSymbol)compilation
-                .GlobalNamespace
+            var method = (SourceMemberMethodSymbol)compilation.GlobalNamespace
                 .GetTypeMembers("C")
                 .Single()
                 .GetMembers("M")

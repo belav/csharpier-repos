@@ -34,8 +34,7 @@ public class AspNetTestAssemblyRunner : XunitTestAssemblyRunner
         await Aggregator.RunAsync(
             async () =>
             {
-                var fixturesAttributes = ((IReflectionAssemblyInfo)TestAssembly.Assembly)
-                    .Assembly
+                var fixturesAttributes = ((IReflectionAssemblyInfo)TestAssembly.Assembly).Assembly
                     .GetCustomAttributes(typeof(AssemblyFixtureAttribute), false)
                     .Cast<AssemblyFixtureAttribute>()
                     .ToList();
@@ -43,9 +42,9 @@ public class AspNetTestAssemblyRunner : XunitTestAssemblyRunner
                 // Instantiate all the fixtures
                 foreach (var fixtureAttribute in fixturesAttributes)
                 {
-                    var ctorWithDiagnostics = fixtureAttribute
-                        .FixtureType
-                        .GetConstructor(new[] { typeof(IMessageSink) });
+                    var ctorWithDiagnostics = fixtureAttribute.FixtureType.GetConstructor(
+                        new[] { typeof(IMessageSink) }
+                    );
                     object instance = null;
                     if (ctorWithDiagnostics != null)
                     {

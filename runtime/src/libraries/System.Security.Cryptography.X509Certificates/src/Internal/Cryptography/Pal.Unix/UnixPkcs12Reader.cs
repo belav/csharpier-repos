@@ -367,9 +367,10 @@ namespace Internal.Cryptography.Pal
                         publicKeyInfos[i].Dispose();
                     }
 
-                    ArrayPool<RentedSubjectPublicKeyInfo>
-                        .Shared
-                        .Return(publicKeyInfos, clearArray: true);
+                    ArrayPool<RentedSubjectPublicKeyInfo>.Shared.Return(
+                        publicKeyInfos,
+                        clearArray: true
+                    );
                 }
 
                 ArrayPool<CertBagAsn>.Shared.Return(certBags, clearArray: true);
@@ -720,8 +721,11 @@ namespace Internal.Cryptography.Pal
                 throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding);
             }
 
-            int encryptedValueLength =
-                encryptedData.EncryptedContentInfo.EncryptedContent.Value.Length;
+            int encryptedValueLength = encryptedData
+                .EncryptedContentInfo
+                .EncryptedContent
+                .Value
+                .Length;
             byte[] destination = CryptoPool.Rent(encryptedValueLength);
             int written;
 

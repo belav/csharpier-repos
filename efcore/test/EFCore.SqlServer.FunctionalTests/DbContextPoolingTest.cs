@@ -234,8 +234,7 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 64,
-                scope
-                    .ServiceProvider
+                scope.ServiceProvider
                     .GetRequiredService<PooledContext>()
                     .GetService<IDbContextOptions>()
                     .FindExtension<CoreOptionsExtension>()!
@@ -303,8 +302,7 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 1024,
-                scope
-                    .ServiceProvider
+                scope.ServiceProvider
                     .GetRequiredService<PooledContext>()
                     .GetService<IDbContextOptions>()
                     .FindExtension<CoreOptionsExtension>()!
@@ -568,12 +566,10 @@ namespace Microsoft.EntityFrameworkCore
             async Task<DbContext> GetContextAsync(IServiceScope serviceScope) =>
                 useFactory
                     ? async
-                        ? await serviceScope
-                              .ServiceProvider
+                        ? await serviceScope.ServiceProvider
                               .GetService<IDbContextFactory<DbContext>>()!
                               .CreateDbContextAsync()
-                        : serviceScope
-                          .ServiceProvider
+                        : serviceScope.ServiceProvider
                           .GetService<IDbContextFactory<DbContext>>()!
                           .CreateDbContext()
                     : serviceScope.ServiceProvider.GetService<DbContext>();
@@ -1239,9 +1235,9 @@ namespace Microsoft.EntityFrameworkCore
                 : BuildServiceProvider<PooledContext>();
 
             var scope = serviceProvider.CreateScope();
-            var lease = scope
-                .ServiceProvider
-                .GetRequiredService<IScopedDbContextLease<PooledContext>>();
+            var lease = scope.ServiceProvider.GetRequiredService<
+                IScopedDbContextLease<PooledContext>
+            >();
             var context = lease.Context;
 
             await Dispose(scope, async);
@@ -1249,14 +1245,14 @@ namespace Microsoft.EntityFrameworkCore
             await Dispose(scope, async);
 
             using var scope1 = serviceProvider.CreateScope();
-            var lease1 = scope1
-                .ServiceProvider
-                .GetRequiredService<IScopedDbContextLease<PooledContext>>();
+            var lease1 = scope1.ServiceProvider.GetRequiredService<
+                IScopedDbContextLease<PooledContext>
+            >();
 
             using var scope2 = serviceProvider.CreateScope();
-            var lease2 = scope2
-                .ServiceProvider
-                .GetRequiredService<IScopedDbContextLease<PooledContext>>();
+            var lease2 = scope2.ServiceProvider.GetRequiredService<
+                IScopedDbContextLease<PooledContext>
+            >();
 
             Assert.Same(context, lease1.Context);
             Assert.NotSame(lease1.Context, lease2.Context);
@@ -1457,8 +1453,7 @@ namespace Microsoft.EntityFrameworkCore
                         ? (PooledContext)scopedProvider.GetService<IPooledContext>()
                         : scopedProvider.GetService<PooledContext>();
 
-                    await context!
-                        .Customers
+                    await context!.Customers
                         .AsNoTracking()
                         .FirstAsync(c => c.CustomerId == "ALFKI");
 

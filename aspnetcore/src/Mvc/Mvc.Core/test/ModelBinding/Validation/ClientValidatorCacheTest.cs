@@ -26,8 +26,9 @@ public class ClientValidatorCacheTest
 
         // Assert - 1
         var attribute1 = Assert.Single(validators1.OfType<RequiredAttributeAdapter>()).Attribute;
-        var attribute2 =
-            Assert.Single(validators1.OfType<StringLengthAttributeAdapter>()).Attribute;
+        var attribute2 = Assert
+            .Single(validators1.OfType<StringLengthAttributeAdapter>())
+            .Attribute;
         Assert.Contains(attribute1, metadata.ValidatorMetadata); // Copied by provider
         Assert.Contains(attribute2, metadata.ValidatorMetadata); // Copied by provider
 
@@ -82,10 +83,9 @@ public class ClientValidatorCacheTest
         var modelMetadataProvider = new TestModelMetadataProvider();
         var metadata = modelMetadataProvider.GetMetadataForType(typeof(TestRecordType));
         var property = metadata.Properties[nameof(TestRecordType.Property1)];
-        var parameter = metadata
-            .BoundConstructor
-            .BoundConstructorParameters
-            .First(f => f.Name == nameof(TestRecordType.Property1));
+        var parameter = metadata.BoundConstructor.BoundConstructorParameters.First(
+            f => f.Name == nameof(TestRecordType.Property1)
+        );
         var validatorProvider = new ProviderWithNonReusableValidators();
 
         // Act

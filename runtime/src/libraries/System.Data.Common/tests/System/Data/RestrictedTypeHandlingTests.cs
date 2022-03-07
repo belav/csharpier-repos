@@ -224,12 +224,10 @@ namespace System.Data.Tests
 
             try
             {
-                AppDomain
-                    .CurrentDomain
-                    .SetData(
-                        AppDomainDataSetDefaultAllowedTypesKey,
-                        new Type[] { typeof(MyCustomClass) }
-                    );
+                AppDomain.CurrentDomain.SetData(
+                    AppDomainDataSetDefaultAllowedTypesKey,
+                    new Type[] { typeof(MyCustomClass) }
+                );
 
                 table = ReadXml<DataTable>(asXml);
 
@@ -274,9 +272,11 @@ namespace System.Data.Tests
 
             DataTable table = new DataTable("MyTable");
             table.Columns.Add("ColumnA", typeof(object));
-            table
-                .Columns
-                .Add("ColumnB", typeof(object), "CONVERT(ColumnA, 'System.Text.StringBuilder')");
+            table.Columns.Add(
+                "ColumnB",
+                typeof(object),
+                "CONVERT(ColumnA, 'System.Text.StringBuilder')"
+            );
 
             string asXml = WriteXmlWithSchema(table.WriteXml);
 

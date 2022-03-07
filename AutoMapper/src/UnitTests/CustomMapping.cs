@@ -279,8 +279,7 @@ namespace AutoMapper.UnitTests
                                     src =>
                                         src.SubModels
                                             .FirstOrDefault()
-                                            .SubSubModels
-                                            .FirstOrDefault()
+                                            .SubSubModels.FirstOrDefault()
                                             .Id
                                 )
                         );

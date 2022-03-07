@@ -224,8 +224,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
 
                 var existingFirstAddressEntry = context.Entry(people[2].Addresses.First());
 
-                var addressJson =
-                    existingFirstAddressEntry.Property<JObject>("__jObject").CurrentValue;
+                var addressJson = existingFirstAddressEntry
+                    .Property<JObject>("__jObject")
+                    .CurrentValue;
 
                 Assert.Equal("First", addressJson[nameof(Address.Street)]);
                 addressJson["unmappedId"] = 2;
@@ -486,9 +487,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
             var options = Fixture.CreateOptions();
             using (var context = new EmbeddedTransportationContext(options))
             {
-                var bike = await context
-                    .Vehicles
-                    .SingleAsync(v => v.Name == "Trek Pro Fit Madone 6 Series");
+                var bike = await context.Vehicles.SingleAsync(
+                    v => v.Name == "Trek Pro Fit Madone 6 Series"
+                );
 
                 bike.Operator = new Operator { Name = "Chris Horner" };
 
@@ -502,9 +503,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
 
             using (var context = new EmbeddedTransportationContext(options))
             {
-                var bike = await context
-                    .Vehicles
-                    .SingleAsync(v => v.Name == "Trek Pro Fit Madone 6 Series");
+                var bike = await context.Vehicles.SingleAsync(
+                    v => v.Name == "Trek Pro Fit Madone 6 Series"
+                );
                 Assert.Equal("repairman", bike.Operator.Name);
             }
         }
@@ -515,9 +516,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
             var options = Fixture.CreateOptions();
             using (var context = new EmbeddedTransportationContext(options))
             {
-                var bike = await context
-                    .Vehicles
-                    .SingleAsync(v => v.Name == "Trek Pro Fit Madone 6 Series");
+                var bike = await context.Vehicles.SingleAsync(
+                    v => v.Name == "Trek Pro Fit Madone 6 Series"
+                );
 
                 var newBike = new Vehicle
                 {
@@ -535,9 +536,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
 
             using (var context = new EmbeddedTransportationContext(options))
             {
-                var bike = await context
-                    .Vehicles
-                    .SingleAsync(v => v.Name == "Trek Pro Fit Madone 6 Series");
+                var bike = await context.Vehicles.SingleAsync(
+                    v => v.Name == "Trek Pro Fit Madone 6 Series"
+                );
 
                 Assert.Equal(2, bike.SeatingCapacity);
                 Assert.NotNull(bike.Operator);

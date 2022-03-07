@@ -197,10 +197,8 @@ namespace TestNamespace
                 assertModel: model =>
                 {
                     var lazyConstructorEntity = model.FindEntityType(typeof(LazyConstructorEntity));
-                    var lazyParameterBinding = lazyConstructorEntity
-                        .ConstructorBinding
-                        .ParameterBindings
-                        .Single();
+                    var lazyParameterBinding =
+                        lazyConstructorEntity.ConstructorBinding.ParameterBindings.Single();
                     Assert.Equal(typeof(ILazyLoader), lazyParameterBinding.ParameterType);
                     var lazyPropertyEntity = model.FindEntityType(typeof(LazyPropertyEntity));
                     var lazyServiceProperty = lazyPropertyEntity.GetServiceProperties().Single();
@@ -437,8 +435,7 @@ namespace TestNamespace
                     e =>
                     {
                         e.Property<int>("Id")
-                            .Metadata
-                            .SetTypeMapping(new InMemoryTypeMapping(typeof(int[])));
+                            .Metadata.SetTypeMapping(new InMemoryTypeMapping(typeof(int[])));
                         e.HasKey("Id");
                     }
                 );
@@ -500,8 +497,7 @@ namespace TestNamespace
                     .HasDbFunction(
                         typeof(FunctionTypeMappingContext).GetMethod(nameof(GetSqlFragmentStatic))
                     )
-                    .Metadata
-                    .TypeMapping = new StringTypeMapping("varchar", DbType.AnsiString);
+                    .Metadata.TypeMapping = new StringTypeMapping("varchar", DbType.AnsiString);
             }
         }
 
@@ -536,8 +532,7 @@ namespace TestNamespace
                         )
                     )
                     .HasParameter("param")
-                    .Metadata
-                    .TypeMapping = new StringTypeMapping("varchar", DbType.AnsiString);
+                    .Metadata.TypeMapping = new StringTypeMapping("varchar", DbType.AnsiString);
             }
         }
 
@@ -2201,9 +2196,7 @@ namespace TestNamespace
                     );
                     Assert.Same(
                         derivedSkipNavigation.Inverse,
-                        derivedSkipNavigation
-                            .Inverse
-                            .ForeignKey
+                        derivedSkipNavigation.Inverse.ForeignKey
                             .GetReferencingSkipNavigations()
                             .Single()
                     );
@@ -2424,8 +2417,7 @@ namespace TestNamespace
                         eb.Property(e => e.Id)
                             .UseIdentityColumn(2, 3)
                             .IsSparse()
-                            .Metadata
-                            .SetColumnName(
+                            .Metadata.SetColumnName(
                                 "DerivedId",
                                 StoreObjectIdentifier.Table("PrincipalDerived")
                             );
@@ -2434,8 +2426,7 @@ namespace TestNamespace
                             .UsePropertyAccessMode(PropertyAccessMode.FieldDuringConstruction)
                             .HasColumnType("geometry")
                             .HasDefaultValue(
-                                NtsGeometryServices
-                                    .Instance
+                                NtsGeometryServices.Instance
                                     .CreateGeometryFactory(srid: 0)
                                     .CreatePoint(new CoordinateZM(0, 0, 0, 0))
                             )
@@ -3064,12 +3055,9 @@ namespace TestNamespace
                     Assert.False(getDataParameterless.StoreFunction.IsBuiltIn);
                     Assert.Equal(
                         typeof(Data),
-                        getDataParameterless
-                            .StoreFunction
-                            .EntityTypeMappings
+                        getDataParameterless.StoreFunction.EntityTypeMappings
                             .Single()
-                            .EntityType
-                            .ClrType
+                            .EntityType.ClrType
                     );
                     Assert.Equal(0, getDataParameterless.Parameters.Count);
 
@@ -3163,15 +3151,13 @@ namespace TestNamespace
                     .IsNullable(false)
                     .HasParameter("id")
                     .PropagatesNullability()
-                    .Metadata
-                    .SetAnnotation("MyAnnotation", new[] { 1L });
+                    .Metadata.SetAnnotation("MyAnnotation", new[] { 1L });
 
                 modelBuilder
                     .HasDbFunction(typeof(DbFunctionContext).GetMethod(nameof(IsDateStatic)))
                     .HasName("IsDate")
                     .IsBuiltIn()
-                    .Metadata
-                    .SetAnnotation("MyGuid", new Guid());
+                    .Metadata.SetAnnotation("MyGuid", new Guid());
 
                 modelBuilder.HasDbFunction(
                     typeof(DbFunctionContext).GetMethod(nameof(GetData), new Type[] { typeof(int) })
@@ -4144,8 +4130,7 @@ namespace TestNamespace
             options.ModelNamespace ??= "TestNamespace";
             options.ContextType = context.GetType();
 
-            var generator = DesignTestHelpers
-                .Instance
+            var generator = DesignTestHelpers.Instance
                 .CreateDesignServiceProvider(
                     context.GetService<IDatabaseProvider>().Name,
                     additionalDesignTimeServices: additionalDesignTimeServices

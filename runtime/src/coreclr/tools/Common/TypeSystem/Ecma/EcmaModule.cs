@@ -92,8 +92,7 @@ namespace Internal.TypeSystem.Ecma
                         {
                             MethodDefinitionHandle methodDefinitionHandle =
                                 (MethodDefinitionHandle)handle;
-                            TypeDefinitionHandle typeDefinitionHandle = _module
-                                ._metadataReader
+                            TypeDefinitionHandle typeDefinitionHandle = _module._metadataReader
                                 .GetMethodDefinition(methodDefinitionHandle)
                                 .GetDeclaringType();
                             EcmaType type = (EcmaType)_module.GetObject(
@@ -109,8 +108,7 @@ namespace Internal.TypeSystem.Ecma
                         {
                             FieldDefinitionHandle fieldDefinitionHandle =
                                 (FieldDefinitionHandle)handle;
-                            TypeDefinitionHandle typeDefinitionHandle = _module
-                                ._metadataReader
+                            TypeDefinitionHandle typeDefinitionHandle = _module._metadataReader
                                 .GetFieldDefinition(fieldDefinitionHandle)
                                 .GetDeclaringType();
                             EcmaType type = (EcmaType)_module.GetObject(
@@ -595,8 +593,9 @@ namespace Internal.TypeSystem.Ecma
                             {
                                 // If the base type is generic, any signature match for methods on the base type with the generic details from
                                 // the deriving type
-                                Instantiation newSubstitution =
-                                    typeDescToInspect.GetTypeDefinition().BaseType.Instantiation;
+                                Instantiation newSubstitution = typeDescToInspect
+                                    .GetTypeDefinition()
+                                    .BaseType.Instantiation;
                                 if (!substitution.IsNull)
                                 {
                                     TypeDesc[] newSubstitutionTypes = new TypeDesc[

@@ -472,15 +472,13 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void ReadConversionFails()
         {
-            byte[] data = Encoding
-                .UTF8
-                .GetBytes(
-                    @"{"
-                        + @"""Children"":["
-                        + @"{""MyProperty"":""StringButShouldBeInt""}"
-                        + @"]"
-                        + @"}"
-                );
+            byte[] data = Encoding.UTF8.GetBytes(
+                @"{"
+                    + @"""Children"":["
+                    + @"{""MyProperty"":""StringButShouldBeInt""}"
+                    + @"]"
+                    + @"}"
+            );
 
             bool exceptionThrown = false;
 

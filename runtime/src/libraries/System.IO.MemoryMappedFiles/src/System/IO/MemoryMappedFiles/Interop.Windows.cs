@@ -36,16 +36,14 @@ internal static partial class Interop
             capacityLow;
         SplitLong(maximumSize, out capacityHigh, out capacityLow);
 
-        return Interop
-            .Kernel32
-            .CreateFileMapping(
-                hFile,
-                ref securityAttributes,
-                pageProtection,
-                capacityHigh,
-                capacityLow,
-                name
-            );
+        return Interop.Kernel32.CreateFileMapping(
+            hFile,
+            ref securityAttributes,
+            pageProtection,
+            capacityHigh,
+            capacityLow,
+            name
+        );
     }
 
     public static SafeMemoryMappedFileHandle CreateFileMapping(
@@ -61,16 +59,14 @@ internal static partial class Interop
             capacityLow;
         SplitLong(maximumSize, out capacityHigh, out capacityLow);
 
-        return Interop
-            .Kernel32
-            .CreateFileMapping(
-                hFile,
-                ref securityAttributes,
-                pageProtection,
-                capacityHigh,
-                capacityLow,
-                name
-            );
+        return Interop.Kernel32.CreateFileMapping(
+            hFile,
+            ref securityAttributes,
+            pageProtection,
+            capacityHigh,
+            capacityLow,
+            name
+        );
     }
 
     public static SafeMemoryMappedViewHandle MapViewOfFile(
@@ -85,15 +81,13 @@ internal static partial class Interop
             offsetLow;
         SplitLong(fileOffset, out offsetHigh, out offsetLow);
 
-        return Interop
-            .Kernel32
-            .MapViewOfFile(
-                hFileMappingObject,
-                desiredAccess,
-                offsetHigh,
-                offsetLow,
-                numberOfBytesToMap
-            );
+        return Interop.Kernel32.MapViewOfFile(
+            hFileMappingObject,
+            desiredAccess,
+            offsetHigh,
+            offsetLow,
+            numberOfBytesToMap
+        );
     }
 
     public static SafeMemoryMappedFileHandle OpenFileMapping(

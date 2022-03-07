@@ -392,12 +392,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             );
             Assert.Equal(
                 typeof(Product),
-                orderEntityTypeBuilder
-                    .Metadata
+                orderEntityTypeBuilder.Metadata
                     .GetForeignKeys()
                     .Single()
-                    .PrincipalEntityType
-                    .ClrType
+                    .PrincipalEntityType.ClrType
             );
         }
 
@@ -435,12 +433,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             );
             Assert.Equal(
                 typeof(Product),
-                orderEntityTypeBuilder
-                    .Metadata
+                orderEntityTypeBuilder.Metadata
                     .GetForeignKeys()
                     .Single()
-                    .PrincipalEntityType
-                    .ClrType
+                    .PrincipalEntityType.ClrType
             );
         }
 
@@ -612,35 +608,32 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             );
             skipNavOnLeft.HasInverse(skipNavOnRight.Metadata, ConfigurationSource.Convention);
 
-            var joinEntityTypeBuilder =
-                model
-                    .AddEntityType(
-                        "JoinEntity",
-                        typeof(Dictionary<string, object>),
-                        owned: false,
-                        ConfigurationSource.Convention
-                    )
-                    .Builder;
-            var leftFK =
-                joinEntityTypeBuilder
-                    .HasRelationship(
-                        manyToManyLeft.Metadata.Name,
-                        new List<string> { "ManyToManyLeft_Id" },
-                        manyToManyLeftPK.Metadata,
-                        ConfigurationSource.Convention
-                    )
-                    .IsUnique(false, ConfigurationSource.Convention)
-                    .Metadata;
-            var rightFK =
-                joinEntityTypeBuilder
-                    .HasRelationship(
-                        manyToManyRight.Metadata.Name,
-                        new List<string> { "ManyToManyRight_Id" },
-                        manyToManyRightPK.Metadata,
-                        ConfigurationSource.Convention
-                    )
-                    .IsUnique(false, ConfigurationSource.Convention)
-                    .Metadata;
+            var joinEntityTypeBuilder = model
+                .AddEntityType(
+                    "JoinEntity",
+                    typeof(Dictionary<string, object>),
+                    owned: false,
+                    ConfigurationSource.Convention
+                )
+                .Builder;
+            var leftFK = joinEntityTypeBuilder
+                .HasRelationship(
+                    manyToManyLeft.Metadata.Name,
+                    new List<string> { "ManyToManyLeft_Id" },
+                    manyToManyLeftPK.Metadata,
+                    ConfigurationSource.Convention
+                )
+                .IsUnique(false, ConfigurationSource.Convention)
+                .Metadata;
+            var rightFK = joinEntityTypeBuilder
+                .HasRelationship(
+                    manyToManyRight.Metadata.Name,
+                    new List<string> { "ManyToManyRight_Id" },
+                    manyToManyRightPK.Metadata,
+                    ConfigurationSource.Convention
+                )
+                .IsUnique(false, ConfigurationSource.Convention)
+                .Metadata;
             skipNavOnLeft.HasForeignKey(leftFK, ConfigurationSource.Convention);
             skipNavOnRight.HasForeignKey(rightFK, ConfigurationSource.Convention);
             joinEntityTypeBuilder.PrimaryKey(
@@ -655,12 +648,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             Assert.Empty(model.GetEntityTypes().Where(e => e.IsImplicitlyCreatedJoinEntityType));
 
-            var leftSkipNav = manyToManyLeft
-                .Metadata
-                .FindDeclaredSkipNavigation(nameof(ManyToManyLeft.Rights));
-            var rightSkipNav = manyToManyRight
-                .Metadata
-                .FindDeclaredSkipNavigation(nameof(ManyToManyRight.Lefts));
+            var leftSkipNav = manyToManyLeft.Metadata.FindDeclaredSkipNavigation(
+                nameof(ManyToManyLeft.Rights)
+            );
+            var rightSkipNav = manyToManyRight.Metadata.FindDeclaredSkipNavigation(
+                nameof(ManyToManyRight.Lefts)
+            );
 
             Assert.NotNull(leftSkipNav);
             Assert.NotNull(rightSkipNav);
@@ -735,12 +728,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             Assert.Null(modelBuilder.RemoveImplicitJoinEntity(joinEntityType));
 
-            var leftSkipNav = manyToManyLeft
-                .Metadata
-                .FindDeclaredSkipNavigation(nameof(ManyToManyLeft.Rights));
-            var rightSkipNav = manyToManyRight
-                .Metadata
-                .FindDeclaredSkipNavigation(nameof(ManyToManyRight.Lefts));
+            var leftSkipNav = manyToManyLeft.Metadata.FindDeclaredSkipNavigation(
+                nameof(ManyToManyLeft.Rights)
+            );
+            var rightSkipNav = manyToManyRight.Metadata.FindDeclaredSkipNavigation(
+                nameof(ManyToManyRight.Lefts)
+            );
             Assert.NotNull(leftSkipNav);
             Assert.NotNull(rightSkipNav);
 
@@ -841,8 +834,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         }
 
         private static ProviderConventionSetBuilderDependencies CreateDependencies() =>
-            InMemoryTestHelpers
-                .Instance
+            InMemoryTestHelpers.Instance
                 .CreateContextServices()
                 .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 

@@ -177,10 +177,9 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
         {
             var infoCache = _diagnosticAnalyzerService.AnalyzerInfoCache;
             var hostAnalyzers = document.Project.Solution.State.Analyzers;
-            var groupedDiagnostics =
-                hostAnalyzers
-                    .GetDiagnosticDescriptorsPerReference(infoCache, document.Project)
-                    .Values;
+            var groupedDiagnostics = hostAnalyzers
+                .GetDiagnosticDescriptorsPerReference(infoCache, document.Project)
+                .Values;
             var supportedDiagnostics = groupedDiagnostics.SelectMany(d => d);
             var diagnosticDescriptor = supportedDiagnostics.FirstOrDefault(d => d.Id == errorCode);
             if (diagnosticDescriptor != null)

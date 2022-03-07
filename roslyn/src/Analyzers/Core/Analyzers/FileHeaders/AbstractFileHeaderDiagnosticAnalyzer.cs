@@ -78,13 +78,11 @@ namespace Microsoft.CodeAnalysis.FileHeaders
             }
 
             if (
-                !context
-                    .Options
-                    .TryGetEditorConfigOption<string>(
-                        CodeStyleOptions2.FileHeaderTemplate,
-                        tree,
-                        out var fileHeaderTemplate
-                    ) || string.IsNullOrEmpty(fileHeaderTemplate)
+                !context.Options.TryGetEditorConfigOption<string>(
+                    CodeStyleOptions2.FileHeaderTemplate,
+                    tree,
+                    out var fileHeaderTemplate
+                ) || string.IsNullOrEmpty(fileHeaderTemplate)
             )
             {
                 return;

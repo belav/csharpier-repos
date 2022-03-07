@@ -70,8 +70,7 @@ namespace System.Net.Quic.Implementations.Mock
         {
             CheckDisposed();
 
-            MockConnection.ConnectionState state = await _listenQueue
-                .Reader
+            MockConnection.ConnectionState state = await _listenQueue.Reader
                 .ReadAsync(cancellationToken)
                 .ConfigureAwait(false);
 

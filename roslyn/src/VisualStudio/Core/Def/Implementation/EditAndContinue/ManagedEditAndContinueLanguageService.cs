@@ -48,9 +48,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditAndContinue
         {
             _proxy = new RemoteEditAndContinueServiceProxy(workspace);
             _debuggingService = workspace.Services.GetRequiredService<IDebuggingWorkspaceService>();
-            _activeStatementTrackingService = workspace
-                .Services
-                .GetRequiredService<IActiveStatementTrackingService>();
+            _activeStatementTrackingService =
+                workspace.Services.GetRequiredService<IActiveStatementTrackingService>();
             _debuggerService = debuggerService;
             _diagnosticService = diagnosticService;
             _diagnosticUpdateSource = diagnosticUpdateSource;

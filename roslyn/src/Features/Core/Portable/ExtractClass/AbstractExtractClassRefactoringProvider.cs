@@ -32,12 +32,9 @@ namespace Microsoft.CodeAnalysis.ExtractClass
             // work to support a user interaction that makes sense for those cases.
             // See: https://github.com/dotnet/roslyn/issues/50868
             if (
-                !context
-                    .Document
-                    .Project
-                    .Solution
-                    .Workspace
-                    .CanApplyChange(ApplyChangesKind.AddDocument)
+                !context.Document.Project.Solution.Workspace.CanApplyChange(
+                    ApplyChangesKind.AddDocument
+                )
             )
             {
                 return;
@@ -45,13 +42,7 @@ namespace Microsoft.CodeAnalysis.ExtractClass
 
             var optionsService =
                 _optionsService
-                ?? context
-                    .Document
-                    .Project
-                    .Solution
-                    .Workspace
-                    .Services
-                    .GetService<IExtractClassOptionsService>();
+                ?? context.Document.Project.Solution.Workspace.Services.GetService<IExtractClassOptionsService>();
             if (optionsService is null)
             {
                 return;

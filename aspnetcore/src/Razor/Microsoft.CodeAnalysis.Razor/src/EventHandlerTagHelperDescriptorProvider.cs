@@ -86,9 +86,10 @@ internal class EventHandlerTagHelperDescriptorProvider : ITagHelperDescriptorPro
                 var attribute = attributes[j];
 
                 if (
-                    SymbolEqualityComparer
-                        .Default
-                        .Equals(attribute.AttributeClass, eventHandlerAttribute)
+                    SymbolEqualityComparer.Default.Equals(
+                        attribute.AttributeClass,
+                        eventHandlerAttribute
+                    )
                 )
                 {
                     var enablePreventDefault = false;
@@ -139,16 +140,15 @@ internal class EventHandlerTagHelperDescriptorProvider : ITagHelperDescriptorPro
                 eventArgType
             );
 
-            builder
-                .Metadata
-                .Add(
-                    ComponentMetadata.SpecialKindKey,
-                    ComponentMetadata.EventHandler.TagHelperKind
-                );
+            builder.Metadata.Add(
+                ComponentMetadata.SpecialKindKey,
+                ComponentMetadata.EventHandler.TagHelperKind
+            );
             builder.Metadata.Add(ComponentMetadata.EventHandler.EventArgsType, eventArgType);
             builder.Metadata.Add(TagHelperMetadata.Common.ClassifyAttributesOnly, bool.TrueString);
-            builder.Metadata[TagHelperMetadata.Runtime.Name] =
-                ComponentMetadata.EventHandler.RuntimeName;
+            builder.Metadata[TagHelperMetadata.Runtime.Name] = ComponentMetadata
+                .EventHandler
+                .RuntimeName;
 
             // WTE has a bug in 15.7p1 where a Tag Helper without a display-name that looks like
             // a C# property will crash trying to create the tooltips.
@@ -163,8 +163,9 @@ internal class EventHandlerTagHelperDescriptorProvider : ITagHelperDescriptorPro
                         a =>
                         {
                             a.Name = attributeName;
-                            a.NameComparisonMode =
-                                RequiredAttributeDescriptor.NameComparisonMode.FullMatch;
+                            a.NameComparisonMode = RequiredAttributeDescriptor
+                                .NameComparisonMode
+                                .FullMatch;
                             a.Metadata[ComponentMetadata.Common.DirectiveAttribute] =
                                 bool.TrueString;
                         }
@@ -183,8 +184,9 @@ internal class EventHandlerTagHelperDescriptorProvider : ITagHelperDescriptorPro
                             a =>
                             {
                                 a.Name = attributeName + ":preventDefault";
-                                a.NameComparisonMode =
-                                    RequiredAttributeDescriptor.NameComparisonMode.FullMatch;
+                                a.NameComparisonMode = RequiredAttributeDescriptor
+                                    .NameComparisonMode
+                                    .FullMatch;
                                 a.Metadata[ComponentMetadata.Common.DirectiveAttribute] =
                                     bool.TrueString;
                             }
@@ -204,8 +206,9 @@ internal class EventHandlerTagHelperDescriptorProvider : ITagHelperDescriptorPro
                             a =>
                             {
                                 a.Name = attributeName + ":stopPropagation";
-                                a.NameComparisonMode =
-                                    RequiredAttributeDescriptor.NameComparisonMode.FullMatch;
+                                a.NameComparisonMode = RequiredAttributeDescriptor
+                                    .NameComparisonMode
+                                    .FullMatch;
                                 a.Metadata[ComponentMetadata.Common.DirectiveAttribute] =
                                     bool.TrueString;
                             }

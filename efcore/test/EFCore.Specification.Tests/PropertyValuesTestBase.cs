@@ -989,8 +989,7 @@ namespace Microsoft.EntityFrameworkCore
             var buildingValues = entry.CurrentValues;
             var clonedBuildingValues = buildingValues.Clone();
 
-            var property = context
-                .Model
+            var property = context.Model
                 .FindEntityType(typeof(Whiteboard))
                 .FindProperty(nameof(Whiteboard.AssetTag));
 
@@ -1125,12 +1124,10 @@ namespace Microsoft.EntityFrameworkCore
             var values = entry.CurrentValues;
             var clonedValues = values.Clone();
 
-            var shadowProperty = context
-                .Model
+            var shadowProperty = context.Model
                 .FindEntityType(typeof(PastEmployee))
                 .FindProperty("Shadow4");
-            var termProperty = context
-                .Model
+            var termProperty = context.Model
                 .FindEntityType(typeof(PastEmployee))
                 .FindProperty(nameof(PastEmployee.TerminationDate));
 
@@ -2536,8 +2533,7 @@ namespace Microsoft.EntityFrameworkCore
             using var context = CreateContext();
             var building = (Building)context
                 .Entry(context.Set<Building>().Single(b => b.Name == "Building One"))
-                .CurrentValues
-                .ToObject();
+                .CurrentValues.ToObject();
 
             building.BuildingId = new Guid();
 
@@ -2569,8 +2565,7 @@ namespace Microsoft.EntityFrameworkCore
             using var context = CreateContext();
             var building = (Building)context
                 .Entry(context.Set<Building>().Single(b => b.Name == "Building One"))
-                .CurrentValues
-                .ToObject();
+                .CurrentValues.ToObject();
             building.BuildingId = new Guid();
 
             context.Set<Building>().Attach(building);
@@ -2606,8 +2601,7 @@ namespace Microsoft.EntityFrameworkCore
                         .OfType<CurrentEmployee>()
                         .Single(b => b.FirstName == "Rowan")
                 )
-                .CurrentValues
-                .ToObject();
+                .CurrentValues.ToObject();
             employee.EmployeeId = -77;
 
             context.Set<Employee>().Attach(employee);
@@ -2643,8 +2637,7 @@ namespace Microsoft.EntityFrameworkCore
                         .OfType<CurrentEmployee>()
                         .Single(b => b.FirstName == "Rowan")
                 )
-                .CurrentValues
-                .ToObject();
+                .CurrentValues.ToObject();
             employee.EmployeeId = -77;
 
             context.Set<Employee>().Attach(employee);
@@ -2673,14 +2666,13 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             using var context = CreateContext();
-            var pastEmployeeId =
-                context
-                    .Set<Employee>()
-                    .OfType<PastEmployee>()
-                    .AsNoTracking()
-                    .OrderBy(e => e.EmployeeId)
-                    .FirstOrDefault()
-                    .EmployeeId;
+            var pastEmployeeId = context
+                .Set<Employee>()
+                .OfType<PastEmployee>()
+                .AsNoTracking()
+                .OrderBy(e => e.EmployeeId)
+                .FirstOrDefault()
+                .EmployeeId;
 
             var employee = (CurrentEmployee)context
                 .Entry(
@@ -2689,8 +2681,7 @@ namespace Microsoft.EntityFrameworkCore
                         .OfType<CurrentEmployee>()
                         .Single(b => b.FirstName == "Rowan")
                 )
-                .CurrentValues
-                .ToObject();
+                .CurrentValues.ToObject();
             employee.EmployeeId = pastEmployeeId;
 
             context.Set<Employee>().Attach(employee);
@@ -2719,14 +2710,13 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             using var context = CreateContext();
-            var pastEmployeeId =
-                context
-                    .Set<Employee>()
-                    .OfType<PastEmployee>()
-                    .AsNoTracking()
-                    .OrderBy(e => e.EmployeeId)
-                    .FirstOrDefault()
-                    .EmployeeId;
+            var pastEmployeeId = context
+                .Set<Employee>()
+                .OfType<PastEmployee>()
+                .AsNoTracking()
+                .OrderBy(e => e.EmployeeId)
+                .FirstOrDefault()
+                .EmployeeId;
 
             var employee = (CurrentEmployee)context
                 .Entry(
@@ -2735,8 +2725,7 @@ namespace Microsoft.EntityFrameworkCore
                         .OfType<CurrentEmployee>()
                         .Single(b => b.FirstName == "Rowan")
                 )
-                .CurrentValues
-                .ToObject();
+                .CurrentValues.ToObject();
             employee.EmployeeId = pastEmployeeId;
 
             context.Set<Employee>().Attach(employee);

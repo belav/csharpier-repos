@@ -433,15 +433,13 @@ namespace System.Net.Mail
             {
                 do
                 {
-                    IAsyncResult result = _parent
-                        ._bufferedStream
-                        .BeginRead(
-                            _parent._byteBuffer!,
-                            0,
-                            _parent._byteBuffer!.Length,
-                            s_readCallback,
-                            this
-                        );
+                    IAsyncResult result = _parent._bufferedStream.BeginRead(
+                        _parent._byteBuffer!,
+                        0,
+                        _parent._byteBuffer!.Length,
+                        s_readCallback,
+                        this
+                    );
                     if (!result.CompletedSynchronously)
                     {
                         return;
@@ -522,9 +520,11 @@ namespace System.Net.Mail
 
                         if (_oneLine)
                         {
-                            _parent
-                                ._bufferedStream
-                                .Push(_parent._byteBuffer!, start, _read - start);
+                            _parent._bufferedStream.Push(
+                                _parent._byteBuffer!,
+                                start,
+                                _read - start
+                            );
                             InvokeCallback();
                             return false;
                         }

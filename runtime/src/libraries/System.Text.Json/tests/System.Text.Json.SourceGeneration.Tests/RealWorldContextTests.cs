@@ -621,10 +621,8 @@ namespace System.Text.Json.SourceGeneration.Tests
             {
                 Assert.Equal(expected.DatesAvailable[i], obj.DatesAvailable[i]);
             }
-            List<KeyValuePair<string, HighLowTemps>> expectedTemperatureRanges = expected
-                .TemperatureRanges
-                .OrderBy(kv => kv.Key)
-                .ToList();
+            List<KeyValuePair<string, HighLowTemps>> expectedTemperatureRanges =
+                expected.TemperatureRanges.OrderBy(kv => kv.Key).ToList();
             List<KeyValuePair<string, HighLowTemps>> objTemperatureRanges = obj.TemperatureRanges
                 .OrderBy(kv => kv.Key)
                 .ToList();

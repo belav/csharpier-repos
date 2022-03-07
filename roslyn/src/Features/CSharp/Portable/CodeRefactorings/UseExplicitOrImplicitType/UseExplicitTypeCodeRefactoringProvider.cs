@@ -42,9 +42,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.UseExplicitType
             SemanticModel semanticModel,
             CancellationToken cancellationToken
         ) =>
-            CSharpUseExplicitTypeHelper
-                .Instance
-                .FindAnalyzableType(node, semanticModel, cancellationToken);
+            CSharpUseExplicitTypeHelper.Instance.FindAnalyzableType(
+                node,
+                semanticModel,
+                cancellationToken
+            );
 
         protected override TypeStyleResult AnalyzeTypeName(
             TypeSyntax typeName,
@@ -52,9 +54,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.UseExplicitType
             OptionSet optionSet,
             CancellationToken cancellationToken
         ) =>
-            CSharpUseExplicitTypeHelper
-                .Instance
-                .AnalyzeTypeName(typeName, semanticModel, optionSet, cancellationToken);
+            CSharpUseExplicitTypeHelper.Instance.AnalyzeTypeName(
+                typeName,
+                semanticModel,
+                optionSet,
+                cancellationToken
+            );
 
         protected override Task HandleDeclarationAsync(
             Document document,

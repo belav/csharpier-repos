@@ -1922,13 +1922,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ) where TEntity : class
         {
             var model = CreateModelBuilder();
-            var property =
-                model
-                    .Entity<TEntity>()
-                    .Ignore("Reference")
-                    .Ignore("Collection")
-                    .Property<int>(propertyName)
-                    .Metadata;
+            var property = model
+                .Entity<TEntity>()
+                .Ignore("Reference")
+                .Ignore("Collection")
+                .Property<int>(propertyName)
+                .Metadata;
 
             property.SetField(fieldName);
             Assert.False(property.IsShadowProperty());

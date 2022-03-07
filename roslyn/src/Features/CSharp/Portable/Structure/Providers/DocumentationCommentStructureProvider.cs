@@ -31,9 +31,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             var span = TextSpan.FromBounds(startPos, endPos);
 
             var bannerLength = options.MaximumBannerLength;
-            var bannerText = CSharpFileBannerFacts
-                .Instance
-                .GetBannerText(documentationComment, bannerLength, cancellationToken);
+            var bannerText = CSharpFileBannerFacts.Instance.GetBannerText(
+                documentationComment,
+                bannerLength,
+                cancellationToken
+            );
 
             spans.Add(
                 new BlockSpan(

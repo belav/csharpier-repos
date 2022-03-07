@@ -33,8 +33,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
     [Shared]
     internal partial class EnumAndCompletionListTagCompletionProvider : LSPCompletionProvider
     {
-        private static readonly CompletionItemRules s_enumTypeRules = CompletionItemRules
-            .Default
+        private static readonly CompletionItemRules s_enumTypeRules = CompletionItemRules.Default
             .WithCommitCharacterRules(
                 ImmutableArray.Create(
                     CharacterSetModificationRule.Create(CharacterSetModificationKind.Replace, '.')
@@ -351,10 +350,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     var previousToken = token.GetPreviousToken();
                     if (previousToken.Parent != null)
                     {
-                        var symbol =
-                            semanticModel
-                                .GetSymbolInfo(previousToken.Parent, cancellationToken)
-                                .Symbol;
+                        var symbol = semanticModel
+                            .GetSymbolInfo(previousToken.Parent, cancellationToken)
+                            .Symbol;
 
                         if (
                             symbol?.Kind == SymbolKind.Field
@@ -408,11 +406,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             )
                 return null;
 
-            var documentation = CodeAnalysis
-                .Shared
-                .Utilities
-                .DocumentationComment
-                .FromXmlFragment(xmlText);
+            var documentation = CodeAnalysis.Shared.Utilities.DocumentationComment.FromXmlFragment(
+                xmlText
+            );
 
             var completionListType =
                 documentation.CompletionListCref != null

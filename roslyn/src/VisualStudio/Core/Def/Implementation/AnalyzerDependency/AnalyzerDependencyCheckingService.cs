@@ -90,8 +90,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         public void ReanalyzeSolutionForConflicts()
         {
             var solution = _workspace.CurrentSolution;
-            var currentAnalyzerPaths = solution
-                .Projects
+            var currentAnalyzerPaths = solution.Projects
                 .SelectMany(p => p.AnalyzerReferences)
                 .OfType<AnalyzerFileReference>()
                 .Select(a => a.FullPath)
@@ -137,8 +136,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             CancellationToken cancellationToken
         )
         {
-            var loadedAssemblies = AppDomain
-                .CurrentDomain
+            var loadedAssemblies = AppDomain.CurrentDomain
                 .GetAssemblies()
                 .Select(assembly => AssemblyIdentity.FromAssemblyDefinition(assembly));
             var loadedAssembliesList = new IgnorableAssemblyIdentityList(loadedAssemblies);
@@ -175,8 +173,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 cancellationToken.ThrowIfCancellationRequested();
 
                 var analyzerFilePaths = new HashSet<string>(
-                    project
-                        .AnalyzerReferences
+                    project.AnalyzerReferences
                         .OfType<AnalyzerFileReference>()
                         .Select(f => f.FullPath),
                     StringComparer.OrdinalIgnoreCase
@@ -309,9 +306,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         {
             public AssemblyIdentity ApplyBindingRedirects(AssemblyIdentity originalIdentity)
             {
-                var redirectedAssemblyName = AppDomain
-                    .CurrentDomain
-                    .ApplyPolicy(originalIdentity.ToString());
+                var redirectedAssemblyName = AppDomain.CurrentDomain.ApplyPolicy(
+                    originalIdentity.ToString()
+                );
                 if (
                     AssemblyIdentity.TryParseDisplayName(
                         redirectedAssemblyName,

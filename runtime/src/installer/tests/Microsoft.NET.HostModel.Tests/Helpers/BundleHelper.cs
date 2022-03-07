@@ -292,18 +292,16 @@ namespace BundleTests.Helpers
         public static void AddEmptyContentToApp(TestProjectFixture fixture)
         {
             XDocument projectDoc = XDocument.Load(fixture.TestProject.ProjectFile);
-            projectDoc
-                .Root
-                .Add(
+            projectDoc.Root.Add(
+                new XElement(
+                    "ItemGroup",
                     new XElement(
-                        "ItemGroup",
-                        new XElement(
-                            "Content",
-                            new XAttribute("Include", "empty.txt"),
-                            new XElement("CopyToOutputDirectory", "PreserveNewest")
-                        )
+                        "Content",
+                        new XAttribute("Include", "empty.txt"),
+                        new XElement("CopyToOutputDirectory", "PreserveNewest")
                     )
-                );
+                )
+            );
             projectDoc.Save(fixture.TestProject.ProjectFile);
             File.WriteAllBytes(
                 Path.Combine(fixture.TestProject.Location, "empty.txt"),

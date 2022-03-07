@@ -859,12 +859,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             var columnMap = new Dictionary<PropertyInfo, AddColumnOperation>();
             foreach (var property in typeof(TColumns).GetTypeInfo().DeclaredProperties)
             {
-                var addColumnOperation =
-                    (
-                        (IInfrastructure<AddColumnOperation>)property
-                            .GetMethod!
-                            .Invoke(columnsObject, null)!
-                    ).Instance;
+                var addColumnOperation = (
+                    (IInfrastructure<AddColumnOperation>)property.GetMethod!.Invoke(
+                        columnsObject,
+                        null
+                    )!
+                ).Instance;
                 if (addColumnOperation.Name == null)
                 {
                     addColumnOperation.Name = property.Name;

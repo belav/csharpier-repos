@@ -103,9 +103,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             if (testHost == TestHost.OutOfProcess)
             {
-                var remoteHostProvider = (InProcRemoteHostClientProvider)workspace
-                    .Services
-                    .GetRequiredService<IRemoteHostClientProvider>();
+                var remoteHostProvider =
+                    (InProcRemoteHostClientProvider)workspace.Services.GetRequiredService<IRemoteHostClientProvider>();
                 remoteHostProvider.TraceListener = new XunitTraceListener(_logger);
             }
 
@@ -121,8 +120,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var pid = ProjectId.CreateNewId();
             var workspace = CreateWorkspace(testHost);
 
-            solution = workspace
-                .CurrentSolution
+            solution = workspace.CurrentSolution
                 .AddProject(pid, "TestCases", "TestCases", LanguageNames.CSharp)
                 .AddMetadataReference(pid, MscorlibRef);
             for (var i = 0; i < sourceTexts.Length; i++)

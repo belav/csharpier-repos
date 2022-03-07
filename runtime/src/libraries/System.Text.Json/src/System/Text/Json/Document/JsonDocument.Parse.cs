@@ -514,9 +514,10 @@ namespace System.Text.Json
 
                         if (sequence.IsEmpty)
                         {
-                            valueSpan = reader
-                                .OriginalSpan
-                                .Slice(checked((int)startingOffset), checked((int)totalLength));
+                            valueSpan = reader.OriginalSpan.Slice(
+                                checked((int)startingOffset),
+                                checked((int)totalLength)
+                            );
                         }
                         else
                         {
@@ -846,9 +847,7 @@ namespace System.Text.Json
                         rented = ArrayPool<byte>.Shared.Rent(checked(toReturn.Length * 2));
                         Buffer.BlockCopy(toReturn, 0, rented, 0, toReturn.Length);
                         // Holds document content, clear it.
-                        ArrayPool<byte>
-                            .Shared
-                            .Return(toReturn, clearArray: true);
+                        ArrayPool<byte>.Shared.Return(toReturn, clearArray: true);
                     }
 
                     lastRead = stream.Read(rented, written, rented.Length - written);
@@ -942,9 +941,7 @@ namespace System.Text.Json
                         rented = ArrayPool<byte>.Shared.Rent(toReturn.Length * 2);
                         Buffer.BlockCopy(toReturn, 0, rented, 0, toReturn.Length);
                         // Holds document content, clear it.
-                        ArrayPool<byte>
-                            .Shared
-                            .Return(toReturn, clearArray: true);
+                        ArrayPool<byte>.Shared.Return(toReturn, clearArray: true);
                     }
 
                     lastRead = await stream

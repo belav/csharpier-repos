@@ -29,8 +29,9 @@ namespace Microsoft.CSharp.RuntimeBinder
             {
                 lock (s_bindLock)
                 {
-                    context =
-                        ((AggregateType)SymbolTable.GetCTypeFromType(contextType)).OwningAggregate;
+                    context = (
+                        (AggregateType)SymbolTable.GetCTypeFromType(contextType)
+                    ).OwningAggregate;
                 }
             }
             else
@@ -918,8 +919,9 @@ namespace Microsoft.CSharp.RuntimeBinder
                     eventCType = swtEvent.Event().type;
                 }
 
-                Type eventType =
-                    TypeManager.SubstType(eventCType, swtEvent.Ats).AssociatedSystemType;
+                Type eventType = TypeManager
+                    .SubstType(eventCType, swtEvent.Ats)
+                    .AssociatedSystemType;
 
                 if (eventType != null)
                 {
@@ -967,9 +969,10 @@ namespace Microsoft.CSharp.RuntimeBinder
         private static void CheckForConditionalMethodError(ExprCall call)
         {
             MethodSymbol method = call.MethWithInst.Meth();
-            object[] conditions = method
-                .AssociatedMemberInfo
-                .GetCustomAttributes(typeof(ConditionalAttribute), true);
+            object[] conditions = method.AssociatedMemberInfo.GetCustomAttributes(
+                typeof(ConditionalAttribute),
+                true
+            );
             if (conditions.Length > 0)
             {
                 throw Error.BindCallToConditionalMethod(method.name);
@@ -1009,12 +1012,17 @@ namespace Microsoft.CSharp.RuntimeBinder
             // we're binding against the base method, and the derived method may change the
             // generic arguments.
             TypeArray parameters = TypeManager.SubstTypeArray(methprop.Params, type, typeArgs);
-            methprop = ExpressionBinder
-                .GroupToArgsBinder
-                .FindMostDerivedMethod(methprop, callingObject.Type);
-            ExpressionBinder
-                .GroupToArgsBinder
-                .ReOrderArgsForNamedArguments(methprop, parameters, type, memgroup, argInfo);
+            methprop = ExpressionBinder.GroupToArgsBinder.FindMostDerivedMethod(
+                methprop,
+                callingObject.Type
+            );
+            ExpressionBinder.GroupToArgsBinder.ReOrderArgsForNamedArguments(
+                methprop,
+                parameters,
+                type,
+                memgroup,
+                argInfo
+            );
             Expr pList = null;
 
             // We reordered, so make a new list of them and set them on the constructor.

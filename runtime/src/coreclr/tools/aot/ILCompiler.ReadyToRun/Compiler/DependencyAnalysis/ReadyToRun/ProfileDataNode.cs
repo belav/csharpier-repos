@@ -87,8 +87,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             bool relocsOnly
         )
         {
-            ProfileDataNode nextElementInList =
-                ((ProfileDataSectionNode)ContainingNode).NextElementToEncode;
+            ProfileDataNode nextElementInList = (
+                (ProfileDataSectionNode)ContainingNode
+            ).NextElementToEncode;
             if (nextElementInList != null)
                 dataBuilder.EmitPointerReloc(nextElementInList, -OffsetFromStartOfObjectToSymbol);
             else

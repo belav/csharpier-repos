@@ -21,14 +21,12 @@ namespace Microsoft.Win32.SafeHandles
             );
             SafeGssNameHandle retHandle;
             Interop.NetSecurityNative.Status minorStatus;
-            Interop.NetSecurityNative.Status status = Interop
-                .NetSecurityNative
-                .ImportUserName(
-                    out minorStatus,
-                    name,
-                    Encoding.UTF8.GetByteCount(name),
-                    out retHandle
-                );
+            Interop.NetSecurityNative.Status status = Interop.NetSecurityNative.ImportUserName(
+                out minorStatus,
+                name,
+                Encoding.UTF8.GetByteCount(name),
+                out retHandle
+            );
 
             if (status != Interop.NetSecurityNative.Status.GSS_S_COMPLETE)
             {
@@ -47,14 +45,12 @@ namespace Microsoft.Win32.SafeHandles
             );
             SafeGssNameHandle retHandle;
             Interop.NetSecurityNative.Status minorStatus;
-            Interop.NetSecurityNative.Status status = Interop
-                .NetSecurityNative
-                .ImportPrincipalName(
-                    out minorStatus,
-                    name,
-                    Encoding.UTF8.GetByteCount(name),
-                    out retHandle
-                );
+            Interop.NetSecurityNative.Status status = Interop.NetSecurityNative.ImportPrincipalName(
+                out minorStatus,
+                name,
+                Encoding.UTF8.GetByteCount(name),
+                out retHandle
+            );
 
             if (status != Interop.NetSecurityNative.Status.GSS_S_COMPLETE)
             {
@@ -73,9 +69,10 @@ namespace Microsoft.Win32.SafeHandles
         protected override bool ReleaseHandle()
         {
             Interop.NetSecurityNative.Status minorStatus;
-            Interop.NetSecurityNative.Status status = Interop
-                .NetSecurityNative
-                .ReleaseName(out minorStatus, ref handle);
+            Interop.NetSecurityNative.Status status = Interop.NetSecurityNative.ReleaseName(
+                out minorStatus,
+                ref handle
+            );
             SetHandle(IntPtr.Zero);
             return status == Interop.NetSecurityNative.Status.GSS_S_COMPLETE;
         }
@@ -132,22 +129,22 @@ namespace Microsoft.Win32.SafeHandles
                 Interop.NetSecurityNative.Status minorStatus;
                 if (string.IsNullOrEmpty(password))
                 {
-                    status = Interop
-                        .NetSecurityNative
-                        .InitiateCredSpNego(out minorStatus, userHandle, out retHandle);
+                    status = Interop.NetSecurityNative.InitiateCredSpNego(
+                        out minorStatus,
+                        userHandle,
+                        out retHandle
+                    );
                 }
                 else
                 {
-                    status = Interop
-                        .NetSecurityNative
-                        .InitiateCredWithPassword(
-                            out minorStatus,
-                            isNtlmOnly,
-                            userHandle,
-                            password,
-                            Encoding.UTF8.GetByteCount(password),
-                            out retHandle
-                        );
+                    status = Interop.NetSecurityNative.InitiateCredWithPassword(
+                        out minorStatus,
+                        isNtlmOnly,
+                        userHandle,
+                        password,
+                        Encoding.UTF8.GetByteCount(password),
+                        out retHandle
+                    );
                 }
 
                 if (status != Interop.NetSecurityNative.Status.GSS_S_COMPLETE)
@@ -170,9 +167,10 @@ namespace Microsoft.Win32.SafeHandles
         protected override bool ReleaseHandle()
         {
             Interop.NetSecurityNative.Status minorStatus;
-            Interop.NetSecurityNative.Status status = Interop
-                .NetSecurityNative
-                .ReleaseCred(out minorStatus, ref handle);
+            Interop.NetSecurityNative.Status status = Interop.NetSecurityNative.ReleaseCred(
+                out minorStatus,
+                ref handle
+            );
             SetHandle(IntPtr.Zero);
             return status == Interop.NetSecurityNative.Status.GSS_S_COMPLETE;
         }
@@ -195,9 +193,10 @@ namespace Microsoft.Win32.SafeHandles
         protected override unsafe bool ReleaseHandle()
         {
             Interop.NetSecurityNative.Status minorStatus;
-            Interop.NetSecurityNative.Status status = Interop
-                .NetSecurityNative
-                .DeleteSecContext(out minorStatus, ref handle);
+            Interop.NetSecurityNative.Status status = Interop.NetSecurityNative.DeleteSecContext(
+                out minorStatus,
+                ref handle
+            );
             SetHandle(IntPtr.Zero);
             return status == Interop.NetSecurityNative.Status.GSS_S_COMPLETE;
         }

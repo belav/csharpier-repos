@@ -344,9 +344,10 @@ namespace System.Text.RegularExpressions.Tests
                 .Invoke(
                     () =>
                     {
-                        AppDomain
-                            .CurrentDomain
-                            .SetData(RegexHelpers.DefaultMatchTimeout_ConfigKeyName, true);
+                        AppDomain.CurrentDomain.SetData(
+                            RegexHelpers.DefaultMatchTimeout_ConfigKeyName,
+                            true
+                        );
                         Assert.Throws<TypeInitializationException>(
                             () => Regex.InfiniteMatchTimeout
                         );
@@ -362,9 +363,10 @@ namespace System.Text.RegularExpressions.Tests
                 .Invoke(
                     () =>
                     {
-                        AppDomain
-                            .CurrentDomain
-                            .SetData(RegexHelpers.DefaultMatchTimeout_ConfigKeyName, TimeSpan.Zero);
+                        AppDomain.CurrentDomain.SetData(
+                            RegexHelpers.DefaultMatchTimeout_ConfigKeyName,
+                            TimeSpan.Zero
+                        );
                         Assert.Throws<TypeInitializationException>(
                             () => Regex.InfiniteMatchTimeout
                         );

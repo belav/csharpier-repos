@@ -173,10 +173,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                           // syntax, so strip it off
                           symbol.Signature.UnmanagedCallingConventionTypes.IsEmpty
                               ? null
-                              : symbol
-                                .Signature
-                                .UnmanagedCallingConventionTypes
-                                .Select(
+                              : symbol.Signature.UnmanagedCallingConventionTypes.Select(
                                     type => GetConventionForString(type.Name["CallConv".Length..])
                                 ),
 
@@ -203,9 +200,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                         );
                 }
 
-                var parameters = symbol
-                    .Signature
-                    .Parameters
+                var parameters = symbol.Signature.Parameters
                     .Select(
                         p =>
                             (

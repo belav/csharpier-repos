@@ -80,12 +80,11 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         public override async Task Projecting_correlated_collection_followed_by_Distinct(bool async)
         {
-            var message =
-                (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.Projecting_correlated_collection_followed_by_Distinct(async)
-                    )
-                ).Message;
+            var message = (
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => base.Projecting_correlated_collection_followed_by_Distinct(async)
+                )
+            ).Message;
 
             Assert.Equal(InMemoryStrings.DistinctOnSubqueryNotSupported, message);
         }
@@ -94,15 +93,14 @@ namespace Microsoft.EntityFrameworkCore.Query
             bool async
         )
         {
-            var message =
-                (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            base.Projecting_some_properties_as_well_as_correlated_collection_followed_by_Distinct(
-                                async
-                            )
-                    )
-                ).Message;
+            var message = (
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        base.Projecting_some_properties_as_well_as_correlated_collection_followed_by_Distinct(
+                            async
+                        )
+                )
+            ).Message;
 
             Assert.Equal(InMemoryStrings.DistinctOnSubqueryNotSupported, message);
         }

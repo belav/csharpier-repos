@@ -450,8 +450,9 @@ namespace System.Configuration
                 }
                 else if (attribute is SettingsProviderAttribute)
                 {
-                    string providerTypeName =
-                        ((SettingsProviderAttribute)attribute).ProviderTypeName;
+                    string providerTypeName = (
+                        (SettingsProviderAttribute)attribute
+                    ).ProviderTypeName;
                     Type providerType = Type.GetType(providerTypeName);
                     if (providerType == null)
                     {
@@ -471,8 +472,9 @@ namespace System.Configuration
                     }
 
                     settingsProvider.Initialize(null, null);
-                    settingsProvider.ApplicationName =
-                        ConfigurationManagerInternalFactory.Instance.ExeProductName;
+                    settingsProvider.ApplicationName = ConfigurationManagerInternalFactory
+                        .Instance
+                        .ExeProductName;
 
                     // See if we already have a provider of the same name in our collection. If so,
                     // re-use the existing instance, since we cannot have multiple providers of the same name.
@@ -486,8 +488,9 @@ namespace System.Configuration
                 }
                 else if (attribute is SettingsSerializeAsAttribute)
                 {
-                    settingsProperty.SerializeAs =
-                        ((SettingsSerializeAsAttribute)attribute).SerializeAs;
+                    settingsProperty.SerializeAs = (
+                        (SettingsSerializeAsAttribute)attribute
+                    ).SerializeAs;
                     explicitSerialize = true;
                 }
                 else
@@ -615,13 +618,15 @@ namespace System.Configuration
                                     {
                                         _context = new SettingsContext();
                                     }
-                                    _context["GroupName"] =
-                                        ((SettingsGroupNameAttribute)attr).GroupName;
+                                    _context["GroupName"] = (
+                                        (SettingsGroupNameAttribute)attr
+                                    ).GroupName;
                                 }
                                 else if (attr is SettingsProviderAttribute)
                                 {
-                                    string providerTypeName =
-                                        ((SettingsProviderAttribute)attr).ProviderTypeName;
+                                    string providerTypeName = (
+                                        (SettingsProviderAttribute)attr
+                                    ).ProviderTypeName;
                                     Type providerType = Type.GetType(providerTypeName);
                                     if (providerType != null)
                                     {
@@ -651,8 +656,9 @@ namespace System.Configuration
                                 }
                                 else if (attr is SettingsSerializeAsAttribute)
                                 {
-                                    _init.SerializeAs =
-                                        ((SettingsSerializeAsAttribute)attr).SerializeAs;
+                                    _init.SerializeAs = (
+                                        (SettingsSerializeAsAttribute)attr
+                                    ).SerializeAs;
                                     _explicitSerializeOnClass = true;
                                 }
                                 else
@@ -670,8 +676,9 @@ namespace System.Configuration
 
                     //Initialize the SettingsProvider
                     provider.Initialize(null, null);
-                    provider.ApplicationName =
-                        ConfigurationManagerInternalFactory.Instance.ExeProductName;
+                    provider.ApplicationName = ConfigurationManagerInternalFactory
+                        .Instance
+                        .ExeProductName;
                     _init.Provider = provider;
                 }
 

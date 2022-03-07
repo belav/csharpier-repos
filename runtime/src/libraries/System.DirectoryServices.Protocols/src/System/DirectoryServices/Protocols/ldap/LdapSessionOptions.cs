@@ -1020,12 +1020,10 @@ namespace System.DirectoryServices.Protocols
                             );
 
                             // Save it to the handle table.
-                            LdapConnection
-                                .s_handleTable
-                                .Add(
-                                    ReferralFromConnection,
-                                    new WeakReference(tempReferralConnection)
-                                );
+                            LdapConnection.s_handleTable.Add(
+                                ReferralFromConnection,
+                                new WeakReference(tempReferralConnection)
+                            );
                         }
                     }
                 }
@@ -1122,12 +1120,10 @@ namespace System.DirectoryServices.Protocols
                             );
 
                             // Save it to the handle table.
-                            LdapConnection
-                                .s_handleTable
-                                .Add(
-                                    referralFromConnection,
-                                    new WeakReference(tempReferralConnection)
-                                );
+                            LdapConnection.s_handleTable.Add(
+                                referralFromConnection,
+                                new WeakReference(tempReferralConnection)
+                            );
                         }
                     }
 
@@ -1163,9 +1159,10 @@ namespace System.DirectoryServices.Protocols
                             );
 
                             // Save it to the handle table.
-                            LdapConnection
-                                .s_handleTable
-                                .Add(newConnection, new WeakReference(tempNewConnection));
+                            LdapConnection.s_handleTable.Add(
+                                newConnection,
+                                new WeakReference(tempNewConnection)
+                            );
                         }
                     }
                 }

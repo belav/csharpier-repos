@@ -45,11 +45,9 @@ public class WebHostService : ServiceBase
         // Register callback for application stopping after we've
         // started the service, because otherwise we might introduce unwanted
         // race conditions.
-        _host
-            .Services
+        _host.Services
             .GetRequiredService<IHostApplicationLifetime>()
-            .ApplicationStopping
-            .Register(
+            .ApplicationStopping.Register(
                 () =>
                 {
                     if (!_stopRequestedByWindows)

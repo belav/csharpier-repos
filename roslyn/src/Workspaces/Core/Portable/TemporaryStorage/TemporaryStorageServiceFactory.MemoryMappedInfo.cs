@@ -122,13 +122,11 @@ namespace Microsoft.CodeAnalysis.Host
                                     typeof(MemoryMappedInfo).FullName
                                 );
 
-                            return memoryMappedFile
-                                .Target
-                                .CreateViewAccessor(
-                                    info.Offset,
-                                    info.Size,
-                                    MemoryMappedFileAccess.Read
-                                );
+                            return memoryMappedFile.Target.CreateViewAccessor(
+                                info.Offset,
+                                info.Size,
+                                MemoryMappedFileAccess.Read
+                            );
                         },
                         this
                     );
@@ -158,9 +156,11 @@ namespace Microsoft.CodeAnalysis.Host
                         if (memoryMappedFile is null)
                             throw new ObjectDisposedException(typeof(MemoryMappedInfo).FullName);
 
-                        return memoryMappedFile
-                            .Target
-                            .CreateViewStream(info.Offset, info.Size, MemoryMappedFileAccess.Write);
+                        return memoryMappedFile.Target.CreateViewStream(
+                            info.Offset,
+                            info.Size,
+                            MemoryMappedFileAccess.Write
+                        );
                     },
                     this
                 );

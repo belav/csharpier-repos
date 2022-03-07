@@ -104,11 +104,9 @@ namespace AutoMapper.UnitTests
                     {
                         var inner = ex.InnerException;
                         inner.ShouldBeOfType<InvalidOperationException>();
-                        inner
-                            .Message
-                            .ShouldBe(
-                                "You must use a Map overload that takes Action<IMappingOperationOptions>!"
-                            );
+                        inner.Message.ShouldBe(
+                            "You must use a Map overload that takes Action<IMappingOperationOptions>!"
+                        );
                     }
                 );
             }

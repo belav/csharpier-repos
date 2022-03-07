@@ -240,8 +240,9 @@ namespace System.Tests
             );
 
             var expected = new Version(major, minor, build, revision);
-            var actual =
-                ((OperatingSystem)getOSMethod.Invoke(null, new object[] { input })).Version;
+            var actual = (
+                (OperatingSystem)getOSMethod.Invoke(null, new object[] { input })
+            ).Version;
 
             Assert.Equal(expected, actual);
         }

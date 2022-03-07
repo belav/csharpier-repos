@@ -726,8 +726,9 @@ namespace System.Xml
                     }
                     else
                     {
-                        XmlAttributeCollection attrs =
-                            ((XmlAttribute)_node).OwnerElement!.Attributes;
+                        XmlAttributeCollection attrs = ((XmlAttribute)_node)
+                            .OwnerElement!
+                            .Attributes;
                         bool bFound = false;
                         foreach (XmlAttribute attr in attrs)
                         {
@@ -1383,9 +1384,10 @@ namespace System.Xml
             {
                 if (_column.ColumnMapping == MappingType.Attribute)
                 {
-                    n = _node
-                        .Attributes!
-                        .GetNamedItem(_column.EncodedColumnName, _column.Namespace);
+                    n = _node.Attributes!.GetNamedItem(
+                        _column.EncodedColumnName,
+                        _column.Namespace
+                    );
                 }
                 else
                 {

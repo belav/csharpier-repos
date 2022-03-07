@@ -180,8 +180,11 @@ namespace System.Text.Json.Serialization
                 if (state.Current.ObjectState < StackFrameObjectState.CreatedObject)
                 {
                     CreateCollection(ref reader, ref state, options);
-                    state.Current.JsonPropertyInfo =
-                        state.Current.JsonTypeInfo.ElementTypeInfo!.PropertyInfoForTypeInfo;
+                    state.Current.JsonPropertyInfo = state
+                        .Current
+                        .JsonTypeInfo
+                        .ElementTypeInfo!
+                        .PropertyInfoForTypeInfo;
                     state.Current.ObjectState = StackFrameObjectState.CreatedObject;
                 }
 
@@ -322,8 +325,11 @@ namespace System.Text.Json.Serialization
                         writer.WriteStartArray();
                     }
 
-                    state.Current.DeclaredJsonPropertyInfo =
-                        state.Current.JsonTypeInfo.ElementTypeInfo!.PropertyInfoForTypeInfo;
+                    state.Current.DeclaredJsonPropertyInfo = state
+                        .Current
+                        .JsonTypeInfo
+                        .ElementTypeInfo!
+                        .PropertyInfoForTypeInfo;
                 }
 
                 success = OnWriteResume(writer, value, options, ref state);

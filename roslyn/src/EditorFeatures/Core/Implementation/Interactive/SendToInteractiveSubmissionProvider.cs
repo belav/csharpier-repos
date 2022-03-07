@@ -47,8 +47,7 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
             var selectedSpans = args.TextView.Selection.IsEmpty
                 ? GetExpandedLineAsync(editorOptions, args, cancellationToken)
                   .WaitAndGetResult(cancellationToken)
-                : args.TextView
-                  .Selection
+                : args.TextView.Selection
                   .GetSnapshotSpansOnBuffer(args.SubjectBuffer)
                   .Where(ss => ss.Length > 0);
 
@@ -72,12 +71,8 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
         /// <summary>Returns the span for the currently selected line.</summary>
         private static IEnumerable<SnapshotSpan> GetSelectedLine(ITextView textView)
         {
-            var snapshotLine = textView
-                .Caret
-                .Position
-                .VirtualBufferPosition
-                .Position
-                .GetContainingLine();
+            var snapshotLine =
+                textView.Caret.Position.VirtualBufferPosition.Position.GetContainingLine();
             var span = new SnapshotSpan(snapshotLine.Start, snapshotLine.LengthIncludingLineBreak);
             return new NormalizedSnapshotSpanCollection(span);
         }
@@ -89,9 +84,8 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
             CancellationToken cancellationToken
         )
         {
-            var doc = args.SubjectBuffer
-                .CurrentSnapshot
-                .GetOpenDocumentInCurrentContextWithChanges();
+            var doc =
+                args.SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
             var semanticDocument = await SemanticDocument
                 .CreateAsync(doc, cancellationToken)
                 .ConfigureAwait(false);

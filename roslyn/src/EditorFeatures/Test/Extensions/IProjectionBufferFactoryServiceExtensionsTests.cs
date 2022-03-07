@@ -25,10 +25,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
         [Fact]
         public void TestCreateElisionBufferWithoutIndentation()
         {
-            var exportProvider = EditorTestCompositions
-                .Editor
-                .ExportProviderFactory
-                .CreateExportProvider();
+            var exportProvider =
+                EditorTestCompositions.Editor.ExportProviderFactory.CreateExportProvider();
             var contentTypeRegistryService =
                 exportProvider.GetExportedValue<IContentTypeRegistryService>();
             var textBuffer = exportProvider

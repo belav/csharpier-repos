@@ -35,8 +35,7 @@ public class HostingTests
             .ConfigureServices(
                 s =>
                     s.AddDataProtection()
-                        .Services
-                        .Replace(ServiceDescriptor.Singleton(mockKeyRing.Object))
+                        .Services.Replace(ServiceDescriptor.Singleton(mockKeyRing.Object))
                         .AddSingleton<IServer>(
                             new FakeServer(
                                 onStart: () =>
@@ -72,8 +71,7 @@ public class HostingTests
             .ConfigureServices(
                 s =>
                     s.AddDataProtection()
-                        .Services
-                        .Replace(ServiceDescriptor.Singleton(mockKeyRing.Object))
+                        .Services.Replace(ServiceDescriptor.Singleton(mockKeyRing.Object))
                         .AddSingleton<IServer>(
                             new FakeServer(
                                 onStart: () =>
@@ -116,8 +114,7 @@ public class HostingTests
             .ConfigureServices(
                 s =>
                     s.AddDataProtection()
-                        .Services
-                        .Replace(ServiceDescriptor.Singleton(mockKeyRing.Object))
+                        .Services.Replace(ServiceDescriptor.Singleton(mockKeyRing.Object))
                         .AddSingleton(mockServer.Object)
             )
             .ConfigureWebHost(b => b.UseStartup<TestStartup>());

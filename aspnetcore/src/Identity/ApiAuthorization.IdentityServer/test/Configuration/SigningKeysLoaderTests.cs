@@ -230,13 +230,11 @@ public class SigningKeysLoaderTests
         {
             store.Open(OpenFlags.ReadWrite);
             store.RemoveRange(
-                store
-                    .Certificates
-                    .Find(
-                        X509FindType.FindBySubjectName,
-                        "CN=SigningKeysLoaderTest",
-                        validOnly: false
-                    )
+                store.Certificates.Find(
+                    X509FindType.FindBySubjectName,
+                    "CN=SigningKeysLoaderTest",
+                    validOnly: false
+                )
             );
             store.Close();
         }
@@ -252,8 +250,7 @@ public class SigningKeysLoaderTests
                 var cert = new X509Certificate2(certificate, "aspnetcore", DefaultFlags);
                 if (
                     !(
-                        store
-                            .Certificates
+                        store.Certificates
                             .Find(X509FindType.FindByThumbprint, cert.Thumbprint, validOnly: false)
                             .Count > 0
                     )

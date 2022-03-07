@@ -34,8 +34,9 @@ namespace Microsoft.Interop
         public override ArgumentSyntax AsArgument(TypePositionInfo info, StubCodeContext context)
         {
             ExpressionSyntax windowsExpr = _windowsMarshaller.AsArgument(info, context).Expression;
-            ExpressionSyntax nonWindowsExpr =
-                _nonWindowsMarshaller.AsArgument(info, context).Expression;
+            ExpressionSyntax nonWindowsExpr = _nonWindowsMarshaller
+                .AsArgument(info, context)
+                .Expression;
 
             // If the Windows and non-Windows syntax are equivalent, just return one of them.
             if (windowsExpr.IsEquivalentTo(nonWindowsExpr))

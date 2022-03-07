@@ -281,9 +281,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
                         );
                     }
 
-                    Dependencies
-                        .Logger
-                        .ExecutionStrategyRetrying(ExceptionsEncountered, delay.Value, async: true);
+                    Dependencies.Logger.ExecutionStrategyRetrying(
+                        ExceptionsEncountered,
+                        delay.Value,
+                        async: true
+                    );
 
                     OnRetry();
 
@@ -430,9 +432,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
                         );
                     }
 
-                    Dependencies
-                        .Logger
-                        .ExecutionStrategyRetrying(ExceptionsEncountered, delay.Value, async: true);
+                    Dependencies.Logger.ExecutionStrategyRetrying(
+                        ExceptionsEncountered,
+                        delay.Value,
+                        async: true
+                    );
 
                     OnRetry();
 

@@ -15,8 +15,9 @@ namespace System.Web.Http
         public void SuppressDefaultHostAuthentication_InsertsPassiveAuthenticationMessageHandler()
         {
             // Arrange
-            DelegatingHandler existingHandler =
-                new Mock<DelegatingHandler>(MockBehavior.Strict).Object;
+            DelegatingHandler existingHandler = new Mock<DelegatingHandler>(
+                MockBehavior.Strict
+            ).Object;
 
             using (HttpConfiguration configuration = new HttpConfiguration())
             {

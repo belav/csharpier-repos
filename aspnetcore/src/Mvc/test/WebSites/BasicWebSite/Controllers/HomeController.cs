@@ -135,8 +135,7 @@ public class HomeController : Controller
     )
     {
         // Ensures that the entry assembly part is marked correctly.
-        var assemblyPartMetadata = applicationPartManager
-            .ApplicationParts
+        var assemblyPartMetadata = applicationPartManager.ApplicationParts
             .OfType<AssemblyPart>()
             .Select(part => part.Name)
             .ToArray();

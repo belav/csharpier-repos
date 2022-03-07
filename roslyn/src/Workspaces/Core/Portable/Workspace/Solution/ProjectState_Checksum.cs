@@ -80,10 +80,8 @@ namespace Microsoft.CodeAnalysis
                             cancellationToken
                         );
 
-                    var serializer = _solutionServices
-                        .Workspace
-                        .Services
-                        .GetService<ISerializerService>();
+                    var serializer =
+                        _solutionServices.Workspace.Services.GetService<ISerializerService>();
 
                     var infoChecksum = serializer.CreateChecksum(
                         ProjectInfo.Attributes,

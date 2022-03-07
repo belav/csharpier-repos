@@ -303,8 +303,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
             {
                 var projectId = ProjectId.CreateFromSerialized(projectIdGuid);
                 var documentId = DocumentId.CreateFromSerialized(projectId, documentIdGuid);
-                return _workspace
-                    .CurrentSolution
+                return _workspace.CurrentSolution
                     .GetDocumentAsync(documentId, includeSourceGenerated: true)
                     .AsTask();
             }

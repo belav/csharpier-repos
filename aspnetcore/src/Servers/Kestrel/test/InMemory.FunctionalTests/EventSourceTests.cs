@@ -90,8 +90,7 @@ public class EventSourceTests : LoggedTest
         Assert.Equal(2, requestsReceived);
 
         // Other tests executing in parallel may log events.
-        var events = _listener
-            .EventData
+        var events = _listener.EventData
             .Where(e => e != null && GetProperty(e, "connectionId") == connectionId)
             .ToList();
         var eventIndex = 0;
@@ -240,8 +239,7 @@ public class EventSourceTests : LoggedTest
         Assert.Equal(2, requestsReceived);
 
         // Other tests executing in parallel may log events.
-        var events = _listener
-            .EventData
+        var events = _listener.EventData
             .Where(e => e != null && GetProperty(e, "connectionId") == connectionId)
             .ToList();
         var eventIndex = 0;
@@ -374,8 +372,7 @@ public class EventSourceTests : LoggedTest
         Assert.NotNull(connectionId);
 
         // Other tests executing in parallel may log events.
-        var events = _listener
-            .EventData
+        var events = _listener.EventData
             .Where(e => e != null && GetProperty(e, "connectionId") == connectionId)
             .ToList();
         var eventIndex = 0;
@@ -483,8 +480,7 @@ public class EventSourceTests : LoggedTest
         Assert.NotNull(connectionId);
 
         // Other tests executing in parallel may log events.
-        var events = _listener
-            .EventData
+        var events = _listener.EventData
             .Where(e => e != null && GetProperty(e, "connectionId") == connectionId)
             .ToList();
         var eventIndex = 0;

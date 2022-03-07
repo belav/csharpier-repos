@@ -32,11 +32,9 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary
-                    .TestFramework
-                    .LogInformation(
-                        $"Vector256Int64AsGeneric_NInt: RunNotSupportedScenario failed to throw NotSupportedException."
-                    );
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector256Int64AsGeneric_NInt: RunNotSupportedScenario failed to throw NotSupportedException."
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 throw new Exception("One or more scenarios did not complete as expected.");

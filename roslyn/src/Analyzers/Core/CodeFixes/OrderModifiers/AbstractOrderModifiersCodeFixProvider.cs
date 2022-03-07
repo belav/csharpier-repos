@@ -45,8 +45,7 @@ namespace Microsoft.CodeAnalysis.OrderModifiers
 
         public override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            var syntaxTree = await context
-                .Document
+            var syntaxTree = await context.Document
                 .GetRequiredSyntaxTreeAsync(context.CancellationToken)
                 .ConfigureAwait(false);
             var syntaxNode = Location
@@ -72,10 +71,11 @@ namespace Microsoft.CodeAnalysis.OrderModifiers
             var tree = await document
                 .GetRequiredSyntaxTreeAsync(cancellationToken)
                 .ConfigureAwait(false);
-            var option = document
-                .Project
-                .AnalyzerOptions
-                .GetOption(_option, tree, cancellationToken);
+            var option = document.Project.AnalyzerOptions.GetOption(
+                _option,
+                tree,
+                cancellationToken
+            );
             if (!_helpers.TryGetOrComputePreferredOrder(option.Value, out var preferredOrder))
             {
                 return;

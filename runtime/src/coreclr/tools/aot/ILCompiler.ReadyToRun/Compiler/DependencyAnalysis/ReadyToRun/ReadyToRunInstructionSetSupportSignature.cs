@@ -20,13 +20,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         )
         {
             StringBuilder builder = new StringBuilder();
-            InstructionSet[] supportedInstructionSets = instructionSetSupport
-                .SupportedFlags
-                .ToArray();
+            InstructionSet[] supportedInstructionSets =
+                instructionSetSupport.SupportedFlags.ToArray();
             Array.Sort(supportedInstructionSets);
-            InstructionSet[] explicitlyUnsupportedInstructionSets = instructionSetSupport
-                .ExplicitlyUnsupportedFlags
-                .ToArray();
+            InstructionSet[] explicitlyUnsupportedInstructionSets =
+                instructionSetSupport.ExplicitlyUnsupportedFlags.ToArray();
             Array.Sort(explicitlyUnsupportedInstructionSets);
 
             bool addDelimeter = false;

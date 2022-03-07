@@ -118,9 +118,10 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
                     actions.Add(
                         new CodeAction.CodeActionWithNestedActions(
                             FeaturesResources.Add_parameter_to_constructor,
-                            result
-                                .RequiredParameterActions
-                                .Cast<AddConstructorParametersCodeAction, CodeAction>(),
+                            result.RequiredParameterActions.Cast<
+                                AddConstructorParametersCodeAction,
+                                CodeAction
+                            >(),
                             isInlinable: false
                         )
                     );
@@ -129,9 +130,10 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
                 actions.Add(
                     new CodeAction.CodeActionWithNestedActions(
                         FeaturesResources.Add_optional_parameter_to_constructor,
-                        result
-                            .OptionalParameterActions
-                            .Cast<AddConstructorParametersCodeAction, CodeAction>(),
+                        result.OptionalParameterActions.Cast<
+                            AddConstructorParametersCodeAction,
+                            CodeAction
+                        >(),
                         isInlinable: false
                     )
                 );
@@ -206,9 +208,8 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
                 bool useSubMenuName
             )
             {
-                var missingOptionalParameters = constructorCandidate
-                    .MissingParameters
-                    .SelectAsArray(
+                var missingOptionalParameters =
+                    constructorCandidate.MissingParameters.SelectAsArray(
                         p =>
                             CodeGenerationSymbolFactory.CreateParameterSymbol(
                                 attributes: default,
@@ -250,10 +251,9 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
                 return ImmutableArray<IntentProcessorResult>.Empty;
             }
 
-            var actions = addConstructorParametersResult
-                .Value
-                .RequiredParameterActions
-                .Concat(addConstructorParametersResult.Value.OptionalParameterActions);
+            var actions = addConstructorParametersResult.Value.RequiredParameterActions.Concat(
+                addConstructorParametersResult.Value.OptionalParameterActions
+            );
             if (actions.IsEmpty)
             {
                 return ImmutableArray<IntentProcessorResult>.Empty;

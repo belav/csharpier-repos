@@ -437,17 +437,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 {
                     return ArrayTypeSymbol.CreateSZArray(
                         _otherAssembly,
-                        symbol
-                            .ElementTypeWithAnnotations
-                            .WithTypeAndModifiers(otherElementType, otherModifiers)
+                        symbol.ElementTypeWithAnnotations.WithTypeAndModifiers(
+                            otherElementType,
+                            otherModifiers
+                        )
                     );
                 }
 
                 return ArrayTypeSymbol.CreateMDArray(
                     _otherAssembly,
-                    symbol
-                        .ElementTypeWithAnnotations
-                        .WithTypeAndModifiers(otherElementType, otherModifiers),
+                    symbol.ElementTypeWithAnnotations.WithTypeAndModifiers(
+                        otherElementType,
+                        otherModifiers
+                    ),
                     symbol.Rank,
                     symbol.Sizes,
                     symbol.LowerBounds
@@ -536,9 +538,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 var leftIdentity = left.Identity;
                 var rightIdentity = right.Identity;
 
-                return AssemblyIdentityComparer
-                        .SimpleNameComparer
-                        .Equals(leftIdentity.Name, rightIdentity.Name)
+                return AssemblyIdentityComparer.SimpleNameComparer.Equals(
+                        leftIdentity.Name,
+                        rightIdentity.Name
+                    )
                     && (left.AssemblyVersionPattern ?? leftIdentity.Version).Equals(
                         right.AssemblyVersionPattern ?? rightIdentity.Version
                     )
@@ -693,9 +696,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                     symbol.PointedAtTypeWithAnnotations.CustomModifiers
                 );
                 return new PointerTypeSymbol(
-                    symbol
-                        .PointedAtTypeWithAnnotations
-                        .WithTypeAndModifiers(otherPointedAtType, otherModifiers)
+                    symbol.PointedAtTypeWithAnnotations.WithTypeAndModifiers(
+                        otherPointedAtType,
+                        otherModifiers
+                    )
                 );
             }
 
@@ -743,12 +747,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                             VisitCustomModifiers(param.RefCustomModifiers)
                         );
                         otherParamsBuilder.Add(
-                            param
-                                .TypeWithAnnotations
-                                .WithTypeAndModifiers(
-                                    otherType,
-                                    VisitCustomModifiers(param.TypeWithAnnotations.CustomModifiers)
-                                )
+                            param.TypeWithAnnotations.WithTypeAndModifiers(
+                                otherType,
+                                VisitCustomModifiers(param.TypeWithAnnotations.CustomModifiers)
+                            )
                         );
                     }
 
@@ -937,9 +939,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                     )
                 );
                 Debug.Assert(
-                    other
-                        .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
-                        .All(t => t.CustomModifiers.IsEmpty)
+                    other.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.All(
+                        t => t.CustomModifiers.IsEmpty
+                    )
                 );
 
                 return type.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.SequenceEqual(
@@ -1238,17 +1240,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 {
                     return ArrayTypeSymbol.CreateSZArray(
                         symbol.BaseTypeNoUseSiteDiagnostics.ContainingAssembly,
-                        symbol
-                            .ElementTypeWithAnnotations
-                            .WithTypeAndModifiers(translatedElementType, translatedModifiers)
+                        symbol.ElementTypeWithAnnotations.WithTypeAndModifiers(
+                            translatedElementType,
+                            translatedModifiers
+                        )
                     );
                 }
 
                 return ArrayTypeSymbol.CreateMDArray(
                     symbol.BaseTypeNoUseSiteDiagnostics.ContainingAssembly,
-                    symbol
-                        .ElementTypeWithAnnotations
-                        .WithTypeAndModifiers(translatedElementType, translatedModifiers),
+                    symbol.ElementTypeWithAnnotations.WithTypeAndModifiers(
+                        translatedElementType,
+                        translatedModifiers
+                    ),
                     symbol.Rank,
                     symbol.Sizes,
                     symbol.LowerBounds
@@ -1302,9 +1306,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                     symbol.PointedAtTypeWithAnnotations.CustomModifiers
                 );
                 return new PointerTypeSymbol(
-                    symbol
-                        .PointedAtTypeWithAnnotations
-                        .WithTypeAndModifiers(translatedPointedAtType, translatedModifiers)
+                    symbol.PointedAtTypeWithAnnotations.WithTypeAndModifiers(
+                        translatedPointedAtType,
+                        translatedModifiers
+                    )
                 );
             }
 
@@ -1336,12 +1341,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                     {
                         var translatedParamType = (TypeSymbol)Visit(param.Type);
                         translatedParamsBuilder.Add(
-                            param
-                                .TypeWithAnnotations
-                                .WithTypeAndModifiers(
-                                    translatedParamType,
-                                    VisitCustomModifiers(param.TypeWithAnnotations.CustomModifiers)
-                                )
+                            param.TypeWithAnnotations.WithTypeAndModifiers(
+                                translatedParamType,
+                                VisitCustomModifiers(param.TypeWithAnnotations.CustomModifiers)
+                            )
                         );
                         translatedParamRefCustomModifiersBuilder.Add(
                             VisitCustomModifiers(param.RefCustomModifiers)

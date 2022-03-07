@@ -114,13 +114,11 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             )
             {
                 System.Security.Cryptography.Pkcs.Asn1.CadesIssuerSerial tmpIssuerSerial;
-                System
-                    .Security
-                    .Cryptography
-                    .Pkcs
-                    .Asn1
-                    .CadesIssuerSerial
-                    .Decode(ref sequenceReader, rebind, out tmpIssuerSerial);
+                System.Security.Cryptography.Pkcs.Asn1.CadesIssuerSerial.Decode(
+                    ref sequenceReader,
+                    rebind,
+                    out tmpIssuerSerial
+                );
                 decoded.IssuerSerial = tmpIssuerSerial;
             }
 

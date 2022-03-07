@@ -29,9 +29,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             );
             Assert.Null(entityTypeBuilder.Metadata.GetDiscriminatorValue());
 
-            var baseTypeBuilder = entityTypeBuilder
-                .ModelBuilder
-                .Entity(typeof(EntityBase), ConfigurationSource.Explicit);
+            var baseTypeBuilder = entityTypeBuilder.ModelBuilder.Entity(
+                typeof(EntityBase),
+                ConfigurationSource.Explicit
+            );
             Assert.Same(
                 entityTypeBuilder,
                 entityTypeBuilder.HasBaseType(
@@ -78,9 +79,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             );
             Assert.Null(entityTypeBuilder.Metadata.GetDiscriminatorValue());
 
-            var baseTypeBuilder = entityTypeBuilder
-                .ModelBuilder
-                .Entity(typeof(EntityBase), ConfigurationSource.Explicit);
+            var baseTypeBuilder = entityTypeBuilder.ModelBuilder.Entity(
+                typeof(EntityBase),
+                ConfigurationSource.Explicit
+            );
             Assert.Same(
                 entityTypeBuilder,
                 entityTypeBuilder.HasBaseType(
@@ -91,9 +93,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             RunConvention(entityTypeBuilder, null);
 
-            var derivedTypeBuilder = entityTypeBuilder
-                .ModelBuilder
-                .Entity(typeof(DerivedEntity), ConfigurationSource.Explicit);
+            var derivedTypeBuilder = entityTypeBuilder.ModelBuilder.Entity(
+                typeof(DerivedEntity),
+                ConfigurationSource.Explicit
+            );
             Assert.Same(
                 derivedTypeBuilder,
                 derivedTypeBuilder.HasBaseType(
@@ -103,8 +106,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             );
             Assert.Same(
                 derivedTypeBuilder.Metadata,
-                entityTypeBuilder
-                    .ModelBuilder
+                entityTypeBuilder.ModelBuilder
                     .Entity(typeof(DerivedEntity).FullName, ConfigurationSource.Convention)
                     .Metadata
             );
@@ -157,9 +159,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var entityTypeBuilder = CreateInternalEntityTypeBuilder<Entity>();
 
-            var baseTypeBuilder = entityTypeBuilder
-                .ModelBuilder
-                .Entity(typeof(EntityBase), ConfigurationSource.DataAnnotation);
+            var baseTypeBuilder = entityTypeBuilder.ModelBuilder.Entity(
+                typeof(EntityBase),
+                ConfigurationSource.DataAnnotation
+            );
             entityTypeBuilder.HasBaseType(
                 baseTypeBuilder.Metadata,
                 ConfigurationSource.DataAnnotation
@@ -187,9 +190,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var entityTypeBuilder = CreateInternalEntityTypeBuilder<Entity>();
 
-            var baseTypeBuilder = entityTypeBuilder
-                .ModelBuilder
-                .Entity(typeof(EntityBase), ConfigurationSource.DataAnnotation);
+            var baseTypeBuilder = entityTypeBuilder.ModelBuilder.Entity(
+                typeof(EntityBase),
+                ConfigurationSource.DataAnnotation
+            );
             entityTypeBuilder.HasBaseType(
                 baseTypeBuilder.Metadata,
                 ConfigurationSource.DataAnnotation
@@ -219,9 +223,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             new EntityTypeBuilder(entityTypeBuilder.Metadata).HasDiscriminator("T", typeof(string));
 
-            var baseTypeBuilder = entityTypeBuilder
-                .ModelBuilder
-                .Entity(typeof(EntityBase), ConfigurationSource.Convention);
+            var baseTypeBuilder = entityTypeBuilder.ModelBuilder.Entity(
+                typeof(EntityBase),
+                ConfigurationSource.Convention
+            );
             entityTypeBuilder.HasBaseType(baseTypeBuilder.Metadata, ConfigurationSource.Convention);
 
             RunConvention(entityTypeBuilder, null);
@@ -267,8 +272,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         }
 
         private ProviderConventionSetBuilderDependencies CreateDependencies() =>
-            InMemoryTestHelpers
-                .Instance
+            InMemoryTestHelpers.Instance
                 .CreateContextServices()
                 .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
@@ -285,8 +289,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
         private static InternalEntityTypeBuilder CreateInternalEntityTypeBuilder<T>()
         {
-            var modelBuilder = (InternalModelBuilder)InMemoryTestHelpers
-                .Instance
+            var modelBuilder = (InternalModelBuilder)InMemoryTestHelpers.Instance
                 .CreateConventionBuilder()
                 .GetInfrastructure();
 

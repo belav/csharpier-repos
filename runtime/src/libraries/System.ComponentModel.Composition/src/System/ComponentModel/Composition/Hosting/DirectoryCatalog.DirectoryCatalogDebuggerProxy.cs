@@ -27,9 +27,7 @@ namespace System.ComponentModel.Composition.Hosting
             {
                 get
                 {
-                    return _catalog
-                        ._assemblyCatalogs
-                        .Values
+                    return _catalog._assemblyCatalogs.Values
                         .Select(catalog => catalog.Assembly)
                         .ToReadOnlyCollection();
                 }

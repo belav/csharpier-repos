@@ -17,8 +17,7 @@ internal class DesignTimeDirectiveTargetExtension : IDesignTimeDirectiveTargetEx
         DesignTimeDirectiveIntermediateNode directiveNode
     )
     {
-        context
-            .CodeWriter
+        context.CodeWriter
             .WriteLine("#pragma warning disable 219")
             .WriteLine($"private void {DirectiveTokenHelperMethodName}() {{");
 
@@ -87,8 +86,7 @@ internal class DesignTimeDirectiveTargetExtension : IDesignTimeDirectiveTargetEx
                     using (context.CodeWriter.BuildLinePragma(node.Source, context))
                     {
                         context.AddSourceMappingFor(node);
-                        context
-                            .CodeWriter
+                        context.CodeWriter
                             .Write(node.Content)
                             .Write(" ")
                             .WriteStartAssignment(TypeHelper)
@@ -115,8 +113,7 @@ internal class DesignTimeDirectiveTargetExtension : IDesignTimeDirectiveTargetEx
                     // global::System.Object {node.content} = null;
                     using (context.CodeWriter.BuildLinePragma(node.Source, context))
                     {
-                        context
-                            .CodeWriter
+                        context.CodeWriter
                             .Write("global::")
                             .Write(typeof(object).FullName)
                             .Write(" ");
@@ -145,8 +142,7 @@ internal class DesignTimeDirectiveTargetExtension : IDesignTimeDirectiveTargetEx
                     // global::System.Object __typeHelper = nameof({node.Content});
                     using (context.CodeWriter.BuildLinePragma(node.Source, context))
                     {
-                        context
-                            .CodeWriter
+                        context.CodeWriter
                             .Write("global::")
                             .Write(typeof(object).FullName)
                             .Write(" ")
@@ -164,8 +160,7 @@ internal class DesignTimeDirectiveTargetExtension : IDesignTimeDirectiveTargetEx
                     // global::System.Object __typeHelper = "{node.Content}";
                     using (context.CodeWriter.BuildLinePragma(node.Source, context))
                     {
-                        context
-                            .CodeWriter
+                        context.CodeWriter
                             .Write("global::")
                             .Write(typeof(object).FullName)
                             .Write(" ")
@@ -191,8 +186,7 @@ internal class DesignTimeDirectiveTargetExtension : IDesignTimeDirectiveTargetEx
                     // global::System.Boolean __typeHelper = {node.Content};
                     using (context.CodeWriter.BuildLinePragma(node.Source, context))
                     {
-                        context
-                            .CodeWriter
+                        context.CodeWriter
                             .Write("global::")
                             .Write(typeof(bool).FullName)
                             .Write(" ")
@@ -218,8 +212,7 @@ internal class DesignTimeDirectiveTargetExtension : IDesignTimeDirectiveTargetEx
                         var genericTypeParamName = (DirectiveTokenIntermediateNode)parent.Children[
                             currentIndex - 1
                         ];
-                        context
-                            .CodeWriter
+                        context.CodeWriter
                             .Write("void __TypeConstraints_")
                             .Write(genericTypeParamName.Content)
                             .Write("<")

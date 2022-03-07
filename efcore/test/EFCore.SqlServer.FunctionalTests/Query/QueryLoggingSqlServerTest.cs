@@ -70,8 +70,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             context
                 .GetInfrastructure()
                 .GetRequiredService<IDiagnosticsLogger<DbLoggerCategory.Query>>()
-                .Options
-                .IsSensitiveDataLoggingWarned = false;
+                .Options.IsSensitiveDataLoggingWarned = false;
             // ReSharper disable once ConvertToConstant.Local
             var city = "Redmond";
 

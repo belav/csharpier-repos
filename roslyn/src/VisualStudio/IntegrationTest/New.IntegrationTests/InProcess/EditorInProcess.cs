@@ -190,17 +190,20 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 
         public async Task InvokeCodeActionListAsync(CancellationToken cancellationToken)
         {
-            await TestServices
-                .Workspace
-                .WaitForAsyncOperationsAsync(FeatureAttribute.SolutionCrawler, cancellationToken);
-            await TestServices
-                .Workspace
-                .WaitForAsyncOperationsAsync(FeatureAttribute.DiagnosticService, cancellationToken);
+            await TestServices.Workspace.WaitForAsyncOperationsAsync(
+                FeatureAttribute.SolutionCrawler,
+                cancellationToken
+            );
+            await TestServices.Workspace.WaitForAsyncOperationsAsync(
+                FeatureAttribute.DiagnosticService,
+                cancellationToken
+            );
 
             await ShowLightBulbAsync(cancellationToken);
-            await TestServices
-                .Workspace
-                .WaitForAsyncOperationsAsync(FeatureAttribute.LightBulb, cancellationToken);
+            await TestServices.Workspace.WaitForAsyncOperationsAsync(
+                FeatureAttribute.LightBulb,
+                cancellationToken
+            );
         }
 
         public async Task<bool> IsLightBulbSessionExpandedAsync(CancellationToken cancellationToken)
@@ -622,9 +625,10 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 
         private async Task WaitForCompletionSetAsync(CancellationToken cancellationToken)
         {
-            await TestServices
-                .Workspace
-                .WaitForAsyncOperationsAsync(FeatureAttribute.CompletionSet, cancellationToken);
+            await TestServices.Workspace.WaitForAsyncOperationsAsync(
+                FeatureAttribute.CompletionSet,
+                cancellationToken
+            );
         }
 
         private async Task<IWpfTextViewHost> GetActiveTextViewHostAsync(

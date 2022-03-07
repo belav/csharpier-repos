@@ -60,8 +60,7 @@ namespace System.Linq.Tests
         [Fact]
         public static void CachedReflectionInfoMethodsNoAnnotations()
         {
-            IEnumerable<MethodInfo> methods = typeof(Queryable)
-                .Assembly
+            IEnumerable<MethodInfo> methods = typeof(Queryable).Assembly
                 .GetType("System.Linq.CachedReflectionInfo")
                 .GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static)
                 .Where(m => m.GetParameters().Length > 0);
@@ -116,9 +115,9 @@ namespace System.Linq.Tests
 
                 // The generic type should not have a 'where new()' constraint since that will tell the trimmer to keep the ctor
                 Assert.False(
-                    genericType
-                        .GenericParameterAttributes
-                        .HasFlag(GenericParameterAttributes.DefaultConstructorConstraint)
+                    genericType.GenericParameterAttributes.HasFlag(
+                        GenericParameterAttributes.DefaultConstructorConstraint
+                    )
                 );
             }
         }

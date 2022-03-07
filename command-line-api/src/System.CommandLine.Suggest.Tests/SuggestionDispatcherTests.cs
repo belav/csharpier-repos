@@ -40,8 +40,7 @@ namespace System.CommandLine.Suggest.Tests
         {
             string receivedTargetExeName = null;
 
-            string[] args = CommandLineStringSplitter
-                .Instance
+            string[] args = CommandLineStringSplitter.Instance
                 .Split($@"get -p 12 -e ""{CurrentExeFullPath()}"" -- ""{_currentExeName} add""")
                 .ToArray();
 
@@ -133,9 +132,9 @@ namespace System.CommandLine.Suggest.Tests
         {
             string[] args = Enumerable.ToArray(
                 (
-                    CommandLineStringSplitter
-                        .Instance
-                        .Split(@"get -p 10 -e ""testcli.exe"" -- command op")
+                    CommandLineStringSplitter.Instance.Split(
+                        @"get -p 10 -e ""testcli.exe"" -- command op"
+                    )
                 )
             );
             (await InvokeAsync(args, new TestSuggestionRegistration())).Should().BeEmpty();
@@ -149,8 +148,7 @@ namespace System.CommandLine.Suggest.Tests
             dispatcher.Timeout = TimeSpan.FromMilliseconds(1);
             var testConsole = new TestConsole();
 
-            var args = CommandLineStringSplitter
-                .Instance
+            var args = CommandLineStringSplitter.Instance
                 .Split($@"get -p 0 -e ""{_currentExeName}"" -- {_currentExeName} add")
                 .ToArray();
 
@@ -176,8 +174,7 @@ namespace System.CommandLine.Suggest.Tests
 
             await dispatcher.InvokeAsync(new[] { "list" }, testConsole);
 
-            testConsole
-                .Out
+            testConsole.Out
                 .ToString()
                 .Should()
                 .Be(
@@ -191,8 +188,7 @@ namespace System.CommandLine.Suggest.Tests
             var provider = new TestSuggestionRegistration();
             var dispatcher = new SuggestionDispatcher(provider);
 
-            var args = CommandLineStringSplitter
-                .Instance
+            var args = CommandLineStringSplitter.Instance
                 .Split(
                     $"register --command-path \"{_netExeFullPath}\" --suggestion-command \"net-suggestions complete\""
                 )
@@ -210,8 +206,7 @@ namespace System.CommandLine.Suggest.Tests
             var provider = new TestSuggestionRegistration();
             var dispatcher = new SuggestionDispatcher(provider);
 
-            var args = CommandLineStringSplitter
-                .Instance
+            var args = CommandLineStringSplitter.Instance
                 .Split(
                     $"register --command-path \"{_netExeFullPath}\" --suggestion-command \"net-suggestions complete\""
                 )

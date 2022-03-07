@@ -50,8 +50,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
         public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
-            var documentOptionSet = await context
-                .Document
+            var documentOptionSet = await context.Document
                 .GetOptionsAsync(context.CancellationToken)
                 .ConfigureAwait(false);
 

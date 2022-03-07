@@ -20,18 +20,14 @@ namespace Sample
             "System.Runtime.InteropServices.JavaScript.Runtime",
             "System.Private.Runtime.InteropServices.JavaScript"
         )]
-        static Type jsRuntimeType = System
-            .Type
-            .GetType(
-                "System.Runtime.InteropServices.JavaScript.Runtime, System.Private.Runtime.InteropServices.JavaScript",
-                true
-            );
-        static Type jsFunctionType = System
-            .Type
-            .GetType(
-                "System.Runtime.InteropServices.JavaScript.Function, System.Private.Runtime.InteropServices.JavaScript",
-                true
-            );
+        static Type jsRuntimeType = System.Type.GetType(
+            "System.Runtime.InteropServices.JavaScript.Runtime, System.Private.Runtime.InteropServices.JavaScript",
+            true
+        );
+        static Type jsFunctionType = System.Type.GetType(
+            "System.Runtime.InteropServices.JavaScript.Function, System.Private.Runtime.InteropServices.JavaScript",
+            true
+        );
 
         [DynamicDependency(
             "InvokeJS(System.String)",

@@ -274,10 +274,9 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                     elementBinding
                 );
                 offset = expression.SpanStart - conditionalAccessExpression.SpanStart;
-                argumentList =
-                    (
-                        (ElementBindingExpressionSyntax)conditionalAccessExpression.WhenNotNull
-                    ).ArgumentList;
+                argumentList = (
+                    (ElementBindingExpressionSyntax)conditionalAccessExpression.WhenNotNull
+                ).ArgumentList;
             }
             else
             {
@@ -378,8 +377,7 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 GetPreambleParts(indexer, position, semanticModel),
                 GetSeparatorParts(),
                 GetPostambleParts(),
-                indexer
-                    .Parameters
+                indexer.Parameters
                     .Select(
                         p =>
                             Convert(

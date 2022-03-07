@@ -115,8 +115,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                 var enumType =
                     semanticModel.GetTypeInfo(castExpression.Expression, cancellationToken).Type
                     as INamedTypeSymbol;
-                var castedType =
-                    semanticModel.GetTypeInfo(castExpression.Type, cancellationToken).Type;
+                var castedType = semanticModel
+                    .GetTypeInfo(castExpression.Type, cancellationToken)
+                    .Type;
 
                 if (Equals(enumType?.EnumUnderlyingType, castedType))
                 {
@@ -160,13 +161,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                 var enumType =
                     semanticModel.GetTypeInfo(castExpression.Expression, cancellationToken).Type
                     as INamedTypeSymbol;
-                var castedType =
-                    semanticModel.GetTypeInfo(castExpression.Type, cancellationToken).Type;
+                var castedType = semanticModel
+                    .GetTypeInfo(castExpression.Type, cancellationToken)
+                    .Type;
 
                 if (Equals(enumType?.EnumUnderlyingType, castedType))
                 {
-                    var parentCastType =
-                        semanticModel.GetTypeInfo(parentCast.Type, cancellationToken).Type;
+                    var parentCastType = semanticModel
+                        .GetTypeInfo(parentCast.Type, cancellationToken)
+                        .Type;
                     if (Equals(enumType, parentCastType.RemoveNullableIfPresent()))
                         return true;
                 }
@@ -352,10 +355,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
 
             // we are starting with code like `(X)expr` and converting to just `expr`. Post rewrite we need
             // to ensure that the final converted-type of `expr` matches the final converted type of `(X)expr`.
-            var originalConvertedType =
-                originalSemanticModel
-                    .GetTypeInfo(castNode.WalkUpParentheses(), cancellationToken)
-                    .ConvertedType;
+            var originalConvertedType = originalSemanticModel
+                .GetTypeInfo(castNode.WalkUpParentheses(), cancellationToken)
+                .ConvertedType;
             if (originalConvertedType is null || originalConvertedType.TypeKind == TypeKind.Error)
                 return false;
 
@@ -577,16 +579,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                 && originalConversion.IsIdentityOrImplicitReference()
             )
             {
-                var castedExpressionType =
-                    originalSemanticModel.GetTypeInfo(castedExpressionNode, cancellationToken).Type;
-                var isType =
-                    originalSemanticModel.GetTypeInfo(isExpression.Right, cancellationToken).Type;
+                var castedExpressionType = originalSemanticModel
+                    .GetTypeInfo(castedExpressionNode, cancellationToken)
+                    .Type;
+                var isType = originalSemanticModel
+                    .GetTypeInfo(isExpression.Right, cancellationToken)
+                    .Type;
 
                 if (
                     castedExpressionType != null
                     && isType != null
-                    && originalSemanticModel
-                        .Compilation
+                    && originalSemanticModel.Compilation
                         .ClassifyConversion(castedExpressionType, isType)
                         .Exists
                 )
@@ -837,12 +840,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                 // if we have `a ? (int?)b : default` then we can't remove the nullable cast as it changes the
                 // meaning of `default`.
                 if (
-                    originalConditionalExpression
-                        .WhenTrue
+                    originalConditionalExpression.WhenTrue
                         .WalkDownParentheses()
                         .IsKind(SyntaxKind.DefaultLiteralExpression)
-                    || originalConditionalExpression
-                        .WhenFalse
+                    || originalConditionalExpression.WhenFalse
                         .WalkDownParentheses()
                         .IsKind(SyntaxKind.DefaultLiteralExpression)
                 )
@@ -879,17 +880,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             // type of `a ? b : c` to be the same as what `a ? (T)b : c` is converted to.
 
             if (
-                !originalConditionalTypeInfo
-                    .ConvertedType!
-                    .Equals(
-                        rewrittenConditionalTypeInfo.ConvertedType,
-                        SymbolEqualityComparer.IncludeNullability
-                    )
+                !originalConditionalTypeInfo.ConvertedType!.Equals(
+                    rewrittenConditionalTypeInfo.ConvertedType,
+                    SymbolEqualityComparer.IncludeNullability
+                )
             )
                 return false;
 
-            var castType =
-                originalSemanticModel.GetTypeInfo(castExpression, cancellationToken).Type;
+            var castType = originalSemanticModel
+                .GetTypeInfo(castExpression, cancellationToken)
+                .Type;
             if (IsNullOrErrorType(castType))
                 return false;
 
@@ -1100,8 +1100,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                 return false;
 
             var castType = semanticModel.GetTypeInfo(castNode, cancellationToken).Type;
-            var castedExpressionType =
-                semanticModel.GetTypeInfo(castedExpressionNode, cancellationToken).Type;
+            var castedExpressionType = semanticModel
+                .GetTypeInfo(castedExpressionNode, cancellationToken)
+                .Type;
 
             // Floating point casts can have subtle runtime behavior, even between the same fp types. For example, a
             // cast from float-to-float can still change behavior because it may take a higher precision computation and
@@ -1146,12 +1147,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                     return false;
             }
             else if (
-                castNode
-                    .Parent
-                    .IsKind(
-                        SyntaxKind.ArrayInitializerExpression,
-                        out InitializerExpressionSyntax? arrayInitializer
-                    )
+                castNode.Parent.IsKind(
+                    SyntaxKind.ArrayInitializerExpression,
+                    out InitializerExpressionSyntax? arrayInitializer
+                )
             )
             {
                 // Identity fp conversion is safe if this is in an array initializer.
@@ -1266,10 +1265,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
 
                 haveHitArgumentNode = true;
 
-                var oldSymbolInfo =
-                    originalSemanticModel.GetSymbolInfo(currentOld, cancellationToken).Symbol;
-                var newSymbolInfo =
-                    rewrittenSemanticModel.GetSymbolInfo(currentNew, cancellationToken).Symbol;
+                var oldSymbolInfo = originalSemanticModel
+                    .GetSymbolInfo(currentOld, cancellationToken)
+                    .Symbol;
+                var newSymbolInfo = rewrittenSemanticModel
+                    .GetSymbolInfo(currentNew, cancellationToken)
+                    .Symbol;
 
                 // ignore local functions.  First, we can't test them for equality in speculative situations, but also we
                 // can't end up with an overload resolution issue for them as they don't have overloads.
@@ -1333,20 +1334,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             CancellationToken cancellationToken
         )
         {
-            var originalMemberSymbol =
-                originalSemanticModel
-                    .GetSymbolInfo(memberAccessExpression, cancellationToken)
-                    .Symbol;
+            var originalMemberSymbol = originalSemanticModel
+                .GetSymbolInfo(memberAccessExpression, cancellationToken)
+                .Symbol;
             if (originalMemberSymbol is null)
                 return false;
 
             var rewrittenMemberAccessExpression = (MemberAccessExpressionSyntax)rewrittenExpression
                 .WalkUpParentheses()
                 .GetRequiredParent();
-            var rewrittenMemberSymbol =
-                rewrittenSemanticModel
-                    .GetSymbolInfo(rewrittenMemberAccessExpression, cancellationToken)
-                    .Symbol;
+            var rewrittenMemberSymbol = rewrittenSemanticModel
+                .GetSymbolInfo(rewrittenMemberAccessExpression, cancellationToken)
+                .Symbol;
             if (rewrittenMemberSymbol is null)
                 return false;
 
@@ -1365,8 +1364,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             // Next, see if this is a call to an interface method.
             if (originalMemberSymbol.ContainingType.TypeKind == TypeKind.Interface)
             {
-                var rewrittenType =
-                    rewrittenSemanticModel.GetTypeInfo(rewrittenExpression, cancellationToken).Type;
+                var rewrittenType = rewrittenSemanticModel
+                    .GetTypeInfo(rewrittenExpression, cancellationToken)
+                    .Type;
                 if (IsNullOrErrorType(rewrittenType))
                     return false;
 
@@ -1475,20 +1475,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             CancellationToken cancellationToken
         )
         {
-            var originalMemberSymbol =
-                originalSemanticModel
-                    .GetSymbolInfo(memberAccessExpression, cancellationToken)
-                    .Symbol;
+            var originalMemberSymbol = originalSemanticModel
+                .GetSymbolInfo(memberAccessExpression, cancellationToken)
+                .Symbol;
             if (originalMemberSymbol is null)
                 return false;
 
             var rewrittenMemberAccessExpression = (InvocationExpressionSyntax)rewrittenExpression
                 .WalkUpParentheses()
                 .GetRequiredParent();
-            var rewrittenMemberSymbol =
-                rewrittenSemanticModel
-                    .GetSymbolInfo(rewrittenMemberAccessExpression, cancellationToken)
-                    .Symbol;
+            var rewrittenMemberSymbol = rewrittenSemanticModel
+                .GetSymbolInfo(rewrittenMemberAccessExpression, cancellationToken)
+                .Symbol;
             if (rewrittenMemberSymbol is null)
                 return false;
 
@@ -1609,9 +1607,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                         var originalParameter = originalParameters[i];
                         var rewrittenParameter = rewrittenParameters[i];
 
-                        var argument = invocationOperation
-                            .Arguments
-                            .FirstOrDefault(a => Equals(originalParameter, a.Parameter));
+                        var argument = invocationOperation.Arguments.FirstOrDefault(
+                            a => Equals(originalParameter, a.Parameter)
+                        );
                         var argumentSyntax = argument?.Syntax as ArgumentSyntax;
 
                         if (
@@ -1668,10 +1666,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                 return (convertedType, default);
             }
 
-            var rewrittenConvertedType =
-                rewrittenSemanticModel
-                    .GetTypeInfo(rewrittenExpression, cancellationToken)
-                    .ConvertedType;
+            var rewrittenConvertedType = rewrittenSemanticModel
+                .GetTypeInfo(rewrittenExpression, cancellationToken)
+                .ConvertedType;
             var rewrittenConversion = rewrittenSemanticModel.GetConversion(
                 rewrittenExpression,
                 cancellationToken
@@ -1744,8 +1741,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
 
             // Removing a cast may cause a conditional-expression conversion to come into existence.  This is
             // fine as long as we're in C# 9 or above.
-            var languageVersion =
-                ((CSharpCompilation)originalSemanticModel.Compilation).LanguageVersion;
+            var languageVersion = (
+                (CSharpCompilation)originalSemanticModel.Compilation
+            ).LanguageVersion;
             if (
                 languageVersion < LanguageVersion.CSharp9
                 && IntroducedConditionalExpressionConversion(

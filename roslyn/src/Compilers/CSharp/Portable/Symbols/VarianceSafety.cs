@@ -199,9 +199,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             if (member.IsStatic && !member.IsAbstract)
             {
-                return MessageID
-                        .IDS_FeatureVarianceSafetyForStaticInterfaceMembers
-                        .RequiredVersion() <= member.DeclaringCompilation.LanguageVersion;
+                return MessageID.IDS_FeatureVarianceSafetyForStaticInterfaceMembers.RequiredVersion()
+                    <= member.DeclaringCompilation.LanguageVersion;
             }
 
             return false;
@@ -470,8 +469,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 for (int i = 0; i < namedType.Arity; i++)
                 {
                     TypeParameterSymbol typeParam = namedType.TypeParameters[i];
-                    TypeSymbol typeArg =
-                        namedType.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[i].Type;
+                    TypeSymbol typeArg = namedType.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
+                        i
+                    ].Type;
 
                     bool requireOut;
                     bool requireIn;
@@ -577,9 +577,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     actualVariance.Localize(),
                     expectedVariance.Localize(),
                     new CSharpRequiredLanguageVersion(
-                        MessageID
-                            .IDS_FeatureVarianceSafetyForStaticInterfaceMembers
-                            .RequiredVersion()
+                        MessageID.IDS_FeatureVarianceSafetyForStaticInterfaceMembers.RequiredVersion()
                     )
                 );
             }

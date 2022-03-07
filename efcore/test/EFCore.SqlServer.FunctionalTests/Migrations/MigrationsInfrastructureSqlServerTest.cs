@@ -536,8 +536,7 @@ GO
         public async Task Empty_Migration_Creates_Database()
         {
             using var context = new BloggingContext(
-                Fixture
-                    .TestStore
+                Fixture.TestStore
                     .AddProviderOptions(
                         new DbContextOptionsBuilder().EnableServiceProviderCaching(false)
                     )
@@ -1470,11 +1469,12 @@ DROP DATABASE TransactionSuppressed"
 
             public override MigrationsContext CreateContext()
             {
-                var options =
-                    AddOptions(TestStore.AddProviderOptions(new DbContextOptionsBuilder()))
-                        .UseSqlServer(TestStore.ConnectionString, b => b.ApplyConfiguration())
-                        .UseInternalServiceProvider(ServiceProvider)
-                        .Options;
+                var options = AddOptions(
+                        TestStore.AddProviderOptions(new DbContextOptionsBuilder())
+                    )
+                    .UseSqlServer(TestStore.ConnectionString, b => b.ApplyConfiguration())
+                    .UseInternalServiceProvider(ServiceProvider)
+                    .Options;
                 return new MigrationsContext(options);
             }
         }

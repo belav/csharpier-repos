@@ -41,8 +41,7 @@ public class DataProtectionEntityFrameworkTests
         using (
             var context = services
                 .CreateScope()
-                .ServiceProvider
-                .GetRequiredService<DataProtectionKeyContext>()
+                .ServiceProvider.GetRequiredService<DataProtectionKeyContext>()
         )
         {
             Assert.Equal(1, context.DataProtectionKeys.Count());

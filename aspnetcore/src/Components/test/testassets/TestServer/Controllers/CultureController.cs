@@ -16,13 +16,10 @@ public class CultureController : Controller
     {
         if (culture != null)
         {
-            HttpContext
-                .Response
-                .Cookies
-                .Append(
-                    CookieRequestCultureProvider.DefaultCookieName,
-                    CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture))
-                );
+            HttpContext.Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture))
+            );
         }
 
         var htmlEncoder = HtmlEncoder.Default;

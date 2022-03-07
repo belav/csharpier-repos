@@ -12,8 +12,9 @@ namespace Microsoft.JSInterop.Infrastructure;
 
 public class DotNetDispatcherTest
 {
-    private static readonly string thisAssemblyName =
-        typeof(DotNetDispatcherTest).Assembly.GetName().Name;
+    private static readonly string thisAssemblyName = typeof(DotNetDispatcherTest).Assembly
+        .GetName()
+        .Name;
 
     [Fact]
     public void CannotInvokeWithEmptyAssemblyName()
@@ -219,12 +220,11 @@ public class DotNetDispatcherTest
                 out var property
             )
         );
-        var resultDto2 =
-            Assert
-                .IsType<DotNetObjectReference<TestDTO>>(
-                    jsRuntime.GetObjectReference(property.GetInt64())
-                )
-                .Value;
+        var resultDto2 = Assert
+            .IsType<DotNetObjectReference<TestDTO>>(
+                jsRuntime.GetObjectReference(property.GetInt64())
+            )
+            .Value;
         Assert.Equal("MY STRING", resultDto2.StringVal);
         Assert.Equal(1299, resultDto2.IntVal);
     }

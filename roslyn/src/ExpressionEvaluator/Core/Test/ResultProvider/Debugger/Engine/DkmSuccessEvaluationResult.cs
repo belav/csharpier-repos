@@ -94,9 +94,11 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
 
         public DkmClrValue GetClrValue()
         {
-            return InspectionContext
-                .InspectionSession
-                .InvokeResultProvider(this, MethodId.GetClrValue, r => r.GetClrValue(this));
+            return InspectionContext.InspectionSession.InvokeResultProvider(
+                this,
+                MethodId.GetClrValue,
+                r => r.GetClrValue(this)
+            );
         }
     }
 }

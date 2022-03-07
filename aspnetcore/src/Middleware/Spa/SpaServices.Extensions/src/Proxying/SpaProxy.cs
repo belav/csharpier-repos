@@ -68,10 +68,9 @@ internal static class SpaProxy
     )
     {
         // Stop proxying if either the server or client wants to disconnect
-        var proxyCancellationToken =
-            CancellationTokenSource
-                .CreateLinkedTokenSource(context.RequestAborted, applicationStoppingToken)
-                .Token;
+        var proxyCancellationToken = CancellationTokenSource
+            .CreateLinkedTokenSource(context.RequestAborted, applicationStoppingToken)
+            .Token;
 
         // We allow for the case where the target isn't known ahead of time, and want to
         // delay proxied requests until the target becomes known. This is useful, for example,
@@ -172,10 +171,10 @@ internal static class SpaProxy
                 && requestMessage.Content != null
             )
             {
-                requestMessage
-                    .Content
-                    ?.Headers
-                    .TryAddWithoutValidation(header.Key, header.Value.ToArray());
+                requestMessage.Content?.Headers.TryAddWithoutValidation(
+                    header.Key,
+                    header.Value.ToArray()
+                );
             }
         }
 

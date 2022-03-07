@@ -94,8 +94,7 @@ internal class ActionSelectionTable<TItem>
                 string? value = null;
                 e.Metadata
                     .GetMetadata<ActionDescriptor>()
-                    ?.RouteValues
-                    ?.TryGetValue(key, out value);
+                    ?.RouteValues?.TryGetValue(key, out value);
                 return Convert.ToString(value, CultureInfo.InvariantCulture) ?? string.Empty;
             }
         );

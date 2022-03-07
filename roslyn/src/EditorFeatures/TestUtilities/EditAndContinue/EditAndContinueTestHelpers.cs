@@ -158,8 +158,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
                 var includeFirstLineInDiagnostics =
                     expectedResult.Diagnostics.Any(d => d.FirstLine != null) == true;
-                var newActiveStatementSpans =
-                    expectedResult.ActiveStatements.OldUnmappedTrackingSpans;
+                var newActiveStatementSpans = expectedResult
+                    .ActiveStatements
+                    .OldUnmappedTrackingSpans;
 
                 // we need to rebuild the edit script, so that it operates on nodes associated with the same syntax trees backing the documents:
                 var oldTree = oldTrees[documentIndex];
@@ -178,17 +179,16 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 var lazyOldActiveStatementMap = AsyncLazy.Create(
                     expectedResult.ActiveStatements.OldStatementsMap
                 );
-                var result =
-                    Analyzer
-                        .AnalyzeDocumentAsync(
-                            oldProject,
-                            lazyOldActiveStatementMap,
-                            newDocument,
-                            newActiveStatementSpans,
-                            lazyCapabilities,
-                            CancellationToken.None
-                        )
-                        .Result;
+                var result = Analyzer
+                    .AnalyzeDocumentAsync(
+                        oldProject,
+                        lazyOldActiveStatementMap,
+                        newDocument,
+                        newActiveStatementSpans,
+                        lazyCapabilities,
+                        CancellationToken.None
+                    )
+                    .Result;
                 var oldText = oldDocument.GetTextSynchronously(default);
                 var newText = newDocument.GetTextSynchronously(default);
 
@@ -259,8 +259,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                     );
 
                     // check lines of line edits:
-                    _ = expectedResult
-                        .LineEdits
+                    _ = expectedResult.LineEdits
                         .Zip(
                             result.LineEdits,
                             (expected, actual) =>
@@ -378,8 +377,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 // Partial types must match:
                 Assert.Equal(
                     expectedSemanticEdit.PartialType?.Invoke(newCompilation),
-                    actualSemanticEdit
-                        .PartialType
+                    actualSemanticEdit.PartialType
                         ?.Resolve(newCompilation, ignoreAssemblyKey: true)
                         .Symbol
                 );
@@ -430,10 +428,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             var documentIndex = 0;
             foreach (var editScript in editScripts)
             {
-                oldProject =
-                    oldProject
-                        .AddDocument(documentIndex.ToString(), editScript.Match.OldRoot)
-                        .Project;
+                oldProject = oldProject
+                    .AddDocument(documentIndex.ToString(), editScript.Match.OldRoot)
+                    .Project;
                 documentIndex++;
             }
 
@@ -525,13 +522,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                         partners =>
                             new MatchingPair
                             {
-                                Old = partners
-                                    .Key
+                                Old = partners.Key
                                     .ToString()
                                     .Replace("\r\n", " ")
                                     .Replace("\n", " "),
-                                New = partners
-                                    .Value
+                                New = partners.Value
                                     .ToString()
                                     .Replace("\r\n", " ")
                                     .Replace("\n", " ")

@@ -313,9 +313,9 @@ class C
         for (ref int rx = ref x; x < 0; x++) { }
     }
 }",
-                parseOptions: CSharpParseOptions
-                    .Default
-                    .WithLanguageVersion(LanguageVersion.CSharp7_2)
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp7_2
+                )
             );
             comp.VerifyDiagnostics(
                 // (6,14): error CS8320: Feature 'ref for-loop variables' is not available in C# 7.2. Please use language version 7.3 or greater.
@@ -339,9 +339,9 @@ class C
         foreach (ref int x in span) { }
     }
 }",
-                parseOptions: CSharpParseOptions
-                    .Default
-                    .WithLanguageVersion(LanguageVersion.CSharp7_2)
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp7_2
+                )
             );
             comp.VerifyDiagnostics(
                 // (7,18): error CS8320: Feature 'ref foreach iteration variables' is not available in C# 7.2. Please use language version 7.3 or greater.
@@ -4986,10 +4986,9 @@ public unsafe class C
 
             var model = compilation.GetSemanticModel(tree, ignoreAccessibility: true);
 
-            var left =
-                (
-                    (MakeRefExpressionSyntax)((RefValueExpressionSyntax)assignment.Left).Expression
-                ).Expression;
+            var left = (
+                (MakeRefExpressionSyntax)((RefValueExpressionSyntax)assignment.Left).Expression
+            ).Expression;
             Assert.Equal(SpecialType.System_Int32, model.GetTypeInfo(left).Type.SpecialType);
 
             var right = ((RefExpressionSyntax)assignment.Right).Expression;

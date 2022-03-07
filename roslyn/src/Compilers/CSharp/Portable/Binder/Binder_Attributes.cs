@@ -229,10 +229,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else
             {
-                boundConstructorArguments = analyzedArguments
-                    .ConstructorArguments
-                    .Arguments
-                    .SelectAsArray(
+                boundConstructorArguments =
+                    analyzedArguments.ConstructorArguments.Arguments.SelectAsArray(
                         static (arg, attributeArgumentBinder) =>
                             attributeArgumentBinder.BindToTypeForErrorRecovery(arg),
                         attributeArgumentBinder
@@ -263,9 +261,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            ImmutableArray<string?> boundConstructorArgumentNamesOpt = analyzedArguments
-                .ConstructorArguments
-                .GetNames();
+            ImmutableArray<string?> boundConstructorArgumentNamesOpt =
+                analyzedArguments.ConstructorArguments.GetNames();
             ImmutableArray<BoundAssignmentOperator> boundNamedArguments =
                 analyzedArguments.NamedArguments?.ToImmutableAndFree()
                 ?? ImmutableArray<BoundAssignmentOperator>.Empty;
@@ -1140,9 +1137,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 parameterType = GetSpecialType(SpecialType.System_String, diagnostics, syntax);
                 kind = TypedConstantKind.Primitive;
-                defaultValue = syntax
-                    .SyntaxTree
-                    .GetDisplayPath(syntax.Name.Span, Compilation.Options.SourceReferenceResolver);
+                defaultValue = syntax.SyntaxTree.GetDisplayPath(
+                    syntax.Name.Span,
+                    Compilation.Options.SourceReferenceResolver
+                );
             }
             else if (
                 !IsEarlyAttributeBinder
@@ -1152,9 +1150,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 parameterType = GetSpecialType(SpecialType.System_String, diagnostics, syntax);
                 kind = TypedConstantKind.Primitive;
-                defaultValue = ((ContextualAttributeBinder)this)
-                    .AttributedMember
-                    .GetMemberCallerName();
+                defaultValue = (
+                    (ContextualAttributeBinder)this
+                ).AttributedMember.GetMemberCallerName();
             }
             // We check IsCallerMemberName here since the above if can be reached with AttributedMember == null, in which case,
             // We shouldn't be checking CallerArgumentExpression

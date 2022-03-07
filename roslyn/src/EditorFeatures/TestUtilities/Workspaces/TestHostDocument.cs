@@ -62,11 +62,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 {
                     var workspace = _languageServiceProvider!.WorkspaceServices.Workspace;
                     var project = workspace.CurrentSolution.GetRequiredProject(_project!.Id);
-                    var sourceGeneratedDocuments =
-                        project
-                            .GetSourceGeneratedDocumentsAsync(CancellationToken.None)
-                            .AsTask()
-                            .Result;
+                    var sourceGeneratedDocuments = project
+                        .GetSourceGeneratedDocumentsAsync(CancellationToken.None)
+                        .AsTask()
+                        .Result;
                     _id = sourceGeneratedDocuments.Single(d => d.FilePath == this.FilePath).Id;
                 }
 
@@ -249,22 +248,17 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 _textView = factory.CreateTextView(this.GetTextBuffer(), roles);
                 if (this.CursorPosition.HasValue)
                 {
-                    _textView
-                        .Caret
-                        .MoveTo(new SnapshotPoint(_textView.TextSnapshot, CursorPosition.Value));
+                    _textView.Caret.MoveTo(
+                        new SnapshotPoint(_textView.TextSnapshot, CursorPosition.Value)
+                    );
                 }
                 else if (this.SelectedSpans.IsSingle())
                 {
                     var span = this.SelectedSpans.Single();
-                    _textView
-                        .Selection
-                        .Select(
-                            new SnapshotSpan(
-                                _textView.TextSnapshot,
-                                new Span(span.Start, span.Length)
-                            ),
-                            false
-                        );
+                    _textView.Selection.Select(
+                        new SnapshotSpan(_textView.TextSnapshot, new Span(span.Start, span.Length)),
+                        false
+                    );
                 }
             }
 
@@ -298,8 +292,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             {
                 // Open (or reopen) any files that were closed in this call. We do this for all linked copies at once.
                 foreach (
-                    var linkedId in workspace
-                        .CurrentSolution
+                    var linkedId in workspace.CurrentSolution
                         .GetDocumentIdsWithFilePath(FilePath)
                         .Concat(this.Id)
                 )

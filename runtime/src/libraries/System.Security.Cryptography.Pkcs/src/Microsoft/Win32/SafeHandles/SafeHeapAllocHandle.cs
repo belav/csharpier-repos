@@ -14,9 +14,11 @@ namespace Microsoft.Win32.SafeHandles
 
         internal static SafeHeapAllocHandle Alloc(int size)
         {
-            SafeHeapAllocHandle result = Interop
-                .Kernel32
-                .HeapAlloc(s_hHeap, HeapAllocFlags.None, size);
+            SafeHeapAllocHandle result = Interop.Kernel32.HeapAlloc(
+                s_hHeap,
+                HeapAllocFlags.None,
+                size
+            );
             if (result.IsInvalid)
             {
                 result.SetHandleAsInvalid();

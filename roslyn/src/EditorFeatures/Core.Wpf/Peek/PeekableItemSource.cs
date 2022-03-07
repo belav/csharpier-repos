@@ -159,9 +159,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
             if (navigableItems != null)
             {
                 var workspace = project.Solution.Workspace;
-                var navigationService = workspace
-                    .Services
-                    .GetRequiredService<IDocumentNavigationService>();
+                var navigationService =
+                    workspace.Services.GetRequiredService<IDocumentNavigationService>();
 
                 foreach (var item in navigableItems)
                 {

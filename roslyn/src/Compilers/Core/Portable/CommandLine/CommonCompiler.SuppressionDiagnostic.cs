@@ -54,9 +54,8 @@ namespace Microsoft.CodeAnalysis
             public override string GetMessage(IFormatProvider? formatProvider = null)
             {
                 // Diagnostic '{0}: {1}' was programmatically suppressed by a DiagnosticSuppressor with suppression ID '{2}' and justification '{3}'
-                var localizableMessageFormat = s_suppressionDiagnosticDescriptor
-                    .MessageFormat
-                    .ToString(formatProvider);
+                var localizableMessageFormat =
+                    s_suppressionDiagnosticDescriptor.MessageFormat.ToString(formatProvider);
                 return string.Format(
                     formatProvider,
                     localizableMessageFormat,

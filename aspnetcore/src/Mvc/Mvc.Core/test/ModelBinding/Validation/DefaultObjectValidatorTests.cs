@@ -1575,16 +1575,18 @@ public class DefaultObjectValidatorTests
         var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider(
             excludeFilters.ToArray()
         );
-        var validatorProviders =
-            TestModelValidatorProvider.CreateDefaultProvider().ValidatorProviders;
+        var validatorProviders = TestModelValidatorProvider
+            .CreateDefaultProvider()
+            .ValidatorProviders;
         return new DefaultObjectValidator(metadataProvider, validatorProviders, new MvcOptions());
     }
 
     private DefaultObjectValidator CreateValidator(params IMetadataDetailsProvider[] providers)
     {
         var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider(providers);
-        var validatorProviders =
-            TestModelValidatorProvider.CreateDefaultProvider().ValidatorProviders;
+        var validatorProviders = TestModelValidatorProvider
+            .CreateDefaultProvider()
+            .ValidatorProviders;
         return new DefaultObjectValidator(metadataProvider, validatorProviders, _options);
     }
 

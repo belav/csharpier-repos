@@ -584,12 +584,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                 )
                 .Should()
                 .Pass()
-                .And
-                .RestartedFrameworkResolution("5.1.1", "5.4.1")
-                .And
-                .RestartedFrameworkResolution("5.4.1", "5.6.0")
-                .And
-                .HaveResolvedFramework(MicrosoftNETCoreApp, "5.6.0");
+                .And.RestartedFrameworkResolution("5.1.1", "5.4.1")
+                .And.RestartedFrameworkResolution("5.4.1", "5.6.0")
+                .And.HaveResolvedFramework(MicrosoftNETCoreApp, "5.6.0");
         }
 
         // This test:
@@ -628,12 +625,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                 )
                 .Should()
                 .Pass()
-                .And
-                .RestartedFrameworkResolution("5.1.1", "5.4.1")
-                .And
-                .RestartedFrameworkResolution("5.4.1", "5.6.0")
-                .And
-                .HaveResolvedFramework(MicrosoftNETCoreApp, "5.6.0");
+                .And.RestartedFrameworkResolution("5.1.1", "5.4.1")
+                .And.RestartedFrameworkResolution("5.4.1", "5.6.0")
+                .And.HaveResolvedFramework(MicrosoftNETCoreApp, "5.6.0");
         }
 
         // Verifies that roll forward acts on all framework references (3 frameworks in chain)
@@ -669,12 +663,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                 )
                 .Should()
                 .Pass()
-                .And
-                .HaveResolvedFramework(MicrosoftNETCoreApp, "5.1.3")
-                .And
-                .HaveResolvedFramework(MiddleWare, "2.1.2")
-                .And
-                .HaveResolvedFramework(HighWare, "7.3.1");
+                .And.HaveResolvedFramework(MicrosoftNETCoreApp, "5.1.3")
+                .And.HaveResolvedFramework(MiddleWare, "2.1.2")
+                .And.HaveResolvedFramework(HighWare, "7.3.1");
         }
 
         private CommandResult RunTest(

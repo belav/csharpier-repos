@@ -81,9 +81,7 @@ namespace System.Security.Cryptography
                     try
                     {
                         bool success = protect
-                            ? Interop
-                              .Crypt32
-                              .CryptProtectData(
+                            ? Interop.Crypt32.CryptProtectData(
                                   ref userDataBlob,
                                   null,
                                   ref optionalEntropyBlob,
@@ -92,9 +90,7 @@ namespace System.Security.Cryptography
                                   flags,
                                   out outputBlob
                               )
-                            : Interop
-                              .Crypt32
-                              .CryptUnprotectData(
+                            : Interop.Crypt32.CryptUnprotectData(
                                   ref userDataBlob,
                                   IntPtr.Zero,
                                   ref optionalEntropyBlob,

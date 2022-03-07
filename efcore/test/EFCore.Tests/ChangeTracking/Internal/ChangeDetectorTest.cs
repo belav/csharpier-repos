@@ -42,9 +42,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [ConditionalFact]
         public void PropertyChanging_snapshots_original_and_FK_value_if_lazy_snapshots_are_in_use()
         {
-            var contextServices = InMemoryTestHelpers
-                .Instance
-                .CreateContextServices(BuildNotifyingModel());
+            var contextServices = InMemoryTestHelpers.Instance.CreateContextServices(
+                BuildNotifyingModel()
+            );
             var entity = new NotifyingProduct { DependentId = 77 };
             var entry = CreateInternalEntry(contextServices, entity);
             entry.SetEntityState(EntityState.Unchanged);
@@ -72,9 +72,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [ConditionalFact]
         public void PropertyChanging_does_not_snapshot_original_values_for_properties_with_no_original_value_tracking()
         {
-            var contextServices = InMemoryTestHelpers
-                .Instance
-                .CreateContextServices(BuildNotifyingModel());
+            var contextServices = InMemoryTestHelpers.Instance.CreateContextServices(
+                BuildNotifyingModel()
+            );
             var entity = new NotifyingProduct { Name = "Cheese" };
             var entry = CreateInternalEntry(contextServices, entity);
 
@@ -96,9 +96,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [ConditionalFact]
         public void PropertyChanging_snapshots_reference_navigations_if_lazy_snapshots_are_in_use()
         {
-            var contextServices = InMemoryTestHelpers
-                .Instance
-                .CreateContextServices(BuildNotifyingModel());
+            var contextServices = InMemoryTestHelpers.Instance.CreateContextServices(
+                BuildNotifyingModel()
+            );
             var category = new NotifyingCategory();
             var entity = new NotifyingProduct { Category = category };
             var entry = CreateInternalEntry(contextServices, entity);
@@ -128,9 +128,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [ConditionalFact]
         public void PropertyChanging_snapshots_PK_for_relationships_if_lazy_snapshots_are_in_use()
         {
-            var contextServices = InMemoryTestHelpers
-                .Instance
-                .CreateContextServices(BuildNotifyingModel());
+            var contextServices = InMemoryTestHelpers.Instance.CreateContextServices(
+                BuildNotifyingModel()
+            );
             var id = Guid.NewGuid();
             var entity = new NotifyingProduct { Id = id };
             var entry = CreateInternalEntry(contextServices, entity);
@@ -239,10 +239,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             using var context = useTypeMapping
                 ? new BaxterWithMappingContext()
                 : new BaxterContext();
-            var baxter =
-                context
-                    .Attach(new Baxter { Id = Guid.NewGuid(), Demands = new[] { 1, 2, 3, 4 } })
-                    .Entity;
+            var baxter = context
+                .Attach(new Baxter { Id = Guid.NewGuid(), Demands = new[] { 1, 2, 3, 4 } })
+                .Entity;
 
             baxter.Demands[2] = 33;
 
@@ -363,8 +362,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
                 var property = modelBuilder.Entity<Baxter>().Property(e => e.Demands).Metadata;
 
-                var shadowProperty =
-                    modelBuilder.Entity<Baxter>().Property<int[]>("ShadyDemands").Metadata;
+                var shadowProperty = modelBuilder
+                    .Entity<Baxter>()
+                    .Property<int[]>("ShadyDemands")
+                    .Metadata;
 
                 if (UseTypeMapping)
                 {
@@ -390,9 +391,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [ConditionalFact]
         public void Skips_detection_of_scalar_property_change_for_notification_entities()
         {
-            var contextServices = InMemoryTestHelpers
-                .Instance
-                .CreateContextServices(BuildModelWithChanged());
+            var contextServices = InMemoryTestHelpers.Instance.CreateContextServices(
+                BuildModelWithChanged()
+            );
 
             var stateManager = contextServices.GetRequiredService<IStateManager>();
             var changeDetector = contextServices.GetRequiredService<IChangeDetector>();
@@ -414,9 +415,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [ConditionalFact]
         public void Skips_local_detection_of_scalar_property_change_for_notification_entities()
         {
-            var contextServices = InMemoryTestHelpers
-                .Instance
-                .CreateContextServices(BuildModelWithChanged());
+            var contextServices = InMemoryTestHelpers.Instance.CreateContextServices(
+                BuildModelWithChanged()
+            );
 
             var changeDetector = contextServices.GetRequiredService<IChangeDetector>();
 
@@ -2101,8 +2102,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
         private static IModel BuildNotifyingModel()
         {
-            var builder = InMemoryTestHelpers
-                .Instance
+            var builder = InMemoryTestHelpers.Instance
                 .CreateConventionBuilder()
                 .HasChangeTrackingStrategy(ChangeTrackingStrategy.ChangingAndChangedNotifications);
 
@@ -2173,8 +2173,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
         private static IModel BuildModelWithChanged()
         {
-            var builder = InMemoryTestHelpers
-                .Instance
+            var builder = InMemoryTestHelpers.Instance
                 .CreateConventionBuilder()
                 .HasChangeTrackingStrategy(ChangeTrackingStrategy.ChangedNotifications);
 
@@ -2201,17 +2200,15 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
         private static IServiceProvider CreateContextServices(IModel model = null)
         {
-            return InMemoryTestHelpers
-                .Instance
-                .CreateContextServices(
-                    new ServiceCollection()
-                        .AddScoped<TestRelationshipListener>()
-                        .AddScoped<IEntityGraphAttacher, TestAttacher>()
-                        .AddScoped<INavigationFixer>(
-                            p => p.GetRequiredService<TestRelationshipListener>()
-                        ),
-                    model ?? BuildModel()
-                );
+            return InMemoryTestHelpers.Instance.CreateContextServices(
+                new ServiceCollection()
+                    .AddScoped<TestRelationshipListener>()
+                    .AddScoped<IEntityGraphAttacher, TestAttacher>()
+                    .AddScoped<INavigationFixer>(
+                        p => p.GetRequiredService<TestRelationshipListener>()
+                    ),
+                model ?? BuildModel()
+            );
         }
 
         private class TestAttacher : EntityGraphAttacher

@@ -922,12 +922,11 @@ namespace System.Text.Json.Serialization.Tests
                 new WrapperForPoint_3D { Point_3D = new Point_3D(10, 6) }
             );
 
-            point =
-                (
-                    await JsonSerializerWrapperForString.DeserializeWrapper<WrapperForPoint_3D>(
-                        serialized
-                    )
-                ).Point_3D;
+            point = (
+                await JsonSerializerWrapperForString.DeserializeWrapper<WrapperForPoint_3D>(
+                    serialized
+                )
+            ).Point_3D;
             Assert.Equal(10, point.X);
             Assert.Equal(6, point.Y);
             Assert.Equal(50, point.Z);
@@ -965,13 +964,12 @@ namespace System.Text.Json.Serialization.Tests
                 new WrapperForPoint_3D { Point_3D = new Point_3D(10, 6) }
             );
 
-            point =
-                (
-                    await JsonSerializerWrapperForString.DeserializeWrapper<WrapperForPoint_3D>(
-                        serialized,
-                        options
-                    )
-                ).Point_3D;
+            point = (
+                await JsonSerializerWrapperForString.DeserializeWrapper<WrapperForPoint_3D>(
+                    serialized,
+                    options
+                )
+            ).Point_3D;
             Assert.Equal(4, point.X);
             Assert.Equal(4, point.Y);
             Assert.Equal(4, point.Z);

@@ -80,9 +80,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             // moved off we'll need to fix up it's constructor to be free-threaded.
 
             await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
-            _visualStudioWorkspaceImpl
-                .Services
-                .GetRequiredService<VisualStudioMetadataReferenceManager>();
+            _visualStudioWorkspaceImpl.Services.GetRequiredService<VisualStudioMetadataReferenceManager>();
 
             // Since we're on the UI thread here anyways, use that as an opportunity to grab the
             // IVsSolution object and solution file path.
@@ -198,21 +196,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             Guid projectGuid
         )
         {
-            return _threadingContext
-                .JoinableTaskFactory
-                .Run(
-                    async () =>
-                        await ((IVsTypeScriptVisualStudioProjectFactory)this)
-                            .CreateAndAddToWorkspaceAsync(
-                                projectSystemName,
-                                language,
-                                projectFilePath,
-                                hierarchy,
-                                projectGuid,
-                                CancellationToken.None
-                            )
-                            .ConfigureAwait(false)
-                );
+            return _threadingContext.JoinableTaskFactory.Run(
+                async () =>
+                    await ((IVsTypeScriptVisualStudioProjectFactory)this)
+                        .CreateAndAddToWorkspaceAsync(
+                            projectSystemName,
+                            language,
+                            projectFilePath,
+                            hierarchy,
+                            projectGuid,
+                            CancellationToken.None
+                        )
+                        .ConfigureAwait(false)
+            );
         }
 
         async ValueTask<VSTypeScriptVisualStudioProjectWrapper> IVsTypeScriptVisualStudioProjectFactory.CreateAndAddToWorkspaceAsync(

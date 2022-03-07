@@ -25,13 +25,11 @@ public class ServiceCollectionTests
         var services1 = new ServiceCollection()
             .AddLogging()
             .AddDataProtection()
-            .Services
-            .BuildServiceProvider();
+            .Services.BuildServiceProvider();
 
         var services2 = new ServiceCollection()
             .AddDataProtection()
-            .Services
-            .AddLogging()
+            .Services.AddLogging()
             .BuildServiceProvider();
 
         Assert.Equal(

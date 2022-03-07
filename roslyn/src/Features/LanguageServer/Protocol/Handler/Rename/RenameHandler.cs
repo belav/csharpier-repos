@@ -42,10 +42,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             if (document != null)
             {
                 var oldSolution = document.Project.Solution;
-                var renameService = document
-                    .Project
-                    .LanguageServices
-                    .GetRequiredService<IEditorInlineRenameService>();
+                var renameService =
+                    document.Project.LanguageServices.GetRequiredService<IEditorInlineRenameService>();
                 var position = await document
                     .GetPositionFromLinePositionAsync(
                         ProtocolConversions.PositionToLinePosition(request.Position),
@@ -94,10 +92,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                     )
                     .Select(group => group.First());
 
-                var textDiffService = renamedSolution
-                    .Workspace
-                    .Services
-                    .GetRequiredService<IDocumentTextDifferencingService>();
+                var textDiffService =
+                    renamedSolution.Workspace.Services.GetRequiredService<IDocumentTextDifferencingService>();
 
                 var documentEdits = await ProtocolConversions
                     .ChangedDocumentsToTextDocumentEditsAsync(

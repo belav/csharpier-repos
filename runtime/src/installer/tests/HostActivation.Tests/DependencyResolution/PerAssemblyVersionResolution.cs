@@ -173,15 +173,13 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 testAssemblyName + ".dll"
             );
 
-            SharedState
-                .DotNetWithNetCoreApp
+            SharedState.DotNetWithNetCoreApp
                 .Exec(app.AppDll)
                 .EnableTracingAndCaptureOutputs()
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveResolvedAssembly(expectedTestAssemblyPath);
+                .And.HaveResolvedAssembly(expectedTestAssemblyPath);
         }
     }
 
@@ -227,10 +225,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 .RunComponentResolutionTest(component)
                 .Should()
                 .Pass()
-                .And
-                .HaveSuccessfullyResolvedComponentDependencies()
-                .And
-                .HaveResolvedComponentDependencyAssembly(
+                .And.HaveSuccessfullyResolvedComponentDependencies()
+                .And.HaveResolvedComponentDependencyAssembly(
                     $"{component.AppDll};{expectedTestAssemblyPath}"
                 );
         }

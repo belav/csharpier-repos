@@ -85,10 +85,8 @@ internal class ResponseCacheFilterExecutor
 
         if (VaryByQueryKeys != null)
         {
-            var responseCachingFeature = context
-                .HttpContext
-                .Features
-                .Get<IResponseCachingFeature>();
+            var responseCachingFeature =
+                context.HttpContext.Features.Get<IResponseCachingFeature>();
             if (responseCachingFeature == null)
             {
                 throw new InvalidOperationException(

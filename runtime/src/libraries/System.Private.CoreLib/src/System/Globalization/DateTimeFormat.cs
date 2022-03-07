@@ -153,8 +153,9 @@ namespace System
 
         private const int DEFAULT_ALL_DATETIMES_SIZE = 132;
 
-        internal static readonly DateTimeFormatInfo InvariantFormatInfo =
-            CultureInfo.InvariantCulture.DateTimeFormat;
+        internal static readonly DateTimeFormatInfo InvariantFormatInfo = CultureInfo
+            .InvariantCulture
+            .DateTimeFormat;
         internal static readonly string[] InvariantAbbreviatedMonthNames =
             InvariantFormatInfo.AbbreviatedMonthNames;
         internal static readonly string[] InvariantAbbreviatedDayNames =

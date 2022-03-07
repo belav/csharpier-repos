@@ -12,8 +12,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             public static readonly DecimalValueSetFactory Instance = new DecimalValueSetFactory();
 
-            private readonly IValueSetFactory<decimal> _underlying =
-                NumericValueSetFactory<decimal, DecimalTC>.Instance;
+            private readonly IValueSetFactory<decimal> _underlying = NumericValueSetFactory<
+                decimal,
+                DecimalTC
+            >.Instance;
 
             IValueSet IValueSetFactory.AllValues => NumericValueSet<decimal, DecimalTC>.AllValues;
 

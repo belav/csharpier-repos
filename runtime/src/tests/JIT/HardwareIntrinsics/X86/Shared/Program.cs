@@ -90,10 +90,8 @@ namespace JIT.HardwareIntrinsics.X86
 
         private static void PrintUsage()
         {
-            TestLibrary
-                .TestFramework
-                .LogInformation(
-                    $@"Usage:
+            TestLibrary.TestFramework.LogInformation(
+                $@"Usage:
 {Environment.GetCommandLineArgs()[0]} [testName]
 
   [testName]: The name of the function to test.
@@ -101,7 +99,7 @@ namespace JIT.HardwareIntrinsics.X86
               Multiple can be specified.
 
   Available Test Names:"
-                );
+            );
             foreach (string testName in TestList.Keys)
             {
                 TestLibrary.TestFramework.LogInformation($"    {testName}");

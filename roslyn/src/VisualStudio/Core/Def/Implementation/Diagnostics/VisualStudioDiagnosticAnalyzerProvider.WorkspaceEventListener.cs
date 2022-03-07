@@ -56,9 +56,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
 
             public void StartListening(Workspace workspace, object serviceOpt)
             {
-                var setter = workspace
-                    .Services
-                    .GetService<ISolutionAnalyzerSetterWorkspaceService>();
+                var setter =
+                    workspace.Services.GetService<ISolutionAnalyzerSetterWorkspaceService>();
                 if (setter != null)
                 {
                     // fire and forget

@@ -84,8 +84,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
                     return false;
                 }
 
-                var methodsOfName = symbol
-                    .ContainingType
+                var methodsOfName = symbol.ContainingType
                     .GetMembers(symbol.Name)
                     .Where(m => m.Kind == SymbolKind.Method);
 

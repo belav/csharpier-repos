@@ -535,8 +535,8 @@ namespace Microsoft.EntityFrameworkCore
                         && e.ContainsGenericParameters
                         && e.GetParameters()
                             .SingleOrDefault()
-                            ?.ParameterType
-                            .GetGenericTypeDefinition() == typeof(IEntityTypeConfiguration<>)
+                            ?.ParameterType.GetGenericTypeDefinition()
+                            == typeof(IEntityTypeConfiguration<>)
                 );
 
             foreach (var type in assembly.GetConstructibleTypes().OrderBy(t => t.FullName))

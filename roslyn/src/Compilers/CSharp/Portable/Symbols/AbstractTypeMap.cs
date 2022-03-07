@@ -147,8 +147,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             for (int i = 0; i < customModifiers.Length; i++)
             {
-                NamedTypeSymbol modifier =
-                    ((CSharpCustomModifier)customModifiers[i]).ModifierSymbol;
+                NamedTypeSymbol modifier = (
+                    (CSharpCustomModifier)customModifiers[i]
+                ).ModifierSymbol;
                 var substituted = SubstituteNamedType(modifier);
 
                 if (!TypeSymbol.Equals(modifier, substituted, TypeCompareKind.ConsiderEverything2))
@@ -445,10 +446,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (dynamicEraser == null)
                 {
                     dynamicEraser = new DynamicTypeEraser(
-                        owner
-                            .ContainingAssembly
-                            .CorLibrary
-                            .GetSpecialType(SpecialType.System_Object)
+                        owner.ContainingAssembly.CorLibrary.GetSpecialType(
+                            SpecialType.System_Object
+                        )
                     );
                 }
 

@@ -32,10 +32,11 @@ namespace System.Text.Json
 
             useExtensionProperty = false;
 
-            JsonPropertyInfo jsonPropertyInfo = state
-                .Current
-                .JsonTypeInfo
-                .GetProperty(unescapedPropertyName, ref state.Current, out byte[] utf8PropertyName);
+            JsonPropertyInfo jsonPropertyInfo = state.Current.JsonTypeInfo.GetProperty(
+                unescapedPropertyName,
+                ref state.Current,
+                out byte[] utf8PropertyName
+            );
 
             // Increment PropertyIndex so GetProperty() checks the next property first when called again.
             state.Current.PropertyIndex++;
@@ -46,8 +47,10 @@ namespace System.Text.Json
             // Determine if we should use the extension property.
             if (jsonPropertyInfo == JsonPropertyInfo.s_missingProperty)
             {
-                JsonPropertyInfo? dataExtProperty =
-                    state.Current.JsonTypeInfo.DataExtensionProperty;
+                JsonPropertyInfo? dataExtProperty = state
+                    .Current
+                    .JsonTypeInfo
+                    .DataExtensionProperty;
                 if (
                     dataExtProperty != null
                     && dataExtProperty.HasGetter
@@ -122,9 +125,10 @@ namespace System.Text.Json
             {
                 // Create the appropriate dictionary type. We already verified the types.
 #if DEBUG
-                Type underlyingIDictionaryType = jsonPropertyInfo
-                    .DeclaredPropertyType
-                    .GetCompatibleGenericInterface(typeof(IDictionary<,>))!;
+                Type underlyingIDictionaryType =
+                    jsonPropertyInfo.DeclaredPropertyType.GetCompatibleGenericInterface(
+                        typeof(IDictionary<,>)
+                    )!;
                 Type[] genericArgs = underlyingIDictionaryType.GetGenericArguments();
 
                 Debug.Assert(underlyingIDictionaryType.IsGenericType);

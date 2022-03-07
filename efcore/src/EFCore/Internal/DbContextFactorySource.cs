@@ -42,8 +42,9 @@ namespace Microsoft.EntityFrameworkCore.Internal
         {
             var constructors = typeof(TContext)
                 .GetTypeInfo()
-                .DeclaredConstructors
-                .Where(c => !c.IsStatic && c.IsPublic && c.GetParameters().Length != 0)
+                .DeclaredConstructors.Where(
+                    c => !c.IsStatic && c.IsPublic && c.GetParameters().Length != 0
+                )
                 .ToArray();
 
             if (constructors.Length == 1)

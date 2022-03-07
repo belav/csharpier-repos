@@ -267,10 +267,12 @@ namespace System.Reflection.PortableExecutable
             Debug.Assert((resourceBuilderOpt?.Count ?? 0) % 4 == 0);
 
             // TODO: avoid recalculation
-            int importTableRva =
-                GetImportTableDirectoryEntry(relativeVirtualAddess).RelativeVirtualAddress;
-            int importAddressTableRva =
-                GetImportAddressTableDirectoryEntry(relativeVirtualAddess).RelativeVirtualAddress;
+            int importTableRva = GetImportTableDirectoryEntry(
+                relativeVirtualAddess
+            ).RelativeVirtualAddress;
+            int importAddressTableRva = GetImportAddressTableDirectoryEntry(
+                relativeVirtualAddess
+            ).RelativeVirtualAddress;
 
             if (RequiresStartupStub)
             {

@@ -119,12 +119,10 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.ImportCompletion
                 )
                 {
                     if (
-                        attributeItem
-                            .DisplayText
-                            .TryGetWithoutAttributeSuffix(
-                                isCaseSensitive: isCaseSensitive,
-                                out var attributeNameWithoutSuffix
-                            )
+                        attributeItem.DisplayText.TryGetWithoutAttributeSuffix(
+                            isCaseSensitive: isCaseSensitive,
+                            out var attributeNameWithoutSuffix
+                        )
                     )
                     {
                         // We don't want to cache this item.

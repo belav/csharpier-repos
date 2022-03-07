@@ -96,8 +96,9 @@ namespace Microsoft.CodeAnalysis.CSharp.InitializeParameter
             var withBlock =
                 options.GetOption(CSharpCodeStyleOptions.PreferBraces).Value
                 == CodeAnalysis.CodeStyle.PreferBracesPreference.Always;
-            var singleLine =
-                options.GetOption(CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine).Value;
+            var singleLine = options
+                .GetOption(CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine)
+                .Value;
             var closeParenToken = Token(SyntaxKind.CloseParenToken);
             if (withBlock)
             {

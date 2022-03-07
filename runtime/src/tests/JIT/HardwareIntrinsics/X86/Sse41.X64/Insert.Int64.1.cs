@@ -186,9 +186,11 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario));
 
-            var result = Sse41
-                .X64
-                .Insert(Unsafe.Read<Vector128<Int64>>(_dataTable.inArrayPtr), (long)2, 1);
+            var result = Sse41.X64.Insert(
+                Unsafe.Read<Vector128<Int64>>(_dataTable.inArrayPtr),
+                (long)2,
+                1
+            );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.inArrayPtr, (long)2, _dataTable.outArrayPtr);
@@ -201,9 +203,11 @@ namespace JIT.HardwareIntrinsics.X86
             Int64 localData = (long)2;
             Int64* ptr = &localData;
 
-            var result = Sse41
-                .X64
-                .Insert(Sse2.LoadVector128((Int64*)(_dataTable.inArrayPtr)), *ptr, 1);
+            var result = Sse41.X64.Insert(
+                Sse2.LoadVector128((Int64*)(_dataTable.inArrayPtr)),
+                *ptr,
+                1
+            );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.inArrayPtr, *ptr, _dataTable.outArrayPtr);
@@ -216,9 +220,11 @@ namespace JIT.HardwareIntrinsics.X86
             Int64 localData = (long)2;
             Int64* ptr = &localData;
 
-            var result = Sse41
-                .X64
-                .Insert(Sse2.LoadAlignedVector128((Int64*)(_dataTable.inArrayPtr)), *ptr, 1);
+            var result = Sse41.X64.Insert(
+                Sse2.LoadAlignedVector128((Int64*)(_dataTable.inArrayPtr)),
+                *ptr,
+                1
+            );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.inArrayPtr, *ptr, _dataTable.outArrayPtr);
@@ -467,17 +473,15 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (!succeeded)
             {
-                TestLibrary
-                    .TestFramework
-                    .LogInformation(
-                        $"{nameof(Sse41.X64)}.{nameof(Sse41.X64.Insert)}<Int64>(Vector128<Int64><9>): {method} failed:"
-                    );
-                TestLibrary
-                    .TestFramework
-                    .LogInformation($"  firstOp: ({string.Join(", ", firstOp)})");
-                TestLibrary
-                    .TestFramework
-                    .LogInformation($"   result: ({string.Join(", ", result)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(Sse41.X64)}.{nameof(Sse41.X64.Insert)}<Int64>(Vector128<Int64><9>): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  firstOp: ({string.Join(", ", firstOp)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   result: ({string.Join(", ", result)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

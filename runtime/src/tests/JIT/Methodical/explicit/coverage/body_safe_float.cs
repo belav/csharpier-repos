@@ -257,8 +257,11 @@ internal class TestApp
 
     private static float test_3_5(float num)
     {
-        AA.aa_zero[0, (int)num - 1, (int)num / 100].q +=
-            AA.aa_init[0, (int)num - 1, (int)num / 100].q;
+        AA.aa_zero[0, (int)num - 1, (int)num / 100].q += AA.aa_init[
+            0,
+            (int)num - 1,
+            (int)num / 100
+        ].q;
         return AA.aa_zero[0, (int)num - 1, (int)num / 100].q;
     }
 

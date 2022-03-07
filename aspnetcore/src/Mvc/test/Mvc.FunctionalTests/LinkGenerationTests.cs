@@ -19,8 +19,9 @@ public class LinkGenerationTests
     // so they require a reference to the assembly on which the resources are located, in order to
     // make the tests less verbose, we get a reference to the assembly with the resources and we
     // use it on all the rest of the tests.
-    private static readonly Assembly _resourcesAssembly =
-        typeof(LinkGenerationTests).GetTypeInfo().Assembly;
+    private static readonly Assembly _resourcesAssembly = typeof(LinkGenerationTests)
+        .GetTypeInfo()
+        .Assembly;
 
     public LinkGenerationTests(MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting> fixture)
     {

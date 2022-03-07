@@ -249,9 +249,12 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
         await Client.ExpectRenderBatch(
             async () =>
             {
-                await Client
-                    .HubConnection
-                    .InvokeAsync("EndInvokeJSFromDotNet", id, true, $"[{id}, true, \"{{\"]");
+                await Client.HubConnection.InvokeAsync(
+                    "EndInvokeJSFromDotNet",
+                    id,
+                    true,
+                    $"[{id}, true, \"{{\"]"
+                );
             }
         );
 
@@ -280,9 +283,12 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
         await Client.ExpectRenderBatch(
             async () =>
             {
-                await Client
-                    .HubConnection
-                    .InvokeAsync("EndInvokeJSFromDotNet", id, true, $"[{id}, true, null]");
+                await Client.HubConnection.InvokeAsync(
+                    "EndInvokeJSFromDotNet",
+                    id,
+                    true,
+                    $"[{id}, true, null]"
+                );
             }
         );
 
@@ -312,14 +318,12 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
         await Client.ExpectRenderBatch(
             async () =>
             {
-                await Client
-                    .HubConnection
-                    .InvokeAsync(
-                        "EndInvokeJSFromDotNet",
-                        id,
-                        false,
-                        $"[{id}, false, \"There was an error invoking sendFailureCallbackReturn\"]"
-                    );
+                await Client.HubConnection.InvokeAsync(
+                    "EndInvokeJSFromDotNet",
+                    id,
+                    false,
+                    $"[{id}, false, \"There was an error invoking sendFailureCallbackReturn\"]"
+                );
             }
         );
 
@@ -353,9 +357,12 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
         await Client.ExpectCircuitError(
             async () =>
             {
-                await Client
-                    .HubConnection
-                    .InvokeAsync("EndInvokeJSFromDotNet", id, true, $"[{id}, true, }}");
+                await Client.HubConnection.InvokeAsync(
+                    "EndInvokeJSFromDotNet",
+                    id,
+                    true,
+                    $"[{id}, true, }}"
+                );
             }
         );
 
@@ -463,9 +470,11 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
         await Client.ExpectCircuitError(
             async () =>
             {
-                await Client
-                    .HubConnection
-                    .InvokeAsync("DispatchBrowserEvent", "{Invalid:{\"payload}", "{}");
+                await Client.HubConnection.InvokeAsync(
+                    "DispatchBrowserEvent",
+                    "{Invalid:{\"payload}",
+                    "{}"
+                );
             }
         );
 
@@ -501,16 +510,14 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
         await Client.ExpectCircuitError(
             async () =>
             {
-                await Client
-                    .HubConnection
-                    .InvokeAsync(
-                        "DispatchBrowserEvent",
-                        JsonSerializer.Serialize(
-                            browserDescriptor,
-                            TestJsonSerializerOptionsProvider.Options
-                        ),
-                        "{Invalid:{\"payload}"
-                    );
+                await Client.HubConnection.InvokeAsync(
+                    "DispatchBrowserEvent",
+                    JsonSerializer.Serialize(
+                        browserDescriptor,
+                        TestJsonSerializerOptionsProvider.Options
+                    ),
+                    "{Invalid:{\"payload}"
+                );
             }
         );
 

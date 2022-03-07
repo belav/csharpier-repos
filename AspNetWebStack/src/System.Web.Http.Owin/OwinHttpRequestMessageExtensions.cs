@@ -36,12 +36,10 @@ namespace System.Net.Http
                 // instead.
                 IDictionary<string, object> environment;
                 if (
-                    request
-                        .Properties
-                        .TryGetValue<IDictionary<string, object>>(
-                            OwinEnvironmentKey,
-                            out environment
-                        )
+                    request.Properties.TryGetValue<IDictionary<string, object>>(
+                        OwinEnvironmentKey,
+                        out environment
+                    )
                 )
                 {
                     context = new OwinContext(environment);

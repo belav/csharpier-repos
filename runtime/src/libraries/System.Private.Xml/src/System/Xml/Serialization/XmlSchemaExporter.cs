@@ -783,14 +783,17 @@ namespace System.Xml.Serialization
             if (type.ContentModel != null)
             {
                 if (type.ContentModel.Content is XmlSchemaComplexContentRestriction)
-                    attributes =
-                        ((XmlSchemaComplexContentRestriction)type.ContentModel.Content).Attributes;
+                    attributes = (
+                        (XmlSchemaComplexContentRestriction)type.ContentModel.Content
+                    ).Attributes;
                 else if (type.ContentModel.Content is XmlSchemaComplexContentExtension)
-                    attributes =
-                        ((XmlSchemaComplexContentExtension)type.ContentModel.Content).Attributes;
+                    attributes = (
+                        (XmlSchemaComplexContentExtension)type.ContentModel.Content
+                    ).Attributes;
                 else if (type.ContentModel.Content is XmlSchemaSimpleContentExtension)
-                    attributes =
-                        ((XmlSchemaSimpleContentExtension)type.ContentModel.Content).Attributes;
+                    attributes = (
+                        (XmlSchemaSimpleContentExtension)type.ContentModel.Content
+                    ).Attributes;
                 else
                     throw new InvalidOperationException(
                         SR.Format(SR.XmlInvalidContent, type.ContentModel.Content!.GetType().Name)

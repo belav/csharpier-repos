@@ -1016,8 +1016,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                             c =>
                                 ss.Set<Order>()
                                     .FirstOrDefault(o => o.CustomerID == "ALFKI")
-                                    .Customer
-                                    .City
+                                    .Customer.City
                         )
             );
         }
@@ -1037,8 +1036,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                             c =>
                                 ss.Set<Order>()
                                     .SingleOrDefault(o => o.OrderID == 10643)
-                                    .Customer
-                                    .City
+                                    .Customer.City
                         )
             );
         }
@@ -1075,8 +1073,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     .Customer != null
                                     ? ss.Set<Order>()
                                       .FirstOrDefault(o => o.CustomerID == "ALFKI")
-                                      .Customer
-                                      .City
+                                      .Customer.City
                                     : null
                         )
             );
@@ -1098,8 +1095,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 ss.Set<Order>()
                                     .OrderBy(o => o.CustomerID)
                                     .FirstOrDefault(o => o.CustomerID == "ALFKI")
-                                    .Customer
-                                    .City
+                                    .Customer.City
                         )
             );
         }

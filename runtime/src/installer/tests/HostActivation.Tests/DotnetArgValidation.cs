@@ -21,16 +21,14 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         public void MuxerExec_MissingAppAssembly_Fails()
         {
             string assemblyName = Path.Combine(GetNonexistentAndUnnormalizedPath(), "foo.dll");
-            sharedTestState
-                .BuiltDotNet
+            sharedTestState.BuiltDotNet
                 .Exec("exec", assemblyName)
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute(fExpectedToFail: true)
                 .Should()
                 .Fail()
-                .And
-                .HaveStdErrContaining(
+                .And.HaveStdErrContaining(
                     $"The application to execute does not exist: '{assemblyName}'"
                 );
         }
@@ -39,16 +37,14 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         public void MuxerExec_MissingAppAssembly_BadExtension_Fails()
         {
             string assemblyName = Path.Combine(GetNonexistentAndUnnormalizedPath(), "foo.xzy");
-            sharedTestState
-                .BuiltDotNet
+            sharedTestState.BuiltDotNet
                 .Exec("exec", assemblyName)
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute(fExpectedToFail: true)
                 .Should()
                 .Fail()
-                .And
-                .HaveStdErrContaining(
+                .And.HaveStdErrContaining(
                     $"The application to execute does not exist: '{assemblyName}'"
                 );
         }
@@ -65,16 +61,14 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             fxDir = new DirectoryInfo(fxDir).GetDirectories()[0].FullName;
             string assemblyName = Path.Combine(fxDir, "Microsoft.NETCore.App.deps.json");
 
-            sharedTestState
-                .BuiltDotNet
+            sharedTestState.BuiltDotNet
                 .Exec("exec", assemblyName)
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute(fExpectedToFail: true)
                 .Should()
                 .Fail()
-                .And
-                .HaveStdErrContaining(
+                .And.HaveStdErrContaining(
                     $"dotnet exec needs a managed .dll or .exe extension. The application specified was '{assemblyName}'"
                 );
         }
@@ -82,24 +76,21 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         [Fact]
         public void MissingArgumentValue_Fails()
         {
-            sharedTestState
-                .BuiltDotNet
+            sharedTestState.BuiltDotNet
                 .Exec("--fx-version")
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute(fExpectedToFail: true)
                 .Should()
                 .Fail()
-                .And
-                .HaveStdErrContaining($"Failed to parse supported options or their values:");
+                .And.HaveStdErrContaining($"Failed to parse supported options or their values:");
         }
 
         [Fact]
         public void InvalidFileOrCommand_NoSDK_ListsPossibleIssues()
         {
             string fileName = "NonExistent";
-            sharedTestState
-                .BuiltDotNet
+            sharedTestState.BuiltDotNet
                 .Exec(fileName)
                 .WorkingDirectory(sharedTestState.BaseDirectory)
                 .CaptureStdOut()
@@ -107,10 +98,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute(fExpectedToFail: true)
                 .Should()
                 .Fail()
-                .And
-                .HaveStdErrContaining($"The application '{fileName}' does not exist")
-                .And
-                .HaveStdErrContaining($"It was not possible to find any installed .NET SDKs");
+                .And.HaveStdErrContaining($"The application '{fileName}' does not exist")
+                .And.HaveStdErrContaining($"It was not possible to find any installed .NET SDKs");
         }
 
         // Return a non-exisitent path that contains a mix of / and \

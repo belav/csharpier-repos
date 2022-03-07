@@ -1582,8 +1582,9 @@ class Query
                 .Where(t => t.Identifier.ValueText == "Query")
                 .Single();
             dynamic methodM = (MethodDeclarationSyntax)classC.Members[0];
-            QueryExpressionSyntax q =
-                methodM.Body.Statements[3].Declaration.Variables[0].Initializer.Value;
+            QueryExpressionSyntax q = methodM.Body.Statements[3].Declaration.Variables[0]
+                .Initializer
+                .Value;
 
             var info0 = model.GetQueryClauseInfo(q.FromClause);
             var x = model.GetDeclaredSymbol(q.FromClause);
@@ -1811,8 +1812,9 @@ class Query
                 .Where(t => t.Identifier.ValueText == "Query")
                 .Single();
             dynamic methodM = (MethodDeclarationSyntax)classC.Members[0];
-            QueryExpressionSyntax q =
-                methodM.Body.Statements[3].Declaration.Variables[0].Initializer.Value;
+            QueryExpressionSyntax q = methodM.Body.Statements[3].Declaration.Variables[0]
+                .Initializer
+                .Value;
 
             var info0 = model.GetQueryClauseInfo(q.FromClause);
             var x = model.GetDeclaredSymbol(q.FromClause);
@@ -1886,8 +1888,9 @@ class Query
                 .Where(t => t.Identifier.ValueText == "Query")
                 .Single();
             dynamic methodM = (MethodDeclarationSyntax)classC.Members[0];
-            QueryExpressionSyntax q =
-                methodM.Body.Statements[2].Declaration.Variables[0].Initializer.Value;
+            QueryExpressionSyntax q = methodM.Body.Statements[2].Declaration.Variables[0]
+                .Initializer
+                .Value;
 
             var info0 = model.GetQueryClauseInfo(q.FromClause);
             Assert.Equal("Cast", info0.CastInfo.Symbol.Name);
@@ -1931,8 +1934,9 @@ class Query
                 .Where(t => t.Identifier.ValueText == "Query")
                 .Single();
             dynamic methodM = (MethodDeclarationSyntax)classC.Members[0];
-            QueryExpressionSyntax q =
-                methodM.Body.Statements[1].Declaration.Variables[0].Initializer.Value;
+            QueryExpressionSyntax q = methodM.Body.Statements[1].Declaration.Variables[0]
+                .Initializer
+                .Value;
 
             var info0 = model.GetQueryClauseInfo(q.FromClause);
             Assert.Null(info0.CastInfo.Symbol);
@@ -2488,10 +2492,9 @@ public class Test2
             var tree = compilation.SyntaxTrees[0];
             var semanticModel = compilation.GetSemanticModel(tree);
 
-            var queryContinuation =
-                tree.GetRoot()
-                    .FindToken(sourceCode.IndexOf("into w", StringComparison.Ordinal))
-                    .Parent;
+            var queryContinuation = tree.GetRoot()
+                .FindToken(sourceCode.IndexOf("into w", StringComparison.Ordinal))
+                .Parent;
             var symbol = semanticModel.GetDeclaredSymbol(queryContinuation);
 
             Assert.NotNull(symbol);
@@ -2550,10 +2553,9 @@ static class Test
             var tree = compilation.SyntaxTrees[0];
             var semanticModel = compilation.GetSemanticModel(tree);
 
-            var joinInto =
-                tree.GetRoot()
-                    .FindToken(sourceCode.IndexOf("into x8", StringComparison.Ordinal))
-                    .Parent;
+            var joinInto = tree.GetRoot()
+                .FindToken(sourceCode.IndexOf("into x8", StringComparison.Ordinal))
+                .Parent;
             var symbol = semanticModel.GetDeclaredSymbol(joinInto);
 
             Assert.NotNull(symbol);
@@ -3242,8 +3244,9 @@ class C
                 .Where(t => t.Identifier.ValueText == "C")
                 .Single();
             dynamic main = (MethodDeclarationSyntax)classC.Members[0];
-            QueryExpressionSyntax q =
-                main.Body.Statements[0].Declaration.Variables[0].Initializer.Value;
+            QueryExpressionSyntax q = main.Body.Statements[0].Declaration.Variables[0]
+                .Initializer
+                .Value;
             var info0 = model.GetQueryClauseInfo(q.FromClause);
             var x = model.GetDeclaredSymbol(q.FromClause);
             Assert.Equal(SymbolKind.RangeVariable, x.Kind);
@@ -3281,8 +3284,9 @@ class C
                 .Where(t => t.Identifier.ValueText == "C")
                 .Single();
             dynamic main = (MethodDeclarationSyntax)classC.Members[0];
-            QueryExpressionSyntax q =
-                main.Body.Statements[0].Declaration.Variables[0].Initializer.Value;
+            QueryExpressionSyntax q = main.Body.Statements[0].Declaration.Variables[0]
+                .Initializer
+                .Value;
             var info0 = model.GetQueryClauseInfo(q.FromClause);
             var x = model.GetDeclaredSymbol(q.FromClause);
             Assert.Equal(SymbolKind.RangeVariable, x.Kind);
@@ -3963,8 +3967,9 @@ public class Test
                 .Variables[0]
                 .Initializer
                 .Value;
-            JoinIntoClauseSyntax joinInto =
-                ((JoinClauseSyntax)queryExpression.Body.Clauses[0]).Into;
+            JoinIntoClauseSyntax joinInto = (
+                (JoinClauseSyntax)queryExpression.Body.Clauses[0]
+            ).Into;
             var symbol = speculativeModel.GetDeclaredSymbol(joinInto);
 
             Assert.NotNull(symbol);

@@ -32,9 +32,11 @@ namespace System.Xml.Schema
             get { return _language; }
             set
             {
-                _language = (string)s_languageType
-                    .Datatype!
-                    .ParseValue(value, (XmlNameTable?)null, (IXmlNamespaceResolver?)null);
+                _language = (string)s_languageType.Datatype!.ParseValue(
+                    value,
+                    (XmlNameTable?)null,
+                    (IXmlNamespaceResolver?)null
+                );
             }
         }
 

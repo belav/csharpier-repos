@@ -25,10 +25,9 @@ public class Startup
             .AddStackExchangeRedis(
                 options =>
                 {
-                    options
-                        .Configuration
-                        .EndPoints
-                        .Add(Environment.GetEnvironmentVariable("REDIS_CONNECTION"));
+                    options.Configuration.EndPoints.Add(
+                        Environment.GetEnvironmentVariable("REDIS_CONNECTION")
+                    );
                 }
             );
 

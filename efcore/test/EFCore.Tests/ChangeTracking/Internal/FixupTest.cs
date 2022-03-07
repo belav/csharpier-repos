@@ -3270,8 +3270,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             using (var context = new FixupContext())
             {
-                var category =
-                    context.Set<Product>().Include(c => c.Category).ToList().First().Category;
+                var category = context
+                    .Set<Product>()
+                    .Include(c => c.Category)
+                    .ToList()
+                    .First()
+                    .Category;
 
                 Assert.Equal(2, category.Products.Count);
 

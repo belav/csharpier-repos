@@ -37,9 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
         // Explicitly remove ":" from the set of filter characters because (by default)
         // any character that appears in DisplayText gets treated as a filter char.
-        private static readonly CompletionItemRules s_rules = CompletionItemRules
-            .Default
-            .WithFilterCharacterRule(
+        private static readonly CompletionItemRules s_rules =
+            CompletionItemRules.Default.WithFilterCharacterRule(
                 CharacterSetModificationRule.Create(CharacterSetModificationKind.Remove, ':')
             );
 
@@ -123,8 +122,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
                 // Consider refining this logic to mandate completion with an argument name, if preceded by an out-of-position name
                 // See https://github.com/dotnet/roslyn/issues/20657
-                var languageVersion =
-                    ((CSharpParseOptions)document.Project.ParseOptions!).LanguageVersion;
+                var languageVersion = (
+                    (CSharpParseOptions)document.Project.ParseOptions!
+                ).LanguageVersion;
                 if (
                     languageVersion < LanguageVersion.CSharp7_2
                     && token.IsMandatoryNamedParameterPosition()
@@ -193,8 +193,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             int position
         )
         {
-            var existingArguments = argumentList
-                .Arguments
+            var existingArguments = argumentList.Arguments
                 .Where(a => a.Span.End <= position && a.NameColon != null)
                 .Select(a => a.NameColon!.Name.Identifier.ValueText);
 
@@ -286,10 +285,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             var expressionSymbol = semanticModel
                 .GetSymbolInfo(elementAccessExpression.Expression, cancellationToken)
                 .GetAnySymbol();
-            var expressionType =
-                semanticModel
-                    .GetTypeInfo(elementAccessExpression.Expression, cancellationToken)
-                    .Type;
+            var expressionType = semanticModel
+                .GetTypeInfo(elementAccessExpression.Expression, cancellationToken)
+                .Type;
 
             if (expressionSymbol != null && expressionType != null)
             {
@@ -358,8 +356,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     semanticModel.GetTypeInfo(recordBaseType.Type, cancellationToken).Type
                     as INamedTypeSymbol;
 
-                return type?.InstanceConstructors
-                    .Where(m => m.IsAccessibleWithin(within))
+                return type?.InstanceConstructors.Where(m => m.IsAccessibleWithin(within))
                     .Select(m => m.Parameters);
             }
 

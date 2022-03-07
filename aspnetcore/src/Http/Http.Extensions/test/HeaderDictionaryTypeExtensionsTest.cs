@@ -17,8 +17,7 @@ public class HeaderDictionaryTypeExtensionsTest
         var context = new DefaultHttpContext();
         context.Request.Headers.ContentType = "text/plain";
 
-        var result = context
-            .Request
+        var result = context.Request
             .GetTypedHeaders()
             .Get<MediaTypeHeaderValue>(HeaderNames.ContentType);
 
@@ -31,8 +30,7 @@ public class HeaderDictionaryTypeExtensionsTest
     {
         var context = new DefaultHttpContext();
 
-        var result = context
-            .Request
+        var result = context.Request
             .GetTypedHeaders()
             .Get<MediaTypeHeaderValue>(HeaderNames.ContentType);
 
@@ -45,8 +43,7 @@ public class HeaderDictionaryTypeExtensionsTest
         var context = new DefaultHttpContext();
         context.Request.Headers.ContentType = "invalid";
 
-        var result = context
-            .Request
+        var result = context.Request
             .GetTypedHeaders()
             .Get<MediaTypeHeaderValue>(HeaderNames.ContentType);
 
@@ -99,8 +96,7 @@ public class HeaderDictionaryTypeExtensionsTest
         var context = new DefaultHttpContext();
         context.Request.Headers.Accept = "text/plain; q=0.9, text/other, */*";
 
-        var result = context
-            .Request
+        var result = context.Request
             .GetTypedHeaders()
             .GetList<MediaTypeHeaderValue>(HeaderNames.Accept);
 
@@ -118,8 +114,7 @@ public class HeaderDictionaryTypeExtensionsTest
     {
         var context = new DefaultHttpContext();
 
-        var result = context
-            .Request
+        var result = context.Request
             .GetTypedHeaders()
             .GetList<MediaTypeHeaderValue>(HeaderNames.Accept);
 
@@ -132,8 +127,7 @@ public class HeaderDictionaryTypeExtensionsTest
         var context = new DefaultHttpContext();
         context.Request.Headers.Accept = "invalid";
 
-        var result = context
-            .Request
+        var result = context.Request
             .GetTypedHeaders()
             .GetList<MediaTypeHeaderValue>(HeaderNames.Accept);
 

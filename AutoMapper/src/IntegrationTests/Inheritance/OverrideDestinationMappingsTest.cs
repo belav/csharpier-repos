@@ -23,28 +23,26 @@ namespace AutoMapper.IntegrationTests.Net4
         {
             protected override void Seed(Context context)
             {
-                context
-                    .Entity
-                    .AddRange(
-                        new[]
+                context.Entity.AddRange(
+                    new[]
+                    {
+                        new Entity
                         {
-                            new Entity
-                            {
-                                Id = 1,
-                                Child = new ChildEntity { SomeValue = "Alain Brito" }
-                            },
-                            new Entity
-                            {
-                                Id = 2,
-                                Child = new ChildEntity { SomeValue = "Jimmy Bogard" }
-                            },
-                            new Entity
-                            {
-                                Id = 3,
-                                Child = new ChildEntity { SomeValue = "Bill Gates" }
-                            }
+                            Id = 1,
+                            Child = new ChildEntity { SomeValue = "Alain Brito" }
+                        },
+                        new Entity
+                        {
+                            Id = 2,
+                            Child = new ChildEntity { SomeValue = "Jimmy Bogard" }
+                        },
+                        new Entity
+                        {
+                            Id = 3,
+                            Child = new ChildEntity { SomeValue = "Bill Gates" }
                         }
-                    );
+                    }
+                );
                 base.Seed(context);
             }
         }

@@ -91,14 +91,12 @@ namespace Microsoft.CodeAnalysis.OrderModifiers
                     context.ReportDiagnostic(
                         Diagnostic.Create(
                             Descriptor,
-                            context
-                                .Tree
-                                .GetLocation(
-                                    TextSpan.FromBounds(
-                                        modifiers.First().SpanStart,
-                                        modifiers.Last().Span.End
-                                    )
+                            context.Tree.GetLocation(
+                                TextSpan.FromBounds(
+                                    modifiers.First().SpanStart,
+                                    modifiers.Last().Span.End
                                 )
+                            )
                         )
                     );
                 }

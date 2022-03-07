@@ -21,8 +21,9 @@ public class TagHelpersTest
     // so they require a reference to the assembly on which the resources are located, in order to
     // make the tests less verbose, we get a reference to the assembly with the resources and we
     // use it on all the rest of the tests.
-    private static readonly Assembly _resourcesAssembly =
-        typeof(TagHelpersTest).GetTypeInfo().Assembly;
+    private static readonly Assembly _resourcesAssembly = typeof(TagHelpersTest)
+        .GetTypeInfo()
+        .Assembly;
 
     public TagHelpersTest(
         MvcTestFixture<TagHelpersWebSite.Startup> fixture,

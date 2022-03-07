@@ -64,8 +64,9 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 // so handle "base." primary-expression here by nulling out "throughType"
                 if (throughExpression is not BaseExpressionSyntax)
                 {
-                    throughType =
-                        semanticModel.GetTypeInfo(throughExpression, cancellationToken).Type;
+                    throughType = semanticModel
+                        .GetTypeInfo(throughExpression, cancellationToken)
+                        .Type;
                 }
 
                 var includeInstance =

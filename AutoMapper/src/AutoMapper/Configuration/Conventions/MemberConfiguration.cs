@@ -178,8 +178,7 @@ namespace AutoMapper.Configuration.Conventions
                 : SourceMemberNamingConvention;
 
             var matches =
-                destinationMemberNamingConvention
-                    .SplittingExpression
+                destinationMemberNamingConvention.SplittingExpression
                     ?.Matches(nameToSearch)
                     .Cast<Match>()
                     .Select(m => sourceMemberNamingConvention.ReplaceValue(m))
@@ -197,9 +196,12 @@ namespace AutoMapper.Configuration.Conventions
                     matches.Skip(i).Select(SplitMembers)
                 );
 
-                matchingMemberInfo = parent
-                    .NameMapper
-                    .GetMatchingMemberInfo(sourceType, destType, destMemberType, first);
+                matchingMemberInfo = parent.NameMapper.GetMatchingMemberInfo(
+                    sourceType,
+                    destType,
+                    destMemberType,
+                    first
+                );
 
                 if (matchingMemberInfo != null)
                 {
@@ -224,9 +226,10 @@ namespace AutoMapper.Configuration.Conventions
             }
             return matchingMemberInfo != null;
             string SplitMembers(string value) =>
-                sourceMemberNamingConvention
-                    .SplittingExpression
-                    .Replace(value, sourceMemberNamingConvention.ReplaceValue);
+                sourceMemberNamingConvention.SplittingExpression.Replace(
+                    value,
+                    sourceMemberNamingConvention.ReplaceValue
+                );
         }
     }
 }

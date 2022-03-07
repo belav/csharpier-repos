@@ -166,18 +166,20 @@ namespace System.Reflection.Metadata
         {
             if (s_projectedTypeNames == null || s_projectionInfos == null)
             {
-                var systemRuntimeWindowsRuntime =
-                    AssemblyReferenceHandle.VirtualIndex.System_Runtime_WindowsRuntime;
+                var systemRuntimeWindowsRuntime = AssemblyReferenceHandle
+                    .VirtualIndex
+                    .System_Runtime_WindowsRuntime;
                 var systemRuntime = AssemblyReferenceHandle.VirtualIndex.System_Runtime;
                 var systemObjectModel = AssemblyReferenceHandle.VirtualIndex.System_ObjectModel;
-                var systemRuntimeWindowsUiXaml =
-                    AssemblyReferenceHandle.VirtualIndex.System_Runtime_WindowsRuntime_UI_Xaml;
-                var systemRuntimeInterop =
-                    AssemblyReferenceHandle
-                        .VirtualIndex
-                        .System_Runtime_InteropServices_WindowsRuntime;
-                var systemNumericsVectors =
-                    AssemblyReferenceHandle.VirtualIndex.System_Numerics_Vectors;
+                var systemRuntimeWindowsUiXaml = AssemblyReferenceHandle
+                    .VirtualIndex
+                    .System_Runtime_WindowsRuntime_UI_Xaml;
+                var systemRuntimeInterop = AssemblyReferenceHandle
+                    .VirtualIndex
+                    .System_Runtime_InteropServices_WindowsRuntime;
+                var systemNumericsVectors = AssemblyReferenceHandle
+                    .VirtualIndex
+                    .System_Numerics_Vectors;
 
                 // sorted by name
                 var keys = new string[50];

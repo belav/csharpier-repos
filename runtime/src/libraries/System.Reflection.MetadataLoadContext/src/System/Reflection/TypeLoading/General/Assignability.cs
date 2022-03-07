@@ -242,8 +242,9 @@ namespace System.Reflection.TypeLoading
                 Type fromTypeArgumentInfo = fromTypeArguments[i];
                 Type toTypeArgumentInfo = toTypeArguments[i];
 
-                GenericParameterAttributes attributes =
-                    genericTypeParameters[i].GenericParameterAttributes;
+                GenericParameterAttributes attributes = genericTypeParameters[
+                    i
+                ].GenericParameterAttributes;
                 switch (attributes & GenericParameterAttributes.VarianceMask)
                 {
                     case GenericParameterAttributes.Covariant:

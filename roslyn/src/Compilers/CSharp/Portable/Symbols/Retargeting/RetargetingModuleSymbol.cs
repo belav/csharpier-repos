@@ -197,8 +197,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                 }
 
 #if DEBUG
-                var identityComparer =
-                    _underlyingModule.DeclaringCompilation.Options.AssemblyIdentityComparer;
+                var identityComparer = _underlyingModule
+                    .DeclaringCompilation
+                    .Options
+                    .AssemblyIdentityComparer;
                 var definitionIdentity = ReferenceEquals(
                     referencedAssemblySymbols[i],
                     originatingSourceAssemblyDebugOnly

@@ -67,8 +67,10 @@ internal class AutoRedirectEndSessionEndpoint : IEndpointHandler
             && client.Properties.TryGetValue(ApplicationProfilesPropertyNames.Profile, out var type)
         )
         {
-            var signInScheme =
-                _identityServerOptions.Value.Authentication.CookieAuthenticationScheme;
+            var signInScheme = _identityServerOptions
+                .Value
+                .Authentication
+                .CookieAuthenticationScheme;
             if (signInScheme != null)
             {
                 await ctx.SignOutAsync(signInScheme);

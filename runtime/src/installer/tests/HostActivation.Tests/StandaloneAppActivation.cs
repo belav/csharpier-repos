@@ -42,10 +42,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining("Hello World")
-                .And
-                .HaveStdOutContaining(sharedTestState.RepoDirectories.MicrosoftNETCoreAppVersion);
+                .And.HaveStdOutContaining("Hello World")
+                .And.HaveStdOutContaining(
+                    sharedTestState.RepoDirectories.MicrosoftNETCoreAppVersion
+                );
         }
 
         [Fact]
@@ -62,10 +62,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining("Hello World")
-                .And
-                .HaveStdOutContaining(sharedTestState.RepoDirectories.MicrosoftNETCoreAppVersion);
+                .And.HaveStdOutContaining("Hello World")
+                .And.HaveStdOutContaining(
+                    sharedTestState.RepoDirectories.MicrosoftNETCoreAppVersion
+                );
         }
 
         [Fact]
@@ -81,13 +81,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             );
             File.Copy(builtAppHost, appExe, true);
 
-            int exitCode =
-                Command
-                    .Create(appExe)
-                    .CaptureStdErr()
-                    .CaptureStdOut()
-                    .Execute(fExpectedToFail: true)
-                    .ExitCode;
+            int exitCode = Command
+                .Create(appExe)
+                .CaptureStdErr()
+                .CaptureStdOut()
+                .Execute(fExpectedToFail: true)
+                .ExitCode;
 
             if (OperatingSystem.IsWindows())
             {
@@ -118,13 +117,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             );
             File.Copy(builtHost, appExe, true);
 
-            int exitCode =
-                Command
-                    .Create(appExe)
-                    .CaptureStdErr()
-                    .CaptureStdOut()
-                    .Execute(fExpectedToFail: true)
-                    .ExitCode;
+            int exitCode = Command
+                .Create(appExe)
+                .CaptureStdErr()
+                .CaptureStdOut()
+                .Execute(fExpectedToFail: true)
+                .ExitCode;
 
             if (OperatingSystem.IsWindows())
             {
@@ -158,10 +156,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining("Hello World")
-                .And
-                .HaveStdOutContaining(sharedTestState.RepoDirectories.MicrosoftNETCoreAppVersion);
+                .And.HaveStdOutContaining("Hello World")
+                .And.HaveStdOutContaining(
+                    sharedTestState.RepoDirectories.MicrosoftNETCoreAppVersion
+                );
         }
 
         [Fact]
@@ -201,10 +199,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining("Hello World")
-                .And
-                .HaveStdOutContaining(sharedTestState.RepoDirectories.MicrosoftNETCoreAppVersion);
+                .And.HaveStdOutContaining("Hello World")
+                .And.HaveStdOutContaining(
+                    sharedTestState.RepoDirectories.MicrosoftNETCoreAppVersion
+                );
         }
 
         [Fact]
@@ -243,12 +241,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute(fExpectedToFail: true)
                 .Should()
                 .Fail()
-                .And
-                .HaveStdErrContaining($"Using environment variable DOTNET_ROOT") // use the first part avoiding "(x86)" if present
-                .And
-                .HaveStdErrContaining($"=[{Path.GetFullPath(newOutDir)}] as runtime location.") // use the last part
-                .And
-                .HaveStdErrContaining("A fatal error occurred");
+                .And.HaveStdErrContaining($"Using environment variable DOTNET_ROOT") // use the first part avoiding "(x86)" if present
+                .And.HaveStdErrContaining($"=[{Path.GetFullPath(newOutDir)}] as runtime location.") // use the last part
+                .And.HaveStdErrContaining("A fatal error occurred");
         }
 
         [Fact]
@@ -269,10 +264,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining("Hello World")
-                .And
-                .HaveStdOutContaining(sharedTestState.RepoDirectories.MicrosoftNETCoreAppVersion);
+                .And.HaveStdOutContaining("Hello World")
+                .And.HaveStdOutContaining(
+                    sharedTestState.RepoDirectories.MicrosoftNETCoreAppVersion
+                );
         }
 
         [Fact]
@@ -294,8 +289,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Fail()
-                .And
-                .HaveStdErrContaining("This executable is not bound to a managed DLL to execute.");
+                .And.HaveStdErrContaining(
+                    "This executable is not bound to a managed DLL to execute."
+                );
         }
 
         [Fact]
@@ -319,15 +315,14 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Fail()
-                .And
-                .FileExists(traceFilePath)
-                .And
-                .FileContains(
+                .And.FileExists(traceFilePath)
+                .And.FileContains(
                     traceFilePath,
                     "This executable is not bound to a managed DLL to execute."
                 )
-                .And
-                .HaveStdErrContaining("This executable is not bound to a managed DLL to execute.");
+                .And.HaveStdErrContaining(
+                    "This executable is not bound to a managed DLL to execute."
+                );
 
             FileUtils.DeleteFileIfPossible(traceFilePath);
         }

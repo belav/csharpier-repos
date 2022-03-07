@@ -1156,13 +1156,12 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             var model = Validate(modelBuilder);
 
-            var column =
-                model
-                    .FindEntityType(typeof(Cat))
-                    .FindProperty("OtherId")
-                    .GetTableColumnMappings()
-                    .Single()
-                    .Column;
+            var column = model
+                .FindEntityType(typeof(Cat))
+                .FindProperty("OtherId")
+                .GetTableColumnMappings()
+                .Single()
+                .Column;
 
             Assert.Equal(2, column.PropertyMappings.Count());
             Assert.True(column.IsNullable);
@@ -1589,24 +1588,22 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         {
             var modelBuilder = CreateConventionalModelBuilder();
             modelBuilder.Entity<Animal>();
-            var fk1 =
-                modelBuilder
-                    .Entity<Cat>()
-                    .HasOne<Person>()
-                    .WithMany()
-                    .HasForeignKey(c => c.Name)
-                    .HasPrincipalKey(p => p.Name)
-                    .HasConstraintName("FK_Animal_Person_Name")
-                    .Metadata;
-            var fk2 =
-                modelBuilder
-                    .Entity<Dog>()
-                    .HasOne<Person>()
-                    .WithOne()
-                    .HasForeignKey<Dog>(d => d.Name)
-                    .HasPrincipalKey<Person>(p => p.Name)
-                    .HasConstraintName("FK_Animal_Person_Name")
-                    .Metadata;
+            var fk1 = modelBuilder
+                .Entity<Cat>()
+                .HasOne<Person>()
+                .WithMany()
+                .HasForeignKey(c => c.Name)
+                .HasPrincipalKey(p => p.Name)
+                .HasConstraintName("FK_Animal_Person_Name")
+                .Metadata;
+            var fk2 = modelBuilder
+                .Entity<Dog>()
+                .HasOne<Person>()
+                .WithOne()
+                .HasForeignKey<Dog>(d => d.Name)
+                .HasPrincipalKey<Person>(p => p.Name)
+                .HasConstraintName("FK_Animal_Person_Name")
+                .Metadata;
 
             VerifyError(
                 RelationalStrings.DuplicateForeignKeyUniquenessMismatch(
@@ -1668,24 +1665,22 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         {
             var modelBuilder = CreateConventionalModelBuilder();
             modelBuilder.Entity<Animal>();
-            var fk1 =
-                modelBuilder
-                    .Entity<Cat>()
-                    .HasOne<Person>()
-                    .WithMany()
-                    .HasForeignKey(c => c.Name)
-                    .HasPrincipalKey(p => p.Name)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .Metadata;
-            var fk2 =
-                modelBuilder
-                    .Entity<Dog>()
-                    .HasOne<Person>()
-                    .WithMany()
-                    .HasForeignKey(d => d.Name)
-                    .HasPrincipalKey(p => p.Name)
-                    .OnDelete(DeleteBehavior.SetNull)
-                    .Metadata;
+            var fk1 = modelBuilder
+                .Entity<Cat>()
+                .HasOne<Person>()
+                .WithMany()
+                .HasForeignKey(c => c.Name)
+                .HasPrincipalKey(p => p.Name)
+                .OnDelete(DeleteBehavior.Cascade)
+                .Metadata;
+            var fk2 = modelBuilder
+                .Entity<Dog>()
+                .HasOne<Person>()
+                .WithMany()
+                .HasForeignKey(d => d.Name)
+                .HasPrincipalKey(p => p.Name)
+                .OnDelete(DeleteBehavior.SetNull)
+                .Metadata;
 
             Validate(modelBuilder);
 
@@ -1703,25 +1698,23 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         {
             var modelBuilder = CreateConventionalModelBuilder();
             modelBuilder.Entity<Animal>();
-            var fk1 =
-                modelBuilder
-                    .Entity<Cat>()
-                    .HasOne<Person>()
-                    .WithMany()
-                    .HasForeignKey(c => c.Name)
-                    .HasPrincipalKey(p => p.Name)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK_Animal_Person_Name")
-                    .Metadata;
-            var fk2 =
-                modelBuilder
-                    .Entity<Dog>()
-                    .HasOne<Person>()
-                    .WithMany()
-                    .HasForeignKey(d => d.Name)
-                    .HasPrincipalKey(p => p.Name)
-                    .OnDelete(DeleteBehavior.SetNull)
-                    .Metadata;
+            var fk1 = modelBuilder
+                .Entity<Cat>()
+                .HasOne<Person>()
+                .WithMany()
+                .HasForeignKey(c => c.Name)
+                .HasPrincipalKey(p => p.Name)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_Animal_Person_Name")
+                .Metadata;
+            var fk2 = modelBuilder
+                .Entity<Dog>()
+                .HasOne<Person>()
+                .WithMany()
+                .HasForeignKey(d => d.Name)
+                .HasPrincipalKey(p => p.Name)
+                .OnDelete(DeleteBehavior.SetNull)
+                .Metadata;
 
             Validate(modelBuilder);
 
@@ -1746,24 +1739,22 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 et =>
                 {
                     et.Property(c => c.Breed).HasColumnName("Breed");
-                    fk1 =
-                        et.HasOne(a => a.FavoritePerson)
-                            .WithMany()
-                            .HasForeignKey(c => new { c.Name, c.Breed })
-                            .HasPrincipalKey(p => new { p.Name, p.FavoriteBreed })
-                            .Metadata;
+                    fk1 = et.HasOne(a => a.FavoritePerson)
+                        .WithMany()
+                        .HasForeignKey(c => new { c.Name, c.Breed })
+                        .HasPrincipalKey(p => new { p.Name, p.FavoriteBreed })
+                        .Metadata;
                 }
             );
             modelBuilder.Entity<Dog>(
                 et =>
                 {
                     et.Property(c => c.Breed).HasColumnName("Breed");
-                    fk2 =
-                        et.HasOne(a => (Employee)a.FavoritePerson)
-                            .WithMany()
-                            .HasForeignKey(c => new { c.Name, c.Breed })
-                            .HasPrincipalKey(p => new { p.Name, p.FavoriteBreed })
-                            .Metadata;
+                    fk2 = et.HasOne(a => (Employee)a.FavoritePerson)
+                        .WithMany()
+                        .HasForeignKey(c => new { c.Name, c.Breed })
+                        .HasPrincipalKey(p => new { p.Name, p.FavoriteBreed })
+                        .Metadata;
                 }
             );
 
@@ -1790,26 +1781,24 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 et =>
                 {
                     et.Property(c => c.Breed).HasColumnName("Breed");
-                    fk1 =
-                        et.HasOne<Person>()
-                            .WithMany()
-                            .HasForeignKey(c => new { c.Name, c.Breed })
-                            .HasPrincipalKey(p => new { p.Name, p.FavoriteBreed })
-                            .HasConstraintName("FK")
-                            .Metadata;
+                    fk1 = et.HasOne<Person>()
+                        .WithMany()
+                        .HasForeignKey(c => new { c.Name, c.Breed })
+                        .HasPrincipalKey(p => new { p.Name, p.FavoriteBreed })
+                        .HasConstraintName("FK")
+                        .Metadata;
                 }
             );
             modelBuilder.Entity<Dog>(
                 et =>
                 {
                     et.Property(c => c.Breed).HasColumnName("Breed");
-                    fk2 =
-                        et.HasOne<Employee>()
-                            .WithMany()
-                            .HasForeignKey(c => new { c.Name, c.Breed })
-                            .HasPrincipalKey(p => new { p.Name, p.FavoriteBreed })
-                            .HasConstraintName("FK")
-                            .Metadata;
+                    fk2 = et.HasOne<Employee>()
+                        .WithMany()
+                        .HasForeignKey(c => new { c.Name, c.Breed })
+                        .HasPrincipalKey(p => new { p.Name, p.FavoriteBreed })
+                        .HasConstraintName("FK")
+                        .Metadata;
                 }
             );
 
@@ -1972,13 +1961,12 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         {
             var modelBuilder = CreateConventionalModelBuilder();
             modelBuilder.Entity<Animal>();
-            var index1 =
-                modelBuilder
-                    .Entity<Cat>()
-                    .HasIndex(c => c.Name)
-                    .IsUnique()
-                    .HasDatabaseName("IX_Animal_Name")
-                    .Metadata;
+            var index1 = modelBuilder
+                .Entity<Cat>()
+                .HasIndex(c => c.Name)
+                .IsUnique()
+                .HasDatabaseName("IX_Animal_Name")
+                .Metadata;
             var index2 = modelBuilder.Entity<Dog>().HasIndex(d => d.Name).IsUnique(false).Metadata;
 
             Validate(modelBuilder);
@@ -2664,9 +2652,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         {
             var modelBuilder = CreateConventionalModelBuilder();
 
-            ((IConventionEntityType)modelBuilder.Entity<TestMethods>().HasNoKey().Metadata)
-                .Builder
-                .ToFunction(TestMethods.MethodBMi);
+            (
+                (IConventionEntityType)modelBuilder.Entity<TestMethods>().HasNoKey().Metadata
+            ).Builder.ToFunction(TestMethods.MethodBMi);
 
             VerifyError(
                 RelationalStrings.InvalidMappedFunctionWithParameters(
@@ -2928,8 +2916,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 {
                     e.ToTable("foo");
                     e.Property(p => p.Name)
-                        .Metadata
-                        .SetColumnName("bar", StoreObjectIdentifier.Table("foo", null));
+                        .Metadata.SetColumnName("bar", StoreObjectIdentifier.Table("foo", null));
                 }
             );
 

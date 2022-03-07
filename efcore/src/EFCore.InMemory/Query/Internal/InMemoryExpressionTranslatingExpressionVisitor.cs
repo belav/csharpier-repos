@@ -821,8 +821,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
             // if the nullability of arguments change, we have no easy/reliable way to adjust the actual methodInfo to match the new type,
             // so we are forced to cast back to the original type
-            var parameterTypes = methodCallExpression
-                .Method
+            var parameterTypes = methodCallExpression.Method
                 .GetParameters()
                 .Select(p => p.ParameterType)
                 .ToArray();
@@ -961,12 +960,10 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         protected override Expression VisitParameter(ParameterExpression parameterExpression)
         {
             if (
-                parameterExpression
-                    .Name
-                    ?.StartsWith(
-                        QueryCompilationContext.QueryParameterPrefix,
-                        StringComparison.Ordinal
-                    ) == true
+                parameterExpression.Name?.StartsWith(
+                    QueryCompilationContext.QueryParameterPrefix,
+                    StringComparison.Ordinal
+                ) == true
             )
             {
                 return Expression.Call(
@@ -1588,9 +1585,9 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     );
 
                 case MemberInitExpression memberInitExpression
-                      when memberInitExpression
-                          .Bindings
-                          .SingleOrDefault(mb => mb.Member.Name == property.Name)
+                      when memberInitExpression.Bindings.SingleOrDefault(
+                          mb => mb.Member.Name == property.Name
+                      )
                           is MemberAssignment memberAssignment:
                     return memberAssignment.Expression.Type.IsNullableType()
                       ? memberAssignment.Expression
@@ -1670,13 +1667,11 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
                 case MemberInitExpression memberInitExpression:
                     return CanEvaluate(memberInitExpression.NewExpression)
-                        && memberInitExpression
-                            .Bindings
-                            .All(
-                                mb =>
-                                    mb is MemberAssignment memberAssignment
-                                    && CanEvaluate(memberAssignment.Expression)
-                            );
+                        && memberInitExpression.Bindings.All(
+                            mb =>
+                                mb is MemberAssignment memberAssignment
+                                && CanEvaluate(memberAssignment.Expression)
+                        );
 
                 default:
                     return false;

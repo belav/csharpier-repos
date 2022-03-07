@@ -308,9 +308,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             initializerExpr = ((BoundAddressOfOperator)initializerExpr).Operand;
 
             // intervening parens may have been skipped by the binder; find the declarator
-            VariableDeclaratorSyntax? declarator = fixedInitializer
-                .Syntax
-                .FirstAncestorOrSelf<VariableDeclaratorSyntax>();
+            VariableDeclaratorSyntax? declarator =
+                fixedInitializer.Syntax.FirstAncestorOrSelf<VariableDeclaratorSyntax>();
             Debug.Assert(declarator != null);
 
             pinnedTemp = factory.SynthesizedLocal(
@@ -385,9 +384,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(getPinnableMethod is { });
 
             // intervening parens may have been skipped by the binder; find the declarator
-            VariableDeclaratorSyntax? declarator = fixedInitializer
-                .Syntax
-                .FirstAncestorOrSelf<VariableDeclaratorSyntax>();
+            VariableDeclaratorSyntax? declarator =
+                fixedInitializer.Syntax.FirstAncestorOrSelf<VariableDeclaratorSyntax>();
             Debug.Assert(declarator != null);
 
             // pinned ref int pinnedTemp
@@ -499,9 +497,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(initializerType is { });
 
             // intervening parens may have been skipped by the binder; find the declarator
-            VariableDeclaratorSyntax? declarator = fixedInitializer
-                .Syntax
-                .FirstAncestorOrSelf<VariableDeclaratorSyntax>();
+            VariableDeclaratorSyntax? declarator =
+                fixedInitializer.Syntax.FirstAncestorOrSelf<VariableDeclaratorSyntax>();
             Debug.Assert(declarator != null);
 
             pinnedTemp = factory.SynthesizedLocal(

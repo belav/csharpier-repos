@@ -52,10 +52,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 return completionItem;
             }
 
-            var completionService = document
-                .Project
-                .LanguageServices
-                .GetRequiredService<CompletionService>();
+            var completionService =
+                document.Project.LanguageServices.GetRequiredService<CompletionService>();
             var cacheEntry = GetCompletionListCacheEntry(completionItem);
             if (cacheEntry == null)
             {
@@ -85,11 +83,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             if (completionItem is LSP.VSCompletionItem vsCompletionItem)
             {
                 vsCompletionItem.Description = new ClassifiedTextElement(
-                    description
-                        .TaggedParts
-                        .Select(
-                            tp => new ClassifiedTextRun(tp.Tag.ToClassificationTypeName(), tp.Text)
-                        )
+                    description.TaggedParts.Select(
+                        tp => new ClassifiedTextRun(tp.Tag.ToClassificationTypeName(), tp.Text)
+                    )
                 );
             }
 
@@ -131,18 +127,20 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         )
         {
             if (
-                !lspCompletionItem
-                    .Label
-                    .StartsWith(completionItem.DisplayTextPrefix, StringComparison.Ordinal)
+                !lspCompletionItem.Label.StartsWith(
+                    completionItem.DisplayTextPrefix,
+                    StringComparison.Ordinal
+                )
             )
             {
                 return false;
             }
 
             if (
-                !lspCompletionItem
-                    .Label
-                    .EndsWith(completionItem.DisplayTextSuffix, StringComparison.Ordinal)
+                !lspCompletionItem.Label.EndsWith(
+                    completionItem.DisplayTextSuffix,
+                    StringComparison.Ordinal
+                )
             )
             {
                 return false;

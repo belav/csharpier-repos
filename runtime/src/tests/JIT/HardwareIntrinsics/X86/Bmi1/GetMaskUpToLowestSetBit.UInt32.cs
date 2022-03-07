@@ -223,11 +223,9 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (isUnexpectedResult)
             {
-                TestLibrary
-                    .TestFramework
-                    .LogInformation(
-                        $"{nameof(Bmi1)}.{nameof(Bmi1.GetMaskUpToLowestSetBit)}<UInt32>(UInt32): GetMaskUpToLowestSetBit failed:"
-                    );
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(Bmi1)}.{nameof(Bmi1.GetMaskUpToLowestSetBit)}<UInt32>(UInt32): GetMaskUpToLowestSetBit failed:"
+                );
                 TestLibrary.TestFramework.LogInformation($"    data: {data}");
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");
                 TestLibrary.TestFramework.LogInformation(string.Empty);

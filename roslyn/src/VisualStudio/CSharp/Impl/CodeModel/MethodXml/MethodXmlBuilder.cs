@@ -486,8 +486,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel.MethodXml
 
             using (NameRefTag(GetVariableKind(symbol)))
             {
-                var leftHandSymbol =
-                    SemanticModel.GetSymbolInfo(memberAccessExpression.Expression).Symbol;
+                var leftHandSymbol = SemanticModel
+                    .GetSymbolInfo(memberAccessExpression.Expression)
+                    .Symbol;
                 if (leftHandSymbol != null)
                 {
                     if (leftHandSymbol.Kind == SymbolKind.Alias)

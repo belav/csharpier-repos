@@ -19,15 +19,10 @@ namespace Microsoft.NET.HostModel.ComHost.Tests
 
         public static TestDirectory Create([CallerMemberName] string callingMethod = "")
         {
-            string path = System
-                .IO
-                .Path
-                .Combine(
-                    System.IO.Path.GetTempPath(),
-                    "dotNetSdkUnitTest_"
-                        + callingMethod
-                        + (Guid.NewGuid().ToString().Substring(0, 8))
-                );
+            string path = System.IO.Path.Combine(
+                System.IO.Path.GetTempPath(),
+                "dotNetSdkUnitTest_" + callingMethod + (Guid.NewGuid().ToString().Substring(0, 8))
+            );
             return new TestDirectory(path);
         }
 

@@ -87,9 +87,7 @@ namespace Microsoft.CodeAnalysis.CaseCorrection
             ImmutableArray<TextSpan> spans,
             CancellationToken cancellationToken = default
         ) =>
-            document
-                .Project
-                .LanguageServices
+            document.Project.LanguageServices
                 .GetRequiredService<ICaseCorrectionService>()
                 .CaseCorrectAsync(document, spans, cancellationToken);
 
@@ -102,8 +100,7 @@ namespace Microsoft.CodeAnalysis.CaseCorrection
             Workspace workspace,
             CancellationToken cancellationToken = default
         ) =>
-            workspace
-                .Services
+            workspace.Services
                 .GetLanguageServices(root.Language)
                 .GetRequiredService<ICaseCorrectionService>()
                 .CaseCorrect(root, spans, workspace, cancellationToken);

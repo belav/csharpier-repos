@@ -124,15 +124,14 @@ public abstract class WebViewManager : IAsyncDisposable
             return Dispatcher.InvokeAsync(
                 () =>
                 {
-                    rootComponent.ComponentId = _currentPageContext
-                        .Renderer
-                        .AddRootComponent(componentType, selector);
-                    return _currentPageContext
-                        .Renderer
-                        .RenderRootComponentAsync(
-                            rootComponent.ComponentId.Value,
-                            rootComponent.Parameters
-                        );
+                    rootComponent.ComponentId = _currentPageContext.Renderer.AddRootComponent(
+                        componentType,
+                        selector
+                    );
+                    return _currentPageContext.Renderer.RenderRootComponentAsync(
+                        rootComponent.ComponentId.Value,
+                        rootComponent.Parameters
+                    );
                 }
             );
         }
@@ -161,9 +160,9 @@ public abstract class WebViewManager : IAsyncDisposable
         {
             return Dispatcher.InvokeAsync(
                 () =>
-                    _currentPageContext
-                        .Renderer
-                        .RemoveRootComponent(rootComponent.ComponentId.Value)
+                    _currentPageContext.Renderer.RemoveRootComponent(
+                        rootComponent.ComponentId.Value
+                    )
             );
         }
         else
@@ -258,16 +257,15 @@ public abstract class WebViewManager : IAsyncDisposable
         var pendingRenders = new List<Task>(_rootComponentsBySelector.Count);
         foreach (var (selector, rootComponent) in _rootComponentsBySelector)
         {
-            rootComponent.ComponentId = _currentPageContext
-                .Renderer
-                .AddRootComponent(rootComponent.ComponentType, selector);
+            rootComponent.ComponentId = _currentPageContext.Renderer.AddRootComponent(
+                rootComponent.ComponentType,
+                selector
+            );
             pendingRenders.Add(
-                _currentPageContext
-                    .Renderer
-                    .RenderRootComponentAsync(
-                        rootComponent.ComponentId.Value,
-                        rootComponent.Parameters
-                    )
+                _currentPageContext.Renderer.RenderRootComponentAsync(
+                    rootComponent.ComponentId.Value,
+                    rootComponent.Parameters
+                )
             );
         }
 
@@ -317,9 +315,9 @@ public abstract class WebViewManager : IAsyncDisposable
             if (File.Exists(manifestPath))
             {
                 using var manifestStream = File.OpenRead(manifestPath);
-                var manifest = ManifestStaticWebAssetFileProvider
-                    .StaticWebAssetManifest
-                    .Parse(manifestStream);
+                var manifest = ManifestStaticWebAssetFileProvider.StaticWebAssetManifest.Parse(
+                    manifestStream
+                );
                 if (manifest.ContentRoots.Length > 0)
                 {
                     var manifestProvider = new ManifestStaticWebAssetFileProvider(

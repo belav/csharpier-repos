@@ -178,197 +178,367 @@ namespace Microsoft.VisualBasic
     {
         internal Constants() { }
 
-        public const Microsoft.VisualBasic.MsgBoxResult vbAbort =
-            Microsoft.VisualBasic.MsgBoxResult.Abort;
-        public const Microsoft.VisualBasic.MsgBoxStyle vbAbortRetryIgnore =
-            Microsoft.VisualBasic.MsgBoxStyle.AbortRetryIgnore;
-        public const Microsoft.VisualBasic.MsgBoxStyle vbApplicationModal =
-            Microsoft.VisualBasic.MsgBoxStyle.ApplicationModal;
-        public const Microsoft.VisualBasic.FileAttribute vbArchive =
-            Microsoft.VisualBasic.FileAttribute.Archive;
-        public const Microsoft.VisualBasic.VariantType vbArray =
-            Microsoft.VisualBasic.VariantType.Array;
+        public const Microsoft.VisualBasic.MsgBoxResult vbAbort = Microsoft
+            .VisualBasic
+            .MsgBoxResult
+            .Abort;
+        public const Microsoft.VisualBasic.MsgBoxStyle vbAbortRetryIgnore = Microsoft
+            .VisualBasic
+            .MsgBoxStyle
+            .AbortRetryIgnore;
+        public const Microsoft.VisualBasic.MsgBoxStyle vbApplicationModal = Microsoft
+            .VisualBasic
+            .MsgBoxStyle
+            .ApplicationModal;
+        public const Microsoft.VisualBasic.FileAttribute vbArchive = Microsoft
+            .VisualBasic
+            .FileAttribute
+            .Archive;
+        public const Microsoft.VisualBasic.VariantType vbArray = Microsoft
+            .VisualBasic
+            .VariantType
+            .Array;
         public const string vbBack = "\b";
-        public const Microsoft.VisualBasic.CompareMethod vbBinaryCompare =
-            Microsoft.VisualBasic.CompareMethod.Binary;
-        public const Microsoft.VisualBasic.VariantType vbBoolean =
-            Microsoft.VisualBasic.VariantType.Boolean;
-        public const Microsoft.VisualBasic.VariantType vbByte =
-            Microsoft.VisualBasic.VariantType.Byte;
-        public const Microsoft.VisualBasic.MsgBoxResult vbCancel =
-            Microsoft.VisualBasic.MsgBoxResult.Cancel;
+        public const Microsoft.VisualBasic.CompareMethod vbBinaryCompare = Microsoft
+            .VisualBasic
+            .CompareMethod
+            .Binary;
+        public const Microsoft.VisualBasic.VariantType vbBoolean = Microsoft
+            .VisualBasic
+            .VariantType
+            .Boolean;
+        public const Microsoft.VisualBasic.VariantType vbByte = Microsoft
+            .VisualBasic
+            .VariantType
+            .Byte;
+        public const Microsoft.VisualBasic.MsgBoxResult vbCancel = Microsoft
+            .VisualBasic
+            .MsgBoxResult
+            .Cancel;
         public const string vbCr = "\r";
-        public const Microsoft.VisualBasic.MsgBoxStyle vbCritical =
-            Microsoft.VisualBasic.MsgBoxStyle.Critical;
+        public const Microsoft.VisualBasic.MsgBoxStyle vbCritical = Microsoft
+            .VisualBasic
+            .MsgBoxStyle
+            .Critical;
         public const string vbCrLf = "\r\n";
-        public const Microsoft.VisualBasic.VariantType vbCurrency =
-            Microsoft.VisualBasic.VariantType.Currency;
-        public const Microsoft.VisualBasic.VariantType vbDate =
-            Microsoft.VisualBasic.VariantType.Date;
-        public const Microsoft.VisualBasic.VariantType vbDecimal =
-            Microsoft.VisualBasic.VariantType.Decimal;
-        public const Microsoft.VisualBasic.MsgBoxStyle vbDefaultButton1 =
-            Microsoft.VisualBasic.MsgBoxStyle.ApplicationModal;
-        public const Microsoft.VisualBasic.MsgBoxStyle vbDefaultButton2 =
-            Microsoft.VisualBasic.MsgBoxStyle.DefaultButton2;
-        public const Microsoft.VisualBasic.MsgBoxStyle vbDefaultButton3 =
-            Microsoft.VisualBasic.MsgBoxStyle.DefaultButton3;
-        public const Microsoft.VisualBasic.FileAttribute vbDirectory =
-            Microsoft.VisualBasic.FileAttribute.Directory;
-        public const Microsoft.VisualBasic.VariantType vbDouble =
-            Microsoft.VisualBasic.VariantType.Double;
-        public const Microsoft.VisualBasic.VariantType vbEmpty =
-            Microsoft.VisualBasic.VariantType.Empty;
-        public const Microsoft.VisualBasic.MsgBoxStyle vbExclamation =
-            Microsoft.VisualBasic.MsgBoxStyle.Exclamation;
+        public const Microsoft.VisualBasic.VariantType vbCurrency = Microsoft
+            .VisualBasic
+            .VariantType
+            .Currency;
+        public const Microsoft.VisualBasic.VariantType vbDate = Microsoft
+            .VisualBasic
+            .VariantType
+            .Date;
+        public const Microsoft.VisualBasic.VariantType vbDecimal = Microsoft
+            .VisualBasic
+            .VariantType
+            .Decimal;
+        public const Microsoft.VisualBasic.MsgBoxStyle vbDefaultButton1 = Microsoft
+            .VisualBasic
+            .MsgBoxStyle
+            .ApplicationModal;
+        public const Microsoft.VisualBasic.MsgBoxStyle vbDefaultButton2 = Microsoft
+            .VisualBasic
+            .MsgBoxStyle
+            .DefaultButton2;
+        public const Microsoft.VisualBasic.MsgBoxStyle vbDefaultButton3 = Microsoft
+            .VisualBasic
+            .MsgBoxStyle
+            .DefaultButton3;
+        public const Microsoft.VisualBasic.FileAttribute vbDirectory = Microsoft
+            .VisualBasic
+            .FileAttribute
+            .Directory;
+        public const Microsoft.VisualBasic.VariantType vbDouble = Microsoft
+            .VisualBasic
+            .VariantType
+            .Double;
+        public const Microsoft.VisualBasic.VariantType vbEmpty = Microsoft
+            .VisualBasic
+            .VariantType
+            .Empty;
+        public const Microsoft.VisualBasic.MsgBoxStyle vbExclamation = Microsoft
+            .VisualBasic
+            .MsgBoxStyle
+            .Exclamation;
         public const Microsoft.VisualBasic.TriState vbFalse = Microsoft.VisualBasic.TriState.False;
-        public const Microsoft.VisualBasic.FirstWeekOfYear vbFirstFourDays =
-            Microsoft.VisualBasic.FirstWeekOfYear.FirstFourDays;
-        public const Microsoft.VisualBasic.FirstWeekOfYear vbFirstFullWeek =
-            Microsoft.VisualBasic.FirstWeekOfYear.FirstFullWeek;
-        public const Microsoft.VisualBasic.FirstWeekOfYear vbFirstJan1 =
-            Microsoft.VisualBasic.FirstWeekOfYear.Jan1;
+        public const Microsoft.VisualBasic.FirstWeekOfYear vbFirstFourDays = Microsoft
+            .VisualBasic
+            .FirstWeekOfYear
+            .FirstFourDays;
+        public const Microsoft.VisualBasic.FirstWeekOfYear vbFirstFullWeek = Microsoft
+            .VisualBasic
+            .FirstWeekOfYear
+            .FirstFullWeek;
+        public const Microsoft.VisualBasic.FirstWeekOfYear vbFirstJan1 = Microsoft
+            .VisualBasic
+            .FirstWeekOfYear
+            .Jan1;
         public const string vbFormFeed = "\f";
-        public const Microsoft.VisualBasic.FirstDayOfWeek vbFriday =
-            Microsoft.VisualBasic.FirstDayOfWeek.Friday;
-        public const Microsoft.VisualBasic.DateFormat vbGeneralDate =
-            Microsoft.VisualBasic.DateFormat.GeneralDate;
+        public const Microsoft.VisualBasic.FirstDayOfWeek vbFriday = Microsoft
+            .VisualBasic
+            .FirstDayOfWeek
+            .Friday;
+        public const Microsoft.VisualBasic.DateFormat vbGeneralDate = Microsoft
+            .VisualBasic
+            .DateFormat
+            .GeneralDate;
         public const Microsoft.VisualBasic.CallType vbGet = Microsoft.VisualBasic.CallType.Get;
-        public const Microsoft.VisualBasic.FileAttribute vbHidden =
-            Microsoft.VisualBasic.FileAttribute.Hidden;
-        public const Microsoft.VisualBasic.AppWinStyle vbHide =
-            Microsoft.VisualBasic.AppWinStyle.Hide;
-        public const Microsoft.VisualBasic.VbStrConv vbHiragana =
-            Microsoft.VisualBasic.VbStrConv.Hiragana;
-        public const Microsoft.VisualBasic.MsgBoxResult vbIgnore =
-            Microsoft.VisualBasic.MsgBoxResult.Ignore;
-        public const Microsoft.VisualBasic.MsgBoxStyle vbInformation =
-            Microsoft.VisualBasic.MsgBoxStyle.Information;
-        public const Microsoft.VisualBasic.VariantType vbInteger =
-            Microsoft.VisualBasic.VariantType.Integer;
-        public const Microsoft.VisualBasic.VbStrConv vbKatakana =
-            Microsoft.VisualBasic.VbStrConv.Katakana;
+        public const Microsoft.VisualBasic.FileAttribute vbHidden = Microsoft
+            .VisualBasic
+            .FileAttribute
+            .Hidden;
+        public const Microsoft.VisualBasic.AppWinStyle vbHide = Microsoft
+            .VisualBasic
+            .AppWinStyle
+            .Hide;
+        public const Microsoft.VisualBasic.VbStrConv vbHiragana = Microsoft
+            .VisualBasic
+            .VbStrConv
+            .Hiragana;
+        public const Microsoft.VisualBasic.MsgBoxResult vbIgnore = Microsoft
+            .VisualBasic
+            .MsgBoxResult
+            .Ignore;
+        public const Microsoft.VisualBasic.MsgBoxStyle vbInformation = Microsoft
+            .VisualBasic
+            .MsgBoxStyle
+            .Information;
+        public const Microsoft.VisualBasic.VariantType vbInteger = Microsoft
+            .VisualBasic
+            .VariantType
+            .Integer;
+        public const Microsoft.VisualBasic.VbStrConv vbKatakana = Microsoft
+            .VisualBasic
+            .VbStrConv
+            .Katakana;
         public const Microsoft.VisualBasic.CallType vbLet = Microsoft.VisualBasic.CallType.Let;
         public const string vbLf = "\n";
-        public const Microsoft.VisualBasic.VbStrConv vbLinguisticCasing =
-            Microsoft.VisualBasic.VbStrConv.LinguisticCasing;
-        public const Microsoft.VisualBasic.VariantType vbLong =
-            Microsoft.VisualBasic.VariantType.Long;
-        public const Microsoft.VisualBasic.DateFormat vbLongDate =
-            Microsoft.VisualBasic.DateFormat.LongDate;
-        public const Microsoft.VisualBasic.DateFormat vbLongTime =
-            Microsoft.VisualBasic.DateFormat.LongTime;
-        public const Microsoft.VisualBasic.VbStrConv vbLowerCase =
-            Microsoft.VisualBasic.VbStrConv.Lowercase;
-        public const Microsoft.VisualBasic.AppWinStyle vbMaximizedFocus =
-            Microsoft.VisualBasic.AppWinStyle.MaximizedFocus;
-        public const Microsoft.VisualBasic.CallType vbMethod =
-            Microsoft.VisualBasic.CallType.Method;
-        public const Microsoft.VisualBasic.AppWinStyle vbMinimizedFocus =
-            Microsoft.VisualBasic.AppWinStyle.MinimizedFocus;
-        public const Microsoft.VisualBasic.AppWinStyle vbMinimizedNoFocus =
-            Microsoft.VisualBasic.AppWinStyle.MinimizedNoFocus;
-        public const Microsoft.VisualBasic.FirstDayOfWeek vbMonday =
-            Microsoft.VisualBasic.FirstDayOfWeek.Monday;
-        public const Microsoft.VisualBasic.MsgBoxStyle vbMsgBoxHelp =
-            Microsoft.VisualBasic.MsgBoxStyle.MsgBoxHelp;
-        public const Microsoft.VisualBasic.MsgBoxStyle vbMsgBoxRight =
-            Microsoft.VisualBasic.MsgBoxStyle.MsgBoxRight;
-        public const Microsoft.VisualBasic.MsgBoxStyle vbMsgBoxRtlReading =
-            Microsoft.VisualBasic.MsgBoxStyle.MsgBoxRtlReading;
-        public const Microsoft.VisualBasic.MsgBoxStyle vbMsgBoxSetForeground =
-            Microsoft.VisualBasic.MsgBoxStyle.MsgBoxSetForeground;
-        public const Microsoft.VisualBasic.VbStrConv vbNarrow =
-            Microsoft.VisualBasic.VbStrConv.Narrow;
+        public const Microsoft.VisualBasic.VbStrConv vbLinguisticCasing = Microsoft
+            .VisualBasic
+            .VbStrConv
+            .LinguisticCasing;
+        public const Microsoft.VisualBasic.VariantType vbLong = Microsoft
+            .VisualBasic
+            .VariantType
+            .Long;
+        public const Microsoft.VisualBasic.DateFormat vbLongDate = Microsoft
+            .VisualBasic
+            .DateFormat
+            .LongDate;
+        public const Microsoft.VisualBasic.DateFormat vbLongTime = Microsoft
+            .VisualBasic
+            .DateFormat
+            .LongTime;
+        public const Microsoft.VisualBasic.VbStrConv vbLowerCase = Microsoft
+            .VisualBasic
+            .VbStrConv
+            .Lowercase;
+        public const Microsoft.VisualBasic.AppWinStyle vbMaximizedFocus = Microsoft
+            .VisualBasic
+            .AppWinStyle
+            .MaximizedFocus;
+        public const Microsoft.VisualBasic.CallType vbMethod = Microsoft
+            .VisualBasic
+            .CallType
+            .Method;
+        public const Microsoft.VisualBasic.AppWinStyle vbMinimizedFocus = Microsoft
+            .VisualBasic
+            .AppWinStyle
+            .MinimizedFocus;
+        public const Microsoft.VisualBasic.AppWinStyle vbMinimizedNoFocus = Microsoft
+            .VisualBasic
+            .AppWinStyle
+            .MinimizedNoFocus;
+        public const Microsoft.VisualBasic.FirstDayOfWeek vbMonday = Microsoft
+            .VisualBasic
+            .FirstDayOfWeek
+            .Monday;
+        public const Microsoft.VisualBasic.MsgBoxStyle vbMsgBoxHelp = Microsoft
+            .VisualBasic
+            .MsgBoxStyle
+            .MsgBoxHelp;
+        public const Microsoft.VisualBasic.MsgBoxStyle vbMsgBoxRight = Microsoft
+            .VisualBasic
+            .MsgBoxStyle
+            .MsgBoxRight;
+        public const Microsoft.VisualBasic.MsgBoxStyle vbMsgBoxRtlReading = Microsoft
+            .VisualBasic
+            .MsgBoxStyle
+            .MsgBoxRtlReading;
+        public const Microsoft.VisualBasic.MsgBoxStyle vbMsgBoxSetForeground = Microsoft
+            .VisualBasic
+            .MsgBoxStyle
+            .MsgBoxSetForeground;
+        public const Microsoft.VisualBasic.VbStrConv vbNarrow = Microsoft
+            .VisualBasic
+            .VbStrConv
+            .Narrow;
 
         [System.ObsoleteAttribute(
             "vbNewLine has been deprecated. For a carriage return and line feed, use vbCrLf. For the current platform's newline, use System.Environment.NewLine."
         )]
         public const string vbNewLine = "\r\n";
-        public const Microsoft.VisualBasic.MsgBoxResult vbNo =
-            Microsoft.VisualBasic.MsgBoxResult.No;
-        public const Microsoft.VisualBasic.FileAttribute vbNormal =
-            Microsoft.VisualBasic.FileAttribute.Normal;
-        public const Microsoft.VisualBasic.AppWinStyle vbNormalFocus =
-            Microsoft.VisualBasic.AppWinStyle.NormalFocus;
-        public const Microsoft.VisualBasic.AppWinStyle vbNormalNoFocus =
-            Microsoft.VisualBasic.AppWinStyle.NormalNoFocus;
-        public const Microsoft.VisualBasic.VariantType vbNull =
-            Microsoft.VisualBasic.VariantType.Null;
+        public const Microsoft.VisualBasic.MsgBoxResult vbNo = Microsoft
+            .VisualBasic
+            .MsgBoxResult
+            .No;
+        public const Microsoft.VisualBasic.FileAttribute vbNormal = Microsoft
+            .VisualBasic
+            .FileAttribute
+            .Normal;
+        public const Microsoft.VisualBasic.AppWinStyle vbNormalFocus = Microsoft
+            .VisualBasic
+            .AppWinStyle
+            .NormalFocus;
+        public const Microsoft.VisualBasic.AppWinStyle vbNormalNoFocus = Microsoft
+            .VisualBasic
+            .AppWinStyle
+            .NormalNoFocus;
+        public const Microsoft.VisualBasic.VariantType vbNull = Microsoft
+            .VisualBasic
+            .VariantType
+            .Null;
         public const string vbNullChar = "\0";
         public const string? vbNullString = null;
-        public const Microsoft.VisualBasic.VariantType vbObject =
-            Microsoft.VisualBasic.VariantType.Object;
+        public const Microsoft.VisualBasic.VariantType vbObject = Microsoft
+            .VisualBasic
+            .VariantType
+            .Object;
         public const int vbObjectError = -2147221504;
-        public const Microsoft.VisualBasic.MsgBoxResult vbOK =
-            Microsoft.VisualBasic.MsgBoxResult.Ok;
-        public const Microsoft.VisualBasic.MsgBoxStyle vbOKCancel =
-            Microsoft.VisualBasic.MsgBoxStyle.OkCancel;
-        public const Microsoft.VisualBasic.MsgBoxStyle vbOKOnly =
-            Microsoft.VisualBasic.MsgBoxStyle.ApplicationModal;
-        public const Microsoft.VisualBasic.VbStrConv vbProperCase =
-            Microsoft.VisualBasic.VbStrConv.ProperCase;
-        public const Microsoft.VisualBasic.MsgBoxStyle vbQuestion =
-            Microsoft.VisualBasic.MsgBoxStyle.Question;
-        public const Microsoft.VisualBasic.FileAttribute vbReadOnly =
-            Microsoft.VisualBasic.FileAttribute.ReadOnly;
-        public const Microsoft.VisualBasic.MsgBoxResult vbRetry =
-            Microsoft.VisualBasic.MsgBoxResult.Retry;
-        public const Microsoft.VisualBasic.MsgBoxStyle vbRetryCancel =
-            Microsoft.VisualBasic.MsgBoxStyle.RetryCancel;
-        public const Microsoft.VisualBasic.FirstDayOfWeek vbSaturday =
-            Microsoft.VisualBasic.FirstDayOfWeek.Saturday;
+        public const Microsoft.VisualBasic.MsgBoxResult vbOK = Microsoft
+            .VisualBasic
+            .MsgBoxResult
+            .Ok;
+        public const Microsoft.VisualBasic.MsgBoxStyle vbOKCancel = Microsoft
+            .VisualBasic
+            .MsgBoxStyle
+            .OkCancel;
+        public const Microsoft.VisualBasic.MsgBoxStyle vbOKOnly = Microsoft
+            .VisualBasic
+            .MsgBoxStyle
+            .ApplicationModal;
+        public const Microsoft.VisualBasic.VbStrConv vbProperCase = Microsoft
+            .VisualBasic
+            .VbStrConv
+            .ProperCase;
+        public const Microsoft.VisualBasic.MsgBoxStyle vbQuestion = Microsoft
+            .VisualBasic
+            .MsgBoxStyle
+            .Question;
+        public const Microsoft.VisualBasic.FileAttribute vbReadOnly = Microsoft
+            .VisualBasic
+            .FileAttribute
+            .ReadOnly;
+        public const Microsoft.VisualBasic.MsgBoxResult vbRetry = Microsoft
+            .VisualBasic
+            .MsgBoxResult
+            .Retry;
+        public const Microsoft.VisualBasic.MsgBoxStyle vbRetryCancel = Microsoft
+            .VisualBasic
+            .MsgBoxStyle
+            .RetryCancel;
+        public const Microsoft.VisualBasic.FirstDayOfWeek vbSaturday = Microsoft
+            .VisualBasic
+            .FirstDayOfWeek
+            .Saturday;
         public const Microsoft.VisualBasic.CallType vbSet = Microsoft.VisualBasic.CallType.Set;
-        public const Microsoft.VisualBasic.DateFormat vbShortDate =
-            Microsoft.VisualBasic.DateFormat.ShortDate;
-        public const Microsoft.VisualBasic.DateFormat vbShortTime =
-            Microsoft.VisualBasic.DateFormat.ShortTime;
-        public const Microsoft.VisualBasic.VbStrConv vbSimplifiedChinese =
-            Microsoft.VisualBasic.VbStrConv.SimplifiedChinese;
-        public const Microsoft.VisualBasic.VariantType vbSingle =
-            Microsoft.VisualBasic.VariantType.Single;
-        public const Microsoft.VisualBasic.VariantType vbString =
-            Microsoft.VisualBasic.VariantType.String;
-        public const Microsoft.VisualBasic.FirstDayOfWeek vbSunday =
-            Microsoft.VisualBasic.FirstDayOfWeek.Sunday;
-        public const Microsoft.VisualBasic.FileAttribute vbSystem =
-            Microsoft.VisualBasic.FileAttribute.System;
-        public const Microsoft.VisualBasic.MsgBoxStyle vbSystemModal =
-            Microsoft.VisualBasic.MsgBoxStyle.SystemModal;
+        public const Microsoft.VisualBasic.DateFormat vbShortDate = Microsoft
+            .VisualBasic
+            .DateFormat
+            .ShortDate;
+        public const Microsoft.VisualBasic.DateFormat vbShortTime = Microsoft
+            .VisualBasic
+            .DateFormat
+            .ShortTime;
+        public const Microsoft.VisualBasic.VbStrConv vbSimplifiedChinese = Microsoft
+            .VisualBasic
+            .VbStrConv
+            .SimplifiedChinese;
+        public const Microsoft.VisualBasic.VariantType vbSingle = Microsoft
+            .VisualBasic
+            .VariantType
+            .Single;
+        public const Microsoft.VisualBasic.VariantType vbString = Microsoft
+            .VisualBasic
+            .VariantType
+            .String;
+        public const Microsoft.VisualBasic.FirstDayOfWeek vbSunday = Microsoft
+            .VisualBasic
+            .FirstDayOfWeek
+            .Sunday;
+        public const Microsoft.VisualBasic.FileAttribute vbSystem = Microsoft
+            .VisualBasic
+            .FileAttribute
+            .System;
+        public const Microsoft.VisualBasic.MsgBoxStyle vbSystemModal = Microsoft
+            .VisualBasic
+            .MsgBoxStyle
+            .SystemModal;
         public const string vbTab = "\t";
-        public const Microsoft.VisualBasic.CompareMethod vbTextCompare =
-            Microsoft.VisualBasic.CompareMethod.Text;
-        public const Microsoft.VisualBasic.FirstDayOfWeek vbThursday =
-            Microsoft.VisualBasic.FirstDayOfWeek.Thursday;
-        public const Microsoft.VisualBasic.VbStrConv vbTraditionalChinese =
-            Microsoft.VisualBasic.VbStrConv.TraditionalChinese;
+        public const Microsoft.VisualBasic.CompareMethod vbTextCompare = Microsoft
+            .VisualBasic
+            .CompareMethod
+            .Text;
+        public const Microsoft.VisualBasic.FirstDayOfWeek vbThursday = Microsoft
+            .VisualBasic
+            .FirstDayOfWeek
+            .Thursday;
+        public const Microsoft.VisualBasic.VbStrConv vbTraditionalChinese = Microsoft
+            .VisualBasic
+            .VbStrConv
+            .TraditionalChinese;
         public const Microsoft.VisualBasic.TriState vbTrue = Microsoft.VisualBasic.TriState.True;
-        public const Microsoft.VisualBasic.FirstDayOfWeek vbTuesday =
-            Microsoft.VisualBasic.FirstDayOfWeek.Tuesday;
-        public const Microsoft.VisualBasic.VbStrConv vbUpperCase =
-            Microsoft.VisualBasic.VbStrConv.Uppercase;
-        public const Microsoft.VisualBasic.TriState vbUseDefault =
-            Microsoft.VisualBasic.TriState.UseDefault;
-        public const Microsoft.VisualBasic.VariantType vbUserDefinedType =
-            Microsoft.VisualBasic.VariantType.UserDefinedType;
-        public const Microsoft.VisualBasic.FirstWeekOfYear vbUseSystem =
-            Microsoft.VisualBasic.FirstWeekOfYear.System;
-        public const Microsoft.VisualBasic.FirstDayOfWeek vbUseSystemDayOfWeek =
-            Microsoft.VisualBasic.FirstDayOfWeek.System;
-        public const Microsoft.VisualBasic.VariantType vbVariant =
-            Microsoft.VisualBasic.VariantType.Variant;
+        public const Microsoft.VisualBasic.FirstDayOfWeek vbTuesday = Microsoft
+            .VisualBasic
+            .FirstDayOfWeek
+            .Tuesday;
+        public const Microsoft.VisualBasic.VbStrConv vbUpperCase = Microsoft
+            .VisualBasic
+            .VbStrConv
+            .Uppercase;
+        public const Microsoft.VisualBasic.TriState vbUseDefault = Microsoft
+            .VisualBasic
+            .TriState
+            .UseDefault;
+        public const Microsoft.VisualBasic.VariantType vbUserDefinedType = Microsoft
+            .VisualBasic
+            .VariantType
+            .UserDefinedType;
+        public const Microsoft.VisualBasic.FirstWeekOfYear vbUseSystem = Microsoft
+            .VisualBasic
+            .FirstWeekOfYear
+            .System;
+        public const Microsoft.VisualBasic.FirstDayOfWeek vbUseSystemDayOfWeek = Microsoft
+            .VisualBasic
+            .FirstDayOfWeek
+            .System;
+        public const Microsoft.VisualBasic.VariantType vbVariant = Microsoft
+            .VisualBasic
+            .VariantType
+            .Variant;
         public const string vbVerticalTab = "\v";
-        public const Microsoft.VisualBasic.FileAttribute vbVolume =
-            Microsoft.VisualBasic.FileAttribute.Volume;
-        public const Microsoft.VisualBasic.FirstDayOfWeek vbWednesday =
-            Microsoft.VisualBasic.FirstDayOfWeek.Wednesday;
+        public const Microsoft.VisualBasic.FileAttribute vbVolume = Microsoft
+            .VisualBasic
+            .FileAttribute
+            .Volume;
+        public const Microsoft.VisualBasic.FirstDayOfWeek vbWednesday = Microsoft
+            .VisualBasic
+            .FirstDayOfWeek
+            .Wednesday;
         public const Microsoft.VisualBasic.VbStrConv vbWide = Microsoft.VisualBasic.VbStrConv.Wide;
-        public const Microsoft.VisualBasic.MsgBoxResult vbYes =
-            Microsoft.VisualBasic.MsgBoxResult.Yes;
-        public const Microsoft.VisualBasic.MsgBoxStyle vbYesNo =
-            Microsoft.VisualBasic.MsgBoxStyle.YesNo;
-        public const Microsoft.VisualBasic.MsgBoxStyle vbYesNoCancel =
-            Microsoft.VisualBasic.MsgBoxStyle.YesNoCancel;
+        public const Microsoft.VisualBasic.MsgBoxResult vbYes = Microsoft
+            .VisualBasic
+            .MsgBoxResult
+            .Yes;
+        public const Microsoft.VisualBasic.MsgBoxStyle vbYesNo = Microsoft
+            .VisualBasic
+            .MsgBoxStyle
+            .YesNo;
+        public const Microsoft.VisualBasic.MsgBoxStyle vbYesNoCancel = Microsoft
+            .VisualBasic
+            .MsgBoxStyle
+            .YesNoCancel;
     }
 
     public sealed partial class ControlChars

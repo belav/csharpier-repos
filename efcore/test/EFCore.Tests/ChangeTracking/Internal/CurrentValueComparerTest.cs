@@ -111,8 +111,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     .Throws<InvalidOperationException>(
                         () =>
                             factory.Create(
-                                context
-                                    .Model
+                                context.Model
                                     .FindEntityType(typeof(Godzilla))
                                     .FindProperty(nameof(Godzilla.NotComparable))
                             )
@@ -139,8 +138,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     .Throws<InvalidOperationException>(
                         () =>
                             factory.Create(
-                                context
-                                    .Model
+                                context.Model
                                     .FindEntityType(typeof(Godzilla))
                                     .FindProperty(nameof(Godzilla.NotComparableConverted))
                             )
@@ -208,14 +206,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 generator(3)
             );
 
-            var comparer = context
-                .Model
+            var comparer = context.Model
                 .FindEntityType(typeof(Godzilla))
                 .FindProperty(propertyName)
                 .GetCurrentValueComparer();
 
-            var entries = context
-                .ChangeTracker
+            var entries = context.ChangeTracker
                 .Entries<Godzilla>()
                 .OrderBy(e => e.GetInfrastructure(), comparer)
                 .Select(e => selector(e.Entity))
@@ -293,14 +289,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 generator(new byte[] { 3, 3 })
             );
 
-            var comparer = context
-                .Model
+            var comparer = context.Model
                 .FindEntityType(typeof(Godzilla))
                 .FindProperty(propertyName)
                 .GetCurrentValueComparer();
 
-            var entries = context
-                .ChangeTracker
+            var entries = context.ChangeTracker
                 .Entries<Godzilla>()
                 .OrderBy(e => e.GetInfrastructure(), comparer)
                 .Select(e => selector(e.Entity))
@@ -447,14 +441,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 generator(3)
             );
 
-            var comparer = context
-                .Model
+            var comparer = context.Model
                 .FindEntityType(typeof(Godzilla))
                 .FindProperty(propertyName)
                 .GetCurrentValueComparer();
 
-            var entries = context
-                .ChangeTracker
+            var entries = context.ChangeTracker
                 .Entries<Godzilla>()
                 .OrderBy(e => e.GetInfrastructure(), comparer)
                 .Select(e => selector(e.Entity))
@@ -544,14 +536,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 generator(new byte[] { 3, 3 })
             );
 
-            var comparer = context
-                .Model
+            var comparer = context.Model
                 .FindEntityType(typeof(Godzilla))
                 .FindProperty(propertyName)
                 .GetCurrentValueComparer();
 
-            var entries = context
-                .ChangeTracker
+            var entries = context.ChangeTracker
                 .Entries<Godzilla>()
                 .OrderBy(e => e.GetInfrastructure(), comparer)
                 .Select(e => selector(e.Entity))
@@ -737,9 +727,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     return result;
                 }
 
-                return StructuralComparisons
-                    .StructuralComparer
-                    .Compare(Value, ((ComparableBytesStruct)other).Value);
+                return StructuralComparisons.StructuralComparer.Compare(
+                    Value,
+                    ((ComparableBytesStruct)other).Value
+                );
             }
         }
 

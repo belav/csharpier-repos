@@ -65,11 +65,9 @@ namespace Microsoft.EntityFrameworkCore.Tools
                 Path.GetFileName(file) + ".EntityFrameworkCore.targets"
             );
             using (
-                var input = typeof(Resources)
-                    .Assembly
-                    .GetManifestResourceStream(
-                        "Microsoft.EntityFrameworkCore.Tools.Resources.EntityFrameworkCore.targets"
-                    )!
+                var input = typeof(Resources).Assembly.GetManifestResourceStream(
+                    "Microsoft.EntityFrameworkCore.Tools.Resources.EntityFrameworkCore.targets"
+                )!
             )
             using (var output = File.OpenWrite(efTargetsPath))
             {

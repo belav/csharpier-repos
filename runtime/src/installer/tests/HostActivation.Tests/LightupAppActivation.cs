@@ -49,8 +49,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .EnsureRestored()
                 .BuildProject();
 
-            string greatestVersionSharedFxPath =
-                sharedTestState.LightupLibFixture_Built.BuiltDotnet.GreatestVersionSharedFxPath;
+            string greatestVersionSharedFxPath = sharedTestState
+                .LightupLibFixture_Built
+                .BuiltDotnet
+                .GreatestVersionSharedFxPath;
             string sharedFxVersion = (new DirectoryInfo(greatestVersionSharedFxPath)).Name;
             _builtSharedFxDir = Path.Combine(
                 builtDotnet,
@@ -102,8 +104,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute(fExpectedToFail: true)
                 .Should()
                 .Fail()
-                .And
-                .HaveStdErrContaining(
+                .And.HaveStdErrContaining(
                     "Error:"
                         + Environment.NewLine
                         + "  An assembly specified in the application dependencies manifest (LightupLib.deps.json) was not found:"
@@ -163,8 +164,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining("Hello LightupClient");
+                .And.HaveStdOutContaining("Hello LightupClient");
         }
 
         [Fact]
@@ -230,10 +230,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining("Hello LightupClient")
-                .And
-                .HaveStdErrContaining(
+                .And.HaveStdOutContaining("Hello LightupClient")
+                .And.HaveStdErrContaining(
                     $"Using specified additional deps.json: '{selectedLightupPath}"
                 );
         }
@@ -301,10 +299,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining("Hello LightupClient")
-                .And
-                .HaveStdErrContaining(
+                .And.HaveStdOutContaining("Hello LightupClient")
+                .And.HaveStdErrContaining(
                     $"Using specified additional deps.json: '{selectedLightupPath}"
                 );
         }
@@ -360,8 +356,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute(fExpectedToFail: true)
                 .Should()
                 .Fail()
-                .And
-                .HaveStdErrContaining(
+                .And.HaveStdErrContaining(
                     $"No additional deps directory less than or equal to [8888.0.1] found with same major and minor version."
                 );
         }
@@ -391,8 +386,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute(fExpectedToFail: true)
                 .Should()
                 .Fail()
-                .And
-                .HaveStdOutContaining("Exception: Failed to load the lightup assembly!");
+                .And.HaveStdOutContaining("Exception: Failed to load the lightup assembly!");
         }
 
         [Fact]
@@ -440,8 +434,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute(fExpectedToFail: true)
                 .Should()
                 .Fail()
-                .And
-                .HaveStdErrContaining(
+                .And.HaveStdErrContaining(
                     $"Error initializing the dependency resolver: An error occurred while parsing: {additionalDepsPath}"
                 );
         }
@@ -518,25 +511,18 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdErrContaining(
+                .And.HaveStdErrContaining(
                     $"Using specified additional deps.json: '{additionalDepsPath}'"
                 )
-                .And
-                .HaveStdErrContaining($"Adding tpa entry: {uberAssembly}")
-                .And
-                .HaveStdErrContaining($"Adding tpa entry: {appAssembly}")
-                .And
-                .HaveStdErrContaining($"Replacing deps entry [{appAssembly}")
-                .And
-                .HaveStdErrContaining(
+                .And.HaveStdErrContaining($"Adding tpa entry: {uberAssembly}")
+                .And.HaveStdErrContaining($"Adding tpa entry: {appAssembly}")
+                .And.HaveStdErrContaining($"Replacing deps entry [{appAssembly}")
+                .And.HaveStdErrContaining(
                     $"with [{uberAssembly}, AssemblyVersion:{SystemCollectionsImmutableAssemblyVersion}, FileVersion:{SystemCollectionsImmutableFileVersion}]"
                 )
                 // Verify final selection in TRUSTED_PLATFORM_ASSEMBLIES
-                .And
-                .HaveStdErrContaining($"{uberAssembly}{Path.PathSeparator}")
-                .And
-                .NotHaveStdErrContaining($"{appAssembly}{Path.PathSeparator}");
+                .And.HaveStdErrContaining($"{uberAssembly}{Path.PathSeparator}")
+                .And.NotHaveStdErrContaining($"{appAssembly}{Path.PathSeparator}");
         }
 
         [Fact]
@@ -612,19 +598,15 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdErrContaining(
+                .And.HaveStdErrContaining(
                     $"Using specified additional deps.json: '{additionalDepsPath}'"
                 )
-                .And
-                .HaveStdErrContaining(
+                .And.HaveStdErrContaining(
                     $"Adding tpa entry: {appAssembly}, AssemblyVersion: 99.9.9.9, FileVersion: 98.9.9.9"
                 )
                 // Verify final selection in TRUSTED_PLATFORM_ASSEMBLIES
-                .And
-                .HaveStdErrContaining($"{appAssembly}{Path.PathSeparator}")
-                .And
-                .NotHaveStdErrContaining($"{uberAssembly}{Path.PathSeparator}");
+                .And.HaveStdErrContaining($"{appAssembly}{Path.PathSeparator}")
+                .And.NotHaveStdErrContaining($"{uberAssembly}{Path.PathSeparator}");
         }
 
         private static void CreateLightupFolder(

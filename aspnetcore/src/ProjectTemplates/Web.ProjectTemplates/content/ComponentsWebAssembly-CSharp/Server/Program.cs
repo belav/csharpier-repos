@@ -26,20 +26,17 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString =
     builder.Configuration.GetConnectionString("DefaultConnection")
     ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-builder
-    .Services
-    .AddDbContext<ApplicationDbContext>(
-        options =>
+builder.Services.AddDbContext<ApplicationDbContext>(
+    options =>
 #if (UseLocalDB)
     options.UseSqlServer(connectionString));
 #else
-            options.UseSqlite(connectionString)
-    );
+        options.UseSqlite(connectionString)
+);
 #endif
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder
-    .Services
+builder.Services
     .AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
@@ -48,8 +45,7 @@ builder.Services.AddIdentityServer().AddApiAuthorization<ApplicationUser, Applic
 builder.Services.AddAuthentication().AddIdentityServerJwt();
 #endif
 #if (OrganizationalAuth)
-builder
-    .Services
+builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 #if (GenerateApiOrGraph)
     .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"))
@@ -65,8 +61,7 @@ builder
     .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
 #endif
 #elif (IndividualB2CAuth)
-builder
-    .Services
+builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 #if (GenerateApi)
     .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAdB2C"))
@@ -78,9 +73,7 @@ builder
 #endif
 #endif
 
-builder
-    .Services
-    .AddControllersWithViews();
+builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
 var app = builder.Build();

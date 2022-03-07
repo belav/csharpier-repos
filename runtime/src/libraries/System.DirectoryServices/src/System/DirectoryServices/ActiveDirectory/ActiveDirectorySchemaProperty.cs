@@ -1612,10 +1612,12 @@ namespace System.DirectoryServices.ActiveDirectory
             GetSchemaPropertyDirectoryEntry();
             Debug.Assert(_propertyEntry != null);
 
-            _propertyEntry.Properties[PropertyManager.AttributeSyntax].Value =
-                s_syntaxes[(int)syntax].attributeSyntax;
-            _propertyEntry.Properties[PropertyManager.OMSyntax].Value =
-                s_syntaxes[(int)syntax].oMSyntax;
+            _propertyEntry.Properties[PropertyManager.AttributeSyntax].Value = s_syntaxes[
+                (int)syntax
+            ].attributeSyntax;
+            _propertyEntry.Properties[PropertyManager.OMSyntax].Value = s_syntaxes[
+                (int)syntax
+            ].oMSyntax;
             OMObjectClass? oMObjectClass = s_syntaxes[(int)syntax].oMObjectClass;
             if (oMObjectClass != null)
             {

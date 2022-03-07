@@ -163,13 +163,11 @@ public class HtmlHelperValueTest
         viewData["StringProperty"] = "ViewDataValue";
         viewData.TemplateInfo.HtmlFieldPrefix = "FieldPrefix";
 
-        viewData
-            .ModelState
-            .SetModelValue(
-                "FieldPrefix.StringProperty",
-                "StringPropertyRawValue",
-                "StringPropertyAttemptedValue"
-            );
+        viewData.ModelState.SetModelValue(
+            "FieldPrefix.StringProperty",
+            "StringPropertyRawValue",
+            "StringPropertyAttemptedValue"
+        );
 
         viewData.ModelState.SetModelValue("FieldPrefix", "ModelRawValue", "ModelAttemptedValue");
 
@@ -223,13 +221,11 @@ public class HtmlHelperValueTest
         var viewData = helper.ViewData;
         viewData["StringProperty"] = "ViewDataValue <\"\">";
 
-        viewData
-            .ModelState
-            .SetModelValue(
-                "ObjectProperty",
-                "ObjectPropertyRawValue <\"\">",
-                "ObjectPropertyAttemptedValue <\"\">"
-            );
+        viewData.ModelState.SetModelValue(
+            "ObjectProperty",
+            "ObjectPropertyRawValue <\"\">",
+            "ObjectPropertyAttemptedValue <\"\">"
+        );
 
         // Act & Assert
         Assert.Equal(

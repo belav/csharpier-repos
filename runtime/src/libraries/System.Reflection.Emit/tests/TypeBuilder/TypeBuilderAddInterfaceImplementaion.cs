@@ -33,8 +33,7 @@ namespace System.Reflection.Emit.Tests
                 createdInterface,
                 createdType
                     .GetTypeInfo()
-                    .ImplementedInterfaces
-                    .Single(i => i.Name == createdInterface.Name)
+                    .ImplementedInterfaces.Single(i => i.Name == createdInterface.Name)
             );
         }
 
@@ -71,8 +70,7 @@ namespace System.Reflection.Emit.Tests
                 createdInterface,
                 createdType
                     .GetTypeInfo()
-                    .ImplementedInterfaces
-                    .Single(i => i.Name == createdInterface.Name)
+                    .ImplementedInterfaces.Single(i => i.Name == createdInterface.Name)
             );
         }
 

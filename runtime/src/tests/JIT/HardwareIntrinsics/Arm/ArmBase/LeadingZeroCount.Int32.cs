@@ -222,11 +222,9 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (isUnexpectedResult)
             {
-                TestLibrary
-                    .TestFramework
-                    .LogInformation(
-                        $"{nameof(ArmBase)}.{nameof(ArmBase.LeadingZeroCount)}<Int32>(Int32): LeadingZeroCount failed:"
-                    );
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(ArmBase)}.{nameof(ArmBase.LeadingZeroCount)}<Int32>(Int32): LeadingZeroCount failed:"
+                );
                 TestLibrary.TestFramework.LogInformation($"    data: {data}");
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");
                 TestLibrary.TestFramework.LogInformation(string.Empty);

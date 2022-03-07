@@ -56,12 +56,8 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
 
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
 
-            var service = document
-                .Project
-                .Solution
-                .Workspace
-                .Services
-                .GetRequiredService<IMoveStaticMembersOptionsService>();
+            var service =
+                document.Project.Solution.Workspace.Services.GetRequiredService<IMoveStaticMembersOptionsService>();
 
             var action = new MoveStaticMembersWithDialogCodeAction(
                 document,

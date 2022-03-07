@@ -49,22 +49,20 @@ namespace AutoMapper.IntegrationTests
         {
             protected override void Seed(Context context)
             {
-                context
-                    .Customers
-                    .Add(
-                        new Customer
+                context.Customers.Add(
+                    new Customer
+                    {
+                        Id = 1,
+                        FirstName = "Bob",
+                        LastName = "Smith",
+                        Items = new[]
                         {
-                            Id = 1,
-                            FirstName = "Bob",
-                            LastName = "Smith",
-                            Items = new[]
-                            {
-                                new Item { Code = 1 },
-                                new Item { Code = 3 },
-                                new Item { Code = 5 }
-                            }
+                            new Item { Code = 1 },
+                            new Item { Code = 3 },
+                            new Item { Code = 5 }
                         }
-                    );
+                    }
+                );
 
                 base.Seed(context);
             }
@@ -86,18 +84,13 @@ namespace AutoMapper.IntegrationTests
             using (var context = new Context())
             {
                 var result = ProjectTo<CustomerViewModel>(
-                        context
-                            .Customers
-                            .Select(
-                                customer =>
-                                    new CustomerItemCodes
-                                    {
-                                        ItemCodes = customer
-                                            .Items
-                                            .Select(item => item.Code)
-                                            .ToList()
-                                    }
-                            )
+                        context.Customers.Select(
+                            customer =>
+                                new CustomerItemCodes
+                                {
+                                    ItemCodes = customer.Items.Select(item => item.Code).ToList()
+                                }
+                        )
                     )
                     .Single();
 

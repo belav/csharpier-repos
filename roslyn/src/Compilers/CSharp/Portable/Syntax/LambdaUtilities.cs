@@ -498,8 +498,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 return true;
 
                             case SyntaxKind.ForStatement:
-                                SeparatedSyntaxList<ExpressionSyntax> incrementors =
-                                    ((ForStatementSyntax)node.Parent).Incrementors;
+                                SeparatedSyntaxList<ExpressionSyntax> incrementors = (
+                                    (ForStatementSyntax)node.Parent
+                                ).Incrementors;
                                 if (incrementors.FirstOrDefault() == node)
                                 {
                                     return true;

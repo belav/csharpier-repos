@@ -236,9 +236,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.Equal(@interface, innerClass.Interfaces().Single().ConstructedFrom);
 
             var innerClassProperty = (PropertySymbol)innerClass.GetMembers(methodName).Single();
-            var innerClassImplementingProperty = innerClassProperty
-                .ExplicitInterfaceImplementations
-                .Single();
+            var innerClassImplementingProperty =
+                innerClassProperty.ExplicitInterfaceImplementations.Single();
             Assert.Equal(interfaceProperty, innerClassImplementingProperty.OriginalDefinition);
             Assert.Equal(@interface, innerClassImplementingProperty.ContainingType.ConstructedFrom);
         }

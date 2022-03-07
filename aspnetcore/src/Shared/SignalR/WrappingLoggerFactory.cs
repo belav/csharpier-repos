@@ -104,30 +104,28 @@ public class WrappingLoggerFactory : ILoggerFactory
         private string GetConnectionId()
         {
             string connectionId = null;
-            _provider
-                .ScopeProvider
-                ?.ForEachScope<object>(
-                    (scope, s) =>
+            _provider.ScopeProvider?.ForEachScope<object>(
+                (scope, s) =>
+                {
+                    if (scope is IReadOnlyList<KeyValuePair<string, object>> logScope)
                     {
-                        if (scope is IReadOnlyList<KeyValuePair<string, object>> logScope)
+                        if (
+                            logScope
+                                .FirstOrDefault(
+                                    kv =>
+                                        kv.Key == "TransportConnectionId"
+                                        || kv.Key == "ClientConnectionId"
+                                )
+                                .Value
+                            is string id
+                        )
                         {
-                            if (
-                                logScope
-                                    .FirstOrDefault(
-                                        kv =>
-                                            kv.Key == "TransportConnectionId"
-                                            || kv.Key == "ClientConnectionId"
-                                    )
-                                    .Value
-                                is string id
-                            )
-                            {
-                                connectionId = id;
-                            }
+                            connectionId = id;
                         }
-                    },
-                    null
-                );
+                    }
+                },
+                null
+            );
             return connectionId;
         }
     }

@@ -30,12 +30,16 @@ namespace System.Text.Json.Serialization.Converters
         public FSharpValueOptionConverter(JsonConverter<TElement> elementConverter)
         {
             _elementConverter = elementConverter;
-            _optionValueGetter = FSharpCoreReflectionProxy
-                .Instance
-                .CreateFSharpValueOptionValueGetter<TValueOption, TElement>();
-            _optionConstructor = FSharpCoreReflectionProxy
-                .Instance
-                .CreateFSharpValueOptionSomeConstructor<TValueOption, TElement>();
+            _optionValueGetter =
+                FSharpCoreReflectionProxy.Instance.CreateFSharpValueOptionValueGetter<
+                    TValueOption,
+                    TElement
+                >();
+            _optionConstructor =
+                FSharpCoreReflectionProxy.Instance.CreateFSharpValueOptionSomeConstructor<
+                    TValueOption,
+                    TElement
+                >();
 
             // temporary workaround for JsonConverter base constructor needing to access
             // ConverterStrategy when calculating `CanUseDirectReadOrWrite`.
@@ -59,8 +63,11 @@ namespace System.Text.Json.Serialization.Converters
                 return true;
             }
 
-            state.Current.JsonPropertyInfo =
-                state.Current.JsonTypeInfo.ElementTypeInfo!.PropertyInfoForTypeInfo;
+            state.Current.JsonPropertyInfo = state
+                .Current
+                .JsonTypeInfo
+                .ElementTypeInfo!
+                .PropertyInfoForTypeInfo;
             if (
                 _elementConverter.TryRead(
                     ref reader,
@@ -95,8 +102,11 @@ namespace System.Text.Json.Serialization.Converters
 
             TElement element = _optionValueGetter(ref value);
 
-            state.Current.DeclaredJsonPropertyInfo =
-                state.Current.JsonTypeInfo.ElementTypeInfo!.PropertyInfoForTypeInfo;
+            state.Current.DeclaredJsonPropertyInfo = state
+                .Current
+                .JsonTypeInfo
+                .ElementTypeInfo!
+                .PropertyInfoForTypeInfo;
             return _elementConverter.TryWrite(writer, element, options, ref state);
         }
 

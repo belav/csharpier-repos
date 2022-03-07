@@ -751,8 +751,9 @@ namespace System.Text.Json.Serialization.Tests
             options.ReadCommentHandling = JsonCommentHandling.Skip;
             JsonSerializer.Deserialize<int>(json, options);
             JsonSerializer.Deserialize<int>(jsonBytes, options);
-            int result =
-                JsonSerializer.DeserializeAsync<int>(new MemoryStream(jsonBytes), options).Result;
+            int result = JsonSerializer
+                .DeserializeAsync<int>(new MemoryStream(jsonBytes), options)
+                .Result;
 
             // Using a reader directly doesn't throw.
             reader = new Utf8JsonReader(jsonBytes);

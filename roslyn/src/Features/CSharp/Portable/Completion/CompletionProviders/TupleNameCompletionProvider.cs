@@ -89,13 +89,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             if (token.IsKind(SyntaxKind.OpenParenToken))
             {
                 if (
-                    token
-                        .Parent
-                        .IsKind(
-                            SyntaxKind.ParenthesizedExpression,
-                            SyntaxKind.TupleExpression,
-                            SyntaxKind.CastExpression
-                        )
+                    token.Parent.IsKind(
+                        SyntaxKind.ParenthesizedExpression,
+                        SyntaxKind.TupleExpression,
+                        SyntaxKind.CastExpression
+                    )
                 )
                 {
                     return 0;

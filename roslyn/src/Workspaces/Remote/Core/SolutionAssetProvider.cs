@@ -44,8 +44,9 @@ namespace Microsoft.CodeAnalysis.Remote
             CancellationToken cancellationToken
         )
         {
-            var assetStorage =
-                _services.GetRequiredService<ISolutionAssetStorageProvider>().AssetStorage;
+            var assetStorage = _services
+                .GetRequiredService<ISolutionAssetStorageProvider>()
+                .AssetStorage;
             var serializer = _services.GetRequiredService<ISerializerService>();
             var replicationContext = assetStorage.GetReplicationContext(scopeId);
 
@@ -125,8 +126,7 @@ namespace Microsoft.CodeAnalysis.Remote
                 Exception? exception = null;
                 try
                 {
-                    await localPipe
-                        .Reader
+                    await localPipe.Reader
                         .CopyToAsync(pipeWriter, cancellationToken)
                         .ConfigureAwait(false);
                 }

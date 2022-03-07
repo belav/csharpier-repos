@@ -94,10 +94,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseObjectInitializer
                 var assignment = (AssignmentExpressionSyntax)expressionStatement.Expression;
 
                 var newAssignment = assignment.WithLeft(
-                    match
-                        .MemberAccessExpression
-                        .Name
-                        .WithLeadingTrivia(match.MemberAccessExpression.GetLeadingTrivia())
+                    match.MemberAccessExpression.Name.WithLeadingTrivia(
+                        match.MemberAccessExpression.GetLeadingTrivia()
+                    )
                 );
 
                 if (i < matches.Length - 1)

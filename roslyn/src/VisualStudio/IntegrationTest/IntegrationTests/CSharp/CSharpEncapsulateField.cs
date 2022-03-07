@@ -53,10 +53,9 @@ namespace myNamespace
                 encapsulateField.DialogName,
                 FeatureAttribute.EncapsulateField
             );
-            VisualStudio
-                .Editor
-                .Verify
-                .TextContains("public static int? Param { get => param; set => param = value; }");
+            VisualStudio.Editor.Verify.TextContains(
+                "public static int? Param { get => param; set => param = value; }"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.EncapsulateField)]
@@ -64,19 +63,13 @@ namespace myNamespace
         {
             SetUpEditor(TestSource);
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio
-                .Editor
-                .Verify
-                .CodeAction(
-                    "Encapsulate field: 'param' (and use property)",
-                    applyFix: true,
-                    blockUntilComplete: true
-                );
-            VisualStudio
-                .Editor
-                .Verify
-                .TextContains(
-                    @"
+            VisualStudio.Editor.Verify.CodeAction(
+                "Encapsulate field: 'param' (and use property)",
+                applyFix: true,
+                blockUntilComplete: true
+            );
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 namespace myNamespace
 {
     class Program
@@ -91,7 +84,7 @@ namespace myNamespace
         }
     }
 }"
-                );
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.EncapsulateField)]
@@ -99,19 +92,13 @@ namespace myNamespace
         {
             SetUpEditor(TestSource);
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio
-                .Editor
-                .Verify
-                .CodeAction(
-                    "Encapsulate field: 'param' (but still use field)",
-                    applyFix: true,
-                    blockUntilComplete: true
-                );
-            VisualStudio
-                .Editor
-                .Verify
-                .TextContains(
-                    @"
+            VisualStudio.Editor.Verify.CodeAction(
+                "Encapsulate field: 'param' (but still use field)",
+                applyFix: true,
+                blockUntilComplete: true
+            );
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 namespace myNamespace
 {
     class Program
@@ -126,7 +113,7 @@ namespace myNamespace
         }
     }
 }"
-                );
+            );
         }
     }
 }

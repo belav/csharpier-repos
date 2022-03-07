@@ -29,23 +29,19 @@ public class Startup
                     options.Filters.AddService(typeof(ApiExplorerDataFilter));
 
                     options.Conventions.Add(new ApiExplorerVisibilityEnabledConvention());
-                    options
-                        .Conventions
-                        .Add(
-                            new ApiExplorerVisibilityDisabledConvention(
-                                typeof(ApiExplorerVisibilityDisabledByConventionController)
-                            )
-                        );
-                    options
-                        .Conventions
-                        .Add(
-                            new ApiExplorerInboundOutboundConvention(
-                                typeof(ApiExplorerInboundOutBoundController)
-                            )
-                        );
-                    options
-                        .Conventions
-                        .Add(new ApiExplorerRouteChangeConvention(wellKnownChangeToken));
+                    options.Conventions.Add(
+                        new ApiExplorerVisibilityDisabledConvention(
+                            typeof(ApiExplorerVisibilityDisabledByConventionController)
+                        )
+                    );
+                    options.Conventions.Add(
+                        new ApiExplorerInboundOutboundConvention(
+                            typeof(ApiExplorerInboundOutBoundController)
+                        )
+                    );
+                    options.Conventions.Add(
+                        new ApiExplorerRouteChangeConvention(wellKnownChangeToken)
+                    );
 
                     options.OutputFormatters.Clear();
                     options.OutputFormatters.Add(new XmlDataContractSerializerOutputFormatter());

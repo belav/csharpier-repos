@@ -52,8 +52,7 @@ namespace Microsoft.CodeAnalysis.InheritanceMargin
             CancellationToken cancellationToken
         )
         {
-            var definitionItem = await serializableItem
-                .DefinitionItem
+            var definitionItem = await serializableItem.DefinitionItem
                 .RehydrateAsync(solution, cancellationToken)
                 .ConfigureAwait(false);
 

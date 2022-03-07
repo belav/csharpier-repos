@@ -61,9 +61,10 @@ public class JwtBearerPostConfigureOptions : IPostConfigureOptions<JwtBearerOpti
 
                 if (
                     options.RequireHttpsMetadata
-                    && !options
-                        .MetadataAddress
-                        .StartsWith("https://", StringComparison.OrdinalIgnoreCase)
+                    && !options.MetadataAddress.StartsWith(
+                        "https://",
+                        StringComparison.OrdinalIgnoreCase
+                    )
                 )
                 {
                     throw new InvalidOperationException(
@@ -76,11 +77,9 @@ public class JwtBearerPostConfigureOptions : IPostConfigureOptions<JwtBearerOpti
                     options.Backchannel = new HttpClient(
                         options.BackchannelHttpHandler ?? new HttpClientHandler()
                     );
-                    options
-                        .Backchannel
-                        .DefaultRequestHeaders
-                        .UserAgent
-                        .ParseAdd("Microsoft ASP.NET Core JwtBearer handler");
+                    options.Backchannel.DefaultRequestHeaders.UserAgent.ParseAdd(
+                        "Microsoft ASP.NET Core JwtBearer handler"
+                    );
                     options.Backchannel.Timeout = options.BackchannelTimeout;
                     options.Backchannel.MaxResponseContentBufferSize = 1024 * 1024 * 10; // 10 MB
                 }

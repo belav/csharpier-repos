@@ -78,8 +78,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     }
                     else
                     {
-                        SeparatedSyntaxList<ArgumentSyntax> arguments =
-                            declarator.ArgumentList.Arguments;
+                        SeparatedSyntaxList<ArgumentSyntax> arguments = declarator
+                            .ArgumentList
+                            .Arguments;
 
                         if (
                             arguments.Count == 0
@@ -154,8 +155,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 {
                                     size = int32Value;
 
-                                    TypeSymbol elementType =
-                                        ((PointerTypeSymbol)this.Type).PointedAtType;
+                                    TypeSymbol elementType = (
+                                        (PointerTypeSymbol)this.Type
+                                    ).PointedAtType;
                                     int elementSize = elementType.FixedBufferElementSizeInBytes();
                                     long totalSize = elementSize * 1L * int32Value;
                                     if (totalSize > int.MaxValue)

@@ -60,9 +60,11 @@ namespace Internal.Cryptography
         {
             string providerName = provider.Provider;
             SafeNCryptProviderHandle providerHandle;
-            ErrorCode errorCode = Interop
-                .NCrypt
-                .NCryptOpenStorageProvider(out providerHandle, providerName, 0);
+            ErrorCode errorCode = Interop.NCrypt.NCryptOpenStorageProvider(
+                out providerHandle,
+                providerName,
+                0
+            );
             if (errorCode != ErrorCode.ERROR_SUCCESS)
                 throw errorCode.ToCryptographicException();
             return providerHandle;
@@ -84,16 +86,14 @@ namespace Internal.Cryptography
             unsafe
             {
                 int numBytesNeeded;
-                ErrorCode errorCode = Interop
-                    .NCrypt
-                    .NCryptGetProperty(
-                        ncryptHandle,
-                        propertyName,
-                        null,
-                        0,
-                        out numBytesNeeded,
-                        options
-                    );
+                ErrorCode errorCode = Interop.NCrypt.NCryptGetProperty(
+                    ncryptHandle,
+                    propertyName,
+                    null,
+                    0,
+                    out numBytesNeeded,
+                    options
+                );
                 if (errorCode == ErrorCode.NTE_NOT_FOUND)
                     return null;
                 if (errorCode != ErrorCode.ERROR_SUCCESS)
@@ -102,16 +102,14 @@ namespace Internal.Cryptography
                 byte[] propertyValue = new byte[numBytesNeeded];
                 fixed (byte* pPropertyValue = propertyValue)
                 {
-                    errorCode = Interop
-                        .NCrypt
-                        .NCryptGetProperty(
-                            ncryptHandle,
-                            propertyName,
-                            pPropertyValue,
-                            propertyValue.Length,
-                            out numBytesNeeded,
-                            options
-                        );
+                    errorCode = Interop.NCrypt.NCryptGetProperty(
+                        ncryptHandle,
+                        propertyName,
+                        pPropertyValue,
+                        propertyValue.Length,
+                        out numBytesNeeded,
+                        options
+                    );
                 }
                 if (errorCode == ErrorCode.NTE_NOT_FOUND)
                     return null;
@@ -178,16 +176,14 @@ namespace Internal.Cryptography
             {
                 int numBytesNeeded;
                 IntPtr value;
-                ErrorCode errorCode = Interop
-                    .NCrypt
-                    .NCryptGetProperty(
-                        ncryptHandle,
-                        propertyName,
-                        &value,
-                        IntPtr.Size,
-                        out numBytesNeeded,
-                        options
-                    );
+                ErrorCode errorCode = Interop.NCrypt.NCryptGetProperty(
+                    ncryptHandle,
+                    propertyName,
+                    &value,
+                    IntPtr.Size,
+                    out numBytesNeeded,
+                    options
+                );
                 if (errorCode == ErrorCode.NTE_NOT_FOUND)
                     return IntPtr.Zero;
                 if (errorCode != ErrorCode.ERROR_SUCCESS)
@@ -206,15 +202,13 @@ namespace Internal.Cryptography
         {
             unsafe
             {
-                ErrorCode errorCode = Interop
-                    .NCrypt
-                    .NCryptSetProperty(
-                        keyHandle,
-                        KeyPropertyName.ExportPolicy,
-                        &exportPolicy,
-                        sizeof(CngExportPolicies),
-                        CngPropertyOptions.Persist
-                    );
+                ErrorCode errorCode = Interop.NCrypt.NCryptSetProperty(
+                    keyHandle,
+                    KeyPropertyName.ExportPolicy,
+                    &exportPolicy,
+                    sizeof(CngExportPolicies),
+                    CngPropertyOptions.Persist
+                );
                 if (errorCode != ErrorCode.ERROR_SUCCESS)
                     throw errorCode.ToCryptographicException();
             }

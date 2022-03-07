@@ -40,20 +40,17 @@ namespace System.Security.Cryptography
             if (creationParameters == null)
                 creationParameters = new CngKeyCreationParameters();
 
-            SafeNCryptProviderHandle providerHandle = creationParameters
-                .Provider!
-                .OpenStorageProvider();
+            SafeNCryptProviderHandle providerHandle =
+                creationParameters.Provider!.OpenStorageProvider();
             SafeNCryptKeyHandle keyHandle;
-            ErrorCode errorCode = Interop
-                .NCrypt
-                .NCryptCreatePersistedKey(
-                    providerHandle,
-                    out keyHandle,
-                    algorithm.Algorithm,
-                    keyName,
-                    0,
-                    creationParameters.KeyCreationOptions
-                );
+            ErrorCode errorCode = Interop.NCrypt.NCryptCreatePersistedKey(
+                providerHandle,
+                out keyHandle,
+                algorithm.Algorithm,
+                keyName,
+                0,
+                creationParameters.KeyCreationOptions
+            );
             if (errorCode != ErrorCode.ERROR_SUCCESS)
             {
                 // For ecc, the exception may be caught and re-thrown as PlatformNotSupportedException
@@ -99,15 +96,13 @@ namespace System.Security.Cryptography
                 if (creationParameters.KeyUsage.HasValue)
                 {
                     CngKeyUsages keyUsage = creationParameters.KeyUsage.Value;
-                    ErrorCode errorCode = Interop
-                        .NCrypt
-                        .NCryptSetProperty(
-                            keyHandle,
-                            KeyPropertyName.KeyUsage,
-                            &keyUsage,
-                            sizeof(CngKeyUsages),
-                            CngPropertyOptions.Persist
-                        );
+                    ErrorCode errorCode = Interop.NCrypt.NCryptSetProperty(
+                        keyHandle,
+                        KeyPropertyName.KeyUsage,
+                        &keyUsage,
+                        sizeof(CngKeyUsages),
+                        CngPropertyOptions.Persist
+                    );
                     if (errorCode != ErrorCode.ERROR_SUCCESS)
                         throw errorCode.ToCryptographicException();
                 }
@@ -115,15 +110,13 @@ namespace System.Security.Cryptography
                 if (creationParameters.ParentWindowHandle != IntPtr.Zero)
                 {
                     IntPtr parentWindowHandle = creationParameters.ParentWindowHandle;
-                    ErrorCode errorCode = Interop
-                        .NCrypt
-                        .NCryptSetProperty(
-                            keyHandle,
-                            KeyPropertyName.ParentWindowHandle,
-                            &parentWindowHandle,
-                            sizeof(IntPtr),
-                            CngPropertyOptions.None
-                        );
+                    ErrorCode errorCode = Interop.NCrypt.NCryptSetProperty(
+                        keyHandle,
+                        KeyPropertyName.ParentWindowHandle,
+                        &parentWindowHandle,
+                        sizeof(IntPtr),
+                        CngPropertyOptions.None
+                    );
                     if (errorCode != ErrorCode.ERROR_SUCCESS)
                         throw errorCode.ToCryptographicException();
                 }
@@ -141,15 +134,13 @@ namespace System.Security.Cryptography
                     int valueLength = (value == null) ? 0 : value.Length;
                     fixed (byte* pValue = value.MapZeroLengthArrayToNonNullPointer())
                     {
-                        ErrorCode errorCode = Interop
-                            .NCrypt
-                            .NCryptSetProperty(
-                                keyHandle,
-                                property.Name,
-                                pValue,
-                                valueLength,
-                                property.Options
-                            );
+                        ErrorCode errorCode = Interop.NCrypt.NCryptSetProperty(
+                            keyHandle,
+                            property.Name,
+                            pValue,
+                            valueLength,
+                            property.Options
+                        );
                         if (errorCode != ErrorCode.ERROR_SUCCESS)
                             throw errorCode.ToCryptographicException();
                     }
@@ -182,15 +173,13 @@ namespace System.Security.Cryptography
                         pszDescription = new IntPtr(pinnedDescription),
                     };
 
-                    ErrorCode errorCode = Interop
-                        .NCrypt
-                        .NCryptSetProperty(
-                            keyHandle,
-                            KeyPropertyName.UIPolicy,
-                            &ncryptUiPolicy,
-                            sizeof(NCRYPT_UI_POLICY),
-                            CngPropertyOptions.Persist
-                        );
+                    ErrorCode errorCode = Interop.NCrypt.NCryptSetProperty(
+                        keyHandle,
+                        KeyPropertyName.UIPolicy,
+                        &ncryptUiPolicy,
+                        sizeof(NCRYPT_UI_POLICY),
+                        CngPropertyOptions.Persist
+                    );
                     if (errorCode != ErrorCode.ERROR_SUCCESS)
                         throw errorCode.ToCryptographicException();
                 }
@@ -201,15 +190,13 @@ namespace System.Security.Cryptography
                     int useContextByteLength = checked((useContext.Length + 1) * sizeof(char));
                     fixed (char* pinnedUseContext = useContext)
                     {
-                        ErrorCode errorCode = Interop
-                            .NCrypt
-                            .NCryptSetProperty(
-                                keyHandle,
-                                KeyPropertyName.UseContext,
-                                pinnedUseContext,
-                                useContextByteLength,
-                                CngPropertyOptions.Persist
-                            );
+                        ErrorCode errorCode = Interop.NCrypt.NCryptSetProperty(
+                            keyHandle,
+                            KeyPropertyName.UseContext,
+                            pinnedUseContext,
+                            useContextByteLength,
+                            CngPropertyOptions.Persist
+                        );
                         if (errorCode != ErrorCode.ERROR_SUCCESS)
                             throw errorCode.ToCryptographicException();
                     }

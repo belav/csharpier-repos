@@ -480,8 +480,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             Assert.Throws<InvalidOperationException>(
                 () =>
-                    CreateContext()
-                        .Orders
+                    CreateContext().Orders
                         .Where(
                             o =>
                                 o.OrderDetails.FirstOrDefault()
@@ -1227,8 +1226,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Any_with_multiple_conditions_still_uses_exists()
         {
             using var context = CreateContext();
-            var query = context
-                .Customers
+            var query = context.Customers
                 .Where(c => c.City == "London" && c.Orders.Any(o => o.EmployeeID == 1))
                 .ToList();
 
@@ -2575,8 +2573,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                             select new { Foo = e2 }
                         )
                             .First()
-                            .Foo
-                            .FirstName
+                            .Foo.FirstName
                     select e1,
                 entryCount: 1
             );
@@ -2615,8 +2612,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                             select new { Foo = e2 }
                         )
                             .FirstOrDefault()
-                            .Foo
-                            .FirstName
+                            .Foo.FirstName
                     select e1,
                 entryCount: 1
             );
@@ -2668,8 +2664,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     select new { c3 }
                                 )
                                     .First()
-                                    .c3
-                                    .City
+                                    .c3.City
                             select c1,
                         entryCount: 1
                     ),
@@ -2719,8 +2714,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     .OrderBy(c => c.CustomerID)
                                     .Select(c => new { Foo = c })
                                     .First()
-                                    .Foo
-                                    .IsLondon
+                                    .Foo.IsLondon
                             select c1,
                         entryCount: 85
                     ),
@@ -3792,8 +3786,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void OrderBy_any()
         {
             using var context = CreateContext();
-            var query = context
-                .Customers
+            var query = context.Customers
                 .OrderBy(p => p.Orders.Any(o => o.OrderID > 11000))
                 .ThenBy(p => p.CustomerID)
                 .ToList();
@@ -4315,8 +4308,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 {
                     try
                     {
-                        context
-                            .Customers
+                        context.Customers
                             .Select(c => Process(c, synchronizationEvent, blockingSemaphore))
                             .ToList();
                     }
@@ -4367,8 +4359,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 {
                     try
                     {
-                        context
-                            .Customers
+                        context.Customers
                             .Select(c => Process(c, synchronizationEvent, blockingSemaphore))
                             .ToList();
                     }
@@ -4991,8 +4982,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             Assert.Throws<InvalidOperationException>(
                 () =>
-                    context
-                        .Customers
+                    context.Customers
                         .Where(c => Equals(c.Orders.First(), customer.Orders.First()))
                         .ToList()
             );
@@ -5006,8 +4996,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             Assert.Throws<InvalidOperationException>(
                 () =>
-                    context
-                        .Orders
+                    context.Orders
                         .Where(
                             o =>
                                 (o.OrderID < 10400)
@@ -5249,9 +5238,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                             o =>
                                 new Order
                                 {
-                                    OrderDate = o.OrderDate
-                                        .Value
-                                        .AddTicks(TimeSpan.TicksPerMillisecond)
+                                    OrderDate = o.OrderDate.Value.AddTicks(
+                                        TimeSpan.TicksPerMillisecond
+                                    )
                                 }
                         ),
                 e => e.OrderDate
@@ -5311,8 +5300,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                             o =>
                                 new Order
                                 {
-                                    OrderDate = o.OrderDate
-                                        .Value
+                                    OrderDate = o.OrderDate.Value
                                         .AddDays(o.OrderDate.Value.Millisecond / millisecondsPerDay)
                                         .AddMilliseconds(
                                             o.OrderDate.Value.Millisecond % millisecondsPerDay
@@ -6068,11 +6056,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                             c =>
                                 new DTO<DateTime?>
                                 {
-                                    Property =
-                                        c.Orders
-                                            .OrderByDescending(o => o.OrderID)
-                                            .FirstOrDefault()
-                                            .OrderDate
+                                    Property = c.Orders
+                                        .OrderByDescending(o => o.OrderID)
+                                        .FirstOrDefault()
+                                        .OrderDate
                                 }
                         )
                         .OrderBy(n => n.Property),
@@ -6721,15 +6708,13 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             using var context = CreateContext();
             var results = (
-                context
-                    .Customers
+                context.Customers
                     .Select(
                         c =>
                             new
                             {
                                 c.CustomerID,
-                                Orders = context
-                                    .Orders
+                                Orders = context.Orders
                                     .Where(o => o.Customer.CustomerID == c.CustomerID)
                                     .ToList()
                             }
@@ -7099,8 +7084,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 | BindingFlags.Static
                                 | BindingFlags.FlattenHierarchy
                         )
-                        ?.DeclaringType
-                        ?.DisplayName(),
+                        ?.DeclaringType?.DisplayName(),
                     nameof(UnknownMethod)
                 )
             );
@@ -7224,8 +7208,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 new
                                 {
                                     e.Item.OrderID,
-                                    ProductIds = e.Item
-                                        .OrderDetails
+                                    ProductIds = e.Item.OrderDetails
                                         .Select(od => od.ProductID)
                                         .ToList()
                                 }
@@ -7261,8 +7244,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 new
                                 {
                                     e.Item.OrderID,
-                                    ProductIds = e.Item
-                                        .OrderDetails
+                                    ProductIds = e.Item.OrderDetails
                                         .Select(od => od.ProductID)
                                         .ToList()
                                 }
@@ -7299,8 +7281,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 new
                                 {
                                     e.Item.OrderID,
-                                    ProductIds = e.Item
-                                        .OrderDetails
+                                    ProductIds = e.Item.OrderDetails
                                         .Select(od => od.ProductID)
                                         .ToList()
                                 }
@@ -7639,15 +7620,13 @@ namespace Microsoft.EntityFrameworkCore.Query
         )
         {
             using var context = CreateContext();
-            var orderIds = context
-                .Customers
+            var orderIds = context.Customers
                 .Where(c => c.CustomerID == "ALFKI")
                 .SelectMany(c => c.Orders)
                 .Select(o => o.OrderID)
                 .ToList();
 
-            var query = context
-                .Orders
+            var query = context.Orders
                 .Where(o => orderIds.Contains(o.OrderID))
                 .Select(o => o.Customer);
 
@@ -7875,9 +7854,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     Complex = (bool?)c.Orders
                                         .OrderBy(e => e.OrderDate)
                                         .FirstOrDefault()
-                                        .Customer
-                                        .Orders
-                                        .Any(e => e.OrderID < 11000)
+                                        .Customer.Orders.Any(e => e.OrderID < 11000)
                                 }
                         ),
                 ss =>
@@ -7893,9 +7870,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                                         ? c.Orders
                                           .OrderBy(e => e.OrderDate)
                                           .FirstOrDefault()
-                                          .Customer
-                                          .Orders
-                                          .Any(e => e.OrderID < 11000)
+                                          .Customer.Orders.Any(e => e.OrderID < 11000)
                                         : (bool?)false
                                 }
                         ),
@@ -8146,16 +8121,15 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             using var context = CreateContext();
             var results = (
-                await context
-                    .Customers
+                await context.Customers
                     .Select(
                         c =>
                             new
                             {
                                 c.CustomerID,
-                                Orders = context
-                                    .Orders
-                                    .Where(o => o.Customer.CustomerID == c.CustomerID)
+                                Orders = context.Orders.Where(
+                                    o => o.Customer.CustomerID == c.CustomerID
+                                )
                             }
                     )
                     .ToListAsync()

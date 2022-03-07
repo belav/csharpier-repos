@@ -228,9 +228,10 @@ namespace System.IO
             uint result;
             while (
                 (
-                    result = Interop
-                        .Kernel32
-                        .GetTempPathW(builder.Capacity, ref builder.GetPinnableReference())
+                    result = Interop.Kernel32.GetTempPathW(
+                        builder.Capacity,
+                        ref builder.GetPinnableReference()
+                    )
                 ) > builder.Capacity
             )
             {
@@ -256,14 +257,12 @@ namespace System.IO
 
             var builder = new ValueStringBuilder(stackalloc char[PathInternal.MaxShortPath]);
 
-            uint result = Interop
-                .Kernel32
-                .GetTempFileNameW(
-                    ref tempPathBuilder.GetPinnableReference(),
-                    "tmp",
-                    0,
-                    ref builder.GetPinnableReference()
-                );
+            uint result = Interop.Kernel32.GetTempFileNameW(
+                ref tempPathBuilder.GetPinnableReference(),
+                "tmp",
+                0,
+                ref builder.GetPinnableReference()
+            );
 
             tempPathBuilder.Dispose();
 

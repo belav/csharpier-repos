@@ -11,8 +11,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
 public class TagHelperComponentTagHelperTest : IClassFixture<MvcTestFixture<RazorWebSite.Startup>>
 {
-    private static readonly Assembly _resourcesAssembly =
-        typeof(TagHelperComponentTagHelperTest).GetTypeInfo().Assembly;
+    private static readonly Assembly _resourcesAssembly = typeof(TagHelperComponentTagHelperTest)
+        .GetTypeInfo()
+        .Assembly;
 
     public TagHelperComponentTagHelperTest(MvcTestFixture<RazorWebSite.Startup> fixture)
     {

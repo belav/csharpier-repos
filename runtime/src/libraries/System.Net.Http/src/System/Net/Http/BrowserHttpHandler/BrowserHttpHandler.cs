@@ -29,18 +29,10 @@ namespace System.Net.Http
     internal sealed class BrowserHttpHandler : HttpMessageHandler
     {
         // This partial implementation contains members common to Browser WebAssembly running on .NET Core.
-        private static readonly JSObject? s_fetch = (JSObject)System
-            .Runtime
-            .InteropServices
-            .JavaScript
-            .Runtime
-            .GetGlobalObject("fetch");
-        private static readonly JSObject? s_window = (JSObject)System
-            .Runtime
-            .InteropServices
-            .JavaScript
-            .Runtime
-            .GetGlobalObject("window");
+        private static readonly JSObject? s_fetch =
+            (JSObject)System.Runtime.InteropServices.JavaScript.Runtime.GetGlobalObject("fetch");
+        private static readonly JSObject? s_window =
+            (JSObject)System.Runtime.InteropServices.JavaScript.Runtime.GetGlobalObject("window");
 
         private static readonly HttpRequestOptionsKey<bool> EnableStreamingResponse =
             new HttpRequestOptionsKey<bool>("WebAssemblyEnableStreamingResponse");
@@ -179,9 +171,10 @@ namespace System.Net.Http
                 var requestObject = new JSObject();
 
                 if (
-                    request
-                        .Options
-                        .TryGetValue(FetchOptions, out IDictionary<string, object>? fetchOptions)
+                    request.Options.TryGetValue(
+                        FetchOptions,
+                        out IDictionary<string, object>? fetchOptions
+                    )
                 )
                 {
                     foreach (KeyValuePair<string, object> item in fetchOptions)
@@ -218,8 +211,7 @@ namespace System.Net.Http
                     {
                         requestObject.SetObjectProperty(
                             "body",
-                            await request
-                                .Content
+                            await request.Content
                                 .ReadAsStringAsync(cancellationToken)
                                 .ConfigureAwait(continueOnCapturedContext: true)
                         );
@@ -228,8 +220,7 @@ namespace System.Net.Http
                     {
                         using (
                             Uint8Array uint8Buffer = Uint8Array.From(
-                                await request
-                                    .Content
+                                await request.Content
                                     .ReadAsByteArrayAsync(cancellationToken)
                                     .ConfigureAwait(continueOnCapturedContext: true)
                             )
@@ -279,22 +270,20 @@ namespace System.Net.Http
                 CancellationTokenSource abortCts = CancellationTokenSource.CreateLinkedTokenSource(
                     cancellationToken
                 );
-                CancellationTokenRegistration abortRegistration = abortCts
-                    .Token
-                    .Register(
-                        (Action)(
-                            () =>
+                CancellationTokenRegistration abortRegistration = abortCts.Token.Register(
+                    (Action)(
+                        () =>
+                        {
+                            if (abortController.JSHandle != -1)
                             {
-                                if (abortController.JSHandle != -1)
-                                {
-                                    abortController.Invoke("abort");
-                                    abortController?.Dispose();
-                                }
-                                wasmHttpReadStream?.Dispose();
-                                abortCts.Dispose();
+                                abortController.Invoke("abort");
+                                abortController?.Dispose();
                             }
-                        )
-                    );
+                            wasmHttpReadStream?.Dispose();
+                            abortCts.Dispose();
+                        }
+                    )
+                );
 
                 var args = new System.Runtime.InteropServices.JavaScript.Array();
                 if (request.RequestUri != null)
@@ -372,14 +361,15 @@ namespace System.Net.Http
                                         var name = (string)resultValue[0];
                                         var value = (string)resultValue[1];
                                         if (
-                                            !httpResponse
-                                                .Headers
-                                                .TryAddWithoutValidation(name, value)
+                                            !httpResponse.Headers.TryAddWithoutValidation(
+                                                name,
+                                                value
+                                            )
                                         )
-                                            httpResponse
-                                                .Content
-                                                .Headers
-                                                .TryAddWithoutValidation(name, value);
+                                            httpResponse.Content.Headers.TryAddWithoutValidation(
+                                                name,
+                                                value
+                                            );
                                     }
                                     nextResult?.Dispose();
                                     nextResult = (JSObject)entriesIterator.Invoke("next");

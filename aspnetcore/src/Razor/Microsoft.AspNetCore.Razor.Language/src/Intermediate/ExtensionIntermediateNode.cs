@@ -32,13 +32,11 @@ public abstract class ExtensionIntermediateNode : IntermediateNode
         }
 
         var documentKind = context.DocumentKind ?? string.Empty;
-        context
-            .Diagnostics
-            .Add(
-                RazorDiagnosticFactory.CreateCodeTarget_UnsupportedExtension(
-                    documentKind,
-                    typeof(TDependency)
-                )
-            );
+        context.Diagnostics.Add(
+            RazorDiagnosticFactory.CreateCodeTarget_UnsupportedExtension(
+                documentKind,
+                typeof(TDependency)
+            )
+        );
     }
 }

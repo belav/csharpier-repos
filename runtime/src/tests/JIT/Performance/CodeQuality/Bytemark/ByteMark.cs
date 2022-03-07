@@ -748,8 +748,9 @@ public class ByteMark
 
                 case PF.NUMMINS: /* NUMMINSECONDS */
                     global.numsortstruct_rect.request_secs = Int32.Parse(eptr);
-                    global.numsortstruct_jagged.request_secs =
-                        global.numsortstruct_rect.request_secs;
+                    global.numsortstruct_jagged.request_secs = global
+                        .numsortstruct_rect
+                        .request_secs;
                     break;
 
                 case PF.DOSTR: /* DOSTRINGSORT */
@@ -802,8 +803,9 @@ public class ByteMark
 
                 case PF.EMFMINS: /* EMFMINSECOND */
                     global.emfloatstruct_class.request_secs = Int32.Parse(eptr);
-                    global.emfloatstruct_struct.request_secs =
-                        global.emfloatstruct_class.request_secs;
+                    global.emfloatstruct_struct.request_secs = global
+                        .emfloatstruct_class
+                        .request_secs;
                     break;
 
                 case PF.DOFOUR: /* DOFOUR */

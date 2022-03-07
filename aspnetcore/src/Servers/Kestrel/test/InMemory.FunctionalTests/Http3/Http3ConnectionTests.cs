@@ -354,8 +354,7 @@ public class Http3ConnectionTests : Http3TestBase
             }
         );
 
-        var maxFieldSetting = await Http3Api
-            .ServerReceivedSettingsReader
+        var maxFieldSetting = await Http3Api.ServerReceivedSettingsReader
             .ReadAsync()
             .DefaultTimeout();
 

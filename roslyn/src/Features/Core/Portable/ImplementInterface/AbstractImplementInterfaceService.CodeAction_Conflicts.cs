@@ -26,8 +26,7 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 // a method we've already implemented.  If so, we'll need to implement this one
                 // explicitly.
 
-                var allMembers = State
-                    .ClassOrStructType
+                var allMembers = State.ClassOrStructType
                     .GetAccessibleMembersInThisAndBaseTypes<ISymbol>(State.ClassOrStructType)
                     .Concat(implementedVisibleMembers);
 
@@ -91,13 +90,11 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 // c) different constraints
                 if (
                     member1.DeclaredAccessibility != member2.DeclaredAccessibility
-                    || !SignatureComparer
-                        .Instance
-                        .HaveSameSignatureAndConstraintsAndReturnTypeAndAccessors(
-                            member1,
-                            member2,
-                            IsCaseSensitive
-                        )
+                    || !SignatureComparer.Instance.HaveSameSignatureAndConstraintsAndReturnTypeAndAccessors(
+                        member1,
+                        member2,
+                        IsCaseSensitive
+                    )
                 )
                 {
                     return true;

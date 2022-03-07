@@ -229,8 +229,9 @@ public class XmlSerializerOutputFormatter : TextOutputFormatter
         var httpContext = context.HttpContext;
         var response = httpContext.Response;
 
-        _mvcOptions ??=
-            httpContext.RequestServices.GetRequiredService<IOptions<MvcOptions>>().Value;
+        _mvcOptions ??= httpContext.RequestServices
+            .GetRequiredService<IOptions<MvcOptions>>()
+            .Value;
         _asyncEnumerableReaderFactory ??= new AsyncEnumerableReader(_mvcOptions);
 
         var value = context.Object;

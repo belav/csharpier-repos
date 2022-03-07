@@ -41,8 +41,9 @@ namespace Internal.TypeSystem
             if (method.HasSuppressGCTransitionAttribute())
                 return true;
 
-            MethodSignatureFlags unmanagedCallConv =
-                method.GetPInvokeMethodMetadata().Flags.UnmanagedCallingConvention;
+            MethodSignatureFlags unmanagedCallConv = method
+                .GetPInvokeMethodMetadata()
+                .Flags.UnmanagedCallingConvention;
             if (unmanagedCallConv != MethodSignatureFlags.None)
                 return false;
 
@@ -59,9 +60,7 @@ namespace Internal.TypeSystem
                 return false;
 
             foreach (
-                DefType defType in unmanagedCallConvAttribute
-                    .Value
-                    .EnumerateCallConvsFromAttribute()
+                DefType defType in unmanagedCallConvAttribute.Value.EnumerateCallConvsFromAttribute()
             )
             {
                 if (defType.Name == "CallConvSuppressGCTransition")

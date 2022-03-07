@@ -158,8 +158,7 @@ namespace CoreclrTestLib
 
                 using Process pgrep = Process.Start(pgrepInfo);
 
-                string[] pidStrings = pgrep
-                    .StandardOutput
+                string[] pidStrings = pgrep.StandardOutput
                     .ReadToEnd()
                     .Split('\n', StringSplitOptions.RemoveEmptyEntries);
                 pgrep.WaitForExit();
@@ -227,10 +226,10 @@ namespace CoreclrTestLib
             {
                 createdump.StartInfo.FileName = "sudo";
                 createdump.StartInfo.Arguments = $"{createdumpPath} " + arguments;
-                createdump
-                    .StartInfo
-                    .EnvironmentVariables
-                    .Add("COMPlus_DbgEnableElfDumpOnMacOS", "1");
+                createdump.StartInfo.EnvironmentVariables.Add(
+                    "COMPlus_DbgEnableElfDumpOnMacOS",
+                    "1"
+                );
             }
 
             createdump.StartInfo.UseShellExecute = false;
@@ -353,14 +352,16 @@ namespace CoreclrTestLib
                 process.Start();
 
                 var cts = new CancellationTokenSource();
-                Task copyOutput = process
-                    .StandardOutput
-                    .BaseStream
-                    .CopyToAsync(outputStream, 4096, cts.Token);
-                Task copyError = process
-                    .StandardError
-                    .BaseStream
-                    .CopyToAsync(errorStream, 4096, cts.Token);
+                Task copyOutput = process.StandardOutput.BaseStream.CopyToAsync(
+                    outputStream,
+                    4096,
+                    cts.Token
+                );
+                Task copyError = process.StandardError.BaseStream.CopyToAsync(
+                    errorStream,
+                    4096,
+                    cts.Token
+                );
 
                 if (process.WaitForExit(timeout))
                 {

@@ -99,8 +99,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                     return;
 
                 var selection = TryGetCodeRefactoringSelection(state, range);
-                await workspace
-                    .Services
+                await workspace.Services
                     .GetRequiredService<IWorkspaceStatusService>()
                     .WaitUntilFullyLoadedAsync(cancellationToken)
                     .ConfigureAwait(false);
@@ -213,9 +212,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             )
             {
                 var workspace = document.Project.Solution.Workspace;
-                var supportsFeatureService = workspace
-                    .Services
-                    .GetRequiredService<ITextBufferSupportsFeatureService>();
+                var supportsFeatureService =
+                    workspace.Services.GetRequiredService<ITextBufferSupportsFeatureService>();
 
                 var fixesTask = GetCodeFixesAsync(
                     state,

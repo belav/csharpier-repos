@@ -36,9 +36,10 @@ namespace System.Net.Security
 
             try
             {
-                _sslContext = Interop
-                    .OpenSsl
-                    .AllocateSslHandle(credential, sslAuthenticationOptions);
+                _sslContext = Interop.OpenSsl.AllocateSslHandle(
+                    credential,
+                    sslAuthenticationOptions
+                );
             }
             catch (Exception ex)
             {

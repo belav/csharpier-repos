@@ -33,11 +33,10 @@ namespace Microsoft.EntityFrameworkCore
                 .AddSingleton(TestModelSource.GetFactory(OnModelCreating))
                 .BuildServiceProvider(validateScopes: true);
 
-            var options =
-                new DbContextOptionsBuilder()
-                    .UseInternalServiceProvider(serviceProvider)
-                    .UseInMemoryDatabase(nameof(DatabaseInMemoryTest))
-                    .Options;
+            var options = new DbContextOptionsBuilder()
+                .UseInternalServiceProvider(serviceProvider)
+                .UseInMemoryDatabase(nameof(DatabaseInMemoryTest))
+                .Options;
 
             var customer = new Customer { Id = 42, Name = "Theon" };
 

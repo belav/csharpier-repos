@@ -40,8 +40,7 @@ namespace Microsoft.EntityFrameworkCore
 
             var reverseEngineerScaffolder = services
                 .CreateScope()
-                .ServiceProvider
-                .GetService<IReverseEngineerScaffolder>();
+                .ServiceProvider.GetService<IReverseEngineerScaffolder>();
 
             Assert.NotNull(reverseEngineerScaffolder);
         }
@@ -67,8 +66,7 @@ namespace Microsoft.EntityFrameworkCore
 
             var migrationsScaffolder = services
                 .CreateScope()
-                .ServiceProvider
-                .GetService<IMigrationsScaffolder>();
+                .ServiceProvider.GetService<IMigrationsScaffolder>();
 
             Assert.NotNull(migrationsScaffolder);
         }

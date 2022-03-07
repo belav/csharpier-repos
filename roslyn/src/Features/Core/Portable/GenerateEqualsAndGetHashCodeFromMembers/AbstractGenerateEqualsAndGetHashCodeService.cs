@@ -62,8 +62,7 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
             CancellationToken cancellationToken
         )
         {
-            var compilation = await document
-                .Project
+            var compilation = await document.Project
                 .GetCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var tree = await document
@@ -111,8 +110,7 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
             CancellationToken cancellationToken
         )
         {
-            var compilation = await document
-                .Project
+            var compilation = await document.Project
                 .GetCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var tree = await document
@@ -130,14 +128,13 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
                     var localName = containingType.GetLocalName();
 
                     expressions.Add(
-                        generator
-                            .SyntaxGeneratorInternal
-                            .IsPatternExpression(
-                                objName,
-                                generator
-                                    .SyntaxGeneratorInternal
-                                    .DeclarationPattern(containingType, localName)
+                        generator.SyntaxGeneratorInternal.IsPatternExpression(
+                            objName,
+                            generator.SyntaxGeneratorInternal.DeclarationPattern(
+                                containingType,
+                                localName
                             )
+                        )
                     );
                     expressions.Add(
                         generator.InvocationExpression(
@@ -192,8 +189,7 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
             CancellationToken cancellationToken
         )
         {
-            var compilation = await document
-                .Project
+            var compilation = await document.Project
                 .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var factory = document.GetRequiredLanguageService<SyntaxGenerator>();

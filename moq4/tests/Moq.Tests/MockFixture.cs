@@ -172,8 +172,10 @@ namespace Moq.Tests
         public void DefaultValueProvider_when_custom_provider_then_DefaultValue_is_Custom()
         {
             var mock = new Mock<object>();
-            var customDefaultValueProvider =
-                new Mock<DefaultValueProvider>() { CallBase = true }.Object;
+            var customDefaultValueProvider = new Mock<DefaultValueProvider>()
+            {
+                CallBase = true
+            }.Object;
 
             mock.DefaultValueProvider = customDefaultValueProvider;
 

@@ -33,9 +33,7 @@ namespace System.CommandLine.Tests
                 .Invoking(c => c.AddGlobalOption(new Option("--same")))
                 .Should()
                 .Throw<ArgumentException>()
-                .Which
-                .Message
-                .Should()
+                .Which.Message.Should()
                 .Be("Alias '--same' is already in use.");
         }
 
@@ -50,9 +48,7 @@ namespace System.CommandLine.Tests
                 .Invoking(c => c.Add(new Option("--same")))
                 .Should()
                 .Throw<ArgumentException>()
-                .And
-                .Message
-                .Should()
+                .And.Message.Should()
                 .Be("Alias '--same' is already in use.");
         }
 

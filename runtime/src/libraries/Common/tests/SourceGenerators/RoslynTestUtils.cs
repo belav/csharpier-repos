@@ -192,9 +192,9 @@ namespace SourceGenerators.Tests
         {
 #if ROSLYN4_0_OR_GREATER
             // workaround https://github.com/dotnet/roslyn/pull/55866. We can remove "LangVersion=Preview" when we get a Roslyn build with that change.
-            CSharpParseOptions options = CSharpParseOptions
-                .Default
-                .WithLanguageVersion(LanguageVersion.Preview);
+            CSharpParseOptions options = CSharpParseOptions.Default.WithLanguageVersion(
+                LanguageVersion.Preview
+            );
             CSharpGeneratorDriver cgd = CSharpGeneratorDriver.Create(
                 new[] { generator.AsSourceGenerator() },
                 parseOptions: options
@@ -296,8 +296,10 @@ namespace SourceGenerators.Tests
                 ImmutableArray<CodeActionOperation> operations = await actions[0]
                     .GetOperationsAsync(CancellationToken.None)
                     .ConfigureAwait(false);
-                Solution solution =
-                    operations.OfType<ApplyChangesOperation>().Single().ChangedSolution;
+                Solution solution = operations
+                    .OfType<ApplyChangesOperation>()
+                    .Single()
+                    .ChangedSolution;
                 Project? changedProj = solution.GetProject(proj.Id);
                 if (changedProj != proj)
                 {

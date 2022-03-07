@@ -138,25 +138,19 @@ public class ViewComponentTagHelperPass : IntermediateNodePassBase, IRazorOptimi
             i++;
         }
 
-        context
-            .Class
-            .Children
-            .Insert(
-                i,
-                new FieldDeclarationIntermediateNode()
+        context.Class.Children.Insert(
+            i,
+            new FieldDeclarationIntermediateNode()
+            {
+                Annotations =
                 {
-                    Annotations =
-                    {
-                        {
-                            CommonAnnotations.DefaultTagHelperExtension.TagHelperField,
-                            bool.TrueString
-                        },
-                    },
-                    Modifiers = { "private", },
-                    FieldName = context.GetFieldName(tagHelper),
-                    FieldType = "global::" + context.GetFullyQualifiedName(tagHelper),
-                }
-            );
+                    { CommonAnnotations.DefaultTagHelperExtension.TagHelperField, bool.TrueString },
+                },
+                Modifiers = { "private", },
+                FieldName = context.GetFieldName(tagHelper),
+                FieldType = "global::" + context.GetFullyQualifiedName(tagHelper),
+            }
+        );
     }
 
     private void AddTagHelperClass(Context context, TagHelperDescriptor tagHelper)

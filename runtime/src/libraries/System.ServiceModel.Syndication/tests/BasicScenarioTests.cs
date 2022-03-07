@@ -364,8 +364,9 @@ namespace System.ServiceModel.Syndication.Tests
                 new Uri("http://contoso.com/news/path")
             );
             item.Id = "uuid:43481a10-d881-40d1-adf2-99b438c57e21;id=1";
-            item.LastUpdatedTime =
-                new DateTimeOffset(Convert.ToDateTime("2017-10-11T11:25:55Z")).UtcDateTime;
+            item.LastUpdatedTime = new DateTimeOffset(
+                Convert.ToDateTime("2017-10-11T11:25:55Z")
+            ).UtcDateTime;
 
             try
             {

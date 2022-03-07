@@ -31,11 +31,9 @@ namespace Microsoft.CodeAnalysis.Editor
                 underlyingItem.Text,
                 underlyingItem.Glyph,
                 GetSpans(underlyingItem),
-                underlyingItem
-                    .ChildItems
-                    .SelectAsArray(
-                        v => (NavigationBarItem)new WrappedNavigationBarItem(textVersion, v)
-                    ),
+                underlyingItem.ChildItems.SelectAsArray(
+                    v => (NavigationBarItem)new WrappedNavigationBarItem(textVersion, v)
+                ),
                 underlyingItem.Indent,
                 underlyingItem.Bolded,
                 underlyingItem.Grayed

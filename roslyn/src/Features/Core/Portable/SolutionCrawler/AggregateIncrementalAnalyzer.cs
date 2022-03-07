@@ -50,8 +50,7 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             {
                 if (analyzer.IsValueCreated)
                 {
-                    await analyzer
-                        .Value
+                    await analyzer.Value
                         .NewSolutionSnapshotAsync(solution, cancellationToken)
                         .ConfigureAwait(false);
                 }
@@ -160,8 +159,7 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             {
                 if (analyzer.IsValueCreated)
                 {
-                    await analyzer
-                        .Value
+                    await analyzer.Value
                         .RemoveDocumentAsync(documentId, cancellationToken)
                         .ConfigureAwait(false);
                 }
@@ -177,8 +175,7 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             {
                 if (analyzer.IsValueCreated)
                 {
-                    await analyzer
-                        .Value
+                    await analyzer.Value
                         .RemoveProjectAsync(projectId, cancellationToken)
                         .ConfigureAwait(false);
                 }

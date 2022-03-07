@@ -26,8 +26,10 @@ namespace System.Web.Http.Filters
         [Fact]
         public void ExecuteExceptionFilterAsync_IfContextParameterIsNull_ThrowsException()
         {
-            IExceptionFilter filter =
-                new Mock<ExceptionFilterAttribute>() { CallBase = true }.Object;
+            IExceptionFilter filter = new Mock<ExceptionFilterAttribute>()
+            {
+                CallBase = true
+            }.Object;
 
             Assert.ThrowsArgumentNull(
                 () =>

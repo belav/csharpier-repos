@@ -66,9 +66,11 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                             y.CustomModifiers,
                             equivalentTypesWithDifferingAssemblies
                         )
-                    && _symbolEqualityComparer
-                        .SignatureTypeEquivalenceComparer
-                        .Equals(x.Type, y.Type, equivalentTypesWithDifferingAssemblies);
+                    && _symbolEqualityComparer.SignatureTypeEquivalenceComparer.Equals(
+                        x.Type,
+                        y.Type,
+                        equivalentTypesWithDifferingAssemblies
+                    );
             }
 
             public bool Equals(IParameterSymbol? x, IParameterSymbol? y) =>

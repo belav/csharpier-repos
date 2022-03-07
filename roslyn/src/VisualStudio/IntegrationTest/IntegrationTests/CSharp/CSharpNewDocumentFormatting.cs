@@ -33,13 +33,11 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
 
             VisualStudio.Workspace.SetFileScopedNamespaces(true);
 
-            VisualStudio
-                .SolutionExplorer
-                .AddProject(
-                    project,
-                    WellKnownProjectTemplates.ConsoleApplication,
-                    LanguageNames.CSharp
-                );
+            VisualStudio.SolutionExplorer.AddProject(
+                project,
+                WellKnownProjectTemplates.ConsoleApplication,
+                LanguageNames.CSharp
+            );
 
             VisualStudio.ErrorList.ShowErrorList();
             VisualStudio.ErrorList.Verify.NoErrors();
@@ -53,13 +51,11 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
 
             VisualStudio.Workspace.SetFileScopedNamespaces(true);
 
-            VisualStudio
-                .SolutionExplorer
-                .AddProject(
-                    project,
-                    WellKnownProjectTemplates.CSharpNetCoreConsoleApplication,
-                    LanguageNames.CSharp
-                );
+            VisualStudio.SolutionExplorer.AddProject(
+                project,
+                WellKnownProjectTemplates.CSharpNetCoreConsoleApplication,
+                LanguageNames.CSharp
+            );
 
             VisualStudio.ErrorList.ShowErrorList();
             VisualStudio.ErrorList.Verify.NoErrors();

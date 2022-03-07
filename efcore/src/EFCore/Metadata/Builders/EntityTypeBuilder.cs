@@ -926,27 +926,25 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             ForeignKey foreignKey;
             if (navigationId.MemberInfo != null)
             {
-                foreignKey =
-                    Builder
-                        .HasRelationship(
-                            relatedEntityType,
-                            navigationId.MemberInfo,
-                            ConfigurationSource.Explicit,
-                            targetIsPrincipal: Builder.Metadata == relatedEntityType ? true : null
-                        )!
-                        .Metadata;
+                foreignKey = Builder
+                    .HasRelationship(
+                        relatedEntityType,
+                        navigationId.MemberInfo,
+                        ConfigurationSource.Explicit,
+                        targetIsPrincipal: Builder.Metadata == relatedEntityType ? true : null
+                    )!
+                    .Metadata;
             }
             else
             {
-                foreignKey =
-                    Builder
-                        .HasRelationship(
-                            relatedEntityType,
-                            navigationId.Name,
-                            ConfigurationSource.Explicit,
-                            targetIsPrincipal: Builder.Metadata == relatedEntityType ? true : null
-                        )!
-                        .Metadata;
+                foreignKey = Builder
+                    .HasRelationship(
+                        relatedEntityType,
+                        navigationId.Name,
+                        ConfigurationSource.Explicit,
+                        targetIsPrincipal: Builder.Metadata == relatedEntityType ? true : null
+                    )!
+                    .Metadata;
             }
 
             return foreignKey;
@@ -1100,13 +1098,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             (
                 navigationName == null
                     ? null
-                    : Builder
-                      .ModelBuilder
-                      .Metadata
-                      .FindEntityType(relatedTypeName, navigationName, Builder.Metadata)
+                    : Builder.ModelBuilder.Metadata.FindEntityType(
+                          relatedTypeName,
+                          navigationName,
+                          Builder.Metadata
+                      )
             )
-            ?? Builder
-                .ModelBuilder
+            ?? Builder.ModelBuilder
                 .Entity(relatedTypeName, ConfigurationSource.Explicit, shouldBeOwned: false)!
                 .Metadata;
 
@@ -1124,13 +1122,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             (
                 navigationName == null || !Builder.ModelBuilder.Metadata.IsShared(relatedType)
                     ? null
-                    : Builder
-                      .ModelBuilder
-                      .Metadata
-                      .FindEntityType(relatedType, navigationName, Builder.Metadata)
+                    : Builder.ModelBuilder.Metadata.FindEntityType(
+                          relatedType,
+                          navigationName,
+                          Builder.Metadata
+                      )
             )
-            ?? Builder
-                .ModelBuilder
+            ?? Builder.ModelBuilder
                 .Entity(relatedType, ConfigurationSource.Explicit, shouldBeOwned: false)!
                 .Metadata;
 

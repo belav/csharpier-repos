@@ -40,8 +40,7 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
             }
             else
             {
-                _parseOptions = Workspace
-                    .Services
+                _parseOptions = Workspace.Services
                     .GetLanguageServices(LanguageName)
                     .GetRequiredService<ISyntaxTreeFactoryService>()
                     .GetDefaultParseOptionsWithLatestLanguageVersion();
@@ -77,11 +76,9 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
             var projectId = ProjectId.CreateNewId();
 
             // Just say it's always a DLL since we probably won't have a Main method
-            var compilationOptions = workspace
-                .Services
+            var compilationOptions = workspace.Services
                 .GetLanguageServices(LanguageName)
-                .CompilationFactory!
-                .GetDefaultCompilationOptions()
+                .CompilationFactory!.GetDefaultCompilationOptions()
                 .WithOutputKind(OutputKind.DynamicallyLinkedLibrary);
 
             var extension = LanguageName == LanguageNames.CSharp ? ".cs" : ".vb";
@@ -100,8 +97,9 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                           AssemblyIdentity.Version
                       );
 
-            var assemblyInfoSourceTextContainer =
-                SourceText.From(assemblyInfoString, Encoding).Container;
+            var assemblyInfoSourceTextContainer = SourceText
+                .From(assemblyInfoString, Encoding)
+                .Container;
 
             var assemblyInfoDocument = DocumentInfo.Create(
                 assemblyInfoDocumentId,

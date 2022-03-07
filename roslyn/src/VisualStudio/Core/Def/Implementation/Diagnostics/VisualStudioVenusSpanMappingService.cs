@@ -116,11 +116,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                 if (documentIds.Contains(currentDocumentId))
                 {
                     // text most likely already read in
-                    return _workspace
-                        .CurrentSolution
+                    return _workspace.CurrentSolution
                         .GetDocument(currentDocumentId)
-                        .State
-                        .GetTextSynchronously(CancellationToken.None)
+                        .State.GetTextSynchronously(CancellationToken.None)
                         .Lines;
                 }
             }

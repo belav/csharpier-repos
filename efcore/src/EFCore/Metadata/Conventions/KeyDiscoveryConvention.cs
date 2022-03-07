@@ -104,9 +104,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 keyProperties = DiscoverKeyProperties(entityType, candidateProperties).ToList();
                 if (keyProperties.Count > 1)
                 {
-                    Dependencies
-                        .Logger
-                        .MultiplePrimaryKeyCandidates(keyProperties[0], keyProperties[1]);
+                    Dependencies.Logger.MultiplePrimaryKeyCandidates(
+                        keyProperties[0],
+                        keyProperties[1]
+                    );
                     return;
                 }
             }
@@ -125,10 +126,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         || ownership.Properties.Contains(shadowProperty)
                     )
                     {
-                        shadowProperty =
-                            entityTypeBuilder
-                                .CreateUniqueProperty(typeof(int), "Id", required: true)!
-                                .Metadata;
+                        shadowProperty = entityTypeBuilder
+                            .CreateUniqueProperty(typeof(int), "Id", required: true)!
+                            .Metadata;
                     }
 
                     keyProperties.Clear();

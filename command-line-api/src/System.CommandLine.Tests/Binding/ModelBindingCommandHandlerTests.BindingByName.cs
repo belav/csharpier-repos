@@ -80,8 +80,7 @@ namespace System.CommandLine.Tests.Binding
                     new InvocationContext(command.Parse(commandLine), console)
                 );
 
-                console
-                    .Out
+                console.Out
                     .ToString()
                     .Should()
                     .Be($"ClassWithSetter<{type.Name}>: {expectedValue}");
@@ -119,8 +118,7 @@ namespace System.CommandLine.Tests.Binding
                     new InvocationContext(command.Parse(commandLine), console)
                 );
 
-                console
-                    .Out
+                console.Out
                     .ToString()
                     .Should()
                     .Be($"ClassWithCtorParameter<{type.Name}>: {expectedValue}");

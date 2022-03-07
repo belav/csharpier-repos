@@ -52,13 +52,8 @@ namespace Microsoft.CodeAnalysis.Indentation
                 _service = service;
                 _syntaxFacts = document.Document.GetRequiredLanguageService<ISyntaxFactsService>();
                 OptionSet = optionSet;
-                OptionService = document
-                    .Document
-                    .Project
-                    .Solution
-                    .Workspace
-                    .Services
-                    .GetRequiredService<IOptionService>();
+                OptionService =
+                    document.Document.Project.Solution.Workspace.Services.GetRequiredService<IOptionService>();
                 Root = (TSyntaxRoot)document.Root;
                 LineToBeIndented = lineToBeIndented;
                 _tabSize = this.OptionSet.GetOption(FormattingOptions.TabSize, Root.Language);

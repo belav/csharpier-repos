@@ -9,9 +9,11 @@ namespace System.Web.Http.ContentNegotiation
 
         protected override void ApplyConfiguration(HttpConfiguration configuration)
         {
-            configuration
-                .Routes
-                .MapHttpRoute("Default", "{controller}", new { controller = "Conneg" });
+            configuration.Routes.MapHttpRoute(
+                "Default",
+                "{controller}",
+                new { controller = "Conneg" }
+            );
         }
     }
 }

@@ -164,9 +164,10 @@ namespace Microsoft.EntityFrameworkCore.Storage
                         if (sourceType != null)
                         {
                             foreach (
-                                var converterInfo in Dependencies
-                                    .ValueConverterSelector
-                                    .Select(sourceType, providerType)
+                                var converterInfo in Dependencies.ValueConverterSelector.Select(
+                                    sourceType,
+                                    providerType
+                                )
                             )
                             {
                                 var mappingInfoUsed = info.WithConverter(converterInfo);
@@ -175,9 +176,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
                                 if (mapping == null && providerType != null)
                                 {
                                     foreach (
-                                        var secondConverterInfo in Dependencies
-                                            .ValueConverterSelector
-                                            .Select(providerType)
+                                        var secondConverterInfo in Dependencies.ValueConverterSelector.Select(
+                                            providerType
+                                        )
                                     )
                                     {
                                         mapping = FindMapping(

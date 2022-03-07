@@ -91,12 +91,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
             if (!_nodeFactory.CompilationModuleGroup.IsCompositeBuildMode)
             {
-                MetadataReader mdReader =
-                    _nodeFactory
-                        .CompilationModuleGroup
-                        .CompilationModuleSet
-                        .Single()
-                        .MetadataReader;
+                MetadataReader mdReader = _nodeFactory.CompilationModuleGroup.CompilationModuleSet
+                    .Single()
+                    .MetadataReader;
                 _assemblyRefCount = mdReader.GetTableRowCount(TableIndex.AssemblyRef) + 1;
 
                 if (!_nodeFactory.CompilationModuleGroup.IsInputBubble)

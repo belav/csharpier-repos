@@ -140,8 +140,9 @@ namespace System.Configuration
 
             if (isUserScoped)
             {
-                fileMap.ExeConfigFilename =
-                    ConfigurationManagerInternalFactory.Instance.ApplicationConfigUri;
+                fileMap.ExeConfigFilename = ConfigurationManagerInternalFactory
+                    .Instance
+                    .ApplicationConfigUri;
                 fileMap.RoamingUserConfigFilename = configFileName;
             }
             else

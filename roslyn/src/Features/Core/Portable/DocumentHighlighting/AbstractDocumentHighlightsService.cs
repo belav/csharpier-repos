@@ -64,8 +64,7 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
                     return ImmutableArray<DocumentHighlights>.Empty;
                 }
 
-                return await result
-                    .Value
+                return await result.Value
                     .SelectAsArrayAsync(h => h.RehydrateAsync(solution))
                     .ConfigureAwait(false);
             }
@@ -189,9 +188,10 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
             {
                 var progress = new StreamingProgressCollector();
 
-                var options = FindSymbols
-                    .FindReferencesSearchOptions
-                    .GetFeatureOptionsForStartingSymbol(symbol);
+                var options =
+                    FindSymbols.FindReferencesSearchOptions.GetFeatureOptionsForStartingSymbol(
+                        symbol
+                    );
                 await SymbolFinder
                     .FindReferencesAsync(
                         symbol,

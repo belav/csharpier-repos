@@ -21,13 +21,11 @@ namespace Microsoft.Extensions.Logging
         /// <returns>The <see cref="ILoggingBuilder"/> so that additional calls can be chained.</returns>
         public static ILoggingBuilder SetMinimumLevel(this ILoggingBuilder builder, LogLevel level)
         {
-            builder
-                .Services
-                .Add(
-                    ServiceDescriptor.Singleton<IConfigureOptions<LoggerFilterOptions>>(
-                        new DefaultLoggerLevelConfigureOptions(level)
-                    )
-                );
+            builder.Services.Add(
+                ServiceDescriptor.Singleton<IConfigureOptions<LoggerFilterOptions>>(
+                    new DefaultLoggerLevelConfigureOptions(level)
+                )
+            );
             return builder;
         }
 

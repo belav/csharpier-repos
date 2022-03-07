@@ -30,9 +30,7 @@ namespace Internal.IL.Stubs
                 codeStream.Emit(
                     ILOpcode.ldflda,
                     emit.NewToken(
-                        method
-                            .Context
-                            .SystemModule
+                        method.Context.SystemModule
                             .GetKnownType("System.Runtime.CompilerServices", "RawArrayData")
                             .GetField("Data")
                     )

@@ -739,9 +739,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 // These features may not be handled well by the analysis below.
                 if (ExperimentalFeaturesEnabled(newTree))
                 {
-                    DocumentAnalysisResults
-                        .Log
-                        .Write("{0}: experimental features enabled", newDocument.Name);
+                    DocumentAnalysisResults.Log.Write(
+                        "{0}: experimental features enabled",
+                        newDocument.Name
+                    );
 
                     return DocumentAnalysisResults.SyntaxErrors(
                         newDocument.Id,
@@ -798,13 +799,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
                 if (diagnostics.Count > 0 && !hasRudeEdits)
                 {
-                    DocumentAnalysisResults
-                        .Log
-                        .Write(
-                            "{0} syntactic rude edits, first: '{1}'",
-                            diagnostics.Count,
-                            newDocument.FilePath
-                        );
+                    DocumentAnalysisResults.Log.Write(
+                        "{0} syntactic rude edits, first: '{1}'",
+                        diagnostics.Count,
+                        newDocument.FilePath
+                    );
                     hasRudeEdits = true;
                 }
 
@@ -876,14 +875,12 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
                 if (diagnostics.Count > 0 && !hasRudeEdits)
                 {
-                    DocumentAnalysisResults
-                        .Log
-                        .Write(
-                            "{0}@{1}: rude edit ({2} total)",
-                            newDocument.FilePath,
-                            diagnostics.First().Span.Start,
-                            diagnostics.Count
-                        );
+                    DocumentAnalysisResults.Log.Write(
+                        "{0}@{1}: rude edit ({2} total)",
+                        newDocument.FilePath,
+                        diagnostics.First().Span.Start,
+                        diagnostics.Count
+                    );
                     hasRudeEdits = true;
                 }
 
@@ -1081,13 +1078,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                             // Guard against invalid active statement spans (in case PDB was somehow out of sync with the source).
                             if (oldBody == null || newBody == null)
                             {
-                                DocumentAnalysisResults
-                                    .Log
-                                    .Write(
-                                        "Invalid active statement span: [{0}..{1})",
-                                        oldStatementSpan.Start,
-                                        oldStatementSpan.End
-                                    );
+                                DocumentAnalysisResults.Log.Write(
+                                    "Invalid active statement span: [{0}..{1})",
+                                    oldStatementSpan.Start,
+                                    oldStatementSpan.End
+                                );
                                 continue;
                             }
 
@@ -1111,9 +1106,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                                 // Adjust for active statements that cover more than the old member span.
                                 // For example, C# variable declarators that represent field initializers:
                                 //   [|public int <<F = Expr()>>;|]
-                                var adjustedOldStatementStart = oldMember
-                                    .FullSpan
-                                    .Contains(oldStatementSpan.Start)
+                                var adjustedOldStatementStart = oldMember.FullSpan.Contains(
+                                    oldStatementSpan.Start
+                                )
                                   ? oldStatementSpan.Start
                                   : oldMember.SpanStart;
 
@@ -1153,12 +1148,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                                     newStatement,
                                     oldActiveStatements[i].Statement.IsNonLeaf
                                 );
-                                newExceptionRegions[i] =
-                                    GetExceptionRegions(
-                                        ancestors,
-                                        newStatement.SyntaxTree,
-                                        cancellationToken
-                                    ).Spans;
+                                newExceptionRegions[i] = GetExceptionRegions(
+                                    ancestors,
+                                    newStatement.SyntaxTree,
+                                    cancellationToken
+                                ).Spans;
                             }
 
                             // Even though the body of the declaration haven't changed,
@@ -1180,13 +1174,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     }
                     else
                     {
-                        DocumentAnalysisResults
-                            .Log
-                            .Write(
-                                "Invalid active statement span: [{0}..{1})",
-                                oldStatementSpan.Start,
-                                oldStatementSpan.End
-                            );
+                        DocumentAnalysisResults.Log.Write(
+                            "Invalid active statement span: [{0}..{1})",
+                            oldStatementSpan.Start,
+                            oldStatementSpan.End
+                        );
                     }
 
                     // we were not able to determine the active statement location (PDB data might be invalid)
@@ -1791,8 +1783,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     return;
                 }
 
-                newStatementSyntax =
-                    bodyMatch.NewRoot.FindToken(newStatementSyntaxSpan.Start).Parent;
+                newStatementSyntax = bodyMatch.NewRoot
+                    .FindToken(newStatementSyntaxSpan.Start)
+                    .Parent;
 
                 Contract.ThrowIfNull(newStatementSyntax);
             }
@@ -1814,12 +1807,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 if (diagnostics.Count == 0)
                 {
                     Debug.Assert(oldAncestors.Count == newAncestors.Count);
-                    newExceptionRegions[ordinal] =
-                        GetExceptionRegions(
-                            newAncestors,
-                            newStatementSyntax.SyntaxTree,
-                            cancellationToken
-                        ).Spans;
+                    newExceptionRegions[ordinal] = GetExceptionRegions(
+                        newAncestors,
+                        newStatementSyntax.SyntaxTree,
+                        cancellationToken
+                    ).Spans;
                 }
             }
         }
@@ -3286,9 +3278,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             IParameterSymbol newParameter,
             bool exact
         ) =>
-            (exact ? s_exactSymbolEqualityComparer : s_runtimeSymbolEqualityComparer)
-                .ParameterEquivalenceComparer
-                .Equals(oldParameter, newParameter);
+            (
+                exact ? s_exactSymbolEqualityComparer : s_runtimeSymbolEqualityComparer
+            ).ParameterEquivalenceComparer.Equals(oldParameter, newParameter);
 
         protected static bool TypeParameterConstraintsEquivalent(
             ITypeParameterSymbol oldParameter,
@@ -3512,14 +3504,12 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         var symbolKey = SymbolKey.Create(symbol, cancellationToken);
 
                         // Ignore ambiguous resolution result - it may happen if there are semantic errors in the compilation.
-                        oldSymbol ??=
-                            symbolKey
-                                .Resolve(oldCompilation, ignoreAssemblyKey: true, cancellationToken)
-                                .Symbol;
-                        newSymbol ??=
-                            symbolKey
-                                .Resolve(newCompilation, ignoreAssemblyKey: true, cancellationToken)
-                                .Symbol;
+                        oldSymbol ??= symbolKey
+                            .Resolve(oldCompilation, ignoreAssemblyKey: true, cancellationToken)
+                            .Symbol;
+                        newSymbol ??= symbolKey
+                            .Resolve(newCompilation, ignoreAssemblyKey: true, cancellationToken)
+                            .Symbol;
 
                         var (oldDeclaration, newDeclaration) = GetSymbolDeclarationNodes(
                             oldSymbol,
@@ -3914,14 +3904,13 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                                                 oldSymbol.ContainingType,
                                                 cancellationToken
                                             );
-                                            var newContainingSymbol =
-                                                containingSymbolKey
-                                                    .Resolve(
-                                                        newCompilation,
-                                                        ignoreAssemblyKey: true,
-                                                        cancellationToken
-                                                    )
-                                                    .Symbol;
+                                            var newContainingSymbol = containingSymbolKey
+                                                .Resolve(
+                                                    newCompilation,
+                                                    ignoreAssemblyKey: true,
+                                                    cancellationToken
+                                                )
+                                                .Symbol;
                                             if (newContainingSymbol == null)
                                             {
                                                 continue;
@@ -4065,9 +4054,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                                             if (oldBody != null)
                                             {
                                                 // The old symbol's declaration syntax may be located in a different document than the old version of the current document.
-                                                var oldSyntaxDocument = oldProject
-                                                    .Solution
-                                                    .GetRequiredDocument(oldDeclaration.SyntaxTree);
+                                                var oldSyntaxDocument =
+                                                    oldProject.Solution.GetRequiredDocument(
+                                                        oldDeclaration.SyntaxTree
+                                                    );
                                                 var oldSyntaxModel = await oldSyntaxDocument
                                                     .GetRequiredSemanticModelAsync(
                                                         cancellationToken
@@ -5031,12 +5021,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
                 // VB implements clause
                 if (
-                    !oldMethod
-                        .ExplicitInterfaceImplementations
-                        .SequenceEqual(
-                            newMethod.ExplicitInterfaceImplementations,
-                            (x, y) => SymbolsEquivalent(x, y)
-                        )
+                    !oldMethod.ExplicitInterfaceImplementations.SequenceEqual(
+                        newMethod.ExplicitInterfaceImplementations,
+                        (x, y) => SymbolsEquivalent(x, y)
+                    )
                 )
                 {
                     rudeEdit = RudeEditKind.ImplementsClauseUpdate;
@@ -5797,27 +5785,25 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 foreach (var match in oldAttributes.Value)
                 {
                     if (
-                        SymbolEquivalenceComparer
-                            .Instance
-                            .Equals(match.AttributeClass, attribute.AttributeClass)
+                        SymbolEquivalenceComparer.Instance.Equals(
+                            match.AttributeClass,
+                            attribute.AttributeClass
+                        )
                     )
                     {
                         if (
-                            SymbolEquivalenceComparer
-                                .Instance
-                                .Equals(match.AttributeConstructor, attribute.AttributeConstructor)
-                            && match
-                                .ConstructorArguments
-                                .SequenceEqual(
-                                    attribute.ConstructorArguments,
-                                    TypedConstantComparer.Instance
-                                )
-                            && match
-                                .NamedArguments
-                                .SequenceEqual(
-                                    attribute.NamedArguments,
-                                    NamedArgumentComparer.Instance
-                                )
+                            SymbolEquivalenceComparer.Instance.Equals(
+                                match.AttributeConstructor,
+                                attribute.AttributeConstructor
+                            )
+                            && match.ConstructorArguments.SequenceEqual(
+                                attribute.ConstructorArguments,
+                                TypedConstantComparer.Instance
+                            )
+                            && match.NamedArguments.SequenceEqual(
+                                attribute.NamedArguments,
+                                NamedArgumentComparer.Instance
+                            )
                         )
                         {
                             return match;
@@ -5975,18 +5961,14 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     m =>
                         m.IsImplicitlyDeclared
                         && m.Parameters.Length == 1
-                        && SymbolEqualityComparer
-                            .Default
-                            .Equals(
-                                m.Parameters[0].Type,
-                                compilation.GetTypeByMetadataName(typeof(StringBuilder).FullName!)
-                            )
-                        && SymbolEqualityComparer
-                            .Default
-                            .Equals(
-                                m.ReturnType,
-                                compilation.GetTypeByMetadataName(typeof(bool).FullName!)
-                            )
+                        && SymbolEqualityComparer.Default.Equals(
+                            m.Parameters[0].Type,
+                            compilation.GetTypeByMetadataName(typeof(StringBuilder).FullName!)
+                        )
+                        && SymbolEqualityComparer.Default.Equals(
+                            m.ReturnType,
+                            compilation.GetTypeByMetadataName(typeof(bool).FullName!)
+                        )
                 );
             if (result is not null)
             {
@@ -6000,9 +5982,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     m =>
                         m.IsImplicitlyDeclared
                         && m.Parameters.Length == 1
-                        && SymbolEqualityComparer
-                            .Default
-                            .Equals(m.Parameters[0].Type, m.ContainingType)
+                        && SymbolEqualityComparer.Default.Equals(
+                            m.Parameters[0].Type,
+                            m.ContainingType
+                        )
                 );
             if (result is not null)
             {
@@ -6151,10 +6134,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             while (oldContainer != null)
             {
                 var containerKey = SymbolKey.Create(oldContainer, cancellationToken);
-                var newContainer =
-                    containerKey
-                        .Resolve(newCompilation, ignoreAssemblyKey: true, cancellationToken)
-                        .Symbol;
+                var newContainer = containerKey
+                    .Resolve(newCompilation, ignoreAssemblyKey: true, cancellationToken)
+                    .Symbol;
                 if (newContainer != null)
                 {
                     return GetRudeEditDiagnosticNode(newContainer, cancellationToken);
@@ -6279,9 +6261,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 return false;
             }
 
-            lazyLayoutAttribute ??= model
-                .Compilation
-                .GetTypeByMetadataName(typeof(StructLayoutAttribute).FullName!);
+            lazyLayoutAttribute ??= model.Compilation.GetTypeByMetadataName(
+                typeof(StructLayoutAttribute).FullName!
+            );
             if (lazyLayoutAttribute == null)
             {
                 return false;
@@ -6427,10 +6409,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             {
                 var oldType = updatesInCurrentDocument.OldType;
 
-                var anyInitializerUpdatesInCurrentDocument = updatesInCurrentDocument
-                    .ChangedDeclarations
-                    .Keys
-                    .Any(IsDeclarationWithInitializer);
+                var anyInitializerUpdatesInCurrentDocument =
+                    updatesInCurrentDocument.ChangedDeclarations.Keys.Any(
+                        IsDeclarationWithInitializer
+                    );
                 var isPartialEdit = IsPartialEdit(oldType, newType, oldSyntaxTree, newSyntaxTree);
 
                 // Create a syntax map that aggregates syntax maps of the constructor body and all initializers in this document.
@@ -6497,9 +6479,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         if (
                             !isPrimaryRecordConstructor
                             && !anyInitializerUpdatesInCurrentDocument
-                            && !updatesInCurrentDocument
-                                .ChangedDeclarations
-                                .ContainsKey(newDeclaration)
+                            && !updatesInCurrentDocument.ChangedDeclarations.ContainsKey(
+                                newDeclaration
+                            )
                         )
                         {
                             continue;
@@ -6573,19 +6555,16 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         )
                         {
                             // attribute rude edit to one of the modified members
-                            var firstSpan =
-                                updatesInCurrentDocument
-                                    .ChangedDeclarations
-                                    .Keys
-                                    .Where(IsDeclarationWithInitializer)
-                                    .Aggregate(
-                                        (min: int.MaxValue, span: default(TextSpan)),
-                                        (accumulate, node) =>
-                                            (node.SpanStart < accumulate.min)
-                                                ? (node.SpanStart, node.Span)
-                                                : accumulate
-                                    )
-                                    .span;
+                            var firstSpan = updatesInCurrentDocument.ChangedDeclarations.Keys
+                                .Where(IsDeclarationWithInitializer)
+                                .Aggregate(
+                                    (min: int.MaxValue, span: default(TextSpan)),
+                                    (accumulate, node) =>
+                                        (node.SpanStart < accumulate.min)
+                                            ? (node.SpanStart, node.Span)
+                                            : accumulate
+                                )
+                                .span;
 
                             Contract.ThrowIfTrue(firstSpan.IsEmpty);
                             ReportMemberBodyUpdateRudeEdits(diagnostics, newDeclaration, firstSpan);
@@ -6639,15 +6618,14 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                                 continue;
                             }
 
-                            oldCtor = oldType
-                                .InstanceConstructors
-                                .Single(
-                                    c =>
-                                        c.Parameters.Length == 1
-                                        && SymbolEqualityComparer
-                                            .Default
-                                            .Equals(c.Parameters[0].Type, c.ContainingType)
-                                );
+                            oldCtor = oldType.InstanceConstructors.Single(
+                                c =>
+                                    c.Parameters.Length == 1
+                                    && SymbolEqualityComparer.Default.Equals(
+                                        c.Parameters[0].Type,
+                                        c.ContainingType
+                                    )
+                            );
                             // The copy constructor does not have a syntax map
                             syntaxMapToUse = null;
                             // Since there is no syntax map, we don't need to handle anything special to merge them for partial types.
@@ -7291,26 +7269,23 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                             }
                             else
                             {
-                                errorSpan =
-                                    GetVariableUseSites(
-                                            GetLambdaBodyExpressionsAndStatements(lambdaBody),
-                                            captures[i],
-                                            model,
-                                            cancellationToken
-                                        )
-                                        .First()
-                                        .Span;
+                                errorSpan = GetVariableUseSites(
+                                        GetLambdaBodyExpressionsAndStatements(lambdaBody),
+                                        captures[i],
+                                        model,
+                                        cancellationToken
+                                    )
+                                    .First()
+                                    .Span;
                             }
 
                             rudeEdit = RudeEditKind.InsertLambdaWithMultiScopeCapture;
                         }
                         else
                         {
-                            errorSpan =
-                                newCaptures[reverseCapturesMap.IndexOf(i)]
-                                    .Locations
-                                    .Single()
-                                    .SourceSpan;
+                            errorSpan = newCaptures[reverseCapturesMap.IndexOf(i)].Locations
+                                .Single()
+                                .SourceSpan;
                             rudeEdit = RudeEditKind.DeleteLambdaWithMultiScopeCapture;
                         }
 
@@ -7407,8 +7382,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             var containingLambda = parameter.ContainingSymbol as IMethodSymbol;
             if (containingLambda?.MethodKind is MethodKind.LambdaMethod or MethodKind.LocalFunction)
             {
-                var oldContainingLambdaSyntax = containingLambda
-                    .DeclaringSyntaxReferences
+                var oldContainingLambdaSyntax = containingLambda.DeclaringSyntaxReferences
                     .Single()
                     .GetSyntax(cancellationToken);
                 return (oldContainingLambdaSyntax, parameter.Ordinal);
@@ -7556,8 +7530,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 }
                 else
                 {
-                    var newCaptureSyntax = newCapture
-                        .DeclaringSyntaxReferences
+                    var newCaptureSyntax = newCapture.DeclaringSyntaxReferences
                         .Single()
                         .GetSyntax(cancellationToken);
 
@@ -7921,8 +7894,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     || HasParameterClosureScope(member)
                 )
                 {
-                    var result = localOrParameter
-                        .DeclaringSyntaxReferences
+                    var result = localOrParameter.DeclaringSyntaxReferences
                         .Single()
                         .GetSyntax(cancellationToken);
                     Debug.Assert(IsLambda(result));
@@ -7932,8 +7904,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 return memberBody;
             }
 
-            var node = localOrParameter
-                .DeclaringSyntaxReferences
+            var node = localOrParameter.DeclaringSyntaxReferences
                 .Single()
                 .GetSyntax(cancellationToken);
             while (true)

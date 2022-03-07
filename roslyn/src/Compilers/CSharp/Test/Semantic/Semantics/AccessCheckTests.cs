@@ -832,14 +832,18 @@ class ADerived2: A
             ITypeSymbol aarrayType = (classA.GetMembers("aarray").Single() as IFieldSymbol).Type;
             ITypeSymbol kptrType = (classA.GetMembers("kptr").Single() as IFieldSymbol).Type;
             ITypeSymbol aptrType = (classA.GetMembers("aptr").Single() as IFieldSymbol).Type;
-            ITypeSymbol kinreturnfuncptrType =
-                (classA.GetMembers("kinreturnfuncptr").Single() as IFieldSymbol).Type;
-            ITypeSymbol kinparamfuncptr1Type =
-                (classA.GetMembers("kinparamfuncptr1").Single() as IFieldSymbol).Type;
-            ITypeSymbol kinparamfuncptr2Type =
-                (classA.GetMembers("kinparamfuncptr2").Single() as IFieldSymbol).Type;
-            ITypeSymbol afuncptrType =
-                (classA.GetMembers("afuncptr").Single() as IFieldSymbol).Type;
+            ITypeSymbol kinreturnfuncptrType = (
+                classA.GetMembers("kinreturnfuncptr").Single() as IFieldSymbol
+            ).Type;
+            ITypeSymbol kinparamfuncptr1Type = (
+                classA.GetMembers("kinparamfuncptr1").Single() as IFieldSymbol
+            ).Type;
+            ITypeSymbol kinparamfuncptr2Type = (
+                classA.GetMembers("kinparamfuncptr2").Single() as IFieldSymbol
+            ).Type;
+            ITypeSymbol afuncptrType = (
+                classA.GetMembers("afuncptr").Single() as IFieldSymbol
+            ).Type;
             ITypeSymbol kenumType = (classA.GetMembers("kenum").Single() as IFieldSymbol).Type;
             ITypeSymbol aenumType = (classA.GetMembers("aenum").Single() as IFieldSymbol).Type;
             var discards = tree.GetRoot()
@@ -849,8 +853,9 @@ class ADerived2: A
                 .ToArray();
             IDiscardSymbol kdiscard = (IDiscardSymbol)model.GetSymbolInfo(discards[0]).Symbol;
             IDiscardSymbol adiscard = (IDiscardSymbol)model.GetSymbolInfo(discards[1]).Symbol;
-            ITypeSymbol unknownType =
-                (classA.GetMembers("unknowntype").Single() as IFieldSymbol).Type;
+            ITypeSymbol unknownType = (
+                classA.GetMembers("unknowntype").Single() as IFieldSymbol
+            ).Type;
 
             ISymbol nullSymbol = null;
             Assert.Throws<ArgumentNullException>(
@@ -1159,13 +1164,11 @@ internal class InFriendCompilation
             Compilation compilation = c;
             c.VerifyDiagnostics();
             Assert.NotNull(c.GetReferencedAssemblySymbol(r1));
-            var classC = compilation
-                .GlobalNamespace
+            var classC = compilation.GlobalNamespace
                 .GetMembers("C")
                 .OfType<INamedTypeSymbol>()
                 .Single();
-            var classQ = compilation
-                .GlobalNamespace
+            var classQ = compilation.GlobalNamespace
                 .GetMembers("Q")
                 .OfType<INamedTypeSymbol>()
                 .Single();
@@ -1182,16 +1185,14 @@ internal class InFriendCompilation
             // duplicate assembly results in no assembly symbol
             Assert.Null(c.GetReferencedAssemblySymbol(r1));
             // The variable classC represents a symbol from r1, which did not result in any symbols in c
-            var c2 = ((Compilation)c)
-                .GlobalNamespace
+            var c2 = ((Compilation)c).GlobalNamespace
                 .GetMembers("C")
                 .OfType<INamedTypeSymbol>()
                 .Single();
             Assert.NotEqual(classC, c2);
 
             Assert.NotNull(c.GetReferencedAssemblySymbol(r2));
-            classQ = ((Compilation)c)
-                .GlobalNamespace
+            classQ = ((Compilation)c).GlobalNamespace
                 .GetMembers("Q")
                 .OfType<INamedTypeSymbol>()
                 .Single();

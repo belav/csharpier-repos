@@ -33,8 +33,10 @@ namespace Microsoft.CodeAnalysis.Host.Mef
         private ImmutableDictionary<
             Type,
             Lazy<IWorkspaceService, WorkspaceServiceMetadata>
-        > _serviceMap =
-            ImmutableDictionary<Type, Lazy<IWorkspaceService, WorkspaceServiceMetadata>>.Empty;
+        > _serviceMap = ImmutableDictionary<
+            Type,
+            Lazy<IWorkspaceService, WorkspaceServiceMetadata>
+        >.Empty;
 
         // accumulated cache for language services
         private ImmutableDictionary<string, MefLanguageServices> _languageServicesMap =

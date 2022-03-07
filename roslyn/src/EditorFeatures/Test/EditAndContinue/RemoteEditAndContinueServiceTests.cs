@@ -47,9 +47,9 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
         [Theory, CombinatorialData]
         public async Task Proxy(TestHost testHost)
         {
-            var localComposition = EditorTestCompositions
-                .EditorFeatures
-                .WithTestHostParts(testHost);
+            var localComposition = EditorTestCompositions.EditorFeatures.WithTestHostParts(
+                testHost
+            );
             if (testHost == TestHost.InProcess)
             {
                 localComposition = localComposition.AddParts(
@@ -62,16 +62,14 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
             var globalOptions = localWorkspace.GetService<IGlobalOptionService>();
 
             MockEditAndContinueWorkspaceService mockEncService;
-            var clientProvider = (InProcRemoteHostClientProvider?)localWorkspace
-                .Services
-                .GetService<IRemoteHostClientProvider>();
+            var clientProvider =
+                (InProcRemoteHostClientProvider?)localWorkspace.Services.GetService<IRemoteHostClientProvider>();
             if (testHost == TestHost.InProcess)
             {
                 Assert.Null(clientProvider);
 
-                mockEncService = (MockEditAndContinueWorkspaceService)localWorkspace
-                    .Services
-                    .GetRequiredService<IEditAndContinueWorkspaceService>();
+                mockEncService =
+                    (MockEditAndContinueWorkspaceService)localWorkspace.Services.GetRequiredService<IEditAndContinueWorkspaceService>();
             }
             else
             {
@@ -85,14 +83,12 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
                     .GetTestClientAsync(localWorkspace)
                     .ConfigureAwait(false);
                 var remoteWorkspace = client.TestData.WorkspaceManager.GetWorkspace();
-                mockEncService = (MockEditAndContinueWorkspaceService)remoteWorkspace
-                    .Services
-                    .GetRequiredService<IEditAndContinueWorkspaceService>();
+                mockEncService =
+                    (MockEditAndContinueWorkspaceService)remoteWorkspace.Services.GetRequiredService<IEditAndContinueWorkspaceService>();
             }
 
             localWorkspace.ChangeSolution(
-                localWorkspace
-                    .CurrentSolution
+                localWorkspace.CurrentSolution
                     .AddProject("proj", "proj", LanguageNames.CSharp)
                     .AddMetadataReferences(
                         TargetFrameworkUtil.GetReferences(TargetFramework.Mscorlib40)
@@ -102,8 +98,7 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
                         SourceText.From("class C { }", Encoding.UTF8),
                         filePath: "test.cs"
                     )
-                    .Project
-                    .Solution
+                    .Project.Solution
             );
 
             var solution = localWorkspace.CurrentSolution;
@@ -324,8 +319,7 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
                     )
                 );
 
-                var syntaxTree = project
-                    .Documents
+                var syntaxTree = project.Documents
                     .Single()
                     .GetSyntaxTreeSynchronously(CancellationToken.None)!;
 

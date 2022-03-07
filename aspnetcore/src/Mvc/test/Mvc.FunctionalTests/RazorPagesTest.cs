@@ -21,8 +21,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 public class RazorPagesTest
     : IClassFixture<MvcTestFixture<RazorPagesWebSite.StartupWithoutEndpointRouting>>
 {
-    private static readonly Assembly _resourcesAssembly =
-        typeof(RazorPagesTest).GetTypeInfo().Assembly;
+    private static readonly Assembly _resourcesAssembly = typeof(RazorPagesTest)
+        .GetTypeInfo()
+        .Assembly;
 
     public RazorPagesTest(MvcTestFixture<RazorPagesWebSite.StartupWithoutEndpointRouting> fixture)
     {

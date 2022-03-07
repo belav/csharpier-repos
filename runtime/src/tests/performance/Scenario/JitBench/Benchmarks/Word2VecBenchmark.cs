@@ -186,8 +186,10 @@ namespace JitBench
             double? trainingTime = null;
             double? firstSearchTime = null;
             double? steadyStateMedianTime = null;
-            var currentDecimalSeparator =
-                CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator;
+            var currentDecimalSeparator = CultureInfo
+                .CurrentCulture
+                .NumberFormat
+                .NumberDecimalSeparator;
 
             using (var reader = new StringReader(stdout))
             {

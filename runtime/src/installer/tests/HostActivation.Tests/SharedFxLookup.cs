@@ -174,8 +174,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdErrContaining(
+                .And.HaveStdErrContaining(
                     $"Replacing deps entry [{uberFile}, AssemblyVersion:0.0.0.1, FileVersion:0.0.0.2] with [{netCoreAppFile}"
                 );
         }
@@ -229,10 +228,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdErrContaining(Path.Combine("7777.0.0", "System.Collections.Immutable.dll"))
-                .And
-                .NotHaveStdErrContaining(
+                .And.HaveStdErrContaining(
+                    Path.Combine("7777.0.0", "System.Collections.Immutable.dll")
+                )
+                .And.NotHaveStdErrContaining(
                     Path.Combine("9999.1.0", "System.Collections.Immutable.dll")
                 );
         }

@@ -109,11 +109,9 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_UnsafeRead));
 
-            var result = ArmBase
-                .Arm64
-                .ReverseElementBits(
-                    Unsafe.ReadUnaligned<Int64>(ref Unsafe.As<Int64, byte>(ref _data))
-                );
+            var result = ArmBase.Arm64.ReverseElementBits(
+                Unsafe.ReadUnaligned<Int64>(ref Unsafe.As<Int64, byte>(ref _data))
+            );
 
             ValidateResult(_data, result);
         }
@@ -219,11 +217,9 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (isUnexpectedResult)
             {
-                TestLibrary
-                    .TestFramework
-                    .LogInformation(
-                        $"{nameof(ArmBase.Arm64)}.{nameof(ArmBase.Arm64.ReverseElementBits)}<Int64>(Int64): ReverseElementBits failed:"
-                    );
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(ArmBase.Arm64)}.{nameof(ArmBase.Arm64.ReverseElementBits)}<Int64>(Int64): ReverseElementBits failed:"
+                );
                 TestLibrary.TestFramework.LogInformation($"    data: {data}");
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");
                 TestLibrary.TestFramework.LogInformation(string.Empty);

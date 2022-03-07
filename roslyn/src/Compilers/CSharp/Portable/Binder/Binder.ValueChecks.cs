@@ -3133,8 +3133,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case BoundKind.FunctionPointerInvocation:
                     var functionPointerInvocation = (BoundFunctionPointerInvocation)expr;
 
-                    FunctionPointerMethodSymbol signature =
-                        functionPointerInvocation.FunctionPointer.Signature;
+                    FunctionPointerMethodSymbol signature = functionPointerInvocation
+                        .FunctionPointer
+                        .Signature;
                     if (signature.RefKind == RefKind.None)
                     {
                         break;

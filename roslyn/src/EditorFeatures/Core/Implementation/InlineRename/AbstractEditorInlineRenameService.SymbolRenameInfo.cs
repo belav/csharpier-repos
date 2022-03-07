@@ -267,11 +267,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             {
                 if (
                     RenameSymbol.Kind == SymbolKind.NamedType
-                    && _document
-                        .Project
-                        .Solution
-                        .Workspace
-                        .CanApplyChange(ApplyChangesKind.ChangeDocumentInfo)
+                    && _document.Project.Solution.Workspace.CanApplyChange(
+                        ApplyChangesKind.ChangeDocumentInfo
+                    )
                 )
                 {
                     if (RenameSymbol.Locations.Length > 1)
@@ -282,10 +280,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                     // Get the document that the symbol is defined in to compare
                     // the name with the symbol name. If they match allow
                     // rename file rename as part of the symbol rename
-                    var symbolSourceDocument = _document
-                        .Project
-                        .Solution
-                        .GetDocument(RenameSymbol.Locations.Single().SourceTree);
+                    var symbolSourceDocument = _document.Project.Solution.GetDocument(
+                        RenameSymbol.Locations.Single().SourceTree
+                    );
                     if (
                         symbolSourceDocument != null
                         && WorkspacePathUtilities.TypeNameMatchesDocumentName(

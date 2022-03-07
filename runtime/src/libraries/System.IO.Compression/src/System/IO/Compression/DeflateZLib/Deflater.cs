@@ -62,8 +62,9 @@ namespace System.IO.Compression
                     throw new ArgumentOutOfRangeException(nameof(compressionLevel));
             }
 
-            ZLibNative.CompressionStrategy strategy =
-                ZLibNative.CompressionStrategy.DefaultStrategy;
+            ZLibNative.CompressionStrategy strategy = ZLibNative
+                .CompressionStrategy
+                .DefaultStrategy;
 
             ZErrorCode errC;
             try

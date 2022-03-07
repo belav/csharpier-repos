@@ -20,9 +20,9 @@ namespace System.Net.Security.Tests
         public static bool IsNtlmInstalled => Capability.IsNtlmInstalled();
 
         private const int PartialBytesToRead = 5;
-        protected static readonly byte[] s_sampleMsg = Encoding
-            .UTF8
-            .GetBytes("Sample Test Message");
+        protected static readonly byte[] s_sampleMsg = Encoding.UTF8.GetBytes(
+            "Sample Test Message"
+        );
 
         private const int MaxWriteDataSize = 63 * 1024; // NegoState.MaxWriteDataSize
         private static string s_longString = new string('A', MaxWriteDataSize) + 'Z';

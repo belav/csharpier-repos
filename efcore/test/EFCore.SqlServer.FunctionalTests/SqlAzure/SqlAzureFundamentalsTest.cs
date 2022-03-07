@@ -28,8 +28,7 @@ namespace Microsoft.EntityFrameworkCore.SqlAzure
         public void CanAdd()
         {
             using var context = CreateContext();
-            context
-                .Database
+            context.Database
                 .CreateExecutionStrategy()
                 .Execute(
                     context,
@@ -56,8 +55,7 @@ namespace Microsoft.EntityFrameworkCore.SqlAzure
         public void CanUpdate()
         {
             using var context = CreateContext();
-            context
-                .Database
+            context.Database
                 .CreateExecutionStrategy()
                 .Execute(
                     context,
@@ -81,8 +79,7 @@ namespace Microsoft.EntityFrameworkCore.SqlAzure
         public void IncludeQuery()
         {
             using var context = CreateContext();
-            var order = context
-                .SalesOrders
+            var order = context.SalesOrders
                 .OrderBy(s => s.SalesOrderID)
                 .Include(s => s.Customer)
                 .First();

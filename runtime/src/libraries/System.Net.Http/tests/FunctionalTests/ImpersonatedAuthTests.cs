@@ -53,8 +53,7 @@ namespace System.Net.Http.Functional.Tests
                         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                         Assert.Equal("foo", await response.Content.ReadAsStringAsync());
 
-                        string initialUser = response
-                            .Headers
+                        string initialUser = response.Headers
                             .GetValues(NtAuthTests.UserHeaderName)
                             .First();
 
@@ -86,8 +85,7 @@ namespace System.Net.Http.Functional.Tests
                                     response.Content.ReadAsStringAsync().GetAwaiter().GetResult()
                                 );
 
-                                string newUser = response
-                                    .Headers
+                                string newUser = response.Headers
                                     .GetValues(NtAuthTests.UserHeaderName)
                                     .First();
                                 Assert.Equal(_fixture.TestAccount.AccountName, newUser);

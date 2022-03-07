@@ -27,13 +27,11 @@ namespace System.Security.Cryptography
                     throw new CryptographicException(SR.Cryptography_OpenInvalidHandle);
                 }
 
-                byte[] keyBlob = Interop
-                    .AppleCrypto
-                    .SecKeyExport(
-                        includePrivateParameters ? keys.PrivateKey : keys.PublicKey,
-                        exportPrivate: includePrivateParameters,
-                        password: ExportPassword
-                    );
+                byte[] keyBlob = Interop.AppleCrypto.SecKeyExport(
+                    includePrivateParameters ? keys.PrivateKey : keys.PublicKey,
+                    exportPrivate: includePrivateParameters,
+                    password: ExportPassword
+                );
 
                 try
                 {
@@ -197,9 +195,10 @@ namespace System.Security.Cryptography
 
                 try
                 {
-                    return Interop
-                        .AppleCrypto
-                        .ImportEphemeralKey(rented.AsSpan(0, written), hasPrivateKey);
+                    return Interop.AppleCrypto.ImportEphemeralKey(
+                        rented.AsSpan(0, written),
+                        hasPrivateKey
+                    );
                 }
                 finally
                 {
@@ -229,9 +228,10 @@ namespace System.Security.Cryptography
                             out int localRead
                         );
 
-                        SafeSecKeyRefHandle publicKey = Interop
-                            .AppleCrypto
-                            .ImportEphemeralKey(source.Slice(0, localRead), false);
+                        SafeSecKeyRefHandle publicKey = Interop.AppleCrypto.ImportEphemeralKey(
+                            source.Slice(0, localRead),
+                            false
+                        );
                         SetKey(SecKeyPair.PublicOnly(publicKey));
 
                         bytesRead = localRead;

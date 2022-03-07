@@ -24,8 +24,9 @@ namespace Microsoft.EntityFrameworkCore
                 c => c.Default(WarningBehavior.Throw)
             );
 
-            var warningConfiguration =
-                optionsBuilder.Options.FindExtension<CoreOptionsExtension>().WarningsConfiguration;
+            var warningConfiguration = optionsBuilder.Options
+                .FindExtension<CoreOptionsExtension>()
+                .WarningsConfiguration;
 
             Assert.Equal(WarningBehavior.Throw, warningConfiguration.DefaultBehavior);
         }
@@ -51,8 +52,7 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Same(model, optionsBuilder.Options.FindExtension<CoreOptionsExtension>().Model);
             Assert.True(
-                optionsBuilder
-                    .Options
+                optionsBuilder.Options
                     .FindExtension<CoreOptionsExtension>()
                     .IsSensitiveDataLoggingEnabled
             );
@@ -349,8 +349,9 @@ namespace Microsoft.EntityFrameworkCore
                 )
             );
 
-            var warningConfiguration =
-                optionsBuilder.Options.FindExtension<CoreOptionsExtension>().WarningsConfiguration;
+            var warningConfiguration = optionsBuilder.Options
+                .FindExtension<CoreOptionsExtension>()
+                .WarningsConfiguration;
 
             Assert.Equal(WarningBehavior.Throw, warningConfiguration.DefaultBehavior);
         }

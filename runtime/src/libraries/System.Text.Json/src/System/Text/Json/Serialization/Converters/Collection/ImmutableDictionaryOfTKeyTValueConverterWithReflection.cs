@@ -34,9 +34,12 @@ namespace System.Text.Json.Serialization.Converters
         )
         {
             Debug.Assert(jsonTypeInfo != null);
-            jsonTypeInfo.CreateObjectWithArgs = options
-                .MemberAccessorStrategy
-                .CreateImmutableDictionaryCreateRangeDelegate<TCollection, TKey, TValue>();
+            jsonTypeInfo.CreateObjectWithArgs =
+                options.MemberAccessorStrategy.CreateImmutableDictionaryCreateRangeDelegate<
+                    TCollection,
+                    TKey,
+                    TValue
+                >();
         }
     }
 }

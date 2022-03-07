@@ -370,8 +370,7 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
                         includeDirectives: true,
                         includeDocumentationComments: true
                     )
-                    .Span
-                    .End;
+                    .Span.End;
             }
 
             return nextToken.Span.End;
@@ -932,8 +931,7 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
             {
                 Contract.ThrowIfNull(annotation.Data);
 
-                var types = annotation
-                    .Data
+                var types = annotation.Data
                     .Split(s_separators)
                     .Select(s => (SpanMarkerType)Enum.Parse(typeof(SpanMarkerType), s))
                     .ToArray();

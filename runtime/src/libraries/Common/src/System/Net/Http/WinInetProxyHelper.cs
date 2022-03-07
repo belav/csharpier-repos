@@ -151,14 +151,12 @@ namespace System.Net.Http
             {
                 _autoDetectionFailed = false;
                 if (
-                    Interop
-                        .WinHttp
-                        .WinHttpGetProxyForUrl(
-                            sessionHandle!,
-                            destination,
-                            ref autoProxyOptions,
-                            out proxyInfo
-                        )
+                    Interop.WinHttp.WinHttpGetProxyForUrl(
+                        sessionHandle!,
+                        destination,
+                        ref autoProxyOptions,
+                        out proxyInfo
+                    )
                 )
                 {
                     if (NetEventSource.Log.IsEnabled())

@@ -21,14 +21,12 @@ namespace System.Security.Cryptography
             _ctxHandle = Interop.Crypto.EvpCipherCreatePartial(GetCipher(key.Length * 8));
 
             Interop.Crypto.CheckValidOpenSslHandle(_ctxHandle);
-            Interop
-                .Crypto
-                .EvpCipherSetKeyAndIV(
-                    _ctxHandle,
-                    key,
-                    Span<byte>.Empty,
-                    Interop.Crypto.EvpCipherDirection.NoChange
-                );
+            Interop.Crypto.EvpCipherSetKeyAndIV(
+                _ctxHandle,
+                key,
+                Span<byte>.Empty,
+                Interop.Crypto.EvpCipherDirection.NoChange
+            );
         }
 
         private void EncryptCore(
@@ -39,21 +37,22 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> associatedData = default
         )
         {
-            Interop
-                .Crypto
-                .EvpCipherSetKeyAndIV(
-                    _ctxHandle,
-                    Span<byte>.Empty,
-                    nonce,
-                    Interop.Crypto.EvpCipherDirection.Encrypt
-                );
+            Interop.Crypto.EvpCipherSetKeyAndIV(
+                _ctxHandle,
+                Span<byte>.Empty,
+                nonce,
+                Interop.Crypto.EvpCipherDirection.Encrypt
+            );
 
             if (associatedData.Length != 0)
             {
                 if (
-                    !Interop
-                        .Crypto
-                        .EvpCipherUpdate(_ctxHandle, Span<byte>.Empty, out _, associatedData)
+                    !Interop.Crypto.EvpCipherUpdate(
+                        _ctxHandle,
+                        Span<byte>.Empty,
+                        out _,
+                        associatedData
+                    )
                 )
                 {
                     throw Interop.Crypto.CreateOpenSslCryptographicException();
@@ -61,27 +60,23 @@ namespace System.Security.Cryptography
             }
 
             if (
-                !Interop
-                    .Crypto
-                    .EvpCipherUpdate(
-                        _ctxHandle,
-                        ciphertext,
-                        out int ciphertextBytesWritten,
-                        plaintext
-                    )
+                !Interop.Crypto.EvpCipherUpdate(
+                    _ctxHandle,
+                    ciphertext,
+                    out int ciphertextBytesWritten,
+                    plaintext
+                )
             )
             {
                 throw Interop.Crypto.CreateOpenSslCryptographicException();
             }
 
             if (
-                !Interop
-                    .Crypto
-                    .EvpCipherFinalEx(
-                        _ctxHandle,
-                        ciphertext.Slice(ciphertextBytesWritten),
-                        out int bytesWritten
-                    )
+                !Interop.Crypto.EvpCipherFinalEx(
+                    _ctxHandle,
+                    ciphertext.Slice(ciphertextBytesWritten),
+                    out int bytesWritten
+                )
             )
             {
                 throw Interop.Crypto.CreateOpenSslCryptographicException();
@@ -108,21 +103,22 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> associatedData
         )
         {
-            Interop
-                .Crypto
-                .EvpCipherSetKeyAndIV(
-                    _ctxHandle,
-                    ReadOnlySpan<byte>.Empty,
-                    nonce,
-                    Interop.Crypto.EvpCipherDirection.Decrypt
-                );
+            Interop.Crypto.EvpCipherSetKeyAndIV(
+                _ctxHandle,
+                ReadOnlySpan<byte>.Empty,
+                nonce,
+                Interop.Crypto.EvpCipherDirection.Decrypt
+            );
 
             if (associatedData.Length != 0)
             {
                 if (
-                    !Interop
-                        .Crypto
-                        .EvpCipherUpdate(_ctxHandle, Span<byte>.Empty, out _, associatedData)
+                    !Interop.Crypto.EvpCipherUpdate(
+                        _ctxHandle,
+                        Span<byte>.Empty,
+                        out _,
+                        associatedData
+                    )
                 )
                 {
                     throw Interop.Crypto.CreateOpenSslCryptographicException();
@@ -130,14 +126,12 @@ namespace System.Security.Cryptography
             }
 
             if (
-                !Interop
-                    .Crypto
-                    .EvpCipherUpdate(
-                        _ctxHandle,
-                        plaintext,
-                        out int plaintextBytesWritten,
-                        ciphertext
-                    )
+                !Interop.Crypto.EvpCipherUpdate(
+                    _ctxHandle,
+                    plaintext,
+                    out int plaintextBytesWritten,
+                    ciphertext
+                )
             )
             {
                 throw Interop.Crypto.CreateOpenSslCryptographicException();
@@ -146,13 +140,11 @@ namespace System.Security.Cryptography
             Interop.Crypto.EvpCipherSetAeadTag(_ctxHandle, tag);
 
             if (
-                !Interop
-                    .Crypto
-                    .EvpCipherFinalEx(
-                        _ctxHandle,
-                        plaintext.Slice(plaintextBytesWritten),
-                        out int bytesWritten
-                    )
+                !Interop.Crypto.EvpCipherFinalEx(
+                    _ctxHandle,
+                    plaintext.Slice(plaintextBytesWritten),
+                    out int bytesWritten
+                )
             )
             {
                 CryptographicOperations.ZeroMemory(plaintext);

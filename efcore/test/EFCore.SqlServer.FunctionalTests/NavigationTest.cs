@@ -123,11 +123,10 @@ namespace Microsoft.EntityFrameworkCore
                 ["Trusted_Connection"] = true
             };
 
-            _options =
-                new DbContextOptionsBuilder()
-                    .UseSqlServer(connStrBuilder.ConnectionString, b => b.ApplyConfiguration())
-                    .UseInternalServiceProvider(serviceProvider)
-                    .Options;
+            _options = new DbContextOptionsBuilder()
+                .UseSqlServer(connStrBuilder.ConnectionString, b => b.ApplyConfiguration())
+                .UseInternalServiceProvider(serviceProvider)
+                .Options;
         }
 
         public virtual GoTContext CreateContext() => new(_options);

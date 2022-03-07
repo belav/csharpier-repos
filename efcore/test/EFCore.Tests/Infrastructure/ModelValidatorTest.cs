@@ -1067,8 +1067,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                     ConfigurationSource.Convention,
                     setTargetAsPrincipal: true
                 )
-                .Metadata
-                .IsOwnership = true;
+                .Metadata.IsOwnership = true;
 
             ownedTypeBuilder.Ignore(nameof(ReferencedEntity.Id), ConfigurationSource.Explicit);
             ownedTypeBuilder.Ignore(
@@ -1264,8 +1263,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 nameof(B.A),
                 ConfigurationSource.Convention
             );
-            var anotherEntityTypeBuilder =
-                baseOwnershipBuilder.Metadata.DeclaringEntityType.Builder;
+            var anotherEntityTypeBuilder = baseOwnershipBuilder
+                .Metadata
+                .DeclaringEntityType
+                .Builder;
             anotherEntityTypeBuilder = modelBuilder.Entity(
                 typeof(A),
                 ConfigurationSource.Convention
@@ -1597,8 +1598,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             Assert.Equal(
                 ValueGenerated.OnAdd,
-                modelBuilder
-                    .Model
+                modelBuilder.Model
                     .FindEntityType(typeof(NonSignedIntegerKeyEntity))
                     .FindProperty(nameof(NonSignedIntegerKeyEntity.Id))
                     .ValueGenerated

@@ -488,8 +488,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                         return null;
                     }
 
-                    nameToken =
-                        ((SingleVariableDesignationSyntax)declaration.Designation).Identifier;
+                    nameToken = (
+                        (SingleVariableDesignationSyntax)declaration.Designation
+                    ).Identifier;
                     break;
 
                 case SyntaxKind.ParenthesizedVariableDesignation:

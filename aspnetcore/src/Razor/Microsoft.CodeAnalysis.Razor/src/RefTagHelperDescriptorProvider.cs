@@ -40,9 +40,10 @@ internal class RefTagHelperDescriptorProvider : ITagHelperDescriptorProvider
         var targetAssembly = context.Items.GetTargetAssembly();
         if (
             targetAssembly is not null
-            && !SymbolEqualityComparer
-                .Default
-                .Equals(targetAssembly, elementReference.ContainingAssembly)
+            && !SymbolEqualityComparer.Default.Equals(
+                targetAssembly,
+                elementReference.ContainingAssembly
+            )
         )
         {
             return;

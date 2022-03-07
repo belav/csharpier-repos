@@ -393,8 +393,7 @@ public class SharedFxTests
 
         ZipArchive archive = ZipFile.OpenRead(sharedFxPath);
 
-        var actualPaths = archive
-            .Entries
+        var actualPaths = archive.Entries
             .Where(i => i.FullName.EndsWith(".dll", StringComparison.Ordinal))
             .Select(i => i.FullName)
             .ToHashSet();

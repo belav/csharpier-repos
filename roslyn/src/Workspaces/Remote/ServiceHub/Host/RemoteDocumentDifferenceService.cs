@@ -64,20 +64,16 @@ namespace Microsoft.CodeAnalysis.Remote
             // checksum or tree comparison and etc.
 
             // first check checksum
-            var oldTextChecksum =
-                (
-                    await oldDocument
-                        .State
-                        .GetStateChecksumsAsync(cancellationToken)
-                        .ConfigureAwait(false)
-                ).Text;
-            var newTextChecksum =
-                (
-                    await newDocument
-                        .State
-                        .GetStateChecksumsAsync(cancellationToken)
-                        .ConfigureAwait(false)
-                ).Text;
+            var oldTextChecksum = (
+                await oldDocument.State
+                    .GetStateChecksumsAsync(cancellationToken)
+                    .ConfigureAwait(false)
+            ).Text;
+            var newTextChecksum = (
+                await newDocument.State
+                    .GetStateChecksumsAsync(cancellationToken)
+                    .ConfigureAwait(false)
+            ).Text;
             if (oldTextChecksum == newTextChecksum)
             {
                 // null means nothing has changed.

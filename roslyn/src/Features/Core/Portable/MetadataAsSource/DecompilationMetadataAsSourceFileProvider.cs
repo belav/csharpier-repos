@@ -36,8 +36,10 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
         private IBidirectionalMap<
             MetadataAsSourceGeneratedFileInfo,
             DocumentId
-        > _openedDocumentIds =
-            BidirectionalMap<MetadataAsSourceGeneratedFileInfo, DocumentId>.Empty;
+        > _openedDocumentIds = BidirectionalMap<
+            MetadataAsSourceGeneratedFileInfo,
+            DocumentId
+        >.Empty;
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
@@ -65,8 +67,7 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
             var useDecompiler = !signaturesOnly && allowDecompilation;
             if (useDecompiler)
             {
-                useDecompiler = !symbol
-                    .ContainingAssembly
+                useDecompiler = !symbol.ContainingAssembly
                     .GetAttributes()
                     .Any(
                         attribute =>
@@ -104,8 +105,7 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                     workspace,
                     loadFileFromDisk: false
                 );
-                var temporaryDocument = workspace
-                    .CurrentSolution
+                var temporaryDocument = workspace.CurrentSolution
                     .AddProject(temporaryProjectInfoAndDocumentId.Item1)
                     .GetDocument(temporaryProjectInfoAndDocumentId.Item2);
 
@@ -149,10 +149,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
 
                 if (!useDecompiler)
                 {
-                    var sourceFromMetadataService = temporaryDocument
-                        .Project
-                        .LanguageServices
-                        .GetRequiredService<IMetadataAsSourceService>();
+                    var sourceFromMetadataService =
+                        temporaryDocument.Project.LanguageServices.GetRequiredService<IMetadataAsSourceService>();
                     temporaryDocument = await sourceFromMetadataService
                         .AddSourceToAsync(temporaryDocument, compilation, symbol, cancellationToken)
                         .ConfigureAwait(false);
@@ -258,8 +256,7 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                 workspace,
                 loadFileFromDisk: true
             );
-            var temporaryDocument = workspace
-                .CurrentSolution
+            var temporaryDocument = workspace.CurrentSolution
                 .AddProject(temporaryProjectInfoAndDocumentId.Item1)
                 .GetDocument(temporaryProjectInfoAndDocumentId.Item2);
 

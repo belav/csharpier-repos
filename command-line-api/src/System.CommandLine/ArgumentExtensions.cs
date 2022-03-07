@@ -75,8 +75,7 @@ namespace System.CommandLine
         {
             argument.AddValidator(
                 symbol =>
-                    symbol
-                        .Tokens
+                    symbol.Tokens
                         .Select(t => t.Value)
                         .Where(filePath => !File.Exists(filePath))
                         .Select(symbol.LocalizationResources.FileDoesNotExist)
@@ -94,8 +93,7 @@ namespace System.CommandLine
         {
             argument.AddValidator(
                 symbol =>
-                    symbol
-                        .Tokens
+                    symbol.Tokens
                         .Select(t => t.Value)
                         .Where(filePath => !Directory.Exists(filePath))
                         .Select(symbol.LocalizationResources.DirectoryDoesNotExist)
@@ -113,8 +111,7 @@ namespace System.CommandLine
         {
             argument.AddValidator(
                 symbol =>
-                    symbol
-                        .Tokens
+                    symbol.Tokens
                         .Select(t => t.Value)
                         .Where(filePath => !Directory.Exists(filePath) && !File.Exists(filePath))
                         .Select(symbol.LocalizationResources.FileOrDirectoryDoesNotExist)
@@ -193,9 +190,9 @@ namespace System.CommandLine
 
                         if (invalidCharactersIndex >= 0)
                         {
-                            return symbol
-                                .LocalizationResources
-                                .InvalidCharactersInPath(token.Value[invalidCharactersIndex]);
+                            return symbol.LocalizationResources.InvalidCharactersInPath(
+                                token.Value[invalidCharactersIndex]
+                            );
                         }
                     }
 
@@ -227,9 +224,9 @@ namespace System.CommandLine
 
                         if (invalidCharactersIndex >= 0)
                         {
-                            return symbol
-                                .LocalizationResources
-                                .InvalidCharactersInFileName(token.Value[invalidCharactersIndex]);
+                            return symbol.LocalizationResources.InvalidCharactersInFileName(
+                                token.Value[invalidCharactersIndex]
+                            );
                         }
                     }
 

@@ -118,8 +118,7 @@ namespace Microsoft.CodeAnalysis.Simplification
                 throw new ArgumentNullException(nameof(workspace));
             }
 
-            var result = workspace
-                .Services
+            var result = workspace.Services
                 .GetLanguageServices(node.Language)
                 .GetService<ISimplificationService>()
                 .Expand(
@@ -182,8 +181,7 @@ namespace Microsoft.CodeAnalysis.Simplification
                 throw new ArgumentNullException(nameof(workspace));
             }
 
-            return workspace
-                .Services
+            return workspace.Services
                 .GetLanguageServices(token.Language)
                 .GetService<ISimplificationService>()
                 .Expand(token, semanticModel, expandInsideNode, cancellationToken);

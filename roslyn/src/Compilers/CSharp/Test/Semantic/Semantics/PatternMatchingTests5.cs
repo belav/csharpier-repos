@@ -1319,16 +1319,16 @@ class P
             Assert.Equal(CandidateReason.None, xySymbol.CandidateReason);
             Assert.Equal("P P.Y", xySymbol.Symbol.ToTestDisplayString());
 
-            var x =
-                (
-                    (MemberAccessExpressionSyntax)subpatterns[0].ExpressionColon.Expression
-                ).Expression;
+            var x = (
+                (MemberAccessExpressionSyntax)subpatterns[0].ExpressionColon.Expression
+            ).Expression;
             var xSymbol = model.GetSymbolInfo(x);
             Assert.Equal(CandidateReason.None, xSymbol.CandidateReason);
             Assert.Equal("P P.X { get; }", xSymbol.Symbol.ToTestDisplayString());
 
-            var yName =
-                ((MemberAccessExpressionSyntax)subpatterns[0].ExpressionColon.Expression).Name;
+            var yName = (
+                (MemberAccessExpressionSyntax)subpatterns[0].ExpressionColon.Expression
+            ).Name;
             var yNameSymbol = model.GetSymbolInfo(yName);
             Assert.Equal(CandidateReason.None, yNameSymbol.CandidateReason);
             Assert.Equal("P P.Y", yNameSymbol.Symbol.ToTestDisplayString());
@@ -1341,16 +1341,16 @@ class P
             Assert.Equal(CandidateReason.None, yxSymbol.CandidateReason);
             Assert.Equal("P P.X { get; }", yxSymbol.Symbol.ToTestDisplayString());
 
-            var y =
-                (
-                    (MemberAccessExpressionSyntax)subpatterns[1].ExpressionColon.Expression
-                ).Expression;
+            var y = (
+                (MemberAccessExpressionSyntax)subpatterns[1].ExpressionColon.Expression
+            ).Expression;
             var ySymbol = model.GetSymbolInfo(y);
             Assert.Equal(CandidateReason.None, ySymbol.CandidateReason);
             Assert.Equal("P P.Y", ySymbol.Symbol.ToTestDisplayString());
 
-            var xName =
-                ((MemberAccessExpressionSyntax)subpatterns[1].ExpressionColon.Expression).Name;
+            var xName = (
+                (MemberAccessExpressionSyntax)subpatterns[1].ExpressionColon.Expression
+            ).Name;
             var xNameSymbol = model.GetSymbolInfo(xName);
             Assert.Equal(CandidateReason.None, xNameSymbol.CandidateReason);
             Assert.Equal("P P.X { get; }", xNameSymbol.Symbol.ToTestDisplayString());
@@ -1406,10 +1406,9 @@ interface P : I1, I2
 
             AssertEmpty(model.GetSymbolInfo(subpatterns[0]));
             AssertEmpty(model.GetSymbolInfo(subpatterns[0].ExpressionColon));
-            var x =
-                (
-                    (MemberAccessExpressionSyntax)subpatterns[0].ExpressionColon.Expression
-                ).Expression;
+            var x = (
+                (MemberAccessExpressionSyntax)subpatterns[0].ExpressionColon.Expression
+            ).Expression;
             var xSymbol = model.GetSymbolInfo(x);
             Assert.Equal(CandidateReason.Ambiguous, xSymbol.CandidateReason);
             Assert.Null(xSymbol.Symbol);
@@ -1419,10 +1418,9 @@ interface P : I1, I2
 
             AssertEmpty(model.GetSymbolInfo(subpatterns[1]));
             AssertEmpty(model.GetSymbolInfo(subpatterns[1].ExpressionColon));
-            var y =
-                (
-                    (MemberAccessExpressionSyntax)subpatterns[1].ExpressionColon.Expression
-                ).Expression;
+            var y = (
+                (MemberAccessExpressionSyntax)subpatterns[1].ExpressionColon.Expression
+            ).Expression;
             var ySymbol = model.GetSymbolInfo(y);
             Assert.Equal(CandidateReason.Ambiguous, ySymbol.CandidateReason);
             Assert.Null(ySymbol.Symbol);
@@ -1527,10 +1525,9 @@ struct S
             Assert.Equal("C", xyType.Type.ToTestDisplayString());
             Assert.Equal("C", xyType.ConvertedType.ToTestDisplayString());
 
-            var x =
-                (
-                    (MemberAccessExpressionSyntax)subpatterns[0].ExpressionColon.Expression
-                ).Expression;
+            var x = (
+                (MemberAccessExpressionSyntax)subpatterns[0].ExpressionColon.Expression
+            ).Expression;
             var xSymbol = model.GetSymbolInfo(x);
             Assert.Equal(CandidateReason.None, xSymbol.CandidateReason);
             Assert.Equal("S? C.X { get; }", xSymbol.Symbol.ToTestDisplayString());
@@ -1538,8 +1535,9 @@ struct S
             Assert.Equal("S?", xType.Type.ToTestDisplayString());
             Assert.Equal("S?", xType.ConvertedType.ToTestDisplayString());
 
-            var yName =
-                ((MemberAccessExpressionSyntax)subpatterns[0].ExpressionColon.Expression).Name;
+            var yName = (
+                (MemberAccessExpressionSyntax)subpatterns[0].ExpressionColon.Expression
+            ).Name;
             var yNameSymbol = model.GetSymbolInfo(yName);
             Assert.Equal(CandidateReason.None, yNameSymbol.CandidateReason);
             Assert.Equal("C S.Y", yNameSymbol.Symbol.ToTestDisplayString());
@@ -1558,10 +1556,9 @@ struct S
             Assert.Equal("S?", yxType.Type.ToTestDisplayString());
             Assert.Equal("S?", yxType.ConvertedType.ToTestDisplayString());
 
-            var y =
-                (
-                    (MemberAccessExpressionSyntax)subpatterns[1].ExpressionColon.Expression
-                ).Expression;
+            var y = (
+                (MemberAccessExpressionSyntax)subpatterns[1].ExpressionColon.Expression
+            ).Expression;
             var ySymbol = model.GetSymbolInfo(y);
             Assert.Equal(CandidateReason.None, ySymbol.CandidateReason);
             Assert.Equal("C S.Y", ySymbol.Symbol.ToTestDisplayString());
@@ -1569,8 +1566,9 @@ struct S
             Assert.Equal("C", yType.Type.ToTestDisplayString());
             Assert.Equal("C", yType.ConvertedType.ToTestDisplayString());
 
-            var xName =
-                ((MemberAccessExpressionSyntax)subpatterns[1].ExpressionColon.Expression).Name;
+            var xName = (
+                (MemberAccessExpressionSyntax)subpatterns[1].ExpressionColon.Expression
+            ).Name;
             var xNameSymbol = model.GetSymbolInfo(xName);
             Assert.Equal(CandidateReason.None, xNameSymbol.CandidateReason);
             Assert.Equal("S? C.X { get; }", xNameSymbol.Symbol.ToTestDisplayString());

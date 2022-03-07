@@ -130,12 +130,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             }
             catch (Exception ex)
             {
-                TransportContext
-                    .Log
-                    .LogCritical(
-                        ex,
-                        $"Unexpected exception in {nameof(ListenerContext)}.{nameof(HandleConnection)}."
-                    );
+                TransportContext.Log.LogCritical(
+                    ex,
+                    $"Unexpected exception in {nameof(ListenerContext)}.{nameof(HandleConnection)}."
+                );
             }
         }
 

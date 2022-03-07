@@ -50,9 +50,13 @@ namespace System.Net.Security
             try
             {
                 Interop.NetSecurityNative.Status minorStatus;
-                Interop.NetSecurityNative.Status status = Interop
-                    .NetSecurityNative
-                    .WrapBuffer(out minorStatus, context, encrypt, buffer, ref encryptedBuffer);
+                Interop.NetSecurityNative.Status status = Interop.NetSecurityNative.WrapBuffer(
+                    out minorStatus,
+                    context,
+                    encrypt,
+                    buffer,
+                    ref encryptedBuffer
+                );
                 if (status != Interop.NetSecurityNative.Status.GSS_S_COMPLETE)
                 {
                     throw new Interop.NetSecurityNative.GssApiException(status, minorStatus);
@@ -91,16 +95,14 @@ namespace System.Net.Security
             try
             {
                 Interop.NetSecurityNative.Status minorStatus;
-                Interop.NetSecurityNative.Status status = Interop
-                    .NetSecurityNative
-                    .UnwrapBuffer(
-                        out minorStatus,
-                        context,
-                        buffer,
-                        offset,
-                        count,
-                        ref decryptedBuffer
-                    );
+                Interop.NetSecurityNative.Status status = Interop.NetSecurityNative.UnwrapBuffer(
+                    out minorStatus,
+                    context,
+                    buffer,
+                    offset,
+                    count,
+                    ref decryptedBuffer
+                );
                 if (status != Interop.NetSecurityNative.Status.GSS_S_COMPLETE)
                 {
                     throw new Interop.NetSecurityNative.GssApiException(status, minorStatus);
@@ -156,41 +158,37 @@ namespace System.Net.Security
                     Debug.Assert(appDataOffset < channelBinding.Size);
                     IntPtr cbtAppData = channelBinding.DangerousGetHandle() + appDataOffset;
                     int cbtAppDataSize = channelBinding.Size - appDataOffset;
-                    status = Interop
-                        .NetSecurityNative
-                        .InitSecContext(
-                            out minorStatus,
-                            credential,
-                            ref context,
-                            isNtlm,
-                            cbtAppData,
-                            cbtAppDataSize,
-                            targetName,
-                            (uint)inFlags,
-                            buffer,
-                            (buffer == null) ? 0 : buffer.Length,
-                            ref token,
-                            out outFlags,
-                            out isNtlmUsed
-                        );
+                    status = Interop.NetSecurityNative.InitSecContext(
+                        out minorStatus,
+                        credential,
+                        ref context,
+                        isNtlm,
+                        cbtAppData,
+                        cbtAppDataSize,
+                        targetName,
+                        (uint)inFlags,
+                        buffer,
+                        (buffer == null) ? 0 : buffer.Length,
+                        ref token,
+                        out outFlags,
+                        out isNtlmUsed
+                    );
                 }
                 else
                 {
-                    status = Interop
-                        .NetSecurityNative
-                        .InitSecContext(
-                            out minorStatus,
-                            credential,
-                            ref context,
-                            isNtlm,
-                            targetName,
-                            (uint)inFlags,
-                            buffer,
-                            (buffer == null) ? 0 : buffer.Length,
-                            ref token,
-                            out outFlags,
-                            out isNtlmUsed
-                        );
+                    status = Interop.NetSecurityNative.InitSecContext(
+                        out minorStatus,
+                        credential,
+                        ref context,
+                        isNtlm,
+                        targetName,
+                        (uint)inFlags,
+                        buffer,
+                        (buffer == null) ? 0 : buffer.Length,
+                        ref token,
+                        out outFlags,
+                        out isNtlmUsed
+                    );
                 }
 
                 if (
@@ -241,18 +239,16 @@ namespace System.Net.Security
             try
             {
                 Interop.NetSecurityNative.Status minorStatus;
-                status = Interop
-                    .NetSecurityNative
-                    .AcceptSecContext(
-                        out minorStatus,
-                        credential,
-                        ref context,
-                        buffer,
-                        buffer?.Length ?? 0,
-                        ref token,
-                        out outFlags,
-                        out isNtlmUsed
-                    );
+                status = Interop.NetSecurityNative.AcceptSecContext(
+                    out minorStatus,
+                    credential,
+                    ref context,
+                    buffer,
+                    buffer?.Length ?? 0,
+                    ref token,
+                    out outFlags,
+                    out isNtlmUsed
+                );
 
                 if (
                     (status != Interop.NetSecurityNative.Status.GSS_S_COMPLETE)
@@ -284,9 +280,11 @@ namespace System.Net.Security
 
             try
             {
-                Interop.NetSecurityNative.Status status = Interop
-                    .NetSecurityNative
-                    .GetUser(out var minorStatus, context, ref token);
+                Interop.NetSecurityNative.Status status = Interop.NetSecurityNative.GetUser(
+                    out var minorStatus,
+                    context,
+                    ref token
+                );
 
                 if (status != Interop.NetSecurityNative.Status.GSS_S_COMPLETE)
                 {

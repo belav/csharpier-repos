@@ -295,8 +295,7 @@ class C
                     var method = (MethodSymbol)testData
                         .GetExplicitlyDeclaredMethods()
                         .Single()
-                        .Value
-                        .Method;
+                        .Value.Method;
                     CheckAttribute(
                         assembly,
                         method,
@@ -379,8 +378,7 @@ class C
                     var method = (MethodSymbol)testData
                         .GetExplicitlyDeclaredMethods()
                         .Single()
-                        .Value
-                        .Method;
+                        .Value.Method;
                     CheckAttribute(
                         assembly,
                         method,
@@ -660,8 +658,7 @@ class C
                     var method = (MethodSymbol)testData
                         .GetExplicitlyDeclaredMethods()
                         .Single()
-                        .Value
-                        .Method;
+                        .Value.Method;
                     CheckAttribute(
                         assembly,
                         method,

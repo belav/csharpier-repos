@@ -874,8 +874,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         dependentEntry.Metadata.FindOwnership().PrincipalToDependent.Name
                     );
 
-                    var subDependent1Entry =
-                        dependentEntry.Reference(p => p.BillingAddress).TargetEntry;
+                    var subDependent1Entry = dependentEntry
+                        .Reference(p => p.BillingAddress)
+                        .TargetEntry;
                     Assert.Equal(
                         principal.Id,
                         subDependent1Entry.Property("OrderDetailsId").CurrentValue
@@ -890,8 +891,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         subDependent1Entry.Metadata.Name
                     );
 
-                    var subDependent2Entry =
-                        dependentEntry.Reference(p => p.ShippingAddress).TargetEntry;
+                    var subDependent2Entry = dependentEntry
+                        .Reference(p => p.ShippingAddress)
+                        .TargetEntry;
                     Assert.Equal(
                         principal.Id,
                         subDependent2Entry.Property("OrderDetailsId").CurrentValue

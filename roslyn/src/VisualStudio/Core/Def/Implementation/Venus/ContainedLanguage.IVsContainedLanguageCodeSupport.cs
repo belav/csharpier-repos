@@ -93,9 +93,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                         pszEventHandlerName,
                         itemidInsertionPoint,
                         useHandlesClause: false,
-                        additionalFormattingRule: targetDocument
-                            .Project
-                            .LanguageServices
+                        additionalFormattingRule: targetDocument.Project.LanguageServices
                             .GetService<IAdditionalFormattingRuleLanguageService>()
                             .GetAdditionalCodeGenerationRule(),
                         cancellationToken: c.UserCancellationToken
@@ -287,9 +285,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                 showProgress: false,
                 action: c =>
                 {
-                    var refactorNotifyServices = this.ComponentModel
-                        .DefaultExportProvider
-                        .GetExportedValues<IRefactorNotifyService>();
+                    var refactorNotifyServices =
+                        this.ComponentModel.DefaultExportProvider.GetExportedValues<IRefactorNotifyService>();
 
                     if (
                         !ContainedLanguageCodeSupport.TryRenameElement(
@@ -318,8 +315,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
         {
             var document = this.ContainedDocument
                 .GetOpenTextContainer()
-                .CurrentText
-                .GetOpenDocumentInCurrentContextWithChanges();
+                .CurrentText.GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
                 throw new InvalidOperationException();

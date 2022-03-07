@@ -40,21 +40,17 @@ public class Test
                 text,
                 symbolValidator: module =>
                 {
-                    var typeParameter = module
-                        .ContainingAssembly
+                    var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Test")
                         .GetMethod("M")
-                        .TypeParameters
-                        .Single();
+                        .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
                     Assert.Null(
-                        module
-                            .ContainingAssembly
-                            .GetTypeByMetadataName(
-                                AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
-                            )
+                        module.ContainingAssembly.GetTypeByMetadataName(
+                            AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
+                        )
                     );
                     AssertReferencedIsUnmanagedAttribute(
                         Accessibility.Public,
@@ -83,20 +79,16 @@ public class Test<T> where T : unmanaged
                 text,
                 symbolValidator: module =>
                 {
-                    var typeParameter = module
-                        .ContainingAssembly
+                    var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Test`1")
-                        .TypeParameters
-                        .Single();
+                        .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
                     Assert.Null(
-                        module
-                            .ContainingAssembly
-                            .GetTypeByMetadataName(
-                                AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
-                            )
+                        module.ContainingAssembly.GetTypeByMetadataName(
+                            AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
+                        )
                     );
                     AssertReferencedIsUnmanagedAttribute(
                         Accessibility.Public,
@@ -129,26 +121,22 @@ public class Test
 
             CompileAndVerify(
                 text,
-                options: TestOptions
-                    .ReleaseDll
-                    .WithMetadataImportOptions(MetadataImportOptions.All),
+                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
+                    MetadataImportOptions.All
+                ),
                 symbolValidator: module =>
                 {
-                    var typeParameter = module
-                        .ContainingAssembly
+                    var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Test")
                         .GetMethod("<M>g__N|0_0")
-                        .TypeParameters
-                        .Single();
+                        .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
                     Assert.Null(
-                        module
-                            .ContainingAssembly
-                            .GetTypeByMetadataName(
-                                AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
-                            )
+                        module.ContainingAssembly.GetTypeByMetadataName(
+                            AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
+                        )
                     );
                     AssertReferencedIsUnmanagedAttribute(
                         Accessibility.Public,
@@ -173,25 +161,21 @@ public delegate void D<T>() where T : unmanaged;
 
             CompileAndVerify(
                 text,
-                options: TestOptions
-                    .ReleaseDll
-                    .WithMetadataImportOptions(MetadataImportOptions.All),
+                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
+                    MetadataImportOptions.All
+                ),
                 symbolValidator: module =>
                 {
-                    var typeParameter = module
-                        .GlobalNamespace
+                    var typeParameter = module.GlobalNamespace
                         .GetTypeMember("D")
-                        .TypeParameters
-                        .Single();
+                        .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
                     Assert.Null(
-                        module
-                            .ContainingAssembly
-                            .GetTypeByMetadataName(
-                                AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
-                            )
+                        module.ContainingAssembly.GetTypeByMetadataName(
+                            AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
+                        )
                     );
                     AssertReferencedIsUnmanagedAttribute(
                         Accessibility.Public,
@@ -227,12 +211,10 @@ public class Test
                 references: new[] { reference },
                 symbolValidator: module =>
                 {
-                    var typeParameter = module
-                        .ContainingAssembly
+                    var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Test")
                         .GetMethod("M")
-                        .TypeParameters
-                        .Single();
+                        .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
@@ -270,11 +252,9 @@ public class Test<T> where T : unmanaged
                 references: new[] { reference },
                 symbolValidator: module =>
                 {
-                    var typeParameter = module
-                        .ContainingAssembly
+                    var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Test`1")
-                        .TypeParameters
-                        .Single();
+                        .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
@@ -315,18 +295,16 @@ public class Test
 
             CompileAndVerify(
                 source: text,
-                options: TestOptions
-                    .ReleaseDll
-                    .WithMetadataImportOptions(MetadataImportOptions.All),
+                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
+                    MetadataImportOptions.All
+                ),
                 references: new[] { reference },
                 symbolValidator: module =>
                 {
-                    var typeParameter = module
-                        .ContainingAssembly
+                    var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Test")
                         .GetMethod("<M>g__N|0_0")
-                        .TypeParameters
-                        .Single();
+                        .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
@@ -359,17 +337,15 @@ public delegate void D<T>() where T : unmanaged;
 
             CompileAndVerify(
                 source: text,
-                options: TestOptions
-                    .ReleaseDll
-                    .WithMetadataImportOptions(MetadataImportOptions.All),
+                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
+                    MetadataImportOptions.All
+                ),
                 references: new[] { reference },
                 symbolValidator: module =>
                 {
-                    var typeParameter = module
-                        .GlobalNamespace
+                    var typeParameter = module.GlobalNamespace
                         .GetTypeMember("D")
-                        .TypeParameters
-                        .Single();
+                        .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
@@ -410,12 +386,10 @@ public class Test
                 options: TestOptions.ReleaseModule,
                 symbolValidator: module =>
                 {
-                    var typeParameter = module
-                        .ContainingAssembly
+                    var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Test")
                         .GetMethod("M")
-                        .TypeParameters
-                        .Single();
+                        .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
@@ -455,11 +429,9 @@ public class Test<T> where T : unmanaged
                 options: TestOptions.ReleaseModule,
                 symbolValidator: module =>
                 {
-                    var typeParameter = module
-                        .ContainingAssembly
+                    var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Test`1")
-                        .TypeParameters
-                        .Single();
+                        .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
@@ -502,17 +474,15 @@ public class Test
                 source: text,
                 verify: Verification.Fails,
                 references: new[] { reference },
-                options: TestOptions
-                    .ReleaseModule
-                    .WithMetadataImportOptions(MetadataImportOptions.All),
+                options: TestOptions.ReleaseModule.WithMetadataImportOptions(
+                    MetadataImportOptions.All
+                ),
                 symbolValidator: module =>
                 {
-                    var typeParameter = module
-                        .ContainingAssembly
+                    var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Test")
                         .GetMethod("<M>g__N|0_0")
-                        .TypeParameters
-                        .Single();
+                        .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
@@ -547,16 +517,14 @@ public delegate void D<T>() where T : unmanaged;
                 source: text,
                 verify: Verification.Fails,
                 references: new[] { reference },
-                options: TestOptions
-                    .ReleaseModule
-                    .WithMetadataImportOptions(MetadataImportOptions.All),
+                options: TestOptions.ReleaseModule.WithMetadataImportOptions(
+                    MetadataImportOptions.All
+                ),
                 symbolValidator: module =>
                 {
-                    var typeParameter = module
-                        .GlobalNamespace
+                    var typeParameter = module.GlobalNamespace
                         .GetTypeMember("D")
-                        .TypeParameters
-                        .Single();
+                        .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
@@ -585,12 +553,10 @@ public class Test
                 text,
                 symbolValidator: module =>
                 {
-                    var typeParameter = module
-                        .ContainingAssembly
+                    var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Test")
                         .GetMethod("M")
-                        .TypeParameters
-                        .Single();
+                        .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
@@ -617,11 +583,9 @@ public class Test<T> where T : unmanaged
                 text,
                 symbolValidator: module =>
                 {
-                    var typeParameter = module
-                        .ContainingAssembly
+                    var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Test`1")
-                        .TypeParameters
-                        .Single();
+                        .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
@@ -652,17 +616,15 @@ public class Test
 
             CompileAndVerify(
                 source: text,
-                options: TestOptions
-                    .ReleaseDll
-                    .WithMetadataImportOptions(MetadataImportOptions.All),
+                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
+                    MetadataImportOptions.All
+                ),
                 symbolValidator: module =>
                 {
-                    var typeParameter = module
-                        .ContainingAssembly
+                    var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Test")
                         .GetMethod("<M>g__N|0_0")
-                        .TypeParameters
-                        .Single();
+                        .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
@@ -685,16 +647,14 @@ public delegate void D<T>() where T : unmanaged;
 
             CompileAndVerify(
                 source: text,
-                options: TestOptions
-                    .ReleaseDll
-                    .WithMetadataImportOptions(MetadataImportOptions.All),
+                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
+                    MetadataImportOptions.All
+                ),
                 symbolValidator: module =>
                 {
-                    var typeParameter = module
-                        .GlobalNamespace
+                    var typeParameter = module.GlobalNamespace
                         .GetTypeMember("D")
-                        .TypeParameters
-                        .Single();
+                        .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
@@ -968,11 +928,9 @@ public class Test2<T> : Test1<T> where T : unmanaged { }
                 code3,
                 symbolValidator: module =>
                 {
-                    var typeParameter = module
-                        .ContainingAssembly
+                    var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Test2`1")
-                        .TypeParameters
-                        .Single();
+                        .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
@@ -1043,9 +1001,9 @@ public class Test
 
             CreateCompilation(
                     source: code,
-                    options: TestOptions
-                        .ReleaseModule
-                        .WithMetadataImportOptions(MetadataImportOptions.All)
+                    options: TestOptions.ReleaseModule.WithMetadataImportOptions(
+                        MetadataImportOptions.All
+                    )
                 )
                 .VerifyDiagnostics(
                     // (6,16): error CS0518: Predefined type 'System.Runtime.CompilerServices.IsUnmanagedAttribute' is not defined or imported
@@ -1063,9 +1021,9 @@ public class Test
 
             CreateCompilation(
                     source: code,
-                    options: TestOptions
-                        .ReleaseModule
-                        .WithMetadataImportOptions(MetadataImportOptions.All)
+                    options: TestOptions.ReleaseModule.WithMetadataImportOptions(
+                        MetadataImportOptions.All
+                    )
                 )
                 .VerifyDiagnostics(
                     // (1,24): error CS0518: Predefined type 'System.Runtime.CompilerServices.IsUnmanagedAttribute' is not defined or imported
@@ -1093,11 +1051,9 @@ public class Test1<T> where T : unmanaged
                 options: options,
                 symbolValidator: module =>
                 {
-                    var typeParameter = module
-                        .ContainingAssembly
+                    var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Test1`1")
-                        .TypeParameters
-                        .Single();
+                        .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
@@ -1121,11 +1077,9 @@ public class Test2<T> : Test1<T> where T : unmanaged
                 references: new[] { comp1.Compilation.ToMetadataReference() },
                 symbolValidator: module =>
                 {
-                    var typeParameter = module
-                        .ContainingAssembly
+                    var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Test2`1")
-                        .TypeParameters
-                        .Single();
+                        .TypeParameters.Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
@@ -1269,11 +1223,9 @@ class Test<T> where T : unmanaged
                 case Accessibility.Public:
                 {
                     Assert.Null(
-                        attributeType
-                            .ContainingAssembly
-                            .GetTypeByMetadataName(
-                                AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
-                            )
+                        attributeType.ContainingAssembly.GetTypeByMetadataName(
+                            AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
+                        )
                     );
 
                     break;

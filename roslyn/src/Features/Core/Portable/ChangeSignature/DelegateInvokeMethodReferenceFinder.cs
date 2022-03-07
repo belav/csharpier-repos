@@ -42,8 +42,7 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
         {
             using var _ = ArrayBuilder<ISymbol>.GetInstance(out var result);
 
-            var beginInvoke = symbol
-                .ContainingType
+            var beginInvoke = symbol.ContainingType
                 .GetMembers(WellKnownMemberNames.DelegateBeginInvokeName)
                 .FirstOrDefault();
             if (beginInvoke != null)

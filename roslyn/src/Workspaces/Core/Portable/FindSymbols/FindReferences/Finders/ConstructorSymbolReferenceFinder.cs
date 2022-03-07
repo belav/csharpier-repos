@@ -403,8 +403,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                     return;
 
                 // if there are too few or too many arguments, then don't bother checking.
-                var actualArgumentCount =
-                    syntaxFacts.GetArgumentsOfObjectCreationExpression(node).Count;
+                var actualArgumentCount = syntaxFacts
+                    .GetArgumentsOfObjectCreationExpression(node)
+                    .Count;
                 if (
                     actualArgumentCount < minimumArgumentCount
                     || actualArgumentCount > maximumArgumentCount

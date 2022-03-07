@@ -6193,8 +6193,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     {
                         var isAfterNewLine = parentType
                             .GetLastToken()
-                            .TrailingTrivia
-                            .Any((int)SyntaxKind.EndOfLineTrivia);
+                            .TrailingTrivia.Any((int)SyntaxKind.EndOfLineTrivia);
                         if (isAfterNewLine)
                         {
                             int offset,
@@ -10943,13 +10942,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     switch (decl.designation.Kind)
                     {
                         case SyntaxKind.SingleVariableDesignation:
-                            identifier =
-                                ((SingleVariableDesignationSyntax)decl.designation).identifier;
+                            identifier = (
+                                (SingleVariableDesignationSyntax)decl.designation
+                            ).identifier;
                             break;
                         case SyntaxKind.DiscardDesignation:
                             // revert the identifier from its contextual underscore back to an identifier.
-                            var discard =
-                                ((DiscardDesignationSyntax)decl.designation).underscoreToken;
+                            var discard = (
+                                (DiscardDesignationSyntax)decl.designation
+                            ).underscoreToken;
                             Debug.Assert(discard.Kind == SyntaxKind.UnderscoreToken);
                             identifier = SyntaxToken.WithValue(
                                 SyntaxKind.IdentifierToken,

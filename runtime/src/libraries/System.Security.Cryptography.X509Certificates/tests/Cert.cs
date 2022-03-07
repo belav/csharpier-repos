@@ -19,7 +19,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             ? X509KeyStorageFlags.EphemeralKeySet
             :
 #endif
-            X509KeyStorageFlags.DefaultKeySet;
+        X509KeyStorageFlags.DefaultKeySet;
 
         //
         // The Import() methods have an overload for each X509Certificate2Collection.Import() overload.

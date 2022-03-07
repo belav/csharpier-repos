@@ -36,8 +36,7 @@ namespace Microsoft.WebMatrix.Utility
             {
                 return aggregateException
                     .Flatten()
-                    .InnerExceptions
-                    .SelectMany(ex => GetAssembliesInCallStack(ex));
+                    .InnerExceptions.SelectMany(ex => GetAssembliesInCallStack(ex));
             }
         }
 

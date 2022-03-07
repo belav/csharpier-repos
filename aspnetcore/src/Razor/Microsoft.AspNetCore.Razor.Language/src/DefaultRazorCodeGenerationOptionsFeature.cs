@@ -21,8 +21,7 @@ internal class DefaultRazorCodeGenerationOptionsFeature
 
     protected override void OnInitialized()
     {
-        _configureOptions = Engine
-            .Features
+        _configureOptions = Engine.Features
             .OfType<IConfigureRazorCodeGenerationOptionsFeature>()
             .ToArray();
     }

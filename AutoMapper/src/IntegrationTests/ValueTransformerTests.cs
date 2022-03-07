@@ -350,8 +350,7 @@ namespace AutoMapper.IntegrationTests.ValueTransformers
                             p =>
                             {
                                 p.CreateProjection<Source, Dest>()
-                                    .ValueTransformers
-                                    .Add<string>(dest => dest + ", for real,");
+                                    .ValueTransformers.Add<string>(dest => dest + ", for real,");
                                 p.ValueTransformers.Add<string>(
                                     dest => dest + " is straight up dope"
                                 );

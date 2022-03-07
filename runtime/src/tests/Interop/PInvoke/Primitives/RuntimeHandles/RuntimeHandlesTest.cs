@@ -26,8 +26,9 @@ class RuntimeHandlesTest
 
     private static void TestRuntimeMethodHandle()
     {
-        RuntimeMethodHandle handle =
-            typeof(TestClass).GetMethod(nameof(TestClass.Method)).MethodHandle;
+        RuntimeMethodHandle handle = typeof(TestClass)
+            .GetMethod(nameof(TestClass.Method))
+            .MethodHandle;
         Assert.True(Marshal_In(handle, handle.Value));
     }
 

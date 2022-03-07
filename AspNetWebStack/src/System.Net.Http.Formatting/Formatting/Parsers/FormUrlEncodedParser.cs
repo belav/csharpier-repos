@@ -179,9 +179,11 @@ namespace System.Net.Http.Formatting.Parsers
                     {
                         if (++bytesConsumed == effectiveMax)
                         {
-                            string name = Encoding
-                                .UTF8
-                                .GetString(buffer, segmentStart, bytesConsumed - segmentStart);
+                            string name = Encoding.UTF8.GetString(
+                                buffer,
+                                segmentStart,
+                                bytesConsumed - segmentStart
+                            );
                             currentNameValuePair.Name.Append(name);
                             goto quit;
                         }
@@ -189,9 +191,11 @@ namespace System.Net.Http.Formatting.Parsers
 
                     if (bytesConsumed > segmentStart)
                     {
-                        string name = Encoding
-                            .UTF8
-                            .GetString(buffer, segmentStart, bytesConsumed - segmentStart);
+                        string name = Encoding.UTF8.GetString(
+                            buffer,
+                            segmentStart,
+                            bytesConsumed - segmentStart
+                        );
                         currentNameValuePair.Name.Append(name);
                     }
 
@@ -227,9 +231,11 @@ namespace System.Net.Http.Formatting.Parsers
                     {
                         if (++bytesConsumed == effectiveMax)
                         {
-                            string value = Encoding
-                                .UTF8
-                                .GetString(buffer, segmentStart, bytesConsumed - segmentStart);
+                            string value = Encoding.UTF8.GetString(
+                                buffer,
+                                segmentStart,
+                                bytesConsumed - segmentStart
+                            );
                             currentNameValuePair.Value.Append(value);
                             goto quit;
                         }
@@ -237,9 +243,11 @@ namespace System.Net.Http.Formatting.Parsers
 
                     if (bytesConsumed > segmentStart)
                     {
-                        string value = Encoding
-                            .UTF8
-                            .GetString(buffer, segmentStart, bytesConsumed - segmentStart);
+                        string value = Encoding.UTF8.GetString(
+                            buffer,
+                            segmentStart,
+                            bytesConsumed - segmentStart
+                        );
                         currentNameValuePair.Value.Append(value);
                     }
 

@@ -1107,8 +1107,11 @@ namespace Microsoft.EntityFrameworkCore
                     removedId = removed.Id;
                     childId = child.Id;
 
-                    newFk =
-                        context.Set<Optional1>().AsNoTracking().Single(e => e.Id != removed.Id).Id;
+                    newFk = context
+                        .Set<Optional1>()
+                        .AsNoTracking()
+                        .Single(e => e.Id != removed.Id)
+                        .Id;
 
                     var newParent = loadNewParent ? context.Set<Optional1>().Find(newFk) : null;
 
@@ -1501,9 +1504,7 @@ namespace Microsoft.EntityFrameworkCore
                     context.Entry(requieredChildAk).State = EntityState.Detached;
 
                     foreach (
-                        var overlappingEntry in context
-                            .ChangeTracker
-                            .Entries<OptionalOverlapping2>()
+                        var overlappingEntry in context.ChangeTracker.Entries<OptionalOverlapping2>()
                     )
                     {
                         overlappingEntry.State = EntityState.Detached;

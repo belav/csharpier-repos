@@ -39,8 +39,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             var originalSpanStart = OriginalSelectionResult.OriginalSpan.Start;
             Contract.ThrowIfFalse(originalSpanStart >= 0);
 
-            var root = await document
-                .Document
+            var root = await document.Document
                 .GetSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             var basePosition = root.FindToken(originalSpanStart);
@@ -57,9 +56,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                         )
                         || (
                             node.ExpressionBody != null
-                            && node.ExpressionBody
-                                .Span
-                                .Contains(OriginalSelectionResult.OriginalSpan)
+                            && node.ExpressionBody.Span.Contains(
+                                OriginalSelectionResult.OriginalSpan
+                            )
                         )
                 );
                 if (localFunctionNode is object)
@@ -149,8 +148,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     cancellationToken: cancellationToken
                 )
                 .ConfigureAwait(false);
-            return await selection
-                .SemanticDocument
+            return await selection.SemanticDocument
                 .WithSyntaxRootAsync(
                     selection.SemanticDocument.Root.ReplaceNode(lastExpression, newExpression),
                     cancellationToken
@@ -217,14 +215,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             foreach (var typeParameter in TypeParameterCollector.Collect(type))
             {
                 var typeName = SyntaxFactory.ParseTypeName(typeParameter.Name);
-                var currentType =
-                    semanticModel
-                        .GetSpeculativeTypeInfo(
-                            contextNode.SpanStart,
-                            typeName,
-                            SpeculativeBindingOption.BindAsTypeOrNamespace
-                        )
-                        .Type;
+                var currentType = semanticModel
+                    .GetSpeculativeTypeInfo(
+                        contextNode.SpanStart,
+                        typeName,
+                        SpeculativeBindingOption.BindAsTypeOrNamespace
+                    )
+                    .Type;
                 if (
                     currentType == null
                     || !SymbolEqualityComparer.Default.Equals(currentType, typeParameter)

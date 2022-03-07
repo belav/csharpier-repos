@@ -16,8 +16,7 @@ namespace Microsoft.EntityFrameworkCore
         {
             using var context = CreateContext();
             Assert.True(
-                context
-                    .Model
+                context.Model
                     .FindEntityType(typeof(One))
                     .FindProperty("RowVersion")
                     .IsConcurrencyToken
@@ -29,8 +28,7 @@ namespace Microsoft.EntityFrameworkCore
             using var context = CreateContext();
             Assert.Equal(
                 10,
-                context
-                    .Model
+                context.Model
                     .FindEntityType(typeof(One))
                     .FindProperty("MaxLengthProperty")
                     .GetMaxLength()
@@ -41,12 +39,10 @@ namespace Microsoft.EntityFrameworkCore
         {
             using var context = CreateContext();
             Assert.True(
-                context
-                    .Model
+                context.Model
                     .FindEntityType(typeof(BookDetails))
                     .FindNavigation(nameof(BookDetails.AnotherBook))
-                    .ForeignKey
-                    .IsRequired
+                    .ForeignKey.IsRequired
             );
         }
 
@@ -71,8 +67,7 @@ namespace Microsoft.EntityFrameworkCore
         {
             using var context = CreateContext();
             Assert.True(
-                context
-                    .Model
+                context.Model
                     .FindEntityType(typeof(Two))
                     .FindProperty("Timestamp")
                     .IsConcurrencyToken

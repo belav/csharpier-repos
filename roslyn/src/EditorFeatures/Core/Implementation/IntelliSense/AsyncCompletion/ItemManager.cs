@@ -60,13 +60,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         )
         {
             if (
-                session
-                    .TextView
-                    .Properties
-                    .TryGetProperty(
-                        CompletionSource.TargetTypeFilterExperimentEnabled,
-                        out bool isTargetTypeFilterEnabled
-                    ) && isTargetTypeFilterEnabled
+                session.TextView.Properties.TryGetProperty(
+                    CompletionSource.TargetTypeFilterExperimentEnabled,
+                    out bool isTargetTypeFilterEnabled
+                ) && isTargetTypeFilterEnabled
             )
             {
                 AsyncCompletionLogger.LogSessionHasTargetTypeFilterEnabled();
@@ -86,13 +83,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             }
 
             if (
-                session
-                    .TextView
-                    .Properties
-                    .TryGetProperty(
-                        CompletionSource.TypeImportCompletionEnabled,
-                        out bool isTypeImportCompletionEnabled
-                    ) && isTypeImportCompletionEnabled
+                session.TextView.Properties.TryGetProperty(
+                    CompletionSource.TypeImportCompletionEnabled,
+                    out bool isTypeImportCompletionEnabled
+                ) && isTypeImportCompletionEnabled
             )
             {
                 AsyncCompletionLogger.LogSessionWithTypeImportCompletionEnabled();
@@ -127,12 +121,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         )
         {
             if (
-                !session
-                    .Properties
-                    .TryGetProperty(
-                        CompletionSource.HasSuggestionItemOptions,
-                        out bool hasSuggestedItemOptions
-                    )
+                !session.Properties.TryGetProperty(
+                    CompletionSource.HasSuggestionItemOptions,
+                    out bool hasSuggestedItemOptions
+                )
             )
             {
                 // This is the scenario when the session is created out of Roslyn, in some other provider, e.g. in Debugger.
@@ -188,13 +180,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             var needToFilterExpanded = unselectedExpanders.Length > 0;
 
             if (
-                session
-                    .TextView
-                    .Properties
-                    .TryGetProperty(
-                        CompletionSource.TargetTypeFilterExperimentEnabled,
-                        out bool isExperimentEnabled
-                    ) && isExperimentEnabled
+                session.TextView.Properties.TryGetProperty(
+                    CompletionSource.TargetTypeFilterExperimentEnabled,
+                    out bool isExperimentEnabled
+                ) && isExperimentEnabled
             )
             {
                 // Telemetry: Want to know % of sessions with the "Target type matches" filter where that filter is actually enabled
@@ -209,12 +198,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                     AsyncCompletionLogger.LogTargetTypeFilterChosenInSession();
 
                     // Make sure we only record one enabling of the filter per session
-                    session
-                        .Properties
-                        .AddProperty(
-                            _targetTypeCompletionFilterChosenMarker,
-                            _targetTypeCompletionFilterChosenMarker
-                        );
+                    session.Properties.AddProperty(
+                        _targetTypeCompletionFilterChosenMarker,
+                        _targetTypeCompletionFilterChosenMarker
+                    );
                 }
             }
 
@@ -230,8 +217,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
               : data.Snapshot;
 
             var document = snapshotForDocument
-                ?.TextBuffer
-                .AsTextContainer()
+                ?.TextBuffer.AsTextContainer()
                 .GetOpenDocumentInCurrentContext();
             var completionService = document?.GetLanguageService<CompletionService>();
             var completionRules =
@@ -391,12 +377,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 );
                 if (firstItem != null)
                 {
-                    return firstItem
-                        .Properties
-                        .TryGetProperty(
-                            CompletionSource.TriggerLocation,
-                            out intialTriggerLocation
-                        );
+                    return firstItem.Properties.TryGetProperty(
+                        CompletionSource.TriggerLocation,
+                        out intialTriggerLocation
+                    );
                 }
 
                 intialTriggerLocation = default;
@@ -485,17 +469,18 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 selectedItemIndex = 0;
                 bestOrFirstMatchResult = itemsInList[0];
 
-                var longestCommonPrefixLength = bestOrFirstMatchResult
-                    .RoslynCompletionItem
-                    .FilterText
-                    .GetCaseInsensitivePrefixLength(filterText);
+                var longestCommonPrefixLength =
+                    bestOrFirstMatchResult.RoslynCompletionItem.FilterText.GetCaseInsensitivePrefixLength(
+                        filterText
+                    );
 
                 for (var i = 1; i < itemsInList.Count; ++i)
                 {
                     var item = itemsInList[i];
-                    var commonPrefixLength = item.RoslynCompletionItem
-                        .FilterText
-                        .GetCaseInsensitivePrefixLength(filterText);
+                    var commonPrefixLength =
+                        item.RoslynCompletionItem.FilterText.GetCaseInsensitivePrefixLength(
+                            filterText
+                        );
 
                     if (commonPrefixLength > longestCommonPrefixLength)
                     {
@@ -644,11 +629,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 // This also preserves the behavior the VB had through Dev12.
                 hardSelect =
                     !hasSuggestedItemOptions
-                    && bestMatchResult
-                        .Value
-                        .EditorCompletionItem
-                        .FilterText
-                        .StartsWith(filterText, StringComparison.CurrentCultureIgnoreCase);
+                    && bestMatchResult.Value.EditorCompletionItem.FilterText.StartsWith(
+                        filterText,
+                        StringComparison.CurrentCultureIgnoreCase
+                    );
                 index = matchResults.IndexOf(bestMatchResult.Value);
             }
             else
@@ -726,10 +710,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                     {
                         // Since VS item's display text is created as Prefix + DisplayText + Suffix,
                         // we can calculate the highlighted span by adding an offset that is the length of the Prefix.
-                        return patternMatch
-                            .Value
-                            .MatchedSpans
-                            .SelectAsArray(s_highlightSpanGetter, matchResult.RoslynCompletionItem);
+                        return patternMatch.Value.MatchedSpans.SelectAsArray(
+                            s_highlightSpanGetter,
+                            matchResult.RoslynCompletionItem
+                        );
                     }
                 }
 
@@ -872,12 +856,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         private static RoslynCompletionItem GetOrAddRoslynCompletionItem(VSCompletionItem vsItem)
         {
             if (
-                !vsItem
-                    .Properties
-                    .TryGetProperty(
-                        CompletionSource.RoslynItem,
-                        out RoslynCompletionItem roslynItem
-                    )
+                !vsItem.Properties.TryGetProperty(
+                    CompletionSource.RoslynItem,
+                    out RoslynCompletionItem roslynItem
+                )
             )
             {
                 roslynItem = RoslynCompletionItem.Create(

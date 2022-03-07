@@ -2145,9 +2145,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     (true, false) or (false, true) => false,
                     (true, true) => true,
                     _
-                      => sourceSignature
-                          .ParameterRefKinds
-                          .SequenceEqual(targetSignature.ParameterRefKinds)
+                      => sourceSignature.ParameterRefKinds.SequenceEqual(
+                          targetSignature.ParameterRefKinds
+                      )
                 };
         }
 
@@ -3265,26 +3265,23 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // If the first attempt succeeded, the result should be the same as
                 // the second attempt, although perhaps with different nullability.
                 var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
-                var withoutNullability =
-                    Fix(
-                        _compilation,
-                        _conversions.WithNullability(false),
-                        typeParameter,
-                        exact,
-                        lower,
-                        upper,
-                        ref discardedUseSiteInfo
-                    ).Type;
+                var withoutNullability = Fix(
+                    _compilation,
+                    _conversions.WithNullability(false),
+                    typeParameter,
+                    exact,
+                    lower,
+                    upper,
+                    ref discardedUseSiteInfo
+                ).Type;
                 // https://github.com/dotnet/roslyn/issues/27961 Results may differ by tuple names or dynamic.
                 // See NullableReferenceTypesTests.TypeInference_TupleNameDifferences_01 for example.
                 Debug.Assert(
-                    best.Type
-                        .Type
-                        .Equals(
-                            withoutNullability.Type,
-                            TypeCompareKind.IgnoreDynamicAndTupleNames
-                                | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
-                        )
+                    best.Type.Type.Equals(
+                        withoutNullability.Type,
+                        TypeCompareKind.IgnoreDynamicAndTupleNames
+                            | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                    )
                 );
             }
 #endif

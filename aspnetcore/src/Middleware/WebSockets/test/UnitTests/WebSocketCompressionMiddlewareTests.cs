@@ -27,15 +27,13 @@ public class WebSocketCompressionMiddlewareTests : LoggedTest
                 async context =>
                 {
                     Assert.True(context.WebSockets.IsWebSocketRequest);
-                    var webSocket = await context
-                        .WebSockets
-                        .AcceptWebSocketAsync(
-                            new WebSocketAcceptContext()
-                            {
-                                DangerousEnableCompression = true,
-                                DisableServerContextTakeover = true
-                            }
-                        );
+                    var webSocket = await context.WebSockets.AcceptWebSocketAsync(
+                        new WebSocketAcceptContext()
+                        {
+                            DangerousEnableCompression = true,
+                            DisableServerContextTakeover = true
+                        }
+                    );
                 }
             )
         )
@@ -55,8 +53,7 @@ public class WebSocketCompressionMiddlewareTests : LoggedTest
                     Assert.Equal(HttpStatusCode.SwitchingProtocols, response.StatusCode);
                     Assert.Equal(
                         "permessage-deflate; server_no_context_takeover",
-                        response
-                            .Headers
+                        response.Headers
                             .GetValues(HeaderNames.SecWebSocketExtensions)
                             .Aggregate((l, r) => $"{l}; {r}")
                     );
@@ -120,15 +117,13 @@ public class WebSocketCompressionMiddlewareTests : LoggedTest
                 async context =>
                 {
                     Assert.True(context.WebSockets.IsWebSocketRequest);
-                    var webSocket = await context
-                        .WebSockets
-                        .AcceptWebSocketAsync(
-                            new WebSocketAcceptContext()
-                            {
-                                DangerousEnableCompression = true,
-                                ServerMaxWindowBits = 13
-                            }
-                        );
+                    var webSocket = await context.WebSockets.AcceptWebSocketAsync(
+                        new WebSocketAcceptContext()
+                        {
+                            DangerousEnableCompression = true,
+                            ServerMaxWindowBits = 13
+                        }
+                    );
                 }
             )
         )
@@ -148,8 +143,7 @@ public class WebSocketCompressionMiddlewareTests : LoggedTest
                     Assert.Equal(HttpStatusCode.SwitchingProtocols, response.StatusCode);
                     Assert.Equal(
                         expectedResponse,
-                        response
-                            .Headers
+                        response.Headers
                             .GetValues(HeaderNames.SecWebSocketExtensions)
                             .Aggregate((l, r) => $"{l}; {r}")
                     );
@@ -169,15 +163,13 @@ public class WebSocketCompressionMiddlewareTests : LoggedTest
                 async context =>
                 {
                     Assert.True(context.WebSockets.IsWebSocketRequest);
-                    using var webSocket = await context
-                        .WebSockets
-                        .AcceptWebSocketAsync(
-                            new WebSocketAcceptContext()
-                            {
-                                DangerousEnableCompression = true,
-                                ServerMaxWindowBits = 13
-                            }
-                        );
+                    using var webSocket = await context.WebSockets.AcceptWebSocketAsync(
+                        new WebSocketAcceptContext()
+                        {
+                            DangerousEnableCompression = true,
+                            ServerMaxWindowBits = 13
+                        }
+                    );
 
                     var serverBuffer = new byte[1024];
                     while (true)
@@ -254,14 +246,12 @@ public class WebSocketCompressionMiddlewareTests : LoggedTest
         request.Headers.Upgrade.Add(new System.Net.Http.Headers.ProductHeaderValue("websocket"));
         request.Headers.Add(HeaderNames.SecWebSocketVersion, "13");
         // SecWebSocketKey required to be 16 bytes
-        request
-            .Headers
-            .Add(
-                HeaderNames.SecWebSocketKey,
-                Convert.ToBase64String(
-                    new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 },
-                    Base64FormattingOptions.None
-                )
-            );
+        request.Headers.Add(
+            HeaderNames.SecWebSocketKey,
+            Convert.ToBase64String(
+                new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 },
+                Base64FormattingOptions.None
+            )
+        );
     }
 }

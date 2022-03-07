@@ -92,8 +92,11 @@ class C
 "
                 )
                 .GetRoot();
-            var leftPosition =
-                leftRoot.DescendantNodes().OfType<LiteralExpressionSyntax>().ElementAt(2).SpanStart; // 0 within Console.WriteLine(0)
+            var leftPosition = leftRoot
+                .DescendantNodes()
+                .OfType<LiteralExpressionSyntax>()
+                .ElementAt(2)
+                .SpanStart; // 0 within Console.WriteLine(0)
             var rightRoot = SyntaxFactory
                 .ParseSyntaxTree(
                     @"
@@ -154,8 +157,11 @@ class C
                 )
                 .GetRoot();
 
-            var leftPosition =
-                leftRoot.DescendantNodes().OfType<LiteralExpressionSyntax>().ElementAt(5).SpanStart; // 3 within Console.WriteLine(3)
+            var leftPosition = leftRoot
+                .DescendantNodes()
+                .OfType<LiteralExpressionSyntax>()
+                .ElementAt(5)
+                .SpanStart; // 3 within Console.WriteLine(3)
             var rightRoot = SyntaxFactory
                 .ParseSyntaxTree(
                     @"
@@ -246,24 +252,21 @@ class C
             var l1 = m3.DescendantNodes()
                 .OfType<VariableDeclaratorSyntax>()
                 .Single(m => m.Identifier.ValueText == "l1")
-                .Initializer
-                .DescendantNodes()
+                .Initializer.DescendantNodes()
                 .OfType<LambdaExpressionSyntax>()
                 .Single();
 
             var l2 = m3.DescendantNodes()
                 .OfType<VariableDeclaratorSyntax>()
                 .Single(m => m.Identifier.ValueText == "l2")
-                .Initializer
-                .DescendantNodes()
+                .Initializer.DescendantNodes()
                 .OfType<LambdaExpressionSyntax>()
                 .Single();
 
             var l3 = m3.DescendantNodes()
                 .OfType<VariableDeclaratorSyntax>()
                 .Single(m => m.Identifier.ValueText == "l3")
-                .Initializer
-                .DescendantNodes()
+                .Initializer.DescendantNodes()
                 .OfType<AnonymousFunctionExpressionSyntax>()
                 .Single();
 

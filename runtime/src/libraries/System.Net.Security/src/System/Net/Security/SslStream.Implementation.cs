@@ -239,9 +239,10 @@ namespace System.Net.Security
             CancellationToken cancellationToken
         )
         {
-            NetSecurityTelemetry
-                .Log
-                .HandshakeStart(_context!.IsServer, _sslAuthenticationOptions!.TargetHost);
+            NetSecurityTelemetry.Log.HandshakeStart(
+                _context!.IsServer,
+                _sslAuthenticationOptions!.TargetHost
+            );
             ValueStopwatch stopwatch = ValueStopwatch.StartNew();
 
             try
@@ -266,9 +267,11 @@ namespace System.Net.Security
                 bool connectionOpen =
                     Interlocked.CompareExchange(ref _connectionOpenedStatus, 1, 0) == 0;
 
-                NetSecurityTelemetry
-                    .Log
-                    .HandshakeCompleted(GetSslProtocolInternal(), stopwatch, connectionOpen);
+                NetSecurityTelemetry.Log.HandshakeCompleted(
+                    GetSslProtocolInternal(),
+                    stopwatch,
+                    connectionOpen
+                );
             }
             catch (Exception ex)
             {
@@ -536,18 +539,16 @@ namespace System.Net.Security
             }
 
             if (NetEventSource.Log.IsEnabled())
-                NetEventSource
-                    .Log
-                    .SspiSelectedCipherSuite(
-                        nameof(ForceAuthenticationAsync),
-                        SslProtocol,
-                        CipherAlgorithm,
-                        CipherStrength,
-                        HashAlgorithm,
-                        HashStrength,
-                        KeyExchangeAlgorithm,
-                        KeyExchangeStrength
-                    );
+                NetEventSource.Log.SspiSelectedCipherSuite(
+                    nameof(ForceAuthenticationAsync),
+                    SslProtocol,
+                    CipherAlgorithm,
+                    CipherStrength,
+                    HashAlgorithm,
+                    HashStrength,
+                    KeyExchangeAlgorithm,
+                    KeyExchangeStrength
+                );
         }
 
         private async ValueTask<ProtocolToken> ReceiveBlobAsync<TIOAdapter>(TIOAdapter adapter)

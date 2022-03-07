@@ -448,8 +448,7 @@ namespace AutoMapper.UnitTests
         {
             Mapper
                 .Map(new Source(), new Destination())
-                .MyCollection
-                .SequenceEqual(new[] { "one", "two" })
+                .MyCollection.SequenceEqual(new[] { "one", "two" })
                 .ShouldBeTrue();
         }
     }
@@ -474,10 +473,8 @@ namespace AutoMapper.UnitTests
         public void Should_fail() =>
             new Action(() => Mapper.Map(new Source(), new Destination()))
                 .ShouldThrow<AutoMapperMappingException>()
-                .InnerException
-                .ShouldBeOfType<NotSupportedException>()
-                .Message
-                .ShouldBe("Collection is read-only.");
+                .InnerException.ShouldBeOfType<NotSupportedException>()
+                .Message.ShouldBe("Collection is read-only.");
     }
 
     public class When_mapping_to_readonly_property_UseDestinationValue : AutoMapperSpecBase
@@ -513,8 +510,7 @@ namespace AutoMapper.UnitTests
         {
             Mapper
                 .Map<Destination>(new Source())
-                .MyCollection
-                .SequenceEqual(new[] { "one", "two" })
+                .MyCollection.SequenceEqual(new[] { "one", "two" })
                 .ShouldBeTrue();
         }
     }
@@ -553,8 +549,7 @@ namespace AutoMapper.UnitTests
         {
             Mapper
                 .Map<Destination>(new Source())
-                .MyCollection
-                .SequenceEqual(new[] { "one", "two" })
+                .MyCollection.SequenceEqual(new[] { "one", "two" })
                 .ShouldBeTrue();
         }
     }
@@ -597,8 +592,7 @@ namespace AutoMapper.UnitTests
         {
             Mapper
                 .Map<DestItem>(new SourceItem { ShipsTo = new MyCollection() })
-                .ShipsTo
-                .SequenceEqual(Enumerable.Range(1, 10))
+                .ShipsTo.SequenceEqual(Enumerable.Range(1, 10))
                 .ShouldBeTrue();
         }
     }
@@ -628,8 +622,7 @@ namespace AutoMapper.UnitTests
             var items = Enumerable.Range(1, 10).Select(i => i.ToString()).ToArray();
             Mapper
                 .Map<DestItem>(new SourceItem { ShipsTo = new List<string>(items) })
-                .ShipsTo
-                .Cast<string>()
+                .ShipsTo.Cast<string>()
                 .SequenceEqual(items)
                 .ShouldBeTrue();
         }

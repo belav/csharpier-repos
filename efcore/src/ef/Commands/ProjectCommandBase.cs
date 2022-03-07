@@ -31,9 +31,7 @@ namespace Microsoft.EntityFrameworkCore.Tools.Commands
         protected CommandOption? Configuration { get; private set; }
 
         protected string? EFCoreVersion =>
-            _efcoreVersion ??= System
-                .Reflection
-                .Assembly
+            _efcoreVersion ??= System.Reflection.Assembly
                 .Load("Microsoft.EntityFrameworkCore.Design")
                 .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
                 ?.InformationalVersion;
@@ -119,8 +117,7 @@ namespace Microsoft.EntityFrameworkCore.Tools.Commands
                                     BindingFlags.Static | BindingFlags.NonPublic
                                 )
                                 .SetValue(null, null);
-                            typeof(ConfigurationManager)
-                                .Assembly
+                            typeof(ConfigurationManager).Assembly
                                 .GetType("System.Configuration.ClientConfigPaths")
                                 .GetField("s_current", BindingFlags.Static | BindingFlags.NonPublic)
                                 .SetValue(null, null);

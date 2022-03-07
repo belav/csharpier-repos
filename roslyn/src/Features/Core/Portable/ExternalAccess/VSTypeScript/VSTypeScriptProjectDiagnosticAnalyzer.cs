@@ -21,11 +21,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
             CancellationToken cancellationToken
         )
         {
-            var analyzer =
-                project
-                    .LanguageServices
-                    .GetRequiredService<VSTypeScriptDiagnosticAnalyzerLanguageService>()
-                    .Implementation;
+            var analyzer = project.LanguageServices
+                .GetRequiredService<VSTypeScriptDiagnosticAnalyzerLanguageService>()
+                .Implementation;
             if (analyzer == null)
             {
                 return SpecializedTasks.EmptyImmutableArray<Diagnostic>();

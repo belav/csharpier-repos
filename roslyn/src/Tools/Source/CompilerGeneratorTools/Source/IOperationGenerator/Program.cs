@@ -13,9 +13,10 @@ string outFilePath;
 
 if (args.Length != 2)
 {
-    Console
-        .Error
-        .WriteLine("Usage: \"{0} <input> <output>\"", Path.GetFileNameWithoutExtension(args[0]));
+    Console.Error.WriteLine(
+        "Usage: \"{0} <input> <output>\"",
+        Path.GetFileNameWithoutExtension(args[0])
+    );
     return 1;
 }
 

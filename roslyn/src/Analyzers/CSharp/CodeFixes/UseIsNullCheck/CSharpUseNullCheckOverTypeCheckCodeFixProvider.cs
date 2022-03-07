@@ -64,9 +64,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
         {
             foreach (var diagnostic in diagnostics)
             {
-                var node = diagnostic
-                    .Location
-                    .FindNode(getInnermostNodeForTie: true, cancellationToken: cancellationToken);
+                var node = diagnostic.Location.FindNode(
+                    getInnermostNodeForTie: true,
+                    cancellationToken: cancellationToken
+                );
                 SyntaxNode replacement = node switch
                 {
                     // Replace 'x is object' with 'x is not null'

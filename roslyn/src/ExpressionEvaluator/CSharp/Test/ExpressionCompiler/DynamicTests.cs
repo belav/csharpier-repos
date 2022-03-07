@@ -66,8 +66,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                     var method = (MethodSymbol)testData
                         .GetExplicitlyDeclaredMethods()
                         .Single()
-                        .Value
-                        .Method;
+                        .Value.Method;
                     CheckAttribute(
                         assembly,
                         method,
@@ -134,8 +133,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                     var method = (MethodSymbol)testData
                         .GetExplicitlyDeclaredMethods()
                         .Single()
-                        .Value
-                        .Method;
+                        .Value.Method;
                     CheckAttribute(
                         assembly,
                         method,
@@ -205,8 +203,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                     var method = (MethodSymbol)testData
                         .GetExplicitlyDeclaredMethods()
                         .Single()
-                        .Value
-                        .Method;
+                        .Value.Method;
                     CheckAttribute(
                         assembly,
                         method,
@@ -276,8 +273,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                     var method = (MethodSymbol)testData
                         .GetExplicitlyDeclaredMethods()
                         .Single()
-                        .Value
-                        .Method;
+                        .Value.Method;
                     CheckAttribute(
                         assembly,
                         method,
@@ -344,8 +340,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                     var method = (MethodSymbol)testData
                         .GetExplicitlyDeclaredMethods()
                         .Single()
-                        .Value
-                        .Method;
+                        .Value.Method;
                     CheckAttribute(
                         assembly,
                         method,
@@ -421,8 +416,7 @@ class Generic<T>
                     var method = (MethodSymbol)testData
                         .GetExplicitlyDeclaredMethods()
                         .Single()
-                        .Value
-                        .Method;
+                        .Value.Method;
                     CheckAttribute(
                         assembly,
                         method,
@@ -966,8 +960,7 @@ class Generic<T>
                     var method = (MethodSymbol)testData
                         .GetExplicitlyDeclaredMethods()
                         .Single()
-                        .Value
-                        .Method;
+                        .Value.Method;
                     CheckAttribute(
                         assembly,
                         method,
@@ -1028,8 +1021,7 @@ class Generic<T>
                     var method = (MethodSymbol)testData
                         .GetExplicitlyDeclaredMethods()
                         .Single()
-                        .Value
-                        .Method;
+                        .Value.Method;
                     CheckAttribute(
                         assembly,
                         method,
@@ -1093,8 +1085,7 @@ class Generic<T>
                     var method = (MethodSymbol)testData
                         .GetExplicitlyDeclaredMethods()
                         .Single()
-                        .Value
-                        .Method;
+                        .Value.Method;
                     CheckAttribute(
                         assembly,
                         method,
@@ -1170,8 +1161,7 @@ public class Outer<T, U>
                     var method = (MethodSymbol)testData
                         .GetExplicitlyDeclaredMethods()
                         .Single()
-                        .Value
-                        .Method;
+                        .Value.Method;
                     CheckAttribute(
                         assembly,
                         method,
@@ -1404,8 +1394,7 @@ public class Outer<T, U>
                     var method = (MethodSymbol)testData
                         .GetExplicitlyDeclaredMethods()
                         .Single()
-                        .Value
-                        .Method;
+                        .Value.Method;
                     CheckAttribute(
                         assembly,
                         method,

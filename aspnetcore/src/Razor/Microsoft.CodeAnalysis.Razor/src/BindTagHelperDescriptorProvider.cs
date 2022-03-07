@@ -106,9 +106,10 @@ internal class BindTagHelperDescriptorProvider : ITagHelperDescriptorProvider
         var targetAssembly = context.Items.GetTargetAssembly();
         if (
             targetAssembly is not null
-            && !SymbolEqualityComparer
-                .Default
-                .Equals(targetAssembly, bindMethods.ContainingAssembly)
+            && !SymbolEqualityComparer.Default.Equals(
+                targetAssembly,
+                bindMethods.ContainingAssembly
+            )
         )
         {
             return;
@@ -145,9 +146,10 @@ internal class BindTagHelperDescriptorProvider : ITagHelperDescriptorProvider
         builder.CaseSensitive = true;
         builder.Documentation = ComponentResources.BindTagHelper_Fallback_Documentation;
 
-        builder
-            .Metadata
-            .Add(ComponentMetadata.SpecialKindKey, ComponentMetadata.Bind.TagHelperKind);
+        builder.Metadata.Add(
+            ComponentMetadata.SpecialKindKey,
+            ComponentMetadata.Bind.TagHelperKind
+        );
         builder.Metadata.Add(TagHelperMetadata.Common.ClassifyAttributesOnly, bool.TrueString);
         builder.Metadata[TagHelperMetadata.Runtime.Name] = ComponentMetadata.Bind.RuntimeName;
         builder.Metadata[ComponentMetadata.Bind.FallbackKey] = bool.TrueString;
@@ -164,8 +166,9 @@ internal class BindTagHelperDescriptorProvider : ITagHelperDescriptorProvider
                     attribute =>
                     {
                         attribute.Name = "@bind-";
-                        attribute.NameComparisonMode =
-                            RequiredAttributeDescriptor.NameComparisonMode.PrefixMatch;
+                        attribute.NameComparisonMode = RequiredAttributeDescriptor
+                            .NameComparisonMode
+                            .PrefixMatch;
                         attribute.Metadata[ComponentMetadata.Common.DirectiveAttribute] =
                             bool.TrueString;
                     }
@@ -296,9 +299,10 @@ internal class BindTagHelperDescriptorProvider : ITagHelperDescriptorProvider
                     );
                 }
                 else if (
-                    SymbolEqualityComparer
-                        .Default
-                        .Equals(attribute.AttributeClass, bindInputElement)
+                    SymbolEqualityComparer.Default.Equals(
+                        attribute.AttributeClass,
+                        bindInputElement
+                    )
                     && attribute.ConstructorArguments.Length == 4
                 )
                 {
@@ -315,9 +319,10 @@ internal class BindTagHelperDescriptorProvider : ITagHelperDescriptorProvider
                     );
                 }
                 else if (
-                    SymbolEqualityComparer
-                        .Default
-                        .Equals(attribute.AttributeClass, bindInputElement)
+                    SymbolEqualityComparer.Default.Equals(
+                        attribute.AttributeClass,
+                        bindInputElement
+                    )
                     && attribute.ConstructorArguments.Length == 6
                 )
                 {
@@ -373,9 +378,10 @@ internal class BindTagHelperDescriptorProvider : ITagHelperDescriptorProvider
                 entry.ChangeAttribute
             );
 
-            builder
-                .Metadata
-                .Add(ComponentMetadata.SpecialKindKey, ComponentMetadata.Bind.TagHelperKind);
+            builder.Metadata.Add(
+                ComponentMetadata.SpecialKindKey,
+                ComponentMetadata.Bind.TagHelperKind
+            );
             builder.Metadata.Add(TagHelperMetadata.Common.ClassifyAttributesOnly, bool.TrueString);
             builder.Metadata[TagHelperMetadata.Runtime.Name] = ComponentMetadata.Bind.RuntimeName;
             builder.Metadata[ComponentMetadata.Bind.ValueAttribute] = entry.ValueAttribute;
@@ -413,11 +419,13 @@ internal class BindTagHelperDescriptorProvider : ITagHelperDescriptorProvider
                             a =>
                             {
                                 a.Name = "type";
-                                a.NameComparisonMode =
-                                    RequiredAttributeDescriptor.NameComparisonMode.FullMatch;
+                                a.NameComparisonMode = RequiredAttributeDescriptor
+                                    .NameComparisonMode
+                                    .FullMatch;
                                 a.Value = entry.TypeAttribute;
-                                a.ValueComparisonMode =
-                                    RequiredAttributeDescriptor.ValueComparisonMode.FullMatch;
+                                a.ValueComparisonMode = RequiredAttributeDescriptor
+                                    .ValueComparisonMode
+                                    .FullMatch;
                             }
                         );
                     }
@@ -426,8 +434,9 @@ internal class BindTagHelperDescriptorProvider : ITagHelperDescriptorProvider
                         a =>
                         {
                             a.Name = attributeName;
-                            a.NameComparisonMode =
-                                RequiredAttributeDescriptor.NameComparisonMode.FullMatch;
+                            a.NameComparisonMode = RequiredAttributeDescriptor
+                                .NameComparisonMode
+                                .FullMatch;
                             a.Metadata[ComponentMetadata.Common.DirectiveAttribute] =
                                 bool.TrueString;
                         }
@@ -562,9 +571,10 @@ internal class BindTagHelperDescriptorProvider : ITagHelperDescriptorProvider
 
                 BoundAttributeDescriptor valueAttribute = null;
                 BoundAttributeDescriptor expressionAttribute = null;
-                var valueAttributeName = changeAttribute
-                    .Name
-                    .Substring(0, changeAttribute.Name.Length - "Changed".Length);
+                var valueAttributeName = changeAttribute.Name.Substring(
+                    0,
+                    changeAttribute.Name.Length - "Changed".Length
+                );
                 var expressionAttributeName = valueAttributeName + "Expression";
                 for (var j = 0; j < tagHelper.BoundAttributes.Count; j++)
                 {
@@ -605,11 +615,13 @@ internal class BindTagHelperDescriptorProvider : ITagHelperDescriptorProvider
                     changeAttribute.Name
                 );
 
-                builder
-                    .Metadata
-                    .Add(ComponentMetadata.SpecialKindKey, ComponentMetadata.Bind.TagHelperKind);
-                builder.Metadata[TagHelperMetadata.Runtime.Name] =
-                    ComponentMetadata.Bind.RuntimeName;
+                builder.Metadata.Add(
+                    ComponentMetadata.SpecialKindKey,
+                    ComponentMetadata.Bind.TagHelperKind
+                );
+                builder.Metadata[TagHelperMetadata.Runtime.Name] = ComponentMetadata
+                    .Bind
+                    .RuntimeName;
                 builder.Metadata[ComponentMetadata.Bind.ValueAttribute] = valueAttribute.Name;
                 builder.Metadata[ComponentMetadata.Bind.ChangeAttribute] = changeAttribute.Name;
 
@@ -632,8 +644,9 @@ internal class BindTagHelperDescriptorProvider : ITagHelperDescriptorProvider
                             attribute =>
                             {
                                 attribute.Name = "@bind-" + valueAttribute.Name;
-                                attribute.NameComparisonMode =
-                                    RequiredAttributeDescriptor.NameComparisonMode.FullMatch;
+                                attribute.NameComparisonMode = RequiredAttributeDescriptor
+                                    .NameComparisonMode
+                                    .FullMatch;
                                 attribute.Metadata[ComponentMetadata.Common.DirectiveAttribute] =
                                     bool.TrueString;
                             }
@@ -665,8 +678,9 @@ internal class BindTagHelperDescriptorProvider : ITagHelperDescriptorProvider
 
                 if (tagHelper.IsComponentFullyQualifiedNameMatch())
                 {
-                    builder.Metadata[ComponentMetadata.Component.NameMatchKey] =
-                        ComponentMetadata.Component.FullyQualifiedNameMatch;
+                    builder.Metadata[ComponentMetadata.Component.NameMatchKey] = ComponentMetadata
+                        .Component
+                        .FullyQualifiedNameMatch;
                 }
 
                 results.Add(builder.Build());

@@ -25,9 +25,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
     [UseExportProvider]
     public abstract class RecommenderTests : TestBase
     {
-        protected static readonly CSharpParseOptions CSharp9ParseOptions = CSharpParseOptions
-            .Default
-            .WithLanguageVersion(LanguageVersion.CSharp9);
+        protected static readonly CSharpParseOptions CSharp9ParseOptions =
+            CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp9);
 
         protected string keywordText;
         internal Func<

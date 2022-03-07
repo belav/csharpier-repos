@@ -192,9 +192,11 @@ namespace JIT.HardwareIntrinsics.Arm
                 ImmUnaryOpTest__ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar_Vector64_UInt16_1 testClass
             )
             {
-                var result = AdvSimd
-                    .Arm64
-                    .ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar(_fld, 15);
+                var result =
+                    AdvSimd.Arm64.ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar(
+                        _fld,
+                        15
+                    );
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
                 testClass.ValidateResult(_fld, testClass._dataTable.outArrayPtr);
@@ -206,9 +208,8 @@ namespace JIT.HardwareIntrinsics.Arm
             {
                 fixed (Vector64<Int32>* pFld = &_fld)
                 {
-                    var result = AdvSimd
-                        .Arm64
-                        .ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar(
+                    var result =
+                        AdvSimd.Arm64.ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar(
                             AdvSimd.LoadVector64((Int32*)(pFld)),
                             15
                         );
@@ -277,12 +278,10 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_UnsafeRead));
 
-            var result = AdvSimd
-                .Arm64
-                .ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar(
-                    Unsafe.Read<Vector64<Int32>>(_dataTable.inArrayPtr),
-                    15
-                );
+            var result = AdvSimd.Arm64.ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar(
+                Unsafe.Read<Vector64<Int32>>(_dataTable.inArrayPtr),
+                15
+            );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.inArrayPtr, _dataTable.outArrayPtr);
@@ -292,12 +291,10 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_Load));
 
-            var result = AdvSimd
-                .Arm64
-                .ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar(
-                    AdvSimd.LoadVector64((Int32*)(_dataTable.inArrayPtr)),
-                    15
-                );
+            var result = AdvSimd.Arm64.ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar(
+                AdvSimd.LoadVector64((Int32*)(_dataTable.inArrayPtr)),
+                15
+            );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.inArrayPtr, _dataTable.outArrayPtr);
@@ -347,9 +344,10 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario));
 
-            var result = AdvSimd
-                .Arm64
-                .ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar(_clsVar, 15);
+            var result = AdvSimd.Arm64.ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar(
+                _clsVar,
+                15
+            );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_clsVar, _dataTable.outArrayPtr);
@@ -361,9 +359,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector64<Int32>* pClsVar = &_clsVar)
             {
-                var result = AdvSimd
-                    .Arm64
-                    .ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar(
+                var result =
+                    AdvSimd.Arm64.ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar(
                         AdvSimd.LoadVector64((Int32*)(pClsVar)),
                         15
                     );
@@ -378,9 +375,10 @@ namespace JIT.HardwareIntrinsics.Arm
             TestLibrary.TestFramework.BeginScenario(nameof(RunLclVarScenario_UnsafeRead));
 
             var firstOp = Unsafe.Read<Vector64<Int32>>(_dataTable.inArrayPtr);
-            var result = AdvSimd
-                .Arm64
-                .ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar(firstOp, 15);
+            var result = AdvSimd.Arm64.ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar(
+                firstOp,
+                15
+            );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(firstOp, _dataTable.outArrayPtr);
@@ -391,9 +389,10 @@ namespace JIT.HardwareIntrinsics.Arm
             TestLibrary.TestFramework.BeginScenario(nameof(RunLclVarScenario_Load));
 
             var firstOp = AdvSimd.LoadVector64((Int32*)(_dataTable.inArrayPtr));
-            var result = AdvSimd
-                .Arm64
-                .ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar(firstOp, 15);
+            var result = AdvSimd.Arm64.ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar(
+                firstOp,
+                15
+            );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(firstOp, _dataTable.outArrayPtr);
@@ -405,9 +404,10 @@ namespace JIT.HardwareIntrinsics.Arm
 
             var test =
                 new ImmUnaryOpTest__ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar_Vector64_UInt16_1();
-            var result = AdvSimd
-                .Arm64
-                .ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar(test._fld, 15);
+            var result = AdvSimd.Arm64.ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar(
+                test._fld,
+                15
+            );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(test._fld, _dataTable.outArrayPtr);
@@ -422,9 +422,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector64<Int32>* pFld = &test._fld)
             {
-                var result = AdvSimd
-                    .Arm64
-                    .ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar(
+                var result =
+                    AdvSimd.Arm64.ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar(
                         AdvSimd.LoadVector64((Int32*)(pFld)),
                         15
                     );
@@ -438,9 +437,10 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClassFldScenario));
 
-            var result = AdvSimd
-                .Arm64
-                .ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar(_fld, 15);
+            var result = AdvSimd.Arm64.ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar(
+                _fld,
+                15
+            );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_fld, _dataTable.outArrayPtr);
@@ -452,9 +452,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector64<Int32>* pFld = &_fld)
             {
-                var result = AdvSimd
-                    .Arm64
-                    .ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar(
+                var result =
+                    AdvSimd.Arm64.ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar(
                         AdvSimd.LoadVector64((Int32*)(pFld)),
                         15
                     );
@@ -469,9 +468,10 @@ namespace JIT.HardwareIntrinsics.Arm
             TestLibrary.TestFramework.BeginScenario(nameof(RunStructLclFldScenario));
 
             var test = TestStruct.Create();
-            var result = AdvSimd
-                .Arm64
-                .ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar(test._fld, 15);
+            var result = AdvSimd.Arm64.ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar(
+                test._fld,
+                15
+            );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(test._fld, _dataTable.outArrayPtr);
@@ -482,12 +482,10 @@ namespace JIT.HardwareIntrinsics.Arm
             TestLibrary.TestFramework.BeginScenario(nameof(RunStructLclFldScenario_Load));
 
             var test = TestStruct.Create();
-            var result = AdvSimd
-                .Arm64
-                .ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar(
-                    AdvSimd.LoadVector64((Int32*)(&test._fld)),
-                    15
-                );
+            var result = AdvSimd.Arm64.ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar(
+                AdvSimd.LoadVector64((Int32*)(&test._fld)),
+                15
+            );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(test._fld, _dataTable.outArrayPtr);
@@ -601,17 +599,15 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (!succeeded)
             {
-                TestLibrary
-                    .TestFramework
-                    .LogInformation(
-                        $"{nameof(AdvSimd.Arm64)}.{nameof(AdvSimd.Arm64.ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar)}<UInt16>(Vector64<Int32>, 15): {method} failed:"
-                    );
-                TestLibrary
-                    .TestFramework
-                    .LogInformation($"  firstOp: ({string.Join(", ", firstOp)})");
-                TestLibrary
-                    .TestFramework
-                    .LogInformation($"   result: ({string.Join(", ", result)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(AdvSimd.Arm64)}.{nameof(AdvSimd.Arm64.ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar)}<UInt16>(Vector64<Int32>, 15): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  firstOp: ({string.Join(", ", firstOp)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   result: ({string.Join(", ", result)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

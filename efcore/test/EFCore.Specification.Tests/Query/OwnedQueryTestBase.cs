@@ -1071,8 +1071,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                 ? await collectionQuery.ToListAsync()
                 : collectionQuery.ToList();
 
-            var expectedOrders =
-                Fixture.GetExpectedData().Set<OwnedPerson>().Single(e => e.Id == 1).Orders;
+            var expectedOrders = Fixture
+                .GetExpectedData()
+                .Set<OwnedPerson>()
+                .Single(e => e.Id == 1)
+                .Orders;
 
             Assert.Equal(expectedOrders.Count, actualOrders.Count);
             foreach (

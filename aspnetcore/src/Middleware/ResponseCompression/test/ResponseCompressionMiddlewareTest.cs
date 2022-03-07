@@ -711,9 +711,8 @@ public class ResponseCompressionMiddlewareTest
                                 app.Run(
                                     context =>
                                     {
-                                        var feature = context
-                                            .Features
-                                            .Get<IHttpsCompressionFeature>();
+                                        var feature =
+                                            context.Features.Get<IHttpsCompressionFeature>();
                                         feature.Mode = mode;
                                         context.Response.ContentType = TextPlain;
                                         return context.Response.WriteAsync(new string('a', 100));
@@ -795,9 +794,8 @@ public class ResponseCompressionMiddlewareTest
                                 app.Run(
                                     context =>
                                     {
-                                        var feature = context
-                                            .Features
-                                            .Get<IHttpsCompressionFeature>();
+                                        var feature =
+                                            context.Features.Get<IHttpsCompressionFeature>();
                                         feature.Mode = mode;
                                         context.Response.ContentType = TextPlain;
                                         return context.Response.WriteAsync(new string('a', 100));
@@ -868,9 +866,9 @@ public class ResponseCompressionMiddlewareTest
                                         context.Response.Headers.ContentMD5 = "MD5";
                                         context.Response.ContentType = TextPlain;
                                         context.Response.Body.Flush();
-                                        await responseReceived
-                                            .Task
-                                            .TimeoutAfter(TimeSpan.FromSeconds(3));
+                                        await responseReceived.Task.TimeoutAfter(
+                                            TimeSpan.FromSeconds(3)
+                                        );
                                         await context.Response.WriteAsync(new string('a', 100));
                                     }
                                 );
@@ -930,9 +928,9 @@ public class ResponseCompressionMiddlewareTest
                                         context.Response.Headers.ContentMD5 = "MD5";
                                         context.Response.ContentType = TextPlain;
                                         await context.Response.Body.FlushAsync();
-                                        await responseReceived
-                                            .Task
-                                            .TimeoutAfter(TimeSpan.FromSeconds(3));
+                                        await responseReceived.Task.TimeoutAfter(
+                                            TimeSpan.FromSeconds(3)
+                                        );
                                         await context.Response.WriteAsync(new string('a', 100));
                                     }
                                 );
@@ -985,9 +983,8 @@ public class ResponseCompressionMiddlewareTest
                                 app.Run(
                                     async context =>
                                     {
-                                        var feature = context
-                                            .Features
-                                            .Get<IHttpBodyControlFeature>();
+                                        var feature =
+                                            context.Features.Get<IHttpBodyControlFeature>();
                                         if (feature != null)
                                         {
                                             feature.AllowSynchronousIO = true;
@@ -997,9 +994,9 @@ public class ResponseCompressionMiddlewareTest
                                         context.Response.ContentType = TextPlain;
                                         context.Response.Body.Write(new byte[10], 0, 10);
                                         context.Response.Body.Flush();
-                                        await responseReceived
-                                            .Task
-                                            .TimeoutAfter(TimeSpan.FromSeconds(3));
+                                        await responseReceived.Task.TimeoutAfter(
+                                            TimeSpan.FromSeconds(3)
+                                        );
                                         context.Response.Body.Write(new byte[90], 0, 90);
                                     }
                                 );
@@ -1063,9 +1060,9 @@ public class ResponseCompressionMiddlewareTest
                                         context.Response.ContentType = TextPlain;
                                         await context.Response.WriteAsync(new string('a', 10));
                                         await context.Response.Body.FlushAsync();
-                                        await responseReceived
-                                            .Task
-                                            .TimeoutAfter(TimeSpan.FromSeconds(3));
+                                        await responseReceived.Task.TimeoutAfter(
+                                            TimeSpan.FromSeconds(3)
+                                        );
                                         await context.Response.WriteAsync(new string('a', 90));
                                     }
                                 );
@@ -1132,14 +1129,12 @@ public class ResponseCompressionMiddlewareTest
                                     {
                                         context.Response.Headers.ContentMD5 = "MD5";
                                         context.Response.ContentType = TextPlain;
-                                        context
-                                            .Features
+                                        context.Features
                                             .Get<IHttpResponseBodyFeature>()
                                             .DisableBuffering();
 
-                                        var feature = context
-                                            .Features
-                                            .Get<IHttpBodyControlFeature>();
+                                        var feature =
+                                            context.Features.Get<IHttpBodyControlFeature>();
                                         if (feature != null)
                                         {
                                             feature.AllowSynchronousIO = true;
@@ -1216,8 +1211,7 @@ public class ResponseCompressionMiddlewareTest
                                     {
                                         context.Response.Headers.ContentMD5 = "MD5";
                                         context.Response.ContentType = TextPlain;
-                                        context
-                                            .Features
+                                        context.Features
                                             .Get<IHttpResponseBodyFeature>()
                                             .DisableBuffering();
 
@@ -1292,8 +1286,7 @@ public class ResponseCompressionMiddlewareTest
                                     {
                                         context.Response.Headers.ContentMD5 = "MD5";
                                         context.Response.ContentType = "Un/compressed";
-                                        context
-                                            .Features
+                                        context.Features
                                             .Get<IHttpResponseBodyFeature>()
                                             .DisableBuffering();
 
@@ -1363,9 +1356,9 @@ public class ResponseCompressionMiddlewareTest
                                         fakeSendFile = new FakeSendFileFeature(
                                             context.Features.Get<IHttpResponseBodyFeature>()
                                         );
-                                        context
-                                            .Features
-                                            .Set<IHttpResponseBodyFeature>(fakeSendFile);
+                                        context.Features.Set<IHttpResponseBodyFeature>(
+                                            fakeSendFile
+                                        );
                                         return next(context);
                                     }
                                 );
@@ -1376,9 +1369,8 @@ public class ResponseCompressionMiddlewareTest
                                         context.Response.Headers.ContentMD5 = "MD5";
                                         context.Response.ContentType = "custom/type";
                                         context.Response.ContentLength = 1024;
-                                        var sendFile = context
-                                            .Features
-                                            .Get<IHttpResponseBodyFeature>();
+                                        var sendFile =
+                                            context.Features.Get<IHttpResponseBodyFeature>();
                                         Assert.NotNull(sendFile);
                                         return sendFile.SendFileAsync(
                                             "testfile1kb.txt",
@@ -1435,9 +1427,9 @@ public class ResponseCompressionMiddlewareTest
                                         fakeSendFile = new FakeSendFileFeature(
                                             context.Features.Get<IHttpResponseBodyFeature>()
                                         );
-                                        context
-                                            .Features
-                                            .Set<IHttpResponseBodyFeature>(fakeSendFile);
+                                        context.Features.Set<IHttpResponseBodyFeature>(
+                                            fakeSendFile
+                                        );
                                         return next(context);
                                     }
                                 );
@@ -1448,9 +1440,8 @@ public class ResponseCompressionMiddlewareTest
                                         context.Response.Headers.ContentMD5 = "MD5";
                                         context.Response.ContentType = TextPlain;
                                         context.Response.ContentLength = 1024;
-                                        var sendFile = context
-                                            .Features
-                                            .Get<IHttpResponseBodyFeature>();
+                                        var sendFile =
+                                            context.Features.Get<IHttpResponseBodyFeature>();
                                         Assert.NotNull(sendFile);
                                         return sendFile.SendFileAsync(
                                             "testfile1kb.txt",
@@ -1507,9 +1498,9 @@ public class ResponseCompressionMiddlewareTest
                                         fakeSendFile = new FakeSendFileFeature(
                                             context.Features.Get<IHttpResponseBodyFeature>()
                                         );
-                                        context
-                                            .Features
-                                            .Set<IHttpResponseBodyFeature>(fakeSendFile);
+                                        context.Features.Set<IHttpResponseBodyFeature>(
+                                            fakeSendFile
+                                        );
                                         return next(context);
                                     }
                                 );
@@ -1519,9 +1510,8 @@ public class ResponseCompressionMiddlewareTest
                                     {
                                         context.Response.Headers.ContentMD5 = "MD5";
                                         context.Response.ContentType = TextPlain;
-                                        var feature = context
-                                            .Features
-                                            .Get<IHttpResponseBodyFeature>();
+                                        var feature =
+                                            context.Features.Get<IHttpResponseBodyFeature>();
 
                                         await context.Response.WriteAsync(new string('a', 100));
                                         await feature.SendFileAsync(
@@ -1593,9 +1583,9 @@ public class ResponseCompressionMiddlewareTest
                                         context.Response.ContentType = TextPlain;
                                         await context.Response.WriteAsync(new string('a', 10));
                                         await context.Response.Body.FlushAsync();
-                                        await responseReceived
-                                            .Task
-                                            .TimeoutAfter(TimeSpan.FromSeconds(3));
+                                        await responseReceived.Task.TimeoutAfter(
+                                            TimeSpan.FromSeconds(3)
+                                        );
                                         await context.Response.WriteAsync(new string('a', 90));
                                     }
                                 );
@@ -1673,9 +1663,9 @@ public class ResponseCompressionMiddlewareTest
                                         }
 
                                         addResponseAction?.Invoke(context.Response);
-                                        return context
-                                            .Response
-                                            .WriteAsync(new string('a', uncompressedBodyLength));
+                                        return context.Response.WriteAsync(
+                                            new string('a', uncompressedBodyLength)
+                                        );
                                     }
                                 );
                             }
@@ -1692,17 +1682,11 @@ public class ResponseCompressionMiddlewareTest
         var request = new HttpRequestMessage(new HttpMethod(httpMethod), "");
         for (var i = 0; i < requestAcceptEncodings?.Length; i++)
         {
-            request
-                .Headers
-                .AcceptEncoding
-                .Add(
-                    System
-                        .Net
-                        .Http
-                        .Headers
-                        .StringWithQualityHeaderValue
-                        .Parse(requestAcceptEncodings[i])
-                );
+            request.Headers.AcceptEncoding.Add(
+                System.Net.Http.Headers.StringWithQualityHeaderValue.Parse(
+                    requestAcceptEncodings[i]
+                )
+            );
         }
 
         var response = await client.SendAsync(request);

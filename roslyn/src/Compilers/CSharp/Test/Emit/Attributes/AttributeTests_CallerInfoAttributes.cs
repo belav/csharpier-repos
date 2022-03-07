@@ -2869,12 +2869,11 @@ class Program
                 parseOptions: TestOptions.Regular10
             );
             CompileAndVerify(compilation, expectedOutput: "'3', '0'").VerifyDiagnostics();
-            var arguments =
-                compilation
-                    .GetTypeByMetadataName("Program")
-                    .GetAttributes()
-                    .Single()
-                    .CommonConstructorArguments;
+            var arguments = compilation
+                .GetTypeByMetadataName("Program")
+                .GetAttributes()
+                .Single()
+                .CommonConstructorArguments;
             Assert.Equal(2, arguments.Length);
             Assert.Equal(3, arguments[0].Value);
             Assert.Equal(0, arguments[1].Value);
@@ -5234,9 +5233,9 @@ partial class A
                         encoding: Encoding.UTF8
                     )
                 },
-                options: TestOptions
-                    .ReleaseExe
-                    .WithSourceReferenceResolver(SourceFileResolver.Default)
+                options: TestOptions.ReleaseExe.WithSourceReferenceResolver(
+                    SourceFileResolver.Default
+                )
             );
 
             CompileAndVerify(
@@ -5321,14 +5320,9 @@ partial class A { static void Main5() { Log(); } }
                     ),
                 },
                 new[] { SystemRef },
-                TestOptions
-                    .ReleaseExe
-                    .WithSourceReferenceResolver(
-                        new SourceFileResolver(
-                            ImmutableArray<string>.Empty,
-                            baseDirectory: @"C:\A\B"
-                        )
-                    )
+                TestOptions.ReleaseExe.WithSourceReferenceResolver(
+                    new SourceFileResolver(ImmutableArray<string>.Empty, baseDirectory: @"C:\A\B")
+                )
             );
 
             // On CoreClr the '*' is a legal path character

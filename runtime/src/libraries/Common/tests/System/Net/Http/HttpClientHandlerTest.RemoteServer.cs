@@ -32,8 +32,9 @@ namespace System.Net.Http.Functional.Tests
         private readonly NetworkCredential _credential = new NetworkCredential(Username, Password);
 
         public static readonly object[][] Http2Servers = Configuration.Http.Http2Servers;
-        public static readonly object[][] Http2NoPushServers =
-            Configuration.Http.Http2NoPushServers;
+        public static readonly object[][] Http2NoPushServers = Configuration
+            .Http
+            .Http2NoPushServers;
 
         // Standard HTTP methods defined in RFC7231: http://tools.ietf.org/html/rfc7231#section-4.3
         //     "GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS", "TRACE"
@@ -1015,9 +1016,9 @@ namespace System.Net.Http.Functional.Tests
 
                     if (expectRedirectToPost)
                     {
-                        IEnumerable<string> headerValue = response
-                            .Headers
-                            .GetValues("X-HttpRequest-Method");
+                        IEnumerable<string> headerValue = response.Headers.GetValues(
+                            "X-HttpRequest-Method"
+                        );
                         Assert.Equal("POST", headerValue.First());
                     }
                 }
@@ -1238,13 +1239,9 @@ namespace System.Net.Http.Functional.Tests
                             $"\"Content-Length\": \"{request.Content.Headers.ContentLength.Value}\"",
                             responseContent
                         );
-                        string bodyContent = System
-                            .Text
-                            .Json
-                            .JsonDocument
+                        string bodyContent = System.Text.Json.JsonDocument
                             .Parse(responseContent)
-                            .RootElement
-                            .GetProperty("BodyContent")
+                            .RootElement.GetProperty("BodyContent")
                             .GetString();
                         Assert.Contains(stringContent.Substring(startingPosition), bodyContent);
                         if (startingPosition != 0)
@@ -1347,14 +1344,11 @@ namespace System.Net.Http.Functional.Tests
             handler.AllowAutoRedirect = true;
             using (HttpClient client = CreateHttpClient(handler))
             {
-                Uri uri = Configuration
-                    .Http
-                    .RemoteHttp11Server
-                    .RedirectUriForDestinationUri(
-                        statusCode: 302,
-                        destinationUri: Configuration.Http.RemoteSecureHttp11Server.EchoUri,
-                        hops: 1
-                    );
+                Uri uri = Configuration.Http.RemoteHttp11Server.RedirectUriForDestinationUri(
+                    statusCode: 302,
+                    destinationUri: Configuration.Http.RemoteSecureHttp11Server.EchoUri,
+                    hops: 1
+                );
                 _output.WriteLine("Uri: {0}", uri);
                 using (HttpResponseMessage response = await client.GetAsync(uri))
                 {
@@ -1376,14 +1370,11 @@ namespace System.Net.Http.Functional.Tests
             handler.AllowAutoRedirect = true;
             using (HttpClient client = CreateHttpClient(handler))
             {
-                Uri uri = Configuration
-                    .Http
-                    .RemoteSecureHttp11Server
-                    .RedirectUriForDestinationUri(
-                        statusCode: 302,
-                        destinationUri: Configuration.Http.RemoteHttp11Server.EchoUri,
-                        hops: 1
-                    );
+                Uri uri = Configuration.Http.RemoteSecureHttp11Server.RedirectUriForDestinationUri(
+                    statusCode: 302,
+                    destinationUri: Configuration.Http.RemoteHttp11Server.EchoUri,
+                    hops: 1
+                );
                 _output.WriteLine("Uri: {0}", uri);
 
                 using (HttpResponseMessage response = await client.GetAsync(uri))
@@ -1443,14 +1434,11 @@ namespace System.Net.Http.Functional.Tests
             using (HttpClient client = CreateHttpClient(handler))
             {
                 Task<HttpResponseMessage> t = client.GetAsync(
-                    Configuration
-                        .Http
-                        .RemoteHttp11Server
-                        .RedirectUriForDestinationUri(
-                            statusCode: 302,
-                            destinationUri: Configuration.Http.RemoteHttp11Server.EchoUri,
-                            hops: hops
-                        )
+                    Configuration.Http.RemoteHttp11Server.RedirectUriForDestinationUri(
+                        statusCode: 302,
+                        destinationUri: Configuration.Http.RemoteHttp11Server.EchoUri,
+                        hops: hops
+                    )
                 );
 
                 if (hops <= maxHops)

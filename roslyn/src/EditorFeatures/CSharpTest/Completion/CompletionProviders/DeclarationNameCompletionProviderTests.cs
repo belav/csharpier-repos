@@ -2335,19 +2335,12 @@ public class Class1
 
             var workspace = workspaceFixture.Target.GetWorkspace(ExportProvider);
             workspace.TryApplyChanges(
-                workspace
-                    .CurrentSolution
-                    .WithOptions(
-                        workspace
-                            .Options
-                            .WithChangedOption(
-                                new OptionKey2(
-                                    NamingStyleOptions.NamingPreferences,
-                                    LanguageNames.CSharp
-                                ),
-                                NamesEndWithSuffixPreferences()
-                            )
+                workspace.CurrentSolution.WithOptions(
+                    workspace.Options.WithChangedOption(
+                        new OptionKey2(NamingStyleOptions.NamingPreferences, LanguageNames.CSharp),
+                        NamesEndWithSuffixPreferences()
                     )
+                )
             );
 
             var markup =
@@ -2386,19 +2379,12 @@ class Configuration
 
             var workspace = workspaceFixture.Target.GetWorkspace(ExportProvider);
             workspace.TryApplyChanges(
-                workspace
-                    .CurrentSolution
-                    .WithOptions(
-                        workspace
-                            .Options
-                            .WithChangedOption(
-                                new OptionKey2(
-                                    NamingStyleOptions.NamingPreferences,
-                                    LanguageNames.CSharp
-                                ),
-                                NamesEndWithSuffixPreferences()
-                            )
+                workspace.CurrentSolution.WithOptions(
+                    workspace.Options.WithChangedOption(
+                        new OptionKey2(NamingStyleOptions.NamingPreferences, LanguageNames.CSharp),
+                        NamesEndWithSuffixPreferences()
                     )
+                )
             );
 
             var markup =
@@ -2900,19 +2886,12 @@ class ClassA
 
             var workspace = workspaceFixture.Target.GetWorkspace(ExportProvider);
             workspace.TryApplyChanges(
-                workspace
-                    .CurrentSolution
-                    .WithOptions(
-                        workspace
-                            .Options
-                            .WithChangedOption(
-                                new OptionKey2(
-                                    NamingStyleOptions.NamingPreferences,
-                                    LanguageNames.CSharp
-                                ),
-                                MultipleCamelCaseLocalRules()
-                            )
+                workspace.CurrentSolution.WithOptions(
+                    workspace.Options.WithChangedOption(
+                        new OptionKey2(NamingStyleOptions.NamingPreferences, LanguageNames.CSharp),
+                        MultipleCamelCaseLocalRules()
                     )
+                )
             );
 
             var markup =

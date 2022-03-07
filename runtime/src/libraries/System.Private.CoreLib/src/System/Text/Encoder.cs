@@ -56,9 +56,8 @@ namespace System.Text
                     if (_fallback != null)
                         _fallbackBuffer = _fallback.CreateFallbackBuffer();
                     else
-                        _fallbackBuffer = EncoderFallback
-                            .ReplacementFallback
-                            .CreateFallbackBuffer();
+                        _fallbackBuffer =
+                            EncoderFallback.ReplacementFallback.CreateFallbackBuffer();
                 }
 
                 return _fallbackBuffer;

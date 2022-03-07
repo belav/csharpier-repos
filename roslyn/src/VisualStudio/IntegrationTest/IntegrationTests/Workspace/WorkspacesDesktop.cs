@@ -41,13 +41,11 @@ namespace Roslyn.VisualStudio.IntegrationTests.Workspace
         {
             VisualStudio.SolutionExplorer.CreateSolution(nameof(WorkspacesDesktop));
             var project = new ProjectUtils.Project(ProjectName);
-            VisualStudio
-                .SolutionExplorer
-                .AddProject(
-                    project,
-                    WellKnownProjectTemplates.ClassLibrary,
-                    LanguageNames.VisualBasic
-                );
+            VisualStudio.SolutionExplorer.AddProject(
+                project,
+                WellKnownProjectTemplates.ClassLibrary,
+                LanguageNames.VisualBasic
+            );
             base.ProjectProperties();
         }
     }

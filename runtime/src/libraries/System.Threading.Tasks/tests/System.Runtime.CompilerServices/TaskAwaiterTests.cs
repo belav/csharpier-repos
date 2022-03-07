@@ -548,9 +548,10 @@ namespace System.Threading.Tasks.Tests
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
                     "timeout",
                     () =>
-                        new TaskCompletionSource()
-                            .Task
-                            .WaitAsync(timeout, new CancellationToken(true))
+                        new TaskCompletionSource().Task.WaitAsync(
+                            timeout,
+                            new CancellationToken(true)
+                        )
                 );
 
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
@@ -560,16 +561,18 @@ namespace System.Threading.Tasks.Tests
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
                     "timeout",
                     () =>
-                        new TaskCompletionSource<int>()
-                            .Task
-                            .WaitAsync(timeout, CancellationToken.None)
+                        new TaskCompletionSource<int>().Task.WaitAsync(
+                            timeout,
+                            CancellationToken.None
+                        )
                 );
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
                     "timeout",
                     () =>
-                        new TaskCompletionSource<int>()
-                            .Task
-                            .WaitAsync(timeout, new CancellationToken(true))
+                        new TaskCompletionSource<int>().Task.WaitAsync(
+                            timeout,
+                            new CancellationToken(true)
+                        )
                 );
 
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
@@ -996,17 +999,15 @@ namespace System.Threading.Tasks.Tests
             yield return new object[]
             {
                 LineNumber(),
-                Task<int>
-                    .Factory
-                    .FromAsync(
-                        nonGeneric,
-                        new Func<IAsyncResult, int>(
-                            ar =>
-                            {
-                                throw oce;
-                            }
-                        )
-                    ),
+                Task<int>.Factory.FromAsync(
+                    nonGeneric,
+                    new Func<IAsyncResult, int>(
+                        ar =>
+                        {
+                            throw oce;
+                        }
+                    )
+                ),
                 oce
             };
 

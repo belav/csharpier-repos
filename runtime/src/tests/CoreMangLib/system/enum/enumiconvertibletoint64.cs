@@ -36,9 +36,10 @@ public class EnumIConvertibleToInt64
             long l1 = i1.ToInt64(null);
             if (l1 != 100)
             {
-                TestLibrary
-                    .TestFramework
-                    .LogError("001", "The result is not the value as expected");
+                TestLibrary.TestFramework.LogError(
+                    "001",
+                    "The result is not the value as expected"
+                );
                 retVal = false;
             }
         }
@@ -63,9 +64,10 @@ public class EnumIConvertibleToInt64
             long l2 = (e2 as IConvertible).ToInt64(null);
             if (l2 != 1)
             {
-                TestLibrary
-                    .TestFramework
-                    .LogError("003", "The result is not the value as expected");
+                TestLibrary.TestFramework.LogError(
+                    "003",
+                    "The result is not the value as expected"
+                );
                 retVal = false;
             }
         }
@@ -82,11 +84,9 @@ public class EnumIConvertibleToInt64
     {
         bool retVal = true;
 
-        TestLibrary
-            .TestFramework
-            .BeginScenario(
-                "PosTest3: Convert a enum to int64, the value of which is Int32.Maximal "
-            );
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest3: Convert a enum to int64, the value of which is Int32.Maximal "
+        );
 
         try
         {
@@ -94,9 +94,10 @@ public class EnumIConvertibleToInt64
             long l3 = (e3 as IConvertible).ToInt64(null);
             if (l3 != Int32.MaxValue)
             {
-                TestLibrary
-                    .TestFramework
-                    .LogError("005", "The result is not the value as expected");
+                TestLibrary.TestFramework.LogError(
+                    "005",
+                    "The result is not the value as expected"
+                );
                 retVal = false;
             }
         }
@@ -113,11 +114,9 @@ public class EnumIConvertibleToInt64
     {
         bool retVal = true;
 
-        TestLibrary
-            .TestFramework
-            .BeginScenario(
-                "PosTest4: Convert a enum to Int64, the value of which is Int64.minvalue"
-            );
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest4: Convert a enum to Int64, the value of which is Int64.minvalue"
+        );
 
         try
         {
@@ -126,9 +125,10 @@ public class EnumIConvertibleToInt64
             long l4 = i4.ToInt64(null);
             if (l4 != Int64.MinValue)
             {
-                TestLibrary
-                    .TestFramework
-                    .LogError("007", "The result is not the value as expected");
+                TestLibrary.TestFramework.LogError(
+                    "007",
+                    "The result is not the value as expected"
+                );
                 retVal = false;
             }
         }
@@ -145,11 +145,9 @@ public class EnumIConvertibleToInt64
     {
         bool retVal = true;
 
-        TestLibrary
-            .TestFramework
-            .BeginScenario(
-                "PosTest5: Convert a enum to Int64, the value of which is Int64.MaxValue"
-            );
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest5: Convert a enum to Int64, the value of which is Int64.MaxValue"
+        );
 
         try
         {
@@ -158,9 +156,10 @@ public class EnumIConvertibleToInt64
             long l5 = i5.ToInt64(null);
             if (l5 != Int64.MaxValue)
             {
-                TestLibrary
-                    .TestFramework
-                    .LogError("009", "The result is not the value as expected");
+                TestLibrary.TestFramework.LogError(
+                    "009",
+                    "The result is not the value as expected"
+                );
                 retVal = false;
             }
         }

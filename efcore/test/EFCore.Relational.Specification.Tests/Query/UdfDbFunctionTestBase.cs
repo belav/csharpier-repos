@@ -635,27 +635,37 @@ namespace Microsoft.EntityFrameworkCore.Query
                     Addresses = new List<Address> { address41, address42, address43 }
                 };
 
-                ((UDFSqlContext)context)
-                    .Products
-                    .AddRange(product1, product2, product3, product4, product5);
-                ((UDFSqlContext)context)
-                    .Addresses
-                    .AddRange(
-                        address11,
-                        address12,
-                        address21,
-                        address31,
-                        address32,
-                        address41,
-                        address42,
-                        address43
-                    );
-                ((UDFSqlContext)context)
-                    .Customers
-                    .AddRange(customer1, customer2, customer3, customer4);
-                ((UDFSqlContext)context)
-                    .Orders
-                    .AddRange(order11, order12, order13, order21, order22, order31);
+                ((UDFSqlContext)context).Products.AddRange(
+                    product1,
+                    product2,
+                    product3,
+                    product4,
+                    product5
+                );
+                ((UDFSqlContext)context).Addresses.AddRange(
+                    address11,
+                    address12,
+                    address21,
+                    address31,
+                    address32,
+                    address41,
+                    address42,
+                    address43
+                );
+                ((UDFSqlContext)context).Customers.AddRange(
+                    customer1,
+                    customer2,
+                    customer3,
+                    customer4
+                );
+                ((UDFSqlContext)context).Orders.AddRange(
+                    order11,
+                    order12,
+                    order13,
+                    order21,
+                    order22,
+                    order31
+                );
             }
         }
 
@@ -670,9 +680,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             using var context = CreateContext();
 
-            var len = context
-                .Customers
-                .Count(c => UDFSqlContext.IsDateStatic(c.FirstName) == false);
+            var len = context.Customers.Count(
+                c => UDFSqlContext.IsDateStatic(c.FirstName) == false
+            );
 
             Assert.Equal(4, len);
         }
@@ -683,8 +693,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             using var context = CreateContext();
             var customerId = 3;
 
-            var len = context
-                .Customers
+            var len = context.Customers
                 .Where(c => c.Id == customerId)
                 .Select(c => UDFSqlContext.MyCustomLengthStatic(c.LastName))
                 .Single();
@@ -719,8 +728,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             using var context = CreateContext();
             var customerId = 1;
 
-            var custs = context
-                .Customers
+            var custs = context.Customers
                 .Select(c => UDFSqlContext.CustomerOrderCountStatic(customerId))
                 .ToList();
 
@@ -1203,8 +1211,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             using var context = CreateContext();
 
-            var result = context
-                .Orders
+            var result = context.Orders
                 .OrderBy(o => o.Id)
                 .Select(o => UDFSqlContext.IdentityString(o.Customer.FirstName))
                 .FirstOrDefault();
@@ -1217,8 +1224,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             using var context = CreateContext();
 
-            var result = context
-                .Customers
+            var result = context.Customers
                 .OrderBy(c => c.Id)
                 .Where(c => UDFSqlContext.IdentityString(c.FirstName) != null)
                 .ToList();
@@ -1231,8 +1237,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             using var context = CreateContext();
 
-            var result = context
-                .Customers
+            var result = context.Customers
                 .OrderBy(c => c.Id)
                 .Where(c => UDFSqlContext.IdentityStringPropagateNull(c.FirstName) != null)
                 .ToList();
@@ -1245,8 +1250,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             using var context = CreateContext();
 
-            var result = context
-                .Customers
+            var result = context.Customers
                 .OrderBy(c => c.Id)
                 .Where(
                     c =>
@@ -1263,8 +1267,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             using var context = CreateContext();
 
-            var result = context
-                .Customers
+            var result = context.Customers
                 .OrderBy(c => c.Id)
                 .Where(c => context.StringLength(c.FirstName) != context.StringLength(c.LastName))
                 .ToList();
@@ -1277,9 +1280,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             using var context = CreateContext();
 
-            var len = context
-                .Customers
-                .Count(c => c.LastName == UDFSqlContext.GetSqlFragmentStatic());
+            var len = context.Customers.Count(
+                c => c.LastName == UDFSqlContext.GetSqlFragmentStatic()
+            );
 
             Assert.Equal(1, len);
         }
@@ -1288,8 +1291,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Scalar_Function_with_InExpression_translation()
         {
             using var context = CreateContext();
-            var query = context
-                .Customers
+            var query = context.Customers
                 .Where(c => UDFSqlContext.IsABC(c.FirstName.Substring(0, 1)))
                 .ToList();
 
@@ -1300,8 +1302,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Scalar_Function_with_nested_InExpression_translation()
         {
             using var context = CreateContext();
-            var query = context
-                .Customers
+            var query = context.Customers
                 .Where(c => UDFSqlContext.IsOrIsNotABC(c.FirstName.Substring(0, 1)))
                 .ToList();
 
@@ -1346,8 +1347,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             using var context = CreateContext();
             var customerId = 3;
 
-            var len = context
-                .Customers
+            var len = context.Customers
                 .Where(c => c.Id == customerId)
                 .Select(c => context.MyCustomLengthInstance(c.LastName))
                 .Single();
@@ -1382,8 +1382,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             using var context = CreateContext();
             var customerId = 1;
 
-            var custs = context
-                .Customers
+            var custs = context.Customers
                 .Select(c => context.CustomerOrderCountInstance(customerId))
                 .ToList();
 
@@ -2005,20 +2004,19 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             using (var context = CreateContext())
             {
-                var message =
-                    Assert
-                        .Throws<InvalidOperationException>(
-                            () =>
-                                (
-                                    from c in context.Customers
-                                    select new
-                                    {
-                                        c.Id,
-                                        Prods = context.GetTopTwoSellingProducts().ToList(),
-                                    }
-                                ).ToList()
-                        )
-                        .Message;
+                var message = Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            (
+                                from c in context.Customers
+                                select new
+                                {
+                                    c.Id,
+                                    Prods = context.GetTopTwoSellingProducts().ToList(),
+                                }
+                            ).ToList()
+                    )
+                    .Message;
 
                 Assert.Equal(
                     RelationalStrings.InsufficientInformationToIdentifyElementOfCollectionJoin,
@@ -2136,37 +2134,34 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             using (var context = CreateContext())
             {
-                var message =
-                    Assert
-                        .Throws<InvalidOperationException>(
-                            () =>
-                                (
-                                    from c in context.Customers
-                                    select new
-                                    {
-                                        c.Id,
-                                        OrderCountYear = context
-                                            .GetOrdersWithMultipleProducts(c.Id)
-                                            .Where(o => o.OrderDate.Day == 21)
-                                            .Select(
-                                                o =>
-                                                    new
-                                                    {
-                                                        OrderCountYearNested = context
-                                                            .GetOrdersWithMultipleProducts(
-                                                                o.CustomerId
-                                                            )
-                                                            .ToList(),
-                                                        Prods = context
-                                                            .GetTopTwoSellingProducts()
-                                                            .ToList(),
-                                                    }
-                                            )
-                                            .ToList()
-                                    }
-                                ).ToList()
-                        )
-                        .Message;
+                var message = Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            (
+                                from c in context.Customers
+                                select new
+                                {
+                                    c.Id,
+                                    OrderCountYear = context
+                                        .GetOrdersWithMultipleProducts(c.Id)
+                                        .Where(o => o.OrderDate.Day == 21)
+                                        .Select(
+                                            o =>
+                                                new
+                                                {
+                                                    OrderCountYearNested = context
+                                                        .GetOrdersWithMultipleProducts(o.CustomerId)
+                                                        .ToList(),
+                                                    Prods = context
+                                                        .GetTopTwoSellingProducts()
+                                                        .ToList(),
+                                                }
+                                        )
+                                        .ToList()
+                                }
+                            ).ToList()
+                    )
+                    .Message;
 
                 Assert.Equal(
                     RelationalStrings.InsufficientInformationToIdentifyElementOfCollectionJoin,
@@ -2180,27 +2175,24 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             using (var context = CreateContext())
             {
-                var message =
-                    Assert
-                        .Throws<InvalidOperationException>(
-                            () =>
-                                (
-                                    from c in context.Customers
-                                    select new
-                                    {
-                                        c.Id,
-                                        Addresses = c.Addresses
-                                            .Where(a => a.State == "NY")
-                                            .ToList(),
-                                        Prods = context
-                                            .GetTopTwoSellingProducts()
-                                            .Where(p => p.AmountSold == 249)
-                                            .Select(p => p.ProductId)
-                                            .ToList()
-                                    }
-                                ).ToList()
-                        )
-                        .Message;
+                var message = Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            (
+                                from c in context.Customers
+                                select new
+                                {
+                                    c.Id,
+                                    Addresses = c.Addresses.Where(a => a.State == "NY").ToList(),
+                                    Prods = context
+                                        .GetTopTwoSellingProducts()
+                                        .Where(p => p.AmountSold == 249)
+                                        .Select(p => p.ProductId)
+                                        .ToList()
+                                }
+                            ).ToList()
+                    )
+                    .Message;
 
                 Assert.Equal(
                     RelationalStrings.InsufficientInformationToIdentifyElementOfCollectionJoin,
@@ -2214,23 +2206,22 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             using (var context = CreateContext())
             {
-                var message =
-                    Assert
-                        .Throws<InvalidOperationException>(
-                            () =>
-                                (
-                                    from c in context.Customers
-                                    select new
-                                    {
-                                        c.Id,
-                                        Prods = context
-                                            .GetTopTwoSellingProducts()
-                                            .Select(p => p.ProductId)
-                                            .ToList(),
-                                    }
-                                ).ToList()
-                        )
-                        .Message;
+                var message = Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            (
+                                from c in context.Customers
+                                select new
+                                {
+                                    c.Id,
+                                    Prods = context
+                                        .GetTopTwoSellingProducts()
+                                        .Select(p => p.ProductId)
+                                        .ToList(),
+                                }
+                            ).ToList()
+                    )
+                    .Message;
 
                 Assert.Equal(
                     RelationalStrings.InsufficientInformationToIdentifyElementOfCollectionJoin,
@@ -2245,24 +2236,23 @@ namespace Microsoft.EntityFrameworkCore.Query
             using (var context = CreateContext())
             {
                 var amount = 27;
-                var message =
-                    Assert
-                        .Throws<InvalidOperationException>(
-                            () =>
-                                (
-                                    from c in context.Customers
-                                    select new
-                                    {
-                                        c.Id,
-                                        Prods = context
-                                            .GetTopTwoSellingProducts()
-                                            .Where(p => p.AmountSold == amount)
-                                            .Select(p => p.ProductId)
-                                            .ToList(),
-                                    }
-                                ).ToList()
-                        )
-                        .Message;
+                var message = Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            (
+                                from c in context.Customers
+                                select new
+                                {
+                                    c.Id,
+                                    Prods = context
+                                        .GetTopTwoSellingProducts()
+                                        .Where(p => p.AmountSold == amount)
+                                        .Select(p => p.ProductId)
+                                        .ToList(),
+                                }
+                            ).ToList()
+                    )
+                    .Message;
 
                 Assert.Equal(
                     RelationalStrings.InsufficientInformationToIdentifyElementOfCollectionJoin,
@@ -2703,8 +2693,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 var expected = (
                     from a in context.Addresses.ToList()
-                    from r in context
-                        .Orders
+                    from r in context.Orders
                         .ToList()
                         .Where(
                             x =>

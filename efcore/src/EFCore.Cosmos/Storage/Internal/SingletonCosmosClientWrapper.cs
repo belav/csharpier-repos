@@ -77,20 +77,23 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
 
             if (options.GatewayModeMaxConnectionLimit != null)
             {
-                configuration.GatewayModeMaxConnectionLimit =
-                    options.GatewayModeMaxConnectionLimit.Value;
+                configuration.GatewayModeMaxConnectionLimit = options
+                    .GatewayModeMaxConnectionLimit
+                    .Value;
             }
 
             if (options.MaxTcpConnectionsPerEndpoint != null)
             {
-                configuration.MaxTcpConnectionsPerEndpoint =
-                    options.MaxTcpConnectionsPerEndpoint.Value;
+                configuration.MaxTcpConnectionsPerEndpoint = options
+                    .MaxTcpConnectionsPerEndpoint
+                    .Value;
             }
 
             if (options.MaxRequestsPerTcpConnection != null)
             {
-                configuration.MaxRequestsPerTcpConnection =
-                    options.MaxRequestsPerTcpConnection.Value;
+                configuration.MaxRequestsPerTcpConnection = options
+                    .MaxRequestsPerTcpConnection
+                    .Value;
             }
 
             if (options.HttpClientFactory != null)

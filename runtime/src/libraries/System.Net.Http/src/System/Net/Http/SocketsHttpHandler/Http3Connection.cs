@@ -90,9 +90,8 @@ namespace System.Net.Http
                       CultureInfo.InvariantCulture,
                       $"{authority.IdnHost}:{authority.Port}"
                   );
-            _altUsedEncodedHeader = QPack
-                .QPackEncoder
-                .EncodeLiteralHeaderFieldWithoutNameReferenceToArray(
+            _altUsedEncodedHeader =
+                QPack.QPackEncoder.EncodeLiteralHeaderFieldWithoutNameReferenceToArray(
                     KnownHeaders.AltUsed.Name,
                     altUsedValue
                 );
@@ -400,15 +399,13 @@ namespace System.Net.Http
             string message,
             [CallerMemberName] string? memberName = null
         ) =>
-            NetEventSource
-                .Log
-                .HandlerMessage(
-                    _pool?.GetHashCode() ?? 0, // pool ID
-                    GetHashCode(), // connection ID
-                    (int)streamId, // stream ID
-                    memberName, // method name
-                    message
-                ); // message
+            NetEventSource.Log.HandlerMessage(
+                _pool?.GetHashCode() ?? 0, // pool ID
+                GetHashCode(), // connection ID
+                (int)streamId, // stream ID
+                memberName, // method name
+                message
+            ); // message
 
         private async Task SendSettingsAsync()
         {

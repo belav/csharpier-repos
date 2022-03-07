@@ -406,12 +406,11 @@ WHERE [g0].[Discriminator] = N'Officer'"
                 .Where(g => g.HasSoulPatch)
                 .Concat(ctx.Set<Gear>().TemporalAsOf(date2));
 
-            var message =
-                (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => async ? query.ToListAsync() : Task.FromResult(query.ToList())
-                    )
-                ).Message;
+            var message = (
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => async ? query.ToListAsync() : Task.FromResult(query.ToList())
+                )
+            ).Message;
 
             Assert.Equal(
                 SqlServerStrings.TemporalSetOperationOnMismatchedSources(nameof(Gear)),

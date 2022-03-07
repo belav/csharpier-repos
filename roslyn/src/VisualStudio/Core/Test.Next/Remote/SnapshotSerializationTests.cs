@@ -51,8 +51,7 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
 
         private static Workspace CreateWorkspace(Type[] additionalParts = null) =>
             new AdhocWorkspace(
-                FeaturesTestCompositions
-                    .Features
+                FeaturesTestCompositions.Features
                     .AddParts(additionalParts)
                     .WithTestHostParts(TestHost.OutOfProcess)
                     .GetHostServices()
@@ -65,9 +64,7 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
                 LanguageNames.CSharp,
                 LanguageNames.VisualBasic
             );
-            var solutionOptions = solution
-                .Workspace
-                .Services
+            var solutionOptions = solution.Workspace.Services
                 .GetRequiredService<IOptionService>()
                 .GetSerializableOptionsSnapshot(languages);
             solution = solution.WithOptions(solutionOptions);
@@ -77,37 +74,34 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
             var document1 = project1.AddDocument("Document1", SourceText.From(csCode));
 
             var vbCode = "Class B\r\nEnd Class";
-            var project2 = document1
-                .Project
-                .Solution
-                .AddProject("Project2", "Project2.dll", LanguageNames.VisualBasic);
+            var project2 = document1.Project.Solution.AddProject(
+                "Project2",
+                "Project2.dll",
+                LanguageNames.VisualBasic
+            );
             var document2 = project2.AddDocument("Document2", SourceText.From(vbCode));
 
-            solution =
-                document2
-                    .Project
-                    .Solution
-                    .GetRequiredProject(project1.Id)
-                    .AddProjectReference(
-                        new ProjectReference(project2.Id, ImmutableArray.Create("test"))
+            solution = document2.Project.Solution
+                .GetRequiredProject(project1.Id)
+                .AddProjectReference(
+                    new ProjectReference(project2.Id, ImmutableArray.Create("test"))
+                )
+                .AddMetadataReference(
+                    MetadataReference.CreateFromFile(typeof(object).Assembly.Location)
+                )
+                .AddAnalyzerReference(
+                    new AnalyzerFileReference(
+                        Path.Combine(TempRoot.Root, "path1"),
+                        new TestAnalyzerAssemblyLoader()
                     )
-                    .AddMetadataReference(
-                        MetadataReference.CreateFromFile(typeof(object).Assembly.Location)
-                    )
-                    .AddAnalyzerReference(
-                        new AnalyzerFileReference(
-                            Path.Combine(TempRoot.Root, "path1"),
-                            new TestAnalyzerAssemblyLoader()
-                        )
-                    )
-                    .AddAdditionalDocument(
-                        "Additional",
-                        SourceText.From("hello"),
-                        ImmutableArray.Create("test"),
-                        @".\Add"
-                    )
-                    .Project
-                    .Solution;
+                )
+                .AddAdditionalDocument(
+                    "Additional",
+                    SourceText.From("hello"),
+                    ImmutableArray.Create("test"),
+                    @".\Add"
+                )
+                .Project.Solution;
 
             return solution
                 .WithAnalyzerReferences(
@@ -143,13 +137,11 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
 
             var validator = new SerializationValidator(workspace.Services);
 
-            using var scope = await validator
-                .AssetStorage
+            using var scope = await validator.AssetStorage
                 .StoreAssetsAsync(solution, CancellationToken.None)
                 .ConfigureAwait(false);
             var checksum = scope.SolutionInfo.SolutionChecksum;
-            var solutionSyncObject = await validator
-                .AssetStorage
+            var solutionSyncObject = await validator.AssetStorage
                 .GetAssetAsync(scope.SolutionInfo.ScopeId, checksum, CancellationToken.None)
                 .ConfigureAwait(false);
 
@@ -173,8 +165,7 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
                 )
                 .ConfigureAwait(false);
 
-            var projectsSyncObject = await validator
-                .AssetStorage
+            var projectsSyncObject = await validator.AssetStorage
                 .GetAssetAsync(
                     scope.SolutionInfo.ScopeId,
                     solutionObject.Projects.Checksum,
@@ -195,8 +186,7 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
             var solution = workspace.CurrentSolution;
 
             var validator = new SerializationValidator(workspace.Services);
-            using var scope = await validator
-                .AssetStorage
+            using var scope = await validator.AssetStorage
                 .StoreAssetsAsync(solution, CancellationToken.None)
                 .ConfigureAwait(false);
             await validator
@@ -216,13 +206,11 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
 
             var validator = new SerializationValidator(workspace.Services);
 
-            using var scope = await validator
-                .AssetStorage
+            using var scope = await validator.AssetStorage
                 .StoreAssetsAsync(project.Solution, CancellationToken.None)
                 .ConfigureAwait(false);
             var checksum = scope.SolutionInfo.SolutionChecksum;
-            var solutionSyncObject = await validator
-                .AssetStorage
+            var solutionSyncObject = await validator.AssetStorage
                 .GetAssetAsync(scope.SolutionInfo.ScopeId, checksum, CancellationToken.None)
                 .ConfigureAwait(false);
 
@@ -243,8 +231,7 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
                 WellKnownSynchronizationKind.OptionSet
             );
 
-            var projectSyncObject = await validator
-                .AssetStorage
+            var projectSyncObject = await validator.AssetStorage
                 .GetAssetAsync(
                     scope.SolutionInfo.ScopeId,
                     solutionObject.Projects.Checksum,
@@ -272,14 +259,15 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
         public async Task CreateSolutionSnapshotId_Project_Serialization()
         {
             using var workspace = CreateWorkspace();
-            var project = workspace
-                .CurrentSolution
-                .AddProject("Project", "Project.dll", LanguageNames.CSharp);
+            var project = workspace.CurrentSolution.AddProject(
+                "Project",
+                "Project.dll",
+                LanguageNames.CSharp
+            );
 
             var validator = new SerializationValidator(workspace.Services);
 
-            using var snapshot = await validator
-                .AssetStorage
+            using var snapshot = await validator.AssetStorage
                 .StoreAssetsAsync(project.Solution, CancellationToken.None)
                 .ConfigureAwait(false);
             await validator
@@ -296,19 +284,16 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
             var code = "class A { }";
 
             using var workspace = CreateWorkspace();
-            var document = workspace
-                .CurrentSolution
+            var document = workspace.CurrentSolution
                 .AddProject("Project", "Project.dll", LanguageNames.CSharp)
                 .AddDocument("Document", SourceText.From(code));
 
             var validator = new SerializationValidator(workspace.Services);
 
-            using var scope = await validator
-                .AssetStorage
+            using var scope = await validator.AssetStorage
                 .StoreAssetsAsync(document.Project.Solution, CancellationToken.None)
                 .ConfigureAwait(false);
-            var syncObject = await validator
-                .AssetStorage
+            var syncObject = await validator.AssetStorage
                 .GetAssetAsync(
                     scope.SolutionInfo.ScopeId,
                     scope.SolutionInfo.SolutionChecksum,
@@ -367,8 +352,7 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
 
             var validator = new SerializationValidator(workspace.Services);
 
-            using var scope = await validator
-                .AssetStorage
+            using var scope = await validator.AssetStorage
                 .StoreAssetsAsync(document.Project.Solution, CancellationToken.None)
                 .ConfigureAwait(false);
             await validator
@@ -387,21 +371,17 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
 
             var firstProjectChecksum = await solution
                 .GetProject(solution.ProjectIds[0])
-                .State
-                .GetChecksumAsync(CancellationToken.None);
+                .State.GetChecksumAsync(CancellationToken.None);
             var secondProjectChecksum = await solution
                 .GetProject(solution.ProjectIds[1])
-                .State
-                .GetChecksumAsync(CancellationToken.None);
+                .State.GetChecksumAsync(CancellationToken.None);
 
             var validator = new SerializationValidator(workspace.Services);
 
-            using var scope = await validator
-                .AssetStorage
+            using var scope = await validator.AssetStorage
                 .StoreAssetsAsync(solution, CancellationToken.None)
                 .ConfigureAwait(false);
-            var syncObject = await validator
-                .AssetStorage
+            var syncObject = await validator.AssetStorage
                 .GetAssetAsync(
                     scope.SolutionInfo.ScopeId,
                     scope.SolutionInfo.SolutionChecksum,
@@ -467,8 +447,7 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
 
             var validator = new SerializationValidator(workspace.Services);
 
-            using var scope = await validator
-                .AssetStorage
+            using var scope = await validator.AssetStorage
                 .StoreAssetsAsync(solution, CancellationToken.None)
                 .ConfigureAwait(false);
             await validator
@@ -487,8 +466,7 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
 
             var validator = new SerializationValidator(workspace.Services);
 
-            using var scope = await validator
-                .AssetStorage
+            using var scope = await validator.AssetStorage
                 .StoreAssetsAsync(solution, CancellationToken.None)
                 .ConfigureAwait(false);
             var solutionObject = await validator.GetValueAsync<SolutionStateChecksums>(
@@ -505,8 +483,7 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
 
             var validator = new SerializationValidator(workspace.Services);
 
-            using var scope = await validator
-                .AssetStorage
+            using var scope = await validator.AssetStorage
                 .StoreAssetsAsync(solution, CancellationToken.None)
                 .ConfigureAwait(false);
             var solutionObject = await validator.GetValueAsync<SolutionStateChecksums>(
@@ -529,8 +506,7 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
             var validator = new SerializationValidator(workspace.Services);
 
             using (
-                var scope1 = await validator
-                    .AssetStorage
+                var scope1 = await validator.AssetStorage
                     .StoreAssetsAsync(solution, CancellationToken.None)
                     .ConfigureAwait(false)
             )
@@ -541,8 +517,7 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
             }
 
             using (
-                var scope2 = await validator
-                    .AssetStorage
+                var scope2 = await validator.AssetStorage
                     .StoreAssetsAsync(solution, CancellationToken.None)
                     .ConfigureAwait(false)
             )
@@ -584,8 +559,7 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
 
             var validator = new SerializationValidator(workspace.Services);
 
-            var scope1 = await validator
-                .AssetStorage
+            var scope1 = await validator.AssetStorage
                 .StoreAssetsAsync(solution, CancellationToken.None)
                 .ConfigureAwait(false);
 
@@ -596,8 +570,7 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
                 .ConfigureAwait(false);
 
             // create new snapshot from recovered solution
-            using var scope2 = await validator
-                .AssetStorage
+            using var scope2 = await validator.AssetStorage
                 .StoreAssetsAsync(recovered, CancellationToken.None)
                 .ConfigureAwait(false);
 
@@ -614,8 +587,7 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
             var roundtrip = await validator.GetSolutionAsync(scope2).ConfigureAwait(false);
 
             // create new snapshot from round tripped solution
-            using var scope3 = await validator
-                .AssetStorage
+            using var scope3 = await validator.AssetStorage
                 .StoreAssetsAsync(roundtrip, CancellationToken.None)
                 .ConfigureAwait(false);
             // verify asset created by rount trip solution is good
@@ -636,8 +608,7 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
 
             var validator = new SerializationValidator(workspace.Services);
 
-            var scope1 = await validator
-                .AssetStorage
+            var scope1 = await validator.AssetStorage
                 .StoreAssetsAsync(solution, CancellationToken.None)
                 .ConfigureAwait(false);
 
@@ -648,8 +619,7 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
                 .ConfigureAwait(false);
 
             // create new snapshot from recovered solution
-            using var scope2 = await validator
-                .AssetStorage
+            using var scope2 = await validator.AssetStorage
                 .StoreAssetsAsync(recovered, CancellationToken.None)
                 .ConfigureAwait(false);
 
@@ -667,8 +637,7 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
             var roundtrip = await validator.GetSolutionAsync(scope2).ConfigureAwait(false);
 
             // create new snapshot from round tripped solution
-            using var scope3 = await validator
-                .AssetStorage
+            using var scope3 = await validator.AssetStorage
                 .StoreAssetsAsync(roundtrip, CancellationToken.None)
                 .ConfigureAwait(false);
             // verify asset created by rount trip solution is good
@@ -684,14 +653,10 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
         [Fact]
         public async Task OptionSet_Serialization()
         {
-            using var workspace =
-                CreateWorkspace()
-                    .CurrentSolution
-                    .AddProject("Project1", "Project.dll", LanguageNames.CSharp)
-                    .Solution
-                    .AddProject("Project2", "Project2.dll", LanguageNames.VisualBasic)
-                    .Solution
-                    .Workspace;
+            using var workspace = CreateWorkspace().CurrentSolution
+                .AddProject("Project1", "Project.dll", LanguageNames.CSharp)
+                .Solution.AddProject("Project2", "Project2.dll", LanguageNames.VisualBasic)
+                .Solution.Workspace;
             await VerifyOptionSetsAsync(workspace, _ => { }).ConfigureAwait(false);
         }
 
@@ -716,31 +681,28 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
                 new CodeStyleOption2<bool>(true, NotificationOption2.Silent);
 
             workspace.TryApplyChanges(
-                workspace
-                    .CurrentSolution
-                    .WithOptions(
-                        workspace
-                            .Options
-                            .WithChangedOption(
-                                CodeStyleOptions2.QualifyFieldAccess,
-                                LanguageNames.CSharp,
-                                newQualifyFieldAccessValue
-                            )
-                            .WithChangedOption(
-                                CodeStyleOptions2.QualifyMethodAccess,
-                                LanguageNames.VisualBasic,
-                                newQualifyMethodAccessValue
-                            )
-                            .WithChangedOption(
-                                CSharpCodeStyleOptions.VarWhenTypeIsApparent,
-                                newVarWhenTypeIsApparentValue
-                            )
-                            .WithChangedOption(
-                                CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
-                                LanguageNames.VisualBasic,
-                                newPreferIntrinsicPredefinedTypeKeywordInMemberAccessValue
-                            )
-                    )
+                workspace.CurrentSolution.WithOptions(
+                    workspace.Options
+                        .WithChangedOption(
+                            CodeStyleOptions2.QualifyFieldAccess,
+                            LanguageNames.CSharp,
+                            newQualifyFieldAccessValue
+                        )
+                        .WithChangedOption(
+                            CodeStyleOptions2.QualifyMethodAccess,
+                            LanguageNames.VisualBasic,
+                            newQualifyMethodAccessValue
+                        )
+                        .WithChangedOption(
+                            CSharpCodeStyleOptions.VarWhenTypeIsApparent,
+                            newVarWhenTypeIsApparentValue
+                        )
+                        .WithChangedOption(
+                            CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
+                            LanguageNames.VisualBasic,
+                            newPreferIntrinsicPredefinedTypeKeywordInMemberAccessValue
+                        )
+                )
             );
 
             var validator = new SerializationValidator(workspace.Services);
@@ -917,9 +879,11 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
         public async Task SnapshotWithIdenticalAnalyzerFiles()
         {
             using var workspace = CreateWorkspace();
-            var project = workspace
-                .CurrentSolution
-                .AddProject("Project", "Project.dll", LanguageNames.CSharp);
+            var project = workspace.CurrentSolution.AddProject(
+                "Project",
+                "Project.dll",
+                LanguageNames.CSharp
+            );
 
             using var temp = new TempRoot();
             var dir = temp.CreateDirectory();
@@ -942,8 +906,7 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
             project = project.AddAnalyzerReferences(new[] { analyzer1, analyzer2 });
 
             var validator = new SerializationValidator(workspace.Services);
-            using var snapshot = await validator
-                .AssetStorage
+            using var snapshot = await validator.AssetStorage
                 .StoreAssetsAsync(project.Solution, CancellationToken.None)
                 .ConfigureAwait(false);
 
@@ -958,9 +921,11 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
         public async Task SnapshotWithMissingReferencesTest()
         {
             using var workspace = CreateWorkspace();
-            var project = workspace
-                .CurrentSolution
-                .AddProject("Project", "Project.dll", LanguageNames.CSharp);
+            var project = workspace.CurrentSolution.AddProject(
+                "Project",
+                "Project.dll",
+                LanguageNames.CSharp
+            );
 
             var metadata = new MissingMetadataReference();
             var analyzer = new AnalyzerFileReference(
@@ -973,8 +938,7 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
 
             var validator = new SerializationValidator(workspace.Services);
 
-            using var snapshot = await validator
-                .AssetStorage
+            using var snapshot = await validator.AssetStorage
                 .StoreAssetsAsync(project.Solution, CancellationToken.None)
                 .ConfigureAwait(false);
             // this shouldn't throw
@@ -987,14 +951,15 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
             using var workspace = CreateWorkspace(
                 new[] { typeof(NoCompilationLanguageServiceFactory) }
             );
-            var project = workspace
-                .CurrentSolution
-                .AddProject("Project", "Project.dll", NoCompilationConstants.LanguageName);
+            var project = workspace.CurrentSolution.AddProject(
+                "Project",
+                "Project.dll",
+                NoCompilationConstants.LanguageName
+            );
 
             var validator = new SerializationValidator(workspace.Services);
 
-            using var snapshot = await validator
-                .AssetStorage
+            using var snapshot = await validator.AssetStorage
                 .StoreAssetsAsync(project.Solution, CancellationToken.None)
                 .ConfigureAwait(false);
             // this shouldn't throw
@@ -1007,11 +972,9 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
             using var workspace = CreateWorkspace(
                 new[] { typeof(NoCompilationLanguageServiceFactory) }
             );
-            var project = workspace
-                .CurrentSolution
+            var project = workspace.CurrentSolution
                 .AddProject("Project", "Project.dll", NoCompilationConstants.LanguageName)
-                .Solution
-                .AddProject("Project2", "Project2.dll", LanguageNames.CSharp);
+                .Solution.AddProject("Project2", "Project2.dll", LanguageNames.CSharp);
             workspace.TryApplyChanges(project.Solution);
 
             await VerifyOptionSetsAsync(workspace, verifyOptionValues: _ => { });
@@ -1020,16 +983,11 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
         [Fact]
         public async Task EmptyAssetChecksumTest()
         {
-            var document = CreateWorkspace()
-                .CurrentSolution
+            var document = CreateWorkspace().CurrentSolution
                 .AddProject("empty", "empty", LanguageNames.CSharp)
                 .AddDocument("empty", SourceText.From(""));
-            var serializer = document
-                .Project
-                .Solution
-                .Workspace
-                .Services
-                .GetService<ISerializerService>();
+            var serializer =
+                document.Project.Solution.Workspace.Services.GetService<ISerializerService>();
 
             var source = serializer.CreateChecksum(
                 await document.GetTextAsync().ConfigureAwait(false),
@@ -1055,17 +1013,18 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
         [Fact]
         public async Task VBParseOptionsInCompilationOptions()
         {
-            var project = CreateWorkspace()
-                .CurrentSolution
-                .AddProject("empty", "empty", LanguageNames.VisualBasic);
+            var project = CreateWorkspace().CurrentSolution.AddProject(
+                "empty",
+                "empty",
+                LanguageNames.VisualBasic
+            );
             project = project.WithCompilationOptions(
                 (
                     (VisualBasic.VisualBasicCompilationOptions)project.CompilationOptions
                 ).WithParseOptions((VisualBasic.VisualBasicParseOptions)project.ParseOptions)
             );
 
-            var checksum = await project
-                .State
+            var checksum = await project.State
                 .GetChecksumAsync(CancellationToken.None)
                 .ConfigureAwait(false);
 
@@ -1098,23 +1057,21 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
             );
 
             using var workspace = CreateWorkspace();
-            var solution =
-                workspace
-                    .CurrentSolution
-                    .AddProject("Project", "Project.dll", LanguageNames.CSharp)
-                    .AddMetadataReference(MetadataReference.CreateFromFile(tempCorlib.Path))
-                    .Solution;
+            var solution = workspace.CurrentSolution
+                .AddProject("Project", "Project.dll", LanguageNames.CSharp)
+                .AddMetadataReference(MetadataReference.CreateFromFile(tempCorlib.Path))
+                .Solution;
 
             var validator = new SerializationValidator(workspace.Services);
 
-            using var scope = await validator
-                .AssetStorage
-                .StoreAssetsAsync(solution, CancellationToken.None);
+            using var scope = await validator.AssetStorage.StoreAssetsAsync(
+                solution,
+                CancellationToken.None
+            );
             // recover solution from given snapshot
             var recovered = await validator.GetSolutionAsync(scope);
 
-            var compilation = await recovered
-                .Projects
+            var compilation = await recovered.Projects
                 .First()
                 .GetCompilationAsync(CancellationToken.None);
             var objectType = compilation.GetTypeByMetadataName("System.Object");
@@ -1180,17 +1137,13 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
         [Fact]
         public void TestCompilationOptions_NullableAndImport()
         {
-            var csharpOptions = CSharp
-                .CSharpCompilation
+            var csharpOptions = CSharp.CSharpCompilation
                 .Create("dummy")
-                .Options
-                .WithNullableContextOptions(NullableContextOptions.Warnings)
+                .Options.WithNullableContextOptions(NullableContextOptions.Warnings)
                 .WithMetadataImportOptions(MetadataImportOptions.All);
-            var vbOptions = VisualBasic
-                .VisualBasicCompilation
+            var vbOptions = VisualBasic.VisualBasicCompilation
                 .Create("dummy")
-                .Options
-                .WithMetadataImportOptions(MetadataImportOptions.Internal);
+                .Options.WithMetadataImportOptions(MetadataImportOptions.Internal);
 
             using var workspace = CreateWorkspace();
             var serializer = workspace.Services.GetService<ISerializerService>();
@@ -1240,8 +1193,7 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
 
             var validator = new SerializationValidator(workspace.Services);
 
-            using var scope = await validator
-                .AssetStorage
+            using var scope = await validator.AssetStorage
                 .StoreAssetsAsync(solution, CancellationToken.None)
                 .ConfigureAwait(false);
             var checksum = scope.SolutionInfo.SolutionChecksum;
@@ -1267,8 +1219,7 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
             verifyOptionValues(recoveredSolution.Options);
 
             // checksum for recovered solution should be the same.
-            using var recoveredScope = await validator
-                .AssetStorage
+            using var recoveredScope = await validator.AssetStorage
                 .StoreAssetsAsync(recoveredSolution, CancellationToken.None)
                 .ConfigureAwait(false);
             var recoveredChecksum = recoveredScope.SolutionInfo.SolutionChecksum;

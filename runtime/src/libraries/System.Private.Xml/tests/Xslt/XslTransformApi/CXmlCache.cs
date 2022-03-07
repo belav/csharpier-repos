@@ -770,8 +770,9 @@ public class CXmlCache
         {
             if (((XmlValidatingReader)rXmlReader).Reader is XmlTextReader)
             {
-                _eWhitespaceMode =
-                    ((XmlTextReader)((XmlValidatingReader)rXmlReader).Reader).WhitespaceHandling;
+                _eWhitespaceMode = (
+                    (XmlTextReader)((XmlValidatingReader)rXmlReader).Reader
+                ).WhitespaceHandling;
             }
             else
             {

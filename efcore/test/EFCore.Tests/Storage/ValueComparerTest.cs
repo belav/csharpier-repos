@@ -606,11 +606,13 @@ namespace Microsoft.EntityFrameworkCore.Storage
             public byte[] Value1 { get; }
         }
 
-        private static readonly MethodInfo _getValue0Method =
-            typeof(DeepBinary).GetProperty(nameof(DeepBinary.Value0)).GetMethod;
+        private static readonly MethodInfo _getValue0Method = typeof(DeepBinary)
+            .GetProperty(nameof(DeepBinary.Value0))
+            .GetMethod;
 
-        private static readonly MethodInfo _getValue1Method =
-            typeof(DeepBinary).GetProperty(nameof(DeepBinary.Value1)).GetMethod;
+        private static readonly MethodInfo _getValue1Method = typeof(DeepBinary)
+            .GetProperty(nameof(DeepBinary.Value1))
+            .GetMethod;
 
         [ConditionalFact]
         public void Can_create_new_comparer_composing_existing_comparers()

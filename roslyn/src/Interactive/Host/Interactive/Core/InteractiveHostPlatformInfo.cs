@@ -63,8 +63,9 @@ namespace Microsoft.CodeAnalysis.Interactive
             );
 
         private static bool IsNotHostAssembly(string path) =>
-            !StringComparer
-                .OrdinalIgnoreCase
-                .Equals(PathUtilities.GetDirectoryName(path), s_hostDirectory);
+            !StringComparer.OrdinalIgnoreCase.Equals(
+                PathUtilities.GetDirectoryName(path),
+                s_hostDirectory
+            );
     }
 }

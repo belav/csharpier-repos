@@ -42,8 +42,9 @@ namespace Internal.Cryptography.Pal
             )
             {
                 Debug.Assert(certificatePal.HasPrivateKey);
-                SafeKeyHandle? privateKey =
-                    ((AndroidCertificatePal)certificatePal).PrivateKeyHandle;
+                SafeKeyHandle? privateKey = (
+                    (AndroidCertificatePal)certificatePal
+                ).PrivateKeyHandle;
 
                 AsymmetricAlgorithm algorithm;
                 switch (privateKey)

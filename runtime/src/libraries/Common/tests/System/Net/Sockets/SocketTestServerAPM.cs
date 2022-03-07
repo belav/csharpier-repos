@@ -83,16 +83,14 @@ namespace System.Net.Sockets.Tests
             ServerSocketState state = new ServerSocketState(client, _receiveBufferSize);
             try
             {
-                state
-                    .Socket
-                    .BeginReceive(
-                        state.TransferBuffer,
-                        0,
-                        state.TransferBuffer.Length,
-                        SocketFlags.None,
-                        OnReceive,
-                        state
-                    );
+                state.Socket.BeginReceive(
+                    state.TransferBuffer,
+                    0,
+                    state.TransferBuffer.Length,
+                    SocketFlags.None,
+                    OnReceive,
+                    state
+                );
             }
             catch (SocketException) { }
 
@@ -131,26 +129,22 @@ namespace System.Net.Sockets.Tests
 
                 ServerSocketState sendState = new ServerSocketState(recvState, bytesReceived);
 
-                sendState
-                    .Socket
-                    .BeginSend(
-                        sendState.TransferBuffer,
-                        0,
-                        bytesReceived,
-                        SocketFlags.None,
-                        OnSend,
-                        sendState
-                    );
-                recvState
-                    .Socket
-                    .BeginReceive(
-                        recvState.TransferBuffer,
-                        0,
-                        recvState.TransferBuffer.Length,
-                        SocketFlags.None,
-                        OnReceive,
-                        recvState
-                    );
+                sendState.Socket.BeginSend(
+                    sendState.TransferBuffer,
+                    0,
+                    bytesReceived,
+                    SocketFlags.None,
+                    OnSend,
+                    sendState
+                );
+                recvState.Socket.BeginReceive(
+                    recvState.TransferBuffer,
+                    0,
+                    recvState.TransferBuffer.Length,
+                    SocketFlags.None,
+                    OnReceive,
+                    recvState
+                );
             }
             catch (SocketException)
             {

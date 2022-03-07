@@ -35,9 +35,10 @@ namespace System.Transactions
                 lock (ClassSyncObject)
                 {
                     s_distributedTransactionStartedDelegate =
-                        (TransactionStartedEventHandler?)System
-                            .Delegate
-                            .Combine(s_distributedTransactionStartedDelegate, value);
+                        (TransactionStartedEventHandler?)System.Delegate.Combine(
+                            s_distributedTransactionStartedDelegate,
+                            value
+                        );
                     if (value != null)
                     {
                         ProcessExistingTransactions(value);
@@ -49,9 +50,10 @@ namespace System.Transactions
                 lock (ClassSyncObject)
                 {
                     s_distributedTransactionStartedDelegate =
-                        (TransactionStartedEventHandler?)System
-                            .Delegate
-                            .Remove(s_distributedTransactionStartedDelegate, value);
+                        (TransactionStartedEventHandler?)System.Delegate.Remove(
+                            s_distributedTransactionStartedDelegate,
+                            value
+                        );
                 }
             }
         }

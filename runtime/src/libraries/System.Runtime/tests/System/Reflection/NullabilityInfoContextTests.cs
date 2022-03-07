@@ -840,9 +840,10 @@ namespace System.Reflection.Tests
         public void VerifyIsSupportedThrows()
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
-            options
-                .RuntimeConfigurationOptions
-                .Add("System.Reflection.NullabilityInfoContext.IsSupported", "false");
+            options.RuntimeConfigurationOptions.Add(
+                "System.Reflection.NullabilityInfoContext.IsSupported",
+                "false"
+            );
 
             using RemoteInvokeHandle remoteHandle = RemoteExecutor.Invoke(
                 () =>
@@ -875,9 +876,10 @@ namespace System.Reflection.Tests
         public void VerifyIsSupportedWorks()
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
-            options
-                .RuntimeConfigurationOptions
-                .Add("System.Reflection.NullabilityInfoContext.IsSupported", "true");
+            options.RuntimeConfigurationOptions.Add(
+                "System.Reflection.NullabilityInfoContext.IsSupported",
+                "true"
+            );
 
             using RemoteInvokeHandle remoteHandle = RemoteExecutor.Invoke(
                 () =>

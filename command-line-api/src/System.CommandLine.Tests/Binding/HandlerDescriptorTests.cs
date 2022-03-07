@@ -26,8 +26,7 @@ namespace System.CommandLine.Tests.Binding
 
                 var descriptor = HandlerDescriptor.FromMethodInfo(method);
 
-                descriptor
-                    .ParameterDescriptors
+                descriptor.ParameterDescriptors
                     .Select(p => p.ValueName)
                     .Should()
                     .BeEquivalentSequenceTo("value");
@@ -45,8 +44,7 @@ namespace System.CommandLine.Tests.Binding
 
                 var descriptor = HandlerDescriptor.FromMethodInfo(method);
 
-                descriptor
-                    .ParameterDescriptors
+                descriptor.ParameterDescriptors
                     .Select(p => p.ValueType)
                     .Should()
                     .BeEquivalentSequenceTo(parameterType);
@@ -67,8 +65,7 @@ namespace System.CommandLine.Tests.Binding
 
                 var descriptor = HandlerDescriptor.FromMethodInfo(method);
 
-                descriptor
-                    .ParameterDescriptors
+                descriptor.ParameterDescriptors
                     .Select(p => p.ValueName)
                     .Should()
                     .BeEquivalentSequenceTo("value");
@@ -86,8 +83,7 @@ namespace System.CommandLine.Tests.Binding
 
                 var descriptor = HandlerDescriptor.FromMethodInfo(method);
 
-                descriptor
-                    .ParameterDescriptors
+                descriptor.ParameterDescriptors
                     .Select(p => p.ValueType)
                     .Should()
                     .BeEquivalentSequenceTo(parameterType);

@@ -644,9 +644,9 @@ namespace System.Net.Http
             {
                 if (HttpTelemetry.Log.IsEnabled())
                 {
-                    HttpTelemetry
-                        .Log
-                        .Http11RequestLeftQueue(stopwatch.GetElapsedTime().TotalMilliseconds);
+                    HttpTelemetry.Log.Http11RequestLeftQueue(
+                        stopwatch.GetElapsedTime().TotalMilliseconds
+                    );
                 }
             }
         }
@@ -939,9 +939,9 @@ namespace System.Net.Http
             {
                 if (HttpTelemetry.Log.IsEnabled())
                 {
-                    HttpTelemetry
-                        .Log
-                        .Http20RequestLeftQueue(stopwatch.GetElapsedTime().TotalMilliseconds);
+                    HttpTelemetry.Log.Http20RequestLeftQueue(
+                        stopwatch.GetElapsedTime().TotalMilliseconds
+                    );
                 }
             }
         }
@@ -1129,12 +1129,10 @@ namespace System.Net.Http
         {
             if (
                 _altSvcEnabled
-                && response
-                    .Headers
-                    .TryGetValues(
-                        KnownHeaders.AltSvc.Descriptor,
-                        out IEnumerable<string>? altSvcHeaderValues
-                    )
+                && response.Headers.TryGetValues(
+                    KnownHeaders.AltSvc.Descriptor,
+                    out IEnumerable<string>? altSvcHeaderValues
+                )
             )
             {
                 HandleAltSvc(altSvcHeaderValues, response.Headers.Age);
@@ -1339,14 +1337,12 @@ namespace System.Net.Http
                 int parseIdx = 0;
 
                 if (
-                    AltSvcHeaderParser
-                        .Parser
-                        .TryParseValue(
-                            altSvcHeaderValue,
-                            null,
-                            ref parseIdx,
-                            out object? parsedValue
-                        )
+                    AltSvcHeaderParser.Parser.TryParseValue(
+                        altSvcHeaderValue,
+                        null,
+                        ref parseIdx,
+                        out object? parsedValue
+                    )
                 )
                 {
                     var value = (AltSvcHeaderValue?)parsedValue;
@@ -2019,9 +2015,10 @@ namespace System.Net.Http
                 )
             )
             {
-                tunnelRequest
-                    .Headers
-                    .TryAddWithoutValidation(HttpKnownHeaderNames.UserAgent, values);
+                tunnelRequest.Headers.TryAddWithoutValidation(
+                    HttpKnownHeaderNames.UserAgent,
+                    values
+                );
             }
 
             HttpResponseMessage tunnelResponse = await _poolManager
@@ -2536,8 +2533,9 @@ namespace System.Net.Http
         public bool CleanCacheAndDisposeIfUnused()
         {
             TimeSpan pooledConnectionLifetime = _poolManager.Settings._pooledConnectionLifetime;
-            TimeSpan pooledConnectionIdleTimeout =
-                _poolManager.Settings._pooledConnectionIdleTimeout;
+            TimeSpan pooledConnectionIdleTimeout = _poolManager
+                .Settings
+                ._pooledConnectionIdleTimeout;
 
             List<HttpConnectionBase>? toDispose = null;
 
@@ -2768,15 +2766,13 @@ namespace System.Net.Http
             );
 
         private void Trace(string? message, [CallerMemberName] string? memberName = null) =>
-            NetEventSource
-                .Log
-                .HandlerMessage(
-                    GetHashCode(), // pool ID
-                    0, // connection ID
-                    0, // request ID
-                    memberName, // method name
-                    message
-                ); // message
+            NetEventSource.Log.HandlerMessage(
+                GetHashCode(), // pool ID
+                0, // connection ID
+                0, // request ID
+                memberName, // method name
+                message
+            ); // message
 
         private struct RequestQueue<T>
         {

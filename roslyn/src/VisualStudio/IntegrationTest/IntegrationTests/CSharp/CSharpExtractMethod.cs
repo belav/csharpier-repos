@@ -84,15 +84,12 @@ public class Program
             );
 
             VisualStudio.Editor.SendKeys("SayHello", VirtualKey.Enter);
-            VisualStudio
-                .Editor
-                .Verify
-                .TextContains(
-                    @"private static void SayHello()
+            VisualStudio.Editor.Verify.TextContains(
+                @"private static void SayHello()
     {
         Console.WriteLine(""Hello World"");
     }"
-                );
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
@@ -101,10 +98,11 @@ public class Program
             VisualStudio.Editor.SetText(TestSource);
             VisualStudio.Editor.PlaceCaret("a = 5", charsOffset: -1);
             VisualStudio.Editor.PlaceCaret("a * b", charsOffset: 1, extendSelection: true);
-            VisualStudio
-                .Editor
-                .Verify
-                .CodeAction("Extract method", applyFix: true, blockUntilComplete: true);
+            VisualStudio.Editor.Verify.CodeAction(
+                "Extract method",
+                applyFix: true,
+                blockUntilComplete: true
+            );
 
             var expectedMarkup =
                 @"

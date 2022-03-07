@@ -61,16 +61,14 @@ namespace Internal.Cryptography.Pal
             ICertificatePal? certificatePal
         )
         {
-            int algId =
-                Interop
-                    .Crypt32
-                    .FindOidInfo(
-                        CryptOidInfoKeyType.CRYPT_OID_INFO_OID_KEY,
-                        oid.Value!,
-                        OidGroup.PublicKeyAlgorithm,
-                        fallBackToAllGroups: true
-                    )
-                    .AlgId;
+            int algId = Interop.Crypt32
+                .FindOidInfo(
+                    CryptOidInfoKeyType.CRYPT_OID_INFO_OID_KEY,
+                    oid.Value!,
+                    OidGroup.PublicKeyAlgorithm,
+                    fallBackToAllGroups: true
+                )
+                .AlgId;
             switch (algId)
             {
                 case AlgId.CALG_RSA_KEYX:
@@ -164,15 +162,13 @@ namespace Internal.Cryptography.Pal
                 {
                     unsafe
                     {
-                        bool success = Interop
-                            .crypt32
-                            .CryptImportPublicKeyInfoEx2(
-                                Interop.Crypt32.CertEncodingType.X509_ASN_ENCODING,
-                                &(certContext.CertContext->pCertInfo->SubjectPublicKeyInfo),
-                                importFlags,
-                                null,
-                                out bCryptKeyHandle
-                            );
+                        bool success = Interop.crypt32.CryptImportPublicKeyInfoEx2(
+                            Interop.Crypt32.CertEncodingType.X509_ASN_ENCODING,
+                            &(certContext.CertContext->pCertInfo->SubjectPublicKeyInfo),
+                            importFlags,
+                            null,
+                            out bCryptKeyHandle
+                        );
                         if (!success)
                             throw Marshal.GetHRForLastWin32Error().ToCryptographicException();
                         return bCryptKeyHandle;
@@ -194,32 +190,28 @@ namespace Internal.Cryptography.Pal
             string blobFormatString = blobFormat.Format;
 
             int numBytesNeeded = 0;
-            NTSTATUS ntStatus = Interop
-                .BCrypt
-                .BCryptExportKey(
-                    bCryptKeyHandle,
-                    IntPtr.Zero,
-                    blobFormatString,
-                    null,
-                    0,
-                    out numBytesNeeded,
-                    0
-                );
+            NTSTATUS ntStatus = Interop.BCrypt.BCryptExportKey(
+                bCryptKeyHandle,
+                IntPtr.Zero,
+                blobFormatString,
+                null,
+                0,
+                out numBytesNeeded,
+                0
+            );
             if (ntStatus != NTSTATUS.STATUS_SUCCESS)
                 throw new CryptographicException(Interop.Kernel32.GetMessage((int)ntStatus));
 
             byte[] keyBlob = new byte[numBytesNeeded];
-            ntStatus = Interop
-                .BCrypt
-                .BCryptExportKey(
-                    bCryptKeyHandle,
-                    IntPtr.Zero,
-                    blobFormatString,
-                    keyBlob,
-                    keyBlob.Length,
-                    out numBytesNeeded,
-                    0
-                );
+            ntStatus = Interop.BCrypt.BCryptExportKey(
+                bCryptKeyHandle,
+                IntPtr.Zero,
+                blobFormatString,
+                keyBlob,
+                keyBlob.Length,
+                out numBytesNeeded,
+                0
+            );
             if (ntStatus != NTSTATUS.STATUS_SUCCESS)
                 throw new CryptographicException(Interop.Kernel32.GetMessage((int)ntStatus));
 
@@ -272,33 +264,29 @@ namespace Internal.Cryptography.Pal
         {
             int cbDecoded = 0;
             if (
-                !Interop
-                    .crypt32
-                    .CryptDecodeObject(
-                        CertEncodingType.All,
-                        lpszStructType,
-                        encodedKeyValue,
-                        encodedKeyValue.Length,
-                        CryptDecodeObjectFlags.None,
-                        null,
-                        ref cbDecoded
-                    )
+                !Interop.crypt32.CryptDecodeObject(
+                    CertEncodingType.All,
+                    lpszStructType,
+                    encodedKeyValue,
+                    encodedKeyValue.Length,
+                    CryptDecodeObjectFlags.None,
+                    null,
+                    ref cbDecoded
+                )
             )
                 throw Marshal.GetLastWin32Error().ToCryptographicException();
 
             byte[] keyBlob = new byte[cbDecoded];
             if (
-                !Interop
-                    .crypt32
-                    .CryptDecodeObject(
-                        CertEncodingType.All,
-                        lpszStructType,
-                        encodedKeyValue,
-                        encodedKeyValue.Length,
-                        CryptDecodeObjectFlags.None,
-                        keyBlob,
-                        ref cbDecoded
-                    )
+                !Interop.crypt32.CryptDecodeObject(
+                    CertEncodingType.All,
+                    lpszStructType,
+                    encodedKeyValue,
+                    encodedKeyValue.Length,
+                    CryptDecodeObjectFlags.None,
+                    keyBlob,
+                    ref cbDecoded
+                )
             )
                 throw Marshal.GetLastWin32Error().ToCryptographicException();
 
@@ -462,25 +450,28 @@ namespace Internal.Cryptography.Pal
             unsafe
             {
                 int numBytesNeeded;
-                NTSTATUS errorCode = Interop
-                    .BCrypt
-                    .BCryptGetProperty(cryptHandle, propertyName, null, 0, out numBytesNeeded, 0);
+                NTSTATUS errorCode = Interop.BCrypt.BCryptGetProperty(
+                    cryptHandle,
+                    propertyName,
+                    null,
+                    0,
+                    out numBytesNeeded,
+                    0
+                );
                 if (errorCode != NTSTATUS.STATUS_SUCCESS)
                     return null;
 
                 byte[] propertyValue = new byte[numBytesNeeded];
                 fixed (byte* pPropertyValue = propertyValue)
                 {
-                    errorCode = Interop
-                        .BCrypt
-                        .BCryptGetProperty(
-                            cryptHandle,
-                            propertyName,
-                            pPropertyValue,
-                            propertyValue.Length,
-                            out numBytesNeeded,
-                            0
-                        );
+                    errorCode = Interop.BCrypt.BCryptGetProperty(
+                        cryptHandle,
+                        propertyName,
+                        pPropertyValue,
+                        propertyValue.Length,
+                        out numBytesNeeded,
+                        0
+                    );
                 }
                 if (errorCode != NTSTATUS.STATUS_SUCCESS)
                     return null;

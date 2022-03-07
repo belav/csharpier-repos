@@ -73,9 +73,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             _connectionString = string.IsNullOrWhiteSpace(relationalOptions.ConnectionString)
               ? null
-              : dependencies
-                .ConnectionStringResolver
-                .ResolveConnectionString(relationalOptions.ConnectionString);
+              : dependencies.ConnectionStringResolver.ResolveConnectionString(
+                    relationalOptions.ConnectionString
+                );
 
             if (relationalOptions.Connection != null)
             {
@@ -241,9 +241,10 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             if (!SupportsAmbientTransactions)
             {
-                Dependencies
-                    .TransactionLogger
-                    .AmbientTransactionWarning(this, DateTimeOffset.UtcNow);
+                Dependencies.TransactionLogger.AmbientTransactionWarning(
+                    this,
+                    DateTimeOffset.UtcNow
+                );
                 return;
             }
 
@@ -347,23 +348,24 @@ namespace Microsoft.EntityFrameworkCore.Storage
             var startTime = DateTimeOffset.UtcNow;
             _stopwatch.Restart();
 
-            var interceptionResult = Dependencies
-                .TransactionLogger
-                .TransactionStarting(this, isolationLevel, transactionId, startTime);
+            var interceptionResult = Dependencies.TransactionLogger.TransactionStarting(
+                this,
+                isolationLevel,
+                transactionId,
+                startTime
+            );
 
             var dbTransaction = interceptionResult.HasResult
                 ? interceptionResult.Result
                 : ConnectionBeginTransaction(isolationLevel);
 
-            dbTransaction = Dependencies
-                .TransactionLogger
-                .TransactionStarted(
-                    this,
-                    dbTransaction,
-                    transactionId,
-                    startTime,
-                    _stopwatch.Elapsed
-                );
+            dbTransaction = Dependencies.TransactionLogger.TransactionStarted(
+                this,
+                dbTransaction,
+                transactionId,
+                startTime,
+                _stopwatch.Elapsed
+            );
 
             return CreateRelationalTransaction(dbTransaction, transactionId, true);
         }
@@ -400,8 +402,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
             var startTime = DateTimeOffset.UtcNow;
             _stopwatch.Restart();
 
-            var interceptionResult = await Dependencies
-                .TransactionLogger
+            var interceptionResult = await Dependencies.TransactionLogger
                 .TransactionStartingAsync(
                     this,
                     isolationLevel,
@@ -416,8 +417,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 : await ConnectionBeginTransactionAsync(isolationLevel, cancellationToken)
                       .ConfigureAwait(false);
 
-            dbTransaction = await Dependencies
-                .TransactionLogger
+            dbTransaction = await Dependencies.TransactionLogger
                 .TransactionStartedAsync(
                     this,
                     dbTransaction,
@@ -476,15 +476,13 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Guid transactionId,
             bool transactionOwned
         ) =>
-            CurrentTransaction = Dependencies
-                .RelationalTransactionFactory
-                .Create(
-                    this,
-                    transaction,
-                    transactionId,
-                    Dependencies.TransactionLogger,
-                    transactionOwned: transactionOwned
-                );
+            CurrentTransaction = Dependencies.RelationalTransactionFactory.Create(
+                this,
+                transaction,
+                transactionId,
+                Dependencies.TransactionLogger,
+                transactionOwned: transactionOwned
+            );
 
         /// <summary>
         ///     Specifies an existing <see cref="DbTransaction" /> to be used for database operations.
@@ -513,9 +511,12 @@ namespace Microsoft.EntityFrameworkCore.Storage
             {
                 Open();
 
-                transaction = Dependencies
-                    .TransactionLogger
-                    .TransactionUsed(this, transaction, transactionId, DateTimeOffset.UtcNow);
+                transaction = Dependencies.TransactionLogger.TransactionUsed(
+                    this,
+                    transaction,
+                    transactionId,
+                    DateTimeOffset.UtcNow
+                );
 
                 CurrentTransaction = CreateRelationalTransaction(
                     transaction,
@@ -557,8 +558,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
             {
                 await OpenAsync(cancellationToken).ConfigureAwait(false);
 
-                transaction = await Dependencies
-                    .TransactionLogger
+                transaction = await Dependencies.TransactionLogger
                     .TransactionUsedAsync(
                         this,
                         transaction,
@@ -893,9 +893,10 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             if (!SupportsAmbientTransactions)
             {
-                Dependencies
-                    .TransactionLogger
-                    .AmbientTransactionWarning(this, DateTimeOffset.UtcNow);
+                Dependencies.TransactionLogger.AmbientTransactionWarning(
+                    this,
+                    DateTimeOffset.UtcNow
+                );
                 return;
             }
 
@@ -954,18 +955,19 @@ namespace Microsoft.EntityFrameworkCore.Storage
                         {
                             _stopwatch.Restart();
 
-                            var interceptionResult = Dependencies
-                                .ConnectionLogger
-                                .ConnectionClosing(this, startTime);
+                            var interceptionResult =
+                                Dependencies.ConnectionLogger.ConnectionClosing(this, startTime);
 
                             if (!interceptionResult.IsSuppressed)
                             {
                                 CloseDbConnection();
                             }
 
-                            Dependencies
-                                .ConnectionLogger
-                                .ConnectionClosed(this, startTime, _stopwatch.Elapsed);
+                            Dependencies.ConnectionLogger.ConnectionClosed(
+                                this,
+                                startTime,
+                                _stopwatch.Elapsed
+                            );
                         }
                         else
                         {
@@ -976,9 +978,13 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     }
                     catch (Exception e)
                     {
-                        Dependencies
-                            .ConnectionLogger
-                            .ConnectionError(this, e, startTime, _stopwatch.Elapsed, false);
+                        Dependencies.ConnectionLogger.ConnectionError(
+                            this,
+                            e,
+                            startTime,
+                            _stopwatch.Elapsed,
+                            false
+                        );
 
                         throw;
                     }
@@ -1027,8 +1033,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
                         {
                             _stopwatch.Restart();
 
-                            var interceptionResult = await Dependencies
-                                .ConnectionLogger
+                            var interceptionResult = await Dependencies.ConnectionLogger
                                 .ConnectionClosingAsync(this, startTime)
                                 .ConfigureAwait(false);
 
@@ -1037,8 +1042,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
                                 await CloseDbConnectionAsync().ConfigureAwait(false);
                             }
 
-                            await Dependencies
-                                .ConnectionLogger
+                            await Dependencies.ConnectionLogger
                                 .ConnectionClosedAsync(this, startTime, _stopwatch.Elapsed)
                                 .ConfigureAwait(false);
                         }
@@ -1051,8 +1055,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     }
                     catch (Exception e)
                     {
-                        await Dependencies
-                            .ConnectionLogger
+                        await Dependencies.ConnectionLogger
                             .ConnectionErrorAsync(
                                 this,
                                 e,

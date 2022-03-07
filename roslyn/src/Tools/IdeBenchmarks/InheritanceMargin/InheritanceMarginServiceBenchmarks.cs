@@ -57,8 +57,7 @@ namespace IdeBenchmarks.InheritanceMargin
                 throw new ArgumentException("Couldn't find solution.");
 
             Console.WriteLine("Found solution.");
-            var assemblies = MSBuildMefHostServices
-                .DefaultAssemblies
+            var assemblies = MSBuildMefHostServices.DefaultAssemblies
                 .AddRange(EditorTestCompositions.EditorFeatures.Assemblies)
                 .Distinct();
 

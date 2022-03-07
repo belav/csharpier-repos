@@ -75,8 +75,9 @@ namespace System.Web.Http.Controllers
             {
                 if (_actionBinding == null)
                 {
-                    ServicesContainer controllerServices =
-                        _controllerDescriptor.Configuration.Services;
+                    ServicesContainer controllerServices = _controllerDescriptor
+                        .Configuration
+                        .Services;
                     IActionValueBinder actionValueBinder =
                         controllerServices.GetActionValueBinder();
                     HttpActionBinding actionBinding = actionValueBinder.GetBinding(this);
@@ -278,9 +279,8 @@ namespace System.Web.Http.Controllers
 
         private Collection<FilterInfo> InitializeFilterPipeline()
         {
-            IEnumerable<IFilterProvider> filterProviders = _configuration
-                .Services
-                .GetFilterProviders();
+            IEnumerable<IFilterProvider> filterProviders =
+                _configuration.Services.GetFilterProviders();
 
             IEnumerable<FilterInfo> filters = filterProviders
                 .SelectMany(fp => fp.GetFilters(_configuration, this))

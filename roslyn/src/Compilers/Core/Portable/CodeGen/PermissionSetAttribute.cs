@@ -66,9 +66,10 @@ namespace Microsoft.CodeAnalysis.CodeGen
         public ImmutableArray<Cci.IMetadataNamedArgument> GetNamedArguments(EmitContext context)
         {
             // Perform fixup
-            Cci.ITypeReference stringType = context
-                .Module
-                .GetPlatformType(Cci.PlatformType.SystemString, context);
+            Cci.ITypeReference stringType = context.Module.GetPlatformType(
+                Cci.PlatformType.SystemString,
+                context
+            );
 
 #if DEBUG
             // Must have exactly 1 named argument.

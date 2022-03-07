@@ -27,11 +27,9 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
     public class ServiceDescriptorTests
     {
         public static IEnumerable<object[]> AllServiceDescriptors =>
-            ServiceDescriptors
-                .Instance
+            ServiceDescriptors.Instance
                 .GetTestAccessor()
-                .Descriptors
-                .Select(
+                .Descriptors.Select(
                     descriptor =>
                         new object[]
                         {
@@ -48,8 +46,7 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
             var interfaces = new List<Type>();
 
             foreach (
-                var (serviceType, (descriptor, _, _, _)) in ServiceDescriptors
-                    .Instance
+                var (serviceType, (descriptor, _, _, _)) in ServiceDescriptors.Instance
                     .GetTestAccessor()
                     .Descriptors
             )
@@ -234,8 +231,7 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
         [Fact]
         public void CallbackDispatchers()
         {
-            var hostServices = FeaturesTestCompositions
-                .Features
+            var hostServices = FeaturesTestCompositions.Features
                 .WithTestHostParts(Testing.TestHost.OutOfProcess)
                 .GetHostServices();
             var callbackDispatchers = ((IMefHostExportProvider)hostServices).GetExports<
@@ -243,11 +239,9 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
                 RemoteServiceCallbackDispatcherRegistry.ExportMetadata
             >();
 
-            var descriptorsWithCallbackServiceTypes = ServiceDescriptors
-                .Instance
+            var descriptorsWithCallbackServiceTypes = ServiceDescriptors.Instance
                 .GetTestAccessor()
-                .Descriptors
-                .Where(d => d.Value.descriptor64.ClientInterface != null)
+                .Descriptors.Where(d => d.Value.descriptor64.ClientInterface != null)
                 .Select(d => d.Key);
 
             var callbackDispatcherServiceTypes = callbackDispatchers.Select(

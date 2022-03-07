@@ -35,9 +35,10 @@ namespace System.Diagnostics
                         Process.GetUntruncatedProcessName(ref parsedStat),
                         StringComparison.OrdinalIgnoreCase
                     )
-                    && Interop
-                        .procfs
-                        .TryReadStatusFile(pid, out Interop.procfs.ParsedStatus parsedStatus)
+                    && Interop.procfs.TryReadStatusFile(
+                        pid,
+                        out Interop.procfs.ParsedStatus parsedStatus
+                    )
                 )
                 {
                     ProcessInfo processInfo = ProcessManager.CreateProcessInfo(
@@ -167,8 +168,9 @@ namespace System.Diagnostics
                 {
                     try
                     {
-                        _processInfo.HandleCount =
-                            Directory.GetFiles(path, "*", SearchOption.TopDirectoryOnly).Length;
+                        _processInfo.HandleCount = Directory
+                            .GetFiles(path, "*", SearchOption.TopDirectoryOnly)
+                            .Length;
                     }
                     catch (DirectoryNotFoundException) // Occurs when the process is deleted between the Exists check and the GetFiles call.
                     { }

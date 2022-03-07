@@ -96,12 +96,10 @@ public class TestingController : Controller
     [HttpGet("Testing/AntiforgerySimulator/{value}")]
     public IActionResult AntiforgerySimulator([FromRoute] int value)
     {
-        Response
-            .Cookies
-            .Append(
-                "AntiforgerySimulator",
-                $"Cookie-{value.ToString(CultureInfo.InvariantCulture)}"
-            );
+        Response.Cookies.Append(
+            "AntiforgerySimulator",
+            $"Cookie-{value.ToString(CultureInfo.InvariantCulture)}"
+        );
 
         return Ok();
     }
@@ -121,9 +119,10 @@ public class TestingController : Controller
         }
 
         TempData["Value"] = value + 1;
-        Response
-            .Cookies
-            .Append("Message", $"Value-{(value + 1).ToString(CultureInfo.InvariantCulture)}");
+        Response.Cookies.Append(
+            "Message",
+            $"Value-{(value + 1).ToString(CultureInfo.InvariantCulture)}"
+        );
 
         return RedirectToAction(nameof(PostRedirectGetGet));
     }

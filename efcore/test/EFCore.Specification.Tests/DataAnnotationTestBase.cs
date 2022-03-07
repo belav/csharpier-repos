@@ -258,14 +258,12 @@ namespace Microsoft.EntityFrameworkCore
             Validate(modelBuilder);
 
             Assert.Null(
-                modelBuilder
-                    .Model
+                modelBuilder.Model
                     .FindEntityType(typeof(AbstractBaseEntity1))
                     .FindProperty("BaseClassProperty")
             );
             Assert.NotNull(
-                modelBuilder
-                    .Model
+                modelBuilder.Model
                     .FindEntityType(typeof(BaseEntity1))
                     .FindProperty("BaseClassProperty")
             );
@@ -273,20 +271,17 @@ namespace Microsoft.EntityFrameworkCore
                 modelBuilder.Model.FindEntityType(typeof(Unit1)).FindProperty("BaseClassProperty")
             );
             Assert.Null(
-                modelBuilder
-                    .Model
+                modelBuilder.Model
                     .FindEntityType(typeof(AbstractBaseEntity1))
                     .FindProperty("VirtualBaseClassProperty")
             );
             Assert.Null(
-                modelBuilder
-                    .Model
+                modelBuilder.Model
                     .FindEntityType(typeof(BaseEntity1))
                     .FindProperty("VirtualBaseClassProperty")
             );
             Assert.Null(
-                modelBuilder
-                    .Model
+                modelBuilder.Model
                     .FindEntityType(typeof(Unit1))
                     .FindProperty("VirtualBaseClassProperty")
             );
@@ -331,20 +326,17 @@ namespace Microsoft.EntityFrameworkCore
             Validate(modelBuilder);
 
             Assert.Null(
-                modelBuilder
-                    .Model
+                modelBuilder.Model
                     .FindEntityType(typeof(AbstractBaseEntity2))
                     .FindProperty("VirtualBaseClassProperty")
             );
             Assert.Null(
-                modelBuilder
-                    .Model
+                modelBuilder.Model
                     .FindEntityType(typeof(BaseEntity2))
                     .FindProperty("VirtualBaseClassProperty")
             );
             Assert.Null(
-                modelBuilder
-                    .Model
+                modelBuilder.Model
                     .FindEntityType(typeof(Unit2))
                     .FindProperty("VirtualBaseClassProperty")
             );
@@ -389,15 +381,13 @@ namespace Microsoft.EntityFrameworkCore
             Validate(modelBuilder);
 
             Assert.Null(
-                modelBuilder
-                    .Model
+                modelBuilder.Model
                     .FindEntityType(typeof(AbstractBaseEntity3))
                     .FindProperty("AbstractBaseClassProperty")
             );
             Assert.Null(modelBuilder.Model.FindEntityType(typeof(BaseEntity3)));
             Assert.Null(
-                modelBuilder
-                    .Model
+                modelBuilder.Model
                     .FindEntityType(typeof(Unit3))
                     .FindProperty("AbstractBaseClassProperty")
             );
@@ -412,8 +402,7 @@ namespace Microsoft.EntityFrameworkCore
             modelBuilder.Entity<BaseEntity3>();
 
             Assert.NotNull(
-                modelBuilder
-                    .Model
+                modelBuilder.Model
                     .FindEntityType(typeof(Unit3))
                     .FindProperty("VirtualBaseClassProperty")
             );
@@ -435,8 +424,7 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Null(modelBuilder.Model.FindEntityType(typeof(AbstractBaseEntity3)));
             Assert.Null(modelBuilder.Model.FindEntityType(typeof(BaseEntity3)));
             Assert.Null(
-                modelBuilder
-                    .Model
+                modelBuilder.Model
                     .FindEntityType(typeof(Unit3))
                     .FindProperty("VirtualBaseClassProperty")
             );
@@ -482,20 +470,17 @@ namespace Microsoft.EntityFrameworkCore
             Validate(modelBuilder);
 
             Assert.Null(
-                modelBuilder
-                    .Model
+                modelBuilder.Model
                     .FindEntityType(typeof(AbstractBaseEntity3))
                     .FindProperty("AbstractBaseClassProperty")
             );
             Assert.Null(
-                modelBuilder
-                    .Model
+                modelBuilder.Model
                     .FindEntityType(typeof(BaseEntity3))
                     .FindProperty("AbstractBaseClassProperty")
             );
             Assert.Null(
-                modelBuilder
-                    .Model
+                modelBuilder.Model
                     .FindEntityType(typeof(Unit3))
                     .FindProperty("AbstractBaseClassProperty")
             );
@@ -514,8 +499,7 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Null(modelBuilder.Model.FindEntityType(typeof(AbstractBaseEntity2)));
             Assert.Null(modelBuilder.Model.FindEntityType(typeof(BaseEntity2)));
             Assert.Null(
-                modelBuilder
-                    .Model
+                modelBuilder.Model
                     .FindEntityType(typeof(Unit2))
                     .FindProperty("VirtualBaseClassProperty")
             );
@@ -535,8 +519,7 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Null(modelBuilder.Model.FindEntityType(typeof(AbstractBaseEntity1)));
             Assert.Null(modelBuilder.Model.FindEntityType(typeof(BaseEntity1)));
             Assert.Null(
-                modelBuilder
-                    .Model
+                modelBuilder.Model
                     .FindEntityType(typeof(Unit1))
                     .FindProperty("VirtualBaseClassProperty")
             );
@@ -555,8 +538,7 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Null(modelBuilder.Model.FindEntityType(typeof(BaseEntity5)));
             Assert.Null(modelBuilder.Model.FindEntityType(typeof(Unit5)));
             Assert.Null(
-                modelBuilder
-                    .Model
+                modelBuilder.Model
                     .FindEntityType(typeof(DifferentUnit5))
                     .FindProperty("VirtualBaseClassProperty")
             );
@@ -1684,18 +1666,14 @@ namespace Microsoft.EntityFrameworkCore
                 nameof(Profile14.Profile1Id),
                 profile
                     .FindNavigation(nameof(Profile14.Profile1))
-                    .ForeignKey
-                    .Properties
-                    .Single()
+                    .ForeignKey.Properties.Single()
                     .Name
             );
             Assert.Equal(
                 nameof(Profile14.Profile1Id),
                 profile
                     .FindNavigation(nameof(Profile14.Profile2))
-                    .ForeignKey
-                    .Properties
-                    .Single()
+                    .ForeignKey.Properties.Single()
                     .Name
             );
         }
@@ -1726,36 +1704,28 @@ namespace Microsoft.EntityFrameworkCore
                 nameof(Profile15.Profile1Id),
                 profile
                     .FindNavigation(nameof(Profile15.Profile1))
-                    .ForeignKey
-                    .Properties
-                    .Single()
+                    .ForeignKey.Properties.Single()
                     .Name
             );
             Assert.Equal(
                 nameof(Profile15.Profile2Id),
                 profile
                     .FindNavigation(nameof(Profile15.Profile2))
-                    .ForeignKey
-                    .Properties
-                    .Single()
+                    .ForeignKey.Properties.Single()
                     .Name
             );
             Assert.Equal(
                 nameof(Profile15.Profile1Id),
                 profile
                     .FindNavigation(nameof(Profile15.Profile3))
-                    .ForeignKey
-                    .Properties
-                    .Single()
+                    .ForeignKey.Properties.Single()
                     .Name
             );
             Assert.Equal(
                 nameof(Profile15.Profile2Id),
                 profile
                     .FindNavigation(nameof(Profile15.Profile4))
-                    .ForeignKey
-                    .Properties
-                    .Single()
+                    .ForeignKey.Properties.Single()
                     .Name
             );
         }
@@ -2123,8 +2093,7 @@ namespace Microsoft.EntityFrameworkCore
                     .FindEntityType(typeof(Book))
                     .GetNavigations()
                     .Single(n => n.Name == "Details")
-                    .ForeignKey
-                    .DeclaringEntityType
+                    .ForeignKey.DeclaringEntityType
             );
             Assert.Contains(
                 "Details",
@@ -2162,8 +2131,7 @@ namespace Microsoft.EntityFrameworkCore
                 model
                     .FindEntityType(typeof(BookLabel))
                     .FindNavigation(nameof(BookLabel.Book))
-                    .Inverse
-                    ?.Name
+                    .Inverse?.Name
             );
 
             Assert.Null(
@@ -2191,8 +2159,7 @@ namespace Microsoft.EntityFrameworkCore
                 model
                     .FindEntityType(typeof(SpecialBookLabel))
                     .FindNavigation(nameof(SpecialBookLabel.Book))
-                    .Inverse
-                    ?.Name
+                    .Inverse?.Name
             );
             Assert.Null(
                 model
@@ -2239,8 +2206,7 @@ namespace Microsoft.EntityFrameworkCore
                 model
                     .FindEntityType(typeof(SpecialBookLabel))
                     .FindNavigation(nameof(SpecialBookLabel.Book))
-                    .Inverse
-                    ?.Name
+                    .Inverse?.Name
             );
             Assert.Null(
                 model.FindEntityType(typeof(Book)).FindNavigation(nameof(Book.AlternateLabel))
@@ -2285,8 +2251,7 @@ namespace Microsoft.EntityFrameworkCore
                 model
                     .FindEntityType(typeof(SpecialBookLabel))
                     .FindNavigation(nameof(SpecialBookLabel.Book))
-                    .Inverse
-                    ?.Name
+                    .Inverse?.Name
             );
             Assert.Null(
                 model.FindEntityType(typeof(Book)).FindNavigation(nameof(Book.AlternateLabel))
@@ -2310,8 +2275,7 @@ namespace Microsoft.EntityFrameworkCore
                 model
                     .FindEntityType(typeof(ExtraSpecialBookLabel))
                     .FindNavigation(nameof(ExtraSpecialBookLabel.Book))
-                    .Inverse
-                    ?.Name
+                    .Inverse?.Name
             );
             Assert.Null(
                 model
@@ -2503,16 +2467,14 @@ namespace Microsoft.EntityFrameworkCore
                 model
                     .FindEntityType(typeof(Blog7698))
                     .FindNavigation(nameof(Blog7698.PostNav))
-                    .Inverse
-                    .Name
+                    .Inverse.Name
             );
             Assert.Equal(
                 nameof(SpecialPost7698.BlogInverseNav),
                 model
                     .FindEntityType(typeof(Blog7698))
                     .FindNavigation(nameof(Blog7698.ASpecialPostNav))
-                    .Inverse
-                    .Name
+                    .Inverse.Name
             );
         }
 
@@ -2671,17 +2633,14 @@ namespace Microsoft.EntityFrameworkCore
                 model
                     .FindEntityType(typeof(Post))
                     .FindNavigation("PostDetails")
-                    .ForeignKey
-                    .PrincipalToDependent
+                    .ForeignKey.PrincipalToDependent
             );
             Assert.Equal(
                 "PostDetailsId",
                 model
                     .FindEntityType(typeof(Post))
                     .FindNavigation("PostDetails")
-                    .ForeignKey
-                    .Properties
-                    .First()
+                    .ForeignKey.Properties.First()
                     .Name
             );
 
@@ -2689,17 +2648,14 @@ namespace Microsoft.EntityFrameworkCore
                 model
                     .FindEntityType(typeof(PostDetails))
                     .FindNavigation("Post")
-                    .ForeignKey
-                    .PrincipalToDependent
+                    .ForeignKey.PrincipalToDependent
             );
             Assert.Equal(
                 "PostId",
                 model
                     .FindEntityType(typeof(PostDetails))
                     .FindNavigation("Post")
-                    .ForeignKey
-                    .Properties
-                    .First()
+                    .ForeignKey.Properties.First()
                     .Name
             );
 
@@ -2735,17 +2691,14 @@ namespace Microsoft.EntityFrameworkCore
                 model
                     .FindEntityType(typeof(Post))
                     .FindNavigation("Author")
-                    .ForeignKey
-                    .PrincipalToDependent
+                    .ForeignKey.PrincipalToDependent
             );
             Assert.Equal(
                 "AuthorId",
                 model
                     .FindEntityType(typeof(Post))
                     .FindNavigation("Author")
-                    .ForeignKey
-                    .Properties
-                    .First()
+                    .ForeignKey.Properties.First()
                     .Name
             );
 
@@ -2753,17 +2706,14 @@ namespace Microsoft.EntityFrameworkCore
                 model
                     .FindEntityType(typeof(Author))
                     .FindNavigation("Post")
-                    .ForeignKey
-                    .PrincipalToDependent
+                    .ForeignKey.PrincipalToDependent
             );
             Assert.Equal(
                 "PostId",
                 model
                     .FindEntityType(typeof(Author))
                     .FindNavigation("Post")
-                    .ForeignKey
-                    .Properties
-                    .First()
+                    .ForeignKey.Properties.First()
                     .Name
             );
 
@@ -3258,8 +3208,7 @@ namespace Microsoft.EntityFrameworkCore
                 model
                     .FindEntityType(typeof(Order))
                     .FindNavigation(nameof(Order.ShippingAddress))
-                    .ForeignKey
-                    .IsOwnership
+                    .ForeignKey.IsOwnership
             );
         }
 
@@ -3298,8 +3247,7 @@ namespace Microsoft.EntityFrameworkCore
                 model
                     .FindEntityType(typeof(Book))
                     .FindNavigation(nameof(Book.AdditionalDetails))
-                    .ForeignKey
-                    .IsOwnership
+                    .ForeignKey.IsOwnership
             );
             var one = model.FindEntityType(typeof(One));
             var ownership1 = one.FindNavigation(nameof(One.Details)).ForeignKey;

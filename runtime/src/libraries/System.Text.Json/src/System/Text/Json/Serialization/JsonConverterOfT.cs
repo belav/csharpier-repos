@@ -462,9 +462,10 @@ namespace System.Text.Json.Serialization
                     {
                         // For internal converter only: Handle polymorphic case and get the new converter.
                         // Custom converter, even though polymorphic converter, get called for reading AND writing.
-                        JsonConverter jsonConverter = state
-                            .Current
-                            .InitializeReEntry(type, options);
+                        JsonConverter jsonConverter = state.Current.InitializeReEntry(
+                            type,
+                            options
+                        );
                         Debug.Assert(jsonConverter != this);
 
                         // For boxed value types: invoke the reference handler
@@ -635,8 +636,11 @@ namespace System.Text.Json.Serialization
 
             // Extension data properties change how dictionary key naming policies are applied.
             state.Current.IsWritingExtensionDataProperty = true;
-            state.Current.DeclaredJsonPropertyInfo =
-                state.Current.JsonTypeInfo.ElementTypeInfo!.PropertyInfoForTypeInfo;
+            state.Current.DeclaredJsonPropertyInfo = state
+                .Current
+                .JsonTypeInfo
+                .ElementTypeInfo!
+                .PropertyInfoForTypeInfo;
 
             success = dictionaryConverter.OnWriteResume(writer, value, options, ref state);
             if (success)

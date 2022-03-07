@@ -59,8 +59,10 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
         private const string ExternalProjectName = "ExternalDocuments";
 
         // A collection of opened documents in RDT, indexed by the moniker of the document.
-        private ImmutableDictionary<string, DocumentId> _openedDocs =
-            ImmutableDictionary<string, DocumentId>.Empty;
+        private ImmutableDictionary<string, DocumentId> _openedDocs = ImmutableDictionary<
+            string,
+            DocumentId
+        >.Empty;
 
         private CollaborationSession? _session;
 
@@ -294,9 +296,9 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
         /// </summary>
         public async Task RefreshAllFilesAsync()
         {
-            await _threadingContext
-                .JoinableTaskFactory
-                .SwitchToMainThreadAsync(CancellationToken.None);
+            await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                CancellationToken.None
+            );
             var documents = _runningDocumentTableEventTracker.EnumerateDocumentSet();
             foreach (var (moniker, textBuffer, _) in documents)
             {
@@ -393,9 +395,9 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
 
         private Document AddDocumentToProject(string filePath, string language, string projectName)
         {
-            var project = CurrentSolution
-                .Projects
-                .FirstOrDefault(p => p.Name == projectName && p.Language == language);
+            var project = CurrentSolution.Projects.FirstOrDefault(
+                p => p.Name == projectName && p.Language == language
+            );
             if (project == null)
             {
                 var projectInfo = ProjectInfo.Create(
@@ -473,21 +475,19 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
                     return;
                 }
 
-                _threadingContext
-                    .JoinableTaskFactory
-                    .Run(
-                        async () =>
-                        {
+                _threadingContext.JoinableTaskFactory.Run(
+                    async () =>
+                    {
 #pragma warning disable CS8604 // Possible null reference argument. (Can ConvertLocalPathToSharedUri return null here?)
-                            await _session
-                                .DownloadFileAsync(
-                                    _session.ConvertLocalPathToSharedUri(doc.FilePath),
-                                    CancellationToken.None
-                                )
-                                .ConfigureAwait(true);
+                        await _session
+                            .DownloadFileAsync(
+                                _session.ConvertLocalPathToSharedUri(doc.FilePath),
+                                CancellationToken.None
+                            )
+                            .ConfigureAwait(true);
 #pragma warning restore CS8604 // Possible null reference argument.
-                        }
-                    );
+                    }
+                );
 
                 var logicalView = Guid.Empty;
                 if (
@@ -576,18 +576,14 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
             {
                 if (_openedDocs.Values.Contains(documentId) || IsDocumentOpen(documentId))
                 {
-                    var textBuffer = _threadingContext
-                        .JoinableTaskFactory
-                        .Run(
-                            async () =>
-                            {
-                                var sourceText = await document
-                                    .GetTextAsync()
-                                    .ConfigureAwait(false);
-                                var textContainer = sourceText.Container;
-                                return textContainer.TryGetTextBuffer();
-                            }
-                        );
+                    var textBuffer = _threadingContext.JoinableTaskFactory.Run(
+                        async () =>
+                        {
+                            var sourceText = await document.GetTextAsync().ConfigureAwait(false);
+                            var textContainer = sourceText.Container;
+                            return textContainer.TryGetTextBuffer();
+                        }
+                    );
 
                     if (textBuffer == null)
                     {

@@ -26,18 +26,16 @@ namespace AssemblyDependencyResolverTests
                 );
                 File.WriteAllText(componentAssemblyPath, "Mock assembly");
 
-                object innerException =
-                    Assert
-                        .Throws<InvalidOperationException>(
-                            () =>
-                            {
-                                AssemblyDependencyResolver resolver =
-                                    new AssemblyDependencyResolver(
-                                        Path.Combine(testBasePath, componentAssemblyPath)
-                                    );
-                            }
-                        )
-                        .InnerException;
+                object innerException = Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                        {
+                            AssemblyDependencyResolver resolver = new AssemblyDependencyResolver(
+                                Path.Combine(testBasePath, componentAssemblyPath)
+                            );
+                        }
+                    )
+                    .InnerException;
 
                 Assert.IsType<DllNotFoundException>(innerException);
             }

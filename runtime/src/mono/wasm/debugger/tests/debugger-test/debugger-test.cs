@@ -587,15 +587,10 @@ public class LoadDebuggerTest
         if (pdb_base64 != null)
             pdb_bytes = Convert.FromBase64String(pdb_base64);
 
-        var loadedAssembly = System
-            .Runtime
-            .Loader
-            .AssemblyLoadContext
-            .Default
-            .LoadFromStream(
-                new System.IO.MemoryStream(asm_bytes),
-                new System.IO.MemoryStream(pdb_bytes)
-            );
+        var loadedAssembly = System.Runtime.Loader.AssemblyLoadContext.Default.LoadFromStream(
+            new System.IO.MemoryStream(asm_bytes),
+            new System.IO.MemoryStream(pdb_bytes)
+        );
         Console.WriteLine($"Loaded - {loadedAssembly}");
     }
 }
@@ -686,15 +681,10 @@ public class TestHotReload
         dil_data2_bytes = Convert.FromBase64String(dil_data2);
         dpdb_data2_bytes = Convert.FromBase64String(dpdb_data2);
 
-        loadedAssembly = System
-            .Runtime
-            .Loader
-            .AssemblyLoadContext
-            .Default
-            .LoadFromStream(
-                new System.IO.MemoryStream(asm_bytes),
-                new System.IO.MemoryStream(pdb_bytes)
-            );
+        loadedAssembly = System.Runtime.Loader.AssemblyLoadContext.Default.LoadFromStream(
+            new System.IO.MemoryStream(asm_bytes),
+            new System.IO.MemoryStream(pdb_bytes)
+        );
         Console.WriteLine($"Loaded - {loadedAssembly}");
     }
 
@@ -741,19 +731,21 @@ public class TestHotReload
 
         if (version == 1)
         {
-            System
-                .Reflection
-                .Metadata
-                .MetadataUpdater
-                .ApplyUpdate(assm, dmeta_data1_bytes, dil_data1_bytes, dpdb_data1_bytes);
+            System.Reflection.Metadata.MetadataUpdater.ApplyUpdate(
+                assm,
+                dmeta_data1_bytes,
+                dil_data1_bytes,
+                dpdb_data1_bytes
+            );
         }
         else if (version == 2)
         {
-            System
-                .Reflection
-                .Metadata
-                .MetadataUpdater
-                .ApplyUpdate(assm, dmeta_data2_bytes, dil_data2_bytes, dpdb_data2_bytes);
+            System.Reflection.Metadata.MetadataUpdater.ApplyUpdate(
+                assm,
+                dmeta_data2_bytes,
+                dil_data2_bytes,
+                dpdb_data2_bytes
+            );
         }
     }
 }

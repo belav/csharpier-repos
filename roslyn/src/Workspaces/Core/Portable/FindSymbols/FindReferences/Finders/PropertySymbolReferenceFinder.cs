@@ -34,8 +34,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             CancellationToken cancellationToken
         )
         {
-            var backingFields = symbol
-                .ContainingType
+            var backingFields = symbol.ContainingType
                 .GetMembers()
                 .OfType<IFieldSymbol>()
                 .Where(f => symbol.Equals(f.AssociatedSymbol))

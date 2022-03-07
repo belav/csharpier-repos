@@ -374,9 +374,13 @@ namespace Microsoft.CodeAnalysis.Storage
                 Checksum checksum,
                 CancellationToken cancellationToken
             ) =>
-                _storage
-                    .Target
-                    .WriteStreamAsync(project, name, stream, checksum, cancellationToken);
+                _storage.Target.WriteStreamAsync(
+                    project,
+                    name,
+                    stream,
+                    checksum,
+                    cancellationToken
+                );
 
             public Task<bool> WriteStreamAsync(
                 Document document,
@@ -385,9 +389,13 @@ namespace Microsoft.CodeAnalysis.Storage
                 Checksum checksum,
                 CancellationToken cancellationToken
             ) =>
-                _storage
-                    .Target
-                    .WriteStreamAsync(document, name, stream, checksum, cancellationToken);
+                _storage.Target.WriteStreamAsync(
+                    document,
+                    name,
+                    stream,
+                    checksum,
+                    cancellationToken
+                );
 
             public Task<bool> WriteStreamAsync(
                 ProjectKey projectKey,
@@ -396,9 +404,13 @@ namespace Microsoft.CodeAnalysis.Storage
                 Checksum checksum,
                 CancellationToken cancellationToken
             ) =>
-                _storage
-                    .Target
-                    .WriteStreamAsync(projectKey, name, stream, checksum, cancellationToken);
+                _storage.Target.WriteStreamAsync(
+                    projectKey,
+                    name,
+                    stream,
+                    checksum,
+                    cancellationToken
+                );
 
             public Task<bool> WriteStreamAsync(
                 DocumentKey documentKey,
@@ -407,9 +419,13 @@ namespace Microsoft.CodeAnalysis.Storage
                 Checksum checksum,
                 CancellationToken cancellationToken
             ) =>
-                _storage
-                    .Target
-                    .WriteStreamAsync(documentKey, name, stream, checksum, cancellationToken);
+                _storage.Target.WriteStreamAsync(
+                    documentKey,
+                    name,
+                    stream,
+                    checksum,
+                    cancellationToken
+                );
         }
     }
 }

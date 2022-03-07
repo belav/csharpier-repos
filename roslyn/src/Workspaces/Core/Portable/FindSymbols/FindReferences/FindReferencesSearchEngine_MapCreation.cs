@@ -238,9 +238,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                                         searchSymbol.ContainingAssembly
                                     );
                                     if (
-                                        symbolProject
-                                            ?.LanguageServices
-                                            .GetService<ILanguageServiceReferenceFinder>() is
+                                        symbolProject?.LanguageServices.GetService<ILanguageServiceReferenceFinder>() is
                                         { } service
                                     )
                                     {
@@ -330,10 +328,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
                 foreach (var reference in document.Project.ProjectReferences)
                 {
-                    var referenceProject = document
-                        .Project
-                        .Solution
-                        .GetProject(reference.ProjectId);
+                    var referenceProject = document.Project.Solution.GetProject(
+                        reference.ProjectId
+                    );
                     if (referenceProject != null)
                     {
                         builder.Add(referenceProject);

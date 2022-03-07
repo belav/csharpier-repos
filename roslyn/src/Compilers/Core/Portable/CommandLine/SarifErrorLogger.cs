@@ -102,9 +102,10 @@ namespace Microsoft.CodeAnalysis
                     _writer.WriteObjectStart("customProperties");
 
                     foreach (
-                        var pair in diagnostic
-                            .Properties
-                            .OrderBy(x => x.Key, StringComparer.Ordinal)
+                        var pair in diagnostic.Properties.OrderBy(
+                            x => x.Key,
+                            StringComparer.Ordinal
+                        )
                     )
                     {
                         _writer.Write(pair.Key, pair.Value);

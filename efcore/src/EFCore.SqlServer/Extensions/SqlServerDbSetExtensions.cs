@@ -43,8 +43,7 @@ namespace Microsoft.EntityFrameworkCore
             var queryRootExpression = (QueryRootExpression)queryableSource.Expression;
             var entityType = queryRootExpression.EntityType;
 
-            return queryableSource
-                .Provider
+            return queryableSource.Provider
                 .CreateQuery<TEntity>(
                     new TemporalAsOfQueryRootExpression(
                         queryRootExpression.QueryProvider!,
@@ -94,8 +93,7 @@ namespace Microsoft.EntityFrameworkCore
             var queryRootExpression = (QueryRootExpression)queryableSource.Expression;
             var entityType = queryRootExpression.EntityType;
 
-            return queryableSource
-                .Provider
+            return queryableSource.Provider
                 .CreateQuery<TEntity>(
                     new TemporalFromToQueryRootExpression(
                         queryRootExpression.QueryProvider!,
@@ -146,8 +144,7 @@ namespace Microsoft.EntityFrameworkCore
             var queryRootExpression = (QueryRootExpression)queryableSource.Expression;
             var entityType = queryRootExpression.EntityType;
 
-            return queryableSource
-                .Provider
+            return queryableSource.Provider
                 .CreateQuery<TEntity>(
                     new TemporalBetweenQueryRootExpression(
                         queryRootExpression.QueryProvider!,
@@ -198,8 +195,7 @@ namespace Microsoft.EntityFrameworkCore
             var queryRootExpression = (QueryRootExpression)queryableSource.Expression;
             var entityType = queryRootExpression.EntityType;
 
-            return queryableSource
-                .Provider
+            return queryableSource.Provider
                 .CreateQuery<TEntity>(
                     new TemporalContainedInQueryRootExpression(
                         queryRootExpression.QueryProvider!,
@@ -233,8 +229,7 @@ namespace Microsoft.EntityFrameworkCore
             var queryRootExpression = (QueryRootExpression)queryableSource.Expression;
             var entityType = queryRootExpression.EntityType;
 
-            return queryableSource
-                .Provider
+            return queryableSource.Provider
                 .CreateQuery<TEntity>(
                     new TemporalAllQueryRootExpression(
                         queryRootExpression.QueryProvider!,

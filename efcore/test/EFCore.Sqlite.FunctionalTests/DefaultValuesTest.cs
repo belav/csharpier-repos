@@ -17,16 +17,15 @@ namespace Microsoft.EntityFrameworkCore
             using (var context = CreateChipsContext())
             {
                 var honeyDijon = context.Add(new KettleChips { Name = "Honey Dijon" }).Entity;
-                var buffaloBleu =
-                    context
-                        .Add(
-                            new KettleChips
-                            {
-                                Name = "Buffalo Bleu",
-                                BestBuyDate = new DateTime(2111, 1, 11)
-                            }
-                        )
-                        .Entity;
+                var buffaloBleu = context
+                    .Add(
+                        new KettleChips
+                        {
+                            Name = "Buffalo Bleu",
+                            BestBuyDate = new DateTime(2111, 1, 11)
+                        }
+                    )
+                    .Entity;
 
                 context.SaveChanges();
 

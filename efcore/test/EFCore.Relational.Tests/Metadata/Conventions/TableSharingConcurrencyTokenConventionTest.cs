@@ -275,14 +275,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         }
 
         private ProviderConventionSetBuilderDependencies CreateDependencies() =>
-            RelationalTestHelpers
-                .Instance
+            RelationalTestHelpers.Instance
                 .CreateContextServices()
                 .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
         private RelationalConventionSetBuilderDependencies CreateRelationalDependencies() =>
-            RelationalTestHelpers
-                .Instance
+            RelationalTestHelpers.Instance
                 .CreateContextServices()
                 .GetRequiredService<RelationalConventionSetBuilderDependencies>();
     }

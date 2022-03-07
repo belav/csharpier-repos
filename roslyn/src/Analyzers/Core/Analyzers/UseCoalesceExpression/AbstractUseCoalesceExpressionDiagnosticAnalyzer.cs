@@ -130,13 +130,12 @@ namespace Microsoft.CodeAnalysis.UseCoalesceExpression
             if (IsTargetTyped(semanticModel, conditionalExpression, cancellationToken))
                 return;
 
-            var conditionType =
-                semanticModel
-                    .GetTypeInfo(
-                        conditionLeftIsNull ? conditionRightLow : conditionLeftLow,
-                        cancellationToken
-                    )
-                    .Type;
+            var conditionType = semanticModel
+                .GetTypeInfo(
+                    conditionLeftIsNull ? conditionRightLow : conditionLeftLow,
+                    cancellationToken
+                )
+                .Type;
             if (conditionType != null && !conditionType.IsReferenceType)
             {
                 // Note: it is intentional that we do not support nullable types here.  If you have:

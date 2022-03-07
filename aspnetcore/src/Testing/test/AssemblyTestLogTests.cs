@@ -15,15 +15,15 @@ namespace Microsoft.Extensions.Logging.Testing.Tests;
 
 public class AssemblyTestLogTests : LoggedTest
 {
-    private static readonly Assembly ThisAssembly =
-        typeof(AssemblyTestLogTests).GetTypeInfo().Assembly;
+    private static readonly Assembly ThisAssembly = typeof(AssemblyTestLogTests)
+        .GetTypeInfo()
+        .Assembly;
     private static readonly string ThisAssemblyName = ThisAssembly.GetName().Name;
-    private static readonly string TFM =
-        ThisAssembly
-            .GetCustomAttributes()
-            .OfType<TestOutputDirectoryAttribute>()
-            .FirstOrDefault()
-            .TargetFramework;
+    private static readonly string TFM = ThisAssembly
+        .GetCustomAttributes()
+        .OfType<TestOutputDirectoryAttribute>()
+        .FirstOrDefault()
+        .TargetFramework;
 
     [Fact]
     public void FunctionalLogs_LogsPreservedFromNonQuarantinedTest() { }

@@ -572,8 +572,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                         methodSymbol.ReturnType,
                         newMethodSymbol.ReturnType
                     )
-                    && methodSymbol
-                        .Parameters
+                    && methodSymbol.Parameters
                         .Zip(newMethodSymbol.Parameters, (p1, p2) => (p1, p2))
                         .All(t => CompareAcrossSemanticModels(t.p1, t.p2));
             }
@@ -795,20 +794,24 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         {
             if (previousOriginalNode != null && previousReplacedNode != null)
             {
-                var originalExpressionSymbol =
-                    this.OriginalSemanticModel.GetSymbolInfo(currentOriginalNode).Symbol;
-                var replacedExpressionSymbol =
-                    this.SpeculativeSemanticModel.GetSymbolInfo(currentReplacedNode).Symbol;
+                var originalExpressionSymbol = this.OriginalSemanticModel
+                    .GetSymbolInfo(currentOriginalNode)
+                    .Symbol;
+                var replacedExpressionSymbol = this.SpeculativeSemanticModel
+                    .GetSymbolInfo(currentReplacedNode)
+                    .Symbol;
 
                 if (
                     IsSymbolSystemObjectInstanceMethod(originalExpressionSymbol)
                     && IsSymbolSystemObjectInstanceMethod(replacedExpressionSymbol)
                 )
                 {
-                    var previousOriginalType =
-                        this.OriginalSemanticModel.GetTypeInfo(previousOriginalNode).Type;
-                    var previousReplacedType =
-                        this.SpeculativeSemanticModel.GetTypeInfo(previousReplacedNode).Type;
+                    var previousOriginalType = this.OriginalSemanticModel
+                        .GetTypeInfo(previousOriginalNode)
+                        .Type;
+                    var previousReplacedType = this.SpeculativeSemanticModel
+                        .GetTypeInfo(previousReplacedNode)
+                        .Type;
                     if (previousReplacedType != null && previousOriginalType != null)
                     {
                         return !previousReplacedType.InheritsFromOrEquals(previousOriginalType);
@@ -957,10 +960,9 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 // GetEnumerator method on a specific type.
                 if (getEnumerator.IsImplementableMember())
                 {
-                    var expressionType =
-                        this.SpeculativeSemanticModel
-                            .GetTypeInfo(newForEachStatementExpression, _cancellationToken)
-                            .ConvertedType;
+                    var expressionType = this.SpeculativeSemanticModel
+                        .GetTypeInfo(newForEachStatementExpression, _cancellationToken)
+                        .ConvertedType;
                     if (expressionType != null)
                     {
                         var implementationMember =
@@ -994,11 +996,13 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         )
         {
             var originalThrowExpression = GetThrowStatementExpression(originalThrowStatement);
-            var originalThrowExpressionType =
-                this.OriginalSemanticModel.GetTypeInfo(originalThrowExpression).Type;
+            var originalThrowExpressionType = this.OriginalSemanticModel
+                .GetTypeInfo(originalThrowExpression)
+                .Type;
             var newThrowExpression = GetThrowStatementExpression(newThrowStatement);
-            var newThrowExpressionType =
-                this.SpeculativeSemanticModel.GetTypeInfo(newThrowExpression).Type;
+            var newThrowExpressionType = this.SpeculativeSemanticModel
+                .GetTypeInfo(newThrowExpression)
+                .Type;
 
             // C# language specification requires that type of the expression passed to ThrowStatement is or derives from System.Exception.
             return originalThrowExpressionType.IsOrDerivesFromExceptionType(
@@ -1022,18 +1026,18 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             ISymbol? newSymbol;
             if (useSpeculativeModel)
             {
-                newSymbol =
-                    this.SpeculativeSemanticModel.GetSymbolInfo(newType, _cancellationToken).Symbol;
+                newSymbol = this.SpeculativeSemanticModel
+                    .GetSymbolInfo(newType, _cancellationToken)
+                    .Symbol;
             }
             else
             {
                 var bindingOption = IsInNamespaceOrTypeContext(type)
                   ? SpeculativeBindingOption.BindAsTypeOrNamespace
                   : SpeculativeBindingOption.BindAsExpression;
-                newSymbol =
-                    this.OriginalSemanticModel
-                        .GetSpeculativeSymbolInfo(type.SpanStart, newType, bindingOption)
-                        .Symbol;
+                newSymbol = this.OriginalSemanticModel
+                    .GetSpeculativeSymbolInfo(type.SpanStart, newType, bindingOption)
+                    .Symbol;
             }
 
             return symbol != null && !SymbolsAreCompatible(symbol, newSymbol);
@@ -1495,8 +1499,9 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             }
             else
             {
-                var originalConvertedTypeSymbol =
-                    this.OriginalSemanticModel.GetTypeInfo(originalExpression).ConvertedType;
+                var originalConvertedTypeSymbol = this.OriginalSemanticModel
+                    .GetTypeInfo(originalExpression)
+                    .ConvertedType;
                 if (originalConvertedTypeSymbol != null)
                 {
                     originalConversion = ClassifyConversion(
@@ -1506,8 +1511,9 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     );
                 }
 
-                var newConvertedTypeSymbol =
-                    this.SpeculativeSemanticModel.GetTypeInfo(newExpression).ConvertedType;
+                var newConvertedTypeSymbol = this.SpeculativeSemanticModel
+                    .GetTypeInfo(newExpression)
+                    .ConvertedType;
                 if (newConvertedTypeSymbol != null)
                 {
                     newConversion = ClassifyConversion(

@@ -88,9 +88,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var containingNamespace =
                     symbol.ContainingNamespace == null
                         ? null
-                        : semanticModelOpt
-                          .Compilation
-                          .GetCompilationNamespace(symbol.ContainingNamespace);
+                        : semanticModelOpt.Compilation.GetCompilationNamespace(
+                              symbol.ContainingNamespace
+                          );
                 if (containingNamespace != null)
                 {
                     if (containingNamespace.IsGlobalNamespace)
@@ -153,9 +153,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                         var containingNamespace =
                             symbol.ContainingNamespace == null
                                 ? null
-                                : semanticModelOpt
-                                  .Compilation
-                                  .GetCompilationNamespace(symbol.ContainingNamespace);
+                                : semanticModelOpt.Compilation.GetCompilationNamespace(
+                                      symbol.ContainingNamespace
+                                  );
                         if (containingNamespace != null)
                         {
                             if (containingNamespace.IsGlobalNamespace)
@@ -256,14 +256,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                         // clause, we speculatively bind the name of the variable in the select
                         // or group clause of the query body.
                         var identifierName = SyntaxFactory.IdentifierName(symbol.Name);
-                        type =
-                            semanticModelOpt
-                                .GetSpeculativeTypeInfo(
-                                    queryBody.SelectOrGroup.Span.End - 1,
-                                    identifierName,
-                                    SpeculativeBindingOption.BindAsExpression
-                                )
-                                .Type;
+                        type = semanticModelOpt
+                            .GetSpeculativeTypeInfo(
+                                queryBody.SelectOrGroup.Span.End - 1,
+                                identifierName,
+                                SpeculativeBindingOption.BindAsExpression
+                            )
+                            .Type;
                     }
 
                     var identifier = token.Parent as IdentifierNameSyntax;
@@ -296,9 +295,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             if (
                 this.IsMinimizing
-                && format
-                    .MiscellaneousOptions
-                    .IncludesOption(SymbolDisplayMiscellaneousOptions.RemoveAttributeSuffix)
+                && format.MiscellaneousOptions.IncludesOption(
+                    SymbolDisplayMiscellaneousOptions.RemoveAttributeSuffix
+                )
                 && semanticModelOpt.Compilation.IsAttributeType(symbol)
             )
             {

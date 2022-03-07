@@ -40,9 +40,11 @@ namespace HFATest
             }
             else
             {
-                System
-                    .Console
-                    .WriteLine("FAILED => expected = {0}, actual = {1}", expected, actual);
+                System.Console.WriteLine(
+                    "FAILED => expected = {0}, actual = {1}",
+                    expected,
+                    actual
+                );
             }
         }
     }

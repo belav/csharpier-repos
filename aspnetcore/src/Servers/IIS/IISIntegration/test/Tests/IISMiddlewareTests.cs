@@ -39,9 +39,8 @@ public class IISMiddlewareTests
                                 app.Run(
                                     context =>
                                     {
-                                        var auth = context
-                                            .Features
-                                            .Get<IHttpAuthenticationFeature>();
+                                        var auth =
+                                            context.Features.Get<IHttpAuthenticationFeature>();
                                         Assert.Null(auth);
                                         assertsExecuted = true;
                                         return Task.FromResult(0);
@@ -85,9 +84,8 @@ public class IISMiddlewareTests
                                 app.Run(
                                     context =>
                                     {
-                                        var auth = context
-                                            .Features
-                                            .Get<IHttpAuthenticationFeature>();
+                                        var auth =
+                                            context.Features.Get<IHttpAuthenticationFeature>();
                                         Assert.Null(auth);
                                         assertsExecuted = true;
                                         return Task.FromResult(0);
@@ -141,9 +139,9 @@ public class IISMiddlewareTests
                             {
                                 var appLifetime =
                                     app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
-                                appLifetime
-                                    .ApplicationStopping
-                                    .Register(() => applicationStoppingFired.SetResult(0));
+                                appLifetime.ApplicationStopping.Register(
+                                    () => applicationStoppingFired.SetResult(0)
+                                );
 
                                 app.Run(
                                     context =>
@@ -213,9 +211,9 @@ public class IISMiddlewareTests
                             {
                                 var appLifetime =
                                     app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
-                                appLifetime
-                                    .ApplicationStopping
-                                    .Register(() => applicationStoppingFired.SetResult(0));
+                                appLifetime.ApplicationStopping.Register(
+                                    () => applicationStoppingFired.SetResult(0)
+                                );
 
                                 app.Run(
                                     context =>
@@ -271,9 +269,9 @@ public class IISMiddlewareTests
                             {
                                 var appLifetime =
                                     app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
-                                appLifetime
-                                    .ApplicationStopping
-                                    .Register(() => applicationStoppingFired.SetResult(0));
+                                appLifetime.ApplicationStopping.Register(
+                                    () => applicationStoppingFired.SetResult(0)
+                                );
 
                                 app.Run(
                                     context =>
@@ -329,9 +327,9 @@ public class IISMiddlewareTests
                             {
                                 var appLifetime =
                                     app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
-                                appLifetime
-                                    .ApplicationStopping
-                                    .Register(() => applicationStoppingFired.SetResult(0));
+                                appLifetime.ApplicationStopping.Register(
+                                    () => applicationStoppingFired.SetResult(0)
+                                );
 
                                 app.Run(
                                     context =>
@@ -493,9 +491,8 @@ public class IISMiddlewareTests
                                 app.Run(
                                     async context =>
                                     {
-                                        var auth = context
-                                            .RequestServices
-                                            .GetRequiredService<IAuthenticationSchemeProvider>();
+                                        var auth =
+                                            context.RequestServices.GetRequiredService<IAuthenticationSchemeProvider>();
                                         var windows = await auth.GetSchemeAsync(
                                             IISDefaults.AuthenticationScheme
                                         );
@@ -548,9 +545,8 @@ public class IISMiddlewareTests
                                 app.Run(
                                     async context =>
                                     {
-                                        var auth = context
-                                            .RequestServices
-                                            .GetService<IAuthenticationSchemeProvider>();
+                                        var auth =
+                                            context.RequestServices.GetService<IAuthenticationSchemeProvider>();
                                         Assert.NotNull(auth);
                                         var windowsAuth = await auth.GetSchemeAsync(
                                             IISDefaults.AuthenticationScheme

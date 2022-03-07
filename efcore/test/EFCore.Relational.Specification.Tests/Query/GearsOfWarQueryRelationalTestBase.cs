@@ -20,15 +20,14 @@ namespace Microsoft.EntityFrameworkCore.Query
             bool async
         )
         {
-            var message =
-                (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            base.Correlated_collection_with_groupby_with_complex_grouping_key_not_projecting_identifier_column_with_group_aggregate_in_final_projection(
-                                async
-                            )
-                    )
-                ).Message;
+            var message = (
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        base.Correlated_collection_with_groupby_with_complex_grouping_key_not_projecting_identifier_column_with_group_aggregate_in_final_projection(
+                            async
+                        )
+                )
+            ).Message;
 
             Assert.Equal(
                 RelationalStrings.InsufficientInformationToIdentifyElementOfCollectionJoin,
@@ -40,15 +39,14 @@ namespace Microsoft.EntityFrameworkCore.Query
             bool async
         )
         {
-            var message =
-                (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            base.Correlated_collection_with_distinct_not_projecting_identifier_column_also_projecting_complex_expressions(
-                                async
-                            )
-                    )
-                ).Message;
+            var message = (
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        base.Correlated_collection_with_distinct_not_projecting_identifier_column_also_projecting_complex_expressions(
+                            async
+                        )
+                )
+            ).Message;
 
             Assert.Equal(
                 RelationalStrings.InsufficientInformationToIdentifyElementOfCollectionJoin,
@@ -216,12 +214,11 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         public override async Task Projecting_correlated_collection_followed_by_Distinct(bool async)
         {
-            var message =
-                (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.Projecting_correlated_collection_followed_by_Distinct(async)
-                    )
-                ).Message;
+            var message = (
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => base.Projecting_correlated_collection_followed_by_Distinct(async)
+                )
+            ).Message;
 
             Assert.Equal(RelationalStrings.DistinctOnCollectionNotSupported, message);
         }
@@ -230,15 +227,14 @@ namespace Microsoft.EntityFrameworkCore.Query
             bool async
         )
         {
-            var message =
-                (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            base.Projecting_some_properties_as_well_as_correlated_collection_followed_by_Distinct(
-                                async
-                            )
-                    )
-                ).Message;
+            var message = (
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        base.Projecting_some_properties_as_well_as_correlated_collection_followed_by_Distinct(
+                            async
+                        )
+                )
+            ).Message;
 
             Assert.Equal(RelationalStrings.DistinctOnCollectionNotSupported, message);
         }
@@ -247,15 +243,14 @@ namespace Microsoft.EntityFrameworkCore.Query
             bool async
         )
         {
-            var message =
-                (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            base.Projecting_entity_as_well_as_correlated_collection_followed_by_Distinct(
-                                async
-                            )
-                    )
-                ).Message;
+            var message = (
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        base.Projecting_entity_as_well_as_correlated_collection_followed_by_Distinct(
+                            async
+                        )
+                )
+            ).Message;
 
             Assert.Equal(RelationalStrings.DistinctOnCollectionNotSupported, message);
         }
@@ -264,15 +259,14 @@ namespace Microsoft.EntityFrameworkCore.Query
             bool async
         )
         {
-            var message =
-                (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            base.Projecting_entity_as_well_as_complex_correlated_collection_followed_by_Distinct(
-                                async
-                            )
-                    )
-                ).Message;
+            var message = (
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        base.Projecting_entity_as_well_as_complex_correlated_collection_followed_by_Distinct(
+                            async
+                        )
+                )
+            ).Message;
 
             Assert.Equal(RelationalStrings.DistinctOnCollectionNotSupported, message);
         }
@@ -281,27 +275,25 @@ namespace Microsoft.EntityFrameworkCore.Query
             bool async
         )
         {
-            var message =
-                (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            base.Projecting_entity_as_well_as_correlated_collection_of_scalars_followed_by_Distinct(
-                                async
-                            )
-                    )
-                ).Message;
+            var message = (
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        base.Projecting_entity_as_well_as_correlated_collection_of_scalars_followed_by_Distinct(
+                            async
+                        )
+                )
+            ).Message;
 
             Assert.Equal(RelationalStrings.DistinctOnCollectionNotSupported, message);
         }
 
         public override async Task Correlated_collection_with_distinct_3_levels(bool async)
         {
-            var message =
-                (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.Correlated_collection_with_distinct_3_levels(async)
-                    )
-                ).Message;
+            var message = (
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => base.Correlated_collection_with_distinct_3_levels(async)
+                )
+            ).Message;
 
             Assert.Equal(RelationalStrings.DistinctOnCollectionNotSupported, message);
         }

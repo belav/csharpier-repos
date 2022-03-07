@@ -32,8 +32,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             )
             {
                 DocumentDiagnosticsMap = diagnosticsMap;
-                ProjectDiagnosticsMap =
-                    ImmutableDictionary<Project, ImmutableArray<Diagnostic>>.Empty;
+                ProjectDiagnosticsMap = ImmutableDictionary<
+                    Project,
+                    ImmutableArray<Diagnostic>
+                >.Empty;
             }
 
             public FixMultipleDiagnosticProvider(
@@ -41,8 +43,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             )
             {
                 ProjectDiagnosticsMap = diagnosticsMap;
-                DocumentDiagnosticsMap =
-                    ImmutableDictionary<Document, ImmutableArray<Diagnostic>>.Empty;
+                DocumentDiagnosticsMap = ImmutableDictionary<
+                    Document,
+                    ImmutableArray<Diagnostic>
+                >.Empty;
             }
 
             public override Task<IEnumerable<Diagnostic>> GetAllDiagnosticsAsync(

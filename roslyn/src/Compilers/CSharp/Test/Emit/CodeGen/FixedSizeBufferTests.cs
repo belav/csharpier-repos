@@ -627,12 +627,11 @@ class Program
         S t = s;
     }
 }";
-            var comp1 =
-                CompileAndVerify(
-                    s1,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Passes
-                ).Compilation;
+            var comp1 = CompileAndVerify(
+                s1,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Passes
+            ).Compilation;
 
             var comp2 = (CSharpCompilation)CompileAndVerify(
                 s2,
@@ -1351,8 +1350,7 @@ public unsafe struct FixedBuffer
                 references: new[] { comp.ToMetadataReference() },
                 targetFramework: TargetFramework.Mscorlib46
             );
-            var retargetingField = comp3
-                .GlobalNamespace
+            var retargetingField = comp3.GlobalNamespace
                 .GetMember<NamedTypeSymbol>("FixedBuffer")
                 .GetMember<RetargetingFieldSymbol>("buffer");
             Assert.True(retargetingField.IsFixedSizeBuffer);

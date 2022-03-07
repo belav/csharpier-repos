@@ -171,12 +171,10 @@ struct Native
                     && attr.NamedArguments.Length == 1
                     && attr.NamedArguments[0].Key == "CallConvs"
                     && attr.NamedArguments[0].Value.Values.Length == 1
-                    && SymbolEqualityComparer
-                        .Default
-                        .Equals(
-                            (INamedTypeSymbol?)attr.NamedArguments[0].Value.Values[0].Value!,
-                            callConvType
-                        )
+                    && SymbolEqualityComparer.Default.Equals(
+                        (INamedTypeSymbol?)attr.NamedArguments[0].Value.Values[0].Value!,
+                        callConvType
+                    )
             );
         }
 
@@ -234,18 +232,14 @@ struct Native
                     && attr.NamedArguments.Length == 1
                     && attr.NamedArguments[0].Key == "CallConvs"
                     && attr.NamedArguments[0].Value.Values.Length == 2
-                    && SymbolEqualityComparer
-                        .Default
-                        .Equals(
-                            (INamedTypeSymbol?)attr.NamedArguments[0].Value.Values[0].Value!,
-                            callConvType
-                        )
-                    && SymbolEqualityComparer
-                        .Default
-                        .Equals(
-                            (INamedTypeSymbol?)attr.NamedArguments[0].Value.Values[1].Value!,
-                            callConvType2
-                        )
+                    && SymbolEqualityComparer.Default.Equals(
+                        (INamedTypeSymbol?)attr.NamedArguments[0].Value.Values[0].Value!,
+                        callConvType
+                    )
+                    && SymbolEqualityComparer.Default.Equals(
+                        (INamedTypeSymbol?)attr.NamedArguments[0].Value.Values[1].Value!,
+                        callConvType2
+                    )
             );
         }
 

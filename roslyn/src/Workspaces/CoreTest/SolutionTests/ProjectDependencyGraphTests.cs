@@ -601,8 +601,7 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             var a = solution.GetProjectsByName("A").Single();
             var b = solution.GetProjectsByName("B").Single();
             var d = solution.GetProjectsByName("D").Single();
-            var expected = solution
-                .State
+            var expected = solution.State
                 .GetProjectDependencyGraph()
                 .GetProjectsThatTransitivelyDependOnThisProject(d.Id);
 
@@ -614,8 +613,7 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             // removal.
             Assert.Same(
                 expected,
-                solution
-                    .State
+                solution.State
                     .GetProjectDependencyGraph()
                     .GetTestAccessor()
                     .TryGetProjectsThatTransitivelyDependOnThisProject(d.Id)
@@ -639,8 +637,7 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             var a = solution.GetProjectsByName("A").Single();
             var b = solution.GetProjectsByName("B").Single();
             var e = solution.GetProjectsByName("E").Single();
-            var expected = solution
-                .State
+            var expected = solution.State
                 .GetProjectDependencyGraph()
                 .GetProjectsThatTransitivelyDependOnThisProject(e.Id);
 
@@ -652,8 +649,7 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             // removal.
             Assert.Same(
                 expected,
-                solution
-                    .State
+                solution.State
                     .GetProjectDependencyGraph()
                     .GetTestAccessor()
                     .TryGetProjectsThatTransitivelyDependOnThisProject(e.Id)
@@ -678,8 +674,7 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             var a = solution.GetProjectsByName("A").Single();
             var b = solution.GetProjectsByName("B").Single();
             var c = solution.GetProjectsByName("C").Single();
-            var notExpected = solution
-                .State
+            var notExpected = solution.State
                 .GetProjectDependencyGraph()
                 .GetProjectsThatTransitivelyDependOnThisProject(c.Id);
             Assert.NotNull(notExpected);
@@ -690,8 +685,7 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             // Before any other operations, verify that TryGetProjectsThatTransitivelyDependOnThisProject returns a
             // null set.
             Assert.Null(
-                solution
-                    .State
+                solution.State
                     .GetProjectDependencyGraph()
                     .GetTestAccessor()
                     .TryGetProjectsThatTransitivelyDependOnThisProject(c.Id)

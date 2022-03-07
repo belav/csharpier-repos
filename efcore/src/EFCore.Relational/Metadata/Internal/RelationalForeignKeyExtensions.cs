@@ -139,10 +139,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                             foreignKey.DeclaringEntityType.GetSchemaQualifiedTableName(),
                             foreignKey.GetConstraintName(storeObject, principalTable.Value),
                             foreignKey.PrincipalKey.Properties.FormatColumns(principalTable.Value),
-                            duplicateForeignKey
-                                .PrincipalKey
-                                .Properties
-                                .FormatColumns(principalTable.Value)
+                            duplicateForeignKey.PrincipalKey.Properties.FormatColumns(
+                                principalTable.Value
+                            )
                         )
                     );
                 }

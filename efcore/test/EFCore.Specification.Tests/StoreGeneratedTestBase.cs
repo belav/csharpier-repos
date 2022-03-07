@@ -1530,18 +1530,17 @@ namespace Microsoft.EntityFrameworkCore
             ExecuteWithStrategyInTransaction(
                 context =>
                 {
-                    var entity =
-                        context
-                            .Add(
-                                new WithNullableBackingFields
-                                {
-                                    NullableBackedBoolTrueDefault = false,
-                                    NullableBackedIntNonZeroDefault = 0,
-                                    NullableBackedBoolFalseDefault = true,
-                                    NullableBackedIntZeroDefault = -1
-                                }
-                            )
-                            .Entity;
+                    var entity = context
+                        .Add(
+                            new WithNullableBackingFields
+                            {
+                                NullableBackedBoolTrueDefault = false,
+                                NullableBackedIntNonZeroDefault = 0,
+                                NullableBackedBoolFalseDefault = true,
+                                NullableBackedIntZeroDefault = -1
+                            }
+                        )
+                        .Entity;
 
                     context.SaveChanges();
 
@@ -1568,18 +1567,17 @@ namespace Microsoft.EntityFrameworkCore
             ExecuteWithStrategyInTransaction(
                 context =>
                 {
-                    var entity =
-                        context
-                            .Add(
-                                new WithNullableBackingFields
-                                {
-                                    NullableBackedBoolTrueDefault = true,
-                                    NullableBackedIntNonZeroDefault = 3,
-                                    NullableBackedBoolFalseDefault = true,
-                                    NullableBackedIntZeroDefault = 5
-                                }
-                            )
-                            .Entity;
+                    var entity = context
+                        .Add(
+                            new WithNullableBackingFields
+                            {
+                                NullableBackedBoolTrueDefault = true,
+                                NullableBackedIntNonZeroDefault = 3,
+                                NullableBackedBoolFalseDefault = true,
+                                NullableBackedIntZeroDefault = 5
+                            }
+                        )
+                        .Entity;
 
                     context.SaveChanges();
 
@@ -1633,18 +1631,17 @@ namespace Microsoft.EntityFrameworkCore
             ExecuteWithStrategyInTransaction(
                 context =>
                 {
-                    var entity =
-                        context
-                            .Add(
-                                new WithObjectBackingFields
-                                {
-                                    NullableBackedBoolTrueDefault = false,
-                                    NullableBackedIntNonZeroDefault = 0,
-                                    NullableBackedBoolFalseDefault = true,
-                                    NullableBackedIntZeroDefault = -1
-                                }
-                            )
-                            .Entity;
+                    var entity = context
+                        .Add(
+                            new WithObjectBackingFields
+                            {
+                                NullableBackedBoolTrueDefault = false,
+                                NullableBackedIntNonZeroDefault = 0,
+                                NullableBackedBoolFalseDefault = true,
+                                NullableBackedIntZeroDefault = -1
+                            }
+                        )
+                        .Entity;
 
                     context.SaveChanges();
 
@@ -1671,18 +1668,17 @@ namespace Microsoft.EntityFrameworkCore
             ExecuteWithStrategyInTransaction(
                 context =>
                 {
-                    var entity =
-                        context
-                            .Add(
-                                new WithObjectBackingFields
-                                {
-                                    NullableBackedBoolTrueDefault = true,
-                                    NullableBackedIntNonZeroDefault = 3,
-                                    NullableBackedBoolFalseDefault = true,
-                                    NullableBackedIntZeroDefault = 5
-                                }
-                            )
-                            .Entity;
+                    var entity = context
+                        .Add(
+                            new WithObjectBackingFields
+                            {
+                                NullableBackedBoolTrueDefault = true,
+                                NullableBackedIntNonZeroDefault = 3,
+                                NullableBackedBoolFalseDefault = true,
+                                NullableBackedIntZeroDefault = 5
+                            }
+                        )
+                        .Entity;
 
                     context.SaveChanges();
 
@@ -1970,17 +1966,15 @@ namespace Microsoft.EntityFrameworkCore
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Save);
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Save);
 
-                        property =
-                            b.Property(e => e.IdentityReadOnlyBeforeSave)
-                                .ValueGeneratedOnAdd()
-                                .Metadata;
+                        property = b.Property(e => e.IdentityReadOnlyBeforeSave)
+                            .ValueGeneratedOnAdd()
+                            .Metadata;
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Save);
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Throw);
 
-                        property =
-                            b.Property(e => e.IdentityReadOnlyAfterSave)
-                                .ValueGeneratedOnAdd()
-                                .Metadata;
+                        property = b.Property(e => e.IdentityReadOnlyAfterSave)
+                            .ValueGeneratedOnAdd()
+                            .Metadata;
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Throw);
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Save);
 
@@ -1988,57 +1982,51 @@ namespace Microsoft.EntityFrameworkCore
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Save);
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Save);
 
-                        property =
-                            b.Property(e => e.AlwaysIdentityReadOnlyBeforeSave)
-                                .ValueGeneratedOnAdd()
-                                .Metadata;
+                        property = b.Property(e => e.AlwaysIdentityReadOnlyBeforeSave)
+                            .ValueGeneratedOnAdd()
+                            .Metadata;
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Save);
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Throw);
 
-                        property =
-                            b.Property(e => e.AlwaysIdentityReadOnlyAfterSave)
-                                .ValueGeneratedOnAdd()
-                                .Metadata;
+                        property = b.Property(e => e.AlwaysIdentityReadOnlyAfterSave)
+                            .ValueGeneratedOnAdd()
+                            .Metadata;
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Throw);
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Save);
 
-                        property =
-                            b.Property(e => e.Computed).ValueGeneratedOnAddOrUpdate().Metadata;
+                        property = b.Property(e => e.Computed)
+                            .ValueGeneratedOnAddOrUpdate()
+                            .Metadata;
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Save);
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Save);
 
-                        property =
-                            b.Property(e => e.ComputedReadOnlyBeforeSave)
-                                .ValueGeneratedOnAddOrUpdate()
-                                .Metadata;
+                        property = b.Property(e => e.ComputedReadOnlyBeforeSave)
+                            .ValueGeneratedOnAddOrUpdate()
+                            .Metadata;
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Save);
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Throw);
 
-                        property =
-                            b.Property(e => e.ComputedReadOnlyAfterSave)
-                                .ValueGeneratedOnAddOrUpdate()
-                                .Metadata;
+                        property = b.Property(e => e.ComputedReadOnlyAfterSave)
+                            .ValueGeneratedOnAddOrUpdate()
+                            .Metadata;
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Throw);
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Save);
 
-                        property =
-                            b.Property(e => e.AlwaysComputed)
-                                .ValueGeneratedOnAddOrUpdate()
-                                .Metadata;
+                        property = b.Property(e => e.AlwaysComputed)
+                            .ValueGeneratedOnAddOrUpdate()
+                            .Metadata;
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Save);
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Save);
 
-                        property =
-                            b.Property(e => e.AlwaysComputedReadOnlyBeforeSave)
-                                .ValueGeneratedOnAddOrUpdate()
-                                .Metadata;
+                        property = b.Property(e => e.AlwaysComputedReadOnlyBeforeSave)
+                            .ValueGeneratedOnAddOrUpdate()
+                            .Metadata;
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Save);
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Throw);
 
-                        property =
-                            b.Property(e => e.AlwaysComputedReadOnlyAfterSave)
-                                .ValueGeneratedOnAddOrUpdate()
-                                .Metadata;
+                        property = b.Property(e => e.AlwaysComputedReadOnlyAfterSave)
+                            .ValueGeneratedOnAddOrUpdate()
+                            .Metadata;
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Throw);
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Save);
                     }
@@ -2049,261 +2037,225 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         b.Property(e => e.Never).ValueGeneratedNever();
 
-                        var property =
-                            b.Property(e => e.NeverUseBeforeUseAfter)
-                                .ValueGeneratedNever()
-                                .Metadata;
+                        var property = b.Property(e => e.NeverUseBeforeUseAfter)
+                            .ValueGeneratedNever()
+                            .Metadata;
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Save);
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Save);
 
-                        property =
-                            b.Property(e => e.NeverIgnoreBeforeUseAfter)
-                                .ValueGeneratedNever()
-                                .Metadata;
+                        property = b.Property(e => e.NeverIgnoreBeforeUseAfter)
+                            .ValueGeneratedNever()
+                            .Metadata;
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Ignore);
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Save);
 
-                        property =
-                            b.Property(e => e.NeverThrowBeforeUseAfter)
-                                .ValueGeneratedNever()
-                                .Metadata;
+                        property = b.Property(e => e.NeverThrowBeforeUseAfter)
+                            .ValueGeneratedNever()
+                            .Metadata;
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Throw);
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Save);
 
-                        property =
-                            b.Property(e => e.NeverUseBeforeIgnoreAfter)
-                                .ValueGeneratedNever()
-                                .Metadata;
+                        property = b.Property(e => e.NeverUseBeforeIgnoreAfter)
+                            .ValueGeneratedNever()
+                            .Metadata;
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Save);
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
 
-                        property =
-                            b.Property(e => e.NeverIgnoreBeforeIgnoreAfter)
-                                .ValueGeneratedNever()
-                                .Metadata;
+                        property = b.Property(e => e.NeverIgnoreBeforeIgnoreAfter)
+                            .ValueGeneratedNever()
+                            .Metadata;
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Ignore);
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
 
-                        property =
-                            b.Property(e => e.NeverThrowBeforeIgnoreAfter)
-                                .ValueGeneratedNever()
-                                .Metadata;
+                        property = b.Property(e => e.NeverThrowBeforeIgnoreAfter)
+                            .ValueGeneratedNever()
+                            .Metadata;
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Throw);
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
 
-                        property =
-                            b.Property(e => e.NeverUseBeforeThrowAfter)
-                                .ValueGeneratedNever()
-                                .Metadata;
+                        property = b.Property(e => e.NeverUseBeforeThrowAfter)
+                            .ValueGeneratedNever()
+                            .Metadata;
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Save);
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Throw);
 
-                        property =
-                            b.Property(e => e.NeverIgnoreBeforeThrowAfter)
-                                .ValueGeneratedNever()
-                                .Metadata;
+                        property = b.Property(e => e.NeverIgnoreBeforeThrowAfter)
+                            .ValueGeneratedNever()
+                            .Metadata;
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Ignore);
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Throw);
 
-                        property =
-                            b.Property(e => e.NeverThrowBeforeThrowAfter)
-                                .ValueGeneratedNever()
-                                .Metadata;
+                        property = b.Property(e => e.NeverThrowBeforeThrowAfter)
+                            .ValueGeneratedNever()
+                            .Metadata;
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Throw);
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Throw);
 
                         b.Property(e => e.OnAdd).ValueGeneratedOnAdd();
 
-                        property =
-                            b.Property(e => e.OnAddUseBeforeUseAfter)
-                                .ValueGeneratedOnAdd()
-                                .Metadata;
+                        property = b.Property(e => e.OnAddUseBeforeUseAfter)
+                            .ValueGeneratedOnAdd()
+                            .Metadata;
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Save);
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Save);
 
-                        property =
-                            b.Property(e => e.OnAddIgnoreBeforeUseAfter)
-                                .ValueGeneratedOnAdd()
-                                .Metadata;
+                        property = b.Property(e => e.OnAddIgnoreBeforeUseAfter)
+                            .ValueGeneratedOnAdd()
+                            .Metadata;
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Ignore);
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Save);
 
-                        property =
-                            b.Property(e => e.OnAddThrowBeforeUseAfter)
-                                .ValueGeneratedOnAdd()
-                                .Metadata;
+                        property = b.Property(e => e.OnAddThrowBeforeUseAfter)
+                            .ValueGeneratedOnAdd()
+                            .Metadata;
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Throw);
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Save);
 
-                        property =
-                            b.Property(e => e.OnAddUseBeforeIgnoreAfter)
-                                .ValueGeneratedOnAdd()
-                                .Metadata;
+                        property = b.Property(e => e.OnAddUseBeforeIgnoreAfter)
+                            .ValueGeneratedOnAdd()
+                            .Metadata;
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Save);
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
 
-                        property =
-                            b.Property(e => e.OnAddIgnoreBeforeIgnoreAfter)
-                                .ValueGeneratedOnAdd()
-                                .Metadata;
+                        property = b.Property(e => e.OnAddIgnoreBeforeIgnoreAfter)
+                            .ValueGeneratedOnAdd()
+                            .Metadata;
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Ignore);
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
 
-                        property =
-                            b.Property(e => e.OnAddThrowBeforeIgnoreAfter)
-                                .ValueGeneratedOnAdd()
-                                .Metadata;
+                        property = b.Property(e => e.OnAddThrowBeforeIgnoreAfter)
+                            .ValueGeneratedOnAdd()
+                            .Metadata;
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Throw);
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
 
-                        property =
-                            b.Property(e => e.OnAddUseBeforeThrowAfter)
-                                .ValueGeneratedOnAdd()
-                                .Metadata;
+                        property = b.Property(e => e.OnAddUseBeforeThrowAfter)
+                            .ValueGeneratedOnAdd()
+                            .Metadata;
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Save);
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Throw);
 
-                        property =
-                            b.Property(e => e.OnAddIgnoreBeforeThrowAfter)
-                                .ValueGeneratedOnAdd()
-                                .Metadata;
+                        property = b.Property(e => e.OnAddIgnoreBeforeThrowAfter)
+                            .ValueGeneratedOnAdd()
+                            .Metadata;
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Ignore);
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Throw);
 
-                        property =
-                            b.Property(e => e.OnAddThrowBeforeThrowAfter)
-                                .ValueGeneratedOnAdd()
-                                .Metadata;
+                        property = b.Property(e => e.OnAddThrowBeforeThrowAfter)
+                            .ValueGeneratedOnAdd()
+                            .Metadata;
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Throw);
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Throw);
 
                         b.Property(e => e.OnAddOrUpdate).ValueGeneratedOnAddOrUpdate();
 
-                        property =
-                            b.Property(e => e.OnAddOrUpdateUseBeforeUseAfter)
-                                .ValueGeneratedOnAddOrUpdate()
-                                .Metadata;
+                        property = b.Property(e => e.OnAddOrUpdateUseBeforeUseAfter)
+                            .ValueGeneratedOnAddOrUpdate()
+                            .Metadata;
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Save);
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Save);
 
-                        property =
-                            b.Property(e => e.OnAddOrUpdateIgnoreBeforeUseAfter)
-                                .ValueGeneratedOnAddOrUpdate()
-                                .Metadata;
+                        property = b.Property(e => e.OnAddOrUpdateIgnoreBeforeUseAfter)
+                            .ValueGeneratedOnAddOrUpdate()
+                            .Metadata;
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Ignore);
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Save);
 
-                        property =
-                            b.Property(e => e.OnAddOrUpdateThrowBeforeUseAfter)
-                                .ValueGeneratedOnAddOrUpdate()
-                                .Metadata;
+                        property = b.Property(e => e.OnAddOrUpdateThrowBeforeUseAfter)
+                            .ValueGeneratedOnAddOrUpdate()
+                            .Metadata;
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Throw);
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Save);
 
-                        property =
-                            b.Property(e => e.OnAddOrUpdateUseBeforeIgnoreAfter)
-                                .ValueGeneratedOnAddOrUpdate()
-                                .Metadata;
+                        property = b.Property(e => e.OnAddOrUpdateUseBeforeIgnoreAfter)
+                            .ValueGeneratedOnAddOrUpdate()
+                            .Metadata;
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Save);
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
 
-                        property =
-                            b.Property(e => e.OnAddOrUpdateIgnoreBeforeIgnoreAfter)
-                                .ValueGeneratedOnAddOrUpdate()
-                                .Metadata;
+                        property = b.Property(e => e.OnAddOrUpdateIgnoreBeforeIgnoreAfter)
+                            .ValueGeneratedOnAddOrUpdate()
+                            .Metadata;
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Ignore);
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
 
-                        property =
-                            b.Property(e => e.OnAddOrUpdateThrowBeforeIgnoreAfter)
-                                .ValueGeneratedOnAddOrUpdate()
-                                .Metadata;
+                        property = b.Property(e => e.OnAddOrUpdateThrowBeforeIgnoreAfter)
+                            .ValueGeneratedOnAddOrUpdate()
+                            .Metadata;
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Throw);
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
 
-                        property =
-                            b.Property(e => e.OnAddOrUpdateUseBeforeThrowAfter)
-                                .ValueGeneratedOnAddOrUpdate()
-                                .Metadata;
+                        property = b.Property(e => e.OnAddOrUpdateUseBeforeThrowAfter)
+                            .ValueGeneratedOnAddOrUpdate()
+                            .Metadata;
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Save);
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Throw);
 
-                        property =
-                            b.Property(e => e.OnAddOrUpdateIgnoreBeforeThrowAfter)
-                                .ValueGeneratedOnAddOrUpdate()
-                                .Metadata;
+                        property = b.Property(e => e.OnAddOrUpdateIgnoreBeforeThrowAfter)
+                            .ValueGeneratedOnAddOrUpdate()
+                            .Metadata;
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Ignore);
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Throw);
 
-                        property =
-                            b.Property(e => e.OnAddOrUpdateThrowBeforeThrowAfter)
-                                .ValueGeneratedOnAddOrUpdate()
-                                .Metadata;
+                        property = b.Property(e => e.OnAddOrUpdateThrowBeforeThrowAfter)
+                            .ValueGeneratedOnAddOrUpdate()
+                            .Metadata;
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Throw);
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Throw);
 
                         b.Property(e => e.OnUpdate).ValueGeneratedOnUpdate();
 
-                        property =
-                            b.Property(e => e.OnUpdateUseBeforeUseAfter)
-                                .ValueGeneratedOnUpdate()
-                                .Metadata;
+                        property = b.Property(e => e.OnUpdateUseBeforeUseAfter)
+                            .ValueGeneratedOnUpdate()
+                            .Metadata;
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Save);
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Save);
 
-                        property =
-                            b.Property(e => e.OnUpdateIgnoreBeforeUseAfter)
-                                .ValueGeneratedOnUpdate()
-                                .Metadata;
+                        property = b.Property(e => e.OnUpdateIgnoreBeforeUseAfter)
+                            .ValueGeneratedOnUpdate()
+                            .Metadata;
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Ignore);
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Save);
 
-                        property =
-                            b.Property(e => e.OnUpdateThrowBeforeUseAfter)
-                                .ValueGeneratedOnUpdate()
-                                .Metadata;
+                        property = b.Property(e => e.OnUpdateThrowBeforeUseAfter)
+                            .ValueGeneratedOnUpdate()
+                            .Metadata;
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Throw);
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Save);
 
-                        property =
-                            b.Property(e => e.OnUpdateUseBeforeIgnoreAfter)
-                                .ValueGeneratedOnUpdate()
-                                .Metadata;
+                        property = b.Property(e => e.OnUpdateUseBeforeIgnoreAfter)
+                            .ValueGeneratedOnUpdate()
+                            .Metadata;
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Save);
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
 
-                        property =
-                            b.Property(e => e.OnUpdateIgnoreBeforeIgnoreAfter)
-                                .ValueGeneratedOnUpdate()
-                                .Metadata;
+                        property = b.Property(e => e.OnUpdateIgnoreBeforeIgnoreAfter)
+                            .ValueGeneratedOnUpdate()
+                            .Metadata;
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Ignore);
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
 
-                        property =
-                            b.Property(e => e.OnUpdateThrowBeforeIgnoreAfter)
-                                .ValueGeneratedOnUpdate()
-                                .Metadata;
+                        property = b.Property(e => e.OnUpdateThrowBeforeIgnoreAfter)
+                            .ValueGeneratedOnUpdate()
+                            .Metadata;
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Throw);
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
 
-                        property =
-                            b.Property(e => e.OnUpdateUseBeforeThrowAfter)
-                                .ValueGeneratedOnUpdate()
-                                .Metadata;
+                        property = b.Property(e => e.OnUpdateUseBeforeThrowAfter)
+                            .ValueGeneratedOnUpdate()
+                            .Metadata;
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Save);
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Throw);
 
-                        property =
-                            b.Property(e => e.OnUpdateIgnoreBeforeThrowAfter)
-                                .ValueGeneratedOnUpdate()
-                                .Metadata;
+                        property = b.Property(e => e.OnUpdateIgnoreBeforeThrowAfter)
+                            .ValueGeneratedOnUpdate()
+                            .Metadata;
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Ignore);
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Throw);
 
-                        property =
-                            b.Property(e => e.OnUpdateThrowBeforeThrowAfter)
-                                .ValueGeneratedOnUpdate()
-                                .Metadata;
+                        property = b.Property(e => e.OnUpdateThrowBeforeThrowAfter)
+                            .ValueGeneratedOnUpdate()
+                            .Metadata;
                         property.SetBeforeSaveBehavior(PropertySaveBehavior.Throw);
                         property.SetAfterSaveBehavior(PropertySaveBehavior.Throw);
                     }

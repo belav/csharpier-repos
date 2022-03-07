@@ -58,8 +58,7 @@ namespace Microsoft.EntityFrameworkCore
             using var context = new ChangeContext<ChangeNonVirtualIndexerNotUsed>();
 
             Assert.DoesNotContain(
-                context
-                    .Model
+                context.Model
                     .FindEntityType(typeof(ChangeNonVirtualIndexerNotUsed))
                     .GetProperties(),
                 e => e.IsIndexerProperty()

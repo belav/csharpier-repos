@@ -60,8 +60,9 @@ namespace Microsoft.Extensions.FileSystemGlobbing
             string directoryPath
         )
         {
-            IEnumerable<FilePatternMatch> matches =
-                matcher.Execute(new DirectoryInfoWrapper(new DirectoryInfo(directoryPath))).Files;
+            IEnumerable<FilePatternMatch> matches = matcher
+                .Execute(new DirectoryInfoWrapper(new DirectoryInfo(directoryPath)))
+                .Files;
             string[] result = matches
                 .Select(match => Path.GetFullPath(Path.Combine(directoryPath, match.Path)))
                 .ToArray();

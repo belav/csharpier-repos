@@ -64,9 +64,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ChangeSignature
         )
         {
             using (
-                context
-                    .OperationContext
-                    .AddScope(allowCancellation: true, FeaturesResources.Change_signature)
+                context.OperationContext.AddScope(
+                    allowCancellation: true,
+                    FeaturesResources.Change_signature
+                )
             )
             {
                 if (!IsAvailable(subjectBuffer, out var workspace))
@@ -80,9 +81,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ChangeSignature
                     return false;
                 }
 
-                var document = subjectBuffer
-                    .CurrentSnapshot
-                    .GetFullyLoadedOpenDocumentInCurrentContextWithChanges(
+                var document =
+                    subjectBuffer.CurrentSnapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChanges(
                         context.OperationContext,
                         _threadingContext
                     );

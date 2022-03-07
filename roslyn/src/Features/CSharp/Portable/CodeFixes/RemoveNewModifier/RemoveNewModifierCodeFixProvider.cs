@@ -45,8 +45,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.RemoveNewModifier
 
         public override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            var root = await context
-                .Document
+            var root = await context.Document
                 .GetSyntaxRootAsync(context.CancellationToken)
                 .ConfigureAwait(false);
 

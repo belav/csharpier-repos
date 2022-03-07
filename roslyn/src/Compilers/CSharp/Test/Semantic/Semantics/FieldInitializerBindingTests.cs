@@ -296,8 +296,7 @@ class C
         {
             var compilation = CreateCompilation(source);
             var syntaxTree = compilation.SyntaxTrees.First();
-            var typeSymbol = (SourceNamedTypeSymbol)compilation
-                .GlobalNamespace
+            var typeSymbol = (SourceNamedTypeSymbol)compilation.GlobalNamespace
                 .GetMembers("C")
                 .Single();
 
@@ -358,8 +357,9 @@ class C
                     Assert.Same(initValueSyntax.Parent, boundInit.Syntax);
                     Assert.Equal(expectedInitializer.InitialValue, initValueSyntax.ToFullString());
 
-                    var initValueLineNumber =
-                        syntaxTree.GetLineSpan(initValueSyntax.Span).StartLinePosition.Line;
+                    var initValueLineNumber = syntaxTree
+                        .GetLineSpan(initValueSyntax.Span)
+                        .StartLinePosition.Line;
                     Assert.Equal(expectedInitializer.LineNumber, initValueLineNumber);
 
                     Assert.Equal(expectedInitializer.FieldName, boundFieldInit.Field.Name);

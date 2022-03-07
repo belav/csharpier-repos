@@ -136,12 +136,10 @@ namespace System.Web.Http.SelfHost.Channels
         internal static HttpMessageEncodingRequestContext GetContextFromMessage(Message message)
         {
             HttpMessageEncodingRequestContext context = null;
-            message
-                .Properties
-                .TryGetValue<HttpMessageEncodingRequestContext>(
-                    HttpMessageEncodingRequestContextPropertyName,
-                    out context
-                );
+            message.Properties.TryGetValue<HttpMessageEncodingRequestContext>(
+                HttpMessageEncodingRequestContextPropertyName,
+                out context
+            );
             return context;
         }
 
@@ -190,9 +188,10 @@ namespace System.Web.Http.SelfHost.Channels
 
             HttpRequestMessageProperty requestProperty;
             if (
-                !message
-                    .Properties
-                    .TryGetValue(HttpRequestMessageProperty.Name, out requestProperty)
+                !message.Properties.TryGetValue(
+                    HttpRequestMessageProperty.Name,
+                    out requestProperty
+                )
             )
             {
                 throw Error.InvalidOperation(
@@ -262,10 +261,10 @@ namespace System.Web.Http.SelfHost.Channels
                 string headerValue = headers[headerName];
                 if (!httpRequestMessage.Headers.TryAddWithoutValidation(headerName, headerValue))
                 {
-                    httpRequestMessage
-                        .Content
-                        .Headers
-                        .TryAddWithoutValidation(headerName, headerValue);
+                    httpRequestMessage.Content.Headers.TryAddWithoutValidation(
+                        headerName,
+                        headerValue
+                    );
                 }
             }
 

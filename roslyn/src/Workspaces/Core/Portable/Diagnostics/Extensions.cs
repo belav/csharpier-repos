@@ -198,9 +198,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 }
 
                 var result = new DiagnosticAnalysisResultBuilder(project, version);
-                var diagnosticIdsToFilter = skippedAnalyzersInfo
-                    .FilteredDiagnosticIdsForAnalyzers
-                    .GetValueOrDefault(analyzer, ImmutableArray<string>.Empty);
+                var diagnosticIdsToFilter =
+                    skippedAnalyzersInfo.FilteredDiagnosticIdsForAnalyzers.GetValueOrDefault(
+                        analyzer,
+                        ImmutableArray<string>.Empty
+                    );
 
                 if (documentAnalysisScope != null)
                 {
@@ -218,9 +220,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                             if (treeToAnalyze != null)
                             {
                                 if (
-                                    analysisResult
-                                        .SyntaxDiagnostics
-                                        .TryGetValue(treeToAnalyze, out diagnosticsByAnalyzerMap)
+                                    analysisResult.SyntaxDiagnostics.TryGetValue(
+                                        treeToAnalyze,
+                                        out diagnosticsByAnalyzerMap
+                                    )
                                 )
                                 {
                                     AddAnalyzerDiagnosticsToResult(
@@ -238,12 +241,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                                 }
                             }
                             else if (
-                                analysisResult
-                                    .AdditionalFileDiagnostics
-                                    .TryGetValue(
-                                        additionalFileToAnalyze!,
-                                        out diagnosticsByAnalyzerMap
-                                    )
+                                analysisResult.AdditionalFileDiagnostics.TryGetValue(
+                                    additionalFileToAnalyze!,
+                                    out diagnosticsByAnalyzerMap
+                                )
                             )
                             {
                                 AddAnalyzerDiagnosticsToResult(
@@ -264,9 +265,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
                         case AnalysisKind.Semantic:
                             if (
-                                analysisResult
-                                    .SemanticDiagnostics
-                                    .TryGetValue(treeToAnalyze!, out diagnosticsByAnalyzerMap)
+                                analysisResult.SemanticDiagnostics.TryGetValue(
+                                    treeToAnalyze!,
+                                    out diagnosticsByAnalyzerMap
+                                )
                             )
                             {
                                 AddAnalyzerDiagnosticsToResult(
@@ -581,8 +583,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             }
 
             Debug.Assert(
-                documentAnalysisScope
-                    .Analyzers
+                documentAnalysisScope.Analyzers
                     .ToSet()
                     .IsSubsetOf(compilationWithAnalyzers.Analyzers)
             );

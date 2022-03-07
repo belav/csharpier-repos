@@ -115,8 +115,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
                 cancellationToken
             );
 
-            var solution =
-                (await GetRequiredGlobalServiceAsync<SDTE, EnvDTE.DTE>(cancellationToken)).Solution;
+            var solution = (
+                await GetRequiredGlobalServiceAsync<SDTE, EnvDTE.DTE>(cancellationToken)
+            ).Solution;
             Assumes.Present(solution);
 
             solution.AddFromTemplate(
@@ -189,8 +190,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             var project = await GetProjectAsync(projectName, cancellationToken);
-            var references = ((VSProject)project.Object)
-                .References
+            var references = ((VSProject)project.Object).References
                 .Cast<Reference>()
                 .Where(x => x.SourceProject == null)
                 .Select(x => x.Name + "," + x.Version + "," + x.PublicKeyToken)
@@ -206,8 +206,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             var project = await GetProjectAsync(projectName, cancellationToken);
-            var references = ((VSProject)project.Object)
-                .References
+            var references = ((VSProject)project.Object).References
                 .Cast<Reference>()
                 .Where(x => x.SourceProject != null)
                 .Select(x => x.Name)
@@ -540,8 +539,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             var solution = dte.Solution;
             Assumes.Present(solution);
 
-            var project = solution
-                .Projects
+            var project = solution.Projects
                 .Cast<EnvDTE.Project>()
                 .First(x => x.Name == projectName);
             var projectPath = Path.GetDirectoryName(project.FullName);
@@ -701,8 +699,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 
             var dte = await GetRequiredGlobalServiceAsync<SDTE, EnvDTE.DTE>(cancellationToken);
             var solution = (EnvDTE80.Solution2)dte.Solution;
-            return solution
-                .Projects
+            return solution.Projects
                 .OfType<EnvDTE.Project>()
                 .First(
                     project =>

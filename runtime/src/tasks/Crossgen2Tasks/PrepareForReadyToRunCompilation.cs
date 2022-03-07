@@ -583,16 +583,18 @@ namespace Microsoft.NET.Build.Tasks
         {
             foreach (var attributeHandle in mdReader.GetAssemblyDefinition().GetCustomAttributes())
             {
-                EntityHandle attributeCtor =
-                    mdReader.GetCustomAttribute(attributeHandle).Constructor;
+                EntityHandle attributeCtor = mdReader
+                    .GetCustomAttribute(attributeHandle)
+                    .Constructor;
 
                 StringHandle attributeTypeName = default;
                 StringHandle attributeTypeNamespace = default;
 
                 if (attributeCtor.Kind == HandleKind.MemberReference)
                 {
-                    EntityHandle attributeMemberParent =
-                        mdReader.GetMemberReference((MemberReferenceHandle)attributeCtor).Parent;
+                    EntityHandle attributeMemberParent = mdReader
+                        .GetMemberReference((MemberReferenceHandle)attributeCtor)
+                        .Parent;
                     if (attributeMemberParent.Kind == HandleKind.TypeReference)
                     {
                         TypeReference attributeTypeRef = mdReader.GetTypeReference(
@@ -617,12 +619,14 @@ namespace Microsoft.NET.Build.Tasks
                 if (
                     !attributeTypeName.IsNil
                     && !attributeTypeNamespace.IsNil
-                    && mdReader
-                        .StringComparer
-                        .Equals(attributeTypeName, "ReferenceAssemblyAttribute")
-                    && mdReader
-                        .StringComparer
-                        .Equals(attributeTypeNamespace, "System.Runtime.CompilerServices")
+                    && mdReader.StringComparer.Equals(
+                        attributeTypeName,
+                        "ReferenceAssemblyAttribute"
+                    )
+                    && mdReader.StringComparer.Equals(
+                        attributeTypeNamespace,
+                        "System.Runtime.CompilerServices"
+                    )
                 )
                 {
                     return true;

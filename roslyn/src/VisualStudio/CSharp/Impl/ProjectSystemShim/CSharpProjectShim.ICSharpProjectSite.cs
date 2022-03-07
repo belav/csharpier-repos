@@ -152,11 +152,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
                     .Select(
                         e =>
                             e.ToDisplayString(
-                                SymbolDisplayFormat
-                                    .FullyQualifiedFormat
-                                    .WithGlobalNamespaceStyle(
-                                        SymbolDisplayGlobalNamespaceStyle.Omitted
-                                    )
+                                SymbolDisplayFormat.FullyQualifiedFormat.WithGlobalNamespaceStyle(
+                                    SymbolDisplayGlobalNamespaceStyle.Omitted
+                                )
                             )
                     )
                     .ToArray();

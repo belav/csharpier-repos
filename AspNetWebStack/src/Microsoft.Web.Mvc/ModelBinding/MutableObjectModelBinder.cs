@@ -112,9 +112,11 @@ namespace Microsoft.Web.Mvc.ModelBinding
                 ModelName = bindingContext.ModelName
             };
 
-            IExtensibleModelBinder dtoBinder = bindingContext
-                .ModelBinderProviders
-                .GetRequiredBinder(controllerContext, dtoBindingContext);
+            IExtensibleModelBinder dtoBinder =
+                bindingContext.ModelBinderProviders.GetRequiredBinder(
+                    controllerContext,
+                    dtoBindingContext
+                );
             dtoBinder.BindModel(controllerContext, dtoBindingContext);
             return (ComplexModelDto)dtoBindingContext.Model;
         }
@@ -157,8 +159,10 @@ namespace Microsoft.Web.Mvc.ModelBinding
             return (sender, e) =>
             {
                 ModelValidationNode validationNode = (ModelValidationNode)sender;
-                ModelStateDictionary modelState =
-                    e.ControllerContext.Controller.ViewData.ModelState;
+                ModelStateDictionary modelState = e.ControllerContext
+                    .Controller
+                    .ViewData
+                    .ModelState;
 
                 if (modelState.IsValidField(validationNode.ModelStateKey))
                 {
@@ -210,8 +214,7 @@ namespace Microsoft.Web.Mvc.ModelBinding
 
         private static object GetPropertyDefaultValue(PropertyDescriptor propertyDescriptor)
         {
-            DefaultValueAttribute attr = propertyDescriptor
-                .Attributes
+            DefaultValueAttribute attr = propertyDescriptor.Attributes
                 .OfType<DefaultValueAttribute>()
                 .FirstOrDefault();
             return (attr != null) ? attr.Value : null;
@@ -236,8 +239,7 @@ namespace Microsoft.Web.Mvc.ModelBinding
 
             foreach (PropertyDescriptor propertyDescriptor in propertyDescriptors)
             {
-                BindingBehaviorAttribute propAttr = propertyDescriptor
-                    .Attributes
+                BindingBehaviorAttribute propAttr = propertyDescriptor.Attributes
                     .OfType<BindingBehaviorAttribute>()
                     .SingleOrDefault();
                 BindingBehaviorAttribute workingAttr = propAttr ?? typeAttr;
@@ -333,8 +335,7 @@ namespace Microsoft.Web.Mvc.ModelBinding
                 string modelStateKey = dtoResult.ValidationNode.ModelStateKey;
                 if (bindingContext.ModelState.IsValidField(modelStateKey))
                 {
-                    ModelValidator requiredValidator = ModelValidatorProviders
-                        .Providers
+                    ModelValidator requiredValidator = ModelValidatorProviders.Providers
                         .GetValidators(propertyMetadata, controllerContext)
                         .Where(v => v.IsRequired)
                         .FirstOrDefault();
@@ -346,9 +347,10 @@ namespace Microsoft.Web.Mvc.ModelBinding
                             )
                         )
                         {
-                            bindingContext
-                                .ModelState
-                                .AddModelError(modelStateKey, validationResult.Message);
+                            bindingContext.ModelState.AddModelError(
+                                modelStateKey,
+                                validationResult.Message
+                            );
                         }
                     }
                 }

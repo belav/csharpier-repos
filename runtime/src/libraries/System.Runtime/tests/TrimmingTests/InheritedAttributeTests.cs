@@ -34,8 +34,9 @@ class Program
 {
     static int Main(string[] args)
     {
-        int numAttributes =
-            Attribute.GetCustomAttributes(typeof(Derived).GetProperty("X"), inherit: true).Length;
+        int numAttributes = Attribute
+            .GetCustomAttributes(typeof(Derived).GetProperty("X"), inherit: true)
+            .Length;
         if (numAttributes == 3)
         {
             return 100;

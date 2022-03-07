@@ -344,8 +344,9 @@ namespace System.Reflection.Tests
                 )
             );
 
-            IEnumerable<CustomAttributeData> attributeData =
-                s_typeTestClass.GetTypeInfo().CustomAttributes;
+            IEnumerable<CustomAttributeData> attributeData = s_typeTestClass
+                .GetTypeInfo()
+                .CustomAttributes;
 
             IEnumerator<CustomAttributeData> customAttrsdata = attributeData.GetEnumerator();
 

@@ -60,8 +60,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.LinkedFileDiffMerging
                 }
             }
 
-            var mergedSolution =
-                updatedSolution.WithMergedLinkedFileChangesAsync(startingSolution).Result;
+            var mergedSolution = updatedSolution
+                .WithMergedLinkedFileChangesAsync(startingSolution)
+                .Result;
             for (var i = 0; i < updatedTexts.Count; i++)
             {
                 AssertEx.EqualOrDiff(

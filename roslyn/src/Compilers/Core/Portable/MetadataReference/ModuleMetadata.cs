@@ -244,14 +244,12 @@ namespace Microsoft.CodeAnalysis
         public static ModuleMetadata CreateFromFile(string path)
         {
             return CreateFromStream(
-                StandardFileSystem
-                    .Instance
-                    .OpenFileWithNormalizedException(
-                        path,
-                        FileMode.Open,
-                        FileAccess.Read,
-                        FileShare.Read
-                    )
+                StandardFileSystem.Instance.OpenFileWithNormalizedException(
+                    path,
+                    FileMode.Open,
+                    FileAccess.Read,
+                    FileShare.Read
+                )
             );
         }
 

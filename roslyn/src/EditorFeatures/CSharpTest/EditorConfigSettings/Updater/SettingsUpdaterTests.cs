@@ -37,8 +37,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
 
             Assert.True(
                 workspace.TryApplyChanges(
-                    workspace
-                        .CurrentSolution
+                    workspace.CurrentSolution
                         .AddProject(projectId, "proj1", "proj1.dll", LanguageNames.CSharp)
                         .AddDocument(
                             DocumentId.CreateNewId(projectId),
@@ -64,13 +63,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
         )
         {
             var solution = workspace.CurrentSolution;
-            var documentId = solution
-                .Projects
+            var documentId = solution.Projects
                 .Single()
-                .State
-                .AnalyzerConfigDocumentStates
-                .Ids
-                .First();
+                .State.AnalyzerConfigDocumentStates.Ids.First();
             var text = SourceText.From(contents);
             var newSolution1 = solution.WithAnalyzerConfigDocumentText(
                 documentId,
@@ -149,8 +144,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
         [Fact, Trait(Traits.Feature, Traits.Features.EditorConfigUI)]
         public async Task TestAddNewEnumCodeStyleOptionWithSeverityAsync()
         {
-            ICodeStyleOption option =
-                CSharpCodeStyleOptions.PreferredUsingDirectivePlacement.DefaultValue;
+            ICodeStyleOption option = CSharpCodeStyleOptions
+                .PreferredUsingDirectivePlacement
+                .DefaultValue;
             option = option
                 .WithValue(AddImportPlacement.InsideNamespace)
                 .WithNotification(NotificationOption2.Warning);
@@ -469,17 +465,16 @@ csharp_new_line_before_else = true";
                 update.NewText
             );
             value = "false:error";
-            var editorconfig = workspace
-                .CurrentSolution
-                .Projects
+            var editorconfig = workspace.CurrentSolution.Projects
                 .SelectMany(
                     p => p.AnalyzerConfigDocuments.Where(a => a.FilePath == EditorconfigPath)
                 )
                 .Single();
             var text = await editorconfig.GetTextAsync();
-            var newSolution = workspace
-                .CurrentSolution
-                .WithAnalyzerConfigDocumentText(editorconfig.Id, text);
+            var newSolution = workspace.CurrentSolution.WithAnalyzerConfigDocumentText(
+                editorconfig.Id,
+                text
+            );
             Assert.True(workspace.TryApplyChanges(newSolution));
             setting.ChangeValue(0);
             updates = await updater.GetChangedEditorConfigAsync(default);

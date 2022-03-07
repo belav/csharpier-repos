@@ -108,8 +108,7 @@ internal class ExperimentalWorkspacePullDiagnosticsHandler
         WorkspaceDiagnosticParams diagnosticsParams
     )
     {
-        return diagnosticsParams
-            .PreviousResultIds
+        return diagnosticsParams.PreviousResultIds
             .Select(
                 id =>
                     new PreviousResult(id.Value, new TextDocumentIdentifier { Uri = id.Uri })

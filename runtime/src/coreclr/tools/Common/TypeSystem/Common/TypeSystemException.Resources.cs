@@ -23,9 +23,10 @@ namespace Internal.TypeSystem
 
         public static string GetFormatString(ExceptionStringID id)
         {
-            return s_stringResourceManager
-                .Value
-                .GetString(id.ToString(), CultureInfo.InvariantCulture);
+            return s_stringResourceManager.Value.GetString(
+                id.ToString(),
+                CultureInfo.InvariantCulture
+            );
         }
     }
 }

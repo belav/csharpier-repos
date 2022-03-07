@@ -19,9 +19,10 @@ namespace Microsoft.CodeAnalysis.CodeLens
             if (x != null && x.IsInSource && y != null && y.IsInSource)
             {
                 return x.SourceSpan.Equals(y.SourceSpan)
-                    && x.SourceTree
-                        .FilePath
-                        .Equals(y.SourceTree.FilePath, StringComparison.OrdinalIgnoreCase);
+                    && x.SourceTree.FilePath.Equals(
+                        y.SourceTree.FilePath,
+                        StringComparison.OrdinalIgnoreCase
+                    );
             }
 
             return object.Equals(x, y);

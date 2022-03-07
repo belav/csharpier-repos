@@ -24,10 +24,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
 
         public virtual void ErrorList()
         {
-            VisualStudio
-                .Editor
-                .SetText(
-                    @"
+            VisualStudio.Editor.SetText(
+                @"
 Module Module1
 
     Function Good() As P
@@ -40,7 +38,7 @@ Module Module1
 
 End Module
 "
-                );
+            );
             VisualStudio.ErrorList.ShowErrorList();
             var expectedContents = new[]
             {
@@ -80,10 +78,8 @@ End Module
 
         public virtual void ErrorsDuringMethodBodyEditing()
         {
-            VisualStudio
-                .Editor
-                .SetText(
-                    @"
+            VisualStudio.Editor.SetText(
+                @"
 Namespace N
     Class C
         Private F As Integer
@@ -93,7 +89,7 @@ Namespace N
     End Class
 End Namespace
 "
-                );
+            );
             VisualStudio.Editor.PlaceCaret(" Comment", charsOffset: -2);
             VisualStudio.SendKeys.Send("F = 0");
             VisualStudio.ErrorList.ShowErrorList();

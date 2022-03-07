@@ -164,12 +164,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                 // RazorCSharp has an HTMLX base type but should not be associated with
                 // the HTML host type, so we check for it first.
                 if (
-                    projectionBuffer
-                        .SourceBuffers
-                        .Any(
-                            b =>
-                                b.ContentType.IsOfType(Razor) || b.ContentType.IsOfType(LegacyRazor)
-                        )
+                    projectionBuffer.SourceBuffers.Any(
+                        b => b.ContentType.IsOfType(Razor) || b.ContentType.IsOfType(LegacyRazor)
+                    )
                 )
                 {
                     return HostType.Razor;
@@ -178,14 +175,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                 // For TypeScript hosted in HTML the source buffers will have type names
                 // HTMLX and TypeScript.
                 if (
-                    projectionBuffer
-                        .SourceBuffers
-                        .Any(
-                            b =>
-                                b.ContentType.IsOfType(HTML)
-                                || b.ContentType.IsOfType(WebForms)
-                                || b.ContentType.IsOfType(HTMLX)
-                        )
+                    projectionBuffer.SourceBuffers.Any(
+                        b =>
+                            b.ContentType.IsOfType(HTML)
+                            || b.ContentType.IsOfType(WebForms)
+                            || b.ContentType.IsOfType(HTMLX)
+                    )
                 )
                 {
                     return HostType.HTML;
@@ -626,12 +621,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
         {
             textChange = default;
 
-            var visibleFirstLineInOriginalText = originalText
-                .Lines
-                .GetLineFromPosition(visibleSpanInOriginalText.Start);
-            var visibleLastLineInOriginalText = originalText
-                .Lines
-                .GetLineFromPosition(visibleSpanInOriginalText.End);
+            var visibleFirstLineInOriginalText = originalText.Lines.GetLineFromPosition(
+                visibleSpanInOriginalText.Start
+            );
+            var visibleLastLineInOriginalText = originalText.Lines.GetLineFromPosition(
+                visibleSpanInOriginalText.End
+            );
 
             // skip easy case
             // 1. things are out of visible span
@@ -762,8 +757,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
         )
         {
             var diffService = _differenceSelectorService.GetTextDifferencingService(
-                _workspace
-                    .Services
+                _workspace.Services
                     .GetLanguageServices(_project.Language)
                     .GetService<IContentTypeLanguageService>()
                     .GetDefaultContentType()
@@ -910,8 +904,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
 
             if (DataBuffer is IProjectionBuffer projectionDataBuffer)
             {
-                return projectionDataBuffer
-                    .CurrentSnapshot
+                return projectionDataBuffer.CurrentSnapshot
                     .GetSourceSpans()
                     .Where(ss => ss.Snapshot.TextBuffer == subjectBuffer)
                     .Select(s => s.Span.ToTextSpan())
@@ -992,8 +985,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
 
             var editorOptionsFactory = _componentModel.GetService<IEditorOptionsFactoryService>();
             var editorOptions = editorOptionsFactory.GetOptions(DataBuffer);
-            var options = _workspace
-                .Options
+            var options = _workspace.Options
                 .WithChangedOption(
                     FormattingOptions.NewLine,
                     root.Language,
@@ -1268,9 +1260,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
         {
             if (_hostType == HostType.HTML)
             {
-                return _workspace
-                    .Options
-                    .GetOption(FormattingOptions.IndentationSize, _project.Language);
+                return _workspace.Options.GetOption(
+                    FormattingOptions.IndentationSize,
+                    _project.Language
+                );
             }
 
             if (_hostType == HostType.Razor)
@@ -1291,8 +1284,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                         if (end >= 0 && text[end] == '}')
                         {
                             var token = root.FindToken(end);
-                            var syntaxFact = _workspace
-                                .Services
+                            var syntaxFact = _workspace.Services
                                 .GetLanguageServices(_project.Language)
                                 .GetService<ISyntaxFactsService>();
                             if (token.Span.Start == end && syntaxFact != null)
@@ -1337,8 +1329,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                             )
                             {
                                 var token = root.FindToken(end, findInsideTrivia: true);
-                                var syntaxFact = _workspace
-                                    .Services
+                                var syntaxFact = _workspace.Services
                                     .GetLanguageServices(_project.Language)
                                     .GetService<ISyntaxFactsService>();
                                 if (token.Span.End == textSpan.End && syntaxFact != null)
@@ -1352,9 +1343,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                         }
                     }
 
-                    return _workspace
-                        .Options
-                        .GetOption(FormattingOptions.IndentationSize, _project.Language);
+                    return _workspace.Options.GetOption(
+                        FormattingOptions.IndentationSize,
+                        _project.Language
+                    );
                 }
             }
 

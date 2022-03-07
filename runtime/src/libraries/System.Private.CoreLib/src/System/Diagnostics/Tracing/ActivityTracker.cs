@@ -71,12 +71,10 @@ namespace System.Diagnostics.Tracing
                 m_checkedForEnable = true;
                 if (
                     useTplSource
-                    && TplEventSource
-                        .Log
-                        .IsEnabled(
-                            EventLevel.Informational,
-                            TplEventSource.Keywords.TasksFlowActivityIds
-                        )
+                    && TplEventSource.Log.IsEnabled(
+                        EventLevel.Informational,
+                        TplEventSource.Keywords.TasksFlowActivityIds
+                    )
                 )
                     Enable();
                 if (m_current == null)
@@ -278,14 +276,11 @@ namespace System.Diagnostics.Tracing
                 catch (NotImplementedException)
                 {
                     // send message to debugger without delay
-                    System
-                        .Diagnostics
-                        .Debugger
-                        .Log(
-                            0,
-                            null,
-                            "Activity Enabled() called but AsyncLocals Not Supported (pre V4.6).  Ignoring Enable"
-                        );
+                    System.Diagnostics.Debugger.Log(
+                        0,
+                        null,
+                        "Activity Enabled() called but AsyncLocals Not Supported (pre V4.6).  Ignoring Enable"
+                    );
                 }
             }
         }

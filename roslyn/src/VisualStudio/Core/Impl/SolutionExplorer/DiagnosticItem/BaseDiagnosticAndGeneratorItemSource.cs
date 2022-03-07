@@ -85,8 +85,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                 {
                     var project = Workspace.CurrentSolution.GetRequiredProject(ProjectId);
                     _generalDiagnosticOption = project.CompilationOptions!.GeneralDiagnosticOption;
-                    _specificDiagnosticOptions =
-                        project.CompilationOptions!.SpecificDiagnosticOptions;
+                    _specificDiagnosticOptions = project
+                        .CompilationOptions!
+                        .SpecificDiagnosticOptions;
                     _analyzerConfigOptions = project.GetAnalyzerConfigOptions();
 
                     _items = CreateDiagnosticAndGeneratorItems(
@@ -209,10 +210,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             void OnProjectConfigurationChanged()
             {
                 var project = e.NewSolution.GetRequiredProject(ProjectId);
-                var newGeneralDiagnosticOption =
-                    project.CompilationOptions!.GeneralDiagnosticOption;
-                var newSpecificDiagnosticOptions =
-                    project.CompilationOptions!.SpecificDiagnosticOptions;
+                var newGeneralDiagnosticOption = project
+                    .CompilationOptions!
+                    .GeneralDiagnosticOption;
+                var newSpecificDiagnosticOptions = project
+                    .CompilationOptions!
+                    .SpecificDiagnosticOptions;
                 var newAnalyzerConfigOptions = project.GetAnalyzerConfigOptions();
 
                 if (

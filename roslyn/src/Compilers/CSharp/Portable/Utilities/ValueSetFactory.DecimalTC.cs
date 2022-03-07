@@ -131,14 +131,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Debug.Assert(scale > 0); // otherwise value == decimal.MaxValue
                     scale -= 1;
 
-                    var result =
-                        new DecimalRep(
-                            low: low + 1,
-                            mid: mid,
-                            high: high,
-                            isNegative: isNegative,
-                            scale: scale
-                        ).Value;
+                    var result = new DecimalRep(
+                        low: low + 1,
+                        mid: mid,
+                        high: high,
+                        isNegative: isNegative,
+                        scale: scale
+                    ).Value;
 
                     // Assert that the value returned really is the next possible value.
                     Debug.Assert(

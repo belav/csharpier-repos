@@ -275,8 +275,9 @@ namespace Internal.TypeSystem.Ecma
 
             if (attributeCtor.Kind == HandleKind.MemberReference)
             {
-                attributeType =
-                    metadataReader.GetMemberReference((MemberReferenceHandle)attributeCtor).Parent;
+                attributeType = metadataReader
+                    .GetMemberReference((MemberReferenceHandle)attributeCtor)
+                    .Parent;
                 return true;
             }
             else if (attributeCtor.Kind == HandleKind.MethodDefinition)

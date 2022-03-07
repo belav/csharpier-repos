@@ -122,10 +122,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
         )
         {
             var solutionEditor = new SolutionEditor(solution);
-            var codeGenerationService = document
-                .Project
-                .LanguageServices
-                .GetRequiredService<ICodeGenerationService>();
+            var codeGenerationService =
+                document.Project.LanguageServices.GetRequiredService<ICodeGenerationService>();
             var destinationSyntaxNode = await codeGenerationService
                 .FindMostRelevantNameSpaceOrTypeDeclarationAsync(
                     solution,
@@ -139,9 +137,9 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
                     cancellationToken
                 )
                 .ConfigureAwait(false);
-            var symbolsToPullUp = pullMemberUpOptions
-                .MemberAnalysisResults
-                .SelectAsArray(analysisResult => GetSymbolsToPullUp(analysisResult));
+            var symbolsToPullUp = pullMemberUpOptions.MemberAnalysisResults.SelectAsArray(
+                analysisResult => GetSymbolsToPullUp(analysisResult)
+            );
 
             // Add members to interface
             var codeGenerationOptions = new CodeGenerationOptions(
@@ -322,10 +320,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
         )
         {
             var solutionEditor = new SolutionEditor(solution);
-            var codeGenerationService = document
-                .Project
-                .LanguageServices
-                .GetRequiredService<ICodeGenerationService>();
+            var codeGenerationService =
+                document.Project.LanguageServices.GetRequiredService<ICodeGenerationService>();
             var destinationSyntaxNode = await codeGenerationService
                 .FindMostRelevantNameSpaceOrTypeDeclarationAsync(
                     solution,
@@ -340,25 +336,23 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
                 )
                 .ConfigureAwait(false);
             // Add members to destination
-            var pullUpMembersSymbols = result
-                .MemberAnalysisResults
-                .SelectAsArray(
-                    memberResult =>
+            var pullUpMembersSymbols = result.MemberAnalysisResults.SelectAsArray(
+                memberResult =>
+                {
+                    if (
+                        memberResult.MakeMemberDeclarationAbstract
+                        && !memberResult.Member.IsKind(SymbolKind.Field)
+                    )
                     {
-                        if (
-                            memberResult.MakeMemberDeclarationAbstract
-                            && !memberResult.Member.IsKind(SymbolKind.Field)
-                        )
-                        {
-                            // Change the member to abstract if user choose to make them abstract
-                            return MakeAbstractVersion(memberResult.Member);
-                        }
-                        else
-                        {
-                            return memberResult.Member;
-                        }
+                        // Change the member to abstract if user choose to make them abstract
+                        return MakeAbstractVersion(memberResult.Member);
                     }
-                );
+                    else
+                    {
+                        return memberResult.Member;
+                    }
+                }
+            );
             var options = new CodeGenerationOptions(
                 reuseSyntax: true,
                 generateMethodBodies: false,
@@ -379,9 +373,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
                 )
                 .ConfigureAwait(false);
 
-            var syntaxFacts = destinationEditor
-                .OriginalDocument
-                .GetRequiredLanguageService<ISyntaxFactsService>();
+            var syntaxFacts =
+                destinationEditor.OriginalDocument.GetRequiredLanguageService<ISyntaxFactsService>();
 
             // Remove some original members since we are pulling members into class.
             // Note: If the user chooses to make the member abstract, then the original member will be changed to an override,
@@ -393,8 +386,7 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
                 if (!resultNamespace.IsGlobalNamespace)
                 {
                     sourceImports.Add(
-                        destinationEditor
-                            .Generator
+                        destinationEditor.Generator
                             .NamespaceImportDeclaration(
                                 resultNamespace.ToDisplayString(SymbolDisplayFormats.NameFormat)
                             )
@@ -437,9 +429,9 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
                     }
                     else
                     {
-                        var declarationSyntax = originalMemberEditor
-                            .Generator
-                            .GetDeclaration(syntax);
+                        var declarationSyntax = originalMemberEditor.Generator.GetDeclaration(
+                            syntax
+                        );
                         originalMemberEditor.ReplaceNode(
                             declarationSyntax,
                             (node, generator) =>
@@ -452,27 +444,24 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
             // Change the destination to abstract class if needed.
             if (
                 !result.Destination.IsAbstract
-                && result
-                    .MemberAnalysisResults
-                    .Any(
-                        analysis =>
-                            analysis.Member.IsAbstract || analysis.MakeMemberDeclarationAbstract
-                    )
+                && result.MemberAnalysisResults.Any(
+                    analysis => analysis.Member.IsAbstract || analysis.MakeMemberDeclarationAbstract
+                )
             )
             {
                 var modifiers = DeclarationModifiers.From(result.Destination).WithIsAbstract(true);
-                newDestination = destinationEditor
-                    .Generator
-                    .WithModifiers(newDestination, modifiers);
+                newDestination = destinationEditor.Generator.WithModifiers(
+                    newDestination,
+                    modifiers
+                );
             }
 
             destinationEditor.ReplaceNode(destinationSyntaxNode, newDestination);
 
             // add imports by moving all source imports to destination container, then taking out unneccessary
             // imports that we just added (marked by our annotation).
-            var addImportsService = destinationEditor
-                .OriginalDocument
-                .GetRequiredLanguageService<IAddImportsService>();
+            var addImportsService =
+                destinationEditor.OriginalDocument.GetRequiredLanguageService<IAddImportsService>();
             var destinationTrivia = GetLeadingTriviaBeforeFirstMember(
                 destinationEditor.OriginalRoot,
                 syntaxFacts
@@ -496,9 +485,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
                     )
             );
 
-            var removeImportsService = destinationEditor
-                .OriginalDocument
-                .GetRequiredLanguageService<IRemoveUnnecessaryImportsService>();
+            var removeImportsService =
+                destinationEditor.OriginalDocument.GetRequiredLanguageService<IRemoveUnnecessaryImportsService>();
             var destinationDocument = await removeImportsService
                 .RemoveUnnecessaryImportsAsync(
                     destinationEditor.GetChangedDocument(),
@@ -647,10 +635,9 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
 
             foreach (var memberAnalysisResult in result.MemberAnalysisResults)
             {
-                var tasks = memberAnalysisResult
-                    .Member
-                    .DeclaringSyntaxReferences
-                    .SelectAsArray(@ref => @ref.GetSyntaxAsync(cancellationToken));
+                var tasks = memberAnalysisResult.Member.DeclaringSyntaxReferences.SelectAsArray(
+                    @ref => @ref.GetSyntaxAsync(cancellationToken)
+                );
                 var allSyntaxes = await Task.WhenAll(tasks).ConfigureAwait(false);
                 symbolToDeclarationsBuilder.Add(
                     memberAnalysisResult.Member,
@@ -721,13 +708,15 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
         {
             foreach (var interfaceMember in destination.GetMembers())
             {
-                var implementationOfMember = selectedMember
-                    .ContainingType
-                    .FindImplementationForInterfaceMember(interfaceMember);
+                var implementationOfMember =
+                    selectedMember.ContainingType.FindImplementationForInterfaceMember(
+                        interfaceMember
+                    );
                 if (
-                    SymbolEquivalenceComparer
-                        .Instance
-                        .Equals(selectedMember, implementationOfMember?.OriginalDefinition)
+                    SymbolEquivalenceComparer.Instance.Equals(
+                        selectedMember,
+                        implementationOfMember?.OriginalDefinition
+                    )
                 )
                 {
                     return true;

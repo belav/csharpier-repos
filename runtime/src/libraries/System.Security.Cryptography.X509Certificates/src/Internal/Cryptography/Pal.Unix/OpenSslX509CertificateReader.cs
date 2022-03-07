@@ -175,9 +175,10 @@ namespace Internal.Cryptography.Pal
             [NotNullWhen(true)] out ICertificatePal? certPal
         )
         {
-            SafeX509Handle certHandle = Interop
-                .Crypto
-                .DecodeX509(ref MemoryMarshal.GetReference(rawData), rawData.Length);
+            SafeX509Handle certHandle = Interop.Crypto.DecodeX509(
+                ref MemoryMarshal.GetReference(rawData),
+                rawData.Length
+            );
 
             if (certHandle.IsInvalid)
             {
@@ -305,8 +306,7 @@ namespace Internal.Cryptography.Pal
                 return _issuer ??= UseCertInteriorData(
                     static cert =>
                     {
-                        return Interop
-                            .Crypto
+                        return Interop.Crypto
                             .LoadX500Name(Interop.Crypto.X509GetIssuerName(cert))
                             .Name;
                     }
@@ -324,8 +324,7 @@ namespace Internal.Cryptography.Pal
                 return _subject ??= UseCertInteriorData(
                     static cert =>
                     {
-                        return Interop
-                            .Crypto
+                        return Interop.Crypto
                             .LoadX500Name(Interop.Crypto.X509GetSubjectName(cert))
                             .Name;
                     }
@@ -380,9 +379,9 @@ namespace Internal.Cryptography.Pal
             get
             {
                 using (
-                    SafeSharedAsn1IntegerHandle serialNumber = Interop
-                        .Crypto
-                        .X509GetSerialNumber(_cert)
+                    SafeSharedAsn1IntegerHandle serialNumber = Interop.Crypto.X509GetSerialNumber(
+                        _cert
+                    )
                 )
                 {
                     return Interop.Crypto.GetAsn1IntegerBytes(serialNumber);
@@ -435,13 +434,11 @@ namespace Internal.Cryptography.Pal
         {
             get
             {
-                return Interop
-                    .Crypto
-                    .OpenSslEncode(
-                        x => Interop.Crypto.GetX509DerSize(x),
-                        (x, buf) => Interop.Crypto.EncodeX509(x, buf),
-                        _cert
-                    );
+                return Interop.Crypto.OpenSslEncode(
+                    x => Interop.Crypto.GetX509DerSize(x),
+                    (x, buf) => Interop.Crypto.EncodeX509(x, buf),
+                    _cert
+                );
             }
         }
 
@@ -534,34 +531,31 @@ namespace Internal.Cryptography.Pal
                         switch (oidValue)
                         {
                             case Oids.ApplicationCertPolicies:
-                                policyData.ApplicationCertPolicies = Interop
-                                    .Crypto
-                                    .GetAsn1StringBytes(dataPtr);
+                                policyData.ApplicationCertPolicies =
+                                    Interop.Crypto.GetAsn1StringBytes(dataPtr);
                                 break;
                             case Oids.CertPolicies:
-                                policyData.CertPolicies = Interop
-                                    .Crypto
-                                    .GetAsn1StringBytes(dataPtr);
+                                policyData.CertPolicies = Interop.Crypto.GetAsn1StringBytes(
+                                    dataPtr
+                                );
                                 break;
                             case Oids.CertPolicyMappings:
-                                policyData.CertPolicyMappings = Interop
-                                    .Crypto
-                                    .GetAsn1StringBytes(dataPtr);
+                                policyData.CertPolicyMappings = Interop.Crypto.GetAsn1StringBytes(
+                                    dataPtr
+                                );
                                 break;
                             case Oids.CertPolicyConstraints:
-                                policyData.CertPolicyConstraints = Interop
-                                    .Crypto
-                                    .GetAsn1StringBytes(dataPtr);
+                                policyData.CertPolicyConstraints =
+                                    Interop.Crypto.GetAsn1StringBytes(dataPtr);
                                 break;
                             case Oids.EnhancedKeyUsage:
-                                policyData.EnhancedKeyUsage = Interop
-                                    .Crypto
-                                    .GetAsn1StringBytes(dataPtr);
+                                policyData.EnhancedKeyUsage = Interop.Crypto.GetAsn1StringBytes(
+                                    dataPtr
+                                );
                                 break;
                             case Oids.InhibitAnyPolicyExtension:
-                                policyData.InhibitAnyPolicyExtension = Interop
-                                    .Crypto
-                                    .GetAsn1StringBytes(dataPtr);
+                                policyData.InhibitAnyPolicyExtension =
+                                    Interop.Crypto.GetAsn1StringBytes(dataPtr);
                                 break;
                         }
                     }
@@ -615,9 +609,10 @@ namespace Internal.Cryptography.Pal
             int nid = Interop.Crypto.ResolveRequiredNid(oidValue);
 
             using (
-                SafeSharedAsn1OctetStringHandle data = Interop
-                    .Crypto
-                    .X509FindExtensionData(cert, nid)
+                SafeSharedAsn1OctetStringHandle data = Interop.Crypto.X509FindExtensionData(
+                    cert,
+                    nid
+                )
             )
             {
                 if (data.IsInvalid)
@@ -794,9 +789,11 @@ namespace Internal.Cryptography.Pal
         public string GetNameInfo(X509NameType nameType, bool forIssuer)
         {
             using (
-                SafeBioHandle bioHandle = Interop
-                    .Crypto
-                    .GetX509NameInfo(_cert, (int)nameType, forIssuer)
+                SafeBioHandle bioHandle = Interop.Crypto.GetX509NameInfo(
+                    _cert,
+                    (int)nameType,
+                    forIssuer
+                )
             )
             {
                 if (bioHandle.IsInvalid)
@@ -891,10 +888,8 @@ namespace Internal.Cryptography.Pal
 
             if (s_validityDateTimeFormatInfo == null)
             {
-                DateTimeFormatInfo validityFormatInfo = (DateTimeFormatInfo)CultureInfo
-                    .InvariantCulture
-                    .DateTimeFormat
-                    .Clone();
+                DateTimeFormatInfo validityFormatInfo =
+                    (DateTimeFormatInfo)CultureInfo.InvariantCulture.DateTimeFormat.Clone();
 
                 // Two-digit years are 1950-2049
                 validityFormatInfo.Calendar.TwoDigitYearMax = 2049;

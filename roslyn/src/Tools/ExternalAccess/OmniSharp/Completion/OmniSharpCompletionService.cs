@@ -34,13 +34,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.Completion
             completionItem.ProviderName;
 
         public static bool? IncludeItemsFromUnimportedNamespaces(Document document) =>
-            document
-                .Project
-                .Solution
-                .Options
-                .GetOption(
-                    CompletionOptions.Metadata.ShowItemsFromUnimportedNamespaces,
-                    document.Project.Language
-                );
+            document.Project.Solution.Options.GetOption(
+                CompletionOptions.Metadata.ShowItemsFromUnimportedNamespaces,
+                document.Project.Language
+            );
     }
 }

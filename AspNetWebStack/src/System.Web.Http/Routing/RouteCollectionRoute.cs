@@ -25,8 +25,10 @@ namespace System.Web.Http.Routing
 
         private IReadOnlyCollection<IHttpRoute> _subRoutes;
 
-        private static readonly IDictionary<string, object> _empty =
-            EmptyReadOnlyDictionary<string, object>.Value;
+        private static readonly IDictionary<string, object> _empty = EmptyReadOnlyDictionary<
+            string,
+            object
+        >.Value;
 
         public RouteCollectionRoute() { }
 

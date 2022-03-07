@@ -61,9 +61,7 @@ namespace Microsoft.Web.Mvc.Resources
                 {
                     bool handled = false;
                     foreach (
-                        ContentType responseFormat in filterContext
-                            .RequestContext
-                            .GetResponseFormats()
+                        ContentType responseFormat in filterContext.RequestContext.GetResponseFormats()
                     )
                     {
                         // CONSIDER: making this lookup optional if perf is an issue
@@ -86,9 +84,11 @@ namespace Microsoft.Web.Mvc.Resources
                                 viewName = viewName + "." + friendlyName;
                                 // CONSIDER: ViewEngineCollection queries view engines in registration order and returns 1st match,
                                 // would it make sense to let the client provide a hint in case
-                                ViewEngineResult result = viewResult
-                                    .ViewEngineCollection
-                                    .FindView(filterContext, viewName, null);
+                                ViewEngineResult result = viewResult.ViewEngineCollection.FindView(
+                                    filterContext,
+                                    viewName,
+                                    null
+                                );
                                 // ignore errors and fallback to default behavior
                                 if (result != null && result.View != null)
                                 {

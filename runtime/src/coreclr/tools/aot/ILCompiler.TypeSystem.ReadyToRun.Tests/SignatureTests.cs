@@ -56,8 +56,10 @@ namespace TypeSystemTests
         public void TestSignatureMatches2ModOptsAtStartOfSig()
         {
             MetadataType modOptTester = _testModule.GetType("", "ModOptTester");
-            MethodSignature methodWith2ModOptsAtStartOfSig =
-                modOptTester.GetMethods().Single(m => string.Equals(m.Name, "Method")).Signature;
+            MethodSignature methodWith2ModOptsAtStartOfSig = modOptTester
+                .GetMethods()
+                .Single(m => string.Equals(m.Name, "Method"))
+                .Signature;
 
             // All modopts that are at the very beginning of the signature are given index 0.1.1.1
             // Both the index and the order in the modopt array are significant for signature comparison
@@ -83,8 +85,10 @@ namespace TypeSystemTests
         public void TestSignatureMatchesModOptAtStartOfSigAndAfterByRef()
         {
             MetadataType modOptTester = _testModule.GetType("", "ModOptTester");
-            MethodSignature methodWithModOptAtStartOfSigAndAfterByRef =
-                modOptTester.GetMethods().Single(m => string.Equals(m.Name, "Method2")).Signature;
+            MethodSignature methodWithModOptAtStartOfSigAndAfterByRef = modOptTester
+                .GetMethods()
+                .Single(m => string.Equals(m.Name, "Method2"))
+                .Signature;
 
             // A modopts after an E_T_BYREF will look like 0.1.1.2.1.1
             Assert.Equal(
@@ -109,8 +113,10 @@ namespace TypeSystemTests
         public void TestSignatureMatchesModoptOnPointerOrRefModifiedType()
         {
             MetadataType modOptTester = _testModule.GetType("", "ModOptTester");
-            MethodSignature methodWithModOpt =
-                modOptTester.GetMethods().Single(m => string.Equals(m.Name, "Method3")).Signature;
+            MethodSignature methodWithModOpt = modOptTester
+                .GetMethods()
+                .Single(m => string.Equals(m.Name, "Method3"))
+                .Signature;
             Assert.Equal(
                 MethodSignature.GetIndexOfCustomModifierOnPointedAtTypeByParameterIndex(0),
                 methodWithModOpt.GetEmbeddedSignatureData()[0].index
@@ -129,8 +135,10 @@ namespace TypeSystemTests
         public void TestSignatureMatchesForArrayShapeDetails()
         {
             MetadataType modOptTester = _testModule.GetType("", "ModOptTester");
-            MethodSignature methodWithModOpt =
-                modOptTester.GetMethods().Single(m => string.Equals(m.Name, "Method4")).Signature;
+            MethodSignature methodWithModOpt = modOptTester
+                .GetMethods()
+                .Single(m => string.Equals(m.Name, "Method4"))
+                .Signature;
 
             _output.WriteLine(
                 $"Found ModOptData '{GetModOptMethodSignatureInfo(methodWithModOpt)}'"
@@ -160,8 +168,10 @@ namespace TypeSystemTests
             // Test that ensure the typical case (where the loBounds is 0, and the hibounds is unspecified) doesn't produce an
             // EmbeddedSignatureData, but that other cases do. This isn't a complete test as ilasm won't actually properly generate the metadata for many of these cases
             MetadataType modOptTester = _testModule.GetType("", "ModOptTester");
-            MethodSignature methodWithModOpt =
-                modOptTester.GetMethods().Single(m => string.Equals(m.Name, "Method5")).Signature;
+            MethodSignature methodWithModOpt = modOptTester
+                .GetMethods()
+                .Single(m => string.Equals(m.Name, "Method5"))
+                .Signature;
 
             _output.WriteLine(
                 $"Found ModOptData '{GetModOptMethodSignatureInfo(methodWithModOpt)}'"

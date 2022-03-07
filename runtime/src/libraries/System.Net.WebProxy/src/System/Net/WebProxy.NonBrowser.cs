@@ -25,8 +25,9 @@ namespace System.Net
             if (IPAddress.TryParse(hostString, out IPAddress? hostAddress))
             {
                 EnsureNetworkChangeRegistration();
-                IPAddress[] localAddresses = s_localAddresses ??=
-                    Dns.GetHostEntry(Dns.GetHostName()).AddressList;
+                IPAddress[] localAddresses = s_localAddresses ??= Dns.GetHostEntry(
+                    Dns.GetHostName()
+                ).AddressList;
                 return Array.IndexOf(localAddresses, hostAddress) != -1;
             }
 

@@ -429,11 +429,9 @@ namespace Microsoft.Extensions.Logging.Generators
                                             }
 
                                             string typeName = paramTypeSymbol.ToDisplayString(
-                                                SymbolDisplayFormat
-                                                    .FullyQualifiedFormat
-                                                    .WithMiscellaneousOptions(
-                                                        SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
-                                                    )
+                                                SymbolDisplayFormat.FullyQualifiedFormat.WithMiscellaneousOptions(
+                                                    SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
+                                                )
                                             );
 
                                             var lp = new LoggerParameter
@@ -716,9 +714,8 @@ namespace Microsoft.Extensions.Logging.Generators
                                                     Name =
                                                         parentLoggerClass.Identifier.ToString()
                                                         + parentLoggerClass.TypeParameterList,
-                                                    Constraints = parentLoggerClass
-                                                        .ConstraintClauses
-                                                        .ToString(),
+                                                    Constraints =
+                                                        parentLoggerClass.ConstraintClauses.ToString(),
                                                     ParentClass = null,
                                                 };
 

@@ -991,8 +991,9 @@ namespace System.Diagnostics.Tests
             Assert.InRange(_process.UserProcessorTime.TotalSeconds, 0, long.MaxValue);
             Assert.InRange(_process.PrivilegedProcessorTime.TotalSeconds, 0, long.MaxValue);
 
-            double processorTimeBeforeSpin =
-                Process.GetCurrentProcess().TotalProcessorTime.TotalSeconds;
+            double processorTimeBeforeSpin = Process
+                .GetCurrentProcess()
+                .TotalProcessorTime.TotalSeconds;
             double processorTimeAtHalfSpin = 0;
             // Perform loop to occupy cpu, takes less than a second.
             int i = int.MaxValue / 16;
@@ -1000,8 +1001,9 @@ namespace System.Diagnostics.Tests
             {
                 i--;
                 if (i == int.MaxValue / 32)
-                    processorTimeAtHalfSpin =
-                        Process.GetCurrentProcess().TotalProcessorTime.TotalSeconds;
+                    processorTimeAtHalfSpin = Process
+                        .GetCurrentProcess()
+                        .TotalProcessorTime.TotalSeconds;
             }
 
             Assert.InRange(
@@ -1030,8 +1032,9 @@ namespace System.Diagnostics.Tests
             DateTime endTime = DateTime.UtcNow;
 
             double timeDiff = (endTime - startTime).TotalMilliseconds;
-            double cpuTimeDiff =
-                (processorTimeAfterSpin - processorTimeBeforeSpin).TotalMilliseconds;
+            double cpuTimeDiff = (
+                processorTimeAfterSpin - processorTimeBeforeSpin
+            ).TotalMilliseconds;
 
             double cpuUsage = cpuTimeDiff / (timeDiff * Environment.ProcessorCount);
 
@@ -2132,8 +2135,7 @@ namespace System.Diagnostics.Tests
                 SetPrivateFieldValue(
                     process,
                     "_processInfo",
-                    typeof(Process)
-                        .Assembly
+                    typeof(Process).Assembly
                         .GetType("System.Diagnostics.ProcessInfo")
                         .GetConstructor(
                             BindingFlags.NonPublic | BindingFlags.Instance,
@@ -2956,8 +2958,7 @@ namespace System.Diagnostics.Tests
                 }
             );
 
-            IEnumerable<Process> childProcesses = rootResult
-                .Message
+            IEnumerable<Process> childProcesses = rootResult.Message
                 .Split(';')
                 .Select(x => int.Parse(x))
                 .Select(pid => Process.GetProcessById(pid));

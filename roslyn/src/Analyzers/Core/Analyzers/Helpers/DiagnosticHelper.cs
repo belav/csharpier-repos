@@ -109,15 +109,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 );
             }
 
-            var tagIndices = ImmutableDictionary<string, IEnumerable<int>>
-                .Empty
-                .Add(
-                    WellKnownDiagnosticTags.Unnecessary,
-                    Enumerable.Range(
-                        additionalLocations.Length,
-                        additionalUnnecessaryLocations.Length
-                    )
-                );
+            var tagIndices = ImmutableDictionary<string, IEnumerable<int>>.Empty.Add(
+                WellKnownDiagnosticTags.Unnecessary,
+                Enumerable.Range(additionalLocations.Length, additionalUnnecessaryLocations.Length)
+            );
             return CreateWithLocationTags(
                 descriptor,
                 location,
@@ -174,15 +169,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 );
             }
 
-            var tagIndices = ImmutableDictionary<string, IEnumerable<int>>
-                .Empty
-                .Add(
-                    WellKnownDiagnosticTags.Unnecessary,
-                    Enumerable.Range(
-                        additionalLocations.Length,
-                        additionalUnnecessaryLocations.Length
-                    )
-                );
+            var tagIndices = ImmutableDictionary<string, IEnumerable<int>>.Empty.Add(
+                WellKnownDiagnosticTags.Unnecessary,
+                Enumerable.Range(additionalLocations.Length, additionalUnnecessaryLocations.Length)
+            );
             return CreateWithLocationTags(
                 descriptor,
                 location,

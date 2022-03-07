@@ -73,9 +73,7 @@ namespace System.CommandLine.Tests
 
             var result = new RootCommand { new Argument<string[]>() }.Parse($"@{responseFile}");
 
-            result
-                .CommandResult
-                .Tokens
+            result.CommandResult.Tokens
                 .Select(t => t.Value)
                 .Should()
                 .BeEquivalentSequenceTo("one", "two", "three");
@@ -91,9 +89,7 @@ namespace System.CommandLine.Tests
                 new Command("subcommand") { new Argument<string[]>() }
             }.Parse($"subcommand @{responseFile}");
 
-            result
-                .CommandResult
-                .Tokens
+            result.CommandResult.Tokens
                 .Select(t => t.Value)
                 .Should()
                 .BeEquivalentSequenceTo("one", "two", "three");
@@ -109,9 +105,7 @@ namespace System.CommandLine.Tests
                 new Command("subcommand") { new Argument<string[]>() }
             }.Parse($"@{responseFile} one two three");
 
-            result
-                .CommandResult
-                .Tokens
+            result.CommandResult.Tokens
                 .Select(t => t.Value)
                 .Should()
                 .BeEquivalentSequenceTo("one", "two", "three");
@@ -127,9 +121,7 @@ namespace System.CommandLine.Tests
                 new Command("subcommand") { new Argument<string[]>() }
             }.Parse($"subcommand @{responseFile}");
 
-            result
-                .CommandResult
-                .Tokens
+            result.CommandResult.Tokens
                 .Select(t => t.Value)
                 .Should()
                 .BeEquivalentSequenceTo("one", "two", "three");
@@ -212,11 +204,9 @@ namespace System.CommandLine.Tests
                 result.HasOption(optionOne).Should().BeFalse();
                 result.HasOption(optionTwo).Should().BeFalse();
                 result.Errors.Should().HaveCount(1);
-                result
-                    .Errors
+                result.Errors
                     .Single()
-                    .Message
-                    .Should()
+                    .Message.Should()
                     .StartWith($"Error reading response file '{nonexistent}'");
             }
         }
@@ -257,8 +247,7 @@ namespace System.CommandLine.Tests
 
             var result = parser.Parse("@file.rsp");
 
-            result
-                .Tokens
+            result.Tokens
                 .Should()
                 .Contain(t => t.Value == "@file.rsp" && t.Type == TokenType.Argument);
             result.Errors.Should().HaveCount(0);

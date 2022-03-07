@@ -124,9 +124,11 @@ namespace System.Web.Http.Dispatcher
 
         public virtual IDictionary<string, HttpControllerDescriptor> GetControllerMapping()
         {
-            return _controllerInfoCache
-                .Value
-                .ToDictionary(c => c.Key, c => c.Value, StringComparer.OrdinalIgnoreCase);
+            return _controllerInfoCache.Value.ToDictionary(
+                c => c.Key,
+                c => c.Value,
+                StringComparer.OrdinalIgnoreCase
+            );
         }
 
         public virtual string GetControllerName(HttpRequestMessage request)
@@ -159,8 +161,9 @@ namespace System.Web.Http.Dispatcher
                 Contract.Assert(candidates.Length > 0);
                 Contract.Assert(candidates[0].ActionDescriptor != null);
 
-                HttpControllerDescriptor controllerDescriptor =
-                    candidates[0].ActionDescriptor.ControllerDescriptor;
+                HttpControllerDescriptor controllerDescriptor = candidates[0]
+                    .ActionDescriptor
+                    .ControllerDescriptor;
 
                 // Check that all other candidate action descriptors share the same controller descriptor
                 for (int i = 1; i < candidates.Length; i++)

@@ -68,8 +68,10 @@ public static class WebHost
     /// <returns>A started <see cref="IWebHost"/> that hosts the application.</returns>
     public static IWebHost Start(string url, Action<IRouteBuilder> routeBuilder)
     {
-        var startupAssemblyName =
-            routeBuilder.GetMethodInfo().DeclaringType!.Assembly.GetName().Name;
+        var startupAssemblyName = routeBuilder
+            .GetMethodInfo()
+            .DeclaringType!.Assembly.GetName()
+            .Name;
         return StartWith(
             url,
             services => services.AddRouting(),

@@ -39,18 +39,14 @@ public static class IdentityBuilderExtensions
     private static void AddSignInManagerDeps(this IdentityBuilder builder)
     {
         builder.Services.AddHttpContextAccessor();
-        builder
-            .Services
-            .AddScoped(
-                typeof(ISecurityStampValidator),
-                typeof(SecurityStampValidator<>).MakeGenericType(builder.UserType)
-            );
-        builder
-            .Services
-            .AddScoped(
-                typeof(ITwoFactorSecurityStampValidator),
-                typeof(TwoFactorSecurityStampValidator<>).MakeGenericType(builder.UserType)
-            );
+        builder.Services.AddScoped(
+            typeof(ISecurityStampValidator),
+            typeof(SecurityStampValidator<>).MakeGenericType(builder.UserType)
+        );
+        builder.Services.AddScoped(
+            typeof(ITwoFactorSecurityStampValidator),
+            typeof(TwoFactorSecurityStampValidator<>).MakeGenericType(builder.UserType)
+        );
     }
 
     /// <summary>
@@ -90,12 +86,10 @@ public static class IdentityBuilderExtensions
         }
         if (managerType != customType)
         {
-            builder
-                .Services
-                .AddScoped(
-                    typeof(TSignInManager),
-                    services => services.GetRequiredService(managerType)
-                );
+            builder.Services.AddScoped(
+                typeof(TSignInManager),
+                services => services.GetRequiredService(managerType)
+            );
         }
         builder.Services.AddScoped(managerType, typeof(TSignInManager));
         return builder;

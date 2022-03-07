@@ -25,13 +25,11 @@ namespace System.Diagnostics
         {
             // connect to the specified remote registry
             SafeRegistryHandle foreignHKey = null;
-            int ret = Interop
-                .Advapi32
-                .RegConnectRegistry(
-                    machineName,
-                    new SafeRegistryHandle(new IntPtr(PerformanceData), ownsHandle: false),
-                    out foreignHKey
-                );
+            int ret = Interop.Advapi32.RegConnectRegistry(
+                machineName,
+                new SafeRegistryHandle(new IntPtr(PerformanceData), ownsHandle: false),
+                out foreignHKey
+            );
 
             if (ret == Interop.Errors.ERROR_DLL_INIT_FAILED)
             {
@@ -70,16 +68,14 @@ namespace System.Diagnostics
             while (
                 Interop.Errors.ERROR_MORE_DATA
                 == (
-                    ret = Interop
-                        .Advapi32
-                        .RegQueryValueEx(
-                            _hkey,
-                            name,
-                            lpReserved: null,
-                            ref type,
-                            data,
-                            ref sizeInput
-                        )
+                    ret = Interop.Advapi32.RegQueryValueEx(
+                        _hkey,
+                        name,
+                        lpReserved: null,
+                        ref type,
+                        data,
+                        ref sizeInput
+                    )
                 )
             )
             {

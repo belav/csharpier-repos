@@ -69,9 +69,11 @@ namespace System.Net.Http.Headers
         public static new NameValueWithParametersHeaderValue Parse(string? input)
         {
             int index = 0;
-            return (NameValueWithParametersHeaderValue)GenericHeaderParser
-                .SingleValueNameValueWithParametersParser
-                .ParseValue(input, null, ref index);
+            return (NameValueWithParametersHeaderValue)GenericHeaderParser.SingleValueNameValueWithParametersParser.ParseValue(
+                input,
+                null,
+                ref index
+            );
         }
 
         public static bool TryParse(
@@ -83,9 +85,12 @@ namespace System.Net.Http.Headers
             parsedValue = null;
 
             if (
-                GenericHeaderParser
-                    .SingleValueNameValueWithParametersParser
-                    .TryParseValue(input, null, ref index, out object? output)
+                GenericHeaderParser.SingleValueNameValueWithParametersParser.TryParseValue(
+                    input,
+                    null,
+                    ref index,
+                    out object? output
+                )
             )
             {
                 parsedValue = (NameValueWithParametersHeaderValue)output!;

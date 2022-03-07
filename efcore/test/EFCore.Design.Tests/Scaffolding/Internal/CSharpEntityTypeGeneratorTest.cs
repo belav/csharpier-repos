@@ -829,14 +829,12 @@ namespace TestNamespace
                     Assert.True(
                         entityType
                             .FindNavigation("RequiredReferenceNavigation")!
-                            .ForeignKey
-                            .IsRequired
+                            .ForeignKey.IsRequired
                     );
                     Assert.False(
                         entityType
                             .FindNavigation("OptionalReferenceNavigation")!
-                            .ForeignKey
-                            .IsRequired
+                            .ForeignKey.IsRequired
                     );
                     Assert.True(
                         entityType.FindNavigation("RequiredValueNavigation")!.ForeignKey.IsRequired
@@ -943,26 +941,22 @@ namespace TestNamespace
                     Assert.True(
                         entityType
                             .FindNavigation("RequiredNavigationWithReferenceForeignKey")!
-                            .ForeignKey
-                            .IsRequired
+                            .ForeignKey.IsRequired
                     );
                     Assert.False(
                         entityType
                             .FindNavigation("OptionalNavigationWithReferenceForeignKey")!
-                            .ForeignKey
-                            .IsRequired
+                            .ForeignKey.IsRequired
                     );
                     Assert.True(
                         entityType
                             .FindNavigation("RequiredNavigationWithValueForeignKey")!
-                            .ForeignKey
-                            .IsRequired
+                            .ForeignKey.IsRequired
                     );
                     Assert.False(
                         entityType
                             .FindNavigation("OptionalNavigationWithValueForeignKey")!
-                            .ForeignKey
-                            .IsRequired
+                            .ForeignKey.IsRequired
                     );
                 }
             );
@@ -1071,26 +1065,22 @@ namespace TestNamespace
                     Assert.True(
                         entityType
                             .FindNavigation("RequiredNavigationWithReferenceForeignKey")!
-                            .ForeignKey
-                            .IsRequired
+                            .ForeignKey.IsRequired
                     );
                     Assert.False(
                         entityType
                             .FindNavigation("OptionalNavigationWithReferenceForeignKey")!
-                            .ForeignKey
-                            .IsRequired
+                            .ForeignKey.IsRequired
                     );
                     Assert.True(
                         entityType
                             .FindNavigation("RequiredNavigationWithValueForeignKey")!
-                            .ForeignKey
-                            .IsRequired
+                            .ForeignKey.IsRequired
                     );
                     Assert.False(
                         entityType
                             .FindNavigation("OptionalNavigationWithValueForeignKey")!
-                            .ForeignKey
-                            .IsRequired
+                            .ForeignKey.IsRequired
                     );
                 }
             );

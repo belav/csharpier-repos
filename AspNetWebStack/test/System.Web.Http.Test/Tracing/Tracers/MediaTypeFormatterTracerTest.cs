@@ -66,8 +66,9 @@ namespace System.Web.Http.Tracing.Tracers
             );
 
             // Act
-            MediaTypeFormatter innerFormatter =
-                (formatterTracer as IDecorator<MediaTypeFormatter>).Inner;
+            MediaTypeFormatter innerFormatter = (
+                formatterTracer as IDecorator<MediaTypeFormatter>
+            ).Inner;
 
             // Assert
             Assert.Same(formatter, innerFormatter);

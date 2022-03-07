@@ -32,8 +32,12 @@ public class Startup
                 options =>
                 {
                     options.HtmlHelperOptions.ClientValidationEnabled = false;
-                    options.HtmlHelperOptions.Html5DateRenderingMode =
-                        Microsoft.AspNetCore.Mvc.Rendering.Html5DateRenderingMode.Rfc3339;
+                    options.HtmlHelperOptions.Html5DateRenderingMode = Microsoft
+                        .AspNetCore
+                        .Mvc
+                        .Rendering
+                        .Html5DateRenderingMode
+                        .Rfc3339;
                     options.HtmlHelperOptions.IdAttributeDotReplacement = "!";
                     options.HtmlHelperOptions.ValidationMessageElement = "validationMessageElement";
                     options.HtmlHelperOptions.ValidationSummaryMessageElement =

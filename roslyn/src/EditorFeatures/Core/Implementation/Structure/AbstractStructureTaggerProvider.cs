@@ -328,9 +328,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
 
             var sourceSpans = new List<object>()
             {
-                elisionSpan
-                    .Snapshot
-                    .CreateTrackingSpan(elisionSpan, SpanTrackingMode.EdgeExclusive),
+                elisionSpan.Snapshot.CreateTrackingSpan(
+                    elisionSpan,
+                    SpanTrackingMode.EdgeExclusive
+                ),
                 "..."
             };
 

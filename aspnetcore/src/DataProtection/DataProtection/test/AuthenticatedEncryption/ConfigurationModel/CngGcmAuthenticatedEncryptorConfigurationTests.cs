@@ -15,10 +15,12 @@ public class CngGcmAuthenticatedEncryptorConfigurationTests
         var configuration = new CngGcmAuthenticatedEncryptorConfiguration();
 
         // Act
-        var masterKey1 =
-            ((CngGcmAuthenticatedEncryptorDescriptor)configuration.CreateNewDescriptor()).MasterKey;
-        var masterKey2 =
-            ((CngGcmAuthenticatedEncryptorDescriptor)configuration.CreateNewDescriptor()).MasterKey;
+        var masterKey1 = (
+            (CngGcmAuthenticatedEncryptorDescriptor)configuration.CreateNewDescriptor()
+        ).MasterKey;
+        var masterKey2 = (
+            (CngGcmAuthenticatedEncryptorDescriptor)configuration.CreateNewDescriptor()
+        ).MasterKey;
 
         // Assert
         SecretAssert.NotEqual(masterKey1, masterKey2);

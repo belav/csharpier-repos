@@ -53,9 +53,8 @@ public class CookieRequestCultureProviderTest
                                 app.Run(
                                     context =>
                                     {
-                                        var requestCultureFeature = context
-                                            .Features
-                                            .Get<IRequestCultureFeature>();
+                                        var requestCultureFeature =
+                                            context.Features.Get<IRequestCultureFeature>();
                                         var requestCulture = requestCultureFeature.RequestCulture;
                                         Assert.Equal("ar-SA", requestCulture.Culture.Name);
                                         return Task.FromResult(0);
@@ -75,9 +74,10 @@ public class CookieRequestCultureProviderTest
             var culture = new CultureInfo("ar-SA");
             var requestCulture = new RequestCulture(culture);
             var value = CookieRequestCultureProvider.MakeCookieValue(requestCulture);
-            client
-                .DefaultRequestHeaders
-                .Add("Cookie", new CookieHeaderValue("Preferences", value).ToString());
+            client.DefaultRequestHeaders.Add(
+                "Cookie",
+                new CookieHeaderValue("Preferences", value).ToString()
+            );
             var response = await client.GetAsync(string.Empty);
             Assert.Equal("c=ar-SA|uic=ar-SA", value);
         }
@@ -116,9 +116,8 @@ public class CookieRequestCultureProviderTest
                                 app.Run(
                                     context =>
                                     {
-                                        var requestCultureFeature = context
-                                            .Features
-                                            .Get<IRequestCultureFeature>();
+                                        var requestCultureFeature =
+                                            context.Features.Get<IRequestCultureFeature>();
                                         var requestCulture = requestCultureFeature.RequestCulture;
                                         Assert.Equal("en-US", requestCulture.Culture.Name);
                                         return Task.FromResult(0);
@@ -136,9 +135,10 @@ public class CookieRequestCultureProviderTest
         {
             var client = server.CreateClient();
 
-            client
-                .DefaultRequestHeaders
-                .Add("Cookie", new CookieHeaderValue("Preferences", "uic=ar-SA").ToString());
+            client.DefaultRequestHeaders.Add(
+                "Cookie",
+                new CookieHeaderValue("Preferences", "uic=ar-SA").ToString()
+            );
             var response = await client.GetAsync(string.Empty);
         }
     }
@@ -176,9 +176,8 @@ public class CookieRequestCultureProviderTest
                                 app.Run(
                                     context =>
                                     {
-                                        var requestCultureFeature = context
-                                            .Features
-                                            .Get<IRequestCultureFeature>();
+                                        var requestCultureFeature =
+                                            context.Features.Get<IRequestCultureFeature>();
                                         var requestCulture = requestCultureFeature.RequestCulture;
                                         Assert.Equal("en-US", requestCulture.Culture.Name);
                                         return Task.FromResult(0);
@@ -254,12 +253,10 @@ public class CookieRequestCultureProviderTest
             var client = server.CreateClient();
             var culture = "??";
             var uiCulture = "ar-YE";
-            client
-                .DefaultRequestHeaders
-                .Add(
-                    "Cookie",
-                    new CookieHeaderValue("Preferences", $"c={culture}|uic={uiCulture}").ToString()
-                );
+            client.DefaultRequestHeaders.Add(
+                "Cookie",
+                new CookieHeaderValue("Preferences", $"c={culture}|uic={uiCulture}").ToString()
+            );
 
             var response = await client.GetAsync(string.Empty);
             response.EnsureSuccessStatusCode();
@@ -328,12 +325,10 @@ public class CookieRequestCultureProviderTest
             var client = server.CreateClient();
             var culture = "ar-YE";
             var uiCulture = "??";
-            client
-                .DefaultRequestHeaders
-                .Add(
-                    "Cookie",
-                    new CookieHeaderValue("Preferences", $"c={culture}|uic={uiCulture}").ToString()
-                );
+            client.DefaultRequestHeaders.Add(
+                "Cookie",
+                new CookieHeaderValue("Preferences", $"c={culture}|uic={uiCulture}").ToString()
+            );
 
             var response = await client.GetAsync(string.Empty);
             response.EnsureSuccessStatusCode();

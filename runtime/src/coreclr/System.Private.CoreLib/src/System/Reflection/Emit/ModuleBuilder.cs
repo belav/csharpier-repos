@@ -599,23 +599,19 @@ namespace System.Reflection.Emit
                     Debug.Assert(masmi != null);
 
                     methDef = masmi.GetGenericMethodDefinition()!;
-                    methDef = methDef
-                        .Module
-                        .ResolveMethod(
-                            methodBase.MetadataToken,
-                            methDef.DeclaringType?.GetGenericArguments(),
-                            methDef.GetGenericArguments()
-                        )!;
+                    methDef = methDef.Module.ResolveMethod(
+                        methodBase.MetadataToken,
+                        methDef.DeclaringType?.GetGenericArguments(),
+                        methDef.GetGenericArguments()
+                    )!;
                 }
                 else
                 {
-                    methDef = methodBase
-                        .Module
-                        .ResolveMethod(
-                            methodBase.MetadataToken,
-                            methodBase.DeclaringType?.GetGenericArguments(),
-                            null
-                        )!;
+                    methDef = methodBase.Module.ResolveMethod(
+                        methodBase.MetadataToken,
+                        methodBase.DeclaringType?.GetGenericArguments(),
+                        null
+                    )!;
                 }
             }
 
@@ -844,8 +840,9 @@ namespace System.Reflection.Emit
                 if (baseType == null && Assembly is AssemblyBuilder)
                 {
                     // now goto Assembly level to find the type.
-                    List<ModuleBuilder> modList =
-                        ContainingAssemblyBuilder._assemblyData._moduleBuilderList;
+                    List<ModuleBuilder> modList = ContainingAssemblyBuilder
+                        ._assemblyData
+                        ._moduleBuilderList;
                     int size = modList.Count;
                     for (int i = 0; i < size && baseType == null; i++)
                     {
@@ -1251,19 +1248,17 @@ namespace System.Reflection.Emit
                 AssemblyBuilder.CheckContext(returnType);
                 AssemblyBuilder.CheckContext(parameterTypes);
 
-                return _moduleData
-                    ._globalTypeBuilder
-                    .DefinePInvokeMethod(
-                        name,
-                        dllName,
-                        entryName,
-                        attributes,
-                        callingConvention,
-                        returnType,
-                        parameterTypes,
-                        nativeCallConv,
-                        nativeCharSet
-                    );
+                return _moduleData._globalTypeBuilder.DefinePInvokeMethod(
+                    name,
+                    dllName,
+                    entryName,
+                    attributes,
+                    callingConvention,
+                    returnType,
+                    parameterTypes,
+                    nativeCallConv,
+                    nativeCharSet
+                );
             }
         }
 
@@ -1370,19 +1365,17 @@ namespace System.Reflection.Emit
             AssemblyBuilder.CheckContext(requiredParameterTypeCustomModifiers);
             AssemblyBuilder.CheckContext(optionalParameterTypeCustomModifiers);
 
-            return _moduleData
-                ._globalTypeBuilder
-                .DefineMethod(
-                    name,
-                    attributes,
-                    callingConvention,
-                    returnType,
-                    requiredReturnTypeCustomModifiers,
-                    optionalReturnTypeCustomModifiers,
-                    parameterTypes,
-                    requiredParameterTypeCustomModifiers,
-                    optionalParameterTypeCustomModifiers
-                );
+            return _moduleData._globalTypeBuilder.DefineMethod(
+                name,
+                attributes,
+                callingConvention,
+                returnType,
+                requiredReturnTypeCustomModifiers,
+                optionalReturnTypeCustomModifiers,
+                parameterTypes,
+                requiredParameterTypeCustomModifiers,
+                optionalParameterTypeCustomModifiers
+            );
         }
 
         public void CreateGlobalFunctions()

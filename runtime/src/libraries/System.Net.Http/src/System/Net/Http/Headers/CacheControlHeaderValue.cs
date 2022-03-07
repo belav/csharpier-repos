@@ -393,9 +393,11 @@ namespace System.Net.Http.Headers
         public static CacheControlHeaderValue Parse(string? input)
         {
             int index = 0;
-            return (CacheControlHeaderValue)CacheControlHeaderParser
-                .Parser
-                .ParseValue(input, null, ref index);
+            return (CacheControlHeaderValue)CacheControlHeaderParser.Parser.ParseValue(
+                input,
+                null,
+                ref index
+            );
         }
 
         public static bool TryParse(string? input, out CacheControlHeaderValue? parsedValue)
@@ -404,9 +406,12 @@ namespace System.Net.Http.Headers
             parsedValue = null;
 
             if (
-                CacheControlHeaderParser
-                    .Parser
-                    .TryParseValue(input, null, ref index, out object? output)
+                CacheControlHeaderParser.Parser.TryParseValue(
+                    input,
+                    null,
+                    ref index,
+                    out object? output
+                )
             )
             {
                 parsedValue = (CacheControlHeaderValue?)output;

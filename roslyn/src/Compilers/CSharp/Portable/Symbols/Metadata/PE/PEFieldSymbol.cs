@@ -335,9 +335,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             int bufferSize;
             PEModuleSymbol containingPEModule = this.ContainingPEModule;
             if (
-                containingPEModule
-                    .Module
-                    .HasFixedBufferAttribute(_handle, out elementTypeName, out bufferSize)
+                containingPEModule.Module.HasFixedBufferAttribute(
+                    _handle,
+                    out elementTypeName,
+                    out bufferSize
+                )
             )
             {
                 var decoder = new MetadataDecoder(containingPEModule);
@@ -464,10 +466,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
                 if ((_flags & FieldAttributes.Literal) != 0)
                 {
-                    value = _containingType
-                        .ContainingPEModule
-                        .Module
-                        .GetConstantFieldValue(_handle);
+                    value = _containingType.ContainingPEModule.Module.GetConstantFieldValue(
+                        _handle
+                    );
                 }
 
                 // If this is a Decimal, the constant value may come from DecimalConstantAttribute
@@ -477,10 +478,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     ConstantValue defaultValue;
 
                     if (
-                        _containingType
-                            .ContainingPEModule
-                            .Module
-                            .HasDecimalConstantAttribute(Handle, out defaultValue)
+                        _containingType.ContainingPEModule.Module.HasDecimalConstantAttribute(
+                            Handle,
+                            out defaultValue
+                        )
                     )
                     {
                         value = defaultValue;
@@ -501,10 +502,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         {
             get
             {
-                return _containingType
-                    .ContainingPEModule
-                    .MetadataLocation
-                    .Cast<MetadataLocation, Location>();
+                return _containingType.ContainingPEModule.MetadataLocation.Cast<
+                    MetadataLocation,
+                    Location
+                >();
             }
         }
 
@@ -619,8 +620,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 var containingPEModuleSymbol = _containingType.ContainingPEModule;
                 yield return new PEAttributeData(
                     containingPEModuleSymbol,
-                    containingPEModuleSymbol
-                        .Module
+                    containingPEModuleSymbol.Module
                         .FindLastTargetAttribute(
                             _handle,
                             AttributeDescription.DecimalConstantAttribute

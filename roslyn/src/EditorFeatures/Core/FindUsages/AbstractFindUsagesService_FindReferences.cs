@@ -104,10 +104,8 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
         {
             using var _ = ArrayBuilder<DefinitionItem>.GetInstance(out var result);
 
-            var factory = solution
-                .Workspace
-                .Services
-                .GetRequiredService<IDefinitionsAndReferencesFactory>();
+            var factory =
+                solution.Workspace.Services.GetRequiredService<IDefinitionsAndReferencesFactory>();
 
             foreach (var definition in definitions)
             {

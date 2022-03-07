@@ -27,12 +27,15 @@ namespace System.Text.Json.Serialization.Converters
         public FSharpOptionConverter(JsonConverter<TElement> elementConverter)
         {
             _elementConverter = elementConverter;
-            _optionValueGetter = FSharpCoreReflectionProxy
-                .Instance
-                .CreateFSharpOptionValueGetter<TOption, TElement>();
-            _optionConstructor = FSharpCoreReflectionProxy
-                .Instance
-                .CreateFSharpOptionSomeConstructor<TOption, TElement>();
+            _optionValueGetter = FSharpCoreReflectionProxy.Instance.CreateFSharpOptionValueGetter<
+                TOption,
+                TElement
+            >();
+            _optionConstructor =
+                FSharpCoreReflectionProxy.Instance.CreateFSharpOptionSomeConstructor<
+                    TOption,
+                    TElement
+                >();
 
             // temporary workaround for JsonConverter base constructor needing to access
             // ConverterStrategy when calculating `CanUseDirectReadOrWrite`.
@@ -56,8 +59,11 @@ namespace System.Text.Json.Serialization.Converters
                 return true;
             }
 
-            state.Current.JsonPropertyInfo =
-                state.Current.JsonTypeInfo.ElementTypeInfo!.PropertyInfoForTypeInfo;
+            state.Current.JsonPropertyInfo = state
+                .Current
+                .JsonTypeInfo
+                .ElementTypeInfo!
+                .PropertyInfoForTypeInfo;
             if (
                 _elementConverter.TryRead(
                     ref reader,
@@ -91,8 +97,11 @@ namespace System.Text.Json.Serialization.Converters
             }
 
             TElement element = _optionValueGetter(value);
-            state.Current.DeclaredJsonPropertyInfo =
-                state.Current.JsonTypeInfo.ElementTypeInfo!.PropertyInfoForTypeInfo;
+            state.Current.DeclaredJsonPropertyInfo = state
+                .Current
+                .JsonTypeInfo
+                .ElementTypeInfo!
+                .PropertyInfoForTypeInfo;
             return _elementConverter.TryWrite(writer, element, options, ref state);
         }
 

@@ -974,11 +974,9 @@ namespace Microsoft.CodeAnalysis
                 var document = newSolution.GetTextDocument(docId);
                 if (document != null)
                 {
-                    newSolution =
-                        document
-                            .WithText(this.GetOpenDocumentText(oldSolution, docId))
-                            .Project
-                            .Solution;
+                    newSolution = document
+                        .WithText(this.GetOpenDocumentText(oldSolution, docId))
+                        .Project.Solution;
                 }
             }
 
@@ -996,11 +994,9 @@ namespace Microsoft.CodeAnalysis
                 var document = newSolution.GetTextDocument(docId);
                 if (document != null)
                 {
-                    newSolution =
-                        document
-                            .WithText(this.GetOpenDocumentText(oldSolution, docId))
-                            .Project
-                            .Solution;
+                    newSolution = document
+                        .WithText(this.GetOpenDocumentText(oldSolution, docId))
+                        .Project.Solution;
                 }
             }
 

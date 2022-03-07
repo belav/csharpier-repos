@@ -131,9 +131,11 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
         {
             if (_workers.TryGetValue(id, out var worker))
             {
-                await worker
-                    .Worker
-                    .ConnectAsync(targetAddress, transportType, numberOfConnectionsPerWorker);
+                await worker.Worker.ConnectAsync(
+                    targetAddress,
+                    transportType,
+                    numberOfConnectionsPerWorker
+                );
             }
         }
 

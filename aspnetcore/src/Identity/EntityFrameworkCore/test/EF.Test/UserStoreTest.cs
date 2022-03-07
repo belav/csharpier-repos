@@ -393,8 +393,9 @@ public class UserStoreTest
     [ConditionalFact]
     public async Task ConcurrentUpdatesWillFail()
     {
-        var options =
-            new DbContextOptionsBuilder().UseSqlite($"Data Source=D{Guid.NewGuid()}.db").Options;
+        var options = new DbContextOptionsBuilder()
+            .UseSqlite($"Data Source=D{Guid.NewGuid()}.db")
+            .Options;
         var user = CreateTestUser();
         using (var db = new IdentityDbContext(options))
         {
@@ -428,8 +429,9 @@ public class UserStoreTest
     [ConditionalFact]
     public async Task ConcurrentUpdatesWillFailWithDetachedUser()
     {
-        var options =
-            new DbContextOptionsBuilder().UseSqlite($"Data Source=D{Guid.NewGuid()}.db").Options;
+        var options = new DbContextOptionsBuilder()
+            .UseSqlite($"Data Source=D{Guid.NewGuid()}.db")
+            .Options;
         var user = CreateTestUser();
         using (var db = new IdentityDbContext(options))
         {
@@ -461,8 +463,9 @@ public class UserStoreTest
     [ConditionalFact]
     public async Task DeleteAModifiedUserWillFail()
     {
-        var options =
-            new DbContextOptionsBuilder().UseSqlite($"Data Source=D{Guid.NewGuid()}.db").Options;
+        var options = new DbContextOptionsBuilder()
+            .UseSqlite($"Data Source=D{Guid.NewGuid()}.db")
+            .Options;
         var user = CreateTestUser();
         using (var db = new IdentityDbContext(options))
         {
@@ -495,8 +498,9 @@ public class UserStoreTest
     [ConditionalFact]
     public async Task ConcurrentRoleUpdatesWillFail()
     {
-        var options =
-            new DbContextOptionsBuilder().UseSqlite($"Data Source=D{Guid.NewGuid()}.db").Options;
+        var options = new DbContextOptionsBuilder()
+            .UseSqlite($"Data Source=D{Guid.NewGuid()}.db")
+            .Options;
         var role = new IdentityRole(Guid.NewGuid().ToString());
         using (var db = new IdentityDbContext(options))
         {
@@ -530,8 +534,9 @@ public class UserStoreTest
     [ConditionalFact]
     public async Task ConcurrentRoleUpdatesWillFailWithDetachedRole()
     {
-        var options =
-            new DbContextOptionsBuilder().UseSqlite($"Data Source=D{Guid.NewGuid()}.db").Options;
+        var options = new DbContextOptionsBuilder()
+            .UseSqlite($"Data Source=D{Guid.NewGuid()}.db")
+            .Options;
         var role = new IdentityRole(Guid.NewGuid().ToString());
         using (var db = new IdentityDbContext(options))
         {
@@ -564,8 +569,9 @@ public class UserStoreTest
     [ConditionalFact]
     public async Task DeleteAModifiedRoleWillFail()
     {
-        var options =
-            new DbContextOptionsBuilder().UseSqlite($"Data Source=D{Guid.NewGuid()}.db").Options;
+        var options = new DbContextOptionsBuilder()
+            .UseSqlite($"Data Source=D{Guid.NewGuid()}.db")
+            .Options;
         var role = new IdentityRole(Guid.NewGuid().ToString());
         using (var db = new IdentityDbContext(options))
         {

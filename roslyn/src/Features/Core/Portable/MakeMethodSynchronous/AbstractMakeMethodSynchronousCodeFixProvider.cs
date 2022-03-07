@@ -150,8 +150,7 @@ namespace Microsoft.CodeAnalysis.MakeMethodSynchronous
             CancellationToken cancellationToken
         )
         {
-            var compilation = await document
-                .Project
+            var compilation = await document.Project
                 .GetCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var knownTypes = new KnownTypes(compilation);
@@ -338,10 +337,9 @@ namespace Microsoft.CodeAnalysis.MakeMethodSynchronous
                 var parentMemberAccessExpressionNameNode =
                     syntaxFacts.GetNameOfMemberAccessExpression(parentMemberAccessExpression);
 
-                var parentMemberAccessExpressionName =
-                    syntaxFacts
-                        .GetIdentifierOfSimpleName(parentMemberAccessExpressionNameNode)
-                        .ValueText;
+                var parentMemberAccessExpressionName = syntaxFacts
+                    .GetIdentifierOfSimpleName(parentMemberAccessExpressionNameNode)
+                    .ValueText;
                 if (parentMemberAccessExpressionName == nameof(Task.ConfigureAwait))
                 {
                     var parentExpression = parentMemberAccessExpression.Parent;

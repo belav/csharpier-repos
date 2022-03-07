@@ -55,14 +55,12 @@ namespace Microsoft.EntityFrameworkCore
                 principals[1].OptionalDependents.Clear();
 
                 context.Remove(dependents[0]);
-                principals[0]
-                    .OptionalDependents
-                    .Add(
-                        new IntStructKeyOptionalDependent
-                        {
-                            Id = new IntStructKey(dependents[0].Id.Id),
-                        }
-                    );
+                principals[0].OptionalDependents.Add(
+                    new IntStructKeyOptionalDependent
+                    {
+                        Id = new IntStructKey(dependents[0].Id.Id),
+                    }
+                );
 
                 context.SaveChanges();
             }
@@ -178,8 +176,7 @@ namespace Microsoft.EntityFrameworkCore
                     expectedPrincipalToDependents,
                     expectedDependentToPrincipals,
                     p =>
-                        ((IntStructKeyPrincipal)p)
-                            .OptionalDependents
+                        ((IntStructKeyPrincipal)p).OptionalDependents
                             .Select(d => (IIntOptionalDependent)d)
                             .ToList(),
                     d => ((IntStructKeyOptionalDependent)d).Principal
@@ -223,14 +220,12 @@ namespace Microsoft.EntityFrameworkCore
                 principals[1].OptionalDependents.Clear();
 
                 context.Remove(dependents[0]);
-                principals[0]
-                    .OptionalDependents
-                    .Add(
-                        new ComparableIntStructKeyOptionalDependent
-                        {
-                            Id = new ComparableIntStructKey(dependents[0].Id.Id),
-                        }
-                    );
+                principals[0].OptionalDependents.Add(
+                    new ComparableIntStructKeyOptionalDependent
+                    {
+                        Id = new ComparableIntStructKey(dependents[0].Id.Id),
+                    }
+                );
 
                 context.SaveChanges();
             }
@@ -358,8 +353,7 @@ namespace Microsoft.EntityFrameworkCore
                     expectedPrincipalToDependents,
                     expectedDependentToPrincipals,
                     p =>
-                        ((ComparableIntStructKeyPrincipal)p)
-                            .OptionalDependents
+                        ((ComparableIntStructKeyPrincipal)p).OptionalDependents
                             .Select(d => (IIntOptionalDependent)d)
                             .ToList(),
                     d => ((ComparableIntStructKeyOptionalDependent)d).Principal
@@ -403,14 +397,12 @@ namespace Microsoft.EntityFrameworkCore
                 principals[1].OptionalDependents.Clear();
 
                 context.Remove(dependents[0]);
-                principals[0]
-                    .OptionalDependents
-                    .Add(
-                        new GenericComparableIntStructKeyOptionalDependent
-                        {
-                            Id = new GenericComparableIntStructKey(dependents[0].Id.Id),
-                        }
-                    );
+                principals[0].OptionalDependents.Add(
+                    new GenericComparableIntStructKeyOptionalDependent
+                    {
+                        Id = new GenericComparableIntStructKey(dependents[0].Id.Id),
+                    }
+                );
 
                 context.SaveChanges();
             }
@@ -538,8 +530,7 @@ namespace Microsoft.EntityFrameworkCore
                     expectedPrincipalToDependents,
                     expectedDependentToPrincipals,
                     p =>
-                        ((GenericComparableIntStructKeyPrincipal)p)
-                            .OptionalDependents
+                        ((GenericComparableIntStructKeyPrincipal)p).OptionalDependents
                             .Select(d => (IIntOptionalDependent)d)
                             .ToList(),
                     d => ((GenericComparableIntStructKeyOptionalDependent)d).Principal
@@ -580,14 +571,12 @@ namespace Microsoft.EntityFrameworkCore
                 principals[1].RequiredDependents.Clear();
 
                 context.Remove(dependents[0]);
-                principals[0]
-                    .RequiredDependents
-                    .Add(
-                        new IntStructKeyRequiredDependent
-                        {
-                            Id = new IntStructKey(dependents[0].Id.Id),
-                        }
-                    );
+                principals[0].RequiredDependents.Add(
+                    new IntStructKeyRequiredDependent
+                    {
+                        Id = new IntStructKey(dependents[0].Id.Id),
+                    }
+                );
 
                 context.SaveChanges();
             }
@@ -713,8 +702,7 @@ namespace Microsoft.EntityFrameworkCore
                     expectedPrincipalToDependents,
                     expectedDependentToPrincipals,
                     p =>
-                        ((IntStructKeyPrincipal)p)
-                            .RequiredDependents
+                        ((IntStructKeyPrincipal)p).RequiredDependents
                             .Select(d => (IIntRequiredDependent)d)
                             .ToList(),
                     d => ((IntStructKeyRequiredDependent)d).Principal
@@ -758,14 +746,12 @@ namespace Microsoft.EntityFrameworkCore
                 principals[1].RequiredDependents.Clear();
 
                 context.Remove(dependents[0]);
-                principals[0]
-                    .RequiredDependents
-                    .Add(
-                        new ComparableIntStructKeyRequiredDependent
-                        {
-                            Id = new ComparableIntStructKey(dependents[0].Id.Id),
-                        }
-                    );
+                principals[0].RequiredDependents.Add(
+                    new ComparableIntStructKeyRequiredDependent
+                    {
+                        Id = new ComparableIntStructKey(dependents[0].Id.Id),
+                    }
+                );
 
                 context.SaveChanges();
             }
@@ -897,8 +883,7 @@ namespace Microsoft.EntityFrameworkCore
                     expectedPrincipalToDependents,
                     expectedDependentToPrincipals,
                     p =>
-                        ((ComparableIntStructKeyPrincipal)p)
-                            .RequiredDependents
+                        ((ComparableIntStructKeyPrincipal)p).RequiredDependents
                             .Select(d => (IIntRequiredDependent)d)
                             .ToList(),
                     d => ((ComparableIntStructKeyRequiredDependent)d).Principal
@@ -942,14 +927,12 @@ namespace Microsoft.EntityFrameworkCore
                 principals[1].RequiredDependents.Clear();
 
                 context.Remove(dependents[0]);
-                principals[0]
-                    .RequiredDependents
-                    .Add(
-                        new GenericComparableIntStructKeyRequiredDependent
-                        {
-                            Id = new GenericComparableIntStructKey(dependents[0].Id.Id),
-                        }
-                    );
+                principals[0].RequiredDependents.Add(
+                    new GenericComparableIntStructKeyRequiredDependent
+                    {
+                        Id = new GenericComparableIntStructKey(dependents[0].Id.Id),
+                    }
+                );
 
                 context.SaveChanges();
             }
@@ -1087,8 +1070,7 @@ namespace Microsoft.EntityFrameworkCore
                     expectedPrincipalToDependents,
                     expectedDependentToPrincipals,
                     p =>
-                        ((GenericComparableIntStructKeyPrincipal)p)
-                            .RequiredDependents
+                        ((GenericComparableIntStructKeyPrincipal)p).RequiredDependents
                             .Select(d => (IIntRequiredDependent)d)
                             .ToList(),
                     d => ((GenericComparableIntStructKeyRequiredDependent)d).Principal
@@ -1129,14 +1111,9 @@ namespace Microsoft.EntityFrameworkCore
                 principals[1].OptionalDependents.Clear();
 
                 context.Remove(dependents[0]);
-                principals[0]
-                    .OptionalDependents
-                    .Add(
-                        new IntClassKeyOptionalDependent
-                        {
-                            Id = new IntClassKey(dependents[0].Id.Id),
-                        }
-                    );
+                principals[0].OptionalDependents.Add(
+                    new IntClassKeyOptionalDependent { Id = new IntClassKey(dependents[0].Id.Id), }
+                );
 
                 context.SaveChanges();
             }
@@ -1249,8 +1226,7 @@ namespace Microsoft.EntityFrameworkCore
                     expectedPrincipalToDependents,
                     expectedDependentToPrincipals,
                     p =>
-                        ((IntClassKeyPrincipal)p)
-                            .OptionalDependents
+                        ((IntClassKeyPrincipal)p).OptionalDependents
                             .Select(d => (IIntOptionalDependent)d)
                             .ToList(),
                     d => ((IntClassKeyOptionalDependent)d).Principal
@@ -1291,14 +1267,12 @@ namespace Microsoft.EntityFrameworkCore
                 principals[1].OptionalDependents.Clear();
 
                 context.Remove(dependents[0]);
-                principals[0]
-                    .OptionalDependents
-                    .Add(
-                        new BareIntClassKeyOptionalDependent
-                        {
-                            Id = new BareIntClassKey(dependents[0].Id.Id),
-                        }
-                    );
+                principals[0].OptionalDependents.Add(
+                    new BareIntClassKeyOptionalDependent
+                    {
+                        Id = new BareIntClassKey(dependents[0].Id.Id),
+                    }
+                );
 
                 context.SaveChanges();
             }
@@ -1416,8 +1390,7 @@ namespace Microsoft.EntityFrameworkCore
                     expectedPrincipalToDependents,
                     expectedDependentToPrincipals,
                     p =>
-                        ((BareIntClassKeyPrincipal)p)
-                            .OptionalDependents
+                        ((BareIntClassKeyPrincipal)p).OptionalDependents
                             .Select(d => (IIntOptionalDependent)d)
                             .ToList(),
                     d => ((BareIntClassKeyOptionalDependent)d).Principal
@@ -1461,14 +1434,12 @@ namespace Microsoft.EntityFrameworkCore
                 principals[1].OptionalDependents.Clear();
 
                 context.Remove(dependents[0]);
-                principals[0]
-                    .OptionalDependents
-                    .Add(
-                        new ComparableIntClassKeyOptionalDependent
-                        {
-                            Id = new ComparableIntClassKey(dependents[0].Id.Id),
-                        }
-                    );
+                principals[0].OptionalDependents.Add(
+                    new ComparableIntClassKeyOptionalDependent
+                    {
+                        Id = new ComparableIntClassKey(dependents[0].Id.Id),
+                    }
+                );
 
                 context.SaveChanges();
             }
@@ -1594,8 +1565,7 @@ namespace Microsoft.EntityFrameworkCore
                     expectedPrincipalToDependents,
                     expectedDependentToPrincipals,
                     p =>
-                        ((ComparableIntClassKeyPrincipal)p)
-                            .OptionalDependents
+                        ((ComparableIntClassKeyPrincipal)p).OptionalDependents
                             .Select(d => (IIntOptionalDependent)d)
                             .ToList(),
                     d => ((ComparableIntClassKeyOptionalDependent)d).Principal
@@ -1636,14 +1606,12 @@ namespace Microsoft.EntityFrameworkCore
                 principals[1].OptionalDependents.Clear();
 
                 context.Remove(dependents[0]);
-                principals[0]
-                    .OptionalDependents
-                    .Add(
-                        new BytesStructKeyOptionalDependent
-                        {
-                            Id = new BytesStructKey(dependents[0].Id.Id),
-                        }
-                    );
+                principals[0].OptionalDependents.Add(
+                    new BytesStructKeyOptionalDependent
+                    {
+                        Id = new BytesStructKey(dependents[0].Id.Id),
+                    }
+                );
 
                 context.SaveChanges();
             }
@@ -1775,8 +1743,7 @@ namespace Microsoft.EntityFrameworkCore
                     expectedPrincipalToDependents,
                     expectedDependentToPrincipals,
                     p =>
-                        ((BytesStructKeyPrincipal)p)
-                            .OptionalDependents
+                        ((BytesStructKeyPrincipal)p).OptionalDependents
                             .Select(d => (IBytesOptionalDependent)d)
                             .ToList(),
                     d => ((BytesStructKeyOptionalDependent)d).Principal
@@ -1820,14 +1787,12 @@ namespace Microsoft.EntityFrameworkCore
                 principals[1].OptionalDependents.Clear();
 
                 context.Remove(dependents[0]);
-                principals[0]
-                    .OptionalDependents
-                    .Add(
-                        new StructuralComparableBytesStructKeyOptionalDependent
-                        {
-                            Id = new StructuralComparableBytesStructKey(dependents[0].Id.Id),
-                        }
-                    );
+                principals[0].OptionalDependents.Add(
+                    new StructuralComparableBytesStructKeyOptionalDependent
+                    {
+                        Id = new StructuralComparableBytesStructKey(dependents[0].Id.Id),
+                    }
+                );
 
                 context.SaveChanges();
             }
@@ -1991,8 +1956,7 @@ namespace Microsoft.EntityFrameworkCore
                     expectedPrincipalToDependents,
                     expectedDependentToPrincipals,
                     p =>
-                        ((StructuralComparableBytesStructKeyPrincipal)p)
-                            .OptionalDependents
+                        ((StructuralComparableBytesStructKeyPrincipal)p).OptionalDependents
                             .Select(d => (IBytesOptionalDependent)d)
                             .ToList(),
                     d => ((StructuralComparableBytesStructKeyOptionalDependent)d).Principal
@@ -2036,14 +2000,12 @@ namespace Microsoft.EntityFrameworkCore
                 principals[1].OptionalDependents.Clear();
 
                 context.Remove(dependents[0]);
-                principals[0]
-                    .OptionalDependents
-                    .Add(
-                        new ComparableBytesStructKeyOptionalDependent
-                        {
-                            Id = new ComparableBytesStructKey(dependents[0].Id.Id),
-                        }
-                    );
+                principals[0].OptionalDependents.Add(
+                    new ComparableBytesStructKeyOptionalDependent
+                    {
+                        Id = new ComparableBytesStructKey(dependents[0].Id.Id),
+                    }
+                );
 
                 context.SaveChanges();
             }
@@ -2191,8 +2153,7 @@ namespace Microsoft.EntityFrameworkCore
                     expectedPrincipalToDependents,
                     expectedDependentToPrincipals,
                     p =>
-                        ((ComparableBytesStructKeyPrincipal)p)
-                            .OptionalDependents
+                        ((ComparableBytesStructKeyPrincipal)p).OptionalDependents
                             .Select(d => (IBytesOptionalDependent)d)
                             .ToList(),
                     d => ((ComparableBytesStructKeyOptionalDependent)d).Principal
@@ -2236,14 +2197,12 @@ namespace Microsoft.EntityFrameworkCore
                 principals[1].OptionalDependents.Clear();
 
                 context.Remove(dependents[0]);
-                principals[0]
-                    .OptionalDependents
-                    .Add(
-                        new GenericComparableBytesStructKeyOptionalDependent
-                        {
-                            Id = new GenericComparableBytesStructKey(dependents[0].Id.Id),
-                        }
-                    );
+                principals[0].OptionalDependents.Add(
+                    new GenericComparableBytesStructKeyOptionalDependent
+                    {
+                        Id = new GenericComparableBytesStructKey(dependents[0].Id.Id),
+                    }
+                );
 
                 context.SaveChanges();
             }
@@ -2394,8 +2353,7 @@ namespace Microsoft.EntityFrameworkCore
                     expectedPrincipalToDependents,
                     expectedDependentToPrincipals,
                     p =>
-                        ((GenericComparableBytesStructKeyPrincipal)p)
-                            .OptionalDependents
+                        ((GenericComparableBytesStructKeyPrincipal)p).OptionalDependents
                             .Select(d => (IBytesOptionalDependent)d)
                             .ToList(),
                     d => ((GenericComparableBytesStructKeyOptionalDependent)d).Principal
@@ -2436,14 +2394,12 @@ namespace Microsoft.EntityFrameworkCore
                 principals[1].RequiredDependents.Clear();
 
                 context.Remove(dependents[0]);
-                principals[0]
-                    .RequiredDependents
-                    .Add(
-                        new BytesStructKeyRequiredDependent
-                        {
-                            Id = new BytesStructKey(dependents[0].Id.Id),
-                        }
-                    );
+                principals[0].RequiredDependents.Add(
+                    new BytesStructKeyRequiredDependent
+                    {
+                        Id = new BytesStructKey(dependents[0].Id.Id),
+                    }
+                );
 
                 context.SaveChanges();
             }
@@ -2580,8 +2536,7 @@ namespace Microsoft.EntityFrameworkCore
                     expectedPrincipalToDependents,
                     expectedDependentToPrincipals,
                     p =>
-                        ((BytesStructKeyPrincipal)p)
-                            .RequiredDependents
+                        ((BytesStructKeyPrincipal)p).RequiredDependents
                             .Select(d => (IBytesRequiredDependent)d)
                             .ToList(),
                     d => ((BytesStructKeyRequiredDependent)d).Principal
@@ -2625,14 +2580,12 @@ namespace Microsoft.EntityFrameworkCore
                 principals[1].RequiredDependents.Clear();
 
                 context.Remove(dependents[0]);
-                principals[0]
-                    .RequiredDependents
-                    .Add(
-                        new ComparableBytesStructKeyRequiredDependent
-                        {
-                            Id = new ComparableBytesStructKey(dependents[0].Id.Id),
-                        }
-                    );
+                principals[0].RequiredDependents.Add(
+                    new ComparableBytesStructKeyRequiredDependent
+                    {
+                        Id = new ComparableBytesStructKey(dependents[0].Id.Id),
+                    }
+                );
 
                 context.SaveChanges();
             }
@@ -2785,8 +2738,7 @@ namespace Microsoft.EntityFrameworkCore
                     expectedPrincipalToDependents,
                     expectedDependentToPrincipals,
                     p =>
-                        ((ComparableBytesStructKeyPrincipal)p)
-                            .RequiredDependents
+                        ((ComparableBytesStructKeyPrincipal)p).RequiredDependents
                             .Select(d => (IBytesRequiredDependent)d)
                             .ToList(),
                     d => ((ComparableBytesStructKeyRequiredDependent)d).Principal
@@ -2830,14 +2782,12 @@ namespace Microsoft.EntityFrameworkCore
                 principals[1].RequiredDependents.Clear();
 
                 context.Remove(dependents[0]);
-                principals[0]
-                    .RequiredDependents
-                    .Add(
-                        new StructuralComparableBytesStructKeyRequiredDependent
-                        {
-                            Id = new StructuralComparableBytesStructKey(dependents[0].Id.Id),
-                        }
-                    );
+                principals[0].RequiredDependents.Add(
+                    new StructuralComparableBytesStructKeyRequiredDependent
+                    {
+                        Id = new StructuralComparableBytesStructKey(dependents[0].Id.Id),
+                    }
+                );
 
                 context.SaveChanges();
             }
@@ -3020,8 +2970,7 @@ namespace Microsoft.EntityFrameworkCore
                     expectedPrincipalToDependents,
                     expectedDependentToPrincipals,
                     p =>
-                        ((StructuralComparableBytesStructKeyPrincipal)p)
-                            .RequiredDependents
+                        ((StructuralComparableBytesStructKeyPrincipal)p).RequiredDependents
                             .Select(d => (IBytesRequiredDependent)d)
                             .ToList(),
                     d => ((StructuralComparableBytesStructKeyRequiredDependent)d).Principal
@@ -3065,14 +3014,12 @@ namespace Microsoft.EntityFrameworkCore
                 principals[1].RequiredDependents.Clear();
 
                 context.Remove(dependents[0]);
-                principals[0]
-                    .RequiredDependents
-                    .Add(
-                        new GenericComparableBytesStructKeyRequiredDependent
-                        {
-                            Id = new GenericComparableBytesStructKey(dependents[0].Id.Id),
-                        }
-                    );
+                principals[0].RequiredDependents.Add(
+                    new GenericComparableBytesStructKeyRequiredDependent
+                    {
+                        Id = new GenericComparableBytesStructKey(dependents[0].Id.Id),
+                    }
+                );
 
                 context.SaveChanges();
             }
@@ -3240,8 +3187,7 @@ namespace Microsoft.EntityFrameworkCore
                     expectedPrincipalToDependents,
                     expectedDependentToPrincipals,
                     p =>
-                        ((GenericComparableBytesStructKeyPrincipal)p)
-                            .RequiredDependents
+                        ((GenericComparableBytesStructKeyPrincipal)p).RequiredDependents
                             .Select(d => (IBytesRequiredDependent)d)
                             .ToList(),
                     d => ((GenericComparableBytesStructKeyRequiredDependent)d).Principal
@@ -3681,19 +3627,18 @@ namespace Microsoft.EntityFrameworkCore
                 dependents[5].Principal = principals[0];
 
                 context.Entry(dependents[4]).Property("PrincipalId").CurrentValue = null;
-                context.Entry(dependents[3]).Property("PrincipalId").CurrentValue =
-                    principals[0].Id;
+                context.Entry(dependents[3]).Property("PrincipalId").CurrentValue = principals[
+                    0
+                ].Id;
                 principals[1].OptionalDependents.Clear();
 
                 context.Remove(dependents[0]);
-                principals[0]
-                    .OptionalDependents
-                    .Add(
-                        new IntStructKeyOptionalDependentShadow
-                        {
-                            Id = new IntStructKey(dependents[0].Id.Id),
-                        }
-                    );
+                principals[0].OptionalDependents.Add(
+                    new IntStructKeyOptionalDependentShadow
+                    {
+                        Id = new IntStructKey(dependents[0].Id.Id),
+                    }
+                );
 
                 context.SaveChanges();
             }
@@ -3908,19 +3853,18 @@ namespace Microsoft.EntityFrameworkCore
                 dependents[5].Principal = principals[0];
 
                 context.Entry(dependents[4]).Property("PrincipalId").CurrentValue = null;
-                context.Entry(dependents[3]).Property("PrincipalId").CurrentValue =
-                    principals[0].Id;
+                context.Entry(dependents[3]).Property("PrincipalId").CurrentValue = principals[
+                    0
+                ].Id;
                 principals[1].OptionalDependents.Clear();
 
                 context.Remove(dependents[0]);
-                principals[0]
-                    .OptionalDependents
-                    .Add(
-                        new ComparableIntStructKeyOptionalDependentShadow
-                        {
-                            Id = new ComparableIntStructKey(dependents[0].Id.Id),
-                        }
-                    );
+                principals[0].OptionalDependents.Add(
+                    new ComparableIntStructKeyOptionalDependentShadow
+                    {
+                        Id = new ComparableIntStructKey(dependents[0].Id.Id),
+                    }
+                );
 
                 context.SaveChanges();
             }
@@ -4139,19 +4083,18 @@ namespace Microsoft.EntityFrameworkCore
 
                 dependents[5].Principal = principals[0];
                 context.Entry(dependents[4]).Property("PrincipalId").CurrentValue = null;
-                context.Entry(dependents[3]).Property("PrincipalId").CurrentValue =
-                    principals[0].Id;
+                context.Entry(dependents[3]).Property("PrincipalId").CurrentValue = principals[
+                    0
+                ].Id;
                 principals[1].OptionalDependents.Clear();
 
                 context.Remove(dependents[0]);
-                principals[0]
-                    .OptionalDependents
-                    .Add(
-                        new GenericComparableIntStructKeyOptionalDependentShadow
-                        {
-                            Id = new GenericComparableIntStructKey(dependents[0].Id.Id),
-                        }
-                    );
+                principals[0].OptionalDependents.Add(
+                    new GenericComparableIntStructKeyOptionalDependentShadow
+                    {
+                        Id = new GenericComparableIntStructKey(dependents[0].Id.Id),
+                    }
+                );
 
                 context.SaveChanges();
             }
@@ -4375,19 +4318,18 @@ namespace Microsoft.EntityFrameworkCore
 
                 dependents[5].Principal = principals[0];
                 context.Remove(dependents[4]);
-                context.Entry(dependents[3]).Property("PrincipalId").CurrentValue =
-                    principals[0].Id;
+                context.Entry(dependents[3]).Property("PrincipalId").CurrentValue = principals[
+                    0
+                ].Id;
                 principals[1].RequiredDependents.Clear();
 
                 context.Remove(dependents[0]);
-                principals[0]
-                    .RequiredDependents
-                    .Add(
-                        new IntStructKeyRequiredDependentShadow
-                        {
-                            Id = new IntStructKey(dependents[0].Id.Id),
-                        }
-                    );
+                principals[0].RequiredDependents.Add(
+                    new IntStructKeyRequiredDependentShadow
+                    {
+                        Id = new IntStructKey(dependents[0].Id.Id),
+                    }
+                );
 
                 context.SaveChanges();
             }
@@ -4599,19 +4541,18 @@ namespace Microsoft.EntityFrameworkCore
 
                 dependents[5].Principal = principals[0];
                 context.Remove(dependents[4]);
-                context.Entry(dependents[3]).Property("PrincipalId").CurrentValue =
-                    principals[0].Id;
+                context.Entry(dependents[3]).Property("PrincipalId").CurrentValue = principals[
+                    0
+                ].Id;
                 principals[1].RequiredDependents.Clear();
 
                 context.Remove(dependents[0]);
-                principals[0]
-                    .RequiredDependents
-                    .Add(
-                        new ComparableIntStructKeyRequiredDependentShadow
-                        {
-                            Id = new ComparableIntStructKey(dependents[0].Id.Id),
-                        }
-                    );
+                principals[0].RequiredDependents.Add(
+                    new ComparableIntStructKeyRequiredDependentShadow
+                    {
+                        Id = new ComparableIntStructKey(dependents[0].Id.Id),
+                    }
+                );
 
                 context.SaveChanges();
             }
@@ -4827,19 +4768,18 @@ namespace Microsoft.EntityFrameworkCore
 
                 dependents[5].Principal = principals[0];
                 context.Remove(dependents[4]);
-                context.Entry(dependents[3]).Property("PrincipalId").CurrentValue =
-                    principals[0].Id;
+                context.Entry(dependents[3]).Property("PrincipalId").CurrentValue = principals[
+                    0
+                ].Id;
                 principals[1].RequiredDependents.Clear();
 
                 context.Remove(dependents[0]);
-                principals[0]
-                    .RequiredDependents
-                    .Add(
-                        new GenericComparableIntStructKeyRequiredDependentShadow
-                        {
-                            Id = new GenericComparableIntStructKey(dependents[0].Id.Id),
-                        }
-                    );
+                principals[0].RequiredDependents.Add(
+                    new GenericComparableIntStructKeyRequiredDependentShadow
+                    {
+                        Id = new GenericComparableIntStructKey(dependents[0].Id.Id),
+                    }
+                );
 
                 context.SaveChanges();
             }
@@ -5066,19 +5006,18 @@ namespace Microsoft.EntityFrameworkCore
 
                 dependents[5].Principal = principals[0];
                 context.Entry(dependents[4]).Property("PrincipalId").CurrentValue = null;
-                context.Entry(dependents[3]).Property("PrincipalId").CurrentValue =
-                    principals[0].Id;
+                context.Entry(dependents[3]).Property("PrincipalId").CurrentValue = principals[
+                    0
+                ].Id;
                 principals[1].OptionalDependents.Clear();
 
                 context.Remove(dependents[0]);
-                principals[0]
-                    .OptionalDependents
-                    .Add(
-                        new IntClassKeyOptionalDependentShadow
-                        {
-                            Id = new IntClassKey(dependents[0].Id.Id),
-                        }
-                    );
+                principals[0].OptionalDependents.Add(
+                    new IntClassKeyOptionalDependentShadow
+                    {
+                        Id = new IntClassKey(dependents[0].Id.Id),
+                    }
+                );
 
                 context.SaveChanges();
             }
@@ -5287,19 +5226,18 @@ namespace Microsoft.EntityFrameworkCore
 
                 dependents[5].Principal = principals[0];
                 context.Entry(dependents[4]).Property("PrincipalId").CurrentValue = null;
-                context.Entry(dependents[3]).Property("PrincipalId").CurrentValue =
-                    principals[0].Id;
+                context.Entry(dependents[3]).Property("PrincipalId").CurrentValue = principals[
+                    0
+                ].Id;
                 principals[1].OptionalDependents.Clear();
 
                 context.Remove(dependents[0]);
-                principals[0]
-                    .OptionalDependents
-                    .Add(
-                        new BareIntClassKeyOptionalDependentShadow
-                        {
-                            Id = new BareIntClassKey(dependents[0].Id.Id),
-                        }
-                    );
+                principals[0].OptionalDependents.Add(
+                    new BareIntClassKeyOptionalDependentShadow
+                    {
+                        Id = new BareIntClassKey(dependents[0].Id.Id),
+                    }
+                );
 
                 context.SaveChanges();
             }
@@ -5514,19 +5452,18 @@ namespace Microsoft.EntityFrameworkCore
 
                 dependents[5].Principal = principals[0];
                 context.Entry(dependents[4]).Property("PrincipalId").CurrentValue = null;
-                context.Entry(dependents[3]).Property("PrincipalId").CurrentValue =
-                    principals[0].Id;
+                context.Entry(dependents[3]).Property("PrincipalId").CurrentValue = principals[
+                    0
+                ].Id;
                 principals[1].OptionalDependents.Clear();
 
                 context.Remove(dependents[0]);
-                principals[0]
-                    .OptionalDependents
-                    .Add(
-                        new ComparableIntClassKeyOptionalDependentShadow
-                        {
-                            Id = new ComparableIntClassKey(dependents[0].Id.Id),
-                        }
-                    );
+                principals[0].OptionalDependents.Add(
+                    new ComparableIntClassKeyOptionalDependentShadow
+                    {
+                        Id = new ComparableIntClassKey(dependents[0].Id.Id),
+                    }
+                );
 
                 context.SaveChanges();
             }
@@ -5743,19 +5680,18 @@ namespace Microsoft.EntityFrameworkCore
 
                 dependents[5].Principal = principals[0];
                 context.Entry(dependents[4]).Property("PrincipalId").CurrentValue = null;
-                context.Entry(dependents[3]).Property("PrincipalId").CurrentValue =
-                    principals[0].Id;
+                context.Entry(dependents[3]).Property("PrincipalId").CurrentValue = principals[
+                    0
+                ].Id;
                 principals[1].OptionalDependents.Clear();
 
                 context.Remove(dependents[0]);
-                principals[0]
-                    .OptionalDependents
-                    .Add(
-                        new BytesStructKeyOptionalDependentShadow
-                        {
-                            Id = new BytesStructKey(dependents[0].Id.Id),
-                        }
-                    );
+                principals[0].OptionalDependents.Add(
+                    new BytesStructKeyOptionalDependentShadow
+                    {
+                        Id = new BytesStructKey(dependents[0].Id.Id),
+                    }
+                );
 
                 context.SaveChanges();
             }
@@ -5982,19 +5918,18 @@ namespace Microsoft.EntityFrameworkCore
 
                 dependents[5].Principal = principals[0];
                 context.Entry(dependents[4]).Property("PrincipalId").CurrentValue = null;
-                context.Entry(dependents[3]).Property("PrincipalId").CurrentValue =
-                    principals[0].Id;
+                context.Entry(dependents[3]).Property("PrincipalId").CurrentValue = principals[
+                    0
+                ].Id;
                 principals[1].OptionalDependents.Clear();
 
                 context.Remove(dependents[0]);
-                principals[0]
-                    .OptionalDependents
-                    .Add(
-                        new StructuralComparableBytesStructKeyOptionalDependentShadow
-                        {
-                            Id = new StructuralComparableBytesStructKey(dependents[0].Id.Id),
-                        }
-                    );
+                principals[0].OptionalDependents.Add(
+                    new StructuralComparableBytesStructKeyOptionalDependentShadow
+                    {
+                        Id = new StructuralComparableBytesStructKey(dependents[0].Id.Id),
+                    }
+                );
 
                 context.SaveChanges();
             }
@@ -6253,19 +6188,18 @@ namespace Microsoft.EntityFrameworkCore
 
                 dependents[5].Principal = principals[0];
                 context.Entry(dependents[4]).Property("PrincipalId").CurrentValue = null;
-                context.Entry(dependents[3]).Property("PrincipalId").CurrentValue =
-                    principals[0].Id;
+                context.Entry(dependents[3]).Property("PrincipalId").CurrentValue = principals[
+                    0
+                ].Id;
                 principals[1].OptionalDependents.Clear();
 
                 context.Remove(dependents[0]);
-                principals[0]
-                    .OptionalDependents
-                    .Add(
-                        new ComparableBytesStructKeyOptionalDependentShadow
-                        {
-                            Id = new ComparableBytesStructKey(dependents[0].Id.Id),
-                        }
-                    );
+                principals[0].OptionalDependents.Add(
+                    new ComparableBytesStructKeyOptionalDependentShadow
+                    {
+                        Id = new ComparableBytesStructKey(dependents[0].Id.Id),
+                    }
+                );
 
                 context.SaveChanges();
             }
@@ -6505,19 +6439,18 @@ namespace Microsoft.EntityFrameworkCore
 
                 dependents[5].Principal = principals[0];
                 context.Entry(dependents[4]).Property("PrincipalId").CurrentValue = null;
-                context.Entry(dependents[3]).Property("PrincipalId").CurrentValue =
-                    principals[0].Id;
+                context.Entry(dependents[3]).Property("PrincipalId").CurrentValue = principals[
+                    0
+                ].Id;
                 principals[1].OptionalDependents.Clear();
 
                 context.Remove(dependents[0]);
-                principals[0]
-                    .OptionalDependents
-                    .Add(
-                        new GenericComparableBytesStructKeyOptionalDependentShadow
-                        {
-                            Id = new GenericComparableBytesStructKey(dependents[0].Id.Id),
-                        }
-                    );
+                principals[0].OptionalDependents.Add(
+                    new GenericComparableBytesStructKeyOptionalDependentShadow
+                    {
+                        Id = new GenericComparableBytesStructKey(dependents[0].Id.Id),
+                    }
+                );
 
                 context.SaveChanges();
             }
@@ -6768,19 +6701,18 @@ namespace Microsoft.EntityFrameworkCore
 
                 dependents[5].Principal = principals[0];
                 context.Remove(dependents[4]);
-                context.Entry(dependents[3]).Property("PrincipalId").CurrentValue =
-                    principals[0].Id;
+                context.Entry(dependents[3]).Property("PrincipalId").CurrentValue = principals[
+                    0
+                ].Id;
                 principals[1].RequiredDependents.Clear();
 
                 context.Remove(dependents[0]);
-                principals[0]
-                    .RequiredDependents
-                    .Add(
-                        new BytesStructKeyRequiredDependentShadow
-                        {
-                            Id = new BytesStructKey(dependents[0].Id.Id),
-                        }
-                    );
+                principals[0].RequiredDependents.Add(
+                    new BytesStructKeyRequiredDependentShadow
+                    {
+                        Id = new BytesStructKey(dependents[0].Id.Id),
+                    }
+                );
 
                 context.SaveChanges();
             }
@@ -7008,19 +6940,18 @@ namespace Microsoft.EntityFrameworkCore
 
                 dependents[5].Principal = principals[0];
                 context.Remove(dependents[4]);
-                context.Entry(dependents[3]).Property("PrincipalId").CurrentValue =
-                    principals[0].Id;
+                context.Entry(dependents[3]).Property("PrincipalId").CurrentValue = principals[
+                    0
+                ].Id;
                 principals[1].RequiredDependents.Clear();
 
                 context.Remove(dependents[0]);
-                principals[0]
-                    .RequiredDependents
-                    .Add(
-                        new ComparableBytesStructKeyRequiredDependentShadow
-                        {
-                            Id = new ComparableBytesStructKey(dependents[0].Id.Id),
-                        }
-                    );
+                principals[0].RequiredDependents.Add(
+                    new ComparableBytesStructKeyRequiredDependentShadow
+                    {
+                        Id = new ComparableBytesStructKey(dependents[0].Id.Id),
+                    }
+                );
 
                 context.SaveChanges();
             }
@@ -7269,19 +7200,18 @@ namespace Microsoft.EntityFrameworkCore
 
                 dependents[5].Principal = principals[0];
                 context.Remove(dependents[4]);
-                context.Entry(dependents[3]).Property("PrincipalId").CurrentValue =
-                    principals[0].Id;
+                context.Entry(dependents[3]).Property("PrincipalId").CurrentValue = principals[
+                    0
+                ].Id;
                 principals[1].RequiredDependents.Clear();
 
                 context.Remove(dependents[0]);
-                principals[0]
-                    .RequiredDependents
-                    .Add(
-                        new StructuralComparableBytesStructKeyRequiredDependentShadow
-                        {
-                            Id = new StructuralComparableBytesStructKey(dependents[0].Id.Id),
-                        }
-                    );
+                principals[0].RequiredDependents.Add(
+                    new StructuralComparableBytesStructKeyRequiredDependentShadow
+                    {
+                        Id = new StructuralComparableBytesStructKey(dependents[0].Id.Id),
+                    }
+                );
 
                 context.SaveChanges();
             }
@@ -7555,19 +7485,18 @@ namespace Microsoft.EntityFrameworkCore
 
                 dependents[5].Principal = principals[0];
                 context.Remove(dependents[4]);
-                context.Entry(dependents[3]).Property("PrincipalId").CurrentValue =
-                    principals[0].Id;
+                context.Entry(dependents[3]).Property("PrincipalId").CurrentValue = principals[
+                    0
+                ].Id;
                 principals[1].RequiredDependents.Clear();
 
                 context.Remove(dependents[0]);
-                principals[0]
-                    .RequiredDependents
-                    .Add(
-                        new GenericComparableBytesStructKeyRequiredDependentShadow
-                        {
-                            Id = new GenericComparableBytesStructKey(dependents[0].Id.Id),
-                        }
-                    );
+                principals[0].RequiredDependents.Add(
+                    new GenericComparableBytesStructKeyRequiredDependentShadow
+                    {
+                        Id = new GenericComparableBytesStructKey(dependents[0].Id.Id),
+                    }
+                );
 
                 context.SaveChanges();
             }
@@ -8267,9 +8196,10 @@ namespace Microsoft.EntityFrameworkCore
 
                 return result != 0
                   ? result
-                  : StructuralComparisons
-                    .StructuralComparer
-                    .Compare(Id, ((ComparableBytesStructKey)other).Id);
+                  : StructuralComparisons.StructuralComparer.Compare(
+                        Id,
+                        ((ComparableBytesStructKey)other).Id
+                    );
             }
         }
 

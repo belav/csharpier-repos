@@ -667,10 +667,9 @@ internal sealed class Response
                                 (HttpApiTypes.HTTP_RESPONSE_INFO*)gcHandle.AddrOfPinnedObject();
                         }
 
-                        knownHeaderInfo[_nativeResponse.ResponseInfoCount].Type =
-                            HttpApiTypes
-                                .HTTP_RESPONSE_INFO_TYPE
-                                .HttpResponseInfoTypeMultipleKnownHeaders;
+                        knownHeaderInfo[_nativeResponse.ResponseInfoCount].Type = HttpApiTypes
+                            .HTTP_RESPONSE_INFO_TYPE
+                            .HttpResponseInfoTypeMultipleKnownHeaders;
                         knownHeaderInfo[_nativeResponse.ResponseInfoCount].Length =
                             (uint)Marshal.SizeOf<HttpApiTypes.HTTP_MULTIPLE_KNOWN_HEADERS>();
 
@@ -759,8 +758,9 @@ internal sealed class Response
         var unknownHeaders = new HttpApiTypes.HTTP_UNKNOWN_HEADER[trailerCount];
         var gcHandle = GCHandle.Alloc(unknownHeaders, GCHandleType.Pinned);
         pinnedHeaders.Add(gcHandle);
-        dataChunks[currentChunk].DataChunkType =
-            HttpApiTypes.HTTP_DATA_CHUNK_TYPE.HttpDataChunkTrailers;
+        dataChunks[currentChunk].DataChunkType = HttpApiTypes
+            .HTTP_DATA_CHUNK_TYPE
+            .HttpDataChunkTrailers;
         dataChunks[currentChunk].trailers.trailerCount = (ushort)trailerCount;
         dataChunks[currentChunk].trailers.pTrailers = gcHandle.AddrOfPinnedObject();
 

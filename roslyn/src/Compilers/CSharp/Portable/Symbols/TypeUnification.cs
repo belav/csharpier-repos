@@ -37,9 +37,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
 
                 Debug.Assert(
-                    substituted1
-                        .Type
-                        .Equals(substituted2.Type, TypeCompareKind.CLRSignatureCompareOptions)
+                    substituted1.Type.Equals(
+                        substituted2.Type,
+                        TypeCompareKind.CLRSignatureCompareOptions
+                    )
                 );
                 Debug.Assert(
                     substituted1.CustomModifiers.SequenceEqual(substituted2.CustomModifiers)

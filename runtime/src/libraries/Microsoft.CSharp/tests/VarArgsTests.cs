@@ -59,8 +59,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         public void FailBindOnlyVarargsAvailable()
         {
             dynamic d = new HasVarargs();
-            string errorMessage =
-                Assert.Throws<RuntimeBinderException>(() => d.OnlyVarargs()).Message;
+            string errorMessage = Assert
+                .Throws<RuntimeBinderException>(() => d.OnlyVarargs())
+                .Message;
             // No overload for method 'OnlyVarargs' takes '0' arguments
             // Localized forms should contain the name and count.
             Assert.Contains("OnlyVarargs", errorMessage);

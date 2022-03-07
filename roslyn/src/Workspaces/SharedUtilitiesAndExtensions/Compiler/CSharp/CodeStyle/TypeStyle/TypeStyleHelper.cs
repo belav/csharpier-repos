@@ -162,8 +162,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle.TypeStyle
                 return false;
             }
 
-            var containingType =
-                semanticModel.GetTypeInfo(containingTypeName, cancellationToken).Type;
+            var containingType = semanticModel
+                .GetTypeInfo(containingTypeName, cancellationToken)
+                .Type;
 
             // The containing type was determined from an expression of the form ContainingType.MemberName, and the
             // caller verifies that MemberName resolves to a method symbol.

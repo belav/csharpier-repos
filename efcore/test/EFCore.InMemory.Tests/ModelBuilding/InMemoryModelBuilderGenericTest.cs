@@ -45,30 +45,26 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     .WithMany(x => x.ModifierGroupHeader1)
                     .HasForeignKey(x => new { x.LinkedGroupHeaderId, x.AccountId });
 
-                var contextOptions =
-                    new DbContextOptionsBuilder()
-                        .UseModel(modelBuilder.Model.FinalizeModel())
-                        .UseInternalServiceProvider(InMemoryFixture.DefaultNullabilityCheckProvider)
-                        .UseInMemoryDatabase(
-                            "Can_use_self_referencing_overlapping_FK_PK",
-                            b => b.EnableNullChecks(false)
-                        )
-                        .Options;
+                var contextOptions = new DbContextOptionsBuilder()
+                    .UseModel(modelBuilder.Model.FinalizeModel())
+                    .UseInternalServiceProvider(InMemoryFixture.DefaultNullabilityCheckProvider)
+                    .UseInMemoryDatabase(
+                        "Can_use_self_referencing_overlapping_FK_PK",
+                        b => b.EnableNullChecks(false)
+                    )
+                    .Options;
 
                 using (var context = new DbContext(contextOptions))
                 {
-                    var parent =
-                        context
-                            .Add(new ModifierGroupHeader { GroupHeaderId = 77, AccountId = 90 })
-                            .Entity;
-                    var child1 =
-                        context
-                            .Add(new ModifierGroupHeader { GroupHeaderId = 78, AccountId = 90 })
-                            .Entity;
-                    var child2 =
-                        context
-                            .Add(new ModifierGroupHeader { GroupHeaderId = 79, AccountId = 90 })
-                            .Entity;
+                    var parent = context
+                        .Add(new ModifierGroupHeader { GroupHeaderId = 77, AccountId = 90 })
+                        .Entity;
+                    var child1 = context
+                        .Add(new ModifierGroupHeader { GroupHeaderId = 78, AccountId = 90 })
+                        .Entity;
+                    var child2 = context
+                        .Add(new ModifierGroupHeader { GroupHeaderId = 79, AccountId = 90 })
+                        .Entity;
 
                     child1.ModifierGroupHeader2 = parent;
                     child2.ModifierGroupHeader2 = parent;
@@ -188,14 +184,11 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     }
                 );
 
-                var contextOptions =
-                    new DbContextOptionsBuilder()
-                        .UseModel(modelBuilder.Model.FinalizeModel())
-                        .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
-                        .UseInMemoryDatabase(
-                            "Can_use_self_referencing_overlapping_FK_PK_one_to_one"
-                        )
-                        .Options;
+                var contextOptions = new DbContextOptionsBuilder()
+                    .UseModel(modelBuilder.Model.FinalizeModel())
+                    .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
+                    .UseInMemoryDatabase("Can_use_self_referencing_overlapping_FK_PK_one_to_one")
+                    .Options;
 
                 using (var context = new DbContext(contextOptions))
                 {

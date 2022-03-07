@@ -46,12 +46,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.TypeStyle
 
         public override bool OpenFileOnly(OptionSet options)
         {
-            var forIntrinsicTypesOption =
-                options.GetOption(CSharpCodeStyleOptions.VarForBuiltInTypes).Notification;
-            var whereApparentOption =
-                options.GetOption(CSharpCodeStyleOptions.VarWhenTypeIsApparent).Notification;
-            var wherePossibleOption =
-                options.GetOption(CSharpCodeStyleOptions.VarElsewhere).Notification;
+            var forIntrinsicTypesOption = options
+                .GetOption(CSharpCodeStyleOptions.VarForBuiltInTypes)
+                .Notification;
+            var whereApparentOption = options
+                .GetOption(CSharpCodeStyleOptions.VarWhenTypeIsApparent)
+                .Notification;
+            var wherePossibleOption = options
+                .GetOption(CSharpCodeStyleOptions.VarElsewhere)
+                .Notification;
 
             return !(
                 forIntrinsicTypesOption == NotificationOption2.Warning

@@ -251,26 +251,36 @@ namespace System.Security.Cryptography
 
                     int offset = sizeof(BCRYPT_ECCFULLKEY_BLOB);
 
-                    primeCurve.Prime = Interop
-                        .BCrypt
-                        .Consume(ecBlob, ref offset, pBcryptBlob->cbFieldLength);
-                    primeCurve.A = Interop
-                        .BCrypt
-                        .Consume(ecBlob, ref offset, pBcryptBlob->cbFieldLength);
-                    primeCurve.B = Interop
-                        .BCrypt
-                        .Consume(ecBlob, ref offset, pBcryptBlob->cbFieldLength);
+                    primeCurve.Prime = Interop.BCrypt.Consume(
+                        ecBlob,
+                        ref offset,
+                        pBcryptBlob->cbFieldLength
+                    );
+                    primeCurve.A = Interop.BCrypt.Consume(
+                        ecBlob,
+                        ref offset,
+                        pBcryptBlob->cbFieldLength
+                    );
+                    primeCurve.B = Interop.BCrypt.Consume(
+                        ecBlob,
+                        ref offset,
+                        pBcryptBlob->cbFieldLength
+                    );
                     primeCurve.G = new ECPoint()
                     {
                         X = Interop.BCrypt.Consume(ecBlob, ref offset, pBcryptBlob->cbFieldLength),
                         Y = Interop.BCrypt.Consume(ecBlob, ref offset, pBcryptBlob->cbFieldLength),
                     };
-                    primeCurve.Order = Interop
-                        .BCrypt
-                        .Consume(ecBlob, ref offset, pBcryptBlob->cbSubgroupOrder);
-                    primeCurve.Cofactor = Interop
-                        .BCrypt
-                        .Consume(ecBlob, ref offset, pBcryptBlob->cbCofactor);
+                    primeCurve.Order = Interop.BCrypt.Consume(
+                        ecBlob,
+                        ref offset,
+                        pBcryptBlob->cbSubgroupOrder
+                    );
+                    primeCurve.Cofactor = Interop.BCrypt.Consume(
+                        ecBlob,
+                        ref offset,
+                        pBcryptBlob->cbCofactor
+                    );
 
                     // Optional parameters
                     primeCurve.Seed =
@@ -286,9 +296,11 @@ namespace System.Security.Cryptography
 
                     if (includePrivateParameters)
                     {
-                        ecParams.D = Interop
-                            .BCrypt
-                            .Consume(ecBlob, ref offset, pBcryptBlob->cbSubgroupOrder);
+                        ecParams.D = Interop.BCrypt.Consume(
+                            ecBlob,
+                            ref offset,
+                            pBcryptBlob->cbSubgroupOrder
+                        );
                     }
 
                     ecParams.Curve = primeCurve;
@@ -536,8 +548,10 @@ namespace System.Security.Cryptography
                     descPtr = Marshal.AllocHGlobal(Marshal.SizeOf(desc));
                     buffPtr = Marshal.AllocHGlobal(Marshal.SizeOf(buff));
                     buff.cbBuffer = (curveName.Length + 1) * 2; // Add 1 for null terminator
-                    buff.BufferType =
-                        Interop.BCrypt.CngBufferDescriptors.NCRYPTBUFFER_ECC_CURVE_NAME;
+                    buff.BufferType = Interop
+                        .BCrypt
+                        .CngBufferDescriptors
+                        .NCRYPTBUFFER_ECC_CURVE_NAME;
                     buff.pvBuffer = safeCurveName.DangerousGetHandle();
                     Marshal.StructureToPtr(buff, buffPtr, false);
 
@@ -546,18 +560,16 @@ namespace System.Security.Cryptography
                     desc.ulVersion = Interop.BCrypt.BCRYPTBUFFER_VERSION;
                     Marshal.StructureToPtr(desc, descPtr, false);
 
-                    errorCode = Interop
-                        .NCrypt
-                        .NCryptImportKey(
-                            provider,
-                            IntPtr.Zero,
-                            blobType,
-                            descPtr,
-                            out keyHandle,
-                            ref MemoryMarshal.GetReference(keyBlob),
-                            keyBlob.Length,
-                            0
-                        );
+                    errorCode = Interop.NCrypt.NCryptImportKey(
+                        provider,
+                        IntPtr.Zero,
+                        blobType,
+                        descPtr,
+                        out keyHandle,
+                        ref MemoryMarshal.GetReference(keyBlob),
+                        keyBlob.Length,
+                        0
+                    );
                 }
                 finally
                 {

@@ -89,8 +89,7 @@ public class Http1ReadingBenchmark
     {
         ResetState();
 
-        return _http1Connection
-            .RequestBody
+        return _http1Connection.RequestBody
             .ReadAsync(new byte[100], default(CancellationToken))
             .AsTask();
     }

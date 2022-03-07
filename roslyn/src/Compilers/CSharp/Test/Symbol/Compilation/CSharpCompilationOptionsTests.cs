@@ -370,8 +370,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 0,
                 new CSharpCompilationOptions(OutputKind.ConsoleApplication)
                     .WithMainTypeName(null)
-                    .Errors
-                    .Length
+                    .Errors.Length
             );
             new CSharpCompilationOptions(OutputKind.ConsoleApplication)
                 .WithMainTypeName("blah\0goo")
@@ -458,16 +457,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void WithUsings()
         {
-            var actual1 =
-                new CSharpCompilationOptions(OutputKind.ConsoleApplication)
-                    .WithUsings(new[] { "A", "B" })
-                    .Usings;
+            var actual1 = new CSharpCompilationOptions(OutputKind.ConsoleApplication)
+                .WithUsings(new[] { "A", "B" })
+                .Usings;
             Assert.True(actual1.SequenceEqual(new[] { "A", "B" }));
 
-            var actual2 =
-                new CSharpCompilationOptions(OutputKind.ConsoleApplication)
-                    .WithUsings(Enumerable.Repeat("A", 1))
-                    .Usings;
+            var actual2 = new CSharpCompilationOptions(OutputKind.ConsoleApplication)
+                .WithUsings(Enumerable.Repeat("A", 1))
+                .Usings;
             Assert.True(actual2.SequenceEqual(Enumerable.Repeat("A", 1)));
 
             Assert.Equal(
@@ -475,16 +472,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 new CSharpCompilationOptions(OutputKind.ConsoleApplication)
                     .WithUsings("A", "B")
                     .WithUsings(null)
-                    .Usings
-                    .Count()
+                    .Usings.Count()
             );
             Assert.Equal(
                 0,
                 new CSharpCompilationOptions(OutputKind.ConsoleApplication)
                     .WithUsings("A", "B")
                     .WithUsings((string[])null)
-                    .Usings
-                    .Count()
+                    .Usings.Count()
             );
 
             new CSharpCompilationOptions(OutputKind.ConsoleApplication)
@@ -525,16 +520,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 3,
                 new CSharpCompilationOptions(OutputKind.ConsoleApplication)
                     .WithSpecificDiagnosticOptions(warnings)
-                    .SpecificDiagnosticOptions
-                    .Count
+                    .SpecificDiagnosticOptions.Count
             );
 
             Assert.Equal(
                 0,
                 new CSharpCompilationOptions(OutputKind.ConsoleApplication)
                     .WithSpecificDiagnosticOptions(null)
-                    .SpecificDiagnosticOptions
-                    .Count
+                    .SpecificDiagnosticOptions.Count
             );
 
             Assert.Equal(
@@ -564,8 +557,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             // ModuleName
             Assert.Null(TestOptions.ReleaseDll.WithModuleName(null).ModuleName);
-            TestOptions
-                .ReleaseDll
+            TestOptions.ReleaseDll
                 .WithModuleName("")
                 .VerifyErrors(
                     // error CS7087: Invalid module name: Name cannot be empty.
@@ -574,8 +566,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                         .WithLocation(1, 1)
                 );
 
-            TestOptions
-                .ReleaseDll
+            TestOptions.ReleaseDll
                 .WithModuleName("a\0a")
                 .VerifyErrors(
                     // error CS7087: Invalid module name: Name contains invalid characters.
@@ -584,8 +575,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                         .WithLocation(1, 1)
                 );
 
-            TestOptions
-                .ReleaseDll
+            TestOptions.ReleaseDll
                 .WithModuleName("a\uD800b")
                 .VerifyErrors(
                     // error CS7087: Invalid module name: Name contains invalid characters.
@@ -594,8 +584,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                         .WithLocation(1, 1)
                 );
 
-            TestOptions
-                .ReleaseDll
+            TestOptions.ReleaseDll
                 .WithModuleName("a\\b")
                 .VerifyErrors(
                     // error CS7087: Invalid module name: Name contains invalid characters.
@@ -604,8 +593,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                         .WithLocation(1, 1)
                 );
 
-            TestOptions
-                .ReleaseDll
+            TestOptions.ReleaseDll
                 .WithModuleName("a/b")
                 .VerifyErrors(
                     // error CS7087: Invalid module name: Name contains invalid characters.
@@ -614,8 +602,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                         .WithLocation(1, 1)
                 );
 
-            TestOptions
-                .ReleaseDll
+            TestOptions.ReleaseDll
                 .WithModuleName("a:b")
                 .VerifyErrors(
                     // error CS7087: Invalid module name: Name contains invalid characters.
@@ -921,9 +908,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 new CSharpCompilationOptions(OutputKind.ConsoleApplication).NullableContextOptions
             );
 
-            var values = (NullableContextOptions[])System
-                .Enum
-                .GetValues(typeof(NullableContextOptions));
+            var values = (NullableContextOptions[])System.Enum.GetValues(
+                typeof(NullableContextOptions)
+            );
             var options = new CSharpCompilationOptions[values.Length];
 
             for (int i = 0; i < values.Length; i++)

@@ -2676,9 +2676,7 @@ namespace Microsoft.EntityFrameworkCore
 
             return new IncludableQueryable<TEntity, TProperty>(
                 source.Provider is EntityQueryProvider
-                  ? source
-                    .Provider
-                    .CreateQuery<TEntity>(
+                  ? source.Provider.CreateQuery<TEntity>(
                         Expression.Call(
                             instance: null,
                             method: IncludeMethodInfo.MakeGenericMethod(
@@ -2707,9 +2705,7 @@ namespace Microsoft.EntityFrameworkCore
         {
             return new IncludableQueryable<TEntity, TProperty>(
                 source.Provider is EntityQueryProvider
-                  ? source
-                    .Provider
-                    .CreateQuery<TEntity>(
+                  ? source.Provider.CreateQuery<TEntity>(
                         Expression.Call(
                             instance: null,
                             method: NotQuiteIncludeMethodInfo.MakeGenericMethod(
@@ -2808,9 +2804,7 @@ namespace Microsoft.EntityFrameworkCore
         ) where TEntity : class =>
             new IncludableQueryable<TEntity, TProperty>(
                 source.Provider is EntityQueryProvider
-                  ? source
-                    .Provider
-                    .CreateQuery<TEntity>(
+                  ? source.Provider.CreateQuery<TEntity>(
                         Expression.Call(
                             instance: null,
                             method: ThenIncludeAfterEnumerableMethodInfo.MakeGenericMethod(
@@ -2879,9 +2873,7 @@ namespace Microsoft.EntityFrameworkCore
         ) where TEntity : class =>
             new IncludableQueryable<TEntity, TProperty>(
                 source.Provider is EntityQueryProvider
-                  ? source
-                    .Provider
-                    .CreateQuery<TEntity>(
+                  ? source.Provider.CreateQuery<TEntity>(
                         Expression.Call(
                             instance: null,
                             method: ThenIncludeAfterReferenceMethodInfo.MakeGenericMethod(
@@ -2981,9 +2973,7 @@ namespace Microsoft.EntityFrameworkCore
             Check.NotEmpty(navigationPropertyPath, nameof(navigationPropertyPath));
 
             return source.Provider is EntityQueryProvider
-              ? source
-                .Provider
-                .CreateQuery<TEntity>(
+              ? source.Provider.CreateQuery<TEntity>(
                     Expression.Call(
                         instance: null,
                         method: StringIncludeMethodInfo.MakeGenericMethod(typeof(TEntity)),
@@ -3016,9 +3006,7 @@ namespace Microsoft.EntityFrameworkCore
             this IQueryable<TEntity> source
         ) where TEntity : class =>
             source.Provider is EntityQueryProvider
-                ? source
-                  .Provider
-                  .CreateQuery<TEntity>(
+                ? source.Provider.CreateQuery<TEntity>(
                       Expression.Call(
                           instance: null,
                           method: IgnoreAutoIncludesMethodInfo.MakeGenericMethod(typeof(TEntity)),
@@ -3050,9 +3038,7 @@ namespace Microsoft.EntityFrameworkCore
             this IQueryable<TEntity> source
         ) where TEntity : class =>
             source.Provider is EntityQueryProvider
-                ? source
-                  .Provider
-                  .CreateQuery<TEntity>(
+                ? source.Provider.CreateQuery<TEntity>(
                       Expression.Call(
                           instance: null,
                           method: IgnoreQueryFiltersMethodInfo.MakeGenericMethod(typeof(TEntity)),
@@ -3100,9 +3086,7 @@ namespace Microsoft.EntityFrameworkCore
         public static IQueryable<TEntity> AsNoTracking<TEntity>(this IQueryable<TEntity> source)
             where TEntity : class =>
             source.Provider is EntityQueryProvider
-                ? source
-                  .Provider
-                  .CreateQuery<TEntity>(
+                ? source.Provider.CreateQuery<TEntity>(
                       Expression.Call(
                           instance: null,
                           method: AsNoTrackingMethodInfo.MakeGenericMethod(typeof(TEntity)),
@@ -3147,9 +3131,7 @@ namespace Microsoft.EntityFrameworkCore
             this IQueryable<TEntity> source
         ) where TEntity : class =>
             source.Provider is EntityQueryProvider
-                ? source
-                  .Provider
-                  .CreateQuery<TEntity>(
+                ? source.Provider.CreateQuery<TEntity>(
                       Expression.Call(
                           instance: null,
                           method: AsNoTrackingWithIdentityResolutionMethodInfo.MakeGenericMethod(
@@ -3186,9 +3168,7 @@ namespace Microsoft.EntityFrameworkCore
         public static IQueryable<TEntity> AsTracking<TEntity>(this IQueryable<TEntity> source)
             where TEntity : class =>
             source.Provider is EntityQueryProvider
-                ? source
-                  .Provider
-                  .CreateQuery<TEntity>(
+                ? source.Provider.CreateQuery<TEntity>(
                       Expression.Call(
                           instance: null,
                           method: AsTrackingMethodInfo.MakeGenericMethod(typeof(TEntity)),
@@ -3297,9 +3277,7 @@ namespace Microsoft.EntityFrameworkCore
             Check.NotEmpty(tag, nameof(tag));
 
             return source.Provider is EntityQueryProvider
-              ? source
-                .Provider
-                .CreateQuery<T>(
+              ? source.Provider.CreateQuery<T>(
                     Expression.Call(
                         instance: null,
                         method: TagWithMethodInfo.MakeGenericMethod(typeof(T)),
@@ -3331,9 +3309,7 @@ namespace Microsoft.EntityFrameworkCore
             [NotParameterized] [CallerLineNumber] int lineNumber = 0
         ) =>
             source.Provider is EntityQueryProvider
-                ? source
-                  .Provider
-                  .CreateQuery<T>(
+                ? source.Provider.CreateQuery<T>(
                       Expression.Call(
                           instance: null,
                           method: TagWithCallSiteMethodInfo.MakeGenericMethod(typeof(T)),

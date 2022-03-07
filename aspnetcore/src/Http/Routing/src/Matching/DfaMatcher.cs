@@ -326,15 +326,13 @@ internal sealed partial class DfaMatcher : Matcher
         {
             var constraint = constraints[i];
             if (
-                !constraint
-                    .Value
-                    .Match(
-                        httpContext,
-                        NullRouter.Instance,
-                        constraint.Key,
-                        values,
-                        RouteDirection.IncomingRequest
-                    )
+                !constraint.Value.Match(
+                    httpContext,
+                    NullRouter.Instance,
+                    constraint.Key,
+                    values,
+                    RouteDirection.IncomingRequest
+                )
             )
             {
                 Log.CandidateRejectedByConstraint(

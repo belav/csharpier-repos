@@ -54,29 +54,23 @@ internal sealed class ComponentMarkupDiagnosticPass
                             ] as string;
                         if (originalAttributeName != null)
                         {
-                            other
-                                .node
-                                .Diagnostics
-                                .Add(
-                                    ComponentDiagnosticFactory.Create_DuplicateMarkupAttributeDirective(
-                                        other.name,
-                                        originalAttributeName,
-                                        other.node.Source ?? node.Source
-                                    )
-                                );
+                            other.node.Diagnostics.Add(
+                                ComponentDiagnosticFactory.Create_DuplicateMarkupAttributeDirective(
+                                    other.name,
+                                    originalAttributeName,
+                                    other.node.Source ?? node.Source
+                                )
+                            );
                         }
                         else
                         {
                             // This is a conflict in the code the user wrote.
-                            other
-                                .node
-                                .Diagnostics
-                                .Add(
-                                    ComponentDiagnosticFactory.Create_DuplicateMarkupAttribute(
-                                        other.name,
-                                        other.node.Source ?? node.Source
-                                    )
-                                );
+                            other.node.Diagnostics.Add(
+                                ComponentDiagnosticFactory.Create_DuplicateMarkupAttribute(
+                                    other.name,
+                                    other.node.Source ?? node.Source
+                                )
+                            );
                         }
                     }
 
@@ -115,29 +109,23 @@ internal sealed class ComponentMarkupDiagnosticPass
                             ] as string;
                         if (originalAttributeName != null)
                         {
-                            other
-                                .node
-                                .Diagnostics
-                                .Add(
-                                    ComponentDiagnosticFactory.Create_DuplicateComponentParameterDirective(
-                                        other.name,
-                                        originalAttributeName,
-                                        other.node.Source ?? node.Source
-                                    )
-                                );
+                            other.node.Diagnostics.Add(
+                                ComponentDiagnosticFactory.Create_DuplicateComponentParameterDirective(
+                                    other.name,
+                                    originalAttributeName,
+                                    other.node.Source ?? node.Source
+                                )
+                            );
                         }
                         else
                         {
                             // This is a conflict in the code the user wrote.
-                            other
-                                .node
-                                .Diagnostics
-                                .Add(
-                                    ComponentDiagnosticFactory.Create_DuplicateComponentParameter(
-                                        other.name,
-                                        other.node.Source ?? node.Source
-                                    )
-                                );
+                            other.node.Diagnostics.Add(
+                                ComponentDiagnosticFactory.Create_DuplicateComponentParameter(
+                                    other.name,
+                                    other.node.Source ?? node.Source
+                                )
+                            );
                         }
                     }
 

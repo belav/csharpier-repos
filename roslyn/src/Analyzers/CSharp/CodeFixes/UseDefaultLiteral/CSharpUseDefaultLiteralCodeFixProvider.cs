@@ -71,16 +71,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDefaultLiteral
 
             var parseOptions = (CSharpParseOptions)document.Project.ParseOptions;
             var tree = await document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
-            var preferSimpleDefaultExpression =
-                document
-                    .Project
-                    .AnalyzerOptions
-                    .GetOption(
-                        CSharpCodeStyleOptions.PreferSimpleDefaultExpression,
-                        tree,
-                        cancellationToken
-                    )
-                    .Value;
+            var preferSimpleDefaultExpression = document.Project.AnalyzerOptions
+                .GetOption(
+                    CSharpCodeStyleOptions.PreferSimpleDefaultExpression,
+                    tree,
+                    cancellationToken
+                )
+                .Value;
 
             var workspace = document.Project.Solution.Workspace;
             var originalRoot = editor.OriginalRoot;

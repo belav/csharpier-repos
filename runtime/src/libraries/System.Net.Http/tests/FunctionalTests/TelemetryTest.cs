@@ -23,9 +23,11 @@ namespace System.Net.Http.Functional.Tests
         [Fact]
         public static void EventSource_ExistsWithCorrectId()
         {
-            Type esType = typeof(HttpClient)
-                .Assembly
-                .GetType("System.Net.Http.HttpTelemetry", throwOnError: true, ignoreCase: false);
+            Type esType = typeof(HttpClient).Assembly.GetType(
+                "System.Net.Http.HttpTelemetry",
+                throwOnError: true,
+                ignoreCase: false
+            );
             Assert.NotNull(esType);
 
             Assert.Equal("System.Net.Http", EventSource.GetName(esType));
@@ -134,9 +136,11 @@ namespace System.Net.Http.Functional.Tests
                                                                         HttpCompletionOption.ResponseHeadersRead
                                                                     )
                                                             );
-                                                        response
-                                                            .Content
-                                                            .CopyTo(Stream.Null, null, default);
+                                                        response.Content.CopyTo(
+                                                            Stream.Null,
+                                                            null,
+                                                            default
+                                                        );
                                                     }
                                                     break;
 
@@ -157,9 +161,9 @@ namespace System.Net.Http.Functional.Tests
                                                                 request,
                                                                 HttpCompletionOption.ResponseHeadersRead
                                                             );
-                                                        await response
-                                                            .Content
-                                                            .CopyToAsync(Stream.Null);
+                                                        await response.Content.CopyToAsync(
+                                                            Stream.Null
+                                                        );
                                                     }
                                                     break;
 
@@ -203,9 +207,9 @@ namespace System.Net.Http.Functional.Tests
                                                                         cancellationToken: default
                                                                     )
                                                             );
-                                                        await response
-                                                            .Content
-                                                            .CopyToAsync(Stream.Null);
+                                                        await response.Content.CopyToAsync(
+                                                            Stream.Null
+                                                        );
                                                     }
                                                     break;
 
@@ -218,9 +222,9 @@ namespace System.Net.Http.Functional.Tests
                                                                 request,
                                                                 cancellationToken: default
                                                             );
-                                                        await response
-                                                            .Content
-                                                            .CopyToAsync(Stream.Null);
+                                                        await response.Content.CopyToAsync(
+                                                            Stream.Null
+                                                        );
                                                     }
                                                     break;
                                             }
@@ -519,9 +523,9 @@ namespace System.Net.Http.Functional.Tests
                                             };
 
                                             var content = new ByteArrayContent(
-                                                Encoding
-                                                    .ASCII
-                                                    .GetBytes(new string('a', RequestContentLength))
+                                                Encoding.ASCII.GetBytes(
+                                                    new string('a', RequestContentLength)
+                                                )
                                             );
                                             request.Content = content;
 
@@ -553,9 +557,9 @@ namespace System.Net.Http.Functional.Tests
                                                                     cancellationToken: default
                                                                 )
                                                         );
-                                                    await syncResponse
-                                                        .Content
-                                                        .CopyToAsync(Stream.Null);
+                                                    await syncResponse.Content.CopyToAsync(
+                                                        Stream.Null
+                                                    );
                                                     break;
 
                                                 case "InvokerSendAsync":
@@ -564,9 +568,9 @@ namespace System.Net.Http.Functional.Tests
                                                             request,
                                                             cancellationToken: default
                                                         );
-                                                    await asyncResponse
-                                                        .Content
-                                                        .CopyToAsync(Stream.Null);
+                                                    await asyncResponse.Content.CopyToAsync(
+                                                        Stream.Null
+                                                    );
                                                     break;
                                             }
                                         },

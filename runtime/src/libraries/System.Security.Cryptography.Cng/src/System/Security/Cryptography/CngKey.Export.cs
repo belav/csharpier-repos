@@ -24,34 +24,30 @@ namespace System.Security.Cryptography
                 throw new ArgumentNullException(nameof(format));
 
             int numBytesNeeded;
-            ErrorCode errorCode = Interop
-                .NCrypt
-                .NCryptExportKey(
-                    _keyHandle,
-                    IntPtr.Zero,
-                    format.Format,
-                    IntPtr.Zero,
-                    null,
-                    0,
-                    out numBytesNeeded,
-                    0
-                );
+            ErrorCode errorCode = Interop.NCrypt.NCryptExportKey(
+                _keyHandle,
+                IntPtr.Zero,
+                format.Format,
+                IntPtr.Zero,
+                null,
+                0,
+                out numBytesNeeded,
+                0
+            );
             if (errorCode != ErrorCode.ERROR_SUCCESS)
                 throw errorCode.ToCryptographicException();
 
             byte[] buffer = new byte[numBytesNeeded];
-            errorCode = Interop
-                .NCrypt
-                .NCryptExportKey(
-                    _keyHandle,
-                    IntPtr.Zero,
-                    format.Format,
-                    IntPtr.Zero,
-                    buffer,
-                    buffer.Length,
-                    out numBytesNeeded,
-                    0
-                );
+            errorCode = Interop.NCrypt.NCryptExportKey(
+                _keyHandle,
+                IntPtr.Zero,
+                format.Format,
+                IntPtr.Zero,
+                buffer,
+                buffer.Length,
+                out numBytesNeeded,
+                0
+            );
             if (errorCode != ErrorCode.ERROR_SUCCESS)
                 throw errorCode.ToCryptographicException();
 
@@ -68,18 +64,16 @@ namespace System.Security.Cryptography
             // Sanity check the current bounds
             Span<byte> empty = default;
 
-            ErrorCode errorCode = Interop
-                .NCrypt
-                .NCryptExportKey(
-                    _keyHandle,
-                    IntPtr.Zero,
-                    blobType,
-                    IntPtr.Zero,
-                    ref MemoryMarshal.GetReference(empty),
-                    empty.Length,
-                    out int written,
-                    0
-                );
+            ErrorCode errorCode = Interop.NCrypt.NCryptExportKey(
+                _keyHandle,
+                IntPtr.Zero,
+                blobType,
+                IntPtr.Zero,
+                ref MemoryMarshal.GetReference(empty),
+                empty.Length,
+                out int written,
+                0
+            );
 
             if (errorCode != ErrorCode.ERROR_SUCCESS)
             {
@@ -92,18 +86,16 @@ namespace System.Security.Cryptography
                 return false;
             }
 
-            errorCode = Interop
-                .NCrypt
-                .NCryptExportKey(
-                    _keyHandle,
-                    IntPtr.Zero,
-                    blobType,
-                    IntPtr.Zero,
-                    ref MemoryMarshal.GetReference(destination),
-                    destination.Length,
-                    out written,
-                    0
-                );
+            errorCode = Interop.NCrypt.NCryptExportKey(
+                _keyHandle,
+                IntPtr.Zero,
+                blobType,
+                IntPtr.Zero,
+                ref MemoryMarshal.GetReference(destination),
+                destination.Length,
+                out written,
+                0
+            );
 
             if (errorCode != ErrorCode.ERROR_SUCCESS)
             {
@@ -150,11 +142,8 @@ namespace System.Security.Cryptography
         }
 
         // The Windows APIs for OID strings are ASCII-only
-        private static readonly byte[] s_pkcs12TripleDesOidBytes = System
-            .Text
-            .Encoding
-            .ASCII
-            .GetBytes("1.2.840.113549.1.12.1.3\0");
+        private static readonly byte[] s_pkcs12TripleDesOidBytes =
+            System.Text.Encoding.ASCII.GetBytes("1.2.840.113549.1.12.1.3\0");
 
         internal static unsafe bool ExportPkcs8KeyBlob(
             bool allocate,
@@ -217,18 +206,16 @@ namespace System.Security.Cryptography
 
                     Span<byte> empty = default;
 
-                    ErrorCode errorCode = Interop
-                        .NCrypt
-                        .NCryptExportKey(
-                            keyHandle,
-                            IntPtr.Zero,
-                            Interop.NCrypt.NCRYPT_PKCS8_PRIVATE_KEY_BLOB,
-                            ref desc,
-                            ref MemoryMarshal.GetReference(empty),
-                            0,
-                            out int numBytesNeeded,
-                            0
-                        );
+                    ErrorCode errorCode = Interop.NCrypt.NCryptExportKey(
+                        keyHandle,
+                        IntPtr.Zero,
+                        Interop.NCrypt.NCRYPT_PKCS8_PRIVATE_KEY_BLOB,
+                        ref desc,
+                        ref MemoryMarshal.GetReference(empty),
+                        0,
+                        out int numBytesNeeded,
+                        0
+                    );
 
                     if (errorCode != ErrorCode.ERROR_SUCCESS)
                     {
@@ -248,18 +235,16 @@ namespace System.Security.Cryptography
                         return false;
                     }
 
-                    errorCode = Interop
-                        .NCrypt
-                        .NCryptExportKey(
-                            keyHandle,
-                            IntPtr.Zero,
-                            Interop.NCrypt.NCRYPT_PKCS8_PRIVATE_KEY_BLOB,
-                            ref desc,
-                            ref MemoryMarshal.GetReference(destination),
-                            destination.Length,
-                            out numBytesNeeded,
-                            0
-                        );
+                    errorCode = Interop.NCrypt.NCryptExportKey(
+                        keyHandle,
+                        IntPtr.Zero,
+                        Interop.NCrypt.NCRYPT_PKCS8_PRIVATE_KEY_BLOB,
+                        ref desc,
+                        ref MemoryMarshal.GetReference(destination),
+                        destination.Length,
+                        out numBytesNeeded,
+                        0
+                    );
 
                     if (errorCode != ErrorCode.ERROR_SUCCESS)
                     {

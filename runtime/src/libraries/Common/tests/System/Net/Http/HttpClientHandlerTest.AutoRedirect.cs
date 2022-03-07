@@ -350,8 +350,10 @@ namespace System.Net.Http.Functional.Tests
                                 UriKind.Relative
                             );
                         }
-                        Uri expectedUrl =
-                            new UriBuilder(origUrl) { Fragment = expectedFragment }.Uri;
+                        Uri expectedUrl = new UriBuilder(origUrl)
+                        {
+                            Fragment = expectedFragment
+                        }.Uri;
 
                         // Make and receive the first request that'll be redirected.
                         Task<HttpResponseMessage> getResponse = client.GetAsync(origUrl);

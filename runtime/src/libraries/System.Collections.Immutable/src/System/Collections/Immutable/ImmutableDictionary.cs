@@ -54,9 +54,10 @@ namespace System.Collections.Immutable
             IEqualityComparer<TValue>? valueComparer
         ) where TKey : notnull
         {
-            return ImmutableDictionary<TKey, TValue>
-                .Empty
-                .WithComparers(keyComparer, valueComparer);
+            return ImmutableDictionary<TKey, TValue>.Empty.WithComparers(
+                keyComparer,
+                valueComparer
+            );
         }
 
         /// <summary>
@@ -86,8 +87,7 @@ namespace System.Collections.Immutable
             IEnumerable<KeyValuePair<TKey, TValue>> items
         ) where TKey : notnull
         {
-            return ImmutableDictionary<TKey, TValue>
-                .Empty
+            return ImmutableDictionary<TKey, TValue>.Empty
                 .WithComparers(keyComparer)
                 .AddRange(items);
         }
@@ -107,8 +107,7 @@ namespace System.Collections.Immutable
             IEnumerable<KeyValuePair<TKey, TValue>> items
         ) where TKey : notnull
         {
-            return ImmutableDictionary<TKey, TValue>
-                .Empty
+            return ImmutableDictionary<TKey, TValue>.Empty
                 .WithComparers(keyComparer, valueComparer)
                 .AddRange(items);
         }
@@ -183,8 +182,7 @@ namespace System.Collections.Immutable
             Requires.NotNull(keySelector, nameof(keySelector));
             Requires.NotNull(elementSelector, nameof(elementSelector));
 
-            return ImmutableDictionary<TKey, TValue>
-                .Empty
+            return ImmutableDictionary<TKey, TValue>.Empty
                 .WithComparers(keyComparer, valueComparer)
                 .AddRange(
                     source.Select(
@@ -316,8 +314,7 @@ namespace System.Collections.Immutable
                 return existingDictionary.WithComparers(keyComparer, valueComparer);
             }
 
-            return ImmutableDictionary<TKey, TValue>
-                .Empty
+            return ImmutableDictionary<TKey, TValue>.Empty
                 .WithComparers(keyComparer, valueComparer)
                 .AddRange(source);
         }

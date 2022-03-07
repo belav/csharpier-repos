@@ -122,8 +122,7 @@ namespace AutoMapper.UnitTests.Projection
                 .AsQueryable()
                 .ProjectTo<Destination>(Configuration)
                 .First()
-                .Value
-                .ShouldBe("5");
+                .Value.ShouldBe("5");
     }
 
     public class ConstructorsWithCollections : AutoMapperSpecBase
@@ -179,9 +178,7 @@ namespace AutoMapper.UnitTests.Projection
                     }.AsQueryable()
                 )
                 .First()
-                .AddressDto
-                .Address
-                .ShouldBe("address");
+                .AddressDto.Address.ShouldBe("address");
     }
 
     public class ConstructorTests : AutoMapperSpecBase
@@ -272,8 +269,6 @@ namespace AutoMapper.UnitTests.Projection
         public void Should_project_ok() =>
             ProjectTo<DtoA>(new[] { new A { B = new B { Id = 3 } } }.AsQueryable())
                 .FirstOrDefault()
-                .B
-                .Id
-                .ShouldBe(3);
+                .B.Id.ShouldBe(3);
     }
 }

@@ -465,13 +465,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             foreignKey1.SetDependentToPrincipal(OneToManyDependent.DeceptionProperty);
 
             var newFkProp = foreignKey1.DeclaringEntityType.AddProperty("FkProp", typeof(int));
-            var foreignKey2 = foreignKey1
-                .DeclaringEntityType
-                .AddForeignKey(
-                    new[] { newFkProp },
-                    foreignKey1.PrincipalEntityType.FindPrimaryKey(),
-                    foreignKey1.PrincipalEntityType
-                );
+            var foreignKey2 = foreignKey1.DeclaringEntityType.AddForeignKey(
+                new[] { newFkProp },
+                foreignKey1.PrincipalEntityType.FindPrimaryKey(),
+                foreignKey1.PrincipalEntityType
+            );
 
             Assert.Equal(
                 CoreStrings.NavigationForWrongForeignKey(
@@ -498,13 +496,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             foreignKey1.SetDependentToPrincipal(OneToManyDependent.DeceptionProperty);
 
             var newFkProp = foreignKey1.DeclaringEntityType.AddProperty("FkProp", typeof(int));
-            var foreignKey2 = foreignKey1
-                .DeclaringEntityType
-                .AddForeignKey(
-                    new[] { newFkProp },
-                    foreignKey1.PrincipalEntityType.FindPrimaryKey(),
-                    foreignKey1.PrincipalEntityType
-                );
+            var foreignKey2 = foreignKey1.DeclaringEntityType.AddForeignKey(
+                new[] { newFkProp },
+                foreignKey1.PrincipalEntityType.FindPrimaryKey(),
+                foreignKey1.PrincipalEntityType
+            );
 
             Assert.Equal(
                 CoreStrings.NavigationForWrongForeignKey(

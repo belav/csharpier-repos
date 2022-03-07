@@ -126,9 +126,10 @@ namespace Microsoft.EntityFrameworkCore
         {
             if (entityTypeBuilder.CanSetIsMemoryOptimized(memoryOptimized, fromDataAnnotation))
             {
-                entityTypeBuilder
-                    .Metadata
-                    .SetIsMemoryOptimized(memoryOptimized, fromDataAnnotation);
+                entityTypeBuilder.Metadata.SetIsMemoryOptimized(
+                    memoryOptimized,
+                    fromDataAnnotation
+                );
                 return entityTypeBuilder;
             }
 
@@ -339,9 +340,10 @@ namespace Microsoft.EntityFrameworkCore
         {
             if (entityTypeBuilder.CanSetPeriodStart(propertyName, fromDataAnnotation))
             {
-                entityTypeBuilder
-                    .Metadata
-                    .SetPeriodStartPropertyName(propertyName, fromDataAnnotation);
+                entityTypeBuilder.Metadata.SetPeriodStartPropertyName(
+                    propertyName,
+                    fromDataAnnotation
+                );
 
                 return entityTypeBuilder;
             }
@@ -393,9 +395,10 @@ namespace Microsoft.EntityFrameworkCore
         {
             if (entityTypeBuilder.CanSetPeriodEnd(propertyName, fromDataAnnotation))
             {
-                entityTypeBuilder
-                    .Metadata
-                    .SetPeriodEndPropertyName(propertyName, fromDataAnnotation);
+                entityTypeBuilder.Metadata.SetPeriodEndPropertyName(
+                    propertyName,
+                    fromDataAnnotation
+                );
 
                 return entityTypeBuilder;
             }

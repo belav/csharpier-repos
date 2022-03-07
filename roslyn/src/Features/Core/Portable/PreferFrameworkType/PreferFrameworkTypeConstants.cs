@@ -14,8 +14,6 @@ namespace Microsoft.CodeAnalysis.PreferFrameworkType
         public static readonly ImmutableDictionary<string, string> Properties = ImmutableDictionary<
             string,
             string
-        >
-            .Empty
-            .Add(PreferFrameworkType, "");
+        >.Empty.Add(PreferFrameworkType, "");
     }
 }

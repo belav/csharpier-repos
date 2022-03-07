@@ -33,9 +33,10 @@ namespace Microsoft.CodeAnalysis.Rename
 
             public override string GetDescription(CultureInfo? culture) =>
                 string.Format(
-                    WorkspacesResources
-                        .ResourceManager
-                        .GetString("Rename_0_to_1", culture ?? WorkspacesResources.Culture)!,
+                    WorkspacesResources.ResourceManager.GetString(
+                        "Rename_0_to_1",
+                        culture ?? WorkspacesResources.Culture
+                    )!,
                     _analysis.OriginalDocumentName,
                     _analysis.NewDocumentName
                 );

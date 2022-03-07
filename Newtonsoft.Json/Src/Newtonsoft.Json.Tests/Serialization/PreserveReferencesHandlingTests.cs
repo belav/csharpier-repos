@@ -581,9 +581,10 @@ namespace Newtonsoft.Json.Tests.Serialization
             {
                 CircularReferenceClass circularReferenceClass = (CircularReferenceClass)value;
 
-                string reference = serializer
-                    .ReferenceResolver
-                    .GetReference(serializer, circularReferenceClass);
+                string reference = serializer.ReferenceResolver.GetReference(
+                    serializer,
+                    circularReferenceClass
+                );
 
                 JObject me = new JObject();
                 me["$id"] = new JValue(reference);

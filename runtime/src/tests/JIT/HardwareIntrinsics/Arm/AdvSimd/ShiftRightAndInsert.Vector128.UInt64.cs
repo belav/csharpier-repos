@@ -655,20 +655,18 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (!succeeded)
             {
-                TestLibrary
-                    .TestFramework
-                    .LogInformation(
-                        $"{nameof(AdvSimd)}.{nameof(AdvSimd.ShiftRightAndInsert)}<UInt64>(Vector128<UInt64>, Vector128<UInt64>, 32): {method} failed:"
-                    );
-                TestLibrary
-                    .TestFramework
-                    .LogInformation($"    firstOp: ({string.Join(", ", firstOp)})");
-                TestLibrary
-                    .TestFramework
-                    .LogInformation($"   secondOp: ({string.Join(", ", secondOp)})");
-                TestLibrary
-                    .TestFramework
-                    .LogInformation($"  result: ({string.Join(", ", result)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(AdvSimd)}.{nameof(AdvSimd.ShiftRightAndInsert)}<UInt64>(Vector128<UInt64>, Vector128<UInt64>, 32): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"    firstOp: ({string.Join(", ", firstOp)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   secondOp: ({string.Join(", ", secondOp)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", result)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

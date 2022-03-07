@@ -40,13 +40,13 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             _contextType = queryCompilationContext.ContextType;
             _tags = queryCompilationContext.Tags;
-            _threadSafetyChecksEnabled =
-                dependencies.CoreSingletonOptions.AreThreadSafetyChecksEnabled;
+            _threadSafetyChecksEnabled = dependencies
+                .CoreSingletonOptions
+                .AreThreadSafetyChecksEnabled;
             _detailedErrorsEnabled = dependencies.CoreSingletonOptions.AreDetailedErrorsEnabled;
-            _useRelationalNulls =
-                RelationalOptionsExtension
-                    .Extract(queryCompilationContext.ContextOptions)
-                    .UseRelationalNulls;
+            _useRelationalNulls = RelationalOptionsExtension
+                .Extract(queryCompilationContext.ContextOptions)
+                .UseRelationalNulls;
         }
 
         /// <summary>
@@ -61,8 +61,9 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             VerifyNoClientConstant(shapedQueryExpression.ShaperExpression);
             var nonComposedFromSql = selectExpression.IsNonComposedFromSql();
-            var querySplittingBehavior =
-                ((RelationalQueryCompilationContext)QueryCompilationContext).QuerySplittingBehavior;
+            var querySplittingBehavior = (
+                (RelationalQueryCompilationContext)QueryCompilationContext
+            ).QuerySplittingBehavior;
             var splitQuery = querySplittingBehavior == QuerySplittingBehavior.SplitQuery;
             var collectionCount = 0;
             var shaper = new ShaperProcessingExpressionVisitor(
@@ -94,8 +95,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ),
                     Expression.Constant(relationalCommandCache),
                     Expression.Constant(
-                        selectExpression
-                            .Projection
+                        selectExpression.Projection
                             .Select(pe => ((ColumnExpression)pe.Expression).Name)
                             .ToList(),
                         typeof(IReadOnlyList<string>)

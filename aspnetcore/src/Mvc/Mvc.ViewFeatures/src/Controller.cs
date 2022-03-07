@@ -76,9 +76,8 @@ public abstract class Controller : ControllerBase, IActionFilter, IAsyncActionFi
         {
             if (_tempData == null)
             {
-                var factory = HttpContext
-                    ?.RequestServices
-                    ?.GetRequiredService<ITempDataDictionaryFactory>();
+                var factory =
+                    HttpContext?.RequestServices?.GetRequiredService<ITempDataDictionaryFactory>();
                 _tempData = factory?.GetTempData(HttpContext);
             }
 

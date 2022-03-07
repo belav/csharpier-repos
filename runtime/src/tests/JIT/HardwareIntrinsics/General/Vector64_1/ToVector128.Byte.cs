@@ -151,17 +151,15 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary
-                    .TestFramework
-                    .LogInformation(
-                        $"Vector64<Byte>.ToVector128{(isUnsafe ? "Unsafe" : "")}(): {method} failed:"
-                    );
-                TestLibrary
-                    .TestFramework
-                    .LogInformation($"   value: ({string.Join(", ", values)})");
-                TestLibrary
-                    .TestFramework
-                    .LogInformation($"  result: ({string.Join(", ", result)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector64<Byte>.ToVector128{(isUnsafe ? "Unsafe" : "")}(): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   value: ({string.Join(", ", values)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", result)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

@@ -9492,9 +9492,10 @@ This is just junk, though.";
         [Test]
         public void ChildClassWithProtectedOverridePlusJsonProperty_Serialize()
         {
-            JsonObjectContract c = (JsonObjectContract)DefaultContractResolver
-                .Instance
-                .ResolveContract(typeof(ChildClassWithProtectedOverridePlusJsonProperty));
+            JsonObjectContract c =
+                (JsonObjectContract)DefaultContractResolver.Instance.ResolveContract(
+                    typeof(ChildClassWithProtectedOverridePlusJsonProperty)
+                );
             Assert.AreEqual(1, c.Properties.Count);
 
             var propertyValue = "test";

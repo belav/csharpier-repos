@@ -101,9 +101,9 @@ namespace Microsoft.CodeAnalysis.Options
 
             // First create a base option set for the given languages.
             languages = languages.Union(_languages.Value);
-            var newOptionSet = _workspaceOptionSet
-                .OptionService
-                .GetSerializableOptionsSnapshot(languages);
+            var newOptionSet = _workspaceOptionSet.OptionService.GetSerializableOptionsSnapshot(
+                languages
+            );
 
             // Then apply all the changed options from the current option set to the new option set.
             foreach (var changedOption in this.GetChangedOptions())

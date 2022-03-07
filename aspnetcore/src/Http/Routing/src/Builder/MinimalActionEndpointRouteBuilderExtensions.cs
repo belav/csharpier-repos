@@ -186,8 +186,7 @@ namespace Microsoft.AspNetCore.Builder
                 }
             }
 
-            var dataSource = endpoints
-                .DataSources
+            var dataSource = endpoints.DataSources
                 .OfType<ModelEndpointDataSource>()
                 .FirstOrDefault();
             if (dataSource is null)

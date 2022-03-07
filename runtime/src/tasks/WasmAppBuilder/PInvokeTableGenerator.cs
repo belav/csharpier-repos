@@ -101,15 +101,13 @@ public class PInvokeTableGenerator : Task
         {
             if ((method.Attributes & MethodAttributes.PinvokeImpl) != 0)
             {
-                var dllimport = method
-                    .CustomAttributes
-                    .First(attr => attr.AttributeType.Name == "DllImportAttribute");
+                var dllimport = method.CustomAttributes.First(
+                    attr => attr.AttributeType.Name == "DllImportAttribute"
+                );
                 var module = (string)dllimport.ConstructorArguments[0].Value!;
-                var entrypoint = (string)dllimport
-                    .NamedArguments
+                var entrypoint = (string)dllimport.NamedArguments
                     .First(arg => arg.MemberName == "EntryPoint")
-                    .TypedValue
-                    .Value!;
+                    .TypedValue.Value!;
                 pinvokes.Add(new PInvoke(entrypoint, module, method));
             }
 
@@ -410,12 +408,8 @@ public class PInvokeTableGenerator : Task
             bool is_void = method.ReturnType.Name == "Void";
 
             string module_symbol = method
-                .DeclaringType!
-                .Module!
-                .Assembly!
-                .GetName()!
-                .Name!
-                .Replace(".", "_");
+                .DeclaringType!.Module!.Assembly!.GetName()!
+                .Name!.Replace(".", "_");
             uint token = (uint)method.MetadataToken;
             string class_name = method.DeclaringType.Name;
             string method_name = method.Name;
@@ -485,12 +479,8 @@ public class PInvokeTableGenerator : Task
         {
             var method = cb.Method;
             string module_symbol = method
-                .DeclaringType!
-                .Module!
-                .Assembly!
-                .GetName()!
-                .Name!
-                .Replace(".", "_");
+                .DeclaringType!.Module!.Assembly!.GetName()!
+                .Name!.Replace(".", "_");
             string class_name = method.DeclaringType.Name;
             string method_name = method.Name;
             w.WriteLine($"\"{module_symbol}_{class_name}_{method_name}\",");

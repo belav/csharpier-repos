@@ -198,8 +198,7 @@ namespace Microsoft.CodeAnalysis.Rename
                             .ConfigureAwait(false);
 
                         if (result.HasValue && result.Value != null)
-                            return await result
-                                .Value
+                            return await result.Value
                                 .RehydrateAsync(solution, cancellationToken)
                                 .ConfigureAwait(false);
 

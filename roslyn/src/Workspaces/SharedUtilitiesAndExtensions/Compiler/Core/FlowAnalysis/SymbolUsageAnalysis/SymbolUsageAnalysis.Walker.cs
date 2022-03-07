@@ -475,8 +475,9 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                             continue;
 
                         case OperationKind.DelegateCreation:
-                            currentOperation =
-                                ((IDelegateCreationOperation)currentOperation).Target;
+                            currentOperation = (
+                                (IDelegateCreationOperation)currentOperation
+                            ).Target;
                             continue;
 
                         case OperationKind.AnonymousFunction:

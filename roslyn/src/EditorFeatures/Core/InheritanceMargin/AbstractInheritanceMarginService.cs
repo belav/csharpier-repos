@@ -52,12 +52,8 @@ namespace Microsoft.CodeAnalysis.InheritanceMargin
                 .GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
 
-            var mappingService = document
-                .Project
-                .Solution
-                .Workspace
-                .Services
-                .GetRequiredService<ISymbolMappingService>();
+            var mappingService =
+                document.Project.Solution.Workspace.Services.GetRequiredService<ISymbolMappingService>();
             using var _ = ArrayBuilder<(SymbolKey symbolKey, int lineNumber)>.GetInstance(
                 out var builder
             );
@@ -90,8 +86,7 @@ namespace Microsoft.CodeAnalysis.InheritanceMargin
                 builder.Add(
                     (
                         mappingResult.Symbol.GetSymbolKey(cancellationToken),
-                        sourceText
-                            .Lines
+                        sourceText.Lines
                             .GetLineFromPosition(
                                 GetDeclarationToken(memberDeclarationNode).SpanStart
                             )

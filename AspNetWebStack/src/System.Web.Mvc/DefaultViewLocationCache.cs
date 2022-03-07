@@ -50,16 +50,14 @@ namespace System.Web.Mvc
             {
                 throw new ArgumentNullException("httpContext");
             }
-            httpContext
-                .Cache
-                .Insert(
-                    key,
-                    virtualPath,
-                    null /* dependencies */
-                    ,
-                    Cache.NoAbsoluteExpiration,
-                    TimeSpan
-                );
+            httpContext.Cache.Insert(
+                key,
+                virtualPath,
+                null /* dependencies */
+                ,
+                Cache.NoAbsoluteExpiration,
+                TimeSpan
+            );
         }
 
         #endregion

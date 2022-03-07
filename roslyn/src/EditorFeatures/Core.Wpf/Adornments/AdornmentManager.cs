@@ -200,8 +200,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
                 if (needToScheduleUpdate)
                 {
                     // schedule an update
-                    _threadingContext
-                        .JoinableTaskFactory
+                    _threadingContext.JoinableTaskFactory
                         .WithPriority(_textView.VisualElement.Dispatcher, DispatcherPriority.Render)
                         .RunAsync(
                             async () =>
@@ -212,9 +211,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
                                     )
                                 )
                                 {
-                                    await _threadingContext
-                                        .JoinableTaskFactory
-                                        .SwitchToMainThreadAsync(alwaysYield: true);
+                                    await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                                        alwaysYield: true
+                                    );
                                     UpdateInvalidSpans();
                                 }
                             }
@@ -316,23 +315,21 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
                     // We don't want to draw line separators if they would intersect a collapsed outlining
                     // region.  So we test if we can map the start of the line separator up to our visual
                     // snapshot. If we can't, then we just skip it.
-                    var point = tagMappingSpan
-                        .Span
-                        .Start
-                        .GetPoint(changedSpan.Snapshot, PositionAffinity.Predecessor);
+                    var point = tagMappingSpan.Span.Start.GetPoint(
+                        changedSpan.Snapshot,
+                        PositionAffinity.Predecessor
+                    );
                     if (point == null)
                     {
                         continue;
                     }
 
-                    var mappedPoint = _textView
-                        .BufferGraph
-                        .MapUpToSnapshot(
-                            point.Value,
-                            PointTrackingMode.Negative,
-                            PositionAffinity.Predecessor,
-                            _textView.VisualSnapshot
-                        );
+                    var mappedPoint = _textView.BufferGraph.MapUpToSnapshot(
+                        point.Value,
+                        PointTrackingMode.Negative,
+                        PositionAffinity.Predecessor,
+                        _textView.VisualSnapshot
+                    );
                     if (mappedPoint == null)
                     {
                         continue;
@@ -390,10 +387,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
             // should use the cheapest.
             if (viewSnapshot != null && mappingSpan.AnchorBuffer == viewSnapshot.TextBuffer)
             {
-                var mappedStart =
-                    mappingSpan.Start.GetPoint(viewSnapshot, PositionAffinity.Predecessor).Value;
-                var mappedEnd =
-                    mappingSpan.End.GetPoint(viewSnapshot, PositionAffinity.Successor).Value;
+                var mappedStart = mappingSpan.Start
+                    .GetPoint(viewSnapshot, PositionAffinity.Predecessor)
+                    .Value;
+                var mappedEnd = mappingSpan.End
+                    .GetPoint(viewSnapshot, PositionAffinity.Successor)
+                    .Value;
                 span = new SnapshotSpan(mappedStart, mappedEnd);
                 return true;
             }

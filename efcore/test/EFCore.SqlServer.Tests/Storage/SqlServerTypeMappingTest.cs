@@ -36,8 +36,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
             var token = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 };
             var newToken = changeValue ? new byte[] { 1, 2, 3, 4, 0, 6, 7, 8 } : token;
 
-            var entity =
-                context.Attach(new WithRowVersion { Id = 789, Version = token.ToArray() }).Entity;
+            var entity = context
+                .Attach(new WithRowVersion { Id = 789, Version = token.ToArray() })
+                .Entity;
 
             var propertyEntry = context.Entry(entity).Property(e => e.Version);
 

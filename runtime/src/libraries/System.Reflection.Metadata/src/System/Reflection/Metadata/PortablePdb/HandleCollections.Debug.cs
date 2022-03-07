@@ -218,9 +218,11 @@ namespace System.Reflection.Metadata
             }
             else
             {
-                reader
-                    .LocalScopeTable
-                    .GetLocalScopeRange(methodDefinitionRowId, out _firstRowId, out _lastRowId);
+                reader.LocalScopeTable.GetLocalScopeRange(
+                    methodDefinitionRowId,
+                    out _firstRowId,
+                    out _lastRowId
+                );
             }
         }
 

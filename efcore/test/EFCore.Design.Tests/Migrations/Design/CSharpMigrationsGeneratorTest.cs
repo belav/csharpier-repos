@@ -564,8 +564,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                 finalizedModel
             );
 
-            var snapshotModel =
-                CompileModelSnapshot(modelSnapshotCode, "MyNamespace.MySnapshot").Model;
+            var snapshotModel = CompileModelSnapshot(
+                modelSnapshotCode,
+                "MyNamespace.MySnapshot"
+            ).Model;
 
             Assert.Equal(
                 (int)RawEnum.A,
@@ -695,9 +697,9 @@ namespace MyNamespace
                 ignoreLineEndingDifferences: true
             );
 
-            var modelBuilder = SqlServerTestHelpers
-                .Instance
-                .CreateConventionBuilder(configure: c => c.RemoveAllConventions());
+            var modelBuilder = SqlServerTestHelpers.Instance.CreateConventionBuilder(
+                configure: c => c.RemoveAllConventions()
+            );
             modelBuilder.HasAnnotation("Some:EnumValue", RegexOptions.Multiline);
             modelBuilder.HasAnnotation(
                 RelationalAnnotationNames.DbFunctions,

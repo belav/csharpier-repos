@@ -136,20 +136,18 @@ class C
             var syntaxTree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(syntaxTree);
 
-            var classDeclPosition =
-                syntaxTree
-                    .GetRoot()
-                    .DescendantNodes()
-                    .OfType<ClassDeclarationSyntax>()
-                    .Single()
-                    .SpanStart;
-            var methodDeclPosition =
-                syntaxTree
-                    .GetRoot()
-                    .DescendantNodes()
-                    .OfType<MethodDeclarationSyntax>()
-                    .Single()
-                    .SpanStart;
+            var classDeclPosition = syntaxTree
+                .GetRoot()
+                .DescendantNodes()
+                .OfType<ClassDeclarationSyntax>()
+                .Single()
+                .SpanStart;
+            var methodDeclPosition = syntaxTree
+                .GetRoot()
+                .DescendantNodes()
+                .OfType<MethodDeclarationSyntax>()
+                .Single()
+                .SpanStart;
 
             Assert.Equal(expectedContext, model.GetNullableContext(classDeclPosition));
 
@@ -186,20 +184,18 @@ partial class C
             var syntaxTree2 = comp.SyntaxTrees[1];
             var model2 = comp.GetSemanticModel(syntaxTree2);
 
-            var classDecl1 =
-                syntaxTree1
-                    .GetRoot()
-                    .DescendantNodes()
-                    .OfType<ClassDeclarationSyntax>()
-                    .Single()
-                    .SpanStart;
-            var classDecl2 =
-                syntaxTree2
-                    .GetRoot()
-                    .DescendantNodes()
-                    .OfType<ClassDeclarationSyntax>()
-                    .Single()
-                    .SpanStart;
+            var classDecl1 = syntaxTree1
+                .GetRoot()
+                .DescendantNodes()
+                .OfType<ClassDeclarationSyntax>()
+                .Single()
+                .SpanStart;
+            var classDecl2 = syntaxTree2
+                .GetRoot()
+                .DescendantNodes()
+                .OfType<ClassDeclarationSyntax>()
+                .Single()
+                .SpanStart;
 
             Assert.Equal(NullableContext.Enabled, model1.GetNullableContext(classDecl1));
             Assert.Equal(
@@ -673,13 +669,12 @@ class Program
                 comp.NullableAnalysisData = new();
                 var syntaxTree = comp.SyntaxTrees[0];
                 var model = comp.GetSemanticModel(syntaxTree);
-                var syntax =
-                    syntaxTree
-                        .GetRoot()
-                        .DescendantNodes()
-                        .OfType<EqualsValueClauseSyntax>()
-                        .First()
-                        .Value;
+                var syntax = syntaxTree
+                    .GetRoot()
+                    .DescendantNodes()
+                    .OfType<EqualsValueClauseSyntax>()
+                    .First()
+                    .Value;
                 Assert.Equal("(F = null)", syntax.ToString());
                 var typeInfo = model.GetTypeInfo(syntax);
                 var expectedNullability = expectedFlowState
@@ -1157,8 +1152,9 @@ static class Program
                     bool expectedAnalysis = expectedAnalyzedKeys.Contains(
                         methodDeclaration.Identifier.Text
                     );
-                    bool actualAnalysis =
-                        tree.IsNullableAnalysisEnabled(methodDeclaration.Span).Value;
+                    bool actualAnalysis = tree.IsNullableAnalysisEnabled(
+                        methodDeclaration.Span
+                    ).Value;
                     Assert.Equal(expectedAnalysis, actualAnalysis);
                 }
             }
@@ -1478,9 +1474,9 @@ partial class Program
 #nullable restore
     object F4 = null;
 }";
-            var options = TestOptions
-                .ReleaseDll
-                .WithNullableContextOptions(NullableContextOptions.Disable);
+            var options = TestOptions.ReleaseDll.WithNullableContextOptions(
+                NullableContextOptions.Disable
+            );
 
             verify(new[] { source1, source2 }, options, new string[0]);
 
@@ -2511,13 +2507,12 @@ _ = x.ToString();
 
                 var syntaxTree = comp.SyntaxTrees[0];
                 var model = comp.GetSemanticModel(syntaxTree);
-                var syntax =
-                    syntaxTree
-                        .GetRoot()
-                        .DescendantNodes()
-                        .OfType<AssignmentExpressionSyntax>()
-                        .Single()
-                        .Right;
+                var syntax = syntaxTree
+                    .GetRoot()
+                    .DescendantNodes()
+                    .OfType<AssignmentExpressionSyntax>()
+                    .Single()
+                    .Right;
                 Assert.Equal("obj", syntax.ToString());
                 var typeInfo = model.GetTypeInfo(syntax);
                 Assert.Equal(expectedFlowState, typeInfo.Nullability.FlowState);
@@ -3082,8 +3077,7 @@ string";
             CSharpCompilation.NullableData nullableData,
             bool requiredAnalysis = false
         ) =>
-            nullableData
-                .Data
+            nullableData.Data
                 .Where(pair => !requiredAnalysis || pair.Value.RequiredAnalysis)
                 .Select(pair => GetNullableDataKeyAsString(pair.Key))
                 .OrderBy(key => key)
@@ -3095,8 +3089,7 @@ string";
         )
         {
             toString ??= GetNullableDataKeyAsString;
-            return nullableData
-                .Data
+            return nullableData.Data
                 .Where(
                     pair =>
                         pair.Value.RequiredAnalysis

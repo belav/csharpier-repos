@@ -75,8 +75,11 @@ namespace System.Xml
         {
             Stream stream = (Stream)(
                 await _laterInitParam!
-                    .inputUriResolver!
-                    .GetEntityAsync(_laterInitParam.inputbaseUri!, string.Empty, typeof(Stream))
+                    .inputUriResolver!.GetEntityAsync(
+                        _laterInitParam.inputbaseUri!,
+                        string.Empty,
+                        typeof(Stream)
+                    )
                     .ConfigureAwait(false)
             );
 

@@ -332,10 +332,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             ParameterSyntax replacedParam
         )
         {
-            var originalParamType =
-                this.OriginalSemanticModel.GetDeclaredSymbol(originalParam).Type;
-            var replacedParamType =
-                this.SpeculativeSemanticModel.GetDeclaredSymbol(replacedParam).Type;
+            var originalParamType = this.OriginalSemanticModel
+                .GetDeclaredSymbol(originalParam)
+                .Type;
+            var replacedParamType = this.SpeculativeSemanticModel
+                .GetDeclaredSymbol(replacedParam)
+                .Type;
             return Equals(originalParamType, replacedParamType);
         }
 
@@ -573,14 +575,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
 
                 // If case label is changing, then need to check if the semantics will change for the switch expression.
                 // e.g. if switch expression is "switch(x)" where "object x = 1f", then "case 1:" and "case (float) 1:" are different.
-                var originalCaseType =
-                    this.OriginalSemanticModel
-                        .GetTypeInfo(previousOriginalNode, this.CancellationToken)
-                        .Type;
-                var newCaseType =
-                    this.SpeculativeSemanticModel
-                        .GetTypeInfo(previousReplacedNode, this.CancellationToken)
-                        .Type;
+                var originalCaseType = this.OriginalSemanticModel
+                    .GetTypeInfo(previousOriginalNode, this.CancellationToken)
+                    .Type;
+                var newCaseType = this.SpeculativeSemanticModel
+                    .GetTypeInfo(previousReplacedNode, this.CancellationToken)
+                    .Type;
 
                 if (Equals(originalCaseType, newCaseType))
                     return false;
@@ -634,12 +634,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                 )
                     return true;
 
-                var originalSwitchLabels = originalSwitchStatement
-                    .Sections
+                var originalSwitchLabels = originalSwitchStatement.Sections
                     .SelectMany(section => section.Labels)
                     .ToArray();
-                var newSwitchLabels = newSwitchStatement
-                    .Sections
+                var newSwitchLabels = newSwitchStatement.Sections
                     .SelectMany(section => section.Labels)
                     .ToArray();
 
@@ -791,20 +789,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             AnonymousObjectMemberDeclaratorSyntax replacedAnonymousObjectMemberDeclarator
         )
         {
-            var originalExpressionType =
-                this.OriginalSemanticModel
-                    .GetTypeInfo(
-                        originalAnonymousObjectMemberDeclarator.Expression,
-                        this.CancellationToken
-                    )
-                    .Type;
-            var newExpressionType =
-                this.SpeculativeSemanticModel
-                    .GetTypeInfo(
-                        replacedAnonymousObjectMemberDeclarator.Expression,
-                        this.CancellationToken
-                    )
-                    .Type;
+            var originalExpressionType = this.OriginalSemanticModel
+                .GetTypeInfo(
+                    originalAnonymousObjectMemberDeclarator.Expression,
+                    this.CancellationToken
+                )
+                .Type;
+            var newExpressionType = this.SpeculativeSemanticModel
+                .GetTypeInfo(
+                    replacedAnonymousObjectMemberDeclarator.Expression,
+                    this.CancellationToken
+                )
+                .Type;
             return !object.Equals(originalExpressionType, newExpressionType);
         }
 
@@ -813,12 +809,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             ConstructorInitializerSyntax newCtorInitializer
         )
         {
-            var originalSymbol =
-                this.OriginalSemanticModel.GetSymbolInfo(ctorInitializer, CancellationToken).Symbol;
-            var newSymbol =
-                this.SpeculativeSemanticModel
-                    .GetSymbolInfo(newCtorInitializer, CancellationToken)
-                    .Symbol;
+            var originalSymbol = this.OriginalSemanticModel
+                .GetSymbolInfo(ctorInitializer, CancellationToken)
+                .Symbol;
+            var newSymbol = this.SpeculativeSemanticModel
+                .GetSymbolInfo(newCtorInitializer, CancellationToken)
+                .Symbol;
             return !SymbolsAreCompatible(originalSymbol, newSymbol);
         }
 
@@ -827,14 +823,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             ExpressionSyntax newInitializer
         )
         {
-            var originalSymbol =
-                this.OriginalSemanticModel
-                    .GetCollectionInitializerSymbolInfo(originalInitializer, CancellationToken)
-                    .Symbol;
-            var newSymbol =
-                this.SpeculativeSemanticModel
-                    .GetCollectionInitializerSymbolInfo(newInitializer, CancellationToken)
-                    .Symbol;
+            var originalSymbol = this.OriginalSemanticModel
+                .GetCollectionInitializerSymbolInfo(originalInitializer, CancellationToken)
+                .Symbol;
+            var newSymbol = this.SpeculativeSemanticModel
+                .GetCollectionInitializerSymbolInfo(newInitializer, CancellationToken)
+                .Symbol;
             return !SymbolsAreCompatible(originalSymbol, newSymbol);
         }
 
@@ -987,10 +981,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                 return true;
             }
 
-            var originalConvertedType =
-                this.OriginalSemanticModel.GetTypeInfo(originalIsOrAsExpression.Right).Type;
-            var newConvertedType =
-                this.SpeculativeSemanticModel.GetTypeInfo(newIsOrAsExpression.Right).Type;
+            var originalConvertedType = this.OriginalSemanticModel
+                .GetTypeInfo(originalIsOrAsExpression.Right)
+                .Type;
+            var newConvertedType = this.SpeculativeSemanticModel
+                .GetTypeInfo(newIsOrAsExpression.Right)
+                .Type;
 
             if (originalConvertedType == null || newConvertedType == null)
             {

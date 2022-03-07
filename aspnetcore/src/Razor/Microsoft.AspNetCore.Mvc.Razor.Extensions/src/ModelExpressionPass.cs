@@ -57,16 +57,14 @@ public class ModelExpressionPass : IntermediateNodePassBase, IRazorOptimizationP
             {
                 var expression = new CSharpExpressionIntermediateNode();
 
-                expression
-                    .Children
-                    .Add(
-                        new IntermediateToken()
-                        {
-                            Kind = TokenKind.CSharp,
-                            Content =
-                                "ModelExpressionProvider.CreateModelExpression(ViewData, __model => ",
-                        }
-                    );
+                expression.Children.Add(
+                    new IntermediateToken()
+                    {
+                        Kind = TokenKind.CSharp,
+                        Content =
+                            "ModelExpressionProvider.CreateModelExpression(ViewData, __model => ",
+                    }
+                );
 
                 if (
                     node.Children.Count == 1
@@ -76,15 +74,9 @@ public class ModelExpressionPass : IntermediateNodePassBase, IRazorOptimizationP
                 {
                     // A 'simple' expression will look like __model => __model.Foo
 
-                    expression
-                        .Children
-                        .Add(
-                            new IntermediateToken()
-                            {
-                                Kind = TokenKind.CSharp,
-                                Content = "__model."
-                            }
-                        );
+                    expression.Children.Add(
+                        new IntermediateToken() { Kind = TokenKind.CSharp, Content = "__model." }
+                    );
 
                     expression.Children.Add(token);
                 }
@@ -110,9 +102,9 @@ public class ModelExpressionPass : IntermediateNodePassBase, IRazorOptimizationP
                     }
                 }
 
-                expression
-                    .Children
-                    .Add(new IntermediateToken() { Kind = TokenKind.CSharp, Content = ")", });
+                expression.Children.Add(
+                    new IntermediateToken() { Kind = TokenKind.CSharp, Content = ")", }
+                );
 
                 node.Children.Clear();
 

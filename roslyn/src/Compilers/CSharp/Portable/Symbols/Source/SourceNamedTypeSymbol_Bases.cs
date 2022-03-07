@@ -133,9 +133,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 && this.DeclaringCompilation.IsAttributeType(localBase)
             )
             {
-                MessageID
-                    .IDS_FeatureGenericAttributes
-                    .CheckFeatureAvailability(diagnostics, this.DeclaringCompilation, baseLocation);
+                MessageID.IDS_FeatureGenericAttributes.CheckFeatureAvailability(
+                    diagnostics,
+                    this.DeclaringCompilation,
+                    baseLocation
+                );
             }
 
             // Check constraints on the first declaration with explicit bases.
@@ -311,8 +313,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     foreach (var baseTypeSyntax in bases.Types)
                     {
                         var b = baseTypeSyntax.Type;
-                        var curBaseSym =
-                            baseBinder.BindType(b, BindingDiagnosticBag.Discarded).Type;
+                        var curBaseSym = baseBinder
+                            .BindType(b, BindingDiagnosticBag.Discarded)
+                            .Type;
 
                         if (baseSym.Equals(curBaseSym))
                         {
@@ -628,8 +631,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 if (i == 0 && TypeKind == TypeKind.Class) // allow class in the first position
                 {
-                    baseType =
-                        baseBinder.BindType(typeSyntax, diagnostics, newBasesBeingResolved).Type;
+                    baseType = baseBinder
+                        .BindType(typeSyntax, diagnostics, newBasesBeingResolved)
+                        .Type;
 
                     SpecialType baseSpecialType = baseType.SpecialType;
                     if (IsRestrictedBaseType(baseSpecialType))
@@ -727,8 +731,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
                 else
                 {
-                    baseType =
-                        baseBinder.BindType(typeSyntax, diagnostics, newBasesBeingResolved).Type;
+                    baseType = baseBinder
+                        .BindType(typeSyntax, diagnostics, newBasesBeingResolved)
+                        .Type;
                 }
 
                 if (i == 0)

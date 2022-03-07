@@ -18,9 +18,10 @@ namespace System.Drawing.Internal
             // The cloned object should have the same current "position"
             var clone = new GPStream(_dataStream) { _virtualPosition = _virtualPosition };
 
-            *ppstm = DrawingCom
-                .Instance
-                .GetOrCreateComInterfaceForObject(clone, CreateComInterfaceFlags.None);
+            *ppstm = DrawingCom.Instance.GetOrCreateComInterfaceForObject(
+                clone,
+                CreateComInterfaceFlags.None
+            );
 
             return Interop.HRESULT.S_OK;
         }

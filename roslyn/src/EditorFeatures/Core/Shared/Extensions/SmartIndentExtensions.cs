@@ -17,14 +17,12 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         )
         {
             var position = new SnapshotPoint(lineToBeIndented.Snapshot, result.BasePosition);
-            var pointInSurfaceSnapshot = textView
-                .BufferGraph
-                .MapUpToSnapshot(
-                    position,
-                    PointTrackingMode.Positive,
-                    PositionAffinity.Successor,
-                    textView.TextSnapshot
-                );
+            var pointInSurfaceSnapshot = textView.BufferGraph.MapUpToSnapshot(
+                position,
+                PointTrackingMode.Positive,
+                PositionAffinity.Successor,
+                textView.TextSnapshot
+            );
             if (!pointInSurfaceSnapshot.HasValue)
             {
                 return position
@@ -32,10 +30,9 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                     .GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(textView.Options);
             }
 
-            var lineInSurfaceSnapshot = pointInSurfaceSnapshot
-                .Value
-                .Snapshot
-                .GetLineFromPosition(pointInSurfaceSnapshot.Value.Position);
+            var lineInSurfaceSnapshot = pointInSurfaceSnapshot.Value.Snapshot.GetLineFromPosition(
+                pointInSurfaceSnapshot.Value.Position
+            );
             var offsetInLine =
                 pointInSurfaceSnapshot.Value.Position - lineInSurfaceSnapshot.Start.Position;
             return lineInSurfaceSnapshot.GetColumnFromLineOffset(offsetInLine, textView.Options)

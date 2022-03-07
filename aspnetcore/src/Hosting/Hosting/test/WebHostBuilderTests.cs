@@ -357,10 +357,9 @@ public class WebHostBuilderTests
         using (var host = builder.Build())
         {
             await host.StartAsync();
-            var context = provider
-                .Sink
-                .Writes
-                .Where(s => s.EventId.Id == LoggerEventIds.HostingStartupAssemblyException);
+            var context = provider.Sink.Writes.Where(
+                s => s.EventId.Id == LoggerEventIds.HostingStartupAssemblyException
+            );
             Assert.NotNull(context);
             Assert.Single(context);
         }
@@ -753,8 +752,9 @@ public class WebHostBuilderTests
         {
             var basePath = host.Services.GetRequiredService<IHostEnvironment>().ContentRootPath;
 #pragma warning disable CS0618 // Type or member is obsolete
-            var basePath2 =
-                host.Services.GetService<AspNetCore.Hosting.IHostingEnvironment>().ContentRootPath;
+            var basePath2 = host.Services
+                .GetService<AspNetCore.Hosting.IHostingEnvironment>()
+                .ContentRootPath;
 #pragma warning restore CS0618 // Type or member is obsolete
 
             Assert.True(Path.IsPathRooted(basePath));
@@ -1361,12 +1361,9 @@ public class WebHostBuilderTests
         using (var host = builder.Build())
         {
             await host.StartAsync();
-            var context = provider
-                .Sink
-                .Writes
-                .FirstOrDefault(
-                    s => s.EventId.Id == LoggerEventIds.HostingStartupAssemblyException
-                );
+            var context = provider.Sink.Writes.FirstOrDefault(
+                s => s.EventId.Id == LoggerEventIds.HostingStartupAssemblyException
+            );
             Assert.NotNull(context);
         }
     }

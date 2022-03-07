@@ -2904,12 +2904,10 @@ class C : Interface<int>
             Assert.False(implementingNormalEvent.IsWindowsRuntimeEvent);
             Assert.True(implementingWinRTEvent.IsWindowsRuntimeEvent);
 
-            var substitutedNormalEvent = implementingNormalEvent
-                .ExplicitInterfaceImplementations
-                .Single();
-            var substitutedWinRTEvent = implementingWinRTEvent
-                .ExplicitInterfaceImplementations
-                .Single();
+            var substitutedNormalEvent =
+                implementingNormalEvent.ExplicitInterfaceImplementations.Single();
+            var substitutedWinRTEvent =
+                implementingWinRTEvent.ExplicitInterfaceImplementations.Single();
 
             Assert.IsType<SubstitutedEventSymbol>(substitutedNormalEvent);
             Assert.IsType<SubstitutedEventSymbol>(substitutedWinRTEvent);
@@ -2924,9 +2922,9 @@ class C : Interface<int>
             );
             retargetingAssembly.SetCorLibrary(comp.Assembly.CorLibrary);
 
-            var retargetingType = retargetingAssembly
-                .GlobalNamespace
-                .GetMember<NamedTypeSymbol>("C");
+            var retargetingType = retargetingAssembly.GlobalNamespace.GetMember<NamedTypeSymbol>(
+                "C"
+            );
             var retargetingNormalEvent = retargetingType
                 .GetMembers()
                 .OfType<EventSymbol>()

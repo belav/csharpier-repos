@@ -54,9 +54,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
                 expectedTitle,
                 "Apply"
             );
-            VisualStudioInstance
-                .Workspace
-                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, featureName);
+            VisualStudioInstance.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                featureName
+            );
         }
 
         public void ClickCancel(string expectedTitle) =>

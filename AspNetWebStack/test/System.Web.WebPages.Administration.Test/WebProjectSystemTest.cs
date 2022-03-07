@@ -94,8 +94,7 @@ namespace System.Web.WebPages.Administration.Test
             Assert.Equal("configuration", element.Name);
 
             // Use SingleOrDefault to ensure there's exactly one element with that name
-            var assemblies = document
-                .Root
+            var assemblies = document.Root
                 .Elements()
                 .SingleOrDefault(e => e.Name.ToString().Equals("system.web"))
                 .Elements()
@@ -157,8 +156,7 @@ namespace System.Web.WebPages.Administration.Test
             Assert.Equal("configuration", element.Name);
 
             // Use SingleOrDefault to ensure there's exactly one element with that name
-            var assemblies = document
-                .Root
+            var assemblies = document.Root
                 .Elements()
                 .SingleOrDefault(e => e.Name.ToString().Equals("system.web"))
                 .Elements()
@@ -171,8 +169,7 @@ namespace System.Web.WebPages.Administration.Test
             // Make sure the original web.config content is unaffected
             Assert.Equal(
                 "test",
-                document
-                    .Root
+                document.Root
                     .Elements()
                     .SingleOrDefault(e => e.Name.ToString().Equals("connectionStrings"))
                     .Elements()
@@ -184,8 +181,7 @@ namespace System.Web.WebPages.Administration.Test
 
             Assert.Equal(
                 "awesomeprofile",
-                document
-                    .Root
+                document.Root
                     .Element("system.web")
                     .Element("profiles")
                     .Element("add")
@@ -255,8 +251,7 @@ namespace System.Web.WebPages.Administration.Test
             Assert.Equal("configuration", element.Name);
 
             // Use SingleOrDefault to ensure there's exactly one element with that name
-            var assemblies = document
-                .Root
+            var assemblies = document.Root
                 .Elements()
                 .SingleOrDefault(e => e.Name.ToString().Equals("system.web"))
                 .Elements()
@@ -277,8 +272,7 @@ namespace System.Web.WebPages.Administration.Test
             // Make sure the original web.config content is unaffected
             Assert.Equal(
                 "test",
-                document
-                    .Root
+                document.Root
                     .Elements()
                     .SingleOrDefault(e => e.Name.ToString().Equals("connectionStrings"))
                     .Elements()
@@ -290,8 +284,7 @@ namespace System.Web.WebPages.Administration.Test
 
             Assert.Equal(
                 "awesomeprofile",
-                document
-                    .Root
+                document.Root
                     .Element("system.web")
                     .Element("profiles")
                     .Element("add")

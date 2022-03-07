@@ -259,13 +259,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                     || visited.HasErrors
                     || ReferenceEquals(visited.Type, node.Type)
                     || visited.Type is { }
-                        && visited
-                            .Type
-                            .Equals(
-                                node.Type,
-                                TypeCompareKind.IgnoreDynamicAndTupleNames
-                                    | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
-                            )
+                        && visited.Type.Equals(
+                            node.Type,
+                            TypeCompareKind.IgnoreDynamicAndTupleNames
+                                | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                        )
                     || IsUnusedDeconstruction(node)
             );
 
@@ -356,10 +354,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
 
                 if (
-                    _factory
-                        .CompilationState
-                        .Compilation
-                        .ShouldEmitNullableAttributes(localFunction)
+                    _factory.CompilationState.Compilation.ShouldEmitNullableAttributes(
+                        localFunction
+                    )
                 )
                 {
                     bool constraintsNeedNullableAttribute = typeParameters.Any(
@@ -944,8 +941,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // System.Runtime.CompilerServices.RuntimeHelpers.GetSubArray(array, Range)
 
                 Debug.Assert(node.Expression.Type is { TypeKind: TypeKind.Array });
-                var elementType =
-                    ((ArrayTypeSymbol)node.Expression.Type).ElementTypeWithAnnotations;
+                var elementType = (
+                    (ArrayTypeSymbol)node.Expression.Type
+                ).ElementTypeWithAnnotations;
 
                 resultExpr = F.Call(
                     receiver: null,

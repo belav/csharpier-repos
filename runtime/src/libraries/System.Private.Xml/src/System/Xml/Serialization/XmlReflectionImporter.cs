@@ -2061,27 +2061,23 @@ namespace System.Xml.Serialization
         {
             // check that the choice field exists
 
-            MemberInfo[] infos = structModel
-                .Type
-                .GetMember(
+            MemberInfo[] infos = structModel.Type.GetMember(
+                choice.MemberName,
+                BindingFlags.DeclaredOnly
+                    | BindingFlags.Public
+                    | BindingFlags.Instance
+                    | BindingFlags.Static
+            );
+            if (infos == null || infos.Length == 0)
+            {
+                // if we can not find the choice identifier between fields, check properties
+                PropertyInfo? info = structModel.Type.GetProperty(
                     choice.MemberName,
                     BindingFlags.DeclaredOnly
                         | BindingFlags.Public
                         | BindingFlags.Instance
                         | BindingFlags.Static
                 );
-            if (infos == null || infos.Length == 0)
-            {
-                // if we can not find the choice identifier between fields, check properties
-                PropertyInfo? info = structModel
-                    .Type
-                    .GetProperty(
-                        choice.MemberName,
-                        BindingFlags.DeclaredOnly
-                            | BindingFlags.Public
-                            | BindingFlags.Instance
-                            | BindingFlags.Static
-                    );
 
                 if (info == null)
                 {
@@ -2989,8 +2985,9 @@ namespace System.Xml.Serialization
                                 element.AnyNamespaces == null ? "##any" : element.AnyNamespaces;
                             if (xmlName.Substring(0, xmlName.Length - 1) == anyNs)
                             {
-                                accessor.ChoiceIdentifier.MemberIds[i] =
-                                    choiceMapping.Constants[j].Name;
+                                accessor.ChoiceIdentifier.MemberIds[i] = choiceMapping.Constants[
+                                    j
+                                ].Name;
                                 found = true;
                                 break;
                             }
@@ -3011,8 +3008,9 @@ namespace System.Xml.Serialization
                                 || element.Namespace == choiceNs
                             )
                             {
-                                accessor.ChoiceIdentifier.MemberIds[i] =
-                                    choiceMapping.Constants[j].Name;
+                                accessor.ChoiceIdentifier.MemberIds[i] = choiceMapping.Constants[
+                                    j
+                                ].Name;
                                 found = true;
                                 break;
                             }

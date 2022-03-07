@@ -33,17 +33,15 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         public void GenerateMethodInClosedFile()
         {
             var project = new ProjectUtils.Project(ProjectName);
-            VisualStudio
-                .SolutionExplorer
-                .AddFile(
-                    project,
-                    "Foo.cs",
-                    contents: @"
+            VisualStudio.SolutionExplorer.AddFile(
+                project,
+                "Foo.cs",
+                contents: @"
 public class Foo
 {
 }
 "
-                );
+            );
 
             SetUpEditor(
                 @"
@@ -62,13 +60,10 @@ public class Program
 
             VisualStudio.Editor.InvokeCodeActionList();
             VisualStudio.Editor.Verify.CodeAction("Generate method 'Bar'", applyFix: true);
-            VisualStudio
-                .SolutionExplorer
-                .Verify
-                .FileContents(
-                    project,
-                    "Foo.cs",
-                    @"
+            VisualStudio.SolutionExplorer.Verify.FileContents(
+                project,
+                "Foo.cs",
+                @"
 using System;
 
 public class Foo
@@ -79,7 +74,7 @@ public class Foo
     }
 }
 "
-                );
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.CodeActionsAddImport)]
@@ -119,25 +114,20 @@ class Program
 "
             );
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio
-                .Editor
-                .Verify
-                .CodeAction("using System;", applyFix: true, blockUntilComplete: true);
+            VisualStudio.Editor.Verify.CodeAction(
+                "using System;",
+                applyFix: true,
+                blockUntilComplete: true
+            );
             VisualStudio.Editor.InvokeCodeActionListWithoutWaiting();
-            VisualStudio
-                .Editor
-                .Verify
-                .CodeAction(
-                    "Simplify name 'System.ArgumentException'",
-                    applyFix: true,
-                    blockUntilComplete: true
-                );
+            VisualStudio.Editor.Verify.CodeAction(
+                "Simplify name 'System.ArgumentException'",
+                applyFix: true,
+                blockUntilComplete: true
+            );
 
-            VisualStudio
-                .Editor
-                .Verify
-                .TextContains(
-                    @"
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 using System;
 
 class Program
@@ -147,7 +137,7 @@ class Program
         Exception ex = new ArgumentException();
     }
 }"
-                );
+            );
         }
 
         [
@@ -184,28 +174,26 @@ class C
 
             SetUpEditor(markup);
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio
-                .Editor
-                .Verify
-                .CodeAction(
-                    "Delegate invocation can be simplified.",
-                    applyFix: true,
-                    ensureExpectedItemsAreOrdered: true,
-                    blockUntilComplete: true
-                );
-            VisualStudio
-                .Editor
-                .PlaceCaret("temp2", 0, 0, extendSelection: false, selectBlock: false);
+            VisualStudio.Editor.Verify.CodeAction(
+                "Delegate invocation can be simplified.",
+                applyFix: true,
+                ensureExpectedItemsAreOrdered: true,
+                blockUntilComplete: true
+            );
+            VisualStudio.Editor.PlaceCaret(
+                "temp2",
+                0,
+                0,
+                extendSelection: false,
+                selectBlock: false
+            );
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio
-                .Editor
-                .Verify
-                .CodeAction(
-                    "Delegate invocation can be simplified.",
-                    applyFix: true,
-                    ensureExpectedItemsAreOrdered: true,
-                    blockUntilComplete: true
-                );
+            VisualStudio.Editor.Verify.CodeAction(
+                "Delegate invocation can be simplified.",
+                applyFix: true,
+                ensureExpectedItemsAreOrdered: true,
+                blockUntilComplete: true
+            );
             VisualStudio.Editor.Verify.TextContains("First?.");
             VisualStudio.Editor.Verify.TextContains("Second?.");
         }
@@ -254,9 +242,10 @@ class C
     public int Y2 => 5;
 }";
 
-            VisualStudio
-                .SolutionExplorer
-                .OpenFile(new ProjectUtils.Project(ProjectName), "Class1.cs");
+            VisualStudio.SolutionExplorer.OpenFile(
+                new ProjectUtils.Project(ProjectName),
+                "Class1.cs"
+            );
 
             /*
              * The first portion of this test adds a .editorconfig file to configure the analyzer behavior, and verifies
@@ -266,15 +255,13 @@ class C
 
             MarkupTestFile.GetSpans(markup, out _, out ImmutableArray<TextSpan> _);
             SetUpEditor(markup);
-            VisualStudio
-                .Workspace
-                .WaitForAllAsyncOperations(
-                    Helper.HangMitigatingTimeout,
-                    FeatureAttribute.Workspace,
-                    FeatureAttribute.SolutionCrawler,
-                    FeatureAttribute.DiagnosticService,
-                    FeatureAttribute.ErrorSquiggles
-                );
+            VisualStudio.Workspace.WaitForAllAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.Workspace,
+                FeatureAttribute.SolutionCrawler,
+                FeatureAttribute.DiagnosticService,
+                FeatureAttribute.ErrorSquiggles
+            );
             VisualStudio.Editor.Verify.CodeActionsNotShowing();
 
             var editorConfig =
@@ -284,33 +271,26 @@ class C
 csharp_style_expression_bodied_properties = true:warning
 ";
 
-            VisualStudio
-                .SolutionExplorer
-                .AddFile(
-                    new ProjectUtils.Project(ProjectName),
-                    ".editorconfig",
-                    editorConfig,
-                    open: false
-                );
+            VisualStudio.SolutionExplorer.AddFile(
+                new ProjectUtils.Project(ProjectName),
+                ".editorconfig",
+                editorConfig,
+                open: false
+            );
 
-            VisualStudio
-                .Workspace
-                .WaitForAllAsyncOperations(
-                    Helper.HangMitigatingTimeout,
-                    FeatureAttribute.Workspace,
-                    FeatureAttribute.SolutionCrawler,
-                    FeatureAttribute.DiagnosticService,
-                    FeatureAttribute.ErrorSquiggles
-                );
+            VisualStudio.Workspace.WaitForAllAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.Workspace,
+                FeatureAttribute.SolutionCrawler,
+                FeatureAttribute.DiagnosticService,
+                FeatureAttribute.ErrorSquiggles
+            );
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio
-                .Editor
-                .Verify
-                .CodeAction(
-                    "Use expression body for properties",
-                    applyFix: true,
-                    fixAllScope: FixAllScope.Project
-                );
+            VisualStudio.Editor.Verify.CodeAction(
+                "Use expression body for properties",
+                applyFix: true,
+                fixAllScope: FixAllScope.Project
+            );
 
             Assert.Equal(expectedText, VisualStudio.Editor.GetText());
 
@@ -321,32 +301,25 @@ csharp_style_expression_bodied_properties = true:warning
              * outcome for the modified .editorconfig style.
              */
 
-            VisualStudio
-                .SolutionExplorer
-                .SetFileContents(
-                    new ProjectUtils.Project(ProjectName),
-                    ".editorconfig",
-                    editorConfig.Replace("true:warning", "false:warning")
-                );
+            VisualStudio.SolutionExplorer.SetFileContents(
+                new ProjectUtils.Project(ProjectName),
+                ".editorconfig",
+                editorConfig.Replace("true:warning", "false:warning")
+            );
 
-            VisualStudio
-                .Workspace
-                .WaitForAllAsyncOperations(
-                    Helper.HangMitigatingTimeout,
-                    FeatureAttribute.Workspace,
-                    FeatureAttribute.SolutionCrawler,
-                    FeatureAttribute.DiagnosticService,
-                    FeatureAttribute.ErrorSquiggles
-                );
+            VisualStudio.Workspace.WaitForAllAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.Workspace,
+                FeatureAttribute.SolutionCrawler,
+                FeatureAttribute.DiagnosticService,
+                FeatureAttribute.ErrorSquiggles
+            );
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio
-                .Editor
-                .Verify
-                .CodeAction(
-                    "Use block body for properties",
-                    applyFix: true,
-                    fixAllScope: FixAllScope.Project
-                );
+            VisualStudio.Editor.Verify.CodeAction(
+                "Use block body for properties",
+                applyFix: true,
+                fixAllScope: FixAllScope.Project
+            );
 
             expectedText =
                 @"
@@ -436,29 +409,29 @@ class D
                 out int generatedSourcePosition
             );
 
-            VisualStudio
-                .SolutionExplorer
-                .AddFile(
-                    new ProjectUtils.Project(ProjectName),
-                    "D.cs",
-                    generatedSource,
-                    open: false
-                );
+            VisualStudio.SolutionExplorer.AddFile(
+                new ProjectUtils.Project(ProjectName),
+                "D.cs",
+                generatedSource,
+                open: false
+            );
 
             // Switch to the main document we'll be editing
-            VisualStudio
-                .SolutionExplorer
-                .OpenFile(new ProjectUtils.Project(ProjectName), "Class1.cs");
+            VisualStudio.SolutionExplorer.OpenFile(
+                new ProjectUtils.Project(ProjectName),
+                "Class1.cs"
+            );
 
             // Verify that applying a Fix All operation does not change generated files.
             // This is a regression test for correctness with respect to the design.
             SetUpEditor(markup);
             VisualStudio.WaitForApplicationIdle(CancellationToken.None);
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio
-                .Editor
-                .Verify
-                .CodeAction("Remove Unnecessary Usings", applyFix: true, fixAllScope: scope);
+            VisualStudio.Editor.Verify.CodeAction(
+                "Remove Unnecessary Usings",
+                applyFix: true,
+                fixAllScope: scope
+            );
 
             Assert.Equal(expectedText, VisualStudio.Editor.GetText());
 
@@ -471,14 +444,11 @@ class D
             // change.
             VisualStudio.Editor.MoveCaret(generatedSourcePosition);
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio
-                .Editor
-                .Verify
-                .CodeAction(
-                    "Remove Unnecessary Usings",
-                    applyFix: true,
-                    fixAllScope: FixAllScope.Document
-                );
+            VisualStudio.Editor.Verify.CodeAction(
+                "Remove Unnecessary Usings",
+                applyFix: true,
+                fixAllScope: FixAllScope.Document
+            );
 
             Assert.Equal(generatedSource, VisualStudio.Editor.GetText());
 
@@ -486,10 +456,11 @@ class D
             // This is a regression test for correctness with respect to the design.
             VisualStudio.Editor.MoveCaret(generatedSourcePosition);
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio
-                .Editor
-                .Verify
-                .CodeAction("Remove Unnecessary Usings", applyFix: true, fixAllScope: null);
+            VisualStudio.Editor.Verify.CodeAction(
+                "Remove Unnecessary Usings",
+                applyFix: true,
+                fixAllScope: null
+            );
 
             Assert.Equal(expectedGeneratedSource, VisualStudio.Editor.GetText());
         }
@@ -528,14 +499,18 @@ class D
     public IntPtr X1 { get; set; }
 }";
 
-            VisualStudio
-                .SolutionExplorer
-                .AddFile(new ProjectUtils.Project(ProjectName), "D.cs", secondFile, open: false);
+            VisualStudio.SolutionExplorer.AddFile(
+                new ProjectUtils.Project(ProjectName),
+                "D.cs",
+                secondFile,
+                open: false
+            );
 
             // Switch to the main document we'll be editing
-            VisualStudio
-                .SolutionExplorer
-                .OpenFile(new ProjectUtils.Project(ProjectName), "Class1.cs");
+            VisualStudio.SolutionExplorer.OpenFile(
+                new ProjectUtils.Project(ProjectName),
+                "Class1.cs"
+            );
 
             // Verify that applying a Fix All operation does not change generated file, but does change other files.
             // ⚠ This is a statement of the current behavior, and not a claim regarding correctness of the design.
@@ -545,10 +520,11 @@ class D
             SetUpEditor(markup);
             VisualStudio.WaitForApplicationIdle(CancellationToken.None);
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio
-                .Editor
-                .Verify
-                .CodeAction("Remove Unnecessary Usings", applyFix: true, fixAllScope: scope);
+            VisualStudio.Editor.Verify.CodeAction(
+                "Remove Unnecessary Usings",
+                applyFix: true,
+                fixAllScope: scope
+            );
 
             Assert.Equal(expectedText, VisualStudio.Editor.GetText());
 
@@ -616,14 +592,11 @@ public class P2 { }"
                 "Error",
             };
 
-            VisualStudio
-                .Editor
-                .Verify
-                .CodeActions(
-                    expectedItems,
-                    applyFix: expectedItems[0],
-                    ensureExpectedItemsAreOrdered: true
-                );
+            VisualStudio.Editor.Verify.CodeActions(
+                expectedItems,
+                applyFix: expectedItems[0],
+                ensureExpectedItemsAreOrdered: true
+            );
             VisualStudio.Editor.Verify.TextContains("using System.IO;");
         }
 
@@ -671,14 +644,11 @@ namespace NS
                 "Error",
             };
 
-            VisualStudio
-                .Editor
-                .Verify
-                .CodeActions(
-                    expectedItems,
-                    applyFix: expectedItems[0],
-                    ensureExpectedItemsAreOrdered: true
-                );
+            VisualStudio.Editor.Verify.CodeActions(
+                expectedItems,
+                applyFix: expectedItems[0],
+                ensureExpectedItemsAreOrdered: true
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.CodeGeneration)]
@@ -722,14 +692,11 @@ class Program
                 "Error",
             };
 
-            VisualStudio
-                .Editor
-                .Verify
-                .CodeActions(
-                    expectedItems,
-                    applyFix: generateImplicitTitle,
-                    ensureExpectedItemsAreOrdered: true
-                );
+            VisualStudio.Editor.Verify.CodeActions(
+                expectedItems,
+                applyFix: generateImplicitTitle,
+                ensureExpectedItemsAreOrdered: true
+            );
             VisualStudio.Editor.Verify.TextContains("implicit");
         }
 
@@ -755,14 +722,11 @@ public class Program
                 "System.Runtime.InteropServices.GCHandle"
             };
 
-            VisualStudio
-                .Editor
-                .Verify
-                .CodeActions(
-                    expectedItems,
-                    applyFix: expectedItems[0],
-                    ensureExpectedItemsAreOrdered: true
-                );
+            VisualStudio.Editor.Verify.CodeActions(
+                expectedItems,
+                applyFix: expectedItems[0],
+                ensureExpectedItemsAreOrdered: true
+            );
             VisualStudio.Editor.Verify.TextContains("using System.Runtime.InteropServices");
         }
 
@@ -788,14 +752,11 @@ public class Program
                 "System.Runtime.InteropServices.GCHandle"
             };
 
-            VisualStudio
-                .Editor
-                .Verify
-                .CodeActions(
-                    expectedItems,
-                    applyFix: expectedItems[0],
-                    ensureExpectedItemsAreOrdered: true
-                );
+            VisualStudio.Editor.Verify.CodeActions(
+                expectedItems,
+                applyFix: expectedItems[0],
+                ensureExpectedItemsAreOrdered: true
+            );
             VisualStudio.Editor.Verify.TextContains("using System.Runtime.InteropServices");
         }
 
@@ -865,10 +826,10 @@ public class Program
                 "Error",
             };
 
-            VisualStudio
-                .Editor
-                .Verify
-                .CodeActions(expectedItems, ensureExpectedItemsAreOrdered: true);
+            VisualStudio.Editor.Verify.CodeActions(
+                expectedItems,
+                ensureExpectedItemsAreOrdered: true
+            );
         }
 
         [
@@ -909,10 +870,11 @@ class C
                 "Warning",
                 "Error",
             };
-            VisualStudio
-                .Editor
-                .Verify
-                .CodeActions(expectedItems, applyFix: "Error", ensureExpectedItemsAreOrdered: true);
+            VisualStudio.Editor.Verify.CodeActions(
+                expectedItems,
+                applyFix: "Error",
+                ensureExpectedItemsAreOrdered: true
+            );
 
             // Verify CS0168 is now reported as an error.
             VerifyDiagnosticInErrorList("Error", VisualStudio);

@@ -203,8 +203,7 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
             propertyDocument = solution.GetRequiredDocument(propertyDocument.Id);
             Debug.Assert(fieldDocument.Project == propertyDocument.Project);
 
-            compilation = await fieldDocument
-                .Project
+            compilation = await fieldDocument.Project
                 .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
 
@@ -416,8 +415,7 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
             CancellationToken cancellationToken
         )
         {
-            var constructorNodes = field
-                .ContainingType
+            var constructorNodes = field.ContainingType
                 .GetMembers()
                 .Where(m => m.IsConstructor())
                 .SelectMany(c => c.DeclaringSyntaxReferences)
@@ -425,18 +423,16 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
                 .Select(n => n.FirstAncestorOrSelf<TConstructorDeclaration>())
                 .WhereNotNull()
                 .ToSet();
-            return renameLocations
-                .Locations
-                .Any(
-                    loc =>
-                        IsWrittenToOutsideOfConstructorOrProperty(
-                            renameLocations.Solution,
-                            loc,
-                            propertyDeclaration,
-                            constructorNodes,
-                            cancellationToken
-                        )
-                );
+            return renameLocations.Locations.Any(
+                loc =>
+                    IsWrittenToOutsideOfConstructorOrProperty(
+                        renameLocations.Solution,
+                        loc,
+                        propertyDeclaration,
+                        constructorNodes,
+                        cancellationToken
+                    )
+            );
         }
 
         private static bool IsWrittenToOutsideOfConstructorOrProperty(

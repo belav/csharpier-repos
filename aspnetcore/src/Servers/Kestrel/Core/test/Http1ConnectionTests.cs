@@ -162,17 +162,15 @@ public class Http1ConnectionTests : Http1ConnectionTestsBase
 
         _http1Connection.Reset();
 
-        var nextId =
-            ((IFeatureCollection)_http1Connection)
-                .Get<IHttpRequestIdentifierFeature>()
-                .TraceIdentifier;
+        var nextId = ((IFeatureCollection)_http1Connection)
+            .Get<IHttpRequestIdentifierFeature>()
+            .TraceIdentifier;
         Assert.NotEqual("xyz", nextId);
 
         _http1Connection.Reset();
-        var secondId =
-            ((IFeatureCollection)_http1Connection)
-                .Get<IHttpRequestIdentifierFeature>()
-                .TraceIdentifier;
+        var secondId = ((IFeatureCollection)_http1Connection)
+            .Get<IHttpRequestIdentifierFeature>()
+            .TraceIdentifier;
         Assert.NotEqual(nextId, secondId);
     }
 
@@ -467,8 +465,11 @@ public class Http1ConnectionTests : Http1ConnectionTestsBase
         ParseRequest((await _transport.Input.ReadAsync()).Buffer, out _consumed, out _examined);
         _transport.Input.AdvanceTo(_consumed, _examined);
 
-        var expectedRequestHeadersTimeout =
-            _serviceContext.ServerOptions.Limits.RequestHeadersTimeout.Ticks;
+        var expectedRequestHeadersTimeout = _serviceContext
+            .ServerOptions
+            .Limits
+            .RequestHeadersTimeout
+            .Ticks;
         _timeoutControl.Verify(
             cc => cc.ResetTimeout(expectedRequestHeadersTimeout, TimeoutReason.RequestHeaders)
         );
@@ -1042,9 +1043,9 @@ public class Http1ConnectionTests : Http1ConnectionTestsBase
 
         var requestProcessingTask = _http1Connection.ProcessRequestsAsync(httpApplication);
 
-        var data = Encoding
-            .ASCII
-            .GetBytes("POST / HTTP/1.1\r\nHost:\r\nConnection: close\r\ncontent-length: 1\r\n\r\n");
+        var data = Encoding.ASCII.GetBytes(
+            "POST / HTTP/1.1\r\nHost:\r\nConnection: close\r\ncontent-length: 1\r\n\r\n"
+        );
         await _application.Output.WriteAsync(data);
         await requestProcessingTask.DefaultTimeout();
 

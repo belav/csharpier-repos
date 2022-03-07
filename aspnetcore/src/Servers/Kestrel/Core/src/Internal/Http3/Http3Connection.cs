@@ -246,8 +246,11 @@ internal class Http3Connection : IHttp3StreamLifetimeHandler, IRequestProcessor
                 }
                 else if (stream.IsDraining)
                 {
-                    var minDataRate =
-                        _context.ServiceContext.ServerOptions.Limits.MinResponseDataRate;
+                    var minDataRate = _context
+                        .ServiceContext
+                        .ServerOptions
+                        .Limits
+                        .MinResponseDataRate;
                     if (minDataRate == null)
                     {
                         continue;
@@ -255,9 +258,8 @@ internal class Http3Connection : IHttp3StreamLifetimeHandler, IRequestProcessor
 
                     if (stream.StreamTimeoutTicks == default)
                     {
-                        stream.StreamTimeoutTicks = _context
-                            .TimeoutControl
-                            .GetResponseDrainDeadline(ticks, minDataRate);
+                        stream.StreamTimeoutTicks =
+                            _context.TimeoutControl.GetResponseDrainDeadline(ticks, minDataRate);
                     }
 
                     if (stream.StreamTimeoutTicks < ticks)
@@ -328,9 +330,8 @@ internal class Http3Connection : IHttp3StreamLifetimeHandler, IRequestProcessor
                         continue;
                     }
 
-                    var streamDirectionFeature = streamContext
-                        .Features
-                        .Get<IStreamDirectionFeature>();
+                    var streamDirectionFeature =
+                        streamContext.Features.Get<IStreamDirectionFeature>();
                     var streamIdFeature = streamContext.Features.Get<IStreamIdFeature>();
 
                     Debug.Assert(streamDirectionFeature != null);
@@ -370,9 +371,8 @@ internal class Http3Connection : IHttp3StreamLifetimeHandler, IRequestProcessor
                         // Request stream IDs are tracked.
                         UpdateHighestOpenedRequestStreamId(streamIdFeature.StreamId);
 
-                        var persistentStateFeature = streamContext
-                            .Features
-                            .Get<IPersistentStateFeature>();
+                        var persistentStateFeature =
+                            streamContext.Features.Get<IPersistentStateFeature>();
                         Debug.Assert(
                             persistentStateFeature != null,
                             $"Required {nameof(IPersistentStateFeature)} not on stream context."
@@ -383,9 +383,10 @@ internal class Http3Connection : IHttp3StreamLifetimeHandler, IRequestProcessor
                         // Check whether there is an existing HTTP/3 stream on the transport stream.
                         // A stream will only be cached if the transport stream itself is reused.
                         if (
-                            !persistentStateFeature
-                                .State
-                                .TryGetValue(StreamPersistentStateKey, out var s)
+                            !persistentStateFeature.State.TryGetValue(
+                                StreamPersistentStateKey,
+                                out var s
+                            )
                         )
                         {
                             stream = new Http3Stream<TContext>(
@@ -402,9 +403,10 @@ internal class Http3Connection : IHttp3StreamLifetimeHandler, IRequestProcessor
 
                         _streamLifetimeHandler.OnStreamCreated(stream);
 
-                        KestrelEventSource
-                            .Log
-                            .RequestQueuedStart(stream, AspNetCore.Http.HttpProtocol.Http3);
+                        KestrelEventSource.Log.RequestQueuedStart(
+                            stream,
+                            AspNetCore.Http.HttpProtocol.Http3
+                        );
                         ThreadPool.UnsafeQueueUserWorkItem(stream, preferLocal: false);
                     }
                 }

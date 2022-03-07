@@ -642,11 +642,8 @@ namespace System.DirectoryServices.AccountManagement
         internal static string GetNT4UserName()
         {
             using (
-                WindowsIdentity currentIdentity = System
-                    .Security
-                    .Principal
-                    .WindowsIdentity
-                    .GetCurrent()
+                WindowsIdentity currentIdentity =
+                    System.Security.Principal.WindowsIdentity.GetCurrent()
             )
             {
                 string s = currentIdentity.Name;
@@ -747,17 +744,15 @@ namespace System.DirectoryServices.AccountManagement
                         )
                 );
 
-                int f = Interop
-                    .Advapi32
-                    .LookupAccountSid(
-                        serverName,
-                        sid,
-                        null,
-                        ref nameLength,
-                        null,
-                        ref domainNameLength,
-                        out accountUsage
-                    );
+                int f = Interop.Advapi32.LookupAccountSid(
+                    serverName,
+                    sid,
+                    null,
+                    ref nameLength,
+                    null,
+                    ref domainNameLength,
+                    out accountUsage
+                );
 
                 int lastErr = Marshal.GetLastWin32Error();
                 if (lastErr != 122) // ERROR_INSUFFICIENT_BUFFER
@@ -778,17 +773,15 @@ namespace System.DirectoryServices.AccountManagement
                 fixed (char* sbName = new char[nameLength])
                 fixed (char* sbDomainName = new char[domainNameLength])
                 {
-                    f = Interop
-                        .Advapi32
-                        .LookupAccountSid(
-                            serverName,
-                            sid,
-                            sbName,
-                            ref nameLength,
-                            sbDomainName,
-                            ref domainNameLength,
-                            out accountUsage
-                        );
+                    f = Interop.Advapi32.LookupAccountSid(
+                        serverName,
+                        sid,
+                        sbName,
+                        ref nameLength,
+                        sbDomainName,
+                        ref domainNameLength,
+                        out accountUsage
+                    );
 
                     if (f == 0)
                     {

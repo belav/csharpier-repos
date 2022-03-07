@@ -164,13 +164,11 @@ internal class HtmlMarkupParser : TokenizerBackedParser<HtmlTokenizer>
                 }
                 else
                 {
-                    Context
-                        .ErrorSink
-                        .OnError(
-                            RazorDiagnosticFactory.CreateParsing_MarkupBlockMustStartWithTag(
-                                new SourceSpan(CurrentStart, CurrentToken.Content.Length)
-                            )
-                        );
+                    Context.ErrorSink.OnError(
+                        RazorDiagnosticFactory.CreateParsing_MarkupBlockMustStartWithTag(
+                            new SourceSpan(CurrentStart, CurrentToken.Content.Length)
+                        )
+                    );
                 }
 
                 // Add any remaining tokens to the builder.
@@ -345,17 +343,15 @@ internal class HtmlMarkupParser : TokenizerBackedParser<HtmlTokenizer>
                 {
                     // We're at the outermost start tag. Add an error.
                     // We don't want to add this error if the tag is unfinished. A different error would have already been added.
-                    Context
-                        .ErrorSink
-                        .OnError(
-                            RazorDiagnosticFactory.CreateParsing_MissingEndTag(
-                                new SourceSpan(
-                                    SourceLocationTracker.Advance(tracker.TagLocation, "<"),
-                                    tracker.TagName.Length
-                                ),
-                                tracker.TagName
-                            )
-                        );
+                    Context.ErrorSink.OnError(
+                        RazorDiagnosticFactory.CreateParsing_MissingEndTag(
+                            new SourceSpan(
+                                SourceLocationTracker.Advance(tracker.TagLocation, "<"),
+                                tracker.TagName.Length
+                            ),
+                            tracker.TagName
+                        )
+                    );
                 }
             }
         }
@@ -607,17 +603,15 @@ internal class HtmlMarkupParser : TokenizerBackedParser<HtmlTokenizer>
         if (_tagTracker.Count == 0)
         {
             // We can't possibly have a matching start tag.
-            Context
-                .ErrorSink
-                .OnError(
-                    RazorDiagnosticFactory.CreateParsing_UnexpectedEndTag(
-                        new SourceSpan(
-                            SourceLocationTracker.Advance(endTagStartLocation, "</"),
-                            Math.Max(endTagName.Length, 1)
-                        ),
-                        endTagName
-                    )
-                );
+            Context.ErrorSink.OnError(
+                RazorDiagnosticFactory.CreateParsing_UnexpectedEndTag(
+                    new SourceSpan(
+                        SourceLocationTracker.Advance(endTagStartLocation, "</"),
+                        Math.Max(endTagName.Length, 1)
+                    ),
+                    endTagName
+                )
+            );
             return;
         }
 
@@ -635,17 +629,15 @@ internal class HtmlMarkupParser : TokenizerBackedParser<HtmlTokenizer>
             if (_tagTracker.Count == 0)
             {
                 // This means we couldn't find a match and we're at the outermost start tag. Add an error.
-                Context
-                    .ErrorSink
-                    .OnError(
-                        RazorDiagnosticFactory.CreateParsing_MissingEndTag(
-                            new SourceSpan(
-                                SourceLocationTracker.Advance(tracker.TagLocation, "<"),
-                                tracker.TagName.Length
-                            ),
-                            tracker.TagName
-                        )
-                    );
+                Context.ErrorSink.OnError(
+                    RazorDiagnosticFactory.CreateParsing_MissingEndTag(
+                        new SourceSpan(
+                            SourceLocationTracker.Advance(tracker.TagLocation, "<"),
+                            tracker.TagName.Length
+                        ),
+                        tracker.TagName
+                    )
+                );
             }
         }
     }
@@ -787,19 +779,17 @@ internal class HtmlMarkupParser : TokenizerBackedParser<HtmlTokenizer>
             if (EndOfFile || !At(SyntaxKind.CloseAngle))
             {
                 // Unfinished tag
-                Context
-                    .ErrorSink
-                    .OnError(
-                        RazorDiagnosticFactory.CreateParsing_UnfinishedTag(
-                            new SourceSpan(
-                                tagName.Length == 0
-                                  ? tagStartLocation
-                                  : SourceLocationTracker.Advance(tagStartLocation, "<"),
-                                Math.Max(tagName.Length, 1)
-                            ),
-                            tagName
-                        )
-                    );
+                Context.ErrorSink.OnError(
+                    RazorDiagnosticFactory.CreateParsing_UnfinishedTag(
+                        new SourceSpan(
+                            tagName.Length == 0
+                              ? tagStartLocation
+                              : SourceLocationTracker.Advance(tagStartLocation, "<"),
+                            Math.Max(tagName.Length, 1)
+                        ),
+                        tagName
+                    )
+                );
             }
             else
             {
@@ -930,16 +920,14 @@ internal class HtmlMarkupParser : TokenizerBackedParser<HtmlTokenizer>
             }
             else
             {
-                Context
-                    .ErrorSink
-                    .OnError(
-                        RazorDiagnosticFactory.CreateParsing_TextTagCannotContainAttributes(
-                            new SourceSpan(
-                                textLocation,
-                                contentLength: 4 /* text */
-                            )
+                Context.ErrorSink.OnError(
+                    RazorDiagnosticFactory.CreateParsing_TextTagCannotContainAttributes(
+                        new SourceSpan(
+                            textLocation,
+                            contentLength: 4 /* text */
                         )
-                    );
+                    )
+                );
 
                 RecoverTextTag(out var miscContent, out closeAngleToken);
                 miscAttributeContentBuilder.Add(miscContent);
@@ -1124,16 +1112,14 @@ internal class HtmlMarkupParser : TokenizerBackedParser<HtmlTokenizer>
             isWellFormed = At(SyntaxKind.CloseAngle);
             if (!isWellFormed)
             {
-                Context
-                    .ErrorSink
-                    .OnError(
-                        RazorDiagnosticFactory.CreateParsing_TextTagCannotContainAttributes(
-                            new SourceSpan(
-                                textLocation,
-                                contentLength: 4 /* text */
-                            )
+                Context.ErrorSink.OnError(
+                    RazorDiagnosticFactory.CreateParsing_TextTagCannotContainAttributes(
+                        new SourceSpan(
+                            textLocation,
+                            contentLength: 4 /* text */
                         )
-                    );
+                    )
+                );
 
                 SpanContext.EditHandler.AcceptedCharacters = AcceptedCharactersInternal.Any;
                 RecoverTextTag(out var miscContent, out closeAngleToken);
@@ -1674,17 +1660,15 @@ internal class HtmlMarkupParser : TokenizerBackedParser<HtmlTokenizer>
 
                 if (!At(SyntaxKind.CloseAngle))
                 {
-                    Context
-                        .ErrorSink
-                        .OnError(
-                            RazorDiagnosticFactory.CreateParsing_UnfinishedTag(
-                                new SourceSpan(
-                                    SourceLocationTracker.Advance(tagStart, "</"),
-                                    ScriptTagName.Length
-                                ),
-                                ScriptTagName
-                            )
-                        );
+                    Context.ErrorSink.OnError(
+                        RazorDiagnosticFactory.CreateParsing_UnfinishedTag(
+                            new SourceSpan(
+                                SourceLocationTracker.Advance(tagStart, "</"),
+                                ScriptTagName.Length
+                            ),
+                            ScriptTagName
+                        )
+                    );
                     closeAngleToken = SyntaxFactory.MissingToken(SyntaxKind.CloseAngle);
                 }
                 else
@@ -1963,8 +1947,7 @@ internal class HtmlMarkupParser : TokenizerBackedParser<HtmlTokenizer>
 
         if (typeAttribute != null)
         {
-            var contentValues = typeAttribute
-                .Value
+            var contentValues = typeAttribute.Value
                 .CreateRed()
                 .DescendantNodes()
                 .Where(n => n.IsToken)

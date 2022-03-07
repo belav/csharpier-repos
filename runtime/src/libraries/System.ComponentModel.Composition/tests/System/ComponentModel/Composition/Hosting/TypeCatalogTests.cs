@@ -465,8 +465,7 @@ namespace System.ComponentModel.Composition
             Assert.True(matchingExports.Count() >= 0);
 
             IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> expectedMatchingExports =
-                catalog
-                    .Parts
+                catalog.Parts
                     .SelectMany(
                         part => part.ExportDefinitions,
                         (part, export) =>

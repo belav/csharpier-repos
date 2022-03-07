@@ -68,10 +68,8 @@ public static class HtmlHelperComponentExtensions
         }
 
         var viewContext = htmlHelper.ViewContext;
-        var componentRenderer = viewContext
-            .HttpContext
-            .RequestServices
-            .GetRequiredService<IComponentRenderer>();
+        var componentRenderer =
+            viewContext.HttpContext.RequestServices.GetRequiredService<IComponentRenderer>();
         return componentRenderer.RenderComponentAsync(
             viewContext,
             componentType,

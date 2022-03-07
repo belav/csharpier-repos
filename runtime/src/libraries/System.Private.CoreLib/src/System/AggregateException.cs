@@ -319,8 +319,9 @@ namespace System
             while (exceptionsToFlatten.Count > nDequeueIndex)
             {
                 // dequeue one from exceptionsToFlatten
-                ReadOnlyCollection<Exception> currentInnerExceptions =
-                    exceptionsToFlatten[nDequeueIndex++].InnerExceptions;
+                ReadOnlyCollection<Exception> currentInnerExceptions = exceptionsToFlatten[
+                    nDequeueIndex++
+                ].InnerExceptions;
 
                 for (int i = 0; i < currentInnerExceptions.Count; i++)
                 {

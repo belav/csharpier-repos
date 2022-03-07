@@ -37,9 +37,7 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
         public CommandBatchPreparer(CommandBatchPreparerDependencies dependencies)
         {
             _minBatchSize =
-                dependencies
-                    .Options
-                    .Extensions
+                dependencies.Options.Extensions
                     .OfType<RelationalOptionsExtension>()
                     .FirstOrDefault()
                     ?.MinBatchSize ?? 4;
@@ -103,25 +101,21 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
                         {
                             if (batch.ModificationCommands.Count > 1)
                             {
-                                Dependencies
-                                    .UpdateLogger
-                                    .BatchReadyForExecution(
-                                        batch.ModificationCommands.SelectMany(c => c.Entries),
-                                        batch.ModificationCommands.Count
-                                    );
+                                Dependencies.UpdateLogger.BatchReadyForExecution(
+                                    batch.ModificationCommands.SelectMany(c => c.Entries),
+                                    batch.ModificationCommands.Count
+                                );
                             }
 
                             yield return batch;
                         }
                         else
                         {
-                            Dependencies
-                                .UpdateLogger
-                                .BatchSmallerThanMinBatchSize(
-                                    batch.ModificationCommands.SelectMany(c => c.Entries),
-                                    batch.ModificationCommands.Count,
-                                    _minBatchSize
-                                );
+                            Dependencies.UpdateLogger.BatchSmallerThanMinBatchSize(
+                                batch.ModificationCommands.SelectMany(c => c.Entries),
+                                batch.ModificationCommands.Count,
+                                _minBatchSize
+                            );
 
                             foreach (var command in batch.ModificationCommands)
                             {
@@ -140,25 +134,21 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
                 {
                     if (batch.ModificationCommands.Count > 1)
                     {
-                        Dependencies
-                            .UpdateLogger
-                            .BatchReadyForExecution(
-                                batch.ModificationCommands.SelectMany(c => c.Entries),
-                                batch.ModificationCommands.Count
-                            );
+                        Dependencies.UpdateLogger.BatchReadyForExecution(
+                            batch.ModificationCommands.SelectMany(c => c.Entries),
+                            batch.ModificationCommands.Count
+                        );
                     }
 
                     yield return batch;
                 }
                 else
                 {
-                    Dependencies
-                        .UpdateLogger
-                        .BatchSmallerThanMinBatchSize(
-                            batch.ModificationCommands.SelectMany(c => c.Entries),
-                            batch.ModificationCommands.Count,
-                            _minBatchSize
-                        );
+                    Dependencies.UpdateLogger.BatchSmallerThanMinBatchSize(
+                        batch.ModificationCommands.SelectMany(c => c.Entries),
+                        batch.ModificationCommands.Count,
+                        _minBatchSize
+                    );
 
                     foreach (var command in batch.ModificationCommands)
                     {
@@ -242,35 +232,31 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
                         command = sharedCommandsMap.GetOrAddValue(
                             entry,
                             (n, s, comparer) =>
-                                Dependencies
-                                    .ModificationCommandFactory
-                                    .CreateModificationCommand(
-                                        new ModificationCommandParameters(
-                                            n,
-                                            s,
-                                            _sensitiveLoggingEnabled,
-                                            comparer,
-                                            generateParameterName,
-                                            Dependencies.UpdateLogger
-                                        )
+                                Dependencies.ModificationCommandFactory.CreateModificationCommand(
+                                    new ModificationCommandParameters(
+                                        n,
+                                        s,
+                                        _sensitiveLoggingEnabled,
+                                        comparer,
+                                        generateParameterName,
+                                        Dependencies.UpdateLogger
                                     )
+                                )
                         );
                         isMainEntry = sharedCommandsMap.IsMainEntry(entry);
                     }
                     else
                     {
-                        command = Dependencies
-                            .ModificationCommandFactory
-                            .CreateModificationCommand(
-                                new ModificationCommandParameters(
-                                    table.Name,
-                                    table.Schema,
-                                    _sensitiveLoggingEnabled,
-                                    comparer: null,
-                                    generateParameterName,
-                                    Dependencies.UpdateLogger
-                                )
-                            );
+                        command = Dependencies.ModificationCommandFactory.CreateModificationCommand(
+                            new ModificationCommandParameters(
+                                table.Name,
+                                table.Schema,
+                                _sensitiveLoggingEnabled,
+                                comparer: null,
+                                generateParameterName,
+                                Dependencies.UpdateLogger
+                            )
+                        );
                     }
 
                     command.AddEntry(entry, isMainEntry);
@@ -448,9 +434,9 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
             StringBuilder builder
         )
         {
-            var reverseDependency = !source
-                .Entries
-                .Any(e => foreignKey.DeclaringEntityType.IsAssignableFrom(e.EntityType));
+            var reverseDependency = !source.Entries.Any(
+                e => foreignKey.DeclaringEntityType.IsAssignableFrom(e.EntityType)
+            );
             if (reverseDependency)
             {
                 builder.AppendLine(" <-");
@@ -486,9 +472,9 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
             }
 
             var dependentCommand = reverseDependency ? target : source;
-            var dependentEntry = dependentCommand
-                .Entries
-                .First(e => foreignKey.DeclaringEntityType.IsAssignableFrom(e.EntityType));
+            var dependentEntry = dependentCommand.Entries.First(
+                e => foreignKey.DeclaringEntityType.IsAssignableFrom(e.EntityType)
+            );
             builder.Append("{ ");
             for (var i = 0; i < foreignKey.Properties.Count; i++)
             {
@@ -536,9 +522,9 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
             builder.Append("Index ");
 
             var dependentCommand = reverseDependency ? target : source;
-            var dependentEntry = dependentCommand
-                .Entries
-                .First(e => index.DeclaringEntityType.IsAssignableFrom(e.EntityType));
+            var dependentEntry = dependentCommand.Entries.First(
+                e => index.DeclaringEntityType.IsAssignableFrom(e.EntityType)
+            );
             builder.Append("{ ");
             for (var i = 0; i < index.Properties.Count; i++)
             {
@@ -598,8 +584,7 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
                                 continue;
                             }
 
-                            var principalKeyValue = Dependencies
-                                .KeyValueIndexFactorySource
+                            var principalKeyValue = Dependencies.KeyValueIndexFactorySource
                                 .GetKeyValueIndexFactory(foreignKey.PrincipalKey)
                                 .CreatePrincipalKeyValue(entry, foreignKey);
 
@@ -639,8 +624,7 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
                                 continue;
                             }
 
-                            var dependentKeyValue = Dependencies
-                                .KeyValueIndexFactorySource
+                            var dependentKeyValue = Dependencies.KeyValueIndexFactorySource
                                 .GetKeyValueIndexFactory(foreignKey.PrincipalKey)
                                 .CreateDependentKeyValueFromOriginalValues(entry, foreignKey);
 
@@ -692,8 +676,7 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
                                     continue;
                                 }
 
-                                var dependentKeyValue = Dependencies
-                                    .KeyValueIndexFactorySource
+                                var dependentKeyValue = Dependencies.KeyValueIndexFactorySource
                                     .GetKeyValueIndexFactory(foreignKey.PrincipalKey)
                                     .CreateDependentKeyValue(entry, foreignKey);
                                 if (dependentKeyValue == null)
@@ -724,8 +707,7 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
                                     continue;
                                 }
 
-                                var principalKeyValue = Dependencies
-                                    .KeyValueIndexFactorySource
+                                var principalKeyValue = Dependencies.KeyValueIndexFactorySource
                                     .GetKeyValueIndexFactory(foreignKey.PrincipalKey)
                                     .CreatePrincipalKeyValueFromOriginalValues(entry, foreignKey);
                                 if (principalKeyValue != null)
@@ -892,8 +874,7 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
                             continue;
                         }
 
-                        var principalKeyValue = Dependencies
-                            .KeyValueIndexFactorySource
+                        var principalKeyValue = Dependencies.KeyValueIndexFactorySource
                             .GetKeyValueIndexFactory(key)
                             .CreatePrincipalKeyValue(entry, null);
 
@@ -977,8 +958,7 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
                                 continue;
                             }
 
-                            var principalKeyValue = Dependencies
-                                .KeyValueIndexFactorySource
+                            var principalKeyValue = Dependencies.KeyValueIndexFactorySource
                                 .GetKeyValueIndexFactory(key)
                                 .CreatePrincipalKeyValue(entry, null);
 

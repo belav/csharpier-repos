@@ -27,9 +27,8 @@ namespace System.Text.Json.Serialization.Converters
         )
         {
             Debug.Assert(jsonTypeInfo != null);
-            jsonTypeInfo.AddMethodDelegate = options
-                .MemberAccessorStrategy
-                .CreateAddMethodDelegate<TCollection>();
+            jsonTypeInfo.AddMethodDelegate =
+                options.MemberAccessorStrategy.CreateAddMethodDelegate<TCollection>();
         }
     }
 }

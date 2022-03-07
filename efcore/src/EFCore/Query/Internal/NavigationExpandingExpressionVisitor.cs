@@ -261,9 +261,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 memberExpression.Expression != null
                 && innerExpression != null
                 && memberExpression.Member.Name == nameof(ICollection<int>.Count)
-                && memberExpression
-                    .Expression
-                    .Type
+                && memberExpression.Expression.Type
                     .GetInterfaces()
                     .Append(memberExpression.Expression.Type)
                     .Any(
@@ -285,9 +283,9 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 {
                     return Visit(
                         Expression.Call(
-                            QueryableMethods
-                                .CountWithoutPredicate
-                                .MakeGenericMethod(innerQueryable.Type.GetSequenceType()),
+                            QueryableMethods.CountWithoutPredicate.MakeGenericMethod(
+                                innerQueryable.Type.GetSequenceType()
+                            ),
                             innerQueryable
                         )
                     );
@@ -810,9 +808,9 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     {
                         // This is groupingElement.AsQueryable so we preserve it
                         return Expression.Call(
-                            QueryableMethods
-                                .AsQueryable
-                                .MakeGenericMethod(navigationTreeExpression.Type.GetSequenceType()),
+                            QueryableMethods.AsQueryable.MakeGenericMethod(
+                                navigationTreeExpression.Type.GetSequenceType()
+                            ),
                             navigationTreeExpression
                         );
                     }
@@ -984,8 +982,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
             if (
                 newStructure is EntityReference entityReference
-                && entityReference
-                    .EntityType
+                && entityReference.EntityType
                     .GetAllBaseTypes()
                     .Concat(entityReference.EntityType.GetDerivedTypesInclusive())
                     .FirstOrDefault(et => et.ClrType == castType)
@@ -1004,14 +1001,11 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 newEntityReference.IncludePaths.Merge(entityReference.IncludePaths);
 
                 // Prune includes for sibling types
-                var siblingNavigations = newEntityReference
-                    .IncludePaths
-                    .Keys
-                    .Where(
-                        n =>
-                            !castEntityType.IsAssignableFrom(n.DeclaringEntityType)
-                            && !n.DeclaringEntityType.IsAssignableFrom(castEntityType)
-                    );
+                var siblingNavigations = newEntityReference.IncludePaths.Keys.Where(
+                    n =>
+                        !castEntityType.IsAssignableFrom(n.DeclaringEntityType)
+                        && !n.DeclaringEntityType.IsAssignableFrom(castEntityType)
+                );
 
                 foreach (var navigation in siblingNavigations)
                 {
@@ -1057,9 +1051,9 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         {
             source.UpdateSource(
                 Expression.Call(
-                    QueryableMethods
-                        .DefaultIfEmptyWithoutArgument
-                        .MakeGenericMethod(source.SourceElementType),
+                    QueryableMethods.DefaultIfEmptyWithoutArgument.MakeGenericMethod(
+                        source.SourceElementType
+                    ),
                     source.Source
                 )
             );
@@ -1180,9 +1174,10 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     GetParameterName("g")
                 );
                 var innerSource = Expression.Call(
-                    QueryableMethods
-                        .GroupByWithKeySelector
-                        .MakeGenericMethod(source.SourceElementType, keySelector.ReturnType),
+                    QueryableMethods.GroupByWithKeySelector.MakeGenericMethod(
+                        source.SourceElementType,
+                        keySelector.ReturnType
+                    ),
                     source.Source,
                     Expression.Quote(keySelector)
                 );
@@ -1223,13 +1218,11 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             );
 
             result = Expression.Call(
-                QueryableMethods
-                    .GroupByWithKeyResultSelector
-                    .MakeGenericMethod(
-                        source.CurrentParameter.Type,
-                        keySelector.ReturnType,
-                        resultSelector.ReturnType
-                    ),
+                QueryableMethods.GroupByWithKeyResultSelector.MakeGenericMethod(
+                    source.CurrentParameter.Type,
+                    keySelector.ReturnType,
+                    resultSelector.ReturnType
+                ),
                 source.Source,
                 Expression.Quote(keySelector),
                 Expression.Quote(resultSelector)
@@ -1308,9 +1301,10 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
                         if (includeTreeNodes.Count == 0)
                         {
-                            _queryCompilationContext
-                                .Logger
-                                .InvalidIncludePathError(navigationChain, navigationName);
+                            _queryCompilationContext.Logger.InvalidIncludePathError(
+                                navigationChain,
+                                navigationName
+                            );
                         }
                     }
                 }
@@ -1335,9 +1329,10 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     {
                         if (
                             lastIncludeTree.FilterExpression != null
-                            && !ExpressionEqualityComparer
-                                .Instance
-                                .Equals(filterExpression, lastIncludeTree.FilterExpression)
+                            && !ExpressionEqualityComparer.Instance.Equals(
+                                filterExpression,
+                                lastIncludeTree.FilterExpression
+                            )
                         )
                         {
                             throw new InvalidOperationException(
@@ -1482,14 +1477,12 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             );
 
             var source = Expression.Call(
-                QueryableMethods
-                    .Join
-                    .MakeGenericMethod(
-                        outerSource.SourceElementType,
-                        innerSource.SourceElementType,
-                        outerKeySelector.ReturnType,
-                        newResultSelector.ReturnType
-                    ),
+                QueryableMethods.Join.MakeGenericMethod(
+                    outerSource.SourceElementType,
+                    innerSource.SourceElementType,
+                    outerKeySelector.ReturnType,
+                    newResultSelector.ReturnType
+                ),
                 outerSource.Source,
                 innerSource.Source,
                 Expression.Quote(outerKeySelector),
@@ -1559,14 +1552,12 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             );
 
             var source = Expression.Call(
-                QueryableExtensions
-                    .LeftJoinMethodInfo
-                    .MakeGenericMethod(
-                        outerSource.SourceElementType,
-                        innerSource.SourceElementType,
-                        outerKeySelector.ReturnType,
-                        newResultSelector.ReturnType
-                    ),
+                QueryableExtensions.LeftJoinMethodInfo.MakeGenericMethod(
+                    outerSource.SourceElementType,
+                    innerSource.SourceElementType,
+                    outerKeySelector.ReturnType,
+                    newResultSelector.ReturnType
+                ),
                 outerSource.Source,
                 innerSource.Source,
                 Expression.Quote(outerKeySelector),
@@ -1716,13 +1707,11 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 );
 
                 var newSource = Expression.Call(
-                    QueryableMethods
-                        .SelectManyWithCollectionSelector
-                        .MakeGenericMethod(
-                            source.SourceElementType,
-                            collectionElementType,
-                            newResultSelector.ReturnType
-                        ),
+                    QueryableMethods.SelectManyWithCollectionSelector.MakeGenericMethod(
+                        source.SourceElementType,
+                        collectionElementType,
+                        newResultSelector.ReturnType
+                    ),
                     source.Source,
                     Expression.Quote(collectionSelector),
                     Expression.Quote(newResultSelector)
@@ -1809,9 +1798,9 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
         private Expression ProcessUnknownMethod(MethodCallExpression methodCallExpression)
         {
-            var queryableElementType = methodCallExpression
-                .Type
-                .TryGetElementType(typeof(IQueryable<>));
+            var queryableElementType = methodCallExpression.Type.TryGetElementType(
+                typeof(IQueryable<>)
+            );
             if (
                 queryableElementType != null
                 && methodCallExpression.Object == null
@@ -1820,8 +1809,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 && methodCallExpression.Method.GetGenericArguments().Length == 1
                 && methodCallExpression.Method.GetGenericArguments()[0] == queryableElementType
                 && methodCallExpression.Arguments.Count > 0
-                && methodCallExpression
-                    .Arguments
+                && methodCallExpression.Arguments
                     .Skip(1)
                     .All(e => e.Type.TryGetElementType(typeof(IQueryable<>)) == null)
             )
@@ -1840,8 +1828,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     var queryable = Reduce(source);
 
                     var result = Expression.Call(
-                        methodCallExpression
-                            .Method
+                        methodCallExpression.Method
                             .GetGenericMethodDefinition()
                             .MakeGenericMethod(queryableElementType),
                         new[] { queryable }.Concat(
@@ -1954,9 +1941,10 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             selector = Expression.Lambda(selectorBody, groupBySource.CurrentParameter);
 
             var newSource = Expression.Call(
-                QueryableMethods
-                    .Select
-                    .MakeGenericMethod(groupBySource.SourceElementType, selector.ReturnType),
+                QueryableMethods.Select.MakeGenericMethod(
+                    groupBySource.SourceElementType,
+                    selector.ReturnType
+                ),
                 groupBySource.Source,
                 Expression.Quote(selector)
             );
@@ -2022,8 +2010,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         && navigationTreeExpression.Value is EntityReference entityReference
                     )
                     {
-                        var primaryKeyProperties = entityReference
-                            .EntityType
+                        var primaryKeyProperties = entityReference.EntityType
                             .FindPrimaryKey()
                             ?.Properties;
                         if (primaryKeyProperties != null)
@@ -2067,8 +2054,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                             is EntityReference subqueryEntityReference
                     )
                     {
-                        var primaryKeyProperties = subqueryEntityReference
-                            .EntityType
+                        var primaryKeyProperties = subqueryEntityReference.EntityType
                             .FindPrimaryKey()
                             ?.Properties;
                         if (primaryKeyProperties != null)
@@ -2153,9 +2139,9 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
             if (outerKeySelector.ReturnType != innerKeySelector.ReturnType)
             {
-                var baseType = outerKeySelector
-                    .ReturnType
-                    .IsAssignableFrom(innerKeySelector.ReturnType)
+                var baseType = outerKeySelector.ReturnType.IsAssignableFrom(
+                    innerKeySelector.ReturnType
+                )
                   ? outerKeySelector.ReturnType
                   : innerKeySelector.ReturnType;
 
@@ -2427,9 +2413,9 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 for (var i = 0; i < enumerableMethodParameters.Length; i++)
                 {
                     if (
-                        !enumerableMethodParameters[i]
-                            .ParameterType
-                            .IsAssignableFrom(enumerableArguments[i].Type)
+                        !enumerableMethodParameters[i].ParameterType.IsAssignableFrom(
+                            enumerableArguments[i].Type
+                        )
                     )
                     {
                         validMapping = false;
@@ -2631,9 +2617,9 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 && ownedNavigationReference.Navigation.IsCollection
               ? CreateNavigationExpansionExpression(
                     Expression.Call(
-                        QueryableMethods
-                            .AsQueryable
-                            .MakeGenericMethod(ownedNavigationReference.Type.GetSequenceType()),
+                        QueryableMethods.AsQueryable.MakeGenericMethod(
+                            ownedNavigationReference.Type.GetSequenceType()
+                        ),
                         ownedNavigationReference
                     ),
                     ownedNavigationReference
@@ -2757,9 +2743,9 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     return includeTreeNode;
 
                 case MemberExpression memberExpression when memberExpression.Expression != null:
-                    var innerExpression = memberExpression
-                        .Expression
-                        .UnwrapTypeConversion(out var convertedType);
+                    var innerExpression = memberExpression.Expression.UnwrapTypeConversion(
+                        out var convertedType
+                    );
                     var innerIncludeTreeNode = PopulateIncludeTree(
                         includeTreeNode,
                         innerExpression,

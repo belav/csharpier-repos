@@ -47,16 +47,14 @@ internal sealed class CreateNewOnMetadataUpdateAttributePass
         @namespace.Children.Insert(classIndex, metadataAttributeNode);
 
         // [global:Microsoft.AspNetCore.Razor.Hosting.RazorCompiledItemMetadataAttribute("Identifier", "/Views/Home/Index.cshtml")]
-        @namespace
-            .Children
-            .Insert(
-                classIndex,
-                new RazorCompiledItemMetadataAttributeIntermediateNode
-                {
-                    Key = "Identifier",
-                    Value = identifier,
-                }
-            );
+        @namespace.Children.Insert(
+            classIndex,
+            new RazorCompiledItemMetadataAttributeIntermediateNode
+            {
+                Key = "Identifier",
+                Value = identifier,
+            }
+        );
     }
 
     internal sealed class CreateNewOnMetadataUpdateAttributeIntermediateNode
@@ -75,8 +73,7 @@ internal sealed class CreateNewOnMetadataUpdateAttributePass
         public override void WriteNode(CodeTarget target, CodeRenderingContext context)
         {
             // [global::System.Runtime.CompilerServices.CreateNewOnMetadataUpdateAttribute]
-            context
-                .CodeWriter
+            context.CodeWriter
                 .Write("[")
                 .Write(CreateNewOnMetadataUpdateAttributeName)
                 .WriteLine("]");

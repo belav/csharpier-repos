@@ -1292,17 +1292,15 @@ public class ReliabilityFramework
 
                             try
                             {
-                                daTest
-                                    .EntryPointMethod
-                                    .Invoke(
-                                        null,
-                                        new object[]
-                                        {
-                                            (daTest.Arguments == null)
-                                                ? new string[0]
-                                                : daTest.GetSplitArguments()
-                                        }
-                                    );
+                                daTest.EntryPointMethod.Invoke(
+                                    null,
+                                    new object[]
+                                    {
+                                        (daTest.Arguments == null)
+                                            ? new string[0]
+                                            : daTest.GetSplitArguments()
+                                    }
+                                );
                             }
                             catch (Exception e)
                             {

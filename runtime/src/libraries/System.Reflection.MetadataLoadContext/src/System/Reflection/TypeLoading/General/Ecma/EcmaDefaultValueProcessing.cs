@@ -144,8 +144,13 @@ namespace System.Reflection.TypeLoading.Ecma
                         int hi = (int)cats[2].Value!;
                         int mid = (int)cats[3].Value!;
                         int lo = (int)cats[4].Value!;
-                        rawDefaultValue =
-                            new DecimalConstantAttribute(scale, sign, hi, mid, lo).Value;
+                        rawDefaultValue = new DecimalConstantAttribute(
+                            scale,
+                            sign,
+                            hi,
+                            mid,
+                            lo
+                        ).Value;
                         return true;
                     }
 
@@ -158,8 +163,13 @@ namespace System.Reflection.TypeLoading.Ecma
                         uint hi = (uint)cats[2].Value!;
                         uint mid = (uint)cats[3].Value!;
                         uint lo = (uint)cats[4].Value!;
-                        rawDefaultValue =
-                            new DecimalConstantAttribute(scale, sign, hi, mid, lo).Value;
+                        rawDefaultValue = new DecimalConstantAttribute(
+                            scale,
+                            sign,
+                            hi,
+                            mid,
+                            lo
+                        ).Value;
                         return true;
                     }
 

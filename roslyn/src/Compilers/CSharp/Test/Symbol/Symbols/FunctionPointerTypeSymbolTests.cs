@@ -65,16 +65,13 @@ class C
 
             var syntaxTree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(syntaxTree);
-            var paramType =
-                syntaxTree
-                    .GetRoot()
-                    .DescendantNodes()
-                    .OfType<MethodDeclarationSyntax>()
-                    .Single()
-                    .ParameterList
-                    .Parameters
-                    .Single()
-                    .Type;
+            var paramType = syntaxTree
+                .GetRoot()
+                .DescendantNodes()
+                .OfType<MethodDeclarationSyntax>()
+                .Single()
+                .ParameterList.Parameters.Single()
+                .Type;
 
             FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
                 model,
@@ -542,8 +539,9 @@ class C
             Assert.Equal(SpecialType.System_Object, fifthParam.Parameters[1].Type.SpecialType);
 
             var sixthParam = getParam(5);
-            var sixthParamParam =
-                ((FunctionPointerTypeSymbol)sixthParam.Parameters.Single().Type).Signature;
+            var sixthParamParam = (
+                (FunctionPointerTypeSymbol)sixthParam.Parameters.Single().Type
+            ).Signature;
             Assert.Equal(t, sixthParamParam.ReturnType);
             Assert.Empty(sixthParamParam.Parameters);
 
@@ -915,16 +913,13 @@ class C
 
             var syntaxTree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(syntaxTree);
-            var paramType =
-                syntaxTree
-                    .GetRoot()
-                    .DescendantNodes()
-                    .OfType<MethodDeclarationSyntax>()
-                    .Single()
-                    .ParameterList
-                    .Parameters
-                    .Single()
-                    .Type;
+            var paramType = syntaxTree
+                .GetRoot()
+                .DescendantNodes()
+                .OfType<MethodDeclarationSyntax>()
+                .Single()
+                .ParameterList.Parameters.Single()
+                .Type;
 
             FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
                 model,
@@ -1463,12 +1458,10 @@ class C
                     }
 
                     Assert.True(
-                        param1
-                            .Type
-                            .Equals(
-                                param2.Type,
-                                TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
-                            )
+                        param1.Type.Equals(
+                            param2.Type,
+                            TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                        )
                     );
                 }
             }
@@ -1579,11 +1572,9 @@ class C
 
             var misplacedDeclaration = (
                 (ArrayTypeSyntax)functionPointerTypeSyntax.ParameterList.Parameters.Single().Type!
-            )
-                .RankSpecifiers
+            ).RankSpecifiers
                 .Single()
-                .Sizes
-                .Single();
+                .Sizes.Single();
 
             var a = (ILocalSymbol)model.GetSymbolInfo(misplacedDeclaration).Symbol!;
             Assert.NotNull(a);
@@ -1782,8 +1773,12 @@ class Program
             var syntaxTree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(syntaxTree);
 
-            var baseNameSyntax =
-                syntaxTree.GetRoot().DescendantNodes().OfType<SimpleBaseTypeSyntax>().Single().Type;
+            var baseNameSyntax = syntaxTree
+                .GetRoot()
+                .DescendantNodes()
+                .OfType<SimpleBaseTypeSyntax>()
+                .Single()
+                .Type;
 
             FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
                 model,
@@ -2313,13 +2308,10 @@ unsafe class C
             );
             Assert.Equal(
                 "System.Runtime.InteropServices.OutAttribute[missing]",
-                ptr.Signature
-                    .Parameters
+                ptr.Signature.Parameters
                     .Single()
-                    .RefCustomModifiers
-                    .Single()
-                    .Modifier
-                    .ToTestDisplayString()
+                    .RefCustomModifiers.Single()
+                    .Modifier.ToTestDisplayString()
             );
         }
 
@@ -3048,15 +3040,13 @@ namespace System
                 {
                     Assert.Equal(
                         expectedConventionEquality,
-                        ptr1.NoRef
-                            .Signature
+                        ptr1.NoRef.Signature
                             .GetCallingConventionModifiers()
                             .SetEquals(ptr2.NoRef.Signature.GetCallingConventionModifiers())
                     );
                     Assert.Equal(
                         expectedConventionEquality,
-                        ptr1.ByRef
-                            .Signature
+                        ptr1.ByRef.Signature
                             .GetCallingConventionModifiers()
                             .SetEquals(ptr2.ByRef.Signature.GetCallingConventionModifiers())
                     );
@@ -3181,15 +3171,13 @@ namespace System
 
                 Assert.Equal(
                     expectedConventionEquality,
-                    ptr1.NoRef
-                        .Signature
+                    ptr1.NoRef.Signature
                         .GetCallingConventionModifiers()
                         .SetEquals(ptr2.NoRef.Signature.GetCallingConventionModifiers())
                 );
                 Assert.Equal(
                     expectedConventionEquality,
-                    ptr1.ByRef
-                        .Signature
+                    ptr1.ByRef.Signature
                         .GetCallingConventionModifiers()
                         .SetEquals(ptr2.ByRef.Signature.GetCallingConventionModifiers())
                 );
@@ -3319,15 +3307,13 @@ namespace System
 
                 Assert.Equal(
                     expectedTypeConventionEquality,
-                    ptr1.NoRef
-                        .Signature
+                    ptr1.NoRef.Signature
                         .GetCallingConventionModifiers()
                         .SetEquals(ptr2.NoRef.Signature.GetCallingConventionModifiers())
                 );
                 Assert.Equal(
                     expectedRefConventionEquality,
-                    ptr1.ByRef
-                        .Signature
+                    ptr1.ByRef.Signature
                         .GetCallingConventionModifiers()
                         .SetEquals(ptr2.ByRef.Signature.GetCallingConventionModifiers())
                 );

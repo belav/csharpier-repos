@@ -61,32 +61,26 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
 
                 if (left is SqlExpression leftSql && right is SqlExpression rightSql)
                 {
-                    return Dependencies
-                        .SqlExpressionFactory
-                        .Convert(
-                            Dependencies
-                                .SqlExpressionFactory
-                                .Function(
-                                    "SUBSTRING",
-                                    new[]
-                                    {
-                                        leftSql,
-                                        Dependencies
-                                            .SqlExpressionFactory
-                                            .Add(
-                                                Dependencies
-                                                    .SqlExpressionFactory
-                                                    .ApplyDefaultTypeMapping(rightSql),
-                                                Dependencies.SqlExpressionFactory.Constant(1)
-                                            ),
-                                        Dependencies.SqlExpressionFactory.Constant(1)
-                                    },
-                                    nullable: true,
-                                    argumentsPropagateNullability: new[] { true, true, true },
-                                    typeof(byte[])
+                    return Dependencies.SqlExpressionFactory.Convert(
+                        Dependencies.SqlExpressionFactory.Function(
+                            "SUBSTRING",
+                            new[]
+                            {
+                                leftSql,
+                                Dependencies.SqlExpressionFactory.Add(
+                                    Dependencies.SqlExpressionFactory.ApplyDefaultTypeMapping(
+                                        rightSql
+                                    ),
+                                    Dependencies.SqlExpressionFactory.Constant(1)
                                 ),
-                            binaryExpression.Type
-                        );
+                                Dependencies.SqlExpressionFactory.Constant(1)
+                            },
+                            nullable: true,
+                            argumentsPropagateNullability: new[] { true, true, true },
+                            typeof(byte[])
+                        ),
+                        binaryExpression.Type
+                    );
                 }
             }
 
@@ -123,20 +117,19 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                 var isBinaryMaxDataType =
                     GetProviderType(sqlExpression) == "varbinary(max)"
                     || sqlExpression is SqlParameterExpression;
-                var dataLengthSqlFunction = Dependencies
-                    .SqlExpressionFactory
-                    .Function(
-                        "DATALENGTH",
-                        new[] { sqlExpression },
-                        nullable: true,
-                        argumentsPropagateNullability: new[] { true },
-                        isBinaryMaxDataType ? typeof(long) : typeof(int)
-                    );
+                var dataLengthSqlFunction = Dependencies.SqlExpressionFactory.Function(
+                    "DATALENGTH",
+                    new[] { sqlExpression },
+                    nullable: true,
+                    argumentsPropagateNullability: new[] { true },
+                    isBinaryMaxDataType ? typeof(long) : typeof(int)
+                );
 
                 return isBinaryMaxDataType
-                  ? (Expression)Dependencies
-                        .SqlExpressionFactory
-                        .Convert(dataLengthSqlFunction, typeof(int))
+                  ? (Expression)Dependencies.SqlExpressionFactory.Convert(
+                        dataLengthSqlFunction,
+                        typeof(int)
+                    )
                   : dataLengthSqlFunction;
             }
 
@@ -150,19 +143,15 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public override SqlExpression? TranslateLongCount(SqlExpression sqlExpression) =>
-            Dependencies
-                .SqlExpressionFactory
-                .ApplyDefaultTypeMapping(
-                    Dependencies
-                        .SqlExpressionFactory
-                        .Function(
-                            "COUNT_BIG",
-                            new[] { sqlExpression },
-                            nullable: false,
-                            argumentsPropagateNullability: new[] { false },
-                            typeof(long)
-                        )
-                );
+            Dependencies.SqlExpressionFactory.ApplyDefaultTypeMapping(
+                Dependencies.SqlExpressionFactory.Function(
+                    "COUNT_BIG",
+                    new[] { sqlExpression },
+                    nullable: false,
+                    argumentsPropagateNullability: new[] { false },
+                    typeof(long)
+                )
+            );
 
         private static string? GetProviderType(SqlExpression expression) =>
             expression.TypeMapping?.StoreType;

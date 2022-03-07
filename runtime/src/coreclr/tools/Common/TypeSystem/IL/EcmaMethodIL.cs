@@ -27,8 +27,9 @@ namespace Internal.IL
 
         public static EcmaMethodIL Create(EcmaMethod method)
         {
-            var rva =
-                method.MetadataReader.GetMethodDefinition(method.Handle).RelativeVirtualAddress;
+            var rva = method.MetadataReader
+                .GetMethodDefinition(method.Handle)
+                .RelativeVirtualAddress;
             if (rva == 0)
                 return null;
             return new EcmaMethodIL(method, rva);

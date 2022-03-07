@@ -31,11 +31,9 @@ namespace Sockets.FunctionalTests
                                     app.Run(
                                         context =>
                                         {
-                                            var socket =
-                                                context
-                                                    .Features
-                                                    .Get<IConnectionSocketFeature>()
-                                                    .Socket;
+                                            var socket = context.Features
+                                                .Get<IConnectionSocketFeature>()
+                                                .Socket;
                                             Assert.NotNull(socket);
                                             Assert.Equal(ProtocolType.Tcp, socket.ProtocolType);
                                             var ip = (IPEndPoint)socket.RemoteEndPoint;

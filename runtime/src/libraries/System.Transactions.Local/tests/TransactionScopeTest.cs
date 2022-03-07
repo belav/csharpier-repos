@@ -82,8 +82,10 @@ namespace System.Transactions.Tests
                     {
                         scope.Complete();
                         /* Can't access ambient transaction after scope.Complete */
-                        TransactionStatus status =
-                            Transaction.Current.TransactionInformation.Status;
+                        TransactionStatus status = Transaction
+                            .Current
+                            .TransactionInformation
+                            .Status;
                     }
                 }
             );

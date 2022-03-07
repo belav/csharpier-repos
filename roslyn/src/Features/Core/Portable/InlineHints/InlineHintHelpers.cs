@@ -40,10 +40,9 @@ namespace Microsoft.CodeAnalysis.InlineHints
                 .GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
 
-            var symbol =
-                symbolKey
-                    .Resolve(semanticModel.Compilation, cancellationToken: cancellationToken)
-                    .Symbol;
+            var symbol = symbolKey
+                .Resolve(semanticModel.Compilation, cancellationToken: cancellationToken)
+                .Symbol;
             if (symbol != null)
             {
                 var symbolDisplayService =

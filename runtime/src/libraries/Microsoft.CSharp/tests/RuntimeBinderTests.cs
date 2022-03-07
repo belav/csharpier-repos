@@ -87,20 +87,16 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
             // make a callsite as if it is contained inside "Microsoft.CSharp.RuntimeBinder.RuntimeBinderException"
             MySite.mySite = CallSite<Action<CallSite, object>>.Create(
-                Microsoft
-                    .CSharp
-                    .RuntimeBinder
-                    .Binder
-                    .InvokeMember(
-                        CSharpBinderFlags.ResultDiscarded,
-                        "Foo",
-                        null,
-                        typeof(Microsoft.CSharp.RuntimeBinder.RuntimeBinderException),
-                        new CSharpArgumentInfo[]
-                        {
-                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
-                        }
-                    )
+                Microsoft.CSharp.RuntimeBinder.Binder.InvokeMember(
+                    CSharpBinderFlags.ResultDiscarded,
+                    "Foo",
+                    null,
+                    typeof(Microsoft.CSharp.RuntimeBinder.RuntimeBinderException),
+                    new CSharpArgumentInfo[]
+                    {
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                    }
+                )
             );
 
             MySite.mySite.Target(MySite.mySite, typed);
@@ -110,20 +106,16 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
             // make a callsite as if it is contained inside "System.Exception"
             MySite.mySite = CallSite<Action<CallSite, object>>.Create(
-                Microsoft
-                    .CSharp
-                    .RuntimeBinder
-                    .Binder
-                    .InvokeMember(
-                        CSharpBinderFlags.ResultDiscarded,
-                        "Foo",
-                        null,
-                        typeof(System.Exception),
-                        new CSharpArgumentInfo[]
-                        {
-                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
-                        }
-                    )
+                Microsoft.CSharp.RuntimeBinder.Binder.InvokeMember(
+                    CSharpBinderFlags.ResultDiscarded,
+                    "Foo",
+                    null,
+                    typeof(System.Exception),
+                    new CSharpArgumentInfo[]
+                    {
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                    }
+                )
             );
 
             // call should fail because "Foo" is internal to the calling context.
@@ -356,8 +348,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         public void AmbiguousInterfaceInheritedMethodError()
         {
             ICounterBoth icb = null; // Error on ambiguity should happen before error on null.
-            string message =
-                Assert.Throws<RuntimeBinderException>(() => icb.Count((dynamic)new int[3])).Message;
+            string message = Assert
+                .Throws<RuntimeBinderException>(() => icb.Count((dynamic)new int[3]))
+                .Message;
             // The call is ambiguous between the following methods or properties:
             // 'Microsoft.CSharp.RuntimeBinder.Tests.RuntimeBinderTests.ICounter1.Count(System.Collections.ICollection)'
             // and 'Microsoft.CSharp.RuntimeBinder.Tests.RuntimeBinderTests.ICounter2.Count(System.Collections.ICollection)'
@@ -394,12 +387,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                     )
                 );
             Func<CallSite, ICounterBoth, int, object> target0 = compileTimeTypeValueSetter.Target;
-            string message =
-                Assert
-                    .Throws<RuntimeBinderException>(
-                        () => target0(compileTimeTypeValueSetter, null, 2)
-                    )
-                    .Message;
+            string message = Assert
+                .Throws<RuntimeBinderException>(() => target0(compileTimeTypeValueSetter, null, 2))
+                .Message;
             // Ambiguity between 'Microsoft.CSharp.RuntimeBinder.Tests.RuntimeBinderTests.ICounter1.ExplicitCount'
             // and 'Microsoft.CSharp.RuntimeBinder.Tests.RuntimeBinderTests.ICounter2.ExplicitCount'
             Assert.Contains(

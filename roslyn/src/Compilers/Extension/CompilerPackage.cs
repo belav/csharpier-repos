@@ -63,12 +63,10 @@ namespace Roslyn.Compilers.Extension
                         .ProjectCollection
                         .GlobalProjectCollection
                         .DisableMarkDirty = true;
-                    Microsoft
-                        .Build
-                        .Evaluation
-                        .ProjectCollection
-                        .GlobalProjectCollection
-                        .SetGlobalProperty("RoslynHive", RoslynHive);
+                    Microsoft.Build.Evaluation.ProjectCollection.GlobalProjectCollection.SetGlobalProperty(
+                        "RoslynHive",
+                        RoslynHive
+                    );
                 }
                 finally
                 {

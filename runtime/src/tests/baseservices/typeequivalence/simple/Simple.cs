@@ -139,8 +139,9 @@ public class Simple
     {
         Console.WriteLine($"{nameof(CallSparseInterface)}");
 
-        int sparseTypeMethodCount =
-            typeof(ISparseType).GetMethods(BindingFlags.Public | BindingFlags.Instance).Length;
+        int sparseTypeMethodCount = typeof(ISparseType)
+            .GetMethods(BindingFlags.Public | BindingFlags.Instance)
+            .Length;
         Assert.Equal(2, sparseTypeMethodCount);
 
         var sparseType = (ISparseType)SparseTest.Create();

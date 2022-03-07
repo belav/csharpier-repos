@@ -81,8 +81,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                 {
                     cancellationToken.ThrowIfCancellationRequested();
 
-                    var newSymbol =
-                        semanticModel.GetSymbolInfo(syntaxNode, cancellationToken).Symbol;
+                    var newSymbol = semanticModel
+                        .GetSymbolInfo(syntaxNode, cancellationToken)
+                        .Symbol;
                     if (
                         newSymbol != null
                         && newSymbol is IMethodSymbol

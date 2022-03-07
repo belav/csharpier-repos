@@ -61,8 +61,7 @@ namespace Microsoft.CodeAnalysis.SimplifyTypeNames
                 helpLinkUri: DiagnosticHelper.GetHelpLinkForDiagnosticId(
                     IDEDiagnosticIds.SimplifyNamesDiagnosticId
                 ),
-                customTags: DiagnosticCustomTags
-                    .Unnecessary
+                customTags: DiagnosticCustomTags.Unnecessary
                     .Concat(EnforceOnBuildValues.SimplifyNames.ToCustomTag())
                     .ToArray()
             );
@@ -84,8 +83,7 @@ namespace Microsoft.CodeAnalysis.SimplifyTypeNames
                 helpLinkUri: DiagnosticHelper.GetHelpLinkForDiagnosticId(
                     IDEDiagnosticIds.SimplifyMemberAccessDiagnosticId
                 ),
-                customTags: DiagnosticCustomTags
-                    .Unnecessary
+                customTags: DiagnosticCustomTags.Unnecessary
                     .Concat(EnforceOnBuildValues.SimplifyMemberAccess.ToCustomTag())
                     .ToArray()
             );
@@ -101,8 +99,7 @@ namespace Microsoft.CodeAnalysis.SimplifyTypeNames
                 helpLinkUri: DiagnosticHelper.GetHelpLinkForDiagnosticId(
                     IDEDiagnosticIds.PreferBuiltInOrFrameworkTypeDiagnosticId
                 ),
-                customTags: DiagnosticCustomTags
-                    .Unnecessary
+                customTags: DiagnosticCustomTags.Unnecessary
                     .Concat(EnforceOnBuildValues.PreferBuiltInOrFrameworkType.ToCustomTag())
                     .ToArray()
             );
@@ -131,20 +128,18 @@ namespace Microsoft.CodeAnalysis.SimplifyTypeNames
 
         public bool OpenFileOnly(OptionSet options)
         {
-            var preferTypeKeywordInDeclarationOption =
-                options
-                    .GetOption(
-                        CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration,
-                        GetLanguageName()
-                    )!
-                    .Notification;
-            var preferTypeKeywordInMemberAccessOption =
-                options
-                    .GetOption(
-                        CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
-                        GetLanguageName()
-                    )!
-                    .Notification;
+            var preferTypeKeywordInDeclarationOption = options
+                .GetOption(
+                    CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration,
+                    GetLanguageName()
+                )!
+                .Notification;
+            var preferTypeKeywordInMemberAccessOption = options
+                .GetOption(
+                    CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
+                    GetLanguageName()
+                )!
+                .Notification;
 
             return !(
                 preferTypeKeywordInDeclarationOption == NotificationOption2.Warning

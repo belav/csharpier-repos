@@ -38,23 +38,19 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             //// clean up intermittent history - we do the data fixup in 2 steps (due to cycle)
             //// so we want to remove the temporary states, so that further manipulation is easier
-            context
-                .Database
-                .ExecuteSqlRaw("ALTER TABLE [LocustLeaders] SET (SYSTEM_VERSIONING = OFF)");
+            context.Database.ExecuteSqlRaw(
+                "ALTER TABLE [LocustLeaders] SET (SYSTEM_VERSIONING = OFF)"
+            );
             context.Database.ExecuteSqlRaw("DELETE FROM [LocustLeadersHistory]");
-            context
-                .Database
-                .ExecuteSqlRaw(
-                    "ALTER TABLE [LocustLeaders] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [dbo].[LocustLeadersHistory]))"
-                );
+            context.Database.ExecuteSqlRaw(
+                "ALTER TABLE [LocustLeaders] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [dbo].[LocustLeadersHistory]))"
+            );
 
             context.Database.ExecuteSqlRaw("ALTER TABLE [Missions] SET (SYSTEM_VERSIONING = OFF)");
             context.Database.ExecuteSqlRaw("DELETE FROM [MissionsHistory]");
-            context
-                .Database
-                .ExecuteSqlRaw(
-                    "ALTER TABLE [Missions] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [dbo].[MissionsHistory]))"
-                );
+            context.Database.ExecuteSqlRaw(
+                "ALTER TABLE [Missions] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [dbo].[MissionsHistory]))"
+            );
 
             context.RemoveRange(
                 context.ChangeTracker.Entries().Where(e => e.Entity is City).Select(e => e.Entity)
@@ -66,15 +62,13 @@ namespace Microsoft.EntityFrameworkCore.Query
                 context.ChangeTracker.Entries().Where(e => e.Entity is Gear).Select(e => e.Entity)
             );
             context.RemoveRange(
-                context
-                    .ChangeTracker
+                context.ChangeTracker
                     .Entries()
                     .Where(e => e.Entity is LocustHighCommand)
                     .Select(e => e.Entity)
             );
             context.RemoveRange(
-                context
-                    .ChangeTracker
+                context.ChangeTracker
                     .Entries()
                     .Where(e => e.Entity is Mission)
                     .Select(e => e.Entity)
@@ -83,8 +77,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 context.ChangeTracker.Entries().Where(e => e.Entity is Squad).Select(e => e.Entity)
             );
             context.RemoveRange(
-                context
-                    .ChangeTracker
+                context.ChangeTracker
                     .Entries()
                     .Where(e => e.Entity is SquadMission)
                     .Select(e => e.Entity)
@@ -95,15 +88,13 @@ namespace Microsoft.EntityFrameworkCore.Query
             context.SaveChanges();
 
             context.RemoveRange(
-                context
-                    .ChangeTracker
+                context.ChangeTracker
                     .Entries()
                     .Where(e => e.Entity is Faction)
                     .Select(e => e.Entity)
             );
             context.RemoveRange(
-                context
-                    .ChangeTracker
+                context.ChangeTracker
                     .Entries()
                     .Where(e => e.Entity is LocustLeader)
                     .Select(e => e.Entity)
@@ -112,14 +103,12 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             // clean up Faction history
             context.Database.ExecuteSqlRaw("ALTER TABLE [Factions] SET (SYSTEM_VERSIONING = OFF)");
-            context
-                .Database
-                .ExecuteSqlRaw("DELETE FROM [FactionsHistory] WHERE CommanderName IS NULL");
-            context
-                .Database
-                .ExecuteSqlRaw(
-                    "ALTER TABLE [Factions] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [dbo].[FactionsHistory]))"
-                );
+            context.Database.ExecuteSqlRaw(
+                "DELETE FROM [FactionsHistory] WHERE CommanderName IS NULL"
+            );
+            context.Database.ExecuteSqlRaw(
+                "ALTER TABLE [Factions] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [dbo].[FactionsHistory]))"
+            );
 
             var tableNames = new List<string>
             {
@@ -137,34 +126,26 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             foreach (var tableName in tableNames)
             {
-                context
-                    .Database
-                    .ExecuteSqlRaw($"ALTER TABLE [{tableName}] SET (SYSTEM_VERSIONING = OFF)");
-                context
-                    .Database
-                    .ExecuteSqlRaw($"ALTER TABLE [{tableName}] DROP PERIOD FOR SYSTEM_TIME");
+                context.Database.ExecuteSqlRaw(
+                    $"ALTER TABLE [{tableName}] SET (SYSTEM_VERSIONING = OFF)"
+                );
+                context.Database.ExecuteSqlRaw(
+                    $"ALTER TABLE [{tableName}] DROP PERIOD FOR SYSTEM_TIME"
+                );
 
-                context
-                    .Database
-                    .ExecuteSqlRaw(
-                        $"UPDATE [{tableName + "History"}] SET PeriodStart = '2000-01-01T01:00:00.0000000Z'"
-                    );
-                context
-                    .Database
-                    .ExecuteSqlRaw(
-                        $"UPDATE [{tableName + "History"}] SET PeriodEnd = '2020-07-01T07:00:00.0000000Z'"
-                    );
+                context.Database.ExecuteSqlRaw(
+                    $"UPDATE [{tableName + "History"}] SET PeriodStart = '2000-01-01T01:00:00.0000000Z'"
+                );
+                context.Database.ExecuteSqlRaw(
+                    $"UPDATE [{tableName + "History"}] SET PeriodEnd = '2020-07-01T07:00:00.0000000Z'"
+                );
 
-                context
-                    .Database
-                    .ExecuteSqlRaw(
-                        $"ALTER TABLE [{tableName}] ADD PERIOD FOR SYSTEM_TIME ([PeriodStart], [PeriodEnd])"
-                    );
-                context
-                    .Database
-                    .ExecuteSqlRaw(
-                        $"ALTER TABLE [{tableName}] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [dbo].[{tableName + "History"}]))"
-                    );
+                context.Database.ExecuteSqlRaw(
+                    $"ALTER TABLE [{tableName}] ADD PERIOD FOR SYSTEM_TIME ([PeriodStart], [PeriodEnd])"
+                );
+                context.Database.ExecuteSqlRaw(
+                    $"ALTER TABLE [{tableName}] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [dbo].[{tableName + "History"}]))"
+                );
             }
         }
     }

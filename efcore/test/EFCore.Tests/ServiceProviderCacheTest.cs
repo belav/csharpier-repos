@@ -235,31 +235,35 @@ namespace Microsoft.EntityFrameworkCore
             {
                 var loggerFactory = new ListLoggerFactory();
 
-                var config1 =
-                    new DbContextOptionsBuilder(CreateOptions<CoreOptionsExtension>(loggerFactory))
-                        .EnableDetailedErrors()
-                        .EnableSensitiveDataLogging()
-                        .ConfigureWarnings(w => w.Throw(CoreEventId.CascadeDelete))
-                        .Options;
+                var config1 = new DbContextOptionsBuilder(
+                    CreateOptions<CoreOptionsExtension>(loggerFactory)
+                )
+                    .EnableDetailedErrors()
+                    .EnableSensitiveDataLogging()
+                    .ConfigureWarnings(w => w.Throw(CoreEventId.CascadeDelete))
+                    .Options;
 
-                var config2 =
-                    new DbContextOptionsBuilder(CreateOptions<CoreOptionsExtension>(loggerFactory))
-                        .EnableDetailedErrors()
-                        .EnableSensitiveDataLogging()
-                        .ConfigureWarnings(w => w.Throw(CoreEventId.CascadeDeleteOrphan))
-                        .Options;
+                var config2 = new DbContextOptionsBuilder(
+                    CreateOptions<CoreOptionsExtension>(loggerFactory)
+                )
+                    .EnableDetailedErrors()
+                    .EnableSensitiveDataLogging()
+                    .ConfigureWarnings(w => w.Throw(CoreEventId.CascadeDeleteOrphan))
+                    .Options;
 
-                var config3 =
-                    new DbContextOptionsBuilder(CreateOptions<CoreOptionsExtension>(loggerFactory))
-                        .EnableDetailedErrors()
-                        .ConfigureWarnings(w => w.Throw(CoreEventId.CascadeDelete))
-                        .Options;
+                var config3 = new DbContextOptionsBuilder(
+                    CreateOptions<CoreOptionsExtension>(loggerFactory)
+                )
+                    .EnableDetailedErrors()
+                    .ConfigureWarnings(w => w.Throw(CoreEventId.CascadeDelete))
+                    .Options;
 
-                var config4 =
-                    new DbContextOptionsBuilder(CreateOptions<CoreOptionsExtension>(loggerFactory))
-                        .EnableSensitiveDataLogging()
-                        .ConfigureWarnings(w => w.Throw(CoreEventId.ContextDisposed))
-                        .Options;
+                var config4 = new DbContextOptionsBuilder(
+                    CreateOptions<CoreOptionsExtension>(loggerFactory)
+                )
+                    .EnableSensitiveDataLogging()
+                    .ConfigureWarnings(w => w.Throw(CoreEventId.ContextDisposed))
+                    .Options;
 
                 var cache = new ServiceProviderCache();
 

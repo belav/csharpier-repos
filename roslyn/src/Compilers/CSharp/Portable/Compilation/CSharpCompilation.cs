@@ -1035,8 +1035,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (!externalSyntaxTrees.Contains(tree))
                 {
                     // Check to make sure this is not a #load'ed tree.
-                    var loadedSyntaxTreeMap =
-                        syntaxAndDeclarations.GetLazyState().LoadedSyntaxTreeMap;
+                    var loadedSyntaxTreeMap = syntaxAndDeclarations
+                        .GetLazyState()
+                        .LoadedSyntaxTreeMap;
                     if (SyntaxAndDeclarationManager.IsLoadedSyntaxTree(tree, loadedSyntaxTreeMap))
                     {
                         throw new ArgumentException(
@@ -1927,10 +1928,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                         entryPoint = new EntryPoint(
                             entryPoint.MethodSymbol,
                             new ImmutableBindingDiagnostic<AssemblySymbol>(
-                                entryPoint
-                                    .Diagnostics
-                                    .Diagnostics
-                                    .Concat(diagnostics.ToReadOnlyAndFree()),
+                                entryPoint.Diagnostics.Diagnostics.Concat(
+                                    diagnostics.ToReadOnlyAndFree()
+                                ),
                                 entryPoint.Diagnostics.Dependencies
                             )
                         );
@@ -2696,16 +2696,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             Debug.Assert(
-                System
-                    .Runtime
-                    .CompilerServices
-                    .Unsafe
-                    .AreSame(
-                        ref cachedBinderFactories,
-                        ref ignoreAccessibility
-                          ? ref _ignoreAccessibilityBinderFactories
-                          : ref _binderFactories
-                    )
+                System.Runtime.CompilerServices.Unsafe.AreSame(
+                    ref cachedBinderFactories,
+                    ref ignoreAccessibility
+                      ? ref _ignoreAccessibilityBinderFactories
+                      : ref _binderFactories
+                )
             );
 
             var treeNum = GetSyntaxTreeOrdinal(syntaxTree);
@@ -2862,8 +2858,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 var node = info.Tree
                                     .GetRoot(cancellationToken)
                                     .FindToken(info.Span.Start, findInsideTrivia: false)
-                                    .Parent!
-                                    .FirstAncestorOrSelf<ExternAliasDirectiveSyntax>();
+                                    .Parent!.FirstAncestorOrSelf<ExternAliasDirectiveSyntax>();
 
                                 if (
                                     node is object
@@ -3298,8 +3293,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 syntaxAndDeclarations
                     .GetLazyState()
-                    .LoadDirectiveMap
-                    .TryGetValue(syntaxTree, out loadDirectives)
+                    .LoadDirectiveMap.TryGetValue(syntaxTree, out loadDirectives)
             )
             {
                 Debug.Assert(!loadDirectives.IsEmpty);
@@ -4695,12 +4689,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (!elementNullableAnnotations.IsDefault)
             {
                 tupleType = tupleType.WithElementTypes(
-                    tupleType
-                        .TupleElementTypesWithAnnotations
-                        .ZipAsArray(
-                            elementNullableAnnotations,
-                            (t, a) => TypeWithAnnotations.Create(t.Type, a.ToInternalAnnotation())
-                        )
+                    tupleType.TupleElementTypesWithAnnotations.ZipAsArray(
+                        elementNullableAnnotations,
+                        (t, a) => TypeWithAnnotations.Create(t.Type, a.ToInternalAnnotation())
+                    )
                 );
             }
             return tupleType.GetPublicSymbol();
@@ -4984,9 +4976,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     bool value =
                         SyntaxTrees
                             .FirstOrDefault()
-                            ?.Options
-                            ?.Features
-                            ?.ContainsKey("nullablePublicOnly") == true;
+                            ?.Options?.Features?.ContainsKey("nullablePublicOnly") == true;
                     _lazyEmitNullablePublicOnly = value.ToThreeState();
                 }
                 return _lazyEmitNullablePublicOnly.Value();
@@ -5330,8 +5320,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (mergedNamespace != null)
                     {
                         _cache[
-                            mergedNamespace
-                                .ConstituentNamespaces
+                            mergedNamespace.ConstituentNamespaces
                                 .OfType<SourceNamespaceSymbol>()
                                 .First()
                                 .MergedDeclaration

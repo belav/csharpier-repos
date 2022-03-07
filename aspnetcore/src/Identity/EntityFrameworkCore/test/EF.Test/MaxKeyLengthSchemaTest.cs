@@ -37,17 +37,14 @@ public class MaxKeyLengthSchemaTest : IClassFixture<ScratchDatabaseFixture>
         _builder = new ApplicationBuilder(services.BuildServiceProvider());
 
         using (
-            var scope = _builder
-                .ApplicationServices
+            var scope = _builder.ApplicationServices
                 .GetRequiredService<IServiceScopeFactory>()
                 .CreateScope()
         )
         {
-            scope
-                .ServiceProvider
+            scope.ServiceProvider
                 .GetRequiredService<VerstappenDbContext>()
-                .Database
-                .EnsureCreated();
+                .Database.EnsureCreated();
         }
     }
 
@@ -61,8 +58,7 @@ public class MaxKeyLengthSchemaTest : IClassFixture<ScratchDatabaseFixture>
     public void EnsureDefaultSchema()
     {
         using (
-            var scope = _builder
-                .ApplicationServices
+            var scope = _builder.ApplicationServices
                 .GetRequiredService<IServiceScopeFactory>()
                 .CreateScope()
         )

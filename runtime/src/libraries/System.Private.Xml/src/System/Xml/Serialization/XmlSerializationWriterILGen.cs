@@ -1205,10 +1205,9 @@ namespace System.Xml.Serialization
                     ilg.Load(null);
                 else
                 {
-                    System
-                        .Diagnostics
-                        .Debug
-                        .Assert(xmlnsSource.StartsWith("o.@", StringComparison.Ordinal));
+                    System.Diagnostics.Debug.Assert(
+                        xmlnsSource.StartsWith("o.@", StringComparison.Ordinal)
+                    );
                     ILGenLoad(xmlnsSource);
                 }
 
@@ -1817,9 +1816,10 @@ namespace System.Xml.Serialization
                 }
                 else
                 {
-                    getEnumeratorMethod = arrayTypeDesc
-                        .Type!
-                        .GetMethod("GetEnumerator", Type.EmptyTypes)!;
+                    getEnumeratorMethod = arrayTypeDesc.Type!.GetMethod(
+                        "GetEnumerator",
+                        Type.EmptyTypes
+                    )!;
                 }
                 ilg.Call(getEnumeratorMethod);
                 ilg.ConvertValue(getEnumeratorMethod.ReturnType, typeof(IEnumerator));
@@ -2315,13 +2315,11 @@ namespace System.Xml.Serialization
                 switch (mapping.TypeDesc!.Kind)
                 {
                     case TypeKind.Node:
-                        MethodInfo WriteTo = source
-                            .Type!
-                            .GetMethod(
-                                "WriteTo",
-                                CodeGenerator.InstanceBindingFlags,
-                                new Type[] { typeof(XmlWriter) }
-                            )!;
+                        MethodInfo WriteTo = source.Type!.GetMethod(
+                            "WriteTo",
+                            CodeGenerator.InstanceBindingFlags,
+                            new Type[] { typeof(XmlWriter) }
+                        )!;
                         MethodInfo XmlSerializationWriter_get_Writer =
                             typeof(XmlSerializationWriter).GetMethod(
                                 "get_Writer",
@@ -2360,15 +2358,11 @@ namespace System.Xml.Serialization
             {
                 if (source.Type == element.Mapping.TypeDesc!.Type)
                 {
-                    MethodInfo Nullable_get_HasValue = element
-                        .Mapping
-                        .TypeDesc
-                        .Type!
-                        .GetMethod(
-                            "get_HasValue",
-                            CodeGenerator.InstanceBindingFlags,
-                            Type.EmptyTypes
-                        )!;
+                    MethodInfo Nullable_get_HasValue = element.Mapping.TypeDesc.Type!.GetMethod(
+                        "get_HasValue",
+                        CodeGenerator.InstanceBindingFlags,
+                        Type.EmptyTypes
+                    )!;
                     source.LoadAddress(element.Mapping.TypeDesc.Type);
                     ilg.Call(Nullable_get_HasValue);
                 }
@@ -3154,8 +3148,7 @@ namespace System.Xml.Serialization
                     {
                         string[] vars = initValue.Source.Split('.');
                         object fixup = initValue.ILG.GetVariable(vars[0]);
-                        PropertyInfo propInfo = initValue
-                            .ILG
+                        PropertyInfo propInfo = initValue.ILG
                             .GetVariableType(fixup)
                             .GetProperty(vars[1])!;
                         initValue.ILG.LoadMember(fixup, propInfo);
@@ -3165,9 +3158,10 @@ namespace System.Xml.Serialization
                     {
                         object sVar = initValue.ILG.GetVariable(initValue.Arg);
                         initValue.ILG.Load(sVar);
-                        initValue
-                            .ILG
-                            .ConvertValue(initValue.ILG.GetVariableType(sVar), localA.LocalType);
+                        initValue.ILG.ConvertValue(
+                            initValue.ILG.GetVariableType(sVar),
+                            localA.LocalType
+                        );
                     }
                 }
                 initValue.ILG.Stloc(localA);

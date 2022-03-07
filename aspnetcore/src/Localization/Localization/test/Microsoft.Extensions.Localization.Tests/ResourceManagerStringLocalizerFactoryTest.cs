@@ -279,12 +279,12 @@ public class ResourceManagerStringLocalizerFactoryTest
             localizationOptions: options.Object,
             loggerFactory: loggerFactory
         );
-        var location1 =
-            new AssemblyName(typeof(ResourceManagerStringLocalizer).Assembly.FullName).Name;
-        var location2 =
-            new AssemblyName(
-                typeof(ResourceManagerStringLocalizerFactoryTest).Assembly.FullName
-            ).Name;
+        var location1 = new AssemblyName(
+            typeof(ResourceManagerStringLocalizer).Assembly.FullName
+        ).Name;
+        var location2 = new AssemblyName(
+            typeof(ResourceManagerStringLocalizerFactoryTest).Assembly.FullName
+        ).Name;
 
         // Act
         var result1 = factory.Create("baseName", location1);

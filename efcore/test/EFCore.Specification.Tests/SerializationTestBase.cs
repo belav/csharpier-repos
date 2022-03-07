@@ -34,8 +34,7 @@ namespace Microsoft.EntityFrameworkCore
         {
             using var context = Fixture.CreateContext();
 
-            var teams = context
-                .Teams
+            var teams = context.Teams
                 .Include(e => e.Drivers)
                 .Include(e => e.Engine)
                 .ThenInclude(e => e.EngineSupplier)

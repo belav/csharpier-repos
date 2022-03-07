@@ -31,8 +31,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
         {
             var projectId = ProjectId.CreateNewId();
 
-            var project = workspace
-                .CurrentSolution
+            var project = workspace.CurrentSolution
                 .AddProject(projectId, languageName, $"{languageName}.dll", languageName)
                 .GetProject(projectId);
 
@@ -44,12 +43,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
             var annotatedDocument = document.WithSyntaxRoot(
                 document
                     .GetSyntaxRootAsync()
-                    .Result
-                    .WithAdditionalAnnotations(Simplification.Simplifier.Annotation)
+                    .Result.WithAdditionalAnnotations(Simplification.Simplifier.Annotation)
             );
 
-            var simplifiedDocument =
-                Simplification.Simplifier.ReduceAsync(annotatedDocument).Result;
+            var simplifiedDocument = Simplification.Simplifier
+                .ReduceAsync(annotatedDocument)
+                .Result;
 
             var rootNode = simplifiedDocument.GetSyntaxRootAsync().Result;
 
@@ -97,8 +96,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
 
             if (cs != null || csSimple != null)
             {
-                var codeDefFactory = workspace
-                    .Services
+                var codeDefFactory = workspace.Services
                     .GetLanguageServices(LanguageNames.CSharp)
                     .GetService<SyntaxGenerator>();
 
@@ -117,12 +115,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
                         WrapExpressionInBoilerplate(node, codeDefFactory),
                         LanguageNames.CSharp
                     );
-                    var expression =
-                        simplifiedRootNode
-                            .DescendantNodes()
-                            .OfType<EqualsValueClauseSyntax>()
-                            .First()
-                            .Value;
+                    var expression = simplifiedRootNode
+                        .DescendantNodes()
+                        .OfType<EqualsValueClauseSyntax>()
+                        .First()
+                        .Value;
 
                     TokenUtilities.AssertTokensEqual(
                         csSimple,
@@ -134,8 +131,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
 
             if (vb != null || vbSimple != null)
             {
-                var codeDefFactory = workspace
-                    .Services
+                var codeDefFactory = workspace.Services
                     .GetLanguageServices(LanguageNames.VisualBasic)
                     .GetService<SyntaxGenerator>();
 
@@ -158,12 +154,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
                         WrapExpressionInBoilerplate(node, codeDefFactory),
                         LanguageNames.VisualBasic
                     );
-                    var expression =
-                        simplifiedRootNode
-                            .DescendantNodes()
-                            .OfType<EqualsValueSyntax>()
-                            .First()
-                            .Value;
+                    var expression = simplifiedRootNode
+                        .DescendantNodes()
+                        .OfType<EqualsValueSyntax>()
+                        .First()
+                        .Value;
 
                     TokenUtilities.AssertTokensEqual(
                         vbSimple,

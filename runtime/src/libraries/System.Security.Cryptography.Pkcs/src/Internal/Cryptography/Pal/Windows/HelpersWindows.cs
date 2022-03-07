@@ -40,9 +40,13 @@ namespace Internal.Cryptography.Pal.Windows
         {
             int cbData = 0;
             if (
-                !Interop
-                    .Crypt32
-                    .CryptMsgGetParam(hCryptMsg, paramType, index, IntPtr.Zero, ref cbData)
+                !Interop.Crypt32.CryptMsgGetParam(
+                    hCryptMsg,
+                    paramType,
+                    index,
+                    IntPtr.Zero,
+                    ref cbData
+                )
             )
                 throw Marshal.GetLastWin32Error().ToCryptographicException();
 
@@ -50,9 +54,13 @@ namespace Internal.Cryptography.Pal.Windows
             fixed (byte* pvData = data)
             {
                 if (
-                    !Interop
-                        .Crypt32
-                        .CryptMsgGetParam(hCryptMsg, paramType, index, pvData, ref cbData)
+                    !Interop.Crypt32.CryptMsgGetParam(
+                        hCryptMsg,
+                        paramType,
+                        index,
+                        pvData,
+                        ref cbData
+                    )
                 )
                     throw Marshal.GetLastWin32Error().ToCryptographicException();
             }
@@ -69,23 +77,25 @@ namespace Internal.Cryptography.Pal.Windows
         {
             int cbData = 0;
             if (
-                !Interop
-                    .Crypt32
-                    .CryptMsgGetParam(hCryptMsg, paramType, index, IntPtr.Zero, ref cbData)
+                !Interop.Crypt32.CryptMsgGetParam(
+                    hCryptMsg,
+                    paramType,
+                    index,
+                    IntPtr.Zero,
+                    ref cbData
+                )
             )
                 throw Marshal.GetLastWin32Error().ToCryptographicException();
 
             SafeHandle pvData = SafeHeapAllocHandle.Alloc(cbData);
             if (
-                !Interop
-                    .Crypt32
-                    .CryptMsgGetParam(
-                        hCryptMsg,
-                        paramType,
-                        index,
-                        pvData.DangerousGetHandle(),
-                        ref cbData
-                    )
+                !Interop.Crypt32.CryptMsgGetParam(
+                    hCryptMsg,
+                    paramType,
+                    index,
+                    pvData.DangerousGetHandle(),
+                    ref cbData
+                )
             )
                 throw Marshal.GetLastWin32Error().ToCryptographicException();
 
@@ -108,15 +118,13 @@ namespace Internal.Cryptography.Pal.Windows
             int cbData = sizeof(CryptMsgType);
             CryptMsgType cryptMsgType;
             if (
-                !Interop
-                    .Crypt32
-                    .CryptMsgGetParam(
-                        hCryptMsg,
-                        CryptMsgParamType.CMSG_TYPE_PARAM,
-                        0,
-                        out cryptMsgType,
-                        ref cbData
-                    )
+                !Interop.Crypt32.CryptMsgGetParam(
+                    hCryptMsg,
+                    CryptMsgParamType.CMSG_TYPE_PARAM,
+                    0,
+                    out cryptMsgType,
+                    ref cbData
+                )
             )
                 throw Marshal.GetLastWin32Error().ToCryptographicException();
             return cryptMsgType;
@@ -127,15 +135,13 @@ namespace Internal.Cryptography.Pal.Windows
             int cbData = sizeof(int);
             int version;
             if (
-                !Interop
-                    .Crypt32
-                    .CryptMsgGetParam(
-                        hCryptMsg,
-                        CryptMsgParamType.CMSG_VERSION_PARAM,
-                        0,
-                        out version,
-                        ref cbData
-                    )
+                !Interop.Crypt32.CryptMsgGetParam(
+                    hCryptMsg,
+                    CryptMsgParamType.CMSG_VERSION_PARAM,
+                    0,
+                    out version,
+                    ref cbData
+                )
             )
                 throw Marshal.GetLastWin32Error().ToCryptographicException();
             return version;
@@ -176,15 +182,13 @@ namespace Internal.Cryptography.Pal.Windows
             int numCertificates = 0;
             int cbNumCertificates = sizeof(int);
             if (
-                !Interop
-                    .Crypt32
-                    .CryptMsgGetParam(
-                        hCryptMsg,
-                        CryptMsgParamType.CMSG_CERT_COUNT_PARAM,
-                        0,
-                        out numCertificates,
-                        ref cbNumCertificates
-                    )
+                !Interop.Crypt32.CryptMsgGetParam(
+                    hCryptMsg,
+                    CryptMsgParamType.CMSG_CERT_COUNT_PARAM,
+                    0,
+                    out numCertificates,
+                    ref cbNumCertificates
+                )
             )
                 throw Marshal.GetLastWin32Error().ToCryptographicException();
             X509Certificate2Collection certs = new X509Certificate2Collection();
@@ -205,14 +209,12 @@ namespace Internal.Cryptography.Pal.Windows
         /// </summary>
         public static AlgId ToAlgId(this string oidValue)
         {
-            CRYPT_OID_INFO info = Interop
-                .Crypt32
-                .FindOidInfo(
-                    CryptOidInfoKeyType.CRYPT_OID_INFO_OID_KEY,
-                    oidValue,
-                    OidGroup.All,
-                    false
-                );
+            CRYPT_OID_INFO info = Interop.Crypt32.FindOidInfo(
+                CryptOidInfoKeyType.CRYPT_OID_INFO_OID_KEY,
+                oidValue,
+                OidGroup.All,
+                false
+            );
             return (AlgId)(info.AlgId);
         }
 
@@ -229,27 +231,23 @@ namespace Internal.Cryptography.Pal.Windows
         {
             int cbData = 0;
             if (
-                !Interop
-                    .Crypt32
-                    .CertGetCertificateContextProperty(
-                        hCertContext,
-                        CertContextPropId.CERT_KEY_IDENTIFIER_PROP_ID,
-                        null,
-                        ref cbData
-                    )
+                !Interop.Crypt32.CertGetCertificateContextProperty(
+                    hCertContext,
+                    CertContextPropId.CERT_KEY_IDENTIFIER_PROP_ID,
+                    null,
+                    ref cbData
+                )
             )
                 throw Marshal.GetLastWin32Error().ToCryptographicException();
 
             byte[] ski = new byte[cbData];
             if (
-                !Interop
-                    .Crypt32
-                    .CertGetCertificateContextProperty(
-                        hCertContext,
-                        CertContextPropId.CERT_KEY_IDENTIFIER_PROP_ID,
-                        ski,
-                        ref cbData
-                    )
+                !Interop.Crypt32.CertGetCertificateContextProperty(
+                    hCertContext,
+                    CertContextPropId.CERT_KEY_IDENTIFIER_PROP_ID,
+                    ski,
+                    ref cbData
+                )
             )
                 throw Marshal.GetLastWin32Error().ToCryptographicException();
 
@@ -272,15 +270,13 @@ namespace Internal.Cryptography.Pal.Windows
                     {
                         DATA_BLOB* dataBlobPtr = &certId.u.IssuerSerialNumber.Issuer;
 
-                        int nc = Interop
-                            .Crypt32
-                            .CertNameToStr(
-                                (int)MsgEncodingType.All,
-                                dataBlobPtr,
-                                dwStrType,
-                                null,
-                                0
-                            );
+                        int nc = Interop.Crypt32.CertNameToStr(
+                            (int)MsgEncodingType.All,
+                            dataBlobPtr,
+                            dwStrType,
+                            null,
+                            0
+                        );
                         if (nc <= 1) // The API actually return 1 when it fails; which is not what the documentation says.
                         {
                             throw Marshal.GetLastWin32Error().ToCryptographicException();
@@ -289,15 +285,13 @@ namespace Internal.Cryptography.Pal.Windows
                         Span<char> name = nc <= 128 ? stackalloc char[128] : new char[nc];
                         fixed (char* namePtr = name)
                         {
-                            nc = Interop
-                                .Crypt32
-                                .CertNameToStr(
-                                    (int)MsgEncodingType.All,
-                                    dataBlobPtr,
-                                    dwStrType,
-                                    namePtr,
-                                    nc
-                                );
+                            nc = Interop.Crypt32.CertNameToStr(
+                                (int)MsgEncodingType.All,
+                                dataBlobPtr,
+                                dwStrType,
+                                namePtr,
+                                nc
+                            );
                             if (nc <= 1) // The API actually return 1 when it fails; which is not what the documentation says.
                             {
                                 throw Marshal.GetLastWin32Error().ToCryptographicException();
@@ -376,9 +370,10 @@ namespace Internal.Cryptography.Pal.Windows
             this CERT_PUBLIC_KEY_INFO publicKeyInfo
         )
         {
-            int keyLength = Interop
-                .Crypt32
-                .CertGetPublicKeyLength(MsgEncodingType.All, ref publicKeyInfo);
+            int keyLength = Interop.Crypt32.CertGetPublicKeyLength(
+                MsgEncodingType.All,
+                ref publicKeyInfo
+            );
             string oidValue = publicKeyInfo.Algorithm.pszObjId.ToStringAnsi();
             AlgorithmIdentifier algorithmId = new AlgorithmIdentifier(
                 Oid.FromOidValue(oidValue, OidGroup.PublicKeyAlgorithm),
@@ -413,15 +408,13 @@ namespace Internal.Cryptography.Pal.Windows
                         {
                             int cbSize = sizeof(CRYPT_RC2_CBC_PARAMETERS);
                             if (
-                                !Interop
-                                    .Crypt32
-                                    .CryptDecodeObject(
-                                        CryptDecodeObjectStructType.PKCS_RC2_CBC_PARAMETERS,
-                                        cryptAlgorithmIdentifer.Parameters.pbData,
-                                        (int)(cryptAlgorithmIdentifer.Parameters.cbData),
-                                        &rc2Parameters,
-                                        ref cbSize
-                                    )
+                                !Interop.Crypt32.CryptDecodeObject(
+                                    CryptDecodeObjectStructType.PKCS_RC2_CBC_PARAMETERS,
+                                    cryptAlgorithmIdentifer.Parameters.pbData,
+                                    (int)(cryptAlgorithmIdentifer.Parameters.cbData),
+                                    &rc2Parameters,
+                                    ref cbSize
+                                )
                             )
                                 throw Marshal.GetLastWin32Error().ToCryptographicException();
                         }
@@ -444,13 +437,11 @@ namespace Internal.Cryptography.Pal.Windows
                     if (cryptAlgorithmIdentifer.Parameters.cbData != 0)
                     {
                         using (
-                            SafeHandle sh = Interop
-                                .Crypt32
-                                .CryptDecodeObjectToMemory(
-                                    CryptDecodeObjectStructType.X509_OCTET_STRING,
-                                    cryptAlgorithmIdentifer.Parameters.pbData,
-                                    (int)cryptAlgorithmIdentifer.Parameters.cbData
-                                )
+                            SafeHandle sh = Interop.Crypt32.CryptDecodeObjectToMemory(
+                                CryptDecodeObjectStructType.X509_OCTET_STRING,
+                                cryptAlgorithmIdentifer.Parameters.pbData,
+                                (int)cryptAlgorithmIdentifer.Parameters.cbData
+                            )
                         )
                         {
                             unsafe
@@ -490,9 +481,8 @@ namespace Internal.Cryptography.Pal.Windows
             switch (oidValue)
             {
                 case Oids.RsaOaep:
-                    algorithmIdentifier.Parameters = cryptAlgorithmIdentifer
-                        .Parameters
-                        .ToByteArray();
+                    algorithmIdentifier.Parameters =
+                        cryptAlgorithmIdentifer.Parameters.ToByteArray();
                     break;
             }
             return algorithmIdentifier;
@@ -506,15 +496,13 @@ namespace Internal.Cryptography.Pal.Windows
             // get a CRYPT_E_ATTRIBUTES_MISSING failure if the count is 0.
             int cbUnprotectedAttr = 0;
             if (
-                !Interop
-                    .Crypt32
-                    .CryptMsgGetParam(
-                        hCryptMsg,
-                        CryptMsgParamType.CMSG_UNPROTECTED_ATTR_PARAM,
-                        0,
-                        IntPtr.Zero,
-                        ref cbUnprotectedAttr
-                    )
+                !Interop.Crypt32.CryptMsgGetParam(
+                    hCryptMsg,
+                    CryptMsgParamType.CMSG_UNPROTECTED_ATTR_PARAM,
+                    0,
+                    IntPtr.Zero,
+                    ref cbUnprotectedAttr
+                )
             )
             {
                 int lastError = Marshal.GetLastWin32Error();
@@ -560,9 +548,12 @@ namespace Internal.Cryptography.Pal.Windows
             int size = stackSpan.Length;
 
             if (
-                !Interop
-                    .Advapi32
-                    .CryptGetProvParam(handle, CryptProvParam.PP_PROVTYPE, stackSpan, ref size)
+                !Interop.Advapi32.CryptGetProvParam(
+                    handle,
+                    CryptProvParam.PP_PROVTYPE,
+                    stackSpan,
+                    ref size
+                )
             )
             {
                 throw Marshal.GetLastWin32Error().ToCryptographicException();
@@ -578,9 +569,12 @@ namespace Internal.Cryptography.Pal.Windows
 
             size = stackSpan.Length;
             if (
-                !Interop
-                    .Advapi32
-                    .CryptGetProvParam(handle, CryptProvParam.PP_KEYSET_TYPE, stackSpan, ref size)
+                !Interop.Advapi32.CryptGetProvParam(
+                    handle,
+                    CryptProvParam.PP_KEYSET_TYPE,
+                    stackSpan,
+                    ref size
+                )
             )
             {
                 throw Marshal.GetLastWin32Error().ToCryptographicException();

@@ -335,9 +335,10 @@ namespace System.Resources
             {
                 for (int i = lo; i <= hi; i++)
                 {
-                    _store
-                        .BaseStream
-                        .Seek(_nameSectionOffset + GetNamePosition(i), SeekOrigin.Begin);
+                    _store.BaseStream.Seek(
+                        _nameSectionOffset + GetNamePosition(i),
+                        SeekOrigin.Begin
+                    );
                     if (CompareStringEqualsName(name))
                     {
                         int dataPos = _store.ReadInt32();
@@ -537,8 +538,9 @@ namespace System.Resources
                     if (typeCode < ResourceTypeCode.StartOfUserTypes)
                         typeString = typeCode.ToString();
                     else
-                        typeString =
-                            FindType(typeCode - ResourceTypeCode.StartOfUserTypes).FullName;
+                        typeString = FindType(
+                            typeCode - ResourceTypeCode.StartOfUserTypes
+                        ).FullName;
                     throw new InvalidOperationException(
                         SR.Format(SR.InvalidOperation_ResourceNotString_Type, typeString)
                     );

@@ -619,11 +619,9 @@ namespace A
                 composition: EditorTestCompositions.EditorFeaturesWpf
             );
 
-            var solution = workspace
-                .CurrentSolution
+            var solution = workspace.CurrentSolution
                 .WithOptions(
-                    workspace
-                        .Options
+                    workspace.Options
                         .WithChangedOption(
                             GenerationOptions.PlaceSystemNamespaceFirst,
                             LanguageNames.CSharp,

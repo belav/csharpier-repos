@@ -520,8 +520,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                             i--
                         )
                         {
-                            TypeSyntax? paramType =
-                                functionPointerTypeSyntax.ParameterList.Parameters[i].Type;
+                            TypeSyntax? paramType = functionPointerTypeSyntax
+                                .ParameterList
+                                .Parameters[i].Type;
                             Debug.Assert(paramType is object);
                             stack.Push(paramType);
                         }

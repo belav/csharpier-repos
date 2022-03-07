@@ -389,8 +389,9 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             var requireAccessibilityModifiers = options.GetOption(
                 CodeStyleOptions2.RequireAccessibilityModifiers
             );
-            var parameterNameParts =
-                IdentifierNameParts.CreateIdentifierNameParts(parameter, rules).BaseNameParts;
+            var parameterNameParts = IdentifierNameParts
+                .CreateIdentifierNameParts(parameter, rules)
+                .BaseNameParts;
 
             foreach (var rule in rules)
             {
@@ -457,8 +458,9 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             var requireAccessibilityModifiers = options.GetOption(
                 CodeStyleOptions2.RequireAccessibilityModifiers
             );
-            var parameterNameParts =
-                IdentifierNameParts.CreateIdentifierNameParts(parameter, rules).BaseNameParts;
+            var parameterNameParts = IdentifierNameParts
+                .CreateIdentifierNameParts(parameter, rules)
+                .BaseNameParts;
 
             foreach (var rule in rules)
             {
@@ -877,8 +879,7 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             // Use a variety of heuristics around the name/type to see if this is a match.
 
             var containingType = parameter.ContainingType;
-            var compilation = await document
-                .Project
+            var compilation = await document.Project
                 .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
 

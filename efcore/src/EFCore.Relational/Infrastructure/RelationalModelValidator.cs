@@ -728,15 +728,14 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 {
                     if (mappedType.BaseType != null)
                     {
-                        var principalType =
-                            mappedType
-                                .FindForeignKeys(mappedType.FindPrimaryKey()!.Properties)
-                                .First(
-                                    fk =>
-                                        fk.PrincipalKey.IsPrimaryKey()
-                                        && unvalidatedTypes.Contains(fk.PrincipalEntityType)
-                                )
-                                .PrincipalEntityType;
+                        var principalType = mappedType
+                            .FindForeignKeys(mappedType.FindPrimaryKey()!.Properties)
+                            .First(
+                                fk =>
+                                    fk.PrincipalKey.IsPrimaryKey()
+                                    && unvalidatedTypes.Contains(fk.PrincipalEntityType)
+                            )
+                            .PrincipalEntityType;
                         throw new InvalidOperationException(
                             RelationalStrings.IncompatibleViewDerivedRelationship(
                                 storeObject.DisplayName(),
@@ -1288,8 +1287,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 );
                 if (foreignKeyName == null)
                 {
-                    var derivedTables = foreignKey
-                        .DeclaringEntityType
+                    var derivedTables = foreignKey.DeclaringEntityType
                         .GetDerivedTypes()
                         .Select(t => StoreObjectIdentifier.Create(t, StoreObjectType.Table))
                         .Where(t => t != null);
@@ -1749,8 +1747,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                     HashSet<(string Table, string? Schema)>? overlappingTables = null;
                     foreach (var property in index.Properties)
                     {
-                        var tablesMappedToProperty = property
-                            .DeclaringEntityType
+                        var tablesMappedToProperty = property.DeclaringEntityType
                             .GetDerivedTypesInclusive()
                             .Select(t => (t.GetTableName(), t.GetSchema()))
                             .Distinct()

@@ -152,9 +152,9 @@ public class MutexWaitOne2
         bool retVal = true;
         Thread thread = null;
 
-        TestLibrary
-            .TestFramework
-            .BeginScenario("PosTest3: Wait some finite time will quit for timeout");
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest3: Wait some finite time will quit for timeout"
+        );
 
         try
         {
@@ -166,9 +166,10 @@ public class MutexWaitOne2
             if (false != m_Mutex.WaitOne(c_DEFAULT_SLEEP_TIME / 10))
             {
                 m_Mutex.ReleaseMutex();
-                TestLibrary
-                    .TestFramework
-                    .LogError("004", "WaitOne returns true when wait time out");
+                TestLibrary.TestFramework.LogError(
+                    "004",
+                    "WaitOne returns true when wait time out"
+                );
                 retVal = false;
             }
         }
@@ -200,11 +201,9 @@ public class MutexWaitOne2
         bool retVal = true;
         Thread thread = null;
 
-        TestLibrary
-            .TestFramework
-            .BeginScenario(
-                "PosTest4: Wait some finite time will quit for timeout when another thread is in nondefault managed context"
-            );
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest4: Wait some finite time will quit for timeout when another thread is in nondefault managed context"
+        );
 
         try
         {
@@ -216,12 +215,10 @@ public class MutexWaitOne2
             if (false != m_Mutex.WaitOne(c_DEFAULT_SLEEP_TIME / 5))
             {
                 m_Mutex.ReleaseMutex();
-                TestLibrary
-                    .TestFramework
-                    .LogError(
-                        "006",
-                        "WaitOne returns true when wait some finite time will quit for timeout when another thread is in nondefault managed context"
-                    );
+                TestLibrary.TestFramework.LogError(
+                    "006",
+                    "WaitOne returns true when wait some finite time will quit for timeout when another thread is in nondefault managed context"
+                );
                 retVal = false;
             }
         }
@@ -253,11 +250,9 @@ public class MutexWaitOne2
         bool retVal = true;
         Thread thread = null;
 
-        TestLibrary
-            .TestFramework
-            .BeginScenario(
-                "PosTest5: Wait some finite time will quit for timeout when another thread is in nondefault managed context"
-            );
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest5: Wait some finite time will quit for timeout when another thread is in nondefault managed context"
+        );
 
         try
         {
@@ -269,12 +264,10 @@ public class MutexWaitOne2
             if (false != m_Mutex.WaitOne(c_DEFAULT_SLEEP_TIME))
             {
                 m_Mutex.ReleaseMutex();
-                TestLibrary
-                    .TestFramework
-                    .LogError(
-                        "008",
-                        "WaitOne returns true when wait some finite time will quit for timeout when another thread is in nondefault managed context"
-                    );
+                TestLibrary.TestFramework.LogError(
+                    "008",
+                    "WaitOne returns true when wait some finite time will quit for timeout when another thread is in nondefault managed context"
+                );
                 retVal = false;
             }
         }
@@ -306,11 +299,9 @@ public class MutexWaitOne2
         bool retVal = true;
         Thread thread = null;
 
-        TestLibrary
-            .TestFramework
-            .BeginScenario(
-                "PosTest6: Wait infinite time when another thread is in nondefault managed context"
-            );
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest6: Wait infinite time when another thread is in nondefault managed context"
+        );
 
         try
         {
@@ -322,12 +313,10 @@ public class MutexWaitOne2
             if (true != m_Mutex.WaitOne(Timeout.Infinite))
             {
                 m_Mutex.ReleaseMutex();
-                TestLibrary
-                    .TestFramework
-                    .LogError(
-                        "010",
-                        "WaitOne returns false when wait infinite time when another thread is in nondefault managed context"
-                    );
+                TestLibrary.TestFramework.LogError(
+                    "010",
+                    "WaitOne returns false when wait infinite time when another thread is in nondefault managed context"
+                );
                 retVal = false;
             }
         }
@@ -359,11 +348,9 @@ public class MutexWaitOne2
         bool retVal = true;
         Thread thread = null;
 
-        TestLibrary
-            .TestFramework
-            .BeginScenario(
-                "PosTest7: Wait infinite time when another thread is in nondefault managed context"
-            );
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest7: Wait infinite time when another thread is in nondefault managed context"
+        );
 
         try
         {
@@ -375,12 +362,10 @@ public class MutexWaitOne2
             if (true != m_Mutex.WaitOne(Timeout.Infinite))
             {
                 m_Mutex.ReleaseMutex();
-                TestLibrary
-                    .TestFramework
-                    .LogError(
-                        "012",
-                        "WaitOne returns false when wait infinite time when another thread is in nondefault managed context"
-                    );
+                TestLibrary.TestFramework.LogError(
+                    "012",
+                    "WaitOne returns false when wait infinite time when another thread is in nondefault managed context"
+                );
                 retVal = false;
             }
         }
@@ -414,11 +399,9 @@ public class MutexWaitOne2
         bool retVal = true;
         Thread thread = null;
 
-        TestLibrary
-            .TestFramework
-            .BeginScenario(
-                "NegTest1: AbandonedMutexException should be thrown if a thread exited without releasing a mutex"
-            );
+        TestLibrary.TestFramework.BeginScenario(
+            "NegTest1: AbandonedMutexException should be thrown if a thread exited without releasing a mutex"
+        );
 
         try
         {
@@ -432,12 +415,10 @@ public class MutexWaitOne2
             // AbandonedMutexException is not thrown on Windows 98 or Windows ME
             //if (Environment.OSVersion.Platform == PlatformID.Win32NT)
             //{
-            TestLibrary
-                .TestFramework
-                .LogError(
-                    "101",
-                    "AbandonedMutexException is not thrown if a thread exited without releasing a mutex"
-                );
+            TestLibrary.TestFramework.LogError(
+                "101",
+                "AbandonedMutexException is not thrown if a thread exited without releasing a mutex"
+            );
             retVal = false;
             //}
         }
@@ -468,11 +449,9 @@ public class MutexWaitOne2
     {
         bool retVal = true;
 
-        TestLibrary
-            .TestFramework
-            .BeginScenario(
-                "NegTest2: ObjectDisposedException should be thrown if current instance has already been disposed"
-            );
+        TestLibrary.TestFramework.BeginScenario(
+            "NegTest2: ObjectDisposedException should be thrown if current instance has already been disposed"
+        );
 
         try
         {
@@ -484,12 +463,10 @@ public class MutexWaitOne2
             thread.Join();
             m_Mutex.WaitOne(Timeout.Infinite);
 
-            TestLibrary
-                .TestFramework
-                .LogError(
-                    "103",
-                    "ObjectDisposedException is not thrown if current instance has already been disposed"
-                );
+            TestLibrary.TestFramework.LogError(
+                "103",
+                "ObjectDisposedException is not thrown if current instance has already been disposed"
+            );
             retVal = false;
         }
         catch (ObjectDisposedException) { }
@@ -515,11 +492,9 @@ public class MutexWaitOne2
         bool retVal = true;
         int testInt = 0;
 
-        TestLibrary
-            .TestFramework
-            .BeginScenario(
-                "NegTest3: Check ArgumentOutOfRangeException will be thrown if millisecondsTimeout is a negative number other than -1"
-            );
+        TestLibrary.TestFramework.BeginScenario(
+            "NegTest3: Check ArgumentOutOfRangeException will be thrown if millisecondsTimeout is a negative number other than -1"
+        );
 
         try
         {
@@ -538,12 +513,10 @@ public class MutexWaitOne2
             m_Mutex = new Mutex();
             m_Mutex.WaitOne(testInt);
 
-            TestLibrary
-                .TestFramework
-                .LogError(
-                    "105",
-                    "ArgumentOutOfRangeException is not thrown if millisecondsTimeout is a negative number other than -1"
-                );
+            TestLibrary.TestFramework.LogError(
+                "105",
+                "ArgumentOutOfRangeException is not thrown if millisecondsTimeout is a negative number other than -1"
+            );
             TestLibrary.TestFramework.LogInformation("[LOCAL VARIABLES] testInt = " + testInt);
             retVal = false;
         }

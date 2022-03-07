@@ -28,8 +28,10 @@ namespace Microsoft.CodeAnalysis.Host.Mef
         private ImmutableDictionary<
             Type,
             Lazy<ILanguageService, LanguageServiceMetadata>
-        > _serviceMap =
-            ImmutableDictionary<Type, Lazy<ILanguageService, LanguageServiceMetadata>>.Empty;
+        > _serviceMap = ImmutableDictionary<
+            Type,
+            Lazy<ILanguageService, LanguageServiceMetadata>
+        >.Empty;
 
         public MefLanguageServices(MefWorkspaceServices workspaceServices, string language)
         {

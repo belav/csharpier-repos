@@ -248,10 +248,9 @@ while(true) {}
         [Fact]
         public async Task AsyncExecuteFile()
         {
-            var file =
-                Temp.CreateFile()
-                    .WriteAllText(
-                        @"
+            var file = Temp.CreateFile()
+                .WriteAllText(
+                    @"
 using static System.Console;
 
 public class C 
@@ -264,8 +263,8 @@ public int Goo(int i) { return i; }
 
 WriteLine(5);
 "
-                    )
-                    .Path;
+                )
+                .Path;
             var task = await Host.ExecuteFileAsync(file);
 
             var output = await ReadOutputToEnd();

@@ -40,20 +40,18 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Structure
             if (blockStructure != null)
             {
                 return new BlockStructure(
-                    blockStructure
-                        .Spans
-                        .SelectAsArray(
-                            x =>
-                                new BlockSpan(
-                                    x.Type,
-                                    x.IsCollapsible,
-                                    x.TextSpan,
-                                    x.HintSpan,
-                                    x.BannerText,
-                                    x.AutoCollapse,
-                                    x.IsDefaultCollapsed
-                                )
-                        )
+                    blockStructure.Spans.SelectAsArray(
+                        x =>
+                            new BlockSpan(
+                                x.Type,
+                                x.IsCollapsible,
+                                x.TextSpan,
+                                x.HintSpan,
+                                x.BannerText,
+                                x.AutoCollapse,
+                                x.IsDefaultCollapsed
+                            )
+                    )
                 );
             }
             else

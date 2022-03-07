@@ -3463,11 +3463,10 @@ WHERE (c[""Discriminator""] = ""Customer"")"
                             c =>
                                 new DTO<DateTime?>
                                 {
-                                    Property =
-                                        c.Orders
-                                            .OrderByDescending(o => o.OrderID)
-                                            .FirstOrDefault()
-                                            .OrderDate
+                                    Property = c.Orders
+                                        .OrderByDescending(o => o.OrderID)
+                                        .FirstOrDefault()
+                                        .OrderDate
                                 }
                         )
                         .OrderBy(n => n.Property),
@@ -4138,17 +4137,16 @@ OFFSET @__p_0 LIMIT @__p_1"
             using (var context = CreateContext())
             {
                 var results = (
-                    context
-                        .Customers
+                    context.Customers
                         .Where(c => c.CustomerID == "ALFKI")
                         .Select(
                             c =>
                                 new
                                 {
                                     c.CustomerID,
-                                    Orders = context
-                                        .Orders
-                                        .Where(o => o.Customer.CustomerID == c.CustomerID)
+                                    Orders = context.Orders.Where(
+                                        o => o.Customer.CustomerID == c.CustomerID
+                                    )
                                 }
                         )
                         .ToList()

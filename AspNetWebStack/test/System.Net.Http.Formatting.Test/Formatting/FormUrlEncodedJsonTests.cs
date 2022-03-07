@@ -12,12 +12,10 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void TypeIsCorrect()
         {
-            Assert
-                .Type
-                .HasProperties(
-                    typeof(FormUrlEncodedJson),
-                    TypeAssert.TypeProperties.IsClass | TypeAssert.TypeProperties.IsStatic
-                );
+            Assert.Type.HasProperties(
+                typeof(FormUrlEncodedJson),
+                TypeAssert.TypeProperties.IsClass | TypeAssert.TypeProperties.IsStatic
+            );
         }
 
         [Fact]

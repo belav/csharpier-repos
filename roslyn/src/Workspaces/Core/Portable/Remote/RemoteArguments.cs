@@ -302,16 +302,10 @@ namespace Microsoft.CodeAnalysis.Remote
         {
             return new SerializableSymbolGroup(
                 new HashSet<SerializableSymbolAndProjectId>(
-                    group
-                        .Symbols
-                        .Select(
-                            s =>
-                                SerializableSymbolAndProjectId.Dehydrate(
-                                    solution,
-                                    s,
-                                    cancellationToken
-                                )
-                        )
+                    group.Symbols.Select(
+                        s =>
+                            SerializableSymbolAndProjectId.Dehydrate(solution, s, cancellationToken)
+                    )
                 )
             );
         }

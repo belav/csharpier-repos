@@ -22,8 +22,7 @@ public sealed class SectionDirectivePass : IntermediateNodePassBase, IRazorDirec
 
         foreach (var directive in documentNode.FindDirectiveReferences(SectionDirective.Directive))
         {
-            var sectionName = ((DirectiveIntermediateNode)directive.Node)
-                .Tokens
+            var sectionName = ((DirectiveIntermediateNode)directive.Node).Tokens
                 .FirstOrDefault()
                 ?.Content;
 

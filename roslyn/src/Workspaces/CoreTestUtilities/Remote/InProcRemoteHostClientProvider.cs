@@ -61,8 +61,7 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
                 LazyWorkspace = new Lazy<RemoteWorkspace>(
                     () =>
                     {
-                        var hostServices = FeaturesTestCompositions
-                            .RemoteHost
+                        var hostServices = FeaturesTestCompositions.RemoteHost
                             .AddParts(additionalRemoteParts)
                             .GetHostServices();
 

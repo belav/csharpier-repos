@@ -72,8 +72,9 @@ public class HeartbeatTests : LoggedTest
 
         heartbeatHandler.Verify(h => h.OnHeartbeat(now), Times.Once());
 
-        var warningMessage =
-            TestSink.Writes.Single(message => message.LogLevel == LogLevel.Warning).Message;
+        var warningMessage = TestSink.Writes
+            .Single(message => message.LogLevel == LogLevel.Warning)
+            .Message;
         Assert.Equal(
             $"As of \"{now.ToString(CultureInfo.InvariantCulture)}\", the heartbeat has been running for "
                 + $"\"{heartbeatDuration.ToString("c", CultureInfo.InvariantCulture)}\" which is longer than "

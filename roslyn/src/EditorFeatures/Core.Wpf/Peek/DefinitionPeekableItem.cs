@@ -75,15 +75,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
                     .GetCompilationAsync(cancellationToken)
                     .WaitAndGetResult_CanCallOnBackground(cancellationToken);
 
-                var symbol =
-                    _peekableItem
-                        ._symbolKey
-                        .Resolve(
-                            compilation,
-                            ignoreAssemblyKey: true,
-                            cancellationToken: cancellationToken
-                        )
-                        .Symbol;
+                var symbol = _peekableItem._symbolKey
+                    .Resolve(
+                        compilation,
+                        ignoreAssemblyKey: true,
+                        cancellationToken: cancellationToken
+                    )
+                    .Symbol;
                 if (symbol == null)
                 {
                     callback.ReportFailure(
@@ -97,8 +95,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
                 if (!sourceLocations.Any())
                 {
                     // It's a symbol from metadata, so we want to go produce it from metadata
-                    var declarationFile = _peekableItem
-                        ._metadataAsSourceFileService
+                    var declarationFile = _peekableItem._metadataAsSourceFileService
                         .GetGeneratedFileAsync(
                             project,
                             symbol,

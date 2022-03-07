@@ -255,9 +255,11 @@ namespace System.Runtime.CompilerServices
             // Log the creation of the state machine box object / task for this async method.
             if (TplEventSource.Log.IsEnabled())
             {
-                TplEventSource
-                    .Log
-                    .TraceOperationBegin(box.Id, "Async: " + stateMachine.GetType().Name, 0);
+                TplEventSource.Log.TraceOperationBegin(
+                    box.Id,
+                    "Async: " + stateMachine.GetType().Name,
+                    0
+                );
             }
 
             // And if async debugging is enabled, track the task.
@@ -342,9 +344,10 @@ namespace System.Runtime.CompilerServices
                 bool loggingOn = TplEventSource.Log.IsEnabled();
                 if (loggingOn)
                 {
-                    TplEventSource
-                        .Log
-                        .TraceSynchronousWorkBegin(this.Id, CausalitySynchronousWork.Execution);
+                    TplEventSource.Log.TraceSynchronousWorkBegin(
+                        this.Id,
+                        CausalitySynchronousWork.Execution
+                    );
                 }
 
                 ExecutionContext? context = Context;

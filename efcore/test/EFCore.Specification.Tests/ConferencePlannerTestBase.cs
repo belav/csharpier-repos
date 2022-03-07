@@ -130,14 +130,12 @@ namespace Microsoft.EntityFrameworkCore
 
                     var pinky = context.Attendees.Single(a => a.UserName == "Pinks");
 
-                    var pinkySessions = context
-                        .Sessions
+                    var pinkySessions = context.Sessions
                         .AsNoTracking()
                         .Where(s => s.SessionAttendees.Any(e => e.Attendee.UserName == "Pinks"))
                         .ToList();
 
-                    var session = context
-                        .Sessions
+                    var session = context.Sessions
                         .AsNoTracking()
                         .Single(e => e.Title == "Hidden gems in .NET Core 3");
 
@@ -160,8 +158,7 @@ namespace Microsoft.EntityFrameworkCore
 
                     Assert.Equal(
                         result.Sessions.Select(r => r.Id).OrderBy(i => i).ToList(),
-                        context
-                            .Sessions
+                        context.Sessions
                             .AsNoTracking()
                             .Where(s => s.SessionAttendees.Any(e => e.Attendee.UserName == "Pinks"))
                             .Select(s => s.Id)
@@ -195,8 +192,7 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     var controller = new AttendeesController(context);
 
-                    var session = context
-                        .Sessions
+                    var session = context.Sessions
                         .AsNoTracking()
                         .Single(e => e.Title == "Hidden gems in .NET Core 3");
 
@@ -215,8 +211,7 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     var controller = new AttendeesController(context);
 
-                    var beforeRemove = context
-                        .Sessions
+                    var beforeRemove = context.Sessions
                         .AsNoTracking()
                         .Where(s => s.SessionAttendees.Any(e => e.Attendee.UserName == "Pinks"))
                         .OrderBy(e => e.Id)
@@ -230,8 +225,7 @@ namespace Microsoft.EntityFrameworkCore
 
                     Assert.Equal("Success", result);
 
-                    var afterRemove = context
-                        .Sessions
+                    var afterRemove = context.Sessions
                         .AsNoTracking()
                         .Where(s => s.SessionAttendees.Any(e => e.Attendee.UserName == "Pinks"))
                         .OrderBy(e => e.Id)
@@ -268,8 +262,7 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     var controller = new AttendeesController(context);
 
-                    var session = context
-                        .Sessions
+                    var session = context.Sessions
                         .AsNoTracking()
                         .Single(e => e.Title == "Hidden gems in .NET Core 3");
 
@@ -355,9 +348,9 @@ namespace Microsoft.EntityFrameworkCore
                     return "No session";
                 }
 
-                attendee
-                    .SessionsAttendees
-                    .Add(new SessionAttendee { AttendeeId = attendee.Id, SessionId = sessionId });
+                attendee.SessionsAttendees.Add(
+                    new SessionAttendee { AttendeeId = attendee.Id, SessionId = sessionId }
+                );
 
                 await _db.SaveChangesAsync();
 
@@ -382,9 +375,9 @@ namespace Microsoft.EntityFrameworkCore
                     return "No session";
                 }
 
-                var sessionAttendee = attendee
-                    .SessionsAttendees
-                    .FirstOrDefault(sa => sa.SessionId == sessionId);
+                var sessionAttendee = attendee.SessionsAttendees.FirstOrDefault(
+                    sa => sa.SessionId == sessionId
+                );
                 attendee.SessionsAttendees.Remove(sessionAttendee);
 
                 await _db.SaveChangesAsync();
@@ -513,8 +506,7 @@ namespace Microsoft.EntityFrameworkCore
             await ExecuteWithStrategyInTransactionAsync(
                 async context =>
                 {
-                    var session = context
-                        .Sessions
+                    var session = context.Sessions
                         .AsNoTracking()
                         .Single(e => e.Title.StartsWith("C# and Rust: combining "));
 
@@ -565,8 +557,7 @@ namespace Microsoft.EntityFrameworkCore
                         }
                     );
 
-                    var newSession = context
-                        .Sessions
+                    var newSession = context.Sessions
                         .AsNoTracking()
                         .Single(e => e.Title == "Pandas!");
 
@@ -584,8 +575,7 @@ namespace Microsoft.EntityFrameworkCore
             await ExecuteWithStrategyInTransactionAsync(
                 async context =>
                 {
-                    var session = context
-                        .Sessions
+                    var session = context.Sessions
                         .AsNoTracking()
                         .Single(e => e.Title.StartsWith("C# and Rust: combining "));
 
@@ -606,8 +596,7 @@ namespace Microsoft.EntityFrameworkCore
 
                     Assert.Equal("Success", result);
 
-                    var updatedSession = context
-                        .Sessions
+                    var updatedSession = context.Sessions
                         .AsNoTracking()
                         .Single(e => e.Id == session.Id);
 
@@ -638,8 +627,7 @@ namespace Microsoft.EntityFrameworkCore
             await ExecuteWithStrategyInTransactionAsync(
                 async context =>
                 {
-                    var session = context
-                        .Sessions
+                    var session = context.Sessions
                         .AsNoTracking()
                         .Single(e => e.Title.StartsWith("C# and Rust: combining "));
 
@@ -783,8 +771,7 @@ namespace Microsoft.EntityFrameworkCore
             await ExecuteWithStrategyInTransactionAsync(
                 async context =>
                 {
-                    var speaker = context
-                        .Speakers
+                    var speaker = context.Speakers
                         .AsNoTracking()
                         .Single(e => e.Name == "Julie Lerman");
 

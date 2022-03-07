@@ -50,10 +50,8 @@ internal class RequestSizeLimitFilter : IAuthorizationFilter, IRequestSizePolicy
             return;
         }
 
-        var maxRequestBodySizeFeature = context
-            .HttpContext
-            .Features
-            .Get<IHttpMaxRequestBodySizeFeature>();
+        var maxRequestBodySizeFeature =
+            context.HttpContext.Features.Get<IHttpMaxRequestBodySizeFeature>();
 
         if (maxRequestBodySizeFeature == null)
         {

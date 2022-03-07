@@ -118,8 +118,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
             var currentRoot = root.TrackNodes(nodesToTrack);
 
             var options = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
-            var languageVersion =
-                ((CSharpParseOptions)semanticModel.SyntaxTree.Options).LanguageVersion;
+            var languageVersion = (
+                (CSharpParseOptions)semanticModel.SyntaxTree.Options
+            ).LanguageVersion;
             var makeStaticIfPossible =
                 languageVersion >= LanguageVersion.CSharp8
                 && options.GetOption(CSharpCodeStyleOptions.PreferStaticLocalFunction).Value;
@@ -355,15 +356,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
                 )
               : SyntaxFactory.ParameterList(
                     SyntaxFactory.SeparatedList(
-                        delegateMethod
-                            .Parameters
-                            .Select(
-                                parameter =>
-                                    PromoteParameter(
-                                        SyntaxFactory.Parameter(parameter.Name.ToIdentifierToken()),
-                                        parameter
-                                    )
-                            )
+                        delegateMethod.Parameters.Select(
+                            parameter =>
+                                PromoteParameter(
+                                    SyntaxFactory.Parameter(parameter.Name.ToIdentifierToken()),
+                                    parameter
+                                )
+                        )
                     )
                 );
 
@@ -431,18 +430,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
                         return argumentNode;
                     }
 
-                    var newParameter = newParameterList
-                        .Parameters
-                        .ElementAtOrDefault(parameterIndex);
+                    var newParameter = newParameterList.Parameters.ElementAtOrDefault(
+                        parameterIndex
+                    );
                     if (newParameter == null || newParameter.Identifier.IsMissing)
                     {
                         return argumentNode;
                     }
 
                     return argumentNode.WithNameColon(
-                        argumentNode
-                            .NameColon
-                            .WithName(SyntaxFactory.IdentifierName(newParameter.Identifier))
+                        argumentNode.NameColon.WithName(
+                            SyntaxFactory.IdentifierName(newParameter.Identifier)
+                        )
                     );
                 }
             );

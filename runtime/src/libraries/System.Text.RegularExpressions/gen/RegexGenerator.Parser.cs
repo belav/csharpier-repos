@@ -249,14 +249,11 @@ namespace System.Text.RegularExpressions.Generator
             }
 
             // Determine the namespace the class is declared in, if any
-            string? ns = regexMethodSymbol
-                .ContainingType
-                ?.ContainingNamespace
-                ?.ToDisplayString(
-                    SymbolDisplayFormat
-                        .FullyQualifiedFormat
-                        .WithGlobalNamespaceStyle(SymbolDisplayGlobalNamespaceStyle.Omitted)
-                );
+            string? ns = regexMethodSymbol.ContainingType?.ContainingNamespace?.ToDisplayString(
+                SymbolDisplayFormat.FullyQualifiedFormat.WithGlobalNamespaceStyle(
+                    SymbolDisplayGlobalNamespaceStyle.Omitted
+                )
+            );
 
             var regexMethod = new RegexMethod(
                 regexMethodSymbol.Name,

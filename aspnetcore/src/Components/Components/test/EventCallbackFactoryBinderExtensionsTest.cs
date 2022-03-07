@@ -680,9 +680,12 @@ public class EventCallbackFactoryBinderExtensionsTest
         var component = new EventCountingComponent();
         Action<int> setter = (_) => value = _;
 
-        var binder = EventCallback
-            .Factory
-            .CreateBinder(component, setter, value, CultureInfo.InvariantCulture);
+        var binder = EventCallback.Factory.CreateBinder(
+            component,
+            setter,
+            value,
+            CultureInfo.InvariantCulture
+        );
 
         var expectedValue = 42_000;
 

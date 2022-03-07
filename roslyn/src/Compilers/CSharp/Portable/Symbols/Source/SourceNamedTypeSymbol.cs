@@ -1205,13 +1205,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
             )
             {
-                (attributeData, boundAttribute) = arguments
-                    .Binder
-                    .GetAttribute(
-                        arguments.AttributeSyntax,
-                        arguments.AttributeType,
-                        out hasAnyDiagnostics
-                    );
+                (attributeData, boundAttribute) = arguments.Binder.GetAttribute(
+                    arguments.AttributeSyntax,
+                    arguments.AttributeType,
+                    out hasAnyDiagnostics
+                );
                 if (!attributeData.HasErrors)
                 {
                     arguments
@@ -1234,13 +1232,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
             )
             {
-                (attributeData, boundAttribute) = arguments
-                    .Binder
-                    .GetAttribute(
-                        arguments.AttributeSyntax,
-                        arguments.AttributeType,
-                        out hasAnyDiagnostics
-                    );
+                (attributeData, boundAttribute) = arguments.Binder.GetAttribute(
+                    arguments.AttributeSyntax,
+                    arguments.AttributeType,
+                    out hasAnyDiagnostics
+                );
                 if (!attributeData.HasErrors)
                 {
                     arguments
@@ -1263,13 +1259,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
             )
             {
-                (attributeData, boundAttribute) = arguments
-                    .Binder
-                    .GetAttribute(
-                        arguments.AttributeSyntax,
-                        arguments.AttributeType,
-                        out hasAnyDiagnostics
-                    );
+                (attributeData, boundAttribute) = arguments.Binder.GetAttribute(
+                    arguments.AttributeSyntax,
+                    arguments.AttributeType,
+                    out hasAnyDiagnostics
+                );
                 if (!attributeData.HasErrors)
                 {
                     string? name = attributeData.GetConstructorArgument<string>(
@@ -1316,13 +1310,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
             )
             {
-                (attributeData, boundAttribute) = arguments
-                    .Binder
-                    .GetAttribute(
-                        arguments.AttributeSyntax,
-                        arguments.AttributeType,
-                        out hasAnyDiagnostics
-                    );
+                (attributeData, boundAttribute) = arguments.Binder.GetAttribute(
+                    arguments.AttributeSyntax,
+                    arguments.AttributeType,
+                    out hasAnyDiagnostics
+                );
                 if (!attributeData.HasErrors)
                 {
                     AttributeUsageInfo info = this.DecodeAttributeUsageAttribute(
@@ -1364,13 +1356,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
             )
             {
-                (attributeData, boundAttribute) = arguments
-                    .Binder
-                    .GetAttribute(
-                        arguments.AttributeSyntax,
-                        arguments.AttributeType,
-                        out hasAnyDiagnostics
-                    );
+                (attributeData, boundAttribute) = arguments.Binder.GetAttribute(
+                    arguments.AttributeSyntax,
+                    arguments.AttributeType,
+                    out hasAnyDiagnostics
+                );
                 if (!attributeData.HasErrors)
                 {
                     arguments
@@ -1650,11 +1640,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             foreach (SyntaxList<AttributeListSyntax> list in attributeLists)
             {
                 var syntaxTree = list.Node.SyntaxTree;
-                QuickAttributeChecker checker =
-                    this.DeclaringCompilation
-                        .GetBinderFactory(list.Node.SyntaxTree)
-                        .GetBinder(list.Node)
-                        .QuickAttributeChecker;
+                QuickAttributeChecker checker = this.DeclaringCompilation
+                    .GetBinderFactory(list.Node.SyntaxTree)
+                    .GetBinder(list.Node)
+                    .QuickAttributeChecker;
 
                 foreach (AttributeListSyntax attrList in list)
                 {

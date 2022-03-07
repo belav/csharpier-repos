@@ -27,9 +27,8 @@ public class Program
                     app.Run(
                         async context =>
                         {
-                            var env = context
-                                .RequestServices
-                                .GetRequiredService<IHostEnvironment>();
+                            var env =
+                                context.RequestServices.GetRequiredService<IHostEnvironment>();
                             await context.Response.WriteAsync(env.ApplicationName);
                             messageSent.Set();
                         }

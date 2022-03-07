@@ -15,8 +15,7 @@ namespace System.Reflection
         public static bool IsContainsMethod(this MethodInfo method) =>
             method.Name == nameof(IList.Contains)
             && method.DeclaringType != null
-            && method
-                .DeclaringType
+            && method.DeclaringType
                 .GetInterfaces()
                 .Append(method.DeclaringType)
                 .Any(

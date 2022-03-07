@@ -79,8 +79,9 @@ namespace System.Data.Odbc
             Debug.Assert(internalConnection != null, "internalConnection may not be null.");
             cacheMetaDataFactory = false;
 
-            OdbcConnection odbcOuterConnection =
-                ((OdbcConnectionOpen)internalConnection).OuterConnection;
+            OdbcConnection odbcOuterConnection = (
+                (OdbcConnectionOpen)internalConnection
+            ).OuterConnection;
             Debug.Assert(odbcOuterConnection != null, "outer connection may not be null.");
 
             // get the DBMS Name
@@ -93,9 +94,7 @@ namespace System.Data.Odbc
                 driverName = stringValue;
             }
 
-            Stream? XMLStream = System
-                .Reflection
-                .Assembly
+            Stream? XMLStream = System.Reflection.Assembly
                 .GetExecutingAssembly()
                 .GetManifestResourceStream("System.Data.Odbc.OdbcMetaData.xml");
             cacheMetaDataFactory = true;

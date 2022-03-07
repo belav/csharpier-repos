@@ -68,8 +68,10 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.ChangeSignature
 
         internal AddedParameter GetAddedParameter(Document document)
         {
-            var semanticModel =
-                document.GetRequiredSemanticModelAsync(CancellationToken.None).AsTask().Result;
+            var semanticModel = document
+                .GetRequiredSemanticModelAsync(CancellationToken.None)
+                .AsTask()
+                .Result;
 
             var type = document.Project.Language switch
             {
@@ -77,9 +79,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.ChangeSignature
                   => semanticModel
                       .GetSpeculativeTypeInfo(
                           0,
-                          CSharp
-                              .SyntaxFactory
-                              .ParseTypeName(_addedParameterFullyQualifiedTypeName!),
+                          CSharp.SyntaxFactory.ParseTypeName(
+                              _addedParameterFullyQualifiedTypeName!
+                          ),
                           SpeculativeBindingOption.BindAsTypeOrNamespace
                       )
                       .Type,
@@ -87,9 +89,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.ChangeSignature
                   => semanticModel
                       .GetSpeculativeTypeInfo(
                           0,
-                          VisualBasic
-                              .SyntaxFactory
-                              .ParseTypeName(_addedParameterFullyQualifiedTypeName!),
+                          VisualBasic.SyntaxFactory.ParseTypeName(
+                              _addedParameterFullyQualifiedTypeName!
+                          ),
                           SpeculativeBindingOption.BindAsTypeOrNamespace
                       )
                       .Type,

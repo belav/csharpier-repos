@@ -106,11 +106,10 @@ public class MvcCoreBuilderExtensionsTest
         );
 
         // Assert
-        var options =
-            serviceCollection
-                .BuildServiceProvider()
-                .GetRequiredService<IOptions<ApiBehaviorOptions>>()
-                .Value;
+        var options = serviceCollection
+            .BuildServiceProvider()
+            .GetRequiredService<IOptions<ApiBehaviorOptions>>()
+            .Value;
         Assert.True(options.SuppressMapClientErrors);
     }
 

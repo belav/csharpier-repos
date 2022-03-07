@@ -44,15 +44,13 @@ public class UseEndpointRoutingStartup
                     "/",
                     (httpContext) =>
                     {
-                        var dataSource = httpContext
-                            .RequestServices
-                            .GetRequiredService<EndpointDataSource>();
+                        var dataSource =
+                            httpContext.RequestServices.GetRequiredService<EndpointDataSource>();
 
                         var sb = new StringBuilder();
                         sb.AppendLine("Endpoints:");
                         foreach (
-                            var endpoint in dataSource
-                                .Endpoints
+                            var endpoint in dataSource.Endpoints
                                 .OfType<RouteEndpoint>()
                                 .OrderBy(
                                     e => e.RoutePattern.RawText,
@@ -101,12 +99,10 @@ public class UseEndpointRoutingStartup
                                 )
                             )
                             {
-                                var graphWriter = httpContext
-                                    .RequestServices
-                                    .GetRequiredService<DfaGraphWriter>();
-                                var dataSource = httpContext
-                                    .RequestServices
-                                    .GetRequiredService<EndpointDataSource>();
+                                var graphWriter =
+                                    httpContext.RequestServices.GetRequiredService<DfaGraphWriter>();
+                                var dataSource =
+                                    httpContext.RequestServices.GetRequiredService<EndpointDataSource>();
                                 graphWriter.Write(dataSource, writer);
                             }
 

@@ -814,17 +814,13 @@ class Program
             using var workspace = TestWorkspace.CreateCSharp(code);
 
             workspace.TryApplyChanges(
-                workspace
-                    .CurrentSolution
-                    .WithOptions(
-                        workspace
-                            .Options
-                            .WithChangedOption(
-                                FormattingOptions2.UseTabs,
-                                LanguageNames.CSharp,
-                                useTabs
-                            )
+                workspace.CurrentSolution.WithOptions(
+                    workspace.Options.WithChangedOption(
+                        FormattingOptions2.UseTabs,
+                        LanguageNames.CSharp,
+                        useTabs
                     )
+                )
             );
 
             var buffer = workspace.Documents.First().GetTextBuffer();

@@ -165,8 +165,7 @@ namespace Microsoft.CodeAnalysis.Remote
                 )
             )
             {
-                var checksum = await solution
-                    .State
+                var checksum = await solution.State
                     .GetChecksumAsync(cancellationToken)
                     .ConfigureAwait(false);
 
@@ -250,8 +249,7 @@ namespace Microsoft.CodeAnalysis.Remote
                         return;
                     }
 
-                    var state = await oldDocument
-                        .State
+                    var state = await oldDocument.State
                         .GetStateChecksumsAsync(CancellationToken)
                         .ConfigureAwait(false);
 

@@ -70,9 +70,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     // Prefer a value near zero.
                     var tc = default(TTC);
-                    var gz = NumericValueSetFactory<T, TTC>
-                        .Instance
-                        .Related(BinaryOperatorKind.GreaterThanOrEqual, tc.Zero);
+                    var gz = NumericValueSetFactory<T, TTC>.Instance.Related(
+                        BinaryOperatorKind.GreaterThanOrEqual,
+                        tc.Zero
+                    );
                     var t = (NumericValueSet<T, TTC>)this.Intersect(gz);
                     if (!t.IsEmpty)
                         return tc.ToConstantValue(t._intervals[0].first);

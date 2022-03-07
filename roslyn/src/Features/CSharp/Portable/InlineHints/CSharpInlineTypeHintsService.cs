@@ -41,8 +41,9 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineHints
                     && !variableDeclaration.Variables[0].Identifier.IsMissing
                 )
                 {
-                    var type =
-                        semanticModel.GetTypeInfo(variableDeclaration.Type, cancellationToken).Type;
+                    var type = semanticModel
+                        .GetTypeInfo(variableDeclaration.Type, cancellationToken)
+                        .Type;
                     if (IsValidType(type))
                         return CreateTypeHint(
                             type,
@@ -60,10 +61,9 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineHints
                     } declarationExpression
                 )
                 {
-                    var type =
-                        semanticModel
-                            .GetTypeInfo(declarationExpression.Type, cancellationToken)
-                            .Type;
+                    var type = semanticModel
+                        .GetTypeInfo(declarationExpression.Type, cancellationToken)
+                        .Type;
                     if (IsValidType(type))
                         return CreateTypeHint(
                             type,

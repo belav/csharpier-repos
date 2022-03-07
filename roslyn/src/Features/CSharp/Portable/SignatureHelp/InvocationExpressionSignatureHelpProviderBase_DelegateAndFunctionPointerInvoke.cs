@@ -40,10 +40,9 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 .GetAnySymbol();
             if (
                 expressionSymbol.IsKind(SymbolKind.Event)
-                && !expressionSymbol
-                    .ContainingType
-                    .OriginalDefinition
-                    .Equals(within.OriginalDefinition)
+                && !expressionSymbol.ContainingType.OriginalDefinition.Equals(
+                    within.OriginalDefinition
+                )
             )
             {
                 return null;

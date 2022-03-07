@@ -306,9 +306,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         private static bool IsValidWatsonEntry(EventRecord eventLogRecord)
         {
             if (
-                StringComparer
-                    .InvariantCultureIgnoreCase
-                    .Equals(eventLogRecord.ProviderName, WatsonProviderName)
+                StringComparer.InvariantCultureIgnoreCase.Equals(
+                    eventLogRecord.ProviderName,
+                    WatsonProviderName
+                )
                 && (eventLogRecord.Id == WatsonEventId)
                 && (eventLogRecord.Properties.Count >= WatsonEventLogEntryPropertyCount)
                 && (
@@ -344,10 +345,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         )
         {
             if (
-                StringComparer
-                    .InvariantCultureIgnoreCase
-                    .Equals(eventLogRecord.ProviderName, DotNetProviderName)
-                && s_dotNetEventId.Contains(eventLogRecord.Id)
+                StringComparer.InvariantCultureIgnoreCase.Equals(
+                    eventLogRecord.ProviderName,
+                    DotNetProviderName
+                ) && s_dotNetEventId.Contains(eventLogRecord.Id)
             )
             {
                 dotNetEntry = new FeedbackItemDotNetEntry(eventLogRecord);

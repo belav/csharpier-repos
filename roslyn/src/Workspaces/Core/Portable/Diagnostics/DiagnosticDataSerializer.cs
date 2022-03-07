@@ -384,8 +384,7 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
             var documentId =
                 document != null
                     ? document.Id
-                    : project
-                      .Solution
+                    : project.Solution
                       .GetDocumentIdsWithFilePath(originalFile)
                       .FirstOrDefault(documentId => documentId.ProjectId == project.Id);
 

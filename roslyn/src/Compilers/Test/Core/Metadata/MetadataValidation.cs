@@ -32,8 +32,9 @@ namespace Roslyn.Test.Utilities
             var ctorHandle = metadataReader.GetCustomAttribute(customAttribute).Constructor;
             if (ctorHandle.Kind == HandleKind.MemberReference) // MemberRef
             {
-                var container =
-                    metadataReader.GetMemberReference((MemberReferenceHandle)ctorHandle).Parent;
+                var container = metadataReader
+                    .GetMemberReference((MemberReferenceHandle)ctorHandle)
+                    .Parent;
                 var name = metadataReader.GetTypeReference((TypeReferenceHandle)container).Name;
                 return metadataReader.GetString(name);
             }

@@ -150,14 +150,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                         );
 
                         var oldSymbol = semanticModel.GetSymbolInfo(node).Symbol;
-                        var newSymbol =
-                            semanticModel
-                                .GetSpeculativeSymbolInfo(
-                                    node.SpanStart,
-                                    candidateRewrittenNode,
-                                    SpeculativeBindingOption.BindAsExpression
-                                )
-                                .Symbol;
+                        var newSymbol = semanticModel
+                            .GetSpeculativeSymbolInfo(
+                                node.SpanStart,
+                                candidateRewrittenNode,
+                                SpeculativeBindingOption.BindAsExpression
+                            )
+                            .Symbol;
 
                         if (oldSymbol != null && newSymbol != null)
                         {

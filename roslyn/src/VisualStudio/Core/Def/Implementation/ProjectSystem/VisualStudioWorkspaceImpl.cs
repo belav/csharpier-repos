@@ -74,8 +74,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
         private ImmutableDictionary<ProjectId, IVsHierarchy?> _projectToHierarchyMap =
             ImmutableDictionary<ProjectId, IVsHierarchy?>.Empty;
-        private ImmutableDictionary<ProjectId, Guid> _projectToGuidMap =
-            ImmutableDictionary<ProjectId, Guid>.Empty;
+        private ImmutableDictionary<ProjectId, Guid> _projectToGuidMap = ImmutableDictionary<
+            ProjectId,
+            Guid
+        >.Empty;
         private ImmutableDictionary<ProjectId, string?> _projectToMaxSupportedLangVersionMap =
             ImmutableDictionary<ProjectId, string?>.Empty;
         private ImmutableDictionary<ProjectId, string> _projectToDependencyNodeTargetIdentifier =
@@ -157,8 +159,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
             _ = Task.Run(() => InitializeUIAffinitizedServicesAsync(asyncServiceProvider));
 
-            FileChangeWatcher =
-                exportProvider.GetExportedValue<FileChangeWatcherProvider>().Watcher;
+            FileChangeWatcher = exportProvider
+                .GetExportedValue<FileChangeWatcherProvider>()
+                .Watcher;
             FileWatchedReferenceFactory =
                 exportProvider.GetExportedValue<FileWatchedPortableExecutableReferenceFactory>();
 
@@ -198,29 +201,27 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             }
 
             // This pattern ensures that we are called whenever the build starts/completes even if it is already in progress.
-            KnownUIContexts
-                .SolutionBuildingContext
-                .WhenActivated(
-                    () =>
+            KnownUIContexts.SolutionBuildingContext.WhenActivated(
+                () =>
+                {
+                    KnownUIContexts.SolutionBuildingContext.UIContextChanged += (
+                        object _,
+                        UIContextChangedEventArgs e
+                    ) =>
                     {
-                        KnownUIContexts.SolutionBuildingContext.UIContextChanged += (
-                            object _,
-                            UIContextChangedEventArgs e
-                        ) =>
+                        if (e.Activated)
                         {
-                            if (e.Activated)
-                            {
-                                ExternalErrorDiagnosticUpdateSource.OnSolutionBuildStarted();
-                            }
-                            else
-                            {
-                                ExternalErrorDiagnosticUpdateSource.OnSolutionBuildCompleted();
-                            }
-                        };
+                            ExternalErrorDiagnosticUpdateSource.OnSolutionBuildStarted();
+                        }
+                        else
+                        {
+                            ExternalErrorDiagnosticUpdateSource.OnSolutionBuildCompleted();
+                        }
+                    };
 
-                        ExternalErrorDiagnosticUpdateSource.OnSolutionBuildStarted();
-                    }
-                );
+                    ExternalErrorDiagnosticUpdateSource.OnSolutionBuildStarted();
+                }
+            );
 
             _isExternalErrorDiagnosticUpdateSourceSubscribedToSolutionBuildEvents = true;
         }
@@ -230,9 +231,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         )
         {
             // Create services that are bound to the UI thread
-            await _threadingContext
-                .JoinableTaskFactory
-                .SwitchToMainThreadAsync(_threadingContext.DisposalToken);
+            await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                _threadingContext.DisposalToken
+            );
 
             var solutionClosingContext = UIContext.FromUIContextGuid(
                 VSConstants.UICONTEXT.SolutionClosing_guid
@@ -415,9 +416,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 );
             }
 
-            return _projectCodeModelFactory
-                .Value
-                .GetOrCreateFileCodeModel(documentId.ProjectId, documentFilePath);
+            return _projectCodeModelFactory.Value.GetOrCreateFileCodeModel(
+                documentId.ProjectId,
+                documentFilePath
+            );
         }
 
         internal override bool TryApplyChanges(
@@ -514,8 +516,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             CompilationOptions newOptions,
             CodeAnalysis.Project project
         ) =>
-            project
-                .LanguageServices
+            project.LanguageServices
                 .GetRequiredService<ICompilationOptionsChangingService>()
                 .CanApplyChange(oldOptions, newOptions);
 
@@ -530,8 +531,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 out var maxSupportLangVersion
             );
 
-            return project
-                .LanguageServices
+            return project.LanguageServices
                 .GetRequiredService<IParseOptionsChangingService>()
                 .CanApplyChange(oldOptions, newOptions, maxSupportLangVersion);
         }
@@ -540,9 +540,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             object sender,
             TextBufferCreatedEventArgs e
         ) =>
-            e.TextBuffer
-                .Properties
-                .AddProperty(typeof(ITextBufferCloneService), _textBufferCloneService);
+            e.TextBuffer.Properties.AddProperty(
+                typeof(ITextBufferCloneService),
+                _textBufferCloneService
+            );
 
         public override bool CanApplyChange(ApplyChangesKind feature)
         {
@@ -643,9 +644,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             }
 
             var originalProject = CurrentSolution.GetRequiredProject(projectId);
-            var compilationOptionsService = originalProject
-                .LanguageServices
-                .GetRequiredService<ICompilationOptionsChangingService>();
+            var compilationOptionsService =
+                originalProject.LanguageServices.GetRequiredService<ICompilationOptionsChangingService>();
             var storage = ProjectPropertyStorage.Create(
                 TryGetDTEProject(projectId),
                 ServiceProvider.GlobalProvider
@@ -667,8 +667,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
             var parseOptionsService = CurrentSolution
                 .GetRequiredProject(projectId)
-                .LanguageServices
-                .GetRequiredService<IParseOptionsChangingService>();
+                .LanguageServices.GetRequiredService<IParseOptionsChangingService>();
             var storage = ProjectPropertyStorage.Create(
                 TryGetDTEProject(projectId),
                 ServiceProvider.GlobalProvider
@@ -811,9 +810,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             // Instead, we invoke this in JTF run which will mitigate deadlocks when the ConfigureAwait(true)
             // tries to switch back to the main thread in the LSP client.
             // Link to LSP client bug for ConfigureAwait(true) - https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1216657
-            var mappedChanges = _threadingContext
-                .JoinableTaskFactory
-                .Run(() => GetMappedTextChanges(solutionChanges));
+            var mappedChanges = _threadingContext.JoinableTaskFactory.Run(
+                () => GetMappedTextChanges(solutionChanges)
+            );
 
             // Group the mapped text changes by file, then apply all mapped text changes for the file.
             foreach (var changesForFile in mappedChanges)
@@ -821,8 +820,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 // It doesn't matter which of the file's projectIds we pass to the invisible editor, so just pick the first.
                 var projectId = changesForFile.Value.First().ProjectId;
                 // Make sure we only take distinct changes - we'll have duplicates from different projects for linked files or multi-targeted files.
-                var distinctTextChanges = changesForFile
-                    .Value
+                var distinctTextChanges = changesForFile.Value
                     .Select(change => change.TextChange)
                     .Distinct()
                     .ToImmutableArray();
@@ -852,9 +850,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 {
                     foreach (var changedDocumentId in projectChanges.GetChangedDocuments())
                     {
-                        var oldDocument = projectChanges
-                            .OldProject
-                            .GetRequiredDocument(changedDocumentId);
+                        var oldDocument = projectChanges.OldProject.GetRequiredDocument(
+                            changedDocumentId
+                        );
                         if (
                             !ShouldApplyChangesToMappedDocuments(
                                 oldDocument,
@@ -865,9 +863,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                             continue;
                         }
 
-                        var newDocument = projectChanges
-                            .NewProject
-                            .GetRequiredDocument(changedDocumentId);
+                        var newDocument = projectChanges.NewProject.GetRequiredDocument(
+                            changedDocumentId
+                        );
                         var mappedTextChanges = await mappingService
                             .GetMappedTextChangesAsync(
                                 oldDocument,
@@ -936,9 +934,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 ?? documentTrackingService.GetVisibleDocuments().FirstOrDefault();
             if (documentId != null)
             {
-                var composition = (IComponentModel)ServiceProvider
-                    .GlobalProvider
-                    .GetService(typeof(SComponentModel));
+                var composition = (IComponentModel)ServiceProvider.GlobalProvider.GetService(
+                    typeof(SComponentModel)
+                );
                 var exportProvider = composition.DefaultExportProvider;
                 var editorAdaptersService =
                     exportProvider.GetExportedValue<IVsEditorAdaptersFactoryService>();
@@ -1493,8 +1491,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     var textBuffer = this.CurrentSolution
                         .GetTextDocument(documentId)!
                         .GetTextSynchronously(CancellationToken.None)
-                        .Container
-                        .TryGetTextBuffer();
+                        .Container.TryGetTextBuffer();
 
                     if (textBuffer != null)
                     {
@@ -1562,13 +1559,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     projectItemForDocument.Save();
                 }
 
-                var uniqueName = projectItemForDocument
-                    .Collection
-                    .GetUniqueNameIgnoringProjectItem(
-                        projectItemForDocument,
-                        Path.GetFileNameWithoutExtension(updatedInfo.Name),
-                        Path.GetExtension(updatedInfo.Name)
-                    );
+                var uniqueName = projectItemForDocument.Collection.GetUniqueNameIgnoringProjectItem(
+                    projectItemForDocument,
+                    Path.GetFileNameWithoutExtension(updatedInfo.Name),
+                    Path.GetExtension(updatedInfo.Name)
+                );
 
                 // Get the current undoManager before any file renames/documentId changes happen
                 var undoManager = TryGetUndoManager();
@@ -1778,9 +1773,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
         public void EnsureEditableDocuments(IEnumerable<DocumentId> documents)
         {
-            var queryEdit = (IVsQueryEditQuerySave2)ServiceProvider
-                .GlobalProvider
-                .GetService(typeof(SVsQueryEditQuerySave));
+            var queryEdit = (IVsQueryEditQuerySave2)ServiceProvider.GlobalProvider.GetService(
+                typeof(SVsQueryEditQuerySave)
+            );
 
             // make sure given document id actually exist in current solution and the file is marked as supporting modifications
             // and actually has non null file path
@@ -1903,9 +1898,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
             // In both directions things are still unknown.  Fallback to the reference manager
             // to make the determination here.
-            var referenceManager = (IVsReferenceManager)ServiceProvider
-                .GlobalProvider
-                .GetService(typeof(SVsReferenceManager));
+            var referenceManager = (IVsReferenceManager)ServiceProvider.GlobalProvider.GetService(
+                typeof(SVsReferenceManager)
+            );
             if (referenceManager == null)
             {
                 // Couldn't get the reference manager.  Have to assume it's not allowed.
@@ -2087,9 +2082,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             _threadingContext.RunWithShutdownBlockAsync(
                 async cancellationToken =>
                 {
-                    await _threadingContext
-                        .JoinableTaskFactory
-                        .SwitchToMainThreadAsync(alwaysYield: true, cancellationToken);
+                    await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                        alwaysYield: true,
+                        cancellationToken
+                    );
                     RefreshProjectExistsUIContextForLanguage(languageName);
                     asyncToken.Dispose();
                 }
@@ -2219,9 +2215,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
                             projectIdsChanged.Add(projectIdToRetarget);
 
-                            GetReferenceInfo_NoLock(projectIdToRetarget)
-                                .ConvertedProjectReferences
-                                .Add((reference.FilePath!, projectReference));
+                            GetReferenceInfo_NoLock(
+                                projectIdToRetarget
+                            ).ConvertedProjectReferences.Add(
+                                (reference.FilePath!, projectReference)
+                            );
 
                             // We have converted one, but you could have more than one reference with different aliases
                             // that we need to convert, so we'll keep going
@@ -2271,9 +2269,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             if (projectWithMetadataReference.Language != referencedProject.Language)
             {
                 if (
-                    projectWithMetadataReference
-                        .LanguageServices
-                        .GetService<ICompilationFactoryService>() != null
+                    projectWithMetadataReference.LanguageServices.GetService<ICompilationFactoryService>()
+                        != null
                     && referencedProject.LanguageServices.GetService<ICompilationFactoryService>()
                         == null
                 )
@@ -2394,9 +2391,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                         embedInteropTypes: properties.EmbedInteropTypes
                     );
 
-                    GetReferenceInfo_NoLock(referencingProject)
-                        .ConvertedProjectReferences
-                        .Add((path, projectReference));
+                    GetReferenceInfo_NoLock(referencingProject).ConvertedProjectReferences.Add(
+                        (path, projectReference)
+                    );
 
                     return projectReference;
                 }
@@ -2548,9 +2545,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     // we might not find the path at all: when we receive the file changed event, we aren't checking if the file is still
                     // in the workspace at that time; it's possible it might have already been removed.
                     foreach (
-                        var portableExecutableReference in project
-                            .MetadataReferences
-                            .OfType<PortableExecutableReference>()
+                        var portableExecutableReference in project.MetadataReferences.OfType<PortableExecutableReference>()
                     )
                     {
                         if (portableExecutableReference.FilePath == fullFilePath)

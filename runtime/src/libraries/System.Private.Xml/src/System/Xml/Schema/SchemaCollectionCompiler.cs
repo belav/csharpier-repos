@@ -196,9 +196,10 @@ namespace System.Xml.Schema
 
         private void Compile()
         {
-            _schema!
-                .SchemaTypes
-                .Insert(DatatypeImplementation.QnAnyType, XmlSchemaComplexType.AnyType);
+            _schema!.SchemaTypes.Insert(
+                DatatypeImplementation.QnAnyType,
+                XmlSchemaComplexType.AnyType
+            );
 
             foreach (XmlSchemaSubstitutionGroupV1Compat? substitutionGroup in _examplars.Values)
             {
@@ -2209,9 +2210,10 @@ namespace System.Xml.Schema
                         {
                             if (attributeGroup.AttributeUses[attributeValue!.QualifiedName] == null)
                             {
-                                attributeGroup
-                                    .AttributeUses
-                                    .Add(attributeValue.QualifiedName, attributeValue);
+                                attributeGroup.AttributeUses.Add(
+                                    attributeValue.QualifiedName,
+                                    attributeValue
+                                );
                             }
                             else
                             {
@@ -2321,9 +2323,10 @@ namespace System.Xml.Schema
                             {
                                 if (derivedType.AttributeUses[attributeValue.QualifiedName] == null)
                                 {
-                                    derivedType
-                                        .AttributeUses
-                                        .Add(attributeValue.QualifiedName, attributeValue);
+                                    derivedType.AttributeUses.Add(
+                                        attributeValue.QualifiedName,
+                                        attributeValue
+                                    );
                                 }
                                 else
                                 {
@@ -2387,9 +2390,10 @@ namespace System.Xml.Schema
                         }
                         else
                         {
-                            derivedType
-                                .AttributeUses
-                                .Add(attributeBase.QualifiedName, attributeBase);
+                            derivedType.AttributeUses.Add(
+                                attributeBase.QualifiedName,
+                                attributeBase
+                            );
                         }
                     }
                 }
@@ -2420,9 +2424,10 @@ namespace System.Xml.Schema
                             ];
                         if (attribute == null)
                         {
-                            derivedType
-                                .AttributeUses
-                                .Add(attributeBase.QualifiedName, attributeBase);
+                            derivedType.AttributeUses.Add(
+                                attributeBase.QualifiedName,
+                                attributeBase
+                            );
                         }
                         else
                         {

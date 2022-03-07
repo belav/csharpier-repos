@@ -25,8 +25,9 @@ namespace System.Web.WebPages.Deployment
             Path.GetFileName(ThisAssemblyName.Name) + ".dll";
 
         // Special case MWI because it does not share the same assembly version as the rest of WebPages.
-        private static readonly Version _mwiVersion =
-            new AssemblyName(typeof(InfrastructureHelper).Assembly.FullName).Version;
+        private static readonly Version _mwiVersion = new AssemblyName(
+            typeof(InfrastructureHelper).Assembly.FullName
+        ).Version;
 
         private static readonly AssemblyName _mwiAssemblyName = GetFullName(
             "Microsoft.Web.Infrastructure",

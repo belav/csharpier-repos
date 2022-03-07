@@ -52,10 +52,8 @@ namespace Microsoft.CodeAnalysis
                     )
                 )
                 {
-                    var serializer = solutionServices
-                        .Workspace
-                        .Services
-                        .GetRequiredService<ISerializerService>();
+                    var serializer =
+                        solutionServices.Workspace.Services.GetRequiredService<ISerializerService>();
 
                     var infoChecksum = serializer.CreateChecksum(Attributes, cancellationToken);
                     var serializableText = await SerializableSourceText

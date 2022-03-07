@@ -19,8 +19,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             CompletionItemRules rules
         )
         {
-            var props = ImmutableDictionary<string, string>
-                .Empty
+            var props = ImmutableDictionary<string, string>.Empty
                 .Add(BeforeCaretText, beforeCaretText)
                 .Add(AfterCaretText, afterCaretText);
 

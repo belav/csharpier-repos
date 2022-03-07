@@ -203,8 +203,7 @@ namespace AutoMapper.UnitTests
                             p =>
                             {
                                 p.CreateMap<Source, Dest>()
-                                    .ValueTransformers
-                                    .Add<string>(dest => dest + ", for real,");
+                                    .ValueTransformers.Add<string>(dest => dest + ", for real,");
                                 p.ValueTransformers.Add<string>(
                                     dest => dest + " is straight up dope"
                                 );

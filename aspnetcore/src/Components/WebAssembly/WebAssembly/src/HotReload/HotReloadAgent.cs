@@ -259,8 +259,7 @@ internal sealed class HotReloadAgent : IDisposable
 
         foreach (var delta in deltas)
         {
-            var assembly = AppDomain
-                .CurrentDomain
+            var assembly = AppDomain.CurrentDomain
                 .GetAssemblies()
                 .FirstOrDefault(
                     assembly =>

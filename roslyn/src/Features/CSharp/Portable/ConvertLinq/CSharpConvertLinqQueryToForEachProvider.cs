@@ -170,8 +170,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                     case SyntaxKind.WhereClause:
                         return SyntaxFactory.Block(
                             SyntaxFactory.IfStatement(
-                                ((WhereClauseSyntax)node)
-                                    .Condition
+                                ((WhereClauseSyntax)node).Condition
                                     .WithAdditionalAnnotations(Simplifier.Annotation)
                                     .WithoutTrivia(),
                                 statement
@@ -299,9 +298,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                                                                     joinClause.LeftExpression
                                                                 ),
                                                                 SyntaxFactory.Argument(
-                                                                    joinClause
-                                                                        .RightExpression
-                                                                        .WithoutTrailingTrivia()
+                                                                    joinClause.RightExpression.WithoutTrailingTrivia()
                                                                 )
                                                             }
                                                         )
@@ -318,8 +315,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                         // This is not the latest Select in the Query Expression
                         // There is a QueryBody with the Continuation as a parent.
                         var selectClause = (SelectClauseSyntax)node;
-                        var identifier =
-                            ((QueryBodySyntax)selectClause.Parent).Continuation.Identifier;
+                        var identifier = ((QueryBodySyntax)selectClause.Parent)
+                            .Continuation
+                            .Identifier;
                         return AddToBlockTop(
                             CreateLocalDeclarationStatement(
                                 identifier,
@@ -765,8 +763,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                 var typeSyntax = generateTypeFromExpression
                     ? _semanticModel
                       .GetTypeInfo(expression, _cancellationToken)
-                      .ConvertedType
-                      .GenerateTypeSyntax()
+                      .ConvertedType.GenerateTypeSyntax()
                     : VarNameIdentifier;
                 return SyntaxFactory
                     .LocalDeclarationStatement(
@@ -953,21 +950,21 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                     // foreach(MyType thisIdentifier in from ....... from MyType thisIdentifier ... select thisIdentifier)
 
                     // The last clause in query stack must be SelectClauseSyntax.
-                    var lastSelectExpression =
-                        ((SelectClauseSyntax)queryExpressionProcessingInfo.Stack.Peek()).Expression;
+                    var lastSelectExpression = (
+                        (SelectClauseSyntax)queryExpressionProcessingInfo.Stack.Peek()
+                    ).Expression;
                     if (
                         lastSelectExpression is IdentifierNameSyntax identifierName
                         && forEachStatement.Identifier.ValueText
                             == identifierName.Identifier.ValueText
-                        && queryExpressionProcessingInfo
-                            .IdentifierNames
-                            .Contains(identifierName.Identifier.ValueText)
+                        && queryExpressionProcessingInfo.IdentifierNames.Contains(
+                            identifierName.Identifier.ValueText
+                        )
                     )
                     {
-                        var forEachStatementTypeSymbolType =
-                            _semanticModel
-                                .GetTypeInfo(forEachStatement.Type, _cancellationToken)
-                                .Type;
+                        var forEachStatementTypeSymbolType = _semanticModel
+                            .GetTypeInfo(forEachStatement.Type, _cancellationToken)
+                            .Type;
                         var lastSelectExpressionTypeInfo = _semanticModel.GetTypeInfo(
                             lastSelectExpression,
                             _cancellationToken
@@ -1270,8 +1267,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                     if (
                         _semanticModel
                             .GetTypeInfo(selectClause.Expression, _cancellationToken)
-                            .Type
-                            .ContainsAnonymousType()
+                            .Type.ContainsAnonymousType()
                     )
                     {
                         return false;

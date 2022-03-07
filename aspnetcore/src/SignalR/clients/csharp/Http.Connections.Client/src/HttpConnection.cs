@@ -462,9 +462,10 @@ public partial class HttpConnection : ConnectionContext, IConnectionInherentKeep
                         );
                     }
                     else if (
-                        !transport
-                            .TransferFormats!
-                            .Contains(transferFormatString, StringComparer.Ordinal)
+                        !transport.TransferFormats!.Contains(
+                            transferFormatString,
+                            StringComparer.Ordinal
+                        )
                     )
                     {
                         Log.TransportDoesNotSupportTransferFormat(
@@ -687,8 +688,9 @@ public partial class HttpConnection : ConnectionContext, IConnectionInherentKeep
 
                 if (_httpConnectionOptions.UseDefaultCredentials != null)
                 {
-                    httpClientHandler.UseDefaultCredentials =
-                        _httpConnectionOptions.UseDefaultCredentials.Value;
+                    httpClientHandler.UseDefaultCredentials = _httpConnectionOptions
+                        .UseDefaultCredentials
+                        .Value;
                 }
 
                 if (_httpConnectionOptions.Credentials != null)

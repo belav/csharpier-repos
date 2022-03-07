@@ -177,9 +177,10 @@ namespace Microsoft.CodeAnalysis
                     var candidateName = AssemblyName.GetAssemblyName(candidatePath);
                     // Checking FullName ensures that version and PublicKeyToken match exactly.
                     if (
-                        candidateName
-                            .FullName
-                            .Equals(assemblyName.FullName, StringComparison.OrdinalIgnoreCase)
+                        candidateName.FullName.Equals(
+                            assemblyName.FullName,
+                            StringComparison.OrdinalIgnoreCase
+                        )
                     )
                     {
                         return LoadFromAssemblyPath(_loader.GetPathToLoad(candidatePath));

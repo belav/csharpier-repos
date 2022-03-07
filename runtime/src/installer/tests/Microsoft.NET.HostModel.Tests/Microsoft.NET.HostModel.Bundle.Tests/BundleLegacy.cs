@@ -41,8 +41,7 @@ namespace Microsoft.NET.HostModel.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining("Hello World!");
+                .And.HaveStdOutContaining("Hello World!");
         }
 
         private static TestProjectFixture CreatePublishedFixture(

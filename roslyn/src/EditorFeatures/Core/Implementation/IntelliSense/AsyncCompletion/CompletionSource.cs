@@ -131,21 +131,19 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             // There could be mixed desired behavior per textView and even per same completion session.
             // The right fix would be to send this information as a result of the method.
             // Then, the Editor would choose the right behavior for mixed cases.
-            _textView
-                .Options
-                .GlobalOptions
-                .SetOptionValue(
-                    NonBlockingCompletionEditorOption,
-                    !_globalOptions.GetOption(
-                        CompletionViewOptions.BlockForCompletionItems,
-                        service.Language
-                    )
-                );
+            _textView.Options.GlobalOptions.SetOptionValue(
+                NonBlockingCompletionEditorOption,
+                !_globalOptions.GetOption(
+                    CompletionViewOptions.BlockForCompletionItems,
+                    service.Language
+                )
+            );
 
             // In case of calls with multiple completion services for the same view (e.g. TypeScript and C#), those completion services must not be called simultaneously for the same session.
             // Therefore, in each completion session we use a list of commit character for a specific completion service and a specific content type.
-            _textView.Properties[PotentialCommitCharacters] =
-                service.GetRules(options).DefaultCommitCharacters;
+            _textView.Properties[PotentialCommitCharacters] = service
+                .GetRules(options)
+                .DefaultCommitCharacters;
 
             // Reset a flag which means a snippet triggered by ? + Tab.
             // Set it later if met the condition.
@@ -292,11 +290,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 TextSpan.FromBounds(caretPoint - 2, caretPoint),
                 string.Empty
             );
-            document
-                .Project
-                .Solution
-                .Workspace
-                .ApplyTextChanges(document.Id, textChange, CancellationToken.None);
+            document.Project.Solution.Workspace.ApplyTextChanges(
+                document.Id,
+                textChange,
+                CancellationToken.None
+            );
 
             _snippetCompletionTriggeredIndirectly = true;
             return true;
@@ -333,12 +331,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             // We only want to provide expanded items for Roslyn's expander.
             if (
                 expander == FilterSet.Expander
-                && session
-                    .Properties
-                    .TryGetProperty(
-                        ExpandedItemTriggerLocation,
-                        out SnapshotPoint initialTriggerLocation
-                    )
+                && session.Properties.TryGetProperty(
+                    ExpandedItemTriggerLocation,
+                    out SnapshotPoint initialTriggerLocation
+                )
             )
             {
                 return await GetCompletionContextWorkerAsync(
@@ -426,10 +422,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                     completionList.SuggestionModeItem != null
                         ? new AsyncCompletionData.SuggestionItemOptions(
                               completionList.SuggestionModeItem.DisplayText,
-                              completionList
-                                  .SuggestionModeItem
-                                  .Properties
-                                  .TryGetValue(Description, out var description)
+                              completionList.SuggestionModeItem.Properties.TryGetValue(
+                                  Description,
+                                  out var description
+                              )
                                 ? description
                                 : string.Empty
                           )
@@ -444,12 +440,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 // Controller.Session_ComputeModel: if completionList.SuggestionModeItem != null, then suggestionMode = true
                 // If there are suggestionItemOptions, then later HandleNormalFiltering should set selection to SoftSelection.
                 if (
-                    !session
-                        .Properties
-                        .TryGetProperty(
-                            HasSuggestionItemOptions,
-                            out bool hasSuggestionItemOptionsBefore
-                        ) || !hasSuggestionItemOptionsBefore
+                    !session.Properties.TryGetProperty(
+                        HasSuggestionItemOptions,
+                        out bool hasSuggestionItemOptionsBefore
+                    ) || !hasSuggestionItemOptionsBefore
                 )
                 {
                     session.Properties[HasSuggestionItemOptions] = suggestionItemOptions != null;
@@ -459,12 +453,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 if (excludedCommitCharacters.Length > 0)
                 {
                     if (
-                        session
-                            .Properties
-                            .TryGetProperty(
-                                ExcludedCommitCharacters,
-                                out ImmutableArray<char> excludedCommitCharactersBefore
-                            )
+                        session.Properties.TryGetProperty(
+                            ExcludedCommitCharacters,
+                            out ImmutableArray<char> excludedCommitCharactersBefore
+                        )
                     )
                     {
                         excludedCommitCharacters = excludedCommitCharacters
@@ -549,8 +541,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 _streamingPresenter
             );
 
-            var elements = IntelliSense
-                .Helpers
+            var elements = IntelliSense.Helpers
                 .BuildInteractiveTextElements(description.TaggedParts, context)
                 .ToArray();
             if (elements.Length == 0)

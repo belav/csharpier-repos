@@ -251,11 +251,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 metadata.GetForeignKeyConfigurationSource()
             );
 
-            var orderProductEntity = metadata
-                .DeclaringEntityType
-                .Model
-                .Builder
-                .Entity(typeof(OrderProduct));
+            var orderProductEntity = metadata.DeclaringEntityType.Model.Builder.Entity(
+                typeof(OrderProduct)
+            );
             var fk = (ForeignKey)orderProductEntity
                 .HasRelationship(metadata.DeclaringEntityType, nameof(OrderProduct.Order))
                 .IsUnique(false)
@@ -305,9 +303,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             // the skip navigation is pointing to the automatically-generated
             // join entity type and so is its inverse
-            var inverse = (SkipNavigation)metadata
-                .TargetEntityType
-                .Builder
+            var inverse = (SkipNavigation)metadata.TargetEntityType.Builder
                 .HasSkipNavigation(Product.OrdersProperty, metadata.DeclaringEntityType)
                 .Metadata;
 
@@ -415,8 +411,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         private InternalSkipNavigationBuilder CreateInternalSkipNavigationBuilder()
         {
-            var modelBuilder = (InternalModelBuilder)InMemoryTestHelpers
-                .Instance
+            var modelBuilder = (InternalModelBuilder)InMemoryTestHelpers.Instance
                 .CreateConventionBuilder()
                 .GetInfrastructure();
 

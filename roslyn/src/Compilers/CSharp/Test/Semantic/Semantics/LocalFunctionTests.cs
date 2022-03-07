@@ -1234,8 +1234,7 @@ class C
             Assert.Equal(4, attributeSyntaxes.Count);
 
             var attributeConstructor = comp.GetTypeByMetadataName("A")
-                .InstanceConstructors
-                .Single();
+                .InstanceConstructors.Single();
             foreach (var attributeSyntax in attributeSyntaxes)
             {
                 var symbol = model.GetSymbolInfo(attributeSyntax).Symbol.GetSymbol<MethodSymbol>();
@@ -2081,8 +2080,7 @@ class C
                 .Single();
             var localSymbol = model
                 .GetDeclaredSymbol(x)
-                .ContainingSymbol
-                .GetSymbol<LocalFunctionSymbol>();
+                .ContainingSymbol.GetSymbol<LocalFunctionSymbol>();
             var typeParam = localSymbol.TypeParameters.Single();
             var attrs = typeParam.GetAttributes();
 

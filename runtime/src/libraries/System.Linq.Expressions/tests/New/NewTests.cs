@@ -362,8 +362,7 @@ namespace System.Linq.Expressions.Tests
         {
             ConstructorInfo cctor = typeof(StaticCtor)
                 .GetTypeInfo()
-                .DeclaredConstructors
-                .Single(c => c.IsStatic);
+                .DeclaredConstructors.Single(c => c.IsStatic);
 
             AssertExtensions.Throws<ArgumentException>("constructor", () => Expression.New(cctor));
             AssertExtensions.Throws<ArgumentException>(

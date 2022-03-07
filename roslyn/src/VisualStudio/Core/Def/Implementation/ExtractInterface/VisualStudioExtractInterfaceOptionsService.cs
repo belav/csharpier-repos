@@ -68,8 +68,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractInterfac
 
             if (result.HasValue && result.Value)
             {
-                var includedMembers = viewModel
-                    .MemberContainers
+                var includedMembers = viewModel.MemberContainers
                     .Where(c => c.IsChecked)
                     .Select(c => c.Symbol);
 

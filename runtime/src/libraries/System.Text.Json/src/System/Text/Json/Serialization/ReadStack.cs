@@ -143,8 +143,10 @@ namespace System.Text.Json
                 {
                     JsonTypeInfo jsonTypeInfo;
                     JsonNumberHandling? numberHandling = Current.NumberHandling;
-                    ConverterStrategy converterStrategy =
-                        Current.JsonTypeInfo.PropertyInfoForTypeInfo.ConverterStrategy;
+                    ConverterStrategy converterStrategy = Current
+                        .JsonTypeInfo
+                        .PropertyInfoForTypeInfo
+                        .ConverterStrategy;
 
                     if (converterStrategy == ConverterStrategy.Object)
                     {
@@ -154,8 +156,10 @@ namespace System.Text.Json
                         }
                         else
                         {
-                            jsonTypeInfo =
-                                Current.CtorArgumentState!.JsonParameterInfo!.RuntimeTypeInfo;
+                            jsonTypeInfo = Current
+                                .CtorArgumentState!
+                                .JsonParameterInfo!
+                                .RuntimeTypeInfo;
                         }
                     }
                     else if (converterStrategy == ConverterStrategy.Value)

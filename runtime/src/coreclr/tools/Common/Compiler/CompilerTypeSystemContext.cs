@@ -309,9 +309,9 @@ namespace ILCompiler
         protected void InheritOpenModules(CompilerTypeSystemContext oldTypeSystemContext)
         {
             foreach (
-                ModuleData oldModuleData in ModuleHashtable
-                    .Enumerator
-                    .Get(oldTypeSystemContext._moduleHashtable)
+                ModuleData oldModuleData in ModuleHashtable.Enumerator.Get(
+                    oldTypeSystemContext._moduleHashtable
+                )
             )
             {
                 AddModule(null, null, true, oldModuleData);
@@ -407,8 +407,9 @@ namespace ILCompiler
                     if (debugEntry.Type != DebugDirectoryEntryType.CodeView)
                         continue;
 
-                    string candidateFileName =
-                        peReader.ReadCodeViewDebugDirectoryData(debugEntry).Path;
+                    string candidateFileName = peReader
+                        .ReadCodeViewDebugDirectoryData(debugEntry)
+                        .Path;
                     if (Path.IsPathRooted(candidateFileName) && File.Exists(candidateFileName))
                     {
                         pdbFilename = candidateFileName;

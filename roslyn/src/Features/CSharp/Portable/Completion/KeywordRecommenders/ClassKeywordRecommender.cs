@@ -45,8 +45,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                     canBePartial: true,
                     cancellationToken: cancellationToken
                 )
-                || context
-                    .LeftToken
+                || context.LeftToken
                     .GetPreviousTokenIfTouchingWord(position)
                     .IsKind(SyntaxKind.RecordKeyword)
                 || syntaxTree.IsTypeParameterConstraintStartContext(position, context.LeftToken);

@@ -64,11 +64,9 @@ namespace System.Web.Http.ExceptionHandling
                         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                         Assert.Equal(
                             "Hello World!",
-                            await response
-                                .Content
-                                .ReadAsAsync<string>(
-                                    new List<MediaTypeFormatter>() { new JsonMediaTypeFormatter() }
-                                )
+                            await response.Content.ReadAsAsync<string>(
+                                new List<MediaTypeFormatter>() { new JsonMediaTypeFormatter() }
+                            )
                         );
                     }
                     else
@@ -76,19 +74,18 @@ namespace System.Web.Http.ExceptionHandling
                         Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
                         Assert.Equal(
                             String.Format("Error at {0}", throwAt),
-                            await response
-                                .Content
-                                .ReadAsAsync<string>(
-                                    new List<MediaTypeFormatter>() { new JsonMediaTypeFormatter() }
-                                )
+                            await response.Content.ReadAsAsync<string>(
+                                new List<MediaTypeFormatter>() { new JsonMediaTypeFormatter() }
+                            )
                         );
                     }
                 },
                 config =>
                 {
-                    config
-                        .Services
-                        .Replace(typeof(IContentNegotiator), new CustomContentNegotiator(throwAt));
+                    config.Services.Replace(
+                        typeof(IContentNegotiator),
+                        new CustomContentNegotiator(throwAt)
+                    );
 
                     config.MessageHandlers.Add(new CustomMessageHandler(throwAt));
                     config.Filters.Add(new CustomActionFilterAttribute(throwAt));

@@ -254,9 +254,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
                     // The check below ensures we correctly return the spans in the correct order, i.e. 'one', '""', 'two'.
                     while (
                         updatedSpanIndex + 1 < originalClassifiedSpans.Length
-                        && textSpan
-                            .Value
-                            .Contains(originalClassifiedSpans[updatedSpanIndex + 1].TextSpan)
+                        && textSpan.Value.Contains(
+                            originalClassifiedSpans[updatedSpanIndex + 1].TextSpan
+                        )
                     )
                     {
                         updatedClassifiedSpans.Add(originalClassifiedSpans[updatedSpanIndex + 1]);
@@ -365,8 +365,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             // Classified spans with the same text span should be combined into one token.
             while (classifiedSpans[currentClassifiedSpanIndex].TextSpan == originalTextSpan)
             {
-                var classificationType =
-                    classifiedSpans[currentClassifiedSpanIndex].ClassificationType;
+                var classificationType = classifiedSpans[
+                    currentClassifiedSpanIndex
+                ].ClassificationType;
                 if (classificationType == ClassificationTypeNames.StaticSymbol)
                 {
                     // 4. Token modifiers - each set bit will be looked up in SemanticTokensLegend.tokenModifiers

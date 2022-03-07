@@ -31,12 +31,10 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
         {
             if (
                 token.IsKind(SyntaxKind.EqualsGreaterThanToken)
-                && token
-                    .Parent
-                    .IsKind(
-                        SyntaxKind.ParenthesizedLambdaExpression,
-                        SyntaxKind.SimpleLambdaExpression
-                    )
+                && token.Parent.IsKind(
+                    SyntaxKind.ParenthesizedLambdaExpression,
+                    SyntaxKind.SimpleLambdaExpression
+                )
             )
             {
                 // () =>

@@ -103,9 +103,7 @@ namespace Microsoft.Web.Mvc.Resources
                                 {
                                     if (
                                         ava.Verbs.Contains(
-                                            controllerContext
-                                                .HttpContext
-                                                .Request
+                                            controllerContext.HttpContext.Request
                                                 .GetHttpMethodOverride()
                                                 .ToUpperInvariant()
                                         )

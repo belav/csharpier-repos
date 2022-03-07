@@ -277,8 +277,7 @@ namespace System.Net.Connections
                     // Flush happens implicitly from CompleteAsync(null), so only flush here if we need cancellation.
                     if (cancellationToken.CanBeCanceled)
                     {
-                        FlushResult r = await _originalPipe
-                            .Output
+                        FlushResult r = await _originalPipe.Output
                             .FlushAsync(cancellationToken)
                             .ConfigureAwait(false);
                         if (r.IsCanceled)

@@ -131,12 +131,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             {
                 foreach (var detachedKeyTuple in Keys)
                 {
-                    detachedKeyTuple
-                        .Item1
-                        .Attach(
-                            entityTypeBuilder.Metadata.RootType().Builder,
-                            detachedKeyTuple.Item2
-                        );
+                    detachedKeyTuple.Item1.Attach(
+                        entityTypeBuilder.Metadata.RootType().Builder,
+                        detachedKeyTuple.Item2
+                    );
                 }
             }
 

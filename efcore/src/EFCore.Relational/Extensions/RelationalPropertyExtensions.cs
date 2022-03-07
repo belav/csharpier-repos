@@ -70,9 +70,7 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     var tableFound = false;
                     foreach (
-                        var containingType in property
-                            .DeclaringEntityType
-                            .GetDerivedTypesInclusive()
+                        var containingType in property.DeclaringEntityType.GetDerivedTypesInclusive()
                     )
                     {
                         if (
@@ -1600,8 +1598,7 @@ namespace Microsoft.EntityFrameworkCore
             {
                 IReadOnlyProperty? linkedProperty = null;
                 foreach (
-                    var p in rootProperty
-                        .DeclaringEntityType
+                    var p in rootProperty.DeclaringEntityType
                         .FindRowInternalForeignKeys(storeObject)
                         .SelectMany(fk => fk.PrincipalEntityType.GetProperties())
                 )
@@ -1644,8 +1641,7 @@ namespace Microsoft.EntityFrameworkCore
                 i++
             )
             {
-                var linkingRelationship = principalProperty
-                    .DeclaringEntityType
+                var linkingRelationship = principalProperty.DeclaringEntityType
                     .FindRowInternalForeignKeys(storeObject)
                     .FirstOrDefault();
                 if (linkingRelationship == null)
@@ -1680,8 +1676,7 @@ namespace Microsoft.EntityFrameworkCore
                 i++
             )
             {
-                var linkingRelationship = principalProperty
-                    .DeclaringEntityType
+                var linkingRelationship = principalProperty.DeclaringEntityType
                     .FindRowInternalForeignKeys(storeObject)
                     .FirstOrDefault();
                 if (linkingRelationship == null)
@@ -1689,9 +1684,9 @@ namespace Microsoft.EntityFrameworkCore
                     break;
                 }
 
-                principalProperty = linkingRelationship
-                    .PrincipalEntityType
-                    .FindProperty(property.Name);
+                principalProperty = linkingRelationship.PrincipalEntityType.FindProperty(
+                    property.Name
+                );
                 if (principalProperty == null || !principalProperty.IsConcurrencyToken)
                 {
                     return null;

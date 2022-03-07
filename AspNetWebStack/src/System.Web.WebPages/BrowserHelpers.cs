@@ -35,8 +35,11 @@ namespace System.Web.WebPages
         // Default implementation to generate an HttpBrowserCapabilities object using the current HttpCapabilitiesProvider
         private static HttpBrowserCapabilitiesBase CreateOverriddenBrowser(string userAgent)
         {
-            HttpBrowserCapabilities overriddenBrowser =
-                new HttpContext(new UserAgentWorkerRequest(userAgent)).Request.Browser;
+            HttpBrowserCapabilities overriddenBrowser = new HttpContext(
+                new UserAgentWorkerRequest(userAgent)
+            )
+                .Request
+                .Browser;
             return new HttpBrowserCapabilitiesWrapper(overriddenBrowser);
         }
 

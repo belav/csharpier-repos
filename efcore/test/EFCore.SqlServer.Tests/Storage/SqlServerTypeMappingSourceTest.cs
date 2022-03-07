@@ -402,9 +402,11 @@ namespace Microsoft.EntityFrameworkCore
             property.SetIsFixedLength(fixedLength);
             var fkProperty = property.DeclaringEntityType.AddProperty("FK", typeof(string));
             var pk = property.DeclaringEntityType.SetPrimaryKey(property);
-            property
-                .DeclaringEntityType
-                .AddForeignKey(fkProperty, pk, property.DeclaringEntityType);
+            property.DeclaringEntityType.AddForeignKey(
+                fkProperty,
+                pk,
+                property.DeclaringEntityType
+            );
 
             var typeMapping = CreateRelationalTypeMappingSource().GetMapping((IProperty)fkProperty);
 
@@ -432,9 +434,11 @@ namespace Microsoft.EntityFrameworkCore
             property.SetIsFixedLength(fixedLength);
             var fkProperty = property.DeclaringEntityType.AddProperty("FK", typeof(string));
             var pk = property.DeclaringEntityType.SetPrimaryKey(property);
-            property
-                .DeclaringEntityType
-                .AddForeignKey(fkProperty, pk, property.DeclaringEntityType);
+            property.DeclaringEntityType.AddForeignKey(
+                fkProperty,
+                pk,
+                property.DeclaringEntityType
+            );
             fkProperty.IsNullable = false;
 
             var typeMapping = CreateRelationalTypeMappingSource().GetMapping((IProperty)fkProperty);
@@ -734,9 +738,11 @@ namespace Microsoft.EntityFrameworkCore
             property.IsNullable = false;
             var fkProperty = property.DeclaringEntityType.AddProperty("FK", typeof(string));
             var pk = property.DeclaringEntityType.SetPrimaryKey(property);
-            property
-                .DeclaringEntityType
-                .AddForeignKey(fkProperty, pk, property.DeclaringEntityType);
+            property.DeclaringEntityType.AddForeignKey(
+                fkProperty,
+                pk,
+                property.DeclaringEntityType
+            );
 
             var typeMapping = CreateRelationalTypeMappingSource().GetMapping((IProperty)fkProperty);
 
@@ -759,9 +765,11 @@ namespace Microsoft.EntityFrameworkCore
             property.IsNullable = false;
             var fkProperty = property.DeclaringEntityType.AddProperty("FK", typeof(string));
             var pk = property.DeclaringEntityType.SetPrimaryKey(property);
-            property
-                .DeclaringEntityType
-                .AddForeignKey(fkProperty, pk, property.DeclaringEntityType);
+            property.DeclaringEntityType.AddForeignKey(
+                fkProperty,
+                pk,
+                property.DeclaringEntityType
+            );
             fkProperty.IsNullable = false;
 
             var typeMapping = CreateRelationalTypeMappingSource().GetMapping((IProperty)fkProperty);
@@ -1043,9 +1051,11 @@ namespace Microsoft.EntityFrameworkCore
             property.SetIsFixedLength(fixedLength);
             var fkProperty = property.DeclaringEntityType.AddProperty("FK", typeof(byte[]));
             var pk = property.DeclaringEntityType.SetPrimaryKey(property);
-            property
-                .DeclaringEntityType
-                .AddForeignKey(fkProperty, pk, property.DeclaringEntityType);
+            property.DeclaringEntityType.AddForeignKey(
+                fkProperty,
+                pk,
+                property.DeclaringEntityType
+            );
 
             var typeMapping = CreateRelationalTypeMappingSource().GetMapping((IProperty)fkProperty);
             Assert.False(typeMapping.IsFixedLength);
@@ -1068,9 +1078,11 @@ namespace Microsoft.EntityFrameworkCore
             property.SetIsFixedLength(fixedLength);
             var fkProperty = property.DeclaringEntityType.AddProperty("FK", typeof(byte[]));
             var pk = property.DeclaringEntityType.SetPrimaryKey(property);
-            property
-                .DeclaringEntityType
-                .AddForeignKey(fkProperty, pk, property.DeclaringEntityType);
+            property.DeclaringEntityType.AddForeignKey(
+                fkProperty,
+                pk,
+                property.DeclaringEntityType
+            );
             fkProperty.IsNullable = false;
 
             var typeMapping = CreateRelationalTypeMappingSource().GetMapping((IProperty)fkProperty);
@@ -1344,13 +1356,12 @@ namespace Microsoft.EntityFrameworkCore
         {
             var builder = CreateModelBuilder();
 
-            var property =
-                builder
-                    .Entity<StringCheese>()
-                    .Property(e => e.StringWithSize)
-                    .HasColumnType(typeName)
-                    .HasMaxLength(2018)
-                    .Metadata;
+            var property = builder
+                .Entity<StringCheese>()
+                .Property(e => e.StringWithSize)
+                .HasColumnType(typeName)
+                .HasMaxLength(2018)
+                .Metadata;
 
             var mapping = CreateRelationalTypeMappingSource().FindMapping((IProperty)property);
 
@@ -1375,13 +1386,12 @@ namespace Microsoft.EntityFrameworkCore
         {
             var builder = CreateModelBuilder();
 
-            var property =
-                builder
-                    .Entity<StringCheese>()
-                    .Property(e => e.BinaryWithSize)
-                    .HasColumnType(typeName)
-                    .HasMaxLength(2018)
-                    .Metadata;
+            var property = builder
+                .Entity<StringCheese>()
+                .Property(e => e.BinaryWithSize)
+                .HasColumnType(typeName)
+                .HasMaxLength(2018)
+                .Metadata;
 
             var mapping = CreateRelationalTypeMappingSource().FindMapping((IProperty)property);
 

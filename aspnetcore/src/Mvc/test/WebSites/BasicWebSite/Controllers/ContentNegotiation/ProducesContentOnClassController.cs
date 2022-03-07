@@ -15,16 +15,12 @@ public class ProducesContentOnClassController : ProducesContentBaseController
         var result = context.Result as ObjectResult;
         if (result != null)
         {
-            result
-                .Formatters
-                .Add(new CustomFormatter("application/custom_ProducesContentOnClassController"));
-            result
-                .Formatters
-                .Add(
-                    new CustomFormatter(
-                        "application/custom_ProducesContentOnClassController_Action"
-                    )
-                );
+            result.Formatters.Add(
+                new CustomFormatter("application/custom_ProducesContentOnClassController")
+            );
+            result.Formatters.Add(
+                new CustomFormatter("application/custom_ProducesContentOnClassController_Action")
+            );
         }
 
         base.OnActionExecuted(context);

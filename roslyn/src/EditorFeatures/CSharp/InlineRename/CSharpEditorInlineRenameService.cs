@@ -43,14 +43,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.InlineRename
                 // speculatively bind the identifier "var". If it returns a symbol, it's a real type,
                 // if not, it's the keyword.
                 // see bugs 659683 (compiler API) and 659705 (rename/workspace api) for examples
-                var symbolForVar =
-                    semanticModel
-                        .GetSpeculativeSymbolInfo(
-                            triggerToken.SpanStart,
-                            triggerToken.Parent!,
-                            SpeculativeBindingOption.BindAsTypeOrNamespace
-                        )
-                        .Symbol;
+                var symbolForVar = semanticModel
+                    .GetSpeculativeSymbolInfo(
+                        triggerToken.SpanStart,
+                        triggerToken.Parent!,
+                        SpeculativeBindingOption.BindAsTypeOrNamespace
+                    )
+                    .Symbol;
 
                 if (symbolForVar == null)
                 {

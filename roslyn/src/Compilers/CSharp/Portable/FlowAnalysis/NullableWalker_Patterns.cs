@@ -384,9 +384,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             // to evaluate the patterns.  In this way we infer non-nullability of the original element's parts.
             // We do not extend such courtesy to nested tuple literals.
             var originalInputElementSlots = expression is BoundTupleExpression tuple
-                ? tuple
-                  .Arguments
-                  .SelectAsArray(static (a, w) => w.GetSlotForSwitchInputValue(a), this)
+                ? tuple.Arguments.SelectAsArray(
+                      static (a, w) => w.GetSlotForSwitchInputValue(a),
+                      this
+                  )
                 : default;
             var originalInputMap = PooledDictionary<int, BoundExpression>.GetInstance();
             originalInputMap.Add(originalInputSlot, expression);
@@ -451,8 +452,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 int extensionExtra = method.RequiresInstanceReceiver ? 0 : 1;
                                 for (int i = 0; i < method.ParameterCount - extensionExtra; i++)
                                 {
-                                    var parameterType =
-                                        method.Parameters[i + extensionExtra].TypeWithAnnotations;
+                                    var parameterType = method.Parameters[
+                                        i + extensionExtra
+                                    ].TypeWithAnnotations;
                                     var output = new BoundDagTemp(
                                         e.Syntax,
                                         parameterType.Type,
@@ -770,9 +772,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                                         // merge inferred nullable annotation from different branches of the decision tree
                                         inferredType = TypeWithAnnotations.Create(
                                             inferredType.Type,
-                                            existingType
-                                                .NullableAnnotation
-                                                .Join(inferredType.NullableAnnotation)
+                                            existingType.NullableAnnotation.Join(
+                                                inferredType.NullableAnnotation
+                                            )
                                         );
                                     }
                                     _variables.SetType(local, inferredType);

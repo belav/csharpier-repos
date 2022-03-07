@@ -95,14 +95,12 @@ public static class OAuthExtensions
         where TOptions : OAuthOptions, new()
         where THandler : OAuthHandler<TOptions>
     {
-        builder
-            .Services
-            .TryAddEnumerable(
-                ServiceDescriptor.Singleton<
-                    IPostConfigureOptions<TOptions>,
-                    OAuthPostConfigureOptions<TOptions, THandler>
-                >()
-            );
+        builder.Services.TryAddEnumerable(
+            ServiceDescriptor.Singleton<
+                IPostConfigureOptions<TOptions>,
+                OAuthPostConfigureOptions<TOptions, THandler>
+            >()
+        );
         return builder.AddRemoteScheme<TOptions, THandler>(
             authenticationScheme,
             displayName,

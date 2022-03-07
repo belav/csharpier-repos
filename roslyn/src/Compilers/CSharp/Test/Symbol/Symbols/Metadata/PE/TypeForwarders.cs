@@ -67,9 +67,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.Equal(
                 base1,
                 module1.TypeRefHandleToTypeMap[
-                    (TypeReferenceHandle)module1
-                        .Module
-                        .GetBaseTypeOfTypeOrThrow(((PENamedTypeSymbol)derived1).Handle)
+                    (TypeReferenceHandle)module1.Module.GetBaseTypeOfTypeOrThrow(
+                        ((PENamedTypeSymbol)derived1).Handle
+                    )
                 ]
             );
             Assert.True(
@@ -137,14 +137,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             // System.Func`1 in both isn't ambiguous because one forwards to the other.
             Assert.Equal(
                 funcType,
-                compilation
-                    .Assembly
-                    .GetTypeByMetadataName(
-                        funcTypeMetadataName,
-                        includeReferences: true,
-                        isWellKnownType: false,
-                        conflicts: out var _
-                    )
+                compilation.Assembly.GetTypeByMetadataName(
+                    funcTypeMetadataName,
+                    includeReferences: true,
+                    isWellKnownType: false,
+                    conflicts: out var _
+                )
             );
         }
 
@@ -848,8 +846,7 @@ class Test : Derived
             );
 
             Assert.Empty(
-                comp3.GetReferencedAssemblySymbol(ref2).Modules[0]
-                    .ReferencedAssemblySymbols
+                comp3.GetReferencedAssemblySymbol(ref2).Modules[0].ReferencedAssemblySymbols
                     .OfType<MissingAssemblySymbol>()
                     .First()
                     .GetPublicSymbol()
@@ -2390,8 +2387,10 @@ public class Forwarded<T>
                         );
 
                         var forwarded = context.GetTypeByMetadataName("Forwarded`1");
-                        var resolved =
-                            context.GetTypeByMetadataName("B").BaseType().OriginalDefinition;
+                        var resolved = context
+                            .GetTypeByMetadataName("B")
+                            .BaseType()
+                            .OriginalDefinition;
 
                         Assert.NotNull(forwarded);
                         Assert.False(resolved.IsErrorType());

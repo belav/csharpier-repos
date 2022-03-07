@@ -55,13 +55,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDeconstruction
         private void AnalyzeNode(SyntaxNodeAnalysisContext context)
         {
             var cancellationToken = context.CancellationToken;
-            var option = context
-                .Options
-                .GetOption(
-                    CSharpCodeStyleOptions.PreferDeconstructedVariableDeclaration,
-                    context.Node.SyntaxTree,
-                    cancellationToken
-                );
+            var option = context.Options.GetOption(
+                CSharpCodeStyleOptions.PreferDeconstructedVariableDeclaration,
+                context.Node.SyntaxTree,
+                cancellationToken
+            );
             if (!option.Value)
             {
                 return;
@@ -212,8 +210,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDeconstruction
                 forEachStatement,
                 cancellationToken
             );
-            var elementConversion =
-                semanticModel.GetForEachStatementInfo(forEachStatement).ElementConversion;
+            var elementConversion = semanticModel
+                .GetForEachStatementInfo(forEachStatement)
+                .ElementConversion;
 
             return TryAnalyze(
                 semanticModel,

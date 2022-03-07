@@ -36,8 +36,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             }
 
             var internalEntityEntry = node.GetInfrastructure();
-            var navigations = internalEntityEntry
-                .EntityType
+            var navigations = internalEntityEntry.EntityType
                 .GetNavigations()
                 .Concat<INavigationBase>(internalEntityEntry.EntityType.GetSkipNavigations());
 
@@ -109,8 +108,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             }
 
             var internalEntityEntry = node.GetInfrastructure();
-            var navigations = internalEntityEntry
-                .EntityType
+            var navigations = internalEntityEntry.EntityType
                 .GetNavigations()
                 .Concat<INavigationBase>(internalEntityEntry.EntityType.GetSkipNavigations());
             var stateManager = internalEntityEntry.StateManager;

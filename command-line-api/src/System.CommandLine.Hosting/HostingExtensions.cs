@@ -136,12 +136,10 @@ namespace System.CommandLine.Hosting
                 && command.GetType() == commandType
             )
             {
-                invocation
-                    .BindingContext
-                    .AddService(
-                        handlerType,
-                        c => c.GetService<IHost>().Services.GetService(handlerType)
-                    );
+                invocation.BindingContext.AddService(
+                    handlerType,
+                    c => c.GetService<IHost>().Services.GetService(handlerType)
+                );
                 builder.ConfigureServices(
                     services =>
                     {

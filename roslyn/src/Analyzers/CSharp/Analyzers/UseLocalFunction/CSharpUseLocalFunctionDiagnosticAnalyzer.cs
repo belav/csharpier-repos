@@ -247,11 +247,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
                 anonymousFunction.IsParentKind(SyntaxKind.EqualsValueClause)
                 && anonymousFunction.Parent.IsParentKind(SyntaxKind.VariableDeclarator)
                 && anonymousFunction.Parent.Parent.IsParentKind(SyntaxKind.VariableDeclaration)
-                && anonymousFunction
-                    .Parent
-                    .Parent
-                    .Parent
-                    .IsParentKind(SyntaxKind.LocalDeclarationStatement, out localDeclaration)
+                && anonymousFunction.Parent.Parent.Parent.IsParentKind(
+                    SyntaxKind.LocalDeclarationStatement,
+                    out localDeclaration
+                )
             )
             {
                 if (!localDeclaration.Declaration.Type.IsVar)
@@ -349,8 +348,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
                             references.Add(nodeToCheck.GetLocation());
                         }
 
-                        var convertedType =
-                            semanticModel.GetTypeInfo(nodeToCheck, cancellationToken).ConvertedType;
+                        var convertedType = semanticModel
+                            .GetTypeInfo(nodeToCheck, cancellationToken)
+                            .ConvertedType;
                         if (!convertedType.IsDelegateType())
                         {
                             // We can't change this anonymous function into a local function if it is
@@ -448,14 +448,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
                             var variableDeclarator = localDeclaration.Declaration.Variables[0];
                             if (
                                 variableDeclarator.Initializer == null
-                                || variableDeclarator
-                                    .Initializer
-                                    .Value
-                                    .IsKind(
-                                        SyntaxKind.NullLiteralExpression,
-                                        SyntaxKind.DefaultLiteralExpression,
-                                        SyntaxKind.DefaultExpression
-                                    )
+                                || variableDeclarator.Initializer.Value.IsKind(
+                                    SyntaxKind.NullLiteralExpression,
+                                    SyntaxKind.DefaultLiteralExpression,
+                                    SyntaxKind.DefaultExpression
+                                )
                             )
                             {
                                 var identifierName = (IdentifierNameSyntax)assignment.Left;

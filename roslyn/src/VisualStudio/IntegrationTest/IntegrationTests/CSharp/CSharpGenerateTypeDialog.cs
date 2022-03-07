@@ -39,10 +39,11 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
 "
             );
 
-            VisualStudio
-                .Editor
-                .Verify
-                .CodeAction("Generate new type...", applyFix: true, blockUntilComplete: false);
+            VisualStudio.Editor.Verify.CodeAction(
+                "Generate new type...",
+                applyFix: true,
+                blockUntilComplete: false
+            );
 
             GenerateTypeDialog.VerifyOpen();
             GenerateTypeDialog.ClickCancel();
@@ -53,13 +54,11 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         public void CSharpToBasic()
         {
             var vbProj = new ProjectUtils.Project("VBProj");
-            VisualStudio
-                .SolutionExplorer
-                .AddProject(
-                    vbProj,
-                    WellKnownProjectTemplates.ClassLibrary,
-                    LanguageNames.VisualBasic
-                );
+            VisualStudio.SolutionExplorer.AddProject(
+                vbProj,
+                WellKnownProjectTemplates.ClassLibrary,
+                LanguageNames.VisualBasic
+            );
 
             var project = new ProjectUtils.Project(ProjectName);
             VisualStudio.SolutionExplorer.OpenFile(project, "Class1.cs");
@@ -75,10 +74,11 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
 "
             );
 
-            VisualStudio
-                .Editor
-                .Verify
-                .CodeAction("Generate new type...", applyFix: true, blockUntilComplete: false);
+            VisualStudio.Editor.Verify.CodeAction(
+                "Generate new type...",
+                applyFix: true,
+                blockUntilComplete: false
+            );
 
             GenerateTypeDialog.VerifyOpen();
             GenerateTypeDialog.SetAccessibility("public");

@@ -15,10 +15,8 @@ internal class AbortAction : UrlAction
     {
         context.HttpContext.Abort();
         context.Result = RuleResult.EndResponse;
-        context
-            .Logger
-            .AbortedRequest(
-                context.HttpContext.Request.Path + context.HttpContext.Request.QueryString
-            );
+        context.Logger.AbortedRequest(
+            context.HttpContext.Request.Path + context.HttpContext.Request.QueryString
+        );
     }
 }

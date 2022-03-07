@@ -42,8 +42,7 @@ namespace Microsoft.CodeAnalysis.UseCoalesceExpression
         internal sealed override CodeFixCategory CodeFixCategory => CodeFixCategory.CodeStyle;
 
         protected override bool IncludeDiagnosticDuringFixAll(Diagnostic diagnostic) =>
-            !diagnostic
-                .Descriptor
+            !diagnostic.Descriptor
                 .ImmutableCustomTags()
                 .Contains(WellKnownDiagnosticTags.Unnecessary);
 
@@ -66,9 +65,9 @@ namespace Microsoft.CodeAnalysis.UseCoalesceExpression
             var semanticModel = await document
                 .GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
-            var expressionTypeOpt = semanticModel
-                .Compilation
-                .GetTypeByMetadataName("System.Linq.Expressions.Expression`1");
+            var expressionTypeOpt = semanticModel.Compilation.GetTypeByMetadataName(
+                "System.Linq.Expressions.Expression`1"
+            );
 
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var semanticFacts = document.GetRequiredLanguageService<ISemanticFactsService>();

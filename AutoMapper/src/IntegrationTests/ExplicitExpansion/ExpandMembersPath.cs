@@ -118,28 +118,26 @@ namespace AutoMapper.IntegrationTests.Net4
         {
             protected override void Seed(TestContext context)
             {
-                context
-                    .Class1Set
-                    .AddRange(
-                        new[]
+                context.Class1Set.AddRange(
+                    new[]
+                    {
+                        new Class1
                         {
-                            new Class1
-                            {
-                                Class2 = new Class2 { Class3 = new Class3 { Name = "SomeValue" } },
-                                Name = "Alain Brito"
-                            },
-                            new Class1
-                            {
-                                Class2 = new Class2 { Class3 = new Class3 { Name = "OtherValue" } },
-                                Name = "Jimmy Bogard"
-                            },
-                            new Class1
-                            {
-                                Class2 = new Class2 { Class3 = new Class3 { Name = "SomeValue" } },
-                                Name = "Bill Gates"
-                            }
+                            Class2 = new Class2 { Class3 = new Class3 { Name = "SomeValue" } },
+                            Name = "Alain Brito"
+                        },
+                        new Class1
+                        {
+                            Class2 = new Class2 { Class3 = new Class3 { Name = "OtherValue" } },
+                            Name = "Jimmy Bogard"
+                        },
+                        new Class1
+                        {
+                            Class2 = new Class2 { Class3 = new Class3 { Name = "SomeValue" } },
+                            Name = "Bill Gates"
                         }
-                    );
+                    }
+                );
                 base.Seed(context);
             }
         }

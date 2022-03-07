@@ -12,8 +12,7 @@ namespace System.Web.Mvc.Test
         public void CollectionDefaults()
         {
             // Act
-            Type[] actualTypes = ModelBinderProviders
-                .BinderProviders
+            Type[] actualTypes = ModelBinderProviders.BinderProviders
                 .Select(b => b.GetType())
                 .ToArray();
 

@@ -41,10 +41,7 @@ namespace Microsoft.Diagnostics.Tools.Pgo
         )
         {
             foreach (
-                var traceData in traceProcess
-                    .TraceProcess
-                    .EventsInProcess
-                    .ByEventType<ModuleLoadUnloadTraceData>()
+                var traceData in traceProcess.TraceProcess.EventsInProcess.ByEventType<ModuleLoadUnloadTraceData>()
             )
             {
                 if (traceData.ModuleILPath != null)
@@ -474,8 +471,9 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     if (debugEntry.Type != DebugDirectoryEntryType.CodeView)
                         continue;
 
-                    string candidateFileName =
-                        peReader.ReadCodeViewDebugDirectoryData(debugEntry).Path;
+                    string candidateFileName = peReader
+                        .ReadCodeViewDebugDirectoryData(debugEntry)
+                        .Path;
                     if (Path.IsPathRooted(candidateFileName) && File.Exists(candidateFileName))
                     {
                         pdbFilename = candidateFileName;

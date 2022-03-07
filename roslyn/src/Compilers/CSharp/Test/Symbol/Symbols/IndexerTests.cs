@@ -85,9 +85,9 @@ struct S
                 source: source,
                 sourceSymbolValidator: validator,
                 symbolValidator: validator,
-                options: TestOptions
-                    .ReleaseDll
-                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
+                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
+                    MetadataImportOptions.Internal
+                )
             );
         }
 
@@ -214,10 +214,9 @@ class C : IB, IC
                 SpecialType.System_String
             );
 
-            var bridgeMethods =
-                sourceType
-                    .GetSynthesizedExplicitImplementations(CancellationToken.None)
-                    .ForwardingMethods;
+            var bridgeMethods = sourceType
+                .GetSynthesizedExplicitImplementations(CancellationToken.None)
+                .ForwardingMethods;
             Assert.Equal(2, bridgeMethods.Length);
             Assert.True(
                 bridgeMethods
@@ -246,10 +245,9 @@ class C : IB, IC
                 SpecialType.System_String
             );
 
-            bridgeMethods =
-                sourceType
-                    .GetSynthesizedExplicitImplementations(CancellationToken.None)
-                    .ForwardingMethods;
+            bridgeMethods = sourceType
+                .GetSynthesizedExplicitImplementations(CancellationToken.None)
+                .ForwardingMethods;
             Assert.Equal(3, bridgeMethods.Length);
             Assert.True(
                 bridgeMethods
@@ -478,10 +476,9 @@ class C : I1, I2
                 @class.FindImplementationForInterfaceMember(interface2Indexer)
             );
 
-            var synthesizedExplicitImplementations =
-                @class
-                    .GetSynthesizedExplicitImplementations(default(CancellationToken))
-                    .ForwardingMethods;
+            var synthesizedExplicitImplementations = @class
+                .GetSynthesizedExplicitImplementations(default(CancellationToken))
+                .ForwardingMethods;
             Assert.Equal(2, synthesizedExplicitImplementations.Length);
 
             Assert.Equal(
@@ -495,12 +492,12 @@ class C : I1, I2
 
             var interface1Getter = interface1Indexer.GetMethod;
             var interface2Getter = interface2Indexer.GetMethod;
-            var interface1GetterImpl = synthesizedExplicitImplementations[0]
-                .ExplicitInterfaceImplementations
-                .Single();
-            var interface2GetterImpl = synthesizedExplicitImplementations[1]
-                .ExplicitInterfaceImplementations
-                .Single();
+            var interface1GetterImpl = synthesizedExplicitImplementations[
+                0
+            ].ExplicitInterfaceImplementations.Single();
+            var interface2GetterImpl = synthesizedExplicitImplementations[
+                1
+            ].ExplicitInterfaceImplementations.Single();
 
             Assert.True(
                 interface1Getter == interface1GetterImpl ^ interface1Getter == interface2GetterImpl
@@ -588,10 +585,9 @@ class C : I1, I2
                         @class.FindImplementationForInterfaceMember(interface2Indexer)
                     );
 
-                    var synthesizedExplicitImplementations =
-                        @class
-                            .GetSynthesizedExplicitImplementations(default(CancellationToken))
-                            .ForwardingMethods;
+                    var synthesizedExplicitImplementations = @class
+                        .GetSynthesizedExplicitImplementations(default(CancellationToken))
+                        .ForwardingMethods;
                     Assert.Equal(2, synthesizedExplicitImplementations.Length);
 
                     Assert.Equal(
@@ -605,12 +601,12 @@ class C : I1, I2
 
                     var interface1Getter = interface1Indexer.GetMethod;
                     var interface2Getter = interface2Indexer.GetMethod;
-                    var interface1GetterImpl = synthesizedExplicitImplementations[0]
-                        .ExplicitInterfaceImplementations
-                        .Single();
-                    var interface2GetterImpl = synthesizedExplicitImplementations[1]
-                        .ExplicitInterfaceImplementations
-                        .Single();
+                    var interface1GetterImpl = synthesizedExplicitImplementations[
+                        0
+                    ].ExplicitInterfaceImplementations.Single();
+                    var interface2GetterImpl = synthesizedExplicitImplementations[
+                        1
+                    ].ExplicitInterfaceImplementations.Single();
 
                     Assert.True(
                         interface1Getter == interface1GetterImpl
@@ -691,8 +687,7 @@ class C : I1
 
                     var synthesizedExplicitImplementation = @class
                         .GetSynthesizedExplicitImplementations(default(CancellationToken))
-                        .ForwardingMethods
-                        .Single();
+                        .ForwardingMethods.Single();
 
                     Assert.Equal(
                         classIndexer.GetMethod,
@@ -907,9 +902,9 @@ class Derived : Base
                     var baseClass = compilation.GlobalNamespace.GetMember<NamedTypeSymbol>("Base");
                     var baseIndexer = baseClass.Indexers.Single();
 
-                    var derivedClass = compilation
-                        .GlobalNamespace
-                        .GetMember<NamedTypeSymbol>("Derived");
+                    var derivedClass = compilation.GlobalNamespace.GetMember<NamedTypeSymbol>(
+                        "Derived"
+                    );
                     var derivedIndexer = derivedClass.Indexers.Single();
 
                     // Rhe indexers have the same Name
@@ -1809,11 +1804,9 @@ class B
             var compilation = CreateCompilation(source);
             compilation.VerifyDiagnostics();
 
-            var indexer = compilation
-                .GlobalNamespace
+            var indexer = compilation.GlobalNamespace
                 .GetMember<NamedTypeSymbol>("B")
-                .Indexers
-                .Single();
+                .Indexers.Single();
             Assert.Equal(WellKnownMemberNames.Indexer, indexer.Name);
             Assert.Equal("A", indexer.MetadataName);
             Assert.Equal("get_A", indexer.GetMethod.Name);
@@ -1839,11 +1832,9 @@ interface I
             var compilation = CreateCompilation(source);
             compilation.VerifyDiagnostics();
 
-            var indexer = compilation
-                .GlobalNamespace
+            var indexer = compilation.GlobalNamespace
                 .GetMember<NamedTypeSymbol>("I")
-                .Indexers
-                .Single();
+                .Indexers.Single();
             Assert.Equal("@indexer", indexer.MetadataName);
             Assert.Equal("get_@indexer", indexer.GetMethod.MetadataName);
             Assert.Equal("set_@indexer", indexer.SetMethod.MetadataName);
@@ -2598,11 +2589,9 @@ class Program
 ";
             var compilation = CreateCompilation(source).VerifyDiagnostics();
 
-            var indexer = compilation
-                .GlobalNamespace
+            var indexer = compilation.GlobalNamespace
                 .GetMember<NamedTypeSymbol>("Program")
-                .Indexers
-                .Single();
+                .Indexers.Single();
             Assert.True(indexer.IsIndexer);
             Assert.Equal("A", indexer.MetadataName);
             Assert.True(
@@ -2616,11 +2605,9 @@ class Program
                 compilation,
                 symbolValidator: module =>
                 {
-                    var peIndexer = (PEPropertySymbol)module
-                        .GlobalNamespace
+                    var peIndexer = (PEPropertySymbol)module.GlobalNamespace
                         .GetTypeMember("Program")
-                        .Indexers
-                        .Single();
+                        .Indexers.Single();
                     Assert.True(peIndexer.IsIndexer);
                     Assert.Equal("A", peIndexer.MetadataName);
                     Assert.Empty(peIndexer.GetAttributes());
@@ -2914,8 +2901,7 @@ struct Test
 }
 ";
             var comp = CreateCompilation(text);
-            NamedTypeSymbol type01 = comp.SourceModule
-                .GlobalNamespace
+            NamedTypeSymbol type01 = comp.SourceModule.GlobalNamespace
                 .GetTypeMembers("Test")
                 .Single();
             var indexer =

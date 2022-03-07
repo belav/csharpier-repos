@@ -201,32 +201,28 @@ namespace System.Drawing.Printing
 
                 int bufferSize;
                 int count;
-                Interop
-                    .Winspool
-                    .EnumPrinters(
-                        SafeNativeMethods.PRINTER_ENUM_LOCAL
-                            | SafeNativeMethods.PRINTER_ENUM_CONNECTIONS,
-                        null,
-                        Level,
-                        IntPtr.Zero,
-                        0,
-                        out bufferSize,
-                        out count
-                    );
+                Interop.Winspool.EnumPrinters(
+                    SafeNativeMethods.PRINTER_ENUM_LOCAL
+                        | SafeNativeMethods.PRINTER_ENUM_CONNECTIONS,
+                    null,
+                    Level,
+                    IntPtr.Zero,
+                    0,
+                    out bufferSize,
+                    out count
+                );
 
                 IntPtr buffer = Marshal.AllocCoTaskMem(bufferSize);
-                int returnCode = Interop
-                    .Winspool
-                    .EnumPrinters(
-                        SafeNativeMethods.PRINTER_ENUM_LOCAL
-                            | SafeNativeMethods.PRINTER_ENUM_CONNECTIONS,
-                        null,
-                        Level,
-                        buffer,
-                        bufferSize,
-                        out bufferSize,
-                        out count
-                    );
+                int returnCode = Interop.Winspool.EnumPrinters(
+                    SafeNativeMethods.PRINTER_ENUM_LOCAL
+                        | SafeNativeMethods.PRINTER_ENUM_CONNECTIONS,
+                    null,
+                    Level,
+                    buffer,
+                    bufferSize,
+                    out bufferSize,
+                    out count
+                );
                 var array = new string[count];
 
                 if (returnCode == 0)
@@ -476,16 +472,14 @@ namespace System.Drawing.Printing
                 try
                 {
                     isDirectPrintingSupported =
-                        Interop
-                            .Gdi32
-                            .ExtEscape(
-                                hdc,
-                                Interop.Gdi32.QUERYESCSUPPORT,
-                                sizeof(int),
-                                ref nEscape,
-                                0,
-                                out outData
-                            ) > 0;
+                        Interop.Gdi32.ExtEscape(
+                            hdc,
+                            Interop.Gdi32.QUERYESCSUPPORT,
+                            sizeof(int),
+                            ref nEscape,
+                            0,
+                            out outData
+                        ) > 0;
                 }
                 finally
                 {
@@ -524,30 +518,26 @@ namespace System.Drawing.Printing
                     try
                     {
                         bool querySupported =
-                            Interop
-                                .Gdi32
-                                .ExtEscape(
-                                    hdc,
-                                    Interop.Gdi32.QUERYESCSUPPORT,
-                                    sizeof(int),
-                                    ref nEscape,
-                                    0,
-                                    out outData
-                                ) > 0;
+                            Interop.Gdi32.ExtEscape(
+                                hdc,
+                                Interop.Gdi32.QUERYESCSUPPORT,
+                                sizeof(int),
+                                ref nEscape,
+                                0,
+                                out outData
+                            ) > 0;
                         if (querySupported)
                         {
                             isDirectPrintingSupported =
                                 (
-                                    Interop
-                                        .Gdi32
-                                        .ExtEscape(
-                                            hdc,
-                                            nEscape,
-                                            pvImage.Length,
-                                            pvImage,
-                                            sizeof(int),
-                                            out outData
-                                        ) > 0
+                                    Interop.Gdi32.ExtEscape(
+                                        hdc,
+                                        nEscape,
+                                        pvImage.Length,
+                                        pvImage,
+                                        sizeof(int),
+                                        out outData
+                                    ) > 0
                                 ) && (outData == 1);
                         }
                     }
@@ -797,15 +787,13 @@ namespace System.Drawing.Printing
             string printerName
         )
         {
-            int result = Interop
-                .Winspool
-                .DeviceCapabilities(
-                    printerName,
-                    GetOutputPort(),
-                    capability,
-                    pointerToBuffer,
-                    IntPtr.Zero
-                );
+            int result = Interop.Winspool.DeviceCapabilities(
+                printerName,
+                GetOutputPort(),
+                capability,
+                pointerToBuffer,
+                IntPtr.Zero
+            );
             if (result == -1)
                 return defaultValue;
             return result;
@@ -949,23 +937,22 @@ namespace System.Drawing.Printing
         private IntPtr GetHdevmodeInternal(string printer)
         {
             // Create DEVMODE
-            int modeSize = Interop
-                .Winspool
-                .DocumentProperties(
-                    NativeMethods.NullHandleRef,
-                    NativeMethods.NullHandleRef,
-                    printer,
-                    IntPtr.Zero,
-                    NativeMethods.NullHandleRef,
-                    0
-                );
+            int modeSize = Interop.Winspool.DocumentProperties(
+                NativeMethods.NullHandleRef,
+                NativeMethods.NullHandleRef,
+                printer,
+                IntPtr.Zero,
+                NativeMethods.NullHandleRef,
+                0
+            );
             if (modeSize < 1)
             {
                 throw new InvalidPrinterException(this);
             }
-            IntPtr handle = Interop
-                .Kernel32
-                .GlobalAlloc(SafeNativeMethods.GMEM_MOVEABLE, (uint)modeSize); // cannot be <0 anyway
+            IntPtr handle = Interop.Kernel32.GlobalAlloc(
+                SafeNativeMethods.GMEM_MOVEABLE,
+                (uint)modeSize
+            ); // cannot be <0 anyway
             IntPtr pointer = Interop.Kernel32.GlobalLock(handle);
 
             //Get the DevMode only if its not cached....
@@ -975,16 +962,14 @@ namespace System.Drawing.Printing
             }
             else
             {
-                int returnCode = Interop
-                    .Winspool
-                    .DocumentProperties(
-                        NativeMethods.NullHandleRef,
-                        NativeMethods.NullHandleRef,
-                        printer,
-                        pointer,
-                        NativeMethods.NullHandleRef,
-                        SafeNativeMethods.DM_OUT_BUFFER
-                    );
+                int returnCode = Interop.Winspool.DocumentProperties(
+                    NativeMethods.NullHandleRef,
+                    NativeMethods.NullHandleRef,
+                    printer,
+                    pointer,
+                    NativeMethods.NullHandleRef,
+                    SafeNativeMethods.DM_OUT_BUFFER
+                );
                 if (returnCode < 0)
                 {
                     throw new Win32Exception();
@@ -1030,16 +1015,14 @@ namespace System.Drawing.Printing
 
             Marshal.StructureToPtr(mode, pointer, false);
 
-            int retCode = Interop
-                .Winspool
-                .DocumentProperties(
-                    NativeMethods.NullHandleRef,
-                    NativeMethods.NullHandleRef,
-                    printer,
-                    pointer,
-                    pointer,
-                    SafeNativeMethods.DM_IN_BUFFER | SafeNativeMethods.DM_OUT_BUFFER
-                );
+            int retCode = Interop.Winspool.DocumentProperties(
+                NativeMethods.NullHandleRef,
+                NativeMethods.NullHandleRef,
+                printer,
+                pointer,
+                pointer,
+                SafeNativeMethods.DM_IN_BUFFER | SafeNativeMethods.DM_OUT_BUFFER
+            );
             if (retCode < 0)
             {
                 Interop.Kernel32.GlobalFree(handle);
@@ -1086,12 +1069,10 @@ namespace System.Drawing.Printing
             uint namesSize = (uint)checked(
                 Marshal.SystemDefaultCharSize * (offset + namesCharacters)
             ); // always >0
-            IntPtr handle = Interop
-                .Kernel32
-                .GlobalAlloc(
-                    SafeNativeMethods.GMEM_MOVEABLE | SafeNativeMethods.GMEM_ZEROINIT,
-                    namesSize
-                );
+            IntPtr handle = Interop.Kernel32.GlobalAlloc(
+                SafeNativeMethods.GMEM_MOVEABLE | SafeNativeMethods.GMEM_ZEROINIT,
+                namesSize
+            );
             IntPtr namesPointer = Interop.Kernel32.GlobalLock(handle);
 
             Marshal.WriteInt16(namesPointer, offset); // wDriverOffset

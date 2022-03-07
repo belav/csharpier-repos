@@ -2253,8 +2253,10 @@ class C { }";
                     {
                         workspace
                             .GetService<IEditorOptionsFactoryService>()
-                            .GlobalOptions
-                            .SetOptionValue(DefaultOptions.TrimTrailingWhiteSpaceOptionName, true);
+                            .GlobalOptions.SetOptionValue(
+                                DefaultOptions.TrimTrailingWhiteSpaceOptionName,
+                                true
+                            );
                     }
                 );
             }
@@ -2263,8 +2265,10 @@ class C { }";
                 TestWorkspace
                     .CreateCSharp("")
                     .GetService<IEditorOptionsFactoryService>()
-                    .GlobalOptions
-                    .SetOptionValue(DefaultOptions.TrimTrailingWhiteSpaceOptionName, false);
+                    .GlobalOptions.SetOptionValue(
+                        DefaultOptions.TrimTrailingWhiteSpaceOptionName,
+                        false
+                    );
             }
         }
 
@@ -2275,12 +2279,10 @@ class C { }";
 
         internal override ICommandHandler CreateCommandHandler(TestWorkspace workspace)
         {
-            return workspace
-                .ExportProvider
-                .GetCommandHandler<DocumentationCommentCommandHandler>(
-                    PredefinedCommandHandlerNames.DocumentationComments,
-                    ContentTypeNames.CSharpContentType
-                );
+            return workspace.ExportProvider.GetCommandHandler<DocumentationCommentCommandHandler>(
+                PredefinedCommandHandlerNames.DocumentationComments,
+                ContentTypeNames.CSharpContentType
+            );
         }
 
         protected override TestWorkspace CreateTestWorkspace(string code) =>

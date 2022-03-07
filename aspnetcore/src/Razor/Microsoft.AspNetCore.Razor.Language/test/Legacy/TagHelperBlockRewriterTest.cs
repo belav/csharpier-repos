@@ -2506,8 +2506,9 @@ public class TagHelperBlockRewriterTest : TagHelperRewritingTestBase
                                 r =>
                                 {
                                     r.Name = "@bind-";
-                                    r.NameComparisonMode =
-                                        RequiredAttributeDescriptor.NameComparisonMode.PrefixMatch;
+                                    r.NameComparisonMode = RequiredAttributeDescriptor
+                                        .NameComparisonMode
+                                        .PrefixMatch;
                                     r.Metadata.Add(
                                         ComponentMetadata.Common.DirectiveAttribute,
                                         bool.TrueString
@@ -2565,8 +2566,9 @@ public class TagHelperBlockRewriterTest : TagHelperRewritingTestBase
                                 r =>
                                 {
                                     r.Name = "@bind-";
-                                    r.NameComparisonMode =
-                                        RequiredAttributeDescriptor.NameComparisonMode.PrefixMatch;
+                                    r.NameComparisonMode = RequiredAttributeDescriptor
+                                        .NameComparisonMode
+                                        .PrefixMatch;
                                     r.Metadata.Add(
                                         ComponentMetadata.Common.DirectiveAttribute,
                                         bool.TrueString

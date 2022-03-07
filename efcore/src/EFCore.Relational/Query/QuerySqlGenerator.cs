@@ -136,8 +136,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             && selectExpression.Tables.Count == 1
             && selectExpression.Tables[0] is SetOperationBase setOperation
             && selectExpression.Projection.Count == setOperation.Source1.Projection.Count
-            && selectExpression
-                .Projection
+            && selectExpression.Projection
                 .Select(
                     (pe, index) =>
                         pe.Expression is ColumnExpression column
@@ -410,9 +409,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                         }
                         else if (value is SqlConstantExpression sqlConstantExpression)
                         {
-                            substitutions[i] = sqlConstantExpression
-                                .TypeMapping!
-                                .GenerateSqlLiteral(sqlConstantExpression.Value);
+                            substitutions[i] =
+                                sqlConstantExpression.TypeMapping!.GenerateSqlLiteral(
+                                    sqlConstantExpression.Value
+                                );
                         }
                     }
 
@@ -603,9 +603,9 @@ namespace Microsoft.EntityFrameworkCore.Query
             );
 
             if (
-                _relationalCommandBuilder
-                    .Parameters
-                    .All(p => p.InvariantName != sqlParameterExpression.Name)
+                _relationalCommandBuilder.Parameters.All(
+                    p => p.InvariantName != sqlParameterExpression.Name
+                )
             )
             {
                 _relationalCommandBuilder.AddParameter(

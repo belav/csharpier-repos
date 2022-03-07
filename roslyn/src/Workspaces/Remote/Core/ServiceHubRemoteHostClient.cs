@@ -53,8 +53,9 @@ namespace Microsoft.CodeAnalysis.Remote
             _hubClient = hubClient;
             _callbackDispatcherProvider = callbackDispatcherProvider;
 
-            _assetStorage =
-                services.GetRequiredService<ISolutionAssetStorageProvider>().AssetStorage;
+            _assetStorage = services
+                .GetRequiredService<ISolutionAssetStorageProvider>()
+                .AssetStorage;
             _errorReportingService = services.GetService<IErrorReportingService>();
             _shutdownCancellationService =
                 services.GetService<IRemoteHostClientShutdownCancellationService>();

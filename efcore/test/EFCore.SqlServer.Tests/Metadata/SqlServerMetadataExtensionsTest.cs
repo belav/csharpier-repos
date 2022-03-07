@@ -292,12 +292,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = GetModelBuilder();
 
-            var property =
-                modelBuilder
-                    .Entity<Customer>()
-                    .Property(e => e.NullableInt)
-                    .ValueGeneratedOnAdd()
-                    .Metadata;
+            var property = modelBuilder
+                .Entity<Customer>()
+                .Property(e => e.NullableInt)
+                .ValueGeneratedOnAdd()
+                .Metadata;
 
             Assert.Equal(
                 SqlServerValueGenerationStrategy.IdentityColumn,
@@ -401,8 +400,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = GetModelBuilder();
 
-            var property =
-                modelBuilder.Entity<Customer>().Property(e => e.Id).ValueGeneratedOnAdd().Metadata;
+            var property = modelBuilder
+                .Entity<Customer>()
+                .Property(e => e.Id)
+                .ValueGeneratedOnAdd()
+                .Metadata;
 
             modelBuilder.Model.AddSequence("DaneelOlivaw");
             property.SetHiLoSequenceName("DaneelOlivaw");
@@ -416,13 +418,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = GetModelBuilder();
 
-            var property =
-                modelBuilder.Entity<Customer>().Property(e => e.Id).ValueGeneratedOnAdd().Metadata;
+            var property = modelBuilder
+                .Entity<Customer>()
+                .Property(e => e.Id)
+                .ValueGeneratedOnAdd()
+                .Metadata;
 
             modelBuilder.Model.AddSequence("DaneelOlivaw");
-            modelBuilder
-                .Model
-                .SetValueGenerationStrategy(SqlServerValueGenerationStrategy.SequenceHiLo);
+            modelBuilder.Model.SetValueGenerationStrategy(
+                SqlServerValueGenerationStrategy.SequenceHiLo
+            );
             property.SetHiLoSequenceName("DaneelOlivaw");
 
             Assert.Equal("DaneelOlivaw", property.FindHiLoSequence().Name);
@@ -433,8 +438,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = GetModelBuilder();
 
-            var property =
-                modelBuilder.Entity<Customer>().Property(e => e.Id).ValueGeneratedOnAdd().Metadata;
+            var property = modelBuilder
+                .Entity<Customer>()
+                .Property(e => e.Id)
+                .ValueGeneratedOnAdd()
+                .Metadata;
 
             modelBuilder.Model.AddSequence("DaneelOlivaw");
             modelBuilder.Model.SetHiLoSequenceName("DaneelOlivaw");
@@ -448,13 +456,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = GetModelBuilder();
 
-            var property =
-                modelBuilder.Entity<Customer>().Property(e => e.Id).ValueGeneratedOnAdd().Metadata;
+            var property = modelBuilder
+                .Entity<Customer>()
+                .Property(e => e.Id)
+                .ValueGeneratedOnAdd()
+                .Metadata;
 
             modelBuilder.Model.AddSequence("DaneelOlivaw");
-            modelBuilder
-                .Model
-                .SetValueGenerationStrategy(SqlServerValueGenerationStrategy.SequenceHiLo);
+            modelBuilder.Model.SetValueGenerationStrategy(
+                SqlServerValueGenerationStrategy.SequenceHiLo
+            );
             modelBuilder.Model.SetHiLoSequenceName("DaneelOlivaw");
 
             Assert.Equal("DaneelOlivaw", property.FindHiLoSequence().Name);
@@ -465,8 +476,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = GetModelBuilder();
 
-            var property =
-                modelBuilder.Entity<Customer>().Property(e => e.Id).ValueGeneratedOnAdd().Metadata;
+            var property = modelBuilder
+                .Entity<Customer>()
+                .Property(e => e.Id)
+                .ValueGeneratedOnAdd()
+                .Metadata;
 
             modelBuilder.Model.AddSequence("DaneelOlivaw", "R");
             property.SetHiLoSequenceName("DaneelOlivaw");
@@ -482,13 +496,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = GetModelBuilder();
 
-            var property =
-                modelBuilder.Entity<Customer>().Property(e => e.Id).ValueGeneratedOnAdd().Metadata;
+            var property = modelBuilder
+                .Entity<Customer>()
+                .Property(e => e.Id)
+                .ValueGeneratedOnAdd()
+                .Metadata;
 
             modelBuilder.Model.AddSequence("DaneelOlivaw", "R");
-            modelBuilder
-                .Model
-                .SetValueGenerationStrategy(SqlServerValueGenerationStrategy.SequenceHiLo);
+            modelBuilder.Model.SetValueGenerationStrategy(
+                SqlServerValueGenerationStrategy.SequenceHiLo
+            );
             property.SetHiLoSequenceName("DaneelOlivaw");
             property.SetHiLoSequenceSchema("R");
 
@@ -501,8 +518,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = GetModelBuilder();
 
-            var property =
-                modelBuilder.Entity<Customer>().Property(e => e.Id).ValueGeneratedOnAdd().Metadata;
+            var property = modelBuilder
+                .Entity<Customer>()
+                .Property(e => e.Id)
+                .ValueGeneratedOnAdd()
+                .Metadata;
 
             modelBuilder.Model.AddSequence("DaneelOlivaw", "R");
             modelBuilder.Model.SetHiLoSequenceName("DaneelOlivaw");
@@ -518,13 +538,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = GetModelBuilder();
 
-            var property =
-                modelBuilder.Entity<Customer>().Property(e => e.Id).ValueGeneratedOnAdd().Metadata;
+            var property = modelBuilder
+                .Entity<Customer>()
+                .Property(e => e.Id)
+                .ValueGeneratedOnAdd()
+                .Metadata;
 
             modelBuilder.Model.AddSequence("DaneelOlivaw", "R");
-            modelBuilder
-                .Model
-                .SetValueGenerationStrategy(SqlServerValueGenerationStrategy.SequenceHiLo);
+            modelBuilder.Model.SetValueGenerationStrategy(
+                SqlServerValueGenerationStrategy.SequenceHiLo
+            );
             modelBuilder.Model.SetHiLoSequenceName("DaneelOlivaw");
             modelBuilder.Model.SetHiLoSequenceSchema("R");
 

@@ -271,8 +271,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     entity
                         .GetKeys()
                         .First(key => key != entity.FindPrimaryKey())
-                        .Properties
-                        .First()
+                        .Properties.First()
                         .Name
                 );
             }
@@ -298,8 +297,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     entity
                         .GetKeys()
                         .First(key => key != entity.FindPrimaryKey())
-                        .Properties
-                        .First()
+                        .Properties.First()
                         .Name
                 );
             }
@@ -323,8 +321,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     entity
                         .GetKeys()
                         .First(key => key != entity.FindPrimaryKey())
-                        .Properties
-                        .First()
+                        .Properties.First()
                         .Name
                 );
             }
@@ -2179,8 +2176,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 Assert.DoesNotContain(
                     nameof(IEntityBase.Target),
-                    modelBuilder
-                        .Model
+                    modelBuilder.Model
                         .FindEntityType(typeof(EntityBase))
                         .GetProperties()
                         .Select(p => p.Name)
@@ -2190,8 +2186,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 Assert.Contains(
                     nameof(IEntityBase.Target),
-                    modelBuilder
-                        .Model
+                    modelBuilder.Model
                         .FindEntityType(typeof(EntityBase))
                         .GetProperties()
                         .Select(p => p.Name)

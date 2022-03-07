@@ -117,16 +117,15 @@ namespace Microsoft.EntityFrameworkCore
         {
             using (var context = CreateContext())
             {
-                var principal =
-                    context
-                        .Add(
-                            new NullablePrincipal
-                            {
-                                Id = 1,
-                                Dependents = new List<NonNullableDependent> { new() { Id = 1 } }
-                            }
-                        )
-                        .Entity;
+                var principal = context
+                    .Add(
+                        new NullablePrincipal
+                        {
+                            Id = 1,
+                            Dependents = new List<NonNullableDependent> { new() { Id = 1 } }
+                        }
+                    )
+                    .Entity;
 
                 var pkEntry = context.Entry(principal).Property(e => e.Id);
                 var fkEntry = context
@@ -182,8 +181,10 @@ namespace Microsoft.EntityFrameworkCore
             Guid id;
             using (var context = CreateContext())
             {
-                var user =
-                    context.Set<User>().Add(new User(Email.Create("eeky_bear@example.com"))).Entity;
+                var user = context
+                    .Set<User>()
+                    .Add(new User(Email.Create("eeky_bear@example.com")))
+                    .Entity;
 
                 Assert.Equal(1, context.SaveChanges());
 
@@ -232,8 +233,10 @@ namespace Microsoft.EntityFrameworkCore
         {
             using (var context = CreateContext())
             {
-                var load =
-                    context.Set<Load>().Add(new Load { LoadId = 1, Fuel = new Fuel(1.1) }).Entity;
+                var load = context
+                    .Set<Load>()
+                    .Add(new Load { LoadId = 1, Fuel = new Fuel(1.1) })
+                    .Entity;
 
                 Assert.Equal(1, context.SaveChanges());
             }
@@ -268,23 +271,21 @@ namespace Microsoft.EntityFrameworkCore
         {
             using (var context = CreateContext())
             {
-                var principal =
-                    context
-                        .Set<StringKeyDataType>()
-                        .Add(new StringKeyDataType { Id = "Gumball!!" })
-                        .Entity;
+                var principal = context
+                    .Set<StringKeyDataType>()
+                    .Add(new StringKeyDataType { Id = "Gumball!!" })
+                    .Entity;
 
-                var dependent =
-                    context
-                        .Set<StringForeignKeyDataType>()
-                        .Add(
-                            new StringForeignKeyDataType
-                            {
-                                Id = 7767,
-                                StringKeyDataTypeId = "gumball!!"
-                            }
-                        )
-                        .Entity;
+                var dependent = context
+                    .Set<StringForeignKeyDataType>()
+                    .Add(
+                        new StringForeignKeyDataType
+                        {
+                            Id = 7767,
+                            StringKeyDataTypeId = "gumball!!"
+                        }
+                    )
+                    .Entity;
 
                 Assert.Same(principal, dependent.Principal);
 
@@ -715,8 +716,7 @@ namespace Microsoft.EntityFrameworkCore
                     .Throws<InvalidOperationException>(
                         () => context.Set<CollectionScalar>().Where(e => e.Tags.Any()).ToList()
                     )
-                    .Message
-                    .Replace("\r", "")
+                    .Message.Replace("\r", "")
                     .Replace("\n", "")
             );
         }
@@ -733,8 +733,7 @@ namespace Microsoft.EntityFrameworkCore
                     .Throws<InvalidOperationException>(
                         () => context.Set<CollectionScalar>().Where(e => e.Tags.Count == 2).ToList()
                     )
-                    .Message
-                    .Replace("\r", "")
+                    .Message.Replace("\r", "")
                     .Replace("\n", "")
             );
         }
@@ -760,8 +759,7 @@ namespace Microsoft.EntityFrameworkCore
                                 .Where(e => e.Roles.Contains(sameRole))
                                 .ToList()
                     )
-                    .Message
-                    .Replace("\r", "")
+                    .Message.Replace("\r", "")
                     .Replace("\n", "")
             );
         }
@@ -869,8 +867,7 @@ namespace Microsoft.EntityFrameworkCore
                                 )
                                 .ToList()
                     )
-                    .Message
-                    .Replace("\r", "")
+                    .Message.Replace("\r", "")
                     .Replace("\n", "")
             );
         }
@@ -1380,10 +1377,9 @@ namespace Microsoft.EntityFrameworkCore
                 modelBuilder.Entity<StringKeyDataType>(
                     b =>
                     {
-                        var property =
-                            b.Property(e => e.Id)
-                                .HasConversion(v => "KeyValue=" + v, v => v.Substring(9))
-                                .Metadata;
+                        var property = b.Property(e => e.Id)
+                            .HasConversion(v => "KeyValue=" + v, v => v.Substring(9))
+                            .Metadata;
 
 #pragma warning disable 618
                         property.SetKeyValueComparer(caseInsensitiveComparer);

@@ -40,8 +40,7 @@ namespace AutoMapper.UnitTests.Projection
             projected.ShouldNotBeNull();
             customers
                 .Single()
-                .CustomerType
-                .ToString()
+                .CustomerType.ToString()
                 .ToUpper()
                 .ShouldBe(projected.Single().CustomerType);
         }

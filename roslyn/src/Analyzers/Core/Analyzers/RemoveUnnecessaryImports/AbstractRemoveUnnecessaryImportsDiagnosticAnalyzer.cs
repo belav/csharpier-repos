@@ -66,8 +66,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
                 helpLinkUri: DiagnosticHelper.GetHelpLinkForDiagnosticId(
                     IDEDiagnosticIds.RemoveUnnecessaryImportsDiagnosticId
                 ),
-                customTags: DiagnosticCustomTags
-                    .Unnecessary
+                customTags: DiagnosticCustomTags.Unnecessary
                     .Concat(EnforceOnBuildValues.RemoveUnnecessaryImports.ToCustomTag())
                     .ToArray()
             );

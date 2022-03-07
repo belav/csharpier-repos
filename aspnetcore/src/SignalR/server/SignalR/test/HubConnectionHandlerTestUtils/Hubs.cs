@@ -78,9 +78,10 @@ public class MethodHub : TestHub
 
     public Task BroadcastItem()
     {
-        return Clients
-            .All
-            .SendAsync("Broadcast", new Result { Message = "test", paramName = "param" });
+        return Clients.All.SendAsync(
+            "Broadcast",
+            new Result { Message = "test", paramName = "param" }
+        );
     }
 
     public Task SendArray()
@@ -326,9 +327,10 @@ public class MethodHub : TestHub
         var tcs = new TaskCompletionSource<object>(
             TaskCreationOptions.RunContinuationsAsynchronously
         );
-        Context
-            .ConnectionAborted
-            .Register(state => ((TaskCompletionSource<object>)state).SetResult(null), tcs);
+        Context.ConnectionAborted.Register(
+            state => ((TaskCompletionSource<object>)state).SetResult(null),
+            tcs
+        );
 
         await tcs.Task;
     }
@@ -1210,14 +1212,12 @@ public class ErrorInAbortedTokenHub : Hub
     {
         Context.Items[nameof(OnConnectedAsync)] = true;
 
-        Context
-            .ConnectionAborted
-            .Register(
-                () =>
-                {
-                    throw new InvalidOperationException("BOOM");
-                }
-            );
+        Context.ConnectionAborted.Register(
+            () =>
+            {
+                throw new InvalidOperationException("BOOM");
+            }
+        );
 
         return base.OnConnectedAsync();
     }
@@ -1243,14 +1243,12 @@ public class ConnectionLifetimeHub : Hub
     {
         _state.TokenStateInConnected = Context.ConnectionAborted.IsCancellationRequested;
 
-        Context
-            .ConnectionAborted
-            .Register(
-                () =>
-                {
-                    _state.TokenCallbackTriggered = true;
-                }
-            );
+        Context.ConnectionAborted.Register(
+            () =>
+            {
+                _state.TokenCallbackTriggered = true;
+            }
+        );
 
         return base.OnConnectedAsync();
     }

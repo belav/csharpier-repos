@@ -34,13 +34,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
         public async Task SerializationTest_Document()
         {
             using var workspace = new TestWorkspace(
-                composition: EditorTestCompositions
-                    .EditorFeatures
-                    .AddParts(typeof(TestPersistentStorageServiceFactory))
+                composition: EditorTestCompositions.EditorFeatures.AddParts(
+                    typeof(TestPersistentStorageServiceFactory)
+                )
             );
 
-            var document = workspace
-                .CurrentSolution
+            var document = workspace.CurrentSolution
                 .AddProject("TestProject", "TestProject", LanguageNames.CSharp)
                 .AddDocument("TestDocument", "");
 
@@ -84,9 +83,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                     isEnabledByDefault: true,
                     warningLevel: 0,
                     customTags: ImmutableArray.Create("Test2"),
-                    properties: ImmutableDictionary<string, string>
-                        .Empty
-                        .Add("propertyKey", "propertyValue"),
+                    properties: ImmutableDictionary<string, string>.Empty.Add(
+                        "propertyKey",
+                        "propertyValue"
+                    ),
                     document.Project.Id,
                     new DiagnosticDataLocation(
                         document.Id,
@@ -117,8 +117,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                     isEnabledByDefault: true,
                     warningLevel: 2,
                     customTags: ImmutableArray.Create("Test3", "Test3_2"),
-                    properties: ImmutableDictionary<string, string>
-                        .Empty
+                    properties: ImmutableDictionary<string, string>.Empty
                         .Add("p1Key", "p1Value")
                         .Add("p2Key", "p2Value"),
                     document.Project.Id,
@@ -148,9 +147,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
 
             var key = "document";
 
-            var persistentService = workspace
-                .Services
-                .GetRequiredService<IPersistentStorageService>();
+            var persistentService =
+                workspace.Services.GetRequiredService<IPersistentStorageService>();
             var serializer = new CodeAnalysis.Workspaces.Diagnostics.DiagnosticDataSerializer(
                 analyzerVersion,
                 version
@@ -184,13 +182,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
         public async Task SerializationTest_Project()
         {
             using var workspace = new TestWorkspace(
-                composition: EditorTestCompositions
-                    .EditorFeatures
-                    .AddParts(typeof(TestPersistentStorageServiceFactory))
+                composition: EditorTestCompositions.EditorFeatures.AddParts(
+                    typeof(TestPersistentStorageServiceFactory)
+                )
             );
 
-            var document = workspace
-                .CurrentSolution
+            var document = workspace.CurrentSolution
                 .AddProject("TestProject", "TestProject", LanguageNames.CSharp)
                 .AddDocument("TestDocument", "");
 
@@ -235,8 +232,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                     isEnabledByDefault: true,
                     warningLevel: 2,
                     customTags: ImmutableArray.Create("Test3", "Test3_2"),
-                    properties: ImmutableDictionary<string, string>
-                        .Empty
+                    properties: ImmutableDictionary<string, string>.Empty
                         .Add("p2Key", "p2Value")
                         .Add("p1Key", "p1Value"),
                     projectId: document.Project.Id,
@@ -250,9 +246,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             var version = VersionStamp.Create(utcTime.AddDays(1));
 
             var key = "project";
-            var persistentService = workspace
-                .Services
-                .GetRequiredService<IPersistentStorageService>();
+            var persistentService =
+                workspace.Services.GetRequiredService<IPersistentStorageService>();
             var serializer = new CodeAnalysis.Workspaces.Diagnostics.DiagnosticDataSerializer(
                 analyzerVersion,
                 version

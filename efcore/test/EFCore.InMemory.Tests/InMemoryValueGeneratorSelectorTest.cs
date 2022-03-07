@@ -23,8 +23,7 @@ namespace Microsoft.EntityFrameworkCore
             var model = BuildModel();
             var entityType = model.FindEntityType(typeof(AnEntity));
 
-            var selector = InMemoryTestHelpers
-                .Instance
+            var selector = InMemoryTestHelpers.Instance
                 .CreateContextServices(model)
                 .GetRequiredService<IValueGeneratorSelector>();
 
@@ -121,8 +120,7 @@ namespace Microsoft.EntityFrameworkCore
         {
             var model = BuildModel();
 
-            var selector = InMemoryTestHelpers
-                .Instance
+            var selector = InMemoryTestHelpers.Instance
                 .CreateContextServices(model)
                 .GetRequiredService<IValueGeneratorSelector>();
 
@@ -135,8 +133,7 @@ namespace Microsoft.EntityFrameworkCore
             var model = BuildModel();
             var entityType = model.FindEntityType(typeof(AnEntity));
 
-            var selector = InMemoryTestHelpers
-                .Instance
+            var selector = InMemoryTestHelpers.Instance
                 .CreateContextServices(model)
                 .GetRequiredService<IValueGeneratorSelector>();
 

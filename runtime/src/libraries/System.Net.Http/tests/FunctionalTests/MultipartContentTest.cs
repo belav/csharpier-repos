@@ -219,9 +219,10 @@ namespace System.Net.Http.Functional.Tests
             );
             subContent.Headers.Add("someHeaderName", "andSomeHeaderValue");
             subContent.Headers.Add("someOtherHeaderName", new[] { "withNotOne", "ButTwoValues" });
-            subContent
-                .Headers
-                .Add("oneMoreHeader", new[] { "withNotOne", "AndNotTwo", "butThreeValues" });
+            subContent.Headers.Add(
+                "oneMoreHeader",
+                new[] { "withNotOne", "AndNotTwo", "butThreeValues" }
+            );
 
             var mc = new MultipartContent("someSubtype", "theBoundary");
             mc.Add(subContent);

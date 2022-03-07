@@ -359,12 +359,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 {
                     return false;
                 }
-                var o = field
-                    .AssociatedFieldInfo
-                    .GetCustomAttributes(
-                        typeof(System.Runtime.CompilerServices.DynamicAttribute),
-                        false
-                    );
+                var o = field.AssociatedFieldInfo.GetCustomAttributes(
+                    typeof(System.Runtime.CompilerServices.DynamicAttribute),
+                    false
+                );
                 if (o.Length == 1)
                 {
                     da = o[0] as System.Runtime.CompilerServices.DynamicAttribute;

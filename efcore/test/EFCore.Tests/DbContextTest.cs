@@ -58,11 +58,9 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Local_calls_DetectChanges()
         {
-            var provider = InMemoryTestHelpers
-                .Instance
-                .CreateServiceProvider(
-                    new ServiceCollection().AddScoped<IChangeDetector, ChangeDetectorProxy>()
-                );
+            var provider = InMemoryTestHelpers.Instance.CreateServiceProvider(
+                new ServiceCollection().AddScoped<IChangeDetector, ChangeDetectorProxy>()
+            );
 
             using var context = new ButTheHedgehogContext(provider);
             var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
@@ -84,11 +82,9 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Local_does_not_call_DetectChanges_when_disabled()
         {
-            var provider = InMemoryTestHelpers
-                .Instance
-                .CreateServiceProvider(
-                    new ServiceCollection().AddScoped<IChangeDetector, ChangeDetectorProxy>()
-                );
+            var provider = InMemoryTestHelpers.Instance.CreateServiceProvider(
+                new ServiceCollection().AddScoped<IChangeDetector, ChangeDetectorProxy>()
+            );
 
             using var context = new ButTheHedgehogContext(provider);
             var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
@@ -648,11 +644,9 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public async Task Add_Attach_Remove_Update_do_not_call_DetectChanges()
         {
-            var provider = InMemoryTestHelpers
-                .Instance
-                .CreateServiceProvider(
-                    new ServiceCollection().AddScoped<IChangeDetector, ChangeDetectorProxy>()
-                );
+            var provider = InMemoryTestHelpers.Instance.CreateServiceProvider(
+                new ServiceCollection().AddScoped<IChangeDetector, ChangeDetectorProxy>()
+            );
             using var context = new ButTheHedgehogContext(provider);
             var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 

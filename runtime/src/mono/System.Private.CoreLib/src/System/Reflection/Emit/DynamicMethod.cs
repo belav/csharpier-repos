@@ -554,13 +554,12 @@ namespace System.Reflection.Emit
         // This class takes care of constructing the module in a thread safe manner
         private static class AnonHostModuleHolder
         {
-            public static readonly Module anon_host_module =
-                AssemblyBuilder
-                    .DefineDynamicAssembly(
-                        new AssemblyName() { Name = "Anonymously Hosted DynamicMethods Assembly" },
-                        AssemblyBuilderAccess.Run
-                    )
-                    .ManifestModule;
+            public static readonly Module anon_host_module = AssemblyBuilder
+                .DefineDynamicAssembly(
+                    new AssemblyName() { Name = "Anonymously Hosted DynamicMethods Assembly" },
+                    AssemblyBuilderAccess.Run
+                )
+                .ManifestModule;
 
             public static Module AnonHostModule
             {

@@ -86,8 +86,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.SyncNamespa
                     var oldDocumentId = oldDocument.Id;
                     var expectedText = workspace.Documents[0]
                         .GetTextBuffer()
-                        .CurrentSnapshot
-                        .GetText();
+                        .CurrentSnapshot.GetText();
 
                     // a new document with the same text as old document is added.
                     var allResults = await TestOperationAsync(testOptions, workspace, expectedText);
@@ -180,8 +179,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.SyncNamespa
             {
                 if (workspace.Projects.Count == 2)
                 {
-                    var project =
-                        workspace.Documents.Single(doc => !doc.SelectedSpans.IsEmpty()).Project;
+                    var project = workspace.Documents
+                        .Single(doc => !doc.SelectedSpans.IsEmpty())
+                        .Project;
                     var dependentProject = workspace.Projects.Single(proj => proj.Id != project.Id);
                     var references = dependentProject.ProjectReferences.ToList();
                     references.Add(new ProjectReference(project.Id));
@@ -194,13 +194,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.SyncNamespa
 
                 if (expectedSourceOriginal != null)
                 {
-                    var originalDocument = workspace
-                        .Documents
-                        .Single(doc => !doc.SelectedSpans.IsEmpty());
+                    var originalDocument = workspace.Documents.Single(
+                        doc => !doc.SelectedSpans.IsEmpty()
+                    );
                     var originalDocumentId = originalDocument.Id;
 
-                    var refDocument = workspace
-                        .Documents
+                    var refDocument = workspace.Documents
                         .Where(doc => doc.Id != originalDocumentId)
                         .SingleOrDefault();
                     var refDocumentId = refDocument?.Id;

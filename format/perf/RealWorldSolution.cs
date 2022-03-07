@@ -100,8 +100,7 @@ namespace Microsoft.CodeAnalysis.Tools.Perf.Real
                     .WithIterationCount(12)
                     .WithOutlierMode(Perfolizer.Mathematics.OutlierDetection.OutlierMode.RemoveAll);
                 Add(
-                    DefaultConfig
-                        .Instance
+                    DefaultConfig.Instance
                         .AddJob(job.AsDefault())
                         .AddDiagnoser(MemoryDiagnoser.Default)
                 );

@@ -67,8 +67,9 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
 
                 if (string.IsNullOrEmpty(DeploymentParameters.ApplicationName))
                 {
-                    DeploymentParameters.ApplicationName =
-                        new DirectoryInfo(DeploymentParameters.ApplicationPath).Name;
+                    DeploymentParameters.ApplicationName = new DirectoryInfo(
+                        DeploymentParameters.ApplicationPath
+                    ).Name;
                 }
             }
         }

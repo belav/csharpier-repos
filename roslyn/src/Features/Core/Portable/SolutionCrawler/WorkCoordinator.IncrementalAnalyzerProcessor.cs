@@ -63,10 +63,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
 
                     _listener = listener;
                     _registration = registration;
-                    _cacheService = registration
-                        .Workspace
-                        .Services
-                        .GetService<IProjectCacheService>();
+                    _cacheService =
+                        registration.Workspace.Services.GetService<IProjectCacheService>();
 
                     _lazyDiagnosticAnalyzerService = new Lazy<IDiagnosticAnalyzerService?>(
                         () => GetDiagnosticAnalyzerService(analyzerProviders)
@@ -100,15 +98,11 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     }
 
                     // event and worker queues
-                    _documentTracker = _registration
-                        .Workspace
-                        .Services
-                        .GetRequiredService<IDocumentTrackingService>();
+                    _documentTracker =
+                        _registration.Workspace.Services.GetRequiredService<IDocumentTrackingService>();
 
-                    var globalNotificationService = _registration
-                        .Workspace
-                        .Services
-                        .GetRequiredService<IGlobalOperationNotificationService>();
+                    var globalNotificationService =
+                        _registration.Workspace.Services.GetRequiredService<IGlobalOperationNotificationService>();
 
                     _highPriorityProcessor = new HighPriorityProcessor(
                         listener,
@@ -524,28 +518,24 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         List<WorkItem> items
                     )
                     {
-                        _incrementalAnalyzerProcessor
-                            ._normalPriorityProcessor
+                        _incrementalAnalyzerProcessor._normalPriorityProcessor
                             .GetTestAccessor()
                             .WaitUntilCompletion(analyzers, items);
 
                         var projectItems = items.Select(
                             i => i.ToProjectWorkItem(EmptyAsyncToken.Instance)
                         );
-                        _incrementalAnalyzerProcessor
-                            ._lowPriorityProcessor
+                        _incrementalAnalyzerProcessor._lowPriorityProcessor
                             .GetTestAccessor()
                             .WaitUntilCompletion(analyzers, items);
                     }
 
                     internal void WaitUntilCompletion()
                     {
-                        _incrementalAnalyzerProcessor
-                            ._normalPriorityProcessor
+                        _incrementalAnalyzerProcessor._normalPriorityProcessor
                             .GetTestAccessor()
                             .WaitUntilCompletion();
-                        _incrementalAnalyzerProcessor
-                            ._lowPriorityProcessor
+                        _incrementalAnalyzerProcessor._lowPriorityProcessor
                             .GetTestAccessor()
                             .WaitUntilCompletion();
                     }

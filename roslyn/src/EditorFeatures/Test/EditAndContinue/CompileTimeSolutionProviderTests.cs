@@ -50,8 +50,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             var additionalDocumentId = DocumentId.CreateNewId(projectId);
             var designTimeDocumentId = DocumentId.CreateNewId(projectId);
 
-            var designTimeSolution = workspace
-                .CurrentSolution
+            var designTimeSolution = workspace.CurrentSolution
                 .AddProject(
                     ProjectInfo.Create(
                         projectId,

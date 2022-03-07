@@ -28,8 +28,7 @@ namespace Microsoft.EntityFrameworkCore
                 base.OnModelCreating(modelBuilder, context);
 
                 foreach (
-                    var foreignKey in modelBuilder
-                        .Model
+                    var foreignKey in modelBuilder.Model
                         .GetEntityTypes()
                         .SelectMany(e => e.GetDeclaredForeignKeys())
                 )

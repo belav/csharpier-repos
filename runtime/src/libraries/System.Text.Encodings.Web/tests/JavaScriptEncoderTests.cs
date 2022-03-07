@@ -407,19 +407,13 @@ namespace System.Text.Encodings.Web.Tests
 
             // Encode(Span, ...)
             Span<char> destination = new char[12];
-            OperationStatus status = System
-                .Text
-                .Encodings
-                .Web
-                .JavaScriptEncoder
-                .Default
-                .Encode(
-                    "\U0001f4a9".AsSpan(),
-                    destination,
-                    out int charsConsumed,
-                    out int charsWritten,
-                    isFinalBlock: true
-                );
+            OperationStatus status = System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(
+                "\U0001f4a9".AsSpan(),
+                destination,
+                out int charsConsumed,
+                out int charsWritten,
+                isFinalBlock: true
+            );
 
             Assert.Equal(OperationStatus.Done, status);
             Assert.Equal(2, charsConsumed);
@@ -438,19 +432,13 @@ namespace System.Text.Encodings.Web.Tests
             destination[112] = 'x';
 
             // Pass in destination + 100 to check for underwrite.
-            OperationStatus status = System
-                .Text
-                .Encodings
-                .Web
-                .JavaScriptEncoder
-                .Default
-                .Encode(
-                    "\U0001f4a9".AsSpan(),
-                    destination.Slice(100, 12),
-                    out int charsConsumed,
-                    out int charsWritten,
-                    isFinalBlock: true
-                );
+            OperationStatus status = System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(
+                "\U0001f4a9".AsSpan(),
+                destination.Slice(100, 12),
+                out int charsConsumed,
+                out int charsWritten,
+                isFinalBlock: true
+            );
 
             Assert.Equal(OperationStatus.Done, status);
             Assert.Equal(2, charsConsumed);
@@ -466,19 +454,13 @@ namespace System.Text.Encodings.Web.Tests
             "\U0001f4a9".AsSpan().CopyTo(destination);
 
             // Overlap behavior is undefined but documented that it is not valid. Here we don't expect any issues.
-            OperationStatus status = System
-                .Text
-                .Encodings
-                .Web
-                .JavaScriptEncoder
-                .Default
-                .Encode(
-                    destination.Slice(0, 2),
-                    destination,
-                    out int charsConsumed,
-                    out int charsWritten,
-                    isFinalBlock: true
-                );
+            OperationStatus status = System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(
+                destination.Slice(0, 2),
+                destination,
+                out int charsConsumed,
+                out int charsWritten,
+                isFinalBlock: true
+            );
 
             Assert.Equal(OperationStatus.Done, status);
             Assert.Equal(2, charsConsumed);
@@ -489,19 +471,13 @@ namespace System.Text.Encodings.Web.Tests
         public void TestSurrogateBufferTooSmall()
         {
             Span<char> destination = new char[11];
-            OperationStatus status = System
-                .Text
-                .Encodings
-                .Web
-                .JavaScriptEncoder
-                .Default
-                .Encode(
-                    "\U0001f4a9".AsSpan(),
-                    destination,
-                    out int charsConsumed,
-                    out int charsWritten,
-                    isFinalBlock: true
-                );
+            OperationStatus status = System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(
+                "\U0001f4a9".AsSpan(),
+                destination,
+                out int charsConsumed,
+                out int charsWritten,
+                isFinalBlock: true
+            );
 
             Assert.Equal(OperationStatus.DestinationTooSmall, status);
             Assert.Equal(0, charsConsumed);
@@ -511,19 +487,13 @@ namespace System.Text.Encodings.Web.Tests
         [Fact]
         public void JavaScriptEncoder_NonEmptySource_EmptyDest_Throws()
         {
-            OperationStatus status = System
-                .Text
-                .Encodings
-                .Web
-                .JavaScriptEncoder
-                .Default
-                .Encode(
-                    "\U0001f4a9".AsSpan(),
-                    destination: null,
-                    out int _,
-                    out int _,
-                    isFinalBlock: true
-                );
+            OperationStatus status = System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(
+                "\U0001f4a9".AsSpan(),
+                destination: null,
+                out int _,
+                out int _,
+                isFinalBlock: true
+            );
 
             Assert.Equal(OperationStatus.DestinationTooSmall, status);
         }
@@ -531,13 +501,13 @@ namespace System.Text.Encodings.Web.Tests
         [Fact]
         public void JavaScriptEncoder_EmptySource_EmptyDest()
         {
-            OperationStatus status = System
-                .Text
-                .Encodings
-                .Web
-                .JavaScriptEncoder
-                .Default
-                .Encode("".AsSpan(), destination: null, out int _, out int _, isFinalBlock: true);
+            OperationStatus status = System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(
+                "".AsSpan(),
+                destination: null,
+                out int _,
+                out int _,
+                isFinalBlock: true
+            );
 
             Assert.Equal(OperationStatus.Done, status);
         }
@@ -557,19 +527,13 @@ namespace System.Text.Encodings.Web.Tests
 
             // Encode(Span, ...)
             Span<char> destination = new char[12];
-            OperationStatus status = System
-                .Text
-                .Encodings
-                .Web
-                .JavaScriptEncoder
-                .Default
-                .Encode(
-                    "".AsSpan(),
-                    destination,
-                    out int charsConsumed,
-                    out int charsWritten,
-                    isFinalBlock: true
-                );
+            OperationStatus status = System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(
+                "".AsSpan(),
+                destination,
+                out int charsConsumed,
+                out int charsWritten,
+                isFinalBlock: true
+            );
 
             Assert.Equal(OperationStatus.Done, status);
             Assert.Equal(0, charsConsumed);
@@ -577,19 +541,13 @@ namespace System.Text.Encodings.Web.Tests
             Assert.Equal("", new string(destination.Slice(0, charsWritten).ToArray()));
 
             destination = null; // null doesn't throw is no characters to encode
-            status = System
-                .Text
-                .Encodings
-                .Web
-                .JavaScriptEncoder
-                .Default
-                .Encode(
-                    "".AsSpan(),
-                    destination,
-                    out charsConsumed,
-                    out charsWritten,
-                    isFinalBlock: true
-                );
+            status = System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(
+                "".AsSpan(),
+                destination,
+                out charsConsumed,
+                out charsWritten,
+                isFinalBlock: true
+            );
 
             Assert.Equal(OperationStatus.Done, status);
             Assert.Equal(0, charsConsumed);

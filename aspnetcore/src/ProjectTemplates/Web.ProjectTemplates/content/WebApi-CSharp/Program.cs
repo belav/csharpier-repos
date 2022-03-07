@@ -18,8 +18,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 #if (OrganizationalAuth)
-builder
-    .Services
+builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 #if (GenerateApiOrGraph)
     .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"))
@@ -35,8 +34,7 @@ builder
     .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
 #endif
 #elif (IndividualB2CAuth)
-builder
-    .Services
+builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 #if (GenerateApi)
     .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAdB2C"))
@@ -48,9 +46,7 @@ builder
 #endif
 #endif
 
-builder
-    .Services
-    .AddControllers();
+builder.Services.AddControllers();
 #if (EnableOpenAPI)
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -58,20 +54,17 @@ builder.Services.AddSwaggerGen();
 #endif
 #if (WindowsAuth)
 
-builder
-    .Services
+builder.Services
     .AddAuthentication(NegotiateDefaults.AuthenticationScheme)
     .AddNegotiate();
 
-builder
-    .Services
-    .AddAuthorization(
-        options =>
-        {
-            // By default, all incoming requests will be authorized according to the default policy.
-            options.FallbackPolicy = options.DefaultPolicy;
-        }
-    );
+builder.Services.AddAuthorization(
+    options =>
+    {
+        // By default, all incoming requests will be authorized according to the default policy.
+        options.FallbackPolicy = options.DefaultPolicy;
+    }
+);
 #endif
 
 var app = builder.Build();

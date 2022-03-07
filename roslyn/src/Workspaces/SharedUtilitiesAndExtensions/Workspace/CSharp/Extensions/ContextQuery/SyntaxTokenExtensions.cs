@@ -153,14 +153,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                     return false;
 
                 case SyntaxKind.ColonToken:
-                    return token
-                        .Parent
-                        .IsKind(
-                            SyntaxKind.CaseSwitchLabel,
-                            SyntaxKind.DefaultSwitchLabel,
-                            SyntaxKind.CasePatternSwitchLabel,
-                            SyntaxKind.LabeledStatement
-                        );
+                    return token.Parent.IsKind(
+                        SyntaxKind.CaseSwitchLabel,
+                        SyntaxKind.DefaultSwitchLabel,
+                        SyntaxKind.CasePatternSwitchLabel,
+                        SyntaxKind.LabeledStatement
+                    );
 
                 case SyntaxKind.DoKeyword when token.Parent.IsKind(SyntaxKind.DoStatement):
                     return true;
@@ -306,12 +304,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                 }
 
                 if (
-                    token
-                        .Parent
-                        .IsKind(
-                            SyntaxKind.ParenthesizedExpression,
-                            out ParenthesizedExpressionSyntax? parenExpr
-                        )
+                    token.Parent.IsKind(
+                        SyntaxKind.ParenthesizedExpression,
+                        out ParenthesizedExpressionSyntax? parenExpr
+                    )
                 )
                 {
                     var expr = parenExpr.Expression;
@@ -448,13 +444,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
             if (targetToken.Kind() == SyntaxKind.ColonToken)
             {
                 if (
-                    targetToken
-                        .Parent
-                        .IsKind(
-                            SyntaxKind.CaseSwitchLabel,
-                            SyntaxKind.DefaultSwitchLabel,
-                            SyntaxKind.CasePatternSwitchLabel
-                        )
+                    targetToken.Parent.IsKind(
+                        SyntaxKind.CaseSwitchLabel,
+                        SyntaxKind.DefaultSwitchLabel,
+                        SyntaxKind.CasePatternSwitchLabel
+                    )
                 )
                 {
                     return true;
@@ -482,9 +476,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
         public static bool IsXmlCrefParameterModifierContext(this SyntaxToken targetToken)
         {
             return targetToken.IsKind(SyntaxKind.CommaToken, SyntaxKind.OpenParenToken)
-                && targetToken
-                    .Parent
-                    .IsKind(SyntaxKind.CrefBracketedParameterList, SyntaxKind.CrefParameterList);
+                && targetToken.Parent.IsKind(
+                    SyntaxKind.CrefBracketedParameterList,
+                    SyntaxKind.CrefParameterList
+                );
         }
 
         public static bool IsConstructorOrMethodParameterArgumentContext(

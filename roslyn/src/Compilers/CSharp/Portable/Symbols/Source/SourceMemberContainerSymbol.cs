@@ -1645,8 +1645,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     // We can't include indexer symbol yet, because we don't know
                     // what name it will have after attribute binding (because of
                     // IndexerNameAttribute).
-                    membersByName = membersAndInitializers
-                        .NonTypeMembers
+                    membersByName = membersAndInitializers.NonTypeMembers
                         .WhereAsArray(
                             s =>
                                 !s.IsIndexer()
@@ -1718,8 +1717,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 RoslynDebug.AssertOrFailFast(
                     Volatile
                         .Read(ref _lazyTypeMembers)
-                        ?.Values
-                        .Any(types => types.Contains(t => t == (object)type)) == true
+                        ?.Values.Any(types => types.Contains(t => t == (object)type)) == true
                 );
                 return;
             }
@@ -2763,8 +2761,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     method.IsOverride
                     && method
                         .GetConstructedLeastOverriddenMethod(this, requireSameReturnType: false)
-                        .ContainingType
-                        .SpecialType == Microsoft.CodeAnalysis.SpecialType.System_Object
+                        .ContainingType.SpecialType
+                        == Microsoft.CodeAnalysis.SpecialType.System_Object
                 )
                 {
                     return true;
@@ -2951,9 +2949,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else
             {
-                membersByName = membersAndInitializers
-                    .NonTypeMembers
-                    .ToDictionary(s => s.Name, StringOrdinalComparer.Instance);
+                membersByName = membersAndInitializers.NonTypeMembers.ToDictionary(
+                    s => s.Name,
+                    StringOrdinalComparer.Instance
+                );
 
                 // Merge types into the member dictionary
                 AddNestedTypesToDictionary(membersByName, GetTypeMembersDictionary());
@@ -3225,10 +3224,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             == InstanceInitializersForPositionalMembers[0].Syntax.SyntaxTree
                     );
                     Debug.Assert(
-                        declaredMembers
-                            .RecordDeclarationWithParameters
-                            .Span
-                            .Contains(InstanceInitializersForPositionalMembers[0].Syntax.Span.Start)
+                        declaredMembers.RecordDeclarationWithParameters.Span.Contains(
+                            InstanceInitializersForPositionalMembers[0].Syntax.Span.Start
+                        )
                     );
 
                     var groupCount = declaredMembers.InstanceInitializers.Length;
@@ -3270,12 +3268,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         insertAt != groupCount
                         && declaredMembers.RecordDeclarationWithParameters.SyntaxTree
                             == declaredMembers.InstanceInitializers[insertAt][0].Syntax.SyntaxTree
-                        && declaredMembers
-                            .RecordDeclarationWithParameters
-                            .Span
-                            .Contains(
-                                declaredMembers.InstanceInitializers[insertAt][0].Syntax.Span.Start
-                            )
+                        && declaredMembers.RecordDeclarationWithParameters.Span.Contains(
+                            declaredMembers.InstanceInitializers[insertAt][0].Syntax.Span.Start
+                        )
                     )
                     {
                         // Need to merge into the previous group
@@ -3310,17 +3305,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     else
                     {
                         Debug.Assert(
-                            !declaredMembers
-                                .InstanceInitializers
-                                .Any(
-                                    g =>
-                                        declaredMembers.RecordDeclarationWithParameters.SyntaxTree
-                                            == g[0].Syntax.SyntaxTree
-                                        && declaredMembers
-                                            .RecordDeclarationWithParameters
-                                            .Span
-                                            .Contains(g[0].Syntax.Span.Start)
-                                )
+                            !declaredMembers.InstanceInitializers.Any(
+                                g =>
+                                    declaredMembers.RecordDeclarationWithParameters.SyntaxTree
+                                        == g[0].Syntax.SyntaxTree
+                                    && declaredMembers.RecordDeclarationWithParameters.Span.Contains(
+                                        g[0].Syntax.Span.Start
+                                    )
+                            )
                         );
                         groupsBuilder = ArrayBuilder<
                             ImmutableArray<FieldOrPropertyInitializer>
@@ -4130,12 +4122,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     return false;
                 }
 
-                var propertyParamType =
-                    (
-                        ((i == numParams - 1) && !getNotSet)
-                            ? propertySymbol.TypeWithAnnotations
-                            : propertyParams[i].TypeWithAnnotations
-                    ).Type;
+                var propertyParamType = (
+                    ((i == numParams - 1) && !getNotSet)
+                        ? propertySymbol.TypeWithAnnotations
+                        : propertyParams[i].TypeWithAnnotations
+                ).Type;
                 if (!propertyParamType.Equals(methodParam.Type, TypeCompareKind.AllIgnoreOptions))
                 {
                     return false;
@@ -4349,13 +4340,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         }
                         else
                         {
-                            MessageID
-                                .IDS_FeatureParameterlessStructConstructors
-                                .CheckFeatureAvailability(
-                                    diagnostics,
-                                    m.DeclaringCompilation,
-                                    location
-                                );
+                            MessageID.IDS_FeatureParameterlessStructConstructors.CheckFeatureAvailability(
+                                diagnostics,
+                                m.DeclaringCompilation,
+                                location
+                            );
                             if (m.DeclaredAccessibility != Accessibility.Public)
                             {
                                 diagnostics.Add(
@@ -4391,13 +4380,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 foreach (FieldOrPropertyInitializer initializer in initializers)
                 {
                     var symbol = initializer.FieldOpt.AssociatedSymbol ?? initializer.FieldOpt;
-                    MessageID
-                        .IDS_FeatureStructFieldInitializers
-                        .CheckFeatureAvailability(
-                            diagnostics,
-                            symbol.DeclaringCompilation,
-                            symbol.Locations[0]
-                        );
+                    MessageID.IDS_FeatureStructFieldInitializers.CheckFeatureAvailability(
+                        diagnostics,
+                        symbol.DeclaringCompilation,
+                        symbol.Locations[0]
+                    );
                 }
             }
         }
@@ -4764,9 +4751,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     }
 
                     if (
-                        !printMembersMethod
-                            .ReturnType
-                            .Equals(targetMethod.ReturnType, TypeCompareKind.AllIgnoreOptions)
+                        !printMembersMethod.ReturnType.Equals(
+                            targetMethod.ReturnType,
+                            TypeCompareKind.AllIgnoreOptions
+                        )
                     )
                     {
                         if (!printMembersMethod.ReturnType.IsErrorType())
@@ -4823,13 +4811,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         )
                     )
                     {
-                        var languageVersion =
-                            (
-                                (CSharpParseOptions)this.Locations[0].SourceTree!.Options
-                            ).LanguageVersion;
-                        var requiredVersion = MessageID
-                            .IDS_FeatureSealedToStringInRecord
-                            .RequiredVersion();
+                        var languageVersion = (
+                            (CSharpParseOptions)this.Locations[0].SourceTree!.Options
+                        ).LanguageVersion;
+                        var requiredVersion =
+                            MessageID.IDS_FeatureSealedToStringInRecord.RequiredVersion();
                         diagnostics.Add(
                             ErrorCode.ERR_InheritingFromRecordWithSealedToString,
                             this.Locations[0],
@@ -4869,13 +4855,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             && !IsSealed
                         )
                         {
-                            MessageID
-                                .IDS_FeatureSealedToStringInRecord
-                                .CheckFeatureAvailability(
-                                    diagnostics,
-                                    this.DeclaringCompilation,
-                                    toStringMethod.Locations[0]
-                                );
+                            MessageID.IDS_FeatureSealedToStringInRecord.CheckFeatureAvailability(
+                                diagnostics,
+                                this.DeclaringCompilation,
+                                toStringMethod.Locations[0]
+                            );
                         }
                     }
                 }
@@ -4959,9 +4943,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     }
                     else if (
                         existingMember is FieldSymbol { IsStatic: false } field
-                        && field
-                            .TypeWithAnnotations
-                            .Equals(param.TypeWithAnnotations, TypeCompareKind.AllIgnoreOptions)
+                        && field.TypeWithAnnotations.Equals(
+                            param.TypeWithAnnotations,
+                            TypeCompareKind.AllIgnoreOptions
+                        )
                     )
                     {
                         Binder.CheckFeatureAvailability(
@@ -5008,11 +4993,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             param.Locations[0],
                             new FormattedSymbol(
                                 existingMember,
-                                SymbolDisplayFormat
-                                    .CSharpErrorMessageFormat
-                                    .WithMemberOptions(
-                                        SymbolDisplayMemberOptions.IncludeContainingType
-                                    )
+                                SymbolDisplayFormat.CSharpErrorMessageFormat.WithMemberOptions(
+                                    SymbolDisplayMemberOptions.IncludeContainingType
+                                )
                             ),
                             param.TypeWithAnnotations,
                             param.Name
@@ -5182,9 +5165,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     }
 
                     if (
-                        !equalityContract
-                            .Type
-                            .Equals(targetProperty.Type, TypeCompareKind.AllIgnoreOptions)
+                        !equalityContract.Type.Equals(
+                            targetProperty.Type,
+                            TypeCompareKind.AllIgnoreOptions
+                        )
                     )
                     {
                         if (!equalityContract.Type.IsErrorType())
@@ -5962,8 +5946,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 // drill into any LabeledStatements
                                 while (innerStatement.Kind() == SyntaxKind.LabeledStatement)
                                 {
-                                    innerStatement =
-                                        ((LabeledStatementSyntax)innerStatement).Statement;
+                                    innerStatement = (
+                                        (LabeledStatementSyntax)innerStatement
+                                    ).Statement;
                                 }
 
                                 switch (innerStatement.Kind())

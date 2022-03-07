@@ -474,26 +474,29 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                             switch (node.Kind())
                             {
                                 case SyntaxKind.MethodDeclaration:
-                                    startPosition =
-                                        ((MethodDeclarationSyntax)node).Identifier.SpanStart;
+                                    startPosition = ((MethodDeclarationSyntax)node)
+                                        .Identifier
+                                        .SpanStart;
                                     break;
                                 case SyntaxKind.ConstructorDeclaration:
-                                    startPosition =
-                                        ((ConstructorDeclarationSyntax)node).Identifier.SpanStart;
+                                    startPosition = ((ConstructorDeclarationSyntax)node)
+                                        .Identifier
+                                        .SpanStart;
                                     break;
                                 case SyntaxKind.DestructorDeclaration:
-                                    startPosition =
-                                        ((DestructorDeclarationSyntax)node).Identifier.SpanStart;
+                                    startPosition = ((DestructorDeclarationSyntax)node)
+                                        .Identifier
+                                        .SpanStart;
                                     break;
                                 case SyntaxKind.ConversionOperatorDeclaration:
-                                    startPosition =
-                                        ((ConversionOperatorDeclarationSyntax)node)
-                                            .ImplicitOrExplicitKeyword
-                                            .SpanStart;
+                                    startPosition = ((ConversionOperatorDeclarationSyntax)node)
+                                        .ImplicitOrExplicitKeyword
+                                        .SpanStart;
                                     break;
                                 case SyntaxKind.OperatorDeclaration:
-                                    startPosition =
-                                        ((OperatorDeclarationSyntax)node).OperatorToken.SpanStart;
+                                    startPosition = ((OperatorDeclarationSyntax)node)
+                                        .OperatorToken
+                                        .SpanStart;
                                     break;
                                 default:
                                     startPosition = node.GetFirstTokenAfterAttributes().SpanStart;
@@ -1144,27 +1147,34 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                             switch (node.Kind())
                             {
                                 case SyntaxKind.MethodDeclaration:
-                                    endPosition =
-                                        ((MethodDeclarationSyntax)node).Identifier.Span.End;
+                                    endPosition = ((MethodDeclarationSyntax)node)
+                                        .Identifier
+                                        .Span
+                                        .End;
                                     break;
                                 case SyntaxKind.ConstructorDeclaration:
-                                    endPosition =
-                                        ((ConstructorDeclarationSyntax)node).Identifier.Span.End;
+                                    endPosition = ((ConstructorDeclarationSyntax)node)
+                                        .Identifier
+                                        .Span
+                                        .End;
                                     break;
                                 case SyntaxKind.DestructorDeclaration:
-                                    endPosition =
-                                        ((DestructorDeclarationSyntax)node).Identifier.Span.End;
+                                    endPosition = ((DestructorDeclarationSyntax)node)
+                                        .Identifier
+                                        .Span
+                                        .End;
                                     break;
                                 case SyntaxKind.ConversionOperatorDeclaration:
-                                    endPosition =
-                                        ((ConversionOperatorDeclarationSyntax)node)
-                                            .ImplicitOrExplicitKeyword
-                                            .Span
-                                            .End;
+                                    endPosition = ((ConversionOperatorDeclarationSyntax)node)
+                                        .ImplicitOrExplicitKeyword
+                                        .Span
+                                        .End;
                                     break;
                                 case SyntaxKind.OperatorDeclaration:
-                                    endPosition =
-                                        ((OperatorDeclarationSyntax)node).OperatorToken.Span.End;
+                                    endPosition = ((OperatorDeclarationSyntax)node)
+                                        .OperatorToken
+                                        .Span
+                                        .End;
                                     break;
                                 default:
                                     endPosition = node.GetFirstTokenAfterAttributes().Span.End;

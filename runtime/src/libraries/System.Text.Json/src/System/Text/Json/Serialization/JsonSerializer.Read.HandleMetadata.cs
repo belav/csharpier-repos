@@ -46,8 +46,11 @@ namespace System.Text.Json
             JsonSerializerOptions options
         )
         {
-            JsonConverter converter =
-                state.Current.JsonTypeInfo.PropertyInfoForTypeInfo.ConverterBase;
+            JsonConverter converter = state
+                .Current
+                .JsonTypeInfo
+                .PropertyInfoForTypeInfo
+                .ConverterBase;
 
             if (state.Current.ObjectState < StackFrameObjectState.ReadAheadNameOrEndObject)
             {
@@ -224,8 +227,11 @@ namespace System.Text.Json
             JsonSerializerOptions options
         )
         {
-            JsonConverter converter =
-                state.Current.JsonTypeInfo.PropertyInfoForTypeInfo.ConverterBase;
+            JsonConverter converter = state
+                .Current
+                .JsonTypeInfo
+                .PropertyInfoForTypeInfo
+                .ConverterBase;
 
             if (state.Current.ObjectState < StackFrameObjectState.ReadAheadNameOrEndObject)
             {
@@ -555,9 +561,9 @@ namespace System.Text.Json
                             );
                         }
 
-                        referenceValue = state
-                            .ReferenceResolver
-                            .ResolveReference(property.Value.GetString()!);
+                        referenceValue = state.ReferenceResolver.ResolveReference(
+                            property.Value.GetString()!
+                        );
                         refMetadataFound = true;
                     }
                 }

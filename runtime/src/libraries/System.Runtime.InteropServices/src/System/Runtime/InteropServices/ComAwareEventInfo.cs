@@ -109,9 +109,10 @@ namespace System.Runtime.InteropServices
             out int dispid
         )
         {
-            object[] comEventInterfaces = eventInfo
-                .DeclaringType!
-                .GetCustomAttributes(typeof(ComEventInterfaceAttribute), inherit: false);
+            object[] comEventInterfaces = eventInfo.DeclaringType!.GetCustomAttributes(
+                typeof(ComEventInterfaceAttribute),
+                inherit: false
+            );
 
             if (comEventInterfaces == null || comEventInterfaces.Length == 0)
             {
@@ -127,8 +128,9 @@ namespace System.Runtime.InteropServices
                 );
             }
 
-            Type sourceInterface =
-                ((ComEventInterfaceAttribute)comEventInterfaces[0]).SourceInterface;
+            Type sourceInterface = (
+                (ComEventInterfaceAttribute)comEventInterfaces[0]
+            ).SourceInterface;
             Guid guid = sourceInterface.GUID;
 
             MethodInfo methodInfo = sourceInterface.GetMethod(eventInfo.Name)!;

@@ -57,8 +57,9 @@ public static class SyntaxNodeVerifier
             _writer.GetStringBuilder().Clear();
             _visitor.Visit(node);
             var actual = _writer.GetStringBuilder().ToString();
-            var actualLineCount =
-                actual.Split(new[] { _writer.NewLine }, StringSplitOptions.None).Length;
+            var actualLineCount = actual
+                .Split(new[] { _writer.NewLine }, StringSplitOptions.None)
+                .Length;
 
             var expectedLineIndex = 1;
             while (expectedLineIndex++ < actualLineCount && _index < _baseline.Length)

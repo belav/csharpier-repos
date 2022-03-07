@@ -54,12 +54,10 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         [WpfFact(Skip = "https://github.com/dotnet/roslyn/issues/40160")]
         public void International()
         {
-            VisualStudio
-                .InteractiveWindow
-                .InsertCode(
-                    @"delegate void العربية();
+            VisualStudio.InteractiveWindow.InsertCode(
+                @"delegate void العربية();
 العربية func = () => System.Console.WriteLine(2);"
-                );
+            );
             VisualStudio.InteractiveWindow.PlaceCaret("func", charsOffset: -1);
             VisualStudio.InteractiveWindow.InvokeQuickInfo();
             var s = VisualStudio.InteractiveWindow.GetQuickInfo();
@@ -72,21 +70,18 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
             VisualStudio.InteractiveWindow.InsertCode("int someint; someint = 22; someint = 23;");
             VisualStudio.InteractiveWindow.PlaceCaret("someint = 22", charsOffset: -6);
 
-            VisualStudio
-                .Workspace
-                .WaitForAsyncOperations(
-                    Helper.HangMitigatingTimeout,
-                    FeatureAttribute.ReferenceHighlighting
-                );
-            VisualStudio
-                .InteractiveWindow
-                .VerifyTags(
-                    WellKnownTagNames.MarkerFormatDefinition_HighlightedWrittenReference,
-                    2
-                );
-            VisualStudio
-                .InteractiveWindow
-                .VerifyTags(WellKnownTagNames.MarkerFormatDefinition_HighlightedDefinition, 1);
+            VisualStudio.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.ReferenceHighlighting
+            );
+            VisualStudio.InteractiveWindow.VerifyTags(
+                WellKnownTagNames.MarkerFormatDefinition_HighlightedWrittenReference,
+                2
+            );
+            VisualStudio.InteractiveWindow.VerifyTags(
+                WellKnownTagNames.MarkerFormatDefinition_HighlightedDefinition,
+                1
+            );
         }
 
         [WpfFact(Skip = "https://github.com/dotnet/roslyn/issues/40160")]
@@ -94,38 +89,32 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         {
             VisualStudio.InteractiveWindow.InsertCode("int someint; someint = 22; someint = 23;");
             VisualStudio.InteractiveWindow.PlaceCaret("someint = 22", charsOffset: -6);
-            VisualStudio
-                .Workspace
-                .WaitForAsyncOperations(
-                    Helper.HangMitigatingTimeout,
-                    FeatureAttribute.ReferenceHighlighting
-                );
-            VisualStudio
-                .InteractiveWindow
-                .VerifyTags(
-                    WellKnownTagNames.MarkerFormatDefinition_HighlightedWrittenReference,
-                    2
-                );
+            VisualStudio.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.ReferenceHighlighting
+            );
+            VisualStudio.InteractiveWindow.VerifyTags(
+                WellKnownTagNames.MarkerFormatDefinition_HighlightedWrittenReference,
+                2
+            );
 
             VisualStudio.InteractiveWindow.PlaceCaret("22");
-            VisualStudio
-                .Workspace
-                .WaitForAsyncOperations(
-                    Helper.HangMitigatingTimeout,
-                    FeatureAttribute.ReferenceHighlighting
-                );
-            VisualStudio
-                .InteractiveWindow
-                .VerifyTags(WellKnownTagNames.MarkerFormatDefinition_HighlightedDefinition, 0);
-            VisualStudio
-                .InteractiveWindow
-                .VerifyTags(WellKnownTagNames.MarkerFormatDefinition_HighlightedReference, 0);
-            VisualStudio
-                .InteractiveWindow
-                .VerifyTags(
-                    WellKnownTagNames.MarkerFormatDefinition_HighlightedWrittenReference,
-                    0
-                );
+            VisualStudio.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.ReferenceHighlighting
+            );
+            VisualStudio.InteractiveWindow.VerifyTags(
+                WellKnownTagNames.MarkerFormatDefinition_HighlightedDefinition,
+                0
+            );
+            VisualStudio.InteractiveWindow.VerifyTags(
+                WellKnownTagNames.MarkerFormatDefinition_HighlightedReference,
+                0
+            );
+            VisualStudio.InteractiveWindow.VerifyTags(
+                WellKnownTagNames.MarkerFormatDefinition_HighlightedWrittenReference,
+                0
+            );
         }
 
         [WpfFact(Skip = "https://github.com/dotnet/roslyn/issues/46027")]
@@ -135,18 +124,18 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
             VisualStudio.InteractiveWindow.SubmitText("Goo something = new Goo();");
             VisualStudio.InteractiveWindow.SubmitText("something.ToString();");
             VisualStudio.InteractiveWindow.PlaceCaret("someth", charsOffset: 1, occurrence: 2);
-            VisualStudio
-                .Workspace
-                .WaitForAsyncOperations(
-                    Helper.HangMitigatingTimeout,
-                    FeatureAttribute.ReferenceHighlighting
-                );
-            VisualStudio
-                .InteractiveWindow
-                .VerifyTags(WellKnownTagNames.MarkerFormatDefinition_HighlightedDefinition, 1);
-            VisualStudio
-                .InteractiveWindow
-                .VerifyTags(WellKnownTagNames.MarkerFormatDefinition_HighlightedReference, 1);
+            VisualStudio.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.ReferenceHighlighting
+            );
+            VisualStudio.InteractiveWindow.VerifyTags(
+                WellKnownTagNames.MarkerFormatDefinition_HighlightedDefinition,
+                1
+            );
+            VisualStudio.InteractiveWindow.VerifyTags(
+                WellKnownTagNames.MarkerFormatDefinition_HighlightedReference,
+                1
+            );
         }
 
         [WpfFact(Skip = "https://github.com/dotnet/roslyn/issues/46027")]
@@ -156,18 +145,18 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
             VisualStudio.InteractiveWindow.SubmitText("Goo something = new Goo();");
             VisualStudio.InteractiveWindow.InsertCode("something.ToString();");
             VisualStudio.InteractiveWindow.PlaceCaret("someth", charsOffset: 1, occurrence: 2);
-            VisualStudio
-                .Workspace
-                .WaitForAsyncOperations(
-                    Helper.HangMitigatingTimeout,
-                    FeatureAttribute.ReferenceHighlighting
-                );
-            VisualStudio
-                .InteractiveWindow
-                .VerifyTags(WellKnownTagNames.MarkerFormatDefinition_HighlightedDefinition, 1);
-            VisualStudio
-                .InteractiveWindow
-                .VerifyTags(WellKnownTagNames.MarkerFormatDefinition_HighlightedReference, 1);
+            VisualStudio.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.ReferenceHighlighting
+            );
+            VisualStudio.InteractiveWindow.VerifyTags(
+                WellKnownTagNames.MarkerFormatDefinition_HighlightedDefinition,
+                1
+            );
+            VisualStudio.InteractiveWindow.VerifyTags(
+                WellKnownTagNames.MarkerFormatDefinition_HighlightedReference,
+                1
+            );
         }
 
         [WpfFact(Skip = "https://github.com/dotnet/roslyn/issues/46027")]
@@ -177,18 +166,18 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
             VisualStudio.InteractiveWindow.SubmitText("Goo a;");
             VisualStudio.InteractiveWindow.SubmitText("Goo b;");
             VisualStudio.InteractiveWindow.PlaceCaret("Goo b", charsOffset: -1);
-            VisualStudio
-                .Workspace
-                .WaitForAsyncOperations(
-                    Helper.HangMitigatingTimeout,
-                    FeatureAttribute.ReferenceHighlighting
-                );
-            VisualStudio
-                .InteractiveWindow
-                .VerifyTags(WellKnownTagNames.MarkerFormatDefinition_HighlightedDefinition, 1);
-            VisualStudio
-                .InteractiveWindow
-                .VerifyTags(WellKnownTagNames.MarkerFormatDefinition_HighlightedReference, 2);
+            VisualStudio.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.ReferenceHighlighting
+            );
+            VisualStudio.InteractiveWindow.VerifyTags(
+                WellKnownTagNames.MarkerFormatDefinition_HighlightedDefinition,
+                1
+            );
+            VisualStudio.InteractiveWindow.VerifyTags(
+                WellKnownTagNames.MarkerFormatDefinition_HighlightedReference,
+                2
+            );
         }
 
         [WpfFact(Skip = "https://github.com/dotnet/roslyn/issues/46027")]
@@ -198,18 +187,18 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
             VisualStudio.InteractiveWindow.SubmitText("Goo a;");
             VisualStudio.InteractiveWindow.InsertCode("Goo b;");
             VisualStudio.InteractiveWindow.PlaceCaret("Goo b", charsOffset: -1);
-            VisualStudio
-                .Workspace
-                .WaitForAsyncOperations(
-                    Helper.HangMitigatingTimeout,
-                    FeatureAttribute.ReferenceHighlighting
-                );
-            VisualStudio
-                .InteractiveWindow
-                .VerifyTags(WellKnownTagNames.MarkerFormatDefinition_HighlightedDefinition, 1);
-            VisualStudio
-                .InteractiveWindow
-                .VerifyTags(WellKnownTagNames.MarkerFormatDefinition_HighlightedReference, 2);
+            VisualStudio.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.ReferenceHighlighting
+            );
+            VisualStudio.InteractiveWindow.VerifyTags(
+                WellKnownTagNames.MarkerFormatDefinition_HighlightedDefinition,
+                1
+            );
+            VisualStudio.InteractiveWindow.VerifyTags(
+                WellKnownTagNames.MarkerFormatDefinition_HighlightedReference,
+                2
+            );
         }
 
         [WpfFact]
@@ -219,15 +208,18 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
             VisualStudio.InteractiveWindow.SubmitText("Goo a;");
             VisualStudio.InteractiveWindow.InsertCode("Goo b;Something();");
             VisualStudio.InteractiveWindow.PlaceCaret("Something();", charsOffset: -1);
-            VisualStudio
-                .Workspace
-                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
-            VisualStudio
-                .InteractiveWindow
-                .VerifyTags(WellKnownTagNames.MarkerFormatDefinition_HighlightedDefinition, 0);
-            VisualStudio
-                .InteractiveWindow
-                .VerifyTags(WellKnownTagNames.MarkerFormatDefinition_HighlightedReference, 0);
+            VisualStudio.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.Workspace
+            );
+            VisualStudio.InteractiveWindow.VerifyTags(
+                WellKnownTagNames.MarkerFormatDefinition_HighlightedDefinition,
+                0
+            );
+            VisualStudio.InteractiveWindow.VerifyTags(
+                WellKnownTagNames.MarkerFormatDefinition_HighlightedReference,
+                0
+            );
         }
 
         [WpfFact]
@@ -236,31 +228,30 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
             VisualStudio.InteractiveWindow.SubmitText("string abc = null;");
             VisualStudio.InteractiveWindow.SubmitText("abc = string.Empty;");
             VisualStudio.InteractiveWindow.InsertCode("int abc = 42;");
-            VisualStudio
-                .Workspace
-                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
+            VisualStudio.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.Workspace
+            );
             VisualStudio.InteractiveWindow.PlaceCaret("abc", occurrence: 3);
-            VisualStudio
-                .Workspace
-                .WaitForAsyncOperations(
-                    Helper.HangMitigatingTimeout,
-                    FeatureAttribute.ReferenceHighlighting
-                );
-            VisualStudio
-                .InteractiveWindow
-                .VerifyTags(WellKnownTagNames.MarkerFormatDefinition_HighlightedDefinition, 1);
-            VisualStudio
-                .InteractiveWindow
-                .VerifyTags(WellKnownTagNames.MarkerFormatDefinition_HighlightedReference, 0);
+            VisualStudio.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.ReferenceHighlighting
+            );
+            VisualStudio.InteractiveWindow.VerifyTags(
+                WellKnownTagNames.MarkerFormatDefinition_HighlightedDefinition,
+                1
+            );
+            VisualStudio.InteractiveWindow.VerifyTags(
+                WellKnownTagNames.MarkerFormatDefinition_HighlightedReference,
+                0
+            );
         }
 
         [WpfFact(Skip = "https://github.com/dotnet/roslyn/issues/40160")]
         public void DisabledCommandsPart1()
         {
-            VisualStudio
-                .InteractiveWindow
-                .InsertCode(
-                    @"public class Class
+            VisualStudio.InteractiveWindow.InsertCode(
+                @"public class Class
 {
     int field;
 
@@ -269,42 +260,47 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
          int abc = 1 + 1;
      }
 }"
-                );
+            );
 
             VisualStudio.InteractiveWindow.PlaceCaret("abc");
-            VisualStudio
-                .Workspace
-                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
+            VisualStudio.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.Workspace
+            );
             Assert.False(VisualStudio.IsCommandAvailable(WellKnownCommandNames.Refactor_Rename));
 
             VisualStudio.InteractiveWindow.PlaceCaret("1 + 1");
-            VisualStudio
-                .Workspace
-                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
+            VisualStudio.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.Workspace
+            );
             Assert.False(
                 VisualStudio.IsCommandAvailable(WellKnownCommandNames.Refactor_ExtractMethod)
             );
 
             VisualStudio.InteractiveWindow.PlaceCaret("Class");
-            VisualStudio
-                .Workspace
-                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
+            VisualStudio.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.Workspace
+            );
             Assert.False(
                 VisualStudio.IsCommandAvailable(WellKnownCommandNames.Refactor_ExtractInterface)
             );
 
             VisualStudio.InteractiveWindow.PlaceCaret("field");
-            VisualStudio
-                .Workspace
-                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
+            VisualStudio.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.Workspace
+            );
             Assert.False(
                 VisualStudio.IsCommandAvailable(WellKnownCommandNames.Refactor_EncapsulateField)
             );
 
             VisualStudio.InteractiveWindow.PlaceCaret("Method");
-            VisualStudio
-                .Workspace
-                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
+            VisualStudio.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.Workspace
+            );
             Assert.False(
                 VisualStudio.IsCommandAvailable(WellKnownCommandNames.Refactor_RemoveParameters)
             );
@@ -318,50 +314,43 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         {
             VisualStudio.InteractiveWindow.InsertCode("typeof(ArrayList)");
             VisualStudio.InteractiveWindow.PlaceCaret("ArrayList");
-            VisualStudio
-                .Workspace
-                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
+            VisualStudio.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.Workspace
+            );
             VisualStudio.InteractiveWindow.InvokeCodeActionList();
-            VisualStudio
-                .InteractiveWindow
-                .Verify
-                .CodeActions(
-                    new string[] { "using System.Collections;", "System.Collections.ArrayList" },
-                    "using System.Collections;"
-                );
+            VisualStudio.InteractiveWindow.Verify.CodeActions(
+                new string[] { "using System.Collections;", "System.Collections.ArrayList" },
+                "using System.Collections;"
+            );
 
-            VisualStudio
-                .InteractiveWindow
-                .Verify
-                .LastReplInput(
-                    @"using System.Collections;
+            VisualStudio.InteractiveWindow.Verify.LastReplInput(
+                @"using System.Collections;
 
 typeof(ArrayList)"
-                );
+            );
         }
 
         [WpfFact(Skip = "https://github.com/dotnet/roslyn/issues/40160")]
         public void QualifyName()
         {
             VisualStudio.InteractiveWindow.InsertCode("typeof(ArrayList)");
-            VisualStudio
-                .Workspace
-                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
+            VisualStudio.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.Workspace
+            );
             VisualStudio.InteractiveWindow.PlaceCaret("ArrayList");
-            VisualStudio
-                .Workspace
-                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
-            VisualStudio
-                .InteractiveWindow
-                .Verify
-                .CodeActions(
-                    new string[] { "using System.Collections;", "System.Collections.ArrayList" },
-                    "System.Collections.ArrayList"
-                );
-            VisualStudio
-                .InteractiveWindow
-                .Verify
-                .LastReplInput("typeof(System.Collections.ArrayList)");
+            VisualStudio.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.Workspace
+            );
+            VisualStudio.InteractiveWindow.Verify.CodeActions(
+                new string[] { "using System.Collections;", "System.Collections.ArrayList" },
+                "System.Collections.ArrayList"
+            );
+            VisualStudio.InteractiveWindow.Verify.LastReplInput(
+                "typeof(System.Collections.ArrayList)"
+            );
         }
     }
 }

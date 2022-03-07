@@ -56,8 +56,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 result
                     .Should()
                     .Pass()
-                    .And
-                    .ExecuteComponentEntryPoint(sharedState.ComponentEntryPoint1, 1, 1);
+                    .And.ExecuteComponentEntryPoint(sharedState.ComponentEntryPoint1, 1, 1);
             }
             else
             {
@@ -100,8 +99,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 result
                     .Should()
                     .Pass()
-                    .And
-                    .ExecuteComponentEntryPoint(sharedState.ComponentEntryPoint1, 1, 1);
+                    .And.ExecuteComponentEntryPoint(sharedState.ComponentEntryPoint1, 1, 1);
             }
             else
             {
@@ -130,10 +128,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             result
                 .Should()
                 .InitializeContextForApp(appProject.AppDll)
-                .And
-                .Pass()
-                .And
-                .ExecuteComponentEntryPoint(sharedState.ComponentEntryPoint1, 1, 1);
+                .And.Pass()
+                .And.ExecuteComponentEntryPoint(sharedState.ComponentEntryPoint1, 1, 1);
         }
 
         [Theory]
@@ -182,16 +178,14 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             result
                 .Should()
                 .Pass()
-                .And
-                .InitializeContextForConfig(componentProject.RuntimeConfigJson);
+                .And.InitializeContextForConfig(componentProject.RuntimeConfigJson);
 
             for (int i = 1; i <= callCount; ++i)
             {
                 result
                     .Should()
                     .ExecuteComponentEntryPoint(comp1Name, i * 2 - 1, i)
-                    .And
-                    .ExecuteComponentEntryPoint(sharedState.ComponentEntryPoint2, i * 2, i);
+                    .And.ExecuteComponentEntryPoint(sharedState.ComponentEntryPoint2, i * 2, i);
             }
         }
 
@@ -232,16 +226,14 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             result
                 .Should()
                 .Pass()
-                .And
-                .InitializeContextForConfig(componentProject.RuntimeConfigJson);
+                .And.InitializeContextForConfig(componentProject.RuntimeConfigJson);
 
             for (int i = 1; i <= callCount; ++i)
             {
                 result
                     .Should()
                     .ExecuteComponentEntryPoint(sharedState.ComponentEntryPoint1, i, i)
-                    .And
-                    .ExecuteComponentEntryPoint(sharedState.ComponentEntryPoint2, i, i);
+                    .And.ExecuteComponentEntryPoint(sharedState.ComponentEntryPoint2, i, i);
             }
         }
 
@@ -265,10 +257,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 .Execute()
                 .Should()
                 .Fail()
-                .And
-                .InitializeContextForConfig(componentProject.RuntimeConfigJson)
-                .And
-                .ExecuteComponentEntryPointWithException(entryPoint, 1);
+                .And.InitializeContextForConfig(componentProject.RuntimeConfigJson)
+                .And.ExecuteComponentEntryPointWithException(entryPoint, 1);
         }
 
         public class SharedTestState : SharedTestStateBase
@@ -336,8 +326,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
         {
             return assertion
                 .ExecuteComponentEntryPoint(methodName, componentCallCount)
-                .And
-                .HaveStdOutContaining(
+                .And.HaveStdOutContaining(
                     $"{methodName} delegate result: 0x{returnValue.ToString("x")}"
                 );
         }
@@ -351,20 +340,16 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             var constraint = assertion.ExecuteComponentEntryPoint(methodName, componentCallCount);
             if (OperatingSystem.IsWindows())
             {
-                return constraint
-                    .And
-                    .HaveStdOutContaining(
-                        $"{methodName} delegate threw exception: 0x{Constants.ErrorCode.COMPlusException.ToString("x")}"
-                    );
+                return constraint.And.HaveStdOutContaining(
+                    $"{methodName} delegate threw exception: 0x{Constants.ErrorCode.COMPlusException.ToString("x")}"
+                );
             }
             else
             {
                 // Exception is unhandled by native host on non-Windows systems
-                return constraint
-                    .And
+                return constraint.And
                     .ExitWith(Constants.ErrorCode.SIGABRT)
-                    .And
-                    .HaveStdErrContaining(
+                    .And.HaveStdErrContaining(
                         $"Unhandled exception. System.InvalidOperationException: {methodName}"
                     );
             }

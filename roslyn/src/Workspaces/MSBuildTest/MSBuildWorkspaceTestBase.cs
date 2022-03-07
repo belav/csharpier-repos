@@ -32,8 +32,7 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
         {
             AssertEx.Equal(
                 expectedFailures,
-                workspace
-                    .Diagnostics
+                workspace.Diagnostics
                     .Where(d => d.Kind == WorkspaceDiagnosticKind.Failure)
                     .Select(d => d.Message)
             );
@@ -170,10 +169,9 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
         {
             var files = GetSolutionFiles(inputs);
             CreateFiles(files);
-            var solutionFileName =
-                files
-                    .First(t => t.fileName.EndsWith(".sln", StringComparison.OrdinalIgnoreCase))
-                    .fileName;
+            var solutionFileName = files
+                .First(t => t.fileName.EndsWith(".sln", StringComparison.OrdinalIgnoreCase))
+                .fileName;
             solutionFileName = GetSolutionFileName(solutionFileName);
             using (var workspace = CreateMSBuildWorkspace())
             {

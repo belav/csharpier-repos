@@ -124,10 +124,8 @@ public class ViewViewComponentResult : IViewComponentResult
         {
             if (_diagnosticListener == null)
             {
-                _diagnosticListener = viewContext
-                    .HttpContext
-                    .RequestServices
-                    .GetRequiredService<DiagnosticListener>();
+                _diagnosticListener =
+                    viewContext.HttpContext.RequestServices.GetRequiredService<DiagnosticListener>();
             }
 
             _diagnosticListener.ViewComponentBeforeViewExecute(context, view);
@@ -146,10 +144,6 @@ public class ViewViewComponentResult : IViewComponentResult
 
     private static IViewEngine ResolveViewEngine(ViewComponentContext context)
     {
-        return context
-            .ViewContext
-            .HttpContext
-            .RequestServices
-            .GetRequiredService<ICompositeViewEngine>();
+        return context.ViewContext.HttpContext.RequestServices.GetRequiredService<ICompositeViewEngine>();
     }
 }

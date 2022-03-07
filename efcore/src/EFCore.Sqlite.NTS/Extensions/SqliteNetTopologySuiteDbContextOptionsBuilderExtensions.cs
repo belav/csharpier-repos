@@ -29,8 +29,9 @@ namespace Microsoft.EntityFrameworkCore
             this SqliteDbContextOptionsBuilder optionsBuilder
         )
         {
-            var coreOptionsBuilder =
-                ((IRelationalDbContextOptionsBuilderInfrastructure)optionsBuilder).OptionsBuilder;
+            var coreOptionsBuilder = (
+                (IRelationalDbContextOptionsBuilderInfrastructure)optionsBuilder
+            ).OptionsBuilder;
             var infrastructure = (IDbContextOptionsBuilderInfrastructure)coreOptionsBuilder;
 #pragma warning disable EF1001 // Internal EF Core API usage.
             // #20566

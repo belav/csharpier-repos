@@ -1316,8 +1316,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 case BoundKind.ExpressionWithNullability:
                 {
-                    var innerExpression =
-                        ((BoundExpressionWithNullability)sourceExpression).Expression;
+                    var innerExpression = (
+                        (BoundExpressionWithNullability)sourceExpression
+                    ).Expression;
                     var innerConversion = ClassifyImplicitBuiltInConversionFromExpression(
                         innerExpression,
                         innerExpression.Type,
@@ -1821,9 +1822,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if (
                     invokeMethod.RefKind != refKind
-                    || !invokeMethod
-                        .ReturnType
-                        .Equals(returnType.Type, TypeCompareKind.AllIgnoreOptions)
+                    || !invokeMethod.ReturnType.Equals(
+                        returnType.Type,
+                        TypeCompareKind.AllIgnoreOptions
+                    )
                 )
                 {
                     return LambdaConversionResult.MismatchedReturnType;
@@ -1853,12 +1855,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         if (
                             delegateParameters[p].RefKind != anonymousFunction.RefKind(p)
-                            || !delegateParameters[p]
-                                .Type
-                                .Equals(
-                                    anonymousFunction.ParameterType(p),
-                                    TypeCompareKind.AllIgnoreOptions
-                                )
+                            || !delegateParameters[p].Type.Equals(
+                                anonymousFunction.ParameterType(p),
+                                TypeCompareKind.AllIgnoreOptions
+                            )
                         )
                         {
                             return LambdaConversionResult.MismatchedParameterType;
@@ -4696,10 +4696,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                         == SpecialType.System_Collections_Generic_IReadOnlyCollection_T
                 )
                 {
-                    var sourceElement =
-                        ((NamedTypeSymbol)source)
-                            .TypeArgumentWithDefinitionUseSiteDiagnostics(0, ref useSiteInfo)
-                            .Type;
+                    var sourceElement = ((NamedTypeSymbol)source)
+                        .TypeArgumentWithDefinitionUseSiteDiagnostics(0, ref useSiteInfo)
+                        .Type;
                     var destinationElement = destinationArray.ElementType;
 
                     if (HasIdentityConversionInternal(sourceElement, destinationElement))

@@ -30,10 +30,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         ) : base(dependencies, queryCompilationContext)
         {
             RelationalDependencies = relationalDependencies;
-            _useRelationalNulls =
-                RelationalOptionsExtension
-                    .Extract(queryCompilationContext.ContextOptions)
-                    .UseRelationalNulls;
+            _useRelationalNulls = RelationalOptionsExtension
+                .Extract(queryCompilationContext.ContextOptions)
+                .UseRelationalNulls;
         }
 
         /// <summary>

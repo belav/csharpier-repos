@@ -35,9 +35,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
                 {
                     listener.ListenSocket = listener.CreateListenSocket();
 #pragma warning disable CS0618
-                    listener
-                        .ListenSocket
-                        .Listen(TransportContext.Options.Backlog, ConnectionCallback, listener);
+                    listener.ListenSocket.Listen(
+                        TransportContext.Options.Backlog,
+                        ConnectionCallback,
+                        listener
+                    );
 #pragma warning restore CS0618
                 },
                 this

@@ -277,10 +277,8 @@ namespace System.Net.WebSockets.Client.Tests
             }
 
             using (
-                X509Certificate2 clientCert = Test.Common
-                    .Configuration
-                    .Certificates
-                    .GetClientCertificate()
+                X509Certificate2 clientCert =
+                    Test.Common.Configuration.Certificates.GetClientCertificate()
             )
             {
                 await LoopbackServer.CreateClientAndServerAsync(

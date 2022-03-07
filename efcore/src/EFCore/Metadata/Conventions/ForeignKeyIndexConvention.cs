@@ -211,8 +211,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var baseKeys = newBaseType?.GetKeys().ToList();
             var baseIndexes = newBaseType?.GetIndexes().ToList();
             foreach (
-                var foreignKey in entityTypeBuilder
-                    .Metadata
+                var foreignKey in entityTypeBuilder.Metadata
                     .GetDeclaredForeignKeys()
                     .Concat(entityTypeBuilder.Metadata.GetDerivedForeignKeys())
             )
@@ -273,8 +272,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var index = indexBuilder.Metadata;
             foreach (
-                var otherIndex in index
-                    .DeclaringEntityType
+                var otherIndex in index.DeclaringEntityType
                     .GetDerivedTypesInclusive()
                     .SelectMany(t => t.GetDeclaredIndexes())
                     .Where(
@@ -307,8 +305,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         )
         {
             foreach (
-                var foreignKey in index
-                    .DeclaringEntityType
+                var foreignKey in index.DeclaringEntityType
                     .GetDerivedTypesInclusive()
                     .SelectMany(t => t.GetDeclaredForeignKeys())
                     .Where(
@@ -357,8 +354,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             {
                 if (!foreignKey.IsUnique)
                 {
-                    var coveringKey = foreignKey
-                        .DeclaringEntityType
+                    var coveringKey = foreignKey.DeclaringEntityType
                         .GetKeys()
                         .FirstOrDefault(
                             k =>
@@ -375,8 +371,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         return;
                     }
 
-                    var coveringIndex = foreignKey
-                        .DeclaringEntityType
+                    var coveringIndex = foreignKey.DeclaringEntityType
                         .GetIndexes()
                         .FirstOrDefault(
                             i =>
@@ -407,8 +402,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             if (index.IsUnique)
             {
                 foreach (
-                    var otherIndex in index
-                        .DeclaringEntityType
+                    var otherIndex in index.DeclaringEntityType
                         .GetDerivedTypesInclusive()
                         .SelectMany(t => t.GetDeclaredIndexes())
                         .Where(
@@ -430,8 +424,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             else
             {
                 foreach (
-                    var foreignKey in index
-                        .DeclaringEntityType
+                    var foreignKey in index.DeclaringEntityType
                         .GetDerivedTypesInclusive()
                         .SelectMany(t => t.GetDeclaredForeignKeys())
                         .Where(
@@ -557,12 +550,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         {
                             if (declaredForeignKey.Properties.Count != key.Properties.Count)
                             {
-                                Dependencies
-                                    .Logger
-                                    .RedundantIndexRemoved(
-                                        declaredForeignKey.Properties,
-                                        key.Properties
-                                    );
+                                Dependencies.Logger.RedundantIndexRemoved(
+                                    declaredForeignKey.Properties,
+                                    key.Properties
+                                );
                             }
                         }
                     }
@@ -583,12 +574,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                                 != existingIndex.Properties.Count
                             )
                             {
-                                Dependencies
-                                    .Logger
-                                    .RedundantIndexRemoved(
-                                        declaredForeignKey.Properties,
-                                        existingIndex.Properties
-                                    );
+                                Dependencies.Logger.RedundantIndexRemoved(
+                                    declaredForeignKey.Properties,
+                                    existingIndex.Properties
+                                );
                             }
                         }
                     }

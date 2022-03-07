@@ -30,9 +30,11 @@ namespace System.Text.Json.Serialization.Converters
         )
         {
             Debug.Assert(jsonTypeInfo != null);
-            jsonTypeInfo.CreateObjectWithArgs = options
-                .MemberAccessorStrategy
-                .CreateImmutableEnumerableCreateRangeDelegate<TCollection, TElement>();
+            jsonTypeInfo.CreateObjectWithArgs =
+                options.MemberAccessorStrategy.CreateImmutableEnumerableCreateRangeDelegate<
+                    TCollection,
+                    TElement
+                >();
         }
     }
 }

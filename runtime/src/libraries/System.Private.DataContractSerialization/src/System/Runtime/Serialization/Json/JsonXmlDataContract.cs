@@ -89,8 +89,9 @@ namespace System.Runtime.Serialization.Json
             if (context != null)
             {
                 List<XmlQualifiedName> stableNames = new List<XmlQualifiedName>();
-                Dictionary<XmlQualifiedName, DataContract>[] entries =
-                    context.scopedKnownTypes.dataContractDictionaries;
+                Dictionary<XmlQualifiedName, DataContract>[] entries = context
+                    .scopedKnownTypes
+                    .dataContractDictionaries;
                 if (entries != null)
                 {
                     for (int i = 0; i < entries.Length; i++)

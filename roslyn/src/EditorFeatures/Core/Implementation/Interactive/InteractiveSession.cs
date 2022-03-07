@@ -185,8 +185,7 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
                 imports = initResult.Imports.ToImmutableArrayOrEmpty();
 
                 var metadataService = _workspace.Services.GetRequiredService<IMetadataService>();
-                references = initResult
-                    .MetadataReferencePaths
+                references = initResult.MetadataReferencePaths
                     .ToImmutableArrayOrEmpty()
                     .SelectAsArray(
                         (path, metadataService) =>
@@ -240,16 +239,14 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
                             initializationScriptReferences
                         );
 
-                        solution = initProject
-                            .Solution
-                            .AddDocument(
-                                DocumentId.CreateNewId(
-                                    initializationScriptProjectId,
-                                    debugName: initializationScriptPath
-                                ),
-                                Path.GetFileName(initializationScriptPath),
-                                new FileTextLoader(initializationScriptPath, defaultEncoding: null)
-                            );
+                        solution = initProject.Solution.AddDocument(
+                            DocumentId.CreateNewId(
+                                initializationScriptProjectId,
+                                debugName: initializationScriptPath
+                            ),
+                            Path.GetFileName(initializationScriptPath),
+                            new FileTextLoader(initializationScriptPath, defaultEncoding: null)
+                        );
                     }
 
                     var newSubmissionProject = CreateSubmissionProjectNoLock(
@@ -260,13 +257,11 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
                         imports,
                         references
                     );
-                    solution = newSubmissionProject
-                        .Solution
-                        .AddDocument(
-                            newSubmissionDocumentId,
-                            newSubmissionProjectName,
-                            newSubmissionText
-                        );
+                    solution = newSubmissionProject.Solution.AddDocument(
+                        newSubmissionDocumentId,
+                        newSubmissionProjectName,
+                        newSubmissionText
+                    );
 
                     return solution;
                 },
@@ -302,10 +297,9 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
                     (RuntimeMetadataReferenceResolver)compilationOptions.MetadataReferenceResolver!;
                 if (
                     metadataResolver.PathResolver.BaseDirectory != _workingDirectory
-                    || !metadataResolver
-                        .PathResolver
-                        .SearchPaths
-                        .SequenceEqual(_referenceSearchPaths)
+                    || !metadataResolver.PathResolver.SearchPaths.SequenceEqual(
+                        _referenceSearchPaths
+                    )
                 )
                 {
                     compilationOptions = compilationOptions.WithMetadataReferenceResolver(

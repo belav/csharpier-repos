@@ -154,12 +154,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                         && diagnostic.Location is ExternalFileLocation externalFileLocation
                     )
                     {
-                        return PathUtilities
-                            .Comparer
-                            .Equals(
-                                _contextFile.Value.AdditionalFile.Path,
-                                externalFileLocation.FilePath
-                            );
+                        return PathUtilities.Comparer.Equals(
+                            _contextFile.Value.AdditionalFile.Path,
+                            externalFileLocation.FilePath
+                        );
                     }
 
                     return false;

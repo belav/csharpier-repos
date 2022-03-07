@@ -122,29 +122,23 @@ unsafe class C
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
 
-            var initializer1 =
-                tree.GetRoot()
-                    .DescendantNodes()
-                    .OfType<VariableDeclaratorSyntax>()
-                    .First()
-                    .Initializer!
-                    .Value;
+            var initializer1 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<VariableDeclaratorSyntax>()
+                .First()
+                .Initializer!.Value;
             assertResult(model, initializer1, comp);
             var parameter = tree.GetRoot()
                 .DescendantNodes()
                 .OfType<InvocationExpressionSyntax>()
                 .First()
-                .ArgumentList
-                .Arguments
-                .Single();
+                .ArgumentList.Arguments.Single();
             assertResult(model, parameter.Expression, comp);
-            var initializer2 =
-                tree.GetRoot()
-                    .DescendantNodes()
-                    .OfType<VariableDeclaratorSyntax>()
-                    .Last()
-                    .Initializer!
-                    .Value;
+            var initializer2 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<VariableDeclaratorSyntax>()
+                .Last()
+                .Initializer!.Value;
             assertResult(model, initializer2, comp);
 
             static void assertResult(
@@ -2457,8 +2451,7 @@ public class C<T>
                     "System.Runtime.CompilerServices.CallConvCdecl",
                     "System.Runtime.CompilerServices.CallConvStdcall"
                 },
-                funcPtrType
-                    .Signature
+                funcPtrType.Signature
                     .GetCallingConventionModifiers()
                     .Select(c => ((CSharpCustomModifier)c).ModifierSymbol.ToTestDisplayString())
             );
@@ -4632,13 +4625,12 @@ unsafe class C
             var syntaxTree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(syntaxTree);
 
-            VariableDeclarationSyntax fieldDeclaration =
-                syntaxTree
-                    .GetRoot()
-                    .DescendantNodes()
-                    .OfType<FieldDeclarationSyntax>()
-                    .Single()
-                    .Declaration;
+            VariableDeclarationSyntax fieldDeclaration = syntaxTree
+                .GetRoot()
+                .DescendantNodes()
+                .OfType<FieldDeclarationSyntax>()
+                .Single()
+                .Declaration;
             var fieldVariable = fieldDeclaration.Variables.Single();
             Assert.Equal(
                 "delegate*<System.Void> C.field",

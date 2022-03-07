@@ -95,15 +95,15 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                 CancellationToken.None
             );
 
-            var analysisResult =
-                compWithAnalyzers.GetAnalysisResultAsync(CancellationToken.None).Result;
+            var analysisResult = compWithAnalyzers
+                .GetAnalysisResultAsync(CancellationToken.None)
+                .Result;
             Assert.Empty(analysisResult.CompilationDiagnostics);
 
             // Even though the analyzer registers a symbol action, it should never be invoked because all of its rules are disabled.
-            var analyzerTelemetry =
-                compWithAnalyzers
-                    .GetAnalyzerTelemetryInfoAsync(analyzer, CancellationToken.None)
-                    .Result;
+            var analyzerTelemetry = compWithAnalyzers
+                .GetAnalyzerTelemetryInfoAsync(analyzer, CancellationToken.None)
+                .Result;
             Assert.Equal(0, analyzerTelemetry.SymbolActionsCount);
         }
 

@@ -27,15 +27,14 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         private abstract class CosmosProjectionBindingRemovingExpressionVisitorBase
             : ExpressionVisitor
         {
-            private static readonly MethodInfo _getItemMethodInfo =
-                typeof(JObject)
-                    .GetRuntimeProperties()
-                    .Single(
-                        pi =>
-                            pi.Name == "Item"
-                            && pi.GetIndexParameters()[0].ParameterType == typeof(string)
-                    )
-                    .GetMethod;
+            private static readonly MethodInfo _getItemMethodInfo = typeof(JObject)
+                .GetRuntimeProperties()
+                .Single(
+                    pi =>
+                        pi.Name == "Item"
+                        && pi.GetIndexParameters()[0].ParameterType == typeof(string)
+                )
+                .GetMethod;
 
             private static readonly PropertyInfo _jTokenTypePropertyInfo = typeof(JToken)
                 .GetRuntimeProperties()
@@ -104,8 +103,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                             string storeName = null;
 
                             // Values injected by JObjectInjectingExpressionVisitor
-                            var projectionExpression =
-                                ((UnaryExpression)binaryExpression.Right).Operand;
+                            var projectionExpression = (
+                                (UnaryExpression)binaryExpression.Right
+                            ).Operand;
                             if (
                                 projectionExpression
                                 is ProjectionBindingExpression projectionBindingExpression
@@ -121,8 +121,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                             )
                             {
                                 // Unwrap EntityProjectionExpression when the root entity is not projected
-                                projectionExpression =
-                                    ((UnaryExpression)convertExpression.Operand).Operand;
+                                projectionExpression = (
+                                    (UnaryExpression)convertExpression.Operand
+                                ).Operand;
                             }
 
                             Expression innerAccessExpression;
@@ -196,12 +197,11 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                             }
                             else
                             {
-                                var projection =
-                                    (
-                                        (UnaryExpression)(
-                                            (UnaryExpression)newExpression.Arguments[0]
-                                        ).Operand
-                                    ).Operand;
+                                var projection = (
+                                    (UnaryExpression)(
+                                        (UnaryExpression)newExpression.Arguments[0]
+                                    ).Operand
+                                ).Operand;
                                 entityProjectionExpression = (EntityProjectionExpression)projection;
                             }
 
@@ -360,8 +360,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                             jArray.Name + "Ordinal"
                         );
 
-                        var accessExpression =
-                            objectArrayProjection.InnerProjection.AccessExpression;
+                        var accessExpression = objectArrayProjection
+                            .InnerProjection
+                            .AccessExpression;
                         _projectionBindings[accessExpression] = jObjectParameter;
                         _ownerMappings[accessExpression] = (
                             objectArrayProjection.Navigation.DeclaringEntityType,
@@ -379,9 +380,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         innerShaper = AddIncludes(innerShaper);
 
                         var entities = Expression.Call(
-                            EnumerableMethods
-                                .SelectWithOrdinal
-                                .MakeGenericMethod(typeof(JObject), innerShaper.Type),
+                            EnumerableMethods.SelectWithOrdinal.MakeGenericMethod(
+                                typeof(JObject),
+                                innerShaper.Type
+                            ),
                             Expression.Call(
                                 EnumerableMethods.Cast.MakeGenericMethod(typeof(JObject)),
                                 jArray
@@ -499,9 +501,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                     : (Expression)Expression.Constant(null, typeof(InternalEntityEntry));
 #pragma warning restore EF1001 // Internal EF Core API usage.
 
-                var concreteEntityTypeVariable = shaperBlock
-                    .Variables
-                    .Single(v => v.Type == typeof(IEntityType));
+                var concreteEntityTypeVariable = shaperBlock.Variables.Single(
+                    v => v.Type == typeof(IEntityType)
+                );
                 var inverseNavigation = navigation.Inverse;
                 var fixup = GenerateFixup(
                     includingClrType,
@@ -813,9 +815,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                             if (_ownerMappings.TryGetValue(jObjectExpression, out var ownerInfo))
                             {
                                 Check.DebugAssert(
-                                    principalProperty
-                                        .DeclaringEntityType
-                                        .IsAssignableFrom(ownerInfo.EntityType),
+                                    principalProperty.DeclaringEntityType.IsAssignableFrom(
+                                        ownerInfo.EntityType
+                                    ),
                                     $"{principalProperty.DeclaringEntityType} is not assignable from {ownerInfo.EntityType}"
                                 );
 

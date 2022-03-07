@@ -5489,15 +5489,13 @@ struct S
             Assert.Null(methodGroupSummary.ConvertedType);
             Assert.Equal(ConversionKind.Identity, methodGroupSummary.ImplicitConversion.Kind);
             Assert.True(
-                methodGroupSummary
-                    .MethodGroup
-                    .SetEquals(
-                        ImmutableArray.Create<IMethodSymbol>(
-                            structMethod1.GetPublicSymbol(),
-                            structMethod2.GetPublicSymbol()
-                        ),
-                        EqualityComparer<IMethodSymbol>.Default
-                    )
+                methodGroupSummary.MethodGroup.SetEquals(
+                    ImmutableArray.Create<IMethodSymbol>(
+                        structMethod1.GetPublicSymbol(),
+                        structMethod2.GetPublicSymbol()
+                    ),
+                    EqualityComparer<IMethodSymbol>.Default
+                )
             );
 
             var callSummary = model.GetSemanticInfoSummary(callSyntax);
@@ -5574,12 +5572,10 @@ struct S
             Assert.Null(methodGroupSummary.ConvertedType);
             Assert.Equal(ConversionKind.Identity, methodGroupSummary.ImplicitConversion.Kind);
             Assert.True(
-                methodGroupSummary
-                    .MethodGroup
-                    .SetEquals(
-                        structMethods.GetPublicSymbols(),
-                        EqualityComparer<IMethodSymbol>.Default
-                    )
+                methodGroupSummary.MethodGroup.SetEquals(
+                    structMethods.GetPublicSymbols(),
+                    EqualityComparer<IMethodSymbol>.Default
+                )
             );
 
             var callSummary = model.GetSemanticInfoSummary(callSyntax);
@@ -6614,8 +6610,7 @@ unsafe class C
 
             compilation.VerifyDiagnostics();
 
-            var methodSymbol = compilation
-                .GlobalNamespace
+            var methodSymbol = compilation.GlobalNamespace
                 .GetMember<NamedTypeSymbol>("C")
                 .GetMember<MethodSymbol>("M");
             var pointerType = methodSymbol.Parameters[0].Type;
@@ -8218,8 +8213,7 @@ unsafe class C
             Assert.Equal(charPointerSymbol, summary0.Type.GetSymbol());
 
             var summary1 = initializerSummaries[1];
-            var arraySymbol = compilation
-                .GlobalNamespace
+            var arraySymbol = compilation.GlobalNamespace
                 .GetMember<TypeSymbol>("C")
                 .GetMember<FieldSymbol>("a");
             Assert.Equal(arraySymbol, summary1.Symbol.GetSymbol());
@@ -8303,8 +8297,7 @@ unsafe class C
             Assert.Equal(Conversion.PointerToVoid, summary0.ImplicitConversion);
 
             var summary1 = initializerSummaries[1];
-            var arraySymbol = compilation
-                .GlobalNamespace
+            var arraySymbol = compilation.GlobalNamespace
                 .GetMember<TypeSymbol>("C")
                 .GetMember<FieldSymbol>("a");
             Assert.Equal(arraySymbol, summary1.Symbol.GetSymbol());
@@ -10323,24 +10316,22 @@ namespace ConsoleApplication30
 
     }
 }";
-            var comp1 =
-                CompileAndVerify(
-                    s1,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Passes
-                ).Compilation;
+            var comp1 = CompileAndVerify(
+                s1,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Passes
+            ).Compilation;
 
-            var comp2 =
-                CompileAndVerify(
-                    s2,
-                    options: TestOptions.UnsafeReleaseExe,
-                    verify: Verification.Fails,
-                    references: new MetadataReference[]
-                    {
-                        MetadataReference.CreateFromImage(comp1.EmitToArray())
-                    },
-                    expectedOutput: "TrueFalse"
-                ).Compilation;
+            var comp2 = CompileAndVerify(
+                s2,
+                options: TestOptions.UnsafeReleaseExe,
+                verify: Verification.Fails,
+                references: new MetadataReference[]
+                {
+                    MetadataReference.CreateFromImage(comp1.EmitToArray())
+                },
+                expectedOutput: "TrueFalse"
+            ).Compilation;
 
             var s3 =
                 @"using System; using ClassLibrary1;
@@ -10388,16 +10379,15 @@ namespace ConsoleApplication30
 
             // Only compile this as its intentionally writing outside of fixed buffer boundaries and
             // this doesn't warn but causes flakiness when executed.
-            var comp3 =
-                CompileAndVerify(
-                    s3,
-                    options: TestOptions.UnsafeReleaseDll,
-                    verify: Verification.Fails,
-                    references: new MetadataReference[]
-                    {
-                        MetadataReference.CreateFromImage(comp1.EmitToArray())
-                    }
-                ).Compilation;
+            var comp3 = CompileAndVerify(
+                s3,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails,
+                references: new MetadataReference[]
+                {
+                    MetadataReference.CreateFromImage(comp1.EmitToArray())
+                }
+            ).Compilation;
         }
 
         [Fact]

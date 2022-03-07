@@ -332,8 +332,7 @@ namespace Newtonsoft.Json.Utilities
         {
             return MethodBinder.SelectMethod(
                 type.GetTypeInfo()
-                    .DeclaredMethods
-                    .Where(
+                    .DeclaredMethods.Where(
                         m => (name == null || m.Name == name) && TestAccessibility(m, bindingFlags)
                     ),
                 parameterTypes
@@ -351,8 +350,7 @@ namespace Newtonsoft.Json.Utilities
         )
         {
             return type.GetTypeInfo()
-                .DeclaredConstructors
-                .Where(c => TestAccessibility(c, bindingFlags));
+                .DeclaredConstructors.Where(c => TestAccessibility(c, bindingFlags));
         }
 
         public static ConstructorInfo GetConstructor(this Type type, IList<Type> parameterTypes)

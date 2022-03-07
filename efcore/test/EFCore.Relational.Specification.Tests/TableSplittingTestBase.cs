@@ -224,8 +224,7 @@ namespace Microsoft.EntityFrameworkCore
 
                 scooterEntry
                     .Reference(v => v.Engine)
-                    .TargetEntry
-                    .Property<int>("SeatingCapacity")
+                    .TargetEntry.Property<int>("SeatingCapacity")
                     .CurrentValue = 1;
 
                 context.SaveChanges();
@@ -520,8 +519,7 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = CreateContext())
             {
-                var bike = context
-                    .Vehicles
+                var bike = context.Vehicles
                     .Include(v => v.Operator)
                     .Single(v => v.Name == "Trek Pro Fit Madone 6 Series");
 
@@ -541,8 +539,7 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = CreateContext())
             {
-                var bike = context
-                    .Vehicles
+                var bike = context.Vehicles
                     .Include(v => v.Operator)
                     .Single(v => v.Name == "Trek Pro Fit Madone 6 Series");
                 Assert.Equal("repairman", bike.Operator.Name);
@@ -597,8 +594,7 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = CreateContext())
             {
-                var bike = context
-                    .Vehicles
+                var bike = context.Vehicles
                     .Include(v => v.Operator)
                     .Single(v => v.Name == "Trek Pro Fit Madone 6 Series");
 
@@ -632,8 +628,7 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = CreateContext())
             {
-                var bike = context
-                    .Vehicles
+                var bike = context.Vehicles
                     .Include(v => v.Operator)
                     .Single(v => v.Name == "Trek Pro Fit Madone 6 Series");
 
@@ -657,8 +652,7 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = CreateContext())
             {
-                var bike = context
-                    .Vehicles
+                var bike = context.Vehicles
                     .Include(v => v.Operator)
                     .Single(v => v.Name == "Trek Pro Fit Madone 6 Series");
                 Assert.Equal(2, bike.SeatingCapacity);
@@ -704,9 +698,9 @@ namespace Microsoft.EntityFrameworkCore
                 )
                 .GenerateMessage(nameof(MeterReadingDetail), "{Id: -2147482647}");
 
-            var log = TestSqlLoggerFactory
-                .Log
-                .Single(l => l.Level == Extensions.Logging.LogLevel.Warning);
+            var log = TestSqlLoggerFactory.Log.Single(
+                l => l.Level == Extensions.Logging.LogLevel.Warning
+            );
 
             Assert.Equal(expected, log.Message);
         }
@@ -731,9 +725,9 @@ namespace Microsoft.EntityFrameworkCore
                 )
                 .GenerateMessage(nameof(MeterReadingDetail));
 
-            var log = TestSqlLoggerFactory
-                .Log
-                .Single(l => l.Level == Extensions.Logging.LogLevel.Warning);
+            var log = TestSqlLoggerFactory.Log.Single(
+                l => l.Level == Extensions.Logging.LogLevel.Warning
+            );
 
             Assert.Equal(expected, log.Message);
         }
@@ -756,9 +750,9 @@ namespace Microsoft.EntityFrameworkCore
 
             context.SaveChanges();
 
-            var log = TestSqlLoggerFactory
-                .Log
-                .SingleOrDefault(l => l.Level == Extensions.Logging.LogLevel.Warning);
+            var log = TestSqlLoggerFactory.Log.SingleOrDefault(
+                l => l.Level == Extensions.Logging.LogLevel.Warning
+            );
 
             Assert.Null(log.Message);
         }

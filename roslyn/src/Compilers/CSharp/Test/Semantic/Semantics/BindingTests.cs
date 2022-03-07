@@ -2418,13 +2418,12 @@ partial class C
 ";
             CompileAndVerify(
                 source,
-                options: TestOptions
-                    .ReleaseDll
-                    .WithMetadataImportOptions(MetadataImportOptions.All),
+                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
+                    MetadataImportOptions.All
+                ),
                 symbolValidator: module =>
                 {
-                    var method = module
-                        .GlobalNamespace
+                    var method = module.GlobalNamespace
                         .GetMember<TypeSymbol>("C")
                         .GetMember<MethodSymbol>("F");
                     Assert.Equal("i", method.Parameters[0].Name);
@@ -2450,13 +2449,12 @@ partial class C
 ";
             CompileAndVerify(
                 source,
-                options: TestOptions
-                    .ReleaseDll
-                    .WithMetadataImportOptions(MetadataImportOptions.All),
+                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
+                    MetadataImportOptions.All
+                ),
                 symbolValidator: module =>
                 {
-                    var method = module
-                        .GlobalNamespace
+                    var method = module.GlobalNamespace
                         .GetMember<TypeSymbol>("C")
                         .GetMember<MethodSymbol>("F");
                     Assert.Equal("i", method.Parameters[0].Name);
@@ -3684,16 +3682,15 @@ class C
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
 
-            var node1 =
-                tree.GetRoot()
-                    .DescendantNodes()
-                    .Where(
-                        n =>
-                            n.IsKind(SyntaxKind.IdentifierName)
-                            && ((IdentifierNameSyntax)n).Identifier.ValueText == "Use"
-                    )
-                    .Single()
-                    .Parent;
+            var node1 = tree.GetRoot()
+                .DescendantNodes()
+                .Where(
+                    n =>
+                        n.IsKind(SyntaxKind.IdentifierName)
+                        && ((IdentifierNameSyntax)n).Identifier.ValueText == "Use"
+                )
+                .Single()
+                .Parent;
             Assert.Equal("app.Use", node1.ToString());
             var group1 = model.GetMemberGroup(node1);
             Assert.Equal(2, group1.Length);
@@ -3715,16 +3712,15 @@ class C
             );
             Assert.Equal(CandidateReason.OverloadResolutionFailure, symbolInfo1.CandidateReason);
 
-            var node =
-                tree.GetRoot()
-                    .DescendantNodes()
-                    .Where(
-                        n =>
-                            n.IsKind(SyntaxKind.IdentifierName)
-                            && ((IdentifierNameSyntax)n).Identifier.ValueText == "AuthenticateAsync"
-                    )
-                    .Single()
-                    .Parent;
+            var node = tree.GetRoot()
+                .DescendantNodes()
+                .Where(
+                    n =>
+                        n.IsKind(SyntaxKind.IdentifierName)
+                        && ((IdentifierNameSyntax)n).Identifier.ValueText == "AuthenticateAsync"
+                )
+                .Single()
+                .Parent;
 
             Assert.Equal("ctx.Authentication.AuthenticateAsync", node.ToString());
 
@@ -3801,16 +3797,15 @@ class C
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
 
-            var node1 =
-                tree.GetRoot()
-                    .DescendantNodes()
-                    .Where(
-                        n =>
-                            n.IsKind(SyntaxKind.IdentifierName)
-                            && ((IdentifierNameSyntax)n).Identifier.ValueText == "Use"
-                    )
-                    .Single()
-                    .Parent;
+            var node1 = tree.GetRoot()
+                .DescendantNodes()
+                .Where(
+                    n =>
+                        n.IsKind(SyntaxKind.IdentifierName)
+                        && ((IdentifierNameSyntax)n).Identifier.ValueText == "Use"
+                )
+                .Single()
+                .Parent;
             Assert.Equal("app.Use", node1.ToString());
             var group1 = model.GetMemberGroup(node1);
             Assert.Equal(2, group1.Length);
@@ -3832,16 +3827,15 @@ class C
             );
             Assert.Equal(CandidateReason.OverloadResolutionFailure, symbolInfo1.CandidateReason);
 
-            var node =
-                tree.GetRoot()
-                    .DescendantNodes()
-                    .Where(
-                        n =>
-                            n.IsKind(SyntaxKind.IdentifierName)
-                            && ((IdentifierNameSyntax)n).Identifier.ValueText == "AuthenticateAsync"
-                    )
-                    .Single()
-                    .Parent;
+            var node = tree.GetRoot()
+                .DescendantNodes()
+                .Where(
+                    n =>
+                        n.IsKind(SyntaxKind.IdentifierName)
+                        && ((IdentifierNameSyntax)n).Identifier.ValueText == "AuthenticateAsync"
+                )
+                .Single()
+                .Parent;
 
             Assert.Equal("ctx.Authentication.AuthenticateAsync", node.ToString());
 
@@ -3908,16 +3902,15 @@ class C
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
 
-            var node1 =
-                tree.GetRoot()
-                    .DescendantNodes()
-                    .Where(
-                        n =>
-                            n.IsKind(SyntaxKind.IdentifierName)
-                            && ((IdentifierNameSyntax)n).Identifier.ValueText == "Use"
-                    )
-                    .Single()
-                    .Parent;
+            var node1 = tree.GetRoot()
+                .DescendantNodes()
+                .Where(
+                    n =>
+                        n.IsKind(SyntaxKind.IdentifierName)
+                        && ((IdentifierNameSyntax)n).Identifier.ValueText == "Use"
+                )
+                .Single()
+                .Parent;
             Assert.Equal("app.Use", node1.ToString());
             var group1 = model.GetMemberGroup(node1);
             Assert.Equal(2, group1.Length);
@@ -3943,16 +3936,15 @@ class C
             );
             Assert.Equal(CandidateReason.OverloadResolutionFailure, symbolInfo1.CandidateReason);
 
-            var node =
-                tree.GetRoot()
-                    .DescendantNodes()
-                    .Where(
-                        n =>
-                            n.IsKind(SyntaxKind.IdentifierName)
-                            && ((IdentifierNameSyntax)n).Identifier.ValueText == "AuthenticateAsync"
-                    )
-                    .Single()
-                    .Parent;
+            var node = tree.GetRoot()
+                .DescendantNodes()
+                .Where(
+                    n =>
+                        n.IsKind(SyntaxKind.IdentifierName)
+                        && ((IdentifierNameSyntax)n).Identifier.ValueText == "AuthenticateAsync"
+                )
+                .Single()
+                .Parent;
 
             Assert.Equal("ctx.Authentication.AuthenticateAsync", node.ToString());
 
@@ -4033,16 +4025,15 @@ class C
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
 
-            var node1 =
-                tree.GetRoot()
-                    .DescendantNodes()
-                    .Where(
-                        n =>
-                            n.IsKind(SyntaxKind.IdentifierName)
-                            && ((IdentifierNameSyntax)n).Identifier.ValueText == "Use"
-                    )
-                    .Single()
-                    .Parent;
+            var node1 = tree.GetRoot()
+                .DescendantNodes()
+                .Where(
+                    n =>
+                        n.IsKind(SyntaxKind.IdentifierName)
+                        && ((IdentifierNameSyntax)n).Identifier.ValueText == "Use"
+                )
+                .Single()
+                .Parent;
             Assert.Equal("app.Use", node1.ToString());
             var group1 = model.GetMemberGroup(node1);
             Assert.Equal(2, group1.Length);
@@ -4068,16 +4059,15 @@ class C
             );
             Assert.Equal(CandidateReason.OverloadResolutionFailure, symbolInfo1.CandidateReason);
 
-            var node =
-                tree.GetRoot()
-                    .DescendantNodes()
-                    .Where(
-                        n =>
-                            n.IsKind(SyntaxKind.IdentifierName)
-                            && ((IdentifierNameSyntax)n).Identifier.ValueText == "AuthenticateAsync"
-                    )
-                    .Single()
-                    .Parent;
+            var node = tree.GetRoot()
+                .DescendantNodes()
+                .Where(
+                    n =>
+                        n.IsKind(SyntaxKind.IdentifierName)
+                        && ((IdentifierNameSyntax)n).Identifier.ValueText == "AuthenticateAsync"
+                )
+                .Single()
+                .Parent;
 
             Assert.Equal("ctx.Authentication.AuthenticateAsync", node.ToString());
 
@@ -4176,16 +4166,15 @@ static class Extension2
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
 
-            var node1 =
-                tree.GetRoot()
-                    .DescendantNodes()
-                    .Where(
-                        n =>
-                            n.IsKind(SyntaxKind.IdentifierName)
-                            && ((IdentifierNameSyntax)n).Identifier.ValueText == "MathMin"
-                    )
-                    .Single()
-                    .Parent;
+            var node1 = tree.GetRoot()
+                .DescendantNodes()
+                .Where(
+                    n =>
+                        n.IsKind(SyntaxKind.IdentifierName)
+                        && ((IdentifierNameSyntax)n).Identifier.ValueText == "MathMin"
+                )
+                .Single()
+                .Parent;
             Assert.Equal("MathMin(0, 1)", node1.ToString());
 
             var names = model.LookupNames(node1.SpanStart);
@@ -4335,16 +4324,15 @@ class Program
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
 
-            var node1 =
-                tree.GetRoot()
-                    .DescendantNodes()
-                    .Where(
-                        n =>
-                            n.IsKind(SyntaxKind.IdentifierName)
-                            && ((IdentifierNameSyntax)n).Identifier.ValueText == "E"
-                    )
-                    .Single()
-                    .Parent;
+            var node1 = tree.GetRoot()
+                .DescendantNodes()
+                .Where(
+                    n =>
+                        n.IsKind(SyntaxKind.IdentifierName)
+                        && ((IdentifierNameSyntax)n).Identifier.ValueText == "E"
+                )
+                .Single()
+                .Parent;
             Assert.Equal("x.E1.E", node1.ToString());
             Assert.Equal(SyntaxKind.QualifiedName, node1.Kind());
 

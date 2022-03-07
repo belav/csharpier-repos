@@ -821,8 +821,11 @@ public class C
 }}";
             var comp = CreateCompilation(source);
             var tree = comp.SyntaxTrees[0];
-            var fieldInitializer =
-                tree.GetRoot().DescendantNodes().OfType<EqualsValueClauseSyntax>().Last().Value;
+            var fieldInitializer = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<EqualsValueClauseSyntax>()
+                .Last()
+                .Value;
 
             for (int i = 0; i < 5; i++)
             {
@@ -840,8 +843,7 @@ public class C
                                 "System.String System.String.op_Addition(System.String left, System.String right)",
                                 model
                                     .GetSymbolInfo(fieldInitializer)
-                                    .Symbol
-                                    .ToTestDisplayString(includeNonNullable: false)
+                                    .Symbol.ToTestDisplayString(includeNonNullable: false)
                             )
                     );
             }

@@ -24,9 +24,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ChangeSignature
 {
     internal sealed class ChangeSignatureTestState : IDisposable
     {
-        private static readonly TestComposition s_composition = EditorTestCompositions
-            .EditorFeatures
-            .AddParts(typeof(TestChangeSignatureOptionsService));
+        private static readonly TestComposition s_composition =
+            EditorTestCompositions.EditorFeatures.AddParts(
+                typeof(TestChangeSignatureOptionsService)
+            );
 
         private readonly TestHostDocument _testDocument;
         public TestWorkspace Workspace { get; }
@@ -97,12 +98,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ChangeSignature
         {
             get
             {
-                return (TestChangeSignatureOptionsService)InvocationDocument
-                    .Project
-                    .Solution
-                    .Workspace
-                    .Services
-                    .GetRequiredService<IChangeSignatureOptionsService>();
+                return (TestChangeSignatureOptionsService)InvocationDocument.Project.Solution.Workspace.Services.GetRequiredService<IChangeSignatureOptionsService>();
             }
         }
 
@@ -140,14 +136,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ChangeSignature
                 return changeSignatureAnalyzedSucceedContext.ParameterConfiguration;
             }
 
-            throw Roslyn
-                .Utilities
-                .ExceptionUtilities
-                .UnexpectedValue(
-                    ((CannotChangeSignatureAnalyzedContext)context)
-                        .CannotChangeSignatureReason
-                        .ToString()
-                );
+            throw Roslyn.Utilities.ExceptionUtilities.UnexpectedValue(
+                (
+                    (CannotChangeSignatureAnalyzedContext)context
+                ).CannotChangeSignatureReason.ToString()
+            );
         }
 
         public void Dispose()

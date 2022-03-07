@@ -462,9 +462,7 @@ public class EndpointMetadataApiDescriptionProviderTest
 
         Assert.NotEmpty(apiDescription.ActionDescriptor.EndpointMetadata);
 
-        var apiExplorerSettings = apiDescription
-            .ActionDescriptor
-            .EndpointMetadata
+        var apiExplorerSettings = apiDescription.ActionDescriptor.EndpointMetadata
             .OfType<ApiExplorerSettingsAttribute>()
             .FirstOrDefault();
 
@@ -1000,8 +998,7 @@ public class EndpointMetadataApiDescriptionProviderTest
 
     private static IEnumerable<string> GetSortedMediaTypes(ApiResponseType apiResponseType)
     {
-        return apiResponseType
-            .ApiResponseFormats
+        return apiResponseType.ApiResponseFormats
             .OrderBy(format => format.MediaType)
             .Select(format => format.MediaType);
     }

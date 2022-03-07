@@ -40,14 +40,13 @@ namespace Microsoft.EntityFrameworkCore.Design
                     .Options
             );
 
-            var serviceProvider =
-                CreateDesignServiceProvider(
-                        @"
+            var serviceProvider = CreateDesignServiceProvider(
+                    @"
 using Microsoft.EntityFrameworkCore.Design;
 
 [assembly: DesignTimeServicesReference(""Microsoft.EntityFrameworkCore.Design.DesignTimeServicesTest+TryAddDesignTimeServices, Microsoft.EntityFrameworkCore.Design.Tests"")]
 ",
-                        @"
+                    @"
 using System;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore.Migrations;
@@ -86,10 +85,10 @@ public class UserMigrationsIdGenerator : IMigrationsIdGenerator
     public bool IsValidId(string value) => throw new NotImplementedException();
 }
 ",
-                        useContext ? context : null
-                    )
-                    .CreateScope()
-                    .ServiceProvider;
+                    useContext ? context : null
+                )
+                .CreateScope()
+                .ServiceProvider;
 
             // Base design-time services are resolved
             Assert.Equal(

@@ -51,12 +51,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ClassVi
 
             var snapshot = args.SubjectBuffer.CurrentSnapshot;
 
-            using var waitScope = context
-                .OperationContext
-                .AddScope(
-                    allowCancellation: true,
-                    string.Format(ServicesVSResources.Synchronizing_with_0, ClassView)
-                );
+            using var waitScope = context.OperationContext.AddScope(
+                allowCancellation: true,
+                string.Format(ServicesVSResources.Synchronizing_with_0, ClassView)
+            );
             var document = snapshot
                 .GetFullyLoadedOpenDocumentInCurrentContextWithChangesAsync(
                     context.OperationContext
@@ -84,8 +82,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ClassVi
                 .GetSemanticModelAsync(userCancellationToken)
                 .WaitAndGetResult(userCancellationToken);
 
-            var root = semanticModel
-                .SyntaxTree
+            var root = semanticModel.SyntaxTree
                 .GetRootAsync(userCancellationToken)
                 .WaitAndGetResult(userCancellationToken);
 
@@ -107,14 +104,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ClassVi
             IVsNavInfo navInfo = null;
             if (symbol != null)
             {
-                navInfo = libraryService
-                    .NavInfoFactory
-                    .CreateForSymbol(
-                        symbol,
-                        document.Project,
-                        semanticModel.Compilation,
-                        useExpandedHierarchy: true
-                    );
+                navInfo = libraryService.NavInfoFactory.CreateForSymbol(
+                    symbol,
+                    document.Project,
+                    semanticModel.Compilation,
+                    useExpandedHierarchy: true
+                );
             }
 
             if (navInfo == null)

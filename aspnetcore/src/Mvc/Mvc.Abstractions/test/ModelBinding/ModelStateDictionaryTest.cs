@@ -992,12 +992,9 @@ public class ModelStateDictionaryTest
             new[] { bindingMetadataProvider }
         );
         var optionsAccessor = new OptionsAccessor();
-        optionsAccessor
-            .Value
-            .ModelBindingMessageProvider
-            .SetUnknownValueIsInvalidAccessor(
-                name => $"Hmm, the supplied value is not valid for {name}."
-            );
+        optionsAccessor.Value.ModelBindingMessageProvider.SetUnknownValueIsInvalidAccessor(
+            name => $"Hmm, the supplied value is not valid for {name}."
+        );
 
         var provider = new DefaultModelMetadataProvider(compositeProvider, optionsAccessor);
         var metadata = provider.GetMetadataForProperty(typeof(string), nameof(string.Length));
@@ -1024,12 +1021,9 @@ public class ModelStateDictionaryTest
             new[] { bindingMetadataProvider }
         );
         var optionsAccessor = new OptionsAccessor();
-        optionsAccessor
-            .Value
-            .ModelBindingMessageProvider
-            .SetNonPropertyUnknownValueIsInvalidAccessor(
-                () => "Hmm, the supplied value is not valid."
-            );
+        optionsAccessor.Value.ModelBindingMessageProvider.SetNonPropertyUnknownValueIsInvalidAccessor(
+            () => "Hmm, the supplied value is not valid."
+        );
 
         var method = typeof(string).GetMethod(nameof(string.Copy));
         var parameter = method.GetParameters()[0]; // Copy(string str)
@@ -1058,12 +1052,9 @@ public class ModelStateDictionaryTest
             new[] { bindingMetadataProvider }
         );
         var optionsAccessor = new OptionsAccessor();
-        optionsAccessor
-            .Value
-            .ModelBindingMessageProvider
-            .SetNonPropertyUnknownValueIsInvalidAccessor(
-                () => "Hmm, the supplied value is not valid."
-            );
+        optionsAccessor.Value.ModelBindingMessageProvider.SetNonPropertyUnknownValueIsInvalidAccessor(
+            () => "Hmm, the supplied value is not valid."
+        );
 
         var provider = new DefaultModelMetadataProvider(compositeProvider, optionsAccessor);
         var metadata = provider.GetMetadataForType(typeof(int));
@@ -1125,12 +1116,9 @@ public class ModelStateDictionaryTest
             new[] { bindingMetadataProvider }
         );
         var optionsAccessor = new OptionsAccessor();
-        optionsAccessor
-            .Value
-            .ModelBindingMessageProvider
-            .SetAttemptedValueIsInvalidAccessor(
-                (value, name) => $"Hmm, the value '{value}' is not valid for {name}."
-            );
+        optionsAccessor.Value.ModelBindingMessageProvider.SetAttemptedValueIsInvalidAccessor(
+            (value, name) => $"Hmm, the value '{value}' is not valid for {name}."
+        );
 
         var provider = new DefaultModelMetadataProvider(compositeProvider, optionsAccessor);
         var metadata = provider.GetMetadataForProperty(typeof(string), nameof(string.Length));
@@ -1158,12 +1146,9 @@ public class ModelStateDictionaryTest
             new[] { bindingMetadataProvider }
         );
         var optionsAccessor = new OptionsAccessor();
-        optionsAccessor
-            .Value
-            .ModelBindingMessageProvider
-            .SetNonPropertyAttemptedValueIsInvalidAccessor(
-                value => $"Hmm, the value '{value}' is not valid."
-            );
+        optionsAccessor.Value.ModelBindingMessageProvider.SetNonPropertyAttemptedValueIsInvalidAccessor(
+            value => $"Hmm, the value '{value}' is not valid."
+        );
 
         var method = typeof(string).GetMethod(nameof(string.Copy));
         var parameter = method.GetParameters()[0]; // Copy(string str)
@@ -1193,12 +1178,9 @@ public class ModelStateDictionaryTest
             new[] { bindingMetadataProvider }
         );
         var optionsAccessor = new OptionsAccessor();
-        optionsAccessor
-            .Value
-            .ModelBindingMessageProvider
-            .SetNonPropertyAttemptedValueIsInvalidAccessor(
-                (value) => $"Hmm, the value '{value}' is not valid."
-            );
+        optionsAccessor.Value.ModelBindingMessageProvider.SetNonPropertyAttemptedValueIsInvalidAccessor(
+            (value) => $"Hmm, the value '{value}' is not valid."
+        );
 
         var provider = new DefaultModelMetadataProvider(compositeProvider, optionsAccessor);
         var metadata = provider.GetMetadataForType(typeof(int));

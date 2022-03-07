@@ -203,10 +203,9 @@ namespace System.Speech.Internal.SrgsCompiler
 
         void IRule.CreateScript(IGrammar grammar, string rule, string method, RuleMethodScript type)
         {
-            ((GrammarElement)grammar)
-                .CustomGrammar
-                ._scriptRefs
-                .Add(new ScriptRef(rule, method, type));
+            ((GrammarElement)grammar).CustomGrammar._scriptRefs.Add(
+                new ScriptRef(rule, method, type)
+            );
         }
 
         #endregion

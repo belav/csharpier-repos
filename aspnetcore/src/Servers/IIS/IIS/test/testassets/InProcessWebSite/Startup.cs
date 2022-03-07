@@ -93,8 +93,7 @@ public partial class Startup
     {
         var serverAddresses = ctx.RequestServices
             .GetService<IServer>()
-            .Features
-            .Get<IServerAddressesFeature>();
+            .Features.Get<IServerAddressesFeature>();
         await ctx.Response.WriteAsync(string.Join(",", serverAddresses.Addresses));
     }
 
@@ -132,11 +131,9 @@ public partial class Startup
     public async Task GetClientCert(HttpContext context)
     {
         var clientCert = context.Connection.ClientCertificate;
-        await context
-            .Response
-            .WriteAsync(
-                clientCert != null ? $"Enabled;{clientCert.GetCertHashString()}" : "Disabled"
-            );
+        await context.Response.WriteAsync(
+            clientCert != null ? $"Enabled;{clientCert.GetCertHashString()}" : "Disabled"
+        );
     }
 
     private static int _waitingRequestCount;
@@ -163,17 +160,16 @@ public partial class Startup
 
     public async Task WaitingRequestCount(HttpContext context)
     {
-        await context
-            .Response
-            .WriteAsync(_waitingRequestCount.ToString(CultureInfo.InvariantCulture));
+        await context.Response.WriteAsync(
+            _waitingRequestCount.ToString(CultureInfo.InvariantCulture)
+        );
     }
 
     public Task CreateFile(HttpContext context)
     {
 #if FORWARDCOMPAT
-        var hostingEnv = context
-            .RequestServices
-            .GetService<Microsoft.AspNetCore.Hosting.IHostingEnvironment>();
+        var hostingEnv =
+            context.RequestServices.GetService<Microsoft.AspNetCore.Hosting.IHostingEnvironment>();
 #else
         var hostingEnv = context.RequestServices.GetService<IWebHostEnvironment>();
 #endif
@@ -552,10 +548,7 @@ public partial class Startup
 #else
         var lifetime = ctx.RequestServices.GetService<IHostApplicationLifetime>();
 #endif
-        lifetime
-            .ApplicationStopping
-            .WaitHandle
-            .WaitOne();
+        lifetime.ApplicationStopping.WaitHandle.WaitOne();
         await ctx.Response.WriteAsync("test2");
     }
 
@@ -1034,8 +1027,7 @@ public partial class Startup
         ctx.Response.WriteAsync(
             ctx.Features
                 .Get<IHttpMaxRequestBodySizeFeature>()
-                ?.MaxRequestBodySize
-                ?.ToString(CultureInfo.InvariantCulture) ?? "null"
+                ?.MaxRequestBodySize?.ToString(CultureInfo.InvariantCulture) ?? "null"
         );
 
     public Task Anonymous(HttpContext context) =>
@@ -1076,11 +1068,9 @@ public partial class Startup
     }
 
     public Task UpgradeFeatureDetection(HttpContext context) =>
-        context
-            .Response
-            .WriteAsync(
-                context.Features.Get<IHttpUpgradeFeature>() != null ? "Enabled" : "Disabled"
-            );
+        context.Response.WriteAsync(
+            context.Features.Get<IHttpUpgradeFeature>() != null ? "Enabled" : "Disabled"
+        );
 
     public Task CheckRequestHandlerVersion(HttpContext context)
     {
@@ -1102,41 +1092,31 @@ public partial class Startup
 
     private async Task ProcessId(HttpContext context)
     {
-        await context
-            .Response
-            .WriteAsync(Environment.ProcessId.ToString(CultureInfo.InvariantCulture));
+        await context.Response.WriteAsync(
+            Environment.ProcessId.ToString(CultureInfo.InvariantCulture)
+        );
     }
 
     public async Task ANCM_HTTPS_PORT(HttpContext context)
     {
-        var httpsPort = context
-            .RequestServices
+        var httpsPort = context.RequestServices
             .GetService<IConfiguration>()
             .GetValue<int?>("ANCM_HTTPS_PORT");
 
-        await context
-            .Response
-            .WriteAsync(
-                httpsPort.HasValue
-                  ? httpsPort.Value.ToString(CultureInfo.InvariantCulture)
-                  : "NOVALUE"
-            );
+        await context.Response.WriteAsync(
+            httpsPort.HasValue ? httpsPort.Value.ToString(CultureInfo.InvariantCulture) : "NOVALUE"
+        );
     }
 
     public async Task HTTPS_PORT(HttpContext context)
     {
-        var httpsPort = context
-            .RequestServices
+        var httpsPort = context.RequestServices
             .GetService<IConfiguration>()
             .GetValue<int?>("HTTPS_PORT");
 
-        await context
-            .Response
-            .WriteAsync(
-                httpsPort.HasValue
-                  ? httpsPort.Value.ToString(CultureInfo.InvariantCulture)
-                  : "NOVALUE"
-            );
+        await context.Response.WriteAsync(
+            httpsPort.HasValue ? httpsPort.Value.ToString(CultureInfo.InvariantCulture) : "NOVALUE"
+        );
     }
 
     public Task Latin1(HttpContext context)
@@ -1235,12 +1215,10 @@ public partial class Startup
 
     public Task ResponseTrailers_MultipleValues_SentAsSeparateHeaders(HttpContext context)
     {
-        context
-            .Response
-            .AppendTrailer(
-                "trailername",
-                new StringValues(new[] { "TrailerValue0", "TrailerValue1" })
-            );
+        context.Response.AppendTrailer(
+            "trailername",
+            new StringValues(new[] { "TrailerValue0", "TrailerValue1" })
+        );
         return Task.FromResult(0);
     }
 
@@ -1256,12 +1234,10 @@ public partial class Startup
             new string('f', 1024 * 64 - 1)
         }; // Max header size
 
-        context
-            .Response
-            .AppendTrailer(
-                "ThisIsALongerHeaderNameThatStillWorksForReals",
-                new StringValues(values)
-            );
+        context.Response.AppendTrailer(
+            "ThisIsALongerHeaderNameThatStillWorksForReals",
+            new StringValues(values)
+        );
         return Task.FromResult(0);
     }
 
@@ -1505,43 +1481,41 @@ public partial class Startup
     public async Task OnCompletedHttpContext(HttpContext context)
     {
         // This shouldn't block the response or the server from shutting down.
-        context
-            .Response
-            .OnCompleted(
-                async () =>
+        context.Response.OnCompleted(
+            async () =>
+            {
+                var context = _httpContextAccessor.HttpContext;
+
+                await Task.Delay(500);
+                // Access all fields of the connection after final flush.
+                try
                 {
-                    var context = _httpContextAccessor.HttpContext;
+                    _ = context.Connection.RemoteIpAddress;
+                    _ = context.Connection.LocalIpAddress;
+                    _ = context.Connection.Id;
+                    _ = context.Connection.ClientCertificate;
+                    _ = context.Connection.LocalPort;
+                    _ = context.Connection.RemotePort;
 
-                    await Task.Delay(500);
-                    // Access all fields of the connection after final flush.
-                    try
-                    {
-                        _ = context.Connection.RemoteIpAddress;
-                        _ = context.Connection.LocalIpAddress;
-                        _ = context.Connection.Id;
-                        _ = context.Connection.ClientCertificate;
-                        _ = context.Connection.LocalPort;
-                        _ = context.Connection.RemotePort;
+                    _ = context.Request.ContentLength;
+                    _ = context.Request.Headers;
+                    _ = context.Request.Query;
+                    _ = context.Request.Body;
+                    _ = context.Request.ContentType;
 
-                        _ = context.Request.ContentLength;
-                        _ = context.Request.Headers;
-                        _ = context.Request.Query;
-                        _ = context.Request.Body;
-                        _ = context.Request.ContentType;
-
-                        _ = context.Response.StatusCode;
-                        _ = context.Response.Body;
-                        _ = context.Response.Headers;
-                        _ = context.Response.ContentType;
-                    }
-                    catch (Exception ex)
-                    {
-                        _onCompletedHttpContext.TrySetResult(ex);
-                    }
-
-                    _onCompletedHttpContext.TrySetResult(null);
+                    _ = context.Response.StatusCode;
+                    _ = context.Response.Body;
+                    _ = context.Response.Headers;
+                    _ = context.Response.ContentType;
                 }
-            );
+                catch (Exception ex)
+                {
+                    _onCompletedHttpContext.TrySetResult(ex);
+                }
+
+                _onCompletedHttpContext.TrySetResult(null);
+            }
+        );
 
         await context.Response.WriteAsync("SlowOnCompleted");
     }
@@ -1665,14 +1639,12 @@ public partial class Startup
 
     public Task OnCompletedThrows(HttpContext httpContext)
     {
-        httpContext
-            .Response
-            .OnCompleted(
-                () =>
-                {
-                    throw new Exception();
-                }
-            );
+        httpContext.Response.OnCompleted(
+            () =>
+            {
+                throw new Exception();
+            }
+        );
 
         return Task.CompletedTask;
     }

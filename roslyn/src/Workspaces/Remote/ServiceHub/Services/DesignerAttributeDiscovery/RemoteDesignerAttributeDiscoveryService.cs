@@ -43,9 +43,8 @@ namespace Microsoft.CodeAnalysis.Remote
             return RunServiceAsync(
                 cancellationToken =>
                 {
-                    var registrationService = GetWorkspace()
-                        .Services
-                        .GetRequiredService<ISolutionCrawlerRegistrationService>();
+                    var registrationService =
+                        GetWorkspace().Services.GetRequiredService<ISolutionCrawlerRegistrationService>();
                     var analyzerProvider = new RemoteDesignerAttributeIncrementalAnalyzerProvider(
                         _callback,
                         callbackId

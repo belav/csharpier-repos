@@ -74,10 +74,9 @@ namespace IdeCoreBenchmarks
             _workspace = AnalyzerRunnerHelper.CreateWorkspace();
             _diagnosticAnalyzerRunner = new DiagnosticAnalyzerRunner(_workspace, _options);
 
-            _ =
-                _workspace
-                    .OpenSolutionAsync(_solutionPath, progress: null, CancellationToken.None)
-                    .Result;
+            _ = _workspace
+                .OpenSolutionAsync(_solutionPath, progress: null, CancellationToken.None)
+                .Result;
         }
 
         [GlobalCleanup]

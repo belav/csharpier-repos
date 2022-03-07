@@ -54,13 +54,11 @@ public class AutobahnTester : IDisposable
             // Run the test (write something to the console so people know this will take a while...)
             _logger.LogInformation("Using 'wstest' from: {WsTestPath}", Wstest.Default.Location);
             _logger.LogInformation("Now launching Autobahn Test Suite. This will take a while.");
-            var exitCode = await Wstest
-                .Default
-                .ExecAsync(
-                    "-m fuzzingclient -s " + specFile,
-                    cancellationToken,
-                    _loggerFactory.CreateLogger("wstest")
-                );
+            var exitCode = await Wstest.Default.ExecAsync(
+                "-m fuzzingclient -s " + specFile,
+                cancellationToken,
+                _loggerFactory.CreateLogger("wstest")
+            );
             if (exitCode != 0)
             {
                 throw new Exception("wstest failed");
@@ -234,8 +232,7 @@ public class AutobahnTester : IDisposable
         cancellationToken.ThrowIfCancellationRequested();
 
         // Add to the current spec
-        var wsUrl = result
-            .ApplicationBaseUri
+        var wsUrl = result.ApplicationBaseUri
             .Replace("https://", "wss://")
             .Replace("http://", "ws://");
         Spec.WithServer(name, wsUrl);

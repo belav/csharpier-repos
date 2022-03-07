@@ -250,9 +250,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
             if (!hasBody)
             {
-                var nextToken = (SyntaxToken)SyntaxNavigator
-                    .Instance
-                    .GetNextToken(constructorDecl, predicate: null, stepInto: null);
+                var nextToken = (SyntaxToken)SyntaxNavigator.Instance.GetNextToken(
+                    constructorDecl,
+                    predicate: null,
+                    stepInto: null
+                );
                 return initializerOpt == null
                   ? position >= constructorDecl.ParameterList.CloseParenToken.Span.End
                     && IsBeforeToken(position, nextToken)
@@ -575,9 +577,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             var firstExcluded =
                 bodyStatement != null
                     ? GetFirstExcludedToken(bodyStatement)
-                    : (SyntaxToken)SyntaxNavigator
-                          .Instance
-                          .GetNextToken(body, predicate: null, stepInto: null);
+                    : (SyntaxToken)SyntaxNavigator.Instance.GetNextToken(
+                          body,
+                          predicate: null,
+                          stepInto: null
+                      );
 
             return IsBetweenTokens(position, firstIncluded, firstExcluded);
         }

@@ -711,16 +711,14 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (!succeeded)
             {
-                TestLibrary
-                    .TestFramework
-                    .LogInformation(
-                        $"{nameof(Sse3)}.{nameof(Sse3.HorizontalSubtract)}<Double>(Vector128<Double>, Vector128<Double>): {method} failed:"
-                    );
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(Sse3)}.{nameof(Sse3.HorizontalSubtract)}<Double>(Vector128<Double>, Vector128<Double>): {method} failed:"
+                );
                 TestLibrary.TestFramework.LogInformation($"    left: ({string.Join(", ", left)})");
                 TestLibrary.TestFramework.LogInformation($"   right: ({string.Join(", ", right)})");
-                TestLibrary
-                    .TestFramework
-                    .LogInformation($"  result: ({string.Join(", ", result)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", result)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

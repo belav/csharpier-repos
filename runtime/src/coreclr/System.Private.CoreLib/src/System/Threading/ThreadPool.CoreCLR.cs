@@ -271,9 +271,10 @@ namespace System.Threading
         {
             if (UsePortableThreadPool)
             {
-                return PortableThreadPool
-                    .ThreadPoolInstance
-                    .SetMaxThreads(workerThreads, completionPortThreads);
+                return PortableThreadPool.ThreadPoolInstance.SetMaxThreads(
+                    workerThreads,
+                    completionPortThreads
+                );
             }
 
             return workerThreads >= 0
@@ -295,9 +296,10 @@ namespace System.Threading
         {
             if (UsePortableThreadPool)
             {
-                return PortableThreadPool
-                    .ThreadPoolInstance
-                    .SetMinThreads(workerThreads, completionPortThreads);
+                return PortableThreadPool.ThreadPoolInstance.SetMinThreads(
+                    workerThreads,
+                    completionPortThreads
+                );
             }
 
             return workerThreads >= 0
@@ -523,9 +525,10 @@ namespace System.Threading
         {
             if (UsePortableThreadPool)
             {
-                return PortableThreadPool
-                    .ThreadPoolInstance
-                    .NotifyWorkItemComplete(threadLocalCompletionCountObject, currentTimeMs);
+                return PortableThreadPool.ThreadPoolInstance.NotifyWorkItemComplete(
+                    threadLocalCompletionCountObject,
+                    currentTimeMs
+                );
             }
 
             return NotifyWorkItemCompleteNative();
@@ -573,9 +576,7 @@ namespace System.Threading
 
         internal static object? GetOrCreateThreadLocalCompletionCountObject() =>
             UsePortableThreadPool
-                ? PortableThreadPool
-                  .ThreadPoolInstance
-                  .GetOrCreateThreadLocalCompletionCountObject()
+                ? PortableThreadPool.ThreadPoolInstance.GetOrCreateThreadLocalCompletionCountObject()
                 : null;
 
         [MethodImpl(MethodImplOptions.InternalCall)]

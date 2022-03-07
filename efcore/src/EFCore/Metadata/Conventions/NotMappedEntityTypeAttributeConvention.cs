@@ -37,9 +37,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         )
         {
             if (
-                entityTypeBuilder
-                    .ModelBuilder
-                    .Ignore(entityTypeBuilder.Metadata.Name, fromDataAnnotation: true) != null
+                entityTypeBuilder.ModelBuilder.Ignore(
+                    entityTypeBuilder.Metadata.Name,
+                    fromDataAnnotation: true
+                ) != null
             )
             {
                 context.StopProcessing();

@@ -172,9 +172,10 @@ namespace Newtonsoft.Json.Tests.Serialization
         static DynamicConcrete()
         {
             var assemblyName = new AssemblyName("DynImpl");
-            DynamicAssembly = AppDomain
-                .CurrentDomain
-                .DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.RunAndSave);
+            DynamicAssembly = AppDomain.CurrentDomain.DefineDynamicAssembly(
+                assemblyName,
+                AssemblyBuilderAccess.RunAndSave
+            );
             ModuleBuilder = DynamicAssembly.DefineDynamicModule("DynImplModule");
         }
 

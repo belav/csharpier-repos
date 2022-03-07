@@ -76,11 +76,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Debug.Assert(type.IsAnonymousType);
 
             var anonymous = (AnonymousTypePublicSymbol)type;
-            return anonymous
-                .Manager
-                .ConstructAnonymousTypeSymbol(
-                    anonymous.TypeDescriptor.WithNewFieldsTypes(newFieldTypes)
-                );
+            return anonymous.Manager.ConstructAnonymousTypeSymbol(
+                anonymous.TypeDescriptor.WithNewFieldsTypes(newFieldTypes)
+            );
         }
     }
 }

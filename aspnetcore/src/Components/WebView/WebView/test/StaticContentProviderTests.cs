@@ -103,8 +103,7 @@ public class StaticContentProviderTests
 
             public IEnumerator<IFileInfo> GetEnumerator()
             {
-                return _inMemoryFileProvider
-                    .FilePathsAndContents
+                return _inMemoryFileProvider.FilePathsAndContents
                     .Where(kvp => kvp.Key.StartsWith(_subPath, StringComparison.Ordinal))
                     .Select(x => new InMemoryFileInfo(x.Key, x.Value))
                     .GetEnumerator();

@@ -63,10 +63,14 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             );
 
             var model = modelBuilder.Model;
-            var ownership1 =
-                model.FindEntityType("Customer")!.FindNavigation("Details")!.ForeignKey;
-            var ownership2 =
-                model.FindEntityType("Customer")!.FindNavigation("AdditionalDetails")!.ForeignKey;
+            var ownership1 = model
+                .FindEntityType("Customer")!
+                .FindNavigation("Details")!
+                .ForeignKey;
+            var ownership2 = model
+                .FindEntityType("Customer")!
+                .FindNavigation("AdditionalDetails")!
+                .ForeignKey;
             Assert.True(ownership1.IsRequired);
             Assert.True(ownership2.IsRequired);
             Assert.NotEqual(ownership1.DeclaringEntityType, ownership2.DeclaringEntityType);
@@ -82,13 +86,12 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         public virtual void Can_create_one_to_one_shadow_navigations_between_shadow_entity_types()
         {
             var modelBuilder = CreateModelBuilder();
-            var foreignKey =
-                modelBuilder
-                    .Entity("Order")
-                    .HasOne("OrderDetails", "OrderDetails")
-                    .WithOne("Order")
-                    .HasForeignKey("OrderDetails", "OrderId")
-                    .Metadata;
+            var foreignKey = modelBuilder
+                .Entity("Order")
+                .HasOne("OrderDetails", "OrderDetails")
+                .WithOne("Order")
+                .HasForeignKey("OrderDetails", "OrderId")
+                .Metadata;
 
             Assert.Equal(
                 "OrderDetails",
@@ -110,12 +113,11 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         public virtual void Can_create_one_to_many_shadow_navigations_between_shadow_entity_types()
         {
             var modelBuilder = CreateModelBuilder();
-            var foreignKey =
-                modelBuilder
-                    .Entity("Order")
-                    .HasOne("Customer", "Customer")
-                    .WithMany("Orders")
-                    .Metadata;
+            var foreignKey = modelBuilder
+                .Entity("Order")
+                .HasOne("Customer", "Customer")
+                .WithMany("Orders")
+                .Metadata;
 
             Assert.Equal(
                 "Customer",

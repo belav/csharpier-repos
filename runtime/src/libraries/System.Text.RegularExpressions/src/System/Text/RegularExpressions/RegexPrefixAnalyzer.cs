@@ -76,7 +76,7 @@ namespace System.Text.RegularExpressions
 #if DEBUG
                             50;
 #else
-                            RegexBoyerMoore.MaxLimit;
+                        RegexBoyerMoore.MaxLimit;
 #endif
 
                         if (curNode.M > 0 && curNode.M < Cutoff)

@@ -144,10 +144,8 @@ namespace Microsoft.CodeAnalysis
                         .Select(s => s.GetChecksumAsync(cancellationToken))
                         .ToArray();
 
-                    var serializer = _solutionServices
-                        .Workspace
-                        .Services
-                        .GetRequiredService<ISerializerService>();
+                    var serializer =
+                        _solutionServices.Workspace.Services.GetRequiredService<ISerializerService>();
                     var attributesChecksum = serializer.CreateChecksum(
                         SolutionAttributes,
                         cancellationToken
@@ -164,12 +162,11 @@ namespace Microsoft.CodeAnalysis
                             FrozenSourceGeneratedDocumentState.Identity,
                             cancellationToken
                         );
-                        frozenSourceGeneratedDocumentTextChecksum =
-                            (
-                                await FrozenSourceGeneratedDocumentState
-                                    .GetStateChecksumsAsync(cancellationToken)
-                                    .ConfigureAwait(false)
-                            ).Text;
+                        frozenSourceGeneratedDocumentTextChecksum = (
+                            await FrozenSourceGeneratedDocumentState
+                                .GetStateChecksumsAsync(cancellationToken)
+                                .ConfigureAwait(false)
+                        ).Text;
                     }
 
                     var analyzerReferenceChecksums = ChecksumCache.GetOrCreate<ChecksumCollection>(

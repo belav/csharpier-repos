@@ -320,9 +320,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             _referencesContextAddMenuItem.Visible = selectedProjectSupportsAnalyzers;
             _setActiveRuleSetMenuItem.Visible =
                 selectedProjectSupportsAnalyzers
-                && _tracker
-                    .SelectedHierarchy
-                    .TryGetItemName(_tracker.SelectedItemId, out var itemName)
+                && _tracker.SelectedHierarchy.TryGetItemName(
+                    _tracker.SelectedItemId,
+                    out var itemName
+                )
                 && Path.GetExtension(itemName)
                     .Equals(".ruleset", StringComparison.OrdinalIgnoreCase);
         }
@@ -373,9 +374,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
 
                 foreach (var diagnosticItem in group)
                 {
-                    var severity = diagnosticItem
-                        .Descriptor
-                        .GetEffectiveSeverity(project.CompilationOptions, analyzerConfigOptions);
+                    var severity = diagnosticItem.Descriptor.GetEffectiveSeverity(
+                        project.CompilationOptions,
+                        analyzerConfigOptions
+                    );
                     selectedItemSeverities.Add(severity);
                 }
             }
@@ -412,14 +414,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
 
         private void UpdateSeverityMenuItemsEnabled()
         {
-            var configurable = !_tracker
-                .SelectedDiagnosticItems
-                .Any(
-                    item =>
-                        item.Descriptor
-                            .ImmutableCustomTags()
-                            .Contains(WellKnownDiagnosticTags.NotConfigurable)
-                );
+            var configurable = !_tracker.SelectedDiagnosticItems.Any(
+                item =>
+                    item.Descriptor
+                        .ImmutableCustomTags()
+                        .Contains(WellKnownDiagnosticTags.NotConfigurable)
+            );
 
             _setSeverityDefaultMenuItem.Enabled = configurable;
             _setSeverityErrorMenuItem.Enabled = configurable;
@@ -672,9 +672,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         {
             if (
                 _tracker.SelectedHierarchy.TryGetProject(out var project)
-                && _tracker
-                    .SelectedHierarchy
-                    .TryGetCanonicalName(_tracker.SelectedItemId, out var ruleSetFileFullPath)
+                && _tracker.SelectedHierarchy.TryGetCanonicalName(
+                    _tracker.SelectedItemId,
+                    out var ruleSetFileFullPath
+                )
             )
             {
                 var projectDirectoryFullPath = Path.GetDirectoryName(project.FullName);
@@ -862,9 +863,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                 var componentModel = (IComponentModel)_serviceProvider.GetService(
                     typeof(SComponentModel)
                 );
-                _workspace = componentModel
-                    .DefaultExportProvider
-                    .GetExportedValueOrDefault<VisualStudioWorkspace>();
+                _workspace =
+                    componentModel.DefaultExportProvider.GetExportedValueOrDefault<VisualStudioWorkspace>();
             }
 
             return _workspace;

@@ -59,15 +59,13 @@ namespace System.Net.Sockets
                         remoteSocketAddress.Size
                     );
 
-                    errorCode = Interop
-                        .Winsock
-                        .setsockopt(
-                            _acceptSocket!.SafeHandle,
-                            SocketOptionLevel.Socket,
-                            SocketOptionName.UpdateAcceptContext,
-                            ref handle,
-                            IntPtr.Size
-                        );
+                    errorCode = Interop.Winsock.setsockopt(
+                        _acceptSocket!.SafeHandle,
+                        SocketOptionLevel.Socket,
+                        SocketOptionName.UpdateAcceptContext,
+                        ref handle,
+                        IntPtr.Size
+                    );
 
                     if (errorCode == SocketError.SocketError)
                     {

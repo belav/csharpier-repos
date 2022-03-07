@@ -69,10 +69,9 @@ class C
             var hello = Temp.CreateFile().WriteAllText(helloWorldCS).Path;
             var touchedDir = Temp.CreateDirectory();
             var touchedBase = Path.Combine(touchedDir.Path, "touched");
-            var appConfigPath =
-                Temp.CreateFile()
-                    .WriteAllText(
-                        @"<?xml version=""1.0"" encoding=""utf-8"" ?>
+            var appConfigPath = Temp.CreateFile()
+                .WriteAllText(
+                    @"<?xml version=""1.0"" encoding=""utf-8"" ?>
 <configuration>
   <runtime>
     <assemblyBinding xmlns=""urn:schemas-microsoft-com:asm.v1"">
@@ -80,15 +79,14 @@ class C
     </assemblyBinding>
   </runtime>
 </configuration>"
-                    )
-                    .Path;
+                )
+                .Path;
 
-            var silverlight =
-                Temp.CreateFile()
-                    .WriteAllBytes(
-                        ProprietaryTestResources.silverlight_v5_0_5_0.System_v5_0_5_0_silverlight
-                    )
-                    .Path;
+            var silverlight = Temp.CreateFile()
+                .WriteAllBytes(
+                    ProprietaryTestResources.silverlight_v5_0_5_0.System_v5_0_5_0_silverlight
+                )
+                .Path;
             var net4_0dll = Temp.CreateFile().WriteAllBytes(ResourcesNet451.System).Path;
 
             var outWriter = new StringWriter(CultureInfo.InvariantCulture);
@@ -126,10 +124,9 @@ class C
         public void StrongNameKeyCsc()
         {
             var hello = Temp.CreateFile().WriteAllText(helloWorldCS).Path;
-            var snkPath =
-                Temp.CreateFile("TestKeyPair_", ".snk")
-                    .WriteAllBytes(TestResources.General.snKey)
-                    .Path;
+            var snkPath = Temp.CreateFile("TestKeyPair_", ".snk")
+                .WriteAllBytes(TestResources.General.snKey)
+                .Path;
             var touchedDir = Temp.CreateDirectory();
             var touchedBase = Path.Combine(touchedDir.Path, "touched");
 
@@ -161,16 +158,15 @@ class C
         [ConditionalFact(typeof(WindowsOnly))]
         public void XmlDocumentFileCsc()
         {
-            var sourcePath =
-                Temp.CreateFile()
-                    .WriteAllText(
-                        @"
+            var sourcePath = Temp.CreateFile()
+                .WriteAllText(
+                    @"
 /// <summary>
 /// A subtype of <see cref=""object""/>.
 /// </summary>
 public class C { }"
-                    )
-                    .Path;
+                )
+                .Path;
             var xml = Temp.CreateFile();
             var touchedDir = Temp.CreateDirectory();
             var touchedBase = Path.Combine(touchedDir.Path, "touched");

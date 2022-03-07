@@ -22,8 +22,7 @@ namespace System.CommandLine.Rendering.Tests
 
             terminal.CursorLeft = 19;
 
-            terminal
-                .Events
+            terminal.Events
                 .OfType<TestTerminal.CursorPositionChanged>()
                 .Select(e => e.Position)
                 .Should()
@@ -37,8 +36,7 @@ namespace System.CommandLine.Rendering.Tests
 
             terminal.CursorTop = 12;
 
-            terminal
-                .Events
+            terminal.Events
                 .OfType<TestTerminal.CursorPositionChanged>()
                 .Select(e => e.Position)
                 .Should()
@@ -52,12 +50,11 @@ namespace System.CommandLine.Rendering.Tests
 
             terminal.IsAnsiTerminal = true;
 
-            terminal
-                .Out
-                .Write($"before move{Ansi.Cursor.Move.ToLocation(3, 5).EscapeSequence}after move");
+            terminal.Out.Write(
+                $"before move{Ansi.Cursor.Move.ToLocation(3, 5).EscapeSequence}after move"
+            );
 
-            terminal
-                .Events
+            terminal.Events
                 .Should()
                 .BeEquivalentSequenceTo(
                     new TestTerminal.ContentWritten("before move"),
@@ -78,8 +75,7 @@ namespace System.CommandLine.Rendering.Tests
 
             terminal.Out.Write(stringWithEscapeSequence);
 
-            terminal
-                .Events
+            terminal.Events
                 .Should()
                 .BeEquivalentSequenceTo(new TestTerminal.ContentWritten(stringWithEscapeSequence));
         }
@@ -104,8 +100,7 @@ namespace System.CommandLine.Rendering.Tests
 
             renderer.RenderToRegion(threeLinesOfText, new Region(2, 5, 13, 3));
 
-            terminal
-                .Events
+            terminal.Events
                 .OfType<TestTerminal.CursorPositionChanged>()
                 .Select(e => e.Position)
                 .Should()
@@ -127,8 +122,7 @@ namespace System.CommandLine.Rendering.Tests
 
             renderer.RenderToRegion("first line\nsecond line", region);
 
-            terminal
-                .Events
+            terminal.Events
                 .Where(e => !(e is TestTerminal.AnsiControlCodeWritten))
                 .Should()
                 .BeEquivalentSequenceTo(
@@ -153,8 +147,7 @@ namespace System.CommandLine.Rendering.Tests
                 region
             );
 
-            terminal
-                .Events
+            terminal.Events
                 .Should()
                 .Contain(
                     e =>

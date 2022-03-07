@@ -72,8 +72,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             [NotNullWhen(true)] out string? key
         )
         {
-            var serialization = option
-                .StorageLocations
+            var serialization = option.StorageLocations
                 .OfType<LocalUserProfileStorageLocation>()
                 .SingleOrDefault();
 

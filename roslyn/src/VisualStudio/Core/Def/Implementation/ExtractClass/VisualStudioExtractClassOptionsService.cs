@@ -51,12 +51,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractClass
             ISymbol? selectedMember
         )
         {
-            var notificationService = document
-                .Project
-                .Solution
-                .Workspace
-                .Services
-                .GetRequiredService<INotificationService>();
+            var notificationService =
+                document.Project.Solution.Workspace.Services.GetRequiredService<INotificationService>();
 
             var membersInType = selectedType
                 .GetMembers()
@@ -67,9 +63,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractClass
                     new PullMemberUpSymbolViewModel(member, _glyphService)
                     {
                         // The member user selected will be checked at the beginning.
-                        IsChecked = SymbolEquivalenceComparer
-                            .Instance
-                            .Equals(selectedMember, member),
+                        IsChecked = SymbolEquivalenceComparer.Instance.Equals(
+                            selectedMember,
+                            member
+                        ),
                         MakeAbstract = false,
                         IsMakeAbstractCheckable =
                             !member.IsKind(SymbolKind.Field) && !member.IsAbstract,
@@ -84,8 +81,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractClass
                 cancellationTokenSource.Token
             );
 
-            var conflictingTypeNames = selectedType
-                .ContainingNamespace
+            var conflictingTypeNames = selectedType.ContainingNamespace
                 .GetAllTypes(cancellationTokenSource.Token)
                 .Select(t => t.Name);
             var candidateName = selectedType.Name + "Base";
@@ -129,12 +125,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractClass
                     viewModel.DestinationViewModel.TypeName,
                     viewModel.DestinationViewModel.Destination
                         == CommonControls.NewTypeDestination.CurrentFile,
-                    viewModel
-                        .MemberSelectionViewModel
-                        .CheckedMembers
-                        .SelectAsArray(
-                            m => new ExtractClassMemberAnalysisResult(m.Symbol, m.MakeAbstract)
-                        )
+                    viewModel.MemberSelectionViewModel.CheckedMembers.SelectAsArray(
+                        m => new ExtractClassMemberAnalysisResult(m.Symbol, m.MakeAbstract)
+                    )
                 );
             }
 

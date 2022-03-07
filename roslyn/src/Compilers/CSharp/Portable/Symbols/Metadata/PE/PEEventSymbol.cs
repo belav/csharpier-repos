@@ -196,8 +196,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
                 if (isWindowsRuntimeEvent)
                 {
-                    NamedTypeSymbol eventRegistrationTokenTable_T =
-                        ((PEModuleSymbol)(this.ContainingModule)).EventRegistrationTokenTable_T;
+                    NamedTypeSymbol eventRegistrationTokenTable_T = (
+                        (PEModuleSymbol)(this.ContainingModule)
+                    ).EventRegistrationTokenTable_T;
                     if (
                         TypeSymbol.Equals(
                             eventRegistrationTokenTable_T,
@@ -238,8 +239,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         {
             get
             {
-                NamedTypeSymbol token =
-                    ((PEModuleSymbol)(this.ContainingModule)).EventRegistrationToken;
+                NamedTypeSymbol token = (
+                    (PEModuleSymbol)(this.ContainingModule)
+                ).EventRegistrationToken;
 
                 // If the addMethod returns an EventRegistrationToken
                 // and the removeMethod accepts an EventRegistrationToken
@@ -401,10 +403,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         {
             get
             {
-                return _containingType
-                    .ContainingPEModule
-                    .MetadataLocation
-                    .Cast<MetadataLocation, Location>();
+                return _containingType.ContainingPEModule.MetadataLocation.Cast<
+                    MetadataLocation,
+                    Location
+                >();
             }
         }
 
