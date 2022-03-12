@@ -251,8 +251,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             // mess with it if it's inside a line.
             if (token.IsKind(SyntaxKind.OpenBraceToken))
             {
-                var text = await token
-                    .SyntaxTree!.GetTextAsync(cancellationToken)
+                var text = await token.SyntaxTree!
+                    .GetTextAsync(cancellationToken)
                     .ConfigureAwait(false);
                 if (!token.IsFirstTokenOnLine(text))
                 {
