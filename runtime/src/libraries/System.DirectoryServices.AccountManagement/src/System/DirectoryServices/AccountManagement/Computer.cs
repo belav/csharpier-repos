@@ -123,8 +123,11 @@ namespace System.DirectoryServices.AccountManagement
             string identityValue
         )
         {
-            return (ComputerPrincipal)
-                FindByIdentityWithType(context, typeof(ComputerPrincipal), identityValue);
+            return (ComputerPrincipal)FindByIdentityWithType(
+                context,
+                typeof(ComputerPrincipal),
+                identityValue
+            );
         }
 
         public static new ComputerPrincipal FindByIdentity(
@@ -133,13 +136,12 @@ namespace System.DirectoryServices.AccountManagement
             string identityValue
         )
         {
-            return (ComputerPrincipal)
-                FindByIdentityWithType(
-                    context,
-                    typeof(ComputerPrincipal),
-                    identityType,
-                    identityValue
-                );
+            return (ComputerPrincipal)FindByIdentityWithType(
+                context,
+                typeof(ComputerPrincipal),
+                identityType,
+                identityValue
+            );
         }
 
         //

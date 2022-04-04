@@ -353,11 +353,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                     break;
             }
 
-            return (SqlBinaryExpression)
-                ApplyTypeMapping(
-                    new SqlBinaryExpression(operatorType, left, right, returnType, null),
-                    typeMapping
-                );
+            return (SqlBinaryExpression)ApplyTypeMapping(
+                new SqlBinaryExpression(operatorType, left, right, returnType, null),
+                typeMapping
+            );
         }
 
         /// <inheritdoc />
@@ -484,11 +483,10 @@ namespace Microsoft.EntityFrameworkCore.Query
         ) =>
             !SqlUnaryExpression.IsValidOperator(operatorType)
                 ? null
-                : (SqlUnaryExpression)
-                      ApplyTypeMapping(
-                          new SqlUnaryExpression(operatorType, operand, type, null),
-                          typeMapping
-                      );
+                : (SqlUnaryExpression)ApplyTypeMapping(
+                      new SqlUnaryExpression(operatorType, operand, type, null),
+                      typeMapping
+                  );
 
         /// <inheritdoc />
         public virtual SqlUnaryExpression IsNull(SqlExpression operand) =>
@@ -732,8 +730,9 @@ namespace Microsoft.EntityFrameworkCore.Query
             SqlExpression pattern,
             SqlExpression? escapeChar = null
         ) =>
-            (LikeExpression)
-                ApplyDefaultTypeMapping(new LikeExpression(match, pattern, escapeChar, null));
+            (LikeExpression)ApplyDefaultTypeMapping(
+                new LikeExpression(match, pattern, escapeChar, null)
+            );
 
         /// <inheritdoc />
         public virtual SqlFragmentExpression Fragment(string sql) => new SqlFragmentExpression(sql);
@@ -882,11 +881,10 @@ namespace Microsoft.EntityFrameworkCore.Query
             var concreteEntityTypes = entityType.GetConcreteDerivedTypesInclusive().ToList();
             var predicate =
                 concreteEntityTypes.Count == 1
-                    ? (SqlExpression)
-                          Equal(
-                              discriminatorColumn,
-                              Constant(concreteEntityTypes[0].GetDiscriminatorValue())
-                          )
+                    ? (SqlExpression)Equal(
+                          discriminatorColumn,
+                          Constant(concreteEntityTypes[0].GetDiscriminatorValue())
+                      )
                     : In(
                           discriminatorColumn,
                           Constant(

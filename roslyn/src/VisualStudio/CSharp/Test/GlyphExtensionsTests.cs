@@ -67,8 +67,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
             TestGlyph(
                 StandardGlyphGroup.GlyphGroupClass,
                 SymbolKind.PointerType,
-                pointedAtType: (INamedTypeSymbol)
-                    CreateSymbolMock(SymbolKind.NamedType, typeKind: TypeKind.Class)
+                pointedAtType: (INamedTypeSymbol)CreateSymbolMock(
+                    SymbolKind.NamedType,
+                    typeKind: TypeKind.Class
+                )
             );
 
             TestGlyph(StandardGlyphGroup.GlyphGroupProperty, SymbolKind.Property);
@@ -76,8 +78,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
             TestGlyph(
                 StandardGlyphGroup.GlyphGroupEnumMember,
                 SymbolKind.Field,
-                containingType: (INamedTypeSymbol)
-                    CreateSymbolMock(SymbolKind.NamedType, typeKind: TypeKind.Enum)
+                containingType: (INamedTypeSymbol)CreateSymbolMock(
+                    SymbolKind.NamedType,
+                    typeKind: TypeKind.Enum
+                )
             );
 
             TestGlyph(StandardGlyphGroup.GlyphGroupConstant, SymbolKind.Field, isConst: true);
@@ -93,15 +97,19 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
             TestGlyph(
                 StandardGlyphGroup.GlyphGroupClass,
                 SymbolKind.ArrayType,
-                elementType: (INamedTypeSymbol)
-                    CreateSymbolMock(SymbolKind.NamedType, typeKind: TypeKind.Class)
+                elementType: (INamedTypeSymbol)CreateSymbolMock(
+                    SymbolKind.NamedType,
+                    typeKind: TypeKind.Class
+                )
             );
 
             TestGlyph(
                 StandardGlyphGroup.GlyphGroupClass,
                 SymbolKind.Alias,
-                target: (INamedTypeSymbol)
-                    CreateSymbolMock(SymbolKind.NamedType, typeKind: TypeKind.Class)
+                target: (INamedTypeSymbol)CreateSymbolMock(
+                    SymbolKind.NamedType,
+                    typeKind: TypeKind.Class
+                )
             );
 
             Assert.ThrowsAny<ArgumentException>(

@@ -343,11 +343,10 @@ namespace System.Text
             }
             else if (AdvSimd.Arm64.IsSupported)
             {
-                currentAdvSimdIndex = (uint)
-                    GetIndexOfFirstNonAsciiByteInLane_AdvSimd(
-                        AdvSimd.LoadVector128(pBuffer),
-                        bitmask
-                    ); // unaligned load
+                currentAdvSimdIndex = (uint)GetIndexOfFirstNonAsciiByteInLane_AdvSimd(
+                    AdvSimd.LoadVector128(pBuffer),
+                    bitmask
+                ); // unaligned load
                 if (ContainsNonAsciiByte_AdvSimd(currentAdvSimdIndex))
                 {
                     goto FoundNonAsciiDataInCurrentChunk;
@@ -423,10 +422,14 @@ namespace System.Text
                             pBuffer + SizeOfVector128
                         );
 
-                        currentAdvSimdIndex = (uint)
-                            GetIndexOfFirstNonAsciiByteInLane_AdvSimd(firstVector, bitmask);
-                        secondAdvSimdIndex = (uint)
-                            GetIndexOfFirstNonAsciiByteInLane_AdvSimd(secondVector, bitmask);
+                        currentAdvSimdIndex = (uint)GetIndexOfFirstNonAsciiByteInLane_AdvSimd(
+                            firstVector,
+                            bitmask
+                        );
+                        secondAdvSimdIndex = (uint)GetIndexOfFirstNonAsciiByteInLane_AdvSimd(
+                            secondVector,
+                            bitmask
+                        );
                         if (
                             ContainsNonAsciiByte_AdvSimd(currentAdvSimdIndex)
                             || ContainsNonAsciiByte_AdvSimd(secondAdvSimdIndex)
@@ -471,11 +474,10 @@ namespace System.Text
             }
             else if (AdvSimd.Arm64.IsSupported)
             {
-                currentAdvSimdIndex = (uint)
-                    GetIndexOfFirstNonAsciiByteInLane_AdvSimd(
-                        AdvSimd.LoadVector128(pBuffer),
-                        bitmask
-                    );
+                currentAdvSimdIndex = (uint)GetIndexOfFirstNonAsciiByteInLane_AdvSimd(
+                    AdvSimd.LoadVector128(pBuffer),
+                    bitmask
+                );
                 if (ContainsNonAsciiByte_AdvSimd(currentAdvSimdIndex))
                 {
                     goto FoundNonAsciiDataInCurrentChunk;
@@ -509,11 +511,10 @@ namespace System.Text
                 }
                 else if (AdvSimd.Arm64.IsSupported)
                 {
-                    currentAdvSimdIndex = (uint)
-                        GetIndexOfFirstNonAsciiByteInLane_AdvSimd(
-                            AdvSimd.LoadVector128(pBuffer),
-                            bitmask
-                        ); // unaligned load
+                    currentAdvSimdIndex = (uint)GetIndexOfFirstNonAsciiByteInLane_AdvSimd(
+                        AdvSimd.LoadVector128(pBuffer),
+                        bitmask
+                    ); // unaligned load
                     if (ContainsNonAsciiByte_AdvSimd(currentAdvSimdIndex))
                     {
                         goto FoundNonAsciiDataInCurrentChunk;

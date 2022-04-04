@@ -317,8 +317,8 @@ namespace System.Data.OleDb
             );
             if (property != null)
             {
-                dataSourceInformation[DbMetaDataColumnNames.DataSourceProductName] = (string)
-                    property;
+                dataSourceInformation[DbMetaDataColumnNames.DataSourceProductName] =
+                    (string)property;
             }
 
             // update the server version strings
@@ -378,8 +378,8 @@ namespace System.Data.OleDb
             );
             if (property != null)
             {
-                dataSourceInformation[DbMetaDataColumnNames.OrderByColumnsInSelect] = (bool)
-                    property;
+                dataSourceInformation[DbMetaDataColumnNames.OrderByColumnsInSelect] =
+                    (bool)property;
             }
 
             DataTable? infoLiterals = internalConnection.BuildInfoLiterals();

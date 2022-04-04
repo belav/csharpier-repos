@@ -35,8 +35,12 @@ namespace Moq
             using (var matcherObserver = MatcherObserver.Activate())
             {
                 // Create the root recording proxy:
-                var root = (T)
-                    CreateProxy(typeof(T), ctorArgs, matcherObserver, out var rootRecorder);
+                var root = (T)CreateProxy(
+                    typeof(T),
+                    ctorArgs,
+                    matcherObserver,
+                    out var rootRecorder
+                );
 
                 Exception error = null;
                 try

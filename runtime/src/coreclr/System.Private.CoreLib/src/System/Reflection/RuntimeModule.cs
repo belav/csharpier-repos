@@ -290,8 +290,11 @@ namespace System.Reflection
                     int tkDeclaringType = ModuleHandle
                         .GetMetadataImport(this)
                         .GetParentToken(metadataToken);
-                    declaringType = (RuntimeType)
-                        ResolveType(tkDeclaringType, genericTypeArguments, genericMethodArguments);
+                    declaringType = (RuntimeType)ResolveType(
+                        tkDeclaringType,
+                        genericTypeArguments,
+                        genericMethodArguments
+                    );
                 }
 
                 return RuntimeType.GetFieldInfo(declaringType, fieldHandle);

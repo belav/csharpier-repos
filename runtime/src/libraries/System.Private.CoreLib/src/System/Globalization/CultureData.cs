@@ -2030,8 +2030,9 @@ namespace System.Globalization
                     return new GregorianCalendar();
                 }
 
-                CalendarId defaultCalId = (CalendarId)
-                    GetLocaleInfoCore(LocaleNumberData.CalendarType);
+                CalendarId defaultCalId = (CalendarId)GetLocaleInfoCore(
+                    LocaleNumberData.CalendarType
+                );
 
                 if (defaultCalId == 0)
                 {

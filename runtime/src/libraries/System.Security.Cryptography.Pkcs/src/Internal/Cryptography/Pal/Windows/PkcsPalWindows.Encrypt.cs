@@ -300,8 +300,8 @@ namespace Internal.Cryptography.Pal.Windows
                         case Oids.RsaOaep:
                             recipientEncodeInfo.dwRecipientChoice =
                                 CMsgCmsRecipientChoice.CMSG_KEY_TRANS_RECIPIENT;
-                            recipientEncodeInfo.pCmsRecipientEncodeInfo = (IntPtr)
-                                EncodeKeyTransRecipientInfo(recipient, hb);
+                            recipientEncodeInfo.pCmsRecipientEncodeInfo =
+                                (IntPtr)EncodeKeyTransRecipientInfo(recipient, hb);
                             break;
 
                         case Oids.Esdh:
@@ -309,8 +309,8 @@ namespace Internal.Cryptography.Pal.Windows
                         case Oids.DiffieHellmanPkcs3:
                             recipientEncodeInfo.dwRecipientChoice =
                                 CMsgCmsRecipientChoice.CMSG_KEY_AGREE_RECIPIENT;
-                            recipientEncodeInfo.pCmsRecipientEncodeInfo = (IntPtr)
-                                EncodeKeyAgreeRecipientInfo(
+                            recipientEncodeInfo.pCmsRecipientEncodeInfo =
+                                (IntPtr)EncodeKeyAgreeRecipientInfo(
                                     recipient,
                                     contentEncryptionAlgorithm,
                                     hb

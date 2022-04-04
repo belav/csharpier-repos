@@ -207,8 +207,9 @@ namespace Microsoft.Web.Mvc.ModelBinding
                     (attr.BinderType.IsGenericTypeDefinition)
                         ? attr.BinderType.MakeGenericType(modelType.GetGenericArguments())
                         : attr.BinderType;
-                IExtensibleModelBinder binderInstance = (IExtensibleModelBinder)
-                    CreateInstance(closedBinderType);
+                IExtensibleModelBinder binderInstance = (IExtensibleModelBinder)CreateInstance(
+                    closedBinderType
+                );
                 provider = new SimpleModelBinderProvider(modelType, binderInstance)
                 {
                     SuppressPrefixCheck = attr.SuppressPrefixCheck

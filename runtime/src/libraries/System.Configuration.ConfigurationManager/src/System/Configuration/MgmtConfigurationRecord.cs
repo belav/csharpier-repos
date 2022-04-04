@@ -466,8 +466,11 @@ namespace System.Configuration
             string configKey = configSection.SectionInformation.ConfigKey;
             ConfigurationSection parentSection = FindImmediateParentSection(configSection);
             SectionRecord sectionRecord = GetSectionRecord(configKey, false);
-            ConfigurationSection clone = (ConfigurationSection)
-                UseParentResult(configKey, parentSection, sectionRecord);
+            ConfigurationSection clone = (ConfigurationSection)UseParentResult(
+                configKey,
+                parentSection,
+                sectionRecord
+            );
             return clone;
         }
 

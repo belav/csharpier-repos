@@ -1477,8 +1477,8 @@ namespace System.DirectoryServices.Protocols
 
                 if (directoryAttributes is DirectoryAttributeModificationCollection)
                 {
-                    modificationCollection = (DirectoryAttributeModificationCollection)
-                        directoryAttributes;
+                    modificationCollection =
+                        (DirectoryAttributeModificationCollection)directoryAttributes;
                 }
                 else
                 {

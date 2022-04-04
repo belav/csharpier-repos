@@ -638,8 +638,10 @@ namespace System.Net.Sockets
         {
             get
             {
-                return (LingerOption?)
-                    GetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Linger);
+                return (LingerOption?)GetSocketOption(
+                    SocketOptionLevel.Socket,
+                    SocketOptionName.Linger
+                );
             }
             set { SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Linger, value!); }
         }

@@ -53,8 +53,15 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
             };
 
             generateCommand.Handler = CommandHandler.Create(
-                (Func<FileInfo?, FileInfo?, FileInfo?, string?, LsifFormat, string?, Task>)
-                    GenerateAsync
+                (Func<
+                    FileInfo?,
+                    FileInfo?,
+                    FileInfo?,
+                    string?,
+                    LsifFormat,
+                    string?,
+                    Task
+                >)GenerateAsync
             );
 
             return generateCommand.InvokeAsync(args);

@@ -381,8 +381,10 @@ namespace AutoMapper.Configuration
             Expression<Func<TDestination, TMember>> destinationMember,
             Action<IProjectionMemberConfiguration<TSource, TDestination, TMember>> memberOptions
         ) =>
-            (IProjectionExpression<TSource, TDestination>)
-                ForMember(destinationMember, memberOptions);
+            (IProjectionExpression<TSource, TDestination>)ForMember(
+                destinationMember,
+                memberOptions
+            );
 
         IProjectionExpression<TSource, TDestination> IProjectionExpression<
             TSource,

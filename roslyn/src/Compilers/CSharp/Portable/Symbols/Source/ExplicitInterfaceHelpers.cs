@@ -181,15 +181,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             BindingDiagnosticBag diagnostics
         )
         {
-            return (MethodSymbol)
-                FindExplicitlyImplementedMember(
-                    implementingMethod,
-                    isOperator,
-                    explicitInterfaceType,
-                    interfaceMethodName,
-                    explicitInterfaceSpecifierSyntax,
-                    diagnostics
-                );
+            return (MethodSymbol)FindExplicitlyImplementedMember(
+                implementingMethod,
+                isOperator,
+                explicitInterfaceType,
+                interfaceMethodName,
+                explicitInterfaceSpecifierSyntax,
+                diagnostics
+            );
         }
 
         internal static PropertySymbol FindExplicitlyImplementedProperty(
@@ -200,15 +199,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             BindingDiagnosticBag diagnostics
         )
         {
-            return (PropertySymbol)
-                FindExplicitlyImplementedMember(
-                    implementingProperty,
-                    isOperator: false,
-                    explicitInterfaceType,
-                    interfacePropertyName,
-                    explicitInterfaceSpecifierSyntax,
-                    diagnostics
-                );
+            return (PropertySymbol)FindExplicitlyImplementedMember(
+                implementingProperty,
+                isOperator: false,
+                explicitInterfaceType,
+                interfacePropertyName,
+                explicitInterfaceSpecifierSyntax,
+                diagnostics
+            );
         }
 
         internal static EventSymbol FindExplicitlyImplementedEvent(
@@ -219,15 +217,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             BindingDiagnosticBag diagnostics
         )
         {
-            return (EventSymbol)
-                FindExplicitlyImplementedMember(
-                    implementingEvent,
-                    isOperator: false,
-                    explicitInterfaceType,
-                    interfaceEventName,
-                    explicitInterfaceSpecifierSyntax,
-                    diagnostics
-                );
+            return (EventSymbol)FindExplicitlyImplementedMember(
+                implementingEvent,
+                isOperator: false,
+                explicitInterfaceType,
+                interfaceEventName,
+                explicitInterfaceSpecifierSyntax,
+                diagnostics
+            );
         }
 
         private static Symbol FindExplicitlyImplementedMember(

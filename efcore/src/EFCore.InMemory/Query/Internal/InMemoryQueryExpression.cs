@@ -1151,12 +1151,11 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                         goto default;
                     }
 
-                    var updatedNewExpression = (NewExpression)
-                        GetGroupingKey(
-                            memberInitExpression.NewExpression,
-                            groupingExpressions,
-                            groupingKeyAccessExpression
-                        );
+                    var updatedNewExpression = (NewExpression)GetGroupingKey(
+                        memberInitExpression.NewExpression,
+                        groupingExpressions,
+                        groupingKeyAccessExpression
+                    );
                     var memberBindings = new MemberAssignment[memberInitExpression.Bindings.Count];
                     for (var i = 0; i < memberBindings.Length; i++)
                     {

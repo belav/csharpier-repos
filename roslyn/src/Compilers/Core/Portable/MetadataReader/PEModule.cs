@@ -3091,8 +3091,8 @@ namespace Microsoft.CodeAnalysis
 
                                         if (tokenType == HandleKind.TypeDefinition)
                                         {
-                                            TypeDefinitionHandle typeHandle = (TypeDefinitionHandle)
-                                                token;
+                                            TypeDefinitionHandle typeHandle =
+                                                (TypeDefinitionHandle)token;
 
                                             if (IsNestedTypeDefOrThrow(metadataReader, typeHandle))
                                             {

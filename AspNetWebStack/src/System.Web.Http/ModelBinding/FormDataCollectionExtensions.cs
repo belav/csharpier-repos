@@ -171,8 +171,13 @@ namespace System.Web.Http.ModelBinding
             IFormatterLogger formatterLogger
         )
         {
-            return (T)
-                ReadAs(formData, typeof(T), modelName, requiredMemberSelector, formatterLogger);
+            return (T)ReadAs(
+                formData,
+                typeof(T),
+                modelName,
+                requiredMemberSelector,
+                formatterLogger
+            );
         }
 
         public static T ReadAs<T>(

@@ -291,8 +291,10 @@ namespace System.Xml.Serialization
                     {
                         if (mapping.Elements != null && mapping.Elements.Length > 0)
                         {
-                            mapping.Elements[0] = (ElementAccessor)
-                                ReconcileAccessor(mapping.Elements[0], _elements);
+                            mapping.Elements[0] = (ElementAccessor)ReconcileAccessor(
+                                mapping.Elements[0],
+                                _elements
+                            );
                         }
                     }
                 }
@@ -1071,8 +1073,13 @@ namespace System.Xml.Serialization
               : XsdTypeName(model.Type, a, model.TypeDesc.Name);
             typeName = XmlConvert.EncodeLocalName(typeName);
 
-            StructMapping? mapping = (StructMapping?)
-                GetTypeMapping(typeName, typeNs, model.TypeDesc, _types, model.Type);
+            StructMapping? mapping = (StructMapping?)GetTypeMapping(
+                typeName,
+                typeNs,
+                model.TypeDesc,
+                _types,
+                model.Type
+            );
             if (mapping == null)
             {
                 mapping = new StructMapping();
@@ -1649,8 +1656,13 @@ namespace System.Xml.Serialization
               : XsdTypeName(model.Type, a, model.TypeDesc.Name);
             typeName = XmlConvert.EncodeLocalName(typeName);
 
-            EnumMapping? mapping = (EnumMapping?)
-                GetTypeMapping(typeName, typeNs, model.TypeDesc, _types, model.Type);
+            EnumMapping? mapping = (EnumMapping?)GetTypeMapping(
+                typeName,
+                typeNs,
+                model.TypeDesc,
+                _types,
+                model.Type
+            );
             if (mapping == null)
             {
                 mapping = new EnumMapping();
@@ -2614,8 +2626,10 @@ namespace System.Xml.Serialization
                         {
                             if (_xsdAttributes == null)
                                 _xsdAttributes = new NameTable();
-                            attribute = (AttributeAccessor)
-                                ReconcileAccessor(attribute, _xsdAttributes);
+                            attribute = (AttributeAccessor)ReconcileAccessor(
+                                attribute,
+                                _xsdAttributes
+                            );
                         }
                         accessor.Attribute = attribute;
                     }

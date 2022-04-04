@@ -649,8 +649,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                         switch (replacement.Kind())
                         {
                             case SyntaxKind.AliasQualifiedName:
-                                var aliasQualifiedReplacement = (AliasQualifiedNameSyntax)
-                                    replacement;
+                                var aliasQualifiedReplacement =
+                                    (AliasQualifiedNameSyntax)replacement;
                                 replacement = replacement.ReplaceNode(
                                     aliasQualifiedReplacement.Name,
                                     aliasQualifiedReplacement.Name.WithIdentifier(

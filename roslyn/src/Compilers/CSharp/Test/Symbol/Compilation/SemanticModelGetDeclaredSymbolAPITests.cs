@@ -1939,9 +1939,8 @@ interface IB<T3, T4>
         [Fact]
         public void TestLookupSymbolsExtensionMethods()
         {
-            var compilation = (Compilation)
-                CreateCompilation(
-                    @"namespace N
+            var compilation = (Compilation)CreateCompilation(
+                @"namespace N
 {
     class C
     {
@@ -1968,7 +1967,7 @@ static class S2
     internal static void G<T>(this object o) { }
     internal static void H(this double d) { }
 }"
-                );
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -2107,9 +2106,8 @@ static class S2
         [Fact]
         public void TestLookupSymbolsGenericExtensionMethods()
         {
-            var compilation = (Compilation)
-                CreateCompilation(
-                    @"class C
+            var compilation = (Compilation)CreateCompilation(
+                @"class C
 {
     static void M() { }
 }
@@ -2119,7 +2117,7 @@ static class S
     internal static void E<T, U>(this U u, T t) { }
     internal static void E<T, U>(this object o, T t, U u) { }
 }"
-                );
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -3265,9 +3263,8 @@ namespace A
         [Fact]
         public void GetDeclaredSymbolDupAliasNameErr()
         {
-            var compilation = (Compilation)
-                CreateCompilation(
-                    @"
+            var compilation = (Compilation)CreateCompilation(
+                @"
 namespace NS {  class A {}  }
 
 namespace NS {
@@ -3277,7 +3274,7 @@ namespace NS {
     class B {}
 }
 "
-                );
+            );
 
             var tree = compilation.SyntaxTrees.First();
             var root = tree.GetCompilationUnitRoot();
@@ -3401,9 +3398,8 @@ class C : I
         [Fact]
         public void GetDeclaredSymbolDottedNSAPI()
         {
-            var compilation = (Compilation)
-                CreateCompilation(
-                    @"
+            var compilation = (Compilation)CreateCompilation(
+                @"
 namespace N1 {
   namespace N2.N3
   {
@@ -3411,7 +3407,7 @@ namespace N1 {
   }
 }
 "
-                );
+            );
 
             var tree = compilation.SyntaxTrees.First();
             var root = tree.GetCompilationUnitRoot();
@@ -3437,14 +3433,13 @@ namespace N1 {
         [Fact]
         public void GetDeclaredSymbolGlobalSystemNSErr()
         {
-            var compilation = (Compilation)
-                CreateCompilation(
-                    @"
+            var compilation = (Compilation)CreateCompilation(
+                @"
 namespace global::System {}
 
 class Test { }
 "
-                );
+            );
 
             var tree = compilation.SyntaxTrees.First();
             var root = tree.GetCompilationUnitRoot();
@@ -3463,9 +3458,8 @@ class Test { }
         [Fact]
         public void GetDeclaredSymbolInvalidOverloadsErr()
         {
-            var compilation = (Compilation)
-                CreateCompilation(
-                    @"
+            var compilation = (Compilation)CreateCompilation(
+                @"
 class CGoo
 {
     void M() {}
@@ -3480,7 +3474,7 @@ class CGoo
     }
 }
 "
-                );
+            );
 
             var tree = compilation.SyntaxTrees.First();
             var root = tree.GetCompilationUnitRoot();
@@ -3525,19 +3519,18 @@ class CGoo
         [MemberData(nameof(FileScopedOrBracedNamespace))]
         public void GetDeclaredSymbolNoTypeSymbolWithErr(string ob, string cb)
         {
-            var compilation = (Compilation)
-                CreateCompilation(
-                    @"
+            var compilation = (Compilation)CreateCompilation(
+                @"
 namespace NS
 "
-                        + ob
-                        + @"
+                    + ob
+                    + @"
   protected class A { }
 "
-                        + cb
-                        + @"
+                    + cb
+                    + @"
 "
-                );
+            );
             var tree = compilation.SyntaxTrees.First();
             var root = tree.GetCompilationUnitRoot();
             var model = compilation.GetSemanticModel(tree);
@@ -3587,9 +3580,8 @@ namespace NS
         [Fact]
         public void GetDeclaredSymbolSameNameMethodsDiffNSs()
         {
-            var compilation = (Compilation)
-                CreateCompilation(
-                    @"
+            var compilation = (Compilation)CreateCompilation(
+                @"
 namespace Goo {
     class A { }
 }
@@ -3599,7 +3591,7 @@ namespace NS {
     class A { }
 }
 "
-                );
+            );
             var tree = compilation.SyntaxTrees.First();
             var root = tree.GetCompilationUnitRoot();
             var model = compilation.GetSemanticModel(tree);
@@ -3764,9 +3756,8 @@ public class MainClass
         [Fact]
         public void TestGetSemanticInfoBrokenDecl()
         {
-            var compilation = (Compilation)
-                CreateCompilation(
-                    @"
+            var compilation = (Compilation)CreateCompilation(
+                @"
 class C 
 {
   void F()
@@ -3775,7 +3766,7 @@ class C
   }
 }
 "
-                );
+            );
             var tree = compilation.SyntaxTrees.First();
             var methodDecl = (MethodDeclarationSyntax)
                 ((TypeDeclarationSyntax)tree.GetCompilationUnitRoot().Members[0]).Members[0];
@@ -4377,26 +4368,25 @@ class Program
         [Fact]
         public void SourceNamespaceSymbolMergeWithMetadata()
         {
-            var compilation = (Compilation)
-                CreateEmptyCompilation(
-                    new string[]
-                    {
-                        @"namespace System {
+            var compilation = (Compilation)CreateEmptyCompilation(
+                new string[]
+                {
+                    @"namespace System {
     public partial class PartialClass 
     {
         public int Prop { get; set; }
     }
 }",
-                        @"namespace System
+                    @"namespace System
 {
     public partial class PartialClass 
     {
         public int this[int i] { get { return i; } set {} }
     }
 }"
-                    },
-                    new[] { MscorlibRef }
-                );
+                },
+                new[] { MscorlibRef }
+            );
 
             var tree = compilation.SyntaxTrees.First();
             var root = tree.GetCompilationUnitRoot();

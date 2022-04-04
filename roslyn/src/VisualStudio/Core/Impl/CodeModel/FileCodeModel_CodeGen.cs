@@ -382,8 +382,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             newType = InsertMember(containerNode, newType, insertionIndex);
 
-            return (EnvDTE.CodeClass)
-                CreateInternalCodeMember(this.State, fileCodeModel: this, node: newType);
+            return (EnvDTE.CodeClass)CreateInternalCodeMember(
+                this.State,
+                fileCodeModel: this,
+                node: newType
+            );
         }
 
         internal EnvDTE.CodeDelegate AddDelegate(
@@ -414,8 +417,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             newType = InsertMember(containerNode, newType, insertionIndex);
 
-            return (EnvDTE.CodeDelegate)
-                CreateInternalCodeMember(this.State, fileCodeModel: this, node: newType);
+            return (EnvDTE.CodeDelegate)CreateInternalCodeMember(
+                this.State,
+                fileCodeModel: this,
+                node: newType
+            );
         }
 
 #pragma warning disable IDE0060 // Remove unused parameter - // TODO(DustinCa): "bases" is ignored in C# code model. Need to check VB.
@@ -437,8 +443,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             newType = InsertMember(containerNode, newType, insertionIndex);
 
-            return (EnvDTE.CodeEnum)
-                CreateInternalCodeMember(this.State, fileCodeModel: this, node: newType);
+            return (EnvDTE.CodeEnum)CreateInternalCodeMember(
+                this.State,
+                fileCodeModel: this,
+                node: newType
+            );
         }
 
         public EnvDTE.CodeVariable AddEnumMember(
@@ -475,8 +484,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             newField = InsertMember(containerNode, newField, insertionIndex);
 
-            return (EnvDTE.CodeVariable)
-                CreateInternalCodeMember(this.State, fileCodeModel: this, node: newField);
+            return (EnvDTE.CodeVariable)CreateInternalCodeMember(
+                this.State,
+                fileCodeModel: this,
+                node: newField
+            );
         }
 
         public EnvDTE80.CodeEvent AddEvent(
@@ -513,8 +525,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             newEvent = InsertMember(containerNode, newEvent, insertionIndex);
 
-            return (EnvDTE80.CodeEvent)
-                CreateInternalCodeMember(this.State, fileCodeModel: this, node: newEvent);
+            return (EnvDTE80.CodeEvent)CreateInternalCodeMember(
+                this.State,
+                fileCodeModel: this,
+                node: newEvent
+            );
         }
 
         internal EnvDTE.CodeFunction AddFunction(
@@ -574,8 +589,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             newMember = InsertMember(containerNode, newMember, insertionIndex);
 
-            return (EnvDTE.CodeFunction)
-                CreateInternalCodeMember(this.State, fileCodeModel: this, node: newMember);
+            return (EnvDTE.CodeFunction)CreateInternalCodeMember(
+                this.State,
+                fileCodeModel: this,
+                node: newMember
+            );
         }
 
         internal EnvDTE80.CodeImport AddImport(
@@ -641,8 +659,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             newType = InsertMember(containerNode, newType, insertionIndex);
 
-            return (EnvDTE.CodeInterface)
-                CreateInternalCodeMember(this.State, fileCodeModel: this, node: newType);
+            return (EnvDTE.CodeInterface)CreateInternalCodeMember(
+                this.State,
+                fileCodeModel: this,
+                node: newType
+            );
         }
 
         internal EnvDTE.CodeNamespace AddNamespace(
@@ -660,8 +681,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             newNamespace = InsertMember(containerNode, newNamespace, insertionIndex);
 
-            return (EnvDTE.CodeNamespace)
-                CreateInternalCodeMember(this.State, fileCodeModel: this, node: newNamespace);
+            return (EnvDTE.CodeNamespace)CreateInternalCodeMember(
+                this.State,
+                fileCodeModel: this,
+                node: newNamespace
+            );
         }
 
         internal EnvDTE.CodeProperty AddProperty(
@@ -712,8 +736,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             newProperty = InsertMember(containerNode, newProperty, insertionIndex);
 
-            return (EnvDTE.CodeProperty)
-                CreateInternalCodeMember(this.State, fileCodeModel: this, node: newProperty);
+            return (EnvDTE.CodeProperty)CreateInternalCodeMember(
+                this.State,
+                fileCodeModel: this,
+                node: newProperty
+            );
         }
 
 #pragma warning disable IDE0060 // Remove unused parameter - // TODO(DustinCa): Old C# code base doesn't even check bases for validity -- does VB?
@@ -755,8 +782,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             newType = InsertMember(containerNode, newType, insertionIndex);
 
-            return (EnvDTE.CodeStruct)
-                CreateInternalCodeMember(this.State, fileCodeModel: this, node: newType);
+            return (EnvDTE.CodeStruct)CreateInternalCodeMember(
+                this.State,
+                fileCodeModel: this,
+                node: newType
+            );
         }
 
         public EnvDTE.CodeVariable AddVariable(
@@ -789,8 +819,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             newField = InsertMember(containerNode, newField, insertionIndex);
 
-            return (EnvDTE.CodeVariable)
-                CreateInternalCodeMember(this.State, fileCodeModel: this, node: newField);
+            return (EnvDTE.CodeVariable)CreateInternalCodeMember(
+                this.State,
+                fileCodeModel: this,
+                node: newField
+            );
         }
 
         internal void UpdateAccess(SyntaxNode node, EnvDTE.vsCMAccess access)

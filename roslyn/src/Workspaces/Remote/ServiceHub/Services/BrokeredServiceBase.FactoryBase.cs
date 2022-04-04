@@ -78,13 +78,12 @@ namespace Microsoft.CodeAnalysis.Remote
                     }
 
                     return Task.FromResult(
-                        (object)
-                            Create(
-                                stream.UsePipe(),
-                                hostProvidedServices,
-                                serviceActivationOptions,
-                                serviceBroker
-                            )
+                        (object)Create(
+                            stream.UsePipe(),
+                            hostProvidedServices,
+                            serviceActivationOptions,
+                            serviceBroker
+                        )
                     );
                 }
                 catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e))

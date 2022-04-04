@@ -98,8 +98,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         RuntimeModelDependencies? ModelDependencies
         {
             get =>
-                (RuntimeModelDependencies?)
-                    FindRuntimeAnnotationValue(CoreAnnotationNames.ModelDependencies);
+                (RuntimeModelDependencies?)FindRuntimeAnnotationValue(
+                    CoreAnnotationNames.ModelDependencies
+                );
             set =>
                 SetRuntimeAnnotation(
                     CoreAnnotationNames.ModelDependencies,

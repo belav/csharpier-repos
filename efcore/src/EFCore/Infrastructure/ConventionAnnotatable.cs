@@ -128,12 +128,11 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             Annotation? annotation,
             Annotation? oldAnnotation
         ) =>
-            (Annotation?)
-                OnAnnotationSet(
-                    name,
-                    (IConventionAnnotation?)annotation,
-                    (IConventionAnnotation?)oldAnnotation
-                );
+            (Annotation?)OnAnnotationSet(
+                name,
+                (IConventionAnnotation?)annotation,
+                (IConventionAnnotation?)oldAnnotation
+            );
 
         /// <summary>
         ///     Called when an annotation was set or removed.

@@ -400,12 +400,11 @@ namespace Internal.Cryptography.Pal
             }
 
             // Make a new pal from bytes.
-            CertificatePal pal = (CertificatePal)
-                FromBlob(
-                    RawData,
-                    SafePasswordHandle.InvalidHandle,
-                    X509KeyStorageFlags.PersistKeySet
-                );
+            CertificatePal pal = (CertificatePal)FromBlob(
+                RawData,
+                SafePasswordHandle.InvalidHandle,
+                X509KeyStorageFlags.PersistKeySet
+            );
 
             CngProvider provider = cngKey.Provider!;
             string keyName = cngKey.KeyName;
@@ -605,12 +604,11 @@ namespace Internal.Cryptography.Pal
             }
 
             // Make a new pal from bytes.
-            CertificatePal pal = (CertificatePal)
-                FromBlob(
-                    RawData,
-                    SafePasswordHandle.InvalidHandle,
-                    X509KeyStorageFlags.PersistKeySet
-                );
+            CertificatePal pal = (CertificatePal)FromBlob(
+                RawData,
+                SafePasswordHandle.InvalidHandle,
+                X509KeyStorageFlags.PersistKeySet
+            );
             Interop.Crypt32.CRYPT_KEY_PROV_INFO keyProvInfo = default;
 
             fixed (char* keyName = keyContainerInfo.KeyContainerName)
@@ -648,12 +646,11 @@ namespace Internal.Cryptography.Pal
             SafeNCryptKeyHandle handle = cngKey.Handle;
 
             // Make a new pal from bytes.
-            CertificatePal pal = (CertificatePal)
-                FromBlob(
-                    RawData,
-                    SafePasswordHandle.InvalidHandle,
-                    X509KeyStorageFlags.PersistKeySet
-                );
+            CertificatePal pal = (CertificatePal)FromBlob(
+                RawData,
+                SafePasswordHandle.InvalidHandle,
+                X509KeyStorageFlags.PersistKeySet
+            );
 
             if (
                 !Interop.Crypt32.CertSetCertificateContextProperty(

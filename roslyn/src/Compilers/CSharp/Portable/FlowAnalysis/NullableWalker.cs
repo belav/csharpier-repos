@@ -12040,11 +12040,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 // Reinfer the return type of the node.Expression.GetEnumerator().Current property, so that if
                 // the collection changed nested generic types we pick up those changes.
-                reinferredGetEnumeratorMethod ??= (MethodSymbol)
-                    AsMemberOfType(
-                        convertedResult.Type,
-                        node.EnumeratorInfoOpt.GetEnumeratorInfo.Method
-                    );
+                reinferredGetEnumeratorMethod ??= (MethodSymbol)AsMemberOfType(
+                    convertedResult.Type,
+                    node.EnumeratorInfoOpt.GetEnumeratorInfo.Method
+                );
                 var enumeratorReturnType = GetReturnTypeWithState(reinferredGetEnumeratorMethod);
 
                 if (enumeratorReturnType.State != NullableFlowState.NotNull)
@@ -12061,11 +12060,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
                 }
 
-                var currentPropertyGetter = (MethodSymbol)
-                    AsMemberOfType(
-                        enumeratorReturnType.Type,
-                        node.EnumeratorInfoOpt.CurrentPropertyGetter
-                    );
+                var currentPropertyGetter = (MethodSymbol)AsMemberOfType(
+                    enumeratorReturnType.Type,
+                    node.EnumeratorInfoOpt.CurrentPropertyGetter
+                );
 
                 currentPropertyGetterTypeWithState = ApplyUnconditionalAnnotations(
                     currentPropertyGetter.ReturnTypeWithAnnotations.ToTypeWithState(),
@@ -12080,11 +12078,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     } awaitMoveNextInfo
                 )
                 {
-                    var moveNextAsyncMethod = (MethodSymbol)
-                        AsMemberOfType(
-                            reinferredGetEnumeratorMethod.ReturnType,
-                            node.EnumeratorInfoOpt.MoveNextInfo.Method
-                        );
+                    var moveNextAsyncMethod = (MethodSymbol)AsMemberOfType(
+                        reinferredGetEnumeratorMethod.ReturnType,
+                        node.EnumeratorInfoOpt.MoveNextInfo.Method
+                    );
 
                     EnsureAwaitablePlaceholdersInitialized();
                     var result = new VisitResult(
@@ -12116,11 +12113,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ) // no statically known Dispose method if doing a runtime check
                     {
                         Debug.Assert(disposalPlaceholder is not null);
-                        var disposeAsyncMethod = (MethodSymbol)
-                            AsMemberOfType(
-                                reinferredGetEnumeratorMethod.ReturnType,
-                                originalDisposeMethod
-                            );
+                        var disposeAsyncMethod = (MethodSymbol)AsMemberOfType(
+                            reinferredGetEnumeratorMethod.ReturnType,
+                            originalDisposeMethod
+                        );
                         EnsureAwaitablePlaceholdersInitialized();
                         var result = new VisitResult(
                             GetReturnTypeWithState(disposeAsyncMethod),
@@ -12372,8 +12368,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                             operandResult
                         );
                         // Update method based on inferred operand type.
-                        method = (MethodSymbol)
-                            AsMemberOfType(operandType.Type!.StrippedType(), method);
+                        method = (MethodSymbol)AsMemberOfType(
+                            operandType.Type!.StrippedType(),
+                            method
+                        );
                         // Analyze operator call properly (honoring [Disallow|Allow|Maybe|NotNull] attribute annotations) https://github.com/dotnet/roslyn/issues/32671
                         var parameter = method.Parameters[0];
                         _ = VisitConversion(

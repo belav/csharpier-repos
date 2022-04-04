@@ -263,8 +263,9 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     extensionExpression is SingleResultShaperExpression singleResultShaperExpression
                 )
                 {
-                    var innerShaper = (LambdaExpression)
-                        Visit(singleResultShaperExpression.InnerShaper);
+                    var innerShaper = (LambdaExpression)Visit(
+                        singleResultShaperExpression.InnerShaper
+                    );
 
                     return Expression.Call(
                         _materializeSingleResultMethodInfo.MakeGenericMethod(

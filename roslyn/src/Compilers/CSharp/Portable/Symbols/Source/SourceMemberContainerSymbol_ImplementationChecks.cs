@@ -1124,8 +1124,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     }
                     else if (associatedPropertyOrEvent.Kind == SymbolKind.Property) //no specific errors for event accessors
                     {
-                        PropertySymbol associatedProperty = (PropertySymbol)
-                            associatedPropertyOrEvent;
+                        PropertySymbol associatedProperty =
+                            (PropertySymbol)associatedPropertyOrEvent;
                         PropertySymbol overriddenProperty = associatedProperty.OverriddenProperty;
 
                         if ((object)overriddenProperty == null)

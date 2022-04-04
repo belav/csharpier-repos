@@ -1681,8 +1681,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                                 // Only do the cast if we haven't returned with some error diagnostics.
                                 // Otherwise, `lowered` might have been a BoundBadStatement.
-                                processedInitializers.LoweredInitializers = (BoundStatementList)
-                                    lowered;
+                                processedInitializers.LoweredInitializers =
+                                    (BoundStatementList)lowered;
                             }
 
                             // initializers for global code have already been included in the body

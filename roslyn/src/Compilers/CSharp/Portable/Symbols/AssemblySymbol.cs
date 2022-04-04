@@ -754,8 +754,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
 
                 int i = nestedTypes.Count - 1;
-                var symbol = (NamedTypeSymbol)
-                    GetTypeByReflectionType(nestedTypes[i].AsType(), includeReferences);
+                var symbol = (NamedTypeSymbol)GetTypeByReflectionType(
+                    nestedTypes[i].AsType(),
+                    includeReferences
+                );
                 if ((object)symbol == null)
                 {
                     return null;

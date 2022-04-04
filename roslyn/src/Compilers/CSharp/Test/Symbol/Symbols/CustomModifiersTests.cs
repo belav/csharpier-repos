@@ -62,12 +62,11 @@ class Module1
     }
 }
 ";
-            var compilation = (Compilation)
-                CreateCompilationWithILAndMscorlib40(
-                    source,
-                    ilSource,
-                    options: TestOptions.ReleaseExe
-                );
+            var compilation = (Compilation)CreateCompilationWithILAndMscorlib40(
+                source,
+                ilSource,
+                options: TestOptions.ReleaseExe
+            );
 
             var test = compilation.GetTypeByMetadataName("Test1").GetMember<IMethodSymbol>("Test");
             var type = (INamedTypeSymbol)test.Parameters.First().Type;
@@ -159,12 +158,11 @@ class Module1
     }
 }
 ";
-            var compilation = (Compilation)
-                CreateCompilationWithILAndMscorlib40(
-                    source,
-                    ilSource,
-                    options: TestOptions.ReleaseExe
-                );
+            var compilation = (Compilation)CreateCompilationWithILAndMscorlib40(
+                source,
+                ilSource,
+                options: TestOptions.ReleaseExe
+            );
 
             var test = compilation.GetTypeByMetadataName("Test1").GetMember<IMethodSymbol>("Test");
             var type = (INamedTypeSymbol)test.Parameters.First().Type;

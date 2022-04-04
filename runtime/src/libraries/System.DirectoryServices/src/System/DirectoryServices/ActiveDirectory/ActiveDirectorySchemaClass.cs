@@ -611,8 +611,10 @@ namespace System.DirectoryServices.ActiveDirectory
                     if (!_descriptionInitialized)
                     {
                         // get the property from the server
-                        _description = (string?)
-                            GetValueFromCache(PropertyManager.Description, false);
+                        _description = (string?)GetValueFromCache(
+                            PropertyManager.Description,
+                            false
+                        );
                         _descriptionInitialized = true;
                     }
                 }
@@ -1238,8 +1240,10 @@ namespace System.DirectoryServices.ActiveDirectory
                     if (!_defaultSDSddlFormInitialized)
                     {
                         // get the property from the server
-                        _defaultSDSddlForm = (string?)
-                            GetValueFromCache(PropertyManager.DefaultSecurityDescriptor, false);
+                        _defaultSDSddlForm = (string?)GetValueFromCache(
+                            PropertyManager.DefaultSecurityDescriptor,
+                            false
+                        );
                         _defaultSDSddlFormInitialized = true;
                     }
                 }

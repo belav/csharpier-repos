@@ -1125,8 +1125,9 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                                         e => e.Alias == columnToCopy.TableAlias
                                     );
                                     CopyOverOwnedJoinInSameTable(
-                                        (SelectExpression)
-                                            UnwrapJoinExpression(target._tables[tableIndex]),
+                                        (SelectExpression)UnwrapJoinExpression(
+                                            target._tables[tableIndex]
+                                        ),
                                         innerSelectExpression
                                     );
                                 }

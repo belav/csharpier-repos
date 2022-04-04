@@ -402,8 +402,8 @@ namespace System.DirectoryServices.AccountManagement
         private string GetEscapedDN(string dn)
         {
             UnsafeNativeMethods.Pathname pathNameObj = new UnsafeNativeMethods.Pathname();
-            UnsafeNativeMethods.IADsPathname pathCracker = (UnsafeNativeMethods.IADsPathname)
-                pathNameObj;
+            UnsafeNativeMethods.IADsPathname pathCracker =
+                (UnsafeNativeMethods.IADsPathname)pathNameObj;
 
             // Set the Escape mode On
             pathCracker.EscapedMode =
@@ -1887,8 +1887,8 @@ namespace System.DirectoryServices.AccountManagement
 
             UnsafeNativeMethods.ADsLargeInteger largeIntObj =
                 new UnsafeNativeMethods.ADsLargeInteger();
-            UnsafeNativeMethods.IADsLargeInteger largeInt = (UnsafeNativeMethods.IADsLargeInteger)
-                largeIntObj;
+            UnsafeNativeMethods.IADsLargeInteger largeInt =
+                (UnsafeNativeMethods.IADsLargeInteger)largeIntObj;
 
             if (!dt.HasValue)
             {

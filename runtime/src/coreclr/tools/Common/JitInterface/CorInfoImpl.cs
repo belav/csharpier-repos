@@ -814,8 +814,8 @@ namespace Internal.JitInterface
         )
         {
             suppressGCTransition = false;
-            CorInfoCallConvExtension callConv = (CorInfoCallConvExtension)
-                PlatformDefaultUnmanagedCallingConvention();
+            CorInfoCallConvExtension callConv =
+                (CorInfoCallConvExtension)PlatformDefaultUnmanagedCallingConvention();
 
             bool found = false;
             bool memberFunctionVariant = false;
@@ -1162,12 +1162,11 @@ namespace Internal.JitInterface
                   : (TypeSystemEntity)MethodBeingCompiled.OwningType;
             }
 
-            return (TypeSystemEntity)
-                HandleToObject(
-                    (IntPtr)(
-                        (ulong)contextStruct & ~(ulong)CorInfoContextFlags.CORINFO_CONTEXTFLAGS_MASK
-                    )
-                );
+            return (TypeSystemEntity)HandleToObject(
+                (IntPtr)(
+                    (ulong)contextStruct & ~(ulong)CorInfoContextFlags.CORINFO_CONTEXTFLAGS_MASK
+                )
+            );
         }
 
         private bool isJitIntrinsic(CORINFO_METHOD_STRUCT_* ftn)
@@ -1814,8 +1813,7 @@ namespace Internal.JitInterface
                     }
                     else
                     {
-                        return (CorInfoCallConvExtension)
-                            PlatformDefaultUnmanagedCallingConvention();
+                        return (CorInfoCallConvExtension)PlatformDefaultUnmanagedCallingConvention();
                     }
                 default:
                     ThrowHelper.ThrowInvalidProgramException();

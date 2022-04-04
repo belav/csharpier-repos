@@ -767,8 +767,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             BoundSpillSequenceBuilder builder = null;
             BoundExpression count = VisitExpression(ref builder, node.Count);
-            var initializerOpt = (BoundArrayInitialization)
-                VisitExpression(ref builder, node.InitializerOpt);
+            var initializerOpt = (BoundArrayInitialization)VisitExpression(
+                ref builder,
+                node.InitializerOpt
+            );
             return UpdateExpression(
                 builder,
                 node.Update(node.ElementType, count, initializerOpt, node.Type)

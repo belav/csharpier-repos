@@ -3335,23 +3335,21 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 if (memberOpt is object)
                 {
-                    symbolOpt = (MethodSymbol)
-                        GetWellKnownTypeMember(
-                            memberOpt.GetValueOrDefault(),
-                            diagnostics,
-                            syntax: node,
-                            isOptional: true
-                        );
+                    symbolOpt = (MethodSymbol)GetWellKnownTypeMember(
+                        memberOpt.GetValueOrDefault(),
+                        diagnostics,
+                        syntax: node,
+                        isOptional: true
+                    );
                 }
 
                 if (symbolOpt is null)
                 {
-                    symbolOpt = (MethodSymbol)
-                        GetWellKnownTypeMember(
-                            WellKnownMember.System_Range__ctor,
-                            diagnostics,
-                            syntax: node
-                        );
+                    symbolOpt = (MethodSymbol)GetWellKnownTypeMember(
+                        WellKnownMember.System_Range__ctor,
+                        diagnostics,
+                        syntax: node
+                    );
                 }
             }
 

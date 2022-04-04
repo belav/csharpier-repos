@@ -96,16 +96,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                             ref useSiteInfo
                         );
                     diagnostics.Add(node, useSiteInfo);
-                    var conversion = (BoundConversion)
-                        CreateConversion(
-                            node,
-                            placeholder,
-                            finalDynamicConversion,
-                            isCast: true,
-                            conversionGroupOpt: null,
-                            left.Type,
-                            diagnostics
-                        );
+                    var conversion = (BoundConversion)CreateConversion(
+                        node,
+                        placeholder,
+                        finalDynamicConversion,
+                        isCast: true,
+                        conversionGroupOpt: null,
+                        left.Type,
+                        diagnostics
+                    );
 
                     conversion = conversion.Update(
                         conversion.Operand,
@@ -4253,8 +4252,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics
         )
         {
-            var resultType = (TypeSymbol)
-                GetSpecialType(SpecialType.System_Boolean, diagnostics, node);
+            var resultType = (TypeSymbol)GetSpecialType(
+                SpecialType.System_Boolean,
+                diagnostics,
+                node
+            );
             var operand = BindRValueWithoutTargetType(node.Left, diagnostics);
             var operandHasErrors = IsOperandErrors(node, ref operand, diagnostics);
 

@@ -571,8 +571,9 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     return newExpression.Update(newArguments);
 
                 case MemberInitExpression memberInitExpression:
-                    var updatedNewExpression = (NewExpression?)
-                        TranslateGroupingKey(memberInitExpression.NewExpression);
+                    var updatedNewExpression = (NewExpression?)TranslateGroupingKey(
+                        memberInitExpression.NewExpression
+                    );
                     if (updatedNewExpression == null)
                     {
                         return null;
@@ -1903,12 +1904,11 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
                 case MemberInitExpression memberInitExpression1
                       when shaper2 is MemberInitExpression memberInitExpression2:
-                    var newExpression = (NewExpression)
-                        MatchShaperNullabilityForSetOperation(
-                            memberInitExpression1.NewExpression,
-                            memberInitExpression2.NewExpression,
-                            makeNullable
-                        );
+                    var newExpression = (NewExpression)MatchShaperNullabilityForSetOperation(
+                        memberInitExpression1.NewExpression,
+                        memberInitExpression2.NewExpression,
+                        makeNullable
+                    );
 
                     var memberBindings = new MemberBinding[memberInitExpression1.Bindings.Count];
                     for (var i = 0; i < memberBindings.Length; i++)

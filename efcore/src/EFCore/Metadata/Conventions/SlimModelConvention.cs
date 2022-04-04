@@ -93,8 +93,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                                 runtime
                             )
                     );
-                    slimServiceProperty.ParameterBinding = (ServiceParameterBinding)
-                        Create(serviceProperty.ParameterBinding, slimEntityType);
+                    slimServiceProperty.ParameterBinding = (ServiceParameterBinding)Create(
+                        serviceProperty.ParameterBinding,
+                        slimEntityType
+                    );
                 }
 
                 foreach (var key in entityType.GetDeclaredKeys())

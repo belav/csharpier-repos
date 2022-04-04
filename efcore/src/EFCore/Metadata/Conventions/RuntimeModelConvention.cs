@@ -93,8 +93,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                                 runtime
                             )
                     );
-                    runtimeServiceProperty.ParameterBinding = (ServiceParameterBinding)
-                        Create(serviceProperty.ParameterBinding, runtimeEntityType);
+                    runtimeServiceProperty.ParameterBinding = (ServiceParameterBinding)Create(
+                        serviceProperty.ParameterBinding,
+                        runtimeEntityType
+                    );
                 }
 
                 foreach (var key in entityType.GetDeclaredKeys())

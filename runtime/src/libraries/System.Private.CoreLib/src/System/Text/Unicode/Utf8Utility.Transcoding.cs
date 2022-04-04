@@ -572,10 +572,12 @@ namespace System.Text.Unicode
                                     && (((secondDWord - 0x0000_200Du) & 0x0000_200Fu) != 0)
                                 )
                                 {
-                                    pOutputBuffer[0] = (char)
-                                        ExtractCharFromFirstThreeByteSequence(thisDWord);
-                                    pOutputBuffer[1] = (char)
-                                        ExtractCharFromFirstThreeByteSequence(secondDWord);
+                                    pOutputBuffer[0] = (char)ExtractCharFromFirstThreeByteSequence(
+                                        thisDWord
+                                    );
+                                    pOutputBuffer[1] = (char)ExtractCharFromFirstThreeByteSequence(
+                                        secondDWord
+                                    );
                                     pInputBuffer += 6;
                                     pOutputBuffer += 2;
                                     outputCharsRemaining -= 2;
@@ -1118,8 +1120,7 @@ namespace System.Text.Unicode
 
                                 // narrow and write
                                 Sse2.StoreScalar(
-                                    (ulong*)
-                                        pOutputBuffer /* unaligned */
+                                    (ulong*)pOutputBuffer /* unaligned */
                                     ,
                                     Sse2.PackUnsignedSaturate(utf16Data, utf16Data).AsUInt64()
                                 );

@@ -104,8 +104,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             // Do we need to create a text buffer?
             if (textBuffer == null)
             {
-                textBuffer = (IVsTextBuffer)
-                    GetDocumentData(grfCreateDoc, pszMkDocument, vsHierarchy, itemid);
+                textBuffer = (IVsTextBuffer)GetDocumentData(
+                    grfCreateDoc,
+                    pszMkDocument,
+                    vsHierarchy,
+                    itemid
+                );
                 Contract.ThrowIfNull(
                     textBuffer,
                     $"Failed to get document data for {pszMkDocument}"

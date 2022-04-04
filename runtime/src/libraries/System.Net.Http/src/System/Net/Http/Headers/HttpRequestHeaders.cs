@@ -77,8 +77,9 @@ namespace System.Net.Http.Headers
         {
             get
             {
-                return (AuthenticationHeaderValue?)
-                    GetParsedValues(KnownHeaders.Authorization.Descriptor);
+                return (AuthenticationHeaderValue?)GetParsedValues(
+                    KnownHeaders.Authorization.Descriptor
+                );
             }
             set { SetOrRemoveParsedValue(KnownHeaders.Authorization.Descriptor, value); }
         }
@@ -240,8 +241,9 @@ namespace System.Net.Http.Headers
         {
             get
             {
-                return (AuthenticationHeaderValue?)
-                    GetParsedValues(KnownHeaders.ProxyAuthorization.Descriptor);
+                return (AuthenticationHeaderValue?)GetParsedValues(
+                    KnownHeaders.ProxyAuthorization.Descriptor
+                );
             }
             set { SetOrRemoveParsedValue(KnownHeaders.ProxyAuthorization.Descriptor, value); }
         }

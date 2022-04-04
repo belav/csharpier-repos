@@ -334,8 +334,8 @@ namespace System.Security.Cryptography
                             if (errorCode != ErrorCode.ERROR_SUCCESS)
                                 throw errorCode.ToCryptographicException();
 
-                            NCRYPT_UI_POLICY* pNcryptUiPolicy = (NCRYPT_UI_POLICY*)
-                                pNcryptUiPolicyAndStrings;
+                            NCRYPT_UI_POLICY* pNcryptUiPolicy =
+                                (NCRYPT_UI_POLICY*)pNcryptUiPolicyAndStrings;
                             uiProtectionLevel = pNcryptUiPolicy->dwFlags;
                             friendlyName = Marshal.PtrToStringUni(pNcryptUiPolicy->pszFriendlyName);
                             description = Marshal.PtrToStringUni(pNcryptUiPolicy->pszDescription);

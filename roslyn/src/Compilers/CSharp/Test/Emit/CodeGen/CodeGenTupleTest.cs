@@ -18320,8 +18320,10 @@ interface ITest2<T> : ValueTuple<int, int, int, int, int, int, int, T> where T :
 }
 ";
 
-            var comp = (Compilation)
-                CreateCompilation(source, options: TestOptions.ReleaseExe.WithAllowUnsafe(true));
+            var comp = (Compilation)CreateCompilation(
+                source,
+                options: TestOptions.ReleaseExe.WithAllowUnsafe(true)
+            );
 
             comp.VerifyDiagnostics(
                 // (31,18): error CS0509: 'Test1<T>': cannot derive from sealed type 'ValueTuple<int, int, int, int, int, int, int, T>'

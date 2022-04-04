@@ -148,8 +148,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 }
 
                 collection =
-                    (ICollection<TElement>)
-                        _createAndSetCollection((TEntity)instance, setCollection);
+                    (ICollection<TElement>)_createAndSetCollection(
+                        (TEntity)instance,
+                        setCollection
+                    );
             }
 
             return collection;

@@ -93,12 +93,11 @@ namespace Microsoft.EntityFrameworkCore
             bool useChangeTrackingProxies = true,
             bool checkEquality = true
         ) where TContext : DbContext =>
-            (DbContextOptionsBuilder<TContext>)
-                UseChangeTrackingProxies(
-                    (DbContextOptionsBuilder)optionsBuilder,
-                    useChangeTrackingProxies,
-                    checkEquality
-                );
+            (DbContextOptionsBuilder<TContext>)UseChangeTrackingProxies(
+                (DbContextOptionsBuilder)optionsBuilder,
+                useChangeTrackingProxies,
+                checkEquality
+            );
 
         /// <summary>
         ///     Turns on the creation of lazy loading proxies.
@@ -161,11 +160,10 @@ namespace Microsoft.EntityFrameworkCore
             this DbContextOptionsBuilder<TContext> optionsBuilder,
             bool useLazyLoadingProxies = true
         ) where TContext : DbContext =>
-            (DbContextOptionsBuilder<TContext>)
-                UseLazyLoadingProxies(
-                    (DbContextOptionsBuilder)optionsBuilder,
-                    useLazyLoadingProxies
-                );
+            (DbContextOptionsBuilder<TContext>)UseLazyLoadingProxies(
+                (DbContextOptionsBuilder)optionsBuilder,
+                useLazyLoadingProxies
+            );
 
         /// <summary>
         ///     Creates a proxy instance for an entity type if proxy creation has been turned on.

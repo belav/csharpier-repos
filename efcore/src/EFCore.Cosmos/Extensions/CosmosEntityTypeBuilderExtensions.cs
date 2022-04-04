@@ -404,8 +404,10 @@ namespace Microsoft.EntityFrameworkCore
             this EntityTypeBuilder<TEntity> entityTypeBuilder,
             int? seconds
         ) where TEntity : class =>
-            (EntityTypeBuilder<TEntity>)
-                HasAnalyticalStoreTimeToLive((EntityTypeBuilder)entityTypeBuilder, seconds);
+            (EntityTypeBuilder<TEntity>)HasAnalyticalStoreTimeToLive(
+                (EntityTypeBuilder)entityTypeBuilder,
+                seconds
+            );
 
         /// <summary>
         ///     Configures the time to live for analytical store in seconds at container scope.
@@ -498,8 +500,10 @@ namespace Microsoft.EntityFrameworkCore
             this EntityTypeBuilder<TEntity> entityTypeBuilder,
             int? seconds
         ) where TEntity : class =>
-            (EntityTypeBuilder<TEntity>)
-                HasDefaultTimeToLive((EntityTypeBuilder)entityTypeBuilder, seconds);
+            (EntityTypeBuilder<TEntity>)HasDefaultTimeToLive(
+                (EntityTypeBuilder)entityTypeBuilder,
+                seconds
+            );
 
         /// <summary>
         ///     Configures the default time to live in seconds at container scope.
@@ -586,8 +590,10 @@ namespace Microsoft.EntityFrameworkCore
             this EntityTypeBuilder<TEntity> entityTypeBuilder,
             int? throughput
         ) where TEntity : class =>
-            (EntityTypeBuilder<TEntity>)
-                HasManualThroughput((EntityTypeBuilder)entityTypeBuilder, throughput);
+            (EntityTypeBuilder<TEntity>)HasManualThroughput(
+                (EntityTypeBuilder)entityTypeBuilder,
+                throughput
+            );
 
         /// <summary>
         ///     Configures the autoscale provisioned throughput offering.
@@ -621,8 +627,10 @@ namespace Microsoft.EntityFrameworkCore
             this EntityTypeBuilder<TEntity> entityTypeBuilder,
             int? throughput
         ) where TEntity : class =>
-            (EntityTypeBuilder<TEntity>)
-                HasAutoscaleThroughput((EntityTypeBuilder)entityTypeBuilder, throughput);
+            (EntityTypeBuilder<TEntity>)HasAutoscaleThroughput(
+                (EntityTypeBuilder)entityTypeBuilder,
+                throughput
+            );
 
         /// <summary>
         ///     Configures the provisioned throughput.

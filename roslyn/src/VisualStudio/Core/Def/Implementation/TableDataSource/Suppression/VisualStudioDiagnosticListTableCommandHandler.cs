@@ -58,8 +58,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
         {
             _workspace = workspace;
             _suppressionFixService = (VisualStudioSuppressionFixService)suppressionFixService;
-            _suppressionStateService = (VisualStudioDiagnosticListSuppressionStateService)
-                suppressionStateService;
+            _suppressionStateService =
+                (VisualStudioDiagnosticListSuppressionStateService)suppressionStateService;
             _uiThreadOperationExecutor = uiThreadOperationExecutor;
             _diagnosticService = diagnosticService;
             _editHandlerService = editHandlerService;

@@ -838,8 +838,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     );
 
                 case SyntaxKind.ConstructorDeclaration:
-                    ConstructorDeclarationSyntax constructorSyntax = (ConstructorDeclarationSyntax)
-                        syntax;
+                    ConstructorDeclarationSyntax constructorSyntax =
+                        (ConstructorDeclarationSyntax)syntax;
                     return SkipAttributes(
                         syntax,
                         constructorSyntax.AttributeLists,

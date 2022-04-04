@@ -120,8 +120,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                 ThreadHelper.ThrowIfNotOnUIThread();
 
                 if (_componentModel_doNotAccessDirectly == null)
-                    _componentModel_doNotAccessDirectly = (IComponentModel)
-                        GetService(typeof(SComponentModel));
+                    _componentModel_doNotAccessDirectly = (IComponentModel)GetService(
+                        typeof(SComponentModel)
+                    );
 
                 return _componentModel_doNotAccessDirectly;
             }

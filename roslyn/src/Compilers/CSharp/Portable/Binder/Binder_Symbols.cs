@@ -1457,14 +1457,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 AliasSymbol discarded;
                 return NamespaceOrTypeOrAliasSymbolWithAnnotations.CreateUnannotated(
                     symbol.IsNullableEnabled,
-                    (NamespaceOrTypeSymbol)
-                        UnwrapAlias(
-                            symbol.Symbol,
-                            out discarded,
-                            diagnostics,
-                            syntax,
-                            basesBeingResolved
-                        )
+                    (NamespaceOrTypeSymbol)UnwrapAlias(
+                        symbol.Symbol,
+                        out discarded,
+                        diagnostics,
+                        syntax,
+                        basesBeingResolved
+                    )
                 );
             }
 
@@ -1483,14 +1482,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 return NamespaceOrTypeOrAliasSymbolWithAnnotations.CreateUnannotated(
                     symbol.IsNullableEnabled,
-                    (NamespaceOrTypeSymbol)
-                        UnwrapAlias(
-                            symbol.Symbol,
-                            out alias,
-                            diagnostics,
-                            syntax,
-                            basesBeingResolved
-                        )
+                    (NamespaceOrTypeSymbol)UnwrapAlias(
+                        symbol.Symbol,
+                        out alias,
+                        diagnostics,
+                        syntax,
+                        basesBeingResolved
+                    )
                 );
             }
 

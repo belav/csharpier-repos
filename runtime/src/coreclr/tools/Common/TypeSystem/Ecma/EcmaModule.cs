@@ -90,8 +90,8 @@ namespace Internal.TypeSystem.Ecma
                     case HandleKind.MethodDefinition:
 
                         {
-                            MethodDefinitionHandle methodDefinitionHandle = (MethodDefinitionHandle)
-                                handle;
+                            MethodDefinitionHandle methodDefinitionHandle =
+                                (MethodDefinitionHandle)handle;
                             TypeDefinitionHandle typeDefinitionHandle = _module._metadataReader
                                 .GetMethodDefinition(methodDefinitionHandle)
                                 .GetDeclaringType();
@@ -104,8 +104,8 @@ namespace Internal.TypeSystem.Ecma
                     case HandleKind.FieldDefinition:
 
                         {
-                            FieldDefinitionHandle fieldDefinitionHandle = (FieldDefinitionHandle)
-                                handle;
+                            FieldDefinitionHandle fieldDefinitionHandle =
+                                (FieldDefinitionHandle)handle;
                             TypeDefinitionHandle typeDefinitionHandle = _module._metadataReader
                                 .GetFieldDefinition(fieldDefinitionHandle)
                                 .GetDeclaringType();
@@ -750,12 +750,11 @@ namespace Internal.TypeSystem.Ecma
             if (typeDefinitionsCount == 0)
                 return null;
 
-            return (MetadataType)
-                GetType(
-                    MetadataTokens.EntityHandle(
-                        0x02000001 /* COR_GLOBAL_PARENT_TOKEN */
-                    )
-                );
+            return (MetadataType)GetType(
+                MetadataTokens.EntityHandle(
+                    0x02000001 /* COR_GLOBAL_PARENT_TOKEN */
+                )
+            );
         }
 
         protected static AssemblyContentType GetContentTypeFromAssemblyFlags(AssemblyFlags flags)

@@ -323,8 +323,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
 
             if (advanceExpression.Kind == OperationKind.SimpleAssignment)
             {
-                ISimpleAssignmentOperation advanceAssignment = (ISimpleAssignmentOperation)
-                    advanceExpression;
+                ISimpleAssignmentOperation advanceAssignment =
+                    (ISimpleAssignmentOperation)advanceExpression;
 
                 if (
                     advanceAssignment.Target.Kind == OperationKind.LocalReference
@@ -354,8 +354,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
             }
             else if (advanceExpression.Kind == OperationKind.CompoundAssignment)
             {
-                ICompoundAssignmentOperation advanceAssignment = (ICompoundAssignmentOperation)
-                    advanceExpression;
+                ICompoundAssignmentOperation advanceAssignment =
+                    (ICompoundAssignmentOperation)advanceExpression;
 
                 if (
                     advanceAssignment.Target.Kind == OperationKind.LocalReference
@@ -371,8 +371,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
             }
             else if (advanceExpression.Kind == OperationKind.Increment)
             {
-                IIncrementOrDecrementOperation advanceAssignment = (IIncrementOrDecrementOperation)
-                    advanceExpression;
+                IIncrementOrDecrementOperation advanceAssignment =
+                    (IIncrementOrDecrementOperation)advanceExpression;
 
                 if (
                     advanceAssignment.Target.Kind == OperationKind.LocalReference

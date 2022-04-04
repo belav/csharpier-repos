@@ -33,8 +33,11 @@ namespace System.Web.Helpers.AntiXsrf.Test
             AntiForgeryToken cookieToken
         )
         {
-            return (AntiForgeryToken)
-                GenerateFormToken(httpContext, identity, (AntiForgeryToken)cookieToken);
+            return (AntiForgeryToken)GenerateFormToken(
+                httpContext,
+                identity,
+                (AntiForgeryToken)cookieToken
+            );
         }
 
         bool ITokenValidator.IsCookieTokenValid(AntiForgeryToken cookieToken)

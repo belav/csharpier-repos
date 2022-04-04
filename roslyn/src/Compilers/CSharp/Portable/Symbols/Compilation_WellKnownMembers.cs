@@ -936,10 +936,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             // on exception stack traces. We always set this flag to avoid overhead of JIT loading the PDB.
             // The theoretical scenario for not setting it would be a language compiler that wants their sequence points
             // at specific places, but those places don't match what CLR's heuristics calculate when scanning the IL.
-            var ignoreSymbolStoreDebuggingMode = (FieldSymbol?)
-                GetWellKnownTypeMember(
-                    WellKnownMember.System_Diagnostics_DebuggableAttribute_DebuggingModes__IgnoreSymbolStoreSequencePoints
-                );
+            var ignoreSymbolStoreDebuggingMode = (FieldSymbol?)GetWellKnownTypeMember(
+                WellKnownMember.System_Diagnostics_DebuggableAttribute_DebuggingModes__IgnoreSymbolStoreSequencePoints
+            );
             if (
                 ignoreSymbolStoreDebuggingMode is null
                 || !ignoreSymbolStoreDebuggingMode.HasConstantValue
@@ -963,19 +962,17 @@ namespace Microsoft.CodeAnalysis.CSharp
             // Default | DisableOptimizations               JIT optimizations disabled
             if (_options.OptimizationLevel == OptimizationLevel.Debug)
             {
-                var defaultDebuggingMode = (FieldSymbol?)
-                    GetWellKnownTypeMember(
-                        WellKnownMember.System_Diagnostics_DebuggableAttribute_DebuggingModes__Default
-                    );
+                var defaultDebuggingMode = (FieldSymbol?)GetWellKnownTypeMember(
+                    WellKnownMember.System_Diagnostics_DebuggableAttribute_DebuggingModes__Default
+                );
                 if (defaultDebuggingMode is null || !defaultDebuggingMode.HasConstantValue)
                 {
                     return null;
                 }
 
-                var disableOptimizationsDebuggingMode = (FieldSymbol?)
-                    GetWellKnownTypeMember(
-                        WellKnownMember.System_Diagnostics_DebuggableAttribute_DebuggingModes__DisableOptimizations
-                    );
+                var disableOptimizationsDebuggingMode = (FieldSymbol?)GetWellKnownTypeMember(
+                    WellKnownMember.System_Diagnostics_DebuggableAttribute_DebuggingModes__DisableOptimizations
+                );
                 if (
                     disableOptimizationsDebuggingMode is null
                     || !disableOptimizationsDebuggingMode.HasConstantValue
@@ -1000,10 +997,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (_options.EnableEditAndContinue)
             {
-                var enableEncDebuggingMode = (FieldSymbol?)
-                    GetWellKnownTypeMember(
-                        WellKnownMember.System_Diagnostics_DebuggableAttribute_DebuggingModes__EnableEditAndContinue
-                    );
+                var enableEncDebuggingMode = (FieldSymbol?)GetWellKnownTypeMember(
+                    WellKnownMember.System_Diagnostics_DebuggableAttribute_DebuggingModes__EnableEditAndContinue
+                );
                 if (enableEncDebuggingMode is null || !enableEncDebuggingMode.HasConstantValue)
                 {
                     return null;

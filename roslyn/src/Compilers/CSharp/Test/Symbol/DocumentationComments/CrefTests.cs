@@ -1022,8 +1022,9 @@ class B<T>
 }
 ";
 
-            var compilation = (Compilation)
-                CreateCompilationWithMscorlib40AndDocumentationComments(source);
+            var compilation = (Compilation)CreateCompilationWithMscorlib40AndDocumentationComments(
+                source
+            );
             var model = compilation.GetSemanticModel(compilation.SyntaxTrees.Single());
 
             var crefs = GetCrefSyntaxes(compilation);
@@ -1118,8 +1119,9 @@ class Other
 }
 ";
 
-            var compilation = (Compilation)
-                CreateCompilationWithMscorlib40AndDocumentationComments(source);
+            var compilation = (Compilation)CreateCompilationWithMscorlib40AndDocumentationComments(
+                source
+            );
             var model = compilation.GetSemanticModel(compilation.SyntaxTrees.Single());
 
             var crefs = GetCrefSyntaxes(compilation);
@@ -1217,8 +1219,9 @@ class B<T>
 }
 ";
 
-            var compilation = (Compilation)
-                CreateCompilationWithMscorlib40AndDocumentationComments(source);
+            var compilation = (Compilation)CreateCompilationWithMscorlib40AndDocumentationComments(
+                source
+            );
             var model = compilation.GetSemanticModel(compilation.SyntaxTrees.Single());
 
             var crefs = GetCrefSyntaxes(compilation);
@@ -5623,8 +5626,9 @@ class Derived : Base
 }
 ";
 
-            var compilation = (Compilation)
-                CreateCompilationWithMscorlib40AndDocumentationComments(source);
+            var compilation = (Compilation)CreateCompilationWithMscorlib40AndDocumentationComments(
+                source
+            );
             compilation.VerifyDiagnostics();
 
             var model = compilation.GetSemanticModel(compilation.SyntaxTrees.Single());
@@ -5693,8 +5697,9 @@ class Derived : Base
 }
 ";
 
-            var compilation = (Compilation)
-                CreateCompilationWithMscorlib40AndDocumentationComments(source);
+            var compilation = (Compilation)CreateCompilationWithMscorlib40AndDocumentationComments(
+                source
+            );
             compilation.VerifyDiagnostics();
 
             var model = compilation.GetSemanticModel(compilation.SyntaxTrees.Single());
@@ -5724,8 +5729,9 @@ class Derived : Base
 }
 ";
 
-            var compilation = (Compilation)
-                CreateCompilationWithMscorlib40AndDocumentationComments(source);
+            var compilation = (Compilation)CreateCompilationWithMscorlib40AndDocumentationComments(
+                source
+            );
             compilation.VerifyDiagnostics();
 
             var model = compilation.GetSemanticModel(compilation.SyntaxTrees.Single());
@@ -5791,8 +5797,9 @@ class Derived : Base
 }
 ";
 
-            var compilation = (Compilation)
-                CreateCompilationWithMscorlib40AndDocumentationComments(source);
+            var compilation = (Compilation)CreateCompilationWithMscorlib40AndDocumentationComments(
+                source
+            );
             compilation.VerifyDiagnostics();
 
             var model = compilation.GetSemanticModel(compilation.SyntaxTrees.Single());
@@ -5831,11 +5838,10 @@ class Derived : Base
 }
 ";
 
-            var compilation = (Compilation)
-                CreateCompilationWithMscorlib40AndSystemCore(
-                    source,
-                    parseOptions: TestOptions.RegularWithDocumentationComments
-                );
+            var compilation = (Compilation)CreateCompilationWithMscorlib40AndSystemCore(
+                source,
+                parseOptions: TestOptions.RegularWithDocumentationComments
+            );
             compilation.VerifyDiagnostics(
                 // (15,16): warning CS1574: XML comment has cref attribute 'Derived.M2' that could not be resolved
                 // /// <see cref="Derived.M2" />
@@ -5874,11 +5880,10 @@ class G<T> { }
 class Other { }
 ";
 
-            var compilation = (Compilation)
-                CreateCompilationWithMscorlib40AndDocumentationComments(
-                    source,
-                    new[] { SystemCoreRef }
-                );
+            var compilation = (Compilation)CreateCompilationWithMscorlib40AndDocumentationComments(
+                source,
+                new[] { SystemCoreRef }
+            );
             compilation.VerifyDiagnostics(
                 // (6,22): warning CS1574: XML comment has cref attribute 'G()' that could not be resolved
                 // /// Error <see cref="G()"/>.
@@ -5959,11 +5964,10 @@ class Outer<T>
 }
 ";
 
-            var compilation = (Compilation)
-                CreateCompilationWithMscorlib40AndDocumentationComments(
-                    source,
-                    new[] { SystemCoreRef }
-                );
+            var compilation = (Compilation)CreateCompilationWithMscorlib40AndDocumentationComments(
+                source,
+                new[] { SystemCoreRef }
+            );
             compilation.VerifyDiagnostics(
                 // (2,16): warning CS1574: XML comment has cref attribute 'Outer{T}.Outer' that could not be resolved
                 // /// <see cref="Outer{T}.Outer"/>
@@ -6015,8 +6019,9 @@ class SomeOtherClass
 }
 ";
             var tree = Parse(source, options: TestOptions.RegularWithDocumentationComments);
-            var compilation = (Compilation)
-                CreateCompilationWithMscorlib40AndSystemCore(new[] { tree });
+            var compilation = (Compilation)CreateCompilationWithMscorlib40AndSystemCore(
+                new[] { tree }
+            );
             compilation.VerifyDiagnostics(
                 // (15,34): warning CS1574: XML comment has cref attribute 'GenericClass' that could not be resolved
                 // /// You may also like <see cref="GenericClass"/>. <see cref="GenericClass{T}"/> provides you some interesting methods.
@@ -6137,8 +6142,9 @@ class C<T>
 ";
 
             SyntaxTree tree = Parse(source, options: TestOptions.RegularWithDocumentationComments);
-            var compilation = (Compilation)
-                CreateCompilationWithMscorlib40AndSystemCore(new[] { tree });
+            var compilation = (Compilation)CreateCompilationWithMscorlib40AndSystemCore(
+                new[] { tree }
+            );
             compilation.VerifyDiagnostics();
 
             var type = compilation.GlobalNamespace.GetMember<INamedTypeSymbol>("C");
@@ -6318,8 +6324,9 @@ class Program
 }
 ";
 
-            var compilation = (Compilation)
-                CreateCompilationWithMscorlib40AndDocumentationComments(source);
+            var compilation = (Compilation)CreateCompilationWithMscorlib40AndDocumentationComments(
+                source
+            );
             compilation.VerifyDiagnostics(
                 // (2,20): warning CS1570: XML comment has badly formed XML -- 'Duplicate 'cref' attribute'
                 // /// <see cref="int" cref="long"/>
@@ -6377,8 +6384,9 @@ class C
 }
 ";
 
-            var compilation = (Compilation)
-                CreateCompilationWithMscorlib40AndDocumentationComments(source);
+            var compilation = (Compilation)CreateCompilationWithMscorlib40AndDocumentationComments(
+                source
+            );
             compilation.VerifyDiagnostics();
 
             var model = compilation.GetSemanticModel(compilation.SyntaxTrees.Single());
@@ -6408,8 +6416,9 @@ class C<T>
 }
 ";
 
-            var compilation = (Compilation)
-                CreateCompilationWithMscorlib40AndDocumentationComments(source);
+            var compilation = (Compilation)CreateCompilationWithMscorlib40AndDocumentationComments(
+                source
+            );
             compilation.VerifyDiagnostics();
 
             var model = compilation.GetSemanticModel(compilation.SyntaxTrees.Single());
@@ -6434,8 +6443,9 @@ class Outer<T> where T: System.IFormattable
 }
 ";
 
-            var compilation = (Compilation)
-                CreateCompilationWithMscorlib40AndDocumentationComments(source);
+            var compilation = (Compilation)CreateCompilationWithMscorlib40AndDocumentationComments(
+                source
+            );
             compilation.VerifyDiagnostics();
 
             var model = compilation.GetSemanticModel(compilation.SyntaxTrees.Single());
@@ -6540,8 +6550,9 @@ class C
 }
 ";
 
-            var compilation = (Compilation)
-                CreateCompilationWithMscorlib40AndDocumentationComments(source);
+            var compilation = (Compilation)CreateCompilationWithMscorlib40AndDocumentationComments(
+                source
+            );
             compilation.VerifyDiagnostics(
                 // (6,9): warning CS1587: XML comment is not placed on a valid language element
                 //         /// <see cref="C"/>
@@ -6573,8 +6584,9 @@ class C
 }
 ";
 
-            var compilation = (Compilation)
-                CreateCompilationWithMscorlib40AndDocumentationComments(source);
+            var compilation = (Compilation)CreateCompilationWithMscorlib40AndDocumentationComments(
+                source
+            );
             compilation.VerifyDiagnostics(
                 // (6,9): warning CS1587: XML comment is not placed on a valid language element
                 //         /// <see cref="C"/>
@@ -6829,8 +6841,9 @@ using System;
 class C { }
 ";
 
-            var compilation = (Compilation)
-                CreateCompilationWithMscorlib40AndDocumentationComments(source);
+            var compilation = (Compilation)CreateCompilationWithMscorlib40AndDocumentationComments(
+                source
+            );
             compilation.VerifyDiagnostics();
 
             var delegateConstructor = compilation.GlobalNamespace
@@ -6887,8 +6900,9 @@ class GetEnumerator
 }
 ";
 
-            var compilation = (Compilation)
-                CreateCompilationWithMscorlib40AndDocumentationComments(source);
+            var compilation = (Compilation)CreateCompilationWithMscorlib40AndDocumentationComments(
+                source
+            );
             compilation.VerifyDiagnostics();
 
             var expectedSymbol = compilation.GlobalNamespace.GetMember<INamedTypeSymbol>(
@@ -6914,8 +6928,9 @@ class GetEnumerator
 enum E { }
 ";
 
-            var compilation = (Compilation)
-                CreateCompilationWithMscorlib40AndDocumentationComments(source);
+            var compilation = (Compilation)CreateCompilationWithMscorlib40AndDocumentationComments(
+                source
+            );
             compilation.VerifyDiagnostics();
 
             var expectedSymbol = compilation
@@ -6974,8 +6989,9 @@ enum E { }
 class C { }
 ";
 
-            var compilation = (Compilation)
-                CreateCompilationWithMscorlib40AndDocumentationComments(source);
+            var compilation = (Compilation)CreateCompilationWithMscorlib40AndDocumentationComments(
+                source
+            );
             compilation.VerifyDiagnostics();
 
             var expectedSymbol = compilation.GlobalNamespace
@@ -7032,8 +7048,9 @@ class C<T>
 }
 ";
 
-            var compilation = (Compilation)
-                CreateCompilationWithMscorlib40AndDocumentationComments(source);
+            var compilation = (Compilation)CreateCompilationWithMscorlib40AndDocumentationComments(
+                source
+            );
             compilation.VerifyDiagnostics();
 
             var expectedSymbolOriginalDefinition = compilation.GlobalNamespace
@@ -7133,8 +7150,9 @@ class X
 }
 ";
 
-            var compilation = (Compilation)
-                CreateCompilationWithMscorlib40AndDocumentationComments(source);
+            var compilation = (Compilation)CreateCompilationWithMscorlib40AndDocumentationComments(
+                source
+            );
             compilation.VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
@@ -7176,8 +7194,9 @@ class A<T>
 }
 ";
 
-            var compilation = (Compilation)
-                CreateCompilationWithMscorlib40AndDocumentationComments(source);
+            var compilation = (Compilation)CreateCompilationWithMscorlib40AndDocumentationComments(
+                source
+            );
             compilation.VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
@@ -7219,8 +7238,9 @@ class Outer<T>
 }
 ";
 
-            var compilation = (Compilation)
-                CreateCompilationWithMscorlib40AndDocumentationComments(source);
+            var compilation = (Compilation)CreateCompilationWithMscorlib40AndDocumentationComments(
+                source
+            );
             compilation.VerifyDiagnostics(
                 // (6,31): warning CS8018: Within cref attributes, nested types of generic types should be qualified.
                 //     /// <see cref='Outer{Q}.M(Inner)'/>
@@ -7260,8 +7280,9 @@ using A = System.Int32;
 class C { }
 ";
 
-            var compilation = (Compilation)
-                CreateCompilationWithMscorlib40AndDocumentationComments(source);
+            var compilation = (Compilation)CreateCompilationWithMscorlib40AndDocumentationComments(
+                source
+            );
             compilation.VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
@@ -7294,8 +7315,9 @@ class C
 }
 ";
 
-            var compilation = (Compilation)
-                CreateCompilationWithMscorlib40AndDocumentationComments(source);
+            var compilation = (Compilation)CreateCompilationWithMscorlib40AndDocumentationComments(
+                source
+            );
             compilation.VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
@@ -7387,9 +7409,8 @@ class P
         [WorkItem(760850, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/760850")]
         public void TestGetSpeculativeSymbolInfoInsideCrefParameterOrReturnType()
         {
-            var compilation = (Compilation)
-                CreateCompilationWithMscorlib40AndDocumentationComments(
-                    @"
+            var compilation = (Compilation)CreateCompilationWithMscorlib40AndDocumentationComments(
+                @"
 class Base
 {
     class Inherited { }
@@ -7408,7 +7429,7 @@ class Outer
     }
 }
 "
-                );
+            );
             var tree = compilation.SyntaxTrees.First();
             var cref = (ConversionOperatorMemberCrefSyntax)GetCrefSyntaxes(compilation).Single();
             var crefReturnType = cref.Type;
@@ -7630,8 +7651,9 @@ class C<T>
 }
 ";
 
-            var compilation = (Compilation)
-                CreateCompilationWithMscorlib40AndDocumentationComments(source);
+            var compilation = (Compilation)CreateCompilationWithMscorlib40AndDocumentationComments(
+                source
+            );
             compilation.VerifyDiagnostics();
 
             var model = compilation.GetSemanticModel(compilation.SyntaxTrees.Single());
@@ -7658,8 +7680,9 @@ class C<T>
 }
 ";
 
-            var compilation = (Compilation)
-                CreateCompilationWithMscorlib40AndDocumentationComments(source);
+            var compilation = (Compilation)CreateCompilationWithMscorlib40AndDocumentationComments(
+                source
+            );
             compilation.VerifyDiagnostics(
                 // (3,16): warning CS1584: XML comment has syntactically incorrect cref attribute 'C{}'
                 // /// <see cref="C{}" />
@@ -7704,8 +7727,9 @@ class C<T>
 class C { }
 ";
 
-            var compilation = (Compilation)
-                CreateCompilationWithMscorlib40AndDocumentationComments(source);
+            var compilation = (Compilation)CreateCompilationWithMscorlib40AndDocumentationComments(
+                source
+            );
             compilation.VerifyDiagnostics(
                 // (2,16): warning CS1584: XML comment has syntactically incorrect cref attribute 'C[]'
                 // /// <see cref="C[]" />
@@ -7732,8 +7756,9 @@ class C { }
 class C { }
 ";
 
-            var compilation = (Compilation)
-                CreateCompilationWithMscorlib40AndDocumentationComments(source);
+            var compilation = (Compilation)CreateCompilationWithMscorlib40AndDocumentationComments(
+                source
+            );
             compilation.VerifyDiagnostics(
                 // (2,16): warning CS1584: XML comment has syntactically incorrect cref attribute 'C?'
                 // /// <see cref="C?" />
@@ -7761,8 +7786,9 @@ class C { }
 class Cat { }
 ";
 
-            var compilation = (Compilation)
-                CreateCompilationWithMscorlib40AndDocumentationComments(source);
+            var compilation = (Compilation)CreateCompilationWithMscorlib40AndDocumentationComments(
+                source
+            );
             compilation.VerifyDiagnostics(
                 // (2,16): warning CS1584: XML comment has syntactically incorrect cref attribute 'Cat:-)'
                 // /// <see cref="Cat:-)" />

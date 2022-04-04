@@ -430,8 +430,11 @@ namespace System.Xml.Serialization
             string typeName = XsdTypeName(model.Type, a, model.TypeDesc.Name);
             typeName = XmlConvert.EncodeLocalName(typeName);
 
-            StructMapping? mapping = (StructMapping?)
-                GetTypeMapping(typeName, typeNs, model.TypeDesc);
+            StructMapping? mapping = (StructMapping?)GetTypeMapping(
+                typeName,
+                typeNs,
+                model.TypeDesc
+            );
             if (mapping == null)
             {
                 mapping = new StructMapping();

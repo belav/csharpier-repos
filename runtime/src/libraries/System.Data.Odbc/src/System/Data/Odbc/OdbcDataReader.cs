@@ -563,13 +563,12 @@ namespace System.Data.Odbc
                             {
                                 //Delegate (for the sub type)
                                 ODBC32.SQL_TYPE subtype = (ODBC32.SQL_TYPE)
-                                    (int)
-                                        GetColAttribute(
-                                            i,
-                                            (ODBC32.SQL_DESC)ODBC32.SQL_CA_SS.VARIANT_SQL_TYPE,
-                                            (ODBC32.SQL_COLUMN)(-1),
-                                            ODBC32.HANDLER.THROW
-                                        );
+                                    (int)GetColAttribute(
+                                        i,
+                                        (ODBC32.SQL_DESC)ODBC32.SQL_CA_SS.VARIANT_SQL_TYPE,
+                                        (ODBC32.SQL_COLUMN)(-1),
+                                        ODBC32.HANDLER.THROW
+                                    );
                                 return GetValue(i, TypeMap.FromSqlType(subtype));
                             }
                         }
@@ -620,13 +619,12 @@ namespace System.Data.Odbc
             {
                 info._dbtype = unchecked(
                     (ODBC32.SQL_TYPE)
-                        (int)
-                            GetColAttribute(
-                                i,
-                                ODBC32.SQL_DESC.CONCISE_TYPE,
-                                ODBC32.SQL_COLUMN.TYPE,
-                                ODBC32.HANDLER.THROW
-                            )
+                        (int)GetColAttribute(
+                            i,
+                            ODBC32.SQL_DESC.CONCISE_TYPE,
+                            ODBC32.SQL_COLUMN.TYPE,
+                            ODBC32.HANDLER.THROW
+                        )
                 );
                 typeMap = TypeMap.FromSqlType(info._dbtype.Value);
                 if (typeMap._signType == true)
@@ -2273,13 +2271,12 @@ namespace System.Data.Odbc
                 typeMap = TypeMap.FromSqlType(
                     (ODBC32.SQL_TYPE)
                         unchecked(
-                            (int)
-                                GetColAttribute(
-                                    i,
-                                    ODBC32.SQL_DESC.CONCISE_TYPE,
-                                    ODBC32.SQL_COLUMN.TYPE,
-                                    ODBC32.HANDLER.THROW
-                                )
+                            (int)GetColAttribute(
+                                i,
+                                ODBC32.SQL_DESC.CONCISE_TYPE,
+                                ODBC32.SQL_COLUMN.TYPE,
+                                ODBC32.HANDLER.THROW
+                            )
                         )
                 );
                 if (typeMap._signType == true)
@@ -2316,20 +2313,18 @@ namespace System.Data.Odbc
                         break;
                 }
 
-                metaInfos[i].precision = (byte)
-                    GetColAttribute(
-                        i,
-                        (ODBC32.SQL_DESC)ODBC32.SQL_COLUMN.PRECISION,
-                        ODBC32.SQL_COLUMN.PRECISION,
-                        ODBC32.HANDLER.IGNORE
-                    );
-                metaInfos[i].scale = (byte)
-                    GetColAttribute(
-                        i,
-                        (ODBC32.SQL_DESC)ODBC32.SQL_COLUMN.SCALE,
-                        ODBC32.SQL_COLUMN.SCALE,
-                        ODBC32.HANDLER.IGNORE
-                    );
+                metaInfos[i].precision = (byte)GetColAttribute(
+                    i,
+                    (ODBC32.SQL_DESC)ODBC32.SQL_COLUMN.PRECISION,
+                    ODBC32.SQL_COLUMN.PRECISION,
+                    ODBC32.HANDLER.IGNORE
+                );
+                metaInfos[i].scale = (byte)GetColAttribute(
+                    i,
+                    (ODBC32.SQL_DESC)ODBC32.SQL_COLUMN.SCALE,
+                    ODBC32.SQL_COLUMN.SCALE,
+                    ODBC32.HANDLER.IGNORE
+                );
 
                 metaInfos[i].isAutoIncrement =
                     GetColAttribute(
@@ -2348,13 +2343,12 @@ namespace System.Data.Odbc
                 );
 
                 nullable = (ODBC32.SQL_NULLABILITY)
-                    (int)
-                        GetColAttribute(
-                            i,
-                            ODBC32.SQL_DESC.NULLABLE,
-                            ODBC32.SQL_COLUMN.NULLABLE,
-                            ODBC32.HANDLER.IGNORE
-                        );
+                    (int)GetColAttribute(
+                        i,
+                        ODBC32.SQL_DESC.NULLABLE,
+                        ODBC32.SQL_COLUMN.NULLABLE,
+                        ODBC32.HANDLER.IGNORE
+                    );
                 metaInfos[i].isNullable = (nullable == ODBC32.SQL_NULLABILITY.NULLABLE);
 
                 switch (metaInfos[i].typemap._sql_type)

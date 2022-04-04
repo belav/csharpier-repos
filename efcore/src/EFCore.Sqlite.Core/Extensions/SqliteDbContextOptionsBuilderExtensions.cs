@@ -147,8 +147,10 @@ namespace Microsoft.EntityFrameworkCore
             this DbContextOptionsBuilder<TContext> optionsBuilder,
             Action<SqliteDbContextOptionsBuilder>? sqliteOptionsAction = null
         ) where TContext : DbContext =>
-            (DbContextOptionsBuilder<TContext>)
-                UseSqlite((DbContextOptionsBuilder)optionsBuilder, sqliteOptionsAction);
+            (DbContextOptionsBuilder<TContext>)UseSqlite(
+                (DbContextOptionsBuilder)optionsBuilder,
+                sqliteOptionsAction
+            );
 
         /// <summary>
         ///     Configures the context to connect to a SQLite database.
@@ -167,12 +169,11 @@ namespace Microsoft.EntityFrameworkCore
             string connectionString,
             Action<SqliteDbContextOptionsBuilder>? sqliteOptionsAction = null
         ) where TContext : DbContext =>
-            (DbContextOptionsBuilder<TContext>)
-                UseSqlite(
-                    (DbContextOptionsBuilder)optionsBuilder,
-                    connectionString,
-                    sqliteOptionsAction
-                );
+            (DbContextOptionsBuilder<TContext>)UseSqlite(
+                (DbContextOptionsBuilder)optionsBuilder,
+                connectionString,
+                sqliteOptionsAction
+            );
 
         /// <summary>
         ///     Configures the context to connect to a SQLite database.
@@ -195,8 +196,11 @@ namespace Microsoft.EntityFrameworkCore
             DbConnection connection,
             Action<SqliteDbContextOptionsBuilder>? sqliteOptionsAction = null
         ) where TContext : DbContext =>
-            (DbContextOptionsBuilder<TContext>)
-                UseSqlite((DbContextOptionsBuilder)optionsBuilder, connection, sqliteOptionsAction);
+            (DbContextOptionsBuilder<TContext>)UseSqlite(
+                (DbContextOptionsBuilder)optionsBuilder,
+                connection,
+                sqliteOptionsAction
+            );
 
         private static SqliteOptionsExtension GetOrCreateExtension(
             DbContextOptionsBuilder options

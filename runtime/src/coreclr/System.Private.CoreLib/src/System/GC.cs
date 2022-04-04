@@ -528,8 +528,12 @@ namespace System
                 }
             }
 
-            StartNoGCRegionStatus status = (StartNoGCRegionStatus)
-                _StartNoGCRegion(totalSize, hasLohSize, lohSize, disallowFullBlockingGC);
+            StartNoGCRegionStatus status = (StartNoGCRegionStatus)_StartNoGCRegion(
+                totalSize,
+                hasLohSize,
+                lohSize,
+                disallowFullBlockingGC
+            );
             switch (status)
             {
                 case StartNoGCRegionStatus.NotEnoughMemory:

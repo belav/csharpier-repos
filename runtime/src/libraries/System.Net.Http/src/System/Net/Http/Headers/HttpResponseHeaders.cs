@@ -79,8 +79,9 @@ namespace System.Net.Http.Headers
         {
             get
             {
-                return (RetryConditionHeaderValue?)
-                    GetParsedValues(KnownHeaders.RetryAfter.Descriptor);
+                return (RetryConditionHeaderValue?)GetParsedValues(
+                    KnownHeaders.RetryAfter.Descriptor
+                );
             }
             set { SetOrRemoveParsedValue(KnownHeaders.RetryAfter.Descriptor, value); }
         }

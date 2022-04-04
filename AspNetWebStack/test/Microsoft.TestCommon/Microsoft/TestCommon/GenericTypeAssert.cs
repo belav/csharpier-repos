@@ -485,14 +485,13 @@ namespace Microsoft.TestCommon
             object[] parameterValues
         )
         {
-            return (T)
-                InvokeGenericMethod(
-                    instance,
-                    methodName,
-                    genericParameterType,
-                    parameterTypes,
-                    parameterValues
-                );
+            return (T)InvokeGenericMethod(
+                instance,
+                methodName,
+                genericParameterType,
+                parameterTypes,
+                parameterValues
+            );
         }
 
         /// <summary>

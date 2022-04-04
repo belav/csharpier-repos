@@ -51,8 +51,12 @@ internal static partial class Interop
             int chainDepth
         )
         {
-            X509VerifyStatusCode response = (X509VerifyStatusCode)
-                CryptoNative_X509ChainGetCachedOcspStatus(ctx, cachePath, chainDepth);
+            X509VerifyStatusCode response =
+                (X509VerifyStatusCode)CryptoNative_X509ChainGetCachedOcspStatus(
+                    ctx,
+                    cachePath,
+                    chainDepth
+                );
 
             if (response.Code < 0)
             {
@@ -80,8 +84,13 @@ internal static partial class Interop
             int chainDepth
         )
         {
-            X509VerifyStatusCode response = (X509VerifyStatusCode)
-                CryptoNative_X509ChainVerifyOcsp(ctx, req, resp, cachePath, chainDepth);
+            X509VerifyStatusCode response = (X509VerifyStatusCode)CryptoNative_X509ChainVerifyOcsp(
+                ctx,
+                req,
+                resp,
+                cachePath,
+                chainDepth
+            );
 
             if (response.Code < 0)
             {

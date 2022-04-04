@@ -136,13 +136,12 @@ namespace System.IO
 
         public FileInfo[] GetFiles(string searchPattern, EnumerationOptions enumerationOptions) =>
             (
-                (IEnumerable<FileInfo>)
-                    InternalEnumerateInfos(
-                        FullPath,
-                        searchPattern,
-                        SearchTarget.Files,
-                        enumerationOptions
-                    )
+                (IEnumerable<FileInfo>)InternalEnumerateInfos(
+                    FullPath,
+                    searchPattern,
+                    SearchTarget.Files,
+                    enumerationOptions
+                )
             ).ToArray();
 
         // Returns an array of strongly typed FileSystemInfo entries which will contain a listing
@@ -184,13 +183,12 @@ namespace System.IO
             EnumerationOptions enumerationOptions
         ) =>
             (
-                (IEnumerable<DirectoryInfo>)
-                    InternalEnumerateInfos(
-                        FullPath,
-                        searchPattern,
-                        SearchTarget.Directories,
-                        enumerationOptions
-                    )
+                (IEnumerable<DirectoryInfo>)InternalEnumerateInfos(
+                    FullPath,
+                    searchPattern,
+                    SearchTarget.Directories,
+                    enumerationOptions
+                )
             ).ToArray();
 
         public IEnumerable<DirectoryInfo> EnumerateDirectories() =>
@@ -208,13 +206,12 @@ namespace System.IO
             string searchPattern,
             EnumerationOptions enumerationOptions
         ) =>
-            (IEnumerable<DirectoryInfo>)
-                InternalEnumerateInfos(
-                    FullPath,
-                    searchPattern,
-                    SearchTarget.Directories,
-                    enumerationOptions
-                );
+            (IEnumerable<DirectoryInfo>)InternalEnumerateInfos(
+                FullPath,
+                searchPattern,
+                SearchTarget.Directories,
+                enumerationOptions
+            );
 
         public IEnumerable<FileInfo> EnumerateFiles() =>
             EnumerateFiles("*", enumerationOptions: EnumerationOptions.Compatible);
@@ -231,13 +228,12 @@ namespace System.IO
             string searchPattern,
             EnumerationOptions enumerationOptions
         ) =>
-            (IEnumerable<FileInfo>)
-                InternalEnumerateInfos(
-                    FullPath,
-                    searchPattern,
-                    SearchTarget.Files,
-                    enumerationOptions
-                );
+            (IEnumerable<FileInfo>)InternalEnumerateInfos(
+                FullPath,
+                searchPattern,
+                SearchTarget.Files,
+                enumerationOptions
+            );
 
         public IEnumerable<FileSystemInfo> EnumerateFileSystemInfos() =>
             EnumerateFileSystemInfos("*", enumerationOptions: EnumerationOptions.Compatible);

@@ -472,8 +472,10 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                         case SyntaxKind.ForEachStatement:
                         case SyntaxKind.ForEachVariableStatement:
                             Debug.Assert(!isBody);
-                            statementPart = (int)
-                                GetStatementPart((CommonForEachStatementSyntax)node, position);
+                            statementPart = (int)GetStatementPart(
+                                (CommonForEachStatementSyntax)node,
+                                position
+                            );
                             return node;
 
                         case SyntaxKind.DoStatement:

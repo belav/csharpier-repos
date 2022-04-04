@@ -184,12 +184,11 @@ namespace System.Data.OleDb
                 if ((0 <= hr) || (OleDbHResult.DB_E_ALREADYINITIALIZED == hr))
                 {
                     // call IUnknown::QueryInterface via the delegate
-                    hr = (OleDbHResult)
-                        QueryInterface(
-                            base.handle,
-                            ref ODB.IID_IDBCreateSession,
-                            ref idbCreateSession
-                        );
+                    hr = (OleDbHResult)QueryInterface(
+                        base.handle,
+                        ref ODB.IID_IDBCreateSession,
+                        ref idbCreateSession
+                    );
                     if ((0 <= hr) && (IntPtr.Zero != idbCreateSession))
                     {
                         // native COM rules are the QI result is the 'this' pointer

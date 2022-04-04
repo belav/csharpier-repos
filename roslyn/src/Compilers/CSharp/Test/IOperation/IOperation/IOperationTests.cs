@@ -638,8 +638,9 @@ public class Test
             var model = comp.GetSemanticModel(tree);
 
             // Verify we return non-null operation only for topmost member access expression.
-            var expr = (MemberAccessExpressionSyntax)
-                GetExprSyntaxForBinding(GetExprSyntaxList(tree));
+            var expr = (MemberAccessExpressionSyntax)GetExprSyntaxForBinding(
+                GetExprSyntaxList(tree)
+            );
             Assert.Equal("a.b", expr.ToString());
             var operation = model.GetOperation(expr);
             Assert.NotNull(operation);

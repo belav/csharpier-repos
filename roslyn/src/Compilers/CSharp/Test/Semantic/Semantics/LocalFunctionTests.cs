@@ -2079,9 +2079,8 @@ class C
         [Fact]
         public void TypeParameterAttributesInSemanticModel()
         {
-            var comp = (Compilation)
-                CreateCompilation(
-                    @"
+            var comp = (Compilation)CreateCompilation(
+                @"
 using System;
 class C
 {
@@ -2090,8 +2089,8 @@ class C
         void Local<[A]T, [CLSCompliant]U>() { }
     }
 }",
-                    parseOptions: TestOptions.Regular9
-                );
+                parseOptions: TestOptions.Regular9
+            );
             comp.VerifyDiagnostics(
                 // (7,21): error CS0246: The type or namespace name 'AAttribute' could not be found (are you missing a using directive or an assembly reference?)
                 //         void Local<[A]T, [CLSCompliant]U>() { }
@@ -2179,9 +2178,8 @@ class C
         [Fact]
         public void ParameterAttributesInSemanticModel()
         {
-            var comp = (Compilation)
-                CreateCompilation(
-                    @"
+            var comp = (Compilation)CreateCompilation(
+                @"
 using System;
 class C
 {
@@ -2190,8 +2188,8 @@ class C
         void Local([A]int x, [CLSCompliant]int y) { }
     }
 }",
-                    parseOptions: TestOptions.Regular9
-                );
+                parseOptions: TestOptions.Regular9
+            );
             comp.VerifyDiagnostics(
                 // (7,21): error CS0246: The type or namespace name 'AAttribute' could not be found (are you missing a using directive or an assembly reference?)
                 //         void Local([A]int x, [CLSCompliant]int y) { }

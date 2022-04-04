@@ -71,11 +71,10 @@ namespace System.Net.Http
                           : WinHttpHandler.HttpVersionUnknown;
                 }
 
-                response.StatusCode = (HttpStatusCode)
-                    GetResponseHeaderNumberInfo(
-                        requestHandle,
-                        Interop.WinHttp.WINHTTP_QUERY_STATUS_CODE
-                    );
+                response.StatusCode = (HttpStatusCode)GetResponseHeaderNumberInfo(
+                    requestHandle,
+                    Interop.WinHttp.WINHTTP_QUERY_STATUS_CODE
+                );
 
                 int reasonPhraseLength = GetResponseHeader(
                     requestHandle,

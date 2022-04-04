@@ -873,8 +873,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                         {
                             var entityShaper = (EntityShaperExpression)
                                 entityReferenceExpression.SubqueryEntity.ShaperExpression;
-                            var entityProjection = (EntityProjectionExpression)
-                                Visit(entityShaper.ValueBufferExpression);
+                            var entityProjection = (EntityProjectionExpression)Visit(
+                                entityShaper.ValueBufferExpression
+                            );
                             var subSelectExpression = (SelectExpression)
                                 entityReferenceExpression.SubqueryEntity.QueryExpression;
 
@@ -897,10 +898,9 @@ namespace Microsoft.EntityFrameworkCore.Query
 
                         if (entityReferenceExpression.ParameterEntity != null)
                         {
-                            var entityProjection = (EntityProjectionExpression)
-                                Visit(
-                                    entityReferenceExpression.ParameterEntity.ValueBufferExpression
-                                );
+                            var entityProjection = (EntityProjectionExpression)Visit(
+                                entityReferenceExpression.ParameterEntity.ValueBufferExpression
+                            );
 
                             return GeneratePredicateTPT(entityProjection);
                         }

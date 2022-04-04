@@ -656,8 +656,9 @@ class C<T>
     event System.Action E { add { } remove { } }
 }
 ";
-            var compilation = (Compilation)
-                CreateCompilationWithMscorlib40AndDocumentationComments(source);
+            var compilation = (Compilation)CreateCompilationWithMscorlib40AndDocumentationComments(
+                source
+            );
             var model = compilation.GetSemanticModel(compilation.SyntaxTrees.Single());
 
             int pos1 = source.IndexOf("pos1", StringComparison.Ordinal);
@@ -695,8 +696,9 @@ class C<T>
     event System.Action E;
 }
 ";
-            var compilation = (Compilation)
-                CreateCompilationWithMscorlib40AndDocumentationComments(source);
+            var compilation = (Compilation)CreateCompilationWithMscorlib40AndDocumentationComments(
+                source
+            );
             var model = compilation.GetSemanticModel(compilation.SyntaxTrees.Single());
 
             int pos1 = source.IndexOf("pos1", StringComparison.Ordinal);
@@ -757,8 +759,9 @@ class C
 }
 ";
 
-            var compilation = (Compilation)
-                CreateCompilationWithMscorlib40AndDocumentationComments(source);
+            var compilation = (Compilation)CreateCompilationWithMscorlib40AndDocumentationComments(
+                source
+            );
             var model = compilation.GetSemanticModel(compilation.SyntaxTrees.Single());
 
             var type = compilation.GlobalNamespace.GetMember<INamedTypeSymbol>("C");

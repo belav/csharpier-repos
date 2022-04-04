@@ -5719,11 +5719,10 @@ class C
                 memberOptions: SymbolDisplayMemberOptions.IncludeType,
                 miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes
             );
-            var comp = (Compilation)
-                CreateCompilationWithMscorlib46(
-                    text,
-                    references: new[] { SystemRuntimeFacadeRef, ValueTupleRef }
-                );
+            var comp = (Compilation)CreateCompilationWithMscorlib46(
+                text,
+                references: new[] { SystemRuntimeFacadeRef, ValueTupleRef }
+            );
             comp.VerifyDiagnostics();
             var symbol = comp.GetMember("C.f");
 
@@ -6334,12 +6333,11 @@ class B
     static object?[] F2(object[]? o) => null;
     static A<object>? F3(A<object?> o) => null;
 }";
-            var comp = (Compilation)
-                CreateCompilation(
-                    new[] { source },
-                    parseOptions: TestOptions.Regular8,
-                    options: WithNullableEnable()
-                );
+            var comp = (Compilation)CreateCompilation(
+                new[] { source },
+                parseOptions: TestOptions.Regular8,
+                options: WithNullableEnable()
+            );
             var formatWithoutNonNullableModifier = new SymbolDisplayFormat(
                 memberOptions: SymbolDisplayMemberOptions.IncludeParameters
                     | SymbolDisplayMemberOptions.IncludeType

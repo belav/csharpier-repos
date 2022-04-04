@@ -143,12 +143,11 @@ namespace System.ComponentModel.Composition.ReflectionModel
             {
                 if (string.IsNullOrEmpty(contractName))
                     continue;
-                var definition = (ICompositionElement)
-                    CreateReflectionExportDefinition(
-                        new LazyMemberInfo(typeof(string)),
-                        contractName,
-                        null
-                    );
+                var definition = (ICompositionElement)CreateReflectionExportDefinition(
+                    new LazyMemberInfo(typeof(string)),
+                    contractName,
+                    null
+                );
 
                 var e = CreateDisplayNameExpectation(contractName);
 
@@ -163,8 +162,11 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
             foreach (var type in types)
             {
-                var definition = (ICompositionElement)
-                    CreateReflectionExportDefinition(new LazyMemberInfo(type), "Contract", null);
+                var definition = (ICompositionElement)CreateReflectionExportDefinition(
+                    new LazyMemberInfo(type),
+                    "Contract",
+                    null
+                );
 
                 var e = CreateDisplayNameExpectation(type);
 
@@ -179,8 +181,11 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
             foreach (var member in members)
             {
-                var definition = (ICompositionElement)
-                    CreateReflectionExportDefinition(new LazyMemberInfo(member), "Contract", null);
+                var definition = (ICompositionElement)CreateReflectionExportDefinition(
+                    new LazyMemberInfo(member),
+                    "Contract",
+                    null
+                );
 
                 var e = CreateDisplayNameExpectation(member);
 
@@ -195,8 +200,11 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
             foreach (var member in members)
             {
-                var definition = (ICompositionElement)
-                    CreateReflectionExportDefinition(new LazyMemberInfo(member), "Contract", null);
+                var definition = (ICompositionElement)CreateReflectionExportDefinition(
+                    new LazyMemberInfo(member),
+                    "Contract",
+                    null
+                );
 
                 Assert.Equal(definition.DisplayName, definition.ToString());
             }

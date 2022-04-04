@@ -351,8 +351,10 @@ namespace Microsoft.EntityFrameworkCore
             this PropertyBuilder<TProperty> propertyBuilder,
             bool fixedLength = true
         ) =>
-            (PropertyBuilder<TProperty>)
-                IsFixedLength((PropertyBuilder)propertyBuilder, fixedLength);
+            (PropertyBuilder<TProperty>)IsFixedLength(
+                (PropertyBuilder)propertyBuilder,
+                fixedLength
+            );
 
         /// <summary>
         ///     Configures the property as capable of storing only fixed-length data, such as strings.
@@ -655,8 +657,11 @@ namespace Microsoft.EntityFrameworkCore
             string? sql,
             bool? stored
         ) =>
-            (PropertyBuilder<TProperty>)
-                HasComputedColumnSql((PropertyBuilder)propertyBuilder, sql, stored);
+            (PropertyBuilder<TProperty>)HasComputedColumnSql(
+                (PropertyBuilder)propertyBuilder,
+                sql,
+                stored
+            );
 
         /// <summary>
         ///     Configures the property to map to a computed column when targeting a relational database.

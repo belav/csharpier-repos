@@ -516,8 +516,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                 case SyntaxKind.YieldBreakStatement:
                     return ((YieldStatementSyntax)statement).SemicolonToken;
                 case SyntaxKind.LocalFunctionStatement:
-                    LocalFunctionStatementSyntax localFunctionStmt = (LocalFunctionStatementSyntax)
-                        statement;
+                    LocalFunctionStatementSyntax localFunctionStmt =
+                        (LocalFunctionStatementSyntax)statement;
                     if (localFunctionStmt.Body != null)
                         return GetFirstExcludedToken(localFunctionStmt.Body);
                     if (localFunctionStmt.SemicolonToken != default(SyntaxToken))
@@ -544,8 +544,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             switch (lambdaExpressionOrQueryNode.Kind())
             {
                 case SyntaxKind.SimpleLambdaExpression:
-                    SimpleLambdaExpressionSyntax simple = (SimpleLambdaExpressionSyntax)
-                        lambdaExpressionOrQueryNode;
+                    SimpleLambdaExpressionSyntax simple =
+                        (SimpleLambdaExpressionSyntax)lambdaExpressionOrQueryNode;
                     firstIncluded = simple.ArrowToken;
                     body = simple.Body;
                     break;
@@ -558,8 +558,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                     break;
 
                 case SyntaxKind.AnonymousMethodExpression:
-                    AnonymousMethodExpressionSyntax anon = (AnonymousMethodExpressionSyntax)
-                        lambdaExpressionOrQueryNode;
+                    AnonymousMethodExpressionSyntax anon =
+                        (AnonymousMethodExpressionSyntax)lambdaExpressionOrQueryNode;
                     body = anon.Block;
                     firstIncluded = body.GetFirstToken(includeZeroWidth: true);
                     break;

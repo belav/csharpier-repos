@@ -633,8 +633,10 @@ namespace System.ComponentModel
                 {
                     try
                     {
-                        IExtenderProvider? prov = (IExtenderProvider?)
-                            GetInvocationTarget(_componentClass, provider);
+                        IExtenderProvider? prov = (IExtenderProvider?)GetInvocationTarget(
+                            _componentClass,
+                            provider
+                        );
                         return (bool)shouldSerialize.Invoke(prov, new object[] { component })!;
                     }
                     catch { }
@@ -653,8 +655,10 @@ namespace System.ComponentModel
         {
             if (provider != null)
             {
-                IExtenderProvider? prov = (IExtenderProvider?)
-                    GetInvocationTarget(_componentClass, provider);
+                IExtenderProvider? prov = (IExtenderProvider?)GetInvocationTarget(
+                    _componentClass,
+                    provider
+                );
                 return GetMethodValue.Invoke(prov, new object?[] { component });
             }
             return null;
@@ -706,8 +710,10 @@ namespace System.ComponentModel
                     }
                 }
 
-                IExtenderProvider? prov = (IExtenderProvider?)
-                    GetInvocationTarget(_componentClass, provider);
+                IExtenderProvider? prov = (IExtenderProvider?)GetInvocationTarget(
+                    _componentClass,
+                    provider
+                );
                 if (ResetMethodValue != null)
                 {
                     ResetMethodValue.Invoke(prov, new object[] { component });
@@ -760,8 +766,10 @@ namespace System.ComponentModel
                     }
                 }
 
-                IExtenderProvider? prov = (IExtenderProvider?)
-                    GetInvocationTarget(_componentClass, provider);
+                IExtenderProvider? prov = (IExtenderProvider?)GetInvocationTarget(
+                    _componentClass,
+                    provider
+                );
 
                 if (SetMethodValue != null)
                 {
@@ -775,8 +783,10 @@ namespace System.ComponentModel
 
         internal bool ExtenderShouldSerializeValue(IExtenderProvider provider, object component)
         {
-            IExtenderProvider? prov = (IExtenderProvider?)
-                GetInvocationTarget(_componentClass, provider);
+            IExtenderProvider? prov = (IExtenderProvider?)GetInvocationTarget(
+                _componentClass,
+                provider
+            );
 
             if (IsReadOnly)
             {

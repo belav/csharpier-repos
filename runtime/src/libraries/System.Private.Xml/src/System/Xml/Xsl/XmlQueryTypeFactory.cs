@@ -1756,8 +1756,8 @@ namespace System.Xml.Xsl
                         else
                         {
                             // Complex content
-                            XmlSchemaComplexType complexType = (XmlSchemaComplexType)
-                                sourceSchemaType;
+                            XmlSchemaComplexType complexType =
+                                (XmlSchemaComplexType)sourceSchemaType;
                             itemCard = AddChildParticle(
                                 list,
                                 complexType.ContentTypeParticle,

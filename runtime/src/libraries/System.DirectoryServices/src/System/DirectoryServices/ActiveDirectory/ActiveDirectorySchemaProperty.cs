@@ -471,8 +471,8 @@ namespace System.DirectoryServices.ActiveDirectory
                 // set the searchFlags attribute
                 if (_searchFlags != SearchFlags.None)
                 {
-                    _propertyEntry.Properties[PropertyManager.SearchFlags].Value = (int)
-                        _searchFlags;
+                    _propertyEntry.Properties[PropertyManager.SearchFlags].Value =
+                        (int)_searchFlags;
                 }
 
                 // set the link id
@@ -681,8 +681,10 @@ namespace System.DirectoryServices.ActiveDirectory
                 {
                     if (!_syntaxInitialized)
                     {
-                        byte[]? omObjectClassBinaryForm = (byte[]?)
-                            GetValueFromCache(PropertyManager.OMObjectClass, false);
+                        byte[]? omObjectClassBinaryForm = (byte[]?)GetValueFromCache(
+                            PropertyManager.OMObjectClass,
+                            false
+                        );
                         OMObjectClass? omObjectClass =
                             (omObjectClassBinaryForm != null)
                                 ? new OMObjectClass(omObjectClassBinaryForm)
@@ -734,8 +736,10 @@ namespace System.DirectoryServices.ActiveDirectory
                     if (!_descriptionInitialized)
                     {
                         // get the property from the server
-                        _description = (string?)
-                            GetValueFromCache(PropertyManager.Description, false);
+                        _description = (string?)GetValueFromCache(
+                            PropertyManager.Description,
+                            false
+                        );
                         _descriptionInitialized = true;
                     }
                 }

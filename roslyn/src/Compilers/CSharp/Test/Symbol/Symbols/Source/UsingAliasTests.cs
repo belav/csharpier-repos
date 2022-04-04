@@ -350,8 +350,9 @@ class Program
             SyntaxTree syntaxTree = Parse(text);
             CSharpCompilation comp = CreateCompilation(syntaxTree);
             var model = comp.GetSemanticModel(syntaxTree);
-            IdentifierNameSyntax exprSyntaxToBind = (IdentifierNameSyntax)
-                GetExprSyntaxForBinding(GetExprSyntaxList(syntaxTree));
+            IdentifierNameSyntax exprSyntaxToBind = (IdentifierNameSyntax)GetExprSyntaxForBinding(
+                GetExprSyntaxList(syntaxTree)
+            );
             Assert.Equal(SymbolKind.Alias, model.GetAliasInfo(exprSyntaxToBind).Kind);
         }
 
@@ -375,8 +376,9 @@ class Program
             SyntaxTree syntaxTree = Parse(text);
             CSharpCompilation comp = CreateCompilation(syntaxTree);
             var model = comp.GetSemanticModel(syntaxTree);
-            IdentifierNameSyntax exprSyntaxToBind = (IdentifierNameSyntax)
-                GetExprSyntaxForBinding(GetExprSyntaxList(syntaxTree));
+            IdentifierNameSyntax exprSyntaxToBind = (IdentifierNameSyntax)GetExprSyntaxForBinding(
+                GetExprSyntaxList(syntaxTree)
+            );
             Assert.Equal(
                 "System.Int32?",
                 model.GetAliasInfo(exprSyntaxToBind).Target.ToTestDisplayString()

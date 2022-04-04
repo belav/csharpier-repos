@@ -2374,14 +2374,13 @@ namespace System.Xml.Serialization
             else
                 identifier += CodeIdentifier.MakePascal(attribute.Name);
             if (!attribute.SchemaTypeName.IsEmpty)
-                mapping = (TypeMapping?)
-                    ImportType(
-                        attribute.SchemaTypeName,
-                        typeof(TypeMapping),
-                        null,
-                        TypeFlags.CanBeAttributeValue,
-                        false
-                    );
+                mapping = (TypeMapping?)ImportType(
+                    attribute.SchemaTypeName,
+                    typeof(TypeMapping),
+                    null,
+                    TypeFlags.CanBeAttributeValue,
+                    false
+                );
             else if (attribute.SchemaType != null)
                 mapping = ImportDataType(
                     (XmlSchemaSimpleType)attribute.SchemaType,
@@ -2590,8 +2589,8 @@ namespace System.Xml.Serialization
 
             if (content is XmlSchemaSimpleTypeRestriction)
             {
-                XmlSchemaSimpleTypeRestriction restriction = (XmlSchemaSimpleTypeRestriction)
-                    content;
+                XmlSchemaSimpleTypeRestriction restriction =
+                    (XmlSchemaSimpleTypeRestriction)content;
                 for (int i = 0; i < restriction.Facets.Count; i++)
                 {
                     object facet = restriction.Facets[i];

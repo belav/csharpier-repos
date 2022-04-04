@@ -890,8 +890,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                                         if (pushdownOccurredWhenJoining)
                                         {
                                             // We lift from inner subquery if pushdown occurred with ordering erased
-                                            var subquery = (SelectExpression)
-                                                collectionJoinedInnerTable;
+                                            var subquery =
+                                                (SelectExpression)collectionJoinedInnerTable;
                                             foreach (var ordering in orderingsToBeErased)
                                             {
                                                 innerOrderingExpressions.Add(
@@ -1008,8 +1008,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                                         if (pushdownOccurredWhenJoining)
                                         {
                                             // We lift from inner subquery if pushdown occurred with ordering erased
-                                            var subquery = (SelectExpression)
-                                                collectionJoinedInnerTable;
+                                            var subquery =
+                                                (SelectExpression)collectionJoinedInnerTable;
                                             foreach (var ordering in orderingsToBeErased)
                                             {
                                                 innerOrderingExpressions.Add(

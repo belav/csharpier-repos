@@ -45,8 +45,10 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                         projectionBindingExpression.QueryExpression;
 
                     _materializationContextBindings[parameterExpression] = (
-                        (IDictionary<IProperty, int>)
-                            GetProjectionIndex(queryExpression, projectionBindingExpression),
+                        (IDictionary<IProperty, int>)GetProjectionIndex(
+                            queryExpression,
+                            projectionBindingExpression
+                        ),
                         (
                             (InMemoryQueryExpression)projectionBindingExpression.QueryExpression
                         ).CurrentParameter
@@ -116,8 +118,10 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 {
                     var queryExpression = (InMemoryQueryExpression)
                         projectionBindingExpression.QueryExpression;
-                    var projectionIndex = (int)
-                        GetProjectionIndex(queryExpression, projectionBindingExpression);
+                    var projectionIndex = (int)GetProjectionIndex(
+                        queryExpression,
+                        projectionBindingExpression
+                    );
                     var valueBuffer = queryExpression.CurrentParameter;
                     var property = InferPropertyFromInner(
                         queryExpression.Projection[projectionIndex]

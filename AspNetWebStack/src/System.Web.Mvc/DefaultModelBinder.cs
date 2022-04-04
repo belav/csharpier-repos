@@ -110,8 +110,11 @@ namespace System.Web.Mvc
                     PropertyFilter = bindingContext.PropertyFilter,
                     ValueProvider = bindingContext.ValueProvider
                 };
-                IList list = (IList)
-                    UpdateCollection(controllerContext, arrayBindingContext, elementType);
+                IList list = (IList)UpdateCollection(
+                    controllerContext,
+                    arrayBindingContext,
+                    elementType
+                );
 
                 if (list == null)
                 {

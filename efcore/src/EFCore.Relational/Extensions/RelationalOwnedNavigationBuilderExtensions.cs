@@ -74,7 +74,10 @@ namespace Microsoft.EntityFrameworkCore
         )
             where TEntity : class
             where TDependentEntity : class =>
-            (OwnedNavigationBuilder<TEntity, TDependentEntity>)
-                HasCheckConstraint((OwnedNavigationBuilder)ownedNavigationBuilder, name, sql);
+            (OwnedNavigationBuilder<TEntity, TDependentEntity>)HasCheckConstraint(
+                (OwnedNavigationBuilder)ownedNavigationBuilder,
+                name,
+                sql
+            );
     }
 }

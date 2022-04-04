@@ -248,8 +248,11 @@ namespace System.Reflection
                 throw new ArgumentException("String cannot have zero length.", nameof(name));
             unsafe
             {
-                byte* data = (byte*)
-                    GetManifestResourceInternal(name, out int length, out Module resourceModule);
+                byte* data = (byte*)GetManifestResourceInternal(
+                    name,
+                    out int length,
+                    out Module resourceModule
+                );
                 if (data == null)
                     return null;
 
@@ -497,12 +500,11 @@ namespace System.Reflection
             AssemblyLoadContext? assemblyLoadContext
         )
         {
-            var assembly = (RuntimeAssembly)
-                InternalLoad(
-                    assemblyRef.FullName,
-                    ref stackMark,
-                    assemblyLoadContext != null ? assemblyLoadContext.NativeALC : IntPtr.Zero
-                );
+            var assembly = (RuntimeAssembly)InternalLoad(
+                assemblyRef.FullName,
+                ref stackMark,
+                assemblyLoadContext != null ? assemblyLoadContext.NativeALC : IntPtr.Zero
+            );
             if (assembly == null)
                 throw new FileNotFoundException(null, assemblyRef.Name);
             return assembly;

@@ -1394,24 +1394,22 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                                 (NonGenericTestReferenceCollectionBuilder<
                                     TLeftEntity,
                                     Dictionary<string, object>
-                                >)
-                                    configureRight(
-                                        new NonGenericTestEntityTypeBuilder<
-                                            Dictionary<string, object>
-                                        >(l)
+                                >)configureRight(
+                                    new NonGenericTestEntityTypeBuilder<Dictionary<string, object>>(
+                                        l
                                     )
+                                )
                             ).ReferenceCollectionBuilder,
                         r =>
                             (
                                 (NonGenericTestReferenceCollectionBuilder<
                                     TRightEntity,
                                     Dictionary<string, object>
-                                >)
-                                    configureLeft(
-                                        new NonGenericTestEntityTypeBuilder<
-                                            Dictionary<string, object>
-                                        >(r)
+                                >)configureLeft(
+                                    new NonGenericTestEntityTypeBuilder<Dictionary<string, object>>(
+                                        r
                                     )
+                                )
                             ).ReferenceCollectionBuilder
                     )
                 );
@@ -1435,24 +1433,22 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                                 (NonGenericTestReferenceCollectionBuilder<
                                     TLeftEntity,
                                     Dictionary<string, object>
-                                >)
-                                    configureRight(
-                                        new NonGenericTestEntityTypeBuilder<
-                                            Dictionary<string, object>
-                                        >(l)
+                                >)configureRight(
+                                    new NonGenericTestEntityTypeBuilder<Dictionary<string, object>>(
+                                        l
                                     )
+                                )
                             ).ReferenceCollectionBuilder,
                         r =>
                             (
                                 (NonGenericTestReferenceCollectionBuilder<
                                     TRightEntity,
                                     Dictionary<string, object>
-                                >)
-                                    configureLeft(
-                                        new NonGenericTestEntityTypeBuilder<
-                                            Dictionary<string, object>
-                                        >(r)
+                                >)configureLeft(
+                                    new NonGenericTestEntityTypeBuilder<Dictionary<string, object>>(
+                                        r
                                     )
+                                )
                             ).ReferenceCollectionBuilder
                     )
                 );
@@ -1472,20 +1468,19 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         typeof(TJoinEntity),
                         l =>
                             (
-                                (NonGenericTestReferenceCollectionBuilder<TLeftEntity, TJoinEntity>)
-                                    configureRight(
-                                        new NonGenericTestEntityTypeBuilder<TJoinEntity>(l)
-                                    )
+                                (NonGenericTestReferenceCollectionBuilder<
+                                    TLeftEntity,
+                                    TJoinEntity
+                                >)configureRight(
+                                    new NonGenericTestEntityTypeBuilder<TJoinEntity>(l)
+                                )
                             ).ReferenceCollectionBuilder,
                         r =>
                             (
                                 (NonGenericTestReferenceCollectionBuilder<
                                     TRightEntity,
                                     TJoinEntity
-                                >)
-                                    configureLeft(
-                                        new NonGenericTestEntityTypeBuilder<TJoinEntity>(r)
-                                    )
+                                >)configureLeft(new NonGenericTestEntityTypeBuilder<TJoinEntity>(r))
                             ).ReferenceCollectionBuilder
                     )
                 );
@@ -1507,20 +1502,19 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         typeof(TJoinEntity),
                         l =>
                             (
-                                (NonGenericTestReferenceCollectionBuilder<TLeftEntity, TJoinEntity>)
-                                    configureRight(
-                                        new NonGenericTestEntityTypeBuilder<TJoinEntity>(l)
-                                    )
+                                (NonGenericTestReferenceCollectionBuilder<
+                                    TLeftEntity,
+                                    TJoinEntity
+                                >)configureRight(
+                                    new NonGenericTestEntityTypeBuilder<TJoinEntity>(l)
+                                )
                             ).ReferenceCollectionBuilder,
                         r =>
                             (
                                 (NonGenericTestReferenceCollectionBuilder<
                                     TRightEntity,
                                     TJoinEntity
-                                >)
-                                    configureLeft(
-                                        new NonGenericTestEntityTypeBuilder<TJoinEntity>(r)
-                                    )
+                                >)configureLeft(new NonGenericTestEntityTypeBuilder<TJoinEntity>(r))
                             ).ReferenceCollectionBuilder
                     )
                 );
@@ -1543,24 +1537,22 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                                 (NonGenericTestReferenceCollectionBuilder<
                                     TLeftEntity,
                                     Dictionary<string, object>
-                                >)
-                                    configureRight(
-                                        new NonGenericTestEntityTypeBuilder<
-                                            Dictionary<string, object>
-                                        >(l)
+                                >)configureRight(
+                                    new NonGenericTestEntityTypeBuilder<Dictionary<string, object>>(
+                                        l
                                     )
+                                )
                             ).ReferenceCollectionBuilder,
                         r =>
                             (
                                 (NonGenericTestReferenceCollectionBuilder<
                                     TRightEntity,
                                     Dictionary<string, object>
-                                >)
-                                    configureLeft(
-                                        new NonGenericTestEntityTypeBuilder<
-                                            Dictionary<string, object>
-                                        >(r)
+                                >)configureLeft(
+                                    new NonGenericTestEntityTypeBuilder<Dictionary<string, object>>(
+                                        r
                                     )
+                                )
                             ).ReferenceCollectionBuilder,
                         e =>
                             configureJoinEntityType(
@@ -1589,24 +1581,22 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                                 (NonGenericTestReferenceCollectionBuilder<
                                     TLeftEntity,
                                     Dictionary<string, object>
-                                >)
-                                    configureRight(
-                                        new NonGenericTestEntityTypeBuilder<
-                                            Dictionary<string, object>
-                                        >(l)
+                                >)configureRight(
+                                    new NonGenericTestEntityTypeBuilder<Dictionary<string, object>>(
+                                        l
                                     )
+                                )
                             ).ReferenceCollectionBuilder,
                         r =>
                             (
                                 (NonGenericTestReferenceCollectionBuilder<
                                     TRightEntity,
                                     Dictionary<string, object>
-                                >)
-                                    configureLeft(
-                                        new NonGenericTestEntityTypeBuilder<
-                                            Dictionary<string, object>
-                                        >(r)
+                                >)configureLeft(
+                                    new NonGenericTestEntityTypeBuilder<Dictionary<string, object>>(
+                                        r
                                     )
+                                )
                             ).ReferenceCollectionBuilder,
                         e =>
                             configureJoinEntityType(
@@ -1631,20 +1621,19 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         typeof(TJoinEntity),
                         l =>
                             (
-                                (NonGenericTestReferenceCollectionBuilder<TLeftEntity, TJoinEntity>)
-                                    configureRight(
-                                        new NonGenericTestEntityTypeBuilder<TJoinEntity>(l)
-                                    )
+                                (NonGenericTestReferenceCollectionBuilder<
+                                    TLeftEntity,
+                                    TJoinEntity
+                                >)configureRight(
+                                    new NonGenericTestEntityTypeBuilder<TJoinEntity>(l)
+                                )
                             ).ReferenceCollectionBuilder,
                         r =>
                             (
                                 (NonGenericTestReferenceCollectionBuilder<
                                     TRightEntity,
                                     TJoinEntity
-                                >)
-                                    configureLeft(
-                                        new NonGenericTestEntityTypeBuilder<TJoinEntity>(r)
-                                    )
+                                >)configureLeft(new NonGenericTestEntityTypeBuilder<TJoinEntity>(r))
                             ).ReferenceCollectionBuilder,
                         e =>
                             configureJoinEntityType(
@@ -1671,20 +1660,19 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         typeof(TJoinEntity),
                         l =>
                             (
-                                (NonGenericTestReferenceCollectionBuilder<TLeftEntity, TJoinEntity>)
-                                    configureRight(
-                                        new NonGenericTestEntityTypeBuilder<TJoinEntity>(l)
-                                    )
+                                (NonGenericTestReferenceCollectionBuilder<
+                                    TLeftEntity,
+                                    TJoinEntity
+                                >)configureRight(
+                                    new NonGenericTestEntityTypeBuilder<TJoinEntity>(l)
+                                )
                             ).ReferenceCollectionBuilder,
                         r =>
                             (
                                 (NonGenericTestReferenceCollectionBuilder<
                                     TRightEntity,
                                     TJoinEntity
-                                >)
-                                    configureLeft(
-                                        new NonGenericTestEntityTypeBuilder<TJoinEntity>(r)
-                                    )
+                                >)configureLeft(new NonGenericTestEntityTypeBuilder<TJoinEntity>(r))
                             ).ReferenceCollectionBuilder,
                         e =>
                             configureJoinEntityType(

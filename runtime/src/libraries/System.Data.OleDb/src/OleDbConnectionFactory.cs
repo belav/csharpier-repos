@@ -66,8 +66,8 @@ namespace System.Data.OleDb
             Debug.Assert(internalConnection != null, "internalConnection may not be null.");
             cacheMetaDataFactory = false;
 
-            OleDbConnectionInternal oleDbInternalConnection = (OleDbConnectionInternal)
-                internalConnection;
+            OleDbConnectionInternal oleDbInternalConnection =
+                (OleDbConnectionInternal)internalConnection;
             OleDbConnection? oleDbOuterConnection = oleDbInternalConnection.Connection;
             Debug.Assert(oleDbOuterConnection != null, "outer connection may not be null.");
 

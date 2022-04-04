@@ -528,8 +528,11 @@ namespace ILCompiler.IBC
             var ecmaType = (EcmaType)methodMetadataType.GetTypeDefinition();
 
             EcmaModule ecmaModule = ecmaType.EcmaModule;
-            var lookupClassTokenTypeDef = (int)
-                LookupIbcTypeToken(ref ecmaModule, methodEntry.ClassToken, blobs);
+            var lookupClassTokenTypeDef = (int)LookupIbcTypeToken(
+                ref ecmaModule,
+                methodEntry.ClassToken,
+                blobs
+            );
             if (lookupClassTokenTypeDef != ecmaType.MetadataReader.GetToken(ecmaType.Handle))
                 throw new Exception(
                     $"Ibc MethodToken {ibcToken:x} incosistent classToken '{ibcToken:x}' with specified exact type '{ecmaType}'"

@@ -484,24 +484,24 @@ namespace Microsoft.CodeAnalysis.CSharp
                     case SyntaxKind.DestructorDeclaration:
                         return WellKnownMemberNames.DestructorName;
                     case SyntaxKind.OperatorDeclaration:
-                        var operatorDeclaration = (OperatorDeclarationSyntax)
-                            baseMethodDeclarationSyntax;
+                        var operatorDeclaration =
+                            (OperatorDeclarationSyntax)baseMethodDeclarationSyntax;
                         return ExplicitInterfaceHelpers.GetMemberName(
                             outerBinder,
                             operatorDeclaration.ExplicitInterfaceSpecifier,
                             OperatorFacts.OperatorNameFromDeclaration(operatorDeclaration)
                         );
                     case SyntaxKind.ConversionOperatorDeclaration:
-                        var conversionDeclaration = (ConversionOperatorDeclarationSyntax)
-                            baseMethodDeclarationSyntax;
+                        var conversionDeclaration =
+                            (ConversionOperatorDeclarationSyntax)baseMethodDeclarationSyntax;
                         return ExplicitInterfaceHelpers.GetMemberName(
                             outerBinder,
                             conversionDeclaration.ExplicitInterfaceSpecifier,
                             OperatorFacts.OperatorNameFromDeclaration(conversionDeclaration)
                         );
                     case SyntaxKind.MethodDeclaration:
-                        MethodDeclarationSyntax methodDeclSyntax = (MethodDeclarationSyntax)
-                            baseMethodDeclarationSyntax;
+                        MethodDeclarationSyntax methodDeclSyntax =
+                            (MethodDeclarationSyntax)baseMethodDeclarationSyntax;
                         return ExplicitInterfaceHelpers.GetMemberName(
                             outerBinder,
                             methodDeclSyntax.ExplicitInterfaceSpecifier,
@@ -578,13 +578,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
 
                 string methodName = GetMethodName(baseMethodDeclarationSyntax, outerBinder);
-                return (SourceMemberMethodSymbol)
-                    GetMemberSymbol(
-                        methodName,
-                        baseMethodDeclarationSyntax.FullSpan,
-                        container,
-                        SymbolKind.Method
-                    );
+                return (SourceMemberMethodSymbol)GetMemberSymbol(
+                    methodName,
+                    baseMethodDeclarationSyntax.FullSpan,
+                    container,
+                    SymbolKind.Method
+                );
             }
 
             private SourcePropertySymbol GetPropertySymbol(
@@ -615,13 +614,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     basePropertyDeclarationSyntax,
                     outerBinder
                 );
-                return (SourcePropertySymbol)
-                    GetMemberSymbol(
-                        propertyName,
-                        basePropertyDeclarationSyntax.Span,
-                        container,
-                        SymbolKind.Property
-                    );
+                return (SourcePropertySymbol)GetMemberSymbol(
+                    propertyName,
+                    basePropertyDeclarationSyntax.Span,
+                    container,
+                    SymbolKind.Property
+                );
             }
 
             private SourceEventSymbol GetEventSymbol(
@@ -641,13 +639,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
 
                 string eventName = GetPropertyOrEventName(eventDeclarationSyntax, outerBinder);
-                return (SourceEventSymbol)
-                    GetMemberSymbol(
-                        eventName,
-                        eventDeclarationSyntax.Span,
-                        container,
-                        SymbolKind.Event
-                    );
+                return (SourceEventSymbol)GetMemberSymbol(
+                    eventName,
+                    eventDeclarationSyntax.Span,
+                    container,
+                    SymbolKind.Event
+                );
             }
 
             private Symbol GetMemberSymbol(
@@ -1606,8 +1603,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 if (memberSyntax.Kind() == SyntaxKind.MethodDeclaration)
                 {
-                    MethodDeclarationSyntax methodDeclSyntax = (MethodDeclarationSyntax)
-                        memberSyntax;
+                    MethodDeclarationSyntax methodDeclSyntax =
+                        (MethodDeclarationSyntax)memberSyntax;
                     if (methodDeclSyntax.Arity > 0)
                     {
                         Binder outerBinder = VisitCore(memberSyntax.Parent);

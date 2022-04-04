@@ -1481,8 +1481,11 @@ public class DefaultHtmlGenerator : IHtmlGenerator
 
             case InputType.Text:
             default:
-                var attributeValue = (string)
-                    GetModelStateValue(viewContext, fullName, typeof(string));
+                var attributeValue = (string)GetModelStateValue(
+                    viewContext,
+                    fullName,
+                    typeof(string)
+                );
                 if (attributeValue == null)
                 {
                     attributeValue = useViewData

@@ -96,12 +96,11 @@ namespace System.Threading
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [CLSCompliant(false)]
         public static uint CompareExchange(ref uint location1, uint value, uint comparand) =>
-            (uint)
-                CompareExchange(
-                    ref Unsafe.As<uint, int>(ref location1),
-                    (int)value,
-                    (int)comparand
-                );
+            (uint)CompareExchange(
+                ref Unsafe.As<uint, int>(ref location1),
+                (int)value,
+                (int)comparand
+            );
 
         /// <summary>Compares two 64-bit unsigned integers for equality and, if they are equal, replaces the first value.</summary>
         /// <param name="location1">The destination, whose value is compared with <paramref name="comparand"/> and possibly replaced.</param>
@@ -112,12 +111,11 @@ namespace System.Threading
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [CLSCompliant(false)]
         public static ulong CompareExchange(ref ulong location1, ulong value, ulong comparand) =>
-            (ulong)
-                CompareExchange(
-                    ref Unsafe.As<ulong, long>(ref location1),
-                    (long)value,
-                    (long)comparand
-                );
+            (ulong)CompareExchange(
+                ref Unsafe.As<ulong, long>(ref location1),
+                (long)value,
+                (long)comparand
+            );
 
         /// <summary>Compares two platform-specific handles or pointers for equality and, if they are equal, replaces the first one.</summary>
         /// <param name="location1">The destination <see cref="IntPtr"/>, whose value is compared with the value of <paramref name="comparand"/> and possibly replaced by <paramref name="value"/>.</param>

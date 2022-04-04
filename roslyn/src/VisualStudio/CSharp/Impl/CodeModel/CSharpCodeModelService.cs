@@ -561,20 +561,25 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             switch (node.Kind())
             {
                 case SyntaxKind.Attribute:
-                    return (EnvDTE.CodeElement)
-                        CreateInternalCodeAttribute(state, fileCodeModel, node);
+                    return (EnvDTE.CodeElement)CreateInternalCodeAttribute(
+                        state,
+                        fileCodeModel,
+                        node
+                    );
 
                 case SyntaxKind.AttributeArgument:
-                    return (EnvDTE.CodeElement)
-                        CreateInternalCodeAttributeArgument(
-                            state,
-                            fileCodeModel,
-                            (AttributeArgumentSyntax)node
-                        );
+                    return (EnvDTE.CodeElement)CreateInternalCodeAttributeArgument(
+                        state,
+                        fileCodeModel,
+                        (AttributeArgumentSyntax)node
+                    );
 
                 case SyntaxKind.Parameter:
-                    return (EnvDTE.CodeElement)
-                        CreateInternalCodeParameter(state, fileCodeModel, (ParameterSyntax)node);
+                    return (EnvDTE.CodeElement)CreateInternalCodeParameter(
+                        state,
+                        fileCodeModel,
+                        (ParameterSyntax)node
+                    );
 
                 case SyntaxKind.UsingDirective:
                     return CreateInternalCodeImport(
@@ -586,8 +591,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
 
             if (IsAccessorNode(node))
             {
-                return (EnvDTE.CodeElement)
-                    CreateInternalCodeAccessorFunction(state, fileCodeModel, node);
+                return (EnvDTE.CodeElement)CreateInternalCodeAccessorFunction(
+                    state,
+                    fileCodeModel,
+                    node
+                );
             }
 
             var nodeKey = GetNodeKey(node);

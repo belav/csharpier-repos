@@ -2410,8 +2410,9 @@ class C<T, U, V>
             var tree = Parse(text);
             var comp = CreateCompilation(tree);
             var model = comp.GetSemanticModel(tree);
-            var nameSyntaxToBind = (SimpleNameSyntax)
-                GetExprSyntaxForBinding(GetExprSyntaxList(tree));
+            var nameSyntaxToBind = (SimpleNameSyntax)GetExprSyntaxForBinding(
+                GetExprSyntaxList(tree)
+            );
 
             Assert.Equal(SyntaxKind.GenericName, nameSyntaxToBind.Kind());
             Assert.Equal(3, nameSyntaxToBind.Arity);
@@ -4672,12 +4673,11 @@ class C
 }
 ";
 
-            var compilation = (Compilation)
-                CreateCompilation(
-                    source2,
-                    new[] { reference1 },
-                    assemblyName: "SpeculativelyBindPropertyGroup"
-                );
+            var compilation = (Compilation)CreateCompilation(
+                source2,
+                new[] { reference1 },
+                assemblyName: "SpeculativelyBindPropertyGroup"
+            );
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 

@@ -695,8 +695,8 @@ namespace System.DirectoryServices
                 SearchRoot.Bind(true);
             }
 
-            UnsafeNativeMethods.IDirectorySearch adsSearch = (UnsafeNativeMethods.IDirectorySearch)
-                adsObject;
+            UnsafeNativeMethods.IDirectorySearch adsSearch =
+                (UnsafeNativeMethods.IDirectorySearch)adsObject;
             SetSearchPreferences(adsSearch, findMoreThanOne);
 
             string[]? properties = null;

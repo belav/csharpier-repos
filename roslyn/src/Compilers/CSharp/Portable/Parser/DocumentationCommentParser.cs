@@ -1388,8 +1388,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         /// </summary>
         private CrefBracketedParameterListSyntax ParseBracketedCrefParameterList()
         {
-            return (CrefBracketedParameterListSyntax)
-                ParseBaseCrefParameterList(useSquareBrackets: true);
+            return (CrefBracketedParameterListSyntax)ParseBaseCrefParameterList(
+                useSquareBrackets: true
+            );
         }
 
         /// <summary>

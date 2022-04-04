@@ -30,8 +30,9 @@ namespace System.Text.Encodings.Web.Tests
         {
             IntPtr getBitmapFnPtr = _lazyGetBitmapFnPtr.Value;
             return ref (
-                (delegate* managed<TextEncoderSettings, ref readonly AllowedBmpCodePointsBitmap>)
-                    getBitmapFnPtr
+                (delegate* managed<
+                    TextEncoderSettings,
+                    ref readonly AllowedBmpCodePointsBitmap>)getBitmapFnPtr
             )(settings);
         }
 

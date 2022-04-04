@@ -139,8 +139,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                     var nestedType = type.AsNestedTypeDefinition(_sourceContext);
                     Debug.Assert(nestedType != null);
 
-                    var otherContainer = (Cci.ITypeDefinition?)
-                        VisitDef(nestedType.ContainingTypeDefinition);
+                    var otherContainer = (Cci.ITypeDefinition?)VisitDef(
+                        nestedType.ContainingTypeDefinition
+                    );
                     if (otherContainer == null)
                     {
                         return null;
@@ -156,8 +157,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
                 if (def is Cci.ITypeDefinitionMember member)
                 {
-                    var otherContainer = (Cci.ITypeDefinition?)
-                        VisitDef(member.ContainingTypeDefinition);
+                    var otherContainer = (Cci.ITypeDefinition?)VisitDef(
+                        member.ContainingTypeDefinition
+                    );
                     if (otherContainer == null)
                     {
                         return null;

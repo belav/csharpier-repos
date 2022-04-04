@@ -420,8 +420,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                             converter = new YieldReturnConverter(
                                 forEachInfo,
                                 (YieldStatementSyntax)statementCannotBeConverted,
-                                yieldBreakStatement: (YieldStatementSyntax)
-                                    lastNonLocalFunctionStatement
+                                yieldBreakStatement: (YieldStatementSyntax)lastNonLocalFunctionStatement
                             );
                             return true;
                         }

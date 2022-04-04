@@ -215,8 +215,11 @@ namespace System.DirectoryServices.AccountManagement
             string identityValue
         )
         {
-            return (GroupPrincipal)
-                FindByIdentityWithType(context, typeof(GroupPrincipal), identityValue);
+            return (GroupPrincipal)FindByIdentityWithType(
+                context,
+                typeof(GroupPrincipal),
+                identityValue
+            );
         }
 
         public static new GroupPrincipal FindByIdentity(
@@ -225,13 +228,12 @@ namespace System.DirectoryServices.AccountManagement
             string identityValue
         )
         {
-            return (GroupPrincipal)
-                FindByIdentityWithType(
-                    context,
-                    typeof(GroupPrincipal),
-                    identityType,
-                    identityValue
-                );
+            return (GroupPrincipal)FindByIdentityWithType(
+                context,
+                typeof(GroupPrincipal),
+                identityType,
+                identityValue
+            );
         }
 
         public PrincipalSearchResult<Principal> GetMembers()

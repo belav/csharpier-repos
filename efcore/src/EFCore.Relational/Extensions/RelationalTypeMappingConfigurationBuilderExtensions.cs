@@ -53,8 +53,10 @@ namespace Microsoft.EntityFrameworkCore
             this TypeMappingConfigurationBuilder<TScalar> scalarBuilder,
             string typeName
         ) =>
-            (TypeMappingConfigurationBuilder<TScalar>)
-                HasColumnType((TypeMappingConfigurationBuilder)scalarBuilder, typeName);
+            (TypeMappingConfigurationBuilder<TScalar>)HasColumnType(
+                (TypeMappingConfigurationBuilder)scalarBuilder,
+                typeName
+            );
 
         /// <summary>
         ///     Configures the scalar as capable of storing only fixed-length data, such as strings.
@@ -89,7 +91,9 @@ namespace Microsoft.EntityFrameworkCore
             this TypeMappingConfigurationBuilder<TScalar> scalarBuilder,
             bool fixedLength = true
         ) =>
-            (TypeMappingConfigurationBuilder<TScalar>)
-                IsFixedLength((TypeMappingConfigurationBuilder)scalarBuilder, fixedLength);
+            (TypeMappingConfigurationBuilder<TScalar>)IsFixedLength(
+                (TypeMappingConfigurationBuilder)scalarBuilder,
+                fixedLength
+            );
     }
 }

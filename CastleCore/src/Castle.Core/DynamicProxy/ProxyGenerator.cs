@@ -110,13 +110,12 @@ namespace Castle.DynamicProxy
 
             // NOTE: Can any other Activator.CreateInstance exception be thrown in this context?
 
-            return (TInterface)
-                CreateInterfaceProxyWithTarget(
-                    typeof(TInterface),
-                    target,
-                    ProxyGenerationOptions.Default,
-                    interceptors
-                );
+            return (TInterface)CreateInterfaceProxyWithTarget(
+                typeof(TInterface),
+                target,
+                ProxyGenerationOptions.Default,
+                interceptors
+            );
         }
 
         /// <summary>
@@ -150,8 +149,12 @@ namespace Castle.DynamicProxy
             params IInterceptor[] interceptors
         ) where TInterface : class
         {
-            return (TInterface)
-                CreateInterfaceProxyWithTarget(typeof(TInterface), target, options, interceptors);
+            return (TInterface)CreateInterfaceProxyWithTarget(
+                typeof(TInterface),
+                target,
+                options,
+                interceptors
+            );
         }
 
         /// <summary>
@@ -455,13 +458,12 @@ namespace Castle.DynamicProxy
             params IInterceptor[] interceptors
         ) where TInterface : class
         {
-            return (TInterface)
-                CreateInterfaceProxyWithTargetInterface(
-                    typeof(TInterface),
-                    target,
-                    ProxyGenerationOptions.Default,
-                    interceptors
-                );
+            return (TInterface)CreateInterfaceProxyWithTargetInterface(
+                typeof(TInterface),
+                target,
+                ProxyGenerationOptions.Default,
+                interceptors
+            );
         }
 
         /// <summary>
@@ -494,13 +496,12 @@ namespace Castle.DynamicProxy
             params IInterceptor[] interceptors
         ) where TInterface : class
         {
-            return (TInterface)
-                CreateInterfaceProxyWithTargetInterface(
-                    typeof(TInterface),
-                    target,
-                    options,
-                    interceptors
-                );
+            return (TInterface)CreateInterfaceProxyWithTargetInterface(
+                typeof(TInterface),
+                target,
+                options,
+                interceptors
+            );
         }
 
         /// <summary>
@@ -779,13 +780,12 @@ namespace Castle.DynamicProxy
             params IInterceptor[] interceptors
         ) where TInterface : class
         {
-            return (TInterface)
-                CreateInterfaceProxyWithoutTarget(
-                    typeof(TInterface),
-                    Type.EmptyTypes,
-                    options,
-                    interceptors
-                );
+            return (TInterface)CreateInterfaceProxyWithoutTarget(
+                typeof(TInterface),
+                Type.EmptyTypes,
+                options,
+                interceptors
+            );
         }
 
         /// <summary>
@@ -1015,15 +1015,14 @@ namespace Castle.DynamicProxy
             params IInterceptor[] interceptors
         ) where TClass : class
         {
-            return (TClass)
-                CreateClassProxyWithTarget(
-                    typeof(TClass),
-                    Type.EmptyTypes,
-                    target,
-                    ProxyGenerationOptions.Default,
-                    new object[0],
-                    interceptors
-                );
+            return (TClass)CreateClassProxyWithTarget(
+                typeof(TClass),
+                Type.EmptyTypes,
+                target,
+                ProxyGenerationOptions.Default,
+                new object[0],
+                interceptors
+            );
         }
 
         /// <summary>
@@ -1051,15 +1050,14 @@ namespace Castle.DynamicProxy
             params IInterceptor[] interceptors
         ) where TClass : class
         {
-            return (TClass)
-                CreateClassProxyWithTarget(
-                    typeof(TClass),
-                    Type.EmptyTypes,
-                    target,
-                    options,
-                    new object[0],
-                    interceptors
-                );
+            return (TClass)CreateClassProxyWithTarget(
+                typeof(TClass),
+                Type.EmptyTypes,
+                target,
+                options,
+                new object[0],
+                interceptors
+            );
         }
 
         /// <summary>
@@ -1393,8 +1391,11 @@ namespace Castle.DynamicProxy
         public TClass CreateClassProxy<TClass>(params IInterceptor[] interceptors)
             where TClass : class
         {
-            return (TClass)
-                CreateClassProxy(typeof(TClass), ProxyGenerationOptions.Default, interceptors);
+            return (TClass)CreateClassProxy(
+                typeof(TClass),
+                ProxyGenerationOptions.Default,
+                interceptors
+            );
         }
 
         /// <summary>

@@ -1647,8 +1647,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(conversion.ConversionKind != ConversionKind.MethodGroup);
             if (conversion.ConversionKind == ConversionKind.AnonymousFunction)
             {
-                var result = (BoundExpression)
-                    RewriteLambdaConversion((BoundLambda)conversion.Operand);
+                var result = (BoundExpression)RewriteLambdaConversion(
+                    (BoundLambda)conversion.Operand
+                );
 
                 if (_inExpressionLambda && conversion.ExplicitCastInCode)
                 {

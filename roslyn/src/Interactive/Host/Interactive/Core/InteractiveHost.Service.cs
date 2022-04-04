@@ -1004,41 +1004,40 @@ namespace Microsoft.CodeAnalysis.Interactive
                 bool displayResult
             )
             {
-                return (Task<ScriptState<object>>)
-                    _invokeOnMainThread(
-                        (Func<Task<ScriptState<object>>>)(
-                            async () =>
+                return (Task<ScriptState<object>>)_invokeOnMainThread(
+                    (Func<Task<ScriptState<object>>>)(
+                        async () =>
+                        {
+                            var serviceState = GetServiceState();
+
+                            var task =
+                                (state == null)
+                                    ? script.RunAsync(
+                                          serviceState.Globals,
+                                          catchException: e => true,
+                                          cancellationToken: CancellationToken.None
+                                      )
+                                    : script.RunFromAsync(
+                                          state,
+                                          catchException: e => true,
+                                          cancellationToken: CancellationToken.None
+                                      );
+
+                            var newState = await task.ConfigureAwait(false);
+
+                            if (newState.Exception != null)
                             {
-                                var serviceState = GetServiceState();
-
-                                var task =
-                                    (state == null)
-                                        ? script.RunAsync(
-                                              serviceState.Globals,
-                                              catchException: e => true,
-                                              cancellationToken: CancellationToken.None
-                                          )
-                                        : script.RunFromAsync(
-                                              state,
-                                              catchException: e => true,
-                                              cancellationToken: CancellationToken.None
-                                          );
-
-                                var newState = await task.ConfigureAwait(false);
-
-                                if (newState.Exception != null)
-                                {
-                                    DisplayException(newState.Exception);
-                                }
-                                else if (displayResult && newState.Script.HasReturnValue())
-                                {
-                                    serviceState.Globals.Print(newState.ReturnValue);
-                                }
-
-                                return newState;
+                                DisplayException(newState.Exception);
                             }
-                        )
-                    );
+                            else if (displayResult && newState.Script.HasReturnValue())
+                            {
+                                serviceState.Globals.Print(newState.ReturnValue);
+                            }
+
+                            return newState;
+                        }
+                    )
+                );
             }
 
             private void DisplayInteractiveErrors(

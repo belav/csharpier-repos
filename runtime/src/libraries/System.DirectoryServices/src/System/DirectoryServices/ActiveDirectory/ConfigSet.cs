@@ -305,8 +305,8 @@ namespace System.DirectoryServices.ActiveDirectory
                 DirectoryEntry configEntry = _directoryEntryMgr.GetCachedDirectoryEntry(
                     WellKnownDN.ConfigurationNamingContext
                 );
-                configEntry.Properties[PropertyManager.MsDSReplAuthenticationMode].Value = (int)
-                    securityLevel;
+                configEntry.Properties[PropertyManager.MsDSReplAuthenticationMode].Value =
+                    (int)securityLevel;
                 configEntry.CommitChanges();
             }
             catch (COMException e)

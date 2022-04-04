@@ -788,8 +788,8 @@ namespace System.Diagnostics
                             object isMultiInstanceObject = key.GetValue("IsMultiInstance");
                             if (isMultiInstanceObject != null)
                             {
-                                categoryType = (PerformanceCounterCategoryType)
-                                    isMultiInstanceObject;
+                                categoryType =
+                                    (PerformanceCounterCategoryType)isMultiInstanceObject;
                                 if (
                                     categoryType < PerformanceCounterCategoryType.Unknown
                                     || categoryType > PerformanceCounterCategoryType.MultiInstance

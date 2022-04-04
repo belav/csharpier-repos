@@ -221,8 +221,11 @@ namespace Microsoft.EntityFrameworkCore
             long seed = 1,
             int increment = 1
         ) =>
-            (PropertyBuilder<TProperty>)
-                UseIdentityColumn((PropertyBuilder)propertyBuilder, seed, increment);
+            (PropertyBuilder<TProperty>)UseIdentityColumn(
+                (PropertyBuilder)propertyBuilder,
+                seed,
+                increment
+            );
 
         /// <summary>
         ///     Configures the key property to use the SQL Server IDENTITY feature to generate values for new entities,
@@ -243,8 +246,11 @@ namespace Microsoft.EntityFrameworkCore
             int seed,
             int increment = 1
         ) =>
-            (PropertyBuilder<TProperty>)
-                UseIdentityColumn((PropertyBuilder)propertyBuilder, (long)seed, increment);
+            (PropertyBuilder<TProperty>)UseIdentityColumn(
+                (PropertyBuilder)propertyBuilder,
+                (long)seed,
+                increment
+            );
 
         /// <summary>
         ///     Configures the seed for SQL Server IDENTITY.

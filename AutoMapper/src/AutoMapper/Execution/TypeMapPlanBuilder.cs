@@ -312,13 +312,10 @@ namespace AutoMapper.Execution
                                   ),
                                   memberExpression.Type
                               )
-                            : (Expression)
-                                  Assign(
-                                      setter,
-                                      ObjectFactory.GenerateConstructorExpression(
-                                          memberExpression.Type
-                                      )
-                                  );
+                            : (Expression)Assign(
+                                  setter,
+                                  ObjectFactory.GenerateConstructorExpression(memberExpression.Type)
+                              );
                     return memberExpression.IfNullElse(ifNull, Default(memberExpression.Type));
                 }
                 static Expression GetSetter(MemberExpression memberExpression) =>

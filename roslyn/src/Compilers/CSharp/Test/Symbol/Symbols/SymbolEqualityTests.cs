@@ -349,11 +349,10 @@ public class B
     public static A<object?> field2;
 }
 ";
-            var comp2 = (Compilation)
-                CreateCompilation(
-                    source2,
-                    new[] { new CSharpCompilationReference((CSharpCompilation)comp1) }
-                );
+            var comp2 = (Compilation)CreateCompilation(
+                source2,
+                new[] { new CSharpCompilationReference((CSharpCompilation)comp1) }
+            );
             comp2.VerifyDiagnostics();
 
             var type1comp1 = ((IFieldSymbol)comp1.GetMember("A.field1")).Type;

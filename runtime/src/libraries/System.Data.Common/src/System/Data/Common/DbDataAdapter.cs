@@ -393,15 +393,14 @@ namespace System.Data.Common
                 {
                     srcTableName = TableMappings[index].SourceTable;
                 }
-                return (DataTable?)
-                    FillSchemaInternal(
-                        null,
-                        dataTable,
-                        schemaType,
-                        command,
-                        srcTableName,
-                        behavior | CommandBehavior.SingleResult
-                    );
+                return (DataTable?)FillSchemaInternal(
+                    null,
+                    dataTable,
+                    schemaType,
+                    command,
+                    srcTableName,
+                    behavior | CommandBehavior.SingleResult
+                );
             }
             finally
             {

@@ -900,8 +900,9 @@ namespace System.Xml.Serialization
                         XmlSchemaSimpleTypeList list = new XmlSchemaSimpleTypeList();
                         if (pm.IsAnonymousType)
                         {
-                            list.ItemType = (XmlSchemaSimpleType)
-                                ExportAnonymousPrimitiveMapping(pm);
+                            list.ItemType = (XmlSchemaSimpleType)ExportAnonymousPrimitiveMapping(
+                                pm
+                            );
                         }
                         else
                         {
@@ -917,8 +918,8 @@ namespace System.Xml.Serialization
                     {
                         if (pm.IsAnonymousType)
                         {
-                            attribute.SchemaType = (XmlSchemaSimpleType)
-                                ExportAnonymousPrimitiveMapping(pm);
+                            attribute.SchemaType =
+                                (XmlSchemaSimpleType)ExportAnonymousPrimitiveMapping(pm);
                         }
                         else
                         {

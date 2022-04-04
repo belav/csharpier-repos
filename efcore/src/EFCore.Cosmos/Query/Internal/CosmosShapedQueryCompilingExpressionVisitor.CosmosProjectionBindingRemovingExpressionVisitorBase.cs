@@ -140,8 +140,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                             }
                             else
                             {
-                                var entityProjectionExpression = (EntityProjectionExpression)
-                                    projectionExpression;
+                                var entityProjectionExpression =
+                                    (EntityProjectionExpression)projectionExpression;
                                 var accessExpression = entityProjectionExpression.AccessExpression;
                                 _projectionBindings[accessExpression] = parameterExpression;
                                 storeName ??= entityProjectionExpression.Name;
@@ -371,8 +371,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                             Expression.Constant(1, typeof(int))
                         );
 
-                        var innerShaper = (BlockExpression)
-                            Visit(collectionShaperExpression.InnerShaper);
+                        var innerShaper = (BlockExpression)Visit(
+                            collectionShaperExpression.InnerShaper
+                        );
 
                         innerShaper = AddIncludes(innerShaper);
 

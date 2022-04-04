@@ -191,8 +191,10 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
                     )
                     {
                         delegate* unmanaged[Cdecl]<uint, out NativeApi*, uint> msQuicOpenVersion =
-                            (delegate* unmanaged[Cdecl]<uint, out NativeApi*, uint>)
-                                msQuicOpenVersionAddress;
+                            (delegate* unmanaged[Cdecl]<
+                                uint,
+                                out NativeApi*,
+                                uint>)msQuicOpenVersionAddress;
                         uint status = msQuicOpenVersion(MsQuicVersion, out NativeApi* vtable);
                         if (MsQuicStatusHelper.SuccessfulStatusCode(status))
                         {

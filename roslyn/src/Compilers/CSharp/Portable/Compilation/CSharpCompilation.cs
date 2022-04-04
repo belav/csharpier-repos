@@ -3320,17 +3320,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodCompiler.CompileMethodBodies(
                 compilation: this,
                 moduleBeingBuiltOpt: doLowering
-                  ? (PEModuleBuilder?)
-                        CreateModuleBuilder(
-                            emitOptions: EmitOptions.Default,
-                            debugEntryPoint: null,
-                            manifestResources: null,
-                            sourceLinkStream: null,
-                            embeddedTexts: null,
-                            testData: null,
-                            diagnostics: diagnostics.DiagnosticBag,
-                            cancellationToken: cancellationToken
-                        )
+                  ? (PEModuleBuilder?)CreateModuleBuilder(
+                        emitOptions: EmitOptions.Default,
+                        debugEntryPoint: null,
+                        manifestResources: null,
+                        sourceLinkStream: null,
+                        embeddedTexts: null,
+                        testData: null,
+                        diagnostics: diagnostics.DiagnosticBag,
+                        cancellationToken: cancellationToken
+                    )
                   : null,
                 emittingPdb: false,
                 emitTestCoverageData: false,

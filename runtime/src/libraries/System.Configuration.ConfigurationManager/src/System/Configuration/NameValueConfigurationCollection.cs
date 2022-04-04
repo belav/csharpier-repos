@@ -17,8 +17,9 @@ namespace System.Configuration
             set
             {
                 int index = -1; // append by default
-                NameValueConfigurationElement tempElement = (NameValueConfigurationElement)
-                    BaseGet(name);
+                NameValueConfigurationElement tempElement = (NameValueConfigurationElement)BaseGet(
+                    name
+                );
                 if (tempElement != null)
                 {
                     index = BaseIndexOf(tempElement);

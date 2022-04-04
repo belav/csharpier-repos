@@ -85,8 +85,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 : actualSyncQuery.Compile()(SetSourceCreator(context));
 
             var rewrittenExpectedQueryExpression =
-                (Expression<Func<ISetSource, TResult>>)
-                    _rewriteExpectedQueryExpression(expectedQuery);
+                (Expression<Func<ISetSource, TResult>>)_rewriteExpectedQueryExpression(
+                    expectedQuery
+                );
             var expectedData = GetExpectedData(context, filteredQuery);
             var expected = rewrittenExpectedQueryExpression.Compile()(expectedData);
 

@@ -119,8 +119,10 @@ namespace System.ComponentModel.Composition
 
             foreach (var path in paths)
             {
-                var catalog = (ICompositionElement)
-                    CreateDirectoryCatalog(path, NonExistentSearchPattern);
+                var catalog = (ICompositionElement)CreateDirectoryCatalog(
+                    path,
+                    NonExistentSearchPattern
+                );
 
                 string expected = string.Format("DirectoryCatalog (Path=\"{0}\")", path);
 
@@ -153,8 +155,10 @@ namespace System.ComponentModel.Composition
 
             foreach (var path in paths)
             {
-                var catalog = (ICompositionElement)
-                    CreateDirectoryCatalog(path, NonExistentSearchPattern);
+                var catalog = (ICompositionElement)CreateDirectoryCatalog(
+                    path,
+                    NonExistentSearchPattern
+                );
 
                 Assert.Equal(catalog.DisplayName, catalog.ToString());
             }

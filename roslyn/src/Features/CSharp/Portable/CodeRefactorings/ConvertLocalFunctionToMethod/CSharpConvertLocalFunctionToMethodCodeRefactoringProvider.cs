@@ -249,8 +249,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
                         var additionalArguments = capturesAsParameters
                             .Select(
                                 p =>
-                                    (ArgumentSyntax)
-                                        GenerateArgument(p, p.Name, shouldUseNamedArguments)
+                                    (ArgumentSyntax)GenerateArgument(
+                                        p,
+                                        p.Name,
+                                        shouldUseNamedArguments
+                                    )
                             )
                             .ToArray();
 
