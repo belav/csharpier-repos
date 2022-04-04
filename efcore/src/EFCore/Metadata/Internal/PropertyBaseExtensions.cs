@@ -402,8 +402,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         {
             var constructorBinding = ((EntityType)propertyBase.DeclaringType).ConstructorBinding;
             return
-                constructorBinding
-                    ?.ParameterBindings.OfType<ServiceParameterBinding>()
+                constructorBinding?.ParameterBindings
+                    .OfType<ServiceParameterBinding>()
                     .Any(b => b.ServiceType == typeof(ILazyLoader)) == true
               ? CoreStrings.NoBackingFieldLazyLoading(
                     propertyBase.Name,

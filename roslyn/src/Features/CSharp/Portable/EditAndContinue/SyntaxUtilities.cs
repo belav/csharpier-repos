@@ -267,8 +267,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 return propertyBody.Expression;
             }
 
-            var firstGetter = accessorList
-                ?.Accessors.Where(a => a.IsKind(SyntaxKind.GetAccessorDeclaration))
+            var firstGetter = accessorList?.Accessors
+                .Where(a => a.IsKind(SyntaxKind.GetAccessorDeclaration))
                 .FirstOrDefault();
             if (firstGetter == null)
             {

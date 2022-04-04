@@ -2195,8 +2195,9 @@ namespace Microsoft.CodeAnalysis
                     continue;
                 }
 
-                var doc = GetProjectState(documentId.ProjectId)
-                    ?.DocumentStates.GetState(documentId);
+                var doc = GetProjectState(documentId.ProjectId)?.DocumentStates.GetState(
+                    documentId
+                );
                 if (doc != null)
                 {
                     if (!doc.TryGetText(out var existingText) || existingText != text)

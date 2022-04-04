@@ -266,8 +266,8 @@ namespace AutoMapper
                     )
                     .Select(pm => pm.SourceMember.Name);
 
-                var ignoredSourceMembers = _sourceMemberConfigs
-                    ?.Values.Where(smc => smc.IsIgnored())
+                var ignoredSourceMembers = _sourceMemberConfigs?.Values
+                    .Where(smc => smc.IsIgnored())
                     .Select(pm => pm.SourceMember.Name);
 
                 properties = Profile

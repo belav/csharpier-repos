@@ -216,8 +216,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
               ? intialTriggerLocation.Snapshot
               : data.Snapshot;
 
-            var document = snapshotForDocument
-                ?.TextBuffer.AsTextContainer()
+            var document = snapshotForDocument?.TextBuffer
+                .AsTextContainer()
                 .GetOpenDocumentInCurrentContext();
             var completionService = document?.GetLanguageService<CompletionService>();
             var completionRules =

@@ -65,8 +65,8 @@ namespace System.Diagnostics
                 a => a.AttributeType == typeof(DebuggerBrowsableAttribute)
             );
             // Enums in attribute constructors are boxed as ints, so cast to int? first.
-            return (DebuggerBrowsableState?)(int?)debuggerBrowsableAttribute
-                ?.ConstructorArguments.Single()
+            return (DebuggerBrowsableState?)(int?)debuggerBrowsableAttribute?.ConstructorArguments
+                .Single()
                 .Value;
         }
 

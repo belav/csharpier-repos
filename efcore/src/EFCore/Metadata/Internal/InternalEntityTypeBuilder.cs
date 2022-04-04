@@ -4407,8 +4407,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 // TODO: Use convention batch to get the updated builder, see #15898
                 var principalBuilder = Metadata.IsInModel
                     ? Metadata.Builder
-                    : ownership
-                          ?.PrincipalEntityType.FindNavigation(ownership.PrincipalToDependent!.Name)
+                    : ownership?.PrincipalEntityType
+                          .FindNavigation(ownership.PrincipalToDependent!.Name)
                           ?.TargetEntityType
                           is EntityType target
                       && target.IsInModel
