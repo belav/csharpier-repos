@@ -12,7 +12,5 @@ namespace Microsoft.EntityFrameworkCore
     ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information.
     /// </remarks>
     [AttributeUsage(AttributeTargets.Class)]
-    public sealed class KeylessAttribute : Attribute
-    {
-    }
+    public sealed class KeylessAttribute : Attribute { }
 }

@@ -15,10 +15,12 @@ public class Outside
     public class Inside
     {
         public void GenericMethod<T>() { }
+
         public void TwoGenericMethod<T, U>() { }
     }
 
     public void GenericMethod<T>() { }
+
     public void TwoGenericMethod<T, U>() { }
 }
 
@@ -27,16 +29,23 @@ public class Outside<T>
     public class Inside<U>
     {
         public void GenericMethod<V>() { }
+
         public void TwoGenericMethod<V, W>() { }
     }
 
     public void GenericMethod<U>() { }
+
     public void TwoGenericMethod<U, V>() { }
 }
 
 namespace System.Tests
 {
-    [ActiveIssue("https://github.com/dotnet/runtime/issues/34328", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+    [ActiveIssue(
+        "https://github.com/dotnet/runtime/issues/34328",
+        TestPlatforms.Windows,
+        TargetFrameworkMonikers.Netcoreapp,
+        TestRuntimes.Mono
+    )]
     public partial class TypeTests
     {
         private static readonly IList<Type> NonArrayBaseTypes;
@@ -82,16 +91,23 @@ namespace System.Tests
         [InlineData("*FilterName", false)]
         [InlineData("", false)]
         [InlineData("     ", false)]
-        public void FilterName_Invoke_DelegateFiltersExpectedMembers(string filterCriteria, bool expected)
+        public void FilterName_Invoke_DelegateFiltersExpectedMembers(
+            string filterCriteria,
+            bool expected
+        )
         {
-            MethodInfo mi = typeof(TypeTests).GetMethod(nameof(FilterName_Invoke_DelegateFiltersExpectedMembers));
+            MethodInfo mi = typeof(TypeTests).GetMethod(
+                nameof(FilterName_Invoke_DelegateFiltersExpectedMembers)
+            );
             Assert.Equal(expected, Type.FilterName(mi, filterCriteria));
         }
 
         [Fact]
         public void FilterName_InvalidFilterCriteria_ThrowsInvalidFilterCriteriaException()
         {
-            MethodInfo mi = typeof(TypeTests).GetMethod(nameof(FilterName_Invoke_DelegateFiltersExpectedMembers));
+            MethodInfo mi = typeof(TypeTests).GetMethod(
+                nameof(FilterName_Invoke_DelegateFiltersExpectedMembers)
+            );
             Assert.Throws<InvalidFilterCriteriaException>(() => Type.FilterName(mi, null));
             Assert.Throws<InvalidFilterCriteriaException>(() => Type.FilterName(mi, new object()));
         }
@@ -120,38 +136,116 @@ namespace System.Tests
         [InlineData("*FilterNameIgnoreCase", false)]
         [InlineData("", false)]
         [InlineData("     ", false)]
-        public void FilterNameIgnoreCase_Invoke_DelegateFiltersExpectedMembers(string filterCriteria, bool expected)
+        public void FilterNameIgnoreCase_Invoke_DelegateFiltersExpectedMembers(
+            string filterCriteria,
+            bool expected
+        )
         {
-            MethodInfo mi = typeof(TypeTests).GetMethod(nameof(FilterNameIgnoreCase_Invoke_DelegateFiltersExpectedMembers));
+            MethodInfo mi = typeof(TypeTests).GetMethod(
+                nameof(FilterNameIgnoreCase_Invoke_DelegateFiltersExpectedMembers)
+            );
             Assert.Equal(expected, Type.FilterNameIgnoreCase(mi, filterCriteria));
         }
 
         [Fact]
         public void FilterNameIgnoreCase_InvalidFilterCriteria_ThrowsInvalidFilterCriteriaException()
         {
-            MethodInfo mi = typeof(TypeTests).GetMethod(nameof(FilterName_Invoke_DelegateFiltersExpectedMembers));
-            Assert.Throws<InvalidFilterCriteriaException>(() => Type.FilterNameIgnoreCase(mi, null));
-            Assert.Throws<InvalidFilterCriteriaException>(() => Type.FilterNameIgnoreCase(mi, new object()));
+            MethodInfo mi = typeof(TypeTests).GetMethod(
+                nameof(FilterName_Invoke_DelegateFiltersExpectedMembers)
+            );
+            Assert.Throws<InvalidFilterCriteriaException>(
+                () => Type.FilterNameIgnoreCase(mi, null)
+            );
+            Assert.Throws<InvalidFilterCriteriaException>(
+                () => Type.FilterNameIgnoreCase(mi, new object())
+            );
         }
 
         public static IEnumerable<object[]> FindMembers_TestData()
         {
-            yield return new object[] { MemberTypes.Method, BindingFlags.Public | BindingFlags.Instance, Type.FilterName, "HelloWorld", 0 };
-            yield return new object[] { MemberTypes.Method, BindingFlags.Public | BindingFlags.Instance, Type.FilterName, "FilterName_Invoke_DelegateFiltersExpectedMembers", 1 };
-            yield return new object[] { MemberTypes.Method, BindingFlags.Public | BindingFlags.Instance, Type.FilterName, "FilterName_Invoke_Delegate*", 1 };
-            yield return new object[] { MemberTypes.Method, BindingFlags.Public | BindingFlags.Instance, Type.FilterName, "filterName_Invoke_Delegate*", 0 };
+            yield return new object[]
+            {
+                MemberTypes.Method,
+                BindingFlags.Public | BindingFlags.Instance,
+                Type.FilterName,
+                "HelloWorld",
+                0
+            };
+            yield return new object[]
+            {
+                MemberTypes.Method,
+                BindingFlags.Public | BindingFlags.Instance,
+                Type.FilterName,
+                "FilterName_Invoke_DelegateFiltersExpectedMembers",
+                1
+            };
+            yield return new object[]
+            {
+                MemberTypes.Method,
+                BindingFlags.Public | BindingFlags.Instance,
+                Type.FilterName,
+                "FilterName_Invoke_Delegate*",
+                1
+            };
+            yield return new object[]
+            {
+                MemberTypes.Method,
+                BindingFlags.Public | BindingFlags.Instance,
+                Type.FilterName,
+                "filterName_Invoke_Delegate*",
+                0
+            };
 
-            yield return new object[] { MemberTypes.Method, BindingFlags.Public | BindingFlags.Instance, Type.FilterNameIgnoreCase, "HelloWorld", 0 };
-            yield return new object[] { MemberTypes.Method, BindingFlags.Public | BindingFlags.Instance, Type.FilterNameIgnoreCase, "FilterName_Invoke_DelegateFiltersExpectedMembers", 1 };
-            yield return new object[] { MemberTypes.Method, BindingFlags.Public | BindingFlags.Instance, Type.FilterNameIgnoreCase, "FilterName_Invoke_Delegate*", 1 };
-            yield return new object[] { MemberTypes.Method, BindingFlags.Public | BindingFlags.Instance, Type.FilterNameIgnoreCase, "filterName_Invoke_Delegate*", 1 };
+            yield return new object[]
+            {
+                MemberTypes.Method,
+                BindingFlags.Public | BindingFlags.Instance,
+                Type.FilterNameIgnoreCase,
+                "HelloWorld",
+                0
+            };
+            yield return new object[]
+            {
+                MemberTypes.Method,
+                BindingFlags.Public | BindingFlags.Instance,
+                Type.FilterNameIgnoreCase,
+                "FilterName_Invoke_DelegateFiltersExpectedMembers",
+                1
+            };
+            yield return new object[]
+            {
+                MemberTypes.Method,
+                BindingFlags.Public | BindingFlags.Instance,
+                Type.FilterNameIgnoreCase,
+                "FilterName_Invoke_Delegate*",
+                1
+            };
+            yield return new object[]
+            {
+                MemberTypes.Method,
+                BindingFlags.Public | BindingFlags.Instance,
+                Type.FilterNameIgnoreCase,
+                "filterName_Invoke_Delegate*",
+                1
+            };
         }
 
         [Theory]
         [MemberData(nameof(FindMembers_TestData))]
-        public void FindMembers_Invoke_ReturnsExpected(MemberTypes memberType, BindingFlags bindingAttr, MemberFilter filter, object filterCriteria, int expectedLength)
+        public void FindMembers_Invoke_ReturnsExpected(
+            MemberTypes memberType,
+            BindingFlags bindingAttr,
+            MemberFilter filter,
+            object filterCriteria,
+            int expectedLength
+        )
         {
-            Assert.Equal(expectedLength, typeof(TypeTests).FindMembers(memberType, bindingAttr, filter, filterCriteria).Length);
+            Assert.Equal(
+                expectedLength,
+                typeof(TypeTests)
+                    .FindMembers(memberType, bindingAttr, filter, filterCriteria)
+                    .Length
+            );
         }
 
         [Theory]
@@ -194,7 +288,6 @@ namespace System.Tests
                 new object[] { typeof(double), typeof(double[]) },
                 new object[] { typeof(IntPtr), typeof(IntPtr[]) },
                 new object[] { typeof(UIntPtr), typeof(UIntPtr[]) },
-
                 // Primitives enums
                 new object[] { typeof(SByteEnum), typeof(SByteEnum[]) },
                 new object[] { typeof(ByteEnum), typeof(ByteEnum[]) },
@@ -204,12 +297,10 @@ namespace System.Tests
                 new object[] { typeof(UInt32Enum), typeof(UInt32Enum[]) },
                 new object[] { typeof(Int64Enum), typeof(Int64Enum[]) },
                 new object[] { typeof(UInt64Enum), typeof(UInt64Enum[]) },
-
                 // Array, pointers
                 new object[] { typeof(string[]), typeof(string[][]) },
                 new object[] { typeof(int[]), typeof(int[][]) },
                 new object[] { typeof(int*), typeof(int*[]) },
-
                 // Classes, structs, interfaces, enums
                 new object[] { typeof(NonGenericClass), typeof(NonGenericClass[]) },
                 new object[] { typeof(GenericClass<int>), typeof(GenericClass<int>[]) },
@@ -242,13 +333,22 @@ namespace System.Tests
             yield return new object[] { typeof(StaticClass) };
             yield return new object[] { typeof(void) };
             yield return new object[] { typeof(GenericClass<>) };
-            yield return new object[] { typeof(GenericClass<>).MakeGenericType(typeof(GenericClass<>)) };
-            yield return new object[] { typeof(GenericClass<>).GetTypeInfo().GetGenericArguments()[0] };
+            yield return new object[]
+            {
+                typeof(GenericClass<>).MakeGenericType(typeof(GenericClass<>))
+            };
+            yield return new object[]
+            {
+                typeof(GenericClass<>).GetTypeInfo().GetGenericArguments()[0]
+            };
         }
 
         [Theory]
         [MemberData(nameof(MakeArray_UnusualTypes_TestData))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/52072", TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/52072",
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst
+        )]
         public void MakeArrayType_UnusualTypes_ReturnsExpected(Type t)
         {
             Type tArray = t.MakeArrayType();
@@ -350,7 +450,6 @@ namespace System.Tests
                 new object[] { typeof(IntPtr) },
                 new object[] { typeof(UIntPtr) },
                 new object[] { typeof(void) },
-
                 // Primitives enums
                 new object[] { typeof(SByteEnum) },
                 new object[] { typeof(ByteEnum) },
@@ -360,12 +459,10 @@ namespace System.Tests
                 new object[] { typeof(UInt32Enum) },
                 new object[] { typeof(Int64Enum) },
                 new object[] { typeof(UInt64Enum) },
-
                 // Array, pointers
                 new object[] { typeof(string[]) },
                 new object[] { typeof(int[]) },
                 new object[] { typeof(int*) },
-
                 // Classes, structs, interfaces, enums
                 new object[] { typeof(NonGenericClass) },
                 new object[] { typeof(GenericClass<int>) },
@@ -375,12 +472,10 @@ namespace System.Tests
                 new object[] { typeof(GenericInterface<int>) },
                 new object[] { typeof(AbstractClass) },
                 new object[] { typeof(StaticClass) },
-
                 // Generic types.
                 new object[] { typeof(GenericClass<>) },
                 new object[] { typeof(GenericClass<>).MakeGenericType(typeof(GenericClass<>)) },
                 new object[] { typeof(GenericClass<>).GetTypeInfo().GetGenericArguments()[0] },
-
                 // By-Ref Like.
                 new object[] { typeof(TypedReference) },
                 new object[] { typeof(ArgIterator) },
@@ -432,7 +527,6 @@ namespace System.Tests
                 new object[] { typeof(IntPtr) },
                 new object[] { typeof(UIntPtr) },
                 new object[] { typeof(void) },
-
                 // Primitives enums
                 new object[] { typeof(SByteEnum) },
                 new object[] { typeof(ByteEnum) },
@@ -442,12 +536,10 @@ namespace System.Tests
                 new object[] { typeof(UInt32Enum) },
                 new object[] { typeof(Int64Enum) },
                 new object[] { typeof(UInt64Enum) },
-
                 // Array, pointers
                 new object[] { typeof(string[]) },
                 new object[] { typeof(int[]) },
                 new object[] { typeof(int*) },
-
                 // Classes, structs, interfaces, enums
                 new object[] { typeof(NonGenericClass) },
                 new object[] { typeof(GenericClass<int>) },
@@ -457,12 +549,10 @@ namespace System.Tests
                 new object[] { typeof(GenericInterface<int>) },
                 new object[] { typeof(AbstractClass) },
                 new object[] { typeof(StaticClass) },
-
                 // Generic types.
                 new object[] { typeof(GenericClass<>) },
                 new object[] { typeof(GenericClass<>).MakeGenericType(typeof(GenericClass<>)) },
                 new object[] { typeof(GenericClass<>).GetTypeInfo().GetGenericArguments()[0] },
-
                 // ByRef Like.
                 new object[] { typeof(TypedReference) },
                 new object[] { typeof(ArgIterator) },
@@ -505,8 +595,14 @@ namespace System.Tests
         [InlineData("Outside`1[System.Nullable`1[System.Boolean]]", typeof(Outside<bool?>))]
         public void GetTypeByName_ValidType_ReturnsExpected(string typeName, Type expectedType)
         {
-            Assert.Equal(expectedType, Type.GetType(typeName, throwOnError: false, ignoreCase: false));
-            Assert.Equal(expectedType, Type.GetType(typeName.ToLower(), throwOnError: false, ignoreCase: true));
+            Assert.Equal(
+                expectedType,
+                Type.GetType(typeName, throwOnError: false, ignoreCase: false)
+            );
+            Assert.Equal(
+                expectedType,
+                Type.GetType(typeName.ToLower(), throwOnError: false, ignoreCase: true)
+            );
         }
 
         [Theory]
@@ -516,18 +612,30 @@ namespace System.Tests
         [InlineData("System.Int32[,*,]", typeof(ArgumentException), false)]
         [InlineData("Outside`2", typeof(TypeLoadException), false)]
         [InlineData("Outside`1[System.Boolean, System.Int32]", typeof(ArgumentException), true)]
-        public void GetTypeByName_Invalid(string typeName, Type expectedException, bool alwaysThrowsException)
+        public void GetTypeByName_Invalid(
+            string typeName,
+            Type expectedException,
+            bool alwaysThrowsException
+        )
         {
             if (!alwaysThrowsException)
             {
                 Assert.Null(Type.GetType(typeName, throwOnError: false, ignoreCase: false));
             }
 
-            Assert.Throws(expectedException, () => Type.GetType(typeName, throwOnError: true, ignoreCase: false));
+            Assert.Throws(
+                expectedException,
+                () => Type.GetType(typeName, throwOnError: true, ignoreCase: false)
+            );
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/52393", typeof(PlatformDetection), nameof(PlatformDetection.IsBrowser), nameof(PlatformDetection.IsMonoAOT))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/52393",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBrowser),
+            nameof(PlatformDetection.IsMonoAOT)
+        )]
         public void GetTypeByName_InvokeViaReflection_Success()
         {
             MethodInfo method = typeof(Type).GetMethod("GetType", new[] { typeof(string) });
@@ -572,9 +680,15 @@ namespace System.Tests
         public void ReflectionOnlyGetType()
         {
 #pragma warning disable SYSLIB0018 // ReflectionOnly loading is not supported and throws PlatformNotSupportedException.
-            Assert.Throws<PlatformNotSupportedException>(() => Type.ReflectionOnlyGetType(null, true, false));
-            Assert.Throws<PlatformNotSupportedException>(() => Type.ReflectionOnlyGetType("", true, true));
-            Assert.Throws<PlatformNotSupportedException>(() => Type.ReflectionOnlyGetType("System.Tests.TypeTests", false, true));
+            Assert.Throws<PlatformNotSupportedException>(
+                () => Type.ReflectionOnlyGetType(null, true, false)
+            );
+            Assert.Throws<PlatformNotSupportedException>(
+                () => Type.ReflectionOnlyGetType("", true, true)
+            );
+            Assert.Throws<PlatformNotSupportedException>(
+                () => Type.ReflectionOnlyGetType("System.Tests.TypeTests", false, true)
+            );
 #pragma warning restore SYSLIB0018
         }
 
@@ -588,10 +702,17 @@ namespace System.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/52072", TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/52072",
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst
+        )]
         public void IsSZArray_TrueForSZArrayTypes()
         {
-            foreach (Type type in NonArrayBaseTypes.Select(nonArrayBaseType => nonArrayBaseType.MakeArrayType()))
+            foreach (
+                Type type in NonArrayBaseTypes.Select(
+                    nonArrayBaseType => nonArrayBaseType.MakeArrayType()
+                )
+            )
             {
                 Assert.True(type.IsSZArray);
             }
@@ -600,12 +721,20 @@ namespace System.Tests
         [Fact]
         public void IsSZArray_FalseForVariableBoundArrayTypes()
         {
-            foreach (Type type in NonArrayBaseTypes.Select(nonArrayBaseType => nonArrayBaseType.MakeArrayType(1)))
+            foreach (
+                Type type in NonArrayBaseTypes.Select(
+                    nonArrayBaseType => nonArrayBaseType.MakeArrayType(1)
+                )
+            )
             {
                 Assert.False(type.IsSZArray);
             }
 
-            foreach (Type type in NonArrayBaseTypes.Select(nonArrayBaseType => nonArrayBaseType.MakeArrayType(2)))
+            foreach (
+                Type type in NonArrayBaseTypes.Select(
+                    nonArrayBaseType => nonArrayBaseType.MakeArrayType(2)
+                )
+            )
             {
                 Assert.False(type.IsSZArray);
             }
@@ -623,7 +752,6 @@ namespace System.Tests
             Assert.False(typeof(int[]).MakeByRefType().IsSZArray);
         }
 
-
         [Fact]
         public void IsSZArray_FalseForByRefVariableArrayType()
         {
@@ -640,10 +768,17 @@ namespace System.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/52072", TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/52072",
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst
+        )]
         public void IsVariableBoundArray_FalseForSZArrayTypes()
         {
-            foreach (Type type in NonArrayBaseTypes.Select(nonArrayBaseType => nonArrayBaseType.MakeArrayType()))
+            foreach (
+                Type type in NonArrayBaseTypes.Select(
+                    nonArrayBaseType => nonArrayBaseType.MakeArrayType()
+                )
+            )
             {
                 Assert.False(type.IsVariableBoundArray);
             }
@@ -652,12 +787,20 @@ namespace System.Tests
         [Fact]
         public void IsVariableBoundArray_TrueForVariableBoundArrayTypes()
         {
-            foreach (Type type in NonArrayBaseTypes.Select(nonArrayBaseType => nonArrayBaseType.MakeArrayType(1)))
+            foreach (
+                Type type in NonArrayBaseTypes.Select(
+                    nonArrayBaseType => nonArrayBaseType.MakeArrayType(1)
+                )
+            )
             {
                 Assert.True(type.IsVariableBoundArray);
             }
 
-            foreach (Type type in NonArrayBaseTypes.Select(nonArrayBaseType => nonArrayBaseType.MakeArrayType(2)))
+            foreach (
+                Type type in NonArrayBaseTypes.Select(
+                    nonArrayBaseType => nonArrayBaseType.MakeArrayType(2)
+                )
+            )
             {
                 Assert.True(type.IsVariableBoundArray);
             }
@@ -674,7 +817,6 @@ namespace System.Tests
         {
             Assert.False(typeof(int[]).MakeByRefType().IsVariableBoundArray);
         }
-
 
         [Fact]
         public void IsVariableBoundArray_FalseForByRefVariableArrayType()
@@ -709,7 +851,10 @@ namespace System.Tests
         {
             foreach (Type type in typeof(object).Assembly.DefinedTypes)
             {
-                Assert.True(type.IsTypeDefinition, "IsTypeDefinition expected to be true for type " + type);
+                Assert.True(
+                    type.IsTypeDefinition,
+                    "IsTypeDefinition expected to be true for type " + type
+                );
             }
         }
 
@@ -723,7 +868,7 @@ namespace System.Tests
                 yield return new object[] { typeof(Outside.Inside) };
                 yield return new object[] { typeof(Outside<>) };
                 yield return new object[] { typeof(IEnumerable<>) };
-                yield return new object[] { 3.GetType().GetType() };  // This yields a reflection-blocked type on .NET Native - which is implemented separately
+                yield return new object[] { 3.GetType().GetType() }; // This yields a reflection-blocked type on .NET Native - which is implemented separately
 
                 if (PlatformDetection.IsWindows)
                     yield return new object[] { Type.GetTypeFromCLSID(default(Guid)) };
@@ -795,13 +940,16 @@ namespace System.Tests
             public Span<int> S;
         }
 
-        private struct RegularStruct
-        {
-        }
+        private struct RegularStruct { }
 
         [Theory]
         [MemberData(nameof(IsGenericParameterTestData))]
-        public static void TestIsGenericParameter(Type type, bool isGenericParameter, bool isGenericTypeParameter, bool isGenericMethodParameter)
+        public static void TestIsGenericParameter(
+            Type type,
+            bool isGenericParameter,
+            bool isGenericTypeParameter,
+            bool isGenericMethodParameter
+        )
         {
             Assert.Equal(isGenericParameter, type.IsGenericParameter);
             Assert.Equal(isGenericTypeParameter, type.IsGenericTypeParameter);
@@ -819,17 +967,37 @@ namespace System.Tests
                 yield return new object[] { typeof(int[,]), false, false, false };
                 yield return new object[] { typeof(int).MakeByRefType(), false, false, false };
                 yield return new object[] { typeof(int).MakePointerType(), false, false, false };
-                yield return new object[] { typeof(DummyGenericClassForTypeTests<>), false, false, false };
-                yield return new object[] { typeof(DummyGenericClassForTypeTests<int>), false, false, false };
+                yield return new object[]
+                {
+                    typeof(DummyGenericClassForTypeTests<>),
+                    false,
+                    false,
+                    false
+                };
+                yield return new object[]
+                {
+                    typeof(DummyGenericClassForTypeTests<int>),
+                    false,
+                    false,
+                    false
+                };
                 if (PlatformDetection.IsWindows) // GetTypeFromCLSID is Windows only
                 {
-                    yield return new object[] { Type.GetTypeFromCLSID(default(Guid)), false, false, false };
+                    yield return new object[]
+                    {
+                        Type.GetTypeFromCLSID(default(Guid)),
+                        false,
+                        false,
+                        false
+                    };
                 }
 
                 Type theT = typeof(Outside<>).GetTypeInfo().GenericTypeParameters[0];
                 yield return new object[] { theT, true, true, false };
 
-                Type theM = typeof(TypeTests).GetMethod(nameof(GenericMethod), BindingFlags.NonPublic | BindingFlags.Static).GetGenericArguments()[0];
+                Type theM = typeof(TypeTests)
+                    .GetMethod(nameof(GenericMethod), BindingFlags.NonPublic | BindingFlags.Static)
+                    .GetGenericArguments()[0];
                 yield return new object[] { theM, true, false, true };
             }
         }
@@ -837,83 +1005,115 @@ namespace System.Tests
         private static void GenericMethod<M>() { }
     }
 
-    public class TypeTestsExtended    {
+    public class TypeTestsExtended
+    {
         public class ContextBoundClass : ContextBoundObject
         {
             public string Value = "The Value property.";
         }
 
-        static string s_testAssemblyPath = Path.Combine(Environment.CurrentDirectory, "TestLoadAssembly.dll");
-        static string testtype = "System.Collections.Generic.Dictionary`2[[Program, Foo], [Program, Foo]]";
+        static string s_testAssemblyPath = Path.Combine(
+            Environment.CurrentDirectory,
+            "TestLoadAssembly.dll"
+        );
+        static string testtype =
+            "System.Collections.Generic.Dictionary`2[[Program, Foo], [Program, Foo]]";
 
-        private static Func<AssemblyName, Assembly> assemblyloader = (aName) => aName.Name == "TestLoadAssembly" ?
-                           Assembly.LoadFrom(@".\TestLoadAssembly.dll") :
-                           null;
-        private static Func<Assembly, string, bool, Type> typeloader = (assem, name, ignore) => assem == null ?
-                             Type.GetType(name, false, ignore) :
-                                 assem.GetType(name, false, ignore);
+        private static Func<AssemblyName, Assembly> assemblyloader = (aName) =>
+            aName.Name == "TestLoadAssembly" ? Assembly.LoadFrom(@".\TestLoadAssembly.dll") : null;
+        private static Func<Assembly, string, bool, Type> typeloader = (assem, name, ignore) =>
+            assem == null ? Type.GetType(name, false, ignore) : assem.GetType(name, false, ignore);
+
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void GetTypeByName()
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
-            RemoteExecutor.Invoke(() =>
-               {
-                   string test1 = testtype;
-                   Type t1 = Type.GetType(test1,
-                             (aName) => aName.Name == "Foo" ?
-                                   Assembly.LoadFrom(s_testAssemblyPath) : null,
-                             typeloader,
-                             true
-                     );
+            RemoteExecutor
+                .Invoke(
+                    () =>
+                    {
+                        string test1 = testtype;
+                        Type t1 = Type.GetType(
+                            test1,
+                            (aName) =>
+                                aName.Name == "Foo" ? Assembly.LoadFrom(s_testAssemblyPath) : null,
+                            typeloader,
+                            true
+                        );
 
-                   Assert.NotNull(t1);
+                        Assert.NotNull(t1);
 
-                   string test2 = "System.Collections.Generic.Dictionary`2[[Program, TestLoadAssembly], [Program, TestLoadAssembly]]";
-                   Type t2 = Type.GetType(test2, assemblyloader, typeloader, true);
+                        string test2 =
+                            "System.Collections.Generic.Dictionary`2[[Program, TestLoadAssembly], [Program, TestLoadAssembly]]";
+                        Type t2 = Type.GetType(test2, assemblyloader, typeloader, true);
 
-                   Assert.NotNull(t2);
-                   Assert.Equal(t1, t2);
-               }, options).Dispose();
+                        Assert.NotNull(t2);
+                        Assert.Equal(t1, t2);
+                    },
+                    options
+                )
+                .Dispose();
         }
 
         [ConditionalTheory(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
-        [InlineData("System.Collections.Generic.Dictionary`2[[Program, TestLoadAssembly], [Program2, TestLoadAssembly]]")]
+        [InlineData(
+            "System.Collections.Generic.Dictionary`2[[Program, TestLoadAssembly], [Program2, TestLoadAssembly]]"
+        )]
         [InlineData("")]
         public void GetTypeByName_NoSuchType_ThrowsTypeLoadException(string typeName)
         {
-            RemoteExecutor.Invoke(marshalledTypeName =>
-            {
-                Assert.Throws<TypeLoadException>(() => Type.GetType(marshalledTypeName, assemblyloader, typeloader, true));
-                Assert.Null(Type.GetType(marshalledTypeName, assemblyloader, typeloader, false));
-            }, typeName).Dispose();
+            RemoteExecutor
+                .Invoke(
+                    marshalledTypeName =>
+                    {
+                        Assert.Throws<TypeLoadException>(
+                            () => Type.GetType(marshalledTypeName, assemblyloader, typeloader, true)
+                        );
+                        Assert.Null(
+                            Type.GetType(marshalledTypeName, assemblyloader, typeloader, false)
+                        );
+                    },
+                    typeName
+                )
+                .Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void GetTypeByNameCaseSensitiveTypeloadFailure()
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
-            RemoteExecutor.Invoke(() =>
-               {
-                   //Type load failure due to case sensitive search of type Ptogram
-                   string test3 = "System.Collections.Generic.Dictionary`2[[Program, TestLoadAssembly], [program, TestLoadAssembly]]";
-                   Assert.Throws<TypeLoadException>(() =>
-                                Type.GetType(test3,
-                                            assemblyloader,
-                                            typeloader,
-                                            true,
-                                            false     //case sensitive
-                   ));
+            RemoteExecutor
+                .Invoke(
+                    () =>
+                    {
+                        //Type load failure due to case sensitive search of type Ptogram
+                        string test3 =
+                            "System.Collections.Generic.Dictionary`2[[Program, TestLoadAssembly], [program, TestLoadAssembly]]";
+                        Assert.Throws<TypeLoadException>(
+                            () =>
+                                Type.GetType(
+                                    test3,
+                                    assemblyloader,
+                                    typeloader,
+                                    true,
+                                    false //case sensitive
+                                )
+                        );
 
-                   //non throwing version
-                   Type t2 = Type.GetType(test3,
-                                          assemblyloader,
-                                          typeloader,
-                                          false,  //no throw
-                                          false
-                  );
+                        //non throwing version
+                        Type t2 = Type.GetType(
+                            test3,
+                            assemblyloader,
+                            typeloader,
+                            false, //no throw
+                            false
+                        );
 
-                   Assert.Null(t2);
-               }, options).Dispose();
+                        Assert.Null(t2);
+                    },
+                    options
+                )
+                .Dispose();
         }
 
         [Fact]
@@ -923,7 +1123,10 @@ namespace System.Tests
             Assert.True(!typeof(ContextBoundClass).IsContextful);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public void MakeGenericType_NonRuntimeType()
         {
             foreach (Type nonRuntimeType in Helpers.NonRuntimeTypes)
@@ -942,8 +1145,14 @@ namespace System.Tests
                 typeof(SimpleType),
                 new Tuple<MethodInfo, MethodInfo>[]
                 {
-                    new Tuple<MethodInfo, MethodInfo>(typeof(ISimpleInterface).GetMethod("Method"), typeof(SimpleType).GetMethod("Method")),
-                    new Tuple<MethodInfo, MethodInfo>(typeof(ISimpleInterface).GetMethod("GenericMethod"), typeof(SimpleType).GetMethod("GenericMethod"))
+                    new Tuple<MethodInfo, MethodInfo>(
+                        typeof(ISimpleInterface).GetMethod("Method"),
+                        typeof(SimpleType).GetMethod("Method")
+                    ),
+                    new Tuple<MethodInfo, MethodInfo>(
+                        typeof(ISimpleInterface).GetMethod("GenericMethod"),
+                        typeof(SimpleType).GetMethod("GenericMethod")
+                    )
                 }
             };
             yield return new object[]
@@ -952,8 +1161,14 @@ namespace System.Tests
                 typeof(AbstractSimpleType),
                 new Tuple<MethodInfo, MethodInfo>[]
                 {
-                    new Tuple<MethodInfo, MethodInfo>(typeof(ISimpleInterface).GetMethod("Method"), typeof(AbstractSimpleType).GetMethod("Method")),
-                    new Tuple<MethodInfo, MethodInfo>(typeof(ISimpleInterface).GetMethod("GenericMethod"), typeof(AbstractSimpleType).GetMethod("GenericMethod"))
+                    new Tuple<MethodInfo, MethodInfo>(
+                        typeof(ISimpleInterface).GetMethod("Method"),
+                        typeof(AbstractSimpleType).GetMethod("Method")
+                    ),
+                    new Tuple<MethodInfo, MethodInfo>(
+                        typeof(ISimpleInterface).GetMethod("GenericMethod"),
+                        typeof(AbstractSimpleType).GetMethod("GenericMethod")
+                    )
                 }
             };
             yield return new object[]
@@ -962,7 +1177,10 @@ namespace System.Tests
                 typeof(DerivedType),
                 new Tuple<MethodInfo, MethodInfo>[]
                 {
-                    new Tuple<MethodInfo, MethodInfo>(typeof(IGenericInterface<object>).GetMethod("Method"), typeof(DerivedType).GetMethod("Method", new Type[] { typeof(object) })),
+                    new Tuple<MethodInfo, MethodInfo>(
+                        typeof(IGenericInterface<object>).GetMethod("Method"),
+                        typeof(DerivedType).GetMethod("Method", new Type[] { typeof(object) })
+                    ),
                 }
             };
             yield return new object[]
@@ -971,7 +1189,10 @@ namespace System.Tests
                 typeof(DerivedType),
                 new Tuple<MethodInfo, MethodInfo>[]
                 {
-                    new Tuple<MethodInfo, MethodInfo>(typeof(IGenericInterface<string>).GetMethod("Method"), typeof(DerivedType).GetMethod("Method", new Type[] { typeof(string) })),
+                    new Tuple<MethodInfo, MethodInfo>(
+                        typeof(IGenericInterface<string>).GetMethod("Method"),
+                        typeof(DerivedType).GetMethod("Method", new Type[] { typeof(string) })
+                    ),
                 }
             };
             yield return new object[]
@@ -980,7 +1201,10 @@ namespace System.Tests
                 typeof(DIMs.C1),
                 new Tuple<MethodInfo, MethodInfo>[]
                 {
-                    new Tuple<MethodInfo, MethodInfo>(typeof(DIMs.I1).GetMethod("M"), typeof(DIMs.I1).GetMethod("M"))
+                    new Tuple<MethodInfo, MethodInfo>(
+                        typeof(DIMs.I1).GetMethod("M"),
+                        typeof(DIMs.I1).GetMethod("M")
+                    )
                 }
             };
             yield return new object[]
@@ -989,7 +1213,13 @@ namespace System.Tests
                 typeof(DIMs.C2),
                 new Tuple<MethodInfo, MethodInfo>[]
                 {
-                    new Tuple<MethodInfo, MethodInfo>(typeof(DIMs.I2).GetMethod("System.Tests.TypeTestsExtended.DIMs.I1.M", BindingFlags.Instance | BindingFlags.NonPublic), null)
+                    new Tuple<MethodInfo, MethodInfo>(
+                        typeof(DIMs.I2).GetMethod(
+                            "System.Tests.TypeTestsExtended.DIMs.I1.M",
+                            BindingFlags.Instance | BindingFlags.NonPublic
+                        ),
+                        null
+                    )
                 }
             };
             yield return new object[]
@@ -998,7 +1228,10 @@ namespace System.Tests
                 typeof(DIMs.C2),
                 new Tuple<MethodInfo, MethodInfo>[]
                 {
-                    new Tuple<MethodInfo, MethodInfo>(typeof(DIMs.I1).GetMethod("M"), typeof(DIMs.C2).GetMethod("M"))
+                    new Tuple<MethodInfo, MethodInfo>(
+                        typeof(DIMs.I1).GetMethod("M"),
+                        typeof(DIMs.C2).GetMethod("M")
+                    )
                 }
             };
             yield return new object[]
@@ -1007,7 +1240,16 @@ namespace System.Tests
                 typeof(DIMs.C3),
                 new Tuple<MethodInfo, MethodInfo>[]
                 {
-                    new Tuple<MethodInfo, MethodInfo>(typeof(DIMs.I3).GetMethod("System.Tests.TypeTestsExtended.DIMs.I1.M", BindingFlags.Instance | BindingFlags.NonPublic), typeof(DIMs.I3).GetMethod("System.Tests.TypeTestsExtended.DIMs.I1.M", BindingFlags.Instance | BindingFlags.NonPublic))
+                    new Tuple<MethodInfo, MethodInfo>(
+                        typeof(DIMs.I3).GetMethod(
+                            "System.Tests.TypeTestsExtended.DIMs.I1.M",
+                            BindingFlags.Instance | BindingFlags.NonPublic
+                        ),
+                        typeof(DIMs.I3).GetMethod(
+                            "System.Tests.TypeTestsExtended.DIMs.I1.M",
+                            BindingFlags.Instance | BindingFlags.NonPublic
+                        )
+                    )
                 }
             };
             yield return new object[]
@@ -1016,7 +1258,13 @@ namespace System.Tests
                 typeof(DIMs.C4),
                 new Tuple<MethodInfo, MethodInfo>[]
                 {
-                    new Tuple<MethodInfo, MethodInfo>(typeof(DIMs.I4).GetMethod("System.Tests.TypeTestsExtended.DIMs.I1.M", BindingFlags.Instance | BindingFlags.NonPublic), null)
+                    new Tuple<MethodInfo, MethodInfo>(
+                        typeof(DIMs.I4).GetMethod(
+                            "System.Tests.TypeTestsExtended.DIMs.I1.M",
+                            BindingFlags.Instance | BindingFlags.NonPublic
+                        ),
+                        null
+                    )
                 }
             };
             yield return new object[]
@@ -1025,14 +1273,24 @@ namespace System.Tests
                 typeof(DIMs.C4),
                 new Tuple<MethodInfo, MethodInfo>[]
                 {
-                    new Tuple<MethodInfo, MethodInfo>(typeof(DIMs.I2).GetMethod("System.Tests.TypeTestsExtended.DIMs.I1.M", BindingFlags.Instance | BindingFlags.NonPublic), null)
+                    new Tuple<MethodInfo, MethodInfo>(
+                        typeof(DIMs.I2).GetMethod(
+                            "System.Tests.TypeTestsExtended.DIMs.I1.M",
+                            BindingFlags.Instance | BindingFlags.NonPublic
+                        ),
+                        null
+                    )
                 }
             };
         }
 
         [Theory]
         [MemberData(nameof(GetInterfaceMap_TestData))]
-        public void GetInterfaceMap(Type interfaceType, Type classType, Tuple<MethodInfo, MethodInfo>[] expectedMap)
+        public void GetInterfaceMap(
+            Type interfaceType,
+            Type classType,
+            Tuple<MethodInfo, MethodInfo>[] expectedMap
+        )
         {
             InterfaceMapping actualMapping = classType.GetInterfaceMap(interfaceType);
 
@@ -1060,6 +1318,7 @@ namespace System.Tests
         class SimpleType : ISimpleInterface
         {
             public void Method() { }
+
             public void GenericMethod<T>() { }
         }
 
@@ -1086,10 +1345,12 @@ namespace System.Tests
 
         static class DIMs
         {
-            
             internal interface I1
             {
-                void M() { throw new Exception("e"); }
+                void M()
+                {
+                    throw new Exception("e");
+                }
             }
 
             internal class C1 : I1 { }
@@ -1108,7 +1369,7 @@ namespace System.Tests
             {
                 void I1.M()
                 { // unabstacted
-                    throw new Exception ("e");
+                    throw new Exception("e");
                 }
             }
 
@@ -1136,7 +1397,9 @@ namespace System.Tests
     public class NonGenericSubClassOfGeneric : GenericClass<string> { }
 
     public class GenericClass<T, U> { }
+
     public abstract class AbstractClass { }
+
     public static class StaticClass { }
 
     public struct NonGenericStruct { }
@@ -1144,10 +1407,13 @@ namespace System.Tests
     public ref struct RefStruct { }
 
     public struct GenericStruct<T> { }
+
     public struct GenericStruct<T, U> { }
 
     public interface NonGenericInterface { }
+
     public interface GenericInterface<T> { }
+
     public interface GenericInterface<T, U> { }
 }
 

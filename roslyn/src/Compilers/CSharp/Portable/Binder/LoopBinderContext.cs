@@ -15,8 +15,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         private readonly GeneratedLabelSymbol _breakLabel;
         private readonly GeneratedLabelSymbol _continueLabel;
 
-        protected LoopBinder(Binder enclosing)
-            : base(enclosing)
+        protected LoopBinder(Binder enclosing) : base(enclosing)
         {
             _breakLabel = new GeneratedLabelSymbol("break");
             _continueLabel = new GeneratedLabelSymbol("continue");
@@ -24,18 +23,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override GeneratedLabelSymbol BreakLabel
         {
-            get
-            {
-                return _breakLabel;
-            }
+            get { return _breakLabel; }
         }
 
         internal override GeneratedLabelSymbol ContinueLabel
         {
-            get
-            {
-                return _continueLabel;
-            }
+            get { return _continueLabel; }
         }
     }
 }

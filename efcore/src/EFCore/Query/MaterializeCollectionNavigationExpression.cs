@@ -27,7 +27,10 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// </summary>
         /// <param name="subquery">An expression reprensenting how to get value from query to create the collection.</param>
         /// <param name="navigation">A navigation associated with this collection.</param>
-        public MaterializeCollectionNavigationExpression(Expression subquery, INavigationBase navigation)
+        public MaterializeCollectionNavigationExpression(
+            Expression subquery,
+            INavigationBase navigation
+        )
         {
             Subquery = subquery;
             Navigation = navigation;
@@ -44,16 +47,14 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual INavigationBase Navigation { get; }
 
         /// <inheritdoc />
-        public sealed override ExpressionType NodeType
-            => ExpressionType.Extension;
+        public sealed override ExpressionType NodeType => ExpressionType.Extension;
 
         /// <inheritdoc />
-        public override Type Type
-            => Navigation.ClrType;
+        public override Type Type => Navigation.ClrType;
 
         /// <inheritdoc />
-        protected override Expression VisitChildren(ExpressionVisitor visitor)
-            => Update(visitor.Visit(Subquery));
+        protected override Expression VisitChildren(ExpressionVisitor visitor) =>
+            Update(visitor.Visit(Subquery));
 
         /// <summary>
         ///     Creates a new expression that is like this one, but using the supplied children. If all of the children are the same, it will
@@ -61,8 +62,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// </summary>
         /// <param name="subquery">The <see cref="Subquery" /> property of the result.</param>
         /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
-        public virtual MaterializeCollectionNavigationExpression Update(Expression subquery)
-            => subquery != Subquery
+        public virtual MaterializeCollectionNavigationExpression Update(Expression subquery) =>
+            subquery != Subquery
                 ? new MaterializeCollectionNavigationExpression(subquery, Navigation)
                 : this;
 
@@ -72,7 +73,9 @@ namespace Microsoft.EntityFrameworkCore.Query
             expressionPrinter.AppendLine("MaterializeCollectionNavigation(");
             using (expressionPrinter.Indent())
             {
-                expressionPrinter.AppendLine($"Navigation: {Navigation.DeclaringEntityType.DisplayName()}.{Navigation.Name},");
+                expressionPrinter.AppendLine(
+                    $"Navigation: {Navigation.DeclaringEntityType.DisplayName()}.{Navigation.Name},"
+                );
                 expressionPrinter.Append("subquery: ");
                 expressionPrinter.Visit(Subquery);
                 expressionPrinter.Append(")");

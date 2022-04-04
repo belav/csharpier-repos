@@ -19,13 +19,17 @@ namespace Microsoft.AspNetCore.Mvc;
 /// A filter that specifies the supported request content types. <see cref="ContentTypes"/> is used to select an
 /// action when there would otherwise be multiple matches.
 /// </summary>
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
-public class ConsumesAttribute :
-    Attribute,
-    IResourceFilter,
-    IConsumesActionConstraint,
-    IApiRequestMetadataProvider,
-    IAcceptsMetadata
+[AttributeUsage(
+    AttributeTargets.Class | AttributeTargets.Method,
+    AllowMultiple = false,
+    Inherited = true
+)]
+public class ConsumesAttribute
+    : Attribute,
+      IResourceFilter,
+      IConsumesActionConstraint,
+      IApiRequestMetadataProvider,
+      IAcceptsMetadata
 {
     /// <summary>
     /// The order for consumes attribute.
@@ -64,7 +68,11 @@ public class ConsumesAttribute :
     /// <param name="contentType">The request content type.</param>
     /// <param name="otherContentTypes">The additional list of allowed request content types.</param>
     /// </summary>
-    public ConsumesAttribute(Type requestType, string contentType, params string[] otherContentTypes)
+    public ConsumesAttribute(
+        Type requestType,
+        string contentType,
+        params string[] otherContentTypes
+    )
     {
         if (contentType == null)
         {
@@ -83,7 +91,6 @@ public class ConsumesAttribute :
         ContentTypes = GetContentTypes(contentType, otherContentTypes);
         _contentTypes = GetAllContentTypes(contentType, otherContentTypes);
         _requestType = requestType;
-
     }
 
     // The value used is a non default value so that it avoids getting mixed with other action constraints
@@ -130,7 +137,10 @@ public class ConsumesAttribute :
             //
             // Requests without a content type do not return a 415. It is a common pattern to place [Consumes] on
             // a controller and have GET actions
-            if (!string.IsNullOrEmpty(requestContentType) && !IsSubsetOfAnyContentType(requestContentType))
+            if (
+                !string.IsNullOrEmpty(requestContentType)
+                && !IsSubsetOfAnyContentType(requestContentType)
+            )
             {
                 context.Result = new UnsupportedMediaTypeResult();
             }
@@ -181,8 +191,12 @@ public class ConsumesAttribute :
         if (string.IsNullOrEmpty(requestContentType))
         {
             var isActionWithoutConsumeConstraintPresent = context.Candidates.Any(
-                candidate => candidate.Constraints == null ||
-                !candidate.Constraints.Any(constraint => constraint is IConsumesActionConstraint));
+                candidate =>
+                    candidate.Constraints == null
+                    || !candidate.Constraints.Any(
+                        constraint => constraint is IConsumesActionConstraint
+                    )
+            );
 
             return !isActionWithoutConsumeConstraintPresent;
         }
@@ -222,9 +236,14 @@ public class ConsumesAttribute :
                 CurrentCandidate = candidate
             };
 
-            if (candidate.Constraints == null || candidate.Constraints.Count == 0 ||
-                candidate.Constraints.Any(constraint => constraint is IConsumesActionConstraint &&
-                                                        constraint.Accept(tempContext)))
+            if (
+                candidate.Constraints == null
+                || candidate.Constraints.Count == 0
+                || candidate.Constraints.Any(
+                    constraint =>
+                        constraint is IConsumesActionConstraint && constraint.Accept(tempContext)
+                )
+            )
             {
                 // There is someone later in the chain which can handle the request.
                 // end the process here.
@@ -244,8 +263,9 @@ public class ConsumesAttribute :
         // we take advantage of the fact that ConsumesAttribute is both an IActionFilter and an
         // IConsumeActionConstraint. Since FilterDescriptor collection is ordered (the last filter is the one
         // closest to the action), we apply this constraint only if there is no IConsumeActionConstraint after this.
-        return actionDescriptor.FilterDescriptors.Last(
-            filter => filter.Filter is IConsumesActionConstraint).Filter == this;
+        return actionDescriptor.FilterDescriptors
+                .Last(filter => filter.Filter is IConsumesActionConstraint)
+                .Filter == this;
     }
 
     private MediaTypeCollection GetContentTypes(string firstArg, string[] args)
@@ -257,11 +277,11 @@ public class ConsumesAttribute :
         foreach (var arg in completeArgs)
         {
             var mediaType = new MediaType(arg);
-            if (mediaType.MatchesAllSubTypes ||
-                mediaType.MatchesAllTypes)
+            if (mediaType.MatchesAllSubTypes || mediaType.MatchesAllTypes)
             {
                 throw new InvalidOperationException(
-                    Resources.FormatMatchAllContentTypeIsNotAllowed(arg));
+                    Resources.FormatMatchAllContentTypeIsNotAllowed(arg)
+                );
             }
 
             contentTypes.Add(arg);
@@ -270,12 +290,12 @@ public class ConsumesAttribute :
         return contentTypes;
     }
 
-    private static List<string> GetAllContentTypes(string contentType, string[] additionalContentTypes)
+    private static List<string> GetAllContentTypes(
+        string contentType,
+        string[] additionalContentTypes
+    )
     {
-        var allContentTypes = new List<string>()
-            {
-                contentType
-            };
+        var allContentTypes = new List<string>() { contentType };
         allContentTypes.AddRange(additionalContentTypes);
         return allContentTypes;
     }

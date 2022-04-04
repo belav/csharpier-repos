@@ -38,7 +38,11 @@ public static class ControllerLinkGeneratorExtensions
     /// names from <c>RouteOptions</c>.
     /// </param>
     /// <returns>A URI with an absolute path, or <c>null</c> if a URI cannot be created.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
     public static string? GetPathByAction(
         this LinkGenerator generator,
         HttpContext httpContext,
@@ -47,7 +51,8 @@ public static class ControllerLinkGeneratorExtensions
         object? values = default,
         PathString? pathBase = default,
         FragmentString fragment = default,
-        LinkOptions? options = default)
+        LinkOptions? options = default
+    )
     {
         if (generator == null)
         {
@@ -67,7 +72,8 @@ public static class ControllerLinkGeneratorExtensions
             address.AmbientValues,
             pathBase,
             fragment,
-            options);
+            options
+        );
     }
 
     /// <summary>
@@ -84,7 +90,11 @@ public static class ControllerLinkGeneratorExtensions
     /// names from <c>RouteOptions</c>.
     /// </param>
     /// <returns>A URI with an absolute path, or <c>null</c> if a URI cannot be created.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
     public static string? GetPathByAction(
         this LinkGenerator generator,
         string action,
@@ -92,7 +102,8 @@ public static class ControllerLinkGeneratorExtensions
         object? values = default,
         PathString pathBase = default,
         FragmentString fragment = default,
-        LinkOptions? options = default)
+        LinkOptions? options = default
+    )
     {
         if (generator == null)
         {
@@ -110,7 +121,13 @@ public static class ControllerLinkGeneratorExtensions
         }
 
         var address = CreateAddress(httpContext: null, action, controller, values);
-        return generator.GetPathByAddress<RouteValuesAddress>(address, address.ExplicitValues, pathBase, fragment, options);
+        return generator.GetPathByAddress<RouteValuesAddress>(
+            address,
+            address.ExplicitValues,
+            pathBase,
+            fragment,
+            options
+        );
     }
 
     /// <summary>
@@ -150,7 +167,11 @@ public static class ControllerLinkGeneratorExtensions
     /// your deployment environment.
     /// </para>
     /// </remarks>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
     public static string? GetUriByAction(
         this LinkGenerator generator,
         HttpContext httpContext,
@@ -161,7 +182,8 @@ public static class ControllerLinkGeneratorExtensions
         HostString? host = default,
         PathString? pathBase = default,
         FragmentString fragment = default,
-        LinkOptions? options = default)
+        LinkOptions? options = default
+    )
     {
         if (generator == null)
         {
@@ -183,7 +205,8 @@ public static class ControllerLinkGeneratorExtensions
             host,
             pathBase,
             fragment,
-            options);
+            options
+        );
     }
 
     /// <summary>
@@ -210,7 +233,11 @@ public static class ControllerLinkGeneratorExtensions
     /// your deployment environment.
     /// </para>
     /// </remarks>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
     public static string? GetUriByAction(
         this LinkGenerator generator,
         string action,
@@ -220,7 +247,8 @@ public static class ControllerLinkGeneratorExtensions
         HostString host,
         PathString pathBase = default,
         FragmentString fragment = default,
-        LinkOptions? options = default)
+        LinkOptions? options = default
+    )
     {
         if (generator == null)
         {
@@ -238,15 +266,33 @@ public static class ControllerLinkGeneratorExtensions
         }
 
         var address = CreateAddress(httpContext: null, action, controller, values);
-        return generator.GetUriByAddress<RouteValuesAddress>(address, address.ExplicitValues, scheme, host, pathBase, fragment, options);
+        return generator.GetUriByAddress<RouteValuesAddress>(
+            address,
+            address.ExplicitValues,
+            scheme,
+            host,
+            pathBase,
+            fragment,
+            options
+        );
     }
 
-    private static RouteValuesAddress CreateAddress(HttpContext? httpContext, string? action, string? controller, object? values)
+    private static RouteValuesAddress CreateAddress(
+        HttpContext? httpContext,
+        string? action,
+        string? controller,
+        object? values
+    )
     {
         var explicitValues = new RouteValueDictionary(values);
         var ambientValues = GetAmbientValues(httpContext);
 
-        UrlHelperBase.NormalizeRouteValuesForAction(action, controller, explicitValues, ambientValues);
+        UrlHelperBase.NormalizeRouteValuesForAction(
+            action,
+            controller,
+            explicitValues,
+            ambientValues
+        );
 
         return new RouteValuesAddress()
         {

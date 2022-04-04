@@ -11,7 +11,9 @@ namespace Microsoft.EntityFrameworkCore.Query
     {
         protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 
-        public override async Task Multiple_single_result_in_projection_containing_owned_types(bool async)
+        public override async Task Multiple_single_result_in_projection_containing_owned_types(
+            bool async
+        )
         {
             await base.Multiple_single_result_in_projection_containing_owned_types(async);
 
@@ -35,12 +37,17 @@ LEFT JOIN (
         WHERE [c0].[Type] = 2
     ) AS [t2]
     WHERE [t2].[row] <= 1
-) AS [t1] ON [e].[Id] = [t1].[Entity20277Id]");
+) AS [t1] ON [e].[Id] = [t1].[Entity20277Id]"
+            );
         }
 
-        public override async Task Multiple_owned_reference_mapped_to_own_table_containing_owned_collection_in_split_query(bool async)
+        public override async Task Multiple_owned_reference_mapped_to_own_table_containing_owned_collection_in_split_query(
+            bool async
+        )
         {
-            await base.Multiple_owned_reference_mapped_to_own_table_containing_owned_collection_in_split_query(async);
+            await base.Multiple_owned_reference_mapped_to_own_table_containing_owned_collection_in_split_query(
+                async
+            );
 
             AssertSql(
                 @"SELECT TOP(2) [r].[Id], [m].[Id], [m].[Enabled], [m].[RootId], [m0].[Id], [m0].[RootId]
@@ -59,7 +66,8 @@ FROM (
     WHERE [r].[Id] = 3
 ) AS [t]
 INNER JOIN [Leaf24777] AS [l] ON [t].[Id1] = [l].[ModdleAId]
-ORDER BY [t].[Id], [t].[Id0], [t].[Id1]");
+ORDER BY [t].[Id], [t].[Id0], [t].[Id1]"
+            );
         }
 
         public override async Task Projecting_owned_collection_and_aggregate(bool async)
@@ -73,10 +81,13 @@ ORDER BY [t].[Id], [t].[Id0], [t].[Id1]");
     WHERE [b].[Id] = [p].[BlogId]), [p0].[Title], [p0].[CommentsCount], [p0].[BlogId], [p0].[Id]
 FROM [Blog24133] AS [b]
 LEFT JOIN [Post24133] AS [p0] ON [b].[Id] = [p0].[BlogId]
-ORDER BY [b].[Id], [p0].[BlogId]");
+ORDER BY [b].[Id], [p0].[BlogId]"
+            );
         }
 
-        public override async Task Projecting_correlated_collection_property_for_owned_entity(bool async)
+        public override async Task Projecting_correlated_collection_property_for_owned_entity(
+            bool async
+        )
         {
             await base.Projecting_correlated_collection_property_for_owned_entity(async);
 
@@ -84,7 +95,8 @@ ORDER BY [b].[Id], [p0].[BlogId]");
                 @"SELECT [w].[WarehouseCode], [w].[Id], [w0].[CountryCode], [w0].[WarehouseCode], [w0].[Id]
 FROM [Warehouses] AS [w]
 LEFT JOIN [WarehouseDestinationCountry] AS [w0] ON [w].[WarehouseCode] = [w0].[WarehouseCode]
-ORDER BY [w].[Id], [w0].[WarehouseCode]");
+ORDER BY [w].[Id], [w0].[WarehouseCode]"
+            );
         }
 
         public override async Task Owned_collection_basic_split_query(bool async)
@@ -97,7 +109,8 @@ ORDER BY [w].[Id], [w0].[WarehouseCode]");
 SELECT TOP(1) [l].[Id]
 FROM [Location25680] AS [l]
 WHERE [l].[Id] = @__id_0
-ORDER BY [l].[Id]");
+ORDER BY [l].[Id]"
+            );
         }
     }
 }

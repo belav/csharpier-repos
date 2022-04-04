@@ -53,10 +53,7 @@ internal class Flags
             }
             return res;
         }
-        set
-        {
-            FlagDictionary[flag] = value ?? string.Empty;
-        }
+        set { FlagDictionary[flag] = value ?? string.Empty; }
     }
 
     public bool HasFlag(FlagType flag)

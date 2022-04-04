@@ -20,15 +20,17 @@ public class RouteHandlerOptionsTests
     [InlineData("DEVELOPMENT", true)]
     [InlineData("Production", false)]
     [InlineData("Custom", false)]
-    public void ThrowOnBadRequestIsTrueIfInDevelopmentEnvironmentFalseOtherwise(string environmentName, bool expectedThrowOnBadRequest)
+    public void ThrowOnBadRequestIsTrueIfInDevelopmentEnvironmentFalseOtherwise(
+        string environmentName,
+        bool expectedThrowOnBadRequest
+    )
     {
         var services = new ServiceCollection();
         services.AddOptions();
         services.AddRouting();
-        services.AddSingleton<IHostEnvironment>(new HostEnvironment
-        {
-            EnvironmentName = environmentName,
-        });
+        services.AddSingleton<IHostEnvironment>(
+            new HostEnvironment { EnvironmentName = environmentName, }
+        );
         var serviceProvider = services.BuildServiceProvider();
 
         var options = serviceProvider.GetRequiredService<IOptions<RouteHandlerOptions>>().Value;
@@ -40,15 +42,16 @@ public class RouteHandlerOptionsTests
     {
         var services = new ServiceCollection();
 
-        services.Configure<RouteHandlerOptions>(options =>
-        {
-            options.ThrowOnBadRequest = true;
-        });
+        services.Configure<RouteHandlerOptions>(
+            options =>
+            {
+                options.ThrowOnBadRequest = true;
+            }
+        );
 
-        services.AddSingleton<IHostEnvironment>(new HostEnvironment
-        {
-            EnvironmentName = "Production",
-        });
+        services.AddSingleton<IHostEnvironment>(
+            new HostEnvironment { EnvironmentName = "Production", }
+        );
 
         services.AddOptions();
         services.AddRouting();
@@ -67,7 +70,9 @@ public class RouteHandlerOptionsTests
         services.AddRouting();
         var serviceProvider = services.BuildServiceProvider();
 
-        Assert.Throws<InvalidOperationException>(() => serviceProvider.GetRequiredService<IOptions<RouteHandlerOptions>>());
+        Assert.Throws<InvalidOperationException>(
+            () => serviceProvider.GetRequiredService<IOptions<RouteHandlerOptions>>()
+        );
     }
 
     private class HostEnvironment : IHostEnvironment

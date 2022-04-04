@@ -18,7 +18,11 @@ internal class CertificateForwardingFeature : ITlsConnectionFeature
     private readonly CertificateForwardingOptions _options;
     private X509Certificate2? _certificate;
 
-    public CertificateForwardingFeature(ILogger logger, StringValues header, CertificateForwardingOptions options)
+    public CertificateForwardingFeature(
+        ILogger logger,
+        StringValues header,
+        CertificateForwardingOptions options
+    )
     {
         _logger = logger;
         _options = options;
@@ -45,6 +49,6 @@ internal class CertificateForwardingFeature : ITlsConnectionFeature
         set => _certificate = value;
     }
 
-    public Task<X509Certificate2?> GetClientCertificateAsync(CancellationToken cancellationToken)
-        => Task.FromResult(ClientCertificate);
+    public Task<X509Certificate2?> GetClientCertificateAsync(CancellationToken cancellationToken) =>
+        Task.FromResult(ClientCertificate);
 }

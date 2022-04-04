@@ -13,17 +13,22 @@ namespace System.Text.Json.Reflection
         private readonly IMethodSymbol _method;
         private readonly MetadataLoadContextInternal _metadataLoadContext;
 
-        public MethodInfoWrapper(IMethodSymbol method, MetadataLoadContextInternal metadataLoadContext)
+        public MethodInfoWrapper(
+            IMethodSymbol method,
+            MetadataLoadContextInternal metadataLoadContext
+        )
         {
             _method = method;
             _metadataLoadContext = metadataLoadContext;
         }
 
-        public override ICustomAttributeProvider ReturnTypeCustomAttributes => throw new NotImplementedException();
+        public override ICustomAttributeProvider ReturnTypeCustomAttributes =>
+            throw new NotImplementedException();
 
         private MethodAttributes? _attributes;
 
-        public override MethodAttributes Attributes => _attributes ??= _method.GetMethodAttributes();
+        public override MethodAttributes Attributes =>
+            _attributes ??= _method.GetMethodAttributes();
 
         public override RuntimeMethodHandle MethodHandle => throw new NotSupportedException();
 
@@ -89,7 +94,13 @@ namespace System.Text.Json.Reflection
             return parameters.ToArray();
         }
 
-        public override object Invoke(object obj, BindingFlags invokeAttr, Binder binder, object[] parameters, CultureInfo culture)
+        public override object Invoke(
+            object obj,
+            BindingFlags invokeAttr,
+            Binder binder,
+            object[] parameters,
+            CultureInfo culture
+        )
         {
             throw new NotSupportedException();
         }

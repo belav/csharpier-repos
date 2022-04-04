@@ -14,11 +14,11 @@ namespace Microsoft.Interop
 {
     public sealed class Utf16CharMarshaller : IMarshallingGenerator
     {
-        private static readonly PredefinedTypeSyntax s_nativeType = PredefinedType(Token(SyntaxKind.UShortKeyword));
+        private static readonly PredefinedTypeSyntax s_nativeType = PredefinedType(
+            Token(SyntaxKind.UShortKeyword)
+        );
 
-        public Utf16CharMarshaller()
-        {
-        }
+        public Utf16CharMarshaller() { }
 
         public bool IsSupported(TargetFramework target, Version version) => true;
 
@@ -29,9 +29,8 @@ namespace Microsoft.Interop
             {
                 // (ushort)<managedIdentifier>
                 return Argument(
-                    CastExpression(
-                        AsNativeType(info),
-                        IdentifierName(managedIdentifier)));
+                    CastExpression(AsNativeType(info), IdentifierName(managedIdentifier))
+                );
             }
             else if (IsPinningPathSupported(info, context))
             {
@@ -39,14 +38,18 @@ namespace Microsoft.Interop
                 return Argument(
                     CastExpression(
                         PointerType(AsNativeType(info)),
-                        IdentifierName(PinnedIdentifier(info.InstanceIdentifier))));
+                        IdentifierName(PinnedIdentifier(info.InstanceIdentifier))
+                    )
+                );
             }
 
             // &<nativeIdentifier>
             return Argument(
                 PrefixUnaryExpression(
                     SyntaxKind.AddressOfExpression,
-                    IdentifierName(nativeIdentifier)));
+                    IdentifierName(nativeIdentifier)
+                )
+            );
         }
 
         public TypeSyntax AsNativeType(TypePositionInfo info)
@@ -57,11 +60,8 @@ namespace Microsoft.Interop
 
         public ParameterSyntax AsParameter(TypePositionInfo info)
         {
-            TypeSyntax type = info.IsByRef
-                ? PointerType(AsNativeType(info))
-                : AsNativeType(info);
-            return Parameter(Identifier(info.InstanceIdentifier))
-                .WithType(type);
+            TypeSyntax type = info.IsByRef ? PointerType(AsNativeType(info)) : AsNativeType(info);
+            return Parameter(Identifier(info.InstanceIdentifier)).WithType(type);
         }
 
         public IEnumerable<StatementSyntax> Generate(TypePositionInfo info, StubCodeContext context)
@@ -77,12 +77,17 @@ namespace Microsoft.Interop
                         VariableDeclaration(
                             PointerType(PredefinedType(Token(SyntaxKind.CharKeyword))),
                             SingletonSeparatedList(
-                                VariableDeclarator(Identifier(PinnedIdentifier(info.InstanceIdentifier)))
-                                    .WithInitializer(EqualsValueClause(
-                                        PrefixUnaryExpression(
-                                            SyntaxKind.AddressOfExpression,
-                                            IdentifierName(Identifier(managedIdentifier)))
-                                    ))
+                                VariableDeclarator(
+                                        Identifier(PinnedIdentifier(info.InstanceIdentifier))
+                                    )
+                                    .WithInitializer(
+                                        EqualsValueClause(
+                                            PrefixUnaryExpression(
+                                                SyntaxKind.AddressOfExpression,
+                                                IdentifierName(Identifier(managedIdentifier))
+                                            )
+                                        )
+                                    )
                             )
                         ),
                         EmptyStatement()
@@ -96,27 +101,36 @@ namespace Microsoft.Interop
                 case StubCodeContext.Stage.Setup:
                     break;
                 case StubCodeContext.Stage.Marshal:
-                    if ((info.IsByRef && info.RefKind != RefKind.Out) || !context.SingleFrameSpansNativeContext)
+                    if (
+                        (info.IsByRef && info.RefKind != RefKind.Out)
+                        || !context.SingleFrameSpansNativeContext
+                    )
                     {
                         yield return ExpressionStatement(
                             AssignmentExpression(
                                 SyntaxKind.SimpleAssignmentExpression,
                                 IdentifierName(nativeIdentifier),
-                                IdentifierName(managedIdentifier)));
+                                IdentifierName(managedIdentifier)
+                            )
+                        );
                     }
 
                     break;
                 case StubCodeContext.Stage.Unmarshal:
-                    if (info.IsManagedReturnPosition || (info.IsByRef && info.RefKind != RefKind.In))
+                    if (
+                        info.IsManagedReturnPosition || (info.IsByRef && info.RefKind != RefKind.In)
+                    )
                     {
                         yield return ExpressionStatement(
                             AssignmentExpression(
                                 SyntaxKind.SimpleAssignmentExpression,
                                 IdentifierName(managedIdentifier),
                                 CastExpression(
-                                    PredefinedType(
-                                        Token(SyntaxKind.CharKeyword)),
-                                    IdentifierName(nativeIdentifier))));
+                                    PredefinedType(Token(SyntaxKind.CharKeyword)),
+                                    IdentifierName(nativeIdentifier)
+                                )
+                            )
+                        );
                     }
 
                     break;
@@ -127,10 +141,14 @@ namespace Microsoft.Interop
 
         public bool UsesNativeIdentifier(TypePositionInfo info, StubCodeContext context)
         {
-            return info.IsManagedReturnPosition || (info.IsByRef && !context.SingleFrameSpansNativeContext);
+            return info.IsManagedReturnPosition
+                || (info.IsByRef && !context.SingleFrameSpansNativeContext);
         }
 
-        public bool SupportsByValueMarshalKind(ByValueContentsMarshalKind marshalKind, StubCodeContext context) => false;
+        public bool SupportsByValueMarshalKind(
+            ByValueContentsMarshalKind marshalKind,
+            StubCodeContext context
+        ) => false;
 
         private bool IsPinningPathSupported(TypePositionInfo info, StubCodeContext context)
         {

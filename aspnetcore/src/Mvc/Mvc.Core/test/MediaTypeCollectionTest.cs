@@ -28,10 +28,10 @@ public class MediaTypeCollectionTest
         // Arrange
         var mediaTypeHeaderValue = MediaTypeHeaderValue.Parse("application/json;charset=utf-16");
         var collection = new MediaTypeCollection
-            {
-                MediaTypeHeaderValue.Parse("text/plain"),
-                MediaTypeHeaderValue.Parse("text/xml")
-            };
+        {
+            MediaTypeHeaderValue.Parse("text/plain"),
+            MediaTypeHeaderValue.Parse("text/xml")
+        };
 
         // Act
         collection.Insert(1, mediaTypeHeaderValue);
@@ -45,10 +45,10 @@ public class MediaTypeCollectionTest
     {
         // Arrange
         var collection = new MediaTypeCollection
-            {
-                MediaTypeHeaderValue.Parse("text/plain"),
-                MediaTypeHeaderValue.Parse("text/xml")
-            };
+        {
+            MediaTypeHeaderValue.Parse("text/plain"),
+            MediaTypeHeaderValue.Parse("text/xml")
+        };
 
         // Act
         collection.Remove(MediaTypeHeaderValue.Parse("text/xml"));

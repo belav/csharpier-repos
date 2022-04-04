@@ -56,7 +56,9 @@ internal sealed partial class RedirectResult : IResult
         var logger = httpContext.RequestServices.GetRequiredService<ILogger<RedirectResult>>();
 
         // IsLocalUrl is called to handle URLs starting with '~/'.
-        var destinationUrl = SharedUrlHelper.IsLocalUrl(Url) ? SharedUrlHelper.Content(httpContext, Url) : Url;
+        var destinationUrl = SharedUrlHelper.IsLocalUrl(Url)
+          ? SharedUrlHelper.Content(httpContext, Url)
+          : Url;
 
         Log.RedirectResultExecuting(logger, destinationUrl);
 
@@ -77,9 +79,12 @@ internal sealed partial class RedirectResult : IResult
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Information,
+        [LoggerMessage(
+            1,
+            LogLevel.Information,
             "Executing RedirectResult, redirecting to {Destination}.",
-            EventName = "RedirectResultExecuting")]
+            EventName = "RedirectResultExecuting"
+        )]
         public static partial void RedirectResultExecuting(ILogger logger, string destination);
     }
 }

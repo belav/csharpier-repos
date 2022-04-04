@@ -28,7 +28,8 @@ public static class HeaderNames
     public static readonly string AcceptRanges = "Accept-Ranges";
 
     /// <summary>Gets the <c>Access-Control-Allow-Credentials</c> HTTP header name.</summary>
-    public static readonly string AccessControlAllowCredentials = "Access-Control-Allow-Credentials";
+    public static readonly string AccessControlAllowCredentials =
+        "Access-Control-Allow-Credentials";
 
     /// <summary>Gets the <c>Access-Control-Allow-Headers</c> HTTP header name.</summary>
     public static readonly string AccessControlAllowHeaders = "Access-Control-Allow-Headers";
@@ -100,7 +101,8 @@ public static class HeaderNames
     public static readonly string ContentSecurityPolicy = "Content-Security-Policy";
 
     /// <summary>Gets the <c>Content-Security-Policy-Report-Only</c> HTTP header name.</summary>
-    public static readonly string ContentSecurityPolicyReportOnly = "Content-Security-Policy-Report-Only";
+    public static readonly string ContentSecurityPolicyReportOnly =
+        "Content-Security-Policy-Report-Only";
 
     /// <summary>Gets the <c>Content-Type</c> HTTP header name.</summary>
     public static readonly string ContentType = "Content-Type";

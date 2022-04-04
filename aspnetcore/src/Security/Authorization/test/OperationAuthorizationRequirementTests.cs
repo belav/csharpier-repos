@@ -10,10 +10,7 @@ public class OperationAuthorizationRequirementTests
 {
     private OperationAuthorizationRequirement CreateRequirement(string name)
     {
-        return new OperationAuthorizationRequirement()
-        {
-            Name = name
-        };
+        return new OperationAuthorizationRequirement() { Name = name };
     }
 
     [Fact]

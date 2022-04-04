@@ -18,9 +18,7 @@ public class ValidationMetadataProviderContext
     /// </summary>
     /// <param name="key">The <see cref="ModelMetadataIdentity"/> for the <see cref="ModelMetadata"/>.</param>
     /// <param name="attributes">The attributes for the <see cref="ModelMetadata"/>.</param>
-    public ValidationMetadataProviderContext(
-        ModelMetadataIdentity key,
-        ModelAttributes attributes)
+    public ValidationMetadataProviderContext(ModelMetadataIdentity key, ModelAttributes attributes)
     {
         if (attributes == null)
         {

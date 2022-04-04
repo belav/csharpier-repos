@@ -53,6 +53,7 @@ internal class RangeAttributeAdapter : AttributeAdapterBase<RangeAttribute>
             validationContext.ModelMetadata,
             validationContext.ModelMetadata.GetDisplayName(),
             Attribute.Minimum,
-            Attribute.Maximum);
+            Attribute.Maximum
+        );
     }
 }

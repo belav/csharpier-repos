@@ -24,8 +24,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         /// </summary>
         public CosmosQueryTranslationPreprocessor(
             QueryTranslationPreprocessorDependencies dependencies,
-            CosmosQueryCompilationContext cosmosQueryCompilationContext)
-            : base(dependencies, cosmosQueryCompilationContext)
+            CosmosQueryCompilationContext cosmosQueryCompilationContext
+        ) : base(dependencies, cosmosQueryCompilationContext)
         {
             _queryCompilationContext = cosmosQueryCompilationContext;
         }
@@ -38,7 +38,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         /// </summary>
         public override Expression NormalizeQueryableMethod(Expression query)
         {
-            query = new CosmosQueryMetadataExtractingExpressionVisitor(_queryCompilationContext).Visit(query);
+            query = new CosmosQueryMetadataExtractingExpressionVisitor(
+                _queryCompilationContext
+            ).Visit(query);
             query = base.NormalizeQueryableMethod(query);
 
             return query;

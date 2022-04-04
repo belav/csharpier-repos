@@ -19,15 +19,18 @@ namespace AnalyzerRunner
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public PersistentStorageLocationService()
-        {
-        }
+        public PersistentStorageLocationService() { }
 
         public bool IsSupported(Workspace workspace) => true;
 
         public string TryGetStorageLocation(Solution _)
         {
-            var location = Path.Combine(Path.GetTempPath(), "RoslynTests", "AnalyzerRunner", "temp-db");
+            var location = Path.Combine(
+                Path.GetTempPath(),
+                "RoslynTests",
+                "AnalyzerRunner",
+                "temp-db"
+            );
             Directory.CreateDirectory(location);
             return location;
         }

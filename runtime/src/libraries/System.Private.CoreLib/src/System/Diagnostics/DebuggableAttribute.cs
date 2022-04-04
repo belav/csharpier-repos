@@ -46,7 +46,8 @@ namespace System.Diagnostics
 
         public bool IsJITTrackingEnabled => (DebuggingFlags & DebuggingModes.Default) != 0;
 
-        public bool IsJITOptimizerDisabled => (DebuggingFlags & DebuggingModes.DisableOptimizations) != 0;
+        public bool IsJITOptimizerDisabled =>
+            (DebuggingFlags & DebuggingModes.DisableOptimizations) != 0;
 
         public DebuggingModes DebuggingFlags { get; }
     }

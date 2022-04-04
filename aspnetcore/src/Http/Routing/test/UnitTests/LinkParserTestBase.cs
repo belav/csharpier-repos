@@ -21,9 +21,7 @@ public abstract class LinkParserTestBase
         return services;
     }
 
-    protected virtual void AddAdditionalServices(IServiceCollection services)
-    {
-    }
+    protected virtual void AddAdditionalServices(IServiceCollection services) { }
 
     private protected DefaultLinkParser CreateLinkParser(params Endpoint[] endpoints)
     {
@@ -32,9 +30,13 @@ public abstract class LinkParserTestBase
 
     private protected DefaultLinkParser CreateLinkParser(
         Action<IServiceCollection> configureServices,
-        params Endpoint[] endpoints)
+        params Endpoint[] endpoints
+    )
     {
-        return CreateLinkParser(configureServices, new[] { new DefaultEndpointDataSource(endpoints ?? Array.Empty<Endpoint>()) });
+        return CreateLinkParser(
+            configureServices,
+            new[] { new DefaultEndpointDataSource(endpoints ?? Array.Empty<Endpoint>()) }
+        );
     }
 
     private protected DefaultLinkParser CreateLinkParser(EndpointDataSource[] dataSources)
@@ -44,22 +46,25 @@ public abstract class LinkParserTestBase
 
     private protected DefaultLinkParser CreateLinkParser(
         Action<IServiceCollection> configureServices,
-        EndpointDataSource[] dataSources)
+        EndpointDataSource[] dataSources
+    )
     {
         var services = GetBasicServices();
         AddAdditionalServices(services);
         configureServices?.Invoke(services);
 
-        services.Configure<RouteOptions>(o =>
-        {
-            if (dataSources != null)
+        services.Configure<RouteOptions>(
+            o =>
             {
-                foreach (var dataSource in dataSources)
+                if (dataSources != null)
                 {
-                    o.EndpointDataSources.Add(dataSource);
+                    foreach (var dataSource in dataSources)
+                    {
+                        o.EndpointDataSources.Add(dataSource);
+                    }
                 }
             }
-        });
+        );
 
         var serviceProvider = services.BuildServiceProvider();
         var routeOptions = serviceProvider.GetRequiredService<IOptions<RouteOptions>>();
@@ -68,6 +73,7 @@ public abstract class LinkParserTestBase
             new DefaultParameterPolicyFactory(routeOptions, serviceProvider),
             new CompositeEndpointDataSource(routeOptions.Value.EndpointDataSources),
             serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger<DefaultLinkParser>(),
-            serviceProvider);
+            serviceProvider
+        );
     }
 }

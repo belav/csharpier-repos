@@ -8,13 +8,19 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Authentication.AzureAD.UI;
 
-[Obsolete("This is obsolete and will be removed in a future version. Use Microsoft.Identity.Web instead. See https://aka.ms/ms-identity-web.")]
-internal class AzureADCookieOptionsConfiguration : IConfigureNamedOptions<CookieAuthenticationOptions>
+[Obsolete(
+    "This is obsolete and will be removed in a future version. Use Microsoft.Identity.Web instead. See https://aka.ms/ms-identity-web."
+)]
+internal class AzureADCookieOptionsConfiguration
+    : IConfigureNamedOptions<CookieAuthenticationOptions>
 {
     private readonly IOptions<AzureADSchemeOptions> _schemeOptions;
     private readonly IOptionsMonitor<AzureADOptions> _AzureADOptions;
 
-    public AzureADCookieOptionsConfiguration(IOptions<AzureADSchemeOptions> schemeOptions, IOptionsMonitor<AzureADOptions> AzureADOptions)
+    public AzureADCookieOptionsConfiguration(
+        IOptions<AzureADSchemeOptions> schemeOptions,
+        IOptionsMonitor<AzureADOptions> AzureADOptions
+    )
     {
         _schemeOptions = schemeOptions;
         _AzureADOptions = AzureADOptions;
@@ -40,9 +46,7 @@ internal class AzureADCookieOptionsConfiguration : IConfigureNamedOptions<Cookie
         options.Cookie.SameSite = SameSiteMode.None;
     }
 
-    public void Configure(CookieAuthenticationOptions options)
-    {
-    }
+    public void Configure(CookieAuthenticationOptions options) { }
 
     private string GetAzureADScheme(string name)
     {

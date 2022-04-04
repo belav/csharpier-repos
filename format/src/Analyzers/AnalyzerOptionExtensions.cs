@@ -14,12 +14,16 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         internal const string CategoryPrefix = "category";
         internal const string SeveritySuffix = "severity";
 
-        internal const string DotnetAnalyzerDiagnosticSeverityKey = DotnetAnalyzerDiagnosticPrefix + "." + SeveritySuffix;
+        internal const string DotnetAnalyzerDiagnosticSeverityKey =
+            DotnetAnalyzerDiagnosticPrefix + "." + SeveritySuffix;
 
-        internal static string GetDiagnosticIdBasedDotnetAnalyzerDiagnosticSeverityKey(string diagnosticId)
-            => $"{DotnetDiagnosticPrefix}.{diagnosticId}.{SeveritySuffix}";
-        internal static string GetCategoryBasedDotnetAnalyzerDiagnosticSeverityKey(string category)
-            => $"{DotnetAnalyzerDiagnosticPrefix}.{CategoryPrefix}-{category}.{SeveritySuffix}";
+        internal static string GetDiagnosticIdBasedDotnetAnalyzerDiagnosticSeverityKey(
+            string diagnosticId
+        ) => $"{DotnetDiagnosticPrefix}.{diagnosticId}.{SeveritySuffix}";
+
+        internal static string GetCategoryBasedDotnetAnalyzerDiagnosticSeverityKey(
+            string category
+        ) => $"{DotnetAnalyzerDiagnosticPrefix}.{CategoryPrefix}-{category}.{SeveritySuffix}";
 
         /// <summary>
         /// Tries to get configured severity for the given <paramref name="descriptor"/>
@@ -34,17 +38,30 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             SyntaxTree tree,
             Compilation compilation,
             DiagnosticDescriptor descriptor,
-            out ReportDiagnostic severity)
+            out ReportDiagnostic severity
+        )
         {
             // If user has explicitly configured severity for this diagnostic ID, that should be respected.
-            if (compilation.Options.SpecificDiagnosticOptions.TryGetValue(descriptor.Id, out severity))
+            if (
+                compilation.Options.SpecificDiagnosticOptions.TryGetValue(
+                    descriptor.Id,
+                    out severity
+                )
+            )
             {
                 return true;
             }
 
             // If user has explicitly configured severity for this diagnostic ID, that should be respected.
             // For example, 'dotnet_diagnostic.CA1000.severity = error'
-            if (compilation.Options.SyntaxTreeOptionsProvider?.TryGetDiagnosticValue(tree, descriptor.Id, CancellationToken.None, out severity) == true)
+            if (
+                compilation.Options.SyntaxTreeOptionsProvider?.TryGetDiagnosticValue(
+                    tree,
+                    descriptor.Id,
+                    CancellationToken.None,
+                    out severity
+                ) == true
+            )
             {
                 return true;
             }
@@ -53,29 +70,43 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             //  1. Disabled by default diagnostics
             //  2. Compiler diagnostics
             //  3. Non-configurable diagnostics
-            if (analyzerOptions == null ||
-                !descriptor.IsEnabledByDefault ||
-                descriptor.CustomTags.Any(tag => tag == WellKnownDiagnosticTags.Compiler || tag == WellKnownDiagnosticTags.NotConfigurable))
+            if (
+                analyzerOptions == null
+                || !descriptor.IsEnabledByDefault
+                || descriptor.CustomTags.Any(
+                    tag =>
+                        tag == WellKnownDiagnosticTags.Compiler
+                        || tag == WellKnownDiagnosticTags.NotConfigurable
+                )
+            )
             {
                 severity = default;
                 return false;
             }
 
-            var analyzerConfigOptions = analyzerOptions.AnalyzerConfigOptionsProvider.GetOptions(tree);
+            var analyzerConfigOptions = analyzerOptions.AnalyzerConfigOptionsProvider.GetOptions(
+                tree
+            );
 
             // If user has explicitly configured default severity for the diagnostic category, that should be respected.
             // For example, 'dotnet_analyzer_diagnostic.category-security.severity = error'
-            var categoryBasedKey = GetCategoryBasedDotnetAnalyzerDiagnosticSeverityKey(descriptor.Category);
-            if (analyzerConfigOptions.TryGetValue(categoryBasedKey, out var value) &&
-                TryParseSeverity(value, out severity))
+            var categoryBasedKey = GetCategoryBasedDotnetAnalyzerDiagnosticSeverityKey(
+                descriptor.Category
+            );
+            if (
+                analyzerConfigOptions.TryGetValue(categoryBasedKey, out var value)
+                && TryParseSeverity(value, out severity)
+            )
             {
                 return true;
             }
 
             // Otherwise, if user has explicitly configured default severity for all analyzer diagnostics, that should be respected.
             // For example, 'dotnet_analyzer_diagnostic.severity = error'
-            if (analyzerConfigOptions.TryGetValue(DotnetAnalyzerDiagnosticSeverityKey, out value) &&
-                TryParseSeverity(value, out severity))
+            if (
+                analyzerConfigOptions.TryGetValue(DotnetAnalyzerDiagnosticSeverityKey, out value)
+                && TryParseSeverity(value, out severity)
+            )
             {
                 return true;
             }
@@ -87,22 +118,54 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// <summary>
         /// Determines whether a diagnostic is configured in the <paramref name="analyzerConfigOptions" />.
         /// </summary>
-        public static bool IsDiagnosticSeverityConfigured(this AnalyzerConfigOptions analyzerConfigOptions, Project project, SyntaxTree tree, string diagnosticId, string? diagnosticCategory)
+        public static bool IsDiagnosticSeverityConfigured(
+            this AnalyzerConfigOptions analyzerConfigOptions,
+            Project project,
+            SyntaxTree tree,
+            string diagnosticId,
+            string? diagnosticCategory
+        )
         {
             var optionsProvider = project.CompilationOptions?.SyntaxTreeOptionsProvider;
-            return (optionsProvider != null && optionsProvider.TryGetDiagnosticValue(tree, diagnosticId, CancellationToken.None, out _))
-                || (diagnosticCategory != null && analyzerConfigOptions.TryGetValue(GetCategoryBasedDotnetAnalyzerDiagnosticSeverityKey(diagnosticCategory), out _))
+            return (
+                    optionsProvider != null
+                    && optionsProvider.TryGetDiagnosticValue(
+                        tree,
+                        diagnosticId,
+                        CancellationToken.None,
+                        out _
+                    )
+                )
+                || (
+                    diagnosticCategory != null
+                    && analyzerConfigOptions.TryGetValue(
+                        GetCategoryBasedDotnetAnalyzerDiagnosticSeverityKey(diagnosticCategory),
+                        out _
+                    )
+                )
                 || analyzerConfigOptions.TryGetValue(DotnetAnalyzerDiagnosticSeverityKey, out _);
         }
 
         /// <summary>
         /// Get the configured severity for a diagnostic analyzer from the <paramref name="analyzerConfigOptions" />.
         /// </summary>
-        public static DiagnosticSeverity GetDiagnosticSeverity(this AnalyzerConfigOptions analyzerConfigOptions, Project project, SyntaxTree tree, string diagnosticId, string? diagnosticCategory)
+        public static DiagnosticSeverity GetDiagnosticSeverity(
+            this AnalyzerConfigOptions analyzerConfigOptions,
+            Project project,
+            SyntaxTree tree,
+            string diagnosticId,
+            string? diagnosticCategory
+        )
         {
-            return analyzerConfigOptions.TryGetSeverityFromConfiguration(project, tree, diagnosticId, diagnosticCategory, out var reportSeverity)
-                ? reportSeverity.ToSeverity()
-                : DiagnosticSeverity.Hidden;
+            return analyzerConfigOptions.TryGetSeverityFromConfiguration(
+                project,
+                tree,
+                diagnosticId,
+                diagnosticCategory,
+                out var reportSeverity
+            )
+              ? reportSeverity.ToSeverity()
+              : DiagnosticSeverity.Hidden;
         }
 
         /// <summary>
@@ -119,7 +182,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             SyntaxTree tree,
             string diagnosticId,
             string? diagnosticCategory,
-            out ReportDiagnostic severity)
+            out ReportDiagnostic severity
+        )
         {
             if (analyzerConfigOptions is null)
             {
@@ -130,8 +194,15 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             // If user has explicitly configured severity for this diagnostic ID, that should be respected.
             // For example, 'dotnet_diagnostic.CA1000.severity = error'
             var optionsProvider = project.CompilationOptions?.SyntaxTreeOptionsProvider;
-            if (optionsProvider != null &&
-                optionsProvider.TryGetDiagnosticValue(tree, diagnosticId, CancellationToken.None, out severity))
+            if (
+                optionsProvider != null
+                && optionsProvider.TryGetDiagnosticValue(
+                    tree,
+                    diagnosticId,
+                    CancellationToken.None,
+                    out severity
+                )
+            )
             {
                 return true;
             }
@@ -141,9 +212,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             {
                 // If user has explicitly configured default severity for the diagnostic category, that should be respected.
                 // For example, 'dotnet_analyzer_diagnostic.category-security.severity = error'
-                var categoryBasedKey = GetCategoryBasedDotnetAnalyzerDiagnosticSeverityKey(diagnosticCategory);
-                if (analyzerConfigOptions.TryGetValue(categoryBasedKey, out value) &&
-                    TryParseSeverity(value, out severity))
+                var categoryBasedKey = GetCategoryBasedDotnetAnalyzerDiagnosticSeverityKey(
+                    diagnosticCategory
+                );
+                if (
+                    analyzerConfigOptions.TryGetValue(categoryBasedKey, out value)
+                    && TryParseSeverity(value, out severity)
+                )
                 {
                     return true;
                 }
@@ -151,8 +226,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             // Otherwise, if user has explicitly configured default severity for all analyzer diagnostics, that should be respected.
             // For example, 'dotnet_analyzer_diagnostic.severity = error'
-            if (analyzerConfigOptions.TryGetValue(DotnetAnalyzerDiagnosticSeverityKey, out value) &&
-                TryParseSeverity(value, out severity))
+            if (
+                analyzerConfigOptions.TryGetValue(DotnetAnalyzerDiagnosticSeverityKey, out value)
+                && TryParseSeverity(value, out severity)
+            )
             {
                 return true;
             }

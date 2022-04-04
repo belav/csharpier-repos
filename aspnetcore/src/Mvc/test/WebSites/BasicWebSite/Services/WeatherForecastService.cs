@@ -24,13 +24,15 @@ public class WeatherForecastService
         result.EnsureSuccessStatusCode();
         var dataString = await result.Content.ReadAsStringAsync();
         var weatherData = JsonConvert.DeserializeObject<WeatherForecast[]>(
-            dataString, new JsonSerializerSettings
+            dataString,
+            new JsonSerializerSettings
             {
                 ContractResolver = new DefaultContractResolver
                 {
                     NamingStrategy = new CamelCaseNamingStrategy()
                 }
-            });
+            }
+        );
         return weatherData;
     }
 }

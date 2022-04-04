@@ -17,7 +17,11 @@ namespace System
             return GetConfigBoolValue(switchName, out exist);
         }
 
-        internal static bool GetBoolValueWithFallbacks(string switchName, string environmentName, bool defaultValue)
+        internal static bool GetBoolValueWithFallbacks(
+            string switchName,
+            string environmentName,
+            bool defaultValue
+        )
         {
             bool value = GetBoolValue(switchName, out bool exists);
 
@@ -28,7 +32,11 @@ namespace System
             // abstractions where reasonably possible.
 
             Span<char> buffer = stackalloc char[32];
-            uint length = Interop.Kernel32.GetEnvironmentVariable(environmentName, ref buffer.GetPinnableReference(), (uint)buffer.Length);
+            uint length = Interop.Kernel32.GetEnvironmentVariable(
+                environmentName,
+                ref buffer.GetPinnableReference(),
+                (uint)buffer.Length
+            );
             switch (length)
             {
                 case 1:
@@ -50,7 +58,11 @@ namespace System
             return defaultValue;
         }
 
-        [DllImport(RuntimeHelpers.QCall, EntryPoint = "ClrConfig_GetConfigBoolValue", CharSet = CharSet.Unicode)]
+        [DllImport(
+            RuntimeHelpers.QCall,
+            EntryPoint = "ClrConfig_GetConfigBoolValue",
+            CharSet = CharSet.Unicode
+        )]
         private static extern bool GetConfigBoolValue(string configSwitchName, out bool exist);
     }
 }

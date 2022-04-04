@@ -13,7 +13,10 @@ namespace System.Runtime.InteropServices.Tests
         [InlineData(CallingConvention.StdCall, 3)]
         [InlineData(CallingConvention.ThisCall, 4)]
         [InlineData(CallingConvention.FastCall, 5)]
-        public void CallingConvention_Get_ReturnsExpected(CallingConvention convention, int expected)
+        public void CallingConvention_Get_ReturnsExpected(
+            CallingConvention convention,
+            int expected
+        )
         {
             Assert.Equal(expected, (int)convention);
         }

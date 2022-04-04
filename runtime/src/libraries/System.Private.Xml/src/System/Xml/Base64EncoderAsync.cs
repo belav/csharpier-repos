@@ -88,7 +88,13 @@ namespace System.Xml
         {
             if (_leftOverBytesCount > 0)
             {
-                int leftOverChars = Convert.ToBase64CharArray(_leftOverBytes!, 0, _leftOverBytesCount, _charsLine, 0);
+                int leftOverChars = Convert.ToBase64CharArray(
+                    _leftOverBytes!,
+                    0,
+                    _leftOverBytesCount,
+                    _charsLine,
+                    0
+                );
                 await WriteCharsAsync(_charsLine, 0, leftOverChars).ConfigureAwait(false);
                 _leftOverBytesCount = 0;
             }

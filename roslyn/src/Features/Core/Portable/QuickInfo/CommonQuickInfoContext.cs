@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             SemanticModel semanticModel,
             int position,
             SymbolDescriptionOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             Services = services;
             SemanticModel = semanticModel;

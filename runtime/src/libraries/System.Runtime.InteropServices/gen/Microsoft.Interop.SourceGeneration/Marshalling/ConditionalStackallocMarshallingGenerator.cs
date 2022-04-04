@@ -12,11 +12,20 @@ namespace Microsoft.Interop
 {
     public abstract class ConditionalStackallocMarshallingGenerator : IMarshallingGenerator
     {
-        protected static string GetAllocationMarkerIdentifier(TypePositionInfo info, StubCodeContext context) => context.GetAdditionalIdentifier(info, "allocated");
+        protected static string GetAllocationMarkerIdentifier(
+            TypePositionInfo info,
+            StubCodeContext context
+        ) => context.GetAdditionalIdentifier(info, "allocated");
 
-        private static string GetByteLengthIdentifier(TypePositionInfo info, StubCodeContext context) => context.GetAdditionalIdentifier(info, "bytelen");
+        private static string GetByteLengthIdentifier(
+            TypePositionInfo info,
+            StubCodeContext context
+        ) => context.GetAdditionalIdentifier(info, "bytelen");
 
-        private static string GetStackAllocIdentifier(TypePositionInfo info, StubCodeContext context) => context.GetAdditionalIdentifier(info, "stackptr");
+        private static string GetStackAllocIdentifier(
+            TypePositionInfo info,
+            StubCodeContext context
+        ) => context.GetAdditionalIdentifier(info, "stackptr");
 
         protected bool UsesConditionalStackAlloc(TypePositionInfo info, StubCodeContext context)
         {
@@ -26,7 +35,11 @@ namespace Microsoft.Interop
                 && context.AdditionalTemporaryStateLivesAcrossStages;
         }
 
-        protected bool TryGenerateSetupSyntax(TypePositionInfo info, StubCodeContext context, out StatementSyntax statement)
+        protected bool TryGenerateSetupSyntax(
+            TypePositionInfo info,
+            StubCodeContext context,
+            out StatementSyntax statement
+        )
         {
             statement = EmptyStatement();
 
@@ -41,14 +54,22 @@ namespace Microsoft.Interop
                     PredefinedType(Token(SyntaxKind.BoolKeyword)),
                     SingletonSeparatedList(
                         VariableDeclarator(allocationMarkerIdentifier)
-                            .WithInitializer(EqualsValueClause(LiteralExpression(SyntaxKind.FalseLiteralExpression))))));
+                            .WithInitializer(
+                                EqualsValueClause(
+                                    LiteralExpression(SyntaxKind.FalseLiteralExpression)
+                                )
+                            )
+                    )
+                )
+            );
             return true;
         }
 
         protected IEnumerable<StatementSyntax> GenerateConditionalAllocationSyntax(
             TypePositionInfo info,
             StubCodeContext context,
-            int stackallocMaxSize)
+            int stackallocMaxSize
+        )
         {
             (_, string nativeIdentifier) = context.GetIdentifiers(info);
 
@@ -60,7 +81,14 @@ namespace Microsoft.Interop
                 AssignmentExpression(
                     SyntaxKind.SimpleAssignmentExpression,
                     IdentifierName(nativeIdentifier),
-                    GenerateAllocationExpression(info, context, Identifier(byteLenIdentifier), out bool allocationRequiresByteLength)));
+                    GenerateAllocationExpression(
+                        info,
+                        context,
+                        Identifier(byteLenIdentifier),
+                        out bool allocationRequiresByteLength
+                    )
+                )
+            );
 
             // int <byteLenIdentifier> = <byteLengthExpression>;
             LocalDeclarationStatementSyntax byteLenAssignment = LocalDeclarationStatement(
@@ -68,8 +96,14 @@ namespace Microsoft.Interop
                     PredefinedType(Token(SyntaxKind.IntKeyword)),
                     SingletonSeparatedList(
                         VariableDeclarator(byteLenIdentifier)
-                            .WithInitializer(EqualsValueClause(
-                                GenerateByteLengthCalculationExpression(info, context))))));
+                            .WithInitializer(
+                                EqualsValueClause(
+                                    GenerateByteLengthCalculationExpression(info, context)
+                                )
+                            )
+                    )
+                )
+            );
 
             if (!UsesConditionalStackAlloc(info, context))
             {
@@ -79,12 +113,17 @@ namespace Microsoft.Interop
                     statements.Add(byteLenAssignment);
                 }
                 statements.Add(allocationStatement);
-                yield return ExpressionStatement(AssignmentExpression(SyntaxKind.SimpleAssignmentExpression,
-                    IdentifierName(nativeIdentifier),
-                    LiteralExpression(SyntaxKind.NullLiteralExpression)));
+                yield return ExpressionStatement(
+                    AssignmentExpression(
+                        SyntaxKind.SimpleAssignmentExpression,
+                        IdentifierName(nativeIdentifier),
+                        LiteralExpression(SyntaxKind.NullLiteralExpression)
+                    )
+                );
                 yield return IfStatement(
                     GenerateNullCheckExpression(info, context),
-                    Block(statements));
+                    Block(statements)
+                );
                 yield break;
             }
 
@@ -96,22 +135,40 @@ namespace Microsoft.Interop
                         PointerType(PredefinedType(Token(SyntaxKind.ByteKeyword))),
                         SingletonSeparatedList(
                             VariableDeclarator(stackAllocPtrIdentifier)
-                                .WithInitializer(EqualsValueClause(
-                                    StackAllocArrayCreationExpression(
-                                        ArrayType(
-                                            PredefinedType(Token(SyntaxKind.ByteKeyword)),
-                                            SingletonList(
-                                                ArrayRankSpecifier(SingletonSeparatedList<ExpressionSyntax>(
-                                                    IdentifierName(byteLenIdentifier))))))))))),
-                GenerateStackallocOnlyValueMarshalling(info, context, Identifier(byteLenIdentifier), Identifier(stackAllocPtrIdentifier)),
+                                .WithInitializer(
+                                    EqualsValueClause(
+                                        StackAllocArrayCreationExpression(
+                                            ArrayType(
+                                                PredefinedType(Token(SyntaxKind.ByteKeyword)),
+                                                SingletonList(
+                                                    ArrayRankSpecifier(
+                                                        SingletonSeparatedList<ExpressionSyntax>(
+                                                            IdentifierName(byteLenIdentifier)
+                                                        )
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                        )
+                    )
+                ),
+                GenerateStackallocOnlyValueMarshalling(
+                    info,
+                    context,
+                    Identifier(byteLenIdentifier),
+                    Identifier(stackAllocPtrIdentifier)
+                ),
                 // <nativeIdentifier> = <stackAllocPtr>;
                 ExpressionStatement(
                     AssignmentExpression(
                         SyntaxKind.SimpleAssignmentExpression,
                         IdentifierName(nativeIdentifier),
-                        CastExpression(
-                            AsNativeType(info),
-                            IdentifierName(stackAllocPtrIdentifier)))));
+                        CastExpression(AsNativeType(info), IdentifierName(stackAllocPtrIdentifier))
+                    )
+                )
+            );
 
             //   if (<byteLen> > <StackAllocBytesThreshold>)
             //   {
@@ -128,24 +185,34 @@ namespace Microsoft.Interop
                 BinaryExpression(
                     SyntaxKind.GreaterThanExpression,
                     IdentifierName(byteLenIdentifier),
-                    LiteralExpression(SyntaxKind.NumericLiteralExpression, Literal(stackallocMaxSize))),
+                    LiteralExpression(
+                        SyntaxKind.NumericLiteralExpression,
+                        Literal(stackallocMaxSize)
+                    )
+                ),
                 Block(
                     allocationStatement,
                     ExpressionStatement(
                         AssignmentExpression(
                             SyntaxKind.SimpleAssignmentExpression,
                             IdentifierName(allocationMarkerIdentifier),
-                            LiteralExpression(SyntaxKind.TrueLiteralExpression)))),
-                ElseClause(marshalOnStack));
+                            LiteralExpression(SyntaxKind.TrueLiteralExpression)
+                        )
+                    )
+                ),
+                ElseClause(marshalOnStack)
+            );
 
             yield return IfStatement(
                 GenerateNullCheckExpression(info, context),
-                Block(byteLenAssignment, allocBlock));
+                Block(byteLenAssignment, allocBlock)
+            );
         }
 
         protected StatementSyntax GenerateConditionalAllocationFreeSyntax(
             TypePositionInfo info,
-            StubCodeContext context)
+            StubCodeContext context
+        )
         {
             string allocationMarkerIdentifier = GetAllocationMarkerIdentifier(info, context);
             if (!UsesConditionalStackAlloc(info, context))
@@ -160,7 +227,8 @@ namespace Microsoft.Interop
                 // }
                 return IfStatement(
                     IdentifierName(allocationMarkerIdentifier),
-                    Block(ExpressionStatement(GenerateFreeExpression(info, context))));
+                    Block(ExpressionStatement(GenerateFreeExpression(info, context)))
+                );
             }
         }
 
@@ -176,7 +244,8 @@ namespace Microsoft.Interop
             TypePositionInfo info,
             StubCodeContext context,
             SyntaxToken byteLengthIdentifier,
-            out bool allocationRequiresByteLength);
+            out bool allocationRequiresByteLength
+        );
 
         /// <summary>
         /// Generates an expression that represents the number of bytes that need to be allocated.
@@ -186,7 +255,8 @@ namespace Microsoft.Interop
         /// <returns>An expression that results in the number of bytes to allocate as a C# int.</returns>
         protected abstract ExpressionSyntax GenerateByteLengthCalculationExpression(
             TypePositionInfo info,
-            StubCodeContext context);
+            StubCodeContext context
+        );
 
         /// <summary>
         /// Generate a statement that is only executed when memory is stack allocated.
@@ -200,7 +270,8 @@ namespace Microsoft.Interop
             TypePositionInfo info,
             StubCodeContext context,
             SyntaxToken byteLengthIdentifier,
-            SyntaxToken stackAllocPtrIdentifier);
+            SyntaxToken stackAllocPtrIdentifier
+        );
 
         /// <summary>
         /// Generate code to free native allocated memory used during marshalling.
@@ -210,7 +281,8 @@ namespace Microsoft.Interop
         /// <returns>An expression that frees allocated memory.</returns>
         protected abstract ExpressionSyntax GenerateFreeExpression(
             TypePositionInfo info,
-            StubCodeContext context);
+            StubCodeContext context
+        );
 
         /// <summary>
         /// Generate code to check if the managed value is not null.
@@ -220,12 +292,14 @@ namespace Microsoft.Interop
         /// <returns>An expression that checks if the managed value is not null.</returns>
         protected virtual ExpressionSyntax GenerateNullCheckExpression(
             TypePositionInfo info,
-            StubCodeContext context)
+            StubCodeContext context
+        )
         {
             return BinaryExpression(
-                    SyntaxKind.NotEqualsExpression,
-                    IdentifierName(context.GetIdentifiers(info).managed),
-                    LiteralExpression(SyntaxKind.NullLiteralExpression));
+                SyntaxKind.NotEqualsExpression,
+                IdentifierName(context.GetIdentifiers(info).managed),
+                LiteralExpression(SyntaxKind.NullLiteralExpression)
+            );
         }
 
         /// <inheritdoc/>
@@ -244,12 +318,18 @@ namespace Microsoft.Interop
         public abstract ArgumentSyntax AsArgument(TypePositionInfo info, StubCodeContext context);
 
         /// <inheritdoc/>
-        public abstract IEnumerable<StatementSyntax> Generate(TypePositionInfo info, StubCodeContext context);
+        public abstract IEnumerable<StatementSyntax> Generate(
+            TypePositionInfo info,
+            StubCodeContext context
+        );
 
         /// <inheritdoc/>
         public abstract bool UsesNativeIdentifier(TypePositionInfo info, StubCodeContext context);
 
         /// <inheritdoc />
-        public abstract bool SupportsByValueMarshalKind(ByValueContentsMarshalKind marshalKind, StubCodeContext context);
+        public abstract bool SupportsByValueMarshalKind(
+            ByValueContentsMarshalKind marshalKind,
+            StubCodeContext context
+        );
     }
 }

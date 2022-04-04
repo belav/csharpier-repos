@@ -51,7 +51,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [EntityFrameworkInternal]
         public RelationalMemberTranslatorProviderDependencies(
             ISqlExpressionFactory sqlExpressionFactory,
-            IEnumerable<IMemberTranslatorPlugin> plugins)
+            IEnumerable<IMemberTranslatorPlugin> plugins
+        )
         {
             SqlExpressionFactory = sqlExpressionFactory;
             Plugins = plugins;

@@ -65,7 +65,10 @@ namespace System.IO.Tests
         [Theory]
         [InlineData(FileAttributes.Hidden)]
         [PlatformSpecific(TestPlatforms.AnyUnix & ~(TestPlatforms.OSX | TestPlatforms.FreeBSD))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/51371", TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/51371",
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst
+        )]
         public void SettingInvalidAttributes_UnixExceptOSXAndFreeBSD(FileAttributes attributes)
         {
             string path = CreateItem();
@@ -91,9 +94,7 @@ namespace System.IO.Tests
             Assert.Equal(FileAttributes.Normal, GetAttributes(path));
         }
 
-        [Theory,
-            InlineData(":bar"),
-            InlineData(":bar:$DATA")]
+        [Theory, InlineData(":bar"), InlineData(":bar:$DATA")]
         [PlatformSpecific(TestPlatforms.Windows)]
         public void GettingAndSettingAttributes_AlternateDataStream_Windows(string streamName)
         {

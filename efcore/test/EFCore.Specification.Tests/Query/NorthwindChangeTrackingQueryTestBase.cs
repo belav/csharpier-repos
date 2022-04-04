@@ -12,8 +12,7 @@ namespace Microsoft.EntityFrameworkCore.Query
     public abstract class NorthwindChangeTrackingQueryTestBase<TFixture> : IClassFixture<TFixture>
         where TFixture : NorthwindQueryFixtureBase<NoopModelCustomizer>, new()
     {
-        protected NorthwindChangeTrackingQueryTestBase(TFixture fixture)
-            => Fixture = fixture;
+        protected NorthwindChangeTrackingQueryTestBase(TFixture fixture) => Fixture = fixture;
 
         protected TFixture Fixture { get; }
 
@@ -32,14 +31,23 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             context.ChangeTracker.DetectChanges();
 
-            Assert.Equal(customer.CustomerID, firstTrackedEntity.Property(c => c.CustomerID).CurrentValue);
+            Assert.Equal(
+                customer.CustomerID,
+                firstTrackedEntity.Property(c => c.CustomerID).CurrentValue
+            );
             Assert.Equal(EntityState.Modified, firstTrackedEntity.State);
             Assert.Equal("425-882-8080", firstTrackedEntity.Property(c => c.Phone).CurrentValue);
 
             firstTrackedEntity.State = EntityState.Unchanged;
 
-            Assert.Equal(customer.CustomerID, firstTrackedEntity.Property(c => c.CustomerID).CurrentValue);
-            Assert.Equal(originalPhoneNumber, firstTrackedEntity.Property(c => c.Phone).CurrentValue);
+            Assert.Equal(
+                customer.CustomerID,
+                firstTrackedEntity.Property(c => c.CustomerID).CurrentValue
+            );
+            Assert.Equal(
+                originalPhoneNumber,
+                firstTrackedEntity.Property(c => c.Phone).CurrentValue
+            );
             Assert.Equal(EntityState.Unchanged, firstTrackedEntity.State);
         }
 
@@ -81,7 +89,10 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             Assert.Equal(EntityState.Unchanged, firstTrackedEntity.State);
             Assert.NotEqual("425-882-8080", customer.Phone);
-            Assert.NotEqual("425-882-8080", firstTrackedEntity.Property(c => c.Phone).OriginalValue);
+            Assert.NotEqual(
+                "425-882-8080",
+                firstTrackedEntity.Property(c => c.Phone).OriginalValue
+            );
 
             customer.Phone = "425-882-8080";
             context.ChangeTracker.DetectChanges();
@@ -90,7 +101,10 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             context.Attach(customer);
 
-            Assert.Equal(customer.CustomerID, firstTrackedEntity.Property(c => c.CustomerID).CurrentValue);
+            Assert.Equal(
+                customer.CustomerID,
+                firstTrackedEntity.Property(c => c.CustomerID).CurrentValue
+            );
             Assert.Equal(EntityState.Unchanged, firstTrackedEntity.State);
             Assert.Equal("425-882-8080", firstTrackedEntity.Property(c => c.Phone).CurrentValue);
             Assert.Equal("425-882-8080", firstTrackedEntity.Property(c => c.Phone).OriginalValue);
@@ -105,7 +119,10 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             Assert.Equal(EntityState.Unchanged, firstTrackedEntity.State);
             Assert.NotEqual("425-882-8080", customer.Phone);
-            Assert.NotEqual("425-882-8080", firstTrackedEntity.Property(c => c.Phone).OriginalValue);
+            Assert.NotEqual(
+                "425-882-8080",
+                firstTrackedEntity.Property(c => c.Phone).OriginalValue
+            );
 
             customer.Phone = "425-882-8080";
             context.ChangeTracker.DetectChanges();
@@ -114,7 +131,10 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             context.Customers.Attach(customer);
 
-            Assert.Equal(customer.CustomerID, firstTrackedEntity.Property(c => c.CustomerID).CurrentValue);
+            Assert.Equal(
+                customer.CustomerID,
+                firstTrackedEntity.Property(c => c.CustomerID).CurrentValue
+            );
             Assert.Equal(EntityState.Unchanged, firstTrackedEntity.State);
             Assert.Equal("425-882-8080", firstTrackedEntity.Property(c => c.Phone).CurrentValue);
             Assert.Equal("425-882-8080", firstTrackedEntity.Property(c => c.Phone).OriginalValue);
@@ -149,8 +169,14 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             context.AttachRange(customers);
 
-            Assert.Equal(customer0.CustomerID, trackedEntity0.Property(c => c.CustomerID).CurrentValue);
-            Assert.Equal(customer1.CustomerID, trackedEntity1.Property(c => c.CustomerID).CurrentValue);
+            Assert.Equal(
+                customer0.CustomerID,
+                trackedEntity0.Property(c => c.CustomerID).CurrentValue
+            );
+            Assert.Equal(
+                customer1.CustomerID,
+                trackedEntity1.Property(c => c.CustomerID).CurrentValue
+            );
             Assert.Equal(EntityState.Unchanged, trackedEntity0.State);
             Assert.Equal(EntityState.Unchanged, trackedEntity1.State);
             Assert.Equal("425-882-8080", trackedEntity0.Property(c => c.Phone).CurrentValue);
@@ -187,8 +213,14 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             context.Customers.AttachRange(customers);
 
-            Assert.Equal(customer0.CustomerID, trackedEntity0.Property(c => c.CustomerID).CurrentValue);
-            Assert.Equal(customer1.CustomerID, trackedEntity1.Property(c => c.CustomerID).CurrentValue);
+            Assert.Equal(
+                customer0.CustomerID,
+                trackedEntity0.Property(c => c.CustomerID).CurrentValue
+            );
+            Assert.Equal(
+                customer1.CustomerID,
+                trackedEntity1.Property(c => c.CustomerID).CurrentValue
+            );
             Assert.Equal(EntityState.Unchanged, trackedEntity0.State);
             Assert.Equal(EntityState.Unchanged, trackedEntity1.State);
             Assert.Equal("425-882-8080", trackedEntity0.Property(c => c.Phone).CurrentValue);
@@ -196,13 +228,17 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal("425-882-8080", trackedEntity0.Property(c => c.Phone).OriginalValue);
             Assert.Equal("425-882-8080", trackedEntity1.Property(c => c.Phone).OriginalValue);
         }
+
         // ReSharper restore PossibleMultipleEnumeration
 
         [ConditionalFact]
         public virtual void Can_disable_and_reenable_query_result_tracking()
         {
             using var context = CreateContext();
-            Assert.Equal(QueryTrackingBehavior.TrackAll, context.ChangeTracker.QueryTrackingBehavior);
+            Assert.Equal(
+                QueryTrackingBehavior.TrackAll,
+                context.ChangeTracker.QueryTrackingBehavior
+            );
 
             var query = context.Employees.OrderBy(e => e.EmployeeID);
 
@@ -230,7 +266,10 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Can_disable_and_reenable_query_result_tracking_starting_with_NoTracking()
         {
             using var context = CreateNoTrackingContext();
-            Assert.Equal(QueryTrackingBehavior.NoTracking, context.ChangeTracker.QueryTrackingBehavior);
+            Assert.Equal(
+                QueryTrackingBehavior.NoTracking,
+                context.ChangeTracker.QueryTrackingBehavior
+            );
 
             var query = context.Employees.OrderBy(e => e.EmployeeID);
 
@@ -252,7 +291,10 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             using (var context = CreateContext())
             {
-                Assert.Equal(QueryTrackingBehavior.TrackAll, context.ChangeTracker.QueryTrackingBehavior);
+                Assert.Equal(
+                    QueryTrackingBehavior.TrackAll,
+                    context.ChangeTracker.QueryTrackingBehavior
+                );
 
                 var results = context.Employees.ToList();
 
@@ -278,7 +320,10 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             using (var context = CreateContext())
             {
-                Assert.Equal(QueryTrackingBehavior.TrackAll, context.ChangeTracker.QueryTrackingBehavior);
+                Assert.Equal(
+                    QueryTrackingBehavior.TrackAll,
+                    context.ChangeTracker.QueryTrackingBehavior
+                );
 
                 var results = context.Employees.ToList();
 
@@ -288,7 +333,10 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             using (var context = CreateNoTrackingContext())
             {
-                Assert.Equal(QueryTrackingBehavior.NoTracking, context.ChangeTracker.QueryTrackingBehavior);
+                Assert.Equal(
+                    QueryTrackingBehavior.NoTracking,
+                    context.ChangeTracker.QueryTrackingBehavior
+                );
 
                 var results = context.Employees.ToList();
 
@@ -301,7 +349,10 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Can_disable_and_reenable_query_result_tracking_query_caching_single_context()
         {
             using var context = CreateContext();
-            Assert.Equal(QueryTrackingBehavior.TrackAll, context.ChangeTracker.QueryTrackingBehavior);
+            Assert.Equal(
+                QueryTrackingBehavior.TrackAll,
+                context.ChangeTracker.QueryTrackingBehavior
+            );
 
             context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
 
@@ -352,13 +403,12 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Precedence_of_tracking_modifiers3()
         {
             using var context = CreateContext();
-            var customers
-                = (from c in context.Set<Customer>().AsNoTracking()
-                   join o in context.Set<Order>().AsTracking()
-                       on c.CustomerID equals o.CustomerID
-                   where c.CustomerID == "ALFKI"
-                   select o)
-                .ToList();
+            var customers = (
+                from c in context.Set<Customer>().AsNoTracking()
+                join o in context.Set<Order>().AsTracking() on c.CustomerID equals o.CustomerID
+                where c.CustomerID == "ALFKI"
+                select o
+            ).ToList();
 
             Assert.Equal(6, customers.Count);
             Assert.Equal(6, context.ChangeTracker.Entries().Count());
@@ -368,13 +418,12 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Precedence_of_tracking_modifiers4()
         {
             using var context = CreateContext();
-            var customers
-                = (from c in context.Set<Customer>().AsTracking()
-                   join o in context.Set<Order>().AsNoTracking()
-                       on c.CustomerID equals o.CustomerID
-                   where c.CustomerID == "ALFKI"
-                   select o)
-                .ToList();
+            var customers = (
+                from c in context.Set<Customer>().AsTracking()
+                join o in context.Set<Order>().AsNoTracking() on c.CustomerID equals o.CustomerID
+                where c.CustomerID == "ALFKI"
+                select o
+            ).ToList();
 
             Assert.Equal(6, customers.Count);
             Assert.Empty(context.ChangeTracker.Entries());
@@ -384,12 +433,12 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Precedence_of_tracking_modifiers5()
         {
             using var context = CreateContext();
-            var customers
-                = (from c in context.Set<Customer>().AsTracking()
-                   join o in context.Set<Order>()
-                       on c.CustomerID equals o.CustomerID
-                   where c.CustomerID == "ALFKI"
-                   select o)
+            var customers = (
+                from c in context.Set<Customer>().AsTracking()
+                join o in context.Set<Order>() on c.CustomerID equals o.CustomerID
+                where c.CustomerID == "ALFKI"
+                select o
+            )
                 .AsNoTracking()
                 .ToList();
 
@@ -397,12 +446,13 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Empty(context.ChangeTracker.Entries());
         }
 
-        protected NorthwindContext CreateContext()
-            => Fixture.CreateContext();
+        protected NorthwindContext CreateContext() => Fixture.CreateContext();
 
-        protected virtual NorthwindContext CreateNoTrackingContext()
-            => new(
+        protected virtual NorthwindContext CreateNoTrackingContext() =>
+            new(
                 new DbContextOptionsBuilder(Fixture.CreateOptions())
-                    .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking).Options);
+                    .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
+                    .Options
+            );
     }
 }

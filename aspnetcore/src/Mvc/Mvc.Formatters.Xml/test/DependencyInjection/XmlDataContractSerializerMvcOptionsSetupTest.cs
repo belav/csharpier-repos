@@ -52,7 +52,9 @@ public class XmlDataContractSerializerMvcOptionsSetupTest
         optionsSetup.Configure(options);
 
         // Assert
-        Assert.IsType<XmlDataContractSerializerInputFormatter>(Assert.Single(options.InputFormatters));
+        Assert.IsType<XmlDataContractSerializerInputFormatter>(
+            Assert.Single(options.InputFormatters)
+        );
     }
 
     [Fact]
@@ -66,6 +68,8 @@ public class XmlDataContractSerializerMvcOptionsSetupTest
         optionsSetup.Configure(options);
 
         // Assert
-        Assert.IsType<XmlDataContractSerializerOutputFormatter>(Assert.Single(options.OutputFormatters));
+        Assert.IsType<XmlDataContractSerializerOutputFormatter>(
+            Assert.Single(options.OutputFormatters)
+        );
     }
 }

@@ -6,6 +6,7 @@ class test
 {
     static short si16;
     static uint su32;
+
     static int Main()
     {
         si16 = -1;

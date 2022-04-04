@@ -57,7 +57,9 @@ namespace TestNamespace
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning " + DesignStrings.SensitiveInformationWarning + @"
+#warning "
+                            + DesignStrings.SensitiveInformationWarning
+                            + @"
                 optionsBuilder.UseSqlServer(""Initial Catalog=TestDatabase"");
             }
         }
@@ -71,11 +73,13 @@ namespace TestNamespace
     }
 }
 ",
-                        code.ContextFile);
+                        code.ContextFile
+                    );
 
                     Assert.Empty(code.AdditionalFiles);
                 },
-                model => Assert.Empty(model.GetEntityTypes()));
+                model => Assert.Empty(model.GetEntityTypes())
+            );
         }
 
         [ConditionalFact]
@@ -122,11 +126,13 @@ namespace TestNamespace
     }
 }
 ",
-                        code.ContextFile);
+                        code.ContextFile
+                    );
 
                     Assert.Empty(code.AdditionalFiles);
                 },
-                model => Assert.Empty(model.GetEntityTypes()));
+                model => Assert.Empty(model.GetEntityTypes())
+            );
         }
 
         [ConditionalFact]
@@ -161,11 +167,13 @@ namespace TestNamespace
     }
 }
 ",
-                        code.ContextFile);
+                        code.ContextFile
+                    );
 
                     Assert.Empty(code.AdditionalFiles);
                 },
-                null);
+                null
+            );
         }
 
         [ConditionalFact]
@@ -181,9 +189,13 @@ namespace TestNamespace
                 },
                 code =>
                 {
-                    Assert.Contains("DbSet<Entity> Entity { get; set; }" + _nl, code.ContextFile.Code);
+                    Assert.Contains(
+                        "DbSet<Entity> Entity { get; set; }" + _nl,
+                        code.ContextFile.Code
+                    );
                 },
-                null);
+                null
+            );
         }
 
         [ConditionalFact]
@@ -199,9 +211,13 @@ namespace TestNamespace
                 },
                 code =>
                 {
-                    Assert.Contains("DbSet<Entity> Entity { get; set; } = null!;", code.ContextFile.Code);
+                    Assert.Contains(
+                        "DbSet<Entity> Entity { get; set; } = null!;",
+                        code.ContextFile.Code
+                    );
                 },
-                null);
+                null
+            );
         }
 
         [ConditionalFact]
@@ -213,28 +229,44 @@ namespace TestNamespace
                 .GetRequiredService<IModelCodeGenerator>();
 
             Assert.StartsWith(
-                CoreStrings.ArgumentPropertyNull(nameof(ModelCodeGenerationOptions.ContextName), "options"),
-                Assert.Throws<ArgumentException>(
-                    () =>
-                        generator.GenerateModel(
-                            new Model(),
-                            new ModelCodeGenerationOptions
-                            {
-                                ContextName = null,
-                                ConnectionString = "Initial Catalog=TestDatabase"
-                            })).Message);
+                CoreStrings.ArgumentPropertyNull(
+                    nameof(ModelCodeGenerationOptions.ContextName),
+                    "options"
+                ),
+                Assert
+                    .Throws<ArgumentException>(
+                        () =>
+                            generator.GenerateModel(
+                                new Model(),
+                                new ModelCodeGenerationOptions
+                                {
+                                    ContextName = null,
+                                    ConnectionString = "Initial Catalog=TestDatabase"
+                                }
+                            )
+                    )
+                    .Message
+            );
 
             Assert.StartsWith(
-                CoreStrings.ArgumentPropertyNull(nameof(ModelCodeGenerationOptions.ConnectionString), "options"),
-                Assert.Throws<ArgumentException>(
-                    () =>
-                        generator.GenerateModel(
-                            new Model(),
-                            new ModelCodeGenerationOptions
-                            {
-                                ContextName = "TestDbContext",
-                                ConnectionString = null
-                            })).Message);
+                CoreStrings.ArgumentPropertyNull(
+                    nameof(ModelCodeGenerationOptions.ConnectionString),
+                    "options"
+                ),
+                Assert
+                    .Throws<ArgumentException>(
+                        () =>
+                            generator.GenerateModel(
+                                new Model(),
+                                new ModelCodeGenerationOptions
+                                {
+                                    ContextName = "TestDbContext",
+                                    ConnectionString = null
+                                }
+                            )
+                    )
+                    .Message
+            );
         }
 
         [ConditionalFact]
@@ -253,13 +285,17 @@ namespace TestNamespace
                     ModelNamespace = "TestNamespace",
                     ContextName = "TestDbContext",
                     ConnectionString = "Initial Catalog=TestDatabase"
-                });
+                }
+            );
 
             Assert.Contains(
-                @"optionsBuilder" + _nl +
-                @"                    .UseSqlServer(""Initial Catalog=TestDatabase"", x => x.SetProviderOption())" + _nl +
-                @"                    .SetContextOption();",
-                scaffoldedModel.ContextFile.Code);
+                @"optionsBuilder"
+                    + _nl
+                    + @"                    .UseSqlServer(""Initial Catalog=TestDatabase"", x => x.SetProviderOption())"
+                    + _nl
+                    + @"                    .SetContextOption();",
+                scaffoldedModel.ContextFile.Code
+            );
         }
 
         [ConditionalFact]
@@ -269,17 +305,23 @@ namespace TestNamespace
                 modelBuilder =>
                 {
                     modelBuilder.Entity(
-                        "Entity", x =>
+                        "Entity",
+                        x =>
                         {
                             x.Property<string>("RequiredString").IsRequired();
                             x.Property<string>("NonRequiredString");
                             x.Property<int>("RequiredInt");
                             x.Property<int?>("NonRequiredInt");
-                        });
+                        }
+                    );
                 },
                 new ModelCodeGenerationOptions { UseNullableReferenceTypes = false },
-                code => {
-                    Assert.Contains("Property(e => e.RequiredString).IsRequired()", code.ContextFile.Code);
+                code =>
+                {
+                    Assert.Contains(
+                        "Property(e => e.RequiredString).IsRequired()",
+                        code.ContextFile.Code
+                    );
                     Assert.DoesNotContain("NotRequiredString", code.ContextFile.Code);
                     Assert.DoesNotContain("RequiredInt", code.ContextFile.Code);
                     Assert.DoesNotContain("NotRequiredInt", code.ContextFile.Code);
@@ -291,7 +333,8 @@ namespace TestNamespace
                     Assert.True(entityType.GetProperty("NonRequiredString").IsNullable);
                     Assert.False(entityType.GetProperty("RequiredInt").IsNullable);
                     Assert.True(entityType.GetProperty("NonRequiredInt").IsNullable);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -301,16 +344,19 @@ namespace TestNamespace
                 modelBuilder =>
                 {
                     modelBuilder.Entity(
-                        "Entity", x =>
+                        "Entity",
+                        x =>
                         {
                             x.Property<string>("RequiredString").IsRequired();
                             x.Property<string>("NonRequiredString");
                             x.Property<int>("RequiredInt");
                             x.Property<int?>("NonRequiredInt");
-                        });
+                        }
+                    );
                 },
                 new ModelCodeGenerationOptions { UseNullableReferenceTypes = true },
-                code => {
+                code =>
+                {
                     Assert.DoesNotContain("RequiredString", code.ContextFile.Code);
                     Assert.DoesNotContain("NotRequiredString", code.ContextFile.Code);
                     Assert.DoesNotContain("RequiredInt", code.ContextFile.Code);
@@ -323,47 +369,57 @@ namespace TestNamespace
                     Assert.True(entityType.GetProperty("NonRequiredString").IsNullable);
                     Assert.False(entityType.GetProperty("RequiredInt").IsNullable);
                     Assert.True(entityType.GetProperty("NonRequiredInt").IsNullable);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
         public void Comments_use_fluent_api()
         {
             Test(
-                modelBuilder => modelBuilder.Entity(
-                    "Entity",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<int>("Property")
-                            .HasComment("An int property");
-                    }),
+                modelBuilder =>
+                    modelBuilder.Entity(
+                        "Entity",
+                        x =>
+                        {
+                            x.Property<int>("Id");
+                            x.Property<int>("Property").HasComment("An int property");
+                        }
+                    ),
                 new ModelCodeGenerationOptions(),
-                code => Assert.Contains(
-                    ".HasComment(\"An int property\")",
-                    code.ContextFile.Code),
-                model => Assert.Equal(
-                    "An int property",
-                    model.FindEntityType("TestNamespace.Entity").GetProperty("Property").GetComment()));
+                code => Assert.Contains(".HasComment(\"An int property\")", code.ContextFile.Code),
+                model =>
+                    Assert.Equal(
+                        "An int property",
+                        model
+                            .FindEntityType("TestNamespace.Entity")
+                            .GetProperty("Property")
+                            .GetComment()
+                    )
+            );
         }
 
         [ConditionalFact]
         public void Entity_comments_use_fluent_api()
         {
             Test(
-                modelBuilder => modelBuilder.Entity(
-                    "Entity",
-                    x =>
-                    {
-                        x.HasComment("An entity comment");
-                    }),
+                modelBuilder =>
+                    modelBuilder.Entity(
+                        "Entity",
+                        x =>
+                        {
+                            x.HasComment("An entity comment");
+                        }
+                    ),
                 new ModelCodeGenerationOptions(),
-                code => Assert.Contains(
-                    ".HasComment(\"An entity comment\")",
-                    code.ContextFile.Code),
-                model => Assert.Equal(
-                    "An entity comment",
-                    model.FindEntityType("TestNamespace.Entity").GetComment()));
+                code =>
+                    Assert.Contains(".HasComment(\"An entity comment\")", code.ContextFile.Code),
+                model =>
+                    Assert.Equal(
+                        "An entity comment",
+                        model.FindEntityType("TestNamespace.Entity").GetComment()
+                    )
+            );
         }
 
         [ConditionalFact]
@@ -373,15 +429,19 @@ namespace TestNamespace
                 modelBuilder => modelBuilder.Entity("Vista").ToView("Vista"),
                 new ModelCodeGenerationOptions { UseDataAnnotations = true },
                 code => Assert.Contains("entity.ToView(\"Vista\");", code.ContextFile.Code),
-                model => {
+                model =>
+                {
                     var entityType = model.FindEntityType("TestNamespace.Vista");
 
-                    Assert.NotNull(entityType.FindAnnotation(RelationalAnnotationNames.ViewDefinitionSql));
+                    Assert.NotNull(
+                        entityType.FindAnnotation(RelationalAnnotationNames.ViewDefinitionSql)
+                    );
                     Assert.Equal("Vista", entityType.GetViewName());
                     Assert.Null(entityType.GetViewSchema());
                     Assert.Null(entityType.GetTableName());
                     Assert.Null(entityType.GetSchema());
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -389,31 +449,61 @@ namespace TestNamespace
         {
             var modelGenerationOptions = new ModelCodeGenerationOptions
             {
-                ContextNamespace = "TestNamespace", ModelNamespace = "AnotherNamespaceOfModel"
+                ContextNamespace = "TestNamespace",
+                ModelNamespace = "AnotherNamespaceOfModel"
             };
 
             const string entityInAnotherNamespaceTypeName = "EntityInAnotherNamespace";
 
             Test(
-                modelBuilder => modelBuilder.Entity(entityInAnotherNamespaceTypeName)
-                , modelGenerationOptions
-                , code => Assert.Contains(string.Concat("using ", modelGenerationOptions.ModelNamespace, ";"), code.ContextFile.Code)
-                , model => Assert.NotNull(model.FindEntityType(string.Concat(modelGenerationOptions.ModelNamespace, ".", entityInAnotherNamespaceTypeName)))
+                modelBuilder => modelBuilder.Entity(entityInAnotherNamespaceTypeName),
+                modelGenerationOptions,
+                code =>
+                    Assert.Contains(
+                        string.Concat("using ", modelGenerationOptions.ModelNamespace, ";"),
+                        code.ContextFile.Code
+                    ),
+                model =>
+                    Assert.NotNull(
+                        model.FindEntityType(
+                            string.Concat(
+                                modelGenerationOptions.ModelNamespace,
+                                ".",
+                                entityInAnotherNamespaceTypeName
+                            )
+                        )
+                    )
             );
         }
 
         [ConditionalFact]
         public void ModelSameNamespaceDbContext_works()
         {
-            var modelGenerationOptions = new ModelCodeGenerationOptions { ContextNamespace = "TestNamespace" };
+            var modelGenerationOptions = new ModelCodeGenerationOptions
+            {
+                ContextNamespace = "TestNamespace"
+            };
 
             const string entityInAnotherNamespaceTypeName = "EntityInAnotherNamespace";
 
             Test(
-                modelBuilder => modelBuilder.Entity(entityInAnotherNamespaceTypeName)
-                , modelGenerationOptions
-                , code => Assert.DoesNotContain(string.Concat("using ", modelGenerationOptions.ModelNamespace, ";"), code.ContextFile.Code)
-                , model => Assert.NotNull(model.FindEntityType(string.Concat(modelGenerationOptions.ModelNamespace, ".", entityInAnotherNamespaceTypeName)))
+                modelBuilder => modelBuilder.Entity(entityInAnotherNamespaceTypeName),
+                modelGenerationOptions,
+                code =>
+                    Assert.DoesNotContain(
+                        string.Concat("using ", modelGenerationOptions.ModelNamespace, ";"),
+                        code.ContextFile.Code
+                    ),
+                model =>
+                    Assert.NotNull(
+                        model.FindEntityType(
+                            string.Concat(
+                                modelGenerationOptions.ModelNamespace,
+                                ".",
+                                entityInAnotherNamespaceTypeName
+                            )
+                        )
+                    )
             );
         }
 
@@ -421,54 +511,91 @@ namespace TestNamespace
         public void ValueGenerated_works()
         {
             Test(
-                modelBuilder => modelBuilder.Entity(
-                    "Entity",
-                    x =>
-                    {
-                        x.Property<int>("ValueGeneratedOnAdd").ValueGeneratedOnAdd();
-                        x.Property<int>("ValueGeneratedOnAddOrUpdate").ValueGeneratedOnAddOrUpdate();
-                        x.Property<int>("ConcurrencyToken").IsConcurrencyToken();
-                        x.Property<int>("ValueGeneratedOnUpdate").ValueGeneratedOnUpdate();
-                        x.Property<int>("ValueGeneratedNever").ValueGeneratedNever();
-                    }),
+                modelBuilder =>
+                    modelBuilder.Entity(
+                        "Entity",
+                        x =>
+                        {
+                            x.Property<int>("ValueGeneratedOnAdd").ValueGeneratedOnAdd();
+                            x.Property<int>("ValueGeneratedOnAddOrUpdate")
+                                .ValueGeneratedOnAddOrUpdate();
+                            x.Property<int>("ConcurrencyToken").IsConcurrencyToken();
+                            x.Property<int>("ValueGeneratedOnUpdate").ValueGeneratedOnUpdate();
+                            x.Property<int>("ValueGeneratedNever").ValueGeneratedNever();
+                        }
+                    ),
                 new ModelCodeGenerationOptions(),
                 code =>
                 {
                     Assert.Contains(
                         @$"Property(e => e.ValueGeneratedOnAdd){_nl}                    .ValueGeneratedOnAdd()",
-                        code.ContextFile.Code);
-                    Assert.Contains("Property(e => e.ValueGeneratedOnAddOrUpdate).ValueGeneratedOnAddOrUpdate()", code.ContextFile.Code);
-                    Assert.Contains("Property(e => e.ConcurrencyToken).IsConcurrencyToken()", code.ContextFile.Code);
-                    Assert.Contains("Property(e => e.ValueGeneratedOnUpdate).ValueGeneratedOnUpdate()", code.ContextFile.Code);
-                    Assert.Contains("Property(e => e.ValueGeneratedNever).ValueGeneratedNever()", code.ContextFile.Code);
+                        code.ContextFile.Code
+                    );
+                    Assert.Contains(
+                        "Property(e => e.ValueGeneratedOnAddOrUpdate).ValueGeneratedOnAddOrUpdate()",
+                        code.ContextFile.Code
+                    );
+                    Assert.Contains(
+                        "Property(e => e.ConcurrencyToken).IsConcurrencyToken()",
+                        code.ContextFile.Code
+                    );
+                    Assert.Contains(
+                        "Property(e => e.ValueGeneratedOnUpdate).ValueGeneratedOnUpdate()",
+                        code.ContextFile.Code
+                    );
+                    Assert.Contains(
+                        "Property(e => e.ValueGeneratedNever).ValueGeneratedNever()",
+                        code.ContextFile.Code
+                    );
                 },
                 model =>
                 {
                     var entity = model.FindEntityType("TestNamespace.Entity");
-                    Assert.Equal(ValueGenerated.OnAdd, entity.GetProperty("ValueGeneratedOnAdd").ValueGenerated);
-                    Assert.Equal(ValueGenerated.OnAddOrUpdate, entity.GetProperty("ValueGeneratedOnAddOrUpdate").ValueGenerated);
+                    Assert.Equal(
+                        ValueGenerated.OnAdd,
+                        entity.GetProperty("ValueGeneratedOnAdd").ValueGenerated
+                    );
+                    Assert.Equal(
+                        ValueGenerated.OnAddOrUpdate,
+                        entity.GetProperty("ValueGeneratedOnAddOrUpdate").ValueGenerated
+                    );
                     Assert.True(entity.GetProperty("ConcurrencyToken").IsConcurrencyToken);
-                    Assert.Equal(ValueGenerated.OnUpdate, entity.GetProperty("ValueGeneratedOnUpdate").ValueGenerated);
-                    Assert.Equal(ValueGenerated.Never, entity.GetProperty("ValueGeneratedNever").ValueGenerated);
-                });
+                    Assert.Equal(
+                        ValueGenerated.OnUpdate,
+                        entity.GetProperty("ValueGeneratedOnUpdate").ValueGenerated
+                    );
+                    Assert.Equal(
+                        ValueGenerated.Never,
+                        entity.GetProperty("ValueGeneratedNever").ValueGenerated
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
         public void HasPrecision_works()
         {
             Test(
-                modelBuilder => modelBuilder.Entity(
-                    "Entity",
-                    x =>
-                    {
-                        x.Property<decimal>("HasPrecision").HasPrecision(12);
-                        x.Property<decimal>("HasPrecisionAndScale").HasPrecision(14, 7);
-                    }),
+                modelBuilder =>
+                    modelBuilder.Entity(
+                        "Entity",
+                        x =>
+                        {
+                            x.Property<decimal>("HasPrecision").HasPrecision(12);
+                            x.Property<decimal>("HasPrecisionAndScale").HasPrecision(14, 7);
+                        }
+                    ),
                 new ModelCodeGenerationOptions(),
                 code =>
                 {
-                    Assert.Contains("Property(e => e.HasPrecision).HasPrecision(12)", code.ContextFile.Code);
-                    Assert.Contains("Property(e => e.HasPrecisionAndScale).HasPrecision(14, 7)", code.ContextFile.Code);
+                    Assert.Contains(
+                        "Property(e => e.HasPrecision).HasPrecision(12)",
+                        code.ContextFile.Code
+                    );
+                    Assert.Contains(
+                        "Property(e => e.HasPrecisionAndScale).HasPrecision(14, 7)",
+                        code.ContextFile.Code
+                    );
                 },
                 model =>
                 {
@@ -477,121 +604,180 @@ namespace TestNamespace
                     Assert.Null(entity.GetProperty("HasPrecision").GetScale());
                     Assert.Equal(14, entity.GetProperty("HasPrecisionAndScale").GetPrecision());
                     Assert.Equal(7, entity.GetProperty("HasPrecisionAndScale").GetScale());
-                });
+                }
+            );
         }
 
         [ConditionalFact]
         public void Collation_works()
         {
             Test(
-                modelBuilder => modelBuilder.Entity("Entity").Property<string>("UseCollation").UseCollation("Some Collation"),
+                modelBuilder =>
+                    modelBuilder
+                        .Entity("Entity")
+                        .Property<string>("UseCollation")
+                        .UseCollation("Some Collation"),
                 new ModelCodeGenerationOptions(),
-                code => Assert.Contains("Property(e => e.UseCollation).UseCollation(\"Some Collation\")", code.ContextFile.Code),
+                code =>
+                    Assert.Contains(
+                        "Property(e => e.UseCollation).UseCollation(\"Some Collation\")",
+                        code.ContextFile.Code
+                    ),
                 model =>
                 {
                     var entity = model.FindEntityType("TestNamespace.Entity");
-                    Assert.Equal("Some Collation", entity.GetProperty("UseCollation").GetCollation());
-                });
+                    Assert.Equal(
+                        "Some Collation",
+                        entity.GetProperty("UseCollation").GetCollation()
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
         public void ComputedColumnSql_works()
         {
             Test(
-                modelBuilder => modelBuilder.Entity("Entity").Property<string>("ComputedColumn").HasComputedColumnSql("1 + 2"),
+                modelBuilder =>
+                    modelBuilder
+                        .Entity("Entity")
+                        .Property<string>("ComputedColumn")
+                        .HasComputedColumnSql("1 + 2"),
                 new ModelCodeGenerationOptions(),
                 code => Assert.Contains(".HasComputedColumnSql(\"1 + 2\")", code.ContextFile.Code),
                 model =>
                 {
                     var entity = model.FindEntityType("TestNamespace.Entity");
-                    Assert.Equal("1 + 2", entity.GetProperty("ComputedColumn").GetComputedColumnSql());
-                });
+                    Assert.Equal(
+                        "1 + 2",
+                        entity.GetProperty("ComputedColumn").GetComputedColumnSql()
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
         public void IsUnicode_works()
         {
             Test(
-                modelBuilder => {
+                modelBuilder =>
+                {
                     modelBuilder.Entity("Entity").Property<string>("UnicodeColumn").IsUnicode();
-                    modelBuilder.Entity("Entity").Property<string>("NonUnicodeColumn").IsUnicode(false);
+                    modelBuilder
+                        .Entity("Entity")
+                        .Property<string>("NonUnicodeColumn")
+                        .IsUnicode(false);
                 },
                 new ModelCodeGenerationOptions(),
-                code => {
-                    Assert.Contains("Property(e => e.UnicodeColumn).IsUnicode()", code.ContextFile.Code);
-                    Assert.Contains("Property(e => e.NonUnicodeColumn).IsUnicode(false)", code.ContextFile.Code);
+                code =>
+                {
+                    Assert.Contains(
+                        "Property(e => e.UnicodeColumn).IsUnicode()",
+                        code.ContextFile.Code
+                    );
+                    Assert.Contains(
+                        "Property(e => e.NonUnicodeColumn).IsUnicode(false)",
+                        code.ContextFile.Code
+                    );
                 },
                 model =>
                 {
                     var entity = model.FindEntityType("TestNamespace.Entity");
                     Assert.True(entity.GetProperty("UnicodeColumn").IsUnicode());
                     Assert.False(entity.GetProperty("NonUnicodeColumn").IsUnicode());
-                });
+                }
+            );
         }
 
         [ConditionalFact]
         public void ComputedColumnSql_works_stored()
         {
             Test(
-                modelBuilder => modelBuilder.Entity("Entity").Property<string>("ComputedColumn")
-                    .HasComputedColumnSql("1 + 2", stored: true),
+                modelBuilder =>
+                    modelBuilder
+                        .Entity("Entity")
+                        .Property<string>("ComputedColumn")
+                        .HasComputedColumnSql("1 + 2", stored: true),
                 new ModelCodeGenerationOptions(),
-                code => Assert.Contains(".HasComputedColumnSql(\"1 + 2\", true)", code.ContextFile.Code),
+                code =>
+                    Assert.Contains(
+                        ".HasComputedColumnSql(\"1 + 2\", true)",
+                        code.ContextFile.Code
+                    ),
                 model =>
                 {
                     var entity = model.FindEntityType("TestNamespace.Entity");
                     Assert.True(entity.GetProperty("ComputedColumn").GetIsStored());
-                });
+                }
+            );
         }
 
         [ConditionalFact]
         public void ComputedColumnSql_works_unspecified()
         {
             Test(
-                modelBuilder => modelBuilder.Entity("Entity").Property<string>("ComputedColumn").HasComputedColumnSql(),
+                modelBuilder =>
+                    modelBuilder
+                        .Entity("Entity")
+                        .Property<string>("ComputedColumn")
+                        .HasComputedColumnSql(),
                 new ModelCodeGenerationOptions(),
                 code => Assert.Contains(".HasComputedColumnSql()", code.ContextFile.Code),
                 model =>
                 {
                     var entity = model.FindEntityType("TestNamespace.Entity");
                     Assert.Empty(entity.GetProperty("ComputedColumn").GetComputedColumnSql());
-                });
+                }
+            );
         }
 
         [ConditionalFact]
         public void DefaultValue_works_unspecified()
         {
             Test(
-                modelBuilder => modelBuilder.Entity("Entity").Property<string>("DefaultedColumn").HasDefaultValue(),
+                modelBuilder =>
+                    modelBuilder
+                        .Entity("Entity")
+                        .Property<string>("DefaultedColumn")
+                        .HasDefaultValue(),
                 new ModelCodeGenerationOptions(),
                 code => Assert.Contains(".HasDefaultValue()", code.ContextFile.Code),
                 model =>
                 {
                     var entity = model.FindEntityType("TestNamespace.Entity");
-                    Assert.Equal(DBNull.Value, entity.GetProperty("DefaultedColumn").GetDefaultValue());
-                });
+                    Assert.Equal(
+                        DBNull.Value,
+                        entity.GetProperty("DefaultedColumn").GetDefaultValue()
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
         public void DefaultValueSql_works_unspecified()
         {
             Test(
-                modelBuilder => modelBuilder.Entity("Entity").Property<string>("DefaultedColumn").HasDefaultValueSql(),
+                modelBuilder =>
+                    modelBuilder
+                        .Entity("Entity")
+                        .Property<string>("DefaultedColumn")
+                        .HasDefaultValueSql(),
                 new ModelCodeGenerationOptions(),
                 code => Assert.Contains(".HasDefaultValueSql()", code.ContextFile.Code),
                 model =>
                 {
                     var entity = model.FindEntityType("TestNamespace.Entity");
                     Assert.Empty(entity.GetProperty("DefaultedColumn").GetDefaultValueSql());
-                });
+                }
+            );
         }
 
         [ConditionalFact]
         public void Entity_with_indexes_and_use_data_annotations_false_always_generates_fluent_API()
         {
             Test(
-                modelBuilder => modelBuilder
-                    .Entity(
+                modelBuilder =>
+                    modelBuilder.Entity(
                         "EntityWithIndexes",
                         x =>
                         {
@@ -600,12 +786,12 @@ namespace TestNamespace
                             x.Property<int>("B");
                             x.Property<int>("C");
                             x.HasKey("Id");
-                            x.HasIndex(new[] { "A", "B" }, "IndexOnAAndB")
-                                .IsUnique();
+                            x.HasIndex(new[] { "A", "B" }, "IndexOnAAndB").IsUnique();
                             x.HasIndex(new[] { "B", "C" }, "IndexOnBAndC")
                                 .HasFilter("Filter SQL")
                                 .HasAnnotation("AnnotationName", "AnnotationValue");
-                        }),
+                        }
+                    ),
                 new ModelCodeGenerationOptions { UseDataAnnotations = false },
                 code =>
                 {
@@ -634,7 +820,9 @@ namespace TestNamespace
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning " + DesignStrings.SensitiveInformationWarning + @"
+#warning "
+                            + DesignStrings.SensitiveInformationWarning
+                            + @"
                 optionsBuilder.UseSqlServer(""Initial Catalog=TestDatabase"");
             }
         }
@@ -660,18 +848,23 @@ namespace TestNamespace
     }
 }
 ",
-                        code.ContextFile);
+                        code.ContextFile
+                    );
                 },
                 model =>
-                    Assert.Equal(2, model.FindEntityType("TestNamespace.EntityWithIndexes").GetIndexes().Count()));
+                    Assert.Equal(
+                        2,
+                        model.FindEntityType("TestNamespace.EntityWithIndexes").GetIndexes().Count()
+                    )
+            );
         }
 
         [ConditionalFact]
         public void Entity_with_indexes_and_use_data_annotations_true_generates_fluent_API_only_for_indexes_with_annotations()
         {
             Test(
-                modelBuilder => modelBuilder
-                    .Entity(
+                modelBuilder =>
+                    modelBuilder.Entity(
                         "EntityWithIndexes",
                         x =>
                         {
@@ -680,12 +873,12 @@ namespace TestNamespace
                             x.Property<int>("B");
                             x.Property<int>("C");
                             x.HasKey("Id");
-                            x.HasIndex(new[] { "A", "B" }, "IndexOnAAndB")
-                                .IsUnique();
+                            x.HasIndex(new[] { "A", "B" }, "IndexOnAAndB").IsUnique();
                             x.HasIndex(new[] { "B", "C" }, "IndexOnBAndC")
                                 .HasFilter("Filter SQL")
                                 .HasAnnotation("AnnotationName", "AnnotationValue");
-                        }),
+                        }
+                    ),
                 new ModelCodeGenerationOptions { UseDataAnnotations = true },
                 code =>
                 {
@@ -714,7 +907,9 @@ namespace TestNamespace
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning " + DesignStrings.SensitiveInformationWarning + @"
+#warning "
+                            + DesignStrings.SensitiveInformationWarning
+                            + @"
                 optionsBuilder.UseSqlServer(""Initial Catalog=TestDatabase"");
             }
         }
@@ -737,10 +932,15 @@ namespace TestNamespace
     }
 }
 ",
-                        code.ContextFile);
+                        code.ContextFile
+                    );
                 },
                 model =>
-                    Assert.Equal(2, model.FindEntityType("TestNamespace.EntityWithIndexes").GetIndexes().Count()));
+                    Assert.Equal(
+                        2,
+                        model.FindEntityType("TestNamespace.EntityWithIndexes").GetIndexes().Count()
+                    )
+            );
         }
 
         [ConditionalFact]
@@ -750,15 +950,18 @@ namespace TestNamespace
                 modelBuilder =>
                 {
                     modelBuilder.Entity(
-                        "PrincipalEntity", b =>
+                        "PrincipalEntity",
+                        b =>
                         {
                             b.Property<int>("Id");
                             b.Property<int>("PrincipalId");
                             b.Property<int>("AlternateId");
                             b.HasKey("AlternateId");
-                        });
+                        }
+                    );
                     modelBuilder.Entity(
-                        "DependentEntity", b =>
+                        "DependentEntity",
+                        b =>
                         {
                             b.Property<int>("Id");
                             b.Property<int>("DependentId");
@@ -766,7 +969,8 @@ namespace TestNamespace
                                 .WithOne("NavigationToDependent")
                                 .HasForeignKey("DependentEntity", "DependentId")
                                 .HasPrincipalKey("PrincipalEntity", "PrincipalId");
-                        });
+                        }
+                    );
                 },
                 new ModelCodeGenerationOptions { UseDataAnnotations = false },
                 code =>
@@ -797,7 +1001,9 @@ namespace TestNamespace
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning " + DesignStrings.SensitiveInformationWarning + @"
+#warning "
+                            + DesignStrings.SensitiveInformationWarning
+                            + @"
                 optionsBuilder.UseSqlServer(""Initial Catalog=TestDatabase"");
             }
         }
@@ -831,23 +1037,28 @@ namespace TestNamespace
     }
 }
 ",
-                        code.ContextFile);
+                        code.ContextFile
+                    );
                 },
-                model => { });
+                model => { }
+            );
         }
 
         [ConditionalFact]
         public void Column_type_is_not_scaffolded_as_annotation()
         {
             Test(
-                modelBuilder => modelBuilder
-                    .Entity(
+                modelBuilder =>
+                    modelBuilder.Entity(
                         "Employee",
                         x =>
                         {
                             x.Property<int>("Id");
-                            x.Property<DateTime>("HireDate").HasColumnType("date").HasColumnName("hiring_date");
-                        }),
+                            x.Property<DateTime>("HireDate")
+                                .HasColumnType("date")
+                                .HasColumnName("hiring_date");
+                        }
+                    ),
                 new ModelCodeGenerationOptions { UseDataAnnotations = false },
                 code =>
                 {
@@ -876,7 +1087,9 @@ namespace TestNamespace
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning " + DesignStrings.SensitiveInformationWarning + @"
+#warning "
+                            + DesignStrings.SensitiveInformationWarning
+                            + @"
                 optionsBuilder.UseSqlServer(""Initial Catalog=TestDatabase"");
             }
         }
@@ -899,28 +1112,44 @@ namespace TestNamespace
     }
 }
 ",
-                        code.ContextFile);
+                        code.ContextFile
+                    );
                 },
                 model =>
-                    Assert.Equal("date", model.FindEntityType("TestNamespace.Employee").GetProperty("HireDate").GetConfiguredColumnType()));
+                    Assert.Equal(
+                        "date",
+                        model
+                            .FindEntityType("TestNamespace.Employee")
+                            .GetProperty("HireDate")
+                            .GetConfiguredColumnType()
+                    )
+            );
         }
 
         [ConditionalFact]
         public void Is_fixed_length_annotation_should_be_scaffolded_without_optional_parameter()
         {
-             Test(
-                modelBuilder => modelBuilder
-                    .Entity(
+            Test(
+                modelBuilder =>
+                    modelBuilder.Entity(
                         "Employee",
                         x =>
                         {
                             x.Property<int>("Id");
                             x.Property<string>("Name").HasMaxLength(5).IsFixedLength();
-                        }),
+                        }
+                    ),
                 new ModelCodeGenerationOptions { UseDataAnnotations = false },
                 code => Assert.Contains(".IsFixedLength()", code.ContextFile.Code),
                 model =>
-                    Assert.Equal(true, model.FindEntityType("TestNamespace.Employee").GetProperty("Name").IsFixedLength()));
+                    Assert.Equal(
+                        true,
+                        model
+                            .FindEntityType("TestNamespace.Employee")
+                            .GetProperty("Name")
+                            .IsFixedLength()
+                    )
+            );
         }
 
         [ConditionalFact]
@@ -954,7 +1183,9 @@ public partial class TestDbContext : DbContext
     {
         if (!optionsBuilder.IsConfigured)
         {
-#warning " + DesignStrings.SensitiveInformationWarning + @"
+#warning "
+                            + DesignStrings.SensitiveInformationWarning
+                            + @"
             optionsBuilder.UseSqlServer(""Initial Catalog=TestDatabase"");
         }
     }
@@ -972,14 +1203,16 @@ public partial class TestDbContext : DbContext
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
 ",
-                        code.ContextFile);
+                        code.ContextFile
+                    );
 
                     Assert.DoesNotContain("namespace ", Assert.Single(code.AdditionalFiles).Code);
                 },
                 model =>
                 {
                     Assert.NotNull(model.FindEntityType("MyEntity"));
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -996,12 +1229,16 @@ public partial class TestDbContext : DbContext
                 {
                     Assert.Contains("using TestNamespace;", code.ContextFile.Code);
                     Assert.DoesNotContain("namespace ", code.ContextFile.Code);
-                    Assert.Contains("namespace TestNamespace", Assert.Single(code.AdditionalFiles).Code);
+                    Assert.Contains(
+                        "namespace TestNamespace",
+                        Assert.Single(code.AdditionalFiles).Code
+                    );
                 },
                 model =>
                 {
                     Assert.NotNull(model.FindEntityType("TestNamespace.MyEntity"));
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -1022,14 +1259,16 @@ public partial class TestDbContext : DbContext
                 model =>
                 {
                     Assert.NotNull(model.FindEntityType("MyEntity"));
-                });
+                }
+            );
         }
 
         [ConditionalFact]
         public void Fluent_calls_in_custom_namespaces_work()
         {
             Test(
-                modelBuilder => CustomTestNamespace.TestModelBuilderExtensions.TestFluentApiCall(modelBuilder),
+                modelBuilder =>
+                    CustomTestNamespace.TestModelBuilderExtensions.TestFluentApiCall(modelBuilder),
                 new ModelCodeGenerationOptions { SuppressOnConfiguring = true },
                 code =>
                 {
@@ -1060,12 +1299,14 @@ namespace TestNamespace
     }
 }
 ",
-                        code.ContextFile);
+                        code.ContextFile
+                    );
 
                     Assert.Empty(code.AdditionalFiles);
                 },
                 model => Assert.Empty(model.GetEntityTypes()),
-                skipBuild: true);
+                skipBuild: true
+            );
         }
 
         [ConditionalFact]
@@ -1073,23 +1314,30 @@ namespace TestNamespace
         {
             // Shadow properties. Issue #26007.
             Assert.Equal(
-                SqlServerStrings.TemporalPeriodPropertyMustBeInShadowState("Customer", "PeriodStart"),
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        Test(
-                            modelBuilder => modelBuilder.Entity(
-                                "Customer", e =>
+                SqlServerStrings.TemporalPeriodPropertyMustBeInShadowState(
+                    "Customer",
+                    "PeriodStart"
+                ),
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            Test(
+                                modelBuilder =>
+                                    modelBuilder.Entity(
+                                        "Customer",
+                                        e =>
+                                        {
+                                            e.Property<int>("Id");
+                                            e.Property<string>("Name");
+                                            e.HasKey("Id");
+                                            e.ToTable(tb => tb.IsTemporal());
+                                        }
+                                    ),
+                                new ModelCodeGenerationOptions { UseDataAnnotations = false },
+                                code =>
                                 {
-                                    e.Property<int>("Id");
-                                    e.Property<string>("Name");
-                                    e.HasKey("Id");
-                                    e.ToTable(tb => tb.IsTemporal());
-                                }),
-                            new ModelCodeGenerationOptions { UseDataAnnotations = false },
-                            code =>
-                            {
-                                AssertFileContents(
-                                    @"using System;
+                                    AssertFileContents(
+                                        @"using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -1114,8 +1362,8 @@ namespace TestNamespace
             if (!optionsBuilder.IsConfigured)
             {
 #warning "
-                                    + DesignStrings.SensitiveInformationWarning
-                                    + @"
+                                            + DesignStrings.SensitiveInformationWarning
+                                            + @"
                 optionsBuilder.UseSqlServer(""Initial Catalog=TestDatabase"");
             }
         }
@@ -1145,30 +1393,44 @@ namespace TestNamespace
     }
 }
 ",
-                                    code.ContextFile);
-                            },
-                            model =>
-                            {
-                                // TODO
-                            })).Message);
+                                        code.ContextFile
+                                    );
+                                },
+                                model =>
+                                {
+                                    // TODO
+                                }
+                            )
+                    )
+                    .Message
+            );
         }
 
         protected override void AddModelServices(IServiceCollection services)
         {
-            services.Replace(ServiceDescriptor.Singleton<IRelationalAnnotationProvider, TestModelAnnotationProvider>());
+            services.Replace(
+                ServiceDescriptor.Singleton<
+                    IRelationalAnnotationProvider,
+                    TestModelAnnotationProvider
+                >()
+            );
         }
 
         protected override void AddScaffoldingServices(IServiceCollection services)
         {
-            services.Replace(ServiceDescriptor.Singleton<IAnnotationCodeGenerator, TestModelAnnotationCodeGenerator>());
+            services.Replace(
+                ServiceDescriptor.Singleton<
+                    IAnnotationCodeGenerator,
+                    TestModelAnnotationCodeGenerator
+                >()
+            );
         }
 
         private class TestModelAnnotationProvider : SqlServerAnnotationProvider
         {
-            public TestModelAnnotationProvider(RelationalAnnotationProviderDependencies dependencies)
-                : base(dependencies)
-            {
-            }
+            public TestModelAnnotationProvider(
+                RelationalAnnotationProviderDependencies dependencies
+            ) : base(dependencies) { }
 
             public override IEnumerable<IAnnotation> For(IRelationalModel database, bool designTime)
             {
@@ -1186,17 +1448,21 @@ namespace TestNamespace
 
         private class TestModelAnnotationCodeGenerator : SqlServerAnnotationCodeGenerator
         {
-            private static readonly MethodInfo _testFluentApiCallMethodInfo
-                = typeof(CustomTestNamespace.TestModelBuilderExtensions).GetRuntimeMethod(
-                    nameof(CustomTestNamespace.TestModelBuilderExtensions.TestFluentApiCall), new[] { typeof(ModelBuilder) })!;
+            private static readonly MethodInfo _testFluentApiCallMethodInfo =
+                typeof(CustomTestNamespace.TestModelBuilderExtensions).GetRuntimeMethod(
+                    nameof(CustomTestNamespace.TestModelBuilderExtensions.TestFluentApiCall),
+                    new[] { typeof(ModelBuilder) }
+                )!;
 
-            public TestModelAnnotationCodeGenerator(AnnotationCodeGeneratorDependencies dependencies)
-                : base(dependencies)
-            {
-            }
+            public TestModelAnnotationCodeGenerator(
+                AnnotationCodeGeneratorDependencies dependencies
+            ) : base(dependencies) { }
 
-            protected override MethodCallCodeFragment GenerateFluentApi(IModel model, IAnnotation annotation)
-                => annotation.Name switch
+            protected override MethodCallCodeFragment GenerateFluentApi(
+                IModel model,
+                IAnnotation annotation
+            ) =>
+                annotation.Name switch
                 {
                     "Test:TestModelAnnotation" => new(_testFluentApiCallMethodInfo),
                     _ => base.GenerateFluentApi(model, annotation)
@@ -1205,25 +1471,31 @@ namespace TestNamespace
 
         private class TestCodeGeneratorPlugin : ProviderCodeGeneratorPlugin
         {
-            private static readonly MethodInfo _setProviderOptionMethodInfo
-                = typeof(TestCodeGeneratorPlugin).GetRuntimeMethod(
-                    nameof(SetProviderOption), new[] { typeof(SqlServerDbContextOptionsBuilder) });
+            private static readonly MethodInfo _setProviderOptionMethodInfo =
+                typeof(TestCodeGeneratorPlugin).GetRuntimeMethod(
+                    nameof(SetProviderOption),
+                    new[] { typeof(SqlServerDbContextOptionsBuilder) }
+                );
 
-            private static readonly MethodInfo _setContextOptionMethodInfo
-                = typeof(TestCodeGeneratorPlugin).GetRuntimeMethod(
-                    nameof(SetContextOption), new[] { typeof(DbContextOptionsBuilder) });
+            private static readonly MethodInfo _setContextOptionMethodInfo =
+                typeof(TestCodeGeneratorPlugin).GetRuntimeMethod(
+                    nameof(SetContextOption),
+                    new[] { typeof(DbContextOptionsBuilder) }
+                );
 
-            public override MethodCallCodeFragment GenerateProviderOptions()
-                => new(_setProviderOptionMethodInfo);
+            public override MethodCallCodeFragment GenerateProviderOptions() =>
+                new(_setProviderOptionMethodInfo);
 
-            public override MethodCallCodeFragment GenerateContextOptions()
-                => new(_setContextOptionMethodInfo);
+            public override MethodCallCodeFragment GenerateContextOptions() =>
+                new(_setContextOptionMethodInfo);
 
-            public static SqlServerDbContextOptionsBuilder SetProviderOption(SqlServerDbContextOptionsBuilder optionsBuilder)
-                => throw new NotSupportedException();
+            public static SqlServerDbContextOptionsBuilder SetProviderOption(
+                SqlServerDbContextOptionsBuilder optionsBuilder
+            ) => throw new NotSupportedException();
 
-            public static SqlServerDbContextOptionsBuilder SetContextOption(DbContextOptionsBuilder optionsBuilder)
-                => throw new NotSupportedException();
+            public static SqlServerDbContextOptionsBuilder SetContextOption(
+                DbContextOptionsBuilder optionsBuilder
+            ) => throw new NotSupportedException();
         }
     }
 }

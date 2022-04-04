@@ -17,6 +17,9 @@ namespace Internal.TypeSystem
         protected internal abstract int ClassCode { get; }
 
         // Note to implementers: the type of `other` is actually the same as the type of `this`.
-        protected internal abstract int CompareToImpl(MethodDesc other, TypeSystemComparer comparer);
+        protected internal abstract int CompareToImpl(
+            MethodDesc other,
+            TypeSystemComparer comparer
+        );
     }
 }

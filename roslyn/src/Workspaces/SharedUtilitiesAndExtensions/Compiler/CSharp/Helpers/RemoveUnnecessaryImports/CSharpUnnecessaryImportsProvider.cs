@@ -18,13 +18,14 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
     {
         public static readonly CSharpUnnecessaryImportsProvider Instance = new();
 
-        private CSharpUnnecessaryImportsProvider()
-        {
-        }
+        private CSharpUnnecessaryImportsProvider() { }
 
         protected override ImmutableArray<SyntaxNode> GetUnnecessaryImports(
-            SemanticModel model, SyntaxNode root,
-            Func<SyntaxNode, bool> predicate, CancellationToken cancellationToken)
+            SemanticModel model,
+            SyntaxNode root,
+            Func<SyntaxNode, bool> predicate,
+            CancellationToken cancellationToken
+        )
         {
             predicate ??= Functions<SyntaxNode>.True;
             var diagnostics = model.GetDiagnostics(cancellationToken: cancellationToken);
@@ -39,7 +40,10 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
             {
                 if (diagnostic.Id == "CS8019")
                 {
-                    if (root.FindNode(diagnostic.Location.SourceSpan) is UsingDirectiveSyntax node && predicate(node))
+                    if (
+                        root.FindNode(diagnostic.Location.SourceSpan) is UsingDirectiveSyntax node
+                        && predicate(node)
+                    )
                     {
                         unnecessaryImports.Add(node);
                     }

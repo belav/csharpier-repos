@@ -10,23 +10,16 @@ namespace System.Net.Http.Formatting.DataSets.Types
     {
         private WcfPocoType reference;
 
-        public DerivedWcfPocoType()
-        {
-        }
+        public DerivedWcfPocoType() { }
 
-        public DerivedWcfPocoType(int id, string name, WcfPocoType reference)
-            : base(id, name)
+        public DerivedWcfPocoType(int id, string name, WcfPocoType reference) : base(id, name)
         {
             this.reference = reference;
         }
 
         public WcfPocoType Reference
         {
-            get
-            {
-                return this.reference;
-            }
-
+            get { return this.reference; }
             set
             {
                 this.ReferenceSet = true;

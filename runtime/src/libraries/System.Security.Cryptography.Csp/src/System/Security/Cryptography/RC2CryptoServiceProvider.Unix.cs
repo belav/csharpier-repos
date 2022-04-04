@@ -12,10 +12,14 @@ namespace System.Security.Cryptography
 
         private static KeySizes[] s_legalKeySizes =
         {
-            new KeySizes(40, 128, 8)  // csp implementation only goes up to 128
+            new KeySizes(40, 128, 8) // csp implementation only goes up to 128
         };
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5351", Justification = "This is the implementation of RC2CryptoServiceProvider")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA5351",
+            Justification = "This is the implementation of RC2CryptoServiceProvider"
+        )]
         public RC2CryptoServiceProvider()
         {
             _impl = RC2.Create();
@@ -29,6 +33,7 @@ namespace System.Security.Cryptography
         }
 
         public override ICryptoTransform CreateDecryptor() => _impl.CreateDecryptor();
+
         public override ICryptoTransform CreateEncryptor() => _impl.CreateEncryptor();
 
         public override ICryptoTransform CreateEncryptor(byte[] rgbKey, byte[]? rgbIV) =>
@@ -59,6 +64,7 @@ namespace System.Security.Cryptography
         }
 
         public override void GenerateIV() => _impl.GenerateIV();
+
         public override void GenerateKey() => _impl.GenerateKey();
 
         public override byte[] IV
@@ -109,7 +115,9 @@ namespace System.Security.Cryptography
             {
                 // Don't allow a true value
                 if (value)
-                    throw new PlatformNotSupportedException(SR.Format(SR.Cryptography_CAPI_Required, nameof(UseSalt)));
+                    throw new PlatformNotSupportedException(
+                        SR.Format(SR.Cryptography_CAPI_Required, nameof(UseSalt))
+                    );
             }
         }
     }

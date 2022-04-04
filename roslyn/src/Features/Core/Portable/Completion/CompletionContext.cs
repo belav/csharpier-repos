@@ -34,7 +34,7 @@ namespace Microsoft.CodeAnalysis.Completion
 
         /// <summary>
         /// The span of the syntax element at the caret position.
-        /// 
+        ///
         /// This is the most common value used for <see cref="CompletionItem.Span"/> and will
         /// be automatically assigned to any <see cref="CompletionItem"/> that has no <see cref="CompletionItem.Span"/> specified.
         /// </summary>
@@ -49,7 +49,7 @@ namespace Microsoft.CodeAnalysis.Completion
         /// of the span is to:
         ///     1. Signify where the completions should be presented.
         ///     2. Designate any existing text in the document that should be used for filtering.
-        ///     3. Specify, by default, what portion of the text should be replaced when a completion 
+        ///     3. Specify, by default, what portion of the text should be replaced when a completion
         ///        item is committed.
         /// </summary>
         public TextSpan CompletionListSpan { get; set; }
@@ -78,7 +78,7 @@ namespace Microsoft.CodeAnalysis.Completion
         /// <summary>
         /// Set to true if the corresponding provider can provide extended items with current context,
         /// regardless of whether those items are actually added. i.e. it might be disabled by default,
-        /// but we still want to show the expander so user can explicitly request them to be added to 
+        /// but we still want to show the expander so user can explicitly request them to be added to
         /// completion list if we are in the appropriate context.
         /// </summary>
         internal bool ExpandItemsAvailable { get; set; }
@@ -93,14 +93,20 @@ namespace Microsoft.CodeAnalysis.Completion
             TextSpan defaultSpan,
             CompletionTrigger trigger,
             OptionSet options,
-            CancellationToken cancellationToken)
-            : this(provider ?? throw new ArgumentNullException(nameof(provider)),
-                   document ?? throw new ArgumentNullException(nameof(document)),
-                   position,
-                   defaultSpan,
-                   trigger,
-                   CompletionOptions.From(options ?? throw new ArgumentNullException(nameof(options)), document.Project.Language),
-                   cancellationToken)
+            CancellationToken cancellationToken
+        )
+            : this(
+                provider ?? throw new ArgumentNullException(nameof(provider)),
+                document ?? throw new ArgumentNullException(nameof(document)),
+                position,
+                defaultSpan,
+                trigger,
+                CompletionOptions.From(
+                    options ?? throw new ArgumentNullException(nameof(options)),
+                    document.Project.Language
+                ),
+                cancellationToken
+            )
         {
             _lazyOptionSet = options;
         }
@@ -115,7 +121,8 @@ namespace Microsoft.CodeAnalysis.Completion
             TextSpan defaultSpan,
             CompletionTrigger trigger,
             in CompletionOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             Provider = provider;
             Document = document;
@@ -130,8 +137,8 @@ namespace Microsoft.CodeAnalysis.Completion
         /// <summary>
         /// The options that completion was started with.
         /// </summary>
-        public OptionSet Options
-            => _lazyOptionSet ??= CompletionOptions.ToSet(Document.Project.Language);
+        public OptionSet Options =>
+            _lazyOptionSet ??= CompletionOptions.ToSet(Document.Project.Language);
 
         internal IReadOnlyList<CompletionItem> Items => _items;
 
@@ -161,21 +168,17 @@ namespace Microsoft.CodeAnalysis.Completion
 
         /// <summary>
         /// An optional <see cref="CompletionItem"/> that appears selected in the list presented to the user during suggestion mode.
-        /// 
+        ///
         /// Suggestion mode disables auto-selection of items in the list, giving preference to the text typed by the user unless a specific item is selected manually.
-        /// 
+        ///
         /// Specifying a <see cref="SuggestionModeItem"/> is a request that the completion host operate in suggestion mode.
         /// The item specified determines the text displayed and the description associated with it unless a different item is manually selected.
-        /// 
+        ///
         /// No text is ever inserted when this item is completed, leaving the text the user typed instead.
         /// </summary>
         public CompletionItem? SuggestionModeItem
         {
-            get
-            {
-                return _suggestionModeItem;
-            }
-
+            get { return _suggestionModeItem; }
             set
             {
                 if (value != null)

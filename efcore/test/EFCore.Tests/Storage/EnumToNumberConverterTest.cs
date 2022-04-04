@@ -11,8 +11,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
 {
     public class EnumToNumberConverterTest
     {
-        private static readonly ValueConverter<Beatles, int> _enumToNumber
-            = new EnumToNumberConverter<Beatles, int>();
+        private static readonly ValueConverter<Beatles, int> _enumToNumber =
+            new EnumToNumberConverter<Beatles, int>();
 
         [ConditionalFact]
         public void Can_convert_enums_to_numbers()
@@ -71,11 +71,17 @@ namespace Microsoft.EntityFrameworkCore.Storage
         [ConditionalFact]
         public void Ordering_preserved_for_enums_to_numbers()
         {
-            ValueConverterTest.OrderingTest(_enumToNumber, Beatles.Ringo, Beatles.George, Beatles.Paul, Beatles.John);
+            ValueConverterTest.OrderingTest(
+                _enumToNumber,
+                Beatles.Ringo,
+                Beatles.George,
+                Beatles.Paul,
+                Beatles.John
+            );
         }
 
-        private static readonly ValueConverter<Beatles, double> _enumToDouble
-            = new EnumToNumberConverter<Beatles, double>();
+        private static readonly ValueConverter<Beatles, double> _enumToDouble =
+            new EnumToNumberConverter<Beatles, double>();
 
         [ConditionalFact]
         public void Can_convert_enums_to_doubles()
@@ -103,8 +109,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Assert.Equal(default, converter(0));
         }
 
-        private static readonly ValueConverter<Beatles, decimal> _enumToDecimal
-            = new EnumToNumberConverter<Beatles, decimal>();
+        private static readonly ValueConverter<Beatles, decimal> _enumToDecimal =
+            new EnumToNumberConverter<Beatles, decimal>();
 
         [ConditionalFact]
         public void Can_convert_enums_to_decimals()
@@ -132,8 +138,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Assert.Equal(default, converter(0));
         }
 
-        private static readonly ValueConverter<Beatles, float> _enumToFloat
-            = new EnumToNumberConverter<Beatles, float>();
+        private static readonly ValueConverter<Beatles, float> _enumToFloat =
+            new EnumToNumberConverter<Beatles, float>();
 
         [ConditionalFact]
         public void Can_convert_enums_to_floats()
@@ -161,8 +167,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Assert.Equal(default, converter(0));
         }
 
-        private static readonly ValueConverter<Beatles, byte> _enumToByte
-            = new EnumToNumberConverter<Beatles, byte>();
+        private static readonly ValueConverter<Beatles, byte> _enumToByte =
+            new EnumToNumberConverter<Beatles, byte>();
 
         [ConditionalFact]
         public void Can_convert_enums_to_bytes()
@@ -188,8 +194,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Assert.Equal(default, converter(0));
         }
 
-        private static readonly ValueConverter<Beatles, sbyte> _enumToSByte
-            = new EnumToNumberConverter<Beatles, sbyte>();
+        private static readonly ValueConverter<Beatles, sbyte> _enumToSByte =
+            new EnumToNumberConverter<Beatles, sbyte>();
 
         [ConditionalFact]
         public void Can_convert_enums_to_sbytes()
@@ -217,8 +223,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Assert.Equal(default, converter(0));
         }
 
-        private static readonly ValueConverter<Beatles, long> _enumToLong
-            = new EnumToNumberConverter<Beatles, long>();
+        private static readonly ValueConverter<Beatles, long> _enumToLong =
+            new EnumToNumberConverter<Beatles, long>();
 
         [ConditionalFact]
         public void Can_convert_enums_to_longs()
@@ -246,8 +252,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Assert.Equal(default, converter(0));
         }
 
-        private static readonly ValueConverter<Beatles, ulong> _enumToULong
-            = new EnumToNumberConverter<Beatles, ulong>();
+        private static readonly ValueConverter<Beatles, ulong> _enumToULong =
+            new EnumToNumberConverter<Beatles, ulong>();
 
         [ConditionalFact]
         public void Can_convert_enums_to_ulongs()
@@ -280,17 +286,25 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 CoreStrings.ConverterBadType(
                     typeof(EnumToNumberConverter<Guid, int>).ShortDisplayName(),
                     "Guid",
-                    "enum types"),
-                Assert.Throws<InvalidOperationException>(
-                    () => new EnumToNumberConverter<Guid, int>()).Message);
+                    "enum types"
+                ),
+                Assert
+                    .Throws<InvalidOperationException>(() => new EnumToNumberConverter<Guid, int>())
+                    .Message
+            );
 
             Assert.Equal(
                 CoreStrings.ConverterBadType(
                     typeof(EnumToNumberConverter<Beatles, Guid>).ShortDisplayName(),
                     "Guid",
-                    "'int', 'long', 'short', 'byte', 'uint', 'ulong', 'ushort', 'sbyte', 'double', 'float', 'decimal'"),
-                Assert.Throws<InvalidOperationException>(
-                    () => new EnumToNumberConverter<Beatles, Guid>()).Message);
+                    "'int', 'long', 'short', 'byte', 'uint', 'ulong', 'ushort', 'sbyte', 'double', 'float', 'decimal'"
+                ),
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => new EnumToNumberConverter<Beatles, Guid>()
+                    )
+                    .Message
+            );
         }
 
         private enum Beatles

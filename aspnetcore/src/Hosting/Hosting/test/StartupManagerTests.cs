@@ -20,10 +20,17 @@ public class StartupManagerTests
     public void ConventionalStartupClass_StartupServiceFilters_WrapsConfigureServicesMethod()
     {
         var serviceCollection = new ServiceCollection();
-        serviceCollection.AddSingleton<IServiceProviderFactory<IServiceCollection>, DefaultServiceProviderFactory>();
+        serviceCollection.AddSingleton<
+            IServiceProviderFactory<IServiceCollection>,
+            DefaultServiceProviderFactory
+        >();
 #pragma warning disable CS0612 // Type or member is obsolete
-        serviceCollection.AddSingleton<IStartupConfigureServicesFilter>(new TestStartupServicesFilter(1, overrideAfterService: true));
-        serviceCollection.AddSingleton<IStartupConfigureServicesFilter>(new TestStartupServicesFilter(2, overrideAfterService: true));
+        serviceCollection.AddSingleton<IStartupConfigureServicesFilter>(
+            new TestStartupServicesFilter(1, overrideAfterService: true)
+        );
+        serviceCollection.AddSingleton<IStartupConfigureServicesFilter>(
+            new TestStartupServicesFilter(2, overrideAfterService: true)
+        );
 #pragma warning restore CS0612 // Type or member is obsolete
         var services = serviceCollection.BuildServiceProvider();
 
@@ -42,10 +49,17 @@ public class StartupManagerTests
     public void ConventionalStartupClass_StartupServiceFilters_MultipleStartupServiceFiltersRun()
     {
         var serviceCollection = new ServiceCollection();
-        serviceCollection.AddSingleton<IServiceProviderFactory<IServiceCollection>, DefaultServiceProviderFactory>();
+        serviceCollection.AddSingleton<
+            IServiceProviderFactory<IServiceCollection>,
+            DefaultServiceProviderFactory
+        >();
 #pragma warning disable CS0612 // Type or member is obsolete
-        serviceCollection.AddSingleton<IStartupConfigureServicesFilter>(new TestStartupServicesFilter(1, overrideAfterService: false));
-        serviceCollection.AddSingleton<IStartupConfigureServicesFilter>(new TestStartupServicesFilter(2, overrideAfterService: true));
+        serviceCollection.AddSingleton<IStartupConfigureServicesFilter>(
+            new TestStartupServicesFilter(1, overrideAfterService: false)
+        );
+        serviceCollection.AddSingleton<IStartupConfigureServicesFilter>(
+            new TestStartupServicesFilter(2, overrideAfterService: true)
+        );
 #pragma warning restore CS0612 // Type or member is obsolete
         var services = serviceCollection.BuildServiceProvider();
 
@@ -64,9 +78,14 @@ public class StartupManagerTests
     public void ConventionalStartupClass_StartupServicesFilters_ThrowsIfStartupBuildsTheContainerAsync()
     {
         var serviceCollection = new ServiceCollection();
-        serviceCollection.AddSingleton<IServiceProviderFactory<IServiceCollection>, DefaultServiceProviderFactory>();
+        serviceCollection.AddSingleton<
+            IServiceProviderFactory<IServiceCollection>,
+            DefaultServiceProviderFactory
+        >();
 #pragma warning disable CS0612 // Type or member is obsolete
-        serviceCollection.AddSingleton<IStartupConfigureServicesFilter>(new TestStartupServicesFilter(1, overrideAfterService: false));
+        serviceCollection.AddSingleton<IStartupConfigureServicesFilter>(
+            new TestStartupServicesFilter(1, overrideAfterService: false)
+        );
 #pragma warning restore CS0612 // Type or member is obsolete
         var services = serviceCollection.BuildServiceProvider();
 
@@ -74,12 +93,15 @@ public class StartupManagerTests
         var startup = StartupLoader.LoadMethods(services, type, "");
 
 #pragma warning disable CS0612 // Type or member is obsolete
-        var expectedMessage = $"A ConfigureServices method that returns an {nameof(IServiceProvider)} is " +
-            $"not compatible with the use of one or more {nameof(IStartupConfigureServicesFilter)}. " +
-            $"Use a void returning ConfigureServices method instead or a ConfigureContainer method.";
+        var expectedMessage =
+            $"A ConfigureServices method that returns an {nameof(IServiceProvider)} is "
+            + $"not compatible with the use of one or more {nameof(IStartupConfigureServicesFilter)}. "
+            + $"Use a void returning ConfigureServices method instead or a ConfigureContainer method.";
 #pragma warning restore CS0612 // Type or member is obsolete
 
-        var exception = Assert.Throws<InvalidOperationException>(() => startup.ConfigureServicesDelegate(serviceCollection));
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => startup.ConfigureServicesDelegate(serviceCollection)
+        );
 
         Assert.Equal(expectedMessage, exception.Message);
     }
@@ -90,8 +112,12 @@ public class StartupManagerTests
         var serviceCollection = new ServiceCollection();
         serviceCollection.AddSingleton<IServiceProviderFactory<MyContainer>, MyContainerFactory>();
 #pragma warning disable CS0612 // Type or member is obsolete
-        serviceCollection.AddSingleton<IStartupConfigureContainerFilter<MyContainer>>(new TestConfigureContainerFilter(1, overrideAfterService: true));
-        serviceCollection.AddSingleton<IStartupConfigureContainerFilter<MyContainer>>(new TestConfigureContainerFilter(2, overrideAfterService: true));
+        serviceCollection.AddSingleton<IStartupConfigureContainerFilter<MyContainer>>(
+            new TestConfigureContainerFilter(1, overrideAfterService: true)
+        );
+        serviceCollection.AddSingleton<IStartupConfigureContainerFilter<MyContainer>>(
+            new TestConfigureContainerFilter(2, overrideAfterService: true)
+        );
 #pragma warning restore CS0612 // Type or member is obsolete
         var services = serviceCollection.BuildServiceProvider();
 
@@ -112,8 +138,12 @@ public class StartupManagerTests
         var serviceCollection = new ServiceCollection();
         serviceCollection.AddSingleton<IServiceProviderFactory<MyContainer>, MyContainerFactory>();
 #pragma warning disable CS0612 // Type or member is obsolete
-        serviceCollection.AddSingleton<IStartupConfigureContainerFilter<MyContainer>>(new TestConfigureContainerFilter(1, overrideAfterService: false));
-        serviceCollection.AddSingleton<IStartupConfigureContainerFilter<MyContainer>>(new TestConfigureContainerFilter(2, overrideAfterService: true));
+        serviceCollection.AddSingleton<IStartupConfigureContainerFilter<MyContainer>>(
+            new TestConfigureContainerFilter(1, overrideAfterService: false)
+        );
+        serviceCollection.AddSingleton<IStartupConfigureContainerFilter<MyContainer>>(
+            new TestConfigureContainerFilter(2, overrideAfterService: true)
+        );
 #pragma warning restore CS0612 // Type or member is obsolete
         var services = serviceCollection.BuildServiceProvider();
 
@@ -134,8 +164,12 @@ public class StartupManagerTests
         var serviceCollection = new ServiceCollection();
         serviceCollection.AddSingleton<IServiceProviderFactory<MyContainer>, MyContainerFactory>();
 #pragma warning disable CS0612 // Type or member is obsolete
-        serviceCollection.AddSingleton<IStartupConfigureServicesFilter>(new TestStartupServicesFilter(1, overrideAfterService: false));
-        serviceCollection.AddSingleton<IStartupConfigureContainerFilter<MyContainer>>(new TestConfigureContainerFilter(2, overrideAfterService: true));
+        serviceCollection.AddSingleton<IStartupConfigureServicesFilter>(
+            new TestStartupServicesFilter(1, overrideAfterService: false)
+        );
+        serviceCollection.AddSingleton<IStartupConfigureContainerFilter<MyContainer>>(
+            new TestConfigureContainerFilter(2, overrideAfterService: true)
+        );
 #pragma warning restore CS0612 // Type or member is obsolete
         var services = serviceCollection.BuildServiceProvider();
 
@@ -154,13 +188,13 @@ public class StartupManagerTests
     {
         public void ConfigureContainer(MyContainer services)
         {
-            services.Services.TryAddSingleton(new ServiceBefore { Message = "Configure container" });
+            services.Services.TryAddSingleton(
+                new ServiceBefore { Message = "Configure container" }
+            );
             services.Services.TryAddSingleton(new ServiceAfter { Message = "Configure container" });
         }
 
-        public void Configure(IApplicationBuilder builder)
-        {
-        }
+        public void Configure(IApplicationBuilder builder) { }
     }
 
     public class ConfigureServicesAndConfigureContainerStartup
@@ -173,13 +207,13 @@ public class StartupManagerTests
 
         public void ConfigureContainer(MyContainer services)
         {
-            services.Services.TryAddSingleton(new ServiceBefore { Message = "Configure container" });
+            services.Services.TryAddSingleton(
+                new ServiceBefore { Message = "Configure container" }
+            );
             services.Services.TryAddSingleton(new ServiceAfter { Message = "Configure container" });
         }
 
-        public void Configure(IApplicationBuilder builder)
-        {
-        }
+        public void Configure(IApplicationBuilder builder) { }
     }
 
 #pragma warning disable CS0612 // Type or member is obsolete
@@ -199,18 +233,33 @@ public class StartupManagerTests
         {
             return services =>
             {
-                services.Services.TryAddSingleton(new ServiceBefore { Message = $"ConfigureContainerFilter Before {AdditionalData}" });
+                services.Services.TryAddSingleton(
+                    new ServiceBefore
+                    {
+                        Message = $"ConfigureContainerFilter Before {AdditionalData}"
+                    }
+                );
 
                 next(services);
 
-                    // Ensures we can always override.
-                    if (OverrideAfterService)
+                // Ensures we can always override.
+                if (OverrideAfterService)
                 {
-                    services.Services.AddSingleton(new ServiceAfter { Message = $"ConfigureContainerFilter After {AdditionalData}" });
+                    services.Services.AddSingleton(
+                        new ServiceAfter
+                        {
+                            Message = $"ConfigureContainerFilter After {AdditionalData}"
+                        }
+                    );
                 }
                 else
                 {
-                    services.Services.TryAddSingleton(new ServiceAfter { Message = $"ConfigureContainerFilter After {AdditionalData}" });
+                    services.Services.TryAddSingleton(
+                        new ServiceAfter
+                        {
+                            Message = $"ConfigureContainerFilter After {AdditionalData}"
+                        }
+                    );
                 }
             };
         }
@@ -226,9 +275,7 @@ public class StartupManagerTests
             return services.BuildServiceProvider();
         }
 
-        public void Configure(IApplicationBuilder builder)
-        {
-        }
+        public void Configure(IApplicationBuilder builder) { }
     }
 
 #pragma warning disable CS0612 // Type or member is obsolete
@@ -248,18 +295,30 @@ public class StartupManagerTests
         {
             return services =>
             {
-                services.TryAddSingleton(new ServiceBefore { Message = $"StartupServicesFilter Before {AdditionalData}" });
+                services.TryAddSingleton(
+                    new ServiceBefore { Message = $"StartupServicesFilter Before {AdditionalData}" }
+                );
 
                 next(services);
 
-                    // Ensures we can always override.
-                    if (OverrideAfterService)
+                // Ensures we can always override.
+                if (OverrideAfterService)
                 {
-                    services.AddSingleton(new ServiceAfter { Message = $"StartupServicesFilter After {AdditionalData}" });
+                    services.AddSingleton(
+                        new ServiceAfter
+                        {
+                            Message = $"StartupServicesFilter After {AdditionalData}"
+                        }
+                    );
                 }
                 else
                 {
-                    services.TryAddSingleton(new ServiceAfter { Message = $"StartupServicesFilter After {AdditionalData}" });
+                    services.TryAddSingleton(
+                        new ServiceAfter
+                        {
+                            Message = $"StartupServicesFilter After {AdditionalData}"
+                        }
+                    );
                 }
             };
         }
@@ -273,11 +332,8 @@ public class StartupManagerTests
             services.TryAddSingleton(new ServiceAfter { Message = "Configure services" });
         }
 
-        public void Configure(IApplicationBuilder builder)
-        {
-        }
+        public void Configure(IApplicationBuilder builder) { }
     }
-
 
     public class ServiceBefore
     {
@@ -294,11 +350,17 @@ public class StartupManagerTests
     {
         var callbackStartup = new FakeStartupCallback();
         var serviceCollection = new ServiceCollection();
-        serviceCollection.AddSingleton<IServiceProviderFactory<IServiceCollection>, DefaultServiceProviderFactory>();
+        serviceCollection.AddSingleton<
+            IServiceProviderFactory<IServiceCollection>,
+            DefaultServiceProviderFactory
+        >();
         serviceCollection.AddSingleton<IFakeStartupCallback>(callbackStartup);
         var services = serviceCollection.BuildServiceProvider();
 
-        var type = StartupLoader.FindStartupType("Microsoft.AspNetCore.Hosting.Tests", "WithServices");
+        var type = StartupLoader.FindStartupType(
+            "Microsoft.AspNetCore.Hosting.Tests",
+            "WithServices"
+        );
         var startup = StartupLoader.LoadMethods(services, type, "WithServices");
 
         var app = new ApplicationBuilder(services);
@@ -312,15 +374,17 @@ public class StartupManagerTests
     public void StartupClassMayHaveScopedServicesInjected()
     {
         var serviceCollection = new ServiceCollection();
-        serviceCollection.AddSingleton<IServiceProviderFactory<IServiceCollection>>(new DefaultServiceProviderFactory(new ServiceProviderOptions
-        {
-            ValidateScopes = true
-        }));
+        serviceCollection.AddSingleton<IServiceProviderFactory<IServiceCollection>>(
+            new DefaultServiceProviderFactory(new ServiceProviderOptions { ValidateScopes = true })
+        );
 
         serviceCollection.AddScoped<DisposableService>();
         var services = serviceCollection.BuildServiceProvider();
 
-        var type = StartupLoader.FindStartupType("Microsoft.AspNetCore.Hosting.Tests", "WithScopedServices");
+        var type = StartupLoader.FindStartupType(
+            "Microsoft.AspNetCore.Hosting.Tests",
+            "WithScopedServices"
+        );
         var startup = StartupLoader.LoadMethods(services, type, "WithScopedServices");
         Assert.NotNull(startup.StartupInstance);
 
@@ -345,7 +409,10 @@ public class StartupManagerTests
     public void StartupClassAddsConfigureServicesToApplicationServices(string environment)
     {
         var services = new ServiceCollection()
-            .AddSingleton<IServiceProviderFactory<IServiceCollection>, DefaultServiceProviderFactory>()
+            .AddSingleton<
+                IServiceProviderFactory<IServiceCollection>,
+                DefaultServiceProviderFactory
+            >()
             .BuildServiceProvider();
         var type = StartupLoader.FindStartupType("Microsoft.AspNetCore.Hosting.Tests", environment);
         var startup = StartupLoader.LoadMethods(services, type, environment);
@@ -364,12 +431,20 @@ public class StartupManagerTests
     public void StartupWithNoConfigureThrows()
     {
         var serviceCollection = new ServiceCollection();
-        serviceCollection.AddSingleton<IServiceProviderFactory<IServiceCollection>, DefaultServiceProviderFactory>();
+        serviceCollection.AddSingleton<
+            IServiceProviderFactory<IServiceCollection>,
+            DefaultServiceProviderFactory
+        >();
         serviceCollection.AddSingleton<IFakeStartupCallback>(new FakeStartupCallback());
         var services = serviceCollection.BuildServiceProvider();
         var type = StartupLoader.FindStartupType("Microsoft.AspNetCore.Hosting.Tests", "Boom");
-        var ex = Assert.Throws<InvalidOperationException>(() => StartupLoader.LoadMethods(services, type, "Boom"));
-        Assert.Equal("A public method named 'ConfigureBoom' or 'Configure' could not be found in the 'Microsoft.AspNetCore.Hosting.Fakes.StartupBoom' type.", ex.Message);
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => StartupLoader.LoadMethods(services, type, "Boom")
+        );
+        Assert.Equal(
+            "A public method named 'ConfigureBoom' or 'Configure' could not be found in the 'Microsoft.AspNetCore.Hosting.Fakes.StartupBoom' type.",
+            ex.Message
+        );
     }
 
     [Theory]
@@ -389,10 +464,15 @@ public class StartupManagerTests
     [InlineData("CaseInsensitive")]
     [InlineData("CASEINSENSITIVE")]
     [InlineData("CaSEiNSENsitiVE")]
-    public void StartupClassAddsConfigureServicesToApplicationServicesCaseInsensitive(string environment)
+    public void StartupClassAddsConfigureServicesToApplicationServicesCaseInsensitive(
+        string environment
+    )
     {
         var services = new ServiceCollection()
-            .AddSingleton<IServiceProviderFactory<IServiceCollection>, DefaultServiceProviderFactory>()
+            .AddSingleton<
+                IServiceProviderFactory<IServiceCollection>,
+                DefaultServiceProviderFactory
+            >()
             .BuildServiceProvider();
         var type = StartupLoader.FindStartupType("Microsoft.AspNetCore.Hosting.Tests", environment);
         var startup = StartupLoader.LoadMethods(services, type, environment);
@@ -411,53 +491,92 @@ public class StartupManagerTests
     public void StartupWithTwoConfiguresThrows()
     {
         var serviceCollection = new ServiceCollection();
-        serviceCollection.AddSingleton<IServiceProviderFactory<IServiceCollection>, DefaultServiceProviderFactory>();
+        serviceCollection.AddSingleton<
+            IServiceProviderFactory<IServiceCollection>,
+            DefaultServiceProviderFactory
+        >();
         serviceCollection.AddSingleton<IFakeStartupCallback>(new FakeStartupCallback());
         var services = serviceCollection.BuildServiceProvider();
 
-        var type = StartupLoader.FindStartupType("Microsoft.AspNetCore.Hosting.Tests", "TwoConfigures");
+        var type = StartupLoader.FindStartupType(
+            "Microsoft.AspNetCore.Hosting.Tests",
+            "TwoConfigures"
+        );
 
-        var ex = Assert.Throws<InvalidOperationException>(() => StartupLoader.LoadMethods(services, type, "TwoConfigures"));
-        Assert.Equal("Having multiple overloads of method 'Configure' is not supported.", ex.Message);
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => StartupLoader.LoadMethods(services, type, "TwoConfigures")
+        );
+        Assert.Equal(
+            "Having multiple overloads of method 'Configure' is not supported.",
+            ex.Message
+        );
     }
 
     [Fact]
     public void StartupWithPrivateConfiguresThrows()
     {
         var serviceCollection = new ServiceCollection();
-        serviceCollection.AddSingleton<IServiceProviderFactory<IServiceCollection>, DefaultServiceProviderFactory>();
+        serviceCollection.AddSingleton<
+            IServiceProviderFactory<IServiceCollection>,
+            DefaultServiceProviderFactory
+        >();
         serviceCollection.AddSingleton<IFakeStartupCallback>(new FakeStartupCallback());
         var services = serviceCollection.BuildServiceProvider();
 
         var diagnosticMessages = new List<string>();
-        var type = StartupLoader.FindStartupType("Microsoft.AspNetCore.Hosting.Tests", "PrivateConfigure");
+        var type = StartupLoader.FindStartupType(
+            "Microsoft.AspNetCore.Hosting.Tests",
+            "PrivateConfigure"
+        );
 
-        var ex = Assert.Throws<InvalidOperationException>(() => StartupLoader.LoadMethods(services, type, "PrivateConfigure"));
-        Assert.Equal("A public method named 'ConfigurePrivateConfigure' or 'Configure' could not be found in the 'Microsoft.AspNetCore.Hosting.Fakes.StartupPrivateConfigure' type.", ex.Message);
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => StartupLoader.LoadMethods(services, type, "PrivateConfigure")
+        );
+        Assert.Equal(
+            "A public method named 'ConfigurePrivateConfigure' or 'Configure' could not be found in the 'Microsoft.AspNetCore.Hosting.Fakes.StartupPrivateConfigure' type.",
+            ex.Message
+        );
     }
 
     [Fact]
     public void StartupWithTwoConfigureServicesThrows()
     {
         var serviceCollection = new ServiceCollection();
-        serviceCollection.AddSingleton<IServiceProviderFactory<IServiceCollection>, DefaultServiceProviderFactory>();
+        serviceCollection.AddSingleton<
+            IServiceProviderFactory<IServiceCollection>,
+            DefaultServiceProviderFactory
+        >();
         serviceCollection.AddSingleton<IFakeStartupCallback>(new FakeStartupCallback());
         var services = serviceCollection.BuildServiceProvider();
 
-        var type = StartupLoader.FindStartupType("Microsoft.AspNetCore.Hosting.Tests", "TwoConfigureServices");
+        var type = StartupLoader.FindStartupType(
+            "Microsoft.AspNetCore.Hosting.Tests",
+            "TwoConfigureServices"
+        );
 
-        var ex = Assert.Throws<InvalidOperationException>(() => StartupLoader.LoadMethods(services, type, "TwoConfigureServices"));
-        Assert.Equal("Having multiple overloads of method 'ConfigureServices' is not supported.", ex.Message);
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => StartupLoader.LoadMethods(services, type, "TwoConfigureServices")
+        );
+        Assert.Equal(
+            "Having multiple overloads of method 'ConfigureServices' is not supported.",
+            ex.Message
+        );
     }
 
     [Fact]
     public void StartupClassCanHandleConfigureServicesThatReturnsNull()
     {
         var serviceCollection = new ServiceCollection();
-        serviceCollection.AddSingleton<IServiceProviderFactory<IServiceCollection>, DefaultServiceProviderFactory>();
+        serviceCollection.AddSingleton<
+            IServiceProviderFactory<IServiceCollection>,
+            DefaultServiceProviderFactory
+        >();
         var services = serviceCollection.BuildServiceProvider();
 
-        var type = StartupLoader.FindStartupType("Microsoft.AspNetCore.Hosting.Tests", "WithNullConfigureServices");
+        var type = StartupLoader.FindStartupType(
+            "Microsoft.AspNetCore.Hosting.Tests",
+            "WithNullConfigureServices"
+        );
         var startup = StartupLoader.LoadMethods(services, type, "WithNullConfigureServices");
 
         var app = new ApplicationBuilder(services);
@@ -471,10 +590,16 @@ public class StartupManagerTests
     public void StartupClassWithConfigureServicesShouldMakeServiceAvailableInConfigure()
     {
         var serviceCollection = new ServiceCollection();
-        serviceCollection.AddSingleton<IServiceProviderFactory<IServiceCollection>, DefaultServiceProviderFactory>();
+        serviceCollection.AddSingleton<
+            IServiceProviderFactory<IServiceCollection>,
+            DefaultServiceProviderFactory
+        >();
         var services = serviceCollection.BuildServiceProvider();
 
-        var type = StartupLoader.FindStartupType("Microsoft.AspNetCore.Hosting.Tests", "WithConfigureServices");
+        var type = StartupLoader.FindStartupType(
+            "Microsoft.AspNetCore.Hosting.Tests",
+            "WithConfigureServices"
+        );
         var startup = StartupLoader.LoadMethods(services, type, "WithConfigureServices");
 
         var app = new ApplicationBuilder(services);
@@ -489,11 +614,18 @@ public class StartupManagerTests
     public void StartupLoaderCanLoadByType()
     {
         var serviceCollection = new ServiceCollection();
-        serviceCollection.AddSingleton<IServiceProviderFactory<IServiceCollection>, DefaultServiceProviderFactory>();
+        serviceCollection.AddSingleton<
+            IServiceProviderFactory<IServiceCollection>,
+            DefaultServiceProviderFactory
+        >();
         var services = serviceCollection.BuildServiceProvider();
 
         var hostingEnv = new HostingEnvironment();
-        var startup = StartupLoader.LoadMethods(services, typeof(TestStartup), hostingEnv.EnvironmentName);
+        var startup = StartupLoader.LoadMethods(
+            services,
+            typeof(TestStartup),
+            hostingEnv.EnvironmentName
+        );
 
         var app = new ApplicationBuilder(services);
         app.ApplicationServices = startup.ConfigureServicesDelegate(serviceCollection);
@@ -507,7 +639,10 @@ public class StartupManagerTests
     public void StartupLoaderCanLoadByTypeWithEnvironment()
     {
         var serviceCollection = new ServiceCollection();
-        serviceCollection.AddSingleton<IServiceProviderFactory<IServiceCollection>, DefaultServiceProviderFactory>();
+        serviceCollection.AddSingleton<
+            IServiceProviderFactory<IServiceCollection>,
+            DefaultServiceProviderFactory
+        >();
         var services = serviceCollection.BuildServiceProvider();
 
         var startup = StartupLoader.LoadMethods(services, typeof(TestStartup), "No");
@@ -522,10 +657,17 @@ public class StartupManagerTests
     public void ConfigureServicesThrowingDoesNotThrowTargetInvocationException()
     {
         var serviceCollection = new ServiceCollection();
-        serviceCollection.AddSingleton<IServiceProviderFactory<IServiceCollection>, DefaultServiceProviderFactory>();
+        serviceCollection.AddSingleton<
+            IServiceProviderFactory<IServiceCollection>,
+            DefaultServiceProviderFactory
+        >();
         var services = serviceCollection.BuildServiceProvider();
 
-        var startup = StartupLoader.LoadMethods(services, typeof(StartupConfigureServicesThrows), environmentName: null);
+        var startup = StartupLoader.LoadMethods(
+            services,
+            typeof(StartupConfigureServicesThrows),
+            environmentName: null
+        );
 
         var app = new ApplicationBuilder(services);
 
@@ -536,10 +678,17 @@ public class StartupManagerTests
     public void ConfigureThrowingDoesNotThrowTargetInvocationException()
     {
         var serviceCollection = new ServiceCollection();
-        serviceCollection.AddSingleton<IServiceProviderFactory<IServiceCollection>, DefaultServiceProviderFactory>();
+        serviceCollection.AddSingleton<
+            IServiceProviderFactory<IServiceCollection>,
+            DefaultServiceProviderFactory
+        >();
         var services = serviceCollection.BuildServiceProvider();
 
-        var startup = StartupLoader.LoadMethods(services, typeof(StartupConfigureThrows), environmentName: null);
+        var startup = StartupLoader.LoadMethods(
+            services,
+            typeof(StartupConfigureThrows),
+            environmentName: null
+        );
 
         var app = new ApplicationBuilder(services);
         app.ApplicationServices = startup.ConfigureServicesDelegate(serviceCollection);
@@ -554,7 +703,11 @@ public class StartupManagerTests
         serviceCollection.AddSingleton<IServiceProviderFactory<MyContainer>, MyContainerFactory>();
         var services = serviceCollection.BuildServiceProvider();
 
-        var startup = StartupLoader.LoadMethods(services, typeof(MyContainerStartup), Environments.Development);
+        var startup = StartupLoader.LoadMethods(
+            services,
+            typeof(MyContainerStartup),
+            Environments.Development
+        );
 
         var app = new ApplicationBuilder(services);
         app.ApplicationServices = startup.ConfigureServicesDelegate(serviceCollection);
@@ -570,7 +723,11 @@ public class StartupManagerTests
         serviceCollection.AddSingleton<IServiceProviderFactory<MyContainer>, MyContainerFactory>();
         var services = serviceCollection.BuildServiceProvider();
 
-        var startup = StartupLoader.LoadMethods(services, typeof(MyContainerStartupBaseClass), Environments.Development);
+        var startup = StartupLoader.LoadMethods(
+            services,
+            typeof(MyContainerStartupBaseClass),
+            Environments.Development
+        );
 
         var app = new ApplicationBuilder(services);
         app.ApplicationServices = startup.ConfigureServicesDelegate(serviceCollection);
@@ -586,7 +743,11 @@ public class StartupManagerTests
         serviceCollection.AddSingleton<IServiceProviderFactory<MyContainer>, MyContainerFactory>();
         var services = serviceCollection.BuildServiceProvider();
 
-        var startup = StartupLoader.LoadMethods(services, typeof(MyContainerStartupEnvironmentBased), Environments.Production);
+        var startup = StartupLoader.LoadMethods(
+            services,
+            typeof(MyContainerStartupEnvironmentBased),
+            Environments.Production
+        );
 
         var app = new ApplicationBuilder(services);
         app.ApplicationServices = startup.ConfigureServicesDelegate(serviceCollection);
@@ -601,9 +762,15 @@ public class StartupManagerTests
         var serviceCollection = new ServiceCollection();
         var services = serviceCollection.BuildServiceProvider();
 
-        var startup = StartupLoader.LoadMethods(services, typeof(MyContainerStartup), Environments.Development);
+        var startup = StartupLoader.LoadMethods(
+            services,
+            typeof(MyContainerStartup),
+            Environments.Development
+        );
 
-        Assert.Throws<InvalidOperationException>(() => startup.ConfigureServicesDelegate(serviceCollection));
+        Assert.Throws<InvalidOperationException>(
+            () => startup.ConfigureServicesDelegate(serviceCollection)
+        );
     }
 
     [Fact]
@@ -612,7 +779,14 @@ public class StartupManagerTests
         var serviceCollection = new ServiceCollection();
         var services = serviceCollection.BuildServiceProvider();
 
-        Assert.Throws<InvalidOperationException>(() => StartupLoader.LoadMethods(services, typeof(MyContainerStartupBaseClass), Environments.Development));
+        Assert.Throws<InvalidOperationException>(
+            () =>
+                StartupLoader.LoadMethods(
+                    services,
+                    typeof(MyContainerStartupBaseClass),
+                    Environments.Development
+                )
+        );
     }
 
     [Fact]
@@ -622,17 +796,31 @@ public class StartupManagerTests
         serviceCollection.AddSingleton<IServiceProviderFactory<MyContainer>, MyContainerFactory>();
         var services = serviceCollection.BuildServiceProvider();
 
-        Assert.Throws<InvalidOperationException>(() => StartupLoader.LoadMethods(services, typeof(MyContainerStartupWithOverloads), Environments.Development));
+        Assert.Throws<InvalidOperationException>(
+            () =>
+                StartupLoader.LoadMethods(
+                    services,
+                    typeof(MyContainerStartupWithOverloads),
+                    Environments.Development
+                )
+        );
     }
 
     [Fact]
     public void BadServiceProviderFactoryFailsThatReturnsNullServiceProviderOverriddenByDefault()
     {
         var serviceCollection = new ServiceCollection();
-        serviceCollection.AddSingleton<IServiceProviderFactory<MyContainer>, MyBadContainerFactory>();
+        serviceCollection.AddSingleton<
+            IServiceProviderFactory<MyContainer>,
+            MyBadContainerFactory
+        >();
         var services = serviceCollection.BuildServiceProvider();
 
-        var startup = StartupLoader.LoadMethods(services, typeof(MyContainerStartup), Environments.Development);
+        var startup = StartupLoader.LoadMethods(
+            services,
+            typeof(MyContainerStartup),
+            Environments.Development
+        );
 
         var app = new ApplicationBuilder(services);
         app.ApplicationServices = startup.ConfigureServicesDelegate(serviceCollection);
@@ -643,33 +831,21 @@ public class StartupManagerTests
 
     public class MyContainerStartupWithOverloads
     {
-        public void ConfigureServices(IServiceCollection services)
-        {
-
-        }
+        public void ConfigureServices(IServiceCollection services) { }
 
         public void ConfigureContainer(MyContainer container)
         {
             container.MyFancyContainerMethod();
         }
 
-        public void ConfigureContainer(IServiceCollection services)
-        {
+        public void ConfigureContainer(IServiceCollection services) { }
 
-        }
-
-        public void Configure(IApplicationBuilder app)
-        {
-
-        }
+        public void Configure(IApplicationBuilder app) { }
     }
 
     public class MyContainerStartupEnvironmentBased
     {
-        public void ConfigureServices(IServiceCollection services)
-        {
-
-        }
+        public void ConfigureServices(IServiceCollection services) { }
 
         public void ConfigureDevelopmentContainer(MyContainer container)
         {
@@ -681,40 +857,27 @@ public class StartupManagerTests
             container.Environment = Environments.Production;
         }
 
-        public void Configure(IApplicationBuilder app)
-        {
-
-        }
+        public void Configure(IApplicationBuilder app) { }
     }
 
     public class MyContainerStartup
     {
-        public void ConfigureServices(IServiceCollection services)
-        {
-
-        }
+        public void ConfigureServices(IServiceCollection services) { }
 
         public void ConfigureContainer(MyContainer container)
         {
             container.MyFancyContainerMethod();
         }
 
-        public void Configure(IApplicationBuilder app)
-        {
-
-        }
+        public void Configure(IApplicationBuilder app) { }
     }
 
     public class MyContainerStartupBaseClass : StartupBase<MyContainer>
     {
-        public MyContainerStartupBaseClass(IServiceProviderFactory<MyContainer> factory) : base(factory)
-        {
-        }
+        public MyContainerStartupBaseClass(IServiceProviderFactory<MyContainer> factory)
+            : base(factory) { }
 
-        public override void Configure(IApplicationBuilder app)
-        {
-
-        }
+        public override void Configure(IApplicationBuilder app) { }
 
         public override void ConfigureContainer(MyContainer containerBuilder)
         {
@@ -724,9 +887,7 @@ public class StartupManagerTests
 
     public class SimpleService
     {
-        public SimpleService()
-        {
-        }
+        public SimpleService() { }
 
         public string Message { get; set; }
     }
@@ -738,9 +899,7 @@ public class StartupManagerTests
             services.AddSingleton<SimpleService>();
         }
 
-        public void ConfigureNoServices(IServiceCollection services)
-        {
-        }
+        public void ConfigureNoServices(IServiceCollection services) { }
 
         public void Configure(IApplicationBuilder app)
         {

@@ -13,7 +13,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     {
         private readonly FunctionPointerMethodSymbol _containingSymbol;
 
-        public FunctionPointerParameterSymbol(TypeWithAnnotations typeWithAnnotations, RefKind refKind, int ordinal, FunctionPointerMethodSymbol containingSymbol, ImmutableArray<CustomModifier> refCustomModifiers)
+        public FunctionPointerParameterSymbol(
+            TypeWithAnnotations typeWithAnnotations,
+            RefKind refKind,
+            int ordinal,
+            FunctionPointerMethodSymbol containingSymbol,
+            ImmutableArray<CustomModifier> refCustomModifiers
+        )
         {
             TypeWithAnnotations = typeWithAnnotations;
             RefKind = refKind;
@@ -43,26 +49,36 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return Equals(param, compareKind);
         }
 
-        internal bool Equals(FunctionPointerParameterSymbol other, TypeCompareKind compareKind)
-            => other.Ordinal == Ordinal
-               && _containingSymbol.Equals(other._containingSymbol, compareKind);
+        internal bool Equals(FunctionPointerParameterSymbol other, TypeCompareKind compareKind) =>
+            other.Ordinal == Ordinal
+            && _containingSymbol.Equals(other._containingSymbol, compareKind);
 
-        internal bool MethodEqualityChecks(FunctionPointerParameterSymbol other, TypeCompareKind compareKind)
-            => FunctionPointerTypeSymbol.RefKindEquals(compareKind, RefKind, other.RefKind)
-               && ((compareKind & TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds) != 0
-                    || RefCustomModifiers.SequenceEqual(other.RefCustomModifiers))
-               && TypeWithAnnotations.Equals(other.TypeWithAnnotations, compareKind);
+        internal bool MethodEqualityChecks(
+            FunctionPointerParameterSymbol other,
+            TypeCompareKind compareKind
+        ) =>
+            FunctionPointerTypeSymbol.RefKindEquals(compareKind, RefKind, other.RefKind)
+            && (
+                (compareKind & TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds)
+                    != 0
+                || RefCustomModifiers.SequenceEqual(other.RefCustomModifiers)
+            )
+            && TypeWithAnnotations.Equals(other.TypeWithAnnotations, compareKind);
 
         public override int GetHashCode()
         {
             return Hash.Combine(_containingSymbol.GetHashCode(), Ordinal + 1);
         }
 
-        internal int MethodHashCode()
-            => Hash.Combine(TypeWithAnnotations.GetHashCode(), FunctionPointerTypeSymbol.GetRefKindForHashCode(RefKind).GetHashCode());
+        internal int MethodHashCode() =>
+            Hash.Combine(
+                TypeWithAnnotations.GetHashCode(),
+                FunctionPointerTypeSymbol.GetRefKindForHashCode(RefKind).GetHashCode()
+            );
 
         public override ImmutableArray<Location> Locations => ImmutableArray<Location>.Empty;
-        public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences => ImmutableArray<SyntaxReference>.Empty;
+        public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences =>
+            ImmutableArray<SyntaxReference>.Empty;
         public override bool IsDiscard => false;
         public override bool IsParams => false;
         public override bool IsImplicitlyDeclared => true;
@@ -77,9 +93,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override bool IsCallerLineNumber => false;
         internal override bool IsCallerMemberName => false;
         internal override int CallerArgumentExpressionParameterIndex => -1;
-        internal override FlowAnalysisAnnotations FlowAnalysisAnnotations => FlowAnalysisAnnotations.None;
-        internal override ImmutableHashSet<string> NotNullIfParameterNotNull => ImmutableHashSet<string>.Empty;
-        internal override ImmutableArray<int> InterpolatedStringHandlerArgumentIndexes => ImmutableArray<int>.Empty;
+        internal override FlowAnalysisAnnotations FlowAnalysisAnnotations =>
+            FlowAnalysisAnnotations.None;
+        internal override ImmutableHashSet<string> NotNullIfParameterNotNull =>
+            ImmutableHashSet<string>.Empty;
+        internal override ImmutableArray<int> InterpolatedStringHandlerArgumentIndexes =>
+            ImmutableArray<int>.Empty;
         internal override bool HasInterpolatedStringHandlerArgumentError => false;
     }
 }

@@ -12,7 +12,9 @@ using Microsoft.Extensions.Internal;
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
 [StructLayout(LayoutKind.Auto)]
-internal readonly struct SyntaxTriviaList : IEquatable<SyntaxTriviaList>, IReadOnlyList<SyntaxTrivia>
+internal readonly struct SyntaxTriviaList
+    : IEquatable<SyntaxTriviaList>,
+      IReadOnlyList<SyntaxTrivia>
 {
     public static SyntaxTriviaList Empty => default(SyntaxTriviaList);
 
@@ -41,19 +43,14 @@ internal readonly struct SyntaxTriviaList : IEquatable<SyntaxTriviaList>, IReadO
     /// Creates a list of trivia.
     /// </summary>
     /// <param name="trivias">An array of trivia.</param>
-    public SyntaxTriviaList(params SyntaxTrivia[] trivias)
-        : this(CreateNode(trivias), 0, 0)
-    {
-    }
+    public SyntaxTriviaList(params SyntaxTrivia[] trivias) : this(CreateNode(trivias), 0, 0) { }
 
     /// <summary>
     /// Creates a list of trivia.
     /// </summary>
     /// <param name="trivias">A sequence of trivia.</param>
     public SyntaxTriviaList(IEnumerable<SyntaxTrivia> trivias)
-        : this(SyntaxTriviaListBuilder.Create(trivias).Node, 0, 0)
-    {
-    }
+        : this(SyntaxTriviaListBuilder.Create(trivias).Node, 0, 0) { }
 
     private static SyntaxNode CreateNode(SyntaxTrivia[] trivias)
     {
@@ -141,8 +138,10 @@ internal readonly struct SyntaxTriviaList : IEquatable<SyntaxTriviaList>, IReadO
                 return default(TextSpan);
             }
 
-            return TextSpan.FromBounds(Position + Node.Green.GetLeadingTriviaWidth(),
-                Position + Node.FullWidth - Node.Green.GetTrailingTriviaWidth());
+            return TextSpan.FromBounds(
+                Position + Node.Green.GetLeadingTriviaWidth(),
+                Position + Node.FullWidth - Node.Green.GetTrailingTriviaWidth()
+            );
         }
     }
 
@@ -261,8 +260,7 @@ internal readonly struct SyntaxTriviaList : IEquatable<SyntaxTriviaList>, IReadO
     private static readonly ObjectPool<SyntaxTriviaListBuilder> s_builderPool =
         new ObjectPool<SyntaxTriviaListBuilder>(() => SyntaxTriviaListBuilder.Create());
 
-    private static SyntaxTriviaListBuilder GetBuilder()
-        => s_builderPool.Allocate();
+    private static SyntaxTriviaListBuilder GetBuilder() => s_builderPool.Allocate();
 
     private static void ClearAndFreeBuilder(SyntaxTriviaListBuilder builder)
     {
@@ -376,7 +374,10 @@ internal readonly struct SyntaxTriviaList : IEquatable<SyntaxTriviaList>, IReadO
     /// </summary>
     /// <param name="triviaInList">The trivia element to replace.</param>
     /// <param name="newTrivia">The trivia to replace the element with.</param>
-    public SyntaxTriviaList ReplaceRange(SyntaxTrivia triviaInList, IEnumerable<SyntaxTrivia> newTrivia)
+    public SyntaxTriviaList ReplaceRange(
+        SyntaxTrivia triviaInList,
+        IEnumerable<SyntaxTrivia> newTrivia
+    )
     {
         var index = IndexOf(triviaInList);
         if (index >= 0 && index < Count)
@@ -529,8 +530,7 @@ internal readonly struct SyntaxTriviaList : IEquatable<SyntaxTriviaList>, IReadO
             return new ReversedEnumeratorImpl(in _list);
         }
 
-        IEnumerator
-            IEnumerable.GetEnumerator()
+        IEnumerator IEnumerable.GetEnumerator()
         {
             if (_list.Count == 0)
             {
@@ -566,8 +566,7 @@ internal readonly struct SyntaxTriviaList : IEquatable<SyntaxTriviaList>, IReadO
             private SyntaxNode _current;
             private int _position;
 
-            public Enumerator(in SyntaxTriviaList list)
-                : this()
+            public Enumerator(in SyntaxTriviaList list) : this()
             {
                 if (list.Any())
                 {
@@ -637,9 +636,7 @@ internal readonly struct SyntaxTriviaList : IEquatable<SyntaxTriviaList>, IReadO
                 throw new NotSupportedException();
             }
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
         }
     }
 
@@ -777,8 +774,6 @@ internal readonly struct SyntaxTriviaList : IEquatable<SyntaxTriviaList>, IReadO
             throw new NotSupportedException();
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
     }
 }

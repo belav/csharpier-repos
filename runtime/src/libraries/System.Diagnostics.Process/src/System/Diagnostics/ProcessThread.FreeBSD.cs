@@ -65,7 +65,6 @@ namespace System.Diagnostics
                 Interop.Process.proc_stats stat = Interop.Process.GetThreadInfo(_processId, Id);
                 return Process.TicksToTimeSpan(stat.systemTime);
             }
-
         }
     }
 }

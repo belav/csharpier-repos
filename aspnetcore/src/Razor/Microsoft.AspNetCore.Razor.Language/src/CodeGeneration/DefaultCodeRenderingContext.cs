@@ -19,7 +19,8 @@ internal class DefaultCodeRenderingContext : CodeRenderingContext
         IntermediateNodeWriter nodeWriter,
         RazorCodeDocument codeDocument,
         DocumentIntermediateNode documentNode,
-        RazorCodeGenerationOptions options)
+        RazorCodeGenerationOptions options
+    )
     {
         if (codeWriter == null)
         {
@@ -118,8 +119,14 @@ internal class DefaultCodeRenderingContext : CodeRenderingContext
             return;
         }
 
-        if (SourceDocument.FilePath != null &&
-            !string.Equals(SourceDocument.FilePath, node.Source.Value.FilePath, StringComparison.OrdinalIgnoreCase))
+        if (
+            SourceDocument.FilePath != null
+            && !string.Equals(
+                SourceDocument.FilePath,
+                node.Source.Value.FilePath,
+                StringComparison.OrdinalIgnoreCase
+            )
+        )
         {
             // We don't want to generate line mappings for imports.
             return;

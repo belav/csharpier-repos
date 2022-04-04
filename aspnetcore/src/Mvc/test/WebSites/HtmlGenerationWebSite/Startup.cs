@@ -18,10 +18,14 @@ public class Startup
     {
         // Add MVC services to the services container. Change default FormTagHelper.AntiForgery to false. Usually
         // null which is interpreted as true unless element includes an action attribute.
-        services.AddMvc(ConfigureMvcOptions)
+        services
+            .AddMvc(ConfigureMvcOptions)
             .InitializeTagHelper<FormTagHelper>((helper, _) => helper.Antiforgery = false);
 
-        services.AddSingleton(typeof(ISignalTokenProviderService<>), typeof(SignalTokenProviderService<>));
+        services.AddSingleton(
+            typeof(ISignalTokenProviderService<>),
+            typeof(SignalTokenProviderService<>)
+        );
         services.AddSingleton<ProductsService>();
         services.Configure<MemoryCacheOptions>(o => o.TrackLinkedCacheEntries = true);
     }
@@ -31,29 +35,33 @@ public class Startup
         app.UseStaticFiles();
 
         app.UseRouting();
-        app.UseEndpoints(endpoints =>
-        {
-            endpoints.MapControllerRoute(
-                name: "areaRoute",
-                pattern: "{area:exists}/{controller}/{action}/{id?}",
-                defaults: new { action = "Index" });
-            endpoints.MapControllerRoute(
-                name: "productRoute",
-                pattern: "Product/{action}",
-                defaults: new { controller = "Product" });
-            endpoints.MapControllerRoute(
-                name: "default",
-                pattern: "{controller}/{action}/{id?}",
-                defaults: new { controller = "HtmlGeneration_Home", action = "Index" });
+        app.UseEndpoints(
+            endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "areaRoute",
+                    pattern: "{area:exists}/{controller}/{action}/{id?}",
+                    defaults: new { action = "Index" }
+                );
+                endpoints.MapControllerRoute(
+                    name: "productRoute",
+                    pattern: "Product/{action}",
+                    defaults: new { controller = "Product" }
+                );
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller}/{action}/{id?}",
+                    defaults: new { controller = "HtmlGeneration_Home", action = "Index" }
+                );
 
-            endpoints.MapRazorPages();
-        });
+                endpoints.MapRazorPages();
+            }
+        );
     }
 
     public static void Main(string[] args)
     {
-        var host = CreateWebHostBuilder(args)
-            .Build();
+        var host = CreateWebHostBuilder(args).Build();
 
         host.Run();
     }
@@ -65,7 +73,5 @@ public class Startup
             .UseKestrel()
             .UseIISIntegration();
 
-    protected virtual void ConfigureMvcOptions(MvcOptions options)
-    {
-    }
+    protected virtual void ConfigureMvcOptions(MvcOptions options) { }
 }

@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Binder bodyBinder,
             OperatorDeclarationSyntax syntax,
             bool isNullableAnalysisEnabled,
-            BindingDiagnosticBag diagnostics)
+            BindingDiagnosticBag diagnostics
+        )
         {
             var location = syntax.OperatorToken.GetLocation();
 
@@ -28,14 +29,30 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             var interfaceSpecifier = syntax.ExplicitInterfaceSpecifier;
 
             TypeSymbol explicitInterfaceType;
-            name = ExplicitInterfaceHelpers.GetMemberNameAndInterfaceSymbol(bodyBinder, interfaceSpecifier, name, diagnostics, out explicitInterfaceType, aliasQualifierOpt: out _);
+            name = ExplicitInterfaceHelpers.GetMemberNameAndInterfaceSymbol(
+                bodyBinder,
+                interfaceSpecifier,
+                name,
+                diagnostics,
+                out explicitInterfaceType,
+                aliasQualifierOpt: out _
+            );
 
-            var methodKind = interfaceSpecifier == null
-                ? MethodKind.UserDefinedOperator
-                : MethodKind.ExplicitInterfaceImplementation;
+            var methodKind =
+                interfaceSpecifier == null
+                    ? MethodKind.UserDefinedOperator
+                    : MethodKind.ExplicitInterfaceImplementation;
 
             return new SourceUserDefinedOperatorSymbol(
-                methodKind, containingType, explicitInterfaceType, name, location, syntax, isNullableAnalysisEnabled, diagnostics);
+                methodKind,
+                containingType,
+                explicitInterfaceType,
+                name,
+                location,
+                syntax,
+                isNullableAnalysisEnabled,
+                diagnostics
+            );
         }
 
         // NOTE: no need to call WithUnsafeRegionIfNecessary, since the signature
@@ -49,27 +66,45 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Location location,
             OperatorDeclarationSyntax syntax,
             bool isNullableAnalysisEnabled,
-            BindingDiagnosticBag diagnostics) :
-            base(
+            BindingDiagnosticBag diagnostics
+        )
+            : base(
                 methodKind,
                 explicitInterfaceType,
                 name,
                 containingType,
                 location,
                 syntax,
-                MakeDeclarationModifiers(methodKind, containingType.IsInterface, syntax, location, diagnostics),
+                MakeDeclarationModifiers(
+                    methodKind,
+                    containingType.IsInterface,
+                    syntax,
+                    location,
+                    diagnostics
+                ),
                 hasBody: syntax.HasAnyBody(),
                 isExpressionBodied: syntax.Body == null && syntax.ExpressionBody != null,
                 isIterator: SyntaxFacts.HasYieldOperations(syntax.Body),
                 isNullableAnalysisEnabled: isNullableAnalysisEnabled,
-                diagnostics)
+                diagnostics
+            )
         {
-            CheckForBlockAndExpressionBody(
-                syntax.Body, syntax.ExpressionBody, syntax, diagnostics);
+            CheckForBlockAndExpressionBody(syntax.Body, syntax.ExpressionBody, syntax, diagnostics);
 
-            if (IsAbstract || (name != WellKnownMemberNames.EqualityOperatorName && name != WellKnownMemberNames.InequalityOperatorName))
+            if (
+                IsAbstract
+                || (
+                    name != WellKnownMemberNames.EqualityOperatorName
+                    && name != WellKnownMemberNames.InequalityOperatorName
+                )
+            )
             {
-                CheckFeatureAvailabilityAndRuntimeSupport(syntax, location, hasBody: syntax.Body != null || syntax.ExpressionBody != null, diagnostics: diagnostics);
+                CheckFeatureAvailabilityAndRuntimeSupport(
+                    syntax,
+                    location,
+                    hasBody: syntax.Body != null || syntax.ExpressionBody != null,
+                    diagnostics: diagnostics
+                );
             }
         }
 
@@ -86,10 +121,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         protected override Location ReturnTypeLocation
         {
-            get
-            {
-                return GetSyntax().ReturnType.Location;
-            }
+            get { return GetSyntax().ReturnType.Location; }
         }
 
         internal override bool GenerateDebugInfo
@@ -97,15 +129,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return true; }
         }
 
-        internal sealed override OneOrMany<SyntaxList<AttributeListSyntax>> GetAttributeDeclarations()
+        internal sealed override OneOrMany<
+            SyntaxList<AttributeListSyntax>
+        > GetAttributeDeclarations()
         {
             return OneOrMany.Create(this.GetSyntax().AttributeLists);
         }
 
-        protected override (TypeWithAnnotations ReturnType, ImmutableArray<ParameterSymbol> Parameters) MakeParametersAndBindReturnType(BindingDiagnosticBag diagnostics)
+        protected override (TypeWithAnnotations ReturnType, ImmutableArray<ParameterSymbol> Parameters) MakeParametersAndBindReturnType(
+            BindingDiagnosticBag diagnostics
+        )
         {
             OperatorDeclarationSyntax declarationSyntax = GetSyntax();
-            return MakeParametersAndBindReturnType(declarationSyntax, declarationSyntax.ReturnType, diagnostics);
+            return MakeParametersAndBindReturnType(
+                declarationSyntax,
+                declarationSyntax.ReturnType,
+                diagnostics
+            );
         }
     }
 }

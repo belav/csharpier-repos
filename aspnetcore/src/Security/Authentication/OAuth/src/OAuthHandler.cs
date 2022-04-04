@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Authentication.OAuth;
 /// An authentication handler that supports OAuth.
 /// </summary>
 /// <typeparam name="TOptions">The type of options.</typeparam>
-public class OAuthHandler<TOptions> : RemoteAuthenticationHandler<TOptions> where TOptions : OAuthOptions, new()
+public class OAuthHandler<TOptions> : RemoteAuthenticationHandler<TOptions>
+    where TOptions : OAuthOptions, new()
 {
     /// <summary>
     /// Gets the <see cref="HttpClient"/> instance used to communicate with the remote authentication provider.
@@ -41,15 +42,19 @@ public class OAuthHandler<TOptions> : RemoteAuthenticationHandler<TOptions> wher
     /// Initializes a new instance of <see cref="OAuthHandler{TOptions}"/>.
     /// </summary>
     /// <inheritdoc />
-    public OAuthHandler(IOptionsMonitor<TOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock)
-        : base(options, logger, encoder, clock)
-    { }
+    public OAuthHandler(
+        IOptionsMonitor<TOptions> options,
+        ILoggerFactory logger,
+        UrlEncoder encoder,
+        ISystemClock clock
+    ) : base(options, logger, encoder, clock) { }
 
     /// <summary>
     /// Creates a new instance of the events instance.
     /// </summary>
     /// <returns>A new instance of the events instance.</returns>
-    protected override Task<object> CreateEventsAsync() => Task.FromResult<object>(new OAuthEvents());
+    protected override Task<object> CreateEventsAsync() =>
+        Task.FromResult<object>(new OAuthEvents());
 
     /// <inheritdoc />
     protected override async Task<HandleRequestResult> HandleRemoteAuthenticateAsync()
@@ -87,7 +92,9 @@ public class OAuthHandler<TOptions> : RemoteAuthenticationHandler<TOptions> wher
                 {
                     return result;
                 }
-                var deniedEx = new Exception("Access was denied by the resource owner or by the remote server.");
+                var deniedEx = new Exception(
+                    "Access was denied by the resource owner or by the remote server."
+                );
                 deniedEx.Data["error"] = error.ToString();
                 deniedEx.Data["error_description"] = errorDescription.ToString();
                 deniedEx.Data["error_uri"] = errorUri.ToString();
@@ -121,7 +128,11 @@ public class OAuthHandler<TOptions> : RemoteAuthenticationHandler<TOptions> wher
             return HandleRequestResult.Fail("Code was not found.", properties);
         }
 
-        var codeExchangeContext = new OAuthCodeExchangeContext(properties, code.ToString(), BuildRedirectUri(Options.CallbackPath));
+        var codeExchangeContext = new OAuthCodeExchangeContext(
+            properties,
+            code.ToString(),
+            BuildRedirectUri(Options.CallbackPath)
+        );
         using var tokens = await ExchangeCodeAsync(codeExchangeContext);
 
         if (tokens.Error != null)
@@ -140,30 +151,45 @@ public class OAuthHandler<TOptions> : RemoteAuthenticationHandler<TOptions> wher
         {
             var authTokens = new List<AuthenticationToken>();
 
-            authTokens.Add(new AuthenticationToken { Name = "access_token", Value = tokens.AccessToken });
+            authTokens.Add(
+                new AuthenticationToken { Name = "access_token", Value = tokens.AccessToken }
+            );
             if (!string.IsNullOrEmpty(tokens.RefreshToken))
             {
-                authTokens.Add(new AuthenticationToken { Name = "refresh_token", Value = tokens.RefreshToken });
+                authTokens.Add(
+                    new AuthenticationToken { Name = "refresh_token", Value = tokens.RefreshToken }
+                );
             }
 
             if (!string.IsNullOrEmpty(tokens.TokenType))
             {
-                authTokens.Add(new AuthenticationToken { Name = "token_type", Value = tokens.TokenType });
+                authTokens.Add(
+                    new AuthenticationToken { Name = "token_type", Value = tokens.TokenType }
+                );
             }
 
             if (!string.IsNullOrEmpty(tokens.ExpiresIn))
             {
                 int value;
-                if (int.TryParse(tokens.ExpiresIn, NumberStyles.Integer, CultureInfo.InvariantCulture, out value))
+                if (
+                    int.TryParse(
+                        tokens.ExpiresIn,
+                        NumberStyles.Integer,
+                        CultureInfo.InvariantCulture,
+                        out value
+                    )
+                )
                 {
                     // https://www.w3.org/TR/xmlschema-2/#dateTime
                     // https://msdn.microsoft.com/en-us/library/az4se3k1(v=vs.110).aspx
                     var expiresAt = Clock.UtcNow + TimeSpan.FromSeconds(value);
-                    authTokens.Add(new AuthenticationToken
-                    {
-                        Name = "expires_at",
-                        Value = expiresAt.ToString("o", CultureInfo.InvariantCulture)
-                    });
+                    authTokens.Add(
+                        new AuthenticationToken
+                        {
+                            Name = "expires_at",
+                            Value = expiresAt.ToString("o", CultureInfo.InvariantCulture)
+                        }
+                    );
                 }
             }
 
@@ -177,7 +203,10 @@ public class OAuthHandler<TOptions> : RemoteAuthenticationHandler<TOptions> wher
         }
         else
         {
-            return HandleRequestResult.Fail("Failed to retrieve user information from remote server.", properties);
+            return HandleRequestResult.Fail(
+                "Failed to retrieve user information from remote server.",
+                properties
+            );
         }
     }
 
@@ -186,19 +215,26 @@ public class OAuthHandler<TOptions> : RemoteAuthenticationHandler<TOptions> wher
     /// </summary>
     /// <param name="context">The <see cref="OAuthCodeExchangeContext"/>.</param>
     /// <returns>The response <see cref="OAuthTokenResponse"/>.</returns>
-    protected virtual async Task<OAuthTokenResponse> ExchangeCodeAsync(OAuthCodeExchangeContext context)
+    protected virtual async Task<OAuthTokenResponse> ExchangeCodeAsync(
+        OAuthCodeExchangeContext context
+    )
     {
         var tokenRequestParameters = new Dictionary<string, string>()
-            {
-                { "client_id", Options.ClientId },
-                { "redirect_uri", context.RedirectUri },
-                { "client_secret", Options.ClientSecret },
-                { "code", context.Code },
-                { "grant_type", "authorization_code" },
-            };
+        {
+            { "client_id", Options.ClientId },
+            { "redirect_uri", context.RedirectUri },
+            { "client_secret", Options.ClientSecret },
+            { "code", context.Code },
+            { "grant_type", "authorization_code" },
+        };
 
         // PKCE https://tools.ietf.org/html/rfc7636#section-4.5, see BuildChallengeUrl
-        if (context.Properties.Items.TryGetValue(OAuthConstants.CodeVerifierKey, out var codeVerifier))
+        if (
+            context.Properties.Items.TryGetValue(
+                OAuthConstants.CodeVerifierKey,
+                out var codeVerifier
+            )
+        )
         {
             tokenRequestParameters.Add(OAuthConstants.CodeVerifierKey, codeVerifier!);
             context.Properties.Items.Remove(OAuthConstants.CodeVerifierKey);
@@ -220,13 +256,17 @@ public class OAuthHandler<TOptions> : RemoteAuthenticationHandler<TOptions> wher
         };
     }
 
-    private static OAuthTokenResponse PrepareFailedOAuthTokenReponse(HttpResponseMessage response, string body)
+    private static OAuthTokenResponse PrepareFailedOAuthTokenReponse(
+        HttpResponseMessage response,
+        string body
+    )
     {
         var exception = OAuthTokenResponse.GetStandardErrorException(JsonDocument.Parse(body));
 
         if (exception is null)
         {
-            var errorMessage = $"OAuth token endpoint failure: Status: {response.StatusCode};Headers: {response.Headers};Body: {body};";
+            var errorMessage =
+                $"OAuth token endpoint failure: Status: {response.StatusCode};Headers: {response.Headers};Body: {body};";
             return OAuthTokenResponse.Failed(new Exception(errorMessage));
         }
 
@@ -240,11 +280,24 @@ public class OAuthHandler<TOptions> : RemoteAuthenticationHandler<TOptions> wher
     /// <param name="properties">The <see cref="AuthenticationProperties"/>.</param>
     /// <param name="tokens">The <see cref="OAuthTokenResponse"/>.</param>
     /// <returns>The <see cref="AuthenticationTicket"/>.</returns>
-    protected virtual async Task<AuthenticationTicket> CreateTicketAsync(ClaimsIdentity identity, AuthenticationProperties properties, OAuthTokenResponse tokens)
+    protected virtual async Task<AuthenticationTicket> CreateTicketAsync(
+        ClaimsIdentity identity,
+        AuthenticationProperties properties,
+        OAuthTokenResponse tokens
+    )
     {
         using (var user = JsonDocument.Parse("{}"))
         {
-            var context = new OAuthCreatingTicketContext(new ClaimsPrincipal(identity), properties, Context, Scheme, Options, Backchannel, tokens, user.RootElement);
+            var context = new OAuthCreatingTicketContext(
+                new ClaimsPrincipal(identity),
+                properties,
+                Context,
+                Scheme,
+                Options,
+                Backchannel,
+                tokens,
+                user.RootElement
+            );
             await Events.CreatingTicket(context);
             return new AuthenticationTicket(context.Principal!, context.Properties, Scheme.Name);
         }
@@ -261,10 +314,17 @@ public class OAuthHandler<TOptions> : RemoteAuthenticationHandler<TOptions> wher
         // OAuth2 10.12 CSRF
         GenerateCorrelationId(properties);
 
-        var authorizationEndpoint = BuildChallengeUrl(properties, BuildRedirectUri(Options.CallbackPath));
+        var authorizationEndpoint = BuildChallengeUrl(
+            properties,
+            BuildRedirectUri(Options.CallbackPath)
+        );
         var redirectContext = new RedirectContext<OAuthOptions>(
-            Context, Scheme, Options,
-            properties, authorizationEndpoint);
+            Context,
+            Scheme,
+            Options,
+            properties,
+            authorizationEndpoint
+        );
         await Events.RedirectToAuthorizationEndpoint(redirectContext);
 
         var location = Context.Response.Headers.Location;
@@ -288,18 +348,23 @@ public class OAuthHandler<TOptions> : RemoteAuthenticationHandler<TOptions> wher
     /// <param name="properties">The <see cref="AuthenticationProperties"/>.</param>
     /// <param name="redirectUri">The url to redirect to once the challenge is completed.</param>
     /// <returns>The challenge url.</returns>
-    protected virtual string BuildChallengeUrl(AuthenticationProperties properties, string redirectUri)
+    protected virtual string BuildChallengeUrl(
+        AuthenticationProperties properties,
+        string redirectUri
+    )
     {
-        var scopeParameter = properties.GetParameter<ICollection<string>>(OAuthChallengeProperties.ScopeKey);
+        var scopeParameter = properties.GetParameter<ICollection<string>>(
+            OAuthChallengeProperties.ScopeKey
+        );
         var scope = scopeParameter != null ? FormatScope(scopeParameter) : FormatScope();
 
         var parameters = new Dictionary<string, string>
-            {
-                { "client_id", Options.ClientId },
-                { "scope", scope },
-                { "response_type", "code" },
-                { "redirect_uri", redirectUri },
-            };
+        {
+            { "client_id", Options.ClientId },
+            { "scope", scope },
+            { "response_type", "code" },
+            { "redirect_uri", redirectUri },
+        };
 
         if (Options.UsePkce)
         {
@@ -314,7 +379,8 @@ public class OAuthHandler<TOptions> : RemoteAuthenticationHandler<TOptions> wher
             var codeChallenge = WebEncoders.Base64UrlEncode(challengeBytes);
 
             parameters[OAuthConstants.CodeChallengeKey] = codeChallenge;
-            parameters[OAuthConstants.CodeChallengeMethodKey] = OAuthConstants.CodeChallengeMethodS256;
+            parameters[OAuthConstants.CodeChallengeMethodKey] =
+                OAuthConstants.CodeChallengeMethodS256;
         }
 
         parameters["state"] = Options.StateDataFormat.Protect(properties);
@@ -327,14 +393,12 @@ public class OAuthHandler<TOptions> : RemoteAuthenticationHandler<TOptions> wher
     /// </summary>
     /// <param name="scopes">List of scopes.</param>
     /// <returns>Formatted scopes.</returns>
-    protected virtual string FormatScope(IEnumerable<string> scopes)
-        => string.Join(" ", scopes); // OAuth2 3.3 space separated
+    protected virtual string FormatScope(IEnumerable<string> scopes) => string.Join(" ", scopes); // OAuth2 3.3 space separated
 
     /// <summary>
     /// Format the <see cref="OAuthOptions.Scope"/> property.
     /// </summary>
     /// <returns>Formatted scopes.</returns>
     /// <remarks>Subclasses should rather override <see cref="FormatScope(IEnumerable{string})"/>.</remarks>
-    protected virtual string FormatScope()
-        => FormatScope(Options.Scope);
+    protected virtual string FormatScope() => FormatScope(Options.Scope);
 }

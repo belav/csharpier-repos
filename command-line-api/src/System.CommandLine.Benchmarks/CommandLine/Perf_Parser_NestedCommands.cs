@@ -22,7 +22,7 @@ namespace System.CommandLine.Benchmarks.CommandLine
         ///
         /// 2 - cmd-root/
         ///     |-cmd-nested0
-        /// 
+        ///
         /// 5 - cmd-root/
         ///     |-cmd-nested0/
         ///       |-cmd-nested00/

@@ -34,11 +34,16 @@ namespace Microsoft.CodeAnalysis
         /// <param name="isPublic">True if the resource is public.</param>
         /// <remarks>
         /// Returns a stream of the data to embed.
-        /// </remarks> 
+        /// </remarks>
         public ResourceDescription(string resourceName, Func<Stream> dataProvider, bool isPublic)
-            : this(resourceName, fileName: null, dataProvider, isPublic, isEmbedded: true, checkArgs: true)
-        {
-        }
+            : this(
+                resourceName,
+                fileName: null,
+                dataProvider,
+                isPublic,
+                isEmbedded: true,
+                checkArgs: true
+            ) { }
 
         /// <summary>
         /// Creates a representation of a resource whose file name will be recorded in the assembly.
@@ -52,12 +57,22 @@ namespace Microsoft.CodeAnalysis
         /// <remarks>
         /// Function returning a stream of the resource content (used to calculate hash).
         /// </remarks>
-        public ResourceDescription(string resourceName, string? fileName, Func<Stream> dataProvider, bool isPublic)
-            : this(resourceName, fileName, dataProvider, isPublic, isEmbedded: false, checkArgs: true)
-        {
-        }
+        public ResourceDescription(
+            string resourceName,
+            string? fileName,
+            Func<Stream> dataProvider,
+            bool isPublic
+        ) : this(resourceName, fileName, dataProvider, isPublic, isEmbedded: false, checkArgs: true)
+        { }
 
-        internal ResourceDescription(string resourceName, string? fileName, Func<Stream> dataProvider, bool isPublic, bool isEmbedded, bool checkArgs)
+        internal ResourceDescription(
+            string resourceName,
+            string? fileName,
+            Func<Stream> dataProvider,
+            bool isPublic,
+            bool isEmbedded,
+            bool checkArgs
+        )
         {
             if (checkArgs)
             {
@@ -73,7 +88,10 @@ namespace Microsoft.CodeAnalysis
 
                 if (!MetadataHelpers.IsValidMetadataIdentifier(resourceName))
                 {
-                    throw new ArgumentException(CodeAnalysisResources.EmptyOrInvalidResourceName, nameof(resourceName));
+                    throw new ArgumentException(
+                        CodeAnalysisResources.EmptyOrInvalidResourceName,
+                        nameof(resourceName)
+                    );
                 }
 
                 if (!isEmbedded)
@@ -85,7 +103,10 @@ namespace Microsoft.CodeAnalysis
 
                     if (!MetadataHelpers.IsValidMetadataFileName(fileName))
                     {
-                        throw new ArgumentException(CodeAnalysisResources.EmptyOrInvalidFileName, nameof(fileName));
+                        throw new ArgumentException(
+                            CodeAnalysisResources.EmptyOrInvalidFileName,
+                            nameof(fileName)
+                        );
                     }
                 }
             }
@@ -115,7 +136,9 @@ namespace Microsoft.CodeAnalysis
                     {
                         if (stream == null)
                         {
-                            throw new InvalidOperationException(CodeAnalysisResources.ResourceDataProviderShouldReturnNonNullStream);
+                            throw new InvalidOperationException(
+                                CodeAnalysisResources.ResourceDataProviderShouldReturnNonNullStream
+                            );
                         }
 
                         return ImmutableArray.CreateRange(algorithm.ComputeHash(stream));
@@ -135,7 +158,13 @@ namespace Microsoft.CodeAnalysis
 
         internal Cci.ManagedResource ToManagedResource(CommonPEModuleBuilder moduleBeingBuilt)
         {
-            return new Cci.ManagedResource(ResourceName, IsPublic, IsEmbedded ? DataProvider : null, IsEmbedded ? null : this, offset: 0);
+            return new Cci.ManagedResource(
+                ResourceName,
+                IsPublic,
+                IsEmbedded ? DataProvider : null,
+                IsEmbedded ? null : this,
+                offset: 0
+            );
         }
 
         ImmutableArray<byte> Cci.IFileReference.GetHashValue(AssemblyHashAlgorithm algorithmId)

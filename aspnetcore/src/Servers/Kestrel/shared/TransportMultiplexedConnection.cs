@@ -42,10 +42,7 @@ internal abstract partial class TransportMultiplexedConnection : MultiplexedConn
             // Lazily allocate connection metadata
             return _items ?? (_items = new ConnectionItems());
         }
-        set
-        {
-            _items = value;
-        }
+        set { _items = value; }
     }
 
     public override CancellationToken ConnectionClosed { get; set; }

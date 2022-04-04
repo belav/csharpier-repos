@@ -40,10 +40,16 @@ namespace Microsoft.EntityFrameworkCore.Storage
             IReadOnlyDictionary<string, object?>? parameterValues,
             IReadOnlyList<ReaderColumn>? readerColumns,
             DbContext? context,
-            IRelationalCommandDiagnosticsLogger? logger)
-            : this(connection, parameterValues, readerColumns, context, logger, detailedErrorsEnabled: false)
-        {
-        }
+            IRelationalCommandDiagnosticsLogger? logger
+        )
+            : this(
+                connection,
+                parameterValues,
+                readerColumns,
+                context,
+                logger,
+                detailedErrorsEnabled: false
+            ) { }
 
         /// <summary>
         ///     <para>
@@ -66,10 +72,17 @@ namespace Microsoft.EntityFrameworkCore.Storage
             IReadOnlyList<ReaderColumn>? readerColumns,
             DbContext? context,
             IRelationalCommandDiagnosticsLogger? logger,
-            CommandSource commandSource)
-            : this(connection, parameterValues, readerColumns, context, logger, detailedErrorsEnabled: false, commandSource)
-        {
-        }
+            CommandSource commandSource
+        )
+            : this(
+                connection,
+                parameterValues,
+                readerColumns,
+                context,
+                logger,
+                detailedErrorsEnabled: false,
+                commandSource
+            ) { }
 
         /// <summary>
         ///     <para>
@@ -92,10 +105,17 @@ namespace Microsoft.EntityFrameworkCore.Storage
             IReadOnlyList<ReaderColumn>? readerColumns,
             DbContext? context,
             IRelationalCommandDiagnosticsLogger? logger,
-            bool detailedErrorsEnabled)
-            : this(connection, parameterValues, readerColumns, context, logger, detailedErrorsEnabled, CommandSource.Unknown)
-        {
-        }
+            bool detailedErrorsEnabled
+        )
+            : this(
+                connection,
+                parameterValues,
+                readerColumns,
+                context,
+                logger,
+                detailedErrorsEnabled,
+                CommandSource.Unknown
+            ) { }
 
         /// <summary>
         ///     <para>
@@ -120,7 +140,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             DbContext? context,
             IRelationalCommandDiagnosticsLogger? logger,
             bool detailedErrorsEnabled,
-            CommandSource commandSource)
+            CommandSource commandSource
+        )
         {
             Connection = connection;
             ParameterValues = parameterValues;

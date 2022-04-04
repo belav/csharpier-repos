@@ -19,9 +19,9 @@ public class InputNumberTest
             EditContext = new EditContext(model),
             ValueExpression = () => model.SomeNumber,
             AdditionalAttributes = new Dictionary<string, object>
-                {
-                    { "DisplayName", "Some number" }
-                }
+            {
+                { "DisplayName", "Some number" }
+            }
         };
         var fieldIdentifier = FieldIdentifier.Create(() => model.SomeNumber);
         var inputComponent = await InputRenderer.RenderAndGetComponent(rootComponent);
@@ -66,7 +66,12 @@ public class InputNumberTest
             // (e.g., from @bind), except to simplify the test code there's an InvokeAsync
             // here. In production code it wouldn't normally be required because @bind
             // calls run on the sync context anyway.
-            await InvokeAsync(() => { base.CurrentValueAsString = value; });
+            await InvokeAsync(
+                () =>
+                {
+                    base.CurrentValueAsString = value;
+                }
+            );
         }
     }
 }

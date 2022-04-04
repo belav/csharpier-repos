@@ -13,15 +13,13 @@ using Microsoft.CodeAnalysis.Host.Mef;
 namespace Microsoft.VisualStudio.LanguageServices.Storage
 {
     [ExportWorkspaceService(typeof(IPersistentStorageLocationService), ServiceLayer.Host), Shared]
-    internal class VisualStudioPersistentStorageLocationService : DefaultPersistentStorageLocationService
+    internal class VisualStudioPersistentStorageLocationService
+        : DefaultPersistentStorageLocationService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioPersistentStorageLocationService()
-        {
-        }
+        public VisualStudioPersistentStorageLocationService() { }
 
-        public override bool IsSupported(Workspace workspace)
-            => workspace is VisualStudioWorkspace;
+        public override bool IsSupported(Workspace workspace) => workspace is VisualStudioWorkspace;
     }
 }

@@ -20,71 +20,81 @@ namespace System.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public void NoWorkQueuedIfNoHandlers()
         {
-            RunWithoutSyncCtx(() =>
-            {
-                var tsc = new TrackingSynchronizationContext();
-                SynchronizationContext.SetSynchronizationContext(tsc);
-                Progress<int> p = new Progress<int>();
-                for (int i = 0; i < 3; i++)
-                    ((IProgress<int>)p).Report(i);
-                Assert.Equal(0, tsc.Posts);
-                SynchronizationContext.SetSynchronizationContext(null);
-            });
+            RunWithoutSyncCtx(
+                () =>
+                {
+                    var tsc = new TrackingSynchronizationContext();
+                    SynchronizationContext.SetSynchronizationContext(tsc);
+                    Progress<int> p = new Progress<int>();
+                    for (int i = 0; i < 3; i++)
+                        ((IProgress<int>)p).Report(i);
+                    Assert.Equal(0, tsc.Posts);
+                    SynchronizationContext.SetSynchronizationContext(null);
+                }
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public void TargetsCurrentSynchronizationContext()
         {
-            RunWithoutSyncCtx(() =>
-            {
-                var tsc = new TrackingSynchronizationContext();
-                SynchronizationContext.SetSynchronizationContext(tsc);
-                Progress<int> p = new Progress<int>(i => { });
-                for (int i = 0; i < 3; i++)
-                    ((IProgress<int>)p).Report(i);
-                Assert.Equal(3, tsc.Posts);
-                SynchronizationContext.SetSynchronizationContext(null);
-            });
+            RunWithoutSyncCtx(
+                () =>
+                {
+                    var tsc = new TrackingSynchronizationContext();
+                    SynchronizationContext.SetSynchronizationContext(tsc);
+                    Progress<int> p = new Progress<int>(i => { });
+                    for (int i = 0; i < 3; i++)
+                        ((IProgress<int>)p).Report(i);
+                    Assert.Equal(3, tsc.Posts);
+                    SynchronizationContext.SetSynchronizationContext(null);
+                }
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public void EventRaisedWithActionHandler()
         {
-            RunWithoutSyncCtx(() =>
-            {
-                Barrier b = new Barrier(2);
-                Progress<int> p = new Progress<int>(i =>
+            RunWithoutSyncCtx(
+                () =>
                 {
-                    Assert.Equal(b.CurrentPhaseNumber, i);
-                    b.SignalAndWait();
-                });
-                for (int i = 0; i < 3; i++)
-                {
-                    ((IProgress<int>)p).Report(i);
-                    b.SignalAndWait();
+                    Barrier b = new Barrier(2);
+                    Progress<int> p = new Progress<int>(
+                        i =>
+                        {
+                            Assert.Equal(b.CurrentPhaseNumber, i);
+                            b.SignalAndWait();
+                        }
+                    );
+                    for (int i = 0; i < 3; i++)
+                    {
+                        ((IProgress<int>)p).Report(i);
+                        b.SignalAndWait();
+                    }
                 }
-            });
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public void EventRaisedWithEventHandler()
         {
-            RunWithoutSyncCtx(() =>
-            {
-                Barrier b = new Barrier(2);
-                Progress<int> p = new Progress<int>();
-                p.ProgressChanged += (s, i) =>
+            RunWithoutSyncCtx(
+                () =>
                 {
-                    Assert.Same(s, p);
-                    Assert.Equal(b.CurrentPhaseNumber, i);
-                    b.SignalAndWait();
-                };
-                for (int i = 0; i < 3; i++)
-                {
-                    ((IProgress<int>)p).Report(i);
-                    b.SignalAndWait();
+                    Barrier b = new Barrier(2);
+                    Progress<int> p = new Progress<int>();
+                    p.ProgressChanged += (s, i) =>
+                    {
+                        Assert.Same(s, p);
+                        Assert.Equal(b.CurrentPhaseNumber, i);
+                        b.SignalAndWait();
+                    };
+                    for (int i = 0; i < 3; i++)
+                    {
+                        ((IProgress<int>)p).Report(i);
+                        b.SignalAndWait();
+                    }
                 }
-            });
+            );
         }
 
         private static void RunWithoutSyncCtx(Action action)

@@ -15,56 +15,82 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
 public class TestModelMetadataProvider : DefaultModelMetadataProvider
 {
-    private static DataAnnotationsMetadataProvider CreateDefaultDataAnnotationsProvider(IStringLocalizerFactory stringLocalizerFactory)
+    private static DataAnnotationsMetadataProvider CreateDefaultDataAnnotationsProvider(
+        IStringLocalizerFactory stringLocalizerFactory
+    )
     {
         var localizationOptions = Options.Create(new MvcDataAnnotationsLocalizationOptions());
-        localizationOptions.Value.DataAnnotationLocalizerProvider = (modelType, localizerFactory) => localizerFactory.Create(modelType);
+        localizationOptions.Value.DataAnnotationLocalizerProvider = (modelType, localizerFactory) =>
+            localizerFactory.Create(modelType);
 
-        return new DataAnnotationsMetadataProvider(new MvcOptions(), localizationOptions, stringLocalizerFactory);
+        return new DataAnnotationsMetadataProvider(
+            new MvcOptions(),
+            localizationOptions,
+            stringLocalizerFactory
+        );
     }
 
     // Creates a provider with all the defaults - includes data annotations
-    public static ModelMetadataProvider CreateDefaultProvider(IStringLocalizerFactory stringLocalizerFactory = null)
+    public static ModelMetadataProvider CreateDefaultProvider(
+        IStringLocalizerFactory stringLocalizerFactory = null
+    )
     {
         var detailsProviders = new List<IMetadataDetailsProvider>
-            {
-                new DefaultBindingMetadataProvider(),
-                new DefaultValidationMetadataProvider(),
-                CreateDefaultDataAnnotationsProvider(stringLocalizerFactory),
-                new DataMemberRequiredBindingMetadataProvider(),
-            };
+        {
+            new DefaultBindingMetadataProvider(),
+            new DefaultValidationMetadataProvider(),
+            CreateDefaultDataAnnotationsProvider(stringLocalizerFactory),
+            new DataMemberRequiredBindingMetadataProvider(),
+        };
 
         MvcCoreMvcOptionsSetup.ConfigureAdditionalModelMetadataDetailsProviders(detailsProviders);
 
         var validationProviders = TestModelValidatorProvider.CreateDefaultProvider();
-        detailsProviders.Add(new HasValidatorsValidationMetadataProvider(validationProviders.ValidatorProviders));
+        detailsProviders.Add(
+            new HasValidatorsValidationMetadataProvider(validationProviders.ValidatorProviders)
+        );
 
-        var compositeDetailsProvider = new DefaultCompositeMetadataDetailsProvider(detailsProviders);
-        return new DefaultModelMetadataProvider(compositeDetailsProvider, Options.Create(new MvcOptions()));
+        var compositeDetailsProvider = new DefaultCompositeMetadataDetailsProvider(
+            detailsProviders
+        );
+        return new DefaultModelMetadataProvider(
+            compositeDetailsProvider,
+            Options.Create(new MvcOptions())
+        );
     }
 
-    public static IModelMetadataProvider CreateDefaultProvider(IList<IMetadataDetailsProvider> providers)
+    public static IModelMetadataProvider CreateDefaultProvider(
+        IList<IMetadataDetailsProvider> providers
+    )
     {
         var detailsProviders = new List<IMetadataDetailsProvider>()
-            {
-                new DefaultBindingMetadataProvider(),
-                new DefaultValidationMetadataProvider(),
-                new DataAnnotationsMetadataProvider(
-                    new MvcOptions(),
-                    Options.Create(new MvcDataAnnotationsLocalizationOptions()),
-                    stringLocalizerFactory: null),
-                new DataMemberRequiredBindingMetadataProvider(),
-            };
+        {
+            new DefaultBindingMetadataProvider(),
+            new DefaultValidationMetadataProvider(),
+            new DataAnnotationsMetadataProvider(
+                new MvcOptions(),
+                Options.Create(new MvcDataAnnotationsLocalizationOptions()),
+                stringLocalizerFactory: null
+            ),
+            new DataMemberRequiredBindingMetadataProvider(),
+        };
 
         MvcCoreMvcOptionsSetup.ConfigureAdditionalModelMetadataDetailsProviders(detailsProviders);
 
         detailsProviders.AddRange(providers);
 
         var validationProviders = TestModelValidatorProvider.CreateDefaultProvider();
-        detailsProviders.Add(new HasValidatorsValidationMetadataProvider(validationProviders.ValidatorProviders));
+        detailsProviders.Add(
+            new HasValidatorsValidationMetadataProvider(validationProviders.ValidatorProviders)
+        );
 
-        var compositeDetailsProvider = new DefaultCompositeMetadataDetailsProvider(detailsProviders);
-        return new DefaultModelMetadataProvider(compositeDetailsProvider, Options.Create(new MvcOptions()));
+        var compositeDetailsProvider = new DefaultCompositeMetadataDetailsProvider(
+            detailsProviders
+        );
+        return new DefaultModelMetadataProvider(
+            compositeDetailsProvider,
+            Options.Create(new MvcOptions())
+        );
     }
 
     public static IModelMetadataProvider CreateProvider(IList<IMetadataDetailsProvider> providers)
@@ -75,30 +101,36 @@ public class TestModelMetadataProvider : DefaultModelMetadataProvider
             detailsProviders.AddRange(providers);
         }
 
-        var compositeDetailsProvider = new DefaultCompositeMetadataDetailsProvider(detailsProviders);
-        return new DefaultModelMetadataProvider(compositeDetailsProvider, Options.Create(new MvcOptions()));
+        var compositeDetailsProvider = new DefaultCompositeMetadataDetailsProvider(
+            detailsProviders
+        );
+        return new DefaultModelMetadataProvider(
+            compositeDetailsProvider,
+            Options.Create(new MvcOptions())
+        );
     }
 
     private readonly TestModelMetadataDetailsProvider _detailsProvider;
 
-    public TestModelMetadataProvider()
-        : this(new TestModelMetadataDetailsProvider())
-    {
-    }
+    public TestModelMetadataProvider() : this(new TestModelMetadataDetailsProvider()) { }
 
     private TestModelMetadataProvider(TestModelMetadataDetailsProvider detailsProvider)
         : base(
-              new DefaultCompositeMetadataDetailsProvider(new IMetadataDetailsProvider[]
-              {
-                      new DefaultBindingMetadataProvider(),
-                      new DefaultValidationMetadataProvider(),
-                      new DataAnnotationsMetadataProvider(
-                          new MvcOptions(),
-                          Options.Create(new MvcDataAnnotationsLocalizationOptions()),
-                          stringLocalizerFactory: null),
-                      detailsProvider
-              }),
-              Options.Create(new MvcOptions()))
+            new DefaultCompositeMetadataDetailsProvider(
+                new IMetadataDetailsProvider[]
+                {
+                    new DefaultBindingMetadataProvider(),
+                    new DefaultValidationMetadataProvider(),
+                    new DataAnnotationsMetadataProvider(
+                        new MvcOptions(),
+                        Options.Create(new MvcDataAnnotationsLocalizationOptions()),
+                        stringLocalizerFactory: null
+                    ),
+                    detailsProvider
+                }
+            ),
+            Options.Create(new MvcOptions())
+        )
     {
         _detailsProvider = detailsProvider;
     }
@@ -143,10 +175,10 @@ public class TestModelMetadataProvider : DefaultModelMetadataProvider
         return ForProperty(typeof(TContainer), propertyName);
     }
 
-    private class TestModelMetadataDetailsProvider :
-        IBindingMetadataProvider,
-        IDisplayMetadataProvider,
-        IValidationMetadataProvider
+    private class TestModelMetadataDetailsProvider
+        : IBindingMetadataProvider,
+          IDisplayMetadataProvider,
+          IValidationMetadataProvider
     {
         public List<MetadataBuilder> Builders { get; } = new List<MetadataBuilder>();
 
@@ -186,9 +218,12 @@ public class TestModelMetadataProvider : DefaultModelMetadataProvider
 
     private class MetadataBuilder : IMetadataBuilder
     {
-        private readonly List<Action<BindingMetadata>> _bindingActions = new List<Action<BindingMetadata>>();
-        private readonly List<Action<DisplayMetadata>> _displayActions = new List<Action<DisplayMetadata>>();
-        private readonly List<Action<ValidationMetadata>> _validationActions = new List<Action<ValidationMetadata>>();
+        private readonly List<Action<BindingMetadata>> _bindingActions =
+            new List<Action<BindingMetadata>>();
+        private readonly List<Action<DisplayMetadata>> _displayActions =
+            new List<Action<DisplayMetadata>>();
+        private readonly List<Action<ValidationMetadata>> _validationActions =
+            new List<Action<ValidationMetadata>>();
 
         private readonly ModelMetadataIdentity _key;
 

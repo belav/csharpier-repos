@@ -17,12 +17,19 @@ namespace Microsoft.CodeAnalysis.CSharp
         ImmutableArray<BoundExpression> Arguments,
         ImmutableArray<int> ArgsToParamsOpt,
         BitVector DefaultArguments,
-        bool Expanded)
+        bool Expanded
+    )
     {
         public static MethodArgumentInfo CreateParameterlessMethod(MethodSymbol method)
         {
             Debug.Assert(method.ParameterCount == 0);
-            return new MethodArgumentInfo(method, Arguments: ImmutableArray<BoundExpression>.Empty, ArgsToParamsOpt: default, DefaultArguments: default, Expanded: false);
+            return new MethodArgumentInfo(
+                method,
+                Arguments: ImmutableArray<BoundExpression>.Empty,
+                ArgsToParamsOpt: default,
+                DefaultArguments: default,
+                Expanded: false
+            );
         }
     }
 }

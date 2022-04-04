@@ -14,8 +14,7 @@ using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.Collections.Internal
 {
-    internal sealed class IDictionaryDebugView<K, V>
-        where K : notnull
+    internal sealed class IDictionaryDebugView<K, V> where K : notnull
     {
         private readonly IDictionary<K, V> _dict;
 

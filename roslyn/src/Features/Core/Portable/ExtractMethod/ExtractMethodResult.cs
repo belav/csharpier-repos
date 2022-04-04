@@ -46,14 +46,17 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             IEnumerable<string> reasons,
             Document document,
             SyntaxToken invocationNameToken,
-            SyntaxNode methodDeclarationNode)
+            SyntaxNode methodDeclarationNode
+        )
         {
             Status = status;
 
             Succeeded = status.Succeeded() && !status.HasSuggestion();
             SucceededWithSuggestion = status.Succeeded() && status.HasSuggestion();
 
-            Reasons = (reasons ?? SpecializedCollections.EmptyEnumerable<string>()).ToReadOnlyCollection();
+            Reasons = (
+                reasons ?? SpecializedCollections.EmptyEnumerable<string>()
+            ).ToReadOnlyCollection();
 
             Document = document;
             InvocationNameToken = invocationNameToken;
@@ -61,7 +64,7 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
         }
 
         /// <summary>
-        /// internal status of result. more fine grained reason why it is failed. 
+        /// internal status of result. more fine grained reason why it is failed.
         /// </summary>
         internal OperationStatusFlag Status { get; }
     }

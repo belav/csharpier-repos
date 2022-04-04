@@ -21,7 +21,7 @@ namespace Internal.Runtime
 #pragma warning disable 0169
     internal struct ReadyToRunHeader
     {
-        private uint Signature;      // ReadyToRunHeaderConstants.Signature
+        private uint Signature; // ReadyToRunHeaderConstants.Signature
         private ushort MajorVersion;
         private ushort MinorVersion;
 
@@ -55,6 +55,7 @@ namespace Internal.Runtime
         ExceptionInfo = 104,
         DebugInfo = 105,
         DelayLoadMethodCallThunks = 106,
+
         // 107 is deprecated - it was used by an older format of AvailableTypes
         AvailableTypes = 108,
         InstanceMethodEntryPoints = 109,

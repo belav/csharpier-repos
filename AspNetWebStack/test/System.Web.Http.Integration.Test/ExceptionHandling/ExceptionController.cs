@@ -19,17 +19,28 @@ namespace System.Web.Http
 
         public HttpResponseMessage Unavailable()
         {
-            throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.ServiceUnavailable));
+            throw new HttpResponseException(
+                new HttpResponseMessage(HttpStatusCode.ServiceUnavailable)
+            );
         }
 
         public Task<HttpResponseMessage> AsyncUnavailable()
         {
-            throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.ServiceUnavailable));
+            throw new HttpResponseException(
+                new HttpResponseMessage(HttpStatusCode.ServiceUnavailable)
+            );
         }
 
         public Task<HttpResponseMessage> AsyncUnavailableDelegate()
         {
-            return Task.Factory.StartNew<HttpResponseMessage>(() => { throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.ServiceUnavailable)); });
+            return Task.Factory.StartNew<HttpResponseMessage>(
+                () =>
+                {
+                    throw new HttpResponseException(
+                        new HttpResponseMessage(HttpStatusCode.ServiceUnavailable)
+                    );
+                }
+            );
         }
 
         public HttpResponseMessage ArgumentNull()
@@ -39,7 +50,12 @@ namespace System.Web.Http
 
         public Task<HttpResponseMessage> AsyncArgumentNull()
         {
-            return Task.Factory.StartNew<HttpResponseMessage>(() => { throw new ArgumentNullException("foo"); });
+            return Task.Factory.StartNew<HttpResponseMessage>(
+                () =>
+                {
+                    throw new ArgumentNullException("foo");
+                }
+            );
         }
 
         [HttpGet]
@@ -78,18 +94,25 @@ namespace System.Web.Http
         public void ActionFilter() { }
 
         [ExceptionFilterThrows]
-        public void ExceptionFilter() { throw new ArgumentException("exception"); }
+        public void ExceptionFilter()
+        {
+            throw new ArgumentException("exception");
+        }
 
         private class AuthenticationFilterAttribute : Attribute, IAuthenticationFilter
         {
-            public virtual Task AuthenticateAsync(HttpAuthenticationContext context,
-                CancellationToken cancellationToken)
+            public virtual Task AuthenticateAsync(
+                HttpAuthenticationContext context,
+                CancellationToken cancellationToken
+            )
             {
                 return Task.FromResult<object>(null);
             }
 
-            public virtual Task ChallengeAsync(HttpAuthenticationChallengeContext context,
-                CancellationToken cancellationToken)
+            public virtual Task ChallengeAsync(
+                HttpAuthenticationChallengeContext context,
+                CancellationToken cancellationToken
+            )
             {
                 return Task.FromResult<object>(null);
             }
@@ -119,8 +142,10 @@ namespace System.Web.Http
 
         private class AuthenticationFilterAuthenticateThrows : AuthenticationFilterAttribute
         {
-            public override Task AuthenticateAsync(HttpAuthenticationContext context,
-                CancellationToken cancellationToken)
+            public override Task AuthenticateAsync(
+                HttpAuthenticationContext context,
+                CancellationToken cancellationToken
+            )
             {
                 TryThrowHttpResponseException(context.ActionContext);
                 throw new ArgumentException("authentication");
@@ -129,8 +154,10 @@ namespace System.Web.Http
 
         private class AuthenticationFilterAuthenticateResultThrows : AuthenticationFilterAttribute
         {
-            public override Task AuthenticateAsync(HttpAuthenticationContext context,
-                CancellationToken cancellationToken)
+            public override Task AuthenticateAsync(
+                HttpAuthenticationContext context,
+                CancellationToken cancellationToken
+            )
             {
                 context.ErrorResult = new AuthenticationErrorResult(context.ActionContext);
                 return Task.FromResult<object>(null);
@@ -139,8 +166,10 @@ namespace System.Web.Http
 
         private class AuthenticationFilterChallengeThrows : AuthenticationFilterAttribute
         {
-            public override Task ChallengeAsync(HttpAuthenticationChallengeContext context,
-                CancellationToken cancellationToken)
+            public override Task ChallengeAsync(
+                HttpAuthenticationChallengeContext context,
+                CancellationToken cancellationToken
+            )
             {
                 TryThrowHttpResponseException(context.ActionContext);
                 throw new ArgumentException("authentication");
@@ -149,8 +178,10 @@ namespace System.Web.Http
 
         private class AuthenticationFilterChallengeResultThrows : AuthenticationFilterAttribute
         {
-            public override Task ChallengeAsync(HttpAuthenticationChallengeContext context,
-                CancellationToken cancellationToken)
+            public override Task ChallengeAsync(
+                HttpAuthenticationChallengeContext context,
+                CancellationToken cancellationToken
+            )
             {
                 context.Result = new AuthenticationErrorResult(context.ActionContext);
                 return Task.FromResult<object>(null);
@@ -187,13 +218,23 @@ namespace System.Web.Http
         private static void TryThrowHttpResponseException(HttpActionContext actionContext)
         {
             IEnumerable<string> values;
-            if (actionContext.ControllerContext.Request.Headers.TryGetValues(ResponseExceptionHeaderKey, out values))
+            if (
+                actionContext.ControllerContext.Request.Headers.TryGetValues(
+                    ResponseExceptionHeaderKey,
+                    out values
+                )
+            )
             {
                 string statusString = values.First() as string;
                 if (!String.IsNullOrEmpty(statusString))
                 {
-                    HttpStatusCode status = (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), statusString);
-                    throw new HttpResponseException(actionContext.Request.CreateResponse(status, "HttpResponseExceptionMessage"));
+                    HttpStatusCode status = (HttpStatusCode)Enum.Parse(
+                        typeof(HttpStatusCode),
+                        statusString
+                    );
+                    throw new HttpResponseException(
+                        actionContext.Request.CreateResponse(status, "HttpResponseExceptionMessage")
+                    );
                 }
             }
         }

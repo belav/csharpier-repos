@@ -10,26 +10,25 @@ namespace CompareExchangeLong
         static int Main(string[] args)
         {
             // Check number of args
-            if(args.Length != 2)
+            if (args.Length != 2)
             {
-                Console.WriteLine("USAGE:  CompareExchangeLong " +
-                    "/loops:<int> /addVal:<long>");
+                Console.WriteLine("USAGE:  CompareExchangeLong " + "/loops:<int> /addVal:<long>");
                 return -1;
             }
 
             // Get the args
-            int loops=100;
+            int loops = 100;
             long valueToAdd = 0;
-        
-            for(int i=0;i<args.Length;i++)
+
+            for (int i = 0; i < args.Length; i++)
             {
-                if(args[i].ToLower().StartsWith("/loops:"))
+                if (args[i].ToLower().StartsWith("/loops:"))
                 {
                     loops = Convert.ToInt32(args[i].Substring(7));
                     continue;
                 }
 
-                if(args[i].ToLower().StartsWith("/addval:"))
+                if (args[i].ToLower().StartsWith("/addval:"))
                 {
                     valueToAdd = Convert.ToInt64(args[i].Substring(8));
                     continue;
@@ -44,16 +43,16 @@ namespace CompareExchangeLong
                 threads[i] = new Thread(new ThreadStart(tsi.ThreadWorker));
                 threads[i].Start();
             }
-            
+
             tsi.Signal();
 
-            for(int i=0;i<threads.Length;i++)
+            for (int i = 0; i < threads.Length; i++)
                 threads[i].Join();
 
-            if(tsi.Total == tsi.Expected * threads.Length)
+            if (tsi.Total == tsi.Expected * threads.Length)
                 rValue = 100;
-            Console.WriteLine("Expected: "+ (tsi.Expected * threads.Length));
-            Console.WriteLine("Actual  : "+ tsi.Total);
+            Console.WriteLine("Expected: " + (tsi.Expected * threads.Length));
+            Console.WriteLine("Actual  : " + tsi.Total);
             Console.WriteLine("Test {0}", rValue == 100 ? "Passed" : "Failed");
             return rValue;
         }
@@ -62,10 +61,12 @@ namespace CompareExchangeLong
     public class ThreadSafe
     {
         ManualResetEvent signal;
-        private long totalValue = 0;        
+        private long totalValue = 0;
         private int numberOfIterations;
         private long valueToAdd;
-        public ThreadSafe(): this(100,Int64.MaxValue) { }
+
+        public ThreadSafe() : this(100, Int64.MaxValue) { }
+
         public ThreadSafe(int loops, long value)
         {
             signal = new ManualResetEvent(false);
@@ -81,16 +82,13 @@ namespace CompareExchangeLong
         public void ThreadWorker()
         {
             signal.Set();
-            for(int i=0;i<numberOfIterations;i++)
+            for (int i = 0; i < numberOfIterations; i++)
                 AddToTotal(valueToAdd);
         }
 
         public long Expected
         {
-            get
-            {
-                return (numberOfIterations * valueToAdd);
-            }
+            get { return (numberOfIterations * valueToAdd); }
         }
 
         public long Total
@@ -100,16 +98,18 @@ namespace CompareExchangeLong
 
         private long AddToTotal(long addend)
         {
-            long initialValue, computedValue;
+            long initialValue,
+                computedValue;
             signal.WaitOne();
             do
             {
                 initialValue = totalValue;
                 computedValue = initialValue + addend;
-            } 
-            while (initialValue != Interlocked.CompareExchange(ref totalValue, 
-                computedValue, initialValue));
+            } while (
+                initialValue
+                != Interlocked.CompareExchange(ref totalValue, computedValue, initialValue)
+            );
             return computedValue;
         }
-    }    
+    }
 }

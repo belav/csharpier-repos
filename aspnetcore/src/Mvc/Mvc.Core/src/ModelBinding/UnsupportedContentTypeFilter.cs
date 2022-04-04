@@ -57,7 +57,5 @@ public class UnsupportedContentTypeFilter : IActionFilter, IOrderedFilter
     }
 
     /// <inheritdoc />
-    public void OnActionExecuted(ActionExecutedContext context)
-    {
-    }
+    public void OnActionExecuted(ActionExecutedContext context) { }
 }

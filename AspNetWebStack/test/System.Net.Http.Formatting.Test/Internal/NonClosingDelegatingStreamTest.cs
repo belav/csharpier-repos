@@ -16,7 +16,9 @@ namespace System.Net.Http.Internal
         {
             // Arrange
             Mock<Stream> mockInnerStream = new Mock<Stream>() { CallBase = true };
-            MockNonClosingDelegatingStream mockStream = new MockNonClosingDelegatingStream(mockInnerStream.Object);
+            MockNonClosingDelegatingStream mockStream = new MockNonClosingDelegatingStream(
+                mockInnerStream.Object
+            );
 
             // Act
             mockStream.Dispose();
@@ -31,7 +33,9 @@ namespace System.Net.Http.Internal
         {
             // Arrange
             Mock<Stream> mockInnerStream = new Mock<Stream>() { CallBase = true };
-            MockNonClosingDelegatingStream mockStream = new MockNonClosingDelegatingStream(mockInnerStream.Object);
+            MockNonClosingDelegatingStream mockStream = new MockNonClosingDelegatingStream(
+                mockInnerStream.Object
+            );
 
             // Act
             mockStream.Close();

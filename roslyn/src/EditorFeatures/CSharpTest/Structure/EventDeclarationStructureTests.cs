@@ -13,14 +13,17 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure
 {
-    public class EventDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTests<EventDeclarationSyntax>
+    public class EventDeclarationStructureTests
+        : AbstractCSharpSyntaxNodeStructureTests<EventDeclarationSyntax>
     {
-        internal override AbstractSyntaxStructureProvider CreateProvider() => new EventDeclarationStructureProvider();
+        internal override AbstractSyntaxStructureProvider CreateProvider() =>
+            new EventDeclarationStructureProvider();
 
         [Fact, Trait(Traits.Feature, Traits.Features.Outlining)]
         public async Task TestEvent1()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     {|hint:$$event EventHandler E{|textspan:
@@ -30,14 +33,17 @@ class C
     }|}|}
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Outlining)]
         public async Task TestEvent2()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     {|hint:$$event EventHandler E{|textspan:
@@ -52,14 +58,17 @@ class C
     }
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Outlining)]
         public async Task TestEvent3()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     {|hint:$$event EventHandler E{|textspan:
@@ -75,14 +84,17 @@ class C
     }
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Outlining)]
         public async Task TestEvent4()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     {|hint:$$event EventHandler E{|textspan:
@@ -98,14 +110,17 @@ class C
     }
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Outlining)]
         public async Task TestEvent5()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     {|hint:$$event EventHandler E{|textspan:
@@ -121,14 +136,17 @@ class C
     }
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Outlining)]
         public async Task TestEventWithComments()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     {|span1:// Goo
@@ -140,9 +158,11 @@ class C
     }|}|}
 }";
 
-            await VerifyBlockSpansAsync(code,
+            await VerifyBlockSpansAsync(
+                code,
                 Region("span1", "// Goo ...", autoCollapse: true),
-                Region("textspan2", "hint2", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+                Region("textspan2", "hint2", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+            );
         }
     }
 }

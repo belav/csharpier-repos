@@ -9,11 +9,10 @@ namespace Microsoft.AspNetCore.Razor.Language;
 
 internal class DirectiveTokenDescriptorComparer : IEqualityComparer<DirectiveTokenDescriptor>
 {
-    public static readonly DirectiveTokenDescriptorComparer Default = new DirectiveTokenDescriptorComparer();
+    public static readonly DirectiveTokenDescriptorComparer Default =
+        new DirectiveTokenDescriptorComparer();
 
-    protected DirectiveTokenDescriptorComparer()
-    {
-    }
+    protected DirectiveTokenDescriptorComparer() { }
 
     public bool Equals(DirectiveTokenDescriptor descriptorX, DirectiveTokenDescriptor descriptorY)
     {
@@ -22,9 +21,9 @@ internal class DirectiveTokenDescriptorComparer : IEqualityComparer<DirectiveTok
             return true;
         }
 
-        return descriptorX != null &&
-            descriptorX.Kind == descriptorY.Kind &&
-            descriptorX.Optional == descriptorY.Optional;
+        return descriptorX != null
+            && descriptorX.Kind == descriptorY.Kind
+            && descriptorX.Optional == descriptorY.Optional;
     }
 
     public int GetHashCode(DirectiveTokenDescriptor descriptor)

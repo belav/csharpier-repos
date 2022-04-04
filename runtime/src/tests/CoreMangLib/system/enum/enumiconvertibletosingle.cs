@@ -28,7 +28,6 @@ public class EnumIConvertibleToSingle
     {
         bool retVal = true;
 
-
         TestLibrary.TestFramework.BeginScenario("PosTest1: Convert zero to single");
 
         try
@@ -38,7 +37,10 @@ public class EnumIConvertibleToSingle
             float f1 = i1.ToSingle(null);
             if (f1 != 0.0)
             {
-                TestLibrary.TestFramework.LogError("001", "The result is not the value as expected");
+                TestLibrary.TestFramework.LogError(
+                    "001",
+                    "The result is not the value as expected"
+                );
                 retVal = false;
             }
         }
@@ -64,7 +66,10 @@ public class EnumIConvertibleToSingle
             float f2 = i2.ToSingle(null);
             if (f2 != 3.0)
             {
-                TestLibrary.TestFramework.LogError("003", "The result is not the value as expected");
+                TestLibrary.TestFramework.LogError(
+                    "003",
+                    "The result is not the value as expected"
+                );
                 retVal = false;
             }
         }
@@ -90,7 +95,10 @@ public class EnumIConvertibleToSingle
             float f2 = i2.ToSingle(null);
             if (f2 != Int32.MaxValue)
             {
-                TestLibrary.TestFramework.LogError("005", "The result is not the value as expected");
+                TestLibrary.TestFramework.LogError(
+                    "005",
+                    "The result is not the value as expected"
+                );
                 retVal = false;
             }
         }
@@ -116,7 +124,10 @@ public class EnumIConvertibleToSingle
             float f2 = i2.ToSingle(null);
             if (f2 != Int64.MinValue)
             {
-                TestLibrary.TestFramework.LogError("007", "The result is not the value as expected");
+                TestLibrary.TestFramework.LogError(
+                    "007",
+                    "The result is not the value as expected"
+                );
                 retVal = false;
             }
         }
@@ -142,7 +153,10 @@ public class EnumIConvertibleToSingle
             float f2 = i2.ToSingle(null);
             if (f2 != -4)
             {
-                TestLibrary.TestFramework.LogError("009", "The result is not the value as expected");
+                TestLibrary.TestFramework.LogError(
+                    "009",
+                    "The result is not the value as expected"
+                );
                 retVal = false;
             }
         }
@@ -168,7 +182,10 @@ public class EnumIConvertibleToSingle
             float f2 = i2.ToSingle(null);
             if (f2 != 0)
             {
-                TestLibrary.TestFramework.LogError("009", "The result is not the value as expected");
+                TestLibrary.TestFramework.LogError(
+                    "009",
+                    "The result is not the value as expected"
+                );
                 retVal = false;
             }
         }
@@ -212,6 +229,7 @@ public class EnumIConvertibleToSingle
         white = 3,
         red,
     }
+
     enum e_test : long
     {
         itemA = -4,

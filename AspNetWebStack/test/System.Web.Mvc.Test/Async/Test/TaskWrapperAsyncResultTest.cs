@@ -23,7 +23,10 @@ namespace System.Web.Mvc.Async.Test
             mockTask.Setup(o => o.IsCompleted).Returns(true);
 
             // Act
-            TaskWrapperAsyncResult taskWrapper = new TaskWrapperAsyncResult(mockTask.Object, asyncState: 20);
+            TaskWrapperAsyncResult taskWrapper = new TaskWrapperAsyncResult(
+                mockTask.Object,
+                asyncState: 20
+            );
 
             // Assert
             Assert.Equal(20, taskWrapper.AsyncState);
@@ -36,10 +39,7 @@ namespace System.Web.Mvc.Async.Test
         // Assists in mocking a Task by passing a dummy action to the Task constructor [which defers execution]
         public class MyTask : Task, IAsyncResult
         {
-            public MyTask()
-                : base(() => { })
-            {
-            }
+            public MyTask() : base(() => { }) { }
 
             public new virtual object AsyncState
             {

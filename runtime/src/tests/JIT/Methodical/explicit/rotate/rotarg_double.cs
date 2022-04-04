@@ -13,7 +13,8 @@ namespace Rotate
         private class Node
         {
             public double m_weight;
-            public Node m_leftChild, m_rightChild;
+            public Node m_leftChild,
+                m_rightChild;
 
             public Node()
             {
@@ -44,7 +45,8 @@ namespace Rotate
             public void rotateTree(ref double leftWeight, ref double rightWeight)
             {
                 //Console.WriteLine("rotateTree(" + m_weight.ToString() + ") - begin");
-                Node newLeftChild = null, newRightChild = null;
+                Node newLeftChild = null,
+                    newRightChild = null;
                 int objCount = s_objCount;
                 if (m_leftChild != null)
                 {
@@ -64,16 +66,19 @@ namespace Rotate
                 }
                 m_leftChild = newLeftChild;
                 m_rightChild = newRightChild;
-                for (int I = 0; I < 1024; I++) { int[] u = new int[1024]; }
+                for (int I = 0; I < 1024; I++)
+                {
+                    int[] u = new int[1024];
+                }
                 GC.Collect();
                 if (m_rightChild != null)
                 {
-                    if (m_rightChild.m_leftChild != null &&
-                        m_rightChild.m_rightChild != null)
+                    if (m_rightChild.m_leftChild != null && m_rightChild.m_rightChild != null)
                     {
                         m_rightChild.rotateTree(
                             ref m_rightChild.m_leftChild.m_weight,
-                            ref m_rightChild.m_rightChild.m_weight);
+                            ref m_rightChild.m_rightChild.m_weight
+                        );
                     }
                     else
                     {
@@ -88,12 +93,12 @@ namespace Rotate
                 }
                 if (m_leftChild != null)
                 {
-                    if (m_leftChild.m_leftChild != null &&
-                        m_leftChild.m_rightChild != null)
+                    if (m_leftChild.m_leftChild != null && m_leftChild.m_rightChild != null)
                     {
                         m_leftChild.rotateTree(
                             ref m_leftChild.m_leftChild.m_weight,
-                            ref m_leftChild.m_rightChild.m_weight);
+                            ref m_leftChild.m_rightChild.m_weight
+                        );
                     }
                     else
                     {

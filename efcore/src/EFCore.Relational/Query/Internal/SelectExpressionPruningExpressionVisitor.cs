@@ -29,14 +29,16 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 case ShapedQueryExpression shapedQueryExpression:
                     return shapedQueryExpression.Update(
                         ((SelectExpression)shapedQueryExpression.QueryExpression).Prune(),
-                        Visit(shapedQueryExpression.ShaperExpression));
+                        Visit(shapedQueryExpression.ShaperExpression)
+                    );
 
                 case RelationalSplitCollectionShaperExpression relationalSplitCollectionShaperExpression:
                     return relationalSplitCollectionShaperExpression.Update(
                         relationalSplitCollectionShaperExpression.ParentIdentifier,
                         relationalSplitCollectionShaperExpression.ChildIdentifier,
                         relationalSplitCollectionShaperExpression.SelectExpression.Prune(),
-                        Visit(relationalSplitCollectionShaperExpression.InnerShaper));
+                        Visit(relationalSplitCollectionShaperExpression.InnerShaper)
+                    );
 
                 default:
                     return base.Visit(expression);

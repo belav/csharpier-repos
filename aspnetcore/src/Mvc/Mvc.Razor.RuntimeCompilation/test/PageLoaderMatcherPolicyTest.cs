@@ -24,7 +24,13 @@ public class PageLoaderMatcherPolicyTest
 
         var candidateSet = CreateCandidateSet(compiled);
 
-        var loader = Mock.Of<PageLoader>(p => p.LoadAsync(It.IsAny<PageActionDescriptor>(), It.IsAny<EndpointMetadataCollection>()) == Task.FromResult(compiled));
+        var loader = Mock.Of<PageLoader>(
+            p =>
+                p.LoadAsync(
+                    It.IsAny<PageActionDescriptor>(),
+                    It.IsAny<EndpointMetadataCollection>()
+                ) == Task.FromResult(compiled)
+        );
         var policy = new PageLoaderMatcherPolicy(loader);
 
         // Act
@@ -44,12 +50,20 @@ public class PageLoaderMatcherPolicyTest
         var tcs = new TaskCompletionSource<int>();
         var candidateSet = CreateCandidateSet(compiled);
 
-        var loadTask = Task.Run(async () =>
-        {
-            await tcs.Task;
-            return compiled;
-        });
-        var loader = Mock.Of<PageLoader>(p => p.LoadAsync(It.IsAny<PageActionDescriptor>(), It.IsAny<EndpointMetadataCollection>()) == loadTask);
+        var loadTask = Task.Run(
+            async () =>
+            {
+                await tcs.Task;
+                return compiled;
+            }
+        );
+        var loader = Mock.Of<PageLoader>(
+            p =>
+                p.LoadAsync(
+                    It.IsAny<PageActionDescriptor>(),
+                    It.IsAny<EndpointMetadataCollection>()
+                ) == loadTask
+        );
         var policy = new PageLoaderMatcherPolicy(loader);
 
         // Act
@@ -67,7 +81,8 @@ public class PageLoaderMatcherPolicyTest
         return new Endpoint(
             (context) => Task.CompletedTask,
             new EndpointMetadataCollection(metadata),
-            $"test: {action?.DisplayName}");
+            $"test: {action?.DisplayName}"
+        );
     }
 
     private static CandidateSet CreateCandidateSet(params ActionDescriptor[] actions)
@@ -81,7 +96,8 @@ public class PageLoaderMatcherPolicyTest
         var candidateSet = new CandidateSet(
             actions.Select(CreateEndpoint).ToArray(),
             values,
-            new int[actions.Length]);
+            new int[actions.Length]
+        );
         return candidateSet;
     }
 }

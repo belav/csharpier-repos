@@ -13,23 +13,23 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    // A node table is the fundamental structure we use to track changes through the incremental 
+    // A node table is the fundamental structure we use to track changes through the incremental
     // generator api. It can be thought of as a series of slots that take their input from an
     // upstream table and produce 0-or-more outputs. When viewed from a downstream table the outputs
     // are presented as a single unified list, with each output forming the new input to the downstream
     // table.
-    // 
+    //
     // Each slot has an associated state which is used to inform the operation that should be performed
     // to create or update the outputs. States generally flow through from upstream to downstream tables.
-    // For instance an Added state implies that the upstream table produced a value that was not seen 
-    // in the previous iteration, and the table should run whatever transform it tracks on the input 
+    // For instance an Added state implies that the upstream table produced a value that was not seen
+    // in the previous iteration, and the table should run whatever transform it tracks on the input
     // to produce the outputs. These new outputs will also have a state of Added. A cached input specifies
     // that the input has not changed, and thus the outputs will be the same as the previous run. Added,
     // and Modified inputs will always run a transform to produce new outputs. Cached and Removed
     // entries will always use the previous entries and perform no work.
-    // 
-    // It is important to track Removed entries while updating the downstream tables, as an upstream 
-    // remove can result in multiple downstream entries being removed. However, once all tables are up 
+    //
+    // It is important to track Removed entries while updating the downstream tables, as an upstream
+    // remove can result in multiple downstream entries being removed. However, once all tables are up
     // to date, the removed entries are no longer needed, and the remaining entries can be considered to
     // be cached. This process is called 'compaction' and results in the actual tables which are stored
     // between runs, as opposed to the 'live' tables that exist during an update.
@@ -38,11 +38,17 @@ namespace Microsoft.CodeAnalysis
     // all outputs are unconditionally added too. However when an input is modified, the outputs may still
     // be the same (for instance something changed elsewhere in a file that had no bearing on the produced
     // output). In this case, the state table checks the results against the previously produced values,
-    // and any that are found to be the same instead get a cached state, meaning no new downstream work 
-    // will be produced for them. Thus a modified input is the only slot that can have differing output 
+    // and any that are found to be the same instead get a cached state, meaning no new downstream work
+    // will be produced for them. Thus a modified input is the only slot that can have differing output
     // states.
 
-    internal enum EntryState { Added, Removed, Modified, Cached };
+    internal enum EntryState
+    {
+        Added,
+        Removed,
+        Modified,
+        Cached
+    };
 
     internal interface IStateTable
     {
@@ -55,10 +61,10 @@ namespace Microsoft.CodeAnalysis
     /// <typeparam name="T">The type of the items tracked by this table</typeparam>
     internal sealed class NodeStateTable<T> : IStateTable
     {
-        internal static NodeStateTable<T> Empty { get; } = new NodeStateTable<T>(ImmutableArray<TableEntry>.Empty, isCompacted: true);
+        internal static NodeStateTable<T> Empty { get; } =
+            new NodeStateTable<T>(ImmutableArray<TableEntry>.Empty, isCompacted: true);
 
         private readonly ImmutableArray<TableEntry> _states;
-
 
         private NodeStateTable(ImmutableArray<TableEntry> states, bool isCompacted)
         {
@@ -68,7 +74,10 @@ namespace Microsoft.CodeAnalysis
             IsCached = isCompacted;
         }
 
-        public int Count { get => _states.Length; }
+        public int Count
+        {
+            get => _states.Length;
+        }
 
         /// <summary>
         /// Indicates if every entry in this table has a state of <see cref="EntryState.Cached"/>
@@ -106,7 +115,10 @@ namespace Microsoft.CodeAnalysis
 
         public T Single()
         {
-            Debug.Assert((_states.Length == 1 || _states.Length == 2 && _states[0].IsRemoved) && this._states[^1].Count == 1);
+            Debug.Assert(
+                (_states.Length == 1 || _states.Length == 2 && _states[0].IsRemoved)
+                    && this._states[^1].Count == 1
+            );
             return this._states[^1].GetItem(0);
         }
 
@@ -186,7 +198,14 @@ namespace Microsoft.CodeAnalysis
                 }
 
                 Debug.Assert(_previous._states[_states.Count].Count == 1);
-                _states.Add(new TableEntry(value, comparer.Equals(_previous._states[_states.Count].GetItem(0), value) ? EntryState.Cached : EntryState.Modified));
+                _states.Add(
+                    new TableEntry(
+                        value,
+                        comparer.Equals(_previous._states[_states.Count].GetItem(0), value)
+                          ? EntryState.Cached
+                          : EntryState.Modified
+                    )
+                );
                 return true;
             }
 
@@ -222,7 +241,9 @@ namespace Microsoft.CodeAnalysis
                     var previous = previousEntry.GetItem(i);
                     var replacement = outputs[i];
 
-                    var entryState = comparer.Equals(previous, replacement) ? EntryState.Cached : EntryState.Modified;
+                    var entryState = comparer.Equals(previous, replacement)
+                      ? EntryState.Cached
+                      : EntryState.Modified;
                     modified.Add(replacement, entryState);
                 }
 
@@ -261,16 +282,23 @@ namespace Microsoft.CodeAnalysis
                 }
 
                 var hasNonCached = _states.Any(static s => !s.IsCached);
-                return new NodeStateTable<T>(_states.ToImmutableAndFree(), isCompacted: !hasNonCached);
+                return new NodeStateTable<T>(
+                    _states.ToImmutableAndFree(),
+                    isCompacted: !hasNonCached
+                );
             }
         }
 
         private readonly struct TableEntry
         {
-            private static readonly ImmutableArray<EntryState> s_allAddedEntries = ImmutableArray.Create(EntryState.Added);
-            private static readonly ImmutableArray<EntryState> s_allCachedEntries = ImmutableArray.Create(EntryState.Cached);
-            private static readonly ImmutableArray<EntryState> s_allModifiedEntries = ImmutableArray.Create(EntryState.Modified);
-            private static readonly ImmutableArray<EntryState> s_allRemovedEntries = ImmutableArray.Create(EntryState.Removed);
+            private static readonly ImmutableArray<EntryState> s_allAddedEntries =
+                ImmutableArray.Create(EntryState.Added);
+            private static readonly ImmutableArray<EntryState> s_allCachedEntries =
+                ImmutableArray.Create(EntryState.Cached);
+            private static readonly ImmutableArray<EntryState> s_allModifiedEntries =
+                ImmutableArray.Create(EntryState.Modified);
+            private static readonly ImmutableArray<EntryState> s_allRemovedEntries =
+                ImmutableArray.Create(EntryState.Removed);
 
             private readonly ImmutableArray<T> _items;
             private readonly T? _item;
@@ -281,8 +309,8 @@ namespace Microsoft.CodeAnalysis
             /// </summary>
             private readonly ImmutableArray<EntryState> _states;
 
-            public TableEntry(T item, EntryState state)
-                : this(item, default, GetSingleArray(state)) { }
+            public TableEntry(T item, EntryState state) : this(item, default, GetSingleArray(state))
+            { }
 
             public TableEntry(ImmutableArray<T> items, EntryState state)
                 : this(default, items, GetSingleArray(state)) { }
@@ -297,9 +325,12 @@ namespace Microsoft.CodeAnalysis
                 this._states = states;
             }
 
-            public bool IsCached => this._states == s_allCachedEntries || this._states.All(s => s == EntryState.Cached);
+            public bool IsCached =>
+                this._states == s_allCachedEntries || this._states.All(s => s == EntryState.Cached);
 
-            public bool IsRemoved => this._states == s_allRemovedEntries || this._states.All(s => s == EntryState.Removed);
+            public bool IsRemoved =>
+                this._states == s_allRemovedEntries
+                || this._states.All(s => s == EntryState.Removed);
 
             public int Count => IsSingle ? 1 : _items.Length;
 
@@ -309,9 +340,11 @@ namespace Microsoft.CodeAnalysis
                 return IsSingle ? _item : _items[index];
             }
 
-            public EntryState GetState(int index) => _states.Length == 1 ? _states[0] : _states[index];
+            public EntryState GetState(int index) =>
+                _states.Length == 1 ? _states[0] : _states[index];
 
-            public ImmutableArray<T> ToImmutableArray() => IsSingle ? ImmutableArray.Create(_item) : _items;
+            public ImmutableArray<T> ToImmutableArray() =>
+                IsSingle ? ImmutableArray.Create(_item) : _items;
 
             public TableEntry AsCached() => new(_item, _items, s_allCachedEntries);
 
@@ -320,14 +353,15 @@ namespace Microsoft.CodeAnalysis
             [MemberNotNullWhen(true, new[] { nameof(_item) })]
             private bool IsSingle => this._items.IsDefault;
 
-            private static ImmutableArray<EntryState> GetSingleArray(EntryState state) => state switch
-            {
-                EntryState.Added => s_allAddedEntries,
-                EntryState.Cached => s_allCachedEntries,
-                EntryState.Modified => s_allModifiedEntries,
-                EntryState.Removed => s_allRemovedEntries,
-                _ => throw ExceptionUtilities.Unreachable
-            };
+            private static ImmutableArray<EntryState> GetSingleArray(EntryState state) =>
+                state switch
+                {
+                    EntryState.Added => s_allAddedEntries,
+                    EntryState.Cached => s_allCachedEntries,
+                    EntryState.Modified => s_allModifiedEntries,
+                    EntryState.Removed => s_allRemovedEntries,
+                    _ => throw ExceptionUtilities.Unreachable
+                };
 
 #if DEBUG
             public override string ToString()
@@ -379,7 +413,10 @@ namespace Microsoft.CodeAnalysis
                     }
                     else if (_currentState != state)
                     {
-                        _states = ArrayBuilder<EntryState>.GetInstance(_items.Count - 1, _currentState.Value);
+                        _states = ArrayBuilder<EntryState>.GetInstance(
+                            _items.Count - 1,
+                            _currentState.Value
+                        );
                         _states.Add(state);
                     }
                 }
@@ -387,7 +424,11 @@ namespace Microsoft.CodeAnalysis
                 public TableEntry ToImmutableAndFree()
                 {
                     Debug.Assert(_currentState.HasValue, "Created a builder with no values?");
-                    return new TableEntry(item: default, _items.ToImmutableAndFree(), _states?.ToImmutableAndFree() ?? GetSingleArray(_currentState.Value));
+                    return new TableEntry(
+                        item: default,
+                        _items.ToImmutableAndFree(),
+                        _states?.ToImmutableAndFree() ?? GetSingleArray(_currentState.Value)
+                    );
                 }
             }
         }

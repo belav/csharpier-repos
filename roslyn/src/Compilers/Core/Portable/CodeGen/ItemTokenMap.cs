@@ -10,15 +10,18 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CodeGen
 {
     /// <summary>
-    /// Handles storage of items referenced via tokens in metadata. When items are stored 
+    /// Handles storage of items referenced via tokens in metadata. When items are stored
     /// they are uniquely "associated" with fake tokens, which are basically sequential numbers.
-    /// IL gen will use these fake tokens during codegen and later, when actual values 
+    /// IL gen will use these fake tokens during codegen and later, when actual values
     /// are known, the method bodies will be patched.
     /// To support these two scenarios we need two maps - Item-->uint, and uint-->Item. (The second is really just a list).
     /// </summary>
     internal sealed class ItemTokenMap<T> where T : class
     {
-        private readonly ConcurrentDictionary<T, uint> _itemToToken = new ConcurrentDictionary<T, uint>(ReferenceEqualityComparer.Instance);
+        private readonly ConcurrentDictionary<T, uint> _itemToToken = new ConcurrentDictionary<
+            T,
+            uint
+        >(ReferenceEqualityComparer.Instance);
         private readonly ArrayBuilder<T> _items = new ArrayBuilder<T>();
 
         public uint GetOrAddTokenFor(T item)

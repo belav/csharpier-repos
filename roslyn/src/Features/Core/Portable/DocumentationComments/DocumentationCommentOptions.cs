@@ -16,29 +16,41 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
         bool AutoXmlDocCommentGeneration,
         int TabSize,
         bool UseTabs,
-        string NewLine)
+        string NewLine
+    )
     {
         [ExportSolutionOptionProvider, Shared]
         internal sealed class Metadata : IOptionProvider
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public Metadata()
-            {
-            }
+            public Metadata() { }
 
-            public ImmutableArray<IOption> Options { get; } = ImmutableArray.Create<IOption>(
-                AutoXmlDocCommentGeneration);
+            public ImmutableArray<IOption> Options { get; } =
+                ImmutableArray.Create<IOption>(AutoXmlDocCommentGeneration);
 
-            public static readonly PerLanguageOption2<bool> AutoXmlDocCommentGeneration = new(nameof(DocumentationCommentOptions), nameof(AutoXmlDocCommentGeneration), defaultValue: true,
-                storageLocation: new RoamingProfileStorageLocation(language => language == LanguageNames.VisualBasic ? "TextEditor.%LANGUAGE%.Specific.AutoComment" : "TextEditor.%LANGUAGE%.Specific.Automatic XML Doc Comment Generation"));
+            public static readonly PerLanguageOption2<bool> AutoXmlDocCommentGeneration =
+                new(
+                    nameof(DocumentationCommentOptions),
+                    nameof(AutoXmlDocCommentGeneration),
+                    defaultValue: true,
+                    storageLocation: new RoamingProfileStorageLocation(
+                        language =>
+                            language == LanguageNames.VisualBasic
+                                ? "TextEditor.%LANGUAGE%.Specific.AutoComment"
+                                : "TextEditor.%LANGUAGE%.Specific.Automatic XML Doc Comment Generation"
+                    )
+                );
         }
 
-        public static DocumentationCommentOptions From(DocumentOptionSet options)
-          => new(
-              AutoXmlDocCommentGeneration: options.GetOption(Metadata.AutoXmlDocCommentGeneration),
-              TabSize: options.GetOption(FormattingOptions.TabSize),
-              UseTabs: options.GetOption(FormattingOptions.UseTabs),
-              NewLine: options.GetOption(FormattingOptions.NewLine));
+        public static DocumentationCommentOptions From(DocumentOptionSet options) =>
+            new(
+                AutoXmlDocCommentGeneration: options.GetOption(
+                    Metadata.AutoXmlDocCommentGeneration
+                ),
+                TabSize: options.GetOption(FormattingOptions.TabSize),
+                UseTabs: options.GetOption(FormattingOptions.UseTabs),
+                NewLine: options.GetOption(FormattingOptions.NewLine)
+            );
     }
 }

@@ -30,13 +30,11 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 {
     internal class EditorInProcess : InProcComponent
     {
-        public EditorInProcess(TestServices testServices)
-            : base(testServices)
-        {
-        }
+        public EditorInProcess(TestServices testServices) : base(testServices) { }
 
-        public async Task<IWpfTextView> GetActiveTextViewAsync(CancellationToken cancellationToken)
-            => (await GetActiveTextViewHostAsync(cancellationToken)).TextView;
+        public async Task<IWpfTextView> GetActiveTextViewAsync(
+            CancellationToken cancellationToken
+        ) => (await GetActiveTextViewHostAsync(cancellationToken)).TextView;
 
         public async Task SetTextAsync(string text, CancellationToken cancellationToken)
         {
@@ -84,12 +82,16 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             bool defaultOption;
             if (IsDebuggerTextView(textView))
             {
-                optionKey = new EditorOptionKey<bool>(PredefinedCompletionNames.SuggestionModeInDebuggerCompletionOptionName);
+                optionKey = new EditorOptionKey<bool>(
+                    PredefinedCompletionNames.SuggestionModeInDebuggerCompletionOptionName
+                );
                 defaultOption = true;
             }
             else
             {
-                optionKey = new EditorOptionKey<bool>(PredefinedCompletionNames.SuggestionModeInCompletionOptionName);
+                optionKey = new EditorOptionKey<bool>(
+                    PredefinedCompletionNames.SuggestionModeInCompletionOptionName
+                );
                 defaultOption = false;
             }
 
@@ -100,20 +102,33 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 
             return options.GetOptionValue(optionKey);
 
-            static bool IsDebuggerTextView(IWpfTextView textView)
-                => textView.Roles.Contains("DEBUGVIEW");
+            static bool IsDebuggerTextView(IWpfTextView textView) =>
+                textView.Roles.Contains("DEBUGVIEW");
         }
 
         public async Task SetUseSuggestionModeAsync(bool value, CancellationToken cancellationToken)
         {
             if (await IsUseSuggestionModeOnAsync(cancellationToken) != value)
             {
-                var dispatcher = await GetRequiredGlobalServiceAsync<SUIHostCommandDispatcher, IOleCommandTarget>(cancellationToken);
-                ErrorHandler.ThrowOnFailure(dispatcher.Exec(typeof(VSConstants.VSStd2KCmdID).GUID, (uint)VSConstants.VSStd2KCmdID.ToggleConsumeFirstCompletionMode, (uint)OLECMDEXECOPT.OLECMDEXECOPT_DODEFAULT, IntPtr.Zero, IntPtr.Zero));
+                var dispatcher = await GetRequiredGlobalServiceAsync<
+                    SUIHostCommandDispatcher,
+                    IOleCommandTarget
+                >(cancellationToken);
+                ErrorHandler.ThrowOnFailure(
+                    dispatcher.Exec(
+                        typeof(VSConstants.VSStd2KCmdID).GUID,
+                        (uint)VSConstants.VSStd2KCmdID.ToggleConsumeFirstCompletionMode,
+                        (uint)OLECMDEXECOPT.OLECMDEXECOPT_DODEFAULT,
+                        IntPtr.Zero,
+                        IntPtr.Zero
+                    )
+                );
 
                 if (await IsUseSuggestionModeOnAsync(cancellationToken) != value)
                 {
-                    throw new InvalidOperationException($"{WellKnownCommandNames.Edit_ToggleCompletionMode} did not leave the editor in the expected state.");
+                    throw new InvalidOperationException(
+                        $"{WellKnownCommandNames.Edit_ToggleCompletionMode} did not leave the editor in the expected state."
+                    );
                 }
             }
 
@@ -158,7 +173,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var shell = await GetRequiredGlobalServiceAsync<SVsUIShell, IVsUIShell>(cancellationToken);
+            var shell = await GetRequiredGlobalServiceAsync<SVsUIShell, IVsUIShell>(
+                cancellationToken
+            );
             var cmdGroup = typeof(VSConstants.VSStd14CmdID).GUID;
             var cmdExecOpt = OLECMDEXECOPT.OLECMDEXECOPT_DONTPROMPTUSER;
 
@@ -173,11 +190,20 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 
         public async Task InvokeCodeActionListAsync(CancellationToken cancellationToken)
         {
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(FeatureAttribute.SolutionCrawler, cancellationToken);
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(FeatureAttribute.DiagnosticService, cancellationToken);
+            await TestServices.Workspace.WaitForAsyncOperationsAsync(
+                FeatureAttribute.SolutionCrawler,
+                cancellationToken
+            );
+            await TestServices.Workspace.WaitForAsyncOperationsAsync(
+                FeatureAttribute.DiagnosticService,
+                cancellationToken
+            );
 
             await ShowLightBulbAsync(cancellationToken);
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(FeatureAttribute.LightBulb, cancellationToken);
+            await TestServices.Workspace.WaitForAsyncOperationsAsync(
+                FeatureAttribute.LightBulb,
+                cancellationToken
+            );
         }
 
         public async Task<bool> IsLightBulbSessionExpandedAsync(CancellationToken cancellationToken)
@@ -208,25 +234,44 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             var view = await GetActiveTextViewAsync(cancellationToken);
 
             var broker = await GetComponentModelServiceAsync<ILightBulbBroker>(cancellationToken);
-            return (await GetLightBulbActionsAsync(broker, view, cancellationToken)).Select(a => a.DisplayText).ToArray();
+            return (await GetLightBulbActionsAsync(broker, view, cancellationToken))
+                .Select(a => a.DisplayText)
+                .ToArray();
         }
 
-        public async Task<bool> ApplyLightBulbActionAsync(string actionName, FixAllScope? fixAllScope, bool blockUntilComplete, CancellationToken cancellationToken)
+        public async Task<bool> ApplyLightBulbActionAsync(
+            string actionName,
+            FixAllScope? fixAllScope,
+            bool blockUntilComplete,
+            CancellationToken cancellationToken
+        )
         {
-            var lightBulbAction = GetLightBulbApplicationAction(actionName, fixAllScope, blockUntilComplete);
+            var lightBulbAction = GetLightBulbApplicationAction(
+                actionName,
+                fixAllScope,
+                blockUntilComplete
+            );
 
-            var listenerProvider = await GetComponentModelServiceAsync<IAsynchronousOperationListenerProvider>(cancellationToken);
+            var listenerProvider =
+                await GetComponentModelServiceAsync<IAsynchronousOperationListenerProvider>(
+                    cancellationToken
+                );
             var listener = listenerProvider.GetListener(FeatureAttribute.LightBulb);
 
-            var task = JoinableTaskFactory.RunAsync(async () =>
-            {
-                using var _ = listener.BeginAsyncOperation(nameof(ApplyLightBulbActionAsync));
+            var task = JoinableTaskFactory.RunAsync(
+                async () =>
+                {
+                    using var _ = listener.BeginAsyncOperation(nameof(ApplyLightBulbActionAsync));
 
-                await JoinableTaskFactory.SwitchToMainThreadAsync(alwaysYield: true, cancellationToken);
+                    await JoinableTaskFactory.SwitchToMainThreadAsync(
+                        alwaysYield: true,
+                        cancellationToken
+                    );
 
-                var activeTextView = await GetActiveTextViewAsync(cancellationToken);
-                return await lightBulbAction(activeTextView, cancellationToken);
-            });
+                    var activeTextView = await GetActiveTextViewAsync(cancellationToken);
+                    return await lightBulbAction(activeTextView, cancellationToken);
+                }
+            );
 
             if (blockUntilComplete)
             {
@@ -238,15 +283,23 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             return true;
         }
 
-        private Func<IWpfTextView, CancellationToken, Task<bool>> GetLightBulbApplicationAction(string actionName, FixAllScope? fixAllScope, bool willBlockUntilComplete)
+        private Func<IWpfTextView, CancellationToken, Task<bool>> GetLightBulbApplicationAction(
+            string actionName,
+            FixAllScope? fixAllScope,
+            bool willBlockUntilComplete
+        )
         {
             return async (view, cancellationToken) =>
             {
                 await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-                var broker = await GetComponentModelServiceAsync<ILightBulbBroker>(cancellationToken);
+                var broker = await GetComponentModelServiceAsync<ILightBulbBroker>(
+                    cancellationToken
+                );
 
-                var actions = (await GetLightBulbActionsAsync(broker, view, cancellationToken)).ToArray();
+                var actions = (
+                    await GetLightBulbActionsAsync(broker, view, cancellationToken)
+                ).ToArray();
                 var action = actions.FirstOrDefault(a => a.DisplayText == actionName);
 
                 if (action == null)
@@ -259,28 +312,39 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 
                     var bufferType = view.TextBuffer.ContentType.DisplayName;
                     throw new InvalidOperationException(
-                        $"ISuggestedAction {actionName} not found.  Buffer content type={bufferType}\r\nActions: {sb}");
+                        $"ISuggestedAction {actionName} not found.  Buffer content type={bufferType}\r\nActions: {sb}"
+                    );
                 }
 
                 if (fixAllScope != null)
                 {
                     if (!action.HasActionSets)
                     {
-                        throw new InvalidOperationException($"Suggested action '{action.DisplayText}' does not support FixAllOccurrences.");
+                        throw new InvalidOperationException(
+                            $"Suggested action '{action.DisplayText}' does not support FixAllOccurrences."
+                        );
                     }
 
                     var actionSetsForAction = await action.GetActionSetsAsync(cancellationToken);
-                    var fixAllAction = await GetFixAllSuggestedActionAsync(actionSetsForAction, fixAllScope.Value, cancellationToken);
+                    var fixAllAction = await GetFixAllSuggestedActionAsync(
+                        actionSetsForAction,
+                        fixAllScope.Value,
+                        cancellationToken
+                    );
                     if (fixAllAction == null)
                     {
-                        throw new InvalidOperationException($"Unable to find FixAll in {fixAllScope} code fix for suggested action '{action.DisplayText}'.");
+                        throw new InvalidOperationException(
+                            $"Unable to find FixAll in {fixAllScope} code fix for suggested action '{action.DisplayText}'."
+                        );
                     }
 
                     action = fixAllAction;
 
-                    if (willBlockUntilComplete
+                    if (
+                        willBlockUntilComplete
                         && action is FixAllSuggestedAction fixAllSuggestedAction
-                        && fixAllSuggestedAction.CodeAction is FixSomeCodeAction fixSomeCodeAction)
+                        && fixAllSuggestedAction.CodeAction is FixSomeCodeAction fixSomeCodeAction
+                    )
                     {
                         // Ensure the preview changes dialog will not be shown. Since the operation 'willBlockUntilComplete',
                         // the caller would not be able to interact with the preview changes dialog, and the tests would
@@ -301,8 +365,13 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
                     return true;
 
                 broker.DismissSession(view);
-                var threadOperationExecutor = await GetComponentModelServiceAsync<IUIThreadOperationExecutor>(cancellationToken);
-                var guardedOperations = await GetComponentModelServiceAsync<IGuardedOperations2>(cancellationToken);
+                var threadOperationExecutor =
+                    await GetComponentModelServiceAsync<IUIThreadOperationExecutor>(
+                        cancellationToken
+                    );
+                var guardedOperations = await GetComponentModelServiceAsync<IGuardedOperations2>(
+                    cancellationToken
+                );
                 threadOperationExecutor.Execute(
                     title: "Execute Suggested Action",
                     defaultDescription: Accelerator.StripAccelerators(action.DisplayText, '_'),
@@ -313,35 +382,52 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
                         guardedOperations.CallExtensionPoint(
                             errorSource: suggestedAction,
                             call: () => suggestedAction.Invoke(context),
-                            exceptionGuardFilter: e => e is not OperationCanceledException);
-                    });
+                            exceptionGuardFilter: e => e is not OperationCanceledException
+                        );
+                    }
+                );
 
                 return true;
             };
         }
 
-        private async Task<IEnumerable<ISuggestedAction>> GetLightBulbActionsAsync(ILightBulbBroker broker, IWpfTextView view, CancellationToken cancellationToken)
+        private async Task<IEnumerable<ISuggestedAction>> GetLightBulbActionsAsync(
+            ILightBulbBroker broker,
+            IWpfTextView view,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             if (!broker.IsLightBulbSessionActive(view))
             {
                 var bufferType = view.TextBuffer.ContentType.DisplayName;
-                throw new Exception($"No light bulb session in View!  Buffer content type={bufferType}");
+                throw new Exception(
+                    $"No light bulb session in View!  Buffer content type={bufferType}"
+                );
             }
 
             var activeSession = broker.GetSession(view);
             if (activeSession == null)
             {
                 var bufferType = view.TextBuffer.ContentType.DisplayName;
-                throw new InvalidOperationException($"No expanded light bulb session found after View.ShowSmartTag.  Buffer content type={bufferType}");
+                throw new InvalidOperationException(
+                    $"No expanded light bulb session found after View.ShowSmartTag.  Buffer content type={bufferType}"
+                );
             }
 
-            var actionSets = await LightBulbHelper.WaitForItemsAsync(broker, view, cancellationToken);
+            var actionSets = await LightBulbHelper.WaitForItemsAsync(
+                broker,
+                view,
+                cancellationToken
+            );
             return await SelectActionsAsync(actionSets, cancellationToken);
         }
 
-        private async Task<IEnumerable<ISuggestedAction>> SelectActionsAsync(IEnumerable<SuggestedActionSet> actionSets, CancellationToken cancellationToken)
+        private async Task<IEnumerable<ISuggestedAction>> SelectActionsAsync(
+            IEnumerable<SuggestedActionSet> actionSets,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -356,8 +442,13 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
                         foreach (var action in actionSet.Actions)
                         {
                             actions.Add(action);
-                            var nestedActionSets = await action.GetActionSetsAsync(cancellationToken);
-                            var nestedActions = await SelectActionsAsync(nestedActionSets, cancellationToken);
+                            var nestedActionSets = await action.GetActionSetsAsync(
+                                cancellationToken
+                            );
+                            var nestedActions = await SelectActionsAsync(
+                                nestedActionSets,
+                                cancellationToken
+                            );
                             actions.AddRange(nestedActions);
                         }
                     }
@@ -367,7 +458,11 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             return actions;
         }
 
-        private async Task<FixAllSuggestedAction?> GetFixAllSuggestedActionAsync(IEnumerable<SuggestedActionSet> actionSets, FixAllScope fixAllScope, CancellationToken cancellationToken)
+        private async Task<FixAllSuggestedAction?> GetFixAllSuggestedActionAsync(
+            IEnumerable<SuggestedActionSet> actionSets,
+            FixAllScope fixAllScope,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -377,7 +472,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
                 {
                     if (action is FixAllSuggestedAction fixAllSuggestedAction)
                     {
-                        var fixAllCodeAction = fixAllSuggestedAction.CodeAction as FixSomeCodeAction;
+                        var fixAllCodeAction =
+                            fixAllSuggestedAction.CodeAction as FixSomeCodeAction;
                         if (fixAllCodeAction?.FixAllState?.Scope == fixAllScope)
                         {
                             return fixAllSuggestedAction;
@@ -387,7 +483,11 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
                     if (action.HasActionSets)
                     {
                         var nestedActionSets = await action.GetActionSetsAsync(cancellationToken);
-                        var fixAllCodeAction = await GetFixAllSuggestedActionAsync(nestedActionSets, fixAllScope, cancellationToken);
+                        var fixAllCodeAction = await GetFixAllSuggestedActionAsync(
+                            nestedActionSets,
+                            fixAllScope,
+                            cancellationToken
+                        );
                         if (fixAllCodeAction != null)
                         {
                             return fixAllCodeAction;
@@ -399,8 +499,19 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             return null;
         }
 
-        public Task PlaceCaretAsync(string marker, int charsOffset, CancellationToken cancellationToken)
-            => PlaceCaretAsync(marker, charsOffset, occurrence: 0, extendSelection: false, selectBlock: false, cancellationToken);
+        public Task PlaceCaretAsync(
+            string marker,
+            int charsOffset,
+            CancellationToken cancellationToken
+        ) =>
+            PlaceCaretAsync(
+                marker,
+                charsOffset,
+                occurrence: 0,
+                extendSelection: false,
+                selectBlock: false,
+                cancellationToken
+            );
 
         public async Task PlaceCaretAsync(
             string marker,
@@ -408,7 +519,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             int occurrence,
             bool extendSelection,
             bool selectBlock,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -422,7 +534,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             dte.Find.Action = EnvDTE.vsFindAction.vsFindActionFind;
 
             var originalPosition = await GetCaretPositionAsync(cancellationToken);
-            view.Caret.MoveTo(new SnapshotPoint(view.GetBufferContainingCaret()!.CurrentSnapshot, 0));
+            view.Caret.MoveTo(
+                new SnapshotPoint(view.GetBufferContainingCaret()!.CurrentSnapshot, 0)
+            );
 
             if (occurrence > 0)
             {
@@ -434,7 +548,14 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 
                 if (result != EnvDTE.vsFindResult.vsFindResultFound)
                 {
-                    throw new Exception("Occurrence " + occurrence + " of marker '" + marker + "' not found in text: " + view.TextSnapshot.GetText());
+                    throw new Exception(
+                        "Occurrence "
+                            + occurrence
+                            + " of marker '"
+                            + marker
+                            + "' not found in text: "
+                            + view.TextSnapshot.GetText()
+                    );
                 }
             }
             else
@@ -442,7 +563,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
                 var result = dte.Find.Execute();
                 if (result != EnvDTE.vsFindResult.vsFindResultFound)
                 {
-                    throw new Exception("Marker '" + marker + "' not found in text: " + view.TextSnapshot.GetText());
+                    throw new Exception(
+                        "Marker '" + marker + "' not found in text: " + view.TextSnapshot.GetText()
+                    );
                 }
             }
 
@@ -459,7 +582,12 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             if (charsOffset < 0)
             {
                 // On the first negative charsOffset, move to anchor-point position, as if the user hit the LEFT key
-                view.Caret.MoveTo(new SnapshotPoint(view.TextSnapshot, view.Selection.AnchorPoint.Position.Position));
+                view.Caret.MoveTo(
+                    new SnapshotPoint(
+                        view.TextSnapshot,
+                        view.Selection.AnchorPoint.Position.Position
+                    )
+                );
 
                 for (var i = 0; i < -charsOffset - 1; i++)
                 {
@@ -472,8 +600,13 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             if (extendSelection)
             {
                 var newPosition = view.Selection.ActivePoint.Position.Position;
-                view.Selection.Select(new VirtualSnapshotPoint(view.TextSnapshot, originalPosition), new VirtualSnapshotPoint(view.TextSnapshot, newPosition));
-                view.Selection.Mode = selectBlock ? TextSelectionMode.Box : TextSelectionMode.Stream;
+                view.Selection.Select(
+                    new VirtualSnapshotPoint(view.TextSnapshot, originalPosition),
+                    new VirtualSnapshotPoint(view.TextSnapshot, newPosition)
+                );
+                view.Selection.Mode = selectBlock
+                    ? TextSelectionMode.Box
+                    : TextSelectionMode.Stream;
             }
         }
 
@@ -492,10 +625,15 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 
         private async Task WaitForCompletionSetAsync(CancellationToken cancellationToken)
         {
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(FeatureAttribute.CompletionSet, cancellationToken);
+            await TestServices.Workspace.WaitForAsyncOperationsAsync(
+                FeatureAttribute.CompletionSet,
+                cancellationToken
+            );
         }
 
-        private async Task<IWpfTextViewHost> GetActiveTextViewHostAsync(CancellationToken cancellationToken)
+        private async Task<IWpfTextViewHost> GetActiveTextViewHostAsync(
+            CancellationToken cancellationToken
+        )
         {
             // The active text view might not have finished composing yet, waiting for the application to 'idle'
             // means that it is done pumping messages (including WM_PAINT) and the window should return the correct text
@@ -506,18 +644,30 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 
             var activeVsTextView = (IVsUserData)await GetActiveVsTextViewAsync(cancellationToken);
 
-            ErrorHandler.ThrowOnFailure(activeVsTextView.GetData(DefGuidList.guidIWpfTextViewHost, out var wpfTextViewHost));
+            ErrorHandler.ThrowOnFailure(
+                activeVsTextView.GetData(DefGuidList.guidIWpfTextViewHost, out var wpfTextViewHost)
+            );
 
             return (IWpfTextViewHost)wpfTextViewHost;
         }
 
-        private async Task<IVsTextView> GetActiveVsTextViewAsync(CancellationToken cancellationToken)
+        private async Task<IVsTextView> GetActiveVsTextViewAsync(
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var vsTextManager = await GetRequiredGlobalServiceAsync<SVsTextManager, IVsTextManager>(cancellationToken);
+            var vsTextManager = await GetRequiredGlobalServiceAsync<SVsTextManager, IVsTextManager>(
+                cancellationToken
+            );
 
-            ErrorHandler.ThrowOnFailure(vsTextManager.GetActiveView(fMustHaveFocus: 1, pBuffer: null, ppView: out var vsTextView));
+            ErrorHandler.ThrowOnFailure(
+                vsTextManager.GetActiveView(
+                    fMustHaveFocus: 1,
+                    pBuffer: null,
+                    ppView: out var vsTextView
+                )
+            );
 
             return vsTextView;
         }

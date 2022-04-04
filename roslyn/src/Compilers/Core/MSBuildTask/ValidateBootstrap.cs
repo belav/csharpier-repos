@@ -27,8 +27,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks
     /// </summary>
     public sealed partial class ValidateBootstrap : Task
     {
-        private static readonly ConcurrentDictionary<AssemblyName, byte> s_failedLoadSet = new ConcurrentDictionary<AssemblyName, byte>();
-        private static readonly ConcurrentQueue<(ResponseType ResponseType, string? OutputAssembly)> s_failedQueue = new ConcurrentQueue<(ResponseType ResponseType, string? OutputAssembly)>();
+        private static readonly ConcurrentDictionary<AssemblyName, byte> s_failedLoadSet =
+            new ConcurrentDictionary<AssemblyName, byte>();
+        private static readonly ConcurrentQueue<(ResponseType ResponseType, string? OutputAssembly)> s_failedQueue =
+            new ConcurrentQueue<(ResponseType ResponseType, string? OutputAssembly)>();
 
         private string? _tasksAssemblyFullPath;
 
@@ -39,16 +41,15 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             set { _tasksAssemblyFullPath = NormalizePath(Path.GetFullPath(value!)); }
         }
 
-        public ValidateBootstrap()
-        {
-
-        }
+        public ValidateBootstrap() { }
 
         public override bool Execute()
         {
             if (TasksAssemblyFullPath is null)
             {
-                Log.LogError($"{nameof(ValidateBootstrap)} task must have a {nameof(TasksAssemblyFullPath)} parameter.");
+                Log.LogError(
+                    $"{nameof(ValidateBootstrap)} task must have a {nameof(TasksAssemblyFullPath)} parameter."
+                );
                 return false;
             }
 
@@ -56,7 +57,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             var fullPath = typeof(ValidateBootstrap).Assembly.Location;
             if (!StringComparer.OrdinalIgnoreCase.Equals(TasksAssemblyFullPath, fullPath))
             {
-                Log.LogError($"Bootstrap assembly {Path.GetFileName(fullPath)} incorrectly loaded from {fullPath} instead of {TasksAssemblyFullPath}");
+                Log.LogError(
+                    $"Bootstrap assembly {Path.GetFileName(fullPath)} incorrectly loaded from {fullPath} instead of {TasksAssemblyFullPath}"
+                );
                 allGood = false;
             }
 
@@ -71,11 +74,11 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             }
 
             // This represents the maximum number of failed build attempts on the server before we will declare
-            // that the overall build itself failed. 
+            // that the overall build itself failed.
             //
             // The goal is to keep this at zero. The errors here are a mix of repository construction errors (having
             // incompatible NuGet analyzers) and product errors (having flaky behavior in the server). Any time this
-            // number goes above zero it means we are dropping connections during developer inner loop builds and 
+            // number goes above zero it means we are dropping connections during developer inner loop builds and
             // hence measurably slowing down our productivity.
             //
             // When we find issues in the server or our infra we can temporarily raise this number while it is
@@ -92,7 +95,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                         break;
                     case ResponseType.MismatchedVersion:
                     case ResponseType.IncorrectHash:
-                        Log.LogError($"Critical error {tuple.ResponseType} building {tuple.OutputAssembly}");
+                        Log.LogError(
+                            $"Critical error {tuple.ResponseType} building {tuple.OutputAssembly}"
+                        );
                         allGood = false;
                         break;
                     case ResponseType.Rejected:
@@ -134,7 +139,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             return path;
         }
 
-        private string? GetDirectory(Assembly assembly) => Path.GetDirectoryName(Utilities.TryGetAssemblyPath(assembly));
+        private string? GetDirectory(Assembly assembly) =>
+            Path.GetDirectoryName(Utilities.TryGetAssemblyPath(assembly));
 
         internal static void AddFailedLoad(AssemblyName name)
         {

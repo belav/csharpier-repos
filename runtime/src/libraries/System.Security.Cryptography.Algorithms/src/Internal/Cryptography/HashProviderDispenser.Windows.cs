@@ -34,23 +34,33 @@ namespace Internal.Cryptography
                 string hashAlgorithmId,
                 ReadOnlySpan<byte> key,
                 ReadOnlySpan<byte> source,
-                Span<byte> destination)
+                Span<byte> destination
+            )
             {
                 int hashSize; // in bytes
 
                 // Use a pseudo-handle if available.
                 if (Interop.BCrypt.PseudoHandlesSupported)
                 {
-                    HashDataUsingPseudoHandle(hashAlgorithmId, source, key, isHmac: true, destination, out hashSize);
+                    HashDataUsingPseudoHandle(
+                        hashAlgorithmId,
+                        source,
+                        key,
+                        isHmac: true,
+                        destination,
+                        out hashSize
+                    );
                     return hashSize;
                 }
                 else
                 {
                     // Pseudo-handle not available. Fall back to a shared handle with no using or dispose.
-                    SafeBCryptAlgorithmHandle cachedAlgorithmHandle = BCryptAlgorithmCache.GetCachedBCryptAlgorithmHandle(
-                        hashAlgorithmId,
-                        BCryptOpenAlgorithmProviderFlags.BCRYPT_ALG_HANDLE_HMAC_FLAG,
-                        out hashSize);
+                    SafeBCryptAlgorithmHandle cachedAlgorithmHandle =
+                        BCryptAlgorithmCache.GetCachedBCryptAlgorithmHandle(
+                            hashAlgorithmId,
+                            BCryptOpenAlgorithmProviderFlags.BCRYPT_ALG_HANDLE_HMAC_FLAG,
+                            out hashSize
+                        );
 
                     if (destination.Length < hashSize)
                     {
@@ -64,23 +74,36 @@ namespace Internal.Cryptography
                 }
             }
 
-            public static unsafe int HashData(string hashAlgorithmId, ReadOnlySpan<byte> source, Span<byte> destination)
+            public static unsafe int HashData(
+                string hashAlgorithmId,
+                ReadOnlySpan<byte> source,
+                Span<byte> destination
+            )
             {
                 int hashSize; // in bytes
 
                 // Use a pseudo-handle if available.
                 if (Interop.BCrypt.PseudoHandlesSupported)
                 {
-                    HashDataUsingPseudoHandle(hashAlgorithmId, source, key: default, isHmac : false, destination, out hashSize);
+                    HashDataUsingPseudoHandle(
+                        hashAlgorithmId,
+                        source,
+                        key: default,
+                        isHmac: false,
+                        destination,
+                        out hashSize
+                    );
                     return hashSize;
                 }
                 else
                 {
                     // Pseudo-handle not available. Fall back to a shared handle with no using or dispose.
-                    SafeBCryptAlgorithmHandle cachedAlgorithmHandle = BCryptAlgorithmCache.GetCachedBCryptAlgorithmHandle(
-                        hashAlgorithmId,
-                        BCryptOpenAlgorithmProviderFlags.None,
-                        out hashSize);
+                    SafeBCryptAlgorithmHandle cachedAlgorithmHandle =
+                        BCryptAlgorithmCache.GetCachedBCryptAlgorithmHandle(
+                            hashAlgorithmId,
+                            BCryptOpenAlgorithmProviderFlags.None,
+                            out hashSize
+                        );
 
                     if (destination.Length < hashSize)
                     {
@@ -88,7 +111,13 @@ namespace Internal.Cryptography
                         throw new CryptographicException();
                     }
 
-                    HashUpdateAndFinish(cachedAlgorithmHandle, hashSize, key: default, source, destination);
+                    HashUpdateAndFinish(
+                        cachedAlgorithmHandle,
+                        hashSize,
+                        key: default,
+                        source,
+                        destination
+                    );
 
                     return hashSize;
                 }
@@ -100,7 +129,8 @@ namespace Internal.Cryptography
                 ReadOnlySpan<byte> key,
                 bool isHmac,
                 Span<byte> destination,
-                out int hashSize)
+                out int hashSize
+            )
             {
                 hashSize = default;
 
@@ -111,37 +141,37 @@ namespace Internal.Cryptography
 
                 if (hashAlgorithmId == HashAlgorithmNames.MD5)
                 {
-                    algHandle = isHmac ?
-                        Interop.BCrypt.BCryptAlgPseudoHandle.BCRYPT_HMAC_MD5_ALG_HANDLE :
-                        Interop.BCrypt.BCryptAlgPseudoHandle.BCRYPT_MD5_ALG_HANDLE;
+                    algHandle = isHmac
+                        ? Interop.BCrypt.BCryptAlgPseudoHandle.BCRYPT_HMAC_MD5_ALG_HANDLE
+                        : Interop.BCrypt.BCryptAlgPseudoHandle.BCRYPT_MD5_ALG_HANDLE;
                     digestSizeInBytes = 128 / 8;
                 }
                 else if (hashAlgorithmId == HashAlgorithmNames.SHA1)
                 {
-                    algHandle = isHmac ?
-                        Interop.BCrypt.BCryptAlgPseudoHandle.BCRYPT_HMAC_SHA1_ALG_HANDLE :
-                        Interop.BCrypt.BCryptAlgPseudoHandle.BCRYPT_SHA1_ALG_HANDLE;
+                    algHandle = isHmac
+                        ? Interop.BCrypt.BCryptAlgPseudoHandle.BCRYPT_HMAC_SHA1_ALG_HANDLE
+                        : Interop.BCrypt.BCryptAlgPseudoHandle.BCRYPT_SHA1_ALG_HANDLE;
                     digestSizeInBytes = 160 / 8;
                 }
                 else if (hashAlgorithmId == HashAlgorithmNames.SHA256)
                 {
-                    algHandle = isHmac ?
-                        Interop.BCrypt.BCryptAlgPseudoHandle.BCRYPT_HMAC_SHA256_ALG_HANDLE :
-                        Interop.BCrypt.BCryptAlgPseudoHandle.BCRYPT_SHA256_ALG_HANDLE;
+                    algHandle = isHmac
+                        ? Interop.BCrypt.BCryptAlgPseudoHandle.BCRYPT_HMAC_SHA256_ALG_HANDLE
+                        : Interop.BCrypt.BCryptAlgPseudoHandle.BCRYPT_SHA256_ALG_HANDLE;
                     digestSizeInBytes = 256 / 8;
                 }
                 else if (hashAlgorithmId == HashAlgorithmNames.SHA384)
                 {
-                    algHandle = isHmac ?
-                        Interop.BCrypt.BCryptAlgPseudoHandle.BCRYPT_HMAC_SHA384_ALG_HANDLE :
-                        Interop.BCrypt.BCryptAlgPseudoHandle.BCRYPT_SHA384_ALG_HANDLE;
+                    algHandle = isHmac
+                        ? Interop.BCrypt.BCryptAlgPseudoHandle.BCRYPT_HMAC_SHA384_ALG_HANDLE
+                        : Interop.BCrypt.BCryptAlgPseudoHandle.BCRYPT_SHA384_ALG_HANDLE;
                     digestSizeInBytes = 384 / 8;
                 }
                 else if (hashAlgorithmId == HashAlgorithmNames.SHA512)
                 {
-                    algHandle = isHmac ?
-                        Interop.BCrypt.BCryptAlgPseudoHandle.BCRYPT_HMAC_SHA512_ALG_HANDLE :
-                        Interop.BCrypt.BCryptAlgPseudoHandle.BCRYPT_SHA512_ALG_HANDLE;
+                    algHandle = isHmac
+                        ? Interop.BCrypt.BCryptAlgPseudoHandle.BCRYPT_HMAC_SHA512_ALG_HANDLE
+                        : Interop.BCrypt.BCryptAlgPseudoHandle.BCRYPT_SHA512_ALG_HANDLE;
                     digestSizeInBytes = 512 / 8;
                 }
                 else
@@ -160,7 +190,15 @@ namespace Internal.Cryptography
                 fixed (byte* pSrc = &MemoryMarshal.GetReference(source))
                 fixed (byte* pDest = &MemoryMarshal.GetReference(destination))
                 {
-                    NTSTATUS ntStatus = Interop.BCrypt.BCryptHash((uint)algHandle, pKey, key.Length, pSrc, source.Length, pDest, digestSizeInBytes);
+                    NTSTATUS ntStatus = Interop.BCrypt.BCryptHash(
+                        (uint)algHandle,
+                        pKey,
+                        key.Length,
+                        pSrc,
+                        source.Length,
+                        pDest,
+                        digestSizeInBytes
+                    );
 
                     if (ntStatus != NTSTATUS.STATUS_SUCCESS)
                     {
@@ -176,7 +214,8 @@ namespace Internal.Cryptography
                 int hashSize,
                 ReadOnlySpan<byte> key,
                 ReadOnlySpan<byte> source,
-                Span<byte> destination)
+                Span<byte> destination
+            )
             {
                 NTSTATUS ntStatus = Interop.BCrypt.BCryptCreateHash(
                     algHandle,
@@ -185,7 +224,8 @@ namespace Internal.Cryptography
                     0,
                     key,
                     key.Length,
-                    BCryptCreateHashFlags.None);
+                    BCryptCreateHashFlags.None
+                );
 
                 if (ntStatus != NTSTATUS.STATUS_SUCCESS)
                 {

@@ -21,9 +21,7 @@ public class TestLoggerProvider : ILoggerProvider
         return _logger;
     }
 
-    public void Dispose()
-    {
-    }
+    public void Dispose() { }
 
     public class TestLogger : ILogger
     {
@@ -42,7 +40,13 @@ public class TestLoggerProvider : ILoggerProvider
             }
         }
 
-        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
+        public void Log<TState>(
+            LogLevel logLevel,
+            EventId eventId,
+            TState state,
+            Exception exception,
+            Func<TState, Exception, string> formatter
+        )
         {
             lock (_sync)
             {
@@ -64,8 +68,7 @@ public class TestLoggerProvider : ILoggerProvider
         {
             public static NullScope Instance = new NullScope();
 
-            public void Dispose()
-            { }
+            public void Dispose() { }
         }
     }
 }

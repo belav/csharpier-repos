@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
             Logger = new XunitCompilerServerLogger(testOutputHelper);
         }
 
-        private const string HelloWorldSourceText = @"
+        private const string HelloWorldSourceText =
+            @"
 using System;
 class Hello
 {
@@ -54,7 +55,10 @@ class Hello
             return source.Task;
         }
 
-        private async Task<BuildRequest> CreateBuildRequest(string sourceText, TimeSpan? keepAlive = null)
+        private async Task<BuildRequest> CreateBuildRequest(
+            string sourceText,
+            TimeSpan? keepAlive = null
+        )
         {
             var directory = Temp.CreateDirectory();
             var file = directory.CreateFile("temp.cs");
@@ -63,22 +67,45 @@ class Hello
             var builder = ImmutableArray.CreateBuilder<BuildRequest.Argument>();
             if (keepAlive.HasValue)
             {
-                builder.Add(new BuildRequest.Argument(BuildProtocolConstants.ArgumentId.KeepAlive, argumentIndex: 0, value: keepAlive.Value.TotalSeconds.ToString()));
+                builder.Add(
+                    new BuildRequest.Argument(
+                        BuildProtocolConstants.ArgumentId.KeepAlive,
+                        argumentIndex: 0,
+                        value: keepAlive.Value.TotalSeconds.ToString()
+                    )
+                );
             }
 
-            builder.Add(new BuildRequest.Argument(BuildProtocolConstants.ArgumentId.CurrentDirectory, argumentIndex: 0, value: directory.Path));
-            builder.Add(new BuildRequest.Argument(BuildProtocolConstants.ArgumentId.CommandLineArgument, argumentIndex: 0, value: file.Path));
+            builder.Add(
+                new BuildRequest.Argument(
+                    BuildProtocolConstants.ArgumentId.CurrentDirectory,
+                    argumentIndex: 0,
+                    value: directory.Path
+                )
+            );
+            builder.Add(
+                new BuildRequest.Argument(
+                    BuildProtocolConstants.ArgumentId.CommandLineArgument,
+                    argumentIndex: 0,
+                    value: file.Path
+                )
+            );
 
             return new BuildRequest(
                 RequestLanguage.CSharpCompile,
                 BuildProtocolConstants.GetCommitHash(),
-                builder.ToImmutable());
+                builder.ToImmutable()
+            );
         }
 
         /// <summary>
         /// Run a C# compilation against the given source text using the provided named pipe name.
         /// </summary>
-        private async Task<BuildResponse> RunCSharpCompile(string pipeName, string sourceText, TimeSpan? keepAlive = null)
+        private async Task<BuildResponse> RunCSharpCompile(
+            string pipeName,
+            string sourceText,
+            TimeSpan? keepAlive = null
+        )
         {
             using (var namedPipe = new NamedPipeClientStream(".", pipeName, PipeDirection.InOut))
             {
@@ -103,9 +130,12 @@ class Hello
             var mutexName = BuildServerConnection.GetServerMutexName(pipeName);
 
             bool holdsMutex;
-            using (var mutex = BuildServerConnection.OpenOrCreateMutex(
-                                         name: mutexName,
-                                         createdNew: out holdsMutex))
+            using (
+                var mutex = BuildServerConnection.OpenOrCreateMutex(
+                    name: mutexName,
+                    createdNew: out holdsMutex
+                )
+            )
             {
                 Assert.True(holdsMutex);
                 try
@@ -114,7 +144,8 @@ class Hello
                     var result = BuildServerController.CreateAndRunServer(
                         pipeName,
                         clientConnectionHost: host.Object,
-                        keepAlive: null);
+                        keepAlive: null
+                    );
                     Assert.Equal(CommonCompiler.Failed, result);
                 }
                 finally
@@ -131,41 +162,51 @@ class Hello
             var mutexName = BuildServerConnection.GetServerMutexName(pipeName);
             var host = new TestableClientConnectionHost();
             bool? wasServerMutexOpen = null;
-            host.Add(() =>
-            {
-                // Use a thread instead of Task to guarantee this code runs on a different
-                // thread and we can validate the mutex state. 
-                var tcs = new TaskCompletionSource<IClientConnection>();
-                var thread = new Thread(_ =>
+            host.Add(
+                () =>
                 {
-                    wasServerMutexOpen = BuildServerConnection.WasServerMutexOpen(mutexName);
+                    // Use a thread instead of Task to guarantee this code runs on a different
+                    // thread and we can validate the mutex state.
+                    var tcs = new TaskCompletionSource<IClientConnection>();
+                    var thread = new Thread(
+                        _ =>
+                        {
+                            wasServerMutexOpen = BuildServerConnection.WasServerMutexOpen(
+                                mutexName
+                            );
 
+                            var client = new TestableClientConnection()
+                            {
+                                ReadBuildRequestFunc = _ =>
+                                    Task.FromResult(ProtocolUtil.EmptyCSharpBuildRequest),
+                                WriteBuildResponseFunc = (r, _) => Task.CompletedTask,
+                            };
+                            tcs.SetResult(client);
+                        }
+                    );
+
+                    thread.Start();
+                    return tcs.Task;
+                }
+            );
+
+            host.Add(
+                () =>
+                {
                     var client = new TestableClientConnection()
                     {
-                        ReadBuildRequestFunc = _ => Task.FromResult(ProtocolUtil.EmptyCSharpBuildRequest),
+                        ReadBuildRequestFunc = _ => Task.FromResult(BuildRequest.CreateShutdown()),
                         WriteBuildResponseFunc = (r, _) => Task.CompletedTask,
                     };
-                    tcs.SetResult(client);
-                });
-
-                thread.Start();
-                return tcs.Task;
-            });
-
-            host.Add(() =>
-            {
-                var client = new TestableClientConnection()
-                {
-                    ReadBuildRequestFunc = _ => Task.FromResult(BuildRequest.CreateShutdown()),
-                    WriteBuildResponseFunc = (r, _) => Task.CompletedTask,
-                };
-                return Task.FromResult<IClientConnection>(client);
-            });
+                    return Task.FromResult<IClientConnection>(client);
+                }
+            );
 
             var result = BuildServerController.CreateAndRunServer(
                 pipeName,
                 clientConnectionHost: host,
-                keepAlive: TimeSpan.FromMilliseconds(-1));
+                keepAlive: TimeSpan.FromMilliseconds(-1)
+            );
             Assert.Equal(CommonCompiler.Succeeded, result);
             Assert.True(wasServerMutexOpen);
         }
@@ -176,7 +217,14 @@ class Hello
         {
             using var temp = new TempRoot();
             using var serverData = await ServerUtil.CreateServer(Logger);
-            var request = BuildRequest.Create(RequestLanguage.CSharpCompile, workingDirectory: temp.CreateDirectory().Path, tempDirectory: null, compilerHash: BuildProtocolConstants.GetCommitHash(), libDirectory: null, args: Array.Empty<string>());
+            var request = BuildRequest.Create(
+                RequestLanguage.CSharpCompile,
+                workingDirectory: temp.CreateDirectory().Path,
+                tempDirectory: null,
+                compilerHash: BuildProtocolConstants.GetCommitHash(),
+                libDirectory: null,
+                args: Array.Empty<string>()
+            );
             var response = await serverData.SendAsync(request);
             Assert.Equal(ResponseType.Rejected, response.Type);
         }
@@ -185,7 +233,13 @@ class Hello
         public async Task IncorrectServerHashReturnsIncorrectHashResponse()
         {
             using var serverData = await ServerUtil.CreateServer(Logger);
-            var buildResponse = await serverData.SendAsync(new BuildRequest(RequestLanguage.CSharpCompile, "abc", new List<BuildRequest.Argument> { }));
+            var buildResponse = await serverData.SendAsync(
+                new BuildRequest(
+                    RequestLanguage.CSharpCompile,
+                    "abc",
+                    new List<BuildRequest.Argument> { }
+                )
+            );
             Assert.Equal(BuildResponse.ResponseType.IncorrectHash, buildResponse.Type);
         }
 
@@ -193,7 +247,10 @@ class Hello
         [WorkItem(33452, "https://github.com/dotnet/roslyn/issues/33452")]
         public void QuotePipeName_Desktop()
         {
-            var serverInfo = BuildServerConnection.GetServerProcessInfo(@"q:\tools", "name with space");
+            var serverInfo = BuildServerConnection.GetServerProcessInfo(
+                @"q:\tools",
+                "name with space"
+            );
             Assert.Equal(@"q:\tools\VBCSCompiler.exe", serverInfo.processFilePath);
             Assert.Equal(@"q:\tools\VBCSCompiler.exe", serverInfo.toolFilePath);
             Assert.Equal(@"""-pipename:name with space""", serverInfo.commandLineArguments);
@@ -203,24 +260,38 @@ class Hello
         [WorkItem(33452, "https://github.com/dotnet/roslyn/issues/33452")]
         public void QuotePipeName_CoreClr()
         {
-            var toolDir = ExecutionConditionUtil.IsWindows
-                ? @"q:\tools"
-                : "/tools";
+            var toolDir = ExecutionConditionUtil.IsWindows ? @"q:\tools" : "/tools";
             var serverInfo = BuildServerConnection.GetServerProcessInfo(toolDir, "name with space");
             var vbcsFilePath = Path.Combine(toolDir, "VBCSCompiler.dll");
             Assert.Equal(vbcsFilePath, serverInfo.toolFilePath);
-            Assert.Equal($@"exec ""{vbcsFilePath}"" ""-pipename:name with space""", serverInfo.commandLineArguments);
+            Assert.Equal(
+                $@"exec ""{vbcsFilePath}"" ""-pipename:name with space""",
+                serverInfo.commandLineArguments
+            );
         }
 
         [Theory]
-        [InlineData(@"OLqrNgkgZRf14qL91MdaUn8coiKckUIZCIEkpy0Lt18", "name with space", true, "basename")]
+        [InlineData(
+            @"OLqrNgkgZRf14qL91MdaUn8coiKckUIZCIEkpy0Lt18",
+            "name with space",
+            true,
+            "basename"
+        )]
         [InlineData(@"8VDiJptv892LtWpeN86z76_YI0Yg0BV6j0SOv8CjQVA", @"ha""ha", true, "basename")]
         [InlineData(@"wKSU9psJMbkw+5+TFKLEf94aeslpEb3dDRpAw+9j4nw", @"jared", true, @"ha""ha")]
         [InlineData(@"0BDP4_GPWYQh9J_BknwhS9uAZAF_64PK4_VnNsddGZE", @"jared", false, @"ha""ha")]
         [InlineData(@"XroHfrjD1FTk7PcXcif2hZdmlVH_L0Pg+RUX01d_uQc", @"jared", false, @"ha\ha")]
-        public void GetPipeNameCore(string expectedName, string userName, bool isAdmin, string compilerExeDir)
+        public void GetPipeNameCore(
+            string expectedName,
+            string userName,
+            bool isAdmin,
+            string compilerExeDir
+        )
         {
-            Assert.Equal(expectedName, BuildServerConnection.GetPipeName(userName, isAdmin, compilerExeDir));
+            Assert.Equal(
+                expectedName,
+                BuildServerConnection.GetPipeName(userName, isAdmin, compilerExeDir)
+            );
         }
     }
 }

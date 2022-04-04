@@ -16,10 +16,7 @@
             public ChildSource Child3 { get; set; }
         }
 
-        public class ChildSource
-        {
-            
-        }
+        public class ChildSource { }
 
         public class Dest
         {
@@ -28,19 +25,18 @@
             public ChildDest Child3 { get; set; }
         }
 
-        public class ChildDest
-        {
-        }
+        public class ChildDest { }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateProjection<Source, Dest>()
-                .ForMember(m => m.Child1, opt => opt.ExplicitExpansion())
-                .ForMember(m => m.Child2, opt => opt.ExplicitExpansion())
-                ;
-            cfg.CreateProjection<ChildSource, ChildDest>();
-        });
-            
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateProjection<Source, Dest>()
+                        .ForMember(m => m.Child1, opt => opt.ExplicitExpansion())
+                        .ForMember(m => m.Child2, opt => opt.ExplicitExpansion());
+                    cfg.CreateProjection<ChildSource, ChildDest>();
+                }
+            );
 
         protected override void Because_of()
         {
@@ -54,7 +50,10 @@
                 }
             };
 
-            _dests = sourceList.AsQueryable().ProjectTo<Dest>(Configuration, d => d.Child2).ToArray();
+            _dests = sourceList
+                .AsQueryable()
+                .ProjectTo<Dest>(Configuration, d => d.Child2)
+                .ToArray();
         }
 
         [Fact]

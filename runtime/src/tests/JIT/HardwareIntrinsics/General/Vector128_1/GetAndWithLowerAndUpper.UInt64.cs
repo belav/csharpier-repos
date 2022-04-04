@@ -38,7 +38,8 @@ namespace JIT.HardwareIntrinsics.General
     {
         private static readonly int LargestVectorSize = 16;
 
-        private static readonly int ElementCount = Unsafe.SizeOf<Vector128<UInt64>>() / sizeof(UInt64);
+        private static readonly int ElementCount =
+            Unsafe.SizeOf<Vector128<UInt64>>() / sizeof(UInt64);
 
         public bool Succeeded { get; set; } = true;
 
@@ -78,27 +79,36 @@ namespace JIT.HardwareIntrinsics.General
             Vector128<UInt64> value = Vector128.Create(values[0], values[1]);
 
             object lowerResult = typeof(Vector128)
-                                    .GetMethod(nameof(Vector128.GetLower))
-                                    .MakeGenericMethod(typeof(UInt64))
-                                    .Invoke(null, new object[] { value });
+                .GetMethod(nameof(Vector128.GetLower))
+                .MakeGenericMethod(typeof(UInt64))
+                .Invoke(null, new object[] { value });
             object upperResult = typeof(Vector128)
-                                    .GetMethod(nameof(Vector128.GetUpper))
-                                    .MakeGenericMethod(typeof(UInt64))
-                                    .Invoke(null, new object[] { value });
-            ValidateGetResult((Vector64<UInt64>)(lowerResult), (Vector64<UInt64>)(upperResult), values);
+                .GetMethod(nameof(Vector128.GetUpper))
+                .MakeGenericMethod(typeof(UInt64))
+                .Invoke(null, new object[] { value });
+            ValidateGetResult(
+                (Vector64<UInt64>)(lowerResult),
+                (Vector64<UInt64>)(upperResult),
+                values
+            );
 
             object result = typeof(Vector128)
-                                .GetMethod(nameof(Vector128.WithLower))
-                                .MakeGenericMethod(typeof(UInt64))
-                                .Invoke(null, new object[] { value, upperResult });
+                .GetMethod(nameof(Vector128.WithLower))
+                .MakeGenericMethod(typeof(UInt64))
+                .Invoke(null, new object[] { value, upperResult });
             result = typeof(Vector128)
-                        .GetMethod(nameof(Vector128.WithUpper))
-                        .MakeGenericMethod(typeof(UInt64))
-                        .Invoke(null, new object[] { result, lowerResult });
+                .GetMethod(nameof(Vector128.WithUpper))
+                .MakeGenericMethod(typeof(UInt64))
+                .Invoke(null, new object[] { result, lowerResult });
             ValidateWithResult((Vector128<UInt64>)(result), values);
         }
 
-        private void ValidateGetResult(Vector64<UInt64> lowerResult, Vector64<UInt64> upperResult, UInt64[] values, [CallerMemberName] string method = "")
+        private void ValidateGetResult(
+            Vector64<UInt64> lowerResult,
+            Vector64<UInt64> upperResult,
+            UInt64[] values,
+            [CallerMemberName] string method = ""
+        )
         {
             UInt64[] lowerElements = new UInt64[ElementCount / 2];
             Unsafe.WriteUnaligned(ref Unsafe.As<UInt64, byte>(ref lowerElements[0]), lowerResult);
@@ -109,7 +119,12 @@ namespace JIT.HardwareIntrinsics.General
             ValidateGetResult(lowerElements, upperElements, values, method);
         }
 
-        private void ValidateGetResult(UInt64[] lowerResult, UInt64[] upperResult, UInt64[] values, [CallerMemberName] string method = "")
+        private void ValidateGetResult(
+            UInt64[] lowerResult,
+            UInt64[] upperResult,
+            UInt64[] values,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
 
@@ -124,9 +139,15 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector128<UInt64>.GetLower(): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"   value: ({string.Join(", ", values)})");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", lowerResult)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector128<UInt64>.GetLower(): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   value: ({string.Join(", ", values)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", lowerResult)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;
@@ -145,23 +166,37 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector128<UInt64>.GetUpper(): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"   value: ({string.Join(", ", values)})");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", upperResult)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector128<UInt64>.GetUpper(): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   value: ({string.Join(", ", values)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", upperResult)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;
             }
         }
 
-        private void ValidateWithResult(Vector128<UInt64> result, UInt64[] values, [CallerMemberName] string method = "")
+        private void ValidateWithResult(
+            Vector128<UInt64> result,
+            UInt64[] values,
+            [CallerMemberName] string method = ""
+        )
         {
             UInt64[] resultElements = new UInt64[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<UInt64, byte>(ref resultElements[0]), result);
             ValidateWithResult(resultElements, values, method);
         }
 
-        private void ValidateWithResult(UInt64[] result, UInt64[] values, [CallerMemberName] string method = "")
+        private void ValidateWithResult(
+            UInt64[] result,
+            UInt64[] values,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
 
@@ -176,9 +211,15 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector128<UInt64.WithLower(): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"   value: ({string.Join(", ", values)})");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", result)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector128<UInt64.WithLower(): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   value: ({string.Join(", ", values)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", result)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;
@@ -197,9 +238,15 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector128<UInt64.WithUpper(): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"   value: ({string.Join(", ", values)})");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", result)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector128<UInt64.WithUpper(): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   value: ({string.Join(", ", values)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", result)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

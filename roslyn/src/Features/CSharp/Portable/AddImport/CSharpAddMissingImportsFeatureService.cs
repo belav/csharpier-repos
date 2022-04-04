@@ -18,10 +18,9 @@ namespace Microsoft.CodeAnalysis.CSharp.AddMissingImports
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpAddMissingImportsFeatureService()
-        {
-        }
+        public CSharpAddMissingImportsFeatureService() { }
 
-        protected sealed override ImmutableArray<string> FixableDiagnosticIds => AddImportDiagnosticIds.FixableDiagnosticIds;
+        protected sealed override ImmutableArray<string> FixableDiagnosticIds =>
+            AddImportDiagnosticIds.FixableDiagnosticIds;
     }
 }

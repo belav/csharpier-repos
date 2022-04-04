@@ -14,7 +14,8 @@ namespace System.Data.Common
         [DllImport(Interop.Libraries.OleAut32, CharSet = CharSet.Unicode, PreserveSig = true)]
         internal static extern System.Data.OleDb.OleDbHResult GetErrorInfo(
             int dwReserved,
-            [MarshalAs(UnmanagedType.Interface)] out UnsafeNativeMethods.IErrorInfo? ppIErrorInfo);
+            [MarshalAs(UnmanagedType.Interface)] out UnsafeNativeMethods.IErrorInfo? ppIErrorInfo
+        );
 
         internal static void ReleaseErrorInfoObject(UnsafeNativeMethods.IErrorInfo errorInfo)
         {

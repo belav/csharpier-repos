@@ -19,8 +19,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
     /// </summary>
     public class SqliteDateOnlyMemberTranslator : IMemberTranslator
     {
-        private static readonly Dictionary<string, string> _datePartMapping
-            = new()
+        private static readonly Dictionary<string, string> _datePartMapping =
+            new()
             {
                 { nameof(DateOnly.Year), "%Y" },
                 { nameof(DateOnly.Month), "%m" },
@@ -52,21 +52,26 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             SqlExpression? instance,
             MemberInfo member,
             Type returnType,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        )
         {
             Check.NotNull(member, nameof(member));
             Check.NotNull(returnType, nameof(returnType));
             Check.NotNull(logger, nameof(logger));
 
-            return member.DeclaringType == typeof(DateOnly) && _datePartMapping.TryGetValue(member.Name, out var datePart)
-                ? _sqlExpressionFactory.Convert(
+            return
+                member.DeclaringType == typeof(DateOnly)
+                && _datePartMapping.TryGetValue(member.Name, out var datePart)
+              ? _sqlExpressionFactory.Convert(
                     SqliteExpression.Strftime(
                         _sqlExpressionFactory,
                         typeof(string),
                         datePart,
-                        instance!),
-                    returnType)
-                : null;
+                        instance!
+                    ),
+                    returnType
+                )
+              : null;
         }
     }
 }

@@ -13,44 +13,56 @@ using Microsoft.CodeAnalysis.Shared.Utilities;
 
 namespace Microsoft.CodeAnalysis.GenerateMember.GenerateEnumMember
 {
-    internal abstract partial class AbstractGenerateEnumMemberService<TService, TSimpleNameSyntax, TExpressionSyntax>
+    internal abstract partial class AbstractGenerateEnumMemberService<
+        TService,
+        TSimpleNameSyntax,
+        TExpressionSyntax
+    >
     {
         private partial class GenerateEnumMemberCodeAction : CodeAction
         {
             private readonly Document _document;
             private readonly State _state;
 
-            public GenerateEnumMemberCodeAction(
-                Document document,
-                State state)
+            public GenerateEnumMemberCodeAction(Document document, State state)
             {
                 _document = document;
                 _state = state;
             }
 
-            protected override async Task<Document> GetChangedDocumentAsync(CancellationToken cancellationToken)
+            protected override async Task<Document> GetChangedDocumentAsync(
+                CancellationToken cancellationToken
+            )
             {
-                var languageServices = _document.Project.Solution.Workspace.Services.GetLanguageServices(_state.TypeToGenerateIn.Language);
+                var languageServices =
+                    _document.Project.Solution.Workspace.Services.GetLanguageServices(
+                        _state.TypeToGenerateIn.Language
+                    );
                 var codeGenerator = languageServices.GetService<ICodeGenerationService>();
                 var semanticFacts = languageServices.GetService<ISemanticFactsService>();
 
                 var value = semanticFacts.LastEnumValueHasInitializer(_state.TypeToGenerateIn)
-                    ? EnumValueUtilities.GetNextEnumValue(_state.TypeToGenerateIn)
-                    : null;
+                  ? EnumValueUtilities.GetNextEnumValue(_state.TypeToGenerateIn)
+                  : null;
 
-                var result = await codeGenerator.AddFieldAsync(
-                    _document.Project.Solution,
-                    _state.TypeToGenerateIn,
-                    CodeGenerationSymbolFactory.CreateFieldSymbol(
-                        attributes: default,
-                        accessibility: Accessibility.Public,
-                        modifiers: default,
-                        type: _state.TypeToGenerateIn,
-                        name: _state.IdentifierToken.ValueText,
-                        hasConstantValue: value != null,
-                        constantValue: value),
-                    new CodeGenerationOptions(contextLocation: _state.IdentifierToken.GetLocation()),
-                    cancellationToken)
+                var result = await codeGenerator
+                    .AddFieldAsync(
+                        _document.Project.Solution,
+                        _state.TypeToGenerateIn,
+                        CodeGenerationSymbolFactory.CreateFieldSymbol(
+                            attributes: default,
+                            accessibility: Accessibility.Public,
+                            modifiers: default,
+                            type: _state.TypeToGenerateIn,
+                            name: _state.IdentifierToken.ValueText,
+                            hasConstantValue: value != null,
+                            constantValue: value
+                        ),
+                        new CodeGenerationOptions(
+                            contextLocation: _state.IdentifierToken.GetLocation()
+                        ),
+                        cancellationToken
+                    )
                     .ConfigureAwait(false);
 
                 return result;
@@ -61,7 +73,9 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateEnumMember
                 get
                 {
                     return string.Format(
-                        FeaturesResources.Generate_enum_member_0, _state.IdentifierToken.ValueText);
+                        FeaturesResources.Generate_enum_member_0,
+                        _state.IdentifierToken.ValueText
+                    );
                 }
             }
         }

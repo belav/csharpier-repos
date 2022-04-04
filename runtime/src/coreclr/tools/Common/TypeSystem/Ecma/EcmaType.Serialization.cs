@@ -9,10 +9,7 @@ namespace Internal.TypeSystem.Ecma
     {
         public override bool IsSerializable
         {
-            get
-            {
-                return (_typeDefinition.Attributes & TypeAttributes.Serializable) != 0;
-            }
+            get { return (_typeDefinition.Attributes & TypeAttributes.Serializable) != 0; }
         }
     }
 }

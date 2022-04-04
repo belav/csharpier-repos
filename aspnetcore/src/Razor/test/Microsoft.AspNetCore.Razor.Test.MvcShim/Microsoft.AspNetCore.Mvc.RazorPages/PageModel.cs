@@ -22,8 +22,7 @@ public abstract class PageModel
 
     public ViewDataDictionary ViewData { get; }
 
-    protected internal Task<bool> TryUpdateModelAsync<TModel>(TModel model)
-        where TModel : class
+    protected internal Task<bool> TryUpdateModelAsync<TModel>(TModel model) where TModel : class
     {
         throw new NotImplementedException();
     }
@@ -38,5 +37,6 @@ public abstract class PageModel
 
     public virtual bool TryValidateModel(object model) => throw new NotImplementedException();
 
-    public virtual bool TryValidateModel(object model, string name) => throw new NotImplementedException();
+    public virtual bool TryValidateModel(object model, string name) =>
+        throw new NotImplementedException();
 }

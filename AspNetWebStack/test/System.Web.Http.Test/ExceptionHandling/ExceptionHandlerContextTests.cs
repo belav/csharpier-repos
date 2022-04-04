@@ -54,7 +54,10 @@ namespace System.Web.Http.ExceptionHandling
         {
             // Arrange
             Exception expectedException = new InvalidOperationException();
-            ExceptionContext context = new ExceptionContext(expectedException, ExceptionCatchBlocks.HttpServer);
+            ExceptionContext context = new ExceptionContext(
+                expectedException,
+                ExceptionCatchBlocks.HttpServer
+            );
             ExceptionHandlerContext product = CreateProductUnderTest(context);
 
             // Act
@@ -68,7 +71,11 @@ namespace System.Web.Http.ExceptionHandling
         public void CatchBlockGet_ReturnsSpecifiedInstance()
         {
             // Arrange
-            ExceptionContextCatchBlock expectedCatchBlock = new ExceptionContextCatchBlock("IgnoreName", false, false);
+            ExceptionContextCatchBlock expectedCatchBlock = new ExceptionContextCatchBlock(
+                "IgnoreName",
+                false,
+                false
+            );
             ExceptionContext context = new ExceptionContext(new Exception(), expectedCatchBlock);
             ExceptionHandlerContext product = CreateProductUnderTest(context);
 
@@ -129,7 +136,9 @@ namespace System.Web.Http.ExceptionHandling
             return new Mock<IHttpActionResult>(MockBehavior.Strict).Object;
         }
 
-        private static ExceptionHandlerContext CreateProductUnderTest(ExceptionContext exceptionContext)
+        private static ExceptionHandlerContext CreateProductUnderTest(
+            ExceptionContext exceptionContext
+        )
         {
             return new ExceptionHandlerContext(exceptionContext);
         }

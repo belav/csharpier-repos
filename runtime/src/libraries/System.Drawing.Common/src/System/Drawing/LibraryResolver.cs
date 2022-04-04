@@ -15,7 +15,11 @@ namespace System.Drawing
             NativeLibrary.SetDllImportResolver(Assembly.GetExecutingAssembly(), DllImportResolver);
         }
 
-        private static IntPtr DllImportResolver(string libraryName, Assembly assembly, DllImportSearchPath? searchPath)
+        private static IntPtr DllImportResolver(
+            string libraryName,
+            Assembly assembly,
+            DllImportSearchPath? searchPath
+        )
         {
             if (libraryName == LibcupsNative.LibraryName)
                 return LibcupsNative.LoadLibcups();

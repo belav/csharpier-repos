@@ -46,35 +46,42 @@ namespace AutoMapper.IntegrationTests.Net4
 
         public class TestContext : DbContext
         {
-            public TestContext()
-                : base()
+            public TestContext() : base()
             {
                 Database.SetInitializer<TestContext>(new DatabaseInitializer());
             }
 
             public DbSet<Base> Bases { get; set; }
             public DbSet<Sub> Subs { get; set; }
-
         }
 
         public class DatabaseInitializer : DropCreateDatabaseAlways<TestContext>
         {
             protected override void Seed(TestContext testContext)
             {
-                testContext.Bases.Add(new Base() { BaseID = 1, Base1 = "base1", Sub = new Sub() { BaseId = 1, Sub1 = "sub1" } });
+                testContext.Bases.Add(
+                    new Base()
+                    {
+                        BaseID = 1,
+                        Base1 = "base1",
+                        Sub = new Sub() { BaseId = 1, Sub1 = "sub1" }
+                    }
+                );
 
                 base.Seed(testContext);
             }
         }
 
-
         public class UnitTest : AutoMapperSpecBase
         {
-            protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-            {
-                cfg.CreateProjection<Base, BaseDTO>();
-                cfg.CreateProjection<Sub, SubDTO>();
-            });
+            protected override MapperConfiguration Configuration =>
+                new MapperConfiguration(
+                    cfg =>
+                    {
+                        cfg.CreateProjection<Base, BaseDTO>();
+                        cfg.CreateProjection<Sub, SubDTO>();
+                    }
+                );
 
             [Fact]
             public void AutoMapperEFRelationsTest()
@@ -89,19 +96,20 @@ namespace AutoMapper.IntegrationTests.Net4
 
                 using (var context = new TestContext())
                 {
-                    var baseDTO = context.Bases.Select(b => new BaseDTO
-                    {
-                        Base1 = b.Base1,
-                        BaseID = b.BaseID,
-                        Sub = new SubDTO
-                        {
-                            Sub1 = b.Sub.Sub1,
-                        }
-                    }).FirstOrDefault();
+                    var baseDTO = context.Bases
+                        .Select(
+                            b =>
+                                new BaseDTO
+                                {
+                                    Base1 = b.Base1,
+                                    BaseID = b.BaseID,
+                                    Sub = new SubDTO { Sub1 = b.Sub.Sub1, }
+                                }
+                        )
+                        .FirstOrDefault();
                     baseDTO.ShouldNotBeNull();
                     baseDTO.BaseID.ShouldBe(1);
                     baseDTO.Sub.Sub1.ShouldBe("sub1");
-
 
                     baseDTO = ProjectTo<BaseDTO>(context.Bases).FirstOrDefault();
                     baseDTO.ShouldNotBeNull();
@@ -109,9 +117,12 @@ namespace AutoMapper.IntegrationTests.Net4
                     baseDTO.Sub.Sub1.ShouldBe("sub1");
                 }
             }
-            [Fact]
-            public void MapShouldThrow() => new Action(() => Mapper.Map<SubDTO>(new Sub())).ShouldThrow<AutoMapperConfigurationException>().Message.ShouldBe("CreateProjection works with ProjectTo, not with Map.");
-        }
 
+            [Fact]
+            public void MapShouldThrow() =>
+                new Action(() => Mapper.Map<SubDTO>(new Sub()))
+                    .ShouldThrow<AutoMapperConfigurationException>()
+                    .Message.ShouldBe("CreateProjection works with ProjectTo, not with Map.");
+        }
     }
 }

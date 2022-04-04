@@ -17,30 +17,49 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Completion.Providers
 {
-    internal abstract class AbstractTypeImportCompletionProvider<AliasDeclarationTypeNode> : AbstractImportCompletionProvider
-        where AliasDeclarationTypeNode : SyntaxNode
+    internal abstract class AbstractTypeImportCompletionProvider<AliasDeclarationTypeNode>
+        : AbstractImportCompletionProvider where AliasDeclarationTypeNode : SyntaxNode
     {
-        protected override bool ShouldProvideCompletion(CompletionContext completionContext, SyntaxContext syntaxContext)
-            => syntaxContext.IsTypeContext;
+        protected override bool ShouldProvideCompletion(
+            CompletionContext completionContext,
+            SyntaxContext syntaxContext
+        ) => syntaxContext.IsTypeContext;
 
-        protected override void LogCommit()
-            => CompletionProvidersLogger.LogCommitOfTypeImportCompletionItem();
+        protected override void LogCommit() =>
+            CompletionProvidersLogger.LogCommitOfTypeImportCompletionItem();
 
-        protected abstract ImmutableArray<AliasDeclarationTypeNode> GetAliasDeclarationNodes(SyntaxNode node);
+        protected abstract ImmutableArray<AliasDeclarationTypeNode> GetAliasDeclarationNodes(
+            SyntaxNode node
+        );
 
-        protected override async Task AddCompletionItemsAsync(CompletionContext completionContext, SyntaxContext syntaxContext, HashSet<string> namespacesInScope, bool isExpandedCompletion, CancellationToken cancellationToken)
+        protected override async Task AddCompletionItemsAsync(
+            CompletionContext completionContext,
+            SyntaxContext syntaxContext,
+            HashSet<string> namespacesInScope,
+            bool isExpandedCompletion,
+            CancellationToken cancellationToken
+        )
         {
-            using (Logger.LogBlock(FunctionId.Completion_TypeImportCompletionProvider_GetCompletionItemsAsync, cancellationToken))
+            using (
+                Logger.LogBlock(
+                    FunctionId.Completion_TypeImportCompletionProvider_GetCompletionItemsAsync,
+                    cancellationToken
+                )
+            )
             {
                 var telemetryCounter = new TelemetryCounter();
-                var typeImportCompletionService = completionContext.Document.GetRequiredLanguageService<ITypeImportCompletionService>();
+                var typeImportCompletionService =
+                    completionContext.Document.GetRequiredLanguageService<ITypeImportCompletionService>();
 
-                var itemsFromAllAssemblies = await typeImportCompletionService.GetAllTopLevelTypesAsync(
-                    completionContext.Document.Project,
-                    syntaxContext,
-                    forceCacheCreation: isExpandedCompletion,
-                    completionContext.CompletionOptions,
-                    cancellationToken).ConfigureAwait(false);
+                var itemsFromAllAssemblies = await typeImportCompletionService
+                    .GetAllTopLevelTypesAsync(
+                        completionContext.Document.Project,
+                        syntaxContext,
+                        forceCacheCreation: isExpandedCompletion,
+                        completionContext.CompletionOptions,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 if (itemsFromAllAssemblies == null)
                 {
@@ -48,10 +67,20 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 }
                 else
                 {
-                    var aliasTargetNamespaceToTypeNameMap = GetAliasTypeDictionary(completionContext.Document, syntaxContext, cancellationToken);
+                    var aliasTargetNamespaceToTypeNameMap = GetAliasTypeDictionary(
+                        completionContext.Document,
+                        syntaxContext,
+                        cancellationToken
+                    );
                     foreach (var items in itemsFromAllAssemblies)
                     {
-                        AddItems(items, completionContext, namespacesInScope, aliasTargetNamespaceToTypeNameMap, telemetryCounter);
+                        AddItems(
+                            items,
+                            completionContext,
+                            namespacesInScope,
+                            aliasTargetNamespaceToTypeNameMap,
+                            telemetryCounter
+                        );
                     }
                 }
 
@@ -67,7 +96,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         private MultiDictionary<string, string> GetAliasTypeDictionary(
             Document document,
             SyntaxContext syntaxContext,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var syntaxFactsService = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var dictionary = new MultiDictionary<string, string>(syntaxFactsService.StringComparer);
@@ -82,8 +112,16 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             var aliasDeclarations = GetAliasDeclarationNodes(nodeToCheck);
             foreach (var aliasNode in aliasDeclarations)
             {
-                var symbol = syntaxContext.SemanticModel.GetDeclaredSymbol(aliasNode, cancellationToken);
-                if (symbol is IAliasSymbol { Target: ITypeSymbol { TypeKind: not TypeKind.Error } target })
+                var symbol = syntaxContext.SemanticModel.GetDeclaredSymbol(
+                    aliasNode,
+                    cancellationToken
+                );
+                if (
+                    symbol is IAliasSymbol
+                    {
+                        Target: ITypeSymbol { TypeKind: not TypeKind.Error } target
+                    }
+                )
                 {
                     // If the target type is a type constructs from generics type, e.g.
                     // using AliasBar = Bar<int>
@@ -106,7 +144,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     var typeParameter = target.GetTypeParameters();
                     if (typeParameter.IsEmpty)
                     {
-                        var namespaceOfTarget = target.ContainingNamespace.ToDisplayString(SymbolDisplayFormats.NameFormat);
+                        var namespaceOfTarget = target.ContainingNamespace.ToDisplayString(
+                            SymbolDisplayFormats.NameFormat
+                        );
                         var typeNameOfTarget = target.Name;
                         dictionary.Add(namespaceOfTarget, typeNameOfTarget);
                     }
@@ -121,7 +161,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             CompletionContext completionContext,
             HashSet<string> namespacesInScope,
             MultiDictionary<string, string> aliasTargetNamespaceToTypeNameMap,
-            TelemetryCounter counter)
+            TelemetryCounter counter
+        )
         {
             counter.ReferenceCount++;
             foreach (var item in items)
@@ -140,7 +181,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             static bool ShouldAddItem(
                 CompletionItem item,
                 HashSet<string> namespacesInScope,
-                MultiDictionary<string, string> aliasTargetNamespaceToTypeNameMap)
+                MultiDictionary<string, string> aliasTargetNamespaceToTypeNameMap
+            )
             {
                 var containingNamespace = ImportCompletionItem.GetContainingNamespace(item);
                 // 1. if the namespace of the item is in scoop. Don't add the item
@@ -152,8 +194,12 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 // 2. If the item might be an alias target. First check if the target alias map has any value then
                 // check if the type name is in the dictionary.
                 // It is done in this way to avoid calling ImportCompletionItem.GetTypeName for all the CompletionItems
-                if (!aliasTargetNamespaceToTypeNameMap.IsEmpty
-                    && aliasTargetNamespaceToTypeNameMap[containingNamespace].Contains(ImportCompletionItem.GetTypeName(item)))
+                if (
+                    !aliasTargetNamespaceToTypeNameMap.IsEmpty
+                    && aliasTargetNamespaceToTypeNameMap[containingNamespace].Contains(
+                        ImportCompletionItem.GetTypeName(item)
+                    )
+                )
                 {
                     return false;
                 }
@@ -169,8 +215,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             public int ReferenceCount { get; set; }
             public bool CacheMiss { get; set; }
 
-            public TelemetryCounter()
-                => Tick = Environment.TickCount;
+            public TelemetryCounter() => Tick = Environment.TickCount;
 
             public void Report()
             {
@@ -183,7 +228,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     var delta = Environment.TickCount - Tick;
                     CompletionProvidersLogger.LogTypeImportCompletionTicksDataPoint(delta);
                     CompletionProvidersLogger.LogTypeImportCompletionItemCountDataPoint(ItemsCount);
-                    CompletionProvidersLogger.LogTypeImportCompletionReferenceCountDataPoint(ReferenceCount);
+                    CompletionProvidersLogger.LogTypeImportCompletionReferenceCountDataPoint(
+                        ReferenceCount
+                    );
                 }
             }
         }

@@ -20,21 +20,30 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         TFieldDeclarationSyntax,
         TPropertyDeclarationSyntax,
         TTypeDeclarationSyntax,
-        TVariableSyntax>
+        TVariableSyntax
+    >
         where TMemberDeclarationSyntax : SyntaxNode
         where TFieldDeclarationSyntax : TMemberDeclarationSyntax
         where TPropertyDeclarationSyntax : TMemberDeclarationSyntax
         where TTypeDeclarationSyntax : TMemberDeclarationSyntax
         where TVariableSyntax : SyntaxNode
     {
-        protected abstract SyntaxList<TMemberDeclarationSyntax> GetMembers(TTypeDeclarationSyntax containingType);
-        protected abstract IEnumerable<TVariableSyntax> GetAllDeclarators(TFieldDeclarationSyntax field);
+        protected abstract SyntaxList<TMemberDeclarationSyntax> GetMembers(
+            TTypeDeclarationSyntax containingType
+        );
+        protected abstract IEnumerable<TVariableSyntax> GetAllDeclarators(
+            TFieldDeclarationSyntax field
+        );
 
         protected abstract SyntaxToken GetVariableIdentifier(TVariableSyntax declarator);
         protected abstract SyntaxToken GetPropertyIdentifier(TPropertyDeclarationSyntax declarator);
 
         public async Task<ImmutableArray<SyntaxNode>> GetSelectedFieldsAndPropertiesAsync(
-            SyntaxTree tree, TextSpan textSpan, bool allowPartialSelection, CancellationToken cancellationToken)
+            SyntaxTree tree,
+            TextSpan textSpan,
+            bool allowPartialSelection,
+            CancellationToken cancellationToken
+        )
         {
             var text = await tree.GetTextAsync(cancellationToken).ConfigureAwait(false);
             var root = await tree.GetRootAsync(cancellationToken).ConfigureAwait(false);
@@ -58,18 +67,29 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             var token = textSpan.IsEmpty
                 ? root.FindToken(textSpan.Start)
                 : root.FindTokenOnRightOfPosition(textSpan.Start);
-            var firstMember = token.GetAncestors<TMemberDeclarationSyntax>()
-                                   .Where(m => m.Parent is TTypeDeclarationSyntax)
-                                   .FirstOrDefault();
+            var firstMember = token
+                .GetAncestors<TMemberDeclarationSyntax>()
+                .Where(m => m.Parent is TTypeDeclarationSyntax)
+                .FirstOrDefault();
             if (firstMember == null)
                 return ImmutableArray<SyntaxNode>.Empty;
 
-            return GetFieldsAndPropertiesInSpan(root, text, textSpan, firstMember, allowPartialSelection);
+            return GetFieldsAndPropertiesInSpan(
+                root,
+                text,
+                textSpan,
+                firstMember,
+                allowPartialSelection
+            );
         }
 
         private ImmutableArray<SyntaxNode> GetFieldsAndPropertiesInSpan(
-            SyntaxNode root, SourceText text, TextSpan textSpan,
-            TMemberDeclarationSyntax firstMember, bool allowPartialSelection)
+            SyntaxNode root,
+            SourceText text,
+            TextSpan textSpan,
+            TMemberDeclarationSyntax firstMember,
+            bool allowPartialSelection
+        )
         {
             var containingType = (TTypeDeclarationSyntax)firstMember.Parent;
             var members = GetMembers(containingType);
@@ -102,8 +122,7 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             // local functions
             void AddSelectedFieldOrPropertyDeclarations(TMemberDeclarationSyntax member)
             {
-                if (member is not TFieldDeclarationSyntax and
-                    not TPropertyDeclarationSyntax)
+                if (member is not TFieldDeclarationSyntax and not TPropertyDeclarationSyntax)
                 {
                     return;
                 }
@@ -136,13 +155,21 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                             case TFieldDeclarationSyntax field:
                                 foreach (var varDecl in GetAllDeclarators(field))
                                 {
-                                    if (GetVariableIdentifier(varDecl).FullSpan.IntersectsWith(position))
+                                    if (
+                                        GetVariableIdentifier(varDecl).FullSpan.IntersectsWith(
+                                            position
+                                        )
+                                    )
                                         selectedMembers.Add(varDecl);
                                 }
 
                                 return;
                             case TPropertyDeclarationSyntax property:
-                                if (GetPropertyIdentifier(property).FullSpan.IntersectsWith(position))
+                                if (
+                                    GetPropertyIdentifier(property).FullSpan.IntersectsWith(
+                                        position
+                                    )
+                                )
                                     selectedMembers.Add(property);
 
                                 return;
@@ -177,19 +204,27 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         }
 
         private static bool IsBeforeOrAfterNodeOnSameLine(
-            SourceText text, SyntaxNode root, SyntaxNode member, int position)
+            SourceText text,
+            SyntaxNode root,
+            SyntaxNode member,
+            int position
+        )
         {
             var token = root.FindToken(position);
-            if (token == member.GetFirstToken() &&
-                position <= token.SpanStart &&
-                text.AreOnSameLine(position, token.SpanStart))
+            if (
+                token == member.GetFirstToken()
+                && position <= token.SpanStart
+                && text.AreOnSameLine(position, token.SpanStart)
+            )
             {
                 return true;
             }
 
-            if (token == member.GetLastToken() &&
-                position >= token.Span.End &&
-                text.AreOnSameLine(position, token.Span.End))
+            if (
+                token == member.GetLastToken()
+                && position >= token.Span.End
+                && text.AreOnSameLine(position, token.Span.End)
+            )
             {
                 return true;
             }

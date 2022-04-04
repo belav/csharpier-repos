@@ -22,6 +22,9 @@ internal class ModelStateInvalidFilterFactory : IFilterFactory, IOrderedFilter
         var options = serviceProvider.GetRequiredService<IOptions<ApiBehaviorOptions>>();
         var loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();
 
-        return new ModelStateInvalidFilter(options.Value, loggerFactory.CreateLogger<ModelStateInvalidFilter>());
+        return new ModelStateInvalidFilter(
+            options.Value,
+            loggerFactory.CreateLogger<ModelStateInvalidFilter>()
+        );
     }
 }

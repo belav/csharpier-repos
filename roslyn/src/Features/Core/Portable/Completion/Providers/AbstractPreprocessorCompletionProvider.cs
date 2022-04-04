@@ -21,10 +21,17 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             var originatingDocument = context.Document;
             var position = context.Position;
 
-            var semanticModel = await originatingDocument.ReuseExistingSpeculativeModelAsync(position, cancellationToken).ConfigureAwait(false);
+            var semanticModel = await originatingDocument
+                .ReuseExistingSpeculativeModelAsync(position, cancellationToken)
+                .ConfigureAwait(false);
             var service = originatingDocument.GetRequiredLanguageService<ISyntaxContextService>();
             var solution = originatingDocument.Project.Solution;
-            var syntaxContext = service.CreateContext(originatingDocument, semanticModel, position, cancellationToken);
+            var syntaxContext = service.CreateContext(
+                originatingDocument,
+                semanticModel,
+                position,
+                cancellationToken
+            );
             if (!syntaxContext.IsPreProcessorExpressionContext)
                 return;
 
@@ -36,7 +43,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             foreach (var documentId in solution.GetRelatedDocumentIds(originatingDocument.Id))
             {
                 var document = solution.GetRequiredDocument(documentId);
-                var currentSyntaxTree = await document.GetRequiredSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+                var currentSyntaxTree = await document
+                    .GetRequiredSyntaxTreeAsync(cancellationToken)
+                    .ConfigureAwait(false);
 
                 preprocessorNames.AddRange(currentSyntaxTree.Options.PreprocessorSymbolNames);
             }
@@ -45,12 +54,15 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             // include (like `true/false`)
             foreach (var name in preprocessorNames.OrderBy(a => a))
             {
-                context.AddItem(CommonCompletionItem.Create(
-                    name,
-                    displayTextSuffix: "",
-                    CompletionItemRules.Default,
-                    glyph: Glyph.Keyword,
-                    sortText: "_0_" + name));
+                context.AddItem(
+                    CommonCompletionItem.Create(
+                        name,
+                        displayTextSuffix: "",
+                        CompletionItemRules.Default,
+                        glyph: Glyph.Keyword,
+                        sortText: "_0_" + name
+                    )
+                );
             }
         }
     }

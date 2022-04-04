@@ -8,7 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 {
     [ApiController]
-    public class NoDiagnosticsAreReturned_ForApiController_WithAllDocumentedStatusCodes : ControllerBase
+    public class NoDiagnosticsAreReturned_ForApiController_WithAllDocumentedStatusCodes
+        : ControllerBase
     {
         [ProducesResponseType(typeof(string), 200)]
         [ProducesResponseType(typeof(string), 400)]

@@ -5,9 +5,7 @@ namespace System.Xml.Xsl.XsltOld.Debugger
 {
     using System.Xml.XPath;
 
-    internal interface IXsltProcessor
-    {
-    }
+    internal interface IXsltProcessor { }
 
     internal interface IXsltDebugger
     {

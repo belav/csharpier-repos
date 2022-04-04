@@ -16,7 +16,11 @@ namespace System.Xml.Tests
         protected XElement pvirtualNode;
         protected CXmlDriverParamRawNodes pparentParams;
 
-        internal CXmlDriverParamRawNodes(XElement originalNode, XElement virtualNode, CXmlDriverParamRawNodes parentParams)
+        internal CXmlDriverParamRawNodes(
+            XElement originalNode,
+            XElement virtualNode,
+            CXmlDriverParamRawNodes parentParams
+        )
         {
             this.poriginalNode = originalNode;
             this.pvirtualNode = virtualNode;
@@ -24,13 +28,22 @@ namespace System.Xml.Tests
         }
 
         // original test module node
-        public virtual XElement TestModule { get { return null; } }
+        public virtual XElement TestModule
+        {
+            get { return null; }
+        }
 
         // original test case node
-        public virtual XElement TestCase { get { return null; } }
+        public virtual XElement TestCase
+        {
+            get { return null; }
+        }
 
         // original test variation node
-        public virtual XElement Variation { get { return null; } }
+        public virtual XElement Variation
+        {
+            get { return null; }
+        }
 
         // dynamic node which includes all sections combined using Inheritance rules.
         public virtual XElement Virtual
@@ -40,37 +53,69 @@ namespace System.Xml.Tests
                 // support of delayed building of the Virtual node
                 if (pvirtualNode == null)
                 {
-                    pvirtualNode = CXmlDriverEngine.BuildVirtualNode(pparentParams.Virtual, poriginalNode);
+                    pvirtualNode = CXmlDriverEngine.BuildVirtualNode(
+                        pparentParams.Virtual,
+                        poriginalNode
+                    );
                 }
                 return pvirtualNode;
             }
         }
     }
 
-
     internal class CXmlDriverParamRawNodes_TestModule : CXmlDriverParamRawNodes
     {
-        internal CXmlDriverParamRawNodes_TestModule(XElement testModuleNode, XElement virtualNode, CXmlDriverParamRawNodes parentParams) : base(testModuleNode, virtualNode, parentParams) { }
-        public override XElement TestModule { get { return poriginalNode; } }
-    }
+        internal CXmlDriverParamRawNodes_TestModule(
+            XElement testModuleNode,
+            XElement virtualNode,
+            CXmlDriverParamRawNodes parentParams
+        ) : base(testModuleNode, virtualNode, parentParams) { }
 
+        public override XElement TestModule
+        {
+            get { return poriginalNode; }
+        }
+    }
 
     internal class CXmlDriverParamRawNodes_TestCase : CXmlDriverParamRawNodes
     {
-        internal CXmlDriverParamRawNodes_TestCase(XElement testCaseNode, XElement virtualNode, CXmlDriverParamRawNodes parentParams) : base(testCaseNode, virtualNode, parentParams) { }
-        public override XElement TestModule { get { return pparentParams.TestModule; } }
-        public override XElement TestCase { get { return poriginalNode; } }
-    }
+        internal CXmlDriverParamRawNodes_TestCase(
+            XElement testCaseNode,
+            XElement virtualNode,
+            CXmlDriverParamRawNodes parentParams
+        ) : base(testCaseNode, virtualNode, parentParams) { }
 
+        public override XElement TestModule
+        {
+            get { return pparentParams.TestModule; }
+        }
+        public override XElement TestCase
+        {
+            get { return poriginalNode; }
+        }
+    }
 
     internal class CXmlDriverParamRawNodes_Variation : CXmlDriverParamRawNodes
     {
-        internal CXmlDriverParamRawNodes_Variation(XElement variationNode, XElement virtualNode, CXmlDriverParamRawNodes parentParams) : base(variationNode, virtualNode, parentParams) { }
-        public override XElement TestModule { get { return pparentParams.TestModule; } }
-        public override XElement TestCase { get { return pparentParams.TestCase; } }
-        public override XElement Variation { get { return poriginalNode; } }
-    }
+        internal CXmlDriverParamRawNodes_Variation(
+            XElement variationNode,
+            XElement virtualNode,
+            CXmlDriverParamRawNodes parentParams
+        ) : base(variationNode, virtualNode, parentParams) { }
 
+        public override XElement TestModule
+        {
+            get { return pparentParams.TestModule; }
+        }
+        public override XElement TestCase
+        {
+            get { return pparentParams.TestCase; }
+        }
+        public override XElement Variation
+        {
+            get { return poriginalNode; }
+        }
+    }
 
     public class CXmlDriverParam
     {
@@ -86,10 +131,7 @@ namespace System.Xml.Tests
         // returns raw nodes
         public CXmlDriverParamRawNodes RawNodes
         {
-            get
-            {
-                return _rawNodes;
-            }
+            get { return _rawNodes; }
         }
 
         // returns InnerText from the Data (default section) or null if the given xpath selects nothing
@@ -105,7 +147,11 @@ namespace System.Xml.Tests
             int i = 0;
             for (; i < route.Length; i++)
             {
-                if (curNode == null || route[i].StartsWith("@") || curNode.NodeType != XmlNodeType.Element)
+                if (
+                    curNode == null
+                    || route[i].StartsWith("@")
+                    || curNode.NodeType != XmlNodeType.Element
+                )
                 {
                     break;
                 }
@@ -153,7 +199,11 @@ namespace System.Xml.Tests
         public string SelectExistingValue(string xpath, string sectionName)
         {
             string value = SelectValue(xpath, sectionName);
-            CError.Compare(value != null, true, "XmlDriver: '" + xpath + "' is not found in the section '" + sectionName + "'.");
+            CError.Compare(
+                value != null,
+                true,
+                "XmlDriver: '" + xpath + "' is not found in the section '" + sectionName + "'."
+            );
             return value;
         }
 
@@ -162,7 +212,6 @@ namespace System.Xml.Tests
         {
             return DefaultSection.Elements(xpath);
         }
-
 
         // selects nodes by xpath from the given section
         public IEnumerable<XElement> SelectNodes(string xpath, string sectionName)
@@ -173,14 +222,22 @@ namespace System.Xml.Tests
             return sectionNode.Elements(xpath);
         }
 
-        public string DefaultSectionName { get { return _defaultSection; } set { _defaultSection = value; } }
+        public string DefaultSectionName
+        {
+            get { return _defaultSection; }
+            set { _defaultSection = value; }
+        }
 
         public XElement DefaultSection
         {
             get
             {
                 XElement node = GetSection(_defaultSection);
-                CError.Compare(node != null, true, "XmlDriver: no default section found, defaultSectionName='" + _defaultSection);
+                CError.Compare(
+                    node != null,
+                    true,
+                    "XmlDriver: no default section found, defaultSectionName='" + _defaultSection
+                );
                 return node;
             }
         }
@@ -190,7 +247,6 @@ namespace System.Xml.Tests
             XElement node = _rawNodes.Virtual.Element(sectionName);
             return node;
         }
-
 
         // returns an attribute from the Virtual node by attribute name
         public string GetTopLevelAttributeValue(string attrName)
@@ -204,12 +260,19 @@ namespace System.Xml.Tests
         public string GetTopLevelExistingAttributeValue(string attrName)
         {
             string value = GetTopLevelAttributeValue(attrName);
-            CError.Compare(value != null, true, "XmlDriver: '" + attrName + "' attribute is not found.");
+            CError.Compare(
+                value != null,
+                true,
+                "XmlDriver: '" + attrName + "' attribute is not found."
+            );
             return value;
         }
 
         // 'inline' implementation without using Virtual node for perf improvement (only for internal use)
-        internal static string GetTopLevelAttributeValue_Inline(CXmlDriverParamRawNodes param, string attrName)
+        internal static string GetTopLevelAttributeValue_Inline(
+            CXmlDriverParamRawNodes param,
+            string attrName
+        )
         {
             XAttribute attr = null;
             if (param.Variation != null)

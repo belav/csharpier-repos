@@ -8,7 +8,8 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-public class AsyncActionsTests : IClassFixture<MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting>>
+public class AsyncActionsTests
+    : IClassFixture<MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting>>
 {
     public AsyncActionsTests(MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting> fixture)
     {
@@ -56,7 +57,9 @@ public class AsyncActionsTests : IClassFixture<MvcTestFixture<BasicWebSite.Start
     public async Task TaskOfObjectAction_ReturnsJsonFormattedObject()
     {
         // Act
-        var response = await Client.GetAsync("http://localhost/AsyncActions/TaskOfObjectAction?message=Alpha");
+        var response = await Client.GetAsync(
+            "http://localhost/AsyncActions/TaskOfObjectAction?message=Alpha"
+        );
         var responseBody = await response.Content.ReadAsStringAsync();
 
         // Assert
@@ -68,7 +71,9 @@ public class AsyncActionsTests : IClassFixture<MvcTestFixture<BasicWebSite.Start
     public async Task TaskOfObjectExceptionAction_ReturnsCorrectError()
     {
         // Act
-        var response = await Client.GetAsync("http://localhost/AsyncActions/TaskOfObjectExceptionAction?message=Alpha");
+        var response = await Client.GetAsync(
+            "http://localhost/AsyncActions/TaskOfObjectExceptionAction?message=Alpha"
+        );
         var responseBody = await response.Content.ReadAsStringAsync();
 
         // Assert
@@ -79,7 +84,9 @@ public class AsyncActionsTests : IClassFixture<MvcTestFixture<BasicWebSite.Start
     public async Task TaskOfIActionResultAction_ReturnsString()
     {
         // Act
-        var response = await Client.GetAsync("http://localhost/AsyncActions/TaskOfIActionResultAction?message=Beta");
+        var response = await Client.GetAsync(
+            "http://localhost/AsyncActions/TaskOfIActionResultAction?message=Beta"
+        );
         var responseBody = await response.Content.ReadAsStringAsync();
 
         // Assert
@@ -91,7 +98,9 @@ public class AsyncActionsTests : IClassFixture<MvcTestFixture<BasicWebSite.Start
     public async Task TaskOfIActionResultExceptionAction_ReturnsCorrectError()
     {
         // Act
-        var response = await Client.GetAsync("http://localhost/AsyncActions/TaskOfIActionResultExceptionAction?message=Beta");
+        var response = await Client.GetAsync(
+            "http://localhost/AsyncActions/TaskOfIActionResultExceptionAction?message=Beta"
+        );
         var responseBody = await response.Content.ReadAsStringAsync();
 
         // Assert
@@ -102,7 +111,9 @@ public class AsyncActionsTests : IClassFixture<MvcTestFixture<BasicWebSite.Start
     public async Task TaskOfContentResultAction_ReturnsString()
     {
         // Act
-        var response = await Client.GetAsync("http://localhost/AsyncActions/TaskOfContentResultAction?message=Gamma");
+        var response = await Client.GetAsync(
+            "http://localhost/AsyncActions/TaskOfContentResultAction?message=Gamma"
+        );
         var responseBody = await response.Content.ReadAsStringAsync();
 
         // Assert
@@ -114,7 +125,9 @@ public class AsyncActionsTests : IClassFixture<MvcTestFixture<BasicWebSite.Start
     public async Task TaskOfContentResultExceptionAction_ReturnsCorrectError()
     {
         // Act
-        var response = await Client.GetAsync("http://localhost/AsyncActions/TaskOfContentResultExceptionAction?message=Gamma");
+        var response = await Client.GetAsync(
+            "http://localhost/AsyncActions/TaskOfContentResultExceptionAction?message=Gamma"
+        );
         var responseBody = await response.Content.ReadAsStringAsync();
 
         // Assert
@@ -125,7 +138,9 @@ public class AsyncActionsTests : IClassFixture<MvcTestFixture<BasicWebSite.Start
     public async Task PreCompletedValueTaskOfObjectAction_ReturnsJsonFormattedObject()
     {
         // Act
-        var response = await Client.GetAsync("http://localhost/AsyncActions/PreCompletedValueTaskOfObjectAction?message=Delta");
+        var response = await Client.GetAsync(
+            "http://localhost/AsyncActions/PreCompletedValueTaskOfObjectAction?message=Delta"
+        );
         var responseBody = await response.Content.ReadAsStringAsync();
 
         // Assert
@@ -137,7 +152,9 @@ public class AsyncActionsTests : IClassFixture<MvcTestFixture<BasicWebSite.Start
     public async Task PreCompletedValueTaskOfObjectExceptionAction_ReturnsCorrectError()
     {
         // Act
-        var response = await Client.GetAsync("http://localhost/AsyncActions/PreCompletedValueTaskOfObjectExceptionAction?message=Delta");
+        var response = await Client.GetAsync(
+            "http://localhost/AsyncActions/PreCompletedValueTaskOfObjectExceptionAction?message=Delta"
+        );
         var responseBody = await response.Content.ReadAsStringAsync();
 
         // Assert
@@ -148,7 +165,9 @@ public class AsyncActionsTests : IClassFixture<MvcTestFixture<BasicWebSite.Start
     public async Task PreCompletedValueTaskOfIActionResultAction_ReturnsString()
     {
         // Act
-        var response = await Client.GetAsync("http://localhost/AsyncActions/PreCompletedValueTaskOfIActionResultAction?message=Epsilon");
+        var response = await Client.GetAsync(
+            "http://localhost/AsyncActions/PreCompletedValueTaskOfIActionResultAction?message=Epsilon"
+        );
         var responseBody = await response.Content.ReadAsStringAsync();
 
         // Assert
@@ -160,7 +179,9 @@ public class AsyncActionsTests : IClassFixture<MvcTestFixture<BasicWebSite.Start
     public async Task PreCompletedValueTaskOfIActionResultExceptionAction_ReturnsCorrectError()
     {
         // Act
-        var response = await Client.GetAsync("http://localhost/AsyncActions/PreCompletedValueTaskOfIActionResultExceptionAction?message=Epsilon");
+        var response = await Client.GetAsync(
+            "http://localhost/AsyncActions/PreCompletedValueTaskOfIActionResultExceptionAction?message=Epsilon"
+        );
         var responseBody = await response.Content.ReadAsStringAsync();
 
         // Assert
@@ -171,7 +192,9 @@ public class AsyncActionsTests : IClassFixture<MvcTestFixture<BasicWebSite.Start
     public async Task PreCompletedValueTaskOfContentResultAction_ReturnsString()
     {
         // Act
-        var response = await Client.GetAsync("http://localhost/AsyncActions/PreCompletedValueTaskOfContentResultAction?message=Zeta");
+        var response = await Client.GetAsync(
+            "http://localhost/AsyncActions/PreCompletedValueTaskOfContentResultAction?message=Zeta"
+        );
         var responseBody = await response.Content.ReadAsStringAsync();
 
         // Assert
@@ -183,7 +206,9 @@ public class AsyncActionsTests : IClassFixture<MvcTestFixture<BasicWebSite.Start
     public async Task PreCompletedValueTaskOfContentResultExceptionAction_ReturnsCorrectError()
     {
         // Act
-        var response = await Client.GetAsync("http://localhost/AsyncActions/PreCompletedValueTaskOfContentResultExceptionAction?message=Zeta");
+        var response = await Client.GetAsync(
+            "http://localhost/AsyncActions/PreCompletedValueTaskOfContentResultExceptionAction?message=Zeta"
+        );
         var responseBody = await response.Content.ReadAsStringAsync();
 
         // Assert
@@ -194,7 +219,9 @@ public class AsyncActionsTests : IClassFixture<MvcTestFixture<BasicWebSite.Start
     public async Task CustomAwaitableVoidAction_ReturnsOK()
     {
         // Act
-        var response = await Client.GetAsync("http://localhost/AsyncActions/CustomAwaitableVoidAction");
+        var response = await Client.GetAsync(
+            "http://localhost/AsyncActions/CustomAwaitableVoidAction"
+        );
         var responseBody = await response.Content.ReadAsStringAsync();
 
         // Assert
@@ -206,7 +233,9 @@ public class AsyncActionsTests : IClassFixture<MvcTestFixture<BasicWebSite.Start
     public async Task CustomAwaitableVoidExceptionAction_ReturnsCorrectError()
     {
         // Act
-        var response = await Client.GetAsync("http://localhost/AsyncActions/CustomAwaitableVoidExceptionAction");
+        var response = await Client.GetAsync(
+            "http://localhost/AsyncActions/CustomAwaitableVoidExceptionAction"
+        );
         var responseBody = await response.Content.ReadAsStringAsync();
 
         // Assert
@@ -217,7 +246,9 @@ public class AsyncActionsTests : IClassFixture<MvcTestFixture<BasicWebSite.Start
     public async Task CustomAwaitableOfObjectAction_ReturnsJsonFormattedObject()
     {
         // Act
-        var response = await Client.GetAsync("http://localhost/AsyncActions/CustomAwaitableOfObjectAction?message=Eta");
+        var response = await Client.GetAsync(
+            "http://localhost/AsyncActions/CustomAwaitableOfObjectAction?message=Eta"
+        );
         var responseBody = await response.Content.ReadAsStringAsync();
 
         // Assert
@@ -229,7 +260,9 @@ public class AsyncActionsTests : IClassFixture<MvcTestFixture<BasicWebSite.Start
     public async Task CustomAwaitableOfObjectExceptionAction_ReturnsCorrectError()
     {
         // Act
-        var response = await Client.GetAsync("http://localhost/AsyncActions/CustomAwaitableOfObjectExceptionAction?message=Eta");
+        var response = await Client.GetAsync(
+            "http://localhost/AsyncActions/CustomAwaitableOfObjectExceptionAction?message=Eta"
+        );
         var responseBody = await response.Content.ReadAsStringAsync();
 
         // Assert
@@ -240,7 +273,9 @@ public class AsyncActionsTests : IClassFixture<MvcTestFixture<BasicWebSite.Start
     public async Task CustomAwaitableOfIActionResultAction_ReturnsString()
     {
         // Act
-        var response = await Client.GetAsync("http://localhost/AsyncActions/CustomAwaitableOfIActionResultAction?message=Theta");
+        var response = await Client.GetAsync(
+            "http://localhost/AsyncActions/CustomAwaitableOfIActionResultAction?message=Theta"
+        );
         var responseBody = await response.Content.ReadAsStringAsync();
 
         // Assert
@@ -252,7 +287,9 @@ public class AsyncActionsTests : IClassFixture<MvcTestFixture<BasicWebSite.Start
     public async Task CustomAwaitableOfIActionResultExceptionAction_ReturnsCorrectError()
     {
         // Act
-        var response = await Client.GetAsync("http://localhost/AsyncActions/CustomAwaitableOfIActionResultExceptionAction?message=Theta");
+        var response = await Client.GetAsync(
+            "http://localhost/AsyncActions/CustomAwaitableOfIActionResultExceptionAction?message=Theta"
+        );
         var responseBody = await response.Content.ReadAsStringAsync();
 
         // Assert
@@ -263,7 +300,9 @@ public class AsyncActionsTests : IClassFixture<MvcTestFixture<BasicWebSite.Start
     public async Task CustomAwaitableOfContentResultAction_ReturnsString()
     {
         // Act
-        var response = await Client.GetAsync("http://localhost/AsyncActions/CustomAwaitableOfContentResultAction?message=Iota");
+        var response = await Client.GetAsync(
+            "http://localhost/AsyncActions/CustomAwaitableOfContentResultAction?message=Iota"
+        );
         var responseBody = await response.Content.ReadAsStringAsync();
 
         // Assert
@@ -275,7 +314,9 @@ public class AsyncActionsTests : IClassFixture<MvcTestFixture<BasicWebSite.Start
     public async Task CustomAwaitableOfContentResultExceptionAction_ReturnsCorrectError()
     {
         // Act
-        var response = await Client.GetAsync("http://localhost/AsyncActions/CustomAwaitableOfContentResultExceptionAction?message=Iota");
+        var response = await Client.GetAsync(
+            "http://localhost/AsyncActions/CustomAwaitableOfContentResultExceptionAction?message=Iota"
+        );
         var responseBody = await response.Content.ReadAsStringAsync();
 
         // Assert

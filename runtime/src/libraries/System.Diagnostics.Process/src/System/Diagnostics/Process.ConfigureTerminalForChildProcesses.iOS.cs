@@ -10,11 +10,12 @@ namespace System.Diagnostics
         /// These methods are used on other Unix systems to track how many children use the terminal,
         /// and update the terminal configuration when necessary.
 
-        internal static void ConfigureTerminalForChildProcesses(int increment, bool configureConsole = true)
-        { }
+        internal static void ConfigureTerminalForChildProcesses(
+            int increment,
+            bool configureConsole = true
+        ) { }
 
-        private static unsafe void SetDelayedSigChildConsoleConfigurationHandler()
-        { }
+        private static unsafe void SetDelayedSigChildConsoleConfigurationHandler() { }
 
         private static bool AreChildrenUsingTerminal => false;
     }

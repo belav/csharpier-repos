@@ -60,23 +60,14 @@ namespace System.Net.Sockets
         // Sets the IP address of a multicast group.
         public IPAddress Group
         {
-            get
-            {
-                return _group;
-            }
-            set
-            {
-                _group = value ?? throw new ArgumentNullException(nameof(value));
-            }
+            get { return _group; }
+            set { _group = value ?? throw new ArgumentNullException(nameof(value)); }
         }
 
         // Sets the local address of a multicast group.
         public IPAddress? LocalAddress
         {
-            get
-            {
-                return _localAddress;
-            }
+            get { return _localAddress; }
             set
             {
                 _ifIndex = 0;
@@ -86,10 +77,7 @@ namespace System.Net.Sockets
 
         public int InterfaceIndex
         {
-            get
-            {
-                return _ifIndex;
-            }
+            get { return _ifIndex; }
             set
             {
                 if (value < 0 || value > 0x00FFFFFF)
@@ -143,23 +131,14 @@ namespace System.Net.Sockets
         // Sets the IP address of a multicast group.
         public IPAddress Group
         {
-            get
-            {
-                return _group;
-            }
-            set
-            {
-                _group = value ?? throw new ArgumentNullException(nameof(value));
-            }
+            get { return _group; }
+            set { _group = value ?? throw new ArgumentNullException(nameof(value)); }
         }
 
         // Sets the interface index.
         public long InterfaceIndex
         {
-            get
-            {
-                return _interface;
-            }
+            get { return _interface; }
             set
             {
                 if (value < 0 || value > 0x00000000FFFFFFFF)

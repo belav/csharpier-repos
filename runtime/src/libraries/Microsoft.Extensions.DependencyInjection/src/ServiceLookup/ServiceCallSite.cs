@@ -22,8 +22,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         public object Value { get; set; }
 
         public bool CaptureDisposable =>
-            ImplementationType == null ||
-            typeof(IDisposable).IsAssignableFrom(ImplementationType) ||
-            typeof(IAsyncDisposable).IsAssignableFrom(ImplementationType);
+            ImplementationType == null
+            || typeof(IDisposable).IsAssignableFrom(ImplementationType)
+            || typeof(IAsyncDisposable).IsAssignableFrom(ImplementationType);
     }
 }

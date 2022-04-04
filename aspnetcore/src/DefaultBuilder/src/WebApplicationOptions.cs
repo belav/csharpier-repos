@@ -85,9 +85,7 @@ public class WebApplicationOptions
         // we need to set the application name via UseSetting
         if (Args is not null)
         {
-            var config = new ConfigurationBuilder()
-                    .AddCommandLine(Args)
-                    .Build();
+            var config = new ConfigurationBuilder().AddCommandLine(Args).Build();
 
             applicationName = config[WebHostDefaults.ApplicationKey];
 

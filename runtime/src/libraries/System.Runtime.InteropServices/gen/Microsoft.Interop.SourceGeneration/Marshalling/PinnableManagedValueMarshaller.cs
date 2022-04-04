@@ -18,8 +18,8 @@ namespace Microsoft.Interop
             _manualMarshallingGenerator = manualMarshallingGenerator;
         }
 
-        public bool IsSupported(TargetFramework target, Version version)
-            => _manualMarshallingGenerator.IsSupported(target, version);
+        public bool IsSupported(TargetFramework target, Version version) =>
+            _manualMarshallingGenerator.IsSupported(target, version);
 
         public ArgumentSyntax AsArgument(TypePositionInfo info, StubCodeContext context)
         {
@@ -50,7 +50,10 @@ namespace Microsoft.Interop
             return _manualMarshallingGenerator.Generate(info, context);
         }
 
-        public bool SupportsByValueMarshalKind(ByValueContentsMarshalKind marshalKind, StubCodeContext context)
+        public bool SupportsByValueMarshalKind(
+            ByValueContentsMarshalKind marshalKind,
+            StubCodeContext context
+        )
         {
             return _manualMarshallingGenerator.SupportsByValueMarshalKind(marshalKind, context);
         }
@@ -63,12 +66,18 @@ namespace Microsoft.Interop
             }
             return _manualMarshallingGenerator.UsesNativeIdentifier(info, context);
         }
+
         private static bool IsPinningPathSupported(TypePositionInfo info, StubCodeContext context)
         {
-            return context.SingleFrameSpansNativeContext && !info.IsByRef && !info.IsManagedReturnPosition;
+            return context.SingleFrameSpansNativeContext
+                && !info.IsByRef
+                && !info.IsManagedReturnPosition;
         }
 
-        private IEnumerable<StatementSyntax> GeneratePinningPath(TypePositionInfo info, StubCodeContext context)
+        private IEnumerable<StatementSyntax> GeneratePinningPath(
+            TypePositionInfo info,
+            StubCodeContext context
+        )
         {
             if (context.CurrentStage == StubCodeContext.Stage.Pin)
             {
@@ -78,9 +87,9 @@ namespace Microsoft.Interop
                         PointerType(PredefinedType(Token(SyntaxKind.VoidKeyword))),
                         SingletonSeparatedList(
                             VariableDeclarator(Identifier(nativeIdentifier))
-                                .WithInitializer(EqualsValueClause(
-                                    IdentifierName(managedIdentifier)
-                                ))
+                                .WithInitializer(
+                                    EqualsValueClause(IdentifierName(managedIdentifier))
+                                )
                         )
                     ),
                     EmptyStatement()

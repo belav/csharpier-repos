@@ -25,8 +25,11 @@ namespace XPathTests.FunctionalTests.MiscellaneousCases
             var startingNodePath = "/bookstore/book[1]";
             var testExpression = @"child::*[$$abc=1]";
 
-            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -104,8 +107,12 @@ namespace XPathTests.FunctionalTests.MiscellaneousCases
 
             namespaceManager.AddNamespace("abc", "http://abc.htm");
 
-            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(xml, testExpression,
-                namespaceManager: namespaceManager, startingNodePath: startingNodePath);
+            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(
+                xml,
+                testExpression,
+                namespaceManager: namespaceManager,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -117,13 +124,18 @@ namespace XPathTests.FunctionalTests.MiscellaneousCases
         {
             var xml = "books.xml";
             var startingNodePath = "/bookstore";
-            var testExpression = @"descendant::node()/self::node() [self::text() = false() and self::attribute=fasle()]";
+            var testExpression =
+                @"descendant::node()/self::node() [self::text() = false() and self::attribute=fasle()]";
             var namespaceManager = new XmlNamespaceManager(new NameTable());
 
             namespaceManager.AddNamespace("abc", "http://abc.htm");
 
-            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(xml, testExpression,
-                namespaceManager: namespaceManager, startingNodePath: startingNodePath);
+            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(
+                xml,
+                testExpression,
+                namespaceManager: namespaceManager,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -137,8 +149,11 @@ namespace XPathTests.FunctionalTests.MiscellaneousCases
             var startingNodePath = "/bookstore";
             var testExpression = @"//*[abc()]";
 
-            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -155,8 +170,12 @@ namespace XPathTests.FunctionalTests.MiscellaneousCases
 
             namespaceManager.AddNamespace("abc", "http://abc.htm");
 
-            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(xml, testExpression,
-                namespaceManager: namespaceManager, startingNodePath: startingNodePath);
+            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(
+                xml,
+                testExpression,
+                namespaceManager: namespaceManager,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -215,8 +234,11 @@ namespace XPathTests.FunctionalTests.MiscellaneousCases
             var startingNodePath = "//book";
             var testExpression = @"/bookstore | /bookstore//@* | //magazine |";
 
-            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
     }
 }

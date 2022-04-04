@@ -7,7 +7,10 @@ namespace System.Security.Cryptography
 {
     internal abstract partial class AsnFormatter
     {
-        internal static AsnFormatter Instance { get { return s_instance; } }
+        internal static AsnFormatter Instance
+        {
+            get { return s_instance; }
+        }
 
         public string Format(Oid? oid, byte[] rawData, bool multiLine)
         {
@@ -22,24 +25,28 @@ namespace System.Security.Cryptography
 
             int length = (sArray.Length * 3) - 1; // two chars per byte, plus 1 space between each
 
-            return string.Create(length, sArray, (hexOrder, sArray) =>
-            {
-                int j = 0;
-
-                for (int i = 0; i < sArray.Length; i++)
+            return string.Create(
+                length,
+                sArray,
+                (hexOrder, sArray) =>
                 {
-                    if (i != 0)
+                    int j = 0;
+
+                    for (int i = 0; i < sArray.Length; i++)
                     {
-                        hexOrder[j++] = ' ';
+                        if (i != 0)
+                        {
+                            hexOrder[j++] = ' ';
+                        }
+
+                        int digit = sArray[i];
+                        hexOrder[j++] = HexConverter.ToCharUpper(digit >> 4);
+                        hexOrder[j++] = HexConverter.ToCharUpper(digit);
                     }
 
-                    int digit = sArray[i];
-                    hexOrder[j++] = HexConverter.ToCharUpper(digit >> 4);
-                    hexOrder[j++] = HexConverter.ToCharUpper(digit);
+                    Debug.Assert(j == hexOrder.Length);
                 }
-
-                Debug.Assert(j == hexOrder.Length);
-            });
+            );
         }
     }
 }

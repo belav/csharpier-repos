@@ -69,8 +69,20 @@ namespace System.Drawing.Imaging.Tests
 
         public static IEnumerable<object[]> Properties_TestData()
         {
-            yield return new object[] { int.MaxValue, int.MaxValue, short.MaxValue, new byte[1] { 0 } };
-            yield return new object[] { int.MinValue, int.MinValue, short.MinValue, new byte[2] { 1, 1} };
+            yield return new object[]
+            {
+                int.MaxValue,
+                int.MaxValue,
+                short.MaxValue,
+                new byte[1] { 0 }
+            };
+            yield return new object[]
+            {
+                int.MinValue,
+                int.MinValue,
+                short.MinValue,
+                new byte[2] { 1, 1 }
+            };
             yield return new object[] { 0, 0, 0, new byte[0] };
         }
 
@@ -81,7 +93,7 @@ namespace System.Drawing.Imaging.Tests
         {
             using var image = new Bitmap(Helpers.GetTestBitmapPath("16x16_nonindexed_24bit.png"));
             using Image clone = (Image)image.Clone();
-            
+
             PropertyItem[] propItems = clone.PropertyItems;
             PropertyItem propItem = propItems[0];
             Assert.Equal(771, propItem.Id);

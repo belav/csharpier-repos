@@ -18,7 +18,11 @@ namespace System.Reflection.Context.Virtual
             PositionImpl = position;
         }
 
-        internal static ParameterInfo[] CloneParameters(MemberInfo member, ParameterInfo[] parameters, bool skipLastParameter)
+        internal static ParameterInfo[] CloneParameters(
+            MemberInfo member,
+            ParameterInfo[] parameters,
+            bool skipLastParameter
+        )
         {
             int length = parameters.Length;
             if (skipLastParameter)
@@ -31,7 +35,12 @@ namespace System.Reflection.Context.Virtual
             for (int i = 0; i < length; i++)
             {
                 ParameterInfo parameter = parameters[i];
-                clonedParameters[i] = new VirtualParameter(member, parameter.ParameterType, parameter.Name, parameter.Position);
+                clonedParameters[i] = new VirtualParameter(
+                    member,
+                    parameter.ParameterType,
+                    parameter.Name,
+                    parameter.Position
+                );
             }
 
             return clonedParameters;
@@ -40,17 +49,15 @@ namespace System.Reflection.Context.Virtual
         public override bool Equals([NotNullWhen(true)] object? obj)
         {
             // Do we need to compare Name and ParameterType?
-            return obj is VirtualParameter other &&
-                Member == other.Member &&
-                Position == other.Position &&
-                ParameterType == other.ParameterType;
+            return obj is VirtualParameter other
+                && Member == other.Member
+                && Position == other.Position
+                && ParameterType == other.ParameterType;
         }
 
         public override int GetHashCode()
         {
-            return Member.GetHashCode() ^
-                Position.GetHashCode() ^
-                ParameterType.GetHashCode();
+            return Member.GetHashCode() ^ Position.GetHashCode() ^ ParameterType.GetHashCode();
         }
     }
 }

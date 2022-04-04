@@ -20,12 +20,15 @@ namespace ServerComparison.FunctionalTests;
 
 public class ResponseTests : LoggedTest
 {
-    public ResponseTests(ITestOutputHelper output) : base(output)
-    {
-    }
+    public ResponseTests(ITestOutputHelper output) : base(output) { }
 
-    public static TestMatrix TestVariants
-        => TestMatrix.ForServers(/* ServerType.IISExpress, https://github.com/dotnet/aspnetcore/issues/6168, */ ServerType.Kestrel, ServerType.Nginx, ServerType.HttpSys)
+    public static TestMatrix TestVariants =>
+        TestMatrix
+            .ForServers( /* ServerType.IISExpress, https://github.com/dotnet/aspnetcore/issues/6168, */
+                ServerType.Kestrel,
+                ServerType.Nginx,
+                ServerType.HttpSys
+            )
             .WithTfms(Tfm.Default)
             .WithAllHostingModels();
 
@@ -50,9 +53,8 @@ public class ResponseTests : LoggedTest
         return ResponseFormats(variant, CheckManuallyChunkedAsync);
     }
 
-    public static TestMatrix SelfhostTestVariants
-        => TestMatrix.ForServers(ServerType.Kestrel, ServerType.HttpSys)
-            .WithTfms(Tfm.Default);
+    public static TestMatrix SelfhostTestVariants =>
+        TestMatrix.ForServers(ServerType.Kestrel, ServerType.HttpSys).WithTfms(Tfm.Default);
 
     // Connection Close tests do not work through reverse proxies
     [ConditionalTheory]
@@ -76,12 +78,21 @@ public class ResponseTests : LoggedTest
         return ResponseFormats(variant, CheckManuallyChunkedAndCloseAsync);
     }
 
-    private async Task ResponseFormats(TestVariant variant, Func<HttpClient, ILogger, Task> scenario, [CallerMemberName] string testName = null)
+    private async Task ResponseFormats(
+        TestVariant variant,
+        Func<HttpClient, ILogger, Task> scenario,
+        [CallerMemberName] string testName = null
+    )
     {
-        testName = $"{testName}_{variant.Server}_{variant.Tfm}_{variant.Architecture}_{variant.ApplicationType}";
-        using (StartLog(out var loggerFactory,
-            variant.Server == ServerType.Nginx ? LogLevel.Trace : LogLevel.Debug, // https://github.com/aspnet/ServerTests/issues/144
-            testName))
+        testName =
+            $"{testName}_{variant.Server}_{variant.Tfm}_{variant.Architecture}_{variant.ApplicationType}";
+        using (
+            StartLog(
+                out var loggerFactory,
+                variant.Server == ServerType.Nginx ? LogLevel.Trace : LogLevel.Debug, // https://github.com/aspnet/ServerTests/issues/144
+                testName
+            )
+        )
         {
             var logger = loggerFactory.CreateLogger("ResponseFormats");
 
@@ -93,18 +104,29 @@ public class ResponseTests : LoggedTest
 
             if (variant.Server == ServerType.Nginx)
             {
-                deploymentParameters.ServerConfigTemplateContent = Helpers.GetNginxConfigContent("nginx.conf");
+                deploymentParameters.ServerConfigTemplateContent = Helpers.GetNginxConfigContent(
+                    "nginx.conf"
+                );
             }
 
-            using (var deployer = IISApplicationDeployerFactory.Create(deploymentParameters, loggerFactory))
+            using (
+                var deployer = IISApplicationDeployerFactory.Create(
+                    deploymentParameters,
+                    loggerFactory
+                )
+            )
             {
                 var deploymentResult = await deployer.DeployAsync();
 
                 // Request to base address and check if various parts of the body are rendered & measure the cold startup time.
-                var response = await RetryHelper.RetryRequest(() =>
-                {
-                    return deploymentResult.HttpClient.GetAsync(string.Empty);
-                }, logger, deploymentResult.HostShutdownToken);
+                var response = await RetryHelper.RetryRequest(
+                    () =>
+                    {
+                        return deploymentResult.HttpClient.GetAsync(string.Empty);
+                    },
+                    logger,
+                    deploymentResult.HostShutdownToken
+                );
 
                 var responseText = await response.Content.ReadAsStringAsync();
                 try
@@ -251,7 +273,10 @@ public class ResponseTests : LoggedTest
         try
         {
             Assert.Equal("Manually Chunked and Close", responseText);
-            Assert.True(response.Headers.TransferEncodingChunked, "/manuallychunkedandclose, chunked?");
+            Assert.True(
+                response.Headers.TransferEncodingChunked,
+                "/manuallychunkedandclose, chunked?"
+            );
             Assert.True(response.Headers.ConnectionClose, "/manuallychunkedandclose, closed?");
             Assert.Null(GetContentLength(response));
         }
@@ -267,6 +292,8 @@ public class ResponseTests : LoggedTest
     {
         // Don't use response.Content.Headers.ContentLength, it will dynamically calculate the value if it can.
         IEnumerable<string> values;
-        return response.Content.Headers.TryGetValues(HeaderNames.ContentLength, out values) ? values.FirstOrDefault() : null;
+        return response.Content.Headers.TryGetValues(HeaderNames.ContentLength, out values)
+          ? values.FirstOrDefault()
+          : null;
     }
 }

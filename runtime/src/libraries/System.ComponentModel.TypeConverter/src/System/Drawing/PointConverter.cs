@@ -19,10 +19,15 @@ namespace System.Drawing
 
         public override bool CanConvertTo(ITypeDescriptorContext? context, Type? destinationType)
         {
-            return destinationType == typeof(InstanceDescriptor) || base.CanConvertTo(context, destinationType);
+            return destinationType == typeof(InstanceDescriptor)
+                || base.CanConvertTo(context, destinationType);
         }
 
-        public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object value)
+        public override object? ConvertFrom(
+            ITypeDescriptorContext? context,
+            CultureInfo? culture,
+            object value
+        )
         {
             if (value is string strValue)
             {
@@ -61,7 +66,12 @@ namespace System.Drawing
             return base.ConvertFrom(context, culture, value);
         }
 
-        public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
+        public override object? ConvertTo(
+            ITypeDescriptorContext? context,
+            CultureInfo? culture,
+            object? value,
+            Type destinationType
+        )
         {
             if (destinationType == null)
             {
@@ -90,7 +100,9 @@ namespace System.Drawing
                 }
                 else if (destinationType == typeof(InstanceDescriptor))
                 {
-                    ConstructorInfo? ctor = typeof(Point).GetConstructor(new Type[] { typeof(int), typeof(int) });
+                    ConstructorInfo? ctor = typeof(Point).GetConstructor(
+                        new Type[] { typeof(int), typeof(int) }
+                    );
                     if (ctor != null)
                     {
                         return new InstanceDescriptor(ctor, new object[] { pt.X, pt.Y });
@@ -101,7 +113,10 @@ namespace System.Drawing
             return base.ConvertTo(context, culture, value, destinationType);
         }
 
-        public override object CreateInstance(ITypeDescriptorContext? context, IDictionary propertyValues)
+        public override object CreateInstance(
+            ITypeDescriptorContext? context,
+            IDictionary propertyValues
+        )
         {
             if (propertyValues == null)
             {
@@ -123,10 +138,20 @@ namespace System.Drawing
 
         private static readonly string[] s_propertySort = { "X", "Y" };
 
-        [RequiresUnreferencedCode("The Type of value cannot be statically discovered. " + AttributeCollection.FilterRequiresUnreferencedCodeMessage)]
-        public override PropertyDescriptorCollection GetProperties(ITypeDescriptorContext? context, object? value, Attribute[]? attributes)
+        [RequiresUnreferencedCode(
+            "The Type of value cannot be statically discovered. "
+                + AttributeCollection.FilterRequiresUnreferencedCodeMessage
+        )]
+        public override PropertyDescriptorCollection GetProperties(
+            ITypeDescriptorContext? context,
+            object? value,
+            Attribute[]? attributes
+        )
         {
-            PropertyDescriptorCollection props = TypeDescriptor.GetProperties(typeof(Point), attributes);
+            PropertyDescriptorCollection props = TypeDescriptor.GetProperties(
+                typeof(Point),
+                attributes
+            );
             return props.Sort(s_propertySort);
         }
 

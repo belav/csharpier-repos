@@ -18,13 +18,18 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-public class RazorPagesTest : IClassFixture<MvcTestFixture<RazorPagesWebSite.StartupWithoutEndpointRouting>>
+public class RazorPagesTest
+    : IClassFixture<MvcTestFixture<RazorPagesWebSite.StartupWithoutEndpointRouting>>
 {
-    private static readonly Assembly _resourcesAssembly = typeof(RazorPagesTest).GetTypeInfo().Assembly;
+    private static readonly Assembly _resourcesAssembly = typeof(RazorPagesTest)
+        .GetTypeInfo()
+        .Assembly;
 
     public RazorPagesTest(MvcTestFixture<RazorPagesWebSite.StartupWithoutEndpointRouting> fixture)
     {
-        var factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+        var factory =
+            fixture.Factories.FirstOrDefault()
+            ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
         Client = factory.CreateDefaultClient();
     }
 
@@ -39,7 +44,11 @@ public class RazorPagesTest : IClassFixture<MvcTestFixture<RazorPagesWebSite.Sta
         // Arrange
         var expectedMediaType = MediaTypeHeaderValue.Parse("text/html; charset=utf-8");
         var outputFile = "compiler/resources/RazorPagesWebSite.SimpleForms.html";
-        var expectedContent = await ResourceFile.ReadResourceAsync(_resourcesAssembly, outputFile, sourceFile: false);
+        var expectedContent = await ResourceFile.ReadResourceAsync(
+            _resourcesAssembly,
+            outputFile,
+            sourceFile: false
+        );
 
         // Act
         var response = await Client.GetAsync("http://localhost/SimpleForms");
@@ -49,15 +58,26 @@ public class RazorPagesTest : IClassFixture<MvcTestFixture<RazorPagesWebSite.Sta
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         Assert.Equal(expectedMediaType, response.Content.Headers.ContentType);
 
-        var forgeryToken = AntiforgeryTestHelper.RetrieveAntiforgeryToken(responseContent, "SimpleForms");
-        ResourceFile.UpdateOrVerify(_resourcesAssembly, outputFile, expectedContent, responseContent, forgeryToken);
+        var forgeryToken = AntiforgeryTestHelper.RetrieveAntiforgeryToken(
+            responseContent,
+            "SimpleForms"
+        );
+        ResourceFile.UpdateOrVerify(
+            _resourcesAssembly,
+            outputFile,
+            expectedContent,
+            responseContent,
+            forgeryToken
+        );
     }
 
     [Fact]
     public async Task Page_Handler_HandlerFromQueryString()
     {
         // Arrange & Act
-        var content = await Client.GetStringAsync("http://localhost/HandlerTestPage?handler=Customer");
+        var content = await Client.GetStringAsync(
+            "http://localhost/HandlerTestPage?handler=Customer"
+        );
 
         // Assert
         Assert.StartsWith("Method: OnGetCustomer", content.Trim());
@@ -67,7 +87,9 @@ public class RazorPagesTest : IClassFixture<MvcTestFixture<RazorPagesWebSite.Sta
     public async Task Page_Handler_HandlerRouteDataChosenOverQueryString()
     {
         // Arrange & Act
-        var content = await Client.GetStringAsync("http://localhost/HandlerTestPage/Customer?handler=ViewCustomer");
+        var content = await Client.GetStringAsync(
+            "http://localhost/HandlerTestPage/Customer?handler=ViewCustomer"
+        );
 
         // Assert
         Assert.StartsWith("Method: OnGetCustomer", content.Trim());
@@ -89,10 +111,16 @@ public class RazorPagesTest : IClassFixture<MvcTestFixture<RazorPagesWebSite.Sta
         // Arrange
         var getResponse = await Client.GetAsync("http://localhost/HandlerTestPage");
         var getResponseBody = await getResponse.Content.ReadAsStringAsync();
-        var formToken = AntiforgeryTestHelper.RetrieveAntiforgeryToken(getResponseBody, "/ModelHandlerTestPage");
+        var formToken = AntiforgeryTestHelper.RetrieveAntiforgeryToken(
+            getResponseBody,
+            "/ModelHandlerTestPage"
+        );
         var cookie = AntiforgeryTestHelper.RetrieveAntiforgeryCookie(getResponse);
 
-        var postRequest = new HttpRequestMessage(HttpMethod.Post, "http://localhost/HandlerTestPage");
+        var postRequest = new HttpRequestMessage(
+            HttpMethod.Post,
+            "http://localhost/HandlerTestPage"
+        );
         postRequest.Headers.Add("Cookie", cookie.Key + "=" + cookie.Value);
         postRequest.Headers.Add("RequestVerificationToken", formToken);
 
@@ -121,10 +149,16 @@ public class RazorPagesTest : IClassFixture<MvcTestFixture<RazorPagesWebSite.Sta
         // Arrange
         var getResponse = await Client.GetAsync("http://localhost/HandlerTestPage");
         var getResponseBody = await getResponse.Content.ReadAsStringAsync();
-        var formToken = AntiforgeryTestHelper.RetrieveAntiforgeryToken(getResponseBody, "/ModelHandlerTestPage");
+        var formToken = AntiforgeryTestHelper.RetrieveAntiforgeryToken(
+            getResponseBody,
+            "/ModelHandlerTestPage"
+        );
         var cookie = AntiforgeryTestHelper.RetrieveAntiforgeryCookie(getResponse);
 
-        var postRequest = new HttpRequestMessage(HttpMethod.Post, "http://localhost/HandlerTestPage/CustomActionResult");
+        var postRequest = new HttpRequestMessage(
+            HttpMethod.Post,
+            "http://localhost/HandlerTestPage/CustomActionResult"
+        );
         postRequest.Headers.Add("Cookie", cookie.Key + "=" + cookie.Value);
         postRequest.Headers.Add("RequestVerificationToken", formToken);
         // Act
@@ -160,7 +194,9 @@ public class RazorPagesTest : IClassFixture<MvcTestFixture<RazorPagesWebSite.Sta
     public async Task PageWithModel_PartialUsingPageModelWorks()
     {
         // Act
-        using var document = await Client.GetHtmlDocumentAsync("RenderPartial/UsePageModelAsPartialModel");
+        using var document = await Client.GetHtmlDocumentAsync(
+            "RenderPartial/UsePageModelAsPartialModel"
+        );
 
         var element = document.RequiredQuerySelector("#content");
         Assert.Equal("Hello from RenderPartialWithModel", element.TextContent);
@@ -180,7 +216,9 @@ public class RazorPagesTest : IClassFixture<MvcTestFixture<RazorPagesWebSite.Sta
     public async Task Page_Handler_AsyncReturnTypeImplementsIActionResult()
     {
         // Arrange & Act
-        var content = await Client.GetStringAsync("http://localhost/HandlerTestPage/CustomActionResult");
+        var content = await Client.GetStringAsync(
+            "http://localhost/HandlerTestPage/CustomActionResult"
+        );
 
         // Assert
         Assert.Equal("CustomActionResult", content);
@@ -202,10 +240,16 @@ public class RazorPagesTest : IClassFixture<MvcTestFixture<RazorPagesWebSite.Sta
         // Arrange
         var getResponse = await Client.GetAsync("http://localhost/ModelHandlerTestPage");
         var getResponseBody = await getResponse.Content.ReadAsStringAsync();
-        var formToken = AntiforgeryTestHelper.RetrieveAntiforgeryToken(getResponseBody, "/ModelHandlerTestPage");
+        var formToken = AntiforgeryTestHelper.RetrieveAntiforgeryToken(
+            getResponseBody,
+            "/ModelHandlerTestPage"
+        );
         var cookie = AntiforgeryTestHelper.RetrieveAntiforgeryCookie(getResponse);
 
-        var postRequest = new HttpRequestMessage(HttpMethod.Post, "http://localhost/ModelHandlerTestPage");
+        var postRequest = new HttpRequestMessage(
+            HttpMethod.Post,
+            "http://localhost/ModelHandlerTestPage"
+        );
         postRequest.Headers.Add("Cookie", cookie.Key + "=" + cookie.Value);
         postRequest.Headers.Add("RequestVerificationToken", formToken);
 
@@ -222,7 +266,9 @@ public class RazorPagesTest : IClassFixture<MvcTestFixture<RazorPagesWebSite.Sta
     public async Task PageModel_Handler_AsyncHandler()
     {
         // Arrange & Act
-        var content = await Client.GetStringAsync("http://localhost/ModelHandlerTestPage/ViewCustomer");
+        var content = await Client.GetStringAsync(
+            "http://localhost/ModelHandlerTestPage/ViewCustomer"
+        );
 
         // Assert
         Assert.StartsWith("Method: OnGetViewCustomerAsync", content.Trim());
@@ -234,10 +280,16 @@ public class RazorPagesTest : IClassFixture<MvcTestFixture<RazorPagesWebSite.Sta
         // Arrange
         var getResponse = await Client.GetAsync("http://localhost/ModelHandlerTestPage");
         var getResponseBody = await getResponse.Content.ReadAsStringAsync();
-        var formToken = AntiforgeryTestHelper.RetrieveAntiforgeryToken(getResponseBody, "/ModelHandlerTestPage");
+        var formToken = AntiforgeryTestHelper.RetrieveAntiforgeryToken(
+            getResponseBody,
+            "/ModelHandlerTestPage"
+        );
         var cookie = AntiforgeryTestHelper.RetrieveAntiforgeryCookie(getResponse);
 
-        var postRequest = new HttpRequestMessage(HttpMethod.Post, "http://localhost/ModelHandlerTestPage/CustomActionResult");
+        var postRequest = new HttpRequestMessage(
+            HttpMethod.Post,
+            "http://localhost/ModelHandlerTestPage/CustomActionResult"
+        );
         postRequest.Headers.Add("Cookie", cookie.Key + "=" + cookie.Value);
         postRequest.Headers.Add("RequestVerificationToken", formToken);
         // Act
@@ -253,7 +305,9 @@ public class RazorPagesTest : IClassFixture<MvcTestFixture<RazorPagesWebSite.Sta
     public async Task PageModel_Handler_AsyncReturnTypeImplementsIActionResult()
     {
         // Arrange & Act
-        var content = await Client.GetStringAsync("http://localhost/ModelHandlerTestPage/CustomActionResult");
+        var content = await Client.GetStringAsync(
+            "http://localhost/ModelHandlerTestPage/CustomActionResult"
+        );
 
         // Assert
         Assert.Equal("CustomActionResult", content);
@@ -263,7 +317,10 @@ public class RazorPagesTest : IClassFixture<MvcTestFixture<RazorPagesWebSite.Sta
     public async Task RouteData_StringValueOnIntProp_ExpectsNotFound()
     {
         // Arrange
-        var routeRequest = new HttpRequestMessage(HttpMethod.Get, "http://localhost/RouteData/pizza");
+        var routeRequest = new HttpRequestMessage(
+            HttpMethod.Get,
+            "http://localhost/RouteData/pizza"
+        );
 
         // Act
         var routeResponse = await Client.SendAsync(routeRequest);
@@ -337,7 +394,10 @@ public class RazorPagesTest : IClassFixture<MvcTestFixture<RazorPagesWebSite.Sta
     public async Task PageHandlerCanReturnBadRequest()
     {
         // Arrange
-        var request = new HttpRequestMessage(HttpMethod.Get, "http://localhost/Pages/HandlerWithParameter");
+        var request = new HttpRequestMessage(
+            HttpMethod.Get,
+            "http://localhost/Pages/HandlerWithParameter"
+        );
 
         // Act
         var response = await Client.SendAsync(request);
@@ -369,7 +429,10 @@ public class RazorPagesTest : IClassFixture<MvcTestFixture<RazorPagesWebSite.Sta
     public async Task HelloWorldWithRoute_CanGetContent()
     {
         // Arrange
-        var request = new HttpRequestMessage(HttpMethod.Get, "http://localhost/HelloWorldWithRoute/Some/Path/route");
+        var request = new HttpRequestMessage(
+            HttpMethod.Get,
+            "http://localhost/HelloWorldWithRoute/Some/Path/route"
+        );
 
         // Act
         var response = await Client.SendAsync(request);
@@ -385,7 +448,10 @@ public class RazorPagesTest : IClassFixture<MvcTestFixture<RazorPagesWebSite.Sta
     public async Task HelloWorldWithHandler_CanGetContent()
     {
         // Arrange
-        var request = new HttpRequestMessage(HttpMethod.Get, "http://localhost/HelloWorldWithHandler?message=handler");
+        var request = new HttpRequestMessage(
+            HttpMethod.Get,
+            "http://localhost/HelloWorldWithHandler?message=handler"
+        );
 
         // Act
         var response = await Client.SendAsync(request);
@@ -401,14 +467,22 @@ public class RazorPagesTest : IClassFixture<MvcTestFixture<RazorPagesWebSite.Sta
     public async Task HelloWorldWithPageModelHandler_CanPostContent()
     {
         // Arrange
-        var getRequest = new HttpRequestMessage(HttpMethod.Get, "http://localhost/HelloWorldWithPageModelHandler?message=message");
+        var getRequest = new HttpRequestMessage(
+            HttpMethod.Get,
+            "http://localhost/HelloWorldWithPageModelHandler?message=message"
+        );
         var getResponse = await Client.SendAsync(getRequest);
         var getResponseBody = await getResponse.Content.ReadAsStringAsync();
-        var formToken = AntiforgeryTestHelper.RetrieveAntiforgeryToken(getResponseBody, "/HelloWorlWithPageModelHandler");
+        var formToken = AntiforgeryTestHelper.RetrieveAntiforgeryToken(
+            getResponseBody,
+            "/HelloWorlWithPageModelHandler"
+        );
         var cookie = AntiforgeryTestHelper.RetrieveAntiforgeryCookie(getResponse);
 
-
-        var postRequest = new HttpRequestMessage(HttpMethod.Post, "http://localhost/HelloWorldWithPageModelHandler");
+        var postRequest = new HttpRequestMessage(
+            HttpMethod.Post,
+            "http://localhost/HelloWorldWithPageModelHandler"
+        );
         postRequest.Headers.Add("Cookie", cookie.Key + "=" + cookie.Value);
         postRequest.Headers.Add("RequestVerificationToken", formToken);
 
@@ -458,7 +532,10 @@ public class RazorPagesTest : IClassFixture<MvcTestFixture<RazorPagesWebSite.Sta
     public async Task PageWithoutContent()
     {
         // Arrange
-        var request = new HttpRequestMessage(HttpMethod.Get, "http://localhost/PageWithoutContent/No/Content/Path");
+        var request = new HttpRequestMessage(
+            HttpMethod.Get,
+            "http://localhost/PageWithoutContent/No/Content/Path"
+        );
 
         // Act
         var response = await Client.SendAsync(request);
@@ -565,10 +642,16 @@ public class RazorPagesTest : IClassFixture<MvcTestFixture<RazorPagesWebSite.Sta
     public async Task TempData_TempDataPropertyOnPageModel_PopulatesTempData()
     {
         // Arrange 1
-        var getRequest = new HttpRequestMessage(HttpMethod.Get, "http://localhost/TempData/TempDataPageModelProperty");
+        var getRequest = new HttpRequestMessage(
+            HttpMethod.Get,
+            "http://localhost/TempData/TempDataPageModelProperty"
+        );
         var getResponse = await Client.SendAsync(getRequest);
         var getResponseBody = await getResponse.Content.ReadAsStringAsync();
-        var formToken = AntiforgeryTestHelper.RetrieveAntiforgeryToken(getResponseBody, "/TempData/TempDataPageModelProperty");
+        var formToken = AntiforgeryTestHelper.RetrieveAntiforgeryToken(
+            getResponseBody,
+            "/TempData/TempDataPageModelProperty"
+        );
         var cookie = AntiforgeryTestHelper.RetrieveAntiforgeryCookie(getResponse);
 
         var url = "http://localhost/TempData/TempDataPageModelProperty";
@@ -586,7 +669,10 @@ public class RazorPagesTest : IClassFixture<MvcTestFixture<RazorPagesWebSite.Sta
         Assert.EndsWith("TempData:", content.Trim());
 
         // Arrange 2
-        request = new HttpRequestMessage(HttpMethod.Get, "http://localhost/TempData/TempDataPageModelProperty");
+        request = new HttpRequestMessage(
+            HttpMethod.Get,
+            "http://localhost/TempData/TempDataPageModelProperty"
+        );
         request.Headers.Add("Cookie", GetCookie(response));
 
         // Act 2
@@ -610,7 +696,10 @@ public class RazorPagesTest : IClassFixture<MvcTestFixture<RazorPagesWebSite.Sta
 
         // Assert
         Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
-        Assert.Equal("/Login?ReturnUrl=%2FHelloWorldWithAuth", response.Headers.Location.PathAndQuery);
+        Assert.Equal(
+            "/Login?ReturnUrl=%2FHelloWorldWithAuth",
+            response.Headers.Location.PathAndQuery
+        );
     }
 
     [Fact]
@@ -634,7 +723,8 @@ public class RazorPagesTest : IClassFixture<MvcTestFixture<RazorPagesWebSite.Sta
     {
         // Test for https://github.com/aspnet/Mvc/issues/5915
         //Arrange
-        var expected = @"Hello from _ViewStart
+        var expected =
+            @"Hello from _ViewStart
 Hello from /Pages/WithViewStart/Index.cshtml!";
 
         // Act
@@ -663,13 +753,18 @@ Hello from /Pages/WithViewStart/Index.cshtml!";
     {
         // Arrange
         var expected = "Id = 10, Name = Foo, Age = 25";
-        var request = new HttpRequestMessage(HttpMethod.Post, "Pages/PropertyBinding/PagePropertyBinding/10")
+        var request = new HttpRequestMessage(
+            HttpMethod.Post,
+            "Pages/PropertyBinding/PagePropertyBinding/10"
+        )
         {
-            Content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]
-            {
+            Content = new FormUrlEncodedContent(
+                new KeyValuePair<string, string>[]
+                {
                     new KeyValuePair<string, string>("Name", "Foo"),
                     new KeyValuePair<string, string>("Age", "25"),
-            }),
+                }
+            ),
         };
         await AddAntiforgeryHeaders(request);
 
@@ -688,16 +783,21 @@ Hello from /Pages/WithViewStart/Index.cshtml!";
         // Arrange
         var expected = new[]
         {
-                "Id = 27, Name = , Age = 325",
-                "The Name field is required.",
-                "The field Age must be between 0 and 99.",
-            };
-        var request = new HttpRequestMessage(HttpMethod.Post, "Pages/PropertyBinding/PagePropertyBinding/27")
+            "Id = 27, Name = , Age = 325",
+            "The Name field is required.",
+            "The field Age must be between 0 and 99.",
+        };
+        var request = new HttpRequestMessage(
+            HttpMethod.Post,
+            "Pages/PropertyBinding/PagePropertyBinding/27"
+        )
         {
-            Content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]
-            {
+            Content = new FormUrlEncodedContent(
+                new KeyValuePair<string, string>[]
+                {
                     new KeyValuePair<string, string>("Age", "325"),
-            }),
+                }
+            ),
         };
         await AddAntiforgeryHeaders(request);
 
@@ -718,13 +818,18 @@ Hello from /Pages/WithViewStart/Index.cshtml!";
     {
         // Arrange
         var expected = "Id = 10, Name = Foo, Age = 25, PropertyWithSupportGetsTrue = foo";
-        var request = new HttpRequestMessage(HttpMethod.Post, "Pages/PropertyBinding/PageModelWithPropertyBinding/10?PropertyWithSupportGetsTrue=foo")
+        var request = new HttpRequestMessage(
+            HttpMethod.Post,
+            "Pages/PropertyBinding/PageModelWithPropertyBinding/10?PropertyWithSupportGetsTrue=foo"
+        )
         {
-            Content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]
-            {
+            Content = new FormUrlEncodedContent(
+                new KeyValuePair<string, string>[]
+                {
                     new KeyValuePair<string, string>("Name", "Foo"),
                     new KeyValuePair<string, string>("Age", "25"),
-            }),
+                }
+            ),
         };
         await AddAntiforgeryHeaders(request);
 
@@ -744,17 +849,19 @@ Hello from /Pages/WithViewStart/Index.cshtml!";
         var url = "Pages/PropertyBinding/PageModelWithPropertyBinding/27";
         var expected = new[]
         {
-                "Id = 27, Name = , Age = 325, PropertyWithSupportGetsTrue =",
-                "The Name field is required.",
-                "The field Age must be between 0 and 99.",
-            };
+            "Id = 27, Name = , Age = 325, PropertyWithSupportGetsTrue =",
+            "The Name field is required.",
+            "The field Age must be between 0 and 99.",
+        };
 
         var request = new HttpRequestMessage(HttpMethod.Post, url)
         {
-            Content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]
-            {
+            Content = new FormUrlEncodedContent(
+                new KeyValuePair<string, string>[]
+                {
                     new KeyValuePair<string, string>("Age", "325"),
-            }),
+                }
+            ),
         };
 
         await AddAntiforgeryHeaders(request);
@@ -778,13 +885,18 @@ Hello from /Pages/WithViewStart/Index.cshtml!";
         var name = "TestName";
         var age = 23;
         var expected = $"Name = {name}, Age = {age}";
-        var request = new HttpRequestMessage(HttpMethod.Post, "Pages/PropertyBinding/PolymorphicBinding")
+        var request = new HttpRequestMessage(
+            HttpMethod.Post,
+            "Pages/PropertyBinding/PolymorphicBinding"
+        )
         {
-            Content = new FormUrlEncodedContent(new Dictionary<string, string>
+            Content = new FormUrlEncodedContent(
+                new Dictionary<string, string>
                 {
                     { "Name", name },
                     { "Age", age.ToString(CultureInfo.InvariantCulture) },
-                }),
+                }
+            ),
         };
         await AddAntiforgeryHeaders(request);
 
@@ -803,13 +915,18 @@ Hello from /Pages/WithViewStart/Index.cshtml!";
         // Arrange
         var name = "TestName";
         var age = 123;
-        var request = new HttpRequestMessage(HttpMethod.Post, "Pages/PropertyBinding/PolymorphicBinding")
+        var request = new HttpRequestMessage(
+            HttpMethod.Post,
+            "Pages/PropertyBinding/PolymorphicBinding"
+        )
         {
-            Content = new FormUrlEncodedContent(new Dictionary<string, string>
+            Content = new FormUrlEncodedContent(
+                new Dictionary<string, string>
                 {
                     { "Name", name },
                     { "Age", age.ToString(CultureInfo.InvariantCulture) },
-                }),
+                }
+            ),
         };
         await AddAntiforgeryHeaders(request);
 
@@ -820,13 +937,14 @@ Hello from /Pages/WithViewStart/Index.cshtml!";
         await response.AssertStatusCodeAsync(HttpStatusCode.BadRequest);
         var result = JObject.Parse(await response.Content.ReadAsStringAsync());
         Assert.Collection(
-           result.Properties(),
-           p =>
-           {
-               Assert.Equal("Age", p.Name);
-               var value = Assert.IsType<JArray>(p.Value);
-               Assert.Equal("The field Age must be between 0 and 99.", value.First.ToString());
-           });
+            result.Properties(),
+            p =>
+            {
+                Assert.Equal("Age", p.Name);
+                var value = Assert.IsType<JArray>(p.Value);
+                Assert.Equal("The field Age must be between 0 and 99.", value.First.ToString());
+            }
+        );
     }
 
     [Fact]
@@ -834,13 +952,18 @@ Hello from /Pages/WithViewStart/Index.cshtml!";
     {
         // Arrange
         var expected = "Id = 11, Name = Test-Name, Age = 32";
-        var request = new HttpRequestMessage(HttpMethod.Post, "Pages/PropertyBinding/PageWithPropertyAndArgumentBinding?id=11")
+        var request = new HttpRequestMessage(
+            HttpMethod.Post,
+            "Pages/PropertyBinding/PageWithPropertyAndArgumentBinding?id=11"
+        )
         {
-            Content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]
-            {
+            Content = new FormUrlEncodedContent(
+                new KeyValuePair<string, string>[]
+                {
                     new KeyValuePair<string, string>("Name", "Test-Name"),
                     new KeyValuePair<string, string>("Age", "32"),
-            }),
+                }
+            ),
         };
         await AddAntiforgeryHeaders(request);
 
@@ -859,13 +982,18 @@ Hello from /Pages/WithViewStart/Index.cshtml!";
         // Arrange
         var expected = "Id = 11, Name = Test-Name, Age =";
         var validationError = "The Name field is required.";
-        var request = new HttpRequestMessage(HttpMethod.Get, "Pages/PropertyBinding/PageWithPropertyAndArgumentBinding?id=11")
+        var request = new HttpRequestMessage(
+            HttpMethod.Get,
+            "Pages/PropertyBinding/PageWithPropertyAndArgumentBinding?id=11"
+        )
         {
-            Content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]
-            {
+            Content = new FormUrlEncodedContent(
+                new KeyValuePair<string, string>[]
+                {
                     new KeyValuePair<string, string>("Name", "Test-Name"),
                     new KeyValuePair<string, string>("Age", "32"),
-            }),
+                }
+            ),
         };
 
         // Act
@@ -882,7 +1010,10 @@ Hello from /Pages/WithViewStart/Index.cshtml!";
     public async Task PageProperty_WithSupportsGetTrue_OnPageWithHandler_FuzzyMatchesHeadRequest()
     {
         // Arrange
-        var request = new HttpRequestMessage(HttpMethod.Head, "Pages/PropertyBinding/PageModelWithPropertyBinding/10?PropertyWithSupportGetsTrue=foo");
+        var request = new HttpRequestMessage(
+            HttpMethod.Head,
+            "Pages/PropertyBinding/PageModelWithPropertyBinding/10?PropertyWithSupportGetsTrue=foo"
+        );
 
         // Act
         var response = await Client.SendAsync(request);
@@ -898,7 +1029,10 @@ Hello from /Pages/WithViewStart/Index.cshtml!";
     public async Task PageProperty_WithSupportsGetTrue_OnPageWithNoHandler_FuzzyMatchesHeadRequest()
     {
         // Arrange
-        var request = new HttpRequestMessage(HttpMethod.Head, "Pages/PropertyBinding/BindPropertyWithGet?value=11");
+        var request = new HttpRequestMessage(
+            HttpMethod.Head,
+            "Pages/PropertyBinding/BindPropertyWithGet?value=11"
+        );
 
         // Act
         var response = await Client.SendAsync(request);
@@ -915,7 +1049,10 @@ Hello from /Pages/WithViewStart/Index.cshtml!";
     {
         // Arrange
         var expected = "<p>11</p>";
-        var request = new HttpRequestMessage(HttpMethod.Get, "Pages/PropertyBinding/BindPropertyWithGet?value=11");
+        var request = new HttpRequestMessage(
+            HttpMethod.Get,
+            "Pages/PropertyBinding/BindPropertyWithGet?value=11"
+        );
 
         // Act
         var response = await Client.SendAsync(request);
@@ -931,7 +1068,7 @@ Hello from /Pages/WithViewStart/Index.cshtml!";
     {
         // Arrange
         var expected =
-@"Microsoft.AspNetCore.Mvc.Routing.UrlHelper
+            @"Microsoft.AspNetCore.Mvc.Routing.UrlHelper
 Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper`1[AspNetCoreGeneratedDocument.InjectedPageProperties]
 Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary`1[AspNetCoreGeneratedDocument.InjectedPageProperties]";
 
@@ -977,10 +1114,12 @@ Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary`1[AspNetCoreGeneratedDo
         var expected = "/Pages/Redirects/RedirectToSelf?user=37";
         var request = new HttpRequestMessage(HttpMethod.Post, "/Pages/Redirects/RedirectToSelf")
         {
-            Content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]
-            {
+            Content = new FormUrlEncodedContent(
+                new KeyValuePair<string, string>[]
+                {
                     new KeyValuePair<string, string>("value", "37"),
-            }),
+                }
+            ),
         };
 
         // Act
@@ -999,7 +1138,9 @@ Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary`1[AspNetCoreGeneratedDo
         var expected = "/Pages/Redirects/RedirectFromHandler";
 
         // Act
-        var response = await Client.GetAsync("/Pages/Redirects/RedirectFromHandler/RedirectToPage/10");
+        var response = await Client.GetAsync(
+            "/Pages/Redirects/RedirectFromHandler/RedirectToPage/10"
+        );
 
         // Assert
         Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
@@ -1013,7 +1154,9 @@ Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary`1[AspNetCoreGeneratedDo
         var expected = "/Pages/Redirects/RedirectFromHandler/RedirectToPage/11";
 
         // Act
-        var response = await Client.GetAsync("/Pages/Redirects/RedirectFromHandler/RedirectToAnotherHandler/11");
+        var response = await Client.GetAsync(
+            "/Pages/Redirects/RedirectFromHandler/RedirectToAnotherHandler/11"
+        );
 
         // Assert
         Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
@@ -1053,7 +1196,9 @@ Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary`1[AspNetCoreGeneratedDo
     {
         // Arrange
         var expected = "/Pages/Redirects/Redirect/10";
-        var response = await Client.GetAsync("/Pages/Redirects/RedirectToSibling/RedirectToRedirect");
+        var response = await Client.GetAsync(
+            "/Pages/Redirects/RedirectToSibling/RedirectToRedirect"
+        );
 
         // Assert
         Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
@@ -1091,7 +1236,9 @@ Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary`1[AspNetCoreGeneratedDo
         var expected = "/Pages/Redirects/SubDir/SubDirPage";
 
         // Act
-        var response = await Client.GetAsync("/Pages/Redirects/RedirectToSibling/RedirectToDotSlash");
+        var response = await Client.GetAsync(
+            "/Pages/Redirects/RedirectToSibling/RedirectToDotSlash"
+        );
 
         // Assert
         Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
@@ -1115,7 +1262,7 @@ Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary`1[AspNetCoreGeneratedDo
     {
         // Arrange
         var expected =
-@"<form method=""post"" action=""/Pages/TagHelper/CrossPost""></form>
+            @"<form method=""post"" action=""/Pages/TagHelper/CrossPost""></form>
 <a href=""/Pages/TagHelper/SelfPost/12"" />
 <input type=""image"" formaction=""/Pages/TagHelper/CrossPost#my-fragment"" />";
 
@@ -1131,7 +1278,7 @@ Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary`1[AspNetCoreGeneratedDo
     {
         // Arrange
         var expected =
-@"<form method=""post"" action=""/Pages/TagHelper/SubDir/SubDirPage""></form>
+            @"<form method=""post"" action=""/Pages/TagHelper/SubDir/SubDirPage""></form>
 <a href=""/Pages/TagHelper/SubDir/SubDirPage/12"" />
 <input type=""image"" formaction=""/Pages/TagHelper/SubDir/SubDirPage#my-fragment"" />";
 
@@ -1147,7 +1294,7 @@ Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary`1[AspNetCoreGeneratedDo
     {
         // Arrange
         var expected =
-@"<form method=""post"" action=""/Pages/TagHelper/SubDirectoryLinks""></form>
+            @"<form method=""post"" action=""/Pages/TagHelper/SubDirectoryLinks""></form>
 <form method=""post"" action=""/HelloWorld""></form>
 <a href=""/Pages/Redirects/RedirectToIndex"" />
 <input type=""image"" formaction=""/Pages/Admin#my-fragment"" />";
@@ -1206,7 +1353,10 @@ Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary`1[AspNetCoreGeneratedDo
 
         // Assert
         Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
-        Assert.Equal("/Login?ReturnUrl=%2FPages%2FModelWithAuthFilter", response.Headers.Location.PathAndQuery);
+        Assert.Equal(
+            "/Login?ReturnUrl=%2FPages%2FModelWithAuthFilter",
+            response.Headers.Location.PathAndQuery
+        );
     }
 
     [Fact]
@@ -1217,7 +1367,10 @@ Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary`1[AspNetCoreGeneratedDo
 
         // Assert
         Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
-        Assert.Equal("/Login?ReturnUrl=%2FPages%2FAdmin%2FEdit", response.Headers.Location.PathAndQuery);
+        Assert.Equal(
+            "/Login?ReturnUrl=%2FPages%2FAdmin%2FEdit",
+            response.Headers.Location.PathAndQuery
+        );
     }
 
     [Fact]
@@ -1280,12 +1433,14 @@ Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary`1[AspNetCoreGeneratedDo
     {
         // Arrange
         var expected = "Property1 = 123, Property2 = 25,";
-        var request = new HttpRequestMessage(HttpMethod.Post, "/Pages/PropertyBinding/BindPropertiesOnModel?Property1=123")
+        var request = new HttpRequestMessage(
+            HttpMethod.Post,
+            "/Pages/PropertyBinding/BindPropertiesOnModel?Property1=123"
+        )
         {
-            Content = new FormUrlEncodedContent(new Dictionary<string, string>
-                {
-                    { "Property2", "25" },
-                }),
+            Content = new FormUrlEncodedContent(
+                new Dictionary<string, string> { { "Property2", "25" }, }
+            ),
         };
         await AddAntiforgeryHeaders(request);
 
@@ -1302,7 +1457,8 @@ Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary`1[AspNetCoreGeneratedDo
     public async Task BindPropertiesAttribute_CanBeAppliedToModelType_AllowsBindingOnGet()
     {
         // Arrange
-        var url = "/Pages/PropertyBinding/BindPropertiesWithSupportsGetOnModel?Property=Property-Value";
+        var url =
+            "/Pages/PropertyBinding/BindPropertiesWithSupportsGetOnModel?Property=Property-Value";
 
         // Act
         var response = await Client.GetAsync(url);
@@ -1318,15 +1474,20 @@ Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary`1[AspNetCoreGeneratedDo
     {
         // Arrange
         var expected = "Property1 = 123, Property2 = 25,";
-        var request = new HttpRequestMessage(HttpMethod.Post, "/Pages/PropertyBinding/BindPropertiesOnModel?Property1=123")
+        var request = new HttpRequestMessage(
+            HttpMethod.Post,
+            "/Pages/PropertyBinding/BindPropertiesOnModel?Property1=123"
+        )
         {
-            Content = new FormUrlEncodedContent(new[]
-            {
+            Content = new FormUrlEncodedContent(
+                new[]
+                {
                     // FormValueProvider appears before QueryStringValueProvider. However, the FromQuery explicitly listed
                     // on the property should cause it to use the latter.
                     new KeyValuePair<string, string>("Property1", "345"),
                     new KeyValuePair<string, string>("Property2", "25"),
-                }),
+                }
+            ),
         };
         await AddAntiforgeryHeaders(request);
 
@@ -1340,17 +1501,18 @@ Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary`1[AspNetCoreGeneratedDo
     }
 
     [Fact]
-    public Task InheritsOnViewImportsWorksForPagesWithoutModel()
-        => InheritsOnViewImportsWorks("Pages/CustomBaseType/Page");
+    public Task InheritsOnViewImportsWorksForPagesWithoutModel() =>
+        InheritsOnViewImportsWorks("Pages/CustomBaseType/Page");
 
     [Fact]
-    public Task InheritsOnViewImportsWorksForPagesWithModel()
-        => InheritsOnViewImportsWorks("Pages/CustomBaseType/PageWithModel");
+    public Task InheritsOnViewImportsWorksForPagesWithModel() =>
+        InheritsOnViewImportsWorks("Pages/CustomBaseType/PageWithModel");
 
     private async Task InheritsOnViewImportsWorks(string path)
     {
         // Arrange
-        var expected = "<custom-base-type-layout>RazorPagesWebSite.CustomPageBase</custom-base-type-layout>";
+        var expected =
+            "<custom-base-type-layout>RazorPagesWebSite.CustomPageBase</custom-base-type-layout>";
 
         // Act
         var response = await Client.GetStringAsync(path);
@@ -1399,11 +1561,14 @@ Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary`1[AspNetCoreGeneratedDo
         string expected;
         using (new CultureReplacer(CultureInfo.InvariantCulture, CultureInfo.InvariantCulture))
         {
-            expected = $"id: 10, guid: {default(Guid)}, boolean: {default(bool)}, dateTime: {default(DateTime)}";
+            expected =
+                $"id: 10, guid: {default(Guid)}, boolean: {default(bool)}, dateTime: {default(DateTime)}";
         }
 
         // Act
-        var content = await Client.GetStringAsync("http://localhost/ModelHandlerTestPage/DefaultValues");
+        var content = await Client.GetStringAsync(
+            "http://localhost/ModelHandlerTestPage/DefaultValues"
+        );
 
         // Assert
         Assert.Equal(expected, content);
@@ -1415,7 +1580,9 @@ Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary`1[AspNetCoreGeneratedDo
     public async Task PageResultSetAt_AuthorizationFilter_Works(string targetName)
     {
         // Act
-        var content = await Client.GetStringAsync("http://localhost/Pages/ShortCircuitPageAtAuthFilter?target=" + targetName);
+        var content = await Client.GetStringAsync(
+            "http://localhost/Pages/ShortCircuitPageAtAuthFilter?target=" + targetName
+        );
 
         // Assert
         Assert.Equal("From ShortCircuitPageAtAuthFilter.cshtml", content);
@@ -1427,7 +1594,9 @@ Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary`1[AspNetCoreGeneratedDo
     public async Task PageResultSetAt_PageFilter_Works(string targetName)
     {
         // Act
-        var content = await Client.GetStringAsync("http://localhost/Pages/ShortCircuitPageAtPageFilter?target=" + targetName);
+        var content = await Client.GetStringAsync(
+            "http://localhost/Pages/ShortCircuitPageAtPageFilter?target=" + targetName
+        );
 
         // Assert
         Assert.Equal("From ShortCircuitPageAtPageFilter.cshtml", content);
@@ -1437,7 +1606,9 @@ Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary`1[AspNetCoreGeneratedDo
     public async Task ViewDataAwaitableInPageFilter_AfterHandlerMethod_ReturnsPageResult()
     {
         // Act
-        var content = await Client.GetStringAsync("http://localhost/Pages/ViewDataAvailableAfterHandlerExecuted");
+        var content = await Client.GetStringAsync(
+            "http://localhost/Pages/ViewDataAvailableAfterHandlerExecuted"
+        );
 
         // Assert
         Assert.Equal("ViewData: Bar", content);
@@ -1463,7 +1634,10 @@ Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary`1[AspNetCoreGeneratedDo
     public async Task PageWithOptionsHandler_ExecutesGetRequest()
     {
         // Arrange
-        var request = new HttpRequestMessage(HttpMethod.Get, "http://localhost/HelloWorldWithOptionsHandler");
+        var request = new HttpRequestMessage(
+            HttpMethod.Get,
+            "http://localhost/HelloWorldWithOptionsHandler"
+        );
 
         // Act
         var response = await Client.SendAsync(request);
@@ -1479,7 +1653,10 @@ Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary`1[AspNetCoreGeneratedDo
     public async Task PageWithOptionsHandler_ExecutesOptionsRequest()
     {
         // Arrange
-        var request = new HttpRequestMessage(HttpMethod.Options, "http://localhost/HelloWorldWithOptionsHandler");
+        var request = new HttpRequestMessage(
+            HttpMethod.Options,
+            "http://localhost/HelloWorldWithOptionsHandler"
+        );
 
         // Act
         var response = await Client.SendAsync(request);

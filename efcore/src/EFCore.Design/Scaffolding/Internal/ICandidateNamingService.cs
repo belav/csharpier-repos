@@ -46,6 +46,7 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         /// </summary>
         string GetPrincipalEndCandidateNavigationPropertyName(
             IReadOnlyForeignKey foreignKey,
-            string dependentEndNavigationPropertyName);
+            string dependentEndNavigationPropertyName
+        );
     }
 }

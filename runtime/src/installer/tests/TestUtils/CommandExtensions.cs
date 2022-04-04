@@ -12,12 +12,18 @@ namespace Microsoft.DotNet.CoreSetup.Test
     {
         public static Command EnableHostTracing(this Command command)
         {
-            return command.EnvironmentVariable(Constants.HostTracing.TraceLevelEnvironmentVariable, "1");
+            return command.EnvironmentVariable(
+                Constants.HostTracing.TraceLevelEnvironmentVariable,
+                "1"
+            );
         }
 
         public static Command EnableHostTracingToFile(this Command command, out string filePath)
         {
-            filePath = Path.Combine(TestArtifact.TestArtifactsPath, "trace" + Guid.NewGuid().ToString() + ".log");
+            filePath = Path.Combine(
+                TestArtifact.TestArtifactsPath,
+                "trace" + Guid.NewGuid().ToString() + ".log"
+            );
             if (File.Exists(filePath))
             {
                 File.Delete(filePath);
@@ -30,25 +36,36 @@ namespace Microsoft.DotNet.CoreSetup.Test
 
         public static Command EnableTracingAndCaptureOutputs(this Command command)
         {
-            return command
-                .EnableHostTracing()
-                .CaptureStdOut()
-                .CaptureStdErr();
+            return command.EnableHostTracing().CaptureStdOut().CaptureStdErr();
         }
 
-        public static Command DotNetRoot(this Command command, string dotNetRoot, string architecture = null)
+        public static Command DotNetRoot(
+            this Command command,
+            string dotNetRoot,
+            string architecture = null
+        )
         {
             if (!string.IsNullOrEmpty(architecture))
-                return command.EnvironmentVariable(Constants.DotnetRoot.ArchitectureEnvironmentVariablePrefix + architecture.ToUpper(), dotNetRoot);
+                return command.EnvironmentVariable(
+                    Constants.DotnetRoot.ArchitectureEnvironmentVariablePrefix
+                        + architecture.ToUpper(),
+                    dotNetRoot
+                );
 
             return command
                 .EnvironmentVariable(Constants.DotnetRoot.EnvironmentVariable, dotNetRoot)
-                .EnvironmentVariable(Constants.DotnetRoot.WindowsX86EnvironmentVariable, dotNetRoot);
+                .EnvironmentVariable(
+                    Constants.DotnetRoot.WindowsX86EnvironmentVariable,
+                    dotNetRoot
+                );
         }
 
         public static Command MultilevelLookup(this Command command, bool enable)
         {
-            return command.EnvironmentVariable(Constants.MultilevelLookup.EnvironmentVariable, enable ? "1" : "0");
+            return command.EnvironmentVariable(
+                Constants.MultilevelLookup.EnvironmentVariable,
+                enable ? "1" : "0"
+            );
         }
 
         public static Command RuntimeId(this Command command, string rid)

@@ -9,50 +9,55 @@ using Xunit;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public abstract class NorthwindDbFunctionsQueryRelationalTestBase<TFixture> : NorthwindDbFunctionsQueryTestBase<TFixture>
+    public abstract class NorthwindDbFunctionsQueryRelationalTestBase<TFixture>
+        : NorthwindDbFunctionsQueryTestBase<TFixture>
         where TFixture : NorthwindQueryRelationalFixture<NoopModelCustomizer>, new()
     {
-        public NorthwindDbFunctionsQueryRelationalTestBase(TFixture fixture)
-            : base(fixture)
-        {
-        }
+        public NorthwindDbFunctionsQueryRelationalTestBase(TFixture fixture) : base(fixture) { }
 
-        protected virtual bool CanExecuteQueryString
-            => false;
+        protected virtual bool CanExecuteQueryString => false;
 
-        protected override QueryAsserter CreateQueryAsserter(TFixture fixture)
-            => new RelationalQueryAsserter(
-                fixture, RewriteExpectedQueryExpression, RewriteServerQueryExpression, canExecuteQueryString: CanExecuteQueryString);
+        protected override QueryAsserter CreateQueryAsserter(TFixture fixture) =>
+            new RelationalQueryAsserter(
+                fixture,
+                RewriteExpectedQueryExpression,
+                RewriteServerQueryExpression,
+                canExecuteQueryString: CanExecuteQueryString
+            );
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
-        public virtual Task Collate_case_insensitive(bool async)
-            => AssertCount(
+        public virtual Task Collate_case_insensitive(bool async) =>
+            AssertCount(
                 async,
                 ss => ss.Set<Customer>(),
                 ss => ss.Set<Customer>(),
-                c => EF.Functions.Collate(c.ContactName, CaseInsensitiveCollation) == "maria anders",
-                c => c.ContactName.Equals("maria anders", StringComparison.OrdinalIgnoreCase));
+                c =>
+                    EF.Functions.Collate(c.ContactName, CaseInsensitiveCollation) == "maria anders",
+                c => c.ContactName.Equals("maria anders", StringComparison.OrdinalIgnoreCase)
+            );
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
-        public virtual Task Collate_case_sensitive(bool async)
-            => AssertCount(
+        public virtual Task Collate_case_sensitive(bool async) =>
+            AssertCount(
                 async,
                 ss => ss.Set<Customer>(),
                 ss => ss.Set<Customer>(),
                 c => EF.Functions.Collate(c.ContactName, CaseSensitiveCollation) == "maria anders",
-                c => c.ContactName.Equals("maria anders", StringComparison.Ordinal));
+                c => c.ContactName.Equals("maria anders", StringComparison.Ordinal)
+            );
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
-        public virtual Task Collate_case_sensitive_constant(bool async)
-            => AssertCount(
+        public virtual Task Collate_case_sensitive_constant(bool async) =>
+            AssertCount(
                 async,
                 ss => ss.Set<Customer>(),
                 ss => ss.Set<Customer>(),
                 c => c.ContactName == EF.Functions.Collate("maria anders", CaseSensitiveCollation),
-                c => c.ContactName.Equals("maria anders", StringComparison.Ordinal));
+                c => c.ContactName.Equals("maria anders", StringComparison.Ordinal)
+            );
 
         protected abstract string CaseInsensitiveCollation { get; }
         protected abstract string CaseSensitiveCollation { get; }

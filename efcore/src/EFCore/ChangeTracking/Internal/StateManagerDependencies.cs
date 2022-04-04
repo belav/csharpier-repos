@@ -71,7 +71,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             ILoggingOptions loggingOptions,
             IDiagnosticsLogger<DbLoggerCategory.Update> updateLogger,
             IDiagnosticsLogger<DbLoggerCategory.ChangeTracking> changeTrackingLogger,
-            INavigationFixer navigationFixer)
+            INavigationFixer navigationFixer
+        )
         {
             InternalEntityEntrySubscriber = internalEntityEntrySubscriber;
             InternalEntityEntryNotifier = internalEntityEntryNotifier;

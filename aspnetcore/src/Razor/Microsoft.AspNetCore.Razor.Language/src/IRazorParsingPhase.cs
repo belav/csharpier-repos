@@ -3,6 +3,4 @@
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-public interface IRazorParsingPhase : IRazorEnginePhase
-{
-}
+public interface IRazorParsingPhase : IRazorEnginePhase { }

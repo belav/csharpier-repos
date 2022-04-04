@@ -15,20 +15,23 @@ public class LoggingHandler : DelegatingHandler
     private readonly int _maxBodyLogSize = 16 * 1024;
     private readonly ILogger _logger;
 
-    public LoggingHandler(HttpMessageHandler innerHandler, ILogger logger)
-        : base(innerHandler)
+    public LoggingHandler(HttpMessageHandler innerHandler, ILogger logger) : base(innerHandler)
     {
         _logger = logger;
     }
 
     protected override async Task<HttpResponseMessage> SendAsync(
         HttpRequestMessage request,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         _logger.LogDebug(request.ToString());
         var response = await base.SendAsync(request, cancellationToken);
 
-        await LogResponse(response.IsSuccessStatusCode ? LogLevel.Debug : LogLevel.Warning, response);
+        await LogResponse(
+            response.IsSuccessStatusCode ? LogLevel.Debug : LogLevel.Warning,
+            response
+        );
         return response;
     }
 

@@ -24,14 +24,23 @@ namespace R2RTest
         {
             get
             {
-                return _options.CrossgenPath != null ? _options.CrossgenPath.FullName : base.CompilerPath;
+                return _options.CrossgenPath != null
+                  ? _options.CrossgenPath.FullName
+                  : base.CompilerPath;
             }
         }
 
-        public CrossgenRunner(BuildOptions options, IEnumerable<string> referencePaths, string overrideOutputPath = null)
-            : base(options, referencePaths, overrideOutputPath) { }
+        public CrossgenRunner(
+            BuildOptions options,
+            IEnumerable<string> referencePaths,
+            string overrideOutputPath = null
+        ) : base(options, referencePaths, overrideOutputPath) { }
 
-        protected override ProcessParameters ExecutionProcess(IEnumerable<string> modules, IEnumerable<string> folders, bool noEtw)
+        protected override ProcessParameters ExecutionProcess(
+            IEnumerable<string> modules,
+            IEnumerable<string> folders,
+            bool noEtw
+        )
         {
             ProcessParameters processParameters = base.ExecutionProcess(modules, folders, noEtw);
             processParameters.EnvironmentOverrides["COMPLUS_ReadyToRun"] = "1";
@@ -39,11 +48,16 @@ namespace R2RTest
             return processParameters;
         }
 
-        protected override IEnumerable<string> BuildCommandLineArguments(IEnumerable<string> assemblyFileNames, string outputFileName)
+        protected override IEnumerable<string> BuildCommandLineArguments(
+            IEnumerable<string> assemblyFileNames,
+            string outputFileName
+        )
         {
             if (assemblyFileNames.Count() > 1)
             {
-                throw new NotImplementedException($@"Crossgen1 doesn't support composite build mode for compiling multiple input assemblies: {string.Join("; ", assemblyFileNames)}");
+                throw new NotImplementedException(
+                    $@"Crossgen1 doesn't support composite build mode for compiling multiple input assemblies: {string.Join("; ", assemblyFileNames)}"
+                );
             }
 
             // The file to compile
@@ -54,7 +68,11 @@ namespace R2RTest
             yield return "/out";
             yield return outputFileName;
 
-            if (_options.LargeBubble && Path.GetFileNameWithoutExtension(assemblyFileNames.First()) != "System.Private.CoreLib")
+            if (
+                _options.LargeBubble
+                && Path.GetFileNameWithoutExtension(assemblyFileNames.First())
+                    != "System.Private.CoreLib"
+            )
             {
                 // There seems to be a bug in Crossgen on Linux we don't intend to fix -
                 // it crashes when trying to compile S.P.C in large version bubble mode.

@@ -20,7 +20,11 @@ namespace Microsoft.CodeAnalysis.Host
         private readonly IDocumentTrackingService _documentTrackingService;
         private readonly TaskQueue _taskQueue;
 
-        [SuppressMessage("CodeQuality", "IDE0052:Remove unread private members", Justification = "Used to keep a strong reference to the built compilations so they are not GC'd")]
+        [SuppressMessage(
+            "CodeQuality",
+            "IDE0052:Remove unread private members",
+            Justification = "Used to keep a strong reference to the built compilations so they are not GC'd"
+        )]
         private Compilation?[]? _mostRecentCompilations;
 
         private readonly object _buildGate = new();
@@ -29,10 +33,12 @@ namespace Microsoft.CodeAnalysis.Host
         public BackgroundCompiler(Workspace workspace)
         {
             _workspace = workspace;
-            _documentTrackingService = _workspace.Services.GetRequiredService<IDocumentTrackingService>();
+            _documentTrackingService =
+                _workspace.Services.GetRequiredService<IDocumentTrackingService>();
 
             // make a scheduler that runs on the thread pool
-            var listenerProvider = workspace.Services.GetRequiredService<IWorkspaceAsynchronousOperationListenerProvider>();
+            var listenerProvider =
+                workspace.Services.GetRequiredService<IWorkspaceAsynchronousOperationListenerProvider>();
             _taskQueue = new TaskQueue(listenerProvider.GetListener(), TaskScheduler.Default);
 
             _cancellationSource = new CancellationTokenSource();
@@ -55,11 +61,11 @@ namespace Microsoft.CodeAnalysis.Host
             }
         }
 
-        private void OnDocumentOpened(object? sender, DocumentEventArgs args)
-            => Rebuild(args.Document.Project.Solution, args.Document.Project.Id);
+        private void OnDocumentOpened(object? sender, DocumentEventArgs args) =>
+            Rebuild(args.Document.Project.Solution, args.Document.Project.Id);
 
-        private void OnDocumentClosed(object? sender, DocumentEventArgs args)
-            => Rebuild(args.Document.Project.Solution, args.Document.Project.Id);
+        private void OnDocumentClosed(object? sender, DocumentEventArgs args) =>
+            Rebuild(args.Document.Project.Solution, args.Document.Project.Id);
 
         private void OnWorkspaceChanged(object? sender, WorkspaceChangeEventArgs args)
         {
@@ -100,13 +106,21 @@ namespace Microsoft.CodeAnalysis.Host
                 // build the current compilations without rebuilding the entire DeclarationTable
                 CancelBuild(releasePreviousCompilations: false);
 
-                var allOpenProjects = _workspace.GetOpenDocumentIds().Select(d => d.ProjectId).ToSet();
+                var allOpenProjects = _workspace
+                    .GetOpenDocumentIds()
+                    .Select(d => d.ProjectId)
+                    .ToSet();
                 var activeProject = _documentTrackingService.TryGetActiveDocument()?.ProjectId;
 
                 // don't even get started if there is nothing to do
                 if (allOpenProjects.Count > 0)
                 {
-                    _ = BuildCompilationsAsync(solution, initialProject, allOpenProjects, activeProject);
+                    _ = BuildCompilationsAsync(
+                        solution,
+                        initialProject,
+                        allOpenProjects,
+                        activeProject
+                    );
                 }
             }
         }
@@ -128,13 +142,22 @@ namespace Microsoft.CodeAnalysis.Host
             Solution solution,
             ProjectId? initialProject,
             ISet<ProjectId> allOpenProjects,
-            ProjectId? activeProject)
+            ProjectId? activeProject
+        )
         {
             var cancellationToken = _cancellationSource.Token;
             return _taskQueue.ScheduleTask(
                 "BackgroundCompiler.BuildCompilationsAsync",
-                () => BuildCompilationsAsync(solution, initialProject, allOpenProjects, activeProject, cancellationToken),
-                cancellationToken);
+                () =>
+                    BuildCompilationsAsync(
+                        solution,
+                        initialProject,
+                        allOpenProjects,
+                        activeProject,
+                        cancellationToken
+                    ),
+                cancellationToken
+            );
         }
 
         private Task BuildCompilationsAsync(
@@ -142,7 +165,8 @@ namespace Microsoft.CodeAnalysis.Host
             ProjectId? initialProject,
             ISet<ProjectId> projectsToBuild,
             ProjectId? activeProject,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var allProjectIds = new List<ProjectId>();
             if (initialProject != null)
@@ -152,45 +176,56 @@ namespace Microsoft.CodeAnalysis.Host
 
             allProjectIds.AddRange(projectsToBuild.Where(p => p != initialProject));
 
-            var logger = Logger.LogBlock(FunctionId.BackgroundCompiler_BuildCompilationsAsync, cancellationToken);
+            var logger = Logger.LogBlock(
+                FunctionId.BackgroundCompiler_BuildCompilationsAsync,
+                cancellationToken
+            );
 
             // Skip performing any background compilation for projects where user has explicitly
             // set the background analysis scope to only analyze active files.
             var compilationTasks = allProjectIds
                 .Select(solution.GetProject)
-                .Select(async p =>
-                {
-                    if (p is null)
-                        return null;
-
-                    if (SolutionCrawlerOptions.GetBackgroundAnalysisScope(p) == BackgroundAnalysisScope.ActiveFile
-                        && p.Id != activeProject)
+                .Select(
+                    async p =>
                     {
-                        // For open files with Active File analysis scope, only build the compilation if the project is
-                        // active.
-                        return null;
-                    }
+                        if (p is null)
+                            return null;
 
-                    return await p.GetCompilationAsync(cancellationToken).ConfigureAwait(false);
-                })
-                .ToArray();
-            return Task.WhenAll(compilationTasks).SafeContinueWith(t =>
-                {
-                    logger.Dispose();
-                    if (t.Status == TaskStatus.RanToCompletion)
-                    {
-                        lock (_buildGate)
+                        if (
+                            SolutionCrawlerOptions.GetBackgroundAnalysisScope(p)
+                                == BackgroundAnalysisScope.ActiveFile
+                            && p.Id != activeProject
+                        )
                         {
-                            if (!cancellationToken.IsCancellationRequested)
+                            // For open files with Active File analysis scope, only build the compilation if the project is
+                            // active.
+                            return null;
+                        }
+
+                        return await p.GetCompilationAsync(cancellationToken).ConfigureAwait(false);
+                    }
+                )
+                .ToArray();
+            return Task.WhenAll(compilationTasks)
+                .SafeContinueWith(
+                    t =>
+                    {
+                        logger.Dispose();
+                        if (t.Status == TaskStatus.RanToCompletion)
+                        {
+                            lock (_buildGate)
                             {
-                                _mostRecentCompilations = t.Result;
+                                if (!cancellationToken.IsCancellationRequested)
+                                {
+                                    _mostRecentCompilations = t.Result;
+                                }
                             }
                         }
-                    }
-                },
-                CancellationToken.None,
-                TaskContinuationOptions.None,
-                TaskScheduler.Default);
+                    },
+                    CancellationToken.None,
+                    TaskContinuationOptions.None,
+                    TaskScheduler.Default
+                );
         }
     }
 }

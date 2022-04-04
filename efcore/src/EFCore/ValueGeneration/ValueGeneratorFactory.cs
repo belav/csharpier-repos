@@ -23,8 +23,8 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
         /// <param name="property">The property to create the value generator for.</param>
         /// <returns>The newly created value generator.</returns>
         [Obsolete("Use the overload with most parameters")]
-        public virtual ValueGenerator Create(IProperty property)
-            => Create(property, property.DeclaringEntityType);
+        public virtual ValueGenerator Create(IProperty property) =>
+            Create(property, property.DeclaringEntityType);
 
         /// <summary>
         ///     Creates a new value generator.

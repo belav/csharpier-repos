@@ -12,10 +12,13 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void WriteImmutableArrayOfImmutableArray()
         {
-            ImmutableArray<ImmutableArray<int>> input = ImmutableArray.CreateRange(new List<ImmutableArray<int>>{
-                ImmutableArray.CreateRange(new List<int>() { 1, 2 }),
-                ImmutableArray.CreateRange(new List<int>() { 3, 4 })
-            });
+            ImmutableArray<ImmutableArray<int>> input = ImmutableArray.CreateRange(
+                new List<ImmutableArray<int>>
+                {
+                    ImmutableArray.CreateRange(new List<int>() { 1, 2 }),
+                    ImmutableArray.CreateRange(new List<int>() { 3, 4 })
+                }
+            );
 
             string json = JsonSerializer.Serialize(input);
             Assert.Equal("[[1,2],[3,4]]", json);
@@ -24,11 +27,9 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void WriteImmutableArrayOfArray()
         {
-            ImmutableArray<int[]> input = ImmutableArray.CreateRange(new List<int[]>
-            {
-                new int[] { 1, 2 },
-                new int[] { 3, 4 }
-            });
+            ImmutableArray<int[]> input = ImmutableArray.CreateRange(
+                new List<int[]> { new int[] { 1, 2 }, new int[] { 3, 4 } }
+            );
 
             string json = JsonSerializer.Serialize(input);
             Assert.Equal("[[1,2],[3,4]]", json);
@@ -57,10 +58,13 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void WriteIImmutableListTOfIImmutableListT()
         {
-            IImmutableList<IImmutableList<int>> input = ImmutableList.CreateRange(new List<IImmutableList<int>>{
-                ImmutableList.CreateRange(new List<int>() { 1, 2 }),
-                ImmutableList.CreateRange(new List<int>() { 3, 4 })
-            });
+            IImmutableList<IImmutableList<int>> input = ImmutableList.CreateRange(
+                new List<IImmutableList<int>>
+                {
+                    ImmutableList.CreateRange(new List<int>() { 1, 2 }),
+                    ImmutableList.CreateRange(new List<int>() { 3, 4 })
+                }
+            );
 
             string json = JsonSerializer.Serialize(input);
             Assert.Equal("[[1,2],[3,4]]", json);
@@ -69,11 +73,9 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void WriteIImmutableListTOfArray()
         {
-            IImmutableList<int[]> input = ImmutableList.CreateRange(new List<int[]>
-            {
-                new int[] { 1, 2 },
-                new int[] { 3, 4 }
-            });
+            IImmutableList<int[]> input = ImmutableList.CreateRange(
+                new List<int[]> { new int[] { 1, 2 }, new int[] { 3, 4 } }
+            );
 
             string json = JsonSerializer.Serialize(input);
             Assert.Equal("[[1,2],[3,4]]", json);
@@ -91,10 +93,14 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void WriteSimpleClassWithObjectImmutableArray()
         {
-            SimpleTestClassWithObjectImmutableArray obj = new SimpleTestClassWithObjectImmutableArray();
+            SimpleTestClassWithObjectImmutableArray obj =
+                new SimpleTestClassWithObjectImmutableArray();
             obj.Initialize();
 
-            Assert.Equal(SimpleTestClassWithObjectImmutableArray.s_json, JsonSerializer.Serialize(obj));
+            Assert.Equal(
+                SimpleTestClassWithObjectImmutableArray.s_json,
+                JsonSerializer.Serialize(obj)
+            );
         }
 
         [Fact]
@@ -116,7 +122,9 @@ namespace System.Text.Json.Serialization.Tests
             string json = JsonSerializer.Serialize(input);
             Assert.Equal("[1,2]", json);
 
-            StringIImmutableListWrapper input2 = new StringIImmutableListWrapper(new List<string> { "1", "2" });
+            StringIImmutableListWrapper input2 = new StringIImmutableListWrapper(
+                new List<string> { "1", "2" }
+            );
 
             json = JsonSerializer.Serialize(input2);
             Assert.Equal(@"[""1"",""2""]", json);
@@ -125,10 +133,13 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void WriteIImmutableStackTOfIImmutableStackT()
         {
-            IImmutableStack<IImmutableStack<int>> input = ImmutableStack.CreateRange(new List<IImmutableStack<int>>{
-                ImmutableStack.CreateRange(new List<int>() { 1, 2 }),
-                ImmutableStack.CreateRange(new List<int>() { 3, 4 })
-            });
+            IImmutableStack<IImmutableStack<int>> input = ImmutableStack.CreateRange(
+                new List<IImmutableStack<int>>
+                {
+                    ImmutableStack.CreateRange(new List<int>() { 1, 2 }),
+                    ImmutableStack.CreateRange(new List<int>() { 3, 4 })
+                }
+            );
 
             string json = JsonSerializer.Serialize(input);
             Assert.Equal("[[4,3],[2,1]]", json);
@@ -137,11 +148,9 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void WriteIImmutableStackTOfArray()
         {
-            IImmutableStack<int[]> input = ImmutableStack.CreateRange(new List<int[]>
-            {
-                new int[] { 1, 2 },
-                new int[] { 3, 4 }
-            });
+            IImmutableStack<int[]> input = ImmutableStack.CreateRange(
+                new List<int[]> { new int[] { 1, 2 }, new int[] { 3, 4 } }
+            );
 
             string json = JsonSerializer.Serialize(input);
             Assert.Equal("[[3,4],[1,2]]", json);
@@ -166,7 +175,9 @@ namespace System.Text.Json.Serialization.Tests
             string json = JsonSerializer.Serialize(input);
             Assert.Equal("[2,1]", json);
 
-            StringIImmutableStackWrapper input2 = new StringIImmutableStackWrapper(new List<string> { "1", "2" });
+            StringIImmutableStackWrapper input2 = new StringIImmutableStackWrapper(
+                new List<string> { "1", "2" }
+            );
 
             json = JsonSerializer.Serialize(input2);
             Assert.Equal(@"[""2"",""1""]", json);
@@ -175,10 +186,13 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void WriteIImmutableQueueTOfIImmutableQueueT()
         {
-            IImmutableQueue<IImmutableQueue<int>> input = ImmutableQueue.CreateRange(new List<IImmutableQueue<int>>{
-                ImmutableQueue.CreateRange(new List<int>() { 1, 2 }),
-                ImmutableQueue.CreateRange(new List<int>() { 3, 4 })
-            });
+            IImmutableQueue<IImmutableQueue<int>> input = ImmutableQueue.CreateRange(
+                new List<IImmutableQueue<int>>
+                {
+                    ImmutableQueue.CreateRange(new List<int>() { 1, 2 }),
+                    ImmutableQueue.CreateRange(new List<int>() { 3, 4 })
+                }
+            );
 
             string json = JsonSerializer.Serialize(input);
             Assert.Equal("[[1,2],[3,4]]", json);
@@ -187,11 +201,9 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void WriteIImmutableQueueTOfArray()
         {
-            IImmutableQueue<int[]> input = ImmutableQueue.CreateRange(new List<int[]>
-            {
-                new int[] { 1, 2 },
-                new int[] { 3, 4 }
-            });
+            IImmutableQueue<int[]> input = ImmutableQueue.CreateRange(
+                new List<int[]> { new int[] { 1, 2 }, new int[] { 3, 4 } }
+            );
 
             string json = JsonSerializer.Serialize(input);
             Assert.Equal("[[1,2],[3,4]]", json);
@@ -216,7 +228,9 @@ namespace System.Text.Json.Serialization.Tests
             string json = JsonSerializer.Serialize(input);
             Assert.Equal("[1,2]", json);
 
-            StringIImmutableQueueWrapper input2 = new StringIImmutableQueueWrapper(new List<string> { "1", "2" });
+            StringIImmutableQueueWrapper input2 = new StringIImmutableQueueWrapper(
+                new List<string> { "1", "2" }
+            );
 
             json = JsonSerializer.Serialize(input2);
             Assert.Equal(@"[""1"",""2""]", json);
@@ -225,10 +239,13 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void WriteIImmutableSetTOfIImmutableSetT()
         {
-            IImmutableSet<IImmutableSet<int>> input = ImmutableHashSet.CreateRange(new List<IImmutableSet<int>>{
-                ImmutableHashSet.CreateRange(new List<int>() { 1, 2 }),
-                ImmutableHashSet.CreateRange(new List<int>() { 3, 4 })
-            });
+            IImmutableSet<IImmutableSet<int>> input = ImmutableHashSet.CreateRange(
+                new List<IImmutableSet<int>>
+                {
+                    ImmutableHashSet.CreateRange(new List<int>() { 1, 2 }),
+                    ImmutableHashSet.CreateRange(new List<int>() { 3, 4 })
+                }
+            );
 
             string json = JsonSerializer.Serialize(input);
             Assert.Contains("[1,2]", json);
@@ -238,11 +255,9 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void WriteIImmutableSetTOfArray()
         {
-            IImmutableSet<int[]> input = ImmutableHashSet.CreateRange(new List<int[]>
-            {
-                new int[] { 1, 2 },
-                new int[] { 3, 4 }
-            });
+            IImmutableSet<int[]> input = ImmutableHashSet.CreateRange(
+                new List<int[]> { new int[] { 1, 2 }, new int[] { 3, 4 } }
+            );
 
             string json = JsonSerializer.Serialize(input);
             Assert.Contains("[1,2]", json);
@@ -268,7 +283,9 @@ namespace System.Text.Json.Serialization.Tests
             string json = JsonSerializer.Serialize(input);
             Assert.Equal("[1,2]", json);
 
-            StringIImmutableSetWrapper input2 = new StringIImmutableSetWrapper(new List<string> { "1", "2" });
+            StringIImmutableSetWrapper input2 = new StringIImmutableSetWrapper(
+                new List<string> { "1", "2" }
+            );
 
             json = JsonSerializer.Serialize(input2);
             Assert.True(json == @"[""1"",""2""]" || json == @"[""2"",""1""]");
@@ -277,10 +294,13 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void WriteImmutableHashSetTOfImmutableHashSetT()
         {
-            ImmutableHashSet<ImmutableHashSet<int>> input = ImmutableHashSet.CreateRange(new List<ImmutableHashSet<int>>{
-                ImmutableHashSet.CreateRange(new List<int>() { 1, 2 }),
-                ImmutableHashSet.CreateRange(new List<int>() { 3, 4 })
-            });
+            ImmutableHashSet<ImmutableHashSet<int>> input = ImmutableHashSet.CreateRange(
+                new List<ImmutableHashSet<int>>
+                {
+                    ImmutableHashSet.CreateRange(new List<int>() { 1, 2 }),
+                    ImmutableHashSet.CreateRange(new List<int>() { 3, 4 })
+                }
+            );
 
             string json = JsonSerializer.Serialize(input);
             Assert.Contains("[1,2]", json);
@@ -290,11 +310,9 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void WriteImmutableHashSetTOfArray()
         {
-            ImmutableHashSet<int[]> input = ImmutableHashSet.CreateRange(new List<int[]>
-            {
-                new int[] { 1, 2 },
-                new int[] { 3, 4 }
-            });
+            ImmutableHashSet<int[]> input = ImmutableHashSet.CreateRange(
+                new List<int[]> { new int[] { 1, 2 }, new int[] { 3, 4 } }
+            );
 
             string json = JsonSerializer.Serialize(input);
             Assert.Contains("[1,2]", json);
@@ -324,10 +342,13 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void WriteImmutableListTOfImmutableListT()
         {
-            ImmutableList<ImmutableList<int>> input = ImmutableList.CreateRange(new List<ImmutableList<int>>{
-                ImmutableList.CreateRange(new List<int>() { 1, 2 }),
-                ImmutableList.CreateRange(new List<int>() { 3, 4 })
-            });
+            ImmutableList<ImmutableList<int>> input = ImmutableList.CreateRange(
+                new List<ImmutableList<int>>
+                {
+                    ImmutableList.CreateRange(new List<int>() { 1, 2 }),
+                    ImmutableList.CreateRange(new List<int>() { 3, 4 })
+                }
+            );
 
             string json = JsonSerializer.Serialize(input);
             Assert.Equal("[[1,2],[3,4]]", json);
@@ -336,11 +357,9 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void WriteImmutableListTOfArray()
         {
-            ImmutableList<int[]> input = ImmutableList.CreateRange(new List<int[]>
-            {
-                new int[] { 1, 2 },
-                new int[] { 3, 4 }
-            });
+            ImmutableList<int[]> input = ImmutableList.CreateRange(
+                new List<int[]> { new int[] { 1, 2 }, new int[] { 3, 4 } }
+            );
 
             string json = JsonSerializer.Serialize(input);
             Assert.Equal("[[1,2],[3,4]]", json);
@@ -369,10 +388,13 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void WriteImmutableStackTOfImmutableStackT()
         {
-            ImmutableStack<ImmutableStack<int>> input = ImmutableStack.CreateRange(new List<ImmutableStack<int>>{
-                ImmutableStack.CreateRange(new List<int>() { 1, 2 }),
-                ImmutableStack.CreateRange(new List<int>() { 3, 4 })
-            });
+            ImmutableStack<ImmutableStack<int>> input = ImmutableStack.CreateRange(
+                new List<ImmutableStack<int>>
+                {
+                    ImmutableStack.CreateRange(new List<int>() { 1, 2 }),
+                    ImmutableStack.CreateRange(new List<int>() { 3, 4 })
+                }
+            );
 
             string json = JsonSerializer.Serialize(input);
             Assert.Equal("[[4,3],[2,1]]", json);
@@ -381,11 +403,9 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void WriteImmutableStackTOfArray()
         {
-            ImmutableStack<int[]> input = ImmutableStack.CreateRange(new List<int[]>
-            {
-                new int[] { 1, 2 },
-                new int[] { 3, 4 }
-            });
+            ImmutableStack<int[]> input = ImmutableStack.CreateRange(
+                new List<int[]> { new int[] { 1, 2 }, new int[] { 3, 4 } }
+            );
 
             string json = JsonSerializer.Serialize(input);
             Assert.Equal("[[3,4],[1,2]]", json);
@@ -414,10 +434,13 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void WriteImmutableQueueTOfImmutableQueueT()
         {
-            ImmutableQueue<ImmutableQueue<int>> input = ImmutableQueue.CreateRange(new List<ImmutableQueue<int>>{
-                ImmutableQueue.CreateRange(new List<int>() { 1, 2 }),
-                ImmutableQueue.CreateRange(new List<int>() { 3, 4 })
-            });
+            ImmutableQueue<ImmutableQueue<int>> input = ImmutableQueue.CreateRange(
+                new List<ImmutableQueue<int>>
+                {
+                    ImmutableQueue.CreateRange(new List<int>() { 1, 2 }),
+                    ImmutableQueue.CreateRange(new List<int>() { 3, 4 })
+                }
+            );
 
             string json = JsonSerializer.Serialize(input);
             Assert.Equal("[[1,2],[3,4]]", json);
@@ -426,11 +449,9 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void WriteImmutableQueueTOfArray()
         {
-            ImmutableQueue<int[]> input = ImmutableQueue.CreateRange(new List<int[]>
-            {
-                new int[] { 1, 2 },
-                new int[] { 3, 4 }
-            });
+            ImmutableQueue<int[]> input = ImmutableQueue.CreateRange(
+                new List<int[]> { new int[] { 1, 2 }, new int[] { 3, 4 } }
+            );
 
             string json = JsonSerializer.Serialize(input);
             Assert.Equal("[[1,2],[3,4]]", json);
@@ -479,11 +500,16 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void WriteImmutableCollectionWrappers()
         {
-            SimpleTestClassWithIImmutableDictionaryWrapper obj1 = new SimpleTestClassWithIImmutableDictionaryWrapper();
-            SimpleTestClassWithImmutableListWrapper obj2 = new SimpleTestClassWithImmutableListWrapper();
-            SimpleTestClassWithImmutableStackWrapper obj3 = new SimpleTestClassWithImmutableStackWrapper();
-            SimpleTestClassWithImmutableQueueWrapper obj4 = new SimpleTestClassWithImmutableQueueWrapper();
-            SimpleTestClassWithImmutableSetWrapper obj5 = new SimpleTestClassWithImmutableSetWrapper();
+            SimpleTestClassWithIImmutableDictionaryWrapper obj1 =
+                new SimpleTestClassWithIImmutableDictionaryWrapper();
+            SimpleTestClassWithImmutableListWrapper obj2 =
+                new SimpleTestClassWithImmutableListWrapper();
+            SimpleTestClassWithImmutableStackWrapper obj3 =
+                new SimpleTestClassWithImmutableStackWrapper();
+            SimpleTestClassWithImmutableQueueWrapper obj4 =
+                new SimpleTestClassWithImmutableQueueWrapper();
+            SimpleTestClassWithImmutableSetWrapper obj5 =
+                new SimpleTestClassWithImmutableSetWrapper();
 
             obj1.Initialize();
             obj2.Initialize();
@@ -491,20 +517,50 @@ namespace System.Text.Json.Serialization.Tests
             obj4.Initialize();
             obj5.Initialize();
 
-            Assert.Equal(SimpleTestClassWithIImmutableDictionaryWrapper.s_json.StripWhitespace(), JsonSerializer.Serialize(obj1));
-            Assert.Equal(SimpleTestClassWithIImmutableDictionaryWrapper.s_json.StripWhitespace(), JsonSerializer.Serialize<object>(obj1));
+            Assert.Equal(
+                SimpleTestClassWithIImmutableDictionaryWrapper.s_json.StripWhitespace(),
+                JsonSerializer.Serialize(obj1)
+            );
+            Assert.Equal(
+                SimpleTestClassWithIImmutableDictionaryWrapper.s_json.StripWhitespace(),
+                JsonSerializer.Serialize<object>(obj1)
+            );
 
-            Assert.Equal(SimpleTestClassWithImmutableListWrapper.s_json.StripWhitespace(), JsonSerializer.Serialize(obj2));
-            Assert.Equal(SimpleTestClassWithImmutableListWrapper.s_json.StripWhitespace(), JsonSerializer.Serialize<object>(obj2));
+            Assert.Equal(
+                SimpleTestClassWithImmutableListWrapper.s_json.StripWhitespace(),
+                JsonSerializer.Serialize(obj2)
+            );
+            Assert.Equal(
+                SimpleTestClassWithImmutableListWrapper.s_json.StripWhitespace(),
+                JsonSerializer.Serialize<object>(obj2)
+            );
 
-            Assert.Equal(SimpleTestClassWithImmutableStackWrapper.s_json.StripWhitespace(), JsonSerializer.Serialize(obj3));
-            Assert.Equal(SimpleTestClassWithImmutableStackWrapper.s_json.StripWhitespace(), JsonSerializer.Serialize<object>(obj3));
+            Assert.Equal(
+                SimpleTestClassWithImmutableStackWrapper.s_json.StripWhitespace(),
+                JsonSerializer.Serialize(obj3)
+            );
+            Assert.Equal(
+                SimpleTestClassWithImmutableStackWrapper.s_json.StripWhitespace(),
+                JsonSerializer.Serialize<object>(obj3)
+            );
 
-            Assert.Equal(SimpleTestClassWithImmutableQueueWrapper.s_json.StripWhitespace(), JsonSerializer.Serialize(obj4));
-            Assert.Equal(SimpleTestClassWithImmutableQueueWrapper.s_json.StripWhitespace(), JsonSerializer.Serialize<object>(obj4));
+            Assert.Equal(
+                SimpleTestClassWithImmutableQueueWrapper.s_json.StripWhitespace(),
+                JsonSerializer.Serialize(obj4)
+            );
+            Assert.Equal(
+                SimpleTestClassWithImmutableQueueWrapper.s_json.StripWhitespace(),
+                JsonSerializer.Serialize<object>(obj4)
+            );
 
-            Assert.Equal(SimpleTestClassWithImmutableSetWrapper.s_json.StripWhitespace(), JsonSerializer.Serialize(obj5));
-            Assert.Equal(SimpleTestClassWithImmutableSetWrapper.s_json.StripWhitespace(), JsonSerializer.Serialize<object>(obj5));
+            Assert.Equal(
+                SimpleTestClassWithImmutableSetWrapper.s_json.StripWhitespace(),
+                JsonSerializer.Serialize(obj5)
+            );
+            Assert.Equal(
+                SimpleTestClassWithImmutableSetWrapper.s_json.StripWhitespace(),
+                JsonSerializer.Serialize<object>(obj5)
+            );
         }
     }
 }

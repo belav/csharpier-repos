@@ -28,10 +28,7 @@ namespace Microsoft.Win32.SafeHandles
 
         internal static SafeLocalAllocHandle InvalidHandle
         {
-            get
-            {
-                return new SafeLocalAllocHandle(IntPtr.Zero);
-            }
+            get { return new SafeLocalAllocHandle(IntPtr.Zero); }
         }
 
         protected override bool ReleaseHandle()

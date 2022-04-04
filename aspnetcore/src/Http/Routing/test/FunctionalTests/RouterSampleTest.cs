@@ -84,7 +84,8 @@ public class RouterSampleTest : IDisposable
     {
         // Arrange
         var message = new HttpRequestMessage(new HttpMethod(httpVerb), "api/all/Joe/Duf");
-        var expectedBody = $"Verb =  {httpVerb} - Path = /api/all/Joe/Duf - Route values - [name, Joe], [lastName, Duf]";
+        var expectedBody =
+            $"Verb =  {httpVerb} - Path = /api/all/Joe/Duf - Route values - [name, Joe], [lastName, Duf]";
 
         // Act
         var response = await _client.SendAsync(message);

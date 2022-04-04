@@ -13,14 +13,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 {
     internal struct NativeIntegerTypeDecoder
     {
-        internal static TypeSymbol TransformType(TypeSymbol type, EntityHandle handle, PEModuleSymbol containingModule)
+        internal static TypeSymbol TransformType(
+            TypeSymbol type,
+            EntityHandle handle,
+            PEModuleSymbol containingModule
+        )
         {
-            return containingModule.Module.HasNativeIntegerAttribute(handle, out var transformFlags) ?
-                TransformType(type, transformFlags) :
-                type;
+            return containingModule.Module.HasNativeIntegerAttribute(handle, out var transformFlags)
+              ? TransformType(type, transformFlags)
+              : type;
         }
 
-        internal static TypeSymbol TransformType(TypeSymbol type, ImmutableArray<bool> transformFlags)
+        internal static TypeSymbol TransformType(
+            TypeSymbol type,
+            ImmutableArray<bool> transformFlags
+        )
         {
             var decoder = new NativeIntegerTypeDecoder(transformFlags);
             try
@@ -139,7 +146,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 }
             }
 
-            NamedTypeSymbol result = haveChanges ? type.WithTypeArguments(allTypeArguments.ToImmutable()) : type;
+            NamedTypeSymbol result = haveChanges
+                ? type.WithTypeArguments(allTypeArguments.ToImmutable())
+                : type;
             allTypeArguments.Free();
             return result;
         }
@@ -156,7 +165,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         private PointerTypeSymbol? TransformPointerType(PointerTypeSymbol type)
         {
-            if (TransformTypeWithAnnotations(type.PointedAtTypeWithAnnotations) is { } pointedAtType)
+            if (
+                TransformTypeWithAnnotations(type.PointedAtTypeWithAnnotations) is { } pointedAtType
+            )
             {
                 return type.WithPointedAtType(pointedAtType);
             }
@@ -164,9 +175,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             return null;
         }
 
-        private FunctionPointerTypeSymbol? TransformFunctionPointerType(FunctionPointerTypeSymbol type)
+        private FunctionPointerTypeSymbol? TransformFunctionPointerType(
+            FunctionPointerTypeSymbol type
+        )
         {
-            if (TransformTypeWithAnnotations(type.Signature.ReturnTypeWithAnnotations) is not { } transformedReturnType)
+            if (
+                TransformTypeWithAnnotations(type.Signature.ReturnTypeWithAnnotations)
+                is not { } transformedReturnType
+            )
             {
                 return null;
             }
@@ -176,15 +192,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
             if (type.Signature.ParameterCount > 0)
             {
-                var builder = ArrayBuilder<TypeWithAnnotations>.GetInstance(type.Signature.ParameterCount);
+                var builder = ArrayBuilder<TypeWithAnnotations>.GetInstance(
+                    type.Signature.ParameterCount
+                );
                 foreach (var param in type.Signature.Parameters)
                 {
-                    if (TransformTypeWithAnnotations(param.TypeWithAnnotations) is not { } transformedParam)
+                    if (
+                        TransformTypeWithAnnotations(param.TypeWithAnnotations)
+                        is not { } transformedParam
+                    )
                     {
                         return null;
                     }
 
-                    paramsModified = paramsModified || !transformedParam.IsSameAs(param.TypeWithAnnotations);
+                    paramsModified =
+                        paramsModified || !transformedParam.IsSameAs(param.TypeWithAnnotations);
                     builder.Add(transformedParam);
                 }
 
@@ -199,9 +221,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 }
             }
 
-            if (paramsModified || !transformedReturnType.IsSameAs(type.Signature.ReturnTypeWithAnnotations))
+            if (
+                paramsModified
+                || !transformedReturnType.IsSameAs(type.Signature.ReturnTypeWithAnnotations)
+            )
             {
-                return type.SubstituteTypeSymbol(transformedReturnType, transformedParameterTypes, refCustomModifiers: default, paramRefCustomModifiers: default);
+                return type.SubstituteTypeSymbol(
+                    transformedReturnType,
+                    transformedParameterTypes,
+                    refCustomModifiers: default,
+                    paramRefCustomModifiers: default
+                );
             }
             else
             {

@@ -23,7 +23,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         public SqlServerNetTopologySuiteMemberTranslatorPlugin(
             IRelationalTypeMappingSource typeMappingSource,
-            ISqlExpressionFactory sqlExpressionFactory)
+            ISqlExpressionFactory sqlExpressionFactory
+        )
         {
             Translators = new IMemberTranslator[]
             {

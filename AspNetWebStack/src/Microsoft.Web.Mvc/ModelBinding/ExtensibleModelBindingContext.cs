@@ -17,10 +17,7 @@ namespace Microsoft.Web.Mvc.ModelBinding
         private Dictionary<string, ModelMetadata> _propertyMetadata;
         private ModelValidationNode _validationNode;
 
-        public ExtensibleModelBindingContext()
-            : this(null)
-        {
-        }
+        public ExtensibleModelBindingContext() : this(null) { }
 
         // copies certain values that won't change between parent and child objects,
         // e.g. ValueProvider, ModelState
@@ -48,7 +45,11 @@ namespace Microsoft.Web.Mvc.ModelBinding
             }
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "This is writeable to support unit testing")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2227:CollectionPropertiesShouldBeReadOnly",
+            Justification = "This is writeable to support unit testing"
+        )]
         public ModelBinderProviderCollection ModelBinderProviders
         {
             get
@@ -77,7 +78,11 @@ namespace Microsoft.Web.Mvc.ModelBinding
             set { _modelName = value; }
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "This is writeable to support unit testing")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2227:CollectionPropertiesShouldBeReadOnly",
+            Justification = "This is writeable to support unit testing"
+        )]
         public ModelStateDictionary ModelState
         {
             get
@@ -106,7 +111,10 @@ namespace Microsoft.Web.Mvc.ModelBinding
             {
                 if (_propertyMetadata == null)
                 {
-                    _propertyMetadata = ModelMetadata.Properties.ToDictionary(m => m.PropertyName, StringComparer.OrdinalIgnoreCase);
+                    _propertyMetadata = ModelMetadata.Properties.ToDictionary(
+                        m => m.PropertyName,
+                        StringComparer.OrdinalIgnoreCase
+                    );
                 }
 
                 return _propertyMetadata;

@@ -34,7 +34,7 @@ namespace Microsoft.CodeAnalysis.Emit
         /// otherwise keeps the underlying stream open until the returned <see cref="MetadataReaderProvider"/> is disposed.
         /// </param>
         /// <returns>
-        /// Instance of <see cref="MetadataReaderProvider"/>, which owns the opened metadata and must be disposed once the caller is done reading the data, 
+        /// Instance of <see cref="MetadataReaderProvider"/>, which owns the opened metadata and must be disposed once the caller is done reading the data,
         /// or null if the assembly is not available.
         /// </returns>
         /// <exception cref="BadImageFormatException">Invalid format of the assembly data.</exception>
@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.Emit
             return MetadataReaderProvider.FromMetadataStream(
                 peStream,
                 prefetch ? MetadataStreamOptions.PrefetchMetadata : MetadataStreamOptions.Default,
-                size: peHeaders.MetadataSize);
+                size: peHeaders.MetadataSize
+            );
         }
 
         /// <summary>
@@ -105,10 +106,14 @@ namespace Microsoft.CodeAnalysis.Emit
             if (peStream != null)
             {
                 using var peReader = new PEReader(peStream);
-                var embeddedPdbEntry = peReader.ReadDebugDirectory().FirstOrDefault(e => e.Type == DebugDirectoryEntryType.EmbeddedPortablePdb);
+                var embeddedPdbEntry = peReader
+                    .ReadDebugDirectory()
+                    .FirstOrDefault(e => e.Type == DebugDirectoryEntryType.EmbeddedPortablePdb);
                 if (embeddedPdbEntry.DataSize != 0)
                 {
-                    return DebugInformationReaderProvider.CreateFromMetadataReader(peReader.ReadEmbeddedPortablePdbDebugDirectoryData(embeddedPdbEntry));
+                    return DebugInformationReaderProvider.CreateFromMetadataReader(
+                        peReader.ReadEmbeddedPortablePdbDebugDirectoryData(embeddedPdbEntry)
+                    );
                 }
             }
 
@@ -119,17 +124,22 @@ namespace Microsoft.CodeAnalysis.Emit
         {
             if (stream != null && (!stream.CanRead || !stream.CanSeek))
             {
-                throw new InvalidOperationException(string.Format(FeaturesResources.MethodMustReturnStreamThatSupportsReadAndSeek, methodName));
+                throw new InvalidOperationException(
+                    string.Format(
+                        FeaturesResources.MethodMustReturnStreamThatSupportsReadAndSeek,
+                        methodName
+                    )
+                );
             }
 
             return stream;
         }
 
-        private Stream? OpenPdbStreamChecked()
-            => ValidateStream(OpenPdbStream(), nameof(OpenPdbStream));
+        private Stream? OpenPdbStreamChecked() =>
+            ValidateStream(OpenPdbStream(), nameof(OpenPdbStream));
 
-        private Stream? OpenAssemblyStreamChecked()
-            => ValidateStream(OpenAssemblyStream(), nameof(OpenAssemblyStream));
+        private Stream? OpenAssemblyStreamChecked() =>
+            ValidateStream(OpenAssemblyStream(), nameof(OpenAssemblyStream));
 
         /// <summary>
         /// Opens an assembly file produced by the compiler.

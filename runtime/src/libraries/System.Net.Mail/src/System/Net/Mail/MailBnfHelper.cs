@@ -51,9 +51,18 @@ namespace System.Net.Mime
         {
             // atext = ALPHA / DIGIT / "!" / "#" / "$" / "%" / "&" / "'" / "*" / "+" / "-" / "/" / "=" / "?" / "^" / "_" / "`" / "{" / "|" / "}" / "~"
             var atext = new bool[128];
-            for (int i = '0'; i <= '9'; i++) { atext[i] = true; }
-            for (int i = 'A'; i <= 'Z'; i++) { atext[i] = true; }
-            for (int i = 'a'; i <= 'z'; i++) { atext[i] = true; }
+            for (int i = '0'; i <= '9'; i++)
+            {
+                atext[i] = true;
+            }
+            for (int i = 'A'; i <= 'Z'; i++)
+            {
+                atext[i] = true;
+            }
+            for (int i = 'a'; i <= 'z'; i++)
+            {
+                atext[i] = true;
+            }
             atext['!'] = true;
             atext['#'] = true;
             atext['$'] = true;
@@ -80,12 +89,24 @@ namespace System.Net.Mime
         {
             // fqtext = %d1-9 / %d11 / %d12 / %d14-33 / %d35-91 / %d93-127
             var qtext = new bool[128];
-            for (int i = 1; i <= 9; i++) { qtext[i] = true; }
+            for (int i = 1; i <= 9; i++)
+            {
+                qtext[i] = true;
+            }
             qtext[11] = true;
             qtext[12] = true;
-            for (int i = 14; i <= 33; i++) { qtext[i] = true; }
-            for (int i = 35; i <= 91; i++) { qtext[i] = true; }
-            for (int i = 93; i <= 127; i++) { qtext[i] = true; }
+            for (int i = 14; i <= 33; i++)
+            {
+                qtext[i] = true;
+            }
+            for (int i = 35; i <= 91; i++)
+            {
+                qtext[i] = true;
+            }
+            for (int i = 93; i <= 127; i++)
+            {
+                qtext[i] = true;
+            }
             return qtext;
         }
 
@@ -93,12 +114,24 @@ namespace System.Net.Mime
         {
             // fdtext = %d1-8 / %d11 / %d12 / %d14-31 / %d33-90 / %d94-127
             var dtext = new bool[128];
-            for (int i = 1; i <= 8; i++) { dtext[i] = true; }
+            for (int i = 1; i <= 8; i++)
+            {
+                dtext[i] = true;
+            }
             dtext[11] = true;
             dtext[12] = true;
-            for (int i = 14; i <= 31; i++) { dtext[i] = true; }
-            for (int i = 33; i <= 90; i++) { dtext[i] = true; }
-            for (int i = 94; i <= 127; i++) { dtext[i] = true; }
+            for (int i = 14; i <= 31; i++)
+            {
+                dtext[i] = true;
+            }
+            for (int i = 33; i <= 90; i++)
+            {
+                dtext[i] = true;
+            }
+            for (int i = 94; i <= 127; i++)
+            {
+                dtext[i] = true;
+            }
             return dtext;
         }
 
@@ -106,8 +139,14 @@ namespace System.Net.Mime
         {
             // ftext = %d33-57 / %d59-126
             var ftext = new bool[128];
-            for (int i = 33; i <= 57; i++) { ftext[i] = true; }
-            for (int i = 59; i <= 126; i++) { ftext[i] = true; }
+            for (int i = 33; i <= 57; i++)
+            {
+                ftext[i] = true;
+            }
+            for (int i = 59; i <= 126; i++)
+            {
+                ftext[i] = true;
+            }
             return ftext;
         }
 
@@ -115,7 +154,10 @@ namespace System.Net.Mime
         {
             // ttext = %d33-126 except '()<>@,;:\"/[]?='
             var ttext = new bool[128];
-            for (int i = 33; i <= 126; i++) { ttext[i] = true; }
+            for (int i = 33; i <= 126; i++)
+            {
+                ttext[i] = true;
+            }
             ttext['('] = false;
             ttext[')'] = false;
             ttext['<'] = false;
@@ -138,13 +180,28 @@ namespace System.Net.Mime
         {
             // ctext- %d1-8 / %d11 / %d12 / %d14-31 / %33-39 / %42-91 / %93-127
             var ctext = new bool[128];
-            for (int i = 1; i <= 8; i++) { ctext[i] = true; }
+            for (int i = 1; i <= 8; i++)
+            {
+                ctext[i] = true;
+            }
             ctext[11] = true;
             ctext[12] = true;
-            for (int i = 14; i <= 31; i++) { ctext[i] = true; }
-            for (int i = 33; i <= 39; i++) { ctext[i] = true; }
-            for (int i = 42; i <= 91; i++) { ctext[i] = true; }
-            for (int i = 93; i <= 127; i++) { ctext[i] = true; }
+            for (int i = 14; i <= 31; i++)
+            {
+                ctext[i] = true;
+            }
+            for (int i = 33; i <= 39; i++)
+            {
+                ctext[i] = true;
+            }
+            for (int i = 42; i <= 91; i++)
+            {
+                ctext[i] = true;
+            }
+            for (int i = 93; i <= 127; i++)
+            {
+                ctext[i] = true;
+            }
             return ctext;
         }
 
@@ -154,7 +211,9 @@ namespace System.Net.Mime
             for (; offset < data.Length; offset++)
             {
                 if (data[offset] > 127)
-                    throw new FormatException(SR.Format(SR.MailHeaderFieldInvalidCharacter, data[offset]));
+                    throw new FormatException(
+                        SR.Format(SR.MailHeaderFieldInvalidCharacter, data[offset])
+                    );
                 else if (data[offset] == '\\' && comments > 0)
                     offset += 2;
                 else if (data[offset] == '(')
@@ -166,7 +225,9 @@ namespace System.Net.Mime
 
                 if (comments < 0)
                 {
-                    throw new FormatException(SR.Format(SR.MailHeaderFieldInvalidCharacter, data[offset]));
+                    throw new FormatException(
+                        SR.Format(SR.MailHeaderFieldInvalidCharacter, data[offset])
+                    );
                 }
             }
 
@@ -186,12 +247,22 @@ namespace System.Net.Mime
                 throw new FormatException(SR.InvalidHeaderName);
         }
 
-        internal static string? ReadQuotedString(string data, ref int offset, StringBuilder? builder)
+        internal static string? ReadQuotedString(
+            string data,
+            ref int offset,
+            StringBuilder? builder
+        )
         {
             return ReadQuotedString(data, ref offset, builder, false, false);
         }
 
-        internal static string? ReadQuotedString(string data, ref int offset, StringBuilder? builder, bool doesntRequireQuotes, bool permitUnicodeInDisplayName)
+        internal static string? ReadQuotedString(
+            string data,
+            ref int offset,
+            StringBuilder? builder,
+            bool doesntRequireQuotes,
+            bool permitUnicodeInDisplayName
+        )
         {
             // assume first char is the opening quote
             if (!doesntRequireQuotes)
@@ -213,11 +284,13 @@ namespace System.Net.Mime
                     offset++;
                     return (builder != null ? null : localBuilder.ToString());
                 }
-                else if (data[offset] == '=' &&
-                    data.Length > offset + 3 &&
-                    data[offset + 1] == '\r' &&
-                    data[offset + 2] == '\n' &&
-                    (data[offset + 3] == ' ' || data[offset + 3] == '\t'))
+                else if (
+                    data[offset] == '='
+                    && data.Length > offset + 3
+                    && data[offset + 1] == '\r'
+                    && data[offset + 2] == '\n'
+                    && (data[offset + 3] == ' ' || data[offset + 3] == '\t')
+                )
                 {
                     //it's a soft crlf so it's ok
                     offset += 3;
@@ -227,12 +300,16 @@ namespace System.Net.Mime
                     //if data contains Unicode and Unicode is permitted, then
                     //it is valid in a quoted string in a header.
                     if (data[offset] <= Ascii7bitMaxValue && !Qtext[data[offset]])
-                        throw new FormatException(SR.Format(SR.MailHeaderFieldInvalidCharacter, data[offset]));
+                        throw new FormatException(
+                            SR.Format(SR.MailHeaderFieldInvalidCharacter, data[offset])
+                        );
                 }
                 //not permitting Unicode, in which case Unicode is a formatting error
                 else if (data[offset] > Ascii7bitMaxValue || !Qtext[data[offset]])
                 {
-                    throw new FormatException(SR.Format(SR.MailHeaderFieldInvalidCharacter, data[offset]));
+                    throw new FormatException(
+                        SR.Format(SR.MailHeaderFieldInvalidCharacter, data[offset])
+                    );
                 }
             }
             if (doesntRequireQuotes)
@@ -243,7 +320,11 @@ namespace System.Net.Mime
             throw new FormatException(SR.MailHeaderFieldMalformedHeader);
         }
 
-        internal static string? ReadParameterAttribute(string data, ref int offset, StringBuilder? builder)
+        internal static string? ReadParameterAttribute(
+            string data,
+            ref int offset,
+            StringBuilder? builder
+        )
         {
             if (!SkipCFWS(data, ref offset))
                 return null; //
@@ -258,7 +339,9 @@ namespace System.Net.Mime
             {
                 if (data[offset] > Ascii7bitMaxValue)
                 {
-                    throw new FormatException(SR.Format(SR.MailHeaderFieldInvalidCharacter, data[offset]));
+                    throw new FormatException(
+                        SR.Format(SR.MailHeaderFieldInvalidCharacter, data[offset])
+                    );
                 }
                 else if (!Ttext[data[offset]])
                 {
@@ -268,13 +351,30 @@ namespace System.Net.Mime
 
             if (start == offset && offset < data.Length)
             {
-                throw new FormatException(SR.Format(SR.MailHeaderFieldInvalidCharacter, data[offset]));
+                throw new FormatException(
+                    SR.Format(SR.MailHeaderFieldInvalidCharacter, data[offset])
+                );
             }
 
             return data.Substring(start, offset - start);
         }
 
-        private static readonly string?[] s_months = new string?[] { null, "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+        private static readonly string?[] s_months = new string?[]
+        {
+            null,
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec"
+        };
 
         internal static string? GetDateTimeString(DateTime value, StringBuilder? builder)
         {
@@ -319,9 +419,14 @@ namespace System.Net.Mime
             return (builder != null ? null : localBuilder.ToString());
         }
 
-        internal static void GetTokenOrQuotedString(string data, StringBuilder builder, bool allowUnicode)
+        internal static void GetTokenOrQuotedString(
+            string data,
+            StringBuilder builder,
+            bool allowUnicode
+        )
         {
-            int offset = 0, start = 0;
+            int offset = 0,
+                start = 0;
             for (; offset < data.Length; offset++)
             {
                 if (CheckForUnicode(data[offset], allowUnicode))
@@ -403,11 +508,12 @@ namespace System.Net.Mime
             Debug.Assert(index >= 0);
             Debug.Assert(index < data.Length);
 
-            return (data[index] == MailBnfHelper.CR
-                    && index + 2 < data.Length
-                    && data[index + 1] == MailBnfHelper.LF
-                    && (data[index + 2] == MailBnfHelper.Space
-                        || data[index + 2] == MailBnfHelper.Tab));
+            return (
+                data[index] == MailBnfHelper.CR
+                && index + 2 < data.Length
+                && data[index + 1] == MailBnfHelper.LF
+                && (data[index + 2] == MailBnfHelper.Space || data[index + 2] == MailBnfHelper.Tab)
+            );
         }
     }
 }

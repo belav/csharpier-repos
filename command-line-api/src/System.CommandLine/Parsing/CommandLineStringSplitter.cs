@@ -15,9 +15,7 @@ namespace System.CommandLine.Parsing
         /// </summary>
         public static readonly CommandLineStringSplitter Instance = new();
 
-        private CommandLineStringSplitter()
-        {
-        }
+        private CommandLineStringSplitter() { }
 
         private enum Boundary
         {
@@ -122,7 +120,10 @@ namespace System.CommandLine.Parsing
 
             string CurrentToken()
             {
-                return memory.Slice(startTokenIndex, IndexOfEndOfToken()).ToString().Replace("\"", "");
+                return memory
+                    .Slice(startTokenIndex, IndexOfEndOfToken())
+                    .ToString()
+                    .Replace("\"", "");
             }
 
             int IndexOfEndOfToken() => pos - startTokenIndex;

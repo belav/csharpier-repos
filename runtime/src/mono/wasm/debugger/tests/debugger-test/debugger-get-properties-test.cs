@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace DebuggerTests.GetPropertiesTests
 {
-
     public interface IFirstName
     {
         string FirstName { get; }
@@ -18,8 +17,7 @@ namespace DebuggerTests.GetPropertiesTests
         string LastName { get; }
     }
 
-    public interface IName : IFirstName, ILastName
-    { }
+    public interface IName : IFirstName, ILastName { }
 
     public class BaseBaseClass
     {
@@ -36,8 +34,10 @@ namespace DebuggerTests.GetPropertiesTests
         public virtual DateTime DateTimeForOverride { get; set; }
         public string Base_AutoStringPropertyForOverrideWithField { get; set; }
 
-        public virtual string StringPropertyForOverrideWithAutoProperty => "base#StringPropertyForOverrideWithAutoProperty";
-        public virtual string Base_GetterForOverrideWithField => "base#Base_GetterForOverrideWithField";
+        public virtual string StringPropertyForOverrideWithAutoProperty =>
+            "base#StringPropertyForOverrideWithAutoProperty";
+        public virtual string Base_GetterForOverrideWithField =>
+            "base#Base_GetterForOverrideWithField";
         public new string BaseBase_MemberForOverride => "Base#BaseBase_MemberForOverride";
 
         public string this[string s] => s + "_hello";
@@ -72,8 +72,10 @@ namespace DebuggerTests.GetPropertiesTests
         // Overrides an auto-property with a getter
         public override DateTime DateTimeForOverride => new DateTime(2190, 9, 7, 5, 3, 2);
         public override string StringPropertyForOverrideWithAutoProperty { get; }
-        public new string Base_AutoStringPropertyForOverrideWithField = "DerivedClass#Base_AutoStringPropertyForOverrideWithField";
-        public new string Base_GetterForOverrideWithField = "DerivedClass#Base_GetterForOverrideWithField";
+        public new string Base_AutoStringPropertyForOverrideWithField =
+            "DerivedClass#Base_AutoStringPropertyForOverrideWithField";
+        public new string Base_GetterForOverrideWithField =
+            "DerivedClass#Base_GetterForOverrideWithField";
         public new string BaseBase_MemberForOverride = "DerivedClass#BaseBase_MemberForOverride";
 
         public int this[int i, string s] => i + 1 + s.Length;
@@ -88,7 +90,8 @@ namespace DebuggerTests.GetPropertiesTests
         {
             a = 4;
             AutoStringProperty = "DerivedClass#AutoStringProperty";
-            StringPropertyForOverrideWithAutoProperty = "DerivedClass#StringPropertyForOverrideWithAutoProperty";
+            StringPropertyForOverrideWithAutoProperty =
+                "DerivedClass#StringPropertyForOverrideWithAutoProperty";
         }
 
         public static void run()
@@ -161,7 +164,6 @@ namespace DebuggerTests.GetPropertiesTests
         {
             Console.WriteLine($"break here");
         }
-
     }
 
     public struct NestedStruct
@@ -216,10 +218,26 @@ namespace DebuggerTests.GetPropertiesTests
     {
         public static void run()
         {
-            InvokeReflectedStaticMethod(10, "foobar", new DateTime(1234, 6, 7, 8, 9, 10), 100, "xyz", 345, "abc");
+            InvokeReflectedStaticMethod(
+                10,
+                "foobar",
+                new DateTime(1234, 6, 7, 8, 9, 10),
+                100,
+                "xyz",
+                345,
+                "abc"
+            );
         }
 
-        public static void InvokeReflectedStaticMethod(int num, string name, DateTime some_date, int num1, string str2, int num3, string str3)
+        public static void InvokeReflectedStaticMethod(
+            int num,
+            string name,
+            DateTime some_date,
+            int num1,
+            string str2,
+            int num3,
+            string str3
+        )
         {
             var mi = typeof(CloneableStruct).GetMethod("SimpleStaticMethod");
             var dt = new DateTime(4210, 3, 4, 5, 6, 7);

@@ -32,14 +32,16 @@ namespace Microsoft.EntityFrameworkCore.Query
         ///     Creates a new instance of the <see cref="RelationalMemberTranslatorProvider" /> class.
         /// </summary>
         /// <param name="dependencies">Parameter object containing dependencies for this class.</param>
-        public RelationalMemberTranslatorProvider(RelationalMemberTranslatorProviderDependencies dependencies)
+        public RelationalMemberTranslatorProvider(
+            RelationalMemberTranslatorProviderDependencies dependencies
+        )
         {
             Dependencies = dependencies;
 
             _plugins.AddRange(dependencies.Plugins.SelectMany(p => p.Translators));
-            _translators
-                .AddRange(
-                    new[] { new NullableMemberTranslator(dependencies.SqlExpressionFactory) });
+            _translators.AddRange(
+                new[] { new NullableMemberTranslator(dependencies.SqlExpressionFactory) }
+            );
         }
 
         /// <summary>
@@ -52,15 +54,18 @@ namespace Microsoft.EntityFrameworkCore.Query
             SqlExpression? instance,
             MemberInfo member,
             Type returnType,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
-            => _plugins.Concat(_translators)
-                .Select(t => t.Translate(instance, member, returnType, logger)).FirstOrDefault(t => t != null);
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        ) =>
+            _plugins
+                .Concat(_translators)
+                .Select(t => t.Translate(instance, member, returnType, logger))
+                .FirstOrDefault(t => t != null);
 
         /// <summary>
         ///     Adds additional translators which will take priority over existing registered translators.
         /// </summary>
         /// <param name="translators">Translators to add.</param>
-        protected virtual void AddTranslators(IEnumerable<IMemberTranslator> translators)
-            => _translators.InsertRange(0, translators);
+        protected virtual void AddTranslators(IEnumerable<IMemberTranslator> translators) =>
+            _translators.InsertRange(0, translators);
     }
 }

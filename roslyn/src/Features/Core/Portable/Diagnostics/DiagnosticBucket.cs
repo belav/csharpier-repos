@@ -9,7 +9,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     internal readonly struct DiagnosticBucket
     {
         /// <summary>
-        /// The identity of bucket group. 
+        /// The identity of bucket group.
         /// </summary>
         public readonly object Id;
 
@@ -28,7 +28,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// </summary>
         public readonly DocumentId? DocumentId;
 
-        public DiagnosticBucket(object id, Workspace workspace, ProjectId? projectId, DocumentId? documentId)
+        public DiagnosticBucket(
+            object id,
+            Workspace workspace,
+            ProjectId? projectId,
+            DocumentId? documentId
+        )
         {
             Id = id;
             Workspace = workspace;

@@ -35,15 +35,10 @@ namespace Microsoft.CodeAnalysis.Options.Providers
     /// </summary>
     internal sealed class ExportGlobalOptionProviderAttribute : ExportOptionProviderAttribute
     {
-        public ExportGlobalOptionProviderAttribute()
-            : this(language: string.Empty)
-        {
-        }
+        public ExportGlobalOptionProviderAttribute() : this(language: string.Empty) { }
 
-        public ExportGlobalOptionProviderAttribute(string language)
-            : base(language, isGlobal: true)
-        {
-        }
+        public ExportGlobalOptionProviderAttribute(string language) : base(language, isGlobal: true)
+        { }
     }
 
     /// <summary>
@@ -52,14 +47,9 @@ namespace Microsoft.CodeAnalysis.Options.Providers
     /// </summary>
     internal sealed class ExportSolutionOptionProviderAttribute : ExportOptionProviderAttribute
     {
-        public ExportSolutionOptionProviderAttribute()
-            : this(language: string.Empty)
-        {
-        }
+        public ExportSolutionOptionProviderAttribute() : this(language: string.Empty) { }
 
         public ExportSolutionOptionProviderAttribute(string language)
-            : base(language, isGlobal: false)
-        {
-        }
+            : base(language, isGlobal: false) { }
     }
 }

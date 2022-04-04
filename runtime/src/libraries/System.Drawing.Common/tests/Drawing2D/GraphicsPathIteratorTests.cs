@@ -30,7 +30,11 @@ namespace System.Drawing.Drawing2D.Tests
 {
     public class GraphicsPathIteratorTests
     {
-        private readonly PointF[] _twoPoints = new PointF[2] { new PointF(1, 2), new PointF(20, 30) };
+        private readonly PointF[] _twoPoints = new PointF[2]
+        {
+            new PointF(1, 2),
+            new PointF(20, 30)
+        };
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void Ctor_Path_Success()
@@ -106,7 +110,10 @@ namespace System.Drawing.Drawing2D.Tests
             using (GraphicsPathIterator gpi = new GraphicsPathIterator(gp))
             {
                 gp.AddLines(_twoPoints);
-                Assert.Equal(0, gpi.NextSubpath(out int startIndex, out int endIndex, out bool isClosed));
+                Assert.Equal(
+                    0,
+                    gpi.NextSubpath(out int startIndex, out int endIndex, out bool isClosed)
+                );
                 Assert.False(isClosed);
                 Assert.Equal(0, startIndex);
                 Assert.Equal(0, endIndex);
@@ -119,7 +126,10 @@ namespace System.Drawing.Drawing2D.Tests
             using (GraphicsPath gp = new GraphicsPath(_twoPoints, new byte[] { 0, 129 }))
             using (GraphicsPathIterator gpi = new GraphicsPathIterator(gp))
             {
-                Assert.Equal(2, gpi.NextSubpath(out int startIndex, out int endIndex, out bool isClosed));
+                Assert.Equal(
+                    2,
+                    gpi.NextSubpath(out int startIndex, out int endIndex, out bool isClosed)
+                );
                 Assert.True(isClosed);
                 Assert.Equal(0, startIndex);
                 Assert.Equal(1, endIndex);
@@ -224,7 +234,13 @@ namespace System.Drawing.Drawing2D.Tests
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void HasCurve_ReturnsExpected()
         {
-            Point[] points = new Point[] { new Point(1, 1), new Point(2, 2), new Point(3, 3), new Point(4, 4) };
+            Point[] points = new Point[]
+            {
+                new Point(1, 1),
+                new Point(2, 2),
+                new Point(3, 3),
+                new Point(4, 4)
+            };
             byte[] types = new byte[] { 0, 3, 3, 3 };
 
             using (GraphicsPath gp = new GraphicsPath(points, types))
@@ -283,7 +299,13 @@ namespace System.Drawing.Drawing2D.Tests
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void Enumerate_ReturnsExpected()
         {
-            PointF[] points = new PointF[] { new PointF(1f, 1f), new PointF(2f, 2f), new PointF(3f, 3f), new PointF(4f, 4f) };
+            PointF[] points = new PointF[]
+            {
+                new PointF(1f, 1f),
+                new PointF(2f, 2f),
+                new PointF(3f, 3f),
+                new PointF(4f, 4f)
+            };
             byte[] types = new byte[] { 0, 3, 3, 3 };
 
             PointF[] actualPoints = new PointF[4];
@@ -306,12 +328,18 @@ namespace System.Drawing.Drawing2D.Tests
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(PointsTypesLenghtMismatch_TestData))]
-        public void Enumerate_PointsTypesMismatch_ThrowsArgumentException(PointF[] points, byte[] types)
+        public void Enumerate_PointsTypesMismatch_ThrowsArgumentException(
+            PointF[] points,
+            byte[] types
+        )
         {
             using (GraphicsPath gp = new GraphicsPath())
             using (GraphicsPathIterator gpi = new GraphicsPathIterator(gp))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => gpi.Enumerate(ref points, ref types));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => gpi.Enumerate(ref points, ref types)
+                );
             }
         }
 
@@ -324,7 +352,10 @@ namespace System.Drawing.Drawing2D.Tests
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(NullPointsTypes_TestData))]
-        public void Enumerate_NullPointsTypes_ThrowsNullReferenceException(PointF[] points, byte[] types)
+        public void Enumerate_NullPointsTypes_ThrowsNullReferenceException(
+            PointF[] points,
+            byte[] types
+        )
         {
             using (GraphicsPath gp = new GraphicsPath())
             using (GraphicsPathIterator gpi = new GraphicsPathIterator(gp))
@@ -335,30 +366,44 @@ namespace System.Drawing.Drawing2D.Tests
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(PointsTypesLenghtMismatch_TestData))]
-        public void CopyData_PointsTypesMismatch_ThrowsArgumentException(PointF[] points, byte[] types)
+        public void CopyData_PointsTypesMismatch_ThrowsArgumentException(
+            PointF[] points,
+            byte[] types
+        )
         {
             using (GraphicsPath gp = new GraphicsPath())
             using (GraphicsPathIterator gpi = new GraphicsPathIterator(gp))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => gpi.CopyData(ref points, ref types, 0, points.Length));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => gpi.CopyData(ref points, ref types, 0, points.Length)
+                );
             }
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(NullPointsTypes_TestData))]
-        public void CopyData_NullPointsTypes_ThrowsNullReferenceException(PointF[] points, byte[] types)
+        public void CopyData_NullPointsTypes_ThrowsNullReferenceException(
+            PointF[] points,
+            byte[] types
+        )
         {
             using (GraphicsPath gp = new GraphicsPath())
             using (GraphicsPathIterator gpi = new GraphicsPathIterator(gp))
             {
-                Assert.Throws<NullReferenceException>(() => gpi.CopyData(ref points, ref types, 0, 1));
+                Assert.Throws<NullReferenceException>(
+                    () => gpi.CopyData(ref points, ref types, 0, 1)
+                );
             }
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [InlineData(-1, 2)]
         [InlineData(0, 3)]
-        public void CopyData_StartEndIndexesOutOfRange_ThrowsArgumentException(int startIndex, int endIndex)
+        public void CopyData_StartEndIndexesOutOfRange_ThrowsArgumentException(
+            int startIndex,
+            int endIndex
+        )
         {
             PointF[] resultPoints = new PointF[0];
             byte[] resultTypes = new byte[0];
@@ -366,7 +411,10 @@ namespace System.Drawing.Drawing2D.Tests
             using (GraphicsPath gp = new GraphicsPath())
             using (GraphicsPathIterator gpi = new GraphicsPathIterator(gp))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => gpi.CopyData(ref resultPoints, ref resultTypes, startIndex, endIndex));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => gpi.CopyData(ref resultPoints, ref resultTypes, startIndex, endIndex)
+                );
             }
         }
 
@@ -379,7 +427,12 @@ namespace System.Drawing.Drawing2D.Tests
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(CopyData_StartEndIndexesOutOfRange_TestData))]
-        public void CopyData_StartEndIndexesOutOfRange_ReturnsExpeced(PointF[] points, byte[] types, int startIndex, int endIndex)
+        public void CopyData_StartEndIndexesOutOfRange_ReturnsExpeced(
+            PointF[] points,
+            byte[] types,
+            int startIndex,
+            int endIndex
+        )
         {
             PointF[] resultPoints = new PointF[points.Length];
             byte[] resultTypes = new byte[points.Length];
@@ -387,14 +440,23 @@ namespace System.Drawing.Drawing2D.Tests
             using (GraphicsPath gp = new GraphicsPath(points, types))
             using (GraphicsPathIterator gpi = new GraphicsPathIterator(gp))
             {
-                Assert.Equal(0, gpi.CopyData(ref resultPoints, ref resultTypes, startIndex, endIndex));
+                Assert.Equal(
+                    0,
+                    gpi.CopyData(ref resultPoints, ref resultTypes, startIndex, endIndex)
+                );
             }
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void CopyData_EqualStartEndIndexes_ReturnsExpeced()
         {
-            PointF[] points = new PointF[] { new PointF(1f, 1f), new PointF(2f, 2f), new PointF(3f, 3f), new PointF(4f, 4f) };
+            PointF[] points = new PointF[]
+            {
+                new PointF(1f, 1f),
+                new PointF(2f, 2f),
+                new PointF(3f, 3f),
+                new PointF(4f, 4f)
+            };
             byte[] types = new byte[] { 0, 3, 3, 3 };
 
             PointF[] actualPoints = new PointF[1];
@@ -412,7 +474,13 @@ namespace System.Drawing.Drawing2D.Tests
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void CopyData_ReturnsExpected()
         {
-            PointF[] points = new PointF[] { new PointF(1f, 1f), new PointF(2f, 2f), new PointF(3f, 3f), new PointF(4f, 4f) };
+            PointF[] points = new PointF[]
+            {
+                new PointF(1f, 1f),
+                new PointF(2f, 2f),
+                new PointF(3f, 3f),
+                new PointF(4f, 4f)
+            };
             byte[] types = new byte[] { 0, 3, 3, 3 };
 
             PointF[] actualPoints = new PointF[3];

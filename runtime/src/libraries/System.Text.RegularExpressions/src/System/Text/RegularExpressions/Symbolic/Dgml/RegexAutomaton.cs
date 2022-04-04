@@ -10,7 +10,8 @@ namespace System.Text.RegularExpressions.Symbolic.DGML
     /// <summary>
     /// Used by DgmlWriter to unwind a regex into a DFA up to a bound that limits the number of states
     /// </summary>
-    internal sealed class RegexAutomaton<T> : IAutomaton<(SymbolicRegexNode<T>?, T)> where T : notnull
+    internal sealed class RegexAutomaton<T> : IAutomaton<(SymbolicRegexNode<T>?, T)>
+        where T : notnull
     {
         private readonly DfaMatchingState<T> _q0;
         private readonly List<int> _states = new();
@@ -19,15 +20,26 @@ namespace System.Text.RegularExpressions.Symbolic.DGML
         private readonly SymbolicRegexBuilder<T> _builder;
         private SymbolicNFA<T>? _nfa;
 
-        internal RegexAutomaton(SymbolicRegexMatcher<T> srm, int bound, bool addDotStar, bool inReverse, bool asNFA)
+        internal RegexAutomaton(
+            SymbolicRegexMatcher<T> srm,
+            int bound,
+            bool addDotStar,
+            bool inReverse,
+            bool asNFA
+        )
         {
             _builder = srm._builder;
-            uint startId = inReverse ?
-                (srm._reversePattern._info.StartsWithLineAnchor ? CharKind.StartStop : 0) :
-                (srm._pattern._info.StartsWithLineAnchor ? CharKind.StartStop : 0);
+            uint startId = inReverse
+                ? (srm._reversePattern._info.StartsWithLineAnchor ? CharKind.StartStop : 0)
+                : (srm._pattern._info.StartsWithLineAnchor ? CharKind.StartStop : 0);
 
             //inReverse only matters if Ar contains some line anchor
-            _q0 = _builder.MkState(inReverse ? srm._reversePattern : (addDotStar ? srm._dotStarredPattern : srm._pattern), startId);
+            _q0 = _builder.MkState(
+                inReverse
+                  ? srm._reversePattern
+                  : (addDotStar ? srm._dotStarredPattern : srm._pattern),
+                startId
+            );
 
             if (asNFA)
             {
@@ -36,7 +48,13 @@ namespace System.Text.RegularExpressions.Symbolic.DGML
                 {
                     _states.Add(q);
                     foreach ((T, SymbolicRegexNode<T>?, int) branch in _nfa.EnumeratePaths(q))
-                        _moves.Add(Move<(SymbolicRegexNode<T>?, T)>.Create(q, branch.Item3, (branch.Item2, branch.Item1)));
+                        _moves.Add(
+                            Move<(SymbolicRegexNode<T>?, T)>.Create(
+                                q,
+                                branch.Item3,
+                                (branch.Item2, branch.Item1)
+                            )
+                        );
                 }
             }
             else
@@ -67,15 +85,21 @@ namespace System.Text.RegularExpressions.Symbolic.DGML
                             }
 
                             var qp = (q.Id, p.Id);
-                            normalizedmoves[qp] = normalizedmoves.ContainsKey(qp) ?
-                                _builder._solver.Or(normalizedmoves[qp], c) :
-                                c;
+                            normalizedmoves[qp] = normalizedmoves.ContainsKey(qp)
+                              ? _builder._solver.Or(normalizedmoves[qp], c)
+                              : c;
                         }
                     }
                 }
 
                 foreach (KeyValuePair<(int, int), T> entry in normalizedmoves)
-                    _moves.Add(Move<(SymbolicRegexNode<T>?, T)>.Create(entry.Key.Item1, entry.Key.Item2, (null, entry.Value)));
+                    _moves.Add(
+                        Move<(SymbolicRegexNode<T>?, T)>.Create(
+                            entry.Key.Item1,
+                            entry.Key.Item2,
+                            (null, entry.Value)
+                        )
+                    );
             }
         }
 
@@ -101,9 +125,13 @@ namespace System.Text.RegularExpressions.Symbolic.DGML
         public int TransitionCount => _moves.Count;
 
         public string DescribeLabel((SymbolicRegexNode<T>?, T) lab) =>
-            lab.Item1 is null ? Net.WebUtility.HtmlEncode(_builder._solver.PrettyPrint(lab.Item2)) :
-            // Conditional nullability based on anchors
-            Net.WebUtility.HtmlEncode($"{lab.Item1}/{_builder._solver.PrettyPrint(lab.Item2)}");
+            lab.Item1 is null
+                ? Net.WebUtility.HtmlEncode(_builder._solver.PrettyPrint(lab.Item2))
+                :
+                  // Conditional nullability based on anchors
+                  Net.WebUtility.HtmlEncode(
+                      $"{lab.Item1}/{_builder._solver.PrettyPrint(lab.Item2)}"
+                  );
 
         public string DescribeStartLabel() => "";
 

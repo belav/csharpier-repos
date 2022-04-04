@@ -68,10 +68,13 @@ internal sealed partial class JsonResult : IResult
             }
         }
 
-        [LoggerMessage(1, LogLevel.Information,
+        [LoggerMessage(
+            1,
+            LogLevel.Information,
             "Executing JsonResult, writing value of type '{Type}'.",
             EventName = "JsonResultExecuting",
-            SkipEnabledCheck = true)]
+            SkipEnabledCheck = true
+        )]
         private static partial void JsonResultExecuting(ILogger logger, string type);
     }
 }

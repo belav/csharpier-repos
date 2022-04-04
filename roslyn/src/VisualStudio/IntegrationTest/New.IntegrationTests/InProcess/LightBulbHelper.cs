@@ -15,28 +15,38 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 {
     public static class LightBulbHelper
     {
-        public static async Task<bool> WaitForLightBulbSessionAsync(ILightBulbBroker broker, IWpfTextView view, CancellationToken cancellationToken)
+        public static async Task<bool> WaitForLightBulbSessionAsync(
+            ILightBulbBroker broker,
+            IWpfTextView view,
+            CancellationToken cancellationToken
+        )
         {
             var startTime = DateTimeOffset.Now;
 
-            var active = await Helper.RetryAsync(async cancellationToken =>
-            {
-                if (broker.IsLightBulbSessionActive(view))
+            var active = await Helper.RetryAsync(
+                async cancellationToken =>
                 {
-                    return true;
-                }
+                    if (broker.IsLightBulbSessionActive(view))
+                    {
+                        return true;
+                    }
 
-                if (cancellationToken.IsCancellationRequested)
-                {
-                    throw new InvalidOperationException("Expected a light bulb session to appear.");
-                }
+                    if (cancellationToken.IsCancellationRequested)
+                    {
+                        throw new InvalidOperationException(
+                            "Expected a light bulb session to appear."
+                        );
+                    }
 
-                // checking whether there is any suggested action is async up to editor layer and our waiter doesn't track up to that point.
-                // so here, we have no other way than sleep (with timeout) to see LB is available.
-                await Task.Delay(TimeSpan.FromSeconds(1), cancellationToken);
+                    // checking whether there is any suggested action is async up to editor layer and our waiter doesn't track up to that point.
+                    // so here, we have no other way than sleep (with timeout) to see LB is available.
+                    await Task.Delay(TimeSpan.FromSeconds(1), cancellationToken);
 
-                return broker.IsLightBulbSessionActive(view);
-            }, TimeSpan.FromMilliseconds(1), cancellationToken);
+                    return broker.IsLightBulbSessionActive(view);
+                },
+                TimeSpan.FromMilliseconds(1),
+                cancellationToken
+            );
 
             if (!active)
                 return false;
@@ -45,13 +55,19 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             return true;
         }
 
-        public static async Task<IEnumerable<SuggestedActionSet>> WaitForItemsAsync(ILightBulbBroker broker, IWpfTextView view, CancellationToken cancellationToken)
+        public static async Task<IEnumerable<SuggestedActionSet>> WaitForItemsAsync(
+            ILightBulbBroker broker,
+            IWpfTextView view,
+            CancellationToken cancellationToken
+        )
         {
             var activeSession = broker.GetSession(view);
             if (activeSession == null)
             {
                 var bufferType = view.TextBuffer.ContentType.DisplayName;
-                throw new InvalidOperationException($"No expanded light bulb session found after View.ShowSmartTag.  Buffer content type={bufferType}");
+                throw new InvalidOperationException(
+                    $"No expanded light bulb session found after View.ShowSmartTag.  Buffer content type={bufferType}"
+                );
             }
 
             var asyncSession = (IAsyncLightBulbSession)activeSession;
@@ -67,7 +83,11 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
                 if (e.Status == QuerySuggestedActionCompletionStatus.Completed)
                     tcs.SetResult(e.ActionSets.ToList());
                 else
-                    tcs.SetException(new InvalidOperationException($"Light bulb transitioned to non-complete state: {e.Status}"));
+                    tcs.SetException(
+                        new InvalidOperationException(
+                            $"Light bulb transitioned to non-complete state: {e.Status}"
+                        )
+                    );
 
                 asyncSession.SuggestedActionsUpdated -= handler;
             };
@@ -82,7 +102,10 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             // Calling PopulateWithData ensures the underlying session will call SuggestedActionsUpdated at least once
             // with the latest data computed.  This is needed so that if the lightbulb computation is already complete
             // that we hear about the results.
-            asyncSession.PopulateWithData(overrideRequestedActionCategories: null, operationContext: null);
+            asyncSession.PopulateWithData(
+                overrideRequestedActionCategories: null,
+                operationContext: null
+            );
 
             return await tcs.Task.WithCancellation(cancellationToken);
         }

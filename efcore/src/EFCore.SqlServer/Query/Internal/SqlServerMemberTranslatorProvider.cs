@@ -22,8 +22,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         public SqlServerMemberTranslatorProvider(
             RelationalMemberTranslatorProviderDependencies dependencies,
-            IRelationalTypeMappingSource typeMappingSource)
-            : base(dependencies)
+            IRelationalTypeMappingSource typeMappingSource
+        ) : base(dependencies)
         {
             var sqlExpressionFactory = dependencies.SqlExpressionFactory;
 
@@ -33,7 +33,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                     new SqlServerDateTimeMemberTranslator(sqlExpressionFactory, typeMappingSource),
                     new SqlServerStringMemberTranslator(sqlExpressionFactory),
                     new SqlServerTimeSpanMemberTranslator(sqlExpressionFactory)
-                });
+                }
+            );
         }
     }
 }

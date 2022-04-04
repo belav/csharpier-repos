@@ -19,22 +19,26 @@ namespace System.Text.Json.Serialization.Tests
 
     public sealed class MetadataTests_AsyncStream : MetadataTests
     {
-        public MetadataTests_AsyncStream() : base(JsonSerializerWrapperForString.AsyncStreamSerializer) { }
+        public MetadataTests_AsyncStream()
+            : base(JsonSerializerWrapperForString.AsyncStreamSerializer) { }
     }
 
     public sealed class MetadataTests_SyncStream : MetadataTests
     {
-        public MetadataTests_SyncStream() : base(JsonSerializerWrapperForString.SyncStreamSerializer) { }
+        public MetadataTests_SyncStream()
+            : base(JsonSerializerWrapperForString.SyncStreamSerializer) { }
     }
 
     public sealed class MetadataTests_LowLevel : MetadataTests
     {
-        public MetadataTests_LowLevel() : base(JsonSerializerWrapperForString.ReaderWriterSerializer) { }
+        public MetadataTests_LowLevel()
+            : base(JsonSerializerWrapperForString.ReaderWriterSerializer) { }
     }
 
     public class MetadataTests_Document : MetadataTests
     {
-        public MetadataTests_Document() : base(JsonSerializerWrapperForString.DocumentSerializer) { }
+        public MetadataTests_Document() : base(JsonSerializerWrapperForString.DocumentSerializer)
+        { }
     }
 
     public class MetadataTests_Element : MetadataTests
@@ -75,7 +79,5 @@ namespace System.Text.Json.Serialization.Tests
     }
 
     [JsonSerializable(typeof(WeatherForecastWithPOCOs))]
-    internal sealed partial class JsonContext : JsonSerializerContext
-    {
-    }
+    internal sealed partial class JsonContext : JsonSerializerContext { }
 }

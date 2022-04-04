@@ -23,10 +23,7 @@ internal class DummyApplication : IHttpApplication<HttpContext>
         return new DefaultHttpContext(contextFeatures);
     }
 
-    public void DisposeContext(HttpContext httpContext, Exception exception)
-    {
-
-    }
+    public void DisposeContext(HttpContext httpContext, Exception exception) { }
 
     public async Task ProcessRequestAsync(HttpContext httpContext)
     {

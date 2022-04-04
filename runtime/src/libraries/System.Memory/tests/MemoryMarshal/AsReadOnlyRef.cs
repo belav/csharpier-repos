@@ -16,11 +16,19 @@ namespace System.SpanTests
             ref readonly int asInt = ref MemoryMarshal.AsRef<int>(span);
 
             Assert.Equal(0x11222211, asInt);
-            Assert.True(Unsafe.AreSame<byte>(ref Unsafe.As<int, byte>(ref Unsafe.AsRef(in asInt)), ref MemoryMarshal.GetReference(span)));
+            Assert.True(
+                Unsafe.AreSame<byte>(
+                    ref Unsafe.As<int, byte>(ref Unsafe.AsRef(in asInt)),
+                    ref MemoryMarshal.GetReference(span)
+                )
+            );
 
             var array = new byte[100];
             Array.Fill<byte>(array, 0x42);
-            ref readonly TestHelpers.TestStructExplicit asStruct = ref MemoryMarshal.AsRef<TestHelpers.TestStructExplicit>(new ReadOnlySpan<byte>(array));
+            ref readonly TestHelpers.TestStructExplicit asStruct =
+                ref MemoryMarshal.AsRef<TestHelpers.TestStructExplicit>(
+                    new ReadOnlySpan<byte>(array)
+                );
 
             Assert.Equal(asStruct.UI1, (uint)0x42424242);
         }
@@ -28,10 +36,22 @@ namespace System.SpanTests
         [Fact]
         public static void AsReadOnlyRefFail()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => MemoryMarshal.AsRef<uint>(new ReadOnlySpan<byte>(new byte[] { 1 })));
-            Assert.Throws<ArgumentOutOfRangeException>(() => MemoryMarshal.AsRef<TestHelpers.TestStructExplicit>(new ReadOnlySpan<byte>(new byte[] { 1 })));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => MemoryMarshal.AsRef<uint>(new ReadOnlySpan<byte>(new byte[] { 1 }))
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    MemoryMarshal.AsRef<TestHelpers.TestStructExplicit>(
+                        new ReadOnlySpan<byte>(new byte[] { 1 })
+                    )
+            );
 
-            Assert.Throws<ArgumentException>(() => MemoryMarshal.AsRef<TestHelpers.StructWithReferences>(new ReadOnlySpan<byte>(new byte[100])));
+            Assert.Throws<ArgumentException>(
+                () =>
+                    MemoryMarshal.AsRef<TestHelpers.StructWithReferences>(
+                        new ReadOnlySpan<byte>(new byte[100])
+                    )
+            );
         }
     }
 }

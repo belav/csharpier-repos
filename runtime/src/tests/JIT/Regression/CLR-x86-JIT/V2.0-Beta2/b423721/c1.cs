@@ -6,10 +6,8 @@ using System.Runtime.CompilerServices;
 
 namespace Test
 {
-
     public class C1<T>
     {
-
         public static string GetString()
         {
             return "foo";
@@ -23,5 +21,4 @@ namespace Test
             return ((object)"foo" == (object)val);
         }
     }
-
 }

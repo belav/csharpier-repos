@@ -20,7 +20,10 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Hosting;
 
-internal sealed class GenericWebHostBuilder : IWebHostBuilder, ISupportsStartup, ISupportsUseDefaultServiceProvider
+internal sealed class GenericWebHostBuilder
+    : IWebHostBuilder,
+      ISupportsStartup,
+      ISupportsUseDefaultServiceProvider
 {
     private readonly IHostBuilder _builder;
     private readonly IConfiguration _config;
@@ -33,8 +36,7 @@ internal sealed class GenericWebHostBuilder : IWebHostBuilder, ISupportsStartup,
     public GenericWebHostBuilder(IHostBuilder builder, WebHostBuilderOptions options)
     {
         _builder = builder;
-        var configBuilder = new ConfigurationBuilder()
-            .AddInMemoryCollection();
+        var configBuilder = new ConfigurationBuilder().AddInMemoryCollection();
 
         if (!options.SuppressEnvironmentConfiguration)
         {
@@ -43,88 +45,111 @@ internal sealed class GenericWebHostBuilder : IWebHostBuilder, ISupportsStartup,
 
         _config = configBuilder.Build();
 
-        _builder.ConfigureHostConfiguration(config =>
-        {
-            config.AddConfiguration(_config);
+        _builder.ConfigureHostConfiguration(
+            config =>
+            {
+                config.AddConfiguration(_config);
 
                 // We do this super early but still late enough that we can process the configuration
                 // wired up by calls to UseSetting
                 ExecuteHostingStartups();
-        });
+            }
+        );
 
         // IHostingStartup needs to be executed before any direct methods on the builder
         // so register these callbacks first
-        _builder.ConfigureAppConfiguration((context, configurationBuilder) =>
-        {
-            if (_hostingStartupWebHostBuilder != null)
+        _builder.ConfigureAppConfiguration(
+            (context, configurationBuilder) =>
+            {
+                if (_hostingStartupWebHostBuilder != null)
+                {
+                    var webhostContext = GetWebHostBuilderContext(context);
+                    _hostingStartupWebHostBuilder.ConfigureAppConfiguration(
+                        webhostContext,
+                        configurationBuilder
+                    );
+                }
+            }
+        );
+
+        _builder.ConfigureServices(
+            (context, services) =>
             {
                 var webhostContext = GetWebHostBuilderContext(context);
-                _hostingStartupWebHostBuilder.ConfigureAppConfiguration(webhostContext, configurationBuilder);
-            }
-        });
-
-        _builder.ConfigureServices((context, services) =>
-        {
-            var webhostContext = GetWebHostBuilderContext(context);
-            var webHostOptions = (WebHostOptions)context.Properties[typeof(WebHostOptions)];
+                var webHostOptions = (WebHostOptions)context.Properties[typeof(WebHostOptions)];
 
                 // Add the IHostingEnvironment and IApplicationLifetime from Microsoft.AspNetCore.Hosting
                 services.AddSingleton(webhostContext.HostingEnvironment);
 #pragma warning disable CS0618 // Type or member is obsolete
-                services.AddSingleton((AspNetCore.Hosting.IHostingEnvironment)webhostContext.HostingEnvironment);
-            services.AddSingleton<IApplicationLifetime, GenericWebHostApplicationLifetime>();
+                services.AddSingleton(
+                    (AspNetCore.Hosting.IHostingEnvironment)webhostContext.HostingEnvironment
+                );
+                services.AddSingleton<IApplicationLifetime, GenericWebHostApplicationLifetime>();
 #pragma warning restore CS0618 // Type or member is obsolete
 
-                services.Configure<GenericWebHostServiceOptions>(options =>
-            {
-                    // Set the options
-                    options.WebHostOptions = webHostOptions;
-                    // Store and forward any startup errors
-                    options.HostingStartupExceptions = _hostingStartupErrors;
-            });
+                services.Configure<GenericWebHostServiceOptions>(
+                    options =>
+                    {
+                        // Set the options
+                        options.WebHostOptions = webHostOptions;
+                        // Store and forward any startup errors
+                        options.HostingStartupExceptions = _hostingStartupErrors;
+                    }
+                );
 
                 // REVIEW: This is bad since we don't own this type. Anybody could add one of these and it would mess things up
                 // We need to flow this differently
                 services.TryAddSingleton(sp => new DiagnosticListener("Microsoft.AspNetCore"));
-            services.TryAddSingleton<DiagnosticSource>(sp => sp.GetRequiredService<DiagnosticListener>());
-            services.TryAddSingleton(sp => new ActivitySource("Microsoft.AspNetCore"));
-            services.TryAddSingleton(DistributedContextPropagator.Current);
+                services.TryAddSingleton<DiagnosticSource>(
+                    sp => sp.GetRequiredService<DiagnosticListener>()
+                );
+                services.TryAddSingleton(sp => new ActivitySource("Microsoft.AspNetCore"));
+                services.TryAddSingleton(DistributedContextPropagator.Current);
 
-            services.TryAddSingleton<IHttpContextFactory, DefaultHttpContextFactory>();
-            services.TryAddScoped<IMiddlewareFactory, MiddlewareFactory>();
-            services.TryAddSingleton<IApplicationBuilderFactory, ApplicationBuilderFactory>();
+                services.TryAddSingleton<IHttpContextFactory, DefaultHttpContextFactory>();
+                services.TryAddScoped<IMiddlewareFactory, MiddlewareFactory>();
+                services.TryAddSingleton<IApplicationBuilderFactory, ApplicationBuilderFactory>();
 
                 // IMPORTANT: This needs to run *before* direct calls on the builder (like UseStartup)
                 _hostingStartupWebHostBuilder?.ConfigureServices(webhostContext, services);
 
                 // Support UseStartup(assemblyName)
                 if (!string.IsNullOrEmpty(webHostOptions.StartupAssembly))
-            {
-                try
                 {
-                    var startupType = StartupLoader.FindStartupType(webHostOptions.StartupAssembly, webhostContext.HostingEnvironment.EnvironmentName);
-                    UseStartup(startupType, context, services);
-                }
-                catch (Exception ex) when (webHostOptions.CaptureStartupErrors)
-                {
-                    var capture = ExceptionDispatchInfo.Capture(ex);
-
-                    services.Configure<GenericWebHostServiceOptions>(options =>
+                    try
                     {
-                        options.ConfigureApplication = app =>
-                        {
-                                // Throw if there was any errors initializing startup
-                                capture.Throw();
-                        };
-                    });
+                        var startupType = StartupLoader.FindStartupType(
+                            webHostOptions.StartupAssembly,
+                            webhostContext.HostingEnvironment.EnvironmentName
+                        );
+                        UseStartup(startupType, context, services);
+                    }
+                    catch (Exception ex) when (webHostOptions.CaptureStartupErrors)
+                    {
+                        var capture = ExceptionDispatchInfo.Capture(ex);
+
+                        services.Configure<GenericWebHostServiceOptions>(
+                            options =>
+                            {
+                                options.ConfigureApplication = app =>
+                                {
+                                    // Throw if there was any errors initializing startup
+                                    capture.Throw();
+                                };
+                            }
+                        );
+                    }
                 }
             }
-        });
+        );
     }
 
     private void ExecuteHostingStartups()
     {
-        var webHostOptions = new WebHostOptions(_config, Assembly.GetEntryAssembly()?.GetName().Name ?? string.Empty);
+        var webHostOptions = new WebHostOptions(
+            _config,
+            Assembly.GetEntryAssembly()?.GetName().Name ?? string.Empty
+        );
 
         if (webHostOptions.PreventHostingStartup)
         {
@@ -151,14 +176,21 @@ internal sealed class GenericWebHostBuilder : IWebHostBuilder, ISupportsStartup,
 
                 foreach (var attribute in assembly.GetCustomAttributes<HostingStartupAttribute>())
                 {
-                    var hostingStartup = (IHostingStartup)Activator.CreateInstance(attribute.HostingStartupType)!;
+                    var hostingStartup = (IHostingStartup)Activator.CreateInstance(
+                        attribute.HostingStartupType
+                    )!;
                     hostingStartup.Configure(_hostingStartupWebHostBuilder);
                 }
             }
             catch (Exception ex)
             {
                 // Capture any errors that happen during startup
-                exceptions.Add(new InvalidOperationException($"Startup assembly {assemblyName} failed to execute. See the inner exception for more details.", ex));
+                exceptions.Add(
+                    new InvalidOperationException(
+                        $"Startup assembly {assemblyName} failed to execute. See the inner exception for more details.",
+                        ex
+                    )
+                );
             }
         }
 
@@ -170,16 +202,22 @@ internal sealed class GenericWebHostBuilder : IWebHostBuilder, ISupportsStartup,
 
     public IWebHost Build()
     {
-        throw new NotSupportedException($"Building this implementation of {nameof(IWebHostBuilder)} is not supported.");
+        throw new NotSupportedException(
+            $"Building this implementation of {nameof(IWebHostBuilder)} is not supported."
+        );
     }
 
-    public IWebHostBuilder ConfigureAppConfiguration(Action<WebHostBuilderContext, IConfigurationBuilder> configureDelegate)
+    public IWebHostBuilder ConfigureAppConfiguration(
+        Action<WebHostBuilderContext, IConfigurationBuilder> configureDelegate
+    )
     {
-        _builder.ConfigureAppConfiguration((context, builder) =>
-        {
-            var webhostBuilderContext = GetWebHostBuilderContext(context);
-            configureDelegate(webhostBuilderContext, builder);
-        });
+        _builder.ConfigureAppConfiguration(
+            (context, builder) =>
+            {
+                var webhostBuilderContext = GetWebHostBuilderContext(context);
+                configureDelegate(webhostBuilderContext, builder);
+            }
+        );
 
         return this;
     }
@@ -189,31 +227,41 @@ internal sealed class GenericWebHostBuilder : IWebHostBuilder, ISupportsStartup,
         return ConfigureServices((context, services) => configureServices(services));
     }
 
-    public IWebHostBuilder ConfigureServices(Action<WebHostBuilderContext, IServiceCollection> configureServices)
+    public IWebHostBuilder ConfigureServices(
+        Action<WebHostBuilderContext, IServiceCollection> configureServices
+    )
     {
-        _builder.ConfigureServices((context, builder) =>
-        {
-            var webhostBuilderContext = GetWebHostBuilderContext(context);
-            configureServices(webhostBuilderContext, builder);
-        });
+        _builder.ConfigureServices(
+            (context, builder) =>
+            {
+                var webhostBuilderContext = GetWebHostBuilderContext(context);
+                configureServices(webhostBuilderContext, builder);
+            }
+        );
 
         return this;
     }
 
-    public IWebHostBuilder UseDefaultServiceProvider(Action<WebHostBuilderContext, ServiceProviderOptions> configure)
+    public IWebHostBuilder UseDefaultServiceProvider(
+        Action<WebHostBuilderContext, ServiceProviderOptions> configure
+    )
     {
-        _builder.UseServiceProviderFactory(context =>
-        {
-            var webHostBuilderContext = GetWebHostBuilderContext(context);
-            var options = new ServiceProviderOptions();
-            configure(webHostBuilderContext, options);
-            return new DefaultServiceProviderFactory(options);
-        });
+        _builder.UseServiceProviderFactory(
+            context =>
+            {
+                var webHostBuilderContext = GetWebHostBuilderContext(context);
+                var options = new ServiceProviderOptions();
+                configure(webHostBuilderContext, options);
+                return new DefaultServiceProviderFactory(options);
+            }
+        );
 
         return this;
     }
 
-    public IWebHostBuilder UseStartup([DynamicallyAccessedMembers(StartupLinkerOptions.Accessibility)] Type startupType)
+    public IWebHostBuilder UseStartup(
+        [DynamicallyAccessedMembers(StartupLinkerOptions.Accessibility)] Type startupType
+    )
     {
         var startupAssemblyName = startupType.Assembly.GetName().Name;
 
@@ -222,43 +270,65 @@ internal sealed class GenericWebHostBuilder : IWebHostBuilder, ISupportsStartup,
         // UseStartup can be called multiple times. Only run the last one.
         _startupObject = startupType;
 
-        _builder.ConfigureServices((context, services) =>
-        {
+        _builder.ConfigureServices(
+            (context, services) =>
+            {
                 // Run this delegate if the startup type matches
                 if (object.ReferenceEquals(_startupObject, startupType))
-            {
-                UseStartup(startupType, context, services);
+                {
+                    UseStartup(startupType, context, services);
+                }
             }
-        });
+        );
 
         return this;
     }
 
-    public IWebHostBuilder UseStartup<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] TStartup>(Func<WebHostBuilderContext, TStartup> startupFactory)
+    public IWebHostBuilder UseStartup<
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] TStartup
+    >(Func<WebHostBuilderContext, TStartup> startupFactory)
     {
-        var startupAssemblyName = startupFactory.GetMethodInfo().DeclaringType!.Assembly.GetName().Name;
+        var startupAssemblyName = startupFactory
+            .GetMethodInfo()
+            .DeclaringType!.Assembly.GetName()
+            .Name;
 
         UseSetting(WebHostDefaults.ApplicationKey, startupAssemblyName);
 
         // Clear the startup type
         _startupObject = startupFactory;
 
-        _builder.ConfigureServices((context, services) =>
-        {
+        _builder.ConfigureServices(
+            (context, services) =>
+            {
                 // UseStartup can be called multiple times. Only run the last one.
                 if (object.ReferenceEquals(_startupObject, startupFactory))
-            {
-                var webHostBuilderContext = GetWebHostBuilderContext(context);
-                var instance = startupFactory(webHostBuilderContext) ?? throw new InvalidOperationException("The specified factory returned null startup instance.");
-                UseStartup(instance.GetType(), context, services, instance);
+                {
+                    var webHostBuilderContext = GetWebHostBuilderContext(context);
+                    var instance =
+                        startupFactory(webHostBuilderContext)
+                        ?? throw new InvalidOperationException(
+                            "The specified factory returned null startup instance."
+                        );
+                    UseStartup(instance.GetType(), context, services, instance);
+                }
             }
-        });
+        );
 
         return this;
     }
 
-    [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2006:UnrecognizedReflectionPattern", Justification = "We need to call a generic method on IHostBuilder.")]
-    private void UseStartup([DynamicallyAccessedMembers(StartupLinkerOptions.Accessibility)] Type startupType, HostBuilderContext context, IServiceCollection services, object? instance = null)
+    [UnconditionalSuppressMessage(
+        "ReflectionAnalysis",
+        "IL2006:UnrecognizedReflectionPattern",
+        Justification = "We need to call a generic method on IHostBuilder."
+    )]
+    private void UseStartup(
+        [DynamicallyAccessedMembers(StartupLinkerOptions.Accessibility)] Type startupType,
+        HostBuilderContext context,
+        IServiceCollection services,
+        object? instance = null
+    )
     {
         var webHostBuilderContext = GetWebHostBuilderContext(context);
         var webHostOptions = (WebHostOptions)context.Properties[typeof(WebHostOptions)];
@@ -273,44 +343,71 @@ internal sealed class GenericWebHostBuilder : IWebHostBuilder, ISupportsStartup,
             {
                 throw new NotSupportedException($"{typeof(IStartup)} isn't supported");
             }
-            if (StartupLoader.HasConfigureServicesIServiceProviderDelegate(startupType, context.HostingEnvironment.EnvironmentName))
+            if (
+                StartupLoader.HasConfigureServicesIServiceProviderDelegate(
+                    startupType,
+                    context.HostingEnvironment.EnvironmentName
+                )
+            )
             {
-                throw new NotSupportedException($"ConfigureServices returning an {typeof(IServiceProvider)} isn't supported.");
+                throw new NotSupportedException(
+                    $"ConfigureServices returning an {typeof(IServiceProvider)} isn't supported."
+                );
             }
 
-            instance ??= ActivatorUtilities.CreateInstance(new HostServiceProvider(webHostBuilderContext), startupType);
+            instance ??= ActivatorUtilities.CreateInstance(
+                new HostServiceProvider(webHostBuilderContext),
+                startupType
+            );
             context.Properties[_startupKey] = instance;
 
             // Startup.ConfigureServices
-            var configureServicesBuilder = StartupLoader.FindConfigureServicesDelegate(startupType, context.HostingEnvironment.EnvironmentName);
+            var configureServicesBuilder = StartupLoader.FindConfigureServicesDelegate(
+                startupType,
+                context.HostingEnvironment.EnvironmentName
+            );
             var configureServices = configureServicesBuilder.Build(instance);
 
             configureServices(services);
 
             // REVIEW: We're doing this in the callback so that we have access to the hosting environment
             // Startup.ConfigureContainer
-            var configureContainerBuilder = StartupLoader.FindConfigureContainerDelegate(startupType, context.HostingEnvironment.EnvironmentName);
+            var configureContainerBuilder = StartupLoader.FindConfigureContainerDelegate(
+                startupType,
+                context.HostingEnvironment.EnvironmentName
+            );
             if (configureContainerBuilder.MethodInfo != null)
             {
                 var containerType = configureContainerBuilder.GetContainerType();
                 // Store the builder in the property bag
                 _builder.Properties[typeof(ConfigureContainerBuilder)] = configureContainerBuilder;
 
-                var actionType = typeof(Action<,>).MakeGenericType(typeof(HostBuilderContext), containerType);
+                var actionType = typeof(Action<,>).MakeGenericType(
+                    typeof(HostBuilderContext),
+                    containerType
+                );
 
                 // Get the private ConfigureContainer method on this type then close over the container type
-                var configureCallback = typeof(GenericWebHostBuilder).GetMethod(nameof(ConfigureContainerImpl), BindingFlags.NonPublic | BindingFlags.Instance)!
-                                                 .MakeGenericMethod(containerType)
-                                                 .CreateDelegate(actionType, this);
+                var configureCallback = typeof(GenericWebHostBuilder)
+                    .GetMethod(
+                        nameof(ConfigureContainerImpl),
+                        BindingFlags.NonPublic | BindingFlags.Instance
+                    )!
+                    .MakeGenericMethod(containerType)
+                    .CreateDelegate(actionType, this);
 
                 // _builder.ConfigureContainer<T>(ConfigureContainer);
-                typeof(IHostBuilder).GetMethod(nameof(IHostBuilder.ConfigureContainer))!
+                typeof(IHostBuilder)
+                    .GetMethod(nameof(IHostBuilder.ConfigureContainer))!
                     .MakeGenericMethod(containerType)
                     .InvokeWithoutWrappingExceptions(_builder, new object[] { configureCallback });
             }
 
             // Resolve Configure after calling ConfigureServices and ConfigureContainer
-            configureBuilder = StartupLoader.FindConfigureDelegate(startupType, context.HostingEnvironment.EnvironmentName);
+            configureBuilder = StartupLoader.FindConfigureDelegate(
+                startupType,
+                context.HostingEnvironment.EnvironmentName
+            );
         }
         catch (Exception ex) when (webHostOptions.CaptureStartupErrors)
         {
@@ -318,26 +415,33 @@ internal sealed class GenericWebHostBuilder : IWebHostBuilder, ISupportsStartup,
         }
 
         // Startup.Configure
-        services.Configure<GenericWebHostServiceOptions>(options =>
-        {
-            options.ConfigureApplication = app =>
+        services.Configure<GenericWebHostServiceOptions>(
+            options =>
             {
+                options.ConfigureApplication = app =>
+                {
                     // Throw if there was any errors initializing startup
                     startupError?.Throw();
 
                     // Execute Startup.Configure
                     if (instance != null && configureBuilder != null)
-                {
-                    configureBuilder.Build(instance)(app);
-                }
-            };
-        });
+                    {
+                        configureBuilder.Build(instance)(app);
+                    }
+                };
+            }
+        );
     }
 
-    private void ConfigureContainerImpl<TContainer>(HostBuilderContext context, TContainer container) where TContainer : notnull
+    private void ConfigureContainerImpl<TContainer>(
+        HostBuilderContext context,
+        TContainer container
+    ) where TContainer : notnull
     {
         var instance = context.Properties[_startupKey];
-        var builder = (ConfigureContainerBuilder)context.Properties[typeof(ConfigureContainerBuilder)];
+        var builder = (ConfigureContainerBuilder)context.Properties[
+            typeof(ConfigureContainerBuilder)
+        ];
         builder.Build(instance)(container);
     }
 
@@ -350,16 +454,20 @@ internal sealed class GenericWebHostBuilder : IWebHostBuilder, ISupportsStartup,
         // Clear the startup type
         _startupObject = configure;
 
-        _builder.ConfigureServices((context, services) =>
-        {
-            if (object.ReferenceEquals(_startupObject, configure))
+        _builder.ConfigureServices(
+            (context, services) =>
             {
-                services.Configure<GenericWebHostServiceOptions>(options =>
+                if (object.ReferenceEquals(_startupObject, configure))
                 {
-                    options.ConfigureApplication = app => configure(app);
-                });
+                    services.Configure<GenericWebHostServiceOptions>(
+                        options =>
+                        {
+                            options.ConfigureApplication = app => configure(app);
+                        }
+                    );
+                }
             }
-        });
+        );
 
         return this;
     }
@@ -373,17 +481,22 @@ internal sealed class GenericWebHostBuilder : IWebHostBuilder, ISupportsStartup,
         // Clear the startup type
         _startupObject = configure;
 
-        _builder.ConfigureServices((context, services) =>
-        {
-            if (object.ReferenceEquals(_startupObject, configure))
+        _builder.ConfigureServices(
+            (context, services) =>
             {
-                services.Configure<GenericWebHostServiceOptions>(options =>
+                if (object.ReferenceEquals(_startupObject, configure))
                 {
-                    var webhostBuilderContext = GetWebHostBuilderContext(context);
-                    options.ConfigureApplication = app => configure(webhostBuilderContext, app);
-                });
+                    services.Configure<GenericWebHostServiceOptions>(
+                        options =>
+                        {
+                            var webhostBuilderContext = GetWebHostBuilderContext(context);
+                            options.ConfigureApplication = app =>
+                                configure(webhostBuilderContext, app);
+                        }
+                    );
+                }
             }
-        });
+        );
 
         return this;
     }
@@ -392,13 +505,19 @@ internal sealed class GenericWebHostBuilder : IWebHostBuilder, ISupportsStartup,
     {
         if (!context.Properties.TryGetValue(typeof(WebHostBuilderContext), out var contextVal))
         {
-            var options = new WebHostOptions(context.Configuration, Assembly.GetEntryAssembly()?.GetName().Name ?? string.Empty);
+            var options = new WebHostOptions(
+                context.Configuration,
+                Assembly.GetEntryAssembly()?.GetName().Name ?? string.Empty
+            );
             var webHostBuilderContext = new WebHostBuilderContext
             {
                 Configuration = context.Configuration,
                 HostingEnvironment = new HostingEnvironment(),
             };
-            webHostBuilderContext.HostingEnvironment.Initialize(context.HostingEnvironment.ContentRootPath, options);
+            webHostBuilderContext.HostingEnvironment.Initialize(
+                context.HostingEnvironment.ContentRootPath,
+                options
+            );
             context.Properties[typeof(WebHostBuilderContext)] = webHostBuilderContext;
             context.Properties[typeof(WebHostOptions)] = options;
             return webHostBuilderContext;
@@ -435,12 +554,13 @@ internal sealed class GenericWebHostBuilder : IWebHostBuilder, ISupportsStartup,
         {
             // The implementation of the HostingEnvironment supports both interfaces
 #pragma warning disable CS0618 // Type or member is obsolete
-            if (serviceType == typeof(Microsoft.Extensions.Hosting.IHostingEnvironment)
+            if (
+                serviceType == typeof(Microsoft.Extensions.Hosting.IHostingEnvironment)
                 || serviceType == typeof(Microsoft.AspNetCore.Hosting.IHostingEnvironment)
 #pragma warning restore CS0618 // Type or member is obsolete
-                    || serviceType == typeof(IWebHostEnvironment)
+                || serviceType == typeof(IWebHostEnvironment)
                 || serviceType == typeof(IHostEnvironment)
-                )
+            )
             {
                 return _context.HostingEnvironment;
             }

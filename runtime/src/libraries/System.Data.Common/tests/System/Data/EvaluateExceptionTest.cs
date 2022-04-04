@@ -24,6 +24,7 @@
 //
 
 using Xunit;
+
 //using GHTUtils;
 
 namespace System.Data.Tests
@@ -41,16 +42,20 @@ namespace System.Data.Tests
             dc.Expression = "something"; //invalid expression
 
             // EvaluateException - Column
-            Assert.Throws<EvaluateException>(() =>
-            {
-                tbl.Columns.Add(dc);
-            });
+            Assert.Throws<EvaluateException>(
+                () =>
+                {
+                    tbl.Columns.Add(dc);
+                }
+            );
 
             // EvaluateException - Column Expression
-            Assert.Throws<EvaluateException>(() =>
-            {
-                tbl.Columns[0].Expression = "Min(AK47)"; //invalid expression
-            });
+            Assert.Throws<EvaluateException>(
+                () =>
+                {
+                    tbl.Columns[0].Expression = "Min(AK47)"; //invalid expression
+                }
+            );
         }
     }
 }

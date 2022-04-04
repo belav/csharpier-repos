@@ -29,16 +29,17 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect;
 
 public class OpenIdConnectEventTests
 {
-    private readonly RequestDelegate AppWritePath = context => context.Response.WriteAsync(context.Request.Path);
-    private readonly RequestDelegate AppNotImpl = context => { throw new NotImplementedException("App"); };
+    private readonly RequestDelegate AppWritePath = context =>
+        context.Response.WriteAsync(context.Request.Path);
+    private readonly RequestDelegate AppNotImpl = context =>
+    {
+        throw new NotImplementedException("App");
+    };
 
     [Fact]
     public async Task OnMessageReceived_Skip_NoMoreEventsRun()
     {
-        var events = new ExpectedOidcEvents()
-        {
-            ExpectMessageReceived = true,
-        };
+        var events = new ExpectedOidcEvents() { ExpectMessageReceived = true, };
         events.OnMessageReceived = context =>
         {
             context.SkipHandler();
@@ -68,22 +69,24 @@ public class OpenIdConnectEventTests
         };
         var server = CreateServer(events, AppWritePath);
 
-        var exception = await Assert.ThrowsAsync<Exception>(delegate
-        {
-            return PostAsync(server, "signin-oidc", "");
-        });
+        var exception = await Assert.ThrowsAsync<Exception>(
+            delegate
+            {
+                return PostAsync(server, "signin-oidc", "");
+            }
+        );
 
-        Assert.Equal("Authentication was aborted from user code.", exception.InnerException.Message);
+        Assert.Equal(
+            "Authentication was aborted from user code.",
+            exception.InnerException.Message
+        );
         events.ValidateExpectations();
     }
 
     [Fact]
     public async Task OnMessageReceived_Handled_NoMoreEventsRun()
     {
-        var events = new ExpectedOidcEvents()
-        {
-            ExpectMessageReceived = true,
-        };
+        var events = new ExpectedOidcEvents() { ExpectMessageReceived = true, };
         events.OnMessageReceived = context =>
         {
             context.HandleResponse();
@@ -114,7 +117,11 @@ public class OpenIdConnectEventTests
         };
         var server = CreateServer(events, AppWritePath);
 
-        var response = await PostAsync(server, "signin-oidc", "id_token=my_id_token&state=protected_state");
+        var response = await PostAsync(
+            server,
+            "signin-oidc",
+            "id_token=my_id_token&state=protected_state"
+        );
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         Assert.Equal("/signin-oidc", await response.Content.ReadAsStringAsync());
@@ -137,12 +144,21 @@ public class OpenIdConnectEventTests
         };
         var server = CreateServer(events, AppWritePath);
 
-        var exception = await Assert.ThrowsAsync<Exception>(delegate
-        {
-            return PostAsync(server, "signin-oidc", "id_token=my_id_token&state=protected_state");
-        });
+        var exception = await Assert.ThrowsAsync<Exception>(
+            delegate
+            {
+                return PostAsync(
+                    server,
+                    "signin-oidc",
+                    "id_token=my_id_token&state=protected_state"
+                );
+            }
+        );
 
-        Assert.Equal("Authentication was aborted from user code.", exception.InnerException.Message);
+        Assert.Equal(
+            "Authentication was aborted from user code.",
+            exception.InnerException.Message
+        );
         events.ValidateExpectations();
     }
 
@@ -163,7 +179,11 @@ public class OpenIdConnectEventTests
         };
         var server = CreateServer(events, AppNotImpl);
 
-        var response = await PostAsync(server, "signin-oidc", "id_token=my_id_token&state=protected_state");
+        var response = await PostAsync(
+            server,
+            "signin-oidc",
+            "id_token=my_id_token&state=protected_state"
+        );
 
         Assert.Equal(HttpStatusCode.Accepted, response.StatusCode);
         Assert.Equal("", await response.Content.ReadAsStringAsync());
@@ -199,7 +219,11 @@ public class OpenIdConnectEventTests
         };
         var server = CreateServer(events, AppNotImpl);
 
-        var response = await PostAsync(server, "signin-oidc", "id_token=my_id_token&state=protected_state");
+        var response = await PostAsync(
+            server,
+            "signin-oidc",
+            "id_token=my_id_token&state=protected_state"
+        );
 
         Assert.Equal(HttpStatusCode.Accepted, response.StatusCode);
         Assert.Equal("", await response.Content.ReadAsStringAsync());
@@ -222,7 +246,11 @@ public class OpenIdConnectEventTests
         };
         var server = CreateServer(events, AppWritePath);
 
-        var response = await PostAsync(server, "signin-oidc", "id_token=my_id_token&state=protected_state&code=my_code");
+        var response = await PostAsync(
+            server,
+            "signin-oidc",
+            "id_token=my_id_token&state=protected_state&code=my_code"
+        );
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         Assert.Equal("/signin-oidc", await response.Content.ReadAsStringAsync());
@@ -246,12 +274,21 @@ public class OpenIdConnectEventTests
         };
         var server = CreateServer(events, AppWritePath);
 
-        var exception = await Assert.ThrowsAsync<Exception>(delegate
-        {
-            return PostAsync(server, "signin-oidc", "id_token=my_id_token&state=protected_state&code=my_code");
-        });
+        var exception = await Assert.ThrowsAsync<Exception>(
+            delegate
+            {
+                return PostAsync(
+                    server,
+                    "signin-oidc",
+                    "id_token=my_id_token&state=protected_state&code=my_code"
+                );
+            }
+        );
 
-        Assert.Equal("Authentication was aborted from user code.", exception.InnerException.Message);
+        Assert.Equal(
+            "Authentication was aborted from user code.",
+            exception.InnerException.Message
+        );
         events.ValidateExpectations();
     }
 
@@ -273,7 +310,11 @@ public class OpenIdConnectEventTests
         };
         var server = CreateServer(events, AppNotImpl);
 
-        var response = await PostAsync(server, "signin-oidc", "id_token=my_id_token&state=protected_state&code=my_code");
+        var response = await PostAsync(
+            server,
+            "signin-oidc",
+            "id_token=my_id_token&state=protected_state&code=my_code"
+        );
 
         Assert.Equal(HttpStatusCode.Accepted, response.StatusCode);
         Assert.Equal("", await response.Content.ReadAsStringAsync());
@@ -303,7 +344,11 @@ public class OpenIdConnectEventTests
         };
         var server = CreateServer(events, AppNotImpl);
 
-        var response = await PostAsync(server, "signin-oidc", "id_token=my_id_token&state=protected_state&code=my_code");
+        var response = await PostAsync(
+            server,
+            "signin-oidc",
+            "id_token=my_id_token&state=protected_state&code=my_code"
+        );
 
         Assert.Equal(HttpStatusCode.Accepted, response.StatusCode);
         Assert.Equal("", await response.Content.ReadAsStringAsync());
@@ -327,7 +372,11 @@ public class OpenIdConnectEventTests
         };
         var server = CreateServer(events, AppWritePath);
 
-        var response = await PostAsync(server, "signin-oidc", "id_token=my_id_token&state=protected_state&code=my_code");
+        var response = await PostAsync(
+            server,
+            "signin-oidc",
+            "id_token=my_id_token&state=protected_state&code=my_code"
+        );
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         Assert.Equal("/signin-oidc", await response.Content.ReadAsStringAsync());
@@ -352,12 +401,21 @@ public class OpenIdConnectEventTests
         };
         var server = CreateServer(events, AppWritePath);
 
-        var exception = await Assert.ThrowsAsync<Exception>(delegate
-        {
-            return PostAsync(server, "signin-oidc", "id_token=my_id_token&state=protected_state&code=my_code");
-        });
+        var exception = await Assert.ThrowsAsync<Exception>(
+            delegate
+            {
+                return PostAsync(
+                    server,
+                    "signin-oidc",
+                    "id_token=my_id_token&state=protected_state&code=my_code"
+                );
+            }
+        );
 
-        Assert.Equal("Authentication was aborted from user code.", exception.InnerException.Message);
+        Assert.Equal(
+            "Authentication was aborted from user code.",
+            exception.InnerException.Message
+        );
         events.ValidateExpectations();
     }
 
@@ -380,7 +438,11 @@ public class OpenIdConnectEventTests
         };
         var server = CreateServer(events, AppNotImpl);
 
-        var response = await PostAsync(server, "signin-oidc", "id_token=my_id_token&state=protected_state&code=my_code");
+        var response = await PostAsync(
+            server,
+            "signin-oidc",
+            "id_token=my_id_token&state=protected_state&code=my_code"
+        );
 
         Assert.Equal(HttpStatusCode.Accepted, response.StatusCode);
         Assert.Equal("", await response.Content.ReadAsStringAsync());
@@ -411,7 +473,11 @@ public class OpenIdConnectEventTests
         };
         var server = CreateServer(events, AppNotImpl);
 
-        var response = await PostAsync(server, "signin-oidc", "id_token=my_id_token&state=protected_state&code=my_code");
+        var response = await PostAsync(
+            server,
+            "signin-oidc",
+            "id_token=my_id_token&state=protected_state&code=my_code"
+        );
 
         Assert.Equal(HttpStatusCode.Accepted, response.StatusCode);
         Assert.Equal("", await response.Content.ReadAsStringAsync());
@@ -460,12 +526,17 @@ public class OpenIdConnectEventTests
         };
         var server = CreateServer(events, AppWritePath);
 
-        var exception = await Assert.ThrowsAsync<Exception>(delegate
-        {
-            return PostAsync(server, "signin-oidc", "state=protected_state&code=my_code");
-        });
+        var exception = await Assert.ThrowsAsync<Exception>(
+            delegate
+            {
+                return PostAsync(server, "signin-oidc", "state=protected_state&code=my_code");
+            }
+        );
 
-        Assert.Equal("Authentication was aborted from user code.", exception.InnerException.Message);
+        Assert.Equal(
+            "Authentication was aborted from user code.",
+            exception.InnerException.Message
+        );
         events.ValidateExpectations();
     }
 
@@ -544,7 +615,11 @@ public class OpenIdConnectEventTests
         };
         var server = CreateServer(events, AppWritePath);
 
-        var response = await PostAsync(server, "signin-oidc", "id_token=my_id_token&state=protected_state&code=my_code");
+        var response = await PostAsync(
+            server,
+            "signin-oidc",
+            "id_token=my_id_token&state=protected_state&code=my_code"
+        );
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         Assert.Equal("/signin-oidc", await response.Content.ReadAsStringAsync());
@@ -570,12 +645,21 @@ public class OpenIdConnectEventTests
         };
         var server = CreateServer(events, AppWritePath);
 
-        var exception = await Assert.ThrowsAsync<Exception>(delegate
-        {
-            return PostAsync(server, "signin-oidc", "id_token=my_id_token&state=protected_state&code=my_code");
-        });
+        var exception = await Assert.ThrowsAsync<Exception>(
+            delegate
+            {
+                return PostAsync(
+                    server,
+                    "signin-oidc",
+                    "id_token=my_id_token&state=protected_state&code=my_code"
+                );
+            }
+        );
 
-        Assert.Equal("Authentication was aborted from user code.", exception.InnerException.Message);
+        Assert.Equal(
+            "Authentication was aborted from user code.",
+            exception.InnerException.Message
+        );
         events.ValidateExpectations();
     }
 
@@ -599,7 +683,11 @@ public class OpenIdConnectEventTests
         };
         var server = CreateServer(events, AppNotImpl);
 
-        var response = await PostAsync(server, "signin-oidc", "id_token=my_id_token&state=protected_state&code=my_code");
+        var response = await PostAsync(
+            server,
+            "signin-oidc",
+            "id_token=my_id_token&state=protected_state&code=my_code"
+        );
 
         Assert.Equal(HttpStatusCode.Accepted, response.StatusCode);
         Assert.Equal("", await response.Content.ReadAsStringAsync());
@@ -631,7 +719,11 @@ public class OpenIdConnectEventTests
         };
         var server = CreateServer(events, AppNotImpl);
 
-        var response = await PostAsync(server, "signin-oidc", "id_token=my_id_token&state=protected_state&code=my_code");
+        var response = await PostAsync(
+            server,
+            "signin-oidc",
+            "id_token=my_id_token&state=protected_state&code=my_code"
+        );
 
         Assert.Equal(HttpStatusCode.Accepted, response.StatusCode);
         Assert.Equal("", await response.Content.ReadAsStringAsync());
@@ -662,7 +754,11 @@ public class OpenIdConnectEventTests
         };
         var server = CreateServer(events, AppWritePath);
 
-        var response = await PostAsync(server, "signin-oidc", "id_token=my_id_token&state=protected_state&code=my_code");
+        var response = await PostAsync(
+            server,
+            "signin-oidc",
+            "id_token=my_id_token&state=protected_state&code=my_code"
+        );
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         Assert.Equal("/signin-oidc", await response.Content.ReadAsStringAsync());
@@ -694,12 +790,21 @@ public class OpenIdConnectEventTests
         };
         var server = CreateServer(events, AppWritePath);
 
-        var exception = await Assert.ThrowsAsync<Exception>(delegate
-        {
-            return PostAsync(server, "signin-oidc", "id_token=my_id_token&state=protected_state&code=my_code");
-        });
+        var exception = await Assert.ThrowsAsync<Exception>(
+            delegate
+            {
+                return PostAsync(
+                    server,
+                    "signin-oidc",
+                    "id_token=my_id_token&state=protected_state&code=my_code"
+                );
+            }
+        );
 
-        Assert.Equal("Authentication was aborted from user code.", exception.InnerException.Message);
+        Assert.Equal(
+            "Authentication was aborted from user code.",
+            exception.InnerException.Message
+        );
         events.ValidateExpectations();
     }
 
@@ -729,7 +834,11 @@ public class OpenIdConnectEventTests
         };
         var server = CreateServer(events, AppNotImpl);
 
-        var response = await PostAsync(server, "signin-oidc", "id_token=my_id_token&state=protected_state&code=my_code");
+        var response = await PostAsync(
+            server,
+            "signin-oidc",
+            "id_token=my_id_token&state=protected_state&code=my_code"
+        );
 
         Assert.Equal(HttpStatusCode.Accepted, response.StatusCode);
         Assert.Equal("", await response.Content.ReadAsStringAsync());
@@ -760,12 +869,14 @@ public class OpenIdConnectEventTests
 
             var claims = new[]
             {
-                    new Claim(ClaimTypes.NameIdentifier, "Bob le Magnifique"),
-                    new Claim(ClaimTypes.Email, "bob@contoso.com"),
-                    new Claim(ClaimsIdentity.DefaultNameClaimType, "bob")
+                new Claim(ClaimTypes.NameIdentifier, "Bob le Magnifique"),
+                new Claim(ClaimTypes.Email, "bob@contoso.com"),
+                new Claim(ClaimsIdentity.DefaultNameClaimType, "bob")
             };
 
-            context.Principal = new ClaimsPrincipal(new ClaimsIdentity(claims, context.Scheme.Name));
+            context.Principal = new ClaimsPrincipal(
+                new ClaimsIdentity(claims, context.Scheme.Name)
+            );
             context.Success();
             return Task.FromResult(0);
         };
@@ -777,7 +888,11 @@ public class OpenIdConnectEventTests
         };
         var server = CreateServer(events, AppNotImpl);
 
-        var response = await PostAsync(server, "signin-oidc", "id_token=my_id_token&state=protected_state&code=my_code");
+        var response = await PostAsync(
+            server,
+            "signin-oidc",
+            "id_token=my_id_token&state=protected_state&code=my_code"
+        );
 
         Assert.Equal(HttpStatusCode.Accepted, response.StatusCode);
         Assert.Equal("", await response.Content.ReadAsStringAsync());
@@ -799,7 +914,11 @@ public class OpenIdConnectEventTests
         };
         var server = CreateServer(events, AppWritePath);
 
-        var response = await PostAsync(server, "signin-oidc", "error=access_denied&state=protected_state");
+        var response = await PostAsync(
+            server,
+            "signin-oidc",
+            "error=access_denied&state=protected_state"
+        );
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         Assert.Equal("/signin-oidc", await response.Content.ReadAsStringAsync());
@@ -823,7 +942,11 @@ public class OpenIdConnectEventTests
         };
         var server = CreateServer(events, AppNotImpl);
 
-        var response = await PostAsync(server, "signin-oidc", "error=access_denied&state=protected_state");
+        var response = await PostAsync(
+            server,
+            "signin-oidc",
+            "error=access_denied&state=protected_state"
+        );
 
         Assert.Equal(HttpStatusCode.Accepted, response.StatusCode);
         Assert.Equal("", await response.Content.ReadAsStringAsync());
@@ -860,7 +983,11 @@ public class OpenIdConnectEventTests
         };
         var server = CreateServer(events, AppWritePath);
 
-        var response = await PostAsync(server, "signin-oidc", "id_token=my_id_token&state=protected_state&code=my_code");
+        var response = await PostAsync(
+            server,
+            "signin-oidc",
+            "id_token=my_id_token&state=protected_state&code=my_code"
+        );
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         Assert.Equal("/signin-oidc", await response.Content.ReadAsStringAsync());
@@ -894,7 +1021,11 @@ public class OpenIdConnectEventTests
         };
         var server = CreateServer(events, AppNotImpl);
 
-        var response = await PostAsync(server, "signin-oidc", "id_token=my_id_token&state=protected_state&code=my_code");
+        var response = await PostAsync(
+            server,
+            "signin-oidc",
+            "id_token=my_id_token&state=protected_state&code=my_code"
+        );
 
         Assert.Equal(HttpStatusCode.Accepted, response.StatusCode);
         Assert.Equal("", await response.Content.ReadAsStringAsync());
@@ -920,7 +1051,11 @@ public class OpenIdConnectEventTests
         };
         var server = CreateServer(events, AppWritePath);
 
-        var response = await PostAsync(server, "signin-oidc", "id_token=my_id_token&state=protected_state&code=my_code");
+        var response = await PostAsync(
+            server,
+            "signin-oidc",
+            "id_token=my_id_token&state=protected_state&code=my_code"
+        );
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         Assert.Equal("/signin-oidc", await response.Content.ReadAsStringAsync());
@@ -947,7 +1082,11 @@ public class OpenIdConnectEventTests
         };
         var server = CreateServer(events, AppNotImpl);
 
-        var response = await PostAsync(server, "signin-oidc", "id_token=my_id_token&state=protected_state&code=my_code");
+        var response = await PostAsync(
+            server,
+            "signin-oidc",
+            "id_token=my_id_token&state=protected_state&code=my_code"
+        );
 
         Assert.Equal(HttpStatusCode.Accepted, response.StatusCode);
         Assert.Equal("", await response.Content.ReadAsStringAsync());
@@ -957,15 +1096,14 @@ public class OpenIdConnectEventTests
     [Fact]
     public async Task OnRedirectToIdentityProviderForSignOut_Invoked()
     {
-        var events = new ExpectedOidcEvents()
-        {
-            ExpectRedirectForSignOut = true,
-        };
-        var server = CreateServer(events,
-        context =>
-        {
-            return context.SignOutAsync(OpenIdConnectDefaults.AuthenticationScheme);
-        });
+        var events = new ExpectedOidcEvents() { ExpectRedirectForSignOut = true, };
+        var server = CreateServer(
+            events,
+            context =>
+            {
+                return context.SignOutAsync(OpenIdConnectDefaults.AuthenticationScheme);
+            }
+        );
 
         var client = server.CreateClient();
         var response = await client.GetAsync("/");
@@ -978,21 +1116,20 @@ public class OpenIdConnectEventTests
     [Fact]
     public async Task OnRedirectToIdentityProviderForSignOut_Handled_RedirectNotInvoked()
     {
-        var events = new ExpectedOidcEvents()
-        {
-            ExpectRedirectForSignOut = true,
-        };
+        var events = new ExpectedOidcEvents() { ExpectRedirectForSignOut = true, };
         events.OnRedirectToIdentityProviderForSignOut = context =>
         {
             context.Response.StatusCode = StatusCodes.Status202Accepted;
             context.HandleResponse();
             return Task.CompletedTask;
         };
-        var server = CreateServer(events,
-        context =>
-        {
-            return context.SignOutAsync(OpenIdConnectDefaults.AuthenticationScheme);
-        });
+        var server = CreateServer(
+            events,
+            context =>
+            {
+                return context.SignOutAsync(OpenIdConnectDefaults.AuthenticationScheme);
+            }
+        );
 
         var client = server.CreateClient();
         var response = await client.GetAsync("/");
@@ -1005,10 +1142,7 @@ public class OpenIdConnectEventTests
     [Fact]
     public async Task OnRemoteSignOut_Invoked()
     {
-        var events = new ExpectedOidcEvents()
-        {
-            ExpectRemoteSignOut = true,
-        };
+        var events = new ExpectedOidcEvents() { ExpectRemoteSignOut = true, };
         var server = CreateServer(events, AppNotImpl);
 
         var client = server.CreateClient();
@@ -1025,10 +1159,7 @@ public class OpenIdConnectEventTests
     [Fact]
     public async Task OnRemoteSignOut_Handled_NoSignout()
     {
-        var events = new ExpectedOidcEvents()
-        {
-            ExpectRemoteSignOut = true,
-        };
+        var events = new ExpectedOidcEvents() { ExpectRemoteSignOut = true, };
         events.OnRemoteSignOut = context =>
         {
             context.Response.StatusCode = StatusCodes.Status202Accepted;
@@ -1048,20 +1179,20 @@ public class OpenIdConnectEventTests
     [Fact]
     public async Task OnRemoteSignOut_Skip_NoSignout()
     {
-        var events = new ExpectedOidcEvents()
-        {
-            ExpectRemoteSignOut = true,
-        };
+        var events = new ExpectedOidcEvents() { ExpectRemoteSignOut = true, };
         events.OnRemoteSignOut = context =>
         {
             context.SkipHandler();
             return Task.CompletedTask;
         };
-        var server = CreateServer(events, context =>
-        {
-            context.Response.StatusCode = StatusCodes.Status202Accepted;
-            return Task.CompletedTask;
-        });
+        var server = CreateServer(
+            events,
+            context =>
+            {
+                context.Response.StatusCode = StatusCodes.Status202Accepted;
+                return Task.CompletedTask;
+            }
+        );
 
         var client = server.CreateClient();
         var response = await client.GetAsync("/signout-oidc");
@@ -1074,10 +1205,7 @@ public class OpenIdConnectEventTests
     [Fact]
     public async Task OnRedirectToSignedOutRedirectUri_Invoked()
     {
-        var events = new ExpectedOidcEvents()
-        {
-            ExpectRedirectToSignedOut = true,
-        };
+        var events = new ExpectedOidcEvents() { ExpectRedirectToSignedOut = true, };
         var server = CreateServer(events, AppNotImpl);
 
         var client = server.CreateClient();
@@ -1091,10 +1219,7 @@ public class OpenIdConnectEventTests
     [Fact]
     public async Task OnRedirectToSignedOutRedirectUri_Handled_NoRedirect()
     {
-        var events = new ExpectedOidcEvents()
-        {
-            ExpectRedirectToSignedOut = true,
-        };
+        var events = new ExpectedOidcEvents() { ExpectRedirectToSignedOut = true, };
         events.OnSignedOutCallbackRedirect = context =>
         {
             context.Response.StatusCode = StatusCodes.Status202Accepted;
@@ -1114,21 +1239,20 @@ public class OpenIdConnectEventTests
     [Fact]
     public async Task OnRedirectToSignedOutRedirectUri_Skipped_NoRedirect()
     {
-        var events = new ExpectedOidcEvents()
-        {
-            ExpectRedirectToSignedOut = true,
-        };
+        var events = new ExpectedOidcEvents() { ExpectRedirectToSignedOut = true, };
         events.OnSignedOutCallbackRedirect = context =>
         {
             context.SkipHandler();
             return Task.CompletedTask;
         };
-        var server = CreateServer(events,
-        context =>
-        {
-            context.Response.StatusCode = StatusCodes.Status202Accepted;
-            return Task.CompletedTask;
-        });
+        var server = CreateServer(
+            events,
+            context =>
+            {
+                context.Response.StatusCode = StatusCodes.Status202Accepted;
+                return Task.CompletedTask;
+            }
+        );
 
         var client = server.CreateClient();
         var response = await client.GetAsync("/signout-callback-oidc?state=protected_state");
@@ -1268,38 +1392,52 @@ public class OpenIdConnectEventTests
     private TestServer CreateServer(OpenIdConnectEvents events, RequestDelegate appCode)
     {
         var host = new HostBuilder()
-            .ConfigureWebHost(builder =>
-                builder.UseTestServer()
-                .ConfigureServices(services =>
-                {
-                    services.AddAuthentication(auth =>
-                    {
-                        auth.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                        auth.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
-                    })
-                        .AddCookie()
-                        .AddOpenIdConnect(o =>
-                    {
-                        o.Events = events;
-                        o.ClientId = "ClientId";
-                        o.GetClaimsFromUserInfoEndpoint = true;
-                        o.Configuration = new OpenIdConnectConfiguration()
-                        {
-                            TokenEndpoint = "http://testhost/tokens",
-                            UserInfoEndpoint = "http://testhost/user",
-                            EndSessionEndpoint = "http://testhost/end"
-                        };
-                        o.StateDataFormat = new TestStateDataFormat();
-                        o.SecurityTokenValidator = new TestTokenValidator();
-                        o.ProtocolValidator = new TestProtocolValidator();
-                        o.BackchannelHttpHandler = new TestBackchannel();
-                    });
-                })
-                .Configure(app =>
-                {
-                    app.UseAuthentication();
-                    app.Run(appCode);
-                }))
+            .ConfigureWebHost(
+                builder =>
+                    builder
+                        .UseTestServer()
+                        .ConfigureServices(
+                            services =>
+                            {
+                                services
+                                    .AddAuthentication(
+                                        auth =>
+                                        {
+                                            auth.DefaultScheme =
+                                                CookieAuthenticationDefaults.AuthenticationScheme;
+                                            auth.DefaultChallengeScheme =
+                                                OpenIdConnectDefaults.AuthenticationScheme;
+                                        }
+                                    )
+                                    .AddCookie()
+                                    .AddOpenIdConnect(
+                                        o =>
+                                        {
+                                            o.Events = events;
+                                            o.ClientId = "ClientId";
+                                            o.GetClaimsFromUserInfoEndpoint = true;
+                                            o.Configuration = new OpenIdConnectConfiguration()
+                                            {
+                                                TokenEndpoint = "http://testhost/tokens",
+                                                UserInfoEndpoint = "http://testhost/user",
+                                                EndSessionEndpoint = "http://testhost/end"
+                                            };
+                                            o.StateDataFormat = new TestStateDataFormat();
+                                            o.SecurityTokenValidator = new TestTokenValidator();
+                                            o.ProtocolValidator = new TestProtocolValidator();
+                                            o.BackchannelHttpHandler = new TestBackchannel();
+                                        }
+                                    );
+                            }
+                        )
+                        .Configure(
+                            app =>
+                            {
+                                app.UseAuthentication();
+                                app.Run(appCode);
+                            }
+                        )
+            )
             .Build();
 
         host.Start();
@@ -1311,8 +1449,10 @@ public class OpenIdConnectEventTests
         var client = server.CreateClient();
         var cookie = ".AspNetCore.Correlation.correlationId=N";
         client.DefaultRequestHeaders.Add("Cookie", cookie);
-        return client.PostAsync("signin-oidc",
-            new StringContent(form, Encoding.ASCII, "application/x-www-form-urlencoded"));
+        return client.PostAsync(
+            "signin-oidc",
+            new StringContent(form, Encoding.ASCII, "application/x-www-form-urlencoded")
+        );
     }
 
     private class TestStateDataFormat : ISecureDataFormat<AuthenticationProperties>
@@ -1332,12 +1472,14 @@ public class OpenIdConnectEventTests
         public AuthenticationProperties Unprotect(string protectedText)
         {
             Assert.Equal("protected_state", protectedText);
-            var properties = new AuthenticationProperties(new Dictionary<string, string>()
+            var properties = new AuthenticationProperties(
+                new Dictionary<string, string>()
                 {
                     { ".xsrf", "correlationId" },
                     { OpenIdConnectDefaults.RedirectUriForCodePropertiesKey, "redirect_uri" },
                     { "testkey", "testvalue" }
-                });
+                }
+            );
             properties.RedirectUri = "http://testhost/redirect";
             return properties;
         }
@@ -1364,7 +1506,11 @@ public class OpenIdConnectEventTests
             return true;
         }
 
-        public ClaimsPrincipal ValidateToken(string securityToken, TokenValidationParameters validationParameters, out SecurityToken validatedToken)
+        public ClaimsPrincipal ValidateToken(
+            string securityToken,
+            TokenValidationParameters validationParameters,
+            out SecurityToken validatedToken
+        )
         {
             Assert.Equal("my_id_token", securityToken);
             validatedToken = new JwtSecurityToken();
@@ -1374,34 +1520,47 @@ public class OpenIdConnectEventTests
 
     private class TestProtocolValidator : OpenIdConnectProtocolValidator
     {
-        public override void ValidateAuthenticationResponse(OpenIdConnectProtocolValidationContext validationContext)
-        {
-        }
+        public override void ValidateAuthenticationResponse(
+            OpenIdConnectProtocolValidationContext validationContext
+        ) { }
 
-        public override void ValidateTokenResponse(OpenIdConnectProtocolValidationContext validationContext)
-        {
-        }
+        public override void ValidateTokenResponse(
+            OpenIdConnectProtocolValidationContext validationContext
+        ) { }
 
-        public override void ValidateUserInfoResponse(OpenIdConnectProtocolValidationContext validationContext)
-        {
-        }
+        public override void ValidateUserInfoResponse(
+            OpenIdConnectProtocolValidationContext validationContext
+        ) { }
     }
 
     private class TestBackchannel : HttpMessageHandler
     {
-        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected override Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
             if (string.Equals("/tokens", request.RequestUri.AbsolutePath, StringComparison.Ordinal))
             {
-                return Task.FromResult(new HttpResponseMessage()
-                {
-                    Content =
-                   new StringContent("{ \"id_token\": \"my_id_token\", \"access_token\": \"my_access_token\" }", Encoding.ASCII, "application/json")
-                });
+                return Task.FromResult(
+                    new HttpResponseMessage()
+                    {
+                        Content = new StringContent(
+                            "{ \"id_token\": \"my_id_token\", \"access_token\": \"my_access_token\" }",
+                            Encoding.ASCII,
+                            "application/json"
+                        )
+                    }
+                );
             }
             if (string.Equals("/user", request.RequestUri.AbsolutePath, StringComparison.Ordinal))
             {
-                return Task.FromResult(new HttpResponseMessage() { Content = new StringContent("{ }", Encoding.ASCII, "application/json") });
+                return Task.FromResult(
+                    new HttpResponseMessage()
+                    {
+                        Content = new StringContent("{ }", Encoding.ASCII, "application/json")
+                    }
+                );
             }
 
             throw new NotImplementedException(request.RequestUri.ToString());

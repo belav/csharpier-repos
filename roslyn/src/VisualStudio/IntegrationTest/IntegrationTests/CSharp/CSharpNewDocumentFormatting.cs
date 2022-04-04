@@ -17,9 +17,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
     public class CSharpNewDocumentFormatting : AbstractIntegrationTest
     {
         public CSharpNewDocumentFormatting(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory)
-        {
-        }
+            : base(instanceFactory) { }
 
         public override async Task InitializeAsync()
         {
@@ -35,7 +33,11 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
 
             VisualStudio.Workspace.SetFileScopedNamespaces(true);
 
-            VisualStudio.SolutionExplorer.AddProject(project, WellKnownProjectTemplates.ConsoleApplication, LanguageNames.CSharp);
+            VisualStudio.SolutionExplorer.AddProject(
+                project,
+                WellKnownProjectTemplates.ConsoleApplication,
+                LanguageNames.CSharp
+            );
 
             VisualStudio.ErrorList.ShowErrorList();
             VisualStudio.ErrorList.Verify.NoErrors();
@@ -49,7 +51,11 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
 
             VisualStudio.Workspace.SetFileScopedNamespaces(true);
 
-            VisualStudio.SolutionExplorer.AddProject(project, WellKnownProjectTemplates.CSharpNetCoreConsoleApplication, LanguageNames.CSharp);
+            VisualStudio.SolutionExplorer.AddProject(
+                project,
+                WellKnownProjectTemplates.CSharpNetCoreConsoleApplication,
+                LanguageNames.CSharp
+            );
 
             VisualStudio.ErrorList.ShowErrorList();
             VisualStudio.ErrorList.Verify.NoErrors();

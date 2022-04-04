@@ -24,7 +24,11 @@ namespace System.Globalization.Tests
 
         [Theory]
         [MemberData(nameof(GetEraName_TestData))]
-        public void GetEraName_Invoke_ReturnsExpected(DateTimeFormatInfo format, int era, string expected)
+        public void GetEraName_Invoke_ReturnsExpected(
+            DateTimeFormatInfo format,
+            int era,
+            string expected
+        )
         {
             Assert.Equal(expected, format.GetEraName(era));
         }
@@ -35,7 +39,10 @@ namespace System.Globalization.Tests
         public void GetEraName_InvalidEra_ThrowsArgumentOutOfRangeException(int era)
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("era", () => format.GetEraName(era));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "era",
+                () => format.GetEraName(era)
+            );
         }
     }
 }

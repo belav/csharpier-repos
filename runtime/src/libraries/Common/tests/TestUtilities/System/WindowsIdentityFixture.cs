@@ -81,10 +81,22 @@ namespace System
                 const int LOGON32_PROVIDER_DEFAULT = 0;
                 const int LOGON32_LOGON_INTERACTIVE = 2;
 
-                if (!LogonUser(_userName, ".", testAccountPassword, LOGON32_LOGON_INTERACTIVE, LOGON32_PROVIDER_DEFAULT, out _accountTokenHandle))
+                if (
+                    !LogonUser(
+                        _userName,
+                        ".",
+                        testAccountPassword,
+                        LOGON32_LOGON_INTERACTIVE,
+                        LOGON32_PROVIDER_DEFAULT,
+                        out _accountTokenHandle
+                    )
+                )
                 {
                     _accountTokenHandle = null;
-                    throw new Exception($"Failed to get SafeAccessTokenHandle for test account {_userName}", new Win32Exception());
+                    throw new Exception(
+                        $"Failed to get SafeAccessTokenHandle for test account {_userName}",
+                        new Win32Exception()
+                    );
                 }
 
                 bool gotRef = false;
@@ -103,13 +115,28 @@ namespace System
         }
 
         [DllImport("advapi32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
-        private static extern bool LogonUser(string userName, string domain, string password, int logonType, int logonProvider, out SafeAccessTokenHandle safeAccessTokenHandle);
+        private static extern bool LogonUser(
+            string userName,
+            string domain,
+            string password,
+            int logonType,
+            int logonProvider,
+            out SafeAccessTokenHandle safeAccessTokenHandle
+        );
 
         [DllImport("netapi32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static extern uint NetUserAdd([MarshalAs(UnmanagedType.LPWStr)]string servername, uint level, ref USER_INFO_1 buf, out uint parm_err);
+        internal static extern uint NetUserAdd(
+            [MarshalAs(UnmanagedType.LPWStr)] string servername,
+            uint level,
+            ref USER_INFO_1 buf,
+            out uint parm_err
+        );
 
         [DllImport("netapi32.dll")]
-        internal static extern uint NetUserDel([MarshalAs(UnmanagedType.LPWStr)]string servername, [MarshalAs(UnmanagedType.LPWStr)]string username);
+        internal static extern uint NetUserDel(
+            [MarshalAs(UnmanagedType.LPWStr)] string servername,
+            [MarshalAs(UnmanagedType.LPWStr)] string username
+        );
 
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         internal struct USER_INFO_1
@@ -137,5 +164,4 @@ namespace System
             }
         }
     }
- }
-
+}

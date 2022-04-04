@@ -14,7 +14,8 @@ internal class RazorPagesOptionsSetup : IConfigureOptions<RazorPagesOptions>
 
     public RazorPagesOptionsSetup(IServiceProvider serviceProvider)
     {
-        _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
+        _serviceProvider =
+            serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
     }
 
     public void Configure(RazorPagesOptions options)

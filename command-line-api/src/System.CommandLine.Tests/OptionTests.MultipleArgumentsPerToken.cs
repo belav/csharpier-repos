@@ -31,34 +31,28 @@ namespace System.CommandLine.Tests
                         AllowMultipleArgumentsPerToken = true,
                         Arity = ArgumentArity.ZeroOrMore
                     };
-                    var vegetablesOption = new Option(new[] { "-v", "--vegetables" }) { Arity = ArgumentArity.ZeroOrMore };
-
-                    var command = new RootCommand
+                    var vegetablesOption = new Option(new[] { "-v", "--vegetables" })
                     {
-                        animalsOption,
-                        vegetablesOption
+                        Arity = ArgumentArity.ZeroOrMore
                     };
+
+                    var command = new RootCommand { animalsOption, vegetablesOption };
 
                     var result = command.Parse("-a cat dog -v carrot");
 
                     result
                         .FindResultFor(animalsOption)
-                        .Tokens
-                        .Select(t => t.Value)
+                        .Tokens.Select(t => t.Value)
                         .Should()
                         .BeEquivalentTo(new[] { "cat", "dog" });
 
                     result
                         .FindResultFor(vegetablesOption)
-                        .Tokens
-                        .Select(t => t.Value)
+                        .Tokens.Select(t => t.Value)
                         .Should()
                         .BeEquivalentTo("carrot");
 
-                    result
-                        .UnmatchedTokens
-                        .Should()
-                        .BeNullOrEmpty();
+                    result.UnmatchedTokens.Should().BeNullOrEmpty();
                 }
 
                 [Fact]
@@ -69,32 +63,28 @@ namespace System.CommandLine.Tests
                         AllowMultipleArgumentsPerToken = true,
                         Arity = ArgumentArity.ZeroOrOne
                     };
-                    var vegetablesOption = new Option(new[] { "-v", "--vegetables" }) { Arity = ArgumentArity.ZeroOrMore };
-
-                    var command = new RootCommand
+                    var vegetablesOption = new Option(new[] { "-v", "--vegetables" })
                     {
-                        animalsOption,
-                        vegetablesOption
+                        Arity = ArgumentArity.ZeroOrMore
                     };
+
+                    var command = new RootCommand { animalsOption, vegetablesOption };
 
                     var result = command.Parse("-a cat some-arg -v carrot");
 
-                    result.FindResultFor(animalsOption)
-                        .Tokens
-                        .Select(t => t.Value)
+                    result
+                        .FindResultFor(animalsOption)
+                        .Tokens.Select(t => t.Value)
                         .Should()
                         .BeEquivalentTo("cat");
 
-                    result.FindResultFor(vegetablesOption)
-                        .Tokens
-                        .Select(t => t.Value)
+                    result
+                        .FindResultFor(vegetablesOption)
+                        .Tokens.Select(t => t.Value)
                         .Should()
                         .BeEquivalentTo("carrot");
 
-                    result
-                        .UnmatchedTokens
-                        .Should()
-                        .BeEquivalentTo("some-arg");
+                    result.UnmatchedTokens.Should().BeEquivalentTo("some-arg");
                 }
 
                 [Theory]
@@ -102,17 +92,15 @@ namespace System.CommandLine.Tests
                 [InlineData("xyz --option 1 --option 2")]
                 [InlineData("--option 1 xyz --option 2")]
                 [InlineData("--option 1 --option 2 xyz")]
-                public void When_max_arity_is_1_then_subsequent_option_args_overwrite_previous_ones(string commandLine)
+                public void When_max_arity_is_1_then_subsequent_option_args_overwrite_previous_ones(
+                    string commandLine
+                )
                 {
                     var option = new Option<string>("--option")
                     {
                         AllowMultipleArgumentsPerToken = true
                     };
-                    var command = new Command("the-command")
-                    {
-                        option,
-                        new Argument<string>()
-                    };
+                    var command = new Command("the-command") { option, new Argument<string>() };
 
                     var result = command.Parse(commandLine);
 
@@ -124,10 +112,7 @@ namespace System.CommandLine.Tests
                 [Fact]
                 public void All_consumed_tokens_are_present_in_option_result()
                 {
-                    var option = new Option<int>("-x")
-                    {
-                        AllowMultipleArgumentsPerToken = true
-                    };
+                    var option = new Option<int>("-x") { AllowMultipleArgumentsPerToken = true };
 
                     var result = option.Parse("-x 1 -x 2 -x 3 -x 4");
 
@@ -135,10 +120,10 @@ namespace System.CommandLine.Tests
 
                     var optionResult = result.FindResultFor(option);
 
-                    optionResult
-                        .Tokens
+                    optionResult.Tokens
                         .Select(t => t.Value)
-                        .Should().BeEquivalentSequenceTo("1", "2", "3", "4");
+                        .Should()
+                        .BeEquivalentSequenceTo("1", "2", "3", "4");
                 }
 
                 [Fact]
@@ -153,11 +138,7 @@ namespace System.CommandLine.Tests
                         AllowMultipleArgumentsPerToken = true
                     };
 
-                    var command = new RootCommand
-                    {
-                        optionX,
-                        optionY
-                    };
+                    var command = new RootCommand { optionX, optionY };
 
                     var result = command.Parse("-x -x -x -y -y -x -y -y -y -x -x -y");
 
@@ -174,7 +155,10 @@ namespace System.CommandLine.Tests
                 [Fact]
                 public void Single_option_arg_is_matched()
                 {
-                    var option = new Option<string[]>("--option") { AllowMultipleArgumentsPerToken = false };
+                    var option = new Option<string[]>("--option")
+                    {
+                        AllowMultipleArgumentsPerToken = false
+                    };
                     var command = new Command("the-command") { option };
 
                     var result = command.Parse("--option 1 2");
@@ -187,19 +171,31 @@ namespace System.CommandLine.Tests
                 [Fact]
                 public void Subsequent_matched_arguments_result_in_errors()
                 {
-                    var option = new Option<string[]>("--option") { AllowMultipleArgumentsPerToken = false };
+                    var option = new Option<string[]>("--option")
+                    {
+                        AllowMultipleArgumentsPerToken = false
+                    };
                     var command = new Command("the-command") { option };
 
                     var result = command.Parse("--option 1 2");
 
                     result.UnmatchedTokens.Should().BeEquivalentTo(new[] { "2" });
-                    result.Errors.Should().Contain(e => e.Message == LocalizationResources.Instance.UnrecognizedCommandOrArgument("2"));
+                    result.Errors
+                        .Should()
+                        .Contain(
+                            e =>
+                                e.Message
+                                == LocalizationResources.Instance.UnrecognizedCommandOrArgument("2")
+                        );
                 }
 
                 [Fact]
                 public void When_max_arity_is_greater_than_1_then_multiple_option_args_are_matched()
                 {
-                    var option = new Option<string[]>("--option") { AllowMultipleArgumentsPerToken = false };
+                    var option = new Option<string[]>("--option")
+                    {
+                        AllowMultipleArgumentsPerToken = false
+                    };
                     var command = new Command("the-command") { option };
 
                     var result = command.Parse("--option 1 --option 2");

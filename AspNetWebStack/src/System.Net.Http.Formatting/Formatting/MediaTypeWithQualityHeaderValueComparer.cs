@@ -8,16 +8,16 @@ using System.Net.Http.Headers;
 namespace System.Net.Http.Formatting
 {
     /// Implementation of <see cref="IComparer{T}"/> that can compare accept media type header fields
-    /// based on their quality values (a.k.a q-values). See 
+    /// based on their quality values (a.k.a q-values). See
     /// <see cref="StringWithQualityHeaderValueComparer"/> for a comparer for other content negotiation
     /// header field q-values.
-    internal class MediaTypeWithQualityHeaderValueComparer : IComparer<MediaTypeWithQualityHeaderValue>
+    internal class MediaTypeWithQualityHeaderValueComparer
+        : IComparer<MediaTypeWithQualityHeaderValue>
     {
-        private static readonly MediaTypeWithQualityHeaderValueComparer _mediaTypeComparer = new MediaTypeWithQualityHeaderValueComparer();
+        private static readonly MediaTypeWithQualityHeaderValueComparer _mediaTypeComparer =
+            new MediaTypeWithQualityHeaderValueComparer();
 
-        private MediaTypeWithQualityHeaderValueComparer()
-        {
-        }
+        private MediaTypeWithQualityHeaderValueComparer() { }
 
         public static MediaTypeWithQualityHeaderValueComparer QualityComparer
         {
@@ -26,15 +26,18 @@ namespace System.Net.Http.Formatting
 
         /// <summary>
         /// Compares two <see cref="MediaTypeWithQualityHeaderValue"/> based on their quality value (a.k.a their "q-value").
-        /// Values with identical q-values are considered equal (i.e the result is 0) with the exception that sub-type wild-cards are 
-        /// considered less than specific media types and full wild-cards are considered less than sub-type wild-cards. This allows to 
+        /// Values with identical q-values are considered equal (i.e the result is 0) with the exception that sub-type wild-cards are
+        /// considered less than specific media types and full wild-cards are considered less than sub-type wild-cards. This allows to
         /// sort a sequence of <see cref="StringWithQualityHeaderValue"/> following their q-values in the order of specific media types,
         /// sub-type wildcards, and last any full wild-cards.
         /// </summary>
         /// <param name="mediaType1">The first <see cref="MediaTypeWithQualityHeaderValue"/> to compare.</param>
         /// <param name="mediaType2">The second <see cref="MediaTypeWithQualityHeaderValue"/> to compare.</param>
         /// <returns></returns>
-        public int Compare(MediaTypeWithQualityHeaderValue mediaType1, MediaTypeWithQualityHeaderValue mediaType2)
+        public int Compare(
+            MediaTypeWithQualityHeaderValue mediaType1,
+            MediaTypeWithQualityHeaderValue mediaType2
+        )
         {
             Contract.Assert(mediaType1 != null, "The 'mediaType1' parameter should not be null.");
             Contract.Assert(mediaType2 != null, "The 'mediaType2' parameter should not be null.");
@@ -48,8 +51,12 @@ namespace System.Net.Http.Formatting
 
             if (returnValue == 0)
             {
-                ParsedMediaTypeHeaderValue parsedMediaType1 = new ParsedMediaTypeHeaderValue(mediaType1);
-                ParsedMediaTypeHeaderValue parsedMediaType2 = new ParsedMediaTypeHeaderValue(mediaType2);
+                ParsedMediaTypeHeaderValue parsedMediaType1 = new ParsedMediaTypeHeaderValue(
+                    mediaType1
+                );
+                ParsedMediaTypeHeaderValue parsedMediaType2 = new ParsedMediaTypeHeaderValue(
+                    mediaType2
+                );
 
                 if (!parsedMediaType1.TypesEqual(ref parsedMediaType2))
                 {
@@ -61,11 +68,17 @@ namespace System.Net.Http.Formatting
                     {
                         return 1;
                     }
-                    else if (parsedMediaType1.IsSubtypeMediaRange && !parsedMediaType2.IsSubtypeMediaRange)
+                    else if (
+                        parsedMediaType1.IsSubtypeMediaRange
+                        && !parsedMediaType2.IsSubtypeMediaRange
+                    )
                     {
                         return -1;
                     }
-                    else if (!parsedMediaType1.IsSubtypeMediaRange && parsedMediaType2.IsSubtypeMediaRange)
+                    else if (
+                        !parsedMediaType1.IsSubtypeMediaRange
+                        && parsedMediaType2.IsSubtypeMediaRange
+                    )
                     {
                         return 1;
                     }
@@ -86,7 +99,10 @@ namespace System.Net.Http.Formatting
             return returnValue;
         }
 
-        private static int CompareBasedOnQualityFactor(MediaTypeWithQualityHeaderValue mediaType1, MediaTypeWithQualityHeaderValue mediaType2)
+        private static int CompareBasedOnQualityFactor(
+            MediaTypeWithQualityHeaderValue mediaType1,
+            MediaTypeWithQualityHeaderValue mediaType2
+        )
         {
             Contract.Assert(mediaType1 != null);
             Contract.Assert(mediaType2 != null);

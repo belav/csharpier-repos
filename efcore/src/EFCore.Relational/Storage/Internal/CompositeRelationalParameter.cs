@@ -24,8 +24,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
         /// </summary>
         public CompositeRelationalParameter(
             string invariantName,
-            IReadOnlyList<IRelationalParameter> relationalParameters)
-            : base(invariantName)
+            IReadOnlyList<IRelationalParameter> relationalParameters
+        ) : base(invariantName)
         {
             RelationalParameters = relationalParameters;
         }
@@ -52,7 +52,9 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
                 {
                     throw new InvalidOperationException(
                         RelationalStrings.MissingParameterValue(
-                            RelationalParameters[innerValues.Length].InvariantName));
+                            RelationalParameters[innerValues.Length].InvariantName
+                        )
+                    );
                 }
 
                 for (var i = 0; i < RelationalParameters.Count; i++)
@@ -62,7 +64,9 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
             }
             else
             {
-                throw new InvalidOperationException(RelationalStrings.ParameterNotObjectArray(InvariantName));
+                throw new InvalidOperationException(
+                    RelationalStrings.ParameterNotObjectArray(InvariantName)
+                );
             }
         }
     }

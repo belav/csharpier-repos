@@ -15,11 +15,11 @@ namespace Roslyn.Utilities
     /// <summary>
     /// A simple, forward-only JSON writer to avoid adding dependencies to the compiler.
     /// Used to generate /errorlogger output.
-    /// 
-    /// Does not guarantee well-formed JSON if misused. It is the caller's responsibility 
+    ///
+    /// Does not guarantee well-formed JSON if misused. It is the caller's responsibility
     /// to balance array/object start/end, to only write key-value pairs to objects and
     /// elements to arrays, etc.
-    /// 
+    ///
     /// Takes ownership of the given <see cref="TextWriter" /> at construction and handles its disposal.
     /// </summary>
     internal sealed class JsonWriter : IDisposable
@@ -28,7 +28,13 @@ namespace Roslyn.Utilities
         private int _indent;
         private Pending _pending;
 
-        private enum Pending { None, NewLineAndIndent, CommaNewLineAndIndent };
+        private enum Pending
+        {
+            None,
+            NewLineAndIndent,
+            CommaNewLineAndIndent
+        };
+
         private const string Indentation = "  ";
 
         public JsonWriter(TextWriter output)
@@ -124,7 +130,9 @@ namespace Roslyn.Utilities
                 return;
             }
 
-            Debug.Assert(_pending == Pending.NewLineAndIndent || _pending == Pending.CommaNewLineAndIndent);
+            Debug.Assert(
+                _pending == Pending.NewLineAndIndent || _pending == Pending.CommaNewLineAndIndent
+            );
             if (_pending == Pending.CommaNewLineAndIndent)
             {
                 _output.Write(',');
@@ -160,7 +168,7 @@ namespace Roslyn.Utilities
             _output.Dispose();
         }
 
-        // String escaping implementation forked from System.Runtime.Serialization.Json to 
+        // String escaping implementation forked from System.Runtime.Serialization.Json to
         // avoid a large dependency graph for this small amount of code:
         //
         // https://github.com/dotnet/corefx/blob/main/src/System.Private.DataContractSerialization/src/System/Runtime/Serialization/Json/JavaScriptString.cs
@@ -243,16 +251,18 @@ namespace Roslyn.Utilities
 
         private static bool ShouldAppendAsUnicode(char c)
         {
-            // Note on newline characters: Newline characters in JSON strings need to be encoded on the way out 
-            // See Unicode 6.2, Table 5-1 (http://www.unicode.org/versions/Unicode6.2.0/ch05.pdf]) for the full list. 
+            // Note on newline characters: Newline characters in JSON strings need to be encoded on the way out
+            // See Unicode 6.2, Table 5-1 (http://www.unicode.org/versions/Unicode6.2.0/ch05.pdf]) for the full list.
 
-            // We only care about NEL, LS, and PS, since the other newline characters are all 
-            // control characters so are already encoded. 
+            // We only care about NEL, LS, and PS, since the other newline characters are all
+            // control characters so are already encoded.
 
-            return c < ' ' ||
-                c >= (char)0xfffe || // max char 
-                (c >= (char)0xd800 && c <= (char)0xdfff) || // between high and low surrogate 
-                (c == '\u0085' || c == '\u2028' || c == '\u2029'); // Unicode new line characters 
+            return c < ' '
+                || c >= (char)0xfffe
+                || // max char
+                (c >= (char)0xd800 && c <= (char)0xdfff)
+                || // between high and low surrogate
+                (c == '\u0085' || c == '\u2028' || c == '\u2029'); // Unicode new line characters
         }
     }
 }

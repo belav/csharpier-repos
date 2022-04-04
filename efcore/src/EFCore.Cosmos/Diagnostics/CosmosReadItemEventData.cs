@@ -29,8 +29,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             string resourceId,
             string containerId,
             string? partitionKey,
-            bool logSensitiveData)
-            : base(eventDefinition, messageGenerator)
+            bool logSensitiveData
+        ) : base(eventDefinition, messageGenerator)
         {
             ResourceId = resourceId;
             ContainerId = containerId;

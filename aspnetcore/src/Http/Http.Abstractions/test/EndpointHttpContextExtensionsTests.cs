@@ -30,10 +30,7 @@ public class EndpointHttpContextExtensionsTests
     {
         // Arrange
         var context = new DefaultHttpContext();
-        context.Features.Set<IEndpointFeature>(new EndpointFeature
-        {
-            Endpoint = null
-        });
+        context.Features.Set<IEndpointFeature>(new EndpointFeature { Endpoint = null });
 
         // Act
         var endpoint = context.GetEndpoint();
@@ -47,11 +44,12 @@ public class EndpointHttpContextExtensionsTests
     {
         // Arrange
         var context = new DefaultHttpContext();
-        var initial = new Endpoint(c => Task.CompletedTask, EndpointMetadataCollection.Empty, "Test endpoint");
-        context.Features.Set<IEndpointFeature>(new EndpointFeature
-        {
-            Endpoint = initial
-        });
+        var initial = new Endpoint(
+            c => Task.CompletedTask,
+            EndpointMetadataCollection.Empty,
+            "Test endpoint"
+        );
+        context.Features.Set<IEndpointFeature>(new EndpointFeature { Endpoint = initial });
 
         // Act
         var endpoint = context.GetEndpoint();
@@ -80,7 +78,11 @@ public class EndpointHttpContextExtensionsTests
         var context = new DefaultHttpContext();
 
         // Act
-        var endpoint = new Endpoint(c => Task.CompletedTask, EndpointMetadataCollection.Empty, "Test endpoint");
+        var endpoint = new Endpoint(
+            c => Task.CompletedTask,
+            EndpointMetadataCollection.Empty,
+            "Test endpoint"
+        );
         context.SetEndpoint(endpoint);
 
         // Assert
@@ -94,15 +96,20 @@ public class EndpointHttpContextExtensionsTests
     {
         // Arrange
         var context = new DefaultHttpContext();
-        var initialEndpoint = new Endpoint(c => Task.CompletedTask, EndpointMetadataCollection.Empty, "Test endpoint");
-        var initialFeature = new EndpointFeature
-        {
-            Endpoint = initialEndpoint
-        };
+        var initialEndpoint = new Endpoint(
+            c => Task.CompletedTask,
+            EndpointMetadataCollection.Empty,
+            "Test endpoint"
+        );
+        var initialFeature = new EndpointFeature { Endpoint = initialEndpoint };
         context.Features.Set<IEndpointFeature>(initialFeature);
 
         // Act
-        var endpoint = new Endpoint(c => Task.CompletedTask, EndpointMetadataCollection.Empty, "Test endpoint");
+        var endpoint = new Endpoint(
+            c => Task.CompletedTask,
+            EndpointMetadataCollection.Empty,
+            "Test endpoint"
+        );
         context.SetEndpoint(endpoint);
 
         // Assert
@@ -116,11 +123,12 @@ public class EndpointHttpContextExtensionsTests
     {
         // Arrange
         var context = new DefaultHttpContext();
-        var initialEndpoint = new Endpoint(c => Task.CompletedTask, EndpointMetadataCollection.Empty, "Test endpoint");
-        var initialFeature = new EndpointFeature
-        {
-            Endpoint = initialEndpoint
-        };
+        var initialEndpoint = new Endpoint(
+            c => Task.CompletedTask,
+            EndpointMetadataCollection.Empty,
+            "Test endpoint"
+        );
+        var initialFeature = new EndpointFeature { Endpoint = initialEndpoint };
         context.Features.Set<IEndpointFeature>(initialFeature);
 
         // Act
@@ -137,7 +145,11 @@ public class EndpointHttpContextExtensionsTests
     {
         // Arrange
         var context = new DefaultHttpContext();
-        var initialEndpoint = new Endpoint(c => Task.CompletedTask, EndpointMetadataCollection.Empty, "Test endpoint");
+        var initialEndpoint = new Endpoint(
+            c => Task.CompletedTask,
+            EndpointMetadataCollection.Empty,
+            "Test endpoint"
+        );
 
         // Act
         context.SetEndpoint(initialEndpoint);

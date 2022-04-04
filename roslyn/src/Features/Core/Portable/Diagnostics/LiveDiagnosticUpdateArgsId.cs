@@ -13,8 +13,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public readonly object ProjectOrDocumentId;
         public readonly int Kind;
 
-        public LiveDiagnosticUpdateArgsId(DiagnosticAnalyzer analyzer, object projectOrDocumentId, int kind, string analyzerPackageName)
-            : base(analyzer)
+        public LiveDiagnosticUpdateArgsId(
+            DiagnosticAnalyzer analyzer,
+            object projectOrDocumentId,
+            int kind,
+            string analyzerPackageName
+        ) : base(analyzer)
         {
             Contract.ThrowIfNull(projectOrDocumentId);
 
@@ -33,10 +37,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 return false;
             }
 
-            return Kind == other.Kind && Equals(ProjectOrDocumentId, other.ProjectOrDocumentId) && base.Equals(obj);
+            return Kind == other.Kind
+                && Equals(ProjectOrDocumentId, other.ProjectOrDocumentId)
+                && base.Equals(obj);
         }
 
-        public override int GetHashCode()
-            => Hash.Combine(ProjectOrDocumentId, Hash.Combine(Kind, base.GetHashCode()));
+        public override int GetHashCode() =>
+            Hash.Combine(ProjectOrDocumentId, Hash.Combine(Kind, base.GetHashCode()));
     }
 }

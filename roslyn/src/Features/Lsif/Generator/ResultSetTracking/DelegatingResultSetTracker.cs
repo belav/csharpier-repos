@@ -16,9 +16,11 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.ResultSetTr
             _chooseTrackerForSymbol = chooseTrackerForSymbol;
         }
 
-        public Id<T> GetResultIdForSymbol<T>(ISymbol symbol, string edgeKind, Func<T> vertexCreator) where T : Vertex
+        public Id<T> GetResultIdForSymbol<T>(ISymbol symbol, string edgeKind, Func<T> vertexCreator)
+            where T : Vertex
         {
-            return _chooseTrackerForSymbol(symbol).GetResultIdForSymbol(symbol, edgeKind, vertexCreator);
+            return _chooseTrackerForSymbol(symbol)
+                .GetResultIdForSymbol(symbol, edgeKind, vertexCreator);
         }
 
         public Id<ResultSet> GetResultSetIdForSymbol(ISymbol symbol)
@@ -28,7 +30,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.ResultSetTr
 
         public bool ResultSetNeedsInformationalEdgeAdded(ISymbol symbol, string edgeKind)
         {
-            return _chooseTrackerForSymbol(symbol).ResultSetNeedsInformationalEdgeAdded(symbol, edgeKind);
+            return _chooseTrackerForSymbol(symbol)
+                .ResultSetNeedsInformationalEdgeAdded(symbol, edgeKind);
         }
     }
 }

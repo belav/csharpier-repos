@@ -14,6 +14,7 @@ internal static partial class Interop
             SafeFileHandle hFile,
             int FileInformationClass,
             void* lpFileInformation,
-            uint dwBufferSize);
+            uint dwBufferSize
+        );
     }
 }

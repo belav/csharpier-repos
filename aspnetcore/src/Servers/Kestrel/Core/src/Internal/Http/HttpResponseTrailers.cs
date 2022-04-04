@@ -46,7 +46,11 @@ internal partial class HttpResponseTrailers : HttpHeaders
         return true;
     }
 
-    public override StringValues HeaderConnection { get => throw new NotSupportedException(); set => throw new NotSupportedException(); }
+    public override StringValues HeaderConnection
+    {
+        get => throw new NotSupportedException();
+        set => throw new NotSupportedException();
+    }
 
     public partial struct Enumerator : IEnumerator<KeyValuePair<string, StringValues>>
     {
@@ -66,9 +70,7 @@ internal partial class HttpResponseTrailers : HttpHeaders
             _current = default;
             _currentKnownType = default;
             _hasUnknown = collection.MaybeUnknown != null;
-            _unknownEnumerator = _hasUnknown
-                ? collection.MaybeUnknown!.GetEnumerator()
-                : default;
+            _unknownEnumerator = _hasUnknown ? collection.MaybeUnknown!.GetEnumerator() : default;
         }
 
         public KeyValuePair<string, StringValues> Current => _current;
@@ -77,9 +79,7 @@ internal partial class HttpResponseTrailers : HttpHeaders
 
         object IEnumerator.Current => _current;
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         public void Reset()
         {

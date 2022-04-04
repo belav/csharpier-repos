@@ -11,10 +11,11 @@ internal class AA
     public short tmp1;
 
     [FieldOffset(8)]
-    public byte q;  //this field is the testing subject
+    public byte q; //this field is the testing subject
 
     [FieldOffset(37)]
     public int tmp2;
+
     [FieldOffset(44)]
     public int tmp3;
 
@@ -31,14 +32,20 @@ internal class AA
     public static AA[,,] aa_init = new AA[1, 101, 2];
     public static AA[,,] aa_zero = new AA[1, 101, 2];
     public static object b_init = new AA(100);
-    public static AA _init, _zero;
+    public static AA _init,
+        _zero;
 
-    public static byte call_target(byte arg) { return arg; }
-    public static byte call_target_ref(ref byte arg) { return arg; }
-
-    public void verify()
+    public static byte call_target(byte arg)
     {
+        return arg;
     }
+
+    public static byte call_target_ref(ref byte arg)
+    {
+        return arg;
+    }
+
+    public void verify() { }
 
     public static void verify_all()
     {
@@ -67,5 +74,6 @@ internal class AA
 
 internal struct BB
 {
-    public static AA f_init, f_zero;
+    public static AA f_init,
+        f_zero;
 }

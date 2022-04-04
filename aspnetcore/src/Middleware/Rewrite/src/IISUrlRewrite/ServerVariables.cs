@@ -18,7 +18,12 @@ internal static class ServerVariables
     /// <param name="alwaysUseManagedServerVariables">Determines whether server variables are sourced from the managed server</param>
     /// <exception cref="FormatException">Thrown when the server variable is unknown</exception>
     /// <returns>The matching <see cref="PatternSegment"/></returns>
-    public static PatternSegment FindServerVariable(string serverVariable, ParserContext context, UriMatchPart uriMatchPart, bool alwaysUseManagedServerVariables)
+    public static PatternSegment FindServerVariable(
+        string serverVariable,
+        ParserContext context,
+        UriMatchPart uriMatchPart,
+        bool alwaysUseManagedServerVariables
+    )
     {
         Func<PatternSegment>? managedVariableThunk = default;
 
@@ -26,10 +31,16 @@ internal static class ServerVariables
         {
             // TODO Add all server variables here.
             case "ALL_RAW":
-                managedVariableThunk = () => throw new NotSupportedException(Resources.FormatError_UnsupportedServerVariable(serverVariable));
+                managedVariableThunk = () =>
+                    throw new NotSupportedException(
+                        Resources.FormatError_UnsupportedServerVariable(serverVariable)
+                    );
                 break;
             case "APP_POOL_ID":
-                managedVariableThunk = () => throw new NotSupportedException(Resources.FormatError_UnsupportedServerVariable(serverVariable));
+                managedVariableThunk = () =>
+                    throw new NotSupportedException(
+                        Resources.FormatError_UnsupportedServerVariable(serverVariable)
+                    );
                 break;
             case "CONTENT_LENGTH":
                 managedVariableThunk = () => new HeaderSegment(HeaderNames.ContentLength);
@@ -65,7 +76,10 @@ internal static class ServerVariables
                 managedVariableThunk = () => new LocalAddressSegment();
                 break;
             case "HTTP_PROXY_CONNECTION":
-                managedVariableThunk = () => throw new NotSupportedException(Resources.FormatError_UnsupportedServerVariable(serverVariable));
+                managedVariableThunk = () =>
+                    throw new NotSupportedException(
+                        Resources.FormatError_UnsupportedServerVariable(serverVariable)
+                    );
                 break;
             case "QUERY_STRING":
                 managedVariableThunk = () => new QueryStringSegment();
@@ -74,7 +88,10 @@ internal static class ServerVariables
                 managedVariableThunk = () => new RemoteAddressSegment();
                 break;
             case "REMOTE_HOST":
-                managedVariableThunk = () => throw new NotSupportedException(Resources.FormatError_UnsupportedServerVariable(serverVariable));
+                managedVariableThunk = () =>
+                    throw new NotSupportedException(
+                        Resources.FormatError_UnsupportedServerVariable(serverVariable)
+                    );
                 break;
             case "REMOTE_PORT":
                 managedVariableThunk = () => new RemotePortSegment();
@@ -89,7 +106,12 @@ internal static class ServerVariables
                 managedVariableThunk = () => new UrlSegment(uriMatchPart);
                 break;
             default:
-                throw new FormatException(Resources.FormatError_InputParserUnrecognizedParameter(serverVariable, context.Index));
+                throw new FormatException(
+                    Resources.FormatError_InputParserUnrecognizedParameter(
+                        serverVariable,
+                        context.Index
+                    )
+                );
         }
 
         if (alwaysUseManagedServerVariables)

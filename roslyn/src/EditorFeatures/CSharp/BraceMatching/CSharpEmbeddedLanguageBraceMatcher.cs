@@ -16,8 +16,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.BraceMatching
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpEmbeddedLanguageBraceMatcher()
-        {
-        }
+        public CSharpEmbeddedLanguageBraceMatcher() { }
     }
 }

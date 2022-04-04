@@ -21,8 +21,12 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             Assert.Equal(
                 RelationalStrings.NamedConnectionStringNotFound("foo"),
-                Assert.Throws<InvalidOperationException>(
-                    () => resolver.ResolveConnectionString("name=foo")).Message);
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => resolver.ResolveConnectionString("name=foo")
+                    )
+                    .Message
+            );
         }
 
         [ConditionalFact]
@@ -32,19 +36,29 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             Assert.Equal(
                 RelationalStrings.NamedConnectionStringNotFound("foo"),
-                Assert.Throws<InvalidOperationException>(
-                    () => resolver.ResolveConnectionString("name=foo")).Message);
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => resolver.ResolveConnectionString("name=foo")
+                    )
+                    .Message
+            );
         }
 
         [ConditionalFact]
         public void Throws_if_IConfiguration_does_not_contain_key()
         {
-            var resolver = new NamedConnectionStringResolver(new FakeOptions(new ConfigurationBuilder().Build()));
+            var resolver = new NamedConnectionStringResolver(
+                new FakeOptions(new ConfigurationBuilder().Build())
+            );
 
             Assert.Equal(
                 RelationalStrings.NamedConnectionStringNotFound("foo"),
-                Assert.Throws<InvalidOperationException>(
-                    () => resolver.ResolveConnectionString("name=foo")).Message);
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => resolver.ResolveConnectionString("name=foo")
+                    )
+                    .Message
+            );
         }
 
         [ConditionalFact]
@@ -59,15 +73,27 @@ namespace Microsoft.EntityFrameworkCore.Storage
                                 { "MyConnectionString", "Conn1" },
                                 { "ConnectionStrings:DefaultConnection", "Conn2" },
                                 { "ConnectionStrings:MyConnectionString", "Conn3" }
-                            })
-                        .Build()));
+                            }
+                        )
+                        .Build()
+                )
+            );
 
             Assert.Equal("Conn1", resolver.ResolveConnectionString("name=MyConnectionString"));
-            Assert.Equal("Conn2", resolver.ResolveConnectionString("name=ConnectionStrings:DefaultConnection"));
+            Assert.Equal(
+                "Conn2",
+                resolver.ResolveConnectionString("name=ConnectionStrings:DefaultConnection")
+            );
             Assert.Equal("Conn2", resolver.ResolveConnectionString("name=DefaultConnection"));
-            Assert.Equal("Conn3", resolver.ResolveConnectionString("name=ConnectionStrings:MyConnectionString"));
+            Assert.Equal(
+                "Conn3",
+                resolver.ResolveConnectionString("name=ConnectionStrings:MyConnectionString")
+            );
 
-            Assert.Equal("Conn1", resolver.ResolveConnectionString("  NamE = MyConnectionString   "));
+            Assert.Equal(
+                "Conn1",
+                resolver.ResolveConnectionString("  NamE = MyConnectionString   ")
+            );
         }
 
         [ConditionalFact]
@@ -77,11 +103,20 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 new FakeOptions(
                     new ConfigurationBuilder()
                         .AddInMemoryCollection(
-                            new Dictionary<string, string> { { "Nope", "NoThanks" } })
-                        .Build()));
+                            new Dictionary<string, string> { { "Nope", "NoThanks" } }
+                        )
+                        .Build()
+                )
+            );
 
-            Assert.Equal("name=Fox;DataSource=Jimony", resolver.ResolveConnectionString("name=Fox;DataSource=Jimony"));
-            Assert.Equal("DataSource=Jimony", resolver.ResolveConnectionString("DataSource=Jimony"));
+            Assert.Equal(
+                "name=Fox;DataSource=Jimony",
+                resolver.ResolveConnectionString("name=Fox;DataSource=Jimony")
+            );
+            Assert.Equal(
+                "DataSource=Jimony",
+                resolver.ResolveConnectionString("DataSource=Jimony")
+            );
             Assert.Equal("Jimony", resolver.ResolveConnectionString("Jimony"));
         }
 
@@ -104,8 +139,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 }
             }
 
-            public IEnumerable<IDbContextOptionsExtension> Extensions
-                => null;
+            public IEnumerable<IDbContextOptionsExtension> Extensions => null;
 
             public TExtension FindExtension<TExtension>()
                 where TExtension : class, IDbContextOptionsExtension
@@ -114,7 +148,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
                 if (_serviceProvider != null)
                 {
-                    coreOptionsExtension = coreOptionsExtension.WithApplicationServiceProvider(_serviceProvider);
+                    coreOptionsExtension = coreOptionsExtension.WithApplicationServiceProvider(
+                        _serviceProvider
+                    );
                 }
 
                 return (TExtension)(object)coreOptionsExtension;

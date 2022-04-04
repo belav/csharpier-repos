@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion
         [Theory, CombinatorialData]
         public async Task GettingCompletionListShoudNotRunSourceGenerator(bool forkBeforeFreeze)
         {
-            var sourceMarkup = @"
+            var sourceMarkup =
+                @"
 using System;
 
 namespace N
@@ -47,18 +48,32 @@ namespace N
         $$
     }
 }";
-            MarkupTestFile.GetPosition(sourceMarkup.NormalizeLineEndings(), out var source, out int? position);
+            MarkupTestFile.GetPosition(
+                sourceMarkup.NormalizeLineEndings(),
+                out var source,
+                out int? position
+            );
 
             var generatorRanCount = 0;
-            var generator = new CallbackGenerator(onInit: _ => { }, onExecute: _ => Interlocked.Increment(ref generatorRanCount));
+            var generator = new CallbackGenerator(
+                onInit: _ => { },
+                onExecute: _ => Interlocked.Increment(ref generatorRanCount)
+            );
 
             using var workspace = WorkspaceTestUtilities.CreateWorkspaceWithPartialSemantics();
             var analyzerReference = new TestGeneratorReference(generator);
-            var project = SolutionUtilities.AddEmptyProject(workspace.CurrentSolution)
+            var project = SolutionUtilities
+                .AddEmptyProject(workspace.CurrentSolution)
                 .AddAnalyzerReference(analyzerReference)
-                .AddDocument("Document1.cs", sourceMarkup, filePath: "Document1.cs").Project;
+                .AddDocument("Document1.cs", sourceMarkup, filePath: "Document1.cs")
+                .Project;
 
-            Assert.True(workspace.SetCurrentSolution(_ => project.Solution, WorkspaceChangeKind.SolutionChanged));
+            Assert.True(
+                workspace.SetCurrentSolution(
+                    _ => project.Solution,
+                    WorkspaceChangeKind.SolutionChanged
+                )
+            );
 
             var document = workspace.CurrentSolution.Projects.Single().Documents.Single();
             var compeltionService = document.GetLanguageService<CompletionService>();
@@ -68,20 +83,29 @@ namespace N
             if (forkBeforeFreeze)
             {
                 // Forking before freezing means we'll have to do extra work to produce the final compilation,
-                // but we should still not be running generators. 
+                // but we should still not be running generators.
                 document = document.WithText(SourceText.From(sourceMarkup.Replace("C1", "C2")));
             }
 
             // We want to make sure import completion providers are also participating.
-            var options = CompletionOptions.From(document.Project.Solution.Options, document.Project.Language);
+            var options = CompletionOptions.From(
+                document.Project.Solution.Options,
+                document.Project.Language
+            );
             var newOptions = options with { ShowItemsFromUnimportedNamespaces = true };
-            var (completionList, _) = await compeltionService.GetCompletionsInternalAsync(document, position.Value, options: newOptions);
+            var (completionList, _) = await compeltionService.GetCompletionsInternalAsync(
+                document,
+                position.Value,
+                options: newOptions
+            );
 
             // We expect completion to run on frozen partial semantic, which won't run source generator.
             Assert.Equal(0, generatorRanCount);
 
             var expectedItem = forkBeforeFreeze ? "C2" : "C1";
-            Assert.True(completionList.Items.Select(item => item.DisplayText).Contains(expectedItem));
+            Assert.True(
+                completionList.Items.Select(item => item.DisplayText).Contains(expectedItem)
+            );
         }
     }
 }

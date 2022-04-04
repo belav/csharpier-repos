@@ -36,7 +36,10 @@ public sealed class MethodDeclarationIntermediateNode : MemberDeclarationInterme
 
         formatter.WriteProperty(nameof(MethodName), MethodName);
         formatter.WriteProperty(nameof(Modifiers), string.Join(", ", Modifiers));
-        formatter.WriteProperty(nameof(Parameters), string.Join(", ", Parameters.Select(FormatMethodParameter)));
+        formatter.WriteProperty(
+            nameof(Parameters),
+            string.Join(", ", Parameters.Select(FormatMethodParameter))
+        );
         formatter.WriteProperty(nameof(ReturnType), ReturnType);
     }
 

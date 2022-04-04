@@ -20,14 +20,30 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Every_eventId_has_a_logger_method_and_logs_when_level_enabled()
         {
-            var entityType = new EntityType(typeof(object), new Model(new ConventionSet()), owned: false, ConfigurationSource.Convention);
+            var entityType = new EntityType(
+                typeof(object),
+                new Model(new ConventionSet()),
+                owned: false,
+                ConfigurationSource.Convention
+            );
             var property = new Property(
-                "A", typeof(int), null, null, entityType, ConfigurationSource.Convention, ConfigurationSource.Convention);
+                "A",
+                typeof(int),
+                null,
+                null,
+                entityType,
+                ConfigurationSource.Convention,
+                ConfigurationSource.Convention
+            );
             entityType.Model.FinalizeModel();
 
             var fakeFactories = new Dictionary<Type, Func<object>>
             {
-                { typeof(IList<string>), () => new List<string> { "Fake1", "Fake2" } },
+                {
+                    typeof(IList<string>),
+                    () =>
+                        new List<string> { "Fake1", "Fake2" }
+                },
                 { typeof(IProperty), () => property },
                 { typeof(IReadOnlyProperty), () => property },
                 { typeof(string), () => "Fake" }
@@ -37,7 +53,8 @@ namespace Microsoft.EntityFrameworkCore
                 typeof(SqlServerEventId),
                 typeof(SqlServerLoggerExtensions),
                 new SqlServerLoggingDefinitions(),
-                fakeFactories);
+                fakeFactories
+            );
         }
     }
 }

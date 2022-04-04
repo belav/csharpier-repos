@@ -35,7 +35,11 @@ namespace System.IO
             }
         }
 
-        private unsafe Interop.Error SetCreationTimeCore(string path, long seconds, long nanoseconds)
+        private unsafe Interop.Error SetCreationTimeCore(
+            string path,
+            long seconds,
+            long nanoseconds
+        )
         {
             Interop.Sys.TimeSpec timeSpec = default;
 
@@ -47,9 +51,15 @@ namespace System.IO
             attrList.commonAttr = Interop.libc.AttrList.ATTR_CMN_CRTIME;
 
             Interop.Error error =
-                Interop.libc.setattrlist(path, &attrList, &timeSpec, sizeof(Interop.Sys.TimeSpec), default(CULong)) == 0 ?
-                Interop.Error.SUCCESS :
-                Interop.Sys.GetLastErrorInfo().Error;
+                Interop.libc.setattrlist(
+                    path,
+                    &attrList,
+                    &timeSpec,
+                    sizeof(Interop.Sys.TimeSpec),
+                    default(CULong)
+                ) == 0
+                    ? Interop.Error.SUCCESS
+                    : Interop.Sys.GetLastErrorInfo().Error;
 
             return error;
         }

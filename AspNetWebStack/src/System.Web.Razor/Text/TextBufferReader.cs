@@ -67,17 +67,21 @@ namespace System.Web.Razor.Text
         {
             BacktrackContext context = new BacktrackContext() { Location = CurrentLocation };
             _bookmarks.Push(context);
-            return new DisposableAction(() =>
-            {
-                EndLookahead(context);
-            });
+            return new DisposableAction(
+                () =>
+                {
+                    EndLookahead(context);
+                }
+            );
         }
 
         public override void CancelBacktrack()
         {
             if (_bookmarks.Count == 0)
             {
-                throw new InvalidOperationException(RazorResources.CancelBacktrack_Must_Be_Called_Within_Lookahead);
+                throw new InvalidOperationException(
+                    RazorResources.CancelBacktrack_Must_Be_Called_Within_Lookahead
+                );
             }
             _bookmarks.Pop();
         }

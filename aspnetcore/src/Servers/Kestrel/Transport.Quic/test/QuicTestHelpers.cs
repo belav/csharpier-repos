@@ -27,7 +27,10 @@ internal static class QuicTestHelpers
 {
     private static readonly byte[] TestData = Encoding.UTF8.GetBytes("Hello world");
 
-    public static QuicTransportFactory CreateTransportFactory(ILoggerFactory loggerFactory = null, ISystemClock systemClock = null)
+    public static QuicTransportFactory CreateTransportFactory(
+        ILoggerFactory loggerFactory = null,
+        ISystemClock systemClock = null
+    )
     {
         var quicTransportOptions = new QuicTransportOptions();
         quicTransportOptions.IdleTimeout = TimeSpan.FromMinutes(1);
@@ -38,10 +41,17 @@ internal static class QuicTestHelpers
             quicTransportOptions.SystemClock = systemClock;
         }
 
-        return new QuicTransportFactory(loggerFactory ?? NullLoggerFactory.Instance, Options.Create(quicTransportOptions));
+        return new QuicTransportFactory(
+            loggerFactory ?? NullLoggerFactory.Instance,
+            Options.Create(quicTransportOptions)
+        );
     }
 
-    public static async Task<QuicConnectionListener> CreateConnectionListenerFactory(ILoggerFactory loggerFactory = null, ISystemClock systemClock = null, bool clientCertificateRequired = false)
+    public static async Task<QuicConnectionListener> CreateConnectionListenerFactory(
+        ILoggerFactory loggerFactory = null,
+        ISystemClock systemClock = null,
+        bool clientCertificateRequired = false
+    )
     {
         var transportFactory = CreateTransportFactory(loggerFactory, systemClock);
 
@@ -49,7 +59,11 @@ internal static class QuicTestHelpers
         var endpoint = new IPEndPoint(IPAddress.Loopback, 0);
 
         var features = CreateBindAsyncFeatures(clientCertificateRequired);
-        return (QuicConnectionListener)await transportFactory.BindAsync(endpoint, features, cancellationToken: CancellationToken.None);
+        return (QuicConnectionListener)await transportFactory.BindAsync(
+            endpoint,
+            features,
+            cancellationToken: CancellationToken.None
+        );
     }
 
     public static FeatureCollection CreateBindAsyncFeatures(bool clientCertificateRequired = false)
@@ -57,9 +71,13 @@ internal static class QuicTestHelpers
         var cert = TestResources.GetTestCertificate();
 
         var sslServerAuthenticationOptions = new SslServerAuthenticationOptions();
-        sslServerAuthenticationOptions.ApplicationProtocols = new List<SslApplicationProtocol>() { SslApplicationProtocol.Http3 };
+        sslServerAuthenticationOptions.ApplicationProtocols = new List<SslApplicationProtocol>()
+        {
+            SslApplicationProtocol.Http3
+        };
         sslServerAuthenticationOptions.ServerCertificate = cert;
-        sslServerAuthenticationOptions.RemoteCertificateValidationCallback = RemoteCertificateValidationCallback;
+        sslServerAuthenticationOptions.RemoteCertificateValidationCallback =
+            RemoteCertificateValidationCallback;
         sslServerAuthenticationOptions.ClientCertificateRequired = clientCertificateRequired;
 
         var features = new FeatureCollection();
@@ -68,7 +86,9 @@ internal static class QuicTestHelpers
         return features;
     }
 
-    public static async ValueTask<MultiplexedConnectionContext> AcceptAndAddFeatureAsync(this IMultiplexedConnectionListener listener)
+    public static async ValueTask<MultiplexedConnectionContext> AcceptAndAddFeatureAsync(
+        this IMultiplexedConnectionListener listener
+    )
     {
         var connection = await listener.AcceptAsync();
         connection.Features.Set<IConnectionHeartbeatFeature>(new TestConnectionHeartbeatFeature());
@@ -77,12 +97,15 @@ internal static class QuicTestHelpers
 
     private class TestConnectionHeartbeatFeature : IConnectionHeartbeatFeature
     {
-        public void OnHeartbeat(Action<object> action, object state)
-        {
-        }
+        public void OnHeartbeat(Action<object> action, object state) { }
     }
 
-    private static bool RemoteCertificateValidationCallback(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+    private static bool RemoteCertificateValidationCallback(
+        object sender,
+        X509Certificate certificate,
+        X509Chain chain,
+        SslPolicyErrors sslPolicyErrors
+    )
     {
         return true;
     }
@@ -97,20 +120,25 @@ internal static class QuicTestHelpers
             ClientAuthenticationOptions = new SslClientAuthenticationOptions
             {
                 ApplicationProtocols = new List<SslApplicationProtocol>
-                    {
-                        SslApplicationProtocol.Http3
-                    },
+                {
+                    SslApplicationProtocol.Http3
+                },
                 RemoteCertificateValidationCallback = RemoteCertificateValidationCallback
             }
         };
     }
 
-    public static async Task<QuicStreamContext> CreateAndCompleteBidirectionalStreamGracefully(QuicConnection clientConnection, MultiplexedConnectionContext serverConnection)
+    public static async Task<QuicStreamContext> CreateAndCompleteBidirectionalStreamGracefully(
+        QuicConnection clientConnection,
+        MultiplexedConnectionContext serverConnection
+    )
     {
         var clientStream = clientConnection.OpenBidirectionalStream();
         await clientStream.WriteAsync(TestData, endStream: true).DefaultTimeout();
         var serverStream = await serverConnection.AcceptAsync().DefaultTimeout();
-        var readResult = await serverStream.Transport.Input.ReadAtLeastAsync(TestData.Length).DefaultTimeout();
+        var readResult = await serverStream.Transport.Input
+            .ReadAtLeastAsync(TestData.Length)
+            .DefaultTimeout();
         serverStream.Transport.Input.AdvanceTo(readResult.Buffer.End);
 
         // Input should be completed.

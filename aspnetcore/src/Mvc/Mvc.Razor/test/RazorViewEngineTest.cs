@@ -25,21 +25,30 @@ namespace Microsoft.AspNetCore.Mvc.Razor;
 
 public class RazorViewEngineTest
 {
-    private static readonly Dictionary<string, object> _areaTestContext = new Dictionary<string, object>()
-        {
-            {"area", "foo"},
-            {"controller", "bar"},
-        };
+    private static readonly Dictionary<string, object> _areaTestContext = new Dictionary<
+        string,
+        object
+    >()
+    {
+        { "area", "foo" },
+        { "controller", "bar" },
+    };
 
-    private static readonly Dictionary<string, object> _controllerTestContext = new Dictionary<string, object>()
-        {
-            {"controller", "bar"},
-        };
+    private static readonly Dictionary<string, object> _controllerTestContext = new Dictionary<
+        string,
+        object
+    >()
+    {
+        { "controller", "bar" },
+    };
 
-    private static readonly Dictionary<string, object> _pageTestContext = new Dictionary<string, object>()
-        {
-            {"page", "/Accounts/Index"},
-        };
+    private static readonly Dictionary<string, object> _pageTestContext = new Dictionary<
+        string,
+        object
+    >()
+    {
+        { "page", "/Accounts/Index" },
+    };
 
     public static IEnumerable<object[]> AbsoluteViewPathData
     {
@@ -64,7 +73,8 @@ public class RazorViewEngineTest
         // Act & Assert
         ExceptionAssert.ThrowsArgumentNullOrEmpty(
             () => viewEngine.FindView(context, viewName, isMainPage: true),
-            "viewName");
+            "viewName"
+        );
     }
 
     [Theory]
@@ -218,7 +228,8 @@ public class RazorViewEngineTest
         // Act & Assert
         ExceptionAssert.ThrowsArgumentNullOrEmpty(
             () => viewEngine.FindView(context, partialViewName, isMainPage: false),
-            "viewName");
+            "viewName"
+        );
     }
 
     [Theory]
@@ -266,12 +277,15 @@ public class RazorViewEngineTest
 
         // Assert
         Assert.False(result.Success);
-        Assert.Equal(new[]
-        {
+        Assert.Equal(
+            new[]
+            {
                 "/Areas/foo/Views/bar/viewName.cshtml",
                 "/Areas/foo/Views/Shared/viewName.cshtml",
                 "/Views/Shared/viewName.cshtml",
-            }, result.SearchedLocations);
+            },
+            result.SearchedLocations
+        );
     }
 
     [Theory]
@@ -288,10 +302,10 @@ public class RazorViewEngineTest
 
         // Assert
         Assert.False(result.Success);
-        Assert.Equal(new[] {
-                "/Views/bar/viewName.cshtml",
-                "/Views/Shared/viewName.cshtml",
-            }, result.SearchedLocations);
+        Assert.Equal(
+            new[] { "/Views/bar/viewName.cshtml", "/Views/Shared/viewName.cshtml", },
+            result.SearchedLocations
+        );
     }
 
     [Fact]
@@ -347,7 +361,9 @@ public class RazorViewEngineTest
             pageFactory.Object,
             GetOptionsAccessor(
                 viewLocationFormats: new[] { "fake-path1/{1}/{0}.rzr" },
-                areaViewLocationFormats: new[] { "fake-area-path/{2}/{1}/{0}.rzr" }));
+                areaViewLocationFormats: new[] { "fake-area-path/{2}/{1}/{0}.rzr" }
+            )
+        );
         var context = GetActionContext(_controllerTestContext);
 
         // Act
@@ -375,7 +391,9 @@ public class RazorViewEngineTest
             pageFactory.Object,
             GetOptionsAccessor(
                 viewLocationFormats: new[] { "fake-path1/{1}/{0}.rzr" },
-                areaViewLocationFormats: new[] { "fake-area-path/{2}/{1}/{0}.rzr" }));
+                areaViewLocationFormats: new[] { "fake-area-path/{2}/{1}/{0}.rzr" }
+            )
+        );
         var context = GetActionContext(_areaTestContext);
 
         // Act
@@ -390,7 +408,9 @@ public class RazorViewEngineTest
     [Theory]
     [InlineData("Test-View.cshtml")]
     [InlineData("/Home/Test-View.cshtml")]
-    public void GetView_DoesNotUseViewLocationFormat_WithRelativePath_IfRouteDoesNotContainArea(string viewName)
+    public void GetView_DoesNotUseViewLocationFormat_WithRelativePath_IfRouteDoesNotContainArea(
+        string viewName
+    )
     {
         // Arrange
         var expectedViewName = "/Home/Test-View.cshtml";
@@ -400,9 +420,7 @@ public class RazorViewEngineTest
             .Setup(p => p.CreateFactory(expectedViewName))
             .Returns(GetPageFactoryResult(() => page))
             .Verifiable();
-        var viewEngine = new TestableRazorViewEngine(
-            pageFactory.Object,
-            GetOptionsAccessor());
+        var viewEngine = new TestableRazorViewEngine(pageFactory.Object, GetOptionsAccessor());
 
         // Act
         var result = viewEngine.GetView("/Home/Page.cshtml", viewName, isMainPage: true);
@@ -416,7 +434,9 @@ public class RazorViewEngineTest
     [Theory]
     [InlineData("Test-View.cshtml")]
     [InlineData("/Home/Test-View.cshtml")]
-    public void GetView_DoesNotUseViewLocationFormat_WithRelativePath_IfRouteContainArea(string viewName)
+    public void GetView_DoesNotUseViewLocationFormat_WithRelativePath_IfRouteContainArea(
+        string viewName
+    )
     {
         // Arrange
         var expectedViewName = "/Home/Test-View.cshtml";
@@ -426,9 +446,7 @@ public class RazorViewEngineTest
             .Setup(p => p.CreateFactory(expectedViewName))
             .Returns(GetPageFactoryResult(() => page))
             .Verifiable();
-        var viewEngine = new TestableRazorViewEngine(
-            pageFactory.Object,
-            GetOptionsAccessor());
+        var viewEngine = new TestableRazorViewEngine(pageFactory.Object, GetOptionsAccessor());
 
         // Act
         var result = viewEngine.GetView("/Home/Page.cshtml", viewName, isMainPage: true);
@@ -454,12 +472,14 @@ public class RazorViewEngineTest
             .Setup(p => p.CreateFactory(viewName))
             .Returns(GetPageFactoryResult(() => page))
             .Verifiable();
-        var viewEngine = new TestableRazorViewEngine(
-            pageFactory.Object,
-            GetOptionsAccessor());
+        var viewEngine = new TestableRazorViewEngine(pageFactory.Object, GetOptionsAccessor());
 
         // Act
-        var result = viewEngine.GetView(executingFilePath: null, viewPath: viewName, isMainPage: true);
+        var result = viewEngine.GetView(
+            executingFilePath: null,
+            viewPath: viewName,
+            isMainPage: true
+        );
 
         // Assert
         Assert.True(result.Success);
@@ -475,16 +495,14 @@ public class RazorViewEngineTest
     public void GetView_ResolvesRelativeToCurrentPage_WithRelativePath(string viewName)
     {
         // Arrange
-        var expectedViewName = $"/Home/{ viewName }";
+        var expectedViewName = $"/Home/{viewName}";
         var pageFactory = new Mock<IRazorPageFactoryProvider>();
         var page = Mock.Of<IRazorPage>();
         pageFactory
             .Setup(p => p.CreateFactory(expectedViewName))
             .Returns(GetPageFactoryResult(() => page))
             .Verifiable();
-        var viewEngine = new TestableRazorViewEngine(
-            pageFactory.Object,
-            GetOptionsAccessor());
+        var viewEngine = new TestableRazorViewEngine(pageFactory.Object, GetOptionsAccessor());
 
         // Act
         var result = viewEngine.GetView("/Home/Page.cshtml", viewName, isMainPage: true);
@@ -500,22 +518,26 @@ public class RazorViewEngineTest
     [InlineData("Test-View.CSHTML")]
     [InlineData("PATH/TEST-VIEW.CSHTML")]
     [InlineData("Path1/Path2/Test-View.cshtml")]
-    public void GetView_ResolvesRelativeToAppRoot_WithRelativePath_IfNoPageExecuting(string viewName)
+    public void GetView_ResolvesRelativeToAppRoot_WithRelativePath_IfNoPageExecuting(
+        string viewName
+    )
     {
         // Arrange
-        var expectedViewName = $"/{ viewName }";
+        var expectedViewName = $"/{viewName}";
         var pageFactory = new Mock<IRazorPageFactoryProvider>();
         var page = Mock.Of<IRazorPage>();
         pageFactory
             .Setup(p => p.CreateFactory(expectedViewName))
             .Returns(GetPageFactoryResult(() => page))
             .Verifiable();
-        var viewEngine = new TestableRazorViewEngine(
-            pageFactory.Object,
-            GetOptionsAccessor());
+        var viewEngine = new TestableRazorViewEngine(pageFactory.Object, GetOptionsAccessor());
 
         // Act
-        var result = viewEngine.GetView(executingFilePath: null, viewPath: viewName, isMainPage: true);
+        var result = viewEngine.GetView(
+            executingFilePath: null,
+            viewPath: viewName,
+            isMainPage: true
+        );
 
         // Assert
         Assert.True(result.Success);
@@ -541,35 +563,36 @@ public class RazorViewEngineTest
             .Setup(p => p.CreateFactory("/Views/Home/Index.cshtml"))
             .Returns(GetPageFactoryResult(() => nonAreaPage));
 
-        var viewEngine = new TestableRazorViewEngine(
-            pageFactory.Object,
-            GetOptionsAccessor());
+        var viewEngine = new TestableRazorViewEngine(pageFactory.Object, GetOptionsAccessor());
 
         // Act 1
-        var areaContext = GetActionContext(new Dictionary<string, object>()
-            {
-                {"area", "Admin"},
-                {"controller", "Home"},
-            });
+        var areaContext = GetActionContext(
+            new Dictionary<string, object>() { { "area", "Admin" }, { "controller", "Home" }, }
+        );
         var result1 = viewEngine.FindView(areaContext, "Index", isMainPage);
 
         // Assert 1
         Assert.NotNull(result1);
-        pageFactory.Verify(p => p.CreateFactory("/Areas/Admin/Views/Home/Index.cshtml"), Times.Once());
+        pageFactory.Verify(
+            p => p.CreateFactory("/Areas/Admin/Views/Home/Index.cshtml"),
+            Times.Once()
+        );
         pageFactory.Verify(p => p.CreateFactory("/Views/Home/Index.cshtml"), Times.Never());
         var view1 = Assert.IsType<RazorView>(result1.View);
         Assert.Same(areaPage, view1.RazorPage);
 
         // Act 2
-        var nonAreaContext = GetActionContext(new Dictionary<string, object>()
-            {
-                {"controller", "Home"},
-            });
+        var nonAreaContext = GetActionContext(
+            new Dictionary<string, object>() { { "controller", "Home" }, }
+        );
         var result2 = viewEngine.FindView(nonAreaContext, "Index", isMainPage);
 
         // Assert 2
         Assert.NotNull(result2);
-        pageFactory.Verify(p => p.CreateFactory("/Areas/Admin/Views/Home/Index.cshtml"), Times.Once());
+        pageFactory.Verify(
+            p => p.CreateFactory("/Areas/Admin/Views/Home/Index.cshtml"),
+            Times.Once()
+        );
         pageFactory.Verify(p => p.CreateFactory("/Views/Home/Index.cshtml"), Times.Once());
         var view2 = Assert.IsType<RazorView>(result2.View);
         Assert.Same(nonAreaPage, view2.RazorPage);
@@ -580,7 +603,10 @@ public class RazorViewEngineTest
         var result4 = viewEngine.FindView(nonAreaContext, "Index", isMainPage);
 
         // Assert 4
-        pageFactory.Verify(p => p.CreateFactory("/Areas/Admin/Views/Home/Index.cshtml"), Times.Once());
+        pageFactory.Verify(
+            p => p.CreateFactory("/Areas/Admin/Views/Home/Index.cshtml"),
+            Times.Once()
+        );
         pageFactory.Verify(p => p.CreateFactory("/Views/Home/Index.cshtml"), Times.Once());
 
         var view3 = Assert.IsType<RazorView>(result3.View);
@@ -605,37 +631,43 @@ public class RazorViewEngineTest
             .Setup(p => p.CreateFactory("/Areas/Sales/Views/Home/Index.cshtml"))
             .Returns(GetPageFactoryResult(() => areaPage2));
 
-        var viewEngine = new TestableRazorViewEngine(
-            pageFactory.Object,
-            GetOptionsAccessor());
+        var viewEngine = new TestableRazorViewEngine(pageFactory.Object, GetOptionsAccessor());
 
         // Act 1
-        var areaContext1 = GetActionContext(new Dictionary<string, object>()
-            {
-                {"area", "Marketing"},
-                {"controller", "Home"},
-            });
+        var areaContext1 = GetActionContext(
+            new Dictionary<string, object>() { { "area", "Marketing" }, { "controller", "Home" }, }
+        );
         var result1 = viewEngine.FindView(areaContext1, "Index", isMainPage);
 
         // Assert 1
         Assert.NotNull(result1);
-        pageFactory.Verify(p => p.CreateFactory("/Areas/Marketing/Views/Home/Index.cshtml"), Times.Once());
-        pageFactory.Verify(p => p.CreateFactory("/Areas/Sales/Views/Home/Index.cshtml"), Times.Never());
+        pageFactory.Verify(
+            p => p.CreateFactory("/Areas/Marketing/Views/Home/Index.cshtml"),
+            Times.Once()
+        );
+        pageFactory.Verify(
+            p => p.CreateFactory("/Areas/Sales/Views/Home/Index.cshtml"),
+            Times.Never()
+        );
         var view1 = Assert.IsType<RazorView>(result1.View);
         Assert.Same(areaPage1, view1.RazorPage);
 
         // Act 2
-        var areaContext2 = GetActionContext(new Dictionary<string, object>()
-            {
-                {"controller", "Home"},
-                {"area", "Sales"},
-            });
+        var areaContext2 = GetActionContext(
+            new Dictionary<string, object>() { { "controller", "Home" }, { "area", "Sales" }, }
+        );
         var result2 = viewEngine.FindView(areaContext2, "Index", isMainPage);
 
         // Assert 2
         Assert.NotNull(result2);
-        pageFactory.Verify(p => p.CreateFactory("/Areas/Marketing/Views/Home/Index.cshtml"), Times.Once());
-        pageFactory.Verify(p => p.CreateFactory("/Areas/Sales/Views/Home/Index.cshtml"), Times.Once());
+        pageFactory.Verify(
+            p => p.CreateFactory("/Areas/Marketing/Views/Home/Index.cshtml"),
+            Times.Once()
+        );
+        pageFactory.Verify(
+            p => p.CreateFactory("/Areas/Sales/Views/Home/Index.cshtml"),
+            Times.Once()
+        );
         var view2 = Assert.IsType<RazorView>(result2.View);
         Assert.Same(areaPage2, view2.RazorPage);
 
@@ -645,8 +677,14 @@ public class RazorViewEngineTest
         var result4 = viewEngine.FindView(areaContext2, "Index", isMainPage);
 
         // Assert 4
-        pageFactory.Verify(p => p.CreateFactory("/Areas/Marketing/Views/Home/Index.cshtml"), Times.Once());
-        pageFactory.Verify(p => p.CreateFactory("/Areas/Sales/Views/Home/Index.cshtml"), Times.Once());
+        pageFactory.Verify(
+            p => p.CreateFactory("/Areas/Marketing/Views/Home/Index.cshtml"),
+            Times.Once()
+        );
+        pageFactory.Verify(
+            p => p.CreateFactory("/Areas/Sales/Views/Home/Index.cshtml"),
+            Times.Once()
+        );
 
         var view3 = Assert.IsType<RazorView>(result3.View);
         Assert.Same(areaPage1, view3.RazorPage);
@@ -659,11 +697,7 @@ public class RazorViewEngineTest
     {
         // Arrange
         var routeValues = _controllerTestContext;
-        var expectedSeeds = new[]
-        {
-                "/Views/{1}/{0}.cshtml",
-                "/Views/Shared/{0}.cshtml"
-            };
+        var expectedSeeds = new[] { "/Views/{1}/{0}.cshtml", "/Views/Shared/{0}.cshtml" };
 
         var pageFactory = new Mock<IRazorPageFactoryProvider>();
         pageFactory
@@ -675,39 +709,54 @@ public class RazorViewEngineTest
         var expander1 = new Mock<IViewLocationExpander>();
         expander1
             .Setup(e => e.PopulateValues(It.IsAny<ViewLocationExpanderContext>()))
-            .Callback((ViewLocationExpanderContext c) =>
-            {
-                Assert.NotNull(c.ActionContext);
-                c.Values["expander-key"] = expander1.ToString();
-            })
+            .Callback(
+                (ViewLocationExpanderContext c) =>
+                {
+                    Assert.NotNull(c.ActionContext);
+                    c.Values["expander-key"] = expander1.ToString();
+                }
+            )
             .Verifiable();
         expander1
-            .Setup(e => e.ExpandViewLocations(
-                It.IsAny<ViewLocationExpanderContext>(),
-                It.IsAny<IEnumerable<string>>()))
-            .Callback((ViewLocationExpanderContext c, IEnumerable<string> seeds) =>
-            {
-                Assert.NotNull(c.ActionContext);
-                Assert.Equal(expectedSeeds, seeds);
-            })
+            .Setup(
+                e =>
+                    e.ExpandViewLocations(
+                        It.IsAny<ViewLocationExpanderContext>(),
+                        It.IsAny<IEnumerable<string>>()
+                    )
+            )
+            .Callback(
+                (ViewLocationExpanderContext c, IEnumerable<string> seeds) =>
+                {
+                    Assert.NotNull(c.ActionContext);
+                    Assert.Equal(expectedSeeds, seeds);
+                }
+            )
             .Returns(expander1Result)
             .Verifiable();
 
         var expander2 = new Mock<IViewLocationExpander>();
         expander2
-            .Setup(e => e.ExpandViewLocations(
-                It.IsAny<ViewLocationExpanderContext>(),
-                It.IsAny<IEnumerable<string>>()))
-            .Callback((ViewLocationExpanderContext c, IEnumerable<string> seeds) =>
-            {
-                Assert.Equal(expander1Result, seeds);
-            })
+            .Setup(
+                e =>
+                    e.ExpandViewLocations(
+                        It.IsAny<ViewLocationExpanderContext>(),
+                        It.IsAny<IEnumerable<string>>()
+                    )
+            )
+            .Callback(
+                (ViewLocationExpanderContext c, IEnumerable<string> seeds) =>
+                {
+                    Assert.Equal(expander1Result, seeds);
+                }
+            )
             .Returns(new[] { "test-string/{1}.cshtml" })
             .Verifiable();
 
         var viewEngine = CreateViewEngine(
             pageFactory.Object,
-            new[] { expander1.Object, expander2.Object });
+            new[] { expander1.Object, expander2.Object }
+        );
         var context = GetActionContext(routeValues);
 
         // Act
@@ -728,10 +777,10 @@ public class RazorViewEngineTest
         var routeValues = _areaTestContext;
         var expectedSeeds = new[]
         {
-                "/Areas/{2}/Views/{1}/{0}.cshtml",
-                "/Areas/{2}/Views/Shared/{0}.cshtml",
-                "/Views/Shared/{0}.cshtml"
-            };
+            "/Areas/{2}/Views/{1}/{0}.cshtml",
+            "/Areas/{2}/Views/Shared/{0}.cshtml",
+            "/Views/Shared/{0}.cshtml"
+        };
 
         var pageFactory = new Mock<IRazorPageFactoryProvider>();
         pageFactory
@@ -743,39 +792,54 @@ public class RazorViewEngineTest
         var expander1 = new Mock<IViewLocationExpander>();
         expander1
             .Setup(e => e.PopulateValues(It.IsAny<ViewLocationExpanderContext>()))
-            .Callback((ViewLocationExpanderContext c) =>
-            {
-                Assert.NotNull(c.ActionContext);
-                c.Values["expander-key"] = expander1.ToString();
-            })
+            .Callback(
+                (ViewLocationExpanderContext c) =>
+                {
+                    Assert.NotNull(c.ActionContext);
+                    c.Values["expander-key"] = expander1.ToString();
+                }
+            )
             .Verifiable();
         expander1
-            .Setup(e => e.ExpandViewLocations(
-                It.IsAny<ViewLocationExpanderContext>(),
-                It.IsAny<IEnumerable<string>>()))
-            .Callback((ViewLocationExpanderContext c, IEnumerable<string> seeds) =>
-            {
-                Assert.NotNull(c.ActionContext);
-                Assert.Equal(expectedSeeds, seeds);
-            })
+            .Setup(
+                e =>
+                    e.ExpandViewLocations(
+                        It.IsAny<ViewLocationExpanderContext>(),
+                        It.IsAny<IEnumerable<string>>()
+                    )
+            )
+            .Callback(
+                (ViewLocationExpanderContext c, IEnumerable<string> seeds) =>
+                {
+                    Assert.NotNull(c.ActionContext);
+                    Assert.Equal(expectedSeeds, seeds);
+                }
+            )
             .Returns(expander1Result)
             .Verifiable();
 
         var expander2 = new Mock<IViewLocationExpander>();
         expander2
-            .Setup(e => e.ExpandViewLocations(
-                It.IsAny<ViewLocationExpanderContext>(),
-                It.IsAny<IEnumerable<string>>()))
-            .Callback((ViewLocationExpanderContext c, IEnumerable<string> seeds) =>
-            {
-                Assert.Equal(expander1Result, seeds);
-            })
+            .Setup(
+                e =>
+                    e.ExpandViewLocations(
+                        It.IsAny<ViewLocationExpanderContext>(),
+                        It.IsAny<IEnumerable<string>>()
+                    )
+            )
+            .Callback(
+                (ViewLocationExpanderContext c, IEnumerable<string> seeds) =>
+                {
+                    Assert.Equal(expander1Result, seeds);
+                }
+            )
             .Returns(new[] { "test-string/{1}.cshtml" })
             .Verifiable();
 
         var viewEngine = CreateViewEngine(
             pageFactory.Object,
-            new[] { expander1.Object, expander2.Object });
+            new[] { expander1.Object, expander2.Object }
+        );
         var context = GetActionContext(routeValues);
 
         // Act
@@ -801,14 +865,16 @@ public class RazorViewEngineTest
 
         var expander = new Mock<IViewLocationExpander>();
         expander
-            .Setup(e => e.ExpandViewLocations(
-                It.IsAny<ViewLocationExpanderContext>(),
-                It.IsAny<IEnumerable<string>>()))
+            .Setup(
+                e =>
+                    e.ExpandViewLocations(
+                        It.IsAny<ViewLocationExpanderContext>(),
+                        It.IsAny<IEnumerable<string>>()
+                    )
+            )
             .Returns(new[] { @"Views\Home\Index.cshtml" });
 
-        var viewEngine = CreateViewEngine(
-            pageFactory.Object,
-            new[] { expander.Object });
+        var viewEngine = CreateViewEngine(pageFactory.Object, new[] { expander.Object });
         var context = GetActionContext(new Dictionary<string, object>());
 
         // Act
@@ -831,9 +897,9 @@ public class RazorViewEngineTest
             .Returns(GetPageFactoryResult(factory: null))
             .Verifiable();
         pageFactory
-           .Setup(p => p.CreateFactory("/Views/Shared/baz.cshtml"))
-           .Returns(GetPageFactoryResult(() => page))
-           .Verifiable();
+            .Setup(p => p.CreateFactory("/Views/Shared/baz.cshtml"))
+            .Returns(GetPageFactoryResult(() => page))
+            .Verifiable();
 
         var viewEngine = CreateViewEngine(pageFactory.Object);
         var context = GetActionContext(_controllerTestContext);
@@ -849,8 +915,8 @@ public class RazorViewEngineTest
 
         // Act 2
         pageFactory
-           .Setup(p => p.CreateFactory(It.IsAny<string>()))
-           .Throws(new Exception("Shouldn't be called"));
+            .Setup(p => p.CreateFactory(It.IsAny<string>()))
+            .Throws(new Exception("Shouldn't be called"));
 
         var result2 = viewEngine.FindView(context, "baz", isMainPage: true);
 
@@ -868,9 +934,9 @@ public class RazorViewEngineTest
         var page = Mock.Of<IRazorPage>();
         var pageFactory = new Mock<IRazorPageFactoryProvider>();
         pageFactory
-           .Setup(p => p.CreateFactory("/Views/Shared/baz.cshtml"))
-           .Returns(GetPageFactoryResult(() => page))
-           .Verifiable();
+            .Setup(p => p.CreateFactory("/Views/Shared/baz.cshtml"))
+            .Returns(GetPageFactoryResult(() => page))
+            .Verifiable();
 
         var viewEngine = CreateViewEngine(pageFactory.Object);
         var context = GetActionContext(_pageTestContext);
@@ -886,8 +952,8 @@ public class RazorViewEngineTest
 
         // Act 2
         pageFactory
-           .Setup(p => p.CreateFactory(It.IsAny<string>()))
-           .Throws(new Exception("Shouldn't be called"));
+            .Setup(p => p.CreateFactory(It.IsAny<string>()))
+            .Throws(new Exception("Shouldn't be called"));
 
         var result2 = viewEngine.FindView(context, "baz", isMainPage: false);
 
@@ -914,10 +980,10 @@ public class RazorViewEngineTest
             .Setup(p => p.CreateFactory("/Views/bar/baz.cshtml"))
             .Returns(GetPageFactoryResult(factory: null, changeTokens: new[] { changeToken }));
         pageFactory
-           .InSequence(sequence)
-           .Setup(p => p.CreateFactory("/Views/Shared/baz.cshtml"))
-           .Returns(GetPageFactoryResult(() => page1))
-           .Verifiable();
+            .InSequence(sequence)
+            .Setup(p => p.CreateFactory("/Views/Shared/baz.cshtml"))
+            .Returns(GetPageFactoryResult(() => page1))
+            .Verifiable();
         pageFactory
             .InSequence(sequence)
             .Setup(p => p.CreateFactory("/Views/bar/baz.cshtml"))
@@ -953,29 +1019,28 @@ public class RazorViewEngineTest
         // Arrange
         var pageFactory = Mock.Of<IRazorPageFactoryProvider>();
         var expander = new Mock<IViewLocationExpander>();
-        var expandedLocations = new[]
-        {
-                "viewlocation1",
-                "viewlocation2",
-                "viewlocation3",
-            };
+        var expandedLocations = new[] { "viewlocation1", "viewlocation2", "viewlocation3", };
         expander
             .Setup(v => v.PopulateValues(It.IsAny<ViewLocationExpanderContext>()))
-            .Callback((ViewLocationExpanderContext expanderContext) =>
-            {
-                expanderContext.Values["somekey"] = "somevalue";
-            })
+            .Callback(
+                (ViewLocationExpanderContext expanderContext) =>
+                {
+                    expanderContext.Values["somekey"] = "somevalue";
+                }
+            )
             .Verifiable();
         expander
-            .Setup(v => v.ExpandViewLocations(
-                It.IsAny<ViewLocationExpanderContext>(),
-                It.IsAny<IEnumerable<string>>()))
+            .Setup(
+                v =>
+                    v.ExpandViewLocations(
+                        It.IsAny<ViewLocationExpanderContext>(),
+                        It.IsAny<IEnumerable<string>>()
+                    )
+            )
             .Returns(expandedLocations)
             .Verifiable();
 
-        var viewEngine = CreateViewEngine(
-            pageFactory,
-            expanders: new[] { expander.Object });
+        var viewEngine = CreateViewEngine(pageFactory, expanders: new[] { expander.Object });
         var context = GetActionContext(_controllerTestContext);
 
         // Act - 1
@@ -994,10 +1059,16 @@ public class RazorViewEngineTest
         Assert.Equal(expandedLocations, result.SearchedLocations);
         expander.Verify(
             v => v.PopulateValues(It.IsAny<ViewLocationExpanderContext>()),
-            Times.Exactly(2));
+            Times.Exactly(2)
+        );
         expander.Verify(
-            v => v.ExpandViewLocations(It.IsAny<ViewLocationExpanderContext>(), It.IsAny<IEnumerable<string>>()),
-            Times.Once());
+            v =>
+                v.ExpandViewLocations(
+                    It.IsAny<ViewLocationExpanderContext>(),
+                    It.IsAny<IEnumerable<string>>()
+                ),
+            Times.Once()
+        );
     }
 
     [Fact]
@@ -1012,29 +1083,28 @@ public class RazorViewEngineTest
             .Setup(p => p.CreateFactory("viewlocation3"))
             .Returns(GetPageFactoryResult(factory: null, changeTokens: new[] { changeToken }));
         var expander = new Mock<IViewLocationExpander>();
-        var expandedLocations = new[]
-        {
-                "viewlocation1",
-                "viewlocation2",
-                "viewlocation3",
-            };
+        var expandedLocations = new[] { "viewlocation1", "viewlocation2", "viewlocation3", };
         expander
             .Setup(v => v.PopulateValues(It.IsAny<ViewLocationExpanderContext>()))
-            .Callback((ViewLocationExpanderContext expanderContext) =>
-            {
-                expanderContext.Values["somekey"] = "somevalue";
-            })
+            .Callback(
+                (ViewLocationExpanderContext expanderContext) =>
+                {
+                    expanderContext.Values["somekey"] = "somevalue";
+                }
+            )
             .Verifiable();
         expander
-            .Setup(v => v.ExpandViewLocations(
-                It.IsAny<ViewLocationExpanderContext>(),
-                It.IsAny<IEnumerable<string>>()))
+            .Setup(
+                v =>
+                    v.ExpandViewLocations(
+                        It.IsAny<ViewLocationExpanderContext>(),
+                        It.IsAny<IEnumerable<string>>()
+                    )
+            )
             .Returns(expandedLocations)
             .Verifiable();
 
-        var viewEngine = CreateViewEngine(
-            pageFactory.Object,
-            expanders: new[] { expander.Object });
+        var viewEngine = CreateViewEngine(pageFactory.Object, expanders: new[] { expander.Object });
         var context = GetActionContext(_controllerTestContext);
 
         // Act - 1
@@ -1058,10 +1128,16 @@ public class RazorViewEngineTest
         Assert.Same(page, view.RazorPage);
         expander.Verify(
             v => v.PopulateValues(It.IsAny<ViewLocationExpanderContext>()),
-            Times.Exactly(2));
+            Times.Exactly(2)
+        );
         expander.Verify(
-            v => v.ExpandViewLocations(It.IsAny<ViewLocationExpanderContext>(), It.IsAny<IEnumerable<string>>()),
-            Times.Exactly(2));
+            v =>
+                v.ExpandViewLocations(
+                    It.IsAny<ViewLocationExpanderContext>(),
+                    It.IsAny<IEnumerable<string>>()
+                ),
+            Times.Exactly(2)
+        );
     }
 
     [Theory]
@@ -1134,7 +1210,8 @@ public class RazorViewEngineTest
         // Act & Assert
         ExceptionAssert.ThrowsArgumentNullOrEmpty(
             () => viewEngine.FindPage(context, pageName),
-            "pageName");
+            "pageName"
+        );
     }
 
     [Fact]
@@ -1142,11 +1219,7 @@ public class RazorViewEngineTest
     {
         // Arrange
         var routeValues = _controllerTestContext;
-        var expectedSeeds = new[]
-        {
-                "/Views/{1}/{0}.cshtml",
-                "/Views/Shared/{0}.cshtml"
-            };
+        var expectedSeeds = new[] { "/Views/{1}/{0}.cshtml", "/Views/Shared/{0}.cshtml" };
 
         var page = Mock.Of<IRazorPage>();
         var pageFactory = new Mock<IRazorPageFactoryProvider>();
@@ -1158,30 +1231,36 @@ public class RazorViewEngineTest
         var expander = new Mock<IViewLocationExpander>();
         expander
             .Setup(e => e.PopulateValues(It.IsAny<ViewLocationExpanderContext>()))
-            .Callback((ViewLocationExpanderContext c) =>
-            {
-                Assert.NotNull(c.ActionContext);
-                c.Values["expander-key"] = expander.ToString();
-            })
+            .Callback(
+                (ViewLocationExpanderContext c) =>
+                {
+                    Assert.NotNull(c.ActionContext);
+                    c.Values["expander-key"] = expander.ToString();
+                }
+            )
             .Verifiable();
         expander
-            .Setup(e => e.ExpandViewLocations(
-                It.IsAny<ViewLocationExpanderContext>(),
-                It.IsAny<IEnumerable<string>>()))
-            .Returns((ViewLocationExpanderContext c, IEnumerable<string> seeds) =>
-            {
-                Assert.NotNull(c.ActionContext);
-                Assert.Equal(expectedSeeds, seeds);
+            .Setup(
+                e =>
+                    e.ExpandViewLocations(
+                        It.IsAny<ViewLocationExpanderContext>(),
+                        It.IsAny<IEnumerable<string>>()
+                    )
+            )
+            .Returns(
+                (ViewLocationExpanderContext c, IEnumerable<string> seeds) =>
+                {
+                    Assert.NotNull(c.ActionContext);
+                    Assert.Equal(expectedSeeds, seeds);
 
-                Assert.Equal(expander.ToString(), c.Values["expander-key"]);
+                    Assert.Equal(expander.ToString(), c.Values["expander-key"]);
 
-                return new[] { "expanded-path/bar-{0}" };
-            })
+                    return new[] { "expanded-path/bar-{0}" };
+                }
+            )
             .Verifiable();
 
-        var viewEngine = CreateViewEngine(
-            pageFactory.Object,
-            new[] { expander.Object });
+        var viewEngine = CreateViewEngine(pageFactory.Object, new[] { expander.Object });
         var context = GetActionContext(routeValues);
 
         // Act
@@ -1202,10 +1281,10 @@ public class RazorViewEngineTest
         var routeValues = _areaTestContext;
         var expectedSeeds = new[]
         {
-                "/Areas/{2}/Views/{1}/{0}.cshtml",
-                "/Areas/{2}/Views/Shared/{0}.cshtml",
-                "/Views/Shared/{0}.cshtml"
-            };
+            "/Areas/{2}/Views/{1}/{0}.cshtml",
+            "/Areas/{2}/Views/Shared/{0}.cshtml",
+            "/Views/Shared/{0}.cshtml"
+        };
 
         var page = Mock.Of<IRazorPage>();
         var pageFactory = new Mock<IRazorPageFactoryProvider>();
@@ -1217,30 +1296,36 @@ public class RazorViewEngineTest
         var expander = new Mock<IViewLocationExpander>();
         expander
             .Setup(e => e.PopulateValues(It.IsAny<ViewLocationExpanderContext>()))
-            .Callback((ViewLocationExpanderContext c) =>
-            {
-                Assert.NotNull(c.ActionContext);
-                c.Values["expander-key"] = expander.ToString();
-            })
+            .Callback(
+                (ViewLocationExpanderContext c) =>
+                {
+                    Assert.NotNull(c.ActionContext);
+                    c.Values["expander-key"] = expander.ToString();
+                }
+            )
             .Verifiable();
         expander
-            .Setup(e => e.ExpandViewLocations(
-                It.IsAny<ViewLocationExpanderContext>(),
-                It.IsAny<IEnumerable<string>>()))
-            .Returns((ViewLocationExpanderContext c, IEnumerable<string> seeds) =>
-            {
-                Assert.NotNull(c.ActionContext);
-                Assert.Equal(expectedSeeds, seeds);
+            .Setup(
+                e =>
+                    e.ExpandViewLocations(
+                        It.IsAny<ViewLocationExpanderContext>(),
+                        It.IsAny<IEnumerable<string>>()
+                    )
+            )
+            .Returns(
+                (ViewLocationExpanderContext c, IEnumerable<string> seeds) =>
+                {
+                    Assert.NotNull(c.ActionContext);
+                    Assert.Equal(expectedSeeds, seeds);
 
-                Assert.Equal(expander.ToString(), c.Values["expander-key"]);
+                    Assert.Equal(expander.ToString(), c.Values["expander-key"]);
 
-                return new[] { "expanded-path/bar-{0}" };
-            })
+                    return new[] { "expanded-path/bar-{0}" };
+                }
+            )
             .Verifiable();
 
-        var viewEngine = CreateViewEngine(
-            pageFactory.Object,
-            new[] { expander.Object });
+        var viewEngine = CreateViewEngine(pageFactory.Object, new[] { expander.Object });
         var context = GetActionContext(routeValues);
 
         // Act
@@ -1258,11 +1343,7 @@ public class RazorViewEngineTest
     public void FindPage_ReturnsSearchedLocationsIfPageCannotBeFound()
     {
         // Arrange
-        var expected = new[]
-        {
-                "/Views/bar/layout.cshtml",
-                "/Views/Shared/layout.cshtml",
-            };
+        var expected = new[] { "/Views/bar/layout.cshtml", "/Views/Shared/layout.cshtml", };
 
         var viewEngine = CreateViewEngine();
         var context = GetActionContext(_controllerTestContext);
@@ -1282,10 +1363,7 @@ public class RazorViewEngineTest
         // The ActionDescriptor contains "Foo" and the RouteData contains "foo"
         // which matches the case of the constructor thus searching in the appropriate location.
         // Arrange
-        var routeValues = new Dictionary<string, object>
-            {
-                { "controller", "foo" }
-            };
+        var routeValues = new Dictionary<string, object> { { "controller", "foo" } };
         var page = new Mock<IRazorPage>(MockBehavior.Strict);
         var pageFactory = new Mock<IRazorPageFactoryProvider>();
         pageFactory
@@ -1294,14 +1372,9 @@ public class RazorViewEngineTest
             .Verifiable();
 
         var viewEngine = CreateViewEngine(pageFactory.Object);
-        var routesInActionDescriptor = new Dictionary<string, string>()
-            {
-                { "controller", "Foo" }
-            };
+        var routesInActionDescriptor = new Dictionary<string, string>() { { "controller", "Foo" } };
 
-        var context = GetActionContextWithActionDescriptor(
-            routeValues,
-            routesInActionDescriptor);
+        var context = GetActionContextWithActionDescriptor(routeValues, routesInActionDescriptor);
 
         // Act
         var result = viewEngine.FindPage(context, "details");
@@ -1317,25 +1390,13 @@ public class RazorViewEngineTest
     public void FindPage_LooksForPages_UsingActionDescriptor_Controller()
     {
         // Arrange
-        var expected = new[]
-        {
-                "/Views/bar/foo.cshtml",
-                "/Views/Shared/foo.cshtml",
-            };
+        var expected = new[] { "/Views/bar/foo.cshtml", "/Views/Shared/foo.cshtml", };
 
-        var routeValues = new Dictionary<string, object>
-            {
-                { "controller", "Bar" }
-            };
-        var routesInActionDescriptor = new Dictionary<string, string>()
-            {
-                { "controller", "bar" }
-            };
+        var routeValues = new Dictionary<string, object> { { "controller", "Bar" } };
+        var routesInActionDescriptor = new Dictionary<string, string>() { { "controller", "bar" } };
 
         var viewEngine = CreateViewEngine();
-        var context = GetActionContextWithActionDescriptor(
-            routeValues,
-            routesInActionDescriptor);
+        var context = GetActionContextWithActionDescriptor(routeValues, routesInActionDescriptor);
 
         // Act
         var result = viewEngine.FindPage(context, "foo");
@@ -1352,26 +1413,24 @@ public class RazorViewEngineTest
         // Arrange
         var expected = new[]
         {
-                "/Areas/world/Views/bar/foo.cshtml",
-                "/Areas/world/Views/Shared/foo.cshtml",
-                "/Views/Shared/foo.cshtml"
-            };
+            "/Areas/world/Views/bar/foo.cshtml",
+            "/Areas/world/Views/Shared/foo.cshtml",
+            "/Views/Shared/foo.cshtml"
+        };
 
         var routeValues = new Dictionary<string, object>
-            {
-                { "controller", "Bar" },
-                { "area", "World" }
-            };
+        {
+            { "controller", "Bar" },
+            { "area", "World" }
+        };
         var routesInActionDescriptor = new Dictionary<string, string>()
-            {
-                { "controller", "bar" },
-                { "area", "world" }
-            };
+        {
+            { "controller", "bar" },
+            { "area", "world" }
+        };
 
         var viewEngine = CreateViewEngine();
-        var context = GetActionContextWithActionDescriptor(
-            routeValues,
-            routesInActionDescriptor);
+        var context = GetActionContextWithActionDescriptor(routeValues, routesInActionDescriptor);
 
         // Act
         var result = viewEngine.FindPage(context, "foo");
@@ -1386,21 +1445,15 @@ public class RazorViewEngineTest
     public void FindPage_LooksForPages_UsesRouteValuesAsFallback()
     {
         // Arrange
-        var expected = new[]
-        {
-                "/Views/foo/bar.cshtml",
-                "/Views/Shared/bar.cshtml",
-            };
+        var expected = new[] { "/Views/foo/bar.cshtml", "/Views/Shared/bar.cshtml", };
 
-        var routeValues = new Dictionary<string, object>()
-            {
-                { "controller", "foo" }
-            };
+        var routeValues = new Dictionary<string, object>() { { "controller", "foo" } };
 
         var viewEngine = CreateViewEngine();
         var context = GetActionContextWithActionDescriptor(
             routeValues,
-            new Dictionary<string, string>());
+            new Dictionary<string, string>()
+        );
 
         // Act
         var result = viewEngine.FindPage(context, "bar");
@@ -1426,9 +1479,7 @@ public class RazorViewEngineTest
             .Setup(p => p.CreateFactory(pageName))
             .Returns(GetPageFactoryResult(() => page))
             .Verifiable();
-        var viewEngine = new TestableRazorViewEngine(
-            pageFactory.Object,
-            GetOptionsAccessor());
+        var viewEngine = new TestableRazorViewEngine(pageFactory.Object, GetOptionsAccessor());
 
         // Act
         var result = viewEngine.GetPage("~/Another/Place.cshtml", pagePath: pageName);
@@ -1447,16 +1498,14 @@ public class RazorViewEngineTest
     public void GetPage_ResolvesRelativeToCurrentPage_WithRelativePath(string pageName)
     {
         // Arrange
-        var expectedPageName = $"/Home/{ pageName }";
+        var expectedPageName = $"/Home/{pageName}";
         var pageFactory = new Mock<IRazorPageFactoryProvider>();
         var page = Mock.Of<IRazorPage>();
         pageFactory
             .Setup(p => p.CreateFactory(expectedPageName))
             .Returns(GetPageFactoryResult(() => page))
             .Verifiable();
-        var viewEngine = new TestableRazorViewEngine(
-            pageFactory.Object,
-            GetOptionsAccessor());
+        var viewEngine = new TestableRazorViewEngine(pageFactory.Object, GetOptionsAccessor());
 
         // Act
         var result = viewEngine.GetPage("/Home/Page.cshtml", pageName);
@@ -1472,19 +1521,19 @@ public class RazorViewEngineTest
     [InlineData("Test-View.CSHTML")]
     [InlineData("PATH/TEST-VIEW.CSHTML")]
     [InlineData("Path1/Path2/Test-View.cshtml")]
-    public void GetPage_ResolvesRelativeToAppRoot_WithRelativePath_IfNoPageExecuting(string pageName)
+    public void GetPage_ResolvesRelativeToAppRoot_WithRelativePath_IfNoPageExecuting(
+        string pageName
+    )
     {
         // Arrange
-        var expectedPageName = $"/{ pageName }";
+        var expectedPageName = $"/{pageName}";
         var pageFactory = new Mock<IRazorPageFactoryProvider>();
         var page = Mock.Of<IRazorPage>();
         pageFactory
             .Setup(p => p.CreateFactory(expectedPageName))
             .Returns(GetPageFactoryResult(() => page))
             .Verifiable();
-        var viewEngine = new TestableRazorViewEngine(
-            pageFactory.Object,
-            GetOptionsAccessor());
+        var viewEngine = new TestableRazorViewEngine(pageFactory.Object, GetOptionsAccessor());
 
         // Act
         var result = viewEngine.GetPage(executingFilePath: null, pagePath: pageName);
@@ -1506,7 +1555,10 @@ public class RazorViewEngineTest
     [InlineData("/Home/Index.cshtml", "Page")]
     [InlineData("/Home/Index.cshtml", "Folder/Page")]
     [InlineData("/Home/Index.cshtml", "Folder1/Folder2/Page")]
-    public void GetAbsolutePath_ReturnsPagePathUnchanged_IfNotAPath(string executingFilePath, string pagePath)
+    public void GetAbsolutePath_ReturnsPagePathUnchanged_IfNotAPath(
+        string executingFilePath,
+        string pagePath
+    )
     {
         // Arrange
         var viewEngine = CreateViewEngine();
@@ -1521,7 +1573,10 @@ public class RazorViewEngineTest
     [Theory]
     [InlineData("/Views/Home/Index.cshtml", "../Shared/_Partial.cshtml")]
     [InlineData("/Views/Home/Index.cshtml", "..\\Shared\\_Partial.cshtml")]
-    [InlineData("/Areas/MyArea/Views/Home/Index.cshtml", "../../../../Views/Shared/_Partial.cshtml")]
+    [InlineData(
+        "/Areas/MyArea/Views/Home/Index.cshtml",
+        "../../../../Views/Shared/_Partial.cshtml"
+    )]
     [InlineData("/Views/Accounts/Users.cshtml", "../Test/../Shared/_Partial.cshtml")]
     [InlineData("Views/Accounts/Users.cshtml", "./../Shared/./_Partial.cshtml")]
     public void GetAbsolutePath_ResolvesPathTraversals(string executingFilePath, string pagePath)
@@ -1559,7 +1614,10 @@ public class RazorViewEngineTest
     [InlineData("/Home/Index.cshtml", "~/Page")]
     [InlineData("/Home/Index.cshtml", "/Folder/Page.cshtml")]
     [InlineData("/Home/Index.cshtml", "~/Folder1/Folder2/Page.rzr")]
-    public void GetAbsolutePath_ReturnsPagePathUnchanged_IfAppRelative(string executingFilePath, string pagePath)
+    public void GetAbsolutePath_ReturnsPagePathUnchanged_IfAppRelative(
+        string executingFilePath,
+        string pagePath
+    )
     {
         // Arrange
         var viewEngine = CreateViewEngine();
@@ -1643,7 +1701,15 @@ public class RazorViewEngineTest
             RouteData = new RouteData()
         };
 
-        actionContext.RouteData.Values[key] = new DateTimeOffset(2018, 10, 31, 7, 37, 38, TimeSpan.FromHours(-7));
+        actionContext.RouteData.Values[key] = new DateTimeOffset(
+            2018,
+            10,
+            31,
+            7,
+            37,
+            38,
+            TimeSpan.FromHours(-7)
+        );
 
         // Act
         var result = RazorViewEngine.GetNormalizedRouteValue(actionContext, key);
@@ -1734,7 +1800,8 @@ public class RazorViewEngineTest
 
         var viewEngine = new TestableRazorViewEngine(
             Mock.Of<IRazorPageFactoryProvider>(),
-            GetOptionsAccessor(viewLocationFormats: expected));
+            GetOptionsAccessor(viewLocationFormats: expected)
+        );
 
         var context = new ViewLocationExpanderContext(
             new ActionContext(),
@@ -1742,7 +1809,8 @@ public class RazorViewEngineTest
             controllerName: "Home",
             areaName: null,
             pageName: "ignored",
-            isMainPage: true);
+            isMainPage: true
+        );
 
         // Act
         var actual = viewEngine.GetViewLocationFormats(context);
@@ -1759,7 +1827,8 @@ public class RazorViewEngineTest
 
         var viewEngine = new TestableRazorViewEngine(
             Mock.Of<IRazorPageFactoryProvider>(),
-            GetOptionsAccessor(areaViewLocationFormats: expected));
+            GetOptionsAccessor(areaViewLocationFormats: expected)
+        );
 
         var context = new ViewLocationExpanderContext(
             new ActionContext(),
@@ -1767,7 +1836,8 @@ public class RazorViewEngineTest
             controllerName: "Home",
             areaName: "Admin",
             pageName: "ignored",
-            isMainPage: true);
+            isMainPage: true
+        );
 
         // Act
         var actual = viewEngine.GetViewLocationFormats(context);
@@ -1784,7 +1854,8 @@ public class RazorViewEngineTest
 
         var viewEngine = new TestableRazorViewEngine(
             Mock.Of<IRazorPageFactoryProvider>(),
-            GetOptionsAccessor(pageViewLocationFormats: expected));
+            GetOptionsAccessor(pageViewLocationFormats: expected)
+        );
 
         var context = new ViewLocationExpanderContext(
             new ActionContext(),
@@ -1792,7 +1863,8 @@ public class RazorViewEngineTest
             controllerName: null,
             areaName: null,
             pageName: "/Some/Page",
-            isMainPage: true);
+            isMainPage: true
+        );
 
         // Act
         var actual = viewEngine.GetViewLocationFormats(context);
@@ -1811,7 +1883,8 @@ public class RazorViewEngineTest
 
         var viewEngine = new TestableRazorViewEngine(
             Mock.Of<IRazorPageFactoryProvider>(),
-            GetOptionsAccessor(viewLocationFormats: expected));
+            GetOptionsAccessor(viewLocationFormats: expected)
+        );
 
         var context = new ViewLocationExpanderContext(
             new ActionContext(),
@@ -1819,7 +1892,8 @@ public class RazorViewEngineTest
             controllerName: null,
             areaName: null,
             pageName: null,
-            isMainPage: true);
+            isMainPage: true
+        );
 
         // Act
         var actual = viewEngine.GetViewLocationFormats(context);
@@ -1833,26 +1907,32 @@ public class RazorViewEngineTest
     {
         // Arrange
         var routeValues = new Dictionary<string, object>
-            {
-                { "controller", "MyController" },
-                { "action", "MyAction" }
-            };
+        {
+            { "controller", "MyController" },
+            { "action", "MyAction" }
+        };
 
         var expected = new[] { "some-seed" };
         var expander = new Mock<IViewLocationExpander>();
         expander
             .Setup(e => e.PopulateValues(It.IsAny<ViewLocationExpanderContext>()))
-            .Callback((ViewLocationExpanderContext c) =>
-            {
-                Assert.Equal("MyController", c.ControllerName);
-                Assert.Null(c.PageName);
-            })
+            .Callback(
+                (ViewLocationExpanderContext c) =>
+                {
+                    Assert.Equal("MyController", c.ControllerName);
+                    Assert.Null(c.PageName);
+                }
+            )
             .Verifiable();
 
         expander
-            .Setup(e => e.ExpandViewLocations(
-                It.IsAny<ViewLocationExpanderContext>(),
-                It.IsAny<IEnumerable<string>>()))
+            .Setup(
+                e =>
+                    e.ExpandViewLocations(
+                        It.IsAny<ViewLocationExpanderContext>(),
+                        It.IsAny<IEnumerable<string>>()
+                    )
+            )
             .Returns(expected);
 
         var viewEngine = CreateViewEngine(expanders: new[] { expander.Object });
@@ -1869,25 +1949,28 @@ public class RazorViewEngineTest
     public void ViewEngine_SetsPageValue_IfItIsSpecifiedInRouteValues()
     {
         // Arrange
-        var routeValues = new Dictionary<string, object>
-            {
-                { "page", "MyPage" },
-            };
+        var routeValues = new Dictionary<string, object> { { "page", "MyPage" }, };
 
         var expected = new[] { "some-seed" };
         var expander = new Mock<IViewLocationExpander>();
         expander
             .Setup(e => e.PopulateValues(It.IsAny<ViewLocationExpanderContext>()))
-            .Callback((ViewLocationExpanderContext c) =>
-            {
-                Assert.Equal("MyPage", c.PageName);
-            })
+            .Callback(
+                (ViewLocationExpanderContext c) =>
+                {
+                    Assert.Equal("MyPage", c.PageName);
+                }
+            )
             .Verifiable();
 
         expander
-            .Setup(e => e.ExpandViewLocations(
-                It.IsAny<ViewLocationExpanderContext>(),
-                It.IsAny<IEnumerable<string>>()))
+            .Setup(
+                e =>
+                    e.ExpandViewLocations(
+                        It.IsAny<ViewLocationExpanderContext>(),
+                        It.IsAny<IEnumerable<string>>()
+                    )
+            )
             .Returns(expected);
 
         var viewEngine = CreateViewEngine(expanders: new[] { expander.Object });
@@ -1906,7 +1989,8 @@ public class RazorViewEngineTest
     {
         // Arrange
         var pageFactory = new Mock<IRazorPageFactoryProvider>();
-        pageFactory.Setup(p => p.CreateFactory("/Views/Shared/_Partial.cshtml"))
+        pageFactory
+            .Setup(p => p.CreateFactory("/Views/Shared/_Partial.cshtml"))
             .Returns(GetPageFactoryResult(() => Mock.Of<IRazorPage>()))
             .Verifiable();
         var viewEngine = CreateViewEngine(pageFactory.Object);
@@ -1924,7 +2008,8 @@ public class RazorViewEngineTest
     {
         // Arrange
         var pageFactory = new Mock<IRazorPageFactoryProvider>();
-        pageFactory.Setup(p => p.CreateFactory("/Views/Shared/_Partial.cshtml"))
+        pageFactory
+            .Setup(p => p.CreateFactory("/Views/Shared/_Partial.cshtml"))
             .Returns(GetPageFactoryResult(() => Mock.Of<IRazorPage>()))
             .Verifiable();
         var viewEngine = CreateViewEngine(pageFactory.Object);
@@ -1946,7 +2031,8 @@ public class RazorViewEngineTest
     {
         // Arrange
         var pageFactory = new Mock<IRazorPageFactoryProvider>();
-        pageFactory.Setup(p => p.CreateFactory("/Views/MyView.cshtml"))
+        pageFactory
+            .Setup(p => p.CreateFactory("/Views/MyView.cshtml"))
             .Returns(GetPageFactoryResult(() => Mock.Of<IRazorPage>()))
             .Verifiable();
         var viewEngine = CreateViewEngine(pageFactory.Object);
@@ -1964,7 +2050,8 @@ public class RazorViewEngineTest
     {
         // Arrange
         var pageFactory = new Mock<IRazorPageFactoryProvider>();
-        pageFactory.Setup(p => p.CreateFactory("/Views/MyPage.cshtml"))
+        pageFactory
+            .Setup(p => p.CreateFactory("/Views/MyPage.cshtml"))
             .Returns(GetPageFactoryResult(() => Mock.Of<IRazorPage>()))
             .Verifiable();
         var viewEngine = CreateViewEngine(pageFactory.Object);
@@ -1996,7 +2083,6 @@ public class RazorViewEngineTest
         // First verify results are typically cached
         for (var i = 0; i < 3; i++)
         {
-
             var result = viewEngine.FindView(context, "Index", isMainPage: false);
 
             // Assert - 1
@@ -2040,7 +2126,8 @@ public class RazorViewEngineTest
     private static RazorPageFactoryResult GetPageFactoryResult(
         Func<IRazorPage> factory,
         IList<IChangeToken> changeTokens = null,
-        string path = "/Views/Home/Index.cshtml")
+        string path = "/Views/Home/Index.cshtml"
+    )
     {
         var descriptor = new CompiledViewDescriptor
         {
@@ -2053,7 +2140,8 @@ public class RazorViewEngineTest
 
     private TestableRazorViewEngine CreateViewEngine(
         IRazorPageFactoryProvider pageFactory = null,
-        IEnumerable<IViewLocationExpander> expanders = null)
+        IEnumerable<IViewLocationExpander> expanders = null
+    )
     {
         pageFactory = pageFactory ?? Mock.Of<IRazorPageFactoryProvider>();
         return new TestableRazorViewEngine(pageFactory, GetOptionsAccessor(expanders));
@@ -2063,7 +2151,8 @@ public class RazorViewEngineTest
         IEnumerable<IViewLocationExpander> expanders = null,
         IEnumerable<string> viewLocationFormats = null,
         IEnumerable<string> areaViewLocationFormats = null,
-        IEnumerable<string> pageViewLocationFormats = null)
+        IEnumerable<string> pageViewLocationFormats = null
+    )
     {
         var optionsSetup = new RazorViewEngineOptionsSetup();
 
@@ -2111,9 +2200,7 @@ public class RazorViewEngineTest
         }
 
         var optionsAccessor = new Mock<IOptions<RazorViewEngineOptions>>();
-        optionsAccessor
-            .SetupGet(v => v.Value)
-            .Returns(options);
+        optionsAccessor.SetupGet(v => v.Value).Returns(options);
         return optionsAccessor.Object;
     }
 
@@ -2132,7 +2219,8 @@ public class RazorViewEngineTest
 
     private static ActionContext GetActionContextWithActionDescriptor(
         IDictionary<string, object> routeValues,
-        IDictionary<string, string> actionRouteValues)
+        IDictionary<string, string> actionRouteValues
+    )
     {
         var httpContext = new DefaultHttpContext();
         var routeData = new RouteData();
@@ -2155,10 +2243,16 @@ public class RazorViewEngineTest
     {
         public TestableRazorViewEngine(
             IRazorPageFactoryProvider pageFactory,
-            IOptions<RazorViewEngineOptions> optionsAccessor)
-            : base(pageFactory, Mock.Of<IRazorPageActivator>(), new HtmlTestEncoder(), optionsAccessor, NullLoggerFactory.Instance, new DiagnosticListener("Microsoft.AspNetCore.Mvc.Razor"))
-        {
-        }
+            IOptions<RazorViewEngineOptions> optionsAccessor
+        )
+            : base(
+                pageFactory,
+                Mock.Of<IRazorPageActivator>(),
+                new HtmlTestEncoder(),
+                optionsAccessor,
+                NullLoggerFactory.Instance,
+                new DiagnosticListener("Microsoft.AspNetCore.Mvc.Razor")
+            ) { }
 
         public IMemoryCache ViewLookupCachePublic => ViewLookupCache;
     }

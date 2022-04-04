@@ -14,14 +14,22 @@ namespace System.DirectoryServices.AccountManagement
 {
     internal sealed class SidList
     {
-        internal SidList(List<byte[]> sidListByteFormat) : this(sidListByteFormat, null, null)
-        {
-        }
+        internal SidList(List<byte[]> sidListByteFormat) : this(sidListByteFormat, null, null) { }
 
         internal SidList(List<byte[]> sidListByteFormat, string target, NetCred credentials)
         {
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "SidList", "SidList: processing {0} ByteFormat SIDs", sidListByteFormat.Count);
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "SidList", "SidList: Targetting {0} ", (target != null) ? target : "local store");
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "SidList",
+                "SidList: processing {0} ByteFormat SIDs",
+                sidListByteFormat.Count
+            );
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "SidList",
+                "SidList: Targetting {0} ",
+                (target != null) ? target : "local store"
+            );
 
             // Build the list of SIDs to resolve
             IntPtr hUser = IntPtr.Zero;
@@ -52,7 +60,12 @@ namespace System.DirectoryServices.AccountManagement
 
         internal SidList(UnsafeNativeMethods.SID_AND_ATTR[] sidAndAttr)
         {
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "SidList", "SidList: processing {0} Sid+Attr SIDs", sidAndAttr.Length);
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "SidList",
+                "SidList: processing {0} Sid+Attr SIDs",
+                sidAndAttr.Length
+            );
 
             // Build the list of SIDs to resolve
             int sidCount = sidAndAttr.Length;
@@ -68,7 +81,12 @@ namespace System.DirectoryServices.AccountManagement
 
         private void TranslateSids(string target, IntPtr[] pSids)
         {
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "AuthZSet", "SidList: processing {0} SIDs", pSids.Length);
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "AuthZSet",
+                "SidList: processing {0} SIDs",
+                pSids.Length
+            );
 
             // if there are no SIDs to translate return
             if (pSids.Length == 0)
@@ -94,47 +112,58 @@ namespace System.DirectoryServices.AccountManagement
                 //
                 // Get the policy handle
                 //
-                UnsafeNativeMethods.LSA_OBJECT_ATTRIBUTES oa = new UnsafeNativeMethods.LSA_OBJECT_ATTRIBUTES();
+                UnsafeNativeMethods.LSA_OBJECT_ATTRIBUTES oa =
+                    new UnsafeNativeMethods.LSA_OBJECT_ATTRIBUTES();
 
-                pOA = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(UnsafeNativeMethods.LSA_OBJECT_ATTRIBUTES)));
+                pOA = Marshal.AllocHGlobal(
+                    Marshal.SizeOf(typeof(UnsafeNativeMethods.LSA_OBJECT_ATTRIBUTES))
+                );
                 Marshal.StructureToPtr(oa, pOA, false);
 
                 int err = 0;
                 if (target == null)
                 {
                     err = UnsafeNativeMethods.LsaOpenPolicy(
-                                    IntPtr.Zero,
-                                    pOA,
-                                    0x800,        // POLICY_LOOKUP_NAMES
-                                    ref pPolicyHandle);
+                        IntPtr.Zero,
+                        pOA,
+                        0x800, // POLICY_LOOKUP_NAMES
+                        ref pPolicyHandle
+                    );
                 }
                 else
                 {
                     // Build an entry.  Note that LSA_UNICODE_STRING.length is in bytes,
                     // while PtrToStringUni expects a length in characters.
-                    UnsafeNativeMethods.LSA_UNICODE_STRING_Managed lsaTargetString = new UnsafeNativeMethods.LSA_UNICODE_STRING_Managed();
+                    UnsafeNativeMethods.LSA_UNICODE_STRING_Managed lsaTargetString =
+                        new UnsafeNativeMethods.LSA_UNICODE_STRING_Managed();
                     lsaTargetString.buffer = target;
                     lsaTargetString.length = (ushort)(target.Length * 2);
                     lsaTargetString.maximumLength = lsaTargetString.length;
 
-                    IntPtr lsaTargetPr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(UnsafeNativeMethods.LSA_UNICODE_STRING)));
+                    IntPtr lsaTargetPr = Marshal.AllocHGlobal(
+                        Marshal.SizeOf(typeof(UnsafeNativeMethods.LSA_UNICODE_STRING))
+                    );
 
                     try
                     {
                         Marshal.StructureToPtr(lsaTargetString, lsaTargetPr, false);
 
                         err = UnsafeNativeMethods.LsaOpenPolicy(
-                                        lsaTargetPr,
-                                        pOA,
-                                        0x800,        // POLICY_LOOKUP_NAMES
-                                        ref pPolicyHandle);
+                            lsaTargetPr,
+                            pOA,
+                            0x800, // POLICY_LOOKUP_NAMES
+                            ref pPolicyHandle
+                        );
                     }
                     finally
                     {
                         if (lsaTargetPr != IntPtr.Zero)
                         {
                             UnsafeNativeMethods.LSA_UNICODE_STRING lsaTargetUnmanagedPtr =
-                                (UnsafeNativeMethods.LSA_UNICODE_STRING)Marshal.PtrToStructure(lsaTargetPr, typeof(UnsafeNativeMethods.LSA_UNICODE_STRING));
+                                (UnsafeNativeMethods.LSA_UNICODE_STRING)Marshal.PtrToStructure(
+                                    lsaTargetPr,
+                                    typeof(UnsafeNativeMethods.LSA_UNICODE_STRING)
+                                );
                             if (lsaTargetUnmanagedPtr.buffer != IntPtr.Zero)
                             {
                                 Marshal.FreeHGlobal(lsaTargetUnmanagedPtr.buffer);
@@ -147,11 +176,19 @@ namespace System.DirectoryServices.AccountManagement
 
                 if (err != 0)
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Warn, "AuthZSet", "SidList: couldn't get policy handle, err={0}", err);
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Warn,
+                        "AuthZSet",
+                        "SidList: couldn't get policy handle, err={0}",
+                        err
+                    );
 
-                    throw new PrincipalOperationException(SR.Format(
-                                                               SR.AuthZErrorEnumeratingGroups,
-                                                               SafeNativeMethods.LsaNtStatusToWinError(err)));
+                    throw new PrincipalOperationException(
+                        SR.Format(
+                            SR.AuthZErrorEnumeratingGroups,
+                            SafeNativeMethods.LsaNtStatusToWinError(err)
+                        )
+                    );
                 }
 
                 Debug.Assert(pPolicyHandle != IntPtr.Zero);
@@ -161,23 +198,30 @@ namespace System.DirectoryServices.AccountManagement
                 //
 
                 err = UnsafeNativeMethods.LsaLookupSids(
-                                    pPolicyHandle,
-                                    sidCount,
-                                    pSids,
-                                    out pDomains,
-                                    out pNames);
+                    pPolicyHandle,
+                    sidCount,
+                    pSids,
+                    out pDomains,
+                    out pNames
+                );
 
                 // ignore error STATUS_SOME_NOT_MAPPED = 0x00000107 and
                 // STATUS_NONE_MAPPED = 0xC0000073
-                if (err != 0 &&
-                     err != 263 &&
-                     err != -1073741709)
+                if (err != 0 && err != 263 && err != -1073741709)
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Warn, "AuthZSet", "SidList: LsaLookupSids failed, err={0}", err);
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Warn,
+                        "AuthZSet",
+                        "SidList: LsaLookupSids failed, err={0}",
+                        err
+                    );
 
-                    throw new PrincipalOperationException(SR.Format(
-                                                               SR.AuthZErrorEnumeratingGroups,
-                                                               SafeNativeMethods.LsaNtStatusToWinError(err)));
+                    throw new PrincipalOperationException(
+                        SR.Format(
+                            SR.AuthZErrorEnumeratingGroups,
+                            SafeNativeMethods.LsaNtStatusToWinError(err)
+                        )
+                    );
                 }
 
                 //
@@ -188,10 +232,15 @@ namespace System.DirectoryServices.AccountManagement
 
                 for (int i = 0; i < sidCount; i++)
                 {
-                    names[i] = (UnsafeNativeMethods.LSA_TRANSLATED_NAME)
-                                    Marshal.PtrToStructure(pCurrentName, typeof(UnsafeNativeMethods.LSA_TRANSLATED_NAME));
+                    names[i] = (UnsafeNativeMethods.LSA_TRANSLATED_NAME)Marshal.PtrToStructure(
+                        pCurrentName,
+                        typeof(UnsafeNativeMethods.LSA_TRANSLATED_NAME)
+                    );
 
-                    pCurrentName = new IntPtr(pCurrentName.ToInt64() + Marshal.SizeOf(typeof(UnsafeNativeMethods.LSA_TRANSLATED_NAME)));
+                    pCurrentName = new IntPtr(
+                        pCurrentName.ToInt64()
+                            + Marshal.SizeOf(typeof(UnsafeNativeMethods.LSA_TRANSLATED_NAME))
+                    );
                 }
 
                 //
@@ -200,7 +249,11 @@ namespace System.DirectoryServices.AccountManagement
 
                 // Extract LSA_REFERENCED_DOMAIN_LIST.Entries
 
-                UnsafeNativeMethods.LSA_REFERENCED_DOMAIN_LIST referencedDomains = (UnsafeNativeMethods.LSA_REFERENCED_DOMAIN_LIST)Marshal.PtrToStructure(pDomains, typeof(UnsafeNativeMethods.LSA_REFERENCED_DOMAIN_LIST));
+                UnsafeNativeMethods.LSA_REFERENCED_DOMAIN_LIST referencedDomains =
+                    (UnsafeNativeMethods.LSA_REFERENCED_DOMAIN_LIST)Marshal.PtrToStructure(
+                        pDomains,
+                        typeof(UnsafeNativeMethods.LSA_REFERENCED_DOMAIN_LIST)
+                    );
 
                 int domainCount = referencedDomains.entries;
 
@@ -213,11 +266,23 @@ namespace System.DirectoryServices.AccountManagement
 
                 for (int i = 0; i < domainCount; i++)
                 {
-                    domains[i] = (UnsafeNativeMethods.LSA_TRUST_INFORMATION)Marshal.PtrToStructure(pCurrentDomain, typeof(UnsafeNativeMethods.LSA_TRUST_INFORMATION));
-                    pCurrentDomain = new IntPtr(pCurrentDomain.ToInt64() + Marshal.SizeOf(typeof(UnsafeNativeMethods.LSA_TRUST_INFORMATION)));
+                    domains[i] = (UnsafeNativeMethods.LSA_TRUST_INFORMATION)Marshal.PtrToStructure(
+                        pCurrentDomain,
+                        typeof(UnsafeNativeMethods.LSA_TRUST_INFORMATION)
+                    );
+                    pCurrentDomain = new IntPtr(
+                        pCurrentDomain.ToInt64()
+                            + Marshal.SizeOf(typeof(UnsafeNativeMethods.LSA_TRUST_INFORMATION))
+                    );
                 }
 
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "AuthZSet", "SidList: got {0} groups in {1} domains", sidCount, domainCount);
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "AuthZSet",
+                    "SidList: got {0} groups in {1} domains",
+                    sidCount,
+                    domainCount
+                );
 
                 //
                 // Build the list of entries
@@ -239,9 +304,14 @@ namespace System.DirectoryServices.AccountManagement
                     Debug.Assert(name.domainIndex < domains.Length);
                     if (name.domainIndex >= 0)
                     {
-                        UnsafeNativeMethods.LSA_TRUST_INFORMATION domain = domains[name.domainIndex];
+                        UnsafeNativeMethods.LSA_TRUST_INFORMATION domain = domains[
+                            name.domainIndex
+                        ];
                         Debug.Assert(domain.name.length % 2 == 0);
-                        entry.sidIssuerName = Marshal.PtrToStringUni(domain.name.buffer, domain.name.length / 2);
+                        entry.sidIssuerName = Marshal.PtrToStringUni(
+                            domain.name.buffer,
+                            domain.name.length / 2
+                        );
                     }
 
                     entry.pSid = pSids[i];
@@ -310,6 +380,7 @@ namespace System.DirectoryServices.AccountManagement
         public IntPtr pSid = IntPtr.Zero;
         public string name;
         public string sidIssuerName;
+
         //
         // IDisposable
         //

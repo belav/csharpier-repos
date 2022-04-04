@@ -10,6 +10,4 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 /// marks all subclasses of that type as page model types.
 /// </summary>
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
-public class PageModelAttribute : Attribute
-{
-}
+public class PageModelAttribute : Attribute { }

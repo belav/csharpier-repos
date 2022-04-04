@@ -31,7 +31,14 @@ internal class RedirectToHttpsRule : IRule
             }
 
             var req = context.HttpContext.Request;
-            var newUrl = UriHelper.BuildAbsolute("https", host, req.PathBase, req.Path, req.QueryString, default);
+            var newUrl = UriHelper.BuildAbsolute(
+                "https",
+                host,
+                req.PathBase,
+                req.Path,
+                req.QueryString,
+                default
+            );
             var response = context.HttpContext.Response;
             response.StatusCode = StatusCode;
             response.Headers.Location = newUrl;

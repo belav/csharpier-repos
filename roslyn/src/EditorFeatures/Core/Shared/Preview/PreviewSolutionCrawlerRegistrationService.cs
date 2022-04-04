@@ -17,7 +17,13 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Shared.Preview
 {
-    [ExportWorkspaceServiceFactory(typeof(ISolutionCrawlerRegistrationService), WorkspaceKind.Preview), Shared]
+    [
+        ExportWorkspaceServiceFactory(
+            typeof(ISolutionCrawlerRegistrationService),
+            WorkspaceKind.Preview
+        ),
+        Shared
+    ]
     internal class PreviewSolutionCrawlerRegistrationServiceFactory : IWorkspaceServiceFactory
     {
         private readonly DiagnosticAnalyzerService _analyzerService;
@@ -25,7 +31,10 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Preview
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public PreviewSolutionCrawlerRegistrationServiceFactory(IDiagnosticAnalyzerService analyzerService, IAsynchronousOperationListenerProvider listenerProvider)
+        public PreviewSolutionCrawlerRegistrationServiceFactory(
+            IDiagnosticAnalyzerService analyzerService,
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
         {
             // this service is directly tied to DiagnosticAnalyzerService and
             // depends on its implementation.
@@ -51,7 +60,10 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Preview
             // we can have states for this specific workspace.
             private Task? _analyzeTask;
 
-            public Service(PreviewSolutionCrawlerRegistrationServiceFactory owner, Workspace workspace)
+            public Service(
+                PreviewSolutionCrawlerRegistrationServiceFactory owner,
+                Workspace workspace
+            )
             {
                 _owner = owner;
                 _workspace = workspace;
@@ -66,14 +78,22 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Preview
                 // this can't be called twice
                 Contract.ThrowIfFalse(_analyzeTask == null);
 
-                var asyncToken = _owner._listener.BeginAsyncOperation(nameof(PreviewSolutionCrawlerRegistrationServiceFactory) + "." + nameof(Service) + "." + nameof(Register));
+                var asyncToken = _owner._listener.BeginAsyncOperation(
+                    nameof(PreviewSolutionCrawlerRegistrationServiceFactory)
+                        + "."
+                        + nameof(Service)
+                        + "."
+                        + nameof(Register)
+                );
                 _analyzeTask = AnalyzeAsync().CompletesAsyncOperation(asyncToken);
             }
 
             private async Task AnalyzeAsync()
             {
                 var workerBackOffTimeSpan = InternalSolutionCrawlerOptions.PreviewBackOffTimeSpan;
-                var incrementalAnalyzer = _owner._analyzerService.CreateIncrementalAnalyzer(_workspace);
+                var incrementalAnalyzer = _owner._analyzerService.CreateIncrementalAnalyzer(
+                    _workspace
+                );
 
                 var solution = _workspace.CurrentSolution;
                 var documentIds = _workspace.GetOpenDocumentIds().ToImmutableArray();
@@ -89,17 +109,38 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Preview
                         }
 
                         // delay analyzing
-                        await _owner._listener.Delay(workerBackOffTimeSpan, _source.Token).ConfigureAwait(false);
+                        await _owner._listener
+                            .Delay(workerBackOffTimeSpan, _source.Token)
+                            .ConfigureAwait(false);
 
                         // do actual analysis
                         if (textDocument is Document document)
                         {
-                            await incrementalAnalyzer.AnalyzeSyntaxAsync(document, InvocationReasons.Empty, _source.Token).ConfigureAwait(false);
-                            await incrementalAnalyzer.AnalyzeDocumentAsync(document, bodyOpt: null, reasons: InvocationReasons.Empty, cancellationToken: _source.Token).ConfigureAwait(false);
+                            await incrementalAnalyzer
+                                .AnalyzeSyntaxAsync(
+                                    document,
+                                    InvocationReasons.Empty,
+                                    _source.Token
+                                )
+                                .ConfigureAwait(false);
+                            await incrementalAnalyzer
+                                .AnalyzeDocumentAsync(
+                                    document,
+                                    bodyOpt: null,
+                                    reasons: InvocationReasons.Empty,
+                                    cancellationToken: _source.Token
+                                )
+                                .ConfigureAwait(false);
                         }
                         else if (incrementalAnalyzer is IIncrementalAnalyzer2 incrementalAnalyzer2)
                         {
-                            await incrementalAnalyzer2.AnalyzeNonSourceDocumentAsync(textDocument, InvocationReasons.Empty, _source.Token).ConfigureAwait(false);
+                            await incrementalAnalyzer2
+                                .AnalyzeNonSourceDocumentAsync(
+                                    textDocument,
+                                    InvocationReasons.Empty,
+                                    _source.Token
+                                )
+                                .ConfigureAwait(false);
                         }
 
                         // don't call project one.
@@ -111,8 +152,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Preview
                 }
             }
 
-            public void Unregister(Workspace workspace, bool blockingShutdown = false)
-                => _ = UnregisterAsync(workspace);
+            public void Unregister(Workspace workspace, bool blockingShutdown = false) =>
+                _ = UnregisterAsync(workspace);
 
             private async Task UnregisterAsync(Workspace workspace)
             {
@@ -128,7 +169,10 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Preview
                 _owner._analyzerService.ShutdownAnalyzerFrom(_workspace);
             }
 
-            public void AddAnalyzerProvider(IIncrementalAnalyzerProvider provider, IncrementalAnalyzerProviderMetadata metadata)
+            public void AddAnalyzerProvider(
+                IIncrementalAnalyzerProvider provider,
+                IncrementalAnalyzerProviderMetadata metadata
+            )
             {
                 // preview solution crawler doesn't support adding and removing analyzer dynamically
                 throw new NotSupportedException();

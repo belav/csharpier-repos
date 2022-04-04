@@ -8,7 +8,11 @@ namespace SinCalcLib
     public struct PiVal
     {
         public double Value;
-        public PiVal(double v) { Value = v; }
+
+        public PiVal(double v)
+        {
+            Value = v;
+        }
     }
 
     public class SinCalcLib
@@ -17,7 +21,10 @@ namespace SinCalcLib
 
         public static object mySin(object Angle)
         {
-            object powX, sumOfTerms, term, fact = 1.0;
+            object powX,
+                sumOfTerms,
+                term,
+                fact = 1.0;
 
             powX = term = Angle;
             sumOfTerms = 0.0;

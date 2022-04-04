@@ -50,7 +50,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         public void Example()
         {
             #region Usage
-            string json = @"[
+            string json =
+                @"[
               'One',
               'II',
               '3'

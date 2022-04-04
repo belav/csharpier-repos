@@ -16,7 +16,9 @@ namespace System.Drawing
                 throw new ArgumentNullException(nameof(stream));
             }
 
-            using DrawingCom.IStreamWrapper streamWrapper = DrawingCom.GetComWrapper(new GPStream(stream));
+            using DrawingCom.IStreamWrapper streamWrapper = DrawingCom.GetComWrapper(
+                new GPStream(stream)
+            );
 
             IntPtr bitmap = IntPtr.Zero;
             if (useIcm)

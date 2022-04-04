@@ -31,7 +31,7 @@ namespace AutoMapper.UnitTests.Mappers
 
                 var result = mapper.Map(new NameValueCollection(), (NameValueCollection)null);
 
-                result.ShouldBeEmpty(); 
+                result.ShouldBeEmpty();
             }
 
             [Fact]
@@ -48,6 +48,5 @@ namespace AutoMapper.UnitTests.Mappers
                 "bar".ShouldBe(result["foo"]);
             }
         }
-        
     }
 }

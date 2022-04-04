@@ -28,8 +28,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         public HostWorkspaceServices Services => _solution.Workspace.Services;
 
-        [PerformanceSensitive("https://github.com/dotnet/roslyn/issues/23582", OftenCompletesSynchronously = true)]
-        public async ValueTask<OptionSet> GetDocumentOptionSetAsync(SyntaxTree syntaxTree, CancellationToken cancellationToken)
+        [PerformanceSensitive(
+            "https://github.com/dotnet/roslyn/issues/23582",
+            OftenCompletesSynchronously = true
+        )]
+        public async ValueTask<OptionSet> GetDocumentOptionSetAsync(
+            SyntaxTree syntaxTree,
+            CancellationToken cancellationToken
+        )
         {
             var documentId = _solution.GetDocumentId(syntaxTree);
             if (documentId == null)
@@ -43,7 +49,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 return _solution.Options;
             }
 
-            return await document.GetOptionsAsync(_solution.Options, cancellationToken).ConfigureAwait(false);
+            return await document
+                .GetOptionsAsync(_solution.Options, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         public override bool Equals(object obj)
@@ -53,16 +61,18 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 return true;
             }
 
-            return obj is WorkspaceAnalyzerOptions other &&
-                _solution.WorkspaceVersion == other._solution.WorkspaceVersion &&
-                _solution.Workspace == other._solution.Workspace &&
-                base.Equals(other);
+            return obj is WorkspaceAnalyzerOptions other
+                && _solution.WorkspaceVersion == other._solution.WorkspaceVersion
+                && _solution.Workspace == other._solution.Workspace
+                && base.Equals(other);
         }
 
         public override int GetHashCode()
         {
-            return Hash.Combine(_solution.Workspace,
-                Hash.Combine(_solution.WorkspaceVersion, base.GetHashCode()));
+            return Hash.Combine(
+                _solution.Workspace,
+                Hash.Combine(_solution.WorkspaceVersion, base.GetHashCode())
+            );
         }
     }
 }

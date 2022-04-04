@@ -13,14 +13,13 @@ namespace System.Net.Sockets
     {
         private readonly SafeSocketHandle? _socketHandle;
 
-        public SafeNativeOverlapped()
-            : this(IntPtr.Zero)
+        public SafeNativeOverlapped() : this(IntPtr.Zero)
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this);
         }
 
-        private SafeNativeOverlapped(IntPtr handle)
-            : base(IntPtr.Zero, true)
+        private SafeNativeOverlapped(IntPtr handle) : base(IntPtr.Zero, true)
         {
             SetHandle(handle);
         }
@@ -30,7 +29,8 @@ namespace System.Net.Sockets
         {
             _socketHandle = socketHandle;
 
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"socketHandle:{socketHandle}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, $"socketHandle:{socketHandle}");
         }
 
         public override bool IsInvalid
@@ -40,7 +40,8 @@ namespace System.Net.Sockets
 
         protected override bool ReleaseHandle()
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this);
 
             FreeNativeOverlapped();
 
@@ -58,7 +59,10 @@ namespace System.Net.Sockets
                 Debug.Assert(_socketHandle != null, "_socketHandle is null.");
 
                 ThreadPoolBoundHandle? boundHandle = _socketHandle.IOCPBoundHandle;
-                Debug.Assert(boundHandle != null, "SafeNativeOverlapped::FreeNativeOverlapped - boundHandle is null");
+                Debug.Assert(
+                    boundHandle != null,
+                    "SafeNativeOverlapped::FreeNativeOverlapped - boundHandle is null"
+                );
 
                 // FreeNativeOverlapped will be called even if boundHandle was previously disposed.
                 boundHandle?.FreeNativeOverlapped((NativeOverlapped*)oldHandle);

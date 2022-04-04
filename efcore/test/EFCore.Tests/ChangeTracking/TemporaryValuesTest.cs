@@ -24,12 +24,20 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 Assert.Null(entity.ReferenceValueProperty);
 
                 Assert.True(context.Entry(entity).Property(e => e.ValueProperty).CurrentValue < 0);
-                Assert.True(context.Entry(entity).Property(e => e.NullableValueProperty).CurrentValue < 0);
-                Assert.NotNull(context.Entry(entity).Property(e => e.ReferenceValueProperty).CurrentValue);
+                Assert.True(
+                    context.Entry(entity).Property(e => e.NullableValueProperty).CurrentValue < 0
+                );
+                Assert.NotNull(
+                    context.Entry(entity).Property(e => e.ReferenceValueProperty).CurrentValue
+                );
 
                 Assert.True(context.Entry(entity).Property(e => e.ValueProperty).IsTemporary);
-                Assert.True(context.Entry(entity).Property(e => e.NullableValueProperty).IsTemporary);
-                Assert.True(context.Entry(entity).Property(e => e.ReferenceValueProperty).IsTemporary);
+                Assert.True(
+                    context.Entry(entity).Property(e => e.NullableValueProperty).IsTemporary
+                );
+                Assert.True(
+                    context.Entry(entity).Property(e => e.ReferenceValueProperty).IsTemporary
+                );
 
                 entity.ValueProperty = 77;
                 entity.NullableValueProperty = 77;
@@ -42,12 +50,22 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 Assert.Equal("Seventy Seven", entity.ReferenceValueProperty);
 
                 Assert.Equal(77, context.Entry(entity).Property(e => e.ValueProperty).CurrentValue);
-                Assert.Equal(77, context.Entry(entity).Property(e => e.NullableValueProperty).CurrentValue);
-                Assert.Equal("Seventy Seven", context.Entry(entity).Property(e => e.ReferenceValueProperty).CurrentValue);
+                Assert.Equal(
+                    77,
+                    context.Entry(entity).Property(e => e.NullableValueProperty).CurrentValue
+                );
+                Assert.Equal(
+                    "Seventy Seven",
+                    context.Entry(entity).Property(e => e.ReferenceValueProperty).CurrentValue
+                );
 
                 Assert.False(context.Entry(entity).Property(e => e.ValueProperty).IsTemporary);
-                Assert.False(context.Entry(entity).Property(e => e.NullableValueProperty).IsTemporary);
-                Assert.False(context.Entry(entity).Property(e => e.ReferenceValueProperty).IsTemporary);
+                Assert.False(
+                    context.Entry(entity).Property(e => e.NullableValueProperty).IsTemporary
+                );
+                Assert.False(
+                    context.Entry(entity).Property(e => e.ReferenceValueProperty).IsTemporary
+                );
 
                 context.Entry(entity).Property(e => e.ValueProperty).IsTemporary = true;
                 context.Entry(entity).Property(e => e.NullableValueProperty).IsTemporary = true;
@@ -58,12 +76,22 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 Assert.Equal("Seventy Seven", entity.ReferenceValueProperty);
 
                 Assert.Equal(77, context.Entry(entity).Property(e => e.ValueProperty).CurrentValue);
-                Assert.Equal(77, context.Entry(entity).Property(e => e.NullableValueProperty).CurrentValue);
-                Assert.Equal("Seventy Seven", context.Entry(entity).Property(e => e.ReferenceValueProperty).CurrentValue);
+                Assert.Equal(
+                    77,
+                    context.Entry(entity).Property(e => e.NullableValueProperty).CurrentValue
+                );
+                Assert.Equal(
+                    "Seventy Seven",
+                    context.Entry(entity).Property(e => e.ReferenceValueProperty).CurrentValue
+                );
 
                 Assert.True(context.Entry(entity).Property(e => e.ValueProperty).IsTemporary);
-                Assert.True(context.Entry(entity).Property(e => e.NullableValueProperty).IsTemporary);
-                Assert.True(context.Entry(entity).Property(e => e.ReferenceValueProperty).IsTemporary);
+                Assert.True(
+                    context.Entry(entity).Property(e => e.NullableValueProperty).IsTemporary
+                );
+                Assert.True(
+                    context.Entry(entity).Property(e => e.ReferenceValueProperty).IsTemporary
+                );
             }
         }
 
@@ -83,12 +111,20 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 Assert.Null(entity3["ReferenceValueProperty"]);
 
                 Assert.True(context.Entry(entity1).Property<int>("ValueProperty").CurrentValue < 0);
-                Assert.True(context.Entry(entity2).Property<int?>("NullableValueProperty").CurrentValue < 0);
-                Assert.NotNull(context.Entry(entity3).Property<string>("ReferenceValueProperty").CurrentValue);
+                Assert.True(
+                    context.Entry(entity2).Property<int?>("NullableValueProperty").CurrentValue < 0
+                );
+                Assert.NotNull(
+                    context.Entry(entity3).Property<string>("ReferenceValueProperty").CurrentValue
+                );
 
                 Assert.True(context.Entry(entity1).Property<int>("ValueProperty").IsTemporary);
-                Assert.True(context.Entry(entity2).Property<int?>("NullableValueProperty").IsTemporary);
-                Assert.True(context.Entry(entity3).Property<string>("ReferenceValueProperty").IsTemporary);
+                Assert.True(
+                    context.Entry(entity2).Property<int?>("NullableValueProperty").IsTemporary
+                );
+                Assert.True(
+                    context.Entry(entity3).Property<string>("ReferenceValueProperty").IsTemporary
+                );
 
                 entity1["ValueProperty"] = 77;
                 entity2["NullableValueProperty"] = 77;
@@ -98,13 +134,26 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 Assert.Equal(77, entity2["NullableValueProperty"]);
                 Assert.Equal("Seventy Seven", entity3["ReferenceValueProperty"]);
 
-                Assert.Equal(77, context.Entry(entity1).Property<int>("ValueProperty").CurrentValue);
-                Assert.Equal(77, context.Entry(entity2).Property<int?>("NullableValueProperty").CurrentValue);
-                Assert.Equal("Seventy Seven", context.Entry(entity3).Property<string>("ReferenceValueProperty").CurrentValue);
+                Assert.Equal(
+                    77,
+                    context.Entry(entity1).Property<int>("ValueProperty").CurrentValue
+                );
+                Assert.Equal(
+                    77,
+                    context.Entry(entity2).Property<int?>("NullableValueProperty").CurrentValue
+                );
+                Assert.Equal(
+                    "Seventy Seven",
+                    context.Entry(entity3).Property<string>("ReferenceValueProperty").CurrentValue
+                );
 
                 Assert.False(context.Entry(entity1).Property<int>("ValueProperty").IsTemporary);
-                Assert.False(context.Entry(entity2).Property<int?>("NullableValueProperty").IsTemporary);
-                Assert.False(context.Entry(entity3).Property<string>("ReferenceValueProperty").IsTemporary);
+                Assert.False(
+                    context.Entry(entity2).Property<int?>("NullableValueProperty").IsTemporary
+                );
+                Assert.False(
+                    context.Entry(entity3).Property<string>("ReferenceValueProperty").IsTemporary
+                );
 
                 entity1["ValueProperty"] = 78;
                 entity2["NullableValueProperty"] = 78;
@@ -114,29 +163,56 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 Assert.Equal(78, entity2["NullableValueProperty"]);
                 Assert.Equal("Seventy Eight", entity3["ReferenceValueProperty"]);
 
-                Assert.Equal(78, context.Entry(entity1).Property<int>("ValueProperty").CurrentValue);
-                Assert.Equal(78, context.Entry(entity2).Property<int?>("NullableValueProperty").CurrentValue);
-                Assert.Equal("Seventy Eight", context.Entry(entity3).Property<string>("ReferenceValueProperty").CurrentValue);
+                Assert.Equal(
+                    78,
+                    context.Entry(entity1).Property<int>("ValueProperty").CurrentValue
+                );
+                Assert.Equal(
+                    78,
+                    context.Entry(entity2).Property<int?>("NullableValueProperty").CurrentValue
+                );
+                Assert.Equal(
+                    "Seventy Eight",
+                    context.Entry(entity3).Property<string>("ReferenceValueProperty").CurrentValue
+                );
 
                 Assert.False(context.Entry(entity1).Property<int>("ValueProperty").IsTemporary);
-                Assert.False(context.Entry(entity2).Property<int?>("NullableValueProperty").IsTemporary);
-                Assert.False(context.Entry(entity3).Property<string>("ReferenceValueProperty").IsTemporary);
+                Assert.False(
+                    context.Entry(entity2).Property<int?>("NullableValueProperty").IsTemporary
+                );
+                Assert.False(
+                    context.Entry(entity3).Property<string>("ReferenceValueProperty").IsTemporary
+                );
 
                 context.Entry(entity1).Property<int>("ValueProperty").IsTemporary = true;
                 context.Entry(entity2).Property<int?>("NullableValueProperty").IsTemporary = true;
-                context.Entry(entity3).Property<string>("ReferenceValueProperty").IsTemporary = true;
+                context.Entry(entity3).Property<string>("ReferenceValueProperty").IsTemporary =
+                    true;
 
                 Assert.Equal(78, entity1["ValueProperty"]);
                 Assert.Equal(78, entity2["NullableValueProperty"]);
                 Assert.Equal("Seventy Eight", entity3["ReferenceValueProperty"]);
 
-                Assert.Equal(78, context.Entry(entity1).Property<int>("ValueProperty").CurrentValue);
-                Assert.Equal(78, context.Entry(entity2).Property<int?>("NullableValueProperty").CurrentValue);
-                Assert.Equal("Seventy Eight", context.Entry(entity3).Property<string>("ReferenceValueProperty").CurrentValue);
+                Assert.Equal(
+                    78,
+                    context.Entry(entity1).Property<int>("ValueProperty").CurrentValue
+                );
+                Assert.Equal(
+                    78,
+                    context.Entry(entity2).Property<int?>("NullableValueProperty").CurrentValue
+                );
+                Assert.Equal(
+                    "Seventy Eight",
+                    context.Entry(entity3).Property<string>("ReferenceValueProperty").CurrentValue
+                );
 
                 Assert.True(context.Entry(entity1).Property<int>("ValueProperty").IsTemporary);
-                Assert.True(context.Entry(entity2).Property<int?>("NullableValueProperty").IsTemporary);
-                Assert.True(context.Entry(entity3).Property<string>("ReferenceValueProperty").IsTemporary);
+                Assert.True(
+                    context.Entry(entity2).Property<int?>("NullableValueProperty").IsTemporary
+                );
+                Assert.True(
+                    context.Entry(entity3).Property<string>("ReferenceValueProperty").IsTemporary
+                );
             }
         }
 
@@ -154,12 +230,20 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 Assert.Null(entity["ReferenceValueProperty"]);
 
                 Assert.True(context.Entry(entity).Property<int>("ValueProperty").CurrentValue < 0);
-                Assert.True(context.Entry(entity).Property<int?>("NullableValueProperty").CurrentValue < 0);
-                Assert.NotNull(context.Entry(entity).Property<string>("ReferenceValueProperty").CurrentValue);
+                Assert.True(
+                    context.Entry(entity).Property<int?>("NullableValueProperty").CurrentValue < 0
+                );
+                Assert.NotNull(
+                    context.Entry(entity).Property<string>("ReferenceValueProperty").CurrentValue
+                );
 
                 Assert.True(context.Entry(entity).Property<int>("ValueProperty").IsTemporary);
-                Assert.True(context.Entry(entity).Property<int?>("NullableValueProperty").IsTemporary);
-                Assert.True(context.Entry(entity).Property<string>("ReferenceValueProperty").IsTemporary);
+                Assert.True(
+                    context.Entry(entity).Property<int?>("NullableValueProperty").IsTemporary
+                );
+                Assert.True(
+                    context.Entry(entity).Property<string>("ReferenceValueProperty").IsTemporary
+                );
 
                 entity["ValueProperty"] = 77;
                 entity["NullableValueProperty"] = 77;
@@ -170,12 +254,22 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 Assert.Equal("Seventy Seven", entity["ReferenceValueProperty"]);
 
                 Assert.Equal(77, context.Entry(entity).Property<int>("ValueProperty").CurrentValue);
-                Assert.Equal(77, context.Entry(entity).Property<int?>("NullableValueProperty").CurrentValue);
-                Assert.Equal("Seventy Seven", context.Entry(entity).Property<string>("ReferenceValueProperty").CurrentValue);
+                Assert.Equal(
+                    77,
+                    context.Entry(entity).Property<int?>("NullableValueProperty").CurrentValue
+                );
+                Assert.Equal(
+                    "Seventy Seven",
+                    context.Entry(entity).Property<string>("ReferenceValueProperty").CurrentValue
+                );
 
                 Assert.False(context.Entry(entity).Property<int>("ValueProperty").IsTemporary);
-                Assert.False(context.Entry(entity).Property<int?>("NullableValueProperty").IsTemporary);
-                Assert.False(context.Entry(entity).Property<string>("ReferenceValueProperty").IsTemporary);
+                Assert.False(
+                    context.Entry(entity).Property<int?>("NullableValueProperty").IsTemporary
+                );
+                Assert.False(
+                    context.Entry(entity).Property<string>("ReferenceValueProperty").IsTemporary
+                );
 
                 entity["ValueProperty"] = 78;
                 entity["NullableValueProperty"] = 78;
@@ -186,12 +280,22 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 Assert.Equal("Seventy Eight", entity["ReferenceValueProperty"]);
 
                 Assert.Equal(78, context.Entry(entity).Property<int>("ValueProperty").CurrentValue);
-                Assert.Equal(78, context.Entry(entity).Property<int?>("NullableValueProperty").CurrentValue);
-                Assert.Equal("Seventy Eight", context.Entry(entity).Property<string>("ReferenceValueProperty").CurrentValue);
+                Assert.Equal(
+                    78,
+                    context.Entry(entity).Property<int?>("NullableValueProperty").CurrentValue
+                );
+                Assert.Equal(
+                    "Seventy Eight",
+                    context.Entry(entity).Property<string>("ReferenceValueProperty").CurrentValue
+                );
 
                 Assert.False(context.Entry(entity).Property<int>("ValueProperty").IsTemporary);
-                Assert.False(context.Entry(entity).Property<int?>("NullableValueProperty").IsTemporary);
-                Assert.False(context.Entry(entity).Property<string>("ReferenceValueProperty").IsTemporary);
+                Assert.False(
+                    context.Entry(entity).Property<int?>("NullableValueProperty").IsTemporary
+                );
+                Assert.False(
+                    context.Entry(entity).Property<string>("ReferenceValueProperty").IsTemporary
+                );
 
                 context.Entry(entity).Property<int>("ValueProperty").IsTemporary = true;
                 context.Entry(entity).Property<int?>("NullableValueProperty").IsTemporary = true;
@@ -202,12 +306,22 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 Assert.Equal("Seventy Eight", entity["ReferenceValueProperty"]);
 
                 Assert.Equal(78, context.Entry(entity).Property<int>("ValueProperty").CurrentValue);
-                Assert.Equal(78, context.Entry(entity).Property<int?>("NullableValueProperty").CurrentValue);
-                Assert.Equal("Seventy Eight", context.Entry(entity).Property<string>("ReferenceValueProperty").CurrentValue);
+                Assert.Equal(
+                    78,
+                    context.Entry(entity).Property<int?>("NullableValueProperty").CurrentValue
+                );
+                Assert.Equal(
+                    "Seventy Eight",
+                    context.Entry(entity).Property<string>("ReferenceValueProperty").CurrentValue
+                );
 
                 Assert.True(context.Entry(entity).Property<int>("ValueProperty").IsTemporary);
-                Assert.True(context.Entry(entity).Property<int?>("NullableValueProperty").IsTemporary);
-                Assert.True(context.Entry(entity).Property<string>("ReferenceValueProperty").IsTemporary);
+                Assert.True(
+                    context.Entry(entity).Property<int?>("NullableValueProperty").IsTemporary
+                );
+                Assert.True(
+                    context.Entry(entity).Property<string>("ReferenceValueProperty").IsTemporary
+                );
             }
         }
 
@@ -293,7 +407,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                         b.Property(e => e.ReferenceValueProperty)
                             .ValueGeneratedOnAdd()
                             .HasValueGenerator<TemporaryStringValueGenerator>();
-                    });
+                    }
+                );
 
                 modelBuilder.Entity<EntityWithIndexersAsObject>(
                     b =>
@@ -309,7 +424,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                         b.IndexerProperty<string>("ReferenceValueProperty")
                             .ValueGeneratedOnAdd()
                             .HasValueGenerator<TemporaryStringValueGenerator>();
-                    });
+                    }
+                );
 
                 modelBuilder.Entity<EntityWithIndexerValueProperty>(
                     b =>
@@ -317,7 +433,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                         b.IndexerProperty<int>("ValueProperty")
                             .ValueGeneratedOnAdd()
                             .HasValueGenerator<TemporaryIntValueGenerator>();
-                    });
+                    }
+                );
 
                 modelBuilder.Entity<EntityWithIndexerNullableValueProperty>(
                     b =>
@@ -325,7 +442,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                         b.IndexerProperty<int?>("NullableValueProperty")
                             .ValueGeneratedOnAdd()
                             .HasValueGenerator<TemporaryIntValueGenerator>();
-                    });
+                    }
+                );
 
                 modelBuilder.Entity<EntityWithIndexerReferenceProperty>(
                     b =>
@@ -333,16 +451,15 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                         b.IndexerProperty<string>("ReferenceValueProperty")
                             .ValueGeneratedOnAdd()
                             .HasValueGenerator<TemporaryStringValueGenerator>();
-                    });
+                    }
+                );
             }
 
             private class TemporaryStringValueGenerator : ValueGenerator<string>
             {
-                public override bool GeneratesTemporaryValues
-                    => true;
+                public override bool GeneratesTemporaryValues => true;
 
-                public override string Next(EntityEntry entry)
-                    => Guid.NewGuid().ToString();
+                public override string Next(EntityEntry entry) => Guid.NewGuid().ToString();
             }
         }
     }

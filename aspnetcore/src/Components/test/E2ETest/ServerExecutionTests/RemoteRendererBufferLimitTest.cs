@@ -17,10 +17,10 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests;
 [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/19666")]
 public class RemoteRendererBufferLimitTest : IgnitorTest<ServerStartup>
 {
-    public RemoteRendererBufferLimitTest(BasicTestAppServerSiteFixture<ServerStartup> serverFixture, ITestOutputHelper output)
-        : base(serverFixture, output)
-    {
-    }
+    public RemoteRendererBufferLimitTest(
+        BasicTestAppServerSiteFixture<ServerStartup> serverFixture,
+        ITestOutputHelper output
+    ) : base(serverFixture, output) { }
 
     [Fact(Skip = "https://github.com/dotnet/aspnetcore/issues/19666")]
     public async Task DispatchedEventsWillKeepBeingProcessed_ButUpdatedWillBeDelayedUntilARenderIsAcknowledged()
@@ -38,14 +38,27 @@ public class RemoteRendererBufferLimitTest : IgnitorTest<ServerStartup>
         }
         await Client.ClickAsync("increment", expectRenderBatch: false);
 
-        Assert.Single(Logs, l => (LogLevel.Debug, "The queue of unacknowledged render batches is full.") == (l.LogLevel, l.Message));
-        Assert.Equal("10", ((TextNode)Client.FindElementById("the-count").Children.Single()).TextContent);
+        Assert.Single(
+            Logs,
+            l =>
+                (LogLevel.Debug, "The queue of unacknowledged render batches is full.")
+                == (l.LogLevel, l.Message)
+        );
+        Assert.Equal(
+            "10",
+            ((TextNode)Client.FindElementById("the-count").Children.Single()).TextContent
+        );
         var fullCount = Batches.Count;
 
         // Act
         await Client.ClickAsync("increment", expectRenderBatch: false);
 
-        Assert.Contains(Logs, l => (LogLevel.Debug, "The queue of unacknowledged render batches is full.") == (l.LogLevel, l.Message));
+        Assert.Contains(
+            Logs,
+            l =>
+                (LogLevel.Debug, "The queue of unacknowledged render batches is full.")
+                == (l.LogLevel, l.Message)
+        );
         Assert.Equal(fullCount, Batches.Count);
         Client.ConfirmRenderBatch = true;
 
@@ -53,7 +66,10 @@ public class RemoteRendererBufferLimitTest : IgnitorTest<ServerStartup>
         await Client.ExpectRenderBatch(() => Client.ConfirmBatch(Batches.Last().Id));
 
         // Assert
-        Assert.Equal("12", ((TextNode)Client.FindElementById("the-count").Children.Single()).TextContent);
+        Assert.Equal(
+            "12",
+            ((TextNode)Client.FindElementById("the-count").Children.Single()).TextContent
+        );
         Assert.Equal(fullCount + 1, Batches.Count);
     }
 }
