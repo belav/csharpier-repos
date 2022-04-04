@@ -280,9 +280,8 @@ public class ResponseCacheAttributeTest
             VaryByHeader = "Accept",
             VaryByQueryKeys = varyByQueryKeys
         };
-        var filter = (ResponseCacheFilter)responseCache.CreateInstance(
-            GetServiceProvider(cacheProfiles: null)
-        );
+        var filter = (ResponseCacheFilter)
+            responseCache.CreateInstance(GetServiceProvider(cacheProfiles: null));
         var context = GetActionExecutingContext(filter);
         context.HttpContext.Features.Set<IResponseCachingFeature>(new ResponseCachingFeature());
 
@@ -351,9 +350,8 @@ public class ResponseCacheAttributeTest
     )
     {
         // Arrange
-        var filter = (ResponseCacheFilter)responseCacheAttribute.CreateInstance(
-            GetServiceProvider(cacheProfiles: null)
-        );
+        var filter = (ResponseCacheFilter)
+            responseCacheAttribute.CreateInstance(GetServiceProvider(cacheProfiles: null));
         var context = GetActionExecutingContext(filter);
 
         // Act
@@ -371,9 +369,8 @@ public class ResponseCacheAttributeTest
     {
         // Arrange
         var responseCacheAttribute = new ResponseCacheAttribute() { Duration = 40 };
-        var filter = (ResponseCacheFilter)responseCacheAttribute.CreateInstance(
-            GetServiceProvider(cacheProfiles: null)
-        );
+        var filter = (ResponseCacheFilter)
+            responseCacheAttribute.CreateInstance(GetServiceProvider(cacheProfiles: null));
         var context = GetActionExecutingContext(filter);
 
         // Act
@@ -391,9 +388,8 @@ public class ResponseCacheAttributeTest
     {
         // Arrange
         var responseCacheAttribute = new ResponseCacheAttribute() { VaryByHeader = "Accept" };
-        var filter = (ResponseCacheFilter)responseCacheAttribute.CreateInstance(
-            GetServiceProvider(cacheProfiles: null)
-        );
+        var filter = (ResponseCacheFilter)
+            responseCacheAttribute.CreateInstance(GetServiceProvider(cacheProfiles: null));
         var context = GetActionExecutingContext(filter);
 
         // Act & Assert

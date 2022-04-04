@@ -372,9 +372,10 @@ namespace System.Reflection
                     null,
                     null
                 )!;
-                m_ctor = (RuntimeConstructorInfo)scope
-                    .ResolveMethod(caCtorToken, attributeType.GenericTypeArguments, null)!
-                    .MethodHandle.GetMethodInfo();
+                m_ctor = (RuntimeConstructorInfo)
+                    scope
+                        .ResolveMethod(caCtorToken, attributeType.GenericTypeArguments, null)!
+                        .MethodHandle.GetMethodInfo();
             }
 
             ParameterInfo[] parameters = m_ctor.GetParametersNoCopy();

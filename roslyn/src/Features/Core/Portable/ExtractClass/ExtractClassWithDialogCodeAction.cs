@@ -272,10 +272,8 @@ namespace Microsoft.CodeAnalysis.ExtractClass
                 .ConfigureAwait(false);
             var declarationNode = root.GetAnnotatedNodes(typeAnnotation).Single();
 
-            return (INamedTypeSymbol)semanticModel.GetRequiredDeclaredSymbol(
-                declarationNode,
-                cancellationToken
-            );
+            return (INamedTypeSymbol)
+                semanticModel.GetRequiredDeclaredSymbol(declarationNode, cancellationToken);
         }
 
         private static async Task<Solution> GetSolutionWithBaseAddedAsync(

@@ -122,8 +122,8 @@ class TestClass
                     newMsCorLib_debuggerTypeProxyAttributeType
                 );
 
-                oldMsCorLib_debuggerTypeProxyAttributeCtor =
-                    (MethodSymbol)oldMsCorLib_debuggerTypeProxyAttributeType
+                oldMsCorLib_debuggerTypeProxyAttributeCtor = (MethodSymbol)
+                    oldMsCorLib_debuggerTypeProxyAttributeType
                         .GetMembers(".ctor")
                         .Single(
                             m =>
@@ -135,8 +135,8 @@ class TestClass
                                 )
                         );
 
-                newMsCorLib_debuggerTypeProxyAttributeCtor =
-                    (MethodSymbol)newMsCorLib_debuggerTypeProxyAttributeType
+                newMsCorLib_debuggerTypeProxyAttributeCtor = (MethodSymbol)
+                    newMsCorLib_debuggerTypeProxyAttributeType
                         .GetMembers(".ctor")
                         .Single(
                             m =>

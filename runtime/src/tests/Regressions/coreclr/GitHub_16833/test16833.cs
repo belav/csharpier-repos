@@ -517,10 +517,11 @@ namespace TestShufflingThunk
             string result;
 
             var func1 =
-                (Func<int, int, int, int, SLongLong, int, string>)Delegate.CreateDelegate(
-                    typeof(Func<int, int, int, int, SLongLong, int, string>),
-                    typeof(TestClass).GetMethod(nameof(TestClass.Test1))
-                );
+                (Func<int, int, int, int, SLongLong, int, string>)
+                    Delegate.CreateDelegate(
+                        typeof(Func<int, int, int, int, SLongLong, int, string>),
+                        typeof(TestClass).GetMethod(nameof(TestClass.Test1))
+                    );
 
             SLongLong s1 = new SLongLong { x = 5, y = 6 };
             result = func1(1, 2, 3, 4, s1, 7);
@@ -550,28 +551,29 @@ namespace TestShufflingThunk
                     double,
                     int,
                     string
-                >)Delegate.CreateDelegate(
-                    typeof(Func<
-                        int,
-                        int,
-                        int,
-                        int,
-                        SIntDouble,
-                        double,
-                        double,
-                        double,
-                        double,
-                        double,
-                        double,
-                        double,
-                        double,
-                        double,
-                        double,
-                        int,
-                        string
-                    >),
-                    typeof(TestClass).GetMethod(nameof(TestClass.Test2))
-                );
+                >)
+                    Delegate.CreateDelegate(
+                        typeof(Func<
+                            int,
+                            int,
+                            int,
+                            int,
+                            SIntDouble,
+                            double,
+                            double,
+                            double,
+                            double,
+                            double,
+                            double,
+                            double,
+                            double,
+                            double,
+                            double,
+                            int,
+                            string
+                        >),
+                        typeof(TestClass).GetMethod(nameof(TestClass.Test2))
+                    );
 
             SIntDouble s2 = new SIntDouble { x = 5, y = 6.0 };
             result = func2(
@@ -600,10 +602,11 @@ namespace TestShufflingThunk
             );
 
             var func3 =
-                (Func<int, int, int, int, int, SInt, int, string>)Delegate.CreateDelegate(
-                    typeof(Func<int, int, int, int, int, SInt, int, string>),
-                    typeof(TestClass).GetMethod(nameof(TestClass.Test3))
-                );
+                (Func<int, int, int, int, int, SInt, int, string>)
+                    Delegate.CreateDelegate(
+                        typeof(Func<int, int, int, int, int, SInt, int, string>),
+                        typeof(TestClass).GetMethod(nameof(TestClass.Test3))
+                    );
 
             SInt s3 = new SInt { x = 6 };
             result = func3(1, 2, 3, 4, 5, s3, 7);
@@ -615,10 +618,11 @@ namespace TestShufflingThunk
             );
 
             var func4 =
-                (Func<int, int, int, int, SIntDouble, double, string>)Delegate.CreateDelegate(
-                    typeof(Func<int, int, int, int, SIntDouble, double, string>),
-                    typeof(TestClass).GetMethod(nameof(TestClass.Test4))
-                );
+                (Func<int, int, int, int, SIntDouble, double, string>)
+                    Delegate.CreateDelegate(
+                        typeof(Func<int, int, int, int, SIntDouble, double, string>),
+                        typeof(TestClass).GetMethod(nameof(TestClass.Test4))
+                    );
 
             SIntDouble s4 = new SIntDouble { x = 5, y = 6.0 };
             result = func4(1, 2, 3, 4, s4, 7.0);
@@ -630,10 +634,11 @@ namespace TestShufflingThunk
             );
 
             var func5 =
-                (Func<int, int, int, int, SLongLong, string>)Delegate.CreateDelegate(
-                    typeof(Func<int, int, int, int, SLongLong, string>),
-                    typeof(TestClass).GetMethod(nameof(TestClass.Test5))
-                );
+                (Func<int, int, int, int, SLongLong, string>)
+                    Delegate.CreateDelegate(
+                        typeof(Func<int, int, int, int, SLongLong, string>),
+                        typeof(TestClass).GetMethod(nameof(TestClass.Test5))
+                    );
 
             SLongLong s5 = new SLongLong { x = 5, y = 6 };
             result = func5(1, 2, 3, 4, s1);
@@ -663,28 +668,29 @@ namespace TestShufflingThunk
                     double,
                     double,
                     string
-                >)Delegate.CreateDelegate(
-                    typeof(Func<
-                        int,
-                        int,
-                        int,
-                        int,
-                        int,
-                        SIntDouble,
-                        double,
-                        double,
-                        double,
-                        double,
-                        double,
-                        double,
-                        double,
-                        double,
-                        double,
-                        double,
-                        string
-                    >),
-                    typeof(TestClass).GetMethod(nameof(TestClass.Test6))
-                );
+                >)
+                    Delegate.CreateDelegate(
+                        typeof(Func<
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            SIntDouble,
+                            double,
+                            double,
+                            double,
+                            double,
+                            double,
+                            double,
+                            double,
+                            double,
+                            double,
+                            double,
+                            string
+                        >),
+                        typeof(TestClass).GetMethod(nameof(TestClass.Test6))
+                    );
 
             SIntDouble s6 = new SIntDouble { x = 6, y = 7.0 };
             result = func6(
@@ -715,20 +721,12 @@ namespace TestShufflingThunk
             TestClass tc = new TestClass();
 
             var func1m =
-                (Func<
-                    TestClass,
-                    int,
-                    int,
-                    int,
-                    int,
-                    SLongLong,
-                    int,
-                    string
-                >)Delegate.CreateDelegate(
-                    typeof(Func<TestClass, int, int, int, int, SLongLong, int, string>),
-                    null,
-                    typeof(TestClass).GetMethod(nameof(TestClass.Test1M))
-                );
+                (Func<TestClass, int, int, int, int, SLongLong, int, string>)
+                    Delegate.CreateDelegate(
+                        typeof(Func<TestClass, int, int, int, int, SLongLong, int, string>),
+                        null,
+                        typeof(TestClass).GetMethod(nameof(TestClass.Test1M))
+                    );
 
             result = func1m(tc, 1, 2, 3, 4, s1, 7);
             CheckResult(
@@ -738,11 +736,12 @@ namespace TestShufflingThunk
                 "Test1M: i1, 2, 3, 4, [5, 6], 7"
             );
 
-            var func2m = (Delegate2m)Delegate.CreateDelegate(
-                typeof(Delegate2m),
-                null,
-                typeof(TestClass).GetMethod(nameof(TestClass.Test2M))
-            );
+            var func2m = (Delegate2m)
+                Delegate.CreateDelegate(
+                    typeof(Delegate2m),
+                    null,
+                    typeof(TestClass).GetMethod(nameof(TestClass.Test2M))
+                );
 
             result = func2m(
                 tc,
@@ -771,21 +770,12 @@ namespace TestShufflingThunk
             );
 
             var func3m =
-                (Func<
-                    TestClass,
-                    int,
-                    int,
-                    int,
-                    int,
-                    int,
-                    SInt,
-                    int,
-                    string
-                >)Delegate.CreateDelegate(
-                    typeof(Func<TestClass, int, int, int, int, int, SInt, int, string>),
-                    null,
-                    typeof(TestClass).GetMethod(nameof(TestClass.Test3M))
-                );
+                (Func<TestClass, int, int, int, int, int, SInt, int, string>)
+                    Delegate.CreateDelegate(
+                        typeof(Func<TestClass, int, int, int, int, int, SInt, int, string>),
+                        null,
+                        typeof(TestClass).GetMethod(nameof(TestClass.Test3M))
+                    );
 
             result = func3m(tc, 1, 2, 3, 4, 5, s3, 7);
             CheckResult(
@@ -796,20 +786,12 @@ namespace TestShufflingThunk
             );
 
             var func4m =
-                (Func<
-                    TestClass,
-                    int,
-                    int,
-                    int,
-                    int,
-                    SIntDouble,
-                    double,
-                    string
-                >)Delegate.CreateDelegate(
-                    typeof(Func<TestClass, int, int, int, int, SIntDouble, double, string>),
-                    null,
-                    typeof(TestClass).GetMethod(nameof(TestClass.Test4M))
-                );
+                (Func<TestClass, int, int, int, int, SIntDouble, double, string>)
+                    Delegate.CreateDelegate(
+                        typeof(Func<TestClass, int, int, int, int, SIntDouble, double, string>),
+                        null,
+                        typeof(TestClass).GetMethod(nameof(TestClass.Test4M))
+                    );
 
             result = func4m(tc, 1, 2, 3, 4, s4, 7.0);
             CheckResult(
@@ -820,11 +802,12 @@ namespace TestShufflingThunk
             );
 
             var func5m =
-                (Func<TestClass, int, int, int, int, SLongLong, string>)Delegate.CreateDelegate(
-                    typeof(Func<TestClass, int, int, int, int, SLongLong, string>),
-                    null,
-                    typeof(TestClass).GetMethod(nameof(TestClass.Test5M))
-                );
+                (Func<TestClass, int, int, int, int, SLongLong, string>)
+                    Delegate.CreateDelegate(
+                        typeof(Func<TestClass, int, int, int, int, SLongLong, string>),
+                        null,
+                        typeof(TestClass).GetMethod(nameof(TestClass.Test5M))
+                    );
 
             result = func5m(tc, 1, 2, 3, 4, s1);
             CheckResult(
@@ -834,11 +817,12 @@ namespace TestShufflingThunk
                 "Test5M: i1, 2, 3, 4, [5, 6]"
             );
 
-            var func6m = (Delegate6m)Delegate.CreateDelegate(
-                typeof(Delegate6m),
-                null,
-                typeof(TestClass).GetMethod(nameof(TestClass.Test6M))
-            );
+            var func6m = (Delegate6m)
+                Delegate.CreateDelegate(
+                    typeof(Delegate6m),
+                    null,
+                    typeof(TestClass).GetMethod(nameof(TestClass.Test6M))
+                );
 
             result = func6m(
                 tc,
@@ -867,18 +851,11 @@ namespace TestShufflingThunk
             );
 
             var func1rb =
-                (Func<
-                    int,
-                    int,
-                    int,
-                    int,
-                    SLongLong,
-                    int,
-                    SLargeReturnStruct
-                >)Delegate.CreateDelegate(
-                    typeof(Func<int, int, int, int, SLongLong, int, SLargeReturnStruct>),
-                    typeof(TestClass).GetMethod(nameof(TestClass.Test1RB))
-                );
+                (Func<int, int, int, int, SLongLong, int, SLargeReturnStruct>)
+                    Delegate.CreateDelegate(
+                        typeof(Func<int, int, int, int, SLongLong, int, SLargeReturnStruct>),
+                        typeof(TestClass).GetMethod(nameof(TestClass.Test1RB))
+                    );
 
             SLargeReturnStruct result1 = func1rb(1, 2, 3, 4, s1, 7);
             CheckResult(
@@ -907,28 +884,29 @@ namespace TestShufflingThunk
                     double,
                     int,
                     SLargeReturnStruct
-                >)Delegate.CreateDelegate(
-                    typeof(Func<
-                        int,
-                        int,
-                        int,
-                        int,
-                        SIntDouble,
-                        double,
-                        double,
-                        double,
-                        double,
-                        double,
-                        double,
-                        double,
-                        double,
-                        double,
-                        double,
-                        int,
-                        SLargeReturnStruct
-                    >),
-                    typeof(TestClass).GetMethod(nameof(TestClass.Test2RB))
-                );
+                >)
+                    Delegate.CreateDelegate(
+                        typeof(Func<
+                            int,
+                            int,
+                            int,
+                            int,
+                            SIntDouble,
+                            double,
+                            double,
+                            double,
+                            double,
+                            double,
+                            double,
+                            double,
+                            double,
+                            double,
+                            double,
+                            int,
+                            SLargeReturnStruct
+                        >),
+                        typeof(TestClass).GetMethod(nameof(TestClass.Test2RB))
+                    );
 
             SLargeReturnStruct result2 = func2rb(
                 1,
@@ -956,19 +934,11 @@ namespace TestShufflingThunk
             );
 
             var func3rb =
-                (Func<
-                    int,
-                    int,
-                    int,
-                    int,
-                    int,
-                    SInt,
-                    int,
-                    SLargeReturnStruct
-                >)Delegate.CreateDelegate(
-                    typeof(Func<int, int, int, int, int, SInt, int, SLargeReturnStruct>),
-                    typeof(TestClass).GetMethod(nameof(TestClass.Test3RB))
-                );
+                (Func<int, int, int, int, int, SInt, int, SLargeReturnStruct>)
+                    Delegate.CreateDelegate(
+                        typeof(Func<int, int, int, int, int, SInt, int, SLargeReturnStruct>),
+                        typeof(TestClass).GetMethod(nameof(TestClass.Test3RB))
+                    );
 
             SLargeReturnStruct result3 = func3rb(1, 2, 3, 4, 5, s3, 7);
             CheckResult(
@@ -979,18 +949,11 @@ namespace TestShufflingThunk
             );
 
             var func4rb =
-                (Func<
-                    int,
-                    int,
-                    int,
-                    int,
-                    SIntDouble,
-                    double,
-                    SLargeReturnStruct
-                >)Delegate.CreateDelegate(
-                    typeof(Func<int, int, int, int, SIntDouble, double, SLargeReturnStruct>),
-                    typeof(TestClass).GetMethod(nameof(TestClass.Test4RB))
-                );
+                (Func<int, int, int, int, SIntDouble, double, SLargeReturnStruct>)
+                    Delegate.CreateDelegate(
+                        typeof(Func<int, int, int, int, SIntDouble, double, SLargeReturnStruct>),
+                        typeof(TestClass).GetMethod(nameof(TestClass.Test4RB))
+                    );
 
             SLargeReturnStruct result4 = func4rb(1, 2, 3, 4, s4, 7.0);
             CheckResult(
@@ -1001,10 +964,11 @@ namespace TestShufflingThunk
             );
 
             var func5rb =
-                (Func<int, int, int, int, SLongLong, SLargeReturnStruct>)Delegate.CreateDelegate(
-                    typeof(Func<int, int, int, int, SLongLong, SLargeReturnStruct>),
-                    typeof(TestClass).GetMethod(nameof(TestClass.Test5RB))
-                );
+                (Func<int, int, int, int, SLongLong, SLargeReturnStruct>)
+                    Delegate.CreateDelegate(
+                        typeof(Func<int, int, int, int, SLongLong, SLargeReturnStruct>),
+                        typeof(TestClass).GetMethod(nameof(TestClass.Test5RB))
+                    );
 
             SLargeReturnStruct result5 = func5rb(1, 2, 3, 4, s1);
             CheckResult(
@@ -1033,28 +997,29 @@ namespace TestShufflingThunk
                     double,
                     double,
                     SLargeReturnStruct
-                >)Delegate.CreateDelegate(
-                    typeof(Func<
-                        int,
-                        int,
-                        int,
-                        int,
-                        int,
-                        SIntDouble,
-                        double,
-                        double,
-                        double,
-                        double,
-                        double,
-                        double,
-                        double,
-                        double,
-                        double,
-                        double,
-                        SLargeReturnStruct
-                    >),
-                    typeof(TestClass).GetMethod(nameof(TestClass.Test6RB))
-                );
+                >)
+                    Delegate.CreateDelegate(
+                        typeof(Func<
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            SIntDouble,
+                            double,
+                            double,
+                            double,
+                            double,
+                            double,
+                            double,
+                            double,
+                            double,
+                            double,
+                            double,
+                            SLargeReturnStruct
+                        >),
+                        typeof(TestClass).GetMethod(nameof(TestClass.Test6RB))
+                    );
 
             SLargeReturnStruct result6 = func6rb(
                 1,
@@ -1082,20 +1047,21 @@ namespace TestShufflingThunk
             );
 
             var func1mrb =
-                (Func<
-                    TestClass,
-                    int,
-                    int,
-                    int,
-                    int,
-                    SLongLong,
-                    int,
-                    SLargeReturnStruct
-                >)Delegate.CreateDelegate(
-                    typeof(Func<TestClass, int, int, int, int, SLongLong, int, SLargeReturnStruct>),
-                    null,
-                    typeof(TestClass).GetMethod(nameof(TestClass.Test1MRB))
-                );
+                (Func<TestClass, int, int, int, int, SLongLong, int, SLargeReturnStruct>)
+                    Delegate.CreateDelegate(
+                        typeof(Func<
+                            TestClass,
+                            int,
+                            int,
+                            int,
+                            int,
+                            SLongLong,
+                            int,
+                            SLargeReturnStruct
+                        >),
+                        null,
+                        typeof(TestClass).GetMethod(nameof(TestClass.Test1MRB))
+                    );
 
             SLargeReturnStruct result1mrb = func1mrb(tc, 1, 2, 3, 4, s1, 7);
             CheckResult(
@@ -1105,11 +1071,12 @@ namespace TestShufflingThunk
                 "Test1MRB: 1, 2, 3, 4, [5, 6], 7 -> [-1, -2, -3]"
             );
 
-            var func2mrb = (Delegate2mrb)Delegate.CreateDelegate(
-                typeof(Delegate2mrb),
-                null,
-                typeof(TestClass).GetMethod(nameof(TestClass.Test2MRB))
-            );
+            var func2mrb = (Delegate2mrb)
+                Delegate.CreateDelegate(
+                    typeof(Delegate2mrb),
+                    null,
+                    typeof(TestClass).GetMethod(nameof(TestClass.Test2MRB))
+                );
 
             SLargeReturnStruct result2mrb = func2mrb(
                 tc,
@@ -1138,21 +1105,22 @@ namespace TestShufflingThunk
             );
 
             var func3mrb =
-                (Func<
-                    TestClass,
-                    int,
-                    int,
-                    int,
-                    int,
-                    int,
-                    SInt,
-                    int,
-                    SLargeReturnStruct
-                >)Delegate.CreateDelegate(
-                    typeof(Func<TestClass, int, int, int, int, int, SInt, int, SLargeReturnStruct>),
-                    null,
-                    typeof(TestClass).GetMethod(nameof(TestClass.Test3MRB))
-                );
+                (Func<TestClass, int, int, int, int, int, SInt, int, SLargeReturnStruct>)
+                    Delegate.CreateDelegate(
+                        typeof(Func<
+                            TestClass,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            SInt,
+                            int,
+                            SLargeReturnStruct
+                        >),
+                        null,
+                        typeof(TestClass).GetMethod(nameof(TestClass.Test3MRB))
+                    );
 
             SLargeReturnStruct result3mrb = func3mrb(tc, 1, 2, 3, 4, 5, s3, 7);
             CheckResult(
@@ -1163,29 +1131,21 @@ namespace TestShufflingThunk
             );
 
             var func4mrb =
-                (Func<
-                    TestClass,
-                    int,
-                    int,
-                    int,
-                    int,
-                    SIntDouble,
-                    double,
-                    SLargeReturnStruct
-                >)Delegate.CreateDelegate(
-                    typeof(Func<
-                        TestClass,
-                        int,
-                        int,
-                        int,
-                        int,
-                        SIntDouble,
-                        double,
-                        SLargeReturnStruct
-                    >),
-                    null,
-                    typeof(TestClass).GetMethod(nameof(TestClass.Test4MRB))
-                );
+                (Func<TestClass, int, int, int, int, SIntDouble, double, SLargeReturnStruct>)
+                    Delegate.CreateDelegate(
+                        typeof(Func<
+                            TestClass,
+                            int,
+                            int,
+                            int,
+                            int,
+                            SIntDouble,
+                            double,
+                            SLargeReturnStruct
+                        >),
+                        null,
+                        typeof(TestClass).GetMethod(nameof(TestClass.Test4MRB))
+                    );
 
             SLargeReturnStruct result4mrb = func4mrb(tc, 1, 2, 3, 4, s4, 7.0);
             CheckResult(
@@ -1196,19 +1156,12 @@ namespace TestShufflingThunk
             );
 
             var func5mrb =
-                (Func<
-                    TestClass,
-                    int,
-                    int,
-                    int,
-                    int,
-                    SLongLong,
-                    SLargeReturnStruct
-                >)Delegate.CreateDelegate(
-                    typeof(Func<TestClass, int, int, int, int, SLongLong, SLargeReturnStruct>),
-                    null,
-                    typeof(TestClass).GetMethod(nameof(TestClass.Test5MRB))
-                );
+                (Func<TestClass, int, int, int, int, SLongLong, SLargeReturnStruct>)
+                    Delegate.CreateDelegate(
+                        typeof(Func<TestClass, int, int, int, int, SLongLong, SLargeReturnStruct>),
+                        null,
+                        typeof(TestClass).GetMethod(nameof(TestClass.Test5MRB))
+                    );
 
             SLargeReturnStruct result5mrb = func5mrb(tc, 1, 2, 3, 4, s1);
             CheckResult(
@@ -1218,11 +1171,12 @@ namespace TestShufflingThunk
                 "Test5MRB: 1, 2, 3, 4, [5, 6] -> [-1, -2, -3]"
             );
 
-            var func6mrb = (Delegate6mrb)Delegate.CreateDelegate(
-                typeof(Delegate6mrb),
-                null,
-                typeof(TestClass).GetMethod(nameof(TestClass.Test6MRB))
-            );
+            var func6mrb = (Delegate6mrb)
+                Delegate.CreateDelegate(
+                    typeof(Delegate6mrb),
+                    null,
+                    typeof(TestClass).GetMethod(nameof(TestClass.Test6MRB))
+                );
 
             SLargeReturnStruct result6mrb = func6mrb(
                 tc,

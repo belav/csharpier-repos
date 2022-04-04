@@ -451,8 +451,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateType
                                 SyntaxKind.SimpleMemberAccessExpression
                             )
                         );
-                        outerMostMemberAccessExpression =
-                            (ExpressionSyntax)nameOrMemberAccessExpression.Parent;
+                        outerMostMemberAccessExpression = (ExpressionSyntax)
+                            nameOrMemberAccessExpression.Parent;
                     }
 
                     outerMostMemberAccessExpression = outerMostMemberAccessExpression

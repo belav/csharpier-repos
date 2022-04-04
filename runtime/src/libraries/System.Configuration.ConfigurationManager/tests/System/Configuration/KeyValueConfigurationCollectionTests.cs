@@ -15,9 +15,8 @@ namespace System.ConfigurationTests
             using (var temp = new TempConfig(TestData.EmptyConfig))
             {
                 var config = ConfigurationManager.OpenExeConfiguration(temp.ExePath);
-                AppSettingsSection configSection = (AppSettingsSection)config.GetSection(
-                    "appSettings"
-                );
+                AppSettingsSection configSection = (AppSettingsSection)
+                    config.GetSection("appSettings");
                 Assert.Equal("appSettings", configSection.SectionInformation.Name);
                 KeyValueConfigurationElement myAdminKeyVal = new KeyValueConfigurationElement(
                     "myAdminTool",

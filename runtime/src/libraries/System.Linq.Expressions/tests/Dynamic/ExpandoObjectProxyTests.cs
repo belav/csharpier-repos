@@ -14,8 +14,9 @@ namespace System.Dynamic.Tests
     {
         private static Type GetDebugViewType(Type type)
         {
-            var att = (DebuggerTypeProxyAttribute)type.GetCustomAttributes()
-                .SingleOrDefault(at => at.TypeId.Equals(typeof(DebuggerTypeProxyAttribute)));
+            var att = (DebuggerTypeProxyAttribute)
+                type.GetCustomAttributes()
+                    .SingleOrDefault(at => at.TypeId.Equals(typeof(DebuggerTypeProxyAttribute)));
             if (att == null)
             {
                 return null;
@@ -94,9 +95,8 @@ namespace System.Dynamic.Tests
                 throw new SkipTestException($"Didn't find DebuggerTypeProxyAttribute on {eo}.");
             }
             PropertyInfo itemsProp = view.GetType().GetProperty("Items");
-            var browsable = (DebuggerBrowsableAttribute)itemsProp.GetCustomAttribute(
-                typeof(DebuggerBrowsableAttribute)
-            );
+            var browsable = (DebuggerBrowsableAttribute)
+                itemsProp.GetCustomAttribute(typeof(DebuggerBrowsableAttribute));
             Assert.Equal(DebuggerBrowsableState.RootHidden, browsable.State);
         }
 

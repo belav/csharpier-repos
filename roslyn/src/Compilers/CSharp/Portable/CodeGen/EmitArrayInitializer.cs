@@ -417,9 +417,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             }
 
             var ctor = (
-                (MethodSymbol)this._module.Compilation.GetWellKnownTypeMember(
-                    WellKnownMember.System_ReadOnlySpan_T__ctor
-                )
+                (MethodSymbol)
+                    this._module.Compilation.GetWellKnownTypeMember(
+                        WellKnownMember.System_ReadOnlySpan_T__ctor
+                    )
             );
             if (ctor == null)
             {

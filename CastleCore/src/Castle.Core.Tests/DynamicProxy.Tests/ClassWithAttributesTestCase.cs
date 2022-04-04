@@ -28,8 +28,8 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void EnsureProxyHasAttributesOnClassAndMethods()
         {
-            HasNonInheritableAttribute instance =
-                (HasNonInheritableAttribute)generator.CreateClassProxy(
+            HasNonInheritableAttribute instance = (HasNonInheritableAttribute)
+                generator.CreateClassProxy(
                     typeof(HasNonInheritableAttribute),
                     new StandardInterceptor()
                 );
@@ -53,10 +53,8 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void EnsureProxyHasAttributesOnClassAndMethods_ComplexAttributes()
         {
-            AttributedClass2 instance = (AttributedClass2)generator.CreateClassProxy(
-                typeof(AttributedClass2),
-                new StandardInterceptor()
-            );
+            AttributedClass2 instance = (AttributedClass2)
+                generator.CreateClassProxy(typeof(AttributedClass2), new StandardInterceptor());
 
             object[] attributes = instance
                 .GetType()

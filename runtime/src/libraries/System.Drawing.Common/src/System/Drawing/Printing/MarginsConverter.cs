@@ -72,11 +72,8 @@ namespace System.Drawing.Printing
                     for (int i = 0; i < values.Length; i++)
                     {
                         // Note: ConvertFromString will raise exception if value cannot be converted.
-                        values[i] = (int)intConverter.ConvertFromString(
-                            context,
-                            culture,
-                            tokens[i]
-                        )!;
+                        values[i] = (int)
+                            intConverter.ConvertFromString(context, culture, tokens[i])!;
                     }
                     if (values.Length != 4)
                     {

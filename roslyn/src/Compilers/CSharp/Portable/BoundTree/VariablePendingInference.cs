@@ -146,9 +146,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             switch (this.Syntax.Kind())
             {
                 case SyntaxKind.DeclarationExpression:
-                    designation = (SingleVariableDesignationSyntax)(
-                        (DeclarationExpressionSyntax)this.Syntax
-                    ).Designation;
+                    designation = (SingleVariableDesignationSyntax)
+                        ((DeclarationExpressionSyntax)this.Syntax).Designation;
                     break;
                 case SyntaxKind.SingleVariableDesignation:
                     designation = (SingleVariableDesignationSyntax)this.Syntax;

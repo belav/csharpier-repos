@@ -222,10 +222,8 @@ namespace System.Text
             {
                 // Unrecognized fallback mechanism - count chars manually.
 
-                byteCount = (int)ASCIIUtility.GetIndexOfFirstNonAsciiChar(
-                    pChars,
-                    (uint)charsLength
-                );
+                byteCount = (int)
+                    ASCIIUtility.GetIndexOfFirstNonAsciiChar(pChars, (uint)charsLength);
             }
 
             charsConsumed = byteCount;
@@ -461,11 +459,12 @@ namespace System.Text
             out int charsConsumed
         )
         {
-            int bytesWritten = (int)ASCIIUtility.NarrowUtf16ToAscii(
-                pChars,
-                pBytes,
-                (uint)Math.Min(charsLength, bytesLength)
-            );
+            int bytesWritten = (int)
+                ASCIIUtility.NarrowUtf16ToAscii(
+                    pChars,
+                    pBytes,
+                    (uint)Math.Min(charsLength, bytesLength)
+                );
 
             charsConsumed = bytesWritten;
             return bytesWritten;
@@ -506,11 +505,12 @@ namespace System.Text
 
                         if (idx < numElementsToConvert)
                         {
-                            idx += (int)ASCIIUtility.NarrowUtf16ToAscii(
-                                &pChars[idx],
-                                &pBytes[idx],
-                                (uint)(numElementsToConvert - idx)
-                            );
+                            idx += (int)
+                                ASCIIUtility.NarrowUtf16ToAscii(
+                                    &pChars[idx],
+                                    &pBytes[idx],
+                                    (uint)(numElementsToConvert - idx)
+                                );
                         }
 
                         Debug.Assert(
@@ -685,10 +685,8 @@ namespace System.Text
             {
                 // Unrecognized fallback mechanism - count bytes manually.
 
-                charCount = (int)ASCIIUtility.GetIndexOfFirstNonAsciiByte(
-                    pBytes,
-                    (uint)bytesLength
-                );
+                charCount = (int)
+                    ASCIIUtility.GetIndexOfFirstNonAsciiByte(pBytes, (uint)bytesLength);
             }
 
             bytesConsumed = charCount;
@@ -854,11 +852,12 @@ namespace System.Text
             out int bytesConsumed
         )
         {
-            int charsWritten = (int)ASCIIUtility.WidenAsciiToUtf16(
-                pBytes,
-                pChars,
-                (uint)Math.Min(bytesLength, charsLength)
-            );
+            int charsWritten = (int)
+                ASCIIUtility.WidenAsciiToUtf16(
+                    pBytes,
+                    pChars,
+                    (uint)Math.Min(bytesLength, charsLength)
+                );
 
             bytesConsumed = charsWritten;
             return charsWritten;
@@ -898,11 +897,12 @@ namespace System.Text
 
                         if (idx < numElementsToConvert)
                         {
-                            idx += (int)ASCIIUtility.WidenAsciiToUtf16(
-                                &pBytes[idx],
-                                &pChars[idx],
-                                (uint)(numElementsToConvert - idx)
-                            );
+                            idx += (int)
+                                ASCIIUtility.WidenAsciiToUtf16(
+                                    &pBytes[idx],
+                                    &pChars[idx],
+                                    (uint)(numElementsToConvert - idx)
+                                );
                         }
 
                         Debug.Assert(

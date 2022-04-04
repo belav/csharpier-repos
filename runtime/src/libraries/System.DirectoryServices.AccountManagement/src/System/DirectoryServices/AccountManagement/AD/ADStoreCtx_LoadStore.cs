@@ -83,11 +83,12 @@ namespace System.DirectoryServices.AccountManagement
                         )
                         {
                             DirectoryRdnPrefixAttribute[] MyAttribute =
-                                (DirectoryRdnPrefixAttribute[])Attribute.GetCustomAttributes(
-                                    principalType.BaseType,
-                                    typeof(DirectoryRdnPrefixAttribute),
-                                    false
-                                );
+                                (DirectoryRdnPrefixAttribute[])
+                                    Attribute.GetCustomAttributes(
+                                        principalType.BaseType,
+                                        typeof(DirectoryRdnPrefixAttribute),
+                                        false
+                                    );
 
                             if (MyAttribute == null)
                                 throw new InvalidOperationException(
@@ -138,9 +139,8 @@ namespace System.DirectoryServices.AccountManagement
                         {
                             // They set a sAMAccountName.  If it's an invalid claim, we'll just ignore it here.
                             // The error will get picked up in IdentClaimToLdapConverter.
-                            string samAccountName = (string)p.GetValueForProperty(
-                                PropertyNames.PrincipalSamAccountName
-                            );
+                            string samAccountName = (string)
+                                p.GetValueForProperty(PropertyNames.PrincipalSamAccountName);
 
                             int index = samAccountName.IndexOf('\\');
 
@@ -207,9 +207,8 @@ namespace System.DirectoryServices.AccountManagement
                 // including writable properties which we don't support in AD.
                 // If we don't support the property, the PropertyMappingTableEntry will map
                 // it to a converter which will throw an appropriate exception.
-                Hashtable mappingTableByProp = (Hashtable)s_propertyMappingTableByProperty[
-                    this.MappingTableIndex
-                ];
+                Hashtable mappingTableByProp = (Hashtable)
+                    s_propertyMappingTableByProperty[this.MappingTableIndex];
 
                 foreach (DictionaryEntry dictEntry in mappingTableByProp)
                 {
@@ -403,8 +402,8 @@ namespace System.DirectoryServices.AccountManagement
         private string GetEscapedDN(string dn)
         {
             UnsafeNativeMethods.Pathname pathNameObj = new UnsafeNativeMethods.Pathname();
-            UnsafeNativeMethods.IADsPathname pathCracker =
-                (UnsafeNativeMethods.IADsPathname)pathNameObj;
+            UnsafeNativeMethods.IADsPathname pathCracker = (UnsafeNativeMethods.IADsPathname)
+                pathNameObj;
 
             // Set the Escape mode On
             pathCracker.EscapedMode =
@@ -445,9 +444,8 @@ namespace System.DirectoryServices.AccountManagement
                 props = new dSPropertyCollection(sr.Properties);
             }
 
-            Hashtable propertyMappingTable = (Hashtable)s_propertyMappingTableByPropertyFull[
-                this.MappingTableIndex
-            ];
+            Hashtable propertyMappingTable = (Hashtable)
+                s_propertyMappingTableByPropertyFull[this.MappingTableIndex];
 
             ArrayList entries = (ArrayList)propertyMappingTable[principalPropertyName];
 
@@ -502,9 +500,8 @@ namespace System.DirectoryServices.AccountManagement
                 de.Path
             );
 
-            Hashtable ldapMappingTable = (Hashtable)s_propertyMappingTableByLDAP[
-                this.MappingTableIndex
-            ];
+            Hashtable ldapMappingTable = (Hashtable)
+                s_propertyMappingTableByLDAP[this.MappingTableIndex];
             foreach (DictionaryEntry Dictentry in ldapMappingTable)
             {
                 ArrayList entries = (ArrayList)Dictentry.Value;
@@ -1827,8 +1824,8 @@ namespace System.DirectoryServices.AccountManagement
             string suggestedAdProperty
         )
         {
-            X509Certificate2Collection certificates =
-                (X509Certificate2Collection)p.GetValueForProperty(propertyName);
+            X509Certificate2Collection certificates = (X509Certificate2Collection)
+                p.GetValueForProperty(propertyName);
 
             if (certificates.Count == 0)
             {
@@ -1890,8 +1887,8 @@ namespace System.DirectoryServices.AccountManagement
 
             UnsafeNativeMethods.ADsLargeInteger largeIntObj =
                 new UnsafeNativeMethods.ADsLargeInteger();
-            UnsafeNativeMethods.IADsLargeInteger largeInt =
-                (UnsafeNativeMethods.IADsLargeInteger)largeIntObj;
+            UnsafeNativeMethods.IADsLargeInteger largeInt = (UnsafeNativeMethods.IADsLargeInteger)
+                largeIntObj;
 
             if (!dt.HasValue)
             {
@@ -2126,9 +2123,8 @@ namespace System.DirectoryServices.AccountManagement
         {
             Debug.Assert(group.fakePrincipal == false);
 
-            PrincipalCollection members = (PrincipalCollection)group.GetValueForProperty(
-                PropertyNames.GroupMembers
-            );
+            PrincipalCollection members = (PrincipalCollection)
+                group.GetValueForProperty(PropertyNames.GroupMembers);
 
             DirectoryEntry groupDe = null;
 

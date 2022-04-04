@@ -25,10 +25,8 @@ public class Example
         AppDomain ad = AppDomain.CreateDomain("subdomain");
         try
         {
-            TestOutput remoteOutput = (TestOutput)ad.CreateInstanceAndUnwrap(
-                typeof(TestOutput).Assembly.FullName,
-                "TestOutput"
-            );
+            TestOutput remoteOutput = (TestOutput)
+                ad.CreateInstanceAndUnwrap(typeof(TestOutput).Assembly.FullName, "TestOutput");
             remoteOutput.ThrowUnserializable();
         }
         catch (SerializationException)

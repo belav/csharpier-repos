@@ -87,9 +87,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             .DescendantNodes()
             .OfType<ReturnStatementSyntax>()
             .First();
-        var returnOperation = (IReturnOperation)compilation
-            .GetSemanticModel(syntaxTree)
-            .GetOperation(returnStatement);
+        var returnOperation = (IReturnOperation)
+            compilation.GetSemanticModel(syntaxTree).GetOperation(returnStatement);
 
         var actualResponseMetadata = ActualApiResponseMetadataFactory.InspectReturnOperation(
             symbolCache,
@@ -381,12 +380,10 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         Assert.True(ApiControllerSymbolCache.TryCreate(compilation, out var symbolCache));
 
         var syntaxTree = method.DeclaringSyntaxReferences[0].SyntaxTree;
-        var methodSyntax = (MethodDeclarationSyntax)syntaxTree
-            .GetRoot()
-            .FindNode(method.Locations[0].SourceSpan);
-        var methodOperation = (IMethodBodyBaseOperation)compilation
-            .GetSemanticModel(syntaxTree)
-            .GetOperation(methodSyntax);
+        var methodSyntax = (MethodDeclarationSyntax)
+            syntaxTree.GetRoot().FindNode(method.Locations[0].SourceSpan);
+        var methodOperation = (IMethodBodyBaseOperation)
+            compilation.GetSemanticModel(syntaxTree).GetOperation(methodSyntax);
 
         var result = ActualApiResponseMetadataFactory.TryGetActualResponseMetadata(
             symbolCache,
@@ -417,9 +414,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             .DescendantNodes()
             .OfType<ReturnStatementSyntax>()
             .First();
-        var returnOperation = (IReturnOperation)compilation
-            .GetSemanticModel(syntaxTree)
-            .GetOperation(returnStatement);
+        var returnOperation = (IReturnOperation)
+            compilation.GetSemanticModel(syntaxTree).GetOperation(returnStatement);
 
         return ActualApiResponseMetadataFactory.InspectReturnOperation(
             symbolCache,
@@ -448,9 +444,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             .DescendantNodes()
             .OfType<ReturnStatementSyntax>()
             .First();
-        var returnOperation = (IReturnOperation)compilation
-            .GetSemanticModel(syntaxTree)
-            .GetOperation(returnStatement);
+        var returnOperation = (IReturnOperation)
+            compilation.GetSemanticModel(syntaxTree).GetOperation(returnStatement);
 
         return ActualApiResponseMetadataFactory.InspectReturnOperation(
             symbolCache,

@@ -694,23 +694,26 @@ namespace JIT.HardwareIntrinsics.X86
                                 ? (byte)Math.Clamp(left[i], byte.MinValue, byte.MaxValue)
                                 : (
                                       i < 16 && i > 7
-                                          ? (byte)Math.Clamp(
-                                                right[i % 8],
-                                                byte.MinValue,
-                                                byte.MaxValue
-                                            )
+                                          ? (byte)
+                                                Math.Clamp(
+                                                    right[i % 8],
+                                                    byte.MinValue,
+                                                    byte.MaxValue
+                                                )
                                           : (
                                                 i < 24 && i > 15
-                                                    ? (byte)Math.Clamp(
-                                                          left[i - 8],
-                                                          byte.MinValue,
-                                                          byte.MaxValue
-                                                      )
-                                                    : (byte)Math.Clamp(
-                                                          right[i - 16],
-                                                          byte.MinValue,
-                                                          byte.MaxValue
-                                                      )
+                                                    ? (byte)
+                                                          Math.Clamp(
+                                                              left[i - 8],
+                                                              byte.MinValue,
+                                                              byte.MaxValue
+                                                          )
+                                                    : (byte)
+                                                          Math.Clamp(
+                                                              right[i - 16],
+                                                              byte.MinValue,
+                                                              byte.MaxValue
+                                                          )
                                             )
                                   )
                         )

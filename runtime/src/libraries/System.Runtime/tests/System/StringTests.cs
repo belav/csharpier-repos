@@ -1647,8 +1647,8 @@ namespace System.Tests
             );
         }
 
-        private static readonly StringComparison[] StringComparisons =
-            (StringComparison[])Enum.GetValues(typeof(StringComparison));
+        private static readonly StringComparison[] StringComparisons = (StringComparison[])
+            Enum.GetValues(typeof(StringComparison));
 
         [Fact]
         public static void GetHashCode_OfSpan_EmbeddedNull_ReturnsDifferentHashCodes()

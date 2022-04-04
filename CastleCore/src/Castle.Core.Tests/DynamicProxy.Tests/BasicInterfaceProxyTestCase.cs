@@ -34,11 +34,12 @@ namespace Castle.DynamicProxy.Tests
         {
             LogInvocationInterceptor logger = new LogInvocationInterceptor();
 
-            IService service = (IService)generator.CreateInterfaceProxyWithTarget(
-                typeof(IService),
-                new ServiceImpl(),
-                logger
-            );
+            IService service = (IService)
+                generator.CreateInterfaceProxyWithTarget(
+                    typeof(IService),
+                    new ServiceImpl(),
+                    logger
+                );
 
             Assert.AreEqual(3, service.Sum(1, 2));
 
@@ -49,26 +50,30 @@ namespace Castle.DynamicProxy.Tests
         public void Caching()
         {
 #pragma warning disable 219
-            IService service = (IService)generator.CreateInterfaceProxyWithTarget(
-                typeof(IService),
-                new ServiceImpl(),
-                new StandardInterceptor()
-            );
-            service = (IService)generator.CreateInterfaceProxyWithTarget(
-                typeof(IService),
-                new ServiceImpl(),
-                new StandardInterceptor()
-            );
-            service = (IService)generator.CreateInterfaceProxyWithTarget(
-                typeof(IService),
-                new ServiceImpl(),
-                new StandardInterceptor()
-            );
-            service = (IService)generator.CreateInterfaceProxyWithTarget(
-                typeof(IService),
-                new ServiceImpl(),
-                new StandardInterceptor()
-            );
+            IService service = (IService)
+                generator.CreateInterfaceProxyWithTarget(
+                    typeof(IService),
+                    new ServiceImpl(),
+                    new StandardInterceptor()
+                );
+            service = (IService)
+                generator.CreateInterfaceProxyWithTarget(
+                    typeof(IService),
+                    new ServiceImpl(),
+                    new StandardInterceptor()
+                );
+            service = (IService)
+                generator.CreateInterfaceProxyWithTarget(
+                    typeof(IService),
+                    new ServiceImpl(),
+                    new StandardInterceptor()
+                );
+            service = (IService)
+                generator.CreateInterfaceProxyWithTarget(
+                    typeof(IService),
+                    new ServiceImpl(),
+                    new StandardInterceptor()
+                );
 #pragma warning restore 219
         }
 
@@ -77,11 +82,8 @@ namespace Castle.DynamicProxy.Tests
         {
             LogInvocationInterceptor logger = new LogInvocationInterceptor();
 
-            IService2 service = (IService2)generator.CreateInterfaceProxyWithTarget(
-                typeof(IService2),
-                new Service2(),
-                logger
-            );
+            IService2 service = (IService2)
+                generator.CreateInterfaceProxyWithTarget(typeof(IService2), new Service2(), logger);
 
             service.DoOperation2();
 
@@ -93,11 +95,12 @@ namespace Castle.DynamicProxy.Tests
         {
             LogInvocationInterceptor logger = new LogInvocationInterceptor();
 
-            IService service = (IExtendedService)generator.CreateInterfaceProxyWithTarget(
-                typeof(IExtendedService),
-                new ServiceImpl(),
-                logger
-            );
+            IService service = (IExtendedService)
+                generator.CreateInterfaceProxyWithTarget(
+                    typeof(IExtendedService),
+                    new ServiceImpl(),
+                    logger
+                );
 
             Assert.AreEqual(3, service.Sum(1, 2));
 
@@ -109,8 +112,8 @@ namespace Castle.DynamicProxy.Tests
         {
             LogInvocationInterceptor logger = new LogInvocationInterceptor();
 
-            InterfaceWithIndexer service =
-                (InterfaceWithIndexer)generator.CreateInterfaceProxyWithTarget(
+            InterfaceWithIndexer service = (InterfaceWithIndexer)
+                generator.CreateInterfaceProxyWithTarget(
                     typeof(InterfaceWithIndexer),
                     new ClassWithIndexer(),
                     logger
@@ -155,8 +158,8 @@ namespace Castle.DynamicProxy.Tests
                 delegate
                 {
 #pragma warning disable 219
-                    IService2 service =
-                        (IService2)generator.CreateInterfaceProxyWithTargetInterface(
+                    IService2 service = (IService2)
+                        generator.CreateInterfaceProxyWithTargetInterface(
                             typeof(Service2),
                             new Service2()
                         );
@@ -172,12 +175,13 @@ namespace Castle.DynamicProxy.Tests
             AssertCanChangeTargetInterceptor invocationChecker =
                 new AssertCanChangeTargetInterceptor();
 
-            IService2 service = (IService2)generator.CreateInterfaceProxyWithTargetInterface(
-                typeof(IService2),
-                new Service2(),
-                invocationChecker,
-                logger
-            );
+            IService2 service = (IService2)
+                generator.CreateInterfaceProxyWithTargetInterface(
+                    typeof(IService2),
+                    new Service2(),
+                    invocationChecker,
+                    logger
+                );
 
             service.DoOperation2();
 
@@ -189,12 +193,13 @@ namespace Castle.DynamicProxy.Tests
         {
             LogInvocationInterceptor logger = new LogInvocationInterceptor();
 
-            IService service = (IService)generator.CreateInterfaceProxyWithTargetInterface(
-                typeof(IService),
-                new AlwaysThrowsServiceImpl(),
-                new ChangeTargetInterceptor(new ServiceImpl()),
-                logger
-            );
+            IService service = (IService)
+                generator.CreateInterfaceProxyWithTargetInterface(
+                    typeof(IService),
+                    new AlwaysThrowsServiceImpl(),
+                    new ChangeTargetInterceptor(new ServiceImpl()),
+                    logger
+                );
 
             Assert.AreEqual(20, service.Sum(10, 10));
         }

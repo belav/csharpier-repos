@@ -81,9 +81,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var entityTypeBuilder = new EntityTypeBuilder<TEntity>((IMutableEntityType)entityType);
             var entityTypeConfiguration =
-                (IEntityTypeConfiguration<TEntity>)Activator.CreateInstance(
-                    entityTypeConfigurationType
-                )!;
+                (IEntityTypeConfiguration<TEntity>)
+                    Activator.CreateInstance(entityTypeConfigurationType)!;
             entityTypeConfiguration.Configure(entityTypeBuilder);
         }
     }

@@ -107,9 +107,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             in StoreObjectIdentifier storeObject
         )
         {
-            var tableOverrides = (SortedDictionary<StoreObjectIdentifier, object>?)property[
-                RelationalAnnotationNames.RelationalOverrides
-            ];
+            var tableOverrides = (SortedDictionary<StoreObjectIdentifier, object>?)
+                property[RelationalAnnotationNames.RelationalOverrides];
             return
                 tableOverrides != null && tableOverrides.TryGetValue(storeObject, out var overrides)
               ? (IRelationalPropertyOverrides)overrides
@@ -127,9 +126,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             in StoreObjectIdentifier storeObject
         )
         {
-            var tableOverrides = (SortedDictionary<StoreObjectIdentifier, object>?)property[
-                RelationalAnnotationNames.RelationalOverrides
-            ];
+            var tableOverrides = (SortedDictionary<StoreObjectIdentifier, object>?)
+                property[RelationalAnnotationNames.RelationalOverrides];
             if (tableOverrides == null)
             {
                 tableOverrides = new SortedDictionary<StoreObjectIdentifier, object>();

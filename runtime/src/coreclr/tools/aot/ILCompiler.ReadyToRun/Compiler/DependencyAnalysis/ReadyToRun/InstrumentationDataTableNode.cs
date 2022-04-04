@@ -108,10 +108,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 }
                 if (type.AsType != null && _compilationGroup.VersionsWithTypeReference(type.AsType))
                 {
-                    Import typeHandleImport = (Import)_symbolFactory.CreateReadyToRunHelper(
-                        ReadyToRunHelperId.TypeHandle,
-                        type.AsType
-                    );
+                    Import typeHandleImport = (Import)
+                        _symbolFactory.CreateReadyToRunHelper(
+                            ReadyToRunHelperId.TypeHandle,
+                            type.AsType
+                        );
                     _imports.Add(typeHandleImport);
 
                     if (_actuallyCaptureOutput)

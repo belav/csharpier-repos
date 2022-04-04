@@ -172,9 +172,8 @@ namespace System.Text.Json.Serialization.Metadata
             MethodInfo createRange = typeof(TCollection).GetImmutableEnumerableCreateRangeMethod(
                 typeof(TElement)
             );
-            return (Func<IEnumerable<TElement>, TCollection>)createRange.CreateDelegate(
-                typeof(Func<IEnumerable<TElement>, TCollection>)
-            );
+            return (Func<IEnumerable<TElement>, TCollection>)
+                createRange.CreateDelegate(typeof(Func<IEnumerable<TElement>, TCollection>));
         }
 
         [RequiresUnreferencedCode(
@@ -189,12 +188,10 @@ namespace System.Text.Json.Serialization.Metadata
                 typeof(TKey),
                 typeof(TValue)
             );
-            return (Func<
-                IEnumerable<KeyValuePair<TKey, TValue>>,
-                TCollection
-            >)createRange.CreateDelegate(
-                typeof(Func<IEnumerable<KeyValuePair<TKey, TValue>>, TCollection>)
-            );
+            return (Func<IEnumerable<KeyValuePair<TKey, TValue>>, TCollection>)
+                createRange.CreateDelegate(
+                    typeof(Func<IEnumerable<KeyValuePair<TKey, TValue>>, TCollection>)
+                );
         }
 
         public override Func<object, TProperty> CreatePropertyGetter<TProperty>(

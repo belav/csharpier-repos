@@ -209,9 +209,8 @@ public class ElementHive
                 case RenderTreeEditType.StepIn:
                 {
                     var siblingIndex = edit.SiblingIndex;
-                    parent = (ContainerNode)parent.Children[
-                        childIndexAtCurrentDepth + siblingIndex
-                    ];
+                    parent = (ContainerNode)
+                        parent.Children[childIndexAtCurrentDepth + siblingIndex];
                     currentDepth++;
                     childIndexAtCurrentDepth = 0;
                     break;

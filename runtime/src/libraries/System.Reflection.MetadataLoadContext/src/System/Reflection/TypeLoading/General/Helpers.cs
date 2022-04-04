@@ -338,13 +338,14 @@ namespace System.Reflection.TypeLoading
                 return null;
             };
 
-            return (RoType?)Type.GetType(
-                name,
-                assemblyResolver: assemblyResolver,
-                typeResolver: typeResolver,
-                throwOnError: throwOnError,
-                ignoreCase: ignoreCase
-            );
+            return (RoType?)
+                Type.GetType(
+                    name,
+                    assemblyResolver: assemblyResolver,
+                    typeResolver: typeResolver,
+                    throwOnError: throwOnError,
+                    ignoreCase: ignoreCase
+                );
         }
 
         public static Type[] ExtractCustomModifiers(this RoType type, bool isRequired)

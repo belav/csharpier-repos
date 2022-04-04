@@ -67,9 +67,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
         )
         {
             await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
-            var textManager = (IVsTextManager2?)await asyncServiceProvider
-                .GetServiceAsync(typeof(SVsTextManager))
-                .ConfigureAwait(true);
+            var textManager = (IVsTextManager2?)
+                await asyncServiceProvider
+                    .GetServiceAsync(typeof(SVsTextManager))
+                    .ConfigureAwait(true);
             Assumes.Present(textManager);
 
             if (textManager.GetExpansionManager(out _expansionManager) == VSConstants.S_OK)
@@ -248,10 +249,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
 
         private static VsExpansion ConvertToVsExpansionAndFree(IntPtr expansionPtr)
         {
-            var buffer = (VsExpansionWithIntPtrs)Marshal.PtrToStructure(
-                expansionPtr,
-                typeof(VsExpansionWithIntPtrs)
-            );
+            var buffer = (VsExpansionWithIntPtrs)
+                Marshal.PtrToStructure(expansionPtr, typeof(VsExpansionWithIntPtrs));
             var expansion = new VsExpansion();
 
             ConvertToStringAndFree(ref buffer.DescriptionPtr, ref expansion.description);

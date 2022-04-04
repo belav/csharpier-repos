@@ -105,7 +105,8 @@ namespace System.Text
             //          (char)0x00fd, (char)0x0079,    // Latin Small Letter Y With Acute -> y
             //          (char)0x00fe, (char)0x003f,    // Latin Small Letter Thorn
             //          (char)0x00ff, (char)0x0079,    // Latin Small Letter Y With Diaeresis -> y
-            (char)0x0100,
+            (char)
+                0x0100,
             (char)0x0041, // Latin Capital Letter A With Macron -> A
             (char)0x0101,
             (char)0x0061, // Latin Small Letter A With Macron -> a

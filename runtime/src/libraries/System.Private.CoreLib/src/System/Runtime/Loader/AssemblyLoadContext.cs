@@ -636,9 +636,8 @@ namespace System.Runtime.Loader
             AssemblyName assemblyName
         )
         {
-            AssemblyLoadContext context = (AssemblyLoadContext)(
-                GCHandle.FromIntPtr(gchManagedAssemblyLoadContext).Target
-            )!;
+            AssemblyLoadContext context = (AssemblyLoadContext)
+                (GCHandle.FromIntPtr(gchManagedAssemblyLoadContext).Target)!;
 
             return context.ResolveUsingLoad(assemblyName);
         }

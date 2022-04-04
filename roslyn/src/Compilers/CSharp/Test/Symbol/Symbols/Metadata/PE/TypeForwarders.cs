@@ -67,9 +67,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.Equal(
                 base1,
                 module1.TypeRefHandleToTypeMap[
-                    (TypeReferenceHandle)module1.Module.GetBaseTypeOfTypeOrThrow(
-                        ((PENamedTypeSymbol)derived1).Handle
-                    )
+                    (TypeReferenceHandle)
+                        module1.Module.GetBaseTypeOfTypeOrThrow(
+                            ((PENamedTypeSymbol)derived1).Handle
+                        )
                 ]
             );
             Assert.True(

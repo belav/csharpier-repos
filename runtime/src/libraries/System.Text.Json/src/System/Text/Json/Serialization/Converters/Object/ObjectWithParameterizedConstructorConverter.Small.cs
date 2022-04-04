@@ -22,7 +22,8 @@ namespace System.Text.Json.Serialization.Converters
                 TArg1,
                 TArg2,
                 TArg3
-            >)frame.JsonTypeInfo.CreateObjectWithArgs!;
+            >)
+                frame.JsonTypeInfo.CreateObjectWithArgs!;
             var arguments =
                 (Arguments<TArg0, TArg1, TArg2, TArg3>)frame.CtorArgumentState!.Arguments;
             return createObject!(arguments.Arg0, arguments.Arg1, arguments.Arg2, arguments.Arg3);

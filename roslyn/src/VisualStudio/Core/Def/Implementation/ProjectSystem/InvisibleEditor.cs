@@ -51,10 +51,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             _filePath = filePath;
             _needsSave = needsSave;
 
-            var invisibleEditorManager =
-                (IIntPtrReturningVsInvisibleEditorManager)serviceProvider.GetService(
-                    typeof(SVsInvisibleEditorManager)
-                );
+            var invisibleEditorManager = (IIntPtrReturningVsInvisibleEditorManager)
+                serviceProvider.GetService(typeof(SVsInvisibleEditorManager));
             var vsProject = hierarchy as IVsProject;
             Marshal.ThrowExceptionForHR(
                 invisibleEditorManager.RegisterInvisibleEditor(
@@ -68,9 +66,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
             try
             {
-                _invisibleEditor = (IVsInvisibleEditor)Marshal.GetUniqueObjectForIUnknown(
-                    invisibleEditorPtr
-                );
+                _invisibleEditor = (IVsInvisibleEditor)
+                    Marshal.GetUniqueObjectForIUnknown(invisibleEditorPtr);
 
                 var docDataPtr = IntPtr.Zero;
                 Marshal.ThrowExceptionForHR(
@@ -150,10 +147,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     // the invisible editor never actually makes the document go away. Check out CLockHolder::ReleaseEditLock
                     // in env\msenv\core\editmgr.cpp for details. We choose this particular technique for saving files
                     // since it's what the old cslangsvc.dll used.
-                    var runningDocumentTable4 =
-                        (IVsRunningDocumentTable4)_serviceProvider.GetService(
-                            typeof(SVsRunningDocumentTable)
-                        );
+                    var runningDocumentTable4 = (IVsRunningDocumentTable4)
+                        _serviceProvider.GetService(typeof(SVsRunningDocumentTable));
 
                     if (runningDocumentTable4.IsMonikerValid(_filePath))
                     {

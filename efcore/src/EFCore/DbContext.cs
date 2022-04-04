@@ -320,10 +320,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <typeparam name="TEntity">The type of entity for which a set should be returned.</typeparam>
         /// <returns>A set for the given entity type.</returns>
         public virtual DbSet<TEntity> Set<TEntity>() where TEntity : class =>
-            (DbSet<TEntity>)((IDbSetCache)this).GetOrAddSet(
-                DbContextDependencies.SetSource,
-                typeof(TEntity)
-            );
+            (DbSet<TEntity>)
+                ((IDbSetCache)this).GetOrAddSet(DbContextDependencies.SetSource, typeof(TEntity));
 
         /// <summary>
         ///     Creates a <see cref="DbSet{TEntity}" /> for a shared-type entity type that can be used to query and save
@@ -343,11 +341,12 @@ namespace Microsoft.EntityFrameworkCore
         /// <typeparam name="TEntity">The type of entity for which a set should be returned.</typeparam>
         /// <returns>A set for the given entity type.</returns>
         public virtual DbSet<TEntity> Set<TEntity>(string name) where TEntity : class =>
-            (DbSet<TEntity>)((IDbSetCache)this).GetOrAddSet(
-                DbContextDependencies.SetSource,
-                name,
-                typeof(TEntity)
-            );
+            (DbSet<TEntity>)
+                ((IDbSetCache)this).GetOrAddSet(
+                    DbContextDependencies.SetSource,
+                    name,
+                    typeof(TEntity)
+                );
 
         private IEntityFinder Finder(Type type)
         {

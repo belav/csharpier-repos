@@ -37,9 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             CancellationToken cancellationToken
         )
         {
-            var declaration = (MethodDeclarationSyntax)method.DeclaringSyntaxReferences[
-                0
-            ].GetSyntax(cancellationToken);
+            var declaration = (MethodDeclarationSyntax)
+                method.DeclaringSyntaxReferences[0].GetSyntax(cancellationToken);
             foreach (var mod in declaration.Modifiers)
             {
                 switch (mod.Kind())

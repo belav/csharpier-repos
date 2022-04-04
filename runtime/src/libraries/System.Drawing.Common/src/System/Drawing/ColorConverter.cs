@@ -204,11 +204,13 @@ namespace System.Drawing
                                     unchecked(
                                         (int)(
                                             0xFF000000
-                                            | (uint)(int)intConverter.ConvertFromString(
-                                                context,
-                                                culture,
-                                                text
-                                            )
+                                            | (uint)
+                                                (int)
+                                                    intConverter.ConvertFromString(
+                                                        context,
+                                                        culture,
+                                                        text
+                                                    )
                                         )
                                     )
                                 );

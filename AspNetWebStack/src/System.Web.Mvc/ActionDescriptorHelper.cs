@@ -10,8 +10,8 @@ namespace System.Web.Mvc
     {
         public static ICollection<ActionSelector> GetSelectors(MethodInfo methodInfo)
         {
-            ActionMethodSelectorAttribute[] attrs =
-                (ActionMethodSelectorAttribute[])methodInfo.GetCustomAttributes(
+            ActionMethodSelectorAttribute[] attrs = (ActionMethodSelectorAttribute[])
+                methodInfo.GetCustomAttributes(
                     typeof(ActionMethodSelectorAttribute),
                     inherit: true
                 );
@@ -27,11 +27,8 @@ namespace System.Web.Mvc
 
         public static ICollection<ActionNameSelector> GetNameSelectors(MethodInfo methodInfo)
         {
-            ActionNameSelectorAttribute[] attrs =
-                (ActionNameSelectorAttribute[])methodInfo.GetCustomAttributes(
-                    typeof(ActionNameSelectorAttribute),
-                    inherit: true
-                );
+            ActionNameSelectorAttribute[] attrs = (ActionNameSelectorAttribute[])
+                methodInfo.GetCustomAttributes(typeof(ActionNameSelectorAttribute), inherit: true);
             ActionNameSelector[] selectors = Array.ConvertAll(
                 attrs,
                 attr =>

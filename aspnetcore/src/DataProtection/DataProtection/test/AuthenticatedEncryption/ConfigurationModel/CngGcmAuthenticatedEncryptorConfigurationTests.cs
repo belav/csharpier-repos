@@ -43,8 +43,8 @@ public class CngGcmAuthenticatedEncryptorConfigurationTests
         var configuration = new CngGcmAuthenticatedEncryptorConfiguration();
 
         // Act
-        var descriptor =
-            (CngGcmAuthenticatedEncryptorDescriptor)configuration.CreateNewDescriptor();
+        var descriptor = (CngGcmAuthenticatedEncryptorDescriptor)
+            configuration.CreateNewDescriptor();
 
         // Assert
         Assert.Equal(configuration, descriptor.Configuration);

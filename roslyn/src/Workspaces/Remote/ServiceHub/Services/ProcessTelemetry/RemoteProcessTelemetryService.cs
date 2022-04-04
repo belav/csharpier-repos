@@ -54,8 +54,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 {
                     var services = GetWorkspace().Services;
 
-                    var telemetryService =
-                        (RemoteWorkspaceTelemetryService)services.GetRequiredService<IWorkspaceTelemetryService>();
+                    var telemetryService = (RemoteWorkspaceTelemetryService)
+                        services.GetRequiredService<IWorkspaceTelemetryService>();
                     var telemetrySession = new TelemetrySession(serializedSession);
                     telemetrySession.Start();
 

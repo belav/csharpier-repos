@@ -541,9 +541,8 @@ namespace System.Text.Unicode.Tests
                         );
                     }
 
-                    return (GetPointerToFirstInvalidByteDel)methodInfo.CreateDelegate(
-                        typeof(GetPointerToFirstInvalidByteDel)
-                    );
+                    return (GetPointerToFirstInvalidByteDel)
+                        methodInfo.CreateDelegate(typeof(GetPointerToFirstInvalidByteDel));
                 }
             );
         }

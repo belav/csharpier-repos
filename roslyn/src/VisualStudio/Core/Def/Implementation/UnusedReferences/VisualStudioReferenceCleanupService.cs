@@ -28,8 +28,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
             IProjectSystemReferenceCleanupService projectSystemReferenceUpdateService
         )
         {
-            _projectSystemReferenceUpdateService =
-                (IProjectSystemReferenceCleanupService2)projectSystemReferenceUpdateService;
+            _projectSystemReferenceUpdateService = (IProjectSystemReferenceCleanupService2)
+                projectSystemReferenceUpdateService;
         }
 
         public async Task<ImmutableArray<ReferenceInfo>> GetProjectReferencesAsync(

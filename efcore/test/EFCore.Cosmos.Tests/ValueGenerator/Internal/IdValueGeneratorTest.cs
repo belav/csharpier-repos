@@ -55,15 +55,16 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.ValueGenerator.Internal
             Assert.Equal(ids.Count, new HashSet<string>(ids.Concat(ids)).Count);
 
             string Create<TEntity>(TEntity entity) where TEntity : class, new() =>
-                (string)CosmosTestHelpers.Instance.CreateInternalEntry(
-                    model,
-                    EntityState.Added,
-                    entity
-                )[
-                    model
-                        .FindEntityType(typeof(TEntity))
-                        .FindProperty(StoreKeyConvention.DefaultIdPropertyName)
-                ];
+                (string)
+                    CosmosTestHelpers.Instance.CreateInternalEntry(
+                        model,
+                        EntityState.Added,
+                        entity
+                    )[
+                        model
+                            .FindEntityType(typeof(TEntity))
+                            .FindProperty(StoreKeyConvention.DefaultIdPropertyName)
+                    ];
         }
 
         private class Blog

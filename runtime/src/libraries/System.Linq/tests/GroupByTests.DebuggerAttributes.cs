@@ -34,9 +34,8 @@ namespace System.Linq.Tests
             Assert.Equal(2, properties.Count());
 
             // Key
-            TKey key = (TKey)properties
-                .Single(property => property.Name == "Key")
-                .GetValue(proxyObject);
+            TKey key = (TKey)
+                properties.Single(property => property.Name == "Key").GetValue(proxyObject);
             Assert.Equal(grouping.Key, key);
 
             // Values

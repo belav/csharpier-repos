@@ -470,12 +470,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             );
 
             // resultTemp = builderTemp.ToStringAndClear();
-            var toStringAndClear = (MethodSymbol)Binder.GetWellKnownTypeMember(
-                _compilation,
-                WellKnownMember.System_Runtime_CompilerServices_DefaultInterpolatedStringHandler__ToStringAndClear,
-                _diagnostics,
-                syntax: syntax
-            );
+            var toStringAndClear = (MethodSymbol)
+                Binder.GetWellKnownTypeMember(
+                    _compilation,
+                    WellKnownMember.System_Runtime_CompilerServices_DefaultInterpolatedStringHandler__ToStringAndClear,
+                    _diagnostics,
+                    syntax: syntax
+                );
             BoundExpression toStringAndClearCall = toStringAndClear is not null
                 ? BoundCall.Synthesized(syntax, result.HandlerTemp, toStringAndClear)
                 : new BoundBadExpression(

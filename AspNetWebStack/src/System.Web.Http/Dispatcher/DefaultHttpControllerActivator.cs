@@ -134,9 +134,8 @@ namespace System.Web.Http.Dispatcher
             Contract.Assert(controllerType != null);
 
             // If dependency resolver returns controller object then use it.
-            IHttpController instance = (IHttpController)request
-                .GetDependencyScope()
-                .GetService(controllerType);
+            IHttpController instance = (IHttpController)
+                request.GetDependencyScope().GetService(controllerType);
             if (instance != null)
             {
                 activator = null;

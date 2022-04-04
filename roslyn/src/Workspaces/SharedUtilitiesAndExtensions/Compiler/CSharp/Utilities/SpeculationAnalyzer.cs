@@ -245,16 +245,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             {
                 case SyntaxKind.ParenthesizedLambdaExpression:
                 {
-                    var originalParenthesizedLambda =
-                        (ParenthesizedLambdaExpressionSyntax)originalLambda;
+                    var originalParenthesizedLambda = (ParenthesizedLambdaExpressionSyntax)
+                        originalLambda;
                     var originalParams = originalParenthesizedLambda.ParameterList.Parameters;
                     if (!originalParams.Any())
                     {
                         return false;
                     }
 
-                    var replacedParenthesizedLambda =
-                        (ParenthesizedLambdaExpressionSyntax)replacedLambda;
+                    var replacedParenthesizedLambda = (ParenthesizedLambdaExpressionSyntax)
+                        replacedLambda;
                     var replacedParams = replacedParenthesizedLambda.ParameterList.Parameters;
                     Debug.Assert(originalParams.Count == replacedParams.Count);
 
@@ -585,9 +585,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                 if (Equals(originalCaseType, newCaseType))
                     return false;
 
-                var oldSwitchStatement = (SwitchStatementSyntax)originalCaseSwitchLabel
-                    .Parent
-                    .Parent;
+                var oldSwitchStatement = (SwitchStatementSyntax)
+                    originalCaseSwitchLabel.Parent.Parent;
                 var newSwitchStatement = (SwitchStatementSyntax)newCaseSwitchLabel.Parent.Parent;
 
                 var originalConversion = this.OriginalSemanticModel.ClassifyConversion(

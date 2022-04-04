@@ -5950,9 +5950,10 @@ namespace System.Xml
             // First try to get the data as a TextReader
             if (_xmlResolver.SupportsType(uri, typeof(TextReader)))
             {
-                TextReader textReader = (TextReader)await _xmlResolver
-                    .GetEntityAsync(uri, null, typeof(TextReader))
-                    .ConfigureAwait(false);
+                TextReader textReader = (TextReader)
+                    await _xmlResolver
+                        .GetEntityAsync(uri, null, typeof(TextReader))
+                        .ConfigureAwait(false);
                 if (textReader == null)
                 {
                     return false;
@@ -5970,9 +5971,10 @@ namespace System.Xml
                     "Stream must always be a supported type in XmlResolver"
                 );
 
-                Stream stream = (Stream)await _xmlResolver
-                    .GetEntityAsync(uri, null, typeof(Stream))
-                    .ConfigureAwait(false);
+                Stream stream = (Stream)
+                    await _xmlResolver
+                        .GetEntityAsync(uri, null, typeof(Stream))
+                        .ConfigureAwait(false);
                 if (stream == null)
                 {
                     return false;

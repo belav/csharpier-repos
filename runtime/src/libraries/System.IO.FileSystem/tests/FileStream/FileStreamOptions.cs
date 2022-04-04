@@ -245,12 +245,8 @@ namespace System.IO.Tests
                     canWrite
                 );
                 Validate(
-                    (FileStream)new StreamReader(
-                        filePath,
-                        Encoding.UTF8,
-                        false,
-                        options
-                    ).BaseStream,
+                    (FileStream)
+                        new StreamReader(filePath, Encoding.UTF8, false, options).BaseStream,
                     filePath,
                     isAsync,
                     canRead,

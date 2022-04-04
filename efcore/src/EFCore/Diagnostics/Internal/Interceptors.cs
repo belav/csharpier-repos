@@ -68,9 +68,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
         /// </summary>
         public virtual TInterceptor? Aggregate<TInterceptor>()
             where TInterceptor : class, IInterceptor =>
-            (TInterceptor?)_aggregators[typeof(TInterceptor)].AggregateInterceptors(
-                RegisteredInterceptors
-            );
+            (TInterceptor?)
+                _aggregators[typeof(TInterceptor)].AggregateInterceptors(RegisteredInterceptors);
 
         /// <summary>
         ///     We resolve this lazily because loggers are created very early in the initialization

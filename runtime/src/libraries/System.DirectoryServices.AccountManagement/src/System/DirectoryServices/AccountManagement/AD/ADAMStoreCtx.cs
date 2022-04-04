@@ -158,8 +158,8 @@ namespace System.DirectoryServices.AccountManagement
             // User supplied name
             //
             UnsafeNativeMethods.Pathname pathCracker = new UnsafeNativeMethods.Pathname();
-            UnsafeNativeMethods.IADsPathname pathName =
-                (UnsafeNativeMethods.IADsPathname)pathCracker;
+            UnsafeNativeMethods.IADsPathname pathName = (UnsafeNativeMethods.IADsPathname)
+                pathCracker;
 
             pathName.Set(
                 this.ctxBase.Path,

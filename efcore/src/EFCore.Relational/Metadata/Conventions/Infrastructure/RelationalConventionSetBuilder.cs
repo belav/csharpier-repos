@@ -166,18 +166,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure
             );
             ReplaceConvention(
                 conventionSet.ModelFinalizingConventions,
-                (QueryFilterRewritingConvention)new RelationalQueryFilterRewritingConvention(
-                    Dependencies,
-                    RelationalDependencies
-                )
+                (QueryFilterRewritingConvention)
+                    new RelationalQueryFilterRewritingConvention(
+                        Dependencies,
+                        RelationalDependencies
+                    )
             );
 
             ReplaceConvention(
                 conventionSet.ModelFinalizedConventions,
-                (RuntimeModelConvention)new RelationalRuntimeModelConvention(
-                    Dependencies,
-                    RelationalDependencies
-                )
+                (RuntimeModelConvention)
+                    new RelationalRuntimeModelConvention(Dependencies, RelationalDependencies)
             );
 
             return conventionSet;

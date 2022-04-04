@@ -579,9 +579,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             while (currentUnderlying.Arity == NamedTypeSymbol.ValueTupleRestPosition)
             {
-                tupleSymbol = (INamedTypeSymbol)currentUnderlying.TypeArguments[
-                    NamedTypeSymbol.ValueTupleRestPosition - 1
-                ];
+                tupleSymbol = (INamedTypeSymbol)
+                    currentUnderlying.TypeArguments[NamedTypeSymbol.ValueTupleRestPosition - 1];
                 Debug.Assert(tupleSymbol.IsTupleType);
 
                 if (

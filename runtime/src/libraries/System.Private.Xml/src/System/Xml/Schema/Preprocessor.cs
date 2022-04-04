@@ -1001,9 +1001,8 @@ namespace System.Xml.Schema
                     else
                     {
                         AddToTable(redefine.Groups, group.QualifiedName, group);
-                        XmlSchemaGroup? originalGroup = (XmlSchemaGroup?)schemaToUpdate.Groups[
-                            group.QualifiedName
-                        ];
+                        XmlSchemaGroup? originalGroup = (XmlSchemaGroup?)
+                            schemaToUpdate.Groups[group.QualifiedName];
                         XmlSchema? parentSchema = GetParentSchema(originalGroup);
                         if (
                             originalGroup == null
@@ -1044,10 +1043,8 @@ namespace System.Xml.Schema
                             attributeGroup.QualifiedName,
                             attributeGroup
                         );
-                        XmlSchemaAttributeGroup? originalAttrGroup =
-                            (XmlSchemaAttributeGroup?)schemaToUpdate.AttributeGroups[
-                                attributeGroup.QualifiedName
-                            ];
+                        XmlSchemaAttributeGroup? originalAttrGroup = (XmlSchemaAttributeGroup?)
+                            schemaToUpdate.AttributeGroups[attributeGroup.QualifiedName];
                         XmlSchema? parentSchema = GetParentSchema(originalAttrGroup);
                         if (
                             originalAttrGroup == null
@@ -1087,9 +1084,8 @@ namespace System.Xml.Schema
                     else
                     {
                         AddToTable(redefine.SchemaTypes, complexType.QualifiedName, complexType);
-                        XmlSchemaType? originalType = (XmlSchemaType?)schemaToUpdate.SchemaTypes[
-                            complexType.QualifiedName
-                        ];
+                        XmlSchemaType? originalType = (XmlSchemaType?)
+                            schemaToUpdate.SchemaTypes[complexType.QualifiedName];
                         XmlSchema? parentSchema = GetParentSchema(originalType);
                         if (
                             originalType == null
@@ -1133,9 +1129,8 @@ namespace System.Xml.Schema
                     else
                     {
                         AddToTable(redefine.SchemaTypes, simpleType.QualifiedName, simpleType);
-                        XmlSchemaType? originalType = (XmlSchemaType?)schemaToUpdate.SchemaTypes[
-                            simpleType.QualifiedName
-                        ];
+                        XmlSchemaType? originalType = (XmlSchemaType?)
+                            schemaToUpdate.SchemaTypes[simpleType.QualifiedName];
                         XmlSchema? parentSchema = GetParentSchema(originalType);
                         if (
                             originalType == null
@@ -1328,8 +1323,8 @@ namespace System.Xml.Schema
         {
             if (stype.Content != null && stype.Content is XmlSchemaSimpleTypeRestriction)
             {
-                XmlSchemaSimpleTypeRestriction restriction =
-                    (XmlSchemaSimpleTypeRestriction)stype.Content;
+                XmlSchemaSimpleTypeRestriction restriction = (XmlSchemaSimpleTypeRestriction)
+                    stype.Content;
                 if (restriction.BaseTypeName == stype.QualifiedName)
                 {
                     return;
@@ -1703,8 +1698,8 @@ namespace System.Xml.Schema
 
             for (int i = 0; i < element.Constraints.Count; ++i)
             {
-                XmlSchemaIdentityConstraint identityConstraint =
-                    (XmlSchemaIdentityConstraint)element.Constraints[i];
+                XmlSchemaIdentityConstraint identityConstraint = (XmlSchemaIdentityConstraint)
+                    element.Constraints[i];
                 SetParent(identityConstraint, element);
                 PreprocessIdentityConstraint(identityConstraint);
             }
@@ -1835,8 +1830,8 @@ namespace System.Xml.Schema
             }
             else if (simpleType.Content is XmlSchemaSimpleTypeRestriction)
             {
-                XmlSchemaSimpleTypeRestriction restriction =
-                    (XmlSchemaSimpleTypeRestriction)simpleType.Content;
+                XmlSchemaSimpleTypeRestriction restriction = (XmlSchemaSimpleTypeRestriction)
+                    simpleType.Content;
                 //SetParent
                 SetParent(restriction, simpleType);
                 for (int i = 0; i < restriction.Facets.Count; ++i)
@@ -1999,8 +1994,8 @@ namespace System.Xml.Schema
                 }
                 if (complexType.ContentModel is XmlSchemaSimpleContent)
                 {
-                    XmlSchemaSimpleContent content =
-                        (XmlSchemaSimpleContent)complexType.ContentModel;
+                    XmlSchemaSimpleContent content = (XmlSchemaSimpleContent)
+                        complexType.ContentModel;
                     if (content.Content == null)
                     {
                         if (complexType.QualifiedName == XmlQualifiedName.Empty)
@@ -2376,8 +2371,8 @@ namespace System.Xml.Schema
                 }
                 else
                 { // XmlSchemaAttributeGroupRef
-                    XmlSchemaAttributeGroupRef attributeGroupRef =
-                        (XmlSchemaAttributeGroupRef)attributes[i];
+                    XmlSchemaAttributeGroupRef attributeGroupRef = (XmlSchemaAttributeGroupRef)
+                        attributes[i];
                     if (attributeGroupRef.RefName.IsEmpty)
                     {
                         SendValidationEvent(SR.Sch_MissAttribute, "ref", attributeGroupRef);

@@ -694,17 +694,19 @@ namespace Internal.JitInterface
                     {
                         Debug.Assert(pGenericLookupKind.needsRuntimeLookup);
 
-                        ReadyToRunHelperId helperId =
-                            (ReadyToRunHelperId)pGenericLookupKind.runtimeLookupFlags;
+                        ReadyToRunHelperId helperId = (ReadyToRunHelperId)
+                            pGenericLookupKind.runtimeLookupFlags;
                         TypeDesc constrainedType = null;
                         if (
                             helperId == ReadyToRunHelperId.MethodEntry
                             && pGenericLookupKind.runtimeLookupArgs != null
                         )
                         {
-                            constrainedType = (TypeDesc)GetRuntimeDeterminedObjectForToken(
-                                ref *(CORINFO_RESOLVED_TOKEN*)pGenericLookupKind.runtimeLookupArgs
-                            );
+                            constrainedType = (TypeDesc)
+                                GetRuntimeDeterminedObjectForToken(
+                                    ref *(CORINFO_RESOLVED_TOKEN*)
+                                        pGenericLookupKind.runtimeLookupArgs
+                                );
                         }
                         object helperArg = GetRuntimeDeterminedObjectForToken(ref pResolvedToken);
                         if (helperArg is MethodDesc methodDesc)
@@ -1269,9 +1271,8 @@ namespace Internal.JitInterface
                         // To replace !!0, we need to find the token for a !!0 TypeSpec within the image.
                         Debug.Assert(resultDef is SignatureMethodVariable);
                         Debug.Assert(((SignatureMethodVariable)resultDef).Index == 0);
-                        module = (EcmaModule)(
-                            (MetadataType)methodILDef.OwningMethod.OwningType
-                        ).Module;
+                        module = (EcmaModule)
+                            ((MetadataType)methodILDef.OwningMethod.OwningType).Module;
                         token = FindGenericMethodArgTypeSpec(module);
                     }
                 }
@@ -1962,9 +1963,8 @@ namespace Internal.JitInterface
                 )
                 {
                     var methodIL = HandleToObject(pResolvedToken.tokenScope);
-                    var rawMethod = (MethodDesc)methodIL
-                        .GetMethodILScopeDefinition()
-                        .GetObject((int)pResolvedToken.token);
+                    var rawMethod = (MethodDesc)
+                        methodIL.GetMethodILScopeDefinition().GetObject((int)pResolvedToken.token);
                     if (IsTypeSpecForTypicalInstantiation(rawMethod.OwningType))
                     {
                         pResult->contextHandle = contextFromMethodBeingCompiled();
@@ -2312,9 +2312,10 @@ namespace Internal.JitInterface
         {
             if (MethodSignatureIsUnstable(method.Signature, out string unstableMessage))
             {
-                constLookup.addr = (void*)ObjectToHandle(
-                    new RequiresRuntimeJitIfUsedSymbol(unstableMessage + " calling " + method)
-                );
+                constLookup.addr = (void*)
+                    ObjectToHandle(
+                        new RequiresRuntimeJitIfUsedSymbol(unstableMessage + " calling " + method)
+                    );
                 constLookup.accessType = InfoAccessType.IAT_PVALUE;
             }
         }
@@ -2616,13 +2617,13 @@ namespace Internal.JitInterface
                     pResultLookup.lookupKind.runtimeLookupArgs = ObjectToHandle(
                         templateMethod.OwningType
                     );
-                    pResultLookup.lookupKind.runtimeLookupFlags =
-                        (ushort)ReadyToRunHelperId.DeclaringTypeHandle;
+                    pResultLookup.lookupKind.runtimeLookupFlags = (ushort)
+                        ReadyToRunHelperId.DeclaringTypeHandle;
                     break;
 
                 case DictionaryEntryKind.TypeHandleSlot:
-                    pResultLookup.lookupKind.runtimeLookupFlags =
-                        (ushort)ReadyToRunHelperId.TypeHandle;
+                    pResultLookup.lookupKind.runtimeLookupFlags = (ushort)
+                        ReadyToRunHelperId.TypeHandle;
                     break;
 
                 case DictionaryEntryKind.MethodDescSlot:
@@ -2631,25 +2632,25 @@ namespace Internal.JitInterface
                 case DictionaryEntryKind.DispatchStubAddrSlot:
                 {
                     if (entryKind == DictionaryEntryKind.MethodDescSlot)
-                        pResultLookup.lookupKind.runtimeLookupFlags =
-                            (ushort)ReadyToRunHelperId.MethodHandle;
+                        pResultLookup.lookupKind.runtimeLookupFlags = (ushort)
+                            ReadyToRunHelperId.MethodHandle;
                     else if (
                         entryKind == DictionaryEntryKind.MethodEntrySlot
                         || entryKind == DictionaryEntryKind.ConstrainedMethodEntrySlot
                     )
-                        pResultLookup.lookupKind.runtimeLookupFlags =
-                            (ushort)ReadyToRunHelperId.MethodEntry;
+                        pResultLookup.lookupKind.runtimeLookupFlags = (ushort)
+                            ReadyToRunHelperId.MethodEntry;
                     else
-                        pResultLookup.lookupKind.runtimeLookupFlags =
-                            (ushort)ReadyToRunHelperId.VirtualDispatchCell;
+                        pResultLookup.lookupKind.runtimeLookupFlags = (ushort)
+                            ReadyToRunHelperId.VirtualDispatchCell;
 
                     pResultLookup.lookupKind.runtimeLookupArgs = pConstrainedResolvedToken;
                     break;
                 }
 
                 case DictionaryEntryKind.FieldDescSlot:
-                    pResultLookup.lookupKind.runtimeLookupFlags =
-                        (ushort)ReadyToRunHelperId.FieldHandle;
+                    pResultLookup.lookupKind.runtimeLookupFlags = (ushort)
+                        ReadyToRunHelperId.FieldHandle;
                     break;
 
                 default:
@@ -2723,9 +2724,8 @@ namespace Internal.JitInterface
                         //
 
                         templateMethod = declaringMethod;
-                        pResult.compileTimeHandle = (CORINFO_GENERIC_STRUCT_*)ObjectToHandle(
-                            declaringMethod.OwningType
-                        );
+                        pResult.compileTimeHandle = (CORINFO_GENERIC_STRUCT_*)
+                            ObjectToHandle(declaringMethod.OwningType);
                     }
                 }
 
@@ -2786,10 +2786,11 @@ namespace Internal.JitInterface
             if (!_compilation.CompilationModuleGroup.VersionsWithType(type))
                 throw new RequiresRuntimeJitException(type.ToString());
 
-            Import typeHandleImport = (Import)_compilation.SymbolNodeFactory.CreateReadyToRunHelper(
-                ReadyToRunHelperId.TypeHandle,
-                type
-            );
+            Import typeHandleImport = (Import)
+                _compilation.SymbolNodeFactory.CreateReadyToRunHelper(
+                    ReadyToRunHelperId.TypeHandle,
+                    type
+                );
             Debug.Assert(typeHandleImport.RepresentsIndirectionCell);
             ppIndirection = (void*)ObjectToHandle(typeHandleImport);
             return null;
@@ -3053,18 +3054,20 @@ namespace Internal.JitInterface
         private void getGSCookie(IntPtr* pCookieVal, IntPtr** ppCookieVal)
         {
             *pCookieVal = IntPtr.Zero;
-            *ppCookieVal = (IntPtr*)ObjectToHandle(
-                _compilation.NodeFactory.GetReadyToRunHelperCell(ReadyToRunHelper.GSCookie)
-            );
+            *ppCookieVal = (IntPtr*)
+                ObjectToHandle(
+                    _compilation.NodeFactory.GetReadyToRunHelperCell(ReadyToRunHelper.GSCookie)
+                );
         }
 
         private int* getAddrOfCaptureThreadGlobal(ref void* ppIndirection)
         {
-            ppIndirection = (void*)ObjectToHandle(
-                _compilation.NodeFactory.GetReadyToRunHelperCell(
-                    ReadyToRunHelper.IndirectTrapThreads
-                )
-            );
+            ppIndirection = (void*)
+                ObjectToHandle(
+                    _compilation.NodeFactory.GetReadyToRunHelperCell(
+                        ReadyToRunHelper.IndirectTrapThreads
+                    )
+                );
             return null;
         }
 
@@ -3177,9 +3180,8 @@ namespace Internal.JitInterface
                     return HRESULT.E_NOTIMPL;
             }
 
-            BlockCounts* blockCounts = (BlockCounts*)GetPin(
-                _bbCounts = new byte[countSchemaItems * sizeof(BlockCounts)]
-            );
+            BlockCounts* blockCounts = (BlockCounts*)
+                GetPin(_bbCounts = new byte[countSchemaItems * sizeof(BlockCounts)]);
             *pInstrumentationData = (byte*)blockCounts;
 
             for (uint iSchema = 0; iSchema < countSchemaItems; iSchema++)
@@ -3219,16 +3221,18 @@ namespace Internal.JitInterface
 
             if (ecmaMethod.IsSuppressGCTransition())
             {
-                pLookup.addr = (void*)ObjectToHandle(
-                    _compilation.SymbolNodeFactory.GetPInvokeTargetNode(methodWithToken)
-                );
+                pLookup.addr = (void*)
+                    ObjectToHandle(
+                        _compilation.SymbolNodeFactory.GetPInvokeTargetNode(methodWithToken)
+                    );
                 pLookup.accessType = InfoAccessType.IAT_PVALUE;
             }
             else
             {
-                pLookup.addr = (void*)ObjectToHandle(
-                    _compilation.SymbolNodeFactory.GetIndirectPInvokeTargetNode(methodWithToken)
-                );
+                pLookup.addr = (void*)
+                    ObjectToHandle(
+                        _compilation.SymbolNodeFactory.GetIndirectPInvokeTargetNode(methodWithToken)
+                    );
                 pLookup.accessType = InfoAccessType.IAT_PPVALUE;
             }
         }
@@ -3318,11 +3322,8 @@ namespace Internal.JitInterface
                 {
                     MethodIL methodIL = _compilation.GetMethodIL(MethodBeingCompiled);
                     mdToken classToken = (mdToken)clause.ClassTokenOrOffset;
-                    TypeDesc clauseType = (TypeDesc)ResolveTokenInScope(
-                        methodIL,
-                        MethodBeingCompiled,
-                        classToken
-                    );
+                    TypeDesc clauseType = (TypeDesc)
+                        ResolveTokenInScope(methodIL, MethodBeingCompiled, classToken);
 
                     CORJIT_FLAGS flags = default(CORJIT_FLAGS);
                     getJitFlags(ref flags, 0);

@@ -174,9 +174,10 @@ namespace System.Collections.Generic
             {
                 if (typeof(TKey) == typeof(string))
                 {
-                    return (IEqualityComparer<TKey>)IInternalStringEqualityComparer.GetUnderlyingEqualityComparer(
-                        (IEqualityComparer<string?>?)_comparer
-                    );
+                    return (IEqualityComparer<TKey>)
+                        IInternalStringEqualityComparer.GetUnderlyingEqualityComparer(
+                            (IEqualityComparer<string?>?)_comparer
+                        );
                 }
                 else
                 {
@@ -951,19 +952,15 @@ namespace System.Collections.Generic
             int realVersion = siInfo.GetInt32(VersionName);
             int hashsize = siInfo.GetInt32(HashSizeName);
             _comparer =
-                (IEqualityComparer<TKey>)siInfo.GetValue(
-                    ComparerName,
-                    typeof(IEqualityComparer<TKey>)
-                )!; // When serialized if comparer is null, we use the default.
+                (IEqualityComparer<TKey>)
+                    siInfo.GetValue(ComparerName, typeof(IEqualityComparer<TKey>))!; // When serialized if comparer is null, we use the default.
 
             if (hashsize != 0)
             {
                 Initialize(hashsize);
 
-                KeyValuePair<TKey, TValue>[]? array = (KeyValuePair<
-                    TKey,
-                    TValue
-                >[]?)siInfo.GetValue(KeyValuePairsName, typeof(KeyValuePair<TKey, TValue>[]));
+                KeyValuePair<TKey, TValue>[]? array = (KeyValuePair<TKey, TValue>[]?)
+                    siInfo.GetValue(KeyValuePairsName, typeof(KeyValuePair<TKey, TValue>[]));
 
                 if (array == null)
                 {
@@ -1011,9 +1008,10 @@ namespace System.Collections.Generic
             {
                 Debug.Assert(_comparer is NonRandomizedStringEqualityComparer);
                 _comparer =
-                    (IEqualityComparer<TKey>)(
-                        (NonRandomizedStringEqualityComparer)_comparer
-                    ).GetRandomizedEqualityComparer();
+                    (IEqualityComparer<TKey>)
+                        (
+                            (NonRandomizedStringEqualityComparer)_comparer
+                        ).GetRandomizedEqualityComparer();
 
                 for (int i = 0; i < count; i++)
                 {

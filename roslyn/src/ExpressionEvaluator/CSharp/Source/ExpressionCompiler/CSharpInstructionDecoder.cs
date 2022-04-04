@@ -219,9 +219,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             DkmClrInstructionAddress instructionAddress
         )
         {
-            var methodHandle = (MethodDefinitionHandle)MetadataTokens.Handle(
-                instructionAddress.MethodId.Token
-            );
+            var methodHandle = (MethodDefinitionHandle)
+                MetadataTokens.Handle(instructionAddress.MethodId.Token);
             return compilation.GetSourceMethod(
                 instructionAddress.ModuleInstance.Mvid,
                 methodHandle

@@ -90,10 +90,8 @@ namespace System.ConfigurationTests
                     + assemblyName;
 
                 Type type = Type.GetType(typeName, true);
-                var configFactory = (IInternalConfigConfigurationFactory)Activator.CreateInstance(
-                    type,
-                    true
-                );
+                var configFactory = (IInternalConfigConfigurationFactory)
+                    Activator.CreateInstance(type, true);
                 var config = configFactory.Create(
                     typeof(TempConfigurationHost),
                     "test",

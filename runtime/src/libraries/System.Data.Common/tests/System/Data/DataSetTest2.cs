@@ -1012,9 +1012,8 @@ namespace System.Data.Tests
 
             //Checking ForeignKeyConstraint
 
-            ForeignKeyConstraint con = (ForeignKeyConstraint)ds.Tables["ChildElement1"].Constraints[
-                "Element1_ChildElement1"
-            ];
+            ForeignKeyConstraint con = (ForeignKeyConstraint)
+                ds.Tables["ChildElement1"].Constraints["Element1_ChildElement1"];
 
             Assert.Equal("Element1_Id", con.Columns[0].ColumnName);
             Assert.Equal(Rule.Cascade, con.DeleteRule);

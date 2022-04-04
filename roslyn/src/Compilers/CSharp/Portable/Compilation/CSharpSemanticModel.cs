@@ -513,9 +513,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             AliasSymbol aliasOpt; // not needed.
-            NamedTypeSymbol attributeType = (NamedTypeSymbol)binder
-                .BindType(attribute.Name, BindingDiagnosticBag.Discarded, out aliasOpt)
-                .Type;
+            NamedTypeSymbol attributeType = (NamedTypeSymbol)
+                binder.BindType(attribute.Name, BindingDiagnosticBag.Discarded, out aliasOpt).Type;
             var boundNode = new ExecutableCodeBinder(
                 attribute,
                 binder.ContainingMemberOrLambda,
@@ -767,8 +766,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 // Find containing object creation expression
 
-                InitializerExpressionSyntax initializer =
-                    (InitializerExpressionSyntax)expression.Parent;
+                InitializerExpressionSyntax initializer = (InitializerExpressionSyntax)
+                    expression.Parent;
 
                 // Skip containing object initializers
                 while (
@@ -1252,10 +1251,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     case SyntaxKind.SingleVariableDesignation:
                         var (declarationType, annotation) =
-                            ((ITypeSymbol, CodeAnalysis.NullableAnnotation))TypeFromVariable(
-                                (SingleVariableDesignationSyntax)parent.Designation,
-                                cancellationToken
-                            );
+                            ((ITypeSymbol, CodeAnalysis.NullableAnnotation))
+                                TypeFromVariable(
+                                    (SingleVariableDesignationSyntax)parent.Designation,
+                                    cancellationToken
+                                );
                         var declarationTypeSymbol = declarationType.GetSymbol();
                         var nullabilityInfo = annotation.ToNullabilityInfo(declarationTypeSymbol);
                         return new CSharpTypeInfo(
@@ -2717,8 +2717,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var tupleLiteralConversion = (BoundConversion)highestBoundExpr;
                     if (tupleLiteralConversion.Operand.Kind == BoundKind.ConvertedTupleLiteral)
                     {
-                        var convertedTuple =
-                            (BoundConvertedTupleLiteral)tupleLiteralConversion.Operand;
+                        var convertedTuple = (BoundConvertedTupleLiteral)
+                            tupleLiteralConversion.Operand;
                         type = convertedTuple.SourceTuple.Type;
                         nullability = convertedTuple.TopLevelNullability;
                     }
@@ -2838,8 +2838,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 else if (boundNodeForSyntacticParent?.Kind == BoundKind.DelegateCreationExpression)
                 {
                     // A delegate creation expression takes the place of a method group or anonymous function conversion.
-                    var delegateCreation =
-                        (BoundDelegateCreationExpression)boundNodeForSyntacticParent;
+                    var delegateCreation = (BoundDelegateCreationExpression)
+                        boundNodeForSyntacticParent;
                     (convertedType, convertedNullability) = getTypeAndNullability(delegateCreation);
                     switch (boundExpr.Kind)
                     {
@@ -3542,9 +3542,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             AliasSymbol aliasOpt;
-            var attributeType = (NamedTypeSymbol)binder
-                .BindType(attribute.Name, BindingDiagnosticBag.Discarded, out aliasOpt)
-                .Type;
+            var attributeType = (NamedTypeSymbol)
+                binder.BindType(attribute.Name, BindingDiagnosticBag.Discarded, out aliasOpt).Type;
             speculativeModel = (
                 (SyntaxTreeSemanticModel)this
             ).CreateSpeculativeAttributeSemanticModel(
@@ -5230,8 +5229,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         break;
 
                     case BoundKind.BadExpression:
-                        BoundBadExpression boundBadExpression =
-                            (BoundBadExpression)boundNodeForSyntacticParent;
+                        BoundBadExpression boundBadExpression = (BoundBadExpression)
+                            boundNodeForSyntacticParent;
                         if (unwrappedSymbols.Length == 1)
                         {
                             resultKind = resultKind.WorseResultKind(boundBadExpression.ResultKind);
@@ -5578,8 +5577,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     case BoundKind.DelegateCreationExpression:
                         // If we are looking for info on "M" in "new Action(M)"
                         // we want to get the symbol that overload resolution chose for M, not the whole method group M.
-                        var delegateCreation =
-                            (BoundDelegateCreationExpression)boundNodeForSyntacticParent;
+                        var delegateCreation = (BoundDelegateCreationExpression)
+                            boundNodeForSyntacticParent;
                         if (
                             delegateCreation.Argument == boundNode
                             && (object)delegateCreation.MethodOpt != null

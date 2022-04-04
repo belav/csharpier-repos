@@ -3907,8 +3907,8 @@ IUnaryOperation (UnaryOperatorKind.Hat) (OperationKind.Unary, Type: System.Index
     IParameterReferenceOperation: arg (OperationKind.ParameterReference, Type: System.Int32) (Syntax: 'arg')
 ";
 
-            var operation =
-                (IUnaryOperation)VerifyOperationTreeForTest<PrefixUnaryExpressionSyntax>(
+            var operation = (IUnaryOperation)
+                VerifyOperationTreeForTest<PrefixUnaryExpressionSyntax>(
                     compilation,
                     expectedOperationTree
                 );
@@ -3938,8 +3938,8 @@ IUnaryOperation (UnaryOperatorKind.Hat, IsLifted) (OperationKind.Unary, Type: Sy
     IParameterReferenceOperation: arg (OperationKind.ParameterReference, Type: System.Int32?) (Syntax: 'arg')
 ";
 
-            var operation =
-                (IUnaryOperation)VerifyOperationTreeForTest<PrefixUnaryExpressionSyntax>(
+            var operation = (IUnaryOperation)
+                VerifyOperationTreeForTest<PrefixUnaryExpressionSyntax>(
                     compilation,
                     expectedOperationTree
                 );
@@ -3972,8 +3972,8 @@ IUnaryOperation (UnaryOperatorKind.Hat) (OperationKind.Unary, Type: System.Index
         IParameterReferenceOperation: arg (OperationKind.ParameterReference, Type: System.Byte) (Syntax: 'arg')
 ";
 
-            var operation =
-                (IUnaryOperation)VerifyOperationTreeForTest<PrefixUnaryExpressionSyntax>(
+            var operation = (IUnaryOperation)
+                VerifyOperationTreeForTest<PrefixUnaryExpressionSyntax>(
                     compilation,
                     expectedOperationTree
                 );

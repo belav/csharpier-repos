@@ -372,9 +372,10 @@ namespace System
 
         internal static int GetLastGCPercentTimeInGC()
         {
-            return (int)EventPipeInternal.GetRuntimeCounterValue(
-                EventPipeInternal.RuntimeCounters.GC_LAST_PERCENT_TIME_IN_GC
-            );
+            return (int)
+                EventPipeInternal.GetRuntimeCounterValue(
+                    EventPipeInternal.RuntimeCounters.GC_LAST_PERCENT_TIME_IN_GC
+                );
         }
     }
 }

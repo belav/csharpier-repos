@@ -130,10 +130,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         return (EventSymbol)OverriddenOrHiddenMembers.GetOverriddenMember();
                     }
 
-                    return (EventSymbol)OverriddenOrHiddenMembersResult.GetOverriddenMember(
-                        this,
-                        OriginalDefinition.OverriddenEvent
-                    );
+                    return (EventSymbol)
+                        OverriddenOrHiddenMembersResult.GetOverriddenMember(
+                            this,
+                            OriginalDefinition.OverriddenEvent
+                        );
                 }
                 return null;
             }

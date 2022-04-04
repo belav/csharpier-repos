@@ -155,10 +155,8 @@ namespace System.Threading
                     return workerThreads == ForcedMinWorkerThreads;
                 }
 
-                short newMinThreads = (short)Math.Max(
-                    1,
-                    Math.Min(workerThreads, MaxPossibleThreadCount)
-                );
+                short newMinThreads = (short)
+                    Math.Max(1, Math.Min(workerThreads, MaxPossibleThreadCount));
                 _minThreads = newMinThreads;
                 if (_numBlockedThreads > 0)
                 {

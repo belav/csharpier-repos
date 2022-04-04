@@ -64,9 +64,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
 
             if (typeof(TEntity) == typeof(DerivedInheritanceRelationshipEntity))
             {
-                return (IQueryable<TEntity>)BaseEntities
-                    .OfType<DerivedInheritanceRelationshipEntity>()
-                    .AsQueryable();
+                return (IQueryable<TEntity>)
+                    BaseEntities.OfType<DerivedInheritanceRelationshipEntity>().AsQueryable();
             }
 
             if (typeof(TEntity) == typeof(BaseReferenceOnBase))
@@ -729,16 +728,16 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
             collectionsOnBase[4].ParentId = baseEntities[3].Id;
 
             // DerivedInheritanceRelationshipEntity navigations
-            baseEntities[0].DerivedSefReferenceOnBase =
-                (DerivedInheritanceRelationshipEntity)baseEntities[3];
+            baseEntities[0].DerivedSefReferenceOnBase = (DerivedInheritanceRelationshipEntity)
+                baseEntities[3];
             ((DerivedInheritanceRelationshipEntity)baseEntities[3]).BaseSelfReferenceOnDerived =
                 baseEntities[0];
             ((DerivedInheritanceRelationshipEntity)baseEntities[3]).BaseId = baseEntities[0].Id;
 
             ((DerivedInheritanceRelationshipEntity)baseEntities[3]).BaseReferenceOnDerived =
                 baseReferencesOnDerived[0];
-            baseReferencesOnDerived[0].BaseParent =
-                (DerivedInheritanceRelationshipEntity)baseEntities[3];
+            baseReferencesOnDerived[0].BaseParent = (DerivedInheritanceRelationshipEntity)
+                baseEntities[3];
             baseReferencesOnDerived[0].BaseParentId = baseEntities[3].Id;
 
             ((DerivedInheritanceRelationshipEntity)baseEntities[3]).DerivedReferenceOnDerived =
@@ -751,8 +750,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel
 
             ((DerivedInheritanceRelationshipEntity)baseEntities[3]).BaseCollectionOnDerived =
                 new List<BaseCollectionOnDerived> { baseCollectionsOnDerived[0] };
-            baseCollectionsOnDerived[0].BaseParent =
-                (DerivedInheritanceRelationshipEntity)baseEntities[3];
+            baseCollectionsOnDerived[0].BaseParent = (DerivedInheritanceRelationshipEntity)
+                baseEntities[3];
             baseCollectionsOnDerived[0].ParentId = baseEntities[3].Id;
 
             ((DerivedInheritanceRelationshipEntity)baseEntities[3]).CollectionOnDerived =

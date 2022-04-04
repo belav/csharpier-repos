@@ -95,9 +95,8 @@ namespace System.Text.Encodings.Web
                     ThrowArgumentException_MaxOutputCharsPerInputChar();
                 }
 
-                uint utf8lsb = (uint)UnicodeHelpers.GetUtf8RepresentationForScalarValue(
-                    (uint)nextScalarValue.Value
-                );
+                uint utf8lsb = (uint)
+                    UnicodeHelpers.GetUtf8RepresentationForScalarValue((uint)nextScalarValue.Value);
                 do
                 {
                     if (SpanUtility.IsValidIndex(utf8Destination, dstIdx))
@@ -427,9 +426,8 @@ namespace System.Text.Encodings.Web
 
                 if (!WillEncode(scalarValue.Value))
                 {
-                    uint utf8lsb = (uint)UnicodeHelpers.GetUtf8RepresentationForScalarValue(
-                        (uint)scalarValue.Value
-                    );
+                    uint utf8lsb = (uint)
+                        UnicodeHelpers.GetUtf8RepresentationForScalarValue((uint)scalarValue.Value);
                     int dstIdxTemp = 0;
                     do
                     {

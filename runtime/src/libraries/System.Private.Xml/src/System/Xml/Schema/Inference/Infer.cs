@@ -1126,9 +1126,8 @@ namespace System.Xml.Schema
                         != typeof(XmlSchemaElement)
                     )
                         throw new XmlSchemaInferenceException(SR.SchInf_seq, 0, 0);
-                    XmlSchemaElement subElement = (XmlSchemaElement)(
-                        (XmlSchemaSequence)ct.Particle
-                    ).Items[lastUsedSeqItem];
+                    XmlSchemaElement subElement = (XmlSchemaElement)
+                        ((XmlSchemaSequence)ct.Particle).Items[lastUsedSeqItem];
                     subElement.MinOccurs = 0;
                 }
             }

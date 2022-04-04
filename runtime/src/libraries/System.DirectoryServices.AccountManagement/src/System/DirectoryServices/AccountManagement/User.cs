@@ -337,11 +337,8 @@ namespace System.DirectoryServices.AccountManagement
             string identityValue
         )
         {
-            return (UserPrincipal)FindByIdentityWithType(
-                context,
-                typeof(UserPrincipal),
-                identityValue
-            );
+            return (UserPrincipal)
+                FindByIdentityWithType(context, typeof(UserPrincipal), identityValue);
         }
 
         public static new UserPrincipal FindByIdentity(
@@ -350,12 +347,8 @@ namespace System.DirectoryServices.AccountManagement
             string identityValue
         )
         {
-            return (UserPrincipal)FindByIdentityWithType(
-                context,
-                typeof(UserPrincipal),
-                identityType,
-                identityValue
-            );
+            return (UserPrincipal)
+                FindByIdentityWithType(context, typeof(UserPrincipal), identityType, identityValue);
         }
 
         public PrincipalSearchResult<Principal> GetAuthorizationGroups()

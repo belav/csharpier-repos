@@ -177,18 +177,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
             {
                 // Check if the using statement itself contains variables that will collide
                 // with other variables in the block.
-                var usingOperation = (IUsingOperation)semanticModel.GetRequiredOperation(
-                    current,
-                    cancellationToken
-                );
+                var usingOperation = (IUsingOperation)
+                    semanticModel.GetRequiredOperation(current, cancellationToken);
                 if (DeclaredLocalCausesCollision(symbolNameToExistingSymbol, usingOperation.Locals))
                     return true;
             }
 
-            var innerUsingOperation = (IUsingOperation)semanticModel.GetRequiredOperation(
-                innermostUsing,
-                cancellationToken
-            );
+            var innerUsingOperation = (IUsingOperation)
+                semanticModel.GetRequiredOperation(innermostUsing, cancellationToken);
             if (innerUsingOperation.Body is IBlockOperation innerUsingBlock)
                 return DeclaredLocalCausesCollision(
                     symbolNameToExistingSymbol,

@@ -202,10 +202,8 @@ unsafe class StdCallMemberFunctionTest
         {
             if (unmanagedCallersOnlyVtable == null)
             {
-                unmanagedCallersOnlyVtable =
-                    (StdCallMemberFunctionNative.C.VtableLayout*)Marshal.AllocHGlobal(
-                        sizeof(StdCallMemberFunctionNative.C.VtableLayout)
-                    );
+                unmanagedCallersOnlyVtable = (StdCallMemberFunctionNative.C.VtableLayout*)
+                    Marshal.AllocHGlobal(sizeof(StdCallMemberFunctionNative.C.VtableLayout));
                 unmanagedCallersOnlyVtable->getSize = &GetSize;
                 unmanagedCallersOnlyVtable->getWidth = &GetWidth;
                 unmanagedCallersOnlyVtable->getHeightAsInt = &GetHeightAsInt;

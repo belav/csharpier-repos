@@ -708,7 +708,8 @@ internal class TagHelperDescriptorJsonConverter : JsonConverter
                                 break;
                             case nameof(RequiredAttributeDescriptor.NameComparison):
                                 var nameComparison =
-                                    (RequiredAttributeDescriptor.NameComparisonMode)reader.ReadAsInt32();
+                                    (RequiredAttributeDescriptor.NameComparisonMode)
+                                        reader.ReadAsInt32();
                                 attribute.NameComparisonMode = nameComparison;
                                 break;
                             case nameof(RequiredAttributeDescriptor.Value):
@@ -720,7 +721,8 @@ internal class TagHelperDescriptorJsonConverter : JsonConverter
                                 break;
                             case nameof(RequiredAttributeDescriptor.ValueComparison):
                                 var valueComparison =
-                                    (RequiredAttributeDescriptor.ValueComparisonMode)reader.ReadAsInt32();
+                                    (RequiredAttributeDescriptor.ValueComparisonMode)
+                                        reader.ReadAsInt32();
                                 attribute.ValueComparisonMode = valueComparison;
                                 break;
                             case nameof(RequiredAttributeDescriptor.Diagnostics):

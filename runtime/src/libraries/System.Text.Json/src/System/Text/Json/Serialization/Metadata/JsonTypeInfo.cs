@@ -846,8 +846,8 @@ namespace System.Text.Json.Serialization.Metadata
 
         private static JsonNumberHandling? GetNumberHandlingForType(Type type)
         {
-            var numberHandlingAttribute =
-                (JsonNumberHandlingAttribute?)JsonSerializerOptions.GetAttributeThatCanHaveMultiple(
+            var numberHandlingAttribute = (JsonNumberHandlingAttribute?)
+                JsonSerializerOptions.GetAttributeThatCanHaveMultiple(
                     type,
                     typeof(JsonNumberHandlingAttribute)
                 );

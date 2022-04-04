@@ -229,8 +229,8 @@ namespace System.Configuration
             if (compareTo == null || compareTo.GetType() != GetType())
                 return false;
 
-            ConfigurationElementCollection compareToElem =
-                (ConfigurationElementCollection)compareTo;
+            ConfigurationElementCollection compareToElem = (ConfigurationElementCollection)
+                compareTo;
             if (Count != compareToElem.Count)
                 return false;
 
@@ -350,9 +350,8 @@ namespace System.Configuration
 
                     if (inheritance.Contains(entry.GetKey(this)))
                     {
-                        Entry parentEntry = (Entry)parentCollection.Items[
-                            parentCollection.RealIndexOf(entry.Value)
-                        ];
+                        Entry parentEntry = (Entry)
+                            parentCollection.Items[parentCollection.RealIndexOf(entry.Value)];
 
                         ConfigurationElement elem = entry.Value;
                         if (elem.Equals(parentEntry.Value))

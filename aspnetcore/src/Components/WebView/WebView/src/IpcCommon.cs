@@ -52,11 +52,12 @@ internal class IpcCommon
         if (message != null && message.StartsWith(_ipcMessagePrefix, StringComparison.Ordinal))
         {
             var messageAfterPrefix = message.AsSpan(_ipcMessagePrefix.Length);
-            var parsed = (JsonElement[])JsonSerializer.Deserialize(
-                messageAfterPrefix,
-                typeof(JsonElement[]),
-                JsonSerializerOptionsProvider.Options
-            );
+            var parsed = (JsonElement[])
+                JsonSerializer.Deserialize(
+                    messageAfterPrefix,
+                    typeof(JsonElement[]),
+                    JsonSerializerOptionsProvider.Options
+                );
             messageType = (T)Enum.Parse(typeof(T), parsed[0].GetString());
             args = new ArraySegment<JsonElement>(parsed, 1, parsed.Length - 1);
             return true;

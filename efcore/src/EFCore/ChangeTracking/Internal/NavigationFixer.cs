@@ -146,9 +146,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                                 // null out its FKs and navigation property. A.k.a. reference stealing.
                                 // However, if the FK has already been changed or the reference is already set to point
                                 // to something else, then don't change it.
-                                var victimDependentEntry = (InternalEntityEntry?)stateManager
-                                    .GetDependents(newTargetEntry, foreignKey)
-                                    .FirstOrDefault();
+                                var victimDependentEntry = (InternalEntityEntry?)
+                                    stateManager
+                                        .GetDependents(newTargetEntry, foreignKey)
+                                        .FirstOrDefault();
                                 if (victimDependentEntry != null && victimDependentEntry != entry)
                                 {
                                     ConditionallyNullForeignKeyProperties(
@@ -567,12 +568,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                                 // and navigation property. A.k.a. reference stealing.
                                 // However, if the FK has already been changed or the reference is already set to point
                                 // to something else, then don't change it.
-                                var targetDependentEntry = (InternalEntityEntry?)stateManager
-                                    .GetDependentsUsingRelationshipSnapshot(
-                                        newPrincipalEntry,
-                                        foreignKey
-                                    )
-                                    .FirstOrDefault();
+                                var targetDependentEntry = (InternalEntityEntry?)
+                                    stateManager
+                                        .GetDependentsUsingRelationshipSnapshot(
+                                            newPrincipalEntry,
+                                            foreignKey
+                                        )
+                                        .FirstOrDefault();
 
                                 if (targetDependentEntry != null && targetDependentEntry != entry)
                                 {
@@ -1606,9 +1608,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                               oldDependent,
                               foreignKey.DeclaringEntityType
                           )
-                        : (InternalEntityEntry?)dependentEntry.StateManager
-                              .GetDependentsUsingRelationshipSnapshot(principalEntry, foreignKey)
-                              .FirstOrDefault();
+                        : (InternalEntityEntry?)
+                              dependentEntry.StateManager
+                                  .GetDependentsUsingRelationshipSnapshot(
+                                      principalEntry,
+                                      foreignKey
+                                  )
+                                  .FirstOrDefault();
 
                 if (
                     oldDependentEntry != null

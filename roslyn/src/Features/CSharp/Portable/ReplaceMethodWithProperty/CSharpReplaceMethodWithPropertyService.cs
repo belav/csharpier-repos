@@ -158,8 +158,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ReplaceMethodWithProper
             bool nameChanged
         )
         {
-            var getMethodDeclaration =
-                (MethodDeclarationSyntax)getAndSetMethods.GetMethodDeclaration;
+            var getMethodDeclaration = (MethodDeclarationSyntax)
+                getAndSetMethods.GetMethodDeclaration;
             var setMethodDeclaration =
                 getAndSetMethods.SetMethodDeclaration as MethodDeclarationSyntax;
             var getAccessor = CreateGetAccessor(getAndSetMethods, documentOptions, parseOptions);
@@ -365,10 +365,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ReplaceMethodWithProper
 
             if (getMethod.DeclaredAccessibility != setMethod.DeclaredAccessibility)
             {
-                accessor = (AccessorDeclarationSyntax)generator.WithAccessibility(
-                    accessor,
-                    setMethod.DeclaredAccessibility
-                );
+                accessor = (AccessorDeclarationSyntax)
+                    generator.WithAccessibility(accessor, setMethod.DeclaredAccessibility);
             }
 
             if (setMethodDeclaration.ExpressionBody != null)
@@ -488,11 +486,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ReplaceMethodWithProper
                     var currentInvocation = (InvocationExpressionSyntax)i;
                     // looks like   a.b.Goo(arg)   =>     a.b.NewName = arg
                     nameNode = currentInvocation.Expression.GetRightmostName();
-                    currentInvocation = (InvocationExpressionSyntax)g.ReplaceNode(
-                        currentInvocation,
-                        nameNode,
-                        newName
-                    );
+                    currentInvocation = (InvocationExpressionSyntax)
+                        g.ReplaceNode(currentInvocation, nameNode, newName);
 
                     // Wrap the argument in parentheses (in order to not introduce any precedence problems).
                     // But also add a simplification annotation so we can remove the parens if possible.

@@ -4996,10 +4996,11 @@ class C
                 .Single();
             int nodeLocation = node.Location.SourceSpan.Start;
 
-            var modifiedNode = (ExpressionStatementSyntax)SyntaxFactory.ParseStatement(
-                "M(new());",
-                options: ImplicitObjectCreationTestOptions
-            );
+            var modifiedNode = (ExpressionStatementSyntax)
+                SyntaxFactory.ParseStatement(
+                    "M(new());",
+                    options: ImplicitObjectCreationTestOptions
+                );
             Assert.False(modifiedNode.HasErrors);
 
             bool success = model.TryGetSpeculativeSemanticModel(

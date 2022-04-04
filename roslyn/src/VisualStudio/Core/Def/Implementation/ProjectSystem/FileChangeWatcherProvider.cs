@@ -33,9 +33,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                             threadingContext.DisposalToken
                         );
 
-                        var fileChangeService = (IVsAsyncFileChangeEx?)await serviceProvider
-                            .GetServiceAsync(typeof(SVsFileChangeEx))
-                            .ConfigureAwait(true);
+                        var fileChangeService = (IVsAsyncFileChangeEx?)
+                            await serviceProvider
+                                .GetServiceAsync(typeof(SVsFileChangeEx))
+                                .ConfigureAwait(true);
                         Assumes.Present(fileChangeService);
                         return fileChangeService;
                     },

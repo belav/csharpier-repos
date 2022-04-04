@@ -2273,17 +2273,19 @@ class Program
     }
 }";
             var tree = SyntaxFactory.ParseSyntaxTree(source);
-            var compilation = (Compilation)CSharpCompilation
-                .Create("MyCompilation")
-                .AddReferences(MscorlibRef)
-                .AddSyntaxTrees(tree);
+            var compilation = (Compilation)
+                CSharpCompilation
+                    .Create("MyCompilation")
+                    .AddReferences(MscorlibRef)
+                    .AddSyntaxTrees(tree);
 
             var model = compilation.GetSemanticModel(tree);
 
             // Get VariableDeclaratorSyntax corresponding to variable 'ii' above.
-            var variableDeclarator = (VariableDeclaratorSyntax)tree.GetCompilationUnitRoot()
-                .FindToken(source.IndexOf("ii", StringComparison.Ordinal))
-                .Parent;
+            var variableDeclarator = (VariableDeclaratorSyntax)
+                tree.GetCompilationUnitRoot()
+                    .FindToken(source.IndexOf("ii", StringComparison.Ordinal))
+                    .Parent;
 
             // Get TypeSymbol corresponding to above VariableDeclaratorSyntax.
             ITypeSymbol targetType = (
@@ -2291,16 +2293,18 @@ class Program
             ).Type;
 
             // Perform ClassifyConversion for expressions from within the above SyntaxTree.
-            var sourceExpression1 = (ExpressionSyntax)tree.GetCompilationUnitRoot()
-                .FindToken(source.IndexOf("jj)", StringComparison.Ordinal))
-                .Parent;
+            var sourceExpression1 = (ExpressionSyntax)
+                tree.GetCompilationUnitRoot()
+                    .FindToken(source.IndexOf("jj)", StringComparison.Ordinal))
+                    .Parent;
             Conversion conversion = model.ClassifyConversion(sourceExpression1, targetType);
             Assert.True(conversion.IsImplicit);
             Assert.True(conversion.IsNumeric);
 
-            var sourceExpression2 = (ExpressionSyntax)tree.GetCompilationUnitRoot()
-                .FindToken(source.IndexOf("ss)", StringComparison.Ordinal))
-                .Parent;
+            var sourceExpression2 = (ExpressionSyntax)
+                tree.GetCompilationUnitRoot()
+                    .FindToken(source.IndexOf("ss)", StringComparison.Ordinal))
+                    .Parent;
             conversion = model.ClassifyConversion(sourceExpression2, targetType);
             Assert.False(conversion.Exists);
 

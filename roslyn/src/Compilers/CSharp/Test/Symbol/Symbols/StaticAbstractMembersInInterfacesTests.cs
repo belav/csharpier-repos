@@ -7383,7 +7383,8 @@ interface I13
                         d.Code
                             is not (
                                 (int)ErrorCode.ERR_OperatorNeedsMatch
-                                or (int)ErrorCode.ERR_InterfacesCantContainConversionOrEqualityOperators
+                                or (int)
+                                    ErrorCode.ERR_InterfacesCantContainConversionOrEqualityOperators
                             )
                 )
                 .Verify(
@@ -7536,7 +7537,8 @@ interface I13
                         d.Code
                             is not (
                                 (int)ErrorCode.ERR_OperatorNeedsMatch
-                                or (int)ErrorCode.ERR_InterfacesCantContainConversionOrEqualityOperators
+                                or (int)
+                                    ErrorCode.ERR_InterfacesCantContainConversionOrEqualityOperators
                             )
                 )
                 .Verify(
@@ -9096,10 +9098,11 @@ class Test
             var model = compilation1.GetSemanticModel(tree);
             var node =
                 postfixOp != ""
-                    ? (ExpressionSyntax)tree.GetRoot()
-                          .DescendantNodes()
-                          .OfType<PostfixUnaryExpressionSyntax>()
-                          .First()
+                    ? (ExpressionSyntax)
+                          tree.GetRoot()
+                              .DescendantNodes()
+                              .OfType<PostfixUnaryExpressionSyntax>()
+                              .First()
                     : tree.GetRoot()
                       .DescendantNodes()
                       .OfType<PrefixUnaryExpressionSyntax>()
@@ -13087,7 +13090,8 @@ class Test
                 .Where(
                     d =>
                         d.Code
-                            is not (int)ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation
+                            is not (int)
+                                ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation
                 )
                 .Verify(builder.ToArrayAndFree());
         }
@@ -28174,15 +28178,13 @@ public class C3 : C2, I1
                     // Forwarding methods for accessors aren't tied to a property
                     Assert.Null(c3M01);
 
-                    var c3M01Get = (MethodSymbol)c3.FindImplementationForInterfaceMember(
-                        m01.GetMethod
-                    );
+                    var c3M01Get = (MethodSymbol)
+                        c3.FindImplementationForInterfaceMember(m01.GetMethod);
                     Assert.Equal("System.Int32 C3.I1.get_M01()", c3M01Get.ToTestDisplayString());
                     Assert.Same(m01.GetMethod, c3M01Get.ExplicitInterfaceImplementations.Single());
 
-                    var c3M01Set = (MethodSymbol)c3.FindImplementationForInterfaceMember(
-                        m01.SetMethod
-                    );
+                    var c3M01Set = (MethodSymbol)
+                        c3.FindImplementationForInterfaceMember(m01.SetMethod);
                     Assert.Equal(
                         "void C3.I1.set_M01(System.Int32 value)",
                         c3M01Set.ToTestDisplayString()
@@ -30586,9 +30588,8 @@ class C2 : C1, I1
 
                 var c2M01 = (EventSymbol)c2.FindImplementationForInterfaceMember(m01);
                 var c2M01Add = (MethodSymbol)c2.FindImplementationForInterfaceMember(m01.AddMethod);
-                var c2M01Remove = (MethodSymbol)c2.FindImplementationForInterfaceMember(
-                    m01.RemoveMethod
-                );
+                var c2M01Remove = (MethodSymbol)
+                    c2.FindImplementationForInterfaceMember(m01.RemoveMethod);
 
                 Assert.True(c2M01Add.IsStatic);
                 Assert.False(c2M01Add.IsAbstract);
@@ -30872,9 +30873,8 @@ class C4 : I2
                     Assert.False(c1M01Add.IsMetadataFinal);
                     Assert.False(c1M01Add.IsMetadataNewSlot());
 
-                    c1M01Remove = (MethodSymbol)c1.FindImplementationForInterfaceMember(
-                        m01.RemoveMethod
-                    );
+                    c1M01Remove = (MethodSymbol)
+                        c1.FindImplementationForInterfaceMember(m01.RemoveMethod);
                     Assert.Equal(
                         MethodKind.ExplicitInterfaceImplementation,
                         c1M01Remove.MethodKind
@@ -31021,9 +31021,8 @@ class C4 : I2
                     Assert.False(c3M02Add.IsMetadataFinal);
                     Assert.False(c3M02Add.IsMetadataNewSlot());
 
-                    c3M02Remove = (MethodSymbol)c3.FindImplementationForInterfaceMember(
-                        m02.RemoveMethod
-                    );
+                    c3M02Remove = (MethodSymbol)
+                        c3.FindImplementationForInterfaceMember(m02.RemoveMethod);
                     Assert.Equal(
                         MethodKind.ExplicitInterfaceImplementation,
                         c3M02Remove.MethodKind
@@ -31456,18 +31455,16 @@ public class C3 : C2, I1
                     // Forwarding methods for accessors aren't tied to an event
                     Assert.Null(c3M01);
 
-                    var c3M01Add = (MethodSymbol)c3.FindImplementationForInterfaceMember(
-                        m01.AddMethod
-                    );
+                    var c3M01Add = (MethodSymbol)
+                        c3.FindImplementationForInterfaceMember(m01.AddMethod);
                     Assert.Equal(
                         "void C3.I1.add_M01(System.Action value)",
                         c3M01Add.ToTestDisplayString()
                     );
                     Assert.Same(m01.AddMethod, c3M01Add.ExplicitInterfaceImplementations.Single());
 
-                    var c3M01Remove = (MethodSymbol)c3.FindImplementationForInterfaceMember(
-                        m01.RemoveMethod
-                    );
+                    var c3M01Remove = (MethodSymbol)
+                        c3.FindImplementationForInterfaceMember(m01.RemoveMethod);
                     Assert.Equal(
                         "void C3.I1.remove_M01(System.Action value)",
                         c3M01Remove.ToTestDisplayString()

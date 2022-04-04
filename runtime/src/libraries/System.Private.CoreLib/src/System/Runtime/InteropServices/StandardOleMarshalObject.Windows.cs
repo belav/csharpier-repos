@@ -107,8 +107,8 @@ namespace System.Runtime.InteropServices
                 // GetMarshalSizeMax is 4th slot
                 IntPtr method = *((IntPtr*)vtable.ToPointer() + 4);
 
-                GetMarshalSizeMaxDelegate del =
-                    (GetMarshalSizeMaxDelegate)Marshal.GetDelegateForFunctionPointer(
+                GetMarshalSizeMaxDelegate del = (GetMarshalSizeMaxDelegate)
+                    Marshal.GetDelegateForFunctionPointer(
                         method,
                         typeof(GetMarshalSizeMaxDelegate)
                     );
@@ -149,11 +149,8 @@ namespace System.Runtime.InteropServices
                 IntPtr vtable = *(IntPtr*)pStandardMarshal.ToPointer();
                 IntPtr method = *((IntPtr*)vtable.ToPointer() + 5); // MarshalInterface is 5th slot
 
-                MarshalInterfaceDelegate del =
-                    (MarshalInterfaceDelegate)Marshal.GetDelegateForFunctionPointer(
-                        method,
-                        typeof(MarshalInterfaceDelegate)
-                    );
+                MarshalInterfaceDelegate del = (MarshalInterfaceDelegate)
+                    Marshal.GetDelegateForFunctionPointer(method, typeof(MarshalInterfaceDelegate));
                 return del(
                     pStandardMarshal,
                     pStm,

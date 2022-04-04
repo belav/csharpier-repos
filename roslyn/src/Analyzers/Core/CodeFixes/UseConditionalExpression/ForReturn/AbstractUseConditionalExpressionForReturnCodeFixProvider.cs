@@ -56,17 +56,14 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
         )
         {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
-            var ifStatement = (TIfStatementSyntax)diagnostic.AdditionalLocations[0].FindNode(
-                cancellationToken
-            );
+            var ifStatement = (TIfStatementSyntax)
+                diagnostic.AdditionalLocations[0].FindNode(cancellationToken);
 
             var semanticModel = await document
                 .GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
-            var ifOperation = (IConditionalOperation)semanticModel.GetOperation(
-                ifStatement,
-                cancellationToken
-            )!;
+            var ifOperation = (IConditionalOperation)
+                semanticModel.GetOperation(ifStatement, cancellationToken)!;
             var containingSymbol = semanticModel.GetRequiredEnclosingSymbol(
                 ifStatement.SpanStart,
                 cancellationToken
@@ -103,9 +100,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             var generatorInternal = document.GetRequiredLanguageService<SyntaxGeneratorInternal>();
             var returnStatement =
                 anyReturn.Kind == OperationKind.YieldReturn
-                    ? (TStatementSyntax)generatorInternal.YieldReturnStatement(
-                          conditionalExpression
-                      )
+                    ? (TStatementSyntax)
+                          generatorInternal.YieldReturnStatement(conditionalExpression)
                     : (TStatementSyntax)editor.Generator.ReturnStatement(conditionalExpression);
 
             returnStatement = returnStatement.WithTriviaFrom(ifStatement);

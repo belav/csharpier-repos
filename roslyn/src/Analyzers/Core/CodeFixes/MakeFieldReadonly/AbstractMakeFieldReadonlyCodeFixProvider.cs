@@ -101,10 +101,8 @@ namespace Microsoft.CodeAnalysis.MakeFieldReadonly
 
                     foreach (var declarator in declarationDeclarators.Reverse())
                     {
-                        var symbol = (IFieldSymbol?)model.GetDeclaredSymbol(
-                            declarator,
-                            cancellationToken
-                        );
+                        var symbol = (IFieldSymbol?)
+                            model.GetDeclaredSymbol(declarator, cancellationToken);
                         Contract.ThrowIfNull(symbol);
                         var modifiers = generator.GetModifiers(fieldDeclarators.Key);
 

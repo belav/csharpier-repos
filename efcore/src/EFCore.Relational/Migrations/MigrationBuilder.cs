@@ -860,10 +860,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             foreach (var property in typeof(TColumns).GetTypeInfo().DeclaredProperties)
             {
                 var addColumnOperation = (
-                    (IInfrastructure<AddColumnOperation>)property.GetMethod!.Invoke(
-                        columnsObject,
-                        null
-                    )!
+                    (IInfrastructure<AddColumnOperation>)
+                        property.GetMethod!.Invoke(columnsObject, null)!
                 ).Instance;
                 if (addColumnOperation.Name == null)
                 {

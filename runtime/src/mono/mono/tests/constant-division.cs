@@ -48,9 +48,8 @@ namespace Test
                 il.Emit(OpCodes.Ret);
 
                 OneParameter<int, int> invokeSDivision =
-                    (OneParameter<int, int>)SDivision.CreateDelegate(
-                        typeof(OneParameter<int, int>)
-                    );
+                    (OneParameter<int, int>)
+                        SDivision.CreateDelegate(typeof(OneParameter<int, int>));
 
                 for (j = 0; j < invokes; j++)
                 {
@@ -104,9 +103,8 @@ namespace Test
                 il.Emit(OpCodes.Ret);
 
                 OneParameter<uint, uint> invokeUDivision =
-                    (OneParameter<uint, uint>)UDivision.CreateDelegate(
-                        typeof(OneParameter<uint, uint>)
-                    );
+                    (OneParameter<uint, uint>)
+                        UDivision.CreateDelegate(typeof(OneParameter<uint, uint>));
 
                 for (j = 0; j < invokes; j++)
                 {

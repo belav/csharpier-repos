@@ -1160,8 +1160,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             changeDetector.DetectChanges(stateManager);
 
-            var testAttacher =
-                (TestAttacher)contextServices.GetRequiredService<IEntityGraphAttacher>();
+            var testAttacher = (TestAttacher)
+                contextServices.GetRequiredService<IEntityGraphAttacher>();
 
             Assert.Same(newCategory, testAttacher.Attached.Item1.Entity);
             Assert.Equal(EntityState.Added, testAttacher.Attached.Item2);
@@ -1189,8 +1189,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             changeDetector.DetectChanges(stateManager);
 
-            var testAttacher =
-                (TestAttacher)contextServices.GetRequiredService<IEntityGraphAttacher>();
+            var testAttacher = (TestAttacher)
+                contextServices.GetRequiredService<IEntityGraphAttacher>();
 
             Assert.Same(tag, testAttacher.Attached.Item1.Entity);
             Assert.Equal(EntityState.Added, testAttacher.Attached.Item2);
@@ -1213,8 +1213,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             changeDetector.DetectChanges(stateManager);
 
-            var testAttacher =
-                (TestAttacher)contextServices.GetRequiredService<IEntityGraphAttacher>();
+            var testAttacher = (TestAttacher)
+                contextServices.GetRequiredService<IEntityGraphAttacher>();
 
             Assert.Same(category, testAttacher.Attached.Item1.Entity);
             Assert.Equal(EntityState.Added, testAttacher.Attached.Item2);
@@ -1244,8 +1244,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             changeDetector.DetectChanges(stateManager);
 
-            var testAttacher =
-                (TestAttacher)contextServices.GetRequiredService<IEntityGraphAttacher>();
+            var testAttacher = (TestAttacher)
+                contextServices.GetRequiredService<IEntityGraphAttacher>();
 
             Assert.Same(product3, testAttacher.Attached.Item1.Entity);
             Assert.Equal(EntityState.Added, testAttacher.Attached.Item2);
@@ -1268,8 +1268,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             changeDetector.DetectChanges(stateManager);
 
-            var testAttacher =
-                (TestAttacher)contextServices.GetRequiredService<IEntityGraphAttacher>();
+            var testAttacher = (TestAttacher)
+                contextServices.GetRequiredService<IEntityGraphAttacher>();
 
             Assert.Same(husband, testAttacher.Attached.Item1.Entity);
             Assert.Equal(EntityState.Added, testAttacher.Attached.Item2);
@@ -1292,8 +1292,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             changeDetector.DetectChanges(stateManager);
 
-            var testAttacher =
-                (TestAttacher)contextServices.GetRequiredService<IEntityGraphAttacher>();
+            var testAttacher = (TestAttacher)
+                contextServices.GetRequiredService<IEntityGraphAttacher>();
 
             Assert.Same(wife, testAttacher.Attached.Item1.Entity);
             Assert.Equal(EntityState.Added, testAttacher.Attached.Item2);
@@ -1687,8 +1687,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             };
             product.Category = newCategory;
 
-            var testAttacher =
-                (TestAttacher)contextServices.GetRequiredService<IEntityGraphAttacher>();
+            var testAttacher = (TestAttacher)
+                contextServices.GetRequiredService<IEntityGraphAttacher>();
 
             Assert.Same(newCategory, testAttacher.Attached.Item1.Entity);
             Assert.Equal(EntityState.Added, testAttacher.Attached.Item2);
@@ -1713,8 +1713,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             var tag = new NotifyingCategoryTag { Id = 2 };
             category.Tag = tag;
 
-            var testAttacher =
-                (TestAttacher)contextServices.GetRequiredService<IEntityGraphAttacher>();
+            var testAttacher = (TestAttacher)
+                contextServices.GetRequiredService<IEntityGraphAttacher>();
 
             Assert.Same(tag, testAttacher.Attached.Item1.Entity);
             Assert.Equal(EntityState.Added, testAttacher.Attached.Item2);
@@ -1734,8 +1734,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             var category = new NotifyingCategory { PrincipalId = 777, TagId = 77 };
             tag.Category = category;
 
-            var testAttacher =
-                (TestAttacher)contextServices.GetRequiredService<IEntityGraphAttacher>();
+            var testAttacher = (TestAttacher)
+                contextServices.GetRequiredService<IEntityGraphAttacher>();
 
             Assert.Same(category, testAttacher.Attached.Item1.Entity);
             Assert.Equal(EntityState.Added, testAttacher.Attached.Item2);
@@ -1763,8 +1763,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             var product3 = new NotifyingProduct { Tag = new NotifyingProductTag() };
             category.Products.Add(product3);
 
-            var testAttacher =
-                (TestAttacher)contextServices.GetRequiredService<IEntityGraphAttacher>();
+            var testAttacher = (TestAttacher)
+                contextServices.GetRequiredService<IEntityGraphAttacher>();
 
             Assert.Same(product3, testAttacher.Attached.Item1.Entity);
             Assert.Equal(EntityState.Added, testAttacher.Attached.Item2);
@@ -1784,8 +1784,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             var husband = new NotifyingPerson();
             wife.Husband = husband;
 
-            var testAttacher =
-                (TestAttacher)contextServices.GetRequiredService<IEntityGraphAttacher>();
+            var testAttacher = (TestAttacher)
+                contextServices.GetRequiredService<IEntityGraphAttacher>();
 
             Assert.Same(husband, testAttacher.Attached.Item1.Entity);
             Assert.Equal(EntityState.Added, testAttacher.Attached.Item2);
@@ -1805,8 +1805,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             var wife = new NotifyingPerson();
             husband.Wife = wife;
 
-            var testAttacher =
-                (TestAttacher)contextServices.GetRequiredService<IEntityGraphAttacher>();
+            var testAttacher = (TestAttacher)
+                contextServices.GetRequiredService<IEntityGraphAttacher>();
 
             Assert.Same(wife, testAttacher.Attached.Item1.Entity);
             Assert.Equal(EntityState.Added, testAttacher.Attached.Item2);

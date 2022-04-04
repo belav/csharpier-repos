@@ -25,18 +25,20 @@ namespace System.Runtime.InteropServices.Tests.Common
             IntPtr fpRelease = default;
             ComWrappers.GetIUnknownImpl(out fpQueryInterface, out fpAddRef, out fpRelease);
 
-            var vtblRaw = (IntPtr*)RuntimeHelpers.AllocateTypeAssociatedMemory(
-                typeof(ComWrappersImpl),
-                IntPtr.Size * 3
-            );
+            var vtblRaw = (IntPtr*)
+                RuntimeHelpers.AllocateTypeAssociatedMemory(
+                    typeof(ComWrappersImpl),
+                    IntPtr.Size * 3
+                );
             vtblRaw[0] = fpQueryInterface;
             vtblRaw[1] = fpAddRef;
             vtblRaw[2] = fpRelease;
 
-            var entryRaw = (ComInterfaceEntry*)RuntimeHelpers.AllocateTypeAssociatedMemory(
-                typeof(ComWrappersImpl),
-                sizeof(ComInterfaceEntry)
-            );
+            var entryRaw = (ComInterfaceEntry*)
+                RuntimeHelpers.AllocateTypeAssociatedMemory(
+                    typeof(ComWrappersImpl),
+                    sizeof(ComInterfaceEntry)
+                );
             entryRaw->IID = new Guid(IID_TestQueryInterface);
             entryRaw->Vtable = (IntPtr)vtblRaw;
 

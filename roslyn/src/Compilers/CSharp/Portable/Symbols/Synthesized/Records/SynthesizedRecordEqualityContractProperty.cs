@@ -70,9 +70,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 this,
                 _modifiers,
                 ContainingType.Locations[0],
-                (CSharpSyntaxNode)(
-                    (SourceMemberContainerTypeSymbol)ContainingType
-                ).SyntaxReferences[0].GetSyntax(),
+                (CSharpSyntaxNode)
+                    ((SourceMemberContainerTypeSymbol)ContainingType).SyntaxReferences[
+                        0
+                    ].GetSyntax(),
                 diagnostics
             );
         }

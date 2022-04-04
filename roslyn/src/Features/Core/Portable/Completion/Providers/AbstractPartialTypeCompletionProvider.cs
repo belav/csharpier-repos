@@ -49,12 +49,13 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     {
                         var syntaxContextService =
                             document.GetRequiredLanguageService<ISyntaxContextService>();
-                        var syntaxContext = (TSyntaxContext)syntaxContextService.CreateContext(
-                            document,
-                            semanticModel,
-                            position,
-                            cancellationToken
-                        );
+                        var syntaxContext = (TSyntaxContext)
+                            syntaxContextService.CreateContext(
+                                document,
+                                semanticModel,
+                                position,
+                                cancellationToken
+                            );
                         var symbols = LookupCandidateSymbols(
                             syntaxContext,
                             declaredSymbol,

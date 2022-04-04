@@ -38,9 +38,8 @@ public struct EventDescriptor
                 (ModuleSymbol module) =>
                 {
                     var assembly = module.ContainingAssembly;
-                    var type = (Cci.ITypeDefinition)module.GlobalNamespace
-                        .GetMember("EventDescriptor")
-                        .GetCciAdapter();
+                    var type = (Cci.ITypeDefinition)
+                        module.GlobalNamespace.GetMember("EventDescriptor").GetCciAdapter();
 
                     if (isFromSource)
                     {

@@ -147,8 +147,8 @@ public class DirectoryBrowserMiddlewareTests
                                     new Endpoint(
                                         (c) =>
                                         {
-                                            c.Response.StatusCode =
-                                                (int)HttpStatusCode.NotAcceptable;
+                                            c.Response.StatusCode = (int)
+                                                HttpStatusCode.NotAcceptable;
                                             return c.Response.WriteAsync("Hi from endpoint.");
                                         },
                                         new EndpointMetadataCollection(),

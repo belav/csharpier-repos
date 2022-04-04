@@ -41,9 +41,8 @@ namespace System.DirectoryServices.Tests
                             StringComparison.OrdinalIgnoreCase
                         );
 
-                        IADsSecurityDescriptor iadsSD = (IADsSecurityDescriptor)de.Properties[
-                            "ntSecurityDescriptor"
-                        ].Value;
+                        IADsSecurityDescriptor iadsSD = (IADsSecurityDescriptor)
+                            de.Properties["ntSecurityDescriptor"].Value;
                         Assert.Contains(
                             iadsSD.Owner.Split('\\')[0],
                             LdapConfiguration.Configuration.SearchDn,

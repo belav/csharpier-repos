@@ -239,10 +239,11 @@ namespace System.DirectoryServices.AccountManagement
             IntPtr pIdentAuth = UnsafeNativeMethods.GetSidIdentifierAuthority(pSid);
 
             UnsafeNativeMethods.SID_IDENTIFIER_AUTHORITY identAuth =
-                (UnsafeNativeMethods.SID_IDENTIFIER_AUTHORITY)Marshal.PtrToStructure(
-                    pIdentAuth,
-                    typeof(UnsafeNativeMethods.SID_IDENTIFIER_AUTHORITY)
-                );
+                (UnsafeNativeMethods.SID_IDENTIFIER_AUTHORITY)
+                    Marshal.PtrToStructure(
+                        pIdentAuth,
+                        typeof(UnsafeNativeMethods.SID_IDENTIFIER_AUTHORITY)
+                    );
 
             IntPtr pRid = UnsafeNativeMethods.GetSidSubAuthority(pSid, 0);
             int rid = Marshal.ReadInt32(pRid);
@@ -494,11 +495,8 @@ namespace System.DirectoryServices.AccountManagement
                 }
 
                 // Retrieve the user's SID from the user info
-                UnsafeNativeMethods.TOKEN_USER tokenUser =
-                    (UnsafeNativeMethods.TOKEN_USER)Marshal.PtrToStructure(
-                        pBuffer,
-                        typeof(UnsafeNativeMethods.TOKEN_USER)
-                    );
+                UnsafeNativeMethods.TOKEN_USER tokenUser = (UnsafeNativeMethods.TOKEN_USER)
+                    Marshal.PtrToStructure(pBuffer, typeof(UnsafeNativeMethods.TOKEN_USER));
                 IntPtr pUserSid = tokenUser.sidAndAttributes.pSid; // this is a reference into the NATIVE memory (into pBuffer)
 
                 Debug.Assert(UnsafeNativeMethods.IsValidSid(pUserSid));
@@ -598,10 +596,11 @@ namespace System.DirectoryServices.AccountManagement
 
                 Debug.Assert(pBuffer != IntPtr.Zero);
                 UnsafeNativeMethods.POLICY_ACCOUNT_DOMAIN_INFO info =
-                    (UnsafeNativeMethods.POLICY_ACCOUNT_DOMAIN_INFO)Marshal.PtrToStructure(
-                        pBuffer,
-                        typeof(UnsafeNativeMethods.POLICY_ACCOUNT_DOMAIN_INFO)
-                    );
+                    (UnsafeNativeMethods.POLICY_ACCOUNT_DOMAIN_INFO)
+                        Marshal.PtrToStructure(
+                            pBuffer,
+                            typeof(UnsafeNativeMethods.POLICY_ACCOUNT_DOMAIN_INFO)
+                        );
 
                 Debug.Assert(UnsafeNativeMethods.IsValidSid(info.domainSid));
 
@@ -699,10 +698,11 @@ namespace System.DirectoryServices.AccountManagement
                 }
 
                 UnsafeNativeMethods.DomainControllerInfo domainControllerInfo =
-                    (UnsafeNativeMethods.DomainControllerInfo)Marshal.PtrToStructure(
-                        domainControllerInfoPtr,
-                        typeof(UnsafeNativeMethods.DomainControllerInfo)
-                    );
+                    (UnsafeNativeMethods.DomainControllerInfo)
+                        Marshal.PtrToStructure(
+                            domainControllerInfoPtr,
+                            typeof(UnsafeNativeMethods.DomainControllerInfo)
+                        );
 
                 return domainControllerInfo;
             }
@@ -1023,10 +1023,11 @@ namespace System.DirectoryServices.AccountManagement
                 }
 
                 UnsafeNativeMethods.DSROLE_PRIMARY_DOMAIN_INFO_BASIC dsRolePrimaryDomainInfo =
-                    (UnsafeNativeMethods.DSROLE_PRIMARY_DOMAIN_INFO_BASIC)Marshal.PtrToStructure(
-                        dsRoleInfoPtr,
-                        typeof(UnsafeNativeMethods.DSROLE_PRIMARY_DOMAIN_INFO_BASIC)
-                    );
+                    (UnsafeNativeMethods.DSROLE_PRIMARY_DOMAIN_INFO_BASIC)
+                        Marshal.PtrToStructure(
+                            dsRoleInfoPtr,
+                            typeof(UnsafeNativeMethods.DSROLE_PRIMARY_DOMAIN_INFO_BASIC)
+                        );
 
                 return (
                     dsRolePrimaryDomainInfo.MachineRole

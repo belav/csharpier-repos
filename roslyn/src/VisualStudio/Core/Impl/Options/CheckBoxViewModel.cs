@@ -29,9 +29,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
         {
             SetProperty(
                 ref _isChecked,
-                (bool)optionStore.GetOption(
-                    new OptionKey(option, option.IsPerLanguage ? info.Language : null)
-                )
+                (bool)
+                    optionStore.GetOption(
+                        new OptionKey(option, option.IsPerLanguage ? info.Language : null)
+                    )
             );
         }
 

@@ -40,7 +40,8 @@ namespace System.Text.Json.Serialization.Converters
             Func<IEnumerable<KeyValuePair<TKey, TValue>>, TDictionary>? creator = (Func<
                 IEnumerable<KeyValuePair<TKey, TValue>>,
                 TDictionary
-            >?)state.Current.JsonTypeInfo.CreateObjectWithArgs;
+            >?)
+                state.Current.JsonTypeInfo.CreateObjectWithArgs;
             Debug.Assert(creator != null);
             state.Current.ReturnValue = creator(
                 (Dictionary<TKey, TValue>)state.Current.ReturnValue!

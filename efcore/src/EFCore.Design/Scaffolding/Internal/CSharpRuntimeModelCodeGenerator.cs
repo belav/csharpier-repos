@@ -478,9 +478,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                     .Append(_code.Literal(providerClrType));
             }
 
-            var valueConverterType = (Type?)typeConfiguration[
-                CoreAnnotationNames.ValueConverterType
-            ];
+            var valueConverterType = (Type?)
+                typeConfiguration[CoreAnnotationNames.ValueConverterType];
             if (valueConverterType != null)
             {
                 AddNamespace(valueConverterType, parameters.Namespaces);
@@ -782,9 +781,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             CSharpRuntimeAnnotationCodeGeneratorParameters parameters
         )
         {
-            var valueGeneratorFactoryType = (Type?)property[
-                CoreAnnotationNames.ValueGeneratorFactoryType
-            ];
+            var valueGeneratorFactoryType = (Type?)
+                property[CoreAnnotationNames.ValueGeneratorFactoryType];
             if (valueGeneratorFactoryType == null && property.GetValueGeneratorFactory() != null)
             {
                 throw new InvalidOperationException(

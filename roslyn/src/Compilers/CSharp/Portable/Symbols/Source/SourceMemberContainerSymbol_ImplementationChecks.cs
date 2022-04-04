@@ -1124,8 +1124,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     }
                     else if (associatedPropertyOrEvent.Kind == SymbolKind.Property) //no specific errors for event accessors
                     {
-                        PropertySymbol associatedProperty =
-                            (PropertySymbol)associatedPropertyOrEvent;
+                        PropertySymbol associatedProperty = (PropertySymbol)
+                            associatedPropertyOrEvent;
                         PropertySymbol overriddenProperty = associatedProperty.OverriddenProperty;
 
                         if ((object)overriddenProperty == null)
@@ -1756,10 +1756,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal static bool IsOrContainsErrorType(TypeSymbol typeSymbol)
         {
-            return (object)typeSymbol.VisitType(
-                    (currentTypeSymbol, unused1, unused2) => currentTypeSymbol.IsErrorType(),
-                    (object)null
-                ) != null;
+            return (object)
+                    typeSymbol.VisitType(
+                        (currentTypeSymbol, unused1, unused2) => currentTypeSymbol.IsErrorType(),
+                        (object)null
+                    ) != null;
         }
 
         /// <summary>

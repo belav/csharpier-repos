@@ -413,9 +413,8 @@ class Program
 
         foreach (var instArg in new Type[] { typeof(String), typeof(object), typeof(int) })
         {
-            IFieldGetter getter = (IFieldGetter)Activator.CreateInstance(
-                typeof(FieldGetter<>).MakeGenericType(instArg)
-            );
+            IFieldGetter getter = (IFieldGetter)
+                Activator.CreateInstance(typeof(FieldGetter<>).MakeGenericType(instArg));
 
             string expectedField1 = "System.Int32 Gen`1[???]::m_Field1".Replace(
                 "???",

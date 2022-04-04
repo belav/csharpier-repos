@@ -430,10 +430,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 AnonymousObjectMemberDeclaratorSyntax node
             )
             {
-                var newDeclarator =
-                    (AnonymousObjectMemberDeclaratorSyntax)base.VisitAnonymousObjectMemberDeclarator(
-                        node
-                    );
+                var newDeclarator = (AnonymousObjectMemberDeclaratorSyntax)
+                    base.VisitAnonymousObjectMemberDeclarator(node);
                 if (node.NameEquals == null)
                 {
                     var inferredName = node.Expression.TryGetInferredMemberName();
@@ -651,8 +649,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                         switch (replacement.Kind())
                         {
                             case SyntaxKind.AliasQualifiedName:
-                                var aliasQualifiedReplacement =
-                                    (AliasQualifiedNameSyntax)replacement;
+                                var aliasQualifiedReplacement = (AliasQualifiedNameSyntax)
+                                    replacement;
                                 replacement = replacement.ReplaceNode(
                                     aliasQualifiedReplacement.Name,
                                     aliasQualifiedReplacement.Name.WithIdentifier(
@@ -1448,9 +1446,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                     return originalNode;
                 }
 
-                var rewrittenNode = (InvocationExpressionSyntax)base.VisitInvocationExpression(
-                    originalNode
-                );
+                var rewrittenNode = (InvocationExpressionSyntax)
+                    base.VisitInvocationExpression(originalNode);
                 if (
                     originalNode.Expression.IsKind(
                         SyntaxKind.SimpleMemberAccessExpression,

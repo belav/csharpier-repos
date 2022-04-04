@@ -89,10 +89,8 @@ namespace System.ComponentModel.Composition
                 throw new ArgumentNullException(nameof(genericMethod));
             }
 
-            return (Func<Export, object>)Delegate.CreateDelegate(
-                typeof(Func<Export, object>),
-                genericMethod
-            );
+            return (Func<Export, object>)
+                Delegate.CreateDelegate(typeof(Func<Export, object>), genericMethod);
         }
 
         internal static Func<Export, Lazy<object, object>> CreateSemiStronglyTypedLazyFactory(
@@ -108,10 +106,8 @@ namespace System.ComponentModel.Composition
             {
                 throw new ArgumentNullException(nameof(genericMethod));
             }
-            return (Func<Export, Lazy<object, object>>)Delegate.CreateDelegate(
-                typeof(Func<Export, Lazy<object, object>>),
-                genericMethod
-            );
+            return (Func<Export, Lazy<object, object>>)
+                Delegate.CreateDelegate(typeof(Func<Export, Lazy<object, object>>), genericMethod);
         }
 
         internal static Lazy<T, M> CreateStronglyTypedLazyOfTM<T, M>(Export export)

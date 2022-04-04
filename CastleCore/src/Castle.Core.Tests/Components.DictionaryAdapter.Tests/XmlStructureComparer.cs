@@ -223,9 +223,8 @@ namespace Castle.Components.DictionaryAdapter.Tests
         private static IEnumerable<XmlNode> GetElementChildNodes(XmlNode node)
         {
             return Enumerable.Concat(
-                (IEnumerable<XmlNode>)node.Attributes
-                    .OfType<XmlAttribute>()
-                    .Where(a => !IsNamespace(a)),
+                (IEnumerable<XmlNode>)
+                    node.Attributes.OfType<XmlAttribute>().Where(a => !IsNamespace(a)),
                 (IEnumerable<XmlNode>)node.ChildNodes.OfType<XmlElement>()
             );
         }

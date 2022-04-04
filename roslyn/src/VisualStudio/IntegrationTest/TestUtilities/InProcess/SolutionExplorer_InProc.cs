@@ -110,10 +110,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         public void SetLanguageVersion(string projectName, string languageVersion)
         {
             var project = GetProject(projectName);
-            var projectConfiguration = (CSharpProjectConfigurationProperties3)project
-                .ConfigurationManager
-                .ActiveConfiguration
-                .Object;
+            var projectConfiguration = (CSharpProjectConfigurationProperties3)
+                project.ConfigurationManager.ActiveConfiguration.Object;
             projectConfiguration.LanguageVersion = languageVersion;
         }
 

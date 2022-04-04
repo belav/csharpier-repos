@@ -119,9 +119,8 @@ namespace System.Net.Http.Tests
             RetryConditionHeaderValue source = new RetryConditionHeaderValue(
                 new TimeSpan(0, 0, 123456789)
             );
-            RetryConditionHeaderValue clone = (RetryConditionHeaderValue)(
-                (ICloneable)source
-            ).Clone();
+            RetryConditionHeaderValue clone = (RetryConditionHeaderValue)
+                ((ICloneable)source).Clone();
 
             Assert.Equal(source.Delta, clone.Delta);
             Assert.Null(clone.Date);

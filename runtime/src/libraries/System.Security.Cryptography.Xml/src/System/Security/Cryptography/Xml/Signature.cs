@@ -96,10 +96,8 @@ namespace System.Security.Cryptography.Xml
         internal XmlElement GetXml(XmlDocument document)
         {
             // Create the Signature
-            XmlElement signatureElement = (XmlElement)document.CreateElement(
-                "Signature",
-                SignedXml.XmlDsigNamespaceUrl
-            );
+            XmlElement signatureElement = (XmlElement)
+                document.CreateElement("Signature", SignedXml.XmlDsigNamespaceUrl);
             if (!string.IsNullOrEmpty(_id))
                 signatureElement.SetAttribute("Id", _id);
 

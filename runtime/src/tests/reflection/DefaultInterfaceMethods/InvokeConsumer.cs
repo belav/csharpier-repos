@@ -24,59 +24,63 @@ class Program
 
         if (
             !(
-                (RuntimeTypeHandle)typeof(IFoo<Fooer>)
-                    .GetMethod("StaticMethod")
-                    .Invoke(null, new object[] { })
+                (RuntimeTypeHandle)
+                    typeof(IFoo<Fooer>).GetMethod("StaticMethod").Invoke(null, new object[] { })
             ).Equals(typeof(Fooer[,]).TypeHandle)
         )
             return 11;
 
         if (
             !(
-                (RuntimeTypeHandle)typeof(IFoo<Fooer>)
-                    .GetMethod("DefaultMethod")
-                    .Invoke(new Fooer(), new object[] { })
+                (RuntimeTypeHandle)
+                    typeof(IFoo<Fooer>)
+                        .GetMethod("DefaultMethod")
+                        .Invoke(new Fooer(), new object[] { })
             ).Equals(typeof(Fooer).TypeHandle)
         )
             return 12;
 
         if (
             !(
-                (RuntimeTypeHandle)typeof(IFoo<Fooer>)
-                    .GetMethod("InstanceMethod")
-                    .Invoke(new Fooer(), new object[] { })
+                (RuntimeTypeHandle)
+                    typeof(IFoo<Fooer>)
+                        .GetMethod("InstanceMethod")
+                        .Invoke(new Fooer(), new object[] { })
             ).Equals(typeof(Fooer[]).TypeHandle)
         )
             return 13;
 
         if (
-            (int)typeof(IFoo)
-                .GetMethod("DefaultMethod")
-                .Invoke(new ValueFooer(), new object[] { 1 }) != 51
+            (int)
+                typeof(IFoo).GetMethod("DefaultMethod").Invoke(new ValueFooer(), new object[] { 1 })
+            != 51
         )
             return 22;
 
         if (
-            (int)typeof(IFoo)
-                .GetMethod("InstanceMethod")
-                .Invoke(new ValueFooer(), new object[] { 1 }) != 21
+            (int)
+                typeof(IFoo)
+                    .GetMethod("InstanceMethod")
+                    .Invoke(new ValueFooer(), new object[] { 1 }) != 21
         )
             return 23;
 
         if (
             !(
-                (RuntimeTypeHandle)typeof(IFoo<Fooer>)
-                    .GetMethod("DefaultMethod")
-                    .Invoke(new ValueFooer(), new object[] { })
+                (RuntimeTypeHandle)
+                    typeof(IFoo<Fooer>)
+                        .GetMethod("DefaultMethod")
+                        .Invoke(new ValueFooer(), new object[] { })
             ).Equals(typeof(Fooer).TypeHandle)
         )
             return 32;
 
         if (
             !(
-                (RuntimeTypeHandle)typeof(IFoo<Fooer>)
-                    .GetMethod("InstanceMethod")
-                    .Invoke(new ValueFooer(), new object[] { })
+                (RuntimeTypeHandle)
+                    typeof(IFoo<Fooer>)
+                        .GetMethod("InstanceMethod")
+                        .Invoke(new ValueFooer(), new object[] { })
             ).Equals(typeof(Fooer[]).TypeHandle)
         )
             return 33;

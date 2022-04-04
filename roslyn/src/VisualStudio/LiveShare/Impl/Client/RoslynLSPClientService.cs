@@ -31,10 +31,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
             CancellationToken cancellationToken
         )
         {
-            var languageServerGuestService =
-                (LS.ILanguageServerGuestService)collaborationSession.GetService(
-                    typeof(LS.ILanguageServerGuestService)
-                );
+            var languageServerGuestService = (LS.ILanguageServerGuestService)
+                collaborationSession.GetService(typeof(LS.ILanguageServerGuestService));
 
             collaborationSession.RemoteServicesChanged += (sender, e) =>
             {

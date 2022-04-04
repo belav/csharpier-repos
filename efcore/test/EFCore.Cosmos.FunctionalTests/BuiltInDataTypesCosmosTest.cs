@@ -104,15 +104,14 @@ WHERE ((c[""Discriminator""] = ""BuiltInDataTypes"") AND (c[""Id""] = 13))"
             {
                 base.OnModelCreating(modelBuilder, context);
 
-                var shadowJObject = (Property)modelBuilder
-                    .Entity<BuiltInDataTypesShadow>()
-                    .Property("__jObject")
-                    .Metadata;
+                var shadowJObject = (Property)
+                    modelBuilder.Entity<BuiltInDataTypesShadow>().Property("__jObject").Metadata;
                 shadowJObject.SetConfigurationSource(ConfigurationSource.Convention);
-                var nullableShadowJObject = (Property)modelBuilder
-                    .Entity<BuiltInNullableDataTypesShadow>()
-                    .Property("__jObject")
-                    .Metadata;
+                var nullableShadowJObject = (Property)
+                    modelBuilder
+                        .Entity<BuiltInNullableDataTypesShadow>()
+                        .Property("__jObject")
+                        .Metadata;
                 nullableShadowJObject.SetConfigurationSource(ConfigurationSource.Convention);
             }
         }

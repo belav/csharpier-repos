@@ -570,10 +570,8 @@ public class DefaultObjectValidatorTests
 
         var validator = CreateValidator();
 
-        var model = (object)new ValidatableModelContainer
-        {
-            ValidatableModelProperty = new ValidatableModel(),
-        };
+        var model = (object)
+            new ValidatableModelContainer { ValidatableModelProperty = new ValidatableModel(), };
 
         modelState.SetModelValue("parameter", "model", "model");
         validationState.Add(model, new ValidationStateEntry() { Key = "parameter" });
@@ -1114,11 +1112,8 @@ public class DefaultObjectValidatorTests
 
         var validator = CreateValidator();
 
-        var model = (object)new Dictionary<string, Person>
-        {
-            { "Joe", new Person() },
-            { "Mark", new Person() }
-        };
+        var model = (object)
+            new Dictionary<string, Person> { { "Joe", new Person() }, { "Mark", new Person() } };
 
         modelState.SetModelValue("[0].Key", "Joe", "Joe");
         modelState.SetModelValue("[1].Key", "Mark", "Mark");
@@ -1447,11 +1442,12 @@ public class DefaultObjectValidatorTests
         var validationState = new ValidationStateDictionary();
         var validator = CreateValidator();
 
-        var model = (object)new SelfValidatableModelContainer
-        {
-            IsParentValid = false,
-            ValidatableModelProperty = new ValidatableModel()
-        };
+        var model = (object)
+            new SelfValidatableModelContainer
+            {
+                IsParentValid = false,
+                ValidatableModelProperty = new ValidatableModel()
+            };
 
         // Act
         validator.Validate(actionContext, validationState, prefix: string.Empty, model);

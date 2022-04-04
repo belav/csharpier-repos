@@ -118,8 +118,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDeconstruction
                         variableDeclaration.Parent,
                         (current, _) =>
                         {
-                            var currentDeclarationStatement =
-                                (LocalDeclarationStatementSyntax)current;
+                            var currentDeclarationStatement = (LocalDeclarationStatementSyntax)
+                                current;
                             return CreateDeconstructionStatement(
                                 tupleType,
                                 currentDeclarationStatement,

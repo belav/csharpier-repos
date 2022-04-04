@@ -683,9 +683,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
             // GetServiceAsync/GetProxyAsync and the cast below are all explicitly documented as being BG thread safe.
             await TaskScheduler.Default;
 
-            var serviceContainer = (IBrokeredServiceContainer?)await _asyncServiceProvider
-                .GetServiceAsync(typeof(SVsBrokeredServiceContainer))
-                .ConfigureAwait(false);
+            var serviceContainer = (IBrokeredServiceContainer?)
+                await _asyncServiceProvider
+                    .GetServiceAsync(typeof(SVsBrokeredServiceContainer))
+                    .ConfigureAwait(false);
             var serviceBroker = serviceContainer?.GetFullAccessServiceBroker();
             if (serviceBroker == null)
                 return default;
@@ -939,10 +940,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
             var extensionProvider = (IVsPackageExtensionProvider)nugetPackageManager;
             var extensionGuid = new Guid("042C2B4B-C7F7-49DB-B7A2-402EB8DC7892");
             var emptyGuid = Guid.Empty;
-            var searchProvider = (IVsSearchProvider)extensionProvider.CreateExtensionInstance(
-                ref emptyGuid,
-                ref extensionGuid
-            );
+            var searchProvider = (IVsSearchProvider)
+                extensionProvider.CreateExtensionInstance(ref emptyGuid, ref extensionGuid);
             var task = searchProvider.CreateSearch(
                 dwCookie: 1,
                 pSearchQuery: new SearchQuery(packageName),

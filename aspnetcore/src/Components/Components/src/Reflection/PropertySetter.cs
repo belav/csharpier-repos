@@ -44,10 +44,11 @@ internal sealed class PropertySetter
                 property.PropertyType
             );
         _setterDelegate =
-            (Action<object, object>)callPropertySetterClosedGenericMethod.CreateDelegate(
-                typeof(Action<object, object>),
-                propertySetterAsAction
-            );
+            (Action<object, object>)
+                callPropertySetterClosedGenericMethod.CreateDelegate(
+                    typeof(Action<object, object>),
+                    propertySetterAsAction
+                );
     }
 
     public bool Cascading { get; init; }

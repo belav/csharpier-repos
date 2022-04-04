@@ -82,10 +82,8 @@ namespace System.Net
 
                     if (!_inOpaqueMode)
                     {
-                        flags = (uint)Interop
-                            .HttpApi
-                            .HTTP_FLAGS
-                            .HTTP_RECEIVE_REQUEST_FLAG_COPY_BODY;
+                        flags = (uint)
+                            Interop.HttpApi.HTTP_FLAGS.HTTP_RECEIVE_REQUEST_FLAG_COPY_BODY;
                     }
 
                     statusCode = Interop.HttpApi.HttpReceiveRequestEntityBody(
@@ -230,10 +228,8 @@ namespace System.Net
 
                         if (!_inOpaqueMode)
                         {
-                            flags = (uint)Interop
-                                .HttpApi
-                                .HTTP_FLAGS
-                                .HTTP_RECEIVE_REQUEST_FLAG_COPY_BODY;
+                            flags = (uint)
+                                Interop.HttpApi.HTTP_FLAGS.HTTP_RECEIVE_REQUEST_FLAG_COPY_BODY;
                         }
 
                         statusCode = Interop.HttpApi.HttpReceiveRequestEntityBody(
@@ -468,10 +464,8 @@ namespace System.Net
                 NativeOverlapped* nativeOverlapped
             )
             {
-                HttpRequestStreamAsyncResult asyncResult =
-                    (HttpRequestStreamAsyncResult)ThreadPoolBoundHandle.GetNativeOverlappedState(
-                        nativeOverlapped
-                    )!;
+                HttpRequestStreamAsyncResult asyncResult = (HttpRequestStreamAsyncResult)
+                    ThreadPoolBoundHandle.GetNativeOverlappedState(nativeOverlapped)!;
 
                 if (NetEventSource.Log.IsEnabled())
                     NetEventSource.Info(

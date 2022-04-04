@@ -719,8 +719,8 @@ namespace System.Collections.Tests
             IDictionaryEnumerator enumerator = sortedList.GetEnumerator();
             ICloneable cloneableEnumerator = (ICloneable)enumerator;
 
-            IDictionaryEnumerator clonedEnumerator =
-                (IDictionaryEnumerator)cloneableEnumerator.Clone();
+            IDictionaryEnumerator clonedEnumerator = (IDictionaryEnumerator)
+                cloneableEnumerator.Clone();
             Assert.NotSame(enumerator, clonedEnumerator);
 
             // Cloned and original enumerators should enumerate separately.

@@ -32,10 +32,8 @@ namespace System.Reflection.Emit.Tests
             ILGenerator ilGenerator = method.GetILGenerator(8);
             Helpers.EmitMethodBody(ilGenerator, field);
 
-            IntDelegate instanceCallBack = (IntDelegate)method.CreateDelegate(
-                typeof(IntDelegate),
-                target
-            );
+            IntDelegate instanceCallBack = (IntDelegate)
+                method.CreateDelegate(typeof(IntDelegate), target);
             VerifyILGenerator(instanceCallBack, target, 0);
         }
 
@@ -73,10 +71,8 @@ namespace System.Reflection.Emit.Tests
             ILGenerator ilGenerator = method.GetILGenerator(8);
             Helpers.EmitMethodBody(ilGenerator, field);
 
-            IntDelegate instanceCallBack = (IntDelegate)method.CreateDelegate(
-                typeof(IntDelegate),
-                target
-            );
+            IntDelegate instanceCallBack = (IntDelegate)
+                method.CreateDelegate(typeof(IntDelegate), target);
             VerifyILGenerator(instanceCallBack, target, 0);
         }
 
@@ -104,10 +100,8 @@ namespace System.Reflection.Emit.Tests
             ILGenerator ilGenerator = method.GetILGenerator();
             Helpers.EmitMethodBody(ilGenerator, field);
 
-            IntDelegate instanceCallBack = (IntDelegate)method.CreateDelegate(
-                typeof(IntDelegate),
-                target
-            );
+            IntDelegate instanceCallBack = (IntDelegate)
+                method.CreateDelegate(typeof(IntDelegate), target);
             VerifyILGenerator(instanceCallBack, target, 0);
         }
 
@@ -145,10 +139,8 @@ namespace System.Reflection.Emit.Tests
             ILGenerator ilGenerator = method.GetILGenerator();
             Helpers.EmitMethodBody(ilGenerator, field);
 
-            IntDelegate instanceCallBack = (IntDelegate)method.CreateDelegate(
-                typeof(IntDelegate),
-                target
-            );
+            IntDelegate instanceCallBack = (IntDelegate)
+                method.CreateDelegate(typeof(IntDelegate), target);
             VerifyILGenerator(instanceCallBack, target, 0);
         }
 

@@ -694,23 +694,26 @@ namespace JIT.HardwareIntrinsics.X86
                                 ? (short)Math.Clamp(left[i], short.MinValue, short.MaxValue)
                                 : (
                                       i < 8 && i > 3
-                                          ? (short)Math.Clamp(
-                                                right[i % 4],
-                                                short.MinValue,
-                                                short.MaxValue
-                                            )
+                                          ? (short)
+                                                Math.Clamp(
+                                                    right[i % 4],
+                                                    short.MinValue,
+                                                    short.MaxValue
+                                                )
                                           : (
                                                 i < 12 && i > 7
-                                                    ? (short)Math.Clamp(
-                                                          left[i - 4],
-                                                          short.MinValue,
-                                                          short.MaxValue
-                                                      )
-                                                    : (short)Math.Clamp(
-                                                          right[i - 8],
-                                                          short.MinValue,
-                                                          short.MaxValue
-                                                      )
+                                                    ? (short)
+                                                          Math.Clamp(
+                                                              left[i - 4],
+                                                              short.MinValue,
+                                                              short.MaxValue
+                                                          )
+                                                    : (short)
+                                                          Math.Clamp(
+                                                              right[i - 8],
+                                                              short.MinValue,
+                                                              short.MaxValue
+                                                          )
                                             )
                                   )
                         )

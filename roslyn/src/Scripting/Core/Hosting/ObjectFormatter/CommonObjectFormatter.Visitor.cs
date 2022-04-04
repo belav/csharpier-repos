@@ -432,9 +432,10 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
 
                     bool rootHidden = false,
                         ignoreVisibility = false;
-                    var browsable = (DebuggerBrowsableAttribute)member
-                        .GetCustomAttributes(typeof(DebuggerBrowsableAttribute), false)
-                        .FirstOrDefault();
+                    var browsable = (DebuggerBrowsableAttribute)
+                        member
+                            .GetCustomAttributes(typeof(DebuggerBrowsableAttribute), false)
+                            .FirstOrDefault();
                     if (browsable != null)
                     {
                         if (browsable.State == DebuggerBrowsableState.Never)

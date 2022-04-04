@@ -13,8 +13,8 @@ namespace NetClient
 
         public ErrorTests()
         {
-            this.server =
-                (Server.Contract.Servers.ErrorMarshalTesting)new Server.Contract.Servers.ErrorMarshalTestingClass();
+            this.server = (Server.Contract.Servers.ErrorMarshalTesting)
+                new Server.Contract.Servers.ErrorMarshalTestingClass();
         }
 
         public void Run()

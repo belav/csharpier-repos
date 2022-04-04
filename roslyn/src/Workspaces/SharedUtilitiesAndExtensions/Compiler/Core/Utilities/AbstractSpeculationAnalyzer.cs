@@ -193,10 +193,11 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     this.SemanticRootOfOriginalExpression,
                     annotatedExpression
                 );
-                _lazyReplacedExpression = (TExpressionSyntax)_lazySemanticRootOfReplacedExpression
-                    .GetAnnotatedNodesAndTokens(annotation)
-                    .Single()
-                    .AsNode()!;
+                _lazyReplacedExpression = (TExpressionSyntax)
+                    _lazySemanticRootOfReplacedExpression
+                        .GetAnnotatedNodesAndTokens(annotation)
+                        .Single()
+                        .AsNode()!;
             }
             else
             {
@@ -870,12 +871,10 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             // inferred variable type compatible
             if (IsForEachTypeInferred(forEachStatement, _semanticModel))
             {
-                var local = (ILocalSymbol)_semanticModel.GetRequiredDeclaredSymbol(
-                    forEachStatement,
-                    _cancellationToken
-                );
-                var newLocal =
-                    (ILocalSymbol)this.SpeculativeSemanticModel.GetRequiredDeclaredSymbol(
+                var local = (ILocalSymbol)
+                    _semanticModel.GetRequiredDeclaredSymbol(forEachStatement, _cancellationToken);
+                var newLocal = (ILocalSymbol)
+                    this.SpeculativeSemanticModel.GetRequiredDeclaredSymbol(
                         newForEachStatement,
                         _cancellationToken
                     );

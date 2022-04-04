@@ -984,9 +984,10 @@ namespace System.DirectoryServices.AccountManagement
                     // Postpone to later.
                     if (!foreignPrincipal.fakePrincipal)
                     {
-                        string groupDN = (string)(
-                            (DirectoryEntry)foreignPrincipal.UnderlyingObject
-                        ).Properties["distinguishedName"].Value;
+                        string groupDN = (string)
+                            ((DirectoryEntry)foreignPrincipal.UnderlyingObject).Properties[
+                                "distinguishedName"
+                            ].Value;
 
                         GlobalDebug.WriteLineIf(
                             GlobalDebug.Info,
@@ -1017,8 +1018,8 @@ namespace System.DirectoryServices.AccountManagement
                         "MoveNextForeign: using as currentForeignDE/currentForeignPrincipal"
                     );
 
-                    DirectoryEntry foreignDE =
-                        (DirectoryEntry)foreignPrincipal.GetUnderlyingObject();
+                    DirectoryEntry foreignDE = (DirectoryEntry)
+                        foreignPrincipal.GetUnderlyingObject();
 
                     _storeCtx.LoadDirectoryEntryAttributes(foreignDE);
 
@@ -1081,9 +1082,10 @@ namespace System.DirectoryServices.AccountManagement
                 new RangeRetriever((DirectoryEntry)foreignGroup.UnderlyingObject, "member", true)
             );
 
-            string groupDN = (string)((DirectoryEntry)foreignGroup.UnderlyingObject).Properties[
-                "distinguishedName"
-            ].Value;
+            string groupDN = (string)
+                ((DirectoryEntry)foreignGroup.UnderlyingObject).Properties[
+                    "distinguishedName"
+                ].Value;
             _groupsVisited.Add(groupDN);
 
             GlobalDebug.WriteLineIf(
@@ -1132,9 +1134,10 @@ namespace System.DirectoryServices.AccountManagement
 
             _memberSearchersQueue.Enqueue(ds);
 
-            string groupDN = (string)((DirectoryEntry)foreignGroup.UnderlyingObject).Properties[
-                "distinguishedName"
-            ].Value;
+            string groupDN = (string)
+                ((DirectoryEntry)foreignGroup.UnderlyingObject).Properties[
+                    "distinguishedName"
+                ].Value;
             _groupsVisited.Add(groupDN);
 
             GlobalDebug.WriteLineIf(

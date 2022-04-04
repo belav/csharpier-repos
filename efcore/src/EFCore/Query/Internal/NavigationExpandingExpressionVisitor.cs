@@ -300,10 +300,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             {
                 // This is FirstOrDefault.Member
                 // due to SubqueryMemberPushdown, this may be collection navigation which was not pushed down
-                navigationExpansionExpression =
-                    (NavigationExpansionExpression)_pendingSelectorExpandingExpressionVisitor.Visit(
-                        navigationExpansionExpression
-                    );
+                navigationExpansionExpression = (NavigationExpansionExpression)
+                    _pendingSelectorExpandingExpressionVisitor.Visit(navigationExpansionExpression);
                 var expandedExpression = new ExpandingExpressionVisitor(
                     this,
                     navigationExpansionExpression,
@@ -917,10 +915,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             if (selector != null)
             {
                 source = ProcessSelect(source, selector);
-                source =
-                    (NavigationExpansionExpression)_pendingSelectorExpandingExpressionVisitor.Visit(
-                        source
-                    );
+                source = (NavigationExpansionExpression)
+                    _pendingSelectorExpandingExpressionVisitor.Visit(source);
 
                 var selectorLambda = GenerateLambda(
                     source.PendingSelector,
@@ -942,10 +938,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 return Expression.Call(method, source.Source, selectorLambda);
             }
 
-            source =
-                (NavigationExpansionExpression)_pendingSelectorExpandingExpressionVisitor.Visit(
-                    source
-                );
+            source = (NavigationExpansionExpression)
+                _pendingSelectorExpandingExpressionVisitor.Visit(source);
             var queryable = Reduce(source);
 
             if (method.GetGenericArguments().Length == 1)
@@ -971,10 +965,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 return source;
             }
 
-            source =
-                (NavigationExpansionExpression)_pendingSelectorExpandingExpressionVisitor.Visit(
-                    source
-                );
+            source = (NavigationExpansionExpression)
+                _pendingSelectorExpandingExpressionVisitor.Visit(source);
             var newStructure = SnapshotExpression(source.PendingSelector);
             var queryable = Reduce(source);
 
@@ -1032,10 +1024,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
         private Expression ProcessContains(NavigationExpansionExpression source, Expression item)
         {
-            source =
-                (NavigationExpansionExpression)_pendingSelectorExpandingExpressionVisitor.Visit(
-                    source
-                );
+            source = (NavigationExpansionExpression)
+                _pendingSelectorExpandingExpressionVisitor.Visit(source);
             var queryable = Reduce(source);
 
             return Expression.Call(
@@ -1078,10 +1068,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             MethodInfo genericMethod
         )
         {
-            source =
-                (NavigationExpansionExpression)_pendingSelectorExpandingExpressionVisitor.Visit(
-                    source
-                );
+            source = (NavigationExpansionExpression)
+                _pendingSelectorExpandingExpressionVisitor.Visit(source);
             var newStructure = SnapshotExpression(source.PendingSelector);
             var queryable = Reduce(source);
 
@@ -1660,10 +1648,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
             if (collectionSelectorBody is NavigationExpansionExpression collectionSource)
             {
-                collectionSource =
-                    (NavigationExpansionExpression)_pendingSelectorExpandingExpressionVisitor.Visit(
-                        collectionSource
-                    );
+                collectionSource = (NavigationExpansionExpression)
+                    _pendingSelectorExpandingExpressionVisitor.Visit(collectionSource);
                 var innerTree = new NavigationTreeExpression(
                     SnapshotExpression(collectionSource.PendingSelector)
                 );
@@ -1751,16 +1737,12 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             NavigationExpansionExpression innerSource
         )
         {
-            outerSource =
-                (NavigationExpansionExpression)_pendingSelectorExpandingExpressionVisitor.Visit(
-                    outerSource
-                );
+            outerSource = (NavigationExpansionExpression)
+                _pendingSelectorExpandingExpressionVisitor.Visit(outerSource);
             var outerTreeStructure = SnapshotExpression(outerSource.PendingSelector);
 
-            innerSource =
-                (NavigationExpansionExpression)_pendingSelectorExpandingExpressionVisitor.Visit(
-                    innerSource
-                );
+            innerSource = (NavigationExpansionExpression)
+                _pendingSelectorExpandingExpressionVisitor.Visit(innerSource);
             var innerTreeStructure = SnapshotExpression(innerSource.PendingSelector);
 
             ValidateExpressionCompatibility(outerTreeStructure, innerTreeStructure);
@@ -1820,10 +1802,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     && source.Type == methodCallExpression.Type
                 )
                 {
-                    source =
-                        (NavigationExpansionExpression)_pendingSelectorExpandingExpressionVisitor.Visit(
-                            source
-                        );
+                    source = (NavigationExpansionExpression)
+                        _pendingSelectorExpandingExpressionVisitor.Visit(source);
                     var newStructure = SnapshotExpression(source.PendingSelector);
                     var queryable = Reduce(source);
 
@@ -2123,8 +2103,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             var outerKeyLambda = RemapLambdaExpression(outerSource, outerKeySelector);
             var innerKeyLambda = RemapLambdaExpression(innerSource, innerKeySelector);
 
-            var keyComparison =
-                (BinaryExpression)_removeRedundantNavigationComparisonExpressionVisitor.Visit(
+            var keyComparison = (BinaryExpression)
+                _removeRedundantNavigationComparisonExpressionVisitor.Visit(
                     Expression.Equal(outerKeyLambda, innerKeyLambda)
                 );
 
@@ -2185,14 +2165,12 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     )
                     {
                         filterPredicate = queryFilter;
-                        filterPredicate =
-                            (LambdaExpression)_parameterExtractingExpressionVisitor.ExtractParameters(
+                        filterPredicate = (LambdaExpression)
+                            _parameterExtractingExpressionVisitor.ExtractParameters(
                                 filterPredicate
                             );
-                        filterPredicate =
-                            (LambdaExpression)_queryTranslationPreprocessor.NormalizeQueryableMethod(
-                                filterPredicate
-                            );
+                        filterPredicate = (LambdaExpression)
+                            _queryTranslationPreprocessor.NormalizeQueryableMethod(filterPredicate);
 
                         // We need to do entity equality, but that requires a full method call on a query root to properly flow the
                         // entity information through. Construct a MethodCall wrapper for the predicate with the proper query root.
@@ -2206,8 +2184,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         _parameterizedQueryFilterPredicateCache[rootEntityType] = filterPredicate;
                     }
 
-                    filterPredicate =
-                        (LambdaExpression)new SelfReferenceEntityQueryableRewritingExpressionVisitor(
+                    filterPredicate = (LambdaExpression)
+                        new SelfReferenceEntityQueryableRewritingExpressionVisitor(
                             this,
                             entityType
                         ).Visit(filterPredicate);

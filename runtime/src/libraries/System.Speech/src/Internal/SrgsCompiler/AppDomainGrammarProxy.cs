@@ -151,9 +151,8 @@ namespace System.Speech.Internal.SrgsCompiler
             _rule = rule;
             try
             {
-                _grammar = (System.Speech.Recognition.Grammar)_assembly.CreateInstance(
-                    _grammarType.FullName
-                );
+                _grammar = (System.Speech.Recognition.Grammar)
+                    _assembly.CreateInstance(_grammarType.FullName);
             }
             catch (MissingMemberException)
             {
@@ -185,9 +184,8 @@ namespace System.Speech.Internal.SrgsCompiler
                 grammar =
                     ruleClass == _grammarType
                         ? _grammar
-                        : (System.Speech.Recognition.Grammar)_assembly.CreateInstance(
-                              ruleClass.FullName
-                          );
+                        : (System.Speech.Recognition.Grammar)
+                              _assembly.CreateInstance(ruleClass.FullName);
             }
             catch (MissingMemberException)
             {

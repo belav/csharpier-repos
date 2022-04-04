@@ -9,13 +9,14 @@ public class Test
         if (t == null)
             return 1;
         var setGCAllowSynchronousMajor =
-            (Func<bool, bool>)Delegate.CreateDelegate(
-                typeof(Func<bool, bool>),
-                t,
-                "SetGCAllowSynchronousMajor",
-                ignoreCase: false,
-                throwOnBindFailure: false
-            );
+            (Func<bool, bool>)
+                Delegate.CreateDelegate(
+                    typeof(Func<bool, bool>),
+                    t,
+                    "SetGCAllowSynchronousMajor",
+                    ignoreCase: false,
+                    throwOnBindFailure: false
+                );
         if (setGCAllowSynchronousMajor == null)
             return 1;
 

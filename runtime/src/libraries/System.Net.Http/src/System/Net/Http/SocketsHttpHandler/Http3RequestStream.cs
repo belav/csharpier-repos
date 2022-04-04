@@ -1346,10 +1346,11 @@ namespace System.Net.Http
                     {
                         // Some of the payload is in our receive buffer, so copy it.
 
-                        int copyLen = (int)Math.Min(
-                            buffer.Length,
-                            Math.Min(_responseDataPayloadRemaining, _recvBuffer.ActiveLength)
-                        );
+                        int copyLen = (int)
+                            Math.Min(
+                                buffer.Length,
+                                Math.Min(_responseDataPayloadRemaining, _recvBuffer.ActiveLength)
+                            );
                         _recvBuffer.ActiveSpan.Slice(0, copyLen).CopyTo(buffer);
 
                         totalBytesRead += copyLen;
@@ -1431,10 +1432,11 @@ namespace System.Net.Http
                     {
                         // Some of the payload is in our receive buffer, so copy it.
 
-                        int copyLen = (int)Math.Min(
-                            buffer.Length,
-                            Math.Min(_responseDataPayloadRemaining, _recvBuffer.ActiveLength)
-                        );
+                        int copyLen = (int)
+                            Math.Min(
+                                buffer.Length,
+                                Math.Min(_responseDataPayloadRemaining, _recvBuffer.ActiveLength)
+                            );
                         _recvBuffer.ActiveSpan.Slice(0, copyLen).CopyTo(buffer.Span);
 
                         totalBytesRead += copyLen;

@@ -221,9 +221,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 do
                 {
                     underlyingType = (
-                        (NamedTypeSymbol)underlyingType.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
-                            NamedTypeSymbol.ValueTupleRestIndex
-                        ].Type
+                        (NamedTypeSymbol)
+                            underlyingType.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
+                                NamedTypeSymbol.ValueTupleRestIndex
+                            ].Type
                     );
                 } while (underlyingType.Arity >= NamedTypeSymbol.ValueTupleRestPosition);
 
@@ -312,8 +313,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 underlyingTupleTypeChain.Add(currentType);
                 if (currentType.Arity == NamedTypeSymbol.ValueTupleRestPosition)
                 {
-                    currentType =
-                        (NamedTypeSymbol)currentType.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
+                    currentType = (NamedTypeSymbol)
+                        currentType.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
                             NamedTypeSymbol.ValueTupleRestPosition - 1
                         ].Type;
                 }
@@ -985,8 +986,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
 
                 var oldUnderlying = currentValueTuple;
-                currentValueTuple =
-                    (NamedTypeSymbol)oldUnderlying.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
+                currentValueTuple = (NamedTypeSymbol)
+                    oldUnderlying.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
                         ValueTupleRestIndex
                     ].Type;
                 currentNestingLevel++;
@@ -1094,9 +1095,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 NamedTypeSymbol found = topLevelUnderlyingType;
                 for (int i = 0; i < depth; i++)
                 {
-                    found = (NamedTypeSymbol)found.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
-                        ValueTupleRestPosition - 1
-                    ].Type;
+                    found = (NamedTypeSymbol)
+                        found.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
+                            ValueTupleRestPosition - 1
+                        ].Type;
                 }
 
                 return found;

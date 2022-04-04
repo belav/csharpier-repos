@@ -63,8 +63,8 @@ namespace System.Web.Mvc.Test
             mockControllerContext.Setup(o => o.HttpContext.Request.Form).Returns(_backingStore);
 
             // Act
-            IUnvalidatedValueProvider valueProvider =
-                (IUnvalidatedValueProvider)factory.GetValueProvider(mockControllerContext.Object);
+            IUnvalidatedValueProvider valueProvider = (IUnvalidatedValueProvider)
+                factory.GetValueProvider(mockControllerContext.Object);
 
             // Assert
             Assert.Equal(typeof(JQueryFormValueProvider), valueProvider.GetType());

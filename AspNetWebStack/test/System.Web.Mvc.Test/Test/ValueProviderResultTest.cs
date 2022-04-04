@@ -106,9 +106,8 @@ namespace System.Web.Mvc.Test
 
             // Act
             DefaultModelBinderTest.StringContainer returned =
-                (DefaultModelBinderTest.StringContainer)vpr.ConvertTo(
-                    typeof(DefaultModelBinderTest.StringContainer)
-                );
+                (DefaultModelBinderTest.StringContainer)
+                    vpr.ConvertTo(typeof(DefaultModelBinderTest.StringContainer));
 
             // Assert
             Assert.Equal("someValue (fr-FR)", returned.Value);
@@ -523,10 +522,8 @@ namespace System.Web.Mvc.Test
 
             // Act
             DefaultModelBinderTest.StringContainer returned =
-                (DefaultModelBinderTest.StringContainer)vpr.ConvertTo(
-                    typeof(DefaultModelBinderTest.StringContainer),
-                    gbCulture
-                );
+                (DefaultModelBinderTest.StringContainer)
+                    vpr.ConvertTo(typeof(DefaultModelBinderTest.StringContainer), gbCulture);
 
             // Assert
             Assert.Equal("someValue (en-GB)", returned.Value);

@@ -52,9 +52,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
             _cache.GetOrAdd(
                 (type, name),
                 t =>
-                    (Func<DbContext, string?, object>)createMethod
-                        .MakeGenericMethod(t.Type)
-                        .Invoke(null, null)!
+                    (Func<DbContext, string?, object>)
+                        createMethod.MakeGenericMethod(t.Type).Invoke(null, null)!
             )(context, name);
 
         [UsedImplicitly]

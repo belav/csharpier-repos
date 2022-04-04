@@ -552,8 +552,8 @@ namespace System.DirectoryServices.ActiveDirectory
                 ];
                 for (int j = 0; j < errorList.Count; j++)
                 {
-                    SyncFromAllServersErrorInformation tmp =
-                        (SyncFromAllServersErrorInformation)errorList[j]!;
+                    SyncFromAllServersErrorInformation tmp = (SyncFromAllServersErrorInformation)
+                        errorList[j]!;
                     info[j] = new SyncFromAllServersErrorInformation(
                         tmp.ErrorCategory,
                         tmp.ErrorCode,

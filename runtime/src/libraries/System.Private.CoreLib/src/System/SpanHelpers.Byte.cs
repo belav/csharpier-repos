@@ -1850,12 +1850,13 @@ namespace System
                     uint matches;
                     while (lengthToExamine > offset)
                     {
-                        matches = (uint)Avx2.MoveMask(
-                            Avx2.CompareEqual(
-                                LoadVector256(ref first, offset),
-                                LoadVector256(ref second, offset)
-                            )
-                        );
+                        matches = (uint)
+                            Avx2.MoveMask(
+                                Avx2.CompareEqual(
+                                    LoadVector256(ref first, offset),
+                                    LoadVector256(ref second, offset)
+                                )
+                            );
                         // Note that MoveMask has converted the equal vector elements into a set of bit flags,
                         // So the bit position in 'matches' corresponds to the element offset.
 
@@ -1872,12 +1873,13 @@ namespace System
                     // Move to Vector length from end for final compare
                     offset = lengthToExamine;
                     // Same as method as above
-                    matches = (uint)Avx2.MoveMask(
-                        Avx2.CompareEqual(
-                            LoadVector256(ref first, offset),
-                            LoadVector256(ref second, offset)
-                        )
-                    );
+                    matches = (uint)
+                        Avx2.MoveMask(
+                            Avx2.CompareEqual(
+                                LoadVector256(ref first, offset),
+                                LoadVector256(ref second, offset)
+                            )
+                        );
                     if (matches == uint.MaxValue)
                     {
                         // All matched
@@ -1903,12 +1905,13 @@ namespace System
                     uint matches;
                     if (lengthToExamine > offset)
                     {
-                        matches = (uint)Sse2.MoveMask(
-                            Sse2.CompareEqual(
-                                LoadVector128(ref first, offset),
-                                LoadVector128(ref second, offset)
-                            )
-                        );
+                        matches = (uint)
+                            Sse2.MoveMask(
+                                Sse2.CompareEqual(
+                                    LoadVector128(ref first, offset),
+                                    LoadVector128(ref second, offset)
+                                )
+                            );
                         // Note that MoveMask has converted the equal vector elements into a set of bit flags,
                         // So the bit position in 'matches' corresponds to the element offset.
 
@@ -1921,12 +1924,13 @@ namespace System
                     // Move to Vector length from end for final compare
                     offset = lengthToExamine;
                     // Same as method as above
-                    matches = (uint)Sse2.MoveMask(
-                        Sse2.CompareEqual(
-                            LoadVector128(ref first, offset),
-                            LoadVector128(ref second, offset)
-                        )
-                    );
+                    matches = (uint)
+                        Sse2.MoveMask(
+                            Sse2.CompareEqual(
+                                LoadVector128(ref first, offset),
+                                LoadVector128(ref second, offset)
+                            )
+                        );
                     if (matches == ushort.MaxValue)
                     {
                         // All matched
@@ -1954,12 +1958,13 @@ namespace System
                     uint matches;
                     while (lengthToExamine > offset)
                     {
-                        matches = (uint)Sse2.MoveMask(
-                            Sse2.CompareEqual(
-                                LoadVector128(ref first, offset),
-                                LoadVector128(ref second, offset)
-                            )
-                        );
+                        matches = (uint)
+                            Sse2.MoveMask(
+                                Sse2.CompareEqual(
+                                    LoadVector128(ref first, offset),
+                                    LoadVector128(ref second, offset)
+                                )
+                            );
                         // Note that MoveMask has converted the equal vector elements into a set of bit flags,
                         // So the bit position in 'matches' corresponds to the element offset.
 
@@ -1976,12 +1981,13 @@ namespace System
                     // Move to Vector length from end for final compare
                     offset = lengthToExamine;
                     // Same as method as above
-                    matches = (uint)Sse2.MoveMask(
-                        Sse2.CompareEqual(
-                            LoadVector128(ref first, offset),
-                            LoadVector128(ref second, offset)
-                        )
-                    );
+                    matches = (uint)
+                        Sse2.MoveMask(
+                            Sse2.CompareEqual(
+                                LoadVector128(ref first, offset),
+                                LoadVector128(ref second, offset)
+                            )
+                        );
                     if (matches == ushort.MaxValue)
                     {
                         // All matched
@@ -2146,9 +2152,10 @@ namespace System
         private static unsafe nuint UnalignedCountVectorFromEnd(ref byte searchSpace, int length)
         {
             nint unaligned = (nint)Unsafe.AsPointer(ref searchSpace) & (Vector<byte>.Count - 1);
-            return (nuint)(uint)(
-                ((length & (Vector<byte>.Count - 1)) + unaligned) & (Vector<byte>.Count - 1)
-            );
+            return (nuint)
+                (uint)(
+                    ((length & (Vector<byte>.Count - 1)) + unaligned) & (Vector<byte>.Count - 1)
+                );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

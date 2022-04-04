@@ -34,13 +34,14 @@ namespace NativeVarargsTest
                 Type testType = ijwNativeDll.GetType("TestClass");
                 object testInstance = Activator.CreateInstance(testType);
                 MethodInfo testMethod = testType.GetMethod("RunTests");
-                IEnumerable failedTests = (IEnumerable)testMethod.Invoke(
-                    testInstance,
-                    BindingFlags.DoNotWrapExceptions,
-                    null,
-                    new object[] { seed },
-                    null
-                );
+                IEnumerable failedTests = (IEnumerable)
+                    testMethod.Invoke(
+                        testInstance,
+                        BindingFlags.DoNotWrapExceptions,
+                        null,
+                        new object[] { seed },
+                        null
+                    );
 
                 if (failedTests.OfType<object>().Any())
                 {

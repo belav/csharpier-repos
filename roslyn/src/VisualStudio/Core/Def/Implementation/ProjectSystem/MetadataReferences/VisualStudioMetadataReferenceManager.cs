@@ -62,19 +62,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             _metadataCache = new MetadataCache();
             _runtimeDirectories = GetRuntimeDirectories();
 
-            XmlMemberIndexService = (IVsXMLMemberIndexService)serviceProvider.GetService(
-                typeof(SVsXMLMemberIndexService)
-            );
+            XmlMemberIndexService = (IVsXMLMemberIndexService)
+                serviceProvider.GetService(typeof(SVsXMLMemberIndexService));
             Assumes.Present(XmlMemberIndexService);
 
-            SmartOpenScopeServiceOpt = (IVsSmartOpenScope)serviceProvider.GetService(
-                typeof(SVsSmartOpenScope)
-            );
+            SmartOpenScopeServiceOpt = (IVsSmartOpenScope)
+                serviceProvider.GetService(typeof(SVsSmartOpenScope));
             Assumes.Present(SmartOpenScopeServiceOpt);
 
-            FileChangeService = (IVsFileChangeEx)serviceProvider.GetService(
-                typeof(SVsFileChangeEx)
-            );
+            FileChangeService = (IVsFileChangeEx)
+                serviceProvider.GetService(typeof(SVsFileChangeEx));
             Assumes.Present(FileChangeService);
             _workspace = workspace;
             _temporaryStorageService = temporaryStorageService;

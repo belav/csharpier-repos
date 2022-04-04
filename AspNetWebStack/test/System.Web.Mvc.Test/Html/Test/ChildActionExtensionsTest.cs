@@ -184,9 +184,8 @@ namespace System.Web.Mvc.Html.Test
                 )
                 .Callback<IHttpHandler, TextWriter, bool>(
                     (handler, _, __) =>
-                        mvcHandler = (MvcHandler)(
-                            (HttpHandlerUtil.ServerExecuteHttpHandlerWrapper)handler
-                        ).InnerHandler
+                        mvcHandler = (MvcHandler)
+                            ((HttpHandlerUtil.ServerExecuteHttpHandlerWrapper)handler).InnerHandler
                 );
 
             // Act
@@ -225,9 +224,8 @@ namespace System.Web.Mvc.Html.Test
                 )
                 .Callback<IHttpHandler, TextWriter, bool>(
                     (handler, _, __) =>
-                        mvcHandler = (MvcHandler)(
-                            (HttpHandlerUtil.ServerExecuteHttpHandlerWrapper)handler
-                        ).InnerHandler
+                        mvcHandler = (MvcHandler)
+                            ((HttpHandlerUtil.ServerExecuteHttpHandlerWrapper)handler).InnerHandler
                 );
 
             // Act
@@ -263,9 +261,8 @@ namespace System.Web.Mvc.Html.Test
                 )
                 .Callback<IHttpHandler, TextWriter, bool>(
                     (handler, _, __) =>
-                        mvcHandler = (MvcHandler)(
-                            (HttpHandlerUtil.ServerExecuteHttpHandlerWrapper)handler
-                        ).InnerHandler
+                        mvcHandler = (MvcHandler)
+                            ((HttpHandlerUtil.ServerExecuteHttpHandlerWrapper)handler).InnerHandler
                 );
 
             // Act
@@ -301,9 +298,8 @@ namespace System.Web.Mvc.Html.Test
                 )
                 .Callback<IHttpHandler, TextWriter, bool>(
                     (handler, _, __) =>
-                        mvcHandler = (MvcHandler)(
-                            (HttpHandlerUtil.ServerExecuteHttpHandlerWrapper)handler
-                        ).InnerHandler
+                        mvcHandler = (MvcHandler)
+                            ((HttpHandlerUtil.ServerExecuteHttpHandlerWrapper)handler).InnerHandler
                 );
 
             // Act
@@ -339,9 +335,8 @@ namespace System.Web.Mvc.Html.Test
                 )
                 .Callback<IHttpHandler, TextWriter, bool>(
                     (handler, _, __) =>
-                        mvcHandler = (MvcHandler)(
-                            (HttpHandlerUtil.ServerExecuteHttpHandlerWrapper)handler
-                        ).InnerHandler
+                        mvcHandler = (MvcHandler)
+                            ((HttpHandlerUtil.ServerExecuteHttpHandlerWrapper)handler).InnerHandler
                 );
 
             // Act
@@ -386,9 +381,8 @@ namespace System.Web.Mvc.Html.Test
                 )
                 .Callback<IHttpHandler, TextWriter, bool>(
                     (handler, _, __) =>
-                        mvcHandler = (MvcHandler)(
-                            (HttpHandlerUtil.ServerExecuteHttpHandlerWrapper)handler
-                        ).InnerHandler
+                        mvcHandler = (MvcHandler)
+                            ((HttpHandlerUtil.ServerExecuteHttpHandlerWrapper)handler).InnerHandler
                 );
 
             // Act
@@ -424,9 +418,8 @@ namespace System.Web.Mvc.Html.Test
                 )
                 .Callback<IHttpHandler, TextWriter, bool>(
                     (handler, _, __) =>
-                        mvcHandler = (MvcHandler)(
-                            (HttpHandlerUtil.ServerExecuteHttpHandlerWrapper)handler
-                        ).InnerHandler
+                        mvcHandler = (MvcHandler)
+                            ((HttpHandlerUtil.ServerExecuteHttpHandlerWrapper)handler).InnerHandler
                 );
 
             // Act
@@ -467,9 +460,8 @@ namespace System.Web.Mvc.Html.Test
                 )
                 .Callback<IHttpHandler, TextWriter, bool>(
                     (handler, _, __) =>
-                        mvcHandler = (MvcHandler)(
-                            (HttpHandlerUtil.ServerExecuteHttpHandlerWrapper)handler
-                        ).InnerHandler
+                        mvcHandler = (MvcHandler)
+                            ((HttpHandlerUtil.ServerExecuteHttpHandlerWrapper)handler).InnerHandler
                 );
 
             // Act
@@ -539,9 +531,8 @@ namespace System.Web.Mvc.Html.Test
                 )
                 .Callback<IHttpHandler, TextWriter, bool>(
                     (handler, _, __) =>
-                        mvcHandler = (MvcHandler)(
-                            (HttpHandlerUtil.ServerExecuteHttpHandlerWrapper)handler
-                        ).InnerHandler
+                        mvcHandler = (MvcHandler)
+                            ((HttpHandlerUtil.ServerExecuteHttpHandlerWrapper)handler).InnerHandler
                 );
 
             // Act
@@ -581,9 +572,8 @@ namespace System.Web.Mvc.Html.Test
                 )
                 .Callback<IHttpHandler, TextWriter, bool>(
                     (handler, _, __) =>
-                        mvcHandler = (MvcHandler)(
-                            (HttpHandlerUtil.ServerExecuteHttpHandlerWrapper)handler
-                        ).InnerHandler
+                        mvcHandler = (MvcHandler)
+                            ((HttpHandlerUtil.ServerExecuteHttpHandlerWrapper)handler).InnerHandler
                 );
 
             // Act

@@ -21,10 +21,8 @@ public class Test : MarshalByRefObject
             object t = null;
             string s = (string)t;
             AppDomain domain = AppDomain.CreateDomain("testdomain");
-            Remo server = (Remo)domain.CreateInstanceAndUnwrap(
-                typeof(Test).Assembly.FullName,
-                "Remo"
-            );
+            Remo server = (Remo)
+                domain.CreateInstanceAndUnwrap(typeof(Test).Assembly.FullName, "Remo");
             if (System.Threading.Thread.GetDomainID() == server.GetDomainId())
                 throw new TestException("Object not created in new domain", 1);
 

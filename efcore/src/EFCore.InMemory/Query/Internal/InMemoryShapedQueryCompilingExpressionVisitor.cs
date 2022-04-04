@@ -63,8 +63,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         /// </summary>
         protected override Expression VisitShapedQuery(ShapedQueryExpression shapedQueryExpression)
         {
-            var inMemoryQueryExpression =
-                (InMemoryQueryExpression)shapedQueryExpression.QueryExpression;
+            var inMemoryQueryExpression = (InMemoryQueryExpression)
+                shapedQueryExpression.QueryExpression;
             inMemoryQueryExpression.ApplyProjection();
 
             var shaperExpression = new ShaperExpressionProcessingExpressionVisitor(

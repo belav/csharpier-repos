@@ -90,15 +90,14 @@ namespace Microsoft.DotNet.CoreSetup.Test
             {
                 return new Framework((string)jobject["name"], (string)jobject["version"])
                 {
-                    RollForward = (string)jobject[
-                        Constants.RollForwardSetting.RuntimeConfigPropertyName
-                    ],
-                    RollForwardOnNoCandidateFx = (int?)jobject[
-                        Constants.RollForwardOnNoCandidateFxSetting.RuntimeConfigPropertyName
-                    ],
-                    ApplyPatches = (bool?)jobject[
-                        Constants.ApplyPatchesSetting.RuntimeConfigPropertyName
-                    ]
+                    RollForward = (string)
+                        jobject[Constants.RollForwardSetting.RuntimeConfigPropertyName],
+                    RollForwardOnNoCandidateFx = (int?)
+                        jobject[
+                            Constants.RollForwardOnNoCandidateFxSetting.RuntimeConfigPropertyName
+                        ],
+                    ApplyPatches = (bool?)
+                        jobject[Constants.ApplyPatchesSetting.RuntimeConfigPropertyName]
                 };
             }
         }
@@ -167,15 +166,14 @@ namespace Microsoft.DotNet.CoreSetup.Test
                         }
                     }
 
-                    runtimeConfig._rollForward = (string)runtimeOptions[
-                        Constants.RollForwardSetting.RuntimeConfigPropertyName
-                    ];
-                    runtimeConfig._rollForwardOnNoCandidateFx = (int?)runtimeOptions[
-                        Constants.RollForwardOnNoCandidateFxSetting.RuntimeConfigPropertyName
-                    ];
-                    runtimeConfig._applyPatches = (bool?)runtimeOptions[
-                        Constants.ApplyPatchesSetting.RuntimeConfigPropertyName
-                    ];
+                    runtimeConfig._rollForward = (string)
+                        runtimeOptions[Constants.RollForwardSetting.RuntimeConfigPropertyName];
+                    runtimeConfig._rollForwardOnNoCandidateFx = (int?)
+                        runtimeOptions[
+                            Constants.RollForwardOnNoCandidateFxSetting.RuntimeConfigPropertyName
+                        ];
+                    runtimeConfig._applyPatches = (bool?)
+                        runtimeOptions[Constants.ApplyPatchesSetting.RuntimeConfigPropertyName];
                 }
             }
 

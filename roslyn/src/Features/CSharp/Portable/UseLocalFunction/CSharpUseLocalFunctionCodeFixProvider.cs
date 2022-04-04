@@ -84,14 +84,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
 
             foreach (var diagnostic in diagnostics)
             {
-                var localDeclaration =
-                    (LocalDeclarationStatementSyntax)diagnostic.AdditionalLocations[0].FindNode(
-                        cancellationToken
-                    );
-                var anonymousFunction =
-                    (AnonymousFunctionExpressionSyntax)diagnostic.AdditionalLocations[1].FindNode(
-                        cancellationToken
-                    );
+                var localDeclaration = (LocalDeclarationStatementSyntax)
+                    diagnostic.AdditionalLocations[0].FindNode(cancellationToken);
+                var anonymousFunction = (AnonymousFunctionExpressionSyntax)
+                    diagnostic.AdditionalLocations[1].FindNode(cancellationToken);
 
                 var references = new List<ExpressionSyntax>(
                     diagnostic.AdditionalLocations.Count - 2
@@ -100,10 +96,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
                 for (var i = 2; i < diagnostic.AdditionalLocations.Count; i++)
                 {
                     references.Add(
-                        (ExpressionSyntax)diagnostic.AdditionalLocations[i].FindNode(
-                            getInnermostNodeForTie: true,
-                            cancellationToken
-                        )
+                        (ExpressionSyntax)
+                            diagnostic.AdditionalLocations[i].FindNode(
+                                getInnermostNodeForTie: true,
+                                cancellationToken
+                            )
                     );
                 }
 
@@ -135,9 +132,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
                 ) in nodesFromDiagnostics.OrderByDescending(nodes => nodes.function.SpanStart)
             )
             {
-                var delegateType = (INamedTypeSymbol)semanticModel
-                    .GetTypeInfo(anonymousFunction, cancellationToken)
-                    .ConvertedType;
+                var delegateType = (INamedTypeSymbol)
+                    semanticModel.GetTypeInfo(anonymousFunction, cancellationToken).ConvertedType;
                 var parameterList = GenerateParameterList(
                     anonymousFunction,
                     delegateType.DelegateInvokeMethod

@@ -683,11 +683,12 @@ namespace System.Xml
             }
             else
             {
-                stream = (Stream?)_laterInitParam.inputUriResolver.GetEntity(
-                    _laterInitParam.inputbaseUri,
-                    string.Empty,
-                    typeof(Stream)
-                );
+                stream = (Stream?)
+                    _laterInitParam.inputUriResolver.GetEntity(
+                        _laterInitParam.inputbaseUri,
+                        string.Empty,
+                        typeof(Stream)
+                    );
             }
 
             if (stream == null)
@@ -8631,11 +8632,8 @@ namespace System.Xml
             // First try to get the data as a TextReader
             if (_xmlResolver.SupportsType(uri, typeof(TextReader)))
             {
-                TextReader? textReader = (TextReader?)_xmlResolver.GetEntity(
-                    uri,
-                    null,
-                    typeof(TextReader)
-                );
+                TextReader? textReader = (TextReader?)
+                    _xmlResolver.GetEntity(uri, null, typeof(TextReader));
                 if (textReader == null)
                 {
                     return false;

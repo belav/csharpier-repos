@@ -186,10 +186,11 @@ namespace System.Globalization
         internal static GraphemeClusterBreakType GetGraphemeClusterBreakType(Rune rune)
         {
             nuint offset = GetNumericGraphemeTableOffsetNoBoundsChecks((uint)rune.Value);
-            return (GraphemeClusterBreakType)Unsafe.AddByteOffset(
-                ref MemoryMarshal.GetReference(GraphemeSegmentationValues),
-                offset
-            );
+            return (GraphemeClusterBreakType)
+                Unsafe.AddByteOffset(
+                    ref MemoryMarshal.GetReference(GraphemeSegmentationValues),
+                    offset
+                );
         }
 
         /*
@@ -207,10 +208,9 @@ namespace System.Globalization
 
             // High bit of each value in the 'CategoriesValues' array denotes whether this code point is white space.
 
-            return (sbyte)Unsafe.AddByteOffset(
-                    ref MemoryMarshal.GetReference(CategoriesValues),
-                    offset
-                ) < 0;
+            return (sbyte)
+                    Unsafe.AddByteOffset(ref MemoryMarshal.GetReference(CategoriesValues), offset)
+                < 0;
         }
 
         /*

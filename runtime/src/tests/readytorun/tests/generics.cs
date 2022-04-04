@@ -2668,10 +2668,8 @@ class Program
                 );
                 object dynamicDerivedObj = Activator.CreateInstance(dynamicDerivedOfString);
                 var virtualMethodDynamicDerived = dynamicDerivedOfString.GetMethod("VirtualMethod");
-                string result = (string)virtualMethodDynamicDerived.Invoke(
-                    dynamicDerivedObj,
-                    new[] { "fad" }
-                );
+                string result = (string)
+                    virtualMethodDynamicDerived.Invoke(dynamicDerivedObj, new[] { "fad" });
                 Verify("DynamicDerived<T>.VirtualMethod", result);
             }
 
@@ -2701,10 +2699,8 @@ class Program
                 var virtualMethodDynamicDerived = dynamicDerivedOfString
                     .GetMethod("GenericVirtualMethod")
                     .MakeGenericMethod(new[] { typeof(string) });
-                string result = (string)virtualMethodDynamicDerived.Invoke(
-                    dynamicDerivedObj,
-                    new[] { "hey", "fad" }
-                );
+                string result = (string)
+                    virtualMethodDynamicDerived.Invoke(dynamicDerivedObj, new[] { "hey", "fad" });
                 Verify("DynamicDerivedSystem.Stringfad", result);
             }
         }

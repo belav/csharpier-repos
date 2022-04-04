@@ -255,10 +255,8 @@ namespace Moq
         {
             if (type.IsTypeMatcher())
             {
-                var attr = (TypeMatcherAttribute)Attribute.GetCustomAttribute(
-                    type,
-                    typeof(TypeMatcherAttribute)
-                );
+                var attr = (TypeMatcherAttribute)
+                    Attribute.GetCustomAttribute(type, typeof(TypeMatcherAttribute));
                 typeMatcherType = attr.Type ?? type;
                 Guard.ImplementsTypeMatcherProtocol(typeMatcherType);
                 return true;

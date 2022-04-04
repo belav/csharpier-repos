@@ -252,9 +252,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                 var node = await GetOrCreateNodeAsync(_graph, symbol, _solution, cancellationToken)
                     .ConfigureAwait(false);
 
-                node[RoslynGraphProperties.SymbolId] = (SymbolKey?)symbol.GetSymbolKey(
-                    cancellationToken
-                );
+                node[RoslynGraphProperties.SymbolId] = (SymbolKey?)
+                    symbol.GetSymbolKey(cancellationToken);
                 node[RoslynGraphProperties.ContextProjectId] = GetContextProjectId(
                     contextProject,
                     symbol
@@ -499,9 +498,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                     if (typeSymbol.IsGenericType)
                     {
                         // Symbol.name does not contain type params for generic types, so we populate them here for some requiring cases like VS properties panel.
-                        node.Label = (string)node[
-                            RoslynGraphProperties.FormattedLabelWithoutContainingSymbol
-                        ];
+                        node.Label = (string)
+                            node[RoslynGraphProperties.FormattedLabelWithoutContainingSymbol];
 
                         // Some consumers like CodeMap want to show types in an unified way for both C# and VB.
                         // Therefore, populate a common label property using only name and its type parameters.

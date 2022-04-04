@@ -604,8 +604,8 @@ dotnet_diagnostic.{DisabledByDefaultAnalyzer.s_compilationRule.Id}.severity = wa
                 exportProvider.GetExportedValue<IDiagnosticAnalyzerService>()
             );
 
-            var incrementalAnalyzer =
-                (DiagnosticIncrementalAnalyzer)service.CreateIncrementalAnalyzer(workspace);
+            var incrementalAnalyzer = (DiagnosticIncrementalAnalyzer)
+                service.CreateIncrementalAnalyzer(workspace);
             var analyzers = incrementalAnalyzer.GetAnalyzersTestOnly(project).ToArray();
 
             AssertEx.Equal(
@@ -700,8 +700,8 @@ dotnet_diagnostic.{DisabledByDefaultAnalyzer.s_compilationRule.Id}.severity = wa
                 called = true;
             };
 
-            var incrementalAnalyzer =
-                (DiagnosticIncrementalAnalyzer)service.CreateIncrementalAnalyzer(workspace);
+            var incrementalAnalyzer = (DiagnosticIncrementalAnalyzer)
+                service.CreateIncrementalAnalyzer(workspace);
             await incrementalAnalyzer.AnalyzeProjectAsync(
                 project,
                 semanticsChanged: true,
@@ -867,10 +867,8 @@ dotnet_diagnostic.{NamedTypeAnalyzer.DiagnosticId}.severity = warning
                 called = true;
             };
 
-            var incrementalAnalyzer =
-                (DiagnosticIncrementalAnalyzer)service.CreateIncrementalAnalyzer(
-                    project.Solution.Workspace
-                );
+            var incrementalAnalyzer = (DiagnosticIncrementalAnalyzer)
+                service.CreateIncrementalAnalyzer(project.Solution.Workspace);
             await incrementalAnalyzer.AnalyzeProjectAsync(
                 project,
                 semanticsChanged: true,
@@ -968,8 +966,8 @@ dotnet_diagnostic.{NamedTypeAnalyzer.DiagnosticId}.severity = warning
                 );
             };
 
-            var incrementalAnalyzer =
-                (DiagnosticIncrementalAnalyzer)service.CreateIncrementalAnalyzer(workspace);
+            var incrementalAnalyzer = (DiagnosticIncrementalAnalyzer)
+                service.CreateIncrementalAnalyzer(workspace);
             var firstAdditionalDocument = project.AdditionalDocuments.FirstOrDefault();
 
             switch (analysisScope)
@@ -1121,15 +1119,15 @@ dotnet_diagnostic.{NamedTypeAnalyzer.DiagnosticId}.severity = warning
                 diagnostic = Assert.Single(diagnostics);
             };
 
-            var incrementalAnalyzer =
-                (DiagnosticIncrementalAnalyzer)service.CreateIncrementalAnalyzer(workspace);
+            var incrementalAnalyzer = (DiagnosticIncrementalAnalyzer)
+                service.CreateIncrementalAnalyzer(workspace);
 
             switch (analysisScope)
             {
                 case BackgroundAnalysisScope.ActiveFile:
                     workspace.OpenDocument(document.Id);
-                    var documentTrackingService =
-                        (TestDocumentTrackingService)workspace.Services.GetService<IDocumentTrackingService>();
+                    var documentTrackingService = (TestDocumentTrackingService)
+                        workspace.Services.GetService<IDocumentTrackingService>();
                     documentTrackingService.SetActiveDocument(document.Id);
                     await incrementalAnalyzer.AnalyzeDocumentAsync(
                         document,
@@ -1267,15 +1265,15 @@ class A
                 );
             };
 
-            var incrementalAnalyzer =
-                (DiagnosticIncrementalAnalyzer)service.CreateIncrementalAnalyzer(workspace);
+            var incrementalAnalyzer = (DiagnosticIncrementalAnalyzer)
+                service.CreateIncrementalAnalyzer(workspace);
 
             switch (analysisScope)
             {
                 case BackgroundAnalysisScope.ActiveFile:
                     workspace.OpenDocument(document.Id);
-                    var documentTrackingService =
-                        (TestDocumentTrackingService)workspace.Services.GetRequiredService<IDocumentTrackingService>();
+                    var documentTrackingService = (TestDocumentTrackingService)
+                        workspace.Services.GetRequiredService<IDocumentTrackingService>();
                     documentTrackingService.SetActiveDocument(document.Id);
                     await incrementalAnalyzer.AnalyzeDocumentAsync(
                         document,
@@ -1397,8 +1395,8 @@ class A
                 diagnostic = Assert.Single(diagnostics);
             };
 
-            var incrementalAnalyzer =
-                (DiagnosticIncrementalAnalyzer)service.CreateIncrementalAnalyzer(workspace);
+            var incrementalAnalyzer = (DiagnosticIncrementalAnalyzer)
+                service.CreateIncrementalAnalyzer(workspace);
 
             workspace.OpenDocument(document.Id);
 

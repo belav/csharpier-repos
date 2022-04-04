@@ -42,9 +42,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.R
         {
             if (!_eventsHookedUp)
             {
-                var trackProjectDocuments = (IVsTrackProjectDocuments2)_serviceProvider.GetService(
-                    typeof(SVsTrackProjectDocuments)
-                );
+                var trackProjectDocuments = (IVsTrackProjectDocuments2)
+                    _serviceProvider.GetService(typeof(SVsTrackProjectDocuments));
 
                 if (
                     ErrorHandler.Succeeded(
@@ -61,9 +60,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.R
         {
             if (_eventsHookedUp)
             {
-                var trackProjectDocuments = (IVsTrackProjectDocuments2)_serviceProvider.GetService(
-                    typeof(SVsTrackProjectDocuments)
-                );
+                var trackProjectDocuments = (IVsTrackProjectDocuments2)
+                    _serviceProvider.GetService(typeof(SVsTrackProjectDocuments));
 
                 if (
                     ErrorHandler.Succeeded(

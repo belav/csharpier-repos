@@ -46,12 +46,13 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public async Task FloatParseHandlingAsync()
         {
-            JValue v = (JValue)await JToken.ReadFromAsync(
-                new JsonTextReader(new StringReader("9.9"))
-                {
-                    FloatParseHandling = FloatParseHandling.Decimal
-                }
-            );
+            JValue v = (JValue)
+                await JToken.ReadFromAsync(
+                    new JsonTextReader(new StringReader("9.9"))
+                    {
+                        FloatParseHandling = FloatParseHandling.Decimal
+                    }
+                );
 
             Assert.AreEqual(9.9m, v.Value);
             Assert.AreEqual(typeof(decimal), v.Value.GetType());

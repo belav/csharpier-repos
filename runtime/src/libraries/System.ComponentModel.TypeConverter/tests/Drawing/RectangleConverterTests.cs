@@ -236,9 +236,8 @@ namespace System.ComponentModel.TypeConverterTests
         [MemberData(nameof(RectangleData))]
         public void ConvertFromInvariantString(int x, int y, int width, int height)
         {
-            var rect = (Rectangle)Converter.ConvertFromInvariantString(
-                $"{x}, {y}, {width}, {height}"
-            );
+            var rect = (Rectangle)
+                Converter.ConvertFromInvariantString($"{x}, {y}, {width}, {height}");
             Assert.Equal(x, rect.X);
             Assert.Equal(y, rect.Y);
             Assert.Equal(width, rect.Width);
@@ -261,16 +260,17 @@ namespace System.ComponentModel.TypeConverterTests
         [MemberData(nameof(RectangleData))]
         public void ConvertFromString(int x, int y, int width, int height)
         {
-            var rect = (Rectangle)Converter.ConvertFromString(
-                string.Format(
-                    "{0}{4} {1}{4} {2}{4} {3}",
-                    x,
-                    y,
-                    width,
-                    height,
-                    CultureInfo.CurrentCulture.TextInfo.ListSeparator
-                )
-            );
+            var rect = (Rectangle)
+                Converter.ConvertFromString(
+                    string.Format(
+                        "{0}{4} {1}{4} {2}{4} {3}",
+                        x,
+                        y,
+                        width,
+                        height,
+                        CultureInfo.CurrentCulture.TextInfo.ListSeparator
+                    )
+                );
             Assert.Equal(x, rect.X);
             Assert.Equal(y, rect.Y);
             Assert.Equal(width, rect.Width);

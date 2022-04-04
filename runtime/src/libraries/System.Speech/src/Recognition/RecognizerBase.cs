@@ -900,8 +900,8 @@ namespace System.Speech.Recognition
                     throw new InvalidOperationException(SR.Get(SRID.RecognizerAlreadyRecognizing));
                 }
 
-                ISpObjectTokenCategory category =
-                    (ISpObjectTokenCategory)new SpObjectTokenCategory();
+                ISpObjectTokenCategory category = (ISpObjectTokenCategory)
+                    new SpObjectTokenCategory();
                 try
                 {
                     category.SetId(SAPICategories.AudioIn, false);
@@ -2879,9 +2879,8 @@ namespace System.Speech.Recognition
         private RecognitionResult CreateRecognitionResult(SpeechEvent speechEvent)
         {
             // Get the sapi result
-            ISpRecoResult sapiResult = (ISpRecoResult)Marshal.GetObjectForIUnknown(
-                (IntPtr)speechEvent.LParam
-            );
+            ISpRecoResult sapiResult = (ISpRecoResult)
+                Marshal.GetObjectForIUnknown((IntPtr)speechEvent.LParam);
             RecognitionResult recoResult = null;
 
             // Get the serialized unmanaged blob and then delete the sapi result

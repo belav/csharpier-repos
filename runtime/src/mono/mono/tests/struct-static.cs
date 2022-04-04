@@ -39,9 +39,8 @@ namespace recursivetype_1238911
         [MethodImpl(MethodImplOptions.NoInlining)]
         static void TestBody2(Type info)
         {
-            FineStruct2 fs = (FineStruct2)info.Assembly.CreateInstance(
-                "recursivetype_1238911.FineStruct2"
-            );
+            FineStruct2 fs = (FineStruct2)
+                info.Assembly.CreateInstance("recursivetype_1238911.FineStruct2");
         }
     }
 }

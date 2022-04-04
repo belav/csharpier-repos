@@ -59,10 +59,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                         new Type[] { typeof(string) }
                     );
                 var enabledExtensions =
-                    (IEnumerable<object>)extensionManager_GetEnabledExtensionsMethod.Invoke(
-                        _extensionManager,
-                        new object[] { AnalyzerContentTypeName }
-                    );
+                    (IEnumerable<object>)
+                        extensionManager_GetEnabledExtensionsMethod.Invoke(
+                            _extensionManager,
+                            new object[] { AnalyzerContentTypeName }
+                        );
 
                 foreach (var extension in enabledExtensions)
                 {

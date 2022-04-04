@@ -1835,10 +1835,8 @@ namespace System.IO.Ports
         )
         {
             // Extract async the result from overlapped structure
-            SerialStreamAsyncResult asyncResult =
-                (SerialStreamAsyncResult)ThreadPoolBoundHandle.GetNativeOverlappedState(
-                    pOverlapped
-                );
+            SerialStreamAsyncResult asyncResult = (SerialStreamAsyncResult)
+                ThreadPoolBoundHandle.GetNativeOverlappedState(pOverlapped);
 
             asyncResult._numBytes = (int)numBytes;
             asyncResult._errorCode = (int)errorCode;
@@ -2047,10 +2045,8 @@ namespace System.IO.Ports
             )
             {
                 // Extract the async result from overlapped structure
-                SerialStreamAsyncResult asyncResult =
-                    (SerialStreamAsyncResult)ThreadPoolBoundHandle.GetNativeOverlappedState(
-                        pOverlapped
-                    );
+                SerialStreamAsyncResult asyncResult = (SerialStreamAsyncResult)
+                    ThreadPoolBoundHandle.GetNativeOverlappedState(pOverlapped);
 
                 if (Interlocked.Decrement(ref asyncResult._numBytes) == 0)
                     threadPoolBinding.FreeNativeOverlapped(pOverlapped);

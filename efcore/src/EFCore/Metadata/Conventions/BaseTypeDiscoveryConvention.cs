@@ -59,9 +59,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var entityType = entityTypeBuilder.Metadata;
             var model = entityType.Model;
-            var derivedTypesMap = (Dictionary<Type, List<IConventionEntityType>>?)model[
-                CoreAnnotationNames.DerivedTypes
-            ];
+            var derivedTypesMap = (Dictionary<Type, List<IConventionEntityType>>?)
+                model[CoreAnnotationNames.DerivedTypes];
             if (derivedTypesMap == null)
             {
                 derivedTypesMap = new Dictionary<Type, List<IConventionEntityType>>();

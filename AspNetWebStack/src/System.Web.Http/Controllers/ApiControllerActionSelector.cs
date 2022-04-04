@@ -211,8 +211,8 @@ namespace System.Web.Http.Controllers
                         CandidateAction candidate = _combinedCandidateActions[i];
 
                         // We know that this cast is safe before we created all of the action descriptors for standard actions
-                        ReflectedHttpActionDescriptor action =
-                            (ReflectedHttpActionDescriptor)candidate.ActionDescriptor;
+                        ReflectedHttpActionDescriptor action = (ReflectedHttpActionDescriptor)
+                            candidate.ActionDescriptor;
 
                         // Allow standard routes access inherited actionsByVerb or actionsByVerb without Route attributes.
                         if (

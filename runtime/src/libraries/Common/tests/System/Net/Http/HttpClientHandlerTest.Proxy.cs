@@ -717,13 +717,14 @@ namespace System.Net.Http.Functional.Tests
                 .SetValue(winInetProxyHelper, null);
 
             // Create a HttpWindowsProxy with our custom WinInetProxyHelper.
-            IWebProxy httpWindowsProxy = (IWebProxy)Activator.CreateInstance(
-                typeof(HttpClient).Assembly.GetType("System.Net.Http.HttpWindowsProxy", true),
-                Reflection.BindingFlags.NonPublic | Reflection.BindingFlags.Instance,
-                null,
-                new[] { winInetProxyHelper, null },
-                null
-            );
+            IWebProxy httpWindowsProxy = (IWebProxy)
+                Activator.CreateInstance(
+                    typeof(HttpClient).Assembly.GetType("System.Net.Http.HttpWindowsProxy", true),
+                    Reflection.BindingFlags.NonPublic | Reflection.BindingFlags.Instance,
+                    null,
+                    new[] { winInetProxyHelper, null },
+                    null
+                );
 
             Task<bool> nextFailedConnection = null;
 

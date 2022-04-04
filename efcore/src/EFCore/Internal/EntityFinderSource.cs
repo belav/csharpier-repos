@@ -42,13 +42,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
             _cache.GetOrAdd(
                 type.ClrType,
                 t =>
-                    (Func<
-                        IStateManager,
-                        IDbSetSource,
-                        IDbSetCache,
-                        IEntityType,
-                        IEntityFinder
-                    >)_genericCreate.MakeGenericMethod(t).Invoke(null, null)!
+                    (Func<IStateManager, IDbSetSource, IDbSetCache, IEntityType, IEntityFinder>)
+                        _genericCreate.MakeGenericMethod(t).Invoke(null, null)!
             )(stateManager, setSource, setCache, type);
 
         [UsedImplicitly]

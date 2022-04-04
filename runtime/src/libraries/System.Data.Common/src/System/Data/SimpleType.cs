@@ -57,8 +57,8 @@ namespace System.Data
 
             if (node.Content is XmlSchemaSimpleTypeRestriction)
             {
-                XmlSchemaSimpleTypeRestriction content =
-                    (XmlSchemaSimpleTypeRestriction)node.Content;
+                XmlSchemaSimpleTypeRestriction content = (XmlSchemaSimpleTypeRestriction)
+                    node.Content;
 
                 XmlSchemaSimpleType? ancestor = node.BaseXmlSchemaType as XmlSchemaSimpleType;
                 if ((ancestor != null) && (ancestor.QualifiedName.Namespace != Keywords.XSDNS))

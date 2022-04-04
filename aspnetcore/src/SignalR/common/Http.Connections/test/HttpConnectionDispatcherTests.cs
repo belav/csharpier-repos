@@ -318,10 +318,8 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             var availableTransports = HttpTransportType.None;
             foreach (var transport in negotiateResponse["availableTransports"])
             {
-                var transportType = (HttpTransportType)Enum.Parse(
-                    typeof(HttpTransportType),
-                    transport.Value<string>("transport")
-                );
+                var transportType = (HttpTransportType)
+                    Enum.Parse(typeof(HttpTransportType), transport.Value<string>("transport"));
                 availableTransports |= transportType;
             }
 
@@ -543,8 +541,8 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
                 // Pretend the transport closed because the client disconnected
                 if (context.WebSockets.IsWebSocketRequest)
                 {
-                    var ws =
-                        (TestWebSocketConnectionFeature)context.Features.Get<IHttpWebSocketFeature>();
+                    var ws = (TestWebSocketConnectionFeature)
+                        context.Features.Get<IHttpWebSocketFeature>();
                     await ws.Client.CloseOutputAsync(
                         WebSocketCloseStatus.NormalClosure,
                         "",
@@ -2697,8 +2695,8 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
 
             _ = dispatcher.ExecuteAsync(context, options, app);
 
-            var websocket =
-                (TestWebSocketConnectionFeature)context.Features.Get<IHttpWebSocketFeature>();
+            var websocket = (TestWebSocketConnectionFeature)
+                context.Features.Get<IHttpWebSocketFeature>();
             await websocket.Accepted.DefaultTimeout();
             await websocket.Client
                 .CloseOutputAsync(

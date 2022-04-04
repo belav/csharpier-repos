@@ -26,17 +26,16 @@ namespace Castle.DynamicProxy.Tests
         {
             ProxyGenerator generator = new ProxyGenerator();
 
-            IMyService target1 = (IMyService)generator.CreateInterfaceProxyWithTarget(
-                typeof(IMyService),
-                new MyServiceImpl(),
-                new StandardInterceptor()
-            );
+            IMyService target1 = (IMyService)
+                generator.CreateInterfaceProxyWithTarget(
+                    typeof(IMyService),
+                    new MyServiceImpl(),
+                    new StandardInterceptor()
+                );
             Assert.IsNotNull(target1.CreateSomething<int>("aa"));
 
-            IMyService target2 = (IMyService)generator.CreateClassProxy(
-                typeof(MyServiceImpl),
-                new StandardInterceptor()
-            );
+            IMyService target2 = (IMyService)
+                generator.CreateClassProxy(typeof(MyServiceImpl), new StandardInterceptor());
             Assert.IsNotNull(target2.CreateSomething<int>("aa"));
         }
     }

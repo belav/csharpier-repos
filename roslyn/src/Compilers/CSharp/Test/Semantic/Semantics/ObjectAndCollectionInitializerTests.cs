@@ -4273,9 +4273,8 @@ class Test
             var objectCreation = root.DescendantNodes()
                 .OfType<ObjectCreationExpressionSyntax>()
                 .Single();
-            var listAssignment = (AssignmentExpressionSyntax)objectCreation.Initializer.Expressions[
-                0
-            ];
+            var listAssignment = (AssignmentExpressionSyntax)
+                objectCreation.Initializer.Expressions[0];
 
             Assert.Equal(SyntaxKind.SimpleAssignmentExpression, listAssignment.Kind());
             Assert.Equal("List", listAssignment.Left.ToString());
@@ -4334,11 +4333,13 @@ class Test2
             var objectCreation = root.DescendantNodes()
                 .OfType<ObjectCreationExpressionSyntax>()
                 .Single();
-            var listAssignment = (AssignmentExpressionSyntax)(
-                (InitializerExpressionSyntax)(
-                    (AssignmentExpressionSyntax)objectCreation.Initializer.Expressions[0]
-                ).Right
-            ).Expressions[0];
+            var listAssignment = (AssignmentExpressionSyntax)
+                (
+                    (InitializerExpressionSyntax)
+                        (
+                            (AssignmentExpressionSyntax)objectCreation.Initializer.Expressions[0]
+                        ).Right
+                ).Expressions[0];
 
             Assert.Equal(SyntaxKind.SimpleAssignmentExpression, listAssignment.Kind());
             Assert.Equal("List", listAssignment.Left.ToString());
@@ -4391,11 +4392,13 @@ class C : System.Collections.Generic.List<C>
             var objectCreation = root.DescendantNodes()
                 .OfType<ObjectCreationExpressionSyntax>()
                 .Last();
-            var listAssignment = (AssignmentExpressionSyntax)(
-                (InitializerExpressionSyntax)(
-                    (AssignmentExpressionSyntax)objectCreation.Initializer.Expressions[0]
-                ).Right
-            ).Expressions[0];
+            var listAssignment = (AssignmentExpressionSyntax)
+                (
+                    (InitializerExpressionSyntax)
+                        (
+                            (AssignmentExpressionSyntax)objectCreation.Initializer.Expressions[0]
+                        ).Right
+                ).Expressions[0];
 
             Assert.Equal(SyntaxKind.SimpleAssignmentExpression, listAssignment.Kind());
             Assert.Equal("[0]", listAssignment.Left.ToString());

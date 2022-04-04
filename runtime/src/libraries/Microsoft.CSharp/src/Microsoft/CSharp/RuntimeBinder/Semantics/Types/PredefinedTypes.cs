@@ -19,9 +19,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         private static AggregateSymbol DelayLoadPredefSym(PredefinedType pt)
         {
-            AggregateType type = (AggregateType)SymbolTable.GetCTypeFromType(
-                PredefinedTypeFacts.GetAssociatedSystemType(pt)
-            );
+            AggregateType type = (AggregateType)
+                SymbolTable.GetCTypeFromType(PredefinedTypeFacts.GetAssociatedSystemType(pt));
             AggregateSymbol sym = type.OwningAggregate;
             return InitializePredefinedType(sym, pt);
         }

@@ -300,37 +300,45 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if (
                     (object)method
-                        == (object)_compilation.GetSpecialTypeMember(
-                            SpecialMember.System_String__ConcatStringString
-                        )
+                        == (object)
+                            _compilation.GetSpecialTypeMember(
+                                SpecialMember.System_String__ConcatStringString
+                            )
                     || (object)method
-                        == (object)_compilation.GetSpecialTypeMember(
-                            SpecialMember.System_String__ConcatStringStringString
-                        )
+                        == (object)
+                            _compilation.GetSpecialTypeMember(
+                                SpecialMember.System_String__ConcatStringStringString
+                            )
                     || (object)method
-                        == (object)_compilation.GetSpecialTypeMember(
-                            SpecialMember.System_String__ConcatStringStringStringString
-                        )
+                        == (object)
+                            _compilation.GetSpecialTypeMember(
+                                SpecialMember.System_String__ConcatStringStringStringString
+                            )
                     || (object)method
-                        == (object)_compilation.GetSpecialTypeMember(
-                            SpecialMember.System_String__ConcatObject
-                        )
+                        == (object)
+                            _compilation.GetSpecialTypeMember(
+                                SpecialMember.System_String__ConcatObject
+                            )
                     || (object)method
-                        == (object)_compilation.GetSpecialTypeMember(
-                            SpecialMember.System_String__ConcatObjectObject
-                        )
+                        == (object)
+                            _compilation.GetSpecialTypeMember(
+                                SpecialMember.System_String__ConcatObjectObject
+                            )
                     || (object)method
-                        == (object)_compilation.GetSpecialTypeMember(
-                            SpecialMember.System_String__ConcatObjectObjectObject
-                        )
+                        == (object)
+                            _compilation.GetSpecialTypeMember(
+                                SpecialMember.System_String__ConcatObjectObjectObject
+                            )
                     || (object)method
-                        == (object)_compilation.GetSpecialTypeMember(
-                            SpecialMember.System_String__ConcatStringArray
-                        )
+                        == (object)
+                            _compilation.GetSpecialTypeMember(
+                                SpecialMember.System_String__ConcatStringArray
+                            )
                     || (object)method
-                        == (object)_compilation.GetSpecialTypeMember(
-                            SpecialMember.System_String__ConcatObjectArray
-                        )
+                        == (object)
+                            _compilation.GetSpecialTypeMember(
+                                SpecialMember.System_String__ConcatObjectArray
+                            )
                 )
                 {
                     return true;

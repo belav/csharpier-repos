@@ -519,10 +519,8 @@ namespace Microsoft.CodeAnalysis.Operations
                     foreach (var decl in multipleDeclaration.LocalDeclarations)
                     {
                         builder.Add(
-                            (IVariableDeclaratorOperation)CreateVariableDeclaratorInternal(
-                                decl,
-                                decl.Syntax
-                            )
+                            (IVariableDeclaratorOperation)
+                                CreateVariableDeclaratorInternal(decl, decl.Syntax)
                         );
                     }
                     return builder.ToImmutableAndFree();
@@ -1032,9 +1030,8 @@ namespace Microsoft.CodeAnalysis.Operations
                 boundObjectCreationExpression
             );
             IObjectOrCollectionInitializerOperation? initializer =
-                (IObjectOrCollectionInitializerOperation?)Create(
-                    boundObjectCreationExpression.InitializerExpressionOpt
-                );
+                (IObjectOrCollectionInitializerOperation?)
+                    Create(boundObjectCreationExpression.InitializerExpressionOpt);
 
             return new ObjectCreationOperation(
                 constructor.GetPublicSymbol(),
@@ -1054,9 +1051,8 @@ namespace Microsoft.CodeAnalysis.Operations
         {
             IOperation operand = Create(boundWithExpression.Receiver);
             IObjectOrCollectionInitializerOperation initializer =
-                (IObjectOrCollectionInitializerOperation)Create(
-                    boundWithExpression.InitializerExpression
-                );
+                (IObjectOrCollectionInitializerOperation)
+                    Create(boundWithExpression.InitializerExpression);
             MethodSymbol? constructor = boundWithExpression.CloneMethod;
             SyntaxNode syntax = boundWithExpression.Syntax;
             ITypeSymbol? type = boundWithExpression.GetPublicTypeSymbol();
@@ -1077,9 +1073,8 @@ namespace Microsoft.CodeAnalysis.Operations
         )
         {
             IObjectOrCollectionInitializerOperation? initializer =
-                (IObjectOrCollectionInitializerOperation?)Create(
-                    boundDynamicObjectCreationExpression.InitializerExpressionOpt
-                );
+                (IObjectOrCollectionInitializerOperation?)
+                    Create(boundDynamicObjectCreationExpression.InitializerExpressionOpt);
             ImmutableArray<IOperation> arguments = CreateFromArray<BoundExpression, IOperation>(
                 boundDynamicObjectCreationExpression.Arguments
             );
@@ -1897,9 +1892,8 @@ namespace Microsoft.CodeAnalysis.Operations
                 BoundExpression,
                 IOperation
             >(boundArrayCreation.Bounds);
-            IArrayInitializerOperation? arrayInitializer = (IArrayInitializerOperation?)Create(
-                boundArrayCreation.InitializerOpt
-            );
+            IArrayInitializerOperation? arrayInitializer = (IArrayInitializerOperation?)
+                Create(boundArrayCreation.InitializerOpt);
             SyntaxNode syntax = boundArrayCreation.Syntax;
             ITypeSymbol? type = boundArrayCreation.GetPublicTypeSymbol();
             bool isImplicit =
@@ -2159,9 +2153,8 @@ namespace Microsoft.CodeAnalysis.Operations
         private ITypeParameterObjectCreationOperation CreateBoundNewTOperation(BoundNewT boundNewT)
         {
             IObjectOrCollectionInitializerOperation? initializer =
-                (IObjectOrCollectionInitializerOperation?)Create(
-                    boundNewT.InitializerExpressionOpt
-                );
+                (IObjectOrCollectionInitializerOperation?)
+                    Create(boundNewT.InitializerExpressionOpt);
             SyntaxNode syntax = boundNewT.Syntax;
             ITypeSymbol? type = boundNewT.GetPublicTypeSymbol();
             bool isImplicit = boundNewT.WasCompilerGenerated;
@@ -3072,8 +3065,8 @@ namespace Microsoft.CodeAnalysis.Operations
             BoundFixedStatement boundFixedStatement
         )
         {
-            IVariableDeclarationGroupOperation variables =
-                (IVariableDeclarationGroupOperation)Create(boundFixedStatement.Declarations);
+            IVariableDeclarationGroupOperation variables = (IVariableDeclarationGroupOperation)
+                Create(boundFixedStatement.Declarations);
             IOperation body = Create(boundFixedStatement.Body);
             ImmutableArray<ILocalSymbol> locals = boundFixedStatement.Locals.GetPublicSymbols();
             SyntaxNode syntax = boundFixedStatement.Syntax;

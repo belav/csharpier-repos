@@ -377,8 +377,8 @@ public class MaxRequestBufferSizeTests : LoggedTest
                                         < options.Limits.MaxRequestHeadersTotalSize
                                 )
                                 {
-                                    options.Limits.MaxRequestHeadersTotalSize =
-                                        (int)maxRequestBufferSize;
+                                    options.Limits.MaxRequestHeadersTotalSize = (int)
+                                        maxRequestBufferSize;
                                 }
 
                                 options.Limits.MinRequestBodyDataRate = null;

@@ -48,10 +48,8 @@ namespace System.Web.Mvc.Test
             ParameterDescriptor pd = GetParameterDescriptor();
 
             // Act
-            ObsoleteAttribute[] attrs = (ObsoleteAttribute[])pd.GetCustomAttributes(
-                typeof(ObsoleteAttribute),
-                true
-            );
+            ObsoleteAttribute[] attrs = (ObsoleteAttribute[])
+                pd.GetCustomAttributes(typeof(ObsoleteAttribute), true);
 
             // Assert
             Assert.Empty(attrs);

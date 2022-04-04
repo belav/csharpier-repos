@@ -144,11 +144,8 @@ namespace System.SpanTests
         {
             for (int i = 0; i < 26; i++)
             {
-                yield return (T)Convert.ChangeType(
-                    'a' + i,
-                    typeof(T),
-                    CultureInfo.InvariantCulture
-                );
+                yield return (T)
+                    Convert.ChangeType('a' + i, typeof(T), CultureInfo.InvariantCulture);
             }
         }
 

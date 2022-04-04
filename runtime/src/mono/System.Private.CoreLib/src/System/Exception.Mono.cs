@@ -15,9 +15,10 @@ namespace System
     {
         internal static uint GetExceptionCount()
         {
-            return (uint)EventPipeInternal.GetRuntimeCounterValue(
-                EventPipeInternal.RuntimeCounters.EXCEPTION_COUNT
-            );
+            return (uint)
+                EventPipeInternal.GetRuntimeCounterValue(
+                    EventPipeInternal.RuntimeCounters.EXCEPTION_COUNT
+                );
         }
 
         internal readonly struct DispatchState

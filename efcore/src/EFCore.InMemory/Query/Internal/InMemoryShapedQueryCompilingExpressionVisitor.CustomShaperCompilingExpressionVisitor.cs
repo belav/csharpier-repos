@@ -179,8 +179,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
                     if (includeExpression.Navigation.IsCollection)
                     {
-                        var collectionShaper =
-                            (CollectionShaperExpression)includeExpression.NavigationExpression;
+                        var collectionShaper = (CollectionShaperExpression)
+                            includeExpression.NavigationExpression;
                         return Expression.Call(
                             _includeCollectionMethodInfo.MakeGenericMethod(
                                 entityClrType,
@@ -263,9 +263,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     extensionExpression is SingleResultShaperExpression singleResultShaperExpression
                 )
                 {
-                    var innerShaper = (LambdaExpression)Visit(
-                        singleResultShaperExpression.InnerShaper
-                    );
+                    var innerShaper = (LambdaExpression)
+                        Visit(singleResultShaperExpression.InnerShaper);
 
                     return Expression.Call(
                         _materializeSingleResultMethodInfo.MakeGenericMethod(

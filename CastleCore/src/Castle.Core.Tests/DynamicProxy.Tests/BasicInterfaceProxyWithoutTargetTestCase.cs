@@ -27,14 +27,13 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void BasicInterfaceProxyWithValidTarget_ThrowsIfInterceptorCallsProceed()
         {
-            var service = (IService)generator.CreateInterfaceProxyWithoutTarget(
-                typeof(IService),
-                new StandardInterceptor()
-            );
-            var exception = (NotImplementedException)Assert.Throws(
-                typeof(NotImplementedException),
-                () => service.Sum(1, 2)
-            );
+            var service = (IService)
+                generator.CreateInterfaceProxyWithoutTarget(
+                    typeof(IService),
+                    new StandardInterceptor()
+                );
+            var exception = (NotImplementedException)
+                Assert.Throws(typeof(NotImplementedException), () => service.Sum(1, 2));
 
             Assert.AreEqual(
                 "This is a DynamicProxy2 error: The interceptor attempted to 'Proceed' for method 'Int32 Sum(Int32, Int32)' which has no target. "
@@ -47,10 +46,11 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void CanReplaceReturnValueOfInterfaceMethod()
         {
-            var service = (IService)generator.CreateInterfaceProxyWithoutTarget(
-                typeof(IService),
-                new SetReturnValueInterceptor(3)
-            );
+            var service = (IService)
+                generator.CreateInterfaceProxyWithoutTarget(
+                    typeof(IService),
+                    new SetReturnValueInterceptor(3)
+                );
 
             var result = service.Sum(2, 2);
             Assert.AreEqual(3, result);
@@ -59,10 +59,11 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void CanThrowExceptionFromInterceptorOfInterfaceMethod()
         {
-            var service = (IService)generator.CreateInterfaceProxyWithoutTarget(
-                typeof(IService),
-                new ThrowingInterceptor()
-            );
+            var service = (IService)
+                generator.CreateInterfaceProxyWithoutTarget(
+                    typeof(IService),
+                    new ThrowingInterceptor()
+                );
 
             var ex = Assert.Throws<ThrowingInterceptorException>(() => service.Sum(2, 2));
             Assert.AreEqual("Because I feel like it", ex.Message);
@@ -71,11 +72,12 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void ProducesInvocationsThatCantChangeTarget()
         {
-            var service = (IService)generator.CreateInterfaceProxyWithoutTarget(
-                typeof(IService),
-                new AssertCannotChangeTargetInterceptor(),
-                new SetReturnValueInterceptor(3)
-            );
+            var service = (IService)
+                generator.CreateInterfaceProxyWithoutTarget(
+                    typeof(IService),
+                    new AssertCannotChangeTargetInterceptor(),
+                    new SetReturnValueInterceptor(3)
+                );
 
             var result = service.Sum(2, 2);
             Assert.AreEqual(3, result);

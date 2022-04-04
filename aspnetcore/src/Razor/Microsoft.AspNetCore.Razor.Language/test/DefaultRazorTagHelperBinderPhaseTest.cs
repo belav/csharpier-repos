@@ -1267,11 +1267,12 @@ public class DefaultRazorTagHelperBinderPhaseTest : RazorProjectEngineTestBase
         Assert.Null(visitor.TagHelperPrefix);
         var match = Assert.Single(visitor.Matches);
         Assert.Same(componentDescriptor, match);
-        var directiveChunkGenerator = (TagHelperPrefixDirectiveChunkGenerator)tree.Root
-            .DescendantNodes()
-            .First(n => n is CSharpStatementLiteralSyntax)
-            .GetSpanContext()
-            .ChunkGenerator;
+        var directiveChunkGenerator = (TagHelperPrefixDirectiveChunkGenerator)
+            tree.Root
+                .DescendantNodes()
+                .First(n => n is CSharpStatementLiteralSyntax)
+                .GetSpanContext()
+                .ChunkGenerator;
         var diagnostic = Assert.Single(directiveChunkGenerator.Diagnostics);
         Assert.Equal("RZ9978", diagnostic.Id);
     }

@@ -70,11 +70,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                                 property.ClrType,
                                 property.Name
                             )!;
-                        return (ServiceParameterBinding)factory.Bind(
-                            entityType,
-                            property.ClrType,
-                            property.Name
-                        );
+                        return (ServiceParameterBinding)
+                            factory.Bind(entityType, property.ClrType, property.Name);
                     }
                 );
             [DebuggerStepThrough]

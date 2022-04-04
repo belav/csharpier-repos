@@ -88,8 +88,8 @@ namespace Microsoft.CodeAnalysis.Rename
                         var containingMethod = (IMethodSymbol)symbol.ContainingSymbol;
                         if (containingMethod.AssociatedSymbol is IPropertySymbol)
                         {
-                            var associatedPropertyOrEvent =
-                                (IPropertySymbol)containingMethod.AssociatedSymbol;
+                            var associatedPropertyOrEvent = (IPropertySymbol)
+                                containingMethod.AssociatedSymbol;
                             var ordinal = containingMethod.Parameters.IndexOf(
                                 (IParameterSymbol)symbol
                             );

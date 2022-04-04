@@ -494,7 +494,8 @@ internal class HttpsConnectionMiddleware
                 HttpsConnectionMiddleware,
                 ConnectionContext,
                 Core.Internal.TlsConnectionFeature
-            >)state!;
+            >)
+                state!;
 
         feature.HostName = clientHelloInfo.ServerName;
         context.Features.Set(sslStream);

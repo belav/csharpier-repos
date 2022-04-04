@@ -208,9 +208,8 @@ namespace System.Net.Http.Tests
                 "Basic",
                 "QWxhZGRpbjpvcGVuIHNlc2FtZQ=="
             );
-            AuthenticationHeaderValue clone = (AuthenticationHeaderValue)(
-                (ICloneable)source
-            ).Clone();
+            AuthenticationHeaderValue clone = (AuthenticationHeaderValue)
+                ((ICloneable)source).Clone();
             Assert.Equal(source.Scheme, clone.Scheme);
             Assert.Equal(source.Parameter, clone.Parameter);
 

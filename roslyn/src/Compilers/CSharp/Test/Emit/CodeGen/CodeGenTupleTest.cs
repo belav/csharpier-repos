@@ -5435,10 +5435,11 @@ namespace System
                     .WithLocation(16, 39)
             );
 
-            var mTuple = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace
-                .GetMember<NamedTypeSymbol>("C")
-                .GetMember<MethodSymbol>("M")
-                .ReturnType;
+            var mTuple = (NamedTypeSymbol)
+                comp.SourceModule.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("C")
+                    .GetMember<MethodSymbol>("M")
+                    .ReturnType;
             AssertTupleTypeEquality(mTuple);
 
             var mItem1 = (FieldSymbol)mTuple.GetMembers("Item1").Single();
@@ -5472,10 +5473,11 @@ namespace System
                 "(System.String, System.String)..ctor()"
             );
 
-            var m2Tuple = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace
-                .GetMember<NamedTypeSymbol>("C")
-                .GetMember<MethodSymbol>("M2")
-                .Parameters[0].Type;
+            var m2Tuple = (NamedTypeSymbol)
+                comp.SourceModule.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("C")
+                    .GetMember<MethodSymbol>("M2")
+                    .Parameters[0].Type;
             AssertTupleTypeEquality(m2Tuple);
             AssertTestDisplayString(
                 m2Tuple.GetMembers(),
@@ -7648,10 +7650,8 @@ namespace System
             var vt2WithErrorType = vt2.Construct(intType, ErrorTypeSymbol.UnknownResultType);
 
             var tupleWithoutNames = (
-                (Symbols.PublicModel.NamedTypeSymbol)comp.CreateTupleTypeSymbol(
-                    vt2WithErrorType,
-                    elementNames: default
-                )
+                (Symbols.PublicModel.NamedTypeSymbol)
+                    comp.CreateTupleTypeSymbol(vt2WithErrorType, elementNames: default)
             ).UnderlyingNamedTypeSymbol;
 
             Assert.Same(vt2WithErrorType, tupleWithoutNames);
@@ -7674,10 +7674,15 @@ namespace System
         [WorkItem(14365, "https://github.com/dotnet/roslyn/issues/14365")]
         public void CreateTupleTypeSymbol_UnderlyingTypeIsError()
         {
-            var comp = (Compilation)CSharpCompilation.Create(
-                "test",
-                references: new[] { MscorlibRef, TestReferences.SymbolsTests.netModule.netModule1 }
-            );
+            var comp = (Compilation)
+                CSharpCompilation.Create(
+                    "test",
+                    references: new[]
+                    {
+                        MscorlibRef,
+                        TestReferences.SymbolsTests.netModule.netModule1
+                    }
+                );
 
             ITypeSymbol intType = comp.GetSpecialType(SpecialType.System_Int32);
             var vt2 = comp.CreateErrorTypeSymbol(null, "ValueTuple", 2).Construct(intType, intType);
@@ -7830,9 +7835,8 @@ End Class";
             );
 
             vbComp.VerifyDiagnostics();
-            INamedTypeSymbol vbType = (INamedTypeSymbol)vbComp.GlobalNamespace
-                .GetMembers("C")
-                .Single();
+            INamedTypeSymbol vbType = (INamedTypeSymbol)
+                vbComp.GlobalNamespace.GetMembers("C").Single();
 
             var comp = CSharpCompilation.Create("test", references: new[] { MscorlibRef });
             var e = Assert.Throws<ArgumentException>(
@@ -8387,10 +8391,11 @@ class C
 ";
 
             var comp = (Compilation)CreateCompilation(source);
-            var tuple1 = (INamedTypeSymbol)comp.SourceModule.GlobalNamespace
-                .GetMember<INamedTypeSymbol>("C")
-                .GetMember<IFieldSymbol>("F")
-                .Type;
+            var tuple1 = (INamedTypeSymbol)
+                comp.SourceModule.GlobalNamespace
+                    .GetMember<INamedTypeSymbol>("C")
+                    .GetMember<IFieldSymbol>("F")
+                    .Type;
 
             var intType = comp.GetSpecialType(SpecialType.System_Int32);
             var stringType = comp.GetSpecialType(SpecialType.System_String);
@@ -8660,9 +8665,8 @@ class C
     (int, string) F;
 }";
             var comp = CreateCompilation(source);
-            var tuple1 = (INamedTypeSymbol)((FieldSymbol)comp.GetMember("Program.F"))
-                .GetPublicSymbol()
-                .Type;
+            var tuple1 = (INamedTypeSymbol)
+                ((FieldSymbol)comp.GetMember("Program.F")).GetPublicSymbol().Type;
             Assert.Null(tuple1.TupleUnderlyingType);
             var underlyingType = tuple1;
 
@@ -15058,9 +15062,8 @@ class C
             Assert.True(m3Item8.IsImplicitlyDeclared);
             Assert.Null(m3Item8.TypeLayoutOffset);
 
-            var m3TupleRestTuple = (NamedTypeSymbol)(
-                (FieldSymbol)m3Tuple.GetMembers("Rest").Single()
-            ).Type;
+            var m3TupleRestTuple = (NamedTypeSymbol)
+                ((FieldSymbol)m3Tuple.GetMembers("Rest").Single()).Type;
             AssertTestDisplayString(
                 m3TupleRestTuple.GetMembers(),
                 "System.Int32 (System.Int32, System.Int32).Item1",
@@ -18317,10 +18320,8 @@ interface ITest2<T> : ValueTuple<int, int, int, int, int, int, int, T> where T :
 }
 ";
 
-            var comp = (Compilation)CreateCompilation(
-                source,
-                options: TestOptions.ReleaseExe.WithAllowUnsafe(true)
-            );
+            var comp = (Compilation)
+                CreateCompilation(source, options: TestOptions.ReleaseExe.WithAllowUnsafe(true));
 
             comp.VerifyDiagnostics(
                 // (31,18): error CS0509: 'Test1<T>': cannot derive from sealed type 'ValueTuple<int, int, int, int, int, int, int, T>'
@@ -23573,10 +23574,11 @@ class Program
         public void ClassifyConversionIdentity02()
         {
             var tupleComp = CreateCompilation(trivial2uple + trivial3uple + trivialRemainingTuples);
-            var comp = (Compilation)CSharpCompilation.Create(
-                "test",
-                references: new[] { MscorlibRef, tupleComp.ToMetadataReference() }
-            );
+            var comp = (Compilation)
+                CSharpCompilation.Create(
+                    "test",
+                    references: new[] { MscorlibRef, tupleComp.ToMetadataReference() }
+                );
 
             ITypeSymbol intType = comp.GetSpecialType(SpecialType.System_Int32);
             ITypeSymbol stringType = comp.GetSpecialType(SpecialType.System_String);
@@ -23617,10 +23619,11 @@ class Program
         public void ClassifyConversionNone01()
         {
             var tupleComp = CreateCompilation(trivial2uple + trivial3uple + trivialRemainingTuples);
-            var comp = (Compilation)CSharpCompilation.Create(
-                "test",
-                references: new[] { MscorlibRef, tupleComp.ToMetadataReference() }
-            );
+            var comp = (Compilation)
+                CSharpCompilation.Create(
+                    "test",
+                    references: new[] { MscorlibRef, tupleComp.ToMetadataReference() }
+                );
 
             ITypeSymbol intType = comp.GetSpecialType(SpecialType.System_Int32);
             ITypeSymbol stringType = comp.GetSpecialType(SpecialType.System_String);
@@ -23692,10 +23695,11 @@ class Program
         public void ClassifyConversionImplicit02()
         {
             var tupleComp = CreateCompilation(trivial2uple + trivial3uple + trivialRemainingTuples);
-            var comp = (Compilation)CSharpCompilation.Create(
-                "test",
-                references: new[] { MscorlibRef, tupleComp.ToMetadataReference() }
-            );
+            var comp = (Compilation)
+                CSharpCompilation.Create(
+                    "test",
+                    references: new[] { MscorlibRef, tupleComp.ToMetadataReference() }
+                );
 
             ITypeSymbol intType = comp.GetSpecialType(SpecialType.System_Int32);
             ITypeSymbol stringType = comp.GetSpecialType(SpecialType.System_String);
@@ -23749,15 +23753,16 @@ class Program
             var tupleComp2 = CreateCompilation(
                 trivial2uple + trivial3uple + trivialRemainingTuples
             );
-            var comp = (Compilation)CSharpCompilation.Create(
-                "test",
-                references: new[]
-                {
-                    MscorlibRef,
-                    tupleComp1.ToMetadataReference(),
-                    tupleComp2.ToMetadataReference()
-                }
-            );
+            var comp = (Compilation)
+                CSharpCompilation.Create(
+                    "test",
+                    references: new[]
+                    {
+                        MscorlibRef,
+                        tupleComp1.ToMetadataReference(),
+                        tupleComp2.ToMetadataReference()
+                    }
+                );
 
             ITypeSymbol intType = comp.GetSpecialType(SpecialType.System_Int32);
             ITypeSymbol stringType = comp.GetSpecialType(SpecialType.System_String);
@@ -23810,15 +23815,16 @@ class Program
             var tupleComp2 = CreateCompilation(
                 trivial2uple + trivial3uple + trivialRemainingTuples
             );
-            var comp = (Compilation)CSharpCompilation.Create(
-                "test",
-                references: new[]
-                {
-                    MscorlibRef,
-                    tupleComp1.ToMetadataReference(),
-                    tupleComp2.ToMetadataReference()
-                }
-            );
+            var comp = (Compilation)
+                CSharpCompilation.Create(
+                    "test",
+                    references: new[]
+                    {
+                        MscorlibRef,
+                        tupleComp1.ToMetadataReference(),
+                        tupleComp2.ToMetadataReference()
+                    }
+                );
 
             ITypeSymbol intType = comp.GetSpecialType(SpecialType.System_Int32);
             ITypeSymbol stringType = comp.GetSpecialType(SpecialType.System_String);
@@ -23871,15 +23877,16 @@ class Program
             var tupleComp2 = CreateCompilation(
                 trivial2uple + trivial3uple + trivialRemainingTuples
             );
-            var comp = (Compilation)CSharpCompilation.Create(
-                "test",
-                references: new[]
-                {
-                    MscorlibRef,
-                    tupleComp1.ToMetadataReference(),
-                    tupleComp2.ToMetadataReference()
-                }
-            );
+            var comp = (Compilation)
+                CSharpCompilation.Create(
+                    "test",
+                    references: new[]
+                    {
+                        MscorlibRef,
+                        tupleComp1.ToMetadataReference(),
+                        tupleComp2.ToMetadataReference()
+                    }
+                );
 
             ITypeSymbol intType = comp.GetSpecialType(SpecialType.System_Int32);
             ITypeSymbol stringType = comp.GetSpecialType(SpecialType.System_String);
@@ -23933,15 +23940,16 @@ class Program
             var tupleComp2 = CreateCompilation(
                 trivial2uple + trivial3uple + trivialRemainingTuples
             );
-            var comp = (Compilation)CSharpCompilation.Create(
-                "test",
-                references: new[]
-                {
-                    MscorlibRef,
-                    tupleComp1.ToMetadataReference(),
-                    tupleComp2.ToMetadataReference()
-                }
-            );
+            var comp = (Compilation)
+                CSharpCompilation.Create(
+                    "test",
+                    references: new[]
+                    {
+                        MscorlibRef,
+                        tupleComp1.ToMetadataReference(),
+                        tupleComp2.ToMetadataReference()
+                    }
+                );
 
             ITypeSymbol intType = comp.GetSpecialType(SpecialType.System_Int32);
             ITypeSymbol stringType = comp.GetSpecialType(SpecialType.System_String);
@@ -24006,15 +24014,16 @@ class C {
             );
 
             var tree = Parse(text);
-            var comp = (Compilation)CSharpCompilation.Create(
-                "test",
-                syntaxTrees: new[] { tree },
-                references: new[]
-                {
-                    (MetadataReference)Net40.mscorlib,
-                    tupleComp1.ToMetadataReference()
-                }
-            );
+            var comp = (Compilation)
+                CSharpCompilation.Create(
+                    "test",
+                    syntaxTrees: new[] { tree },
+                    references: new[]
+                    {
+                        (MetadataReference)Net40.mscorlib,
+                        tupleComp1.ToMetadataReference()
+                    }
+                );
 
             var model = comp.GetSemanticModel(tree);
             var exprs = GetBindingNodes<ExpressionSyntax>(comp);
@@ -24080,15 +24089,16 @@ class C {
             );
 
             var tree = Parse(text);
-            var comp = (Compilation)CSharpCompilation.Create(
-                "test",
-                syntaxTrees: new[] { tree },
-                references: new[]
-                {
-                    (MetadataReference)Net40.mscorlib,
-                    tupleComp1.ToMetadataReference()
-                }
-            );
+            var comp = (Compilation)
+                CSharpCompilation.Create(
+                    "test",
+                    syntaxTrees: new[] { tree },
+                    references: new[]
+                    {
+                        (MetadataReference)Net40.mscorlib,
+                        tupleComp1.ToMetadataReference()
+                    }
+                );
 
             var model = comp.GetSemanticModel(tree);
             var exprs = GetBindingNodes<ExpressionSyntax>(comp);
@@ -24151,11 +24161,12 @@ class C {
             );
 
             var tree = Parse(text);
-            var comp = (Compilation)CSharpCompilation.Create(
-                "test",
-                syntaxTrees: new[] { tree },
-                references: new[] { MscorlibRef, tupleComp1.ToMetadataReference() }
-            );
+            var comp = (Compilation)
+                CSharpCompilation.Create(
+                    "test",
+                    syntaxTrees: new[] { tree },
+                    references: new[] { MscorlibRef, tupleComp1.ToMetadataReference() }
+                );
 
             var model = comp.GetSemanticModel(tree);
             var exprs = GetBindingNodes<ExpressionSyntax>(comp);
@@ -24218,11 +24229,12 @@ class C {
             );
 
             var tree = Parse(text);
-            var comp = (Compilation)CSharpCompilation.Create(
-                "test",
-                syntaxTrees: new[] { tree },
-                references: new[] { MscorlibRef, tupleComp1.ToMetadataReference() }
-            );
+            var comp = (Compilation)
+                CSharpCompilation.Create(
+                    "test",
+                    syntaxTrees: new[] { tree },
+                    references: new[] { MscorlibRef, tupleComp1.ToMetadataReference() }
+                );
 
             var model = comp.GetSemanticModel(tree);
             var exprs = GetBindingNodes<ExpressionSyntax>(comp);
@@ -26015,9 +26027,8 @@ public class C2 : C1, I1<(int c, int d)>
                         .ToTestDisplayString()
                 );
 
-                var m2 = (MethodSymbol)((TypeSymbol)c2).GetMember(
-                    "I1<(System.Int32c,System.Int32d)>.M2"
-                );
+                var m2 = (MethodSymbol)
+                    ((TypeSymbol)c2).GetMember("I1<(System.Int32c,System.Int32d)>.M2");
                 var m2Implementations = m2.ExplicitInterfaceImplementations;
                 Assert.Equal(1, m2Implementations.Length);
                 Assert.Equal(
@@ -35284,10 +35295,11 @@ class C
                 references: new[] { comp.ToMetadataReference() },
                 targetFramework: TargetFramework.Mscorlib46
             );
-            var retargetingValueTupleType = (NamedTypeSymbol)comp3.GlobalNamespace
-                .GetMember<NamespaceSymbol>("System")
-                .GetMembers("ValueTuple")
-                .Single();
+            var retargetingValueTupleType = (NamedTypeSymbol)
+                comp3.GlobalNamespace
+                    .GetMember<NamespaceSymbol>("System")
+                    .GetMembers("ValueTuple")
+                    .Single();
             Assert.IsType<RetargetingNamedTypeSymbol>(retargetingValueTupleType);
             Assert.Empty(retargetingValueTupleType.GetFieldsToEmit());
             verify(
@@ -35315,10 +35327,11 @@ class C
 
             static void verifyModule(ModuleSymbol module)
             {
-                var type = (NamedTypeSymbol)module.GlobalNamespace
-                    .GetMember<NamespaceSymbol>("System")
-                    .GetMembers("ValueTuple")
-                    .Single();
+                var type = (NamedTypeSymbol)
+                    module.GlobalNamespace
+                        .GetMember<NamespaceSymbol>("System")
+                        .GetMembers("ValueTuple")
+                        .Single();
                 Assert.Empty(type.GetFieldsToEmit());
 
                 var item1 = type.GetMember<FieldSymbol>("Item1");
@@ -35418,10 +35431,11 @@ class C
 
             static void verifyModule(ModuleSymbol module)
             {
-                var type = (NamedTypeSymbol)module.GlobalNamespace
-                    .GetMember<NamespaceSymbol>("System")
-                    .GetMembers("ValueTuple")
-                    .Single();
+                var type = (NamedTypeSymbol)
+                    module.GlobalNamespace
+                        .GetMember<NamespaceSymbol>("System")
+                        .GetMembers("ValueTuple")
+                        .Single();
                 Assert.Equal("(T1, T2)", type.ToTestDisplayString());
                 var fields = type.GetMembers().OfType<FieldSymbol>();
                 AssertEx.SetEqual(
@@ -35469,17 +35483,19 @@ namespace System
             {
                 var isSourceSymbol = module is SourceModuleSymbol;
 
-                var tuple1 = (NamedTypeSymbol)module.GlobalNamespace
-                    .GetMember<MethodSymbol>("System.ValueTuple.M")
-                    .ReturnType;
+                var tuple1 = (NamedTypeSymbol)
+                    module.GlobalNamespace
+                        .GetMember<MethodSymbol>("System.ValueTuple.M")
+                        .ReturnType;
                 if (isSourceSymbol)
                     Assert.Equal("SourceNamedTypeSymbol: (T1, T2)", print(tuple1));
                 else
                     Assert.Equal("PENamedTypeSymbolGeneric: (T1, T2)", print(tuple1));
 
-                var tuple2 = (NamedTypeSymbol)module.GlobalNamespace
-                    .GetMember<MethodSymbol>("System.ValueTuple.M2")
-                    .ReturnType;
+                var tuple2 = (NamedTypeSymbol)
+                    module.GlobalNamespace
+                        .GetMember<MethodSymbol>("System.ValueTuple.M2")
+                        .ReturnType;
                 Assert.Equal("ConstructedNamedTypeSymbol: (T1 Item1, T2 Item2)", print(tuple2));
 
                 if (isSourceSymbol)
@@ -35507,9 +35523,10 @@ namespace System
                     );
                 }
 
-                var tuple3 = (NamedTypeSymbol)module.GlobalNamespace
-                    .GetMember<MethodSymbol>("System.ValueTuple.M3")
-                    .ReturnType;
+                var tuple3 = (NamedTypeSymbol)
+                    module.GlobalNamespace
+                        .GetMember<MethodSymbol>("System.ValueTuple.M3")
+                        .ReturnType;
                 Assert.Equal("ConstructedNamedTypeSymbol: (T1, T2 Item2)", print(tuple3));
             }
 
@@ -35550,22 +35567,25 @@ namespace System
             {
                 var isSourceSymbol = module is SourceModuleSymbol;
 
-                var tuple1 = (NamedTypeSymbol)module.GlobalNamespace
-                    .GetMember<MethodSymbol>("System.ValueTuple.M")
-                    .ReturnType;
+                var tuple1 = (NamedTypeSymbol)
+                    module.GlobalNamespace
+                        .GetMember<MethodSymbol>("System.ValueTuple.M")
+                        .ReturnType;
                 if (isSourceSymbol)
                     Assert.Equal("SourceNamedTypeSymbol: (T1, T2)", print(tuple1));
                 else
                     Assert.Equal("PENamedTypeSymbolGeneric: (T1, T2)", print(tuple1));
 
-                var tuple2 = (NamedTypeSymbol)module.GlobalNamespace
-                    .GetMember<MethodSymbol>("System.ValueTuple.M2")
-                    .ReturnType;
+                var tuple2 = (NamedTypeSymbol)
+                    module.GlobalNamespace
+                        .GetMember<MethodSymbol>("System.ValueTuple.M2")
+                        .ReturnType;
                 Assert.Equal("ConstructedNamedTypeSymbol: (T1 Item1, T2 Item2)", print(tuple2));
 
-                var tuple3 = (NamedTypeSymbol)module.GlobalNamespace
-                    .GetMember<MethodSymbol>("System.ValueTuple.M3")
-                    .ReturnType;
+                var tuple3 = (NamedTypeSymbol)
+                    module.GlobalNamespace
+                        .GetMember<MethodSymbol>("System.ValueTuple.M3")
+                        .ReturnType;
                 Assert.Equal("ConstructedNamedTypeSymbol: (T1, T2 Item2)", print(tuple3));
             }
 
@@ -35863,19 +35883,21 @@ namespace System
                 references: new[] { comp.ToMetadataReference() },
                 targetFramework: TargetFramework.Mscorlib46
             );
-            var retargetingValueTupleType = (NamedTypeSymbol)comp3.GlobalNamespace
-                .GetMember<NamespaceSymbol>("System")
-                .GetMembers("ValueTuple")
-                .Single();
+            var retargetingValueTupleType = (NamedTypeSymbol)
+                comp3.GlobalNamespace
+                    .GetMember<NamespaceSymbol>("System")
+                    .GetMembers("ValueTuple")
+                    .Single();
             Assert.IsType<RetargetingNamedTypeSymbol>(retargetingValueTupleType);
             verifyTupleType(retargetingValueTupleType, retargeting: true);
 
             static void verifyModule(ModuleSymbol module)
             {
-                var type = (NamedTypeSymbol)module.GlobalNamespace
-                    .GetMember<NamespaceSymbol>("System")
-                    .GetMembers("ValueTuple")
-                    .Single();
+                var type = (NamedTypeSymbol)
+                    module.GlobalNamespace
+                        .GetMember<NamespaceSymbol>("System")
+                        .GetMembers("ValueTuple")
+                        .Single();
                 verifyTupleType(type, retargeting: false);
             }
 
@@ -35993,10 +36015,11 @@ namespace System
 
             static void verifyModule(ModuleSymbol module)
             {
-                var namedType = (NamedTypeSymbol)module.GlobalNamespace
-                    .GetMember<NamespaceSymbol>("System")
-                    .GetMembers("ValueTuple")
-                    .Single();
+                var namedType = (NamedTypeSymbol)
+                    module.GlobalNamespace
+                        .GetMember<NamespaceSymbol>("System")
+                        .GetMembers("ValueTuple")
+                        .Single();
                 var isSourceSymbol = namedType.ContainingModule is SourceModuleSymbol;
 
                 Assert.Equal("(T1, T2)", namedType.ToTestDisplayString());
@@ -36080,10 +36103,11 @@ class C
 
             static void verifyModule(ModuleSymbol module)
             {
-                var type = (NamedTypeSymbol)module.GlobalNamespace
-                    .GetMember<NamespaceSymbol>("System")
-                    .GetMembers("ValueTuple")
-                    .Single();
+                var type = (NamedTypeSymbol)
+                    module.GlobalNamespace
+                        .GetMember<NamespaceSymbol>("System")
+                        .GetMembers("ValueTuple")
+                        .Single();
                 var item2 = type.GetMember<FieldSymbol>("Item2");
                 verify(item2);
 
@@ -36232,10 +36256,11 @@ namespace System
             {
                 var isSourceSymbol = module is SourceModuleSymbol;
 
-                var type = (NamedTypeSymbol)module.GlobalNamespace
-                    .GetMember<NamespaceSymbol>("System")
-                    .GetMembers("ValueTuple")
-                    .Single();
+                var type = (NamedTypeSymbol)
+                    module.GlobalNamespace
+                        .GetMember<NamespaceSymbol>("System")
+                        .GetMembers("ValueTuple")
+                        .Single();
                 assertValueTupleUnderlyingFields(type, isSourceSymbol);
                 if (isSourceSymbol)
                 {
@@ -36264,9 +36289,8 @@ namespace System
                     );
                 }
 
-                var tuple1 = (NamedTypeSymbol)module.GlobalNamespace
-                    .GetMember<MethodSymbol>("C.M")
-                    .ReturnType;
+                var tuple1 = (NamedTypeSymbol)
+                    module.GlobalNamespace.GetMember<MethodSymbol>("C.M").ReturnType;
                 Assert.Equal(
                     "ConstructedNamedTypeSymbol: (System.Int32, System.Int32)",
                     print(tuple1)
@@ -36292,9 +36316,8 @@ namespace System
                     tuple1Item1.OriginalDefinition.GetType().Name
                 );
 
-                var tuple2 = (NamedTypeSymbol)module.GlobalNamespace
-                    .GetMember<MethodSymbol>("C.M2")
-                    .ReturnType;
+                var tuple2 = (NamedTypeSymbol)
+                    module.GlobalNamespace.GetMember<MethodSymbol>("C.M2").ReturnType;
                 Assert.Equal(
                     "ConstructedNamedTypeSymbol: (System.Int32 Item1, System.Int32 Item2)",
                     print(tuple2)
@@ -36320,9 +36343,8 @@ namespace System
                     tuple2Item1.OriginalDefinition.GetType().Name
                 );
 
-                var tuple3 = (NamedTypeSymbol)module.GlobalNamespace
-                    .GetMember<MethodSymbol>("C.M3")
-                    .ReturnType;
+                var tuple3 = (NamedTypeSymbol)
+                    module.GlobalNamespace.GetMember<MethodSymbol>("C.M3").ReturnType;
                 Assert.Equal(
                     "ConstructedNamedTypeSymbol: (System.Int32 a, System.Int32 b)",
                     print(tuple3)
@@ -36432,9 +36454,8 @@ public class C
 
             static void verifyModule(ModuleSymbol module)
             {
-                var tuple1 = (NamedTypeSymbol)module.GlobalNamespace
-                    .GetMember<MethodSymbol>("C.M")
-                    .ReturnType;
+                var tuple1 = (NamedTypeSymbol)
+                    module.GlobalNamespace.GetMember<MethodSymbol>("C.M").ReturnType;
                 Assert.Equal(
                     "ConstructedNamedTypeSymbol: (System.Int32, System.Int32, System.Int32, System.Int32, System.Int32, System.Int32, System.Int32, System.Int32)",
                     print(tuple1)
@@ -36464,9 +36485,8 @@ public class C
                 Assert.True(tuple1.GetMember<FieldSymbol>("Item7").IsDefinition);
                 Assert.True(tuple1.GetMember<FieldSymbol>("Item8").IsDefinition);
 
-                var tuple2 = (NamedTypeSymbol)module.GlobalNamespace
-                    .GetMember<MethodSymbol>("C.M2")
-                    .ReturnType;
+                var tuple2 = (NamedTypeSymbol)
+                    module.GlobalNamespace.GetMember<MethodSymbol>("C.M2").ReturnType;
                 Assert.Equal(
                     "ConstructedNamedTypeSymbol: (System.Int32 Item1, System.Int32 Item2, System.Int32 Item3, System.Int32 Item4, System.Int32 Item5, System.Int32 Item6, System.Int32 Item7, System.Int32 Item8)",
                     print(tuple2)
@@ -36499,9 +36519,8 @@ public class C
                 Assert.True(tuple2.GetMember<FieldSymbol>("Item7").IsDefinition);
                 Assert.True(tuple2.GetMember<FieldSymbol>("Item8").IsDefinition);
 
-                var tuple3 = (NamedTypeSymbol)module.GlobalNamespace
-                    .GetMember<MethodSymbol>("C.M3")
-                    .ReturnType;
+                var tuple3 = (NamedTypeSymbol)
+                    module.GlobalNamespace.GetMember<MethodSymbol>("C.M3").ReturnType;
                 Assert.Equal(
                     "ConstructedNamedTypeSymbol: (System.Int32 a, System.Int32 b, System.Int32 c, System.Int32 d, System.Int32 e, System.Int32 f, System.Int32 g, System.Int32 h)",
                     print(tuple3)
@@ -36570,9 +36589,8 @@ public class C
                     printFields(tuple3.TupleUnderlyingType)
                 );
 
-                var tuple4 = (NamedTypeSymbol)module.GlobalNamespace
-                    .GetMember<MethodSymbol>("C.M4")
-                    .ReturnType;
+                var tuple4 = (NamedTypeSymbol)
+                    module.GlobalNamespace.GetMember<MethodSymbol>("C.M4").ReturnType;
                 Assert.Equal(
                     "ConstructedNamedTypeSymbol: (System.Int32, System.Int32, System.Int32, System.Int32, System.Int32, System.Int32, System.Int32, System.Int32)",
                     print(tuple4)
@@ -36814,13 +36832,12 @@ unsafe struct Z
                 verifyIndexAndDefaultElement(newDefaultField, i, isDefaultElement: true);
                 verifyDefaultFieldType(newDefaultField, i, nullabilityString);
 
-                var originalDefaultField =
-                    (TupleErrorFieldSymbol)originalField.CorrespondingTupleField;
+                var originalDefaultField = (TupleErrorFieldSymbol)
+                    originalField.CorrespondingTupleField;
                 verifyIndexAndDefaultElement(originalDefaultField, i, isDefaultElement: true);
 
-                newDefaultField = (TupleErrorFieldSymbol)originalDefaultField.AsMember(
-                    nullableEnabledTuple
-                );
+                newDefaultField = (TupleErrorFieldSymbol)
+                    originalDefaultField.AsMember(nullableEnabledTuple);
 
                 verifyIndexAndDefaultElement(newDefaultField, i, isDefaultElement: true);
                 verifyDefaultFieldType(newDefaultField, i, nullabilityString);

@@ -137,10 +137,11 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 {
                     // alternatively, we could just MEF import IDiagnosticAnalyzerService directly
                     // this can be null in test env.
-                    return (IDiagnosticAnalyzerService?)analyzerProviders
-                        .Where(p => p.Value is IDiagnosticAnalyzerService)
-                        .SingleOrDefault()
-                        ?.Value;
+                    return (IDiagnosticAnalyzerService?)
+                        analyzerProviders
+                            .Where(p => p.Value is IDiagnosticAnalyzerService)
+                            .SingleOrDefault()
+                            ?.Value;
                 }
 
                 private static ImmutableArray<IIncrementalAnalyzer> GetIncrementalAnalyzers(

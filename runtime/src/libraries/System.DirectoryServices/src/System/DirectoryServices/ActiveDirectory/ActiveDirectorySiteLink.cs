@@ -56,11 +56,12 @@ namespace System.DirectoryServices.ActiveDirectory
             try
             {
                 de = DirectoryEntryManager.GetDirectoryEntry(context, WellKnownDN.RootDSE);
-                string config = (string)PropertyManager.GetPropertyValue(
-                    context,
-                    de,
-                    PropertyManager.ConfigurationNamingContext
-                )!;
+                string config = (string)
+                    PropertyManager.GetPropertyValue(
+                        context,
+                        de,
+                        PropertyManager.ConfigurationNamingContext
+                    )!;
 
                 string parentDN;
                 if (transport == ActiveDirectoryTransportType.Rpc)
@@ -159,11 +160,12 @@ namespace System.DirectoryServices.ActiveDirectory
             try
             {
                 de = DirectoryEntryManager.GetDirectoryEntry(context, WellKnownDN.RootDSE);
-                string config = (string)PropertyManager.GetPropertyValue(
-                    context,
-                    de,
-                    PropertyManager.ConfigurationNamingContext
-                )!;
+                string config = (string)
+                    PropertyManager.GetPropertyValue(
+                        context,
+                        de,
+                        PropertyManager.ConfigurationNamingContext
+                    )!;
                 string containerDN = "CN=Inter-Site Transports,CN=Sites," + config;
                 if (transport == ActiveDirectoryTransportType.Rpc)
                     containerDN = "CN=IP," + containerDN;

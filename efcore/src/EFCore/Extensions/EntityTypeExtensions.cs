@@ -53,9 +53,8 @@ namespace Microsoft.EntityFrameworkCore
                 return null;
             }
 
-            var definingNavigation = (INavigation?)entityType.DefiningEntityType!.FindNavigation(
-                entityType.DefiningNavigationName!
-            );
+            var definingNavigation = (INavigation?)
+                entityType.DefiningEntityType!.FindNavigation(entityType.DefiningNavigationName!);
             return definingNavigation?.TargetEntityType == entityType ? definingNavigation : null;
         }
 

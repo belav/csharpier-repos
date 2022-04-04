@@ -69,11 +69,12 @@ namespace System.Net.Http.Headers
         public static new NameValueWithParametersHeaderValue Parse(string? input)
         {
             int index = 0;
-            return (NameValueWithParametersHeaderValue)GenericHeaderParser.SingleValueNameValueWithParametersParser.ParseValue(
-                input,
-                null,
-                ref index
-            );
+            return (NameValueWithParametersHeaderValue)
+                GenericHeaderParser.SingleValueNameValueWithParametersParser.ParseValue(
+                    input,
+                    null,
+                    ref index
+                );
         }
 
         public static bool TryParse(
@@ -142,7 +143,8 @@ namespace System.Net.Http.Headers
                     input,
                     current,
                     ';',
-                    (UnvalidatedObjectCollection<NameValueHeaderValue>)nameValueWithParameters.Parameters
+                    (UnvalidatedObjectCollection<NameValueHeaderValue>)
+                        nameValueWithParameters.Parameters
                 );
 
                 if (parameterLength == 0)

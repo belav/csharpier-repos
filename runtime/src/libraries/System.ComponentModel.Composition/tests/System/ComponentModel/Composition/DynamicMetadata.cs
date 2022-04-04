@@ -300,9 +300,8 @@ namespace System.ComponentModel.Composition
 
             public override TypeConverter GetConverter()
             {
-                TypeConverterAttribute attribute = (TypeConverterAttribute)GetAttributes()[
-                    typeof(TypeConverterAttribute)
-                ];
+                TypeConverterAttribute attribute = (TypeConverterAttribute)
+                    GetAttributes()[typeof(TypeConverterAttribute)];
                 if (attribute != null)
                 {
                     Type c = this.GetTypeFromName(attribute.ConverterTypeName);

@@ -31,10 +31,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             var nonNullableModelType = modelType.UnwrapNullableType();
             if (IsGenericComparable(modelType, nonNullableModelType))
             {
-                return (IComparer<IUpdateEntry>)Activator.CreateInstance(
-                    typeof(EntryCurrentValueComparer<>).MakeGenericType(modelType),
-                    propertyBase
-                )!;
+                return (IComparer<IUpdateEntry>)
+                    Activator.CreateInstance(
+                        typeof(EntryCurrentValueComparer<>).MakeGenericType(modelType),
+                        propertyBase
+                    )!;
             }
 
             if (typeof(IStructuralComparable).IsAssignableFrom(nonNullableModelType))
@@ -73,11 +74,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                                       converter.ProviderClrType
                                   );
 
-                        return (IComparer<IUpdateEntry>)Activator.CreateInstance(
-                            comparerType,
-                            propertyBase,
-                            converter
-                        )!;
+                        return (IComparer<IUpdateEntry>)
+                            Activator.CreateInstance(comparerType, propertyBase, converter)!;
                     }
 
                     if (typeof(IStructuralComparable).IsAssignableFrom(nonNullableProviderType))

@@ -339,8 +339,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (hiddenOrOverriddenByProperty.OverriddenMembers.Any())
             {
                 // CONSIDER: Do something more sensible if there are multiple overridden members?  Already an error case.
-                PropertySymbol propertyOverriddenByProperty =
-                    (PropertySymbol)hiddenOrOverriddenByProperty.OverriddenMembers[0];
+                PropertySymbol propertyOverriddenByProperty = (PropertySymbol)
+                    hiddenOrOverriddenByProperty.OverriddenMembers[0];
                 MethodSymbol correspondingAccessor = accessorIsGetter
                     ? propertyOverriddenByProperty.GetOwnOrInheritedGetMethod()
                     : propertyOverriddenByProperty.GetOwnOrInheritedSetMethod();
@@ -461,8 +461,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (hiddenOrOverriddenByEvent.OverriddenMembers.Any())
             {
                 // CONSIDER: Do something more sensible if there are multiple overridden members?  Already an error case.
-                EventSymbol eventOverriddenByEvent =
-                    (EventSymbol)hiddenOrOverriddenByEvent.OverriddenMembers[0];
+                EventSymbol eventOverriddenByEvent = (EventSymbol)
+                    hiddenOrOverriddenByEvent.OverriddenMembers[0];
                 MethodSymbol correspondingAccessor =
                     eventOverriddenByEvent.GetOwnOrInheritedAccessor(accessorIsAdder);
                 if ((object)correspondingAccessor != null)

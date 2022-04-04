@@ -115,10 +115,12 @@ namespace System.Text.Unicode
                     // hence using nint instead of nuint.
 
                     if (
-                        (nint)(void*)Unsafe.ByteOffset(
-                            ref *pInputBuffer,
-                            ref *pFinalPosWhereCanReadDWordFromInputBuffer
-                        )
+                        (nint)
+                            (void*)
+                                Unsafe.ByteOffset(
+                                    ref *pInputBuffer,
+                                    ref *pFinalPosWhereCanReadDWordFromInputBuffer
+                                )
                         >= 4 * sizeof(uint)
                     )
                     {
@@ -177,14 +179,12 @@ namespace System.Text.Unicode
                             {
                                 if (Sse2.IsSupported)
                                 {
-                                    uint mask = (uint)Sse2.MoveMask(
-                                        Sse2.LoadVector128(pInputBuffer)
-                                    );
+                                    uint mask = (uint)
+                                        Sse2.MoveMask(Sse2.LoadVector128(pInputBuffer));
                                     if (mask != 0)
                                     {
-                                        trailingZeroCount = (nuint)BitOperations.TrailingZeroCount(
-                                            mask
-                                        );
+                                        trailingZeroCount = (nuint)
+                                            BitOperations.TrailingZeroCount(mask);
                                         goto LoopTerminatedEarlyDueToNonAsciiData;
                                     }
                                 }
@@ -740,10 +740,12 @@ namespace System.Text.Unicode
             ProcessRemainingBytesSlow:
 
             inputBufferRemainingBytes =
-                (nuint)(void*)Unsafe.ByteOffset(
-                    ref *pInputBuffer,
-                    ref *pFinalPosWhereCanReadDWordFromInputBuffer
-                ) + 4;
+                (nuint)
+                    (void*)
+                        Unsafe.ByteOffset(
+                            ref *pInputBuffer,
+                            ref *pFinalPosWhereCanReadDWordFromInputBuffer
+                        ) + 4;
 
             ProcessSmallBufferCommon:
 

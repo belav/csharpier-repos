@@ -19,9 +19,8 @@ namespace Microsoft.TestCommon
                 property.Body is UnaryExpression && property.Body.NodeType == ExpressionType.Convert
             )
             {
-                return (PropertyInfo)(
-                    (MemberExpression)((UnaryExpression)property.Body).Operand
-                ).Member;
+                return (PropertyInfo)
+                    ((MemberExpression)((UnaryExpression)property.Body).Operand).Member;
             }
             else
             {

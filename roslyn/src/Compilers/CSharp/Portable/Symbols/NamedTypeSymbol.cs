@@ -450,10 +450,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal SynthesizedInteractiveInitializerMethod GetScriptInitializer()
         {
             Debug.Assert(IsScriptClass);
-            return (SynthesizedInteractiveInitializerMethod)GetMembers(
-                    SynthesizedInteractiveInitializerMethod.InitializerName
-                )
-                .Single();
+            return (SynthesizedInteractiveInitializerMethod)
+                GetMembers(SynthesizedInteractiveInitializerMethod.InitializerName).Single();
         }
 
         internal SynthesizedEntryPointSymbol GetScriptEntryPoint()

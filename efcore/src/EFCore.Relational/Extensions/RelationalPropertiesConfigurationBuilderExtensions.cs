@@ -50,10 +50,8 @@ namespace Microsoft.EntityFrameworkCore
             this PropertiesConfigurationBuilder<TProperty> propertyBuilder,
             string typeName
         ) =>
-            (PropertiesConfigurationBuilder<TProperty>)HaveColumnType(
-                (PropertiesConfigurationBuilder)propertyBuilder,
-                typeName
-            );
+            (PropertiesConfigurationBuilder<TProperty>)
+                HaveColumnType((PropertiesConfigurationBuilder)propertyBuilder, typeName);
 
         /// <summary>
         ///     Configures the property as capable of storing only fixed-length data, such as strings.
@@ -88,10 +86,8 @@ namespace Microsoft.EntityFrameworkCore
             this PropertiesConfigurationBuilder<TProperty> propertyBuilder,
             bool fixedLength = true
         ) =>
-            (PropertiesConfigurationBuilder<TProperty>)AreFixedLength(
-                (PropertiesConfigurationBuilder)propertyBuilder,
-                fixedLength
-            );
+            (PropertiesConfigurationBuilder<TProperty>)
+                AreFixedLength((PropertiesConfigurationBuilder)propertyBuilder, fixedLength);
 
         /// <summary>
         ///     Configures the property to use the given collation. The database column will be created with the given
@@ -129,9 +125,7 @@ namespace Microsoft.EntityFrameworkCore
             this PropertiesConfigurationBuilder<TProperty> propertyBuilder,
             string collation
         ) =>
-            (PropertiesConfigurationBuilder<TProperty>)UseCollation(
-                (PropertiesConfigurationBuilder)propertyBuilder,
-                collation
-            );
+            (PropertiesConfigurationBuilder<TProperty>)
+                UseCollation((PropertiesConfigurationBuilder)propertyBuilder, collation);
     }
 }

@@ -935,9 +935,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (conversionExpression.Language == LanguageNames.CSharp)
             {
-                return (Conversion)(
-                    (ConversionOperation)conversionExpression
-                ).ConversionConvertible;
+                return (Conversion)
+                    ((ConversionOperation)conversionExpression).ConversionConvertible;
             }
             else
             {
@@ -969,9 +968,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (compoundAssignment.Language == LanguageNames.CSharp)
             {
-                return (Conversion)(
-                    (CompoundAssignmentOperation)compoundAssignment
-                ).InConversionConvertible;
+                return (Conversion)
+                    ((CompoundAssignmentOperation)compoundAssignment).InConversionConvertible;
             }
             else
             {
@@ -1003,9 +1001,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (compoundAssignment.Language == LanguageNames.CSharp)
             {
-                return (Conversion)(
-                    (CompoundAssignmentOperation)compoundAssignment
-                ).OutConversionConvertible;
+                return (Conversion)
+                    ((CompoundAssignmentOperation)compoundAssignment).OutConversionConvertible;
             }
             else
             {

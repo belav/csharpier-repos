@@ -276,10 +276,8 @@ namespace System.Diagnostics.Metrics
             }
             Type aggregatorType = createAggregatorFunc.GetType().GenericTypeArguments[0];
             Type instrumentStateType = typeof(InstrumentState<>).MakeGenericType(aggregatorType);
-            return (InstrumentState)Activator.CreateInstance(
-                instrumentStateType,
-                createAggregatorFunc
-            )!;
+            return (InstrumentState)
+                Activator.CreateInstance(instrumentStateType, createAggregatorFunc)!;
         }
 
         private Func<Aggregator?>? GetAggregatorFactory(Instrument instrument)

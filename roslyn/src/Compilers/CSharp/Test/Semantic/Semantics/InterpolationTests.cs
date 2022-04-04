@@ -4759,12 +4759,16 @@ public class CustomHandler
             var model = comp.GetSemanticModel(tree);
             var descendentNodes = tree.GetRoot().DescendantNodes();
             var interpolatedString =
-                (ExpressionSyntax)descendentNodes
-                    .OfType<BinaryExpressionSyntax>()
-                    .Where(
-                        b => b.DescendantNodes().OfType<InterpolatedStringExpressionSyntax>().Any()
-                    )
-                    .FirstOrDefault()
+                (ExpressionSyntax)
+                    descendentNodes
+                        .OfType<BinaryExpressionSyntax>()
+                        .Where(
+                            b =>
+                                b.DescendantNodes()
+                                    .OfType<InterpolatedStringExpressionSyntax>()
+                                    .Any()
+                        )
+                        .FirstOrDefault()
                 ?? descendentNodes.OfType<InterpolatedStringExpressionSyntax>().Single();
             var semanticInfo = model.GetSemanticInfoSummary(interpolatedString);
 

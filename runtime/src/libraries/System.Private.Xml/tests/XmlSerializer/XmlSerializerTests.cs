@@ -977,8 +977,8 @@ public static partial class XmlSerializerTests
 
         using (StringReader reader = new StringReader(xml))
         {
-            TypeWithTimeSpanProperty deserializedObj =
-                (TypeWithTimeSpanProperty)serializer.Deserialize(reader);
+            TypeWithTimeSpanProperty deserializedObj = (TypeWithTimeSpanProperty)
+                serializer.Deserialize(reader);
             Assert.NotNull(deserializedObj);
             Assert.Equal(default(TimeSpan), deserializedObj.TimeSpanProperty);
         }
@@ -1047,8 +1047,8 @@ public static partial class XmlSerializerTests
 
         using (StringReader reader = new StringReader(xml))
         {
-            TypeWithDateTimeOffsetProperties deserializedObj =
-                (TypeWithDateTimeOffsetProperties)serializer.Deserialize(reader);
+            TypeWithDateTimeOffsetProperties deserializedObj = (TypeWithDateTimeOffsetProperties)
+                serializer.Deserialize(reader);
             Assert.NotNull(deserializedObj);
             Assert.Equal(defDTO, deserializedObj.DTO);
             Assert.Equal(defDTO, deserializedObj.DTO2);
@@ -1797,10 +1797,8 @@ public static partial class XmlSerializerTests
    <Group xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"" GroupType='Technical' GroupNumber='42' GroupBase='Red'>
            <GroupName>MyGroup</GroupName>
          </Group>";
-        Group group = (Group)serializer.Deserialize(
-            XmlReader.Create(GetStreamFromString(xmlFileContent)),
-            events
-        );
+        Group group = (Group)
+            serializer.Deserialize(XmlReader.Create(GetStreamFromString(xmlFileContent)), events);
         Assert.NotNull(group);
         Assert.NotNull(group.GroupName);
         Assert.Null(group.GroupVehicle);

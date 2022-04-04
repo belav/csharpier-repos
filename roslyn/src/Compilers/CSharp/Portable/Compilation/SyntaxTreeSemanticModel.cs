@@ -1167,9 +1167,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private MemberSemanticModel GetMemberModel(int position)
         {
             AssertPositionAdjusted(position);
-            CSharpSyntaxNode node = (CSharpSyntaxNode)Root.FindTokenIncludingCrefAndNameAttributes(
-                position
-            ).Parent;
+            CSharpSyntaxNode node = (CSharpSyntaxNode)
+                Root.FindTokenIncludingCrefAndNameAttributes(position).Parent;
             CSharpSyntaxNode memberDecl = GetMemberDeclaration(node);
 
             bool outsideMemberDecl = false;
@@ -1297,8 +1296,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     case SyntaxKind.DestructorDeclaration:
                     {
-                        DestructorDeclarationSyntax destructorDecl =
-                            (DestructorDeclarationSyntax)memberDecl;
+                        DestructorDeclarationSyntax destructorDecl = (DestructorDeclarationSyntax)
+                            memberDecl;
                         var expressionBody = destructorDecl.GetExpressionBodySyntax();
                         return (
                             expressionBody?.FullSpan.Contains(span) == true
@@ -1825,9 +1824,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             AliasSymbol aliasOpt;
-            var attributeType = (NamedTypeSymbol)enclosingBinder
-                .BindType(attribute.Name, BindingDiagnosticBag.Discarded, out aliasOpt)
-                .Type;
+            var attributeType = (NamedTypeSymbol)
+                enclosingBinder
+                    .BindType(attribute.Name, BindingDiagnosticBag.Discarded, out aliasOpt)
+                    .Type;
 
             return AttributeSemanticModel.Create(
                 this,
@@ -1935,11 +1935,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert((object)container != null);
 
             // We should get a namespace symbol since we match the symbol location with a namespace declaration syntax location.
-            var symbol = (NamespaceSymbol)GetDeclaredMember(
-                container,
-                declarationSyntax.Span,
-                declarationSyntax.Name
-            );
+            var symbol = (NamespaceSymbol)
+                GetDeclaredMember(container, declarationSyntax.Span, declarationSyntax.Name);
             Debug.Assert((object)symbol != null);
 
             // Map to compilation-scoped namespace (Roslyn bug 9538)

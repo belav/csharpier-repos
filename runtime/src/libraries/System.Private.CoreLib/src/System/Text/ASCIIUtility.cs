@@ -343,10 +343,11 @@ namespace System.Text
             }
             else if (AdvSimd.Arm64.IsSupported)
             {
-                currentAdvSimdIndex = (uint)GetIndexOfFirstNonAsciiByteInLane_AdvSimd(
-                    AdvSimd.LoadVector128(pBuffer),
-                    bitmask
-                ); // unaligned load
+                currentAdvSimdIndex = (uint)
+                    GetIndexOfFirstNonAsciiByteInLane_AdvSimd(
+                        AdvSimd.LoadVector128(pBuffer),
+                        bitmask
+                    ); // unaligned load
                 if (ContainsNonAsciiByte_AdvSimd(currentAdvSimdIndex))
                 {
                     goto FoundNonAsciiDataInCurrentChunk;
@@ -422,14 +423,10 @@ namespace System.Text
                             pBuffer + SizeOfVector128
                         );
 
-                        currentAdvSimdIndex = (uint)GetIndexOfFirstNonAsciiByteInLane_AdvSimd(
-                            firstVector,
-                            bitmask
-                        );
-                        secondAdvSimdIndex = (uint)GetIndexOfFirstNonAsciiByteInLane_AdvSimd(
-                            secondVector,
-                            bitmask
-                        );
+                        currentAdvSimdIndex = (uint)
+                            GetIndexOfFirstNonAsciiByteInLane_AdvSimd(firstVector, bitmask);
+                        secondAdvSimdIndex = (uint)
+                            GetIndexOfFirstNonAsciiByteInLane_AdvSimd(secondVector, bitmask);
                         if (
                             ContainsNonAsciiByte_AdvSimd(currentAdvSimdIndex)
                             || ContainsNonAsciiByte_AdvSimd(secondAdvSimdIndex)
@@ -474,10 +471,11 @@ namespace System.Text
             }
             else if (AdvSimd.Arm64.IsSupported)
             {
-                currentAdvSimdIndex = (uint)GetIndexOfFirstNonAsciiByteInLane_AdvSimd(
-                    AdvSimd.LoadVector128(pBuffer),
-                    bitmask
-                );
+                currentAdvSimdIndex = (uint)
+                    GetIndexOfFirstNonAsciiByteInLane_AdvSimd(
+                        AdvSimd.LoadVector128(pBuffer),
+                        bitmask
+                    );
                 if (ContainsNonAsciiByte_AdvSimd(currentAdvSimdIndex))
                 {
                     goto FoundNonAsciiDataInCurrentChunk;
@@ -511,10 +509,11 @@ namespace System.Text
                 }
                 else if (AdvSimd.Arm64.IsSupported)
                 {
-                    currentAdvSimdIndex = (uint)GetIndexOfFirstNonAsciiByteInLane_AdvSimd(
-                        AdvSimd.LoadVector128(pBuffer),
-                        bitmask
-                    ); // unaligned load
+                    currentAdvSimdIndex = (uint)
+                        GetIndexOfFirstNonAsciiByteInLane_AdvSimd(
+                            AdvSimd.LoadVector128(pBuffer),
+                            bitmask
+                        ); // unaligned load
                     if (ContainsNonAsciiByte_AdvSimd(currentAdvSimdIndex))
                     {
                         goto FoundNonAsciiDataInCurrentChunk;
@@ -933,9 +932,8 @@ namespace System.Text
             // has value >= 0x0800 (non-ASCII). Then we'll treat the vector as a BYTE vector in order
             // to extract the mask. Reminder: the 0x0080 bit of each WORD should be ignored.
 
-            currentMask = (uint)Sse2.MoveMask(
-                Sse2.AddSaturate(firstVector, asciiMaskForAddSaturate).AsByte()
-            );
+            currentMask = (uint)
+                Sse2.MoveMask(Sse2.AddSaturate(firstVector, asciiMaskForAddSaturate).AsByte());
 
             if ((currentMask & NonAsciiDataSeenMask) != 0)
             {
@@ -1009,9 +1007,10 @@ namespace System.Text
                     else
                     {
                         // See comment earlier in the method for an explanation of how the below logic works.
-                        currentMask = (uint)Sse2.MoveMask(
-                            Sse2.AddSaturate(combinedVector, asciiMaskForAddSaturate).AsByte()
-                        );
+                        currentMask = (uint)
+                            Sse2.MoveMask(
+                                Sse2.AddSaturate(combinedVector, asciiMaskForAddSaturate).AsByte()
+                            );
                         if ((currentMask & NonAsciiDataSeenMask) != 0)
                         {
                             goto FoundNonAsciiDataInFirstOrSecondVector;
@@ -1054,9 +1053,8 @@ namespace System.Text
             else
             {
                 // See comment earlier in the method for an explanation of how the below logic works.
-                currentMask = (uint)Sse2.MoveMask(
-                    Sse2.AddSaturate(firstVector, asciiMaskForAddSaturate).AsByte()
-                );
+                currentMask = (uint)
+                    Sse2.MoveMask(Sse2.AddSaturate(firstVector, asciiMaskForAddSaturate).AsByte());
                 if ((currentMask & NonAsciiDataSeenMask) != 0)
                 {
                     goto FoundNonAsciiDataInCurrentMask;
@@ -1093,9 +1091,10 @@ namespace System.Text
                 else
                 {
                     // See comment earlier in the method for an explanation of how the below logic works.
-                    currentMask = (uint)Sse2.MoveMask(
-                        Sse2.AddSaturate(firstVector, asciiMaskForAddSaturate).AsByte()
-                    );
+                    currentMask = (uint)
+                        Sse2.MoveMask(
+                            Sse2.AddSaturate(firstVector, asciiMaskForAddSaturate).AsByte()
+                        );
                     if ((currentMask & NonAsciiDataSeenMask) != 0)
                     {
                         goto FoundNonAsciiDataInCurrentMask;
@@ -1129,9 +1128,8 @@ namespace System.Text
             }
             else
             {
-                currentMask = (uint)Sse2.MoveMask(
-                    Sse2.AddSaturate(firstVector, asciiMaskForAddSaturate).AsByte()
-                );
+                currentMask = (uint)
+                    Sse2.MoveMask(Sse2.AddSaturate(firstVector, asciiMaskForAddSaturate).AsByte());
                 if ((currentMask & NonAsciiDataSeenMask) != 0)
                 {
                     goto FoundNonAsciiDataInCurrentMask;
@@ -1146,9 +1144,8 @@ namespace System.Text
             FoundNonAsciiDataInFirstVector:
 
             // See comment earlier in the method for an explanation of how the below logic works.
-            currentMask = (uint)Sse2.MoveMask(
-                Sse2.AddSaturate(firstVector, asciiMaskForAddSaturate).AsByte()
-            );
+            currentMask = (uint)
+                Sse2.MoveMask(Sse2.AddSaturate(firstVector, asciiMaskForAddSaturate).AsByte());
 
             FoundNonAsciiDataInCurrentMask:
 

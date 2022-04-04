@@ -176,10 +176,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
 
         #region MEF
         public Lazy<TExport, TMetadata> GetExport<TExport, TMetadata>() =>
-            (Lazy<TExport, TMetadata>)(object)Workspace.ExportProvider.GetExport<
-                TExport,
-                TMetadata
-            >();
+            (Lazy<TExport, TMetadata>)
+                (object)Workspace.ExportProvider.GetExport<TExport, TMetadata>();
 
         public IEnumerable<Lazy<TExport, TMetadata>> GetExports<TExport, TMetadata>() =>
             Workspace.ExportProvider.GetExports<TExport, TMetadata>();

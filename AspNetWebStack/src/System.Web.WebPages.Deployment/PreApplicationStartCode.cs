@@ -248,10 +248,11 @@ namespace System.Web.WebPages.Deployment
                 PreApplicationStartMethodAttribute[] attributes = null;
                 try
                 {
-                    attributes = (PreApplicationStartMethodAttribute[])assembly.GetCustomAttributes(
-                        typeof(PreApplicationStartMethodAttribute),
-                        inherit: true
-                    );
+                    attributes = (PreApplicationStartMethodAttribute[])
+                        assembly.GetCustomAttributes(
+                            typeof(PreApplicationStartMethodAttribute),
+                            inherit: true
+                        );
                 }
                 catch
                 {

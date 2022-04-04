@@ -48,10 +48,11 @@ internal class PhotinoSynchronizationContext : SynchronizationContext
 
         _window = window ?? throw new ArgumentNullException(nameof(window));
 
-        _uiThreadId = (int)_window
-            .GetType()
-            .GetField("_managedThreadId", BindingFlags.NonPublic | BindingFlags.Instance)!
-            .GetValue(_window)!;
+        _uiThreadId = (int)
+            _window
+                .GetType()
+                .GetField("_managedThreadId", BindingFlags.NonPublic | BindingFlags.Instance)!
+                .GetValue(_window)!;
 
         _invokeMethodInfo = _window
             .GetType()

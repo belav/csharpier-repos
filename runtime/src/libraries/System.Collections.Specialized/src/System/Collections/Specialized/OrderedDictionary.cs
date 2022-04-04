@@ -419,10 +419,8 @@ namespace System.Collections.Specialized
             {
                 throw new SerializationException(SR.Serialization_InvalidOnDeser);
             }
-            _comparer = (IEqualityComparer?)_siInfo.GetValue(
-                KeyComparerName,
-                typeof(IEqualityComparer)
-            );
+            _comparer = (IEqualityComparer?)
+                _siInfo.GetValue(KeyComparerName, typeof(IEqualityComparer));
             _readOnly = _siInfo.GetBoolean(ReadOnlyName);
             _initialCapacity = _siInfo.GetInt32(InitCapacityName);
 

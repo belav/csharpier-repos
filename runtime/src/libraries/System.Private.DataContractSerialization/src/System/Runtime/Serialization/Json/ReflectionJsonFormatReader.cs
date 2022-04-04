@@ -239,8 +239,8 @@ namespace System.Runtime.Serialization.Json
                 keyType = keyType.GetGenericArguments()[0];
             }
 
-            ClassDataContract keyValueDataContract =
-                (ClassDataContract)collectionContract.ItemContract;
+            ClassDataContract keyValueDataContract = (ClassDataContract)
+                collectionContract.ItemContract;
             DataContract keyDataContract = keyValueDataContract.Members![0].MemberTypeContract;
 
             KeyParseMode keyParseMode = KeyParseMode.Fail;

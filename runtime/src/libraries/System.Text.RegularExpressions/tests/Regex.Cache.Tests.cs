@@ -164,10 +164,11 @@ namespace System.Text.RegularExpressions.Tests
         private int GetCachedItemsNum()
         {
             return (
-                (ICollection)typeof(Regex).Assembly
-                    .GetType("System.Text.RegularExpressions.RegexCache")
-                    .GetField("s_cacheList", BindingFlags.NonPublic | BindingFlags.Static)
-                    .GetValue(null)
+                (ICollection)
+                    typeof(Regex).Assembly
+                        .GetType("System.Text.RegularExpressions.RegexCache")
+                        .GetField("s_cacheList", BindingFlags.NonPublic | BindingFlags.Static)
+                        .GetValue(null)
             ).Count;
         }
     }

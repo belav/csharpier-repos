@@ -12,10 +12,8 @@ namespace Test
             domain.DoCallBack(Run);
             Type stType = typeof(Something<string, string>);
             Other<string, string> st =
-                (Other<string, string>)domain.CreateInstanceAndUnwrap(
-                    stType.Assembly.FullName,
-                    stType.FullName
-                );
+                (Other<string, string>)
+                    domain.CreateInstanceAndUnwrap(stType.Assembly.FullName, stType.FullName);
             Console.WriteLine("in main int: {0}", st.getInt());
             Console.WriteLine("in main types: {0}", st.getTypeNames<Test>());
         }

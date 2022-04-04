@@ -56,12 +56,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
 
             if (index < parameters.Length)
             {
-                element = (EnvDTE.CodeElement)ExternalCodeParameter.Create(
-                    this.State,
-                    _projectId,
-                    parameters[index],
-                    this.ParentElement
-                );
+                element = (EnvDTE.CodeElement)
+                    ExternalCodeParameter.Create(
+                        this.State,
+                        _projectId,
+                        parameters[index],
+                        this.ParentElement
+                    );
                 return true;
             }
 
@@ -76,12 +77,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
 
             if (index >= 0 && index < parameters.Length)
             {
-                element = (EnvDTE.CodeElement)ExternalCodeParameter.Create(
-                    this.State,
-                    _projectId,
-                    parameters[index],
-                    this.ParentElement
-                );
+                element = (EnvDTE.CodeElement)
+                    ExternalCodeParameter.Create(
+                        this.State,
+                        _projectId,
+                        parameters[index],
+                        this.ParentElement
+                    );
                 return true;
             }
 

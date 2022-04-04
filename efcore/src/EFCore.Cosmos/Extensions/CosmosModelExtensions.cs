@@ -110,17 +110,18 @@ namespace Microsoft.EntityFrameworkCore
             bool fromDataAnnotation = false
         )
         {
-            var valueSet = (ThroughputProperties?)model
-                .SetOrRemoveAnnotation(
-                    CosmosAnnotationNames.Throughput,
-                    throughput == null || autoscale == null
-                      ? null
-                      : autoscale.Value
-                          ? ThroughputProperties.CreateAutoscaleThroughput(throughput.Value)
-                          : ThroughputProperties.CreateManualThroughput(throughput.Value),
-                    fromDataAnnotation
-                )
-                ?.Value;
+            var valueSet = (ThroughputProperties?)
+                model
+                    .SetOrRemoveAnnotation(
+                        CosmosAnnotationNames.Throughput,
+                        throughput == null || autoscale == null
+                          ? null
+                          : autoscale.Value
+                              ? ThroughputProperties.CreateAutoscaleThroughput(throughput.Value)
+                              : ThroughputProperties.CreateManualThroughput(throughput.Value),
+                        fromDataAnnotation
+                    )
+                    ?.Value;
             return valueSet?.AutoscaleMaxThroughput ?? valueSet?.Throughput;
         }
 

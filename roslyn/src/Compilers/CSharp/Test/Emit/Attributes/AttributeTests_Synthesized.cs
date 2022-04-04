@@ -169,16 +169,17 @@ class C
                 )
             );
 
-            var pid = (NamedTypeSymbol)comp.GlobalNamespace
-                .GetMembers()
-                .Where(
-                    s =>
-                        s.Name.StartsWith(
-                            "<PrivateImplementationDetails>",
-                            StringComparison.Ordinal
-                        )
-                )
-                .Single();
+            var pid = (NamedTypeSymbol)
+                comp.GlobalNamespace
+                    .GetMembers()
+                    .Where(
+                        s =>
+                            s.Name.StartsWith(
+                                "<PrivateImplementationDetails>",
+                                StringComparison.Ordinal
+                            )
+                    )
+                    .Single();
 
             var expectedAttrs = new[] { "CompilerGeneratedAttribute" };
             var actualAttrs = GetAttributeNames(pid.GetAttributes());
@@ -208,9 +209,8 @@ unsafe struct S
             );
 
             var s = (NamedTypeSymbol)comp.GlobalNamespace.GetMembers("S").Single();
-            var bufferType = (NamedTypeSymbol)s.GetMembers()
-                .Where(t => t.Name == "<C>e__FixedBuffer")
-                .Single();
+            var bufferType = (NamedTypeSymbol)
+                s.GetMembers().Where(t => t.Name == "<C>e__FixedBuffer").Single();
 
             var expectedAttrs = new[] { "CompilerGeneratedAttribute", "UnsafeValueTypeAttribute" };
             var actualAttrs = GetAttributeNames(bufferType.GetAttributes());
@@ -250,9 +250,8 @@ class Test
                     );
                     Verify(property.Handle);
 
-                    var eventField = (PEFieldSymbol)type.GetMember<PEEventSymbol>(
-                        "MyEvent"
-                    ).AssociatedField;
+                    var eventField = (PEFieldSymbol)
+                        type.GetMember<PEEventSymbol>("MyEvent").AssociatedField;
                     Verify(eventField.Handle);
 
                     void Verify(EntityHandle token)
@@ -273,9 +272,8 @@ class Test
                             );
                             Assert.Equal(
                                 DebuggerBrowsableState.Never,
-                                (DebuggerBrowsableState)attributes[1].ConstructorArguments
-                                    .Single()
-                                    .Value
+                                (DebuggerBrowsableState)
+                                    attributes[1].ConstructorArguments.Single().Value
                             );
                         }
                         else

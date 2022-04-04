@@ -890,11 +890,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             if (storeFunction == null)
             {
                 var parameterTypes = dbFunction.Parameters.Select(p => p.StoreType!).ToArray();
-                storeFunction = (StoreFunction?)model.FindFunction(
-                    dbFunction.Name,
-                    dbFunction.Schema,
-                    parameterTypes
-                );
+                storeFunction = (StoreFunction?)
+                    model.FindFunction(dbFunction.Name, dbFunction.Schema, parameterTypes);
                 if (storeFunction == null)
                 {
                     storeFunction = new StoreFunction(dbFunction, model);

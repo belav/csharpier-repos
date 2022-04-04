@@ -2027,15 +2027,16 @@ class C
 "
             );
 
-            var statement = (BlockSyntax)SyntaxFactory.ParseStatement(
-                @"
+            var statement = (BlockSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 { 
    int z = 0; 
    M(z);  
    M(y);
 }
 "
-            );
+                );
 
             var tree = compilation.SyntaxTrees[0];
             var root = tree.GetCompilationUnitRoot();
@@ -2064,18 +2065,16 @@ class C
             Assert.NotNull(typeInfo.Type);
             Assert.Equal("Int32", typeInfo.Type.Name);
 
-            var call = (InvocationExpressionSyntax)(
-                (ExpressionStatementSyntax)statement.Statements[1]
-            ).Expression;
+            var call = (InvocationExpressionSyntax)
+                ((ExpressionStatementSyntax)statement.Statements[1]).Expression;
             var arg = call.ArgumentList.Arguments[0].Expression;
             var info = speculativeModel.GetSymbolInfo(arg);
             Assert.NotNull(info.Symbol);
             Assert.Equal("z", info.Symbol.Name);
             Assert.Equal(SymbolKind.Local, info.Symbol.Kind);
 
-            var call2 = (InvocationExpressionSyntax)(
-                (ExpressionStatementSyntax)((BlockSyntax)statement).Statements[2]
-            ).Expression;
+            var call2 = (InvocationExpressionSyntax)
+                ((ExpressionStatementSyntax)((BlockSyntax)statement).Statements[2]).Expression;
             var arg2 = call2.ArgumentList.Arguments[0].Expression;
             var info2 = speculativeModel.GetSymbolInfo(arg2);
             Assert.NotNull(info2.Symbol);
@@ -2196,15 +2195,16 @@ class C
 "
             );
 
-            var switchStatement = (SwitchStatementSyntax)SyntaxFactory.ParseStatement(
-                @"
+            var switchStatement = (SwitchStatementSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 switch (y)
 {
   case 0:
     y++;
     break;
 }"
-            );
+                );
             var switchLabel = switchStatement.Sections[0].Labels[0];
 
             var tree = compilation.SyntaxTrees[0];
@@ -2253,9 +2253,8 @@ class C
 "
             );
 
-            var speculatedStatement = (LocalDeclarationStatementSyntax)SyntaxFactory.ParseStatement(
-                @"Func<int, int> var = (z) => x + z;"
-            );
+            var speculatedStatement = (LocalDeclarationStatementSyntax)
+                SyntaxFactory.ParseStatement(@"Func<int, int> var = (z) => x + z;");
 
             var tree = compilation.SyntaxTrees[0];
             var root = tree.GetCompilationUnitRoot();
@@ -2297,13 +2296,14 @@ class C
 "
             );
 
-            var statement = (ForEachStatementSyntax)SyntaxFactory.ParseStatement(
-                @"
+            var statement = (ForEachStatementSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 foreach(short ele in a)
 {
 } 
 "
-            );
+                );
 
             var tree = compilation.SyntaxTrees[0];
             var root = tree.GetCompilationUnitRoot();
@@ -2696,9 +2696,8 @@ class C
             );
 
             // (b) Statement
-            newSpeculatedStatement = (LocalDeclarationStatementSyntax)SyntaxFactory.ParseStatement(
-                @"int z = 0;"
-            );
+            newSpeculatedStatement = (LocalDeclarationStatementSyntax)
+                SyntaxFactory.ParseStatement(@"int z = 0;");
             Assert.Throws<InvalidOperationException>(
                 () =>
                     speculativeModel.TryGetSpeculativeSemanticModel(
@@ -2730,9 +2729,8 @@ unsafe class C
 
             var model = compilation.GetSemanticModel(tree);
 
-            var unsafeStatement = (LocalDeclarationStatementSyntax)SyntaxFactory.ParseStatement(
-                "int *p = &x;"
-            );
+            var unsafeStatement = (LocalDeclarationStatementSyntax)
+                SyntaxFactory.ParseStatement("int *p = &x;");
 
             SemanticModel speculativeModel;
             var success = model.TryGetSpeculativeSemanticModel(
@@ -2828,15 +2826,16 @@ class C
 "
             );
 
-            var blockStatement = (BlockSyntax)SyntaxFactory.ParseStatement(
-                @"
+            var blockStatement = (BlockSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 { 
    int z = 0; 
    M(z);  
    M(y);    // Should generate error here as we are replacing the method body.
 }
 "
-            );
+                );
 
             var tree = compilation.SyntaxTrees[0];
             var root = tree.GetCompilationUnitRoot();
@@ -2906,9 +2905,8 @@ class Parent {}
             Assert.NotNull(typeInfo.Type);
             Assert.Equal("Int32", typeInfo.Type.Name);
 
-            var call = (InvocationExpressionSyntax)(
-                (ExpressionStatementSyntax)blockStatement.Statements[1]
-            ).Expression;
+            var call = (InvocationExpressionSyntax)
+                ((ExpressionStatementSyntax)blockStatement.Statements[1]).Expression;
             var arg = call.ArgumentList.Arguments[0].Expression;
             var info = speculativeModel.GetSymbolInfo(arg);
             Assert.NotNull(info.Symbol);
@@ -2916,9 +2914,8 @@ class Parent {}
             Assert.Equal(SymbolKind.Local, info.Symbol.Kind);
 
             // Shouldn't bind to local y in the original method as we are replacing the method body.
-            var call2 = (InvocationExpressionSyntax)(
-                (ExpressionStatementSyntax)((BlockSyntax)blockStatement).Statements[2]
-            ).Expression;
+            var call2 = (InvocationExpressionSyntax)
+                ((ExpressionStatementSyntax)((BlockSyntax)blockStatement).Statements[2]).Expression;
             var arg2 = call2.ArgumentList.Arguments[0].Expression;
             var info2 = speculativeModel.GetSymbolInfo(arg2);
             Assert.Null(info2.Symbol);
@@ -2942,15 +2939,16 @@ class C
 "
             );
 
-            var blockStatement = (BlockSyntax)SyntaxFactory.ParseStatement(
-                @"
+            var blockStatement = (BlockSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 { 
    int z = 0; 
    M(z);  
    M(y);    // Should generate error here as we are replacing the method body.
 }
 "
-            );
+                );
 
             var tree = compilation.SyntaxTrees[0];
             var root = tree.GetCompilationUnitRoot();
@@ -2992,15 +2990,16 @@ class C
 "
             );
 
-            var blockStatement = (BlockSyntax)SyntaxFactory.ParseStatement(
-                @"
+            var blockStatement = (BlockSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 { 
    int z = 0; 
    M(z);  
    M(y);    // Should generate error here as we are replacing the method body.
 }
 "
-            );
+                );
 
             var tree = compilation.SyntaxTrees[0];
             var root = tree.GetCompilationUnitRoot();
@@ -3045,15 +3044,16 @@ class C
 "
             );
 
-            var blockStatement = (BlockSyntax)SyntaxFactory.ParseStatement(
-                @"
+            var blockStatement = (BlockSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 { 
    int z = 0; 
    M(z);  
    M(y);    // Should generate error here as we are replacing the method body.
 }
 "
-            );
+                );
 
             var tree = compilation.SyntaxTrees[0];
             var root = tree.GetCompilationUnitRoot();
@@ -3233,9 +3233,8 @@ class C
             var methodDecl = (MethodDeclarationSyntax)typeDecl.Members[0];
             var model = compilation.GetSemanticModel(tree);
 
-            var blockStatement = (BlockSyntax)SyntaxFactory.ParseStatement(
-                @"{ Func<int, int> var = (z) => x + z; }"
-            );
+            var blockStatement = (BlockSyntax)
+                SyntaxFactory.ParseStatement(@"{ Func<int, int> var = (z) => x + z; }");
             var speculatedMethod = methodDecl.ReplaceNode(methodDecl.Body, blockStatement);
             blockStatement = speculatedMethod.Body;
 
@@ -3340,8 +3339,9 @@ class C
             var methodDecl = (MethodDeclarationSyntax)typeDecl.Members[0];
             var model = compilation.GetSemanticModel(tree);
 
-            var blockStatement = (BlockSyntax)SyntaxFactory.ParseStatement(
-                @"{
+            var blockStatement = (BlockSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"{
     switch(x)
     {
         case 1:
@@ -3349,7 +3349,7 @@ class C
             break;
     }
 }"
-            );
+                );
 
             var speculatedMethod = methodDecl.ReplaceNode(methodDecl.Body, blockStatement);
             blockStatement = speculatedMethod.Body;
@@ -3831,9 +3831,8 @@ class C
             var model = comp.GetSemanticModel(tree);
 
             var position = source.IndexOf("return", StringComparison.Ordinal);
-            var yieldStatement = (YieldStatementSyntax)SyntaxFactory.ParseStatement(
-                "yield return 1;"
-            );
+            var yieldStatement = (YieldStatementSyntax)
+                SyntaxFactory.ParseStatement("yield return 1;");
 
             SemanticModel speculativeModel;
             var success = model.TryGetSpeculativeSemanticModel(
@@ -3873,9 +3872,8 @@ class C
             var model = comp.GetSemanticModel(tree);
 
             var position = source.IndexOf("return", StringComparison.Ordinal);
-            var yieldStatement = (YieldStatementSyntax)SyntaxFactory.ParseStatement(
-                "yield return 1;"
-            );
+            var yieldStatement = (YieldStatementSyntax)
+                SyntaxFactory.ParseStatement("yield return 1;");
 
             SemanticModel speculativeModel;
             var success = model.TryGetSpeculativeSemanticModel(
@@ -5198,9 +5196,8 @@ class C
             var model = comp.GetSemanticModel(syntaxTree);
 
             var ifStatement = root.DescendantNodes().OfType<IfStatementSyntax>().Single();
-            var replacementIfStatement = (IfStatementSyntax)SyntaxFactory.ParseStatement(
-                replacementSource
-            );
+            var replacementIfStatement = (IfStatementSyntax)
+                SyntaxFactory.ParseStatement(replacementSource);
 
             Assert.True(
                 model.TryGetSpeculativeSemanticModel(
@@ -5231,10 +5228,8 @@ public partial class C
 
 ";
             var comp = CreateCompilation(source);
-            var method = (IMethodSymbol)comp.GetTypeByMetadataName("C")
-                .GetMembers("M")
-                .Single()
-                .GetPublicSymbol();
+            var method = (IMethodSymbol)
+                comp.GetTypeByMetadataName("C").GetMembers("M").Single().GetPublicSymbol();
             var attribute = method.GetAttributes().Single();
             Assert.Equal("DEBUG", attribute.ConstructorArguments[0].Value);
 

@@ -3442,36 +3442,35 @@ namespace System.Linq.Expressions.Tests
                 TestBinary<bool, bool>(ExpressionType.ExclusiveOr, false, false, useInterpreter)
             );
             Assert.False(
-                (bool)TestBinary<bool?, bool?>(
-                    ExpressionType.ExclusiveOr,
-                    true,
-                    true,
-                    useInterpreter
-                )
+                (bool)
+                    TestBinary<bool?, bool?>(ExpressionType.ExclusiveOr, true, true, useInterpreter)
             );
             Assert.True(
-                (bool)TestBinary<bool?, bool?>(
-                    ExpressionType.ExclusiveOr,
-                    true,
-                    false,
-                    useInterpreter
-                )
+                (bool)
+                    TestBinary<bool?, bool?>(
+                        ExpressionType.ExclusiveOr,
+                        true,
+                        false,
+                        useInterpreter
+                    )
             );
             Assert.True(
-                (bool)TestBinary<bool?, bool?>(
-                    ExpressionType.ExclusiveOr,
-                    false,
-                    true,
-                    useInterpreter
-                )
+                (bool)
+                    TestBinary<bool?, bool?>(
+                        ExpressionType.ExclusiveOr,
+                        false,
+                        true,
+                        useInterpreter
+                    )
             );
             Assert.False(
-                (bool)TestBinary<bool?, bool?>(
-                    ExpressionType.ExclusiveOr,
-                    false,
-                    false,
-                    useInterpreter
-                )
+                (bool)
+                    TestBinary<bool?, bool?>(
+                        ExpressionType.ExclusiveOr,
+                        false,
+                        false,
+                        useInterpreter
+                    )
             );
             Assert.Null(
                 TestBinary<bool?, bool?>(ExpressionType.ExclusiveOr, true, null, useInterpreter)
@@ -4202,35 +4201,37 @@ namespace System.Linq.Expressions.Tests
                     .DynamicInvoke(cust)
             );
             Assert.True(
-                (bool)Expression
-                    .Lambda(
-                        Expression.Equal(
-                            Expression.PropertyOrField(c, "CustomerId"),
-                            Expression.PropertyOrField(c, "CUSTOMERID")
-                        ),
-                        c
-                    )
-                    .Compile(useInterpreter)
-                    .DynamicInvoke(cust)
-            );
-            Assert.True(
-                (bool)Expression
-                    .Lambda(
-                        Expression.And(
+                (bool)
+                    Expression
+                        .Lambda(
                             Expression.Equal(
                                 Expression.PropertyOrField(c, "CustomerId"),
-                                Expression.PropertyOrField(c2, "CustomerId")
+                                Expression.PropertyOrField(c, "CUSTOMERID")
                             ),
-                            Expression.Equal(
-                                Expression.PropertyOrField(c, "ContactName"),
-                                Expression.PropertyOrField(c2, "ContactName")
-                            )
-                        ),
-                        c,
-                        c2
-                    )
-                    .Compile(useInterpreter)
-                    .DynamicInvoke(cust, cust)
+                            c
+                        )
+                        .Compile(useInterpreter)
+                        .DynamicInvoke(cust)
+            );
+            Assert.True(
+                (bool)
+                    Expression
+                        .Lambda(
+                            Expression.And(
+                                Expression.Equal(
+                                    Expression.PropertyOrField(c, "CustomerId"),
+                                    Expression.PropertyOrField(c2, "CustomerId")
+                                ),
+                                Expression.Equal(
+                                    Expression.PropertyOrField(c, "ContactName"),
+                                    Expression.PropertyOrField(c2, "ContactName")
+                                )
+                            ),
+                            c,
+                            c2
+                        )
+                        .Compile(useInterpreter)
+                        .DynamicInvoke(cust, cust)
             );
         }
 

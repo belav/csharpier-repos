@@ -43,8 +43,8 @@ namespace System.Drawing
 
             IntPtr iStreamVtbl = IStreamVtbl.Create(fpQueryInterface, fpAddRef, fpRelease);
 
-            ComInterfaceEntry* wrapperEntry =
-                (ComInterfaceEntry*)RuntimeHelpers.AllocateTypeAssociatedMemory(
+            ComInterfaceEntry* wrapperEntry = (ComInterfaceEntry*)
+                RuntimeHelpers.AllocateTypeAssociatedMemory(
                     typeof(DrawingCom),
                     sizeof(ComInterfaceEntry)
                 );
@@ -122,48 +122,34 @@ namespace System.Drawing
         {
             public static IntPtr Create(IntPtr fpQueryInterface, IntPtr fpAddRef, IntPtr fpRelease)
             {
-                IntPtr* vtblRaw = (IntPtr*)RuntimeHelpers.AllocateTypeAssociatedMemory(
-                    typeof(IStreamVtbl),
-                    IntPtr.Size * 14
-                );
+                IntPtr* vtblRaw = (IntPtr*)
+                    RuntimeHelpers.AllocateTypeAssociatedMemory(
+                        typeof(IStreamVtbl),
+                        IntPtr.Size * 14
+                    );
                 vtblRaw[0] = fpQueryInterface;
                 vtblRaw[1] = fpAddRef;
                 vtblRaw[2] = fpRelease;
                 vtblRaw[3] = (IntPtr)(delegate* unmanaged<IntPtr, byte*, uint, uint*, int>)&Read;
                 vtblRaw[4] = (IntPtr)(delegate* unmanaged<IntPtr, byte*, uint, uint*, int>)&Write;
-                vtblRaw[5] = (IntPtr)(delegate* unmanaged<
-                    IntPtr,
-                    long,
-                    SeekOrigin,
-                    ulong*,
-                    int>)&Seek;
+                vtblRaw[5] = (IntPtr)
+                    (delegate* unmanaged<IntPtr, long, SeekOrigin, ulong*, int>)&Seek;
                 vtblRaw[6] = (IntPtr)(delegate* unmanaged<IntPtr, ulong, int>)&SetSize;
-                vtblRaw[7] = (IntPtr)(delegate* unmanaged<
-                    IntPtr,
-                    IntPtr,
-                    ulong,
-                    ulong*,
-                    ulong*,
-                    int>)&CopyTo;
+                vtblRaw[7] = (IntPtr)
+                    (delegate* unmanaged<IntPtr, IntPtr, ulong, ulong*, ulong*, int>)&CopyTo;
                 vtblRaw[8] = (IntPtr)(delegate* unmanaged<IntPtr, uint, int>)&Commit;
                 vtblRaw[9] = (IntPtr)(delegate* unmanaged<IntPtr, int>)&Revert;
-                vtblRaw[10] = (IntPtr)(delegate* unmanaged<
-                    IntPtr,
-                    ulong,
-                    ulong,
-                    uint,
-                    int>)&LockRegion;
-                vtblRaw[11] = (IntPtr)(delegate* unmanaged<
-                    IntPtr,
-                    ulong,
-                    ulong,
-                    uint,
-                    int>)&UnlockRegion;
-                vtblRaw[12] = (IntPtr)(delegate* unmanaged<
-                    IntPtr,
-                    Interop.Ole32.STATSTG*,
-                    Interop.Ole32.STATFLAG,
-                    int>)&Stat;
+                vtblRaw[10] = (IntPtr)
+                    (delegate* unmanaged<IntPtr, ulong, ulong, uint, int>)&LockRegion;
+                vtblRaw[11] = (IntPtr)
+                    (delegate* unmanaged<IntPtr, ulong, ulong, uint, int>)&UnlockRegion;
+                vtblRaw[12] = (IntPtr)
+                    (delegate* unmanaged<
+                        IntPtr,
+                        Interop.Ole32.STATSTG*,
+                        Interop.Ole32.STATFLAG,
+                        int>)
+                        &Stat;
                 vtblRaw[13] = (IntPtr)(delegate* unmanaged<IntPtr, IntPtr*, int>)&Clone;
 
                 return (IntPtr)vtblRaw;

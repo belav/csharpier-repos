@@ -97,10 +97,8 @@ namespace System.Collections.Concurrent
                 int count = c.Count;
                 if (count > length)
                 {
-                    length = (int)Math.Min(
-                        BitOperations.RoundUpToPowerOf2((uint)count),
-                        MaxSegmentLength
-                    );
+                    length = (int)
+                        Math.Min(BitOperations.RoundUpToPowerOf2((uint)count), MaxSegmentLength);
                 }
             }
 

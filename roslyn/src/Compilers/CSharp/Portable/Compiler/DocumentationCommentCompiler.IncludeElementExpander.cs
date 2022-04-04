@@ -853,8 +853,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
                 Debug.Assert(leadingTrivia.Count == 1);
                 SyntaxTrivia trivia = leadingTrivia.ElementAt(0);
-                DocumentationCommentTriviaSyntax structure =
-                    (DocumentationCommentTriviaSyntax)trivia.GetStructure();
+                DocumentationCommentTriviaSyntax structure = (DocumentationCommentTriviaSyntax)
+                    trivia.GetStructure();
                 Debug.Assert(structure.Content.Count == 2);
                 XmlEmptyElementSyntax elementSyntax = (XmlEmptyElementSyntax)structure.Content[1];
                 Debug.Assert(elementSyntax.Attributes.Count == 1);

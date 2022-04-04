@@ -92,10 +92,11 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void CanGetCorrectValuesFromIntPtr()
         {
-            var o = (IFooWithIntPtr)generator.CreateInterfaceProxyWithoutTarget(
-                typeof(IFooWithIntPtr),
-                new SetReturnValueInterceptor(IntPtr.Zero)
-            );
+            var o = (IFooWithIntPtr)
+                generator.CreateInterfaceProxyWithoutTarget(
+                    typeof(IFooWithIntPtr),
+                    new SetReturnValueInterceptor(IntPtr.Zero)
+                );
             var buffer = o.Buffer(15);
             Assert.AreEqual(IntPtr.Zero, buffer);
         }
@@ -209,11 +210,12 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void CanProxyMethodWithOutIntPtrParameter()
         {
-            var o = (IFooWithOutIntPtr)generator.CreateInterfaceProxyWithoutTarget(
-                typeof(IFooWithOutIntPtr),
-                new Type[0],
-                new SkipCallingMethodInterceptorWithOutputParams()
-            );
+            var o = (IFooWithOutIntPtr)
+                generator.CreateInterfaceProxyWithoutTarget(
+                    typeof(IFooWithOutIntPtr),
+                    new Type[0],
+                    new SkipCallingMethodInterceptorWithOutputParams()
+                );
             Assert.IsNotNull(o);
             IntPtr i;
             o.Bar(out i);
@@ -246,11 +248,12 @@ namespace Castle.DynamicProxy.Tests
         {
             var logger = new LogInvocationInterceptor();
             var proxy =
-                (IDoubleGeneric<int>)generator.CreateInterfaceProxyWithTarget(
-                    typeof(IDoubleGeneric<int>),
-                    new DoubleGenericImpl<int>(),
-                    logger
-                );
+                (IDoubleGeneric<int>)
+                    generator.CreateInterfaceProxyWithTarget(
+                        typeof(IDoubleGeneric<int>),
+                        new DoubleGenericImpl<int>(),
+                        logger
+                    );
             proxy.Call(1, "");
             Assert.AreEqual("Call", logger.Invocations[0]);
         }
@@ -260,10 +263,11 @@ namespace Castle.DynamicProxy.Tests
         {
             var interceptor = new SetReturnValueInterceptor(3);
             var proxy =
-                (IDoubleGeneric<int>)generator.CreateInterfaceProxyWithoutTarget(
-                    typeof(IDoubleGeneric<int>),
-                    interceptor
-                );
+                (IDoubleGeneric<int>)
+                    generator.CreateInterfaceProxyWithoutTarget(
+                        typeof(IDoubleGeneric<int>),
+                        interceptor
+                    );
             var o = proxy.Call(1, "");
             Assert.AreEqual(3, o);
         }
@@ -281,11 +285,12 @@ namespace Castle.DynamicProxy.Tests
         public void InternalClassWithInternalMethodAndProperty()
         {
             var logging = new LogInvocationInterceptor();
-            var o = (InternalClassWithInternalMembers)generator.CreateClassProxy(
-                typeof(InternalClassWithInternalMembers),
-                new Type[0],
-                logging
-            );
+            var o = (InternalClassWithInternalMembers)
+                generator.CreateClassProxy(
+                    typeof(InternalClassWithInternalMembers),
+                    new Type[0],
+                    logging
+                );
             Assert.IsNotNull(o);
             o.TestMethod();
             Assert.AreEqual(1, logging.Invocations.Count);
@@ -303,11 +308,8 @@ namespace Castle.DynamicProxy.Tests
         public void ProxyInternalMethod()
         {
             var logging = new LogInvocationInterceptor();
-            var o = (WithInternalMethod)generator.CreateClassProxy(
-                typeof(WithInternalMethod),
-                new Type[0],
-                logging
-            );
+            var o = (WithInternalMethod)
+                generator.CreateClassProxy(typeof(WithInternalMethod), new Type[0], logging);
             o.Foo();
             Assert.AreEqual("Foo ", logging.LogContents);
         }
@@ -356,11 +358,12 @@ namespace Castle.DynamicProxy.Tests
         public void ProxyingProtectedInternalAbstractMethod()
         {
             var logging = new LogInvocationInterceptor();
-            var o = (HasProtectedInternalAbstractMethod)generator.CreateClassProxy(
-                typeof(HasProtectedInternalAbstractMethod),
-                new Type[0],
-                logging
-            );
+            var o = (HasProtectedInternalAbstractMethod)
+                generator.CreateClassProxy(
+                    typeof(HasProtectedInternalAbstractMethod),
+                    new Type[0],
+                    logging
+                );
             Assert.IsNotNull(o);
         }
 
@@ -368,11 +371,12 @@ namespace Castle.DynamicProxy.Tests
         public void UsingEvents_Class()
         {
             var logger = new LogInvocationInterceptor();
-            var proxy = (FakeWithEvents)generator.CreateClassProxy(
-                typeof(FakeWithEvents),
-                ProxyGenerationOptions.Default,
-                logger
-            );
+            var proxy = (FakeWithEvents)
+                generator.CreateClassProxy(
+                    typeof(FakeWithEvents),
+                    ProxyGenerationOptions.Default,
+                    logger
+                );
 
             Assert.IsNotNull(proxy);
 
@@ -387,11 +391,12 @@ namespace Castle.DynamicProxy.Tests
         {
             var logger = new LogInvocationInterceptor();
 
-            var proxy = (IWithEvents)generator.CreateInterfaceProxyWithTarget(
-                typeof(IWithEvents),
-                new FakeWithEvents(),
-                logger
-            );
+            var proxy = (IWithEvents)
+                generator.CreateInterfaceProxyWithTarget(
+                    typeof(IWithEvents),
+                    new FakeWithEvents(),
+                    logger
+                );
 
             Assert.IsNotNull(proxy);
 
@@ -405,11 +410,8 @@ namespace Castle.DynamicProxy.Tests
         public void VirtualMethodCallsFromTheConstructor()
         {
             var logging = new LogInvocationInterceptor();
-            var o = (MakeVirtualCallFromCtor)generator.CreateClassProxy(
-                typeof(MakeVirtualCallFromCtor),
-                new Type[0],
-                logging
-            );
+            var o = (MakeVirtualCallFromCtor)
+                generator.CreateClassProxy(typeof(MakeVirtualCallFromCtor), new Type[0], logging);
             Assert.AreEqual(1, logging.Invocations.Count);
             Assert.IsNotNull(o);
         }

@@ -259,9 +259,8 @@ namespace Microsoft.EntityFrameworkCore
         public static SqlServerValueGenerationStrategy? GetValueGenerationStrategy(
             this IReadOnlyModel model
         ) =>
-            (SqlServerValueGenerationStrategy?)model[
-                SqlServerAnnotationNames.ValueGenerationStrategy
-            ];
+            (SqlServerValueGenerationStrategy?)
+                model[SqlServerAnnotationNames.ValueGenerationStrategy];
 
         /// <summary>
         ///     Sets the <see cref="SqlServerValueGenerationStrategy" /> to use for properties

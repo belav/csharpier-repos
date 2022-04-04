@@ -110,11 +110,8 @@ namespace System.Web.Mvc
                     PropertyFilter = bindingContext.PropertyFilter,
                     ValueProvider = bindingContext.ValueProvider
                 };
-                IList list = (IList)UpdateCollection(
-                    controllerContext,
-                    arrayBindingContext,
-                    elementType
-                );
+                IList list = (IList)
+                    UpdateCollection(controllerContext, arrayBindingContext, elementType);
 
                 if (list == null)
                 {
@@ -534,11 +531,10 @@ namespace System.Web.Mvc
             object model
         )
         {
-            BindAttribute bindAttr = (BindAttribute)GetTypeDescriptor(
-                    controllerContext,
-                    bindingContext
-                )
-                .GetAttributes()[typeof(BindAttribute)];
+            BindAttribute bindAttr = (BindAttribute)
+                GetTypeDescriptor(controllerContext, bindingContext).GetAttributes()[
+                    typeof(BindAttribute)
+                ];
             Predicate<string> newPropertyFilter =
                 (bindAttr != null)
                     ? propertyName =>

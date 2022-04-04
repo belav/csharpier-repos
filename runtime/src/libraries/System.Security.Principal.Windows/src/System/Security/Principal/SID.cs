@@ -1215,8 +1215,8 @@ namespace System.Security.Principal
 
                     for (int i = 0; i < rdl.Entries; i++)
                     {
-                        Interop.LSA_TRUST_INFORMATION ti =
-                            (Interop.LSA_TRUST_INFORMATION)Marshal.PtrToStructure<Interop.LSA_TRUST_INFORMATION>(
+                        Interop.LSA_TRUST_INFORMATION ti = (Interop.LSA_TRUST_INFORMATION)
+                            Marshal.PtrToStructure<Interop.LSA_TRUST_INFORMATION>(
                                 new IntPtr(
                                     (long)rdl.Domains
                                         + i * Marshal.SizeOf<Interop.LSA_TRUST_INFORMATION>()

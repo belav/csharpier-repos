@@ -59,8 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 if (paramCount > 0)
                 {
-                    AnonymousTypeTemplateSymbol anonymousType =
-                        (AnonymousTypeTemplateSymbol)this.ContainingType;
+                    AnonymousTypeTemplateSymbol anonymousType = (AnonymousTypeTemplateSymbol)
+                        this.ContainingType;
                     Debug.Assert(anonymousType.Properties.Length == paramCount);
 
                     // Assign fields
@@ -139,8 +139,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 //  }
 
                 // Type and type expression
-                AnonymousTypeTemplateSymbol anonymousType =
-                    (AnonymousTypeTemplateSymbol)this.ContainingType;
+                AnonymousTypeTemplateSymbol anonymousType = (AnonymousTypeTemplateSymbol)
+                    this.ContainingType;
 
                 //  local
                 BoundAssignmentOperator assignmentToTemp;
@@ -235,8 +235,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // Where GetFNVHashCode is the FNV-1a hash code.
 
                 // Type expression
-                AnonymousTypeTemplateSymbol anonymousType =
-                    (AnonymousTypeTemplateSymbol)this.ContainingType;
+                AnonymousTypeTemplateSymbol anonymousType = (AnonymousTypeTemplateSymbol)
+                    this.ContainingType;
 
                 //  INIT_HASH
                 int initHash = 0;
@@ -311,8 +311,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 //  }
 
                 // Type expression
-                AnonymousTypeTemplateSymbol anonymousType =
-                    (AnonymousTypeTemplateSymbol)this.ContainingType;
+                AnonymousTypeTemplateSymbol anonymousType = (AnonymousTypeTemplateSymbol)
+                    this.ContainingType;
 
                 //  build arguments
                 int fieldCount = anonymousType.Properties.Length;

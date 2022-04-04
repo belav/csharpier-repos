@@ -15358,14 +15358,15 @@ class MyAttribute : System.Attribute
                     "",
                     CheckAttributePropagation(
                         (
-                            (NamedTypeSymbol)program
-                                .GetMember<MethodSymbol>("test1")
-                                .GetAttribute(
-                                    "System.Runtime.CompilerServices",
-                                    "AsyncStateMachineAttribute"
-                                )
-                                .ConstructorArguments.Single()
-                                .ValueInternal
+                            (NamedTypeSymbol)
+                                program
+                                    .GetMember<MethodSymbol>("test1")
+                                    .GetAttribute(
+                                        "System.Runtime.CompilerServices",
+                                        "AsyncStateMachineAttribute"
+                                    )
+                                    .ConstructorArguments.Single()
+                                    .ValueInternal
                         ).GetMember<MethodSymbol>("MoveNext")
                     )
                 );
@@ -15373,14 +15374,15 @@ class MyAttribute : System.Attribute
                 Assert.Equal(
                     0,
                     (
-                        (NamedTypeSymbol)program
-                            .GetMember<MethodSymbol>("test2")
-                            .GetAttribute(
-                                "System.Runtime.CompilerServices",
-                                "AsyncStateMachineAttribute"
-                            )
-                            .ConstructorArguments.Single()
-                            .ValueInternal
+                        (NamedTypeSymbol)
+                            program
+                                .GetMember<MethodSymbol>("test2")
+                                .GetAttribute(
+                                    "System.Runtime.CompilerServices",
+                                    "AsyncStateMachineAttribute"
+                                )
+                                .ConstructorArguments.Single()
+                                .ValueInternal
                     )
                         .GetMember<MethodSymbol>("MoveNext")
                         .GetAttributes()
@@ -15391,14 +15393,15 @@ class MyAttribute : System.Attribute
                     "",
                     CheckAttributePropagation(
                         (
-                            (NamedTypeSymbol)program
-                                .GetMember<MethodSymbol>("Test3")
-                                .GetAttribute(
-                                    "System.Runtime.CompilerServices",
-                                    "IteratorStateMachineAttribute"
-                                )
-                                .ConstructorArguments.Single()
-                                .ValueInternal
+                            (NamedTypeSymbol)
+                                program
+                                    .GetMember<MethodSymbol>("Test3")
+                                    .GetAttribute(
+                                        "System.Runtime.CompilerServices",
+                                        "IteratorStateMachineAttribute"
+                                    )
+                                    .ConstructorArguments.Single()
+                                    .ValueInternal
                         ).GetMember<MethodSymbol>("MoveNext")
                     )
                 );
@@ -15406,14 +15409,15 @@ class MyAttribute : System.Attribute
                 Assert.Equal(
                     0,
                     (
-                        (NamedTypeSymbol)program
-                            .GetMember<MethodSymbol>("Test4")
-                            .GetAttribute(
-                                "System.Runtime.CompilerServices",
-                                "IteratorStateMachineAttribute"
-                            )
-                            .ConstructorArguments.Single()
-                            .ValueInternal
+                        (NamedTypeSymbol)
+                            program
+                                .GetMember<MethodSymbol>("Test4")
+                                .GetAttribute(
+                                    "System.Runtime.CompilerServices",
+                                    "IteratorStateMachineAttribute"
+                                )
+                                .ConstructorArguments.Single()
+                                .ValueInternal
                     )
                         .GetMember<MethodSymbol>("MoveNext")
                         .GetAttributes()
@@ -15532,14 +15536,15 @@ class MyAttribute : System.Attribute
                     "DebuggerHiddenAttribute is missing\nDebuggerStepperBoundaryAttribute is missing\n",
                     CheckAttributePropagation(
                         (
-                            (NamedTypeSymbol)program1
-                                .GetMember<MethodSymbol>("test1")
-                                .GetAttribute(
-                                    "System.Runtime.CompilerServices",
-                                    "AsyncStateMachineAttribute"
-                                )
-                                .ConstructorArguments.Single()
-                                .ValueInternal
+                            (NamedTypeSymbol)
+                                program1
+                                    .GetMember<MethodSymbol>("test1")
+                                    .GetAttribute(
+                                        "System.Runtime.CompilerServices",
+                                        "AsyncStateMachineAttribute"
+                                    )
+                                    .ConstructorArguments.Single()
+                                    .ValueInternal
                         )
                     )
                 );
@@ -15548,14 +15553,15 @@ class MyAttribute : System.Attribute
                     "DebuggerNonUserCodeAttribute is missing\nDebuggerHiddenAttribute is missing\nDebuggerStepperBoundaryAttribute is missing\nDebuggerStepThroughAttribute is missing\n",
                     CheckAttributePropagation(
                         (
-                            (NamedTypeSymbol)program2
-                                .GetMember<MethodSymbol>("test2")
-                                .GetAttribute(
-                                    "System.Runtime.CompilerServices",
-                                    "AsyncStateMachineAttribute"
-                                )
-                                .ConstructorArguments.Single()
-                                .ValueInternal
+                            (NamedTypeSymbol)
+                                program2
+                                    .GetMember<MethodSymbol>("test2")
+                                    .GetAttribute(
+                                        "System.Runtime.CompilerServices",
+                                        "AsyncStateMachineAttribute"
+                                    )
+                                    .ConstructorArguments.Single()
+                                    .ValueInternal
                         )
                     )
                 );
@@ -15564,14 +15570,15 @@ class MyAttribute : System.Attribute
                     "DebuggerHiddenAttribute is missing\nDebuggerStepperBoundaryAttribute is missing\n",
                     CheckAttributePropagation(
                         (
-                            (NamedTypeSymbol)program1
-                                .GetMember<MethodSymbol>("Test3")
-                                .GetAttribute(
-                                    "System.Runtime.CompilerServices",
-                                    "IteratorStateMachineAttribute"
-                                )
-                                .ConstructorArguments.Single()
-                                .ValueInternal
+                            (NamedTypeSymbol)
+                                program1
+                                    .GetMember<MethodSymbol>("Test3")
+                                    .GetAttribute(
+                                        "System.Runtime.CompilerServices",
+                                        "IteratorStateMachineAttribute"
+                                    )
+                                    .ConstructorArguments.Single()
+                                    .ValueInternal
                         )
                     )
                 );
@@ -15580,14 +15587,15 @@ class MyAttribute : System.Attribute
                     "DebuggerNonUserCodeAttribute is missing\nDebuggerHiddenAttribute is missing\nDebuggerStepperBoundaryAttribute is missing\nDebuggerStepThroughAttribute is missing\n",
                     CheckAttributePropagation(
                         (
-                            (NamedTypeSymbol)program2
-                                .GetMember<MethodSymbol>("Test4")
-                                .GetAttribute(
-                                    "System.Runtime.CompilerServices",
-                                    "IteratorStateMachineAttribute"
-                                )
-                                .ConstructorArguments.Single()
-                                .ValueInternal
+                            (NamedTypeSymbol)
+                                program2
+                                    .GetMember<MethodSymbol>("Test4")
+                                    .GetAttribute(
+                                        "System.Runtime.CompilerServices",
+                                        "IteratorStateMachineAttribute"
+                                    )
+                                    .ConstructorArguments.Single()
+                                    .ValueInternal
                         )
                     )
                 );

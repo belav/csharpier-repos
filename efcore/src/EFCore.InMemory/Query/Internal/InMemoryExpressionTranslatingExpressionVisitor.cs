@@ -847,10 +847,11 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 && methodCallExpression.Method.Name != nameof(Nullable<int>.GetValueOrDefault)
             )
             {
-                var result = (Expression)methodCallExpression.Update(
-                    Expression.Convert(@object, methodCallExpression.Object.Type),
-                    arguments
-                );
+                var result = (Expression)
+                    methodCallExpression.Update(
+                        Expression.Convert(@object, methodCallExpression.Object.Type),
+                        arguments
+                    );
 
                 result = ConvertToNullable(result);
                 var objectNullCheck = Expression.Equal(
@@ -1089,11 +1090,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 return newOperand;
             }
 
-            var result = (Expression)Expression.MakeUnary(
-                unaryExpression.NodeType,
-                newOperand,
-                unaryExpression.Type
-            );
+            var result = (Expression)
+                Expression.MakeUnary(unaryExpression.NodeType, newOperand, unaryExpression.Type);
             if (
                 result is UnaryExpression outerUnary
                 && outerUnary.NodeType == ExpressionType.Convert
@@ -1188,20 +1186,16 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
             if (entityReferenceExpression.SubqueryEntity != null)
             {
-                var entityShaper = (EntityShaperExpression)entityReferenceExpression
-                    .SubqueryEntity
-                    .ShaperExpression;
-                var inMemoryQueryExpression = (InMemoryQueryExpression)entityReferenceExpression
-                    .SubqueryEntity
-                    .QueryExpression;
+                var entityShaper = (EntityShaperExpression)
+                    entityReferenceExpression.SubqueryEntity.ShaperExpression;
+                var inMemoryQueryExpression = (InMemoryQueryExpression)
+                    entityReferenceExpression.SubqueryEntity.QueryExpression;
 
                 Expression readValueExpression;
-                var projectionBindingExpression =
-                    (ProjectionBindingExpression)entityShaper.ValueBufferExpression;
-                var entityProjectionExpression =
-                    (EntityProjectionExpression)inMemoryQueryExpression.GetProjection(
-                        projectionBindingExpression
-                    );
+                var projectionBindingExpression = (ProjectionBindingExpression)
+                    entityShaper.ValueBufferExpression;
+                var entityProjectionExpression = (EntityProjectionExpression)
+                    inMemoryQueryExpression.GetProjection(projectionBindingExpression);
                 readValueExpression = entityProjectionExpression.BindProperty(property);
 
                 return ProcessSingleResultScalar(
@@ -1347,9 +1341,10 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             {
                 case ConstantExpression constantExpression:
                     var values = constantExpression.GetConstantValue<IEnumerable>();
-                    var propertyValueList = (IList)Activator.CreateInstance(
-                        typeof(List<>).MakeGenericType(property.ClrType.MakeNullable())
-                    )!;
+                    var propertyValueList = (IList)
+                        Activator.CreateInstance(
+                            typeof(List<>).MakeGenericType(property.ClrType.MakeNullable())
+                        )!;
                     var propertyGetter = property.GetGetter();
                     foreach (var value in values)
                     {

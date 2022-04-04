@@ -65,10 +65,8 @@ namespace System.Security.Cryptography.Xml
         internal XmlElement GetXml(XmlDocument document)
         {
             // Create the EncryptionMethod element
-            XmlElement encryptionMethodElement = (XmlElement)document.CreateElement(
-                "EncryptionMethod",
-                EncryptedXml.XmlEncNamespaceUrl
-            );
+            XmlElement encryptionMethodElement = (XmlElement)
+                document.CreateElement("EncryptionMethod", EncryptedXml.XmlEncNamespaceUrl);
             if (!string.IsNullOrEmpty(_algorithm))
                 encryptionMethodElement.SetAttribute("Algorithm", _algorithm);
             if (_keySize > 0)

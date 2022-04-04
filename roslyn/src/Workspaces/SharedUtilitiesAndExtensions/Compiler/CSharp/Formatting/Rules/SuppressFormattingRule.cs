@@ -463,9 +463,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 );
                 var endToken = endDirective is null
                     ? (
-                          (CompilationUnitSyntax)structure.SyntaxTree.GetRoot(
-                              CancellationToken.None
-                          )
+                          (CompilationUnitSyntax)
+                              structure.SyntaxTree.GetRoot(CancellationToken.None)
                       ).EndOfFileToken
                     : endDirective.GetFirstToken(includeDirectives: true);
 

@@ -729,13 +729,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 var locations = ImmutableArray.Create(location);
                 var typeParameter =
                     (typeMap != null)
-                        ? (TypeParameterSymbol)new SourceOverridingMethodTypeParameterSymbol(
-                              typeMap,
-                              name,
-                              ordinal,
-                              locations,
-                              syntaxRefs
-                          )
+                        ? (TypeParameterSymbol)
+                              new SourceOverridingMethodTypeParameterSymbol(
+                                  typeMap,
+                                  name,
+                                  ordinal,
+                                  locations,
+                                  syntaxRefs
+                              )
                         : new SourceMethodTypeParameterSymbol(
                               this,
                               name,

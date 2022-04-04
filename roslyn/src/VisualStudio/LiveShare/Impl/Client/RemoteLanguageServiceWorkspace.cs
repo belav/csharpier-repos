@@ -110,9 +110,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
                 tableManagerProvider
             );
 
-            var runningDocumentTable = (IVsRunningDocumentTable)serviceProvider.GetService(
-                typeof(SVsRunningDocumentTable)
-            );
+            var runningDocumentTable = (IVsRunningDocumentTable)
+                serviceProvider.GetService(typeof(SVsRunningDocumentTable));
             _runningDocumentTableEventTracker = new RunningDocumentTableEventTracker(
                 threadingContext,
                 editorAdaptersFactoryService,

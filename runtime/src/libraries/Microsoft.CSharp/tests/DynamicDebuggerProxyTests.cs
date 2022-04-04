@@ -25,9 +25,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             var exception = Assert.Throws(exceptionType, () => GetItems(debugView));
 
             // Get resource string.
-            var itemValue = (string)exceptionType
-                .GetMethod("get_Empty", BindingFlags.Public | BindingFlags.Instance)
-                .Invoke(exception, new object[0]);
+            var itemValue = (string)
+                exceptionType
+                    .GetMethod("get_Empty", BindingFlags.Public | BindingFlags.Instance)
+                    .Invoke(exception, new object[0]);
             Assert.NotNull(itemValue);
         }
 

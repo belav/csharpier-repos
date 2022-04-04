@@ -1005,10 +1005,8 @@ namespace System.Diagnostics
             context = new ActivityContext(
                 new ActivityTraceId(traceIdSpan.ToString()),
                 new ActivitySpanId(spanIdSpan.ToString()),
-                (ActivityTraceFlags)ActivityTraceId.HexByteFromChars(
-                    traceParent[53],
-                    traceParent[54]
-                ),
+                (ActivityTraceFlags)
+                    ActivityTraceId.HexByteFromChars(traceParent[53], traceParent[54]),
                 traceState
             );
 

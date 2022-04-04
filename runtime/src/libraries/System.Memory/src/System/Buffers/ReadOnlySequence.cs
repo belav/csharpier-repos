@@ -670,8 +670,8 @@ namespace System.Buffers
                     ThrowHelper.ThrowArgumentOutOfRangeException_PositionOutOfRange();
 
                 // Multi-Segment Sequence
-                ReadOnlySequenceSegment<T>? currentSegment =
-                    (ReadOnlySequenceSegment<T>?)startObject;
+                ReadOnlySequenceSegment<T>? currentSegment = (ReadOnlySequenceSegment<T>?)
+                    startObject;
                 while (currentSegment != null && currentSegment != positionSequenceObject)
                 {
                     currentSegment = currentSegment.Next!;

@@ -162,14 +162,15 @@ namespace System.Speech.Recognition
                         // Get the association table
                         try
                         {
-                            cultureId = (string)typeTarget.InvokeMember(
-                                "__cultureId",
-                                BindingFlags.GetField,
-                                null,
-                                null,
-                                null,
-                                null
-                            );
+                            cultureId = (string)
+                                typeTarget.InvokeMember(
+                                    "__cultureId",
+                                    BindingFlags.GetField,
+                                    null,
+                                    null,
+                                    null,
+                                    null
+                                );
                         }
                         catch (Exception e)
                         {
@@ -187,15 +188,16 @@ namespace System.Speech.Recognition
                         {
                             try
                             {
-                                return (Grammar)assembly.CreateInstance(
-                                    typeTarget.FullName,
-                                    false,
-                                    BindingFlags.CreateInstance,
-                                    null,
-                                    onInitParameters,
-                                    null,
-                                    null
-                                );
+                                return (Grammar)
+                                    assembly.CreateInstance(
+                                        typeTarget.FullName,
+                                        false,
+                                        BindingFlags.CreateInstance,
+                                        null,
+                                        onInitParameters,
+                                        null,
+                                        null
+                                    );
                             }
                             catch (MissingMemberException)
                             {
@@ -816,14 +818,15 @@ namespace System.Speech.Recognition
                             // Get the association table
                             try
                             {
-                                cultureId = (string)typeTarget.InvokeMember(
-                                    "__cultureId",
-                                    BindingFlags.GetField,
-                                    null,
-                                    null,
-                                    null,
-                                    null
-                                );
+                                cultureId = (string)
+                                    typeTarget.InvokeMember(
+                                        "__cultureId",
+                                        BindingFlags.GetField,
+                                        null,
+                                        null,
+                                        null,
+                                        null
+                                    );
                             }
                             catch (Exception e)
                             {
@@ -853,15 +856,16 @@ namespace System.Speech.Recognition
                                     );
 
                                     // The CLR does the match for the right constructor based on the onInitParameters types
-                                    return (Grammar)assembly.CreateInstance(
-                                        typeTarget.FullName,
-                                        false,
-                                        BindingFlags.CreateInstance,
-                                        null,
-                                        initParams,
-                                        null,
-                                        null
-                                    );
+                                    return (Grammar)
+                                        assembly.CreateInstance(
+                                            typeTarget.FullName,
+                                            false,
+                                            BindingFlags.CreateInstance,
+                                            null,
+                                            initParams,
+                                            null,
+                                            null
+                                        );
                                 }
                                 catch (MissingMemberException)
                                 {

@@ -393,12 +393,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             NamedTypeSymbol fieldType = (NamedTypeSymbol)field.Type;
             Debug.Assert(fieldType.Name == "EventRegistrationTokenTable");
 
-            MethodSymbol getOrCreateMethod = (MethodSymbol)Binder.GetWellKnownTypeMember(
-                compilation,
-                WellKnownMember.System_Runtime_InteropServices_WindowsRuntime_EventRegistrationTokenTable_T__GetOrCreateEventRegistrationTokenTable,
-                diagnostics,
-                syntax: syntax
-            );
+            MethodSymbol getOrCreateMethod = (MethodSymbol)
+                Binder.GetWellKnownTypeMember(
+                    compilation,
+                    WellKnownMember.System_Runtime_InteropServices_WindowsRuntime_EventRegistrationTokenTable_T__GetOrCreateEventRegistrationTokenTable,
+                    diagnostics,
+                    syntax: syntax
+                );
 
             if ((object)getOrCreateMethod == null)
             {
@@ -412,12 +413,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ? WellKnownMember.System_Runtime_InteropServices_WindowsRuntime_EventRegistrationTokenTable_T__AddEventHandler
                 : WellKnownMember.System_Runtime_InteropServices_WindowsRuntime_EventRegistrationTokenTable_T__RemoveEventHandler;
 
-            MethodSymbol processHandlerMethod = (MethodSymbol)Binder.GetWellKnownTypeMember(
-                compilation,
-                processHandlerMember,
-                diagnostics,
-                syntax: syntax
-            );
+            MethodSymbol processHandlerMethod = (MethodSymbol)
+                Binder.GetWellKnownTypeMember(
+                    compilation,
+                    processHandlerMember,
+                    diagnostics,
+                    syntax: syntax
+                );
 
             if ((object)processHandlerMethod == null)
             {
@@ -524,9 +526,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SpecialMember updateMethodId = isAddMethod
                 ? SpecialMember.System_Delegate__Combine
                 : SpecialMember.System_Delegate__Remove;
-            MethodSymbol updateMethod = (MethodSymbol)compilation.GetSpecialTypeMember(
-                updateMethodId
-            );
+            MethodSymbol updateMethod = (MethodSymbol)
+                compilation.GetSpecialTypeMember(updateMethodId);
 
             BoundStatement @return = new BoundReturnStatement(
                 syntax,
@@ -583,9 +584,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             BoundExpression delegateUpdate;
 
-            MethodSymbol compareExchangeMethod = (MethodSymbol)compilation.GetWellKnownTypeMember(
-                WellKnownMember.System_Threading_Interlocked__CompareExchange_T
-            );
+            MethodSymbol compareExchangeMethod = (MethodSymbol)
+                compilation.GetWellKnownTypeMember(
+                    WellKnownMember.System_Threading_Interlocked__CompareExchange_T
+                );
 
             if ((object)compareExchangeMethod == null)
             {

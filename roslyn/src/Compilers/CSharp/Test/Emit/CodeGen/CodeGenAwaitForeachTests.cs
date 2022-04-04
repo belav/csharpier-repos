@@ -1833,10 +1833,8 @@ class C
             comp.VerifyDiagnostics();
 
             var tree = comp.SyntaxTrees.Single();
-            var model = (SyntaxTreeSemanticModel)comp.GetSemanticModel(
-                tree,
-                ignoreAccessibility: false
-            );
+            var model = (SyntaxTreeSemanticModel)
+                comp.GetSemanticModel(tree, ignoreAccessibility: false);
             var foreachSyntax = tree.GetRoot()
                 .DescendantNodes()
                 .OfType<ForEachStatementSyntax>()
@@ -1861,9 +1859,8 @@ class C
             Assert.Equal(ConversionKind.Identity, info.CurrentConversion.Kind);
 
             var memberModel = model.GetMemberModel(foreachSyntax);
-            BoundForEachStatement boundNode = (BoundForEachStatement)memberModel.GetUpperBoundNode(
-                foreachSyntax
-            );
+            BoundForEachStatement boundNode = (BoundForEachStatement)
+                memberModel.GetUpperBoundNode(foreachSyntax);
             ForEachEnumeratorInfo internalInfo = boundNode.EnumeratorInfoOpt;
             Assert.False(internalInfo.NeedsDisposal);
         }
@@ -1898,10 +1895,8 @@ class C
             );
 
             var tree = comp.SyntaxTrees.Single();
-            var model = (SyntaxTreeSemanticModel)comp.GetSemanticModel(
-                tree,
-                ignoreAccessibility: false
-            );
+            var model = (SyntaxTreeSemanticModel)
+                comp.GetSemanticModel(tree, ignoreAccessibility: false);
             var foreachSyntax = tree.GetRoot()
                 .DescendantNodes()
                 .OfType<ForEachStatementSyntax>()
@@ -1940,10 +1935,8 @@ unsafe class C
             );
 
             var tree = comp.SyntaxTrees.Single();
-            var model = (SyntaxTreeSemanticModel)comp.GetSemanticModel(
-                tree,
-                ignoreAccessibility: false
-            );
+            var model = (SyntaxTreeSemanticModel)
+                comp.GetSemanticModel(tree, ignoreAccessibility: false);
             var foreachSyntax = tree.GetRoot()
                 .DescendantNodes()
                 .OfType<ForEachStatementSyntax>()
@@ -1986,10 +1979,8 @@ class D
             );
 
             var tree = comp.SyntaxTrees.Single();
-            var model = (SyntaxTreeSemanticModel)comp.GetSemanticModel(
-                tree,
-                ignoreAccessibility: false
-            );
+            var model = (SyntaxTreeSemanticModel)
+                comp.GetSemanticModel(tree, ignoreAccessibility: false);
             var foreachSyntax = tree.GetRoot()
                 .DescendantNodes()
                 .OfType<ForEachStatementSyntax>()
@@ -2040,10 +2031,8 @@ class D
             );
 
             var tree = comp.SyntaxTrees.Single();
-            var model = (SyntaxTreeSemanticModel)comp.GetSemanticModel(
-                tree,
-                ignoreAccessibility: false
-            );
+            var model = (SyntaxTreeSemanticModel)
+                comp.GetSemanticModel(tree, ignoreAccessibility: false);
             var foreachSyntax = tree.GetRoot()
                 .DescendantNodes()
                 .OfType<ForEachStatementSyntax>()
@@ -2091,10 +2080,8 @@ class D
             );
 
             var tree = comp.SyntaxTrees.Single();
-            var model = (SyntaxTreeSemanticModel)comp.GetSemanticModel(
-                tree,
-                ignoreAccessibility: false
-            );
+            var model = (SyntaxTreeSemanticModel)
+                comp.GetSemanticModel(tree, ignoreAccessibility: false);
             var foreachSyntax = tree.GetRoot()
                 .DescendantNodes()
                 .OfType<ForEachStatementSyntax>()
@@ -2134,10 +2121,8 @@ class D
             );
 
             var tree = comp.SyntaxTrees.Single();
-            var model = (SyntaxTreeSemanticModel)comp.GetSemanticModel(
-                tree,
-                ignoreAccessibility: false
-            );
+            var model = (SyntaxTreeSemanticModel)
+                comp.GetSemanticModel(tree, ignoreAccessibility: false);
             var foreachSyntax = tree.GetRoot()
                 .DescendantNodes()
                 .OfType<ForEachStatementSyntax>()
@@ -2401,10 +2386,8 @@ class C
             );
 
             var tree = comp.SyntaxTrees.Single();
-            var model = (SyntaxTreeSemanticModel)comp.GetSemanticModel(
-                tree,
-                ignoreAccessibility: false
-            );
+            var model = (SyntaxTreeSemanticModel)
+                comp.GetSemanticModel(tree, ignoreAccessibility: false);
             var foreachSyntax = tree.GetRoot()
                 .DescendantNodes()
                 .OfType<ForEachStatementSyntax>()
@@ -2479,10 +2462,8 @@ class C
             CompileAndVerify(comp, expectedOutput: "Item(1) Dispose Done");
 
             var tree = comp.SyntaxTrees.First();
-            var model = (SyntaxTreeSemanticModel)comp.GetSemanticModel(
-                tree,
-                ignoreAccessibility: false
-            );
+            var model = (SyntaxTreeSemanticModel)
+                comp.GetSemanticModel(tree, ignoreAccessibility: false);
             var foreachSyntax = tree.GetRoot()
                 .DescendantNodes()
                 .OfType<ForEachStatementSyntax>()
@@ -2585,10 +2566,8 @@ class C
         private static void VerifyEmptyForEachStatementInfo(CSharpCompilation comp)
         {
             var tree = comp.SyntaxTrees.First();
-            var model = (SyntaxTreeSemanticModel)comp.GetSemanticModel(
-                tree,
-                ignoreAccessibility: false
-            );
+            var model = (SyntaxTreeSemanticModel)
+                comp.GetSemanticModel(tree, ignoreAccessibility: false);
             var foreachSyntax = tree.GetRoot()
                 .DescendantNodes()
                 .OfType<ForEachStatementSyntax>()
@@ -2724,10 +2703,8 @@ class C
             );
 
             var tree = comp.SyntaxTrees.First();
-            var model = (SyntaxTreeSemanticModel)comp.GetSemanticModel(
-                tree,
-                ignoreAccessibility: false
-            );
+            var model = (SyntaxTreeSemanticModel)
+                comp.GetSemanticModel(tree, ignoreAccessibility: false);
             var foreachSyntax = tree.GetRoot()
                 .DescendantNodes()
                 .OfType<ForEachStatementSyntax>()
@@ -2789,19 +2766,16 @@ public class C
             comp.VerifyDiagnostics();
 
             var tree = comp.SyntaxTrees.Single();
-            var model = (SyntaxTreeSemanticModel)comp.GetSemanticModel(
-                tree,
-                ignoreAccessibility: false
-            );
+            var model = (SyntaxTreeSemanticModel)
+                comp.GetSemanticModel(tree, ignoreAccessibility: false);
             var foreachSyntax = tree.GetRoot()
                 .DescendantNodes()
                 .OfType<ForEachStatementSyntax>()
                 .Single();
 
             var memberModel = model.GetMemberModel(foreachSyntax);
-            BoundForEachStatement boundNode = (BoundForEachStatement)memberModel.GetUpperBoundNode(
-                foreachSyntax
-            );
+            BoundForEachStatement boundNode = (BoundForEachStatement)
+                memberModel.GetUpperBoundNode(foreachSyntax);
             ForEachEnumeratorInfo internalInfo = boundNode.EnumeratorInfoOpt;
             Assert.True(internalInfo.NeedsDisposal);
 
@@ -2864,10 +2838,8 @@ public class C
             comp.VerifyDiagnostics();
 
             var tree = comp.SyntaxTrees.Single();
-            var model = (SyntaxTreeSemanticModel)comp.GetSemanticModel(
-                tree,
-                ignoreAccessibility: false
-            );
+            var model = (SyntaxTreeSemanticModel)
+                comp.GetSemanticModel(tree, ignoreAccessibility: false);
             var foreachSyntax = tree.GetRoot()
                 .DescendantNodes()
                 .OfType<ForEachStatementSyntax>()
@@ -3071,19 +3043,16 @@ class C
             comp.VerifyDiagnostics();
 
             var tree = comp.SyntaxTrees.Single();
-            var model = (SyntaxTreeSemanticModel)comp.GetSemanticModel(
-                tree,
-                ignoreAccessibility: false
-            );
+            var model = (SyntaxTreeSemanticModel)
+                comp.GetSemanticModel(tree, ignoreAccessibility: false);
             var foreachSyntax = tree.GetRoot()
                 .DescendantNodes()
                 .OfType<ForEachStatementSyntax>()
                 .Single();
 
             var memberModel = model.GetMemberModel(foreachSyntax);
-            BoundForEachStatement boundNode = (BoundForEachStatement)memberModel.GetUpperBoundNode(
-                foreachSyntax
-            );
+            BoundForEachStatement boundNode = (BoundForEachStatement)
+                memberModel.GetUpperBoundNode(foreachSyntax);
             ForEachEnumeratorInfo internalInfo = boundNode.EnumeratorInfoOpt;
             Assert.True(internalInfo.NeedsDisposal);
 
@@ -3135,10 +3104,8 @@ class Client
             comp.VerifyDiagnostics();
 
             var tree = comp.SyntaxTrees.Single();
-            var model = (SyntaxTreeSemanticModel)comp.GetSemanticModel(
-                tree,
-                ignoreAccessibility: false
-            );
+            var model = (SyntaxTreeSemanticModel)
+                comp.GetSemanticModel(tree, ignoreAccessibility: false);
             var foreachSyntax = tree.GetRoot()
                 .DescendantNodes()
                 .OfType<ForEachStatementSyntax>()
@@ -3275,10 +3242,8 @@ class C : IAsyncEnumerable<int>
             );
 
             var tree = comp.SyntaxTrees.First();
-            var model = (SyntaxTreeSemanticModel)comp.GetSemanticModel(
-                tree,
-                ignoreAccessibility: false
-            );
+            var model = (SyntaxTreeSemanticModel)
+                comp.GetSemanticModel(tree, ignoreAccessibility: false);
             var foreachSyntax = tree.GetRoot()
                 .DescendantNodes()
                 .OfType<ForEachStatementSyntax>()
@@ -4093,10 +4058,8 @@ class Element
             );
 
             var tree = comp.SyntaxTrees.Single();
-            var model = (SyntaxTreeSemanticModel)comp.GetSemanticModel(
-                tree,
-                ignoreAccessibility: false
-            );
+            var model = (SyntaxTreeSemanticModel)
+                comp.GetSemanticModel(tree, ignoreAccessibility: false);
             var foreachSyntax = tree.GetRoot()
                 .DescendantNodes()
                 .OfType<ForEachStatementSyntax>()
@@ -4192,10 +4155,8 @@ struct C : IAsyncEnumerable<int>
             );
 
             var tree = comp.SyntaxTrees.Single();
-            var model = (SyntaxTreeSemanticModel)comp.GetSemanticModel(
-                tree,
-                ignoreAccessibility: false
-            );
+            var model = (SyntaxTreeSemanticModel)
+                comp.GetSemanticModel(tree, ignoreAccessibility: false);
             var foreachSyntax = tree.GetRoot()
                 .DescendantNodes()
                 .OfType<ForEachStatementSyntax>()
@@ -4328,10 +4289,8 @@ public static class Extensions
             );
 
             var tree = comp.SyntaxTrees.Single();
-            var model = (SyntaxTreeSemanticModel)comp.GetSemanticModel(
-                tree,
-                ignoreAccessibility: false
-            );
+            var model = (SyntaxTreeSemanticModel)
+                comp.GetSemanticModel(tree, ignoreAccessibility: false);
             var foreachSyntax = tree.GetRoot()
                 .DescendantNodes()
                 .OfType<ForEachVariableStatementSyntax>()
@@ -4720,10 +4679,8 @@ class C
             );
 
             var tree = comp.SyntaxTrees.Single();
-            var model = (SyntaxTreeSemanticModel)comp.GetSemanticModel(
-                tree,
-                ignoreAccessibility: false
-            );
+            var model = (SyntaxTreeSemanticModel)
+                comp.GetSemanticModel(tree, ignoreAccessibility: false);
             var foreachSyntax = tree.GetRoot()
                 .DescendantNodes()
                 .OfType<ForEachStatementSyntax>()
@@ -4826,10 +4783,8 @@ class C
             );
 
             var tree = comp.SyntaxTrees.Single();
-            var model = (SyntaxTreeSemanticModel)comp.GetSemanticModel(
-                tree,
-                ignoreAccessibility: false
-            );
+            var model = (SyntaxTreeSemanticModel)
+                comp.GetSemanticModel(tree, ignoreAccessibility: false);
             var foreachSyntax = tree.GetRoot()
                 .DescendantNodes()
                 .OfType<ForEachStatementSyntax>()
@@ -5074,10 +5029,8 @@ class C
             );
 
             var tree = comp.SyntaxTrees.Single();
-            var model = (SyntaxTreeSemanticModel)comp.GetSemanticModel(
-                tree,
-                ignoreAccessibility: false
-            );
+            var model = (SyntaxTreeSemanticModel)
+                comp.GetSemanticModel(tree, ignoreAccessibility: false);
             var foreachSyntax = tree.GetRoot()
                 .DescendantNodes()
                 .OfType<ForEachStatementSyntax>()
@@ -6275,10 +6228,8 @@ public static class Extensions
             CompileAndVerify(comp, expectedOutput: "123");
 
             var tree = comp.SyntaxTrees.Single();
-            var model = (SyntaxTreeSemanticModel)comp.GetSemanticModel(
-                tree,
-                ignoreAccessibility: false
-            );
+            var model = (SyntaxTreeSemanticModel)
+                comp.GetSemanticModel(tree, ignoreAccessibility: false);
             var foreachSyntax = tree.GetRoot()
                 .DescendantNodes()
                 .OfType<ForEachStatementSyntax>()

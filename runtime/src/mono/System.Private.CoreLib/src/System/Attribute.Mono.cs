@@ -76,22 +76,24 @@ namespace System
             (Attribute[])CustomAttribute.GetCustomAttributes(element, inherit);
 
         public static Attribute[] GetCustomAttributes(Assembly element, Type attributeType) =>
-            (Attribute[])CustomAttribute.GetCustomAttributes(
-                (ICustomAttributeProvider)element,
-                attributeType,
-                true
-            );
+            (Attribute[])
+                CustomAttribute.GetCustomAttributes(
+                    (ICustomAttributeProvider)element,
+                    attributeType,
+                    true
+                );
 
         public static Attribute[] GetCustomAttributes(
             Assembly element,
             Type attributeType,
             bool inherit
         ) =>
-            (Attribute[])CustomAttribute.GetCustomAttributes(
-                (ICustomAttributeProvider)element,
-                attributeType,
-                inherit
-            );
+            (Attribute[])
+                CustomAttribute.GetCustomAttributes(
+                    (ICustomAttributeProvider)element,
+                    attributeType,
+                    inherit
+                );
 
         public static Attribute[] GetCustomAttributes(MemberInfo element) =>
             (Attribute[])CustomAttribute.GetCustomAttributes(element, true);
@@ -100,22 +102,24 @@ namespace System
             (Attribute[])CustomAttribute.GetCustomAttributes(element, inherit);
 
         public static Attribute[] GetCustomAttributes(MemberInfo element, Type attributeType) =>
-            (Attribute[])CustomAttribute.GetCustomAttributes(
-                (ICustomAttributeProvider)element,
-                attributeType,
-                true
-            );
+            (Attribute[])
+                CustomAttribute.GetCustomAttributes(
+                    (ICustomAttributeProvider)element,
+                    attributeType,
+                    true
+                );
 
         public static Attribute[] GetCustomAttributes(
             MemberInfo element,
             Type attributeType,
             bool inherit
         ) =>
-            (Attribute[])CustomAttribute.GetCustomAttributes(
-                (ICustomAttributeProvider)element,
-                attributeType,
-                inherit
-            );
+            (Attribute[])
+                CustomAttribute.GetCustomAttributes(
+                    (ICustomAttributeProvider)element,
+                    attributeType,
+                    inherit
+                );
 
         public static Attribute[] GetCustomAttributes(Module element) =>
             (Attribute[])CustomAttribute.GetCustomAttributes(element, true);
@@ -124,22 +128,24 @@ namespace System
             (Attribute[])CustomAttribute.GetCustomAttributes(element, inherit);
 
         public static Attribute[] GetCustomAttributes(Module element, Type attributeType) =>
-            (Attribute[])CustomAttribute.GetCustomAttributes(
-                (ICustomAttributeProvider)element,
-                attributeType,
-                true
-            );
+            (Attribute[])
+                CustomAttribute.GetCustomAttributes(
+                    (ICustomAttributeProvider)element,
+                    attributeType,
+                    true
+                );
 
         public static Attribute[] GetCustomAttributes(
             Module element,
             Type attributeType,
             bool inherit
         ) =>
-            (Attribute[])CustomAttribute.GetCustomAttributes(
-                (ICustomAttributeProvider)element,
-                attributeType,
-                inherit
-            );
+            (Attribute[])
+                CustomAttribute.GetCustomAttributes(
+                    (ICustomAttributeProvider)element,
+                    attributeType,
+                    inherit
+                );
 
         public static Attribute[] GetCustomAttributes(ParameterInfo element) =>
             (Attribute[])CustomAttribute.GetCustomAttributes(element, true);
@@ -148,22 +154,24 @@ namespace System
             (Attribute[])CustomAttribute.GetCustomAttributes(element, inherit);
 
         public static Attribute[] GetCustomAttributes(ParameterInfo element, Type attributeType) =>
-            (Attribute[])CustomAttribute.GetCustomAttributes(
-                (ICustomAttributeProvider)element,
-                attributeType,
-                true
-            );
+            (Attribute[])
+                CustomAttribute.GetCustomAttributes(
+                    (ICustomAttributeProvider)element,
+                    attributeType,
+                    true
+                );
 
         public static Attribute[] GetCustomAttributes(
             ParameterInfo element,
             Type attributeType,
             bool inherit
         ) =>
-            (Attribute[])CustomAttribute.GetCustomAttributes(
-                (ICustomAttributeProvider)element,
-                attributeType,
-                inherit
-            );
+            (Attribute[])
+                CustomAttribute.GetCustomAttributes(
+                    (ICustomAttributeProvider)element,
+                    attributeType,
+                    inherit
+                );
 
         public static bool IsDefined(Assembly element, Type attributeType) =>
             CustomAttribute.IsDefined((ICustomAttributeProvider)element, attributeType, true);

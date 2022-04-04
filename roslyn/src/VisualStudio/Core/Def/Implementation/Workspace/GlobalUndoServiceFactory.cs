@@ -63,9 +63,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             {
                 _threadingContext = threadingContext;
                 _undoHistoryRegistry = undoHistoryRegistry;
-                _undoManager = (IVsLinkedUndoTransactionManager)serviceProvider.GetService(
-                    typeof(SVsLinkedUndoTransactionManager)
-                );
+                _undoManager = (IVsLinkedUndoTransactionManager)
+                    serviceProvider.GetService(typeof(SVsLinkedUndoTransactionManager));
                 _lazyVSWorkspace = lazyVSWorkspace;
             }
 

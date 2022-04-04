@@ -212,11 +212,8 @@ internal class CertificateConfigLoader : ICertificateConfigLoader
         var storeLocation = StoreLocation.CurrentUser;
         if (!string.IsNullOrEmpty(location))
         {
-            storeLocation = (StoreLocation)Enum.Parse(
-                typeof(StoreLocation),
-                location,
-                ignoreCase: true
-            );
+            storeLocation = (StoreLocation)
+                Enum.Parse(typeof(StoreLocation), location, ignoreCase: true);
         }
         var allowInvalid = certInfo.AllowInvalid ?? false;
 

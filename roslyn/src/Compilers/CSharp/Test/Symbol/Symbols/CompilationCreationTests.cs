@@ -110,7 +110,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 if (
                     i == (int)SpecialType.System_Runtime_CompilerServices_RuntimeFeature
                     || i
-                        == (int)SpecialType.System_Runtime_CompilerServices_PreserveBaseOverridesAttribute
+                        == (int)
+                            SpecialType.System_Runtime_CompilerServices_PreserveBaseOverridesAttribute
                 )
                 {
                     Assert.True(type.IsErrorType()); // Not available
@@ -3904,11 +3905,8 @@ public class C5 :
 
             var type4 = asm4_V2.GlobalNamespace.GetTypeMembers("C4").Single();
 
-            var retval1 = (NamedTypeSymbol)type3
-                .GetMembers("Foo")
-                .OfType<MethodSymbol>()
-                .Single()
-                .ReturnType;
+            var retval1 = (NamedTypeSymbol)
+                type3.GetMembers("Foo").OfType<MethodSymbol>().Single().ReturnType;
 
             Assert.Equal("C1<C3>.C2<C4>", retval1.ToTestDisplayString());
 
@@ -4254,19 +4252,16 @@ class Module1
             );
 
             SourceAssemblySymbol c1AsmSource = (SourceAssemblySymbol)c1.Assembly;
-            PEAssemblySymbol Lib1_V1 = (PEAssemblySymbol)c1AsmSource.Modules[
-                0
-            ].GetReferencedAssemblySymbols()[1];
+            PEAssemblySymbol Lib1_V1 = (PEAssemblySymbol)
+                c1AsmSource.Modules[0].GetReferencedAssemblySymbols()[1];
             PEModuleSymbol module1 = (PEModuleSymbol)c1AsmSource.Modules[1];
 
             Assert.Equal(LocationKind.MetadataFile, ((MetadataLocation)Lib1_V1.Locations[0]).Kind);
             SourceAssemblySymbol c2AsmSource = (SourceAssemblySymbol)c2.Assembly;
-            RetargetingAssemblySymbol c1AsmRef = (RetargetingAssemblySymbol)c2AsmSource.Modules[
-                0
-            ].GetReferencedAssemblySymbols()[2];
-            PEAssemblySymbol Lib1_V2 = (PEAssemblySymbol)c2AsmSource.Modules[
-                0
-            ].GetReferencedAssemblySymbols()[1];
+            RetargetingAssemblySymbol c1AsmRef = (RetargetingAssemblySymbol)
+                c2AsmSource.Modules[0].GetReferencedAssemblySymbols()[2];
+            PEAssemblySymbol Lib1_V2 = (PEAssemblySymbol)
+                c2AsmSource.Modules[0].GetReferencedAssemblySymbols()[1];
             PEModuleSymbol module2 = (PEModuleSymbol)c1AsmRef.Modules[1];
 
             Assert.Equal(1, Lib1_V1.Identity.Version.Major);

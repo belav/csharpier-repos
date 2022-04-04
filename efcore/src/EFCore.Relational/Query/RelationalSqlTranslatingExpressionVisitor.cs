@@ -871,15 +871,12 @@ namespace Microsoft.EntityFrameworkCore.Query
                         var discriminatorValues = derivedType.GetTptDiscriminatorValues();
                         if (entityReferenceExpression.SubqueryEntity != null)
                         {
-                            var entityShaper = (EntityShaperExpression)entityReferenceExpression
-                                .SubqueryEntity
-                                .ShaperExpression;
-                            var entityProjection = (EntityProjectionExpression)Visit(
-                                entityShaper.ValueBufferExpression
-                            );
-                            var subSelectExpression = (SelectExpression)entityReferenceExpression
-                                .SubqueryEntity
-                                .QueryExpression;
+                            var entityShaper = (EntityShaperExpression)
+                                entityReferenceExpression.SubqueryEntity.ShaperExpression;
+                            var entityProjection = (EntityProjectionExpression)
+                                Visit(entityShaper.ValueBufferExpression);
+                            var subSelectExpression = (SelectExpression)
+                                entityReferenceExpression.SubqueryEntity.QueryExpression;
 
                             var predicate = GeneratePredicateTPT(entityProjection);
 
@@ -900,9 +897,10 @@ namespace Microsoft.EntityFrameworkCore.Query
 
                         if (entityReferenceExpression.ParameterEntity != null)
                         {
-                            var entityProjection = (EntityProjectionExpression)Visit(
-                                entityReferenceExpression.ParameterEntity.ValueBufferExpression
-                            );
+                            var entityProjection = (EntityProjectionExpression)
+                                Visit(
+                                    entityReferenceExpression.ParameterEntity.ValueBufferExpression
+                                );
 
                             return GeneratePredicateTPT(entityProjection);
                         }
@@ -1137,10 +1135,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Select(p => entityProjectionExpression.BindProperty(p))
                         .Select(
                             c =>
-                                (SqlExpression)_sqlExpressionFactory.NotEqual(
-                                    c,
-                                    _sqlExpressionFactory.Constant(null)
-                                )
+                                (SqlExpression)
+                                    _sqlExpressionFactory.NotEqual(
+                                        c,
+                                        _sqlExpressionFactory.Constant(null)
+                                    )
                         )
                         .Aggregate((a, b) => _sqlExpressionFactory.AndAlso(a, b));
                 }
@@ -1156,10 +1155,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                             .Select(p => entityProjectionExpression.BindProperty(p))
                             .Select(
                                 c =>
-                                    (SqlExpression)_sqlExpressionFactory.NotEqual(
-                                        c,
-                                        _sqlExpressionFactory.Constant(null)
-                                    )
+                                    (SqlExpression)
+                                        _sqlExpressionFactory.NotEqual(
+                                            c,
+                                            _sqlExpressionFactory.Constant(null)
+                                        )
                             )
                             .Aggregate((a, b) => _sqlExpressionFactory.OrElse(a, b));
 
@@ -1189,20 +1189,16 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             if (entityReferenceExpression.SubqueryEntity != null)
             {
-                var entityShaper = (EntityShaperExpression)entityReferenceExpression
-                    .SubqueryEntity
-                    .ShaperExpression;
-                var subSelectExpression = (SelectExpression)entityReferenceExpression
-                    .SubqueryEntity
-                    .QueryExpression;
+                var entityShaper = (EntityShaperExpression)
+                    entityReferenceExpression.SubqueryEntity.ShaperExpression;
+                var subSelectExpression = (SelectExpression)
+                    entityReferenceExpression.SubqueryEntity.QueryExpression;
 
                 SqlExpression innerProjection;
-                var projectionBindingExpression =
-                    (ProjectionBindingExpression)entityShaper.ValueBufferExpression;
-                var entityProjectionExpression =
-                    (EntityProjectionExpression)subSelectExpression.GetProjection(
-                        projectionBindingExpression
-                    );
+                var projectionBindingExpression = (ProjectionBindingExpression)
+                    entityShaper.ValueBufferExpression;
+                var entityProjectionExpression = (EntityProjectionExpression)
+                    subSelectExpression.GetProjection(projectionBindingExpression);
                 innerProjection = entityProjectionExpression.BindProperty(property);
                 subSelectExpression.ReplaceProjection(new List<Expression>());
                 subSelectExpression.AddToProjection(innerProjection);
@@ -1333,9 +1329,10 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 case SqlConstantExpression sqlConstantExpression:
                     var values = (IEnumerable)sqlConstantExpression.Value!;
-                    var propertyValueList = (IList)Activator.CreateInstance(
-                        typeof(List<>).MakeGenericType(property.ClrType.MakeNullable())
-                    )!;
+                    var propertyValueList = (IList)
+                        Activator.CreateInstance(
+                            typeof(List<>).MakeGenericType(property.ClrType.MakeNullable())
+                        )!;
                     var propertyGetter = property.GetGetter();
                     foreach (var value in values)
                     {

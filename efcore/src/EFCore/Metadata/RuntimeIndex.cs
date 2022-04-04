@@ -118,14 +118,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <inheritdoc />
         [DebuggerStepThrough]
         IDependentKeyValueFactory<TKey> IIndex.GetNullableValueFactory<TKey>() =>
-            (IDependentKeyValueFactory<TKey>)NonCapturingLazyInitializer.EnsureInitialized(
-                ref _nullableValueFactory,
-                this,
-                static index =>
-                {
-                    index.EnsureReadOnly();
-                    return new CompositeValueFactory(index.Properties);
-                }
-            );
+            (IDependentKeyValueFactory<TKey>)
+                NonCapturingLazyInitializer.EnsureInitialized(
+                    ref _nullableValueFactory,
+                    this,
+                    static index =>
+                    {
+                        index.EnsureReadOnly();
+                        return new CompositeValueFactory(index.Properties);
+                    }
+                );
     }
 }

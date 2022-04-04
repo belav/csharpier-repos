@@ -94,8 +94,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         public Array GetProviderContexts()
         {
             // Return just the File provider context so that just the browse tab shows up.
-            var context = (IVsFileReferenceProviderContext)GetReferenceManager()
-                .CreateProviderContext(VSConstants.FileReferenceProvider_Guid);
+            var context = (IVsFileReferenceProviderContext)
+                GetReferenceManager().CreateProviderContext(VSConstants.FileReferenceProvider_Guid);
             context.BrowseFilter = string.Format(
                 "{0} (*.dll)\0*.dll\0",
                 SolutionExplorerShim.Analyzer_Files

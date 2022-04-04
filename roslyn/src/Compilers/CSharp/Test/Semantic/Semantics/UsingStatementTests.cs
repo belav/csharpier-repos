@@ -1621,9 +1621,8 @@ class C
             // the type info uses the type inferred for the first declared local
             Assert.Equal(
                 (
-                    (ILocalSymbol)model.GetDeclaredSymbol(
-                        usingStatement.Declaration.Variables.First()
-                    )
+                    (ILocalSymbol)
+                        model.GetDeclaredSymbol(usingStatement.Declaration.Variables.First())
                 ).Type,
                 typeInfo.Symbol
             );

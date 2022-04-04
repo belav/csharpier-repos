@@ -101,9 +101,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         public virtual TBuilder MigrationsAssembly(string? assemblyName) =>
             WithOption(
                 e =>
-                    (TExtension)e.WithMigrationsAssembly(
-                        Check.NullButNotEmpty(assemblyName, nameof(assemblyName))
-                    )
+                    (TExtension)
+                        e.WithMigrationsAssembly(
+                            Check.NullButNotEmpty(assemblyName, nameof(assemblyName))
+                        )
             );
 
         /// <summary>
@@ -122,8 +123,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             return WithOption(
                 e =>
-                    (TExtension)e.WithMigrationsHistoryTableName(tableName)
-                        .WithMigrationsHistoryTableSchema(schema)
+                    (TExtension)
+                        e.WithMigrationsHistoryTableName(tableName)
+                            .WithMigrationsHistoryTableSchema(schema)
             );
         }
 
@@ -163,9 +165,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         ) =>
             WithOption(
                 e =>
-                    (TExtension)e.WithExecutionStrategyFactory(
-                        Check.NotNull(getExecutionStrategy, nameof(getExecutionStrategy))
-                    )
+                    (TExtension)
+                        e.WithExecutionStrategyFactory(
+                            Check.NotNull(getExecutionStrategy, nameof(getExecutionStrategy))
+                        )
             );
 
         /// <summary>

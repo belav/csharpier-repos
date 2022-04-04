@@ -163,8 +163,8 @@ namespace System.DirectoryServices.AccountManagement
             string userSuppliedServername = _storeCtx.UserSuppliedServerName;
 
             UnsafeNativeMethods.Pathname pathCracker = new UnsafeNativeMethods.Pathname();
-            UnsafeNativeMethods.IADsPathname pathName =
-                (UnsafeNativeMethods.IADsPathname)pathCracker;
+            UnsafeNativeMethods.IADsPathname pathName = (UnsafeNativeMethods.IADsPathname)
+                pathCracker;
             pathName.EscapedMode =
                 2 /* ADS_ESCAPEDMODE_ON */
             ;

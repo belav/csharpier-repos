@@ -54,10 +54,8 @@ namespace System.Globalization
                 );
 
                 // They want user overrides, see if the user calendar matches the input calendar
-                CalendarId userCalendar = (CalendarId)CultureData.GetLocaleInfoExInt(
-                    localeName,
-                    LOCALE_ICALENDARTYPE
-                );
+                CalendarId userCalendar = (CalendarId)
+                    CultureData.GetLocaleInfoExInt(localeName, LOCALE_ICALENDARTYPE);
 
                 // If the calendars were the same, see if the locales were the same
                 if (userCalendar == calendarId)
@@ -329,10 +327,8 @@ namespace System.Globalization
             if ((lcType != 0) && ((lcType & CAL_NOUSEROVERRIDE) == 0))
             {
                 // They want user overrides, see if the user calendar matches the input calendar
-                CalendarId userCalendar = (CalendarId)CultureData.GetLocaleInfoExInt(
-                    localeName,
-                    LOCALE_ICALENDARTYPE
-                );
+                CalendarId userCalendar = (CalendarId)
+                    CultureData.GetLocaleInfoExInt(localeName, LOCALE_ICALENDARTYPE);
 
                 // If the calendars were the same, see if the locales were the same
                 if (userCalendar == calendar)

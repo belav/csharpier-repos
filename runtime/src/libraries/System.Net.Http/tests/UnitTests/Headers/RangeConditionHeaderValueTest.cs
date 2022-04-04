@@ -132,9 +132,8 @@ namespace System.Net.Http.Tests
             RangeConditionHeaderValue source = new RangeConditionHeaderValue(
                 new EntityTagHeaderValue("\"x\"")
             );
-            RangeConditionHeaderValue clone = (RangeConditionHeaderValue)(
-                (ICloneable)source
-            ).Clone();
+            RangeConditionHeaderValue clone = (RangeConditionHeaderValue)
+                ((ICloneable)source).Clone();
 
             Assert.Equal(source.EntityTag, clone.EntityTag);
             Assert.Null(clone.Date);

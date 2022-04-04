@@ -334,10 +334,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
                         );
                         var nameHandle = getName(readers[typeGeneration], genEntityHandle);
 
-                        var genNameHandle = (StringHandle)aggregator.GetGenerationHandle(
-                            nameHandle,
-                            out int nameGeneration
-                        );
+                        var genNameHandle = (StringHandle)
+                            aggregator.GetGenerationHandle(nameHandle, out int nameGeneration);
                         return readers[nameGeneration].GetString(genNameHandle);
                     }
                 )

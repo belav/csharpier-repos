@@ -45,9 +45,8 @@ public class AssemblyExtension : RazorExtension
             // There's no real protection/exception handling here because this set isn't really user-extensible
             // right now. This would be a great place to add some additional diagnostics and hardening in the
             // future.
-            var initializer = (RazorExtensionInitializer)Activator.CreateInstance(
-                attribute.InitializerType
-            );
+            var initializer = (RazorExtensionInitializer)
+                Activator.CreateInstance(attribute.InitializerType);
             return initializer;
         }
 

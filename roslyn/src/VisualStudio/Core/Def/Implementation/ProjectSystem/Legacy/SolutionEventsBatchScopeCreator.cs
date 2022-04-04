@@ -132,9 +132,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
             }
 
             // It's possible that we're loading after the solution has already fully loaded, so see if we missed the event
-            var shellMonitorSelection = (IVsMonitorSelection)_serviceProvider.GetService(
-                typeof(SVsShellMonitorSelection)
-            );
+            var shellMonitorSelection = (IVsMonitorSelection)
+                _serviceProvider.GetService(typeof(SVsShellMonitorSelection));
 
             if (
                 ErrorHandler.Succeeded(
@@ -169,9 +168,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
                 return;
             }
 
-            var runningDocumentTable = (IVsRunningDocumentTable)_serviceProvider.GetService(
-                typeof(SVsRunningDocumentTable)
-            );
+            var runningDocumentTable = (IVsRunningDocumentTable)
+                _serviceProvider.GetService(typeof(SVsRunningDocumentTable));
 
             if (
                 ErrorHandler.Succeeded(
@@ -202,9 +200,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
                 return;
             }
 
-            var runningDocumentTable = (IVsRunningDocumentTable)_serviceProvider.GetService(
-                typeof(SVsRunningDocumentTable)
-            );
+            var runningDocumentTable = (IVsRunningDocumentTable)
+                _serviceProvider.GetService(typeof(SVsRunningDocumentTable));
             runningDocumentTable.UnadviseRunningDocTableEvents(
                 _runningDocumentTableEventsCookie.Value
             );

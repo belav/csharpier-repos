@@ -401,10 +401,8 @@ namespace System.ComponentModel.Tests
                     Source = info.GetValue(nameof(Source), Type.GetType(sourceType));
                 }
 
-                string destinationType = (string)info.GetValue(
-                    nameof(DestinationType),
-                    typeof(string)
-                );
+                string destinationType = (string)
+                    info.GetValue(nameof(DestinationType), typeof(string));
                 if (destinationType != null)
                 {
                     DestinationType = Type.GetType(destinationType);
@@ -422,10 +420,8 @@ namespace System.ComponentModel.Tests
                 string contextType = (string)info.GetValue("ContextType", typeof(string));
                 if (contextType != null)
                 {
-                    Context = (ITypeDescriptorContext)info.GetValue(
-                        nameof(Context),
-                        Type.GetType(contextType)
-                    );
+                    Context = (ITypeDescriptorContext)
+                        info.GetValue(nameof(Context), Type.GetType(contextType));
                 }
 
                 string expectedType = (string)info.GetValue("ExpectedType", typeof(string));
@@ -434,28 +430,22 @@ namespace System.ComponentModel.Tests
                     Expected = info.GetValue(nameof(Expected), Type.GetType(expectedType));
                 }
 
-                string netCoreExceptionType = (string)info.GetValue(
-                    nameof(NetCoreExceptionType),
-                    typeof(string)
-                );
+                string netCoreExceptionType = (string)
+                    info.GetValue(nameof(NetCoreExceptionType), typeof(string));
                 if (netCoreExceptionType != null)
                 {
                     NetCoreExceptionType = Type.GetType(netCoreExceptionType);
                 }
 
-                string netFrameworkExceptionType = (string)info.GetValue(
-                    nameof(NetFrameworkExceptionType),
-                    typeof(string)
-                );
+                string netFrameworkExceptionType = (string)
+                    info.GetValue(nameof(NetFrameworkExceptionType), typeof(string));
                 if (netFrameworkExceptionType != null)
                 {
                     NetFrameworkExceptionType = Type.GetType(netFrameworkExceptionType);
                 }
 
-                string remoteInvokeCulture = (string)info.GetValue(
-                    nameof(RemoteInvokeCulture),
-                    typeof(string)
-                );
+                string remoteInvokeCulture = (string)
+                    info.GetValue(nameof(RemoteInvokeCulture), typeof(string));
                 if (remoteInvokeCulture != null)
                 {
                     RemoteInvokeCulture =

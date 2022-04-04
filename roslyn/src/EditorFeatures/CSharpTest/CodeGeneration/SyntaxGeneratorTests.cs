@@ -83,9 +83,8 @@ class C
 
             Assert.Empty(diagnostics);
 
-            var replacement = (ReturnStatementSyntax)g.ReturnStatement(
-                g.NameOfExpression(g.IdentifierName("M"))
-            );
+            var replacement = (ReturnStatementSyntax)
+                g.ReturnStatement(g.NameOfExpression(g.IdentifierName("M")));
             Assert.True(
                 semanticModel.TryGetSpeculativeSemanticModel(
                     statement.SpanStart,

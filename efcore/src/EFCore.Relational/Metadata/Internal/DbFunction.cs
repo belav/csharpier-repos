@@ -580,11 +580,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                           this,
                           static dbFunction =>
                           {
-                              var relationalTypeMappingSource = (IRelationalTypeMappingSource)(
-                                  (IModel)dbFunction.Model
-                              )
-                                  .GetModelDependencies()
-                                  .TypeMappingSource;
+                              var relationalTypeMappingSource = (IRelationalTypeMappingSource)
+                                  ((IModel)dbFunction.Model)
+                                      .GetModelDependencies()
+                                      .TypeMappingSource;
                               return !string.IsNullOrEmpty(dbFunction._storeType)
                                 ? relationalTypeMappingSource.FindMapping(dbFunction._storeType)!
                                 : relationalTypeMappingSource.FindMapping(

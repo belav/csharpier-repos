@@ -77,13 +77,11 @@ namespace System.Text.Unicode
                     // It's safe for us to use Unsafe.AsPointer on them during this loop.
 
                     operationStatus = Utf8Utility.TranscodeToUtf8(
-                        pInputBuffer: (char*)Unsafe.AsPointer(
-                            ref MemoryMarshal.GetReference(source)
-                        ),
+                        pInputBuffer: (char*)
+                            Unsafe.AsPointer(ref MemoryMarshal.GetReference(source)),
                         inputLength: source.Length,
-                        pOutputBuffer: (byte*)Unsafe.AsPointer(
-                            ref MemoryMarshal.GetReference(destination)
-                        ),
+                        pOutputBuffer: (byte*)
+                            Unsafe.AsPointer(ref MemoryMarshal.GetReference(destination)),
                         outputBytesRemaining: destination.Length,
                         pInputBufferRemaining: out pInputBufferRemaining,
                         pOutputBufferRemaining: out pOutputBufferRemaining
@@ -142,12 +140,10 @@ namespace System.Text.Unicode
                     );
 
                     operationStatus = OperationStatus.Done; // we patched the error - if we're about to break out of the loop this is a success case
-                    pInputBufferRemaining = (char*)Unsafe.AsPointer(
-                        ref MemoryMarshal.GetReference(source)
-                    );
-                    pOutputBufferRemaining = (byte*)Unsafe.AsPointer(
-                        ref MemoryMarshal.GetReference(destination)
-                    );
+                    pInputBufferRemaining = (char*)
+                        Unsafe.AsPointer(ref MemoryMarshal.GetReference(source));
+                    pOutputBufferRemaining = (byte*)
+                        Unsafe.AsPointer(ref MemoryMarshal.GetReference(destination));
                 }
 
                 // Not possible to make any further progress - report to our caller how far we got.
@@ -198,13 +194,11 @@ namespace System.Text.Unicode
                     // It's safe for us to use Unsafe.AsPointer on them during this loop.
 
                     operationStatus = Utf8Utility.TranscodeToUtf16(
-                        pInputBuffer: (byte*)Unsafe.AsPointer(
-                            ref MemoryMarshal.GetReference(source)
-                        ),
+                        pInputBuffer: (byte*)
+                            Unsafe.AsPointer(ref MemoryMarshal.GetReference(source)),
                         inputLength: source.Length,
-                        pOutputBuffer: (char*)Unsafe.AsPointer(
-                            ref MemoryMarshal.GetReference(destination)
-                        ),
+                        pOutputBuffer: (char*)
+                            Unsafe.AsPointer(ref MemoryMarshal.GetReference(destination)),
                         outputCharsRemaining: destination.Length,
                         pInputBufferRemaining: out pInputBufferRemaining,
                         pOutputBufferRemaining: out pOutputBufferRemaining
@@ -266,12 +260,10 @@ namespace System.Text.Unicode
                     source = source.Slice(bytesConsumedJustNow);
 
                     operationStatus = OperationStatus.Done; // we patched the error - if we're about to break out of the loop this is a success case
-                    pInputBufferRemaining = (byte*)Unsafe.AsPointer(
-                        ref MemoryMarshal.GetReference(source)
-                    );
-                    pOutputBufferRemaining = (char*)Unsafe.AsPointer(
-                        ref MemoryMarshal.GetReference(destination)
-                    );
+                    pInputBufferRemaining = (byte*)
+                        Unsafe.AsPointer(ref MemoryMarshal.GetReference(source));
+                    pOutputBufferRemaining = (char*)
+                        Unsafe.AsPointer(ref MemoryMarshal.GetReference(destination));
                 }
 
                 // Not possible to make any further progress - report to our caller how far we got.

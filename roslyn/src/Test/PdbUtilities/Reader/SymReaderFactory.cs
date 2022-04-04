@@ -68,10 +68,8 @@ namespace Roslyn.Test.PdbUtilities
             object metadataImporter
         )
         {
-            return (ISymUnmanagedReader5)new PortablePdb.SymBinder().GetReaderFromStream(
-                pdbStream,
-                metadataImporter
-            );
+            return (ISymUnmanagedReader5)
+                new PortablePdb.SymBinder().GetReaderFromStream(pdbStream, metadataImporter);
         }
 
         public static ISymUnmanagedReader5 CreateReader(byte[] pdbImage, byte[] peImageOpt = null)

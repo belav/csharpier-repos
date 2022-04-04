@@ -22,13 +22,14 @@ namespace System.Globalization.Tests
 
             try
             {
-                ret = (bool)typeof(object).Assembly
-                    .GetType("System.Globalization.GlobalizationMode")
-                    .GetProperty(
-                        "PredefinedCulturesOnly",
-                        BindingFlags.Static | BindingFlags.NonPublic
-                    )
-                    .GetValue(null);
+                ret = (bool)
+                    typeof(object).Assembly
+                        .GetType("System.Globalization.GlobalizationMode")
+                        .GetProperty(
+                            "PredefinedCulturesOnly",
+                            BindingFlags.Static | BindingFlags.NonPublic
+                        )
+                        .GetValue(null);
             }
             catch
             {

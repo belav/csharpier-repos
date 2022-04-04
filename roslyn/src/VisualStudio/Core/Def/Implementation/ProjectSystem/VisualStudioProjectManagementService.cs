@@ -49,8 +49,8 @@ namespace Roslyn.VisualStudio.Services.Implementation.ProjectSystem
 
                 try
                 {
-                    defaultNamespace =
-                        (string)envDTEProject.ProjectItems.ContainingProject.Properties
+                    defaultNamespace = (string)
+                        envDTEProject.ProjectItems.ContainingProject.Properties
                             .Item("DefaultNamespace")
                             .Value; // Do not Localize
                 }

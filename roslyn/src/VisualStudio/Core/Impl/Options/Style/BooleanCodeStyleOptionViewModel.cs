@@ -39,9 +39,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             _falsePreview = falsePreview;
 
             var codeStyleOption = (
-                (CodeStyleOption<bool>)optionStore.GetOption(
-                    new OptionKey(option, option.IsPerLanguage ? info.Language : null)
-                )
+                (CodeStyleOption<bool>)
+                    optionStore.GetOption(
+                        new OptionKey(option, option.IsPerLanguage ? info.Language : null)
+                    )
             );
             _selectedPreference = Preferences.Single(c => c.IsChecked == codeStyleOption.Value);
 

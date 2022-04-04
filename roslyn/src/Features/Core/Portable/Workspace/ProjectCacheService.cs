@@ -129,9 +129,8 @@ namespace Microsoft.CodeAnalysis.Host
             {
                 // this should be cheap. graph is cached every time project reference is updated.
                 var p2pReferences =
-                    (ImmutableHashSet<ProjectId>)graph.GetProjectsThatThisProjectTransitivelyDependsOn(
-                        projectId
-                    );
+                    (ImmutableHashSet<ProjectId>)
+                        graph.GetProjectsThatThisProjectTransitivelyDependsOn(projectId);
                 if (p2pReferences.Contains(key))
                 {
                     return true;

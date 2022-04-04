@@ -591,14 +591,8 @@ namespace Microsoft.Extensions.Logging.Test
                 },
                 new object[]
                 {
-                    (DefineScope)LoggerMessage.DefineScope<
-                        string,
-                        string,
-                        string,
-                        string,
-                        string,
-                        string
-                    >,
+                    (DefineScope)
+                        LoggerMessage.DefineScope<string, string, string, string, string, string>,
                     DefineScopeInvalidParameters
                 }
             };

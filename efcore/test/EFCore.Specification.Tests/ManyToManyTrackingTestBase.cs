@@ -461,9 +461,8 @@ namespace Microsoft.EntityFrameworkCore
                         .SelectMany(e => e.CompositeKeySkipFull)
                         .Count(e => e == toRemoveOne);
 
-                    var toRemoveThree = (EntityLeaf)context.EntityRoots.Single(
-                        e => e.Name == "Leaf 3"
-                    );
+                    var toRemoveThree = (EntityLeaf)
+                        context.EntityRoots.Single(e => e.Name == "Leaf 3");
                     id = toRemoveThree.Id;
                     var refCountThrees = ones.SelectMany(e => e.RootSkipShared)
                         .Count(e => e == toRemoveThree);

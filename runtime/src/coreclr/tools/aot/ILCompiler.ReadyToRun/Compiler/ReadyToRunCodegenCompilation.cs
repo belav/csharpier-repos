@@ -351,8 +351,8 @@ namespace ILCompiler
             _inputFiles = inputFiles;
             _compositeRootPath = compositeRootPath;
             _printReproInstructions = printReproInstructions;
-            CompilationModuleGroup =
-                (ReadyToRunCompilationModuleGroupBase)nodeFactory.CompilationModuleGroup;
+            CompilationModuleGroup = (ReadyToRunCompilationModuleGroupBase)
+                nodeFactory.CompilationModuleGroup;
 
             // Generate baseline support specification for InstructionSetSupport. This will prevent usage of the generated
             // code if the runtime environment doesn't support the specified instruction set

@@ -107,9 +107,8 @@ namespace System.Web.Http.Tracing.Tracers
 
             // Assert
             IEnumerable<IDisposable> disposables =
-                (IEnumerable<IDisposable>)request.Properties[
-                    HttpPropertyKeys.DisposableRequestResourcesKey
-                ];
+                (IEnumerable<IDisposable>)
+                    request.Properties[HttpPropertyKeys.DisposableRequestResourcesKey];
             Assert.Contains(tracer, disposables);
             Assert.DoesNotContain(mockDisposable.Object, disposables);
         }

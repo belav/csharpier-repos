@@ -102,8 +102,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<BoundStatement> statements
         )
         {
-            LocalDeclarationStatementSyntax syntax =
-                (LocalDeclarationStatementSyntax)usingDeclarations.Syntax;
+            LocalDeclarationStatementSyntax syntax = (LocalDeclarationStatementSyntax)
+                usingDeclarations.Syntax;
             BoundBlock body = new BoundBlock(syntax, ImmutableArray<LocalSymbol>.Empty, statements);
 
             var usingStatement = MakeDeclarationUsingStatement(

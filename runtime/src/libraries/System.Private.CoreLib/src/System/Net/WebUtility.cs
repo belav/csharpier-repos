@@ -3409,9 +3409,8 @@ namespace System.Net
                 while (!tableData.IsEmpty)
                 {
                     ulong key = BinaryPrimitives.ReadUInt64LittleEndian(tableData);
-                    char value = (char)BinaryPrimitives.ReadUInt16LittleEndian(
-                        tableData.Slice(sizeof(ulong))
-                    );
+                    char value = (char)
+                        BinaryPrimitives.ReadUInt16LittleEndian(tableData.Slice(sizeof(ulong)));
                     dictionary[key] = value;
                     tableData = tableData.Slice(sizeof(ulong) + sizeof(char));
                 }

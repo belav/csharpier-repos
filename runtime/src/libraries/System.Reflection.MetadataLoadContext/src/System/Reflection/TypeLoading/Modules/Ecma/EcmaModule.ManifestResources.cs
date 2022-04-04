@@ -63,9 +63,8 @@ namespace System.Reflection.TypeLoading.Ecma
                             result.FileName = file.Name.GetString(reader);
                             if (file.ContainsMetadata)
                             {
-                                EcmaModule? module = (EcmaModule?)Assembly.GetModule(
-                                    result.FileName
-                                );
+                                EcmaModule? module = (EcmaModule?)
+                                    Assembly.GetModule(result.FileName);
                                 if (module == null)
                                     throw new BadImageFormatException(
                                         SR.Format(

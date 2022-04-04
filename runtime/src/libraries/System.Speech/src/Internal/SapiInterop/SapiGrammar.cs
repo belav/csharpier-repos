@@ -72,22 +72,24 @@ namespace System.Speech.Internal.SapiInterop
 
         internal SAPIErrorCodes SetDictationState(SPRULESTATE state)
         {
-            return (SAPIErrorCodes)_sapiProxy.Invoke(
-                delegate
-                {
-                    return _sapiGrammar.SetDictationState(state);
-                }
-            );
+            return (SAPIErrorCodes)
+                _sapiProxy.Invoke(
+                    delegate
+                    {
+                        return _sapiGrammar.SetDictationState(state);
+                    }
+                );
         }
 
         internal SAPIErrorCodes SetRuleState(string name, SPRULESTATE state)
         {
-            return (SAPIErrorCodes)_sapiProxy.Invoke(
-                delegate
-                {
-                    return _sapiGrammar.SetRuleState(name, IntPtr.Zero, state);
-                }
-            );
+            return (SAPIErrorCodes)
+                _sapiProxy.Invoke(
+                    delegate
+                    {
+                        return _sapiGrammar.SetRuleState(name, IntPtr.Zero, state);
+                    }
+                );
         }
 
         /*

@@ -79,9 +79,8 @@ namespace Microsoft.VisualStudio.LanguageServices
         {
             await threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var shell = (IVsShell?)await serviceProvider
-                .GetServiceAsync(typeof(SVsShell))
-                .ConfigureAwait(true);
+            var shell = (IVsShell?)
+                await serviceProvider.GetServiceAsync(typeof(SVsShell)).ConfigureAwait(true);
             Assumes.Present(shell);
 
             return new VirtualMemoryNotificationListener(

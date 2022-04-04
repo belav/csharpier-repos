@@ -760,10 +760,8 @@ namespace System.Xml.Tests
             }
             XmlNamespaceManager nsm = new XmlNamespaceManager(DataReader.NameTable);
             nsm.AddNamespace("p", "ns1");
-            XmlQualifiedName qname = (XmlQualifiedName)DataReader.ReadContentAs(
-                typeof(XmlQualifiedName),
-                nsm
-            );
+            XmlQualifiedName qname = (XmlQualifiedName)
+                DataReader.ReadContentAs(typeof(XmlQualifiedName), nsm);
             CError.Compare("ns1:foo", qname.ToString(), "Wrong namespace returned");
 
             return TEST_PASS;

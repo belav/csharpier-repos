@@ -185,11 +185,8 @@ namespace System.Net.Http.Headers
         public static ContentRangeHeaderValue Parse(string? input)
         {
             int index = 0;
-            return (ContentRangeHeaderValue)GenericHeaderParser.ContentRangeParser.ParseValue(
-                input,
-                null,
-                ref index
-            );
+            return (ContentRangeHeaderValue)
+                GenericHeaderParser.ContentRangeParser.ParseValue(input, null, ref index);
         }
 
         public static bool TryParse(

@@ -248,8 +248,8 @@ namespace System.ComponentModel
                         && s.Component != component
                     )
                     {
-                        InheritanceAttribute inheritanceAttribute =
-                            (InheritanceAttribute)TypeDescriptor.GetAttributes(s.Component)[
+                        InheritanceAttribute inheritanceAttribute = (InheritanceAttribute)
+                            TypeDescriptor.GetAttributes(s.Component)[
                                 typeof(InheritanceAttribute)
                             ]!;
                         if (

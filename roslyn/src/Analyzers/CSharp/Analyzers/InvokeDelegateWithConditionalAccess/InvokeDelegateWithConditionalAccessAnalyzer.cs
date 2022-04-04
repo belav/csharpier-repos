@@ -358,10 +358,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
                 return false;
             }
 
-            var localSymbol = (ILocalSymbol)semanticModel.GetRequiredDeclaredSymbol(
-                declarator,
-                cancellationToken
-            );
+            var localSymbol = (ILocalSymbol)
+                semanticModel.GetRequiredDeclaredSymbol(declarator, cancellationToken);
 
             // Ok, we made a local just to check it for null and invoke it.  Looks like something
             // we can suggest an improvement for!

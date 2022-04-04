@@ -28,8 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
         {
             var compilation = CreateCompilation(source, options: TestOptions.DebugDll);
             var reference = compilation.EmitToImageReference();
-            return (PEAssemblySymbol)CreateCompilation("", new[] { reference })
-                .GetReferencedAssemblySymbol(reference);
+            return (PEAssemblySymbol)
+                CreateCompilation("", new[] { reference }).GetReferencedAssemblySymbol(reference);
         }
 
         [Fact]
@@ -231,9 +231,8 @@ class C
                 null
             );
 
-            var other = (MethodSymbol)matcher
-                .MapDefinition(member1.GetCciAdapter())
-                .GetInternalSymbol();
+            var other = (MethodSymbol)
+                matcher.MapDefinition(member1.GetCciAdapter()).GetInternalSymbol();
             Assert.NotNull(other);
             Assert.Equal(
                 1,
@@ -729,8 +728,8 @@ class C
             var compilation0 = CreateCompilation(source0, options: TestOptions.DebugDll);
 
             var peRef0 = compilation0.EmitToImageReference();
-            var peAssemblySymbol0 = (PEAssemblySymbol)CreateCompilation("", new[] { peRef0 })
-                .GetReferencedAssemblySymbol(peRef0);
+            var peAssemblySymbol0 = (PEAssemblySymbol)
+                CreateCompilation("", new[] { peRef0 }).GetReferencedAssemblySymbol(peRef0);
             var peModule0 = (PEModuleSymbol)peAssemblySymbol0.Modules[0];
 
             var reader0 = peModule0.Module.MetadataReader;
@@ -1290,8 +1289,8 @@ class C : I<int, bool>
             var compilation0 = CreateCompilation(source, options: TestOptions.DebugDll);
 
             var peRef0 = compilation0.EmitToImageReference();
-            var peAssemblySymbol0 = (PEAssemblySymbol)CreateCompilation("", new[] { peRef0 })
-                .GetReferencedAssemblySymbol(peRef0);
+            var peAssemblySymbol0 = (PEAssemblySymbol)
+                CreateCompilation("", new[] { peRef0 }).GetReferencedAssemblySymbol(peRef0);
 
             var compilation1 = CreateCompilation(source, options: TestOptions.DebugDll);
 
@@ -1320,9 +1319,8 @@ class C : I<int, bool>
                 peAssemblySymbol0
             );
 
-            var mappedProperty = (Cci.IPropertyDefinition)matcher.MapDefinition(
-                property.GetCciAdapter()
-            );
+            var mappedProperty = (Cci.IPropertyDefinition)
+                matcher.MapDefinition(property.GetCciAdapter());
 
             Assert.Equal(
                 "I<System.Int32,System.Boolean>.Item",
@@ -1509,8 +1507,8 @@ class C
             var compilation0 = CreateCompilation(source0, options: TestOptions.DebugDll);
 
             var peRef0 = compilation0.EmitToImageReference();
-            var peAssemblySymbol0 = (PEAssemblySymbol)CreateCompilation("", new[] { peRef0 })
-                .GetReferencedAssemblySymbol(peRef0);
+            var peAssemblySymbol0 = (PEAssemblySymbol)
+                CreateCompilation("", new[] { peRef0 }).GetReferencedAssemblySymbol(peRef0);
             var peModule0 = (PEModuleSymbol)peAssemblySymbol0.Modules[0];
 
             var reader0 = peModule0.Module.MetadataReader;

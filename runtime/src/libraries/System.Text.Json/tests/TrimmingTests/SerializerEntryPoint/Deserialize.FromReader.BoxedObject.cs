@@ -26,10 +26,8 @@ namespace SerializerTrimmingTest
 
             json = @"{""X"":1,""Y"":2}";
             reader = new Utf8JsonReader(Encoding.UTF8.GetBytes(json));
-            var obj = (MyClassWithParameterizedCtor)JsonSerializer.Deserialize(
-                json,
-                typeof(MyClassWithParameterizedCtor)
-            );
+            var obj = (MyClassWithParameterizedCtor)
+                JsonSerializer.Deserialize(json, typeof(MyClassWithParameterizedCtor));
             if (obj == null)
             {
                 return -1;

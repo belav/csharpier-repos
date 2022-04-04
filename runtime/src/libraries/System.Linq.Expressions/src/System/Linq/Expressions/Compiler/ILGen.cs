@@ -972,9 +972,8 @@ namespace System.Linq.Expressions.Compiler
         {
             Debug.Assert(nullableType.IsNullableType());
 
-            MethodInfo mi = (MethodInfo)nullableType.GetMemberWithSameMetadataDefinitionAs(
-                s_nullableHasValueGetter
-            );
+            MethodInfo mi = (MethodInfo)
+                nullableType.GetMemberWithSameMetadataDefinitionAs(s_nullableHasValueGetter);
             Debug.Assert(nullableType.IsValueType);
             il.Emit(OpCodes.Call, mi);
         }
@@ -983,9 +982,8 @@ namespace System.Linq.Expressions.Compiler
         {
             Debug.Assert(nullableType.IsNullableType());
 
-            MethodInfo mi = (MethodInfo)nullableType.GetMemberWithSameMetadataDefinitionAs(
-                s_nullableValueGetter
-            );
+            MethodInfo mi = (MethodInfo)
+                nullableType.GetMemberWithSameMetadataDefinitionAs(s_nullableValueGetter);
             Debug.Assert(nullableType.IsValueType);
             il.Emit(OpCodes.Call, mi);
         }
@@ -994,9 +992,8 @@ namespace System.Linq.Expressions.Compiler
         {
             Debug.Assert(nullableType.IsNullableType());
 
-            MethodInfo mi = (MethodInfo)nullableType.GetMemberWithSameMetadataDefinitionAs(
-                s_nullableGetValueOrDefault
-            );
+            MethodInfo mi = (MethodInfo)
+                nullableType.GetMemberWithSameMetadataDefinitionAs(s_nullableGetValueOrDefault);
             Debug.Assert(nullableType.IsValueType);
             il.Emit(OpCodes.Call, mi);
         }

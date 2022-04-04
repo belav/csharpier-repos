@@ -1531,8 +1531,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     )
                     {
                         var syntax = body.Syntax;
-                        semanticModelWithCachedBoundNodes =
-                            (SyntaxTreeSemanticModel)cachingSemanticModelProvider.GetSemanticModel(
+                        semanticModelWithCachedBoundNodes = (SyntaxTreeSemanticModel)
+                            cachingSemanticModelProvider.GetSemanticModel(
                                 syntax.SyntaxTree,
                                 _compilation
                             );
@@ -1681,8 +1681,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                                 // Only do the cast if we haven't returned with some error diagnostics.
                                 // Otherwise, `lowered` might have been a BoundBadStatement.
-                                processedInitializers.LoweredInitializers =
-                                    (BoundStatementList)lowered;
+                                processedInitializers.LoweredInitializers = (BoundStatementList)
+                                    lowered;
                             }
 
                             // initializers for global code have already been included in the body
@@ -1693,8 +1693,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                     == BoundKind.StatementList
                                 )
                                 {
-                                    BoundStatementList lowered =
-                                        (BoundStatementList)processedInitializers.LoweredInitializers;
+                                    BoundStatementList lowered = (BoundStatementList)
+                                        processedInitializers.LoweredInitializers;
                                     boundStatements = boundStatements.Concat(lowered.Statements);
                                 }
                                 else

@@ -355,14 +355,16 @@ namespace System.Diagnostics.Eventing.Reader
                 if (queryHandle.IsInvalid)
                     throw new InvalidOperationException();
 
-                channelNames = (string[])NativeWrapper.EvtGetQueryInfo(
-                    queryHandle,
-                    UnsafeNativeMethods.EvtQueryPropertyId.EvtQueryNames
-                );
-                errorStatuses = (int[])NativeWrapper.EvtGetQueryInfo(
-                    queryHandle,
-                    UnsafeNativeMethods.EvtQueryPropertyId.EvtQueryStatuses
-                );
+                channelNames = (string[])
+                    NativeWrapper.EvtGetQueryInfo(
+                        queryHandle,
+                        UnsafeNativeMethods.EvtQueryPropertyId.EvtQueryNames
+                    );
+                errorStatuses = (int[])
+                    NativeWrapper.EvtGetQueryInfo(
+                        queryHandle,
+                        UnsafeNativeMethods.EvtQueryPropertyId.EvtQueryStatuses
+                    );
 
                 if (channelNames.Length != errorStatuses.Length)
                     throw new InvalidOperationException();

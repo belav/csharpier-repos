@@ -175,9 +175,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 try
                 {
                     var frameworkProvider = new VsTargetFrameworkProvider(
-                        (IVsFrameworkMultiTargeting)_serviceProvider.GetService(
-                            typeof(SVsFrameworkMultiTargeting)
-                        ),
+                        (IVsFrameworkMultiTargeting)
+                            _serviceProvider.GetService(typeof(SVsFrameworkMultiTargeting)),
                         targetMoniker,
                         (IVsSmartOpenScope)_serviceProvider.GetService(typeof(SVsSmartOpenScope))
                     );

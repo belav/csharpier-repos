@@ -74,9 +74,8 @@ public class OwinWebSocketAdapter : WebSocket
     {
         _websocketContext = websocketContext;
         _sendAsync = (WebSocketSendAsync)websocketContext[OwinConstants.WebSocket.SendAsync];
-        _receiveAsync = (WebSocketReceiveAsync)websocketContext[
-            OwinConstants.WebSocket.ReceiveAsync
-        ];
+        _receiveAsync = (WebSocketReceiveAsync)
+            websocketContext[OwinConstants.WebSocket.ReceiveAsync];
         _closeAsync = (WebSocketCloseAsync)websocketContext[OwinConstants.WebSocket.CloseAsync];
         _state = WebSocketState.Open;
         _subProtocol = subProtocol;

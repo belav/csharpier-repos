@@ -520,10 +520,11 @@ namespace System.Web.Mvc.Routing
         public void AttributeUsage_IsAsSpecified()
         {
             // Act
-            AttributeUsageAttribute usage = (AttributeUsageAttribute)Attribute.GetCustomAttribute(
-                typeof(RouteFactoryAttribute),
-                typeof(AttributeUsageAttribute)
-            );
+            AttributeUsageAttribute usage = (AttributeUsageAttribute)
+                Attribute.GetCustomAttribute(
+                    typeof(RouteFactoryAttribute),
+                    typeof(AttributeUsageAttribute)
+                );
 
             // Assert
             Assert.NotNull(usage);

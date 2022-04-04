@@ -127,10 +127,8 @@ namespace Microsoft.CodeAnalysis.MakeMethodSynchronous
                 var semanticModel = await newDocument
                     .GetSemanticModelAsync(cancellationToken)
                     .ConfigureAwait(false);
-                var newMethod = (IMethodSymbol)semanticModel.GetDeclaredSymbol(
-                    newNode,
-                    cancellationToken
-                );
+                var newMethod = (IMethodSymbol)
+                    semanticModel.GetDeclaredSymbol(newNode, cancellationToken);
                 return await RemoveAsyncTokenAsync(
                         newDocument,
                         newMethod,

@@ -181,9 +181,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     or <see langword="null" /> if they have not common parent.
         /// </returns>
         new IMutableEntityType? FindClosestCommonParent(IReadOnlyEntityType otherEntityType) =>
-            (IMutableEntityType?)((IReadOnlyEntityType)this).FindClosestCommonParent(
-                otherEntityType
-            );
+            (IMutableEntityType?)
+                ((IReadOnlyEntityType)this).FindClosestCommonParent(otherEntityType);
 
         /// <summary>
         ///     Gets the least derived type between the specified two.
@@ -740,9 +739,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <param name="propertyNames">The property names.</param>
         /// <returns>The properties, or <see langword="null" /> if any property is not found.</returns>
         new IReadOnlyList<IMutableProperty>? FindProperties(IReadOnlyList<string> propertyNames) =>
-            (IReadOnlyList<IMutableProperty>?)((IReadOnlyEntityType)this).FindProperties(
-                propertyNames
-            );
+            (IReadOnlyList<IMutableProperty>?)
+                ((IReadOnlyEntityType)this).FindProperties(propertyNames);
 
         /// <summary>
         ///     Finds a property declared on the type with the given name.

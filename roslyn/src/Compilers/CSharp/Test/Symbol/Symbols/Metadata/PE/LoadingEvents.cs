@@ -231,9 +231,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             var substitutedInterface = @class.Interfaces().Single();
             Assert.Equal(@interface, substitutedInterface.ConstructedFrom);
 
-            var substitutedInterfaceEvent = (EventSymbol)substitutedInterface
-                .GetMembers("Event")
-                .Single();
+            var substitutedInterfaceEvent = (EventSymbol)
+                substitutedInterface.GetMembers("Event").Single();
             Assert.Equal(interfaceEvent, substitutedInterfaceEvent.OriginalDefinition);
 
             var classEvent = (EventSymbol)@class.GetMembers("IGeneric<S>.Event").Single();
@@ -266,14 +265,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             var substitutedInterface = @class.Interfaces().Single();
             Assert.Equal(@interface, substitutedInterface.ConstructedFrom);
 
-            var substitutedInterfaceEvent = (EventSymbol)substitutedInterface
-                .GetMembers("Event")
-                .Single();
+            var substitutedInterfaceEvent = (EventSymbol)
+                substitutedInterface.GetMembers("Event").Single();
             Assert.Equal(interfaceEvent, substitutedInterfaceEvent.OriginalDefinition);
 
-            var classEvent = (EventSymbol)@class
-                .GetMembers("IGeneric<System.Int32>.Event")
-                .Single();
+            var classEvent = (EventSymbol)
+                @class.GetMembers("IGeneric<System.Int32>.Event").Single();
 
             var explicitImpl = classEvent.ExplicitInterfaceImplementations.Single();
             Assert.Equal(substitutedInterfaceEvent, explicitImpl);
@@ -296,22 +293,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 
             var globalNamespace = assemblies.ElementAt(1).GlobalNamespace;
 
-            var defInterface = (NamedTypeSymbol)globalNamespace
-                .GetTypeMembers("Interface")
-                .Single();
+            var defInterface = (NamedTypeSymbol)
+                globalNamespace.GetTypeMembers("Interface").Single();
             Assert.Equal(TypeKind.Interface, defInterface.TypeKind);
 
             var defInterfaceEvent = (EventSymbol)defInterface.GetMembers("Event").Single();
 
-            var refInterface = (NamedTypeSymbol)globalNamespace
-                .GetTypeMembers("IGenericInterface")
-                .Single();
+            var refInterface = (NamedTypeSymbol)
+                globalNamespace.GetTypeMembers("IGenericInterface").Single();
             Assert.Equal(TypeKind.Interface, defInterface.TypeKind);
             Assert.True(refInterface.Interfaces().Contains(defInterface));
 
-            var @class = (NamedTypeSymbol)globalNamespace
-                .GetTypeMembers("IndirectImplementation")
-                .Single();
+            var @class = (NamedTypeSymbol)
+                globalNamespace.GetTypeMembers("IndirectImplementation").Single();
             Assert.Equal(TypeKind.Class, @class.TypeKind);
 
             var classInterfacesConstructedFrom = @class.Interfaces().Select(i => i.ConstructedFrom);
@@ -343,9 +337,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 
             var globalNamespace = assemblies.ElementAt(1).GlobalNamespace;
 
-            var outerInterface = (NamedTypeSymbol)globalNamespace
-                .GetTypeMembers("IGeneric2")
-                .Single();
+            var outerInterface = (NamedTypeSymbol)
+                globalNamespace.GetTypeMembers("IGeneric2").Single();
             Assert.Equal(1, outerInterface.Arity);
             Assert.Equal(TypeKind.Interface, outerInterface.TypeKind);
 

@@ -463,9 +463,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
             SetEntityStates(Check.NotNull(entities, nameof(entities)), EntityState.Modified);
 
         private IEntityFinder<TEntity> Finder =>
-            (IEntityFinder<TEntity>)_context
-                .GetDependencies()
-                .EntityFinderFactory.Create(EntityType);
+            (IEntityFinder<TEntity>)
+                _context.GetDependencies().EntityFinderFactory.Create(EntityType);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

@@ -228,10 +228,8 @@ namespace System.Web.Http
                 string statusString = values.First() as string;
                 if (!String.IsNullOrEmpty(statusString))
                 {
-                    HttpStatusCode status = (HttpStatusCode)Enum.Parse(
-                        typeof(HttpStatusCode),
-                        statusString
-                    );
+                    HttpStatusCode status = (HttpStatusCode)
+                        Enum.Parse(typeof(HttpStatusCode), statusString);
                     throw new HttpResponseException(
                         actionContext.Request.CreateResponse(status, "HttpResponseExceptionMessage")
                     );

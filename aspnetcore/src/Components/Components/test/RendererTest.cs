@@ -3864,9 +3864,8 @@ public class RendererTest
         var childComponents = parentComponentEdits1
             .Select(
                 edit =>
-                    (AfterRenderCaptureComponent)batch1.ReferenceFrames[
-                        edit.ReferenceFrameIndex
-                    ].Component
+                    (AfterRenderCaptureComponent)
+                        batch1.ReferenceFrames[edit.ReferenceFrameIndex].Component
             )
             .ToArray();
         Assert.Equal(1, childComponents[0].OnAfterRenderCallCount);
@@ -5107,9 +5106,8 @@ public class RendererTest
         renderer.RenderRootComponentAsync(rootComponentId);
 
         // Act/Assert
-        var capturingComponent = (ParameterViewIllegalCapturingComponent)renderer
-            .GetCurrentRenderTreeFrames(rootComponentId)
-            .Array[0].Component;
+        var capturingComponent = (ParameterViewIllegalCapturingComponent)
+            renderer.GetCurrentRenderTreeFrames(rootComponentId).Array[0].Component;
         var parameterView = capturingComponent.CapturedParameterView;
 
         // All public APIs on capturingComponent should be electrified now

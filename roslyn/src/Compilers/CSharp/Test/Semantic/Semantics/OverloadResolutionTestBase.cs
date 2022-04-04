@@ -38,11 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             var compilation = CreateEmptyCompilation(source, references, TestOptions.ReleaseDll);
 
-            var method = (SourceMemberMethodSymbol)compilation.GlobalNamespace
-                .GetTypeMembers("C")
-                .Single()
-                .GetMembers("M")
-                .Single();
+            var method = (SourceMemberMethodSymbol)
+                compilation.GlobalNamespace.GetTypeMembers("C").Single().GetMembers("M").Single();
             var diagnostics = new DiagnosticBag();
             var block = MethodCompiler.BindMethodBody(
                 method,

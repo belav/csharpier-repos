@@ -357,10 +357,8 @@ namespace Castle.DynamicProxy.Tests
                 delegate(object[] args)
                 {
                     var assembly = Assembly.LoadFrom((string)args[0]);
-                    var attribute = (CacheMappingsAttribute)assembly.GetCustomAttributes(
-                        typeof(CacheMappingsAttribute),
-                        false
-                    )[0];
+                    var attribute = (CacheMappingsAttribute)
+                        assembly.GetCustomAttributes(typeof(CacheMappingsAttribute), false)[0];
                     var entries = attribute.GetDeserializedMappings();
                     Assert.AreEqual(1, entries.Count);
 

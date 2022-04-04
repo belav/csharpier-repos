@@ -154,10 +154,11 @@ namespace ComWrappersTests.GlobalInstance
                     Marshal.StructureToPtr(vtbl, vtblRaw, false);
 
                     // Including interfaces to allow QI, but not actually returning a valid vtable, since it is not needed for the tests here.
-                    var entryRaw = (ComInterfaceEntry*)RuntimeHelpers.AllocateTypeAssociatedMemory(
-                        typeof(IUnknownVtbl),
-                        sizeof(ComInterfaceEntry)
-                    );
+                    var entryRaw = (ComInterfaceEntry*)
+                        RuntimeHelpers.AllocateTypeAssociatedMemory(
+                            typeof(IUnknownVtbl),
+                            sizeof(ComInterfaceEntry)
+                        );
                     entryRaw[0].IID = typeof(Server.Contract.IConsumeNETServer).GUID;
                     entryRaw[0].Vtable = vtblRaw;
 
@@ -232,10 +233,11 @@ namespace ComWrappersTests.GlobalInstance
                 Marshal.StructureToPtr(vtbl, vtblRaw, false);
 
                 int countLocal = obj is TestEx ? ((TestEx)obj).Interfaces.Length + 1 : 1;
-                var entryRaw = (ComInterfaceEntry*)RuntimeHelpers.AllocateTypeAssociatedMemory(
-                    typeof(ITestVtbl),
-                    sizeof(ComInterfaceEntry) * countLocal
-                );
+                var entryRaw = (ComInterfaceEntry*)
+                    RuntimeHelpers.AllocateTypeAssociatedMemory(
+                        typeof(ITestVtbl),
+                        sizeof(ComInterfaceEntry) * countLocal
+                    );
                 entryRaw[0].IID = typeof(ITest).GUID;
                 entryRaw[0].Vtable = vtblRaw;
 

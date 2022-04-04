@@ -307,12 +307,13 @@ namespace Moq
             interfaces[0] = typeof(IMocked<T>);
             this.AdditionalInterfaces.CopyTo(0, interfaces, 1, additionalInterfaceCount);
 
-            this.instance = (T)ProxyFactory.Instance.CreateProxy(
-                typeof(T),
-                this,
-                interfaces,
-                this.constructorArguments
-            );
+            this.instance = (T)
+                ProxyFactory.Instance.CreateProxy(
+                    typeof(T),
+                    this,
+                    interfaces,
+                    this.constructorArguments
+                );
         }
 
         /// <summary>

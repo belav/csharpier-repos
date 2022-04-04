@@ -256,42 +256,32 @@ interface DerivedInterface2 : BaseInterface2, BaseInterface1
 
             var baseInterface1 = (NamedTypeSymbol)global.GetMembers("BaseInterface1").Single();
             var baseInterface2 = (NamedTypeSymbol)global.GetMembers("BaseInterface2").Single();
-            var derivedInterface1 = (NamedTypeSymbol)global
-                .GetMembers("DerivedInterface1")
-                .Single();
-            var derivedInterface2 = (NamedTypeSymbol)global
-                .GetMembers("DerivedInterface2")
-                .Single();
+            var derivedInterface1 = (NamedTypeSymbol)
+                global.GetMembers("DerivedInterface1").Single();
+            var derivedInterface2 = (NamedTypeSymbol)
+                global.GetMembers("DerivedInterface2").Single();
 
             var baseInterface1Method = (MethodSymbol)baseInterface1.GetMembers("Method").Single();
-            var baseInterface1Property = (PropertySymbol)baseInterface1
-                .GetMembers("Property")
-                .Single();
+            var baseInterface1Property = (PropertySymbol)
+                baseInterface1.GetMembers("Property").Single();
 
             var baseInterface2Method = (MethodSymbol)baseInterface2.GetMembers("Method").Single();
-            var baseInterface2Property = (PropertySymbol)baseInterface2
-                .GetMembers("Property")
-                .Single();
+            var baseInterface2Property = (PropertySymbol)
+                baseInterface2.GetMembers("Property").Single();
 
-            var derivedInterface1Method = (MethodSymbol)derivedInterface1
-                .GetMembers("Method")
-                .First();
-            var derivedInterface1MethodInt = (MethodSymbol)derivedInterface1
-                .GetMembers("Method")
-                .Last();
-            var derivedInterface1Property = (PropertySymbol)derivedInterface1
-                .GetMembers("Property")
-                .Single();
+            var derivedInterface1Method = (MethodSymbol)
+                derivedInterface1.GetMembers("Method").First();
+            var derivedInterface1MethodInt = (MethodSymbol)
+                derivedInterface1.GetMembers("Method").Last();
+            var derivedInterface1Property = (PropertySymbol)
+                derivedInterface1.GetMembers("Property").Single();
 
-            var derivedInterface2Method = (MethodSymbol)derivedInterface2
-                .GetMembers("Method")
-                .First();
-            var derivedInterface2MethodInt = (MethodSymbol)derivedInterface2
-                .GetMembers("Method")
-                .Last();
-            var derivedInterface2Property = (PropertySymbol)derivedInterface2
-                .GetMembers("Property")
-                .Single();
+            var derivedInterface2Method = (MethodSymbol)
+                derivedInterface2.GetMembers("Method").First();
+            var derivedInterface2MethodInt = (MethodSymbol)
+                derivedInterface2.GetMembers("Method").Last();
+            var derivedInterface2Property = (PropertySymbol)
+                derivedInterface2.GetMembers("Property").Single();
 
             Assert.Same(
                 OverriddenOrHiddenMembersResult.Empty,
@@ -406,44 +396,34 @@ interface DerivedInterface2 : BaseInterface2<int>, BaseInterface1<int>
 
             var baseInterface1 = (NamedTypeSymbol)global.GetMembers("BaseInterface1").Single();
             var baseInterface2 = (NamedTypeSymbol)global.GetMembers("BaseInterface2").Single();
-            var derivedInterface1 = (NamedTypeSymbol)global
-                .GetMembers("DerivedInterface1")
-                .Single();
-            var derivedInterface2 = (NamedTypeSymbol)global
-                .GetMembers("DerivedInterface2")
-                .Single();
+            var derivedInterface1 = (NamedTypeSymbol)
+                global.GetMembers("DerivedInterface1").Single();
+            var derivedInterface2 = (NamedTypeSymbol)
+                global.GetMembers("DerivedInterface2").Single();
 
             var baseInterface1MethodT = (MethodSymbol)baseInterface1.GetMembers("Method").First();
             var baseInterface1MethodInt = (MethodSymbol)baseInterface1.GetMembers("Method").Last();
-            var baseInterface1Property = (PropertySymbol)baseInterface1
-                .GetMembers("Property")
-                .Single();
+            var baseInterface1Property = (PropertySymbol)
+                baseInterface1.GetMembers("Property").Single();
 
             var baseInterface2MethodT = (MethodSymbol)baseInterface2.GetMembers("Method").First();
             var baseInterface2MethodInt = (MethodSymbol)baseInterface2.GetMembers("Method").Last();
-            var baseInterface2Property = (PropertySymbol)baseInterface2
-                .GetMembers("Property")
-                .Single();
+            var baseInterface2Property = (PropertySymbol)
+                baseInterface2.GetMembers("Property").Single();
 
-            var derivedInterface1Method = (MethodSymbol)derivedInterface1
-                .GetMembers("Method")
-                .First();
-            var derivedInterface1MethodInt = (MethodSymbol)derivedInterface1
-                .GetMembers("Method")
-                .Last();
-            var derivedInterface1Property = (PropertySymbol)derivedInterface1
-                .GetMembers("Property")
-                .Single();
+            var derivedInterface1Method = (MethodSymbol)
+                derivedInterface1.GetMembers("Method").First();
+            var derivedInterface1MethodInt = (MethodSymbol)
+                derivedInterface1.GetMembers("Method").Last();
+            var derivedInterface1Property = (PropertySymbol)
+                derivedInterface1.GetMembers("Property").Single();
 
-            var derivedInterface2Method = (MethodSymbol)derivedInterface2
-                .GetMembers("Method")
-                .First();
-            var derivedInterface2MethodInt = (MethodSymbol)derivedInterface2
-                .GetMembers("Method")
-                .Last();
-            var derivedInterface2Property = (PropertySymbol)derivedInterface2
-                .GetMembers("Property")
-                .Single();
+            var derivedInterface2Method = (MethodSymbol)
+                derivedInterface2.GetMembers("Method").First();
+            var derivedInterface2MethodInt = (MethodSymbol)
+                derivedInterface2.GetMembers("Method").Last();
+            var derivedInterface2Property = (PropertySymbol)
+                derivedInterface2.GetMembers("Property").Single();
 
             Assert.Same(
                 OverriddenOrHiddenMembersResult.Empty,
@@ -690,9 +670,8 @@ class DerivedClass : BaseClass
             var derivedClassMethodInt = (MethodSymbol)derivedClass.GetMembers("Method").Last();
             var derivedClassProperty = (PropertySymbol)derivedClass.GetMembers("Property").Single();
             var derivedClassRefMethod = (MethodSymbol)derivedClass.GetMembers("Method1").Single();
-            var derivedClassRefProperty = (PropertySymbol)derivedClass
-                .GetMembers("Property1")
-                .Single();
+            var derivedClassRefProperty = (PropertySymbol)
+                derivedClass.GetMembers("Property1").Single();
             var derivedClassRefIndexer = (PropertySymbol)derivedClass.GetMembers("this[]").Single();
 
             Assert.Same(
@@ -798,9 +777,8 @@ abstract class DerivedClass : BaseClass<int, long>
             Assert.Null(baseClass.GetMembers("Equals").SingleOrDefault());
 
             Assert.Null(derivedClass.GetMembers("ToString").SingleOrDefault());
-            var derivedClassGetHashCode = (MethodSymbol)derivedClass
-                .GetMembers("GetHashCode")
-                .Single();
+            var derivedClassGetHashCode = (MethodSymbol)
+                derivedClass.GetMembers("GetHashCode").Single();
             var derivedClassEquals = (MethodSymbol)derivedClass.GetMembers("Equals").Single();
 
             var baseClassToStringOverriddenOrHidden = baseClassToString.OverriddenOrHiddenMembers;
@@ -960,30 +938,24 @@ class OverridingClass : HidingClass
 
             var definingClassMethod1 = (MethodSymbol)definingClass.GetMembers("Method1").Single();
             var definingClassMethod2 = (MethodSymbol)definingClass.GetMembers("Method2").Single();
-            var definingClassProperty1 = (PropertySymbol)definingClass
-                .GetMembers("Property1")
-                .Single();
-            var definingClassProperty2 = (PropertySymbol)definingClass
-                .GetMembers("Property2")
-                .Single();
+            var definingClassProperty1 = (PropertySymbol)
+                definingClass.GetMembers("Property1").Single();
+            var definingClassProperty2 = (PropertySymbol)
+                definingClass.GetMembers("Property2").Single();
 
             var hidingClassMethod1 = (FieldSymbol)hidingClass.GetMembers("Method1").Single();
             var hidingClassMethod2 = (MethodSymbol)hidingClass.GetMembers("Method2").Single();
             var hidingClassProperty1 = (FieldSymbol)hidingClass.GetMembers("Property1").Single();
             var hidingClassProperty2 = (PropertySymbol)hidingClass.GetMembers("Property2").Single();
 
-            var overridingClassMethod1 = (MethodSymbol)overridingClass
-                .GetMembers("Method1")
-                .Single();
-            var overridingClassMethod2 = (MethodSymbol)overridingClass
-                .GetMembers("Method2")
-                .Single();
-            var overridingClassProperty1 = (PropertySymbol)overridingClass
-                .GetMembers("Property1")
-                .Single();
-            var overridingClassProperty2 = (PropertySymbol)overridingClass
-                .GetMembers("Property2")
-                .Single();
+            var overridingClassMethod1 = (MethodSymbol)
+                overridingClass.GetMembers("Method1").Single();
+            var overridingClassMethod2 = (MethodSymbol)
+                overridingClass.GetMembers("Method2").Single();
+            var overridingClassProperty1 = (PropertySymbol)
+                overridingClass.GetMembers("Property1").Single();
+            var overridingClassProperty2 = (PropertySymbol)
+                overridingClass.GetMembers("Property2").Single();
 
             var overridingClassMethod1OverriddenOrHidden =
                 overridingClassMethod1.OverriddenOrHiddenMembers;
@@ -1148,18 +1120,14 @@ class CustomModifierOverridingE : CustomModifierOverridingD
             Assert.False(comp.GetDiagnostics().Any());
 
             //IL
-            var classA = (NamedTypeSymbol)global
-                .GetTypeMembers("CustomModifierOverridingA")
-                .Single();
-            var classB = (NamedTypeSymbol)global
-                .GetTypeMembers("CustomModifierOverridingB")
-                .Single();
-            var classC = (NamedTypeSymbol)global
-                .GetTypeMembers("CustomModifierOverridingC")
-                .Single();
-            var classD = (NamedTypeSymbol)global
-                .GetTypeMembers("CustomModifierOverridingD")
-                .Single();
+            var classA = (NamedTypeSymbol)
+                global.GetTypeMembers("CustomModifierOverridingA").Single();
+            var classB = (NamedTypeSymbol)
+                global.GetTypeMembers("CustomModifierOverridingB").Single();
+            var classC = (NamedTypeSymbol)
+                global.GetTypeMembers("CustomModifierOverridingC").Single();
+            var classD = (NamedTypeSymbol)
+                global.GetTypeMembers("CustomModifierOverridingD").Single();
 
             var classAMethod1 = (MethodSymbol)classA.GetMembers("Method1").Single();
             var classAMethod2 = (MethodSymbol)classA.GetMembers("Method2").Single();
@@ -1213,9 +1181,8 @@ class CustomModifierOverridingE : CustomModifierOverridingD
             Assert.Null(classDMethod2.OverriddenMethod);
 
             //Source
-            var classE = (NamedTypeSymbol)global
-                .GetTypeMembers("CustomModifierOverridingE")
-                .Single();
+            var classE = (NamedTypeSymbol)
+                global.GetTypeMembers("CustomModifierOverridingE").Single();
 
             var classEMethod1 = (MethodSymbol)classE.GetMembers("Method1").Single();
             var classEMethod2 = (MethodSymbol)classE.GetMembers("Method2").Single();

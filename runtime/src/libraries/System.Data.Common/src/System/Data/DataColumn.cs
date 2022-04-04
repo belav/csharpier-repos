@@ -2249,12 +2249,13 @@ namespace System.Data
                     && !(value is BigInteger),
                 "unexpected value for autoincrement"
             );
-            long v = (long)SqlConvert.ChangeType2(
-                value,
-                StorageType.Int64,
-                typeof(long),
-                CultureInfo.InvariantCulture
-            );
+            long v = (long)
+                SqlConvert.ChangeType2(
+                    value,
+                    StorageType.Int64,
+                    typeof(long),
+                    CultureInfo.InvariantCulture
+                );
             if (BoundaryCheck(v))
             {
                 _current = unchecked(v + _step);

@@ -52,10 +52,8 @@ public class main
     {
         AppDomain domain = AppDomain.CreateDomain("newdomain");
         Test myTest = new Test();
-        Test otherTest = (Test)domain.CreateInstanceAndUnwrap(
-            typeof(Test).Assembly.FullName,
-            typeof(Test).FullName
-        );
+        Test otherTest = (Test)
+            domain.CreateInstanceAndUnwrap(typeof(Test).Assembly.FullName, typeof(Test).FullName);
 
         otherTest.callSetThread(myTest);
 

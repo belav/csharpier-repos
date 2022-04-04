@@ -25,9 +25,8 @@ public static class RazorProjectEngineBuilderExtensions
         IEnumerable<TagHelperDescriptor> tagHelpers
     )
     {
-        var feature = (TestTagHelperFeature)builder.Features
-            .OfType<ITagHelperFeature>()
-            .FirstOrDefault();
+        var feature = (TestTagHelperFeature)
+            builder.Features.OfType<ITagHelperFeature>().FirstOrDefault();
         if (feature == null)
         {
             feature = new TestTagHelperFeature();

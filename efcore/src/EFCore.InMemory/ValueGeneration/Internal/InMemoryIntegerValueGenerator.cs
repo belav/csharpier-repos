@@ -56,11 +56,12 @@ namespace Microsoft.EntityFrameworkCore.InMemory.ValueGeneration.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public override TValue Next(EntityEntry entry) =>
-            (TValue)Convert.ChangeType(
-                Interlocked.Increment(ref _current),
-                typeof(TValue),
-                CultureInfo.InvariantCulture
-            );
+            (TValue)
+                Convert.ChangeType(
+                    Interlocked.Increment(ref _current),
+                    typeof(TValue),
+                    CultureInfo.InvariantCulture
+                );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

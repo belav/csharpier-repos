@@ -412,10 +412,8 @@ namespace System.Text.Json.SourceGeneration
                         continue;
                     }
 
-                    INamedTypeSymbol contextTypeSymbol =
-                        (INamedTypeSymbol)compilationSemanticModel.GetDeclaredSymbol(
-                            classDeclarationSyntax
-                        );
+                    INamedTypeSymbol contextTypeSymbol = (INamedTypeSymbol)
+                        compilationSemanticModel.GetDeclaredSymbol(classDeclarationSyntax);
                     Debug.Assert(contextTypeSymbol != null);
 
                     if (
@@ -612,9 +610,8 @@ namespace System.Text.Json.SourceGeneration
                             node.ChildNodes().Single() as TypeOfExpressionSyntax;
                         if (typeNode != null)
                         {
-                            ExpressionSyntax typeNameSyntax = (ExpressionSyntax)typeNode
-                                .ChildNodes()
-                                .Single();
+                            ExpressionSyntax typeNameSyntax = (ExpressionSyntax)
+                                typeNode.ChildNodes().Single();
                             typeSymbol = compilationSemanticModel
                                 .GetTypeInfo(typeNameSyntax)
                                 .ConvertedType;
@@ -1662,9 +1659,8 @@ namespace System.Text.Json.SourceGeneration
                                             .FullName == JsonIgnoreConditionFullName
                                     )
                                     {
-                                        ignoreCondition = (JsonIgnoreCondition)namedArgs[0]
-                                            .TypedValue
-                                            .Value;
+                                        ignoreCondition = (JsonIgnoreCondition)
+                                            namedArgs[0].TypedValue.Value;
                                     }
                                 }
                                 break;
@@ -1811,9 +1807,8 @@ namespace System.Text.Json.SourceGeneration
                     return null;
                 }
 
-                ITypeSymbol converterTypeSymbol = (ITypeSymbol)attributeData.ConstructorArguments[
-                    0
-                ].Value;
+                ITypeSymbol converterTypeSymbol = (ITypeSymbol)
+                    attributeData.ConstructorArguments[0].Value;
                 Type converterType = converterTypeSymbol.AsType(_metadataLoadContext);
 
                 if (

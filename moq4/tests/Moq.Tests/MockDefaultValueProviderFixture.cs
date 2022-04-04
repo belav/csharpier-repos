@@ -140,10 +140,8 @@ namespace Moq.Tests
         {
             var mock = new Mock<IFoo>() { DefaultValue = DefaultValue.Mock };
             var task =
-                (Task<IndexOutOfRangeException>)GetDefaultValueForProperty(
-                    nameof(IFoo.TaskOfUnmockableReferenceType),
-                    mock
-                );
+                (Task<IndexOutOfRangeException>)
+                    GetDefaultValueForProperty(nameof(IFoo.TaskOfUnmockableReferenceType), mock);
 
             Assert.NotNull(task);
             Assert.True(task.IsCompleted);
@@ -168,10 +166,8 @@ namespace Moq.Tests
         {
             var mock = new Mock<IFoo>() { DefaultValue = DefaultValue.Mock };
             var task =
-                (Task<Task<int>>)GetDefaultValueForProperty(
-                    nameof(IFoo.TaskOfTaskOfWhatever),
-                    mock
-                );
+                (Task<Task<int>>)
+                    GetDefaultValueForProperty(nameof(IFoo.TaskOfTaskOfWhatever), mock);
 
             Assert.NotNull(task);
             Assert.True(task.IsCompleted);
@@ -195,10 +191,8 @@ namespace Moq.Tests
         {
             var mock = new Mock<IFoo>() { DefaultValue = DefaultValue.Mock };
             var task =
-                (ValueTask<int[]>)GetDefaultValueForProperty(
-                    nameof(IFoo.ValueTaskOfEmptyableType),
-                    mock
-                );
+                (ValueTask<int[]>)
+                    GetDefaultValueForProperty(nameof(IFoo.ValueTaskOfEmptyableType), mock);
 
             Assert.True(task.IsCompleted);
             Assert.NotNull(task.Result);
@@ -210,10 +204,11 @@ namespace Moq.Tests
         {
             var mock = new Mock<IFoo>() { DefaultValue = DefaultValue.Mock };
             var task =
-                (ValueTask<IndexOutOfRangeException>)GetDefaultValueForProperty(
-                    nameof(IFoo.ValueTaskOfUnmockableReferenceType),
-                    mock
-                );
+                (ValueTask<IndexOutOfRangeException>)
+                    GetDefaultValueForProperty(
+                        nameof(IFoo.ValueTaskOfUnmockableReferenceType),
+                        mock
+                    );
 
             Assert.True(task.IsCompleted);
             Assert.Null(task.Result);
@@ -224,10 +219,8 @@ namespace Moq.Tests
         {
             var mock = new Mock<IFoo>() { DefaultValue = DefaultValue.Mock };
             var task =
-                (ValueTask<IBar>)GetDefaultValueForProperty(
-                    nameof(IFoo.ValueTaskOfMockableType),
-                    mock
-                );
+                (ValueTask<IBar>)
+                    GetDefaultValueForProperty(nameof(IFoo.ValueTaskOfMockableType), mock);
 
             Assert.True(task.IsCompleted);
             Assert.NotNull(task.Result);
@@ -239,10 +232,8 @@ namespace Moq.Tests
         {
             var mock = new Mock<IFoo>() { DefaultValue = DefaultValue.Mock };
             var task =
-                (ValueTask<Task<IBar>>)GetDefaultValueForProperty(
-                    nameof(IFoo.ValueTaskOfTaskOfMockableType),
-                    mock
-                );
+                (ValueTask<Task<IBar>>)
+                    GetDefaultValueForProperty(nameof(IFoo.ValueTaskOfTaskOfMockableType), mock);
 
             Assert.True(task.IsCompleted);
             Assert.NotNull(task.Result);

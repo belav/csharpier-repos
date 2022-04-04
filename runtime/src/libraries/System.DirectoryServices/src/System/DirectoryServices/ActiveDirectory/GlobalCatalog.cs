@@ -74,18 +74,21 @@ namespace System.DirectoryServices.ActiveDirectory
                     );
                 }
 
-                gcDnsName = (string)PropertyManager.GetPropertyValue(
-                    context,
-                    rootDSE,
-                    PropertyManager.DnsHostName
-                )!;
-                isGlobalCatalog = (bool)bool.Parse(
-                    (string)PropertyManager.GetPropertyValue(
+                gcDnsName = (string)
+                    PropertyManager.GetPropertyValue(
                         context,
                         rootDSE,
-                        PropertyManager.IsGlobalCatalogReady
-                    )!
-                );
+                        PropertyManager.DnsHostName
+                    )!;
+                isGlobalCatalog = (bool)
+                    bool.Parse(
+                        (string)
+                            PropertyManager.GetPropertyValue(
+                                context,
+                                rootDSE,
+                                PropertyManager.IsGlobalCatalogReady
+                            )!
+                    );
                 if (!isGlobalCatalog)
                 {
                     throw new ActiveDirectoryObjectNotFoundException(

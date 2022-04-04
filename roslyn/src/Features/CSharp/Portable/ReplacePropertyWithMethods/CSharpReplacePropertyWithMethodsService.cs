@@ -176,14 +176,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
             CancellationToken cancellationToken
         )
         {
-            var setAccessorDeclaration =
-                (AccessorDeclarationSyntax)setMethod.DeclaringSyntaxReferences[0].GetSyntax(
-                    cancellationToken
-                );
-            var methodDeclaration = (MethodDeclarationSyntax)generator.MethodDeclaration(
-                setMethod,
-                desiredSetMethodName
-            );
+            var setAccessorDeclaration = (AccessorDeclarationSyntax)
+                setMethod.DeclaringSyntaxReferences[0].GetSyntax(cancellationToken);
+            var methodDeclaration = (MethodDeclarationSyntax)
+                generator.MethodDeclaration(setMethod, desiredSetMethodName);
 
             // property has unsafe, but generator didn't add it to the method, so we have to add it here
             if (
@@ -213,12 +209,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
             {
                 return methodDeclaration.WithBody(
                     SyntaxFactory.Block(
-                        (StatementSyntax)generator.ExpressionStatement(
-                            generator.AssignmentStatement(
-                                GetFieldReference(generator, propertyBackingField),
-                                generator.IdentifierName("value")
+                        (StatementSyntax)
+                            generator.ExpressionStatement(
+                                generator.AssignmentStatement(
+                                    GetFieldReference(generator, propertyBackingField),
+                                    generator.IdentifierName("value")
+                                )
                             )
-                        )
                     )
                 );
             }
@@ -365,10 +362,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
             CancellationToken cancellationToken
         )
         {
-            var methodDeclaration = (MethodDeclarationSyntax)generator.MethodDeclaration(
-                getMethod,
-                desiredGetMethodName
-            );
+            var methodDeclaration = (MethodDeclarationSyntax)
+                generator.MethodDeclaration(getMethod, desiredGetMethodName);
 
             // property has unsafe, but generator didn't add it to the method, so we have to add it here
             if (
@@ -390,10 +385,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
             }
             else
             {
-                var getAccessorDeclaration =
-                    (AccessorDeclarationSyntax)getMethod.DeclaringSyntaxReferences[0].GetSyntax(
-                        cancellationToken
-                    );
+                var getAccessorDeclaration = (AccessorDeclarationSyntax)
+                    getMethod.DeclaringSyntaxReferences[0].GetSyntax(cancellationToken);
                 if (getAccessorDeclaration?.ExpressionBody != null)
                 {
                     return methodDeclaration

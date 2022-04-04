@@ -140,10 +140,8 @@ namespace System.Configuration
                 )
                     throw ExceptionUtil.UnexpectedError("ConfigurationErrorsException");
 
-                _errors[i] = (ConfigurationException)info.GetValue(
-                    numPrefix + SerializationParamErrorData,
-                    currentExceptionType
-                );
+                _errors[i] = (ConfigurationException)
+                    info.GetValue(numPrefix + SerializationParamErrorData, currentExceptionType);
             }
         }
 

@@ -1198,11 +1198,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         {
             var cache = context.GetService<IValueGeneratorCache>();
 
-            var generator = (ResettableValueGenerator)cache.GetOrAdd(
-                property,
-                property.DeclaringEntityType,
-                (p, e) => new ResettableValueGenerator()
-            );
+            var generator = (ResettableValueGenerator)
+                cache.GetOrAdd(
+                    property,
+                    property.DeclaringEntityType,
+                    (p, e) => new ResettableValueGenerator()
+                );
 
             generator.Reset(generateTemporaryValues);
         }

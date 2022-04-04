@@ -69,9 +69,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     LocalDeclarationStatementSyntax node
                 )
                 {
-                    node = (LocalDeclarationStatementSyntax)base.VisitLocalDeclarationStatement(
-                        node
-                    );
+                    node = (LocalDeclarationStatementSyntax)
+                        base.VisitLocalDeclarationStatement(node);
                     var list = new List<VariableDeclaratorSyntax>();
                     var triviaList = new List<SyntaxTrivia>();
                     // go through each var decls in decl statement

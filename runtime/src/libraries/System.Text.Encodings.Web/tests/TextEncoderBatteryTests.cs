@@ -245,11 +245,12 @@ namespace System.Text.Encodings.Web.Tests
                 else
                 {
                     sb.Append(
-                        (char)ushort.Parse(
-                            value.Substring(i + 1, 4),
-                            NumberStyles.AllowHexSpecifier,
-                            CultureInfo.InvariantCulture
-                        )
+                        (char)
+                            ushort.Parse(
+                                value.Substring(i + 1, 4),
+                                NumberStyles.AllowHexSpecifier,
+                                CultureInfo.InvariantCulture
+                            )
                     );
                     i += 4;
                 }

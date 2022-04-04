@@ -76,9 +76,8 @@ namespace System.Web.Http.ModelBinding
                 openModelType
             );
             return (typeArguments != null)
-              ? (IModelBinder)Activator.CreateInstance(
-                    openBinderType.MakeGenericType(typeArguments)
-                )
+              ? (IModelBinder)
+                    Activator.CreateInstance(openBinderType.MakeGenericType(typeArguments))
               : null;
         }
 
@@ -142,9 +141,8 @@ namespace System.Web.Http.ModelBinding
             if (typeof(ModelBinderProvider).IsAssignableFrom(modelBinderAttribute.BinderType))
             {
                 // REVIEW: DI?
-                provider = (ModelBinderProvider)Activator.CreateInstance(
-                    modelBinderAttribute.BinderType
-                );
+                provider = (ModelBinderProvider)
+                    Activator.CreateInstance(modelBinderAttribute.BinderType);
             }
             else if (typeof(IModelBinder).IsAssignableFrom(modelBinderAttribute.BinderType))
             {
@@ -154,9 +152,8 @@ namespace System.Web.Http.ModelBinding
                       )
                     : modelBinderAttribute.BinderType;
 
-                IModelBinder binderInstance = (IModelBinder)Activator.CreateInstance(
-                    closedBinderType
-                );
+                IModelBinder binderInstance = (IModelBinder)
+                    Activator.CreateInstance(closedBinderType);
                 provider = new SimpleModelBinderProvider(modelType, binderInstance)
                 {
                     SuppressPrefixCheck = modelBinderAttribute.SuppressPrefixCheck

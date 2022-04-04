@@ -614,9 +614,8 @@ class C
                 comp,
                 symbolValidator: module =>
                 {
-                    var field = (PEFieldSymbol)module.GlobalNamespace
-                        .GetTypeMember("C")
-                        .GetField("F15");
+                    var field = (PEFieldSymbol)
+                        module.GlobalNamespace.GetTypeMember("C").GetField("F15");
                     var attribute = ((PEModuleSymbol)module)
                         .GetCustomAttributesForToken(field.Handle)
                         .Single();

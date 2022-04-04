@@ -1710,9 +1710,10 @@ Parameter name: arrayIndex",
 
             JObject o = JObject.Parse(json);
 
-            string searchAddress = (string)o["Placemark"][0]["AddressDetails"]["Country"][
-                "AdministrativeArea"
-            ]["SubAdministrativeArea"]["Locality"]["Thoroughfare"]["ThoroughfareName"];
+            string searchAddress = (string)
+                o["Placemark"][0]["AddressDetails"]["Country"]["AdministrativeArea"][
+                    "SubAdministrativeArea"
+                ]["Locality"]["Thoroughfare"]["ThoroughfareName"];
             Assert.AreEqual("435 N Mulford Rd", searchAddress);
         }
 

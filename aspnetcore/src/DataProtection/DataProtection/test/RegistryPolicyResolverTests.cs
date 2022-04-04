@@ -93,8 +93,8 @@ public class RegistryPolicyResolverTests
         var context = RunTestWithRegValues(registryEntries);
 
         // Assert
-        var actualConfiguration =
-            (CngCbcAuthenticatedEncryptorConfiguration)context.EncryptorConfiguration;
+        var actualConfiguration = (CngCbcAuthenticatedEncryptorConfiguration)
+            context.EncryptorConfiguration;
 
         Assert.Equal(
             expectedConfiguration.EncryptionAlgorithm,
@@ -142,8 +142,8 @@ public class RegistryPolicyResolverTests
         var context = RunTestWithRegValues(registryEntries);
 
         // Assert
-        var actualConfiguration =
-            (CngCbcAuthenticatedEncryptorConfiguration)context.EncryptorConfiguration;
+        var actualConfiguration = (CngCbcAuthenticatedEncryptorConfiguration)
+            context.EncryptorConfiguration;
 
         Assert.Equal(
             expectedConfiguration.EncryptionAlgorithm,
@@ -176,8 +176,8 @@ public class RegistryPolicyResolverTests
         var context = RunTestWithRegValues(registryEntries);
 
         // Assert
-        var actualConfiguration =
-            (CngGcmAuthenticatedEncryptorConfiguration)context.EncryptorConfiguration;
+        var actualConfiguration = (CngGcmAuthenticatedEncryptorConfiguration)
+            context.EncryptorConfiguration;
 
         Assert.Equal(
             expectedConfiguration.EncryptionAlgorithm,
@@ -216,8 +216,8 @@ public class RegistryPolicyResolverTests
         var context = RunTestWithRegValues(registryEntries);
 
         // Assert
-        var actualConfiguration =
-            (CngGcmAuthenticatedEncryptorConfiguration)context.EncryptorConfiguration;
+        var actualConfiguration = (CngGcmAuthenticatedEncryptorConfiguration)
+            context.EncryptorConfiguration;
 
         Assert.Equal(
             expectedConfiguration.EncryptionAlgorithm,
@@ -245,8 +245,8 @@ public class RegistryPolicyResolverTests
         var context = RunTestWithRegValues(registryEntries);
 
         // Assert
-        var actualConfiguration =
-            (ManagedAuthenticatedEncryptorConfiguration)context.EncryptorConfiguration;
+        var actualConfiguration = (ManagedAuthenticatedEncryptorConfiguration)
+            context.EncryptorConfiguration;
 
         Assert.Equal(
             expectedConfiguration.EncryptionAlgorithmType,
@@ -285,8 +285,8 @@ public class RegistryPolicyResolverTests
         var context = RunTestWithRegValues(registryEntries);
 
         // Assert
-        var actualConfiguration =
-            (ManagedAuthenticatedEncryptorConfiguration)context.EncryptorConfiguration;
+        var actualConfiguration = (ManagedAuthenticatedEncryptorConfiguration)
+            context.EncryptorConfiguration;
 
         Assert.Equal(
             expectedConfiguration.EncryptionAlgorithmType,

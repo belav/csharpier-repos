@@ -31,9 +31,10 @@ namespace System.Web.WebPages.Test
 
                     Assert.False(PageParser.EnableLongStringsAsResources);
 
-                    string formsAuthLoginUrl = (string)typeof(FormsAuthentication)
-                        .GetField("_LoginUrl", BindingFlags.Static | BindingFlags.NonPublic)
-                        .GetValue(null);
+                    string formsAuthLoginUrl = (string)
+                        typeof(FormsAuthentication)
+                            .GetField("_LoginUrl", BindingFlags.Static | BindingFlags.NonPublic)
+                            .GetValue(null);
                     Assert.Null(formsAuthLoginUrl);
                 }
             );

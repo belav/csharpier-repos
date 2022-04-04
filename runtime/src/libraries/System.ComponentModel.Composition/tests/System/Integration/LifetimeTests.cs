@@ -159,9 +159,8 @@ namespace Tests.Integration
             container.Compose(batch);
             batch = null;
 
-            var exportedValue = (AnyPartRecomposable)refTracker.ReferencesNotExpectedToBeCollected[
-                0
-            ].Target;
+            var exportedValue = (AnyPartRecomposable)
+                refTracker.ReferencesNotExpectedToBeCollected[0].Target;
             Assert.Equal(42, exportedValue.Value);
 
             GC.KeepAlive(container);
@@ -194,10 +193,8 @@ namespace Tests.Integration
             container.Compose(batch);
             batch = null;
 
-            var exportedValue =
-                (AnyPartDisposableRecomposable)refTracker.ReferencesNotExpectedToBeCollected[
-                    0
-                ].Target;
+            var exportedValue = (AnyPartDisposableRecomposable)
+                refTracker.ReferencesNotExpectedToBeCollected[0].Target;
             Assert.Equal(42, exportedValue.Value);
 
             GC.KeepAlive(container);
@@ -327,8 +324,8 @@ namespace Tests.Integration
             container.Compose(batch);
             batch = null;
 
-            var exportedValue =
-                (SharedPartRecomposable)refTracker.ReferencesNotExpectedToBeCollected[0].Target;
+            var exportedValue = (SharedPartRecomposable)
+                refTracker.ReferencesNotExpectedToBeCollected[0].Target;
             Assert.Equal(42, exportedValue.Value);
 
             GC.KeepAlive(container);
@@ -361,10 +358,8 @@ namespace Tests.Integration
             container.Compose(batch);
             batch = null;
 
-            var exportedValue =
-                (SharedPartDisposableRecomposable)refTracker.ReferencesNotExpectedToBeCollected[
-                    0
-                ].Target;
+            var exportedValue = (SharedPartDisposableRecomposable)
+                refTracker.ReferencesNotExpectedToBeCollected[0].Target;
             Assert.Equal(42, exportedValue.Value);
 
             container.Dispose();
@@ -521,10 +516,8 @@ namespace Tests.Integration
             container.Compose(batch);
             batch = null;
 
-            var exportedValue =
-                (NonSharedPartDisposableRecomposable)refTracker.ReferencesNotExpectedToBeCollected[
-                    0
-                ].Target;
+            var exportedValue = (NonSharedPartDisposableRecomposable)
+                refTracker.ReferencesNotExpectedToBeCollected[0].Target;
             Assert.Equal(42, exportedValue.Value);
 
             GC.KeepAlive(container);

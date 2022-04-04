@@ -64,10 +64,11 @@ namespace System.Net.Http
             state.RetryRequest = false;
 
             // Check the status code and retry the request applying credentials if needed.
-            var statusCode = (HttpStatusCode)WinHttpResponseParser.GetResponseHeaderNumberInfo(
-                state.RequestHandle,
-                Interop.WinHttp.WINHTTP_QUERY_STATUS_CODE
-            );
+            var statusCode = (HttpStatusCode)
+                WinHttpResponseParser.GetResponseHeaderNumberInfo(
+                    state.RequestHandle,
+                    Interop.WinHttp.WINHTTP_QUERY_STATUS_CODE
+                );
 
             switch (statusCode)
             {

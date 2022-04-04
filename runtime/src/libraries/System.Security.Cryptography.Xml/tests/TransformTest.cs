@@ -95,9 +95,8 @@ namespace System.Security.Cryptography.Xml.Tests
             {
                 EncryptedXml encryptedXml = new EncryptedXml(baseDocument);
                 encryptedXml.AddKeyNameMapping("key", aes);
-                XmlElement bElement = (XmlElement)baseDocument.DocumentElement.SelectSingleNode(
-                    "b"
-                );
+                XmlElement bElement = (XmlElement)
+                    baseDocument.DocumentElement.SelectSingleNode("b");
                 EncryptedData encryptedData = encryptedXml.Encrypt(bElement, "key");
                 EncryptedXml.ReplaceElement(bElement, encryptedData, false);
 
@@ -108,9 +107,8 @@ namespace System.Security.Cryptography.Xml.Tests
                 {
                     decryptionTransform.PropagatedNamespaces.Add("f", "urn:foo");
                 }
-                XmlDocument decryptedDocument = (XmlDocument)decryptionTransform.GetOutput(
-                    typeof(XmlDocument)
-                );
+                XmlDocument decryptedDocument = (XmlDocument)
+                    decryptionTransform.GetOutput(typeof(XmlDocument));
 
                 Assert.Equal(expectedResult, decryptedDocument.OuterXml);
             }

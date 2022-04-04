@@ -462,9 +462,8 @@ namespace System.Text.Json.Serialization.Tests
                 netfxExpectedValue: 0x0000000000000000ul,
                 netcoreExpectedValue: 0x8000000000000000ul,
                 () =>
-                    (ulong)BitConverter.DoubleToInt64Bits(
-                        JsonSerializer.Deserialize<double>("-0.0")
-                    )
+                    (ulong)
+                        BitConverter.DoubleToInt64Bits(JsonSerializer.Deserialize<double>("-0.0"))
             );
 
             // Verify Round-tripping.

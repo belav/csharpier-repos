@@ -513,8 +513,8 @@ namespace Microsoft.Interop.Analyzers
                     return;
                 }
 
-                ITypeSymbol nativeType =
-                    (ITypeSymbol)nativeMarshalerAttributeData.ConstructorArguments[0].Value!;
+                ITypeSymbol nativeType = (ITypeSymbol)
+                    nativeMarshalerAttributeData.ConstructorArguments[0].Value!;
                 ISymbol nativeTypeDiagnosticsTargetSymbol = nativeType;
 
                 if (nativeType is not INamedTypeSymbol marshalerType)

@@ -53,10 +53,11 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                 var sourceTypeMapping = source.TypeMapping;
 
                 var value = arguments[1] is SqlConstantExpression constantValue
-                    ? (SqlExpression)_sqlExpressionFactory.Constant(
-                          new[] { (byte)constantValue.Value! },
-                          sourceTypeMapping
-                      )
+                    ? (SqlExpression)
+                          _sqlExpressionFactory.Constant(
+                              new[] { (byte)constantValue.Value! },
+                              sourceTypeMapping
+                          )
                     : _sqlExpressionFactory.Convert(
                           arguments[1],
                           typeof(byte[]),

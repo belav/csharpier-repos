@@ -172,8 +172,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     && lazyCustomAttributesBag.IsEarlyDecodedWellKnownAttributeDataComputed
                 )
                 {
-                    var data =
-                        (CommonFieldEarlyWellKnownAttributeData)lazyCustomAttributesBag.EarlyDecodedWellKnownAttributeData;
+                    var data = (CommonFieldEarlyWellKnownAttributeData)
+                        lazyCustomAttributesBag.EarlyDecodedWellKnownAttributeData;
                     return data != null ? data.ObsoleteAttributeData : null;
                 }
 

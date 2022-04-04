@@ -948,7 +948,8 @@ namespace System.Web.Mvc.Html.Test
             // Act
             MvcHtmlString html = helper.Hidden(
                 "foo",
-                (string)null /* value */
+                (string)
+                    null /* value */
                 ,
                 (object)null /* htmlAttributes */
             );
@@ -1623,7 +1624,8 @@ namespace System.Web.Mvc.Html.Test
             // Act
             MvcHtmlString html = helper.Password(
                 "foo",
-                (string)null /* value */
+                (string)
+                    null /* value */
                 ,
                 (object)null
             );
@@ -3179,7 +3181,8 @@ namespace System.Web.Mvc.Html.Test
             // Act
             MvcHtmlString html = helper.TextBox(
                 "foo",
-                (string)null /* value */
+                (string)
+                    null /* value */
                 ,
                 (object)null
             );

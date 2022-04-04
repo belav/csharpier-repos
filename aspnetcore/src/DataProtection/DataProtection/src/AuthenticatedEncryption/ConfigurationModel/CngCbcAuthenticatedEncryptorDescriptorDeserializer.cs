@@ -37,9 +37,8 @@ public sealed class CngCbcAuthenticatedEncryptorDescriptorDeserializer
         var encryptionElement = element.Element("encryption")!;
         configuration.EncryptionAlgorithm = (string)encryptionElement.Attribute("algorithm")!;
         configuration.EncryptionAlgorithmKeySize = (int)encryptionElement.Attribute("keyLength")!;
-        configuration.EncryptionAlgorithmProvider = (string?)encryptionElement.Attribute(
-            "provider"
-        ); // could be null
+        configuration.EncryptionAlgorithmProvider = (string?)
+            encryptionElement.Attribute("provider"); // could be null
 
         var hashElement = element.Element("hash")!;
         configuration.HashAlgorithm = (string)hashElement.Attribute("algorithm")!;

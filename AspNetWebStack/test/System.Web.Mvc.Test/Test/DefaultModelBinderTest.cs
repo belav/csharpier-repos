@@ -828,10 +828,8 @@ namespace System.Web.Mvc.Test
                 .Returns("Hello, world!");
 
             // Act
-            ModelWithoutBindAttribute model = (ModelWithoutBindAttribute)binder.Object.BindModel(
-                new ControllerContext(),
-                bindingContext
-            );
+            ModelWithoutBindAttribute model = (ModelWithoutBindAttribute)
+                binder.Object.BindModel(new ControllerContext(), bindingContext);
 
             // Assert
             Assert.Equal("Hello, world!", model.Bar);
@@ -855,10 +853,8 @@ namespace System.Web.Mvc.Test
             DefaultModelBinder binder = new DefaultModelBinder();
 
             // Act
-            PropertyTestingModel model = (PropertyTestingModel)binder.BindModel(
-                new ControllerContext(),
-                bindingContext
-            );
+            PropertyTestingModel model = (PropertyTestingModel)
+                binder.BindModel(new ControllerContext(), bindingContext);
 
             // Assert
             ModelState modelState = bindingContext.ModelState["IntReadWrite"];

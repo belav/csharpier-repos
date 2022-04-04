@@ -95,7 +95,8 @@ namespace Microsoft.Win32
                 subkey,
                 0,
                 null,
-                (int)registryOptions /* specifies if the key is volatile */
+                (int)
+                    registryOptions /* specifies if the key is volatile */
                 ,
                 GetRegistryKeyAccess(permissionCheck != RegistryKeyPermissionCheck.ReadSubTree)
                     | (int)_regView,

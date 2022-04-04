@@ -31,10 +31,11 @@ namespace RemotingTest
         public static Client CreateInNewAppDomain()
         {
             AppDomain clientDomain = AppDomain.CreateDomain("client");
-            return (Client)clientDomain.CreateInstanceAndUnwrap(
-                typeof(Client).Assembly.FullName,
-                typeof(Client).FullName
-            );
+            return (Client)
+                clientDomain.CreateInstanceAndUnwrap(
+                    typeof(Client).Assembly.FullName,
+                    typeof(Client).FullName
+                );
         }
 
         public string Run()

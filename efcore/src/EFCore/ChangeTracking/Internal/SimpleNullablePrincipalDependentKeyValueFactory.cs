@@ -80,9 +80,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             [NotNullWhen(true)] out TKey? key
         )
         {
-            key = (TKey)(object)(
-                (Func<IUpdateEntry, TNonNullableKey>)_propertyAccessors.CurrentValueGetter
-            )(entry);
+            key = (TKey)
+                (object)
+                    ((Func<IUpdateEntry, TNonNullableKey>)_propertyAccessors.CurrentValueGetter)(
+                        entry
+                    );
             return true;
         }
 
@@ -97,12 +99,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             [NotNullWhen(true)] out TKey? key
         )
         {
-            key = (TKey)(object)(
-                (Func<
-                    IUpdateEntry,
-                    TNonNullableKey
-                >)_propertyAccessors.PreStoreGeneratedCurrentValueGetter
-            )(entry);
+            key = (TKey)
+                (object)
+                    (
+                        (Func<IUpdateEntry, TNonNullableKey>)
+                            _propertyAccessors.PreStoreGeneratedCurrentValueGetter
+                    )(entry);
             return true;
         }
 
@@ -117,9 +119,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             [NotNullWhen(true)] out TKey? key
         )
         {
-            key = (TKey)(object)(
-                (Func<IUpdateEntry, TNonNullableKey>)_propertyAccessors.OriginalValueGetter!
-            )(entry);
+            key = (TKey)
+                (object)
+                    ((Func<IUpdateEntry, TNonNullableKey>)_propertyAccessors.OriginalValueGetter!)(
+                        entry
+                    );
             return true;
         }
 
@@ -134,9 +138,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             [NotNullWhen(true)] out TKey? key
         )
         {
-            key = (TKey)(object)(
-                (Func<IUpdateEntry, TNonNullableKey>)_propertyAccessors.RelationshipSnapshotGetter
-            )(entry);
+            key = (TKey)
+                (object)
+                    (
+                        (Func<IUpdateEntry, TNonNullableKey>)
+                            _propertyAccessors.RelationshipSnapshotGetter
+                    )(entry);
             return true;
         }
     }

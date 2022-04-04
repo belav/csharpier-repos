@@ -208,10 +208,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
 
             try
             {
-                return (ComTypes.TYPELIBATTR)Marshal.PtrToStructure(
-                    pAttrs,
-                    typeof(ComTypes.TYPELIBATTR)
-                );
+                return (ComTypes.TYPELIBATTR)
+                    Marshal.PtrToStructure(pAttrs, typeof(ComTypes.TYPELIBATTR));
             }
             finally
             {

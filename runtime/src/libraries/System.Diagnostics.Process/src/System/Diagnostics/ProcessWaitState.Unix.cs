@@ -455,15 +455,16 @@ namespace System.Diagnostics
                     int remainingTimeout =
                         millisecondsTimeout == Timeout.Infinite
                             ? Timeout.Infinite
-                            : (int)Math.Max(
-                                  millisecondsTimeout
-                                      - (
-                                          (Stopwatch.GetTimestamp() - startTime)
-                                          / (double)Stopwatch.Frequency
-                                          * 1000
-                                      ),
-                                  0
-                              );
+                            : (int)
+                                  Math.Max(
+                                      millisecondsTimeout
+                                          - (
+                                              (Stopwatch.GetTimestamp() - startTime)
+                                              / (double)Stopwatch.Frequency
+                                              * 1000
+                                          ),
+                                      0
+                                  );
 
                     lock (_gate)
                     {

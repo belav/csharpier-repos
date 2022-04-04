@@ -181,9 +181,8 @@ namespace System.Text.Encodings.Web
 
             internal override int EncodeUtf8(Rune value, Span<byte> destination)
             {
-                uint utf8lsb = (uint)UnicodeHelpers.GetUtf8RepresentationForScalarValue(
-                    (uint)value.Value
-                );
+                uint utf8lsb = (uint)
+                    UnicodeHelpers.GetUtf8RepresentationForScalarValue((uint)value.Value);
 
                 if (!SpanUtility.IsValidIndex(destination, 2))
                 {
@@ -233,9 +232,8 @@ namespace System.Text.Encodings.Web
 
             internal override int EncodeUtf16(Rune value, Span<char> destination)
             {
-                uint utf8lsb = (uint)UnicodeHelpers.GetUtf8RepresentationForScalarValue(
-                    (uint)value.Value
-                );
+                uint utf8lsb = (uint)
+                    UnicodeHelpers.GetUtf8RepresentationForScalarValue((uint)value.Value);
 
                 if (!SpanUtility.IsValidIndex(destination, 2))
                 {

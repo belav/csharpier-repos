@@ -51,14 +51,15 @@ namespace System.Reflection.Emit
             {
                 m_pDocumentWriterSafeHandle = pDocumentWriterSafeHandle;
                 // The handle is actually a pointer to a native ISymUnmanagedDocumentWriter.
-                m_pDocWriter =
-                    (ISymUnmanagedDocumentWriter*)m_pDocumentWriterSafeHandle.DangerousGetHandle();
-                m_vtable = (ISymUnmanagedDocumentWriterVTable)(
-                    Marshal.PtrToStructure(
-                        m_pDocWriter->m_unmanagedVTable,
-                        typeof(ISymUnmanagedDocumentWriterVTable)
-                    )
-                )!;
+                m_pDocWriter = (ISymUnmanagedDocumentWriter*)
+                    m_pDocumentWriterSafeHandle.DangerousGetHandle();
+                m_vtable = (ISymUnmanagedDocumentWriterVTable)
+                    (
+                        Marshal.PtrToStructure(
+                            m_pDocWriter->m_unmanagedVTable,
+                            typeof(ISymUnmanagedDocumentWriterVTable)
+                        )
+                    )!;
             }
 
             //------------------------------------------------------------------------------
@@ -393,12 +394,13 @@ namespace System.Reflection.Emit
             internal void InternalSetUnderlyingWriter(IntPtr ppUnderlyingWriter)
             {
                 m_pWriter = *((ISymUnmanagedWriter**)ppUnderlyingWriter);
-                m_vtable = (ISymUnmanagedWriterVTable)(
-                    Marshal.PtrToStructure(
-                        m_pWriter->m_unmanagedVTable,
-                        typeof(ISymUnmanagedWriterVTable)
-                    )
-                )!;
+                m_vtable = (ISymUnmanagedWriterVTable)
+                    (
+                        Marshal.PtrToStructure(
+                            m_pWriter->m_unmanagedVTable,
+                            typeof(ISymUnmanagedWriterVTable)
+                        )
+                    )!;
             }
 
             //------------------------------------------------------------------------------
@@ -575,10 +577,8 @@ namespace System.Reflection.Emit
         public override bool IsInvalid => handle == ((IntPtr)0);
 
         private delegate void DRelease(IntPtr punk); // Delegate type for P/Invoking to coreclr.dll and doing an IUnknown::Release()
-        private static DRelease m_Release = (DRelease)Marshal.GetDelegateForFunctionPointer(
-            nGetDReleaseTarget(),
-            typeof(DRelease)
-        );
+        private static DRelease m_Release = (DRelease)
+            Marshal.GetDelegateForFunctionPointer(nGetDReleaseTarget(), typeof(DRelease));
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern IntPtr nGetDReleaseTarget(); // FCall gets us the native DRelease target (so we don't need named dllexport from coreclr.dll)

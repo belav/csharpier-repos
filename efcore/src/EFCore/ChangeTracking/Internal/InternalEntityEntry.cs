@@ -942,9 +942,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         /// </summary>
         public TProperty GetCurrentValue<TProperty>(IPropertyBase propertyBase) =>
             (
-                (Func<InternalEntityEntry, TProperty>)propertyBase
-                    .GetPropertyAccessors()
-                    .CurrentValueGetter
+                (Func<InternalEntityEntry, TProperty>)
+                    propertyBase.GetPropertyAccessors().CurrentValueGetter
             )(this);
 
         /// <summary>
@@ -955,9 +954,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         /// </summary>
         public TProperty GetOriginalValue<TProperty>(IProperty property) =>
             (
-                (Func<InternalEntityEntry, TProperty>)property
-                    .GetPropertyAccessors()
-                    .OriginalValueGetter!
+                (Func<InternalEntityEntry, TProperty>)
+                    property.GetPropertyAccessors().OriginalValueGetter!
             )(this);
 
         /// <summary>
@@ -968,9 +966,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         /// </summary>
         public TProperty GetRelationshipSnapshotValue<TProperty>(IPropertyBase propertyBase) =>
             (
-                (Func<IUpdateEntry, TProperty>)propertyBase
-                    .GetPropertyAccessors()
-                    .RelationshipSnapshotGetter
+                (Func<IUpdateEntry, TProperty>)
+                    propertyBase.GetPropertyAccessors().RelationshipSnapshotGetter
             )(this);
 
         /// <summary>

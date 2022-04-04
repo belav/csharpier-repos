@@ -70,11 +70,12 @@ namespace AutoMapper.UnitTests.InterfaceMapping
         public void ShouldMapToNewObject()
         {
             var destination =
-                (IMyInterface<ContainerClass>)Mapper.Map(
-                    source,
-                    typeof(MyClass<ContainerClass>),
-                    typeof(IMyInterface<ContainerClass>)
-                );
+                (IMyInterface<ContainerClass>)
+                    Mapper.Map(
+                        source,
+                        typeof(MyClass<ContainerClass>),
+                        typeof(IMyInterface<ContainerClass>)
+                    );
             destination.Container.MyProperty.ShouldBe(3);
         }
     }

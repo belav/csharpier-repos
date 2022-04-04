@@ -1387,9 +1387,8 @@ public class DerivedClass : Interface3Derived
 
             var comp = CreateCompilation(text);
 
-            var derivedClass = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace.GetMembers(
-                "DerivedClass"
-            )[0];
+            var derivedClass = (NamedTypeSymbol)
+                comp.SourceModule.GlobalNamespace.GetMembers("DerivedClass")[0];
             var members = derivedClass.GetMembers();
             Assert.Equal(3, members.Length);
         }
@@ -1425,9 +1424,8 @@ public class C : B<int, long>
             Assert.Equal("Q", classBTypeArguments[0].Name);
             Assert.Equal("R", classBTypeArguments[1].Name);
 
-            var classBMethodM = (MethodSymbol)classB
-                .GetMembers()
-                .Single(sym => sym.Name.EndsWith("M", StringComparison.Ordinal));
+            var classBMethodM = (MethodSymbol)
+                classB.GetMembers().Single(sym => sym.Name.EndsWith("M", StringComparison.Ordinal));
             var classBMethodMTypeParameters = classBMethodM.TypeParameters;
             Assert.Equal(1, classBMethodMTypeParameters.Length);
             Assert.Equal("S", classBMethodMTypeParameters[0].Name);
@@ -1448,9 +1446,10 @@ public class C : B<int, long>
             Assert.Equal(SpecialType.System_Int32, classCBaseTypeArguments[0].SpecialType);
             Assert.Equal(SpecialType.System_Int64, classCBaseTypeArguments[1].SpecialType);
 
-            var classCBaseMethodM = (MethodSymbol)classCBase
-                .GetMembers()
-                .Single(sym => sym.Name.EndsWith("M", StringComparison.Ordinal));
+            var classCBaseMethodM = (MethodSymbol)
+                classCBase
+                    .GetMembers()
+                    .Single(sym => sym.Name.EndsWith("M", StringComparison.Ordinal));
             Assert.NotEqual(classBMethodM, classCBaseMethodM);
 
             var classCBaseMethodMTypeParameters = classCBaseMethodM.TypeParameters;
@@ -1696,9 +1695,8 @@ class C1 : @int, @void
 }
 ";
             var comp = CreateCompilation(Parse(text));
-            NamedTypeSymbol c1 = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace
-                .GetMembers("C1")
-                .Single();
+            NamedTypeSymbol c1 = (NamedTypeSymbol)
+                comp.SourceModule.GlobalNamespace.GetMembers("C1").Single();
             // Per explanation from NGafter:
             //
             // We intentionally escape keywords that appear in the type qualification of the interface name
@@ -1713,8 +1711,8 @@ class C1 : @int, @void
             NamedTypeSymbol rvoid = (NamedTypeSymbol)mreturn.ReturnType;
             Assert.Equal("void", rvoid.Name);
             Assert.Equal("@void", rvoid.ToString());
-            MethodSymbol mvoidreturn =
-                (MethodSymbol)mreturn.ExplicitInterfaceImplementations.Single();
+            MethodSymbol mvoidreturn = (MethodSymbol)
+                mreturn.ExplicitInterfaceImplementations.Single();
             Assert.Equal("return", mvoidreturn.Name);
             Assert.Equal("@void.@return(@void)", mvoidreturn.ToString());
             ParameterSymbol pin = mreturn.Parameters.Single();
@@ -1809,9 +1807,8 @@ class F : System.IFormattable
             var globalNamespace = comp.GlobalNamespace;
             var systemNamespace = (NamespaceSymbol)globalNamespace.GetMembers("System").Single();
 
-            var @interface = (NamedTypeSymbol)systemNamespace
-                .GetTypeMembers("IFormattable")
-                .Single();
+            var @interface = (NamedTypeSymbol)
+                systemNamespace.GetTypeMembers("IFormattable").Single();
             Assert.Equal(TypeKind.Interface, @interface.TypeKind);
 
             var interfaceMethod = (MethodSymbol)@interface.GetMembers("ToString").Single();
@@ -1820,9 +1817,8 @@ class F : System.IFormattable
             Assert.Equal(TypeKind.Class, @class.TypeKind);
             Assert.True(@class.Interfaces().Contains(@interface));
 
-            var classMethod = (MethodSymbol)@class
-                .GetMembers("System.IFormattable.ToString")
-                .Single();
+            var classMethod = (MethodSymbol)
+                @class.GetMembers("System.IFormattable.ToString").Single();
             Assert.Equal(MethodKind.ExplicitInterfaceImplementation, classMethod.MethodKind);
 
             var explicitImpl = classMethod.ExplicitInterfaceImplementations.Single();
@@ -1944,13 +1940,11 @@ class IC : Namespace.I<int>
             var substitutedInterface = @class.Interfaces().Single();
             Assert.Equal(@interface, substitutedInterface.ConstructedFrom);
 
-            var substitutedInterfaceMethod = (MethodSymbol)substitutedInterface
-                .GetMembers("Method")
-                .Single();
+            var substitutedInterfaceMethod = (MethodSymbol)
+                substitutedInterface.GetMembers("Method").Single();
 
-            var classMethod = (MethodSymbol)@class
-                .GetMembers("Namespace.I<System.Int32>.Method")
-                .Single();
+            var classMethod = (MethodSymbol)
+                @class.GetMembers("Namespace.I<System.Int32>.Method").Single();
             Assert.Equal(MethodKind.ExplicitInterfaceImplementation, classMethod.MethodKind);
 
             var explicitImpl = classMethod.ExplicitInterfaceImplementations.Single();

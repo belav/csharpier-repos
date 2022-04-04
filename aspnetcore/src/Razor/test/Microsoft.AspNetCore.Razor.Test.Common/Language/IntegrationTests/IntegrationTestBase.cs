@@ -132,11 +132,8 @@ public abstract class IntegrationTestBase
 
     protected CSharpSyntaxTree AddCSharpSyntaxTree(string text, string? filePath = null)
     {
-        var syntaxTree = (CSharpSyntaxTree)CSharpSyntaxTree.ParseText(
-            text,
-            CSharpParseOptions,
-            path: filePath ?? string.Empty
-        );
+        var syntaxTree = (CSharpSyntaxTree)
+            CSharpSyntaxTree.ParseText(text, CSharpParseOptions, path: filePath ?? string.Empty);
         CSharpSyntaxTrees.Add(syntaxTree);
         return syntaxTree;
     }
@@ -318,11 +315,12 @@ public abstract class IntegrationTestBase
 
         var syntaxTrees = new[]
         {
-            (CSharpSyntaxTree)CSharpSyntaxTree.ParseText(
-                cSharpDocument.GeneratedCode,
-                CSharpParseOptions,
-                path: code.CodeDocument.Source.FilePath
-            ),
+            (CSharpSyntaxTree)
+                CSharpSyntaxTree.ParseText(
+                    cSharpDocument.GeneratedCode,
+                    CSharpParseOptions,
+                    path: code.CodeDocument.Source.FilePath
+                ),
         };
 
         var compilation = code.BaseCompilation.AddSyntaxTrees(syntaxTrees);

@@ -148,14 +148,15 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
                 // instead.
                 if (IsBooleanLiteral(trueValue, false) && IsBooleanLiteral(falseValue, true))
                 {
-                    return (TExpressionSyntax)generator
-                        .Negate(generatorInternal, condition, semanticModel, cancellationToken)
-                        .WithoutTrivia();
+                    return (TExpressionSyntax)
+                        generator
+                            .Negate(generatorInternal, condition, semanticModel, cancellationToken)
+                            .WithoutTrivia();
                 }
             }
 
-            var conditionalExpression =
-                (TConditionalExpressionSyntax)generator.ConditionalExpression(
+            var conditionalExpression = (TConditionalExpressionSyntax)
+                generator.ConditionalExpression(
                     condition.WithoutTrivia(),
                     MakeRef(
                         generatorInternal,
@@ -289,10 +290,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
                     || conversion.Operand.Type.TypeKind != TypeKind.Error
                 )
                 {
-                    return (TExpressionSyntax)generator.CastExpression(
-                        conversion.Type,
-                        sourceSyntax
-                    );
+                    return (TExpressionSyntax)
+                        generator.CastExpression(conversion.Type, sourceSyntax);
                 }
             }
 

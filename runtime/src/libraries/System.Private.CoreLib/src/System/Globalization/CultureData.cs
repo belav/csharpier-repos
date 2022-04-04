@@ -523,15 +523,16 @@ namespace System.Globalization
                 (int)types <= 0
                 || (
                     (int)types
-                    & (int)~(
-                        CultureTypes.NeutralCultures
-                        | CultureTypes.SpecificCultures
-                        | CultureTypes.InstalledWin32Cultures
-                        | CultureTypes.UserCustomCulture
-                        | CultureTypes.ReplacementCultures
-                        | CultureTypes.WindowsOnlyCultures
-                        | CultureTypes.FrameworkCultures
-                    )
+                    & (int)
+                        ~(
+                            CultureTypes.NeutralCultures
+                            | CultureTypes.SpecificCultures
+                            | CultureTypes.InstalledWin32Cultures
+                            | CultureTypes.UserCustomCulture
+                            | CultureTypes.ReplacementCultures
+                            | CultureTypes.WindowsOnlyCultures
+                            | CultureTypes.FrameworkCultures
+                        )
                 ) != 0
             )
             {
@@ -2029,9 +2030,8 @@ namespace System.Globalization
                     return new GregorianCalendar();
                 }
 
-                CalendarId defaultCalId = (CalendarId)GetLocaleInfoCore(
-                    LocaleNumberData.CalendarType
-                );
+                CalendarId defaultCalId = (CalendarId)
+                    GetLocaleInfoCore(LocaleNumberData.CalendarType);
 
                 if (defaultCalId == 0)
                 {

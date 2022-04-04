@@ -287,9 +287,9 @@ namespace Microsoft.EntityFrameworkCore
         public static IEnumerable<ITableMappingBase> GetDefaultMappings(
             this IEntityType entityType
         ) =>
-            (IEnumerable<ITableMappingBase>?)entityType.FindRuntimeAnnotationValue(
-                RelationalAnnotationNames.DefaultMappings
-            ) ?? Array.Empty<ITableMappingBase>();
+            (IEnumerable<ITableMappingBase>?)
+                entityType.FindRuntimeAnnotationValue(RelationalAnnotationNames.DefaultMappings)
+            ?? Array.Empty<ITableMappingBase>();
 
         /// <summary>
         ///     Returns the tables to which the entity type is mapped.
@@ -297,9 +297,9 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="entityType">The entity type to get the table mappings for.</param>
         /// <returns>The tables to which the entity type is mapped.</returns>
         public static IEnumerable<ITableMapping> GetTableMappings(this IEntityType entityType) =>
-            (IEnumerable<ITableMapping>?)entityType.FindRuntimeAnnotationValue(
-                RelationalAnnotationNames.TableMappings
-            ) ?? Array.Empty<ITableMapping>();
+            (IEnumerable<ITableMapping>?)
+                entityType.FindRuntimeAnnotationValue(RelationalAnnotationNames.TableMappings)
+            ?? Array.Empty<ITableMapping>();
 
         /// <summary>
         ///     Returns the name of the view to which the entity type is mapped or <see langword="null" /> if not mapped to a view.
@@ -474,9 +474,9 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="entityType">The entity type to get the view mappings for.</param>
         /// <returns>The views to which the entity type is mapped.</returns>
         public static IEnumerable<IViewMapping> GetViewMappings(this IEntityType entityType) =>
-            (IEnumerable<IViewMapping>?)entityType.FindRuntimeAnnotationValue(
-                RelationalAnnotationNames.ViewMappings
-            ) ?? Array.Empty<IViewMapping>();
+            (IEnumerable<IViewMapping>?)
+                entityType.FindRuntimeAnnotationValue(RelationalAnnotationNames.ViewMappings)
+            ?? Array.Empty<IViewMapping>();
 
         /// <summary>
         ///     Gets the default SQL query name that would be used for this entity type when mapped using
@@ -531,13 +531,14 @@ namespace Microsoft.EntityFrameworkCore
             string? name,
             bool fromDataAnnotation = false
         ) =>
-            (string?)entityType
-                .SetAnnotation(
-                    RelationalAnnotationNames.SqlQuery,
-                    Check.NullButNotEmpty(name, nameof(name)),
-                    fromDataAnnotation
-                )
-                ?.Value;
+            (string?)
+                entityType
+                    .SetAnnotation(
+                        RelationalAnnotationNames.SqlQuery,
+                        Check.NullButNotEmpty(name, nameof(name)),
+                        fromDataAnnotation
+                    )
+                    ?.Value;
 
         /// <summary>
         ///     Gets the <see cref="ConfigurationSource" /> for the query SQL string.
@@ -557,9 +558,9 @@ namespace Microsoft.EntityFrameworkCore
         public static IEnumerable<ISqlQueryMapping> GetSqlQueryMappings(
             this IEntityType entityType
         ) =>
-            (IEnumerable<ISqlQueryMapping>?)entityType.FindRuntimeAnnotationValue(
-                RelationalAnnotationNames.SqlQueryMappings
-            ) ?? Array.Empty<ISqlQueryMapping>();
+            (IEnumerable<ISqlQueryMapping>?)
+                entityType.FindRuntimeAnnotationValue(RelationalAnnotationNames.SqlQueryMappings)
+            ?? Array.Empty<ISqlQueryMapping>();
 
         /// <summary>
         ///     Returns the name of the function to which the entity type is mapped or <see langword="null" /> if not mapped to a function.
@@ -605,13 +606,14 @@ namespace Microsoft.EntityFrameworkCore
             string? name,
             bool fromDataAnnotation = false
         ) =>
-            (string?)entityType
-                .SetAnnotation(
-                    RelationalAnnotationNames.FunctionName,
-                    Check.NullButNotEmpty(name, nameof(name)),
-                    fromDataAnnotation
-                )
-                ?.Value;
+            (string?)
+                entityType
+                    .SetAnnotation(
+                        RelationalAnnotationNames.FunctionName,
+                        Check.NullButNotEmpty(name, nameof(name)),
+                        fromDataAnnotation
+                    )
+                    ?.Value;
 
         /// <summary>
         ///     Gets the <see cref="ConfigurationSource" /> for the function name.
@@ -633,9 +635,9 @@ namespace Microsoft.EntityFrameworkCore
         public static IEnumerable<IFunctionMapping> GetFunctionMappings(
             this IEntityType entityType
         ) =>
-            (IEnumerable<IFunctionMapping>?)entityType.FindRuntimeAnnotationValue(
-                RelationalAnnotationNames.FunctionMappings
-            ) ?? Array.Empty<IFunctionMapping>();
+            (IEnumerable<IFunctionMapping>?)
+                entityType.FindRuntimeAnnotationValue(RelationalAnnotationNames.FunctionMappings)
+            ?? Array.Empty<IFunctionMapping>();
 
         /// <summary>
         ///     Finds an <see cref="IReadOnlyCheckConstraint" /> with the given name.
@@ -683,9 +685,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionEntityType entityType,
             string name
         ) =>
-            (IConventionCheckConstraint?)((IReadOnlyEntityType)entityType).FindCheckConstraint(
-                name
-            );
+            (IConventionCheckConstraint?)
+                ((IReadOnlyEntityType)entityType).FindCheckConstraint(name);
 
         /// <summary>
         ///     Finds an <see cref="ICheckConstraint" /> with the given name.
@@ -771,10 +772,11 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionEntityType entityType,
             string name
         ) =>
-            (IConventionCheckConstraint?)CheckConstraint.RemoveCheckConstraint(
-                (IMutableEntityType)entityType,
-                Check.NotEmpty(name, nameof(name))
-            );
+            (IConventionCheckConstraint?)
+                CheckConstraint.RemoveCheckConstraint(
+                    (IMutableEntityType)entityType,
+                    Check.NotEmpty(name, nameof(name))
+                );
 
         /// <summary>
         ///     Returns all check constraints contained in the entity type.
@@ -1043,9 +1045,8 @@ namespace Microsoft.EntityFrameworkCore
                 throw new InvalidOperationException(CoreStrings.RuntimeModelMissingData);
             }
 
-            var excluded = (bool?)entityType[
-                RelationalAnnotationNames.IsTableExcludedFromMigrations
-            ];
+            var excluded = (bool?)
+                entityType[RelationalAnnotationNames.IsTableExcludedFromMigrations];
             if (excluded != null)
             {
                 return excluded.Value;
@@ -1091,13 +1092,14 @@ namespace Microsoft.EntityFrameworkCore
             bool? excluded,
             bool fromDataAnnotation = false
         ) =>
-            (bool?)entityType
-                .SetOrRemoveAnnotation(
-                    RelationalAnnotationNames.IsTableExcludedFromMigrations,
-                    excluded,
-                    fromDataAnnotation
-                )
-                ?.Value;
+            (bool?)
+                entityType
+                    .SetOrRemoveAnnotation(
+                        RelationalAnnotationNames.IsTableExcludedFromMigrations,
+                        excluded,
+                        fromDataAnnotation
+                    )
+                    ?.Value;
 
         /// <summary>
         ///     Gets the <see cref="ConfigurationSource" /> for <see cref="IsTableExcludedFromMigrations" />.

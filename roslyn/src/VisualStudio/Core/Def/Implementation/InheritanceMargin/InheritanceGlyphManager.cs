@@ -238,9 +238,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             var resourceDictionary = _editorFormatMap.GetProperties(GlyphMarginName);
             if (resourceDictionary.Contains(EditorFormatDefinition.BackgroundColorId))
             {
-                var backgroundColor = (Color)resourceDictionary[
-                    EditorFormatDefinition.BackgroundColorId
-                ];
+                var backgroundColor = (Color)
+                    resourceDictionary[EditorFormatDefinition.BackgroundColorId];
                 // Set background color for all the glyphs
                 ImageThemingUtilities.SetImageBackgroundColor(_glyphsContainer, backgroundColor);
             }

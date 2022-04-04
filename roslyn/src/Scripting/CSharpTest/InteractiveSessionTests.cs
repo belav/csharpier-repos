@@ -365,11 +365,8 @@ typeof(C)
             Assert.Equal(MethodImplAttributes.PreserveSig, m.MethodImplementationFlags);
 
             // Reflection synthesizes DllImportAttribute
-            var dllImport = (DllImportAttribute)m.GetCustomAttributes(
-                    typeof(DllImportAttribute),
-                    inherit: false
-                )
-                .Single();
+            var dllImport = (DllImportAttribute)
+                m.GetCustomAttributes(typeof(DllImportAttribute), inherit: false).Single();
             Assert.True(dllImport.BestFitMapping);
             Assert.Equal(CallingConvention.Cdecl, dllImport.CallingConvention);
             Assert.Equal(CharSet.Unicode, dllImport.CharSet);

@@ -475,8 +475,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     )
                     .AsMember(promiseType);
 
-                var moveNextAsyncReturnType =
-                    (NamedTypeSymbol)IAsyncEnumerableOfElementType_MoveNextAsync.ReturnType;
+                var moveNextAsyncReturnType = (NamedTypeSymbol)
+                    IAsyncEnumerableOfElementType_MoveNextAsync.ReturnType;
 
                 MethodSymbol valueTaskT_ctorValue = F.WellKnownMethod(
                         WellKnownMember.System_Threading_Tasks_ValueTask_T__ctorValue
@@ -581,11 +581,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 // _promiseOfValueOrEnd.Reset();
                 BoundFieldAccess promiseField = F.InstanceField(_promiseOfValueOrEndField);
-                var resetMethod = (MethodSymbol)F.WellKnownMethod(
-                        WellKnownMember.System_Threading_Tasks_Sources_ManualResetValueTaskSourceCore_T__Reset,
-                        isOptional: true
-                    )
-                    .SymbolAsMember((NamedTypeSymbol)_promiseOfValueOrEndField.Type);
+                var resetMethod = (MethodSymbol)
+                    F.WellKnownMethod(
+                            WellKnownMember.System_Threading_Tasks_Sources_ManualResetValueTaskSourceCore_T__Reset,
+                            isOptional: true
+                        )
+                        .SymbolAsMember((NamedTypeSymbol)_promiseOfValueOrEndField.Type);
 
                 callReset = F.ExpressionStatement(F.Call(promiseField, resetMethod));
 
@@ -1024,9 +1025,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
                 if (setResultMethod is { })
                 {
-                    setResultMethod = (MethodSymbol)setResultMethod.SymbolAsMember(
-                        (NamedTypeSymbol)_promiseOfValueOrEndField.Type
-                    );
+                    setResultMethod = (MethodSymbol)
+                        setResultMethod.SymbolAsMember(
+                            (NamedTypeSymbol)_promiseOfValueOrEndField.Type
+                        );
                 }
 
                 MethodSymbol setExceptionMethod = F.WellKnownMethod(
@@ -1035,9 +1037,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
                 if (setExceptionMethod is { })
                 {
-                    setExceptionMethod = (MethodSymbol)setExceptionMethod.SymbolAsMember(
-                        (NamedTypeSymbol)_promiseOfValueOrEndField.Type
-                    );
+                    setExceptionMethod = (MethodSymbol)
+                        setExceptionMethod.SymbolAsMember(
+                            (NamedTypeSymbol)_promiseOfValueOrEndField.Type
+                        );
                 }
 
                 var rewriter = new AsyncIteratorMethodToStateMachineRewriter(

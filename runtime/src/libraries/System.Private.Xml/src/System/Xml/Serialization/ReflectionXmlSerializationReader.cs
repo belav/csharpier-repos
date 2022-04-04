@@ -771,12 +771,13 @@ namespace System.Xml.Serialization
                             (Func<
                                 MemberInfo,
                                 ReflectionXmlSerializationReaderHelper.SetMemberValueDelegate
-                            >)getSetMemberValueDelegateWithTypeMi.CreateDelegate(
-                                typeof(Func<
-                                    MemberInfo,
-                                    ReflectionXmlSerializationReaderHelper.SetMemberValueDelegate
-                                >)
-                            );
+                            >)
+                                getSetMemberValueDelegateWithTypeMi.CreateDelegate(
+                                    typeof(Func<
+                                        MemberInfo,
+                                        ReflectionXmlSerializationReaderHelper.SetMemberValueDelegate
+                                    >)
+                                );
                         result = getSetMemberValueDelegateWithType(memberInfo);
                         delegateCacheForType[memberName] = result;
                     }
@@ -2645,9 +2646,8 @@ namespace System.Xml.Serialization
                     }
 
                     setTypedDelegate =
-                        (Action<TObj, TParam>)setMethod.CreateDelegate(
-                            typeof(Action<TObj, TParam>)
-                        );
+                        (Action<TObj, TParam>)
+                            setMethod.CreateDelegate(typeof(Action<TObj, TParam>));
                 }
                 else if (memberInfo is FieldInfo fieldInfo)
                 {

@@ -114,8 +114,8 @@ public sealed class EphemeralDataProtectionProvider : IDataProtectionProvider
             {
                 Debug.Assert(RuntimeInformation.IsOSPlatform(OSPlatform.Windows));
 
-                var descriptor =
-                    (CngGcmAuthenticatedEncryptorDescriptor)new T().CreateNewDescriptor();
+                var descriptor = (CngGcmAuthenticatedEncryptorDescriptor)
+                    new T().CreateNewDescriptor();
                 return new CngGcmAuthenticatedEncryptorFactory(
                     loggerFactory
                 ).CreateAuthenticatedEncryptorInstance(descriptor.MasterKey, cngConfiguration);
@@ -124,8 +124,8 @@ public sealed class EphemeralDataProtectionProvider : IDataProtectionProvider
                 configuration is ManagedAuthenticatedEncryptorConfiguration managedConfiguration
             )
             {
-                var descriptor =
-                    (ManagedAuthenticatedEncryptorDescriptor)new T().CreateNewDescriptor();
+                var descriptor = (ManagedAuthenticatedEncryptorDescriptor)
+                    new T().CreateNewDescriptor();
                 return new ManagedAuthenticatedEncryptorFactory(
                     loggerFactory
                 ).CreateAuthenticatedEncryptorInstance(descriptor.MasterKey, managedConfiguration);

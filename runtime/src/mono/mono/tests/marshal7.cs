@@ -140,9 +140,10 @@ public class Test
 
     static bool IsOSX()
     {
-        return (int)typeof(Environment)
-                .GetMethod("get_Platform", BindingFlags.Static | BindingFlags.NonPublic)
-                .Invoke(null, null) == 6;
+        return (int)
+                typeof(Environment)
+                    .GetMethod("get_Platform", BindingFlags.Static | BindingFlags.NonPublic)
+                    .Invoke(null, null) == 6;
     }
 
     public unsafe static int Main()

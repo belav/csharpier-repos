@@ -890,9 +890,8 @@ namespace System.Xml.Tests
         {
             Type _type = ex.GetType();
             res = string.Empty;
-            msg = (string)_nav.Evaluate(
-                "string(/exceptions/exception [@res = '" + res + "']/@message)"
-            );
+            msg = (string)
+                _nav.Evaluate("string(/exceptions/exception [@res = '" + res + "']/@message)");
             try
             {
                 _exVer.IsExceptionOk(ex, res);

@@ -700,9 +700,8 @@ namespace System.Runtime.CompilerServices
             var originalCorLib = comp.Assembly.CorLibrary;
             var newCorLib = result.Assembly.CorLibrary;
             Assert.NotEqual(originalCorLib, newCorLib);
-            var retargetingAssembly = (AssemblySymbol)result.GetAssemblyOrModuleSymbol(
-                compAsMetadata
-            );
+            var retargetingAssembly = (AssemblySymbol)
+                result.GetAssemblyOrModuleSymbol(compAsMetadata);
             Assert.True(retargetingAssembly is RetargetingAssemblySymbol);
             return result;
         }

@@ -260,12 +260,13 @@ namespace System.Web.Mvc.Async.Test
             ControllerContext controllerContext = GetControllerContext();
 
             // Act
-            TaskWrapperAsyncResult result = (TaskWrapperAsyncResult)actionDescriptor.BeginExecute(
-                GetControllerContext(),
-                parameters,
-                callback: null,
-                state: "state"
-            );
+            TaskWrapperAsyncResult result = (TaskWrapperAsyncResult)
+                actionDescriptor.BeginExecute(
+                    GetControllerContext(),
+                    parameters,
+                    callback: null,
+                    state: "state"
+                );
 
             // Assert
             Assert.Equal("state", result.AsyncState);

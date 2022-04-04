@@ -95,11 +95,12 @@ namespace Microsoft.AspNetCore.Components.Web
 
                 // For custom events, the args type is determined from the associated delegate
                 var eventArgsType = renderer.GetEventArgsType(eventHandlerId);
-                return (EventArgs)JsonSerializer.Deserialize(
-                    eventArgsJson,
-                    eventArgsType,
-                    jsonSerializerOptions
-                )!;
+                return (EventArgs)
+                    JsonSerializer.Deserialize(
+                        eventArgsJson,
+                        eventArgsType,
+                        jsonSerializerOptions
+                    )!;
             }
             catch (Exception e)
             {

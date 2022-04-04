@@ -111,11 +111,12 @@ namespace System.DirectoryServices.ActiveDirectory
                     );
 
                     // force binding (needed otherwise S.DS throw an exception while releasing the COM interface pointer)
-                    _ = (string?)PropertyManager.GetPropertyValue(
-                        context,
-                        serverEntry,
-                        PropertyManager.DistinguishedName
-                    );
+                    _ = (string?)
+                        PropertyManager.GetPropertyValue(
+                            context,
+                            serverEntry,
+                            PropertyManager.DistinguishedName
+                        );
 
                     // move the object to the servers container of the target site
                     serverEntry.MoveTo(newParentEntry);
@@ -282,9 +283,8 @@ namespace System.DirectoryServices.ActiveDirectory
                     throw ExceptionHelper.GetExceptionFromCOMException(context, e);
                 }
 
-                ArrayList readOnlyPartitions = (ArrayList)values[
-                    PropertyManager.HasPartialReplicaNCs.ToLowerInvariant()
-                ]!;
+                ArrayList readOnlyPartitions = (ArrayList)
+                    values[PropertyManager.HasPartialReplicaNCs.ToLowerInvariant()]!;
 
                 Debug.Assert(readOnlyPartitions != null);
                 foreach (string readOnlyPartition in readOnlyPartitions)
@@ -333,10 +333,11 @@ namespace System.DirectoryServices.ActiveDirectory
                 throw ExceptionHelper.GetExceptionFromErrorCode(Marshal.GetLastWin32Error());
             }
             UnsafeNativeMethods.DsReplicaConsistencyCheck replicaConsistencyCheck =
-                (UnsafeNativeMethods.DsReplicaConsistencyCheck)Marshal.GetDelegateForFunctionPointer(
-                    functionPtr,
-                    typeof(UnsafeNativeMethods.DsReplicaConsistencyCheck)
-                );
+                (UnsafeNativeMethods.DsReplicaConsistencyCheck)
+                    Marshal.GetDelegateForFunctionPointer(
+                        functionPtr,
+                        typeof(UnsafeNativeMethods.DsReplicaConsistencyCheck)
+                    );
 
             int result = replicaConsistencyCheck(dsHandle, 0, 0);
 
@@ -371,10 +372,11 @@ namespace System.DirectoryServices.ActiveDirectory
                     throw ExceptionHelper.GetExceptionFromErrorCode(Marshal.GetLastWin32Error());
                 }
                 UnsafeNativeMethods.DsReplicaGetInfoW dsReplicaGetInfoW =
-                    (UnsafeNativeMethods.DsReplicaGetInfoW)Marshal.GetDelegateForFunctionPointer(
-                        functionPtr,
-                        typeof(UnsafeNativeMethods.DsReplicaGetInfoW)
-                    );
+                    (UnsafeNativeMethods.DsReplicaGetInfoW)
+                        Marshal.GetDelegateForFunctionPointer(
+                            functionPtr,
+                            typeof(UnsafeNativeMethods.DsReplicaGetInfoW)
+                        );
                 result = dsReplicaGetInfoW(dsHandle, secondaryType, partition, (IntPtr)0, ref info);
                 advanced = false;
                 needToTryAgain = false;
@@ -382,10 +384,11 @@ namespace System.DirectoryServices.ActiveDirectory
             else
             {
                 UnsafeNativeMethods.DsReplicaGetInfo2W dsReplicaGetInfo2W =
-                    (UnsafeNativeMethods.DsReplicaGetInfo2W)Marshal.GetDelegateForFunctionPointer(
-                        functionPtr,
-                        typeof(UnsafeNativeMethods.DsReplicaGetInfo2W)
-                    );
+                    (UnsafeNativeMethods.DsReplicaGetInfo2W)
+                        Marshal.GetDelegateForFunctionPointer(
+                            functionPtr,
+                            typeof(UnsafeNativeMethods.DsReplicaGetInfo2W)
+                        );
                 result = dsReplicaGetInfo2W(
                     dsHandle,
                     type,
@@ -409,10 +412,11 @@ namespace System.DirectoryServices.ActiveDirectory
                     throw ExceptionHelper.GetExceptionFromErrorCode(Marshal.GetLastWin32Error());
                 }
                 UnsafeNativeMethods.DsReplicaGetInfoW dsReplicaGetInfoW =
-                    (UnsafeNativeMethods.DsReplicaGetInfoW)Marshal.GetDelegateForFunctionPointer(
-                        functionPtr,
-                        typeof(UnsafeNativeMethods.DsReplicaGetInfoW)
-                    );
+                    (UnsafeNativeMethods.DsReplicaGetInfoW)
+                        Marshal.GetDelegateForFunctionPointer(
+                            functionPtr,
+                            typeof(UnsafeNativeMethods.DsReplicaGetInfoW)
+                        );
 
                 result = dsReplicaGetInfoW(dsHandle, secondaryType, partition, (IntPtr)0, ref info);
                 advanced = false;
@@ -788,10 +792,11 @@ namespace System.DirectoryServices.ActiveDirectory
                 throw ExceptionHelper.GetExceptionFromErrorCode(Marshal.GetLastWin32Error());
             }
             UnsafeNativeMethods.DsReplicaSyncAllW dsReplicaSyncAllW =
-                (UnsafeNativeMethods.DsReplicaSyncAllW)Marshal.GetDelegateForFunctionPointer(
-                    functionPtr,
-                    typeof(UnsafeNativeMethods.DsReplicaSyncAllW)
-                );
+                (UnsafeNativeMethods.DsReplicaSyncAllW)
+                    Marshal.GetDelegateForFunctionPointer(
+                        functionPtr,
+                        typeof(UnsafeNativeMethods.DsReplicaSyncAllW)
+                    );
 
             int result = dsReplicaSyncAllW(
                 handle,
@@ -849,10 +854,11 @@ namespace System.DirectoryServices.ActiveDirectory
                     throw ExceptionHelper.GetExceptionFromErrorCode(Marshal.GetLastWin32Error());
                 }
                 UnsafeNativeMethods.DsReplicaFreeInfo dsReplicaFreeInfo =
-                    (UnsafeNativeMethods.DsReplicaFreeInfo)Marshal.GetDelegateForFunctionPointer(
-                        functionPtr,
-                        typeof(UnsafeNativeMethods.DsReplicaFreeInfo)
-                    );
+                    (UnsafeNativeMethods.DsReplicaFreeInfo)
+                        Marshal.GetDelegateForFunctionPointer(
+                            functionPtr,
+                            typeof(UnsafeNativeMethods.DsReplicaFreeInfo)
+                        );
 
                 dsReplicaFreeInfo((int)type, value);
             }
@@ -907,10 +913,11 @@ namespace System.DirectoryServices.ActiveDirectory
                     throw ExceptionHelper.GetExceptionFromErrorCode(Marshal.GetLastWin32Error());
                 }
                 UnsafeNativeMethods.DsReplicaSyncW dsReplicaSyncW =
-                    (UnsafeNativeMethods.DsReplicaSyncW)Marshal.GetDelegateForFunctionPointer(
-                        functionPtr,
-                        typeof(UnsafeNativeMethods.DsReplicaSyncW)
-                    );
+                    (UnsafeNativeMethods.DsReplicaSyncW)
+                        Marshal.GetDelegateForFunctionPointer(
+                            functionPtr,
+                            typeof(UnsafeNativeMethods.DsReplicaSyncW)
+                        );
 
                 int result = dsReplicaSyncW(dsHandle, partition, unmanagedGuid, (int)option);
 
@@ -987,10 +994,8 @@ namespace System.DirectoryServices.ActiveDirectory
                         ReplicationConnection con = new ReplicationConnection(
                             newContext,
                             r.GetDirectoryEntry(),
-                            (string)PropertyManager.GetSearchResultPropertyValue(
-                                r,
-                                PropertyManager.Cn
-                            )!
+                            (string)
+                                PropertyManager.GetSearchResultPropertyValue(r, PropertyManager.Cn)!
                         );
                         _inbound.Add(con);
                     }

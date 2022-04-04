@@ -14,10 +14,8 @@ namespace System.Speech.Internal
 
         internal static SpeechAudioFormatInfo ToSpeechAudioFormatInfo(IntPtr waveFormatPtr)
         {
-            WaveFormatEx waveFormatEx = (WaveFormatEx)Marshal.PtrToStructure(
-                waveFormatPtr,
-                typeof(WaveFormatEx)
-            );
+            WaveFormatEx waveFormatEx = (WaveFormatEx)
+                Marshal.PtrToStructure(waveFormatPtr, typeof(WaveFormatEx));
 
             byte[] extraData = new byte[waveFormatEx.cbSize];
             IntPtr extraDataPtr = new(waveFormatPtr.ToInt64() + Marshal.SizeOf(waveFormatEx));

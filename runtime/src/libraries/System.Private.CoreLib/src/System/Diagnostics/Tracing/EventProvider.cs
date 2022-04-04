@@ -467,9 +467,8 @@ namespace System.Diagnostics.Tracing
             ref List<SessionInfo>? sessionList
         )
         {
-            uint sessionIdBitMask = (uint)SessionMask.FromEventKeywords(
-                unchecked((ulong)matchAllKeywords)
-            );
+            uint sessionIdBitMask = (uint)
+                SessionMask.FromEventKeywords(unchecked((ulong)matchAllKeywords));
             // an ETW controller that specifies more than the mandated bit for our EventSource
             // will be ignored...
             int val = BitOperations.PopCount(sessionIdBitMask);
@@ -552,17 +551,16 @@ namespace System.Diagnostics.Tracing
                 }
 
                 var providerInfos = (Interop.Advapi32.TRACE_GUID_INFO*)buffer;
-                var providerInstance =
-                    (Interop.Advapi32.TRACE_PROVIDER_INSTANCE_INFO*)&providerInfos[1];
+                var providerInstance = (Interop.Advapi32.TRACE_PROVIDER_INSTANCE_INFO*)
+                    &providerInfos[1];
                 int processId = unchecked((int)Interop.Kernel32.GetCurrentProcessId());
                 // iterate over the instances of the EventProvider in all processes
                 for (int i = 0; i < providerInfos->InstanceCount; i++)
                 {
                     if (providerInstance->Pid == processId)
                     {
-                        var enabledInfos = (Interop.Advapi32.TRACE_ENABLE_INFO*)&providerInstance[
-                            1
-                        ];
+                        var enabledInfos = (Interop.Advapi32.TRACE_ENABLE_INFO*)
+                            &providerInstance[1];
                         // iterate over the list of active ETW sessions "listening" to the current provider
                         for (int j = 0; j < providerInstance->EnableCount; j++)
                             action(
@@ -577,9 +575,8 @@ namespace System.Diagnostics.Tracing
                         0 <= providerInstance->NextOffset && providerInstance->NextOffset < buffSize
                     );
                     byte* structBase = (byte*)providerInstance;
-                    providerInstance = (Interop.Advapi32.TRACE_PROVIDER_INSTANCE_INFO*)&structBase[
-                        providerInstance->NextOffset
-                    ];
+                    providerInstance = (Interop.Advapi32.TRACE_PROVIDER_INSTANCE_INFO*)
+                        &structBase[providerInstance->NextOffset];
                 }
             }
             finally

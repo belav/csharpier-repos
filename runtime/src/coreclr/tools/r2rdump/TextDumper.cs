@@ -397,9 +397,8 @@ namespace R2RDump
                 case ReadyToRunSectionType.AvailableTypes:
                     if (!_options.Naked)
                     {
-                        uint availableTypesSectionOffset = (uint)_r2r.GetOffset(
-                            section.RelativeVirtualAddress
-                        );
+                        uint availableTypesSectionOffset = (uint)
+                            _r2r.GetOffset(section.RelativeVirtualAddress);
                         NativeParser availableTypesParser = new NativeParser(
                             _r2r.Image,
                             availableTypesSectionOffset
@@ -453,9 +452,8 @@ namespace R2RDump
                 case ReadyToRunSectionType.InstanceMethodEntryPoints:
                     if (!_options.Naked)
                     {
-                        uint instanceSectionOffset = (uint)_r2r.GetOffset(
-                            section.RelativeVirtualAddress
-                        );
+                        uint instanceSectionOffset = (uint)
+                            _r2r.GetOffset(section.RelativeVirtualAddress);
                         NativeParser instanceParser = new NativeParser(
                             _r2r.Image,
                             instanceSectionOffset

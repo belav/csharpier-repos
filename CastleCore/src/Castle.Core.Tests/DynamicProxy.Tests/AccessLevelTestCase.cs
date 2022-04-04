@@ -59,10 +59,8 @@ namespace Castle.DynamicProxy.Tests
         {
             LogInvocationInterceptor logger = new LogInvocationInterceptor();
 
-            NonPublicMethodsClass proxy = (NonPublicMethodsClass)generator.CreateClassProxy(
-                typeof(NonPublicMethodsClass),
-                logger
-            );
+            NonPublicMethodsClass proxy = (NonPublicMethodsClass)
+                generator.CreateClassProxy(typeof(NonPublicMethodsClass), logger);
 
             proxy.DoSomething();
             Assert.AreEqual(2, logger.Invocations.Count);
@@ -112,10 +110,8 @@ namespace Castle.DynamicProxy.Tests
             var realObj = (IMethodClass)Activator.CreateInstance(methodClass);
             Assert.Throws<Exception>(realObj.InvokeMethod);
 
-            var proxy = (IMethodClass)generator.CreateClassProxy(
-                methodClass,
-                new DoNothingInterceptor()
-            );
+            var proxy = (IMethodClass)
+                generator.CreateClassProxy(methodClass, new DoNothingInterceptor());
             Assert.DoesNotThrow(proxy.InvokeMethod);
         }
 

@@ -2498,10 +2498,8 @@ namespace System
                 for (int i = 0; i < n; i++)
                 {
                     var mh = new RuntimeMethodHandle(h[i]);
-                    a[i] = (RuntimeMethodInfo)RuntimeMethodInfo.GetMethodFromHandleNoGenericCheck(
-                        mh,
-                        refh
-                    );
+                    a[i] = (RuntimeMethodInfo)
+                        RuntimeMethodInfo.GetMethodFromHandleNoGenericCheck(mh, refh);
                 }
                 return a;
             }
@@ -2530,11 +2528,8 @@ namespace System
                 for (int i = 0; i < n; i++)
                 {
                     var mh = new RuntimeMethodHandle(h[i]);
-                    a[i] =
-                        (RuntimeConstructorInfo)RuntimeMethodInfo.GetMethodFromHandleNoGenericCheck(
-                            mh,
-                            refh
-                        );
+                    a[i] = (RuntimeConstructorInfo)
+                        RuntimeMethodInfo.GetMethodFromHandleNoGenericCheck(mh, refh);
                 }
                 return a;
             }

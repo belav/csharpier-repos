@@ -1993,9 +1993,8 @@ internal class CSharpCodeParser : TokenizerBackedParser<CSharpTokenizer>
                     directiveCodeBlock
                 );
                 var directive = SyntaxFactory.RazorDirective(transition, directiveBody);
-                directive = (RazorDirectiveSyntax)directive.SetDiagnostics(
-                    directiveErrorSink.Errors.ToArray()
-                );
+                directive = (RazorDirectiveSyntax)
+                    directive.SetDiagnostics(directiveErrorSink.Errors.ToArray());
                 directive = directive.WithDirectiveDescriptor(descriptor);
                 return directive;
             }

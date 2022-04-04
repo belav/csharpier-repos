@@ -89,10 +89,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
             bool toNullable
         )
         {
-            var comparer = (ValueComparer)Activator.CreateInstance(
-                typeof(ValueComparer<>).MakeGenericType(type),
-                new object[] { false }
-            );
+            var comparer = (ValueComparer)
+                Activator.CreateInstance(
+                    typeof(ValueComparer<>).MakeGenericType(type),
+                    new object[] { false }
+                );
             if (toNullable)
             {
                 comparer = comparer.ToNonNullNullableComparer();
@@ -108,10 +109,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             Assert.Equal(hashCode ?? value1.GetHashCode(), comparer.GetHashCode(value1));
 
-            var keyComparer = (ValueComparer)Activator.CreateInstance(
-                typeof(ValueComparer<>).MakeGenericType(type),
-                new object[] { true }
-            );
+            var keyComparer = (ValueComparer)
+                Activator.CreateInstance(
+                    typeof(ValueComparer<>).MakeGenericType(type),
+                    new object[] { true }
+                );
             if (toNullable)
             {
                 keyComparer = keyComparer.ToNonNullNullableComparer();
@@ -626,9 +628,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             );
 
             var keyComparer = new ValueComparer<DeepBinary>(
-                (Expression<Func<DeepBinary, DeepBinary, bool>>)CreateAndExpression(
-                    bytesKeyComparer
-                ),
+                (Expression<Func<DeepBinary, DeepBinary, bool>>)
+                    CreateAndExpression(bytesKeyComparer),
                 (Expression<Func<DeepBinary, int>>)CreateHashCodeExpression(bytesKeyComparer)
             );
 

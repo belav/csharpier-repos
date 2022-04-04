@@ -76,9 +76,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
             bool showProgress
         )
         {
-            var componentModel = (IComponentModel)_serviceProvider.GetService(
-                typeof(SComponentModel)
-            );
+            var componentModel = (IComponentModel)
+                _serviceProvider.GetService(typeof(SComponentModel));
             var workspace = componentModel.GetService<VisualStudioWorkspace>();
             Contract.ThrowIfNull(workspace);
 
@@ -86,9 +85,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
                 workspace.Services.GetService<IGlobalOperationNotificationService>();
             Contract.ThrowIfNull(notificationService);
 
-            var dialogFactory = (IVsThreadedWaitDialogFactory)_serviceProvider.GetService(
-                typeof(SVsThreadedWaitDialogFactory)
-            );
+            var dialogFactory = (IVsThreadedWaitDialogFactory)
+                _serviceProvider.GetService(typeof(SVsThreadedWaitDialogFactory));
             Contract.ThrowIfNull(dialogFactory);
 
             return new VisualStudioWaitContext(

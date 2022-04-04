@@ -622,9 +622,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override BoundNode VisitCatchBlock(BoundCatchBlock node)
         {
-            BoundExpression exceptionSourceOpt = (BoundExpression)this.Visit(
-                node.ExceptionSourceOpt
-            );
+            BoundExpression exceptionSourceOpt = (BoundExpression)
+                this.Visit(node.ExceptionSourceOpt);
             var locals = node.Locals;
 
             var exceptionFilterPrologueOpt = node.ExceptionFilterPrologueOpt;
@@ -768,10 +767,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             BoundSpillSequenceBuilder builder = null;
             BoundExpression count = VisitExpression(ref builder, node.Count);
-            var initializerOpt = (BoundArrayInitialization)VisitExpression(
-                ref builder,
-                node.InitializerOpt
-            );
+            var initializerOpt = (BoundArrayInitialization)
+                VisitExpression(ref builder, node.InitializerOpt);
             return UpdateExpression(
                 builder,
                 node.Update(node.ElementType, count, initializerOpt, node.Type)

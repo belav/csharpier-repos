@@ -24,9 +24,8 @@ namespace Moq.Tests.Matchers
         )
         {
             var seconds = new List<string>();
-            var methodCallExpr = (MethodCallExpression)ToExpression<IX>(
-                x => x.Method(It.IsAny<int>(), Capture.In(seconds))
-            ).Body;
+            var methodCallExpr = (MethodCallExpression)
+                ToExpression<IX>(x => x.Method(It.IsAny<int>(), Capture.In(seconds))).Body;
             var expr = methodCallExpr.Arguments.Single();
             var parameter = typeof(IX).GetMethod("Method").GetParameters().Single();
 
@@ -42,9 +41,8 @@ namespace Moq.Tests.Matchers
         public void SetupEvaluatedSuccessfully_succeeds_for_matching_values()
         {
             var seconds = new List<string>();
-            var methodCallExpr = (MethodCallExpression)ToExpression<IX>(
-                x => x.Method(It.IsAny<int>(), Capture.In(seconds))
-            ).Body;
+            var methodCallExpr = (MethodCallExpression)
+                ToExpression<IX>(x => x.Method(It.IsAny<int>(), Capture.In(seconds))).Body;
             var expr = methodCallExpr.Arguments.Single();
             var parameter = typeof(IX).GetMethod("Method").GetParameters().Single();
 

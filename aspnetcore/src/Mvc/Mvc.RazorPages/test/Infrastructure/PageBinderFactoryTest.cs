@@ -418,10 +418,8 @@ public class PageBinderFactoryTest
                     {
                         // Simulates placing a [BindProperty] on the property
                         RequestPredicate = (
-                            (IRequestPredicateProvider)new BindPropertyAttribute()
-                            {
-                                SupportsGet = true
-                            }
+                            (IRequestPredicateProvider)
+                                new BindPropertyAttribute() { SupportsGet = true }
                         ).RequestPredicate,
                     }
                 },
@@ -483,10 +481,8 @@ public class PageBinderFactoryTest
                     BindingInfo = new BindingInfo()
                     {
                         RequestPredicate = (
-                            (IRequestPredicateProvider)new BindPropertyAttribute()
-                            {
-                                SupportsGet = true
-                            }
+                            (IRequestPredicateProvider)
+                                new BindPropertyAttribute() { SupportsGet = true }
                         ).RequestPredicate,
                     }
                 },

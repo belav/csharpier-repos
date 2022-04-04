@@ -224,9 +224,8 @@ namespace TypeSystemTests
                 );
                 Assert.True(instantiatedType.CheckConstraints());
 
-                MetadataType nullable = (MetadataType)_context.GetWellKnownType(
-                    WellKnownType.Nullable
-                );
+                MetadataType nullable = (MetadataType)
+                    _context.GetWellKnownType(WellKnownType.Nullable);
                 MetadataType nullableOfInt = nullable.MakeInstantiatedType(
                     _context.GetWellKnownType(WellKnownType.Int32)
                 );

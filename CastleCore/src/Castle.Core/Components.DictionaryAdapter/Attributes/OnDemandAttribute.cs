@@ -192,14 +192,15 @@ namespace Castle.Components.DictionaryAdapter
                     if (isBindingList && genericArg.IsInterface)
                     {
                         Func<object> addNew = () => dictionaryAdapter.Create(genericArg);
-                        initializer = (IValueInitializer)Activator.CreateInstance(
-                            typeof(BindingListInitializer<>).MakeGenericType(genericArg),
-                            null,
-                            addNew,
-                            null,
-                            null,
-                            null
-                        );
+                        initializer = (IValueInitializer)
+                            Activator.CreateInstance(
+                                typeof(BindingListInitializer<>).MakeGenericType(genericArg),
+                                null,
+                                addNew,
+                                null,
+                                null,
+                                null
+                            );
                     }
                 }
                 else if (genericDef == typeof(IList<>) || genericDef == typeof(ICollection<>))

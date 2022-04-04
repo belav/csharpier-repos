@@ -420,18 +420,20 @@ namespace System.Reflection.PortableExecutable
             // SizeOfImage:
             var lastSection = sections[sections.Length - 1];
             builder.WriteUInt32(
-                (uint)BitArithmetic.Align(
-                    lastSection.RelativeVirtualAddress + lastSection.VirtualSize,
-                    Header.SectionAlignment
-                )
+                (uint)
+                    BitArithmetic.Align(
+                        lastSection.RelativeVirtualAddress + lastSection.VirtualSize,
+                        Header.SectionAlignment
+                    )
             );
 
             // SizeOfHeaders:
             builder.WriteUInt32(
-                (uint)BitArithmetic.Align(
-                    Header.ComputeSizeOfPEHeaders(sections.Length),
-                    Header.FileAlignment
-                )
+                (uint)
+                    BitArithmetic.Align(
+                        Header.ComputeSizeOfPEHeaders(sections.Length),
+                        Header.FileAlignment
+                    )
             );
 
             // Checksum:

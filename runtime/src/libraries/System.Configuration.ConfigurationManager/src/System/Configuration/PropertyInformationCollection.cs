@@ -28,9 +28,8 @@ namespace System.Configuration
                 // check for default collection name
                 if (result == null)
                 {
-                    PropertyInformation defaultColl = (PropertyInformation)BaseGet(
-                        ConfigurationProperty.DefaultCollectionPropertyName
-                    );
+                    PropertyInformation defaultColl = (PropertyInformation)
+                        BaseGet(ConfigurationProperty.DefaultCollectionPropertyName);
 
                     if ((defaultColl != null) && (defaultColl.ProvidedName == propertyName))
                         result = defaultColl;

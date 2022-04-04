@@ -279,12 +279,8 @@ public static class XmlDictionaryWriterTest
         for (int i = 0; i < ReaderWriterType.Count; i++)
         {
             string rwTypeStr = ReaderWriterType[i];
-            ReaderWriterFactory.ReaderWriterType rwType =
-                (ReaderWriterFactory.ReaderWriterType)Enum.Parse(
-                    typeof(ReaderWriterFactory.ReaderWriterType),
-                    rwTypeStr,
-                    true
-                );
+            ReaderWriterFactory.ReaderWriterType rwType = (ReaderWriterFactory.ReaderWriterType)
+                Enum.Parse(typeof(ReaderWriterFactory.ReaderWriterType), rwTypeStr, true);
             Encoding encoding = Encoding.GetEncoding(Encodings[i]);
 
             Random rndGen = new Random();
@@ -365,19 +361,12 @@ public static class XmlDictionaryWriterTest
     public static void FragmentTest()
     {
         string rwTypeStr = "Text";
-        ReaderWriterFactory.ReaderWriterType rwType =
-            (ReaderWriterFactory.ReaderWriterType)Enum.Parse(
-                typeof(ReaderWriterFactory.ReaderWriterType),
-                rwTypeStr,
-                true
-            );
+        ReaderWriterFactory.ReaderWriterType rwType = (ReaderWriterFactory.ReaderWriterType)
+            Enum.Parse(typeof(ReaderWriterFactory.ReaderWriterType), rwTypeStr, true);
         Encoding encoding = Encoding.GetEncoding("utf-8");
         MemoryStream ms = new MemoryStream();
-        XmlDictionaryWriter writer = (XmlDictionaryWriter)ReaderWriterFactory.CreateXmlWriter(
-            rwType,
-            ms,
-            encoding
-        );
+        XmlDictionaryWriter writer = (XmlDictionaryWriter)
+            ReaderWriterFactory.CreateXmlWriter(rwType, ms, encoding);
         Assert.False(FragmentHelper.CanFragment(writer));
     }
 
@@ -389,11 +378,8 @@ public static class XmlDictionaryWriterTest
     )
     {
         ms.Position = 0;
-        XmlDictionaryReader reader = (XmlDictionaryReader)ReaderWriterFactory.CreateXmlReader(
-            rwType,
-            ms,
-            encoding
-        );
+        XmlDictionaryReader reader = (XmlDictionaryReader)
+            ReaderWriterFactory.CreateXmlReader(rwType, ms, encoding);
         reader.ReadToDescendant("Root");
         byte[] bytesFromReader = reader.ReadElementContentAsBase64();
         if (bytesFromReader.Length != byteArray.Length)

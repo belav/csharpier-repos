@@ -499,10 +499,11 @@ public class RedisCache : IDistributedCache, IDisposable
     {
         if (absoluteExpiration.HasValue && options.SlidingExpiration.HasValue)
         {
-            return (long)Math.Min(
-                (absoluteExpiration.Value - creationTime).TotalSeconds,
-                options.SlidingExpiration.Value.TotalSeconds
-            );
+            return (long)
+                Math.Min(
+                    (absoluteExpiration.Value - creationTime).TotalSeconds,
+                    options.SlidingExpiration.Value.TotalSeconds
+                );
         }
         else if (absoluteExpiration.HasValue)
         {

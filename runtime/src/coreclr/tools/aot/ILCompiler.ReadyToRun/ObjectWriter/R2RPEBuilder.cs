@@ -575,9 +575,10 @@ namespace ILCompiler.PEWriter
         private void ApplyMachineOSOverride(Stream outputStream)
         {
             byte[] patchedTargetMachine = BitConverter.GetBytes(
-                (ushort)unchecked(
-                    (ushort)Header.Machine ^ (ushort)_target.MachineOSOverrideFromTarget()
-                )
+                (ushort)
+                    unchecked(
+                        (ushort)Header.Machine ^ (ushort)_target.MachineOSOverrideFromTarget()
+                    )
             );
             Debug.Assert(patchedTargetMachine.Length == sizeof(ushort));
 

@@ -299,20 +299,16 @@ namespace System.Runtime.Serialization.Formatters.Tests
                 new FormatterConverter()
             );
             @this.GetObjectData(thisInfo, new StreamingContext());
-            CompareInfo thisCompareInfo = (CompareInfo)thisInfo.GetValue(
-                "CompareInfo",
-                typeof(CompareInfo)
-            );
+            CompareInfo thisCompareInfo = (CompareInfo)
+                thisInfo.GetValue("CompareInfo", typeof(CompareInfo));
 
             SerializationInfo otherInfo = new SerializationInfo(
                 typeof(Comparer),
                 new FormatterConverter()
             );
             other.GetObjectData(otherInfo, new StreamingContext());
-            CompareInfo otherCompareInfo = (CompareInfo)otherInfo.GetValue(
-                "CompareInfo",
-                typeof(CompareInfo)
-            );
+            CompareInfo otherCompareInfo = (CompareInfo)
+                otherInfo.GetValue("CompareInfo", typeof(CompareInfo));
 
             Assert.Equal(thisCompareInfo, otherCompareInfo);
         }

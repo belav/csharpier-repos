@@ -1177,9 +1177,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            var leastOverriddenMember = (TMember)member.GetLeastOverriddenMember(
-                _binder.ContainingType
-            );
+            var leastOverriddenMember = (TMember)
+                member.GetLeastOverriddenMember(_binder.ContainingType);
 
             // Filter out members with unsupported metadata.
             if (member.HasUnsupportedMetadata)
@@ -4315,8 +4314,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
                 else
                 {
-                    MethodSymbol leastOverriddenMethod =
-                        (MethodSymbol)(Symbol)leastOverriddenMember;
+                    MethodSymbol leastOverriddenMethod = (MethodSymbol)
+                        (Symbol)leastOverriddenMember;
 
                     ImmutableArray<TypeWithAnnotations> typeArguments;
                     if (typeArgumentsBuilder.Count > 0)
@@ -4349,10 +4348,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
 
                     member = (TMember)(Symbol)method.Construct(typeArguments);
-                    leastOverriddenMember =
-                        (TMember)(Symbol)leastOverriddenMethod.ConstructedFrom.Construct(
-                            typeArguments
-                        );
+                    leastOverriddenMember = (TMember)
+                        (Symbol)leastOverriddenMethod.ConstructedFrom.Construct(typeArguments);
 
                     // Spec (§7.6.5.1)
                     //   Once the (inferred) type arguments are substituted for the corresponding method type parameters,

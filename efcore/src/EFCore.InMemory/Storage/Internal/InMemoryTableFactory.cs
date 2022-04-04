@@ -58,20 +58,21 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
             IEntityType entityType,
             IInMemoryTable? baseTable
         ) =>
-            (Func<IInMemoryTable>)typeof(InMemoryTableFactory)
-                .GetTypeInfo()
-                .GetDeclaredMethod(nameof(CreateFactory))!
-                .MakeGenericMethod(entityType.FindPrimaryKey()!.GetKeyType())
-                .Invoke(
-                    null,
-                    new object?[]
-                    {
-                        entityType,
-                        baseTable,
-                        _sensitiveLoggingEnabled,
-                        _nullabilityCheckEnabled
-                    }
-                )!;
+            (Func<IInMemoryTable>)
+                typeof(InMemoryTableFactory)
+                    .GetTypeInfo()
+                    .GetDeclaredMethod(nameof(CreateFactory))!
+                    .MakeGenericMethod(entityType.FindPrimaryKey()!.GetKeyType())
+                    .Invoke(
+                        null,
+                        new object?[]
+                        {
+                            entityType,
+                            baseTable,
+                            _sensitiveLoggingEnabled,
+                            _nullabilityCheckEnabled
+                        }
+                    )!;
 
         [UsedImplicitly]
         private static Func<IInMemoryTable> CreateFactory<TKey>(

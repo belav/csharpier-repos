@@ -45,10 +45,8 @@ namespace System.SpanTests
 
             MethodInfo method = type.GetMethod(nameof(MemoryExtensions.CompareTo));
 
-            int result = (int)method.Invoke(
-                null,
-                new object[] { default, default, StringComparison.Ordinal }
-            );
+            int result = (int)
+                method.Invoke(null, new object[] { default, default, StringComparison.Ordinal });
             Assert.Equal(0, result);
         }
 

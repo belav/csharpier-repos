@@ -259,10 +259,11 @@ namespace System.CommandLine.Binding
                 }
                 else
                 {
-                    return (IList)Activator.CreateInstance(
-                        typeof(List<>).MakeGenericType(itemType),
-                        capacity
-                    );
+                    return (IList)
+                        Activator.CreateInstance(
+                            typeof(List<>).MakeGenericType(itemType),
+                            capacity
+                        );
                 }
             }
 

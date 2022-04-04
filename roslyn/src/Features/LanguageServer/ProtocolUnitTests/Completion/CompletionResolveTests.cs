@@ -65,12 +65,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Completion
                 null
             );
 
-            var results = (LSP.VSInternalCompletionItem)await RunResolveCompletionItemAsync(
-                    testLspServer,
-                    clientCompletionItem,
-                    clientCapabilities
-                )
-                .ConfigureAwait(false);
+            var results = (LSP.VSInternalCompletionItem)
+                await RunResolveCompletionItemAsync(
+                        testLspServer,
+                        clientCompletionItem,
+                        clientCapabilities
+                    )
+                    .ConfigureAwait(false);
             AssertJsonEquals(expected, results);
         }
 
@@ -101,11 +102,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Completion
                 null
             );
 
-            var results = (LSP.VSInternalCompletionItem)await RunResolveCompletionItemAsync(
-                    testLspServer,
-                    clientCompletionItem
-                )
-                .ConfigureAwait(false);
+            var results = (LSP.VSInternalCompletionItem)
+                await RunResolveCompletionItemAsync(testLspServer, clientCompletionItem)
+                    .ConfigureAwait(false);
             AssertJsonEquals(expected, results);
         }
 
@@ -130,11 +129,9 @@ class B : A
                         label: "M()"
                     )
                     .ConfigureAwait(false);
-            var results = (LSP.VSInternalCompletionItem)await RunResolveCompletionItemAsync(
-                    testLspServer,
-                    clientCompletionItem
-                )
-                .ConfigureAwait(false);
+            var results = (LSP.VSInternalCompletionItem)
+                await RunResolveCompletionItemAsync(testLspServer, clientCompletionItem)
+                    .ConfigureAwait(false);
 
             Assert.NotNull(results.TextEdit);
             Assert.Null(results.InsertText);
@@ -182,12 +179,13 @@ class B : A
                     )
                     .ConfigureAwait(false);
 
-            var results = (LSP.VSInternalCompletionItem)await RunResolveCompletionItemAsync(
-                    testLspServer,
-                    clientCompletionItem,
-                    clientCapabilities
-                )
-                .ConfigureAwait(false);
+            var results = (LSP.VSInternalCompletionItem)
+                await RunResolveCompletionItemAsync(
+                        testLspServer,
+                        clientCompletionItem,
+                        clientCapabilities
+                    )
+                    .ConfigureAwait(false);
 
             Assert.NotNull(results.TextEdit);
             Assert.Null(results.InsertText);
@@ -405,11 +403,9 @@ link text";
                     )
                     .ConfigureAwait(false);
 
-            var results = (LSP.VSInternalCompletionItem)await RunResolveCompletionItemAsync(
-                    testLspServer,
-                    clientCompletionItem
-                )
-                .ConfigureAwait(false);
+            var results = (LSP.VSInternalCompletionItem)
+                await RunResolveCompletionItemAsync(testLspServer, clientCompletionItem)
+                    .ConfigureAwait(false);
             Assert.Equal("(byte)", results.Label);
             Assert.NotNull(results.Description);
         }

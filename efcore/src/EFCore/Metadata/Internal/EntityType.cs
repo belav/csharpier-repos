@@ -421,11 +421,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             UpdateBaseTypeConfigurationSource(configurationSource);
             newBaseType?.UpdateConfigurationSource(configurationSource);
 
-            return (EntityType?)Model.ConventionDispatcher.OnEntityTypeBaseTypeChanged(
-                Builder,
-                newBaseType,
-                originalBaseType
-            );
+            return (EntityType?)
+                Model.ConventionDispatcher.OnEntityTypeBaseTypeChanged(
+                    Builder,
+                    newBaseType,
+                    originalBaseType
+                );
         }
 
         /// <summary>
@@ -729,11 +730,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 SetPrimaryKeyConfigurationSource(null);
             }
 
-            return (Key?)Model.ConventionDispatcher.OnPrimaryKeyChanged(
-                Builder,
-                newKey,
-                oldPrimaryKey
-            );
+            return (Key?)
+                Model.ConventionDispatcher.OnPrimaryKeyChanged(Builder, newKey, oldPrimaryKey);
         }
 
         /// <summary>
@@ -1103,9 +1101,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             OnForeignKeyUpdated(foreignKey);
 
-            return (ForeignKey?)Model.ConventionDispatcher
-                .OnForeignKeyAdded(foreignKey.Builder)
-                ?.Metadata;
+            return (ForeignKey?)
+                Model.ConventionDispatcher.OnForeignKeyAdded(foreignKey.Builder)?.Metadata;
         }
 
         /// <summary>
@@ -1412,16 +1409,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ) =>
             _directlyDerivedTypes.Count == 0
                 ? Enumerable.Empty<ForeignKey>()
-                : (IEnumerable<ForeignKey>)GetDerivedTypes()
-                      .Select(
-                          et =>
-                              et.FindDeclaredForeignKey(
-                                  properties,
-                                  principalKey,
-                                  principalEntityType
-                              )
-                      )
-                      .Where(fk => fk != null);
+                : (IEnumerable<ForeignKey>)
+                      GetDerivedTypes()
+                          .Select(
+                              et =>
+                                  et.FindDeclaredForeignKey(
+                                      properties,
+                                      principalKey,
+                                      principalEntityType
+                                  )
+                          )
+                          .Where(fk => fk != null);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1743,9 +1741,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public virtual Navigation? FindNavigation(MemberInfo memberInfo) =>
-            (Navigation?)((IReadOnlyEntityType)this).FindNavigation(
-                Check.NotNull(memberInfo, nameof(memberInfo)).GetSimpleMemberName()
-            );
+            (Navigation?)
+                ((IReadOnlyEntityType)this).FindNavigation(
+                    Check.NotNull(memberInfo, nameof(memberInfo)).GetSimpleMemberName()
+                );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1789,9 +1788,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             return _directlyDerivedTypes.Count == 0
               ? Enumerable.Empty<Navigation>()
-              : (IEnumerable<Navigation>)GetDerivedTypes()
-                    .Select(et => et.FindDeclaredNavigation(name))
-                    .Where(n => n != null);
+              : (IEnumerable<Navigation>)
+                    GetDerivedTypes()
+                        .Select(et => et.FindDeclaredNavigation(name))
+                        .Where(n => n != null);
         }
 
         /// <summary>
@@ -1924,9 +1924,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 Check.DebugAssert(added, "added is false");
             }
 
-            return (SkipNavigation?)Model.ConventionDispatcher
-                .OnSkipNavigationAdded(skipNavigation.Builder)
-                ?.Metadata;
+            return (SkipNavigation?)
+                Model.ConventionDispatcher.OnSkipNavigationAdded(skipNavigation.Builder)?.Metadata;
         }
 
         private Type? ValidateClrMember(
@@ -2032,9 +2031,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             return _directlyDerivedTypes.Count == 0
               ? Enumerable.Empty<SkipNavigation>()
-              : (IEnumerable<SkipNavigation>)GetDerivedTypes()
-                    .Select(et => et.FindDeclaredSkipNavigation(name))
-                    .Where(n => n != null);
+              : (IEnumerable<SkipNavigation>)
+                    GetDerivedTypes()
+                        .Select(et => et.FindDeclaredSkipNavigation(name))
+                        .Where(n => n != null);
         }
 
         /// <summary>
@@ -2126,10 +2126,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             navigation.SetRemovedFromModel();
 
-            return (SkipNavigation?)Model.ConventionDispatcher.OnSkipNavigationRemoved(
-                Builder,
-                navigation
-            );
+            return (SkipNavigation?)
+                Model.ConventionDispatcher.OnSkipNavigationRemoved(Builder, navigation);
         }
 
         /// <summary>
@@ -2419,9 +2417,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ) =>
             _directlyDerivedTypes.Count == 0
                 ? Enumerable.Empty<Index>()
-                : (IEnumerable<Index>)GetDerivedTypes()
-                      .Select(et => et.FindDeclaredIndex(properties))
-                      .Where(i => i != null);
+                : (IEnumerable<Index>)
+                      GetDerivedTypes()
+                          .Select(et => et.FindDeclaredIndex(properties))
+                          .Where(i => i != null);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2432,9 +2431,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual IEnumerable<Index> FindDerivedIndexes(string name) =>
             _directlyDerivedTypes.Count == 0
                 ? Enumerable.Empty<Index>()
-                : (IEnumerable<Index>)GetDerivedTypes()
-                      .Select(et => et.FindDeclaredIndex(Check.NotEmpty(name, nameof(name))))
-                      .Where(i => i != null);
+                : (IEnumerable<Index>)
+                      GetDerivedTypes()
+                          .Select(et => et.FindDeclaredIndex(Check.NotEmpty(name, nameof(name))))
+                          .Where(i => i != null);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2728,9 +2728,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 }
             }
 
-            return (Property?)Model.ConventionDispatcher
-                .OnPropertyAdded(property.Builder)
-                ?.Metadata;
+            return (Property?)
+                Model.ConventionDispatcher.OnPropertyAdded(property.Builder)?.Metadata;
         }
 
         /// <summary>
@@ -2785,9 +2784,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             return _directlyDerivedTypes.Count == 0
               ? Enumerable.Empty<Property>()
-              : (IEnumerable<Property>)GetDerivedTypes()
-                    .Select(et => et.FindDeclaredProperty(propertyName))
-                    .Where(p => p != null);
+              : (IEnumerable<Property>)
+                    GetDerivedTypes()
+                        .Select(et => et.FindDeclaredProperty(propertyName))
+                        .Where(p => p != null);
         }
 
         /// <summary>
@@ -3227,9 +3227,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             return _directlyDerivedTypes.Count == 0
               ? Enumerable.Empty<ServiceProperty>()
-              : (IEnumerable<ServiceProperty>)GetDerivedTypes()
-                    .Select(et => et.FindDeclaredServiceProperty(propertyName))
-                    .Where(p => p != null);
+              : (IEnumerable<ServiceProperty>)
+                    GetDerivedTypes()
+                        .Select(et => et.FindDeclaredServiceProperty(propertyName))
+                        .Where(p => p != null);
         }
 
         /// <summary>
@@ -3670,11 +3671,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 throw new InvalidOperationException(errorMessage);
             }
 
-            return (LambdaExpression?)SetOrRemoveAnnotation(
-                CoreAnnotationNames.QueryFilter,
-                queryFilter,
-                configurationSource
-            )?.Value;
+            return (LambdaExpression?)
+                SetOrRemoveAnnotation(
+                    CoreAnnotationNames.QueryFilter,
+                    queryFilter,
+                    configurationSource
+                )?.Value;
         }
 
         /// <summary>
@@ -3729,11 +3731,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             LambdaExpression? definingQuery,
             ConfigurationSource configurationSource
         ) =>
-            (LambdaExpression?)SetOrRemoveAnnotation(
-                CoreAnnotationNames.DefiningQuery,
-                definingQuery,
-                configurationSource
-            )?.Value;
+            (LambdaExpression?)
+                SetOrRemoveAnnotation(
+                    CoreAnnotationNames.DefiningQuery,
+                    definingQuery,
+                    configurationSource
+                )?.Value;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -3772,11 +3775,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             return
                 (
-                    (string?)SetAnnotation(
-                        CoreAnnotationNames.DiscriminatorProperty,
-                        property?.Name,
-                        configurationSource
-                    )?.Value
+                    (string?)
+                        SetAnnotation(
+                            CoreAnnotationNames.DiscriminatorProperty,
+                            property?.Name,
+                            configurationSource
+                        )?.Value
                 ) == property?.Name
               ? property
               : (Property?)((IReadOnlyEntityType)this).FindDiscriminatorProperty();

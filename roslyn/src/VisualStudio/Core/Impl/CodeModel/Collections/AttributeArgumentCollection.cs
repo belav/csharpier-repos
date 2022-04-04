@@ -40,11 +40,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             var attributeArgumentNodes = CodeModelService.GetAttributeArgumentNodes(node);
             if (index >= 0 && index < attributeArgumentNodes.Count())
             {
-                element = (EnvDTE.CodeElement)CodeAttributeArgument.Create(
-                    this.State,
-                    this.ParentAttribute,
-                    index
-                );
+                element = (EnvDTE.CodeElement)
+                    CodeAttributeArgument.Create(this.State, this.ParentAttribute, index);
                 return true;
             }
 
@@ -62,11 +59,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
                 var childName = CodeModelService.GetName(child);
                 if (childName == name)
                 {
-                    element = (EnvDTE.CodeElement)CodeAttributeArgument.Create(
-                        this.State,
-                        this.ParentAttribute,
-                        currentIndex
-                    );
+                    element = (EnvDTE.CodeElement)
+                        CodeAttributeArgument.Create(
+                            this.State,
+                            this.ParentAttribute,
+                            currentIndex
+                        );
                     return true;
                 }
 

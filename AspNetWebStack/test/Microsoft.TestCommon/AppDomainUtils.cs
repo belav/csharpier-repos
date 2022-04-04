@@ -63,9 +63,10 @@ namespace System.Web.WebPages.TestUtils
                 BindingFlags.Static | BindingFlags.NonPublic
             );
             var value = (
-                (FieldInfo)typeof(BuildManager).Assembly
-                    .GetType("System.Web.Compilation.PreStartInitStage")
-                    .GetMember("DuringPreStartInit")[0]
+                (FieldInfo)
+                    typeof(BuildManager).Assembly
+                        .GetType("System.Web.Compilation.PreStartInitStage")
+                        .GetMember("DuringPreStartInit")[0]
             ).GetValue(null);
             stage.SetValue(null, value, new object[] { });
             SetAppData();

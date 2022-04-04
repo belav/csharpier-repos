@@ -63,10 +63,11 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                 var source = arguments[0];
 
                 var value = arguments[1] is SqlConstantExpression constantValue
-                    ? (SqlExpression)_sqlExpressionFactory.Constant(
-                          new[] { (byte)constantValue.Value! },
-                          source.TypeMapping
-                      )
+                    ? (SqlExpression)
+                          _sqlExpressionFactory.Constant(
+                              new[] { (byte)constantValue.Value! },
+                              source.TypeMapping
+                          )
                     : _sqlExpressionFactory.Function(
                           "char",
                           new[] { arguments[1] },

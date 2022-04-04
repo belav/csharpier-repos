@@ -977,11 +977,12 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                             // Found the initially selected expression. Replace it with the new name we choose, but also annotate
                             // that name with the RenameAnnotation so a rename session is started where the user can pick their
                             // own preferred name.
-                            replacement = (TIdentifierNameSyntax)generator.IdentifierName(
-                                generator
-                                    .Identifier(parameterName)
-                                    .WithAdditionalAnnotations(RenameAnnotation.Create())
-                            );
+                            replacement = (TIdentifierNameSyntax)
+                                generator.IdentifierName(
+                                    generator
+                                        .Identifier(parameterName)
+                                        .WithAdditionalAnnotations(RenameAnnotation.Create())
+                                );
                             editor.ReplaceNode(match, replacement);
                         }
                     }

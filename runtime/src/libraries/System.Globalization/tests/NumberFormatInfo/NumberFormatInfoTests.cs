@@ -85,8 +85,8 @@ namespace System.Globalization.Tests
                 nativeDigits
             );
 
-            NumberFormatInfo nfi =
-                (NumberFormatInfo)CultureInfo.InvariantCulture.NumberFormat.Clone();
+            NumberFormatInfo nfi = (NumberFormatInfo)
+                CultureInfo.InvariantCulture.NumberFormat.Clone();
             string[] newDigits = new string[]
             {
                 "\u0660",

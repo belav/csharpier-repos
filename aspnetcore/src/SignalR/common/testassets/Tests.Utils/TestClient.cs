@@ -103,8 +103,8 @@ class TestClient : ITransferFormatFeature, IConnectionHeartbeatFeature, IDisposa
             // note that the handshake response might not immediately be readable
             // e.g. server is waiting for request, times out after configured duration,
             // and sends response with timeout error
-            HandshakeResponseMessage = (HandshakeResponseMessage)await ReadAsync(true)
-                .DefaultTimeout();
+            HandshakeResponseMessage = (HandshakeResponseMessage)
+                await ReadAsync(true).DefaultTimeout();
         }
 
         return connection;

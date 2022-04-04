@@ -1101,11 +1101,12 @@ internal sealed class FileCache
         Enabled = true;
         if (File.Exists(cacheFilePath))
         {
-            _oldCache = (CompilerCache?)JsonSerializer.Deserialize(
-                File.ReadAllText(cacheFilePath),
-                typeof(CompilerCache),
-                new JsonSerializerOptions()
-            );
+            _oldCache = (CompilerCache?)
+                JsonSerializer.Deserialize(
+                    File.ReadAllText(cacheFilePath),
+                    typeof(CompilerCache),
+                    new JsonSerializerOptions()
+                );
         }
 
         _oldCache ??= new();

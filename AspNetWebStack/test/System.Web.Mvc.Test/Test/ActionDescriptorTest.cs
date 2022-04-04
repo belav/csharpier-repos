@@ -73,10 +73,8 @@ namespace System.Web.Mvc.Test
             ActionDescriptor ad = GetActionDescriptor();
 
             // Act
-            ObsoleteAttribute[] attrs = (ObsoleteAttribute[])ad.GetCustomAttributes(
-                typeof(ObsoleteAttribute),
-                true
-            );
+            ObsoleteAttribute[] attrs = (ObsoleteAttribute[])
+                ad.GetCustomAttributes(typeof(ObsoleteAttribute), true);
 
             // Assert
             Assert.Empty(attrs);

@@ -344,8 +344,8 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
                 .GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             var arguments = syntaxFactsService.GetArgumentsOfInvocationExpression(invocation);
-            var literalExpression =
-                (TLiteralExpressionSyntax?)syntaxFactsService.GetExpressionOfArgument(
+            var literalExpression = (TLiteralExpressionSyntax?)
+                syntaxFactsService.GetExpressionOfArgument(
                     GetFormatArgument(arguments, syntaxFactsService)
                 );
             Contract.ThrowIfNull(literalExpression);
@@ -459,12 +459,13 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
                 }
                 else
                 {
-                    var castExpression = (TExpressionSyntax)syntaxGenerator
-                        .CastExpression(
-                            convertedType,
-                            syntaxGenerator.AddParentheses(argumentExpression)
-                        )
-                        .WithAdditionalAnnotations(Simplifier.Annotation);
+                    var castExpression = (TExpressionSyntax)
+                        syntaxGenerator
+                            .CastExpression(
+                                convertedType,
+                                syntaxGenerator.AddParentheses(argumentExpression)
+                            )
+                            .WithAdditionalAnnotations(Simplifier.Annotation);
                     builder.Add(castExpression);
                 }
             }

@@ -2129,12 +2129,10 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     .Navigation(e => e.OwnedDependent)
                     .UsePropertyAccessMode(PropertyAccessMode.Field);
 
-                var principal = (IReadOnlyEntityType)model.FindEntityType(
-                    typeof(OneToOneNavPrincipalOwner)
-                );
-                var dependent = (IReadOnlyEntityType)model.FindEntityType(
-                    typeof(OwnedNavDependent)
-                );
+                var principal = (IReadOnlyEntityType)
+                    model.FindEntityType(typeof(OneToOneNavPrincipalOwner));
+                var dependent = (IReadOnlyEntityType)
+                    model.FindEntityType(typeof(OwnedNavDependent));
 
                 Assert.Equal(
                     PropertyAccessMode.Field,
@@ -2169,12 +2167,10 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     .Navigation(e => e.OwnedDependents)
                     .UsePropertyAccessMode(PropertyAccessMode.Field);
 
-                var principal = (IReadOnlyEntityType)model.FindEntityType(
-                    typeof(OneToManyNavPrincipalOwner)
-                );
-                var dependent = (IReadOnlyEntityType)model.FindEntityType(
-                    typeof(OwnedOneToManyNavDependent)
-                );
+                var principal = (IReadOnlyEntityType)
+                    model.FindEntityType(typeof(OneToManyNavPrincipalOwner));
+                var dependent = (IReadOnlyEntityType)
+                    model.FindEntityType(typeof(OwnedOneToManyNavDependent));
 
                 Assert.Equal(
                     PropertyAccessMode.Field,

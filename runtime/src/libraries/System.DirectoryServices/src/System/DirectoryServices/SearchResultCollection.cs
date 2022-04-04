@@ -150,9 +150,8 @@ namespace System.DirectoryServices
             try
             {
                 AdsValue* pValue = column.pADsValues;
-                DirectoryVirtualListView value = (DirectoryVirtualListView)new AdsValueHelper(
-                    *pValue
-                ).GetVlvValue();
+                DirectoryVirtualListView value = (DirectoryVirtualListView)
+                    new AdsValueHelper(*pValue).GetVlvValue();
                 return value;
             }
             finally

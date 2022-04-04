@@ -1556,12 +1556,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             // Ensure ITuple has a Length and indexer
-            iTupleGetLength = (MethodSymbol?)Compilation.GetWellKnownTypeMember(
-                WellKnownMember.System_Runtime_CompilerServices_ITuple__get_Length
-            );
-            iTupleGetItem = (MethodSymbol?)Compilation.GetWellKnownTypeMember(
-                WellKnownMember.System_Runtime_CompilerServices_ITuple__get_Item
-            );
+            iTupleGetLength = (MethodSymbol?)
+                Compilation.GetWellKnownTypeMember(
+                    WellKnownMember.System_Runtime_CompilerServices_ITuple__get_Length
+                );
+            iTupleGetItem = (MethodSymbol?)
+                Compilation.GetWellKnownTypeMember(
+                    WellKnownMember.System_Runtime_CompilerServices_ITuple__get_Item
+                );
             if (iTupleGetLength is null || iTupleGetItem is null)
             {
                 // This might not result in an ideal diagnostic

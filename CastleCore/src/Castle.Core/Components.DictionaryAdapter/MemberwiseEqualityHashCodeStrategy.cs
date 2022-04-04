@@ -53,10 +53,8 @@ namespace Castle.Components.DictionaryAdapter
                 object state
             )
             {
-                var nested = (IDictionaryAdapter)dictionaryAdapter.GetProperty(
-                    property.PropertyName,
-                    true
-                );
+                var nested = (IDictionaryAdapter)
+                    dictionaryAdapter.GetProperty(property.PropertyName, true);
                 CollectHashCode(property, GetNestedHashCode(nested));
             }
 
@@ -67,10 +65,8 @@ namespace Castle.Components.DictionaryAdapter
                 object state
             )
             {
-                var collection = (IEnumerable)dictionaryAdapter.GetProperty(
-                    property.PropertyName,
-                    true
-                );
+                var collection = (IEnumerable)
+                    dictionaryAdapter.GetProperty(property.PropertyName, true);
                 CollectHashCode(property, GetCollectionHashcode(collection));
             }
 

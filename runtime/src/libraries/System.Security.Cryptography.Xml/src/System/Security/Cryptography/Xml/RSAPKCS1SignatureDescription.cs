@@ -17,9 +17,8 @@ namespace System.Security.Cryptography.Xml
             AsymmetricAlgorithm key
         )
         {
-            var item = (AsymmetricSignatureDeformatter)CryptoConfig.CreateFromName(
-                DeformatterAlgorithm
-            );
+            var item = (AsymmetricSignatureDeformatter)
+                CryptoConfig.CreateFromName(DeformatterAlgorithm);
             item.SetKey(key);
             item.SetHashAlgorithm(DigestAlgorithm);
             return item;
@@ -27,9 +26,8 @@ namespace System.Security.Cryptography.Xml
 
         public sealed override AsymmetricSignatureFormatter CreateFormatter(AsymmetricAlgorithm key)
         {
-            var item = (AsymmetricSignatureFormatter)CryptoConfig.CreateFromName(
-                FormatterAlgorithm
-            );
+            var item = (AsymmetricSignatureFormatter)
+                CryptoConfig.CreateFromName(FormatterAlgorithm);
             item.SetKey(key);
             item.SetHashAlgorithm(DigestAlgorithm);
             return item;

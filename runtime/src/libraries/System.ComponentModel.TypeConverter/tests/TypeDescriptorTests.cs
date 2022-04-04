@@ -1155,9 +1155,8 @@ namespace System.ComponentModel.Tests
             PropertyDescriptor property = TypeDescriptor.GetProperties(typeof(FooBarDerived))[
                 "Value"
             ];
-            var descriptionAttribute = (DescriptionAttribute)property.Attributes[
-                typeof(DescriptionAttribute)
-            ];
+            var descriptionAttribute = (DescriptionAttribute)
+                property.Attributes[typeof(DescriptionAttribute)];
             Assert.Equal("Derived", descriptionAttribute.Description);
         }
 

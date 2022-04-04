@@ -22,11 +22,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         [ConditionalFact]
         public void Does_not_add_Autoincrement_for_OnAdd_integer_property_non_key()
         {
-            var property = (IProperty)_modelBuilder
-                .Entity<Entity>()
-                .Property(e => e.IntProp)
-                .ValueGeneratedOnAdd()
-                .Metadata;
+            var property = (IProperty)
+                _modelBuilder
+                    .Entity<Entity>()
+                    .Property(e => e.IntProp)
+                    .ValueGeneratedOnAdd()
+                    .Metadata;
             FinalizeModel();
 
             Assert.DoesNotContain(
@@ -38,11 +39,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         [ConditionalFact]
         public void Adds_Autoincrement_for_OnAdd_integer_property_primary_key()
         {
-            var property = (IProperty)_modelBuilder
-                .Entity<Entity>()
-                .Property(e => e.IntProp)
-                .ValueGeneratedOnAdd()
-                .Metadata;
+            var property = (IProperty)
+                _modelBuilder
+                    .Entity<Entity>()
+                    .Property(e => e.IntProp)
+                    .ValueGeneratedOnAdd()
+                    .Metadata;
             _modelBuilder.Entity<Entity>().HasKey(e => e.IntProp);
             FinalizeModel();
 
@@ -55,11 +57,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         [ConditionalFact]
         public void Does_not_add_Autoincrement_for_OnAddOrUpdate_integer_property()
         {
-            var property = (IProperty)_modelBuilder
-                .Entity<Entity>()
-                .Property(e => e.IntProp)
-                .ValueGeneratedOnAddOrUpdate()
-                .Metadata;
+            var property = (IProperty)
+                _modelBuilder
+                    .Entity<Entity>()
+                    .Property(e => e.IntProp)
+                    .ValueGeneratedOnAddOrUpdate()
+                    .Metadata;
             FinalizeModel();
 
             Assert.DoesNotContain(
@@ -71,11 +74,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         [ConditionalFact]
         public void Does_not_add_Autoincrement_for_OnUpdate_integer_property()
         {
-            var property = (IProperty)_modelBuilder
-                .Entity<Entity>()
-                .Property(e => e.IntProp)
-                .ValueGeneratedOnUpdate()
-                .Metadata;
+            var property = (IProperty)
+                _modelBuilder
+                    .Entity<Entity>()
+                    .Property(e => e.IntProp)
+                    .ValueGeneratedOnUpdate()
+                    .Metadata;
             FinalizeModel();
 
             Assert.DoesNotContain(
@@ -87,11 +91,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         [ConditionalFact]
         public void Does_not_add_Autoincrement_for_Never_value_generated_integer_property()
         {
-            var property = (IProperty)_modelBuilder
-                .Entity<Entity>()
-                .Property(e => e.IntProp)
-                .ValueGeneratedNever()
-                .Metadata;
+            var property = (IProperty)
+                _modelBuilder
+                    .Entity<Entity>()
+                    .Property(e => e.IntProp)
+                    .ValueGeneratedNever()
+                    .Metadata;
             FinalizeModel();
 
             Assert.DoesNotContain(
@@ -103,10 +108,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         [ConditionalFact]
         public void Does_not_add_Autoincrement_for_default_integer_property()
         {
-            var property = (IProperty)_modelBuilder
-                .Entity<Entity>()
-                .Property(e => e.IntProp)
-                .Metadata;
+            var property = (IProperty)
+                _modelBuilder.Entity<Entity>().Property(e => e.IntProp).Metadata;
             FinalizeModel();
 
             Assert.DoesNotContain(
@@ -118,11 +121,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         [ConditionalFact]
         public void Does_not_add_Autoincrement_for_non_integer_OnAdd_property()
         {
-            var property = (IProperty)_modelBuilder
-                .Entity<Entity>()
-                .Property(e => e.StringProp)
-                .ValueGeneratedOnAdd()
-                .Metadata;
+            var property = (IProperty)
+                _modelBuilder
+                    .Entity<Entity>()
+                    .Property(e => e.StringProp)
+                    .ValueGeneratedOnAdd()
+                    .Metadata;
             FinalizeModel();
 
             Assert.DoesNotContain(

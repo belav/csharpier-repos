@@ -203,7 +203,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 attributesBag = this.GetAttributesBag();
             }
 
-            return (MethodEarlyWellKnownAttributeData)attributesBag.EarlyDecodedWellKnownAttributeData;
+            return (MethodEarlyWellKnownAttributeData)
+                attributesBag.EarlyDecodedWellKnownAttributeData;
         }
 
         /// <summary>
@@ -461,8 +462,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     && lazyCustomAttributesBag.IsEarlyDecodedWellKnownAttributeDataComputed
                 )
                 {
-                    var data =
-                        (MethodEarlyWellKnownAttributeData)lazyCustomAttributesBag.EarlyDecodedWellKnownAttributeData;
+                    var data = (MethodEarlyWellKnownAttributeData)
+                        lazyCustomAttributesBag.EarlyDecodedWellKnownAttributeData;
                     return data != null ? data.ObsoleteAttributeData : null;
                 }
 
@@ -504,12 +505,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (lazyCustomAttributesBag.IsDecodedWellKnownAttributeDataComputed)
             {
-                var lateData =
-                    (MethodWellKnownAttributeData?)lazyCustomAttributesBag.DecodedWellKnownAttributeData;
+                var lateData = (MethodWellKnownAttributeData?)
+                    lazyCustomAttributesBag.DecodedWellKnownAttributeData;
 
 #if DEBUG
                 verifyDataConsistent(
-                    (MethodEarlyWellKnownAttributeData?)lazyCustomAttributesBag.EarlyDecodedWellKnownAttributeData,
+                    (MethodEarlyWellKnownAttributeData?)
+                        lazyCustomAttributesBag.EarlyDecodedWellKnownAttributeData,
                     lateData
                 );
 #endif
@@ -517,8 +519,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return lateData?.UnmanagedCallersOnlyAttributeData;
             }
 
-            var earlyData =
-                (MethodEarlyWellKnownAttributeData?)lazyCustomAttributesBag.EarlyDecodedWellKnownAttributeData;
+            var earlyData = (MethodEarlyWellKnownAttributeData?)
+                lazyCustomAttributesBag.EarlyDecodedWellKnownAttributeData;
             Debug.Assert(!forceComplete);
             return earlyData?.UnmanagedCallersOnlyAttributePresent == true
               ? UnmanagedCallersOnlyAttributeData.AttributePresentDataNotBound
@@ -1700,8 +1702,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override IEnumerable<Cci.SecurityAttribute> GetSecurityInformation()
         {
             var attributesBag = this.GetAttributesBag();
-            var wellKnownData =
-                (MethodWellKnownAttributeData)attributesBag.DecodedWellKnownAttributeData;
+            var wellKnownData = (MethodWellKnownAttributeData)
+                attributesBag.DecodedWellKnownAttributeData;
             if (wellKnownData != null)
             {
                 SecurityWellKnownAttributeData? securityData = wellKnownData.SecurityInformation;

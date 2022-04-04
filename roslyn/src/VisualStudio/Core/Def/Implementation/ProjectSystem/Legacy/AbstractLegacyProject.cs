@@ -72,9 +72,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
         {
             Contract.ThrowIfNull(hierarchy);
 
-            var componentModel = (IComponentModel)serviceProvider.GetService(
-                typeof(SComponentModel)
-            );
+            var componentModel = (IComponentModel)
+                serviceProvider.GetService(typeof(SComponentModel));
             Workspace = componentModel.GetService<VisualStudioWorkspace>();
             var workspaceImpl = (VisualStudioWorkspaceImpl)Workspace;
 

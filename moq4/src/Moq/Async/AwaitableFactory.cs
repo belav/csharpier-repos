@@ -27,9 +27,10 @@ namespace Moq.Async
 
         private static IAwaitableFactory Create(Type awaitableFactoryType, Type awaitableType)
         {
-            return (IAwaitableFactory)Activator.CreateInstance(
-                awaitableFactoryType.MakeGenericType(awaitableType.GetGenericArguments())
-            );
+            return (IAwaitableFactory)
+                Activator.CreateInstance(
+                    awaitableFactoryType.MakeGenericType(awaitableType.GetGenericArguments())
+                );
         }
 
         public static IAwaitableFactory TryGet(Type type)

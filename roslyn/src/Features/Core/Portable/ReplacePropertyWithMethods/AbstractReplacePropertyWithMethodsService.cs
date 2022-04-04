@@ -209,9 +209,8 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
                 parent
             ) =>
             {
-                return (TExpressionSyntax)replacer._syntaxFacts.GetRightHandSideOfAssignment(
-                    parent
-                )!;
+                return (TExpressionSyntax)
+                    replacer._syntaxFacts.GetRightHandSideOfAssignment(parent)!;
             };
 
             private static readonly GetWriteValue getWriteValueForIncrementOrDecrement = (

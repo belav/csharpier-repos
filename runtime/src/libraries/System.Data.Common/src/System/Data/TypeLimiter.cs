@@ -247,9 +247,8 @@ namespace System.Data
 
                 // Did the application programmatically allow this type to be deserialized?
 
-                Type[]? appDomainAllowedTypes = (Type[]?)AppDomain.CurrentDomain.GetData(
-                    AppDomainDataSetDefaultAllowedTypesKey
-                );
+                Type[]? appDomainAllowedTypes = (Type[]?)
+                    AppDomain.CurrentDomain.GetData(AppDomainDataSetDefaultAllowedTypesKey);
                 if (appDomainAllowedTypes != null)
                 {
                     for (int i = 0; i < appDomainAllowedTypes.Length; i++)

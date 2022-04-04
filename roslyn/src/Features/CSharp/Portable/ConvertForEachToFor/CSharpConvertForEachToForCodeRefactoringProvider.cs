@@ -137,10 +137,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertForEachToFor
                     )
                 ),
                 SyntaxFactory.SeparatedList<ExpressionSyntax>(),
-                (ExpressionSyntax)generator.LessThanExpression(
-                    generator.IdentifierName(indexVariable),
-                    generator.MemberAccessExpression(collectionVariable, foreachInfo.CountName)
-                ),
+                (ExpressionSyntax)
+                    generator.LessThanExpression(
+                        generator.IdentifierName(indexVariable),
+                        generator.MemberAccessExpression(collectionVariable, foreachInfo.CountName)
+                    ),
                 SyntaxFactory.SingletonSeparatedList<ExpressionSyntax>(
                     SyntaxFactory.PostfixUnaryExpression(
                         SyntaxKind.PostIncrementExpression,

@@ -60,9 +60,8 @@ public static class RenderBatchReader
             var edits = new RenderTreeEdit[editCount];
             for (var j = 0; j < editCount; j++)
             {
-                var type = (RenderTreeEditType)BinaryPrimitives.ReadInt32LittleEndian(
-                    editData.Slice(0, 4)
-                );
+                var type = (RenderTreeEditType)
+                    BinaryPrimitives.ReadInt32LittleEndian(editData.Slice(0, 4));
                 var siblingIndex = BinaryPrimitives.ReadInt32LittleEndian(editData.Slice(4, 4));
 
                 // ReferenceFrameIndex and MoveToSiblingIndex share a slot, so this reads
@@ -151,9 +150,8 @@ public static class RenderBatchReader
         {
             var frameData = data.Slice(i, ReferenceFrameSize);
 
-            var type = (RenderTreeFrameType)BinaryPrimitives.ReadInt32LittleEndian(
-                frameData.Slice(0, 4)
-            );
+            var type = (RenderTreeFrameType)
+                BinaryPrimitives.ReadInt32LittleEndian(frameData.Slice(0, 4));
 
             // We want each frame to take up the same number of bytes, so that the
             // recipient can index into the array directly instead of having to

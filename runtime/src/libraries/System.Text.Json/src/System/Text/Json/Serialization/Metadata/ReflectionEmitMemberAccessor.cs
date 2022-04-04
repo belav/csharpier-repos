@@ -61,9 +61,8 @@ namespace System.Text.Json.Serialization.Metadata
 
             generator.Emit(OpCodes.Ret);
 
-            return (JsonTypeInfo.ConstructorDelegate)dynamicMethod.CreateDelegate(
-                typeof(JsonTypeInfo.ConstructorDelegate)
-            );
+            return (JsonTypeInfo.ConstructorDelegate)
+                dynamicMethod.CreateDelegate(typeof(JsonTypeInfo.ConstructorDelegate));
         }
 
         public override Func<object[], T>? CreateParameterizedConstructor<T>(

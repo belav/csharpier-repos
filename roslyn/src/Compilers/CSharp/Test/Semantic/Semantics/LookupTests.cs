@@ -1419,9 +1419,10 @@ class Program
             var actual_lookupSymbols = GetLookupSymbols(source);
 
             // Verify nested namespaces *are not* imported.
-            var systemNS = (INamespaceSymbol)actual_lookupSymbols
-                .Where((sym) => sym.Name.Equals("System") && sym.Kind == SymbolKind.Namespace)
-                .Single();
+            var systemNS = (INamespaceSymbol)
+                actual_lookupSymbols
+                    .Where((sym) => sym.Name.Equals("System") && sym.Kind == SymbolKind.Namespace)
+                    .Single();
             INamespaceSymbol systemXmlNS = systemNS.GetNestedNamespace("Xml");
             Assert.DoesNotContain(systemXmlNS, actual_lookupSymbols);
         }
@@ -1565,9 +1566,10 @@ class Q : P
 
         private void TestLookupSymbolsNestedNamespaces(List<ISymbol> actual_lookupSymbols)
         {
-            var namespaceX = (INamespaceSymbol)actual_lookupSymbols
-                .Where((sym) => sym.Name.Equals("X") && sym.Kind == SymbolKind.Namespace)
-                .Single();
+            var namespaceX = (INamespaceSymbol)
+                actual_lookupSymbols
+                    .Where((sym) => sym.Name.Equals("X") && sym.Kind == SymbolKind.Namespace)
+                    .Single();
 
             // Verify nested namespaces within namespace X *are not* present in lookup symbols.
             INamespaceSymbol namespaceY = namespaceX.GetNestedNamespace("Y");
@@ -1576,16 +1578,18 @@ class Q : P
             Assert.DoesNotContain(typeInnerZ, actual_lookupSymbols);
 
             // Verify nested types *are not* present in lookup symbols.
-            var typeA = (INamedTypeSymbol)actual_lookupSymbols
-                .Where((sym) => sym.Name.Equals("A") && sym.Kind == SymbolKind.NamedType)
-                .Single();
+            var typeA = (INamedTypeSymbol)
+                actual_lookupSymbols
+                    .Where((sym) => sym.Name.Equals("A") && sym.Kind == SymbolKind.NamedType)
+                    .Single();
             INamedTypeSymbol typeB = typeA.GetTypeMembers("B").Single();
             Assert.DoesNotContain(typeB, actual_lookupSymbols);
 
             // Verify aliases to nested namespaces within namespace X *are* present in lookup symbols.
-            var aliasY = (IAliasSymbol)actual_lookupSymbols
-                .Where((sym) => sym.Name.Equals("aliasY") && sym.Kind == SymbolKind.Alias)
-                .Single();
+            var aliasY = (IAliasSymbol)
+                actual_lookupSymbols
+                    .Where((sym) => sym.Name.Equals("aliasY") && sym.Kind == SymbolKind.Alias)
+                    .Single();
             Assert.Contains(aliasY, actual_lookupSymbols);
         }
 

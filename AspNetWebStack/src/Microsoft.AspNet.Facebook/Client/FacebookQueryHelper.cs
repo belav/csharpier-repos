@@ -73,19 +73,16 @@ namespace Microsoft.AspNet.Facebook.Client
                     propertyName
                 ].Attributes;
 
-                JsonIgnoreAttribute jsonIgnoreAttribute = (JsonIgnoreAttribute)attributes[
-                    typeof(JsonIgnoreAttribute)
-                ];
+                JsonIgnoreAttribute jsonIgnoreAttribute = (JsonIgnoreAttribute)
+                    attributes[typeof(JsonIgnoreAttribute)];
 
                 if (jsonIgnoreAttribute == null)
                 {
-                    JsonPropertyAttribute jsonPropertyAttribute = (JsonPropertyAttribute)attributes[
-                        typeof(JsonPropertyAttribute)
-                    ];
+                    JsonPropertyAttribute jsonPropertyAttribute = (JsonPropertyAttribute)
+                        attributes[typeof(JsonPropertyAttribute)];
                     FacebookFieldModifierAttribute modifierAttribute =
-                        (FacebookFieldModifierAttribute)attributes[
-                            typeof(FacebookFieldModifierAttribute)
-                        ];
+                        (FacebookFieldModifierAttribute)
+                            attributes[typeof(FacebookFieldModifierAttribute)];
 
                     StringBuilder fieldName = new StringBuilder(
                         jsonPropertyAttribute != null

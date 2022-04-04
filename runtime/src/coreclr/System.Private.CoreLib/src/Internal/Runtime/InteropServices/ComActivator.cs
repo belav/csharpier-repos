@@ -871,13 +871,14 @@ namespace Internal.Runtime.InteropServices
                 null, /* out */
                 null
             };
-            bool isValid = (bool)_validateTypeAndReturnDetails.Invoke(
-                null,
-                BindingFlags.DoNotWrapExceptions,
-                binder: null,
-                parameters: parameters,
-                culture: null
-            )!;
+            bool isValid = (bool)
+                _validateTypeAndReturnDetails.Invoke(
+                    null,
+                    BindingFlags.DoNotWrapExceptions,
+                    binder: null,
+                    parameters: parameters,
+                    culture: null
+                )!;
             if (!isValid)
             {
                 return;
@@ -891,13 +892,14 @@ namespace Internal.Runtime.InteropServices
             }
 
             parameters = new object?[] { type.AssemblyQualifiedName };
-            runtimeKeyAvail = (bool)_licInfoHelperContains.Invoke(
-                licContext,
-                BindingFlags.DoNotWrapExceptions,
-                binder: null,
-                parameters: parameters,
-                culture: null
-            )!;
+            runtimeKeyAvail = (bool)
+                _licInfoHelperContains.Invoke(
+                    licContext,
+                    BindingFlags.DoNotWrapExceptions,
+                    binder: null,
+                    parameters: parameters,
+                    culture: null
+                )!;
         }
 
         // The CLR invokes this whenever a COM client invokes
@@ -920,13 +922,14 @@ namespace Internal.Runtime.InteropServices
                 null, /* out */
                 null
             };
-            bool isValid = (bool)_validateTypeAndReturnDetails.Invoke(
-                null,
-                BindingFlags.DoNotWrapExceptions,
-                binder: null,
-                parameters: parameters,
-                culture: null
-            )!;
+            bool isValid = (bool)
+                _validateTypeAndReturnDetails.Invoke(
+                    null,
+                    BindingFlags.DoNotWrapExceptions,
+                    binder: null,
+                    parameters: parameters,
+                    culture: null
+                )!;
             if (!isValid)
             {
                 throw new COMException(); // E_FAIL

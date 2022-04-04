@@ -89,10 +89,8 @@ namespace Microsoft.CodeAnalysis.Interop
             );
 
             var metaHost = (IClrMetaHost)nCreateInterface(metaHostClsid, metaHostGuid);
-            var runtime = (IClrRuntimeInfo)metaHost.GetRuntime(
-                GetRuntimeVersion(),
-                clrRuntimeInfoGuid
-            );
+            var runtime = (IClrRuntimeInfo)
+                metaHost.GetRuntime(GetRuntimeVersion(), clrRuntimeInfoGuid);
             return (IClrStrongName)runtime.GetInterface(clrStrongNameClsid, clrStrongNameGuid);
         }
 

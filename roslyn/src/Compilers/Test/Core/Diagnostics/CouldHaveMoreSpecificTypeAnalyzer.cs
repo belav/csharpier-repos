@@ -126,8 +126,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                 operationBlockContext.RegisterOperationAction(
                                     (operationContext) =>
                                     {
-                                        IInvocationOperation invocation =
-                                            (IInvocationOperation)operationContext.Operation;
+                                        IInvocationOperation invocation = (IInvocationOperation)
+                                            operationContext.Operation;
                                         foreach (
                                             IArgumentOperation argument in invocation.Arguments
                                         )
@@ -154,7 +154,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                     (operationContext) =>
                                     {
                                         IVariableInitializerOperation initializer =
-                                            (IVariableInitializerOperation)operationContext.Operation;
+                                            (IVariableInitializerOperation)
+                                                operationContext.Operation;
                                         // If the parent is a single variable declaration, just process that one variable. If it's a multi variable
                                         // declaration, process all variables being assigned
                                         if (
@@ -224,8 +225,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                     compilationContext.RegisterOperationAction(
                         (operationContext) =>
                         {
-                            IFieldInitializerOperation initializer =
-                                (IFieldInitializerOperation)operationContext.Operation;
+                            IFieldInitializerOperation initializer = (IFieldInitializerOperation)
+                                operationContext.Operation;
                             foreach (IFieldSymbol initializedField in initializer.InitializedFields)
                             {
                                 AssignTo(

@@ -1268,9 +1268,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                 textSpan.iEndLine = textSpan.iStartLine;
                 textSpan.iEndIndex = textSpan.iStartIndex;
 
-                var expansion = (IVsExpansion?)EditorAdaptersFactoryService.GetBufferAdapter(
-                    textViewModel.DataBuffer
-                );
+                var expansion = (IVsExpansion?)
+                    EditorAdaptersFactoryService.GetBufferAdapter(textViewModel.DataBuffer);
                 Contract.ThrowIfNull(expansion);
 
                 _earlyEndExpansionHappened = false;

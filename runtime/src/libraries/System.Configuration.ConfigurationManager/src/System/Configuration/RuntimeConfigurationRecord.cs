@@ -48,8 +48,8 @@ namespace System.Configuration
         )
         {
             // Get the factory used to create a section.
-            RuntimeConfigurationFactory factory =
-                (RuntimeConfigurationFactory)factoryRecord.Factory;
+            RuntimeConfigurationFactory factory = (RuntimeConfigurationFactory)
+                factoryRecord.Factory;
 
             // Use the factory to create a section.
             object config = factory.CreateSection(
@@ -182,9 +182,8 @@ namespace System.Configuration
 
                 if (_sectionCtor != null)
                 {
-                    ConfigurationSection configSection = (ConfigurationSection)_sectionCtor.Invoke(
-                        null
-                    );
+                    ConfigurationSection configSection = (ConfigurationSection)
+                        _sectionCtor.Invoke(null);
 
                     configSection.SectionInformation.SetRuntimeConfigurationInformation(
                         configRecord,

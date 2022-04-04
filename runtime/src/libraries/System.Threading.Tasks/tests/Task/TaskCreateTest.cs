@@ -1063,10 +1063,8 @@ namespace System.Threading.Tasks.Tests
                                 break;
                             case TaskType.FutureT:
                                 _task =
-                                    (Task<double>)Task<double>.Factory.StartNew(
-                                        FutureWork,
-                                        cts.Token
-                                    );
+                                    (Task<double>)
+                                        Task<double>.Factory.StartNew(FutureWork, cts.Token);
                                 break;
                             case TaskType.Future:
                                 _task = Task.Factory.StartNew<double>(FutureWork, cts.Token);

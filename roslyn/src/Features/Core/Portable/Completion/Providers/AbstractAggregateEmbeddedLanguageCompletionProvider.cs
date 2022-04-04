@@ -176,11 +176,12 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             if (_languageProviders.IsDefault)
                 throw ExceptionUtilities.Unreachable;
 
-            return (IEmbeddedLanguageFeatures)_languageProviders.Single(
-                lang =>
-                    (lang as IEmbeddedLanguageFeatures)?.CompletionProvider.Name
-                    == item.Properties[EmbeddedProviderName]
-            );
+            return (IEmbeddedLanguageFeatures)
+                _languageProviders.Single(
+                    lang =>
+                        (lang as IEmbeddedLanguageFeatures)?.CompletionProvider.Name
+                        == item.Properties[EmbeddedProviderName]
+                );
         }
     }
 }

@@ -49,8 +49,8 @@ namespace Internal.Cryptography.Pal
                     static delegate(void* pvDecoded, int cbDecoded)
                     {
                         Debug.Assert(cbDecoded >= sizeof(Interop.Crypt32.CRYPT_BIT_BLOB));
-                        Interop.Crypt32.CRYPT_BIT_BLOB* pBlob =
-                            (Interop.Crypt32.CRYPT_BIT_BLOB*)pvDecoded;
+                        Interop.Crypt32.CRYPT_BIT_BLOB* pBlob = (Interop.Crypt32.CRYPT_BIT_BLOB*)
+                            pvDecoded;
                         byte* pbData = (byte*)pBlob->pbData.ToPointer();
 
                         if (pbData != null)

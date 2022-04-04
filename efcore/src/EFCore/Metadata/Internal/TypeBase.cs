@@ -250,11 +250,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             PropertyAccessMode? propertyAccessMode,
             ConfigurationSource configurationSource
         ) =>
-            (PropertyAccessMode?)SetOrRemoveAnnotation(
-                CoreAnnotationNames.PropertyAccessMode,
-                propertyAccessMode,
-                configurationSource
-            )?.Value;
+            (PropertyAccessMode?)
+                SetOrRemoveAnnotation(
+                    CoreAnnotationNames.PropertyAccessMode,
+                    propertyAccessMode,
+                    configurationSource
+                )?.Value;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -276,11 +277,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             PropertyAccessMode? propertyAccessMode,
             ConfigurationSource configurationSource
         ) =>
-            (PropertyAccessMode?)SetOrRemoveAnnotation(
-                CoreAnnotationNames.NavigationAccessMode,
-                propertyAccessMode,
-                configurationSource
-            )?.Value;
+            (PropertyAccessMode?)
+                SetOrRemoveAnnotation(
+                    CoreAnnotationNames.NavigationAccessMode,
+                    propertyAccessMode,
+                    configurationSource
+                )?.Value;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

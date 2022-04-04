@@ -291,10 +291,8 @@ namespace System.Xml.Serialization
                     {
                         if (mapping.Elements != null && mapping.Elements.Length > 0)
                         {
-                            mapping.Elements[0] = (ElementAccessor)ReconcileAccessor(
-                                mapping.Elements[0],
-                                _elements
-                            );
+                            mapping.Elements[0] = (ElementAccessor)
+                                ReconcileAccessor(mapping.Elements[0], _elements);
                         }
                     }
                 }
@@ -808,9 +806,8 @@ namespace System.Xml.Serialization
                     {
                         if (_serializables == null)
                             _serializables = new NameTable();
-                        SerializableMapping? existingMapping = (SerializableMapping?)_serializables[
-                            qname
-                        ];
+                        SerializableMapping? existingMapping = (SerializableMapping?)
+                            _serializables[qname];
                         if (existingMapping != null)
                         {
                             if (existingMapping.Type == null)
@@ -944,10 +941,8 @@ namespace System.Xml.Serialization
             TypeMapping? existingMapping;
             if (!baseMapping.IsAnonymousType)
             {
-                existingMapping = (TypeMapping?)_nullables[
-                    baseMapping.TypeName!,
-                    baseMapping.Namespace
-                ];
+                existingMapping = (TypeMapping?)
+                    _nullables[baseMapping.TypeName!, baseMapping.Namespace];
             }
             else
             {
@@ -1076,13 +1071,8 @@ namespace System.Xml.Serialization
               : XsdTypeName(model.Type, a, model.TypeDesc.Name);
             typeName = XmlConvert.EncodeLocalName(typeName);
 
-            StructMapping? mapping = (StructMapping?)GetTypeMapping(
-                typeName,
-                typeNs,
-                model.TypeDesc,
-                _types,
-                model.Type
-            );
+            StructMapping? mapping = (StructMapping?)
+                GetTypeMapping(typeName, typeNs, model.TypeDesc, _types, model.Type);
             if (mapping == null)
             {
                 mapping = new StructMapping();
@@ -1562,10 +1552,8 @@ namespace System.Xml.Serialization
             // in the case of an ArrayMapping we can have more that one mapping correspond to a type
             // examples of that are ArrayList and object[] both will map tp ArrayOfur-type
             // so we create a link list for all mappings of the same XSD type
-            ArrayMapping? existingMapping = (ArrayMapping?)_types[
-                mapping.TypeName,
-                mapping.Namespace
-            ];
+            ArrayMapping? existingMapping = (ArrayMapping?)
+                _types[mapping.TypeName, mapping.Namespace];
             if (existingMapping != null)
             {
                 ArrayMapping? first = existingMapping;
@@ -1661,13 +1649,8 @@ namespace System.Xml.Serialization
               : XsdTypeName(model.Type, a, model.TypeDesc.Name);
             typeName = XmlConvert.EncodeLocalName(typeName);
 
-            EnumMapping? mapping = (EnumMapping?)GetTypeMapping(
-                typeName,
-                typeNs,
-                model.TypeDesc,
-                _types,
-                model.Type
-            );
+            EnumMapping? mapping = (EnumMapping?)
+                GetTypeMapping(typeName, typeNs, model.TypeDesc, _types, model.Type);
             if (mapping == null)
             {
                 mapping = new EnumMapping();
@@ -2167,9 +2150,8 @@ namespace System.Xml.Serialization
                 );
                 AddUniqueAccessor(arrayItemElements, arrayItemElement);
             }
-            arrayMapping.Elements = (ElementAccessor[])arrayItemElements.ToArray(
-                typeof(ElementAccessor)
-            );
+            arrayMapping.Elements = (ElementAccessor[])
+                arrayItemElements.ToArray(typeof(ElementAccessor));
         }
 
         [RequiresUnreferencedCode("calls GetArrayElementType")]
@@ -2632,10 +2614,8 @@ namespace System.Xml.Serialization
                         {
                             if (_xsdAttributes == null)
                                 _xsdAttributes = new NameTable();
-                            attribute = (AttributeAccessor)ReconcileAccessor(
-                                attribute,
-                                _xsdAttributes
-                            );
+                            attribute = (AttributeAccessor)
+                                ReconcileAccessor(attribute, _xsdAttributes);
                         }
                         accessor.Attribute = attribute;
                     }
@@ -3148,10 +3128,8 @@ namespace System.Xml.Serialization
                 {
                     Type type = items[i]!.Type == null ? accessorType : items[i]!.Type!;
                     string ns = items[i]!.NestingLevel.ToString(CultureInfo.InvariantCulture);
-                    XmlArrayItemAttribute? item = (XmlArrayItemAttribute?)arrayTypes[
-                        type.FullName,
-                        ns
-                    ];
+                    XmlArrayItemAttribute? item = (XmlArrayItemAttribute?)
+                        arrayTypes[type.FullName, ns];
                     if (item != null)
                     {
                         throw new InvalidOperationException(

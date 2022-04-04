@@ -71,8 +71,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
                 composition: EditorTestCompositions.EditorFeatures.AddParts(typeof(T))
             );
 
-            var errorReportingService =
-                (TestErrorReportingService)workspace.Services.GetRequiredService<IErrorReportingService>();
+            var errorReportingService = (TestErrorReportingService)
+                workspace.Services.GetRequiredService<IErrorReportingService>();
 
             var errorReported = false;
             errorReportingService.OnError = message => errorReported = true;
@@ -85,8 +85,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
 
             var project = workspace.CurrentSolution.Projects.Single();
             var document = project.Documents.Single();
-            var extensionManager =
-                (EditorLayerExtensionManager.ExtensionManager)document.Project.Solution.Workspace.Services.GetRequiredService<IExtensionManager>();
+            var extensionManager = (EditorLayerExtensionManager.ExtensionManager)
+                document.Project.Solution.Workspace.Services.GetRequiredService<IExtensionManager>();
             var result = await refactoringService.GetRefactoringsAsync(
                 document,
                 TextSpan.FromBounds(0, 0),

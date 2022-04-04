@@ -942,12 +942,13 @@ namespace System.Threading.Tasks.Tests
                         }
 
                         int activeCount = (
-                            (dynamic)typeof(Task)
-                                .GetField(
-                                    "s_currentActiveTasks",
-                                    BindingFlags.NonPublic | BindingFlags.Static
-                                )
-                                .GetValue(null)
+                            (dynamic)
+                                typeof(Task)
+                                    .GetField(
+                                        "s_currentActiveTasks",
+                                        BindingFlags.NonPublic | BindingFlags.Static
+                                    )
+                                    .GetValue(null)
                         ).Count;
                         Assert.InRange(activeCount, 0, 10); // some other tasks may be created by the runtime, so this is just using a reasonably small upper bound
                     }

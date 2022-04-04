@@ -130,9 +130,10 @@ namespace System.Diagnostics.Tracing
         {
             Span<EventPipeProviderConfigurationNative> providersNative =
                 new Span<EventPipeProviderConfigurationNative>(
-                    (void*)Marshal.AllocCoTaskMem(
-                        sizeof(EventPipeProviderConfigurationNative) * providers.Length
-                    ),
+                    (void*)
+                        Marshal.AllocCoTaskMem(
+                            sizeof(EventPipeProviderConfigurationNative) * providers.Length
+                        ),
                     providers.Length
                 );
             providersNative.Clear();

@@ -88,10 +88,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
 
             // Resolve the constructor into our semantic model's compilation; if the constructor we're looking at is from
             // another project with a different language.
-            var constructorInCompilation = (IMethodSymbol?)SymbolKey
-                .Create(constructor)
-                .Resolve(semanticModel.Compilation)
-                .Symbol;
+            var constructorInCompilation = (IMethodSymbol?)
+                SymbolKey.Create(constructor).Resolve(semanticModel.Compilation).Symbol;
 
             if (constructorInCompilation == null)
             {

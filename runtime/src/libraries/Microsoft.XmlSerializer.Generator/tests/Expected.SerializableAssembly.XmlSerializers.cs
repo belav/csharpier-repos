@@ -1632,7 +1632,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                 @"TypeWithKnownTypesOfCollectionsWithConflictingXmlName",
                 @"",
                 (
-                    (global::SerializationTypes.TypeWithKnownTypesOfCollectionsWithConflictingXmlName)o
+                    (global::SerializationTypes.TypeWithKnownTypesOfCollectionsWithConflictingXmlName)
+                        o
                 ),
                 true,
                 false
@@ -1960,7 +1961,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         Write99_Item(
                             n,
                             ns,
-                            (global::SerializationTypes.TypeWithKnownTypesOfCollectionsWithConflictingXmlName)o,
+                            (global::SerializationTypes.TypeWithKnownTypesOfCollectionsWithConflictingXmlName)
+                                o,
                             isNullable,
                             true
                         );
@@ -2021,7 +2023,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         Write93_Item(
                             n,
                             ns,
-                            (global::SerializationTypes.KnownTypesThroughConstructorWithArrayProperties)o,
+                            (global::SerializationTypes.KnownTypesThroughConstructorWithArrayProperties)
+                                o,
                             isNullable,
                             true
                         );
@@ -2046,7 +2049,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         Write91_Item(
                             n,
                             ns,
-                            (global::SerializationTypes.TypeWithEnumFlagPropertyHavingDefaultValue)o,
+                            (global::SerializationTypes.TypeWithEnumFlagPropertyHavingDefaultValue)
+                                o,
                             isNullable,
                             true
                         );
@@ -2877,13 +2881,14 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                             if (a != null)
                             {
                                 System.Collections.IEnumerator e = (
-                                    (System.Collections.Generic.IEnumerable<global::System.DateTime>)a
+                                    (System.Collections.Generic.IEnumerable<global::System.DateTime>)
+                                        a
                                 ).GetEnumerator();
                                 if (e != null)
                                     while (e.MoveNext())
                                     {
-                                        global::System.DateTime ai =
-                                            (global::System.DateTime)e.Current;
+                                        global::System.DateTime ai = (global::System.DateTime)
+                                            e.Current;
                                         WriteElementStringRaw(
                                             @"dateTime",
                                             @"",
@@ -2927,7 +2932,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         WriteXsiType(@"ArrayOfTypeWithLinkedProperty", @"");
                         {
                             global::System.Collections.Generic.List<global::TypeWithLinkedProperty> a =
-                                (global::System.Collections.Generic.List<global::TypeWithLinkedProperty>)o;
+                                (global::System.Collections.Generic.List<global::TypeWithLinkedProperty>)
+                                    o;
                             if (a != null)
                             {
                                 for (
@@ -3757,7 +3763,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             {
                 global::System.Collections.Generic.List<global::TypeWithLinkedProperty> a =
                     (global::System.Collections.Generic.List<global::TypeWithLinkedProperty>)(
-                        (global::System.Collections.Generic.List<global::TypeWithLinkedProperty>)o.@Children
+                        (global::System.Collections.Generic.List<global::TypeWithLinkedProperty>)
+                            o.@Children
                     );
                 if (a != null)
                 {
@@ -4797,7 +4804,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                     {
                         global::System.Collections.Generic.List<global::System.Int32> a =
                             (global::System.Collections.Generic.List<global::System.Int32>)(
-                                (global::System.Collections.Generic.List<global::System.Int32>)o.@Aliased
+                                (global::System.Collections.Generic.List<global::System.Int32>)
+                                    o.@Aliased
                             );
                         if (a != null)
                         {
@@ -4823,7 +4831,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                     {
                         global::System.Collections.Generic.List<global::System.String> a =
                             (global::System.Collections.Generic.List<global::System.String>)(
-                                (global::System.Collections.Generic.List<global::System.String>)o.@Aliased
+                                (global::System.Collections.Generic.List<global::System.String>)
+                                    o.@Aliased
                             );
                         if (a != null)
                         {
@@ -4847,7 +4856,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                     {
                         global::System.Collections.Generic.List<global::System.Double> a =
                             (global::System.Collections.Generic.List<global::System.Double>)(
-                                (global::System.Collections.Generic.List<global::System.Double>)o.@Aliased
+                                (global::System.Collections.Generic.List<global::System.Double>)
+                                    o.@Aliased
                             );
                         if (a != null)
                         {
@@ -5622,7 +5632,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             {
                 global::SerializationTypes.MyCollection<global::System.String> a =
                     (global::SerializationTypes.MyCollection<global::System.String>)(
-                        (global::SerializationTypes.MyCollection<global::System.String>)o.@Collection
+                        (global::SerializationTypes.MyCollection<global::System.String>)
+                            o.@Collection
                     );
                 if (a != null)
                 {
@@ -5670,7 +5681,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             {
                 global::SerializationTypes.MyCollection<global::System.String> a =
                     (global::SerializationTypes.MyCollection<global::System.String>)(
-                        (global::SerializationTypes.MyCollection<global::System.String>)o.@Collection
+                        (global::SerializationTypes.MyCollection<global::System.String>)
+                            o.@Collection
                     );
                 if (a != null)
                 {
@@ -5979,7 +5991,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             {
                 global::System.Collections.Generic.List<global::System.String> a =
                     (global::System.Collections.Generic.List<global::System.String>)(
-                        (global::System.Collections.Generic.List<global::System.String>)o.@ListProperty
+                        (global::System.Collections.Generic.List<global::System.String>)
+                            o.@ListProperty
                     );
                 if (a != null)
                 {
@@ -6047,7 +6060,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             {
                 global::System.Collections.Generic.List<global::System.String> a =
                     (global::System.Collections.Generic.List<global::System.String>)(
-                        (global::System.Collections.Generic.List<global::System.String>)o.@ListProperty
+                        (global::System.Collections.Generic.List<global::System.String>)
+                            o.@ListProperty
                     );
                 if (a != null)
                 {
@@ -6126,7 +6140,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             {
                 global::System.Collections.Generic.List<global::System.String> a =
                     (global::System.Collections.Generic.List<global::System.String>)(
-                        (global::System.Collections.Generic.List<global::System.String>)o.@ListProperty
+                        (global::System.Collections.Generic.List<global::System.String>)
+                            o.@ListProperty
                     );
                 if (a != null)
                 {
@@ -6727,8 +6742,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                 )
             );
             {
-                global::System.Xml.XmlAttribute[] a =
-                    (global::System.Xml.XmlAttribute[])o.@Attributes;
+                global::System.Xml.XmlAttribute[] a = (global::System.Xml.XmlAttribute[])
+                    o.@Attributes;
                 if (a != null)
                 {
                     for (int i = 0; i < a.Length; i++)
@@ -6881,7 +6896,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             {
                 global::System.Collections.Generic.List<global::System.Int32> a =
                     (global::System.Collections.Generic.List<global::System.Int32>)(
-                        (global::System.Collections.Generic.List<global::System.Int32>)o.@UnqualifiedSchemaFormListProperty
+                        (global::System.Collections.Generic.List<global::System.Int32>)
+                            o.@UnqualifiedSchemaFormListProperty
                     );
                 if (a != null)
                 {
@@ -6902,7 +6918,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             {
                 global::System.Collections.Generic.List<global::System.String> a =
                     (global::System.Collections.Generic.List<global::System.String>)(
-                        (global::System.Collections.Generic.List<global::System.String>)o.@NoneSchemaFormListProperty
+                        (global::System.Collections.Generic.List<global::System.String>)
+                            o.@NoneSchemaFormListProperty
                     );
                 if (a != null)
                 {
@@ -6917,7 +6934,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             {
                 global::System.Collections.Generic.List<global::System.Boolean> a =
                     (global::System.Collections.Generic.List<global::System.Boolean>)(
-                        (global::System.Collections.Generic.List<global::System.Boolean>)o.@QualifiedSchemaFormListProperty
+                        (global::System.Collections.Generic.List<global::System.Boolean>)
+                            o.@QualifiedSchemaFormListProperty
                     );
                 if (a != null)
                 {
@@ -9971,9 +9989,10 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         )
                     )
                     {
-                        o =
-                            (global::SerializationTypes.ClassImplementingIXmlSerialiable)ReadSerializable(
-                                (System.Xml.Serialization.IXmlSerializable)new global::SerializationTypes.ClassImplementingIXmlSerialiable()
+                        o = (global::SerializationTypes.ClassImplementingIXmlSerialiable)
+                            ReadSerializable(
+                                (System.Xml.Serialization.IXmlSerializable)
+                                    new global::SerializationTypes.ClassImplementingIXmlSerialiable()
                             );
                         break;
                     }
@@ -10945,18 +10964,20 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (Reader.IsEmptyElement)
             {
                 Reader.Skip();
-                o.@A = (global::SerializationTypes.TypeNameClashA.TypeNameClash[])ShrinkArray(
-                    a_0,
-                    ca_0,
-                    typeof(global::SerializationTypes.TypeNameClashA.TypeNameClash),
-                    true
-                );
-                o.@B = (global::SerializationTypes.TypeNameClashB.TypeNameClash[])ShrinkArray(
-                    a_1,
-                    ca_1,
-                    typeof(global::SerializationTypes.TypeNameClashB.TypeNameClash),
-                    true
-                );
+                o.@A = (global::SerializationTypes.TypeNameClashA.TypeNameClash[])
+                    ShrinkArray(
+                        a_0,
+                        ca_0,
+                        typeof(global::SerializationTypes.TypeNameClashA.TypeNameClash),
+                        true
+                    );
+                o.@B = (global::SerializationTypes.TypeNameClashB.TypeNameClash[])
+                    ShrinkArray(
+                        a_1,
+                        ca_1,
+                        typeof(global::SerializationTypes.TypeNameClashB.TypeNameClash),
+                        true
+                    );
                 return o;
             }
             Reader.ReadStartElement();
@@ -10977,8 +10998,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                             )
                         )
                         {
-                            a_0 =
-                                (global::SerializationTypes.TypeNameClashA.TypeNameClash[])EnsureArrayIndex(
+                            a_0 = (global::SerializationTypes.TypeNameClashA.TypeNameClash[])
+                                EnsureArrayIndex(
                                     a_0,
                                     ca_0,
                                     typeof(global::SerializationTypes.TypeNameClashA.TypeNameClash)
@@ -10993,8 +11014,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                             )
                         )
                         {
-                            a_1 =
-                                (global::SerializationTypes.TypeNameClashB.TypeNameClash[])EnsureArrayIndex(
+                            a_1 = (global::SerializationTypes.TypeNameClashB.TypeNameClash[])
+                                EnsureArrayIndex(
                                     a_1,
                                     ca_1,
                                     typeof(global::SerializationTypes.TypeNameClashB.TypeNameClash)
@@ -11011,18 +11032,20 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                 }
                 Reader.MoveToContent();
             }
-            o.@A = (global::SerializationTypes.TypeNameClashA.TypeNameClash[])ShrinkArray(
-                a_0,
-                ca_0,
-                typeof(global::SerializationTypes.TypeNameClashA.TypeNameClash),
-                true
-            );
-            o.@B = (global::SerializationTypes.TypeNameClashB.TypeNameClash[])ShrinkArray(
-                a_1,
-                ca_1,
-                typeof(global::SerializationTypes.TypeNameClashB.TypeNameClash),
-                true
-            );
+            o.@A = (global::SerializationTypes.TypeNameClashA.TypeNameClash[])
+                ShrinkArray(
+                    a_0,
+                    ca_0,
+                    typeof(global::SerializationTypes.TypeNameClashA.TypeNameClash),
+                    true
+                );
+            o.@B = (global::SerializationTypes.TypeNameClashB.TypeNameClash[])
+                ShrinkArray(
+                    a_1,
+                    ca_1,
+                    typeof(global::SerializationTypes.TypeNameClashB.TypeNameClash),
+                    true
+                );
             ReadEndElement();
             return o;
         }
@@ -11983,11 +12006,12 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                                 )
                                             )
                                             {
-                                                z_0_0 = (global::OrderedItem[])EnsureArrayIndex(
-                                                    z_0_0,
-                                                    cz_0_0,
-                                                    typeof(global::OrderedItem)
-                                                );
+                                                z_0_0 = (global::OrderedItem[])
+                                                    EnsureArrayIndex(
+                                                        z_0_0,
+                                                        cz_0_0,
+                                                        typeof(global::OrderedItem)
+                                                    );
                                                 z_0_0[cz_0_0++] = Read20_OrderedItem(true, true);
                                                 break;
                                             }
@@ -12005,12 +12029,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                 }
                                 ReadEndElement();
                             }
-                            a = (global::OrderedItem[])ShrinkArray(
-                                z_0_0,
-                                cz_0_0,
-                                typeof(global::OrderedItem),
-                                false
-                            );
+                            a = (global::OrderedItem[])
+                                ShrinkArray(z_0_0, cz_0_0, typeof(global::OrderedItem), false);
                         }
                         return a;
                     }
@@ -12312,11 +12332,12 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                                 )
                                             )
                                             {
-                                                z_0_0 = (global::Instrument[])EnsureArrayIndex(
-                                                    z_0_0,
-                                                    cz_0_0,
-                                                    typeof(global::Instrument)
-                                                );
+                                                z_0_0 = (global::Instrument[])
+                                                    EnsureArrayIndex(
+                                                        z_0_0,
+                                                        cz_0_0,
+                                                        typeof(global::Instrument)
+                                                    );
                                                 z_0_0[cz_0_0++] = Read27_Instrument(true, true);
                                                 break;
                                             }
@@ -12331,12 +12352,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                 }
                                 ReadEndElement();
                             }
-                            a = (global::Instrument[])ShrinkArray(
-                                z_0_0,
-                                cz_0_0,
-                                typeof(global::Instrument),
-                                false
-                            );
+                            a = (global::Instrument[])
+                                ShrinkArray(z_0_0, cz_0_0, typeof(global::Instrument), false);
                         }
                         return a;
                     }
@@ -12357,7 +12374,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                 a =
                                     new global::System.Collections.Generic.List<global::TypeWithLinkedProperty>();
                             global::System.Collections.Generic.List<global::TypeWithLinkedProperty> z_0_0 =
-                                (global::System.Collections.Generic.List<global::TypeWithLinkedProperty>)a;
+                                (global::System.Collections.Generic.List<global::TypeWithLinkedProperty>)
+                                    a;
                             if ((Reader.IsEmptyElement))
                             {
                                 Reader.Skip();
@@ -12509,8 +12527,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                                 )
                                             )
                                             {
-                                                z_0_0 =
-                                                    (global::SerializationTypes.SimpleType[])EnsureArrayIndex(
+                                                z_0_0 = (global::SerializationTypes.SimpleType[])
+                                                    EnsureArrayIndex(
                                                         z_0_0,
                                                         cz_0_0,
                                                         typeof(global::SerializationTypes.SimpleType)
@@ -12529,12 +12547,13 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                 }
                                 ReadEndElement();
                             }
-                            a = (global::SerializationTypes.SimpleType[])ShrinkArray(
-                                z_0_0,
-                                cz_0_0,
-                                typeof(global::SerializationTypes.SimpleType),
-                                false
-                            );
+                            a = (global::SerializationTypes.SimpleType[])
+                                ShrinkArray(
+                                    z_0_0,
+                                    cz_0_0,
+                                    typeof(global::SerializationTypes.SimpleType),
+                                    false
+                                );
                         }
                         return a;
                     }
@@ -12652,8 +12671,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                                 )
                                             )
                                             {
-                                                z_0_0 =
-                                                    (global::SerializationTypes.TypeA[])EnsureArrayIndex(
+                                                z_0_0 = (global::SerializationTypes.TypeA[])
+                                                    EnsureArrayIndex(
                                                         z_0_0,
                                                         cz_0_0,
                                                         typeof(global::SerializationTypes.TypeA)
@@ -12672,12 +12691,13 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                 }
                                 ReadEndElement();
                             }
-                            a = (global::SerializationTypes.TypeA[])ShrinkArray(
-                                z_0_0,
-                                cz_0_0,
-                                typeof(global::SerializationTypes.TypeA),
-                                false
-                            );
+                            a = (global::SerializationTypes.TypeA[])
+                                ShrinkArray(
+                                    z_0_0,
+                                    cz_0_0,
+                                    typeof(global::SerializationTypes.TypeA),
+                                    false
+                                );
                         }
                         return a;
                     }
@@ -12849,11 +12869,12 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                             {
                                                 {
                                                     z_0_0 =
-                                                        (global::SerializationTypes.ItemChoiceType[])EnsureArrayIndex(
-                                                            z_0_0,
-                                                            cz_0_0,
-                                                            typeof(global::SerializationTypes.ItemChoiceType)
-                                                        );
+                                                        (global::SerializationTypes.ItemChoiceType[])
+                                                            EnsureArrayIndex(
+                                                                z_0_0,
+                                                                cz_0_0,
+                                                                typeof(global::SerializationTypes.ItemChoiceType)
+                                                            );
                                                     z_0_0[cz_0_0++] = Read80_ItemChoiceType(
                                                         Reader.ReadElementString()
                                                     );
@@ -12871,12 +12892,13 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                 }
                                 ReadEndElement();
                             }
-                            a = (global::SerializationTypes.ItemChoiceType[])ShrinkArray(
-                                z_0_0,
-                                cz_0_0,
-                                typeof(global::SerializationTypes.ItemChoiceType),
-                                false
-                            );
+                            a = (global::SerializationTypes.ItemChoiceType[])
+                                ShrinkArray(
+                                    z_0_0,
+                                    cz_0_0,
+                                    typeof(global::SerializationTypes.ItemChoiceType),
+                                    false
+                                );
                         }
                         return a;
                     }
@@ -12921,8 +12943,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                             {
                                                 if (ReadNull())
                                                 {
-                                                    z_0_0 =
-                                                        (global::System.Object[])EnsureArrayIndex(
+                                                    z_0_0 = (global::System.Object[])
+                                                        EnsureArrayIndex(
                                                             z_0_0,
                                                             cz_0_0,
                                                             typeof(global::System.Object)
@@ -12931,8 +12953,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                                 }
                                                 else
                                                 {
-                                                    z_0_0 =
-                                                        (global::System.Object[])EnsureArrayIndex(
+                                                    z_0_0 = (global::System.Object[])
+                                                        EnsureArrayIndex(
                                                             z_0_0,
                                                             cz_0_0,
                                                             typeof(global::System.Object)
@@ -12952,12 +12974,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                 }
                                 ReadEndElement();
                             }
-                            a = (global::System.Object[])ShrinkArray(
-                                z_0_0,
-                                cz_0_0,
-                                typeof(global::System.Object),
-                                false
-                            );
+                            a = (global::System.Object[])
+                                ShrinkArray(z_0_0, cz_0_0, typeof(global::System.Object), false);
                         }
                         return a;
                     }
@@ -13159,18 +13177,21 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                                                     if (
                                                                         (
                                                                             (object)Reader.LocalName
-                                                                                == (object)id42_SimpleType
-                                                                            && (object)Reader.NamespaceURI
+                                                                                == (object)
+                                                                                    id42_SimpleType
+                                                                            && (object)
+                                                                                Reader.NamespaceURI
                                                                                 == (object)id2_Item
                                                                         )
                                                                     )
                                                                     {
                                                                         z_0_0_0 =
-                                                                            (global::SerializationTypes.SimpleType[])EnsureArrayIndex(
-                                                                                z_0_0_0,
-                                                                                cz_0_0_0,
-                                                                                typeof(global::SerializationTypes.SimpleType)
-                                                                            );
+                                                                            (global::SerializationTypes.SimpleType[])
+                                                                                EnsureArrayIndex(
+                                                                                    z_0_0_0,
+                                                                                    cz_0_0_0,
+                                                                                    typeof(global::SerializationTypes.SimpleType)
+                                                                                );
                                                                         z_0_0_0[cz_0_0_0++] =
                                                                             Read42_SimpleType(
                                                                                 true,
@@ -13193,18 +13214,20 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                                         ReadEndElement();
                                                     }
                                                     z_0_0 =
-                                                        (global::SerializationTypes.SimpleType[][])EnsureArrayIndex(
-                                                            z_0_0,
-                                                            cz_0_0,
-                                                            typeof(global::SerializationTypes.SimpleType[])
-                                                        );
+                                                        (global::SerializationTypes.SimpleType[][])
+                                                            EnsureArrayIndex(
+                                                                z_0_0,
+                                                                cz_0_0,
+                                                                typeof(global::SerializationTypes.SimpleType[])
+                                                            );
                                                     z_0_0[cz_0_0++] =
-                                                        (global::SerializationTypes.SimpleType[])ShrinkArray(
-                                                            z_0_0_0,
-                                                            cz_0_0_0,
-                                                            typeof(global::SerializationTypes.SimpleType),
-                                                            false
-                                                        );
+                                                        (global::SerializationTypes.SimpleType[])
+                                                            ShrinkArray(
+                                                                z_0_0_0,
+                                                                cz_0_0_0,
+                                                                typeof(global::SerializationTypes.SimpleType),
+                                                                false
+                                                            );
                                                 }
                                                 break;
                                             }
@@ -13219,12 +13242,13 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                 }
                                 ReadEndElement();
                             }
-                            a = (global::SerializationTypes.SimpleType[][])ShrinkArray(
-                                z_0_0,
-                                cz_0_0,
-                                typeof(global::SerializationTypes.SimpleType[]),
-                                false
-                            );
+                            a = (global::SerializationTypes.SimpleType[][])
+                                ShrinkArray(
+                                    z_0_0,
+                                    cz_0_0,
+                                    typeof(global::SerializationTypes.SimpleType[]),
+                                    false
+                                );
                         }
                         return a;
                     }
@@ -13561,11 +13585,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
 
         global::SerializationTypes.EnumFlags Read64_EnumFlags(string s)
         {
-            return (global::SerializationTypes.EnumFlags)ToEnum(
-                s,
-                EnumFlagsValues,
-                @"global::SerializationTypes.EnumFlags"
-            );
+            return (global::SerializationTypes.EnumFlags)
+                ToEnum(s, EnumFlagsValues, @"global::SerializationTypes.EnumFlags");
         }
 
         global::SerializationTypes.TypeA Read53_TypeA(bool isNullable, bool checkType)
@@ -13869,7 +13890,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                 o.@Children =
                     new global::System.Collections.Generic.List<global::TypeWithLinkedProperty>();
             global::System.Collections.Generic.List<global::TypeWithLinkedProperty> a_1 =
-                (global::System.Collections.Generic.List<global::TypeWithLinkedProperty>)o.@Children;
+                (global::System.Collections.Generic.List<global::TypeWithLinkedProperty>)
+                    o.@Children;
             bool[] paramsRead = new bool[2];
             while (Reader.MoveToNextAttribute())
             {
@@ -13920,7 +13942,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                     o.@Children =
                                         new global::System.Collections.Generic.List<global::TypeWithLinkedProperty>();
                                 global::System.Collections.Generic.List<global::TypeWithLinkedProperty> a_1_0 =
-                                    (global::System.Collections.Generic.List<global::TypeWithLinkedProperty>)o.@Children;
+                                    (global::System.Collections.Generic.List<global::TypeWithLinkedProperty>)
+                                        o.@Children;
                                 if ((Reader.IsEmptyElement))
                                 {
                                     Reader.Skip();
@@ -14492,12 +14515,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (Reader.IsEmptyElement)
             {
                 Reader.Skip();
-                o.@Elements = (global::System.Xml.XmlElement[])ShrinkArray(
-                    a_0,
-                    ca_0,
-                    typeof(global::System.Xml.XmlElement),
-                    true
-                );
+                o.@Elements = (global::System.Xml.XmlElement[])
+                    ShrinkArray(a_0, ca_0, typeof(global::System.Xml.XmlElement), true);
                 return o;
             }
             Reader.ReadStartElement();
@@ -14509,11 +14528,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             {
                 if (Reader.NodeType == System.Xml.XmlNodeType.Element)
                 {
-                    a_0 = (global::System.Xml.XmlElement[])EnsureArrayIndex(
-                        a_0,
-                        ca_0,
-                        typeof(global::System.Xml.XmlElement)
-                    );
+                    a_0 = (global::System.Xml.XmlElement[])
+                        EnsureArrayIndex(a_0, ca_0, typeof(global::System.Xml.XmlElement));
                     a_0[ca_0++] = (global::System.Xml.XmlElement)ReadXmlNode(false);
                 }
                 else
@@ -14522,12 +14538,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                 }
                 Reader.MoveToContent();
             }
-            o.@Elements = (global::System.Xml.XmlElement[])ShrinkArray(
-                a_0,
-                ca_0,
-                typeof(global::System.Xml.XmlElement),
-                true
-            );
+            o.@Elements = (global::System.Xml.XmlElement[])
+                ShrinkArray(a_0, ca_0, typeof(global::System.Xml.XmlElement), true);
             ReadEndElement();
             return o;
         }
@@ -15230,12 +15242,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (Reader.IsEmptyElement)
             {
                 Reader.Skip();
-                o.@CDATA = (global::System.Xml.XmlNode[])ShrinkArray(
-                    a_0,
-                    ca_0,
-                    typeof(global::System.Xml.XmlNode),
-                    true
-                );
+                o.@CDATA = (global::System.Xml.XmlNode[])
+                    ShrinkArray(a_0, ca_0, typeof(global::System.Xml.XmlNode), true);
                 return o;
             }
             Reader.ReadStartElement();
@@ -15257,14 +15265,10 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                     || Reader.NodeType == System.Xml.XmlNodeType.SignificantWhitespace
                 )
                 {
-                    a_0 = (global::System.Xml.XmlNode[])EnsureArrayIndex(
-                        a_0,
-                        ca_0,
-                        typeof(global::System.Xml.XmlNode)
-                    );
-                    a_0[ca_0++] = (global::System.Xml.XmlNode)Document.CreateTextNode(
-                        Reader.ReadString()
-                    );
+                    a_0 = (global::System.Xml.XmlNode[])
+                        EnsureArrayIndex(a_0, ca_0, typeof(global::System.Xml.XmlNode));
+                    a_0[ca_0++] = (global::System.Xml.XmlNode)
+                        Document.CreateTextNode(Reader.ReadString());
                 }
                 else
                 {
@@ -15272,12 +15276,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                 }
                 Reader.MoveToContent();
             }
-            o.@CDATA = (global::System.Xml.XmlNode[])ShrinkArray(
-                a_0,
-                ca_0,
-                typeof(global::System.Xml.XmlNode),
-                true
-            );
+            o.@CDATA = (global::System.Xml.XmlNode[])
+                ShrinkArray(a_0, ca_0, typeof(global::System.Xml.XmlNode), true);
             ReadEndElement();
             return o;
         }
@@ -16174,11 +16174,12 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                                     )
                                                 )
                                                 {
-                                                    a_2_0 = (global::OrderedItem[])EnsureArrayIndex(
-                                                        a_2_0,
-                                                        ca_2_0,
-                                                        typeof(global::OrderedItem)
-                                                    );
+                                                    a_2_0 = (global::OrderedItem[])
+                                                        EnsureArrayIndex(
+                                                            a_2_0,
+                                                            ca_2_0,
+                                                            typeof(global::OrderedItem)
+                                                        );
                                                     a_2_0[ca_2_0++] = Read20_OrderedItem(
                                                         true,
                                                         true
@@ -16202,12 +16203,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                     }
                                     ReadEndElement();
                                 }
-                                o.@OrderedItems = (global::OrderedItem[])ShrinkArray(
-                                    a_2_0,
-                                    ca_2_0,
-                                    typeof(global::OrderedItem),
-                                    false
-                                );
+                                o.@OrderedItems = (global::OrderedItem[])
+                                    ShrinkArray(a_2_0, ca_2_0, typeof(global::OrderedItem), false);
                             }
                             break;
                         }
@@ -16619,7 +16616,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                     o.@Aliased =
                                         new global::System.Collections.Generic.List<global::System.Int32>();
                                 global::System.Collections.Generic.List<global::System.Int32> a_0_0 =
-                                    (global::System.Collections.Generic.List<global::System.Int32>)o.@Aliased;
+                                    (global::System.Collections.Generic.List<global::System.Int32>)
+                                        o.@Aliased;
                                 if ((Reader.IsEmptyElement))
                                 {
                                     Reader.Skip();
@@ -16684,7 +16682,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                     o.@Aliased =
                                         new global::System.Collections.Generic.List<global::System.String>();
                                 global::System.Collections.Generic.List<global::System.String> a_0_0 =
-                                    (global::System.Collections.Generic.List<global::System.String>)o.@Aliased;
+                                    (global::System.Collections.Generic.List<global::System.String>)
+                                        o.@Aliased;
                                 if ((Reader.IsEmptyElement))
                                 {
                                     Reader.Skip();
@@ -16750,7 +16749,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                     o.@Aliased =
                                         new global::System.Collections.Generic.List<global::System.Double>();
                                 global::System.Collections.Generic.List<global::System.Double> a_0_0 =
-                                    (global::System.Collections.Generic.List<global::System.Double>)o.@Aliased;
+                                    (global::System.Collections.Generic.List<global::System.Double>)
+                                        o.@Aliased;
                                 if ((Reader.IsEmptyElement))
                                 {
                                     Reader.Skip();
@@ -17071,11 +17071,12 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                                     )
                                                 )
                                                 {
-                                                    a_0_0 = (global::Instrument[])EnsureArrayIndex(
-                                                        a_0_0,
-                                                        ca_0_0,
-                                                        typeof(global::Instrument)
-                                                    );
+                                                    a_0_0 = (global::Instrument[])
+                                                        EnsureArrayIndex(
+                                                            a_0_0,
+                                                            ca_0_0,
+                                                            typeof(global::Instrument)
+                                                        );
                                                     a_0_0[ca_0_0++] = Read27_Instrument(true, true);
                                                     break;
                                                 }
@@ -17090,12 +17091,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                     }
                                     ReadEndElement();
                                 }
-                                o.@Instruments = (global::Instrument[])ShrinkArray(
-                                    a_0_0,
-                                    ca_0_0,
-                                    typeof(global::Instrument),
-                                    false
-                                );
+                                o.@Instruments = (global::Instrument[])
+                                    ShrinkArray(a_0_0, ca_0_0, typeof(global::Instrument), false);
                             }
                             break;
                         }
@@ -17781,11 +17778,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                     string[] vals = listValues.Split(null);
                     for (int i = 0; i < vals.Length; i++)
                     {
-                        a_1 = (global::System.String[])EnsureArrayIndex(
-                            a_1,
-                            ca_1,
-                            typeof(global::System.String)
-                        );
+                        a_1 = (global::System.String[])
+                            EnsureArrayIndex(a_1, ca_1, typeof(global::System.String));
                         a_1[ca_1++] = CollapseWhitespace(vals[i]);
                     }
                 }
@@ -17798,12 +17792,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (Reader.IsEmptyElement)
             {
                 Reader.Skip();
-                o.@Refs = (global::System.String[])ShrinkArray(
-                    a_1,
-                    ca_1,
-                    typeof(global::System.String),
-                    true
-                );
+                o.@Refs = (global::System.String[])
+                    ShrinkArray(a_1, ca_1, typeof(global::System.String), true);
                 return o;
             }
             Reader.ReadStartElement();
@@ -17823,12 +17813,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                 }
                 Reader.MoveToContent();
             }
-            o.@Refs = (global::System.String[])ShrinkArray(
-                a_1,
-                ca_1,
-                typeof(global::System.String),
-                true
-            );
+            o.@Refs = (global::System.String[])
+                ShrinkArray(a_1, ca_1, typeof(global::System.String), true);
             ReadEndElement();
             return o;
         }
@@ -17901,7 +17887,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                     o.@Parameters =
                                         new global::System.Collections.Generic.List<global::Parameter>();
                                 global::System.Collections.Generic.List<global::Parameter> a_0_0 =
-                                    (global::System.Collections.Generic.List<global::Parameter>)o.@Parameters;
+                                    (global::System.Collections.Generic.List<global::Parameter>)
+                                        o.@Parameters;
                                 if ((Reader.IsEmptyElement))
                                 {
                                     Reader.Skip();
@@ -18156,11 +18143,12 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                                 )
                                                 {
                                                     a_0_0 =
-                                                        (global::SerializationTypes.SimpleType[])EnsureArrayIndex(
-                                                            a_0_0,
-                                                            ca_0_0,
-                                                            typeof(global::SerializationTypes.SimpleType)
-                                                        );
+                                                        (global::SerializationTypes.SimpleType[])
+                                                            EnsureArrayIndex(
+                                                                a_0_0,
+                                                                ca_0_0,
+                                                                typeof(global::SerializationTypes.SimpleType)
+                                                            );
                                                     a_0_0[ca_0_0++] = Read42_SimpleType(true, true);
                                                     break;
                                                 }
@@ -18175,12 +18163,13 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                     }
                                     ReadEndElement();
                                 }
-                                o.@F1 = (global::SerializationTypes.SimpleType[])ShrinkArray(
-                                    a_0_0,
-                                    ca_0_0,
-                                    typeof(global::SerializationTypes.SimpleType),
-                                    false
-                                );
+                                o.@F1 = (global::SerializationTypes.SimpleType[])
+                                    ShrinkArray(
+                                        a_0_0,
+                                        ca_0_0,
+                                        typeof(global::SerializationTypes.SimpleType),
+                                        false
+                                    );
                             }
                             break;
                         }
@@ -18222,8 +18211,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                                 )
                                                 {
                                                     {
-                                                        a_1_0 =
-                                                            (global::System.Int32[])EnsureArrayIndex(
+                                                        a_1_0 = (global::System.Int32[])
+                                                            EnsureArrayIndex(
                                                                 a_1_0,
                                                                 ca_1_0,
                                                                 typeof(global::System.Int32)
@@ -18246,12 +18235,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                     }
                                     ReadEndElement();
                                 }
-                                o.@F2 = (global::System.Int32[])ShrinkArray(
-                                    a_1_0,
-                                    ca_1_0,
-                                    typeof(global::System.Int32),
-                                    false
-                                );
+                                o.@F2 = (global::System.Int32[])
+                                    ShrinkArray(a_1_0, ca_1_0, typeof(global::System.Int32), false);
                             }
                             break;
                         }
@@ -18293,11 +18278,12 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                                 )
                                                 {
                                                     a_2_0 =
-                                                        (global::SerializationTypes.SimpleType[])EnsureArrayIndex(
-                                                            a_2_0,
-                                                            ca_2_0,
-                                                            typeof(global::SerializationTypes.SimpleType)
-                                                        );
+                                                        (global::SerializationTypes.SimpleType[])
+                                                            EnsureArrayIndex(
+                                                                a_2_0,
+                                                                ca_2_0,
+                                                                typeof(global::SerializationTypes.SimpleType)
+                                                            );
                                                     a_2_0[ca_2_0++] = Read42_SimpleType(true, true);
                                                     break;
                                                 }
@@ -18312,12 +18298,13 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                     }
                                     ReadEndElement();
                                 }
-                                o.@P1 = (global::SerializationTypes.SimpleType[])ShrinkArray(
-                                    a_2_0,
-                                    ca_2_0,
-                                    typeof(global::SerializationTypes.SimpleType),
-                                    false
-                                );
+                                o.@P1 = (global::SerializationTypes.SimpleType[])
+                                    ShrinkArray(
+                                        a_2_0,
+                                        ca_2_0,
+                                        typeof(global::SerializationTypes.SimpleType),
+                                        false
+                                    );
                             }
                             break;
                         }
@@ -18359,8 +18346,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                                 )
                                                 {
                                                     {
-                                                        a_3_0 =
-                                                            (global::System.Int32[])EnsureArrayIndex(
+                                                        a_3_0 = (global::System.Int32[])
+                                                            EnsureArrayIndex(
                                                                 a_3_0,
                                                                 ca_3_0,
                                                                 typeof(global::System.Int32)
@@ -18383,12 +18370,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                     }
                                     ReadEndElement();
                                 }
-                                o.@P2 = (global::System.Int32[])ShrinkArray(
-                                    a_3_0,
-                                    ca_3_0,
-                                    typeof(global::System.Int32),
-                                    false
-                                );
+                                o.@P2 = (global::System.Int32[])
+                                    ShrinkArray(a_3_0, ca_3_0, typeof(global::System.Int32), false);
                             }
                             break;
                         }
@@ -18494,8 +18477,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             global::SerializationTypes.StructNotSerializable o;
             try
             {
-                o =
-                    (global::SerializationTypes.StructNotSerializable)System.Activator.CreateInstance(
+                o = (global::SerializationTypes.StructNotSerializable)
+                    System.Activator.CreateInstance(
                         typeof(global::SerializationTypes.StructNotSerializable),
                         System.Reflection.BindingFlags.Instance
                             | System.Reflection.BindingFlags.Public
@@ -18644,7 +18627,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                     o.@Collection =
                                         new global::SerializationTypes.MyCollection<global::System.String>();
                                 global::SerializationTypes.MyCollection<global::System.String> a_0_0 =
-                                    (global::SerializationTypes.MyCollection<global::System.String>)o.@Collection;
+                                    (global::SerializationTypes.MyCollection<global::System.String>)
+                                        o.@Collection;
                                 if ((Reader.IsEmptyElement))
                                 {
                                     Reader.Skip();
@@ -18773,7 +18757,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                             if (!ReadNull())
                             {
                                 global::SerializationTypes.MyCollection<global::System.String> a_0_0 =
-                                    (global::SerializationTypes.MyCollection<global::System.String>)o.@Collection;
+                                    (global::SerializationTypes.MyCollection<global::System.String>)
+                                        o.@Collection;
                                 if (((object)(a_0_0) == null) || (Reader.IsEmptyElement))
                                 {
                                     Reader.Skip();
@@ -18954,16 +18939,17 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             global::SerializationTypes.DCStruct o;
             try
             {
-                o = (global::SerializationTypes.DCStruct)System.Activator.CreateInstance(
-                    typeof(global::SerializationTypes.DCStruct),
-                    System.Reflection.BindingFlags.Instance
-                        | System.Reflection.BindingFlags.Public
-                        | System.Reflection.BindingFlags.CreateInstance
-                        | System.Reflection.BindingFlags.NonPublic,
-                    null,
-                    new object[0],
-                    null
-                );
+                o = (global::SerializationTypes.DCStruct)
+                    System.Activator.CreateInstance(
+                        typeof(global::SerializationTypes.DCStruct),
+                        System.Reflection.BindingFlags.Instance
+                            | System.Reflection.BindingFlags.Public
+                            | System.Reflection.BindingFlags.CreateInstance
+                            | System.Reflection.BindingFlags.NonPublic,
+                        null,
+                        new object[0],
+                        null
+                    );
             }
             catch (System.MissingMethodException)
             {
@@ -19368,8 +19354,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                                     )
                                                 )
                                                 {
-                                                    a_0_0 =
-                                                        (global::SerializationTypes.TypeA[])EnsureArrayIndex(
+                                                    a_0_0 = (global::SerializationTypes.TypeA[])
+                                                        EnsureArrayIndex(
                                                             a_0_0,
                                                             ca_0_0,
                                                             typeof(global::SerializationTypes.TypeA)
@@ -19388,12 +19374,13 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                     }
                                     ReadEndElement();
                                 }
-                                o.@Items = (global::SerializationTypes.TypeA[])ShrinkArray(
-                                    a_0_0,
-                                    ca_0_0,
-                                    typeof(global::SerializationTypes.TypeA),
-                                    false
-                                );
+                                o.@Items = (global::SerializationTypes.TypeA[])
+                                    ShrinkArray(
+                                        a_0_0,
+                                        ca_0_0,
+                                        typeof(global::SerializationTypes.TypeA),
+                                        false
+                                    );
                             }
                             break;
                         }
@@ -19606,7 +19593,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                     o.@ListProperty =
                                         new global::System.Collections.Generic.List<global::System.String>();
                                 global::System.Collections.Generic.List<global::System.String> a_3_0 =
-                                    (global::System.Collections.Generic.List<global::System.String>)o.@ListProperty;
+                                    (global::System.Collections.Generic.List<global::System.String>)
+                                        o.@ListProperty;
                                 if ((Reader.IsEmptyElement))
                                 {
                                     Reader.Skip();
@@ -19801,7 +19789,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                     o.@ListProperty =
                                         new global::System.Collections.Generic.List<global::System.String>();
                                 global::System.Collections.Generic.List<global::System.String> a_3_0 =
-                                    (global::System.Collections.Generic.List<global::System.String>)o.@ListProperty;
+                                    (global::System.Collections.Generic.List<global::System.String>)
+                                        o.@ListProperty;
                                 if ((Reader.IsEmptyElement))
                                 {
                                     Reader.Skip();
@@ -20005,7 +19994,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                     o.@ListProperty =
                                         new global::System.Collections.Generic.List<global::System.String>();
                                 global::System.Collections.Generic.List<global::System.String> a_3_0 =
-                                    (global::System.Collections.Generic.List<global::System.String>)o.@ListProperty;
+                                    (global::System.Collections.Generic.List<global::System.String>)
+                                        o.@ListProperty;
                                 if ((Reader.IsEmptyElement))
                                 {
                                     Reader.Skip();
@@ -20341,12 +20331,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (Reader.IsEmptyElement)
             {
                 Reader.Skip();
-                o.@Text = (global::System.String[])ShrinkArray(
-                    a_0,
-                    ca_0,
-                    typeof(global::System.String),
-                    true
-                );
+                o.@Text = (global::System.String[])
+                    ShrinkArray(a_0, ca_0, typeof(global::System.String), true);
                 return o;
             }
             Reader.ReadStartElement();
@@ -20368,11 +20354,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                     || Reader.NodeType == System.Xml.XmlNodeType.SignificantWhitespace
                 )
                 {
-                    a_0 = (global::System.String[])EnsureArrayIndex(
-                        a_0,
-                        ca_0,
-                        typeof(global::System.String)
-                    );
+                    a_0 = (global::System.String[])
+                        EnsureArrayIndex(a_0, ca_0, typeof(global::System.String));
                     a_0[ca_0++] = Reader.ReadString();
                 }
                 else
@@ -20381,12 +20364,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                 }
                 Reader.MoveToContent();
             }
-            o.@Text = (global::System.String[])ShrinkArray(
-                a_0,
-                ca_0,
-                typeof(global::System.String),
-                true
-            );
+            o.@Text = (global::System.String[])
+                ShrinkArray(a_0, ca_0, typeof(global::System.String), true);
             ReadEndElement();
             return o;
         }
@@ -20539,16 +20518,17 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             global::SerializationTypes.SomeStruct o;
             try
             {
-                o = (global::SerializationTypes.SomeStruct)System.Activator.CreateInstance(
-                    typeof(global::SerializationTypes.SomeStruct),
-                    System.Reflection.BindingFlags.Instance
-                        | System.Reflection.BindingFlags.Public
-                        | System.Reflection.BindingFlags.CreateInstance
-                        | System.Reflection.BindingFlags.NonPublic,
-                    null,
-                    new object[0],
-                    null
-                );
+                o = (global::SerializationTypes.SomeStruct)
+                    System.Activator.CreateInstance(
+                        typeof(global::SerializationTypes.SomeStruct),
+                        System.Reflection.BindingFlags.Instance
+                            | System.Reflection.BindingFlags.Public
+                            | System.Reflection.BindingFlags.CreateInstance
+                            | System.Reflection.BindingFlags.NonPublic,
+                        null,
+                        new object[0],
+                        null
+                    );
             }
             catch (System.MissingMethodException)
             {
@@ -21147,11 +21127,12 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                                 {
                                                     {
                                                         a_2_0 =
-                                                            (global::SerializationTypes.ItemChoiceType[])EnsureArrayIndex(
-                                                                a_2_0,
-                                                                ca_2_0,
-                                                                typeof(global::SerializationTypes.ItemChoiceType)
-                                                            );
+                                                            (global::SerializationTypes.ItemChoiceType[])
+                                                                EnsureArrayIndex(
+                                                                    a_2_0,
+                                                                    ca_2_0,
+                                                                    typeof(global::SerializationTypes.ItemChoiceType)
+                                                                );
                                                         a_2_0[ca_2_0++] = Read80_ItemChoiceType(
                                                             Reader.ReadElementString()
                                                         );
@@ -21169,8 +21150,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                     }
                                     ReadEndElement();
                                 }
-                                o.@XmlEnumProperty =
-                                    (global::SerializationTypes.ItemChoiceType[])ShrinkArray(
+                                o.@XmlEnumProperty = (global::SerializationTypes.ItemChoiceType[])
+                                    ShrinkArray(
                                         a_2_0,
                                         ca_2_0,
                                         typeof(global::SerializationTypes.ItemChoiceType),
@@ -21248,8 +21229,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                                 {
                                                     if (ReadNull())
                                                     {
-                                                        a_7_0 =
-                                                            (global::System.Object[])EnsureArrayIndex(
+                                                        a_7_0 = (global::System.Object[])
+                                                            EnsureArrayIndex(
                                                                 a_7_0,
                                                                 ca_7_0,
                                                                 typeof(global::System.Object)
@@ -21258,8 +21239,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                                     }
                                                     else
                                                     {
-                                                        a_7_0 =
-                                                            (global::System.Object[])EnsureArrayIndex(
+                                                        a_7_0 = (global::System.Object[])
+                                                            EnsureArrayIndex(
                                                                 a_7_0,
                                                                 ca_7_0,
                                                                 typeof(global::System.Object)
@@ -21280,12 +21261,13 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                     }
                                     ReadEndElement();
                                 }
-                                o.@XmlArrayProperty = (global::System.Object[])ShrinkArray(
-                                    a_7_0,
-                                    ca_7_0,
-                                    typeof(global::System.Object),
-                                    false
-                                );
+                                o.@XmlArrayProperty = (global::System.Object[])
+                                    ShrinkArray(
+                                        a_7_0,
+                                        ca_7_0,
+                                        typeof(global::System.Object),
+                                        false
+                                    );
                             }
                             break;
                         }
@@ -21365,34 +21347,22 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                 }
                 else if (!IsXmlnsAttribute(Reader.Name))
                 {
-                    System.Xml.XmlAttribute attr = (System.Xml.XmlAttribute)Document.ReadNode(
-                        Reader
-                    );
+                    System.Xml.XmlAttribute attr = (System.Xml.XmlAttribute)
+                        Document.ReadNode(Reader);
                     ParseWsdlArrayType(attr);
-                    a_2 = (global::System.Xml.XmlAttribute[])EnsureArrayIndex(
-                        a_2,
-                        ca_2,
-                        typeof(global::System.Xml.XmlAttribute)
-                    );
+                    a_2 = (global::System.Xml.XmlAttribute[])
+                        EnsureArrayIndex(a_2, ca_2, typeof(global::System.Xml.XmlAttribute));
                     a_2[ca_2++] = attr;
                 }
             }
-            o.@Attributes = (global::System.Xml.XmlAttribute[])ShrinkArray(
-                a_2,
-                ca_2,
-                typeof(global::System.Xml.XmlAttribute),
-                true
-            );
+            o.@Attributes = (global::System.Xml.XmlAttribute[])
+                ShrinkArray(a_2, ca_2, typeof(global::System.Xml.XmlAttribute), true);
             Reader.MoveToElement();
             if (Reader.IsEmptyElement)
             {
                 Reader.Skip();
-                o.@Attributes = (global::System.Xml.XmlAttribute[])ShrinkArray(
-                    a_2,
-                    ca_2,
-                    typeof(global::System.Xml.XmlAttribute),
-                    true
-                );
+                o.@Attributes = (global::System.Xml.XmlAttribute[])
+                    ShrinkArray(a_2, ca_2, typeof(global::System.Xml.XmlAttribute), true);
                 return o;
             }
             Reader.ReadStartElement();
@@ -21429,12 +21399,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                 }
                 Reader.MoveToContent();
             }
-            o.@Attributes = (global::System.Xml.XmlAttribute[])ShrinkArray(
-                a_2,
-                ca_2,
-                typeof(global::System.Xml.XmlAttribute),
-                true
-            );
+            o.@Attributes = (global::System.Xml.XmlAttribute[])
+                ShrinkArray(a_2, ca_2, typeof(global::System.Xml.XmlAttribute), true);
             ReadEndElement();
             return o;
         }
@@ -21743,17 +21709,20 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                 o.@UnqualifiedSchemaFormListProperty =
                     new global::System.Collections.Generic.List<global::System.Int32>();
             global::System.Collections.Generic.List<global::System.Int32> a_0 =
-                (global::System.Collections.Generic.List<global::System.Int32>)o.@UnqualifiedSchemaFormListProperty;
+                (global::System.Collections.Generic.List<global::System.Int32>)
+                    o.@UnqualifiedSchemaFormListProperty;
             if ((object)(o.@NoneSchemaFormListProperty) == null)
                 o.@NoneSchemaFormListProperty =
                     new global::System.Collections.Generic.List<global::System.String>();
             global::System.Collections.Generic.List<global::System.String> a_1 =
-                (global::System.Collections.Generic.List<global::System.String>)o.@NoneSchemaFormListProperty;
+                (global::System.Collections.Generic.List<global::System.String>)
+                    o.@NoneSchemaFormListProperty;
             if ((object)(o.@QualifiedSchemaFormListProperty) == null)
                 o.@QualifiedSchemaFormListProperty =
                     new global::System.Collections.Generic.List<global::System.Boolean>();
             global::System.Collections.Generic.List<global::System.Boolean> a_2 =
-                (global::System.Collections.Generic.List<global::System.Boolean>)o.@QualifiedSchemaFormListProperty;
+                (global::System.Collections.Generic.List<global::System.Boolean>)
+                    o.@QualifiedSchemaFormListProperty;
             bool[] paramsRead = new bool[3];
             while (Reader.MoveToNextAttribute())
             {
@@ -21792,7 +21761,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                     o.@UnqualifiedSchemaFormListProperty =
                                         new global::System.Collections.Generic.List<global::System.Int32>();
                                 global::System.Collections.Generic.List<global::System.Int32> a_0_0 =
-                                    (global::System.Collections.Generic.List<global::System.Int32>)o.@UnqualifiedSchemaFormListProperty;
+                                    (global::System.Collections.Generic.List<global::System.Int32>)
+                                        o.@UnqualifiedSchemaFormListProperty;
                                 if ((Reader.IsEmptyElement))
                                 {
                                     Reader.Skip();
@@ -21855,7 +21825,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                     o.@NoneSchemaFormListProperty =
                                         new global::System.Collections.Generic.List<global::System.String>();
                                 global::System.Collections.Generic.List<global::System.String> a_1_0 =
-                                    (global::System.Collections.Generic.List<global::System.String>)o.@NoneSchemaFormListProperty;
+                                    (global::System.Collections.Generic.List<global::System.String>)
+                                        o.@NoneSchemaFormListProperty;
                                 if ((Reader.IsEmptyElement))
                                 {
                                     Reader.Skip();
@@ -21914,7 +21885,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                     o.@QualifiedSchemaFormListProperty =
                                         new global::System.Collections.Generic.List<global::System.Boolean>();
                                 global::System.Collections.Generic.List<global::System.Boolean> a_2_0 =
-                                    (global::System.Collections.Generic.List<global::System.Boolean>)o.@QualifiedSchemaFormListProperty;
+                                    (global::System.Collections.Generic.List<global::System.Boolean>)
+                                        o.@QualifiedSchemaFormListProperty;
                                 if ((Reader.IsEmptyElement))
                                 {
                                     Reader.Skip();
@@ -22087,8 +22059,8 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             global::SerializationTypes.TypeWithNonPublicDefaultConstructor o;
             try
             {
-                o =
-                    (global::SerializationTypes.TypeWithNonPublicDefaultConstructor)System.Activator.CreateInstance(
+                o = (global::SerializationTypes.TypeWithNonPublicDefaultConstructor)
+                    System.Activator.CreateInstance(
                         typeof(global::SerializationTypes.TypeWithNonPublicDefaultConstructor),
                         System.Reflection.BindingFlags.Instance
                             | System.Reflection.BindingFlags.Public
@@ -22467,19 +22439,24 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                                                     {
                                                                         if (
                                                                             (
-                                                                                (object)Reader.LocalName
-                                                                                    == (object)id42_SimpleType
-                                                                                && (object)Reader.NamespaceURI
-                                                                                    == (object)id2_Item
+                                                                                (object)
+                                                                                    Reader.LocalName
+                                                                                    == (object)
+                                                                                        id42_SimpleType
+                                                                                && (object)
+                                                                                    Reader.NamespaceURI
+                                                                                    == (object)
+                                                                                        id2_Item
                                                                             )
                                                                         )
                                                                         {
                                                                             a_0_0_0 =
-                                                                                (global::SerializationTypes.SimpleType[])EnsureArrayIndex(
-                                                                                    a_0_0_0,
-                                                                                    ca_0_0_0,
-                                                                                    typeof(global::SerializationTypes.SimpleType)
-                                                                                );
+                                                                                (global::SerializationTypes.SimpleType[])
+                                                                                    EnsureArrayIndex(
+                                                                                        a_0_0_0,
+                                                                                        ca_0_0_0,
+                                                                                        typeof(global::SerializationTypes.SimpleType)
+                                                                                    );
                                                                             a_0_0_0[ca_0_0_0++] =
                                                                                 Read42_SimpleType(
                                                                                     true,
@@ -22505,18 +22482,20 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                                             ReadEndElement();
                                                         }
                                                         a_0_0 =
-                                                            (global::SerializationTypes.SimpleType[][])EnsureArrayIndex(
-                                                                a_0_0,
-                                                                ca_0_0,
-                                                                typeof(global::SerializationTypes.SimpleType[])
-                                                            );
+                                                            (global::SerializationTypes.SimpleType[][])
+                                                                EnsureArrayIndex(
+                                                                    a_0_0,
+                                                                    ca_0_0,
+                                                                    typeof(global::SerializationTypes.SimpleType[])
+                                                                );
                                                         a_0_0[ca_0_0++] =
-                                                            (global::SerializationTypes.SimpleType[])ShrinkArray(
-                                                                a_0_0_0,
-                                                                ca_0_0_0,
-                                                                typeof(global::SerializationTypes.SimpleType),
-                                                                false
-                                                            );
+                                                            (global::SerializationTypes.SimpleType[])
+                                                                ShrinkArray(
+                                                                    a_0_0_0,
+                                                                    ca_0_0_0,
+                                                                    typeof(global::SerializationTypes.SimpleType),
+                                                                    false
+                                                                );
                                                     }
                                                     break;
                                                 }
@@ -22532,12 +22511,13 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                                     ReadEndElement();
                                 }
                                 o.@TwoDArrayOfSimpleType =
-                                    (global::SerializationTypes.SimpleType[][])ShrinkArray(
-                                        a_0_0,
-                                        ca_0_0,
-                                        typeof(global::SerializationTypes.SimpleType[]),
-                                        false
-                                    );
+                                    (global::SerializationTypes.SimpleType[][])
+                                        ShrinkArray(
+                                            a_0_0,
+                                            ca_0_0,
+                                            typeof(global::SerializationTypes.SimpleType[]),
+                                            false
+                                        );
                             }
                             break;
                         }
@@ -23355,18 +23335,15 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
             if (Reader.IsEmptyElement)
             {
                 Reader.Skip();
-                o.@ManyChoices = (global::System.Object[])ShrinkArray(
-                    a_0,
-                    ca_0,
-                    typeof(global::System.Object),
-                    true
-                );
-                o.@ChoiceArray = (global::SerializationTypes.MoreChoices[])ShrinkArray(
-                    choice_a_0,
-                    cchoice_a_0,
-                    typeof(global::SerializationTypes.MoreChoices),
-                    true
-                );
+                o.@ManyChoices = (global::System.Object[])
+                    ShrinkArray(a_0, ca_0, typeof(global::System.Object), true);
+                o.@ChoiceArray = (global::SerializationTypes.MoreChoices[])
+                    ShrinkArray(
+                        choice_a_0,
+                        cchoice_a_0,
+                        typeof(global::SerializationTypes.MoreChoices),
+                        true
+                    );
                 return o;
             }
             Reader.ReadStartElement();
@@ -23388,18 +23365,16 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         )
                         {
                             {
-                                a_0 = (global::System.Object[])EnsureArrayIndex(
-                                    a_0,
-                                    ca_0,
-                                    typeof(global::System.Object)
-                                );
+                                a_0 = (global::System.Object[])
+                                    EnsureArrayIndex(a_0, ca_0, typeof(global::System.Object));
                                 a_0[ca_0++] = Reader.ReadElementString();
                             }
-                            choice_a_0 = (global::SerializationTypes.MoreChoices[])EnsureArrayIndex(
-                                choice_a_0,
-                                cchoice_a_0,
-                                typeof(global::SerializationTypes.MoreChoices)
-                            );
+                            choice_a_0 = (global::SerializationTypes.MoreChoices[])
+                                EnsureArrayIndex(
+                                    choice_a_0,
+                                    cchoice_a_0,
+                                    typeof(global::SerializationTypes.MoreChoices)
+                                );
                             choice_a_0[cchoice_a_0++] = global::SerializationTypes
                                 .MoreChoices
                                 .@Item;
@@ -23413,20 +23388,18 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                         )
                         {
                             {
-                                a_0 = (global::System.Object[])EnsureArrayIndex(
-                                    a_0,
-                                    ca_0,
-                                    typeof(global::System.Object)
-                                );
+                                a_0 = (global::System.Object[])
+                                    EnsureArrayIndex(a_0, ca_0, typeof(global::System.Object));
                                 a_0[ca_0++] = System.Xml.XmlConvert.ToInt32(
                                     Reader.ReadElementString()
                                 );
                             }
-                            choice_a_0 = (global::SerializationTypes.MoreChoices[])EnsureArrayIndex(
-                                choice_a_0,
-                                cchoice_a_0,
-                                typeof(global::SerializationTypes.MoreChoices)
-                            );
+                            choice_a_0 = (global::SerializationTypes.MoreChoices[])
+                                EnsureArrayIndex(
+                                    choice_a_0,
+                                    cchoice_a_0,
+                                    typeof(global::SerializationTypes.MoreChoices)
+                                );
                             choice_a_0[cchoice_a_0++] = global::SerializationTypes
                                 .MoreChoices
                                 .@Amount;
@@ -23441,18 +23414,15 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                 }
                 Reader.MoveToContent();
             }
-            o.@ManyChoices = (global::System.Object[])ShrinkArray(
-                a_0,
-                ca_0,
-                typeof(global::System.Object),
-                true
-            );
-            o.@ChoiceArray = (global::SerializationTypes.MoreChoices[])ShrinkArray(
-                choice_a_0,
-                cchoice_a_0,
-                typeof(global::SerializationTypes.MoreChoices),
-                true
-            );
+            o.@ManyChoices = (global::System.Object[])
+                ShrinkArray(a_0, ca_0, typeof(global::System.Object), true);
+            o.@ChoiceArray = (global::SerializationTypes.MoreChoices[])
+                ShrinkArray(
+                    choice_a_0,
+                    cchoice_a_0,
+                    typeof(global::SerializationTypes.MoreChoices),
+                    true
+                );
             ReadEndElement();
             return o;
         }

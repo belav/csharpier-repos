@@ -82,20 +82,16 @@ namespace Microsoft.EntityFrameworkCore
                     if (useExistingEntities)
                     {
                         new1 = context.Set<Optional1>().Single(e => e.Id == new1.Id);
-                        new1d = (Optional1Derived)context
-                            .Set<Optional1>()
-                            .Single(e => e.Id == new1d.Id);
-                        new1dd = (Optional1MoreDerived)context
-                            .Set<Optional1>()
-                            .Single(e => e.Id == new1dd.Id);
+                        new1d = (Optional1Derived)
+                            context.Set<Optional1>().Single(e => e.Id == new1d.Id);
+                        new1dd = (Optional1MoreDerived)
+                            context.Set<Optional1>().Single(e => e.Id == new1dd.Id);
                         new2a = context.Set<Optional2>().Single(e => e.Id == new2a.Id);
                         new2b = context.Set<Optional2>().Single(e => e.Id == new2b.Id);
-                        new2d = (Optional2Derived)context
-                            .Set<Optional2>()
-                            .Single(e => e.Id == new2d.Id);
-                        new2dd = (Optional2MoreDerived)context
-                            .Set<Optional2>()
-                            .Single(e => e.Id == new2dd.Id);
+                        new2d = (Optional2Derived)
+                            context.Set<Optional2>().Single(e => e.Id == new2d.Id);
+                        new2dd = (Optional2MoreDerived)
+                            context.Set<Optional2>().Single(e => e.Id == new2dd.Id);
                     }
                     else
                     {
@@ -235,20 +231,16 @@ namespace Microsoft.EntityFrameworkCore
                     if (useExistingEntities)
                     {
                         new1 = context.Set<Required1>().Single(e => e.Id == new1.Id);
-                        new1d = (Required1Derived)context
-                            .Set<Required1>()
-                            .Single(e => e.Id == new1d.Id);
-                        new1dd = (Required1MoreDerived)context
-                            .Set<Required1>()
-                            .Single(e => e.Id == new1dd.Id);
+                        new1d = (Required1Derived)
+                            context.Set<Required1>().Single(e => e.Id == new1d.Id);
+                        new1dd = (Required1MoreDerived)
+                            context.Set<Required1>().Single(e => e.Id == new1dd.Id);
                         new2a = context.Set<Required2>().Single(e => e.Id == new2a.Id);
                         new2b = context.Set<Required2>().Single(e => e.Id == new2b.Id);
-                        new2d = (Required2Derived)context
-                            .Set<Required2>()
-                            .Single(e => e.Id == new2d.Id);
-                        new2dd = (Required2MoreDerived)context
-                            .Set<Required2>()
-                            .Single(e => e.Id == new2dd.Id);
+                        new2d = (Required2Derived)
+                            context.Set<Required2>().Single(e => e.Id == new2d.Id);
+                        new2dd = (Required2MoreDerived)
+                            context.Set<Required2>().Single(e => e.Id == new2dd.Id);
                     }
                     else
                     {

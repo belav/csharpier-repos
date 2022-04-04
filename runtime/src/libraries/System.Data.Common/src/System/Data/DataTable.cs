@@ -548,10 +548,8 @@ namespace System.Data
             _repeatableElement = info.GetBoolean("DataTable.RepeatableElement");
 
             //ExtendedProperties
-            _extendedProperties = (PropertyCollection?)info.GetValue(
-                "DataTable.ExtendedProperties",
-                typeof(PropertyCollection)
-            );
+            _extendedProperties = (PropertyCollection?)
+                info.GetValue("DataTable.ExtendedProperties", typeof(PropertyCollection));
 
             //Columns
             int colCount = info.GetInt32("DataTable.Columns.Count");
@@ -574,32 +572,37 @@ namespace System.Data
                     string.Format(formatProvider, "DataTable.DataColumn_{0}.Prefix", i)
                 );
 
-                string typeName = (string)info.GetValue(
-                    string.Format(
-                        formatProvider,
-                        "DataTable.DataColumn_{0}.DataType_AssemblyQualifiedName",
-                        i
-                    ),
-                    typeof(string)
-                )!;
+                string typeName = (string)
+                    info.GetValue(
+                        string.Format(
+                            formatProvider,
+                            "DataTable.DataColumn_{0}.DataType_AssemblyQualifiedName",
+                            i
+                        ),
+                        typeof(string)
+                    )!;
                 dc.DataType = Type.GetType(typeName, throwOnError: true);
-                dc.XmlDataType = (string?)info.GetValue(
-                    string.Format(formatProvider, "DataTable.DataColumn_{0}.XmlDataType", i),
-                    typeof(string)
-                );
-                dc.SimpleType = (SimpleType?)info.GetValue(
-                    string.Format(formatProvider, "DataTable.DataColumn_{0}.SimpleType", i),
-                    typeof(SimpleType)
-                );
+                dc.XmlDataType = (string?)
+                    info.GetValue(
+                        string.Format(formatProvider, "DataTable.DataColumn_{0}.XmlDataType", i),
+                        typeof(string)
+                    );
+                dc.SimpleType = (SimpleType?)
+                    info.GetValue(
+                        string.Format(formatProvider, "DataTable.DataColumn_{0}.SimpleType", i),
+                        typeof(SimpleType)
+                    );
 
-                dc.ColumnMapping = (MappingType)info.GetValue(
-                    string.Format(formatProvider, "DataTable.DataColumn_{0}.ColumnMapping", i),
-                    typeof(MappingType)
-                )!;
-                dc.DateTimeMode = (DataSetDateTime)info.GetValue(
-                    string.Format(formatProvider, "DataTable.DataColumn_{0}.DateTimeMode", i),
-                    typeof(DataSetDateTime)
-                )!;
+                dc.ColumnMapping = (MappingType)
+                    info.GetValue(
+                        string.Format(formatProvider, "DataTable.DataColumn_{0}.ColumnMapping", i),
+                        typeof(MappingType)
+                    )!;
+                dc.DateTimeMode = (DataSetDateTime)
+                    info.GetValue(
+                        string.Format(formatProvider, "DataTable.DataColumn_{0}.DateTimeMode", i),
+                        typeof(DataSetDateTime)
+                    )!;
 
                 dc.AllowDBNull = info.GetBoolean(
                     string.Format(formatProvider, "DataTable.DataColumn_{0}.AllowDBNull", i)
@@ -646,10 +649,15 @@ namespace System.Data
                 }
 
                 //ExtendedProperties
-                dc._extendedProperties = (PropertyCollection?)info.GetValue(
-                    string.Format(formatProvider, "DataTable.DataColumn_{0}.ExtendedProperties", i),
-                    typeof(PropertyCollection)
-                );
+                dc._extendedProperties = (PropertyCollection?)
+                    info.GetValue(
+                        string.Format(
+                            formatProvider,
+                            "DataTable.DataColumn_{0}.ExtendedProperties",
+                            i
+                        ),
+                        typeof(PropertyCollection)
+                    );
                 Columns.Add(dc);
             }
             if (isSingleTable)
@@ -777,10 +785,15 @@ namespace System.Data
             bool allConstraints
         )
         {
-            ArrayList constraintList = (ArrayList)info.GetValue(
-                string.Format(CultureInfo.InvariantCulture, "DataTable_{0}.Constraints", serIndex),
-                typeof(ArrayList)
-            )!;
+            ArrayList constraintList = (ArrayList)
+                info.GetValue(
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "DataTable_{0}.Constraints",
+                        serIndex
+                    ),
+                    typeof(ArrayList)
+                )!;
 
             foreach (ArrayList list in constraintList)
             {
@@ -1043,27 +1056,32 @@ namespace System.Data
                 int recordCount = info.GetInt32(
                     string.Format(formatProvider, "DataTable_{0}.Records.Count", serIndex)
                 );
-                BitArray rowStates = (BitArray)info.GetValue(
-                    string.Format(formatProvider, "DataTable_{0}.RowStates", serIndex),
-                    typeof(BitArray)
-                )!;
-                ArrayList storeList = (ArrayList)info.GetValue(
-                    string.Format(formatProvider, "DataTable_{0}.Records", serIndex),
-                    typeof(ArrayList)
-                )!;
-                ArrayList nullbitList = (ArrayList)info.GetValue(
-                    string.Format(formatProvider, "DataTable_{0}.NullBits", serIndex),
-                    typeof(ArrayList)
-                )!;
-                Hashtable rowErrors = (Hashtable)info.GetValue(
-                    string.Format(formatProvider, "DataTable_{0}.RowErrors", serIndex),
-                    typeof(Hashtable)
-                )!;
+                BitArray rowStates = (BitArray)
+                    info.GetValue(
+                        string.Format(formatProvider, "DataTable_{0}.RowStates", serIndex),
+                        typeof(BitArray)
+                    )!;
+                ArrayList storeList = (ArrayList)
+                    info.GetValue(
+                        string.Format(formatProvider, "DataTable_{0}.Records", serIndex),
+                        typeof(ArrayList)
+                    )!;
+                ArrayList nullbitList = (ArrayList)
+                    info.GetValue(
+                        string.Format(formatProvider, "DataTable_{0}.NullBits", serIndex),
+                        typeof(ArrayList)
+                    )!;
+                Hashtable rowErrors = (Hashtable)
+                    info.GetValue(
+                        string.Format(formatProvider, "DataTable_{0}.RowErrors", serIndex),
+                        typeof(Hashtable)
+                    )!;
                 rowErrors.OnDeserialization(this); //OnDeSerialization must be called since the hashtable gets deserialized after the whole graph gets deserialized
-                Hashtable colErrors = (Hashtable)info.GetValue(
-                    string.Format(formatProvider, "DataTable_{0}.ColumnErrors", serIndex),
-                    typeof(Hashtable)
-                )!;
+                Hashtable colErrors = (Hashtable)
+                    info.GetValue(
+                        string.Format(formatProvider, "DataTable_{0}.ColumnErrors", serIndex),
+                        typeof(Hashtable)
+                    )!;
                 colErrors.OnDeserialization(this); //OnDeSerialization must be called since the hashtable gets deserialized after the whole graph gets deserialized
 
                 if (recordCount <= 0)
@@ -7663,10 +7681,8 @@ namespace System.Data
                                         && tableList.Contains(fkc.RelatedTable)
                                     )
                                     {
-                                        ForeignKeyConstraint newFKC =
-                                            (ForeignKeyConstraint)fkc.Clone(
-                                                destinationTable.DataSet!
-                                            )!;
+                                        ForeignKeyConstraint newFKC = (ForeignKeyConstraint)
+                                            fkc.Clone(destinationTable.DataSet!)!;
                                         if (
                                             !destinationTable.Constraints.Contains(
                                                 newFKC.ConstraintName

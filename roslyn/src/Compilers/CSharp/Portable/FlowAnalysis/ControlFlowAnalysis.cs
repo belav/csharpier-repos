@@ -45,14 +45,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var result = _context.Failed
                         ? ImmutableArray<SyntaxNode>.Empty
                         : (
-                              (IEnumerable<SyntaxNode>)EntryPointsWalker.Analyze(
-                                  _context.Compilation,
-                                  _context.Member,
-                                  _context.BoundNode,
-                                  _context.FirstInRegion,
-                                  _context.LastInRegion,
-                                  out _succeeded
-                              )
+                              (IEnumerable<SyntaxNode>)
+                                  EntryPointsWalker.Analyze(
+                                      _context.Compilation,
+                                      _context.Member,
+                                      _context.BoundNode,
+                                      _context.FirstInRegion,
+                                      _context.LastInRegion,
+                                      out _succeeded
+                                  )
                           ).ToImmutableArray();
                     ImmutableInterlocked.InterlockedInitialize(ref _entryPoints, result);
                 }

@@ -191,9 +191,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                     _tracker.SelectedHierarchyItemChanged += SelectedHierarchyItemChangedHandler;
                 }
 
-                var buildManager = (IVsSolutionBuildManager)_serviceProvider.GetService(
-                    typeof(SVsSolutionBuildManager)
-                );
+                var buildManager = (IVsSolutionBuildManager)
+                    _serviceProvider.GetService(typeof(SVsSolutionBuildManager));
                 buildManager.AdviseUpdateSolutionEvents(this, out var cookie);
 
                 _initialized = true;
@@ -532,9 +531,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         )
         {
             using var token = _listener.BeginAsyncOperation(nameof(SetSeverityHandler));
-            var componentModel = (IComponentModel)_serviceProvider.GetService(
-                typeof(SComponentModel)
-            );
+            var componentModel = (IComponentModel)
+                _serviceProvider.GetService(typeof(SComponentModel));
             var uiThreadOperationExecutor =
                 componentModel.GetService<VSUtilities.IUIThreadOperationExecutor>();
 
@@ -860,9 +858,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         {
             if (_workspace == null)
             {
-                var componentModel = (IComponentModel)_serviceProvider.GetService(
-                    typeof(SComponentModel)
-                );
+                var componentModel = (IComponentModel)
+                    _serviceProvider.GetService(typeof(SComponentModel));
                 _workspace =
                     componentModel.DefaultExportProvider.GetExportedValueOrDefault<VisualStudioWorkspace>();
             }

@@ -50,9 +50,10 @@ namespace Newtonsoft.Json.Tests.TestObjects
 
             return (
                 from c in converters
-                let converter = (TypeConverter)Activator.CreateInstance(
-                    Type.GetType(((TypeConverterAttribute)c).ConverterTypeName)
-                )
+                let converter = (TypeConverter)
+                    Activator.CreateInstance(
+                        Type.GetType(((TypeConverterAttribute)c).ConverterTypeName)
+                    )
                 where
                     converter.CanConvertFrom(typeof(string))
                     && converter.CanConvertTo(typeof(string))

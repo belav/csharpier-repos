@@ -201,9 +201,8 @@ namespace System
                         &systemTimeResult
                     );
                     (
-                        (delegate* unmanaged[SuppressGCTransition]<
-                            long*,
-                            void>)pfnGetSystemTimePrecise
+                        (delegate* unmanaged[SuppressGCTransition]<long*, void>)
+                            pfnGetSystemTimePrecise
                     )(&preciseSystemTimeResult);
 
                     if (

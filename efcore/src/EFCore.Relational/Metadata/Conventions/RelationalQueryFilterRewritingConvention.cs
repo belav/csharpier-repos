@@ -46,10 +46,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 if (queryFilter != null)
                 {
                     entityType.SetQueryFilter(
-                        (LambdaExpression)DbSetAccessRewriter.Rewrite(
-                            modelBuilder.Metadata,
-                            queryFilter
-                        )
+                        (LambdaExpression)
+                            DbSetAccessRewriter.Rewrite(modelBuilder.Metadata, queryFilter)
                     );
                 }
 
@@ -58,10 +56,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 if (definingQuery != null)
                 {
                     entityType.SetDefiningQuery(
-                        (LambdaExpression)DbSetAccessRewriter.Rewrite(
-                            modelBuilder.Metadata,
-                            definingQuery
-                        )
+                        (LambdaExpression)
+                            DbSetAccessRewriter.Rewrite(modelBuilder.Metadata, definingQuery)
                     );
                 }
 #pragma warning restore CS0618 // Type or member is obsolete
@@ -99,9 +95,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
                     if (methodName == nameof(RelationalQueryableExtensions.FromSqlRaw))
                     {
-                        sql = (string)(
-                            (ConstantExpression)methodCallExpression.Arguments[1]
-                        ).Value!;
+                        sql = (string)
+                            ((ConstantExpression)methodCallExpression.Arguments[1]).Value!;
                         argument = methodCallExpression.Arguments[2];
                     }
                     else

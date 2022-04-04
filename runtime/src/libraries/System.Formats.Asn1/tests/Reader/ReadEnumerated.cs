@@ -826,19 +826,15 @@ namespace System.Formats.Asn1.Tests.Reader
             Assert.Equal(val1, val2);
 
             reader = new AsnReader(inputData, ruleSet);
-            ShortBacked val3 = (ShortBacked)reader.ReadEnumeratedValue(
-                typeof(ShortBacked),
-                constructedTag
-            );
+            ShortBacked val3 = (ShortBacked)
+                reader.ReadEnumeratedValue(typeof(ShortBacked), constructedTag);
             Assert.False(reader.HasData);
 
             Assert.Equal(val1, val3);
 
             reader = new AsnReader(inputData, ruleSet);
-            ShortBacked val4 = (ShortBacked)reader.ReadEnumeratedValue(
-                typeof(ShortBacked),
-                primitiveTag
-            );
+            ShortBacked val4 = (ShortBacked)
+                reader.ReadEnumeratedValue(typeof(ShortBacked), primitiveTag);
             Assert.False(reader.HasData);
 
             Assert.Equal(val1, val4);

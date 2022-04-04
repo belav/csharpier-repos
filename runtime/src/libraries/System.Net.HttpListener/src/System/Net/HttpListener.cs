@@ -198,9 +198,8 @@ namespace System.Net
                 }
                 for (i = 0; registeredPrefixBuilder[i] != ':'; i++)
                 {
-                    registeredPrefixBuilder[i] = (char)CaseInsensitiveAscii.AsciiToLower[
-                        (byte)registeredPrefixBuilder[i]
-                    ];
+                    registeredPrefixBuilder[i] = (char)
+                        CaseInsensitiveAscii.AsciiToLower[(byte)registeredPrefixBuilder[i]];
                 }
                 registeredPrefix = registeredPrefixBuilder.ToString();
                 if (NetEventSource.Log.IsEnabled())

@@ -135,10 +135,11 @@ namespace System.ComponentModel.Composition
                 multMetadata,
                 (
                     () =>
-                        (Func<int, int, int>)delegate(int a, int b)
-                        {
-                            return a * b;
-                        }
+                        (Func<int, int, int>)
+                            delegate(int a, int b)
+                            {
+                                return a * b;
+                            }
                 )
             );
 

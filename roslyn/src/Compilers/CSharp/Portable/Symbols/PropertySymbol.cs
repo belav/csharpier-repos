@@ -227,10 +227,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         return (PropertySymbol)OverriddenOrHiddenMembers.GetOverriddenMember();
                     }
 
-                    return (PropertySymbol)OverriddenOrHiddenMembersResult.GetOverriddenMember(
-                        this,
-                        OriginalDefinition.OverriddenProperty
-                    );
+                    return (PropertySymbol)
+                        OverriddenOrHiddenMembersResult.GetOverriddenMember(
+                            this,
+                            OriginalDefinition.OverriddenProperty
+                        );
                 }
                 return null;
             }

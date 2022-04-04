@@ -284,9 +284,8 @@ namespace System.IO.Ports.Tests
                 com1.DiscardInBuffer();
 
                 bytesToWrite[bytesToWrite.Length - 1] = (byte)'\n';
-                expectedChars[expectedChars.Length - 1] = (char)bytesToWrite[
-                    bytesToWrite.Length - 1
-                ];
+                expectedChars[expectedChars.Length - 1] = (char)
+                    bytesToWrite[bytesToWrite.Length - 1];
 
                 VerifyRead(com1, com2, bytesToWrite, expectedChars);
             }

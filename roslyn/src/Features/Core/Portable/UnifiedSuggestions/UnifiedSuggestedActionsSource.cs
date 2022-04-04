@@ -607,12 +607,13 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
                 {
                     var nestedActions = codeAction.action.NestedCodeActions.SelectAsArray(
                         na =>
-                            (IUnifiedSuggestedAction)new UnifiedCodeRefactoringSuggestedAction(
-                                workspace,
-                                na,
-                                na.Priority,
-                                refactoring.Provider
-                            )
+                            (IUnifiedSuggestedAction)
+                                new UnifiedCodeRefactoringSuggestedAction(
+                                    workspace,
+                                    na,
+                                    na.Priority,
+                                    refactoring.Provider
+                                )
                     );
 
                     var set = new UnifiedSuggestedActionSet(

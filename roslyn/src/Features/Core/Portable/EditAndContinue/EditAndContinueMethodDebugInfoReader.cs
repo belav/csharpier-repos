@@ -63,10 +63,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 MethodDefinitionHandle methodHandle
             )
             {
-                var symMethod = (ISymUnmanagedMethod2)_symReader.GetMethodByVersion(
-                    MetadataTokens.GetToken(methodHandle),
-                    _version
-                );
+                var symMethod = (ISymUnmanagedMethod2)
+                    _symReader.GetMethodByVersion(MetadataTokens.GetToken(methodHandle), _version);
 
                 // Compiler generated methods (e.g. async kick-off methods) might not have debug information.
                 return symMethod == null

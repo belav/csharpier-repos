@@ -27,11 +27,12 @@ namespace Castle.DynamicProxy.Tests
         private TType CreateProxy<TType>()
         {
             var options = new ProxyGenerationOptions(new ProxyNothingHook());
-            return (TType)generator.CreateInterfaceProxyWithoutTarget(
-                typeof(TType),
-                Type.EmptyTypes,
-                options
-            );
+            return (TType)
+                generator.CreateInterfaceProxyWithoutTarget(
+                    typeof(TType),
+                    Type.EmptyTypes,
+                    options
+                );
         }
 
         private TType CreateProxyWithAdditionalInterface<TType>(ProxyKind kind)
@@ -43,25 +44,28 @@ namespace Castle.DynamicProxy.Tests
                 case ProxyKind.Class:
                     return (TType)generator.CreateClassProxy(typeof(object), interfaces, options);
                 case ProxyKind.WithoutTarget:
-                    return (TType)generator.CreateInterfaceProxyWithoutTarget(
-                        typeof(IEmpty),
-                        interfaces,
-                        options
-                    );
+                    return (TType)
+                        generator.CreateInterfaceProxyWithoutTarget(
+                            typeof(IEmpty),
+                            interfaces,
+                            options
+                        );
                 case ProxyKind.WithTarget:
-                    return (TType)generator.CreateInterfaceProxyWithTarget(
-                        typeof(IEmpty),
-                        interfaces,
-                        new Empty(),
-                        options
-                    );
+                    return (TType)
+                        generator.CreateInterfaceProxyWithTarget(
+                            typeof(IEmpty),
+                            interfaces,
+                            new Empty(),
+                            options
+                        );
                 case ProxyKind.WithTargetInterface:
-                    return (TType)generator.CreateInterfaceProxyWithTargetInterface(
-                        typeof(IEmpty),
-                        interfaces,
-                        new Empty(),
-                        options
-                    );
+                    return (TType)
+                        generator.CreateInterfaceProxyWithTargetInterface(
+                            typeof(IEmpty),
+                            interfaces,
+                            new Empty(),
+                            options
+                        );
             }
 
             Assert.Fail("Invalid proxy kind {0}", kind);

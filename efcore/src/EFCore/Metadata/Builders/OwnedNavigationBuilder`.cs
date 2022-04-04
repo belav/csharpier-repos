@@ -42,10 +42,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             string annotation,
             object? value
         ) =>
-            (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)base.HasAnnotation(
-                annotation,
-                value
-            );
+            (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)
+                base.HasAnnotation(annotation, value);
 
         /// <summary>
         ///     Sets the properties that make up the primary key for this owned entity type.
@@ -185,12 +183,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         public virtual OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> Ignore(
             Expression<Func<TDependentEntity, object?>> propertyExpression
         ) =>
-            (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)base.Ignore(
-                Check
-                    .NotNull(propertyExpression, nameof(propertyExpression))
-                    .GetMemberAccess()
-                    .GetSimpleMemberName()
-            );
+            (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)
+                base.Ignore(
+                    Check
+                        .NotNull(propertyExpression, nameof(propertyExpression))
+                        .GetMemberAccess()
+                        .GetSimpleMemberName()
+                );
 
         /// <summary>
         ///     Configures an index on the specified properties. If there is an existing index on the given
@@ -532,11 +531,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             string navigationName,
             Action<OwnedNavigationBuilder> buildAction
         ) =>
-            (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)base.OwnsOne(
-                ownedTypeName,
-                navigationName,
-                buildAction
-            );
+            (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)
+                base.OwnsOne(ownedTypeName, navigationName, buildAction);
 
         /// <summary>
         ///     Configures a relationship where the target entity is owned by (or part of) this entity.
@@ -569,12 +565,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             string navigationName,
             Action<OwnedNavigationBuilder> buildAction
         ) =>
-            (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)base.OwnsOne(
-                ownedTypeName,
-                ownedType,
-                navigationName,
-                buildAction
-            );
+            (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)
+                base.OwnsOne(ownedTypeName, ownedType, navigationName, buildAction);
 
         /// <summary>
         ///     Configures a relationship where the target entity is owned by (or part of) this entity.
@@ -605,11 +597,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             string navigationName,
             Action<OwnedNavigationBuilder> buildAction
         ) =>
-            (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)base.OwnsOne(
-                ownedType,
-                navigationName,
-                buildAction
-            );
+            (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)
+                base.OwnsOne(ownedType, navigationName, buildAction);
 
         /// <summary>
         ///     Configures a relationship where the target entity is owned by (or part of) this entity.
@@ -1012,11 +1001,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             string navigationName,
             Action<OwnedNavigationBuilder> buildAction
         ) =>
-            (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)base.OwnsMany(
-                ownedTypeName,
-                navigationName,
-                buildAction
-            );
+            (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)
+                base.OwnsMany(ownedTypeName, navigationName, buildAction);
 
         /// <summary>
         ///     Configures a relationship where the target entity is owned by (or part of) this entity.
@@ -1046,11 +1032,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             string navigationName,
             Action<OwnedNavigationBuilder> buildAction
         ) =>
-            (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)base.OwnsMany(
-                ownedType,
-                navigationName,
-                buildAction
-            );
+            (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)
+                base.OwnsMany(ownedType, navigationName, buildAction);
 
         /// <summary>
         ///     Configures a relationship where the target entity is owned by (or part of) this entity.
@@ -1082,12 +1065,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             string navigationName,
             Action<OwnedNavigationBuilder> buildAction
         ) =>
-            (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)base.OwnsMany(
-                ownedTypeName,
-                ownedType,
-                navigationName,
-                buildAction
-            );
+            (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)
+                base.OwnsMany(ownedTypeName, ownedType, navigationName, buildAction);
 
         /// <summary>
         ///     Configures a relationship where the target entity is owned by (or part of) this entity.
@@ -1382,9 +1361,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             TOwnerEntity,
             TDependentEntity
         > HasChangeTrackingStrategy(ChangeTrackingStrategy changeTrackingStrategy) =>
-            (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)base.HasChangeTrackingStrategy(
-                changeTrackingStrategy
-            );
+            (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)
+                base.HasChangeTrackingStrategy(changeTrackingStrategy);
 
         /// <summary>
         ///     Sets the <see cref="PropertyAccessMode" /> to use for all properties of this entity type.
@@ -1407,9 +1385,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             TOwnerEntity,
             TDependentEntity
         > UsePropertyAccessMode(PropertyAccessMode propertyAccessMode) =>
-            (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)base.UsePropertyAccessMode(
-                propertyAccessMode
-            );
+            (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)
+                base.UsePropertyAccessMode(propertyAccessMode);
 
         /// <summary>
         ///     Adds seed data to this entity type. It is used to generate data motion migrations.

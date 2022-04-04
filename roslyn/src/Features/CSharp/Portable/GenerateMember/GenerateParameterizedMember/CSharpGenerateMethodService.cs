@@ -162,9 +162,10 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateMethod
                     )?.Name == simpleName
                 )
                 {
-                    invocationExpressionOpt = (InvocationExpressionSyntax)(
-                        (ConditionalAccessExpressionSyntax)simpleNameOrMemberAccessExpression
-                    ).WhenNotNull;
+                    invocationExpressionOpt = (InvocationExpressionSyntax)
+                        (
+                            (ConditionalAccessExpressionSyntax)simpleNameOrMemberAccessExpression
+                        ).WhenNotNull;
                     isInConditionalAccessExpression = inConditionalMemberAccess;
                     return !invocationExpressionOpt.ArgumentList.CloseParenToken.IsMissing;
                 }

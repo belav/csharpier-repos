@@ -84,9 +84,8 @@ struct S
             Assert.Equal(2, constructors.Length);
 
             var sourceConstructor = (MethodSymbol)constructors.First(c => !c.IsImplicitlyDeclared);
-            var synthesizedConstructor = (MethodSymbol)constructors.First(
-                c => c.IsImplicitlyDeclared
-            );
+            var synthesizedConstructor = (MethodSymbol)
+                constructors.First(c => c.IsImplicitlyDeclared);
             Assert.NotEqual(sourceConstructor, synthesizedConstructor);
 
             Assert.Equal(2, sourceConstructor.Parameters.Length);

@@ -258,10 +258,8 @@ namespace DelegateTest
             {
                 delctor.working = null;
             }
-            booldelegate combine = (booldelegate)Delegate.Combine(
-                delctor.starkWork,
-                delctor.working
-            );
+            booldelegate combine = (booldelegate)
+                Delegate.Combine(delctor.starkWork, delctor.working);
             if (combine == null)
             {
                 return string.Empty;

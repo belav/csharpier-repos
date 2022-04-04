@@ -2670,8 +2670,8 @@ namespace System.Xml.Schema
                 // Have a xsi:type
                 if (beforeXsiDecl.SchemaElement != null)
                 {
-                    XmlSchemaElement xsiElement =
-                        (XmlSchemaElement)beforeXsiDecl.SchemaElement.Clone(null);
+                    XmlSchemaElement xsiElement = (XmlSchemaElement)
+                        beforeXsiDecl.SchemaElement.Clone(null);
                     xsiElement.SchemaTypeName = XmlQualifiedName.Empty; //Reset typeName on element as this might be different
                     xsiElement.SchemaType = currentDecl.SchemaType;
                     xsiElement.SetElementType(currentDecl.SchemaType);
@@ -2833,9 +2833,8 @@ namespace System.Xml.Schema
                     // axisFields is not null, but may be empty
                     for (int k = 0; k < constraintStructures[j].axisFields.Count; ++k)
                     {
-                        LocatedActiveAxis laxis = (LocatedActiveAxis)constraintStructures[
-                            j
-                        ].axisFields[k]!;
+                        LocatedActiveAxis laxis = (LocatedActiveAxis)
+                            constraintStructures[j].axisFields[k]!;
 
                         // check field from here
                         if (laxis.MoveToStartElement(localName, namespaceUri))
@@ -2891,9 +2890,8 @@ namespace System.Xml.Schema
                     // axisFields is not null, but may be empty
                     for (int j = 0; j < constraintStructures[i].axisFields.Count; ++j)
                     {
-                        LocatedActiveAxis laxis = (LocatedActiveAxis)constraintStructures[
-                            i
-                        ].axisFields[j]!;
+                        LocatedActiveAxis laxis = (LocatedActiveAxis)
+                            constraintStructures[i].axisFields[j]!;
 
                         // check field from here
                         if (laxis.MoveToAttribute(name, ns))

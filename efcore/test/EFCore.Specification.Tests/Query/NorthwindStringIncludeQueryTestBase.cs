@@ -284,12 +284,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                         || genericMethodDefinition == _thenIncludeAfterReferenceMethodInfo
                     )
                     {
-                        var innerIncludeMethodCall = (MethodCallExpression)Visit(
-                            methodCallExpression.Arguments[0]
-                        );
-                        var innerNavigationPath = (string)(
-                            (ConstantExpression)innerIncludeMethodCall.Arguments[1]
-                        ).Value;
+                        var innerIncludeMethodCall = (MethodCallExpression)
+                            Visit(methodCallExpression.Arguments[0]);
+                        var innerNavigationPath = (string)
+                            ((ConstantExpression)innerIncludeMethodCall.Arguments[1]).Value;
                         var currentNavigationpath = GetPath(
                             methodCallExpression.Arguments[1].UnwrapLambdaFromQuote().Body
                         );

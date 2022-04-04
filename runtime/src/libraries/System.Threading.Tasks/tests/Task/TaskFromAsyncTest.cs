@@ -747,14 +747,8 @@ namespace System.Threading.Tasks.Tests.FromAsync
 
                             if (_errorCase == ErrorCase.NullBegin)
                                 Task.Factory.FromAsync(
-                                    (Func<
-                                        int,
-                                        double,
-                                        bool,
-                                        AsyncCallback,
-                                        object,
-                                        IAsyncResult
-                                    >)null,
+                                    (Func<int, double, bool, AsyncCallback, object, IAsyncResult>)
+                                        null,
                                     action3.EndInvoke,
                                     TestInteger,
                                     TestDouble,
@@ -827,14 +821,8 @@ namespace System.Threading.Tasks.Tests.FromAsync
                                     bool,
                                     ReadOnlyCollection<object>
                                 >(
-                                    (Func<
-                                        int,
-                                        double,
-                                        bool,
-                                        AsyncCallback,
-                                        object,
-                                        IAsyncResult
-                                    >)null,
+                                    (Func<int, double, bool, AsyncCallback, object, IAsyncResult>)
+                                        null,
                                     func3.EndInvoke,
                                     TestInteger,
                                     TestDouble,

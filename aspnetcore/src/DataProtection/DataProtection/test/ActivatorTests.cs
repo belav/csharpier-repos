@@ -20,15 +20,16 @@ public class ActivatorTests
         var activator = services.GetActivator();
 
         // Act
-        var retVal1 = (ClassWithParameterlessCtor)activator.CreateInstance<object>(
-            typeof(ClassWithParameterlessCtor).AssemblyQualifiedName
-        );
-        var retVal2 = (ClassWithServiceProviderCtor)activator.CreateInstance<object>(
-            typeof(ClassWithServiceProviderCtor).AssemblyQualifiedName
-        );
-        var retVal3 = (ClassWithBothCtors)activator.CreateInstance<object>(
-            typeof(ClassWithBothCtors).AssemblyQualifiedName
-        );
+        var retVal1 = (ClassWithParameterlessCtor)
+            activator.CreateInstance<object>(
+                typeof(ClassWithParameterlessCtor).AssemblyQualifiedName
+            );
+        var retVal2 = (ClassWithServiceProviderCtor)
+            activator.CreateInstance<object>(
+                typeof(ClassWithServiceProviderCtor).AssemblyQualifiedName
+            );
+        var retVal3 = (ClassWithBothCtors)
+            activator.CreateInstance<object>(typeof(ClassWithBothCtors).AssemblyQualifiedName);
 
         // Assert
         Assert.NotNull(services);
@@ -47,15 +48,16 @@ public class ActivatorTests
         var activator = ((IServiceProvider)null).GetActivator();
 
         // Act
-        var retVal1 = (ClassWithParameterlessCtor)activator.CreateInstance<object>(
-            typeof(ClassWithParameterlessCtor).AssemblyQualifiedName
-        );
-        var retVal2 = (ClassWithServiceProviderCtor)activator.CreateInstance<object>(
-            typeof(ClassWithServiceProviderCtor).AssemblyQualifiedName
-        );
-        var retVal3 = (ClassWithBothCtors)activator.CreateInstance<object>(
-            typeof(ClassWithBothCtors).AssemblyQualifiedName
-        );
+        var retVal1 = (ClassWithParameterlessCtor)
+            activator.CreateInstance<object>(
+                typeof(ClassWithParameterlessCtor).AssemblyQualifiedName
+            );
+        var retVal2 = (ClassWithServiceProviderCtor)
+            activator.CreateInstance<object>(
+                typeof(ClassWithServiceProviderCtor).AssemblyQualifiedName
+            );
+        var retVal3 = (ClassWithBothCtors)
+            activator.CreateInstance<object>(typeof(ClassWithBothCtors).AssemblyQualifiedName);
 
         // Assert
         Assert.NotNull(retVal1);

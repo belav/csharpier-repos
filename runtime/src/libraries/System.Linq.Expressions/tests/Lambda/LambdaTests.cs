@@ -923,21 +923,23 @@ namespace System.Linq.Expressions.Tests
         {
             string name = "1, 2, 3, 4. This is not a valid C\u266F label!\"'<>.\uffff";
             var exp =
-                (Expression<Func<int>>)Expression.Lambda(
-                    Expression.Constant(21),
-                    name,
-                    Array.Empty<ParameterExpression>()
-                );
+                (Expression<Func<int>>)
+                    Expression.Lambda(
+                        Expression.Constant(21),
+                        name,
+                        Array.Empty<ParameterExpression>()
+                    );
             Assert.Equal(name, exp.Name);
             Assert.Equal(21, exp.Compile(useInterpreter)());
 
             exp =
-                (Expression<Func<int>>)Expression.Lambda(
-                    typeof(Func<int>),
-                    Expression.Constant(22),
-                    name,
-                    Array.Empty<ParameterExpression>()
-                );
+                (Expression<Func<int>>)
+                    Expression.Lambda(
+                        typeof(Func<int>),
+                        Expression.Constant(22),
+                        name,
+                        Array.Empty<ParameterExpression>()
+                    );
             Assert.Equal(name, exp.Name);
             Assert.Equal(22, exp.Compile(useInterpreter)());
 
@@ -1115,11 +1117,12 @@ namespace System.Linq.Expressions.Tests
             Assert.True(lambda.TailCall);
 
             lambda =
-                (Expression<Func<int>>)Expression.Lambda(
-                    typeof(Func<int>),
-                    Expression.Constant(3),
-                    Enumerable.Empty<ParameterExpression>()
-                );
+                (Expression<Func<int>>)
+                    Expression.Lambda(
+                        typeof(Func<int>),
+                        Expression.Constant(3),
+                        Enumerable.Empty<ParameterExpression>()
+                    );
             lambda = lambda.Update(Expression.Constant(4), lambda.Parameters);
             Assert.False(lambda.TailCall);
         }

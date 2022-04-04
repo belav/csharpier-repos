@@ -403,9 +403,8 @@ namespace System.Diagnostics
             {
                 if (this.synchronizingObject == null && parent.ComponentDesignMode)
                 {
-                    IDesignerHost host = (IDesignerHost)parent.ComponentGetService(
-                        typeof(IDesignerHost)
-                    );
+                    IDesignerHost host = (IDesignerHost)
+                        parent.ComponentGetService(typeof(IDesignerHost));
                     if (host != null)
                     {
                         object baseComponent = host.RootComponent;

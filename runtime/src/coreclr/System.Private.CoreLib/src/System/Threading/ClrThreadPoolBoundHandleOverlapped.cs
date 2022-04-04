@@ -43,8 +43,8 @@ namespace System.Threading
             NativeOverlapped* nativeOverlapped
         )
         {
-            ThreadPoolBoundHandleOverlapped overlapped =
-                (ThreadPoolBoundHandleOverlapped)Overlapped.Unpack(nativeOverlapped);
+            ThreadPoolBoundHandleOverlapped overlapped = (ThreadPoolBoundHandleOverlapped)
+                Overlapped.Unpack(nativeOverlapped);
 
             //
             // The Win32 thread pool implementation of ThreadPoolBoundHandle does not permit reuse of NativeOverlapped

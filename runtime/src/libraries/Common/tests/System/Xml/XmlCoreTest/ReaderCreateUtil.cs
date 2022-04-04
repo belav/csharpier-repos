@@ -154,10 +154,8 @@ namespace XmlCoreTest.Common
         )
         {
             CError.WriteLineIgnore(readerType);
-            ReaderType type = (ReaderType)Enum.Parse(
-                typeof(ReaderType),
-                readerType.ToUpperInvariant()
-            );
+            ReaderType type = (ReaderType)
+                Enum.Parse(typeof(ReaderType), readerType.ToUpperInvariant());
             CreateReaderParams readerParams = new CreateReaderParams(type);
             readerParams.InputType = ReadOverload.TextReader;
             readerParams.Input = stringReader;
@@ -216,10 +214,8 @@ namespace XmlCoreTest.Common
         )
         {
             CError.WriteLineIgnore(readerType);
-            ReaderType type = (ReaderType)Enum.Parse(
-                typeof(ReaderType),
-                readerType.ToUpperInvariant()
-            );
+            ReaderType type = (ReaderType)
+                Enum.Parse(typeof(ReaderType), readerType.ToUpperInvariant());
             CreateReaderParams readerParams = new CreateReaderParams(type);
             readerParams.InputType = ReadOverload.Stream;
             readerParams.Input = stream;
@@ -271,10 +267,8 @@ namespace XmlCoreTest.Common
         )
         {
             CError.WriteLineIgnore(readerType);
-            ReaderType type = (ReaderType)Enum.Parse(
-                typeof(ReaderType),
-                readerType.ToUpperInvariant()
-            );
+            ReaderType type = (ReaderType)
+                Enum.Parse(typeof(ReaderType), readerType.ToUpperInvariant());
             CreateReaderParams readerParams = new CreateReaderParams(type);
             readerParams.InputType = ReadOverload.URL;
             readerParams.Input = url;
@@ -337,10 +331,8 @@ namespace XmlCoreTest.Common
         )
         {
             CError.WriteLineIgnore(readerType);
-            ReaderType type = (ReaderType)Enum.Parse(
-                typeof(ReaderType),
-                readerType.ToUpperInvariant()
-            );
+            ReaderType type = (ReaderType)
+                Enum.Parse(typeof(ReaderType), readerType.ToUpperInvariant());
             CreateReaderParams readerParams = new CreateReaderParams(type);
             readerParams.InputType = ReadOverload.XmlReader;
             readerParams.Input = underlyingReader;

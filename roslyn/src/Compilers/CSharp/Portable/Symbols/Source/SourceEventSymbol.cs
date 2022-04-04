@@ -241,7 +241,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 attributesBag = this.GetAttributesBag();
             }
 
-            return (CommonEventEarlyWellKnownAttributeData)attributesBag.EarlyDecodedWellKnownAttributeData;
+            return (CommonEventEarlyWellKnownAttributeData)
+                attributesBag.EarlyDecodedWellKnownAttributeData;
         }
 
         internal override (CSharpAttributeData?, BoundAttribute?) EarlyDecodeWellKnownAttribute(
@@ -298,8 +299,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     && lazyCustomAttributesBag.IsEarlyDecodedWellKnownAttributeDataComputed
                 )
                 {
-                    var data =
-                        (CommonEventEarlyWellKnownAttributeData)lazyCustomAttributesBag.EarlyDecodedWellKnownAttributeData;
+                    var data = (CommonEventEarlyWellKnownAttributeData)
+                        lazyCustomAttributesBag.EarlyDecodedWellKnownAttributeData;
                     return data != null ? data.ObsoleteAttributeData : null;
                 }
 

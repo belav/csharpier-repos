@@ -306,10 +306,17 @@ namespace Roslyn.Test.Utilities
                 );
             }
 
-            return (IEnumerable<Blob>)s_getContentToSignMethod.Invoke(
-                null,
-                new object[] { peImage, peHeadersSize, peHeaderAlignment, strongNameSignatureFixup }
-            );
+            return (IEnumerable<Blob>)
+                s_getContentToSignMethod.Invoke(
+                    null,
+                    new object[]
+                    {
+                        peImage,
+                        peHeadersSize,
+                        peHeaderAlignment,
+                        strongNameSignatureFixup
+                    }
+                );
         }
 
         public static unsafe string GetMethodIL(this ImmutableArray<byte> ilArray)

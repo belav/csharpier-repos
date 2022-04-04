@@ -139,14 +139,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 IAsyncServiceProvider asyncServiceProvider
             )
             {
-                var runningDocumentTable = (IVsRunningDocumentTable?)await asyncServiceProvider
-                    .GetServiceAsync(typeof(SVsRunningDocumentTable))
-                    .ConfigureAwait(true);
+                var runningDocumentTable = (IVsRunningDocumentTable?)
+                    await asyncServiceProvider
+                        .GetServiceAsync(typeof(SVsRunningDocumentTable))
+                        .ConfigureAwait(true);
                 Assumes.Present(runningDocumentTable);
 
-                var componentModel = (IComponentModel?)await asyncServiceProvider
-                    .GetServiceAsync(typeof(SComponentModel))
-                    .ConfigureAwait(true);
+                var componentModel = (IComponentModel?)
+                    await asyncServiceProvider
+                        .GetServiceAsync(typeof(SComponentModel))
+                        .ConfigureAwait(true);
                 Assumes.Present(componentModel);
 
                 return new OpenFileTracker(workspace, runningDocumentTable, componentModel);

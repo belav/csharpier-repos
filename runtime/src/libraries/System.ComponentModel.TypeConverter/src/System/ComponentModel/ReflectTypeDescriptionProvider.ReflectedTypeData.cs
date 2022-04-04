@@ -205,13 +205,10 @@ namespace System.ComponentModel
                 // to override these attributes, so we want to be smart here.
                 if (instance != null)
                 {
-                    typeAttr = (TypeConverterAttribute?)TypeDescriptor.GetAttributes(_type)[
-                        typeof(TypeConverterAttribute)
-                    ];
-                    TypeConverterAttribute instanceAttr =
-                        (TypeConverterAttribute)TypeDescriptor.GetAttributes(instance)[
-                            typeof(TypeConverterAttribute)
-                        ]!;
+                    typeAttr = (TypeConverterAttribute?)
+                        TypeDescriptor.GetAttributes(_type)[typeof(TypeConverterAttribute)];
+                    TypeConverterAttribute instanceAttr = (TypeConverterAttribute)
+                        TypeDescriptor.GetAttributes(instance)[typeof(TypeConverterAttribute)]!;
                     if (typeAttr != instanceAttr)
                     {
                         Type? converterType = GetTypeFromName(instanceAttr.ConverterTypeName);
@@ -220,10 +217,11 @@ namespace System.ComponentModel
                             && typeof(TypeConverter).IsAssignableFrom(converterType)
                         )
                         {
-                            return (TypeConverter)ReflectTypeDescriptionProvider.CreateInstance(
-                                converterType,
-                                _type
-                            )!;
+                            return (TypeConverter)
+                                ReflectTypeDescriptionProvider.CreateInstance(
+                                    converterType,
+                                    _type
+                                )!;
                         }
                     }
                 }
@@ -233,9 +231,8 @@ namespace System.ComponentModel
                 {
                     if (typeAttr == null)
                     {
-                        typeAttr = (TypeConverterAttribute?)TypeDescriptor.GetAttributes(_type)[
-                            typeof(TypeConverterAttribute)
-                        ];
+                        typeAttr = (TypeConverterAttribute?)
+                            TypeDescriptor.GetAttributes(_type)[typeof(TypeConverterAttribute)];
                     }
 
                     if (typeAttr != null)
@@ -283,9 +280,8 @@ namespace System.ComponentModel
                     attributes = TypeDescriptor.GetAttributes(_type);
                 }
 
-                DefaultEventAttribute? attr = (DefaultEventAttribute?)attributes[
-                    typeof(DefaultEventAttribute)
-                ];
+                DefaultEventAttribute? attr = (DefaultEventAttribute?)
+                    attributes[typeof(DefaultEventAttribute)];
                 if (attr != null && attr.Name != null)
                 {
                     if (instance != null)
@@ -321,9 +317,8 @@ namespace System.ComponentModel
                     attributes = TypeDescriptor.GetAttributes(_type);
                 }
 
-                DefaultPropertyAttribute? attr = (DefaultPropertyAttribute?)attributes[
-                    typeof(DefaultPropertyAttribute)
-                ];
+                DefaultPropertyAttribute? attr = (DefaultPropertyAttribute?)
+                    attributes[typeof(DefaultPropertyAttribute)];
                 if (attr != null && attr.Name != null)
                 {
                     if (instance != null)

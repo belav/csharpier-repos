@@ -697,16 +697,14 @@ namespace System.Data.Tests
             Assert.Equal(1, cloned_ds.Tables["Directories"].Constraints.Count);
             Assert.Equal(1, cloned_ds.Tables["Files"].Constraints.Count);
 
-            ForeignKeyConstraint clonedFk = (ForeignKeyConstraint)cloned_ds.Tables[
-                "Files"
-            ].Constraints[0];
+            ForeignKeyConstraint clonedFk = (ForeignKeyConstraint)
+                cloned_ds.Tables["Files"].Constraints[0];
             Assert.Equal("FK_Test", clonedFk.ConstraintName);
             Assert.Equal(1, clonedFk.Columns.Length);
             Assert.Equal("DirectoryID", clonedFk.Columns[0].ColumnName);
 
-            UniqueConstraint clonedUc = (UniqueConstraint)cloned_ds.Tables[
-                "Directories"
-            ].Constraints[0];
+            UniqueConstraint clonedUc = (UniqueConstraint)
+                cloned_ds.Tables["Directories"].Constraints[0];
             UniqueConstraint origUc = (UniqueConstraint)ds.Tables["Directories"].Constraints[0];
             Assert.Equal(origUc.ConstraintName, clonedUc.ConstraintName);
             Assert.Equal(1, clonedUc.Columns.Length);
@@ -717,16 +715,14 @@ namespace System.Data.Tests
             Assert.Equal(1, copy_ds.Tables["Directories"].Constraints.Count);
             Assert.Equal(1, copy_ds.Tables["Files"].Constraints.Count);
 
-            ForeignKeyConstraint copyFk = (ForeignKeyConstraint)copy_ds.Tables["Files"].Constraints[
-                0
-            ];
+            ForeignKeyConstraint copyFk = (ForeignKeyConstraint)
+                copy_ds.Tables["Files"].Constraints[0];
             Assert.Equal("FK_Test", copyFk.ConstraintName);
             Assert.Equal(1, copyFk.Columns.Length);
             Assert.Equal("DirectoryID", copyFk.Columns[0].ColumnName);
 
-            UniqueConstraint copyUc = (UniqueConstraint)copy_ds.Tables["Directories"].Constraints[
-                0
-            ];
+            UniqueConstraint copyUc = (UniqueConstraint)
+                copy_ds.Tables["Directories"].Constraints[0];
             origUc = (UniqueConstraint)ds.Tables["Directories"].Constraints[0];
             Assert.Equal(origUc.ConstraintName, copyUc.ConstraintName);
             Assert.Equal(1, copyUc.Columns.Length);
@@ -1475,15 +1471,13 @@ namespace System.Data.Tests
             foreach (XmlSchemaElement d in xs.Items)
             {
                 Assert.Equal("d", d.Name);
-                XmlSchemaChoice dsc = (XmlSchemaChoice)(
-                    (XmlSchemaComplexType)d.SchemaType
-                ).Particle;
+                XmlSchemaChoice dsc = (XmlSchemaChoice)
+                    ((XmlSchemaComplexType)d.SchemaType).Particle;
                 foreach (XmlSchemaElement t in dsc.Items)
                 {
                     Assert.Equal("t", t.Name);
-                    XmlSchemaSequence tss = (XmlSchemaSequence)(
-                        (XmlSchemaComplexType)t.SchemaType
-                    ).Particle;
+                    XmlSchemaSequence tss = (XmlSchemaSequence)
+                        ((XmlSchemaComplexType)t.SchemaType).Particle;
                     foreach (XmlSchemaElement c in tss.Items)
                     {
                         Assert.Equal("c", c.Name);

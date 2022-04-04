@@ -1249,8 +1249,8 @@ namespace System.Net.Sockets
                             ec,
                             runState =>
                             {
-                                var t =
-                                    ((AwaitableSocketAsyncEventArgs, Action<object?>, object))runState!;
+                                var t = ((AwaitableSocketAsyncEventArgs, Action<object?>, object))
+                                    runState!;
                                 t.Item1.InvokeContinuation(
                                     t.Item2,
                                     t.Item3,

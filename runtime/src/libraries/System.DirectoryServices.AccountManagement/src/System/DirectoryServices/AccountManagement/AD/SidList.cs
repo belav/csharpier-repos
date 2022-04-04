@@ -160,10 +160,11 @@ namespace System.DirectoryServices.AccountManagement
                         if (lsaTargetPr != IntPtr.Zero)
                         {
                             UnsafeNativeMethods.LSA_UNICODE_STRING lsaTargetUnmanagedPtr =
-                                (UnsafeNativeMethods.LSA_UNICODE_STRING)Marshal.PtrToStructure(
-                                    lsaTargetPr,
-                                    typeof(UnsafeNativeMethods.LSA_UNICODE_STRING)
-                                );
+                                (UnsafeNativeMethods.LSA_UNICODE_STRING)
+                                    Marshal.PtrToStructure(
+                                        lsaTargetPr,
+                                        typeof(UnsafeNativeMethods.LSA_UNICODE_STRING)
+                                    );
                             if (lsaTargetUnmanagedPtr.buffer != IntPtr.Zero)
                             {
                                 Marshal.FreeHGlobal(lsaTargetUnmanagedPtr.buffer);
@@ -232,10 +233,11 @@ namespace System.DirectoryServices.AccountManagement
 
                 for (int i = 0; i < sidCount; i++)
                 {
-                    names[i] = (UnsafeNativeMethods.LSA_TRANSLATED_NAME)Marshal.PtrToStructure(
-                        pCurrentName,
-                        typeof(UnsafeNativeMethods.LSA_TRANSLATED_NAME)
-                    );
+                    names[i] = (UnsafeNativeMethods.LSA_TRANSLATED_NAME)
+                        Marshal.PtrToStructure(
+                            pCurrentName,
+                            typeof(UnsafeNativeMethods.LSA_TRANSLATED_NAME)
+                        );
 
                     pCurrentName = new IntPtr(
                         pCurrentName.ToInt64()
@@ -250,10 +252,11 @@ namespace System.DirectoryServices.AccountManagement
                 // Extract LSA_REFERENCED_DOMAIN_LIST.Entries
 
                 UnsafeNativeMethods.LSA_REFERENCED_DOMAIN_LIST referencedDomains =
-                    (UnsafeNativeMethods.LSA_REFERENCED_DOMAIN_LIST)Marshal.PtrToStructure(
-                        pDomains,
-                        typeof(UnsafeNativeMethods.LSA_REFERENCED_DOMAIN_LIST)
-                    );
+                    (UnsafeNativeMethods.LSA_REFERENCED_DOMAIN_LIST)
+                        Marshal.PtrToStructure(
+                            pDomains,
+                            typeof(UnsafeNativeMethods.LSA_REFERENCED_DOMAIN_LIST)
+                        );
 
                 int domainCount = referencedDomains.entries;
 
@@ -266,10 +269,11 @@ namespace System.DirectoryServices.AccountManagement
 
                 for (int i = 0; i < domainCount; i++)
                 {
-                    domains[i] = (UnsafeNativeMethods.LSA_TRUST_INFORMATION)Marshal.PtrToStructure(
-                        pCurrentDomain,
-                        typeof(UnsafeNativeMethods.LSA_TRUST_INFORMATION)
-                    );
+                    domains[i] = (UnsafeNativeMethods.LSA_TRUST_INFORMATION)
+                        Marshal.PtrToStructure(
+                            pCurrentDomain,
+                            typeof(UnsafeNativeMethods.LSA_TRUST_INFORMATION)
+                        );
                     pCurrentDomain = new IntPtr(
                         pCurrentDomain.ToInt64()
                             + Marshal.SizeOf(typeof(UnsafeNativeMethods.LSA_TRUST_INFORMATION))

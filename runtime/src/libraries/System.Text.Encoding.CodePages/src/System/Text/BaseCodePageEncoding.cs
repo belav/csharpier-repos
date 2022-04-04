@@ -124,9 +124,8 @@ namespace System.Text
                     char* pTableName = &p->TableName;
                     for (int i = 0; i < 16; i++)
                     {
-                        pTableName[i] = (char)BinaryPrimitives.ReverseEndianness(
-                            (ushort)pTableName[i]
-                        );
+                        pTableName[i] = (char)
+                            BinaryPrimitives.ReverseEndianness((ushort)pTableName[i]);
                     }
                     ushort* pVersion = &p->Version;
                     for (int i = 0; i < 4; i++)
@@ -165,9 +164,8 @@ namespace System.Text
                     char* pCodePageName = &p->CodePageName;
                     for (int i = 0; i < 16; i++)
                     {
-                        pCodePageName[i] = (char)BinaryPrimitives.ReverseEndianness(
-                            (ushort)pCodePageName[i]
-                        );
+                        pCodePageName[i] = (char)
+                            BinaryPrimitives.ReverseEndianness((ushort)pCodePageName[i]);
                     }
                     p->CodePage = BinaryPrimitives.ReverseEndianness(p->CodePage);
                     p->ByteCount = BinaryPrimitives.ReverseEndianness(p->ByteCount);
@@ -220,9 +218,8 @@ namespace System.Text
                     char* pCodePageName = &p->CodePageName;
                     for (int i = 0; i < 16; i++)
                     {
-                        pCodePageName[i] = (char)BinaryPrimitives.ReverseEndianness(
-                            (ushort)pCodePageName[i]
-                        );
+                        pCodePageName[i] = (char)
+                            BinaryPrimitives.ReverseEndianness((ushort)pCodePageName[i]);
                     }
                     p->VersionMajor = BinaryPrimitives.ReverseEndianness(p->VersionMajor);
                     p->VersionMinor = BinaryPrimitives.ReverseEndianness(p->VersionMinor);
@@ -230,9 +227,8 @@ namespace System.Text
                     p->VersionBuild = BinaryPrimitives.ReverseEndianness(p->VersionBuild);
                     p->CodePage = BinaryPrimitives.ReverseEndianness(p->CodePage);
                     p->ByteCount = BinaryPrimitives.ReverseEndianness(p->ByteCount);
-                    p->UnicodeReplace = (char)BinaryPrimitives.ReverseEndianness(
-                        (ushort)p->UnicodeReplace
-                    );
+                    p->UnicodeReplace = (char)
+                        BinaryPrimitives.ReverseEndianness((ushort)p->UnicodeReplace);
                     p->ByteReplace = BinaryPrimitives.ReverseEndianness(p->ByteReplace);
                 }
             }

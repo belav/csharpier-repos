@@ -2142,9 +2142,8 @@ namespace System.Management
                             if (
                                 System.Convert.ToInt64(
                                     ValueMap[i],
-                                    (IFormatProvider)CultureInfo.InvariantCulture.GetFormat(
-                                        typeof(ulong)
-                                    )
+                                    (IFormatProvider)
+                                        CultureInfo.InvariantCulture.GetFormat(typeof(ulong))
                                 ) == 0
                             )
                             {
@@ -2268,9 +2267,8 @@ namespace System.Management
                             (
                                 System.Convert.ToInt64(
                                     BitMap[i],
-                                    (IFormatProvider)CultureInfo.InvariantCulture.GetFormat(
-                                        typeof(ulong)
-                                    )
+                                    (IFormatProvider)
+                                        CultureInfo.InvariantCulture.GetFormat(typeof(ulong))
                                 ) == 0
                             )
                         )
@@ -6024,9 +6022,8 @@ namespace System.Management
             arrayOut.Clear();
             int nCurIndex = 0;
             string strToAdd = string.Empty;
-            IFormatProvider formatProv = (IFormatProvider)CultureInfo.InvariantCulture.GetFormat(
-                typeof(int)
-            );
+            IFormatProvider formatProv = (IFormatProvider)
+                CultureInfo.InvariantCulture.GetFormat(typeof(int));
 
             for (int i = 0; i < arrIn.Count; i++)
             {
@@ -6116,10 +6113,8 @@ namespace System.Management
                             codeProvType = asm.GetType("Microsoft.VJSharp.VJSharpCodeProvider");
                             if (codeProvType != null)
                             {
-                                cp =
-                                    (System.CodeDom.Compiler.CodeDomProvider)Activator.CreateInstance(
-                                        codeProvType
-                                    );
+                                cp = (System.CodeDom.Compiler.CodeDomProvider)
+                                    Activator.CreateInstance(codeProvType);
                                 bSucceeded = true;
                             }
                         }
@@ -6141,10 +6136,8 @@ namespace System.Management
                             codeProvType = asm.GetType("Microsoft.VisualC.CppCodeProvider");
                             if (codeProvType != null)
                             {
-                                cp =
-                                    (System.CodeDom.Compiler.CodeDomProvider)Activator.CreateInstance(
-                                        codeProvType
-                                    );
+                                cp = (System.CodeDom.Compiler.CodeDomProvider)
+                                    Activator.CreateInstance(codeProvType);
                                 bSucceeded = true;
                             }
                         }

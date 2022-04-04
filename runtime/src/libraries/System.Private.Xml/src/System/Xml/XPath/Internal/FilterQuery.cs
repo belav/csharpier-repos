@@ -157,12 +157,13 @@ namespace MS.Internal.Xml.XPath
                         if (_noPosition)
                         {
                             return (
-                                (bool)_cond.Evaluate(
-                                    new XPathSingletonIterator(
-                                        current, /*moved:*/
-                                        true
+                                (bool)
+                                    _cond.Evaluate(
+                                        new XPathSingletonIterator(
+                                            current, /*moved:*/
+                                            true
+                                        )
                                     )
-                                )
                             )
                               ? context
                               : null;
@@ -173,12 +174,13 @@ namespace MS.Internal.Xml.XPath
                         {
                             return (
                                 (
-                                    (string)_cond.Evaluate(
-                                        new XPathSingletonIterator(
-                                            current, /*moved:*/
-                                            true
+                                    (string)
+                                        _cond.Evaluate(
+                                            new XPathSingletonIterator(
+                                                current, /*moved:*/
+                                                true
+                                            )
                                         )
-                                    )
                                 ).Length != 0
                             )
                               ? context

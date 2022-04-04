@@ -759,9 +759,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                 )
                 .ConfigureAwait(false);
 
-            return (T)argumentList
-                .WithArguments(newArguments)
-                .WithAdditionalAnnotations(changeSignatureFormattingAnnotation);
+            return (T)
+                argumentList
+                    .WithArguments(newArguments)
+                    .WithAdditionalAnnotations(changeSignatureFormattingAnnotation);
         }
 
         private async Task<AttributeArgumentListSyntax> UpdateAttributeArgumentListAsync(
@@ -1183,9 +1184,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                     continue;
                 }
 
-                var convertedType = (ISymbol?)semanticModel
-                    .GetTypeInfo(node, cancellationToken)
-                    .ConvertedType;
+                var convertedType = (ISymbol?)
+                    semanticModel.GetTypeInfo(node, cancellationToken).ConvertedType;
                 convertedType = convertedType?.OriginalDefinition;
 
                 if (convertedType != null)

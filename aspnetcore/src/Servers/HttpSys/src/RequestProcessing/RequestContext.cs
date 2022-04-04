@@ -331,9 +331,8 @@ internal partial class RequestContext : NativeRequestContext, IThreadPoolWorkIte
                     .HTTP_DELEGATE_REQUEST_PROPERTY_ID
                     .DelegateRequestDelegateUrlProperty,
                 PropertyInfo = (IntPtr)uriPointer,
-                PropertyInfoLength = (uint)System.Text.Encoding.Unicode.GetByteCount(
-                    destination.UrlPrefix
-                )
+                PropertyInfoLength = (uint)
+                    System.Text.Encoding.Unicode.GetByteCount(destination.UrlPrefix)
             };
 
             statusCode = HttpApi.HttpDelegateRequestEx(

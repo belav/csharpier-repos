@@ -54,9 +54,8 @@ namespace System.Web.Mvc
             );
             foreach (Type areaRegistrationType in areaRegistrationTypes)
             {
-                AreaRegistration registration = (AreaRegistration)Activator.CreateInstance(
-                    areaRegistrationType
-                );
+                AreaRegistration registration = (AreaRegistration)
+                    Activator.CreateInstance(areaRegistrationType);
                 registration.CreateContextAndRegister(routes, state);
             }
         }

@@ -546,9 +546,8 @@ namespace System.DirectoryServices.AccountManagement
 
                 Debug.Assert(p is AuthenticablePrincipal);
 
-                bool enable = (bool)p.GetValueForProperty(
-                    PropertyNames.AuthenticablePrincipalEnabled
-                );
+                bool enable = (bool)
+                    p.GetValueForProperty(PropertyNames.AuthenticablePrincipalEnabled);
 
                 SetAuthPrincipalEnableStatus((AuthenticablePrincipal)p, enable);
             }
@@ -894,8 +893,8 @@ namespace System.DirectoryServices.AccountManagement
                     || principalType.IsSubclassOf(typeof(ComputerPrincipal))
                 )
                 {
-                    DirectoryRdnPrefixAttribute[] MyAttribute =
-                        (DirectoryRdnPrefixAttribute[])Attribute.GetCustomAttributes(
+                    DirectoryRdnPrefixAttribute[] MyAttribute = (DirectoryRdnPrefixAttribute[])
+                        Attribute.GetCustomAttributes(
                             principalType.BaseType,
                             typeof(DirectoryRdnPrefixAttribute),
                             false
@@ -1031,9 +1030,11 @@ namespace System.DirectoryServices.AccountManagement
 
                     if (de.Properties["lockoutTime"].Count > 0)
                     {
-                        ulong lockoutTime = (ulong)ADUtils.LargeIntToInt64(
-                            (UnsafeNativeMethods.IADsLargeInteger)de.Properties["lockoutTime"][0]
-                        );
+                        ulong lockoutTime = (ulong)
+                            ADUtils.LargeIntToInt64(
+                                (UnsafeNativeMethods.IADsLargeInteger)
+                                    de.Properties["lockoutTime"][0]
+                            );
 
                         if (lockoutTime != 0)
                         {
@@ -1497,9 +1498,8 @@ namespace System.DirectoryServices.AccountManagement
                                     && resultPropCollection["objectSid"].Count > 0
                                 )
                                 {
-                                    int? groupTypeValue = (int?)resultPropCollection["groupType"][
-                                        0
-                                    ];
+                                    int? groupTypeValue = (int?)
+                                        resultPropCollection["groupType"][0];
                                     if (
                                         groupTypeValue.HasValue
                                         && (
@@ -1508,9 +1508,8 @@ namespace System.DirectoryServices.AccountManagement
                                         )
                                     )
                                     {
-                                        byte[] sidByteArray = (byte[])resultPropCollection[
-                                            "objectSid"
-                                        ][0];
+                                        byte[] sidByteArray = (byte[])
+                                            resultPropCollection["objectSid"][0];
                                         SecurityIdentifier resultSid = new SecurityIdentifier(
                                             sidByteArray,
                                             0
@@ -2710,9 +2709,10 @@ namespace System.DirectoryServices.AccountManagement
                     // Ask the OS to resolve the SID to its target.
                     UnsafeNativeMethods.IAdsObjectOptions objOptions =
                         (UnsafeNativeMethods.IAdsObjectOptions)this.ctxBase.NativeObject;
-                    string serverName = (string)objOptions.GetOption(
-                        0 /* == ADS_OPTION_SERVERNAME */
-                    );
+                    string serverName = (string)
+                        objOptions.GetOption(
+                            0 /* == ADS_OPTION_SERVERNAME */
+                        );
 
                     int accountUsage = 0;
 
@@ -2851,9 +2851,10 @@ namespace System.DirectoryServices.AccountManagement
         {
             UnsafeNativeMethods.IAdsObjectOptions objOptions =
                 (UnsafeNativeMethods.IAdsObjectOptions)this.ctxBase.NativeObject;
-            string serverName = (string)objOptions.GetOption(
-                0 /* == ADS_OPTION_SERVERNAME */
-            );
+            string serverName = (string)
+                objOptions.GetOption(
+                    0 /* == ADS_OPTION_SERVERNAME */
+                );
 
             GlobalDebug.WriteLineIf(
                 GlobalDebug.Info,
@@ -3194,8 +3195,8 @@ namespace System.DirectoryServices.AccountManagement
             // User supplied name
             //
             UnsafeNativeMethods.Pathname pathCracker = new UnsafeNativeMethods.Pathname();
-            UnsafeNativeMethods.IADsPathname pathName =
-                (UnsafeNativeMethods.IADsPathname)pathCracker;
+            UnsafeNativeMethods.IADsPathname pathName = (UnsafeNativeMethods.IADsPathname)
+                pathCracker;
 
             pathName.Set(
                 this.ctxBase.Path,

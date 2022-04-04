@@ -549,10 +549,8 @@ public class DefaultHealthCheckServiceTest
         var results = await service.CheckHealthAsync();
 
         // Assert
-        var healthCheck = (DisposableDependeciesCheck)results.Entries
-            .Single()
-            .Value.Data.Single()
-            .Value;
+        var healthCheck = (DisposableDependeciesCheck)
+            results.Entries.Single().Value.Data.Single().Value;
 
         Assert.True(healthCheck.SynchronousDisposable.IsDisposed);
         Assert.True(healthCheck.AsyncOnlyDisposable.IsAsyncDisposed);
@@ -775,9 +773,10 @@ public class DefaultHealthCheckServiceTest
             configure(builder);
         }
 
-        return (DefaultHealthCheckService)services
-            .BuildServiceProvider(validateScopes: true)
-            .GetRequiredService<HealthCheckService>();
+        return (DefaultHealthCheckService)
+            services
+                .BuildServiceProvider(validateScopes: true)
+                .GetRequiredService<HealthCheckService>();
     }
 
     private class AnotherService { }

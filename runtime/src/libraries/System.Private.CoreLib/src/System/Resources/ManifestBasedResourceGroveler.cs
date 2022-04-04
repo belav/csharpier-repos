@@ -323,10 +323,8 @@ namespace System.Resources
                     // Add in a check for a constructor taking in an assembly first.
                     try
                     {
-                        return (ResourceSet)Activator.CreateInstance(
-                            _mediator.UserResourceSet,
-                            args
-                        )!;
+                        return (ResourceSet)
+                            Activator.CreateInstance(_mediator.UserResourceSet, args)!;
                     }
                     catch (MissingMethodException) { }
 
@@ -390,17 +388,18 @@ namespace System.Resources
                 resSetType = Type.GetType(resSetTypeName, true, false)!;
             }
 
-            ResourceSet rs = (ResourceSet)Activator.CreateInstance(
-                resSetType,
-                BindingFlags.Instance
-                    | BindingFlags.Public
-                    | BindingFlags.NonPublic
-                    | BindingFlags.CreateInstance,
-                null,
-                resourceSetArgs,
-                null,
-                null
-            )!;
+            ResourceSet rs = (ResourceSet)
+                Activator.CreateInstance(
+                    resSetType,
+                    BindingFlags.Instance
+                        | BindingFlags.Public
+                        | BindingFlags.NonPublic
+                        | BindingFlags.CreateInstance,
+                    null,
+                    resourceSetArgs,
+                    null,
+                    null
+                )!;
             return rs;
         }
 

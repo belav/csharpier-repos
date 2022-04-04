@@ -106,11 +106,12 @@ namespace System.Net.Http.Headers
         public static StringWithQualityHeaderValue Parse(string? input)
         {
             int index = 0;
-            return (StringWithQualityHeaderValue)GenericHeaderParser.SingleValueStringWithQualityParser.ParseValue(
-                input,
-                null,
-                ref index
-            );
+            return (StringWithQualityHeaderValue)
+                GenericHeaderParser.SingleValueStringWithQualityParser.ParseValue(
+                    input,
+                    null,
+                    ref index
+                );
         }
 
         public static bool TryParse(

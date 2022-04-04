@@ -67,9 +67,8 @@ namespace Newtonsoft.Json.Utilities
 
             GenerateCreateMethodCallIL(method, generator, 0);
 
-            return (ObjectConstructor<object>)dynamicMethod.CreateDelegate(
-                typeof(ObjectConstructor<object>)
-            );
+            return (ObjectConstructor<object>)
+                dynamicMethod.CreateDelegate(typeof(ObjectConstructor<object>));
         }
 
         public override MethodCall<T, object?> CreateMethodCall<T>(MethodBase method)
@@ -84,9 +83,8 @@ namespace Newtonsoft.Json.Utilities
 
             GenerateCreateMethodCallIL(method, generator, 1);
 
-            return (MethodCall<T, object?>)dynamicMethod.CreateDelegate(
-                typeof(MethodCall<T, object?>)
-            );
+            return (MethodCall<T, object?>)
+                dynamicMethod.CreateDelegate(typeof(MethodCall<T, object?>));
         }
 
         private void GenerateCreateMethodCallIL(

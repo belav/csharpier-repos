@@ -129,13 +129,14 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
 
                         var newArguments = parameterAndCapturedSymbols.Select(
                             p =>
-                                (ArgumentSyntax)generator.Argument(
-                                    seenNamedArgument || seenDefaultArgumentValue
-                                      ? p.symbol.Name
-                                      : null,
-                                    p.symbol.RefKind,
-                                    p.capture.Name.ToIdentifierName()
-                                )
+                                (ArgumentSyntax)
+                                    generator.Argument(
+                                        seenNamedArgument || seenDefaultArgumentValue
+                                          ? p.symbol.Name
+                                          : null,
+                                        p.symbol.RefKind,
+                                        p.capture.Name.ToIdentifierName()
+                                    )
                         );
 
                         var newArgList = currentInvocation.ArgumentList.WithArguments(

@@ -1179,7 +1179,8 @@ namespace Microsoft.EntityFrameworkCore
             )
             {
                 context1 = useInterface
-                    ? (ConstructorTestContextWithOC1A)serviceScope.ServiceProvider.GetService<IConstructorTestContextWithOC1A>()
+                    ? (ConstructorTestContextWithOC1A)
+                          serviceScope.ServiceProvider.GetService<IConstructorTestContextWithOC1A>()
                     : serviceScope.ServiceProvider.GetService<ConstructorTestContextWithOC1A>();
 
                 if (useInterface)
@@ -1208,7 +1209,8 @@ namespace Microsoft.EntityFrameworkCore
             )
             {
                 context2 = useInterface
-                    ? (ConstructorTestContextWithOC1A)serviceScope.ServiceProvider.GetService<IConstructorTestContextWithOC1A>()
+                    ? (ConstructorTestContextWithOC1A)
+                          serviceScope.ServiceProvider.GetService<IConstructorTestContextWithOC1A>()
                     : serviceScope.ServiceProvider.GetService<ConstructorTestContextWithOC1A>();
 
                 // Singleton services not the same because service provider caching is off
@@ -1534,7 +1536,8 @@ namespace Microsoft.EntityFrameworkCore
             )
             {
                 var context = useInterface
-                    ? (ConstructorTestContextWithOC3A)serviceScope.ServiceProvider.GetService<IConstructorTestContextWithOC3A>()
+                    ? (ConstructorTestContextWithOC3A)
+                          serviceScope.ServiceProvider.GetService<IConstructorTestContextWithOC3A>()
                     : serviceScope.ServiceProvider.GetService<ConstructorTestContextWithOC3A>();
 
                 Assert.NotNull(singleton[0] = context.GetService<IInMemoryStoreCache>());
@@ -1553,7 +1556,8 @@ namespace Microsoft.EntityFrameworkCore
             )
             {
                 var context = useInterface
-                    ? (ConstructorTestContextWithOC3A)serviceScope.ServiceProvider.GetService<IConstructorTestContextWithOC3A>()
+                    ? (ConstructorTestContextWithOC3A)
+                          serviceScope.ServiceProvider.GetService<IConstructorTestContextWithOC3A>()
                     : serviceScope.ServiceProvider.GetService<ConstructorTestContextWithOC3A>();
 
                 Assert.Same(singleton[0], context.GetService<IInMemoryStoreCache>());

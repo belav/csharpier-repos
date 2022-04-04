@@ -465,9 +465,8 @@ namespace System.IO
                 FSEventStreamEventId* eventIds
             )
             {
-                RunningInstance? instance = (RunningInstance?)GCHandle
-                    .FromIntPtr(clientCallBackInfo)
-                    .Target;
+                RunningInstance? instance = (RunningInstance?)
+                    GCHandle.FromIntPtr(clientCallBackInfo).Target;
                 Debug.Assert(instance != null);
 
                 // Try to get the actual watcher from our weak reference.  We maintain a weak reference most of the time

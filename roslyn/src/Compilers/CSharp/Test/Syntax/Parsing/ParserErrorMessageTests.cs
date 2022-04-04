@@ -4497,41 +4497,42 @@ public class Test
             var tree = ParseTree(test, TestOptions.Regular);
             tree.GetDiagnostics().Verify();
 
-            var methodDeclaration = (MethodDeclarationSyntax)tree.GetRoot()
-                .DescendantNodes()
-                .Single(node => node is MethodDeclarationSyntax);
+            var methodDeclaration = (MethodDeclarationSyntax)
+                tree.GetRoot().DescendantNodes().Single(node => node is MethodDeclarationSyntax);
             Assert.Equal(
                 SyntaxKind.InKeyword,
                 methodDeclaration.ParameterList.Parameters.Single().Modifiers.Single().Kind()
             );
 
-            var delegateDeclaration = (DelegateDeclarationSyntax)tree.GetRoot()
-                .DescendantNodes()
-                .Single(node => node is DelegateDeclarationSyntax);
+            var delegateDeclaration = (DelegateDeclarationSyntax)
+                tree.GetRoot().DescendantNodes().Single(node => node is DelegateDeclarationSyntax);
             Assert.Equal(
                 SyntaxKind.InKeyword,
                 delegateDeclaration.ParameterList.Parameters.Single().Modifiers.Single().Kind()
             );
 
-            var localFunctionStatement = (LocalFunctionStatementSyntax)tree.GetRoot()
-                .DescendantNodes()
-                .Single(node => node is LocalFunctionStatementSyntax);
+            var localFunctionStatement = (LocalFunctionStatementSyntax)
+                tree.GetRoot()
+                    .DescendantNodes()
+                    .Single(node => node is LocalFunctionStatementSyntax);
             Assert.Equal(
                 SyntaxKind.InKeyword,
                 localFunctionStatement.ParameterList.Parameters.Single().Modifiers.Single().Kind()
             );
 
-            var lambdaExpression = (ParenthesizedLambdaExpressionSyntax)tree.GetRoot()
-                .DescendantNodes()
-                .Single(node => node is ParenthesizedLambdaExpressionSyntax);
+            var lambdaExpression = (ParenthesizedLambdaExpressionSyntax)
+                tree.GetRoot()
+                    .DescendantNodes()
+                    .Single(node => node is ParenthesizedLambdaExpressionSyntax);
             Assert.Equal(
                 SyntaxKind.InKeyword,
                 lambdaExpression.ParameterList.Parameters.Single().Modifiers.Single().Kind()
             );
 
-            var anonymousMethodExpression = (AnonymousMethodExpressionSyntax)tree.GetRoot()
-                .DescendantNodes()
-                .Single(node => node is AnonymousMethodExpressionSyntax);
+            var anonymousMethodExpression = (AnonymousMethodExpressionSyntax)
+                tree.GetRoot()
+                    .DescendantNodes()
+                    .Single(node => node is AnonymousMethodExpressionSyntax);
             Assert.Equal(
                 SyntaxKind.InKeyword,
                 anonymousMethodExpression.ParameterList.Parameters
@@ -4540,17 +4541,15 @@ public class Test
                     .Kind()
             );
 
-            var indexerDeclaration = (IndexerDeclarationSyntax)tree.GetRoot()
-                .DescendantNodes()
-                .Single(node => node is IndexerDeclarationSyntax);
+            var indexerDeclaration = (IndexerDeclarationSyntax)
+                tree.GetRoot().DescendantNodes().Single(node => node is IndexerDeclarationSyntax);
             Assert.Equal(
                 SyntaxKind.InKeyword,
                 indexerDeclaration.ParameterList.Parameters.Single().Modifiers.Single().Kind()
             );
 
-            var operatorDeclaration = (OperatorDeclarationSyntax)tree.GetRoot()
-                .DescendantNodes()
-                .Single(node => node is OperatorDeclarationSyntax);
+            var operatorDeclaration = (OperatorDeclarationSyntax)
+                tree.GetRoot().DescendantNodes().Single(node => node is OperatorDeclarationSyntax);
             Assert.Equal(
                 SyntaxKind.InKeyword,
                 operatorDeclaration.ParameterList.Parameters.Single().Modifiers.Single().Kind()

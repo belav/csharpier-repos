@@ -53,9 +53,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
                 .GetServiceAsync(typeof(SVsManagedFontAndColorInformation))
                 .ConfigureAwait(true);
 
-            var textManager = (IVsTextManager4?)await _serviceProvider
-                .GetServiceAsync(typeof(SVsTextManager))
-                .ConfigureAwait(true);
+            var textManager = (IVsTextManager4?)
+                await _serviceProvider.GetServiceAsync(typeof(SVsTextManager)).ConfigureAwait(true);
             Assumes.Present(textManager);
 
             _lazyPersister ??= new LanguageSettingsPersister(

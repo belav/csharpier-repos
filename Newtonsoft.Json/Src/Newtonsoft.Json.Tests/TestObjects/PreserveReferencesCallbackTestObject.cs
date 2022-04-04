@@ -83,22 +83,14 @@ namespace Newtonsoft.Json.Tests.TestObjects
 
             _stringValue = _serializationInfo.GetString("stringValue");
             _intValue = _serializationInfo.GetInt32("intValue");
-            _person1 = (PersonReference)_serializationInfo.GetValue(
-                "person1",
-                typeof(PersonReference)
-            );
-            _person2 = (PersonReference)_serializationInfo.GetValue(
-                "person2",
-                typeof(PersonReference)
-            );
-            _person3 = (PersonReference)_serializationInfo.GetValue(
-                "person3",
-                typeof(PersonReference)
-            );
-            _parent = (PreserveReferencesCallbackTestObject)_serializationInfo.GetValue(
-                "parent",
-                typeof(PreserveReferencesCallbackTestObject)
-            );
+            _person1 = (PersonReference)
+                _serializationInfo.GetValue("person1", typeof(PersonReference));
+            _person2 = (PersonReference)
+                _serializationInfo.GetValue("person2", typeof(PersonReference));
+            _person3 = (PersonReference)
+                _serializationInfo.GetValue("person3", typeof(PersonReference));
+            _parent = (PreserveReferencesCallbackTestObject)
+                _serializationInfo.GetValue("parent", typeof(PreserveReferencesCallbackTestObject));
 
             _serializationInfo = null;
         }

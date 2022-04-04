@@ -101,9 +101,8 @@ namespace System.Data.Common
         [Fact]
         public void Clone()
         {
-            DataTableMapping clonedDataTableMapping = (DataTableMapping)(
-                (ICloneable)_dataTableMapping
-            ).Clone();
+            DataTableMapping clonedDataTableMapping = (DataTableMapping)
+                ((ICloneable)_dataTableMapping).Clone();
 
             Assert.Equal(_dataTableMapping.SourceTable, clonedDataTableMapping.SourceTable);
             Assert.Equal(_dataTableMapping.DataSetTable, clonedDataTableMapping.DataSetTable);

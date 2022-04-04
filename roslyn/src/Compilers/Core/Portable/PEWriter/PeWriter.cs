@@ -326,10 +326,8 @@ namespace Microsoft.Cci
                     .Single();
             }
 
-            return (uint)s_calculateChecksumMethod.Invoke(
-                null,
-                new object[] { peBlob, checksumBlob, }
-            );
+            return (uint)
+                s_calculateChecksumMethod.Invoke(null, new object[] { peBlob, checksumBlob, });
         }
 
         private static void PatchModuleVersionIds(

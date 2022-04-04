@@ -625,8 +625,8 @@ namespace Microsoft.Interop
             }
             bool isArrayType =
                 unmanagedType == UnmanagedType.LPArray || unmanagedType == UnmanagedType.ByValArray;
-            UnmanagedType elementUnmanagedType =
-                (UnmanagedType)SizeAndParamIndexInfo.UnspecifiedConstSize;
+            UnmanagedType elementUnmanagedType = (UnmanagedType)
+                SizeAndParamIndexInfo.UnspecifiedConstSize;
             SizeAndParamIndexInfo arraySizeInfo = SizeAndParamIndexInfo.Unspecified;
 
             // All other data on attribute is defined as NamedArguments.

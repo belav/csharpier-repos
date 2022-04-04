@@ -71,8 +71,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             CancellationToken cancellationToken
         )
         {
-            var blockStructureService =
-                (BlockStructureServiceWithProviders)languageServices.GetRequiredService<BlockStructureService>();
+            var blockStructureService = (BlockStructureServiceWithProviders)
+                languageServices.GetRequiredService<BlockStructureService>();
             var blockStructure = blockStructureService.GetBlockStructure(
                 syntaxTree,
                 options,

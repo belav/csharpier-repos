@@ -81,9 +81,8 @@ namespace CrossBoundaryLayout
 
             {
                 var a5 =
-                    (ABoringGeneric<ByteStruct>)Activator.CreateInstance(
-                        typeof(ABoringGeneric<ByteStruct>)
-                    );
+                    (ABoringGeneric<ByteStruct>)
+                        Activator.CreateInstance(typeof(ABoringGeneric<ByteStruct>));
                 a5._aVal = 1;
                 if (1 != (byte)typeof(ABoringGeneric<ByteStruct>).GetField("_aVal").GetValue(a5))
                 {

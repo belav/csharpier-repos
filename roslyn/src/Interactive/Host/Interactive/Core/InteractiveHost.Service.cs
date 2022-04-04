@@ -203,9 +203,8 @@ namespace Microsoft.CodeAnalysis.Interactive
 
                 var assemblyLoader = new InteractiveAssemblyLoader(metadataFileProvider);
                 var replServiceProviderType = Type.GetType(replServiceProviderTypeName);
-                var replServiceProvider = (ReplServiceProvider)Activator.CreateInstance(
-                    replServiceProviderType
-                );
+                var replServiceProvider = (ReplServiceProvider)
+                    Activator.CreateInstance(replServiceProviderType);
                 var globals = new InteractiveScriptGlobals(
                     Console.Out,
                     replServiceProvider.ObjectFormatter
@@ -1005,40 +1004,41 @@ namespace Microsoft.CodeAnalysis.Interactive
                 bool displayResult
             )
             {
-                return (Task<ScriptState<object>>)_invokeOnMainThread(
-                    (Func<Task<ScriptState<object>>>)(
-                        async () =>
-                        {
-                            var serviceState = GetServiceState();
-
-                            var task =
-                                (state == null)
-                                    ? script.RunAsync(
-                                          serviceState.Globals,
-                                          catchException: e => true,
-                                          cancellationToken: CancellationToken.None
-                                      )
-                                    : script.RunFromAsync(
-                                          state,
-                                          catchException: e => true,
-                                          cancellationToken: CancellationToken.None
-                                      );
-
-                            var newState = await task.ConfigureAwait(false);
-
-                            if (newState.Exception != null)
+                return (Task<ScriptState<object>>)
+                    _invokeOnMainThread(
+                        (Func<Task<ScriptState<object>>>)(
+                            async () =>
                             {
-                                DisplayException(newState.Exception);
-                            }
-                            else if (displayResult && newState.Script.HasReturnValue())
-                            {
-                                serviceState.Globals.Print(newState.ReturnValue);
-                            }
+                                var serviceState = GetServiceState();
 
-                            return newState;
-                        }
-                    )
-                );
+                                var task =
+                                    (state == null)
+                                        ? script.RunAsync(
+                                              serviceState.Globals,
+                                              catchException: e => true,
+                                              cancellationToken: CancellationToken.None
+                                          )
+                                        : script.RunFromAsync(
+                                              state,
+                                              catchException: e => true,
+                                              cancellationToken: CancellationToken.None
+                                          );
+
+                                var newState = await task.ConfigureAwait(false);
+
+                                if (newState.Exception != null)
+                                {
+                                    DisplayException(newState.Exception);
+                                }
+                                else if (displayResult && newState.Script.HasReturnValue())
+                                {
+                                    serviceState.Globals.Print(newState.ReturnValue);
+                                }
+
+                                return newState;
+                            }
+                        )
+                    );
             }
 
             private void DisplayInteractiveErrors(

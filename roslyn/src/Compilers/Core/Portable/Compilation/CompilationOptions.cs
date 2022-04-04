@@ -804,7 +804,8 @@ namespace Microsoft.CodeAnalysis
                                                                                                                     Hash.Combine(
                                                                                                                         this.PublicSign,
                                                                                                                         Hash.Combine(
-                                                                                                                            (int)this.NullableContextOptions,
+                                                                                                                            (int)
+                                                                                                                                this.NullableContextOptions,
                                                                                                                             0
                                                                                                                         )
                                                                                                                     )

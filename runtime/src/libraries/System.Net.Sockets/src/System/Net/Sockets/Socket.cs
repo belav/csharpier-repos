@@ -175,9 +175,10 @@ namespace System.Net.Sockets
                         case AddressFamily.InterNetwork:
                             _rightEndPoint = new IPEndPoint(
                                 new IPAddress(
-                                    (long)SocketAddressPal.GetIPv4Address(
-                                        buffer.Slice(0, bufferLength)
-                                    ) & 0x0FFFFFFFF
+                                    (long)
+                                        SocketAddressPal.GetIPv4Address(
+                                            buffer.Slice(0, bufferLength)
+                                        ) & 0x0FFFFFFFF
                                 ),
                                 SocketAddressPal.GetPort(buffer)
                             );
@@ -224,9 +225,10 @@ namespace System.Net.Sockets
                                         case AddressFamily.InterNetwork:
                                             _remoteEndPoint = new IPEndPoint(
                                                 new IPAddress(
-                                                    (long)SocketAddressPal.GetIPv4Address(
-                                                        buffer.Slice(0, bufferLength)
-                                                    ) & 0x0FFFFFFFF
+                                                    (long)
+                                                        SocketAddressPal.GetIPv4Address(
+                                                            buffer.Slice(0, bufferLength)
+                                                        ) & 0x0FFFFFFFF
                                                 ),
                                                 SocketAddressPal.GetPort(buffer)
                                             );
@@ -530,10 +532,11 @@ namespace System.Net.Sockets
             get
             {
                 return
-                    (int)GetSocketOption(
-                        SocketOptionLevel.Socket,
-                        SocketOptionName.ExclusiveAddressUse
-                    )! != 0
+                    (int)
+                        GetSocketOption(
+                            SocketOptionLevel.Socket,
+                            SocketOptionName.ExclusiveAddressUse
+                        )! != 0
                   ? true
                   : false;
             }
@@ -555,10 +558,8 @@ namespace System.Net.Sockets
         {
             get
             {
-                return (int)GetSocketOption(
-                    SocketOptionLevel.Socket,
-                    SocketOptionName.ReceiveBuffer
-                )!;
+                return (int)
+                    GetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveBuffer)!;
             }
             set
             {
@@ -592,10 +593,8 @@ namespace System.Net.Sockets
         {
             get
             {
-                return (int)GetSocketOption(
-                    SocketOptionLevel.Socket,
-                    SocketOptionName.ReceiveTimeout
-                )!;
+                return (int)
+                    GetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveTimeout)!;
             }
             set
             {
@@ -616,10 +615,8 @@ namespace System.Net.Sockets
         {
             get
             {
-                return (int)GetSocketOption(
-                    SocketOptionLevel.Socket,
-                    SocketOptionName.SendTimeout
-                )!;
+                return (int)
+                    GetSocketOption(SocketOptionLevel.Socket, SocketOptionName.SendTimeout)!;
             }
             set
             {
@@ -641,10 +638,8 @@ namespace System.Net.Sockets
         {
             get
             {
-                return (LingerOption?)GetSocketOption(
-                    SocketOptionLevel.Socket,
-                    SocketOptionName.Linger
-                );
+                return (LingerOption?)
+                    GetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Linger);
             }
             set { SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Linger, value!); }
         }
@@ -666,17 +661,14 @@ namespace System.Net.Sockets
             {
                 if (_addressFamily == AddressFamily.InterNetwork)
                 {
-                    return (short)(int)GetSocketOption(
-                        SocketOptionLevel.IP,
-                        SocketOptionName.IpTimeToLive
-                    )!;
+                    return (short)
+                        (int)GetSocketOption(SocketOptionLevel.IP, SocketOptionName.IpTimeToLive)!;
                 }
                 else if (_addressFamily == AddressFamily.InterNetworkV6)
                 {
-                    return (short)(int)GetSocketOption(
-                        SocketOptionLevel.IPv6,
-                        SocketOptionName.IpTimeToLive
-                    )!;
+                    return (short)
+                        (int)
+                            GetSocketOption(SocketOptionLevel.IPv6, SocketOptionName.IpTimeToLive)!;
                 }
                 else
                 {
@@ -747,20 +739,22 @@ namespace System.Net.Sockets
                 if (_addressFamily == AddressFamily.InterNetwork)
                 {
                     return
-                        (int)GetSocketOption(
-                            SocketOptionLevel.IP,
-                            SocketOptionName.MulticastLoopback
-                        )! != 0
+                        (int)
+                            GetSocketOption(
+                                SocketOptionLevel.IP,
+                                SocketOptionName.MulticastLoopback
+                            )! != 0
                       ? true
                       : false;
                 }
                 else if (_addressFamily == AddressFamily.InterNetworkV6)
                 {
                     return
-                        (int)GetSocketOption(
-                            SocketOptionLevel.IPv6,
-                            SocketOptionName.MulticastLoopback
-                        )! != 0
+                        (int)
+                            GetSocketOption(
+                                SocketOptionLevel.IPv6,
+                                SocketOptionName.MulticastLoopback
+                            )! != 0
                       ? true
                       : false;
                 }

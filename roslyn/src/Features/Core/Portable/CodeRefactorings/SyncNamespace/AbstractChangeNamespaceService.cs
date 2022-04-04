@@ -996,8 +996,8 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
 
             // We need a dummy import to figure out the container for given reference.
             var dummyImport = CreateImport(generator, "Dummy", withFormatterAnnotation: false);
-            var abstractChangeNamespaceService =
-                (AbstractChangeNamespaceService)changeNamespaceService;
+            var abstractChangeNamespaceService = (AbstractChangeNamespaceService)
+                changeNamespaceService;
 
             foreach (var refLoc in refLocations)
             {

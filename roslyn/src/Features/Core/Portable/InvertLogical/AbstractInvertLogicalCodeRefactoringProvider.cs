@@ -37,9 +37,10 @@ namespace Microsoft.CodeAnalysis.InvertLogical
         {
             var (document, span, cancellationToken) = context;
 
-            var expression = (SyntaxNode?)await context
-                .TryGetRelevantNodeAsync<TBinaryExpressionSyntax>()
-                .ConfigureAwait(false);
+            var expression = (SyntaxNode?)
+                await context
+                    .TryGetRelevantNodeAsync<TBinaryExpressionSyntax>()
+                    .ConfigureAwait(false);
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var syntaxKinds = document.GetRequiredLanguageService<ISyntaxKindsService>();
 

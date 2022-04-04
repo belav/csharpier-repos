@@ -327,9 +327,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     && _lazyNoPiaLocalTypes.TryGetValue(emittedTypeName.TypeName, out typeDef)
                 )
                 {
-                    result = (NamedTypeSymbol)new MetadataDecoder(
-                        ContainingPEModule
-                    ).GetTypeOfToken(typeDef, out isNoPiaLocalType);
+                    result = (NamedTypeSymbol)
+                        new MetadataDecoder(ContainingPEModule).GetTypeOfToken(
+                            typeDef,
+                            out isNoPiaLocalType
+                        );
                     Debug.Assert(isNoPiaLocalType);
                 }
             }

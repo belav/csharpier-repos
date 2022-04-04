@@ -601,9 +601,8 @@ namespace System.Runtime.CompilerServices
             Debug.Assert(_hasCustomFormatter);
             Debug.Assert(_provider != null);
 
-            ICustomFormatter? formatter = (ICustomFormatter?)_provider.GetFormat(
-                typeof(ICustomFormatter)
-            );
+            ICustomFormatter? formatter = (ICustomFormatter?)
+                _provider.GetFormat(typeof(ICustomFormatter));
             Debug.Assert(
                 formatter != null,
                 "An incorrectly written provider said it implemented ICustomFormatter, and then didn't"

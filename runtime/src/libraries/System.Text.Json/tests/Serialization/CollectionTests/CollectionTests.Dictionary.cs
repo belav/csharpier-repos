@@ -1405,10 +1405,8 @@ namespace System.Text.Json.Serialization.Tests
         {
             static IDictionary<string, int> GetProperty(T objectToVerify, string propertyName)
             {
-                return (IDictionary<string, int>)objectToVerify
-                    .GetType()
-                    .GetProperty(propertyName)
-                    .GetValue(objectToVerify);
+                return (IDictionary<string, int>)
+                    objectToVerify.GetType().GetProperty(propertyName).GetValue(objectToVerify);
             }
 
             void Verify(T objectToVerify)

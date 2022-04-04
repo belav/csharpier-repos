@@ -49,9 +49,10 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
                     .Any(t => t.FullName == "NetTopologySuite.Geometries.Geometry")
             )
             {
-                var comparer = (ValueComparer)Activator.CreateInstance(
-                    typeof(GeometryValueComparer<>).MakeGenericType(clrType)
-                )!;
+                var comparer = (ValueComparer)
+                    Activator.CreateInstance(
+                        typeof(GeometryValueComparer<>).MakeGenericType(clrType)
+                    )!;
 
                 return new InMemoryTypeMapping(clrType, comparer, comparer);
             }

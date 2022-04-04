@@ -71,10 +71,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
             var isLspEditorEnabled = GlobalOptions.GetOption(LspOptions.LspEditorFeatureFlag);
             if (isLspEditorEnabled)
             {
-                serverCapabilities =
-                    (VSInternalServerCapabilities)_defaultCapabilitiesProvider.GetCapabilities(
-                        clientCapabilities
-                    );
+                serverCapabilities = (VSInternalServerCapabilities)
+                    _defaultCapabilitiesProvider.GetCapabilities(clientCapabilities);
             }
             else
             {

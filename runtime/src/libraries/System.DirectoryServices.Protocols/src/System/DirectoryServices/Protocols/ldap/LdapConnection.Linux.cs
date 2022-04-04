@@ -35,8 +35,8 @@ namespace System.DirectoryServices.Protocols
             Debug.Assert(!_ldapHandle.IsInvalid);
 
             string scheme = null;
-            LdapDirectoryIdentifier directoryIdentifier =
-                (LdapDirectoryIdentifier)_directoryIdentifier;
+            LdapDirectoryIdentifier directoryIdentifier = (LdapDirectoryIdentifier)
+                _directoryIdentifier;
             if (directoryIdentifier.Connectionless)
             {
                 scheme = "cldap://";

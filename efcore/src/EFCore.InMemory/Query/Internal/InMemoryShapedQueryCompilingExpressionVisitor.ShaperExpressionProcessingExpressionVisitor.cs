@@ -128,8 +128,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                         {
                             variable = Expression.Parameter(projectionBindingExpression.Type);
                             _variables.Add(variable);
-                            var queryExpression =
-                                (InMemoryQueryExpression)projectionBindingExpression.QueryExpression;
+                            var queryExpression = (InMemoryQueryExpression)
+                                projectionBindingExpression.QueryExpression;
                             if (_valueBufferParameter == null)
                             {
                                 _valueBufferParameter = queryExpression.CurrentParameter;
@@ -180,7 +180,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                         if (includeExpression.Navigation.IsCollection)
                         {
                             var collectionResultShaperExpression =
-                                (CollectionResultShaperExpression)includeExpression.NavigationExpression;
+                                (CollectionResultShaperExpression)
+                                    includeExpression.NavigationExpression;
                             var shaperLambda = new ShaperExpressionProcessingExpressionVisitor(
                                 _inMemoryShapedQueryCompilingExpressionVisitor,
                                 _tracking
@@ -301,10 +302,10 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 {
                     var newExpression = (NewExpression)binaryExpression.Right;
 
-                    var projectionBindingExpression =
-                        (ProjectionBindingExpression)newExpression.Arguments[0];
-                    var queryExpression =
-                        (InMemoryQueryExpression)projectionBindingExpression.QueryExpression;
+                    var projectionBindingExpression = (ProjectionBindingExpression)
+                        newExpression.Arguments[0];
+                    var queryExpression = (InMemoryQueryExpression)
+                        projectionBindingExpression.QueryExpression;
                     if (_valueBufferParameter == null)
                     {
                         _valueBufferParameter = queryExpression.CurrentParameter;
@@ -348,9 +349,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 {
                     var property = methodCallExpression.Arguments[2].GetConstantValue<IProperty?>();
                     var indexMap = _materializationContextBindings[
-                        (ParameterExpression)(
-                            (MethodCallExpression)methodCallExpression.Arguments[0]
-                        ).Object!
+                        (ParameterExpression)
+                            ((MethodCallExpression)methodCallExpression.Arguments[0]).Object!
                     ];
 
                     Check.DebugAssert(

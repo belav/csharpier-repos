@@ -1851,10 +1851,8 @@ public class ReliabilityFramework
             // to avoid doing reflection every time we start the test.
             if ((test.TestAttrs & TestAttributes.RequiresThread) == TestAttributes.None)
             {
-                ApartmentState state = (ApartmentState)(int)checkMainForThreadTypeMethod.Invoke(
-                    obj,
-                    new object[0]
-                );
+                ApartmentState state = (ApartmentState)
+                    (int)checkMainForThreadTypeMethod.Invoke(obj, new object[0]);
                 switch (state)
                 {
                     case ApartmentState.STA:

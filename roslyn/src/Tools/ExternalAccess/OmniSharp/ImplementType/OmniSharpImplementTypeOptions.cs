@@ -13,10 +13,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.ImplementType
             OptionSet options,
             string language
         ) =>
-            (OmniSharpImplementTypeInsertionBehavior)options.GetOption(
-                ImplementTypeOptions.InsertionBehavior,
-                language
-            );
+            (OmniSharpImplementTypeInsertionBehavior)
+                options.GetOption(ImplementTypeOptions.InsertionBehavior, language);
 
         public static OptionSet SetInsertionBehavior(
             OptionSet options,
@@ -33,10 +31,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.ImplementType
             OptionSet options,
             string language
         ) =>
-            (OmniSharpImplementTypePropertyGenerationBehavior)options.GetOption(
-                ImplementTypeOptions.PropertyGenerationBehavior,
-                language
-            );
+            (OmniSharpImplementTypePropertyGenerationBehavior)
+                options.GetOption(ImplementTypeOptions.PropertyGenerationBehavior, language);
 
         public static OptionSet SetPropertyGenerationBehavior(
             OptionSet options,

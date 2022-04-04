@@ -2838,13 +2838,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                       loweredRight,
                       method.ReturnType
                   )
-                : (BoundExpression)BoundCall.Synthesized(
-                      syntax,
-                      receiverOpt: null,
-                      method,
-                      loweredLeft,
-                      loweredRight
-                  );
+                : (BoundExpression)
+                      BoundCall.Synthesized(
+                          syntax,
+                          receiverOpt: null,
+                          method,
+                          loweredLeft,
+                          loweredRight
+                      );
             BoundExpression result =
                 method.ReturnType.SpecialType == SpecialType.System_Delegate
                     ? MakeConversionNode(

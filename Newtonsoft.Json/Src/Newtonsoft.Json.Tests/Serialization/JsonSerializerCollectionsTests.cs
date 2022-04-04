@@ -1942,10 +1942,11 @@ namespace Newtonsoft.Json.Tests.Serialization
             );
 
             IList<Event1[,]> values2 =
-                (IList<Event1[,]>)JsonConvert.DeserializeObject(
-                    json,
-                    new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All }
-                );
+                (IList<Event1[,]>)
+                    JsonConvert.DeserializeObject(
+                        json,
+                        new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All }
+                    );
 
             Assert.AreEqual(2, values2.Count);
             Assert.AreEqual("EventName!", values2[0][0, 0].EventName);
@@ -2095,10 +2096,11 @@ namespace Newtonsoft.Json.Tests.Serialization
                 sw.GetStringBuilder().ToString()
             );
 
-            ProductCollection collectionNew = (ProductCollection)jsonSerializer.Deserialize(
-                new JsonTextReader(new StringReader(sw.GetStringBuilder().ToString())),
-                typeof(ProductCollection)
-            );
+            ProductCollection collectionNew = (ProductCollection)
+                jsonSerializer.Deserialize(
+                    new JsonTextReader(new StringReader(sw.GetStringBuilder().ToString())),
+                    typeof(ProductCollection)
+                );
 
             CollectionAssert.AreEqual(collection, collectionNew);
         }

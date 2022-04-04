@@ -119,8 +119,8 @@ internal class DynamicControllerEndpointMatcherPolicy : MatcherPolicy, IEndpoint
             }
             else if (transformerMetadata != null)
             {
-                transformer =
-                    (DynamicRouteValueTransformer)httpContext.RequestServices.GetRequiredService(
+                transformer = (DynamicRouteValueTransformer)
+                    httpContext.RequestServices.GetRequiredService(
                         transformerMetadata.SelectorType
                     );
                 if (transformer.State != null)

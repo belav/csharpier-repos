@@ -727,8 +727,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                     InvokeOnUIThread(
                         cancellationToken =>
                         {
-                            var newControl =
-                                (System.Windows.Forms.Button)designerHost.CreateComponent(
+                            var newControl = (System.Windows.Forms.Button)
+                                designerHost.CreateComponent(
                                     typeof(System.Windows.Forms.Button),
                                     buttonName
                                 );
@@ -882,9 +882,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                         cancellationToken =>
                         {
                             var button = designerHost.Container.Components[buttonName];
-                            var eventBindingService = (IEventBindingService)button.Site.GetService(
-                                typeof(IEventBindingService)
-                            );
+                            var eventBindingService = (IEventBindingService)
+                                button.Site.GetService(typeof(IEventBindingService));
                             var events = TypeDescriptor.GetEvents(button);
                             var eventProperty = eventBindingService.GetEventProperty(
                                 events.Find(eventName, ignoreCase: true)

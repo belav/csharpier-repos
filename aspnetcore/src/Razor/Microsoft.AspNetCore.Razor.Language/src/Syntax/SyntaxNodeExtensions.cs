@@ -144,10 +144,8 @@ internal static class SyntaxNodeExtensions
         Func<SyntaxNode, SyntaxNode, SyntaxNode> computeReplacementNode
     ) where TRoot : SyntaxNode
     {
-        return (TRoot)root.ReplaceCore(
-            nodes: nodes,
-            computeReplacementNode: computeReplacementNode
-        );
+        return (TRoot)
+            root.ReplaceCore(nodes: nodes, computeReplacementNode: computeReplacementNode);
     }
 
     /// <summary>
@@ -168,10 +166,8 @@ internal static class SyntaxNodeExtensions
         where TRoot : SyntaxNode
         where TNode : SyntaxNode
     {
-        return (TRoot)root.ReplaceCore(
-            nodes: nodes,
-            computeReplacementNode: computeReplacementNode
-        );
+        return (TRoot)
+            root.ReplaceCore(nodes: nodes, computeReplacementNode: computeReplacementNode);
     }
 
     /// <summary>
@@ -189,10 +185,8 @@ internal static class SyntaxNodeExtensions
             return root;
         }
 
-        return (TRoot)root.ReplaceCore(
-            nodes: new[] { oldNode },
-            computeReplacementNode: (o, r) => newNode
-        );
+        return (TRoot)
+            root.ReplaceCore(nodes: new[] { oldNode }, computeReplacementNode: (o, r) => newNode);
     }
 
     /// <summary>

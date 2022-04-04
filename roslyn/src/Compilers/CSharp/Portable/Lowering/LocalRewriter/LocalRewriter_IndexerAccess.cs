@@ -330,24 +330,25 @@ namespace Microsoft.CodeAnalysis.CSharp
                     throw ExceptionUtilities.UnexpectedValue(strategy);
             }
 
-            return (BoundSequence)F.Sequence(
-                locals.ToImmutableAndFree(),
-                sideeffects.ToImmutableAndFree(),
-                MakeIndexerAccess(
-                    syntax,
-                    receiverLocal,
-                    intIndexer,
-                    ImmutableArray.Create<BoundExpression>(indexAccess),
-                    default,
-                    default,
-                    expanded: false,
-                    argsToParamsOpt: default,
-                    defaultArguments: default,
-                    intIndexer.Type,
-                    oldNodeOpt: null,
-                    isLeftOfAssignment
-                )
-            );
+            return (BoundSequence)
+                F.Sequence(
+                    locals.ToImmutableAndFree(),
+                    sideeffects.ToImmutableAndFree(),
+                    MakeIndexerAccess(
+                        syntax,
+                        receiverLocal,
+                        intIndexer,
+                        ImmutableArray.Create<BoundExpression>(indexAccess),
+                        default,
+                        default,
+                        expanded: false,
+                        argsToParamsOpt: default,
+                        defaultArguments: default,
+                        intIndexer.Type,
+                        oldNodeOpt: null,
+                        isLeftOfAssignment
+                    )
+                );
         }
 
         /// <summary>
@@ -811,11 +812,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 rangeSizeExpr = rangeSizeLocal;
             }
 
-            return (BoundSequence)F.Sequence(
-                localsBuilder.ToImmutableAndFree(),
-                sideEffectsBuilder.ToImmutableAndFree(),
-                F.Call(receiverLocal, sliceMethod, startExpr, rangeSizeExpr)
-            );
+            return (BoundSequence)
+                F.Sequence(
+                    localsBuilder.ToImmutableAndFree(),
+                    sideEffectsBuilder.ToImmutableAndFree(),
+                    F.Call(receiverLocal, sliceMethod, startExpr, rangeSizeExpr)
+                );
         }
     }
 }

@@ -214,8 +214,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             NamedTypeSymbol newUnderlyingOwner = newOwner;
             while (currentIndex >= NamedTypeSymbol.ValueTupleRestIndex)
             {
-                newUnderlyingOwner =
-                    (NamedTypeSymbol)newUnderlyingOwner.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
+                newUnderlyingOwner = (NamedTypeSymbol)
+                    newUnderlyingOwner.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
                         NamedTypeSymbol.ValueTupleRestIndex
                     ].Type;
                 currentIndex -= NamedTypeSymbol.ValueTupleRestIndex;

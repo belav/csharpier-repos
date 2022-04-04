@@ -157,10 +157,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             );
 
             var deserializedObject =
-                (Dictionary<string, Guid>)JsonConvert.DeserializeObject(
-                    serializedString,
-                    jsonSerializerSettings
-                );
+                (Dictionary<string, Guid>)
+                    JsonConvert.DeserializeObject(serializedString, jsonSerializerSettings);
 
             Assert.AreEqual(someValue, deserializedObject[contextKey]);
         }
@@ -445,18 +443,19 @@ namespace Newtonsoft.Json.Tests.Serialization
 ]";
 
             List<object> values =
-                (List<object>)JsonConvert.DeserializeObject(
-                    json,
-                    typeof(List<object>),
-                    new JsonSerializerSettings
-                    {
-                        TypeNameHandling = TypeNameHandling.Objects,
+                (List<object>)
+                    JsonConvert.DeserializeObject(
+                        json,
+                        typeof(List<object>),
+                        new JsonSerializerSettings
+                        {
+                            TypeNameHandling = TypeNameHandling.Objects,
 #pragma warning disable 618
-                        TypeNameAssemblyFormat = FormatterAssemblyStyle.Full,
+                            TypeNameAssemblyFormat = FormatterAssemblyStyle.Full,
 #pragma warning restore 618
-                        MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead
-                    }
-                );
+                            MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead
+                        }
+                    );
 
             Assert.AreEqual(4, values.Count);
 
@@ -664,19 +663,20 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void ReadAhead_TypedJValue_NoParent()
         {
-            ItemWithJTokens actual = (ItemWithJTokens)JsonConvert.DeserializeObject(
-                @"{
+            ItemWithJTokens actual = (ItemWithJTokens)
+                JsonConvert.DeserializeObject(
+                    @"{
   ""Payload1"": 1,
   ""Payload2"": {'prop1':1,'prop2':[2]},
   ""Payload3"": [1],
   ""$type"": ""Newtonsoft.Json.Tests.Serialization.MetadataPropertyHandlingTests+ItemWithJTokens, Newtonsoft.Json.Tests""
 }",
-                new JsonSerializerSettings
-                {
-                    MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead,
-                    TypeNameHandling = TypeNameHandling.All
-                }
-            );
+                    new JsonSerializerSettings
+                    {
+                        MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead,
+                        TypeNameHandling = TypeNameHandling.All
+                    }
+                );
 
             Assert.AreEqual(JTokenType.Integer, actual.Payload1.Type);
             Assert.AreEqual(1, (int)actual.Payload1);

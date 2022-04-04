@@ -815,8 +815,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 Debug.Assert(currentBindingResult.AssemblySymbol is object);
                 Debug.Assert(currentBindingResult.ReferenceBinding is object);
-                var retargetingAssemblySymbol =
-                    (RetargetingAssemblySymbol)currentBindingResult.AssemblySymbol;
+                var retargetingAssemblySymbol = (RetargetingAssemblySymbol)
+                    currentBindingResult.AssemblySymbol;
                 ImmutableArray<ModuleSymbol> modules = retargetingAssemblySymbol.Modules;
                 int moduleCount = modules.Length;
                 int refsUsed = 0;
@@ -913,8 +913,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 Debug.Assert(currentBindingResult.AssemblySymbol is object);
                 Debug.Assert(currentBindingResult.ReferenceBinding is object);
-                var portableExecutableAssemblySymbol =
-                    (PEAssemblySymbol)currentBindingResult.AssemblySymbol;
+                var portableExecutableAssemblySymbol = (PEAssemblySymbol)
+                    currentBindingResult.AssemblySymbol;
 
                 ImmutableArray<ModuleSymbol> modules = portableExecutableAssemblySymbol.Modules;
                 int moduleCount = modules.Length;

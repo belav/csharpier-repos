@@ -119,10 +119,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 {
                     var runtimeSequences = new SortedDictionary<(string, string?), ISequence>();
                     foreach (
-                        var sequencePair in (SortedDictionary<
-                            (string, string?),
-                            ISequence
-                        >)sequences!
+                        var sequencePair in (SortedDictionary<(string, string?), ISequence>)
+                            sequences!
                     )
                     {
                         var runtimeSequence = Create(sequencePair.Value, runtimeModel);
@@ -333,10 +331,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     var runtimePropertyOverrides =
                         new SortedDictionary<StoreObjectIdentifier, object>();
                     foreach (
-                        var overridesPair in (SortedDictionary<
-                            StoreObjectIdentifier,
-                            object
-                        >?)overrides!
+                        var overridesPair in (SortedDictionary<StoreObjectIdentifier, object>?)
+                            overrides!
                     )
                     {
                         var runtimeOverrides = Create(

@@ -37,11 +37,8 @@ namespace Microsoft.CodeAnalysis.Features.RQName.Nodes
                     typeInfo.TypeVariableCount.ToString()
                 )
                 let nameLeaf = new SimpleLeafNode(typeInfo.TypeName)
-                select (SimpleTreeNode)new SimpleGroupNode(
-                    RQNameStrings.AggName,
-                    nameLeaf,
-                    typeParamCountNode
-                );
+                select (SimpleTreeNode)
+                    new SimpleGroupNode(RQNameStrings.AggName, nameLeaf, typeParamCountNode);
             childList.AddRange(typeNodes);
         }
     }

@@ -38,8 +38,8 @@ namespace System.Drawing
                 try
                 {
                     // Use UniqueInstance here because we never want to cache the wrapper. It only gets used once and then disposed.
-                    using DrawingCom.IPicture picture =
-                        (DrawingCom.IPicture)DrawingCom.Instance.GetOrCreateObjectForComInstance(
+                    using DrawingCom.IPicture picture = (DrawingCom.IPicture)
+                        DrawingCom.Instance.GetOrCreateObjectForComInstance(
                             lpPicture,
                             CreateObjectFlags.UniqueInstance
                         );

@@ -281,8 +281,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             }
             catch (AggregateException ex)
             {
-                var operationCancelledException =
-                    (OperationCanceledException)ex.Flatten().InnerException;
+                var operationCancelledException = (OperationCanceledException)
+                    ex.Flatten().InnerException;
                 Assert.Equal(
                     cancellationTokenSource.Token,
                     operationCancelledException.CancellationToken

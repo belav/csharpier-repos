@@ -224,10 +224,8 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
             if (matchParent is TElementAccessExpression elementAccess)
             {
                 Debug.Assert(syntaxFacts.IsElementAccessExpression(elementAccess));
-                var argumentList =
-                    (TElementBindingArgumentList)syntaxFacts.GetArgumentListOfElementAccessExpression(
-                        elementAccess
-                    )!;
+                var argumentList = (TElementBindingArgumentList)
+                    syntaxFacts.GetArgumentListOfElementAccessExpression(elementAccess)!;
                 return whenPart.ReplaceNode(
                     elementAccess,
                     generator.ConditionalAccessExpression(

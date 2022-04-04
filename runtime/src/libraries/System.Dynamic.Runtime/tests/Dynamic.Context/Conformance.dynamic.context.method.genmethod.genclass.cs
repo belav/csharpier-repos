@@ -456,11 +456,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         public static int MainMethod()
         {
             dynamic dy = new MemberClass<InnerTest2>();
-            InnerTest2 result1 = (InnerTest1)dy.Method_ReturnsDynamic<InnerTest1>(
-                new InnerTest2() { field = 0 },
-                new InnerTest1() { field = 10 },
-                0
-            ); //implicit
+            InnerTest2 result1 = (InnerTest1)
+                dy.Method_ReturnsDynamic<InnerTest1>(
+                    new InnerTest2() { field = 0 },
+                    new InnerTest1() { field = 10 },
+                    0
+                ); //implicit
             return (result1.field == 11) ? 0 : 1;
         }
     }
@@ -492,12 +493,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
             List<string> list = new List<string>() { null, string.Empty, "Test" };
             List<string> list2 = new List<string>();
             foreach (
-                dynamic s in (IEnumerable)mc.Method_ReturnsDynamic<int, IEnumerable>(
-                    null,
-                    0,
-                    list,
-                    string.Empty
-                )
+                dynamic s in (IEnumerable)
+                    mc.Method_ReturnsDynamic<int, IEnumerable>(null, 0, list, string.Empty)
             )
             {
                 list2.Add(s);
@@ -836,10 +833,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         public static int MainMethod()
         {
             dynamic mc = new MemberClass<string>();
-            Test result = (Test)mc.Method_ReturnsUConstraint<Test, InnerTest>(
-                null,
-                new InnerTest() { Field = 0 }
-            );
+            Test result = (Test)
+                mc.Method_ReturnsUConstraint<Test, InnerTest>(null, new InnerTest() { Field = 0 });
             if (result == null)
                 return 0;
             else
@@ -919,12 +914,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
             dynamic mc = new MemberClass<string>();
             dynamic mc2 = "Test2";
             dynamic mc3 = "Test3";
-            string result = (string)mc.Method_ReturnsDynamicConstraint<string, C>(
-                null,
-                mc2,
-                new C(),
-                mc3
-            );
+            string result = (string)
+                mc.Method_ReturnsDynamicConstraint<string, C>(null, mc2, new C(), mc3);
             if (result == "Test2" && (string)mc3 == "Test3")
                 return 0;
             else
@@ -961,12 +952,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
             Test mc2 = new Test() { Field = 2 };
             dynamic dy2 = mc2;
             Test mc3 = new InnerTest() { Field = 3 };
-            float result = (float)mc.Method_ReturnsFloatConstraint<Test, InnerTest>(
-                mc2,
-                dy2,
-                mc3,
-                ref dec
-            );
+            float result = (float)
+                mc.Method_ReturnsFloatConstraint<Test, InnerTest>(mc2, dy2, mc3, ref dec);
             if (dec == 3M && result == 3.4f)
                 return 0;
             else
@@ -1003,11 +990,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
             Test mc2 = new Test() { Field = 2 };
             dynamic dy2 = mc2;
             Test mc3 = new InnerTest() { Field = 3 };
-            string result = (string)mc.Method_ReturnsStringConstraint<Test, InnerTest>(
-                mc2,
-                dy2,
-                mc3
-            );
+            string result = (string)
+                mc.Method_ReturnsStringConstraint<Test, InnerTest>(mc2, dy2, mc3);
             if (result == string.Empty)
                 return 0;
             else
@@ -1092,12 +1076,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
             Test mc3 = new InnerTest() { Field = 3 };
             dynamic dy3 = mc3;
             decimal dec = 3;
-            decimal result = (decimal)mc.Method_ReturnsFloatNegConstraint<Test, InnerTest>(
-                dy2,
-                dy2,
-                dy3,
-                ref dec
-            );
+            decimal result = (decimal)
+                mc.Method_ReturnsFloatNegConstraint<Test, InnerTest>(dy2, dy2, dy3, ref dec);
             if (result != 3.4M)
                 return 1;
             return 0;
@@ -1525,11 +1505,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         public static int MainMethod()
         {
             dynamic mc = new MemberClassWithAnotherTypeConstraint<InnerTest, Test>();
-            InnerTest result = (InnerTest)mc.Method_ReturnsDynamic<InnerTest2>(
-                0,
-                new Test(),
-                new InnerTest2()
-            );
+            InnerTest result = (InnerTest)
+                mc.Method_ReturnsDynamic<InnerTest2>(0, new Test(), new InnerTest2());
             if (result == null)
                 return 0;
             else
@@ -1623,11 +1600,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         {
             dynamic dy = new MemberClass<InnerTest2>();
             InnerTest2 result1 = (InnerTest2)(
-                (InnerTest1)dy.Method_ReturnsDynamic<InnerTest1>(
-                    new InnerTest2() { field = 0 },
-                    new InnerTest1() { field = 10 },
-                    0
-                )
+                (InnerTest1)
+                    dy.Method_ReturnsDynamic<InnerTest1>(
+                        new InnerTest2() { field = 0 },
+                        new InnerTest1() { field = 10 },
+                        0
+                    )
             ); //explicit
             return (result1.field == 11) ? 0 : 1;
         }
@@ -2202,11 +2180,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         {
             dynamic dy = new MemberClass<InnerTest2>();
             InnerTest2 result1 = (InnerTest2)(
-                (InnerTest1)dy.Method_ReturnsDynamic(
-                    new InnerTest2() { field = 0 },
-                    new InnerTest1() { field = 10 },
-                    0
-                )
+                (InnerTest1)
+                    dy.Method_ReturnsDynamic(
+                        new InnerTest2() { field = 0 },
+                        new InnerTest1() { field = 10 },
+                        0
+                    )
             ); //explicit
             return (result1.field == 11) ? 0 : 1;
         }

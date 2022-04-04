@@ -667,10 +667,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             );
             if (documentationModeAttribute != null)
             {
-                return (DocumentationMode)Enum.Parse(
-                    typeof(DocumentationMode),
-                    documentationModeAttribute.Value
-                );
+                return (DocumentationMode)
+                    Enum.Parse(typeof(DocumentationMode), documentationModeAttribute.Value);
             }
             else
             {
@@ -803,10 +801,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 var outputKindAttribute = compilationOptionsElement.Attribute(OutputKindName);
                 if (outputKindAttribute != null)
                 {
-                    outputKind = (OutputKind)Enum.Parse(
-                        typeof(OutputKind),
-                        outputKindAttribute.Value
-                    );
+                    outputKind = (OutputKind)
+                        Enum.Parse(typeof(OutputKind), outputKindAttribute.Value);
                 }
 
                 var checkOverflowAttribute = compilationOptionsElement.Attribute(
@@ -830,10 +826,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 );
                 if (reportDiagnosticAttribute != null)
                 {
-                    reportDiagnostic = (ReportDiagnostic)Enum.Parse(
-                        typeof(ReportDiagnostic),
-                        (string)reportDiagnosticAttribute
-                    );
+                    reportDiagnostic = (ReportDiagnostic)
+                        Enum.Parse(typeof(ReportDiagnostic), (string)reportDiagnosticAttribute);
                 }
 
                 var cryptoKeyFileAttribute = compilationOptionsElement.Attribute(
@@ -874,10 +868,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 var nullableAttribute = compilationOptionsElement.Attribute(NullableAttributeName);
                 if (nullableAttribute != null)
                 {
-                    nullable = (NullableContextOptions)Enum.Parse(
-                        typeof(NullableContextOptions),
-                        nullableAttribute.Value
-                    );
+                    nullable = (NullableContextOptions)
+                        Enum.Parse(typeof(NullableContextOptions), nullableAttribute.Value);
                 }
 
                 var outputTypeAttribute = compilationOptionsElement.Attribute(

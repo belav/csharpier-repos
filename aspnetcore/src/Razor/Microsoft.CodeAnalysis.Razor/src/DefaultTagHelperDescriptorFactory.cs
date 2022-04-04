@@ -194,9 +194,8 @@ internal class DefaultTagHelperDescriptorFactory
 
         builder.AllowChildTag(
             childTagBuilder =>
-                childTagBuilder.Name = (string)restrictChildrenAttribute.ConstructorArguments[
-                    0
-                ].Value
+                childTagBuilder.Name = (string)
+                    restrictChildrenAttribute.ConstructorArguments[0].Value
         );
 
         if (restrictChildrenAttribute.ConstructorArguments.Length == 2)

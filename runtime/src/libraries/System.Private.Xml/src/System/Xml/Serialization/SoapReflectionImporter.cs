@@ -365,10 +365,8 @@ namespace System.Xml.Serialization
         )
         {
             TypeDesc typeDesc = baseMapping.TypeDesc!.GetNullableTypeDesc(type);
-            TypeMapping? existingMapping = (TypeMapping?)_nullables[
-                baseMapping.TypeName!,
-                baseMapping.Namespace
-            ];
+            TypeMapping? existingMapping = (TypeMapping?)
+                _nullables[baseMapping.TypeName!, baseMapping.Namespace];
             NullableMapping mapping;
             if (existingMapping != null)
             {
@@ -432,11 +430,8 @@ namespace System.Xml.Serialization
             string typeName = XsdTypeName(model.Type, a, model.TypeDesc.Name);
             typeName = XmlConvert.EncodeLocalName(typeName);
 
-            StructMapping? mapping = (StructMapping?)GetTypeMapping(
-                typeName,
-                typeNs,
-                model.TypeDesc
-            );
+            StructMapping? mapping = (StructMapping?)
+                GetTypeMapping(typeName, typeNs, model.TypeDesc);
             if (mapping == null)
             {
                 mapping = new StructMapping();
@@ -610,10 +605,8 @@ namespace System.Xml.Serialization
             // in the case of an ArrayMapping we can have more that one mapping correspond to a type
             // examples of that are ArrayList and object[] both will map tp ArrayOfur-type
             // so we create a link list for all mappings of the same XSD type
-            ArrayMapping? existingMapping = (ArrayMapping?)_types[
-                mapping.TypeName!,
-                mapping.Namespace
-            ];
+            ArrayMapping? existingMapping = (ArrayMapping?)
+                _types[mapping.TypeName!, mapping.Namespace];
             if (existingMapping != null)
             {
                 ArrayMapping first = existingMapping;

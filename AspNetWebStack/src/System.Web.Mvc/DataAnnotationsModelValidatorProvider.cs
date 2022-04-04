@@ -140,9 +140,8 @@ namespace System.Web.Mvc
             try
             {
                 AttributeFactories[attributeType] = (metadata, context, attribute) =>
-                    (ModelValidator)constructor.Invoke(
-                        new object[] { metadata, context, attribute }
-                    );
+                    (ModelValidator)
+                        constructor.Invoke(new object[] { metadata, context, attribute });
             }
             finally
             {

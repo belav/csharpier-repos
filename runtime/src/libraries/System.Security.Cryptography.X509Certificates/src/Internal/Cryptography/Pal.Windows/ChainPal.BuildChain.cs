@@ -83,9 +83,8 @@ namespace Internal.Cryptography.Pal
                                     certificatePolicyOids.DangerousGetHandle();
                             }
 
-                            chainPara.dwUrlRetrievalTimeout = (int)Math.Floor(
-                                timeout.TotalMilliseconds
-                            );
+                            chainPara.dwUrlRetrievalTimeout = (int)
+                                Math.Floor(timeout.TotalMilliseconds);
 
                             Interop.Crypt32.FILETIME ft = Interop.Crypt32.FILETIME.FromDateTime(
                                 verificationTime

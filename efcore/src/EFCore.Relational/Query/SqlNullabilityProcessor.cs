@@ -784,13 +784,14 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 return inValuesList.Count == 1
                   ? inExpression.IsNegated
-                      ? (SqlExpression)_sqlExpressionFactory.NotEqual(
-                            inExpression.Item,
-                            _sqlExpressionFactory.Constant(
-                                inValuesList[0],
-                                inValuesExpression.TypeMapping
+                      ? (SqlExpression)
+                            _sqlExpressionFactory.NotEqual(
+                                inExpression.Item,
+                                _sqlExpressionFactory.Constant(
+                                    inValuesList[0],
+                                    inValuesExpression.TypeMapping
+                                )
                             )
-                        )
                       : _sqlExpressionFactory.Equal(
                             inExpression.Item,
                             _sqlExpressionFactory.Constant(

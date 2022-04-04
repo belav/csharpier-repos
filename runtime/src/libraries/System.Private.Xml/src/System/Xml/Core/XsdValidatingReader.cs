@@ -1497,9 +1497,8 @@ namespace System.Xml
             else
             {
                 int defaultIndex = i - _coreReaderAttributeCount;
-                ValidatingReaderNodeData attNode = (ValidatingReaderNodeData)_defaultAttributes[
-                    defaultIndex
-                ]!;
+                ValidatingReaderNodeData attNode = (ValidatingReaderNodeData)
+                    _defaultAttributes[defaultIndex]!;
                 Debug.Assert(attNode != null);
                 return attNode.RawValue;
             }

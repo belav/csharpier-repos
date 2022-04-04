@@ -319,8 +319,8 @@ namespace System.IO.Packaging
             if (partUri == null)
                 throw new ArgumentNullException(nameof(partUri));
 
-            PackUriHelper.ValidatedPartUri validatedPartUri =
-                (PackUriHelper.ValidatedPartUri)PackUriHelper.ValidatePartUri(partUri);
+            PackUriHelper.ValidatedPartUri validatedPartUri = (PackUriHelper.ValidatedPartUri)
+                PackUriHelper.ValidatePartUri(partUri);
 
             if (_partList.ContainsKey(validatedPartUri))
             {
@@ -1146,10 +1146,8 @@ namespace System.IO.Packaging
                     //Note - we can safely do this as DoClose is being called on all parts. So ultimately we will end up
                     //closing the source part as well.
                     //This logic only takes care of out of order parts.
-                    PackUriHelper.ValidatedPartUri owningPartUri =
-                        (PackUriHelper.ValidatedPartUri)PackUriHelper.GetSourcePartUriFromRelationshipPartUri(
-                            p.Uri
-                        );
+                    PackUriHelper.ValidatedPartUri owningPartUri = (PackUriHelper.ValidatedPartUri)
+                        PackUriHelper.GetSourcePartUriFromRelationshipPartUri(p.Uri);
                     //If the source part for this rels part exists then we close it.
                     if (_partList.TryGetValue(owningPartUri, out PackagePart? sourcePart))
                         sourcePart.Close();

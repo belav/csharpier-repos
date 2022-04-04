@@ -78,11 +78,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             PropertyAccessMode? propertyAccessMode,
             bool fromDataAnnotation = false
         ) =>
-            (PropertyAccessMode?)SetOrRemoveAnnotation(
-                CoreAnnotationNames.PropertyAccessMode,
-                propertyAccessMode,
-                fromDataAnnotation
-            )?.Value;
+            (PropertyAccessMode?)
+                SetOrRemoveAnnotation(
+                    CoreAnnotationNames.PropertyAccessMode,
+                    propertyAccessMode,
+                    fromDataAnnotation
+                )?.Value;
 
         /// <summary>
         ///     Returns the configuration source for <see cref="IReadOnlyTypeBase.GetPropertyAccessMode" />.
@@ -105,11 +106,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             PropertyAccessMode? propertyAccessMode,
             bool fromDataAnnotation = false
         ) =>
-            (PropertyAccessMode?)SetOrRemoveAnnotation(
-                CoreAnnotationNames.NavigationAccessMode,
-                propertyAccessMode,
-                fromDataAnnotation
-            )?.Value;
+            (PropertyAccessMode?)
+                SetOrRemoveAnnotation(
+                    CoreAnnotationNames.NavigationAccessMode,
+                    propertyAccessMode,
+                    fromDataAnnotation
+                )?.Value;
 
         /// <summary>
         ///     Returns the configuration source for <see cref="IReadOnlyTypeBase.GetNavigationAccessMode" />.

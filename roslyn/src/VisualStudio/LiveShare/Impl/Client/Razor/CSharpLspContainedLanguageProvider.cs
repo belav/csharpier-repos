@@ -46,9 +46,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client.Razor
             IVsTextBufferCoordinator bufferCoordinator
         )
         {
-            var componentModel = (IComponentModel)_serviceProvider.GetService(
-                typeof(SComponentModel)
-            );
+            var componentModel = (IComponentModel)
+                _serviceProvider.GetService(typeof(SComponentModel));
             var projectId = _razorProjectFactory.GetProject(filePath);
 
             return new ContainedLanguage(

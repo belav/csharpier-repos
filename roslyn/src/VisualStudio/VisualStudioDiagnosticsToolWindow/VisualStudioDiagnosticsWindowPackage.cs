@@ -128,12 +128,10 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow
 
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var componentModel = (IComponentModel)await GetServiceAsync(typeof(SComponentModel))
-                .ConfigureAwait(true);
-            var menuCommandService = (IMenuCommandService)await GetServiceAsync(
-                    typeof(IMenuCommandService)
-                )
-                .ConfigureAwait(true);
+            var componentModel = (IComponentModel)
+                await GetServiceAsync(typeof(SComponentModel)).ConfigureAwait(true);
+            var menuCommandService = (IMenuCommandService)
+                await GetServiceAsync(typeof(IMenuCommandService)).ConfigureAwait(true);
 
             cancellationToken.ThrowIfCancellationRequested();
 

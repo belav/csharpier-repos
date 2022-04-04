@@ -41,10 +41,8 @@ public class Tests
     {
         IntPtr ptr = mono_test_marshal_return_fnptr();
 
-        AddDelegate d = (AddDelegate)Marshal.GetDelegateForFunctionPointer(
-            ptr,
-            typeof(AddDelegate)
-        );
+        AddDelegate d = (AddDelegate)
+            Marshal.GetDelegateForFunctionPointer(ptr, typeof(AddDelegate));
 
         return d(2, 2);
     }

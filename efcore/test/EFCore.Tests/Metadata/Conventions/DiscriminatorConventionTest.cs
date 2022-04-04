@@ -289,9 +289,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
         private static InternalEntityTypeBuilder CreateInternalEntityTypeBuilder<T>()
         {
-            var modelBuilder = (InternalModelBuilder)InMemoryTestHelpers.Instance
-                .CreateConventionBuilder()
-                .GetInfrastructure();
+            var modelBuilder = (InternalModelBuilder)
+                InMemoryTestHelpers.Instance.CreateConventionBuilder().GetInfrastructure();
 
             return modelBuilder.Entity(typeof(T), ConfigurationSource.Explicit);
         }

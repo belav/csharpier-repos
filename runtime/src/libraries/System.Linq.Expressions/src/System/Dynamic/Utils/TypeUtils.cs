@@ -38,9 +38,8 @@ namespace System.Dynamic.Utils
         {
             Debug.Assert(nullableType.IsNullableType());
 
-            return (ConstructorInfo)nullableType.GetMemberWithSameMetadataDefinitionAs(
-                s_nullableConstructor
-            );
+            return (ConstructorInfo)
+                nullableType.GetMemberWithSameMetadataDefinitionAs(s_nullableConstructor);
         }
 
         public static bool IsNullableType(this Type type) =>

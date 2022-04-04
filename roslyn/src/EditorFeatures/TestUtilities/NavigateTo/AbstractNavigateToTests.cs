@@ -334,9 +334,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.NavigateTo
                 out ImmutableArray<TextSpan> expectedDisplayNameSpans
             );
 
-            var itemDisplay = (NavigateToItemDisplay)result.DisplayFactory.CreateItemDisplay(
-                result
-            );
+            var itemDisplay = (NavigateToItemDisplay)
+                result.DisplayFactory.CreateItemDisplay(result);
 
             Assert.Equal(itemDisplay.GlyphMoniker, glyph.GetImageMoniker());
 

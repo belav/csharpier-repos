@@ -1106,12 +1106,13 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .OrderBy(c => c.CustomerID)
                         .Select(
                             c =>
-                                (int?)c.Orders
-                                    .OrderBy(o => o.OrderID)
-                                    .FirstOrDefault()
-                                    .OrderDetails.OrderBy(od => od.ProductID)
-                                    .FirstOrDefault()
-                                    .ProductID
+                                (int?)
+                                    c.Orders
+                                        .OrderBy(o => o.OrderID)
+                                        .FirstOrDefault()
+                                        .OrderDetails.OrderBy(od => od.ProductID)
+                                        .FirstOrDefault()
+                                        .ProductID
                         ),
                 ss =>
                     ss.Set<Customer>()

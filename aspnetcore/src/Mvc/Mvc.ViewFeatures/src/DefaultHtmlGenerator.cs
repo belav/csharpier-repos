@@ -1224,10 +1224,8 @@ public class DefaultHtmlGenerator : IHtmlGenerator
                 {
                     // E.g. got a string from ModelState.
                     var methodInfo = ConvertEnumFromStringMethod.MakeGenericMethod(innerType);
-                    enumValue = (Enum)methodInfo.Invoke(
-                        obj: null,
-                        parameters: new[] { stringValue }
-                    );
+                    enumValue = (Enum)
+                        methodInfo.Invoke(obj: null, parameters: new[] { stringValue });
                 }
             }
 
@@ -1483,11 +1481,8 @@ public class DefaultHtmlGenerator : IHtmlGenerator
 
             case InputType.Text:
             default:
-                var attributeValue = (string)GetModelStateValue(
-                    viewContext,
-                    fullName,
-                    typeof(string)
-                );
+                var attributeValue = (string)
+                    GetModelStateValue(viewContext, fullName, typeof(string));
                 if (attributeValue == null)
                 {
                     attributeValue = useViewData

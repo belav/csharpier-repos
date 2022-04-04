@@ -29,14 +29,15 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceModel
                 .Select(
                     a =>
                         a is Eagle
-                            ? (AnimalQuery)new EagleQuery
-                              {
-                                  Name = a.Name,
-                                  CountryId = a.CountryId,
-                                  EagleId = ((Bird)a).EagleId,
-                                  IsFlightless = ((Bird)a).IsFlightless,
-                                  Group = ((Eagle)a).Group,
-                              }
+                            ? (AnimalQuery)
+                                  new EagleQuery
+                                  {
+                                      Name = a.Name,
+                                      CountryId = a.CountryId,
+                                      EagleId = ((Bird)a).EagleId,
+                                      IsFlightless = ((Bird)a).IsFlightless,
+                                      Group = ((Eagle)a).Group,
+                                  }
                             : new KiwiQuery
                               {
                                   Name = a.Name,

@@ -27,8 +27,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             _methodToken = methodToken;
 
             // Ensure types in signature are loadable and resolvable, otherwise we'll fail later while emitting the signature
-            CompilerTypeSystemContext compilerContext =
-                (CompilerTypeSystemContext)delegateType.Context;
+            CompilerTypeSystemContext compilerContext = (CompilerTypeSystemContext)
+                delegateType.Context;
             compilerContext.EnsureLoadableType(delegateType);
             compilerContext.EnsureLoadableMethod(targetMethod.Method);
         }

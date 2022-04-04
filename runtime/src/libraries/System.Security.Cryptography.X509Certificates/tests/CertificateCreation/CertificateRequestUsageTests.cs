@@ -210,8 +210,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                 X509Extension extension = newCert.Extensions["2.5.29.37"];
                 Assert.NotNull(extension);
 
-                X509EnhancedKeyUsageExtension ekuExtension =
-                    (X509EnhancedKeyUsageExtension)extension;
+                X509EnhancedKeyUsageExtension ekuExtension = (X509EnhancedKeyUsageExtension)
+                    extension;
                 Assert.Equal(1, ekuExtension.EnhancedKeyUsages.Count);
                 Assert.Equal("1.3.6.1.5.5.7.3.1", ekuExtension.EnhancedKeyUsages[0].Value);
 

@@ -107,9 +107,8 @@ namespace System.Runtime.CompilerServices
                 }
 
                 ctor =
-                    (Func<CallSiteBinder, CallSite>)method.CreateDelegate(
-                        typeof(Func<CallSiteBinder, CallSite>)
-                    );
+                    (Func<CallSiteBinder, CallSite>)
+                        method.CreateDelegate(typeof(Func<CallSiteBinder, CallSite>));
                 ctors.Add(delegateType, ctor);
             }
 
@@ -355,9 +354,8 @@ namespace System.Runtime.CompilerServices
                 }
                 if (method != null)
                 {
-                    s_cachedNoMatch = (T)(object)noMatchMethod!
-                        .MakeGenericMethod(args)
-                        .CreateDelegate(target);
+                    s_cachedNoMatch = (T)
+                        (object)noMatchMethod!.MakeGenericMethod(args).CreateDelegate(target);
                     return (T)(object)method.MakeGenericMethod(args).CreateDelegate(target);
                 }
             }

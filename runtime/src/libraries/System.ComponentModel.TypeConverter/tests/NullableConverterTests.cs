@@ -111,8 +111,8 @@ namespace System.ComponentModel.Tests
                 NullableConverterTests.s_intNullableConverter
             );
 
-            var actualInstanceDescriptor =
-                (InstanceDescriptor)NullableConverterTests.s_intNullableConverter.ConvertTo(
+            var actualInstanceDescriptor = (InstanceDescriptor)
+                NullableConverterTests.s_intNullableConverter.ConvertTo(
                     NullableConverterTests.s_nullableThree,
                     typeof(InstanceDescriptor)
                 );
@@ -125,8 +125,8 @@ namespace System.ComponentModel.Tests
             Assert.True(actualInstanceDescriptor.IsComplete);
             Assert.Equal(NullableConverterTests.s_nullableThree, actualInstanceDescriptor.Invoke());
 
-            var actualUnInitInstanceDescriptor =
-                (InstanceDescriptor)NullableConverterTests.s_intNullableConverter.ConvertTo(
+            var actualUnInitInstanceDescriptor = (InstanceDescriptor)
+                NullableConverterTests.s_intNullableConverter.ConvertTo(
                     NullableConverterTests.s_uninitializedInt,
                     typeof(InstanceDescriptor)
                 );

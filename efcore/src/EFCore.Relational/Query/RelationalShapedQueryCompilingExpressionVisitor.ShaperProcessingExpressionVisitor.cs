@@ -487,13 +487,12 @@ namespace Microsoft.EntityFrameworkCore.Query
                 )
                 {
                     var newExpression = (NewExpression)binaryExpression.Right;
-                    var projectionBindingExpression =
-                        (ProjectionBindingExpression)newExpression.Arguments[0];
+                    var projectionBindingExpression = (ProjectionBindingExpression)
+                        newExpression.Arguments[0];
 
                     var propertyMap =
-                        (IDictionary<IProperty, int>)GetProjectionIndex(
-                            projectionBindingExpression
-                        );
+                        (IDictionary<IProperty, int>)
+                            GetProjectionIndex(projectionBindingExpression);
                     _materializationContextBindings[parameterExpression] = propertyMap;
                     entityTypeIdentifyingExpressionOffsets[parameterExpression] =
                         propertyMap.Values.Max() + 1;
@@ -1218,9 +1217,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 )
                 {
                     var property = methodCallExpression.Arguments[2].GetConstantValue<IProperty?>();
-                    var mappingParameter = (ParameterExpression)(
-                        (MethodCallExpression)methodCallExpression.Arguments[0]
-                    ).Object!;
+                    var mappingParameter = (ParameterExpression)
+                        ((MethodCallExpression)methodCallExpression.Arguments[0]).Object!;
                     var projectionIndex =
                         property == null
                             ? entityTypeIdentifyingExpressionOffsets[mappingParameter]

@@ -128,11 +128,8 @@ namespace System.Text.Json.Serialization.Tests
 
                 string json = JsonSerializer.Serialize(testObjects[i], testClassType, options);
 
-                ITestClass obj = (ITestClass)JsonSerializer.Deserialize(
-                    json,
-                    testClassType,
-                    options
-                );
+                ITestClass obj = (ITestClass)
+                    JsonSerializer.Deserialize(json, testClassType, options);
                 obj.Verify();
             }
             ;

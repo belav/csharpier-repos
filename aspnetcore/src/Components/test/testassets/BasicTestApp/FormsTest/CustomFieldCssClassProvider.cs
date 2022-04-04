@@ -23,9 +23,10 @@ public class CustomFieldCssClassProvider : FieldCssClassProvider
         var propertyInfo = fieldIdentifier.Model.GetType().GetProperty(fieldIdentifier.FieldName);
         if (propertyInfo != null)
         {
-            var customValidationClassName = (CustomValidationClassNameAttribute)propertyInfo
-                .GetCustomAttributes(typeof(CustomValidationClassNameAttribute), true)
-                .FirstOrDefault();
+            var customValidationClassName = (CustomValidationClassNameAttribute)
+                propertyInfo
+                    .GetCustomAttributes(typeof(CustomValidationClassNameAttribute), true)
+                    .FirstOrDefault();
             if (customValidationClassName != null)
             {
                 cssClassName = string.Join(

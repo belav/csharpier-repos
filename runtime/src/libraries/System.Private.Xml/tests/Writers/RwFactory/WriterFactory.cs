@@ -303,10 +303,8 @@ namespace System.Xml.Tests
 
         protected void SetupSettings()
         {
-            _settings.ConformanceLevel = (ConformanceLevel)Enum.Parse(
-                typeof(ConformanceLevel),
-                ReadFilterCriteria("ConformanceLevel", true)
-            );
+            _settings.ConformanceLevel = (ConformanceLevel)
+                Enum.Parse(typeof(ConformanceLevel), ReadFilterCriteria("ConformanceLevel", true));
             _settings.CheckCharacters = bool.Parse(ReadFilterCriteria("CheckCharacters", true));
             _settings.CloseOutput = false;
 

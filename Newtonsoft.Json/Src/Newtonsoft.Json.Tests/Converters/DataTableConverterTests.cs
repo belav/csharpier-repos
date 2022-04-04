@@ -606,10 +606,11 @@ namespace Newtonsoft.Json.Tests.Converters
             );
 
             var pair2 =
-                (KeyValuePair<DataTable, int>)JsonConvert.DeserializeObject(
-                    serializedpair,
-                    typeof(KeyValuePair<DataTable, int>)
-                );
+                (KeyValuePair<DataTable, int>)
+                    JsonConvert.DeserializeObject(
+                        serializedpair,
+                        typeof(KeyValuePair<DataTable, int>)
+                    );
 
             Assert.AreEqual(1, pair2.Value);
             Assert.AreEqual(1, pair2.Key.Rows.Count);

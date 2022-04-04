@@ -59,11 +59,12 @@ internal static class QuicTestHelpers
         var endpoint = new IPEndPoint(IPAddress.Loopback, 0);
 
         var features = CreateBindAsyncFeatures(clientCertificateRequired);
-        return (QuicConnectionListener)await transportFactory.BindAsync(
-            endpoint,
-            features,
-            cancellationToken: CancellationToken.None
-        );
+        return (QuicConnectionListener)
+            await transportFactory.BindAsync(
+                endpoint,
+                features,
+                cancellationToken: CancellationToken.None
+            );
     }
 
     public static FeatureCollection CreateBindAsyncFeatures(bool clientCertificateRequired = false)

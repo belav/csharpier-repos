@@ -252,9 +252,10 @@ namespace System.Net.Http.Functional.Tests
             // Expect SETTINGS ACK from client:
             await connection.ExpectSettingsAckAsync();
 
-            int maxCredit = (int)clientSettingsFrame.Entries
-                .SingleOrDefault(e => e.SettingId == SettingId.InitialWindowSize)
-                .Value;
+            int maxCredit = (int)
+                clientSettingsFrame.Entries
+                    .SingleOrDefault(e => e.SettingId == SettingId.InitialWindowSize)
+                    .Value;
             if (maxCredit == default)
                 maxCredit = DefaultInitialWindowSize;
             int credit = maxCredit;

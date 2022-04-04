@@ -574,8 +574,8 @@ namespace ILCompiler
                                 .Instantiation;
                         }
 
-                        GenericParameterDesc genericParam =
-                            (GenericParameterDesc)entityDefinitionInstantiation[iInstantiation];
+                        GenericParameterDesc genericParam = (GenericParameterDesc)
+                            entityDefinitionInstantiation[iInstantiation];
                         if (instType.IsPrimitive)
                         {
                             if (genericParam.HasReferenceTypeConstraint)

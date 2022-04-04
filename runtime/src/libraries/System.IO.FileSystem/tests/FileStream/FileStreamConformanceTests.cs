@@ -74,9 +74,8 @@ namespace System.IO.Tests
             ReadWriteMode mode
         )
         {
-            using FileStream stream = (FileStream)await CreateWriteOnlyStreamCore(
-                Array.Empty<byte>()
-            );
+            using FileStream stream = (FileStream)
+                await CreateWriteOnlyStreamCore(Array.Empty<byte>());
             byte[] buffer = new byte[] { 0, 1, 2, 3, 4 };
             await WriteAsync(mode, stream, buffer, 0, buffer.Length);
 
@@ -169,10 +168,8 @@ namespace System.IO.Tests
         [InlineData(FileAccess.ReadWrite)] // FileAccess.Read does not allow for length manipulations
         public async Task LengthIsNotCachedAfterHandleHasBeenExposed(FileAccess fileAccess)
         {
-            using FileStream stream = (FileStream)await CreateStream(
-                Array.Empty<byte>(),
-                fileAccess
-            );
+            using FileStream stream = (FileStream)
+                await CreateStream(Array.Empty<byte>(), fileAccess);
             using FileStream createdFromHandle = new FileStream(stream.SafeFileHandle, fileAccess);
 
             Assert.Equal(0, stream.Length);

@@ -74,10 +74,12 @@ namespace System.Buffers
                     Debug.Assert(positionObject is string);
 
                     memory =
-                        (ReadOnlyMemory<T>)(object)((string)positionObject).AsMemory(
-                            startIndex,
-                            endIndex - startIndex
-                        );
+                        (ReadOnlyMemory<T>)
+                            (object)
+                                ((string)positionObject).AsMemory(
+                                    startIndex,
+                                    endIndex - startIndex
+                                );
                 }
                 else // type == SequenceType.MemoryManager
                 {
@@ -164,10 +166,12 @@ namespace System.Buffers
                 if (typeof(T) == typeof(char) && endIndex < 0)
                 {
                     // No need to remove the FlagBitMask since (endIndex - startIndex) == (endIndex & ReadOnlySequence.IndexBitMask) - (startIndex & ReadOnlySequence.IndexBitMask)
-                    return (ReadOnlyMemory<T>)(object)((string)startObject).AsMemory(
-                        startIndex & ReadOnlySequence.IndexBitMask,
-                        endIndex - startIndex
-                    );
+                    return (ReadOnlyMemory<T>)
+                        (object)
+                            ((string)startObject).AsMemory(
+                                startIndex & ReadOnlySequence.IndexBitMask,
+                                endIndex - startIndex
+                            );
                 }
                 else // endIndex >= 0, A == 1 && B == 0 means SequenceType.MemoryManager
                 {
@@ -470,16 +474,14 @@ namespace System.Buffers
 
                 if (sliceStartObject != null)
                 {
-                    sliceStartRange += (ulong)(
-                        (ReadOnlySequenceSegment<T>)sliceStartObject
-                    ).RunningIndex;
+                    sliceStartRange += (ulong)
+                        ((ReadOnlySequenceSegment<T>)sliceStartObject).RunningIndex;
                 }
 
                 if (sliceEndObject != null)
                 {
-                    sliceEndRange += (ulong)(
-                        (ReadOnlySequenceSegment<T>)sliceEndObject
-                    ).RunningIndex;
+                    sliceEndRange += (ulong)
+                        ((ReadOnlySequenceSegment<T>)sliceEndObject).RunningIndex;
                 }
 
                 if (sliceStartRange > sliceEndRange)

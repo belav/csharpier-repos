@@ -181,10 +181,8 @@ namespace System.Runtime.Loader.Tests
                     "System.Runtime.Loader.Tests.ContextualReflectionTestFixture"
                 );
 
-                isolatedAlcFixtureInstance =
-                    (IContextualReflectionTestFixture)Activator.CreateInstance(
-                        isolatedAlcFixtureType
-                    );
+                isolatedAlcFixtureInstance = (IContextualReflectionTestFixture)
+                    Activator.CreateInstance(isolatedAlcFixtureType);
             }
             else
             {

@@ -104,9 +104,8 @@ class Tests
     {
         double arg1 = 1.0f;
         double s = 2.0f;
-        var res = (double)typeof(Foo<double>)
-            .GetMethod("Get_T")
-            .Invoke(null, new object[] { arg1, s });
+        var res = (double)
+            typeof(Foo<double>).GetMethod("Get_T").Invoke(null, new object[] { arg1, s });
         if (res != 2.0f)
             return 1;
         return 0;
@@ -117,9 +116,8 @@ class Tests
     {
         double arg1 = 1.0f;
         float s = 2.0f;
-        var res = (float)typeof(Foo<float>)
-            .GetMethod("Get_T")
-            .Invoke(null, new object[] { arg1, s });
+        var res = (float)
+            typeof(Foo<float>).GetMethod("Get_T").Invoke(null, new object[] { arg1, s });
         if (res != 2.0f)
             return 1;
         return 0;
@@ -131,9 +129,8 @@ class Tests
         double arg1 = 1.0f;
         int arg2 = 1;
         double s = 2.0f;
-        var res = (double)typeof(Foo2<double>)
-            .GetMethod("Get_T3")
-            .Invoke(null, new object[] { arg1, arg2, s });
+        var res = (double)
+            typeof(Foo2<double>).GetMethod("Get_T3").Invoke(null, new object[] { arg1, arg2, s });
         if (res != 2.0f)
             return 1;
         return 0;
@@ -145,9 +142,8 @@ class Tests
         double arg1 = 1.0f;
         int arg2 = 1;
         float s = 2.0f;
-        var res = (float)typeof(Foo2<float>)
-            .GetMethod("Get_T3")
-            .Invoke(null, new object[] { arg1, arg2, s });
+        var res = (float)
+            typeof(Foo2<float>).GetMethod("Get_T3").Invoke(null, new object[] { arg1, arg2, s });
         if (res != 2.0f)
             return 1;
         return 0;
@@ -159,9 +155,8 @@ class Tests
         int arg1 = 1;
         double arg2 = 1.0f;
         int s = 2;
-        var res = (int)typeof(Foo2<int>)
-            .GetMethod("Get_T4")
-            .Invoke(null, new object[] { arg1, arg2, s });
+        var res = (int)
+            typeof(Foo2<int>).GetMethod("Get_T4").Invoke(null, new object[] { arg1, arg2, s });
         if (res != 2)
             return 1;
         return 0;
@@ -173,9 +168,8 @@ class Tests
         int arg1 = 1;
         double arg2 = 1.0f;
         object s = new object();
-        var res = (object)typeof(Foo2<object>)
-            .GetMethod("Get_T4")
-            .Invoke(null, new object[] { arg1, arg2, s });
+        var res = (object)
+            typeof(Foo2<object>).GetMethod("Get_T4").Invoke(null, new object[] { arg1, arg2, s });
         if (res != s)
             return 1;
         return 0;
@@ -189,9 +183,8 @@ class Tests
         var s = new Struct1();
         s.a = 1.0f;
         s.b = 2.0f;
-        var s_res = (Struct1)typeof(Foo<Struct1>)
-            .GetMethod("Get_T")
-            .Invoke(null, new object[] { arg1, s });
+        var s_res = (Struct1)
+            typeof(Foo<Struct1>).GetMethod("Get_T").Invoke(null, new object[] { arg1, s });
         if (s_res.a != 1.0f || s_res.b != 2.0f)
             return 1;
         return 0;
@@ -204,9 +197,8 @@ class Tests
         var s = new Struct2();
         s.a = 1.0f;
         s.b = 2.0f;
-        var s_res = (Struct2)typeof(Foo<Struct2>)
-            .GetMethod("Get_T")
-            .Invoke(null, new object[] { arg1, s });
+        var s_res = (Struct2)
+            typeof(Foo<Struct2>).GetMethod("Get_T").Invoke(null, new object[] { arg1, s });
         if (s_res.a != 1.0f || s_res.b != 2.0f)
             return 1;
         return 0;
@@ -216,9 +208,10 @@ class Tests
     static int test_0_amd64_dyncall_use_stack_float()
     {
         float s = 10.0f;
-        var res = (float)typeof(Foo2<float>)
-            .GetMethod("Get_T2")
-            .Invoke(null, new object[] { 1.0f, 2, 3, 4, 5, 6, 7, 8, 9, s });
+        var res = (float)
+            typeof(Foo2<float>)
+                .GetMethod("Get_T2")
+                .Invoke(null, new object[] { 1.0f, 2, 3, 4, 5, 6, 7, 8, 9, s });
         if (res != s)
             return 1;
         return 0;
@@ -228,9 +221,10 @@ class Tests
     static int test_0_amd64_dyncall_use_stack_double()
     {
         double s = 10.0f;
-        var res = (double)typeof(Foo2<double>)
-            .GetMethod("Get_T2")
-            .Invoke(null, new object[] { 1.0f, 2, 3, 4, 5, 6, 7, 8, 9, s });
+        var res = (double)
+            typeof(Foo2<double>)
+                .GetMethod("Get_T2")
+                .Invoke(null, new object[] { 1.0f, 2, 3, 4, 5, 6, 7, 8, 9, s });
         if (res != s)
             return 1;
         return 0;
@@ -240,9 +234,10 @@ class Tests
     static int test_0_amd64_dyncall_use_stack_int()
     {
         int s = 10;
-        var res = (int)typeof(Foo2<int>)
-            .GetMethod("Get_T2")
-            .Invoke(null, new object[] { 1.0f, 2, 3, 4, 5, 6, 7, 8, 9, s });
+        var res = (int)
+            typeof(Foo2<int>)
+                .GetMethod("Get_T2")
+                .Invoke(null, new object[] { 1.0f, 2, 3, 4, 5, 6, 7, 8, 9, s });
         if (res != s)
             return 1;
         return 0;
@@ -252,9 +247,10 @@ class Tests
     static int test_0_amd64_dyncall_use_stack_ref()
     {
         object s = new object();
-        var res = (object)typeof(Foo2<object>)
-            .GetMethod("Get_T2")
-            .Invoke(null, new object[] { 1.0f, 2, 3, 4, 5, 6, 7, 8, 9, s });
+        var res = (object)
+            typeof(Foo2<object>)
+                .GetMethod("Get_T2")
+                .Invoke(null, new object[] { 1.0f, 2, 3, 4, 5, 6, 7, 8, 9, s });
         if (res != s)
             return 1;
         return 0;
@@ -266,9 +262,10 @@ class Tests
         Struct1 s = new Struct1();
         s.a = 10.0f;
         s.b = 11.0f;
-        var res = (Struct1)typeof(Foo2<Struct1>)
-            .GetMethod("Get_T2")
-            .Invoke(null, new object[] { 1.0f, 2, 3, 4, 5, 6, 7, 8, 9, s });
+        var res = (Struct1)
+            typeof(Foo2<Struct1>)
+                .GetMethod("Get_T2")
+                .Invoke(null, new object[] { 1.0f, 2, 3, 4, 5, 6, 7, 8, 9, s });
         if (res.a != s.a || res.b != s.b)
             return 1;
         return 0;
@@ -354,9 +351,10 @@ class Tests
         // Call Foo2.Get_T directly, so its gets an instance
         Foo2<VTypeByRefStruct>.Get_T(1.0f, s);
         var o =
-            (IFaceFoo4<VTypeByRefStruct>)Activator.CreateInstance(
-                typeof(Foo4<>).MakeGenericType(new Type[] { typeof(VTypeByRefStruct) })
-            );
+            (IFaceFoo4<VTypeByRefStruct>)
+                Activator.CreateInstance(
+                    typeof(Foo4<>).MakeGenericType(new Type[] { typeof(VTypeByRefStruct) })
+                );
         // Call Foo4.Get_T, this will call the gsharedvt instance, which will call the non-gsharedvt instance
         var s_res = o.Get_T(1.0f, s);
         if (s_res.o1 != 1 || s_res.o2 != 2 || s_res.o3 != 3)
@@ -455,22 +453,23 @@ class Tests
     {
         var m = typeof(Foo7).GetMethod("vtypeonstack_align");
 
-        string s = (string)m.Invoke(
-            null,
-            new object[]
-            {
+        string s = (string)
+            m.Invoke(
                 null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                true,
-                new Struct7() { value = "ABC" }
-            }
-        );
+                new object[]
+                {
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    true,
+                    new Struct7() { value = "ABC" }
+                }
+            );
         return s == "ABC" ? 0 : 1;
     }
 
@@ -597,40 +596,45 @@ class Tests
 
         v = 42;
         NullableMethods.GetHasValue(v);
-        bool b = (bool)typeof(NullableMethods)
-            .GetMethod("GetHasValue")
-            .MakeGenericMethod(new Type[] { typeof(int) })
-            .Invoke(null, new object[] { v });
+        bool b = (bool)
+            typeof(NullableMethods)
+                .GetMethod("GetHasValue")
+                .MakeGenericMethod(new Type[] { typeof(int) })
+                .Invoke(null, new object[] { v });
         if (!b)
             return 1;
         v = null;
-        b = (bool)typeof(NullableMethods)
-            .GetMethod("GetHasValue")
-            .MakeGenericMethod(new Type[] { typeof(int) })
-            .Invoke(null, new object[] { v });
+        b = (bool)
+            typeof(NullableMethods)
+                .GetMethod("GetHasValue")
+                .MakeGenericMethod(new Type[] { typeof(int) })
+                .Invoke(null, new object[] { v });
         if (b)
             return 2;
 
         v = 42;
         NullableMethods.GetValue(v);
-        var res = (int)typeof(NullableMethods)
-            .GetMethod("GetValue")
-            .MakeGenericMethod(new Type[] { typeof(int) })
-            .Invoke(null, new object[] { v });
+        var res = (int)
+            typeof(NullableMethods)
+                .GetMethod("GetValue")
+                .MakeGenericMethod(new Type[] { typeof(int) })
+                .Invoke(null, new object[] { v });
         if (res != 42)
             return 3;
 
         NullableMethods.Get(42);
-        var res2 = (int?)typeof(NullableMethods)
-            .GetMethod("Get")
-            .MakeGenericMethod(new Type[] { typeof(int) })
-            .Invoke(null, new object[] { 42 });
+        var res2 = (int?)
+            typeof(NullableMethods)
+                .GetMethod("Get")
+                .MakeGenericMethod(new Type[] { typeof(int) })
+                .Invoke(null, new object[] { 42 });
         if (res2 != 42)
             return 4;
-        res2 = (int?)typeof(NullableMethods)
-            .GetMethod("GetNull")
-            .MakeGenericMethod(new Type[] { typeof(int) })
-            .Invoke(null, new object[] { });
+        res2 = (int?)
+            typeof(NullableMethods)
+                .GetMethod("GetNull")
+                .MakeGenericMethod(new Type[] { typeof(int) })
+                .Invoke(null, new object[] { });
         if (res2.HasValue)
             return 5;
 
@@ -668,46 +672,47 @@ class Tests
             7,
             8
         );
-        res2 = (int?)typeof(NullableMethods)
-            .GetMethod("NullableMany")
-            .Invoke(
-                null,
-                new object[]
-                {
-                    1L,
-                    2L,
-                    3L,
-                    4L,
-                    5L,
-                    6L,
-                    7L,
-                    8L,
-                    1L,
-                    2L,
-                    3L,
-                    4L,
-                    5L,
-                    6L,
-                    7L,
-                    8L,
-                    1L,
-                    2L,
-                    3L,
-                    4L,
-                    5L,
-                    6L,
-                    7L,
-                    8L,
-                    1L,
-                    2L,
-                    3L,
-                    4L,
-                    5L,
-                    6L,
-                    7L,
-                    8L
-                }
-            );
+        res2 = (int?)
+            typeof(NullableMethods)
+                .GetMethod("NullableMany")
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        1L,
+                        2L,
+                        3L,
+                        4L,
+                        5L,
+                        6L,
+                        7L,
+                        8L,
+                        1L,
+                        2L,
+                        3L,
+                        4L,
+                        5L,
+                        6L,
+                        7L,
+                        8L,
+                        1L,
+                        2L,
+                        3L,
+                        4L,
+                        5L,
+                        6L,
+                        7L,
+                        8L,
+                        1L,
+                        2L,
+                        3L,
+                        4L,
+                        5L,
+                        6L,
+                        7L,
+                        8L
+                    }
+                );
         if (res2 != 36)
             return 6;
         return 0;
@@ -731,12 +736,14 @@ class Tests
             "GetHasValueManyArgs",
             BindingFlags.Static | BindingFlags.Public
         );
-        bool b1 = (bool)m.MakeGenericMethod(new Type[] { type })
-            .Invoke(null, new object[] { 1, 2, 3, 4, 5, 6, 7, 8, s });
+        bool b1 = (bool)
+            m.MakeGenericMethod(new Type[] { type })
+                .Invoke(null, new object[] { 1, 2, 3, 4, 5, 6, 7, 8, s });
         if (!b1)
             return 1;
-        bool b2 = (bool)m.MakeGenericMethod(new Type[] { type })
-            .Invoke(null, new object[] { 1, 2, 3, 4, 5, 6, 7, 8, null });
+        bool b2 = (bool)
+            m.MakeGenericMethod(new Type[] { type })
+                .Invoke(null, new object[] { 1, 2, 3, 4, 5, 6, 7, 8, null });
         if (b2)
             return 2;
         return 0;
@@ -909,8 +916,8 @@ class Tests
         bool b1 = (bool)m.MakeGenericMethod(new Type[] { type }).Invoke(null, new object[] { s });
         if (!b1)
             return 1;
-        bool b2 = (bool)m.MakeGenericMethod(new Type[] { type })
-            .Invoke(null, new object[] { null });
+        bool b2 = (bool)
+            m.MakeGenericMethod(new Type[] { type }).Invoke(null, new object[] { null });
         if (b2)
             return 2;
         return 0;

@@ -137,13 +137,14 @@ namespace System.Text.Json.Serialization.Tests
                 JsonSerializerOptions options
             )
             {
-                JsonConverter converter = (JsonConverter)Activator.CreateInstance(
-                    typeof(JsonConverterEnumArray<>).MakeGenericType(typeToConvert),
-                    BindingFlags.Instance | BindingFlags.Public,
-                    binder: null,
-                    args: null,
-                    culture: null
-                );
+                JsonConverter converter = (JsonConverter)
+                    Activator.CreateInstance(
+                        typeof(JsonConverterEnumArray<>).MakeGenericType(typeToConvert),
+                        BindingFlags.Instance | BindingFlags.Public,
+                        binder: null,
+                        args: null,
+                        culture: null
+                    );
 
                 return converter;
             }

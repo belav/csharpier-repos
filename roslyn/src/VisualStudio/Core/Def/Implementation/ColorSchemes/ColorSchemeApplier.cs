@@ -89,9 +89,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
             _ = _colorSchemeRegistryItems.GetValueAsync(CancellationToken.None);
 
             // We need to update the theme whenever the Editor Color Scheme setting changes or the VS Theme changes.
-            var settingsManager = (ISettingsManager)_serviceProvider.GetService(
-                typeof(SVsSettingsPersistenceManager)
-            );
+            var settingsManager = (ISettingsManager)
+                _serviceProvider.GetService(typeof(SVsSettingsPersistenceManager));
             settingsManager
                 .GetSubset(ColorSchemeOptions.ColorSchemeSettingKey)
                 .SettingChangedAsync += ColorSchemeChangedAsync;
@@ -203,9 +202,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
         {
             AssertIsForeground();
 
-            var settingsManager = (ISettingsManager)_serviceProvider.GetService(
-                typeof(SVsSettingsPersistenceManager)
-            );
+            var settingsManager = (ISettingsManager)
+                _serviceProvider.GetService(typeof(SVsSettingsPersistenceManager));
 
             //  Look up the value from the new roamed theme property first
             //  Fallback to the original roamed theme property if that fails

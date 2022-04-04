@@ -540,9 +540,8 @@ namespace System.Data.OleDb
             OleDbHResult errorCode
         )
         {
-            OleDbInfoMessageEventHandler? handler = (OleDbInfoMessageEventHandler?)Events[
-                EventInfoMessage
-            ];
+            OleDbInfoMessageEventHandler? handler = (OleDbInfoMessageEventHandler?)
+                Events[EventInfoMessage];
             if (null != handler)
             {
                 try

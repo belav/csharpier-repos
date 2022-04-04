@@ -124,10 +124,8 @@ namespace System.ComponentModel
             }
             else if (destinationType == typeof(InstanceDescriptor))
             {
-                ConstructorInfo ci =
-                    (ConstructorInfo)NullableType.GetMemberWithSameMetadataDefinitionAs(
-                        s_nullableConstructor
-                    );
+                ConstructorInfo ci = (ConstructorInfo)
+                    NullableType.GetMemberWithSameMetadataDefinitionAs(s_nullableConstructor);
                 Debug.Assert(ci != null, "Couldn't find constructor");
                 return new InstanceDescriptor(ci, new object?[] { value }, true);
             }

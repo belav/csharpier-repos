@@ -93,10 +93,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                                 runtime
                             )
                     );
-                    runtimeServiceProperty.ParameterBinding = (ServiceParameterBinding)Create(
-                        serviceProperty.ParameterBinding,
-                        runtimeEntityType
-                    );
+                    runtimeServiceProperty.ParameterBinding = (ServiceParameterBinding)
+                        Create(serviceProperty.ParameterBinding, runtimeEntityType);
                 }
 
                 foreach (var key in entityType.GetDeclaredKeys())
@@ -418,9 +416,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             RuntimeModel model
         )
         {
-            var valueConverterType = (Type?)typeConfiguration[
-                CoreAnnotationNames.ValueConverterType
-            ];
+            var valueConverterType = (Type?)
+                typeConfiguration[CoreAnnotationNames.ValueConverterType];
             var valueConverter =
                 valueConverterType == null
                     ? null

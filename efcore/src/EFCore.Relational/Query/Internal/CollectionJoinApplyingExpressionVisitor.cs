@@ -59,10 +59,10 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     _logger.MultipleCollectionIncludeWarning();
                 }
 
-                var projectionBindingExpression =
-                    (ProjectionBindingExpression)collectionShaperExpression.Projection;
-                var selectExpression =
-                    (SelectExpression)projectionBindingExpression.QueryExpression;
+                var projectionBindingExpression = (ProjectionBindingExpression)
+                    collectionShaperExpression.Projection;
+                var selectExpression = (SelectExpression)
+                    projectionBindingExpression.QueryExpression;
                 // Do pushdown beforehand so it updates all pending collections first
                 if (
                     selectExpression.IsDistinct

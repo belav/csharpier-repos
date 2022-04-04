@@ -389,13 +389,14 @@ namespace System.Runtime.Loader.Tests
                 {
                     Type describeType = Type.GetType(type);
 
-                    result = (String)describeType.InvokeMember(
-                        "Describe",
-                        BindingFlags.InvokeMethod,
-                        null,
-                        null,
-                        new object[] { culture }
-                    );
+                    result = (String)
+                        describeType.InvokeMember(
+                            "Describe",
+                            BindingFlags.InvokeMethod,
+                            null,
+                            null,
+                            new object[] { culture }
+                        );
                 }
             }
             catch (Exception e)

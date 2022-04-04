@@ -79,8 +79,8 @@ namespace System.Threading
                 }
                 else
                 {
-                    ParameterizedThreadStart parameterizedThreadStart =
-                        (ParameterizedThreadStart)start;
+                    ParameterizedThreadStart parameterizedThreadStart = (ParameterizedThreadStart)
+                        start;
 
                     object? startArg = _startArg;
                     _startArg = null;

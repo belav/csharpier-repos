@@ -76,10 +76,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
 
             foreach (var parameterNode in listOfParameterNodes)
             {
-                var parameter = (IParameterSymbol)semanticModel.GetRequiredDeclaredSymbol(
-                    parameterNode,
-                    cancellationToken
-                );
+                var parameter = (IParameterSymbol)
+                    semanticModel.GetRequiredDeclaredSymbol(parameterNode, cancellationToken);
                 if (
                     ParameterValidForNullCheck(
                         document,
@@ -297,10 +295,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
         {
             foreach (var parameterNode in parameterNodes)
             {
-                var parameter = (IParameterSymbol)semanticModel.GetRequiredDeclaredSymbol(
-                    parameterNode,
-                    cancellationToken
-                );
+                var parameter = (IParameterSymbol)
+                    semanticModel.GetRequiredDeclaredSymbol(parameterNode, cancellationToken);
                 if (index == parameter.Ordinal)
                 {
                     return parameter;
@@ -609,14 +605,13 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
         ) =>
             CreateParameterCheckIfStatement(
                 optionSet,
-                (TExpressionSyntax)generator.CreateNullCheckExpression(
-                    semanticModel,
-                    parameter.Name
-                ),
-                (TStatementSyntax)generator.CreateThrowArgumentNullExceptionStatement(
-                    semanticModel.Compilation,
-                    parameter
-                )
+                (TExpressionSyntax)
+                    generator.CreateNullCheckExpression(semanticModel, parameter.Name),
+                (TStatementSyntax)
+                    generator.CreateThrowArgumentNullExceptionStatement(
+                        semanticModel.Compilation,
+                        parameter
+                    )
             );
 
         private TStatementSyntax CreateStringCheckStatement(
@@ -630,16 +625,18 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             var stringType = compilation.GetSpecialType(SpecialType.System_String);
 
             // generates: if (string.IsXXX(s)) throw new ArgumentException("message", nameof(s))
-            var condition = (TExpressionSyntax)generator.InvocationExpression(
-                generator.MemberAccessExpression(
-                    generator.TypeExpression(stringType),
-                    generator.IdentifierName(methodName)
-                ),
-                generator.Argument(generator.IdentifierName(parameter.Name))
-            );
-            var throwStatement = (TStatementSyntax)generator.ThrowStatement(
-                CreateArgumentException(compilation, generator, parameter, methodName)
-            );
+            var condition = (TExpressionSyntax)
+                generator.InvocationExpression(
+                    generator.MemberAccessExpression(
+                        generator.TypeExpression(stringType),
+                        generator.IdentifierName(methodName)
+                    ),
+                    generator.Argument(generator.IdentifierName(parameter.Name))
+                );
+            var throwStatement = (TStatementSyntax)
+                generator.ThrowStatement(
+                    CreateArgumentException(compilation, generator, parameter, methodName)
+                );
 
             return CreateParameterCheckIfStatement(optionSet, condition, throwStatement);
         }

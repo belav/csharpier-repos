@@ -171,10 +171,8 @@ namespace System.Text
             {
                 // Unrecognized fallback mechanism - count chars manually.
 
-                byteCount = (int)Latin1Utility.GetIndexOfFirstNonLatin1Char(
-                    pChars,
-                    (uint)charsLength
-                );
+                byteCount = (int)
+                    Latin1Utility.GetIndexOfFirstNonLatin1Char(pChars, (uint)charsLength);
             }
 
             charsConsumed = byteCount;
@@ -415,11 +413,12 @@ namespace System.Text
             out int charsConsumed
         )
         {
-            int bytesWritten = (int)Latin1Utility.NarrowUtf16ToLatin1(
-                pChars,
-                pBytes,
-                (uint)Math.Min(charsLength, bytesLength)
-            );
+            int bytesWritten = (int)
+                Latin1Utility.NarrowUtf16ToLatin1(
+                    pChars,
+                    pBytes,
+                    (uint)Math.Min(charsLength, bytesLength)
+                );
 
             charsConsumed = bytesWritten;
             return bytesWritten;

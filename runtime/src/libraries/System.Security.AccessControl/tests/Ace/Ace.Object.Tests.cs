@@ -392,18 +392,19 @@ namespace System.Security.AccessControl.Tests
         [Fact]
         public void ObjectAce_CreateBinaryForm_Invalid()
         {
-            ObjectAce ace = (ObjectAce)ObjectAce_CreateTestData(
-                0,
-                0,
-                1,
-                "S-1-5-11",
-                1,
-                "{73D03E18-5C03-422c-9EC7-C4C5B1CB1612}",
-                "{3CFD5DF9-9146-43c8-BF99-78E7E2DE4BAF}",
-                false,
-                8,
-                0
-            )[0];
+            ObjectAce ace = (ObjectAce)
+                ObjectAce_CreateTestData(
+                    0,
+                    0,
+                    1,
+                    "S-1-5-11",
+                    1,
+                    "{73D03E18-5C03-422c-9EC7-C4C5B1CB1612}",
+                    "{3CFD5DF9-9146-43c8-BF99-78E7E2DE4BAF}",
+                    false,
+                    8,
+                    0
+                )[0];
             AssertExtensions.Throws<ArgumentNullException>(
                 "binaryForm",
                 () => ObjectAce.CreateFromBinaryForm(null, 1)
@@ -425,18 +426,19 @@ namespace System.Security.AccessControl.Tests
         [Fact]
         public void ObjectAce_GetBinaryForm_Invalid()
         {
-            ObjectAce ace = (ObjectAce)ObjectAce_CreateTestData(
-                0,
-                0,
-                1,
-                "S-1-5-11",
-                1,
-                "{73D03E18-5C03-422c-9EC7-C4C5B1CB1612}",
-                "{3CFD5DF9-9146-43c8-BF99-78E7E2DE4BAF}",
-                false,
-                8,
-                0
-            )[0];
+            ObjectAce ace = (ObjectAce)
+                ObjectAce_CreateTestData(
+                    0,
+                    0,
+                    1,
+                    "S-1-5-11",
+                    1,
+                    "{73D03E18-5C03-422c-9EC7-C4C5B1CB1612}",
+                    "{3CFD5DF9-9146-43c8-BF99-78E7E2DE4BAF}",
+                    false,
+                    8,
+                    0
+                )[0];
             AssertExtensions.Throws<ArgumentNullException>(
                 "binaryForm",
                 () => ace.GetBinaryForm(null, 1)

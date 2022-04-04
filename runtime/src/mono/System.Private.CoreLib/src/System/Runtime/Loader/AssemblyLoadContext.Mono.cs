@@ -186,9 +186,8 @@ namespace System.Runtime.Loader
             if (gchManagedAssemblyLoadContext == IntPtr.Zero)
                 context = Default;
             else
-                context = (AssemblyLoadContext)(
-                    GCHandle.FromIntPtr(gchManagedAssemblyLoadContext).Target
-                )!;
+                context = (AssemblyLoadContext)
+                    (GCHandle.FromIntPtr(gchManagedAssemblyLoadContext).Target)!;
             return context;
         }
 

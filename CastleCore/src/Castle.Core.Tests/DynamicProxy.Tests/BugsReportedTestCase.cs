@@ -27,11 +27,12 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void InterfaceInheritance()
         {
-            ICameraService proxy = (ICameraService)generator.CreateInterfaceProxyWithTarget(
-                typeof(ICameraService),
-                new CameraService(),
-                new StandardInterceptor()
-            );
+            ICameraService proxy = (ICameraService)
+                generator.CreateInterfaceProxyWithTarget(
+                    typeof(ICameraService),
+                    new CameraService(),
+                    new StandardInterceptor()
+                );
 
             Assert.IsNotNull(proxy);
 
@@ -42,11 +43,12 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void ProxyInterfaceWithSetterOnly()
         {
-            IHaveOnlySetter proxy = (IHaveOnlySetter)generator.CreateInterfaceProxyWithTarget(
-                typeof(IHaveOnlySetter),
-                new HaveOnlySetter(),
-                new DoNothingInterceptor()
-            );
+            IHaveOnlySetter proxy = (IHaveOnlySetter)
+                generator.CreateInterfaceProxyWithTarget(
+                    typeof(IHaveOnlySetter),
+                    new HaveOnlySetter(),
+                    new DoNothingInterceptor()
+                );
 
             Assert.IsNotNull(proxy);
 
@@ -98,11 +100,12 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void DYNPROXY_51_GenericMarkerInterface()
         {
-            WithMixin p = (WithMixin)generator.CreateClassProxy(
-                typeof(WithMixin),
-                new Type[] { typeof(Marker<int>) },
-                new IInterceptor[0]
-            );
+            WithMixin p = (WithMixin)
+                generator.CreateClassProxy(
+                    typeof(WithMixin),
+                    new Type[] { typeof(Marker<int>) },
+                    new IInterceptor[0]
+                );
             p.Method();
         }
 

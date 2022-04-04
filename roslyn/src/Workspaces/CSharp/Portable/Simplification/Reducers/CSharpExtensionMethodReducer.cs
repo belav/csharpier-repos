@@ -108,7 +108,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                             newMemberAccess = SyntaxFactory.MemberAccessExpression(
                                 SyntaxKind.SimpleMemberAccessExpression,
                                 expression,
-                                (IdentifierNameSyntax)invocationExpressionNodeExpression.WithoutLeadingTrivia()
+                                (IdentifierNameSyntax)
+                                    invocationExpressionNodeExpression.WithoutLeadingTrivia()
                             );
                         }
                         else if (node.Expression.Kind() == SyntaxKind.GenericName)
@@ -116,7 +117,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                             newMemberAccess = SyntaxFactory.MemberAccessExpression(
                                 SyntaxKind.SimpleMemberAccessExpression,
                                 expression,
-                                (GenericNameSyntax)invocationExpressionNodeExpression.WithoutLeadingTrivia()
+                                (GenericNameSyntax)
+                                    invocationExpressionNodeExpression.WithoutLeadingTrivia()
                             );
                         }
                         else

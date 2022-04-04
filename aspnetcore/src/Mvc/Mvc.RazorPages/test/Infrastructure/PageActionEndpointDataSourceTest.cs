@@ -37,9 +37,8 @@ public class PageActionEndpointDataSourceTest : ActionEndpointDataSourceBaseTest
             .Setup(m => m.ActionDescriptors)
             .Returns(new ActionDescriptorCollection(actions, 0));
 
-        var dataSource = (PageActionEndpointDataSource)CreateDataSource(
-            mockDescriptorProvider.Object
-        );
+        var dataSource = (PageActionEndpointDataSource)
+            CreateDataSource(mockDescriptorProvider.Object);
 
         // Act
         var endpoints = dataSource.Endpoints;
@@ -70,9 +69,8 @@ public class PageActionEndpointDataSourceTest : ActionEndpointDataSourceBaseTest
             .Setup(m => m.ActionDescriptors)
             .Returns(new ActionDescriptorCollection(actions, 0));
 
-        var dataSource = (PageActionEndpointDataSource)CreateDataSource(
-            mockDescriptorProvider.Object
-        );
+        var dataSource = (PageActionEndpointDataSource)
+            CreateDataSource(mockDescriptorProvider.Object);
 
         dataSource.DefaultBuilder.Add(
             (b) =>

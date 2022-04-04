@@ -30,10 +30,11 @@ static unsafe class CopyCtor
 
     public static unsafe int Main()
     {
-        TestDelegate del = (TestDelegate)Delegate.CreateDelegate(
-            typeof(TestDelegate),
-            typeof(CopyCtor).GetMethod("StructWithCtorTest")
-        );
+        TestDelegate del = (TestDelegate)
+            Delegate.CreateDelegate(
+                typeof(TestDelegate),
+                typeof(CopyCtor).GetMethod("StructWithCtorTest")
+            );
         StructWithCtor s1 = new StructWithCtor();
         StructWithCtor s2 = new StructWithCtor();
         s1._instanceField = 1;

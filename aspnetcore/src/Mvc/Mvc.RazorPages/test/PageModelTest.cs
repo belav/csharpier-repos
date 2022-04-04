@@ -1747,8 +1747,8 @@ public class PageModelTest
         var contentType = "text/xml; charset=us-ascii; p1=p1-value";
 
         // Act
-        var contentResult =
-            (ContentResult)contentPageModel.Content_WithEncodingInCharset_AndEncodingParameter();
+        var contentResult = (ContentResult)
+            contentPageModel.Content_WithEncodingInCharset_AndEncodingParameter();
 
         // Assert
         MediaTypeAssert.Equal(contentType, contentResult.ContentType);

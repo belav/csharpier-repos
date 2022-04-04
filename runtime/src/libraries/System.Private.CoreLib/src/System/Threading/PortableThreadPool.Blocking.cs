@@ -27,10 +27,8 @@ namespace System.Threading
 
                 return _numBlockedThreads <= 0
                   ? _minThreads
-                  : (short)Math.Min(
-                        (ushort)(_minThreads + _numBlockedThreads),
-                        (ushort)_maxThreads
-                    );
+                  : (short)
+                        Math.Min((ushort)(_minThreads + _numBlockedThreads), (ushort)_maxThreads);
             }
         }
 
@@ -169,10 +167,11 @@ namespace System.Threading
                 return 0;
             }
 
-            short configuredMaxThreadsWithoutDelay = (short)Math.Min(
-                (ushort)(_minThreads + BlockingConfig.ThreadsToAddWithoutDelay),
-                (ushort)_maxThreads
-            );
+            short configuredMaxThreadsWithoutDelay = (short)
+                Math.Min(
+                    (ushort)(_minThreads + BlockingConfig.ThreadsToAddWithoutDelay),
+                    (ushort)_maxThreads
+                );
 
             do
             {
@@ -242,10 +241,8 @@ namespace System.Threading
                         counts.NumExistingThreads
                         + (memoryThresholdForFallbackBytes - memoryUsageBytes)
                             / WorkerThread.EstimatedAdditionalStackUsagePerThreadBytes;
-                    newNumThreadsGoal = (short)Math.Min(
-                        newNumThreadsGoal,
-                        achievableNumThreadsGoal
-                    );
+                    newNumThreadsGoal = (short)
+                        Math.Min(newNumThreadsGoal, achievableNumThreadsGoal);
                     if (newNumThreadsGoal <= numThreadsGoal)
                     {
                         return 0;
@@ -341,19 +338,21 @@ namespace System.Threading
 
                 // After the thread count based on ThreadsToAddWithoutDelay is reached, this value specifies how much additional
                 // delay to add per ThreadsPerDelayStep threads, which would be applied before each new thread is created
-                DelayStepMs = (uint)AppContextConfigHelper.GetInt32Config(
-                    "System.Threading.ThreadPool.Blocking.DelayStepMs",
-                    25,
-                    false
-                );
+                DelayStepMs = (uint)
+                    AppContextConfigHelper.GetInt32Config(
+                        "System.Threading.ThreadPool.Blocking.DelayStepMs",
+                        25,
+                        false
+                    );
 
                 // After the thread count based on ThreadsToAddWithoutDelay is reached, this value specifies the max delay to
                 // use before each new thread is created
-                MaxDelayMs = (uint)AppContextConfigHelper.GetInt32Config(
-                    "System.Threading.ThreadPool.Blocking.MaxDelayMs",
-                    250,
-                    false
-                );
+                MaxDelayMs = (uint)
+                    AppContextConfigHelper.GetInt32Config(
+                        "System.Threading.ThreadPool.Blocking.MaxDelayMs",
+                        250,
+                        false
+                    );
 
                 int processorCount = Environment.ProcessorCount;
                 ThreadsToAddWithoutDelay = (short)(

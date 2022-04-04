@@ -173,9 +173,8 @@ namespace System.ComponentModel
                 // Announce that we are about to change this component
                 if (site != null)
                 {
-                    changeService = (IComponentChangeService?)site.GetService(
-                        typeof(IComponentChangeService)
-                    );
+                    changeService = (IComponentChangeService?)
+                        site.GetService(typeof(IComponentChangeService));
                 }
 
                 if (changeService != null)
@@ -204,9 +203,8 @@ namespace System.ComponentModel
                     {
                         throw new ArgumentException(SR.Format(SR.ErrorInvalidEventHandler, Name));
                     }
-                    IDictionaryService? dict = (IDictionaryService?)site.GetService(
-                        typeof(IDictionaryService)
-                    );
+                    IDictionaryService? dict = (IDictionaryService?)
+                        site.GetService(typeof(IDictionaryService));
                     if (dict != null)
                     {
                         Delegate? eventdesc = (Delegate?)dict.GetValue(this);
@@ -483,9 +481,8 @@ namespace System.ComponentModel
                 // Announce that we are about to change this component
                 if (site != null)
                 {
-                    changeService = (IComponentChangeService?)site.GetService(
-                        typeof(IComponentChangeService)
-                    );
+                    changeService = (IComponentChangeService?)
+                        site.GetService(typeof(IComponentChangeService));
                 }
 
                 if (changeService != null)
@@ -509,9 +506,8 @@ namespace System.ComponentModel
 
                 if (site != null && site.DesignMode)
                 {
-                    IDictionaryService? dict = (IDictionaryService?)site.GetService(
-                        typeof(IDictionaryService)
-                    );
+                    IDictionaryService? dict = (IDictionaryService?)
+                        site.GetService(typeof(IDictionaryService));
                     if (dict != null)
                     {
                         Delegate? del = (Delegate?)dict.GetValue(this);

@@ -386,8 +386,8 @@ namespace System.Configuration
                         int i = 0;
                         while (i < _parent._locationSections.Count)
                         {
-                            LocationSectionRecord locationSectionRecord =
-                                (LocationSectionRecord)_parent._locationSections[i];
+                            LocationSectionRecord locationSectionRecord = (LocationSectionRecord)
+                                _parent._locationSections[i];
 
                             if (
                                 !StringUtil.EqualsIgnoreCase(
@@ -744,9 +744,8 @@ namespace System.Configuration
 
                         if (!string.IsNullOrEmpty(ConfigStreamInfo.StreamName))
                         {
-                            StreamInfo fileStreamInfo = (StreamInfo)streamInfos[
-                                ConfigStreamInfo.StreamName
-                            ];
+                            StreamInfo fileStreamInfo = (StreamInfo)
+                                streamInfos[ConfigStreamInfo.StreamName];
 
                             // add this file's streaminfo to the now empty list
                             if (fileStreamInfo != null)
@@ -1078,8 +1077,8 @@ namespace System.Configuration
                             _initDelayedRoot.Remove();
 
                             // Get the config record for this config path
-                            BaseConfigurationRecord newRecord =
-                                (BaseConfigurationRecord)configRoot.GetConfigRecord(configPath);
+                            BaseConfigurationRecord newRecord = (BaseConfigurationRecord)
+                                configRoot.GetConfigRecord(configPath);
 
                             // Repeat the call to GetSectionRecursive
                             newRecord.GetSectionRecursive(
@@ -3609,8 +3608,8 @@ namespace System.Configuration
                                 targetConfigPath;
 
                             // Check uniqueness
-                            HybridDictionary locationSectionRecordDictionary =
-                                (HybridDictionary)locationConfigPaths[targetConfigPath];
+                            HybridDictionary locationSectionRecordDictionary = (HybridDictionary)
+                                locationConfigPaths[targetConfigPath];
                             if (locationSectionRecordDictionary == null)
                             {
                                 locationSectionRecordDictionary = new HybridDictionary(false);
@@ -3620,10 +3619,8 @@ namespace System.Configuration
                                 );
                             }
 
-                            LocationSectionRecord duplicateRecord =
-                                (LocationSectionRecord)locationSectionRecordDictionary[
-                                    locationSectionRecord.ConfigKey
-                                ];
+                            LocationSectionRecord duplicateRecord = (LocationSectionRecord)
+                                locationSectionRecordDictionary[locationSectionRecord.ConfigKey];
                             FactoryRecord factoryRecord = null;
                             if (duplicateRecord == null)
                             {
@@ -4154,9 +4151,8 @@ namespace System.Configuration
             {
                 if (ConfigStreamInfo.HasStreamInfos)
                 {
-                    StreamInfo streamInfo = (StreamInfo)ConfigStreamInfo.StreamInfos[
-                        configSourceStreamName
-                    ];
+                    StreamInfo streamInfo = (StreamInfo)
+                        ConfigStreamInfo.StreamInfos[configSourceStreamName];
                     if ((streamInfo != null) && (streamInfo.SectionName != configKey))
                     {
                         throw new ConfigurationErrorsException(
@@ -4191,9 +4187,8 @@ namespace System.Configuration
                 {
                     if (current.ConfigStreamInfo.HasStreamInfos)
                     {
-                        StreamInfo streamInfo = (StreamInfo)current.ConfigStreamInfo.StreamInfos[
-                            configSourceStreamName
-                        ];
+                        StreamInfo streamInfo = (StreamInfo)
+                            current.ConfigStreamInfo.StreamInfos[configSourceStreamName];
                         if (streamInfo != null)
                         {
                             throw new ConfigurationErrorsException(
@@ -4601,9 +4596,8 @@ namespace System.Configuration
                 factoryList = EnsureFactories();
 
             // Look to see if we already have a factory for "configProtectedData"
-            FactoryRecord factoryRecord = (FactoryRecord)factoryList[
-                ReservedSectionProtectedConfiguration
-            ];
+            FactoryRecord factoryRecord = (FactoryRecord)
+                factoryList[ReservedSectionProtectedConfiguration];
 
             if (factoryRecord != null)
             {

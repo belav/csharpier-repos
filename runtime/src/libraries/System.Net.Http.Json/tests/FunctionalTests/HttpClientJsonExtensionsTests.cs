@@ -39,18 +39,20 @@ namespace System.Net.Http.Json.Functional.Tests
 
                         if (!containsQuotedNumbers)
                         {
-                            per = (Person)await client.GetFromJsonAsync(
-                                uri,
-                                typeof(Person),
-                                JsonContext.Default
-                            );
+                            per = (Person)
+                                await client.GetFromJsonAsync(
+                                    uri,
+                                    typeof(Person),
+                                    JsonContext.Default
+                                );
                             per.Validate();
 
-                            per = (Person)await client.GetFromJsonAsync(
-                                uri.ToString(),
-                                typeof(Person),
-                                JsonContext.Default
-                            );
+                            per = (Person)
+                                await client.GetFromJsonAsync(
+                                    uri.ToString(),
+                                    typeof(Person),
+                                    JsonContext.Default
+                                );
                             per.Validate();
 
                             per = await client.GetFromJsonAsync<Person>(

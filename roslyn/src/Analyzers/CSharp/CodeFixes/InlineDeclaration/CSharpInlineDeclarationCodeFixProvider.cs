@@ -87,9 +87,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
             foreach (var diagnostic in diagnostics)
             {
                 declarationsToRemove.Add(
-                    (LocalDeclarationStatementSyntax)diagnostic.AdditionalLocations[0]
-                        .FindNode(cancellationToken)
-                        .Parent.Parent
+                    (LocalDeclarationStatementSyntax)
+                        diagnostic.AdditionalLocations[0].FindNode(cancellationToken).Parent.Parent
                 );
             }
 
@@ -147,14 +146,14 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
             var identifierLocation = diagnostic.AdditionalLocations[1];
             var invocationOrCreationLocation = diagnostic.AdditionalLocations[2];
 
-            var declarator = (VariableDeclaratorSyntax)declaratorLocation.FindNode(
-                cancellationToken
-            );
+            var declarator = (VariableDeclaratorSyntax)
+                declaratorLocation.FindNode(cancellationToken);
             var identifier = (IdentifierNameSyntax)identifierLocation.FindNode(cancellationToken);
-            var invocationOrCreation = (ExpressionSyntax)invocationOrCreationLocation.FindNode(
-                getInnermostNodeForTie: true,
-                cancellationToken: cancellationToken
-            );
+            var invocationOrCreation = (ExpressionSyntax)
+                invocationOrCreationLocation.FindNode(
+                    getInnermostNodeForTie: true,
+                    cancellationToken: cancellationToken
+                );
 
             return (declarator, identifier, invocationOrCreation);
         }
@@ -306,10 +305,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
             // Then the type is not-apparent, and we should not use var if the user only wants
             // it for apparent types
 
-            var local = (ILocalSymbol)semanticModel.GetDeclaredSymbol(
-                declarator,
-                cancellationToken
-            );
+            var local = (ILocalSymbol)
+                semanticModel.GetDeclaredSymbol(declarator, cancellationToken);
             var newType = GenerateTypeSyntaxOrVar(local.Type, options);
 
             var declarationExpression = GetDeclarationExpression(

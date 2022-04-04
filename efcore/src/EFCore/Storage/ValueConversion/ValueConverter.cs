@@ -238,28 +238,30 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
             var firstConverter =
                 ProviderClrType.IsNullableType() && !secondConverter.ModelClrType.IsNullableType()
                     ? ComposeWith(
-                          (ValueConverter)Activator.CreateInstance(
-                              typeof(CastingConverter<,>).MakeGenericType(
-                                  ProviderClrType,
-                                  secondConverter.ModelClrType
-                              ),
-                              MappingHints
-                          )!
+                          (ValueConverter)
+                              Activator.CreateInstance(
+                                  typeof(CastingConverter<,>).MakeGenericType(
+                                      ProviderClrType,
+                                      secondConverter.ModelClrType
+                                  ),
+                                  MappingHints
+                              )!
                       )
                     : this;
 
-            return (ValueConverter)Activator.CreateInstance(
-                typeof(CompositeValueConverter<,,>).MakeGenericType(
-                    firstConverter.ModelClrType,
-                    firstConverter.ProviderClrType,
-                    secondConverter.ProviderClrType
-                ),
-                firstConverter,
-                secondConverter,
-                secondConverter.MappingHints == null
-                  ? firstConverter.MappingHints
-                  : secondConverter.MappingHints.With(firstConverter.MappingHints)
-            )!;
+            return (ValueConverter)
+                Activator.CreateInstance(
+                    typeof(CompositeValueConverter<,,>).MakeGenericType(
+                        firstConverter.ModelClrType,
+                        firstConverter.ProviderClrType,
+                        secondConverter.ProviderClrType
+                    ),
+                    firstConverter,
+                    secondConverter,
+                    secondConverter.MappingHints == null
+                      ? firstConverter.MappingHints
+                      : secondConverter.MappingHints.With(firstConverter.MappingHints)
+                )!;
         }
     }
 }

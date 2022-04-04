@@ -221,10 +221,8 @@ namespace Microsoft.Win32.SafeHandles
                 NativeOverlapped* pOverlapped
             )
             {
-                OverlappedValueTaskSource? vts =
-                    (OverlappedValueTaskSource?)ThreadPoolBoundHandle.GetNativeOverlappedState(
-                        pOverlapped
-                    );
+                OverlappedValueTaskSource? vts = (OverlappedValueTaskSource?)
+                    ThreadPoolBoundHandle.GetNativeOverlappedState(pOverlapped);
                 Debug.Assert(vts is not null);
                 Debug.Assert(vts._overlapped == pOverlapped, "Overlaps don't match");
 

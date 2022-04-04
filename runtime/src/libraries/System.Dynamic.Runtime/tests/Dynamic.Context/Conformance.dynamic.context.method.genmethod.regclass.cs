@@ -1007,10 +1007,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         public static int MainMethod()
         {
             dynamic dy = new MemberClass();
-            var result = (Test)dy.Method_ReturnsUConstraint<string, Test, InnerTest>(
-                null,
-                new InnerTest() { _field = 0 }
-            );
+            var result = (Test)
+                dy.Method_ReturnsUConstraint<string, Test, InnerTest>(
+                    null,
+                    new InnerTest() { _field = 0 }
+                );
             if (result.GetType() == typeof(InnerTest) && result._field == 11)
                 return 0;
             return 1;
@@ -1140,12 +1141,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
             Test t = new Test();
             dynamic it = new InnerTest();
             decimal dec = 0M;
-            float result = (float)dy.Method_ReturnsFloatConstraint<Test, Test, InnerTest>(
-                t,
-                it,
-                t,
-                ref dec
-            );
+            float result = (float)
+                dy.Method_ReturnsFloatConstraint<Test, Test, InnerTest>(t, it, t, ref dec);
             if (result == 3.4f && dec == 3M)
                 return 0;
             return 1;
@@ -1224,11 +1221,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
             decimal dec = 0M;
             try
             {
-                float result = (float)dy.Method_ReturnsFloatNegConstraint<
-                    Test,
-                    dynamic,
-                    DerivedMyTest
-                >(null, d, d, ref dec);
+                float result = (float)
+                    dy.Method_ReturnsFloatNegConstraint<Test, dynamic, DerivedMyTest>(
+                        null,
+                        d,
+                        d,
+                        ref dec
+                    );
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {

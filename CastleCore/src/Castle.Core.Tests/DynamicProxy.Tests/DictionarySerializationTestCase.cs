@@ -34,10 +34,8 @@ namespace Castle.DynamicProxy.Tests
             ProxyGenerator generator = new ProxyGenerator();
             Dictionary<ClassOverridingEqualsAndGetHashCode, string> theInstances =
                 new Dictionary<ClassOverridingEqualsAndGetHashCode, string>();
-            ClassOverridingEqualsAndGetHashCode c =
-                (ClassOverridingEqualsAndGetHashCode)generator.CreateClassProxy(
-                    typeof(ClassOverridingEqualsAndGetHashCode)
-                );
+            ClassOverridingEqualsAndGetHashCode c = (ClassOverridingEqualsAndGetHashCode)
+                generator.CreateClassProxy(typeof(ClassOverridingEqualsAndGetHashCode));
             c.Id = Guid.NewGuid();
             c.Name = DateTime.Now.ToString("yyyyMMddHHmmss");
             theInstances.Add(c, c.Name);
@@ -81,10 +79,8 @@ namespace Castle.DynamicProxy.Tests
 
             for (int i = 0; i < 50; i++)
             {
-                ClassOverridingEqualsAndGetHashCode c =
-                    (ClassOverridingEqualsAndGetHashCode)generator.CreateClassProxy(
-                        typeof(ClassOverridingEqualsAndGetHashCode)
-                    );
+                ClassOverridingEqualsAndGetHashCode c = (ClassOverridingEqualsAndGetHashCode)
+                    generator.CreateClassProxy(typeof(ClassOverridingEqualsAndGetHashCode));
                 c.Id = Guid.NewGuid();
                 c.Name = DateTime.Now.ToString("yyyyMMddHHmmss");
                 theInstances.Add(c, c.Name);
@@ -102,10 +98,8 @@ namespace Castle.DynamicProxy.Tests
         public void BasicSerializationProxyTest()
         {
             ProxyGenerator generator = new ProxyGenerator();
-            ClassOverridingEqualsAndGetHashCode c =
-                (ClassOverridingEqualsAndGetHashCode)generator.CreateClassProxy(
-                    typeof(ClassOverridingEqualsAndGetHashCode)
-                );
+            ClassOverridingEqualsAndGetHashCode c = (ClassOverridingEqualsAndGetHashCode)
+                generator.CreateClassProxy(typeof(ClassOverridingEqualsAndGetHashCode));
             c.Id = Guid.NewGuid();
             c.Name = DateTime.Now.ToString("yyyyMMddHHmmss");
 

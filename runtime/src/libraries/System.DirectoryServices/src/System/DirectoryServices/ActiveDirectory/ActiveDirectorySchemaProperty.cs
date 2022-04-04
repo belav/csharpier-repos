@@ -199,8 +199,8 @@ namespace System.DirectoryServices.ActiveDirectory
                     context,
                     "LDAP://" + context.GetServerName() + "/schema/" + ldapDisplayName
                 );
-                _iadsProperty =
-                    (NativeComInterfaces.IAdsProperty)_abstractPropertyEntry.NativeObject;
+                _iadsProperty = (NativeComInterfaces.IAdsProperty)
+                    _abstractPropertyEntry.NativeObject;
             }
             catch (COMException e)
             {
@@ -457,22 +457,22 @@ namespace System.DirectoryServices.ActiveDirectory
                 // set the range lower attribute
                 if (_rangeLower != null)
                 {
-                    _propertyEntry.Properties[PropertyManager.RangeLower].Value =
-                        (int)_rangeLower.Value;
+                    _propertyEntry.Properties[PropertyManager.RangeLower].Value = (int)
+                        _rangeLower.Value;
                 }
 
                 // set the range upper attribute
                 if (_rangeUpper != null)
                 {
-                    _propertyEntry.Properties[PropertyManager.RangeUpper].Value =
-                        (int)_rangeUpper.Value;
+                    _propertyEntry.Properties[PropertyManager.RangeUpper].Value = (int)
+                        _rangeUpper.Value;
                 }
 
                 // set the searchFlags attribute
                 if (_searchFlags != SearchFlags.None)
                 {
-                    _propertyEntry.Properties[PropertyManager.SearchFlags].Value =
-                        (int)_searchFlags;
+                    _propertyEntry.Properties[PropertyManager.SearchFlags].Value = (int)
+                        _searchFlags;
                 }
 
                 // set the link id
@@ -681,10 +681,8 @@ namespace System.DirectoryServices.ActiveDirectory
                 {
                     if (!_syntaxInitialized)
                     {
-                        byte[]? omObjectClassBinaryForm = (byte[]?)GetValueFromCache(
-                            PropertyManager.OMObjectClass,
-                            false
-                        );
+                        byte[]? omObjectClassBinaryForm = (byte[]?)
+                            GetValueFromCache(PropertyManager.OMObjectClass, false);
                         OMObjectClass? omObjectClass =
                             (omObjectClassBinaryForm != null)
                                 ? new OMObjectClass(omObjectClassBinaryForm)
@@ -736,10 +734,8 @@ namespace System.DirectoryServices.ActiveDirectory
                     if (!_descriptionInitialized)
                     {
                         // get the property from the server
-                        _description = (string?)GetValueFromCache(
-                            PropertyManager.Description,
-                            false
-                        );
+                        _description = (string?)
+                            GetValueFromCache(PropertyManager.Description, false);
                         _descriptionInitialized = true;
                     }
                 }
@@ -786,10 +782,8 @@ namespace System.DirectoryServices.ActiveDirectory
                         }
                         else
                         {
-                            _isSingleValued = (bool)GetValueFromCache(
-                                PropertyManager.IsSingleValued,
-                                true
-                            )!;
+                            _isSingleValued = (bool)
+                                GetValueFromCache(PropertyManager.IsSingleValued, true)!;
                         }
                         _isSingleValuedInitialized = true;
                     }
@@ -1013,8 +1007,8 @@ namespace System.DirectoryServices.ActiveDirectory
                     }
                     else
                     {
-                        _propertyEntry.Properties[PropertyManager.RangeLower].Value =
-                            (int)value.Value;
+                        _propertyEntry.Properties[PropertyManager.RangeLower].Value = (int)
+                            value.Value;
                     }
                 }
                 _rangeLower = value;
@@ -1067,8 +1061,8 @@ namespace System.DirectoryServices.ActiveDirectory
                     }
                     else
                     {
-                        _propertyEntry.Properties[PropertyManager.RangeUpper].Value =
-                            (int)value.Value;
+                        _propertyEntry.Properties[PropertyManager.RangeUpper].Value = (int)
+                            value.Value;
                     }
                 }
                 _rangeUpper = value;
@@ -1225,10 +1219,8 @@ namespace System.DirectoryServices.ActiveDirectory
                     if (_schemaGuidBinaryForm == null)
                     {
                         // get the property from the server
-                        _schemaGuidBinaryForm = (byte[])GetValueFromCache(
-                            PropertyManager.SchemaIDGuid,
-                            true
-                        )!;
+                        _schemaGuidBinaryForm = (byte[])
+                            GetValueFromCache(PropertyManager.SchemaIDGuid, true)!;
                     }
                 }
 

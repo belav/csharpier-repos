@@ -46,12 +46,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             var shell = (IVsShell)await GetServiceAsync(typeof(SVsShell)).ConfigureAwait(true);
-            _componentModel = (IComponentModel)await GetServiceAsync(typeof(SComponentModel))
-                .ConfigureAwait(true);
-            var menuCommandService = (OleMenuCommandService)await GetServiceAsync(
-                    typeof(IMenuCommandService)
-                )
-                .ConfigureAwait(true);
+            _componentModel = (IComponentModel)
+                await GetServiceAsync(typeof(SComponentModel)).ConfigureAwait(true);
+            var menuCommandService = (OleMenuCommandService)
+                await GetServiceAsync(typeof(IMenuCommandService)).ConfigureAwait(true);
             cancellationToken.ThrowIfCancellationRequested();
             Assumes.Present(shell);
             Assumes.Present(_componentModel);

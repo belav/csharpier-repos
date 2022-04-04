@@ -396,10 +396,8 @@ public class Tests
         };
         var ptr = Marshal.AllocHGlobal(Marshal.SizeOf(structToMarshal));
         Marshal.StructureToPtr(structToMarshal, ptr, false);
-        var genericStruct = (StructWithGenericField)Marshal.PtrToStructure(
-            ptr,
-            typeof(StructWithGenericField)
-        );
+        var genericStruct = (StructWithGenericField)
+            Marshal.PtrToStructure(ptr, typeof(StructWithGenericField));
         if (genericStruct.gs.t1 == 1)
             return 0;
 

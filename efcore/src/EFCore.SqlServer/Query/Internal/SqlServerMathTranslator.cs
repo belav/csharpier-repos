@@ -246,18 +246,19 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             {
                 var argument = arguments[0];
                 // Result of ROUND for float/double is always double in server side
-                var result = (SqlExpression)_sqlExpressionFactory.Function(
-                    "ROUND",
-                    new[]
-                    {
-                        argument,
-                        _sqlExpressionFactory.Constant(0),
-                        _sqlExpressionFactory.Constant(1)
-                    },
-                    nullable: true,
-                    argumentsPropagateNullability: new[] { true, false, false },
-                    typeof(double)
-                );
+                var result = (SqlExpression)
+                    _sqlExpressionFactory.Function(
+                        "ROUND",
+                        new[]
+                        {
+                            argument,
+                            _sqlExpressionFactory.Constant(0),
+                            _sqlExpressionFactory.Constant(1)
+                        },
+                        nullable: true,
+                        argumentsPropagateNullability: new[] { true, false, false },
+                        typeof(double)
+                    );
 
                 if (argument.Type == typeof(float))
                 {
@@ -273,13 +274,14 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                 var digits =
                     arguments.Count == 2 ? arguments[1] : _sqlExpressionFactory.Constant(0);
                 // Result of ROUND for float/double is always double in server side
-                var result = (SqlExpression)_sqlExpressionFactory.Function(
-                    "ROUND",
-                    new[] { argument, digits },
-                    nullable: true,
-                    argumentsPropagateNullability: new[] { true, true },
-                    typeof(double)
-                );
+                var result = (SqlExpression)
+                    _sqlExpressionFactory.Function(
+                        "ROUND",
+                        new[] { argument, digits },
+                        nullable: true,
+                        argumentsPropagateNullability: new[] { true, true },
+                        typeof(double)
+                    );
 
                 if (argument.Type == typeof(float))
                 {

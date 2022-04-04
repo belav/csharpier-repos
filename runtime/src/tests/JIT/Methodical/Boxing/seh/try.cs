@@ -88,10 +88,11 @@ namespace SinCalc
                         total2 = (double)total2 + (double)Angle;
                         total3 =
                             (double)total3
-                            + (double)CalcAndCheck(
-                                Angle,
-                                (double)testresults[(int)i] + 0.0000000004 * (int)i
-                            );
+                            + (double)
+                                CalcAndCheck(
+                                    Angle,
+                                    (double)testresults[(int)i] + 0.0000000004 * (int)i
+                                );
                         Console.WriteLine("OK");
                     }
                     finally

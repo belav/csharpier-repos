@@ -325,7 +325,8 @@ namespace System.Threading.Tasks.Dataflow
             {
                 get
                 {
-                    return (GroupingDataflowBlockOptions)_sourceDebuggingInformation.DataflowBlockOptions;
+                    return (GroupingDataflowBlockOptions)
+                        _sourceDebuggingInformation.DataflowBlockOptions;
                 }
             }
 
@@ -704,7 +705,8 @@ namespace System.Threading.Tasks.Dataflow
             {
                 get
                 {
-                    return (GroupingDataflowBlockOptions)_sourceDebuggingInformation.DataflowBlockOptions;
+                    return (GroupingDataflowBlockOptions)
+                        _sourceDebuggingInformation.DataflowBlockOptions;
                 }
             }
 

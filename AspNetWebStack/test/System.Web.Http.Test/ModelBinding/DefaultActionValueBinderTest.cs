@@ -351,9 +351,8 @@ namespace System.Web.Http.ModelBinding
             Assert.Single(binding.ParameterBindings);
             AssertIsModelBound(binding, 0);
 
-            ModelBinderParameterBinding p = (ModelBinderParameterBinding)binding.ParameterBindings[
-                0
-            ];
+            ModelBinderParameterBinding p = (ModelBinderParameterBinding)
+                binding.ParameterBindings[0];
             Assert.IsType<CustomModelBinder>(p.Binder);
 
             // Since the ModelBinderAttribute didn't specify the valueproviders, we should pull those from config.

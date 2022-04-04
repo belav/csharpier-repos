@@ -2431,8 +2431,8 @@ public class ControllerBaseTest
         var contentType = "text/xml; charset=us-ascii; p1=p1-value";
 
         // Act
-        var contentResult =
-            (ContentResult)contentController.Content_WithEncodingInCharset_AndEncodingParameter();
+        var contentResult = (ContentResult)
+            contentController.Content_WithEncodingInCharset_AndEncodingParameter();
 
         // Assert
         MediaTypeAssert.Equal(contentType, contentResult.ContentType);

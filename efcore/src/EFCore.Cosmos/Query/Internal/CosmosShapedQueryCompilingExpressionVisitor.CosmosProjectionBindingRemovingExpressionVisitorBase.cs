@@ -140,8 +140,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                             }
                             else
                             {
-                                var entityProjectionExpression =
-                                    (EntityProjectionExpression)projectionExpression;
+                                var entityProjectionExpression = (EntityProjectionExpression)
+                                    projectionExpression;
                                 var accessExpression = entityProjectionExpression.AccessExpression;
                                 _projectionBindings[accessExpression] = parameterExpression;
                                 storeName ??= entityProjectionExpression.Name;
@@ -192,15 +192,14 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                             )
                             {
                                 var projection = GetProjection(projectionBindingExpression);
-                                entityProjectionExpression =
-                                    (EntityProjectionExpression)projection.Expression;
+                                entityProjectionExpression = (EntityProjectionExpression)
+                                    projection.Expression;
                             }
                             else
                             {
                                 var projection = (
-                                    (UnaryExpression)(
-                                        (UnaryExpression)newExpression.Arguments[0]
-                                    ).Operand
+                                    (UnaryExpression)
+                                        ((UnaryExpression)newExpression.Arguments[0]).Operand
                                 ).Operand;
                                 entityProjectionExpression = (EntityProjectionExpression)projection;
                             }
@@ -266,9 +265,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                     else
                     {
                         innerExpression = _materializationContextBindings[
-                            (ParameterExpression)(
-                                (MethodCallExpression)methodCallExpression.Arguments[0]
-                            ).Object
+                            (ParameterExpression)
+                                ((MethodCallExpression)methodCallExpression.Arguments[0]).Object
                         ];
                     }
 
@@ -338,8 +336,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         {
                             case ProjectionBindingExpression projectionBindingExpression:
                                 var projection = GetProjection(projectionBindingExpression);
-                                objectArrayProjection =
-                                    (ObjectArrayProjectionExpression)projection.Expression;
+                                objectArrayProjection = (ObjectArrayProjectionExpression)
+                                    projection.Expression;
                                 break;
                             case ObjectArrayProjectionExpression objectArrayProjectionExpression:
                                 objectArrayProjection = objectArrayProjectionExpression;
@@ -373,9 +371,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                             Expression.Constant(1, typeof(int))
                         );
 
-                        var innerShaper = (BlockExpression)Visit(
-                            collectionShaperExpression.InnerShaper
-                        );
+                        var innerShaper = (BlockExpression)
+                            Visit(collectionShaperExpression.InnerShaper);
 
                         innerShaper = AddIncludes(innerShaper);
 

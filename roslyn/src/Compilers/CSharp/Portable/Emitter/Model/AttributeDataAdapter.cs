@@ -59,11 +59,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             PEModuleBuilder moduleBeingBuilt = (PEModuleBuilder)context.Module;
-            return (Cci.IMethodReference)moduleBeingBuilt.Translate(
-                this.AttributeConstructor,
-                (CSharpSyntaxNode)context.SyntaxNode,
-                context.Diagnostics
-            );
+            return (Cci.IMethodReference)
+                moduleBeingBuilt.Translate(
+                    this.AttributeConstructor,
+                    (CSharpSyntaxNode)context.SyntaxNode,
+                    context.Diagnostics
+                );
         }
 
         ImmutableArray<Cci.IMetadataNamedArgument> Cci.ICustomAttribute.GetNamedArguments(

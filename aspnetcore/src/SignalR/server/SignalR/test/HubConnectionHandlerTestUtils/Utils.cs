@@ -90,9 +90,8 @@ public class HubConnectionHandlerTestUtils
     )
     {
         var serviceProvider = CreateServiceProvider(addServices, loggerFactory);
-        return (Connections.ConnectionHandler)serviceProvider.GetService(
-            GetConnectionHandlerType(hubType)
-        );
+        return (Connections.ConnectionHandler)
+            serviceProvider.GetService(GetConnectionHandlerType(hubType));
     }
 }
 

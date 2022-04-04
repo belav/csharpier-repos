@@ -14,25 +14,24 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         {
             var errorCtors = typeof(SqlError).GetTypeInfo().DeclaredConstructors;
 
-            var error = (SqlError)errorCtors
-                .First(c => c.GetParameters().Length == 8)
-                .Invoke(
-                    new object[]
-                    {
-                        number,
-                        (byte)0,
-                        (byte)0,
-                        "Server",
-                        "ErrorMessage",
-                        "Procedure",
-                        0,
-                        null
-                    }
-                );
-            var errors = (SqlErrorCollection)typeof(SqlErrorCollection)
-                .GetTypeInfo()
-                .DeclaredConstructors.Single()
-                .Invoke(null);
+            var error = (SqlError)
+                errorCtors
+                    .First(c => c.GetParameters().Length == 8)
+                    .Invoke(
+                        new object[]
+                        {
+                            number,
+                            (byte)0,
+                            (byte)0,
+                            "Server",
+                            "ErrorMessage",
+                            "Procedure",
+                            0,
+                            null
+                        }
+                    );
+            var errors = (SqlErrorCollection)
+                typeof(SqlErrorCollection).GetTypeInfo().DeclaredConstructors.Single().Invoke(null);
 
             typeof(SqlErrorCollection)
                 .GetRuntimeMethods()
@@ -41,9 +40,10 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
             var exceptionCtors = typeof(SqlException).GetTypeInfo().DeclaredConstructors;
 
-            return (SqlException)exceptionCtors
-                .First(c => c.GetParameters().Length == 4)
-                .Invoke(new object[] { "Bang!", errors, null, connectionId ?? Guid.NewGuid() });
+            return (SqlException)
+                exceptionCtors
+                    .First(c => c.GetParameters().Length == 4)
+                    .Invoke(new object[] { "Bang!", errors, null, connectionId ?? Guid.NewGuid() });
         }
     }
 }

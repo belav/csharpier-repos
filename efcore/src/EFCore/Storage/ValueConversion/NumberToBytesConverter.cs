@@ -143,14 +143,15 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                           )
                         : type == typeof(decimal)
                             ? Expression.Call(_toDecimalMethod, param)
-                            : (Expression)Expression.Call(
-                                  typeof(BitConverter).GetMethod(
-                                      "To" + type.Name,
-                                      new[] { typeof(byte[]), typeof(int) }
-                                  )!,
-                                  EnsureEndian(HandleEmptyArray(param)),
-                                  Expression.Constant(0)
-                              );
+                            : (Expression)
+                                  Expression.Call(
+                                      typeof(BitConverter).GetMethod(
+                                          "To" + type.Name,
+                                          new[] { typeof(byte[]), typeof(int) }
+                                      )!,
+                                      EnsureEndian(HandleEmptyArray(param)),
+                                      Expression.Constant(0)
+                                  );
 
             if (typeof(TNumber).IsNullableType())
             {

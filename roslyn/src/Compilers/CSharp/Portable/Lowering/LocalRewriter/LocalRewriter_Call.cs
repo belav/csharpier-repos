@@ -282,9 +282,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 && method.ContainingType.IsObjectType()
                 && !_inExpressionLambda
                 && (object)method
-                    == (object)_compilation.GetSpecialTypeMember(
-                        SpecialMember.System_Object__ReferenceEquals
-                    )
+                    == (object)
+                        _compilation.GetSpecialTypeMember(
+                            SpecialMember.System_Object__ReferenceEquals
+                        )
             )
             {
                 Debug.Assert(rewrittenArguments.Length == 2);

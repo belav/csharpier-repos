@@ -169,12 +169,10 @@ struct S<T> where T : struct
                 ImmutableArray.Create(TypeWithAnnotations.Create(intType))
             );
 
-            var substitutedPointerType = (PointerTypeSymbol)typeMap
-                .SubstituteType(pointerType)
-                .AsTypeSymbolOnly();
-            var substitutedArrayType = (ArrayTypeSymbol)typeMap
-                .SubstituteType(arrayType)
-                .AsTypeSymbolOnly();
+            var substitutedPointerType = (PointerTypeSymbol)
+                typeMap.SubstituteType(pointerType).AsTypeSymbolOnly();
+            var substitutedArrayType = (ArrayTypeSymbol)
+                typeMap.SubstituteType(arrayType).AsTypeSymbolOnly();
 
             // The map changed the types.
             Assert.Equal(intType, substitutedPointerType.PointedAtType);

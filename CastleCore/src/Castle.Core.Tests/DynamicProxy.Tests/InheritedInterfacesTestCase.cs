@@ -29,11 +29,12 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void InheritedInterfaceWithTarget()
         {
-            var proxiedFoo = (IFooExtended)generator.CreateInterfaceProxyWithTargetInterface(
-                typeof(IFooExtended),
-                new ImplementedFooExtended(),
-                new StandardInterceptor()
-            );
+            var proxiedFoo = (IFooExtended)
+                generator.CreateInterfaceProxyWithTargetInterface(
+                    typeof(IFooExtended),
+                    new ImplementedFooExtended(),
+                    new StandardInterceptor()
+                );
             proxiedFoo.FooExtended();
         }
 
@@ -72,11 +73,12 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void ShouldGenerateProxyWithoutTargetAndWithDuplicatedBaseInterface()
         {
-            var foo = (IHasMethod)generator.CreateInterfaceProxyWithoutTarget(
-                typeof(IHasMethod),
-                new[] { typeof(IFooExtended), typeof(IBarFoo) },
-                new DoNothingInterceptor()
-            );
+            var foo = (IHasMethod)
+                generator.CreateInterfaceProxyWithoutTarget(
+                    typeof(IHasMethod),
+                    new[] { typeof(IFooExtended), typeof(IBarFoo) },
+                    new DoNothingInterceptor()
+                );
 
             foo.Foo();
             ((IFooExtended)foo).FooExtended();
@@ -88,12 +90,13 @@ namespace Castle.DynamicProxy.Tests
         {
             var target = new ImplementedFooExtended();
 
-            var foo = (IHasMethod)generator.CreateInterfaceProxyWithTarget(
-                typeof(IHasMethod),
-                new[] { typeof(IFooExtended), typeof(IBarFoo) },
-                target,
-                new ProceedOnTypeInterceptor(typeof(IBarFoo))
-            );
+            var foo = (IHasMethod)
+                generator.CreateInterfaceProxyWithTarget(
+                    typeof(IHasMethod),
+                    new[] { typeof(IFooExtended), typeof(IBarFoo) },
+                    target,
+                    new ProceedOnTypeInterceptor(typeof(IBarFoo))
+                );
 
             foo.Foo();
             ((IFooExtended)foo).FooExtended();

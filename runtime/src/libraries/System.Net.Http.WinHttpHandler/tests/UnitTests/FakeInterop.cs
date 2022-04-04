@@ -387,9 +387,8 @@ internal static partial class Interop
 
                 if (compression == null)
                 {
-                    TestControl.LastWin32Error = (int)Interop
-                        .WinHttp
-                        .ERROR_WINHTTP_HEADER_NOT_FOUND;
+                    TestControl.LastWin32Error = (int)
+                        Interop.WinHttp.ERROR_WINHTTP_HEADER_NOT_FOUND;
                     return false;
                 }
 
@@ -768,9 +767,8 @@ internal static partial class Interop
                 proxyInfo.Proxy = IntPtr.Zero;
                 proxyInfo.ProxyBypass = IntPtr.Zero;
 
-                TestControl.LastWin32Error = (int)Interop
-                    .WinHttp
-                    .ERROR_WINHTTP_AUTODETECTION_FAILED;
+                TestControl.LastWin32Error = (int)
+                    Interop.WinHttp.ERROR_WINHTTP_AUTODETECTION_FAILED;
                 return false;
             }
 

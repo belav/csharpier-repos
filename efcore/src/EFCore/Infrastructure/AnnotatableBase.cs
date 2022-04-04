@@ -395,14 +395,15 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             Func<TArg?, TValue> valueFactory,
             TArg? factoryArgument
         ) =>
-            (TValue)GetOrCreateRuntimeAnnotations()
-                .GetOrAdd(
-                    name,
-                    static (n, t) =>
-                        t.Annotatable.CreateRuntimeAnnotation(n, t.CreateValue(t.Argument)),
-                    (CreateValue: valueFactory, Argument: factoryArgument, Annotatable: this)
-                )
-                .Value!;
+            (TValue)
+                GetOrCreateRuntimeAnnotations()
+                    .GetOrAdd(
+                        name,
+                        static (n, t) =>
+                            t.Annotatable.CreateRuntimeAnnotation(n, t.CreateValue(t.Argument)),
+                        (CreateValue: valueFactory, Argument: factoryArgument, Annotatable: this)
+                    )
+                    .Value!;
 
         /// <summary>
         ///     Gets the runtime annotation with the given name, returning <see langword="null" /> if it does not exist.

@@ -131,17 +131,15 @@ class Class : Interface
 
             var @class = (NamedTypeSymbol)global.GetMembers("Class").Single();
 
-            var classExplicitImplementationBase = (MethodSymbol)@class
-                .GetMembers("BaseInterface.Method")
-                .Single();
+            var classExplicitImplementationBase = (MethodSymbol)
+                @class.GetMembers("BaseInterface.Method").Single();
             Assert.Equal(
                 MethodKind.ExplicitInterfaceImplementation,
                 classExplicitImplementationBase.MethodKind
             );
 
-            var classExplicitImplementation = (MethodSymbol)@class
-                .GetMembers("Interface.Method")
-                .Single();
+            var classExplicitImplementation = (MethodSymbol)
+                @class.GetMembers("Interface.Method").Single();
             Assert.Equal(
                 MethodKind.ExplicitInterfaceImplementation,
                 classExplicitImplementation.MethodKind
@@ -278,9 +276,8 @@ class Class : Interface
             var classImplicitImplementation = (MethodSymbol)@class.GetMembers("Method").Single();
             Assert.Equal(MethodKind.Ordinary, classImplicitImplementation.MethodKind);
 
-            var classImplicitImplementationBase = (MethodSymbol)@class
-                .GetMembers("BaseMethod")
-                .Single();
+            var classImplicitImplementationBase = (MethodSymbol)
+                @class.GetMembers("BaseMethod").Single();
             Assert.Equal(MethodKind.Ordinary, classImplicitImplementationBase.MethodKind);
 
             var implementingMethod = @class.FindImplementationForInterfaceMember(interfaceMethod);
@@ -477,25 +474,22 @@ class Class2 : BaseClass //does not declare interface
 
             var baseClass = (NamedTypeSymbol)global.GetMembers("BaseClass").Single();
 
-            var baseClassExplicitImplementationBase = (MethodSymbol)baseClass
-                .GetMembers("BaseInterface.Method")
-                .Single();
+            var baseClassExplicitImplementationBase = (MethodSymbol)
+                baseClass.GetMembers("BaseInterface.Method").Single();
             Assert.Equal(
                 MethodKind.ExplicitInterfaceImplementation,
                 baseClassExplicitImplementationBase.MethodKind
             );
 
-            var baseClassExplicitImplementation = (MethodSymbol)baseClass
-                .GetMembers("Interface.Method")
-                .Single();
+            var baseClassExplicitImplementation = (MethodSymbol)
+                baseClass.GetMembers("Interface.Method").Single();
             Assert.Equal(
                 MethodKind.ExplicitInterfaceImplementation,
                 baseClassExplicitImplementation.MethodKind
             );
 
-            var baseClassImplicitImplementation = (MethodSymbol)baseClass
-                .GetMembers("Method")
-                .Single();
+            var baseClassImplicitImplementation = (MethodSymbol)
+                baseClass.GetMembers("Method").Single();
             Assert.Equal(MethodKind.Ordinary, baseClassImplicitImplementation.MethodKind);
 
             Assert.NotSame(baseClassImplicitImplementation, baseClassExplicitImplementation);
@@ -577,14 +571,12 @@ class Class2 : BaseClass //does not declare interface
 
             var baseClass = (NamedTypeSymbol)global.GetMembers("BaseClass").Single();
 
-            var baseClassImplicitImplementation = (MethodSymbol)baseClass
-                .GetMembers("Method")
-                .Single();
+            var baseClassImplicitImplementation = (MethodSymbol)
+                baseClass.GetMembers("Method").Single();
             Assert.Equal(MethodKind.Ordinary, baseClassImplicitImplementation.MethodKind);
 
-            var baseClassImplicitImplementationBase = (MethodSymbol)baseClass
-                .GetMembers("BaseMethod")
-                .Single();
+            var baseClassImplicitImplementationBase = (MethodSymbol)
+                baseClass.GetMembers("BaseMethod").Single();
             Assert.Equal(MethodKind.Ordinary, baseClassImplicitImplementationBase.MethodKind);
 
             var class1 = (NamedTypeSymbol)global.GetMembers("Class1").Single();
@@ -838,9 +830,8 @@ class Class2 : BaseClass //does not declare interface
             Assert.Equal(MethodKind.Ordinary, baseClassMethodVirtual.MethodKind);
             Assert.True(baseClassMethodVirtual.IsVirtual);
 
-            var baseClassMethodNonVirtual = (MethodSymbol)baseClass
-                .GetMembers("NonVirtual")
-                .Single();
+            var baseClassMethodNonVirtual = (MethodSymbol)
+                baseClass.GetMembers("NonVirtual").Single();
             Assert.Equal(MethodKind.Ordinary, baseClassMethodNonVirtual.MethodKind);
             Assert.False(baseClassMethodNonVirtual.IsVirtual);
 
@@ -1009,9 +1000,8 @@ class DeclaringClass2 : NonDeclaringClass2, Interface
             Assert.True(baseClass.Interfaces().Contains(@interface));
             Assert.Null(baseClass.FindImplementationForInterfaceMember(interfaceMethod));
 
-            var derivedClass = (NamedTypeSymbol)global
-                .GetMembers("DerivedExplicitlyImplementsInterface")
-                .Single();
+            var derivedClass = (NamedTypeSymbol)
+                global.GetMembers("DerivedExplicitlyImplementsInterface").Single();
             Assert.False(
                 derivedClass.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics.ContainsKey(
                     @interface

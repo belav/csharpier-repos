@@ -1681,8 +1681,8 @@ class A {";
                 }
                 else
                 {
-                    var unchangedReport =
-                        (WorkspaceUnchangedDocumentDiagnosticReport)workspaceReport.Value!;
+                    var unchangedReport = (WorkspaceUnchangedDocumentDiagnosticReport)
+                        workspaceReport.Value!;
                     return new TestDiagnosticResult(
                         unchangedReport.Uri,
                         unchangedReport.ResultId!,
@@ -1839,8 +1839,8 @@ class A {";
                 workspace.Services.GetRequiredService<ISolutionCrawlerRegistrationService>();
             registrationService.Register(workspace);
 
-            var diagnosticService =
-                (DiagnosticService)workspace.ExportProvider.GetExportedValue<IDiagnosticService>();
+            var diagnosticService = (DiagnosticService)
+                workspace.ExportProvider.GetExportedValue<IDiagnosticService>();
             diagnosticService.Register(new TestHostDiagnosticUpdateSource(workspace));
         }
 

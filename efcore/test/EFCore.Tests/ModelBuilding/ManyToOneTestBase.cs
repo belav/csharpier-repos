@@ -2000,9 +2000,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 modelBuilder.FinalizeModel();
 
-                var entityType = (IReadOnlyEntityType)modelBuilder.Model.FindEntityType(
-                    typeof(Nob)
-                );
+                var entityType = (IReadOnlyEntityType)
+                    modelBuilder.Model.FindEntityType(typeof(Nob));
                 var fk = entityType.GetForeignKeys().Single();
                 Assert.False(fk.IsRequired);
                 var fkProperty1 = entityType.FindProperty(nameof(Nob.HobId1));
@@ -2026,9 +2025,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 modelBuilder.FinalizeModel();
 
-                var entityType = (IReadOnlyEntityType)modelBuilder.Model.FindEntityType(
-                    typeof(Hob)
-                );
+                var entityType = (IReadOnlyEntityType)
+                    modelBuilder.Model.FindEntityType(typeof(Hob));
                 var fk = entityType.GetForeignKeys().Single();
                 Assert.True(fk.IsRequired);
                 var fkProperty1 = entityType.FindProperty(nameof(Hob.NobId1));
@@ -2053,9 +2051,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 modelBuilder.FinalizeModel();
 
-                var entityType = (IReadOnlyEntityType)modelBuilder.Model.FindEntityType(
-                    typeof(Nob)
-                );
+                var entityType = (IReadOnlyEntityType)
+                    modelBuilder.Model.FindEntityType(typeof(Nob));
                 var fk = entityType.GetForeignKeys().Single();
                 Assert.True(fk.IsRequired);
                 var fkProperty1 = entityType.FindProperty(nameof(Nob.HobId1));
@@ -2080,9 +2077,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 modelBuilder.FinalizeModel();
 
-                var entityType = (IReadOnlyEntityType)modelBuilder.Model.FindEntityType(
-                    typeof(Hob)
-                );
+                var entityType = (IReadOnlyEntityType)
+                    modelBuilder.Model.FindEntityType(typeof(Hob));
                 var fk = entityType.GetForeignKeys().Single();
                 Assert.False(fk.IsRequired);
                 var fkProperty1 = entityType.FindProperty(nameof(Hob.NobId1));
@@ -2112,9 +2108,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 modelBuilder.FinalizeModel();
 
-                var entityType = (IReadOnlyEntityType)modelBuilder.Model.FindEntityType(
-                    typeof(Hob)
-                );
+                var entityType = (IReadOnlyEntityType)
+                    modelBuilder.Model.FindEntityType(typeof(Hob));
                 var fk = entityType.GetForeignKeys().Single();
                 Assert.False(fk.IsRequired);
                 var fkProperty1 = entityType.FindProperty(nameof(Hob.NobId1));
@@ -2129,9 +2124,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             public virtual void Can_change_delete_behavior()
             {
                 var modelBuilder = HobNobBuilder();
-                var dependentType = (IReadOnlyEntityType)modelBuilder.Model.FindEntityType(
-                    typeof(Nob)
-                );
+                var dependentType = (IReadOnlyEntityType)
+                    modelBuilder.Model.FindEntityType(typeof(Nob));
 
                 modelBuilder
                     .Entity<Nob>()
@@ -2336,9 +2330,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     .Navigation(e => e.OneToManyPrincipal)
                     .UsePropertyAccessMode(PropertyAccessMode.Property);
 
-                var principal = (IReadOnlyEntityType)model.FindEntityType(
-                    typeof(OneToManyNavPrincipal)
-                );
+                var principal = (IReadOnlyEntityType)
+                    model.FindEntityType(typeof(OneToManyNavPrincipal));
                 var dependent = (IReadOnlyEntityType)model.FindEntityType(typeof(NavDependent));
 
                 Assert.Equal(

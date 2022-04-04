@@ -380,10 +380,8 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
 
             var container = tupleExprOrTypeNode.GetAncestor<TNamespaceDeclarationSyntax>() ?? root;
             var containingNamespace = container is TNamespaceDeclarationSyntax namespaceDecl
-                ? (INamespaceSymbol)semanticModel.GetRequiredDeclaredSymbol(
-                      namespaceDecl,
-                      cancellationToken
-                  )
+                ? (INamespaceSymbol)
+                      semanticModel.GetRequiredDeclaredSymbol(namespaceDecl, cancellationToken)
                 : semanticModel.Compilation.GlobalNamespace;
 
             // Generate a unique name for the struct we're creating.  We'll also add a rename
@@ -514,10 +512,11 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
 
                 var fullTypeName = containingNamespace.IsGlobalNamespace
                     ? (TNameSyntax)generator.GlobalAliasedName(structNameNode)
-                    : (TNameSyntax)generator.QualifiedName(
-                          generator.NameExpression(containingNamespace),
-                          structNameNode
-                      );
+                    : (TNameSyntax)
+                          generator.QualifiedName(
+                              generator.NameExpression(containingNamespace),
+                              structNameNode
+                          );
 
                 fullTypeName = fullTypeName
                     .WithAdditionalAnnotations(Simplifier.Annotation)
@@ -597,10 +596,11 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
 
             return typeParameters.IsEmpty
               ? (TNameSyntax)generator.IdentifierName(structNameToken)
-              : (TNameSyntax)generator.GenericName(
-                    structNameToken,
-                    typeParameters.Select(tp => generator.IdentifierName(tp.Name))
-                );
+              : (TNameSyntax)
+                    generator.GenericName(
+                        structNameToken,
+                        typeParameters.Select(tp => generator.IdentifierName(tp.Name))
+                    );
         }
 
         private static async Task<ImmutableArray<DocumentToUpdate>> GetDocumentsToUpdateAsync(
@@ -780,10 +780,8 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
             var semanticModel = await startingDocument
                 .GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
-            var typeSymbol = (INamedTypeSymbol)semanticModel.GetRequiredDeclaredSymbol(
-                containingType,
-                cancellationToken
-            );
+            var typeSymbol = (INamedTypeSymbol)
+                semanticModel.GetRequiredDeclaredSymbol(containingType, cancellationToken);
 
             using var _ = ArrayBuilder<DocumentToUpdate>.GetInstance(out var result);
 

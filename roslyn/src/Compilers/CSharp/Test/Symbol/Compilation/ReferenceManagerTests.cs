@@ -3176,9 +3176,12 @@ new B()
                         {
                             {
                                 "a",
-                                (PortableExecutableReference)aRef.WithProperties(
-                                    MetadataReferenceProperties.Assembly.WithRecursiveAliases(true)
-                                )
+                                (PortableExecutableReference)
+                                    aRef.WithProperties(
+                                        MetadataReferenceProperties.Assembly.WithRecursiveAliases(
+                                            true
+                                        )
+                                    )
                             }
                         }
                     )
@@ -3224,9 +3227,8 @@ new B()
                         {
                             {
                                 "a",
-                                (PortableExecutableReference)aRef.WithProperties(
-                                    MetadataReferenceProperties.Assembly
-                                )
+                                (PortableExecutableReference)
+                                    aRef.WithProperties(MetadataReferenceProperties.Assembly)
                             }
                         }
                     )

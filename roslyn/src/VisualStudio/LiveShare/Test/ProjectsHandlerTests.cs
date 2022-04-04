@@ -21,11 +21,12 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.UnitTests
             var solution = testLspServer.GetCurrentSolution();
             var expected = solution.Projects.Select(p => CreateLspProject(p)).ToArray();
 
-            var results = (CustomProtocol.Project[])await TestHandleAsync<object, object[]>(
-                solution,
-                null,
-                CustomProtocol.RoslynMethods.ProjectsName
-            );
+            var results = (CustomProtocol.Project[])
+                await TestHandleAsync<object, object[]>(
+                    solution,
+                    null,
+                    CustomProtocol.RoslynMethods.ProjectsName
+                );
             AssertJsonEquals(expected, results);
         }
 

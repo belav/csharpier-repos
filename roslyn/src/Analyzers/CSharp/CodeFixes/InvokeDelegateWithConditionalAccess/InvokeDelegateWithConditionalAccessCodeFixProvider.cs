@@ -110,9 +110,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
             var ifStatement = (IfStatementSyntax)root.FindNode(ifStatementLocation.SourceSpan);
             cancellationToken.ThrowIfCancellationRequested();
 
-            var expressionStatement = (ExpressionStatementSyntax)root.FindNode(
-                expressionStatementLocation.SourceSpan
-            );
+            var expressionStatement = (ExpressionStatementSyntax)
+                root.FindNode(expressionStatementLocation.SourceSpan);
             cancellationToken.ThrowIfCancellationRequested();
 
             var invocationExpression = (InvocationExpressionSyntax)expressionStatement.Expression;
@@ -159,17 +158,15 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
             var ifStatementLocation = diagnostic.AdditionalLocations[1];
             var expressionStatementLocation = diagnostic.AdditionalLocations[2];
 
-            var localDeclarationStatement = (LocalDeclarationStatementSyntax)root.FindNode(
-                localDeclarationLocation.SourceSpan
-            );
+            var localDeclarationStatement = (LocalDeclarationStatementSyntax)
+                root.FindNode(localDeclarationLocation.SourceSpan);
             cancellationToken.ThrowIfCancellationRequested();
 
             var ifStatement = (IfStatementSyntax)root.FindNode(ifStatementLocation.SourceSpan);
             cancellationToken.ThrowIfCancellationRequested();
 
-            var expressionStatement = (ExpressionStatementSyntax)root.FindNode(
-                expressionStatementLocation.SourceSpan
-            );
+            var expressionStatement = (ExpressionStatementSyntax)
+                root.FindNode(expressionStatementLocation.SourceSpan);
             cancellationToken.ThrowIfCancellationRequested();
 
             var invocationExpression = (InvocationExpressionSyntax)expressionStatement.Expression;

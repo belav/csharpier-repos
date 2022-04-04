@@ -349,14 +349,8 @@ namespace System.Data.Common
                     throw ADP.MissingSelectCommand(ADP.FillSchema);
                 }
                 // Never returns null if dataSet is non-null
-                return (DataTable[])FillSchemaInternal(
-                    dataSet,
-                    null,
-                    schemaType,
-                    command,
-                    srcTable,
-                    behavior
-                )!;
+                return (DataTable[])
+                    FillSchemaInternal(dataSet, null, schemaType, command, srcTable, behavior)!;
             }
             finally
             {
@@ -399,14 +393,15 @@ namespace System.Data.Common
                 {
                     srcTableName = TableMappings[index].SourceTable;
                 }
-                return (DataTable?)FillSchemaInternal(
-                    null,
-                    dataTable,
-                    schemaType,
-                    command,
-                    srcTableName,
-                    behavior | CommandBehavior.SingleResult
-                );
+                return (DataTable?)
+                    FillSchemaInternal(
+                        null,
+                        dataTable,
+                        schemaType,
+                        command,
+                        srcTableName,
+                        behavior | CommandBehavior.SingleResult
+                    );
             }
             finally
             {

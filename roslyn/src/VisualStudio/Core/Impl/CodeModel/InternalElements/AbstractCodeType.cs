@@ -77,12 +77,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
                     this.State,
                     this,
                     (ICodeElements)this.Attributes,
-                    (ICodeElements)InheritsImplementsCollection.Create(
-                        this.State,
-                        this,
-                        this.FileCodeModel,
-                        this.NodeKey
-                    ),
+                    (ICodeElements)
+                        InheritsImplementsCollection.Create(
+                            this.State,
+                            this,
+                            this.FileCodeModel,
+                            this.NodeKey
+                        ),
                     (ICodeElements)this.Members
                 );
             }

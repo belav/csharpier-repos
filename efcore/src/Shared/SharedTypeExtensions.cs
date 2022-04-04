@@ -724,9 +724,10 @@ namespace System
         }
 
         public static ConstantExpression GetDefaultValueConstant(this Type type) =>
-            (ConstantExpression)_generateDefaultValueConstantMethod
-                .MakeGenericMethod(type)
-                .Invoke(null, Array.Empty<object>())!;
+            (ConstantExpression)
+                _generateDefaultValueConstantMethod
+                    .MakeGenericMethod(type)
+                    .Invoke(null, Array.Empty<object>())!;
 
         private static readonly MethodInfo _generateDefaultValueConstantMethod =
             typeof(SharedTypeExtensions)

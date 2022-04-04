@@ -210,9 +210,8 @@ namespace System.Runtime.Loader
             AssemblyName assemblyName
         )
         {
-            AssemblyLoadContext context = (AssemblyLoadContext)(
-                GCHandle.FromIntPtr(gchManagedAssemblyLoadContext).Target
-            )!;
+            AssemblyLoadContext context = (AssemblyLoadContext)
+                (GCHandle.FromIntPtr(gchManagedAssemblyLoadContext).Target)!;
 
             // Invoke the ResolveSatelliteAssembly method
             return context.ResolveSatelliteAssembly(assemblyName);
@@ -225,9 +224,8 @@ namespace System.Runtime.Loader
             IntPtr gchManagedAssemblyLoadContext
         )
         {
-            AssemblyLoadContext context = (AssemblyLoadContext)(
-                GCHandle.FromIntPtr(gchManagedAssemblyLoadContext).Target
-            )!;
+            AssemblyLoadContext context = (AssemblyLoadContext)
+                (GCHandle.FromIntPtr(gchManagedAssemblyLoadContext).Target)!;
             return context.LoadUnmanagedDll(unmanagedDllName);
         }
 
@@ -239,9 +237,8 @@ namespace System.Runtime.Loader
             IntPtr gchManagedAssemblyLoadContext
         )
         {
-            AssemblyLoadContext context = (AssemblyLoadContext)(
-                GCHandle.FromIntPtr(gchManagedAssemblyLoadContext).Target
-            )!;
+            AssemblyLoadContext context = (AssemblyLoadContext)
+                (GCHandle.FromIntPtr(gchManagedAssemblyLoadContext).Target)!;
             return context.GetResolvedUnmanagedDll(assembly, unmanagedDllName);
         }
 
@@ -252,9 +249,8 @@ namespace System.Runtime.Loader
             AssemblyName assemblyName
         )
         {
-            AssemblyLoadContext context = (AssemblyLoadContext)(
-                GCHandle.FromIntPtr(gchManagedAssemblyLoadContext).Target
-            )!;
+            AssemblyLoadContext context = (AssemblyLoadContext)
+                (GCHandle.FromIntPtr(gchManagedAssemblyLoadContext).Target)!;
             // Invoke the AssemblyResolve event callbacks if wired up
             return context.ResolveUsingEvent(assemblyName);
         }
@@ -289,9 +285,8 @@ namespace System.Runtime.Loader
                 }
                 else
                 {
-                    loadContextForAssembly = (AssemblyLoadContext)(
-                        GCHandle.FromIntPtr(ptrAssemblyLoadContext).Target
-                    )!;
+                    loadContextForAssembly = (AssemblyLoadContext)
+                        (GCHandle.FromIntPtr(ptrAssemblyLoadContext).Target)!;
                 }
             }
 

@@ -8469,10 +8469,11 @@ IRangeOperation (OperationKind.Range, Type: System.Range) (Syntax: '1..2')
         ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 2) (Syntax: '2')
 ";
 
-            var operation = (IRangeOperation)VerifyOperationTreeForTest<RangeExpressionSyntax>(
-                compilation,
-                expectedOperationTree
-            );
+            var operation = (IRangeOperation)
+                VerifyOperationTreeForTest<RangeExpressionSyntax>(
+                    compilation,
+                    expectedOperationTree
+                );
             Assert.Equal(RangeCtorSignature, operation.Method.ToTestDisplayString());
         }
 
@@ -8506,10 +8507,11 @@ IRangeOperation (OperationKind.Range, Type: System.Range) (Syntax: '0..^1')
         ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 1) (Syntax: '1')
 ";
 
-            var operation = (IRangeOperation)VerifyOperationTreeForTest<RangeExpressionSyntax>(
-                compilation,
-                expectedOperationTree
-            );
+            var operation = (IRangeOperation)
+                VerifyOperationTreeForTest<RangeExpressionSyntax>(
+                    compilation,
+                    expectedOperationTree
+                );
             Assert.Equal(RangeCtorSignature, operation.Method.ToTestDisplayString());
         }
 
@@ -8541,10 +8543,11 @@ IRangeOperation (OperationKind.Range, Type: System.Range) (Syntax: '..2')
         ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 2) (Syntax: '2')
 ";
 
-            var operation = (IRangeOperation)VerifyOperationTreeForTest<RangeExpressionSyntax>(
-                compilation,
-                expectedOperationTree
-            );
+            var operation = (IRangeOperation)
+                VerifyOperationTreeForTest<RangeExpressionSyntax>(
+                    compilation,
+                    expectedOperationTree
+                );
             Assert.Equal(RangeEndAtSignature, operation.Method.ToTestDisplayString());
         }
 
@@ -8576,10 +8579,11 @@ IRangeOperation (OperationKind.Range, Type: System.Range) (Syntax: '1..')
     null
 ";
 
-            var operation = (IRangeOperation)VerifyOperationTreeForTest<RangeExpressionSyntax>(
-                compilation,
-                expectedOperationTree
-            );
+            var operation = (IRangeOperation)
+                VerifyOperationTreeForTest<RangeExpressionSyntax>(
+                    compilation,
+                    expectedOperationTree
+                );
             Assert.Equal(RangeStartAtSignature, operation.Method.ToTestDisplayString());
         }
 
@@ -8608,10 +8612,11 @@ IRangeOperation (OperationKind.Range, Type: System.Range) (Syntax: '..')
     null
 ";
 
-            var operation = (IRangeOperation)VerifyOperationTreeForTest<RangeExpressionSyntax>(
-                compilation,
-                expectedOperationTree
-            );
+            var operation = (IRangeOperation)
+                VerifyOperationTreeForTest<RangeExpressionSyntax>(
+                    compilation,
+                    expectedOperationTree
+                );
             Assert.Equal(RangeAllSignature, operation.Method.ToTestDisplayString());
         }
 
@@ -8646,10 +8651,11 @@ IRangeOperation (IsLifted) (OperationKind.Range, Type: System.Range?) (Syntax: '
         IParameterReferenceOperation: end (OperationKind.ParameterReference, Type: System.Int32?) (Syntax: 'end')
 ";
 
-            var operation = (IRangeOperation)VerifyOperationTreeForTest<RangeExpressionSyntax>(
-                compilation,
-                expectedOperationTree
-            );
+            var operation = (IRangeOperation)
+                VerifyOperationTreeForTest<RangeExpressionSyntax>(
+                    compilation,
+                    expectedOperationTree
+                );
             Assert.Equal(RangeCtorSignature, operation.Method.ToTestDisplayString());
         }
 
@@ -8683,10 +8689,11 @@ IRangeOperation (IsLifted) (OperationKind.Range, Type: System.Range?) (Syntax: '
         IParameterReferenceOperation: end (OperationKind.ParameterReference, Type: System.Int32?) (Syntax: 'end')
 ";
 
-            var operation = (IRangeOperation)VerifyOperationTreeForTest<RangeExpressionSyntax>(
-                compilation,
-                expectedOperationTree
-            );
+            var operation = (IRangeOperation)
+                VerifyOperationTreeForTest<RangeExpressionSyntax>(
+                    compilation,
+                    expectedOperationTree
+                );
             Assert.Equal(RangeCtorSignature, operation.Method.ToTestDisplayString());
         }
 
@@ -8718,10 +8725,11 @@ IRangeOperation (IsLifted) (OperationKind.Range, Type: System.Range?) (Syntax: '
         IParameterReferenceOperation: end (OperationKind.ParameterReference, Type: System.Int32?) (Syntax: 'end')
 ";
 
-            var operation = (IRangeOperation)VerifyOperationTreeForTest<RangeExpressionSyntax>(
-                compilation,
-                expectedOperationTree
-            );
+            var operation = (IRangeOperation)
+                VerifyOperationTreeForTest<RangeExpressionSyntax>(
+                    compilation,
+                    expectedOperationTree
+                );
             Assert.Equal(RangeEndAtSignature, operation.Method.ToTestDisplayString());
         }
 
@@ -8753,10 +8761,11 @@ IRangeOperation (IsLifted) (OperationKind.Range, Type: System.Range?) (Syntax: '
     null
 ";
 
-            var operation = (IRangeOperation)VerifyOperationTreeForTest<RangeExpressionSyntax>(
-                compilation,
-                expectedOperationTree
-            );
+            var operation = (IRangeOperation)
+                VerifyOperationTreeForTest<RangeExpressionSyntax>(
+                    compilation,
+                    expectedOperationTree
+                );
             Assert.Equal(RangeStartAtSignature, operation.Method.ToTestDisplayString());
         }
     }

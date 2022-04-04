@@ -1487,16 +1487,18 @@ namespace System.Data.Common
 
             try
             {
-                version = (string?)ADP.LocalMachineRegistryValue(
-                    "Software\\Microsoft\\DataAccess",
-                    "FullInstallVer"
-                );
+                version = (string?)
+                    ADP.LocalMachineRegistryValue(
+                        "Software\\Microsoft\\DataAccess",
+                        "FullInstallVer"
+                    );
                 if (ADP.IsEmpty(version))
                 {
-                    string filename = (string)ADP.ClassesRootRegistryValue(
-                        System.Data.OleDb.ODB.DataLinks_CLSID,
-                        string.Empty
-                    )!;
+                    string filename = (string)
+                        ADP.ClassesRootRegistryValue(
+                            System.Data.OleDb.ODB.DataLinks_CLSID,
+                            string.Empty
+                        )!;
                     FileVersionInfo versionInfo = ADP.GetVersionInfo(filename);
                     major = versionInfo.FileMajorPart;
                     minor = versionInfo.FileMinorPart;

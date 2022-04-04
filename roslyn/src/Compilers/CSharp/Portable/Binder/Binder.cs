@@ -896,10 +896,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 diagnostics.Add(
                     unmanagedCallersOnlyAttributeData
                         == UnmanagedCallersOnlyAttributeData.Uninitialized
-                      ? (DiagnosticInfo)new LazyUnmanagedCallersOnlyMethodCalledDiagnosticInfo(
-                            symbol,
-                            isDelegateConversion
-                        )
+                      ? (DiagnosticInfo)
+                            new LazyUnmanagedCallersOnlyMethodCalledDiagnosticInfo(
+                                symbol,
+                                isDelegateConversion
+                            )
                       : new CSDiagnosticInfo(
                             isDelegateConversion
                               ? ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeConvertedToDelegate

@@ -320,10 +320,11 @@ public class MulticastDelegateCombineImpl
                 dd1.TestVoidParameterVoidCallback
             );
 
-            dd.VoidParameterVoidDelegate = (VoidParameterVoidDelegate)MulticastDelegate.Combine(
-                dd.VoidParameterVoidDelegate,
-                dd1.VoidParameterVoidDelegate
-            );
+            dd.VoidParameterVoidDelegate = (VoidParameterVoidDelegate)
+                MulticastDelegate.Combine(
+                    dd.VoidParameterVoidDelegate,
+                    dd1.VoidParameterVoidDelegate
+                );
 
             dd.VoidParameterVoidDelegate();
 

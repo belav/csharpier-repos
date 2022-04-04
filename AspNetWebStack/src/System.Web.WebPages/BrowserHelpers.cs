@@ -62,8 +62,8 @@ namespace System.Web.WebPages
             Func<string, HttpBrowserCapabilitiesBase> createBrowser
         )
         {
-            HttpBrowserCapabilitiesBase overriddenBrowser =
-                (HttpBrowserCapabilitiesBase)httpContext.Items[_browserOverrideKey];
+            HttpBrowserCapabilitiesBase overriddenBrowser = (HttpBrowserCapabilitiesBase)
+                httpContext.Items[_browserOverrideKey];
 
             if (overriddenBrowser == null)
             {

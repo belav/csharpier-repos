@@ -1048,9 +1048,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         public sealed override Cci.IMethodReference GetInitArrayHelper()
         {
             return (
-                (MethodSymbol)Compilation.GetWellKnownTypeMember(
-                    WellKnownMember.System_Runtime_CompilerServices_RuntimeHelpers__InitializeArrayArrayRuntimeFieldHandle
-                )
+                (MethodSymbol)
+                    Compilation.GetWellKnownTypeMember(
+                        WellKnownMember.System_Runtime_CompilerServices_RuntimeHelpers__InitializeArrayArrayRuntimeFieldHandle
+                    )
             )?.GetCciAdapter();
         }
 
@@ -1111,8 +1112,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
             AssemblyReference asmRef = new AssemblyReference(assembly);
 
-            AssemblyReference cachedAsmRef =
-                (AssemblyReference)AssemblyOrModuleSymbolToModuleRefMap.GetOrAdd(assembly, asmRef);
+            AssemblyReference cachedAsmRef = (AssemblyReference)
+                AssemblyOrModuleSymbolToModuleRefMap.GetOrAdd(assembly, asmRef);
 
             if (cachedAsmRef == asmRef)
             {
@@ -1283,10 +1284,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                         typeRef = new GenericNamespaceTypeInstanceReference(namedTypeSymbol);
                     }
 
-                    typeRef = (Cci.INamedTypeReference)_genericInstanceMap.GetOrAdd(
-                        namedTypeSymbol,
-                        typeRef
-                    );
+                    typeRef = (Cci.INamedTypeReference)
+                        _genericInstanceMap.GetOrAdd(namedTypeSymbol, typeRef);
 
                     return typeRef;
                 }
@@ -1300,10 +1299,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                     }
 
                     typeRef = new SpecializedNestedTypeReference(namedTypeSymbol);
-                    typeRef = (Cci.INamedTypeReference)_genericInstanceMap.GetOrAdd(
-                        namedTypeSymbol,
-                        typeRef
-                    );
+                    typeRef = (Cci.INamedTypeReference)
+                        _genericInstanceMap.GetOrAdd(namedTypeSymbol, typeRef);
 
                     return typeRef;
                 }
@@ -1672,10 +1669,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                         methodRef = new SpecializedMethodReference(methodSymbol);
                     }
 
-                    methodRef = (Cci.IMethodReference)_genericInstanceMap.GetOrAdd(
-                        methodSymbol,
-                        methodRef
-                    );
+                    methodRef = (Cci.IMethodReference)
+                        _genericInstanceMap.GetOrAdd(methodSymbol, methodRef);
 
                     return methodRef;
                 }
@@ -1724,10 +1719,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                     else
                     {
                         methodRef = new SpecializedMethodReference(methodSymbol);
-                        methodRef = (Cci.IMethodReference)_genericInstanceMap.GetOrAdd(
-                            methodSymbol,
-                            methodRef
-                        );
+                        methodRef = (Cci.IMethodReference)
+                            _genericInstanceMap.GetOrAdd(methodSymbol, methodRef);
                     }
                 }
                 else

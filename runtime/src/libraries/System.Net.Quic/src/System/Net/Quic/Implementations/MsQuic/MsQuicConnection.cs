@@ -493,10 +493,11 @@ namespace System.Net.Quic.Implementations.MsQuic
                         unsafe
                         {
                             ReadOnlySpan<QuicBuffer> quicBuffer = new ReadOnlySpan<QuicBuffer>(
-                                (void*)connectionEvent
-                                    .Data
-                                    .PeerCertificateReceived
-                                    .PlatformCertificateHandle,
+                                (void*)
+                                    connectionEvent
+                                        .Data
+                                        .PeerCertificateReceived
+                                        .PlatformCertificateHandle,
                                 sizeof(QuicBuffer)
                             );
                             certificate = new X509Certificate2(
@@ -516,10 +517,11 @@ namespace System.Net.Quic.Implementations.MsQuic
                             )
                             {
                                 quicBuffer = new ReadOnlySpan<QuicBuffer>(
-                                    (void*)connectionEvent
-                                        .Data
-                                        .PeerCertificateReceived
-                                        .PlatformCertificateChainHandle,
+                                    (void*)
+                                        connectionEvent
+                                            .Data
+                                            .PeerCertificateReceived
+                                            .PlatformCertificateChainHandle,
                                     sizeof(QuicBuffer)
                                 );
                                 if (quicBuffer[0].Length != 0 && quicBuffer[0].Buffer != null)

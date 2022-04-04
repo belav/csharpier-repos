@@ -85,10 +85,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
 
                 if (fieldSymbol.DeclaredAccessibility != propertySymbol.DeclaredAccessibility)
                 {
-                    accessor = (AccessorDeclarationSyntax)generator.WithAccessibility(
-                        accessor,
-                        fieldSymbol.DeclaredAccessibility
-                    );
+                    accessor = (AccessorDeclarationSyntax)
+                        generator.WithAccessibility(accessor, fieldSymbol.DeclaredAccessibility);
                 }
 
                 var modifiers = SyntaxFactory.TokenList(
@@ -200,8 +198,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
             CancellationToken cancellationToken
         )
         {
-            var variableDeclarator =
-                (VariableDeclaratorSyntax)await fieldSymbol.DeclaringSyntaxReferences[0]
+            var variableDeclarator = (VariableDeclaratorSyntax)
+                await fieldSymbol.DeclaringSyntaxReferences[0]
                     .GetSyntaxAsync(cancellationToken)
                     .ConfigureAwait(false);
             return variableDeclarator.Initializer?.Value;

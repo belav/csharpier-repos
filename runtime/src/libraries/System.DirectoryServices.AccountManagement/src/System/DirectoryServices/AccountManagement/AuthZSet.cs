@@ -153,10 +153,11 @@ namespace System.DirectoryServices.AccountManagement
                                 // Extract TOKEN_GROUPS.GroupCount
 
                                 UnsafeNativeMethods.TOKEN_GROUPS tokenGroups =
-                                    (UnsafeNativeMethods.TOKEN_GROUPS)Marshal.PtrToStructure(
-                                        pBuffer,
-                                        typeof(UnsafeNativeMethods.TOKEN_GROUPS)
-                                    );
+                                    (UnsafeNativeMethods.TOKEN_GROUPS)
+                                        Marshal.PtrToStructure(
+                                            pBuffer,
+                                            typeof(UnsafeNativeMethods.TOKEN_GROUPS)
+                                        );
 
                                 int groupCount = tokenGroups.groupCount;
 
@@ -180,8 +181,8 @@ namespace System.DirectoryServices.AccountManagement
 
                                 for (int i = 0; i < groupCount; i++)
                                 {
-                                    groups[i] =
-                                        (UnsafeNativeMethods.SID_AND_ATTR)Marshal.PtrToStructure(
+                                    groups[i] = (UnsafeNativeMethods.SID_AND_ATTR)
+                                        Marshal.PtrToStructure(
                                             currentItem,
                                             typeof(UnsafeNativeMethods.SID_AND_ATTR)
                                         );
@@ -501,11 +502,12 @@ namespace System.DirectoryServices.AccountManagement
                     ir.UrnScheme = UrnScheme.SidScheme;
                     ir.UrnValue = sidObj.ToString();
 
-                    group = (GroupPrincipal)((ADStoreCtx)ctx.QueryCtx).FindPrincipalBySID(
-                        typeof(GroupPrincipal),
-                        ir,
-                        true
-                    );
+                    group = (GroupPrincipal)
+                        ((ADStoreCtx)ctx.QueryCtx).FindPrincipalBySID(
+                            typeof(GroupPrincipal),
+                            ir,
+                            true
+                        );
                 }
 
                 if (group == null)

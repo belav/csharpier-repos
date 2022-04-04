@@ -108,9 +108,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         )
         {
             return new CodeGenerationConstructedNamedTypeSymbol(
-                (CodeGenerationNamedTypeSymbol)_constructedFrom.WithNullableAnnotation(
-                    nullableAnnotation
-                ),
+                (CodeGenerationNamedTypeSymbol)
+                    _constructedFrom.WithNullableAnnotation(nullableAnnotation),
                 _typeArguments,
                 this.TypeMembers
             );

@@ -258,9 +258,8 @@ namespace Newtonsoft.Json.Tests.Converters
 
             UnionCase caseInfo = union.Cases.Single(c => c.Name == "Rectangle");
 
-            Shape.Rectangle value = (Shape.Rectangle)caseInfo.Constructor.Invoke(
-                new object[] { 10.0, 5.0 }
-            );
+            Shape.Rectangle value = (Shape.Rectangle)
+                caseInfo.Constructor.Invoke(new object[] { 10.0, 5.0 });
 
             Assert.AreEqual(
                 "Newtonsoft.Json.Tests.TestObjects.GeometricForms.Shape+Rectangle",

@@ -31,17 +31,18 @@ namespace System.Linq.Expressions.Tests
 
         private static RuntimeWrappedException CreateRuntimeWrappedException(object inner)
         {
-            return (RuntimeWrappedException)typeof(RuntimeWrappedException)
-                .GetConstructor(
-                    BindingFlags.Instance
-                        | BindingFlags.Public
-                        | BindingFlags.NonPublic
-                        | BindingFlags.ExactBinding,
-                    null,
-                    new Type[] { typeof(object) },
-                    null
-                )
-                .Invoke(new[] { inner });
+            return (RuntimeWrappedException)
+                typeof(RuntimeWrappedException)
+                    .GetConstructor(
+                        BindingFlags.Instance
+                            | BindingFlags.Public
+                            | BindingFlags.NonPublic
+                            | BindingFlags.ExactBinding,
+                        null,
+                        new Type[] { typeof(object) },
+                        null
+                    )
+                    .Invoke(new[] { inner });
         }
 
         [Theory]

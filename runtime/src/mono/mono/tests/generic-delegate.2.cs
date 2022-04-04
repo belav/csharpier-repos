@@ -68,10 +68,11 @@ public class main
             return 1;
 
         tda =
-            (TDelegate<ClassA>)Delegate.CreateDelegate(
-                typeof(TDelegate<ClassA>),
-                typeof(Gen<ClassA>).GetMethod("staticTFunction")
-            );
+            (TDelegate<ClassA>)
+                Delegate.CreateDelegate(
+                    typeof(TDelegate<ClassA>),
+                    typeof(Gen<ClassA>).GetMethod("staticTFunction")
+                );
 
         if (tda().GetType() != typeof(ClassA[]))
             return 1;

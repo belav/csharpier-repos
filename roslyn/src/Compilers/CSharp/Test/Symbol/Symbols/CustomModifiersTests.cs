@@ -62,11 +62,12 @@ class Module1
     }
 }
 ";
-            var compilation = (Compilation)CreateCompilationWithILAndMscorlib40(
-                source,
-                ilSource,
-                options: TestOptions.ReleaseExe
-            );
+            var compilation = (Compilation)
+                CreateCompilationWithILAndMscorlib40(
+                    source,
+                    ilSource,
+                    options: TestOptions.ReleaseExe
+                );
 
             var test = compilation.GetTypeByMetadataName("Test1").GetMember<IMethodSymbol>("Test");
             var type = (INamedTypeSymbol)test.Parameters.First().Type;
@@ -158,11 +159,12 @@ class Module1
     }
 }
 ";
-            var compilation = (Compilation)CreateCompilationWithILAndMscorlib40(
-                source,
-                ilSource,
-                options: TestOptions.ReleaseExe
-            );
+            var compilation = (Compilation)
+                CreateCompilationWithILAndMscorlib40(
+                    source,
+                    ilSource,
+                    options: TestOptions.ReleaseExe
+                );
 
             var test = compilation.GetTypeByMetadataName("Test1").GetMember<IMethodSymbol>("Test");
             var type = (INamedTypeSymbol)test.Parameters.First().Type;
@@ -1803,9 +1805,12 @@ class Module1
             Assert.Same(
                 compilation1.SourceModule.CorLibrary(),
                 (
-                    (CSharpCustomModifier)(
-                        (NamedTypeSymbol)test.Parameters.First().Type
-                    ).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0].CustomModifiers.First()
+                    (CSharpCustomModifier)
+                        (
+                            (NamedTypeSymbol)test.Parameters.First().Type
+                        ).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
+                            0
+                        ].CustomModifiers.First()
                 )
                     .ModifierSymbol
                     .ContainingAssembly
@@ -1832,9 +1837,12 @@ class Module1
             Assert.Same(
                 compilation2.SourceModule.CorLibrary(),
                 (
-                    (CSharpCustomModifier)(
-                        (NamedTypeSymbol)test.Parameters.First().Type
-                    ).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0].CustomModifiers.First()
+                    (CSharpCustomModifier)
+                        (
+                            (NamedTypeSymbol)test.Parameters.First().Type
+                        ).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
+                            0
+                        ].CustomModifiers.First()
                 )
                     .ModifierSymbol
                     .ContainingAssembly

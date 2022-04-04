@@ -1462,9 +1462,8 @@ class UsePia4
 
                 Assert.Equal(1, module.GetReferencedAssemblySymbols().Length);
 
-                var itest1 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("ITest1")
-                    .Single();
+                var itest1 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("ITest1").Single();
                 Assert.Equal(TypeKind.Interface, itest1.TypeKind);
                 Assert.Null(itest1.BaseType());
                 Assert.Equal(0, itest1.Interfaces().Length);
@@ -1506,9 +1505,8 @@ class UsePia4
                     itest1.Flags
                 );
 
-                var test2 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("Test2")
-                    .Single();
+                var test2 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("Test2").Single();
                 Assert.Equal(TypeKind.Struct, test2.TypeKind);
                 Assert.Equal(SpecialType.System_ValueType, test2.BaseType().SpecialType);
                 Assert.Same(itest1, test2.Interfaces().Single());
@@ -1596,9 +1594,8 @@ class UsePia4
                     module.GlobalNamespace.GetTypeMembers("UsePia1").Single().Interfaces().Single()
                 );
 
-                var test9 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("Test9")
-                    .Single();
+                var test9 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("Test9").Single();
                 Assert.Equal(TypeKind.Enum, test9.TypeKind);
                 Assert.False(test9.IsComImport);
                 Assert.False(test9.IsSerializable);
@@ -1712,9 +1709,8 @@ class UsePia4
                     )
                 );
 
-                var test11 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("Test11")
-                    .Single();
+                var test11 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("Test11").Single();
                 Assert.Equal(TypeKind.Delegate, test11.TypeKind);
                 Assert.Equal(SpecialType.System_MulticastDelegate, test11.BaseType().SpecialType);
 
@@ -1924,9 +1920,8 @@ class UsePia4
                 Assert.Equal(TypeKind.Interface, itest16.TypeKind);
                 Assert.Equal("void ITest16.M16()", itest16.GetMembers()[0].ToTestDisplayString());
 
-                var itest17 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("ITest17")
-                    .Single();
+                var itest17 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("ITest17").Single();
                 Assert.Equal(TypeKind.Interface, itest17.TypeKind);
 
                 var metadata = ((PEModuleSymbol)module).Module;
@@ -2011,15 +2006,13 @@ class UsePia4
                 );
                 Assert.Equal("void ITest17.M17()", m17.ToTestDisplayString());
 
-                var itest18 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("ITest18")
-                    .Single();
+                var itest18 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("ITest18").Single();
                 Assert.Equal(TypeKind.Interface, itest18.TypeKind);
                 Assert.False(metadata.GetMethodsOfTypeOrThrow(itest18.Handle).AsEnumerable().Any());
 
-                var itest19 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("ITest19")
-                    .Single();
+                var itest19 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("ITest19").Single();
                 var m20 = (PEMethodSymbol)itest19.GetMembers("M20").Single();
 
                 // 6 Arguments
@@ -2099,9 +2092,8 @@ class UsePia4
                     (System.Runtime.InteropServices.UnmanagedType)param.MarshallingDescriptor[0]
                 );
 
-                var itest21 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("ITest21")
-                    .Single();
+                var itest21 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("ITest21").Single();
                 var p1 = (PEPropertySymbol)itest21.GetMembers("P1").Single();
 
                 Assert.Equal(Accessibility.Public, p1.DeclaredAccessibility);
@@ -2114,9 +2106,8 @@ class UsePia4
                 Assert.Same(p1.GetMethod, get_P1);
                 Assert.Same(p1.SetMethod, set_P1);
 
-                var itest22 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("ITest22")
-                    .Single();
+                var itest22 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("ITest22").Single();
                 var p2 = (PEPropertySymbol)itest22.GetMembers("P2").Single();
 
                 var get_P2 = (PEMethodSymbol)itest22.GetMembers("get_P2").Single();
@@ -2125,9 +2116,8 @@ class UsePia4
                 Assert.Same(p2.GetMethod, get_P2);
                 Assert.Same(p2.SetMethod, set_P2);
 
-                var itest23 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("ITest23")
-                    .Single();
+                var itest23 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("ITest23").Single();
                 var p3 = (PEPropertySymbol)itest23.GetMembers("P3").Single();
 
                 var get_P3 = (PEMethodSymbol)itest23.GetMembers("get_P3").Single();
@@ -2135,9 +2125,8 @@ class UsePia4
                 Assert.Same(p3.GetMethod, get_P3);
                 Assert.Null(p3.SetMethod);
 
-                var itest24 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("ITest24")
-                    .Single();
+                var itest24 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("ITest24").Single();
                 var p4 = (PEPropertySymbol)itest24.GetMembers("P4").Single();
 
                 Assert.Equal(2, itest24.GetMembers().Length);
@@ -2153,9 +2142,8 @@ class UsePia4
                 Assert.Null(p4.GetMethod);
                 Assert.Same(p4.SetMethod, set_P4);
 
-                var itest25 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("ITest25")
-                    .Single();
+                var itest25 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("ITest25").Single();
                 var e1 = (PEEventSymbol)itest25.GetMembers("E1").Single();
 
                 Assert.True(e1.HasSpecialName);
@@ -2167,9 +2155,8 @@ class UsePia4
                 Assert.Same(e1.AddMethod, add_E1);
                 Assert.Same(e1.RemoveMethod, remove_E1);
 
-                var itest26 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("ITest26")
-                    .Single();
+                var itest26 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("ITest26").Single();
                 var e2 = (PEEventSymbol)itest26.GetMembers("E2").Single();
 
                 Assert.Equal(3, itest26.GetMembers().Length);
@@ -2290,14 +2277,12 @@ interface UsePia5 : ITest29
 
                 Assert.Equal(1, module.GetReferencedAssemblySymbols().Length);
 
-                var itest28 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("ITest28")
-                    .Single();
+                var itest28 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("ITest28").Single();
                 Assert.Equal(TypeKind.Interface, itest28.TypeKind);
 
-                var itest29 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("ITest29")
-                    .Single();
+                var itest29 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("ITest29").Single();
                 Assert.Equal(TypeKind.Interface, itest29.TypeKind);
 
                 var m21 = (PEMethodSymbol)itest29.GetMembers("M21").Single();
@@ -2492,9 +2477,8 @@ class UsePia
 
                 Assert.Equal(1, module.GetReferencedAssemblySymbols().Length);
 
-                var itest28 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("ITest28")
-                    .Single();
+                var itest28 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("ITest28").Single();
 
                 var interfaceType = itest28
                     .GetAttributes("System.Runtime.InteropServices", "CoClassAttribute")
@@ -2604,9 +2588,8 @@ class UsePia
 
                 Assert.Equal(1, module.GetReferencedAssemblySymbols().Length);
 
-                var itest28 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("ITest28")
-                    .Single();
+                var itest28 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("ITest28").Single();
 
                 var interfaceType = itest28
                     .GetAttributes("System.Runtime.InteropServices", "CoClassAttribute")
@@ -2884,9 +2867,8 @@ class UsePia
                 Assert.Equal("mscorlib", module.GetReferencedAssemblySymbols()[0].Name);
                 Assert.Equal("System.Core", module.GetReferencedAssemblySymbols()[1].Name);
 
-                var interface1_Event = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("Interface1_Event")
-                    .Single();
+                var interface1_Event = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("Interface1_Event").Single();
 
                 var attributes = interface1_Event.GetAttributes();
                 Assert.Equal(3, attributes.Length);
@@ -2905,9 +2887,8 @@ class UsePia
 
                 var goo = (PEEventSymbol)interface1_Event.GetMembers("Goo").Single();
 
-                var interfaceEvents = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("InterfaceEvents")
-                    .Single();
+                var interfaceEvents = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("InterfaceEvents").Single();
 
                 attributes = interfaceEvents.GetAttributes();
                 Assert.Equal(3, attributes.Length);
@@ -3538,9 +3519,8 @@ class UsePia5 : ITest29, ITest30
 
                 Assert.Equal(1, module.GetReferencedAssemblySymbols().Length);
 
-                var itest29 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("ITest29")
-                    .Single();
+                var itest29 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("ITest29").Single();
 
                 var interfaceType = itest29
                     .GetAttributes("System.Runtime.InteropServices", "InterfaceTypeAttribute")
@@ -3550,9 +3530,8 @@ class UsePia5 : ITest29, ITest30
                     interfaceType.ToString()
                 );
 
-                var itest30 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("ITest30")
-                    .Single();
+                var itest30 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("ITest30").Single();
 
                 interfaceType = itest30
                     .GetAttributes("System.Runtime.InteropServices", "InterfaceTypeAttribute")
@@ -3641,9 +3620,8 @@ class UsePia5 : ITest29, ITest30
 
                 Assert.Equal(1, module.GetReferencedAssemblySymbols().Length);
 
-                var itest29 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("ITest29")
-                    .Single();
+                var itest29 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("ITest29").Single();
 
                 var interfaceType = itest29
                     .GetAttributes("System.Runtime.InteropServices", "BestFitMappingAttribute")
@@ -3653,9 +3631,8 @@ class UsePia5 : ITest29, ITest30
                     interfaceType.ToString()
                 );
 
-                var itest30 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("ITest30")
-                    .Single();
+                var itest30 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("ITest30").Single();
 
                 interfaceType = itest30
                     .GetAttributes("System.Runtime.InteropServices", "BestFitMappingAttribute")
@@ -3736,9 +3713,8 @@ class UsePia
 
                 Assert.Equal(1, module.GetReferencedAssemblySymbols().Length);
 
-                var test31 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("Test31")
-                    .Single();
+                var test31 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("Test31").Single();
 
                 var interfaceType = test31.GetAttributes("System", "FlagsAttribute").Single();
                 Assert.Equal("System.FlagsAttribute", interfaceType.ToString());
@@ -3816,9 +3792,8 @@ class UsePia
 
                 Assert.Equal(1, module.GetReferencedAssemblySymbols().Length);
 
-                var itest30 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("ITest30")
-                    .Single();
+                var itest30 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("ITest30").Single();
 
                 var interfaceType = itest30
                     .GetAttributes("System.Reflection", "DefaultMemberAttribute")
@@ -3909,9 +3884,8 @@ class UsePia5 : ITest30
 
                 Assert.Equal(1, module.GetReferencedAssemblySymbols().Length);
 
-                var itest30 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("ITest30")
-                    .Single();
+                var itest30 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("ITest30").Single();
 
                 var m1 = (PEMethodSymbol)itest30.GetMembers("M1").Single();
 
@@ -4001,9 +3975,8 @@ class UsePia5 : ITest30
 
                 Assert.Equal(1, module.GetReferencedAssemblySymbols().Length);
 
-                var itest30 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("ITest30")
-                    .Single();
+                var itest30 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("ITest30").Single();
 
                 var m1 = (PEMethodSymbol)itest30.GetMembers("M1").Single();
 
@@ -4089,9 +4062,8 @@ class UsePia5 : ITest30
 
                 Assert.Equal(1, module.GetReferencedAssemblySymbols().Length);
 
-                var itest30 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("ITest30")
-                    .Single();
+                var itest30 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("ITest30").Single();
 
                 var m1 = (PEMethodSymbol)itest30.GetMembers("M1").Single();
 
@@ -4173,9 +4145,8 @@ class UsePia5 : ITest30
 
                 Assert.Equal(1, module.GetReferencedAssemblySymbols().Length);
 
-                var itest30 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("ITest30")
-                    .Single();
+                var itest30 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("ITest30").Single();
 
                 var m1 = (PEMethodSymbol)itest30.GetMembers("M1").Single();
 
@@ -4260,9 +4231,8 @@ class UsePia5 : ITest30
 
                 Assert.Equal(1, module.GetReferencedAssemblySymbols().Length);
 
-                var itest30 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("ITest30")
-                    .Single();
+                var itest30 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("ITest30").Single();
 
                 var m1 = (PEMethodSymbol)itest30.GetMembers("M1").Single();
 
@@ -4361,9 +4331,8 @@ class UsePia5 : ITest30
 
                 Assert.Equal(2, module.GetReferencedAssemblySymbols().Length);
 
-                var itest30 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("ITest30")
-                    .Single();
+                var itest30 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("ITest30").Single();
 
                 var m1 = (PEMethodSymbol)itest30.GetMembers("M1").Single();
 
@@ -4447,9 +4416,8 @@ class UsePia5
 
                 Assert.Equal(1, module.GetReferencedAssemblySymbols().Length);
 
-                var myDelegate = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("MyDelegate")
-                    .Single();
+                var myDelegate = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("MyDelegate").Single();
 
                 var attr = myDelegate
                     .GetAttributes(
@@ -4539,9 +4507,8 @@ class UsePia5
 
                 Assert.Equal(1, module.GetReferencedAssemblySymbols().Length);
 
-                var itest30 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("ITest30")
-                    .Single();
+                var itest30 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("ITest30").Single();
 
                 var m1 = (PEMethodSymbol)itest30.GetMembers("M1").Single();
 
@@ -5248,19 +5215,16 @@ interface IUsePia6 : ITest35
 
                 Assert.Equal(1, module.GetReferencedAssemblySymbols().Length);
 
-                var itest33 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("ITest33")
-                    .Single();
+                var itest33 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("ITest33").Single();
                 var m1 = (PEMethodSymbol)itest33.GetMembers("M1").Single();
 
-                var itest34 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("ITest34")
-                    .Single();
+                var itest34 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("ITest34").Single();
                 var m2 = (PEMethodSymbol)itest34.GetMembers("M2").Single();
 
-                var itest35 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("ITest35")
-                    .Single();
+                var itest35 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("ITest35").Single();
                 var m3 = (PEMethodSymbol)itest35.GetMembers("M3").Single();
             };
 
@@ -5355,19 +5319,16 @@ class UsePia7 : UsePia6, ITest35
 
                 Assert.Equal(1, module.GetReferencedAssemblySymbols().Length);
 
-                var itest33 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("ITest33")
-                    .Single();
+                var itest33 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("ITest33").Single();
                 var m1 = (PEMethodSymbol)itest33.GetMembers("M1").Single();
 
-                var itest34 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("ITest34")
-                    .Single();
+                var itest34 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("ITest34").Single();
                 var m2 = (PEMethodSymbol)itest34.GetMembers("M2").Single();
 
-                var itest35 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("ITest35")
-                    .Single();
+                var itest35 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("ITest35").Single();
                 var m3 = (PEMethodSymbol)itest35.GetMembers("M3").Single();
             };
 
@@ -5455,19 +5416,16 @@ class UsePia
 
                 Assert.Equal(1, module.GetReferencedAssemblySymbols().Length);
 
-                var itest33 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("ITest33")
-                    .Single();
+                var itest33 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("ITest33").Single();
                 Assert.Equal(0, itest33.GetMembers().Length);
 
-                var itest34 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("ITest34")
-                    .Single();
+                var itest34 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("ITest34").Single();
                 Assert.Equal(0, itest34.GetMembers().Length);
 
-                var itest35 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("ITest35")
-                    .Single();
+                var itest35 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("ITest35").Single();
                 Assert.Equal(0, itest35.GetMembers().Length);
             };
 
@@ -5543,14 +5501,12 @@ class UsePia7 : ITest33
 
                 Assert.Equal(1, module.GetReferencedAssemblySymbols().Length);
 
-                var itest33 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("ITest33")
-                    .Single();
+                var itest33 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("ITest33").Single();
                 var m1 = (PEMethodSymbol)itest33.GetMembers("M1").Single();
 
-                var usePia7 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("UsePia7")
-                    .Single();
+                var usePia7 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("UsePia7").Single();
                 var m1Impl = (PEMethodSymbol)usePia7.GetMembers("ITest33.M1").Single();
 
                 Assert.Same(m1, m1Impl.ExplicitInterfaceImplementations[0]);
@@ -5631,9 +5587,8 @@ class UsePia
 
                 Assert.Equal(3, module.GetReferencedAssemblySymbols().Length);
 
-                var itest33 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("ITest33")
-                    .Single();
+                var itest33 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("ITest33").Single();
                 Assert.Equal(2, itest33.GetMembers("this[]").Length);
             };
 
@@ -5712,9 +5667,8 @@ class UsePia
 
                 Assert.Equal(3, module.GetReferencedAssemblySymbols().Length);
 
-                var itest33 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("ITest33")
-                    .Single();
+                var itest33 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("ITest33").Single();
                 Assert.Equal(2, itest33.GetMembers("this[]").Length);
             };
 
@@ -5793,9 +5747,8 @@ class UsePia
 
                 Assert.Equal(3, module.GetReferencedAssemblySymbols().Length);
 
-                var itest33 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("ITest33")
-                    .Single();
+                var itest33 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("ITest33").Single();
                 Assert.Equal(2, itest33.GetMembers("M1").Length);
             };
 
@@ -5880,9 +5833,8 @@ class UsePia
 
                 Assert.Equal(3, module.GetReferencedAssemblySymbols().Length);
 
-                var itest33 = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("ITest33")
-                    .Single();
+                var itest33 = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("ITest33").Single();
                 Assert.Equal(2, itest33.GetMembers("Add").Length);
             };
 
@@ -6096,9 +6048,8 @@ class UsePia5
 
             Assert.IsType<NoPiaMissingCanonicalTypeSymbol>(
                 (
-                    (PEModuleSymbol)compilation2.SourceModule.GetReferencedAssemblySymbols()[
-                        1
-                    ].Modules[0]
+                    (PEModuleSymbol)
+                        compilation2.SourceModule.GetReferencedAssemblySymbols()[1].Modules[0]
                 ).LookupTopLevelMetadataType(ref fullName, out isNoPiaLocalType)
             );
             Assert.True(isNoPiaLocalType);
@@ -6148,9 +6099,8 @@ class UsePia5
 
             Assert.IsType<NoPiaMissingCanonicalTypeSymbol>(
                 (
-                    (PEModuleSymbol)compilation4.SourceModule.GetReferencedAssemblySymbols()[
-                        1
-                    ].Modules[0]
+                    (PEModuleSymbol)
+                        compilation4.SourceModule.GetReferencedAssemblySymbols()[1].Modules[0]
                 ).LookupTopLevelMetadataType(ref fullName, out isNoPiaLocalType)
             );
             Assert.True(isNoPiaLocalType);
@@ -7172,9 +7122,8 @@ public class NetImpl : IEventsDerived_Event
             {
                 ((PEModuleSymbol)module).Module.PretendThereArentNoPiaLocalTypes();
 
-                var IEventsBase = (PENamedTypeSymbol)module.GlobalNamespace
-                    .GetTypeMembers("IEventsBase")
-                    .Single();
+                var IEventsBase = (PENamedTypeSymbol)
+                    module.GlobalNamespace.GetTypeMembers("IEventsBase").Single();
                 Assert.Equal(1, IEventsBase.GetMembers("MyEvent01").Length);
             };
 
@@ -7803,30 +7752,33 @@ class Program
                         );
 
                         PEParameterSymbol p;
-                        p = (PEParameterSymbol)module.GlobalNamespace
-                            .GetMember<NamedTypeSymbol>("Program")
-                            .GetMember<MethodSymbol>("M")
-                            .Parameters[0];
+                        p = (PEParameterSymbol)
+                            module.GlobalNamespace
+                                .GetMember<NamedTypeSymbol>("Program")
+                                .GetMember<MethodSymbol>("M")
+                                .Parameters[0];
                         Assert.Equal(
                             "x",
                             ((PEModuleSymbol)module).Module.GetParamNameOrThrow(p.Handle)
                         );
                         Assert.Equal("x", p.Name);
                         Assert.Equal("x", p.MetadataName);
-                        p = (PEParameterSymbol)module.GlobalNamespace
-                            .GetMember<NamedTypeSymbol>("Program")
-                            .GetMember<MethodSymbol>("M1")
-                            .Parameters[0];
+                        p = (PEParameterSymbol)
+                            module.GlobalNamespace
+                                .GetMember<NamedTypeSymbol>("Program")
+                                .GetMember<MethodSymbol>("M1")
+                                .Parameters[0];
                         Assert.Equal(
                             "value",
                             ((PEModuleSymbol)module).Module.GetParamNameOrThrow(p.Handle)
                         );
                         Assert.Equal("value", p.Name);
                         Assert.Equal("value", p.MetadataName);
-                        p = (PEParameterSymbol)module.GlobalNamespace
-                            .GetMember<NamedTypeSymbol>("Program")
-                            .GetMember<MethodSymbol>("M2")
-                            .Parameters[0];
+                        p = (PEParameterSymbol)
+                            module.GlobalNamespace
+                                .GetMember<NamedTypeSymbol>("Program")
+                                .GetMember<MethodSymbol>("M2")
+                                .Parameters[0];
                         Assert.Equal(
                             "Param",
                             ((PEModuleSymbol)module).Module.GetParamNameOrThrow(p.Handle)

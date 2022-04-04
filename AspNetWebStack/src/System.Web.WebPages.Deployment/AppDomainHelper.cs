@@ -38,10 +38,8 @@ namespace System.Web.WebPages.Deployment
                 );
 
                 var type = typeof(RemoteAssemblyLoader);
-                var instance = (RemoteAssemblyLoader)appDomain.CreateInstanceAndUnwrap(
-                    type.Assembly.FullName,
-                    type.FullName
-                );
+                var instance = (RemoteAssemblyLoader)
+                    appDomain.CreateInstanceAndUnwrap(type.Assembly.FullName, type.FullName);
 
                 return Directory
                     .EnumerateFiles(binDirectory, "*.dll")

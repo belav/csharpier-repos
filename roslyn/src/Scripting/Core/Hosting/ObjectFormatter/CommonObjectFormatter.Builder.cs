@@ -52,10 +52,11 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 Append(_options.NewLine);
 
                 // recalc limit for the next line:
-                _currentLimit = (int)Math.Min(
-                    (long)_sb.Length + _options.MaximumLineLength,
-                    _options.MaximumOutputLength
-                );
+                _currentLimit = (int)
+                    Math.Min(
+                        (long)_sb.Length + _options.MaximumLineLength,
+                        _options.MaximumOutputLength
+                    );
             }
 
             private void AppendEllipsis()

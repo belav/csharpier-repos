@@ -17,9 +17,10 @@ namespace System.Runtime
         {
             return currentThread
               ? 0
-              : (long)EventPipeInternal.GetRuntimeCounterValue(
-                    EventPipeInternal.RuntimeCounters.JIT_IL_BYTES_JITTED
-                );
+              : (long)
+                    EventPipeInternal.GetRuntimeCounterValue(
+                        EventPipeInternal.RuntimeCounters.JIT_IL_BYTES_JITTED
+                    );
         }
 
         /// <summary>
@@ -32,9 +33,10 @@ namespace System.Runtime
         {
             return currentThread
               ? 0
-              : (long)EventPipeInternal.GetRuntimeCounterValue(
-                    EventPipeInternal.RuntimeCounters.JIT_METHODS_JITTED
-                );
+              : (long)
+                    EventPipeInternal.GetRuntimeCounterValue(
+                        EventPipeInternal.RuntimeCounters.JIT_METHODS_JITTED
+                    );
         }
 
         // normalized to 100ns ticks on vm side
@@ -42,9 +44,10 @@ namespace System.Runtime
         {
             return currentThread
               ? 0
-              : (long)EventPipeInternal.GetRuntimeCounterValue(
-                    EventPipeInternal.RuntimeCounters.JIT_TICKS_IN_JIT
-                );
+              : (long)
+                    EventPipeInternal.GetRuntimeCounterValue(
+                        EventPipeInternal.RuntimeCounters.JIT_TICKS_IN_JIT
+                    );
         }
     }
 }

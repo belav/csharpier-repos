@@ -62,8 +62,8 @@ namespace System.Speech.Internal.SapiInterop
                 // If Dispose() is called from a finalizer this may not be the case so check for null.
                 if (_sapiEventSourceReference != null)
                 {
-                    ISpEventSource sapiEventSource =
-                        (ISpEventSource)_sapiEventSourceReference.Target;
+                    ISpEventSource sapiEventSource = (ISpEventSource)
+                        _sapiEventSourceReference.Target;
                     if (sapiEventSource != null)
                     {
                         // Stop listening to events from sapiEventSource.
@@ -82,8 +82,8 @@ namespace System.Speech.Internal.SapiInterop
                 // Call dispatchEventDelegate for each SAPI event currently queued.
                 if (_sapiEventSourceReference != null)
                 {
-                    ISpEventSource sapiEventSource =
-                        (ISpEventSource)_sapiEventSourceReference.Target;
+                    ISpEventSource sapiEventSource = (ISpEventSource)
+                        _sapiEventSourceReference.Target;
                     if (sapiEventSource != null)
                     {
                         List<SpeechEvent> speechEvents = new();

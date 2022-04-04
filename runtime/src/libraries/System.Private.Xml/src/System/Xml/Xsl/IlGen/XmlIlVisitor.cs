@@ -2389,9 +2389,8 @@ namespace System.Xml.Xsl.IlGen
                 // Handle EqualityIndex pattern
                 Label lblOnEnd = _helper.DefineLabel();
                 Label lblLookup = _helper.DefineLabel();
-                QilIterator nodes = (QilIterator)patt.GetArgument(
-                    OptimizerPatternArgument.IndexedNodes
-                );
+                QilIterator nodes = (QilIterator)
+                    patt.GetArgument(OptimizerPatternArgument.IndexedNodes);
                 QilNode keys = (QilNode)patt.GetArgument(OptimizerPatternArgument.KeyExpression);
 
                 // XmlILIndex index;

@@ -650,10 +650,8 @@ namespace System.Net.Http
                 }
 
                 // Start to read response.
-                _allowedReadLineBytes = (int)Math.Min(
-                    int.MaxValue,
-                    _pool.Settings._maxResponseHeadersLength * 1024L
-                );
+                _allowedReadLineBytes = (int)
+                    Math.Min(int.MaxValue, _pool.Settings._maxResponseHeadersLength * 1024L);
 
                 // We should not have any buffered data here; if there was, it should have been treated as an error
                 // by the previous request handling.  (Note we do not support HTTP pipelining.)

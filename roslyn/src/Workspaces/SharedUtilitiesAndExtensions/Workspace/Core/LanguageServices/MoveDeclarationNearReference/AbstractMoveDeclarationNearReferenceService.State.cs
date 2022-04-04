@@ -90,10 +90,11 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
                 var semanticModel = await document
                     .GetSemanticModelAsync(cancellationToken)
                     .ConfigureAwait(false);
-                LocalSymbol = (ILocalSymbol)semanticModel.GetDeclaredSymbol(
-                    service.GetVariableDeclaratorSymbolNode(VariableDeclarator),
-                    cancellationToken
-                );
+                LocalSymbol = (ILocalSymbol)
+                    semanticModel.GetDeclaredSymbol(
+                        service.GetVariableDeclaratorSymbolNode(VariableDeclarator),
+                        cancellationToken
+                    );
                 if (LocalSymbol == null)
                 {
                     // This can happen in broken code, for example: "{ object x; object }"

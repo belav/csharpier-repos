@@ -471,9 +471,8 @@ delegate int Del(int x);
             var classC = (TypeDeclarationSyntax)compUnit.Members.First();
             var methodTest = (MethodDeclarationSyntax)classC.Members.First();
             var stmt = (LocalDeclarationStatementSyntax)methodTest.Body!.Statements.First();
-            var conditionalExpr = (ConditionalExpressionSyntax)stmt.Declaration.Variables[0]
-                .Initializer!
-                .Value;
+            var conditionalExpr = (ConditionalExpressionSyntax)
+                stmt.Declaration.Variables[0].Initializer!.Value;
 
             var model = comp.GetSemanticModel(tree);
 

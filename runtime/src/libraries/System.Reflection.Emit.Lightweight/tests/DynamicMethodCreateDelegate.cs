@@ -36,10 +36,8 @@ namespace System.Reflection.Emit.Tests
             ILGenerator ilGenerator = method.GetILGenerator();
             Helpers.EmitMethodBody(ilGenerator, field);
 
-            IntDelegate instanceCallBack = (IntDelegate)method.CreateDelegate(
-                typeof(IntDelegate),
-                target
-            );
+            IntDelegate instanceCallBack = (IntDelegate)
+                method.CreateDelegate(typeof(IntDelegate), target);
             Assert.Equal(instanceCallBack(newId), target.ID);
             Assert.Equal(newId, target.ID);
         }
@@ -66,10 +64,8 @@ namespace System.Reflection.Emit.Tests
             ILGenerator ilGenerator = method.GetILGenerator();
             Helpers.EmitMethodBody(ilGenerator, field);
 
-            IntDelegate instanceCallBack = (IntDelegate)method.CreateDelegate(
-                typeof(IntDelegate),
-                target
-            );
+            IntDelegate instanceCallBack = (IntDelegate)
+                method.CreateDelegate(typeof(IntDelegate), target);
             Assert.Equal(instanceCallBack(newId), target.ID);
             Assert.Equal(newId, target.ID);
         }
@@ -93,9 +89,8 @@ namespace System.Reflection.Emit.Tests
             ILGenerator ilGenerator = method.GetILGenerator();
             Helpers.EmitMethodBody(ilGenerator, field);
 
-            IDClassDelegate staticCallBack = (IDClassDelegate)method.CreateDelegate(
-                typeof(IDClassDelegate)
-            );
+            IDClassDelegate staticCallBack = (IDClassDelegate)
+                method.CreateDelegate(typeof(IDClassDelegate));
             Assert.Equal(staticCallBack(target, newId), target.ID);
             Assert.Equal(newId, target.ID);
         }
@@ -122,9 +117,8 @@ namespace System.Reflection.Emit.Tests
             ILGenerator ilGenerator = method.GetILGenerator();
             Helpers.EmitMethodBody(ilGenerator, field);
 
-            IDClassDelegate staticCallBack = (IDClassDelegate)method.CreateDelegate(
-                typeof(IDClassDelegate)
-            );
+            IDClassDelegate staticCallBack = (IDClassDelegate)
+                method.CreateDelegate(typeof(IDClassDelegate));
             Assert.Equal(staticCallBack(target, newId), target.ID);
             Assert.Equal(newId, target.ID);
         }

@@ -175,10 +175,11 @@ namespace System.Threading
                 // Determine how many waiters to wake, taking into account how many spinners and waiters there are and how many waiters
                 // have previously been signaled to wake but have not yet woken
                 countOfWaitersToWake =
-                    (int)Math.Min(
-                        newCounts.SignalCount,
-                        (uint)counts.WaiterCount + counts.SpinnerCount
-                    )
+                    (int)
+                        Math.Min(
+                            newCounts.SignalCount,
+                            (uint)counts.WaiterCount + counts.SpinnerCount
+                        )
                     - counts.SpinnerCount
                     - counts.CountOfWaitersSignaledToWake;
                 if (countOfWaitersToWake > 0)

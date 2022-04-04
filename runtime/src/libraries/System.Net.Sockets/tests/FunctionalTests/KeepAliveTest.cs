@@ -36,10 +36,8 @@ namespace System.Net.Sockets.Tests
             {
                 Assert.Equal<int>(
                     0,
-                    (int)socket.GetSocketOption(
-                        SocketOptionLevel.Socket,
-                        SocketOptionName.KeepAlive
-                    )
+                    (int)
+                        socket.GetSocketOption(SocketOptionLevel.Socket, SocketOptionName.KeepAlive)
                 );
             }
         }
@@ -58,10 +56,8 @@ namespace System.Net.Sockets.Tests
                 socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.KeepAlive, true);
                 Assert.NotEqual<int>(
                     0,
-                    (int)socket.GetSocketOption(
-                        SocketOptionLevel.Socket,
-                        SocketOptionName.KeepAlive
-                    )
+                    (int)
+                        socket.GetSocketOption(SocketOptionLevel.Socket, SocketOptionName.KeepAlive)
                 );
             }
         }
@@ -84,10 +80,11 @@ namespace System.Net.Sockets.Tests
                 );
                 Assert.Equal<int>(
                     RetryCount,
-                    (int)socket.GetSocketOption(
-                        SocketOptionLevel.Tcp,
-                        SocketOptionName.TcpKeepAliveRetryCount
-                    )
+                    (int)
+                        socket.GetSocketOption(
+                            SocketOptionLevel.Tcp,
+                            SocketOptionName.TcpKeepAliveRetryCount
+                        )
                 );
             }
         }
@@ -140,10 +137,11 @@ namespace System.Net.Sockets.Tests
                 );
                 Assert.Equal<int>(
                     Time,
-                    (int)socket.GetSocketOption(
-                        SocketOptionLevel.Tcp,
-                        SocketOptionName.TcpKeepAliveTime
-                    )
+                    (int)
+                        socket.GetSocketOption(
+                            SocketOptionLevel.Tcp,
+                            SocketOptionName.TcpKeepAliveTime
+                        )
                 );
             }
         }
@@ -166,10 +164,11 @@ namespace System.Net.Sockets.Tests
                 );
                 Assert.Equal<int>(
                     Interval,
-                    (int)socket.GetSocketOption(
-                        SocketOptionLevel.Tcp,
-                        SocketOptionName.TcpKeepAliveInterval
-                    )
+                    (int)
+                        socket.GetSocketOption(
+                            SocketOptionLevel.Tcp,
+                            SocketOptionName.TcpKeepAliveInterval
+                        )
                 );
             }
         }
@@ -188,17 +187,19 @@ namespace System.Net.Sockets.Tests
             {
                 Assert.Equal<int>(
                     WindowsDefaultTime,
-                    (int)socket.GetSocketOption(
-                        SocketOptionLevel.Tcp,
-                        SocketOptionName.TcpKeepAliveTime
-                    )
+                    (int)
+                        socket.GetSocketOption(
+                            SocketOptionLevel.Tcp,
+                            SocketOptionName.TcpKeepAliveTime
+                        )
                 );
                 Assert.Equal<int>(
                     WindowsDefaultInterval,
-                    (int)socket.GetSocketOption(
-                        SocketOptionLevel.Tcp,
-                        SocketOptionName.TcpKeepAliveInterval
-                    )
+                    (int)
+                        socket.GetSocketOption(
+                            SocketOptionLevel.Tcp,
+                            SocketOptionName.TcpKeepAliveInterval
+                        )
                 );
 
                 socket.SetSocketOption(
@@ -208,17 +209,19 @@ namespace System.Net.Sockets.Tests
                 );
                 Assert.Equal<int>(
                     Time,
-                    (int)socket.GetSocketOption(
-                        SocketOptionLevel.Tcp,
-                        SocketOptionName.TcpKeepAliveTime
-                    )
+                    (int)
+                        socket.GetSocketOption(
+                            SocketOptionLevel.Tcp,
+                            SocketOptionName.TcpKeepAliveTime
+                        )
                 );
                 Assert.Equal<int>(
                     WindowsDefaultInterval,
-                    (int)socket.GetSocketOption(
-                        SocketOptionLevel.Tcp,
-                        SocketOptionName.TcpKeepAliveInterval
-                    )
+                    (int)
+                        socket.GetSocketOption(
+                            SocketOptionLevel.Tcp,
+                            SocketOptionName.TcpKeepAliveInterval
+                        )
                 );
 
                 socket.SetSocketOption(
@@ -228,17 +231,19 @@ namespace System.Net.Sockets.Tests
                 );
                 Assert.Equal<int>(
                     Time,
-                    (int)socket.GetSocketOption(
-                        SocketOptionLevel.Tcp,
-                        SocketOptionName.TcpKeepAliveTime
-                    )
+                    (int)
+                        socket.GetSocketOption(
+                            SocketOptionLevel.Tcp,
+                            SocketOptionName.TcpKeepAliveTime
+                        )
                 );
                 Assert.Equal<int>(
                     Interval,
-                    (int)socket.GetSocketOption(
-                        SocketOptionLevel.Tcp,
-                        SocketOptionName.TcpKeepAliveInterval
-                    )
+                    (int)
+                        socket.GetSocketOption(
+                            SocketOptionLevel.Tcp,
+                            SocketOptionName.TcpKeepAliveInterval
+                        )
                 );
             }
         }
@@ -257,17 +262,19 @@ namespace System.Net.Sockets.Tests
             {
                 Assert.Equal<int>(
                     WindowsDefaultTime,
-                    (int)socket.GetSocketOption(
-                        SocketOptionLevel.Tcp,
-                        SocketOptionName.TcpKeepAliveTime
-                    )
+                    (int)
+                        socket.GetSocketOption(
+                            SocketOptionLevel.Tcp,
+                            SocketOptionName.TcpKeepAliveTime
+                        )
                 );
                 Assert.Equal<int>(
                     WindowsDefaultInterval,
-                    (int)socket.GetSocketOption(
-                        SocketOptionLevel.Tcp,
-                        SocketOptionName.TcpKeepAliveInterval
-                    )
+                    (int)
+                        socket.GetSocketOption(
+                            SocketOptionLevel.Tcp,
+                            SocketOptionName.TcpKeepAliveInterval
+                        )
                 );
 
                 socket.SetSocketOption(
@@ -277,17 +284,19 @@ namespace System.Net.Sockets.Tests
                 );
                 Assert.Equal<int>(
                     WindowsDefaultTime,
-                    (int)socket.GetSocketOption(
-                        SocketOptionLevel.Tcp,
-                        SocketOptionName.TcpKeepAliveTime
-                    )
+                    (int)
+                        socket.GetSocketOption(
+                            SocketOptionLevel.Tcp,
+                            SocketOptionName.TcpKeepAliveTime
+                        )
                 );
                 Assert.Equal<int>(
                     Interval,
-                    (int)socket.GetSocketOption(
-                        SocketOptionLevel.Tcp,
-                        SocketOptionName.TcpKeepAliveInterval
-                    )
+                    (int)
+                        socket.GetSocketOption(
+                            SocketOptionLevel.Tcp,
+                            SocketOptionName.TcpKeepAliveInterval
+                        )
                 );
 
                 socket.SetSocketOption(
@@ -297,17 +306,19 @@ namespace System.Net.Sockets.Tests
                 );
                 Assert.Equal<int>(
                     Time,
-                    (int)socket.GetSocketOption(
-                        SocketOptionLevel.Tcp,
-                        SocketOptionName.TcpKeepAliveTime
-                    )
+                    (int)
+                        socket.GetSocketOption(
+                            SocketOptionLevel.Tcp,
+                            SocketOptionName.TcpKeepAliveTime
+                        )
                 );
                 Assert.Equal<int>(
                     Interval,
-                    (int)socket.GetSocketOption(
-                        SocketOptionLevel.Tcp,
-                        SocketOptionName.TcpKeepAliveInterval
-                    )
+                    (int)
+                        socket.GetSocketOption(
+                            SocketOptionLevel.Tcp,
+                            SocketOptionName.TcpKeepAliveInterval
+                        )
                 );
             }
         }

@@ -69,10 +69,8 @@ internal static class StreamCopyOperationInternal
                 var readLength = buffer.Length;
                 if (bytesRemaining.HasValue)
                 {
-                    readLength = (int)Math.Min(
-                        bytesRemaining.GetValueOrDefault(),
-                        (long)readLength
-                    );
+                    readLength = (int)
+                        Math.Min(bytesRemaining.GetValueOrDefault(), (long)readLength);
                 }
                 var read = await source.ReadAsync(buffer.AsMemory(0, readLength), cancel);
 

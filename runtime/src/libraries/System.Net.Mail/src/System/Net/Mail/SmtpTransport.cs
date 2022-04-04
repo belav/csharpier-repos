@@ -378,12 +378,13 @@ namespace System.Net.Mail
         {
             while (_toIndex < _toCollection.Count)
             {
-                MultiAsyncResult result = (MultiAsyncResult)RecipientCommand.BeginSend(
-                    _connection,
-                    _toCollection[_toIndex++].GetSmtpAddress(_allowUnicode) + _deliveryNotify,
-                    s_sendToCollectionCompleted,
-                    this
-                );
+                MultiAsyncResult result = (MultiAsyncResult)
+                    RecipientCommand.BeginSend(
+                        _connection,
+                        _toCollection[_toIndex++].GetSmtpAddress(_allowUnicode) + _deliveryNotify,
+                        s_sendToCollectionCompleted,
+                        this
+                    );
                 if (!result.CompletedSynchronously)
                 {
                     return;
@@ -427,9 +428,8 @@ namespace System.Net.Mail
                         {
                             SmtpFailedRecipientException exception =
                                 thisPtr._toCollection.Count == 1
-                                    ? (SmtpFailedRecipientException)thisPtr._failedRecipientExceptions[
-                                          0
-                                      ]
+                                    ? (SmtpFailedRecipientException)
+                                          thisPtr._failedRecipientExceptions[0]
                                     : new SmtpFailedRecipientsException(
                                           thisPtr._failedRecipientExceptions,
                                           true

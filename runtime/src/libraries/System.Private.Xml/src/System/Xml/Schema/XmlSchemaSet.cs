@@ -872,8 +872,8 @@ namespace System.Xml.Schema
                     {
                         substTable = new XmlSchemaObjectTable();
                     }
-                    XmlSchemaSubstitutionGroup substitutionGroup =
-                        (XmlSchemaSubstitutionGroup)substTable[head];
+                    XmlSchemaSubstitutionGroup substitutionGroup = (XmlSchemaSubstitutionGroup)
+                        substTable[head];
                     if (substitutionGroup == null)
                     {
                         substitutionGroup = new XmlSchemaSubstitutionGroup();
@@ -1119,8 +1119,8 @@ namespace System.Xml.Schema
 
                 //Add or Merge new substitutionGroups with those that already exist in the set
                 XmlQualifiedName head = substGroup!.Examplar;
-                XmlSchemaSubstitutionGroup? oldSubstGroup =
-                    (XmlSchemaSubstitutionGroup?)substitutionGroups![head];
+                XmlSchemaSubstitutionGroup? oldSubstGroup = (XmlSchemaSubstitutionGroup?)
+                    substitutionGroups![head];
                 if (oldSubstGroup != null)
                 {
                     for (int i = 0; i < substGroup.Members.Count; ++i)
@@ -1154,9 +1154,8 @@ namespace System.Xml.Schema
                 XmlSchemaElement element = (XmlSchemaElement)substitutionGroup.Members[i]!;
 
                 //Chain to other head's that are members of this head's substGroup
-                XmlSchemaSubstitutionGroup? g = (XmlSchemaSubstitutionGroup?)substTable[
-                    element.QualifiedName
-                ];
+                XmlSchemaSubstitutionGroup? g = (XmlSchemaSubstitutionGroup?)
+                    substTable[element.QualifiedName];
                 if (g != null)
                 {
                     ResolveSubstitutionGroup(g, substTable);
@@ -1550,9 +1549,8 @@ namespace System.Xml.Schema
             VerifyTables();
             foreach (XmlSchemaElement? elementToRemove in schema.Elements.Values)
             {
-                XmlSchemaElement? elem = (XmlSchemaElement?)elements![
-                    elementToRemove!.QualifiedName
-                ];
+                XmlSchemaElement? elem = (XmlSchemaElement?)
+                    elements![elementToRemove!.QualifiedName];
                 if (elem == elementToRemove)
                 {
                     elements.Remove(elementToRemove.QualifiedName);
@@ -1561,9 +1559,8 @@ namespace System.Xml.Schema
 
             foreach (XmlSchemaAttribute? attributeToRemove in schema.Attributes.Values)
             {
-                XmlSchemaAttribute? attr = (XmlSchemaAttribute?)attributes![
-                    attributeToRemove!.QualifiedName
-                ];
+                XmlSchemaAttribute? attr = (XmlSchemaAttribute?)
+                    attributes![attributeToRemove!.QualifiedName];
                 if (attr == attributeToRemove)
                 {
                     attributes.Remove(attributeToRemove.QualifiedName);
@@ -1572,9 +1569,8 @@ namespace System.Xml.Schema
 
             foreach (XmlSchemaType? schemaTypeToRemove in schema.SchemaTypes.Values)
             {
-                XmlSchemaType? schemaType = (XmlSchemaType?)schemaTypes![
-                    schemaTypeToRemove!.QualifiedName
-                ];
+                XmlSchemaType? schemaType = (XmlSchemaType?)
+                    schemaTypes![schemaTypeToRemove!.QualifiedName];
                 if (schemaType == schemaTypeToRemove)
                 {
                     schemaTypes.Remove(schemaTypeToRemove.QualifiedName);

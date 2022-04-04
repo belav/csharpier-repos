@@ -14,17 +14,18 @@ public class ComponentMarkupBlockPassTest
     public ComponentMarkupBlockPassTest()
     {
         Pass = new ComponentMarkupBlockPass();
-        ProjectEngine = (DefaultRazorProjectEngine)RazorProjectEngine.Create(
-            RazorConfiguration.Default,
-            RazorProjectFileSystem.Create(Environment.CurrentDirectory),
-            b =>
-            {
-                if (b.Features.OfType<ComponentMarkupBlockPass>().Any())
+        ProjectEngine = (DefaultRazorProjectEngine)
+            RazorProjectEngine.Create(
+                RazorConfiguration.Default,
+                RazorProjectFileSystem.Create(Environment.CurrentDirectory),
+                b =>
                 {
-                    b.Features.Remove(b.Features.OfType<ComponentMarkupBlockPass>().Single());
+                    if (b.Features.OfType<ComponentMarkupBlockPass>().Any())
+                    {
+                        b.Features.Remove(b.Features.OfType<ComponentMarkupBlockPass>().Single());
+                    }
                 }
-            }
-        );
+            );
         Engine = ProjectEngine.Engine;
 
         Pass.Engine = Engine;

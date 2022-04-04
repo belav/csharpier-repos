@@ -2418,11 +2418,12 @@ namespace System
                 throw new ArgumentException(SR.Arg_InvalidBase);
             }
             return value != null
-              ? (uint)ParseNumbers.StringToInt(
-                    value.AsSpan(),
-                    fromBase,
-                    ParseNumbers.TreatAsUnsigned | ParseNumbers.IsTight
-                )
+              ? (uint)
+                    ParseNumbers.StringToInt(
+                        value.AsSpan(),
+                        fromBase,
+                        ParseNumbers.TreatAsUnsigned | ParseNumbers.IsTight
+                    )
               : 0;
         }
 
@@ -2453,11 +2454,12 @@ namespace System
                 throw new ArgumentException(SR.Arg_InvalidBase);
             }
             return value != null
-              ? (ulong)ParseNumbers.StringToLong(
-                    value.AsSpan(),
-                    fromBase,
-                    ParseNumbers.TreatAsUnsigned | ParseNumbers.IsTight
-                )
+              ? (ulong)
+                    ParseNumbers.StringToLong(
+                        value.AsSpan(),
+                        fromBase,
+                        ParseNumbers.TreatAsUnsigned | ParseNumbers.IsTight
+                    )
               : 0;
         }
 

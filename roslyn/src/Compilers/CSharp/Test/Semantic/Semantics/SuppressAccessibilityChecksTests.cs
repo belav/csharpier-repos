@@ -164,11 +164,12 @@ class C
             var comp = CreateCompilation(tree);
             var model = comp.GetSemanticModel(tree, ignoreAccessibility: true);
 
-            var expr = (ExpressionSyntax)tree.GetCompilationUnitRoot()
-                .DescendantNodes()
-                .OfType<SimpleLambdaExpressionSyntax>()
-                .Single()
-                .Body;
+            var expr = (ExpressionSyntax)
+                tree.GetCompilationUnitRoot()
+                    .DescendantNodes()
+                    .OfType<SimpleLambdaExpressionSyntax>()
+                    .Single()
+                    .Body;
 
             var symbolInfo = model.GetSpeculativeSymbolInfo(
                 expr.FullSpan.Start,
@@ -285,15 +286,16 @@ class C : R
 "
             );
 
-            var blockStatement = (BlockSyntax)SyntaxFactory.ParseStatement(
-                @"
+            var blockStatement = (BlockSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 { 
    int z = 0; 
 
    _p = 123L;
 }
 "
-            );
+                );
 
             var tree = compilation.SyntaxTrees[0];
             var root = tree.GetCompilationUnitRoot();

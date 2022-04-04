@@ -67,9 +67,8 @@ namespace System.Security.Cryptography.CryptoConfigTests
                 Assert.IsAssignableFrom(baseType, created);
 
                 using (
-                    HashAlgorithm equivalent = (HashAlgorithm)baseType
-                        .GetMethod("Create", Type.EmptyTypes)
-                        .Invoke(null, null)
+                    HashAlgorithm equivalent = (HashAlgorithm)
+                        baseType.GetMethod("Create", Type.EmptyTypes).Invoke(null, null)
                 )
                 {
                     byte[] input = { 1, 2, 3, 4, 5 };

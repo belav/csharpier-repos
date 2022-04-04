@@ -193,35 +193,37 @@ namespace System.Reflection.Internal
             {
                 if (s_lazyCreateFromFile != null)
                 {
-                    return (IDisposable)s_lazyCreateFromFile.Invoke(
-                        null,
-                        new object[6]
-                        {
-                            stream, // fileStream
-                            null, // mapName
-                            s_LongZero, // capacity
-                            s_MemoryMappedFileAccess_Read, // access
-                            s_HandleInheritability_None, // inheritability
-                            s_True, // leaveOpen
-                        }
-                    );
+                    return (IDisposable)
+                        s_lazyCreateFromFile.Invoke(
+                            null,
+                            new object[6]
+                            {
+                                stream, // fileStream
+                                null, // mapName
+                                s_LongZero, // capacity
+                                s_MemoryMappedFileAccess_Read, // access
+                                s_HandleInheritability_None, // inheritability
+                                s_True, // leaveOpen
+                            }
+                        );
                 }
                 else
                 {
                     Debug.Assert(s_lazyCreateFromFileClassic != null);
-                    return (IDisposable)s_lazyCreateFromFileClassic.Invoke(
-                        null,
-                        new object[7]
-                        {
-                            stream, // fileStream
-                            null, // mapName
-                            s_LongZero, // capacity
-                            s_MemoryMappedFileAccess_Read, // access
-                            null, // memoryMappedFileSecurity
-                            s_HandleInheritability_None, // inheritability
-                            s_True, // leaveOpen
-                        }
-                    );
+                    return (IDisposable)
+                        s_lazyCreateFromFileClassic.Invoke(
+                            null,
+                            new object[7]
+                            {
+                                stream, // fileStream
+                                null, // mapName
+                                s_LongZero, // capacity
+                                s_MemoryMappedFileAccess_Read, // access
+                                null, // memoryMappedFileSecurity
+                                s_HandleInheritability_None, // inheritability
+                                s_True, // leaveOpen
+                            }
+                        );
                 }
             }
             catch (MemberAccessException)
@@ -247,15 +249,16 @@ namespace System.Reflection.Internal
             Debug.Assert(s_lazyIsAvailable.GetValueOrDefault());
             try
             {
-                return (IDisposable)s_lazyCreateViewAccessor.Invoke(
-                    memoryMap,
-                    new object[3]
-                    {
-                        start, // start
-                        (long)size, // size
-                        s_MemoryMappedFileAccess_Read, // access
-                    }
-                );
+                return (IDisposable)
+                    s_lazyCreateViewAccessor.Invoke(
+                        memoryMap,
+                        new object[3]
+                        {
+                            start, // start
+                            (long)size, // size
+                            s_MemoryMappedFileAccess_Read, // access
+                        }
+                    );
             }
             catch (MemberAccessException)
             {

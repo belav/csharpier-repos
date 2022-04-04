@@ -36,30 +36,30 @@ namespace Castle.DynamicProxy.Tests
             switch (kind)
             {
                 case ProxyKind.Class:
-                    return (TType)generator.CreateClassProxy(
-                        typeof(object),
-                        Type.EmptyTypes,
-                        options
-                    );
+                    return (TType)
+                        generator.CreateClassProxy(typeof(object), Type.EmptyTypes, options);
                 case ProxyKind.WithoutTarget:
-                    return (TType)generator.CreateInterfaceProxyWithoutTarget(
-                        typeof(IEmpty),
-                        Type.EmptyTypes,
-                        options
-                    );
+                    return (TType)
+                        generator.CreateInterfaceProxyWithoutTarget(
+                            typeof(IEmpty),
+                            Type.EmptyTypes,
+                            options
+                        );
                 case ProxyKind.WithTarget:
-                    return (TType)generator.CreateInterfaceProxyWithTarget(
-                        typeof(IEmpty),
-                        Type.EmptyTypes,
-                        new Empty(),
-                        options
-                    );
+                    return (TType)
+                        generator.CreateInterfaceProxyWithTarget(
+                            typeof(IEmpty),
+                            Type.EmptyTypes,
+                            new Empty(),
+                            options
+                        );
                 case ProxyKind.WithTargetInterface:
-                    return (TType)generator.CreateInterfaceProxyWithTargetInterface(
-                        typeof(IEmpty),
-                        new Empty(),
-                        options
-                    );
+                    return (TType)
+                        generator.CreateInterfaceProxyWithTargetInterface(
+                            typeof(IEmpty),
+                            new Empty(),
+                            options
+                        );
             }
 
             Assert.Fail("Invalid proxy kind {0}", kind);

@@ -31,8 +31,8 @@ namespace System.Security.Cryptography
         )]
         public virtual AsymmetricSignatureDeformatter CreateDeformatter(AsymmetricAlgorithm key)
         {
-            AsymmetricSignatureDeformatter? item =
-                (AsymmetricSignatureDeformatter?)CryptoConfig.CreateFromName(DeformatterAlgorithm!);
+            AsymmetricSignatureDeformatter? item = (AsymmetricSignatureDeformatter?)
+                CryptoConfig.CreateFromName(DeformatterAlgorithm!);
             item!.SetKey(key);
             return item;
         }
@@ -42,8 +42,8 @@ namespace System.Security.Cryptography
         )]
         public virtual AsymmetricSignatureFormatter CreateFormatter(AsymmetricAlgorithm key)
         {
-            AsymmetricSignatureFormatter? item =
-                (AsymmetricSignatureFormatter?)CryptoConfig.CreateFromName(FormatterAlgorithm!);
+            AsymmetricSignatureFormatter? item = (AsymmetricSignatureFormatter?)
+                CryptoConfig.CreateFromName(FormatterAlgorithm!);
             item!.SetKey(key);
             return item;
         }

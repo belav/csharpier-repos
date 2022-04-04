@@ -107,13 +107,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
                 out var ordinal
             );
 
-            return (EnvDTE.CodeElement)CodeAttribute.Create(
-                this.State,
-                this.FileCodeModel,
-                parentElement,
-                name,
-                ordinal
-            );
+            return (EnvDTE.CodeElement)
+                CodeAttribute.Create(this.State, this.FileCodeModel, parentElement, name, ordinal);
         }
 
         internal override Snapshot CreateSnapshot()
@@ -236,13 +231,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
                 );
                 if (childName == name)
                 {
-                    element = (EnvDTE.CodeElement)CodeAttribute.Create(
-                        State,
-                        FileCodeModel,
-                        parentElement,
-                        childName,
-                        ordinal
-                    );
+                    element = (EnvDTE.CodeElement)
+                        CodeAttribute.Create(
+                            State,
+                            FileCodeModel,
+                            parentElement,
+                            childName,
+                            ordinal
+                        );
                     return true;
                 }
             }

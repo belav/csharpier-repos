@@ -538,8 +538,8 @@ namespace System.Net.Mail
             {
                 if (!result.CompletedSynchronously)
                 {
-                    ConnectAndHandshakeAsyncResult thisPtr =
-                        (ConnectAndHandshakeAsyncResult)result.AsyncState!;
+                    ConnectAndHandshakeAsyncResult thisPtr = (ConnectAndHandshakeAsyncResult)
+                        result.AsyncState!;
                     try
                     {
                         thisPtr._connection.EndInitializeConnection(result);
@@ -594,8 +594,8 @@ namespace System.Net.Mail
             {
                 if (!result.CompletedSynchronously)
                 {
-                    ConnectAndHandshakeAsyncResult thisPtr =
-                        (ConnectAndHandshakeAsyncResult)result.AsyncState!;
+                    ConnectAndHandshakeAsyncResult thisPtr = (ConnectAndHandshakeAsyncResult)
+                        result.AsyncState!;
                     try
                     {
                         try
@@ -677,8 +677,8 @@ namespace System.Net.Mail
             {
                 if (!result.CompletedSynchronously)
                 {
-                    ConnectAndHandshakeAsyncResult thisPtr =
-                        (ConnectAndHandshakeAsyncResult)result.AsyncState!;
+                    ConnectAndHandshakeAsyncResult thisPtr = (ConnectAndHandshakeAsyncResult)
+                        result.AsyncState!;
                     try
                     {
                         try
@@ -759,8 +759,8 @@ namespace System.Net.Mail
             {
                 if (!result.CompletedSynchronously)
                 {
-                    ConnectAndHandshakeAsyncResult thisPtr =
-                        (ConnectAndHandshakeAsyncResult)result.AsyncState!;
+                    ConnectAndHandshakeAsyncResult thisPtr = (ConnectAndHandshakeAsyncResult)
+                        result.AsyncState!;
                     try
                     {
                         HelloCommand.EndSend(result);
@@ -793,8 +793,8 @@ namespace System.Net.Mail
             {
                 if (!result.CompletedSynchronously)
                 {
-                    ConnectAndHandshakeAsyncResult thisPtr =
-                        (ConnectAndHandshakeAsyncResult)result.AsyncState!;
+                    ConnectAndHandshakeAsyncResult thisPtr = (ConnectAndHandshakeAsyncResult)
+                        result.AsyncState!;
                     try
                     {
                         StartTlsCommand.EndSend(result);
@@ -834,8 +834,8 @@ namespace System.Net.Mail
             {
                 if (!result.CompletedSynchronously)
                 {
-                    ConnectAndHandshakeAsyncResult thisPtr =
-                        (ConnectAndHandshakeAsyncResult)result.AsyncState!;
+                    ConnectAndHandshakeAsyncResult thisPtr = (ConnectAndHandshakeAsyncResult)
+                        result.AsyncState!;
                     try
                     {
                         (thisPtr._connection._networkStream as TlsStream)!.EndAuthenticateAsClient(
@@ -927,8 +927,8 @@ namespace System.Net.Mail
             {
                 if (!result.CompletedSynchronously)
                 {
-                    ConnectAndHandshakeAsyncResult thisPtr =
-                        (ConnectAndHandshakeAsyncResult)result.AsyncState!;
+                    ConnectAndHandshakeAsyncResult thisPtr = (ConnectAndHandshakeAsyncResult)
+                        result.AsyncState!;
                     try
                     {
                         LineInfo info = AuthCommand.EndSend(result);
@@ -1013,8 +1013,8 @@ namespace System.Net.Mail
             {
                 if (!result.CompletedSynchronously)
                 {
-                    ConnectAndHandshakeAsyncResult thisPtr =
-                        (ConnectAndHandshakeAsyncResult)result.AsyncState!;
+                    ConnectAndHandshakeAsyncResult thisPtr = (ConnectAndHandshakeAsyncResult)
+                        result.AsyncState!;
                     try
                     {
                         LineInfo info = AuthCommand.EndSend(result);

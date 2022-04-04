@@ -65,10 +65,11 @@ namespace Microsoft.CodeAnalysis.SimplifyThisOrMe
             var memberAccessNodes = diagnostics
                 .Select(
                     d =>
-                        (TMemberAccessExpressionSyntax)d.AdditionalLocations[0].FindNode(
-                            getInnermostNodeForTie: true,
-                            cancellationToken
-                        )
+                        (TMemberAccessExpressionSyntax)
+                            d.AdditionalLocations[0].FindNode(
+                                getInnermostNodeForTie: true,
+                                cancellationToken
+                            )
                 )
                 .ToSet();
 

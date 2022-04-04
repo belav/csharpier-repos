@@ -287,8 +287,8 @@ namespace System.Diagnostics.PerformanceData
                             uint CurrentCounter = 0;
                             uint CurrentOffset = 0;
 
-                            CounterSetInfo =
-                                (Interop.PerfCounter.PerfCounterSetInfoStruct*)CounterSetBuffer;
+                            CounterSetInfo = (Interop.PerfCounter.PerfCounterSetInfoStruct*)
+                                CounterSetBuffer;
                             CounterSetInfo->CounterSetGuid = _counterSet;
                             CounterSetInfo->ProviderGuid = _providerGuid;
                             CounterSetInfo->NumCounters = (uint)_idToCounter.Count;

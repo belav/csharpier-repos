@@ -810,11 +810,12 @@ public unsafe class Tests
     {
         Tests t = new Tests();
         t.int_field = 32;
-        SimpleDelegate d = (SimpleDelegate)Delegate.CreateDelegate(
-            typeof(SimpleDelegate),
-            t,
-            typeof(Tests).GetMethod("closed_delegate")
-        );
+        SimpleDelegate d = (SimpleDelegate)
+            Delegate.CreateDelegate(
+                typeof(SimpleDelegate),
+                t,
+                typeof(Tests).GetMethod("closed_delegate")
+            );
 
         return mono_test_marshal_delegate(d);
     }

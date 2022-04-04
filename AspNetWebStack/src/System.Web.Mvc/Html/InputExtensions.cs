@@ -971,10 +971,8 @@ namespace System.Web.Mvc.Html
                     }
                     break;
                 default:
-                    string attemptedValue = (string)htmlHelper.GetModelStateValue(
-                        fullName,
-                        typeof(string)
-                    );
+                    string attemptedValue = (string)
+                        htmlHelper.GetModelStateValue(fullName, typeof(string));
                     tagBuilder.MergeAttribute(
                         "value",
                         attemptedValue

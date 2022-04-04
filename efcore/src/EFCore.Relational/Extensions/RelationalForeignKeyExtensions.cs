@@ -219,9 +219,9 @@ namespace Microsoft.EntityFrameworkCore
         public static IEnumerable<IForeignKeyConstraint> GetMappedConstraints(
             this IForeignKey foreignKey
         ) =>
-            (IEnumerable<IForeignKeyConstraint>?)foreignKey.FindRuntimeAnnotationValue(
-                RelationalAnnotationNames.ForeignKeyMappings
-            ) ?? Enumerable.Empty<IForeignKeyConstraint>();
+            (IEnumerable<IForeignKeyConstraint>?)
+                foreignKey.FindRuntimeAnnotationValue(RelationalAnnotationNames.ForeignKeyMappings)
+            ?? Enumerable.Empty<IForeignKeyConstraint>();
 
         /// <summary>
         ///     <para>
@@ -306,9 +306,8 @@ namespace Microsoft.EntityFrameworkCore
             this IMutableForeignKey foreignKey,
             in StoreObjectIdentifier storeObject
         ) =>
-            (IMutableForeignKey?)((IReadOnlyForeignKey)foreignKey).FindSharedObjectRootForeignKey(
-                storeObject
-            );
+            (IMutableForeignKey?)
+                ((IReadOnlyForeignKey)foreignKey).FindSharedObjectRootForeignKey(storeObject);
 
         /// <summary>
         ///     <para>
@@ -326,9 +325,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionForeignKey foreignKey,
             in StoreObjectIdentifier storeObject
         ) =>
-            (IConventionForeignKey?)(
-                (IReadOnlyForeignKey)foreignKey
-            ).FindSharedObjectRootForeignKey(storeObject);
+            (IConventionForeignKey?)
+                ((IReadOnlyForeignKey)foreignKey).FindSharedObjectRootForeignKey(storeObject);
 
         /// <summary>
         ///     <para>
@@ -346,8 +344,7 @@ namespace Microsoft.EntityFrameworkCore
             this IForeignKey foreignKey,
             in StoreObjectIdentifier storeObject
         ) =>
-            (IForeignKey?)((IReadOnlyForeignKey)foreignKey).FindSharedObjectRootForeignKey(
-                storeObject
-            );
+            (IForeignKey?)
+                ((IReadOnlyForeignKey)foreignKey).FindSharedObjectRootForeignKey(storeObject);
     }
 }

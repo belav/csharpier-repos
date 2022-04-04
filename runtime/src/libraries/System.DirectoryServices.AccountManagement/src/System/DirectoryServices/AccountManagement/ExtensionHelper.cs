@@ -20,8 +20,8 @@ namespace System.DirectoryServices.AccountManagement
         {
             get
             {
-                DirectoryRdnPrefixAttribute[] MyAttribute =
-                    (DirectoryRdnPrefixAttribute[])Attribute.GetCustomAttributes(
+                DirectoryRdnPrefixAttribute[] MyAttribute = (DirectoryRdnPrefixAttribute[])
+                    Attribute.GetCustomAttributes(
                         _p.GetType(),
                         typeof(DirectoryRdnPrefixAttribute),
                         false
@@ -50,8 +50,8 @@ namespace System.DirectoryServices.AccountManagement
 
         internal static string ReadStructuralObjectClass(Type principalType)
         {
-            DirectoryObjectClassAttribute[] MyAttribute =
-                (DirectoryObjectClassAttribute[])Attribute.GetCustomAttributes(
+            DirectoryObjectClassAttribute[] MyAttribute = (DirectoryObjectClassAttribute[])
+                Attribute.GetCustomAttributes(
                     principalType,
                     typeof(DirectoryObjectClassAttribute),
                     false
@@ -83,8 +83,8 @@ namespace System.DirectoryServices.AccountManagement
         {
             get
             {
-                DirectoryObjectClassAttribute[] MyAttribute =
-                    (DirectoryObjectClassAttribute[])Attribute.GetCustomAttributes(
+                DirectoryObjectClassAttribute[] MyAttribute = (DirectoryObjectClassAttribute[])
+                    Attribute.GetCustomAttributes(
                         _p.GetType(),
                         typeof(DirectoryObjectClassAttribute),
                         false

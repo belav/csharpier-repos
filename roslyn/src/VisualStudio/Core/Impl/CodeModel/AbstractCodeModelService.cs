@@ -249,64 +249,37 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             switch (symbol.Kind)
             {
                 case SymbolKind.Event:
-                    return (EnvDTE.CodeElement)ExternalCodeEvent.Create(
-                        state,
-                        projectId,
-                        (IEventSymbol)symbol
-                    );
+                    return (EnvDTE.CodeElement)
+                        ExternalCodeEvent.Create(state, projectId, (IEventSymbol)symbol);
                 case SymbolKind.Field:
-                    return (EnvDTE.CodeElement)ExternalCodeVariable.Create(
-                        state,
-                        projectId,
-                        (IFieldSymbol)symbol
-                    );
+                    return (EnvDTE.CodeElement)
+                        ExternalCodeVariable.Create(state, projectId, (IFieldSymbol)symbol);
                 case SymbolKind.Method:
-                    return (EnvDTE.CodeElement)ExternalCodeFunction.Create(
-                        state,
-                        projectId,
-                        (IMethodSymbol)symbol
-                    );
+                    return (EnvDTE.CodeElement)
+                        ExternalCodeFunction.Create(state, projectId, (IMethodSymbol)symbol);
                 case SymbolKind.Namespace:
-                    return (EnvDTE.CodeElement)ExternalCodeNamespace.Create(
-                        state,
-                        projectId,
-                        (INamespaceSymbol)symbol
-                    );
+                    return (EnvDTE.CodeElement)
+                        ExternalCodeNamespace.Create(state, projectId, (INamespaceSymbol)symbol);
                 case SymbolKind.NamedType:
                     var namedType = (INamedTypeSymbol)symbol;
                     switch (namedType.TypeKind)
                     {
                         case TypeKind.Class:
                         case TypeKind.Module:
-                            return (EnvDTE.CodeElement)ExternalCodeClass.Create(
-                                state,
-                                projectId,
-                                namedType
-                            );
+                            return (EnvDTE.CodeElement)
+                                ExternalCodeClass.Create(state, projectId, namedType);
                         case TypeKind.Delegate:
-                            return (EnvDTE.CodeElement)ExternalCodeDelegate.Create(
-                                state,
-                                projectId,
-                                namedType
-                            );
+                            return (EnvDTE.CodeElement)
+                                ExternalCodeDelegate.Create(state, projectId, namedType);
                         case TypeKind.Enum:
-                            return (EnvDTE.CodeElement)ExternalCodeEnum.Create(
-                                state,
-                                projectId,
-                                namedType
-                            );
+                            return (EnvDTE.CodeElement)
+                                ExternalCodeEnum.Create(state, projectId, namedType);
                         case TypeKind.Interface:
-                            return (EnvDTE.CodeElement)ExternalCodeInterface.Create(
-                                state,
-                                projectId,
-                                namedType
-                            );
+                            return (EnvDTE.CodeElement)
+                                ExternalCodeInterface.Create(state, projectId, namedType);
                         case TypeKind.Struct:
-                            return (EnvDTE.CodeElement)ExternalCodeStruct.Create(
-                                state,
-                                projectId,
-                                namedType
-                            );
+                            return (EnvDTE.CodeElement)
+                                ExternalCodeStruct.Create(state, projectId, namedType);
                         default:
                             throw Exceptions.ThrowEFail();
                     }
@@ -314,16 +287,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 case SymbolKind.Property:
                     var propertySymbol = (IPropertySymbol)symbol;
                     return propertySymbol.IsWithEvents
-                      ? (EnvDTE.CodeElement)ExternalCodeVariable.Create(
-                            state,
-                            projectId,
-                            propertySymbol
-                        )
-                      : (EnvDTE.CodeElement)ExternalCodeProperty.Create(
-                            state,
-                            projectId,
-                            (IPropertySymbol)symbol
-                        );
+                      ? (EnvDTE.CodeElement)
+                            ExternalCodeVariable.Create(state, projectId, propertySymbol)
+                      : (EnvDTE.CodeElement)
+                            ExternalCodeProperty.Create(state, projectId, (IPropertySymbol)symbol);
                 default:
                     throw Exceptions.ThrowEFail();
             }
@@ -383,35 +350,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             {
                 case EnvDTE.vsCMElement.vsCMElementClass:
                 case EnvDTE.vsCMElement.vsCMElementModule:
-                    return (EnvDTE.CodeElement)ExternalCodeClass.Create(
-                        state,
-                        projectId,
-                        typeSymbol
-                    );
+                    return (EnvDTE.CodeElement)
+                        ExternalCodeClass.Create(state, projectId, typeSymbol);
                 case EnvDTE.vsCMElement.vsCMElementInterface:
-                    return (EnvDTE.CodeElement)ExternalCodeInterface.Create(
-                        state,
-                        projectId,
-                        typeSymbol
-                    );
+                    return (EnvDTE.CodeElement)
+                        ExternalCodeInterface.Create(state, projectId, typeSymbol);
                 case EnvDTE.vsCMElement.vsCMElementDelegate:
-                    return (EnvDTE.CodeElement)ExternalCodeDelegate.Create(
-                        state,
-                        projectId,
-                        typeSymbol
-                    );
+                    return (EnvDTE.CodeElement)
+                        ExternalCodeDelegate.Create(state, projectId, typeSymbol);
                 case EnvDTE.vsCMElement.vsCMElementEnum:
-                    return (EnvDTE.CodeElement)ExternalCodeEnum.Create(
-                        state,
-                        projectId,
-                        typeSymbol
-                    );
+                    return (EnvDTE.CodeElement)
+                        ExternalCodeEnum.Create(state, projectId, typeSymbol);
                 case EnvDTE.vsCMElement.vsCMElementStruct:
-                    return (EnvDTE.CodeElement)ExternalCodeStruct.Create(
-                        state,
-                        projectId,
-                        typeSymbol
-                    );
+                    return (EnvDTE.CodeElement)
+                        ExternalCodeStruct.Create(state, projectId, typeSymbol);
                 default:
                     Debug.Fail("Unsupported element kind: " + elementKind);
                     throw Exceptions.ThrowEInvalidArg();

@@ -61,9 +61,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                         cancellationToken
                     );
 
-                    var monitorSelectionService = (IVsMonitorSelection?)await asyncServiceProvider
-                        .GetServiceAsync(typeof(SVsShellMonitorSelection))
-                        .ConfigureAwait(true);
+                    var monitorSelectionService = (IVsMonitorSelection?)
+                        await asyncServiceProvider
+                            .GetServiceAsync(typeof(SVsShellMonitorSelection))
+                            .ConfigureAwait(true);
                     Assumes.Present(monitorSelectionService);
 
                     // No need to track windows if we are shutting down

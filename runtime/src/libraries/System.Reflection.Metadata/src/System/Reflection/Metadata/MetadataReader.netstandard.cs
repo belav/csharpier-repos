@@ -16,8 +16,8 @@ namespace System.Reflection.Metadata
         {
             string name = GetString(nameHandle);
             string? cultureName = (!cultureHandle.IsNil) ? GetString(cultureHandle) : null;
-            var hashAlgorithm =
-                (Configuration.Assemblies.AssemblyHashAlgorithm)assemblyHashAlgorithm;
+            var hashAlgorithm = (Configuration.Assemblies.AssemblyHashAlgorithm)
+                assemblyHashAlgorithm;
             byte[]? publicKeyOrToken = !publicKeyOrTokenHandle.IsNil
                 ? GetBlobBytes(publicKeyOrTokenHandle)
                 : null;

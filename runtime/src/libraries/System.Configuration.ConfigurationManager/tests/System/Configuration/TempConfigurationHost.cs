@@ -94,8 +94,8 @@ public class TempConfigurationHost : DelegatingConfigHost
             if (s_configurationFactory == null)
             {
                 Type type = Type.GetType(InternalConfigConfigurationFactoryTypeName, true);
-                s_configurationFactory =
-                    (IInternalConfigConfigurationFactory)Activator.CreateInstance(type, true);
+                s_configurationFactory = (IInternalConfigConfigurationFactory)
+                    Activator.CreateInstance(type, true);
             }
 
             return s_configurationFactory;

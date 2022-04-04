@@ -36,9 +36,10 @@ internal static class TaskGenericsUtil
                 var resultType = GetTaskResultType(taskInstanceType);
                 return resultType == null
                   ? new VoidTaskResultGetter()
-                  : (ITaskResultGetter)Activator.CreateInstance(
-                        typeof(TaskResultGetter<>).MakeGenericType(resultType)
-                    )!;
+                  : (ITaskResultGetter)
+                        Activator.CreateInstance(
+                            typeof(TaskResultGetter<>).MakeGenericType(resultType)
+                        )!;
             }
         );
         return getter.GetResult(task);
@@ -119,9 +120,10 @@ internal static class TaskGenericsUtil
             tcsType =>
             {
                 var resultType = tcsType.GetGenericArguments()[0];
-                return (ITcsResultSetter)Activator.CreateInstance(
-                    typeof(TcsResultSetter<>).MakeGenericType(resultType)
-                )!;
+                return (ITcsResultSetter)
+                    Activator.CreateInstance(
+                        typeof(TcsResultSetter<>).MakeGenericType(resultType)
+                    )!;
             }
         );
     }

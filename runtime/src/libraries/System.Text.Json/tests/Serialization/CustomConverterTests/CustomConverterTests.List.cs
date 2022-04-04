@@ -38,13 +38,14 @@ namespace System.Text.Json.Serialization.Tests
             {
                 Type elementType = type.GetGenericArguments()[0];
 
-                JsonConverter converter = (JsonConverter)Activator.CreateInstance(
-                    typeof(ListConverter<>).MakeGenericType(elementType),
-                    BindingFlags.Instance | BindingFlags.Public,
-                    binder: null,
-                    new object[] { _offset },
-                    culture: null
-                );
+                JsonConverter converter = (JsonConverter)
+                    Activator.CreateInstance(
+                        typeof(ListConverter<>).MakeGenericType(elementType),
+                        BindingFlags.Instance | BindingFlags.Public,
+                        binder: null,
+                        new object[] { _offset },
+                        culture: null
+                    );
 
                 return converter;
             }

@@ -329,11 +329,8 @@ window.mvcClientValidationMetadata.push({0});
             object result;
             if (scope.TryGetValue(name, out result))
             {
-                return (TValue)Convert.ChangeType(
-                    result,
-                    typeof(TValue),
-                    CultureInfo.InvariantCulture
-                );
+                return (TValue)
+                    Convert.ChangeType(result, typeof(TValue), CultureInfo.InvariantCulture);
             }
             return defaultValue;
         }

@@ -111,11 +111,8 @@ namespace System.Net.Http.Headers
         public static NameValueHeaderValue Parse(string? input)
         {
             int index = 0;
-            return (NameValueHeaderValue)GenericHeaderParser.SingleValueNameValueParser.ParseValue(
-                input,
-                null,
-                ref index
-            );
+            return (NameValueHeaderValue)
+                GenericHeaderParser.SingleValueNameValueParser.ParseValue(input, null, ref index);
         }
 
         public static bool TryParse(

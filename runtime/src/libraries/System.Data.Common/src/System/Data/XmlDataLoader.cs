@@ -352,10 +352,8 @@ namespace System.Data
             if (_isTableLevel || (_dataSet != null && _dataSet._fTopLevelTable))
             {
                 XmlElement e = xdoc.DocumentElement;
-                DataTable? topTable = (DataTable?)_nodeToSchemaMap.GetSchemaForNode(
-                    e,
-                    FIgnoreNamespace(e)
-                );
+                DataTable? topTable = (DataTable?)
+                    _nodeToSchemaMap.GetSchemaForNode(e, FIgnoreNamespace(e));
                 if (topTable != null)
                 {
                     topRow = topTable.CreateEmptyRow(); //enzol perf
@@ -993,11 +991,12 @@ namespace System.Data
                                 hasChanges = _dataReader.Value; // Store value
                                 break;
                             case Keywords.HASERRORS: // Has errors attribute ?
-                                hasErrors = (bool)Convert.ChangeType(
-                                    _dataReader.Value,
-                                    typeof(bool),
-                                    CultureInfo.InvariantCulture
-                                );
+                                hasErrors = (bool)
+                                    Convert.ChangeType(
+                                        _dataReader.Value,
+                                        typeof(bool),
+                                        CultureInfo.InvariantCulture
+                                    );
                                 // Store value
                                 break;
                         }
@@ -1007,11 +1006,12 @@ namespace System.Data
                         if (_dataReader.LocalName == Keywords.ROWORDER)
                         {
                             // Is it a row order attribute ?
-                            rowOrder = (int)Convert.ChangeType(
-                                _dataReader.Value,
-                                typeof(int),
-                                CultureInfo.InvariantCulture
-                            );
+                            rowOrder = (int)
+                                Convert.ChangeType(
+                                    _dataReader.Value,
+                                    typeof(int),
+                                    CultureInfo.InvariantCulture
+                                );
                             // Store it
                         }
                         else if (

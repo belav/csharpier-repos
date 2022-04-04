@@ -170,11 +170,12 @@ namespace System.DirectoryServices.ActiveDirectory
                         context.Name
                     );
                 }
-                dcDnsName = (string)PropertyManager.GetPropertyValue(
-                    context,
-                    rootDSE,
-                    PropertyManager.DnsHostName
-                )!;
+                dcDnsName = (string)
+                    PropertyManager.GetPropertyValue(
+                        context,
+                        rootDSE,
+                        PropertyManager.DnsHostName
+                    )!;
             }
             catch (COMException e)
             {
@@ -476,9 +477,8 @@ namespace System.DirectoryServices.ActiveDirectory
                 if (role == ActiveDirectoryRole.RidRole)
                 {
                     System.DirectoryServices.Interop.UnsafeNativeMethods.IADsLargeInteger ridPool =
-                        (System.DirectoryServices.Interop.UnsafeNativeMethods.IADsLargeInteger)roleObjectEntry.Properties[
-                            PropertyManager.RIDAvailablePool
-                        ].Value!;
+                        (System.DirectoryServices.Interop.UnsafeNativeMethods.IADsLargeInteger)
+                            roleObjectEntry.Properties[PropertyManager.RIDAvailablePool].Value!;
 
                     // check the overflow of the low part
                     if (ridPool.LowPart + UpdateRidPoolSeizureValue < ridPool.LowPart)
@@ -782,11 +782,12 @@ namespace System.DirectoryServices.ActiveDirectory
 
                 try
                 {
-                    serverUTCTime = (string)PropertyManager.GetPropertyValue(
-                        context,
-                        rootDSE,
-                        PropertyManager.CurrentTime
-                    )!;
+                    serverUTCTime = (string)
+                        PropertyManager.GetPropertyValue(
+                            context,
+                            rootDSE,
+                            PropertyManager.CurrentTime
+                        )!;
                 }
                 finally
                 {
@@ -810,11 +811,12 @@ namespace System.DirectoryServices.ActiveDirectory
 
                 try
                 {
-                    serverHighestCommittedUsn = (string)PropertyManager.GetPropertyValue(
-                        context,
-                        rootDSE,
-                        PropertyManager.HighestCommittedUSN
-                    )!;
+                    serverHighestCommittedUsn = (string)
+                        PropertyManager.GetPropertyValue(
+                            context,
+                            rootDSE,
+                            PropertyManager.HighestCommittedUSN
+                        )!;
                 }
                 finally
                 {
@@ -836,11 +838,12 @@ namespace System.DirectoryServices.ActiveDirectory
                         ComputerObjectName
                     );
                     // is in the form Windows Server 2003
-                    _cachedOSVersion = (string)PropertyManager.GetPropertyValue(
-                        context,
-                        computerEntry,
-                        PropertyManager.OperatingSystem
-                    )!;
+                    _cachedOSVersion = (string)
+                        PropertyManager.GetPropertyValue(
+                            context,
+                            computerEntry,
+                            PropertyManager.OperatingSystem
+                        )!;
                 }
                 return _cachedOSVersion;
             }
@@ -859,11 +862,12 @@ namespace System.DirectoryServices.ActiveDirectory
                     );
 
                     // is in the form Windows Server 2003
-                    string osVersion = (string)PropertyManager.GetPropertyValue(
-                        context,
-                        computerEntry,
-                        PropertyManager.OperatingSystemVersion
-                    )!;
+                    string osVersion = (string)
+                        PropertyManager.GetPropertyValue(
+                            context,
+                            computerEntry,
+                            PropertyManager.OperatingSystemVersion
+                        )!;
 
                     // this could be in the form 5.2 (3790), so we need to take out the (3790)
                     int index = osVersion.IndexOf('(');
@@ -871,10 +875,8 @@ namespace System.DirectoryServices.ActiveDirectory
                     {
                         osVersion = osVersion.Substring(0, index);
                     }
-                    _cachedNumericOSVersion = (double)double.Parse(
-                        osVersion,
-                        NumberFormatInfo.InvariantInfo
-                    );
+                    _cachedNumericOSVersion = (double)
+                        double.Parse(osVersion, NumberFormatInfo.InvariantInfo);
                 }
 
                 return _cachedNumericOSVersion;
@@ -1369,10 +1371,11 @@ namespace System.DirectoryServices.ActiveDirectory
                 throw ExceptionHelper.GetExceptionFromErrorCode(Marshal.GetLastWin32Error());
             }
             NativeMethods.DsGetDomainControllerInfo dsGetDomainControllerInfo =
-                (NativeMethods.DsGetDomainControllerInfo)Marshal.GetDelegateForFunctionPointer(
-                    functionPtr,
-                    typeof(NativeMethods.DsGetDomainControllerInfo)
-                );
+                (NativeMethods.DsGetDomainControllerInfo)
+                    Marshal.GetDelegateForFunctionPointer(
+                        functionPtr,
+                        typeof(NativeMethods.DsGetDomainControllerInfo)
+                    );
 
             // try DsDomainControllerInfoLevel3 first which supports Read only DC (RODC)
             dcInfoLevel = NativeMethods.DsDomainControllerInfoLevel3;
@@ -1483,10 +1486,11 @@ namespace System.DirectoryServices.ActiveDirectory
                             );
                         }
                         NativeMethods.DsFreeDomainControllerInfo dsFreeDomainControllerInfo =
-                            (NativeMethods.DsFreeDomainControllerInfo)Marshal.GetDelegateForFunctionPointer(
-                                functionPtr,
-                                typeof(NativeMethods.DsFreeDomainControllerInfo)
-                            );
+                            (NativeMethods.DsFreeDomainControllerInfo)
+                                Marshal.GetDelegateForFunctionPointer(
+                                    functionPtr,
+                                    typeof(NativeMethods.DsFreeDomainControllerInfo)
+                                );
                         dsFreeDomainControllerInfo(dcInfoLevel, dcCount, dcInfoPtr);
                     }
                 }
@@ -1587,8 +1591,8 @@ namespace System.DirectoryServices.ActiveDirectory
             {
                 throw ExceptionHelper.GetExceptionFromErrorCode(Marshal.GetLastWin32Error());
             }
-            NativeMethods.DsListRoles dsListRoles =
-                (NativeMethods.DsListRoles)Marshal.GetDelegateForFunctionPointer(
+            NativeMethods.DsListRoles dsListRoles = (NativeMethods.DsListRoles)
+                Marshal.GetDelegateForFunctionPointer(
                     functionPtr,
                     typeof(NativeMethods.DsListRoles)
                 );
@@ -1637,10 +1641,11 @@ namespace System.DirectoryServices.ActiveDirectory
                             );
                         }
                         UnsafeNativeMethods.DsFreeNameResultW dsFreeNameResult =
-                            (UnsafeNativeMethods.DsFreeNameResultW)Marshal.GetDelegateForFunctionPointer(
-                                functionPtr,
-                                typeof(UnsafeNativeMethods.DsFreeNameResultW)
-                            );
+                            (UnsafeNativeMethods.DsFreeNameResultW)
+                                Marshal.GetDelegateForFunctionPointer(
+                                    functionPtr,
+                                    typeof(UnsafeNativeMethods.DsFreeNameResultW)
+                                );
                         dsFreeNameResult(rolesPtr);
                     }
                 }

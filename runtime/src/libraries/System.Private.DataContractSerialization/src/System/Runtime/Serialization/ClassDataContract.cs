@@ -297,8 +297,8 @@ namespace System.Runtime.Serialization
             string[] memberNames
         )
         {
-            ClassDataContract? cdc =
-                (ClassDataContract?)DataContract.GetDataContractFromGeneratedAssembly(type);
+            ClassDataContract? cdc = (ClassDataContract?)
+                DataContract.GetDataContractFromGeneratedAssembly(type);
             if (cdc == null)
             {
                 return new ClassDataContract(type, ns, memberNames);
@@ -1211,8 +1211,8 @@ namespace System.Runtime.Serialization
                                     )
                                 );
 
-                            DataMemberAttribute memberAttribute =
-                                (DataMemberAttribute)memberAttributes[0];
+                            DataMemberAttribute memberAttribute = (DataMemberAttribute)
+                                memberAttributes[0];
                             if (memberAttribute.IsNameSetExplicitly)
                             {
                                 if (
@@ -1845,14 +1845,10 @@ namespace System.Runtime.Serialization
                 {
                     _isKeyValuePairAdapter = true;
                     _keyValuePairGenericArguments = type.GetGenericArguments();
-                    _keyValuePairCtorInfo =
-                        (ConstructorInfo)type.GetMemberWithSameMetadataDefinitionAs(
-                            s_ctorGenericMethod
-                        );
-                    _getKeyValuePairMethodInfo =
-                        (MethodInfo)type.GetMemberWithSameMetadataDefinitionAs(
-                            s_getKeyValuePairMethod
-                        );
+                    _keyValuePairCtorInfo = (ConstructorInfo)
+                        type.GetMemberWithSameMetadataDefinitionAs(s_ctorGenericMethod);
+                    _getKeyValuePairMethodInfo = (MethodInfo)
+                        type.GetMemberWithSameMetadataDefinitionAs(s_getKeyValuePairMethod);
                 }
             }
 

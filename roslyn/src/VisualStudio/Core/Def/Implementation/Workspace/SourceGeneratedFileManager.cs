@@ -608,9 +608,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     return;
                 }
 
-                var infoBarFactory = (IVsInfoBarUIFactory)_fileManager._serviceProvider.GetService(
-                    typeof(SVsInfoBarUIFactory)
-                );
+                var infoBarFactory = (IVsInfoBarUIFactory)
+                    _fileManager._serviceProvider.GetService(typeof(SVsInfoBarUIFactory));
                 Assumes.Present(infoBarFactory);
 
                 if (

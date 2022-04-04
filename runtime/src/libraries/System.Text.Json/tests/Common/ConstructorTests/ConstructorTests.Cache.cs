@@ -176,11 +176,8 @@ namespace System.Text.Json.Serialization.Tests
 
             async Task DeserializeAsync<T>(string json)
             {
-                ITestClass obj =
-                    (ITestClass)await JsonSerializerWrapperForString.DeserializeWrapper<T>(
-                        json,
-                        s_options
-                    );
+                ITestClass obj = (ITestClass)
+                    await JsonSerializerWrapperForString.DeserializeWrapper<T>(json, s_options);
                 obj.Verify();
             }
             ;

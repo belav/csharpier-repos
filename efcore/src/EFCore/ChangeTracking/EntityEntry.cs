@@ -247,10 +247,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                     .Select(
                         navigation =>
                             navigation.IsCollection
-                                ? (NavigationEntry)new CollectionEntry(
-                                      InternalEntry,
-                                      navigation.Name
-                                  )
+                                ? (NavigationEntry)
+                                      new CollectionEntry(InternalEntry, navigation.Name)
                                 : new ReferenceEntry(InternalEntry, navigation.Name)
                     );
             }

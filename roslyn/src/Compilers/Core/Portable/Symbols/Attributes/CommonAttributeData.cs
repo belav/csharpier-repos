@@ -455,9 +455,10 @@ namespace Microsoft.CodeAnalysis
                     == SpecialType.System_Int16
                 )
                 {
-                    options = (MethodImplOptions)attribute.CommonConstructorArguments[
-                        0
-                    ].DecodeValue<short>(SpecialType.System_Int16);
+                    options = (MethodImplOptions)
+                        attribute.CommonConstructorArguments[0].DecodeValue<short>(
+                            SpecialType.System_Int16
+                        );
                 }
                 else
                 {
@@ -489,9 +490,8 @@ namespace Microsoft.CodeAnalysis
             {
                 if (namedArg.Key == "MethodCodeType")
                 {
-                    var value = (MethodImplAttributes)namedArg.Value.DecodeValue<int>(
-                        SpecialType.System_Enum
-                    );
+                    var value = (MethodImplAttributes)
+                        namedArg.Value.DecodeValue<int>(SpecialType.System_Enum);
                     if (value < 0 || value > MethodImplAttributes.Runtime)
                     {
                         Debug.Assert(attribute.AttributeClass is object);

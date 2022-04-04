@@ -78,13 +78,14 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         {
             if (memberExpression.Member is FieldInfo fieldInfo && fieldInfo.IsInitOnly)
             {
-                return (BinaryExpression)Activator.CreateInstance(
-                    _assignBinaryExpressionType,
-                    BindingFlags.NonPublic | BindingFlags.Instance,
-                    null,
-                    new object[] { memberExpression, valueExpression },
-                    null
-                )!;
+                return (BinaryExpression)
+                    Activator.CreateInstance(
+                        _assignBinaryExpressionType,
+                        BindingFlags.NonPublic | BindingFlags.Instance,
+                        null,
+                        new object[] { memberExpression, valueExpression },
+                        null
+                    )!;
             }
 
             return Expression.Assign(memberExpression, valueExpression);

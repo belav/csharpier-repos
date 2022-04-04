@@ -61,10 +61,11 @@ namespace System.Security.Cryptography
         {
             get
             {
-                CngExportPolicies policy = (CngExportPolicies)_keyHandle.GetPropertyAsDword(
-                    KeyPropertyName.ExportPolicy,
-                    CngPropertyOptions.None
-                );
+                CngExportPolicies policy = (CngExportPolicies)
+                    _keyHandle.GetPropertyAsDword(
+                        KeyPropertyName.ExportPolicy,
+                        CngPropertyOptions.None
+                    );
                 return policy;
             }
             internal set { _keyHandle.SetExportPolicy(value); }
@@ -144,10 +145,8 @@ namespace System.Security.Cryptography
         {
             get
             {
-                CngKeyOpenOptions keyType = (CngKeyOpenOptions)_keyHandle.GetPropertyAsDword(
-                    KeyPropertyName.KeyType,
-                    CngPropertyOptions.None
-                );
+                CngKeyOpenOptions keyType = (CngKeyOpenOptions)
+                    _keyHandle.GetPropertyAsDword(KeyPropertyName.KeyType, CngPropertyOptions.None);
                 bool isMachineKey =
                     (keyType & CngKeyOpenOptions.MachineKey) == CngKeyOpenOptions.MachineKey;
                 return isMachineKey;
@@ -335,8 +334,8 @@ namespace System.Security.Cryptography
                             if (errorCode != ErrorCode.ERROR_SUCCESS)
                                 throw errorCode.ToCryptographicException();
 
-                            NCRYPT_UI_POLICY* pNcryptUiPolicy =
-                                (NCRYPT_UI_POLICY*)pNcryptUiPolicyAndStrings;
+                            NCRYPT_UI_POLICY* pNcryptUiPolicy = (NCRYPT_UI_POLICY*)
+                                pNcryptUiPolicyAndStrings;
                             uiProtectionLevel = pNcryptUiPolicy->dwFlags;
                             friendlyName = Marshal.PtrToStringUni(pNcryptUiPolicy->pszFriendlyName);
                             description = Marshal.PtrToStringUni(pNcryptUiPolicy->pszDescription);

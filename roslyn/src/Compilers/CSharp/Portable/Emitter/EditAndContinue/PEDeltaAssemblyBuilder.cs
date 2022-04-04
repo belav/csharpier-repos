@@ -62,9 +62,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 sourceAssembly.DeclaringCompilation
             );
             var metadataDecoder = (MetadataDecoder)metadataSymbols.MetadataDecoder;
-            var metadataAssembly = (PEAssemblySymbol)metadataDecoder
-                .ModuleSymbol
-                .ContainingAssembly;
+            var metadataAssembly = (PEAssemblySymbol)
+                metadataDecoder.ModuleSymbol.ContainingAssembly;
 
             var matchToMetadata = new CSharpSymbolMatcher(
                 metadataSymbols.AnonymousTypes,

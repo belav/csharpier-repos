@@ -2875,8 +2875,8 @@ return;
                     workspace.Documents
                 );
 
-                var provider =
-                    (TestFormattingRuleFactoryServiceFactory.Factory)workspace.Services.GetService<IHostDependentFormattingRuleFactoryService>();
+                var provider = (TestFormattingRuleFactoryServiceFactory.Factory)
+                    workspace.Services.GetService<IHostDependentFormattingRuleFactoryService>();
                 provider.BaseIndentation = BaseIndentationOfNugget;
                 provider.TextSpan = subjectDocument.SelectedSpans.Single();
 

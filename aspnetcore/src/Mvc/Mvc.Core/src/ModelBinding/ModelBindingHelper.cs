@@ -742,10 +742,8 @@ internal static class ModelBindingHelper
             if (valueAsArray != null)
             {
                 // case 1: both destination + source type are arrays, so convert each element
-                var converted = (IList)Array.CreateInstance(
-                    destinationElementType,
-                    valueAsArray.Length
-                );
+                var converted = (IList)
+                    Array.CreateInstance(destinationElementType, valueAsArray.Length);
                 for (var i = 0; i < valueAsArray.Length; i++)
                 {
                     converted[i] = ConvertSimpleType(

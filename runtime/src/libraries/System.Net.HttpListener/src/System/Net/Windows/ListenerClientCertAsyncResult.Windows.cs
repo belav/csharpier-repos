@@ -69,11 +69,8 @@ namespace System.Net
                 state: this,
                 pinData: _backingBuffer
             );
-            _memoryBlob =
-                (Interop.HttpApi.HTTP_SSL_CLIENT_CERT_INFO*)Marshal.UnsafeAddrOfPinnedArrayElement(
-                    _backingBuffer,
-                    0
-                );
+            _memoryBlob = (Interop.HttpApi.HTTP_SSL_CLIENT_CERT_INFO*)
+                Marshal.UnsafeAddrOfPinnedArrayElement(_backingBuffer, 0);
         }
 
         internal unsafe void IOCompleted(uint errorCode, uint numBytes)
@@ -204,10 +201,8 @@ namespace System.Net
             NativeOverlapped* nativeOverlapped
         )
         {
-            ListenerClientCertAsyncResult asyncResult =
-                (ListenerClientCertAsyncResult)ThreadPoolBoundHandle.GetNativeOverlappedState(
-                    nativeOverlapped
-                )!;
+            ListenerClientCertAsyncResult asyncResult = (ListenerClientCertAsyncResult)
+                ThreadPoolBoundHandle.GetNativeOverlappedState(nativeOverlapped)!;
             if (NetEventSource.Log.IsEnabled())
                 NetEventSource.Info(
                     null,

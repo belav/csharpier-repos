@@ -18,9 +18,7 @@ namespace System.DirectoryServices.AccountManagement
 
         public static string DebugLogFile => s_configSettings?.DebugLogFile;
 
-        private static readonly ConfigSettings s_configSettings =
-            (ConfigSettings)ConfigurationManager.GetSection(
-                "System.DirectoryServices.AccountManagement"
-            );
+        private static readonly ConfigSettings s_configSettings = (ConfigSettings)
+            ConfigurationManager.GetSection("System.DirectoryServices.AccountManagement");
     }
 }

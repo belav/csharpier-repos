@@ -49,11 +49,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Experimentation
                 {
                     try
                     {
-                        featureFlags = (IVsFeatureFlags)await (
-                            (IAsyncServiceProvider)serviceProvider
-                        )
-                            .GetServiceAsync(typeof(SVsFeatureFlags))
-                            .ConfigureAwait(false);
+                        featureFlags = (IVsFeatureFlags)
+                            await ((IAsyncServiceProvider)serviceProvider)
+                                .GetServiceAsync(typeof(SVsFeatureFlags))
+                                .ConfigureAwait(false);
                         experimentationServiceOpt = await ((IAsyncServiceProvider)serviceProvider)
                             .GetServiceAsync(typeof(SVsExperimentationService))
                             .ConfigureAwait(false);
@@ -129,10 +128,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Experimentation
 
                 try
                 {
-                    return (bool)_isCachedFlightEnabledInfo.Invoke(
-                        _experimentationServiceOpt,
-                        new object[] { experimentName }
-                    );
+                    return (bool)
+                        _isCachedFlightEnabledInfo.Invoke(
+                            _experimentationServiceOpt,
+                            new object[] { experimentName }
+                        );
                 }
                 catch { }
             }

@@ -651,12 +651,10 @@ namespace System.Numerics.Tests
 
         public static List<byte> ShiftLeft(List<byte> bytes1, List<byte> bytes2)
         {
-            int byteShift = (int)new BigInteger(
-                Divide(Copy(bytes2), new List<byte>(new byte[] { 8 })).ToArray()
-            );
-            sbyte bitShift = (sbyte)new BigInteger(
-                Remainder(bytes2, new List<byte>(new byte[] { 8 })).ToArray()
-            );
+            int byteShift = (int)
+                new BigInteger(Divide(Copy(bytes2), new List<byte>(new byte[] { 8 })).ToArray());
+            sbyte bitShift = (sbyte)
+                new BigInteger(Remainder(bytes2, new List<byte>(new byte[] { 8 })).ToArray());
 
             for (int i = 0; i < Math.Abs(bitShift); i++)
             {

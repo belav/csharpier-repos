@@ -57,10 +57,17 @@ namespace Microsoft.Composition.Demos.ExtendedCollectionImports.Dictionaries
 
             return new[]
             {
-                (ExportDescriptorPromise)gdd.Invoke(
-                    null,
-                    new object[] { contract, valueContract, descriptorAccessor, keyByMetadataName }
-                )
+                (ExportDescriptorPromise)
+                    gdd.Invoke(
+                        null,
+                        new object[]
+                        {
+                            contract,
+                            valueContract,
+                            descriptorAccessor,
+                            keyByMetadataName
+                        }
+                    )
             };
         }
 

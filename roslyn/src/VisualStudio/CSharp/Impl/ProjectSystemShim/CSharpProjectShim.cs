@@ -69,9 +69,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
             _serviceProvider = serviceProvider;
             _warningNumberArrayPointer = Marshal.AllocHGlobal(0);
 
-            var componentModel = (IComponentModel)serviceProvider.GetService(
-                typeof(SComponentModel)
-            );
+            var componentModel = (IComponentModel)
+                serviceProvider.GetService(typeof(SComponentModel));
 
             this.ProjectCodeModel = componentModel
                 .GetService<IProjectCodeModelFactory>()

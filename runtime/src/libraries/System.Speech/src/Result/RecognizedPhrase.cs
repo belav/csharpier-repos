@@ -172,8 +172,8 @@ namespace System.Speech.Recognition
                         {
                             IntPtr elementBuffer =
                                 new((long)buffer + elementsOffset + i * sizeofPhraseElement);
-                            SPSERIALIZEDPHRASEELEMENT element =
-                                (SPSERIALIZEDPHRASEELEMENT)Marshal.PtrToStructure(
+                            SPSERIALIZEDPHRASEELEMENT element = (SPSERIALIZEDPHRASEELEMENT)
+                                Marshal.PtrToStructure(
                                     elementBuffer,
                                     typeof(SPSERIALIZEDPHRASEELEMENT)
                                 );
@@ -343,11 +343,8 @@ namespace System.Speech.Recognition
                                 )
                         )
                         {
-                            SPPHRASEREPLACEMENT replacement =
-                                (SPPHRASEREPLACEMENT)Marshal.PtrToStructure(
-                                    itnBuffer,
-                                    typeof(SPPHRASEREPLACEMENT)
-                                );
+                            SPPHRASEREPLACEMENT replacement = (SPPHRASEREPLACEMENT)
+                                Marshal.PtrToStructure(itnBuffer, typeof(SPPHRASEREPLACEMENT));
                             string text = Marshal.PtrToStringUni(
                                 new IntPtr((long)buffer + replacement.pszReplacementText)
                             );
@@ -391,18 +388,13 @@ namespace System.Speech.Recognition
 
             if (isSapi53Header)
             {
-                serializedPhrase = (SPSERIALIZEDPHRASE)Marshal.PtrToStructure(
-                    phraseBuffer,
-                    typeof(SPSERIALIZEDPHRASE)
-                );
+                serializedPhrase = (SPSERIALIZEDPHRASE)
+                    Marshal.PtrToStructure(phraseBuffer, typeof(SPSERIALIZEDPHRASE));
             }
             else
             {
-                SPSERIALIZEDPHRASE_Sapi51 legacyPhrase =
-                    (SPSERIALIZEDPHRASE_Sapi51)Marshal.PtrToStructure(
-                        phraseBuffer,
-                        typeof(SPSERIALIZEDPHRASE_Sapi51)
-                    );
+                SPSERIALIZEDPHRASE_Sapi51 legacyPhrase = (SPSERIALIZEDPHRASE_Sapi51)
+                    Marshal.PtrToStructure(phraseBuffer, typeof(SPSERIALIZEDPHRASE_Sapi51));
                 serializedPhrase = new SPSERIALIZEDPHRASE(legacyPhrase);
             }
 
@@ -703,11 +695,8 @@ namespace System.Speech.Recognition
         )
         {
             IntPtr propertyBuffer = new((long)phraseBuffer + semanticsOffset);
-            SPSERIALIZEDPHRASEPROPERTY property =
-                (SPSERIALIZEDPHRASEPROPERTY)Marshal.PtrToStructure(
-                    propertyBuffer,
-                    typeof(SPSERIALIZEDPHRASEPROPERTY)
-                );
+            SPSERIALIZEDPHRASEPROPERTY property = (SPSERIALIZEDPHRASEPROPERTY)
+                Marshal.PtrToStructure(propertyBuffer, typeof(SPSERIALIZEDPHRASEPROPERTY));
 
             string propertyName;
             SemanticValue thisSemanticValue = ExtractSemanticValueInformation(
@@ -766,11 +755,8 @@ namespace System.Speech.Recognition
         )
         {
             IntPtr propertyBuffer = new((long)phraseBuffer + semanticsOffset);
-            SPSERIALIZEDPHRASEPROPERTY property =
-                (SPSERIALIZEDPHRASEPROPERTY)Marshal.PtrToStructure(
-                    propertyBuffer,
-                    typeof(SPSERIALIZEDPHRASEPROPERTY)
-                );
+            SPSERIALIZEDPHRASEPROPERTY property = (SPSERIALIZEDPHRASEPROPERTY)
+                Marshal.PtrToStructure(propertyBuffer, typeof(SPSERIALIZEDPHRASEPROPERTY));
 
             string propertyName;
             SemanticValue thisSemanticValue = ExtractSemanticValueInformation(
@@ -1019,10 +1005,8 @@ namespace System.Speech.Recognition
             if (rule.NextSiblingOffset > 0)
             {
                 IntPtr elementBuffer = new((long)phraseBuffer + rule.NextSiblingOffset);
-                SPSERIALIZEDPHRASERULE ruleNext = (SPSERIALIZEDPHRASERULE)Marshal.PtrToStructure(
-                    elementBuffer,
-                    typeof(SPSERIALIZEDPHRASERULE)
-                );
+                SPSERIALIZEDPHRASERULE ruleNext = (SPSERIALIZEDPHRASERULE)
+                    Marshal.PtrToStructure(elementBuffer, typeof(SPSERIALIZEDPHRASERULE));
 
                 node._next = ExtractRules(grammar, ruleNext, phraseBuffer);
             }
@@ -1030,10 +1014,8 @@ namespace System.Speech.Recognition
             if (rule.FirstChildOffset > 0)
             {
                 IntPtr elementBuffer = new((long)phraseBuffer + rule.FirstChildOffset);
-                SPSERIALIZEDPHRASERULE ruleFirst = (SPSERIALIZEDPHRASERULE)Marshal.PtrToStructure(
-                    elementBuffer,
-                    typeof(SPSERIALIZEDPHRASERULE)
-                );
+                SPSERIALIZEDPHRASERULE ruleFirst = (SPSERIALIZEDPHRASERULE)
+                    Marshal.PtrToStructure(elementBuffer, typeof(SPSERIALIZEDPHRASERULE));
 
                 node._child = ExtractRules(grammar, ruleFirst, phraseBuffer);
             }
@@ -1052,10 +1034,11 @@ namespace System.Speech.Recognition
             {
                 IntPtr smlBuffer = gc.AddrOfPinnedObject();
 
-                SPSEMANTICERRORINFO semanticError = (SPSEMANTICERRORINFO)Marshal.PtrToStructure(
-                    (IntPtr)((long)smlBuffer + (int)_serializedPhrase.SemanticErrorInfoOffset),
-                    typeof(SPSEMANTICERRORINFO)
-                );
+                SPSEMANTICERRORINFO semanticError = (SPSEMANTICERRORINFO)
+                    Marshal.PtrToStructure(
+                        (IntPtr)((long)smlBuffer + (int)_serializedPhrase.SemanticErrorInfoOffset),
+                        typeof(SPSEMANTICERRORINFO)
+                    );
 
                 string source = Marshal.PtrToStringUni(
                     new IntPtr((long)smlBuffer + semanticError.pszSourceOffset)
@@ -1340,9 +1323,8 @@ namespace System.Speech.Recognition
             ruleInstance =
                 ruleClass == grammarType
                     ? grammar
-                    : (System.Speech.Recognition.Grammar)assembly.CreateInstance(
-                          ruleClass.FullName
-                      );
+                    : (System.Speech.Recognition.Grammar)
+                          assembly.CreateInstance(ruleClass.FullName);
             onParse = ruleInstance.MethodInfo(method);
         }
 

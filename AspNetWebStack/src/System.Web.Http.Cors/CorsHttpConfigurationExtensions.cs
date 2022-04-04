@@ -167,10 +167,8 @@ namespace System.Web.Http
                 throw new ArgumentNullException("httpConfiguration");
             }
 
-            return (ICorsEngine)httpConfiguration.Properties.GetOrAdd(
-                CorsEngineKey,
-                k => new CorsEngine()
-            );
+            return (ICorsEngine)
+                httpConfiguration.Properties.GetOrAdd(CorsEngineKey, k => new CorsEngine());
         }
 
         /// <summary>
@@ -215,10 +213,11 @@ namespace System.Web.Http
                 throw new ArgumentNullException("httpConfiguration");
             }
 
-            return (ICorsPolicyProviderFactory)httpConfiguration.Properties.GetOrAdd(
-                CorsPolicyProviderFactoryKey,
-                k => new AttributeBasedPolicyProviderFactory()
-            );
+            return (ICorsPolicyProviderFactory)
+                httpConfiguration.Properties.GetOrAdd(
+                    CorsPolicyProviderFactoryKey,
+                    k => new AttributeBasedPolicyProviderFactory()
+                );
         }
     }
 }

@@ -187,9 +187,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
                                         if (mapping != null)
                                         {
-                                            mapping = (RelationalTypeMapping)mapping.Clone(
-                                                secondConverterInfo.Create()
-                                            );
+                                            mapping = (RelationalTypeMapping)
+                                                mapping.Clone(secondConverterInfo.Create());
                                             break;
                                         }
                                     }
@@ -197,9 +196,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
                                 if (mapping != null)
                                 {
-                                    mapping = (RelationalTypeMapping)mapping.Clone(
-                                        converterInfo.Create()
-                                    );
+                                    mapping = (RelationalTypeMapping)
+                                        mapping.Clone(converterInfo.Create());
                                     break;
                                 }
                             }
@@ -320,9 +318,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 var precision = typeConfiguration.GetPrecision();
                 var size = typeConfiguration.GetMaxLength();
 
-                var storeTypeName = (string?)typeConfiguration[
-                    RelationalAnnotationNames.ColumnType
-                ];
+                var storeTypeName = (string?)
+                    typeConfiguration[RelationalAnnotationNames.ColumnType];
                 string? storeTypeBaseName = null;
                 if (storeTypeName != null)
                 {
@@ -355,9 +352,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     }
                 }
 
-                var isFixedLength = (bool?)typeConfiguration[
-                    RelationalAnnotationNames.IsFixedLength
-                ];
+                var isFixedLength = (bool?)
+                    typeConfiguration[RelationalAnnotationNames.IsFixedLength];
                 mappingInfo = new RelationalTypeMappingInfo(
                     customConverter?.ProviderClrType ?? type,
                     storeTypeName,

@@ -101,8 +101,8 @@ namespace System.ComponentModel.Tests
                 UriTypeConverterTests.s_converter
             );
 
-            var actualInstanceDescriptor =
-                (InstanceDescriptor)UriTypeConverterTests.s_converter.ConvertTo(
+            var actualInstanceDescriptor = (InstanceDescriptor)
+                UriTypeConverterTests.s_converter.ConvertTo(
                     new Uri("http://www.Microsoft.com/"),
                     typeof(InstanceDescriptor)
                 );
@@ -117,8 +117,8 @@ namespace System.ComponentModel.Tests
             Assert.True(actualInstanceDescriptor.IsComplete);
             Assert.Equal(new Uri("http://www.Microsoft.com/"), actualInstanceDescriptor.Invoke());
 
-            var actualRelativeInstanceDescriptor =
-                (InstanceDescriptor)UriTypeConverterTests.s_converter.ConvertTo(
+            var actualRelativeInstanceDescriptor = (InstanceDescriptor)
+                UriTypeConverterTests.s_converter.ConvertTo(
                     new Uri("relative", UriKind.Relative),
                     typeof(InstanceDescriptor)
                 );

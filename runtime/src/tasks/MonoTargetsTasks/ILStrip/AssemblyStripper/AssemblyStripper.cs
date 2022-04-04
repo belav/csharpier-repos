@@ -133,9 +133,8 @@ namespace AssemblyStripper
 
                 MetadataToken methodToken = MetadataToken.FromMetadataRow(TokenType.Method, i);
 
-                MethodDefinition method = (MethodDefinition)assembly.MainModule.LookupByToken(
-                    methodToken
-                );
+                MethodDefinition method = (MethodDefinition)
+                    assembly.MainModule.LookupByToken(methodToken);
 
                 if (method.HasBody)
                 {
@@ -163,9 +162,8 @@ namespace AssemblyStripper
 
                 MetadataToken fieldToken = new MetadataToken(TokenType.Field, fieldRvaRow.Field);
 
-                FieldDefinition field = (FieldDefinition)assembly.MainModule.LookupByToken(
-                    fieldToken
-                );
+                FieldDefinition field = (FieldDefinition)
+                    assembly.MainModule.LookupByToken(fieldToken);
 
                 fieldRvaRow.RVA = metadata_writer.GetDataCursor();
                 metadata_writer.AddData(field.InitialValue.Length + 3 & (~3));
@@ -175,9 +173,8 @@ namespace AssemblyStripper
 
         void PatchResources()
         {
-            ManifestResourceTable resourceTable = (ManifestResourceTable)stripped_tables[
-                ManifestResourceTable.RId
-            ];
+            ManifestResourceTable resourceTable = (ManifestResourceTable)
+                stripped_tables[ManifestResourceTable.RId];
             if (resourceTable == null)
                 return;
 

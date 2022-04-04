@@ -55,10 +55,11 @@ namespace System.IO.Ports.Tests
         private static bool ReadAbortOnErrorFlag(SerialPort com)
         {
             Stream baseStream = com.BaseStream;
-            int flagValue = (int)baseStream
-                .GetType()
-                .GetMethod("GetDcbFlag", BindingFlags.NonPublic | BindingFlags.Instance)
-                .Invoke(baseStream, new object[] { 14 });
+            int flagValue = (int)
+                baseStream
+                    .GetType()
+                    .GetMethod("GetDcbFlag", BindingFlags.NonPublic | BindingFlags.Instance)
+                    .Invoke(baseStream, new object[] { 14 });
             return flagValue != 0;
         }
 

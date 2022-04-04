@@ -1462,9 +1462,10 @@ public class WebHostBuilderTests
             {
                 using var host = hostBuilder.Build();
 
-                var filter = (MyStartupFilter)host.Services
-                    .GetServices<IStartupFilter>()
-                    .FirstOrDefault(s => s is MyStartupFilter);
+                var filter = (MyStartupFilter)
+                    host.Services
+                        .GetServices<IStartupFilter>()
+                        .FirstOrDefault(s => s is MyStartupFilter);
                 Assert.NotNull(filter);
                 try
                 {

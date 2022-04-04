@@ -50,11 +50,12 @@ namespace Castle.Components.DictionaryAdapter.Tests
         public void Can_Save_Everything_As_A_String()
         {
             var dictionary = new Dictionary<string, string>();
-            var player = (IPlayer)_factory.GetAdapter(
-                typeof(IPlayer),
-                dictionary.ForDictionaryAdapter(),
-                new PropertyDescriptor().AddBehaviors(new StringStorageAttribute())
-            );
+            var player = (IPlayer)
+                _factory.GetAdapter(
+                    typeof(IPlayer),
+                    dictionary.ForDictionaryAdapter(),
+                    new PropertyDescriptor().AddBehaviors(new StringStorageAttribute())
+                );
             player.Points = 23;
             Assert.AreEqual(23, player.Points);
         }

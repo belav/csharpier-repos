@@ -367,8 +367,8 @@ public partial class ThreadPoolBoundHandleTests
         NativeOverlapped* overlapped
     )
     {
-        OverlappedContext result =
-            (OverlappedContext)ThreadPoolBoundHandle.GetNativeOverlappedState(overlapped);
+        OverlappedContext result = (OverlappedContext)
+            ThreadPoolBoundHandle.GetNativeOverlappedState(overlapped);
         result.ErrorCode = (int)errorCode;
         result.BytesWritten = (int)numBytes;
 

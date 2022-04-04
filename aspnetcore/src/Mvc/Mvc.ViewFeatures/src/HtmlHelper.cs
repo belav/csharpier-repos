@@ -1532,11 +1532,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
     )
     {
         var fullName = NameAndIdProvider.GetFullHtmlFieldName(ViewContext, expression);
-        var attemptedValue = (string)DefaultHtmlGenerator.GetModelStateValue(
-            ViewContext,
-            fullName,
-            typeof(string)
-        );
+        var attemptedValue = (string)
+            DefaultHtmlGenerator.GetModelStateValue(ViewContext, fullName, typeof(string));
 
         string resolvedValue;
         if (attemptedValue != null)

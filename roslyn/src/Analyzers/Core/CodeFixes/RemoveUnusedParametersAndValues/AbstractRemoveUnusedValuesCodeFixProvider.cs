@@ -546,18 +546,19 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                             expression,
                             (node, generator) =>
                             {
-                                var discardAssignmentExpression = (TExpressionSyntax)generator
-                                    .AssignmentStatement(
-                                        left: generator.IdentifierName(
-                                            AbstractRemoveUnusedParametersAndValuesDiagnosticAnalyzer.DiscardVariableName
-                                        ),
-                                        right: node.WithoutTrivia()
-                                    )
-                                    .WithTriviaFrom(node)
-                                    .WithAdditionalAnnotations(
-                                        Simplifier.Annotation,
-                                        Formatter.Annotation
-                                    );
+                                var discardAssignmentExpression = (TExpressionSyntax)
+                                    generator
+                                        .AssignmentStatement(
+                                            left: generator.IdentifierName(
+                                                AbstractRemoveUnusedParametersAndValuesDiagnosticAnalyzer.DiscardVariableName
+                                            ),
+                                            right: node.WithoutTrivia()
+                                        )
+                                        .WithTriviaFrom(node)
+                                        .WithAdditionalAnnotations(
+                                            Simplifier.Annotation,
+                                            Formatter.Annotation
+                                        );
                                 return discardAssignmentExpression;
                             }
                         );
@@ -919,13 +920,14 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                 ITypeSymbol type,
                 string name
             ) =>
-                (TLocalDeclarationStatementSyntax)editor.Generator
-                    .LocalDeclarationStatement(type, name)
-                    .WithLeadingTrivia(syntaxFacts.ElasticCarriageReturnLineFeed)
-                    .WithAdditionalAnnotations(
-                        s_newLocalDeclarationStatementAnnotation,
-                        Simplifier.Annotation
-                    );
+                (TLocalDeclarationStatementSyntax)
+                    editor.Generator
+                        .LocalDeclarationStatement(type, name)
+                        .WithLeadingTrivia(syntaxFacts.ElasticCarriageReturnLineFeed)
+                        .WithAdditionalAnnotations(
+                            s_newLocalDeclarationStatementAnnotation,
+                            Simplifier.Annotation
+                        );
 
             void InsertLocalDeclarationStatement(
                 TLocalDeclarationStatementSyntax declarationStatement,
@@ -1276,11 +1278,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
             var semanticModel = await document
                 .GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
-            var localDeclarationOperation =
-                (IVariableDeclarationGroupOperation)semanticModel.GetOperation(
-                    declStatement,
-                    cancellationToken
-                );
+            var localDeclarationOperation = (IVariableDeclarationGroupOperation)
+                semanticModel.GetOperation(declStatement, cancellationToken);
             var local = localDeclarationOperation.GetDeclaredVariables().Single();
 
             // Check if the declared variable has no references in fixed code.

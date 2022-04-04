@@ -1070,9 +1070,8 @@ public interface I
                 method =>
                 {
                     ITypeParameterSymbol typeParameterSymbol = (
-                        (INamedTypeSymbol)((INamedTypeSymbol)method.ReturnType)
-                            .GetMembers("B")
-                            .Single()
+                        (INamedTypeSymbol)
+                            ((INamedTypeSymbol)method.ReturnType).GetMembers("B").Single()
                     ).TypeParameters.Single();
                     var result = typeParameterSymbol.ConstraintTypes.Single().NullableAnnotation;
                     Assert.Equal(
@@ -1553,9 +1552,8 @@ class C
                     context =>
                     {
                         var declarator = (VariableDeclaratorSyntax)context.Node;
-                        var declaredSymbol = (ILocalSymbol)context.SemanticModel.GetDeclaredSymbol(
-                            declarator
-                        );
+                        var declaredSymbol = (ILocalSymbol)
+                            context.SemanticModel.GetDeclaredSymbol(declarator);
                         Assert.Equal(
                             declaredSymbol.Type.NullableAnnotation,
                             declaredSymbol.NullableAnnotation
@@ -1617,10 +1615,8 @@ class E
                 PublicNullableFlowState.NotNull
             );
 
-            var dCast = (CastExpressionSyntax)root.DescendantNodes()
-                .OfType<EqualsValueClauseSyntax>()
-                .Single()
-                .Value;
+            var dCast = (CastExpressionSyntax)
+                root.DescendantNodes().OfType<EqualsValueClauseSyntax>().Single().Value;
             var dInfo = model.GetTypeInfoAndVerifyIOperation(dCast);
             Assert.Equal(dType, dInfo.Type);
             Assert.Equal(dType, dInfo.ConvertedType);
@@ -1780,22 +1776,18 @@ class C
                 .Single();
             var ternary = root.DescendantNodes().OfType<ConditionalExpressionSyntax>().Single();
 
-            var newSource = (BlockSyntax)SyntaxFactory.ParseStatement(
-                @"{ string? s3 = null; _ = s1 == """" ? s1 : s1; }"
-            );
+            var newSource = (BlockSyntax)
+                SyntaxFactory.ParseStatement(@"{ string? s3 = null; _ = s1 == """" ? s1 : s1; }");
             var newExprStatement = (ExpressionStatementSyntax)newSource.Statements[1];
-            var newTernary = (ConditionalExpressionSyntax)(
-                (AssignmentExpressionSyntax)newExprStatement.Expression
-            ).Right;
+            var newTernary = (ConditionalExpressionSyntax)
+                ((AssignmentExpressionSyntax)newExprStatement.Expression).Right;
             var inCondition = ((BinaryExpressionSyntax)newTernary.Condition).Left;
             var whenTrue = newTernary.WhenTrue;
             var whenFalse = newTernary.WhenFalse;
 
             var newReference = (IdentifierNameSyntax)SyntaxFactory.ParseExpression(@"s1");
-            var newCoalesce = (AssignmentExpressionSyntax)SyntaxFactory.ParseExpression(
-                @"s3 ??= s1",
-                options: TestOptions.Regular8
-            );
+            var newCoalesce = (AssignmentExpressionSyntax)
+                SyntaxFactory.ParseExpression(@"s3 ??= s1", options: TestOptions.Regular8);
 
             // Before the if statement
             verifySpeculativeModel(ifStatement.SpanStart, PublicNullableFlowState.MaybeNull);
@@ -1907,15 +1899,15 @@ class C
             var model = comp.GetSemanticModel(syntaxTree);
 
             var returnStatement = root.DescendantNodes().OfType<ReturnStatementSyntax>().Single();
-            var newSource = (BlockSyntax)SyntaxFactory.ParseStatement(
-                "{ var y = x ?? new object(); y.ToString(); }"
-            );
+            var newSource = (BlockSyntax)
+                SyntaxFactory.ParseStatement("{ var y = x ?? new object(); y.ToString(); }");
             var yReference = (
-                (MemberAccessExpressionSyntax)newSource
-                    .DescendantNodes()
-                    .OfType<InvocationExpressionSyntax>()
-                    .Single()
-                    .Expression
+                (MemberAccessExpressionSyntax)
+                    newSource
+                        .DescendantNodes()
+                        .OfType<InvocationExpressionSyntax>()
+                        .Single()
+                        .Expression
             ).Expression;
             Assert.True(
                 model.TryGetSpeculativeSemanticModel(
@@ -2012,9 +2004,8 @@ class C
             var ternary = root.DescendantNodes().OfType<ConditionalExpressionSyntax>().ElementAt(1);
 
             var newReference = (IdentifierNameSyntax)SyntaxFactory.ParseExpression(@"s1");
-            var newCoalesce = (AssignmentExpressionSyntax)SyntaxFactory.ParseExpression(
-                @"s1 ??= """""
-            );
+            var newCoalesce = (AssignmentExpressionSyntax)
+                SyntaxFactory.ParseExpression(@"s1 ??= """"");
 
             verifySpeculativeTypeInfo(ifStatement.SpanStart, PublicNullableFlowState.MaybeNull);
             verifySpeculativeTypeInfo(
@@ -2096,9 +2087,8 @@ class C
             var ternary = root.DescendantNodes().OfType<ConditionalExpressionSyntax>().Single();
 
             var newReference = (IdentifierNameSyntax)SyntaxFactory.ParseExpression(@"Prop");
-            var newCoalesce = (AssignmentExpressionSyntax)SyntaxFactory.ParseExpression(
-                @"Prop ??= """""
-            );
+            var newCoalesce = (AssignmentExpressionSyntax)
+                SyntaxFactory.ParseExpression(@"Prop ??= """"");
 
             verifySpeculativeTypeInfo(ifStatement.SpanStart, PublicNullableFlowState.MaybeNull);
             verifySpeculativeTypeInfo(
@@ -5637,9 +5627,10 @@ class D<T>
                 .OfType<LocalFunctionStatementSyntax>()
                 .First();
             var localFunctionSymbol = (IMethodSymbol)model.GetDeclaredSymbol(localFunction);
-            var nestedLocalFunction = (IMethodSymbol)model.GetDeclaredSymbol(
-                lambda.DescendantNodes().OfType<LocalFunctionStatementSyntax>().ElementAt(1)
-            );
+            var nestedLocalFunction = (IMethodSymbol)
+                model.GetDeclaredSymbol(
+                    lambda.DescendantNodes().OfType<LocalFunctionStatementSyntax>().ElementAt(1)
+                );
 
             var typeParameters = localFunctionSymbol.TypeParameters[0];
             Assert.Same(localFunctionSymbol, typeParameters.ContainingSymbol);
@@ -6125,13 +6116,14 @@ class C
                 .Single()
                 .Type;
 
-            var methodDeclaration = (MethodDeclarationSyntax)SyntaxFactory.ParseMemberDeclaration(
-                @"
+            var methodDeclaration = (MethodDeclarationSyntax)
+                SyntaxFactory.ParseMemberDeclaration(
+                    @"
 void M2(out C c2)
 {
     M(out C c);
 }"
-            );
+                );
             Assert.True(
                 model.TryGetSpeculativeSemanticModelForMethodBody(
                     type.SpanStart,
@@ -6176,14 +6168,15 @@ class C
                 .Single()
                 .Type;
 
-            var methodDeclaration = (MethodDeclarationSyntax)SyntaxFactory.ParseMemberDeclaration(
-                @"
+            var methodDeclaration = (MethodDeclarationSyntax)
+                SyntaxFactory.ParseMemberDeclaration(
+                    @"
 void M2(out C c2)
 {
 #nullable disable
     M(out C c);
 }"
-            );
+                );
             Assert.True(
                 model.TryGetSpeculativeSemanticModelForMethodBody(
                     type.SpanStart,
@@ -6425,13 +6418,14 @@ class C
                 .Single();
 
             var expression = SyntaxFactory.ParseExpression(@"M(out C c)");
-            var symbol2 = (IMethodSymbol)model
-                .GetSpeculativeSymbolInfo(
-                    initializer.Position,
-                    expression,
-                    SpeculativeBindingOption.BindAsExpression
-                )
-                .Symbol;
+            var symbol2 = (IMethodSymbol)
+                model
+                    .GetSpeculativeSymbolInfo(
+                        initializer.Position,
+                        expression,
+                        SpeculativeBindingOption.BindAsExpression
+                    )
+                    .Symbol;
             Assert.Equal(
                 PublicNullableAnnotation.NotAnnotated,
                 symbol2.Parameters.Single().Type.NullableAnnotation

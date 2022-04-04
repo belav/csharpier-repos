@@ -353,12 +353,13 @@ namespace System.Net.NameResolution.PalTests
             if (justAddresses)
             {
                 IPAddress[] addresses = await (
-                    (Task<IPAddress[]>)NameResolutionPal.GetAddrInfoAsync(
-                        "localhost",
-                        justAddresses,
-                        AddressFamily.Unspecified,
-                        CancellationToken.None
-                    )
+                    (Task<IPAddress[]>)
+                        NameResolutionPal.GetAddrInfoAsync(
+                            "localhost",
+                            justAddresses,
+                            AddressFamily.Unspecified,
+                            CancellationToken.None
+                        )
                 ).ConfigureAwait(false);
 
                 Assert.NotNull(addresses);
@@ -367,12 +368,13 @@ namespace System.Net.NameResolution.PalTests
             else
             {
                 IPHostEntry hostEntry = await (
-                    (Task<IPHostEntry>)NameResolutionPal.GetAddrInfoAsync(
-                        "localhost",
-                        justAddresses,
-                        AddressFamily.Unspecified,
-                        CancellationToken.None
-                    )
+                    (Task<IPHostEntry>)
+                        NameResolutionPal.GetAddrInfoAsync(
+                            "localhost",
+                            justAddresses,
+                            AddressFamily.Unspecified,
+                            CancellationToken.None
+                        )
                 ).ConfigureAwait(false);
 
                 Assert.NotNull(hostEntry);
@@ -507,12 +509,13 @@ namespace System.Net.NameResolution.PalTests
             if (justAddresses)
             {
                 IPAddress[] addresses = await (
-                    (Task<IPAddress[]>)NameResolutionPal.GetAddrInfoAsync(
-                        hostName,
-                        justAddresses,
-                        AddressFamily.Unspecified,
-                        CancellationToken.None
-                    )
+                    (Task<IPAddress[]>)
+                        NameResolutionPal.GetAddrInfoAsync(
+                            hostName,
+                            justAddresses,
+                            AddressFamily.Unspecified,
+                            CancellationToken.None
+                        )
                 ).ConfigureAwait(false);
 
                 Assert.NotNull(addresses);
@@ -521,12 +524,13 @@ namespace System.Net.NameResolution.PalTests
             else
             {
                 IPHostEntry hostEntry = await (
-                    (Task<IPHostEntry>)NameResolutionPal.GetAddrInfoAsync(
-                        hostName,
-                        justAddresses,
-                        AddressFamily.Unspecified,
-                        CancellationToken.None
-                    )
+                    (Task<IPHostEntry>)
+                        NameResolutionPal.GetAddrInfoAsync(
+                            hostName,
+                            justAddresses,
+                            AddressFamily.Unspecified,
+                            CancellationToken.None
+                        )
                 ).ConfigureAwait(false);
 
                 Assert.NotNull(hostEntry);

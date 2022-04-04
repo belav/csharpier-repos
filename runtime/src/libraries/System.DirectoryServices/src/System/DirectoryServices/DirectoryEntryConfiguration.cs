@@ -20,9 +20,10 @@ namespace System.DirectoryServices
         {
             get
             {
-                return (ReferralChasingOption)(
-                    (UnsafeNativeMethods.IAdsObjectOptions)_entry.AdsObject
-                ).GetOption((int)AdsOptions.ADS_OPTION_REFERRALS);
+                return (ReferralChasingOption)
+                    ((UnsafeNativeMethods.IAdsObjectOptions)_entry.AdsObject).GetOption(
+                        (int)AdsOptions.ADS_OPTION_REFERRALS
+                    );
             }
             set
             {
@@ -49,9 +50,10 @@ namespace System.DirectoryServices
         {
             get
             {
-                return (SecurityMasks)(
-                    (UnsafeNativeMethods.IAdsObjectOptions)_entry.AdsObject
-                ).GetOption((int)AdsOptions.ADS_OPTION_SECURITY_MASK);
+                return (SecurityMasks)
+                    ((UnsafeNativeMethods.IAdsObjectOptions)_entry.AdsObject).GetOption(
+                        (int)AdsOptions.ADS_OPTION_SECURITY_MASK
+                    );
             }
             set
             {
@@ -82,9 +84,10 @@ namespace System.DirectoryServices
         {
             get
             {
-                return (int)((UnsafeNativeMethods.IAdsObjectOptions)_entry.AdsObject).GetOption(
-                    (int)AdsOptions.ADS_OPTION_PAGE_SIZE
-                );
+                return (int)
+                    ((UnsafeNativeMethods.IAdsObjectOptions)_entry.AdsObject).GetOption(
+                        (int)AdsOptions.ADS_OPTION_PAGE_SIZE
+                    );
             }
             set
             {
@@ -102,9 +105,10 @@ namespace System.DirectoryServices
         {
             get
             {
-                return (int)((UnsafeNativeMethods.IAdsObjectOptions)_entry.AdsObject).GetOption(
-                    (int)AdsOptions.ADS_OPTION_PASSWORD_PORTNUMBER
-                );
+                return (int)
+                    ((UnsafeNativeMethods.IAdsObjectOptions)_entry.AdsObject).GetOption(
+                        (int)AdsOptions.ADS_OPTION_PASSWORD_PORTNUMBER
+                    );
             }
             set
             {
@@ -119,9 +123,10 @@ namespace System.DirectoryServices
         {
             get
             {
-                return (PasswordEncodingMethod)(
-                    (UnsafeNativeMethods.IAdsObjectOptions)_entry.AdsObject
-                ).GetOption((int)AdsOptions.ADS_OPTION_PASSWORD_METHOD);
+                return (PasswordEncodingMethod)
+                    ((UnsafeNativeMethods.IAdsObjectOptions)_entry.AdsObject).GetOption(
+                        (int)AdsOptions.ADS_OPTION_PASSWORD_METHOD
+                    );
             }
             set
             {
@@ -145,18 +150,20 @@ namespace System.DirectoryServices
         public string GetCurrentServerName()
         {
             // underneath it uses the same handle and binds to the same object, so no permission is required as it has been done in Bind call
-            return (string)((UnsafeNativeMethods.IAdsObjectOptions)_entry.AdsObject).GetOption(
-                (int)AdsOptions.ADS_OPTION_SERVERNAME
-            );
+            return (string)
+                ((UnsafeNativeMethods.IAdsObjectOptions)_entry.AdsObject).GetOption(
+                    (int)AdsOptions.ADS_OPTION_SERVERNAME
+                );
         }
 
         public bool IsMutuallyAuthenticated()
         {
             try
             {
-                int val = (int)((UnsafeNativeMethods.IAdsObjectOptions)_entry.AdsObject).GetOption(
-                    (int)AdsOptions.ADS_OPTION_MUTUAL_AUTH_STATUS
-                );
+                int val = (int)
+                    ((UnsafeNativeMethods.IAdsObjectOptions)_entry.AdsObject).GetOption(
+                        (int)AdsOptions.ADS_OPTION_MUTUAL_AUTH_STATUS
+                    );
                 if ((val & ISC_RET_MUTUAL_AUTH) != 0)
                     return true;
                 else

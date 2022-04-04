@@ -200,20 +200,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this TypeDeclarationSyntax typeDeclaration
         )
         {
-            return (TypeDeclarationSyntax)EnsureHasBraces(
-                typeDeclaration,
-                typeDeclaration.Members.Count > 0
-            );
+            return (TypeDeclarationSyntax)
+                EnsureHasBraces(typeDeclaration, typeDeclaration.Members.Count > 0);
         }
 
         public static EnumDeclarationSyntax EnsureOpenAndCloseBraceTokens(
             this EnumDeclarationSyntax typeDeclaration
         )
         {
-            return (EnumDeclarationSyntax)EnsureHasBraces(
-                typeDeclaration,
-                typeDeclaration.Members.Count > 0
-            );
+            return (EnumDeclarationSyntax)
+                EnsureHasBraces(typeDeclaration, typeDeclaration.Members.Count > 0);
         }
     }
 }

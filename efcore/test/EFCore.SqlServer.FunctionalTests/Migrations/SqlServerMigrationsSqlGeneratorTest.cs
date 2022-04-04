@@ -1347,9 +1347,10 @@ EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + 
                 SqlServerTestHelpers.Instance
                     .AddProviderOptions(
                         (
-                            (IRelationalDbContextOptionsBuilderInfrastructure)new SqlServerDbContextOptionsBuilder(
-                                new DbContextOptionsBuilder()
-                            ).UseNetTopologySuite()
+                            (IRelationalDbContextOptionsBuilderInfrastructure)
+                                new SqlServerDbContextOptionsBuilder(
+                                    new DbContextOptionsBuilder()
+                                ).UseNetTopologySuite()
                         ).OptionsBuilder
                     )
                     .Options

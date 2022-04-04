@@ -79,11 +79,8 @@ public class ByteOrderMarkTest : LoggedTest
         var nonBOMFilesPresent = false;
 
         var files =
-            (IEnumerable<string>)Directory.GetFiles(
-                templateDirectoryPath,
-                "*.cshtml",
-                SearchOption.AllDirectories
-            );
+            (IEnumerable<string>)
+                Directory.GetFiles(templateDirectoryPath, "*.cshtml", SearchOption.AllDirectories);
         files = files.Concat(
             Directory.GetFiles(templateDirectoryPath, "*.razor", SearchOption.AllDirectories)
         );

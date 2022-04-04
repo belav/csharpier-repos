@@ -417,14 +417,15 @@ namespace System.Linq
                 throw Error.ArgumentNull(nameof(source));
             if (keySelector == null)
                 throw Error.ArgumentNull(nameof(keySelector));
-            return (IOrderedQueryable<TSource>)source.Provider.CreateQuery<TSource>(
-                Expression.Call(
-                    null,
-                    CachedReflectionInfo.OrderBy_TSource_TKey_2(typeof(TSource), typeof(TKey)),
-                    source.Expression,
-                    Expression.Quote(keySelector)
-                )
-            );
+            return (IOrderedQueryable<TSource>)
+                source.Provider.CreateQuery<TSource>(
+                    Expression.Call(
+                        null,
+                        CachedReflectionInfo.OrderBy_TSource_TKey_2(typeof(TSource), typeof(TKey)),
+                        source.Expression,
+                        Expression.Quote(keySelector)
+                    )
+                );
         }
 
         [DynamicDependency("OrderBy`2", typeof(Enumerable))]
@@ -438,15 +439,16 @@ namespace System.Linq
                 throw Error.ArgumentNull(nameof(source));
             if (keySelector == null)
                 throw Error.ArgumentNull(nameof(keySelector));
-            return (IOrderedQueryable<TSource>)source.Provider.CreateQuery<TSource>(
-                Expression.Call(
-                    null,
-                    CachedReflectionInfo.OrderBy_TSource_TKey_3(typeof(TSource), typeof(TKey)),
-                    source.Expression,
-                    Expression.Quote(keySelector),
-                    Expression.Constant(comparer, typeof(IComparer<TKey>))
-                )
-            );
+            return (IOrderedQueryable<TSource>)
+                source.Provider.CreateQuery<TSource>(
+                    Expression.Call(
+                        null,
+                        CachedReflectionInfo.OrderBy_TSource_TKey_3(typeof(TSource), typeof(TKey)),
+                        source.Expression,
+                        Expression.Quote(keySelector),
+                        Expression.Constant(comparer, typeof(IComparer<TKey>))
+                    )
+                );
         }
 
         [DynamicDependency("OrderByDescending`2", typeof(Enumerable))]
@@ -459,17 +461,18 @@ namespace System.Linq
                 throw Error.ArgumentNull(nameof(source));
             if (keySelector == null)
                 throw Error.ArgumentNull(nameof(keySelector));
-            return (IOrderedQueryable<TSource>)source.Provider.CreateQuery<TSource>(
-                Expression.Call(
-                    null,
-                    CachedReflectionInfo.OrderByDescending_TSource_TKey_2(
-                        typeof(TSource),
-                        typeof(TKey)
-                    ),
-                    source.Expression,
-                    Expression.Quote(keySelector)
-                )
-            );
+            return (IOrderedQueryable<TSource>)
+                source.Provider.CreateQuery<TSource>(
+                    Expression.Call(
+                        null,
+                        CachedReflectionInfo.OrderByDescending_TSource_TKey_2(
+                            typeof(TSource),
+                            typeof(TKey)
+                        ),
+                        source.Expression,
+                        Expression.Quote(keySelector)
+                    )
+                );
         }
 
         [DynamicDependency("OrderByDescending`2", typeof(Enumerable))]
@@ -483,18 +486,19 @@ namespace System.Linq
                 throw Error.ArgumentNull(nameof(source));
             if (keySelector == null)
                 throw Error.ArgumentNull(nameof(keySelector));
-            return (IOrderedQueryable<TSource>)source.Provider.CreateQuery<TSource>(
-                Expression.Call(
-                    null,
-                    CachedReflectionInfo.OrderByDescending_TSource_TKey_3(
-                        typeof(TSource),
-                        typeof(TKey)
-                    ),
-                    source.Expression,
-                    Expression.Quote(keySelector),
-                    Expression.Constant(comparer, typeof(IComparer<TKey>))
-                )
-            );
+            return (IOrderedQueryable<TSource>)
+                source.Provider.CreateQuery<TSource>(
+                    Expression.Call(
+                        null,
+                        CachedReflectionInfo.OrderByDescending_TSource_TKey_3(
+                            typeof(TSource),
+                            typeof(TKey)
+                        ),
+                        source.Expression,
+                        Expression.Quote(keySelector),
+                        Expression.Constant(comparer, typeof(IComparer<TKey>))
+                    )
+                );
         }
 
         [DynamicDependency("ThenBy`2", typeof(Enumerable))]
@@ -507,14 +511,15 @@ namespace System.Linq
                 throw Error.ArgumentNull(nameof(source));
             if (keySelector == null)
                 throw Error.ArgumentNull(nameof(keySelector));
-            return (IOrderedQueryable<TSource>)source.Provider.CreateQuery<TSource>(
-                Expression.Call(
-                    null,
-                    CachedReflectionInfo.ThenBy_TSource_TKey_2(typeof(TSource), typeof(TKey)),
-                    source.Expression,
-                    Expression.Quote(keySelector)
-                )
-            );
+            return (IOrderedQueryable<TSource>)
+                source.Provider.CreateQuery<TSource>(
+                    Expression.Call(
+                        null,
+                        CachedReflectionInfo.ThenBy_TSource_TKey_2(typeof(TSource), typeof(TKey)),
+                        source.Expression,
+                        Expression.Quote(keySelector)
+                    )
+                );
         }
 
         [DynamicDependency("ThenBy`2", typeof(Enumerable))]
@@ -528,15 +533,16 @@ namespace System.Linq
                 throw Error.ArgumentNull(nameof(source));
             if (keySelector == null)
                 throw Error.ArgumentNull(nameof(keySelector));
-            return (IOrderedQueryable<TSource>)source.Provider.CreateQuery<TSource>(
-                Expression.Call(
-                    null,
-                    CachedReflectionInfo.ThenBy_TSource_TKey_3(typeof(TSource), typeof(TKey)),
-                    source.Expression,
-                    Expression.Quote(keySelector),
-                    Expression.Constant(comparer, typeof(IComparer<TKey>))
-                )
-            );
+            return (IOrderedQueryable<TSource>)
+                source.Provider.CreateQuery<TSource>(
+                    Expression.Call(
+                        null,
+                        CachedReflectionInfo.ThenBy_TSource_TKey_3(typeof(TSource), typeof(TKey)),
+                        source.Expression,
+                        Expression.Quote(keySelector),
+                        Expression.Constant(comparer, typeof(IComparer<TKey>))
+                    )
+                );
         }
 
         [DynamicDependency("ThenByDescending`2", typeof(Enumerable))]
@@ -549,17 +555,18 @@ namespace System.Linq
                 throw Error.ArgumentNull(nameof(source));
             if (keySelector == null)
                 throw Error.ArgumentNull(nameof(keySelector));
-            return (IOrderedQueryable<TSource>)source.Provider.CreateQuery<TSource>(
-                Expression.Call(
-                    null,
-                    CachedReflectionInfo.ThenByDescending_TSource_TKey_2(
-                        typeof(TSource),
-                        typeof(TKey)
-                    ),
-                    source.Expression,
-                    Expression.Quote(keySelector)
-                )
-            );
+            return (IOrderedQueryable<TSource>)
+                source.Provider.CreateQuery<TSource>(
+                    Expression.Call(
+                        null,
+                        CachedReflectionInfo.ThenByDescending_TSource_TKey_2(
+                            typeof(TSource),
+                            typeof(TKey)
+                        ),
+                        source.Expression,
+                        Expression.Quote(keySelector)
+                    )
+                );
         }
 
         [DynamicDependency("ThenByDescending`2", typeof(Enumerable))]
@@ -573,18 +580,19 @@ namespace System.Linq
                 throw Error.ArgumentNull(nameof(source));
             if (keySelector == null)
                 throw Error.ArgumentNull(nameof(keySelector));
-            return (IOrderedQueryable<TSource>)source.Provider.CreateQuery<TSource>(
-                Expression.Call(
-                    null,
-                    CachedReflectionInfo.ThenByDescending_TSource_TKey_3(
-                        typeof(TSource),
-                        typeof(TKey)
-                    ),
-                    source.Expression,
-                    Expression.Quote(keySelector),
-                    Expression.Constant(comparer, typeof(IComparer<TKey>))
-                )
-            );
+            return (IOrderedQueryable<TSource>)
+                source.Provider.CreateQuery<TSource>(
+                    Expression.Call(
+                        null,
+                        CachedReflectionInfo.ThenByDescending_TSource_TKey_3(
+                            typeof(TSource),
+                            typeof(TKey)
+                        ),
+                        source.Expression,
+                        Expression.Quote(keySelector),
+                        Expression.Constant(comparer, typeof(IComparer<TKey>))
+                    )
+                );
         }
 
         [DynamicDependency("Take`1", typeof(Enumerable))]

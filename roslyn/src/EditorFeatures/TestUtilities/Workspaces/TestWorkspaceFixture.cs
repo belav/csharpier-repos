@@ -139,9 +139,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static
             );
             var existingProperties =
-                (List<VisualStudio.Text.Formatting.TextFormattingRunProperties>)existingPropertiesField.GetValue(
-                    null
-                );
+                (List<VisualStudio.Text.Formatting.TextFormattingRunProperties>)
+                    existingPropertiesField.GetValue(null);
             existingProperties.Clear();
         }
     }

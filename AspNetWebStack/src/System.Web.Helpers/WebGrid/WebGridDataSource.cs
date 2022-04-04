@@ -180,16 +180,17 @@ namespace System.Web.Helpers
                 elementType,
                 sorterFunctionBody.Type
             );
-            return (IQueryable<dynamic>)actualSortMethod.Invoke(
-                null,
-                new object[]
-                {
-                    data,
-                    sorterFunctionBody,
-                    sorterFunctionParameter,
-                    sort.SortDirection
-                }
-            );
+            return (IQueryable<dynamic>)
+                actualSortMethod.Invoke(
+                    null,
+                    new object[]
+                    {
+                        data,
+                        sorterFunctionBody,
+                        sorterFunctionParameter,
+                        sort.SortDirection
+                    }
+                );
         }
 
         private static IQueryable<TElement> SortGenericExpression<TElement, TProperty>(

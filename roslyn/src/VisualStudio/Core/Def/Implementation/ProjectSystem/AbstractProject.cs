@@ -256,12 +256,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 .GetProject(Id)
                 .Documents.SelectAsArray(
                     d =>
-                        (IVisualStudioHostDocument)new DocumentProvider.ShimDocument(
-                            this,
-                            d.Id,
-                            d.FilePath,
-                            d.SourceCodeKind
-                        )
+                        (IVisualStudioHostDocument)
+                            new DocumentProvider.ShimDocument(
+                                this,
+                                d.Id,
+                                d.FilePath,
+                                d.SourceCodeKind
+                            )
                 );
         }
     }

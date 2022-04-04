@@ -182,16 +182,13 @@ public sealed class TimeoutManager
         var timeoutinfo = new HttpApiTypes.HTTP_TIMEOUT_LIMIT_INFO();
 
         timeoutinfo.Flags = HttpApiTypes.HTTP_FLAGS.HTTP_PROPERTY_FLAG_PRESENT;
-        timeoutinfo.DrainEntityBody = (ushort)timeouts[
-            (int)HttpApiTypes.HTTP_TIMEOUT_TYPE.DrainEntityBody
-        ];
+        timeoutinfo.DrainEntityBody = (ushort)
+            timeouts[(int)HttpApiTypes.HTTP_TIMEOUT_TYPE.DrainEntityBody];
         timeoutinfo.EntityBody = (ushort)timeouts[(int)HttpApiTypes.HTTP_TIMEOUT_TYPE.EntityBody];
-        timeoutinfo.RequestQueue = (ushort)timeouts[
-            (int)HttpApiTypes.HTTP_TIMEOUT_TYPE.RequestQueue
-        ];
-        timeoutinfo.IdleConnection = (ushort)timeouts[
-            (int)HttpApiTypes.HTTP_TIMEOUT_TYPE.IdleConnection
-        ];
+        timeoutinfo.RequestQueue = (ushort)
+            timeouts[(int)HttpApiTypes.HTTP_TIMEOUT_TYPE.RequestQueue];
+        timeoutinfo.IdleConnection = (ushort)
+            timeouts[(int)HttpApiTypes.HTTP_TIMEOUT_TYPE.IdleConnection];
         timeoutinfo.HeaderWait = (ushort)timeouts[(int)HttpApiTypes.HTTP_TIMEOUT_TYPE.HeaderWait];
         timeoutinfo.MinSendRate = minSendBytesPerSecond;
 

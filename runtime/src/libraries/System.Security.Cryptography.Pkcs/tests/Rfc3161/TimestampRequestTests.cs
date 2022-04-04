@@ -831,10 +831,11 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             token = (Rfc3161TimestampToken)parameters[1];
 
-            status = (TimestampRequestTests.Rfc3161RequestResponseStatus)Enum.ToObject(
-                typeof(TimestampRequestTests.Rfc3161RequestResponseStatus),
-                parameters[2]
-            );
+            status = (TimestampRequestTests.Rfc3161RequestResponseStatus)
+                Enum.ToObject(
+                    typeof(TimestampRequestTests.Rfc3161RequestResponseStatus),
+                    parameters[2]
+                );
 
             bytesRead = (int)parameters[3];
 

@@ -207,8 +207,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
                 protected override SyntaxNode GetFirstStatementOrInitializerSelectedAtCallSite()
                 {
-                    var scope =
-                        (SyntaxNode)CSharpSelectionResult.GetContainingScopeOf<StatementSyntax>();
+                    var scope = (SyntaxNode)
+                        CSharpSelectionResult.GetContainingScopeOf<StatementSyntax>();
                     if (scope == null)
                     {
                         scope =

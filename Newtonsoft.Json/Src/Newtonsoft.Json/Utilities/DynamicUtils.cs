@@ -158,13 +158,8 @@ namespace Newtonsoft.Json.Utilities
                 Init();
                 MiscellaneousUtils.Assert(_getMemberCall != null);
                 MiscellaneousUtils.Assert(_getCSharpArgumentInfoArray != null);
-                return (CallSiteBinder)_getMemberCall(
-                    null,
-                    0,
-                    name,
-                    context,
-                    _getCSharpArgumentInfoArray
-                )!;
+                return (CallSiteBinder)
+                    _getMemberCall(null, 0, name, context, _getCSharpArgumentInfoArray)!;
 #else
                 return Binder.GetMember(
                     CSharpBinderFlags.None, name, context, new[] {CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)});
@@ -177,13 +172,8 @@ namespace Newtonsoft.Json.Utilities
                 Init();
                 MiscellaneousUtils.Assert(_setMemberCall != null);
                 MiscellaneousUtils.Assert(_setCSharpArgumentInfoArray != null);
-                return (CallSiteBinder)_setMemberCall(
-                    null,
-                    0,
-                    name,
-                    context,
-                    _setCSharpArgumentInfoArray
-                )!;
+                return (CallSiteBinder)
+                    _setMemberCall(null, 0, name, context, _setCSharpArgumentInfoArray)!;
 #else
                 return Binder.SetMember(
                     CSharpBinderFlags.None, name, context, new[]

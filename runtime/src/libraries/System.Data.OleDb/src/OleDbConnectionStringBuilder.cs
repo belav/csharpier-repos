@@ -683,21 +683,17 @@ namespace System.Data.OleDb
                             string[] values = svalue.Split(new char[] { ',' });
                             foreach (string v in values)
                             {
-                                convertedValue |= (int)(OleDbServiceValues)Enum.Parse(
-                                    typeof(OleDbServiceValues),
-                                    v,
-                                    true
-                                );
+                                convertedValue |= (int)
+                                    (OleDbServiceValues)
+                                        Enum.Parse(typeof(OleDbServiceValues), v, true);
                             }
                             return (int)convertedValue;
                         }
                         else
                         {
-                            return (int)(OleDbServiceValues)Enum.Parse(
-                                typeof(OleDbServiceValues),
-                                svalue,
-                                true
-                            );
+                            return (int)
+                                (OleDbServiceValues)
+                                    Enum.Parse(typeof(OleDbServiceValues), svalue, true);
                         }
                     }
                 }

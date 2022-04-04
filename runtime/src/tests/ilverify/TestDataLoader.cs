@@ -261,10 +261,8 @@ namespace ILVerification.Tests
             // Substitute method parameters with friendly name
             methodParams[0] = friendlyName;
 
-            var specialMethodHandle = (EcmaMethod)method.OwningType.GetMethod(
-                specialName,
-                method.Signature
-            );
+            var specialMethodHandle = (EcmaMethod)
+                method.OwningType.GetMethod(specialName, method.Signature);
             return specialMethodHandle == null ? method.Handle : specialMethodHandle.Handle;
         }
 

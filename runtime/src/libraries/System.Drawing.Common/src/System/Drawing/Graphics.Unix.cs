@@ -610,11 +610,12 @@ namespace System.Drawing
             if (region == null)
                 throw new ArgumentNullException(nameof(region));
 
-            int status = (int)Gdip.GdipFillRegion(
-                new HandleRef(this, NativeGraphics),
-                new HandleRef(brush, brush.NativeBrush),
-                new HandleRef(region, region.NativeRegion)
-            );
+            int status = (int)
+                Gdip.GdipFillRegion(
+                    new HandleRef(this, NativeGraphics),
+                    new HandleRef(brush, brush.NativeBrush),
+                    new HandleRef(region, region.NativeRegion)
+                );
             Gdip.CheckStatus(status);
         }
 

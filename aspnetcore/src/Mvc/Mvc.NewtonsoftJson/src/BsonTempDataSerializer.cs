@@ -84,9 +84,10 @@ internal class BsonTempDataSerializer : TempDataSerializer
                         returnType,
                         type =>
                         {
-                            return (Func<JArray, object>)_convertArrayMethodInfo
-                                .MakeGenericMethod(type)
-                                .CreateDelegate(typeof(Func<JArray, object>));
+                            return (Func<JArray, object>)
+                                _convertArrayMethodInfo
+                                    .MakeGenericMethod(type)
+                                    .CreateDelegate(typeof(Func<JArray, object>));
                         }
                     );
                     var result = arrayConverter(jArrayValue);
@@ -117,9 +118,10 @@ internal class BsonTempDataSerializer : TempDataSerializer
                         valueType,
                         type =>
                         {
-                            return (Func<JObject, object>)_convertDictionaryMethodInfo
-                                .MakeGenericMethod(type)
-                                .CreateDelegate(typeof(Func<JObject, object>));
+                            return (Func<JObject, object>)
+                                _convertDictionaryMethodInfo
+                                    .MakeGenericMethod(type)
+                                    .CreateDelegate(typeof(Func<JObject, object>));
                         }
                     );
                     var result = dictionaryConverter(jObjectValue);

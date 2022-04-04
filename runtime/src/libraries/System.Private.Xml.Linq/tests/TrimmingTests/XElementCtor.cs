@@ -162,16 +162,18 @@ public class Program
                     )
                     {
                         // This line would fail if the XElement ctor needed was trimmed out.
-                        myClass.Element = (XElement)ReadSerializable(
-                            (IXmlSerializable)Activator.CreateInstance(
-                                typeof(XElement),
-                                (BindingFlags)564,
-                                (Binder)null,
-                                new object[0],
-                                (CultureInfo)null
-                            ),
-                            true
-                        );
+                        myClass.Element = (XElement)
+                            ReadSerializable(
+                                (IXmlSerializable)
+                                    Activator.CreateInstance(
+                                        typeof(XElement),
+                                        (BindingFlags)564,
+                                        (Binder)null,
+                                        new object[0],
+                                        (CultureInfo)null
+                                    ),
+                                true
+                            );
                         array[0] = true;
                     }
                     else

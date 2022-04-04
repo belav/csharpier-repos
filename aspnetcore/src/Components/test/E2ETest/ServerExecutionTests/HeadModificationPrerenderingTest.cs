@@ -64,9 +64,10 @@ public class HeadModificationPrerenderingTest
         var javascript = (IJavaScriptExecutor)Browser;
         Browser.True(
             () =>
-                (bool)javascript.ExecuteScript(
-                    "return window['__aspnetcore__testing__blazor__started__'] === true;"
-                )
+                (bool)
+                    javascript.ExecuteScript(
+                        "return window['__aspnetcore__testing__blazor__started__'] === true;"
+                    )
         );
     }
 }

@@ -342,11 +342,8 @@ namespace M
                 triggerKind: LSP.CompletionTriggerKind.Invoked
             );
 
-            var results = (LSP.VSInternalCompletionList)await RunGetCompletionsAsync(
-                    testLspServer,
-                    completionParams
-                )
-                .ConfigureAwait(false);
+            var results = (LSP.VSInternalCompletionList)
+                await RunGetCompletionsAsync(testLspServer, completionParams).ConfigureAwait(false);
             Assert.True(results.Items.Any());
             Assert.True(results.SuggestionMode);
         }
@@ -1525,10 +1522,10 @@ class A
         private static CompletionListCache GetCompletionListCache(TestLspServer testLspServer)
         {
             var dispatchAccessor = testLspServer.GetDispatcherAccessor();
-            var handler = (CompletionHandler)dispatchAccessor.GetHandler<
-                LSP.CompletionParams,
-                LSP.CompletionList
-            >(LSP.Methods.TextDocumentCompletionName);
+            var handler = (CompletionHandler)
+                dispatchAccessor.GetHandler<LSP.CompletionParams, LSP.CompletionList>(
+                    LSP.Methods.TextDocumentCompletionName
+                );
             Assert.NotNull(handler);
             return handler.GetTestAccessor().GetCache();
         }

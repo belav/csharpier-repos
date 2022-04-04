@@ -387,15 +387,16 @@ namespace System.Security.Cryptography.Algorithms.Tests
                 _dsa.VerifySignature(rgbHash, rgbSignature);
 
             protected override byte[] HashData(Stream data, HashAlgorithmName hashAlgorithm) =>
-                (byte[])_dsa.GetType()
-                    .GetMethod(
-                        nameof(HashData),
-                        BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
-                        null,
-                        new Type[] { typeof(Stream), typeof(HashAlgorithmName) },
-                        null
-                    )
-                    .Invoke(_dsa, new object[] { data, hashAlgorithm });
+                (byte[])
+                    _dsa.GetType()
+                        .GetMethod(
+                            nameof(HashData),
+                            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
+                            null,
+                            new Type[] { typeof(Stream), typeof(HashAlgorithmName) },
+                            null
+                        )
+                        .Invoke(_dsa, new object[] { data, hashAlgorithm });
 
             protected override byte[] HashData(
                 byte[] data,
@@ -403,21 +404,22 @@ namespace System.Security.Cryptography.Algorithms.Tests
                 int count,
                 HashAlgorithmName hashAlgorithm
             ) =>
-                (byte[])_dsa.GetType()
-                    .GetMethod(
-                        nameof(HashData),
-                        BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
-                        null,
-                        new Type[]
-                        {
-                            typeof(byte[]),
-                            typeof(int),
-                            typeof(int),
-                            typeof(HashAlgorithmName)
-                        },
-                        null
-                    )
-                    .Invoke(_dsa, new object[] { data, offset, count, hashAlgorithm });
+                (byte[])
+                    _dsa.GetType()
+                        .GetMethod(
+                            nameof(HashData),
+                            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
+                            null,
+                            new Type[]
+                            {
+                                typeof(byte[]),
+                                typeof(int),
+                                typeof(int),
+                                typeof(HashAlgorithmName)
+                            },
+                            null
+                        )
+                        .Invoke(_dsa, new object[] { data, offset, count, hashAlgorithm });
         }
     }
 }

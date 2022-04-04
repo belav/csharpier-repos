@@ -1771,10 +1771,9 @@ class C
                 await workspaceWaiter.ExpeditedWaitAsync();
 
                 // now wait for semantic processor to finish
-                var crawlerListener = (AsynchronousOperationListener)GetListenerProvider(
-                        workspace.ExportProvider
-                    )
-                    .GetListener(FeatureAttribute.SolutionCrawler);
+                var crawlerListener = (AsynchronousOperationListener)
+                    GetListenerProvider(workspace.ExportProvider)
+                        .GetListener(FeatureAttribute.SolutionCrawler);
 
                 // first, wait for first work to be queued.
                 //
@@ -2065,15 +2064,15 @@ class C
 
         private static void MakeDocumentActive(Document document)
         {
-            var documentTrackingService =
-                (TestDocumentTrackingService)document.Project.Solution.Workspace.Services.GetRequiredService<IDocumentTrackingService>();
+            var documentTrackingService = (TestDocumentTrackingService)
+                document.Project.Solution.Workspace.Services.GetRequiredService<IDocumentTrackingService>();
             documentTrackingService.SetActiveDocument(document.Id);
         }
 
         private static void ClearActiveDocument(Workspace workspace)
         {
-            var documentTrackingService =
-                (TestDocumentTrackingService)workspace.Services.GetService<IDocumentTrackingService>();
+            var documentTrackingService = (TestDocumentTrackingService)
+                workspace.Services.GetService<IDocumentTrackingService>();
             documentTrackingService.SetActiveDocument(null);
         }
 

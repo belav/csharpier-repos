@@ -323,34 +323,37 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             }
 
             createTableOperations =
-                (List<CreateTableOperation>)createTableGraph.TopologicalSort(
-                    (
-                        principalCreateTableOperation,
-                        createTableOperation,
-                        cyclicAddForeignKeyOperations
-                    ) =>
-                    {
-                        foreach (var cyclicAddForeignKeyOperation in cyclicAddForeignKeyOperations)
+                (List<CreateTableOperation>)
+                    createTableGraph.TopologicalSort(
+                        (
+                            principalCreateTableOperation,
+                            createTableOperation,
+                            cyclicAddForeignKeyOperations
+                        ) =>
                         {
-                            var removed = createTableOperation.ForeignKeys.Remove(
-                                cyclicAddForeignKeyOperation
-                            );
-                            if (removed)
+                            foreach (
+                                var cyclicAddForeignKeyOperation in cyclicAddForeignKeyOperations
+                            )
                             {
-                                constraintOperations.Add(cyclicAddForeignKeyOperation);
-                            }
-                            else
-                            {
-                                Check.DebugAssert(
-                                    false,
-                                    "Operation removed twice: " + cyclicAddForeignKeyOperation
+                                var removed = createTableOperation.ForeignKeys.Remove(
+                                    cyclicAddForeignKeyOperation
                                 );
+                                if (removed)
+                                {
+                                    constraintOperations.Add(cyclicAddForeignKeyOperation);
+                                }
+                                else
+                                {
+                                    Check.DebugAssert(
+                                        false,
+                                        "Operation removed twice: " + cyclicAddForeignKeyOperation
+                                    );
+                                }
                             }
-                        }
 
-                        return true;
-                    }
-                );
+                            return true;
+                        }
+                    );
 
             var dropTableGraph = new Multigraph<DropTableOperation, IForeignKeyConstraint>();
             dropTableGraph.AddVertices(dropTableOperations);
@@ -378,16 +381,17 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
 
             var newDiffContext = new DiffContext();
             dropTableOperations =
-                (List<DropTableOperation>)dropTableGraph.TopologicalSort(
-                    (dropTableOperation, principalDropTableOperation, foreignKeys) =>
-                    {
-                        dropForeignKeyOperations.AddRange(
-                            foreignKeys.SelectMany(c => Remove(c, newDiffContext))
-                        );
+                (List<DropTableOperation>)
+                    dropTableGraph.TopologicalSort(
+                        (dropTableOperation, principalDropTableOperation, foreignKeys) =>
+                        {
+                            dropForeignKeyOperations.AddRange(
+                                foreignKeys.SelectMany(c => Remove(c, newDiffContext))
+                            );
 
-                        return true;
-                    }
-                );
+                            return true;
+                        }
+                    );
 
             return dropForeignKeyOperations
                 .Concat(dropTableOperations)

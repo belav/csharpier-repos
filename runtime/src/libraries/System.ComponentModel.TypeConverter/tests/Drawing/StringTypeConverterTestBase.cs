@@ -83,12 +83,8 @@ namespace System.ComponentModel.TypeConverterTests
         {
             Assert.Equal(
                 str,
-                (string)Converter.ConvertTo(
-                    null,
-                    CultureInfo.InvariantCulture,
-                    value,
-                    typeof(string)
-                )
+                (string)
+                    Converter.ConvertTo(null, CultureInfo.InvariantCulture, value, typeof(string))
             );
         }
 

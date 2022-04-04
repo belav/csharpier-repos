@@ -24,8 +24,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         ) : base(dependencies, queryCompilationContext)
         {
             RelationalDependencies = relationalDependencies;
-            _relationalQueryCompilationContext =
-                (RelationalQueryCompilationContext)queryCompilationContext;
+            _relationalQueryCompilationContext = (RelationalQueryCompilationContext)
+                queryCompilationContext;
         }
 
         /// <summary>

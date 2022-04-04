@@ -37,11 +37,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             if (index < parameters.Length)
             {
                 var parameter = parameters[index];
-                element = (EnvDTE.CodeElement)CodeParameter.Create(
-                    this.State,
-                    this.ParentElement,
-                    CodeModelService.GetParameterName(parameter)
-                );
+                element = (EnvDTE.CodeElement)
+                    CodeParameter.Create(
+                        this.State,
+                        this.ParentElement,
+                        CodeModelService.GetParameterName(parameter)
+                    );
                 return true;
             }
 
@@ -59,11 +60,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
                     // The name of the CodeElement should be just the identifier name associated with the element
                     // devoid of the type characters hence we use the just identifier name for both creation and
                     // later searches
-                    element = (EnvDTE.CodeElement)CodeParameter.Create(
-                        this.State,
-                        this.ParentElement,
-                        name
-                    );
+                    element = (EnvDTE.CodeElement)
+                        CodeParameter.Create(this.State, this.ParentElement, name);
                     return true;
                 }
             }

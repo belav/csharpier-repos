@@ -150,10 +150,8 @@ namespace System.Data.ProviderBase
             string sqlCommand = (
                 requestedCollectionRow[populationStringColumn, DataRowVersion.Current] as string
             )!;
-            int numberOfRestrictions = (int)requestedCollectionRow[
-                numberOfRestrictionsColumn,
-                DataRowVersion.Current
-            ];
+            int numberOfRestrictions = (int)
+                requestedCollectionRow[numberOfRestrictionsColumn, DataRowVersion.Current];
             string collectionName = (
                 requestedCollectionRow[collectionNameColumn, DataRowVersion.Current] as string
             )!;

@@ -67,9 +67,8 @@ namespace System.Data.OleDb
                     try { }
                     finally
                     {
-                        hr = (OleDbHResult)NativeOledbWrapper.ITransactionAbort(
-                            DangerousGetHandle()
-                        );
+                        hr = (OleDbHResult)
+                            NativeOledbWrapper.ITransactionAbort(DangerousGetHandle());
                         _mustComplete = false;
                     }
                 }
@@ -96,9 +95,8 @@ namespace System.Data.OleDb
                     try { }
                     finally
                     {
-                        hr = (OleDbHResult)NativeOledbWrapper.ITransactionCommit(
-                            DangerousGetHandle()
-                        );
+                        hr = (OleDbHResult)
+                            NativeOledbWrapper.ITransactionCommit(DangerousGetHandle());
                         if ((0 <= (int)hr) || (OleDbHResult.XACT_E_NOTRANSACTION == hr))
                         {
                             _mustComplete = false;

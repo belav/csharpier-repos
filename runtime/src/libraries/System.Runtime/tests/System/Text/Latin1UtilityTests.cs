@@ -386,10 +386,11 @@ namespace System.Text.Tests
 
                         // Construct the TDelegate pointing to this method
 
-                        return (TDelegate)Activator.CreateInstance(
-                            typeof(TDelegate),
-                            new object[] { null, methodInfo.MethodHandle.GetFunctionPointer() }
-                        );
+                        return (TDelegate)
+                            Activator.CreateInstance(
+                                typeof(TDelegate),
+                                new object[] { null, methodInfo.MethodHandle.GetFunctionPointer() }
+                            );
                     }
                 );
             }

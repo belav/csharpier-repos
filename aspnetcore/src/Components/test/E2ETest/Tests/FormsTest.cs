@@ -1148,9 +1148,10 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
     private bool ElementHasAttribute(IWebElement webElement, string attribute)
     {
         var jsExecutor = (IJavaScriptExecutor)Browser;
-        return (bool)jsExecutor.ExecuteScript(
-            $"return arguments[0].attributes['{attribute}'] !== undefined;",
-            webElement
-        );
+        return (bool)
+            jsExecutor.ExecuteScript(
+                $"return arguments[0].attributes['{attribute}'] !== undefined;",
+                webElement
+            );
     }
 }

@@ -94,12 +94,17 @@ namespace Microsoft.CodeAnalysis.CSharp
             )
             {
                 var spanType = (NamedTypeSymbol)nodeExpressionType;
-                lengthGet = (MethodSymbol?)_factory
-                    .WellKnownMember(WellKnownMember.System_Span_T__get_Length, isOptional: true)
-                    ?.SymbolAsMember(spanType);
-                indexerGet = (MethodSymbol?)_factory
-                    .WellKnownMember(WellKnownMember.System_Span_T__get_Item, isOptional: true)
-                    ?.SymbolAsMember(spanType);
+                lengthGet = (MethodSymbol?)
+                    _factory
+                        .WellKnownMember(
+                            WellKnownMember.System_Span_T__get_Length,
+                            isOptional: true
+                        )
+                        ?.SymbolAsMember(spanType);
+                indexerGet = (MethodSymbol?)
+                    _factory
+                        .WellKnownMember(WellKnownMember.System_Span_T__get_Item, isOptional: true)
+                        ?.SymbolAsMember(spanType);
             }
             else if (
                 (object)origDefinition
@@ -107,18 +112,20 @@ namespace Microsoft.CodeAnalysis.CSharp
             )
             {
                 var spanType = (NamedTypeSymbol)nodeExpressionType;
-                lengthGet = (MethodSymbol?)_factory
-                    .WellKnownMember(
-                        WellKnownMember.System_ReadOnlySpan_T__get_Length,
-                        isOptional: true
-                    )
-                    ?.SymbolAsMember(spanType);
-                indexerGet = (MethodSymbol?)_factory
-                    .WellKnownMember(
-                        WellKnownMember.System_ReadOnlySpan_T__get_Item,
-                        isOptional: true
-                    )
-                    ?.SymbolAsMember(spanType);
+                lengthGet = (MethodSymbol?)
+                    _factory
+                        .WellKnownMember(
+                            WellKnownMember.System_ReadOnlySpan_T__get_Length,
+                            isOptional: true
+                        )
+                        ?.SymbolAsMember(spanType);
+                indexerGet = (MethodSymbol?)
+                    _factory
+                        .WellKnownMember(
+                            WellKnownMember.System_ReadOnlySpan_T__get_Item,
+                            isOptional: true
+                        )
+                        ?.SymbolAsMember(spanType);
             }
 
             return lengthGet is { } && indexerGet is { };
@@ -338,12 +345,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             if (enumeratorInfo.IsAsync)
             {
-                disposeMethod = (MethodSymbol)Binder.GetWellKnownTypeMember(
-                    _compilation,
-                    WellKnownMember.System_IAsyncDisposable__DisposeAsync,
-                    _diagnostics,
-                    syntax: forEachSyntax
-                );
+                disposeMethod = (MethodSymbol)
+                    Binder.GetWellKnownTypeMember(
+                        _compilation,
+                        WellKnownMember.System_IAsyncDisposable__DisposeAsync,
+                        _diagnostics,
+                        syntax: forEachSyntax
+                    );
                 return (object)disposeMethod != null;
             }
 
@@ -1511,8 +1519,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             if (this.Instrument)
             {
-                CommonForEachStatementSyntax forEachSyntax =
-                    (CommonForEachStatementSyntax)original.Syntax;
+                CommonForEachStatementSyntax forEachSyntax = (CommonForEachStatementSyntax)
+                    original.Syntax;
                 if (forEachSyntax is ForEachVariableStatementSyntax)
                 {
                     iterationVarDecl =

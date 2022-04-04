@@ -21,8 +21,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public async Task Can_pass_no_params(bool async, bool cancellation)
         {
             using var context = new ThudContext();
-            var commandBuilder =
-                (TestRawSqlCommandBuilder)context.GetService<IRawSqlCommandBuilder>();
+            var commandBuilder = (TestRawSqlCommandBuilder)
+                context.GetService<IRawSqlCommandBuilder>();
 
             if (async)
             {
@@ -52,8 +52,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public async Task Can_pass_array_of_int_params_as_object(bool async, bool cancellation)
         {
             using var context = new ThudContext();
-            var commandBuilder =
-                (TestRawSqlCommandBuilder)context.GetService<IRawSqlCommandBuilder>();
+            var commandBuilder = (TestRawSqlCommandBuilder)
+                context.GetService<IRawSqlCommandBuilder>();
 
             if (async)
             {
@@ -86,8 +86,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public async Task Can_pass_ints_as_params(bool async)
         {
             using var context = new ThudContext();
-            var commandBuilder =
-                (TestRawSqlCommandBuilder)context.GetService<IRawSqlCommandBuilder>();
+            var commandBuilder = (TestRawSqlCommandBuilder)
+                context.GetService<IRawSqlCommandBuilder>();
 
             if (async)
             {
@@ -109,8 +109,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public async Task Can_pass_mixed_array_of_params(bool async, bool cancellation)
         {
             using var context = new ThudContext();
-            var commandBuilder =
-                (TestRawSqlCommandBuilder)context.GetService<IRawSqlCommandBuilder>();
+            var commandBuilder = (TestRawSqlCommandBuilder)
+                context.GetService<IRawSqlCommandBuilder>();
 
             if (async)
             {
@@ -144,8 +144,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public async Task Can_pass_list_of_int_params_as_object(bool async, bool cancellation)
         {
             using var context = new ThudContext();
-            var commandBuilder =
-                (TestRawSqlCommandBuilder)context.GetService<IRawSqlCommandBuilder>();
+            var commandBuilder = (TestRawSqlCommandBuilder)
+                context.GetService<IRawSqlCommandBuilder>();
 
             if (async)
             {
@@ -182,8 +182,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public async Task Can_pass_mixed_list_of_params(bool async, bool cancellation)
         {
             using var context = new ThudContext();
-            var commandBuilder =
-                (TestRawSqlCommandBuilder)context.GetService<IRawSqlCommandBuilder>();
+            var commandBuilder = (TestRawSqlCommandBuilder)
+                context.GetService<IRawSqlCommandBuilder>();
 
             if (async)
             {
@@ -220,8 +220,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public async Task Can_pass_single_int_as_object(bool async, bool cancellation)
         {
             using var context = new ThudContext();
-            var commandBuilder =
-                (TestRawSqlCommandBuilder)context.GetService<IRawSqlCommandBuilder>();
+            var commandBuilder = (TestRawSqlCommandBuilder)
+                context.GetService<IRawSqlCommandBuilder>();
 
             if (async)
             {
@@ -255,8 +255,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public async Task Can_pass_single_string(bool async, bool cancellation)
         {
             using var context = new ThudContext();
-            var commandBuilder =
-                (TestRawSqlCommandBuilder)context.GetService<IRawSqlCommandBuilder>();
+            var commandBuilder = (TestRawSqlCommandBuilder)
+                context.GetService<IRawSqlCommandBuilder>();
 
             if (async)
             {

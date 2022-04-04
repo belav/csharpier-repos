@@ -231,17 +231,19 @@ namespace FPBehaviorApp
                 {
                     if (x < two63)
                     {
-                        return (ulong)ConvertDoubleToInt64(
-                            x,
-                            FPtoIntegerConversionType.CONVERT_MANAGED_BACKWARD_COMPATIBLE_ARM32
-                        );
+                        return (ulong)
+                            ConvertDoubleToInt64(
+                                x,
+                                FPtoIntegerConversionType.CONVERT_MANAGED_BACKWARD_COMPATIBLE_ARM32
+                            );
                     }
                     else
                     {
-                        return (ulong)ConvertDoubleToInt64(
-                                x - two63,
-                                FPtoIntegerConversionType.CONVERT_MANAGED_BACKWARD_COMPATIBLE_ARM32
-                            ) + (0x8000000000000000);
+                        return (ulong)
+                                ConvertDoubleToInt64(
+                                    x - two63,
+                                    FPtoIntegerConversionType.CONVERT_MANAGED_BACKWARD_COMPATIBLE_ARM32
+                                ) + (0x8000000000000000);
                     }
                 }
 

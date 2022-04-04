@@ -503,10 +503,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         return (MethodSymbol)OverriddenOrHiddenMembers.GetOverriddenMember();
                     }
 
-                    return (MethodSymbol)OverriddenOrHiddenMembersResult.GetOverriddenMember(
-                        this,
-                        OriginalDefinition.OverriddenMethod
-                    );
+                    return (MethodSymbol)
+                        OverriddenOrHiddenMembersResult.GetOverriddenMember(
+                            this,
+                            OriginalDefinition.OverriddenMethod
+                        );
                 }
 
                 return null;

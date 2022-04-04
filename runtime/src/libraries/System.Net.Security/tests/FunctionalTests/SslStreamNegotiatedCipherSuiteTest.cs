@@ -423,9 +423,8 @@ namespace System.Net.Security.Tests
         [ConditionalFact(nameof(CipherSuitesPolicySupported))]
         public void CipherSuitesPolicy_AllowedCipherSuitesIncludesSubsetOfInput_Success()
         {
-            TlsCipherSuite[] allCipherSuites = (TlsCipherSuite[])Enum.GetValues(
-                typeof(TlsCipherSuite)
-            );
+            TlsCipherSuite[] allCipherSuites = (TlsCipherSuite[])
+                Enum.GetValues(typeof(TlsCipherSuite));
             var r = new Random(123);
             int[] numOfCipherSuites = new int[] { 0, 1, 2, 5, 10, 15, 30 };
 

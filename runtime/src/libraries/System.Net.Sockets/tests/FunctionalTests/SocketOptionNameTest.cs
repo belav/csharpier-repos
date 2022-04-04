@@ -32,10 +32,11 @@ namespace System.Net.Sockets.Tests
                 {
                     Assert.Equal(
                         0,
-                        (int)socket.GetSocketOption(
-                            SocketOptionLevel.Socket,
-                            SocketOptionName.ReuseUnicastPort
-                        )
+                        (int)
+                            socket.GetSocketOption(
+                                SocketOptionLevel.Socket,
+                                SocketOptionName.ReuseUnicastPort
+                            )
                     );
                 }
                 else
@@ -69,10 +70,11 @@ namespace System.Net.Sockets.Tests
                         SocketOptionName.ReuseUnicastPort,
                         0
                     );
-                    int optionValue = (int)socket.GetSocketOption(
-                        SocketOptionLevel.Socket,
-                        SocketOptionName.ReuseUnicastPort
-                    );
+                    int optionValue = (int)
+                        socket.GetSocketOption(
+                            SocketOptionLevel.Socket,
+                            SocketOptionName.ReuseUnicastPort
+                        );
                     Assert.Equal(0, optionValue);
                 }
                 else
@@ -249,10 +251,11 @@ namespace System.Net.Sockets.Tests
             {
                 // This should not throw. We currently do not have good mechanism how to verify that the TTL/Hops is actually set.
 
-                int ttl = (int)socket.GetSocketOption(
-                    SocketOptionLevel.IP,
-                    SocketOptionName.MulticastTimeToLive
-                );
+                int ttl = (int)
+                    socket.GetSocketOption(
+                        SocketOptionLevel.IP,
+                        SocketOptionName.MulticastTimeToLive
+                    );
                 ttl += 1;
                 socket.SetSocketOption(
                     SocketOptionLevel.IP,
@@ -261,10 +264,11 @@ namespace System.Net.Sockets.Tests
                 );
                 Assert.Equal(
                     ttl,
-                    (int)socket.GetSocketOption(
-                        SocketOptionLevel.IP,
-                        SocketOptionName.MulticastTimeToLive
-                    )
+                    (int)
+                        socket.GetSocketOption(
+                            SocketOptionLevel.IP,
+                            SocketOptionName.MulticastTimeToLive
+                        )
                 );
             }
         }
@@ -285,10 +289,11 @@ namespace System.Net.Sockets.Tests
             {
                 // This should not throw. We currently do not have good mechanism how to verify that the TTL/Hops is actually set.
 
-                int ttl = (int)socket.GetSocketOption(
-                    SocketOptionLevel.IPv6,
-                    SocketOptionName.MulticastTimeToLive
-                );
+                int ttl = (int)
+                    socket.GetSocketOption(
+                        SocketOptionLevel.IPv6,
+                        SocketOptionName.MulticastTimeToLive
+                    );
                 ttl += 1;
                 socket.SetSocketOption(
                     SocketOptionLevel.IPv6,
@@ -297,10 +302,11 @@ namespace System.Net.Sockets.Tests
                 );
                 Assert.Equal(
                     ttl,
-                    (int)socket.GetSocketOption(
-                        SocketOptionLevel.IPv6,
-                        SocketOptionName.MulticastTimeToLive
-                    )
+                    (int)
+                        socket.GetSocketOption(
+                            SocketOptionLevel.IPv6,
+                            SocketOptionName.MulticastTimeToLive
+                        )
                 );
             }
         }
@@ -447,10 +453,8 @@ namespace System.Net.Sockets.Tests
                 int errorCode;
                 if (simpleGet)
                 {
-                    errorCode = (int)client.GetSocketOption(
-                        SocketOptionLevel.Socket,
-                        SocketOptionName.Error
-                    );
+                    errorCode = (int)
+                        client.GetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Error);
                 }
                 else
                 {
@@ -471,10 +475,8 @@ namespace System.Net.Sockets.Tests
                     // https://github.com/dotnet/runtime/issues/17260
                     Assert.Equal(
                         errorCode,
-                        (int)client.GetSocketOption(
-                            SocketOptionLevel.Socket,
-                            SocketOptionName.Error
-                        )
+                        (int)
+                            client.GetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Error)
                     );
                 }
                 else
@@ -482,10 +484,8 @@ namespace System.Net.Sockets.Tests
                     // The Unix implementation matches the getsockopt and MSDN docs and clears the error code as part of retrieval.
                     Assert.Equal(
                         (int)SocketError.Success,
-                        (int)client.GetSocketOption(
-                            SocketOptionLevel.Socket,
-                            SocketOptionName.Error
-                        )
+                        (int)
+                            client.GetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Error)
                     );
                 }
             }
@@ -648,10 +648,11 @@ namespace System.Net.Sockets.Tests
             {
                 Assert.Equal(
                     1,
-                    (int)a.GetSocketOption(
-                        SocketOptionLevel.Socket,
-                        SocketOptionName.ExclusiveAddressUse
-                    )
+                    (int)
+                        a.GetSocketOption(
+                            SocketOptionLevel.Socket,
+                            SocketOptionName.ExclusiveAddressUse
+                        )
                 );
                 Assert.True(a.ExclusiveAddressUse);
                 Assert.Equal(
@@ -683,10 +684,11 @@ namespace System.Net.Sockets.Tests
 
                 Assert.Equal(
                     value,
-                    (int)a.GetSocketOption(
-                        SocketOptionLevel.Socket,
-                        SocketOptionName.ExclusiveAddressUse
-                    )
+                    (int)
+                        a.GetSocketOption(
+                            SocketOptionLevel.Socket,
+                            SocketOptionName.ExclusiveAddressUse
+                        )
                 );
                 Assert.Equal(
                     value == 1 ? 0 : 1,
@@ -711,10 +713,11 @@ namespace System.Net.Sockets.Tests
                 );
                 Assert.Equal(
                     value == 1 ? 0 : 1,
-                    (int)a.GetSocketOption(
-                        SocketOptionLevel.Socket,
-                        SocketOptionName.ExclusiveAddressUse
-                    )
+                    (int)
+                        a.GetSocketOption(
+                            SocketOptionLevel.Socket,
+                            SocketOptionName.ExclusiveAddressUse
+                        )
                 );
             }
         }
@@ -842,10 +845,8 @@ namespace System.Net.Sockets.Tests
             {
                 socket.SetIPProtectionLevel(level);
 
-                int result = (int)socket.GetSocketOption(
-                    optionLevel,
-                    SocketOptionName.IPProtectionLevel
-                );
+                int result = (int)
+                    socket.GetSocketOption(optionLevel, SocketOptionName.IPProtectionLevel);
                 Assert.Equal(result, (int)level);
             }
         }

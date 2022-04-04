@@ -3335,21 +3335,23 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 if (memberOpt is object)
                 {
-                    symbolOpt = (MethodSymbol)GetWellKnownTypeMember(
-                        memberOpt.GetValueOrDefault(),
-                        diagnostics,
-                        syntax: node,
-                        isOptional: true
-                    );
+                    symbolOpt = (MethodSymbol)
+                        GetWellKnownTypeMember(
+                            memberOpt.GetValueOrDefault(),
+                            diagnostics,
+                            syntax: node,
+                            isOptional: true
+                        );
                 }
 
                 if (symbolOpt is null)
                 {
-                    symbolOpt = (MethodSymbol)GetWellKnownTypeMember(
-                        WellKnownMember.System_Range__ctor,
-                        diagnostics,
-                        syntax: node
-                    );
+                    symbolOpt = (MethodSymbol)
+                        GetWellKnownTypeMember(
+                            WellKnownMember.System_Range__ctor,
+                            diagnostics,
+                            syntax: node
+                        );
                 }
             }
 
@@ -4632,13 +4634,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             //
             // SPEC ends
 
-            var type = (ArrayTypeSymbol)BindArrayType(
-                node.Type,
-                diagnostics,
-                permitDimensions: true,
-                basesBeingResolved: null,
-                disallowRestrictedTypes: true
-            ).Type;
+            var type = (ArrayTypeSymbol)
+                BindArrayType(
+                    node.Type,
+                    diagnostics,
+                    permitDimensions: true,
+                    basesBeingResolved: null,
+                    disallowRestrictedTypes: true
+                ).Type;
 
             // CONSIDER:
             //
@@ -5269,13 +5272,14 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             ArrayTypeSyntax arrayTypeSyntax = (ArrayTypeSyntax)typeSyntax;
             var elementTypeSyntax = arrayTypeSyntax.ElementType;
-            var arrayType = (ArrayTypeSymbol)BindArrayType(
-                arrayTypeSyntax,
-                diagnostics,
-                permitDimensions: true,
-                basesBeingResolved: null,
-                disallowRestrictedTypes: false
-            ).Type;
+            var arrayType = (ArrayTypeSymbol)
+                BindArrayType(
+                    arrayTypeSyntax,
+                    diagnostics,
+                    permitDimensions: true,
+                    basesBeingResolved: null,
+                    disallowRestrictedTypes: false
+                ).Type;
             var elementType = arrayType.ElementTypeWithAnnotations;
 
             TypeSymbol type = GetStackAllocType(node, elementType, diagnostics, out bool hasErrors);
@@ -10036,10 +10040,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                         for (int i = methodGroup.Methods.Count - 1; i >= 0; i--)
                         {
                             if (
-                                (object)methodGroup.Methods[i].ReduceExtensionMethod(
-                                    left.Type,
-                                    this.Compilation
-                                ) == null
+                                (object)
+                                    methodGroup.Methods[i].ReduceExtensionMethod(
+                                        left.Type,
+                                        this.Compilation
+                                    ) == null
                             )
                                 methodGroup.Methods.RemoveAt(i);
                         }
@@ -11870,9 +11875,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 Debug.Assert(argIsRange);
                 // Look for Substring
-                var substring = (MethodSymbol)Compilation.GetSpecialTypeMember(
-                    SpecialMember.System_String__Substring
-                );
+                var substring = (MethodSymbol)
+                    Compilation.GetSpecialTypeMember(SpecialMember.System_String__Substring);
                 if (substring is object)
                 {
                     patternIndexerAccess = new BoundIndexOrRangePatternIndexerAccess(

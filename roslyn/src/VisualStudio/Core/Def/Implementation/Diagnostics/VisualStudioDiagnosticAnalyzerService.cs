@@ -68,9 +68,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
             _serviceProvider = serviceProvider;
 
             // Hook up the "Run Code Analysis" menu command for CPS based managed projects.
-            var menuCommandService = (IMenuCommandService)_serviceProvider.GetService(
-                typeof(IMenuCommandService)
-            );
+            var menuCommandService = (IMenuCommandService)
+                _serviceProvider.GetService(typeof(IMenuCommandService));
             if (menuCommandService != null)
             {
                 VisualStudioCommandHandlerHelpers.AddCommand(

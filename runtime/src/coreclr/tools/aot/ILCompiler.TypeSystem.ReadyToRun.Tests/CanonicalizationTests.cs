@@ -522,9 +522,8 @@ namespace TypeSystemTests
             var gstOverUniversalCanon = _genericStructType.MakeInstantiatedType(
                 _context.UniversalCanonType
             );
-            var rdtUniversalCanon = (RuntimeDeterminedType)gstOverUniversalCanon
-                .ConvertToSharedRuntimeDeterminedForm()
-                .Instantiation[0];
+            var rdtUniversalCanon = (RuntimeDeterminedType)
+                gstOverUniversalCanon.ConvertToSharedRuntimeDeterminedForm().Instantiation[0];
             Assert.Same(_context.UniversalCanonType, rdtUniversalCanon.CanonicalType);
 
             var gstOverRdtUniversalCanon = _genericStructType.MakeInstantiatedType(

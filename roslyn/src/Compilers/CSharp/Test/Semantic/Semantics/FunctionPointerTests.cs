@@ -2210,9 +2210,8 @@ unsafe class C
                 functionPointer.Signature.Parameters[0].Type.TypeKind
             );
 
-            var declaredSymbol = (IMethodSymbol)comp.GetTypeByMetadataName("C")
-                .GetMethod("M2")
-                .ISymbol;
+            var declaredSymbol = (IMethodSymbol)
+                comp.GetTypeByMetadataName("C").GetMethod("M2").ISymbol;
             Assert.True(
                 declaredSymbol.TypeParameters[0].Equals(
                     functionPointer.Signature.ReturnType,

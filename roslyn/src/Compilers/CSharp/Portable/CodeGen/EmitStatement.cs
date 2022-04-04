@@ -1473,9 +1473,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             Debug.Assert(
                 stringEqualityMethodRef
                     == _module.Translate(
-                        (MethodSymbol)_module.Compilation.GetSpecialTypeMember(
-                            SpecialMember.System_String__op_Equality
-                        ),
+                        (MethodSymbol)
+                            _module.Compilation.GetSpecialTypeMember(
+                                SpecialMember.System_String__op_Equality
+                            ),
                         (CSharpSyntaxNode)syntaxNode,
                         assertDiagnostics
                     )

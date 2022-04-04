@@ -56,14 +56,10 @@ namespace System.Security
         protected HostProtectionException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
-            ProtectedResources = (HostProtectionResource)info.GetValue(
-                ProtectedResourcesName,
-                typeof(HostProtectionResource)
-            );
-            DemandedResources = (HostProtectionResource)info.GetValue(
-                DemandedResourcesName,
-                typeof(HostProtectionResource)
-            );
+            ProtectedResources = (HostProtectionResource)
+                info.GetValue(ProtectedResourcesName, typeof(HostProtectionResource));
+            DemandedResources = (HostProtectionResource)
+                info.GetValue(DemandedResourcesName, typeof(HostProtectionResource));
         }
 
         public HostProtectionResource DemandedResources { get; }

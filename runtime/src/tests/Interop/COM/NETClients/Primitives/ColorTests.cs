@@ -14,8 +14,8 @@ namespace NetClient
 
         public ColorTests()
         {
-            this.server =
-                (Server.Contract.Servers.ColorTesting)new Server.Contract.Servers.ColorTestingClass();
+            this.server = (Server.Contract.Servers.ColorTesting)
+                new Server.Contract.Servers.ColorTestingClass();
         }
 
         public void Run()

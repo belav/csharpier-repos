@@ -34,9 +34,8 @@ namespace System.Xml.Tests
     {
         public override XmlReader Create(MyDict<string, object> options)
         {
-            XmlReaderSettings settings = (XmlReaderSettings)options[
-                ReaderFactory.HT_READERSETTINGS
-            ];
+            XmlReaderSettings settings = (XmlReaderSettings)
+                options[ReaderFactory.HT_READERSETTINGS];
             if (settings == null)
                 settings = new XmlReaderSettings();
 

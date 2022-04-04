@@ -519,9 +519,8 @@ class C1
 }
 ";
             var comp = CreateCompilation(Parse(text));
-            NamedTypeSymbol c1 = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace
-                .GetMembers("C1")
-                .Single();
+            NamedTypeSymbol c1 = (NamedTypeSymbol)
+                comp.SourceModule.GlobalNamespace.GetMembers("C1").Single();
             PropertySymbol ein = (PropertySymbol)c1.GetMembers("in").Single();
             Assert.Equal("in", ein.Name);
             Assert.Equal("C1.@in", ein.ToString());
@@ -747,9 +746,8 @@ class Program
                 }
             );
 
-            var type = (PENamedTypeSymbol)compilation.GlobalNamespace
-                .GetMembers("NoAccessors")
-                .Single();
+            var type = (PENamedTypeSymbol)
+                compilation.GlobalNamespace.GetMembers("NoAccessors").Single();
 
             // Methods are available.
             Assert.NotNull(type.GetMembers("StaticMethod").SingleOrDefault());
@@ -843,10 +841,8 @@ class Program
 }
 "
             );
-            var type = (PENamedTypeSymbol)verifier.Compilation.GlobalNamespace
-                .GetMembers("Signatures")
-                .Single()
-                .GetSymbol();
+            var type = (PENamedTypeSymbol)
+                verifier.Compilation.GlobalNamespace.GetMembers("Signatures").Single().GetSymbol();
 
             // Valid static property, property with signature that does not match accessors,
             // and property with accessors that do not match each other.
@@ -869,8 +865,8 @@ class Program
             // and property with accessors that do not match each other.
             var goodInstance = (PEPropertySymbol)type.GetMembers("GoodInstance").Single();
             var badInstance = (PEPropertySymbol)type.GetMembers("BadInstance").Single();
-            var mismatchedInstance = (PEPropertySymbol)type.GetMembers("MismatchedInstance")
-                .Single();
+            var mismatchedInstance = (PEPropertySymbol)
+                type.GetMembers("MismatchedInstance").Single();
 
             Assert.False(goodInstance.MustCallMethodsDirectly);
             Assert.True(badInstance.MustCallMethodsDirectly);
@@ -936,9 +932,8 @@ class Program
                 source,
                 TestOptions.ReleaseDll.WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
-            var type = (PENamedTypeSymbol)compilation.GlobalNamespace
-                .GetMembers("FamilyAssembly")
-                .Single();
+            var type = (PENamedTypeSymbol)
+                compilation.GlobalNamespace.GetMembers("FamilyAssembly").Single();
 
             VerifyAccessibility(
                 (PEPropertySymbol)type.GetMembers("FamilyGetAssemblySetStatic").Single(),
@@ -971,22 +966,22 @@ class Program
                 Accessibility.ProtectedAndInternal
             );
             VerifyAccessibility(
-                (PEPropertySymbol)type.GetMembers("FamilyOrAssemblyGetFamilyOrAssemblySetStatic")
-                    .Single(),
+                (PEPropertySymbol)
+                    type.GetMembers("FamilyOrAssemblyGetFamilyOrAssemblySetStatic").Single(),
                 Accessibility.ProtectedOrInternal,
                 Accessibility.ProtectedOrInternal,
                 Accessibility.ProtectedOrInternal
             );
             VerifyAccessibility(
-                (PEPropertySymbol)type.GetMembers("FamilyOrAssemblyGetFamilyAndAssemblySetStatic")
-                    .Single(),
+                (PEPropertySymbol)
+                    type.GetMembers("FamilyOrAssemblyGetFamilyAndAssemblySetStatic").Single(),
                 Accessibility.ProtectedOrInternal,
                 Accessibility.ProtectedOrInternal,
                 Accessibility.ProtectedAndInternal
             );
             VerifyAccessibility(
-                (PEPropertySymbol)type.GetMembers("FamilyAndAssemblyGetFamilyAndAssemblySetStatic")
-                    .Single(),
+                (PEPropertySymbol)
+                    type.GetMembers("FamilyAndAssemblyGetFamilyAndAssemblySetStatic").Single(),
                 Accessibility.ProtectedAndInternal,
                 Accessibility.ProtectedAndInternal,
                 Accessibility.ProtectedAndInternal
@@ -1004,8 +999,8 @@ class Program
                 Accessibility.ProtectedOrInternal
             );
             VerifyAccessibility(
-                (PEPropertySymbol)type.GetMembers("FamilyAndAssemblyGetFamilyOrAssemblySetInstance")
-                    .Single(),
+                (PEPropertySymbol)
+                    type.GetMembers("FamilyAndAssemblyGetFamilyOrAssemblySetInstance").Single(),
                 Accessibility.ProtectedOrInternal,
                 Accessibility.ProtectedAndInternal,
                 Accessibility.ProtectedOrInternal
@@ -2102,9 +2097,8 @@ class C : N.I<int>
             var substitutedInterface = @class.Interfaces().Single();
             Assert.Equal(@interface, substitutedInterface.ConstructedFrom);
 
-            var substitutedInterfaceProperty = (PropertySymbol)substitutedInterface
-                .GetMembers("P")
-                .Single();
+            var substitutedInterfaceProperty = (PropertySymbol)
+                substitutedInterface.GetMembers("P").Single();
 
             CheckPropertyExplicitImplementation(
                 @class,

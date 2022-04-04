@@ -41,10 +41,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
         [InlineData(false)]
         public void Can_add_type_mapped_parameter_by_type(bool nullable)
         {
-            var typeMapper = (IRelationalTypeMappingSource)new TestRelationalTypeMappingSource(
-                TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
-            );
+            var typeMapper = (IRelationalTypeMappingSource)
+                new TestRelationalTypeMappingSource(
+                    TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
+                    TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+                );
             var typeMapping = typeMapper.FindMapping(nullable ? typeof(int?) : typeof(int));
 
             var parameterBuilder = new RelationalCommandBuilder(

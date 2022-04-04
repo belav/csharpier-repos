@@ -156,12 +156,10 @@ public class HubConnectionHandlerTests : VerifiableLoggedTest
 
                 await connectionHandlerTask.DefaultTimeout();
 
-                var firedOnConnected = (bool)client.Connection.Items[
-                    nameof(ErrorInAbortedTokenHub.OnConnectedAsync)
-                ];
-                var firedOnDisconnected = (bool)client.Connection.Items[
-                    nameof(ErrorInAbortedTokenHub.OnDisconnectedAsync)
-                ];
+                var firedOnConnected = (bool)
+                    client.Connection.Items[nameof(ErrorInAbortedTokenHub.OnConnectedAsync)];
+                var firedOnDisconnected = (bool)
+                    client.Connection.Items[nameof(ErrorInAbortedTokenHub.OnDisconnectedAsync)];
 
                 Assert.True(firedOnConnected);
                 Assert.True(firedOnDisconnected);
@@ -5854,9 +5852,8 @@ public class HubConnectionHandlerTests : VerifiableLoggedTest
             // Wait for a connection, or for the endpoint to fail.
             await client.Connected.OrThrowIfOtherFails(connectionHandlerTask).DefaultTimeout();
 
-            IHubContext context = (IHubContext)serviceProvider.GetRequiredService<
-                IHubContext<MethodHub>
-            >();
+            IHubContext context = (IHubContext)
+                serviceProvider.GetRequiredService<IHubContext<MethodHub>>();
             await context.Clients.All.SendAsync("Send", "test");
 
             var message = await client.ReadAsync().DefaultTimeout();

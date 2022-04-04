@@ -773,12 +773,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics
         )
         {
-            return (MethodSymbol)Binder.GetWellKnownTypeMember(
-                compilation,
-                overload,
-                diagnostics,
-                syntax: syntax
-            );
+            return (MethodSymbol)
+                Binder.GetWellKnownTypeMember(compilation, overload, diagnostics, syntax: syntax);
         }
 
         private static SyntaxNode MethodDeclarationIfAvailable(SyntaxNode body)
@@ -842,8 +838,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     );
 
                 case SyntaxKind.ConstructorDeclaration:
-                    ConstructorDeclarationSyntax constructorSyntax =
-                        (ConstructorDeclarationSyntax)syntax;
+                    ConstructorDeclarationSyntax constructorSyntax = (ConstructorDeclarationSyntax)
+                        syntax;
                     return SkipAttributes(
                         syntax,
                         constructorSyntax.AttributeLists,

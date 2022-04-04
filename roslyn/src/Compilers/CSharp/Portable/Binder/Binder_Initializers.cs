@@ -174,7 +174,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                         new BoundParameter(
                                             parameterSyntax,
                                             (
-                                                (SynthesizedRecordPropertySymbol)fieldSymbol.AssociatedSymbol
+                                                (SynthesizedRecordPropertySymbol)
+                                                    fieldSymbol.AssociatedSymbol
                                             ).BackingParameter
                                         ).MakeCompilerGenerated()
                                     )

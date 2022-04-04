@@ -2373,9 +2373,10 @@ public class Tests
     public static int test_0_arm64_small_stack_args()
     {
         IFoo3<EmptyStruct> o =
-            (IFoo3<EmptyStruct>)Activator.CreateInstance(
-                typeof(Foo3<>).MakeGenericType(new Type[] { typeof(EmptyStruct) })
-            );
+            (IFoo3<EmptyStruct>)
+                Activator.CreateInstance(
+                    typeof(Foo3<>).MakeGenericType(new Type[] { typeof(EmptyStruct) })
+                );
         int res = o.Bytes(new EmptyStruct(), 1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8);
         if (res != 36)
             return 1;
@@ -2471,9 +2472,10 @@ public class Tests
     public static int test_0_arm64_vtype_stack_args()
     {
         IFoo3<EmptyStruct> o =
-            (IFoo3<EmptyStruct>)Activator.CreateInstance(
-                typeof(Foo3<>).MakeGenericType(new Type[] { typeof(EmptyStruct) })
-            );
+            (IFoo3<EmptyStruct>)
+                Activator.CreateInstance(
+                    typeof(Foo3<>).MakeGenericType(new Type[] { typeof(EmptyStruct) })
+                );
         int res = o.Structs(
             new EmptyStruct(),
             1,
@@ -2982,10 +2984,11 @@ public class Tests
         public object AMethod<T>()
         {
             var d =
-                (Func<ClassOpenDel, T>)Delegate.CreateDelegate(
-                    typeof(Func<ClassOpenDel, T>),
-                    typeof(ClassOpenDel).GetMethod("getField")
-                );
+                (Func<ClassOpenDel, T>)
+                    Delegate.CreateDelegate(
+                        typeof(Func<ClassOpenDel, T>),
+                        typeof(ClassOpenDel).GetMethod("getField")
+                    );
             return d(this);
         }
     }

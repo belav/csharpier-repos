@@ -280,9 +280,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                     foreach (var identifier in data.CallingConventionTypes)
                     {
                         builder.Add(
-                            (INamedTypeSymbolInternal)RetargetingTranslator.Retarget(
-                                (NamedTypeSymbol)identifier
-                            )
+                            (INamedTypeSymbolInternal)
+                                RetargetingTranslator.Retarget((NamedTypeSymbol)identifier)
                         );
                     }
 

@@ -37,8 +37,8 @@ namespace System.Web.Mvc
             Action<ICustomAttributeProvider> errorAction
         )
         {
-            CustomModelBinderAttribute[] attrs =
-                (CustomModelBinderAttribute[])element.GetCustomAttributes(
+            CustomModelBinderAttribute[] attrs = (CustomModelBinderAttribute[])
+                element.GetCustomAttributes(
                     typeof(CustomModelBinderAttribute),
                     true /* inherit */
                 );

@@ -76,8 +76,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             Check.NotEmpty(connectionString, nameof(connectionString));
 
-            var extension = (SqlServerOptionsExtension)GetOrCreateExtension(optionsBuilder)
-                .WithConnectionString(connectionString);
+            var extension = (SqlServerOptionsExtension)
+                GetOrCreateExtension(optionsBuilder).WithConnectionString(connectionString);
             ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
                 extension
             );
@@ -114,8 +114,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             Check.NotNull(connection, nameof(connection));
 
-            var extension = (SqlServerOptionsExtension)GetOrCreateExtension(optionsBuilder)
-                .WithConnection(connection);
+            var extension = (SqlServerOptionsExtension)
+                GetOrCreateExtension(optionsBuilder).WithConnection(connection);
             ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
                 extension
             );
@@ -150,10 +150,8 @@ namespace Microsoft.EntityFrameworkCore
             this DbContextOptionsBuilder<TContext> optionsBuilder,
             Action<SqlServerDbContextOptionsBuilder>? sqlServerOptionsAction = null
         ) where TContext : DbContext =>
-            (DbContextOptionsBuilder<TContext>)UseSqlServer(
-                (DbContextOptionsBuilder)optionsBuilder,
-                sqlServerOptionsAction
-            );
+            (DbContextOptionsBuilder<TContext>)
+                UseSqlServer((DbContextOptionsBuilder)optionsBuilder, sqlServerOptionsAction);
 
         /// <summary>
         ///     Configures the context to connect to a Microsoft SQL Server database.
@@ -173,11 +171,12 @@ namespace Microsoft.EntityFrameworkCore
             string connectionString,
             Action<SqlServerDbContextOptionsBuilder>? sqlServerOptionsAction = null
         ) where TContext : DbContext =>
-            (DbContextOptionsBuilder<TContext>)UseSqlServer(
-                (DbContextOptionsBuilder)optionsBuilder,
-                connectionString,
-                sqlServerOptionsAction
-            );
+            (DbContextOptionsBuilder<TContext>)
+                UseSqlServer(
+                    (DbContextOptionsBuilder)optionsBuilder,
+                    connectionString,
+                    sqlServerOptionsAction
+                );
 
         // Note: Decision made to use DbConnection not SqlConnection: Issue #772
         /// <summary>
@@ -202,11 +201,12 @@ namespace Microsoft.EntityFrameworkCore
             DbConnection connection,
             Action<SqlServerDbContextOptionsBuilder>? sqlServerOptionsAction = null
         ) where TContext : DbContext =>
-            (DbContextOptionsBuilder<TContext>)UseSqlServer(
-                (DbContextOptionsBuilder)optionsBuilder,
-                connection,
-                sqlServerOptionsAction
-            );
+            (DbContextOptionsBuilder<TContext>)
+                UseSqlServer(
+                    (DbContextOptionsBuilder)optionsBuilder,
+                    connection,
+                    sqlServerOptionsAction
+                );
 
         private static SqlServerOptionsExtension GetOrCreateExtension(
             DbContextOptionsBuilder optionsBuilder

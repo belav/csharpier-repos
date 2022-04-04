@@ -40,10 +40,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 if (definingQuery != null)
                 {
                     entityType.SetInMemoryQuery(
-                        (LambdaExpression)DbSetAccessRewriter.Rewrite(
-                            modelBuilder.Metadata,
-                            definingQuery
-                        )
+                        (LambdaExpression)
+                            DbSetAccessRewriter.Rewrite(modelBuilder.Metadata, definingQuery)
                     );
                 }
             }

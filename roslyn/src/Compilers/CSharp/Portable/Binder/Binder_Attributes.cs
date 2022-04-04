@@ -50,9 +50,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // BindType for AttributeSyntax's name is handled specially during lookup, see Binder.LookupAttributeType.
                     // When looking up a name in attribute type context, we generate a diagnostic + error type if it is not an attribute type, i.e. named type deriving from System.Attribute.
                     // Hence we can assume here that BindType returns a NamedTypeSymbol.
-                    boundAttributeTypes[i] = (NamedTypeSymbol)binder
-                        .BindType(attributesToBind[i].Name, diagnostics)
-                        .Type;
+                    boundAttributeTypes[i] = (NamedTypeSymbol)
+                        binder.BindType(attributesToBind[i].Name, diagnostics).Type;
                 }
             }
         }

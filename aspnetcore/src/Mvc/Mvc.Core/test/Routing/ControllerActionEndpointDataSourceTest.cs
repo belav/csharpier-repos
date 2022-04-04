@@ -37,9 +37,8 @@ public class ControllerActionEndpointDataSourceTest : ActionEndpointDataSourceBa
             .Setup(m => m.ActionDescriptors)
             .Returns(new ActionDescriptorCollection(actions, 0));
 
-        var dataSource = (ControllerActionEndpointDataSource)CreateDataSource(
-            mockDescriptorProvider.Object
-        );
+        var dataSource = (ControllerActionEndpointDataSource)
+            CreateDataSource(mockDescriptorProvider.Object);
 
         // Act
         var endpoints = dataSource.Endpoints;
@@ -82,9 +81,8 @@ public class ControllerActionEndpointDataSourceTest : ActionEndpointDataSourceBa
             .Setup(m => m.ActionDescriptors)
             .Returns(new ActionDescriptorCollection(actions, 0));
 
-        var dataSource = (ControllerActionEndpointDataSource)CreateDataSource(
-            mockDescriptorProvider.Object
-        );
+        var dataSource = (ControllerActionEndpointDataSource)
+            CreateDataSource(mockDescriptorProvider.Object);
         dataSource.AddRoute("1", "/1/{controller}/{action}/{id?}", null, null, null);
         dataSource.AddRoute("2", "/2/{controller}/{action}/{id?}", null, null, null);
 
@@ -168,9 +166,8 @@ public class ControllerActionEndpointDataSourceTest : ActionEndpointDataSourceBa
             .Setup(m => m.ActionDescriptors)
             .Returns(new ActionDescriptorCollection(actions, 0));
 
-        var dataSource = (ControllerActionEndpointDataSource)CreateDataSource(
-            mockDescriptorProvider.Object
-        );
+        var dataSource = (ControllerActionEndpointDataSource)
+            CreateDataSource(mockDescriptorProvider.Object);
         dataSource.AddRoute("1", "/1/{controller}/{action}/{id?}", null, null, null);
         dataSource.AddRoute("2", "/2/{controller}/{action}/{id?}", null, null, null);
 
@@ -264,9 +261,8 @@ public class ControllerActionEndpointDataSourceTest : ActionEndpointDataSourceBa
             .Setup(m => m.ActionDescriptors)
             .Returns(new ActionDescriptorCollection(actions, 0));
 
-        var dataSource = (ControllerActionEndpointDataSource)CreateDataSource(
-            mockDescriptorProvider.Object
-        );
+        var dataSource = (ControllerActionEndpointDataSource)
+            CreateDataSource(mockDescriptorProvider.Object);
         dataSource.AddRoute("1", "/1/{controller}/{action}/{id?}", null, null, null);
         dataSource.AddRoute("2", "/2/{controller}/{action}/{id?}", null, null, null);
 
@@ -366,9 +362,8 @@ public class ControllerActionEndpointDataSourceTest : ActionEndpointDataSourceBa
             .Setup(m => m.ActionDescriptors)
             .Returns(new ActionDescriptorCollection(actions, 0));
 
-        var dataSource = (ControllerActionEndpointDataSource)CreateDataSource(
-            mockDescriptorProvider.Object
-        );
+        var dataSource = (ControllerActionEndpointDataSource)
+            CreateDataSource(mockDescriptorProvider.Object);
         dataSource
             .AddRoute("1", "/1/{controller}/{action}/{id?}", null, null, null)
             .Add(b => b.Metadata.Add("A"));

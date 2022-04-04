@@ -51,8 +51,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
 
             _workspace = workspace;
 
-            _registrationService =
-                (SolutionCrawlerRegistrationService)workspace.Services.GetRequiredService<ISolutionCrawlerRegistrationService>();
+            _registrationService = (SolutionCrawlerRegistrationService)
+                workspace.Services.GetRequiredService<ISolutionCrawlerRegistrationService>();
             _registrationService.Register(workspace);
 
             if (
@@ -62,17 +62,19 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             )
                 throw new InvalidOperationException();
 
-            AnalyzerService = (DiagnosticAnalyzerService?)_registrationService
-                .GetTestAccessor()
-                .AnalyzerProviders.SelectMany(pair => pair.Value)
-                .SingleOrDefault(
-                    lazyProvider =>
-                        lazyProvider.Metadata.Name == WellKnownSolutionCrawlerAnalyzers.Diagnostic
-                        && lazyProvider.Metadata.HighPriorityForActiveFile
-                )
-                ?.Value;
-            DiagnosticService =
-                (DiagnosticService)workspace.ExportProvider.GetExportedValue<IDiagnosticService>();
+            AnalyzerService = (DiagnosticAnalyzerService?)
+                _registrationService
+                    .GetTestAccessor()
+                    .AnalyzerProviders.SelectMany(pair => pair.Value)
+                    .SingleOrDefault(
+                        lazyProvider =>
+                            lazyProvider.Metadata.Name
+                                == WellKnownSolutionCrawlerAnalyzers.Diagnostic
+                            && lazyProvider.Metadata.HighPriorityForActiveFile
+                    )
+                    ?.Value;
+            DiagnosticService = (DiagnosticService)
+                workspace.ExportProvider.GetExportedValue<IDiagnosticService>();
 
             if (updateSource is object)
             {

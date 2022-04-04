@@ -368,14 +368,15 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                             return QueryCompilationContext.NotTranslatedExpression;
                         }
 
-                        entityProjectionExpression = (EntityProjectionExpression)(
-                            (SelectExpression)projectionBindingExpression.QueryExpression
-                        ).GetProjection(projectionBindingExpression);
+                        entityProjectionExpression = (EntityProjectionExpression)
+                            (
+                                (SelectExpression)projectionBindingExpression.QueryExpression
+                            ).GetProjection(projectionBindingExpression);
                     }
                     else
                     {
-                        entityProjectionExpression =
-                            (EntityProjectionExpression)entityShaperExpression.ValueBufferExpression;
+                        entityProjectionExpression = (EntityProjectionExpression)
+                            entityShaperExpression.ValueBufferExpression;
                     }
 
                     if (_indexBasedBinding)

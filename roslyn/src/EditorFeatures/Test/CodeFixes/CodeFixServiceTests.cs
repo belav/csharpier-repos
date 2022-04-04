@@ -283,8 +283,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
 
             using var workspace = tuple.workspace;
 
-            var errorReportingService =
-                (TestErrorReportingService)workspace.Services.GetRequiredService<IErrorReportingService>();
+            var errorReportingService = (TestErrorReportingService)
+                workspace.Services.GetRequiredService<IErrorReportingService>();
 
             var errorReported = false;
             errorReportingService.OnError = message => errorReported = true;
@@ -330,8 +330,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
             var tuple = ServiceSetup(codefix);
             using var workspace = tuple.workspace;
 
-            var errorReportingService =
-                (TestErrorReportingService)workspace.Services.GetRequiredService<IErrorReportingService>();
+            var errorReportingService = (TestErrorReportingService)
+                workspace.Services.GetRequiredService<IErrorReportingService>();
 
             var errorReported = false;
             errorReportingService.OnError = message => errorReported = true;
@@ -427,8 +427,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
                 .Single()
                 .AddAnalyzerReference(reference);
             document = project.Documents.Single();
-            extensionManager =
-                (EditorLayerExtensionManager.ExtensionManager)document.Project.Solution.Workspace.Services.GetRequiredService<IExtensionManager>();
+            extensionManager = (EditorLayerExtensionManager.ExtensionManager)
+                document.Project.Solution.Workspace.Services.GetRequiredService<IExtensionManager>();
         }
 
         private static IEnumerable<Lazy<CodeFixProvider, CodeChangeProviderMetadata>> CreateFixers()

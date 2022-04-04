@@ -431,10 +431,8 @@ namespace System.Data.OleDb
             );
             if (!hasOleDBServices)
             { // don't touch registry if they have OLE DB Services
-                string? classid = (string?)ADP.ClassesRootRegistryValue(
-                    progid + "\\CLSID",
-                    string.Empty
-                );
+                string? classid = (string?)
+                    ADP.ClassesRootRegistryValue(progid + "\\CLSID", string.Empty);
                 if ((null != classid) && (0 < classid.Length))
                 {
                     // CLSID detection of 'Microsoft OLE DB Provider for ODBC Drivers'

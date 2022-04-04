@@ -859,10 +859,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 diagnostics: ignoreDiagnosticsFromTuple ? null : diagnostics
             );
 
-            return (BoundTupleExpression)BindToNaturalType(
-                new BoundTupleLiteral(syntax, arguments, tupleNames, inferredPositions, type),
-                diagnostics
-            );
+            return (BoundTupleExpression)
+                BindToNaturalType(
+                    new BoundTupleLiteral(syntax, arguments, tupleNames, inferredPositions, type),
+                    diagnostics
+                );
         }
 
         /// <summary>Extract inferred name from a single deconstruction variable.</summary>

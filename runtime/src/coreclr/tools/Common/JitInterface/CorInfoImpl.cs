@@ -814,8 +814,8 @@ namespace Internal.JitInterface
         )
         {
             suppressGCTransition = false;
-            CorInfoCallConvExtension callConv =
-                (CorInfoCallConvExtension)PlatformDefaultUnmanagedCallingConvention();
+            CorInfoCallConvExtension callConv = (CorInfoCallConvExtension)
+                PlatformDefaultUnmanagedCallingConvention();
 
             bool found = false;
             bool memberFunctionVariant = false;
@@ -1162,11 +1162,12 @@ namespace Internal.JitInterface
                   : (TypeSystemEntity)MethodBeingCompiled.OwningType;
             }
 
-            return (TypeSystemEntity)HandleToObject(
-                (IntPtr)(
-                    (ulong)contextStruct & ~(ulong)CorInfoContextFlags.CORINFO_CONTEXTFLAGS_MASK
-                )
-            );
+            return (TypeSystemEntity)
+                HandleToObject(
+                    (IntPtr)(
+                        (ulong)contextStruct & ~(ulong)CorInfoContextFlags.CORINFO_CONTEXTFLAGS_MASK
+                    )
+                );
         }
 
         private bool isJitIntrinsic(CORINFO_METHOD_STRUCT_* ftn)
@@ -1813,7 +1814,8 @@ namespace Internal.JitInterface
                     }
                     else
                     {
-                        return (CorInfoCallConvExtension)PlatformDefaultUnmanagedCallingConvention();
+                        return (CorInfoCallConvExtension)
+                            PlatformDefaultUnmanagedCallingConvention();
                     }
                 default:
                     ThrowHelper.ThrowInvalidProgramException();
@@ -2020,9 +2022,10 @@ namespace Internal.JitInterface
                                because there was a literal typeof(__Canon) in the compiled IL - check for that
                                by resolving the token in the definition. */
                             (
-                                (TypeDesc)methodIL
-                                    .GetMethodILScopeDefinition()
-                                    .GetObject((int)pResolvedToken.token)
+                                (TypeDesc)
+                                    methodIL
+                                        .GetMethodILScopeDefinition()
+                                        .GetObject((int)pResolvedToken.token)
                             ).IsCanonicalDefinitionType(CanonicalFormKind.Any)
                     );
                 }
@@ -3626,9 +3629,10 @@ namespace Internal.JitInterface
                 methodDefinition as TypeSystem.Ecma.EcmaMethod;
             if (ecmaMethodDefinition != null)
             {
-                return (mdToken)System.Reflection.Metadata.Ecma335.MetadataTokens.GetToken(
-                    ecmaMethodDefinition.Handle
-                );
+                return (mdToken)
+                    System.Reflection.Metadata.Ecma335.MetadataTokens.GetToken(
+                        ecmaMethodDefinition.Handle
+                    );
             }
 
             return 0;
@@ -4356,10 +4360,8 @@ namespace Internal.JitInterface
                     return (ushort)ILCompiler.DependencyAnalysis.RelocType.IMAGE_REL_BASED_REL32;
 
                 case TargetArchitecture.ARM:
-                    return (ushort)ILCompiler
-                        .DependencyAnalysis
-                        .RelocType
-                        .IMAGE_REL_BASED_THUMB_BRANCH24;
+                    return (ushort)
+                        ILCompiler.DependencyAnalysis.RelocType.IMAGE_REL_BASED_THUMB_BRANCH24;
 
                 default:
                     return UInt16.MaxValue;
@@ -4578,9 +4580,8 @@ namespace Internal.JitInterface
                 nativeSchemas[i].ILOffset = pgoResultsSchemas[i].ILOffset;
                 nativeSchemas[i].Count = pgoResultsSchemas[i].Count;
                 nativeSchemas[i].Other = pgoResultsSchemas[i].Other;
-                nativeSchemas[i].InstrumentationKind = (PgoInstrumentationKind)pgoResultsSchemas[
-                    i
-                ].InstrumentationKind;
+                nativeSchemas[i].InstrumentationKind = (PgoInstrumentationKind)
+                    pgoResultsSchemas[i].InstrumentationKind;
 
                 if (pgoResultsSchemas[i].DataObject == null)
                 {

@@ -1196,8 +1196,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         anyNonTypeMembers = true;
 
                         // Handle in the same way as explicit method implementations
-                        var opDecl =
-                            (Syntax.InternalSyntax.ConversionOperatorDeclarationSyntax)member;
+                        var opDecl = (Syntax.InternalSyntax.ConversionOperatorDeclarationSyntax)
+                            member;
 
                         if (opDecl.ExplicitInterfaceSpecifier == null)
                         {

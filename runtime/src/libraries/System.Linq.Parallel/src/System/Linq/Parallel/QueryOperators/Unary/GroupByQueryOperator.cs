@@ -141,10 +141,8 @@ namespace System.Linq.Parallel
                     >(hashStream[i], _keyComparer, cancellationToken);
 
                     outputStream[i] =
-                        (QueryOperatorEnumerator<
-                            IGrouping<TGroupKey, TElement>,
-                            TKey
-                        >)(object)enumerator;
+                        (QueryOperatorEnumerator<IGrouping<TGroupKey, TElement>, TKey>)
+                            (object)enumerator;
                 }
                 else
                 {
@@ -196,10 +194,8 @@ namespace System.Linq.Parallel
                     >(hashStream[i], _keySelector, _keyComparer, orderComparer, cancellationToken);
 
                     outputStream[i] =
-                        (QueryOperatorEnumerator<
-                            IGrouping<TGroupKey, TElement>,
-                            TKey
-                        >)(object)enumerator;
+                        (QueryOperatorEnumerator<IGrouping<TGroupKey, TElement>, TKey>)
+                            (object)enumerator;
                 }
                 else
                 {
@@ -251,10 +247,8 @@ namespace System.Linq.Parallel
             if (_elementSelector == null)
             {
                 Debug.Assert(typeof(TElement) == typeof(TSource));
-                return (IEnumerable<IGrouping<TGroupKey, TElement>>)wrappedChild.GroupBy(
-                    _keySelector,
-                    _keyComparer
-                );
+                return (IEnumerable<IGrouping<TGroupKey, TElement>>)
+                    wrappedChild.GroupBy(_keySelector, _keyComparer);
             }
             else
             {

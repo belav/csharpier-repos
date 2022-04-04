@@ -103,8 +103,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             if (testHost == TestHost.OutOfProcess)
             {
-                var remoteHostProvider =
-                    (InProcRemoteHostClientProvider)workspace.Services.GetRequiredService<IRemoteHostClientProvider>();
+                var remoteHostProvider = (InProcRemoteHostClientProvider)
+                    workspace.Services.GetRequiredService<IRemoteHostClientProvider>();
                 remoteHostProvider.TraceListener = new XunitTraceListener(_logger);
             }
 

@@ -144,11 +144,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             var projectDir = (string)dteProject.Properties.Item("FullPath").Value;
             var outputFileName = (string)dteProject.Properties.Item("OutputFileName").Value;
             var defaultNamespace = (string)dteProject.Properties.Item("DefaultNamespace").Value;
-            var targetFrameworkMoniker = (string)dteProject.Properties
-                .Item("TargetFrameworkMoniker")
-                .Value;
-            var relativeOutputPath =
-                (string)dteProject.ConfigurationManager.ActiveConfiguration.Properties
+            var targetFrameworkMoniker = (string)
+                dteProject.Properties.Item("TargetFrameworkMoniker").Value;
+            var relativeOutputPath = (string)
+                dteProject.ConfigurationManager.ActiveConfiguration.Properties
                     .Item("OutputPath")
                     .Value;
 

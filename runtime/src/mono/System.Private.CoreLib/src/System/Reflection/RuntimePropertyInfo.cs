@@ -400,12 +400,8 @@ namespace System.Reflection
                 BindingFlags.Static | BindingFlags.NonPublic
             )!;
             adapterFrame = adapterFrame.MakeGenericMethod(typeVector);
-            return (GetterAdapter)Delegate.CreateDelegate(
-                typeof(GetterAdapter),
-                getterDelegate,
-                adapterFrame,
-                true
-            );
+            return (GetterAdapter)
+                Delegate.CreateDelegate(typeof(GetterAdapter), getterDelegate, adapterFrame, true);
         }
 
         public override object? GetValue(object? obj, object?[]? index)

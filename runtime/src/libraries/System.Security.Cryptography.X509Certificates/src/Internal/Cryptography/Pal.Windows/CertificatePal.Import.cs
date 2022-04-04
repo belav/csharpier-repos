@@ -181,8 +181,8 @@ namespace Internal.Cryptography.Pal
                 )
                     throw Marshal.GetHRForLastWin32Error().ToCryptographicException();
 
-                CMSG_SIGNER_INFO_Partial* pCmsgSignerInfo =
-                    (CMSG_SIGNER_INFO_Partial*)pCmsgSignerBytes;
+                CMSG_SIGNER_INFO_Partial* pCmsgSignerInfo = (CMSG_SIGNER_INFO_Partial*)
+                    pCmsgSignerBytes;
 
                 Interop.Crypt32.CERT_INFO certInfo = default(Interop.Crypt32.CERT_INFO);
                 certInfo.Issuer.cbData = pCmsgSignerInfo->Issuer.cbData;

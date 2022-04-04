@@ -1010,11 +1010,12 @@ class C
                 Array.Empty<MetadataReference>()
             );
 
-            var symbol = (IPropertySymbol)GetAllSymbols(
-                    compilation1.GetSemanticModel(compilation1.SyntaxTrees.Single()),
-                    n => n is CSharp.Syntax.PropertyDeclarationSyntax
-                )
-                .Single();
+            var symbol = (IPropertySymbol)
+                GetAllSymbols(
+                        compilation1.GetSemanticModel(compilation1.SyntaxTrees.Single()),
+                        n => n is CSharp.Syntax.PropertyDeclarationSyntax
+                    )
+                    .Single();
 
             var propType = symbol.Type;
             Assert.Equal(SymbolKind.ErrorType, propType.Kind);
@@ -1058,11 +1059,12 @@ end class";
                 Array.Empty<MetadataReference>()
             );
 
-            var symbol = (IPropertySymbol)GetAllSymbols(
-                    compilation1.GetSemanticModel(compilation1.SyntaxTrees.Single()),
-                    n => n is VisualBasic.Syntax.PropertyStatementSyntax
-                )
-                .Single();
+            var symbol = (IPropertySymbol)
+                GetAllSymbols(
+                        compilation1.GetSemanticModel(compilation1.SyntaxTrees.Single()),
+                        n => n is VisualBasic.Syntax.PropertyStatementSyntax
+                    )
+                    .Single();
 
             var propType = symbol.Type;
             Assert.Equal(SymbolKind.ErrorType, propType.Kind);
@@ -1113,11 +1115,12 @@ class X
                 new[] { compilation1.ToMetadataReference() }
             );
 
-            var symbol = (IPropertySymbol)GetAllSymbols(
-                    compilation2.GetSemanticModel(compilation2.SyntaxTrees.Single()),
-                    n => n is CSharp.Syntax.MemberAccessExpressionSyntax
-                )
-                .Single();
+            var symbol = (IPropertySymbol)
+                GetAllSymbols(
+                        compilation2.GetSemanticModel(compilation2.SyntaxTrees.Single()),
+                        n => n is CSharp.Syntax.MemberAccessExpressionSyntax
+                    )
+                    .Single();
 
             var propType = symbol.Type;
             Assert.Equal(SymbolKind.ErrorType, propType.Kind);
@@ -1168,11 +1171,12 @@ end class";
                 new[] { compilation1.ToMetadataReference() }
             );
 
-            var symbol = (IPropertySymbol)GetAllSymbols(
-                    compilation2.GetSemanticModel(compilation2.SyntaxTrees.Single()),
-                    n => n is VisualBasic.Syntax.MemberAccessExpressionSyntax
-                )
-                .Single();
+            var symbol = (IPropertySymbol)
+                GetAllSymbols(
+                        compilation2.GetSemanticModel(compilation2.SyntaxTrees.Single()),
+                        n => n is VisualBasic.Syntax.MemberAccessExpressionSyntax
+                    )
+                    .Single();
 
             var propType = symbol.Type;
             Assert.Equal(SymbolKind.ErrorType, propType.Kind);

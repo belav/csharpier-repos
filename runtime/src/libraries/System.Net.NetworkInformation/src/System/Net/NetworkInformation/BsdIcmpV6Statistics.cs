@@ -44,10 +44,10 @@ namespace System.Net.NetworkInformation
                 throw new NetworkInformationException(SR.net_PInvokeError);
             }
 
-            _destinationUnreachableMessagesReceived =
-                (long)statistics.DestinationUnreachableMessagesReceived;
-            _destinationUnreachableMessagesSent =
-                (long)statistics.DestinationUnreachableMessagesSent;
+            _destinationUnreachableMessagesReceived = (long)
+                statistics.DestinationUnreachableMessagesReceived;
+            _destinationUnreachableMessagesSent = (long)
+                statistics.DestinationUnreachableMessagesSent;
             _echoRepliesReceived = (long)statistics.EchoRepliesReceived;
             _echoRepliesSent = (long)statistics.EchoRepliesSent;
             _echoRequestsReceived = (long)statistics.EchoRequestsReceived;

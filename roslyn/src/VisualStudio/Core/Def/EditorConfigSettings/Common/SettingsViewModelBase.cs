@@ -77,12 +77,13 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Common
         {
             var initialColumnStates = GetInitialColumnStates();
             var fixedColumns = GetFixedColumns();
-            return (IWpfTableControl4)_controlProvider.CreateControl(
-                _tableManager,
-                true,
-                initialColumnStates,
-                fixedColumns
-            );
+            return (IWpfTableControl4)
+                _controlProvider.CreateControl(
+                    _tableManager,
+                    true,
+                    initialColumnStates,
+                    fixedColumns
+                );
         }
 
         public void ShutDown() => _ = _tableManager.RemoveSource(this);

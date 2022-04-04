@@ -62,10 +62,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
                 var service = EditAndContinueCapabilitiesParser.Parse(capabilities);
 
-                var flag = (EditAndContinueCapabilities)Enum.Parse(
-                    typeof(EditAndContinueCapabilities),
-                    name
-                );
+                var flag = (EditAndContinueCapabilities)
+                    Enum.Parse(typeof(EditAndContinueCapabilities), name);
                 Assert.True(
                     service.HasFlag(flag),
                     $"Capability '{name}' was not parsed correctly, so it's impossible for a runtime to enable it!"

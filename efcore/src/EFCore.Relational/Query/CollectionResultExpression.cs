@@ -61,9 +61,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <inheritdoc />
         protected override Expression VisitChildren(ExpressionVisitor visitor)
         {
-            var projectionBindingExpression = (ProjectionBindingExpression)visitor.Visit(
-                ProjectionBindingExpression
-            );
+            var projectionBindingExpression = (ProjectionBindingExpression)
+                visitor.Visit(ProjectionBindingExpression);
 
             return Update(projectionBindingExpression);
         }

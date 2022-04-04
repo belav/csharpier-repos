@@ -421,8 +421,8 @@ namespace System.Net.Security
             ref ContextFlagsPal contextFlags
         )
         {
-            SafeFreeNegoCredentials negoCredentialsHandle =
-                (SafeFreeNegoCredentials)credentialsHandle;
+            SafeFreeNegoCredentials negoCredentialsHandle = (SafeFreeNegoCredentials)
+                credentialsHandle;
 
             if (negoCredentialsHandle.IsDefault && string.IsNullOrEmpty(spn))
             {

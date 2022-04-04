@@ -178,9 +178,8 @@ namespace System.DirectoryServices.AccountManagement
 
                 foreach (FilterBase filter in filters.FiltersToApply)
                 {
-                    FilterPropertyTableEntry entry = (FilterPropertyTableEntry)filterTable[
-                        filter.GetType()
-                    ];
+                    FilterPropertyTableEntry entry = (FilterPropertyTableEntry)
+                        filterTable[filter.GetType()];
 
                     if (entry == null)
                     {

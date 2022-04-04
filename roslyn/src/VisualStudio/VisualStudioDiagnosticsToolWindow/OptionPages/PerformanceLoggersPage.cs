@@ -37,9 +37,8 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow.OptionsPages
         {
             if (_globalOptions == null)
             {
-                var componentModel = (IComponentModel)serviceProvider.GetService(
-                    typeof(SComponentModel)
-                );
+                var componentModel = (IComponentModel)
+                    serviceProvider.GetService(typeof(SComponentModel));
 
                 _globalOptions = componentModel.GetService<IGlobalOptionService>();
                 _threadingContext = componentModel.GetService<IThreadingContext>();

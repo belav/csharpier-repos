@@ -2557,30 +2557,24 @@ namespace System.Text.RegularExpressions.Tests
                             () =>
                                 new Regex(
                                     Pattern,
-                                    (RegexOptions)int.Parse(
-                                        optionsString,
-                                        CultureInfo.InvariantCulture
-                                    )
+                                    (RegexOptions)
+                                        int.Parse(optionsString, CultureInfo.InvariantCulture)
                                 ).Match(input)
                         );
                         Assert.Throws<RegexMatchTimeoutException>(
                             () =>
                                 new Regex(
                                     Pattern,
-                                    (RegexOptions)int.Parse(
-                                        optionsString,
-                                        CultureInfo.InvariantCulture
-                                    )
+                                    (RegexOptions)
+                                        int.Parse(optionsString, CultureInfo.InvariantCulture)
                                 ).IsMatch(input)
                         );
                         Assert.Throws<RegexMatchTimeoutException>(
                             () =>
                                 new Regex(
                                     Pattern,
-                                    (RegexOptions)int.Parse(
-                                        optionsString,
-                                        CultureInfo.InvariantCulture
-                                    )
+                                    (RegexOptions)
+                                        int.Parse(optionsString, CultureInfo.InvariantCulture)
                                 )
                                     .Matches(input)
                                     .Count
@@ -2591,10 +2585,8 @@ namespace System.Text.RegularExpressions.Tests
                                 Regex.Match(
                                     input,
                                     Pattern,
-                                    (RegexOptions)int.Parse(
-                                        optionsString,
-                                        CultureInfo.InvariantCulture
-                                    )
+                                    (RegexOptions)
+                                        int.Parse(optionsString, CultureInfo.InvariantCulture)
                                 )
                         );
                         Assert.Throws<RegexMatchTimeoutException>(
@@ -2602,10 +2594,8 @@ namespace System.Text.RegularExpressions.Tests
                                 Regex.IsMatch(
                                     input,
                                     Pattern,
-                                    (RegexOptions)int.Parse(
-                                        optionsString,
-                                        CultureInfo.InvariantCulture
-                                    )
+                                    (RegexOptions)
+                                        int.Parse(optionsString, CultureInfo.InvariantCulture)
                                 )
                         );
                         Assert.Throws<RegexMatchTimeoutException>(
@@ -2614,10 +2604,8 @@ namespace System.Text.RegularExpressions.Tests
                                     .Matches(
                                         input,
                                         Pattern,
-                                        (RegexOptions)int.Parse(
-                                            optionsString,
-                                            CultureInfo.InvariantCulture
-                                        )
+                                        (RegexOptions)
+                                            int.Parse(optionsString, CultureInfo.InvariantCulture)
                                     )
                                     .Count
                         );

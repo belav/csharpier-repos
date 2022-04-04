@@ -389,9 +389,8 @@ public unsafe class Program
         Assert.Throws<NotSupportedException>(
             () =>
                 (
-                    (delegate* unmanaged<
-                        int,
-                        int>)&CallingUnmanagedCallersOnlyDirectly.PInvokeMarkedWithUnmanagedCallersOnly
+                    (delegate* unmanaged<int, int>)
+                        &CallingUnmanagedCallersOnlyDirectly.PInvokeMarkedWithUnmanagedCallersOnly
                 )(n)
         );
     }

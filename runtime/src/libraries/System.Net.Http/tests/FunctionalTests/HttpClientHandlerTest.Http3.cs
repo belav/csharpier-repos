@@ -37,8 +37,8 @@ namespace System.Net.Http.Functional.Tests
             Task serverTask = Task.Run(
                 async () =>
                 {
-                    using Http3LoopbackConnection connection =
-                        (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
+                    using Http3LoopbackConnection connection = (Http3LoopbackConnection)
+                        await server.EstablishGenericConnectionAsync();
 
                     (Http3LoopbackStream settingsStream, Http3LoopbackStream requestStream) =
                         await connection.AcceptControlAndRequestStreamAsync();
@@ -103,8 +103,8 @@ namespace System.Net.Http.Functional.Tests
             Task serverTask = Task.Run(
                 async () =>
                 {
-                    using Http3LoopbackConnection connection =
-                        (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
+                    using Http3LoopbackConnection connection = (Http3LoopbackConnection)
+                        await server.EstablishGenericConnectionAsync();
                     for (int i = 0; i < streamLimit + 1; ++i)
                     {
                         using Http3LoopbackStream stream =
@@ -153,8 +153,8 @@ namespace System.Net.Http.Functional.Tests
             Task serverTask = Task.Run(
                 async () =>
                 {
-                    using Http3LoopbackConnection connection =
-                        (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
+                    using Http3LoopbackConnection connection = (Http3LoopbackConnection)
+                        await server.EstablishGenericConnectionAsync();
                     for (int i = 0; i < streamLimit; ++i)
                     {
                         using Http3LoopbackStream stream =
@@ -222,8 +222,8 @@ namespace System.Net.Http.Functional.Tests
                 async () =>
                 {
                     // Read the first streamLimit requests, keep the streams open to make the last one wait.
-                    using Http3LoopbackConnection connection =
-                        (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
+                    using Http3LoopbackConnection connection = (Http3LoopbackConnection)
+                        await server.EstablishGenericConnectionAsync();
                     var streams = new Http3LoopbackStream[streamLimit];
                     for (int i = 0; i < streamLimit; ++i)
                     {
@@ -345,8 +345,8 @@ namespace System.Net.Http.Functional.Tests
             Task serverTask = Task.Run(
                 async () =>
                 {
-                    using Http3LoopbackConnection connection =
-                        (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
+                    using Http3LoopbackConnection connection = (Http3LoopbackConnection)
+                        await server.EstablishGenericConnectionAsync();
                     using Http3LoopbackStream stream = await connection.AcceptRequestStreamAsync();
 
                     await stream.SendFrameAsync(ReservedHttp2PriorityFrameId, new byte[8]);
@@ -397,8 +397,8 @@ namespace System.Net.Http.Functional.Tests
             Task serverTask = Task.Run(
                 async () =>
                 {
-                    using Http3LoopbackConnection connection =
-                        (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
+                    using Http3LoopbackConnection connection = (Http3LoopbackConnection)
+                        await server.EstablishGenericConnectionAsync();
                     using Http3LoopbackStream stream = await connection.AcceptRequestStreamAsync();
                     HttpRequestData request = await stream.ReadRequestDataAsync();
                     await stream.SendResponseHeadersAsync();
@@ -467,8 +467,8 @@ namespace System.Net.Http.Functional.Tests
             Task serverTask = Task.Run(
                 async () =>
                 {
-                    using Http3LoopbackConnection connection =
-                        (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
+                    using Http3LoopbackConnection connection = (Http3LoopbackConnection)
+                        await server.EstablishGenericConnectionAsync();
                     using Http3LoopbackStream stream = await connection.AcceptRequestStreamAsync();
                     HttpRequestData request = await stream.ReadRequestDataAsync(false);
                     await stream.SendResponseHeadersAsync();
@@ -555,8 +555,8 @@ namespace System.Net.Http.Functional.Tests
             Task serverTask = Task.Run(
                 async () =>
                 {
-                    using Http3LoopbackConnection connection =
-                        (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
+                    using Http3LoopbackConnection connection = (Http3LoopbackConnection)
+                        await server.EstablishGenericConnectionAsync();
                     using Http3LoopbackStream stream = await connection.AcceptRequestStreamAsync();
                     await stream.HandleRequestAsync();
                     using Http3LoopbackStream stream2 = await connection.AcceptRequestStreamAsync();
@@ -601,8 +601,8 @@ namespace System.Net.Http.Functional.Tests
             Task serverTask = Task.Run(
                 async () =>
                 {
-                    using Http3LoopbackConnection connection =
-                        (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
+                    using Http3LoopbackConnection connection = (Http3LoopbackConnection)
+                        await server.EstablishGenericConnectionAsync();
                     using Http3LoopbackStream stream = await connection.AcceptRequestStreamAsync();
 
                     // Receive headers and unblock the client.
@@ -656,8 +656,8 @@ namespace System.Net.Http.Functional.Tests
             Task serverTask = Task.Run(
                 async () =>
                 {
-                    using Http3LoopbackConnection connection =
-                        (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
+                    using Http3LoopbackConnection connection = (Http3LoopbackConnection)
+                        await server.EstablishGenericConnectionAsync();
                     HttpRequestData request = await connection.ReadRequestDataAsync();
                     await connection.SendResponseAsync();
 
@@ -824,8 +824,8 @@ namespace System.Net.Http.Functional.Tests
             Task serverTask = Task.Run(
                 async () =>
                 {
-                    using Http3LoopbackConnection connection =
-                        (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
+                    using Http3LoopbackConnection connection = (Http3LoopbackConnection)
+                        await server.EstablishGenericConnectionAsync();
                     using Http3LoopbackStream stream = await connection.AcceptRequestStreamAsync();
 
                     HttpRequestData request = await stream
@@ -935,8 +935,8 @@ namespace System.Net.Http.Functional.Tests
             Task serverTask = Task.Run(
                 async () =>
                 {
-                    using Http3LoopbackConnection connection =
-                        (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
+                    using Http3LoopbackConnection connection = (Http3LoopbackConnection)
+                        await server.EstablishGenericConnectionAsync();
                     using Http3LoopbackStream stream = await connection.AcceptRequestStreamAsync();
 
                     HttpRequestData request = await stream
@@ -1050,8 +1050,8 @@ namespace System.Net.Http.Functional.Tests
             Task serverTask = Task.Run(
                 async () =>
                 {
-                    connection =
-                        (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
+                    connection = (Http3LoopbackConnection)
+                        await server.EstablishGenericConnectionAsync();
                     using Http3LoopbackStream stream = await connection.AcceptRequestStreamAsync();
                     await stream.HandleRequestAsync();
                 }
@@ -1178,8 +1178,8 @@ namespace System.Net.Http.Functional.Tests
             Task serverTask = Task.Run(
                 async () =>
                 {
-                    connection =
-                        (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
+                    connection = (Http3LoopbackConnection)
+                        await server.EstablishGenericConnectionAsync();
                     using Http3LoopbackStream stream = await connection.AcceptRequestStreamAsync();
 
                     HttpRequestData request = await stream
@@ -1238,8 +1238,8 @@ namespace System.Net.Http.Functional.Tests
             Task serverTask = Task.Run(
                 async () =>
                 {
-                    connection =
-                        (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
+                    connection = (Http3LoopbackConnection)
+                        await server.EstablishGenericConnectionAsync();
                     serverStream = await connection.AcceptRequestStreamAsync();
 
                     HttpRequestData requestData = await serverStream
@@ -1348,8 +1348,8 @@ namespace System.Net.Http.Functional.Tests
             Task serverTask = Task.Run(
                 async () =>
                 {
-                    connection =
-                        (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
+                    connection = (Http3LoopbackConnection)
+                        await server.EstablishGenericConnectionAsync();
                     serverStream = await connection.AcceptRequestStreamAsync();
 
                     await serverStream.HandleRequestAsync();
@@ -1433,8 +1433,8 @@ namespace System.Net.Http.Functional.Tests
             Task serverTask = Task.Run(
                 async () =>
                 {
-                    connection =
-                        (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
+                    connection = (Http3LoopbackConnection)
+                        await server.EstablishGenericConnectionAsync();
                     serverStream = await connection.AcceptRequestStreamAsync();
 
                     await serverStream.HandleRequestAsync();
@@ -1519,8 +1519,8 @@ namespace System.Net.Http.Functional.Tests
             Task serverTask = Task.Run(
                 async () =>
                 {
-                    connection =
-                        (Http3LoopbackConnection)await server.EstablishGenericConnectionAsync();
+                    connection = (Http3LoopbackConnection)
+                        await server.EstablishGenericConnectionAsync();
                     serverStream = await connection.AcceptRequestStreamAsync();
 
                     HttpRequestData requestData = await serverStream

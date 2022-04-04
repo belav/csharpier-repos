@@ -2216,9 +2216,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         private DiagnosticInfo GetBadEventUsageDiagnosticInfo(EventSymbol eventSymbol)
         {
-            var leastOverridden = (EventSymbol)eventSymbol.GetLeastOverriddenMember(
-                this.ContainingType
-            );
+            var leastOverridden = (EventSymbol)
+                eventSymbol.GetLeastOverriddenMember(this.ContainingType);
             return leastOverridden.HasAssociatedField
               ? new CSDiagnosticInfo(
                     ErrorCode.ERR_BadEventUsage,

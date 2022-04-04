@@ -83,18 +83,19 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             List<Exception> errors = new List<Exception>();
 
-            JObject a2 = (JObject)JsonConvert.DeserializeObject(
-                @"{""$type"":""<Namespace>.JsonTest+MyTest2, <Assembly>""}",
-                new JsonSerializerSettings
-                {
-                    TypeNameHandling = TypeNameHandling.Auto,
-                    Error = (object sender, Json.Serialization.ErrorEventArgs e) =>
+            JObject a2 = (JObject)
+                JsonConvert.DeserializeObject(
+                    @"{""$type"":""<Namespace>.JsonTest+MyTest2, <Assembly>""}",
+                    new JsonSerializerSettings
                     {
-                        errors.Add(e.ErrorContext.Error);
-                        e.ErrorContext.Handled = true;
+                        TypeNameHandling = TypeNameHandling.Auto,
+                        Error = (object sender, Json.Serialization.ErrorEventArgs e) =>
+                        {
+                            errors.Add(e.ErrorContext.Error);
+                            e.ErrorContext.Handled = true;
+                        }
                     }
-                }
-            );
+                );
 
             Assert.IsNull(a2);
             Assert.AreEqual(1, errors.Count);

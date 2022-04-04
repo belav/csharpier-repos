@@ -152,9 +152,8 @@ namespace System.Net.Http.Tests
         public void Clone_Call_CloneFieldsMatchSourceFields()
         {
             StringWithQualityHeaderValue source = new StringWithQualityHeaderValue("token", 0.123);
-            StringWithQualityHeaderValue clone = (StringWithQualityHeaderValue)(
-                (ICloneable)source
-            ).Clone();
+            StringWithQualityHeaderValue clone = (StringWithQualityHeaderValue)
+                ((ICloneable)source).Clone();
             Assert.Equal(source.Value, clone.Value);
             Assert.Equal(source.Quality, clone.Quality);
 

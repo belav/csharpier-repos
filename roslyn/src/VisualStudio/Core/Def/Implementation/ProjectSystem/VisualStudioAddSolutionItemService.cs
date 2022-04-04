@@ -45,9 +45,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         public void Initialize(IServiceProvider serviceProvider)
         {
             _dte = (DTE)serviceProvider.GetService(typeof(DTE));
-            _fileChangeService = (IVsFileChangeEx)serviceProvider.GetService(
-                typeof(SVsFileChangeEx)
-            );
+            _fileChangeService = (IVsFileChangeEx)
+                serviceProvider.GetService(typeof(SVsFileChangeEx));
         }
 
         public void TrackFilePathAndAddSolutionItemWhenFileCreated(string filePath)

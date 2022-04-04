@@ -368,9 +368,8 @@ namespace System.Security.AccessControl
                 }
             }
 
-            SecurityIdentifier sid = (SecurityIdentifier)rule.IdentityReference.Translate(
-                typeof(SecurityIdentifier)
-            );
+            SecurityIdentifier sid = (SecurityIdentifier)
+                rule.IdentityReference.Translate(typeof(SecurityIdentifier));
 
             Debug.Assert(SecurityDescriptor.DiscretionaryAcl != null);
             if (rule.AccessControlType == AccessControlType.Allow)
@@ -608,9 +607,8 @@ namespace System.Security.AccessControl
                 }
             }
 
-            SecurityIdentifier sid = (SecurityIdentifier)rule.IdentityReference.Translate(
-                typeof(SecurityIdentifier)
-            );
+            SecurityIdentifier sid = (SecurityIdentifier)
+                rule.IdentityReference.Translate(typeof(SecurityIdentifier));
 
             Debug.Assert(SecurityDescriptor.SystemAcl != null);
             switch (modification)

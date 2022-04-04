@@ -29,9 +29,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             new object()
         );
 
-        private static readonly DataType[] s_dataTypes = (DataType[])Enum.GetValues(
-            typeof(DataType)
-        );
+        private static readonly DataType[] s_dataTypes = (DataType[])
+            Enum.GetValues(typeof(DataType));
         public static IEnumerable<object[]> DataTypes_TestData =>
             s_dataTypes.Select(type => new object[] { type });
 

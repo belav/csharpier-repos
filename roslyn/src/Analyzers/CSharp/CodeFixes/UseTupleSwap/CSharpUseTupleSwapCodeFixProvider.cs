@@ -69,19 +69,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UseTupleSwap
             CancellationToken cancellationToken
         )
         {
-            var localDeclarationStatement =
-                (LocalDeclarationStatementSyntax)diagnostic.AdditionalLocations[0].FindNode(
-                    cancellationToken
-                );
+            var localDeclarationStatement = (LocalDeclarationStatementSyntax)
+                diagnostic.AdditionalLocations[0].FindNode(cancellationToken);
             // `expr_a = expr_b`;
-            var firstAssignmentStatement =
-                (ExpressionStatementSyntax)diagnostic.AdditionalLocations[1].FindNode(
-                    cancellationToken
-                );
-            var secondAssignmentStatment =
-                (ExpressionStatementSyntax)diagnostic.AdditionalLocations[2].FindNode(
-                    cancellationToken
-                );
+            var firstAssignmentStatement = (ExpressionStatementSyntax)
+                diagnostic.AdditionalLocations[1].FindNode(cancellationToken);
+            var secondAssignmentStatment = (ExpressionStatementSyntax)
+                diagnostic.AdditionalLocations[2].FindNode(cancellationToken);
 
             editor.RemoveNode(firstAssignmentStatement);
             editor.RemoveNode(secondAssignmentStatment);

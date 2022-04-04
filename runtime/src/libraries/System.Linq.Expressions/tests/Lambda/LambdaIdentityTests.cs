@@ -79,14 +79,16 @@ namespace System.Linq.Expressions.Tests
                 Delegate value in new Delegate[]
                 {
                     null,
-                    (Func<object>)delegate()
-                    {
-                        return null;
-                    },
-                    (Func<int, int>)delegate(int i)
-                    {
-                        return i + 1;
-                    },
+                    (Func<object>)
+                        delegate()
+                        {
+                            return null;
+                        },
+                    (Func<int, int>)
+                        delegate(int i)
+                        {
+                            return i + 1;
+                        },
                     (Action<object>)delegate { }
                 }
             )
@@ -166,10 +168,11 @@ namespace System.Linq.Expressions.Tests
                 Func<object> value in new Func<object>[]
                 {
                     null,
-                    (Func<object>)delegate()
-                    {
-                        return null;
-                    }
+                    (Func<object>)
+                        delegate()
+                        {
+                            return null;
+                        }
                 }
             )
             {

@@ -336,12 +336,8 @@ namespace System.Reflection.Context.Custom
                 if (binder == null)
                     binder = Type.DefaultBinder;
 
-                return (MethodInfo?)binder.SelectMethod(
-                    bindingAttr,
-                    matchingMethods.ToArray(),
-                    types,
-                    modifiers
-                );
+                return (MethodInfo?)
+                    binder.SelectMethod(bindingAttr, matchingMethods.ToArray(), types, modifiers);
             }
         }
 

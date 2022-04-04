@@ -197,9 +197,8 @@ namespace System.Runtime.InteropServices.JavaScript
                 public bool MoveNext()
                 {
                     if (_mapItemIterator == null)
-                        _mapItemIterator = (JSObject)_mapItemCollection._map.Invoke(
-                            _mapItemCollection._iterator
-                        );
+                        _mapItemIterator = (JSObject)
+                            _mapItemCollection._map.Invoke(_mapItemCollection._iterator);
 
                     var done = false;
                     using (var result = (JSObject)_mapItemIterator.Invoke("next"))

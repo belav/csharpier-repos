@@ -23,10 +23,8 @@ unsafe internal class CheckGCMode
         );
         if (getFunctionPtr != null)
         {
-            var isInCooperativeModeFunc = (delegate* unmanaged<int>)(IntPtr)getFunctionPtr.Invoke(
-                null,
-                null
-            );
+            var isInCooperativeModeFunc = (delegate* unmanaged<int>)
+                (IntPtr)getFunctionPtr.Invoke(null, null);
             setIsInCooperativeModeFunction(isInCooperativeModeFunc);
             Enabled = true;
             Console.WriteLine("Explicit GC mode check is enabled");

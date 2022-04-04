@@ -627,9 +627,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                         // Since we lift nested client projections for single results up, we may need to re-clone the baseSelectExpression
                         // again so it does contain the single result subquery too. We erase projections for it since it would be non-empty.
                         earlierClientProjectionCount = _clientProjections.Count;
-                        baseSelectExpression = (SelectExpression)cloningExpressionVisitor!.Visit(
-                            this
-                        );
+                        baseSelectExpression = (SelectExpression)
+                            cloningExpressionVisitor!.Visit(this);
                         baseSelectExpression._projection.Clear();
                     }
 
@@ -662,8 +661,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                                   || shapedQueryExpression.ResultCardinality
                                       == ResultCardinality.SingleOrDefault:
                         {
-                            var innerSelectExpression =
-                                (SelectExpression)shapedQueryExpression.QueryExpression;
+                            var innerSelectExpression = (SelectExpression)
+                                shapedQueryExpression.QueryExpression;
                             var innerShaperExpression = shapedQueryExpression.ShaperExpression;
                             if (innerSelectExpression._clientProjections.Count == 0)
                             {
@@ -766,8 +765,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                               when shapedQueryExpression.ResultCardinality
                                   == ResultCardinality.Enumerable:
                         {
-                            var innerSelectExpression =
-                                (SelectExpression)shapedQueryExpression.QueryExpression;
+                            var innerSelectExpression = (SelectExpression)
+                                shapedQueryExpression.QueryExpression;
                             if (
                                 _identifier.Count == 0
                                 || innerSelectExpression._identifier.Count == 0
@@ -794,12 +793,10 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
 
                             if (querySplittingBehavior == QuerySplittingBehavior.SplitQuery)
                             {
-                                var outerSelectExpression =
-                                    (SelectExpression)cloningExpressionVisitor!.Visit(
-                                        baseSelectExpression!
-                                    );
-                                innerSelectExpression =
-                                    (SelectExpression)new ColumnExpressionReplacingExpressionVisitor(
+                                var outerSelectExpression = (SelectExpression)
+                                    cloningExpressionVisitor!.Visit(baseSelectExpression!);
+                                innerSelectExpression = (SelectExpression)
+                                    new ColumnExpressionReplacingExpressionVisitor(
                                         this,
                                         outerSelectExpression
                                     ).Visit(innerSelectExpression);
@@ -893,8 +890,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                                         if (pushdownOccurredWhenJoining)
                                         {
                                             // We lift from inner subquery if pushdown occurred with ordering erased
-                                            var subquery =
-                                                (SelectExpression)collectionJoinedInnerTable;
+                                            var subquery = (SelectExpression)
+                                                collectionJoinedInnerTable;
                                             foreach (var ordering in orderingsToBeErased)
                                             {
                                                 innerOrderingExpressions.Add(
@@ -1011,8 +1008,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                                         if (pushdownOccurredWhenJoining)
                                         {
                                             // We lift from inner subquery if pushdown occurred with ordering erased
-                                            var subquery =
-                                                (SelectExpression)collectionJoinedInnerTable;
+                                            var subquery = (SelectExpression)
+                                                collectionJoinedInnerTable;
                                             foreach (var ordering in orderingsToBeErased)
                                             {
                                                 innerOrderingExpressions.Add(
@@ -1786,9 +1783,10 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             if (_groupBy.Count > 0)
             {
                 orderingExpression = orderingExpression.Update(
-                    (SqlExpression)new GroupByAggregateLiftingExpressionVisitor(this).Visit(
-                        orderingExpression.Expression
-                    )
+                    (SqlExpression)
+                        new GroupByAggregateLiftingExpressionVisitor(this).Visit(
+                            orderingExpression.Expression
+                        )
                 );
             }
 
@@ -2081,12 +2079,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             var setExpression = setOperationType switch
             {
                 SetOperationType.Except
-                  => (SetOperationBase)new ExceptExpression(
-                      setOperationAlias,
-                      select1,
-                      select2,
-                      distinct
-                  ),
+                  => (SetOperationBase)
+                      new ExceptExpression(setOperationAlias, select1, select2, distinct),
                 SetOperationType.Intersect
                   => new IntersectExpression(setOperationAlias, select1, select2, distinct),
                 SetOperationType.Union
@@ -2449,16 +2443,17 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
 
                 if (unwrappedTable is SelectExpression subquery)
                 {
-                    var subqueryIdentifyingColumn = (ColumnExpression)subquery.Projection
-                        .Single(
-                            e =>
-                                string.Equals(
-                                    e.Alias,
-                                    columnName,
-                                    StringComparison.OrdinalIgnoreCase
-                                )
-                        )
-                        .Expression;
+                    var subqueryIdentifyingColumn = (ColumnExpression)
+                        subquery.Projection
+                            .Single(
+                                e =>
+                                    string.Equals(
+                                        e.Alias,
+                                        columnName,
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
+                            )
+                            .Expression;
 
                     var subqueryPropertyExpressions = GetPropertyExpressionFromSameTable(
                         entityType,
@@ -3700,8 +3695,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                     var boundEntityShaperExpression = entityProjection.BindNavigation(navigation);
                     if (boundEntityShaperExpression != null)
                     {
-                        var innerEntityProjection =
-                            (EntityProjectionExpression)boundEntityShaperExpression.ValueBufferExpression;
+                        var innerEntityProjection = (EntityProjectionExpression)
+                            boundEntityShaperExpression.ValueBufferExpression;
                         var newInnerEntityProjection = LiftEntityProjectionFromSubquery(
                             innerEntityProjection
                         );
@@ -3949,9 +3944,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
 
         private SqlExpression TryLiftGroupByAggregate(SqlExpression sqlExpression) =>
             _groupBy.Count > 0
-                ? (SqlExpression)new GroupByAggregateLiftingExpressionVisitor(this).Visit(
-                      sqlExpression
-                  )
+                ? (SqlExpression)
+                      new GroupByAggregateLiftingExpressionVisitor(this).Visit(sqlExpression)
                 : sqlExpression;
 
         private void AddTable(
@@ -3976,9 +3970,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             UnwrapJoinExpression(tableExpressionBase).Alias = uniqueAlias;
             tableReferenceExpression.Alias = uniqueAlias;
 
-            tableExpressionBase = (TableExpressionBase)new AliasUniquefier(_usedAliases).Visit(
-                tableExpressionBase
-            );
+            tableExpressionBase = (TableExpressionBase)
+                new AliasUniquefier(_usedAliases).Visit(tableExpressionBase);
             _tables.Add(tableExpressionBase);
             _tableReferences.Add(tableReferenceExpression);
         }

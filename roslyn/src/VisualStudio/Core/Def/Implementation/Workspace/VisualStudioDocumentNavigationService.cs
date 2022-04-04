@@ -56,9 +56,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         {
             _serviceProvider = serviceProvider;
             _editorAdaptersFactoryService = editorAdaptersFactoryService;
-            _runningDocumentTable = (IVsRunningDocumentTable4)serviceProvider.GetService(
-                typeof(SVsRunningDocumentTable)
-            );
+            _runningDocumentTable = (IVsRunningDocumentTable4)
+                serviceProvider.GetService(typeof(SVsRunningDocumentTable));
             _threadingContext = threadingContext;
             _sourceGeneratedFileManager = sourceGeneratedFileManager;
         }
@@ -583,9 +582,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     return false;
                 }
 
-                var textManager = (IVsTextManager2)_serviceProvider.GetService(
-                    typeof(SVsTextManager)
-                );
+                var textManager = (IVsTextManager2)
+                    _serviceProvider.GetService(typeof(SVsTextManager));
                 if (textManager == null)
                 {
                     Debug.Fail("Could not get IVsTextManager service!");

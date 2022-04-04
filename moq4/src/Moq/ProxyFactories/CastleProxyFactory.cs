@@ -441,9 +441,8 @@ namespace Moq
                     il.Emit(OpCodes.Ldloc, returnValue);
                     il.Emit(OpCodes.Ret);
 
-                    return (Func<object, object[], object>)dynamicMethod.CreateDelegate(
-                        typeof(Func<object, object[], object>)
-                    );
+                    return (Func<object, object[], object>)
+                        dynamicMethod.CreateDelegate(typeof(Func<object, object[], object>));
                 }
             );
 

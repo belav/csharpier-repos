@@ -30,9 +30,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     return null;
                 }
 
-                var suppressionFixer = (AbstractSuppressionCodeFixProvider)(
-                    (WrapperCodeFixProvider)fixAllContext.CodeFixProvider
-                ).SuppressionFixProvider;
+                var suppressionFixer = (AbstractSuppressionCodeFixProvider)
+                    ((WrapperCodeFixProvider)fixAllContext.CodeFixProvider).SuppressionFixProvider;
 
                 if (
                     NestedSuppressionCodeAction.IsEquivalenceKeyForGlobalSuppression(

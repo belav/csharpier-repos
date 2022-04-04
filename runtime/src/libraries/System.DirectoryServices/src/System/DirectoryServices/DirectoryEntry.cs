@@ -575,9 +575,8 @@ namespace System.DirectoryServices
 
                     //SECREVIEW: Looking at the root of the DS will demand browse permissions
                     //                     on "*" or "LDAP://RootDSE".
-                    string defaultNamingContext = (string)rootDSE.Properties[
-                        "defaultNamingContext"
-                    ][0]!;
+                    string defaultNamingContext = (string)
+                        rootDSE.Properties["defaultNamingContext"][0]!;
                     rootDSE.Dispose();
 
                     pathToUse = "LDAP://" + defaultNamingContext;
@@ -1246,10 +1245,11 @@ namespace System.DirectoryServices
                         (UnsafeNativeMethods.IAdsPropertyList)NativeObject;
 
                     UnsafeNativeMethods.IAdsPropertyEntry propertyEntry =
-                        (UnsafeNativeMethods.IAdsPropertyEntry)list.GetPropertyItem(
-                            SecurityDescriptorProperty,
-                            (int)AdsType.ADSTYPE_OCTET_STRING
-                        );
+                        (UnsafeNativeMethods.IAdsPropertyEntry)
+                            list.GetPropertyItem(
+                                SecurityDescriptorProperty,
+                                (int)AdsType.ADSTYPE_OCTET_STRING
+                            );
                     GC.KeepAlive(this);
 
                     //

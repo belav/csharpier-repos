@@ -1047,9 +1047,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 for (int i = start; i < loweredSymbol.ParameterCount; i++)
                 {
                     // will always be a LambdaFrame, it's always a capture frame
-                    var frameType = (NamedTypeSymbol)loweredSymbol.Parameters[i]
-                        .Type
-                        .OriginalDefinition;
+                    var frameType = (NamedTypeSymbol)
+                        loweredSymbol.Parameters[i].Type.OriginalDefinition;
 
                     Debug.Assert(frameType is SynthesizedClosureEnvironment);
 
@@ -1453,9 +1452,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // It needs to run before the exception variable is accessed.
             // To ensure that, we will make exception variable a sequence that performs prologue as its side-effects.
             BoundExpression rewrittenExceptionSource = null;
-            var rewrittenFilterPrologue = (BoundStatementList)this.Visit(
-                node.ExceptionFilterPrologueOpt
-            );
+            var rewrittenFilterPrologue = (BoundStatementList)
+                this.Visit(node.ExceptionFilterPrologueOpt);
             var rewrittenFilter = (BoundExpression)this.Visit(node.ExceptionFilterOpt);
             if (node.ExceptionSourceOpt != null)
             {
@@ -1649,9 +1647,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(conversion.ConversionKind != ConversionKind.MethodGroup);
             if (conversion.ConversionKind == ConversionKind.AnonymousFunction)
             {
-                var result = (BoundExpression)RewriteLambdaConversion(
-                    (BoundLambda)conversion.Operand
-                );
+                var result = (BoundExpression)
+                    RewriteLambdaConversion((BoundLambda)conversion.Operand);
 
                 if (_inExpressionLambda && conversion.ExplicitCastInCode)
                 {

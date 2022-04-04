@@ -311,9 +311,9 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="index">The index.</param>
         /// <returns>The table indexes to which the index is mapped.</returns>
         public static IEnumerable<ITableIndex> GetMappedTableIndexes(this IIndex index) =>
-            (IEnumerable<ITableIndex>?)index.FindRuntimeAnnotationValue(
-                RelationalAnnotationNames.TableIndexMappings
-            ) ?? Enumerable.Empty<ITableIndex>();
+            (IEnumerable<ITableIndex>?)
+                index.FindRuntimeAnnotationValue(RelationalAnnotationNames.TableIndexMappings)
+            ?? Enumerable.Empty<ITableIndex>();
 
         /// <summary>
         ///     <para>

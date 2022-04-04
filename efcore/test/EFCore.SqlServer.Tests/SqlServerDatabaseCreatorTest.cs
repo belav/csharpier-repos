@@ -98,14 +98,14 @@ namespace Microsoft.EntityFrameworkCore
                 customServices
             );
 
-            var connection =
-                (FakeSqlServerConnection)contextServices.GetRequiredService<ISqlServerConnection>();
+            var connection = (FakeSqlServerConnection)
+                contextServices.GetRequiredService<ISqlServerConnection>();
 
             connection.ErrorNumber = errorNumber;
             connection.FailureCount = 2;
 
-            var creator =
-                (SqlServerDatabaseCreator)contextServices.GetRequiredService<IRelationalDatabaseCreator>();
+            var creator = (SqlServerDatabaseCreator)
+                contextServices.GetRequiredService<IRelationalDatabaseCreator>();
 
             creator.RetryDelay = TimeSpan.FromMilliseconds(1);
             creator.RetryTimeout = TimeSpan.FromMinutes(5);
@@ -147,15 +147,15 @@ namespace Microsoft.EntityFrameworkCore
                 customServices
             );
 
-            var connection =
-                (FakeSqlServerConnection)contextServices.GetRequiredService<ISqlServerConnection>();
+            var connection = (FakeSqlServerConnection)
+                contextServices.GetRequiredService<ISqlServerConnection>();
 
             connection.ErrorNumber = 233;
             connection.FailureCount = 100;
             connection.FailDelay = 50;
 
-            var creator =
-                (SqlServerDatabaseCreator)contextServices.GetRequiredService<IRelationalDatabaseCreator>();
+            var creator = (SqlServerDatabaseCreator)
+                contextServices.GetRequiredService<IRelationalDatabaseCreator>();
 
             creator.RetryDelay = TimeSpan.FromMilliseconds(5);
             creator.RetryTimeout = TimeSpan.FromMilliseconds(100);

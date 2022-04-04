@@ -139,11 +139,8 @@ namespace System.Net.Http.Headers
         public static WarningHeaderValue Parse(string? input)
         {
             int index = 0;
-            return (WarningHeaderValue)GenericHeaderParser.SingleValueWarningParser.ParseValue(
-                input,
-                null,
-                ref index
-            );
+            return (WarningHeaderValue)
+                GenericHeaderParser.SingleValueWarningParser.ParseValue(input, null, ref index);
         }
 
         public static bool TryParse(

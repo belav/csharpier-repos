@@ -102,10 +102,8 @@ namespace Castle.DynamicProxy.Tests
                     invocation.Arguments[0] = 5;
                 }
             );
-            var proxy = (IWithRefOut)generator.CreateInterfaceProxyWithoutTarget(
-                typeof(IWithRefOut),
-                interceptor
-            );
+            var proxy = (IWithRefOut)
+                generator.CreateInterfaceProxyWithoutTarget(typeof(IWithRefOut), interceptor);
             proxy.Do(out i);
             Assert.AreEqual(5, i);
         }
@@ -115,10 +113,8 @@ namespace Castle.DynamicProxy.Tests
         {
             int i;
             var interceptor = new WithCallbackInterceptor(delegate { });
-            var proxy = (IWithRefOut)generator.CreateInterfaceProxyWithoutTarget(
-                typeof(IWithRefOut),
-                interceptor
-            );
+            var proxy = (IWithRefOut)
+                generator.CreateInterfaceProxyWithoutTarget(typeof(IWithRefOut), interceptor);
             proxy.Do(out i);
         }
 
@@ -164,10 +160,8 @@ namespace Castle.DynamicProxy.Tests
                     invocation.Arguments[0] = 5;
                 }
             );
-            var proxy = (IWithRefOut)generator.CreateInterfaceProxyWithoutTarget(
-                typeof(IWithRefOut),
-                interceptor
-            );
+            var proxy = (IWithRefOut)
+                generator.CreateInterfaceProxyWithoutTarget(typeof(IWithRefOut), interceptor);
             proxy.Did(ref i);
             Assert.AreEqual(5, i);
         }
@@ -176,10 +170,8 @@ namespace Castle.DynamicProxy.Tests
         public void CanCreateProxyWithStructRefParam()
         {
             var s = new MyStruct(10);
-            var proxy = (MyClass)generator.CreateClassProxy(
-                typeof(MyClass),
-                new StandardInterceptor()
-            );
+            var proxy = (MyClass)
+                generator.CreateClassProxy(typeof(MyClass), new StandardInterceptor());
             proxy.MyMethodWithStruct(ref s);
             Assert.AreEqual(20, s.Value);
         }

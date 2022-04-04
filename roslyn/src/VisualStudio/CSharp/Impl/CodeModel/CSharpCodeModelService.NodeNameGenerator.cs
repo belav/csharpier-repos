@@ -217,8 +217,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                         break;
 
                     case SyntaxKind.ConversionOperatorDeclaration:
-                        var conversionOperatorDeclaration =
-                            (ConversionOperatorDeclarationSyntax)node;
+                        var conversionOperatorDeclaration = (ConversionOperatorDeclarationSyntax)
+                            node;
                         AppendOperatorName(
                             builder,
                             conversionOperatorDeclaration.ImplicitOrExplicitKeyword.Kind()

@@ -347,8 +347,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
 
                 foreach (var node in typeChain)
                 {
-                    var symbol =
-                        (ITypeSymbol?)State.SemanticDocument.SemanticModel.GetDeclaredSymbol(
+                    var symbol = (ITypeSymbol?)
+                        State.SemanticDocument.SemanticModel.GetDeclaredSymbol(
                             node,
                             CancellationToken
                         );

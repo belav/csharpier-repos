@@ -300,8 +300,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     );
                     if (boundEntityShaperExpression != null)
                     {
-                        var innerEntityProjection =
-                            (EntityProjectionExpression)boundEntityShaperExpression.ValueBufferExpression;
+                        var innerEntityProjection = (EntityProjectionExpression)
+                            boundEntityShaperExpression.ValueBufferExpression;
                         var newInnerEntityProjection = AddEntityProjection(innerEntityProjection);
                         boundEntityShaperExpression = boundEntityShaperExpression.Update(
                             newInnerEntityProjection
@@ -923,10 +923,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 .Select(e => replacingVisitor.Visit(e))
                 .ToList();
             var outerIndex = selectorExpressions.Count;
-            var innerEntityProjection =
-                (EntityProjectionExpression)innerQueryExpression._projectionMapping[
-                    new ProjectionMember()
-                ];
+            var innerEntityProjection = (EntityProjectionExpression)
+                innerQueryExpression._projectionMapping[new ProjectionMember()];
             var innerReadExpressionMap = new Dictionary<IProperty, MethodCallExpression>();
             foreach (var property in GetAllPropertiesInHierarchy(innerEntityProjection.EntityType))
             {
@@ -1153,11 +1151,12 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                         goto default;
                     }
 
-                    var updatedNewExpression = (NewExpression)GetGroupingKey(
-                        memberInitExpression.NewExpression,
-                        groupingExpressions,
-                        groupingKeyAccessExpression
-                    );
+                    var updatedNewExpression = (NewExpression)
+                        GetGroupingKey(
+                            memberInitExpression.NewExpression,
+                            groupingExpressions,
+                            groupingKeyAccessExpression
+                        );
                     var memberBindings = new MemberAssignment[memberInitExpression.Bindings.Count];
                     for (var i = 0; i < memberBindings.Length; i++)
                     {
@@ -1503,11 +1502,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             int index,
             IPropertyBase? property
         ) =>
-            (MethodCallExpression)_valueBufferParameter.CreateValueBufferReadValueExpression(
-                type,
-                index,
-                property
-            );
+            (MethodCallExpression)
+                _valueBufferParameter.CreateValueBufferReadValueExpression(type, index, property);
 
         private static IEnumerable<IProperty> GetAllPropertiesInHierarchy(IEntityType entityType) =>
             entityType
@@ -1555,8 +1551,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 );
                 if (boundEntityShaperExpression != null)
                 {
-                    var innerEntityProjection =
-                        (EntityProjectionExpression)boundEntityShaperExpression.ValueBufferExpression;
+                    var innerEntityProjection = (EntityProjectionExpression)
+                        boundEntityShaperExpression.ValueBufferExpression;
                     var newInnerEntityProjection = MakeEntityProjectionNullable(
                         innerEntityProjection
                     );
@@ -1704,8 +1700,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 );
                 if (boundEntityShaperExpression != null)
                 {
-                    var innerEntityProjection =
-                        (EntityProjectionExpression)boundEntityShaperExpression.ValueBufferExpression;
+                    var innerEntityProjection = (EntityProjectionExpression)
+                        boundEntityShaperExpression.ValueBufferExpression;
                     var newInnerEntityProjection = TraverseEntityProjection(
                         selectorExpressions,
                         innerEntityProjection,

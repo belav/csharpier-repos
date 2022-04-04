@@ -126,10 +126,11 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                 );
 
                 return isBinaryMaxDataType
-                  ? (Expression)Dependencies.SqlExpressionFactory.Convert(
-                        dataLengthSqlFunction,
-                        typeof(int)
-                    )
+                  ? (Expression)
+                        Dependencies.SqlExpressionFactory.Convert(
+                            dataLengthSqlFunction,
+                            typeof(int)
+                        )
                   : dataLengthSqlFunction;
             }
 

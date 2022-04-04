@@ -72,10 +72,8 @@ namespace System.Web.WebPages
                 type =>
                 {
                     SessionStateBehavior sessionStateBehavior = SessionStateBehavior.Default;
-                    var attributes = (RazorDirectiveAttribute[])type.GetCustomAttributes(
-                        typeof(RazorDirectiveAttribute),
-                        inherit: false
-                    );
+                    var attributes = (RazorDirectiveAttribute[])
+                        type.GetCustomAttributes(typeof(RazorDirectiveAttribute), inherit: false);
                     var directiveAttributes = attributes
                         .Where(
                             attr =>

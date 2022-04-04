@@ -1353,9 +1353,8 @@ namespace System.Data.ProviderBase
                 object value = schemaRow[column];
                 if (DBNull.Value != value)
                 {
-                    targetColumn.ColumnMapping = (MappingType)((IConvertible)value).ToInt32(
-                        CultureInfo.InvariantCulture
-                    );
+                    targetColumn.ColumnMapping = (MappingType)
+                        ((IConvertible)value).ToInt32(CultureInfo.InvariantCulture);
                 }
             }
 

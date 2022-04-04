@@ -3469,11 +3469,8 @@ class C
             // the operators given to the comment that follows the use of the operator.
 
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
-            var method = (SourceMemberMethodSymbol)compilation.GlobalNamespace
-                .GetTypeMembers("C")
-                .Single()
-                .GetMembers("M")
-                .Single();
+            var method = (SourceMemberMethodSymbol)
+                compilation.GlobalNamespace.GetTypeMembers("C").Single().GetMembers("M").Single();
             var diagnostics = new DiagnosticBag();
             var block = MethodCompiler.BindMethodBody(
                 method,

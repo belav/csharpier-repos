@@ -22,9 +22,10 @@ namespace Microsoft.Web.Mvc.ModelBinding
             )
             {
                 Type elementType = bindingContext.ModelType.GetElementType();
-                return (IExtensibleModelBinder)Activator.CreateInstance(
-                    typeof(ArrayModelBinder<>).MakeGenericType(elementType)
-                );
+                return (IExtensibleModelBinder)
+                    Activator.CreateInstance(
+                        typeof(ArrayModelBinder<>).MakeGenericType(elementType)
+                    );
             }
 
             return null;

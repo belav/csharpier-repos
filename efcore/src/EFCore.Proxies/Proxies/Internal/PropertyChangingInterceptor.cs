@@ -49,17 +49,13 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
             {
                 if (methodName == $"add_{nameof(INotifyPropertyChanging.PropertyChanging)}")
                 {
-                    _handler = (PropertyChangingEventHandler)Delegate.Combine(
-                        _handler,
-                        (Delegate)invocation.Arguments[0]
-                    );
+                    _handler = (PropertyChangingEventHandler)
+                        Delegate.Combine(_handler, (Delegate)invocation.Arguments[0]);
                 }
                 else if (methodName == $"remove_{nameof(INotifyPropertyChanging.PropertyChanging)}")
                 {
-                    _handler = (PropertyChangingEventHandler?)Delegate.Remove(
-                        _handler,
-                        (Delegate)invocation.Arguments[0]
-                    );
+                    _handler = (PropertyChangingEventHandler?)
+                        Delegate.Remove(_handler, (Delegate)invocation.Arguments[0]);
                 }
             }
             else if (methodName.StartsWith("set_", StringComparison.Ordinal))

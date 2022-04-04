@@ -284,10 +284,8 @@ class C
 
             var tree = comp.Compilation.SyntaxTrees.First();
             var model = comp.Compilation.GetSemanticModel(tree);
-            var deconstruction = (AssignmentExpressionSyntax)tree.FindNodeOrTokenByKind(
-                    SyntaxKind.SimpleAssignmentExpression
-                )
-                .AsNode();
+            var deconstruction = (AssignmentExpressionSyntax)
+                tree.FindNodeOrTokenByKind(SyntaxKind.SimpleAssignmentExpression).AsNode();
             Assert.Equal("(x, y) = new C()", deconstruction.ToString());
             var deconstructionInfo = model.GetDeconstructionInfo(deconstruction);
 
@@ -316,11 +314,9 @@ class C
             Assert.Equal(ConversionKind.Identity, nested[1].Conversion.Value.Kind);
             Assert.Empty(nested[1].Nested);
 
-            var assignment = (AssignmentExpressionSyntax)tree.FindNodeOrTokenByKind(
-                    SyntaxKind.SimpleAssignmentExpression,
-                    occurrence: 2
-                )
-                .AsNode();
+            var assignment = (AssignmentExpressionSyntax)
+                tree.FindNodeOrTokenByKind(SyntaxKind.SimpleAssignmentExpression, occurrence: 2)
+                    .AsNode();
             Assert.Equal("a = 1", assignment.ToString());
             var defaultInfo = model.GetDeconstructionInfo(assignment);
             Assert.Null(defaultInfo.Method);
@@ -356,10 +352,8 @@ class C
 
             var tree = comp.SyntaxTrees.First();
             var model = comp.GetSemanticModel(tree);
-            var foreachDeconstruction = (ForEachVariableStatementSyntax)tree.FindNodeOrTokenByKind(
-                    SyntaxKind.ForEachVariableStatement
-                )
-                .AsNode();
+            var foreachDeconstruction = (ForEachVariableStatementSyntax)
+                tree.FindNodeOrTokenByKind(SyntaxKind.ForEachVariableStatement).AsNode();
             Assert.Equal(@"foreach (char in s) { }", foreachDeconstruction.ToString());
             var deconstructionInfo = model.GetDeconstructionInfo(foreachDeconstruction);
             Assert.Equal(Conversion.UnsetConversion, deconstructionInfo.Conversion);
@@ -2570,10 +2564,8 @@ class C
 
             var tree = comp.Compilation.SyntaxTrees.First();
             var model = comp.Compilation.GetSemanticModel(tree);
-            var deconstruction = (AssignmentExpressionSyntax)tree.FindNodeOrTokenByKind(
-                    SyntaxKind.SimpleAssignmentExpression
-                )
-                .AsNode();
+            var deconstruction = (AssignmentExpressionSyntax)
+                tree.FindNodeOrTokenByKind(SyntaxKind.SimpleAssignmentExpression).AsNode();
             Assert.Equal(
                 @"(x, (y, z)) = Tuple.Create(1, Tuple.Create(""hello"", ""world""))",
                 deconstruction.ToString()

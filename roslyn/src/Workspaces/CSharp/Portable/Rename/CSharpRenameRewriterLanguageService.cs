@@ -1219,10 +1219,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
                     }
                     else
                     {
-                        var compilationUnit = (CompilationUnitSyntax)await tree.GetRootAsync(
-                                cancellationToken
-                            )
-                            .ConfigureAwait(false);
+                        var compilationUnit = (CompilationUnitSyntax)
+                            await tree.GetRootAsync(cancellationToken).ConfigureAwait(false);
                         usings = compilationUnit.Usings;
                     }
 

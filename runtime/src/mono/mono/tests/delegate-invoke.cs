@@ -93,43 +93,28 @@ public class Driver
         if (x().x != 20)
             return 2;
 
-        x = (NoArgDele)Delegate.CreateDelegate(
-            typeof(NoArgDele),
-            "10",
-            typeof(Driver).GetMethod("M2")
-        );
+        x = (NoArgDele)
+            Delegate.CreateDelegate(typeof(NoArgDele), "10", typeof(Driver).GetMethod("M2"));
         if (x().x != 30)
             return 3;
 
-        x = (NoArgDele)Delegate.CreateDelegate(
-            typeof(NoArgDele),
-            null,
-            typeof(Driver).GetMethod("M3")
-        );
+        x = (NoArgDele)
+            Delegate.CreateDelegate(typeof(NoArgDele), null, typeof(Driver).GetMethod("M3"));
         if (x().x != 50)
             return 4;
 
-        y = (OneArgDele)Delegate.CreateDelegate(
-            typeof(OneArgDele),
-            null,
-            typeof(Driver).GetMethod("M4")
-        );
+        y = (OneArgDele)
+            Delegate.CreateDelegate(typeof(OneArgDele), null, typeof(Driver).GetMethod("M4"));
         if (y(new Driver()).x != 70)
             return 5;
 
-        x = (NoArgDele)Delegate.CreateDelegate(
-            typeof(NoArgDele),
-            null,
-            typeof(Driver).GetMethod("M1")
-        );
+        x = (NoArgDele)
+            Delegate.CreateDelegate(typeof(NoArgDele), null, typeof(Driver).GetMethod("M1"));
         if (x().x != 10)
             return 6;
 
-        x = (NoArgDele)Delegate.CreateDelegate(
-            typeof(NoArgDele),
-            null,
-            typeof(Driver).GetMethod("M4")
-        );
+        x = (NoArgDele)
+            Delegate.CreateDelegate(typeof(NoArgDele), null, typeof(Driver).GetMethod("M4"));
         if (x().x != 60)
             return 7;
 
@@ -141,21 +126,20 @@ public class Driver
         EmptyStruct es = default(EmptyStruct);
         es.value = 100;
 
-        var ar1 = (ActionRef)Delegate.CreateDelegate(
-            typeof(ActionRef),
-            typeof(EmptyStruct).GetMethod("test")
-        );
+        var ar1 = (ActionRef)
+            Delegate.CreateDelegate(typeof(ActionRef), typeof(EmptyStruct).GetMethod("test"));
         if (ar1(ref es) != 110)
         {
             Console.WriteLine("expected 110, got {0}", ar1(ref es));
             return 1;
         }
 
-        var ar2 = (ActionRef2)Delegate.CreateDelegate(
-            typeof(ActionRef2),
-            null,
-            typeof(EmptyStruct).GetMethod("test")
-        );
+        var ar2 = (ActionRef2)
+            Delegate.CreateDelegate(
+                typeof(ActionRef2),
+                null,
+                typeof(EmptyStruct).GetMethod("test")
+            );
         try
         {
             Console.WriteLine("must not return, got {0}", ar2());
@@ -163,21 +147,16 @@ public class Driver
         }
         catch (NullReferenceException) { }
 
-        ar1 = (ActionRef)Delegate.CreateDelegate(
-            typeof(ActionRef),
-            typeof(EmptyStruct).GetMethod("test2")
-        );
+        ar1 = (ActionRef)
+            Delegate.CreateDelegate(typeof(ActionRef), typeof(EmptyStruct).GetMethod("test2"));
         if (ar1(ref es) != 120)
         {
             Console.WriteLine("expected 120, got {0}", ar1(ref es));
             return 3;
         }
 
-        ar2 = (ActionRef2)Delegate.CreateDelegate(
-            typeof(ActionRef2),
-            es,
-            typeof(EmptyStruct).GetMethod("test")
-        );
+        ar2 = (ActionRef2)
+            Delegate.CreateDelegate(typeof(ActionRef2), es, typeof(EmptyStruct).GetMethod("test"));
         if (ar2() != 110)
         {
             Console.WriteLine("expected 110 got {0}", ar2());

@@ -175,10 +175,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDeconstruction
                 return false;
             }
 
-            var local = (ILocalSymbol)semanticModel.GetRequiredDeclaredSymbol(
-                declarator,
-                cancellationToken
-            );
+            var local = (ILocalSymbol)
+                semanticModel.GetRequiredDeclaredSymbol(declarator, cancellationToken);
 
             var initializerConversion = semanticModel.GetConversion(
                 declarator.Initializer.Value,
@@ -206,10 +204,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDeconstruction
             CancellationToken cancellationToken
         )
         {
-            var local = (ILocalSymbol)semanticModel.GetRequiredDeclaredSymbol(
-                forEachStatement,
-                cancellationToken
-            );
+            var local = (ILocalSymbol)
+                semanticModel.GetRequiredDeclaredSymbol(forEachStatement, cancellationToken);
             var elementConversion = semanticModel
                 .GetForEachStatementInfo(forEachStatement)
                 .ElementConversion;

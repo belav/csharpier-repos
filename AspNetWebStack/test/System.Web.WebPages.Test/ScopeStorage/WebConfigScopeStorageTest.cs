@@ -99,9 +99,10 @@ namespace System.Web.WebPages.Test
             var entry = entryType.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic)[
                 0
             ].Invoke(new object[] { "foo1", "bar2" });
-            var entriesArray = (ArrayList)typeof(NameObjectCollectionBase)
-                .GetField("_entriesArray", BindingFlags.Instance | BindingFlags.NonPublic)
-                .GetValue(values);
+            var entriesArray = (ArrayList)
+                typeof(NameObjectCollectionBase)
+                    .GetField("_entriesArray", BindingFlags.Instance | BindingFlags.NonPublic)
+                    .GetValue(values);
             entriesArray.Add(entry);
             Assert.Equal(2, values.AllKeys.Length);
 

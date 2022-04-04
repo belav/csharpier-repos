@@ -47,10 +47,11 @@ namespace ComWrappersTests
                     );
                     Marshal.StructureToPtr(vtbl, vtblRaw, false);
 
-                    entryRaw = (ComInterfaceEntry*)RuntimeHelpers.AllocateTypeAssociatedMemory(
-                        typeof(ITestVtbl),
-                        sizeof(ComInterfaceEntry)
-                    );
+                    entryRaw = (ComInterfaceEntry*)
+                        RuntimeHelpers.AllocateTypeAssociatedMemory(
+                            typeof(ITestVtbl),
+                            sizeof(ComInterfaceEntry)
+                        );
                     entryRaw->IID = typeof(ITest).GUID;
                     entryRaw->Vtable = vtblRaw;
                     count = 1;
@@ -214,23 +215,20 @@ namespace ComWrappersTests
             // Get an object from a tracker runtime.
             IntPtr trackerObjRaw = MockReferenceTrackerRuntime.CreateTrackerObject();
 
-            var trackerObj1 = (ITrackerObjectWrapper)cw.GetOrCreateObjectForComInstance(
-                trackerObjRaw,
-                CreateObjectFlags.TrackerObject
-            );
-            var trackerObj2 = (ITrackerObjectWrapper)cw.GetOrCreateObjectForComInstance(
-                trackerObjRaw,
-                CreateObjectFlags.TrackerObject
-            );
+            var trackerObj1 = (ITrackerObjectWrapper)
+                cw.GetOrCreateObjectForComInstance(trackerObjRaw, CreateObjectFlags.TrackerObject);
+            var trackerObj2 = (ITrackerObjectWrapper)
+                cw.GetOrCreateObjectForComInstance(trackerObjRaw, CreateObjectFlags.TrackerObject);
             Assert.Equal(trackerObj1, trackerObj2);
 
             // Ownership has been transferred to the wrapper.
             Marshal.Release(trackerObjRaw);
 
-            var trackerObj3 = (ITrackerObjectWrapper)cw.GetOrCreateObjectForComInstance(
-                trackerObjRaw,
-                CreateObjectFlags.TrackerObject | CreateObjectFlags.UniqueInstance
-            );
+            var trackerObj3 = (ITrackerObjectWrapper)
+                cw.GetOrCreateObjectForComInstance(
+                    trackerObjRaw,
+                    CreateObjectFlags.TrackerObject | CreateObjectFlags.UniqueInstance
+                );
             Assert.NotEqual(trackerObj1, trackerObj3);
         }
 
@@ -277,24 +275,16 @@ namespace ComWrappersTests
             IntPtr trackerObjRaw = MockReferenceTrackerRuntime.CreateTrackerObject();
 
             // Create objects for the COM instance
-            var trackerObj1 = (ITrackerObjectWrapper)cw1.GetOrCreateObjectForComInstance(
-                trackerObjRaw,
-                CreateObjectFlags.TrackerObject
-            );
-            var trackerObj2 = (ITrackerObjectWrapper)cw2.GetOrCreateObjectForComInstance(
-                trackerObjRaw,
-                CreateObjectFlags.TrackerObject
-            );
+            var trackerObj1 = (ITrackerObjectWrapper)
+                cw1.GetOrCreateObjectForComInstance(trackerObjRaw, CreateObjectFlags.TrackerObject);
+            var trackerObj2 = (ITrackerObjectWrapper)
+                cw2.GetOrCreateObjectForComInstance(trackerObjRaw, CreateObjectFlags.TrackerObject);
             Assert.NotEqual(trackerObj1, trackerObj2);
 
-            var trackerObj3 = (ITrackerObjectWrapper)cw1.GetOrCreateObjectForComInstance(
-                trackerObjRaw,
-                CreateObjectFlags.TrackerObject
-            );
-            var trackerObj4 = (ITrackerObjectWrapper)cw2.GetOrCreateObjectForComInstance(
-                trackerObjRaw,
-                CreateObjectFlags.TrackerObject
-            );
+            var trackerObj3 = (ITrackerObjectWrapper)
+                cw1.GetOrCreateObjectForComInstance(trackerObjRaw, CreateObjectFlags.TrackerObject);
+            var trackerObj4 = (ITrackerObjectWrapper)
+                cw2.GetOrCreateObjectForComInstance(trackerObjRaw, CreateObjectFlags.TrackerObject);
             Assert.NotEqual(trackerObj3, trackerObj4);
             Assert.Equal(trackerObj1, trackerObj3);
             Assert.Equal(trackerObj2, trackerObj4);
@@ -319,11 +309,12 @@ namespace ComWrappersTests
             var nativeWrapper = new ITrackerObjectWrapper(iTestComObject);
 
             // Register wrapper, but supply the wrapper.
-            var nativeWrapper2 = (ITrackerObjectWrapper)cw.GetOrRegisterObjectForComInstance(
-                trackerObjRaw,
-                CreateObjectFlags.TrackerObject,
-                nativeWrapper
-            );
+            var nativeWrapper2 = (ITrackerObjectWrapper)
+                cw.GetOrRegisterObjectForComInstance(
+                    trackerObjRaw,
+                    CreateObjectFlags.TrackerObject,
+                    nativeWrapper
+                );
             Assert.Equal(nativeWrapper, nativeWrapper2);
 
             // Ownership has been transferred to the wrapper.
@@ -399,11 +390,12 @@ namespace ComWrappersTests
                 Assert.Equal(0, hr);
                 var nativeWrapper = new ITrackerObjectWrapper(iTestComObject);
 
-                nativeWrapper = (ITrackerObjectWrapper)cw.GetOrRegisterObjectForComInstance(
-                    trackerObjRaw,
-                    CreateObjectFlags.None,
-                    nativeWrapper
-                );
+                nativeWrapper = (ITrackerObjectWrapper)
+                    cw.GetOrRegisterObjectForComInstance(
+                        trackerObjRaw,
+                        CreateObjectFlags.None,
+                        nativeWrapper
+                    );
 
                 // Set this on the return instead of during creation since the returned wrapper may be the one from
                 // the internal cache and not the one passed in above.
@@ -558,10 +550,8 @@ namespace ComWrappersTests
             IntPtr trackerObjRaw = MockReferenceTrackerRuntime.CreateTrackerObject();
 
             // Create a managed wrapper for the native object.
-            var trackerObj = (ITrackerObjectWrapper)cw.GetOrCreateObjectForComInstance(
-                trackerObjRaw,
-                CreateObjectFlags.TrackerObject
-            );
+            var trackerObj = (ITrackerObjectWrapper)
+                cw.GetOrCreateObjectForComInstance(trackerObjRaw, CreateObjectFlags.TrackerObject);
 
             // Ownership has been transferred to the wrapper.
             Marshal.Release(trackerObjRaw);
@@ -612,10 +602,11 @@ namespace ComWrappersTests
             {
                 // Activate the Reference Tracker system in the .NET runtime by consuming an IReferenceTracker instance.
                 IntPtr trackerObjRaw = MockReferenceTrackerRuntime.CreateTrackerObject();
-                var trackerObj = (ITrackerObjectWrapper)cw.GetOrCreateObjectForComInstance(
-                    trackerObjRaw,
-                    CreateObjectFlags.TrackerObject
-                );
+                var trackerObj = (ITrackerObjectWrapper)
+                    cw.GetOrCreateObjectForComInstance(
+                        trackerObjRaw,
+                        CreateObjectFlags.TrackerObject
+                    );
                 Marshal.Release(trackerObjRaw);
             }
 

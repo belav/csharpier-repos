@@ -76,10 +76,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
         {
             var notExpressionLocation = diagnostic.AdditionalLocations[0];
 
-            var notExpression = (PrefixUnaryExpressionSyntax)notExpressionLocation.FindNode(
-                getInnermostNodeForTie: true,
-                cancellationToken
-            );
+            var notExpression = (PrefixUnaryExpressionSyntax)
+                notExpressionLocation.FindNode(getInnermostNodeForTie: true, cancellationToken);
             var parenthesizedExpression = (ParenthesizedExpressionSyntax)notExpression.Operand;
             var oldExpression = parenthesizedExpression.Expression;
 

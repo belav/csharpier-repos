@@ -249,8 +249,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DesignerAttribu
 
             AssertIsForeground();
 
-            var designerService = _legacyDesignerService ??=
-                (IVSMDDesignerService)_serviceProvider.GetService(typeof(SVSMDDesignerService));
+            var designerService = _legacyDesignerService ??= (IVSMDDesignerService)
+                _serviceProvider.GetService(typeof(SVSMDDesignerService));
             if (designerService == null)
                 return;
 

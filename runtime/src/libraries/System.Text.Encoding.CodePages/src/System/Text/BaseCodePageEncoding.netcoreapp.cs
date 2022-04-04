@@ -21,9 +21,8 @@ namespace System.Text
                     char* pCodePageName = &p->CodePageName;
                     for (int i = 0; i < 16; i++)
                     {
-                        pCodePageName[i] = (char)BinaryPrimitives.ReverseEndianness(
-                            (ushort)pCodePageName[i]
-                        );
+                        pCodePageName[i] = (char)
+                            BinaryPrimitives.ReverseEndianness((ushort)pCodePageName[i]);
                     }
                     p->CodePage = BinaryPrimitives.ReverseEndianness(p->CodePage);
                     p->ByteCount = BinaryPrimitives.ReverseEndianness(p->ByteCount);

@@ -201,9 +201,10 @@ namespace VirtualStaticInterfaceMethodTestGen
                                                     );
 
                                                 foreach (
-                                                    var interfaceImplementationApproach in (InterfaceImplementationApproach[])Enum.GetValues(
-                                                        typeof(InterfaceImplementationApproach)
-                                                    )
+                                                    var interfaceImplementationApproach in (InterfaceImplementationApproach[])
+                                                        Enum.GetValues(
+                                                            typeof(InterfaceImplementationApproach)
+                                                        )
                                                 )
                                                 {
                                                     if (baseTypeReturnType == "string")

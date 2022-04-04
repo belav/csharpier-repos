@@ -138,12 +138,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
             if ((object)lazyMethod == (object)ErrorMethodSymbol.UnknownMethod)
             {
                 UseSiteInfo<AssemblySymbol> info;
-                var symbol = (MethodSymbol)Binder.GetWellKnownTypeMember(
-                    ModuleBeingBuilt.Compilation,
-                    member,
-                    out info,
-                    isOptional: false
-                );
+                var symbol = (MethodSymbol)
+                    Binder.GetWellKnownTypeMember(
+                        ModuleBeingBuilt.Compilation,
+                        member,
+                        out info,
+                        isOptional: false
+                    );
 
                 if (info.DiagnosticInfo?.Severity == DiagnosticSeverity.Error)
                 {

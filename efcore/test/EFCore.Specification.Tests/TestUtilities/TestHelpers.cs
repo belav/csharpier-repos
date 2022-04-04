@@ -143,9 +143,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             IServiceCollection services
         )
         {
-            var designTimeServices = (IDesignTimeServices)Activator.CreateInstance(
-                designTimeServicesType
-            )!;
+            var designTimeServices = (IDesignTimeServices)
+                Activator.CreateInstance(designTimeServicesType)!;
             designTimeServices.ConfigureDesignTimeServices(services);
         }
 

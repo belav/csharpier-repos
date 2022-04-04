@@ -108,9 +108,8 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
             maxValue = (int)mathMax.Call(null, 5, 6, 2, 3, 7);
             Assert.Equal(7, maxValue);
 
-            Function mathMin = (Function)(
-                (JSObject)Runtime.GetGlobalObject("Math")
-            ).GetObjectProperty("min");
+            Function mathMin = (Function)
+                ((JSObject)Runtime.GetGlobalObject("Math")).GetObjectProperty("min");
             Assert.True(mathMin != null, "math.min != null");
 
             var minValue = (int)mathMin.Apply(null, new object[] { 5, 6, 2, 3, 7 });

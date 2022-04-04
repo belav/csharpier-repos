@@ -217,9 +217,9 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="key">The key.</param>
         /// <returns>The unique constraints to which the key is mapped.</returns>
         public static IEnumerable<IUniqueConstraint> GetMappedConstraints(this IKey key) =>
-            (IEnumerable<IUniqueConstraint>?)key.FindRuntimeAnnotationValue(
-                RelationalAnnotationNames.UniqueConstraintMappings
-            ) ?? Enumerable.Empty<IUniqueConstraint>();
+            (IEnumerable<IUniqueConstraint>?)
+                key.FindRuntimeAnnotationValue(RelationalAnnotationNames.UniqueConstraintMappings)
+            ?? Enumerable.Empty<IUniqueConstraint>();
 
         /// <summary>
         ///     <para>

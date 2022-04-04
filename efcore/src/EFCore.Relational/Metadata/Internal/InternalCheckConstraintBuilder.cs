@@ -94,11 +94,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             {
                 foreach (var derivedType in entityType.GetDerivedTypes())
                 {
-                    var derivedCheckConstraint =
-                        (IConventionCheckConstraint?)CheckConstraint.FindDeclaredCheckConstraint(
-                            derivedType,
-                            name
-                        );
+                    var derivedCheckConstraint = (IConventionCheckConstraint?)
+                        CheckConstraint.FindDeclaredCheckConstraint(derivedType, name);
                     if (derivedCheckConstraint == null)
                     {
                         continue;
@@ -180,11 +177,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             foreach (var derivedType in entityType.GetDerivedTypes())
             {
-                var derivedCheckConstraint =
-                    (IConventionCheckConstraint?)CheckConstraint.FindDeclaredCheckConstraint(
-                        derivedType,
-                        name
-                    );
+                var derivedCheckConstraint = (IConventionCheckConstraint?)
+                    CheckConstraint.FindDeclaredCheckConstraint(derivedType, name);
                 if (derivedCheckConstraint == null)
                 {
                     continue;

@@ -825,9 +825,8 @@ namespace System.Diagnostics.Eventing.Reader
                         case UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelConfigEnabled:
 
                             {
-                                varVal.Type = (uint)UnsafeNativeMethods
-                                    .EvtVariantType
-                                    .EvtVarTypeBoolean;
+                                varVal.Type = (uint)
+                                    UnsafeNativeMethods.EvtVariantType.EvtVarTypeBoolean;
                                 if ((bool)val == true)
                                     varVal.Bool = 1;
                                 else
@@ -837,9 +836,8 @@ namespace System.Diagnostics.Eventing.Reader
                         case UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelConfigAccess:
 
                             {
-                                varVal.Type = (uint)UnsafeNativeMethods
-                                    .EvtVariantType
-                                    .EvtVarTypeString;
+                                varVal.Type = (uint)
+                                    UnsafeNativeMethods.EvtVariantType.EvtVarTypeString;
                                 taskMem.SetMemory(Marshal.StringToCoTaskMemUni((string)val));
                                 varVal.StringVal = taskMem.GetMemory();
                             }
@@ -849,9 +847,8 @@ namespace System.Diagnostics.Eventing.Reader
                             .EvtChannelLoggingConfigLogFilePath:
 
                             {
-                                varVal.Type = (uint)UnsafeNativeMethods
-                                    .EvtVariantType
-                                    .EvtVarTypeString;
+                                varVal.Type = (uint)
+                                    UnsafeNativeMethods.EvtVariantType.EvtVarTypeString;
                                 taskMem.SetMemory(Marshal.StringToCoTaskMemUni((string)val));
                                 varVal.StringVal = taskMem.GetMemory();
                             }
@@ -861,9 +858,8 @@ namespace System.Diagnostics.Eventing.Reader
                             .EvtChannelLoggingConfigMaxSize:
 
                             {
-                                varVal.Type = (uint)UnsafeNativeMethods
-                                    .EvtVariantType
-                                    .EvtVarTypeUInt64;
+                                varVal.Type = (uint)
+                                    UnsafeNativeMethods.EvtVariantType.EvtVarTypeUInt64;
                                 varVal.ULong = (ulong)((long)val);
                             }
                             break;
@@ -872,9 +868,8 @@ namespace System.Diagnostics.Eventing.Reader
                             .EvtChannelPublishingConfigLevel:
 
                             {
-                                varVal.Type = (uint)UnsafeNativeMethods
-                                    .EvtVariantType
-                                    .EvtVarTypeUInt32;
+                                varVal.Type = (uint)
+                                    UnsafeNativeMethods.EvtVariantType.EvtVarTypeUInt32;
                                 varVal.UInteger = (uint)((int)val);
                             }
                             break;
@@ -883,9 +878,8 @@ namespace System.Diagnostics.Eventing.Reader
                             .EvtChannelPublishingConfigKeywords:
 
                             {
-                                varVal.Type = (uint)UnsafeNativeMethods
-                                    .EvtVariantType
-                                    .EvtVarTypeUInt64;
+                                varVal.Type = (uint)
+                                    UnsafeNativeMethods.EvtVariantType.EvtVarTypeUInt64;
                                 varVal.ULong = (ulong)((long)val);
                             }
                             break;
@@ -894,9 +888,8 @@ namespace System.Diagnostics.Eventing.Reader
                             .EvtChannelLoggingConfigRetention:
 
                             {
-                                varVal.Type = (uint)UnsafeNativeMethods
-                                    .EvtVariantType
-                                    .EvtVarTypeBoolean;
+                                varVal.Type = (uint)
+                                    UnsafeNativeMethods.EvtVariantType.EvtVarTypeBoolean;
                                 if ((bool)val == true)
                                     varVal.Bool = 1;
                                 else
@@ -908,9 +901,8 @@ namespace System.Diagnostics.Eventing.Reader
                             .EvtChannelLoggingConfigAutoBackup:
 
                             {
-                                varVal.Type = (uint)UnsafeNativeMethods
-                                    .EvtVariantType
-                                    .EvtVarTypeBoolean;
+                                varVal.Type = (uint)
+                                    UnsafeNativeMethods.EvtVariantType.EvtVarTypeBoolean;
                                 if ((bool)val == true)
                                     varVal.Bool = 1;
                                 else
@@ -1120,114 +1112,131 @@ namespace System.Diagnostics.Eventing.Reader
                     switch (i)
                     {
                         case (int)UnsafeNativeMethods.EvtSystemPropertyId.EvtSystemProviderName:
-                            systemProperties.ProviderName = (string)ConvertToObject(
-                                varVal,
-                                UnsafeNativeMethods.EvtVariantType.EvtVarTypeString
-                            );
+                            systemProperties.ProviderName = (string)
+                                ConvertToObject(
+                                    varVal,
+                                    UnsafeNativeMethods.EvtVariantType.EvtVarTypeString
+                                );
                             break;
                         case (int)UnsafeNativeMethods.EvtSystemPropertyId.EvtSystemProviderGuid:
-                            systemProperties.ProviderId = (Guid?)ConvertToObject(
-                                varVal,
-                                UnsafeNativeMethods.EvtVariantType.EvtVarTypeGuid
-                            );
+                            systemProperties.ProviderId = (Guid?)
+                                ConvertToObject(
+                                    varVal,
+                                    UnsafeNativeMethods.EvtVariantType.EvtVarTypeGuid
+                                );
                             break;
                         case (int)UnsafeNativeMethods.EvtSystemPropertyId.EvtSystemEventID:
-                            systemProperties.Id = (ushort?)ConvertToObject(
-                                varVal,
-                                UnsafeNativeMethods.EvtVariantType.EvtVarTypeUInt16
-                            );
+                            systemProperties.Id = (ushort?)
+                                ConvertToObject(
+                                    varVal,
+                                    UnsafeNativeMethods.EvtVariantType.EvtVarTypeUInt16
+                                );
                             break;
                         case (int)UnsafeNativeMethods.EvtSystemPropertyId.EvtSystemQualifiers:
-                            systemProperties.Qualifiers = (ushort?)ConvertToObject(
-                                varVal,
-                                UnsafeNativeMethods.EvtVariantType.EvtVarTypeUInt16
-                            );
+                            systemProperties.Qualifiers = (ushort?)
+                                ConvertToObject(
+                                    varVal,
+                                    UnsafeNativeMethods.EvtVariantType.EvtVarTypeUInt16
+                                );
                             break;
                         case (int)UnsafeNativeMethods.EvtSystemPropertyId.EvtSystemLevel:
-                            systemProperties.Level = (byte?)ConvertToObject(
-                                varVal,
-                                UnsafeNativeMethods.EvtVariantType.EvtVarTypeByte
-                            );
+                            systemProperties.Level = (byte?)
+                                ConvertToObject(
+                                    varVal,
+                                    UnsafeNativeMethods.EvtVariantType.EvtVarTypeByte
+                                );
                             break;
                         case (int)UnsafeNativeMethods.EvtSystemPropertyId.EvtSystemTask:
-                            systemProperties.Task = (ushort?)ConvertToObject(
-                                varVal,
-                                UnsafeNativeMethods.EvtVariantType.EvtVarTypeUInt16
-                            );
+                            systemProperties.Task = (ushort?)
+                                ConvertToObject(
+                                    varVal,
+                                    UnsafeNativeMethods.EvtVariantType.EvtVarTypeUInt16
+                                );
                             break;
                         case (int)UnsafeNativeMethods.EvtSystemPropertyId.EvtSystemOpcode:
-                            systemProperties.Opcode = (byte?)ConvertToObject(
-                                varVal,
-                                UnsafeNativeMethods.EvtVariantType.EvtVarTypeByte
-                            );
+                            systemProperties.Opcode = (byte?)
+                                ConvertToObject(
+                                    varVal,
+                                    UnsafeNativeMethods.EvtVariantType.EvtVarTypeByte
+                                );
                             break;
                         case (int)UnsafeNativeMethods.EvtSystemPropertyId.EvtSystemKeywords:
-                            systemProperties.Keywords = (ulong?)ConvertToObject(
-                                varVal,
-                                UnsafeNativeMethods.EvtVariantType.EvtVarTypeHexInt64
-                            );
+                            systemProperties.Keywords = (ulong?)
+                                ConvertToObject(
+                                    varVal,
+                                    UnsafeNativeMethods.EvtVariantType.EvtVarTypeHexInt64
+                                );
                             break;
                         case (int)UnsafeNativeMethods.EvtSystemPropertyId.EvtSystemTimeCreated:
-                            systemProperties.TimeCreated = (DateTime?)ConvertToObject(
-                                varVal,
-                                UnsafeNativeMethods.EvtVariantType.EvtVarTypeFileTime
-                            );
+                            systemProperties.TimeCreated = (DateTime?)
+                                ConvertToObject(
+                                    varVal,
+                                    UnsafeNativeMethods.EvtVariantType.EvtVarTypeFileTime
+                                );
                             break;
                         case (int)UnsafeNativeMethods.EvtSystemPropertyId.EvtSystemEventRecordId:
-                            systemProperties.RecordId = (ulong?)ConvertToObject(
-                                varVal,
-                                UnsafeNativeMethods.EvtVariantType.EvtVarTypeUInt64
-                            );
+                            systemProperties.RecordId = (ulong?)
+                                ConvertToObject(
+                                    varVal,
+                                    UnsafeNativeMethods.EvtVariantType.EvtVarTypeUInt64
+                                );
                             break;
                         case (int)UnsafeNativeMethods.EvtSystemPropertyId.EvtSystemActivityID:
-                            systemProperties.ActivityId = (Guid?)ConvertToObject(
-                                varVal,
-                                UnsafeNativeMethods.EvtVariantType.EvtVarTypeGuid
-                            );
+                            systemProperties.ActivityId = (Guid?)
+                                ConvertToObject(
+                                    varVal,
+                                    UnsafeNativeMethods.EvtVariantType.EvtVarTypeGuid
+                                );
                             break;
-                        case (int)UnsafeNativeMethods
-                            .EvtSystemPropertyId
-                            .EvtSystemRelatedActivityID:
-                            systemProperties.RelatedActivityId = (Guid?)ConvertToObject(
-                                varVal,
-                                UnsafeNativeMethods.EvtVariantType.EvtVarTypeGuid
-                            );
+                        case (int)
+                            UnsafeNativeMethods.EvtSystemPropertyId.EvtSystemRelatedActivityID:
+                            systemProperties.RelatedActivityId = (Guid?)
+                                ConvertToObject(
+                                    varVal,
+                                    UnsafeNativeMethods.EvtVariantType.EvtVarTypeGuid
+                                );
                             break;
                         case (int)UnsafeNativeMethods.EvtSystemPropertyId.EvtSystemProcessID:
-                            systemProperties.ProcessId = (uint?)ConvertToObject(
-                                varVal,
-                                UnsafeNativeMethods.EvtVariantType.EvtVarTypeUInt32
-                            );
+                            systemProperties.ProcessId = (uint?)
+                                ConvertToObject(
+                                    varVal,
+                                    UnsafeNativeMethods.EvtVariantType.EvtVarTypeUInt32
+                                );
                             break;
                         case (int)UnsafeNativeMethods.EvtSystemPropertyId.EvtSystemThreadID:
-                            systemProperties.ThreadId = (uint?)ConvertToObject(
-                                varVal,
-                                UnsafeNativeMethods.EvtVariantType.EvtVarTypeUInt32
-                            );
+                            systemProperties.ThreadId = (uint?)
+                                ConvertToObject(
+                                    varVal,
+                                    UnsafeNativeMethods.EvtVariantType.EvtVarTypeUInt32
+                                );
                             break;
                         case (int)UnsafeNativeMethods.EvtSystemPropertyId.EvtSystemChannel:
-                            systemProperties.ChannelName = (string)ConvertToObject(
-                                varVal,
-                                UnsafeNativeMethods.EvtVariantType.EvtVarTypeString
-                            );
+                            systemProperties.ChannelName = (string)
+                                ConvertToObject(
+                                    varVal,
+                                    UnsafeNativeMethods.EvtVariantType.EvtVarTypeString
+                                );
                             break;
                         case (int)UnsafeNativeMethods.EvtSystemPropertyId.EvtSystemComputer:
-                            systemProperties.ComputerName = (string)ConvertToObject(
-                                varVal,
-                                UnsafeNativeMethods.EvtVariantType.EvtVarTypeString
-                            );
+                            systemProperties.ComputerName = (string)
+                                ConvertToObject(
+                                    varVal,
+                                    UnsafeNativeMethods.EvtVariantType.EvtVarTypeString
+                                );
                             break;
                         case (int)UnsafeNativeMethods.EvtSystemPropertyId.EvtSystemUserID:
-                            systemProperties.UserId = (SecurityIdentifier)ConvertToObject(
-                                varVal,
-                                UnsafeNativeMethods.EvtVariantType.EvtVarTypeSid
-                            );
+                            systemProperties.UserId = (SecurityIdentifier)
+                                ConvertToObject(
+                                    varVal,
+                                    UnsafeNativeMethods.EvtVariantType.EvtVarTypeSid
+                                );
                             break;
                         case (int)UnsafeNativeMethods.EvtSystemPropertyId.EvtSystemVersion:
-                            systemProperties.Version = (byte?)ConvertToObject(
-                                varVal,
-                                UnsafeNativeMethods.EvtVariantType.EvtVarTypeByte
-                            );
+                            systemProperties.Version = (byte?)
+                                ConvertToObject(
+                                    varVal,
+                                    UnsafeNativeMethods.EvtVariantType.EvtVarTypeByte
+                                );
                             break;
                     }
                     pointer = new IntPtr(((long)pointer + Marshal.SizeOf(varVal)));

@@ -293,9 +293,8 @@ namespace System.IO.Ports.Tests
                     bytesToWrite[bytesToWrite.Length - 1] & 0x7F
                 );
                 //Clear the parity error on the last byte
-                expectedChars[expectedChars.Length - 1] = (char)bytesToWrite[
-                    bytesToWrite.Length - 1
-                ];
+                expectedChars[expectedChars.Length - 1] = (char)
+                    bytesToWrite[bytesToWrite.Length - 1];
 
                 VerifyRead(com1, com2, bytesToWrite, expectedChars);
             }

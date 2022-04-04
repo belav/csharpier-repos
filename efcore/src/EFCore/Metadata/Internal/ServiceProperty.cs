@@ -128,11 +128,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                                       property.ClrType,
                                       property.Name
                                   )!;
-                              return (ServiceParameterBinding)factory.Bind(
-                                  entityType,
-                                  property.ClrType,
-                                  property.Name
-                              );
+                              return (ServiceParameterBinding)
+                                  factory.Bind(entityType, property.ClrType, property.Name);
                           }
                       )
                     : _parameterBinding;

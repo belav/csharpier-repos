@@ -70,7 +70,9 @@ namespace System
             ref byte ptr = ref MemoryMarshal.GetArrayDataReference(array);
             nuint byteLength =
                 array.NativeLength
-                * (nuint)(uint)array.GetElementSize() /* force zero-extension */
+                * (nuint)
+                    (uint)
+                        array.GetElementSize() /* force zero-extension */
             ;
 
             if (RuntimeHelpers.ObjectHasReferences(array))

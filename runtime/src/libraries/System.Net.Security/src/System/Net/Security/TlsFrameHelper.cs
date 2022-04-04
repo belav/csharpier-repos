@@ -576,9 +576,8 @@ namespace System.Net.Security
 
             while (extensions.Length >= ExtensionHeader)
             {
-                ExtensionType extensionType = (ExtensionType)BinaryPrimitives.ReadUInt16BigEndian(
-                    extensions
-                );
+                ExtensionType extensionType = (ExtensionType)
+                    BinaryPrimitives.ReadUInt16BigEndian(extensions);
                 extensions = SkipBytes(extensions, sizeof(ushort));
 
                 ushort extensionLength = BinaryPrimitives.ReadUInt16BigEndian(extensions);

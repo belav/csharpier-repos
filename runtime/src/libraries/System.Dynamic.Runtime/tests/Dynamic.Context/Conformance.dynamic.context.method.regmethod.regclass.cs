@@ -771,15 +771,16 @@ namespace System.Dynamic.Runtime.Tests
                 i++
             )
             {
-                result += (sbyte)mc.Method_ReturnSbyte(
-                    (int)i,
-                    mc,
-                    (short)i,
-                    (decimal)i,
-                    new MyClass(),
-                    (float)i,
-                    (short?)i
-                );
+                result += (sbyte)
+                    mc.Method_ReturnSbyte(
+                        (int)i,
+                        mc,
+                        (short)i,
+                        (decimal)i,
+                        new MyClass(),
+                        (float)i,
+                        (short?)i
+                    );
             }
             Assert.Equal(119, result);
         }
@@ -817,13 +818,14 @@ namespace System.Dynamic.Runtime.Tests
                 case '1':
                     break;
                 default:
-                    c = (char)mc.Method_ReturnChar(
-                        new MyStruct[]
-                        {
-                            new MyStruct() { Number = 0 },
-                            new MyStruct() { Number = 1 }
-                        }
-                    );
+                    c = (char)
+                        mc.Method_ReturnChar(
+                            new MyStruct[]
+                            {
+                                new MyStruct() { Number = 0 },
+                                new MyStruct() { Number = 1 }
+                            }
+                        );
                     break;
             }
             Assert.Equal('b', c);
@@ -878,11 +880,12 @@ namespace System.Dynamic.Runtime.Tests
             {
                 Func<short, short, short, short> func = delegate(short x, short y, short z)
                 {
-                    return (short)mc.Method_ReturnShort_Throw(
-                        (MyEnum)mc.Method_ReturnMyEnum(),
-                        mc.Method_ReturnMyEnum(x, (short)y),
-                        mc.Method_ReturnMyEnum((short)z)
-                    );
+                    return (short)
+                        mc.Method_ReturnShort_Throw(
+                            (MyEnum)mc.Method_ReturnMyEnum(),
+                            mc.Method_ReturnMyEnum(x, (short)y),
+                            mc.Method_ReturnMyEnum((short)z)
+                        );
                 };
                 result = func(1, 2, 3);
             }
@@ -991,9 +994,10 @@ namespace System.Dynamic.Runtime.Tests
         {
             dynamic mc = new MemberClass();
             IsEqual<Test>(
-                (byte?[])mc.Method_ReturnByteArrNullable(
-                    new MyStruct?[] { new MyStruct() { Number = 10 } }
-                )
+                (byte?[])
+                    mc.Method_ReturnByteArrNullable(
+                        new MyStruct?[] { new MyStruct() { Number = 10 } }
+                    )
             );
         }
 
@@ -1135,9 +1139,10 @@ namespace System.Dynamic.Runtime.Tests
             MyClass myclass2 = new MyClass() { Field = 2 };
             dynamic mc = new MemberClass();
             string s = (
-                (object)mc.Method_ReturnCharNullable(
-                    new MyClass[] { myclass0, (MyClass)myclass1, myclass2 }
-                )
+                (object)
+                    mc.Method_ReturnCharNullable(
+                        new MyClass[] { myclass0, (MyClass)myclass1, myclass2 }
+                    )
             ).ToString();
 
             Assert.Equal("z", s);
@@ -1285,13 +1290,8 @@ namespace System.Dynamic.Runtime.Tests
             float p2 = 1.234f;
             float? myFloat = null;
             dynamic dynamic = new MemberClass();
-            float? result = (float?)dynamic.Method_ReturnFloatNullable(
-                ref p1,
-                out p2,
-                p1,
-                p2,
-                myFloat
-            );
+            float? result = (float?)
+                dynamic.Method_ReturnFloatNullable(ref p1, out p2, p1, p2, myFloat);
             Assert.Equal(3f, result);
             Assert.Equal(0.000003f, p1);
             Assert.Equal(2342424, p2);
@@ -1331,12 +1331,8 @@ namespace System.Dynamic.Runtime.Tests
             float p2 = 2f;
             float myFloat = 0.111f;
             dynamic dynamic = new MemberClass();
-            float?[] result = (float?[])dynamic.Method_ReturnFloatArrNullable(
-                ref p1,
-                out p2,
-                p2,
-                myFloat
-            );
+            float?[] result = (float?[])
+                dynamic.Method_ReturnFloatArrNullable(ref p1, out p2, p2, myFloat);
             Assert.Equal(new float?[] { 2 }, result);
             Assert.Equal(0.000003f, p1);
             Assert.Equal(2342424, p2);
@@ -1410,11 +1406,8 @@ namespace System.Dynamic.Runtime.Tests
         public static short?[] s_p1 = null;
         public static bool?[] s_p2 = new bool?[1];
         public static MyEnum s_p3 = default(MyEnum);
-        public static byte[] s_field = (byte[])s_mc.Method_ReturnByteArr(
-            out s_p1,
-            ref s_p2,
-            ref s_p3
-        );
+        public static byte[] s_field = (byte[])
+            s_mc.Method_ReturnByteArr(out s_p1, ref s_p2, ref s_p3);
 
         static ClassWithStaticConstructor() { }
     }
@@ -2230,9 +2223,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
         public static int MainMethod()
         {
             dynamic dy = new MemberClass();
-            MyStruct? result = (MyStruct?)dy.Method_ReturnMyStructNullable(
-                (object)dy.Method_ReturnMyStructNullable()
-            );
+            MyStruct? result = (MyStruct?)
+                dy.Method_ReturnMyStructNullable((object)dy.Method_ReturnMyStructNullable());
             if (result.Value.Number == 3)
                 return 0;
             return 1;
@@ -2264,12 +2256,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
             byte? p1 = null;
             string[] p2 = new string[2];
             dynamic dy = new MemberClass();
-            MyStruct? result = (MyStruct?)dy.Method_ReturnMyStructNullable(
-                out p1,
-                out p2,
-                ulong.MaxValue,
-                ulong.MinValue
-            );
+            MyStruct? result = (MyStruct?)
+                dy.Method_ReturnMyStructNullable(out p1, out p2, ulong.MaxValue, ulong.MinValue);
             if (p1 == 3 && p2.Length == 3 && result.Value.Number == 2)
                 return 0;
             return 1;
@@ -2302,11 +2290,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
             dynamic dy = new MemberClass();
             dynamic intdy = 1;
             dynamic enumdy = MyEnum.First;
-            MyStruct? result = (MyStruct?)dy.Method_ReturnMyStructNullable(
-                (object)dy,
-                (object)intdy,
-                (object)enumdy
-            );
+            MyStruct? result = (MyStruct?)
+                dy.Method_ReturnMyStructNullable((object)dy, (object)intdy, (object)enumdy);
             if (result.Value.Number == 3)
                 return 0;
             return 1;
@@ -2629,11 +2614,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
                 {
                     Test t = new Test();
                     dynamic dy = new MemberClass();
-                    short? result = (short?)dy.Method_ReturnShort_ThrowNullable(
-                        out t._p1,
-                        t._p2,
-                        t._p3
-                    ); //exception
+                    short? result = (short?)
+                        dy.Method_ReturnShort_ThrowNullable(out t._p1, t._p2, t._p3); //exception
                 } while (true);
             }
             catch (ArgumentException ae)
@@ -2857,11 +2839,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
     public class Test
     {
         private static dynamic s_dy = new MemberClass();
-        private string[] _result = (string[])s_dy.Method_ReturnStringArr(
-            MyEnum.First,
-            MyEnum.Second,
-            MyEnum.Third
-        );
+        private string[] _result = (string[])
+            s_dy.Method_ReturnStringArr(MyEnum.First, MyEnum.Second, MyEnum.Third);
 
         [Fact]
         public static void DynamicCSharpRunTest()

@@ -66,13 +66,14 @@ namespace System.Xml.Schema
                 CheckProhibitedFlag(facet, RestrictionFlags.Length, SR.Sch_LengthFacetProhibited);
                 CheckDupFlag(facet, RestrictionFlags.Length, SR.Sch_DupLengthFacet);
                 _derivedRestriction.Length = XmlBaseConverter.DecimalToInt32(
-                    (decimal)ParseFacetValue(
-                        _nonNegativeInt,
-                        facet,
-                        SR.Sch_LengthFacetInvalid,
-                        null,
-                        null
-                    )
+                    (decimal)
+                        ParseFacetValue(
+                            _nonNegativeInt,
+                            facet,
+                            SR.Sch_LengthFacetInvalid,
+                            null,
+                            null
+                        )
                 );
 
                 if ((_baseFixedFlags & RestrictionFlags.Length) != 0)
@@ -122,13 +123,14 @@ namespace System.Xml.Schema
                 );
                 CheckDupFlag(facet, RestrictionFlags.MinLength, SR.Sch_DupMinLengthFacet);
                 _derivedRestriction.MinLength = XmlBaseConverter.DecimalToInt32(
-                    (decimal)ParseFacetValue(
-                        _nonNegativeInt,
-                        facet,
-                        SR.Sch_MinLengthFacetInvalid,
-                        null,
-                        null
-                    )
+                    (decimal)
+                        ParseFacetValue(
+                            _nonNegativeInt,
+                            facet,
+                            SR.Sch_MinLengthFacetInvalid,
+                            null,
+                            null
+                        )
                 );
 
                 if ((_baseFixedFlags & RestrictionFlags.MinLength) != 0)
@@ -169,13 +171,14 @@ namespace System.Xml.Schema
                 );
                 CheckDupFlag(facet, RestrictionFlags.MaxLength, SR.Sch_DupMaxLengthFacet);
                 _derivedRestriction.MaxLength = XmlBaseConverter.DecimalToInt32(
-                    (decimal)ParseFacetValue(
-                        _nonNegativeInt,
-                        facet,
-                        SR.Sch_MaxLengthFacetInvalid,
-                        null,
-                        null
-                    )
+                    (decimal)
+                        ParseFacetValue(
+                            _nonNegativeInt,
+                            facet,
+                            SR.Sch_MaxLengthFacetInvalid,
+                            null,
+                            null
+                        )
                 );
 
                 if ((_baseFixedFlags & RestrictionFlags.MaxLength) != 0)
@@ -459,13 +462,14 @@ namespace System.Xml.Schema
                     .GetSimpleTypeFromTypeCode(XmlTypeCode.PositiveInteger)
                     .Datatype!;
                 _derivedRestriction.TotalDigits = XmlBaseConverter.DecimalToInt32(
-                    (decimal)ParseFacetValue(
-                        positiveInt,
-                        facet,
-                        SR.Sch_TotalDigitsFacetInvalid,
-                        null,
-                        null
-                    )
+                    (decimal)
+                        ParseFacetValue(
+                            positiveInt,
+                            facet,
+                            SR.Sch_TotalDigitsFacetInvalid,
+                            null,
+                            null
+                        )
                 );
 
                 if ((_baseFixedFlags & RestrictionFlags.TotalDigits) != 0)
@@ -494,13 +498,14 @@ namespace System.Xml.Schema
                 );
                 CheckDupFlag(facet, RestrictionFlags.FractionDigits, SR.Sch_DupFractionDigitsFacet);
                 _derivedRestriction.FractionDigits = XmlBaseConverter.DecimalToInt32(
-                    (decimal)ParseFacetValue(
-                        _nonNegativeInt,
-                        facet,
-                        SR.Sch_FractionDigitsFacetInvalid,
-                        null,
-                        null
-                    )
+                    (decimal)
+                        ParseFacetValue(
+                            _nonNegativeInt,
+                            facet,
+                            SR.Sch_FractionDigitsFacetInvalid,
+                            null,
+                            null
+                        )
                 );
 
                 if (
@@ -1597,10 +1602,8 @@ namespace System.Xml.Schema
     {
         internal override Exception? CheckValueFacets(object value, XmlSchemaDatatype datatype)
         {
-            TimeSpan timeSpanValue = (TimeSpan)datatype.ValueConverter.ChangeType(
-                value,
-                typeof(TimeSpan)
-            );
+            TimeSpan timeSpanValue = (TimeSpan)
+                datatype.ValueConverter.ChangeType(value, typeof(TimeSpan));
             return CheckValueFacets(timeSpanValue, datatype);
         }
 
@@ -1965,11 +1968,8 @@ namespace System.Xml.Schema
     {
         internal override Exception? CheckValueFacets(object value, XmlSchemaDatatype datatype)
         {
-            XmlQualifiedName qualifiedNameValue =
-                (XmlQualifiedName)datatype.ValueConverter.ChangeType(
-                    value,
-                    typeof(XmlQualifiedName)
-                );
+            XmlQualifiedName qualifiedNameValue = (XmlQualifiedName)
+                datatype.ValueConverter.ChangeType(value, typeof(XmlQualifiedName));
             return CheckValueFacets(qualifiedNameValue, datatype);
         }
 
@@ -2035,10 +2035,8 @@ namespace System.Xml.Schema
         )
         {
             return MatchEnumeration(
-                (XmlQualifiedName)datatype.ValueConverter.ChangeType(
-                    value,
-                    typeof(XmlQualifiedName)
-                ),
+                (XmlQualifiedName)
+                    datatype.ValueConverter.ChangeType(value, typeof(XmlQualifiedName)),
                 enumeration
             );
         }

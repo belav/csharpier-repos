@@ -89,10 +89,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
             var semanticModel = await document
                 .GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
-            var declaredSymbol = (IMethodSymbol)semanticModel.GetDeclaredSymbol(
-                localFunction,
-                cancellationToken
-            );
+            var declaredSymbol = (IMethodSymbol)
+                semanticModel.GetDeclaredSymbol(localFunction, cancellationToken);
 
             var dataFlow = semanticModel.AnalyzeDataFlow(
                 localFunction.Body ?? (SyntaxNode)localFunction.ExpressionBody.Expression
@@ -251,11 +249,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
                         var additionalArguments = capturesAsParameters
                             .Select(
                                 p =>
-                                    (ArgumentSyntax)GenerateArgument(
-                                        p,
-                                        p.Name,
-                                        shouldUseNamedArguments
-                                    )
+                                    (ArgumentSyntax)
+                                        GenerateArgument(p, p.Name, shouldUseNamedArguments)
                             )
                             .ToArray();
 

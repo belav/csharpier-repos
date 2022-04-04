@@ -38,9 +38,8 @@ public class Test_GetTotalAllocatedBytes
             name,
             BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic
         );
-        GetTotalAllocatedBytesDelegate del = (GetTotalAllocatedBytesDelegate)method.CreateDelegate(
-            typeof(GetTotalAllocatedBytesDelegate)
-        );
+        GetTotalAllocatedBytesDelegate del = (GetTotalAllocatedBytesDelegate)
+            method.CreateDelegate(typeof(GetTotalAllocatedBytesDelegate));
         // Prime the delegate to ensure its been called some.
         del(true);
         del(false);

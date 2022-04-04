@@ -285,10 +285,11 @@ namespace JitBench
         )
         {
             IterationResult iterationResult = new IterationResult();
-            int elapsedMs = (int)(
-                scenarioIteration.ProcessExitInfo.ExitTime
-                - scenarioIteration.ProcessExitInfo.StartTime
-            ).TotalMilliseconds;
+            int elapsedMs = (int)
+                (
+                    scenarioIteration.ProcessExitInfo.ExitTime
+                    - scenarioIteration.ProcessExitInfo.StartTime
+                ).TotalMilliseconds;
             iterationResult.Measurements.Add(Metric.ElapsedTimeMilliseconds, elapsedMs);
             if (
                 !string.IsNullOrWhiteSpace(scenarioIteration.EventLogFileName)

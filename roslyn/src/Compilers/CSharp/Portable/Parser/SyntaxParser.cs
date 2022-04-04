@@ -1027,9 +1027,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     else
                     {
                         // do not create zero-width structured trivia, GetStructure doesn't work well for them
-                        var existing = (SyntaxDiagnosticInfo)token
-                            .GetDiagnostics()
-                            .FirstOrDefault();
+                        var existing = (SyntaxDiagnosticInfo)
+                            token.GetDiagnostics().FirstOrDefault();
                         if (existing != null)
                         {
                             diagnostic = existing;

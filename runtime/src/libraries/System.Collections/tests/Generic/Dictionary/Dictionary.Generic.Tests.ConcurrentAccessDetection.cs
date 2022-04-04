@@ -33,10 +33,11 @@ namespace Generic.Dictionary
                         .GetType()
                         .GetField("_entries", BindingFlags.NonPublic | BindingFlags.Instance);
                     Array entriesInstance = (Array)entriesType.GetValue(dictionary);
-                    Array entryArray = (Array)Activator.CreateInstance(
-                        entriesInstance.GetType(),
-                        new object[] { ((IDictionary)dictionary).Count }
-                    );
+                    Array entryArray = (Array)
+                        Activator.CreateInstance(
+                            entriesInstance.GetType(),
+                            new object[] { ((IDictionary)dictionary).Count }
+                        );
                     entriesType.SetValue(dictionary, entryArray);
 
                     Assert.Equal(
@@ -114,9 +115,8 @@ namespace Generic.Dictionary
                     : new Dictionary<DummyRefType, DummyRefType>(
                           (
                               customComparer =
-                                  (IEqualityComparer<DummyRefType>)Activator.CreateInstance(
-                                      comparerType
-                                  )
+                                  (IEqualityComparer<DummyRefType>)
+                                      Activator.CreateInstance(comparerType)
                           )
                       );
 

@@ -524,13 +524,14 @@ namespace System
                 return BitConverter.HalfToUInt16Bits((Half)(result));
             }
 
-            return (ushort)NumberToFloatingPointBitsSlow(
-                ref number,
-                in info,
-                positiveExponent,
-                integerDigitsPresent,
-                fractionalDigitsPresent
-            );
+            return (ushort)
+                NumberToFloatingPointBitsSlow(
+                    ref number,
+                    in info,
+                    positiveExponent,
+                    integerDigitsPresent,
+                    fractionalDigitsPresent
+                );
         }
 
         private static uint NumberToSingleFloatingPointBits(
@@ -614,13 +615,14 @@ namespace System
                 return BitConverter.SingleToUInt32Bits((float)(result));
             }
 
-            return (uint)NumberToFloatingPointBitsSlow(
-                ref number,
-                in info,
-                positiveExponent,
-                integerDigitsPresent,
-                fractionalDigitsPresent
-            );
+            return (uint)
+                NumberToFloatingPointBitsSlow(
+                    ref number,
+                    in info,
+                    positiveExponent,
+                    integerDigitsPresent,
+                    fractionalDigitsPresent
+                );
         }
 
         private static ulong NumberToFloatingPointBitsSlow(

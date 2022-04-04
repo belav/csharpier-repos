@@ -817,9 +817,8 @@ namespace System.Diagnostics
                 generator.Emit(OpCodes.Ldarg_0);
                 generator.Emit(OpCodes.Ldfld, field);
                 generator.Emit(OpCodes.Ret);
-                return (Func<TClass, TField>)getterMethod.CreateDelegate(
-                    typeof(Func<TClass, TField>)
-                );
+                return (Func<TClass, TField>)
+                    getterMethod.CreateDelegate(typeof(Func<TClass, TField>));
             }
 
             return null;
@@ -851,9 +850,8 @@ namespace System.Diagnostics
                 generator.Emit(OpCodes.Ldfld, field);
                 generator.Emit(OpCodes.Ret);
 
-                return (Func<object, TField>)getterMethod.CreateDelegate(
-                    typeof(Func<object, TField>)
-                );
+                return (Func<object, TField>)
+                    getterMethod.CreateDelegate(typeof(Func<object, TField>));
             }
 
             return null;

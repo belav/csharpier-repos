@@ -98,9 +98,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         RuntimeModelDependencies? ModelDependencies
         {
             get =>
-                (RuntimeModelDependencies?)FindRuntimeAnnotationValue(
-                    CoreAnnotationNames.ModelDependencies
-                );
+                (RuntimeModelDependencies?)
+                    FindRuntimeAnnotationValue(CoreAnnotationNames.ModelDependencies);
             set =>
                 SetRuntimeAnnotation(
                     CoreAnnotationNames.ModelDependencies,
@@ -152,11 +151,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             string definingNavigationName,
             IEntityType definingEntityType
         ) =>
-            (IEntityType?)((IReadOnlyModel)this).FindEntityType(
-                type,
-                definingNavigationName,
-                definingEntityType
-            );
+            (IEntityType?)
+                ((IReadOnlyModel)this).FindEntityType(
+                    type,
+                    definingNavigationName,
+                    definingEntityType
+                );
 
         /// <summary>
         ///     Gets the entity types matching the given type.

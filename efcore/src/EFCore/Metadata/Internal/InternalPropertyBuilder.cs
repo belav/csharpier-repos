@@ -219,10 +219,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             PropertyAccessMode? propertyAccessMode,
             ConfigurationSource configurationSource
         ) =>
-            (InternalPropertyBuilder?)base.UsePropertyAccessMode(
-                propertyAccessMode,
-                configurationSource
-            );
+            (InternalPropertyBuilder?)
+                base.UsePropertyAccessMode(propertyAccessMode, configurationSource);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -534,9 +532,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             configurationSource.Overrides(Metadata.GetValueGeneratorFactoryConfigurationSource())
             || (
                 Metadata[CoreAnnotationNames.ValueGeneratorFactoryType] == null
-                && (Func<IProperty, IEntityType, ValueGenerator>?)Metadata[
-                    CoreAnnotationNames.ValueGeneratorFactory
-                ] == factory
+                && (Func<IProperty, IEntityType, ValueGenerator>?)
+                    Metadata[CoreAnnotationNames.ValueGeneratorFactory] == factory
             );
 
         /// <summary>

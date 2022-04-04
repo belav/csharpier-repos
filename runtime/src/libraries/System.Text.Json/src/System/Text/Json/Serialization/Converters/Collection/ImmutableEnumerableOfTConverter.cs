@@ -37,7 +37,8 @@ namespace System.Text.Json.Serialization.Converters
             Func<IEnumerable<TElement>, TCollection>? creator = (Func<
                 IEnumerable<TElement>,
                 TCollection
-            >?)typeInfo.CreateObjectWithArgs;
+            >?)
+                typeInfo.CreateObjectWithArgs;
             Debug.Assert(creator != null);
             state.Current.ReturnValue = creator((List<TElement>)state.Current.ReturnValue!);
         }

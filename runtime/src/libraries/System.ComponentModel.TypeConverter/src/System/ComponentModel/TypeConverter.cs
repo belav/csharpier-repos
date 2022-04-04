@@ -450,9 +450,8 @@ namespace System.ComponentModel
             /// </summary>
             public override bool CanResetValue(object component)
             {
-                DefaultValueAttribute? attr = (DefaultValueAttribute?)Attributes[
-                    typeof(DefaultValueAttribute)
-                ];
+                DefaultValueAttribute? attr = (DefaultValueAttribute?)
+                    Attributes[typeof(DefaultValueAttribute)];
                 if (attr == null)
                 {
                     return false;
@@ -466,9 +465,8 @@ namespace System.ComponentModel
             /// </summary>
             public override void ResetValue(object component)
             {
-                DefaultValueAttribute? attr = (DefaultValueAttribute?)Attributes[
-                    typeof(DefaultValueAttribute)
-                ];
+                DefaultValueAttribute? attr = (DefaultValueAttribute?)
+                    Attributes[typeof(DefaultValueAttribute)];
                 if (attr != null)
                 {
                     SetValue(component, attr.Value);

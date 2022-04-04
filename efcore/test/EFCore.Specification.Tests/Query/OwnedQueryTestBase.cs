@@ -910,9 +910,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<OwnedPerson>()
                         .Where(
                             g =>
-                                (string)ss.Set<OwnedPerson>()
-                                    .Where(c => c.Id == g.Id)
-                                    .FirstOrDefault()["Name"] == "Mona Cy"
+                                (string)
+                                    ss.Set<OwnedPerson>().Where(c => c.Id == g.Id).FirstOrDefault()[
+                                        "Name"
+                                    ] == "Mona Cy"
                         )
                         .Select(c => (string)c["Name"])
             );

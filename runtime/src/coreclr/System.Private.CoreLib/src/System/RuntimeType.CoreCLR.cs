@@ -292,30 +292,34 @@ namespace System
                     switch (cacheType)
                     {
                         case CacheType.Method:
-                            list = (T[])(object)new RuntimeMethodInfo[1]
-                            {
-                                new RuntimeMethodInfo(
-                                    method,
-                                    declaringType,
-                                    m_runtimeTypeCache,
-                                    methodAttributes,
-                                    bindingFlags,
-                                    null
-                                )
-                            };
+                            list = (T[])
+                                (object)
+                                    new RuntimeMethodInfo[1]
+                                    {
+                                        new RuntimeMethodInfo(
+                                            method,
+                                            declaringType,
+                                            m_runtimeTypeCache,
+                                            methodAttributes,
+                                            bindingFlags,
+                                            null
+                                        )
+                                    };
                             break;
 
                         case CacheType.Constructor:
-                            list = (T[])(object)new RuntimeConstructorInfo[1]
-                            {
-                                new RuntimeConstructorInfo(
-                                    method,
-                                    declaringType,
-                                    m_runtimeTypeCache,
-                                    methodAttributes,
-                                    bindingFlags
-                                )
-                            };
+                            list = (T[])
+                                (object)
+                                    new RuntimeConstructorInfo[1]
+                                    {
+                                        new RuntimeConstructorInfo(
+                                            method,
+                                            declaringType,
+                                            m_runtimeTypeCache,
+                                            methodAttributes,
+                                            bindingFlags
+                                        )
+                                    };
                             break;
                     }
 
@@ -370,10 +374,17 @@ namespace System
 
                     BindingFlags bindingFlags = FilterPreCalculate(isPublic, isInherited, isStatic);
 
-                    T[] list = (T[])(object)new RuntimeFieldInfo[1]
-                    {
-                        new RtFieldInfo(field, ReflectedType, m_runtimeTypeCache, bindingFlags)
-                    };
+                    T[] list = (T[])
+                        (object)
+                            new RuntimeFieldInfo[1]
+                            {
+                                new RtFieldInfo(
+                                    field,
+                                    ReflectedType,
+                                    m_runtimeTypeCache,
+                                    bindingFlags
+                                )
+                            };
 
                     Insert(ref list, null, MemberListType.HandleToInfo);
 
@@ -1305,9 +1316,8 @@ namespace System
                                 AddSpecialInterface(
                                     ref list,
                                     filter,
-                                    (RuntimeType)typeof(IReadOnlyCollection<>).MakeGenericType(
-                                        arrayType
-                                    ),
+                                    (RuntimeType)
+                                        typeof(IReadOnlyCollection<>).MakeGenericType(arrayType),
                                     false
                                 );
                             }
@@ -2226,8 +2236,8 @@ namespace System
                 else if (declaredType.IsGenericType)
                 {
                     // ignoring instantiation is the ReflectedType a subtype of the DeclaringType
-                    RuntimeType declaringDefinition =
-                        (RuntimeType)declaredType.GetGenericTypeDefinition();
+                    RuntimeType declaringDefinition = (RuntimeType)
+                        declaredType.GetGenericTypeDefinition();
 
                     RuntimeType? baseType = reflectedType;
 
@@ -2987,8 +2997,8 @@ namespace System
             if (cache == null)
             {
                 cache = new RuntimeTypeCache(this);
-                RuntimeTypeCache? existingCache =
-                    (RuntimeTypeCache?)GCHandle.InternalCompareExchange(m_cache, cache, null);
+                RuntimeTypeCache? existingCache = (RuntimeTypeCache?)
+                    GCHandle.InternalCompareExchange(m_cache, cache, null);
                 if (existingCache != null)
                     cache = existingCache;
             }

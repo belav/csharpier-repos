@@ -93,10 +93,11 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             FieldInfo field;
 #if DNXCORE50 && !NETSTANDARD2_0
-            field = (FieldInfo)Newtonsoft.Json.Utilities.TypeExtensions.GetField(
-                typeof(ReflectionTestObject),
-                "TestField"
-            );
+            field = (FieldInfo)
+                Newtonsoft.Json.Utilities.TypeExtensions.GetField(
+                    typeof(ReflectionTestObject),
+                    "TestField"
+                );
 #else
             field = typeof(ReflectionTestObject).GetField("TestField");
 #endif

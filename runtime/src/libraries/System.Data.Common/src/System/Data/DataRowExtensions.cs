@@ -150,16 +150,17 @@ namespace System.Data
                     return
                         typeof(T).IsGenericType
                         && typeof(T).GetGenericTypeDefinition() == typeof(Nullable<>)
-                      ? (Converter<object, T>)Delegate.CreateDelegate(
-                            typeof(Converter<object, T>),
-                            typeof(UnboxT<T>)
-                                .GetMethod(
-                                    "NullableField",
-                                    System.Reflection.BindingFlags.Static
-                                        | System.Reflection.BindingFlags.NonPublic
-                                )!
-                                .MakeGenericMethod(typeof(T).GetGenericArguments()[0])
-                        )
+                      ? (Converter<object, T>)
+                            Delegate.CreateDelegate(
+                                typeof(Converter<object, T>),
+                                typeof(UnboxT<T>)
+                                    .GetMethod(
+                                        "NullableField",
+                                        System.Reflection.BindingFlags.Static
+                                            | System.Reflection.BindingFlags.NonPublic
+                                    )!
+                                    .MakeGenericMethod(typeof(T).GetGenericArguments()[0])
+                            )
                       : ValueField;
                 }
 

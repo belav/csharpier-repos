@@ -392,13 +392,14 @@ namespace System.Web.Http.ModelBinding
                     settings,
                     configuration
                 );
-                int actual = (int)formData.ReadAs(
-                    typeof(int),
-                    "a",
-                    requiredMemberSelector: null,
-                    formatterLogger: (new Mock<IFormatterLogger>()).Object,
-                    config: configuration
-                );
+                int actual = (int)
+                    formData.ReadAs(
+                        typeof(int),
+                        "a",
+                        requiredMemberSelector: null,
+                        formatterLogger: (new Mock<IFormatterLogger>()).Object,
+                        config: configuration
+                    );
 
                 // Assert
                 Assert.Equal(30, actual);

@@ -39,9 +39,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertNamespace
                 return;
 
             var position = span.Start;
-            var root = (CompilationUnitSyntax)await document
-                .GetRequiredSyntaxRootAsync(cancellationToken)
-                .ConfigureAwait(false);
+            var root = (CompilationUnitSyntax)
+                await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             var token = root.FindToken(position);
             var namespaceDecl = token.GetAncestor<BaseNamespaceDeclarationSyntax>();
             if (namespaceDecl == null)

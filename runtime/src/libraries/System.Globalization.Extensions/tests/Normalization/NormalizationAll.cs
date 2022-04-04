@@ -17,13 +17,14 @@ namespace System.Globalization.Tests
             foreach (string part in parts)
             {
                 sb.Append(
-                    (char)int.Parse(
-                        part,
-                        NumberStyles.HexNumber
-                            | NumberStyles.AllowTrailingWhite
-                            | NumberStyles.AllowLeadingWhite,
-                        CultureInfo.InvariantCulture
-                    )
+                    (char)
+                        int.Parse(
+                            part,
+                            NumberStyles.HexNumber
+                                | NumberStyles.AllowTrailingWhite
+                                | NumberStyles.AllowLeadingWhite,
+                            CultureInfo.InvariantCulture
+                        )
                 );
             }
             return sb.ToString();

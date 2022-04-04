@@ -361,8 +361,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             var relatedEntry = stateManager.GetOrCreateEntry(new RelatedFakeEntity { Id = 42 });
             relatedEntry.SetEntityState(EntityState.Added);
 
-            var factory =
-                (TestModificationCommandBatchFactory)configuration.GetService<IModificationCommandBatchFactory>();
+            var factory = (TestModificationCommandBatchFactory)
+                configuration.GetService<IModificationCommandBatchFactory>();
 
             var modelData = new UpdateAdapter(stateManager);
 

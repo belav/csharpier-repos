@@ -469,8 +469,8 @@ namespace SerializationTestTypes
                 );
                 if (dataContractAttributes != null && dataContractAttributes.Length > 0)
                 {
-                    DataContractAttribute dataContractAttribute =
-                        (DataContractAttribute)dataContractAttributes[0];
+                    DataContractAttribute dataContractAttribute = (DataContractAttribute)
+                        dataContractAttributes[0];
                     hasDataContract = true;
                     if (dataContractAttribute.Name != null)
                     {
@@ -638,9 +638,8 @@ namespace SerializationTestTypes
             string dataContractNs = null;
             for (int i = 0; i < nsAttributes.Length; i++)
             {
-                ContractNamespaceAttribute nsAttribute = (ContractNamespaceAttribute)nsAttributes[
-                    i
-                ];
+                ContractNamespaceAttribute nsAttribute = (ContractNamespaceAttribute)
+                    nsAttributes[i];
                 string clrNsInAttribute = nsAttribute.ClrNamespace;
                 if (clrNsInAttribute == null)
                     clrNsInAttribute = string.Empty;
@@ -678,8 +677,8 @@ namespace SerializationTestTypes
 
                 if (dataContractAttributes != null && dataContractAttributes.Length > 0)
                 {
-                    DataContractAttribute dataContractAttribute =
-                        (DataContractAttribute)dataContractAttributes[0];
+                    DataContractAttribute dataContractAttribute = (DataContractAttribute)
+                        dataContractAttributes[0];
                     if (
                         !dataContractAttribute.IsReference
                         && this is ClassDataContract
@@ -905,10 +904,8 @@ namespace SerializationTestTypes
                 && baseType != Globals.TypeOfObject
                 && baseType != Globals.TypeOfValueType
             )
-                this.BaseContract = (ClassDataContract)DataContract.GetDataContract(
-                    baseType,
-                    supportCollectionDataContract
-                );
+                this.BaseContract = (ClassDataContract)
+                    DataContract.GetDataContract(baseType, supportCollectionDataContract);
             else
                 this.BaseContract = null;
         }
@@ -1611,9 +1608,8 @@ namespace SerializationTestTypes
                                     + " :: "
                                     + field.Name
                             );
-                        DataMemberAttribute memberAttribute = (DataMemberAttribute)memberAttributes[
-                            0
-                        ];
+                        DataMemberAttribute memberAttribute = (DataMemberAttribute)
+                            memberAttributes[0];
                         DataMember memberContract = new DataMember(field);
                         if (memberAttribute.Name == null || memberAttribute.Name.Length == 0)
                             memberContract.Name = field.Name;
@@ -1863,8 +1859,8 @@ namespace SerializationTestTypes
                 && collectionDataContractAttributes.Length > 0
             )
             {
-                collectionContractAttribute =
-                    (CollectionDataContractAttribute)collectionDataContractAttributes[0];
+                collectionContractAttribute = (CollectionDataContractAttribute)
+                    collectionDataContractAttributes[0];
             }
 
             if (ItemType != null)

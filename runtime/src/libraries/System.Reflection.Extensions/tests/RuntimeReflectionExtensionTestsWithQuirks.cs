@@ -39,12 +39,12 @@ namespace System.Reflection.Tests
 
                 properties.Clear();
                 properties.AddRange(
-                    (IEnumerable<string>)type.GetDeclaredField("DeclaredPropertyNames")
-                        .GetValue(null)
+                    (IEnumerable<string>)
+                        type.GetDeclaredField("DeclaredPropertyNames").GetValue(null)
                 );
                 properties.AddRange(
-                    (IEnumerable<string>)type.GetDeclaredField("InheritedPropertyNames")
-                        .GetValue(null)
+                    (IEnumerable<string>)
+                        type.GetDeclaredField("InheritedPropertyNames").GetValue(null)
                 );
 
                 Assert.All(

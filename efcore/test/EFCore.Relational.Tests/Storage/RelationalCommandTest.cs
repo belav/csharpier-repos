@@ -229,15 +229,16 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             var relationalCommand = CreateRelationalCommand();
 
-            var result = (string)relationalCommand.ExecuteScalar(
-                new RelationalCommandParameterObject(
-                    new FakeRelationalConnection(options),
-                    null,
-                    null,
-                    null,
-                    null
-                )
-            );
+            var result = (string)
+                relationalCommand.ExecuteScalar(
+                    new RelationalCommandParameterObject(
+                        new FakeRelationalConnection(options),
+                        null,
+                        null,
+                        null,
+                        null
+                    )
+                );
 
             Assert.Equal("ExecuteScalar Result", result);
 
@@ -279,15 +280,16 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             var relationalCommand = CreateRelationalCommand();
 
-            var result = (string)await relationalCommand.ExecuteScalarAsync(
-                new RelationalCommandParameterObject(
-                    new FakeRelationalConnection(options),
-                    null,
-                    null,
-                    null,
-                    null
-                )
-            );
+            var result = (string)
+                await relationalCommand.ExecuteScalarAsync(
+                    new RelationalCommandParameterObject(
+                        new FakeRelationalConnection(options),
+                        null,
+                        null,
+                        null,
+                        null
+                    )
+                );
 
             Assert.Equal("ExecuteScalar Result", result);
 
@@ -775,10 +777,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             var fakeConnection = CreateConnection();
 
-            var typeMapper = (IRelationalTypeMappingSource)new TestRelationalTypeMappingSource(
-                TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
-            );
+            var typeMapper = (IRelationalTypeMappingSource)
+                new TestRelationalTypeMappingSource(
+                    TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
+                    TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+                );
 
             var dbParameter = new FakeDbParameter
             {

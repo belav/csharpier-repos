@@ -55,18 +55,22 @@ public class InterlockedExchange1
         {
             for (int i = 0; i < c_NUM_LOOPS; i++)
             {
-                value = (T)(object)TestLibrary.Generator.GetString(
-                    -55,
-                    false,
-                    c_MIN_STRING_LEN,
-                    c_MAX_STRING_LEN
-                );
-                location = (T)(object)TestLibrary.Generator.GetString(
-                    -55,
-                    false,
-                    c_MIN_STRING_LEN,
-                    c_MAX_STRING_LEN
-                );
+                value = (T)
+                    (object)
+                        TestLibrary.Generator.GetString(
+                            -55,
+                            false,
+                            c_MIN_STRING_LEN,
+                            c_MAX_STRING_LEN
+                        );
+                location = (T)
+                    (object)
+                        TestLibrary.Generator.GetString(
+                            -55,
+                            false,
+                            c_MIN_STRING_LEN,
+                            c_MAX_STRING_LEN
+                        );
                 prevLocation = location;
 
                 oldLocation = Interlocked.Exchange<T>(ref location, value);

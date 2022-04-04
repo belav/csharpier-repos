@@ -203,14 +203,36 @@ namespace System.Net.NetworkInformation
             Interop.IpHlpApi.IPOptions ipOptions = new Interop.IpHlpApi.IPOptions(options);
             if (!_ipv6)
             {
-                return (int)Interop.IpHlpApi.IcmpSendEcho2(
-                    _handlePingV4!,
+                return (int)
+                    Interop.IpHlpApi.IcmpSendEcho2(
+                        _handlePingV4!,
+                        GetWaitHandle(isAsync),
+                        IntPtr.Zero,
+                        IntPtr.Zero,
+#pragma warning disable CS0618 // Address is marked obsolete
+                        (uint)address.Address,
+#pragma warning restore CS0618
+                        _requestBuffer!,
+                        (ushort)buffer.Length,
+                        ref ipOptions,
+                        _replyBuffer!,
+                        MaxUdpPacket,
+                        (uint)timeout
+                    );
+            }
+
+            IPEndPoint ep = new IPEndPoint(address, 0);
+            Internals.SocketAddress remoteAddr = IPEndPointExtensions.Serialize(ep);
+            byte[] sourceAddr = new byte[28];
+
+            return (int)
+                Interop.IpHlpApi.Icmp6SendEcho2(
+                    _handlePingV6!,
                     GetWaitHandle(isAsync),
                     IntPtr.Zero,
                     IntPtr.Zero,
-#pragma warning disable CS0618 // Address is marked obsolete
-                    (uint)address.Address,
-#pragma warning restore CS0618
+                    sourceAddr,
+                    remoteAddr.Buffer,
                     _requestBuffer!,
                     (ushort)buffer.Length,
                     ref ipOptions,
@@ -218,26 +240,6 @@ namespace System.Net.NetworkInformation
                     MaxUdpPacket,
                     (uint)timeout
                 );
-            }
-
-            IPEndPoint ep = new IPEndPoint(address, 0);
-            Internals.SocketAddress remoteAddr = IPEndPointExtensions.Serialize(ep);
-            byte[] sourceAddr = new byte[28];
-
-            return (int)Interop.IpHlpApi.Icmp6SendEcho2(
-                _handlePingV6!,
-                GetWaitHandle(isAsync),
-                IntPtr.Zero,
-                IntPtr.Zero,
-                sourceAddr,
-                remoteAddr.Buffer,
-                _requestBuffer!,
-                (ushort)buffer.Length,
-                ref ipOptions,
-                _replyBuffer!,
-                MaxUdpPacket,
-                (uint)timeout
-            );
         }
 
         private PingReply CreatePingReply()

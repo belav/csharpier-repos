@@ -105,9 +105,10 @@ public class PInvokeTableGenerator : Task
                     attr => attr.AttributeType.Name == "DllImportAttribute"
                 );
                 var module = (string)dllimport.ConstructorArguments[0].Value!;
-                var entrypoint = (string)dllimport.NamedArguments
-                    .First(arg => arg.MemberName == "EntryPoint")
-                    .TypedValue.Value!;
+                var entrypoint = (string)
+                    dllimport.NamedArguments
+                        .First(arg => arg.MemberName == "EntryPoint")
+                        .TypedValue.Value!;
                 pinvokes.Add(new PInvoke(entrypoint, module, method));
             }
 

@@ -209,17 +209,20 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         if (
                             (object)method
-                                == (object)_compilation.GetSpecialTypeMember(
-                                    SpecialMember.System_String__ConcatStringString
-                                )
+                                == (object)
+                                    _compilation.GetSpecialTypeMember(
+                                        SpecialMember.System_String__ConcatStringString
+                                    )
                             || (object)method
-                                == (object)_compilation.GetSpecialTypeMember(
-                                    SpecialMember.System_String__ConcatStringStringString
-                                )
+                                == (object)
+                                    _compilation.GetSpecialTypeMember(
+                                        SpecialMember.System_String__ConcatStringStringString
+                                    )
                             || (object)method
-                                == (object)_compilation.GetSpecialTypeMember(
-                                    SpecialMember.System_String__ConcatStringStringStringString
-                                )
+                                == (object)
+                                    _compilation.GetSpecialTypeMember(
+                                        SpecialMember.System_String__ConcatStringStringStringString
+                                    )
                         )
                         {
                             arguments = boundCall.Arguments;
@@ -228,9 +231,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                         if (
                             (object)method
-                            == (object)_compilation.GetSpecialTypeMember(
-                                SpecialMember.System_String__ConcatStringArray
-                            )
+                            == (object)
+                                _compilation.GetSpecialTypeMember(
+                                    SpecialMember.System_String__ConcatStringArray
+                                )
                         )
                         {
                             var args = boundCall.Arguments[0] as BoundArrayCreation;

@@ -156,11 +156,8 @@ namespace System.Linq.Parallel
             CountdownEvent sharedBarrier = new CountdownEvent(partitionCount);
 
             Debug.Assert(_indexedPredicate == null || typeof(TKey) == typeof(int));
-            Func<TResult, TKey, bool>? convertedIndexedPredicate = (Func<
-                TResult,
-                TKey,
-                bool
-            >?)(object?)_indexedPredicate;
+            Func<TResult, TKey, bool>? convertedIndexedPredicate = (Func<TResult, TKey, bool>?)
+                (object?)_indexedPredicate;
 
             PartitionedStream<TResult, TKey> partitionedStream = new PartitionedStream<
                 TResult,

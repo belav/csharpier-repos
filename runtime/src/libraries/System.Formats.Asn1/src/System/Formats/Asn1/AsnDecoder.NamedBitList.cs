@@ -111,10 +111,17 @@ namespace System.Formats.Asn1
         {
             Type tFlagsEnum = typeof(TFlagsEnum);
 
-            TFlagsEnum ret = (TFlagsEnum)Enum.ToObject(
-                tFlagsEnum,
-                ReadNamedBitListValue(source, ruleSet, tFlagsEnum, out int consumed, expectedTag)
-            );
+            TFlagsEnum ret = (TFlagsEnum)
+                Enum.ToObject(
+                    tFlagsEnum,
+                    ReadNamedBitListValue(
+                        source,
+                        ruleSet,
+                        tFlagsEnum,
+                        out int consumed,
+                        expectedTag
+                    )
+                );
 
             // Now that there's nothing left to throw, assign bytesConsumed.
             bytesConsumed = consumed;

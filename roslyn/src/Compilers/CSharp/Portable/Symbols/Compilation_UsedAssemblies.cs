@@ -255,9 +255,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                                                     if (
                                                         !(
-                                                            (RetargetingModuleSymbol)retargetingAssembly.Modules[
-                                                                0
-                                                            ]
+                                                            (RetargetingModuleSymbol)
+                                                                retargetingAssembly.Modules[0]
                                                         ).RetargetingDefinitions(
                                                             underlyingDependency,
                                                             out dependency

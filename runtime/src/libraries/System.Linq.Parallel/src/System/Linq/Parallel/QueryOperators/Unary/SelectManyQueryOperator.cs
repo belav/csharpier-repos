@@ -266,9 +266,10 @@ namespace System.Linq.Parallel
                         .Wrap(Child.AsSequentialQuery(token), token)
                         .SelectMany(_rightChildSelector, _resultSelector);
                 }
-                return (IEnumerable<TOutput>)CancellableEnumerable
-                    .Wrap(Child.AsSequentialQuery(token), token)
-                    .SelectMany(_rightChildSelector);
+                return (IEnumerable<TOutput>)
+                    CancellableEnumerable
+                        .Wrap(Child.AsSequentialQuery(token), token)
+                        .SelectMany(_rightChildSelector);
             }
             else
             {
@@ -280,9 +281,10 @@ namespace System.Linq.Parallel
                         .SelectMany(_indexedRightChildSelector, _resultSelector);
                 }
 
-                return (IEnumerable<TOutput>)CancellableEnumerable
-                    .Wrap(Child.AsSequentialQuery(token), token)
-                    .SelectMany(_indexedRightChildSelector);
+                return (IEnumerable<TOutput>)
+                    CancellableEnumerable
+                        .Wrap(Child.AsSequentialQuery(token), token)
+                        .SelectMany(_indexedRightChildSelector);
             }
         }
 

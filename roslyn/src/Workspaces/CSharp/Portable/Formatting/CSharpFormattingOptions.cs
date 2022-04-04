@@ -103,7 +103,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 
         /// <inheritdoc cref="CSharpFormattingOptions2.SpacingAroundBinaryOperator"/>
         public static Option<BinaryOperatorSpacingOptions> SpacingAroundBinaryOperator { get; } =
-            (Option<BinaryOperatorSpacingOptions>)CSharpFormattingOptions2.SpacingAroundBinaryOperator!;
+            (Option<BinaryOperatorSpacingOptions>)
+                CSharpFormattingOptions2.SpacingAroundBinaryOperator!;
 
         /// <inheritdoc cref="CSharpFormattingOptions2.IndentBraces"/>
         public static Option<bool> IndentBraces { get; } =
@@ -167,7 +168,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 
         /// <inheritdoc cref="CSharpFormattingOptions2.NewLinesForBracesInObjectCollectionArrayInitializers"/>
         public static Option<bool> NewLinesForBracesInObjectCollectionArrayInitializers { get; } =
-            (Option<bool>)CSharpFormattingOptions2.NewLinesForBracesInObjectCollectionArrayInitializers!;
+            (Option<bool>)
+                CSharpFormattingOptions2.NewLinesForBracesInObjectCollectionArrayInitializers!;
 
         /// <inheritdoc cref="CSharpFormattingOptions2.NewLinesForBracesInLambdaExpressionBody"/>
         public static Option<bool> NewLinesForBracesInLambdaExpressionBody { get; } =

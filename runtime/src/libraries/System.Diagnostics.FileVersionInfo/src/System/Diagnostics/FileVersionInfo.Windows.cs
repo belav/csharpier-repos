@@ -84,9 +84,8 @@ namespace System.Diagnostics
 
             if (Interop.Version.VerQueryValue(memPtr, "\\", out memRef, out memLen))
             {
-                return (Interop.Version.VS_FIXEDFILEINFO)Marshal.PtrToStructure<Interop.Version.VS_FIXEDFILEINFO>(
-                    memRef
-                );
+                return (Interop.Version.VS_FIXEDFILEINFO)
+                    Marshal.PtrToStructure<Interop.Version.VS_FIXEDFILEINFO>(memRef);
             }
 
             return default;

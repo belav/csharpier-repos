@@ -322,8 +322,8 @@ internal sealed class Response
                 var handle = GCHandle.Alloc(dataChunks, GCHandleType.Pinned);
                 pinnedHeaders.Add(handle);
                 _nativeResponse.Response_V1.EntityChunkCount = (ushort)dataChunks.Length;
-                _nativeResponse.Response_V1.pEntityChunks =
-                    (HttpApiTypes.HTTP_DATA_CHUNK*)handle.AddrOfPinnedObject();
+                _nativeResponse.Response_V1.pEntityChunks = (HttpApiTypes.HTTP_DATA_CHUNK*)
+                    handle.AddrOfPinnedObject();
             }
             else if (asyncResult != null && asyncResult.DataChunks != null)
             {
@@ -340,10 +340,8 @@ internal sealed class Response
             if (_cacheTtl.HasValue && _cacheTtl.Value > TimeSpan.Zero)
             {
                 cachePolicy.Policy = HttpApiTypes.HTTP_CACHE_POLICY_TYPE.HttpCachePolicyTimeToLive;
-                cachePolicy.SecondsToLive = (uint)Math.Min(
-                    _cacheTtl.Value.Ticks / TimeSpan.TicksPerSecond,
-                    Int32.MaxValue
-                );
+                cachePolicy.SecondsToLive = (uint)
+                    Math.Min(_cacheTtl.Value.Ticks / TimeSpan.TicksPerSecond, Int32.MaxValue);
             }
 
             byte[] reasonPhraseBytes = HeaderEncoding.GetBytes(reasonPhrase);
@@ -596,10 +594,8 @@ internal sealed class Response
                         || (
                             isOpaqueUpgrade
                             && lookup
-                                == (int)HttpApiTypes
-                                    .HTTP_RESPONSE_HEADER_ID
-                                    .Enum
-                                    .HttpHeaderConnection
+                                == (int)
+                                    HttpApiTypes.HTTP_RESPONSE_HEADER_ID.Enum.HttpHeaderConnection
                         )
                     )
                     {
@@ -663,15 +659,15 @@ internal sealed class Response
                             ];
                             gcHandle = GCHandle.Alloc(knownHeaderInfo, GCHandleType.Pinned);
                             pinnedHeaders.Add(gcHandle);
-                            _nativeResponse.pResponseInfo =
-                                (HttpApiTypes.HTTP_RESPONSE_INFO*)gcHandle.AddrOfPinnedObject();
+                            _nativeResponse.pResponseInfo = (HttpApiTypes.HTTP_RESPONSE_INFO*)
+                                gcHandle.AddrOfPinnedObject();
                         }
 
                         knownHeaderInfo[_nativeResponse.ResponseInfoCount].Type = HttpApiTypes
                             .HTTP_RESPONSE_INFO_TYPE
                             .HttpResponseInfoTypeMultipleKnownHeaders;
-                        knownHeaderInfo[_nativeResponse.ResponseInfoCount].Length =
-                            (uint)Marshal.SizeOf<HttpApiTypes.HTTP_MULTIPLE_KNOWN_HEADERS>();
+                        knownHeaderInfo[_nativeResponse.ResponseInfoCount].Length = (uint)
+                            Marshal.SizeOf<HttpApiTypes.HTTP_MULTIPLE_KNOWN_HEADERS>();
 
                         HttpApiTypes.HTTP_MULTIPLE_KNOWN_HEADERS header =
                             new HttpApiTypes.HTTP_MULTIPLE_KNOWN_HEADERS();
@@ -683,8 +679,8 @@ internal sealed class Response
                             new HttpApiTypes.HTTP_KNOWN_HEADER[headerValues.Count];
                         gcHandle = GCHandle.Alloc(nativeHeaderValues, GCHandleType.Pinned);
                         pinnedHeaders.Add(gcHandle);
-                        header.KnownHeaders =
-                            (HttpApiTypes.HTTP_KNOWN_HEADER*)gcHandle.AddrOfPinnedObject();
+                        header.KnownHeaders = (HttpApiTypes.HTTP_KNOWN_HEADER*)
+                            gcHandle.AddrOfPinnedObject();
 
                         for (
                             int headerValueIndex = 0;
@@ -695,12 +691,12 @@ internal sealed class Response
                             // Add Value
                             headerValue = headerValues[headerValueIndex] ?? string.Empty;
                             bytes = HeaderEncoding.GetBytes(headerValue);
-                            nativeHeaderValues[header.KnownHeaderCount].RawValueLength =
-                                (ushort)bytes.Length;
+                            nativeHeaderValues[header.KnownHeaderCount].RawValueLength = (ushort)
+                                bytes.Length;
                             gcHandle = GCHandle.Alloc(bytes, GCHandleType.Pinned);
                             pinnedHeaders.Add(gcHandle);
-                            nativeHeaderValues[header.KnownHeaderCount].pRawValue =
-                                (byte*)gcHandle.AddrOfPinnedObject();
+                            nativeHeaderValues[header.KnownHeaderCount].pRawValue = (byte*)
+                                gcHandle.AddrOfPinnedObject();
                             header.KnownHeaderCount++;
                         }
 
@@ -708,7 +704,8 @@ internal sealed class Response
                         gcHandle = GCHandle.Alloc(header, GCHandleType.Pinned);
                         pinnedHeaders.Add(gcHandle);
                         knownHeaderInfo[_nativeResponse.ResponseInfoCount].pInfo =
-                            (HttpApiTypes.HTTP_MULTIPLE_KNOWN_HEADERS*)gcHandle.AddrOfPinnedObject();
+                            (HttpApiTypes.HTTP_MULTIPLE_KNOWN_HEADERS*)
+                                gcHandle.AddrOfPinnedObject();
 
                         _nativeResponse.ResponseInfoCount++;
                     }
@@ -789,8 +786,8 @@ internal sealed class Response
                     unknownHeaders[unknownHeadersOffset].NameLength = (ushort)bytes.Length;
                     gcHandle = GCHandle.Alloc(bytes, GCHandleType.Pinned);
                     pinnedHeaders.Add(gcHandle);
-                    unknownHeaders[unknownHeadersOffset].pName =
-                        (byte*)gcHandle.AddrOfPinnedObject();
+                    unknownHeaders[unknownHeadersOffset].pName = (byte*)
+                        gcHandle.AddrOfPinnedObject();
 
                     // Add Value
                     var headerValue = headerValues[headerValueIndex] ?? string.Empty;
@@ -798,8 +795,8 @@ internal sealed class Response
                     unknownHeaders[unknownHeadersOffset].RawValueLength = (ushort)bytes.Length;
                     gcHandle = GCHandle.Alloc(bytes, GCHandleType.Pinned);
                     pinnedHeaders.Add(gcHandle);
-                    unknownHeaders[unknownHeadersOffset].pRawValue =
-                        (byte*)gcHandle.AddrOfPinnedObject();
+                    unknownHeaders[unknownHeadersOffset].pRawValue = (byte*)
+                        gcHandle.AddrOfPinnedObject();
                     unknownHeadersOffset++;
                 }
             }

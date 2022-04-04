@@ -87,10 +87,8 @@ namespace System.Web.Mvc
                 (TMemberInfo memberInfo) =>
                 {
                     return new ReadOnlyCollection<TAttribute>(
-                        (TAttribute[])memberInfo.GetCustomAttributes(
-                            typeof(TAttribute),
-                            inherit: true
-                        )
+                        (TAttribute[])
+                            memberInfo.GetCustomAttributes(typeof(TAttribute), inherit: true)
                     );
                 };
         }

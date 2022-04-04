@@ -60,8 +60,8 @@ namespace System.Diagnostics
 
         private static SystemDiagnosticsSection GetConfigSection()
         {
-            SystemDiagnosticsSection configSection =
-                (SystemDiagnosticsSection)ConfigurationManager.GetSection("system.diagnostics");
+            SystemDiagnosticsSection configSection = (SystemDiagnosticsSection)
+                ConfigurationManager.GetSection("system.diagnostics");
             return configSection;
         }
 

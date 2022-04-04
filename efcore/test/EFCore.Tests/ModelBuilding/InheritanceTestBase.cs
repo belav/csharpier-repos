@@ -1069,12 +1069,10 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                var derivedEntityType = (EntityType)modelBuilder
-                    .Entity<DerivedTypeWithKeyAnnotation>()
-                    .Metadata;
-                var baseEntityType = (EntityType)modelBuilder
-                    .Entity<BaseTypeWithKeyAnnotation>()
-                    .Metadata;
+                var derivedEntityType = (EntityType)
+                    modelBuilder.Entity<DerivedTypeWithKeyAnnotation>().Metadata;
+                var baseEntityType = (EntityType)
+                    modelBuilder.Entity<BaseTypeWithKeyAnnotation>().Metadata;
 
                 Assert.Equal(baseEntityType, derivedEntityType.BaseType);
                 Assert.Equal(
@@ -1105,9 +1103,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     .WithOne()
                     .HasForeignKey<DerivedTypeWithKeyAnnotation>(e => e.MyPrimaryKey);
                 var derivedEntityType = (EntityType)derivedEntityTypeBuilder.Metadata;
-                var baseEntityType = (EntityType)modelBuilder
-                    .Entity<BaseTypeWithKeyAnnotation>()
-                    .Metadata;
+                var baseEntityType = (EntityType)
+                    modelBuilder.Entity<BaseTypeWithKeyAnnotation>().Metadata;
 
                 Assert.Null(derivedEntityType.BaseType);
                 Assert.Equal(

@@ -77,10 +77,8 @@ namespace System.ComponentModel
 
                     if (context != null)
                     {
-                        ITypeResolutionService? resolver =
-                            (ITypeResolutionService?)context.GetService(
-                                typeof(ITypeResolutionService)
-                            );
+                        ITypeResolutionService? resolver = (ITypeResolutionService?)
+                            context.GetService(typeof(ITypeResolutionService));
                         if (resolver != null)
                         {
                             modulePath = resolver.GetPathOfAssembly(type.Assembly.GetName());

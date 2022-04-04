@@ -198,8 +198,8 @@ namespace System.Web.Mvc.Test
             };
 
             // Act
-            ValueProviderCollection valueProviders =
-                (ValueProviderCollection)factories.GetValueProvider(controllerContext);
+            ValueProviderCollection valueProviders = (ValueProviderCollection)
+                factories.GetValueProvider(controllerContext);
 
             // Assert
             Assert.Equal(expectedValueProviders, valueProviders.ToArray());
@@ -235,8 +235,8 @@ namespace System.Web.Mvc.Test
             );
 
             // Act
-            ValueProviderCollection valueProviders =
-                (ValueProviderCollection)factories.GetValueProvider(controllerContext);
+            ValueProviderCollection valueProviders = (ValueProviderCollection)
+                factories.GetValueProvider(controllerContext);
 
             // Assert
             Assert.Equal(expectedValueProviders, valueProviders.ToArray());

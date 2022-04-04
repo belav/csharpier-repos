@@ -3564,9 +3564,8 @@ class A { } #endregion";
             var tree = SyntaxFactory.ParseSyntaxTree(s1);
 
             var root = tree.GetCompilationUnitRoot();
-            var method = (LocalFunctionStatementSyntax)(
-                (GlobalStatementSyntax)root.Members[0]
-            ).Statement;
+            var method = (LocalFunctionStatementSyntax)
+                ((GlobalStatementSyntax)root.Members[0]).Statement;
 
             var list = (SeparatedSyntaxList<ParameterSyntax>)method.ParameterList.Parameters;
 
@@ -3587,9 +3586,8 @@ class A { } #endregion";
                 Assert.True(exceptionThrown);
             }
 
-            var internalParameterList = (InternalSyntax.ParameterListSyntax)method
-                .ParameterList
-                .Green;
+            var internalParameterList = (InternalSyntax.ParameterListSyntax)
+                method.ParameterList.Green;
             var internalParameters = internalParameterList.Parameters;
 
             Assert.Equal(2, internalParameters.SeparatorCount);
@@ -4225,9 +4223,8 @@ namespace HelloWorld
         public void TestWithAsyncKeyword_ParenthesizedLambdaExpressionSyntax_AddAsync()
         {
             var text = "static (a) => { }";
-            var expression = (ParenthesizedLambdaExpressionSyntax)SyntaxFactory.ParseExpression(
-                text
-            );
+            var expression = (ParenthesizedLambdaExpressionSyntax)
+                SyntaxFactory.ParseExpression(text);
             var withAsync = expression
                 .WithAsyncKeyword(
                     SyntaxFactory
@@ -4272,9 +4269,8 @@ namespace HelloWorld
         public void TestWithAsyncKeyword_ParenthesizedLambdaExpressionSyntax_ReplaceAsync()
         {
             var text = "static async/**/(a) => { }";
-            var expression = (ParenthesizedLambdaExpressionSyntax)SyntaxFactory.ParseExpression(
-                text
-            );
+            var expression = (ParenthesizedLambdaExpressionSyntax)
+                SyntaxFactory.ParseExpression(text);
             var withAsync = expression
                 .WithAsyncKeyword(
                     SyntaxFactory
@@ -4313,9 +4309,8 @@ namespace HelloWorld
         public void TestWithAsyncKeyword_ParenthesizedLambdaExpressionSyntax_RemoveExistingAsync()
         {
             var text = "static async (a) => { }";
-            var expression = (ParenthesizedLambdaExpressionSyntax)SyntaxFactory.ParseExpression(
-                text
-            );
+            var expression = (ParenthesizedLambdaExpressionSyntax)
+                SyntaxFactory.ParseExpression(text);
             var withAsync = expression.WithAsyncKeyword(default).ToString();
             Assert.Equal("static (a) => { }", withAsync);
         }
@@ -4342,9 +4337,8 @@ namespace HelloWorld
         public void TestWithAsyncKeyword_ParenthesizedLambdaExpressionSyntax_RemoveNonExistingAsync()
         {
             var text = "static (a) => { }";
-            var expression = (ParenthesizedLambdaExpressionSyntax)SyntaxFactory.ParseExpression(
-                text
-            );
+            var expression = (ParenthesizedLambdaExpressionSyntax)
+                SyntaxFactory.ParseExpression(text);
             var withAsync = expression.WithAsyncKeyword(default).ToString();
             Assert.Equal(text, withAsync);
         }
@@ -4406,9 +4400,8 @@ namespace HelloWorld
         public void TestStackAllocKeywordUpdate()
         {
             var text = "stackalloc/**/int[50]";
-            var expression = (StackAllocArrayCreationExpressionSyntax)SyntaxFactory.ParseExpression(
-                text
-            );
+            var expression = (StackAllocArrayCreationExpressionSyntax)
+                SyntaxFactory.ParseExpression(text);
             var replacedKeyword = SyntaxFactory
                 .Token(SyntaxKind.StackAllocKeyword)
                 .WithTrailingTrivia(SyntaxFactory.Space);

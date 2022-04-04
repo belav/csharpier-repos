@@ -212,9 +212,8 @@ namespace MS.Internal.Xml.Cache
 
             // If elements within this document might have IDs, then cache the name of the ID attribute, if one exists
             if (_elemIdMap != null)
-                _idAttrName = (XmlQualifiedName?)_elemIdMap[
-                    new XmlQualifiedName(localName, prefix)
-                ];
+                _idAttrName = (XmlQualifiedName?)
+                    _elemIdMap[new XmlQualifiedName(localName, prefix)];
         }
 
         /// <summary>

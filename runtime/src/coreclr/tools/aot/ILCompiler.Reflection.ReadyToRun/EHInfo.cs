@@ -88,10 +88,8 @@ namespace ILCompiler.Reflection.ReadyToRun
         /// <param name="offset">Offset of the EH clause in the image</param>
         public EHClause(ReadyToRunReader reader, int offset)
         {
-            Flags = (CorExceptionFlag)BitConverter.ToUInt32(
-                reader.Image,
-                offset + 0 * sizeof(uint)
-            );
+            Flags = (CorExceptionFlag)
+                BitConverter.ToUInt32(reader.Image, offset + 0 * sizeof(uint));
             TryOffset = BitConverter.ToUInt32(reader.Image, offset + 1 * sizeof(uint));
             TryEnd = BitConverter.ToUInt32(reader.Image, offset + 2 * sizeof(uint));
             HandlerOffset = BitConverter.ToUInt32(reader.Image, offset + 3 * sizeof(uint));

@@ -5719,10 +5719,11 @@ class C
                 memberOptions: SymbolDisplayMemberOptions.IncludeType,
                 miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes
             );
-            var comp = (Compilation)CreateCompilationWithMscorlib46(
-                text,
-                references: new[] { SystemRuntimeFacadeRef, ValueTupleRef }
-            );
+            var comp = (Compilation)
+                CreateCompilationWithMscorlib46(
+                    text,
+                    references: new[] { SystemRuntimeFacadeRef, ValueTupleRef }
+                );
             comp.VerifyDiagnostics();
             var symbol = comp.GetMember("C.f");
 
@@ -6333,11 +6334,12 @@ class B
     static object?[] F2(object[]? o) => null;
     static A<object>? F3(A<object?> o) => null;
 }";
-            var comp = (Compilation)CreateCompilation(
-                new[] { source },
-                parseOptions: TestOptions.Regular8,
-                options: WithNullableEnable()
-            );
+            var comp = (Compilation)
+                CreateCompilation(
+                    new[] { source },
+                    parseOptions: TestOptions.Regular8,
+                    options: WithNullableEnable()
+                );
             var formatWithoutNonNullableModifier = new SymbolDisplayFormat(
                 memberOptions: SymbolDisplayMemberOptions.IncludeParameters
                     | SymbolDisplayMemberOptions.IncludeType
@@ -7170,8 +7172,8 @@ class C
 
             var semanticModel = comp.GetSemanticModel(comp.SyntaxTrees.Single());
             var queryExpression = root.DescendantNodes().OfType<QueryExpressionSyntax>().First();
-            var fromClauseRangeVariableSymbol =
-                (IRangeVariableSymbol)semanticModel.GetDeclaredSymbol(queryExpression.FromClause);
+            var fromClauseRangeVariableSymbol = (IRangeVariableSymbol)
+                semanticModel.GetDeclaredSymbol(queryExpression.FromClause);
 
             Verify(
                 fromClauseRangeVariableSymbol.ToMinimalDisplayParts(
@@ -7675,10 +7677,11 @@ struct X
 
             var semanticModel = comp.GetSemanticModel(comp.SyntaxTrees.Single());
 
-            var declaration = (BaseTypeDeclarationSyntax)semanticModel.SyntaxTree
-                .GetRoot()
-                .DescendantNodes()
-                .Single(n => n.Kind() == SyntaxKind.StructDeclaration);
+            var declaration = (BaseTypeDeclarationSyntax)
+                semanticModel.SyntaxTree
+                    .GetRoot()
+                    .DescendantNodes()
+                    .Single(n => n.Kind() == SyntaxKind.StructDeclaration);
             var members = semanticModel.GetDeclaredSymbol(declaration).GetMembers();
 
             Verify(
@@ -7763,10 +7766,11 @@ struct X
             var comp = CreateCompilation(source).VerifyDiagnostics();
             var semanticModel = comp.GetSemanticModel(comp.SyntaxTrees.Single());
 
-            var declaration = (BaseTypeDeclarationSyntax)semanticModel.SyntaxTree
-                .GetRoot()
-                .DescendantNodes()
-                .Single(n => n.Kind() == SyntaxKind.StructDeclaration);
+            var declaration = (BaseTypeDeclarationSyntax)
+                semanticModel.SyntaxTree
+                    .GetRoot()
+                    .DescendantNodes()
+                    .Single(n => n.Kind() == SyntaxKind.StructDeclaration);
             var members = semanticModel.GetDeclaredSymbol(declaration).GetMembers();
 
             Verify(
@@ -8061,10 +8065,11 @@ readonly struct X
             var comp = CreateCompilation(source).VerifyDiagnostics();
             var semanticModel = comp.GetSemanticModel(comp.SyntaxTrees.Single());
 
-            var declaration = (BaseTypeDeclarationSyntax)semanticModel.SyntaxTree
-                .GetRoot()
-                .DescendantNodes()
-                .Single(n => n.Kind() == SyntaxKind.StructDeclaration);
+            var declaration = (BaseTypeDeclarationSyntax)
+                semanticModel.SyntaxTree
+                    .GetRoot()
+                    .DescendantNodes()
+                    .Single(n => n.Kind() == SyntaxKind.StructDeclaration);
             var members = semanticModel.GetDeclaredSymbol(declaration).GetMembers();
 
             Verify(
@@ -8248,10 +8253,11 @@ namespace Nested
                 .VerifyDiagnostics();
             var semanticModel = comp.GetSemanticModel(comp.SyntaxTrees.Single());
 
-            var declaration = (BaseTypeDeclarationSyntax)semanticModel.SyntaxTree
-                .GetRoot()
-                .DescendantNodes()
-                .Single(n => n.Kind() == SyntaxKind.StructDeclaration);
+            var declaration = (BaseTypeDeclarationSyntax)
+                semanticModel.SyntaxTree
+                    .GetRoot()
+                    .DescendantNodes()
+                    .Single(n => n.Kind() == SyntaxKind.StructDeclaration);
             var members = semanticModel.GetDeclaredSymbol(declaration).GetMembers();
 
             Verify(
@@ -9107,10 +9113,11 @@ class C
             var comp = CreateCompilation(source);
             var semanticModel = comp.GetSemanticModel(comp.SyntaxTrees.Single());
             var syntaxTree = semanticModel.SyntaxTree;
-            var declaration = (LocalDeclarationStatementSyntax)semanticModel.SyntaxTree
-                .GetRoot()
-                .DescendantNodes()
-                .Single(n => n.Kind() == SyntaxKind.LocalDeclarationStatement);
+            var declaration = (LocalDeclarationStatementSyntax)
+                semanticModel.SyntaxTree
+                    .GetRoot()
+                    .DescendantNodes()
+                    .Single(n => n.Kind() == SyntaxKind.LocalDeclarationStatement);
             var type = semanticModel.GetTypeInfo(declaration.Declaration.Type).Type;
 
             Verify(
@@ -9168,10 +9175,11 @@ class C
             var comp = CreateCompilation(source);
             var semanticModel = comp.GetSemanticModel(comp.SyntaxTrees.Single());
             var syntaxTree = semanticModel.SyntaxTree;
-            var declaration = (LocalDeclarationStatementSyntax)semanticModel.SyntaxTree
-                .GetRoot()
-                .DescendantNodes()
-                .Single(n => n.Kind() == SyntaxKind.LocalDeclarationStatement);
+            var declaration = (LocalDeclarationStatementSyntax)
+                semanticModel.SyntaxTree
+                    .GetRoot()
+                    .DescendantNodes()
+                    .Single(n => n.Kind() == SyntaxKind.LocalDeclarationStatement);
             var type = semanticModel.GetTypeInfo(declaration.Declaration.Type).Type;
 
             Verify(

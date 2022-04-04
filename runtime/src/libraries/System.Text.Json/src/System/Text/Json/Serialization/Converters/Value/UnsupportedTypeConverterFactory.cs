@@ -42,13 +42,14 @@ namespace System.Text.Json.Serialization.Converters
 
         public override JsonConverter CreateConverter(Type type, JsonSerializerOptions options)
         {
-            JsonConverter converter = (JsonConverter)Activator.CreateInstance(
-                typeof(UnsupportedTypeConverter<>).MakeGenericType(type),
-                BindingFlags.Instance | BindingFlags.Public,
-                binder: null,
-                args: null,
-                culture: null
-            )!;
+            JsonConverter converter = (JsonConverter)
+                Activator.CreateInstance(
+                    typeof(UnsupportedTypeConverter<>).MakeGenericType(type),
+                    BindingFlags.Instance | BindingFlags.Public,
+                    binder: null,
+                    args: null,
+                    culture: null
+                )!;
 
             return converter;
         }

@@ -22,10 +22,11 @@ namespace System.IO.IsolatedStorage
             using (var isf = GetPresetScope(scope))
             {
                 Assert.False(
-                    (bool)s_containsUnknownFilesMethod.Invoke(
-                        isf,
-                        new object[] { isf.GetUserRootDirectory() }
-                    )
+                    (bool)
+                        s_containsUnknownFilesMethod.Invoke(
+                            isf,
+                            new object[] { isf.GetUserRootDirectory() }
+                        )
                 );
             }
         }

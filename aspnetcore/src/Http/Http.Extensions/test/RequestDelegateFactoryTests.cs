@@ -2032,11 +2032,8 @@ public class RequestDelegateFactoryTests : LoggedTest
                 },
                 new[]
                 {
-                    (Action<
-                        HttpContext,
-                        MyService,
-                        IEnumerable<MyService>
-                    >)TestExplicitMultipleFromService
+                    (Action<HttpContext, MyService, IEnumerable<MyService>>)
+                        TestExplicitMultipleFromService
                 },
             };
         }

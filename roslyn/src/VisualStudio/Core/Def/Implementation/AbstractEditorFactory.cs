@@ -104,12 +104,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             // Do we need to create a text buffer?
             if (textBuffer == null)
             {
-                textBuffer = (IVsTextBuffer)GetDocumentData(
-                    grfCreateDoc,
-                    pszMkDocument,
-                    vsHierarchy,
-                    itemid
-                );
+                textBuffer = (IVsTextBuffer)
+                    GetDocumentData(grfCreateDoc, pszMkDocument, vsHierarchy, itemid);
                 Contract.ThrowIfNull(
                     textBuffer,
                     $"Failed to get document data for {pszMkDocument}"
@@ -359,10 +355,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             pbstrEditorCaption = string.Empty;
             pguidCmdUI = Guid.Empty;
 
-            var winFormsEditorFactory =
-                (IWinFormsEditorFactory)PackageUtilities.QueryService<IWinFormsEditorFactory>(
-                    _oleServiceProvider
-                );
+            var winFormsEditorFactory = (IWinFormsEditorFactory)
+                PackageUtilities.QueryService<IWinFormsEditorFactory>(_oleServiceProvider);
 
             return winFormsEditorFactory is null
               ? VSConstants.E_FAIL

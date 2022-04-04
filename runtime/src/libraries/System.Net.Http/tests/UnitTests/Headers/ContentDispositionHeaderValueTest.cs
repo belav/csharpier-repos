@@ -553,9 +553,8 @@ namespace System.Net.Http.Tests
         public void Clone_Call_CloneFieldsMatchSourceFields()
         {
             ContentDispositionHeaderValue source = new ContentDispositionHeaderValue("attachment");
-            ContentDispositionHeaderValue clone = (ContentDispositionHeaderValue)(
-                (ICloneable)source
-            ).Clone();
+            ContentDispositionHeaderValue clone = (ContentDispositionHeaderValue)
+                ((ICloneable)source).Clone();
             Assert.Equal(source.DispositionType, clone.DispositionType);
             Assert.Equal(0, clone.Parameters.Count);
 

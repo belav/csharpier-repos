@@ -131,10 +131,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     var implementingPart = sourceMethod.SourcePartialImplementation;
                     if ((object)implementingPart != null)
                     {
-                        var typeParameter =
-                            (SourceTypeParameterSymbolBase)implementingPart.TypeParameters[
-                                _ordinal
-                            ];
+                        var typeParameter = (SourceTypeParameterSymbolBase)
+                            implementingPart.TypeParameters[_ordinal];
                         mergedAttributesBuilder.AddRange(
                             typeParameter.MergedAttributeDeclarationSyntaxLists
                         );
@@ -199,9 +197,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
                 else
                 {
-                    var typeParameter = (SourceTypeParameterSymbolBase)sourceMethod
-                        .SourcePartialDefinition
-                        .TypeParameters[_ordinal];
+                    var typeParameter = (SourceTypeParameterSymbolBase)
+                        sourceMethod.SourcePartialDefinition.TypeParameters[_ordinal];
                     CustomAttributesBag<CSharpAttributeData> attributesBag =
                         typeParameter.GetAttributesBag();
 

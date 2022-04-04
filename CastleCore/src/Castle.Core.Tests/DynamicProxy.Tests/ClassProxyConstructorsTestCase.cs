@@ -41,40 +41,44 @@ namespace Castle.DynamicProxy.Tests
         [Ignore("I don't see any simple way of doing this...")]
         public void Should_properly_interpret_array_of_objects()
         {
-            var proxy = (ClassWithVariousConstructors)generator.CreateClassProxy(
-                typeof(ClassWithVariousConstructors),
-                new object[] { new object[] { null } }
-            );
+            var proxy = (ClassWithVariousConstructors)
+                generator.CreateClassProxy(
+                    typeof(ClassWithVariousConstructors),
+                    new object[] { new object[] { null } }
+                );
             Assert.AreEqual(Constructor.ArrayOfObjects, proxy.ConstructorCalled);
         }
 
         [Test]
         public void Should_properly_interpret_array_of_objects_and_string()
         {
-            var proxy = (ClassWithVariousConstructors)generator.CreateClassProxy(
-                typeof(ClassWithVariousConstructors),
-                new object[] { new object[] { null }, "foo" }
-            );
+            var proxy = (ClassWithVariousConstructors)
+                generator.CreateClassProxy(
+                    typeof(ClassWithVariousConstructors),
+                    new object[] { new object[] { null }, "foo" }
+                );
             Assert.AreEqual(Constructor.ArrayOfObjectsAndSingleString, proxy.ConstructorCalled);
         }
 
         [Test]
         public void Should_properly_interpret_array_of_strings_and_string()
         {
-            var proxy = (ClassWithVariousConstructors)generator.CreateClassProxy(
-                typeof(ClassWithVariousConstructors),
-                new object[] { new string[] { null }, "foo" }
-            );
+            var proxy = (ClassWithVariousConstructors)
+                generator.CreateClassProxy(
+                    typeof(ClassWithVariousConstructors),
+                    new object[] { new string[] { null }, "foo" }
+                );
             Assert.AreEqual(Constructor.ArrayAndSingleString, proxy.ConstructorCalled);
         }
 
         [Test]
         public void Should_properly_interpret_empty_array_as_ctor_argument()
         {
-            var proxy = (ClassWithVariousConstructors)generator.CreateClassProxy(
-                typeof(ClassWithVariousConstructors),
-                new object[] { new string[] { } }
-            );
+            var proxy = (ClassWithVariousConstructors)
+                generator.CreateClassProxy(
+                    typeof(ClassWithVariousConstructors),
+                    new object[] { new string[] { } }
+                );
             Assert.AreEqual(Constructor.ArrayOfStrings, proxy.ConstructorCalled);
         }
 
@@ -99,10 +103,11 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void Should_properly_interpret_nothing_as_lack_of_ctor_arguments()
         {
-            var proxy = (ClassWithVariousConstructors)generator.CreateClassProxy(
-                typeof(ClassWithVariousConstructors),
-                new IInterceptor[0]
-            );
+            var proxy = (ClassWithVariousConstructors)
+                generator.CreateClassProxy(
+                    typeof(ClassWithVariousConstructors),
+                    new IInterceptor[0]
+                );
             Assert.AreEqual(Constructor.Default, proxy.ConstructorCalled);
         }
 
@@ -185,10 +190,11 @@ namespace Castle.DynamicProxy.Tests
         [Ignore("I don't see any simple way of doing this...")]
         public void Should_properly_interpret_null_as_ctor_argument()
         {
-            var proxy = (ClassWithVariousConstructors)generator.CreateClassProxy(
-                typeof(ClassWithVariousConstructors),
-                new[] { default(object) }
-            );
+            var proxy = (ClassWithVariousConstructors)
+                generator.CreateClassProxy(
+                    typeof(ClassWithVariousConstructors),
+                    new[] { default(object) }
+                );
             Assert.AreEqual(Constructor.Object, proxy.ConstructorCalled);
         }
 

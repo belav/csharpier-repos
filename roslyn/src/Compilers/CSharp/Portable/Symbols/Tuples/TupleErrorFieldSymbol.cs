@@ -188,9 +188,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             TupleErrorFieldSymbol newCorrespondingField = null;
             if (!ReferenceEquals(_correspondingDefaultField, this))
             {
-                newCorrespondingField = (TupleErrorFieldSymbol)_correspondingDefaultField.AsMember(
-                    newOwner
-                );
+                newCorrespondingField = (TupleErrorFieldSymbol)
+                    _correspondingDefaultField.AsMember(newOwner);
             }
 
             return new TupleErrorFieldSymbol(

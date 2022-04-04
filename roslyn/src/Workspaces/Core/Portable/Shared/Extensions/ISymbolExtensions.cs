@@ -809,10 +809,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         {
             try
             {
-                var xpathResult = (IEnumerable)System.Xml.XPath.Extensions.XPathEvaluate(
-                    node,
-                    xpath
-                );
+                var xpathResult = (IEnumerable)
+                    System.Xml.XPath.Extensions.XPathEvaluate(node, xpath);
 
                 // Throws InvalidOperationException if the result of the XPath is an XDocument:
                 return xpathResult?.Cast<XNode>().ToArray();

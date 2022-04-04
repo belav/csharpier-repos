@@ -324,9 +324,8 @@ namespace System.Management
                             for (int i = 0; i < length; i++)
                                 ((ulong[])val)[i] = Convert.ToUInt64(
                                     (string)(wmiValueArray.GetValue(i)),
-                                    (IFormatProvider)CultureInfo.CurrentCulture.GetFormat(
-                                        typeof(ulong)
-                                    )
+                                    (IFormatProvider)
+                                        CultureInfo.CurrentCulture.GetFormat(typeof(ulong))
                                 );
                             break;
 
@@ -343,9 +342,8 @@ namespace System.Management
                             for (int i = 0; i < length; i++)
                                 ((long[])val)[i] = Convert.ToInt64(
                                     (string)(wmiValueArray.GetValue(i)),
-                                    (IFormatProvider)CultureInfo.CurrentCulture.GetFormat(
-                                        typeof(long)
-                                    )
+                                    (IFormatProvider)
+                                        CultureInfo.CurrentCulture.GetFormat(typeof(long))
                                 );
                             break;
 
@@ -426,10 +424,11 @@ namespace System.Management
                         case CimType.SInt8:
                             wmiValue = new short[length];
                             for (int i = 0; i < length; i++)
-                                ((short[])(wmiValue))[i] = (short)Convert.ToSByte(
-                                    valArray.GetValue(i),
-                                    (IFormatProvider)culInfo.GetFormat(typeof(sbyte))
-                                );
+                                ((short[])(wmiValue))[i] = (short)
+                                    Convert.ToSByte(
+                                        valArray.GetValue(i),
+                                        (IFormatProvider)culInfo.GetFormat(typeof(sbyte))
+                                    );
                             break;
 
                         case CimType.UInt8:
@@ -549,10 +548,11 @@ namespace System.Management
                         case CimType.Char16:
                             wmiValue = new short[length];
                             for (int i = 0; i < length; i++)
-                                ((short[])(wmiValue))[i] = (short)Convert.ToChar(
-                                    valArray.GetValue(i),
-                                    (IFormatProvider)culInfo.GetFormat(typeof(char))
-                                );
+                                ((short[])(wmiValue))[i] = (short)
+                                    Convert.ToChar(
+                                        valArray.GetValue(i),
+                                        (IFormatProvider)culInfo.GetFormat(typeof(char))
+                                    );
                             break;
 
                         case CimType.String:
@@ -606,10 +606,11 @@ namespace System.Management
                     switch (type)
                     {
                         case CimType.SInt8:
-                            wmiValue = (short)Convert.ToSByte(
-                                val,
-                                (IFormatProvider)culInfo.GetFormat(typeof(short))
-                            );
+                            wmiValue = (short)
+                                Convert.ToSByte(
+                                    val,
+                                    (IFormatProvider)culInfo.GetFormat(typeof(short))
+                                );
                             break;
 
                         case CimType.UInt8:
@@ -643,10 +644,11 @@ namespace System.Management
                             break;
 
                         case CimType.UInt32:
-                            wmiValue = (int)Convert.ToUInt32(
-                                val,
-                                (IFormatProvider)culInfo.GetFormat(typeof(uint))
-                            );
+                            wmiValue = (int)
+                                Convert.ToUInt32(
+                                    val,
+                                    (IFormatProvider)culInfo.GetFormat(typeof(uint))
+                                );
                             break;
 
                         case CimType.SInt64:
@@ -682,10 +684,11 @@ namespace System.Management
                             break;
 
                         case CimType.Char16:
-                            wmiValue = (short)Convert.ToChar(
-                                val,
-                                (IFormatProvider)culInfo.GetFormat(typeof(char))
-                            );
+                            wmiValue = (short)
+                                Convert.ToChar(
+                                    val,
+                                    (IFormatProvider)culInfo.GetFormat(typeof(char))
+                                );
                             break;
 
                         case CimType.String:

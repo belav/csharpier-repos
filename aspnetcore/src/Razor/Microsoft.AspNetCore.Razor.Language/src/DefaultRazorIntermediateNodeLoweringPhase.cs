@@ -541,9 +541,10 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
                   : new SyntaxList<SyntaxToken>(node.EqualsToken),
                 node.ValuePrefix?.LiteralTokens
             );
-            var prefix = (MarkupTextLiteralSyntax)SyntaxFactory
-                .MarkupTextLiteral(prefixTokens)
-                .Green.CreateRed(node, node.NamePrefix?.Position ?? node.Name.Position);
+            var prefix = (MarkupTextLiteralSyntax)
+                SyntaxFactory
+                    .MarkupTextLiteral(prefixTokens)
+                    .Green.CreateRed(node, node.NamePrefix?.Position ?? node.Name.Position);
 
             var name = node.Name.GetContent();
             if (
@@ -956,9 +957,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
                 && currentChildren[currentChildren.Count - 1] is HtmlContentIntermediateNode
             )
             {
-                var existingHtmlContent = (HtmlContentIntermediateNode)currentChildren[
-                    currentChildren.Count - 1
-                ];
+                var existingHtmlContent = (HtmlContentIntermediateNode)
+                    currentChildren[currentChildren.Count - 1];
 
                 if (existingHtmlContent.Source == null && source == null)
                 {
@@ -1500,9 +1500,10 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
                   : new SyntaxList<SyntaxToken>(node.EqualsToken),
                 node.ValuePrefix?.LiteralTokens
             );
-            var prefix = (MarkupTextLiteralSyntax)SyntaxFactory
-                .MarkupTextLiteral(prefixTokens)
-                .Green.CreateRed(node, node.NamePrefix?.Position ?? node.Name.Position);
+            var prefix = (MarkupTextLiteralSyntax)
+                SyntaxFactory
+                    .MarkupTextLiteral(prefixTokens)
+                    .Green.CreateRed(node, node.NamePrefix?.Position ?? node.Name.Position);
 
             var name = node.Name.GetContent();
             _builder.Push(
@@ -1528,9 +1529,10 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
                 node.NamePrefix?.LiteralTokens,
                 node.Name.LiteralTokens
             );
-            var prefix = (MarkupTextLiteralSyntax)SyntaxFactory
-                .MarkupTextLiteral(prefixTokens)
-                .Green.CreateRed(node, node.NamePrefix?.Position ?? node.Name.Position);
+            var prefix = (MarkupTextLiteralSyntax)
+                SyntaxFactory
+                    .MarkupTextLiteral(prefixTokens)
+                    .Green.CreateRed(node, node.NamePrefix?.Position ?? node.Name.Position);
 
             var name = node.Name.GetContent();
             _builder.Add(

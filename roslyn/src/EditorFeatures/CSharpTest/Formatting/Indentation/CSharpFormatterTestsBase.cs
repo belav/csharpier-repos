@@ -142,8 +142,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting.Indentation
 
             if (baseIndentation.HasValue)
             {
-                var factory =
-                    (TestFormattingRuleFactoryServiceFactory.Factory)workspace.Services.GetService<IHostDependentFormattingRuleFactoryService>();
+                var factory = (TestFormattingRuleFactoryServiceFactory.Factory)
+                    workspace.Services.GetService<IHostDependentFormattingRuleFactoryService>();
                 factory.BaseIndentation = baseIndentation.Value;
                 factory.TextSpan = span;
             }

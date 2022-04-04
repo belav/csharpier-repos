@@ -34,9 +34,10 @@ namespace System.DirectoryServices.AccountManagement
         {
             UnsafeNativeMethods.IAdsObjectOptions objOptions =
                 (UnsafeNativeMethods.IAdsObjectOptions)de.NativeObject;
-            return (string)objOptions.GetOption(
-                0 /* == ADS_OPTION_SERVERNAME */
-            );
+            return (string)
+                objOptions.GetOption(
+                    0 /* == ADS_OPTION_SERVERNAME */
+                );
         }
 
         // This routine escapes values used in DNs, per RFC 2253 and ADSI escaping rules.

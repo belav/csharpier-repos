@@ -74,27 +74,28 @@ namespace JIT.HardwareIntrinsics.General
             ValidateResult((Vector<Single>)(Result), value);
 
             value =
-                (Vector256<Single>)typeof(Vector256)
-                    .GetMethods()
-                    .Where(
-                        (methodInfo) =>
-                        {
-                            if (methodInfo.Name == nameof(Vector256.AsVector256))
+                (Vector256<Single>)
+                    typeof(Vector256)
+                        .GetMethods()
+                        .Where(
+                            (methodInfo) =>
                             {
-                                var parameters = methodInfo.GetParameters();
-                                return (parameters.Length == 1)
-                                    && (parameters[0].ParameterType.IsGenericType)
-                                    && (
-                                        parameters[0].ParameterType.GetGenericTypeDefinition()
-                                        == typeof(Vector<>)
-                                    );
+                                if (methodInfo.Name == nameof(Vector256.AsVector256))
+                                {
+                                    var parameters = methodInfo.GetParameters();
+                                    return (parameters.Length == 1)
+                                        && (parameters[0].ParameterType.IsGenericType)
+                                        && (
+                                            parameters[0].ParameterType.GetGenericTypeDefinition()
+                                            == typeof(Vector<>)
+                                        );
+                                }
+                                return false;
                             }
-                            return false;
-                        }
-                    )
-                    .Single()
-                    .MakeGenericMethod(typeof(Single))
-                    .Invoke(null, new object[] { Result });
+                        )
+                        .Single()
+                        .MakeGenericMethod(typeof(Single))
+                        .Invoke(null, new object[] { Result });
             ValidateResult(value, (Vector<Single>)(Result));
         }
 

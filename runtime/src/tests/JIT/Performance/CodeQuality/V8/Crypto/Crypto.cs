@@ -934,9 +934,10 @@ namespace V8.Crypto
                 int qd =
                     (r_array[--i] == y0)
                         ? s_BI_DM
-                        : (int)Math.Floor(
-                              (double)r_array[i] * d1 + ((double)(r_array[i - 1] + e)) * d2
-                          );
+                        : (int)
+                              Math.Floor(
+                                  (double)r_array[i] * d1 + ((double)(r_array[i - 1] + e)) * d2
+                              );
                 if ((r_array[i] += s_am(y, 0, qd, r, (int)j, 0, (int)ys)) < qd)
                 { // Try it out
                     y.dLShiftTo(j, t);

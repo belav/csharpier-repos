@@ -744,9 +744,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                 return false;
 
             // If we were parented by a bitwise negation before, we must also be afterwards.
-            var rewrittenBitwiseNotExpression = (PrefixUnaryExpressionSyntax)rewrittenExpression
-                .WalkUpParentheses()
-                .GetRequiredParent();
+            var rewrittenBitwiseNotExpression = (PrefixUnaryExpressionSyntax)
+                rewrittenExpression.WalkUpParentheses().GetRequiredParent();
             Debug.Assert(rewrittenBitwiseNotExpression.Kind() == SyntaxKind.BitwiseNotExpression);
 
             var rewrittenOperation = rewrittenSemanticModel.GetOperation(
@@ -815,9 +814,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                 return false;
 
             // if we were parented by a conditional before, we must be parented by a conditional afterwards.
-            var rewrittenConditionalExpression = (ConditionalExpressionSyntax)rewrittenExpression
-                .WalkUpParentheses()
-                .GetRequiredParent();
+            var rewrittenConditionalExpression = (ConditionalExpressionSyntax)
+                rewrittenExpression.WalkUpParentheses().GetRequiredParent();
 
             if (
                 parent != originalConditionalExpression.WhenFalse
@@ -1340,9 +1338,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             if (originalMemberSymbol is null)
                 return false;
 
-            var rewrittenMemberAccessExpression = (MemberAccessExpressionSyntax)rewrittenExpression
-                .WalkUpParentheses()
-                .GetRequiredParent();
+            var rewrittenMemberAccessExpression = (MemberAccessExpressionSyntax)
+                rewrittenExpression.WalkUpParentheses().GetRequiredParent();
             var rewrittenMemberSymbol = rewrittenSemanticModel
                 .GetSymbolInfo(rewrittenMemberAccessExpression, cancellationToken)
                 .Symbol;
@@ -1481,9 +1478,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             if (originalMemberSymbol is null)
                 return false;
 
-            var rewrittenMemberAccessExpression = (InvocationExpressionSyntax)rewrittenExpression
-                .WalkUpParentheses()
-                .GetRequiredParent();
+            var rewrittenMemberAccessExpression = (InvocationExpressionSyntax)
+                rewrittenExpression.WalkUpParentheses().GetRequiredParent();
             var rewrittenMemberSymbol = rewrittenSemanticModel
                 .GetSymbolInfo(rewrittenMemberAccessExpression, cancellationToken)
                 .Symbol;

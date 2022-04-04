@@ -1951,10 +1951,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             //  ]
             //}
 
-            Product deserializedProduct = (Product)JsonConvert.DeserializeObject(
-                output,
-                typeof(Product)
-            );
+            Product deserializedProduct = (Product)
+                JsonConvert.DeserializeObject(output, typeof(Product));
 
             Assert.AreEqual("Apple", deserializedProduct.Name);
             Assert.AreEqual(new DateTime(2008, 12, 28), deserializedProduct.ExpiryDate);
@@ -2016,10 +2014,8 @@ namespace Newtonsoft.Json.Tests.Serialization
 #endif
 
             Dictionary<string, object> deserializedDictionary =
-                (Dictionary<string, object>)JsonConvert.DeserializeObject(
-                    jsonText,
-                    typeof(Dictionary<string, object>)
-                );
+                (Dictionary<string, object>)
+                    JsonConvert.DeserializeObject(jsonText, typeof(Dictionary<string, object>));
             DateTime deserializedDate = (DateTime)deserializedDictionary["date"];
 
             Assert.AreEqual(dateValue, deserializedDate);
@@ -2505,10 +2501,8 @@ keyword such as type of business.""
             JsonSerializer s = new JsonSerializer();
             s.ObjectCreationHandling = ObjectCreationHandling.Replace;
 
-            ClassWithArray wibble = (ClassWithArray)s.Deserialize(
-                new StringReader(json),
-                typeof(ClassWithArray)
-            );
+            ClassWithArray wibble = (ClassWithArray)
+                s.Deserialize(new StringReader(json), typeof(ClassWithArray));
 
             Assert.AreEqual("hello", wibble.Foo);
 
@@ -3311,8 +3305,8 @@ keyword such as type of business.""
             ExceptionAssert.Throws<JsonSerializationException>(
                 () =>
                 {
-                    InterfacePropertyTestClass testFromDe =
-                        (InterfacePropertyTestClass)JsonConvert.DeserializeObject(
+                    InterfacePropertyTestClass testFromDe = (InterfacePropertyTestClass)
+                        JsonConvert.DeserializeObject(
                             strFromTest,
                             typeof(InterfacePropertyTestClass)
                         );
@@ -3797,10 +3791,8 @@ keyword such as type of business.""
         /*comment11*/ ] /*comment12*/
       } /*comment13*/";
 
-            Product deserializedProduct = (Product)JsonConvert.DeserializeObject(
-                json,
-                typeof(Product)
-            );
+            Product deserializedProduct = (Product)
+                JsonConvert.DeserializeObject(json, typeof(Product));
 
             Assert.AreEqual("Apple", deserializedProduct.Name);
             Assert.AreEqual(
@@ -5630,14 +5622,15 @@ Path '', line 1, position 1."
         [Test]
         public void DeserializeNullableArray()
         {
-            double?[] d = (double?[])JsonConvert.DeserializeObject(
-                @"[
+            double?[] d = (double?[])
+                JsonConvert.DeserializeObject(
+                    @"[
   2.4,
   4.3,
   null
 ]",
-                typeof(double?[])
-            );
+                    typeof(double?[])
+                );
 
             Assert.AreEqual(3, d.Length);
             Assert.AreEqual(2.4, d[0]);
@@ -5683,10 +5676,8 @@ Path '', line 1, position 1."
 
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
-            ByteArrayTestClass[] z = (ByteArrayTestClass[])serializer1.Deserialize(
-                reader,
-                typeof(ByteArrayTestClass[])
-            );
+            ByteArrayTestClass[] z = (ByteArrayTestClass[])
+                serializer1.Deserialize(reader, typeof(ByteArrayTestClass[]));
             Assert.AreEqual(2, z.Length);
             Assert.AreEqual(0, z[0].Prop1.Length);
             Assert.AreEqual(0, z[1].Prop1.Length);
@@ -7723,9 +7714,8 @@ Path '', line 1, position 1."
         [Test]
         public void DeserializeEmptyJsonString()
         {
-            string s = (string)new JsonSerializer().Deserialize(
-                new JsonTextReader(new StringReader("''"))
-            );
+            string s = (string)
+                new JsonSerializer().Deserialize(new JsonTextReader(new StringReader("''")));
             Assert.AreEqual("", s);
         }
 
@@ -8042,10 +8032,8 @@ lines.*/
 
             var reader = new JsonTextReader(new StringReader(json));
 
-            ItemConverterTestClass mt = (ItemConverterTestClass)serializer.Deserialize(
-                reader,
-                typeof(ItemConverterTestClass)
-            );
+            ItemConverterTestClass mt = (ItemConverterTestClass)
+                serializer.Deserialize(reader, typeof(ItemConverterTestClass));
             Assert.AreEqual(1, mt.MyProperty.Count);
         }
 
@@ -8061,10 +8049,8 @@ This is just junk, though.";
 
             var reader = new JsonTextReader(new StringReader(json));
 
-            ItemConverterTestClass mt = (ItemConverterTestClass)serializer.Deserialize(
-                reader,
-                typeof(ItemConverterTestClass)
-            );
+            ItemConverterTestClass mt = (ItemConverterTestClass)
+                serializer.Deserialize(reader, typeof(ItemConverterTestClass));
             Assert.AreEqual(1, mt.MyProperty.Count);
         }
 
@@ -9492,8 +9478,8 @@ This is just junk, though.";
         [Test]
         public void ChildClassWithProtectedOverridePlusJsonProperty_Serialize()
         {
-            JsonObjectContract c =
-                (JsonObjectContract)DefaultContractResolver.Instance.ResolveContract(
+            JsonObjectContract c = (JsonObjectContract)
+                DefaultContractResolver.Instance.ResolveContract(
                     typeof(ChildClassWithProtectedOverridePlusJsonProperty)
                 );
             Assert.AreEqual(1, c.Properties.Count);

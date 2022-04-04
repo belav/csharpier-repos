@@ -294,10 +294,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                             secondTargetType,
                             entityReference.QueryRootExpression
                         );
-                        var innerSource =
-                            (NavigationExpansionExpression)_navigationExpandingExpressionVisitor.Visit(
-                                innerQueryable
-                            );
+                        var innerSource = (NavigationExpansionExpression)
+                            _navigationExpandingExpressionVisitor.Visit(innerQueryable);
 
                         if (includeTree != null)
                         {
@@ -362,10 +360,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                             secondTargetType,
                             entityReference.QueryRootExpression
                         );
-                        var innerSource =
-                            (NavigationExpansionExpression)_navigationExpandingExpressionVisitor.Visit(
-                                innerQueryable
-                            );
+                        var innerSource = (NavigationExpansionExpression)
+                            _navigationExpandingExpressionVisitor.Visit(innerQueryable);
 
                         if (includeTree != null)
                         {
@@ -478,10 +474,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     targetType,
                     entityReference.QueryRootExpression
                 );
-                var innerSource =
-                    (NavigationExpansionExpression)_navigationExpandingExpressionVisitor.Visit(
-                        innerQueryable
-                    );
+                var innerSource = (NavigationExpansionExpression)
+                    _navigationExpandingExpressionVisitor.Visit(innerQueryable);
 
                 // Value known to be non-null
                 var innerEntityReference = UnwrapEntityReference(innerSource.PendingSelector)!;
@@ -1524,8 +1518,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             )
             {
                 _parameterExpression = parameterExpression;
-                _navigationExpansionExpression =
-                    (NavigationExpansionExpression)groupByNavigationExpansionExpression.GroupingEnumerable;
+                _navigationExpansionExpression = (NavigationExpansionExpression)
+                    groupByNavigationExpansionExpression.GroupingEnumerable;
                 _keyAccessExpression = Expression.MakeMemberAccess(
                     groupByNavigationExpansionExpression.CurrentParameter,
                     groupByNavigationExpansionExpression.CurrentParameter.Type.GetRequiredDeclaredProperty(

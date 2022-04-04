@@ -832,11 +832,12 @@ namespace Microsoft.NET.HostModel.Tests
                     var fileInfo = new FileInfo(path);
                     _ = fileInfo.IsReadOnly; // this is to implicitly initialize FileInfo -> FileSystem -> fileCache instance
 
-                    return (int)s_fileStatusModeField.GetValue(
-                        s_fileStatus_fileCacheField.GetValue(
-                            s_fileSystem_fileStatusField.GetValue(fileInfo)
-                        )
-                    );
+                    return (int)
+                        s_fileStatusModeField.GetValue(
+                            s_fileStatus_fileCacheField.GetValue(
+                                s_fileSystem_fileStatusField.GetValue(fileInfo)
+                            )
+                        );
                 }
                 catch (Exception ex)
                 {

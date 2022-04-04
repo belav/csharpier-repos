@@ -631,8 +631,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 // Case (3) : The child Conditional access expression always starts with a MemberBindingExpression if
                 // the parent is a conditional access expression. This case is already covered before the parent kind switch
                 case SyntaxKind.ConditionalAccessExpression:
-                    var parentConditionalAccessExpression =
-                        (ConditionalAccessExpressionSyntax)expression.Parent;
+                    var parentConditionalAccessExpression = (ConditionalAccessExpressionSyntax)
+                        expression.Parent;
                     return expression != parentConditionalAccessExpression.WhenNotNull
                         && !parentConditionalAccessExpression.Parent.IsKind(
                             SyntaxKind.ConditionalAccessExpression

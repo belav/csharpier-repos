@@ -75,10 +75,8 @@ namespace System.Security.Cryptography.Xml
         internal XmlElement GetXml(XmlDocument document)
         {
             // Create the CipherData element
-            XmlElement cipherDataElement = (XmlElement)document.CreateElement(
-                "CipherData",
-                EncryptedXml.XmlEncNamespaceUrl
-            );
+            XmlElement cipherDataElement = (XmlElement)
+                document.CreateElement("CipherData", EncryptedXml.XmlEncNamespaceUrl);
             if (CipherValue != null)
             {
                 XmlElement cipherValueElement = document.CreateElement(

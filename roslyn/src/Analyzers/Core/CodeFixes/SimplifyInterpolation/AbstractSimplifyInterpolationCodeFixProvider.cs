@@ -147,9 +147,10 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
             {
                 result = WithFormatClause(
                     result,
-                    (TInterpolationFormatClause?)generator.InterpolationFormatClause(
-                        Escape(interpolatedString, formatString!)
-                    )
+                    (TInterpolationFormatClause?)
+                        generator.InterpolationFormatClause(
+                            Escape(interpolatedString, formatString!)
+                        )
                 );
             }
 

@@ -71,10 +71,8 @@ namespace Microsoft.CodeAnalysis.SimplifyLinqExpression
 
             static TInvocationExpressionSyntax GetInvocation(SyntaxNode root, Diagnostic diagnostic)
             {
-                return (TInvocationExpressionSyntax)root.FindNode(
-                    diagnostic.Location.SourceSpan,
-                    getInnermostNodeForTie: true
-                );
+                return (TInvocationExpressionSyntax)
+                    root.FindNode(diagnostic.Location.SourceSpan, getInnermostNodeForTie: true);
             }
 
             (TExpressionSyntax Expression, TSimpleNameSyntax Name, SeparatedSyntaxList<SyntaxNode> Arguments) FindNodes(
@@ -82,16 +80,13 @@ namespace Microsoft.CodeAnalysis.SimplifyLinqExpression
             )
             {
                 var memberAccess = SyntaxFacts.GetExpressionOfInvocationExpression(current);
-                var name = (TSimpleNameSyntax)SyntaxFacts.GetNameOfMemberAccessExpression(
-                    memberAccess
-                );
-                var whereExpression =
-                    (TInvocationExpressionSyntax)SyntaxFacts.GetExpressionOfMemberAccessExpression(
-                        memberAccess
-                    )!;
+                var name = (TSimpleNameSyntax)
+                    SyntaxFacts.GetNameOfMemberAccessExpression(memberAccess);
+                var whereExpression = (TInvocationExpressionSyntax)
+                    SyntaxFacts.GetExpressionOfMemberAccessExpression(memberAccess)!;
                 var arguments = SyntaxFacts.GetArgumentsOfInvocationExpression(whereExpression);
-                var expression =
-                    (TExpressionSyntax)SyntaxFacts.GetExpressionOfMemberAccessExpression(
+                var expression = (TExpressionSyntax)
+                    SyntaxFacts.GetExpressionOfMemberAccessExpression(
                         SyntaxFacts.GetExpressionOfInvocationExpression(whereExpression)
                     )!;
                 return (expression, name, arguments);

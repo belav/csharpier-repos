@@ -1388,10 +1388,9 @@ namespace Microsoft.EntityFrameworkCore
                     set.Where(
                             e =>
                                 e.Id == 11
-                                && (int)EF.Property<Enum64?>(
-                                    e,
-                                    nameof(BuiltInNullableDataTypes.Enum64)
-                                ) == param25
+                                && (int)
+                                    EF.Property<Enum64?>(e, nameof(BuiltInNullableDataTypes.Enum64))
+                                    == param25
                         )
                         .ToList()
                         .Single()
@@ -1423,10 +1422,9 @@ namespace Microsoft.EntityFrameworkCore
                     set.Where(
                             e =>
                                 e.Id == 11
-                                && (int)EF.Property<Enum32?>(
-                                    e,
-                                    nameof(BuiltInNullableDataTypes.Enum32)
-                                ) == param26
+                                && (int)
+                                    EF.Property<Enum32?>(e, nameof(BuiltInNullableDataTypes.Enum32))
+                                    == param26
                         )
                         .ToList()
                         .Single()
@@ -1458,10 +1456,9 @@ namespace Microsoft.EntityFrameworkCore
                     set.Where(
                             e =>
                                 e.Id == 11
-                                && (int)EF.Property<Enum16?>(
-                                    e,
-                                    nameof(BuiltInNullableDataTypes.Enum16)
-                                ) == param27
+                                && (int)
+                                    EF.Property<Enum16?>(e, nameof(BuiltInNullableDataTypes.Enum16))
+                                    == param27
                         )
                         .ToList()
                         .Single()
@@ -1493,10 +1490,9 @@ namespace Microsoft.EntityFrameworkCore
                     set.Where(
                             e =>
                                 e.Id == 11
-                                && (int)EF.Property<Enum8?>(
-                                    e,
-                                    nameof(BuiltInNullableDataTypes.Enum8)
-                                ) == param28
+                                && (int)
+                                    EF.Property<Enum8?>(e, nameof(BuiltInNullableDataTypes.Enum8))
+                                    == param28
                         )
                         .ToList()
                         .Single()

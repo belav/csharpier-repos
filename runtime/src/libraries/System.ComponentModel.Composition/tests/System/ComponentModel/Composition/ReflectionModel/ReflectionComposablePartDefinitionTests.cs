@@ -22,14 +22,15 @@ namespace System.ComponentModel.Composition.ReflectionModel
             ICompositionElement origin
         )
         {
-            return (ReflectionComposablePartDefinition)ReflectionModelServices.CreatePartDefinition(
-                partType,
-                requiresDisposal,
-                new Lazy<IEnumerable<ImportDefinition>>(imports, false),
-                new Lazy<IEnumerable<ExportDefinition>>(exports, false),
-                metadata.AsLazy(),
-                origin
-            );
+            return (ReflectionComposablePartDefinition)
+                ReflectionModelServices.CreatePartDefinition(
+                    partType,
+                    requiresDisposal,
+                    new Lazy<IEnumerable<ImportDefinition>>(imports, false),
+                    new Lazy<IEnumerable<ExportDefinition>>(exports, false),
+                    metadata.AsLazy(),
+                    origin
+                );
         }
 
         [Fact]
@@ -287,14 +288,15 @@ namespace System.ComponentModel.Composition.ReflectionModel
             ICompositionElement origin
         )
         {
-            return (ReflectionComposablePartDefinition)ReflectionModelServices.CreatePartDefinition(
-                (type != null) ? type.AsLazy() : null,
-                false,
-                Enumerable.Empty<ImportDefinition>().AsLazy(),
-                Enumerable.Empty<ExportDefinition>().AsLazy(),
-                metadata.AsLazy(),
-                origin
-            );
+            return (ReflectionComposablePartDefinition)
+                ReflectionModelServices.CreatePartDefinition(
+                    (type != null) ? type.AsLazy() : null,
+                    false,
+                    Enumerable.Empty<ImportDefinition>().AsLazy(),
+                    Enumerable.Empty<ExportDefinition>().AsLazy(),
+                    metadata.AsLazy(),
+                    origin
+                );
         }
 
         private static List<ImportDefinition> CreateImports(Type type)
