@@ -265,27 +265,26 @@ namespace System.Collections.Concurrent.Tests
             // Separated out into another method to ensure that even in debug
             // the JIT doesn't force anything to be kept alive for longer than we need.
             var queue = (
-                (Func<ConcurrentQueue<Finalizable>>)
-                    (
-                        () =>
+                (Func<ConcurrentQueue<Finalizable>>)(
+                    () =>
+                    {
+                        var q = new ConcurrentQueue<Finalizable>();
+
+                        for (int i = 0; i < iterations; i++)
                         {
-                            var q = new ConcurrentQueue<Finalizable>();
-
-                            for (int i = 0; i < iterations; i++)
-                            {
-                                mres[i] = new ManualResetEventSlim();
-                                q.Enqueue(new Finalizable(mres[i]));
-                            }
-
-                            for (int i = 0; i < iterations; i++)
-                            {
-                                Finalizable temp;
-                                Assert.True(q.TryDequeue(out temp));
-                            }
-
-                            return q;
+                            mres[i] = new ManualResetEventSlim();
+                            q.Enqueue(new Finalizable(mres[i]));
                         }
-                    )
+
+                        for (int i = 0; i < iterations; i++)
+                        {
+                            Finalizable temp;
+                            Assert.True(q.TryDequeue(out temp));
+                        }
+
+                        return q;
+                    }
+                )
             )();
 
             GC.Collect();

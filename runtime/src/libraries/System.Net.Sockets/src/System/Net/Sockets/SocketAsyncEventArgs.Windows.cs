@@ -1565,8 +1565,9 @@ namespace System.Net.Sockets
         {
             Debug.Assert(OperatingSystem.IsWindows());
             var saeaBox =
-                (StrongBox<SocketAsyncEventArgs>)
-                    (ThreadPoolBoundHandle.GetNativeOverlappedState(nativeOverlapped)!);
+                (StrongBox<SocketAsyncEventArgs>)(
+                    ThreadPoolBoundHandle.GetNativeOverlappedState(nativeOverlapped)!
+                );
 
             Debug.Assert(saeaBox.Value != null);
             SocketAsyncEventArgs saea = saeaBox.Value;

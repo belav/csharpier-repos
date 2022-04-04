@@ -139,14 +139,13 @@ namespace System.Linq.Tests
         {
             bool funcCalled = false;
             IEnumerable<Func<bool>> source = Enumerable.Repeat(
-                (Func<bool>)
-                    (
-                        () =>
-                        {
-                            funcCalled = true;
-                            return true;
-                        }
-                    ),
+                (Func<bool>)(
+                    () =>
+                    {
+                        funcCalled = true;
+                        return true;
+                    }
+                ),
                 1
             );
 
@@ -246,14 +245,13 @@ namespace System.Linq.Tests
         {
             bool funcCalled = false;
             IEnumerable<Func<bool>> source = Enumerable.Repeat(
-                (Func<bool>)
-                    (
-                        () =>
-                        {
-                            funcCalled = true;
-                            return true;
-                        }
-                    ),
+                (Func<bool>)(
+                    () =>
+                    {
+                        funcCalled = true;
+                        return true;
+                    }
+                ),
                 1
             );
 

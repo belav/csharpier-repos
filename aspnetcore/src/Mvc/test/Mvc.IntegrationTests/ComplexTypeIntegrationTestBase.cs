@@ -2281,16 +2281,15 @@ public abstract class ComplexTypeIntegrationTestBase
         metadataProvider
             .ForProperty(typeof(Order10), nameof(Order10.Customer))
             .BindingDetails(
-                (Action<ModelBinding.Metadata.BindingMetadata>)
-                    (
-                        binding =>
-                        {
-                            // A real details provider could customize message based on BindingMetadataProviderContext.
-                            binding.ModelBindingMessageProvider.SetMissingBindRequiredValueAccessor(
-                                name => $"Hurts when '{name}' is not provided."
-                            );
-                        }
-                    )
+                (Action<ModelBinding.Metadata.BindingMetadata>)(
+                    binding =>
+                    {
+                        // A real details provider could customize message based on BindingMetadataProviderContext.
+                        binding.ModelBindingMessageProvider.SetMissingBindRequiredValueAccessor(
+                            name => $"Hurts when '{name}' is not provided."
+                        );
+                    }
+                )
             );
 
         var parameter = new ParameterDescriptor()

@@ -101,8 +101,9 @@ namespace System.Reflection.Metadata.Decoding.Tests
                             );
 
                             var array =
-                                (ImmutableArray<CustomAttributeTypedArgument<string>>)
-                                    (value.NamedArguments[2].Value);
+                                (ImmutableArray<CustomAttributeTypedArgument<string>>)(
+                                    value.NamedArguments[2].Value
+                                );
                             Assert.Equal(1, array.Length);
                             Assert.Equal(typeof(SByteEnum).FullName, array[0].Type);
                             Assert.Equal((sbyte)SByteEnum.Value, array[0].Value);

@@ -441,10 +441,12 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 {
                     const int Iters = 10;
                     Func<TransformBlock<int, int>> func = sync
-                        ? (Func<TransformBlock<int, int>>)
-                              (() => new TransformBlock<int, int>(i => i * 2))
-                        : (Func<TransformBlock<int, int>>)
-                              (() => new TransformBlock<int, int>(i => Task.Run(() => i * 2)));
+                        ? (Func<TransformBlock<int, int>>)(
+                              () => new TransformBlock<int, int>(i => i * 2)
+                          )
+                        : (Func<TransformBlock<int, int>>)(
+                              () => new TransformBlock<int, int>(i => Task.Run(() => i * 2))
+                          );
                     var network = DataflowTestHelpers.Chain<TransformBlock<int, int>, int>(4, func);
                     for (int i = 0; i < Iters; i++)
                     {
@@ -469,10 +471,12 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 {
                     const int Iters = 10;
                     Func<TransformBlock<int, int>> func = sync
-                        ? (Func<TransformBlock<int, int>>)
-                              (() => new TransformBlock<int, int>(i => i * 2))
-                        : (Func<TransformBlock<int, int>>)
-                              (() => new TransformBlock<int, int>(i => Task.Run(() => i * 2)));
+                        ? (Func<TransformBlock<int, int>>)(
+                              () => new TransformBlock<int, int>(i => i * 2)
+                          )
+                        : (Func<TransformBlock<int, int>>)(
+                              () => new TransformBlock<int, int>(i => Task.Run(() => i * 2))
+                          );
                     var network = DataflowTestHelpers.Chain<TransformBlock<int, int>, int>(4, func);
 
                     if (post)
@@ -529,37 +533,33 @@ namespace System.Threading.Tasks.Dataflow.Tests
         public async Task TestExceptions()
         {
             var tb1 = new TransformBlock<int, int>(
-                (Func<int, int>)
-                    (
-                        i =>
-                        {
-                            throw new InvalidCastException();
-                        }
-                    )
+                (Func<int, int>)(
+                    i =>
+                    {
+                        throw new InvalidCastException();
+                    }
+                )
             );
             var tb2 = new TransformBlock<int, int>(
-                (Func<int, Task<int>>)
-                    (
-                        i =>
-                        {
-                            throw new InvalidProgramException();
-                        }
-                    )
+                (Func<int, Task<int>>)(
+                    i =>
+                    {
+                        throw new InvalidProgramException();
+                    }
+                )
             );
             var tb3 = new TransformBlock<int, int>(
-                (Func<int, Task<int>>)
-                    (
-                        i =>
-                            Task.Run(
-                                (Func<int>)
-                                    (
-                                        () =>
-                                        {
-                                            throw new InvalidTimeZoneException();
-                                        }
-                                    )
+                (Func<int, Task<int>>)(
+                    i =>
+                        Task.Run(
+                            (Func<int>)(
+                                () =>
+                                {
+                                    throw new InvalidTimeZoneException();
+                                }
                             )
-                    )
+                        )
+                )
             );
 
             for (int i = 0; i < 3; i++)

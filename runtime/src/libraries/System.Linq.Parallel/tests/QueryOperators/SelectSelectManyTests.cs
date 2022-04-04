@@ -322,13 +322,15 @@ namespace System.Linq.Parallel.Tests
         {
             yield return Labeled.Label(
                 "Array",
-                (Func<int, int, IEnumerable<int>>)
-                    ((start, count) => Enumerable.Range(start * count, count).ToArray())
+                (Func<int, int, IEnumerable<int>>)(
+                    (start, count) => Enumerable.Range(start * count, count).ToArray()
+                )
             );
             yield return Labeled.Label(
                 "Enumerable.Range",
-                (Func<int, int, IEnumerable<int>>)
-                    ((start, count) => Enumerable.Range(start * count, count))
+                (Func<int, int, IEnumerable<int>>)(
+                    (start, count) => Enumerable.Range(start * count, count)
+                )
             );
         }
 

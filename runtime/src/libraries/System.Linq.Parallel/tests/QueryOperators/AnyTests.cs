@@ -191,13 +191,12 @@ namespace System.Linq.Parallel.Tests
                     UnorderedSources
                         .Default(1)
                         .Select(
-                            (Func<int, int>)
-                                (
-                                    x =>
-                                    {
-                                        throw new DeliberateTestException();
-                                    }
-                                )
+                            (Func<int, int>)(
+                                x =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )
                         )
                         .Any()
             );

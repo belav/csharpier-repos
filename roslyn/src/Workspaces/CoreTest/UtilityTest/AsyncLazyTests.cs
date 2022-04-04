@@ -254,17 +254,16 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var lazy = new AsyncLazy<object>(
                 c =>
                     Task.Run(
-                        (Func<object>)
-                            (
-                                () =>
+                        (Func<object>)(
+                            () =>
+                            {
+                                cancellationTokenSource.Cancel();
+                                while (true)
                                 {
-                                    cancellationTokenSource.Cancel();
-                                    while (true)
-                                    {
-                                        c.ThrowIfCancellationRequested();
-                                    }
+                                    c.ThrowIfCancellationRequested();
                                 }
-                            ),
+                            }
+                        ),
                         c
                     ),
                 cacheResult: true

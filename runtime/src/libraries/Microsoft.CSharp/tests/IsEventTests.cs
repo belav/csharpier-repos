@@ -33,13 +33,12 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             dynamic d = new TypeWithEvents();
             int output = 0;
             d.Event +=
-                (Action<int>)
-                    (
-                        i =>
-                        {
-                            output = i;
-                        }
-                    );
+                (Action<int>)(
+                    i =>
+                    {
+                        output = i;
+                    }
+                );
             d.Raise(49);
             Assert.Equal(49, output);
         }

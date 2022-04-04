@@ -153,8 +153,9 @@ namespace System.Web.Mvc.Html.Test
                 () =>
                     GetEnumerableHtmlHelper()
                         .DisplayNameFor(
-                            (Expression<Func<IEnumerable<Foo>, object>>)
-                                (model => new { foo = "Bar" })
+                            (Expression<Func<IEnumerable<Foo>, object>>)(
+                                model => new { foo = "Bar" }
+                            )
                         ),
                 "Templates can be used only with field access, property access, single-dimension array index, or single-parameter custom indexer expressions."
             );

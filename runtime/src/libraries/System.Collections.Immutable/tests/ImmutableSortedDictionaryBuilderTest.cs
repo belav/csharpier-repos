@@ -404,8 +404,9 @@ namespace System.Collections.Immutable.Tests
         )
         {
             return (
-                (ImmutableSortedDictionary<TKey, TValue>)
-                    (basis ?? GetEmptyImmutableDictionary<TKey, TValue>())
+                (ImmutableSortedDictionary<TKey, TValue>)(
+                    basis ?? GetEmptyImmutableDictionary<TKey, TValue>()
+                )
             ).ToBuilder();
         }
     }

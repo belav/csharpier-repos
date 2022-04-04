@@ -91,13 +91,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.Twondo
             dynamic v1 = (Action<Animal>)((Animal a) => { });
             dynamic v2 = v1;
             dynamic m1 =
-                (Meta<Tiger>)
-                    (
-                        (Action<Tiger> action) =>
-                        {
-                            action(new Tiger());
-                        }
-                    );
+                (Meta<Tiger>)(
+                    (Action<Tiger> action) =>
+                    {
+                        action(new Tiger());
+                    }
+                );
             dynamic m2 = (Meta<Animal>)m1;
             m2(v1);
             return 0;
@@ -141,23 +140,21 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.multip
             dynamic f12 = (Foo<Tiger, Fruit, Apple>)f11;
             var x1 = f12(new Tiger(), new Apple());
             dynamic f21 =
-                (Foo<Animal, Apple, Fruit>)
-                    (
-                        (Animal a, Fruit fr) =>
-                        {
-                            return new Apple();
-                        }
-                    );
+                (Foo<Animal, Apple, Fruit>)(
+                    (Animal a, Fruit fr) =>
+                    {
+                        return new Apple();
+                    }
+                );
             Foo<Tiger, Fruit, Apple> f22 = f21;
             var x2 = f22(new Tiger(), new Apple());
             dynamic f31 =
-                (Foo<Animal, Apple, Fruit>)
-                    (
-                        (Animal a, Fruit fr) =>
-                        {
-                            return new Apple();
-                        }
-                    );
+                (Foo<Animal, Apple, Fruit>)(
+                    (Animal a, Fruit fr) =>
+                    {
+                        return new Apple();
+                    }
+                );
             dynamic f32 = (Foo<Tiger, Fruit, Apple>)f31;
             var x3 = f32(new Tiger(), new Apple());
             return 0;

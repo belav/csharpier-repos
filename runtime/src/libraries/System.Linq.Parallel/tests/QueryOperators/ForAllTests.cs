@@ -63,13 +63,12 @@ namespace System.Linq.Parallel.Tests
                     ParallelEnumerable
                         .Range(0, 1)
                         .Select(
-                            (Func<int, int>)
-                                (
-                                    x =>
-                                    {
-                                        throw new DeliberateTestException();
-                                    }
-                                )
+                            (Func<int, int>)(
+                                x =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )
                         )
                         .ForAll(x => { })
             );

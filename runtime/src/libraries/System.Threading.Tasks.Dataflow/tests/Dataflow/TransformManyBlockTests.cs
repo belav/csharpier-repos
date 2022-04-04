@@ -482,15 +482,15 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 foreach (bool sync in DataflowTestHelpers.BooleanValues)
                 {
                     Func<TransformManyBlock<int, int>> func = sync
-                        ? (Func<TransformManyBlock<int, int>>)
-                              (() => new TransformManyBlock<int, int>(i => new[] { i * 2 }))
-                        : (Func<TransformManyBlock<int, int>>)
-                              (
-                                  () =>
-                                      new TransformManyBlock<int, int>(
-                                          i => Task.Run(() => Enumerable.Repeat(i * 2, 1))
-                                      )
-                              );
+                        ? (Func<TransformManyBlock<int, int>>)(
+                              () => new TransformManyBlock<int, int>(i => new[] { i * 2 })
+                          )
+                        : (Func<TransformManyBlock<int, int>>)(
+                              () =>
+                                  new TransformManyBlock<int, int>(
+                                      i => Task.Run(() => Enumerable.Repeat(i * 2, 1))
+                                  )
+                          );
                     var network = DataflowTestHelpers.Chain<TransformManyBlock<int, int>, int>(
                         4,
                         func
@@ -519,15 +519,15 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 foreach (bool sync in DataflowTestHelpers.BooleanValues)
                 {
                     Func<TransformManyBlock<int, int>> func = sync
-                        ? (Func<TransformManyBlock<int, int>>)
-                              (() => new TransformManyBlock<int, int>(i => new[] { i * 2 }))
-                        : (Func<TransformManyBlock<int, int>>)
-                              (
-                                  () =>
-                                      new TransformManyBlock<int, int>(
-                                          i => Task.Run(() => Enumerable.Repeat(i * 2, 1))
-                                      )
-                              );
+                        ? (Func<TransformManyBlock<int, int>>)(
+                              () => new TransformManyBlock<int, int>(i => new[] { i * 2 })
+                          )
+                        : (Func<TransformManyBlock<int, int>>)(
+                              () =>
+                                  new TransformManyBlock<int, int>(
+                                      i => Task.Run(() => Enumerable.Repeat(i * 2, 1))
+                                  )
+                          );
                     var network = DataflowTestHelpers.Chain<TransformManyBlock<int, int>, int>(
                         4,
                         func
@@ -588,37 +588,33 @@ namespace System.Threading.Tasks.Dataflow.Tests
         public async Task TestExceptions()
         {
             var tb1 = new TransformManyBlock<int, int>(
-                (Func<int, IEnumerable<int>>)
-                    (
-                        i =>
-                        {
-                            throw new InvalidCastException();
-                        }
-                    )
+                (Func<int, IEnumerable<int>>)(
+                    i =>
+                    {
+                        throw new InvalidCastException();
+                    }
+                )
             );
             var tb2 = new TransformManyBlock<int, int>(
-                (Func<int, Task<IEnumerable<int>>>)
-                    (
-                        i =>
-                        {
-                            throw new InvalidProgramException();
-                        }
-                    )
+                (Func<int, Task<IEnumerable<int>>>)(
+                    i =>
+                    {
+                        throw new InvalidProgramException();
+                    }
+                )
             );
             var tb3 = new TransformManyBlock<int, int>(
-                (Func<int, Task<IEnumerable<int>>>)
-                    (
-                        i =>
-                            Task.Run(
-                                (Func<IEnumerable<int>>)
-                                    (
-                                        () =>
-                                        {
-                                            throw new InvalidTimeZoneException();
-                                        }
-                                    )
+                (Func<int, Task<IEnumerable<int>>>)(
+                    i =>
+                        Task.Run(
+                            (Func<IEnumerable<int>>)(
+                                () =>
+                                {
+                                    throw new InvalidTimeZoneException();
+                                }
                             )
-                    )
+                        )
+                )
             );
             var tb4 = new TransformManyBlock<int, int>(i => ExceptionAfter(3));
             var tb5 = new TransformManyBlock<int, int>(i => Task.Run(() => ExceptionAfter(3)));

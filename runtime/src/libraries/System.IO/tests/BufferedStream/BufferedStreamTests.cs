@@ -220,11 +220,13 @@ namespace System.IO.Tests
                 var seekFromBegin =
                     (Action<Stream, long>)((stream, pos) => stream.Seek(pos, SeekOrigin.Begin));
                 var seekFromCurrent =
-                    (Action<Stream, long>)
-                        ((stream, pos) => stream.Seek(pos - stream.Position, SeekOrigin.Current));
+                    (Action<Stream, long>)(
+                        (stream, pos) => stream.Seek(pos - stream.Position, SeekOrigin.Current)
+                    );
                 var seekFromEnd =
-                    (Action<Stream, long>)
-                        ((stream, pos) => stream.Seek(pos - stream.Length, SeekOrigin.End));
+                    (Action<Stream, long>)(
+                        (stream, pos) => stream.Seek(pos - stream.Length, SeekOrigin.End)
+                    );
 
                 yield return new object[] { 3, setByPosition };
                 yield return new object[] { 3, seekFromBegin };

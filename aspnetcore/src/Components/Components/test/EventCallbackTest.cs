@@ -102,14 +102,13 @@ public class EventCallbackTest
         EventArgs arg = null;
         var callback = new EventCallback(
             component,
-            (Action<EventArgs>)
-                (
-                    (e) =>
-                    {
-                        arg = e;
-                        runCount++;
-                    }
-                )
+            (Action<EventArgs>)(
+                (e) =>
+                {
+                    arg = e;
+                    runCount++;
+                }
+            )
         );
 
         // Act
@@ -131,14 +130,13 @@ public class EventCallbackTest
         EventArgs arg = null;
         var callback = new EventCallback(
             component,
-            (Action<EventArgs>)
-                (
-                    (e) =>
-                    {
-                        arg = e;
-                        runCount++;
-                    }
-                )
+            (Action<EventArgs>)(
+                (e) =>
+                {
+                    arg = e;
+                    runCount++;
+                }
+            )
         );
 
         // Act
@@ -160,14 +158,13 @@ public class EventCallbackTest
         int arg = -1;
         var callback = new EventCallback(
             component,
-            (Action<int>)
-                (
-                    (e) =>
-                    {
-                        arg = e;
-                        runCount++;
-                    }
-                )
+            (Action<int>)(
+                (e) =>
+                {
+                    arg = e;
+                    runCount++;
+                }
+            )
         );
 
         // Act
@@ -189,14 +186,13 @@ public class EventCallbackTest
         EventArgs arg = null;
         var callback = new EventCallback(
             component,
-            (Action<EventArgs>)
-                (
-                    (e) =>
-                    {
-                        arg = e;
-                        runCount++;
-                    }
-                )
+            (Action<EventArgs>)(
+                (e) =>
+                {
+                    arg = e;
+                    runCount++;
+                }
+            )
         );
 
         // Act & Assert
@@ -217,14 +213,13 @@ public class EventCallbackTest
         int runCount = 0;
         var callback = new EventCallback(
             component,
-            (Func<Task>)
-                (
-                    () =>
-                    {
-                        runCount++;
-                        return Task.CompletedTask;
-                    }
-                )
+            (Func<Task>)(
+                () =>
+                {
+                    runCount++;
+                    return Task.CompletedTask;
+                }
+            )
         );
 
         // Act
@@ -244,14 +239,13 @@ public class EventCallbackTest
         int runCount = 0;
         var callback = new EventCallback(
             component,
-            (Func<Task>)
-                (
-                    () =>
-                    {
-                        runCount++;
-                        return Task.CompletedTask;
-                    }
-                )
+            (Func<Task>)(
+                () =>
+                {
+                    runCount++;
+                    return Task.CompletedTask;
+                }
+            )
         );
 
         // Act
@@ -272,15 +266,14 @@ public class EventCallbackTest
         EventArgs arg = null;
         var callback = new EventCallback(
             component,
-            (Func<EventArgs, Task>)
-                (
-                    (e) =>
-                    {
-                        arg = e;
-                        runCount++;
-                        return Task.CompletedTask;
-                    }
-                )
+            (Func<EventArgs, Task>)(
+                (e) =>
+                {
+                    arg = e;
+                    runCount++;
+                    return Task.CompletedTask;
+                }
+            )
         );
 
         // Act
@@ -302,15 +295,14 @@ public class EventCallbackTest
         EventArgs arg = null;
         var callback = new EventCallback(
             component,
-            (Func<EventArgs, Task>)
-                (
-                    (e) =>
-                    {
-                        arg = e;
-                        runCount++;
-                        return Task.CompletedTask;
-                    }
-                )
+            (Func<EventArgs, Task>)(
+                (e) =>
+                {
+                    arg = e;
+                    runCount++;
+                    return Task.CompletedTask;
+                }
+            )
         );
 
         // Act
@@ -332,15 +324,14 @@ public class EventCallbackTest
         int arg = -1;
         var callback = new EventCallback(
             component,
-            (Func<int, Task>)
-                (
-                    (e) =>
-                    {
-                        arg = e;
-                        runCount++;
-                        return Task.CompletedTask;
-                    }
-                )
+            (Func<int, Task>)(
+                (e) =>
+                {
+                    arg = e;
+                    runCount++;
+                    return Task.CompletedTask;
+                }
+            )
         );
 
         // Act
@@ -362,15 +353,14 @@ public class EventCallbackTest
         EventArgs arg = null;
         var callback = new EventCallback(
             component,
-            (Func<EventArgs, Task>)
-                (
-                    (e) =>
-                    {
-                        arg = e;
-                        runCount++;
-                        return Task.CompletedTask;
-                    }
-                )
+            (Func<EventArgs, Task>)(
+                (e) =>
+                {
+                    arg = e;
+                    runCount++;
+                    return Task.CompletedTask;
+                }
+            )
         );
 
         // Act & Assert
@@ -426,14 +416,13 @@ public class EventCallbackTest
         EventArgs arg = null;
         var callback = new EventCallback<EventArgs>(
             component,
-            (Action<EventArgs>)
-                (
-                    (e) =>
-                    {
-                        arg = e;
-                        runCount++;
-                    }
-                )
+            (Action<EventArgs>)(
+                (e) =>
+                {
+                    arg = e;
+                    runCount++;
+                }
+            )
         );
 
         // Act
@@ -455,14 +444,13 @@ public class EventCallbackTest
         EventArgs arg = null;
         var callback = new EventCallback<EventArgs>(
             component,
-            (Action<EventArgs>)
-                (
-                    (e) =>
-                    {
-                        arg = e;
-                        runCount++;
-                    }
-                )
+            (Action<EventArgs>)(
+                (e) =>
+                {
+                    arg = e;
+                    runCount++;
+                }
+            )
         );
 
         // Act
@@ -483,14 +471,13 @@ public class EventCallbackTest
         int runCount = 0;
         var callback = new EventCallback<EventArgs>(
             component,
-            (Func<Task>)
-                (
-                    () =>
-                    {
-                        runCount++;
-                        return Task.CompletedTask;
-                    }
-                )
+            (Func<Task>)(
+                () =>
+                {
+                    runCount++;
+                    return Task.CompletedTask;
+                }
+            )
         );
 
         // Act
@@ -510,14 +497,13 @@ public class EventCallbackTest
         int runCount = 0;
         var callback = new EventCallback<EventArgs>(
             component,
-            (Func<Task>)
-                (
-                    () =>
-                    {
-                        runCount++;
-                        return Task.CompletedTask;
-                    }
-                )
+            (Func<Task>)(
+                () =>
+                {
+                    runCount++;
+                    return Task.CompletedTask;
+                }
+            )
         );
 
         // Act
@@ -538,15 +524,14 @@ public class EventCallbackTest
         EventArgs arg = null;
         var callback = new EventCallback<EventArgs>(
             component,
-            (Func<EventArgs, Task>)
-                (
-                    (e) =>
-                    {
-                        arg = e;
-                        runCount++;
-                        return Task.CompletedTask;
-                    }
-                )
+            (Func<EventArgs, Task>)(
+                (e) =>
+                {
+                    arg = e;
+                    runCount++;
+                    return Task.CompletedTask;
+                }
+            )
         );
 
         // Act
@@ -568,15 +553,14 @@ public class EventCallbackTest
         EventArgs arg = null;
         var callback = new EventCallback<EventArgs>(
             component,
-            (Func<EventArgs, Task>)
-                (
-                    (e) =>
-                    {
-                        arg = e;
-                        runCount++;
-                        return Task.CompletedTask;
-                    }
-                )
+            (Func<EventArgs, Task>)(
+                (e) =>
+                {
+                    arg = e;
+                    runCount++;
+                    return Task.CompletedTask;
+                }
+            )
         );
 
         // Act

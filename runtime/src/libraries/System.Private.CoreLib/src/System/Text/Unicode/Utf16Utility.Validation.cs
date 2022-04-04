@@ -407,8 +407,9 @@ namespace System.Text.Unicode
                             vector0800
                         );
                         Vector<nuint> sumVector =
-                            (Vector<nuint>)
-                                (Vector<ushort>.Zero - twoOrMoreUtf8Bytes - threeOrMoreUtf8Bytes);
+                            (Vector<nuint>)(
+                                Vector<ushort>.Zero - twoOrMoreUtf8Bytes - threeOrMoreUtf8Bytes
+                            );
 
                         // We'll try summing by a natural word (rather than a 16-bit word) at a time,
                         // which should halve the number of operations we must perform.

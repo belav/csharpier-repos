@@ -1035,13 +1035,12 @@ namespace System.Diagnostics.Metrics.Tests
             Counter<int> c = meter.CreateCounter<int>("counter1");
             ObservableCounter<int> oc = meter.CreateObservableCounter<int>(
                 "observableCounter1",
-                (Func<int>)
-                    (
-                        () =>
-                        {
-                            throw new Exception("Example user exception");
-                        }
-                    )
+                (Func<int>)(
+                    () =>
+                    {
+                        throw new Exception("Example user exception");
+                    }
+                )
             );
 
             EventWrittenEventArgs[] events;
