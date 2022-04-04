@@ -297,14 +297,15 @@ namespace System.Net
         }
 
         public static Task<IPAddress[]> GetHostAddressesAsync(string hostNameOrAddress) =>
-            (Task<IPAddress[]>)GetHostEntryOrAddressesCoreAsync(
-                hostNameOrAddress,
-                justReturnParsedIp: true,
-                throwOnIIPAny: true,
-                justAddresses: true,
-                AddressFamily.Unspecified,
-                CancellationToken.None
-            );
+            (Task<IPAddress[]>)
+                GetHostEntryOrAddressesCoreAsync(
+                    hostNameOrAddress,
+                    justReturnParsedIp: true,
+                    throwOnIIPAny: true,
+                    justAddresses: true,
+                    AddressFamily.Unspecified,
+                    CancellationToken.None
+                );
 
         /// <summary>
         /// Returns the Internet Protocol (IP) addresses for the specified host as an asynchronous operation.
@@ -319,14 +320,15 @@ namespace System.Net
             string hostNameOrAddress,
             CancellationToken cancellationToken
         ) =>
-            (Task<IPAddress[]>)GetHostEntryOrAddressesCoreAsync(
-                hostNameOrAddress,
-                justReturnParsedIp: true,
-                throwOnIIPAny: true,
-                justAddresses: true,
-                AddressFamily.Unspecified,
-                cancellationToken
-            );
+            (Task<IPAddress[]>)
+                GetHostEntryOrAddressesCoreAsync(
+                    hostNameOrAddress,
+                    justReturnParsedIp: true,
+                    throwOnIIPAny: true,
+                    justAddresses: true,
+                    AddressFamily.Unspecified,
+                    cancellationToken
+                );
 
         /// <summary>
         /// Returns the Internet Protocol (IP) addresses for the specified host as an asynchronous operation.
@@ -343,14 +345,15 @@ namespace System.Net
             AddressFamily family,
             CancellationToken cancellationToken = default
         ) =>
-            (Task<IPAddress[]>)GetHostEntryOrAddressesCoreAsync(
-                hostNameOrAddress,
-                justReturnParsedIp: true,
-                throwOnIIPAny: true,
-                justAddresses: true,
-                family,
-                cancellationToken
-            );
+            (Task<IPAddress[]>)
+                GetHostEntryOrAddressesCoreAsync(
+                    hostNameOrAddress,
+                    justReturnParsedIp: true,
+                    throwOnIIPAny: true,
+                    justAddresses: true,
+                    family,
+                    cancellationToken
+                );
 
         public static IAsyncResult BeginGetHostAddresses(
             string hostNameOrAddress,
@@ -742,14 +745,15 @@ namespace System.Net
             AddressFamily family,
             CancellationToken cancellationToken
         ) =>
-            (Task<IPHostEntry>)GetHostEntryOrAddressesCoreAsync(
-                hostName,
-                justReturnParsedIp,
-                throwOnIIPAny,
-                justAddresses: false,
-                family,
-                cancellationToken
-            );
+            (Task<IPHostEntry>)
+                GetHostEntryOrAddressesCoreAsync(
+                    hostName,
+                    justReturnParsedIp,
+                    throwOnIIPAny,
+                    justAddresses: false,
+                    family,
+                    cancellationToken
+                );
 
         // If hostName is an IPString and justReturnParsedIP==true then no reverse lookup will be attempted, but the original address is returned.
         private static Task GetHostEntryOrAddressesCoreAsync(

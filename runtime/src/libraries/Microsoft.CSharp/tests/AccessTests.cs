@@ -47,9 +47,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                 Enumerable.Repeat(new ReferenceType(), 10);
 
             public static dynamic ReferenceTypeDelegate() =>
-                (Func<int, IEnumerable<ReferenceType>>)(
-                    i => Enumerable.Repeat(new ReferenceType(), i)
-                );
+                (Func<int, IEnumerable<ReferenceType>>)
+                    (i => Enumerable.Repeat(new ReferenceType(), i));
 
             public static dynamic ValueTypeArray() => new PrivateValueType[2];
 

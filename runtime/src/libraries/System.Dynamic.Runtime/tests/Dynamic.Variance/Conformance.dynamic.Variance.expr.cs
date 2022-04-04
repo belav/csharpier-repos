@@ -157,12 +157,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.gettype04
         public static int MainMethod()
         {
             dynamic f1 =
-                (Foo<Tiger>)(
-                    () =>
-                    {
-                        return new Tiger();
-                    }
-                );
+                (Foo<Tiger>)
+                    (
+                        () =>
+                        {
+                            return new Tiger();
+                        }
+                    );
             Foo<Animal> f2 = f1;
             dynamic f3 = (Foo<Animal>)f1;
             if (typeof(Foo<Tiger>).ToString() != f2.GetType().ToString())

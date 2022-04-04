@@ -165,12 +165,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.decl.order3.or
         public static int MainMethod()
         {
             dynamic f11 =
-                (Foo<int, Tiger, string, long>)(
-                    () =>
-                    {
-                        return new Tiger();
-                    }
-                );
+                (Foo<int, Tiger, string, long>)
+                    (
+                        () =>
+                        {
+                            return new Tiger();
+                        }
+                    );
             Foo<int, Animal, string, long> f12 = f11;
             Tiger t1 = f11();
             Foo<int, Tiger, string, long> f21 = () =>
@@ -180,12 +181,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.decl.order3.or
             dynamic f22 = (Foo<int, Animal, string, long>)f21;
             Tiger t2 = f22();
             dynamic f31 =
-                (Foo<int, Tiger, string, long>)(
-                    () =>
-                    {
-                        return new Tiger();
-                    }
-                );
+                (Foo<int, Tiger, string, long>)
+                    (
+                        () =>
+                        {
+                            return new Tiger();
+                        }
+                    );
             dynamic f32 = (Foo<int, Animal, string, long>)f31;
             Tiger t3 = f31();
             return 0;
@@ -221,12 +223,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.decl.order4.or
             int result = 0;
             bool ret = true;
             dynamic f11 =
-                (Foo<int, Tiger, string, Tiger>)(
-                    () =>
-                    {
-                        return new Tiger();
-                    }
-                );
+                (Foo<int, Tiger, string, Tiger>)
+                    (
+                        () =>
+                        {
+                            return new Tiger();
+                        }
+                    );
             try
             {
                 result++;
@@ -268,12 +271,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.decl.order4.or
             }
 
             dynamic f31 =
-                (Foo<int, Tiger, string, Tiger>)(
-                    () =>
-                    {
-                        return new Tiger();
-                    }
-                );
+                (Foo<int, Tiger, string, Tiger>)
+                    (
+                        () =>
+                        {
+                            return new Tiger();
+                        }
+                    );
             try
             {
                 result++;
@@ -441,12 +445,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.decl.valtype02
                 result = 0;
             bool ret = true;
             dynamic f11 =
-                (Foo<uint>)(
-                    () =>
-                    {
-                        return 0;
-                    }
-                );
+                (Foo<uint>)
+                    (
+                        () =>
+                        {
+                            return 0;
+                        }
+                    );
             try
             {
                 count++;
@@ -479,12 +484,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.decl.valtype02
             //    System.Console.WriteLine("Scenario {0} passed. ", ++count);
             //}
             dynamic f31 =
-                (Foo<uint>)(
-                    () =>
-                    {
-                        return 0;
-                    }
-                );
+                (Foo<uint>)
+                    (
+                        () =>
+                        {
+                            return 0;
+                        }
+                    );
             try
             {
                 count++;
@@ -615,12 +621,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.decl.valtype04
                 result = 0;
             bool ret = true;
             dynamic f11 =
-                (Foo<uint>)(
-                    () =>
-                    {
-                        return 0;
-                    }
-                );
+                (Foo<uint>)
+                    (
+                        () =>
+                        {
+                            return 0;
+                        }
+                    );
             try
             {
                 count++;
@@ -653,12 +660,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.decl.valtype04
             //    System.Console.WriteLine("Scenario {0} passed. ", ++count);
             //}
             dynamic f31 =
-                (Foo<uint>)(
-                    () =>
-                    {
-                        return 0;
-                    }
-                );
+                (Foo<uint>)
+                    (
+                        () =>
+                        {
+                            return 0;
+                        }
+                    );
             try
             {
                 count++;

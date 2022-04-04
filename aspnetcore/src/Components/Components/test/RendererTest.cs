@@ -1469,13 +1469,14 @@ public class RendererTest
                 nameof(EventComponent.OnClickEventCallback),
                 EventCallback.Factory.Create(
                     parentComponent,
-                    (Func<Task>)(
-                        () =>
-                        {
-                            parentComponent.SomeMethod();
-                            return Task.CompletedTask;
-                        }
-                    )
+                    (Func<Task>)
+                        (
+                            () =>
+                            {
+                                parentComponent.SomeMethod();
+                                return Task.CompletedTask;
+                            }
+                        )
                 )
             );
             builder.CloseComponent();
@@ -1610,13 +1611,14 @@ public class RendererTest
                 nameof(EventComponent.OnClickEventCallbackOfT),
                 EventCallback.Factory.Create<DerivedEventArgs>(
                     parentComponent,
-                    (Func<Task>)(
-                        () =>
-                        {
-                            parentComponent.SomeMethod();
-                            return Task.CompletedTask;
-                        }
-                    )
+                    (Func<Task>)
+                        (
+                            () =>
+                            {
+                                parentComponent.SomeMethod();
+                                return Task.CompletedTask;
+                            }
+                        )
                 )
             );
             builder.CloseComponent();
@@ -1733,12 +1735,13 @@ public class RendererTest
                 nameof(EventComponent.OnClickEventCallbackOfT),
                 EventCallback.Factory.Create(
                     parentComponent,
-                    (Action<DerivedEventArgs>)(
-                        (e) =>
-                        {
-                            arg = e;
-                        }
-                    )
+                    (Action<DerivedEventArgs>)
+                        (
+                            (e) =>
+                            {
+                                arg = e;
+                            }
+                        )
                 )
             );
             builder.CloseComponent();
@@ -1853,13 +1856,14 @@ public class RendererTest
                 nameof(EventComponent.OnClickEventCallbackOfT),
                 EventCallback.Factory.Create(
                     parentComponent,
-                    (Action<DerivedEventArgs>)(
-                        (e) =>
-                        {
-                            arg = e;
-                            throw new OperationCanceledException();
-                        }
-                    )
+                    (Action<DerivedEventArgs>)
+                        (
+                            (e) =>
+                            {
+                                arg = e;
+                                throw new OperationCanceledException();
+                            }
+                        )
                 )
             );
             builder.CloseComponent();
@@ -1974,13 +1978,14 @@ public class RendererTest
                 nameof(EventComponent.OnClickEventCallbackOfT),
                 EventCallback.Factory.Create<DerivedEventArgs>(
                     parentComponent,
-                    (Action<DerivedEventArgs>)(
-                        (e) =>
-                        {
-                            arg = e;
-                            throw new InvalidTimeZoneException();
-                        }
-                    )
+                    (Action<DerivedEventArgs>)
+                        (
+                            (e) =>
+                            {
+                                arg = e;
+                                throw new InvalidTimeZoneException();
+                            }
+                        )
                 )
             );
             builder.CloseComponent();
@@ -2016,12 +2021,13 @@ public class RendererTest
             builder.AddAttribute(
                 1,
                 nameof(EventComponent.OnClickAsyncAction),
-                (Func<Task>)(
-                    async () =>
-                    {
-                        await tcs.Task;
-                    }
-                )
+                (Func<Task>)
+                    (
+                        async () =>
+                        {
+                            await tcs.Task;
+                        }
+                    )
             );
             builder.CloseComponent();
         };
@@ -2142,13 +2148,14 @@ public class RendererTest
             builder.AddAttribute(
                 1,
                 nameof(EventComponent.OnClickAsyncAction),
-                (Func<Task>)(
-                    async () =>
-                    {
-                        await tcs.Task;
-                        throw new TaskCanceledException();
-                    }
-                )
+                (Func<Task>)
+                    (
+                        async () =>
+                        {
+                            await tcs.Task;
+                            throw new TaskCanceledException();
+                        }
+                    )
             );
             builder.CloseComponent();
         };
@@ -2277,13 +2284,14 @@ public class RendererTest
             builder.AddAttribute(
                 1,
                 nameof(EventComponent.OnClickAsyncAction),
-                (Func<Task>)(
-                    async () =>
-                    {
-                        await tcs.Task;
-                        throw new InvalidTimeZoneException();
-                    }
-                )
+                (Func<Task>)
+                    (
+                        async () =>
+                        {
+                            await tcs.Task;
+                            throw new InvalidTimeZoneException();
+                        }
+                    )
             );
             builder.CloseComponent();
         };
@@ -2880,12 +2888,13 @@ public class RendererTest
                     builder.AddAttribute(
                         1,
                         nameof(AsyncDisposableComponent.AsyncDisposeAction),
-                        (Func<ValueTask>)(
-                            async () =>
-                            {
-                                await tcs.Task;
-                            }
-                        )
+                        (Func<ValueTask>)
+                            (
+                                async () =>
+                                {
+                                    await tcs.Task;
+                                }
+                            )
                     );
                     builder.CloseComponent();
                 }
@@ -2933,13 +2942,14 @@ public class RendererTest
                     builder.AddAttribute(
                         1,
                         nameof(AsyncDisposableComponent.AsyncDisposeAction),
-                        (Func<ValueTask>)(
-                            async () =>
-                            {
-                                await tcs.Task;
-                                throw exception1;
-                            }
-                        )
+                        (Func<ValueTask>)
+                            (
+                                async () =>
+                                {
+                                    await tcs.Task;
+                                    throw exception1;
+                                }
+                            )
                     );
                     builder.CloseComponent();
                 }
@@ -3606,16 +3616,17 @@ public class RendererTest
                     builder.AddAttribute(
                         2,
                         "onclick",
-                        (Action<object>)(
-                            (object obj) =>
-                            {
-                                // First we queue (1) a re-render of the root component, then the child component
-                                // will queue (2) its own re-render. But by the time (1) completes, the child will
-                                // have been disposed, even though (2) is still in the queue
-                                shouldRenderChild = false;
-                                component.TriggerRender();
-                            }
-                        )
+                        (Action<object>)
+                            (
+                                (object obj) =>
+                                {
+                                    // First we queue (1) a re-render of the root component, then the child component
+                                    // will queue (2) its own re-render. But by the time (1) completes, the child will
+                                    // have been disposed, even though (2) is still in the queue
+                                    shouldRenderChild = false;
+                                    component.TriggerRender();
+                                }
+                            )
                     );
                     builder.CloseComponent();
                 }
@@ -4866,13 +4877,14 @@ public class RendererTest
                 builder.AddAttribute(
                     1,
                     nameof(AsyncDisposableComponent.AsyncDisposeAction),
-                    (Func<ValueTask>)(
-                        () =>
-                        {
-                            disposed = true;
-                            throw exception1;
-                        }
-                    )
+                    (Func<ValueTask>)
+                        (
+                            () =>
+                            {
+                                disposed = true;
+                                throw exception1;
+                            }
+                        )
                 );
                 builder.CloseComponent();
             }
@@ -4906,14 +4918,15 @@ public class RendererTest
                 builder.AddAttribute(
                     1,
                     nameof(AsyncDisposableComponent.AsyncDisposeAction),
-                    (Func<ValueTask>)(
-                        async () =>
-                        {
-                            await tcs.Task;
-                            disposed = true;
-                            throw exception1;
-                        }
-                    )
+                    (Func<ValueTask>)
+                        (
+                            async () =>
+                            {
+                                await tcs.Task;
+                                disposed = true;
+                                throw exception1;
+                            }
+                        )
                 );
                 builder.CloseComponent();
             }

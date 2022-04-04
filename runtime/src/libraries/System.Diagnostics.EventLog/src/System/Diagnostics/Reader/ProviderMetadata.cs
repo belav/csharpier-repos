@@ -369,12 +369,13 @@ namespace System.Diagnostics.Eventing.Reader
         {
             if (_standardLevels == null)
                 _standardLevels =
-                    (List<EventLevel>)GetProviderListProperty(
-                        _defaultProviderHandle,
-                        UnsafeNativeMethods
-                            .EvtPublisherMetadataPropertyId
-                            .EvtPublisherMetadataLevels
-                    );
+                    (List<EventLevel>)
+                        GetProviderListProperty(
+                            _defaultProviderHandle,
+                            UnsafeNativeMethods
+                                .EvtPublisherMetadataPropertyId
+                                .EvtPublisherMetadataLevels
+                        );
             foreach (EventLevel standardLevel in _standardLevels)
             {
                 if (standardLevel.Name == name && standardLevel.Value == value)
@@ -387,12 +388,13 @@ namespace System.Diagnostics.Eventing.Reader
         {
             if (_standardOpcodes == null)
                 _standardOpcodes =
-                    (List<EventOpcode>)GetProviderListProperty(
-                        _defaultProviderHandle,
-                        UnsafeNativeMethods
-                            .EvtPublisherMetadataPropertyId
-                            .EvtPublisherMetadataOpcodes
-                    );
+                    (List<EventOpcode>)
+                        GetProviderListProperty(
+                            _defaultProviderHandle,
+                            UnsafeNativeMethods
+                                .EvtPublisherMetadataPropertyId
+                                .EvtPublisherMetadataOpcodes
+                        );
             foreach (EventOpcode standardOpcode in _standardOpcodes)
             {
                 if (standardOpcode.Name == name && standardOpcode.Value == value)
@@ -405,12 +407,13 @@ namespace System.Diagnostics.Eventing.Reader
         {
             if (_standardKeywords == null)
                 _standardKeywords =
-                    (List<EventKeyword>)GetProviderListProperty(
-                        _defaultProviderHandle,
-                        UnsafeNativeMethods
-                            .EvtPublisherMetadataPropertyId
-                            .EvtPublisherMetadataKeywords
-                    );
+                    (List<EventKeyword>)
+                        GetProviderListProperty(
+                            _defaultProviderHandle,
+                            UnsafeNativeMethods
+                                .EvtPublisherMetadataPropertyId
+                                .EvtPublisherMetadataKeywords
+                        );
             foreach (EventKeyword standardKeyword in _standardKeywords)
             {
                 if (standardKeyword.Name == name && standardKeyword.Value == value)
@@ -423,10 +426,13 @@ namespace System.Diagnostics.Eventing.Reader
         {
             if (_standardTasks == null)
                 _standardTasks =
-                    (List<EventTask>)GetProviderListProperty(
-                        _defaultProviderHandle,
-                        UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataTasks
-                    );
+                    (List<EventTask>)
+                        GetProviderListProperty(
+                            _defaultProviderHandle,
+                            UnsafeNativeMethods
+                                .EvtPublisherMetadataPropertyId
+                                .EvtPublisherMetadataTasks
+                        );
             foreach (EventTask standardTask in _standardTasks)
             {
                 if (standardTask.Name == name && standardTask.Value == value)

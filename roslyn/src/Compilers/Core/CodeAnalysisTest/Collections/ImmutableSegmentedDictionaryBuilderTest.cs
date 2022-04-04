@@ -364,9 +364,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         )
         {
             return (
-                (ImmutableSegmentedDictionary<TKey, TValue>)(
-                    basis ?? GetEmptyImmutableDictionary<TKey, TValue>()
-                )
+                (ImmutableSegmentedDictionary<TKey, TValue>)
+                    (basis ?? GetEmptyImmutableDictionary<TKey, TValue>())
             ).ToBuilder();
         }
     }

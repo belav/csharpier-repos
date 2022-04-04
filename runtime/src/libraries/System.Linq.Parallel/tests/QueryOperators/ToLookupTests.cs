@@ -400,23 +400,25 @@ namespace System.Linq.Parallel.Tests
             AssertThrows.Wrapped<DeliberateTestException>(
                 () =>
                     labeled.Item.ToLookup(
-                        (Func<int, int>)(
-                            x =>
-                            {
-                                throw new DeliberateTestException();
-                            }
-                        )
+                        (Func<int, int>)
+                            (
+                                x =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )
                     )
             );
             AssertThrows.Wrapped<DeliberateTestException>(
                 () =>
                     labeled.Item.ToLookup(
-                        (Func<int, int>)(
-                            x =>
-                            {
-                                throw new DeliberateTestException();
-                            }
-                        ),
+                        (Func<int, int>)
+                            (
+                                x =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            ),
                         y => y
                     )
             );
@@ -424,36 +426,39 @@ namespace System.Linq.Parallel.Tests
                 () =>
                     labeled.Item.ToLookup(
                         x => x,
-                        (Func<int, int>)(
-                            y =>
-                            {
-                                throw new DeliberateTestException();
-                            }
-                        )
+                        (Func<int, int>)
+                            (
+                                y =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )
                     )
             );
 
             AssertThrows.Wrapped<DeliberateTestException>(
                 () =>
                     labeled.Item.ToLookup(
-                        (Func<int, int>)(
-                            x =>
-                            {
-                                throw new DeliberateTestException();
-                            }
-                        ),
+                        (Func<int, int>)
+                            (
+                                x =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            ),
                         EqualityComparer<int>.Default
                     )
             );
             AssertThrows.Wrapped<DeliberateTestException>(
                 () =>
                     labeled.Item.ToLookup(
-                        (Func<int, int>)(
-                            x =>
-                            {
-                                throw new DeliberateTestException();
-                            }
-                        ),
+                        (Func<int, int>)
+                            (
+                                x =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            ),
                         y => y,
                         EqualityComparer<int>.Default
                     )
@@ -462,12 +467,13 @@ namespace System.Linq.Parallel.Tests
                 () =>
                     labeled.Item.ToLookup(
                         x => x,
-                        (Func<int, int>)(
-                            y =>
-                            {
-                                throw new DeliberateTestException();
-                            }
-                        ),
+                        (Func<int, int>)
+                            (
+                                y =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            ),
                         EqualityComparer<int>.Default
                     )
             );

@@ -377,9 +377,8 @@ namespace System.Collections.Immutable.Tests
         )
         {
             return (
-                (ImmutableDictionary<TKey, TValue>)(
-                    basis ?? GetEmptyImmutableDictionary<TKey, TValue>()
-                )
+                (ImmutableDictionary<TKey, TValue>)
+                    (basis ?? GetEmptyImmutableDictionary<TKey, TValue>())
             ).ToBuilder();
         }
     }

@@ -90,19 +90,21 @@ namespace System.Web.WebPages.Test.Instrumentation
             listener.BeginContextCalls = new List<dynamic>();
             listener.EndContextCalls = new List<dynamic>();
             listener.BeginContext =
-                (Action<dynamic>)(
-                    d =>
-                    {
-                        listener.BeginContextCalls.Add(d);
-                    }
-                );
+                (Action<dynamic>)
+                    (
+                        d =>
+                        {
+                            listener.BeginContextCalls.Add(d);
+                        }
+                    );
             listener.EndContext =
-                (Action<dynamic>)(
-                    d =>
-                    {
-                        listener.EndContextCalls.Add(d);
-                    }
-                );
+                (Action<dynamic>)
+                    (
+                        d =>
+                        {
+                            listener.EndContextCalls.Add(d);
+                        }
+                    );
             return listener;
         }
 

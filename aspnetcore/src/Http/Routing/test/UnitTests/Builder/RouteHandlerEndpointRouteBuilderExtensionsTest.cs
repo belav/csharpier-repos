@@ -74,52 +74,32 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest
             {
                 new object?[]
                 {
-                    (Func<
-                        IEndpointRouteBuilder,
-                        string,
-                        Delegate,
-                        IEndpointConventionBuilder
-                    >)MapGet,
+                    (Func<IEndpointRouteBuilder, string, Delegate, IEndpointConventionBuilder>)
+                        MapGet,
                     "GET"
                 },
                 new object?[]
                 {
-                    (Func<
-                        IEndpointRouteBuilder,
-                        string,
-                        Delegate,
-                        IEndpointConventionBuilder
-                    >)MapPost,
+                    (Func<IEndpointRouteBuilder, string, Delegate, IEndpointConventionBuilder>)
+                        MapPost,
                     "POST"
                 },
                 new object?[]
                 {
-                    (Func<
-                        IEndpointRouteBuilder,
-                        string,
-                        Delegate,
-                        IEndpointConventionBuilder
-                    >)MapPut,
+                    (Func<IEndpointRouteBuilder, string, Delegate, IEndpointConventionBuilder>)
+                        MapPut,
                     "PUT"
                 },
                 new object?[]
                 {
-                    (Func<
-                        IEndpointRouteBuilder,
-                        string,
-                        Delegate,
-                        IEndpointConventionBuilder
-                    >)MapDelete,
+                    (Func<IEndpointRouteBuilder, string, Delegate, IEndpointConventionBuilder>)
+                        MapDelete,
                     "DELETE"
                 },
                 new object?[]
                 {
-                    (Func<
-                        IEndpointRouteBuilder,
-                        string,
-                        Delegate,
-                        IEndpointConventionBuilder
-                    >)MapPatch,
+                    (Func<IEndpointRouteBuilder, string, Delegate, IEndpointConventionBuilder>)
+                        MapPatch,
                     "PATCH"
                 },
                 new object?[]

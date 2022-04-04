@@ -75,7 +75,8 @@ public class RequestDelegateEndpointRouteBuilderExtensionsTest
                         string,
                         RequestDelegate,
                         IEndpointConventionBuilder
-                    >)MapGet
+                    >)
+                        MapGet
                 },
                 new object[]
                 {
@@ -84,7 +85,8 @@ public class RequestDelegateEndpointRouteBuilderExtensionsTest
                         string,
                         RequestDelegate,
                         IEndpointConventionBuilder
-                    >)MapPost
+                    >)
+                        MapPost
                 },
                 new object[]
                 {
@@ -93,7 +95,8 @@ public class RequestDelegateEndpointRouteBuilderExtensionsTest
                         string,
                         RequestDelegate,
                         IEndpointConventionBuilder
-                    >)MapPut
+                    >)
+                        MapPut
                 },
                 new object[]
                 {
@@ -102,7 +105,8 @@ public class RequestDelegateEndpointRouteBuilderExtensionsTest
                         string,
                         RequestDelegate,
                         IEndpointConventionBuilder
-                    >)MapDelete
+                    >)
+                        MapDelete
                 },
                 new object[]
                 {
@@ -111,7 +115,8 @@ public class RequestDelegateEndpointRouteBuilderExtensionsTest
                         string,
                         RequestDelegate,
                         IEndpointConventionBuilder
-                    >)Map
+                    >)
+                        Map
                 },
             };
         }

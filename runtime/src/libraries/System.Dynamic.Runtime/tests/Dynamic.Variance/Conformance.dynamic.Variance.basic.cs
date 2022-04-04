@@ -137,12 +137,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
         public static int MainMethod()
         {
             dynamic f11 =
-                (Foo<Tiger>)(
-                    () =>
-                    {
-                        return new Tiger();
-                    }
-                );
+                (Foo<Tiger>)
+                    (
+                        () =>
+                        {
+                            return new Tiger();
+                        }
+                    );
             Foo<Animal> f12 = f11;
             Animal t1 = f12();
             Foo<Tiger> f21 = () =>
@@ -152,12 +153,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
             dynamic f22 = (Foo<Animal>)f21;
             Animal t2 = f22();
             dynamic f31 =
-                (Foo<Tiger>)(
-                    () =>
-                    {
-                        return new Tiger();
-                    }
-                );
+                (Foo<Tiger>)
+                    (
+                        () =>
+                        {
+                            return new Tiger();
+                        }
+                    );
             dynamic f32 = (Foo<Animal>)f31;
             Animal t3 = f32();
             return 0;
@@ -193,12 +195,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
             int result = 0;
             bool ret = true;
             dynamic f11 =
-                (Foo<Animal>)(
-                    () =>
-                    {
-                        return new Tiger();
-                    }
-                );
+                (Foo<Animal>)
+                    (
+                        () =>
+                        {
+                            return new Tiger();
+                        }
+                    );
             try
             {
                 result++;
@@ -232,12 +235,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
             }
 
             dynamic f31 =
-                (Foo<Animal>)(
-                    () =>
-                    {
-                        return new Tiger();
-                    }
-                );
+                (Foo<Animal>)
+                    (
+                        () =>
+                        {
+                            return new Tiger();
+                        }
+                    );
             try
             {
                 result++;
@@ -639,12 +643,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
         public static int MainMethod()
         {
             dynamic f11 =
-                (Foo<string>)(
-                    () =>
-                    {
-                        return null;
-                    }
-                );
+                (Foo<string>)
+                    (
+                        () =>
+                        {
+                            return null;
+                        }
+                    );
             Foo<dynamic> f12 = f11;
             dynamic t1 = f12();
             Foo<string> f21 = () =>
@@ -654,12 +659,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
             dynamic f22 = (Foo<dynamic>)f21;
             dynamic t2 = f22();
             dynamic f31 =
-                (Foo<string>)(
-                    () =>
-                    {
-                        return "ABC";
-                    }
-                );
+                (Foo<string>)
+                    (
+                        () =>
+                        {
+                            return "ABC";
+                        }
+                    );
             dynamic f32 = (Foo<dynamic>)f31;
             dynamic t3 = f32();
             return 0;
@@ -691,12 +697,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
             int result = 0;
             bool ret = true;
             dynamic f11 =
-                (Foo<dynamic>)(
-                    () =>
-                    {
-                        return 10;
-                    }
-                );
+                (Foo<dynamic>)
+                    (
+                        () =>
+                        {
+                            return 10;
+                        }
+                    );
             try
             {
                 result++;
@@ -730,12 +737,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
             }
 
             dynamic f31 =
-                (Foo<dynamic>)(
-                    () =>
-                    {
-                        return 10;
-                    }
-                );
+                (Foo<dynamic>)
+                    (
+                        () =>
+                        {
+                            return 10;
+                        }
+                    );
             try
             {
                 result++;

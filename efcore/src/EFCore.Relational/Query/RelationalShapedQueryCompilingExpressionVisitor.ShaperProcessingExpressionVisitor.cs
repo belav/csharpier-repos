@@ -491,9 +491,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         newExpression.Arguments[0];
 
                     var propertyMap =
-                        (IDictionary<IProperty, int>)GetProjectionIndex(
-                            projectionBindingExpression
-                        );
+                        (IDictionary<IProperty, int>)
+                            GetProjectionIndex(projectionBindingExpression);
                     _materializationContextBindings[parameterExpression] = propertyMap;
                     entityTypeIdentifyingExpressionOffsets[parameterExpression] =
                         propertyMap.Values.Max() + 1;

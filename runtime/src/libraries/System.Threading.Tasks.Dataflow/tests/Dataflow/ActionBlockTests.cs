@@ -624,12 +624,13 @@ namespace System.Threading.Tasks.Dataflow.Tests
             // Validate that a message which causes the ActionBlock to fault
             // ends up being stored (ToString) in the resulting exception's Data
             var ab1 = new ActionBlock<int>(
-                (Action<int>)(
-                    i =>
-                    {
-                        throw new FormatException();
-                    }
-                )
+                (Action<int>)
+                    (
+                        i =>
+                        {
+                            throw new FormatException();
+                        }
+                    )
             );
             ab1.Post(42);
             await Assert.ThrowsAsync<FormatException>(() => ab1.Completion);
@@ -639,12 +640,13 @@ namespace System.Threading.Tasks.Dataflow.Tests
 
             // Test case where message's ToString throws
             var ab2 = new ActionBlock<ObjectWithFaultyToString>(
-                (Action<ObjectWithFaultyToString>)(
-                    i =>
-                    {
-                        throw new FormatException();
-                    }
-                )
+                (Action<ObjectWithFaultyToString>)
+                    (
+                        i =>
+                        {
+                            throw new FormatException();
+                        }
+                    )
             );
             ab2.Post(new ObjectWithFaultyToString());
             Exception ex = await Assert.ThrowsAsync<FormatException>(() => ab2.Completion);

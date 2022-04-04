@@ -63,12 +63,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.as01.as
             int result = 0;
             // scenario 1
             dynamic f11 =
-                (Foo<Tiger>)(
-                    () =>
-                    {
-                        return new Tiger();
-                    }
-                );
+                (Foo<Tiger>)
+                    (
+                        () =>
+                        {
+                            return new Tiger();
+                        }
+                    );
             Foo<Animal> f12 = f11 as Foo<Tiger>;
             Animal t1 = f12();
             if (t1.speakName() != "Tiger")
@@ -84,12 +85,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.as01.as
                 result++;
             // scenario 3
             dynamic f31 =
-                (Foo<Tiger>)(
-                    () =>
-                    {
-                        return new Tiger();
-                    }
-                );
+                (Foo<Tiger>)
+                    (
+                        () =>
+                        {
+                            return new Tiger();
+                        }
+                    );
             dynamic f32 = (Foo<Animal>)(f31 as Foo<Tiger>);
             Animal t3 = f32();
             if (t3.speakName() != "Tiger")
@@ -293,12 +295,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
         public static int MainMethod()
         {
             dynamic f =
-                (Foo<Tiger>)(
-                    () =>
-                    {
-                        return new Tiger();
-                    }
-                );
+                (Foo<Tiger>)
+                    (
+                        () =>
+                        {
+                            return new Tiger();
+                        }
+                    );
             e += f;
             Animal t = e();
             return 0;
@@ -487,12 +490,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
                 return new Tiger();
             };
             dynamic f2 =
-                (Foo<Tiger>)(
-                    () =>
-                    {
-                        return new Tiger();
-                    }
-                );
+                (Foo<Tiger>)
+                    (
+                        () =>
+                        {
+                            return new Tiger();
+                        }
+                    );
             try
             {
                 Bar1(f2);
@@ -701,12 +705,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.overloa
             int result = 0,
                 count = 0;
             dynamic f11 =
-                (Foo<Giraffe>)(
-                    () =>
-                    {
-                        return new Giraffe();
-                    }
-                );
+                (Foo<Giraffe>)
+                    (
+                        () =>
+                        {
+                            return new Giraffe();
+                        }
+                    );
             try
             {
                 result++;
@@ -738,12 +743,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.overloa
             //    System.Console.WriteLine("Scenario {0} passed.", ++count);
             //}
             dynamic f31 =
-                (Foo<Giraffe>)(
-                    () =>
-                    {
-                        return new Giraffe();
-                    }
-                );
+                (Foo<Giraffe>)
+                    (
+                        () =>
+                        {
+                            return new Giraffe();
+                        }
+                    );
             try
             {
                 result++;

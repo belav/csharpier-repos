@@ -151,9 +151,10 @@ public class AA<TA, TB, TC, TD, TE, TF>
                 ( /*2 REFS*/
                     ((object)(new BB()))
                     != (
-                        (AA<TA, TB, TC, TD, TE, TF>)(
-                            /*2 REFS*/((object)(new BB()))
-                        )
+                        (AA<TA, TB, TC, TD, TE, TF>)
+                            (
+                                /*2 REFS*/((object)(new BB()))
+                            )
                     )
                 )
             );

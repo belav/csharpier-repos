@@ -417,11 +417,12 @@ namespace Microsoft.EntityFrameworkCore
         )
             where TOwnerEntity : class
             where TRelatedEntity : class =>
-            (OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity>)ToTable(
-                (OwnedNavigationBuilder)referenceOwnershipBuilder,
-                name,
-                excludedFromMigrations
-            );
+            (OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity>)
+                ToTable(
+                    (OwnedNavigationBuilder)referenceOwnershipBuilder,
+                    name,
+                    excludedFromMigrations
+                );
 
         /// <summary>
         ///     Configures the table that the entity type maps to when targeting a relational database.
@@ -585,12 +586,13 @@ namespace Microsoft.EntityFrameworkCore
         )
             where TOwnerEntity : class
             where TRelatedEntity : class =>
-            (OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity>)ToTable(
-                (OwnedNavigationBuilder)referenceOwnershipBuilder,
-                name,
-                schema,
-                excludedFromMigrations
-            );
+            (OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity>)
+                ToTable(
+                    (OwnedNavigationBuilder)referenceOwnershipBuilder,
+                    name,
+                    schema,
+                    excludedFromMigrations
+                );
 
         /// <summary>
         ///     Configures the table that the entity type maps to when targeting a relational database.
@@ -959,10 +961,8 @@ namespace Microsoft.EntityFrameworkCore
         )
             where TOwnerEntity : class
             where TRelatedEntity : class =>
-            (OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity>)ToView(
-                (OwnedNavigationBuilder)referenceOwnershipBuilder,
-                name
-            );
+            (OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity>)
+                ToView((OwnedNavigationBuilder)referenceOwnershipBuilder, name);
 
         /// <summary>
         ///     Configures the view that the entity type maps to when targeting a relational database.
@@ -1013,11 +1013,8 @@ namespace Microsoft.EntityFrameworkCore
         )
             where TOwnerEntity : class
             where TRelatedEntity : class =>
-            (OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity>)ToView(
-                (OwnedNavigationBuilder)referenceOwnershipBuilder,
-                name,
-                schema
-            );
+            (OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity>)
+                ToView((OwnedNavigationBuilder)referenceOwnershipBuilder, name, schema);
 
         /// <summary>
         ///     Configures the view that the entity type maps to when targeting a relational database.
@@ -1389,11 +1386,8 @@ namespace Microsoft.EntityFrameworkCore
             string name,
             Action<TableValuedFunctionBuilder> configureFunction
         ) where TEntity : class =>
-            (EntityTypeBuilder<TEntity>)ToFunction(
-                (EntityTypeBuilder)entityTypeBuilder,
-                name,
-                configureFunction
-            );
+            (EntityTypeBuilder<TEntity>)
+                ToFunction((EntityTypeBuilder)entityTypeBuilder, name, configureFunction);
 
         /// <summary>
         ///     Configures the function that the entity type maps to when targeting a relational database.
@@ -1411,11 +1405,8 @@ namespace Microsoft.EntityFrameworkCore
             MethodInfo function,
             Action<TableValuedFunctionBuilder> configureFunction
         ) where TEntity : class =>
-            (EntityTypeBuilder<TEntity>)ToFunction(
-                (EntityTypeBuilder)entityTypeBuilder,
-                function,
-                configureFunction
-            );
+            (EntityTypeBuilder<TEntity>)
+                ToFunction((EntityTypeBuilder)entityTypeBuilder, function, configureFunction);
 
         /// <summary>
         ///     Configures the function that the entity type maps to when targeting a relational database.
@@ -1531,10 +1522,8 @@ namespace Microsoft.EntityFrameworkCore
         )
             where TOwnerEntity : class
             where TRelatedEntity : class =>
-            (OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity>)ToFunction(
-                (OwnedNavigationBuilder)referenceOwnershipBuilder,
-                name
-            );
+            (OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity>)
+                ToFunction((OwnedNavigationBuilder)referenceOwnershipBuilder, name);
 
         /// <summary>
         ///     Configures the function that the entity type maps to when targeting a relational database.
@@ -1554,10 +1543,8 @@ namespace Microsoft.EntityFrameworkCore
         )
             where TOwnerEntity : class
             where TRelatedEntity : class =>
-            (OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity>)ToFunction(
-                (OwnedNavigationBuilder)referenceOwnershipBuilder,
-                function
-            );
+            (OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity>)
+                ToFunction((OwnedNavigationBuilder)referenceOwnershipBuilder, function);
 
         /// <summary>
         ///     Configures the function that the entity type maps to when targeting a relational database.
@@ -1579,11 +1566,12 @@ namespace Microsoft.EntityFrameworkCore
         )
             where TOwnerEntity : class
             where TRelatedEntity : class =>
-            (OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity>)ToFunction(
-                (OwnedNavigationBuilder)referenceOwnershipBuilder,
-                name,
-                configureFunction
-            );
+            (OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity>)
+                ToFunction(
+                    (OwnedNavigationBuilder)referenceOwnershipBuilder,
+                    name,
+                    configureFunction
+                );
 
         /// <summary>
         ///     Configures the function that the entity type maps to when targeting a relational database.
@@ -1605,11 +1593,12 @@ namespace Microsoft.EntityFrameworkCore
         )
             where TOwnerEntity : class
             where TRelatedEntity : class =>
-            (OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity>)ToFunction(
-                (OwnedNavigationBuilder)referenceOwnershipBuilder,
-                function,
-                configureFunction
-            );
+            (OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity>)
+                ToFunction(
+                    (OwnedNavigationBuilder)referenceOwnershipBuilder,
+                    function,
+                    configureFunction
+                );
 
         [return: NotNullIfNotNull("name")]
         private static IMutableDbFunction? ToFunction(string? name, IMutableEntityType entityType)
@@ -1860,11 +1849,8 @@ namespace Microsoft.EntityFrameworkCore
             string name,
             string? sql
         ) where TEntity : class =>
-            (EntityTypeBuilder<TEntity>)HasCheckConstraint(
-                (EntityTypeBuilder)entityTypeBuilder,
-                name,
-                sql
-            );
+            (EntityTypeBuilder<TEntity>)
+                HasCheckConstraint((EntityTypeBuilder)entityTypeBuilder, name, sql);
 
         /// <summary>
         ///     Configures a database check constraint when targeting a relational database.
@@ -1884,12 +1870,8 @@ namespace Microsoft.EntityFrameworkCore
             string sql,
             Action<CheckConstraintBuilder> buildAction
         ) where TEntity : class =>
-            (EntityTypeBuilder<TEntity>)HasCheckConstraint(
-                (EntityTypeBuilder)entityTypeBuilder,
-                name,
-                sql,
-                buildAction
-            );
+            (EntityTypeBuilder<TEntity>)
+                HasCheckConstraint((EntityTypeBuilder)entityTypeBuilder, name, sql, buildAction);
 
         /// <summary>
         ///     Configures a database check constraint when targeting a relational database.
@@ -1937,11 +1919,8 @@ namespace Microsoft.EntityFrameworkCore
         )
             where TOwnerEntity : class
             where TDependentEntity : class =>
-            (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)HasCheckConstraint(
-                (OwnedNavigationBuilder)ownedNavigationBuilder,
-                name,
-                sql
-            );
+            (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)
+                HasCheckConstraint((OwnedNavigationBuilder)ownedNavigationBuilder, name, sql);
 
         /// <summary>
         ///     Configures a database check constraint when targeting a relational database.
@@ -1999,12 +1978,13 @@ namespace Microsoft.EntityFrameworkCore
         )
             where TOwnerEntity : class
             where TDependentEntity : class =>
-            (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)HasCheckConstraint(
-                (OwnedNavigationBuilder)ownedNavigationBuilder,
-                name,
-                sql,
-                buildAction
-            );
+            (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)
+                HasCheckConstraint(
+                    (OwnedNavigationBuilder)ownedNavigationBuilder,
+                    name,
+                    sql,
+                    buildAction
+                );
 
         /// <summary>
         ///     Configures a database check constraint when targeting a relational database.

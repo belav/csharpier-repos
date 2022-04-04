@@ -3536,13 +3536,14 @@ namespace Microsoft.CodeAnalysis
                     moduleBeingBuilt.DebugInformationFormat != DebugInformationFormat.PortablePdb
                     || pdbStreamProvider == null
                         ? null
-                        : (Func<Stream?>)(
-                              () =>
-                                  ConditionalGetOrCreateStream(
-                                      pdbStreamProvider,
-                                      metadataDiagnostics
-                                  )
-                          );
+                        : (Func<Stream?>)
+                              (
+                                  () =>
+                                      ConditionalGetOrCreateStream(
+                                          pdbStreamProvider,
+                                          metadataDiagnostics
+                                      )
+                              );
 
                 try
                 {

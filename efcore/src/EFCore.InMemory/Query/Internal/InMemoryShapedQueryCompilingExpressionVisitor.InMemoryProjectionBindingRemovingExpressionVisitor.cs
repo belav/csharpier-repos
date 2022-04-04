@@ -45,10 +45,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                         projectionBindingExpression.QueryExpression;
 
                     _materializationContextBindings[parameterExpression] = (
-                        (IDictionary<IProperty, int>)GetProjectionIndex(
-                            queryExpression,
-                            projectionBindingExpression
-                        ),
+                        (IDictionary<IProperty, int>)
+                            GetProjectionIndex(queryExpression, projectionBindingExpression),
                         (
                             (InMemoryQueryExpression)projectionBindingExpression.QueryExpression
                         ).CurrentParameter

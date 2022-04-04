@@ -657,12 +657,13 @@ public class RendererSynchronizationContextTest
 
         // Act
         var task = context.InvokeAsync<string>(
-            (Func<string>)(
-                () =>
-                {
-                    throw new InvalidTimeZoneException();
-                }
-            )
+            (Func<string>)
+                (
+                    () =>
+                    {
+                        throw new InvalidTimeZoneException();
+                    }
+                )
         );
 
         // Assert
@@ -677,12 +678,13 @@ public class RendererSynchronizationContextTest
 
         // Act
         var task = context.InvokeAsync<string>(
-            (Func<string>)(
-                () =>
-                {
-                    throw new OperationCanceledException();
-                }
-            )
+            (Func<string>)
+                (
+                    () =>
+                    {
+                        throw new OperationCanceledException();
+                    }
+                )
         );
 
         // Assert
@@ -869,12 +871,13 @@ public class RendererSynchronizationContextTest
 
         // Act
         var task = context.InvokeAsync<string>(
-            (Func<Task<string>>)(
-                () =>
-                {
-                    throw new InvalidTimeZoneException();
-                }
-            )
+            (Func<Task<string>>)
+                (
+                    () =>
+                    {
+                        throw new InvalidTimeZoneException();
+                    }
+                )
         );
 
         // Assert
@@ -889,12 +892,13 @@ public class RendererSynchronizationContextTest
 
         // Act
         var task = context.InvokeAsync<string>(
-            (Func<Task<string>>)(
-                () =>
-                {
-                    throw new OperationCanceledException();
-                }
-            )
+            (Func<Task<string>>)
+                (
+                    () =>
+                    {
+                        throw new OperationCanceledException();
+                    }
+                )
         );
 
         // Assert

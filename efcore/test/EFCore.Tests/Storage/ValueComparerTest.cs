@@ -628,9 +628,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             );
 
             var keyComparer = new ValueComparer<DeepBinary>(
-                (Expression<Func<DeepBinary, DeepBinary, bool>>)CreateAndExpression(
-                    bytesKeyComparer
-                ),
+                (Expression<Func<DeepBinary, DeepBinary, bool>>)
+                    CreateAndExpression(bytesKeyComparer),
                 (Expression<Func<DeepBinary, int>>)CreateHashCodeExpression(bytesKeyComparer)
             );
 
