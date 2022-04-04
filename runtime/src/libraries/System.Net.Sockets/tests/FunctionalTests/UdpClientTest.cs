@@ -707,10 +707,11 @@ namespace System.Net.Sockets.Tests
                 c.AllowNatTraversal(allow);
                 Assert.Equal(
                     (int)resultLevel,
-                    (int)c.Client.GetSocketOption(
-                        SocketOptionLevel.IP,
-                        SocketOptionName.IPProtectionLevel
-                    )
+                    (int)
+                        c.Client.GetSocketOption(
+                            SocketOptionLevel.IP,
+                            SocketOptionName.IPProtectionLevel
+                        )
                 );
             }
         }

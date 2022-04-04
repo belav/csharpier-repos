@@ -83,10 +83,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             where T : class, ITypeSymbol
         {
             // Can be cleaned up when https://github.com/dotnet/roslyn/issues/38061 is resolved
-            var typeSymbol = (T?)symbol
-                .GetSymbolKey()
-                .Resolve(semanticModel.Compilation)
-                .GetAnySymbol();
+            var typeSymbol = (T?)
+                symbol.GetSymbolKey().Resolve(semanticModel.Compilation).GetAnySymbol();
             Contract.ThrowIfNull(typeSymbol);
             return (T)typeSymbol.WithNullableAnnotation(symbol.NullableAnnotation);
         }

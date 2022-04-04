@@ -116,10 +116,8 @@ namespace System.Xml.Tests
             bool pdb
         )
         {
-            var other = (AssemblyLoader)Activator.CreateInstance(
-                typeof(AssemblyLoader),
-                typeof(AssemblyLoader).FullName
-            );
+            var other = (AssemblyLoader)
+                Activator.CreateInstance(typeof(AssemblyLoader), typeof(AssemblyLoader).FullName);
 
             bool result = other.Verify(asmName, typeName, baselineFile, pdb);
 

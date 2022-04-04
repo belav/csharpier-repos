@@ -215,9 +215,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
 
                 foreach (var reference in compilation.References)
                 {
-                    var assemblySymbol = (IAssemblySymbol?)compilation.GetAssemblyOrModuleSymbol(
-                        reference
-                    );
+                    var assemblySymbol = (IAssemblySymbol?)
+                        compilation.GetAssemblyOrModuleSymbol(reference);
                     Contract.ThrowIfNull(assemblySymbol);
 
                     var namedTypeSymbol = assemblySymbol.GetTypeByMetadataName(symbolMetadataName);

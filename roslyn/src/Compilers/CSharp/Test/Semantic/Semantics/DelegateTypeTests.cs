@@ -1097,11 +1097,12 @@ class Program
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
             var expr = (
-                (CastExpressionSyntax)tree.GetRoot()
-                    .DescendantNodes()
-                    .OfType<VariableDeclaratorSyntax>()
-                    .Single()
-                    .Initializer!.Value
+                (CastExpressionSyntax)
+                    tree.GetRoot()
+                        .DescendantNodes()
+                        .OfType<VariableDeclaratorSyntax>()
+                        .Single()
+                        .Initializer!.Value
             ).Expression;
             var typeInfo = model.GetTypeInfo(expr);
             // https://github.com/dotnet/roslyn/issues/52874: GetTypeInfo() for method group should return inferred delegate type.
@@ -1375,11 +1376,12 @@ class Program
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
             var expr = (
-                (CastExpressionSyntax)tree.GetRoot()
-                    .DescendantNodes()
-                    .OfType<VariableDeclaratorSyntax>()
-                    .Single()
-                    .Initializer!.Value
+                (CastExpressionSyntax)
+                    tree.GetRoot()
+                        .DescendantNodes()
+                        .OfType<VariableDeclaratorSyntax>()
+                        .Single()
+                        .Initializer!.Value
             ).Expression;
             var typeInfo = model.GetTypeInfo(expr);
             Assert.Null(typeInfo.Type);
@@ -1506,11 +1508,12 @@ class Program
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
             var expr = (
-                (CastExpressionSyntax)tree.GetRoot()
-                    .DescendantNodes()
-                    .OfType<VariableDeclaratorSyntax>()
-                    .Single()
-                    .Initializer!.Value
+                (CastExpressionSyntax)
+                    tree.GetRoot()
+                        .DescendantNodes()
+                        .OfType<VariableDeclaratorSyntax>()
+                        .Single()
+                        .Initializer!.Value
             ).Expression;
             var typeInfo = model.GetTypeInfo(expr);
             Assert.Null(typeInfo.Type);
@@ -12090,9 +12093,8 @@ class Program
     }
 }";
             var verifier = CompileAndVerify(source, parseOptions: TestOptions.RegularPreview);
-            var method = (MethodSymbol)verifier.TestData.GetMethodsByName()[
-                "Program.<>c.<F>b__0_0()"
-            ].Method;
+            var method = (MethodSymbol)
+                verifier.TestData.GetMethodsByName()["Program.<>c.<F>b__0_0()"].Method;
             Assert.Equal("void Program.<>c.<F>b__0_0()", method.ToTestDisplayString());
             verifier.VerifyIL(
                 "Program.<>c.<F>b__0_0()",

@@ -919,8 +919,8 @@ namespace Newtonsoft.Json.Utilities
                       : Attribute.GetCustomAttributes(p, inherit);
                 default:
 #if !PORTABLE40
-                    ICustomAttributeProvider customAttributeProvider =
-                        (ICustomAttributeProvider)attributeProvider;
+                    ICustomAttributeProvider customAttributeProvider = (ICustomAttributeProvider)
+                        attributeProvider;
                     object[] result =
                         (attributeType != null)
                             ? customAttributeProvider.GetCustomAttributes(attributeType, inherit)
@@ -1138,10 +1138,8 @@ namespace Newtonsoft.Json.Utilities
                 PropertyInfo member = propertyInfos[i];
                 if (member.DeclaringType != targetType)
                 {
-                    PropertyInfo declaredMember = (PropertyInfo)GetMemberInfoFromType(
-                        member.DeclaringType,
-                        member
-                    );
+                    PropertyInfo declaredMember = (PropertyInfo)
+                        GetMemberInfoFromType(member.DeclaringType, member);
                     propertyInfos[i] = declaredMember;
                 }
             }

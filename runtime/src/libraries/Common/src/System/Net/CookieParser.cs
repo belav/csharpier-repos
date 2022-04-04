@@ -512,10 +512,8 @@ namespace System.Net
                         "We need to use an internal method named InternalSetName that is declared on Cookie."
                     );
                     s_internalSetNameMethod =
-                        (Func<Cookie, string?, bool>)Delegate.CreateDelegate(
-                            typeof(Func<Cookie, string?, bool>),
-                            method
-                        );
+                        (Func<Cookie, string?, bool>)
+                            Delegate.CreateDelegate(typeof(Func<Cookie, string?, bool>), method);
                 }
 
                 return s_internalSetNameMethod;

@@ -611,10 +611,8 @@ namespace System.DirectoryServices.ActiveDirectory
                     if (!_descriptionInitialized)
                     {
                         // get the property from the server
-                        _description = (string?)GetValueFromCache(
-                            PropertyManager.Description,
-                            false
-                        );
+                        _description = (string?)
+                            GetValueFromCache(PropertyManager.Description, false);
                         _descriptionInitialized = true;
                     }
                 }
@@ -1203,10 +1201,8 @@ namespace System.DirectoryServices.ActiveDirectory
                     if (_schemaGuidBinaryForm == null)
                     {
                         // get the property from the server
-                        _schemaGuidBinaryForm = (byte[])GetValueFromCache(
-                            PropertyManager.SchemaIDGuid,
-                            true
-                        )!;
+                        _schemaGuidBinaryForm = (byte[])
+                            GetValueFromCache(PropertyManager.SchemaIDGuid, true)!;
                     }
                 }
 
@@ -1242,10 +1238,8 @@ namespace System.DirectoryServices.ActiveDirectory
                     if (!_defaultSDSddlFormInitialized)
                     {
                         // get the property from the server
-                        _defaultSDSddlForm = (string?)GetValueFromCache(
-                            PropertyManager.DefaultSecurityDescriptor,
-                            false
-                        );
+                        _defaultSDSddlForm = (string?)
+                            GetValueFromCache(PropertyManager.DefaultSecurityDescriptor, false);
                         _defaultSDSddlFormInitialized = true;
                     }
                 }
@@ -1308,9 +1302,8 @@ namespace System.DirectoryServices.ActiveDirectory
             InitializePropertiesFromSchemaContainer();
 
             Debug.Assert(_propertyValuesFromServer != null);
-            ArrayList values = (ArrayList)_propertyValuesFromServer[
-                propertyName.ToLowerInvariant()
-            ]!;
+            ArrayList values = (ArrayList)
+                _propertyValuesFromServer[propertyName.ToLowerInvariant()]!;
 
             Debug.Assert(values != null);
             if (values.Count < 1 && mustExist)
@@ -1337,9 +1330,8 @@ namespace System.DirectoryServices.ActiveDirectory
             InitializePropertiesFromSchemaContainer();
 
             Debug.Assert(_propertyValuesFromServer != null);
-            ArrayList values = (ArrayList)_propertyValuesFromServer[
-                propertyName.ToLowerInvariant()
-            ]!;
+            ArrayList values = (ArrayList)
+                _propertyValuesFromServer[propertyName.ToLowerInvariant()]!;
 
             Debug.Assert(values != null);
             return values;
@@ -1610,10 +1602,11 @@ namespace System.DirectoryServices.ActiveDirectory
 
                 foreach (SearchResult res in resCol)
                 {
-                    string ldapDisplayName = (string)PropertyManager.GetSearchResultPropertyValue(
-                        res,
-                        PropertyManager.LdapDisplayName
-                    )!;
+                    string ldapDisplayName = (string)
+                        PropertyManager.GetSearchResultPropertyValue(
+                            res,
+                            PropertyManager.LdapDisplayName
+                        )!;
                     DirectoryEntry de = res.GetDirectoryEntry();
 
                     de.AuthenticationType = Utils.DefaultAuthType;
@@ -1711,10 +1704,11 @@ namespace System.DirectoryServices.ActiveDirectory
 
                 foreach (SearchResult res in resCol)
                 {
-                    string ldapDisplayName = (string)PropertyManager.GetSearchResultPropertyValue(
-                        res,
-                        PropertyManager.LdapDisplayName
-                    )!;
+                    string ldapDisplayName = (string)
+                        PropertyManager.GetSearchResultPropertyValue(
+                            res,
+                            PropertyManager.LdapDisplayName
+                        )!;
                     DirectoryEntry de = res.GetDirectoryEntry();
 
                     de.AuthenticationType = Utils.DefaultAuthType;

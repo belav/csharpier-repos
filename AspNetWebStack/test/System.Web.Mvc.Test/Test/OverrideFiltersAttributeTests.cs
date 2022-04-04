@@ -31,10 +31,8 @@ namespace System.Web.Mvc.Test
         public void AttributeUsage_IsAsSpecified()
         {
             // Act
-            AttributeUsageAttribute usage = (AttributeUsageAttribute)Attribute.GetCustomAttribute(
-                ProductUnderTestType,
-                typeof(AttributeUsageAttribute)
-            );
+            AttributeUsageAttribute usage = (AttributeUsageAttribute)
+                Attribute.GetCustomAttribute(ProductUnderTestType, typeof(AttributeUsageAttribute));
 
             // Assert
             Assert.NotNull(usage);

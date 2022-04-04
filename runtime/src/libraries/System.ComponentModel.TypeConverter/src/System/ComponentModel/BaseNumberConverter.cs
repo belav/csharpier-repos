@@ -82,9 +82,8 @@ namespace System.ComponentModel
                             culture = CultureInfo.CurrentCulture;
                         }
 
-                        NumberFormatInfo? formatInfo = (NumberFormatInfo?)culture.GetFormat(
-                            typeof(NumberFormatInfo)
-                        );
+                        NumberFormatInfo? formatInfo = (NumberFormatInfo?)
+                            culture.GetFormat(typeof(NumberFormatInfo));
                         return FromString(text, formatInfo);
                     }
                 }
@@ -127,9 +126,8 @@ namespace System.ComponentModel
                     culture = CultureInfo.CurrentCulture;
                 }
 
-                NumberFormatInfo? formatInfo = (NumberFormatInfo?)culture.GetFormat(
-                    typeof(NumberFormatInfo)
-                );
+                NumberFormatInfo? formatInfo = (NumberFormatInfo?)
+                    culture.GetFormat(typeof(NumberFormatInfo));
                 return ToString(value, formatInfo);
             }
 

@@ -69,12 +69,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             in ValueBuffer valueBuffer
         ) =>
             entityType.ShadowPropertyCount() > 0
-                ? (InternalEntityEntry)new InternalMixedEntityEntry(
-                      stateManager,
-                      entityType,
-                      entity,
-                      valueBuffer
-                  )
+                ? (InternalEntityEntry)
+                      new InternalMixedEntityEntry(stateManager, entityType, entity, valueBuffer)
                 : new InternalClrEntityEntry(stateManager, entityType, entity);
     }
 }

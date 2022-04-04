@@ -554,10 +554,8 @@ namespace System.Text.Json.Serialization.Tests
             {
                 string json = $@"{{""{escapedPropertyName}"":1}}";
                 MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(json));
-                IDictionary root = (IDictionary)await JsonSerializer.DeserializeAsync(
-                    stream,
-                    dictionaryType
-                );
+                IDictionary root = (IDictionary)
+                    await JsonSerializer.DeserializeAsync(stream, dictionaryType);
 
                 bool containsKey = root.Contains(expectedDictionaryKey);
                 Assert.True(containsKey);

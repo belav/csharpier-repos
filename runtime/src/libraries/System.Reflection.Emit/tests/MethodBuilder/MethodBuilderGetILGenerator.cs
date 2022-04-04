@@ -34,14 +34,12 @@ namespace System.Reflection.Emit.Tests
 
             // Verify MetadataToken
             Assert.Equal(method.MetadataToken, createdMethod.MetadataToken);
-            MethodInfo methodFromToken = (MethodInfo)type.Module.ResolveMethod(
-                method.MetadataToken
-            );
+            MethodInfo methodFromToken = (MethodInfo)
+                type.Module.ResolveMethod(method.MetadataToken);
             Assert.Equal(createdMethod, methodFromToken);
 
-            MemberInfo memberInfoFromToken = (MemberInfo)type.Module.ResolveMember(
-                method.MetadataToken
-            );
+            MemberInfo memberInfoFromToken = (MemberInfo)
+                type.Module.ResolveMember(method.MetadataToken);
             Assert.Equal(methodFromToken, memberInfoFromToken);
         }
 

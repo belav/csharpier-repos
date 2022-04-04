@@ -331,10 +331,11 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
             this HttpConfiguration config
         )
         {
-            return (HelpPageSampleGenerator)config.Properties.GetOrAdd(
-                typeof(HelpPageSampleGenerator),
-                k => new HelpPageSampleGenerator()
-            );
+            return (HelpPageSampleGenerator)
+                config.Properties.GetOrAdd(
+                    typeof(HelpPageSampleGenerator),
+                    k => new HelpPageSampleGenerator()
+                );
         }
 
         /// <summary>
@@ -363,10 +364,11 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
             this HttpConfiguration config
         )
         {
-            return (ModelDescriptionGenerator)config.Properties.GetOrAdd(
-                typeof(ModelDescriptionGenerator),
-                k => InitializeModelDescriptionGenerator(config)
-            );
+            return (ModelDescriptionGenerator)
+                config.Properties.GetOrAdd(
+                    typeof(ModelDescriptionGenerator),
+                    k => InitializeModelDescriptionGenerator(config)
+                );
         }
 
         /// <summary>

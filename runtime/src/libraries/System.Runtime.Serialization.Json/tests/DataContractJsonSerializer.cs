@@ -144,9 +144,8 @@ public static partial class DataContractJsonSerializerTests
     {
         // Assume that UTC offset doesn't change more often than once in the day 2013-01-02
         // DO NOT USE TimeZoneInfo.Local.BaseUtcOffset !
-        var offsetMinutes = (int)TimeZoneInfo.Local
-            .GetUtcOffset(new DateTime(2013, 1, 2))
-            .TotalMinutes;
+        var offsetMinutes = (int)
+            TimeZoneInfo.Local.GetUtcOffset(new DateTime(2013, 1, 2)).TotalMinutes;
         var timeZoneString = string.Format(
             "{0:+;-}{1}",
             offsetMinutes,
@@ -1318,9 +1317,8 @@ public static partial class DataContractJsonSerializerTests
         Assert.StrictEqual(
             "Value2-0",
             (
-                (KeyValuePair<string, object>)(
-                    (object[])((KeyValuePair<string, object>)((object[])y["Key0"])[1]).Value
-                )[0]
+                (KeyValuePair<string, object>)
+                    ((object[])((KeyValuePair<string, object>)((object[])y["Key0"])[1]).Value)[0]
             ).Value
         );
     }
@@ -1569,9 +1567,8 @@ public static partial class DataContractJsonSerializerTests
         Assert.Equal(jaggedStringArray[1], actualJaggedStringArray[1]);
         Assert.Equal(jaggedStringArray[2], actualJaggedStringArray[2]);
 
-        var offsetMinutes = (int)TimeZoneInfo.Local
-            .GetUtcOffset(new DateTime(2013, 1, 2))
-            .TotalMinutes;
+        var offsetMinutes = (int)
+            TimeZoneInfo.Local.GetUtcOffset(new DateTime(2013, 1, 2)).TotalMinutes;
         var timeZoneString = string.Format(
             "{0:+;-}{1}",
             offsetMinutes,
@@ -2321,8 +2318,8 @@ public static partial class DataContractJsonSerializerTests
         sw.Flush();
         ms.Seek(0, SeekOrigin.Begin);
 
-        TypeWithPropertyWithoutDefaultCtor deserializedValue =
-            (TypeWithPropertyWithoutDefaultCtor)dcjs.ReadObject(ms);
+        TypeWithPropertyWithoutDefaultCtor deserializedValue = (TypeWithPropertyWithoutDefaultCtor)
+            dcjs.ReadObject(ms);
         Assert.Equal("Foo", deserializedValue.Name);
         Assert.Null(deserializedValue.MemberWithInvalidDataContract);
     }
@@ -3207,9 +3204,8 @@ public static partial class DataContractJsonSerializerTests
         ContractGeneric reducedData;
         using (var memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(extendedContractJson)))
         {
-            reducedData = (ContractGeneric)new DataContractJsonSerializer(
-                typeof(ContractGeneric)
-            ).ReadObject(memoryStream);
+            reducedData = (ContractGeneric)
+                new DataContractJsonSerializer(typeof(ContractGeneric)).ReadObject(memoryStream);
         }
 
         string reducedContractJson;

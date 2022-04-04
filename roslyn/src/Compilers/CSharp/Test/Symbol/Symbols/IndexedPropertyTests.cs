@@ -1066,9 +1066,8 @@ Q[6] = 5
 "
             );
 
-            var @namespace = (NamespaceSymbol)(
-                (CSharpCompilation)compilation2.Compilation
-            ).GlobalNamespace;
+            var @namespace = (NamespaceSymbol)
+                ((CSharpCompilation)compilation2.Compilation).GlobalNamespace;
             // Property with parameters from type with [ComImport].
             var property = @namespace
                 .GetMember<NamedTypeSymbol>("IA")
@@ -1177,9 +1176,8 @@ Q[6] = 5
                 verify: Verification.Passes
             );
 
-            var @namespace = (NamespaceSymbol)(
-                (CSharpCompilation)compilation2.Compilation
-            ).GlobalNamespace;
+            var @namespace = (NamespaceSymbol)
+                ((CSharpCompilation)compilation2.Compilation).GlobalNamespace;
             // Indexed property with valid name.
             var type = @namespace.GetMember<NamedTypeSymbol>("I");
             var property = type.GetMember<PropertySymbol>("P");

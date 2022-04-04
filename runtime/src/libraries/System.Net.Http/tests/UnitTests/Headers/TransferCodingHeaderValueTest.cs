@@ -144,9 +144,8 @@ namespace System.Net.Http.Tests
         public void Clone_Call_CloneFieldsMatchSourceFields()
         {
             TransferCodingHeaderValue source = new TransferCodingHeaderValue("custom");
-            TransferCodingHeaderValue clone = (TransferCodingHeaderValue)(
-                (ICloneable)source
-            ).Clone();
+            TransferCodingHeaderValue clone = (TransferCodingHeaderValue)
+                ((ICloneable)source).Clone();
             Assert.Equal(source.Value, clone.Value);
             Assert.Equal(0, clone.Parameters.Count);
 

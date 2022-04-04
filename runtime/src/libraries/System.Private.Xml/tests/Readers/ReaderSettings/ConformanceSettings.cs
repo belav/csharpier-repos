@@ -54,20 +54,16 @@ namespace System.Xml.Tests
             try
             {
                 XmlReaderSettings rsU = new XmlReaderSettings();
-                rsU.ConformanceLevel = (ConformanceLevel)Enum.Parse(
-                    typeof(ConformanceLevel),
-                    underlyingReaderLevel
-                );
+                rsU.ConformanceLevel = (ConformanceLevel)
+                    Enum.Parse(typeof(ConformanceLevel), underlyingReaderLevel);
                 XmlReader rU = ReaderHelper.Create(
                     new StringReader(conformanceXml),
                     rsU,
                     (string)null
                 );
                 XmlReaderSettings rsW = new XmlReaderSettings();
-                rsW.ConformanceLevel = (ConformanceLevel)Enum.Parse(
-                    typeof(ConformanceLevel),
-                    wrappingReaderLevel
-                );
+                rsW.ConformanceLevel = (ConformanceLevel)
+                    Enum.Parse(typeof(ConformanceLevel), wrappingReaderLevel);
                 XmlReader rW = ReaderHelper.Create(rU, rsW);
                 CError.Compare(rW.ReadState, ReadState.Initial, "ReadState not initial");
             }

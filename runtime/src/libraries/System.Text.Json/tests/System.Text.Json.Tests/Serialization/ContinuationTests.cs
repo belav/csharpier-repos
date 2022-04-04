@@ -189,11 +189,8 @@ namespace System.Text.Json.Serialization.Tests
                     IgnoreNullValues = ignoreNullValues,
                 };
 
-                var array = (ITestObject[])await JsonSerializer.DeserializeAsync(
-                    stream,
-                    type,
-                    readOptions
-                );
+                var array = (ITestObject[])
+                    await JsonSerializer.DeserializeAsync(stream, type, readOptions);
 
                 Assert.NotNull(array);
                 Assert.Equal(1, array.Length);

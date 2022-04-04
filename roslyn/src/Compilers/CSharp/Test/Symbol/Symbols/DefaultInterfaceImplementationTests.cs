@@ -491,9 +491,8 @@ M2",
                 verify: VerifyOnMonoOrCoreClr,
                 symbolValidator: (m) =>
                 {
-                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace.GetTypeMember(
-                        "Derived"
-                    );
+                    var derivedResult = (PENamedTypeSymbol)
+                        m.GlobalNamespace.GetTypeMember("Derived");
                     Assert.Equal(
                         "I1",
                         derivedResult
@@ -573,9 +572,8 @@ M2",
                 verify: VerifyOnMonoOrCoreClr,
                 symbolValidator: (m) =>
                 {
-                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace.GetTypeMember(
-                        "Derived"
-                    );
+                    var derivedResult = (PENamedTypeSymbol)
+                        m.GlobalNamespace.GetTypeMember("Derived");
                     Assert.Equal(
                         "I1",
                         derivedResult
@@ -665,9 +663,8 @@ Test.M2",
                 verify: VerifyOnMonoOrCoreClr,
                 symbolValidator: (m) =>
                 {
-                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace.GetTypeMember(
-                        "Derived"
-                    );
+                    var derivedResult = (PENamedTypeSymbol)
+                        m.GlobalNamespace.GetTypeMember("Derived");
                     Assert.Equal(
                         "I1",
                         derivedResult
@@ -757,9 +754,8 @@ Test.M2",
                 verify: VerifyOnMonoOrCoreClr,
                 symbolValidator: (m) =>
                 {
-                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace.GetTypeMember(
-                        "Derived"
-                    );
+                    var derivedResult = (PENamedTypeSymbol)
+                        m.GlobalNamespace.GetTypeMember("Derived");
                     Assert.Equal(
                         "I1",
                         derivedResult
@@ -3078,9 +3074,8 @@ class Test : I1 {}
                 verify: VerifyOnMonoOrCoreClr,
                 symbolValidator: (m) =>
                 {
-                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace.GetTypeMember(
-                        "Derived"
-                    );
+                    var derivedResult = (PENamedTypeSymbol)
+                        m.GlobalNamespace.GetTypeMember("Derived");
                     Assert.Equal(
                         "I1",
                         derivedResult
@@ -3207,9 +3202,8 @@ class Test : I1 {}
                 verify: VerifyOnMonoOrCoreClr,
                 symbolValidator: (m) =>
                 {
-                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace.GetTypeMember(
-                        "Derived"
-                    );
+                    var derivedResult = (PENamedTypeSymbol)
+                        m.GlobalNamespace.GetTypeMember("Derived");
                     Assert.Equal(
                         "I1",
                         derivedResult
@@ -3400,9 +3394,8 @@ class Test : I1
                 verify: VerifyOnMonoOrCoreClr,
                 symbolValidator: (m) =>
                 {
-                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace.GetTypeMember(
-                        "Derived"
-                    );
+                    var derivedResult = (PENamedTypeSymbol)
+                        m.GlobalNamespace.GetTypeMember("Derived");
                     Assert.Equal(
                         "I1",
                         derivedResult
@@ -3593,9 +3586,8 @@ class Test : I1
                 verify: VerifyOnMonoOrCoreClr,
                 symbolValidator: (m) =>
                 {
-                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace.GetTypeMember(
-                        "Derived"
-                    );
+                    var derivedResult = (PENamedTypeSymbol)
+                        m.GlobalNamespace.GetTypeMember("Derived");
                     Assert.Equal(
                         "I1",
                         derivedResult
@@ -4937,9 +4929,8 @@ class Test : I1 {}
                 verify: VerifyOnMonoOrCoreClr,
                 symbolValidator: (m) =>
                 {
-                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace.GetTypeMember(
-                        "Derived"
-                    );
+                    var derivedResult = (PENamedTypeSymbol)
+                        m.GlobalNamespace.GetTypeMember("Derived");
                     Assert.Equal(
                         "I1",
                         derivedResult
@@ -5068,9 +5059,8 @@ class Test : I1 {}
                 verify: VerifyOnMonoOrCoreClr,
                 symbolValidator: (m) =>
                 {
-                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace.GetTypeMember(
-                        "Derived"
-                    );
+                    var derivedResult = (PENamedTypeSymbol)
+                        m.GlobalNamespace.GetTypeMember("Derived");
                     Assert.Equal(
                         "I1",
                         derivedResult
@@ -5351,9 +5341,8 @@ class Test : I1
                 verify: VerifyOnMonoOrCoreClr,
                 symbolValidator: (m) =>
                 {
-                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace.GetTypeMember(
-                        "Derived"
-                    );
+                    var derivedResult = (PENamedTypeSymbol)
+                        m.GlobalNamespace.GetTypeMember("Derived");
                     Assert.Equal(
                         "I1",
                         derivedResult
@@ -5546,9 +5535,8 @@ class Test : I1
                 verify: VerifyOnMonoOrCoreClr,
                 symbolValidator: (m) =>
                 {
-                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace.GetTypeMember(
-                        "Derived"
-                    );
+                    var derivedResult = (PENamedTypeSymbol)
+                        m.GlobalNamespace.GetTypeMember("Derived");
                     Assert.Equal(
                         "I1",
                         derivedResult
@@ -7025,9 +7013,8 @@ remove E8",
                 verify: VerifyOnMonoOrCoreClr,
                 symbolValidator: (m) =>
                 {
-                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace.GetTypeMember(
-                        "Derived"
-                    );
+                    var derivedResult = (PENamedTypeSymbol)
+                        m.GlobalNamespace.GetTypeMember("Derived");
                     Assert.Equal(
                         "I1",
                         derivedResult
@@ -7123,9 +7110,8 @@ remove E8",
                 verify: VerifyOnMonoOrCoreClr,
                 symbolValidator: (m) =>
                 {
-                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace.GetTypeMember(
-                        "Derived"
-                    );
+                    var derivedResult = (PENamedTypeSymbol)
+                        m.GlobalNamespace.GetTypeMember("Derived");
                     Assert.Equal(
                         "I1",
                         derivedResult
@@ -7241,9 +7227,8 @@ remove E8",
                 verify: VerifyOnMonoOrCoreClr,
                 symbolValidator: (m) =>
                 {
-                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace.GetTypeMember(
-                        "Derived"
-                    );
+                    var derivedResult = (PENamedTypeSymbol)
+                        m.GlobalNamespace.GetTypeMember("Derived");
                     Assert.Equal(
                         "I1",
                         derivedResult
@@ -7359,9 +7344,8 @@ remove E8",
                 verify: VerifyOnMonoOrCoreClr,
                 symbolValidator: (m) =>
                 {
-                    var derivedResult = (PENamedTypeSymbol)m.GlobalNamespace.GetTypeMember(
-                        "Derived"
-                    );
+                    var derivedResult = (PENamedTypeSymbol)
+                        m.GlobalNamespace.GetTypeMember("Derived");
                     Assert.Equal(
                         "I1",
                         derivedResult

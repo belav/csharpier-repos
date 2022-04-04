@@ -427,16 +427,17 @@ WHERE (c[""Discriminator""] = ""Customer"")"
                         c =>
                             new
                             {
-                                Order = (int?)c.Orders
-                                    .Where(o => o.OrderID < 10500)
-                                    .Select(
-                                        o =>
-                                            o.OrderDetails
-                                                .Where(od => od.OrderID != c.Orders.Count)
-                                                .Select(od => od.ProductID)
-                                                .FirstOrDefault()
-                                    )
-                                    .FirstOrDefault()
+                                Order = (int?)
+                                    c.Orders
+                                        .Where(o => o.OrderID < 10500)
+                                        .Select(
+                                            o =>
+                                                o.OrderDetails
+                                                    .Where(od => od.OrderID != c.Orders.Count)
+                                                    .Select(od => od.ProductID)
+                                                    .FirstOrDefault()
+                                        )
+                                        .FirstOrDefault()
                             }
                     )
                     .ToList();

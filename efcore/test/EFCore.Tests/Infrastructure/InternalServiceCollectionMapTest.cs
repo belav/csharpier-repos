@@ -305,8 +305,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             using (var context = CreateContext(serviceProvider))
             {
-                singletonService =
-                    (FakeSingletonService)context.GetService<IFakeSingletonService>();
+                singletonService = (FakeSingletonService)
+                    context.GetService<IFakeSingletonService>();
                 Assert.Same(context.GetService<IModelSource>(), singletonService.ModelSource);
                 Assert.Same(singletonService, context.GetService<IFakeSingletonService>());
             }

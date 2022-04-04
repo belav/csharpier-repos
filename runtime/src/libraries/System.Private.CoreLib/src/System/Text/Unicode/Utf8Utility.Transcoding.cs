@@ -119,10 +119,12 @@ namespace System.Text.Unicode
                     // Below is basically unrolled loops with poor man's vectorization.
 
                     uint remainingInputBytes =
-                        (uint)(void*)Unsafe.ByteOffset(
-                            ref *pInputBuffer,
-                            ref *pFinalPosWhereCanReadDWordFromInputBuffer
-                        ) + 4;
+                        (uint)
+                            (void*)
+                                Unsafe.ByteOffset(
+                                    ref *pInputBuffer,
+                                    ref *pFinalPosWhereCanReadDWordFromInputBuffer
+                                ) + 4;
                     uint maxIters =
                         Math.Min(remainingInputBytes, (uint)outputCharsRemaining)
                         / (2 * sizeof(uint));
@@ -426,9 +428,8 @@ namespace System.Text.Unicode
                             }
 
                             pOutputBuffer[0] = (char)charToWrite;
-                            pOutputBuffer[1] = (char)(byte)(
-                                thisDWord >> (BitConverter.IsLittleEndian ? 16 : 8)
-                            );
+                            pOutputBuffer[1] = (char)
+                                (byte)(thisDWord >> (BitConverter.IsLittleEndian ? 16 : 8));
                             pInputBuffer += 3;
                             pOutputBuffer += 2;
                             outputCharsRemaining -= 2;
@@ -548,10 +549,12 @@ namespace System.Text.Unicode
 
                             if (
                                 outputCharsRemaining > 1
-                                && (nint)(void*)Unsafe.ByteOffset(
-                                    ref *pInputBuffer,
-                                    ref *pFinalPosWhereCanReadDWordFromInputBuffer
-                                ) >= 3
+                                && (nint)
+                                    (void*)
+                                        Unsafe.ByteOffset(
+                                            ref *pInputBuffer,
+                                            ref *pFinalPosWhereCanReadDWordFromInputBuffer
+                                        ) >= 3
                             )
                             {
                                 // We're going to attempt to read a second 3-byte sequence and write them both out one after the other.
@@ -569,12 +572,10 @@ namespace System.Text.Unicode
                                     && (((secondDWord - 0x0000_200Du) & 0x0000_200Fu) != 0)
                                 )
                                 {
-                                    pOutputBuffer[0] = (char)ExtractCharFromFirstThreeByteSequence(
-                                        thisDWord
-                                    );
-                                    pOutputBuffer[1] = (char)ExtractCharFromFirstThreeByteSequence(
-                                        secondDWord
-                                    );
+                                    pOutputBuffer[0] = (char)
+                                        ExtractCharFromFirstThreeByteSequence(thisDWord);
+                                    pOutputBuffer[1] = (char)
+                                        ExtractCharFromFirstThreeByteSequence(secondDWord);
                                     pInputBuffer += 6;
                                     pOutputBuffer += 2;
                                     outputCharsRemaining -= 2;
@@ -721,10 +722,12 @@ namespace System.Text.Unicode
 
             ProcessRemainingBytesSlow:
             inputLength =
-                (int)(void*)Unsafe.ByteOffset(
-                    ref *pInputBuffer,
-                    ref *pFinalPosWhereCanReadDWordFromInputBuffer
-                ) + 4;
+                (int)
+                    (void*)
+                        Unsafe.ByteOffset(
+                            ref *pInputBuffer,
+                            ref *pFinalPosWhereCanReadDWordFromInputBuffer
+                        ) + 4;
 
             ProcessInputOfLessThanDWordSize:
             while (inputLength > 0)
@@ -1064,10 +1067,8 @@ namespace System.Text.Unicode
 
                     uint inputCharsRemaining =
                         (uint)(pFinalPosWhereCanReadDWordFromInputBuffer - pInputBuffer) + 2;
-                    uint minElementsRemaining = (uint)Math.Min(
-                        inputCharsRemaining,
-                        outputBytesRemaining
-                    );
+                    uint minElementsRemaining = (uint)
+                        Math.Min(inputCharsRemaining, outputBytesRemaining);
 
                     if (
                         Sse41.X64.IsSupported
@@ -1117,7 +1118,8 @@ namespace System.Text.Unicode
 
                                 // narrow and write
                                 Sse2.StoreScalar(
-                                    (ulong*)pOutputBuffer /* unaligned */
+                                    (ulong*)
+                                        pOutputBuffer /* unaligned */
                                     ,
                                     Sse2.PackUnsignedSaturate(utf16Data, utf16Data).AsUInt64()
                                 );

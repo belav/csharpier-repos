@@ -176,10 +176,8 @@ namespace System.Security.Cryptography.Xml
         internal XmlElement GetXml(XmlDocument document)
         {
             // Create the EncryptedKey element
-            XmlElement encryptedKeyElement = (XmlElement)document.CreateElement(
-                "EncryptedKey",
-                EncryptedXml.XmlEncNamespaceUrl
-            );
+            XmlElement encryptedKeyElement = (XmlElement)
+                document.CreateElement("EncryptedKey", EncryptedXml.XmlEncNamespaceUrl);
 
             // Deal with attributes
             if (!string.IsNullOrEmpty(Id))
@@ -238,10 +236,8 @@ namespace System.Security.Cryptography.Xml
             // CarriedKeyName
             if (CarriedKeyName != null)
             {
-                XmlElement carriedKeyNameElement = (XmlElement)document.CreateElement(
-                    "CarriedKeyName",
-                    EncryptedXml.XmlEncNamespaceUrl
-                );
+                XmlElement carriedKeyNameElement = (XmlElement)
+                    document.CreateElement("CarriedKeyName", EncryptedXml.XmlEncNamespaceUrl);
                 XmlText carriedKeyNameText = document.CreateTextNode(CarriedKeyName);
                 carriedKeyNameElement.AppendChild(carriedKeyNameText);
                 encryptedKeyElement.AppendChild(carriedKeyNameElement);

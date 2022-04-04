@@ -888,8 +888,8 @@ namespace Internal.Cryptography.Pal
 
             if (s_validityDateTimeFormatInfo == null)
             {
-                DateTimeFormatInfo validityFormatInfo =
-                    (DateTimeFormatInfo)CultureInfo.InvariantCulture.DateTimeFormat.Clone();
+                DateTimeFormatInfo validityFormatInfo = (DateTimeFormatInfo)
+                    CultureInfo.InvariantCulture.DateTimeFormat.Clone();
 
                 // Two-digit years are 1950-2049
                 validityFormatInfo.Calendar.TwoDigitYearMax = 2049;

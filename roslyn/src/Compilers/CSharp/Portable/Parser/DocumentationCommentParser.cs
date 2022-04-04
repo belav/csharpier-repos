@@ -1388,9 +1388,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         /// </summary>
         private CrefBracketedParameterListSyntax ParseBracketedCrefParameterList()
         {
-            return (CrefBracketedParameterListSyntax)ParseBaseCrefParameterList(
-                useSquareBrackets: true
-            );
+            return (CrefBracketedParameterListSyntax)
+                ParseBaseCrefParameterList(useSquareBrackets: true);
         }
 
         /// <summary>
@@ -1441,11 +1440,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 SyntaxToken close = EatToken(closeKind);
 
                 return useSquareBrackets
-                  ? (BaseCrefParameterListSyntax)SyntaxFactory.CrefBracketedParameterList(
-                        open,
-                        list,
-                        close
-                    )
+                  ? (BaseCrefParameterListSyntax)
+                        SyntaxFactory.CrefBracketedParameterList(open, list, close)
                   : SyntaxFactory.CrefParameterList(open, list, close);
             }
             finally

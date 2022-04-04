@@ -359,8 +359,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             var context = Fixture.CreateContext();
 
-            var badDataCommandBuilderFactory =
-                (BadDataCommandBuilderFactory)context.GetService<IRelationalCommandBuilderFactory>();
+            var badDataCommandBuilderFactory = (BadDataCommandBuilderFactory)
+                context.GetService<IRelationalCommandBuilderFactory>();
 
             badDataCommandBuilderFactory.Values = values;
 

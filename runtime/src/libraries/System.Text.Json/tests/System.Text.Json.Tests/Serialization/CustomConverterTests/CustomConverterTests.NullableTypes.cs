@@ -598,15 +598,16 @@ namespace System.Text.Json.Serialization.Tests
                 Type item1Type = genericArgs[0];
                 Type item2Type = genericArgs[1];
 
-                JsonConverter converter = (JsonConverter)Activator.CreateInstance(
-                    typeof(ValueTupleConverter<,>).MakeGenericType(
-                        new Type[] { item1Type, item2Type }
-                    ),
-                    BindingFlags.Instance | BindingFlags.Public,
-                    binder: null,
-                    args: new object[] { },
-                    culture: null
-                );
+                JsonConverter converter = (JsonConverter)
+                    Activator.CreateInstance(
+                        typeof(ValueTupleConverter<,>).MakeGenericType(
+                            new Type[] { item1Type, item2Type }
+                        ),
+                        BindingFlags.Instance | BindingFlags.Public,
+                        binder: null,
+                        args: new object[] { },
+                        culture: null
+                    );
 
                 return converter;
             }

@@ -63,10 +63,8 @@ namespace System.Web.Mvc
 
         private void ReadSettingsFromBindAttribute()
         {
-            BindAttribute attr = (BindAttribute)Attribute.GetCustomAttribute(
-                _parameterInfo,
-                typeof(BindAttribute)
-            );
+            BindAttribute attr = (BindAttribute)
+                Attribute.GetCustomAttribute(_parameterInfo, typeof(BindAttribute));
             if (attr == null)
             {
                 return;

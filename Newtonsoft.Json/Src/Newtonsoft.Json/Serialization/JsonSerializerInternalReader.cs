@@ -835,8 +835,8 @@ namespace Newtonsoft.Json.Serialization
 #endif
 #if HAVE_BINARY_SERIALIZATION
                 case JsonContractType.Serializable:
-                    JsonISerializableContract serializableContract =
-                        (JsonISerializableContract)contract;
+                    JsonISerializableContract serializableContract = (JsonISerializableContract)
+                        contract;
                     return CreateISerializable(reader, serializableContract, member, id);
 #endif
             }
@@ -3266,8 +3266,8 @@ namespace Newtonsoft.Json.Serialization
 
                     if (propertyContract.ContractType == JsonContractType.Array)
                     {
-                        JsonArrayContract propertyArrayContract =
-                            (JsonArrayContract)propertyContract;
+                        JsonArrayContract propertyArrayContract = (JsonArrayContract)
+                            propertyContract;
 
                         if (
                             propertyArrayContract.CanDeserialize
@@ -3279,9 +3279,8 @@ namespace Newtonsoft.Json.Serialization
                             );
                             if (createdObjectCollection != null)
                             {
-                                propertyArrayContract = (JsonArrayContract)GetContract(
-                                    createdObjectCollection.GetType()
-                                );
+                                propertyArrayContract = (JsonArrayContract)
+                                    GetContract(createdObjectCollection.GetType());
 
                                 IList createdObjectCollectionWrapper =
                                     (propertyArrayContract.ShouldCreateWrapper)
@@ -3308,8 +3307,8 @@ namespace Newtonsoft.Json.Serialization
                     }
                     else if (propertyContract.ContractType == JsonContractType.Dictionary)
                     {
-                        JsonDictionaryContract dictionaryContract =
-                            (JsonDictionaryContract)propertyContract;
+                        JsonDictionaryContract dictionaryContract = (JsonDictionaryContract)
+                            propertyContract;
 
                         if (!dictionaryContract.IsReadOnlyOrFixedSize)
                         {

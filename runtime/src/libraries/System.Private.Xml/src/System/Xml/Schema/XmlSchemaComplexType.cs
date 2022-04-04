@@ -358,8 +358,8 @@ namespace System.Xml.Schema
                     complexType.ContentModel as XmlSchemaSimpleContent;
                 if (simpleContent != null)
                 {
-                    XmlSchemaSimpleContent newSimpleContent =
-                        (XmlSchemaSimpleContent)simpleContent.Clone();
+                    XmlSchemaSimpleContent newSimpleContent = (XmlSchemaSimpleContent)
+                        simpleContent.Clone();
 
                     XmlSchemaSimpleContentExtension? simpleExt =
                         simpleContent.Content as XmlSchemaSimpleContentExtension;
@@ -386,10 +386,10 @@ namespace System.Xml.Schema
                 }
                 else
                 { // complexType.ContentModel is XmlSchemaComplexContent
-                    XmlSchemaComplexContent complexContent =
-                        (XmlSchemaComplexContent)complexType.ContentModel;
-                    XmlSchemaComplexContent newComplexContent =
-                        (XmlSchemaComplexContent)complexContent.Clone();
+                    XmlSchemaComplexContent complexContent = (XmlSchemaComplexContent)
+                        complexType.ContentModel;
+                    XmlSchemaComplexContent newComplexContent = (XmlSchemaComplexContent)
+                        complexContent.Clone();
 
                     XmlSchemaComplexContentExtension? complexExt =
                         complexContent.Content as XmlSchemaComplexContentExtension;

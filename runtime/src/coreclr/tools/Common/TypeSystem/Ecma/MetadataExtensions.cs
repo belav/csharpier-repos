@@ -368,9 +368,8 @@ namespace Internal.TypeSystem.Ecma
 
             if (customAttributeValue.Value.FixedArguments.Length == 1)
             {
-                CallingConvention callingConvention = (CallingConvention)customAttributeValue
-                    .Value
-                    .FixedArguments[0].Value;
+                CallingConvention callingConvention = (CallingConvention)
+                    customAttributeValue.Value.FixedArguments[0].Value;
 
                 switch (callingConvention)
                 {

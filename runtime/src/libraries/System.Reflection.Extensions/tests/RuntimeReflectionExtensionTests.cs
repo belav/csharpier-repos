@@ -50,8 +50,8 @@ namespace System.Reflection.Tests
                     (IEnumerable<string>)type.GetDeclaredField("DeclaredMethodNames").GetValue(null)
                 );
                 methods.AddRange(
-                    (IEnumerable<string>)type.GetDeclaredField("InheritedMethodNames")
-                        .GetValue(null)
+                    (IEnumerable<string>)
+                        type.GetDeclaredField("InheritedMethodNames").GetValue(null)
                 );
                 if (type.GetDeclaredField("NewMethodNames") != null)
                     methods.AddRange(

@@ -39,46 +39,36 @@ internal unsafe class ComWrappersImpl : ComWrappers
 
     static ComWrappersImpl()
     {
-        var vtblRaw = (IntPtr*)RuntimeHelpers.AllocateTypeAssociatedMemory(
-            typeof(IDispatchVtbl),
-            sizeof(IntPtr) * 7
-        );
+        var vtblRaw = (IntPtr*)
+            RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(IDispatchVtbl), sizeof(IntPtr) * 7);
         GetIUnknownImpl(out vtblRaw[0], out vtblRaw[1], out vtblRaw[2]);
 
-        vtblRaw[3] = (IntPtr)(delegate* unmanaged<
-            IntPtr,
-            IntPtr,
-            int>)&IDispatchVtbl.GetTypeInfoCountInternal;
-        vtblRaw[4] = (IntPtr)(delegate* unmanaged<
-            IntPtr,
-            int,
-            int,
-            IntPtr,
-            int>)&IDispatchVtbl.GetTypeInfoInternal;
-        vtblRaw[5] = (IntPtr)(delegate* unmanaged<
-            IntPtr,
-            IntPtr,
-            IntPtr,
-            int,
-            int,
-            IntPtr,
-            int>)&IDispatchVtbl.GetIDsOfNamesInternal;
-        vtblRaw[6] = (IntPtr)(delegate* unmanaged<
-            IntPtr,
-            int,
-            IntPtr,
-            int,
-            ComTypes.INVOKEKIND,
-            IntPtr,
-            IntPtr,
-            IntPtr,
-            IntPtr,
-            int>)&IDispatchVtbl.InvokeInternal;
+        vtblRaw[3] = (IntPtr)
+            (delegate* unmanaged<IntPtr, IntPtr, int>)&IDispatchVtbl.GetTypeInfoCountInternal;
+        vtblRaw[4] = (IntPtr)
+            (delegate* unmanaged<IntPtr, int, int, IntPtr, int>)&IDispatchVtbl.GetTypeInfoInternal;
+        vtblRaw[5] = (IntPtr)
+            (delegate* unmanaged<IntPtr, IntPtr, IntPtr, int, int, IntPtr, int>)
+                &IDispatchVtbl.GetIDsOfNamesInternal;
+        vtblRaw[6] = (IntPtr)
+            (delegate* unmanaged<
+                IntPtr,
+                int,
+                IntPtr,
+                int,
+                ComTypes.INVOKEKIND,
+                IntPtr,
+                IntPtr,
+                IntPtr,
+                IntPtr,
+                int>)
+                &IDispatchVtbl.InvokeInternal;
 
-        wrapperEntry = (ComInterfaceEntry*)RuntimeHelpers.AllocateTypeAssociatedMemory(
-            typeof(IDispatchVtbl),
-            sizeof(ComInterfaceEntry)
-        );
+        wrapperEntry = (ComInterfaceEntry*)
+            RuntimeHelpers.AllocateTypeAssociatedMemory(
+                typeof(IDispatchVtbl),
+                sizeof(ComInterfaceEntry)
+            );
         wrapperEntry->IID = IDispatchVtbl.IID_IDispatch;
         wrapperEntry->Vtable = (IntPtr)vtblRaw;
     }

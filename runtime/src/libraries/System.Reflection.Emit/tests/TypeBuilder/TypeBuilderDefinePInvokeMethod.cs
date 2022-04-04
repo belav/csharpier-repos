@@ -258,10 +258,8 @@ namespace System.Reflection.Emit.Tests
 
             string expected = Environment.GetEnvironmentVariable(EnvironmentVariable);
 
-            int numCharsRequired = (int)m.Invoke(
-                null,
-                new object[] { EnvironmentVariable, null, 0 }
-            );
+            int numCharsRequired = (int)
+                m.Invoke(null, new object[] { EnvironmentVariable, null, 0 });
             if (numCharsRequired == 0)
             {
                 // Environment variable is not defined. Make sure we got that result using both techniques.
@@ -270,10 +268,8 @@ namespace System.Reflection.Emit.Tests
             else
             {
                 StringBuilder sb = new StringBuilder(numCharsRequired);
-                int numCharsWritten = (int)m.Invoke(
-                    null,
-                    new object[] { EnvironmentVariable, sb, numCharsRequired }
-                );
+                int numCharsWritten = (int)
+                    m.Invoke(null, new object[] { EnvironmentVariable, sb, numCharsRequired });
                 Assert.NotEqual(0, numCharsWritten);
                 string actual = sb.ToString();
                 Assert.Equal(expected, actual);

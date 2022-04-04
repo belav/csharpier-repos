@@ -305,14 +305,15 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
                 await factory.InitializeToolWindowAsync(Guids.ValueTrackingToolWindowId, 0);
 
                 // FindWindowPaneAsync creates an instance if it does not exist
-                ValueTrackingToolWindow.Instance = (ValueTrackingToolWindow)await roslynPackage
-                    .FindWindowPaneAsync(
-                        typeof(ValueTrackingToolWindow),
-                        0,
-                        true,
-                        roslynPackage.DisposalToken
-                    )
-                    .ConfigureAwait(false);
+                ValueTrackingToolWindow.Instance = (ValueTrackingToolWindow)
+                    await roslynPackage
+                        .FindWindowPaneAsync(
+                            typeof(ValueTrackingToolWindow),
+                            0,
+                            true,
+                            roslynPackage.DisposalToken
+                        )
+                        .ConfigureAwait(false);
             }
 
             // This can happen if the tool window was initialized outside of this command handler. The ViewModel

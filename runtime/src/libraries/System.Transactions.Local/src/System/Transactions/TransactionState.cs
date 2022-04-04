@@ -765,8 +765,8 @@ namespace System.Transactions
             TransactionCompletedEventHandler? transactionCompletedDelegate
         )
         {
-            tx._transactionCompletedDelegate =
-                (TransactionCompletedEventHandler?)System.Delegate.Combine(
+            tx._transactionCompletedDelegate = (TransactionCompletedEventHandler?)
+                System.Delegate.Combine(
                     tx._transactionCompletedDelegate,
                     transactionCompletedDelegate
                 );
@@ -2303,8 +2303,8 @@ namespace System.Transactions
         )
         {
             // Add this delegate to the list of delegates to be notified of the outcome.
-            tx._transactionCompletedDelegate =
-                (TransactionCompletedEventHandler?)System.Delegate.Combine(
+            tx._transactionCompletedDelegate = (TransactionCompletedEventHandler?)
+                System.Delegate.Combine(
                     tx._transactionCompletedDelegate,
                     transactionCompletedDelegate
                 );
@@ -4141,8 +4141,8 @@ namespace System.Transactions
         )
         {
             // Add this guy to the list of people to be notified of the outcome.
-            tx._transactionCompletedDelegate =
-                (TransactionCompletedEventHandler?)System.Delegate.Combine(
+            tx._transactionCompletedDelegate = (TransactionCompletedEventHandler?)
+                System.Delegate.Combine(
                     tx._transactionCompletedDelegate,
                     transactionCompletedDelegate
                 );

@@ -326,9 +326,8 @@ namespace Microsoft.CodeAnalysis
                     c.Options.GeneralDiagnosticOption == ReportDiagnostic.Error
                         ? ReportDiagnostic.Default
                         : ReportDiagnostic.Error;
-                c = (TCompilation)c.WithOptions(
-                    c.Options.WithGeneralDiagnosticOption(toggledOption)
-                );
+                c = (TCompilation)
+                    c.WithOptions(c.Options.WithGeneralDiagnosticOption(toggledOption));
 
                 var builder = ArrayBuilder<DiagnosticDescription>.GetInstance(
                     expectedDiagnostics.Length
@@ -399,9 +398,10 @@ namespace Microsoft.CodeAnalysis
             var analyzersArray = analyzers.ToImmutableArray();
             if (reportSuppressedDiagnostics != c.Options.ReportSuppressedDiagnostics)
             {
-                c = (TCompilation)c.WithOptions(
-                    c.Options.WithReportSuppressedDiagnostics(reportSuppressedDiagnostics)
-                );
+                c = (TCompilation)
+                    c.WithOptions(
+                        c.Options.WithReportSuppressedDiagnostics(reportSuppressedDiagnostics)
+                    );
             }
 
             var analyzerManager = new AnalyzerManager(analyzersArray);

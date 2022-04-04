@@ -52,14 +52,15 @@ namespace Microsoft.EntityFrameworkCore.Storage
         [InlineData(typeof(UShortTypeMapping), typeof(ushort))]
         public virtual void Create_and_clone_with_converter(Type mappingType, Type type)
         {
-            var mapping = (RelationalTypeMapping)Activator.CreateInstance(
-                mappingType,
-                BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.CreateInstance,
-                null,
-                new[] { FakeTypeMapping.CreateParameters(type) },
-                null,
-                null
-            );
+            var mapping = (RelationalTypeMapping)
+                Activator.CreateInstance(
+                    mappingType,
+                    BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.CreateInstance,
+                    null,
+                    new[] { FakeTypeMapping.CreateParameters(type) },
+                    null,
+                    null
+                );
 
             var clone = mapping.Clone("<clone>", null);
 
@@ -102,24 +103,25 @@ namespace Microsoft.EntityFrameworkCore.Storage
             params object[] additionalArgs
         )
         {
-            var mapping = (RelationalTypeMapping)Activator.CreateInstance(
-                mappingType,
-                BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.CreateInstance,
-                null,
-                new[]
-                {
-                    FakeTypeMapping.CreateParameters(
-                        type,
-                        size: 33,
-                        fixedLength: true,
-                        storeTypePostfix: StoreTypePostfix.Size
-                    )
-                }
-                    .Concat(additionalArgs)
-                    .ToArray(),
-                null,
-                null
-            );
+            var mapping = (RelationalTypeMapping)
+                Activator.CreateInstance(
+                    mappingType,
+                    BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.CreateInstance,
+                    null,
+                    new[]
+                    {
+                        FakeTypeMapping.CreateParameters(
+                            type,
+                            size: 33,
+                            fixedLength: true,
+                            storeTypePostfix: StoreTypePostfix.Size
+                        )
+                    }
+                        .Concat(additionalArgs)
+                        .ToArray(),
+                    null,
+                    null
+                );
 
             var clone = mapping.Clone("<clone>", 66);
 
@@ -170,25 +172,26 @@ namespace Microsoft.EntityFrameworkCore.Storage
             params object[] additionalArgs
         )
         {
-            var mapping = (RelationalTypeMapping)Activator.CreateInstance(
-                mappingType,
-                BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.CreateInstance,
-                null,
-                new[]
-                {
-                    FakeTypeMapping.CreateParameters(
-                        type,
-                        size: 33,
-                        unicode: false,
-                        fixedLength: true,
-                        storeTypePostfix: StoreTypePostfix.Size
-                    )
-                }
-                    .Concat(additionalArgs)
-                    .ToArray(),
-                null,
-                null
-            );
+            var mapping = (RelationalTypeMapping)
+                Activator.CreateInstance(
+                    mappingType,
+                    BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.CreateInstance,
+                    null,
+                    new[]
+                    {
+                        FakeTypeMapping.CreateParameters(
+                            type,
+                            size: 33,
+                            unicode: false,
+                            fixedLength: true,
+                            storeTypePostfix: StoreTypePostfix.Size
+                        )
+                    }
+                        .Concat(additionalArgs)
+                        .ToArray(),
+                    null,
+                    null
+                );
 
             var clone = mapping.Clone("<clone>", 66);
 

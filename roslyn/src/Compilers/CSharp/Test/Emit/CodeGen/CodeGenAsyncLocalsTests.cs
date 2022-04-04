@@ -1038,9 +1038,10 @@ class Test
                 )
             );
             var testClass = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("Test");
-            var stateMachineClass = (NamedTypeSymbol)testClass
-                .GetMembers()
-                .Single(s => s.Name.StartsWith("<Run>", StringComparison.Ordinal));
+            var stateMachineClass = (NamedTypeSymbol)
+                testClass
+                    .GetMembers()
+                    .Single(s => s.Name.StartsWith("<Run>", StringComparison.Ordinal));
             IEnumerable<IGrouping<TypeSymbol, FieldSymbol>> spillFieldsByType = stateMachineClass
                 .GetMembers()
                 .Where(

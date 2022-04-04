@@ -602,9 +602,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             );
             IndexOfTests.IndexOfTest(
                 seq =>
-                    (System.Collections.Immutable.IImmutableList<int>)ImmutableSegmentedList.CreateRange(
-                        seq
-                    ),
+                    (System.Collections.Immutable.IImmutableList<int>)
+                        ImmutableSegmentedList.CreateRange(seq),
                 (b, v) => b.IndexOf(v),
                 (b, v, i) => System.Collections.Immutable.ImmutableList.IndexOf(b, v, i),
                 (b, v, i, c) => System.Collections.Immutable.ImmutableList.IndexOf(b, v, i, c),
@@ -625,9 +624,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             );
             IndexOfTests.LastIndexOfTest(
                 seq =>
-                    (System.Collections.Immutable.IImmutableList<int>)ImmutableSegmentedList.CreateRange(
-                        seq
-                    ),
+                    (System.Collections.Immutable.IImmutableList<int>)
+                        ImmutableSegmentedList.CreateRange(seq),
                 (b, v) => System.Collections.Immutable.ImmutableList.LastIndexOf(b, v),
                 (b, v, eq) => System.Collections.Immutable.ImmutableList.LastIndexOf(b, v, eq),
                 (b, v, i) => System.Collections.Immutable.ImmutableList.LastIndexOf(b, v, i),
@@ -845,22 +843,16 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 "items",
                 () =>
                     System.Collections.Immutable.ImmutableList.RemoveRange(
-                        (System.Collections.Immutable.IImmutableList<int>)ImmutableSegmentedList.Create(
-                            1,
-                            2,
-                            3
-                        ),
+                        (System.Collections.Immutable.IImmutableList<int>)
+                            ImmutableSegmentedList.Create(1, 2, 3),
                         null!
                     )
             );
             Assert.Equal(
                 new[] { 1, 3 },
                 System.Collections.Immutable.ImmutableList.RemoveRange(
-                    (System.Collections.Immutable.IImmutableList<int>)ImmutableSegmentedList.Create(
-                        1,
-                        2,
-                        3
-                    ),
+                    (System.Collections.Immutable.IImmutableList<int>)
+                        ImmutableSegmentedList.Create(1, 2, 3),
                     new[] { 2 }
                 )
             );

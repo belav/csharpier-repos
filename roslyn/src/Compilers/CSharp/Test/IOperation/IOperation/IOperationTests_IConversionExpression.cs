@@ -454,9 +454,8 @@ IVariableDeclaratorOperation (Symbol: System.Object o) (OperationKind.VariableDe
                 {
                     SyntaxSelector = (syntax) =>
                     {
-                        var initializer = (BinaryExpressionSyntax)((VariableDeclaratorSyntax)syntax)
-                            .Initializer
-                            .Value;
+                        var initializer = (BinaryExpressionSyntax)
+                            ((VariableDeclaratorSyntax)syntax).Initializer.Value;
                         return initializer.Right;
                     },
                     OperationSelector = (operation) =>

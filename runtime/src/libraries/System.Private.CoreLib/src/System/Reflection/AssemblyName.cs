@@ -345,10 +345,8 @@ namespace System.Reflection
                     // a Unicode ?
                     if (ch > '\x7F')
                     {
-                        short maxSize = (short)Math.Min(
-                            end - i,
-                            (int)c_MaxUnicodeCharsReallocate - 1
-                        );
+                        short maxSize = (short)
+                            Math.Min(end - i, (int)c_MaxUnicodeCharsReallocate - 1);
 
                         short count = 1;
                         for (; count < maxSize && pStr[i + count] > '\x7f'; ++count)
@@ -376,12 +374,13 @@ namespace System.Reflection
                             prevInputPos
                         );
 
-                        short numberOfBytes = (short)Encoding.UTF8.GetBytes(
-                            pStr + i,
-                            count,
-                            bytes,
-                            c_MaxUnicodeCharsReallocate * c_MaxUTF_8BytesPerUnicodeChar
-                        );
+                        short numberOfBytes = (short)
+                            Encoding.UTF8.GetBytes(
+                                pStr + i,
+                                count,
+                                bytes,
+                                c_MaxUnicodeCharsReallocate * c_MaxUTF_8BytesPerUnicodeChar
+                            );
 
                         // This is the only exception that built in UriParser can throw after a Uri ctor.
                         // Should not happen unless the app tries to feed an invalid Unicode string

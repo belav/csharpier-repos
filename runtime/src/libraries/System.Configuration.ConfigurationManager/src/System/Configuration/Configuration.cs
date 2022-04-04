@@ -34,9 +34,8 @@ namespace System.Configuration
             _typeConfigHost = typeConfigHost;
             _hostInitConfigurationParams = hostInitConfigurationParams;
 
-            IInternalConfigHost configHost = (IInternalConfigHost)TypeUtil.CreateInstance(
-                typeConfigHost
-            );
+            IInternalConfigHost configHost = (IInternalConfigHost)
+                TypeUtil.CreateInstance(typeConfigHost);
 
             // Wrap the host with the UpdateConfigHost to support SaveAs.
             UpdateConfigHost updateConfigHost = new UpdateConfigHost(configHost);
@@ -183,9 +182,8 @@ namespace System.Configuration
         // public methods
         public ConfigurationSection GetSection(string sectionName)
         {
-            ConfigurationSection section = (ConfigurationSection)_configRecord.GetSection(
-                sectionName
-            );
+            ConfigurationSection section = (ConfigurationSection)
+                _configRecord.GetSection(sectionName);
 
             return section;
         }

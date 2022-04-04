@@ -523,11 +523,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BoundExpression
             > binaryOperatorFactory = createBinaryOperator;
 
-            var rewritten = (BoundBinaryOperator)originalOperator.RewriteInterpolatedStringAddition(
-                (appendCalls, @string),
-                interpolationFactory,
-                binaryOperatorFactory
-            );
+            var rewritten = (BoundBinaryOperator)
+                originalOperator.RewriteInterpolatedStringAddition(
+                    (appendCalls, @string),
+                    interpolationFactory,
+                    binaryOperatorFactory
+                );
 
             return rewritten.Update(
                 BoundBinaryOperator.UncommonData.InterpolatedStringHandlerAddition(data)

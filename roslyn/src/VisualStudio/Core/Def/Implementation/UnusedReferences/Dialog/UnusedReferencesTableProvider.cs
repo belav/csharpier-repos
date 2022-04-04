@@ -38,12 +38,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
 
         public IWpfTableControl4 CreateTableControl()
         {
-            var tableControl = (IWpfTableControl4)_tableControlProvider.CreateControl(
-                _tableManager,
-                autoSubscribe: true,
-                BuildColumnStates(),
-                UnusedReferencesColumnDefinitions.ColumnNames.ToArray()
-            );
+            var tableControl = (IWpfTableControl4)
+                _tableControlProvider.CreateControl(
+                    _tableManager,
+                    autoSubscribe: true,
+                    BuildColumnStates(),
+                    UnusedReferencesColumnDefinitions.ColumnNames.ToArray()
+                );
             tableControl.ShowGroupingLine = true;
             tableControl.DoColumnsAutoAdjust = true;
             tableControl.DoSortingAndGroupingWhileUnstable = true;

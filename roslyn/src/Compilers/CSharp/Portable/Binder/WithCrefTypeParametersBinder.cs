@@ -133,9 +133,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // cref type parameters.
                 if (typeArguments[i].Kind() == SyntaxKind.IdentifierName)
                 {
-                    IdentifierNameSyntax typeParameterSyntax = (IdentifierNameSyntax)typeArguments[
-                        i
-                    ];
+                    IdentifierNameSyntax typeParameterSyntax = (IdentifierNameSyntax)
+                        typeArguments[i];
                     Debug.Assert(typeParameterSyntax != null, "Syntactic requirement of crefs");
 
                     string name = typeParameterSyntax.Identifier.ValueText;

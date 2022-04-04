@@ -612,7 +612,8 @@ namespace System.Web.WebPages.Test
             // Act
             var html = helper.TextBox(
                 "foo",
-                (string)null /* value */
+                (string)
+                    null /* value */
                 ,
                 (object)null
             );

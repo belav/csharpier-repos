@@ -80,9 +80,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 if (currentFieldRva != _rva)
                     continue;
 
-                EcmaField field = (EcmaField)_module.GetField(
-                    MetadataTokens.FieldDefinitionHandle(currentFieldRid)
-                );
+                EcmaField field = (EcmaField)
+                    _module.GetField(MetadataTokens.FieldDefinitionHandle(currentFieldRid));
                 Debug.Assert(field.HasRva);
 
                 int currentSize = field.FieldType.GetElementSize().AsInt;

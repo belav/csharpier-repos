@@ -79,11 +79,8 @@ namespace System.Text.Unicode
             string[] split = line.Split(';');
             Assert.Equal(15, split.Length);
 
-            CodePoint = (int)uint.Parse(
-                split[0],
-                NumberStyles.HexNumber,
-                CultureInfo.InvariantCulture
-            );
+            CodePoint = (int)
+                uint.Parse(split[0], NumberStyles.HexNumber, CultureInfo.InvariantCulture);
             Name = split[1];
             GeneralCategory = UnicodeCategoryMap[split[2]];
 

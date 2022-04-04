@@ -364,10 +364,8 @@ namespace System.Xml.Tests
             _callbackErrorCount2 = 0;
 
             //Conformance Level
-            _settings.ConformanceLevel = (ConformanceLevel)Enum.Parse(
-                typeof(ConformanceLevel),
-                ReadFilterCriteria("ConformanceLevel", true)
-            );
+            _settings.ConformanceLevel = (ConformanceLevel)
+                Enum.Parse(typeof(ConformanceLevel), ReadFilterCriteria("ConformanceLevel", true));
 
             //CheckCharacters
             _settings.CheckCharacters = bool.Parse(ReadFilterCriteria("CheckCharacters", true));

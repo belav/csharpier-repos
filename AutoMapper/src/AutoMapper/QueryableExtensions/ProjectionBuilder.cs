@@ -651,14 +651,15 @@ namespace AutoMapper.QueryableExtensions.Impl
             TSource,
             TDestination
         >(this IProjectionBuilder expressionBuilder) =>
-            (Expression<Func<TSource, TDestination>>)expressionBuilder
-                .GetProjection(
-                    typeof(TSource),
-                    typeof(TDestination),
-                    null,
-                    Array.Empty<MemberPath>()
-                )
-                .Projection;
+            (Expression<Func<TSource, TDestination>>)
+                expressionBuilder
+                    .GetProjection(
+                        typeof(TSource),
+                        typeof(TDestination),
+                        null,
+                        Array.Empty<MemberPath>()
+                    )
+                    .Projection;
     }
 
     public class MemberProjection

@@ -3414,7 +3414,8 @@ namespace IntelHardwareIntrinsicTest
                     $"(x{item.Item1}, y{item.Item2}, z{item.Item3}, a{item.Item4} "
                         + (
                             check != null
-                                ? (string)$"->{check(item.Item1, item.Item2, item.Item3, ref item.Item4.Item1, ref item.Item4.Item1, ref item.Item4.Item1, ref item.Item4.Item1)}, "
+                                ? (string)
+                                      $"->{check(item.Item1, item.Item2, item.Item3, ref item.Item4.Item1, ref item.Item4.Item1, ref item.Item4.Item1, ref item.Item4.Item1)}, "
                                 : ", "
                         )
                 );

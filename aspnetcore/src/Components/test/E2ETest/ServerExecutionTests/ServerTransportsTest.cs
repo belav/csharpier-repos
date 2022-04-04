@@ -34,9 +34,10 @@ public class ServerTransportsTest
         var javascript = (IJavaScriptExecutor)Browser;
         Browser.True(
             () =>
-                (bool)javascript.ExecuteScript(
-                    "return window['__aspnetcore__testing__blazor__start__script__executed__'] === true;"
-                )
+                (bool)
+                    javascript.ExecuteScript(
+                        "return window['__aspnetcore__testing__blazor__start__script__executed__'] === true;"
+                    )
         );
 
         AssertLogContainsMessages(
@@ -60,9 +61,10 @@ public class ServerTransportsTest
         var javascript = (IJavaScriptExecutor)Browser;
         Browser.True(
             () =>
-                (bool)javascript.ExecuteScript(
-                    "return window['__aspnetcore__testing__blazor__start__script__executed__'] === true;"
-                )
+                (bool)
+                    javascript.ExecuteScript(
+                        "return window['__aspnetcore__testing__blazor__start__script__executed__'] === true;"
+                    )
         );
 
         AssertLogContainsMessages(
@@ -85,9 +87,10 @@ public class ServerTransportsTest
         var javascript = (IJavaScriptExecutor)Browser;
         Browser.True(
             () =>
-                (bool)javascript.ExecuteScript(
-                    "return window['__aspnetcore__testing__blazor__start__script__executed__'] === true;"
-                )
+                (bool)
+                    javascript.ExecuteScript(
+                        "return window['__aspnetcore__testing__blazor__start__script__executed__'] === true;"
+                    )
         );
 
         AssertLogContainsMessages(
@@ -110,9 +113,10 @@ public class ServerTransportsTest
         var javascript = (IJavaScriptExecutor)Browser;
         Browser.True(
             () =>
-                (bool)javascript.ExecuteScript(
-                    "return window['__aspnetcore__testing__blazor__start__script__executed__'] === true;"
-                )
+                (bool)
+                    javascript.ExecuteScript(
+                        "return window['__aspnetcore__testing__blazor__start__script__executed__'] === true;"
+                    )
         );
 
         AssertLogContainsMessages(
@@ -136,9 +140,10 @@ public class ServerTransportsTest
         var javascript = (IJavaScriptExecutor)Browser;
         Browser.True(
             () =>
-                (bool)javascript.ExecuteScript(
-                    "return window['__aspnetcore__testing__blazor__start__script__executed__'] === true;"
-                )
+                (bool)
+                    javascript.ExecuteScript(
+                        "return window['__aspnetcore__testing__blazor__start__script__executed__'] === true;"
+                    )
         );
 
         AssertLogContainsMessages(
@@ -161,9 +166,10 @@ public class ServerTransportsTest
         var javascript = (IJavaScriptExecutor)Browser;
         Browser.True(
             () =>
-                (bool)javascript.ExecuteScript(
-                    "return window['__aspnetcore__testing__blazor__start__script__executed__'] === true;"
-                )
+                (bool)
+                    javascript.ExecuteScript(
+                        "return window['__aspnetcore__testing__blazor__start__script__executed__'] === true;"
+                    )
         );
 
         AssertLogContainsMessages(

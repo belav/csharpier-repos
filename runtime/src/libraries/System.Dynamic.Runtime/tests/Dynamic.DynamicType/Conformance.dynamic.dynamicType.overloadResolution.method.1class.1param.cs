@@ -197,10 +197,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
             var e = new E() { Baz = new Action(() => Program.Status = 1) };
             var x = new
             {
-                Baz = (Action)delegate
-                {
-                    Program.Status = 1;
-                }
+                Baz = (Action)
+                    delegate
+                    {
+                        Program.Status = 1;
+                    }
             };
             var f = new F();
             int rez = 0;

@@ -77,12 +77,8 @@ namespace System.Net
             Interop.Winsock.AddressInfo* result = null;
             try
             {
-                SocketError errorCode = (SocketError)Interop.Winsock.GetAddrInfoW(
-                    name,
-                    null,
-                    &hints,
-                    &result
-                );
+                SocketError errorCode = (SocketError)
+                    Interop.Winsock.GetAddrInfoW(name, null, &hints, &result);
                 if (errorCode != SocketError.Success)
                 {
                     nativeErrorCode = (int)errorCode;
@@ -195,18 +191,19 @@ namespace System.Net
                 hints.ai_flags = AddressInfoHints.AI_CANONNAME;
             }
 
-            SocketError errorCode = (SocketError)Interop.Winsock.GetAddrInfoExW(
-                hostName,
-                null,
-                Interop.Winsock.NS_ALL,
-                IntPtr.Zero,
-                &hints,
-                &context->Result,
-                IntPtr.Zero,
-                &context->Overlapped,
-                &GetAddressInfoExCallback,
-                &context->CancelHandle
-            );
+            SocketError errorCode = (SocketError)
+                Interop.Winsock.GetAddrInfoExW(
+                    hostName,
+                    null,
+                    Interop.Winsock.NS_ALL,
+                    IntPtr.Zero,
+                    &hints,
+                    &context->Result,
+                    IntPtr.Zero,
+                    &context->Overlapped,
+                    &GetAddressInfoExCallback,
+                    &context->CancelHandle
+                );
 
             if (errorCode == SocketError.IOPending)
             {
@@ -624,9 +621,8 @@ namespace System.Net
 
             public static GetAddrInfoExContext* AllocateContext()
             {
-                var context = (GetAddrInfoExContext*)Marshal.AllocHGlobal(
-                    sizeof(GetAddrInfoExContext)
-                );
+                var context = (GetAddrInfoExContext*)
+                    Marshal.AllocHGlobal(sizeof(GetAddrInfoExContext));
                 *context = default;
                 return context;
             }

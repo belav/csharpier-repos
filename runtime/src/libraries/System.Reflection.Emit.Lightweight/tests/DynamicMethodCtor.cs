@@ -471,9 +471,8 @@ namespace System.Reflection.Emit.Tests
             generator.Emit(OpCodes.Ldelema, typeof(int));
             generator.Emit(OpCodes.Ret);
 
-            var methodDelegate = (GetRefIntoArrayDelegate)method.CreateDelegate(
-                typeof(GetRefIntoArrayDelegate)
-            );
+            var methodDelegate = (GetRefIntoArrayDelegate)
+                method.CreateDelegate(typeof(GetRefIntoArrayDelegate));
 
             var array = new int[] { 0, 1, 2, 3 };
             ref int element = ref methodDelegate(array, 2);

@@ -199,11 +199,8 @@ namespace System.Net.Http.Headers
         public static ContentDispositionHeaderValue Parse(string? input)
         {
             int index = 0;
-            return (ContentDispositionHeaderValue)GenericHeaderParser.ContentDispositionParser.ParseValue(
-                input,
-                null,
-                ref index
-            );
+            return (ContentDispositionHeaderValue)
+                GenericHeaderParser.ContentDispositionParser.ParseValue(input, null, ref index);
         }
 
         public static bool TryParse(
@@ -271,7 +268,8 @@ namespace System.Net.Http.Headers
                     input,
                     current,
                     ';',
-                    (UnvalidatedObjectCollection<NameValueHeaderValue>)contentDispositionHeader.Parameters
+                    (UnvalidatedObjectCollection<NameValueHeaderValue>)
+                        contentDispositionHeader.Parameters
                 );
 
                 if (parameterLength == 0)
@@ -598,10 +596,8 @@ namespace System.Net.Http.Headers
                     if (Uri.IsHexEncoding(dataString, index)) // %FF
                     {
                         // Unescape and cache bytes, multi-byte characters must be decoded all at once.
-                        unescapedBytes[unescapedBytesCount++] = (byte)Uri.HexUnescape(
-                            dataString,
-                            ref index
-                        );
+                        unescapedBytes[unescapedBytesCount++] = (byte)
+                            Uri.HexUnescape(dataString, ref index);
                         index--; // HexUnescape did +=3; Offset the for loop's ++
                     }
                     else

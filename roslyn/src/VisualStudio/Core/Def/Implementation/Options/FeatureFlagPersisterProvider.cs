@@ -42,9 +42,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             IVsFeatureFlags? service;
             try
             {
-                service = (IVsFeatureFlags?)await _serviceProvider
-                    .GetServiceAsync(typeof(SVsFeatureFlags))
-                    .ConfigureAwait(false);
+                service = (IVsFeatureFlags?)
+                    await _serviceProvider
+                        .GetServiceAsync(typeof(SVsFeatureFlags))
+                        .ConfigureAwait(false);
             }
             catch (Exception e) when (FatalError.ReportAndCatch(e))
             {

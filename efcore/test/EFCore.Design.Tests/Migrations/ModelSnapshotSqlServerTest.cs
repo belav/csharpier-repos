@@ -7354,9 +7354,8 @@ namespace RootNamespace
             );
 
         protected virtual MigrationsModelDiffer CreateModelDiffer(DbContextOptions options) =>
-            (MigrationsModelDiffer)TestHelpers
-                .CreateContext(options)
-                .GetService<IMigrationsModelDiffer>();
+            (MigrationsModelDiffer)
+                TestHelpers.CreateContext(options).GetService<IMigrationsModelDiffer>();
 
         protected TestHelpers TestHelpers => SqlServerTestHelpers.Instance;
 

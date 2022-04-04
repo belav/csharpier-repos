@@ -380,11 +380,8 @@ namespace Newtonsoft.Json.Tests.Bson
 
             ms.Seek(0, SeekOrigin.Begin);
             BsonReader reader = new BsonReader(ms);
-            GoogleMapGeocoderStructure bsonGoogleMapGeocoder =
-                (GoogleMapGeocoderStructure)serializer.Deserialize(
-                    reader,
-                    typeof(GoogleMapGeocoderStructure)
-                );
+            GoogleMapGeocoderStructure bsonGoogleMapGeocoder = (GoogleMapGeocoderStructure)
+                serializer.Deserialize(reader, typeof(GoogleMapGeocoderStructure));
 
             Assert.IsNotNull(bsonGoogleMapGeocoder);
             Assert.AreEqual(

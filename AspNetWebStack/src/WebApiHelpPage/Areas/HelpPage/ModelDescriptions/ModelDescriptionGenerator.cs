@@ -89,8 +89,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage.ModelDescriptions
                     typeof(RegularExpressionAttribute),
                     a =>
                     {
-                        RegularExpressionAttribute regularExpression =
-                            (RegularExpressionAttribute)a;
+                        RegularExpressionAttribute regularExpression = (RegularExpressionAttribute)
+                            a;
                         return String.Format(
                             CultureInfo.CurrentCulture,
                             "Matching regular expression pattern: {0}",

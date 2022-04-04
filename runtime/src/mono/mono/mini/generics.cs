@@ -1293,11 +1293,12 @@ class Tests
             return "A";
         };
         var f2 =
-            (Func<Func<string>, string>)Delegate.CreateDelegate(
-                typeof(Func<Func<string>, string>),
-                null,
-                f.GetType().GetMethod("Invoke")
-            );
+            (Func<Func<string>, string>)
+                Delegate.CreateDelegate(
+                    typeof(Func<Func<string>, string>),
+                    null,
+                    f.GetType().GetMethod("Invoke")
+                );
 
         var s = f2(f);
         return s == "A" ? 0 : 1;

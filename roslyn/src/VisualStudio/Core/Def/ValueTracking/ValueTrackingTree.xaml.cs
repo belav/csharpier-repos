@@ -135,9 +135,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
         {
             if (ValueTrackingTreeView.SelectedItem is null)
             {
-                return (TreeViewItemBase)ValueTrackingTreeView.Items[
-                    ValueTrackingTreeView.Items.Count - 1
-                ];
+                return (TreeViewItemBase)
+                    ValueTrackingTreeView.Items[ValueTrackingTreeView.Items.Count - 1];
             }
 
             var item = (TreeViewItemBase)ValueTrackingTreeView.SelectedItem;

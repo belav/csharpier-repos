@@ -40,10 +40,8 @@ namespace System.Text.Unicode
             // First, we'll handle the common case of all-ASCII. If this is able to
             // consume the entire buffer, we'll skip the remainder of this method's logic.
 
-            int numAsciiCharsConsumedJustNow = (int)ASCIIUtility.GetIndexOfFirstNonAsciiChar(
-                pInputBuffer,
-                (uint)inputLength
-            );
+            int numAsciiCharsConsumedJustNow = (int)
+                ASCIIUtility.GetIndexOfFirstNonAsciiChar(pInputBuffer, (uint)inputLength);
             Debug.Assert(
                 0 <= numAsciiCharsConsumedJustNow && numAsciiCharsConsumedJustNow <= inputLength
             );
@@ -162,9 +160,10 @@ namespace System.Text.Unicode
                         else
                         {
                             charIsThreeByteUtf8Encoded = Sse2.AddSaturate(utf16Data, vector7800);
-                            mask = (uint)Sse2.MoveMask(
-                                Sse2.Or(charIsNonAscii, charIsThreeByteUtf8Encoded).AsByte()
-                            );
+                            mask = (uint)
+                                Sse2.MoveMask(
+                                    Sse2.Or(charIsNonAscii, charIsThreeByteUtf8Encoded).AsByte()
+                                );
                         }
 
                         // Each even bit of mask will be 1 only if the char was >= 0x0080,
@@ -213,13 +212,14 @@ namespace System.Text.Unicode
                         }
                         else
                         {
-                            mask = (uint)Sse2.MoveMask(
-                                Sse2.CompareLessThan(
-                                        Sse2.Add(utf16Data, vectorA000).AsInt16(),
-                                        vector7800.AsInt16()
-                                    )
-                                    .AsByte()
-                            );
+                            mask = (uint)
+                                Sse2.MoveMask(
+                                    Sse2.CompareLessThan(
+                                            Sse2.Add(utf16Data, vectorA000).AsInt16(),
+                                            vector7800.AsInt16()
+                                        )
+                                        .AsByte()
+                                );
                         }
 
                         FinishIteration:
@@ -271,9 +271,8 @@ namespace System.Text.Unicode
                             }
                             else
                             {
-                                mask2 = (uint)Sse2.MoveMask(
-                                    Sse2.ShiftRightLogical(utf16Data, 3).AsByte()
-                                );
+                                mask2 = (uint)
+                                    Sse2.MoveMask(Sse2.ShiftRightLogical(utf16Data, 3).AsByte());
                             }
 
                             // 'lowSurrogatesMask' has its bits occur in pairs:
@@ -328,9 +327,8 @@ namespace System.Text.Unicode
                             // free right now, saving the extension step a few lines below. If we're 32-bit, the
                             // convertion to nuint immediately below is a no-op, and we'll pay the cost of the real
                             // 64 -bit extension a few lines below.
-                            nuint surrogatePairsCountNuint = (uint)BitOperations.PopCount(
-                                highSurrogatesMask
-                            );
+                            nuint surrogatePairsCountNuint = (uint)
+                                BitOperations.PopCount(highSurrogatesMask);
 
                             // 2 UTF-16 chars become 1 Unicode scalar
 

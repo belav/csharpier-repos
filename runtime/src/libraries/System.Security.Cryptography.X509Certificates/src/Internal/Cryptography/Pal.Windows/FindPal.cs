@@ -240,8 +240,8 @@ namespace Internal.Cryptography.Pal
                                     delegate(void* pvDecoded, int cbDecoded)
                                     {
                                         Debug.Assert(cbDecoded >= sizeof(CERT_TEMPLATE_EXT));
-                                        CERT_TEMPLATE_EXT* pTemplateExt =
-                                            (CERT_TEMPLATE_EXT*)pvDecoded;
+                                        CERT_TEMPLATE_EXT* pTemplateExt = (CERT_TEMPLATE_EXT*)
+                                            pvDecoded;
                                         string? actual = Marshal.PtrToStringAnsi(
                                             pTemplateExt->pszObjId
                                         );
@@ -353,8 +353,8 @@ namespace Internal.Cryptography.Pal
                             delegate(void* pvDecoded, int cbDecoded)
                             {
                                 Debug.Assert(cbDecoded >= sizeof(CERT_POLICIES_INFO));
-                                CERT_POLICIES_INFO* pCertPoliciesInfo =
-                                    (CERT_POLICIES_INFO*)pvDecoded;
+                                CERT_POLICIES_INFO* pCertPoliciesInfo = (CERT_POLICIES_INFO*)
+                                    pvDecoded;
                                 for (int i = 0; i < pCertPoliciesInfo->cPolicyInfo; i++)
                                 {
                                     CERT_POLICY_INFO* pCertPolicyInfo = &(

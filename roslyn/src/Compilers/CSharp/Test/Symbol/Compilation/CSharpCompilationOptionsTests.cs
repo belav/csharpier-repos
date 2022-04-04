@@ -908,9 +908,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 new CSharpCompilationOptions(OutputKind.ConsoleApplication).NullableContextOptions
             );
 
-            var values = (NullableContextOptions[])System.Enum.GetValues(
-                typeof(NullableContextOptions)
-            );
+            var values = (NullableContextOptions[])
+                System.Enum.GetValues(typeof(NullableContextOptions));
             var options = new CSharpCompilationOptions[values.Length];
 
             for (int i = 0; i < values.Length; i++)

@@ -139,8 +139,8 @@ namespace System.ComponentModel.Composition
                     throw new Exception(SR.Diagnostic_InternalExceptionMessage);
                 }
 
-                MetadataViewFactory generatedMetadataViewFactory =
-                    (MetadataViewFactory)Delegate.CreateDelegate(
+                MetadataViewFactory generatedMetadataViewFactory = (MetadataViewFactory)
+                    Delegate.CreateDelegate(
                         typeof(MetadataViewFactory),
                         generatedProxyType.GetMethod(
                             MetadataViewGenerator.MetadataViewFactoryName,

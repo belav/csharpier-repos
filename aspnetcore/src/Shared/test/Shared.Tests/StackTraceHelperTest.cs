@@ -271,9 +271,8 @@ public class StackTraceHelperTest
     public void GetFrames_DoesNotFailForDynamicallyGeneratedAssemblies()
     {
         // Arrange
-        var action = (Action)Expression
-            .Lambda(Expression.Throw(Expression.New(typeof(Exception))))
-            .Compile();
+        var action = (Action)
+            Expression.Lambda(Expression.Throw(Expression.New(typeof(Exception)))).Compile();
         var exception = Record.Exception(action);
 
         // Act

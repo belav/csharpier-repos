@@ -587,9 +587,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
             foreach (var partName in namespaceFullName.Split('.'))
             {
-                var subnamespace = (NamespaceSymbol)result
-                    .GetMembers(partName)
-                    .FirstOrDefault(m => m.Kind == SymbolKind.Namespace);
+                var subnamespace = (NamespaceSymbol)
+                    result.GetMembers(partName).FirstOrDefault(m => m.Kind == SymbolKind.Namespace);
                 if (subnamespace == null)
                 {
                     subnamespace = new SynthesizedNamespaceSymbol(result, partName);

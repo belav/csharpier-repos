@@ -52,10 +52,8 @@ namespace Internal.TypeSystem
                     && canonicalMethodResult.IsCanonicalMethod(CanonicalFormKind.Universal)
                 )
                 {
-                    canonicalMethodResult =
-                        (InstantiatedMethod)canonicalMethodResult.GetCanonMethodTarget(
-                            CanonicalFormKind.Universal
-                        );
+                    canonicalMethodResult = (InstantiatedMethod)
+                        canonicalMethodResult.GetCanonMethodTarget(CanonicalFormKind.Universal);
                 }
 
                 SetCachedCanonValue(kind, canonicalMethodResult);

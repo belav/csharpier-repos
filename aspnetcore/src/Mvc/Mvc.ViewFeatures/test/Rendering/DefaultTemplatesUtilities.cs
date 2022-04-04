@@ -292,14 +292,15 @@ public class DefaultTemplatesUtilities
         }
 
         // TemplateRenderer will Contextualize this transient service.
-        var innerHelper = (IHtmlHelper)new HtmlHelper(
-            htmlGenerator,
-            viewEngine,
-            provider,
-            new TestViewBufferScope(),
-            new HtmlTestEncoder(),
-            UrlEncoder.Default
-        );
+        var innerHelper = (IHtmlHelper)
+            new HtmlHelper(
+                htmlGenerator,
+                viewEngine,
+                provider,
+                new TestViewBufferScope(),
+                new HtmlTestEncoder(),
+                UrlEncoder.Default
+            );
 
         if (innerHelperWrapper != null)
         {

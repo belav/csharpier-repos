@@ -1652,9 +1652,14 @@ namespace Microsoft.EntityFrameworkCore
                         typeof(LazyFieldBlog).GetRuntimeFields().Single(f => f.Name == "_loader")
                     );
 
-                blogServiceProperty.ParameterBinding = (ServiceParameterBinding)bindingFactories
-                    .FindFactory(typeof(ILazyLoader), "_loader")
-                    .Bind(blogServiceProperty.DeclaringEntityType, typeof(ILazyLoader), "_loader");
+                blogServiceProperty.ParameterBinding = (ServiceParameterBinding)
+                    bindingFactories
+                        .FindFactory(typeof(ILazyLoader), "_loader")
+                        .Bind(
+                            blogServiceProperty.DeclaringEntityType,
+                            typeof(ILazyLoader),
+                            "_loader"
+                        );
 
                 var postServiceProperty = modelBuilder
                     .Entity<LazyFieldPost>()
@@ -1662,9 +1667,14 @@ namespace Microsoft.EntityFrameworkCore
                         typeof(LazyFieldPost).GetRuntimeFields().Single(f => f.Name == "_loader")
                     );
 
-                postServiceProperty.ParameterBinding = (ServiceParameterBinding)bindingFactories
-                    .FindFactory(typeof(ILazyLoader), "_loader")
-                    .Bind(postServiceProperty.DeclaringEntityType, typeof(ILazyLoader), "_loader");
+                postServiceProperty.ParameterBinding = (ServiceParameterBinding)
+                    bindingFactories
+                        .FindFactory(typeof(ILazyLoader), "_loader")
+                        .Bind(
+                            postServiceProperty.DeclaringEntityType,
+                            typeof(ILazyLoader),
+                            "_loader"
+                        );
             }
 
             protected override void Seed(WithConstructorsContext context)

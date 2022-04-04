@@ -57,10 +57,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
         )
         {
             var declarationLocation = diagnostic.AdditionalLocations[0];
-            var originalDeclaration = (LambdaExpressionSyntax)declarationLocation.FindNode(
-                getInnermostNodeForTie: true,
-                cancellationToken
-            );
+            var originalDeclaration = (LambdaExpressionSyntax)
+                declarationLocation.FindNode(getInnermostNodeForTie: true, cancellationToken);
 
             editor.ReplaceNode(
                 originalDeclaration,

@@ -62,14 +62,14 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
             var globalOptions = localWorkspace.GetService<IGlobalOptionService>();
 
             MockEditAndContinueWorkspaceService mockEncService;
-            var clientProvider =
-                (InProcRemoteHostClientProvider?)localWorkspace.Services.GetService<IRemoteHostClientProvider>();
+            var clientProvider = (InProcRemoteHostClientProvider?)
+                localWorkspace.Services.GetService<IRemoteHostClientProvider>();
             if (testHost == TestHost.InProcess)
             {
                 Assert.Null(clientProvider);
 
-                mockEncService =
-                    (MockEditAndContinueWorkspaceService)localWorkspace.Services.GetRequiredService<IEditAndContinueWorkspaceService>();
+                mockEncService = (MockEditAndContinueWorkspaceService)
+                    localWorkspace.Services.GetRequiredService<IEditAndContinueWorkspaceService>();
             }
             else
             {
@@ -83,8 +83,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
                     .GetTestClientAsync(localWorkspace)
                     .ConfigureAwait(false);
                 var remoteWorkspace = client.TestData.WorkspaceManager.GetWorkspace();
-                mockEncService =
-                    (MockEditAndContinueWorkspaceService)remoteWorkspace.Services.GetRequiredService<IEditAndContinueWorkspaceService>();
+                mockEncService = (MockEditAndContinueWorkspaceService)
+                    remoteWorkspace.Services.GetRequiredService<IEditAndContinueWorkspaceService>();
             }
 
             localWorkspace.ChangeSolution(

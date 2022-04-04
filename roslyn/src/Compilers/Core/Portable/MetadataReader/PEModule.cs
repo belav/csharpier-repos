@@ -3091,8 +3091,8 @@ namespace Microsoft.CodeAnalysis
 
                                         if (tokenType == HandleKind.TypeDefinition)
                                         {
-                                            TypeDefinitionHandle typeHandle =
-                                                (TypeDefinitionHandle)token;
+                                            TypeDefinitionHandle typeHandle = (TypeDefinitionHandle)
+                                                token;
 
                                             if (IsNestedTypeDefOrThrow(metadataReader, typeHandle))
                                             {
@@ -3379,9 +3379,8 @@ namespace Microsoft.CodeAnalysis
                             _lazyContainsNoPiaLocalTypes = ThreeState.True;
 
                             // We excluded attributes not applied on TypeDefs above:
-                            var parent = (TypeDefinitionHandle)MetadataReader
-                                .GetCustomAttribute(attributeHandle)
-                                .Parent;
+                            var parent = (TypeDefinitionHandle)
+                                MetadataReader.GetCustomAttribute(attributeHandle).Parent;
 
                             RegisterNoPiaLocalType(parent, attributeHandle, signatureIndex);
                             return true;
@@ -4060,8 +4059,8 @@ namespace Microsoft.CodeAnalysis
                             continue;
                         }
 
-                        AssemblyReferenceHandle refHandle =
-                            (AssemblyReferenceHandle)exportedType.Implementation;
+                        AssemblyReferenceHandle refHandle = (AssemblyReferenceHandle)
+                            exportedType.Implementation;
                         if (refHandle.IsNil)
                         {
                             continue;

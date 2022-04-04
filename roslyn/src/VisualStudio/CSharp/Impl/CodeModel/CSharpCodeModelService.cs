@@ -561,25 +561,20 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             switch (node.Kind())
             {
                 case SyntaxKind.Attribute:
-                    return (EnvDTE.CodeElement)CreateInternalCodeAttribute(
-                        state,
-                        fileCodeModel,
-                        node
-                    );
+                    return (EnvDTE.CodeElement)
+                        CreateInternalCodeAttribute(state, fileCodeModel, node);
 
                 case SyntaxKind.AttributeArgument:
-                    return (EnvDTE.CodeElement)CreateInternalCodeAttributeArgument(
-                        state,
-                        fileCodeModel,
-                        (AttributeArgumentSyntax)node
-                    );
+                    return (EnvDTE.CodeElement)
+                        CreateInternalCodeAttributeArgument(
+                            state,
+                            fileCodeModel,
+                            (AttributeArgumentSyntax)node
+                        );
 
                 case SyntaxKind.Parameter:
-                    return (EnvDTE.CodeElement)CreateInternalCodeParameter(
-                        state,
-                        fileCodeModel,
-                        (ParameterSyntax)node
-                    );
+                    return (EnvDTE.CodeElement)
+                        CreateInternalCodeParameter(state, fileCodeModel, (ParameterSyntax)node);
 
                 case SyntaxKind.UsingDirective:
                     return CreateInternalCodeImport(
@@ -591,11 +586,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
 
             if (IsAccessorNode(node))
             {
-                return (EnvDTE.CodeElement)CreateInternalCodeAccessorFunction(
-                    state,
-                    fileCodeModel,
-                    node
-                );
+                return (EnvDTE.CodeElement)
+                    CreateInternalCodeAccessorFunction(state, fileCodeModel, node);
             }
 
             var nodeKey = GetNodeKey(node);
@@ -603,81 +595,41 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             switch (node.Kind())
             {
                 case SyntaxKind.ClassDeclaration:
-                    return (EnvDTE.CodeElement)CodeClass.Create(
-                        state,
-                        fileCodeModel,
-                        nodeKey,
-                        (int)node.Kind()
-                    );
+                    return (EnvDTE.CodeElement)
+                        CodeClass.Create(state, fileCodeModel, nodeKey, (int)node.Kind());
                 case SyntaxKind.InterfaceDeclaration:
-                    return (EnvDTE.CodeElement)CodeInterface.Create(
-                        state,
-                        fileCodeModel,
-                        nodeKey,
-                        (int)node.Kind()
-                    );
+                    return (EnvDTE.CodeElement)
+                        CodeInterface.Create(state, fileCodeModel, nodeKey, (int)node.Kind());
                 case SyntaxKind.StructDeclaration:
-                    return (EnvDTE.CodeElement)CodeStruct.Create(
-                        state,
-                        fileCodeModel,
-                        nodeKey,
-                        (int)node.Kind()
-                    );
+                    return (EnvDTE.CodeElement)
+                        CodeStruct.Create(state, fileCodeModel, nodeKey, (int)node.Kind());
                 case SyntaxKind.EnumDeclaration:
-                    return (EnvDTE.CodeElement)CodeEnum.Create(
-                        state,
-                        fileCodeModel,
-                        nodeKey,
-                        (int)node.Kind()
-                    );
+                    return (EnvDTE.CodeElement)
+                        CodeEnum.Create(state, fileCodeModel, nodeKey, (int)node.Kind());
                 case SyntaxKind.EnumMemberDeclaration:
-                    return (EnvDTE.CodeElement)CodeVariable.Create(
-                        state,
-                        fileCodeModel,
-                        nodeKey,
-                        (int)node.Kind()
-                    );
+                    return (EnvDTE.CodeElement)
+                        CodeVariable.Create(state, fileCodeModel, nodeKey, (int)node.Kind());
                 case SyntaxKind.DelegateDeclaration:
-                    return (EnvDTE.CodeElement)CodeDelegate.Create(
-                        state,
-                        fileCodeModel,
-                        nodeKey,
-                        (int)node.Kind()
-                    );
+                    return (EnvDTE.CodeElement)
+                        CodeDelegate.Create(state, fileCodeModel, nodeKey, (int)node.Kind());
                 case SyntaxKind.MethodDeclaration:
                 case SyntaxKind.ConstructorDeclaration:
                 case SyntaxKind.DestructorDeclaration:
                 case SyntaxKind.OperatorDeclaration:
                 case SyntaxKind.ConversionOperatorDeclaration:
-                    return (EnvDTE.CodeElement)CodeFunction.Create(
-                        state,
-                        fileCodeModel,
-                        nodeKey,
-                        (int)node.Kind()
-                    );
+                    return (EnvDTE.CodeElement)
+                        CodeFunction.Create(state, fileCodeModel, nodeKey, (int)node.Kind());
                 case SyntaxKind.NamespaceDeclaration:
                 case SyntaxKind.FileScopedNamespaceDeclaration:
-                    return (EnvDTE.CodeElement)CodeNamespace.Create(
-                        state,
-                        fileCodeModel,
-                        nodeKey,
-                        (int)node.Kind()
-                    );
+                    return (EnvDTE.CodeElement)
+                        CodeNamespace.Create(state, fileCodeModel, nodeKey, (int)node.Kind());
                 case SyntaxKind.PropertyDeclaration:
                 case SyntaxKind.IndexerDeclaration:
-                    return (EnvDTE.CodeElement)CodeProperty.Create(
-                        state,
-                        fileCodeModel,
-                        nodeKey,
-                        (int)node.Kind()
-                    );
+                    return (EnvDTE.CodeElement)
+                        CodeProperty.Create(state, fileCodeModel, nodeKey, (int)node.Kind());
                 case SyntaxKind.EventDeclaration:
-                    return (EnvDTE.CodeElement)CodeEvent.Create(
-                        state,
-                        fileCodeModel,
-                        nodeKey,
-                        (int)node.Kind()
-                    );
+                    return (EnvDTE.CodeElement)
+                        CodeEvent.Create(state, fileCodeModel, nodeKey, (int)node.Kind());
                 case SyntaxKind.VariableDeclarator:
                     var baseFieldDeclaration =
                         node.FirstAncestorOrSelf<BaseFieldDeclarationSyntax>();
@@ -685,21 +637,18 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                     {
                         if (baseFieldDeclaration.Kind() == SyntaxKind.FieldDeclaration)
                         {
-                            return (EnvDTE.CodeElement)CodeVariable.Create(
-                                state,
-                                fileCodeModel,
-                                nodeKey,
-                                (int)node.Kind()
-                            );
+                            return (EnvDTE.CodeElement)
+                                CodeVariable.Create(
+                                    state,
+                                    fileCodeModel,
+                                    nodeKey,
+                                    (int)node.Kind()
+                                );
                         }
                         else if (baseFieldDeclaration.Kind() == SyntaxKind.EventFieldDeclaration)
                         {
-                            return (EnvDTE.CodeElement)CodeEvent.Create(
-                                state,
-                                fileCodeModel,
-                                nodeKey,
-                                (int)node.Kind()
-                            );
+                            return (EnvDTE.CodeElement)
+                                CodeEvent.Create(state, fileCodeModel, nodeKey, (int)node.Kind());
                         }
                     }
 
@@ -719,100 +668,91 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             {
                 case SyntaxKind.NamespaceDeclaration:
                 case SyntaxKind.FileScopedNamespaceDeclaration:
-                    return (EnvDTE.CodeElement)CodeNamespace.CreateUnknown(
-                        state,
-                        fileCodeModel,
-                        node.RawKind,
-                        GetName(node)
-                    );
+                    return (EnvDTE.CodeElement)
+                        CodeNamespace.CreateUnknown(
+                            state,
+                            fileCodeModel,
+                            node.RawKind,
+                            GetName(node)
+                        );
 
                 case SyntaxKind.ClassDeclaration:
-                    return (EnvDTE.CodeElement)CodeClass.CreateUnknown(
-                        state,
-                        fileCodeModel,
-                        node.RawKind,
-                        GetName(node)
-                    );
+                    return (EnvDTE.CodeElement)
+                        CodeClass.CreateUnknown(state, fileCodeModel, node.RawKind, GetName(node));
                 case SyntaxKind.InterfaceDeclaration:
-                    return (EnvDTE.CodeElement)CodeInterface.CreateUnknown(
-                        state,
-                        fileCodeModel,
-                        node.RawKind,
-                        GetName(node)
-                    );
+                    return (EnvDTE.CodeElement)
+                        CodeInterface.CreateUnknown(
+                            state,
+                            fileCodeModel,
+                            node.RawKind,
+                            GetName(node)
+                        );
                 case SyntaxKind.StructDeclaration:
-                    return (EnvDTE.CodeElement)CodeStruct.CreateUnknown(
-                        state,
-                        fileCodeModel,
-                        node.RawKind,
-                        GetName(node)
-                    );
+                    return (EnvDTE.CodeElement)
+                        CodeStruct.CreateUnknown(state, fileCodeModel, node.RawKind, GetName(node));
                 case SyntaxKind.EnumDeclaration:
-                    return (EnvDTE.CodeElement)CodeEnum.CreateUnknown(
-                        state,
-                        fileCodeModel,
-                        node.RawKind,
-                        GetName(node)
-                    );
+                    return (EnvDTE.CodeElement)
+                        CodeEnum.CreateUnknown(state, fileCodeModel, node.RawKind, GetName(node));
                 case SyntaxKind.DelegateDeclaration:
-                    return (EnvDTE.CodeElement)CodeDelegate.CreateUnknown(
-                        state,
-                        fileCodeModel,
-                        node.RawKind,
-                        GetName(node)
-                    );
+                    return (EnvDTE.CodeElement)
+                        CodeDelegate.CreateUnknown(
+                            state,
+                            fileCodeModel,
+                            node.RawKind,
+                            GetName(node)
+                        );
 
                 case SyntaxKind.MethodDeclaration:
                 case SyntaxKind.ConstructorDeclaration:
                 case SyntaxKind.DestructorDeclaration:
                 case SyntaxKind.OperatorDeclaration:
                 case SyntaxKind.ConversionOperatorDeclaration:
-                    return (EnvDTE.CodeElement)CodeFunction.CreateUnknown(
-                        state,
-                        fileCodeModel,
-                        node.RawKind,
-                        GetName(node)
-                    );
+                    return (EnvDTE.CodeElement)
+                        CodeFunction.CreateUnknown(
+                            state,
+                            fileCodeModel,
+                            node.RawKind,
+                            GetName(node)
+                        );
 
                 case SyntaxKind.PropertyDeclaration:
                 case SyntaxKind.IndexerDeclaration:
-                    return (EnvDTE.CodeElement)CodeProperty.CreateUnknown(
-                        state,
-                        fileCodeModel,
-                        node.RawKind,
-                        GetName(node)
-                    );
+                    return (EnvDTE.CodeElement)
+                        CodeProperty.CreateUnknown(
+                            state,
+                            fileCodeModel,
+                            node.RawKind,
+                            GetName(node)
+                        );
 
                 case SyntaxKind.EventDeclaration:
-                    return (EnvDTE.CodeElement)CodeEvent.CreateUnknown(
-                        state,
-                        fileCodeModel,
-                        node.RawKind,
-                        GetName(node)
-                    );
+                    return (EnvDTE.CodeElement)
+                        CodeEvent.CreateUnknown(state, fileCodeModel, node.RawKind, GetName(node));
 
                 case SyntaxKind.VariableDeclarator:
                     var eventFieldDeclaration =
                         node.FirstAncestorOrSelf<EventFieldDeclarationSyntax>();
                     if (eventFieldDeclaration != null)
                     {
-                        return (EnvDTE.CodeElement)CodeEvent.CreateUnknown(
-                            state,
-                            fileCodeModel,
-                            node.RawKind,
-                            GetName(node)
-                        );
+                        return (EnvDTE.CodeElement)
+                            CodeEvent.CreateUnknown(
+                                state,
+                                fileCodeModel,
+                                node.RawKind,
+                                GetName(node)
+                            );
                     }
 
                     goto case SyntaxKind.EnumMemberDeclaration;
 
                 case SyntaxKind.EnumMemberDeclaration:
-                    return (EnvDTE.CodeElement)CodeVariable.CreateUnknown(
-                        state,
-                        fileCodeModel,
-                        node.RawKind,
-                        GetName(node)
-                    );
+                    return (EnvDTE.CodeElement)
+                        CodeVariable.CreateUnknown(
+                            state,
+                            fileCodeModel,
+                            node.RawKind,
+                            GetName(node)
+                        );
 
                 default:
                     throw Exceptions.ThrowEUnexpected();
@@ -823,12 +763,13 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             CodeModelState state,
             FileCodeModel fileCodeModel
         ) =>
-            (EnvDTE.CodeElement)CodeNamespace.CreateUnknown(
-                state,
-                fileCodeModel,
-                (int)SyntaxKind.NamespaceDeclaration,
-                string.Empty
-            );
+            (EnvDTE.CodeElement)
+                CodeNamespace.CreateUnknown(
+                    state,
+                    fileCodeModel,
+                    (int)SyntaxKind.NamespaceDeclaration,
+                    string.Empty
+                );
 
         public override EnvDTE.CodeTypeRef CreateCodeTypeRef(
             CodeModelState state,
@@ -1994,9 +1935,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             Debug.Assert(attributeArgumentNode is AttributeArgumentSyntax);
 
             var argument = (AttributeArgumentSyntax)attributeArgumentNode;
-            var attribute = (AttributeSyntax)argument
-                .Ancestors()
-                .First(n => n.Kind() == SyntaxKind.Attribute);
+            var attribute = (AttributeSyntax)
+                argument.Ancestors().First(n => n.Kind() == SyntaxKind.Attribute);
 
             attributeNode = attribute;
             index = attribute.ArgumentList!.Arguments.IndexOf(

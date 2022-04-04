@@ -368,9 +368,8 @@ namespace System.Runtime.CompilerServices.Tests
             Assert.Equal(
                 0,
                 (
-                    (ObjectWithDefaultCtor)RuntimeHelpers.GetUninitializedObject(
-                        typeof(ObjectWithDefaultCtor)
-                    )
+                    (ObjectWithDefaultCtor)
+                        RuntimeHelpers.GetUninitializedObject(typeof(ObjectWithDefaultCtor))
                 ).Value
             );
         }

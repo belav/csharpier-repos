@@ -193,9 +193,8 @@ namespace System.Net
             void** dataLength
         )
         {
-            SafeDeleteSslContext? context = (SafeDeleteSslContext?)GCHandle
-                .FromIntPtr(connection)
-                .Target;
+            SafeDeleteSslContext? context = (SafeDeleteSslContext?)
+                GCHandle.FromIntPtr(connection).Target;
             Debug.Assert(context != null);
 
             // We don't pool these buffers and we can't because there's a race between their us in the native
@@ -231,9 +230,8 @@ namespace System.Net
             void** dataLength
         )
         {
-            SafeDeleteSslContext? context = (SafeDeleteSslContext?)GCHandle
-                .FromIntPtr(connection)
-                .Target;
+            SafeDeleteSslContext? context = (SafeDeleteSslContext?)
+                GCHandle.FromIntPtr(connection).Target;
             Debug.Assert(context != null);
 
             try

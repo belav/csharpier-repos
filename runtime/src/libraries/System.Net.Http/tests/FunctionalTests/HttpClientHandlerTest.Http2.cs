@@ -2807,9 +2807,8 @@ namespace System.Net.Http.Functional.Tests
         {
             await requestStream.WriteAsync(data);
             await requestStream.FlushAsync();
-            DataFrame dataFrame = (DataFrame)await connection.ReadFrameAsync(
-                TimeSpan.FromSeconds(30)
-            );
+            DataFrame dataFrame = (DataFrame)
+                await connection.ReadFrameAsync(TimeSpan.FromSeconds(30));
             Assert.True(data.Span.SequenceEqual(dataFrame.Data.Span));
         }
 
@@ -2821,9 +2820,8 @@ namespace System.Net.Http.Functional.Tests
         )
         {
             duplexContent.Complete();
-            DataFrame dataFrame = (DataFrame)await connection.ReadFrameAsync(
-                TimeSpan.FromSeconds(30)
-            );
+            DataFrame dataFrame = (DataFrame)
+                await connection.ReadFrameAsync(TimeSpan.FromSeconds(30));
             Assert.True(dataFrame.EndStreamFlag);
             Assert.Equal(0, dataFrame.Data.Length);
 

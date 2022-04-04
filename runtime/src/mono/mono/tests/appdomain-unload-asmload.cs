@@ -26,10 +26,11 @@ namespace AppDomainUnloadAsmLoad
             );
             try
             {
-                var driver = (AppDomainTestDriver)appDomain.CreateInstanceAndUnwrap(
-                    typeof(AppDomainTestDriver).Assembly.FullName,
-                    typeof(AppDomainTestDriver).FullName
-                );
+                var driver = (AppDomainTestDriver)
+                    appDomain.CreateInstanceAndUnwrap(
+                        typeof(AppDomainTestDriver).Assembly.FullName,
+                        typeof(AppDomainTestDriver).FullName
+                    );
                 driver.Test();
             }
             finally

@@ -153,20 +153,14 @@ namespace System.ComponentModel.TypeConverterTests
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void ConvertFrom()
         {
-            Image newImage = (Image)_imgConv.ConvertFrom(
-                null,
-                CultureInfo.InvariantCulture,
-                _imageBytes
-            );
+            Image newImage = (Image)
+                _imgConv.ConvertFrom(null, CultureInfo.InvariantCulture, _imageBytes);
 
             Assert.Equal(_image.Height, newImage.Height);
             Assert.Equal(_image.Width, newImage.Width);
 
-            newImage = (Image)_imgConvFrmTD.ConvertFrom(
-                null,
-                CultureInfo.InvariantCulture,
-                _imageBytes
-            );
+            newImage = (Image)
+                _imgConvFrmTD.ConvertFrom(null, CultureInfo.InvariantCulture, _imageBytes);
 
             Assert.Equal(_image.Height, newImage.Height);
             Assert.Equal(_image.Width, newImage.Width);
@@ -236,22 +230,19 @@ namespace System.ComponentModel.TypeConverterTests
         {
             Assert.Equal(
                 _imageStr,
-                (string)_imgConv.ConvertTo(
-                    null,
-                    CultureInfo.InvariantCulture,
-                    _image,
-                    typeof(string)
-                )
+                (string)
+                    _imgConv.ConvertTo(null, CultureInfo.InvariantCulture, _image, typeof(string))
             );
             Assert.Equal(_imageStr, (string)_imgConv.ConvertTo(_image, typeof(string)));
             Assert.Equal(
                 _imageStr,
-                (string)_imgConvFrmTD.ConvertTo(
-                    null,
-                    CultureInfo.InvariantCulture,
-                    _image,
-                    typeof(string)
-                )
+                (string)
+                    _imgConvFrmTD.ConvertTo(
+                        null,
+                        CultureInfo.InvariantCulture,
+                        _image,
+                        typeof(string)
+                    )
             );
             Assert.Equal(_imageStr, (string)_imgConvFrmTD.ConvertTo(_image, typeof(string)));
 
@@ -265,23 +256,25 @@ namespace System.ComponentModel.TypeConverterTests
                 Assert.Equal("(none)", (string)_imgConv.ConvertTo(null, typeof(string)));
                 Assert.Equal(
                     "(none)",
-                    (string)_imgConv.ConvertTo(
-                        null,
-                        CultureInfo.CreateSpecificCulture("ru-RU"),
-                        null,
-                        typeof(string)
-                    )
+                    (string)
+                        _imgConv.ConvertTo(
+                            null,
+                            CultureInfo.CreateSpecificCulture("ru-RU"),
+                            null,
+                            typeof(string)
+                        )
                 );
 
                 Assert.Equal("(none)", (string)_imgConvFrmTD.ConvertTo(null, typeof(string)));
                 Assert.Equal(
                     "(none)",
-                    (string)_imgConvFrmTD.ConvertTo(
-                        null,
-                        CultureInfo.CreateSpecificCulture("de-DE"),
-                        null,
-                        typeof(string)
-                    )
+                    (string)
+                        _imgConvFrmTD.ConvertTo(
+                            null,
+                            CultureInfo.CreateSpecificCulture("de-DE"),
+                            null,
+                            typeof(string)
+                        )
                 );
             }
         }
@@ -289,20 +282,22 @@ namespace System.ComponentModel.TypeConverterTests
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void ConvertTo_ByteArray()
         {
-            byte[] newImageBytes = (byte[])_imgConv.ConvertTo(
-                null,
-                CultureInfo.InvariantCulture,
-                _image,
-                _imageBytes.GetType()
-            );
+            byte[] newImageBytes = (byte[])
+                _imgConv.ConvertTo(
+                    null,
+                    CultureInfo.InvariantCulture,
+                    _image,
+                    _imageBytes.GetType()
+                );
             Assert.Equal(_imageBytes, newImageBytes);
 
-            newImageBytes = (byte[])_imgConvFrmTD.ConvertTo(
-                null,
-                CultureInfo.InvariantCulture,
-                _image,
-                _imageBytes.GetType()
-            );
+            newImageBytes = (byte[])
+                _imgConvFrmTD.ConvertTo(
+                    null,
+                    CultureInfo.InvariantCulture,
+                    _image,
+                    _imageBytes.GetType()
+                );
             Assert.Equal(_imageBytes, newImageBytes);
 
             newImageBytes = (byte[])_imgConvFrmTD.ConvertTo(_image, _imageBytes.GetType());

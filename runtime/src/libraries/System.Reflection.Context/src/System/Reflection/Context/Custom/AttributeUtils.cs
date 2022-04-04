@@ -285,11 +285,8 @@ namespace System.Reflection.Context.Custom
             out bool allowMultiple
         )
         {
-            AttributeUsageAttribute[] usageAttributes =
-                (AttributeUsageAttribute[])attributeFilterType.GetCustomAttributes(
-                    typeof(AttributeUsageAttribute),
-                    false
-                );
+            AttributeUsageAttribute[] usageAttributes = (AttributeUsageAttribute[])
+                attributeFilterType.GetCustomAttributes(typeof(AttributeUsageAttribute), false);
 
             if (usageAttributes == null || usageAttributes.Length == 0)
             {

@@ -4935,9 +4935,7 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             throw new InvalidDataException($"No StatusCode found in '{response}'");
         }
 
-        return (HttpStatusCode)int.Parse(
-            response.Substring(statusStart, statusLength),
-            CultureInfo.InvariantCulture
-        );
+        return (HttpStatusCode)
+            int.Parse(response.Substring(statusStart, statusLength), CultureInfo.InvariantCulture);
     }
 }

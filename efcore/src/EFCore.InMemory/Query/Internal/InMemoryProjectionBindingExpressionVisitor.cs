@@ -347,14 +347,15 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     is ProjectionBindingExpression projectionBindingExpression
                 )
                 {
-                    entityProjectionExpression = (EntityProjectionExpression)(
-                        (InMemoryQueryExpression)projectionBindingExpression.QueryExpression
-                    ).GetProjection(projectionBindingExpression);
+                    entityProjectionExpression = (EntityProjectionExpression)
+                        (
+                            (InMemoryQueryExpression)projectionBindingExpression.QueryExpression
+                        ).GetProjection(projectionBindingExpression);
                 }
                 else
                 {
-                    entityProjectionExpression =
-                        (EntityProjectionExpression)entityShaperExpression.ValueBufferExpression;
+                    entityProjectionExpression = (EntityProjectionExpression)
+                        entityShaperExpression.ValueBufferExpression;
                 }
 
                 if (_indexBasedBinding)

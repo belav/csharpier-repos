@@ -103,9 +103,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Setup
                     cancellationToken
                 );
 
-                var shell = (IVsShell7?)await serviceProvider
-                    .GetServiceAsync(typeof(SVsShell))
-                    .ConfigureAwait(true);
+                var shell = (IVsShell7?)
+                    await serviceProvider.GetServiceAsync(typeof(SVsShell)).ConfigureAwait(true);
                 Assumes.Present(shell);
                 await shell.LoadPackageAsync(typeof(RoslynPackage).GUID);
 
@@ -164,8 +163,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Setup
 
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            _componentModel = (IComponentModel)await GetServiceAsync(typeof(SComponentModel))
-                .ConfigureAwait(true);
+            _componentModel = (IComponentModel)
+                await GetServiceAsync(typeof(SComponentModel)).ConfigureAwait(true);
             cancellationToken.ThrowIfCancellationRequested();
             Assumes.Present(_componentModel);
 
@@ -178,8 +177,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Setup
             // the background thread then we will experience hangs like we see in this bug:
             // https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?_a=edit&id=190808 or
             // https://devdiv.visualstudio.com/DevDiv/_workitems?id=296981&_a=edit
-            var telemetryService =
-                (VisualStudioWorkspaceTelemetryService)_workspace.Services.GetRequiredService<IWorkspaceTelemetryService>();
+            var telemetryService = (VisualStudioWorkspaceTelemetryService)
+                _workspace.Services.GetRequiredService<IWorkspaceTelemetryService>();
             telemetryService.InitializeTelemetrySession(TelemetryService.DefaultSession);
 
             Logger.Log(
@@ -322,14 +321,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Setup
             // Obtain services and QueryInterface from the main thread
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var menuCommandService = (OleMenuCommandService)await GetServiceAsync(
-                    typeof(IMenuCommandService)
-                )
-                .ConfigureAwait(true);
-            var monitorSelectionService = (IVsMonitorSelection)await GetServiceAsync(
-                    typeof(SVsShellMonitorSelection)
-                )
-                .ConfigureAwait(true);
+            var menuCommandService = (OleMenuCommandService)
+                await GetServiceAsync(typeof(IMenuCommandService)).ConfigureAwait(true);
+            var monitorSelectionService = (IVsMonitorSelection)
+                await GetServiceAsync(typeof(SVsShellMonitorSelection)).ConfigureAwait(true);
 
             // Switch to the background object for constructing commands
             await TaskScheduler.Default;
@@ -356,10 +351,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Setup
             // Obtain services and QueryInterface from the main thread
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var menuCommandService = (OleMenuCommandService)await GetServiceAsync(
-                    typeof(IMenuCommandService)
-                )
-                .ConfigureAwait(true);
+            var menuCommandService = (OleMenuCommandService)
+                await GetServiceAsync(typeof(IMenuCommandService)).ConfigureAwait(true);
             StackTraceExplorerCommandHandler.Initialize(menuCommandService, this);
         }
 

@@ -64,9 +64,8 @@ namespace System.ComponentModel
 
                 if (_converter == null)
                 {
-                    TypeConverterAttribute attr = (TypeConverterAttribute)attrs[
-                        typeof(TypeConverterAttribute)
-                    ]!;
+                    TypeConverterAttribute attr = (TypeConverterAttribute)
+                        attrs[typeof(TypeConverterAttribute)]!;
                     if (attr.ConverterTypeName != null && attr.ConverterTypeName.Length > 0)
                     {
                         Type? converterType = GetTypeFromName(attr.ConverterTypeName);
@@ -111,9 +110,8 @@ namespace System.ComponentModel
             get
             {
                 DesignerSerializationVisibilityAttribute attr =
-                    (DesignerSerializationVisibilityAttribute)Attributes[
-                        typeof(DesignerSerializationVisibilityAttribute)
-                    ]!;
+                    (DesignerSerializationVisibilityAttribute)
+                        Attributes[typeof(DesignerSerializationVisibilityAttribute)]!;
                 return attr.Visibility;
             }
         }

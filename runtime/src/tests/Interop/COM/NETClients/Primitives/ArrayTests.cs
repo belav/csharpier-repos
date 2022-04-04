@@ -17,8 +17,8 @@ namespace NetClient
 
         public ArrayTests()
         {
-            this.server =
-                (Server.Contract.Servers.ArrayTesting)new Server.Contract.Servers.ArrayTestingClass();
+            this.server = (Server.Contract.Servers.ArrayTesting)
+                new Server.Contract.Servers.ArrayTestingClass();
 
             double acc = 0.0;
             int[] rawData = BaseData.ToArray();

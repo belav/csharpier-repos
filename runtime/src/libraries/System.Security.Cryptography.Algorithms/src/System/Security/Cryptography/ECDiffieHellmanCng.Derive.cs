@@ -44,9 +44,8 @@ namespace System.Security.Cryptography
                 ECParameters otherPartyParameters = otherPartyPublicKey.ExportParameters();
 
                 using (
-                    ECDiffieHellmanCng otherPartyCng = (ECDiffieHellmanCng)Create(
-                        otherPartyParameters
-                    )
+                    ECDiffieHellmanCng otherPartyCng = (ECDiffieHellmanCng)
+                        Create(otherPartyParameters)
                 )
                 using (
                     SafeNCryptKeyHandle otherPartyHandle = otherPartyCng.GetDuplicatedKeyHandle()

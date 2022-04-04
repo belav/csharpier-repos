@@ -56,10 +56,11 @@ namespace System.Web.Helpers.Claims
                 // For improved perf, instance methods can be treated as static methods by leaving
                 // the 'this' parameter unbound. Virtual dispatch for the property getter will
                 // still take place as expected.
-                return (Func<TClaimsIdentity, IEnumerable<TClaim>>)Delegate.CreateDelegate(
-                    typeof(Func<TClaimsIdentity, IEnumerable<TClaim>>),
-                    propGetter
-                );
+                return (Func<TClaimsIdentity, IEnumerable<TClaim>>)
+                    Delegate.CreateDelegate(
+                        typeof(Func<TClaimsIdentity, IEnumerable<TClaim>>),
+                        propGetter
+                    );
             }
 
             public override IEnumerable<Claim> GetClaims()

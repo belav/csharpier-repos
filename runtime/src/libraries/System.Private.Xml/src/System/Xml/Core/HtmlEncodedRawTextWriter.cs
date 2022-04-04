@@ -122,8 +122,8 @@ namespace System.Xml
                     ChangeTextContentMark(false);
                 }
 
-                _currentElementProperties =
-                    (ElementProperties)_elementPropertySearch.FindCaseInsensitiveString(localName);
+                _currentElementProperties = (ElementProperties)
+                    _elementPropertySearch.FindCaseInsensitiveString(localName);
                 base._bufChars[_bufPos++] = (char)'<';
                 base.RawText(localName);
                 base._attrEndPos = _bufPos;
@@ -341,9 +341,9 @@ namespace System.Xml
                 )
                 {
                     _currentAttributeProperties =
-                        (AttributeProperties)_attributePropertySearch.FindCaseInsensitiveString(
-                            localName
-                        ) & (AttributeProperties)_currentElementProperties;
+                        (AttributeProperties)
+                            _attributePropertySearch.FindCaseInsensitiveString(localName)
+                        & (AttributeProperties)_currentElementProperties;
 
                     if ((_currentAttributeProperties & AttributeProperties.BOOLEAN) != 0)
                     {
@@ -909,8 +909,8 @@ namespace System.Xml
             {
                 Debug.Assert(prefix.Length == 0);
 
-                base._currentElementProperties =
-                    (ElementProperties)_elementPropertySearch.FindCaseInsensitiveString(localName);
+                base._currentElementProperties = (ElementProperties)
+                    _elementPropertySearch.FindCaseInsensitiveString(localName);
 
                 if (
                     _endBlockPos == base._bufPos

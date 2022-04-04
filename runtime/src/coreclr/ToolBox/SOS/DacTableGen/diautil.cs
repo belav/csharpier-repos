@@ -472,10 +472,8 @@ namespace Dia.Util
         {
             // This is Class ID for the DiaSourceClass used by msdia140.
             var diaSourceClassGuid = new Guid("{e6756135-1e65-4d17-8576-610761398c3c}");
-            var comClassFactory = (IClassFactory)DllGetClassObject(
-                diaSourceClassGuid,
-                typeof(IClassFactory).GUID
-            );
+            var comClassFactory = (IClassFactory)
+                DllGetClassObject(diaSourceClassGuid, typeof(IClassFactory).GUID);
 
             // As the DLL to create a new instance of it
             object comObject = null;

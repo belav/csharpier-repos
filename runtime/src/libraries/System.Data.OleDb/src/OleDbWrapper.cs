@@ -42,10 +42,11 @@ namespace System.Data.OleDb
                 IntPtr vtable = Marshal.ReadIntPtr(base.handle, 0);
                 IntPtr method = Marshal.ReadIntPtr(vtable, 3 * IntPtr.Size); // GetDataSource is the 4'th vtable entry
                 DangerousIDataInitializeGetDataSource =
-                    (UnsafeNativeMethods.IDataInitializeGetDataSource)Marshal.GetDelegateForFunctionPointer(
-                        method,
-                        typeof(UnsafeNativeMethods.IDataInitializeGetDataSource)
-                    );
+                    (UnsafeNativeMethods.IDataInitializeGetDataSource)
+                        Marshal.GetDelegateForFunctionPointer(
+                            method,
+                            typeof(UnsafeNativeMethods.IDataInitializeGetDataSource)
+                        );
             }
         }
 
@@ -143,8 +144,8 @@ namespace System.Data.OleDb
                     || (method != Marshal.GetFunctionPointerForDelegate(QueryInterface))
                 )
                 {
-                    QueryInterface =
-                        (UnsafeNativeMethods.IUnknownQueryInterface)Marshal.GetDelegateForFunctionPointer(
+                    QueryInterface = (UnsafeNativeMethods.IUnknownQueryInterface)
+                        Marshal.GetDelegateForFunctionPointer(
                             method,
                             typeof(UnsafeNativeMethods.IUnknownQueryInterface)
                         );
@@ -168,8 +169,8 @@ namespace System.Data.OleDb
                     || (method != Marshal.GetFunctionPointerForDelegate(Initialize))
                 )
                 {
-                    Initialize =
-                        (UnsafeNativeMethods.IDBInitializeInitialize)Marshal.GetDelegateForFunctionPointer(
+                    Initialize = (UnsafeNativeMethods.IDBInitializeInitialize)
+                        Marshal.GetDelegateForFunctionPointer(
                             method,
                             typeof(UnsafeNativeMethods.IDBInitializeInitialize)
                         );
@@ -183,11 +184,12 @@ namespace System.Data.OleDb
                 if ((0 <= hr) || (OleDbHResult.DB_E_ALREADYINITIALIZED == hr))
                 {
                     // call IUnknown::QueryInterface via the delegate
-                    hr = (OleDbHResult)QueryInterface(
-                        base.handle,
-                        ref ODB.IID_IDBCreateSession,
-                        ref idbCreateSession
-                    );
+                    hr = (OleDbHResult)
+                        QueryInterface(
+                            base.handle,
+                            ref ODB.IID_IDBCreateSession,
+                            ref idbCreateSession
+                        );
                     if ((0 <= hr) && (IntPtr.Zero != idbCreateSession))
                     {
                         // native COM rules are the QI result is the 'this' pointer
@@ -206,8 +208,8 @@ namespace System.Data.OleDb
                             || (method != Marshal.GetFunctionPointerForDelegate(CreateSession))
                         )
                         {
-                            CreateSession =
-                                (UnsafeNativeMethods.IDBCreateSessionCreateSession)Marshal.GetDelegateForFunctionPointer(
+                            CreateSession = (UnsafeNativeMethods.IDBCreateSessionCreateSession)
+                                Marshal.GetDelegateForFunctionPointer(
                                     method,
                                     typeof(UnsafeNativeMethods.IDBCreateSessionCreateSession)
                                 );
@@ -323,10 +325,11 @@ namespace System.Data.OleDb
                     IntPtr vtable = Marshal.ReadIntPtr(base.handle, 0);
                     IntPtr method = Marshal.ReadIntPtr(vtable, 0);
                     UnsafeNativeMethods.IUnknownQueryInterface QueryInterface =
-                        (UnsafeNativeMethods.IUnknownQueryInterface)Marshal.GetDelegateForFunctionPointer(
-                            method,
-                            typeof(UnsafeNativeMethods.IUnknownQueryInterface)
-                        );
+                        (UnsafeNativeMethods.IUnknownQueryInterface)
+                            Marshal.GetDelegateForFunctionPointer(
+                                method,
+                                typeof(UnsafeNativeMethods.IUnknownQueryInterface)
+                            );
 
                     int hresult = QueryInterface(
                         base.handle,
@@ -339,10 +342,11 @@ namespace System.Data.OleDb
                         method = Marshal.ReadIntPtr(vtable, 3 * IntPtr.Size);
 
                         DangerousIDBCreateCommandCreateCommand =
-                            (UnsafeNativeMethods.IDBCreateCommandCreateCommand)Marshal.GetDelegateForFunctionPointer(
-                                method,
-                                typeof(UnsafeNativeMethods.IDBCreateCommandCreateCommand)
-                            );
+                            (UnsafeNativeMethods.IDBCreateCommandCreateCommand)
+                                Marshal.GetDelegateForFunctionPointer(
+                                    method,
+                                    typeof(UnsafeNativeMethods.IDBCreateCommandCreateCommand)
+                                );
                         constr.DangerousIDBCreateCommandCreateCommand =
                             DangerousIDBCreateCommandCreateCommand;
                     }
@@ -394,8 +398,8 @@ namespace System.Data.OleDb
                 || (method != Marshal.GetFunctionPointerForDelegate(CreateCommand))
             )
             {
-                CreateCommand =
-                    (UnsafeNativeMethods.IDBCreateCommandCreateCommand)Marshal.GetDelegateForFunctionPointer(
+                CreateCommand = (UnsafeNativeMethods.IDBCreateCommandCreateCommand)
+                    Marshal.GetDelegateForFunctionPointer(
                         method,
                         typeof(UnsafeNativeMethods.IDBCreateCommandCreateCommand)
                     );

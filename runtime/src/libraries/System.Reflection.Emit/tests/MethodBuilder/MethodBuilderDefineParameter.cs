@@ -52,9 +52,8 @@ namespace System.Reflection.Emit.Tests
 
             // Verify MetadataToken
             Assert.Equal(method.MetadataToken, resultMethod.MetadataToken);
-            MethodInfo methodFromToken = (MethodInfo)type.Module.ResolveMethod(
-                method.MetadataToken
-            );
+            MethodInfo methodFromToken = (MethodInfo)
+                type.Module.ResolveMethod(method.MetadataToken);
             Assert.Equal(resultMethod, methodFromToken);
         }
 

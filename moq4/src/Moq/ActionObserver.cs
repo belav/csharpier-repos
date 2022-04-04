@@ -35,12 +35,8 @@ namespace Moq
             using (var matcherObserver = MatcherObserver.Activate())
             {
                 // Create the root recording proxy:
-                var root = (T)CreateProxy(
-                    typeof(T),
-                    ctorArgs,
-                    matcherObserver,
-                    out var rootRecorder
-                );
+                var root = (T)
+                    CreateProxy(typeof(T), ctorArgs, matcherObserver, out var rootRecorder);
 
                 Exception error = null;
                 try
@@ -286,12 +282,13 @@ namespace Moq
         )
         {
             recorder = new Recorder(matcherObserver);
-            return (IProxy)ProxyFactory.Instance.CreateProxy(
-                type,
-                recorder,
-                Type.EmptyTypes,
-                ctorArgs ?? new object[0]
-            );
+            return (IProxy)
+                ProxyFactory.Instance.CreateProxy(
+                    type,
+                    recorder,
+                    Type.EmptyTypes,
+                    ctorArgs ?? new object[0]
+                );
         }
 
         // Records an invocation, mocks return values, and builds a chain to the return value's recorder.

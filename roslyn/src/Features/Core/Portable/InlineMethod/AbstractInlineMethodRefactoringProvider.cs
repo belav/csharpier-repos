@@ -525,8 +525,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                     );
                     var (parameterSymbol, name) =
                         methodParametersInfo.ParametersWithVariableDeclarationArgument.Single();
-                    var declarationNode =
-                        (TStatementSyntax)syntaxGenerator.LocalDeclarationStatement(
+                    var declarationNode = (TStatementSyntax)
+                        syntaxGenerator.LocalDeclarationStatement(
                             parameterSymbol.Type,
                             name,
                             rightHandSideValue
@@ -542,9 +542,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                     && _syntaxFacts.IsExpressionStatement(calleeInvocationNode.Parent)
                 )
                 {
-                    var throwStatement = (TStatementSyntax)syntaxGenerator.ThrowStatement(
-                        inlineMethodContext.InlineExpression
-                    );
+                    var throwStatement = (TStatementSyntax)
+                        syntaxGenerator.ThrowStatement(inlineMethodContext.InlineExpression);
                     return (
                         statementContainsInvocation,
                         throwStatement.WithTriviaFrom(statementContainsInvocation)
@@ -564,11 +563,12 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                     // void Caller() { throw new Exception(); }
                     // void Callee() => throw new Exception();
                     // Note: Throw expression is converted to throw statement
-                    var throwStatement = (TStatementSyntax)syntaxGenerator.ThrowStatement(
-                        _syntaxFacts.GetExpressionOfThrowExpression(
-                            inlineMethodContext.InlineExpression
-                        )
-                    );
+                    var throwStatement = (TStatementSyntax)
+                        syntaxGenerator.ThrowStatement(
+                            _syntaxFacts.GetExpressionOfThrowExpression(
+                                inlineMethodContext.InlineExpression
+                            )
+                        );
                     return (
                         statementContainsInvocation,
                         throwStatement.WithTriviaFrom(statementContainsInvocation)
@@ -612,8 +612,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                         cancellationToken
                     );
 
-                    var localDeclarationNode =
-                        (TStatementSyntax)syntaxGenerator.LocalDeclarationStatement(
+                    var localDeclarationNode = (TStatementSyntax)
+                        syntaxGenerator.LocalDeclarationStatement(
                             calleeMethodSymbol.ReturnType,
                             unusedLocalName.Text,
                             inlineMethodContext.InlineExpression
@@ -637,9 +637,10 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 // Note: Throw statement is converted to throw expression
                 if (CanBeReplacedByThrowExpression(calleeInvocationNode))
                 {
-                    var throwExpression = (TExpressionSyntax)syntaxGenerator
-                        .ThrowExpression(inlineMethodContext.InlineExpression)
-                        .WithTriviaFrom(calleeInvocationNode);
+                    var throwExpression = (TExpressionSyntax)
+                        syntaxGenerator
+                            .ThrowExpression(inlineMethodContext.InlineExpression)
+                            .WithTriviaFrom(calleeInvocationNode);
                     return (
                         calleeInvocationNode,
                         throwExpression.WithTriviaFrom(calleeInvocationNode)
@@ -681,12 +682,13 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 // After:
                 // void Caller() { var x = ((Func<int>)(() => 1))(); }
                 // Func<int> Callee() { return () => 1; }
-                inlineExpression = (TExpressionSyntax)syntaxGenerator.AddParentheses(
-                    syntaxGenerator.CastExpression(
-                        GenerateTypeSyntax(calleeMethodSymbol.ReturnType, allowVar: false),
-                        syntaxGenerator.AddParentheses(inlineMethodContext.InlineExpression)
-                    )
-                );
+                inlineExpression = (TExpressionSyntax)
+                    syntaxGenerator.AddParentheses(
+                        syntaxGenerator.CastExpression(
+                            GenerateTypeSyntax(calleeMethodSymbol.ReturnType, allowVar: false),
+                            syntaxGenerator.AddParentheses(inlineMethodContext.InlineExpression)
+                        )
+                    );
             }
 
             return (calleeInvocationNode, inlineExpression.WithTriviaFrom(calleeInvocationNode));

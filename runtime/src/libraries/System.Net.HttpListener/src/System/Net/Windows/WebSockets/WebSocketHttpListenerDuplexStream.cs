@@ -1174,8 +1174,8 @@ namespace System.Net.WebSockets
                 }
                 else
                 {
-                    _dataChunks![index].pBuffer =
-                        (byte*)_webSocket.InternalBuffer.ConvertPinnedSendPayloadToNative(
+                    _dataChunks![index].pBuffer = (byte*)
+                        _webSocket.InternalBuffer.ConvertPinnedSendPayloadToNative(
                             buffer,
                             offset,
                             count

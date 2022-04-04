@@ -44,9 +44,8 @@ public static partial class DataContractSerializerTests
     {
         // Assume that UTC offset doesn't change more often than once in the day 2013-01-02
         // DO NOT USE TimeZoneInfo.Local.BaseUtcOffset !
-        var offsetMinutes = (int)TimeZoneInfo.Local
-            .GetUtcOffset(new DateTime(2013, 1, 2))
-            .TotalMinutes;
+        var offsetMinutes = (int)
+            TimeZoneInfo.Local.GetUtcOffset(new DateTime(2013, 1, 2)).TotalMinutes;
         var objs = new DateTimeOffset[]
         {
             // Adding offsetMinutes so the DateTime component in serialized strings are time-zone independent
@@ -196,9 +195,8 @@ public static partial class DataContractSerializerTests
     [Fact]
     public static void DCS_DateTimeAsRoot()
     {
-        var offsetMinutes = (int)TimeZoneInfo.Local
-            .GetUtcOffset(new DateTime(2013, 1, 2))
-            .TotalMinutes;
+        var offsetMinutes = (int)
+            TimeZoneInfo.Local.GetUtcOffset(new DateTime(2013, 1, 2)).TotalMinutes;
         Assert.StrictEqual(
             DataContractSerializerHelper.SerializeAndDeserialize<DateTime>(
                 new DateTime(2013, 1, 2),
@@ -2546,9 +2544,8 @@ public static partial class DataContractSerializerTests
 
         // Assume that UTC offset doesn't change more often than once in the day 2013-01-02
         // DO NOT USE TimeZoneInfo.Local.BaseUtcOffset !
-        var offsetMinutes = (int)TimeZoneInfo.Local
-            .GetUtcOffset(new DateTime(2013, 1, 2))
-            .TotalMinutes;
+        var offsetMinutes = (int)
+            TimeZoneInfo.Local.GetUtcOffset(new DateTime(2013, 1, 2)).TotalMinutes;
         // Adding offsetMinutes to ModifiedTime property so the DateTime component in serialized strings are time-zone independent
         value = new TypeWithDateTimeOffsetTypeProperty()
         {
@@ -3097,8 +3094,8 @@ public static partial class DataContractSerializerTests
         sw.Flush();
         ms.Seek(0, SeekOrigin.Begin);
 
-        TypeWithPropertyWithoutDefaultCtor deserializedValue =
-            (TypeWithPropertyWithoutDefaultCtor)dcs.ReadObject(ms);
+        TypeWithPropertyWithoutDefaultCtor deserializedValue = (TypeWithPropertyWithoutDefaultCtor)
+            dcs.ReadObject(ms);
         Assert.Equal("Foo", deserializedValue.Name);
         Assert.Null(deserializedValue.MemberWithInvalidDataContract);
     }
@@ -3358,8 +3355,8 @@ public static partial class DataContractSerializerTests
             );
             if (shouldSucceed)
             {
-                var deserializedObject =
-                    (TypeWithTypeWithIntAndStringPropertyProperty)serializer.ReadObject(reader);
+                var deserializedObject = (TypeWithTypeWithIntAndStringPropertyProperty)
+                    serializer.ReadObject(reader);
                 Assert.StrictEqual(10, deserializedObject.ObjectProperty.SampleInt);
                 Assert.Equal("Sample string", deserializedObject.ObjectProperty.SampleString);
             }
@@ -6789,9 +6786,10 @@ public static partial class DataContractSerializerTests
             bool expectedWritable
         )
         {
-            MemoryStream deserialized = (MemoryStream)new DataContractSerializer(
-                typeof(MemoryStream)
-            ).ReadObject(new XmlTextReader(new StringReader(input)));
+            MemoryStream deserialized = (MemoryStream)
+                new DataContractSerializer(typeof(MemoryStream)).ReadObject(
+                    new XmlTextReader(new StringReader(input))
+                );
 
             Assert.NotNull(deserialized);
             Assert.Equal(expectedData, deserialized.ToArray());
@@ -6845,9 +6843,10 @@ public static partial class DataContractSerializerTests
             // Might be ArgumentException, InvalidOperationException, etc. Honestly it doesn't matter.
             Assert.ThrowsAny<Exception>(
                 () =>
-                    (MemoryStream)new DataContractSerializer(typeof(MemoryStream)).ReadObject(
-                        new XmlTextReader(new StringReader(input))
-                    )
+                    (MemoryStream)
+                        new DataContractSerializer(typeof(MemoryStream)).ReadObject(
+                            new XmlTextReader(new StringReader(input))
+                        )
             );
         }
     }
@@ -6921,9 +6920,8 @@ public static partial class DataContractSerializerTests
     public static void DCS_TypeWithCollectionAndDateTimeOffset()
     {
         // Adding offsetMinutes so the DateTime component in serialized strings are time-zone independent
-        int offsetMinutes = (int)TimeZoneInfo.Local
-            .GetUtcOffset(new DateTime(2013, 1, 2))
-            .TotalMinutes;
+        int offsetMinutes = (int)
+            TimeZoneInfo.Local.GetUtcOffset(new DateTime(2013, 1, 2)).TotalMinutes;
         DateTimeOffset dateTimeOffset = new DateTimeOffset(
             new DateTime(2013, 1, 2, 3, 4, 5, 6).AddMinutes(offsetMinutes)
         );
@@ -6951,9 +6949,8 @@ public static partial class DataContractSerializerTests
     public static void DCS_TypeWithCollectionAndDateTimeOffset_ListIsNull()
     {
         // Adding offsetMinutes so the DateTime component in serialized strings are time-zone independent
-        int offsetMinutes = (int)TimeZoneInfo.Local
-            .GetUtcOffset(new DateTime(2013, 1, 2))
-            .TotalMinutes;
+        int offsetMinutes = (int)
+            TimeZoneInfo.Local.GetUtcOffset(new DateTime(2013, 1, 2)).TotalMinutes;
         DateTimeOffset dateTimeOffset = new DateTimeOffset(
             new DateTime(2013, 1, 2, 3, 4, 5, 6).AddMinutes(offsetMinutes)
         );

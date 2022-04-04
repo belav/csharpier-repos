@@ -1645,12 +1645,13 @@ namespace System.Net.Quic.Implementations.MsQuic
         // This can fail if the stream isn't started.
         private long GetStreamId()
         {
-            return (long)MsQuicParameterHelpers.GetULongParam(
-                MsQuicApi.Api,
-                _state.Handle,
-                QUIC_PARAM_LEVEL.STREAM,
-                (uint)QUIC_PARAM_STREAM.ID
-            );
+            return (long)
+                MsQuicParameterHelpers.GetULongParam(
+                    MsQuicApi.Api,
+                    _state.Handle,
+                    QUIC_PARAM_LEVEL.STREAM,
+                    (uint)QUIC_PARAM_STREAM.ID
+                );
         }
 
         private void ThrowIfDisposed()

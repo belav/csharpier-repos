@@ -204,35 +204,39 @@ namespace System.Text.Json.Serialization.Tests
 
             Assert.Equal(
                 2,
-                (int)JsonSerializer.Deserialize(
-                    numberAsString,
-                    typeof(int),
-                    s_optionReadAndWriteFromStr
-                )
+                (int)
+                    JsonSerializer.Deserialize(
+                        numberAsString,
+                        typeof(int),
+                        s_optionReadAndWriteFromStr
+                    )
             );
             Assert.Equal(
                 2,
-                (float)JsonSerializer.Deserialize(
-                    numberAsString,
-                    typeof(float),
-                    s_optionReadAndWriteFromStr
-                )
+                (float)
+                    JsonSerializer.Deserialize(
+                        numberAsString,
+                        typeof(float),
+                        s_optionReadAndWriteFromStr
+                    )
             );
             Assert.Equal(
                 2,
-                (int?)JsonSerializer.Deserialize(
-                    numberAsString,
-                    typeof(int?),
-                    s_optionReadAndWriteFromStr
-                )
+                (int?)
+                    JsonSerializer.Deserialize(
+                        numberAsString,
+                        typeof(int?),
+                        s_optionReadAndWriteFromStr
+                    )
             );
             Assert.Equal(
                 2,
-                (float?)JsonSerializer.Deserialize(
-                    numberAsString,
-                    typeof(float?),
-                    s_optionReadAndWriteFromStr
-                )
+                (float?)
+                    JsonSerializer.Deserialize(
+                        numberAsString,
+                        typeof(float?),
+                        s_optionReadAndWriteFromStr
+                    )
             );
         }
 
@@ -682,19 +686,17 @@ namespace System.Text.Json.Serialization.Tests
                 if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(HashSet<>))
                 {
                     HashSet<T> obj1 =
-                        (HashSet<T>)JsonSerializer.Deserialize(
-                            json,
-                            type,
-                            s_optionReadAndWriteFromStr
-                        );
+                        (HashSet<T>)
+                            JsonSerializer.Deserialize(json, type, s_optionReadAndWriteFromStr);
                     string serialized = JsonSerializer.Serialize(obj1, s_optionReadAndWriteFromStr);
 
                     HashSet<T> obj2 =
-                        (HashSet<T>)JsonSerializer.Deserialize(
-                            serialized,
-                            type,
-                            s_optionReadAndWriteFromStr
-                        );
+                        (HashSet<T>)
+                            JsonSerializer.Deserialize(
+                                serialized,
+                                type,
+                                s_optionReadAndWriteFromStr
+                            );
 
                     Assert.Equal(obj1.Count, obj2.Count);
                     foreach (T element in obj1)

@@ -17,8 +17,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         [Fact]
         public void Equality()
         {
-            var c = (Compilation)CreateCompilation(
-                @"
+            var c = (Compilation)
+                CreateCompilation(
+                    @"
 class E1
 {
     public E GetEnumerator() { return null; }
@@ -35,7 +36,7 @@ class E2
     public void Dispose() { }
 }
 "
-            );
+                );
             var e1 = (ITypeSymbol)c.GlobalNamespace.GetMembers("E1").Single();
             var ge1 = (IMethodSymbol)e1.GetMembers("GetEnumerator").Single();
             var mn1 = (IMethodSymbol)e1.GetMembers("MoveNext").Single();

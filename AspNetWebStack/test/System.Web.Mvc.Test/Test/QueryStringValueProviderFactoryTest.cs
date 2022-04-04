@@ -62,8 +62,8 @@ namespace System.Web.Mvc.Test
                 .Returns(_backingStore);
 
             // Act
-            IUnvalidatedValueProvider valueProvider =
-                (IUnvalidatedValueProvider)factory.GetValueProvider(mockControllerContext.Object);
+            IUnvalidatedValueProvider valueProvider = (IUnvalidatedValueProvider)
+                factory.GetValueProvider(mockControllerContext.Object);
 
             // Assert
             Assert.Equal(typeof(QueryStringValueProvider), valueProvider.GetType());

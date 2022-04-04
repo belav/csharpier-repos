@@ -1636,8 +1636,8 @@ namespace System.Xml.Xsl
                             if (sourceSchemaType.Datatype == null)
                             {
                                 // Complex content adds anyAtomicType* if mixed
-                                XmlSchemaComplexType complexType =
-                                    (XmlSchemaComplexType)sourceItem.SchemaType;
+                                XmlSchemaComplexType complexType = (XmlSchemaComplexType)
+                                    sourceItem.SchemaType;
                                 if (complexType.ContentType == XmlSchemaContentType.Mixed)
                                 {
                                     AddItemToChoice(list, AnyAtomicType);
@@ -1756,8 +1756,8 @@ namespace System.Xml.Xsl
                         else
                         {
                             // Complex content
-                            XmlSchemaComplexType complexType =
-                                (XmlSchemaComplexType)sourceSchemaType;
+                            XmlSchemaComplexType complexType = (XmlSchemaComplexType)
+                                sourceSchemaType;
                             itemCard = AddChildParticle(
                                 list,
                                 complexType.ContentTypeParticle,

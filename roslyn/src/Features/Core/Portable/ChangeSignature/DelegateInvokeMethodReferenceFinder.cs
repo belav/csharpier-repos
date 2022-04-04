@@ -108,9 +108,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                 if (!syntaxFactsService.IsAnonymousFunctionExpression(node))
                     continue;
 
-                var convertedType = (ISymbol?)semanticModel
-                    .GetTypeInfo(node, cancellationToken)
-                    .ConvertedType;
+                var convertedType = (ISymbol?)
+                    semanticModel.GetTypeInfo(node, cancellationToken).ConvertedType;
                 if (convertedType != null)
                 {
                     convertedType =

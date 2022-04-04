@@ -651,9 +651,8 @@ namespace Microsoft.EntityFrameworkCore
             context.Entry(building).Property("Shadow1").CurrentValue = 12;
             context.Entry(building).Property("Shadow2").CurrentValue = "Pine Walk";
 
-            var buildingClone = (Building)(
-                await getPropertyValues(context.Entry(building))
-            ).ToObject();
+            var buildingClone = (Building)
+                (await getPropertyValues(context.Entry(building))).ToObject();
 
             if (expectOriginalValues)
             {
@@ -720,9 +719,8 @@ namespace Microsoft.EntityFrameworkCore
             context.Entry(employee).Property("Shadow2").CurrentValue = "Dev";
             context.Entry(employee).Property("Shadow3").CurrentValue = 2222;
 
-            var clone = (CurrentEmployee)(
-                await getPropertyValues(context.Entry(employee))
-            ).ToObject();
+            var clone = (CurrentEmployee)
+                (await getPropertyValues(context.Entry(employee))).ToObject();
 
             if (expectOriginalValues)
             {
@@ -787,9 +785,8 @@ namespace Microsoft.EntityFrameworkCore
             context.Entry(building).Property("Shadow1").CurrentValue = 12;
             context.Entry(building).Property("Shadow2").CurrentValue = "Pine Walk";
 
-            var buildingClone = (Building)(
-                await getPropertyValues(context.Entry(building))
-            ).ToObject();
+            var buildingClone = (Building)
+                (await getPropertyValues(context.Entry(building))).ToObject();
 
             if (expectOriginalValues)
             {
@@ -2531,9 +2528,10 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             using var context = CreateContext();
-            var building = (Building)context
-                .Entry(context.Set<Building>().Single(b => b.Name == "Building One"))
-                .CurrentValues.ToObject();
+            var building = (Building)
+                context
+                    .Entry(context.Set<Building>().Single(b => b.Name == "Building One"))
+                    .CurrentValues.ToObject();
 
             building.BuildingId = new Guid();
 
@@ -2563,9 +2561,10 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             using var context = CreateContext();
-            var building = (Building)context
-                .Entry(context.Set<Building>().Single(b => b.Name == "Building One"))
-                .CurrentValues.ToObject();
+            var building = (Building)
+                context
+                    .Entry(context.Set<Building>().Single(b => b.Name == "Building One"))
+                    .CurrentValues.ToObject();
             building.BuildingId = new Guid();
 
             context.Set<Building>().Attach(building);
@@ -2594,14 +2593,15 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             using var context = CreateContext();
-            var employee = (CurrentEmployee)context
-                .Entry(
-                    context
-                        .Set<Employee>()
-                        .OfType<CurrentEmployee>()
-                        .Single(b => b.FirstName == "Rowan")
-                )
-                .CurrentValues.ToObject();
+            var employee = (CurrentEmployee)
+                context
+                    .Entry(
+                        context
+                            .Set<Employee>()
+                            .OfType<CurrentEmployee>()
+                            .Single(b => b.FirstName == "Rowan")
+                    )
+                    .CurrentValues.ToObject();
             employee.EmployeeId = -77;
 
             context.Set<Employee>().Attach(employee);
@@ -2630,14 +2630,15 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             using var context = CreateContext();
-            var employee = (CurrentEmployee)context
-                .Entry(
-                    context
-                        .Set<Employee>()
-                        .OfType<CurrentEmployee>()
-                        .Single(b => b.FirstName == "Rowan")
-                )
-                .CurrentValues.ToObject();
+            var employee = (CurrentEmployee)
+                context
+                    .Entry(
+                        context
+                            .Set<Employee>()
+                            .OfType<CurrentEmployee>()
+                            .Single(b => b.FirstName == "Rowan")
+                    )
+                    .CurrentValues.ToObject();
             employee.EmployeeId = -77;
 
             context.Set<Employee>().Attach(employee);
@@ -2674,14 +2675,15 @@ namespace Microsoft.EntityFrameworkCore
                 .FirstOrDefault()
                 .EmployeeId;
 
-            var employee = (CurrentEmployee)context
-                .Entry(
-                    context
-                        .Set<Employee>()
-                        .OfType<CurrentEmployee>()
-                        .Single(b => b.FirstName == "Rowan")
-                )
-                .CurrentValues.ToObject();
+            var employee = (CurrentEmployee)
+                context
+                    .Entry(
+                        context
+                            .Set<Employee>()
+                            .OfType<CurrentEmployee>()
+                            .Single(b => b.FirstName == "Rowan")
+                    )
+                    .CurrentValues.ToObject();
             employee.EmployeeId = pastEmployeeId;
 
             context.Set<Employee>().Attach(employee);
@@ -2718,14 +2720,15 @@ namespace Microsoft.EntityFrameworkCore
                 .FirstOrDefault()
                 .EmployeeId;
 
-            var employee = (CurrentEmployee)context
-                .Entry(
-                    context
-                        .Set<Employee>()
-                        .OfType<CurrentEmployee>()
-                        .Single(b => b.FirstName == "Rowan")
-                )
-                .CurrentValues.ToObject();
+            var employee = (CurrentEmployee)
+                context
+                    .Entry(
+                        context
+                            .Set<Employee>()
+                            .OfType<CurrentEmployee>()
+                            .Single(b => b.FirstName == "Rowan")
+                    )
+                    .CurrentValues.ToObject();
             employee.EmployeeId = pastEmployeeId;
 
             context.Set<Employee>().Attach(employee);
@@ -2759,9 +2762,8 @@ namespace Microsoft.EntityFrameworkCore
 
             context.Entry(building).State = EntityState.Unchanged;
 
-            var storeValues = (Building)(
-                await getPropertyValues(context.Entry(building))
-            ).ToObject();
+            var storeValues = (Building)
+                (await getPropertyValues(context.Entry(building))).ToObject();
 
             Assert.Equal("Building One", storeValues.Name);
         }

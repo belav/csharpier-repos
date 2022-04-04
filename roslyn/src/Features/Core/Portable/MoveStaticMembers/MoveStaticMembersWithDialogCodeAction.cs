@@ -118,10 +118,11 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
             var destSemanticModel = await newDoc
                 .GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
-            newType = (INamedTypeSymbol)destSemanticModel.GetRequiredDeclaredSymbol(
-                destRoot.GetAnnotatedNodes(annotation).Single(),
-                cancellationToken
-            );
+            newType = (INamedTypeSymbol)
+                destSemanticModel.GetRequiredDeclaredSymbol(
+                    destRoot.GetAnnotatedNodes(annotation).Single(),
+                    cancellationToken
+                );
 
             // refactor references across the entire solution
             var memberReferenceLocations = await FindMemberReferencesAsync(

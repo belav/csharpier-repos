@@ -111,10 +111,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 {
                     var slimSequences = new SortedDictionary<(string, string?), ISequence>();
                     foreach (
-                        var sequencePair in (SortedDictionary<
-                            (string, string?),
-                            ISequence
-                        >)sequences!
+                        var sequencePair in (SortedDictionary<(string, string?), ISequence>)
+                            sequences!
                     )
                     {
                         var slimSequence = Create(sequencePair.Value, slimModel);
@@ -370,7 +368,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         var overridesPair in (SortedDictionary<
                             StoreObjectIdentifier,
                             IRelationalPropertyOverrides
-                        >?)overrides!
+                        >?)
+                            overrides!
                     )
                     {
                         var slimOverrides = Create(overridesPair.Value, slimProperty);

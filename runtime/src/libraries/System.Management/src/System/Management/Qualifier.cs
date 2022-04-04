@@ -133,9 +133,8 @@ namespace System.Management
                             for (int i = 0; i < length; i++)
                                 ((int[])(wmiValue))[i] = Convert.ToInt32(
                                     valArray.GetValue(i),
-                                    (IFormatProvider)CultureInfo.InvariantCulture.GetFormat(
-                                        typeof(int)
-                                    )
+                                    (IFormatProvider)
+                                        CultureInfo.InvariantCulture.GetFormat(typeof(int))
                                 );
                         }
                         else if (elementType == typeof(double))
@@ -144,9 +143,8 @@ namespace System.Management
                             for (int i = 0; i < length; i++)
                                 ((double[])(wmiValue))[i] = Convert.ToDouble(
                                     valArray.GetValue(i),
-                                    (IFormatProvider)CultureInfo.InvariantCulture.GetFormat(
-                                        typeof(double)
-                                    )
+                                    (IFormatProvider)
+                                        CultureInfo.InvariantCulture.GetFormat(typeof(double))
                                 );
                         }
                         else if (elementType == typeof(string))
@@ -161,9 +159,8 @@ namespace System.Management
                             for (int i = 0; i < length; i++)
                                 ((bool[])(wmiValue))[i] = Convert.ToBoolean(
                                     valArray.GetValue(i),
-                                    (IFormatProvider)CultureInfo.InvariantCulture.GetFormat(
-                                        typeof(bool)
-                                    )
+                                    (IFormatProvider)
+                                        CultureInfo.InvariantCulture.GetFormat(typeof(bool))
                                 );
                         }
                         else
@@ -369,8 +366,8 @@ namespace System.Management
                 if (value)
                     flavor |= (int)tag_WBEM_FLAVOR_TYPE.WBEM_FLAVOR_FLAG_PROPAGATE_TO_DERIVED_CLASS;
                 else
-                    flavor &=
-                        ~(int)tag_WBEM_FLAVOR_TYPE.WBEM_FLAVOR_FLAG_PROPAGATE_TO_DERIVED_CLASS;
+                    flavor &= ~(int)
+                        tag_WBEM_FLAVOR_TYPE.WBEM_FLAVOR_FLAG_PROPAGATE_TO_DERIVED_CLASS;
 
                 status = qualifierSet.Put_(qualifierName, ref qualifierValue, flavor);
 

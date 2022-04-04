@@ -42,10 +42,10 @@ namespace System.Net.NetworkInformation
             _addressMaskRepliesSent = (long)statistics.AddressMaskRepliesSent;
             _addressMaskRequestsReceived = (long)statistics.AddressMaskRequestsReceived;
             _addressMaskRequestsSent = (long)statistics.AddressMaskRequestsSent;
-            _destinationUnreachableMessagesReceived =
-                (long)statistics.DestinationUnreachableMessagesReceived;
-            _destinationUnreachableMessagesSent =
-                (long)statistics.DestinationUnreachableMessagesSent;
+            _destinationUnreachableMessagesReceived = (long)
+                statistics.DestinationUnreachableMessagesReceived;
+            _destinationUnreachableMessagesSent = (long)
+                statistics.DestinationUnreachableMessagesSent;
             _echoRepliesReceived = (long)statistics.EchoRepliesReceived;
             _echoRepliesSent = (long)statistics.EchoRepliesSent;
             _echoRequestsReceived = (long)statistics.EchoRequestsReceived;

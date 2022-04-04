@@ -33,9 +33,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         )
         {
             var optionSet = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
-            var root = (CompilationUnitSyntax)await document
-                .GetRequiredSyntaxRootAsync(cancellationToken)
-                .ConfigureAwait(false);
+            var root = (CompilationUnitSyntax)
+                await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
 
             var namespaces = GetNamespacesToReplace(document, root, optionSet);
             return await document

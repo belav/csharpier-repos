@@ -3011,11 +3011,8 @@ public class C { public static FrameworkName Goo() { return null; }}";
                 "",
                 referencedAssemblies: TargetFrameworkUtil.GetReferences(TargetFramework.Standard)
             );
-            var assembly = (IAssemblySymbol)vbComp
-                .GetBoundReferenceManager()
-                .GetReferencedAssemblies()
-                .First()
-                .Value;
+            var assembly = (IAssemblySymbol)
+                vbComp.GetBoundReferenceManager().GetReferencedAssemblies().First().Value;
 
             Assert.Null(comp.GetMetadataReference(assembly));
             Assert.Null(comp.GetMetadataReference(vbComp.Assembly));

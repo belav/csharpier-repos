@@ -129,16 +129,15 @@ namespace System.Data.OleDb
         {
             add
             {
-                OleDbRowUpdatingEventHandler? handler = (OleDbRowUpdatingEventHandler?)Events[
-                    EventRowUpdating
-                ];
+                OleDbRowUpdatingEventHandler? handler = (OleDbRowUpdatingEventHandler?)
+                    Events[EventRowUpdating];
 
                 // prevent someone from registering two different command builders on the adapter by
                 // silently removing the old one
                 if ((null != handler) && (value!.Target is DbCommandBuilder))
                 {
-                    OleDbRowUpdatingEventHandler? d =
-                        (OleDbRowUpdatingEventHandler?)ADP.FindBuilder(handler);
+                    OleDbRowUpdatingEventHandler? d = (OleDbRowUpdatingEventHandler?)
+                        ADP.FindBuilder(handler);
                     if (null != d)
                     {
                         Events.RemoveHandler(EventRowUpdating, d);
@@ -491,9 +490,8 @@ namespace System.Data.OleDb
 
         protected override void OnRowUpdated(RowUpdatedEventArgs value)
         {
-            OleDbRowUpdatedEventHandler? handler = (OleDbRowUpdatedEventHandler?)Events[
-                EventRowUpdated
-            ];
+            OleDbRowUpdatedEventHandler? handler = (OleDbRowUpdatedEventHandler?)
+                Events[EventRowUpdated];
             if ((null != handler) && (value is OleDbRowUpdatedEventArgs))
             {
                 handler(this, (OleDbRowUpdatedEventArgs)value);
@@ -503,9 +501,8 @@ namespace System.Data.OleDb
 
         protected override void OnRowUpdating(RowUpdatingEventArgs value)
         {
-            OleDbRowUpdatingEventHandler? handler = (OleDbRowUpdatingEventHandler?)Events[
-                EventRowUpdating
-            ];
+            OleDbRowUpdatingEventHandler? handler = (OleDbRowUpdatingEventHandler?)
+                Events[EventRowUpdating];
             if ((null != handler) && (value is OleDbRowUpdatingEventArgs))
             {
                 handler(this, (OleDbRowUpdatingEventArgs)value);

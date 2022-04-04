@@ -190,10 +190,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
         }
 
         public static RelationalTypeMapping GetMapping(Type type) =>
-            (RelationalTypeMapping)new SqlServerTypeMappingSource(
-                TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
-            ).FindMapping(type);
+            (RelationalTypeMapping)
+                new SqlServerTypeMappingSource(
+                    TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
+                    TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+                ).FindMapping(type);
 
         public override void ByteArray_literal_generated_correctly()
         {

@@ -36,9 +36,8 @@ namespace System.Net.Http.Headers
         {
             get
             {
-                return (ContentDispositionHeaderValue?)GetParsedValues(
-                    KnownHeaders.ContentDisposition.Descriptor
-                );
+                return (ContentDispositionHeaderValue?)
+                    GetParsedValues(KnownHeaders.ContentDisposition.Descriptor);
             }
             set { SetOrRemoveParsedValue(KnownHeaders.ContentDisposition.Descriptor, value); }
         }
@@ -135,9 +134,8 @@ namespace System.Net.Http.Headers
         {
             get
             {
-                return (ContentRangeHeaderValue?)GetParsedValues(
-                    KnownHeaders.ContentRange.Descriptor
-                );
+                return (ContentRangeHeaderValue?)
+                    GetParsedValues(KnownHeaders.ContentRange.Descriptor);
             }
             set { SetOrRemoveParsedValue(KnownHeaders.ContentRange.Descriptor, value); }
         }

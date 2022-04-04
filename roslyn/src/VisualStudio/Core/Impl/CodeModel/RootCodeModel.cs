@@ -226,11 +226,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 return null;
             }
 
-            return (EnvDTE.CodeType)CodeModelService.CreateCodeType(
-                this.State,
-                _projectId,
-                typeSymbol
-            );
+            return (EnvDTE.CodeType)
+                CodeModelService.CreateCodeType(this.State, _projectId, typeSymbol);
         }
 
         public EnvDTE.CodeTypeRef CreateCodeTypeRef(object type) =>

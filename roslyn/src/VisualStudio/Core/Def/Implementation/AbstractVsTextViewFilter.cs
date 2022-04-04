@@ -106,9 +106,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     {
                         IServiceProvider serviceProvider =
                             ComponentModel.GetService<SVsServiceProvider>();
-                        var debugger = (IVsDebugger)serviceProvider.GetService(
-                            typeof(SVsShellDebugger)
-                        );
+                        var debugger = (IVsDebugger)
+                            serviceProvider.GetService(typeof(SVsShellDebugger));
                         var debugMode = new DBGMODE[1];
 
                         var cancellationToken = context.UserCancellationToken;

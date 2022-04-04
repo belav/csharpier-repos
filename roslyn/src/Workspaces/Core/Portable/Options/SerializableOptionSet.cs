@@ -113,10 +113,8 @@ namespace Microsoft.CodeAnalysis.Options
 
                 if (!Equals(changedValueInThisOptionSet, valueInNewOptionSet))
                 {
-                    newOptionSet = (SerializableOptionSet)newOptionSet.WithChangedOption(
-                        changedOption,
-                        changedValueInThisOptionSet
-                    );
+                    newOptionSet = (SerializableOptionSet)
+                        newOptionSet.WithChangedOption(changedOption, changedValueInThisOptionSet);
                 }
             }
 
@@ -171,10 +169,8 @@ namespace Microsoft.CodeAnalysis.Options
             }
             else
             {
-                workspaceOptionSet = (WorkspaceOptionSet)_workspaceOptionSet.WithChangedOption(
-                    optionKey,
-                    value
-                );
+                workspaceOptionSet = (WorkspaceOptionSet)
+                    _workspaceOptionSet.WithChangedOption(optionKey, value);
                 serializableOptionValues = _serializableOptionValues;
                 changedOptionKeysSerializable = _changedOptionKeysSerializable;
                 changedOptionKeysNonSerializable = _changedOptionKeysNonSerializable.Add(optionKey);

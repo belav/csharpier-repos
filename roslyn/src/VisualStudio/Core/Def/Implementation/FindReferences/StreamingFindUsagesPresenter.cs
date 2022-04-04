@@ -210,9 +210,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
         {
             this.AssertIsForeground();
 
-            var vsFindAllReferencesService = (IFindAllReferencesService)_serviceProvider.GetService(
-                typeof(SVsFindAllReferences)
-            );
+            var vsFindAllReferencesService = (IFindAllReferencesService)
+                _serviceProvider.GetService(typeof(SVsFindAllReferences));
             // Get the appropriate window for FAR results to go into.
             var window = vsFindAllReferencesService.StartSearch(title);
 

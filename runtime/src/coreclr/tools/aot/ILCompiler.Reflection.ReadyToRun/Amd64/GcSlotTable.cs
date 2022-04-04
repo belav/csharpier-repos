@@ -218,11 +218,8 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
         )
         {
             // We have stack slots left and more room to predecode
-            GcStackSlotBase spBase = (GcStackSlotBase)NativeReader.ReadBits(
-                image,
-                2,
-                ref bitOffset
-            );
+            GcStackSlotBase spBase = (GcStackSlotBase)
+                NativeReader.ReadBits(image, 2, ref bitOffset);
             int normSpOffset = NativeReader.DecodeVarLengthSigned(
                 image,
                 gcInfoTypes.STACK_SLOT_ENCBASE,

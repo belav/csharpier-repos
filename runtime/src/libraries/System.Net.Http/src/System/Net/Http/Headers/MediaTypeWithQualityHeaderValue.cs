@@ -47,11 +47,12 @@ namespace System.Net.Http.Headers
         public static new MediaTypeWithQualityHeaderValue Parse(string? input)
         {
             int index = 0;
-            return (MediaTypeWithQualityHeaderValue)MediaTypeHeaderParser.SingleValueWithQualityParser.ParseValue(
-                input,
-                null,
-                ref index
-            );
+            return (MediaTypeWithQualityHeaderValue)
+                MediaTypeHeaderParser.SingleValueWithQualityParser.ParseValue(
+                    input,
+                    null,
+                    ref index
+                );
         }
 
         public static bool TryParse(

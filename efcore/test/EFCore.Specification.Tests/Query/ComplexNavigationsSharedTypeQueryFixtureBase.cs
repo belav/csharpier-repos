@@ -57,11 +57,12 @@ namespace Microsoft.EntityFrameworkCore.Query
             );
             using (var batch = ((Model)modelBuilder.Model).ConventionDispatcher.DelayConventions())
             {
-                level2Fk = (ForeignKey)level2.AddForeignKey(
-                    level2.FindProperty(nameof(Level2.Id)),
-                    level1.FindPrimaryKey(),
-                    level1
-                );
+                level2Fk = (ForeignKey)
+                    level2.AddForeignKey(
+                        level2.FindProperty(nameof(Level2.Id)),
+                        level1.FindPrimaryKey(),
+                        level1
+                    );
                 level2Fk.IsUnique = true;
                 level2Fk.SetPrincipalToDependent(
                     nameof(Level1.OneToOne_Required_PK1),
@@ -207,11 +208,12 @@ namespace Microsoft.EntityFrameworkCore.Query
             );
             using (var batch = ((Model)level2.Model).ConventionDispatcher.DelayConventions())
             {
-                level3Fk = (ForeignKey)level3.AddForeignKey(
-                    level3.FindProperty(nameof(Level3.Id)),
-                    level2.FindPrimaryKey(),
-                    level2
-                );
+                level3Fk = (ForeignKey)
+                    level3.AddForeignKey(
+                        level3.FindProperty(nameof(Level3.Id)),
+                        level2.FindPrimaryKey(),
+                        level2
+                    );
                 level3Fk.IsUnique = true;
                 level3Fk.SetPrincipalToDependent(
                     nameof(Level2.OneToOne_Required_PK2),
@@ -271,11 +273,12 @@ namespace Microsoft.EntityFrameworkCore.Query
             );
             using (var batch = ((Model)level3.Model).ConventionDispatcher.DelayConventions())
             {
-                level4Fk = (ForeignKey)level4.AddForeignKey(
-                    level4.FindProperty(nameof(Level4.Id)),
-                    level3.FindPrimaryKey(),
-                    level3
-                );
+                level4Fk = (ForeignKey)
+                    level4.AddForeignKey(
+                        level4.FindProperty(nameof(Level4.Id)),
+                        level3.FindPrimaryKey(),
+                        level3
+                    );
                 level4Fk.IsUnique = true;
                 level4Fk.SetPrincipalToDependent(
                     nameof(Level3.OneToOne_Required_PK3),

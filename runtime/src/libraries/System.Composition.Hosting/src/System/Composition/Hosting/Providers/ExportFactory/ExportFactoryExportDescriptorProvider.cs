@@ -82,10 +82,11 @@ namespace System.Composition.Hosting.Providers.ExportFactory
                                                     boundaries
                                                 );
                                                 return Tuple.Create<TProduct, Action>(
-                                                    (TProduct)CompositionOperation.Run(
-                                                        lifetimeContext,
-                                                        da
-                                                    ),
+                                                    (TProduct)
+                                                        CompositionOperation.Run(
+                                                            lifetimeContext,
+                                                            da
+                                                        ),
                                                     lifetimeContext.Dispose
                                                 );
                                             }

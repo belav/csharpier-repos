@@ -63,10 +63,8 @@ namespace DelegateTest
                 DelegateRemove delctor = new DelegateRemove();
                 TestClass tcInstance = new TestClass();
                 delctor.starkWork = new booldelegate(tcInstance.StartWork_Bool);
-                delctor.starkWork = (booldelegate)Delegate.Remove(
-                    delctor.starkWork,
-                    new booldelegate(tcInstance.StartWork_Bool)
-                );
+                delctor.starkWork = (booldelegate)
+                    Delegate.Remove(delctor.starkWork, new booldelegate(tcInstance.StartWork_Bool));
                 if (null != delctor.starkWork)
                 {
                     TestLibrary.TestFramework.LogError("001", "remove failure  ");
@@ -101,10 +99,8 @@ namespace DelegateTest
                 delctor.starkWork += bStartWork_Bool;
                 delctor.starkWork += bWorking_Bool;
                 delctor.starkWork += bCompleted_Bool;
-                delctor.starkWork = (booldelegate)Delegate.Remove(
-                    delctor.starkWork,
-                    new booldelegate(tcInstance.Working_Bool)
-                );
+                delctor.starkWork = (booldelegate)
+                    Delegate.Remove(delctor.starkWork, new booldelegate(tcInstance.Working_Bool));
                 Delegate[] invocationList = delctor.starkWork.GetInvocationList();
                 if (invocationList.Length != 2)
                 {
@@ -153,10 +149,11 @@ namespace DelegateTest
                 delctor.starkWork += null;
                 delctor.starkWork += bWorking_Bool;
                 delctor.starkWork += bCompleted_Bool;
-                delctor.starkWork = (booldelegate)Delegate.Remove(
-                    delctor.starkWork,
-                    new booldelegate(new TestClass().Completed_Bool)
-                );
+                delctor.starkWork = (booldelegate)
+                    Delegate.Remove(
+                        delctor.starkWork,
+                        new booldelegate(new TestClass().Completed_Bool)
+                    );
                 Delegate[] invocationList = delctor.starkWork.GetInvocationList();
                 if (invocationList.Length != 3)
                 {
@@ -208,10 +205,8 @@ namespace DelegateTest
                 delctor.starkWork += bStartWork_Bool;
                 delctor.starkWork += bWorking_Bool;
                 delctor.starkWork += bCompleted_Bool;
-                delctor.starkWork = (booldelegate)Delegate.Remove(
-                    delctor.starkWork,
-                    new booldelegate(tcInstance.StartWork_Bool)
-                );
+                delctor.starkWork = (booldelegate)
+                    Delegate.Remove(delctor.starkWork, new booldelegate(tcInstance.StartWork_Bool));
                 Delegate[] invocationList = delctor.starkWork.GetInvocationList();
                 if (invocationList.Length != 3)
                 {
@@ -261,10 +256,8 @@ namespace DelegateTest
                 delctor.starkWork += bStartWork_Bool;
                 delctor.starkWork += bWorking_Bool;
                 delctor.starkWork += bCompleted_Bool;
-                delctor.starkWork = (booldelegate)Delegate.Remove(
-                    delctor.starkWork,
-                    new booldelegate(TestClass1.StartWork_Bool)
-                );
+                delctor.starkWork = (booldelegate)
+                    Delegate.Remove(delctor.starkWork, new booldelegate(TestClass1.StartWork_Bool));
                 Delegate[] invocationList = delctor.starkWork.GetInvocationList();
                 if (invocationList.Length != 3)
                 {
@@ -312,10 +305,8 @@ namespace DelegateTest
                 delctor.starkWork += bStartWork_Bool;
                 delctor.starkWork += bWorking_Bool;
                 delctor.starkWork += bCompleted_Bool;
-                delctor.starkWork = (booldelegate)Delegate.Remove(
-                    delctor.starkWork,
-                    new voiddelegate(tcInstance.StartWork_Void)
-                );
+                delctor.starkWork = (booldelegate)
+                    Delegate.Remove(delctor.starkWork, new voiddelegate(tcInstance.StartWork_Void));
 
                 TestLibrary.TestFramework.LogError("015", "delegate remove error ");
                 retVal = false;

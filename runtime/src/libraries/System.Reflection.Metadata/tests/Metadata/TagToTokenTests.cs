@@ -90,9 +90,10 @@ namespace System.Reflection.Metadata.Tests
                 GetNumberOfBits = () =>
                     (int)typeInfo.GetDeclaredField("NumberOfBits").GetValue(null),
                 ConvertToHandle =
-                    (Func<uint, EntityHandle>)typeInfo
-                        .GetDeclaredMethod("ConvertToHandle")
-                        .CreateDelegate(typeof(Func<uint, EntityHandle>)),
+                    (Func<uint, EntityHandle>)
+                        typeInfo
+                            .GetDeclaredMethod("ConvertToHandle")
+                            .CreateDelegate(typeof(Func<uint, EntityHandle>)),
                 ConvertToTag = handle =>
                 {
                     var m = typeInfo.GetDeclaredMethod("ConvertToTag");

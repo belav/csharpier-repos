@@ -751,9 +751,8 @@ namespace Microsoft.CodeAnalysis.Emit
             // First, visit all MethodImplementations and add to this.methodImplList.
             foreach (var methodImpl in typeDef.GetExplicitImplementationOverrides(Context))
             {
-                var methodDef = (IMethodDefinition?)methodImpl.ImplementingMethod.AsDefinition(
-                    this.Context
-                );
+                var methodDef = (IMethodDefinition?)
+                    methodImpl.ImplementingMethod.AsDefinition(this.Context);
                 RoslynDebug.AssertNotNull(methodDef);
 
                 int methodDefRowId = _methodDefs.GetRowId(methodDef);
@@ -1975,10 +1974,8 @@ namespace Microsoft.CodeAnalysis.Emit
             {
                 // Unless the implementing method was added,
                 // the method implementation already exists.
-                var methodDef =
-                    (IMethodDefinition?)methodImplementation.ImplementingMethod.AsDefinition(
-                        this.Context
-                    );
+                var methodDef = (IMethodDefinition?)
+                    methodImplementation.ImplementingMethod.AsDefinition(this.Context);
                 RoslynDebug.AssertNotNull(methodDef);
 
                 if (_changes.GetChange(methodDef) == SymbolChange.Added)

@@ -386,10 +386,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                 throw Error.CannotRetrieveTypeInformation();
             }
 
-            funcDesc = (ComTypes.FUNCDESC)Marshal.PtrToStructure(
-                pFuncDesc,
-                typeof(ComTypes.FUNCDESC)
-            );
+            funcDesc = (ComTypes.FUNCDESC)
+                Marshal.PtrToStructure(pFuncDesc, typeof(ComTypes.FUNCDESC));
             funcDescHandle = pFuncDesc;
         }
 

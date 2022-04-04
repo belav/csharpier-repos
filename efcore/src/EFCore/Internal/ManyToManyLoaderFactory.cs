@@ -27,12 +27,13 @@ namespace Microsoft.EntityFrameworkCore.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public virtual ICollectionLoader Create(ISkipNavigation skipNavigation) =>
-            (ICollectionLoader)_genericCreate
-                .MakeGenericMethod(
-                    skipNavigation.TargetEntityType.ClrType,
-                    skipNavigation.DeclaringEntityType.ClrType
-                )
-                .Invoke(null, new object[] { skipNavigation })!;
+            (ICollectionLoader)
+                _genericCreate
+                    .MakeGenericMethod(
+                        skipNavigation.TargetEntityType.ClrType,
+                        skipNavigation.DeclaringEntityType.ClrType
+                    )
+                    .Invoke(null, new object[] { skipNavigation })!;
 
         [UsedImplicitly]
         private static ICollectionLoader CreateManyToMany<TEntity, TTargetEntity>(

@@ -162,9 +162,8 @@ namespace System.Threading
                 }
 
                 //CORERT: NativeOverlapped* pNativeOverlapped = (NativeOverlapped*)Interop.MemAlloc((UIntPtr)(sizeof(NativeOverlapped) + sizeof(GCHandle)));
-                NativeOverlapped* pNativeOverlapped = (NativeOverlapped*)Marshal.AllocHGlobal(
-                    (IntPtr)(sizeof(NativeOverlapped) + sizeof(GCHandle))
-                );
+                NativeOverlapped* pNativeOverlapped = (NativeOverlapped*)
+                    Marshal.AllocHGlobal((IntPtr)(sizeof(NativeOverlapped) + sizeof(GCHandle)));
 
                 *(GCHandle*)(pNativeOverlapped + 1) = default;
                 _pNativeOverlapped = pNativeOverlapped;

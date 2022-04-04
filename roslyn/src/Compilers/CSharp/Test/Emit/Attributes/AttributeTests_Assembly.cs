@@ -1075,7 +1075,8 @@ class Program
                     AssemblyDefinition assembly = reader.GetAssemblyDefinition();
                     Assert.Equal(
                         System.Configuration.Assemblies.AssemblyHashAlgorithm.SHA256,
-                        (System.Configuration.Assemblies.AssemblyHashAlgorithm)assembly.HashAlgorithm
+                        (System.Configuration.Assemblies.AssemblyHashAlgorithm)
+                            assembly.HashAlgorithm
                     );
 
                     var file1 = reader.GetAssemblyFile(MetadataTokens.AssemblyFileHandle(1));
@@ -1189,7 +1190,8 @@ class Program
                     AssemblyDefinition assembly = reader.GetAssemblyDefinition();
                     Assert.Equal(
                         System.Configuration.Assemblies.AssemblyHashAlgorithm.SHA384,
-                        (System.Configuration.Assemblies.AssemblyHashAlgorithm)assembly.HashAlgorithm
+                        (System.Configuration.Assemblies.AssemblyHashAlgorithm)
+                            assembly.HashAlgorithm
                     );
 
                     var file1 = reader.GetAssemblyFile(MetadataTokens.AssemblyFileHandle(1));
@@ -1336,7 +1338,8 @@ class Program
                     AssemblyDefinition assembly = reader.GetAssemblyDefinition();
                     Assert.Equal(
                         System.Configuration.Assemblies.AssemblyHashAlgorithm.SHA512,
-                        (System.Configuration.Assemblies.AssemblyHashAlgorithm)assembly.HashAlgorithm
+                        (System.Configuration.Assemblies.AssemblyHashAlgorithm)
+                            assembly.HashAlgorithm
                     );
 
                     var file1 = reader.GetAssemblyFile(MetadataTokens.AssemblyFileHandle(1));

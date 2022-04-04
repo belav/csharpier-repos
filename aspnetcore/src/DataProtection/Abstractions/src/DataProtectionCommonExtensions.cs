@@ -126,9 +126,8 @@ public static class DataProtectionCommonExtensions
 
         // We have our own implementation of GetRequiredService<T> since we don't want to
         // take a dependency on DependencyInjection.Interfaces.
-        var provider = (IDataProtectionProvider?)services.GetService(
-            typeof(IDataProtectionProvider)
-        );
+        var provider = (IDataProtectionProvider?)
+            services.GetService(typeof(IDataProtectionProvider));
         if (provider == null)
         {
             throw new InvalidOperationException(

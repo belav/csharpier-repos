@@ -284,9 +284,8 @@ namespace System.Xml.Schema
                 }
 
                 sdm = s_xsdTypes[i];
-                XmlSchemaSimpleType derivedType = (XmlSchemaSimpleType)s_builtinTypes[
-                    new XmlQualifiedName(sdm.Name, XmlReservedNs.NsXs)
-                ]!;
+                XmlSchemaSimpleType derivedType = (XmlSchemaSimpleType)
+                    s_builtinTypes[new XmlQualifiedName(sdm.Name, XmlReservedNs.NsXs)]!;
                 XmlSchemaSimpleType baseType;
 
                 if (sdm.ParentIndex == anySimpleTypeIndex)
@@ -295,12 +294,13 @@ namespace System.Xml.Schema
                 }
                 else
                 { //derived types whose index > 0
-                    baseType = (XmlSchemaSimpleType)s_builtinTypes[
-                        new XmlQualifiedName(
-                            ((SchemaDatatypeMap)(s_xsdTypes[sdm.ParentIndex])).Name,
-                            XmlReservedNs.NsXs
-                        )
-                    ]!;
+                    baseType = (XmlSchemaSimpleType)
+                        s_builtinTypes[
+                            new XmlQualifiedName(
+                                ((SchemaDatatypeMap)(s_xsdTypes[sdm.ParentIndex])).Name,
+                                XmlReservedNs.NsXs
+                            )
+                        ]!;
                     FinishBuiltinType(derivedType, baseType);
                 }
             }
@@ -739,11 +739,8 @@ namespace System.Xml.Schema
                 }
                 if (this.HasLexicalFacets)
                 {
-                    string s1 = (string)this.ValueConverter.ChangeType(
-                        value,
-                        typeof(string),
-                        namespaceResolver
-                    ); //Using value here to avoid info loss
+                    string s1 = (string)
+                        this.ValueConverter.ChangeType(value, typeof(string), namespaceResolver); //Using value here to avoid info loss
                     exception = this.FacetsChecker.CheckLexicalFacets(ref s1, this);
                     if (exception != null)
                         goto Error;
@@ -813,8 +810,8 @@ namespace System.Xml.Schema
         private static readonly DatatypeImplementation s_doubleXdr = new Datatype_doubleXdr(); // XDR
         private static readonly DatatypeImplementation s_duration = new Datatype_duration();
         private static readonly DatatypeImplementation s_ENTITY = new Datatype_ENTITY();
-        private static readonly DatatypeImplementation s_ENTITIES =
-            (DatatypeImplementation)s_ENTITY.DeriveByList(1, null);
+        private static readonly DatatypeImplementation s_ENTITIES = (DatatypeImplementation)
+            s_ENTITY.DeriveByList(1, null);
         private static readonly DatatypeImplementation s_ENUMERATION = new Datatype_ENUMERATION(); // XDR
         private static readonly DatatypeImplementation s_fixed = new Datatype_fixed();
         private static readonly DatatypeImplementation s_float = new Datatype_float();
@@ -822,8 +819,8 @@ namespace System.Xml.Schema
         private static readonly DatatypeImplementation s_hexBinary = new Datatype_hexBinary();
         private static readonly DatatypeImplementation s_ID = new Datatype_ID();
         private static readonly DatatypeImplementation s_IDREF = new Datatype_IDREF();
-        private static readonly DatatypeImplementation s_IDREFS =
-            (DatatypeImplementation)s_IDREF.DeriveByList(1, null);
+        private static readonly DatatypeImplementation s_IDREFS = (DatatypeImplementation)
+            s_IDREF.DeriveByList(1, null);
         private static readonly DatatypeImplementation s_int = new Datatype_int();
         private static readonly DatatypeImplementation s_integer = new Datatype_integer();
         private static readonly DatatypeImplementation s_language = new Datatype_language();
@@ -835,8 +832,8 @@ namespace System.Xml.Schema
         private static readonly DatatypeImplementation s_negativeInteger =
             new Datatype_negativeInteger();
         private static readonly DatatypeImplementation s_NMTOKEN = new Datatype_NMTOKEN();
-        private static readonly DatatypeImplementation s_NMTOKENS =
-            (DatatypeImplementation)s_NMTOKEN.DeriveByList(1, null);
+        private static readonly DatatypeImplementation s_NMTOKENS = (DatatypeImplementation)
+            s_NMTOKEN.DeriveByList(1, null);
         private static readonly DatatypeImplementation s_nonNegativeInteger =
             new Datatype_nonNegativeInteger();
         private static readonly DatatypeImplementation s_nonPositiveInteger =
@@ -1269,11 +1266,8 @@ namespace System.Xml.Schema
                     item = valuesToCheck.GetValue(i)!;
                     if (checkItemLexical)
                     {
-                        string s1 = (string)itemValueConverter.ChangeType(
-                            item,
-                            typeof(string),
-                            namespaceResolver
-                        );
+                        string s1 = (string)
+                            itemValueConverter.ChangeType(item, typeof(string), namespaceResolver);
                         exception = itemFacetsChecker.CheckLexicalFacets(ref s1, _itemType);
                         if (exception != null)
                             goto Error;
@@ -1289,11 +1283,12 @@ namespace System.Xml.Schema
                 //Check facets on the list itself
                 if (this.HasLexicalFacets)
                 {
-                    string s1 = (string)this.ValueConverter.ChangeType(
-                        valueToCheck,
-                        typeof(string),
-                        namespaceResolver
-                    );
+                    string s1 = (string)
+                        this.ValueConverter.ChangeType(
+                            valueToCheck,
+                            typeof(string),
+                            namespaceResolver
+                        );
                     exception = listFacetsChecker.CheckLexicalFacets(ref s1, this);
                     if (exception != null)
                         goto Error;
@@ -1589,11 +1584,8 @@ namespace System.Xml.Schema
             {
                 if (this.HasLexicalFacets)
                 {
-                    string s1 = (string)this.ValueConverter.ChangeType(
-                        valueToCheck,
-                        typeof(string),
-                        nsmgr
-                    ); //Using value here to avoid info loss
+                    string s1 = (string)
+                        this.ValueConverter.ChangeType(valueToCheck, typeof(string), nsmgr); //Using value here to avoid info loss
                     exception = unionFacetsChecker.CheckLexicalFacets(ref s1, this);
                     if (exception != null)
                         goto Error;
@@ -3840,9 +3832,8 @@ namespace System.Xml.Schema
                 {
                     for (int i = 0; i < dt.Restriction.Enumeration!.Count; ++i)
                     {
-                        XmlQualifiedName notation = (XmlQualifiedName)dt.Restriction.Enumeration[
-                            i
-                        ]!;
+                        XmlQualifiedName notation = (XmlQualifiedName)
+                            dt.Restriction.Enumeration[i]!;
                         if (!notations.Contains(notation))
                         {
                             throw new XmlSchemaException(SR.Sch_NotationRequired, caller);

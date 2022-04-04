@@ -358,9 +358,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Test
         public void AllowUnsafe_Is_AppliedTo_CompilationOption(bool allowUnsafe)
         {
             var scriptOptions = ScriptOptions.Default.WithAllowUnsafe(allowUnsafe);
-            var compilation = (CSharpCompilation)CSharpScript
-                .Create(string.Empty, scriptOptions)
-                .GetCompilation();
+            var compilation = (CSharpCompilation)
+                CSharpScript.Create(string.Empty, scriptOptions).GetCompilation();
             Assert.Equal(scriptOptions.AllowUnsafe, compilation.Options.AllowUnsafe);
         }
 

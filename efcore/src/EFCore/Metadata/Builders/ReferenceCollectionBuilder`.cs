@@ -68,10 +68,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             TPrincipalEntity,
             TDependentEntity
         > HasAnnotation(string annotation, object? value) =>
-            (ReferenceCollectionBuilder<TPrincipalEntity, TDependentEntity>)base.HasAnnotation(
-                Check.NotEmpty(annotation, nameof(annotation)),
-                Check.NotNull(value, nameof(value))
-            );
+            (ReferenceCollectionBuilder<TPrincipalEntity, TDependentEntity>)
+                base.HasAnnotation(
+                    Check.NotEmpty(annotation, nameof(annotation)),
+                    Check.NotNull(value, nameof(value))
+                );
 
         /// <summary>
         ///     Configures the property(s) to use as the foreign key for this relationship.

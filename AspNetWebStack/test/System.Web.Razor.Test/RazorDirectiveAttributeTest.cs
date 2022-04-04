@@ -26,9 +26,10 @@ namespace System.Web.Razor.Test
         public void EnsureRazorDirectiveProperties()
         {
             // Arrange
-            var attribute = (AttributeUsageAttribute)typeof(RazorDirectiveAttribute)
-                .GetCustomAttributes(typeof(AttributeUsageAttribute), inherit: false)
-                .SingleOrDefault();
+            var attribute = (AttributeUsageAttribute)
+                typeof(RazorDirectiveAttribute)
+                    .GetCustomAttributes(typeof(AttributeUsageAttribute), inherit: false)
+                    .SingleOrDefault();
 
             // Assert
             Assert.True(attribute.AllowMultiple);

@@ -212,9 +212,8 @@ public class HttpsTests
             Assert.True(protocol > SslProtocols.None, "Protocol: " + protocol);
             Assert.True(Enum.IsDefined(typeof(SslProtocols), protocol), "Defined: " + protocol); // Mapping is required, make sure it's current
 
-            var cipherAlgorithm = (CipherAlgorithmType)result
-                .GetProperty("cipherAlgorithm")
-                .GetInt32();
+            var cipherAlgorithm = (CipherAlgorithmType)
+                result.GetProperty("cipherAlgorithm").GetInt32();
             Assert.True(cipherAlgorithm > CipherAlgorithmType.Null, "Cipher: " + cipherAlgorithm);
 
             var cipherStrength = result.GetProperty("cipherStrength").GetInt32();
@@ -226,9 +225,8 @@ public class HttpsTests
             var hashStrength = result.GetProperty("hashStrength").GetInt32();
             Assert.True(hashStrength >= 0, "HashStrength: " + hashStrength); // May be 0 for some algorithms
 
-            var keyExchangeAlgorithm = (ExchangeAlgorithmType)result
-                .GetProperty("keyExchangeAlgorithm")
-                .GetInt32();
+            var keyExchangeAlgorithm = (ExchangeAlgorithmType)
+                result.GetProperty("keyExchangeAlgorithm").GetInt32();
             Assert.True(
                 keyExchangeAlgorithm >= ExchangeAlgorithmType.None,
                 "KeyExchangeAlgorithm: " + keyExchangeAlgorithm

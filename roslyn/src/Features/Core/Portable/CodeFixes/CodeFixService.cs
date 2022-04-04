@@ -959,11 +959,12 @@ namespace Microsoft.CodeAnalysis.CodeFixes
 
                 var diagnosticProvider = fixAllForInSpan
                     ? new FixAllPredefinedDiagnosticProvider(allDiagnostics)
-                    : (FixAllContext.DiagnosticProvider)new FixAllDiagnosticProvider(
-                          this,
-                          diagnosticIdsForDiagnosticProvider,
-                          includeSuppressedDiagnostics
-                      );
+                    : (FixAllContext.DiagnosticProvider)
+                          new FixAllDiagnosticProvider(
+                              this,
+                              diagnosticIdsForDiagnosticProvider,
+                              includeSuppressedDiagnostics
+                          );
 
                 fixAllState = new FixAllState(
                     fixAllProvider: fixAllProviderInfo.FixAllProvider,

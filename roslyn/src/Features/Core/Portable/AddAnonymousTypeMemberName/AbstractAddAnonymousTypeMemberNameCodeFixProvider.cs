@@ -157,8 +157,8 @@ namespace Microsoft.CodeAnalysis.AddAnonymousTypeMemberName
                 (current, generator) =>
                 {
                     var currentDeclarator = (TAnonymousObjectMemberDeclaratorSyntax)current;
-                    var initializer =
-                        (TAnonymousObjectInitializer)currentDeclarator.GetRequiredParent();
+                    var initializer = (TAnonymousObjectInitializer)
+                        currentDeclarator.GetRequiredParent();
                     var existingNames = GetAnonymousObjectMemberNames(initializer);
                     var anonymousType = current.Parent;
                     var uniqueName = NameGenerator.EnsureUniqueness(

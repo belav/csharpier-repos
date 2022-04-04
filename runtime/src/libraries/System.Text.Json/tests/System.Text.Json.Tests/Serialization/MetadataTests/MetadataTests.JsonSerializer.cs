@@ -30,11 +30,12 @@ namespace System.Text.Json.Serialization.Tests
                 typeof(WeatherForecastWithPOCOs),
                 JsonContext.Default
             );
-            actual = (WeatherForecastWithPOCOs)await Serializer.DeserializeWrapper(
-                json,
-                typeof(WeatherForecastWithPOCOs),
-                JsonContext.Default
-            );
+            actual = (WeatherForecastWithPOCOs)
+                await Serializer.DeserializeWrapper(
+                    json,
+                    typeof(WeatherForecastWithPOCOs),
+                    JsonContext.Default
+                );
             VerifyWeatherForecastWithPOCOs(expected, actual);
         }
 

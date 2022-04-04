@@ -53,10 +53,8 @@ namespace Microsoft.CodeAnalysis.AddDebuggerDisplay
             if (debuggerAttributeTypeSymbol is null)
                 return;
 
-            var typeSymbol = (INamedTypeSymbol)semanticModel.GetRequiredDeclaredSymbol(
-                type,
-                context.CancellationToken
-            );
+            var typeSymbol = (INamedTypeSymbol)
+                semanticModel.GetRequiredDeclaredSymbol(type, context.CancellationToken);
 
             if (typeSymbol.IsStatic || !IsClassOrStruct(typeSymbol))
                 return;
@@ -99,10 +97,8 @@ namespace Microsoft.CodeAnalysis.AddDebuggerDisplay
             var semanticModel = await document
                 .GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
-            var methodSymbol = (IMethodSymbol)semanticModel.GetRequiredDeclaredSymbol(
-                method,
-                cancellationToken
-            );
+            var methodSymbol = (IMethodSymbol)
+                semanticModel.GetRequiredDeclaredSymbol(method, cancellationToken);
 
             var isDebuggerDisplayMethod = IsDebuggerDisplayMethod(methodSymbol);
             if (!isDebuggerDisplayMethod && !IsToStringMethod(methodSymbol))
@@ -211,10 +207,8 @@ namespace Microsoft.CodeAnalysis.AddDebuggerDisplay
 
             editor.AddAttribute(type, newAttribute);
 
-            var typeSymbol = (INamedTypeSymbol)semanticModel.GetRequiredDeclaredSymbol(
-                type,
-                cancellationToken
-            );
+            var typeSymbol = (INamedTypeSymbol)
+                semanticModel.GetRequiredDeclaredSymbol(type, cancellationToken);
 
             if (!typeSymbol.GetMembers().OfType<IMethodSymbol>().Any(IsDebuggerDisplayMethod))
             {

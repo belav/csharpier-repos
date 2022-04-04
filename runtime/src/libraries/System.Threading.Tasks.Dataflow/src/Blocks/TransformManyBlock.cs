@@ -345,10 +345,8 @@ namespace System.Threading.Tasks.Dataflow
                 (completed, state) =>
                 {
                     var tuple =
-                        (Tuple<
-                            TransformManyBlock<TInput, TOutput>,
-                            KeyValuePair<TInput, long>
-                        >)state!;
+                        (Tuple<TransformManyBlock<TInput, TOutput>, KeyValuePair<TInput, long>>)
+                            state!;
                     tuple.Item1.AsyncCompleteProcessMessageWithTask(completed, tuple.Item2);
                 },
                 Tuple.Create(this, messageWithId),

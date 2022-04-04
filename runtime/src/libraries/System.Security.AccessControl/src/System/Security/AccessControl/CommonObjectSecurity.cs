@@ -279,9 +279,8 @@ namespace System.Security.AccessControl
                     _securityDescriptor.AddControlFlags(ControlFlags.DiscretionaryAclPresent);
                 }
 
-                SecurityIdentifier sid = (SecurityIdentifier)rule.IdentityReference.Translate(
-                    typeof(SecurityIdentifier)
-                );
+                SecurityIdentifier sid = (SecurityIdentifier)
+                    rule.IdentityReference.Translate(typeof(SecurityIdentifier));
 
                 if (rule.AccessControlType == AccessControlType.Allow)
                 {
@@ -511,9 +510,8 @@ namespace System.Security.AccessControl
                     _securityDescriptor.AddControlFlags(ControlFlags.SystemAclPresent);
                 }
 
-                SecurityIdentifier sid = (SecurityIdentifier)rule.IdentityReference.Translate(
-                    typeof(SecurityIdentifier)
-                );
+                SecurityIdentifier sid = (SecurityIdentifier)
+                    rule.IdentityReference.Translate(typeof(SecurityIdentifier));
 
                 switch (modification)
                 {

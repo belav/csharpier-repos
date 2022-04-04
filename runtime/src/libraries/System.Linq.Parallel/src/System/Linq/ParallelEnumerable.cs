@@ -1395,11 +1395,8 @@ namespace System.Linq
                 throw new ArgumentNullException(nameof(keySelector));
 
             return new OrderedParallelQuery<TSource>(
-                (QueryOperator<TSource>)source.OrderedEnumerable.CreateOrderedEnumerable<TKey>(
-                    keySelector,
-                    null,
-                    false
-                )
+                (QueryOperator<TSource>)
+                    source.OrderedEnumerable.CreateOrderedEnumerable<TKey>(keySelector, null, false)
             );
         }
 
@@ -1437,11 +1434,12 @@ namespace System.Linq
                 throw new ArgumentNullException(nameof(keySelector));
 
             return new OrderedParallelQuery<TSource>(
-                (QueryOperator<TSource>)source.OrderedEnumerable.CreateOrderedEnumerable<TKey>(
-                    keySelector,
-                    comparer,
-                    false
-                )
+                (QueryOperator<TSource>)
+                    source.OrderedEnumerable.CreateOrderedEnumerable<TKey>(
+                        keySelector,
+                        comparer,
+                        false
+                    )
             );
         }
 
@@ -1477,11 +1475,8 @@ namespace System.Linq
                 throw new ArgumentNullException(nameof(keySelector));
 
             return new OrderedParallelQuery<TSource>(
-                (QueryOperator<TSource>)source.OrderedEnumerable.CreateOrderedEnumerable<TKey>(
-                    keySelector,
-                    null,
-                    true
-                )
+                (QueryOperator<TSource>)
+                    source.OrderedEnumerable.CreateOrderedEnumerable<TKey>(keySelector, null, true)
             );
         }
 
@@ -1518,11 +1513,12 @@ namespace System.Linq
             if (keySelector == null)
                 throw new ArgumentNullException(nameof(keySelector));
             return new OrderedParallelQuery<TSource>(
-                (QueryOperator<TSource>)source.OrderedEnumerable.CreateOrderedEnumerable<TKey>(
-                    keySelector,
-                    comparer,
-                    true
-                )
+                (QueryOperator<TSource>)
+                    source.OrderedEnumerable.CreateOrderedEnumerable<TKey>(
+                        keySelector,
+                        comparer,
+                        true
+                    )
             );
         }
 

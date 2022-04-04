@@ -2072,25 +2072,27 @@ namespace System.Globalization
         {
             // Build the format flags from the data in this DTFI
             formatFlags =
-                (DateTimeFormatFlags)DateTimeFormatInfoScanner.GetFormatFlagGenitiveMonth(
-                    MonthNames,
-                    InternalGetGenitiveMonthNames(false),
-                    AbbreviatedMonthNames,
-                    InternalGetGenitiveMonthNames(true)
-                )
-                | (DateTimeFormatFlags)DateTimeFormatInfoScanner.GetFormatFlagUseSpaceInMonthNames(
-                    MonthNames,
-                    InternalGetGenitiveMonthNames(false),
-                    AbbreviatedMonthNames,
-                    InternalGetGenitiveMonthNames(true)
-                )
-                | (DateTimeFormatFlags)DateTimeFormatInfoScanner.GetFormatFlagUseSpaceInDayNames(
-                    DayNames,
-                    AbbreviatedDayNames
-                )
-                | (DateTimeFormatFlags)DateTimeFormatInfoScanner.GetFormatFlagUseHebrewCalendar(
-                    (int)Calendar.ID
-                );
+                (DateTimeFormatFlags)
+                    DateTimeFormatInfoScanner.GetFormatFlagGenitiveMonth(
+                        MonthNames,
+                        InternalGetGenitiveMonthNames(false),
+                        AbbreviatedMonthNames,
+                        InternalGetGenitiveMonthNames(true)
+                    )
+                | (DateTimeFormatFlags)
+                    DateTimeFormatInfoScanner.GetFormatFlagUseSpaceInMonthNames(
+                        MonthNames,
+                        InternalGetGenitiveMonthNames(false),
+                        AbbreviatedMonthNames,
+                        InternalGetGenitiveMonthNames(true)
+                    )
+                | (DateTimeFormatFlags)
+                    DateTimeFormatInfoScanner.GetFormatFlagUseSpaceInDayNames(
+                        DayNames,
+                        AbbreviatedDayNames
+                    )
+                | (DateTimeFormatFlags)
+                    DateTimeFormatInfoScanner.GetFormatFlagUseHebrewCalendar((int)Calendar.ID);
             return formatFlags;
         }
 

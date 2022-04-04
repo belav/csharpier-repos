@@ -66,11 +66,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
                     .ConfigureAwait(false);
 
                 var oldRoot = (CompilationUnitSyntax)root;
-                var newRoot = (CompilationUnitSyntax)new Rewriter(
-                    document,
-                    unnecessaryImports,
-                    cancellationToken
-                ).Visit(oldRoot);
+                var newRoot = (CompilationUnitSyntax)
+                    new Rewriter(document, unnecessaryImports, cancellationToken).Visit(oldRoot);
 
                 cancellationToken.ThrowIfCancellationRequested();
                 return document.WithSyntaxRoot(

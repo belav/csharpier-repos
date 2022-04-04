@@ -235,9 +235,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         {
             Check.DebugAssert(designTimeServicesType != null, "designTimeServicesType is null.");
 
-            var designTimeServices = (IDesignTimeServices)Activator.CreateInstance(
-                designTimeServicesType
-            )!;
+            var designTimeServices = (IDesignTimeServices)
+                Activator.CreateInstance(designTimeServicesType)!;
             designTimeServices.ConfigureDesignTimeServices(services);
         }
     }

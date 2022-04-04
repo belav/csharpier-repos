@@ -1349,11 +1349,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
             );
 
             var projectRefs =
-                (IEnumerable<ProjectReference>)ImmutableArray.Create(
-                    new ProjectReference(projectId2),
-                    new ProjectReference(projectId2, ImmutableArray.Create("alias")),
-                    new ProjectReference(projectId2, embedInteropTypes: true)
-                );
+                (IEnumerable<ProjectReference>)
+                    ImmutableArray.Create(
+                        new ProjectReference(projectId2),
+                        new ProjectReference(projectId2, ImmutableArray.Create("alias")),
+                        new ProjectReference(projectId2, embedInteropTypes: true)
+                    );
 
             var solution2 = solution.WithProjectReferences(projectId, projectRefs);
             Assert.Same(projectRefs, solution2.GetProject(projectId)!.AllProjectReferences);
@@ -2472,10 +2473,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
             solution = solution.AddMetadataReference(project1, s_mscorlib);
 
             solution = solution.AddMetadataReference(project1, mefReference);
-            var assemblyReference = (IAssemblySymbol)solution
-                .GetProject(project1)
-                .GetCompilationAsync()
-                .Result.GetAssemblyOrModuleSymbol(mefReference);
+            var assemblyReference = (IAssemblySymbol)
+                solution
+                    .GetProject(project1)
+                    .GetCompilationAsync()
+                    .Result.GetAssemblyOrModuleSymbol(mefReference);
             var namespacesAndTypes = assemblyReference.GlobalNamespace.GetAllNamespacesAndTypes(
                 CancellationToken.None
             );
@@ -2485,10 +2487,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 select symbol;
             Assert.Equal(1, foundSymbol.Count());
             solution = solution.RemoveMetadataReference(project1, mefReference);
-            assemblyReference = (IAssemblySymbol)solution
-                .GetProject(project1)
-                .GetCompilationAsync()
-                .Result.GetAssemblyOrModuleSymbol(mefReference);
+            assemblyReference = (IAssemblySymbol)
+                solution
+                    .GetProject(project1)
+                    .GetCompilationAsync()
+                    .Result.GetAssemblyOrModuleSymbol(mefReference);
             Assert.Null(assemblyReference);
 
             await ValidateSolutionAndCompilationsAsync(solution);

@@ -473,8 +473,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
                 case SyntaxKind.DeclarationExpression:
                 {
-                    var declarationExpression =
-                        (DeclarationExpressionSyntax)possibleTupleDeclaration;
+                    var declarationExpression = (DeclarationExpressionSyntax)
+                        possibleTupleDeclaration;
                     CollectVariablesFromDeconstruction(
                         declarationExpression.Designation,
                         declarationExpression.Type,

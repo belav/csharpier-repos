@@ -23,10 +23,11 @@ namespace Verifier
                 AppDomain.Unload(current);
 
             current = AppDomain.CreateDomain("test");
-            BatchCompiler compiler = (BatchCompiler)current.CreateInstanceAndUnwrap(
-                Assembly.GetExecutingAssembly().FullName,
-                "Verifier.BatchCompiler"
-            );
+            BatchCompiler compiler = (BatchCompiler)
+                current.CreateInstanceAndUnwrap(
+                    Assembly.GetExecutingAssembly().FullName,
+                    "Verifier.BatchCompiler"
+                );
             return compiler;
         }
 

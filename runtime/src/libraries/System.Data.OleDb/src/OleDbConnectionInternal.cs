@@ -647,10 +647,8 @@ namespace System.Data.OleDb
                         )
                         {
                             IntPtr ptr = ADP.IntPtrOffset(schemaGuids, i * ODB.SizeOf_Guid);
-                            supportedSchemas[i]._schemaRowset = (Guid)Marshal.PtrToStructure(
-                                ptr,
-                                typeof(Guid)
-                            )!;
+                            supportedSchemas[i]._schemaRowset = (Guid)
+                                Marshal.PtrToStructure(ptr, typeof(Guid))!;
                         }
                     }
                     if (ADP.PtrZero != schemaRestrictions)

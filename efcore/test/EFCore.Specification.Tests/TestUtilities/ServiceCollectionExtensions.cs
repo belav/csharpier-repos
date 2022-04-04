@@ -29,18 +29,19 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             ServiceLifetime contextLifetime = ServiceLifetime.Scoped,
             ServiceLifetime optionsLifetime = ServiceLifetime.Scoped
         ) =>
-            (IServiceCollection)_addDbContext
-                .MakeGenericMethod(contextType)
-                .Invoke(
-                    null,
-                    new object[]
-                    {
-                        serviceCollection,
-                        optionsAction,
-                        contextLifetime,
-                        optionsLifetime
-                    }
-                );
+            (IServiceCollection)
+                _addDbContext
+                    .MakeGenericMethod(contextType)
+                    .Invoke(
+                        null,
+                        new object[]
+                        {
+                            serviceCollection,
+                            optionsAction,
+                            contextLifetime,
+                            optionsLifetime
+                        }
+                    );
 
         private static readonly MethodInfo _addDbContextPool =
             typeof(EntityFrameworkServiceCollectionExtensions)
@@ -61,8 +62,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Type contextType,
             Action<IServiceProvider, DbContextOptionsBuilder> optionsAction
         ) =>
-            (IServiceCollection)_addDbContextPool
-                .MakeGenericMethod(contextType)
-                .Invoke(null, new object[] { serviceCollection, optionsAction, 128 });
+            (IServiceCollection)
+                _addDbContextPool
+                    .MakeGenericMethod(contextType)
+                    .Invoke(null, new object[] { serviceCollection, optionsAction, 128 });
     }
 }

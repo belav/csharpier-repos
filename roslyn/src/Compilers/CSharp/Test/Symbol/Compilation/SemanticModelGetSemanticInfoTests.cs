@@ -11118,9 +11118,10 @@ namespace N
             Assert.False(
                 SyntaxFacts.IsAttributeName(
                     (
-                        (SourceNamedTypeSymbol)(
-                            (CSharp.Symbols.PublicModel.NamedTypeSymbol)semanticInfo.Symbol
-                        ).UnderlyingNamedTypeSymbol
+                        (SourceNamedTypeSymbol)
+                            (
+                                (CSharp.Symbols.PublicModel.NamedTypeSymbol)semanticInfo.Symbol
+                            ).UnderlyingNamedTypeSymbol
                     ).SyntaxReferences
                         .First()
                         .GetSyntax()
@@ -11166,9 +11167,10 @@ namespace N
             Assert.False(
                 SyntaxFacts.IsAttributeName(
                     (
-                        (SourceNamedTypeSymbol)(
-                            (CSharp.Symbols.PublicModel.NamedTypeSymbol)semanticInfo.Symbol
-                        ).UnderlyingNamedTypeSymbol
+                        (SourceNamedTypeSymbol)
+                            (
+                                (CSharp.Symbols.PublicModel.NamedTypeSymbol)semanticInfo.Symbol
+                            ).UnderlyingNamedTypeSymbol
                     ).SyntaxReferences
                         .First()
                         .GetSyntax()

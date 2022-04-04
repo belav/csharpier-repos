@@ -61,17 +61,17 @@ public class InterlockedCompareExchange1
         {
             for (int i = 0; i < c_NUM_LOOPS; i++)
             {
-                value = (T)(object)TestLibrary.Generator.GetString(
-                    false,
-                    c_MIN_STRING_LEN,
-                    c_MAX_STRING_LEN
-                );
-                location = (T)(object)TestLibrary.Generator.GetString(
-                    -55,
-                    false,
-                    c_MIN_STRING_LEN,
-                    c_MAX_STRING_LEN
-                );
+                value = (T)
+                    (object)
+                        TestLibrary.Generator.GetString(false, c_MIN_STRING_LEN, c_MAX_STRING_LEN);
+                location = (T)
+                    (object)
+                        TestLibrary.Generator.GetString(
+                            -55,
+                            false,
+                            c_MIN_STRING_LEN,
+                            c_MAX_STRING_LEN
+                        );
                 comparand = location;
 
                 // location=comparand, so location should be replaced by value and
@@ -133,27 +133,33 @@ public class InterlockedCompareExchange1
         {
             for (int i = 0; i < c_NUM_LOOPS; i++)
             {
-                value = (T)(object)TestLibrary.Generator.GetString(
-                    -55,
-                    false,
-                    c_MIN_STRING_LEN,
-                    c_MAX_STRING_LEN
-                );
-                location = (T)(object)TestLibrary.Generator.GetString(
-                    -55,
-                    false,
-                    c_MIN_STRING_LEN,
-                    c_MAX_STRING_LEN
-                );
+                value = (T)
+                    (object)
+                        TestLibrary.Generator.GetString(
+                            -55,
+                            false,
+                            c_MIN_STRING_LEN,
+                            c_MAX_STRING_LEN
+                        );
+                location = (T)
+                    (object)
+                        TestLibrary.Generator.GetString(
+                            -55,
+                            false,
+                            c_MIN_STRING_LEN,
+                            c_MAX_STRING_LEN
+                        );
                 comparand = value;
                 while (comparand.Equals(location))
                 {
-                    comparand = (T)(object)TestLibrary.Generator.GetString(
-                        -55,
-                        false,
-                        c_MIN_STRING_LEN,
-                        c_MAX_STRING_LEN
-                    );
+                    comparand = (T)
+                        (object)
+                            TestLibrary.Generator.GetString(
+                                -55,
+                                false,
+                                c_MIN_STRING_LEN,
+                                c_MAX_STRING_LEN
+                            );
                 }
 
                 // location!=comparand, so no swap should take place.

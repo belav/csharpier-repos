@@ -57,9 +57,8 @@ namespace Roslyn.Utilities
                 }
 
                 setter =
-                    (Action<CultureInfo>)currentUICultureSetter.CreateDelegate(
-                        typeof(Action<CultureInfo>)
-                    );
+                    (Action<CultureInfo>)
+                        currentUICultureSetter.CreateDelegate(typeof(Action<CultureInfo>));
                 return true;
             }
             catch

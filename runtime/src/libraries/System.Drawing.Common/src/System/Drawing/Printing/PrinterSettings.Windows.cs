@@ -235,9 +235,8 @@ namespace System.Drawing.Printing
                 {
                     // The printer name is at offset 0
                     //
-                    IntPtr namePointer = (IntPtr)Marshal.ReadIntPtr(
-                        (IntPtr)(checked((long)buffer + i * sizeofstruct))
-                    );
+                    IntPtr namePointer = (IntPtr)
+                        Marshal.ReadIntPtr((IntPtr)(checked((long)buffer + i * sizeofstruct)));
                     array[i] = Marshal.PtrToStringAuto(namePointer)!;
                 }
 
@@ -976,10 +975,8 @@ namespace System.Drawing.Printing
                 }
             }
 
-            Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)Marshal.PtrToStructure(
-                pointer,
-                typeof(Interop.Gdi32.DEVMODE)
-            )!;
+            Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)
+                Marshal.PtrToStructure(pointer, typeof(Interop.Gdi32.DEVMODE))!;
 
             if (_extrainfo != null)
             {
@@ -1066,9 +1063,8 @@ namespace System.Drawing.Printing
 
             // 8 = size of fixed portion of DEVNAMES
             short offset = (short)(8 / Marshal.SystemDefaultCharSize); // Offsets are in characters, not bytes
-            uint namesSize = (uint)checked(
-                Marshal.SystemDefaultCharSize * (offset + namesCharacters)
-            ); // always >0
+            uint namesSize = (uint)
+                checked(Marshal.SystemDefaultCharSize * (offset + namesCharacters)); // always >0
             IntPtr handle = Interop.Kernel32.GlobalAlloc(
                 SafeNativeMethods.GMEM_MOVEABLE | SafeNativeMethods.GMEM_ZEROINIT,
                 namesSize
@@ -1113,10 +1109,8 @@ namespace System.Drawing.Printing
                 }
 
                 IntPtr modePointer = Interop.Kernel32.GlobalLock(new HandleRef(this, modeHandle));
-                Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)Marshal.PtrToStructure(
-                    modePointer,
-                    typeof(Interop.Gdi32.DEVMODE)
-                )!;
+                Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)
+                    Marshal.PtrToStructure(modePointer, typeof(Interop.Gdi32.DEVMODE))!;
                 switch (field)
                 {
                     case ModeField.Orientation:
@@ -1360,10 +1354,8 @@ namespace System.Drawing.Printing
                 throw new ArgumentException(SR.Format(SR.InvalidPrinterHandle, hdevmode));
 
             IntPtr pointer = Interop.Kernel32.GlobalLock(hdevmode);
-            Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)Marshal.PtrToStructure(
-                pointer,
-                typeof(Interop.Gdi32.DEVMODE)
-            )!;
+            Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)
+                Marshal.PtrToStructure(pointer, typeof(Interop.Gdi32.DEVMODE))!;
 
             //Copy entire public devmode as a byte array...
             _devmodebytes = mode.dmSize;

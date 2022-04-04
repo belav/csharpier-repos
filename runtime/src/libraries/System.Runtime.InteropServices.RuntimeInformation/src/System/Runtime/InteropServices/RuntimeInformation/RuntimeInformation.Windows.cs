@@ -56,9 +56,8 @@ namespace System.Runtime.InteropServices
                         Interop.Kernel32.GetNativeSystemInfo(&sysInfo);
                     }
 
-                    osArch = s_osArch = (int)Map(
-                        (Interop.Kernel32.ProcessorArchitecture)sysInfo.wProcessorArchitecture
-                    );
+                    osArch = s_osArch = (int)
+                        Map((Interop.Kernel32.ProcessorArchitecture)sysInfo.wProcessorArchitecture);
                 }
 
                 return (Architecture)osArch;
@@ -81,9 +80,8 @@ namespace System.Runtime.InteropServices
                         Interop.Kernel32.GetSystemInfo(&sysInfo);
                     }
 
-                    processArch = s_processArch = (int)Map(
-                        (Interop.Kernel32.ProcessorArchitecture)sysInfo.wProcessorArchitecture
-                    );
+                    processArch = s_processArch = (int)
+                        Map((Interop.Kernel32.ProcessorArchitecture)sysInfo.wProcessorArchitecture);
                 }
 
                 return (Architecture)processArch;

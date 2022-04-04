@@ -239,9 +239,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 )
             );
 
-            var ctor = (MethodSymbol)_compilation.Assembly.GetSpecialTypeMember(
-                SpecialMember.System_DateTime__CtorInt64
-            );
+            var ctor = (MethodSymbol)
+                _compilation.Assembly.GetSpecialTypeMember(
+                    SpecialMember.System_DateTime__CtorInt64
+                );
             Debug.Assert((object)ctor != null);
             Debug.Assert(ctor.ContainingType.SpecialType == SpecialType.System_DateTime);
 

@@ -255,11 +255,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 UpdatePrincipalKeyConfigurationSource(configurationSource.Value);
             }
 
-            return (IReadOnlyList<Property>)DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyPropertiesChanged(
-                Builder,
-                oldProperties,
-                oldPrincipalKey
-            )!;
+            return (IReadOnlyList<Property>)
+                DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyPropertiesChanged(
+                    Builder,
+                    oldProperties,
+                    oldPrincipalKey
+                )!;
         }
 
         /// <summary>
@@ -647,9 +648,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             if (navigation != null)
             {
-                navigation = (Navigation?)DeclaringEntityType.Model.ConventionDispatcher
-                    .OnNavigationAdded(navigation.Builder)
-                    ?.Metadata;
+                navigation = (Navigation?)
+                    DeclaringEntityType.Model.ConventionDispatcher
+                        .OnNavigationAdded(navigation.Builder)
+                        ?.Metadata;
             }
             else
             {

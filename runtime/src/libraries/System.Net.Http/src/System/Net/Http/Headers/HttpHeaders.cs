@@ -329,9 +329,8 @@ namespace System.Net.Http.Headers
             _headerStore != null && _headerStore.Count > 0
                 ? GetEnumeratorCore()
                 : (
-                      (IEnumerable<KeyValuePair<string, IEnumerable<string>>>)Array.Empty<
-                          KeyValuePair<string, IEnumerable<string>>
-                      >()
+                      (IEnumerable<KeyValuePair<string, IEnumerable<string>>>)
+                          Array.Empty<KeyValuePair<string, IEnumerable<string>>>()
                   ).GetEnumerator();
 
         private IEnumerator<KeyValuePair<string, IEnumerable<string>>> GetEnumeratorCore()

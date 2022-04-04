@@ -324,10 +324,12 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
 
                 // add invocation expression
                 return statements.Concat(
-                    (TStatement)(SyntaxNode)await GetStatementOrInitializerContainingInvocationToExtractedMethodAsync(
-                            cancellationToken
-                        )
-                        .ConfigureAwait(false)
+                    (TStatement)
+                        (SyntaxNode)
+                            await GetStatementOrInitializerContainingInvocationToExtractedMethodAsync(
+                                    cancellationToken
+                                )
+                                .ConfigureAwait(false)
                 );
             }
 

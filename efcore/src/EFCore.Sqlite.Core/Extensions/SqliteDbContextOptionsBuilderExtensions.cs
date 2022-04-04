@@ -75,8 +75,8 @@ namespace Microsoft.EntityFrameworkCore
             Check.NotNull(optionsBuilder, nameof(optionsBuilder));
             Check.NotEmpty(connectionString, nameof(connectionString));
 
-            var extension = (SqliteOptionsExtension)GetOrCreateExtension(optionsBuilder)
-                .WithConnectionString(connectionString);
+            var extension = (SqliteOptionsExtension)
+                GetOrCreateExtension(optionsBuilder).WithConnectionString(connectionString);
             ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
                 extension
             );
@@ -112,8 +112,8 @@ namespace Microsoft.EntityFrameworkCore
             Check.NotNull(optionsBuilder, nameof(optionsBuilder));
             Check.NotNull(connection, nameof(connection));
 
-            var extension = (SqliteOptionsExtension)GetOrCreateExtension(optionsBuilder)
-                .WithConnection(connection);
+            var extension = (SqliteOptionsExtension)
+                GetOrCreateExtension(optionsBuilder).WithConnection(connection);
             ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
                 extension
             );
@@ -147,10 +147,8 @@ namespace Microsoft.EntityFrameworkCore
             this DbContextOptionsBuilder<TContext> optionsBuilder,
             Action<SqliteDbContextOptionsBuilder>? sqliteOptionsAction = null
         ) where TContext : DbContext =>
-            (DbContextOptionsBuilder<TContext>)UseSqlite(
-                (DbContextOptionsBuilder)optionsBuilder,
-                sqliteOptionsAction
-            );
+            (DbContextOptionsBuilder<TContext>)
+                UseSqlite((DbContextOptionsBuilder)optionsBuilder, sqliteOptionsAction);
 
         /// <summary>
         ///     Configures the context to connect to a SQLite database.
@@ -169,11 +167,12 @@ namespace Microsoft.EntityFrameworkCore
             string connectionString,
             Action<SqliteDbContextOptionsBuilder>? sqliteOptionsAction = null
         ) where TContext : DbContext =>
-            (DbContextOptionsBuilder<TContext>)UseSqlite(
-                (DbContextOptionsBuilder)optionsBuilder,
-                connectionString,
-                sqliteOptionsAction
-            );
+            (DbContextOptionsBuilder<TContext>)
+                UseSqlite(
+                    (DbContextOptionsBuilder)optionsBuilder,
+                    connectionString,
+                    sqliteOptionsAction
+                );
 
         /// <summary>
         ///     Configures the context to connect to a SQLite database.
@@ -196,11 +195,8 @@ namespace Microsoft.EntityFrameworkCore
             DbConnection connection,
             Action<SqliteDbContextOptionsBuilder>? sqliteOptionsAction = null
         ) where TContext : DbContext =>
-            (DbContextOptionsBuilder<TContext>)UseSqlite(
-                (DbContextOptionsBuilder)optionsBuilder,
-                connection,
-                sqliteOptionsAction
-            );
+            (DbContextOptionsBuilder<TContext>)
+                UseSqlite((DbContextOptionsBuilder)optionsBuilder, connection, sqliteOptionsAction);
 
         private static SqliteOptionsExtension GetOrCreateExtension(
             DbContextOptionsBuilder options

@@ -199,8 +199,8 @@ namespace System.Runtime.Serialization
                                         field.Name
                                     )
                                 );
-                            EnumMemberAttribute memberAttribute =
-                                (EnumMemberAttribute)memberAttributes[0];
+                            EnumMemberAttribute memberAttribute = (EnumMemberAttribute)
+                                memberAttributes[0];
 
                             DataMember memberContract = new DataMember(field);
                             if (memberAttribute.IsValueSetExplicitly)

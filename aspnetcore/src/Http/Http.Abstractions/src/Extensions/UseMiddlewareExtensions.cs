@@ -146,10 +146,8 @@ public static class UseMiddlewareExtensions
                 );
                 if (parameters.Length == 1)
                 {
-                    return (RequestDelegate)methodInfo.CreateDelegate(
-                        typeof(RequestDelegate),
-                        instance
-                    );
+                    return (RequestDelegate)
+                        methodInfo.CreateDelegate(typeof(RequestDelegate), instance);
                 }
 
                 var factory = Compile<object>(methodInfo, parameters);
@@ -183,9 +181,8 @@ public static class UseMiddlewareExtensions
             {
                 return async context =>
                 {
-                    var middlewareFactory = (IMiddlewareFactory?)context.RequestServices.GetService(
-                        typeof(IMiddlewareFactory)
-                    );
+                    var middlewareFactory = (IMiddlewareFactory?)
+                        context.RequestServices.GetService(typeof(IMiddlewareFactory));
                     if (middlewareFactory == null)
                     {
                         // No middleware factory

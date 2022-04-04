@@ -120,10 +120,8 @@ namespace System.Web.Http.SelfHost.Channels
                 return null;
             }
 
-            return (IChannelListener<TChannel>)new HttpMessageEncodingChannelListener(
-                context.Binding,
-                innerListener
-            );
+            return (IChannelListener<TChannel>)
+                new HttpMessageEncodingChannelListener(context.Binding, innerListener);
         }
 
         /// <summary>

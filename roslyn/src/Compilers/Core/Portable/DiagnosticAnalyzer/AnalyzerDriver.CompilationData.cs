@@ -22,8 +22,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             {
                 Debug.Assert(compilation.SemanticModelProvider is CachingSemanticModelProvider);
 
-                SemanticModelProvider =
-                    (CachingSemanticModelProvider)compilation.SemanticModelProvider;
+                SemanticModelProvider = (CachingSemanticModelProvider)
+                    compilation.SemanticModelProvider;
                 this.SuppressMessageAttributeState = new SuppressMessageAttributeState(compilation);
                 _declarationAnalysisDataMap =
                     new Dictionary<SyntaxReference, DeclarationAnalysisData>();

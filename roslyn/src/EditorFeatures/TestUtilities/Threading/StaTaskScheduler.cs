@@ -33,16 +33,17 @@ namespace Roslyn.Test.Utilities
                 BindingFlags.NonPublic | BindingFlags.Static
             );
             var defaultDomain = (AppDomain)getDefaultDomain.Invoke(null, null);
-            var hook = (XunitDisposeHook)defaultDomain.CreateInstanceFromAndUnwrap(
-                typeof(XunitDisposeHook).Assembly.CodeBase,
-                typeof(XunitDisposeHook).FullName,
-                ignoreCase: false,
-                BindingFlags.CreateInstance,
-                binder: null,
-                args: null,
-                culture: null,
-                activationAttributes: null
-            );
+            var hook = (XunitDisposeHook)
+                defaultDomain.CreateInstanceFromAndUnwrap(
+                    typeof(XunitDisposeHook).Assembly.CodeBase,
+                    typeof(XunitDisposeHook).FullName,
+                    ignoreCase: false,
+                    BindingFlags.CreateInstance,
+                    binder: null,
+                    args: null,
+                    culture: null,
+                    activationAttributes: null
+                );
             hook.Execute();
 
             // We've created an STA thread, which has some extra requirements for COM Runtime

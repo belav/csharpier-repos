@@ -238,9 +238,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             params ChangedOnlyNotificationEntity[] items
         ) =>
             ourCollection
-                ? (ICollection<ChangedOnlyNotificationEntity>)new ObservableHashSet<ChangedOnlyNotificationEntity>(
-                      items
-                  )
+                ? (ICollection<ChangedOnlyNotificationEntity>)
+                      new ObservableHashSet<ChangedOnlyNotificationEntity>(items)
                 : new ObservableCollection<ChangedOnlyNotificationEntity>(items);
 
         private static TestNavigationListener SetupTestCollectionListener(

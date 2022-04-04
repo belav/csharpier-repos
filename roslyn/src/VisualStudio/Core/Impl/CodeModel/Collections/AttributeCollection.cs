@@ -47,13 +47,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
                 out var ordinal
             );
 
-            return (EnvDTE.CodeElement)CodeAttribute.Create(
-                this.State,
-                this.FileCodeModel,
-                this.ParentElement,
-                name,
-                ordinal
-            );
+            return (EnvDTE.CodeElement)
+                CodeAttribute.Create(
+                    this.State,
+                    this.FileCodeModel,
+                    this.ParentElement,
+                    name,
+                    ordinal
+                );
         }
 
         protected override bool TryGetItemByIndex(int index, out EnvDTE.CodeElement element)
@@ -87,13 +88,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
                 );
                 if (childName == name)
                 {
-                    element = (EnvDTE.CodeElement)CodeAttribute.Create(
-                        State,
-                        FileCodeModel,
-                        this.ParentElement,
-                        childName,
-                        ordinal
-                    );
+                    element = (EnvDTE.CodeElement)
+                        CodeAttribute.Create(
+                            State,
+                            FileCodeModel,
+                            this.ParentElement,
+                            childName,
+                            ordinal
+                        );
                     return true;
                 }
             }

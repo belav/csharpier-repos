@@ -227,10 +227,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                     (uint)BUFFERSTATEFLAGS.BSF_USER_READONLY
                 );
 
-                var runningDocumentTable =
-                    (IVsRunningDocumentTable)SystemServiceProvider.GetService(
-                        typeof(SVsRunningDocumentTable)
-                    );
+                var runningDocumentTable = (IVsRunningDocumentTable)
+                    SystemServiceProvider.GetService(typeof(SVsRunningDocumentTable));
                 var runningDocumentTable4 = (IVsRunningDocumentTable4)runningDocumentTable;
 
                 if (runningDocumentTable4.IsMonikerValid(openDocument.FilePath))

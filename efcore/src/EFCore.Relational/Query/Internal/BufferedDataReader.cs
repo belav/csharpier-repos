@@ -884,9 +884,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     TypeCase.UInt => (T)(object)GetUInt32(ordinal),
                     TypeCase.ULong => (T)(object)GetUInt64(ordinal),
                     _
-                      => (T)_objects[
-                          _currentRowNumber * _objectCount + _ordinalToIndexMap[ordinal]
-                      ],
+                      => (T)
+                          _objects[_currentRowNumber * _objectCount + _ordinalToIndexMap[ordinal]],
                 };
 
             public bool IsDBNull(int ordinal) =>

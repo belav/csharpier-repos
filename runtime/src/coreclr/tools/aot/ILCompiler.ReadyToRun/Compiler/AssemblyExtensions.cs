@@ -41,8 +41,8 @@ namespace ILCompiler
                     {
                         ThrowHelper.ThrowBadImageFormatException();
                     }
-                    DebuggableAttribute.DebuggingModes modes =
-                        (DebuggableAttribute.DebuggingModes)decoded.FixedArguments[0].Value;
+                    DebuggableAttribute.DebuggingModes modes = (DebuggableAttribute.DebuggingModes)
+                        decoded.FixedArguments[0].Value;
                     result =
                         modes.HasFlag(DebuggableAttribute.DebuggingModes.DisableOptimizations)
                         && modes.HasFlag(DebuggableAttribute.DebuggingModes.Default);

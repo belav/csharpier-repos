@@ -170,9 +170,8 @@ namespace System.Reflection
             for (int i = 0; i < cAssociates; i++)
             {
                 int methodDefToken = associatesData[i * 2];
-                MethodSemanticsAttributes semantics = (MethodSemanticsAttributes)associatesData[
-                    i * 2 + 1
-                ];
+                MethodSemanticsAttributes semantics = (MethodSemanticsAttributes)
+                    associatesData[i * 2 + 1];
 
                 #region Assign each associate
                 RuntimeMethodInfo? associateMethod = AssignAssociates(

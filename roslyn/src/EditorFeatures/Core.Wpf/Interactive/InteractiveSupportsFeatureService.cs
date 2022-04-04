@@ -30,9 +30,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Interactive
 
             private static bool IsActiveLanguageBuffer(ITextBuffer textBuffer)
             {
-                var evaluator = (IInteractiveEvaluator)textBuffer.Properties[
-                    typeof(IInteractiveEvaluator)
-                ];
+                var evaluator = (IInteractiveEvaluator)
+                    textBuffer.Properties[typeof(IInteractiveEvaluator)];
                 var window = evaluator?.CurrentWindow;
                 if (window?.CurrentLanguageBuffer == textBuffer)
                 {

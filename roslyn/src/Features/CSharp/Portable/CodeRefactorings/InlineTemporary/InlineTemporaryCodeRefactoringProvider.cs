@@ -488,9 +488,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
 
             var newScope = scope.ReplaceToken(nextToken, newNextToken);
 
-            var newLocalDeclaration = (LocalDeclarationStatementSyntax)FindDeclarator(
-                newScope
-            ).Parent.Parent;
+            var newLocalDeclaration = (LocalDeclarationStatementSyntax)
+                FindDeclarator(newScope).Parent.Parent;
 
             // If the local is parented by a label statement, we can't remove this statement. Instead,
             // we'll replace the local declaration with an empty expression statement.
@@ -534,10 +533,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                 .ConfigureAwait(false);
             var expression = variableDeclarator.Initializer.Value.WalkDownParentheses();
 
-            var localSymbol = (ILocalSymbol)semanticModel.GetDeclaredSymbol(
-                variableDeclarator,
-                cancellationToken
-            );
+            var localSymbol = (ILocalSymbol)
+                semanticModel.GetDeclaredSymbol(variableDeclarator, cancellationToken);
 
             if (expression is ImplicitObjectCreationExpressionSyntax implicitCreation)
             {

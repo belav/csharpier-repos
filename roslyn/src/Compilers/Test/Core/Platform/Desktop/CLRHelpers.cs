@@ -108,16 +108,18 @@ namespace Roslyn.Test.Utilities.Desktop
                 {
                     IntPtr buffer = pinned.AddrOfPinnedObject();
 
-                    ICLRValidator validator = (ICLRValidator)GetRuntimeInterfaceAsObject(
-                        s_clsIdClrRuntimeHost,
-                        typeof(ICLRRuntimeHost).GUID
-                    );
+                    ICLRValidator validator = (ICLRValidator)
+                        GetRuntimeInterfaceAsObject(
+                            s_clsIdClrRuntimeHost,
+                            typeof(ICLRRuntimeHost).GUID
+                        );
                     ValidationErrorHandler errorHandler = new ValidationErrorHandler(validator);
 
-                    IMetaDataDispenser dispenser = (IMetaDataDispenser)GetRuntimeInterfaceAsObject(
-                        s_clsIdCorMetaDataDispenser,
-                        typeof(IMetaDataDispenser).GUID
-                    );
+                    IMetaDataDispenser dispenser = (IMetaDataDispenser)
+                        GetRuntimeInterfaceAsObject(
+                            s_clsIdCorMetaDataDispenser,
+                            typeof(IMetaDataDispenser).GUID
+                        );
 
                     // the buffer needs to be pinned during validation
                     Guid riid = typeof(IMetaDataImport).GUID;

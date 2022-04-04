@@ -7124,10 +7124,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Gear>()
                         .Select(
                             g =>
-                                (int?)g.Weapons
-                                    .OrderBy(w => w.Id)
-                                    .Select(w => w.Id)
-                                    .FirstOrDefault() ?? 42
+                                (int?)
+                                    g.Weapons.OrderBy(w => w.Id).Select(w => w.Id).FirstOrDefault()
+                                ?? 42
                         )
             );
         }
@@ -7189,11 +7188,12 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Gear>()
                         .Select(
                             g =>
-                                (bool?)g.Weapons
-                                    .Where(w => w.Name == "BFG")
-                                    .OrderBy(w => w.Id)
-                                    .FirstOrDefault()
-                                    .IsAutomatic
+                                (bool?)
+                                    g.Weapons
+                                        .Where(w => w.Name == "BFG")
+                                        .OrderBy(w => w.Id)
+                                        .FirstOrDefault()
+                                        .IsAutomatic
                         ),
                 ss => ss.Set<Gear>().Select(g => (bool?)null)
             );
@@ -7317,11 +7317,12 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Where(g => g.HasSoulPatch)
                         .Select(
                             g =>
-                                (bool?)g.Weapons
-                                    .Where(w => w.Name == "BFG")
-                                    .Distinct()
-                                    .SingleOrDefault()
-                                    .IsAutomatic
+                                (bool?)
+                                    g.Weapons
+                                        .Where(w => w.Name == "BFG")
+                                        .Distinct()
+                                        .SingleOrDefault()
+                                        .IsAutomatic
                         ),
                 ss => ss.Set<Gear>().Where(g => g.HasSoulPatch).Select(g => (bool?)null),
                 assertOrder: true
@@ -12070,9 +12071,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     DefeatedBy = (l as LocustCommander).DefeatedBy,
                                     IsNull = (l as LocustCommander).DefeatedBy == null,
                                     Property = (l as LocustCommander).DefeatedByNickname,
-                                    PropertyAfterNavigation = (bool?)(l as LocustCommander)
-                                        .DefeatedBy
-                                        .HasSoulPatch,
+                                    PropertyAfterNavigation = (bool?)
+                                        (l as LocustCommander).DefeatedBy.HasSoulPatch,
                                     NestedOuter = new
                                     {
                                         CommandingFaction = (
@@ -12105,9 +12105,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     DefeatedBy = (l as LocustCommander).DefeatedBy,
                                     IsNull = (l as LocustCommander).DefeatedBy == null,
                                     Property = (l as LocustCommander).DefeatedByNickname,
-                                    PropertyAfterNavigation = (bool?)(l as LocustCommander)
-                                        .DefeatedBy
-                                        .HasSoulPatch,
+                                    PropertyAfterNavigation = (bool?)
+                                        (l as LocustCommander).DefeatedBy.HasSoulPatch,
                                     NestedOuter = new
                                     {
                                         CommandingFaction = (

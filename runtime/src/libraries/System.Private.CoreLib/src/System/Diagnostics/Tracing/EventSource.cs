@@ -347,10 +347,8 @@ namespace System.Diagnostics.Tracing
             if (eventSourceType == null)
                 throw new ArgumentNullException(nameof(eventSourceType));
 
-            EventSourceAttribute? attrib = (EventSourceAttribute?)GetCustomAttributeHelper(
-                eventSourceType,
-                typeof(EventSourceAttribute)
-            );
+            EventSourceAttribute? attrib = (EventSourceAttribute?)
+                GetCustomAttributeHelper(eventSourceType, typeof(EventSourceAttribute));
             string name = eventSourceType.Name;
             if (attrib != null)
             {
@@ -1921,11 +1919,8 @@ namespace System.Diagnostics.Tracing
             if (eventSourceType == null)
                 throw new ArgumentNullException(nameof(eventSourceType));
 
-            EventSourceAttribute? attrib = (EventSourceAttribute?)GetCustomAttributeHelper(
-                eventSourceType,
-                typeof(EventSourceAttribute),
-                flags
-            );
+            EventSourceAttribute? attrib = (EventSourceAttribute?)
+                GetCustomAttributeHelper(eventSourceType, typeof(EventSourceAttribute), flags);
             if (attrib != null && attrib.Name != null)
                 return attrib.Name;
 
@@ -3604,10 +3599,11 @@ namespace System.Diagnostics.Tracing
 
                     if (data.ConstructorArguments.Count == 1)
                     {
-                        attr = (Attribute?)Activator.CreateInstance(
-                            attributeType,
-                            new object?[] { data.ConstructorArguments[0].Value }
-                        );
+                        attr = (Attribute?)
+                            Activator.CreateInstance(
+                                attributeType,
+                                new object?[] { data.ConstructorArguments[0].Value }
+                            );
                     }
                     else if (data.ConstructorArguments.Count == 0)
                     {
@@ -3776,12 +3772,8 @@ namespace System.Diagnostics.Tracing
 
                 // See if we have localization information.
                 ResourceManager? resources = null;
-                EventSourceAttribute? eventSourceAttrib =
-                    (EventSourceAttribute?)GetCustomAttributeHelper(
-                        eventSourceType,
-                        typeof(EventSourceAttribute),
-                        flags
-                    );
+                EventSourceAttribute? eventSourceAttrib = (EventSourceAttribute?)
+                    GetCustomAttributeHelper(eventSourceType, typeof(EventSourceAttribute), flags);
                 if (eventSourceAttrib != null && eventSourceAttrib.LocalizationResources != null)
                     resources = new ResourceManager(
                         eventSourceAttrib.LocalizationResources,
@@ -3897,11 +3889,8 @@ namespace System.Diagnostics.Tracing
                         ParameterInfo[] args = method.GetParameters();
 
                         // Get the EventDescriptor (from the Custom attributes)
-                        EventAttribute? eventAttribute = (EventAttribute?)GetCustomAttributeHelper(
-                            method,
-                            typeof(EventAttribute),
-                            flags
-                        );
+                        EventAttribute? eventAttribute = (EventAttribute?)
+                            GetCustomAttributeHelper(method, typeof(EventAttribute), flags);
 
                         // Compat: until v4.5.1 we ignored any non-void returning methods as well as virtual methods for
                         // the only reason of limiting the number of methods considered to be events. This broke a common
@@ -4062,9 +4051,8 @@ namespace System.Diagnostics.Tracing
                                         )
                                         {
                                             // Make the stop event match the start event
-                                            eventAttribute.Task = (EventTask)startEventMetadata
-                                                .Descriptor
-                                                .Task;
+                                            eventAttribute.Task = (EventTask)
+                                                startEventMetadata.Descriptor.Task;
                                             noTask = false;
                                         }
                                     }
@@ -4112,8 +4100,8 @@ namespace System.Diagnostics.Tracing
                             {
                                 unchecked
                                 {
-                                    eventAttribute.Keywords |=
-                                        (EventKeywords)manifest.GetChannelKeyword(
+                                    eventAttribute.Keywords |= (EventKeywords)
+                                        manifest.GetChannelKeyword(
                                             eventAttribute.Channel,
                                             (ulong)eventAttribute.Keywords
                                         );
@@ -4284,10 +4272,8 @@ namespace System.Diagnostics.Tracing
             {
                 if (providerEnumKind != "Channels")
                     goto Error;
-                var channelAttribute = (EventChannelAttribute)GetCustomAttributeHelper(
-                    staticField,
-                    typeof(EventChannelAttribute)
-                );
+                var channelAttribute = (EventChannelAttribute)
+                    GetCustomAttributeHelper(staticField, typeof(EventChannelAttribute));
                 manifest.AddChannel(
                     staticField.Name,
                     (byte)staticField.GetRawConstantValue(),
@@ -4335,7 +4321,8 @@ namespace System.Diagnostics.Tracing
 #if FEATURE_MANAGED_ETW_CHANNELS
                 (byte)eventAttribute.Channel,
 #else
-                (byte)0,
+                (byte)
+                    0,
 #endif
                 (byte)eventAttribute.Level,
                 (byte)eventAttribute.Opcode,
@@ -4916,19 +4903,13 @@ namespace System.Diagnostics.Tracing
             {
                 CallBackForExistingEventSources(false, value);
 
-                this._EventSourceCreated =
-                    (EventHandler<EventSourceCreatedEventArgs>?)Delegate.Combine(
-                        _EventSourceCreated,
-                        value
-                    );
+                this._EventSourceCreated = (EventHandler<EventSourceCreatedEventArgs>?)
+                    Delegate.Combine(_EventSourceCreated, value);
             }
             remove
             {
-                this._EventSourceCreated =
-                    (EventHandler<EventSourceCreatedEventArgs>?)Delegate.Remove(
-                        _EventSourceCreated,
-                        value
-                    );
+                this._EventSourceCreated = (EventHandler<EventSourceCreatedEventArgs>?)
+                    Delegate.Remove(_EventSourceCreated, value);
             }
         }
 

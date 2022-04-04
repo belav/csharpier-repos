@@ -2192,9 +2192,8 @@ namespace System.Net.Tests
                     {
                         return true;
                     };
-                    using HttpWebResponse response = (HttpWebResponse)await GetResponseAsync(
-                        request
-                    );
+                    using HttpWebResponse response = (HttpWebResponse)
+                        await GetResponseAsync(request);
                     Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                 },
                 server => server.HandleRequestAsync(),
@@ -2224,9 +2223,8 @@ namespace System.Net.Tests
                         requestStream.Write(_requestBodyBytes, 0, _requestBodyBytes.Length);
                     }
 
-                    using HttpWebResponse response = (HttpWebResponse)await GetResponseAsync(
-                        request
-                    );
+                    using HttpWebResponse response = (HttpWebResponse)
+                        await GetResponseAsync(request);
                     Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                 },
                 server => server.HandleRequestAsync(),
@@ -2253,9 +2251,8 @@ namespace System.Net.Tests
                     };
                     request.ContentType = ContentType;
 
-                    using HttpWebResponse response = (HttpWebResponse)await GetResponseAsync(
-                        request
-                    );
+                    using HttpWebResponse response = (HttpWebResponse)
+                        await GetResponseAsync(request);
                     Assert.Equal(ContentType, response.Headers[HttpResponseHeader.ContentType]);
                 },
                 async server =>
@@ -2850,9 +2847,8 @@ namespace System.Net.Tests
             try
             {
                 using (
-                    HttpWebResponse response = (HttpWebResponse)state.Request.EndGetResponse(
-                        asynchronousResult
-                    )
+                    HttpWebResponse response = (HttpWebResponse)
+                        state.Request.EndGetResponse(asynchronousResult)
                 )
                 {
                     state.SavedResponseHeaders = response.Headers;

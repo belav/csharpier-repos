@@ -149,9 +149,10 @@ namespace Microsoft.CodeAnalysis
                 == SpecialType.System_Int16
             )
             {
-                unmanagedType = (UnmanagedType)attribute.CommonConstructorArguments[
-                    0
-                ].DecodeValue<short>(SpecialType.System_Int16);
+                unmanagedType = (UnmanagedType)
+                    attribute.CommonConstructorArguments[0].DecodeValue<short>(
+                        SpecialType.System_Int16
+                    );
             }
             else
             {

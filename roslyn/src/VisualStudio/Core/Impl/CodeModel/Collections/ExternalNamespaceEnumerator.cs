@@ -89,11 +89,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             {
                 if (child is INamespaceSymbol namespaceChild)
                 {
-                    yield return (EnvDTE.CodeElement)ExternalCodeNamespace.Create(
-                        state,
-                        projectId,
-                        namespaceChild
-                    );
+                    yield return (EnvDTE.CodeElement)
+                        ExternalCodeNamespace.Create(state, projectId, namespaceChild);
                 }
                 else
                 {

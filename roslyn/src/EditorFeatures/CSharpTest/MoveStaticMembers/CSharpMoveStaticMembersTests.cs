@@ -3093,8 +3093,8 @@ namespace TestNs1
                 var hostServices = s_testServices.GetHostServices();
 
                 var workspace = new AdhocWorkspace(hostServices);
-                var testOptionsService =
-                    (TestMoveStaticMembersService)workspace.Services.GetRequiredService<IMoveStaticMembersOptionsService>();
+                var testOptionsService = (TestMoveStaticMembersService)
+                    workspace.Services.GetRequiredService<IMoveStaticMembersOptionsService>();
                 testOptionsService.DestinationType = _destinationType;
                 testOptionsService.SelectedMembers = _selection;
                 testOptionsService.Filename = _destinationName;

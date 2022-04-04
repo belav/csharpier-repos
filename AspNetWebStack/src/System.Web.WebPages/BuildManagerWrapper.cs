@@ -209,9 +209,8 @@ namespace System.Web.WebPages
         {
             if (_isPrecompiled)
             {
-                var buildManagerResult = (BuildManagerResult)HttpRuntime.Cache.Get(
-                    GetKeyFromVirtualPath(virtualPath)
-                );
+                var buildManagerResult = (BuildManagerResult)
+                    HttpRuntime.Cache.Get(GetKeyFromVirtualPath(virtualPath));
                 // The cache could have evicted our results. In this case, we'll simply fall through to CreateInstanceFromVirtualPath
                 if (buildManagerResult != null)
                 {

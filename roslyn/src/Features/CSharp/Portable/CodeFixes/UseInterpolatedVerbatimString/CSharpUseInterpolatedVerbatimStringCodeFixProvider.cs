@@ -80,8 +80,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseInterpolatedVerbatimString
         )
         {
             var verbatimInterpolatedLocation = diagnostic.Location;
-            var verbatimInterpolated =
-                (InterpolatedStringExpressionSyntax)verbatimInterpolatedLocation.FindNode(
+            var verbatimInterpolated = (InterpolatedStringExpressionSyntax)
+                verbatimInterpolatedLocation.FindNode(
                     getInnermostNodeForTie: true,
                     cancellationToken
                 );

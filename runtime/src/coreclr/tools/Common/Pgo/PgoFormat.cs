@@ -439,8 +439,8 @@ namespace Internal.Pgo
                 int TypeDiff =
                     (int)schema.InstrumentationKind - (int)prevSchema.InstrumentationKind;
 
-                InstrumentationDataProcessingState modifyMask =
-                    (InstrumentationDataProcessingState)0;
+                InstrumentationDataProcessingState modifyMask = (InstrumentationDataProcessingState)
+                    0;
 
                 if (!emitAllElementsUnconditionally)
                 {

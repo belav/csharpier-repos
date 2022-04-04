@@ -97,8 +97,8 @@ namespace OLEDB.Test.ModuleCore
 
         public static Func<CTestModule> GetGenerator(Type type, string methodName)
         {
-            ModuleGenerator moduleGenerator = (ModuleGenerator)type.GetMethod(methodName)
-                .CreateDelegate(typeof(ModuleGenerator));
+            ModuleGenerator moduleGenerator = (ModuleGenerator)
+                type.GetMethod(methodName).CreateDelegate(typeof(ModuleGenerator));
             return new Func<CTestModule>(moduleGenerator);
         }
 

@@ -740,10 +740,8 @@ namespace System.Text.RegularExpressions.Tests
                 .GetMethod("GenerateRandomMembers", BindingFlags.NonPublic | BindingFlags.Instance);
             if (gen is not null)
             {
-                return (IEnumerable<string>)gen.Invoke(
-                    regex,
-                    new object[] { how_many_inputs, randomseed, negative }
-                );
+                return (IEnumerable<string>)
+                    gen.Invoke(regex, new object[] { how_many_inputs, randomseed, negative });
             }
             else
             {

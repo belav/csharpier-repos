@@ -511,10 +511,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             // .NET Core has removed the Thread class. We can get the managed thread id by making a call to
             // Environment.CurrentManagedThreadId. If that method is not present (pre 4.5) fall back to the old behavior.
 
-            var currentManagedThreadIdProperty = (PropertySymbol)F.WellKnownMember(
-                WellKnownMember.System_Environment__CurrentManagedThreadId,
-                isOptional: true
-            );
+            var currentManagedThreadIdProperty = (PropertySymbol)
+                F.WellKnownMember(
+                    WellKnownMember.System_Environment__CurrentManagedThreadId,
+                    isOptional: true
+                );
             if ((object)currentManagedThreadIdProperty != null)
             {
                 MethodSymbol currentManagedThreadIdMethod =
@@ -701,14 +702,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         protected bool CanGetThreadId()
         {
-            return (object)F.WellKnownMember(
-                    WellKnownMember.System_Threading_Thread__ManagedThreadId,
-                    isOptional: true
-                ) != null
-                || (object)F.WellKnownMember(
-                    WellKnownMember.System_Environment__CurrentManagedThreadId,
-                    isOptional: true
-                ) != null;
+            return (object)
+                    F.WellKnownMember(
+                        WellKnownMember.System_Threading_Thread__ManagedThreadId,
+                        isOptional: true
+                    ) != null
+                || (object)
+                    F.WellKnownMember(
+                        WellKnownMember.System_Environment__CurrentManagedThreadId,
+                        isOptional: true
+                    ) != null;
         }
     }
 }

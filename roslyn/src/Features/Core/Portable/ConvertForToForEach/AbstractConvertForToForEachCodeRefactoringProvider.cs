@@ -420,10 +420,13 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
                 var indexerType = GetIndexerType(containingType, collectionType);
                 if (!Equals(indexerType, iterationType))
                 {
-                    typeNode = (TTypeNode)generator.TypeExpression(
-                        indexerType
-                            ?? semanticModel.Compilation.GetSpecialType(SpecialType.System_Object)
-                    );
+                    typeNode = (TTypeNode)
+                        generator.TypeExpression(
+                            indexerType
+                                ?? semanticModel.Compilation.GetSpecialType(
+                                    SpecialType.System_Object
+                                )
+                        );
                 }
             }
 
@@ -509,9 +512,10 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
                                     )
                                 )
                                 {
-                                    var type = (TTypeNode?)syntaxFacts
-                                        .GetTypeOfVariableDeclarator(firstVariable)
-                                        ?.WithoutLeadingTrivia();
+                                    var type = (TTypeNode?)
+                                        syntaxFacts
+                                            .GetTypeOfVariableDeclarator(firstVariable)
+                                            ?.WithoutLeadingTrivia();
                                     var identifier = syntaxFacts.GetIdentifierOfVariableDeclarator(
                                         firstVariable
                                     );

@@ -251,9 +251,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 .OfType<MethodSymbol>()
                 .Single();
             ImmutableArray<ParameterSymbol> param = refMethodSymbol.Parameters;
-            NoPiaMissingCanonicalTypeSymbol missing = (NoPiaMissingCanonicalTypeSymbol)param
-                .First()
-                .Type;
+            NoPiaMissingCanonicalTypeSymbol missing = (NoPiaMissingCanonicalTypeSymbol)
+                param.First().Type;
 
             Assert.Same(
                 localConsumerRefsAsm.First(arg => arg.Name == "ExternalAsm1"),
@@ -389,8 +388,8 @@ static class TypeSubstitution
                 .GetMembers("Scen3")
                 .OfType<MethodSymbol>()
                 .Single();
-            NoPiaMissingCanonicalTypeSymbol missing =
-                (NoPiaMissingCanonicalTypeSymbol)methodSymbol.ReturnType;
+            NoPiaMissingCanonicalTypeSymbol missing = (NoPiaMissingCanonicalTypeSymbol)
+                methodSymbol.ReturnType;
 
             Assert.Same(
                 localConsumerRefsAsm.First(arg => arg.Name == "ExternalAsm1"),
@@ -600,9 +599,8 @@ static class TypeSubstitution
                 .OfType<MethodSymbol>()
                 .Single();
             ImmutableArray<ParameterSymbol> param = refMethodSymbol.Parameters;
-            NoPiaAmbiguousCanonicalTypeSymbol ambiguous = (NoPiaAmbiguousCanonicalTypeSymbol)param
-                .First()
-                .Type;
+            NoPiaAmbiguousCanonicalTypeSymbol ambiguous = (NoPiaAmbiguousCanonicalTypeSymbol)
+                param.First().Type;
 
             Assert.Equal(SymbolKind.ErrorType, param.First().Type.Kind);
             Assert.IsType<NoPiaAmbiguousCanonicalTypeSymbol>(param.First().Type);

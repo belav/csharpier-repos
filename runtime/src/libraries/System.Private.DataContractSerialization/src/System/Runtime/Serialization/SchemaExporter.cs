@@ -941,9 +941,8 @@ namespace System.Runtime.Serialization
             XmlQualifiedName stableName
         )
         {
-            IXmlSerializable ixmlSerializable = (IXmlSerializable)Activator.CreateInstance(
-                clrType
-            )!;
+            IXmlSerializable ixmlSerializable = (IXmlSerializable)
+                Activator.CreateInstance(clrType)!;
             XmlSchema? schema = ixmlSerializable.GetSchema();
             if (schema == null)
             {

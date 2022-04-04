@@ -49,15 +49,13 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             CamelCasePropertyNamesContractResolver resolver1 =
                 new CamelCasePropertyNamesContractResolver();
-            var contract1 = (JsonObjectContract)resolver1.ResolveContract(
-                typeof(CamelCasePropertyNamesContractResolverTests)
-            );
+            var contract1 = (JsonObjectContract)
+                resolver1.ResolveContract(typeof(CamelCasePropertyNamesContractResolverTests));
 
             CamelCasePropertyNamesContractResolver resolver2 =
                 new CamelCasePropertyNamesContractResolver();
-            var contract2 = (JsonObjectContract)resolver2.ResolveContract(
-                typeof(CamelCasePropertyNamesContractResolverTests)
-            );
+            var contract2 = (JsonObjectContract)
+                resolver2.ResolveContract(typeof(CamelCasePropertyNamesContractResolverTests));
 
             Assert.IsTrue(ReferenceEquals(contract1, contract2));
 

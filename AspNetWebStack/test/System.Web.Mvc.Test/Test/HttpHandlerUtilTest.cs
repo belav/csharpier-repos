@@ -23,9 +23,8 @@ namespace System.Web.Mvc.Test
                 .Setup(o => o.BeginProcessRequest(httpContext, cb, "extraData"))
                 .Returns(expectedResult);
 
-            IHttpAsyncHandler wrapper = (IHttpAsyncHandler)HttpHandlerUtil.WrapForServerExecute(
-                mockHttpHandler.Object
-            );
+            IHttpAsyncHandler wrapper = (IHttpAsyncHandler)
+                HttpHandlerUtil.WrapForServerExecute(mockHttpHandler.Object);
 
             // Act
             IAsyncResult actualResult = wrapper.BeginProcessRequest(httpContext, cb, "extraData");
@@ -44,9 +43,8 @@ namespace System.Web.Mvc.Test
             Mock<IHttpAsyncHandler> mockHttpHandler = new Mock<IHttpAsyncHandler>();
             mockHttpHandler.Setup(o => o.EndProcessRequest(asyncResult)).Verifiable();
 
-            IHttpAsyncHandler wrapper = (IHttpAsyncHandler)HttpHandlerUtil.WrapForServerExecute(
-                mockHttpHandler.Object
-            );
+            IHttpAsyncHandler wrapper = (IHttpAsyncHandler)
+                HttpHandlerUtil.WrapForServerExecute(mockHttpHandler.Object);
 
             // Act
             wrapper.EndProcessRequest(asyncResult);

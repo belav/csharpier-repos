@@ -256,10 +256,8 @@ namespace System.Linq.Expressions.Interpreter
 
             try
             {
-                return (CallInstruction)Activator.CreateInstance(
-                    GetHelperType(info, arrTypes),
-                    info
-                )!;
+                return (CallInstruction)
+                    Activator.CreateInstance(GetHelperType(info, arrTypes), info)!;
             }
             catch (TargetInvocationException e)
             {

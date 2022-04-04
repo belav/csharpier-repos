@@ -1733,10 +1733,11 @@ namespace System.Diagnostics
                                     typeof(EnumeratePropertyFetch<>)
                                         .GetTypeInfo()
                                         .MakeGenericType(elemType);
-                                return (PropertyFetch)Activator.CreateInstance(
-                                    instantiatedTypedPropertyFetcher,
-                                    type
-                                )!;
+                                return (PropertyFetch)
+                                    Activator.CreateInstance(
+                                        instantiatedTypedPropertyFetcher,
+                                        type
+                                    )!;
                             }
 
                             // no implementation of IEnumerable<T> found, return a null fetcher
@@ -1790,11 +1791,12 @@ namespace System.Diagnostics
                                     propertyInfo.DeclaringType!,
                                     propertyInfo.PropertyType
                                 );
-                            return (PropertyFetch)Activator.CreateInstance(
-                                instantiatedTypedPropertyFetcher,
-                                type,
-                                propertyInfo
-                            )!;
+                            return (PropertyFetch)
+                                Activator.CreateInstance(
+                                    instantiatedTypedPropertyFetcher,
+                                    type,
+                                    propertyInfo
+                                )!;
                         }
                     }
 
@@ -1816,9 +1818,10 @@ namespace System.Diagnostics
                                 typeof(TObject).GetTypeInfo().IsAssignableFrom(type.GetTypeInfo())
                             );
                             _propertyFetch =
-                                (Func<TObject, TProperty>)property.GetMethod!.CreateDelegate(
-                                    typeof(Func<TObject, TProperty>)
-                                );
+                                (Func<TObject, TProperty>)
+                                    property.GetMethod!.CreateDelegate(
+                                        typeof(Func<TObject, TProperty>)
+                                    );
                         }
 
                         public override object? Fetch(object? obj)
@@ -1841,9 +1844,10 @@ namespace System.Diagnostics
                         {
                             Debug.Assert(typeof(TStruct) == type);
                             _propertyFetch =
-                                (StructFunc<TStruct, TProperty>)property.GetMethod!.CreateDelegate(
-                                    typeof(StructFunc<TStruct, TProperty>)
-                                );
+                                (StructFunc<TStruct, TProperty>)
+                                    property.GetMethod!.CreateDelegate(
+                                        typeof(StructFunc<TStruct, TProperty>)
+                                    );
                         }
 
                         public override object? Fetch(object? obj)

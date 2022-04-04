@@ -98,10 +98,8 @@ namespace Castle.DynamicProxy.Serialization
                 interfaces[i] = Type.GetType(_interfaceNames[i]);
             }
 
-            proxyGenerationOptions = (ProxyGenerationOptions)info.GetValue(
-                "__proxyGenerationOptions",
-                typeof(ProxyGenerationOptions)
-            );
+            proxyGenerationOptions = (ProxyGenerationOptions)
+                info.GetValue("__proxyGenerationOptions", typeof(ProxyGenerationOptions));
             proxy = RecreateProxy();
 
             // We'll try to deserialize as much of the proxy state as possible here. This is just best effort; due to deserialization dependency reasons,

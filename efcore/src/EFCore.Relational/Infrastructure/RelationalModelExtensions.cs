@@ -27,9 +27,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             this IModel model,
             [CallerMemberName] string methodName = ""
         ) =>
-            (RelationalModelDependencies?)model
-                .FindRuntimeAnnotation(RelationalAnnotationNames.ModelDependencies)
-                ?.Value
+            (RelationalModelDependencies?)
+                model.FindRuntimeAnnotation(RelationalAnnotationNames.ModelDependencies)?.Value
             ?? throw new InvalidOperationException(CoreStrings.ModelNotFinalized(methodName));
     }
 }

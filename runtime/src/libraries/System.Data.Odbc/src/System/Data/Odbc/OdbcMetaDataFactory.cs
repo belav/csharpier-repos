@@ -317,11 +317,8 @@ namespace System.Data.Odbc
                 dataTypesRow[typeNameColumn] = getTypeInfoValues[indexTYPE_NAME];
                 dataTypesRow[SQLTypeNameColumn] = getTypeInfoValues[indexDATA_TYPE];
 
-                sqlType = (ODBC32.SQL_TYPE)(int)Convert.ChangeType(
-                    getTypeInfoValues[indexDATA_TYPE],
-                    typeof(int),
-                    null
-                );
+                sqlType = (ODBC32.SQL_TYPE)
+                    (int)Convert.ChangeType(getTypeInfoValues[indexDATA_TYPE], typeof(int), null);
                 // if the driver is pre version 3 and it returned the v2 SQL_DATE or SQL_TIME types they need
                 // to be mapped to their v3 equivalent
                 if (connection.IsV3Driver == false)
@@ -432,10 +429,8 @@ namespace System.Data.Odbc
                 {
                     //Use Convert.ToInt16 instead of direct cast to short because the value will be Int32 in some cases
                     switch (
-                        (ODBC32.SQL_NULLABILITY)Convert.ToInt16(
-                            getTypeInfoValues[indexNULLABLE],
-                            null
-                        )
+                        (ODBC32.SQL_NULLABILITY)
+                            Convert.ToInt16(getTypeInfoValues[indexNULLABLE], null)
                     )
                     {
                         case ODBC32.SQL_NULLABILITY.NO_NULLS:

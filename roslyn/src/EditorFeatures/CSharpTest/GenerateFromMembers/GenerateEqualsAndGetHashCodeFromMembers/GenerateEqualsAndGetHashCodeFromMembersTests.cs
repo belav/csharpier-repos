@@ -39,8 +39,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                 // If we're a dialog test, then mixin our mock and initialize its values to the ones the test asked for.
                 var workspace = new AdhocWorkspace(s_composition.GetHostServices());
 
-                var service =
-                    (TestPickMembersService)workspace.Services.GetService<IPickMembersService>();
+                var service = (TestPickMembersService)
+                    workspace.Services.GetService<IPickMembersService>();
                 service.MemberNames = MemberNames;
                 service.OptionsCallback = OptionsCallback;
 

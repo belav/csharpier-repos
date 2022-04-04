@@ -561,10 +561,11 @@ namespace StaticTestGenerator
                                     }
 
                                     // Store the attribute type and the ctor values for it.
-                                    object[] values = (object[])UnwrapCustomAttributeTypedArguments(
-                                        typeof(object),
-                                        cad.ConstructorArguments
-                                    );
+                                    object[] values = (object[])
+                                        UnwrapCustomAttributeTypedArguments(
+                                            typeof(object),
+                                            cad.ConstructorArguments
+                                        );
                                     cases.Add(
                                         new TestCase
                                         {

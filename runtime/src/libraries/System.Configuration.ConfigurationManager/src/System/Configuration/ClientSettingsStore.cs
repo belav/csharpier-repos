@@ -302,8 +302,8 @@ namespace System.Configuration
                 params object[] hostInitConfigurationParams
             )
             {
-                ConfigurationUserLevel userLevel =
-                    (ConfigurationUserLevel)hostInitConfigurationParams[0];
+                ConfigurationUserLevel userLevel = (ConfigurationUserLevel)
+                    hostInitConfigurationParams[0];
                 Host = TypeUtil.CreateInstance<IInternalConfigHost>(
                     ClientConfigurationHostTypeName
                 );

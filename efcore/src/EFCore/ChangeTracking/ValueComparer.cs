@@ -243,10 +243,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                     ? typeof(DefaultValueComparer<>)
                     : typeof(ValueComparer<>);
 
-            return (ValueComparer)Activator.CreateInstance(
-                comparerType.MakeGenericType(type),
-                new object[] { favorStructuralComparisons }
-            )!;
+            return (ValueComparer)
+                Activator.CreateInstance(
+                    comparerType.MakeGenericType(type),
+                    new object[] { favorStructuralComparisons }
+                )!;
         }
 
         internal class DefaultValueComparer<T> : ValueComparer<T>

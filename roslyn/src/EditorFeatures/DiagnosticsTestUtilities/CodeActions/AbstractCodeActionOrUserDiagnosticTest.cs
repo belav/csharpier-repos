@@ -274,8 +274,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
 #if !CODE_STYLE
             if (parameters.testHost == TestHost.OutOfProcess && _logger != null)
             {
-                var remoteHostProvider =
-                    (InProcRemoteHostClientProvider)workspace.Services.GetRequiredService<IRemoteHostClientProvider>();
+                var remoteHostProvider = (InProcRemoteHostClientProvider)
+                    workspace.Services.GetRequiredService<IRemoteHostClientProvider>();
                 remoteHostProvider.TraceListener = new XunitTraceListener(_logger);
             }
 #endif

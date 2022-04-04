@@ -633,10 +633,8 @@ namespace System.ComponentModel
                 {
                     try
                     {
-                        IExtenderProvider? prov = (IExtenderProvider?)GetInvocationTarget(
-                            _componentClass,
-                            provider
-                        );
+                        IExtenderProvider? prov = (IExtenderProvider?)
+                            GetInvocationTarget(_componentClass, provider);
                         return (bool)shouldSerialize.Invoke(prov, new object[] { component })!;
                     }
                     catch { }
@@ -655,10 +653,8 @@ namespace System.ComponentModel
         {
             if (provider != null)
             {
-                IExtenderProvider? prov = (IExtenderProvider?)GetInvocationTarget(
-                    _componentClass,
-                    provider
-                );
+                IExtenderProvider? prov = (IExtenderProvider?)
+                    GetInvocationTarget(_componentClass, provider);
                 return GetMethodValue.Invoke(prov, new object?[] { component });
             }
             return null;
@@ -688,9 +684,8 @@ namespace System.ComponentModel
                 // Announce that we are about to change this component
                 if (site != null)
                 {
-                    changeService = (IComponentChangeService?)site.GetService(
-                        typeof(IComponentChangeService)
-                    );
+                    changeService = (IComponentChangeService?)
+                        site.GetService(typeof(IComponentChangeService));
                 }
 
                 // Make sure that it is ok to send the onchange events
@@ -711,10 +706,8 @@ namespace System.ComponentModel
                     }
                 }
 
-                IExtenderProvider? prov = (IExtenderProvider?)GetInvocationTarget(
-                    _componentClass,
-                    provider
-                );
+                IExtenderProvider? prov = (IExtenderProvider?)
+                    GetInvocationTarget(_componentClass, provider);
                 if (ResetMethodValue != null)
                 {
                     ResetMethodValue.Invoke(prov, new object[] { component });
@@ -745,9 +738,8 @@ namespace System.ComponentModel
                 // Announce that we are about to change this component
                 if (site != null)
                 {
-                    changeService = (IComponentChangeService?)site.GetService(
-                        typeof(IComponentChangeService)
-                    );
+                    changeService = (IComponentChangeService?)
+                        site.GetService(typeof(IComponentChangeService));
                 }
 
                 // Make sure that it is ok to send the onchange events
@@ -768,10 +760,8 @@ namespace System.ComponentModel
                     }
                 }
 
-                IExtenderProvider? prov = (IExtenderProvider?)GetInvocationTarget(
-                    _componentClass,
-                    provider
-                );
+                IExtenderProvider? prov = (IExtenderProvider?)
+                    GetInvocationTarget(_componentClass, provider);
 
                 if (SetMethodValue != null)
                 {
@@ -785,10 +775,8 @@ namespace System.ComponentModel
 
         internal bool ExtenderShouldSerializeValue(IExtenderProvider provider, object component)
         {
-            IExtenderProvider? prov = (IExtenderProvider?)GetInvocationTarget(
-                _componentClass,
-                provider
-            );
+            IExtenderProvider? prov = (IExtenderProvider?)
+                GetInvocationTarget(_componentClass, provider);
 
             if (IsReadOnly)
             {
@@ -796,10 +784,8 @@ namespace System.ComponentModel
                 {
                     try
                     {
-                        return (bool)ShouldSerializeMethodValue.Invoke(
-                            prov,
-                            new object[] { component }
-                        )!;
+                        return (bool)
+                            ShouldSerializeMethodValue.Invoke(prov, new object[] { component })!;
                     }
                     catch { }
                 }
@@ -811,10 +797,8 @@ namespace System.ComponentModel
                 {
                     try
                     {
-                        return (bool)ShouldSerializeMethodValue.Invoke(
-                            prov,
-                            new object[] { component }
-                        )!;
+                        return (bool)
+                            ShouldSerializeMethodValue.Invoke(prov, new object[] { component })!;
                     }
                     catch { }
                 }
@@ -1210,9 +1194,8 @@ namespace System.ComponentModel
                 // Announce that we are about to change this component
                 if (site != null)
                 {
-                    changeService = (IComponentChangeService?)site.GetService(
-                        typeof(IComponentChangeService)
-                    );
+                    changeService = (IComponentChangeService?)
+                        site.GetService(typeof(IComponentChangeService));
                 }
 
                 // Make sure that it is ok to send the onchange events
@@ -1276,9 +1259,8 @@ namespace System.ComponentModel
                     // Announce that we are about to change this component
                     if (site != null)
                     {
-                        changeService = (IComponentChangeService?)site.GetService(
-                            typeof(IComponentChangeService)
-                        );
+                        changeService = (IComponentChangeService?)
+                            site.GetService(typeof(IComponentChangeService));
                     }
 
                     // Make sure that it is ok to send the onchange events

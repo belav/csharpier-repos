@@ -2865,14 +2865,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         return true;
                     }
 
-                    var oldMappedBreakpointSpan = (SourceFileSpan)oldTree.GetMappedLineSpan(
-                        oldBreakpointSpan,
-                        cancellationToken
-                    );
-                    var newMappedBreakpointSpan = (SourceFileSpan)newTree.GetMappedLineSpan(
-                        newBreakpointSpan,
-                        cancellationToken
-                    );
+                    var oldMappedBreakpointSpan = (SourceFileSpan)
+                        oldTree.GetMappedLineSpan(oldBreakpointSpan, cancellationToken);
+                    var newMappedBreakpointSpan = (SourceFileSpan)
+                        newTree.GetMappedLineSpan(newBreakpointSpan, cancellationToken);
 
                     if (
                         oldMappedBreakpointSpan.AddLineDelta(currentSegment.delta)
@@ -3263,7 +3259,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             (
                 exact
                     ? s_exactSymbolEqualityComparer
-                    : (IEqualityComparer<ITypeSymbol?>)s_runtimeSymbolEqualityComparer.SignatureTypeEquivalenceComparer
+                    : (IEqualityComparer<ITypeSymbol?>)
+                          s_runtimeSymbolEqualityComparer.SignatureTypeEquivalenceComparer
             ).Equals(oldType, newType);
 
         protected static bool TypesEquivalent<T>(
@@ -3559,20 +3556,22 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                                     containingType,
                                     cancellationToken
                                 );
-                                oldContainingType ??= (INamedTypeSymbol?)containingTypeSymbolKey
-                                    .Resolve(
-                                        oldCompilation,
-                                        ignoreAssemblyKey: true,
-                                        cancellationToken
-                                    )
-                                    .Symbol;
-                                newContainingType ??= (INamedTypeSymbol?)containingTypeSymbolKey
-                                    .Resolve(
-                                        newCompilation,
-                                        ignoreAssemblyKey: true,
-                                        cancellationToken
-                                    )
-                                    .Symbol;
+                                oldContainingType ??= (INamedTypeSymbol?)
+                                    containingTypeSymbolKey
+                                        .Resolve(
+                                            oldCompilation,
+                                            ignoreAssemblyKey: true,
+                                            cancellationToken
+                                        )
+                                        .Symbol;
+                                newContainingType ??= (INamedTypeSymbol?)
+                                    containingTypeSymbolKey
+                                        .Resolve(
+                                            newCompilation,
+                                            ignoreAssemblyKey: true,
+                                            cancellationToken
+                                        )
+                                        .Symbol;
 
                                 if (
                                     oldContainingType != null

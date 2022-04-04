@@ -50,9 +50,10 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
 
             canCache &= canCache2;
 
-            return (SelectExpression)new SearchConditionConvertingExpressionVisitor(
-                Dependencies.SqlExpressionFactory
-            ).Visit(optimizedSelectExpression);
+            return (SelectExpression)
+                new SearchConditionConvertingExpressionVisitor(
+                    Dependencies.SqlExpressionFactory
+                ).Visit(optimizedSelectExpression);
         }
 
         /// <summary>

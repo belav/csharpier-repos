@@ -188,10 +188,11 @@ namespace Roslyn.Test.Utilities.Desktop
                 var appDomainProxyType = typeof(RuntimeAssemblyManager);
                 var thisAssembly = appDomainProxyType.Assembly;
                 appDomain = AppDomainUtils.Create("HostedRuntimeEnvironment");
-                var manager = (RuntimeAssemblyManager)appDomain.CreateInstanceAndUnwrap(
-                    thisAssembly.FullName,
-                    appDomainProxyType.FullName
-                );
+                var manager = (RuntimeAssemblyManager)
+                    appDomain.CreateInstanceAndUnwrap(
+                        thisAssembly.FullName,
+                        appDomainProxyType.FullName
+                    );
                 return new RuntimeData(manager, appDomain);
             }
             catch

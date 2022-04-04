@@ -120,11 +120,8 @@ namespace System.ComponentModel.TypeConverterTests
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void TestConvertFrom()
         {
-            Icon newIcon = (Icon)_icoConv.ConvertFrom(
-                null,
-                CultureInfo.InvariantCulture,
-                _iconBytes
-            );
+            Icon newIcon = (Icon)
+                _icoConv.ConvertFrom(null, CultureInfo.InvariantCulture, _iconBytes);
 
             Assert.Equal(_icon.Height, newIcon.Height);
             Assert.Equal(_icon.Width, newIcon.Width);
@@ -153,11 +150,8 @@ namespace System.ComponentModel.TypeConverterTests
                 () => _icoConv.ConvertFrom(null, CultureInfo.InvariantCulture, new object())
             );
 
-            newIcon = (Icon)_icoConvFrmTD.ConvertFrom(
-                null,
-                CultureInfo.InvariantCulture,
-                _iconBytes
-            );
+            newIcon = (Icon)
+                _icoConvFrmTD.ConvertFrom(null, CultureInfo.InvariantCulture, _iconBytes);
 
             Assert.Equal(_icon.Height, newIcon.Height);
             Assert.Equal(_icon.Width, newIcon.Width);
@@ -199,21 +193,13 @@ namespace System.ComponentModel.TypeConverterTests
         {
             Assert.Equal(
                 _iconStr,
-                (string)_icoConv.ConvertTo(
-                    null,
-                    CultureInfo.InvariantCulture,
-                    _icon,
-                    typeof(string)
-                )
+                (string)
+                    _icoConv.ConvertTo(null, CultureInfo.InvariantCulture, _icon, typeof(string))
             );
             Assert.Equal(_iconStr, (string)_icoConv.ConvertTo(_icon, typeof(string)));
 
-            byte[] newIconBytes = (byte[])_icoConv.ConvertTo(
-                null,
-                CultureInfo.InvariantCulture,
-                _icon,
-                _iconBytes.GetType()
-            );
+            byte[] newIconBytes = (byte[])
+                _icoConv.ConvertTo(null, CultureInfo.InvariantCulture, _icon, _iconBytes.GetType());
             Assert.Equal(_iconBytes, newIconBytes);
 
             newIconBytes = (byte[])_icoConv.ConvertTo(_icon, _iconBytes.GetType());
@@ -245,21 +231,23 @@ namespace System.ComponentModel.TypeConverterTests
 
             Assert.Equal(
                 _iconStr,
-                (string)_icoConvFrmTD.ConvertTo(
-                    null,
-                    CultureInfo.InvariantCulture,
-                    _icon,
-                    typeof(string)
-                )
+                (string)
+                    _icoConvFrmTD.ConvertTo(
+                        null,
+                        CultureInfo.InvariantCulture,
+                        _icon,
+                        typeof(string)
+                    )
             );
             Assert.Equal(_iconStr, (string)_icoConvFrmTD.ConvertTo(_icon, typeof(string)));
 
-            newIconBytes = (byte[])_icoConvFrmTD.ConvertTo(
-                null,
-                CultureInfo.InvariantCulture,
-                _icon,
-                _iconBytes.GetType()
-            );
+            newIconBytes = (byte[])
+                _icoConvFrmTD.ConvertTo(
+                    null,
+                    CultureInfo.InvariantCulture,
+                    _icon,
+                    _iconBytes.GetType()
+                );
             Assert.Equal(_iconBytes, newIconBytes);
 
             newIconBytes = (byte[])_icoConvFrmTD.ConvertTo(_icon, _iconBytes.GetType());
@@ -329,23 +317,25 @@ namespace System.ComponentModel.TypeConverterTests
                 Assert.Equal("(none)", (string)_icoConv.ConvertTo(null, typeof(string)));
                 Assert.Equal(
                     "(none)",
-                    (string)_icoConv.ConvertTo(
-                        null,
-                        CultureInfo.CreateSpecificCulture("ru-RU"),
-                        null,
-                        typeof(string)
-                    )
+                    (string)
+                        _icoConv.ConvertTo(
+                            null,
+                            CultureInfo.CreateSpecificCulture("ru-RU"),
+                            null,
+                            typeof(string)
+                        )
                 );
 
                 Assert.Equal("(none)", (string)_icoConvFrmTD.ConvertTo(null, typeof(string)));
                 Assert.Equal(
                     "(none)",
-                    (string)_icoConvFrmTD.ConvertTo(
-                        null,
-                        CultureInfo.CreateSpecificCulture("de-DE"),
-                        null,
-                        typeof(string)
-                    )
+                    (string)
+                        _icoConvFrmTD.ConvertTo(
+                            null,
+                            CultureInfo.CreateSpecificCulture("de-DE"),
+                            null,
+                            typeof(string)
+                        )
                 );
             }
         }

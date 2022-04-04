@@ -378,11 +378,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
                       ownership.PrincipalToDependent!.Name
                   )
                 : entityType.HasSharedClrType
-                    ? (IQueryable)_setCache.GetOrAddSet(
-                          _setSource,
-                          entityType.Name,
-                          entityType.ClrType
-                      )
+                    ? (IQueryable)
+                          _setCache.GetOrAddSet(_setSource, entityType.Name, entityType.ClrType)
                     : (IQueryable)_setCache.GetOrAddSet(_setSource, entityType.ClrType);
 
         private IQueryable BuildQueryRoot(
@@ -394,9 +391,10 @@ namespace Microsoft.EntityFrameworkCore.Internal
             var queryRoot = BuildQueryRoot(ownerEntityType);
             var collectionNavigation = ownerEntityType.FindNavigation(navigationName)!.IsCollection;
 
-            return (IQueryable)(collectionNavigation ? _selectManyMethod : _selectMethod)
-                .MakeGenericMethod(ownerEntityType.ClrType, entityType.ClrType)
-                .Invoke(null, new object[] { queryRoot, navigationName })!;
+            return (IQueryable)
+                (collectionNavigation ? _selectManyMethod : _selectMethod)
+                    .MakeGenericMethod(ownerEntityType.ClrType, entityType.ClrType)
+                    .Invoke(null, new object[] { queryRoot, navigationName })!;
         }
 
         private static readonly MethodInfo _selectMethod = typeof(EntityFinder<TEntity>)

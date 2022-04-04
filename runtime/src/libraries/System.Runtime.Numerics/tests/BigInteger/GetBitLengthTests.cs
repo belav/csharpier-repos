@@ -86,9 +86,8 @@ namespace System.Numerics.Tests
 
         private static long Log2BitLength(BigInteger integer)
         {
-            return (long)Math.Ceiling(
-                BigInteger.Log(integer.Sign < 0 ? -integer : integer + 1, 2.0)
-            );
+            return (long)
+                Math.Ceiling(BigInteger.Log(integer.Sign < 0 ? -integer : integer + 1, 2.0));
         }
 
         private static bool TryIterativeBitLength(BigInteger integer, out long bitLength)

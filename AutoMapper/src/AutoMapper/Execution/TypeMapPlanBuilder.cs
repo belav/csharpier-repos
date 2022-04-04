@@ -280,9 +280,8 @@ namespace AutoMapper.Execution
         private Expression TryPathMap(PathMap pathMap)
         {
             var destination = (
-                (MemberExpression)pathMap.DestinationExpression.ConvertReplaceParameters(
-                    _destination
-                )
+                (MemberExpression)
+                    pathMap.DestinationExpression.ConvertReplaceParameters(_destination)
             ).Expression;
             var createInnerObjects = CreateInnerObjects(destination);
             var setFinalValue = CreatePropertyMapFunc(
@@ -313,10 +312,13 @@ namespace AutoMapper.Execution
                                   ),
                                   memberExpression.Type
                               )
-                            : (Expression)Assign(
-                                  setter,
-                                  ObjectFactory.GenerateConstructorExpression(memberExpression.Type)
-                              );
+                            : (Expression)
+                                  Assign(
+                                      setter,
+                                      ObjectFactory.GenerateConstructorExpression(
+                                          memberExpression.Type
+                                      )
+                                  );
                     return memberExpression.IfNullElse(ifNull, Default(memberExpression.Type));
                 }
                 static Expression GetSetter(MemberExpression memberExpression) =>

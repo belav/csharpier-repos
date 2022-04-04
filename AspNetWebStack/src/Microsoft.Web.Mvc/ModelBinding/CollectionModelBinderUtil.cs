@@ -77,9 +77,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
                 modelMetadata
             );
             return (typeArguments != null)
-              ? (IExtensibleModelBinder)Activator.CreateInstance(
-                    openBinderType.MakeGenericType(typeArguments)
-                )
+              ? (IExtensibleModelBinder)
+                    Activator.CreateInstance(openBinderType.MakeGenericType(typeArguments))
               : null;
         }
 
@@ -174,9 +173,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
                 closedSupportedInterfaceType,
                 typeof(ICollection<>)
             );
-            bool collectionInstanceIsReadOnly = (bool)closedCollectionType
-                .GetProperty("IsReadOnly")
-                .GetValue(modelMetadata.Model, null);
+            bool collectionInstanceIsReadOnly = (bool)
+                closedCollectionType.GetProperty("IsReadOnly").GetValue(modelMetadata.Model, null);
             if (collectionInstanceIsReadOnly)
             {
                 return null;

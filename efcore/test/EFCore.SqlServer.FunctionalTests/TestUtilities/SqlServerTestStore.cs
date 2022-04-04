@@ -24,9 +24,10 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         private static string CurrentDirectory => Environment.CurrentDirectory;
 
         public static SqlServerTestStore GetNorthwindStore() =>
-            (SqlServerTestStore)SqlServerNorthwindTestStoreFactory.Instance
-                .GetOrCreate(SqlServerNorthwindTestStoreFactory.Name)
-                .Initialize(null, (Func<DbContext>)null);
+            (SqlServerTestStore)
+                SqlServerNorthwindTestStoreFactory.Instance
+                    .GetOrCreate(SqlServerNorthwindTestStoreFactory.Name)
+                    .Initialize(null, (Func<DbContext>)null);
 
         public static SqlServerTestStore GetOrCreate(string name) => new(name);
 

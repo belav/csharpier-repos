@@ -5855,9 +5855,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         private InternalModelBuilder CreateModelBuilder() => new(new Model());
 
         private InternalModelBuilder CreateConventionalModelBuilder() =>
-            (InternalModelBuilder)InMemoryTestHelpers.Instance
-                .CreateConventionBuilder()
-                .GetInfrastructure();
+            (InternalModelBuilder)
+                InMemoryTestHelpers.Instance.CreateConventionBuilder().GetInfrastructure();
 
         public enum MemberType
         {

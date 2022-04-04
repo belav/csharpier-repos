@@ -604,8 +604,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                                 break;
                             }
 
-                            var designation =
-                                (SingleVariableDesignationSyntax)declaration.Designation;
+                            var designation = (SingleVariableDesignationSyntax)
+                                declaration.Designation;
                             var name = designation.Identifier.ValueText;
                             if (variablesToRemove.HasSyntaxAnnotation(designation))
                             {

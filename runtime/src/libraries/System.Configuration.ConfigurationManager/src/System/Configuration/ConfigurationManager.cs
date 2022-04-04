@@ -64,8 +64,8 @@ namespace System.Configuration
                     );
                 }
 
-                ConnectionStringsSection connectionStringsSection =
-                    (ConnectionStringsSection)section;
+                ConnectionStringsSection connectionStringsSection = (ConnectionStringsSection)
+                    section;
                 return connectionStringsSection.ConnectionStrings;
             }
         }

@@ -1334,9 +1334,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     Container = new LastInChain
                                     {
                                         Name = "TotalAmount",
-                                        Value = (object)((IEnumerable<Order>)e).Sum(
-                                            e => (decimal)e.OrderID
-                                        )
+                                        Value = (object)
+                                            ((IEnumerable<Order>)e).Sum(e => (decimal)e.OrderID)
                                     }
                                 }
                         ),

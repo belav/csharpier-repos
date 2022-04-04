@@ -315,9 +315,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 {
                     foreach (var property in key.Properties)
                     {
-                        var defaultValue = (IConventionAnnotation?)property.FindAnnotation(
-                            RelationalAnnotationNames.DefaultValue
-                        );
+                        var defaultValue = (IConventionAnnotation?)
+                            property.FindAnnotation(RelationalAnnotationNames.DefaultValue);
                         if (
                             defaultValue?.Value != null
                             && defaultValue
@@ -1624,9 +1623,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             {
                 foreach (var property in entityType.GetDeclaredProperties())
                 {
-                    var tableOverrides = (SortedDictionary<StoreObjectIdentifier, object>?)property[
-                        RelationalAnnotationNames.RelationalOverrides
-                    ];
+                    var tableOverrides = (SortedDictionary<StoreObjectIdentifier, object>?)
+                        property[RelationalAnnotationNames.RelationalOverrides];
                     if (tableOverrides == null)
                     {
                         continue;

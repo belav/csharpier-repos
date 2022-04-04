@@ -571,9 +571,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     return newExpression.Update(newArguments);
 
                 case MemberInitExpression memberInitExpression:
-                    var updatedNewExpression = (NewExpression?)TranslateGroupingKey(
-                        memberInitExpression.NewExpression
-                    );
+                    var updatedNewExpression = (NewExpression?)
+                        TranslateGroupingKey(memberInitExpression.NewExpression);
                     if (updatedNewExpression == null)
                     {
                         return null;
@@ -994,18 +993,16 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     .Single(et => et.ClrType == resultType);
                 var inMemoryQueryExpression = (InMemoryQueryExpression)source.QueryExpression;
 
-                var projectionBindingExpression =
-                    (ProjectionBindingExpression)entityShaperExpression.ValueBufferExpression;
+                var projectionBindingExpression = (ProjectionBindingExpression)
+                    entityShaperExpression.ValueBufferExpression;
                 var projectionMember = projectionBindingExpression.ProjectionMember;
                 Check.DebugAssert(
                     new ProjectionMember().Equals(projectionMember),
                     "Invalid ProjectionMember when processing OfType"
                 );
 
-                var entityProjectionExpression =
-                    (EntityProjectionExpression)inMemoryQueryExpression.GetProjection(
-                        projectionBindingExpression
-                    );
+                var entityProjectionExpression = (EntityProjectionExpression)
+                    inMemoryQueryExpression.GetProjection(projectionBindingExpression);
                 inMemoryQueryExpression.ReplaceProjection(
                     new Dictionary<ProjectionMember, Expression>
                     {
@@ -1583,8 +1580,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 if (navigation.IsCollection)
                 {
                     var innerShapedQuery = CreateShapedQueryExpressionStatic(targetEntityType);
-                    var innerQueryExpression =
-                        (InMemoryQueryExpression)innerShapedQuery.QueryExpression;
+                    var innerQueryExpression = (InMemoryQueryExpression)
+                        innerShapedQuery.QueryExpression;
 
                     var makeNullable = foreignKey.PrincipalKey.Properties
                         .Concat(foreignKey.Properties)
@@ -1653,16 +1650,15 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
                 var entityProjectionExpression = entityShaperExpression.ValueBufferExpression
                     is ProjectionBindingExpression projectionBindingExpression
-                    ? (EntityProjectionExpression)_queryExpression.GetProjection(
-                          projectionBindingExpression
-                      )
+                    ? (EntityProjectionExpression)
+                          _queryExpression.GetProjection(projectionBindingExpression)
                     : (EntityProjectionExpression)entityShaperExpression.ValueBufferExpression;
                 var innerShaper = entityProjectionExpression.BindNavigation(navigation);
                 if (innerShaper == null)
                 {
                     var innerShapedQuery = CreateShapedQueryExpressionStatic(targetEntityType);
-                    var innerQueryExpression =
-                        (InMemoryQueryExpression)innerShapedQuery.QueryExpression;
+                    var innerQueryExpression = (InMemoryQueryExpression)
+                        innerShapedQuery.QueryExpression;
 
                     var makeNullable = foreignKey.PrincipalKey.Properties
                         .Concat(foreignKey.Properties)
@@ -1907,11 +1903,12 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
                 case MemberInitExpression memberInitExpression1
                       when shaper2 is MemberInitExpression memberInitExpression2:
-                    var newExpression = (NewExpression)MatchShaperNullabilityForSetOperation(
-                        memberInitExpression1.NewExpression,
-                        memberInitExpression2.NewExpression,
-                        makeNullable
-                    );
+                    var newExpression = (NewExpression)
+                        MatchShaperNullabilityForSetOperation(
+                            memberInitExpression1.NewExpression,
+                            memberInitExpression2.NewExpression,
+                            makeNullable
+                        );
 
                     var memberBindings = new MemberBinding[memberInitExpression1.Bindings.Count];
                     for (var i = 0; i < memberBindings.Length; i++)

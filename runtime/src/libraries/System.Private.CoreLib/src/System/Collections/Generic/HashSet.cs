@@ -981,9 +981,10 @@ namespace System.Collections.Generic
             {
                 if (typeof(T) == typeof(string))
                 {
-                    return (IEqualityComparer<T>)IInternalStringEqualityComparer.GetUnderlyingEqualityComparer(
-                        (IEqualityComparer<string?>?)_comparer
-                    );
+                    return (IEqualityComparer<T>)
+                        IInternalStringEqualityComparer.GetUnderlyingEqualityComparer(
+                            (IEqualityComparer<string?>?)_comparer
+                        );
                 }
                 else
                 {
@@ -1034,9 +1035,10 @@ namespace System.Collections.Generic
             {
                 Debug.Assert(_comparer is NonRandomizedStringEqualityComparer);
                 _comparer =
-                    (IEqualityComparer<T>)(
-                        (NonRandomizedStringEqualityComparer)_comparer
-                    ).GetRandomizedEqualityComparer();
+                    (IEqualityComparer<T>)
+                        (
+                            (NonRandomizedStringEqualityComparer)_comparer
+                        ).GetRandomizedEqualityComparer();
 
                 for (int i = 0; i < count; i++)
                 {

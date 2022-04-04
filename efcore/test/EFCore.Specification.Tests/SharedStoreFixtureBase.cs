@@ -41,15 +41,16 @@ namespace Microsoft.EntityFrameworkCore
         private IDbContextPool _contextPool;
 
         private IDbContextPool ContextPool =>
-            _contextPool ??= (IDbContextPool)ServiceProvider.GetRequiredService(
-                typeof(IDbContextPool<>).MakeGenericType(ContextType)
-            );
+            _contextPool ??= (IDbContextPool)
+                ServiceProvider.GetRequiredService(
+                    typeof(IDbContextPool<>).MakeGenericType(ContextType)
+                );
 
         private ListLoggerFactory _listLoggerFactory;
 
         public ListLoggerFactory ListLoggerFactory =>
-            _listLoggerFactory ??=
-                (ListLoggerFactory)ServiceProvider.GetRequiredService<ILoggerFactory>();
+            _listLoggerFactory ??= (ListLoggerFactory)
+                ServiceProvider.GetRequiredService<ILoggerFactory>();
 
         public virtual Task InitializeAsync()
         {

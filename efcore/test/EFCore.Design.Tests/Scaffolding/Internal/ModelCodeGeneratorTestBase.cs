@@ -70,11 +70,12 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 if (assertModel != null)
                 {
                     var contextNamespace = options.ContextNamespace ?? options.ModelNamespace;
-                    var context = (DbContext)assembly.CreateInstance(
-                        !string.IsNullOrEmpty(contextNamespace)
-                          ? contextNamespace + "." + options.ContextName
-                          : options.ContextName
-                    );
+                    var context = (DbContext)
+                        assembly.CreateInstance(
+                            !string.IsNullOrEmpty(contextNamespace)
+                              ? contextNamespace + "." + options.ContextName
+                              : options.ContextName
+                        );
 
                     var compiledModel = context.GetService<IDesignTimeModel>().Model;
                     assertModel(compiledModel);

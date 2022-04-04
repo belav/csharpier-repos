@@ -542,8 +542,8 @@ GO
                     )
                     .Options
             );
-            var creator =
-                (SqlServerDatabaseCreator)context.GetService<IRelationalDatabaseCreator>();
+            var creator = (SqlServerDatabaseCreator)
+                context.GetService<IRelationalDatabaseCreator>();
             creator.RetryTimeout = TimeSpan.FromMinutes(10);
 
             await context.Database.MigrateAsync();

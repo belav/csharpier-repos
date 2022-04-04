@@ -246,9 +246,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             //End Class
 
             var c1 = (NamedTypeSymbol)assemblies[0].Modules[0].GlobalNamespace.GetMember("C1");
-            var topLevel = (NamedTypeSymbol)assemblies[1].Modules[0].GlobalNamespace.GetMember(
-                "TopLevelClass"
-            );
+            var topLevel = (NamedTypeSymbol)
+                assemblies[1].Modules[0].GlobalNamespace.GetMember("TopLevelClass");
             var aNestedAttribute = (NamedTypeSymbol)topLevel.GetMember("ANestedAttribute");
 
             c1.GetAttributes().First().VerifyValue(0, TypedConstantKind.Primitive, "C1");
@@ -510,9 +509,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             //    End Function
             //End Class
 
-            var c1 = (NamedTypeSymbol)assemblies[0].Modules[0].GlobalNamespace
-                .GetMembers("C1")
-                .Single();
+            var c1 = (NamedTypeSymbol)
+                assemblies[0].Modules[0].GlobalNamespace.GetMembers("C1").Single();
             c1.GetAttributes().First().VerifyValue(0, TypedConstantKind.Primitive, "C1");
 
             var property1 = (PropertySymbol)c1.GetMember("Property1");
@@ -559,9 +557,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             //    <AType(GetType(List(Of KeyValuePair(Of String, C1.InnerC1(of integer).InnerC2(of string, string)))))>
             //    Public L5 As List(Of KeyValuePair(Of String, C1.InnerC1(of integer).InnerC2(of string, string)))
 
-            var c2 = (NamedTypeSymbol)assemblies[0].Modules[0].GlobalNamespace
-                .GetMembers("C2")
-                .Single();
+            var c2 = (NamedTypeSymbol)
+                assemblies[0].Modules[0].GlobalNamespace.GetMembers("C2").Single();
 
             var l = (FieldSymbol)c2.GetMember("L1");
             l.GetAttributes()
@@ -873,9 +870,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             var runtimeNS = (NamespaceSymbol)sysNS.GetMember("Runtime");
             var interopNS = (NamespaceSymbol)runtimeNS.GetMember("InteropServices");
 
-            var appNS = (NamespaceSymbol)assemblies[0].Modules[0].GlobalNamespace.GetMember(
-                "Interop"
-            );
+            var appNS = (NamespaceSymbol)
+                assemblies[0].Modules[0].GlobalNamespace.GetMember("Interop");
             var igoo = (NamedTypeSymbol)appNS.GetMember("IFoo");
             // ComImport is Pseudo attr
             Assert.Equal(4, igoo.GetAttributes().Length);
@@ -898,9 +894,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.Equal(typeof(Int32), attrSym.CommonConstructorArguments[0].Value.GetType());
             Assert.Equal(1, attrSym.CommonConstructorArguments[0].Value);
 
-            attrObj = (NamedTypeSymbol)interopNS
-                .GetTypeMembers("TypeLibImportClassAttribute")
-                .Single();
+            attrObj = (NamedTypeSymbol)
+                interopNS.GetTypeMembers("TypeLibImportClassAttribute").Single();
             var msym = attrObj.InstanceConstructors.First();
             attrSym = igoo.GetAttribute(msym);
             Assert.Equal(
@@ -936,9 +931,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             var runtimeNS = (NamespaceSymbol)sysNS.GetMember("Runtime");
             var interopNS = (NamespaceSymbol)runtimeNS.GetMember("InteropServices");
 
-            var appNS = (NamespaceSymbol)assemblies[0].Modules[0].GlobalNamespace.GetMember(
-                "Interop"
-            );
+            var appNS = (NamespaceSymbol)
+                assemblies[0].Modules[0].GlobalNamespace.GetMember("Interop");
             var dfoo = (NamedTypeSymbol)appNS.GetMember("DFoo");
             // Pseudo - Serializable
             Assert.Equal(2, dfoo.GetAttributes().Length);
@@ -948,9 +942,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             var attrSym = dfoo.GetAttribute(attrObj);
             attrSym.VerifyValue(0, TypedConstantKind.Primitive, false);
 
-            attrObj = (NamedTypeSymbol)interopNS
-                .GetTypeMembers("UnmanagedFunctionPointerAttribute")
-                .Single();
+            attrObj = (NamedTypeSymbol)
+                interopNS.GetTypeMembers("UnmanagedFunctionPointerAttribute").Single();
             attrSym = dfoo.GetAttribute(attrObj);
             //Assert.Equal(1, attrSym.ConstructorArguments.Count)
             Assert.Equal(3, attrSym.CommonConstructorArguments[0].Value);
@@ -998,9 +991,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             var modattr = assemblies[0].Modules[0].GetAttributes().First();
             Assert.Equal("UnverifiableCodeAttribute", modattr.AttributeClass.Name);
 
-            var appNS = (NamespaceSymbol)assemblies[0].Modules[0].GlobalNamespace.GetMember(
-                "EventNS"
-            );
+            var appNS = (NamespaceSymbol)
+                assemblies[0].Modules[0].GlobalNamespace.GetMember("EventNS");
             var myEnum = (NamedTypeSymbol)appNS.GetMember("MyEnum");
             //
             Assert.Equal(2, myEnum.GetAttributes().Length);
@@ -1058,9 +1050,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             var interopNS = (NamespaceSymbol)runtimeNS.GetMember("InteropServices");
             var reflectNS = (NamespaceSymbol)sysNS.GetMember("Reflection");
 
-            var appNS = (NamespaceSymbol)assemblies[0].Modules[0].GlobalNamespace.GetMember(
-                "Interop"
-            );
+            var appNS = (NamespaceSymbol)
+                assemblies[0].Modules[0].GlobalNamespace.GetMember("Interop");
             //
             var ibar = (NamedTypeSymbol)appNS.GetMember("IBar");
             // Pseudo - ComImport ( 4 + 1 -> DefaultMember)
@@ -1180,13 +1171,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 
             var caNS = (NamespaceSymbol)assemblies[1].GlobalNamespace.GetMember("CustomAttribute");
 
-            var attrObj1 = (NamedTypeSymbol)caNS.GetTypeMembers("AllInheritMultipleAttribute")
-                .Single();
+            var attrObj1 = (NamedTypeSymbol)
+                caNS.GetTypeMembers("AllInheritMultipleAttribute").Single();
             var attrObj2 = (NamedTypeSymbol)caNS.GetTypeMembers("DerivedAttribute").Single();
 
-            var appNS = (NamespaceSymbol)assemblies[0].Modules[0].GlobalNamespace.GetMember(
-                "AttributeUse"
-            );
+            var appNS = (NamespaceSymbol)
+                assemblies[0].Modules[0].GlobalNamespace.GetMember("AttributeUse");
 
             //public interface IFoo<[typevar: AllInheritMultiple(3.1415926)] T, [AllInheritMultiple('q', 2)] V>
             //{
@@ -1291,17 +1281,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 
             var caNS = (NamespaceSymbol)assemblies[1].GlobalNamespace.GetMember("CustomAttribute");
 
-            var attrObj1 = (NamedTypeSymbol)caNS.GetTypeMembers("AllInheritMultipleAttribute")
-                .Single();
+            var attrObj1 = (NamedTypeSymbol)
+                caNS.GetTypeMembers("AllInheritMultipleAttribute").Single();
             var mctors = attrObj1.Constructors;
             //.ToList()
             Assert.Equal(5, mctors.Length);
 
             var attrObj2 = (NamedTypeSymbol)caNS.GetTypeMembers("DerivedAttribute").Single();
 
-            var appNS = (NamespaceSymbol)assemblies[0].Modules[0].GlobalNamespace.GetMember(
-                "AttributeUse"
-            );
+            var appNS = (NamespaceSymbol)
+                assemblies[0].Modules[0].GlobalNamespace.GetMember("AttributeUse");
             var foo = (NamedTypeSymbol)appNS.GetMember("Foo");
             // Attribute on class Foo
 
@@ -1440,15 +1429,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             var refNS = (NamespaceSymbol)sysNS.GetMember("Reflection");
             var rtNS = (NamespaceSymbol)sysNS.GetMember("Runtime");
 
-            var asmFileAttr = (NamedTypeSymbol)refNS
-                .GetTypeMembers("AssemblyFileVersionAttribute")
-                .Single();
+            var asmFileAttr = (NamedTypeSymbol)
+                refNS.GetTypeMembers("AssemblyFileVersionAttribute").Single();
             var attr1 = assemblies[0].GetAttribute(asmFileAttr);
             attr1.VerifyValue(0, TypedConstantKind.Primitive, "4.0.30319.18408");
 
-            var asmInfoAttr = (NamedTypeSymbol)refNS
-                .GetTypeMembers("AssemblyInformationalVersionAttribute")
-                .Single();
+            var asmInfoAttr = (NamedTypeSymbol)
+                refNS.GetTypeMembers("AssemblyInformationalVersionAttribute").Single();
             attr1 = assemblies[0].GetAttribute(asmInfoAttr);
             attr1.VerifyValue(0, TypedConstantKind.Primitive, "4.0.30319.18408");
         }
@@ -1468,9 +1455,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             var linqNS = (NamespaceSymbol)sysNS.GetMember("Linq");
             var exprNS = (NamespaceSymbol)linqNS.GetMember("Expressions");
 
-            var dbgProxyAttr = (NamedTypeSymbol)diagNS
-                .GetTypeMembers("DebuggerTypeProxyAttribute")
-                .Single();
+            var dbgProxyAttr = (NamedTypeSymbol)
+                diagNS.GetTypeMembers("DebuggerTypeProxyAttribute").Single();
 
             // [DebuggerTypeProxy(typeof(Expression.BinaryExpressionProxy))] - internal class as argument to typeof()
             // public class BinaryExpression : Expression {... }
@@ -1537,17 +1523,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             var secondNS = (NamespaceSymbol)sysNS.GetMember("Data");
             var thirdNS = (NamespaceSymbol)secondNS.GetMember("Common");
 
-            var resCatAttr = (NamedTypeSymbol)secondNS
-                .GetTypeMembers("ResCategoryAttribute")
-                .Single();
-            var resDesAttr = (NamedTypeSymbol)secondNS
-                .GetTypeMembers("ResDescriptionAttribute")
-                .Single();
+            var resCatAttr = (NamedTypeSymbol)
+                secondNS.GetTypeMembers("ResCategoryAttribute").Single();
+            var resDesAttr = (NamedTypeSymbol)
+                secondNS.GetTypeMembers("ResDescriptionAttribute").Single();
             var level01NS = (NamespaceSymbol)assemblies[2].GlobalNamespace.GetMember("System");
             var level02NS = (NamespaceSymbol)level01NS.GetMember("ComponentModel");
-            var defValAttr = (NamedTypeSymbol)level02NS
-                .GetTypeMembers("DefaultValueAttribute")
-                .Single();
+            var defValAttr = (NamedTypeSymbol)
+                level02NS.GetTypeMembers("DefaultValueAttribute").Single();
 
             var type01 = (NamedTypeSymbol)thirdNS.GetTypeMembers("DataAdapter").Single();
             var prop = type01.GetMember("MissingMappingAction") as PropertySymbol;
@@ -1589,10 +1572,8 @@ public class Class1
                     var peModule = (PEModuleSymbol)module;
                     var class1 = module.GlobalNamespace.GetTypeMember("Class1");
                     var field = class1.GetMember<PEFieldSymbol>("d1");
-                    var parameter = (PEParameterSymbol)class1
-                        .GetMethod("M1")
-                        .GetParameters()
-                        .Single();
+                    var parameter = (PEParameterSymbol)
+                        class1.GetMethod("M1").GetParameters().Single();
 
                     Assert.Empty(field.GetAttributes());
                     Assert.Equal(

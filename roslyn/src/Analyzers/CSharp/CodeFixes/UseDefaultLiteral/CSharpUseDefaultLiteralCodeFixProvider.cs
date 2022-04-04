@@ -84,10 +84,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDefaultLiteral
 
             var originalNodes = diagnostics.SelectAsArray(
                 d =>
-                    (DefaultExpressionSyntax)originalRoot.FindNode(
-                        d.Location.SourceSpan,
-                        getInnermostNodeForTie: true
-                    )
+                    (DefaultExpressionSyntax)
+                        originalRoot.FindNode(d.Location.SourceSpan, getInnermostNodeForTie: true)
             );
 
             await editor

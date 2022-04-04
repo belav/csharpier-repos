@@ -108,24 +108,22 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                     m =>
                         method.TypeParameters.SelectAsArray(
                             t =>
-                                (TypeParameterSymbol)new SimpleTypeParameterSymbol(
-                                    m,
-                                    t.Ordinal,
-                                    t.Name
-                                )
+                                (TypeParameterSymbol)
+                                    new SimpleTypeParameterSymbol(m, t.Ordinal, t.Name)
                         ),
                     m => m.TypeParameters[0], // return type is <>T&
                     m =>
                         method.Parameters.SelectAsArray(
                             p =>
-                                (ParameterSymbol)SynthesizedParameterSymbol.Create(
-                                    m,
-                                    p.TypeWithAnnotations,
-                                    p.Ordinal,
-                                    p.RefKind,
-                                    p.Name,
-                                    p.RefCustomModifiers
-                                )
+                                (ParameterSymbol)
+                                    SynthesizedParameterSymbol.Create(
+                                        m,
+                                        p.TypeWithAnnotations,
+                                        p.Ordinal,
+                                        p.RefKind,
+                                        p.Name,
+                                        p.RefCustomModifiers
+                                    )
                         )
                 );
                 var local = variable.LocalSymbol;

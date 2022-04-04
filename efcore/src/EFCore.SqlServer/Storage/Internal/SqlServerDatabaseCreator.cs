@@ -116,17 +116,18 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
             Dependencies.ExecutionStrategy.Execute(
                 _connection,
                 connection =>
-                    (int)CreateHasTablesCommand()
-                        .ExecuteScalar(
-                            new RelationalCommandParameterObject(
-                                connection,
-                                null,
-                                null,
-                                Dependencies.CurrentContext.Context,
-                                Dependencies.CommandLogger,
-                                CommandSource.Migrations
-                            )
-                        )! != 0,
+                    (int)
+                        CreateHasTablesCommand()
+                            .ExecuteScalar(
+                                new RelationalCommandParameterObject(
+                                    connection,
+                                    null,
+                                    null,
+                                    Dependencies.CurrentContext.Context,
+                                    Dependencies.CommandLogger,
+                                    CommandSource.Migrations
+                                )
+                            )! != 0,
                 null
             );
 
@@ -139,28 +140,29 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
         public override async Task<bool> HasTablesAsync(
             CancellationToken cancellationToken = default
         ) =>
-            (int)(
-                await Dependencies.ExecutionStrategy
-                    .ExecuteAsync(
-                        _connection,
-                        (connection, ct) =>
-                            CreateHasTablesCommand()
-                                .ExecuteScalarAsync(
-                                    new RelationalCommandParameterObject(
-                                        connection,
-                                        null,
-                                        null,
-                                        Dependencies.CurrentContext.Context,
-                                        Dependencies.CommandLogger,
-                                        CommandSource.Migrations
+            (int)
+                (
+                    await Dependencies.ExecutionStrategy
+                        .ExecuteAsync(
+                            _connection,
+                            (connection, ct) =>
+                                CreateHasTablesCommand()
+                                    .ExecuteScalarAsync(
+                                        new RelationalCommandParameterObject(
+                                            connection,
+                                            null,
+                                            null,
+                                            Dependencies.CurrentContext.Context,
+                                            Dependencies.CommandLogger,
+                                            CommandSource.Migrations
+                                        ),
+                                        cancellationToken: ct
                                     ),
-                                    cancellationToken: ct
-                                ),
-                        null,
-                        cancellationToken
-                    )
-                    .ConfigureAwait(false)
-            )! != 0;
+                            null,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false)
+                )! != 0;
 
         private IRelationalCommand CreateHasTablesCommand() =>
             _rawSqlCommandBuilder.Build(

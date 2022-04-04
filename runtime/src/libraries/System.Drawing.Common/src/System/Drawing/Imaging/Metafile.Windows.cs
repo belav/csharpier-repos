@@ -337,20 +337,16 @@ namespace System.Drawing.Imaging
                 if (metafileType == MetafileType.Wmf || metafileType == MetafileType.WmfPlaceable)
                 {
                     // WMF header
-                    header.wmf = (MetafileHeaderWmf)Marshal.PtrToStructure(
-                        memory,
-                        typeof(MetafileHeaderWmf)
-                    )!;
+                    header.wmf = (MetafileHeaderWmf)
+                        Marshal.PtrToStructure(memory, typeof(MetafileHeaderWmf))!;
                     header.emf = null;
                 }
                 else
                 {
                     // EMF header
                     header.wmf = null;
-                    header.emf = (MetafileHeaderEmf)Marshal.PtrToStructure(
-                        memory,
-                        typeof(MetafileHeaderEmf)
-                    )!;
+                    header.emf = (MetafileHeaderEmf)
+                        Marshal.PtrToStructure(memory, typeof(MetafileHeaderEmf))!;
                 }
             }
             finally
@@ -388,20 +384,16 @@ namespace System.Drawing.Imaging
                 if (metafileType == MetafileType.Wmf || metafileType == MetafileType.WmfPlaceable)
                 {
                     // WMF header
-                    header.wmf = (MetafileHeaderWmf)Marshal.PtrToStructure(
-                        memory,
-                        typeof(MetafileHeaderWmf)
-                    )!;
+                    header.wmf = (MetafileHeaderWmf)
+                        Marshal.PtrToStructure(memory, typeof(MetafileHeaderWmf))!;
                     header.emf = null;
                 }
                 else
                 {
                     // EMF header
                     header.wmf = null;
-                    header.emf = (MetafileHeaderEmf)Marshal.PtrToStructure(
-                        memory,
-                        typeof(MetafileHeaderEmf)
-                    )!;
+                    header.emf = (MetafileHeaderEmf)
+                        Marshal.PtrToStructure(memory, typeof(MetafileHeaderEmf))!;
                 }
             }
             finally
@@ -438,20 +430,16 @@ namespace System.Drawing.Imaging
                 if (metafileType == MetafileType.Wmf || metafileType == MetafileType.WmfPlaceable)
                 {
                     // WMF header
-                    header.wmf = (MetafileHeaderWmf)Marshal.PtrToStructure(
-                        memory,
-                        typeof(MetafileHeaderWmf)
-                    )!;
+                    header.wmf = (MetafileHeaderWmf)
+                        Marshal.PtrToStructure(memory, typeof(MetafileHeaderWmf))!;
                     header.emf = null;
                 }
                 else
                 {
                     // EMF header
                     header.wmf = null;
-                    header.emf = (MetafileHeaderEmf)Marshal.PtrToStructure(
-                        memory,
-                        typeof(MetafileHeaderEmf)
-                    )!;
+                    header.emf = (MetafileHeaderEmf)
+                        Marshal.PtrToStructure(memory, typeof(MetafileHeaderEmf))!;
                 }
             }
             finally

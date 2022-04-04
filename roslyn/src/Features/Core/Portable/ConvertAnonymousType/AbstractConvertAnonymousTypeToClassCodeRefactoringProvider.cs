@@ -309,8 +309,8 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousType
                 childCreation,
                 (currentNode, g) =>
                 {
-                    var currentAnonymousObject =
-                        (TAnonymousObjectCreationExpressionSyntax)currentNode;
+                    var currentAnonymousObject = (TAnonymousObjectCreationExpressionSyntax)
+                        currentNode;
 
                     // If we hit the node the user started on, then add the rename annotation here.
                     var className = classSymbol.Name;
@@ -323,10 +323,13 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousType
                     var classNameNode =
                         classSymbol.TypeParameters.Length == 0
                             ? (TNameSyntax)g.IdentifierName(classNameToken)
-                            : (TNameSyntax)g.GenericName(
-                                  classNameToken,
-                                  classSymbol.TypeParameters.Select(tp => g.IdentifierName(tp.Name))
-                              );
+                            : (TNameSyntax)
+                                  g.GenericName(
+                                      classNameToken,
+                                      classSymbol.TypeParameters.Select(
+                                          tp => g.IdentifierName(tp.Name)
+                                      )
+                                  );
 
                     return CreateObjectCreationExpression(classNameNode, currentAnonymousObject)
                         .WithAdditionalAnnotations(Formatter.Annotation);

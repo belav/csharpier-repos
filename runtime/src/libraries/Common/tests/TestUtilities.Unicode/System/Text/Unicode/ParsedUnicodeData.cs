@@ -91,16 +91,10 @@ namespace System.Text.Unicode
                     continue;
                 }
 
-                int fromCodePoint = (int)uint.Parse(
-                    split[0],
-                    NumberStyles.HexNumber,
-                    CultureInfo.InvariantCulture
-                );
-                int toCodePoint = (int)uint.Parse(
-                    split[2],
-                    NumberStyles.HexNumber,
-                    CultureInfo.InvariantCulture
-                );
+                int fromCodePoint = (int)
+                    uint.Parse(split[0], NumberStyles.HexNumber, CultureInfo.InvariantCulture);
+                int toCodePoint = (int)
+                    uint.Parse(split[2], NumberStyles.HexNumber, CultureInfo.InvariantCulture);
                 dict.Add(fromCodePoint, toCodePoint);
             }
 

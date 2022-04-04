@@ -57,8 +57,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ChangeSignature
                 var testOptions = new TestParameters();
 
                 using var workspace = CreateWorkspaceFromOptions(markup, testOptions);
-                var optionsService =
-                    (TestChangeSignatureOptionsService)workspace.Services.GetRequiredService<IChangeSignatureOptionsService>();
+                var optionsService = (TestChangeSignatureOptionsService)
+                    workspace.Services.GetRequiredService<IChangeSignatureOptionsService>();
                 optionsService.UpdatedSignature = updatedSignature;
 
                 var refactoring = await GetCodeRefactoringAsync(workspace, testOptions);

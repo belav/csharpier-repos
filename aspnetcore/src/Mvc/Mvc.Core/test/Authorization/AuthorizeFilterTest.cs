@@ -47,9 +47,8 @@ public class AuthorizeFilterTest
         // this filter.
         var authorizeFilterFactory = new AuthorizeFilter();
         var filterFactory = authorizeFilterFactory as IFilterFactory;
-        var authorizeFilter = (AuthorizeFilter)filterFactory.CreateInstance(
-            authorizationContext.HttpContext.RequestServices
-        );
+        var authorizeFilter = (AuthorizeFilter)
+            filterFactory.CreateInstance(authorizationContext.HttpContext.RequestServices);
         authorizationContext.Filters.Add(authorizeFilter);
 
         // Act

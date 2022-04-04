@@ -33,9 +33,8 @@ namespace System.Xml.Tests
             int i = ((CurVariation.id) - 1) * 2;
             string strEnVal = string.Empty;
 
-            char c = (char)BinaryPrimitives.ReadUInt16LittleEndian(
-                new Span<byte>(_byte_Digit, i, 2)
-            );
+            char c = (char)
+                BinaryPrimitives.ReadUInt16LittleEndian(new Span<byte>(_byte_Digit, i, 2));
             strEnVal = XmlConvert.EncodeNmToken(c.ToString());
             if (_Expbyte_Digit[i / 2] != "_x0A70_")
             {

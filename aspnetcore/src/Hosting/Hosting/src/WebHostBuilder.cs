@@ -265,9 +265,8 @@ public class WebHostBuilder : IWebHostBuilder
                         var attribute in assembly.GetCustomAttributes<HostingStartupAttribute>()
                     )
                     {
-                        var hostingStartup = (IHostingStartup)Activator.CreateInstance(
-                            attribute.HostingStartupType
-                        )!;
+                        var hostingStartup = (IHostingStartup)
+                            Activator.CreateInstance(attribute.HostingStartupType)!;
                         hostingStartup.Configure(this);
                     }
                 }

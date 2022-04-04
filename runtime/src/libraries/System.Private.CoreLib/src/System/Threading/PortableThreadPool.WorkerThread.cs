@@ -44,9 +44,10 @@ namespace System.Threading
                     if (NativeRuntimeEventSource.Log.IsEnabled())
                     {
                         NativeRuntimeEventSource.Log.ThreadPoolWorkerThreadWait(
-                            (uint)ThreadPoolInstance._separated.counts
-                                .VolatileRead()
-                                .NumExistingThreads
+                            (uint)
+                                ThreadPoolInstance._separated.counts
+                                    .VolatileRead()
+                                    .NumExistingThreads
                         );
                     }
                 }

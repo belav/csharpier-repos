@@ -495,11 +495,12 @@ namespace System.Net
         private static void Prod()
         {
             s_threadReadyEvent.Set();
-            TimerThreadState oldState = (TimerThreadState)Interlocked.CompareExchange(
-                ref s_threadState,
-                (int)TimerThreadState.Running,
-                (int)TimerThreadState.Idle
-            );
+            TimerThreadState oldState = (TimerThreadState)
+                Interlocked.CompareExchange(
+                    ref s_threadState,
+                    (int)TimerThreadState.Running,
+                    (int)TimerThreadState.Idle
+                );
 
             if (oldState == TimerThreadState.Idle)
             {

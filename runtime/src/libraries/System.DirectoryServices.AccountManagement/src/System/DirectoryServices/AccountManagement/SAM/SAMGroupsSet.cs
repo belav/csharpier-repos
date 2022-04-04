@@ -62,8 +62,8 @@ namespace System.DirectoryServices.AccountManagement
             {
                 // Got a group.  Create a DirectoryEntry for it.
                 // Clone the ctxBase to pick up its credentials, then build an appropriate path.
-                UnsafeNativeMethods.IADs nativeMember =
-                    (UnsafeNativeMethods.IADs)_groupsEnumerator.Current;
+                UnsafeNativeMethods.IADs nativeMember = (UnsafeNativeMethods.IADs)
+                    _groupsEnumerator.Current;
 
                 // We do this, rather than using the DirectoryEntry constructor that takes a native IADs object,
                 // is so the credentials get transferred to the new DirectoryEntry.  If we just use the native

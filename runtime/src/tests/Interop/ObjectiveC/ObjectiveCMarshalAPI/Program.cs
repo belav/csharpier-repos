@@ -320,9 +320,8 @@ namespace ObjectiveCMarshalAPI
             }
             else if (e is ExceptionException)
             {
-                return (delegate* unmanaged<
-                    IntPtr,
-                    void>)NativeObjCMarshalTests.GetThrowException();
+                return (delegate* unmanaged<IntPtr, void>)
+                    NativeObjCMarshalTests.GetThrowException();
             }
 
             Assert.True(false, "Unknown exception type");
@@ -351,15 +350,13 @@ namespace ObjectiveCMarshalAPI
                 new Scenario((delegate* unmanaged<int, void>)&UCO_ThrowIntException, 3423),
                 new Scenario((delegate* unmanaged<int, void>)&UCO_ThrowExceptionException, 5432),
                 new Scenario(
-                    (delegate* unmanaged<int, void>)Marshal.GetFunctionPointerForDelegate(
-                        delThrowInt
-                    ),
+                    (delegate* unmanaged<int, void>)
+                        Marshal.GetFunctionPointerForDelegate(delThrowInt),
                     6453
                 ),
                 new Scenario(
-                    (delegate* unmanaged<int, void>)Marshal.GetFunctionPointerForDelegate(
-                        delThrowException
-                    ),
+                    (delegate* unmanaged<int, void>)
+                        Marshal.GetFunctionPointerForDelegate(delThrowException),
                     5343
                 )
             };

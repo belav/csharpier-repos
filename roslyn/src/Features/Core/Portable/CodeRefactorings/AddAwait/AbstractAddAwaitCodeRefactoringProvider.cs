@@ -120,10 +120,14 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.AddAwait
             withoutTrivia = (TExpressionSyntax)generator.AddParentheses(withoutTrivia);
             if (withConfigureAwait)
             {
-                withoutTrivia = (TExpressionSyntax)generator.InvocationExpression(
-                    generator.MemberAccessExpression(withoutTrivia, nameof(Task.ConfigureAwait)),
-                    generator.FalseLiteralExpression()
-                );
+                withoutTrivia = (TExpressionSyntax)
+                    generator.InvocationExpression(
+                        generator.MemberAccessExpression(
+                            withoutTrivia,
+                            nameof(Task.ConfigureAwait)
+                        ),
+                        generator.FalseLiteralExpression()
+                    );
             }
 
             var awaitExpression = generator

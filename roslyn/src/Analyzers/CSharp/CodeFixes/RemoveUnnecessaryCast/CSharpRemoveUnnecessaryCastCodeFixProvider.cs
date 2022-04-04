@@ -65,10 +65,11 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryCast
         {
             var castNodes = diagnostics.SelectAsArray(
                 d =>
-                    (ExpressionSyntax)d.AdditionalLocations[0].FindNode(
-                        getInnermostNodeForTie: true,
-                        cancellationToken
-                    )
+                    (ExpressionSyntax)
+                        d.AdditionalLocations[0].FindNode(
+                            getInnermostNodeForTie: true,
+                            cancellationToken
+                        )
             );
 
             await editor

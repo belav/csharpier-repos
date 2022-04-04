@@ -288,8 +288,8 @@ namespace System.Web.Http.SelfHost
                         using (HttpResponseMessage ignore = await client.SendAsync(expectedRequest))
                         {
                             // Assert
-                            SelfHostHttpRequestContext typedContext =
-                                (SelfHostHttpRequestContext)context;
+                            SelfHostHttpRequestContext typedContext = (SelfHostHttpRequestContext)
+                                context;
                             Assert.Equal(expectedRequest.RequestUri, via);
                             Assert.Same(expectedConfiguration, context.Configuration);
                             Assert.Equal(

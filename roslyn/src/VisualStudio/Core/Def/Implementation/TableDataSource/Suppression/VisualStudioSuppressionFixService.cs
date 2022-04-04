@@ -74,8 +74,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Suppression
             _diagnosticService = diagnosticService;
             _buildErrorDiagnosticService = workspace.ExternalErrorDiagnosticUpdateSource;
             _codeFixService = codeFixService;
-            _suppressionStateService =
-                (VisualStudioDiagnosticListSuppressionStateService)suppressionStateService;
+            _suppressionStateService = (VisualStudioDiagnosticListSuppressionStateService)
+                suppressionStateService;
             _editHandlerService = editHandlerService;
             _uiThreadOperationExecutor = uiThreadOperationExecutor;
             _vsHierarchyItemManager = vsHierarchyItemManager;

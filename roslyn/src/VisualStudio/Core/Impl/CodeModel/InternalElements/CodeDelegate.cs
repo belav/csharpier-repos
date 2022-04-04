@@ -79,11 +79,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
         {
             get
             {
-                return (EnvDTE.CodeClass)this.CodeModelService.CreateCodeType(
-                    this.State,
-                    this.FileCodeModel.GetProjectId(),
-                    this.FileCodeModel.GetCompilation().GetSpecialType(SpecialType.System_Delegate)
-                );
+                return (EnvDTE.CodeClass)
+                    this.CodeModelService.CreateCodeType(
+                        this.State,
+                        this.FileCodeModel.GetProjectId(),
+                        this.FileCodeModel
+                            .GetCompilation()
+                            .GetSpecialType(SpecialType.System_Delegate)
+                    );
             }
         }
 

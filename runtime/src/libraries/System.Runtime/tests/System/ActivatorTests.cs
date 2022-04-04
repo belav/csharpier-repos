@@ -37,10 +37,8 @@ namespace System.Tests
 
             Activator.CreateInstance(typeof(StructTypeWithoutReflectionMetadata));
 
-            StructWithPublicDefaultConstructor s =
-                (StructWithPublicDefaultConstructor)Activator.CreateInstance(
-                    typeof(StructWithPublicDefaultConstructor)
-                );
+            StructWithPublicDefaultConstructor s = (StructWithPublicDefaultConstructor)
+                Activator.CreateInstance(typeof(StructWithPublicDefaultConstructor));
             Assert.True(s.ConstructorInvoked);
         }
 
@@ -119,15 +117,15 @@ namespace System.Tests
         {
             // Activator holds a cache of constructors and the types to which they belong.
             // Test caching behaviour by activating multiple times.
-            TypeWithPrivateDefaultConstructor c1 =
-                (TypeWithPrivateDefaultConstructor)Activator.CreateInstance(
+            TypeWithPrivateDefaultConstructor c1 = (TypeWithPrivateDefaultConstructor)
+                Activator.CreateInstance(
                     typeof(TypeWithPrivateDefaultConstructor),
                     nonPublic: true
                 );
             Assert.Equal(-1, c1.Property);
 
-            TypeWithPrivateDefaultConstructor c2 =
-                (TypeWithPrivateDefaultConstructor)Activator.CreateInstance(
+            TypeWithPrivateDefaultConstructor c2 = (TypeWithPrivateDefaultConstructor)
+                Activator.CreateInstance(
                     typeof(TypeWithPrivateDefaultConstructor),
                     nonPublic: true
                 );
@@ -852,24 +850,26 @@ namespace System.Tests
             );
 
             {
-                HasPublicCtor a = (HasPublicCtor)Activator.CreateInstance(
-                    typeof(HasPublicCtor),
-                    BindingFlags.Public | BindingFlags.Instance,
-                    null,
-                    new object[] { 100 },
-                    null
-                );
+                HasPublicCtor a = (HasPublicCtor)
+                    Activator.CreateInstance(
+                        typeof(HasPublicCtor),
+                        BindingFlags.Public | BindingFlags.Instance,
+                        null,
+                        new object[] { 100 },
+                        null
+                    );
                 Assert.Equal(100, a.Value);
             }
 
             {
-                HasPrivateCtor a = (HasPrivateCtor)Activator.CreateInstance(
-                    typeof(HasPrivateCtor),
-                    BindingFlags.NonPublic | BindingFlags.Instance,
-                    null,
-                    new object[] { 100 },
-                    null
-                );
+                HasPrivateCtor a = (HasPrivateCtor)
+                    Activator.CreateInstance(
+                        typeof(HasPrivateCtor),
+                        BindingFlags.NonPublic | BindingFlags.Instance,
+                        null,
+                        new object[] { 100 },
+                        null
+                    );
                 Assert.Equal(100, a.Value);
             }
         }

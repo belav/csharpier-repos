@@ -89,8 +89,8 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
                         }
                         else if (delegateCreation.Target.Kind == OperationKind.MethodReference)
                         {
-                            var methodReference =
-                                (IMethodReferenceOperation)delegateCreation.Target;
+                            var methodReference = (IMethodReferenceOperation)
+                                delegateCreation.Target;
                             DisallowMvcBindArgumentsOnParameters(
                                 in operationAnalysisContext,
                                 wellKnownTypes,

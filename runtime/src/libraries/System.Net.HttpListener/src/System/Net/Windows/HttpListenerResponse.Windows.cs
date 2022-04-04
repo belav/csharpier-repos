@@ -595,8 +595,8 @@ namespace System.Net
                                 ];
                                 gcHandle = GCHandle.Alloc(unknownHeaders, GCHandleType.Pinned);
                                 pinnedHeaders.Add(gcHandle);
-                                headers.pUnknownHeaders =
-                                    (Interop.HttpApi.HTTP_UNKNOWN_HEADER*)gcHandle.AddrOfPinnedObject();
+                                headers.pUnknownHeaders = (Interop.HttpApi.HTTP_UNKNOWN_HEADER*)
+                                    gcHandle.AddrOfPinnedObject();
                             }
 
                             //----------------------------------------
@@ -612,24 +612,24 @@ namespace System.Net
                             {
                                 //Add Name
                                 bytes = new byte[WebHeaderEncoding.GetByteCount(headerName)];
-                                unknownHeaders[headers.UnknownHeaderCount].NameLength =
-                                    (ushort)bytes.Length;
+                                unknownHeaders[headers.UnknownHeaderCount].NameLength = (ushort)
+                                    bytes.Length;
                                 WebHeaderEncoding.GetBytes(headerName, 0, bytes.Length, bytes, 0);
                                 gcHandle = GCHandle.Alloc(bytes, GCHandleType.Pinned);
                                 pinnedHeaders.Add(gcHandle);
-                                unknownHeaders[headers.UnknownHeaderCount].pName =
-                                    (sbyte*)gcHandle.AddrOfPinnedObject();
+                                unknownHeaders[headers.UnknownHeaderCount].pName = (sbyte*)
+                                    gcHandle.AddrOfPinnedObject();
 
                                 //Add Value
                                 headerValue = headerValues[headerValueIndex];
                                 bytes = new byte[WebHeaderEncoding.GetByteCount(headerValue)];
-                                unknownHeaders[headers.UnknownHeaderCount].RawValueLength =
-                                    (ushort)bytes.Length;
+                                unknownHeaders[headers.UnknownHeaderCount].RawValueLength = (ushort)
+                                    bytes.Length;
                                 WebHeaderEncoding.GetBytes(headerValue, 0, bytes.Length, bytes, 0);
                                 gcHandle = GCHandle.Alloc(bytes, GCHandleType.Pinned);
                                 pinnedHeaders.Add(gcHandle);
-                                unknownHeaders[headers.UnknownHeaderCount].pRawValue =
-                                    (sbyte*)gcHandle.AddrOfPinnedObject();
+                                unknownHeaders[headers.UnknownHeaderCount].pRawValue = (sbyte*)
+                                    gcHandle.AddrOfPinnedObject();
                                 headers.UnknownHeaderCount++;
                                 if (NetEventSource.Log.IsEnabled())
                                     NetEventSource.Info(
@@ -652,8 +652,8 @@ namespace System.Net
                                 WebHeaderEncoding.GetBytes(headerValue, 0, bytes.Length, bytes, 0);
                                 gcHandle = GCHandle.Alloc(bytes, GCHandleType.Pinned);
                                 pinnedHeaders.Add(gcHandle);
-                                pKnownHeaders[lookup].pRawValue =
-                                    (sbyte*)gcHandle.AddrOfPinnedObject();
+                                pKnownHeaders[lookup].pRawValue = (sbyte*)
+                                    gcHandle.AddrOfPinnedObject();
                                 if (NetEventSource.Log.IsEnabled())
                                 {
                                     NetEventSource.Info(

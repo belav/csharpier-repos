@@ -59,10 +59,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             PropertyAccessMode? propertyAccessMode,
             ConfigurationSource configurationSource
         ) =>
-            (InternalServicePropertyBuilder?)base.UsePropertyAccessMode(
-                propertyAccessMode,
-                configurationSource
-            );
+            (InternalServicePropertyBuilder?)
+                base.UsePropertyAccessMode(propertyAccessMode, configurationSource);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

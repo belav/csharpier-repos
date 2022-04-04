@@ -765,8 +765,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case BoundKind.IndexOrRangePatternIndexerAccess:
 
                     {
-                        var patternIndexerAccess =
-                            (BoundIndexOrRangePatternIndexerAccess)originalLHS;
+                        var patternIndexerAccess = (BoundIndexOrRangePatternIndexerAccess)
+                            originalLHS;
                         RefKind refKind = patternIndexerAccess.PatternSymbol switch
                         {
                             PropertySymbol p => p.RefKind,

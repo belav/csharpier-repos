@@ -70,12 +70,13 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             var semanticModel = await document
                 .ReuseExistingSpeculativeModelAsync(position, cancellationToken)
                 .ConfigureAwait(false);
-            var syntaxContext = (TContext)syntaxContextService.CreateContext(
-                document,
-                semanticModel,
-                position,
-                cancellationToken
-            );
+            var syntaxContext = (TContext)
+                syntaxContextService.CreateContext(
+                    document,
+                    semanticModel,
+                    position,
+                    cancellationToken
+                );
             var keywords = await RecommendKeywordsAsync(
                     document,
                     position,

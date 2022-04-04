@@ -3790,9 +3790,8 @@ namespace System.Xml.Xsl.IlGen
                                 {
                                     if (local7.NodeType == QilNodeType.LiteralType)
                                     {
-                                        XmlQueryType local8 = (XmlQueryType)(
-                                            (QilLiteral)local7
-                                        ).Value!;
+                                        XmlQueryType local8 = (XmlQueryType)
+                                            ((QilLiteral)local7).Value!;
                                         if ((local8) == (XmlQueryTypeFactory.Attribute))
                                         {
                                             if (local9.NodeType == QilNodeType.Eq)
@@ -4045,9 +4044,8 @@ namespace System.Xml.Xsl.IlGen
                                 {
                                     if (local6.NodeType == QilNodeType.LiteralType)
                                     {
-                                        XmlQueryType local7 = (XmlQueryType)(
-                                            (QilLiteral)local6
-                                        ).Value!;
+                                        XmlQueryType local7 = (XmlQueryType)
+                                            ((QilLiteral)local6).Value!;
                                         if ((local7) == (XmlQueryTypeFactory.Element))
                                         {
                                             if (local8.NodeType == QilNodeType.Eq)

@@ -128,29 +128,30 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector128<float>)typeof(Avx2)
-                            .GetMethod(
-                                nameof(Avx2.GatherMaskVector128),
-                                new Type[]
-                                {
-                                    typeof(Vector128<float>),
-                                    typeof(float*),
-                                    typeof(Vector128<int>),
-                                    typeof(Vector128<float>),
-                                    typeof(byte)
-                                }
-                            )
-                            .Invoke(
-                                null,
-                                new object[]
-                                {
-                                    sourcef,
-                                    Pointer.Box(floatTable.inArrayPtr, typeof(float*)),
-                                    indexi,
-                                    maskf,
-                                    (byte)4
-                                }
-                            );
+                        (Vector128<float>)
+                            typeof(Avx2)
+                                .GetMethod(
+                                    nameof(Avx2.GatherMaskVector128),
+                                    new Type[]
+                                    {
+                                        typeof(Vector128<float>),
+                                        typeof(float*),
+                                        typeof(Vector128<int>),
+                                        typeof(Vector128<float>),
+                                        typeof(byte)
+                                    }
+                                )
+                                .Invoke(
+                                    null,
+                                    new object[]
+                                    {
+                                        sourcef,
+                                        Pointer.Box(floatTable.inArrayPtr, typeof(float*)),
+                                        indexi,
+                                        maskf,
+                                        (byte)4
+                                    }
+                                );
                     Unsafe.Write(floatTable.outArrayPtr, vf);
 
                     if (
@@ -277,29 +278,30 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vd =
-                        (Vector128<double>)typeof(Avx2)
-                            .GetMethod(
-                                nameof(Avx2.GatherMaskVector128),
-                                new Type[]
-                                {
-                                    typeof(Vector128<double>),
-                                    typeof(double*),
-                                    typeof(Vector128<int>),
-                                    typeof(Vector128<double>),
-                                    typeof(byte)
-                                }
-                            )
-                            .Invoke(
-                                null,
-                                new object[]
-                                {
-                                    sourced,
-                                    Pointer.Box(doubletTable.inArrayPtr, typeof(double*)),
-                                    indexi,
-                                    maskd,
-                                    (byte)8
-                                }
-                            );
+                        (Vector128<double>)
+                            typeof(Avx2)
+                                .GetMethod(
+                                    nameof(Avx2.GatherMaskVector128),
+                                    new Type[]
+                                    {
+                                        typeof(Vector128<double>),
+                                        typeof(double*),
+                                        typeof(Vector128<int>),
+                                        typeof(Vector128<double>),
+                                        typeof(byte)
+                                    }
+                                )
+                                .Invoke(
+                                    null,
+                                    new object[]
+                                    {
+                                        sourced,
+                                        Pointer.Box(doubletTable.inArrayPtr, typeof(double*)),
+                                        indexi,
+                                        maskd,
+                                        (byte)8
+                                    }
+                                );
                     Unsafe.Write(doubletTable.outArrayPtr, vd);
 
                     if (
@@ -419,29 +421,30 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector128<int>)typeof(Avx2)
-                            .GetMethod(
-                                nameof(Avx2.GatherMaskVector128),
-                                new Type[]
-                                {
-                                    typeof(Vector128<int>),
-                                    typeof(int*),
-                                    typeof(Vector128<int>),
-                                    typeof(Vector128<int>),
-                                    typeof(byte)
-                                }
-                            )
-                            .Invoke(
-                                null,
-                                new object[]
-                                {
-                                    sourcei,
-                                    Pointer.Box(intTable.inArrayPtr, typeof(int*)),
-                                    indexi,
-                                    maski,
-                                    (byte)4
-                                }
-                            );
+                        (Vector128<int>)
+                            typeof(Avx2)
+                                .GetMethod(
+                                    nameof(Avx2.GatherMaskVector128),
+                                    new Type[]
+                                    {
+                                        typeof(Vector128<int>),
+                                        typeof(int*),
+                                        typeof(Vector128<int>),
+                                        typeof(Vector128<int>),
+                                        typeof(byte)
+                                    }
+                                )
+                                .Invoke(
+                                    null,
+                                    new object[]
+                                    {
+                                        sourcei,
+                                        Pointer.Box(intTable.inArrayPtr, typeof(int*)),
+                                        indexi,
+                                        maski,
+                                        (byte)4
+                                    }
+                                );
                     Unsafe.Write(intTable.outArrayPtr, vf);
 
                     if (!intTable.CheckResult((x, y) => x == y, intIndexTable))
@@ -547,29 +550,30 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector128<uint>)typeof(Avx2)
-                            .GetMethod(
-                                nameof(Avx2.GatherMaskVector128),
-                                new Type[]
-                                {
-                                    typeof(Vector128<uint>),
-                                    typeof(uint*),
-                                    typeof(Vector128<int>),
-                                    typeof(Vector128<uint>),
-                                    typeof(byte)
-                                }
-                            )
-                            .Invoke(
-                                null,
-                                new object[]
-                                {
-                                    sourceui,
-                                    Pointer.Box(intTable.inArrayPtr, typeof(uint*)),
-                                    indexi,
-                                    maskui,
-                                    (byte)4
-                                }
-                            );
+                        (Vector128<uint>)
+                            typeof(Avx2)
+                                .GetMethod(
+                                    nameof(Avx2.GatherMaskVector128),
+                                    new Type[]
+                                    {
+                                        typeof(Vector128<uint>),
+                                        typeof(uint*),
+                                        typeof(Vector128<int>),
+                                        typeof(Vector128<uint>),
+                                        typeof(byte)
+                                    }
+                                )
+                                .Invoke(
+                                    null,
+                                    new object[]
+                                    {
+                                        sourceui,
+                                        Pointer.Box(intTable.inArrayPtr, typeof(uint*)),
+                                        indexi,
+                                        maskui,
+                                        (byte)4
+                                    }
+                                );
                     Unsafe.Write(intTable.outArrayPtr, vf);
 
                     if (!intTable.CheckResult((x, y) => x == y, intIndexTable))
@@ -675,29 +679,30 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector128<long>)typeof(Avx2)
-                            .GetMethod(
-                                nameof(Avx2.GatherMaskVector128),
-                                new Type[]
-                                {
-                                    typeof(Vector128<long>),
-                                    typeof(long*),
-                                    typeof(Vector128<int>),
-                                    typeof(Vector128<long>),
-                                    typeof(byte)
-                                }
-                            )
-                            .Invoke(
-                                null,
-                                new object[]
-                                {
-                                    sourcel,
-                                    Pointer.Box(longTable.inArrayPtr, typeof(long*)),
-                                    indexi,
-                                    maskl,
-                                    (byte)8
-                                }
-                            );
+                        (Vector128<long>)
+                            typeof(Avx2)
+                                .GetMethod(
+                                    nameof(Avx2.GatherMaskVector128),
+                                    new Type[]
+                                    {
+                                        typeof(Vector128<long>),
+                                        typeof(long*),
+                                        typeof(Vector128<int>),
+                                        typeof(Vector128<long>),
+                                        typeof(byte)
+                                    }
+                                )
+                                .Invoke(
+                                    null,
+                                    new object[]
+                                    {
+                                        sourcel,
+                                        Pointer.Box(longTable.inArrayPtr, typeof(long*)),
+                                        indexi,
+                                        maskl,
+                                        (byte)8
+                                    }
+                                );
                     Unsafe.Write(longTable.outArrayPtr, vf);
 
                     if (!longTable.CheckResult((x, y) => x == y, intIndexTable))
@@ -803,29 +808,30 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector128<ulong>)typeof(Avx2)
-                            .GetMethod(
-                                nameof(Avx2.GatherMaskVector128),
-                                new Type[]
-                                {
-                                    typeof(Vector128<ulong>),
-                                    typeof(ulong*),
-                                    typeof(Vector128<int>),
-                                    typeof(Vector128<ulong>),
-                                    typeof(byte)
-                                }
-                            )
-                            .Invoke(
-                                null,
-                                new object[]
-                                {
-                                    sourceul,
-                                    Pointer.Box(longTable.inArrayPtr, typeof(ulong*)),
-                                    indexi,
-                                    maskul,
-                                    (byte)8
-                                }
-                            );
+                        (Vector128<ulong>)
+                            typeof(Avx2)
+                                .GetMethod(
+                                    nameof(Avx2.GatherMaskVector128),
+                                    new Type[]
+                                    {
+                                        typeof(Vector128<ulong>),
+                                        typeof(ulong*),
+                                        typeof(Vector128<int>),
+                                        typeof(Vector128<ulong>),
+                                        typeof(byte)
+                                    }
+                                )
+                                .Invoke(
+                                    null,
+                                    new object[]
+                                    {
+                                        sourceul,
+                                        Pointer.Box(longTable.inArrayPtr, typeof(ulong*)),
+                                        indexi,
+                                        maskul,
+                                        (byte)8
+                                    }
+                                );
                     Unsafe.Write(longTable.outArrayPtr, vf);
 
                     if (!longTable.CheckResult((x, y) => x == y, intIndexTable))
@@ -933,29 +939,30 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector128<int>)typeof(Avx2)
-                            .GetMethod(
-                                nameof(Avx2.GatherMaskVector128),
-                                new Type[]
-                                {
-                                    typeof(Vector128<int>),
-                                    typeof(int*),
-                                    typeof(Vector128<long>),
-                                    typeof(Vector128<int>),
-                                    typeof(byte)
-                                }
-                            )
-                            .Invoke(
-                                null,
-                                new object[]
-                                {
-                                    sourcei,
-                                    Pointer.Box(intTable.inArrayPtr, typeof(int*)),
-                                    indexl,
-                                    maski,
-                                    (byte)4
-                                }
-                            );
+                        (Vector128<int>)
+                            typeof(Avx2)
+                                .GetMethod(
+                                    nameof(Avx2.GatherMaskVector128),
+                                    new Type[]
+                                    {
+                                        typeof(Vector128<int>),
+                                        typeof(int*),
+                                        typeof(Vector128<long>),
+                                        typeof(Vector128<int>),
+                                        typeof(byte)
+                                    }
+                                )
+                                .Invoke(
+                                    null,
+                                    new object[]
+                                    {
+                                        sourcei,
+                                        Pointer.Box(intTable.inArrayPtr, typeof(int*)),
+                                        indexl,
+                                        maski,
+                                        (byte)4
+                                    }
+                                );
                     Unsafe.Write(intTable.outArrayPtr, vf);
 
                     if (!intTable.CheckResult((x, y) => x == y, longIndexTable))
@@ -1063,29 +1070,30 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector128<uint>)typeof(Avx2)
-                            .GetMethod(
-                                nameof(Avx2.GatherMaskVector128),
-                                new Type[]
-                                {
-                                    typeof(Vector128<uint>),
-                                    typeof(uint*),
-                                    typeof(Vector128<long>),
-                                    typeof(Vector128<uint>),
-                                    typeof(byte)
-                                }
-                            )
-                            .Invoke(
-                                null,
-                                new object[]
-                                {
-                                    sourceui,
-                                    Pointer.Box(intTable.inArrayPtr, typeof(uint*)),
-                                    indexl,
-                                    maskui,
-                                    (byte)4
-                                }
-                            );
+                        (Vector128<uint>)
+                            typeof(Avx2)
+                                .GetMethod(
+                                    nameof(Avx2.GatherMaskVector128),
+                                    new Type[]
+                                    {
+                                        typeof(Vector128<uint>),
+                                        typeof(uint*),
+                                        typeof(Vector128<long>),
+                                        typeof(Vector128<uint>),
+                                        typeof(byte)
+                                    }
+                                )
+                                .Invoke(
+                                    null,
+                                    new object[]
+                                    {
+                                        sourceui,
+                                        Pointer.Box(intTable.inArrayPtr, typeof(uint*)),
+                                        indexl,
+                                        maskui,
+                                        (byte)4
+                                    }
+                                );
                     Unsafe.Write(intTable.outArrayPtr, vf);
 
                     if (!intTable.CheckResult((x, y) => x == y, longIndexTable))
@@ -1193,29 +1201,30 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector128<long>)typeof(Avx2)
-                            .GetMethod(
-                                nameof(Avx2.GatherMaskVector128),
-                                new Type[]
-                                {
-                                    typeof(Vector128<long>),
-                                    typeof(long*),
-                                    typeof(Vector128<long>),
-                                    typeof(Vector128<long>),
-                                    typeof(byte)
-                                }
-                            )
-                            .Invoke(
-                                null,
-                                new object[]
-                                {
-                                    sourcel,
-                                    Pointer.Box(longTable.inArrayPtr, typeof(long*)),
-                                    indexl,
-                                    maskl,
-                                    (byte)8
-                                }
-                            );
+                        (Vector128<long>)
+                            typeof(Avx2)
+                                .GetMethod(
+                                    nameof(Avx2.GatherMaskVector128),
+                                    new Type[]
+                                    {
+                                        typeof(Vector128<long>),
+                                        typeof(long*),
+                                        typeof(Vector128<long>),
+                                        typeof(Vector128<long>),
+                                        typeof(byte)
+                                    }
+                                )
+                                .Invoke(
+                                    null,
+                                    new object[]
+                                    {
+                                        sourcel,
+                                        Pointer.Box(longTable.inArrayPtr, typeof(long*)),
+                                        indexl,
+                                        maskl,
+                                        (byte)8
+                                    }
+                                );
                     Unsafe.Write(longTable.outArrayPtr, vf);
 
                     if (!longTable.CheckResult((x, y) => x == y, longIndexTable))
@@ -1323,29 +1332,30 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector128<ulong>)typeof(Avx2)
-                            .GetMethod(
-                                nameof(Avx2.GatherMaskVector128),
-                                new Type[]
-                                {
-                                    typeof(Vector128<ulong>),
-                                    typeof(ulong*),
-                                    typeof(Vector128<long>),
-                                    typeof(Vector128<ulong>),
-                                    typeof(byte)
-                                }
-                            )
-                            .Invoke(
-                                null,
-                                new object[]
-                                {
-                                    sourceul,
-                                    Pointer.Box(longTable.inArrayPtr, typeof(ulong*)),
-                                    indexl,
-                                    maskul,
-                                    (byte)8
-                                }
-                            );
+                        (Vector128<ulong>)
+                            typeof(Avx2)
+                                .GetMethod(
+                                    nameof(Avx2.GatherMaskVector128),
+                                    new Type[]
+                                    {
+                                        typeof(Vector128<ulong>),
+                                        typeof(ulong*),
+                                        typeof(Vector128<long>),
+                                        typeof(Vector128<ulong>),
+                                        typeof(byte)
+                                    }
+                                )
+                                .Invoke(
+                                    null,
+                                    new object[]
+                                    {
+                                        sourceul,
+                                        Pointer.Box(longTable.inArrayPtr, typeof(ulong*)),
+                                        indexl,
+                                        maskul,
+                                        (byte)8
+                                    }
+                                );
                     Unsafe.Write(longTable.outArrayPtr, vf);
 
                     if (!longTable.CheckResult((x, y) => x == y, longIndexTable))
@@ -1460,29 +1470,30 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector128<float>)typeof(Avx2)
-                            .GetMethod(
-                                nameof(Avx2.GatherMaskVector128),
-                                new Type[]
-                                {
-                                    typeof(Vector128<float>),
-                                    typeof(float*),
-                                    typeof(Vector128<long>),
-                                    typeof(Vector128<float>),
-                                    typeof(byte)
-                                }
-                            )
-                            .Invoke(
-                                null,
-                                new object[]
-                                {
-                                    sourcef,
-                                    Pointer.Box(floatTable.inArrayPtr, typeof(float*)),
-                                    indexl,
-                                    maskf,
-                                    (byte)4
-                                }
-                            );
+                        (Vector128<float>)
+                            typeof(Avx2)
+                                .GetMethod(
+                                    nameof(Avx2.GatherMaskVector128),
+                                    new Type[]
+                                    {
+                                        typeof(Vector128<float>),
+                                        typeof(float*),
+                                        typeof(Vector128<long>),
+                                        typeof(Vector128<float>),
+                                        typeof(byte)
+                                    }
+                                )
+                                .Invoke(
+                                    null,
+                                    new object[]
+                                    {
+                                        sourcef,
+                                        Pointer.Box(floatTable.inArrayPtr, typeof(float*)),
+                                        indexl,
+                                        maskf,
+                                        (byte)4
+                                    }
+                                );
                     Unsafe.Write(floatTable.outArrayPtr, vf);
 
                     if (
@@ -1611,29 +1622,30 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vd =
-                        (Vector128<double>)typeof(Avx2)
-                            .GetMethod(
-                                nameof(Avx2.GatherMaskVector128),
-                                new Type[]
-                                {
-                                    typeof(Vector128<double>),
-                                    typeof(double*),
-                                    typeof(Vector128<long>),
-                                    typeof(Vector128<double>),
-                                    typeof(byte)
-                                }
-                            )
-                            .Invoke(
-                                null,
-                                new object[]
-                                {
-                                    sourced,
-                                    Pointer.Box(doubletTable.inArrayPtr, typeof(double*)),
-                                    indexl,
-                                    maskd,
-                                    (byte)8
-                                }
-                            );
+                        (Vector128<double>)
+                            typeof(Avx2)
+                                .GetMethod(
+                                    nameof(Avx2.GatherMaskVector128),
+                                    new Type[]
+                                    {
+                                        typeof(Vector128<double>),
+                                        typeof(double*),
+                                        typeof(Vector128<long>),
+                                        typeof(Vector128<double>),
+                                        typeof(byte)
+                                    }
+                                )
+                                .Invoke(
+                                    null,
+                                    new object[]
+                                    {
+                                        sourced,
+                                        Pointer.Box(doubletTable.inArrayPtr, typeof(double*)),
+                                        indexl,
+                                        maskd,
+                                        (byte)8
+                                    }
+                                );
                     Unsafe.Write(doubletTable.outArrayPtr, vd);
 
                     if (
@@ -1755,29 +1767,30 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector128<int>)typeof(Avx2)
-                            .GetMethod(
-                                nameof(Avx2.GatherMaskVector128),
-                                new Type[]
-                                {
-                                    typeof(Vector128<int>),
-                                    typeof(int*),
-                                    typeof(Vector256<long>),
-                                    typeof(Vector128<int>),
-                                    typeof(byte)
-                                }
-                            )
-                            .Invoke(
-                                null,
-                                new object[]
-                                {
-                                    sourcei,
-                                    Pointer.Box(intTable.inArrayPtr, typeof(int*)),
-                                    indexl256,
-                                    maski,
-                                    (byte)4
-                                }
-                            );
+                        (Vector128<int>)
+                            typeof(Avx2)
+                                .GetMethod(
+                                    nameof(Avx2.GatherMaskVector128),
+                                    new Type[]
+                                    {
+                                        typeof(Vector128<int>),
+                                        typeof(int*),
+                                        typeof(Vector256<long>),
+                                        typeof(Vector128<int>),
+                                        typeof(byte)
+                                    }
+                                )
+                                .Invoke(
+                                    null,
+                                    new object[]
+                                    {
+                                        sourcei,
+                                        Pointer.Box(intTable.inArrayPtr, typeof(int*)),
+                                        indexl256,
+                                        maski,
+                                        (byte)4
+                                    }
+                                );
                     Unsafe.Write(intTable.outArrayPtr, vf);
 
                     if (!intTable.CheckResult((x, y) => x == y, vector256longIndexTable))
@@ -1885,29 +1898,30 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector128<uint>)typeof(Avx2)
-                            .GetMethod(
-                                nameof(Avx2.GatherMaskVector128),
-                                new Type[]
-                                {
-                                    typeof(Vector128<uint>),
-                                    typeof(uint*),
-                                    typeof(Vector256<long>),
-                                    typeof(Vector128<uint>),
-                                    typeof(byte)
-                                }
-                            )
-                            .Invoke(
-                                null,
-                                new object[]
-                                {
-                                    sourceui,
-                                    Pointer.Box(intTable.inArrayPtr, typeof(uint*)),
-                                    indexl256,
-                                    maskui,
-                                    (byte)4
-                                }
-                            );
+                        (Vector128<uint>)
+                            typeof(Avx2)
+                                .GetMethod(
+                                    nameof(Avx2.GatherMaskVector128),
+                                    new Type[]
+                                    {
+                                        typeof(Vector128<uint>),
+                                        typeof(uint*),
+                                        typeof(Vector256<long>),
+                                        typeof(Vector128<uint>),
+                                        typeof(byte)
+                                    }
+                                )
+                                .Invoke(
+                                    null,
+                                    new object[]
+                                    {
+                                        sourceui,
+                                        Pointer.Box(intTable.inArrayPtr, typeof(uint*)),
+                                        indexl256,
+                                        maskui,
+                                        (byte)4
+                                    }
+                                );
                     Unsafe.Write(intTable.outArrayPtr, vf);
 
                     if (!intTable.CheckResult((x, y) => x == y, vector256longIndexTable))
@@ -2022,29 +2036,30 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf =
-                        (Vector128<float>)typeof(Avx2)
-                            .GetMethod(
-                                nameof(Avx2.GatherMaskVector128),
-                                new Type[]
-                                {
-                                    typeof(Vector128<float>),
-                                    typeof(float*),
-                                    typeof(Vector256<long>),
-                                    typeof(Vector128<float>),
-                                    typeof(byte)
-                                }
-                            )
-                            .Invoke(
-                                null,
-                                new object[]
-                                {
-                                    sourcef,
-                                    Pointer.Box(floatTable.inArrayPtr, typeof(float*)),
-                                    indexl256,
-                                    maskf,
-                                    (byte)4
-                                }
-                            );
+                        (Vector128<float>)
+                            typeof(Avx2)
+                                .GetMethod(
+                                    nameof(Avx2.GatherMaskVector128),
+                                    new Type[]
+                                    {
+                                        typeof(Vector128<float>),
+                                        typeof(float*),
+                                        typeof(Vector256<long>),
+                                        typeof(Vector128<float>),
+                                        typeof(byte)
+                                    }
+                                )
+                                .Invoke(
+                                    null,
+                                    new object[]
+                                    {
+                                        sourcef,
+                                        Pointer.Box(floatTable.inArrayPtr, typeof(float*)),
+                                        indexl256,
+                                        maskf,
+                                        (byte)4
+                                    }
+                                );
                     Unsafe.Write(floatTable.outArrayPtr, vf);
 
                     if (

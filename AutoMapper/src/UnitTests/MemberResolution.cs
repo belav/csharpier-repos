@@ -82,11 +82,8 @@ namespace AutoMapper.UnitTests
                     new ModelObject { BaseString = "Base1" },
                     new ModelSubObject { BaseString = "Base2", SubString = "Sub2" }
                 };
-                _result = (DtoObject[])Mapper.Map(
-                    model,
-                    typeof(ModelObject[]),
-                    typeof(DtoObject[])
-                );
+                _result = (DtoObject[])
+                    Mapper.Map(model, typeof(ModelObject[]), typeof(DtoObject[]));
             }
 
             [Fact]
@@ -196,11 +193,8 @@ namespace AutoMapper.UnitTests
                 {
                     new ModelSubObject { BaseString = "Base2", SubString = "Sub2" }
                 };
-                _result = (DtoObject[])Mapper.Map(
-                    model,
-                    typeof(IModelObject[]),
-                    typeof(DtoObject[])
-                );
+                _result = (DtoObject[])
+                    Mapper.Map(model, typeof(IModelObject[]), typeof(DtoObject[]));
                 base.Because_of();
             }
 

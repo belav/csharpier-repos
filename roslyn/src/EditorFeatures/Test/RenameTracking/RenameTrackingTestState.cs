@@ -122,8 +122,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.RenameTracking
             };
 
             // Mock the action taken by the workspace INotificationService
-            var notificationService =
-                (INotificationServiceCallback)Workspace.Services.GetRequiredService<INotificationService>();
+            var notificationService = (INotificationServiceCallback)
+                Workspace.Services.GetRequiredService<INotificationService>();
             var callback = new Action<string, string, NotificationSeverity>(
                 (message, title, severity) => _notificationMessage = message
             );

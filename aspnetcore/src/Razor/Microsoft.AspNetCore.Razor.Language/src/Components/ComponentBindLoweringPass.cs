@@ -82,8 +82,8 @@ internal class ComponentBindLoweringPass : ComponentIntermediateNodePassBase, IR
         {
             var parameterReference = parameterReferences[i];
             var parent = parameterReference.Parent;
-            var node =
-                (TagHelperDirectiveAttributeParameterIntermediateNode)parameterReference.Node;
+            var node = (TagHelperDirectiveAttributeParameterIntermediateNode)
+                parameterReference.Node;
 
             if (!parent.Children.Contains(node))
             {

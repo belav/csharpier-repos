@@ -182,9 +182,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
         protected override SyntaxToken GetMethodNameAtInvocation(
             IEnumerable<SyntaxNodeOrToken> methodNames
         ) =>
-            (SyntaxToken)methodNames.FirstOrDefault(
-                t => !t.Parent.IsKind(SyntaxKind.MethodDeclaration)
-            );
+            (SyntaxToken)
+                methodNames.FirstOrDefault(t => !t.Parent.IsKind(SyntaxKind.MethodDeclaration));
 
         protected override async Task<OperationStatus> CheckTypeAsync(
             Document document,

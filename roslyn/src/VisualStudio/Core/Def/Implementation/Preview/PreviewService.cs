@@ -34,9 +34,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
             SVsServiceProvider serviceProvider
         ) : base(threadingContext)
         {
-            _previewChanges = (IVsPreviewChangesService)serviceProvider.GetService(
-                typeof(SVsPreviewChangesService)
-            );
+            _previewChanges = (IVsPreviewChangesService)
+                serviceProvider.GetService(typeof(SVsPreviewChangesService));
             _componentModel = (IComponentModel)serviceProvider.GetService(typeof(SComponentModel));
             _imageService = (IVsImageService2)serviceProvider.GetService(typeof(SVsImageService));
         }

@@ -294,9 +294,14 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
                 {
                     serviceProperty = entityType.AddServiceProperty(_lazyLoaderProperty);
                     serviceProperty.SetParameterBinding(
-                        (ServiceParameterBinding)new LazyLoaderParameterBindingFactory(
-                            LazyLoaderParameterBindingFactoryDependencies
-                        ).Bind(entityType, typeof(ILazyLoader), nameof(IProxyLazyLoader.LazyLoader))
+                        (ServiceParameterBinding)
+                            new LazyLoaderParameterBindingFactory(
+                                LazyLoaderParameterBindingFactoryDependencies
+                            ).Bind(
+                                entityType,
+                                typeof(ILazyLoader),
+                                nameof(IProxyLazyLoader.LazyLoader)
+                            )
                     );
                 }
 

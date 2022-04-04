@@ -439,11 +439,12 @@ public class X
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var statement = (ExpressionStatementSyntax)SyntaxFactory.ParseStatement(
-                @"
+            var statement = (ExpressionStatementSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 Dummy(11 is var x1, x1);
 "
-            );
+                );
 
             bool success = model.TryGetSpeculativeSemanticModel(
                 GetReferences(tree, "SpeculateHere").Single().SpanStart,
@@ -780,11 +781,12 @@ public class X
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var statement = (ReturnStatementSyntax)SyntaxFactory.ParseStatement(
-                @"
+            var statement = (ReturnStatementSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 return Dummy(11 is var x1, x1);
 "
-            );
+                );
 
             bool success = model.TryGetSpeculativeSemanticModel(
                 tree.GetRoot()
@@ -1094,11 +1096,12 @@ public class X
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var statement = (ThrowStatementSyntax)SyntaxFactory.ParseStatement(
-                @"
+            var statement = (ThrowStatementSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 throw Dummy(11 is var x1, x1);
 "
-            );
+                );
 
             bool success = model.TryGetSpeculativeSemanticModel(
                 tree.GetRoot()
@@ -1437,11 +1440,12 @@ public class X
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var statement = (IfStatementSyntax)SyntaxFactory.ParseStatement(
-                @"
+            var statement = (IfStatementSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 if (Dummy(11 is var x1, x1));
 "
-            );
+                );
 
             bool success = model.TryGetSpeculativeSemanticModel(
                 GetReferences(tree, "SpeculateHere").Single().SpanStart,
@@ -6129,11 +6133,12 @@ public class X
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var statement = (SwitchStatementSyntax)SyntaxFactory.ParseStatement(
-                @"
+            var statement = (SwitchStatementSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 switch (Dummy(11 is var x1, x1)) {}
 "
-            );
+                );
 
             bool success = model.TryGetSpeculativeSemanticModel(
                 GetReferences(tree, "SpeculateHere").Single().SpanStart,
@@ -7357,11 +7362,12 @@ public class X
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var statement = (LocalDeclarationStatementSyntax)SyntaxFactory.ParseStatement(
-                @"
+            var statement = (LocalDeclarationStatementSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 var y1 = Dummy(11 is var x1, x1);
 "
-            );
+                );
 
             bool success = model.TryGetSpeculativeSemanticModel(
                 GetReferences(tree, "SpeculateHere").Single().SpanStart,
@@ -7932,11 +7938,12 @@ public class X
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var statement = (ExpressionStatementSyntax)SyntaxFactory.ParseStatement(
-                @"
+            var statement = (ExpressionStatementSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 var (y1, dd) = ((123 is var x1), x1);
 "
-            );
+                );
 
             bool success = model.TryGetSpeculativeSemanticModel(
                 tree.GetRoot()
@@ -8310,11 +8317,12 @@ public class X
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var statement = (WhileStatementSyntax)SyntaxFactory.ParseStatement(
-                @"
+            var statement = (WhileStatementSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 while (Dummy(11 is var x1, x1)) ;
 "
-            );
+                );
 
             bool success = model.TryGetSpeculativeSemanticModel(
                 GetReferences(tree, "SpeculateHere").Single().SpanStart,
@@ -8673,11 +8681,12 @@ public class X
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var statement = (DoStatementSyntax)SyntaxFactory.ParseStatement(
-                @"
+            var statement = (DoStatementSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 do {} while (Dummy(11 is var x1, x1));
 "
-            );
+                );
 
             bool success = model.TryGetSpeculativeSemanticModel(
                 GetReferences(tree, "SpeculateHere").Single().SpanStart,
@@ -11011,11 +11020,12 @@ public class X
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var statement = (LockStatementSyntax)SyntaxFactory.ParseStatement(
-                @"
+            var statement = (LockStatementSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 lock (Dummy(11 is var x1, x1));
 "
-            );
+                );
 
             bool success = model.TryGetSpeculativeSemanticModel(
                 GetReferences(tree, "SpeculateHere").Single().SpanStart,
@@ -11632,11 +11642,12 @@ public class X
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var statement = (YieldStatementSyntax)SyntaxFactory.ParseStatement(
-                @"
+            var statement = (YieldStatementSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 yield return (Dummy(11 is var x1, x1));
 "
-            );
+                );
 
             bool success = model.TryGetSpeculativeSemanticModel(
                 GetReferences(tree, "SpeculateHere").Single().SpanStart,
@@ -12282,11 +12293,12 @@ public class X
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var statement = (LabeledStatementSyntax)SyntaxFactory.ParseStatement(
-                @"
+            var statement = (LabeledStatementSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 a: b: c:Dummy(11 is var x1, x1);
 "
-            );
+                );
 
             bool success = model.TryGetSpeculativeSemanticModel(
                 tree.GetRoot()
@@ -13970,11 +13982,12 @@ public class X
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var statement = (LocalDeclarationStatementSyntax)SyntaxFactory.ParseStatement(
-                @"
+            var statement = (LocalDeclarationStatementSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 var y, y1(Dummy(3 is var x1, x1));
 "
-            );
+                );
 
             bool success = model.TryGetSpeculativeSemanticModel(
                 GetReferences(tree, "SpeculateHere").Single().SpanStart,

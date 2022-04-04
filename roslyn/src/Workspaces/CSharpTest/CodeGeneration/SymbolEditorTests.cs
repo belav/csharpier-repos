@@ -93,10 +93,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Editing
             var symbol = (await GetSymbolsAsync(solution, "C")).First();
             var editor = SymbolEditor.Create(solution);
 
-            var newSymbol = (INamedTypeSymbol)await editor.EditOneDeclarationAsync(
-                symbol,
-                (e, d) => e.AddMember(d, e.Generator.MethodDeclaration("m"))
-            );
+            var newSymbol = (INamedTypeSymbol)
+                await editor.EditOneDeclarationAsync(
+                    symbol,
+                    (e, d) => e.AddMember(d, e.Generator.MethodDeclaration("m"))
+                );
             Assert.Equal(1, newSymbol.GetMembers("m").Length);
 
             var actual = await GetActualAsync(editor.GetChangedDocuments().First());
@@ -128,17 +129,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Editing
             var symbol = (await GetSymbolsAsync(solution, "C")).First();
             var editor = SymbolEditor.Create(solution);
 
-            var newSymbol = (INamedTypeSymbol)await editor.EditOneDeclarationAsync(
-                symbol,
-                (e, d) => e.AddMember(d, Generator.MethodDeclaration("m"))
-            );
+            var newSymbol = (INamedTypeSymbol)
+                await editor.EditOneDeclarationAsync(
+                    symbol,
+                    (e, d) => e.AddMember(d, Generator.MethodDeclaration("m"))
+                );
             Assert.Equal(1, newSymbol.GetMembers("m").Length);
             Assert.Equal(0, newSymbol.GetMembers("m2").Length);
 
-            newSymbol = (INamedTypeSymbol)await editor.EditOneDeclarationAsync(
-                symbol,
-                (e, d) => e.AddMember(d, Generator.MethodDeclaration("m2"))
-            );
+            newSymbol = (INamedTypeSymbol)
+                await editor.EditOneDeclarationAsync(
+                    symbol,
+                    (e, d) => e.AddMember(d, Generator.MethodDeclaration("m2"))
+                );
             Assert.Equal(1, newSymbol.GetMembers("m").Length);
             Assert.Equal(1, newSymbol.GetMembers("m2").Length);
 
@@ -171,17 +174,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Editing
             var symbol = (await GetSymbolsAsync(solution, "C")).First();
             var editor = SymbolEditor.Create(solution);
 
-            var newSymbol = (INamedTypeSymbol)await editor.EditOneDeclarationAsync(
-                symbol,
-                (e, d) => e.AddMember(d, e.Generator.MethodDeclaration("m"))
-            );
+            var newSymbol = (INamedTypeSymbol)
+                await editor.EditOneDeclarationAsync(
+                    symbol,
+                    (e, d) => e.AddMember(d, e.Generator.MethodDeclaration("m"))
+                );
             Assert.Equal(1, newSymbol.GetMembers("m").Length);
             Assert.Equal(0, newSymbol.GetMembers("m2").Length);
 
-            newSymbol = (INamedTypeSymbol)await editor.EditOneDeclarationAsync(
-                newSymbol,
-                (e, d) => e.AddMember(d, e.Generator.MethodDeclaration("m2"))
-            );
+            newSymbol = (INamedTypeSymbol)
+                await editor.EditOneDeclarationAsync(
+                    newSymbol,
+                    (e, d) => e.AddMember(d, e.Generator.MethodDeclaration("m2"))
+                );
             Assert.Equal(1, newSymbol.GetMembers("m").Length);
             Assert.Equal(1, newSymbol.GetMembers("m2").Length);
 
@@ -224,16 +229,18 @@ class B
 
             var editor = SymbolEditor.Create(solution);
 
-            var newSymbolA = (INamedTypeSymbol)await editor.EditOneDeclarationAsync(
-                symbolA,
-                (e, d) => e.AddMember(d, e.Generator.MethodDeclaration("ma"))
-            );
+            var newSymbolA = (INamedTypeSymbol)
+                await editor.EditOneDeclarationAsync(
+                    symbolA,
+                    (e, d) => e.AddMember(d, e.Generator.MethodDeclaration("ma"))
+                );
             Assert.Equal(1, newSymbolA.GetMembers("ma").Length);
 
-            var newSymbolB = (INamedTypeSymbol)await editor.EditOneDeclarationAsync(
-                symbolB,
-                (e, d) => e.AddMember(d, e.Generator.MethodDeclaration("mb"))
-            );
+            var newSymbolB = (INamedTypeSymbol)
+                await editor.EditOneDeclarationAsync(
+                    symbolB,
+                    (e, d) => e.AddMember(d, e.Generator.MethodDeclaration("mb"))
+                );
             Assert.Equal(1, newSymbolB.GetMembers("mb").Length);
 
             var actual = await GetActualAsync(editor.GetChangedDocuments().First());
@@ -276,16 +283,18 @@ class B
 
             var editor = SymbolEditor.Create(solution);
 
-            var newSymbolA = (INamedTypeSymbol)await editor.EditOneDeclarationAsync(
-                symbolA,
-                (e, d) => e.AddMember(d, e.Generator.MethodDeclaration("ma"))
-            );
+            var newSymbolA = (INamedTypeSymbol)
+                await editor.EditOneDeclarationAsync(
+                    symbolA,
+                    (e, d) => e.AddMember(d, e.Generator.MethodDeclaration("ma"))
+                );
             Assert.Equal(1, newSymbolA.GetMembers("ma").Length);
 
-            var newSymbolB = (INamedTypeSymbol)await editor.EditOneDeclarationAsync(
-                symbolB,
-                (e, d) => e.AddMember(d, e.Generator.MethodDeclaration("mb"))
-            );
+            var newSymbolB = (INamedTypeSymbol)
+                await editor.EditOneDeclarationAsync(
+                    symbolB,
+                    (e, d) => e.AddMember(d, e.Generator.MethodDeclaration("mb"))
+                );
             Assert.Equal(1, newSymbolB.GetMembers("mb").Length);
 
             var docs = editor.GetChangedDocuments().ToList();
@@ -321,10 +330,11 @@ internal partial class C
             var symbol = (await GetSymbolsAsync(solution, "C")).First();
             var editor = SymbolEditor.Create(solution);
 
-            var newSymbol = (INamedTypeSymbol)await editor.EditAllDeclarationsAsync(
-                symbol,
-                (e, d) => e.SetAccessibility(d, Accessibility.Internal)
-            );
+            var newSymbol = (INamedTypeSymbol)
+                await editor.EditAllDeclarationsAsync(
+                    symbol,
+                    (e, d) => e.SetAccessibility(d, Accessibility.Internal)
+                );
 
             var actual = await GetActualAsync(editor.GetChangedDocuments().First());
 
@@ -361,10 +371,11 @@ internal partial class C
             var symbol = comp.GlobalNamespace.GetMembers("C").First();
 
             var editor = SymbolEditor.Create(solution);
-            var newSymbol = (INamedTypeSymbol)await editor.EditAllDeclarationsAsync(
-                symbol,
-                (e, d) => e.SetAccessibility(d, Accessibility.Public)
-            );
+            var newSymbol = (INamedTypeSymbol)
+                await editor.EditAllDeclarationsAsync(
+                    symbol,
+                    (e, d) => e.SetAccessibility(d, Accessibility.Public)
+                );
 
             var docs = editor.GetChangedDocuments().ToList();
             var actual1 = await GetActualAsync(docs[0]);
@@ -403,11 +414,12 @@ partial class C
             var location = symbol.Locations.Last();
             var editor = SymbolEditor.Create(solution);
 
-            var newSymbol = (INamedTypeSymbol)await editor.EditOneDeclarationAsync(
-                symbol,
-                location,
-                (e, d) => e.AddMember(d, e.Generator.MethodDeclaration("m"))
-            );
+            var newSymbol = (INamedTypeSymbol)
+                await editor.EditOneDeclarationAsync(
+                    symbol,
+                    location,
+                    (e, d) => e.AddMember(d, e.Generator.MethodDeclaration("m"))
+                );
             Assert.Equal(1, newSymbol.GetMembers("m").Length);
 
             var actual = await GetActualAsync(editor.GetChangedDocuments().First());
@@ -444,11 +456,12 @@ partial class C
             var location = symbol.Locations.First();
             var editor = SymbolEditor.Create(solution);
 
-            var newSymbol = (INamedTypeSymbol)await editor.EditOneDeclarationAsync(
-                symbol,
-                location,
-                (e, d) => e.AddMember(d, e.Generator.MethodDeclaration("m"))
-            );
+            var newSymbol = (INamedTypeSymbol)
+                await editor.EditOneDeclarationAsync(
+                    symbol,
+                    location,
+                    (e, d) => e.AddMember(d, e.Generator.MethodDeclaration("m"))
+                );
             Assert.Equal(1, newSymbol.GetMembers("m").Length);
 
             var actual = await GetActualAsync(editor.GetChangedDocuments().First());
@@ -489,19 +502,21 @@ partial class C
             var location = symbol.Locations.Last();
             var editor = SymbolEditor.Create(solution);
 
-            var newSymbol = (INamedTypeSymbol)await editor.EditOneDeclarationAsync(
-                symbol,
-                location,
-                (e, d) => e.AddMember(d, e.Generator.MethodDeclaration("m"))
-            );
+            var newSymbol = (INamedTypeSymbol)
+                await editor.EditOneDeclarationAsync(
+                    symbol,
+                    location,
+                    (e, d) => e.AddMember(d, e.Generator.MethodDeclaration("m"))
+                );
             Assert.Equal(1, newSymbol.GetMembers("m").Length);
 
             // reuse location from original symbol/solution
-            var newSymbol2 = (INamedTypeSymbol)await editor.EditOneDeclarationAsync(
-                newSymbol,
-                location,
-                (e, d) => e.AddMember(d, e.Generator.MethodDeclaration("m2"))
-            );
+            var newSymbol2 = (INamedTypeSymbol)
+                await editor.EditOneDeclarationAsync(
+                    newSymbol,
+                    location,
+                    (e, d) => e.AddMember(d, e.Generator.MethodDeclaration("m2"))
+                );
             Assert.Equal(1, newSymbol2.GetMembers("m").Length);
             Assert.Equal(1, newSymbol2.GetMembers("m2").Length);
 
@@ -543,20 +558,22 @@ partial class C
             var location = symbol.Locations.Last();
             var editor = SymbolEditor.Create(solution);
 
-            var newSymbol = (INamedTypeSymbol)await editor.EditOneDeclarationAsync(
-                symbol,
-                location,
-                (e, d) => e.AddMember(d, e.Generator.MethodDeclaration("m"))
-            );
+            var newSymbol = (INamedTypeSymbol)
+                await editor.EditOneDeclarationAsync(
+                    symbol,
+                    location,
+                    (e, d) => e.AddMember(d, e.Generator.MethodDeclaration("m"))
+                );
             Assert.Equal(1, newSymbol.GetMembers("m").Length);
 
             // use location from new symbol
             var newLocation = newSymbol.Locations.Last();
-            var newSymbol2 = (INamedTypeSymbol)await editor.EditOneDeclarationAsync(
-                newSymbol,
-                newLocation,
-                (e, d) => e.AddMember(d, e.Generator.MethodDeclaration("m2"))
-            );
+            var newSymbol2 = (INamedTypeSymbol)
+                await editor.EditOneDeclarationAsync(
+                    newSymbol,
+                    newLocation,
+                    (e, d) => e.AddMember(d, e.Generator.MethodDeclaration("m2"))
+                );
             Assert.Equal(1, newSymbol2.GetMembers("m").Length);
             Assert.Equal(1, newSymbol2.GetMembers("m2").Length);
 
@@ -601,11 +618,12 @@ partial class C
             var member = symbol.GetMembers("m").First();
             var editor = SymbolEditor.Create(solution);
 
-            var newSymbol = (INamedTypeSymbol)await editor.EditOneDeclarationAsync(
-                symbol,
-                member,
-                (e, d) => e.AddMember(d, e.Generator.MethodDeclaration("m2"))
-            );
+            var newSymbol = (INamedTypeSymbol)
+                await editor.EditOneDeclarationAsync(
+                    symbol,
+                    member,
+                    (e, d) => e.AddMember(d, e.Generator.MethodDeclaration("m2"))
+                );
             Assert.Equal(1, newSymbol.GetMembers("m").Length);
 
             var actual = await GetActualAsync(editor.GetChangedDocuments().First());
@@ -631,10 +649,8 @@ partial class C
             var symbol = (await GetSymbolsAsync(solution, "C")).First();
             var editor = SymbolEditor.Create(solution);
 
-            var newSymbol = (INamedTypeSymbol)await editor.EditOneDeclarationAsync(
-                symbol,
-                (e, d) => e.SetName(d, "X")
-            );
+            var newSymbol = (INamedTypeSymbol)
+                await editor.EditOneDeclarationAsync(symbol, (e, d) => e.SetName(d, "X"));
             Assert.Equal("X", newSymbol.Name);
 
             // original symbols cannot be rebound after identity change.
@@ -671,10 +687,8 @@ partial class X
             var symbol = (await GetSymbolsAsync(solution, "C")).First();
             var editor = SymbolEditor.Create(solution);
 
-            var newSymbol = (INamedTypeSymbol)await editor.EditAllDeclarationsAsync(
-                symbol,
-                (e, d) => e.SetName(d, "X")
-            );
+            var newSymbol = (INamedTypeSymbol)
+                await editor.EditAllDeclarationsAsync(symbol, (e, d) => e.SetName(d, "X"));
             Assert.Equal("X", newSymbol.Name);
 
             // original symbols cannot be rebound after identity change.
@@ -700,10 +714,8 @@ partial class X
             var symbol = (await GetSymbolsAsync(solution, "C")).First();
             var editor = SymbolEditor.Create(solution);
 
-            var newSymbol = (INamedTypeSymbol)await editor.EditOneDeclarationAsync(
-                symbol,
-                (e, d) => e.RemoveNode(d)
-            );
+            var newSymbol = (INamedTypeSymbol)
+                await editor.EditOneDeclarationAsync(symbol, (e, d) => e.RemoveNode(d));
             Assert.Null(newSymbol);
 
             var actual = await GetActualAsync(editor.GetChangedDocuments().First());
@@ -733,10 +745,8 @@ partial class C
             var symbol = (await GetSymbolsAsync(solution, "C")).First();
             var editor = SymbolEditor.Create(solution);
 
-            var newSymbol = (INamedTypeSymbol)await editor.EditOneDeclarationAsync(
-                symbol,
-                (e, d) => e.RemoveNode(d)
-            );
+            var newSymbol = (INamedTypeSymbol)
+                await editor.EditOneDeclarationAsync(symbol, (e, d) => e.RemoveNode(d));
             Assert.NotNull(newSymbol);
             Assert.Equal("C", newSymbol.Name);
 
@@ -765,10 +775,8 @@ partial class C
             var symbol = (await GetSymbolsAsync(solution, "C")).First();
             var editor = SymbolEditor.Create(solution);
 
-            var newSymbol = (INamedTypeSymbol)await editor.EditAllDeclarationsAsync(
-                symbol,
-                (e, d) => e.RemoveNode(d)
-            );
+            var newSymbol = (INamedTypeSymbol)
+                await editor.EditAllDeclarationsAsync(symbol, (e, d) => e.RemoveNode(d));
             Assert.Null(newSymbol);
 
             var actual = await GetActualAsync(editor.GetChangedDocuments().First());
@@ -804,20 +812,16 @@ partial class C
             var editor = SymbolEditor.Create(solution);
 
             // remove X -- should remove only part of the field declaration.
-            var newSymbolX = (INamedTypeSymbol)await editor.EditOneDeclarationAsync(
-                symbolX,
-                (e, d) => e.RemoveNode(d)
-            );
+            var newSymbolX = (INamedTypeSymbol)
+                await editor.EditOneDeclarationAsync(symbolX, (e, d) => e.RemoveNode(d));
             Assert.Null(newSymbolX);
 
             var actual = await GetActualAsync(editor.GetChangedDocuments().First());
             Assert.Equal(expected, actual);
 
             // now remove Y -- should remove entire remaining field declaration
-            var newSymbolY = (INamedTypeSymbol)await editor.EditOneDeclarationAsync(
-                symbolY,
-                (e, d) => e.RemoveNode(d)
-            );
+            var newSymbolY = (INamedTypeSymbol)
+                await editor.EditOneDeclarationAsync(symbolY, (e, d) => e.RemoveNode(d));
             Assert.Null(newSymbolY);
 
             actual = await GetActualAsync(editor.GetChangedDocuments().First());

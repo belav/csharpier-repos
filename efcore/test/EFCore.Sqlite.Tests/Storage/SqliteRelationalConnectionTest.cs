@@ -19,9 +19,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     .Options
             );
 
-            var connection = (SqliteConnection)services
-                .GetRequiredService<IRelationalConnection>()
-                .DbConnection;
+            var connection = (SqliteConnection)
+                services.GetRequiredService<IRelationalConnection>().DbConnection;
 
             Assert.Equal(42, connection.DefaultTimeout);
         }
@@ -39,9 +38,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     .Options
             );
 
-            var connection = (SqliteConnection)services
-                .GetRequiredService<IRelationalConnection>()
-                .DbConnection;
+            var connection = (SqliteConnection)
+                services.GetRequiredService<IRelationalConnection>().DbConnection;
 
             Assert.Same(originalConnection, connection);
             Assert.Equal(42, originalConnection.DefaultTimeout);

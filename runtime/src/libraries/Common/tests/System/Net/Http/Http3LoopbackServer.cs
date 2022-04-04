@@ -88,8 +88,8 @@ namespace System.Net.Test.Common
             string content = ""
         )
         {
-            using var con = (Http3LoopbackConnection)await EstablishGenericConnectionAsync()
-                .ConfigureAwait(false);
+            using var con = (Http3LoopbackConnection)
+                await EstablishGenericConnectionAsync().ConfigureAwait(false);
             return await con.HandleRequestAsync(statusCode, headers, content).ConfigureAwait(false);
         }
     }

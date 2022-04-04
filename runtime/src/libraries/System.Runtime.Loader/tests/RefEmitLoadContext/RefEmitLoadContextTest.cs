@@ -113,10 +113,8 @@ namespace System.Runtime.Loader.Tests
 
             // Use the helper to generate an assembly
             var assemblyNameRefEmit = "RefEmitTestAssembly";
-            var asmRefEmitLoaded = (Assembly)method.Invoke(
-                null,
-                new object[] { assemblyNameRefEmit, builderType }
-            );
+            var asmRefEmitLoaded = (Assembly)
+                method.Invoke(null, new object[] { assemblyNameRefEmit, builderType });
             Assert.NotNull(asmRefEmitLoaded);
 
             // Assert that Dynamically emitted assemblies load context is the same as that of the assembly

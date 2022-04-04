@@ -37,14 +37,15 @@ namespace Microsoft.CodeAnalysis
             Func<SyntaxTrivia, SyntaxTrivia, SyntaxTrivia> computeReplacementTrivia
         ) where TRoot : SyntaxNode
         {
-            return (TRoot)root.ReplaceCore(
-                nodes: nodes,
-                computeReplacementNode: computeReplacementNode,
-                tokens: tokens,
-                computeReplacementToken: computeReplacementToken,
-                trivia: trivia,
-                computeReplacementTrivia: computeReplacementTrivia
-            );
+            return (TRoot)
+                root.ReplaceCore(
+                    nodes: nodes,
+                    computeReplacementNode: computeReplacementNode,
+                    tokens: tokens,
+                    computeReplacementToken: computeReplacementToken,
+                    trivia: trivia,
+                    computeReplacementTrivia: computeReplacementTrivia
+                );
         }
 
         /// <summary>
@@ -65,10 +66,8 @@ namespace Microsoft.CodeAnalysis
             where TRoot : SyntaxNode
             where TNode : SyntaxNode
         {
-            return (TRoot)root.ReplaceCore(
-                nodes: nodes,
-                computeReplacementNode: computeReplacementNode
-            );
+            return (TRoot)
+                root.ReplaceCore(nodes: nodes, computeReplacementNode: computeReplacementNode);
         }
 
         /// <summary>
@@ -89,10 +88,11 @@ namespace Microsoft.CodeAnalysis
                 return root;
             }
 
-            return (TRoot)root.ReplaceCore(
-                nodes: new[] { oldNode },
-                computeReplacementNode: (o, r) => newNode
-            );
+            return (TRoot)
+                root.ReplaceCore(
+                    nodes: new[] { oldNode },
+                    computeReplacementNode: (o, r) => newNode
+                );
         }
 
         /// <summary>
@@ -254,10 +254,11 @@ namespace Microsoft.CodeAnalysis
             Func<SyntaxToken, SyntaxToken, SyntaxToken> computeReplacementToken
         ) where TRoot : SyntaxNode
         {
-            return (TRoot)root.ReplaceCore<SyntaxNode>(
-                tokens: tokens,
-                computeReplacementToken: computeReplacementToken
-            );
+            return (TRoot)
+                root.ReplaceCore<SyntaxNode>(
+                    tokens: tokens,
+                    computeReplacementToken: computeReplacementToken
+                );
         }
 
         /// <summary>
@@ -274,10 +275,11 @@ namespace Microsoft.CodeAnalysis
             SyntaxToken newToken
         ) where TRoot : SyntaxNode
         {
-            return (TRoot)root.ReplaceCore<SyntaxNode>(
-                tokens: new[] { oldToken },
-                computeReplacementToken: (o, r) => newToken
-            );
+            return (TRoot)
+                root.ReplaceCore<SyntaxNode>(
+                    tokens: new[] { oldToken },
+                    computeReplacementToken: (o, r) => newToken
+                );
         }
 
         /// <summary>
@@ -295,10 +297,11 @@ namespace Microsoft.CodeAnalysis
             Func<SyntaxTrivia, SyntaxTrivia, SyntaxTrivia> computeReplacementTrivia
         ) where TRoot : SyntaxNode
         {
-            return (TRoot)root.ReplaceCore<SyntaxNode>(
-                trivia: trivia,
-                computeReplacementTrivia: computeReplacementTrivia
-            );
+            return (TRoot)
+                root.ReplaceCore<SyntaxNode>(
+                    trivia: trivia,
+                    computeReplacementTrivia: computeReplacementTrivia
+                );
         }
 
         /// <summary>
@@ -314,10 +317,11 @@ namespace Microsoft.CodeAnalysis
             SyntaxTrivia newTrivia
         ) where TRoot : SyntaxNode
         {
-            return (TRoot)root.ReplaceCore<SyntaxNode>(
-                trivia: new[] { trivia },
-                computeReplacementTrivia: (o, r) => newTrivia
-            );
+            return (TRoot)
+                root.ReplaceCore<SyntaxNode>(
+                    trivia: new[] { trivia },
+                    computeReplacementTrivia: (o, r) => newTrivia
+                );
         }
 
         /// <summary>

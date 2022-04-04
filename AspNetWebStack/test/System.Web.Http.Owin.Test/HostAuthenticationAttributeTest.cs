@@ -17,10 +17,11 @@ namespace System.Web.Http.Owin
         public void AttributeUsageValidOn_IsClassOrMethod()
         {
             // Act
-            AttributeUsageAttribute usage = (AttributeUsageAttribute)Attribute.GetCustomAttribute(
-                typeof(HostAuthenticationAttribute),
-                typeof(AttributeUsageAttribute)
-            );
+            AttributeUsageAttribute usage = (AttributeUsageAttribute)
+                Attribute.GetCustomAttribute(
+                    typeof(HostAuthenticationAttribute),
+                    typeof(AttributeUsageAttribute)
+                );
 
             // Assert
             Assert.NotNull(usage);
@@ -31,10 +32,11 @@ namespace System.Web.Http.Owin
         public void AttributeUsageAllowMultiple_IsTrue()
         {
             // Act
-            AttributeUsageAttribute usage = (AttributeUsageAttribute)Attribute.GetCustomAttribute(
-                typeof(HostAuthenticationAttribute),
-                typeof(AttributeUsageAttribute)
-            );
+            AttributeUsageAttribute usage = (AttributeUsageAttribute)
+                Attribute.GetCustomAttribute(
+                    typeof(HostAuthenticationAttribute),
+                    typeof(AttributeUsageAttribute)
+                );
 
             // Assert
             Assert.NotNull(usage);

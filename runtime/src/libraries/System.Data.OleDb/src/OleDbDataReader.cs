@@ -2403,10 +2403,8 @@ namespace System.Data.OleDb
                                 {
                                     uniq[metaindex] = true;
 
-                                    string indexname = (string)dataRow[
-                                        indxColumn,
-                                        DataRowVersion.Default
-                                    ];
+                                    string indexname = (string)
+                                        dataRow[indxColumn, DataRowVersion.Default];
                                     if (null == uniqueIndexName)
                                     {
                                         uniqueIndexName = indexname;
@@ -2438,10 +2436,8 @@ namespace System.Data.OleDb
                             }
                             else if (null != uniqueIndexName)
                             {
-                                string indexname = (string)dataRow[
-                                    indxColumn,
-                                    DataRowVersion.Default
-                                ];
+                                string indexname = (string)
+                                    dataRow[indxColumn, DataRowVersion.Default];
 
                                 if (indexname != uniqueIndexName)
                                 {

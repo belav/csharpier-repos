@@ -122,12 +122,13 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf3 =
-                        (Vector128<float>)typeof(Sse41)
-                            .GetMethod(
-                                nameof(Sse41.DotProduct),
-                                new Type[] { vf1.GetType(), vf2.GetType(), typeof(byte) }
-                            )
-                            .Invoke(null, new object[] { vf1, vf2, (byte)(255) });
+                        (Vector128<float>)
+                            typeof(Sse41)
+                                .GetMethod(
+                                    nameof(Sse41.DotProduct),
+                                    new Type[] { vf1.GetType(), vf2.GetType(), typeof(byte) }
+                                )
+                                .Invoke(null, new object[] { vf1, vf2, (byte)(255) });
                     Unsafe.Write(floatTable.outArrayPtr, vf3);
 
                     if (
@@ -230,12 +231,13 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf3 =
-                        (Vector128<double>)typeof(Sse41)
-                            .GetMethod(
-                                nameof(Sse41.DotProduct),
-                                new Type[] { vf1.GetType(), vf2.GetType(), typeof(byte) }
-                            )
-                            .Invoke(null, new object[] { vf1, vf2, (byte)(51) });
+                        (Vector128<double>)
+                            typeof(Sse41)
+                                .GetMethod(
+                                    nameof(Sse41.DotProduct),
+                                    new Type[] { vf1.GetType(), vf2.GetType(), typeof(byte) }
+                                )
+                                .Invoke(null, new object[] { vf1, vf2, (byte)(51) });
                     Unsafe.Write(doubleTable.outArrayPtr, vf3);
 
                     if (

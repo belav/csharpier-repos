@@ -138,9 +138,8 @@ namespace System.Reflection
             }
             catch (Exception)
             {
-                assemblyFromResolveEvent = (RuntimeAssembly?)AssemblyLoadContext.DoAssemblyResolve(
-                    assemblyString
-                );
+                assemblyFromResolveEvent = (RuntimeAssembly?)
+                    AssemblyLoadContext.DoAssemblyResolve(assemblyString);
                 if (assemblyFromResolveEvent == null)
                     throw new FileLoadException(assemblyString);
                 return null;
@@ -249,11 +248,8 @@ namespace System.Reflection
                 throw new ArgumentException("String cannot have zero length.", nameof(name));
             unsafe
             {
-                byte* data = (byte*)GetManifestResourceInternal(
-                    name,
-                    out int length,
-                    out Module resourceModule
-                );
+                byte* data = (byte*)
+                    GetManifestResourceInternal(name, out int length, out Module resourceModule);
                 if (data == null)
                     return null;
 
@@ -373,9 +369,8 @@ namespace System.Reflection
                         AssemblyName name = new AssemblyName();
                         unsafe
                         {
-                            Mono.MonoAssemblyName* nativeName = (Mono.MonoAssemblyName*)nativeNames[
-                                i
-                            ];
+                            Mono.MonoAssemblyName* nativeName = (Mono.MonoAssemblyName*)
+                                nativeNames[i];
                             name.FillName(nativeName, null, addVersion, addPublicKey, defaultToken);
                             result[i] = name;
                         }
@@ -388,9 +383,8 @@ namespace System.Reflection
                     {
                         unsafe
                         {
-                            Mono.MonoAssemblyName* nativeName = (Mono.MonoAssemblyName*)nativeNames[
-                                i
-                            ];
+                            Mono.MonoAssemblyName* nativeName = (Mono.MonoAssemblyName*)
+                                nativeNames[i];
                             Mono.RuntimeMarshal.FreeAssemblyName(ref *nativeName, true);
                         }
                     }
@@ -503,11 +497,12 @@ namespace System.Reflection
             AssemblyLoadContext? assemblyLoadContext
         )
         {
-            var assembly = (RuntimeAssembly)InternalLoad(
-                assemblyRef.FullName,
-                ref stackMark,
-                assemblyLoadContext != null ? assemblyLoadContext.NativeALC : IntPtr.Zero
-            );
+            var assembly = (RuntimeAssembly)
+                InternalLoad(
+                    assemblyRef.FullName,
+                    ref stackMark,
+                    assemblyLoadContext != null ? assemblyLoadContext.NativeALC : IntPtr.Zero
+                );
             if (assembly == null)
                 throw new FileNotFoundException(null, assemblyRef.Name);
             return assembly;

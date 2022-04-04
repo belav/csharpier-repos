@@ -61,10 +61,8 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             _canonicalWriterStream.SetLength(0);
             _canonicalWriter.IncludeComments = _includeComments;
             _canonicalWriter.SetInclusivePrefixes(_tokenizedInclusivePrefixes);
-            _canonicalWriter.ContextProvider =
-                (IAncestralNamespaceContextProvider)AncestralNamespaceContextProviderProxy.CreateContextProvider(
-                    reader
-                );
+            _canonicalWriter.ContextProvider = (IAncestralNamespaceContextProvider)
+                AncestralNamespaceContextProviderProxy.CreateContextProvider(reader);
 
             reader.MoveToContent();
             _canonicalWriter.WriteNode(reader, false);

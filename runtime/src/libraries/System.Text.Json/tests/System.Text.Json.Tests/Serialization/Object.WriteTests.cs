@@ -29,11 +29,8 @@ namespace System.Text.Json.Serialization.Tests
             }
 
             {
-                ITestClass obj = (ITestClass)JsonSerializer.Deserialize(
-                    json,
-                    testObj.GetType(),
-                    options
-                );
+                ITestClass obj = (ITestClass)
+                    JsonSerializer.Deserialize(json, testObj.GetType(), options);
                 obj.Verify();
             }
         }

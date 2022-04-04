@@ -62,11 +62,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                                 targetEntityType
                             );
                             TraverseGraph(
-                                (EntityEntryGraphNode<TState>)node.CreateNode(
-                                    node,
-                                    targetEntry,
-                                    navigation
-                                ),
+                                (EntityEntryGraphNode<TState>)
+                                    node.CreateNode(node, targetEntry, navigation),
                                 handleNode
                             );
                         }
@@ -78,11 +75,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                             targetEntityType
                         );
                         TraverseGraph(
-                            (EntityEntryGraphNode<TState>)node.CreateNode(
-                                node,
-                                targetEntry,
-                                navigation
-                            ),
+                            (EntityEntryGraphNode<TState>)
+                                node.CreateNode(node, targetEntry, navigation),
                             handleNode
                         );
                     }
@@ -133,11 +127,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                                 targetType
                             );
                             await TraverseGraphAsync(
-                                    (EntityEntryGraphNode<TState>)node.CreateNode(
-                                        node,
-                                        targetEntry,
-                                        navigation
-                                    ),
+                                    (EntityEntryGraphNode<TState>)
+                                        node.CreateNode(node, targetEntry, navigation),
                                     handleNode,
                                     cancellationToken
                                 )
@@ -151,11 +142,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                             targetType
                         );
                         await TraverseGraphAsync(
-                                (EntityEntryGraphNode<TState>)node.CreateNode(
-                                    node,
-                                    targetEntry,
-                                    navigation
-                                ),
+                                (EntityEntryGraphNode<TState>)
+                                    node.CreateNode(node, targetEntry, navigation),
                                 handleNode,
                                 cancellationToken
                             )

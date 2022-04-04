@@ -6893,9 +6893,8 @@ public class Source
                     // Even though the method's return type has a use-site warning, we are able to evaluate the expression.
                     Assert.Equal(
                         ErrorCode.WRN_UnifyReferenceMajMin,
-                        (ErrorCode)((MethodSymbol)methodData.Method).ReturnType
-                            .GetUseSiteDiagnostic()
-                            .Code
+                        (ErrorCode)
+                            ((MethodSymbol)methodData.Method).ReturnType.GetUseSiteDiagnostic().Code
                     );
                     methodData.VerifyIL(
                         @"

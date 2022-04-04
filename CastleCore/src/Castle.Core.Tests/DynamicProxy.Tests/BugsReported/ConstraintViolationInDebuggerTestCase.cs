@@ -34,8 +34,8 @@ namespace Castle.DynamicProxy.Tests.BugsReported
                 ProxyGenerationOptions.Default
             );
 
-            IServiceAgent agent =
-                (IServiceAgent)generator.CreateInterfaceProxyWithTarget<IServiceAgent>(
+            IServiceAgent agent = (IServiceAgent)
+                generator.CreateInterfaceProxyWithTarget<IServiceAgent>(
                     new ServiceAgent(),
                     new StandardInterceptor()
                 );

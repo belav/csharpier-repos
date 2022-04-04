@@ -40,8 +40,8 @@ namespace System.Net.Security
 
                     // This will return a client token when conducted authentication on server side.
                     // This token can be used for impersonation. We use it to create a WindowsIdentity and hand it out to the server app.
-                    Interop.SECURITY_STATUS winStatus =
-                        (Interop.SECURITY_STATUS)SSPIWrapper.QuerySecurityContextToken(
+                    Interop.SECURITY_STATUS winStatus = (Interop.SECURITY_STATUS)
+                        SSPIWrapper.QuerySecurityContextToken(
                             GlobalSSPI.SSPIAuth,
                             securityContext!,
                             out token

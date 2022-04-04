@@ -209,9 +209,10 @@ namespace System.ComponentModel.TypeConverterTests
         [MemberData(nameof(SizeFData))]
         public void ConvertFromInvariantString(float width, float height)
         {
-            var point = (SizeF)Converter.ConvertFromInvariantString(
-                FormattableString.Invariant($"{width:G9}, {height:G9}")
-            );
+            var point = (SizeF)
+                Converter.ConvertFromInvariantString(
+                    FormattableString.Invariant($"{width:G9}, {height:G9}")
+                );
             Assert.Equal(width, point.Width);
             Assert.Equal(height, point.Height);
         }
@@ -232,15 +233,16 @@ namespace System.ComponentModel.TypeConverterTests
         [MemberData(nameof(SizeFData))]
         public void ConvertFromString(float width, float height)
         {
-            var point = (SizeF)Converter.ConvertFromString(
-                string.Format(
-                    CultureInfo.CurrentCulture,
-                    "{0:g9}{2} {1:g9}",
-                    width,
-                    height,
-                    CultureInfo.CurrentCulture.TextInfo.ListSeparator
-                )
-            );
+            var point = (SizeF)
+                Converter.ConvertFromString(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        "{0:g9}{2} {1:g9}",
+                        width,
+                        height,
+                        CultureInfo.CurrentCulture.TextInfo.ListSeparator
+                    )
+                );
             Assert.Equal(width, point.Width);
             Assert.Equal(height, point.Height);
         }

@@ -154,10 +154,11 @@ namespace System.Net.Sockets.Tests
             l.AllowNatTraversal(allow);
             Assert.Equal(
                 (int)resultLevel,
-                (int)l.Server.GetSocketOption(
-                    SocketOptionLevel.IP,
-                    SocketOptionName.IPProtectionLevel
-                )
+                (int)
+                    l.Server.GetSocketOption(
+                        SocketOptionLevel.IP,
+                        SocketOptionName.IPProtectionLevel
+                    )
             );
         }
 

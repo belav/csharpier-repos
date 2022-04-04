@@ -79,8 +79,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             IPropertyBase? property,
             object readFunc
         ) =>
-            (ReaderColumn)GetConstructor(type)
-                .Invoke(new[] { nullable, columnName, property, readFunc });
+            (ReaderColumn)
+                GetConstructor(type).Invoke(new[] { nullable, columnName, property, readFunc });
 
         private static ConstructorInfo GetConstructor(Type type) =>
             _constructors.GetOrAdd(

@@ -309,10 +309,11 @@ namespace System.Data.OleDb
                                 )
                                 {
                                     // @devnote: unguarded cast from Int16 to Byte
-                                    parameter.PrecisionInternal = (byte)Convert.ToInt16(
-                                        dataRow[numericPrecision],
-                                        CultureInfo.InvariantCulture
-                                    );
+                                    parameter.PrecisionInternal = (byte)
+                                        Convert.ToInt16(
+                                            dataRow[numericPrecision],
+                                            CultureInfo.InvariantCulture
+                                        );
                                 }
                                 if (
                                     (null != numericScale)
@@ -320,10 +321,11 @@ namespace System.Data.OleDb
                                 )
                                 {
                                     // @devnote: unguarded cast from Int16 to Byte
-                                    parameter.ScaleInternal = (byte)Convert.ToInt16(
-                                        dataRow[numericScale],
-                                        CultureInfo.InvariantCulture
-                                    );
+                                    parameter.ScaleInternal = (byte)
+                                        Convert.ToInt16(
+                                            dataRow[numericScale],
+                                            CultureInfo.InvariantCulture
+                                        );
                                 }
                                 break;
                             case OleDbType.VarBinary:

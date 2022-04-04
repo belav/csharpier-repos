@@ -46,9 +46,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             NotificationOptions = items;
 
             var codeStyleOption = (
-                (CodeStyleOption<bool>)options.GetOption(
-                    new OptionKey(option, option.IsPerLanguage ? info.Language : null)
-                )
+                (CodeStyleOption<bool>)
+                    options.GetOption(
+                        new OptionKey(option, option.IsPerLanguage ? info.Language : null)
+                    )
             );
             SetProperty(ref _isChecked, codeStyleOption.Value);
 

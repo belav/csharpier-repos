@@ -16,17 +16,18 @@ public class ComponentDuplicateAttributeDiagnosticPassTest
     public ComponentDuplicateAttributeDiagnosticPassTest()
     {
         Pass = new ComponentMarkupDiagnosticPass();
-        ProjectEngine = (DefaultRazorProjectEngine)RazorProjectEngine.Create(
-            RazorConfiguration.Default,
-            RazorProjectFileSystem.Create(Environment.CurrentDirectory),
-            b =>
-            {
-                // Don't run the markup mutating passes.
-                b.Features.Remove(b.Features.OfType<ComponentMarkupDiagnosticPass>().Single());
-                b.Features.Remove(b.Features.OfType<ComponentMarkupBlockPass>().Single());
-                b.Features.Remove(b.Features.OfType<ComponentMarkupEncodingPass>().Single());
-            }
-        );
+        ProjectEngine = (DefaultRazorProjectEngine)
+            RazorProjectEngine.Create(
+                RazorConfiguration.Default,
+                RazorProjectFileSystem.Create(Environment.CurrentDirectory),
+                b =>
+                {
+                    // Don't run the markup mutating passes.
+                    b.Features.Remove(b.Features.OfType<ComponentMarkupDiagnosticPass>().Single());
+                    b.Features.Remove(b.Features.OfType<ComponentMarkupBlockPass>().Single());
+                    b.Features.Remove(b.Features.OfType<ComponentMarkupEncodingPass>().Single());
+                }
+            );
         Engine = ProjectEngine.Engine;
 
         Pass.Engine = Engine;

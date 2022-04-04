@@ -129,14 +129,13 @@ namespace System.Linq.Parallel
                 else
                 {
                     outputStream[i] =
-                        (QueryOperatorEnumerator<
-                            TInputOutput,
-                            TKey
-                        >)(object)new DistinctQueryOperatorEnumerator<TKey>(
-                            hashStream[i],
-                            _comparer,
-                            cancellationToken
-                        );
+                        (QueryOperatorEnumerator<TInputOutput, TKey>)
+                            (object)
+                                new DistinctQueryOperatorEnumerator<TKey>(
+                                    hashStream[i],
+                                    _comparer,
+                                    cancellationToken
+                                );
                 }
             }
 

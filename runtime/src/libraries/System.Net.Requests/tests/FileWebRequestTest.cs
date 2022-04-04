@@ -220,9 +220,8 @@ namespace System.Net.Tests
             bool? abortWithDelay
         )
         {
-            FileWebRequest request = (FileWebRequest)WebRequest.Create(
-                "file://" + Path.GetRandomFileName()
-            );
+            FileWebRequest request = (FileWebRequest)
+                WebRequest.Create("file://" + Path.GetRandomFileName());
             Task<WebResponse> responseTask = GetResponseAsync(request);
             if (abortWithDelay.HasValue)
             {

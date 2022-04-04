@@ -113,8 +113,8 @@ namespace System.Reflection.Metadata.Ecma335
             );
             for (int i = 0; i < count; i++)
             {
-                CustomAttributeNamedArgumentKind kind =
-                    (CustomAttributeNamedArgumentKind)valueReader.ReadSerializationTypeCode();
+                CustomAttributeNamedArgumentKind kind = (CustomAttributeNamedArgumentKind)
+                    valueReader.ReadSerializationTypeCode();
                 if (
                     kind != CustomAttributeNamedArgumentKind.Field
                     && kind != CustomAttributeNamedArgumentKind.Property
@@ -273,9 +273,8 @@ namespace System.Reflection.Metadata.Ecma335
                 case SerializationTypeCode.Enum:
                     string? typeName = valueReader.ReadSerializedString();
                     info.Type = _provider.GetTypeFromSerializedName(typeName!);
-                    info.TypeCode = (SerializationTypeCode)_provider.GetUnderlyingEnumType(
-                        info.Type
-                    );
+                    info.TypeCode = (SerializationTypeCode)
+                        _provider.GetUnderlyingEnumType(info.Type);
                     break;
 
                 default:

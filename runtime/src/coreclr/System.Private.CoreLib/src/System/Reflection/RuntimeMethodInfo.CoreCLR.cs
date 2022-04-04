@@ -117,10 +117,8 @@ namespace System.Reflection
             if (RuntimeTypeHandle.GetNumVirtuals(parent) <= slot)
                 return null;
 
-            return (RuntimeMethodInfo?)RuntimeType.GetMethodBase(
-                parent,
-                RuntimeTypeHandle.GetMethodAt(parent, slot)
-            );
+            return (RuntimeMethodInfo?)
+                RuntimeType.GetMethodBase(parent, RuntimeTypeHandle.GetMethodAt(parent, slot));
         }
 
         // Unlike DeclaringType, this will return a valid type even for global methods

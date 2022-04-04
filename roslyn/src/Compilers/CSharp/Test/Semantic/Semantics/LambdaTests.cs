@@ -1288,11 +1288,12 @@ class C
 
             var model = comp.GetSemanticModel(tree);
 
-            var expr = (ExpressionSyntax)tree.GetCompilationUnitRoot()
-                .DescendantNodes()
-                .OfType<ParenthesizedLambdaExpressionSyntax>()
-                .Single()
-                .Body;
+            var expr = (ExpressionSyntax)
+                tree.GetCompilationUnitRoot()
+                    .DescendantNodes()
+                    .OfType<ParenthesizedLambdaExpressionSyntax>()
+                    .Single()
+                    .Body;
 
             var symbolInfo = model.GetSymbolInfo(expr);
 
@@ -1324,11 +1325,12 @@ class C
             var comp = CreateCompilation(tree);
             var model = comp.GetSemanticModel(tree);
 
-            var expr = (ExpressionSyntax)tree.GetCompilationUnitRoot()
-                .DescendantNodes()
-                .OfType<VariableDeclaratorSyntax>()
-                .Single()
-                .Initializer.Value;
+            var expr = (ExpressionSyntax)
+                tree.GetCompilationUnitRoot()
+                    .DescendantNodes()
+                    .OfType<VariableDeclaratorSyntax>()
+                    .Single()
+                    .Initializer.Value;
 
             var symbolInfo = model.GetSymbolInfo(expr);
 
@@ -1364,11 +1366,12 @@ class C
             var comp = CreateCompilation(tree);
             var model = comp.GetSemanticModel(tree);
 
-            var expr = (ExpressionSyntax)tree.GetCompilationUnitRoot()
-                .DescendantNodes()
-                .OfType<ParenthesizedLambdaExpressionSyntax>()
-                .Single()
-                .Body;
+            var expr = (ExpressionSyntax)
+                tree.GetCompilationUnitRoot()
+                    .DescendantNodes()
+                    .OfType<ParenthesizedLambdaExpressionSyntax>()
+                    .Single()
+                    .Body;
 
             var symbolInfo = model.GetSymbolInfo(expr);
 
@@ -4551,11 +4554,8 @@ class Program
 
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree);
-            var a = (IdentifierNameSyntax)tree.GetRoot()
-                .DescendantNodes()
-                .OfType<AttributeSyntax>()
-                .Single()
-                .Name;
+            var a = (IdentifierNameSyntax)
+                tree.GetRoot().DescendantNodes().OfType<AttributeSyntax>().Single().Name;
             Assert.Equal("A", a.Identifier.Text);
             var attrInfo = model.GetSymbolInfo(a);
             var attrType = comp.GetMember<NamedTypeSymbol>("AAttribute").GetPublicSymbol();
@@ -4570,12 +4570,8 @@ class Program
                 model.TryGetSpeculativeSemanticModelForMethodBody(m.Body.SpanStart, m, out model)
             );
 
-            a = (IdentifierNameSyntax)newTree
-                .GetRoot()
-                .DescendantNodes()
-                .OfType<AttributeSyntax>()
-                .Single()
-                .Name;
+            a = (IdentifierNameSyntax)
+                newTree.GetRoot().DescendantNodes().OfType<AttributeSyntax>().Single().Name;
             Assert.Equal("A", a.Identifier.Text);
 
             // If we aren't using the right binder here, the compiler crashes going through the binder factory

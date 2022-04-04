@@ -100,10 +100,8 @@ namespace System.Diagnostics.Tracing
             if (eventAttrib != null)
             {
                 this.level = (EventLevel)Statics.Combine((int)eventAttrib.Level, (int)this.level);
-                this.opcode = (EventOpcode)Statics.Combine(
-                    (int)eventAttrib.Opcode,
-                    (int)this.opcode
-                );
+                this.opcode = (EventOpcode)
+                    Statics.Combine((int)eventAttrib.Opcode, (int)this.opcode);
                 this.keywords |= eventAttrib.Keywords;
                 this.tags |= eventAttrib.Tags;
                 this.name = eventAttrib.Name;

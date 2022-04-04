@@ -72,10 +72,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 if (type.TypeKind == TypeKind.Enum)
                 {
                     var enumType = (INamedTypeSymbol)type;
-                    return (ExpressionSyntax)CSharpFlagsEnumGenerator.Instance.TryCreateEnumConstantValue(
-                        enumType,
-                        value
-                    );
+                    return (ExpressionSyntax)
+                        CSharpFlagsEnumGenerator.Instance.TryCreateEnumConstantValue(
+                            enumType,
+                            value
+                        );
                 }
                 else if (type.IsNullable())
                 {

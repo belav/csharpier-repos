@@ -283,8 +283,8 @@ namespace System.Runtime.Serialization
             );
             MethodInfo getCollectionSetItemDelegateMethod =
                 CollectionSetItemDelegateMethod.MakeGenericMethod(itemType);
-            CollectionSetItemDelegate collectionSetItemDelegate =
-                (CollectionSetItemDelegate)getCollectionSetItemDelegateMethod.Invoke(
+            CollectionSetItemDelegate collectionSetItemDelegate = (CollectionSetItemDelegate)
+                getCollectionSetItemDelegateMethod.Invoke(
                     this,
                     new object[] { collectionContract, resultCollection, isReadOnlyCollection }
                 )!;

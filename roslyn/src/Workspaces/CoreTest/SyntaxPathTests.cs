@@ -148,9 +148,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
   }";
 
             var tree = SyntaxFactory.ParseSyntaxTree(text);
-            var namespaceDecl = (NamespaceDeclarationSyntax)(
-                tree.GetRoot() as CompilationUnitSyntax
-            ).Members[0];
+            var namespaceDecl = (NamespaceDeclarationSyntax)
+                (tree.GetRoot() as CompilationUnitSyntax).Members[0];
             var classDecl = (TypeDeclarationSyntax)namespaceDecl.Members[0];
 
             var member1 = classDecl.Members[0];
@@ -192,9 +191,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
   }";
 
             var tree = SyntaxFactory.ParseSyntaxTree(text);
-            var namespaceDecl = (NamespaceDeclarationSyntax)(
-                tree.GetRoot() as CompilationUnitSyntax
-            ).Members[0];
+            var namespaceDecl = (NamespaceDeclarationSyntax)
+                (tree.GetRoot() as CompilationUnitSyntax).Members[0];
             var class1 = (TypeDeclarationSyntax)namespaceDecl.Members[0];
             var class2 = (TypeDeclarationSyntax)namespaceDecl.Members[1];
 
@@ -227,9 +225,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
   }";
 
             var tree = SyntaxFactory.ParseSyntaxTree(text);
-            var namespaceDecl = (NamespaceDeclarationSyntax)(
-                (CompilationUnitSyntax)tree.GetRoot()
-            ).Members[0];
+            var namespaceDecl = (NamespaceDeclarationSyntax)
+                ((CompilationUnitSyntax)tree.GetRoot()).Members[0];
             var classDecl = (TypeDeclarationSyntax)namespaceDecl.Members[0];
 
             var member1 = classDecl.Members[0];
@@ -261,9 +258,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
   }";
 
             var tree = SyntaxFactory.ParseSyntaxTree(text);
-            var namespaceDecl = (NamespaceDeclarationSyntax)(
-                (CompilationUnitSyntax)tree.GetRoot()
-            ).Members[0];
+            var namespaceDecl = (NamespaceDeclarationSyntax)
+                ((CompilationUnitSyntax)tree.GetRoot()).Members[0];
             var class1 = (TypeDeclarationSyntax)namespaceDecl.Members[0];
             var class2 = (TypeDeclarationSyntax)namespaceDecl.Members[1];
 
@@ -291,9 +287,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
   }";
 
             var tree = SyntaxFactory.ParseSyntaxTree(text);
-            var namespaceDecl = (NamespaceDeclarationSyntax)(
-                (CompilationUnitSyntax)tree.GetRoot()
-            ).Members[0];
+            var namespaceDecl = (NamespaceDeclarationSyntax)
+                ((CompilationUnitSyntax)tree.GetRoot()).Members[0];
             var class1 = (TypeDeclarationSyntax)namespaceDecl.Members[0];
             var class2 = (TypeDeclarationSyntax)namespaceDecl.Members[1];
             var method1 = class1.Members[0];
@@ -324,9 +319,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var text2 = text.Replace(" ", "  ");
 
             var tree = SyntaxFactory.ParseSyntaxTree(text);
-            var namespaceDecl = (NamespaceDeclarationSyntax)(
-                (CompilationUnitSyntax)tree.GetRoot()
-            ).Members[0];
+            var namespaceDecl = (NamespaceDeclarationSyntax)
+                ((CompilationUnitSyntax)tree.GetRoot()).Members[0];
             var class1 = (TypeDeclarationSyntax)namespaceDecl.Members[0];
             var class2 = (TypeDeclarationSyntax)namespaceDecl.Members[1];
 
@@ -355,9 +349,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
   }";
 
             var tree = SyntaxFactory.ParseSyntaxTree(text);
-            var namespaceDecl = (NamespaceDeclarationSyntax)(
-                (CompilationUnitSyntax)tree.GetRoot()
-            ).Members[0];
+            var namespaceDecl = (NamespaceDeclarationSyntax)
+                ((CompilationUnitSyntax)tree.GetRoot()).Members[0];
             var class1 = (TypeDeclarationSyntax)namespaceDecl.Members[0];
             var class2 = (TypeDeclarationSyntax)namespaceDecl.Members[1];
 
@@ -400,9 +393,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
   }";
 
             var tree = SyntaxFactory.ParseSyntaxTree(text);
-            var namespaceDecl = (NamespaceDeclarationSyntax)(
-                (CompilationUnitSyntax)tree.GetRoot()
-            ).Members[0];
+            var namespaceDecl = (NamespaceDeclarationSyntax)
+                ((CompilationUnitSyntax)tree.GetRoot()).Members[0];
             var class1 = (TypeDeclarationSyntax)namespaceDecl.Members[0];
             var class2 = (TypeDeclarationSyntax)namespaceDecl.Members[1];
 

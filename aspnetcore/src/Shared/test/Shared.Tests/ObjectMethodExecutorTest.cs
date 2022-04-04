@@ -144,10 +144,8 @@ public class ObjectMethodExecutorTest
         var executor = GetExecutorForMethod("CustomAwaitableOfReferenceTypeAsync");
 
         // Act
-        var result = await (TestAwaitable<TestObject>)executor.Execute(
-            _targetObject,
-            new object[] { "Hello", 123 }
-        );
+        var result = await (TestAwaitable<TestObject>)
+            executor.Execute(_targetObject, new object[] { "Hello", 123 });
 
         // Assert
         Assert.True(executor.IsMethodAsync);
@@ -163,10 +161,8 @@ public class ObjectMethodExecutorTest
         var executor = GetExecutorForMethod("CustomAwaitableOfValueTypeAsync");
 
         // Act
-        var result = await (TestAwaitable<int>)executor.Execute(
-            _targetObject,
-            new object[] { 123, 456 }
-        );
+        var result = await (TestAwaitable<int>)
+            executor.Execute(_targetObject, new object[] { 123, 456 });
 
         // Assert
         Assert.True(executor.IsMethodAsync);
@@ -275,10 +271,8 @@ public class ObjectMethodExecutorTest
         var executor = GetExecutorForMethod("ValueTaskOfReferenceType");
 
         // Act
-        var result = await (ValueTask<string>)executor.Execute(
-            _targetObject,
-            new object[] { "test result" }
-        );
+        var result = await (ValueTask<string>)
+            executor.Execute(_targetObject, new object[] { "test result" });
 
         // Assert
         Assert.True(executor.IsMethodAsync);

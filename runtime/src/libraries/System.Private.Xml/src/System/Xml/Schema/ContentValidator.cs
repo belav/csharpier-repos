@@ -1162,9 +1162,8 @@ namespace System.Xml.Schema
             if (elem != null && (global || !elem.RefName.IsEmpty))
             {
                 XmlSchemaObjectTable substitutionGroups = schemaSet.SubstitutionGroups;
-                XmlSchemaSubstitutionGroup? grp = (XmlSchemaSubstitutionGroup?)substitutionGroups[
-                    elem.QualifiedName
-                ];
+                XmlSchemaSubstitutionGroup? grp = (XmlSchemaSubstitutionGroup?)
+                    substitutionGroups[elem.QualifiedName];
                 if (grp != null)
                 {
                     //Grp members wil contain the head as well, so filter head as we added it already

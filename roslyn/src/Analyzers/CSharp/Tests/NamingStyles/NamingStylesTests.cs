@@ -1445,9 +1445,8 @@ namespace Microsoft.CodeAnalysis.Host
             Assert.Equal(2, commitOperations.Length);
 
             var symbolRenamedOperation =
-                (TestSymbolRenamedCodeActionOperationFactoryWorkspaceService.Operation)commitOperations[
-                    1
-                ];
+                (TestSymbolRenamedCodeActionOperationFactoryWorkspaceService.Operation)
+                    commitOperations[1];
             Assert.Equal("c", symbolRenamedOperation._symbol.Name);
             Assert.Equal("C", symbolRenamedOperation._newName);
         }
@@ -1476,9 +1475,8 @@ namespace Microsoft.CodeAnalysis.Host
             Assert.Equal(2, commitOperations.Length);
 
             var symbolRenamedOperation =
-                (TestSymbolRenamedCodeActionOperationFactoryWorkspaceService.Operation)commitOperations[
-                    1
-                ];
+                (TestSymbolRenamedCodeActionOperationFactoryWorkspaceService.Operation)
+                    commitOperations[1];
             Assert.Equal("test", symbolRenamedOperation._symbol.Name);
             Assert.Equal("ITest", symbolRenamedOperation._newName);
         }
@@ -1513,9 +1511,8 @@ namespace Microsoft.CodeAnalysis.Host
             Assert.Equal(2, commitOperations.Length);
 
             var symbolRenamedOperation =
-                (TestSymbolRenamedCodeActionOperationFactoryWorkspaceService.Operation)commitOperations[
-                    1
-                ];
+                (TestSymbolRenamedCodeActionOperationFactoryWorkspaceService.Operation)
+                    commitOperations[1];
             Assert.Equal("arg", symbolRenamedOperation._symbol.Name);
             Assert.Equal("TArg", symbolRenamedOperation._newName);
         }

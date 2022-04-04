@@ -1504,9 +1504,12 @@ class C
             TestWorkspace workspace
         )
         {
-            return (AbstractCommentSelectionBase<ValueTuple>)workspace.ExportProvider
-                .GetExportedValues<ICommandHandler>()
-                .First(export => typeof(ToggleBlockCommentCommandHandler).Equals(export.GetType()));
+            return (AbstractCommentSelectionBase<ValueTuple>)
+                workspace.ExportProvider
+                    .GetExportedValues<ICommandHandler>()
+                    .First(
+                        export => typeof(ToggleBlockCommentCommandHandler).Equals(export.GetType())
+                    );
         }
 
         internal override TestWorkspace GetWorkspace(string markup, TestComposition composition) =>

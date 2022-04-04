@@ -324,9 +324,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
         )
         {
             var within = semanticModel.GetEnclosingNamedTypeOrAssembly(position, cancellationToken);
-            var attributeType = (INamedTypeSymbol?)semanticModel
-                .GetTypeInfo(attribute, cancellationToken)
-                .Type;
+            var attributeType = (INamedTypeSymbol?)
+                semanticModel.GetTypeInfo(attribute, cancellationToken).Type;
             Contract.ThrowIfNull(attributeType);
             return attributeType.GetAttributeNamedParameters(semanticModel.Compilation, within);
         }

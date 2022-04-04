@@ -41,9 +41,10 @@ namespace WebMatrix.WebData.Test
                     AppDomainUtils.SetPreAppStartStage();
                     PreApplicationStartCode.Start();
 
-                    string formsAuthLoginUrl = (string)typeof(FormsAuthentication)
-                        .GetField("_LoginUrl", BindingFlags.Static | BindingFlags.NonPublic)
-                        .GetValue(null);
+                    string formsAuthLoginUrl = (string)
+                        typeof(FormsAuthentication)
+                            .GetField("_LoginUrl", BindingFlags.Static | BindingFlags.NonPublic)
+                            .GetValue(null);
                     Assert.Equal(FormsAuthenticationSettings.DefaultLoginUrl, formsAuthLoginUrl);
                 }
             );
@@ -60,9 +61,10 @@ namespace WebMatrix.WebData.Test
                         "False";
                     PreApplicationStartCode.Start();
 
-                    string formsAuthLoginUrl = (string)typeof(FormsAuthentication)
-                        .GetField("_LoginUrl", BindingFlags.Static | BindingFlags.NonPublic)
-                        .GetValue(null);
+                    string formsAuthLoginUrl = (string)
+                        typeof(FormsAuthentication)
+                            .GetField("_LoginUrl", BindingFlags.Static | BindingFlags.NonPublic)
+                            .GetValue(null);
                     Assert.Null(formsAuthLoginUrl);
                 }
             );

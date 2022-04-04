@@ -304,11 +304,12 @@ namespace System.Transactions
                         BucketSet newBucketSet = new BucketSet(this, txNew.AbsoluteTimeout);
                         WeakReference newSetWeak = new WeakReference(newBucketSet);
 
-                        WeakReference? oldNextSetWeak = (WeakReference?)Interlocked.CompareExchange(
-                            ref currentBucketSet.nextSetWeak,
-                            newSetWeak,
-                            nextSetWeak
-                        );
+                        WeakReference? oldNextSetWeak = (WeakReference?)
+                            Interlocked.CompareExchange(
+                                ref currentBucketSet.nextSetWeak,
+                                newSetWeak,
+                                nextSetWeak
+                            );
                         if (oldNextSetWeak == nextSetWeak)
                         {
                             // Ladies and Gentlemen we have a winner.
@@ -335,11 +336,12 @@ namespace System.Transactions
 
                     Debug.Assert(lastBucketSet != null);
                     newBucketSet.nextSetWeak = lastBucketSet.nextSetWeak;
-                    WeakReference? oldNextSetWeak = (WeakReference?)Interlocked.CompareExchange(
-                        ref lastBucketSet.nextSetWeak,
-                        newSetWeak,
-                        newBucketSet.nextSetWeak
-                    );
+                    WeakReference? oldNextSetWeak = (WeakReference?)
+                        Interlocked.CompareExchange(
+                            ref lastBucketSet.nextSetWeak,
+                            newSetWeak,
+                            newBucketSet.nextSetWeak
+                        );
                     if (oldNextSetWeak == newBucketSet.nextSetWeak)
                     {
                         // Ladies and Gentlemen we have a winner.
@@ -503,11 +505,8 @@ namespace System.Transactions
                 // expires, the thread will walk the list again, find the appropriate BucketSet to pinch off, and
                 // then time out the transactions. This means that it is possible for a transaction to live a bit longer,
                 // but not much.
-                WeakReference? abortingSetsWeak = (WeakReference?)Interlocked.CompareExchange(
-                    ref lastBucketSet.nextSetWeak,
-                    null,
-                    nextWeakSet
-                );
+                WeakReference? abortingSetsWeak = (WeakReference?)
+                    Interlocked.CompareExchange(ref lastBucketSet.nextSetWeak, null, nextWeakSet);
 
                 if (abortingSetsWeak == nextWeakSet)
                 {

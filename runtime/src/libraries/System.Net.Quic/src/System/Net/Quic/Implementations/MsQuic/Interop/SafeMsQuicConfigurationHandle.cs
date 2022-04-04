@@ -261,9 +261,8 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
 
                 if (certificateContext != null)
                 {
-                    certificate = (X509Certificate2?)_contextCertificate.GetValue(
-                        certificateContext
-                    );
+                    certificate = (X509Certificate2?)
+                        _contextCertificate.GetValue(certificateContext);
                     intermediates = (X509Certificate2[]?)_contextChain.GetValue(certificateContext);
 
                     if (certificate == null || intermediates == null)

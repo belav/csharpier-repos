@@ -250,12 +250,10 @@ internal partial class HubClientProxyGenerator
             var registerCallbackProviderSemanticModel = _compilation.GetSemanticModel(
                 methodDeclarationSyntax.SyntaxTree
             );
-            var registerCallbackProviderMethodSymbol =
-                (IMethodSymbol)registerCallbackProviderSemanticModel.GetDeclaredSymbol(
-                    methodDeclarationSyntax
-                );
-            var registerCallbackProviderClassSymbol =
-                (INamedTypeSymbol)registerCallbackProviderMethodSymbol.ContainingSymbol;
+            var registerCallbackProviderMethodSymbol = (IMethodSymbol)
+                registerCallbackProviderSemanticModel.GetDeclaredSymbol(methodDeclarationSyntax);
+            var registerCallbackProviderClassSymbol = (INamedTypeSymbol)
+                registerCallbackProviderMethodSymbol.ContainingSymbol;
 
             // Populate spec with metadata on user-specific get proxy method and class
             if (!IsExtensionMethodSignatureValid(registerCallbackProviderMethodSymbol, _context))

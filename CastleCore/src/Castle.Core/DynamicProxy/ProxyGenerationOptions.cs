@@ -71,10 +71,8 @@ namespace Castle.DynamicProxy
         private ProxyGenerationOptions(SerializationInfo info, StreamingContext context)
         {
             Hook = (IProxyGenerationHook)info.GetValue("hook", typeof(IProxyGenerationHook));
-            Selector = (IInterceptorSelector)info.GetValue(
-                "selector",
-                typeof(IInterceptorSelector)
-            );
+            Selector = (IInterceptorSelector)
+                info.GetValue("selector", typeof(IInterceptorSelector));
             mixins = (List<object>)info.GetValue("mixins", typeof(List<object>));
             BaseTypeForInterfaceProxy = Type.GetType(
                 info.GetString("baseTypeForInterfaceProxy.AssemblyQualifiedName")

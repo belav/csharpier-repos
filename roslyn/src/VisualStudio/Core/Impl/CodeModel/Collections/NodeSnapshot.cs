@@ -74,13 +74,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
                 out var ordinal
             );
 
-            return (EnvDTE.CodeElement)CodeAttribute.Create(
-                _state,
-                this.FileCodeModel,
-                _parentElement,
-                name,
-                ordinal
-            );
+            return (EnvDTE.CodeElement)
+                CodeAttribute.Create(_state, this.FileCodeModel, _parentElement, name, ordinal);
         }
 
         private EnvDTE.CodeElement CreateCodeParameter(SyntaxNode node)
@@ -92,11 +87,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
 
             var name = this.CodeModelService.GetParameterName(node);
 
-            return (EnvDTE.CodeElement)CodeParameter.Create(
-                _state,
-                (AbstractCodeMember)_parentElement,
-                name
-            );
+            return (EnvDTE.CodeElement)
+                CodeParameter.Create(_state, (AbstractCodeMember)_parentElement, name);
         }
 
         public override int Count

@@ -168,11 +168,8 @@ namespace System.Drawing
 
                     if (_frameTimer > TotalAnimationTime)
                     {
-                        _loop += (short)Math.DivRem(
-                            _frameTimer,
-                            TotalAnimationTime,
-                            out long newTimer
-                        );
+                        _loop += (short)
+                            Math.DivRem(_frameTimer, TotalAnimationTime, out long newTimer);
                         _frameTimer = newTimer;
 
                         if (!ShouldAnimate)

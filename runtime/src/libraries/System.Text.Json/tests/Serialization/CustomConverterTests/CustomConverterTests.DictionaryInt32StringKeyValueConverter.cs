@@ -26,9 +26,8 @@ namespace System.Text.Json.Serialization.Tests
                 }
 
                 _intToStringConverter =
-                    (JsonConverter<KeyValuePair<int, string>>)options.GetConverter(
-                        typeof(KeyValuePair<int, string>)
-                    );
+                    (JsonConverter<KeyValuePair<int, string>>)
+                        options.GetConverter(typeof(KeyValuePair<int, string>));
 
                 // KeyValuePair<> converter is built-in.
                 Debug.Assert(_intToStringConverter != null);

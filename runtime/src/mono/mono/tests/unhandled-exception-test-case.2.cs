@@ -162,8 +162,8 @@ namespace UnhandledExceptionTest
                         DifferentDomainUnhandledExceptionHandler
                     );
                 }
-                DifferentDomainActor dda =
-                    (DifferentDomainActor)differentAppDomain.CreateInstanceAndUnwrap(
+                DifferentDomainActor dda = (DifferentDomainActor)
+                    differentAppDomain.CreateInstanceAndUnwrap(
                         Assembly.GetEntryAssembly().FullName,
                         typeof(DifferentDomainActor).FullName
                     );

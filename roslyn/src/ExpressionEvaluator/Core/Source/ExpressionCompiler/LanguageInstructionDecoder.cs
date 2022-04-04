@@ -74,8 +74,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     $"Unexpected argumentFlags '{argumentFlags}'"
                 );
 
-                var instructionAddress =
-                    (DkmClrInstructionAddress)languageInstructionAddress.Address;
+                var instructionAddress = (DkmClrInstructionAddress)
+                    languageInstructionAddress.Address;
                 var compilation = _instructionDecoder.GetCompilation(
                     instructionAddress.ModuleInstance
                 );

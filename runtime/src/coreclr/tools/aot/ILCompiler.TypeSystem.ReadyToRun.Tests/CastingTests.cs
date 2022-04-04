@@ -222,9 +222,8 @@ namespace TypeSystemTests
         public void TestNullableCasting()
         {
             TypeDesc intType = _context.GetWellKnownType(WellKnownType.Int32);
-            MetadataType nullableType = (MetadataType)_context.GetWellKnownType(
-                WellKnownType.Nullable
-            );
+            MetadataType nullableType = (MetadataType)
+                _context.GetWellKnownType(WellKnownType.Nullable);
             TypeDesc nullableOfIntType = nullableType.MakeInstantiatedType(intType);
 
             Assert.True(intType.CanCastTo(nullableOfIntType));
@@ -239,10 +238,8 @@ namespace TypeSystemTests
                 "Casting",
                 "ClassWithRecursiveImplementation"
             );
-            MetadataType iContravariantOfTType = (MetadataType)_testModule.GetType(
-                "Casting",
-                "IContravariant`1"
-            );
+            MetadataType iContravariantOfTType = (MetadataType)
+                _testModule.GetType("Casting", "IContravariant`1");
 
             TypeDesc testType = iContravariantOfTType.MakeInstantiatedType(
                 classWithRecursiveImplementation

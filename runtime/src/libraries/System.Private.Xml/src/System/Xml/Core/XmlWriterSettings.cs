@@ -702,10 +702,8 @@ namespace System.Xml
             // string newLineChars;
             NewLineChars = reader.ReadStringQ();
             // TriState indent;
-            IndentInternal = (TriState)reader.ReadSByte(
-                (sbyte)TriState.Unknown,
-                (sbyte)TriState.True
-            );
+            IndentInternal = (TriState)
+                reader.ReadSByte((sbyte)TriState.Unknown, (sbyte)TriState.True);
             // string indentChars;
             IndentChars = reader.ReadStringQ();
             // bool newLineOnAttributes;
@@ -713,10 +711,8 @@ namespace System.Xml
             // bool closeOutput;
             CloseOutput = reader.ReadBoolean();
             // ConformanceLevel conformanceLevel;
-            ConformanceLevel = (ConformanceLevel)reader.ReadSByte(
-                0,
-                (sbyte)ConformanceLevel.Document
-            );
+            ConformanceLevel = (ConformanceLevel)
+                reader.ReadSByte(0, (sbyte)ConformanceLevel.Document);
             // bool checkCharacters;
             CheckCharacters = reader.ReadBoolean();
             // XmlOutputMethod outputMethod;

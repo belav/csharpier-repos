@@ -327,10 +327,8 @@ namespace Microsoft.EntityFrameworkCore
             in StoreObjectIdentifier storeObject
         ) =>
             (
-                (RelationalPropertyOverrides?)RelationalPropertyOverrides.Find(
-                    property,
-                    storeObject
-                )
+                (RelationalPropertyOverrides?)
+                    RelationalPropertyOverrides.Find(property, storeObject)
             )?.GetColumnNameConfigurationSource();
 
         /// <summary>
@@ -534,9 +532,9 @@ namespace Microsoft.EntityFrameworkCore
         public static IEnumerable<IColumnMappingBase> GetDefaultColumnMappings(
             this IProperty property
         ) =>
-            (IEnumerable<IColumnMappingBase>?)property.FindRuntimeAnnotationValue(
-                RelationalAnnotationNames.DefaultColumnMappings
-            ) ?? Enumerable.Empty<IColumnMappingBase>();
+            (IEnumerable<IColumnMappingBase>?)
+                property.FindRuntimeAnnotationValue(RelationalAnnotationNames.DefaultColumnMappings)
+            ?? Enumerable.Empty<IColumnMappingBase>();
 
         /// <summary>
         ///     Returns the table columns to which the property is mapped.
@@ -544,9 +542,9 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="property">The property.</param>
         /// <returns>The table columns to which the property is mapped.</returns>
         public static IEnumerable<IColumnMapping> GetTableColumnMappings(this IProperty property) =>
-            (IEnumerable<IColumnMapping>?)property.FindRuntimeAnnotationValue(
-                RelationalAnnotationNames.TableColumnMappings
-            ) ?? Enumerable.Empty<IColumnMapping>();
+            (IEnumerable<IColumnMapping>?)
+                property.FindRuntimeAnnotationValue(RelationalAnnotationNames.TableColumnMappings)
+            ?? Enumerable.Empty<IColumnMapping>();
 
         /// <summary>
         ///     Returns the view columns to which the property is mapped.
@@ -556,9 +554,9 @@ namespace Microsoft.EntityFrameworkCore
         public static IEnumerable<IViewColumnMapping> GetViewColumnMappings(
             this IProperty property
         ) =>
-            (IEnumerable<IViewColumnMapping>?)property.FindRuntimeAnnotationValue(
-                RelationalAnnotationNames.ViewColumnMappings
-            ) ?? Enumerable.Empty<IViewColumnMapping>();
+            (IEnumerable<IViewColumnMapping>?)
+                property.FindRuntimeAnnotationValue(RelationalAnnotationNames.ViewColumnMappings)
+            ?? Enumerable.Empty<IViewColumnMapping>();
 
         /// <summary>
         ///     Returns the SQL query columns to which the property is mapped.
@@ -568,9 +566,10 @@ namespace Microsoft.EntityFrameworkCore
         public static IEnumerable<ISqlQueryColumnMapping> GetSqlQueryColumnMappings(
             this IProperty property
         ) =>
-            (IEnumerable<ISqlQueryColumnMapping>?)property.FindRuntimeAnnotationValue(
-                RelationalAnnotationNames.SqlQueryColumnMappings
-            ) ?? Enumerable.Empty<ISqlQueryColumnMapping>();
+            (IEnumerable<ISqlQueryColumnMapping>?)
+                property.FindRuntimeAnnotationValue(
+                    RelationalAnnotationNames.SqlQueryColumnMappings
+                ) ?? Enumerable.Empty<ISqlQueryColumnMapping>();
 
         /// <summary>
         ///     Returns the function columns to which the property is mapped.
@@ -580,9 +579,10 @@ namespace Microsoft.EntityFrameworkCore
         public static IEnumerable<IFunctionColumnMapping> GetFunctionColumnMappings(
             this IProperty property
         ) =>
-            (IEnumerable<IFunctionColumnMapping>?)property.FindRuntimeAnnotationValue(
-                RelationalAnnotationNames.FunctionColumnMappings
-            ) ?? Enumerable.Empty<IFunctionColumnMapping>();
+            (IEnumerable<IFunctionColumnMapping>?)
+                property.FindRuntimeAnnotationValue(
+                    RelationalAnnotationNames.FunctionColumnMappings
+                ) ?? Enumerable.Empty<IFunctionColumnMapping>();
 
         /// <summary>
         ///     Returns the column corresponding to this property if it's mapped to the given table-like store object.

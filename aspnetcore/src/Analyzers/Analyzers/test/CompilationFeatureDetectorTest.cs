@@ -33,9 +33,8 @@ namespace Microsoft.AspNetCore.Analyzers.TestFiles.CompilationFeatureDetectorTes
         var compilation = TestCompilation.Create(source);
         var symbols = new StartupSymbols(compilation);
 
-        var type = (INamedTypeSymbol)compilation
-            .GetSymbolsWithName("StartupWithNoFeatures")
-            .Single();
+        var type = (INamedTypeSymbol)
+            compilation.GetSymbolsWithName("StartupWithNoFeatures").Single();
         Assert.True(StartupFacts.IsStartupClass(symbols, type));
 
         // Act
@@ -116,9 +115,8 @@ namespace Microsoft.AspNetCore.Analyzers.TestFiles.CompilationFeatureDetectorTes
         var compilation = TestCompilation.Create(source);
         var symbols = new StartupSymbols(compilation);
 
-        var type = (INamedTypeSymbol)compilation
-            .GetSymbolsWithName("StartupWithMapBlazorHub")
-            .Single();
+        var type = (INamedTypeSymbol)
+            compilation.GetSymbolsWithName("StartupWithMapBlazorHub").Single();
         Assert.True(StartupFacts.IsStartupClass(symbols, type));
 
         // Act

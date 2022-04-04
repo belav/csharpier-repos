@@ -95,10 +95,8 @@ public class JSStreamReferenceJsonConverterTest
             $"{{\"__jsObjectId\":{expectedId}, \"__jsStreamReferenceLength\":{expectedLength}}}";
 
         // Act
-        var deserialized = (JSStreamReference)JsonSerializer.Deserialize<IJSStreamReference>(
-            json,
-            JsonSerializerOptions
-        )!;
+        var deserialized = (JSStreamReference)
+            JsonSerializer.Deserialize<IJSStreamReference>(json, JsonSerializerOptions)!;
 
         // Assert
         Assert.Equal(expectedId, deserialized?.Id);
@@ -115,10 +113,8 @@ public class JSStreamReferenceJsonConverterTest
             $"{{\"__jsStreamReferenceLength\":{expectedLength}, \"__jsObjectId\":{expectedId}}}";
 
         // Act
-        var deserialized = (JSStreamReference)JsonSerializer.Deserialize<IJSStreamReference>(
-            json,
-            JsonSerializerOptions
-        )!;
+        var deserialized = (JSStreamReference)
+            JsonSerializer.Deserialize<IJSStreamReference>(json, JsonSerializerOptions)!;
 
         // Assert
         Assert.Equal(expectedId, deserialized?.Id);

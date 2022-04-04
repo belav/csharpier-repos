@@ -352,8 +352,8 @@ namespace System.ComponentModel
                     && typeof(TypeDescriptionProvider).IsAssignableFrom(providerType)
                 )
                 {
-                    TypeDescriptionProvider prov =
-                        (TypeDescriptionProvider)Activator.CreateInstance(providerType)!;
+                    TypeDescriptionProvider prov = (TypeDescriptionProvider)
+                        Activator.CreateInstance(providerType)!;
                     AddProvider(prov, type);
                     providerAdded = true;
                 }
@@ -533,10 +533,8 @@ namespace System.ComponentModel
             //
             if (componentType == oldPropertyDescriptor.ComponentType)
             {
-                ExtenderProvidedPropertyAttribute attr =
-                    (ExtenderProvidedPropertyAttribute)oldPropertyDescriptor.Attributes[
-                        typeof(ExtenderProvidedPropertyAttribute)
-                    ]!;
+                ExtenderProvidedPropertyAttribute attr = (ExtenderProvidedPropertyAttribute)
+                    oldPropertyDescriptor.Attributes[typeof(ExtenderProvidedPropertyAttribute)]!;
 
                 if (attr.ExtenderProperty is ReflectPropertyDescriptor reflectDesc)
                 {
@@ -2736,10 +2734,8 @@ namespace System.ComponentModel
                     {
                         ISite? site = component.Site;
                         bool flag = false;
-                        ITypeResolutionService? typeResolutionService =
-                            (ITypeResolutionService?)site?.GetService(
-                                typeof(ITypeResolutionService)
-                            );
+                        ITypeResolutionService? typeResolutionService = (ITypeResolutionService?)
+                            site?.GetService(typeof(ITypeResolutionService));
                         if (typeResolutionService != null)
                         {
                             flag = true;
@@ -3332,9 +3328,8 @@ namespace System.ComponentModel
                     "System.Windows.Forms.ComponentModel.Com2Interop.ComNativeDescriptor, System.Windows.Forms",
                     throwOnError: true
                 )!;
-                _comNativeDescriptor = (TypeDescriptionProvider)Activator.CreateInstance(
-                    realComNativeDescriptor
-                )!;
+                _comNativeDescriptor = (TypeDescriptionProvider)
+                    Activator.CreateInstance(realComNativeDescriptor)!;
             }
 
             [return: NotNullIfNotNull("instance")]

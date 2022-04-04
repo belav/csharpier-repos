@@ -45,9 +45,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
         /// <returns></returns>
         public static IWpfTextView GetActiveTextView()
         {
-            var monitorSelection = (IVsMonitorSelection)Package.GetGlobalService(
-                typeof(SVsShellMonitorSelection)
-            );
+            var monitorSelection = (IVsMonitorSelection)
+                Package.GetGlobalService(typeof(SVsShellMonitorSelection));
             if (monitorSelection == null)
             {
                 return null;

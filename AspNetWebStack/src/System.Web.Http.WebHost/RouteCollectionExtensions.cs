@@ -111,8 +111,8 @@ namespace System.Web.Http
             HttpRouteValueDictionary constraintsDictionary = new HttpRouteValueDictionary(
                 constraints
             );
-            HostedHttpRoute httpRoute =
-                (HostedHttpRoute)GlobalConfiguration.Configuration.Routes.CreateRoute(
+            HostedHttpRoute httpRoute = (HostedHttpRoute)
+                GlobalConfiguration.Configuration.Routes.CreateRoute(
                     routeTemplate,
                     defaultsDictionary,
                     constraintsDictionary,

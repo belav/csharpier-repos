@@ -556,18 +556,20 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
                 IBlockOperation? currentBlockStatementOpt = null;
                 if (blockStatementOpt != null)
                 {
-                    currentBlockStatementOpt = (IBlockOperation?)currentSemanticModel.GetOperation(
-                        currentRoot.GetCurrentNode(blockStatementOpt.Syntax)!,
-                        cancellationToken
-                    );
+                    currentBlockStatementOpt = (IBlockOperation?)
+                        currentSemanticModel.GetOperation(
+                            currentRoot.GetCurrentNode(blockStatementOpt.Syntax)!,
+                            cancellationToken
+                        );
                     if (currentBlockStatementOpt == null)
                         continue;
                 }
 
-                var currentParameter = (IParameterSymbol?)parameter
-                    .GetSymbolKey(cancellationToken)
-                    .Resolve(currentCompilation, cancellationToken: cancellationToken)
-                    .GetAnySymbol();
+                var currentParameter = (IParameterSymbol?)
+                    parameter
+                        .GetSymbolKey(cancellationToken)
+                        .Resolve(currentCompilation, cancellationToken: cancellationToken)
+                        .GetAnySymbol();
                 if (currentParameter == null)
                     continue;
 
@@ -664,15 +666,16 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
 
             // Now that we've added any potential members, create an assignment between it
             // and the parameter.
-            var initializationStatement = (TStatementSyntax)generator.ExpressionStatement(
-                generator.AssignmentStatement(
-                    generator.MemberAccessExpression(
-                        generator.ThisExpression(),
-                        generator.IdentifierName(fieldOrProperty.Name)
-                    ),
-                    generator.IdentifierName(parameter.Name)
-                )
-            );
+            var initializationStatement = (TStatementSyntax)
+                generator.ExpressionStatement(
+                    generator.AssignmentStatement(
+                        generator.MemberAccessExpression(
+                            generator.ThisExpression(),
+                            generator.IdentifierName(fieldOrProperty.Name)
+                        ),
+                        generator.IdentifierName(parameter.Name)
+                    )
+                );
 
             // Attempt to place the initialization in a good location in the constructor
             // We'll want to keep initialization statements in the same order as we see

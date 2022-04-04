@@ -59,9 +59,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         {
             _workspace = workspace;
             _updateSource = hostDiagnosticUpdateSource;
-            _fileChangeService = (IVsFileChangeEx)serviceProvider.GetService(
-                typeof(SVsFileChangeEx)
-            );
+            _fileChangeService = (IVsFileChangeEx)
+                serviceProvider.GetService(typeof(SVsFileChangeEx));
         }
 
         internal void RemoveAnalyzerAlreadyLoadedDiagnostics(

@@ -494,9 +494,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             var substitutedInterface = @class.Interfaces().Single();
             Assert.Equal(@interface, substitutedInterface.ConstructedFrom);
 
-            var substitutedInterfaceMethod = (MethodSymbol)substitutedInterface
-                .GetMembers("Method")
-                .Last(); //this assumes decl order
+            var substitutedInterfaceMethod = (MethodSymbol)
+                substitutedInterface.GetMembers("Method").Last(); //this assumes decl order
             Assert.Equal(
                 "void IGeneric<S>.Method<U>(S t, U u)",
                 substitutedInterfaceMethod.ToTestDisplayString()
@@ -542,18 +541,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             var substitutedInterface = @class.Interfaces().Single();
             Assert.Equal(@interface, substitutedInterface.ConstructedFrom);
 
-            var substitutedInterfaceMethod = (MethodSymbol)substitutedInterface
-                .GetMembers("Method")
-                .Last(); //this assumes decl order
+            var substitutedInterfaceMethod = (MethodSymbol)
+                substitutedInterface.GetMembers("Method").Last(); //this assumes decl order
             Assert.Equal(
                 "void IGeneric<System.Int32>.Method<U>(System.Int32 t, U u)",
                 substitutedInterfaceMethod.ToTestDisplayString()
             ); //make sure we got the one we expected
             Assert.Equal(interfaceMethod, substitutedInterfaceMethod.OriginalDefinition);
 
-            var classMethod = (MethodSymbol)@class
-                .GetMembers("IGeneric<System.Int32>.Method")
-                .Last(); //this assumes decl order
+            var classMethod = (MethodSymbol)
+                @class.GetMembers("IGeneric<System.Int32>.Method").Last(); //this assumes decl order
             Assert.Equal(
                 "void Constructed.IGeneric<System.Int32>.Method<W>(System.Int32 i, W w)",
                 classMethod.ToTestDisplayString()
@@ -573,23 +570,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 
             var globalNamespace = assembly.GlobalNamespace;
 
-            var cyclicInterface = (NamedTypeSymbol)globalNamespace
-                .GetTypeMembers("ImplementsSelf")
-                .Single();
+            var cyclicInterface = (NamedTypeSymbol)
+                globalNamespace.GetTypeMembers("ImplementsSelf").Single();
             Assert.Equal(TypeKind.Interface, cyclicInterface.TypeKind);
 
-            var implementedInterface = (NamedTypeSymbol)globalNamespace
-                .GetTypeMembers("I1")
-                .Single();
+            var implementedInterface = (NamedTypeSymbol)
+                globalNamespace.GetTypeMembers("I1").Single();
             Assert.Equal(TypeKind.Interface, implementedInterface.TypeKind);
 
-            var interface2Method = (MethodSymbol)implementedInterface
-                .GetMembers("Method1")
-                .Single();
+            var interface2Method = (MethodSymbol)
+                implementedInterface.GetMembers("Method1").Single();
 
-            var @class = (NamedTypeSymbol)globalNamespace
-                .GetTypeMembers("InterfaceCycleSuccess")
-                .Single();
+            var @class = (NamedTypeSymbol)
+                globalNamespace.GetTypeMembers("InterfaceCycleSuccess").Single();
             Assert.Equal(TypeKind.Class, @class.TypeKind);
             Assert.True(@class.Interfaces().Contains(cyclicInterface));
             Assert.True(@class.Interfaces().Contains(implementedInterface));
@@ -610,14 +603,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 
             var globalNamespace = assembly.GlobalNamespace;
 
-            var cyclicInterface = (NamedTypeSymbol)globalNamespace
-                .GetTypeMembers("ImplementsSelf")
-                .Single();
+            var cyclicInterface = (NamedTypeSymbol)
+                globalNamespace.GetTypeMembers("ImplementsSelf").Single();
             Assert.Equal(TypeKind.Interface, cyclicInterface.TypeKind);
 
-            var @class = (NamedTypeSymbol)globalNamespace
-                .GetTypeMembers("InterfaceCycleFailure")
-                .Single();
+            var @class = (NamedTypeSymbol)
+                globalNamespace.GetTypeMembers("InterfaceCycleFailure").Single();
             Assert.Equal(TypeKind.Class, @class.TypeKind);
             Assert.True(@class.Interfaces().Contains(cyclicInterface));
 
@@ -646,22 +637,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 
             var globalNamespace = assemblies.ElementAt(1).GlobalNamespace;
 
-            var defInterface = (NamedTypeSymbol)globalNamespace
-                .GetTypeMembers("Interface")
-                .Single();
+            var defInterface = (NamedTypeSymbol)
+                globalNamespace.GetTypeMembers("Interface").Single();
             Assert.Equal(TypeKind.Interface, defInterface.TypeKind);
 
             var defInterfaceMethod = (MethodSymbol)defInterface.GetMembers("Method").Single();
 
-            var refInterface = (NamedTypeSymbol)globalNamespace
-                .GetTypeMembers("IGenericInterface")
-                .Single();
+            var refInterface = (NamedTypeSymbol)
+                globalNamespace.GetTypeMembers("IGenericInterface").Single();
             Assert.Equal(TypeKind.Interface, defInterface.TypeKind);
             Assert.True(refInterface.Interfaces().Contains(defInterface));
 
-            var @class = (NamedTypeSymbol)globalNamespace
-                .GetTypeMembers("IndirectImplementation")
-                .Single();
+            var @class = (NamedTypeSymbol)
+                globalNamespace.GetTypeMembers("IndirectImplementation").Single();
             Assert.Equal(TypeKind.Class, @class.TypeKind);
 
             var classInterfacesConstructedFrom = @class.Interfaces().Select(i => i.ConstructedFrom);
@@ -689,14 +677,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 
             var globalNamespace = assembly.GlobalNamespace;
 
-            var baseClass = (NamedTypeSymbol)globalNamespace
-                .GetTypeMembers("ExplicitlyImplementedClass")
-                .Single();
+            var baseClass = (NamedTypeSymbol)
+                globalNamespace.GetTypeMembers("ExplicitlyImplementedClass").Single();
             Assert.Equal(TypeKind.Class, baseClass.TypeKind);
 
-            var derivedClass = (NamedTypeSymbol)globalNamespace
-                .GetTypeMembers("ExplicitlyImplementsAClass")
-                .Single();
+            var derivedClass = (NamedTypeSymbol)
+                globalNamespace.GetTypeMembers("ExplicitlyImplementsAClass").Single();
             Assert.Equal(TypeKind.Class, derivedClass.TypeKind);
             Assert.Equal(baseClass, derivedClass.BaseType());
 
@@ -722,9 +708,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.Equal(0, @interface.Arity);
             Assert.Equal(TypeKind.Interface, @interface.TypeKind);
 
-            var @class = (NamedTypeSymbol)globalNamespace
-                .GetTypeMembers("ExplicitlyImplementsUnrelatedInterfaceMethods")
-                .Single();
+            var @class = (NamedTypeSymbol)
+                globalNamespace
+                    .GetTypeMembers("ExplicitlyImplementsUnrelatedInterfaceMethods")
+                    .Single();
             Assert.Equal(TypeKind.Class, @class.TypeKind);
             Assert.Equal(0, @class.AllInterfaces().Length);
 
@@ -758,9 +745,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.Equal(1, @interface.Arity);
             Assert.Equal(TypeKind.Interface, @interface.TypeKind);
 
-            var @class = (NamedTypeSymbol)globalNamespace
-                .GetTypeMembers("ExplicitlyImplementsUnrelatedInterfaceMethods")
-                .Single();
+            var @class = (NamedTypeSymbol)
+                globalNamespace
+                    .GetTypeMembers("ExplicitlyImplementsUnrelatedInterfaceMethods")
+                    .Single();
             Assert.Equal(TypeKind.Class, @class.TypeKind);
             Assert.Equal(0, @class.AllInterfaces().Length);
 
@@ -791,9 +779,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 
             var globalNamespace = assemblies.ElementAt(1).GlobalNamespace;
 
-            var outerInterface = (NamedTypeSymbol)globalNamespace
-                .GetTypeMembers("IGeneric2")
-                .Single();
+            var outerInterface = (NamedTypeSymbol)
+                globalNamespace.GetTypeMembers("IGeneric2").Single();
             Assert.Equal(1, outerInterface.Arity);
             Assert.Equal(TypeKind.Interface, outerInterface.TypeKind);
 

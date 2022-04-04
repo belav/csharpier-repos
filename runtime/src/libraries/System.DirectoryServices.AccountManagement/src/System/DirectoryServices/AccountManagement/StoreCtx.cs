@@ -432,8 +432,8 @@ namespace System.DirectoryServices.AccountManagement
                     {
                         // Since QBE filter objects are always unpersisted, any certs in the collection
                         // must have been inserted by the application.
-                        X509Certificate2Collection certCollection =
-                            (X509Certificate2Collection)value;
+                        X509Certificate2Collection certCollection = (X509Certificate2Collection)
+                            value;
                         foreach (X509Certificate2 cert in certCollection)
                         {
                             object filter = FilterFactory.CreateFilter(propertyName);

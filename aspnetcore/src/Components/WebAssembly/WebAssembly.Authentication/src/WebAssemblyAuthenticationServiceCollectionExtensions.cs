@@ -48,7 +48,8 @@ public static class WebAssemblyAuthenticationServiceCollectionExtensions
         services.TryAddScoped(
             sp =>
             {
-                return (IRemoteAuthenticationService<TRemoteAuthenticationState>)sp.GetRequiredService<AuthenticationStateProvider>();
+                return (IRemoteAuthenticationService<TRemoteAuthenticationState>)
+                    sp.GetRequiredService<AuthenticationStateProvider>();
             }
         );
 

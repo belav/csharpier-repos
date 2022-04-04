@@ -35,11 +35,8 @@ namespace Castle.DynamicProxy.Tests
 
             var options = new ProxyGenerationOptions(hook);
 
-            var proxy = (ServiceClass)generator.CreateClassProxy(
-                typeof(ServiceClass),
-                options,
-                logger
-            );
+            var proxy = (ServiceClass)
+                generator.CreateClassProxy(typeof(ServiceClass), options, logger);
 
             Assert.IsTrue(hook.Completed);
             Assert.AreEqual(13, hook.AskedMembers.Count, "Asked members");
@@ -59,12 +56,13 @@ namespace Castle.DynamicProxy.Tests
 
             var options = new ProxyGenerationOptions(hook);
 
-            var proxy = (IService)generator.CreateInterfaceProxyWithTarget(
-                typeof(IService),
-                new ServiceImpl(),
-                options,
-                logger
-            );
+            var proxy = (IService)
+                generator.CreateInterfaceProxyWithTarget(
+                    typeof(IService),
+                    new ServiceImpl(),
+                    options,
+                    logger
+                );
 
             Assert.IsTrue(hook.Completed);
             Assert.AreEqual(10, hook.AskedMembers.Count);

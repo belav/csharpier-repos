@@ -1143,9 +1143,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         protected override TestHelpers TestHelpers => SqlServerTestHelpers.Instance;
 
         protected override MigrationsModelDiffer CreateModelDiffer(DbContextOptions options) =>
-            (MigrationsModelDiffer)TestHelpers
-                .CreateContext(options)
-                .GetService<IMigrationsModelDiffer>();
+            (MigrationsModelDiffer)
+                TestHelpers.CreateContext(options).GetService<IMigrationsModelDiffer>();
 
         private bool? IsMemoryOptimized(Annotatable annotatable) =>
             annotatable[SqlServerAnnotationNames.MemoryOptimized] as bool?;

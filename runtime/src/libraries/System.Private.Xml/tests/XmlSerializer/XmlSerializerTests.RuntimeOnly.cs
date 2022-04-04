@@ -154,9 +154,8 @@ public static partial class XmlSerializerTests
     {
         // Assume that UTC offset doesn't change more often than once in the day 2013-01-02
         // DO NOT USE TimeZoneInfo.Local.BaseUtcOffset !
-        var offsetMinutes = (int)TimeZoneInfo.Local
-            .GetUtcOffset(new DateTime(2013, 1, 2))
-            .TotalMinutes;
+        var offsetMinutes = (int)
+            TimeZoneInfo.Local.GetUtcOffset(new DateTime(2013, 1, 2)).TotalMinutes;
         var timeZoneString = string.Format(
             "{0:+;-}{1}",
             offsetMinutes,
@@ -2477,10 +2476,8 @@ public static partial class XmlSerializerTests
             using (var reader = new XmlTextReader(ms))
             {
                 actual =
-                    (MyCollection<string>)serializer.Deserialize(
-                        reader,
-                        "http://www.w3.org/2003/05/soap-encoding"
-                    );
+                    (MyCollection<string>)
+                        serializer.Deserialize(reader, "http://www.w3.org/2003/05/soap-encoding");
             }
         }
 

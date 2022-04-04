@@ -127,14 +127,16 @@ namespace System.Linq.Expressions.Tests
                     new Delegate[]
                     {
                         null,
-                        (Func<object>)delegate()
-                        {
-                            return null;
-                        },
-                        (Func<int, int>)delegate(int i)
-                        {
-                            return i + 1;
-                        },
+                        (Func<object>)
+                            delegate()
+                            {
+                                return null;
+                            },
+                        (Func<int, int>)
+                            delegate(int i)
+                            {
+                                return i + 1;
+                            },
                         (Action<object>)delegate { }
                     },
                     new Delegate[100]
@@ -246,10 +248,11 @@ namespace System.Linq.Expressions.Tests
                     new Func<object>[]
                     {
                         null,
-                        (Func<object>)delegate()
-                        {
-                            return null;
-                        }
+                        (Func<object>)
+                            delegate()
+                            {
+                                return null;
+                            }
                     },
                     new Func<object>[100]
                 }

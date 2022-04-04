@@ -144,16 +144,17 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim
             );
             var cpsProjectFactory =
                 environment.ExportProvider.GetExportedValue<IWorkspaceProjectContextFactory>();
-            var cpsProject = (CPSProject)await cpsProjectFactory.CreateProjectContextAsync(
-                LanguageNames.CSharp,
-                projectName,
-                projectFilePath,
-                projectGuid,
-                hierarchy,
-                binOutputPath,
-                assemblyName: null,
-                CancellationToken.None
-            );
+            var cpsProject = (CPSProject)
+                await cpsProjectFactory.CreateProjectContextAsync(
+                    LanguageNames.CSharp,
+                    projectName,
+                    projectFilePath,
+                    projectGuid,
+                    hierarchy,
+                    binOutputPath,
+                    assemblyName: null,
+                    CancellationToken.None
+                );
 
             cpsProject.SetOptions(ImmutableArray.Create(commandLineArguments));
 
@@ -175,16 +176,17 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim
             var cpsProjectFactory =
                 environment.ExportProvider.GetExportedValue<IWorkspaceProjectContextFactory>();
 
-            return (CPSProject)await cpsProjectFactory.CreateProjectContextAsync(
-                NoCompilationConstants.LanguageName,
-                projectName,
-                projectFilePath,
-                Guid.NewGuid(),
-                hierarchy,
-                binOutputPath: null,
-                assemblyName: null,
-                CancellationToken.None
-            );
+            return (CPSProject)
+                await cpsProjectFactory.CreateProjectContextAsync(
+                    NoCompilationConstants.LanguageName,
+                    projectName,
+                    projectFilePath,
+                    Guid.NewGuid(),
+                    hierarchy,
+                    binOutputPath: null,
+                    assemblyName: null,
+                    CancellationToken.None
+                );
         }
 
         private static string GetOutputPathFromArguments(string[] commandLineArguments)

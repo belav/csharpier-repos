@@ -55,13 +55,16 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
 
                 instance =
                     defaultCtor != null
-                        ? (T)Activator.CreateInstance(
-                              type,
-                              BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
-                              binder: null,
-                              args: null,
-                              culture: null
-                          )!
+                        ? (T)
+                              Activator.CreateInstance(
+                                  type,
+                                  BindingFlags.Public
+                                      | BindingFlags.NonPublic
+                                      | BindingFlags.Instance,
+                                  binder: null,
+                                  args: null,
+                                  culture: null
+                              )!
                         : null;
 
                 return instance != null;

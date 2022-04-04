@@ -17,9 +17,8 @@ namespace System.Net.Http.Tests
             MediaTypeWithQualityHeaderValue source = new MediaTypeWithQualityHeaderValue(
                 "application/xml"
             );
-            MediaTypeWithQualityHeaderValue clone = (MediaTypeWithQualityHeaderValue)(
-                (ICloneable)source
-            ).Clone();
+            MediaTypeWithQualityHeaderValue clone = (MediaTypeWithQualityHeaderValue)
+                ((ICloneable)source).Clone();
             Assert.Equal(source.MediaType, clone.MediaType);
             Assert.Equal(0, clone.Parameters.Count);
 

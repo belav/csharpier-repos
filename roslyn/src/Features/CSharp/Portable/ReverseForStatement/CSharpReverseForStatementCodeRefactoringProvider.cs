@@ -369,10 +369,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReverseForStatement
 
                 var newStart = equals
                     ? end
-                    : (ExpressionSyntax)generator.SubtractExpression(
-                          end,
-                          generator.LiteralExpression(1)
-                      );
+                    : (ExpressionSyntax)
+                          generator.SubtractExpression(end, generator.LiteralExpression(1));
 
                 editor.ReplaceNode(variable.Initializer!.Value, Reduce(newStart));
                 editor.ReplaceNode(condition, Reduce(Invert(variable, condition, start)));

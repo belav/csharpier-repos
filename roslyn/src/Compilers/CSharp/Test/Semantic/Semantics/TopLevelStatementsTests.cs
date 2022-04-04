@@ -9844,9 +9844,8 @@ class Test
                         break;
                 }
 
-                var decl = (CSharpSyntaxNode)context.ContainingSymbol.DeclaringSyntaxReferences
-                    .Single()
-                    .GetSyntax();
+                var decl = (CSharpSyntaxNode)
+                    context.ContainingSymbol.DeclaringSyntaxReferences.Single().GetSyntax();
 
                 Assert.True(syntaxTreeModel.TestOnlyMemberModels.ContainsKey(decl));
 

@@ -68,10 +68,8 @@ namespace System.IO
                     state.PreAllocatedOverlapped = new PreAllocatedOverlapped(
                         (errorCode, numBytes, overlappedPointer) =>
                         {
-                            AsyncReadState state =
-                                (AsyncReadState)ThreadPoolBoundHandle.GetNativeOverlappedState(
-                                    overlappedPointer
-                                )!;
+                            AsyncReadState state = (AsyncReadState)
+                                ThreadPoolBoundHandle.GetNativeOverlappedState(overlappedPointer)!;
                             state.ThreadPoolBinding.FreeNativeOverlapped(overlappedPointer);
                             if (state.WeakWatcher.TryGetTarget(out FileSystemWatcher? watcher))
                             {

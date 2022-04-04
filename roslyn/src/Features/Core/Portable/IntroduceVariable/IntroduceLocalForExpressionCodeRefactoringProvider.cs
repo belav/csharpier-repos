@@ -93,15 +93,14 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                 .ConfigureAwait(false);
             var generator = SyntaxGenerator.GetGenerator(document);
             var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
-            var expression = (TExpressionSyntax)syntaxFacts.GetExpressionOfExpressionStatement(
-                expressionStatement
-            );
+            var expression = (TExpressionSyntax)
+                syntaxFacts.GetExpressionOfExpressionStatement(expressionStatement);
 
             var nameToken = await GenerateUniqueNameAsync(document, expression, cancellationToken)
                 .ConfigureAwait(false);
             var type = semanticModel.GetTypeInfo(expression, cancellationToken).Type;
-            var localDeclaration =
-                (TLocalDeclarationStatementSyntax)generator.LocalDeclarationStatement(
+            var localDeclaration = (TLocalDeclarationStatementSyntax)
+                generator.LocalDeclarationStatement(
                     generator.TypeExpression(type),
                     nameToken.WithAdditionalAnnotations(RenameAnnotation.Create()),
                     expression.WithoutLeadingTrivia()

@@ -120,17 +120,14 @@ namespace System.Resources
                     "Deserialize",
                     new[] { typeof(Stream) }
                 );
-                Func<object?, Stream, object>? deserializeMethod = (Func<
-                    object?,
-                    Stream,
-                    object
-                >?)typeof(ResourceReader)
-                    .GetMethod(
-                        nameof(CreateUntypedDelegate),
-                        BindingFlags.NonPublic | BindingFlags.Static
-                    )
-                    ?.MakeGenericMethod(binaryFormatterType)
-                    .Invoke(null, new[] { binaryFormatterDeserialize });
+                Func<object?, Stream, object>? deserializeMethod = (Func<object?, Stream, object>?)
+                    typeof(ResourceReader)
+                        .GetMethod(
+                            nameof(CreateUntypedDelegate),
+                            BindingFlags.NonPublic | BindingFlags.Static
+                        )
+                        ?.MakeGenericMethod(binaryFormatterType)
+                        .Invoke(null, new[] { binaryFormatterDeserialize });
 
                 Interlocked.CompareExchange(ref s_binaryFormatterType, binaryFormatterType, null);
                 Interlocked.CompareExchange(ref s_deserializeMethod, deserializeMethod, null);
@@ -149,11 +146,8 @@ namespace System.Resources
         )
         {
             Func<TInstance, Stream, object> typedDelegate =
-                (Func<TInstance, Stream, object>)Delegate.CreateDelegate(
-                    typeof(Func<TInstance, Stream, object>),
-                    null,
-                    method
-                );
+                (Func<TInstance, Stream, object>)
+                    Delegate.CreateDelegate(typeof(Func<TInstance, Stream, object>), null, method);
 
             return (obj, stream) => typedDelegate((TInstance)obj, stream);
         }

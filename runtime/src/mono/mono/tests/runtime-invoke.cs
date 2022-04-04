@@ -179,9 +179,10 @@ class Tests
 
     public static int test_0_string_ctor()
     {
-        string res = (string)typeof(String)
-            .GetConstructor(new Type[] { typeof(char[]) })
-            .Invoke(new object[] { new char[] { 'A', 'B', 'C' } });
+        string res = (string)
+            typeof(String)
+                .GetConstructor(new Type[] { typeof(char[]) })
+                .Invoke(new object[] { new char[] { 'A', 'B', 'C' } });
         if (res == "ABC")
             return 0;
         else
@@ -197,10 +198,11 @@ class Tests
     {
         Foo<string> f = new Foo<string> { t = "A" };
         Foo<string> f2 =
-            (Foo<string>)typeof(Tests)
-                .GetMethod("data_types_ginst_ref")
-                .MakeGenericMethod(new Type[] { typeof(string) })
-                .Invoke(null, new object[] { f });
+            (Foo<string>)
+                typeof(Tests)
+                    .GetMethod("data_types_ginst_ref")
+                    .MakeGenericMethod(new Type[] { typeof(string) })
+                    .Invoke(null, new object[] { f });
         if (f2.t != "A")
             return 1;
         else
@@ -211,10 +213,11 @@ class Tests
     {
         FooStruct<string> f = new FooStruct<string> { t = "A" };
         FooStruct<string> f2 =
-            (FooStruct<string>)typeof(Tests)
-                .GetMethod("data_types_ginst_vtype")
-                .MakeGenericMethod(new Type[] { typeof(string) })
-                .Invoke(null, new object[] { f });
+            (FooStruct<string>)
+                typeof(Tests)
+                    .GetMethod("data_types_ginst_vtype")
+                    .MakeGenericMethod(new Type[] { typeof(string) })
+                    .Invoke(null, new object[] { f });
         if (f2.t != "A")
             return 1;
         else

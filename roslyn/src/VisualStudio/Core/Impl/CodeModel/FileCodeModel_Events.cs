@@ -74,9 +74,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 return;
             }
 
-            var extensibility = (EnvDTE80.IVsExtensibility2)this.State.ServiceProvider.GetService(
-                typeof(EnvDTE.IVsExtensibility)
-            );
+            var extensibility = (EnvDTE80.IVsExtensibility2)
+                this.State.ServiceProvider.GetService(typeof(EnvDTE.IVsExtensibility));
             if (extensibility == null)
                 return;
 
@@ -310,11 +309,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 );
                 if (parentCodeElement != null)
                 {
-                    return (EnvDTE.CodeElement)CodeParameter.Create(
-                        this.State,
-                        parentCodeElement,
-                        parameterName
-                    );
+                    return (EnvDTE.CodeElement)
+                        CodeParameter.Create(this.State, parentCodeElement, parameterName);
                 }
             }
             else
@@ -422,13 +418,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                     );
                     if (parentCodeElement != null)
                     {
-                        return (EnvDTE.CodeElement)CodeAttribute.Create(
-                            this.State,
-                            this,
-                            parentCodeElement,
-                            name,
-                            ordinal
-                        );
+                        return (EnvDTE.CodeElement)
+                            CodeAttribute.Create(
+                                this.State,
+                                this,
+                                parentCodeElement,
+                                name,
+                                ordinal
+                            );
                     }
                 }
                 else if (parentObject is EnvDTE.FileCodeModel)
@@ -438,13 +435,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                     );
                     if (parentFileCodeModel != null && parentFileCodeModel == this)
                     {
-                        return (EnvDTE.CodeElement)CodeAttribute.Create(
-                            this.State,
-                            this,
-                            null,
-                            name,
-                            ordinal
-                        );
+                        return (EnvDTE.CodeElement)
+                            CodeAttribute.Create(this.State, this, null, name, ordinal);
                     }
                 }
             }
@@ -514,11 +506,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 );
                 if (parentCodeElement != null)
                 {
-                    return (EnvDTE.CodeElement)CodeAttributeArgument.Create(
-                        this.State,
-                        parentCodeElement,
-                        ordinal
-                    );
+                    return (EnvDTE.CodeElement)
+                        CodeAttributeArgument.Create(this.State, parentCodeElement, ordinal);
                 }
             }
             else

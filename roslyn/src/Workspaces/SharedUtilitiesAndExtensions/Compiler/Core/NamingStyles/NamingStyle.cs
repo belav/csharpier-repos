@@ -581,10 +581,11 @@ namespace Microsoft.CodeAnalysis.NamingStyles
                 prefix: namingStyleElement.Attribute(nameof(Prefix)).Value,
                 suffix: namingStyleElement.Attribute(nameof(Suffix)).Value,
                 wordSeparator: namingStyleElement.Attribute(nameof(WordSeparator)).Value,
-                capitalizationScheme: (Capitalization)Enum.Parse(
-                    typeof(Capitalization),
-                    namingStyleElement.Attribute(nameof(CapitalizationScheme)).Value
-                )
+                capitalizationScheme: (Capitalization)
+                    Enum.Parse(
+                        typeof(Capitalization),
+                        namingStyleElement.Attribute(nameof(CapitalizationScheme)).Value
+                    )
             );
 
         public bool ShouldReuseInSerialization => false;

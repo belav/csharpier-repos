@@ -86,12 +86,10 @@ namespace Roslyn.Utilities
 
                 private Assembly Stub(object sender, object resolveEventArgs)
                 {
-                    var name = (string)_ResolveEventArgs.get_Name.Invoke(
-                        resolveEventArgs,
-                        Array.Empty<object>()
-                    );
-                    var requestingAssembly =
-                        (Assembly)_ResolveEventArgs.get_RequestingAssembly.Invoke(
+                    var name = (string)
+                        _ResolveEventArgs.get_Name.Invoke(resolveEventArgs, Array.Empty<object>());
+                    var requestingAssembly = (Assembly)
+                        _ResolveEventArgs.get_RequestingAssembly.Invoke(
                             resolveEventArgs,
                             Array.Empty<object>()
                         );

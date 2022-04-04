@@ -658,7 +658,8 @@ namespace System.Threading.Tasks
                 m_processingMode = processingMode;
                 m_tasks =
                     (processingMode == ProcessingMode.ProcessingExclusiveTask)
-                        ? (IProducerConsumerQueue<Task>)new SingleProducerSingleConsumerQueue<Task>()
+                        ? (IProducerConsumerQueue<Task>)
+                              new SingleProducerSingleConsumerQueue<Task>()
                         : (IProducerConsumerQueue<Task>)new MultiProducerMultiConsumerQueue<Task>();
             }
 

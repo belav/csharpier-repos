@@ -403,12 +403,10 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                     && foundTests.Count > 0
                                 )
                                 {
-                                    _curTestSet.Tests = (ReliabilityTest[])foundTests.ToArray(
-                                        typeof(ReliabilityTest)
-                                    );
-                                    _curTestSet.DiscoveryPaths = (string[])discoveryPaths.ToArray(
-                                        typeof(string)
-                                    );
+                                    _curTestSet.Tests = (ReliabilityTest[])
+                                        foundTests.ToArray(typeof(ReliabilityTest));
+                                    _curTestSet.DiscoveryPaths = (string[])
+                                        discoveryPaths.ToArray(typeof(string));
                                     discoveryPaths.Clear();
                                     foundTests.Clear();
                                 }
@@ -465,11 +463,8 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                             );
                                             break;
                                         case configLoggingLevel:
-                                            _curTestSet.LoggingLevel =
-                                                (LoggingLevels)Convert.ToInt32(
-                                                    currentXML.Value.ToString(),
-                                                    16
-                                                );
+                                            _curTestSet.LoggingLevel = (LoggingLevels)
+                                                Convert.ToInt32(currentXML.Value.ToString(), 16);
                                             break;
                                         case configTestMinimumCPUStaggered:
                                             _curTestSet.MinPercentCPUStaggered = currentXML.Value;

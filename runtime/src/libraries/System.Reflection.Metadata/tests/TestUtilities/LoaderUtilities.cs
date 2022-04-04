@@ -29,9 +29,8 @@ namespace System.Reflection.Metadata.Tests
                     )
                 )
                 {
-                    byte* peImagePtr = (byte*)global::Interop.Kernel32.GetModuleHandle(
-                        Path.GetFileName(tempFile.Path)
-                    );
+                    byte* peImagePtr = (byte*)
+                        global::Interop.Kernel32.GetModuleHandle(Path.GetFileName(tempFile.Path));
 
                     Assert.True(peImagePtr != null);
                     Assert.Equal('M', (char)peImagePtr[0]);

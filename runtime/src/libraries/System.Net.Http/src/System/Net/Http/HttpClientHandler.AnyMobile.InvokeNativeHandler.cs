@@ -85,13 +85,8 @@ namespace System.Net.Http
             SslPolicyErrors,
             bool
         > GetServerCertificateCustomValidationCallback() =>
-            (Func<
-                HttpRequestMessage,
-                X509Certificate2?,
-                X509Chain?,
-                SslPolicyErrors,
-                bool
-            >)InvokeNativeHandlerMethod("get_ServerCertificateCustomValidationCallback");
+            (Func<HttpRequestMessage, X509Certificate2?, X509Chain?, SslPolicyErrors, bool>)
+                InvokeNativeHandlerMethod("get_ServerCertificateCustomValidationCallback");
 
         [DynamicDependency(
             "set_ServerCertificateCustomValidationCallback",

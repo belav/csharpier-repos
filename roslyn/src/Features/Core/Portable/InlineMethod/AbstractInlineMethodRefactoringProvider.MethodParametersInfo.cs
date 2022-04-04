@@ -594,12 +594,13 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 // void Callee(params int[] x) { }
                 // Collect each of these arguments and generate a new array for it.
                 // Note: it could be empty.
-                return (TExpressionSyntax)syntaxGenerator.AddParentheses(
-                    syntaxGenerator.ArrayCreationExpression(
-                        GenerateTypeSyntax(paramArrayParameter.ElementType, allowVar: false),
-                        initializer.ElementValues.SelectAsArray(op => op.Syntax)
-                    )
-                );
+                return (TExpressionSyntax)
+                    syntaxGenerator.AddParentheses(
+                        syntaxGenerator.ArrayCreationExpression(
+                            GenerateTypeSyntax(paramArrayParameter.ElementType, allowVar: false),
+                            initializer.ElementValues.SelectAsArray(op => op.Syntax)
+                        )
+                    );
             }
 
             // In all the other cases, one parameter should only maps to one argument.
@@ -614,9 +615,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 );
             }
 
-            return (TExpressionSyntax)syntaxGenerator.AddParentheses(
-                argumentExpressionOperation.Syntax
-            );
+            return (TExpressionSyntax)
+                syntaxGenerator.AddParentheses(argumentExpressionOperation.Syntax);
         }
     }
 }

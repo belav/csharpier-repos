@@ -172,10 +172,11 @@ namespace System.Security.Cryptography.X509Certificates
                 new Interop.CryptUI.CRYPTUI_SELECTCERTIFICATE_STRUCTW();
             // Older versions of CRYPTUI do not check the size correctly,
             // so always force it to the oldest version of the structure.
-            csc.dwSize = (uint)Marshal.OffsetOf(
-                typeof(Interop.CryptUI.CRYPTUI_SELECTCERTIFICATE_STRUCTW),
-                "hSelectedCertStore"
-            );
+            csc.dwSize = (uint)
+                Marshal.OffsetOf(
+                    typeof(Interop.CryptUI.CRYPTUI_SELECTCERTIFICATE_STRUCTW),
+                    "hSelectedCertStore"
+                );
             csc.hwndParent = hwndParent;
             csc.dwFlags = (uint)selectionFlags;
             csc.szTitle = title;

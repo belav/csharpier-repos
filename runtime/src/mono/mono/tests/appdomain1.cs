@@ -68,10 +68,11 @@ class Container
             return 7;
 
         // Creata a MBR object to test that the other domain has the correct info
-        MBRTest test = (MBRTest)newDomain.CreateInstanceAndUnwrap(
-            typeof(MBRTest).Assembly.FullName,
-            typeof(MBRTest).FullName
-        );
+        MBRTest test = (MBRTest)
+            newDomain.CreateInstanceAndUnwrap(
+                typeof(MBRTest).Assembly.FullName,
+                typeof(MBRTest).FullName
+            );
 
         if (!RemotingServices.IsTransparentProxy(test))
             return 8;

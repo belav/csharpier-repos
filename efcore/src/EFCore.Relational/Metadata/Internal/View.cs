@@ -27,9 +27,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         /// <inheritdoc />
         public virtual string? ViewDefinitionSql =>
-            (string?)EntityTypeMappings
-                .Select(m => m.EntityType[RelationalAnnotationNames.ViewDefinitionSql])
-                .FirstOrDefault(d => d != null);
+            (string?)
+                EntityTypeMappings
+                    .Select(m => m.EntityType[RelationalAnnotationNames.ViewDefinitionSql])
+                    .FirstOrDefault(d => d != null);
 
         /// <inheritdoc />
         public override IColumnBase? FindColumn(IProperty property) =>

@@ -58,8 +58,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
         {
             _workspace = workspace;
             _suppressionFixService = (VisualStudioSuppressionFixService)suppressionFixService;
-            _suppressionStateService =
-                (VisualStudioDiagnosticListSuppressionStateService)suppressionStateService;
+            _suppressionStateService = (VisualStudioDiagnosticListSuppressionStateService)
+                suppressionStateService;
             _uiThreadOperationExecutor = uiThreadOperationExecutor;
             _diagnosticService = diagnosticService;
             _editHandlerService = editHandlerService;
@@ -72,9 +72,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
         public void Initialize(IServiceProvider serviceProvider)
         {
             // Add command handlers for bulk suppression commands.
-            var menuCommandService = (IMenuCommandService)serviceProvider.GetService(
-                typeof(IMenuCommandService)
-            );
+            var menuCommandService = (IMenuCommandService)
+                serviceProvider.GetService(typeof(IMenuCommandService));
             if (menuCommandService != null)
             {
                 AddErrorListSetSeverityMenuHandlers(menuCommandService);

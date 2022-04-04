@@ -19,13 +19,11 @@ namespace System.Linq.Expressions.Tests
         )
         {
             Func<Expression, Expression, Expression> withoutAssignment =
-                (Func<Expression, Expression, Expression>)nonAssign.CreateDelegate(
-                    typeof(Func<Expression, Expression, Expression>)
-                );
+                (Func<Expression, Expression, Expression>)
+                    nonAssign.CreateDelegate(typeof(Func<Expression, Expression, Expression>));
             Func<Expression, Expression, Expression> withAssignment =
-                (Func<Expression, Expression, Expression>)assign.CreateDelegate(
-                    typeof(Func<Expression, Expression, Expression>)
-                );
+                (Func<Expression, Expression, Expression>)
+                    assign.CreateDelegate(typeof(Func<Expression, Expression, Expression>));
 
             foreach (object x in new[] { 0, -1, 1, 10 }.Select(i => Convert.ChangeType(i, type)))
                 foreach (object y in new[] { -1, 1, 10 }.Select(i => Convert.ChangeType(i, type)))
@@ -90,13 +88,11 @@ namespace System.Linq.Expressions.Tests
         )
         {
             Func<Expression, Expression, Expression> withoutAssignment =
-                (Func<Expression, Expression, Expression>)nonAssign.CreateDelegate(
-                    typeof(Func<Expression, Expression, Expression>)
-                );
+                (Func<Expression, Expression, Expression>)
+                    nonAssign.CreateDelegate(typeof(Func<Expression, Expression, Expression>));
             Func<Expression, Expression, Expression> withAssignment =
-                (Func<Expression, Expression, Expression>)assign.CreateDelegate(
-                    typeof(Func<Expression, Expression, Expression>)
-                );
+                (Func<Expression, Expression, Expression>)
+                    assign.CreateDelegate(typeof(Func<Expression, Expression, Expression>));
 
             foreach (object x in new[] { 0, -1, 1, 10 }.Select(i => Convert.ChangeType(i, type)))
                 foreach (object y in new[] { -1, 1, 10 }.Select(i => Convert.ChangeType(i, type)))
@@ -143,13 +139,11 @@ namespace System.Linq.Expressions.Tests
         )
         {
             Func<Expression, Expression, Expression> withoutAssignment =
-                (Func<Expression, Expression, Expression>)nonAssign.CreateDelegate(
-                    typeof(Func<Expression, Expression, Expression>)
-                );
+                (Func<Expression, Expression, Expression>)
+                    nonAssign.CreateDelegate(typeof(Func<Expression, Expression, Expression>));
             Func<Expression, Expression, Expression> withAssignment =
-                (Func<Expression, Expression, Expression>)assign.CreateDelegate(
-                    typeof(Func<Expression, Expression, Expression>)
-                );
+                (Func<Expression, Expression, Expression>)
+                    assign.CreateDelegate(typeof(Func<Expression, Expression, Expression>));
 
             foreach (object x in new[] { 0, -1, 1, 10 }.Select(i => Convert.ChangeType(i, type)))
                 foreach (object y in new[] { -1, 1, 10 }.Select(i => Convert.ChangeType(i, type)))
@@ -189,13 +183,11 @@ namespace System.Linq.Expressions.Tests
         )
         {
             Func<Expression, Expression, Expression> withoutAssignment =
-                (Func<Expression, Expression, Expression>)nonAssign.CreateDelegate(
-                    typeof(Func<Expression, Expression, Expression>)
-                );
+                (Func<Expression, Expression, Expression>)
+                    nonAssign.CreateDelegate(typeof(Func<Expression, Expression, Expression>));
             Func<Expression, Expression, Expression> withAssignment =
-                (Func<Expression, Expression, Expression>)assign.CreateDelegate(
-                    typeof(Func<Expression, Expression, Expression>)
-                );
+                (Func<Expression, Expression, Expression>)
+                    assign.CreateDelegate(typeof(Func<Expression, Expression, Expression>));
 
             foreach (object x in new[] { 0, -1, 1, 10 }.Select(i => Convert.ChangeType(i, type)))
                 foreach (object y in new[] { -1, 1, 10 }.Select(i => Convert.ChangeType(i, type)))
@@ -246,9 +238,8 @@ namespace System.Linq.Expressions.Tests
         public void AssignmentReducable(MethodInfo assign, Type type)
         {
             Func<Expression, Expression, Expression> withAssignment =
-                (Func<Expression, Expression, Expression>)assign.CreateDelegate(
-                    typeof(Func<Expression, Expression, Expression>)
-                );
+                (Func<Expression, Expression, Expression>)
+                    assign.CreateDelegate(typeof(Func<Expression, Expression, Expression>));
 
             ParameterExpression variable = Expression.Variable(type);
             Expression assignment = withAssignment(variable, Expression.Default(type));
@@ -261,9 +252,8 @@ namespace System.Linq.Expressions.Tests
         public void CannotAssignToNonWritable(MethodInfo assign, Type type)
         {
             Func<Expression, Expression, Expression> withAssignment =
-                (Func<Expression, Expression, Expression>)assign.CreateDelegate(
-                    typeof(Func<Expression, Expression, Expression>)
-                );
+                (Func<Expression, Expression, Expression>)
+                    assign.CreateDelegate(typeof(Func<Expression, Expression, Expression>));
 
             AssertExtensions.Throws<ArgumentException>(
                 "left",
@@ -276,9 +266,8 @@ namespace System.Linq.Expressions.Tests
         public void AssignmentWithMemberAccessReducable(MethodInfo assign, Type type)
         {
             Func<Expression, Expression, Expression> withAssignment =
-                (Func<Expression, Expression, Expression>)assign.CreateDelegate(
-                    typeof(Func<Expression, Expression, Expression>)
-                );
+                (Func<Expression, Expression, Expression>)
+                    assign.CreateDelegate(typeof(Func<Expression, Expression, Expression>));
 
             Type boxType = typeof(Box<>).MakeGenericType(type);
             object box = boxType
@@ -296,9 +285,8 @@ namespace System.Linq.Expressions.Tests
         public void AssignmentWithIndexAccessReducable(MethodInfo assign, Type type)
         {
             Func<Expression, Expression, Expression> withAssignment =
-                (Func<Expression, Expression, Expression>)assign.CreateDelegate(
-                    typeof(Func<Expression, Expression, Expression>)
-                );
+                (Func<Expression, Expression, Expression>)
+                    assign.CreateDelegate(typeof(Func<Expression, Expression, Expression>));
 
             Type boxType = typeof(Box<>).MakeGenericType(type);
             object box = boxType
@@ -328,9 +316,8 @@ namespace System.Linq.Expressions.Tests
         public static void ThrowsOnLeftUnreadable(MethodInfo assign, Type type)
         {
             Func<Expression, Expression, Expression> withAssignment =
-                (Func<Expression, Expression, Expression>)assign.CreateDelegate(
-                    typeof(Func<Expression, Expression, Expression>)
-                );
+                (Func<Expression, Expression, Expression>)
+                    assign.CreateDelegate(typeof(Func<Expression, Expression, Expression>));
 
             Type unreadableType = typeof(Unreadable<>).MakeGenericType(type);
             Expression property = Expression.Property(
@@ -348,9 +335,8 @@ namespace System.Linq.Expressions.Tests
         public static void ThrowsOnRightUnreadable(MethodInfo assign, Type type)
         {
             Func<Expression, Expression, Expression> withAssignment =
-                (Func<Expression, Expression, Expression>)assign.CreateDelegate(
-                    typeof(Func<Expression, Expression, Expression>)
-                );
+                (Func<Expression, Expression, Expression>)
+                    assign.CreateDelegate(typeof(Func<Expression, Expression, Expression>));
 
             Type unreadableType = typeof(Unreadable<>).MakeGenericType(type);
             Expression property = Expression.Property(
@@ -369,9 +355,8 @@ namespace System.Linq.Expressions.Tests
         public void ThrowIfNoSuchBinaryOperation(MethodInfo assign)
         {
             Func<Expression, Expression, Expression> withAssignment =
-                (Func<Expression, Expression, Expression>)assign.CreateDelegate(
-                    typeof(Func<Expression, Expression, Expression>)
-                );
+                (Func<Expression, Expression, Expression>)
+                    assign.CreateDelegate(typeof(Func<Expression, Expression, Expression>));
 
             ParameterExpression variable = Expression.Variable(typeof(string));
             Expression value = Expression.Default(typeof(string));

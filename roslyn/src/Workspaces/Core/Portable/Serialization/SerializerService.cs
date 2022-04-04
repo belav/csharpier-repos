@@ -250,10 +250,8 @@ namespace Microsoft.CodeAnalysis.Serialization
                     case WellKnownSynchronizationKind.ProjectState:
                     case WellKnownSynchronizationKind.DocumentState:
                     case WellKnownSynchronizationKind.ChecksumCollection:
-                        return (T)(object)DeserializeChecksumWithChildren(
-                            reader,
-                            cancellationToken
-                        );
+                        return (T)
+                            (object)DeserializeChecksumWithChildren(reader, cancellationToken);
 
                     case WellKnownSynchronizationKind.SolutionAttributes:
                         return (T)(object)SolutionInfo.SolutionAttributes.ReadFrom(reader);
@@ -274,10 +272,8 @@ namespace Microsoft.CodeAnalysis.Serialization
                     case WellKnownSynchronizationKind.AnalyzerReference:
                         return (T)(object)DeserializeAnalyzerReference(reader, cancellationToken);
                     case WellKnownSynchronizationKind.SerializableSourceText:
-                        return (T)(object)DeserializeSerializableSourceText(
-                            reader,
-                            cancellationToken
-                        );
+                        return (T)
+                            (object)DeserializeSerializableSourceText(reader, cancellationToken);
                     case WellKnownSynchronizationKind.SourceText:
                         return (T)(object)DeserializeSourceText(reader, cancellationToken);
                     case WellKnownSynchronizationKind.OptionSet:

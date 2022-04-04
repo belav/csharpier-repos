@@ -512,9 +512,10 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.DateAndTime
                 return SpecializedTasks.Null<CompletionDescription>();
 
             return Task.FromResult(
-                (CompletionDescription?)CompletionDescription.Create(
-                    ImmutableArray.Create(new TaggedText(TextTags.Text, description))
-                )
+                (CompletionDescription?)
+                    CompletionDescription.Create(
+                        ImmutableArray.Create(new TaggedText(TextTags.Text, description))
+                    )
             );
         }
     }

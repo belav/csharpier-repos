@@ -1918,9 +1918,10 @@ CREATE TABLE RowVersionTable (
                     var columns = dbModel.Tables.Single().Columns;
 
                     Assert.True(
-                        (bool)columns.Single(c => c.Name == "rowversionColumn")[
-                            ScaffoldingAnnotationNames.ConcurrencyToken
-                        ]
+                        (bool)
+                            columns.Single(c => c.Name == "rowversionColumn")[
+                                ScaffoldingAnnotationNames.ConcurrencyToken
+                            ]
                     );
                 },
                 "DROP TABLE RowVersionTable;"
@@ -1993,9 +1994,8 @@ CREATE TABLE ColumnsWithSparseness (
                     var columns = dbModel.Tables.Single().Columns;
 
                     Assert.True(
-                        (bool)columns.Single(c => c.Name == "Sparse")[
-                            SqlServerAnnotationNames.Sparse
-                        ]
+                        (bool)
+                            columns.Single(c => c.Name == "Sparse")[SqlServerAnnotationNames.Sparse]
                     );
                     Assert.Null(
                         columns.Single(c => c.Name == "NonSparse")[SqlServerAnnotationNames.Sparse]

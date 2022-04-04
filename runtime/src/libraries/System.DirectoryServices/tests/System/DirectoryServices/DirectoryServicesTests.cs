@@ -128,9 +128,8 @@ namespace System.DirectoryServices.Tests
                             Assert.True(userEntry.UsePropertyCache);
 
                             SearchOrganizationalRole(rootOU, "caching.user.1");
-                            string originalPhone = (string)userEntry.Properties[
-                                "telephoneNumber"
-                            ].Value;
+                            string originalPhone = (string)
+                                userEntry.Properties["telephoneNumber"].Value;
                             string newPhone = "1 222 222 2222";
                             userEntry.Properties["telephoneNumber"].Value = newPhone;
 

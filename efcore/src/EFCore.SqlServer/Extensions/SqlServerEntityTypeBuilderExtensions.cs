@@ -53,10 +53,8 @@ namespace Microsoft.EntityFrameworkCore
             this EntityTypeBuilder<TEntity> entityTypeBuilder,
             bool memoryOptimized = true
         ) where TEntity : class =>
-            (EntityTypeBuilder<TEntity>)IsMemoryOptimized(
-                (EntityTypeBuilder)entityTypeBuilder,
-                memoryOptimized
-            );
+            (EntityTypeBuilder<TEntity>)
+                IsMemoryOptimized((EntityTypeBuilder)entityTypeBuilder, memoryOptimized);
 
         /// <summary>
         ///     Configures the table that the entity maps to when targeting SQL Server as memory-optimized.
@@ -99,10 +97,11 @@ namespace Microsoft.EntityFrameworkCore
         )
             where TEntity : class
             where TRelatedEntity : class =>
-            (OwnedNavigationBuilder<TEntity, TRelatedEntity>)IsMemoryOptimized(
-                (OwnedNavigationBuilder)collectionOwnershipBuilder,
-                memoryOptimized
-            );
+            (OwnedNavigationBuilder<TEntity, TRelatedEntity>)
+                IsMemoryOptimized(
+                    (OwnedNavigationBuilder)collectionOwnershipBuilder,
+                    memoryOptimized
+                );
 
         /// <summary>
         ///     Configures the table that the entity maps to when targeting SQL Server as memory-optimized.

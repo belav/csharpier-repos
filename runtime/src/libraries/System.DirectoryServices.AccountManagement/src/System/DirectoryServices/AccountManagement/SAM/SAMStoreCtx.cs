@@ -759,8 +759,8 @@ namespace System.DirectoryServices.AccountManagement
 
                 DirectoryEntry userDE = (DirectoryEntry)p.UnderlyingObject;
 
-                UnsafeNativeMethods.IADsMembers iadsMembers =
-                    (UnsafeNativeMethods.IADsMembers)userDE.Invoke("Groups");
+                UnsafeNativeMethods.IADsMembers iadsMembers = (UnsafeNativeMethods.IADsMembers)
+                    userDE.Invoke("Groups");
 
                 ResultSet resultSet = new SAMGroupsSet(iadsMembers, this, _ctxBase);
                 return resultSet;
@@ -946,8 +946,8 @@ namespace System.DirectoryServices.AccountManagement
 
             DirectoryEntry groupDE = (DirectoryEntry)g.UnderlyingObject;
 
-            UnsafeNativeMethods.IADsGroup iADsGroup =
-                (UnsafeNativeMethods.IADsGroup)groupDE.NativeObject;
+            UnsafeNativeMethods.IADsGroup iADsGroup = (UnsafeNativeMethods.IADsGroup)
+                groupDE.NativeObject;
 
             BookmarkableResultSet resultSet = new SAMMembersSet(
                 groupDE.Path,
@@ -1298,10 +1298,11 @@ namespace System.DirectoryServices.AccountManagement
                 if (err == 0)
                 {
                     UnsafeNativeMethods.WKSTA_INFO_100 wkstaInfo =
-                        (UnsafeNativeMethods.WKSTA_INFO_100)Marshal.PtrToStructure(
-                            buffer,
-                            typeof(UnsafeNativeMethods.WKSTA_INFO_100)
-                        );
+                        (UnsafeNativeMethods.WKSTA_INFO_100)
+                            Marshal.PtrToStructure(
+                                buffer,
+                                typeof(UnsafeNativeMethods.WKSTA_INFO_100)
+                            );
 
                     _machineFlatName = wkstaInfo.wki100_computername;
                     GlobalDebug.WriteLineIf(

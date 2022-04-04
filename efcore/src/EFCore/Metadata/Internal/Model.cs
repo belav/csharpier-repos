@@ -285,9 +285,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             _entityTypes.Add(entityTypeName, entityType);
 
-            return (EntityType?)ConventionDispatcher
-                .OnEntityTypeAdded(entityType.Builder)
-                ?.Metadata;
+            return (EntityType?)
+                ConventionDispatcher.OnEntityTypeAdded(entityType.Builder)?.Metadata;
         }
 
         /// <summary>
@@ -927,11 +926,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             PropertyAccessMode? propertyAccessMode,
             ConfigurationSource configurationSource
         ) =>
-            (PropertyAccessMode?)SetOrRemoveAnnotation(
-                CoreAnnotationNames.PropertyAccessMode,
-                propertyAccessMode,
-                configurationSource
-            )?.Value;
+            (PropertyAccessMode?)
+                SetOrRemoveAnnotation(
+                    CoreAnnotationNames.PropertyAccessMode,
+                    propertyAccessMode,
+                    configurationSource
+                )?.Value;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

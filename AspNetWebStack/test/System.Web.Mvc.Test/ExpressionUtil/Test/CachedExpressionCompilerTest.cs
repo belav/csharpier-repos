@@ -144,10 +144,8 @@ namespace System.Web.Mvc.ExpressionUtil.Test
                 methodName,
                 BindingFlags.Static | BindingFlags.NonPublic
             );
-            return (Compiler<TIn, TOut>)Delegate.CreateDelegate(
-                typeof(Compiler<TIn, TOut>),
-                targetMethod
-            );
+            return (Compiler<TIn, TOut>)
+                Delegate.CreateDelegate(typeof(Compiler<TIn, TOut>), targetMethod);
         }
     }
 }

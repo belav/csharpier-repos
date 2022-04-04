@@ -90,11 +90,12 @@ internal class WebEventData
 
             // For custom events, the args type is determined from the associated delegate
             var eventArgsType = renderer.GetEventArgsType(eventHandlerId);
-            return (EventArgs)JsonSerializer.Deserialize(
-                eventArgsJson.GetRawText(),
-                eventArgsType,
-                jsonSerializerOptions
-            )!;
+            return (EventArgs)
+                JsonSerializer.Deserialize(
+                    eventArgsJson.GetRawText(),
+                    eventArgsType,
+                    jsonSerializerOptions
+                )!;
         }
         catch (Exception e)
         {

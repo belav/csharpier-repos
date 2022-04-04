@@ -3046,9 +3046,8 @@ namespace System.Tests
                 uint res = 0;
                 if (high <= 32)
                     res = 1u << (high - 1);
-                res |= (uint)Math.Ceiling(
-                    (uint.MaxValue >> Math.Max(0, 32 - high)) * rnd.NextDouble()
-                );
+                res |= (uint)
+                    Math.Ceiling((uint.MaxValue >> Math.Max(0, 32 - high)) * rnd.NextDouble());
                 if (low > 0)
                     res = (res >> low) << low;
                 return (int)res;

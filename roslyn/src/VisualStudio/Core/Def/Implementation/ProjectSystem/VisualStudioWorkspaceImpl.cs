@@ -934,9 +934,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 ?? documentTrackingService.GetVisibleDocuments().FirstOrDefault();
             if (documentId != null)
             {
-                var composition = (IComponentModel)ServiceProvider.GlobalProvider.GetService(
-                    typeof(SComponentModel)
-                );
+                var composition = (IComponentModel)
+                    ServiceProvider.GlobalProvider.GetService(typeof(SComponentModel));
                 var exportProvider = composition.DefaultExportProvider;
                 var editorAdaptersService =
                     exportProvider.GetExportedValue<IVsEditorAdaptersFactoryService>();
@@ -1773,9 +1772,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
         public void EnsureEditableDocuments(IEnumerable<DocumentId> documents)
         {
-            var queryEdit = (IVsQueryEditQuerySave2)ServiceProvider.GlobalProvider.GetService(
-                typeof(SVsQueryEditQuerySave)
-            );
+            var queryEdit = (IVsQueryEditQuerySave2)
+                ServiceProvider.GlobalProvider.GetService(typeof(SVsQueryEditQuerySave));
 
             // make sure given document id actually exist in current solution and the file is marked as supporting modifications
             // and actually has non null file path
@@ -1829,8 +1827,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             }
 
             // First we have to see if either project disallows the reference being added.
-            const int ContextFlags =
-                (int)__VSQUERYFLAVORREFERENCESCONTEXT.VSQUERYFLAVORREFERENCESCONTEXT_RefreshReference;
+            const int ContextFlags = (int)
+                __VSQUERYFLAVORREFERENCESCONTEXT.VSQUERYFLAVORREFERENCESCONTEXT_RefreshReference;
 
             var canAddProjectReference = (uint)__VSREFERENCEQUERYRESULT.REFERENCE_UNKNOWN;
             var canBeReferenced = (uint)__VSREFERENCEQUERYRESULT.REFERENCE_UNKNOWN;
@@ -1898,9 +1896,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
             // In both directions things are still unknown.  Fallback to the reference manager
             // to make the determination here.
-            var referenceManager = (IVsReferenceManager)ServiceProvider.GlobalProvider.GetService(
-                typeof(SVsReferenceManager)
-            );
+            var referenceManager = (IVsReferenceManager)
+                ServiceProvider.GlobalProvider.GetService(typeof(SVsReferenceManager));
             if (referenceManager == null)
             {
                 // Couldn't get the reference manager.  Have to assume it's not allowed.

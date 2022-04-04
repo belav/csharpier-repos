@@ -207,10 +207,8 @@ namespace AutoMapper
 
                 foreach (var autoMapAttribute in type.GetCustomAttributes<AutoMapAttribute>())
                 {
-                    var mappingExpression = (MappingExpression)autoMapAttributeProfile.CreateMap(
-                        autoMapAttribute.SourceType,
-                        type
-                    );
+                    var mappingExpression = (MappingExpression)
+                        autoMapAttributeProfile.CreateMap(autoMapAttribute.SourceType, type);
 
                     foreach (
                         var memberInfo in type.GetMembers(

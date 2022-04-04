@@ -188,9 +188,12 @@ namespace System.CommandLine.Rendering.Views
                             case SizeMode.Star:
                             {
                                 totalHeightForStarSizing ??= availableHeight;
-                                int starHeight = (int)Math.Round(
-                                    row.Value / totalRowStarSize * totalHeightForStarSizing.Value
-                                );
+                                int starHeight = (int)
+                                    Math.Round(
+                                        row.Value
+                                            / totalRowStarSize
+                                            * totalHeightForStarSizing.Value
+                                    );
                                 if (measuredRows[rowIndex] < starHeight)
                                 {
                                     starHeight = measuredRows[rowIndex].Value;
@@ -243,9 +246,12 @@ namespace System.CommandLine.Rendering.Views
                             totalWidthForStarSizing ??=
                                 availableWidth
                                 - countStarSizedColumnsWithPadding * _columnPaddingRight;
-                            int starWidth = (int)Math.Round(
-                                column.Value / totalColumnStarSize * totalWidthForStarSizing.Value
-                            );
+                            int starWidth = (int)
+                                Math.Round(
+                                    column.Value
+                                        / totalColumnStarSize
+                                        * totalWidthForStarSizing.Value
+                                );
                             if (measuredColumns[columnIndex] < starWidth)
                             {
                                 starWidth = measuredColumns[columnIndex].Value;

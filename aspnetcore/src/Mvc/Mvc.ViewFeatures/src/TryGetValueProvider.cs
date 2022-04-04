@@ -72,9 +72,8 @@ public static class TryGetValueProvider
                     keyType,
                     returnType
                 );
-                result = (TryGetValueDelegate)implementationMethod.CreateDelegate(
-                    typeof(TryGetValueDelegate)
-                );
+                result = (TryGetValueDelegate)
+                    implementationMethod.CreateDelegate(typeof(TryGetValueDelegate));
             }
         }
 

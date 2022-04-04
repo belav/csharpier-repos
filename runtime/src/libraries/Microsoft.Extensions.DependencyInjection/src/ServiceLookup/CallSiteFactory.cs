@@ -200,9 +200,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                         == "System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes"
                 )
                 {
-                    return (DynamicallyAccessedMemberTypes)(int)attributeData.ConstructorArguments[
-                        0
-                    ].Value;
+                    return (DynamicallyAccessedMemberTypes)
+                        (int)attributeData.ConstructorArguments[0].Value;
                 }
             }
 

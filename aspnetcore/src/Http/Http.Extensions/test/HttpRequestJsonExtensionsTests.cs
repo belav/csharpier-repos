@@ -182,9 +182,8 @@ public class HttpRequestJsonExtensionsTests
         );
 
         // Act
-        var result = (Dictionary<string, string>?)await context.Request.ReadFromJsonAsync(
-            typeof(Dictionary<string, string>)
-        );
+        var result = (Dictionary<string, string>?)
+            await context.Request.ReadFromJsonAsync(typeof(Dictionary<string, string>));
 
         // Assert
         Assert.Equal("激光這兩個字是甚麼意思", result!["name"]);
@@ -221,10 +220,8 @@ public class HttpRequestJsonExtensionsTests
         options.AllowTrailingCommas = true;
 
         // Act
-        var result = (List<int>?)await context.Request.ReadFromJsonAsync(
-            typeof(List<int>),
-            options
-        );
+        var result = (List<int>?)
+            await context.Request.ReadFromJsonAsync(typeof(List<int>), options);
 
         // Assert
         Assert.Collection(result, i => Assert.Equal(1, i), i => Assert.Equal(2, i));

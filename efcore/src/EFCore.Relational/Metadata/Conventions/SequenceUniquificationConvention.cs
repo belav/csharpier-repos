@@ -51,9 +51,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         )
         {
             var model = modelBuilder.Metadata;
-            var modelSequences = (SortedDictionary<(string Name, string? Schema), ISequence>?)model[
-                RelationalAnnotationNames.Sequences
-            ];
+            var modelSequences = (SortedDictionary<(string Name, string? Schema), ISequence>?)
+                model[RelationalAnnotationNames.Sequences];
 
             if (modelSequences != null)
             {

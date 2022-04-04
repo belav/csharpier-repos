@@ -93,19 +93,16 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
             SyntaxGenerator generator,
             Compilation compilation
         ) =>
-            (TSwitchArmSyntax)generator.DefaultSwitchSection(
-                new[] { generator.ExitSwitchStatement() }
-            );
+            (TSwitchArmSyntax)
+                generator.DefaultSwitchSection(new[] { generator.ExitSwitchStatement() });
 
         protected sealed override TSwitchArmSyntax CreateSwitchArm(
             SyntaxGenerator generator,
             Compilation compilation,
             TMemberAccessExpression caseLabel
         ) =>
-            (TSwitchArmSyntax)generator.SwitchSection(
-                caseLabel,
-                new[] { generator.ExitSwitchStatement() }
-            );
+            (TSwitchArmSyntax)
+                generator.SwitchSection(caseLabel, new[] { generator.ExitSwitchStatement() });
 
         protected sealed override int InsertPosition(ISwitchOperation switchStatement)
         {

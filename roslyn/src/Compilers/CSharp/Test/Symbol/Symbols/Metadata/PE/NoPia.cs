@@ -835,11 +835,8 @@ public class LocalTypes2
             );
 
             NoPiaIllegalGenericInstantiationSymbol illegal =
-                (NoPiaIllegalGenericInstantiationSymbol)localTypes3
-                    .GetMembers("Test3")
-                    .OfType<MethodSymbol>()
-                    .Single()
-                    .ReturnType;
+                (NoPiaIllegalGenericInstantiationSymbol)
+                    localTypes3.GetMembers("Test3").OfType<MethodSymbol>().Single().ReturnType;
             Assert.Equal("C31<I1>.I31<C33>", illegal.UnderlyingSymbol.ToTestDisplayString());
 
             Assert.NotEqual(
@@ -1266,11 +1263,8 @@ public class C33
             );
 
             NoPiaIllegalGenericInstantiationSymbol illegal =
-                (NoPiaIllegalGenericInstantiationSymbol)localTypes3
-                    .GetMembers("Test3")
-                    .OfType<MethodSymbol>()
-                    .Single()
-                    .ReturnType;
+                (NoPiaIllegalGenericInstantiationSymbol)
+                    localTypes3.GetMembers("Test3").OfType<MethodSymbol>().Single().ReturnType;
             Assert.Equal("C31<I1>.I31<C33>", illegal.UnderlyingSymbol.ToTestDisplayString());
 
             Assert.NotEqual(

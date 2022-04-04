@@ -64,8 +64,8 @@ namespace AnalyzerRunner
 
             var exportProvider = (IMefHostExportProvider)_workspace.Services.HostServices;
 
-            var solutionCrawlerRegistrationService =
-                (SolutionCrawlerRegistrationService)_workspace.Services.GetRequiredService<ISolutionCrawlerRegistrationService>();
+            var solutionCrawlerRegistrationService = (SolutionCrawlerRegistrationService)
+                _workspace.Services.GetRequiredService<ISolutionCrawlerRegistrationService>();
             solutionCrawlerRegistrationService.Register(_workspace);
 
             if (usePersistentStorage)

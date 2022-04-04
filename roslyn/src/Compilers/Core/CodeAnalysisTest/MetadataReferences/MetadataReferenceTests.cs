@@ -180,9 +180,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public void CreateFromAssembly()
         {
             var assembly = typeof(object).Assembly;
-            var r = (PortableExecutableReference)MetadataReference.CreateFromAssemblyInternal(
-                assembly
-            );
+            var r = (PortableExecutableReference)
+                MetadataReference.CreateFromAssemblyInternal(assembly);
             Assert.Equal(assembly.Location, r.FilePath);
             Assert.Equal(assembly.Location, r.Display);
             Assert.Equal(MetadataImageKind.Assembly, r.Properties.Kind);
@@ -207,15 +206,16 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             var doc = new TestDocumentationProvider();
             var assembly = typeof(object).Assembly;
-            var r = (PortableExecutableReference)MetadataReference.CreateFromAssemblyInternal(
-                assembly,
-                new MetadataReferenceProperties(
-                    MetadataImageKind.Assembly,
-                    ImmutableArray.Create("a", "b"),
-                    embedInteropTypes: true
-                ),
-                documentation: doc
-            );
+            var r = (PortableExecutableReference)
+                MetadataReference.CreateFromAssemblyInternal(
+                    assembly,
+                    new MetadataReferenceProperties(
+                        MetadataImageKind.Assembly,
+                        ImmutableArray.Create("a", "b"),
+                        embedInteropTypes: true
+                    ),
+                    documentation: doc
+                );
             Assert.Equal(assembly.Location, r.FilePath);
             Assert.Equal(assembly.Location, r.Display);
             Assert.Equal(MetadataImageKind.Assembly, r.Properties.Kind);
@@ -648,14 +648,17 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 .CreateFromImage(ResourcesNet451.mscorlib)
                 .GetReference(display: "corlib", documentation: docProvider);
 
-            var comp = (Compilation)CS.CSharpCompilation.Create(
-                "goo",
-                syntaxTrees: new[]
-                {
-                    CS.SyntaxFactory.ParseSyntaxTree("class C : System.Collections.ArrayList { }")
-                },
-                references: new[] { corlib }
-            );
+            var comp = (Compilation)
+                CS.CSharpCompilation.Create(
+                    "goo",
+                    syntaxTrees: new[]
+                    {
+                        CS.SyntaxFactory.ParseSyntaxTree(
+                            "class C : System.Collections.ArrayList { }"
+                        )
+                    },
+                    references: new[] { corlib }
+                );
 
             var c = (ITypeSymbol)comp.GlobalNamespace.GetMembers("C").Single();
             var list = c.BaseType;

@@ -105,8 +105,8 @@ namespace System.Web.Http.ExceptionHandling
         public void DebuggerDisplayAttribute_IsSpecifiedValue()
         {
             // Act
-            DebuggerDisplayAttribute attribute =
-                (DebuggerDisplayAttribute)Attribute.GetCustomAttribute(
+            DebuggerDisplayAttribute attribute = (DebuggerDisplayAttribute)
+                Attribute.GetCustomAttribute(
                     typeof(ExceptionContextCatchBlock),
                     typeof(DebuggerDisplayAttribute)
                 );

@@ -803,12 +803,13 @@ namespace Microsoft.Win32
             EnsureSystemEvents(requireHandle: true);
             if (s_systemEvents!._windowHandle != IntPtr.Zero)
             {
-                int res = (int)Interop.User32.SendMessageW(
-                    new HandleRef(s_systemEvents, s_systemEvents._windowHandle),
-                    Interop.User32.WM_KILLTIMER,
-                    timerId,
-                    IntPtr.Zero
-                );
+                int res = (int)
+                    Interop.User32.SendMessageW(
+                        new HandleRef(s_systemEvents, s_systemEvents._windowHandle),
+                        Interop.User32.WM_KILLTIMER,
+                        timerId,
+                        IntPtr.Zero
+                    );
 
                 if (res == 0)
                     throw new ExternalException(SR.ErrorKillTimer);

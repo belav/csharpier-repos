@@ -59,10 +59,8 @@ namespace System.Web.Http.Tracing.Tracers
                     );
                 },
                 execute: () =>
-                    (Task<HttpResponseMessage>)_innerInvoker.InvokeActionAsync(
-                        actionContext,
-                        cancellationToken
-                    ),
+                    (Task<HttpResponseMessage>)
+                        _innerInvoker.InvokeActionAsync(actionContext, cancellationToken),
                 endTrace: (tr, result) =>
                 {
                     HttpResponseMessage response = result;

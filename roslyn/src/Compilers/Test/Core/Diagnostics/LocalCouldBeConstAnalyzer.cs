@@ -80,8 +80,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                         operationBlockContext.RegisterOperationAction(
                             (operationContext) =>
                             {
-                                IInvocationOperation invocation =
-                                    (IInvocationOperation)operationContext.Operation;
+                                IInvocationOperation invocation = (IInvocationOperation)
+                                    operationContext.Operation;
                                 foreach (IArgumentOperation argument in invocation.Arguments)
                                 {
                                     if (

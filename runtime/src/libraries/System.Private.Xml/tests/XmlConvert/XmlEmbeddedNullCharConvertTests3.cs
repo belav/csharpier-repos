@@ -35,9 +35,8 @@ namespace System.Xml.Tests
             string strEnVal = string.Empty;
             string strVal = string.Empty;
 
-            char c = (char)BinaryPrimitives.ReadUInt16LittleEndian(
-                new Span<byte>(_byte_EmbeddedNull, i, 2)
-            );
+            char c = (char)
+                BinaryPrimitives.ReadUInt16LittleEndian(new Span<byte>(_byte_EmbeddedNull, i, 2));
             strVal = c.ToString();
             strEnVal = XmlConvert.EncodeName(strVal);
             CError.Compare(

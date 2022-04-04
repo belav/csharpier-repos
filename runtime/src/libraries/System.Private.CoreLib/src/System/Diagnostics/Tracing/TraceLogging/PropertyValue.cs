@@ -279,9 +279,10 @@ namespace System.Diagnostics.Tracing
             PropertyInfo property
         )
         {
-            var helper = (TypeHelper)Activator.CreateInstance(
-                typeof(ReferenceTypeHelper<>).MakeGenericType(property.DeclaringType!)
-            )!;
+            var helper = (TypeHelper)
+                Activator.CreateInstance(
+                    typeof(ReferenceTypeHelper<>).MakeGenericType(property.DeclaringType!)
+                )!;
             return helper.GetPropertyGetter(property);
         }
 
@@ -305,9 +306,8 @@ namespace System.Diagnostics.Tracing
                 PropertyInfo property
             ) where TProperty : struct =>
 #if ES_BUILD_STANDALONE
-                (Func<TContainer, TProperty>)property.GetMethod!.CreateDelegate(
-                    typeof(Func<TContainer, TProperty>)
-                );
+                (Func<TContainer, TProperty>)
+                    property.GetMethod!.CreateDelegate(typeof(Func<TContainer, TProperty>));
 #else
                 property.GetMethod!.CreateDelegate<Func<TContainer, TProperty>>();
 #endif

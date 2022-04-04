@@ -61,10 +61,11 @@ public class App : C
             var comp1 = CreateCompilation(src1);
 
             // Compilation to Compilation
-            var comp2 = (Compilation)CreateCompilation(
-                src2,
-                new MetadataReference[] { new CSharpCompilationReference(comp1) }
-            );
+            var comp2 = (Compilation)
+                CreateCompilation(
+                    src2,
+                    new MetadataReference[] { new CSharpCompilationReference(comp1) }
+                );
 
             var originalSymbols = GetSourceSymbols(comp1, SymbolCategory.DeclaredType)
                 .OrderBy(s => s.Name)
@@ -289,10 +290,8 @@ class Test
             var comp20 = (Compilation)CreateEmptyCompilation(src1, new[] { Net40.mscorlib });
 
             // "Compilation 2 Assembly"
-            var comp40 = (Compilation)CreateCompilation(
-                src2,
-                new MetadataReference[] { comp20.EmitToImageReference() }
-            );
+            var comp40 = (Compilation)
+                CreateCompilation(src2, new MetadataReference[] { comp20.EmitToImageReference() });
 
             var typeA = comp20.SourceModule.GlobalNamespace.GetTypeMembers("A").Single();
             var mem20_1 = typeA.GetMembers("GetFileInfo").Single() as IMethodSymbol;

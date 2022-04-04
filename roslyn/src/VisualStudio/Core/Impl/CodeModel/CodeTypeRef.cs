@@ -86,11 +86,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         {
             get
             {
-                return (EnvDTE.CodeType)CodeModelService.CreateCodeType(
-                    this.State,
-                    _projectId,
-                    LookupTypeSymbol()
-                );
+                return (EnvDTE.CodeType)
+                    CodeModelService.CreateCodeType(this.State, _projectId, LookupTypeSymbol());
             }
             set { throw Exceptions.ThrowENotImpl(); }
         }

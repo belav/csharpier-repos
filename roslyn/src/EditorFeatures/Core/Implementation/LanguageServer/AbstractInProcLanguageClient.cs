@@ -148,15 +148,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
 
             var (clientStream, serverStream) = FullDuplexStream.CreatePair();
 
-            _languageServer = (LanguageServerTarget)await CreateAsync(
-                    this,
-                    serverStream,
-                    serverStream,
-                    _lspLoggerFactory,
-                    _diagnosticsClientName,
-                    cancellationToken
-                )
-                .ConfigureAwait(false);
+            _languageServer = (LanguageServerTarget)
+                await CreateAsync(
+                        this,
+                        serverStream,
+                        serverStream,
+                        _lspLoggerFactory,
+                        _diagnosticsClientName,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
             return new Connection(clientStream, clientStream);
         }

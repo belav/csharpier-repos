@@ -1181,7 +1181,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 attributesBag = this.GetAttributesBag();
             }
 
-            return (TypeEarlyWellKnownAttributeData)attributesBag.EarlyDecodedWellKnownAttributeData;
+            return (TypeEarlyWellKnownAttributeData)
+                attributesBag.EarlyDecodedWellKnownAttributeData;
         }
 
         internal override (CSharpAttributeData?, BoundAttribute?) EarlyDecodeWellKnownAttribute(
@@ -1412,8 +1413,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     && lazyCustomAttributesBag.IsEarlyDecodedWellKnownAttributeDataComputed
                 )
                 {
-                    var data =
-                        (TypeEarlyWellKnownAttributeData)lazyCustomAttributesBag.EarlyDecodedWellKnownAttributeData;
+                    var data = (TypeEarlyWellKnownAttributeData)
+                        lazyCustomAttributesBag.EarlyDecodedWellKnownAttributeData;
                     return data != null ? data.ObsoleteAttributeData : null;
                 }
 
@@ -1949,8 +1950,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal sealed override IEnumerable<Microsoft.Cci.SecurityAttribute> GetSecurityInformation()
         {
             var attributesBag = this.GetAttributesBag();
-            var wellKnownData =
-                (TypeWellKnownAttributeData)attributesBag.DecodedWellKnownAttributeData;
+            var wellKnownData = (TypeWellKnownAttributeData)
+                attributesBag.DecodedWellKnownAttributeData;
             if (wellKnownData != null)
             {
                 SecurityWellKnownAttributeData securityData = wellKnownData.SecurityInformation;

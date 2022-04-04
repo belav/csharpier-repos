@@ -4372,13 +4372,11 @@ namespace AttributeTest
                 var ns = (NamespaceSymbol)m.GlobalNamespace.GetMember("AttributeTest");
                 var type = (NamedTypeSymbol)ns.GetMember("TestClass");
 
-                var attributeTypeForMethod = (NamedTypeSymbol)ns.GetMember(
-                    "TestAttributeForMethod"
-                );
+                var attributeTypeForMethod = (NamedTypeSymbol)
+                    ns.GetMember("TestAttributeForMethod");
                 var attributeTypeForParam = (NamedTypeSymbol)ns.GetMember("TestAttributeForParam");
-                var attributeTypeForReturn = (NamedTypeSymbol)ns.GetMember(
-                    "TestAttributeForReturn"
-                );
+                var attributeTypeForReturn = (NamedTypeSymbol)
+                    ns.GetMember("TestAttributeForReturn");
 
                 var property = (PropertySymbol)type.GetMember("P1");
                 var setter = property.SetMethod;
@@ -6219,10 +6217,8 @@ class D : C
             var model = cm.GetSemanticModel(cm.SyntaxTrees[0]);
 
             int index = main.IndexOf("M()", StringComparison.Ordinal);
-            var m = (ExpressionSyntax)cm.SyntaxTrees[0]
-                .GetCompilationUnitRoot()
-                .FindToken(index)
-                .Parent.Parent;
+            var m = (ExpressionSyntax)
+                cm.SyntaxTrees[0].GetCompilationUnitRoot().FindToken(index).Parent.Parent;
 
             var info = model.GetSymbolInfo(m);
             var args = info.Symbol.GetAttributes()[0].CommonConstructorArguments;
@@ -11118,15 +11114,13 @@ class Target<T>
 
             var type = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("Target");
 
-            var typeInAttribute = (INamedTypeSymbol)type.GetAttributes()[0].ConstructorArguments
-                .First()
-                .Value;
+            var typeInAttribute = (INamedTypeSymbol)
+                type.GetAttributes()[0].ConstructorArguments.First().Value;
             Assert.True(typeInAttribute.IsUnboundGenericType);
             Assert.True(
                 (
-                    (NamedTypeSymbol)type.GetAttributes()[0].ConstructorArguments
-                        .First()
-                        .ValueInternal
+                    (NamedTypeSymbol)
+                        type.GetAttributes()[0].ConstructorArguments.First().ValueInternal
                 ).IsUnboundGenericType
             );
             Assert.Equal("Target<>", typeInAttribute.ToTestDisplayString());
@@ -11136,15 +11130,13 @@ class Target<T>
 
             Assert.IsAssignableFrom<PENamedTypeSymbol>(type);
 
-            typeInAttribute = (INamedTypeSymbol)type.GetAttributes()[0].ConstructorArguments
-                .First()
-                .Value;
+            typeInAttribute = (INamedTypeSymbol)
+                type.GetAttributes()[0].ConstructorArguments.First().Value;
             Assert.True(typeInAttribute.IsUnboundGenericType);
             Assert.True(
                 (
-                    (NamedTypeSymbol)type.GetAttributes()[0].ConstructorArguments
-                        .First()
-                        .ValueInternal
+                    (NamedTypeSymbol)
+                        type.GetAttributes()[0].ConstructorArguments.First().ValueInternal
                 ).IsUnboundGenericType
             );
             Assert.Equal("Target<>", typeInAttribute.ToTestDisplayString());

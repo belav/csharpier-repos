@@ -124,9 +124,8 @@ namespace System.Security.AccessControl.Tests
         [Fact]
         public void CommonAce_CreateBinaryForm_Invalid()
         {
-            CommonAce ace = (CommonAce)CommonAce_CreateTestData(0, 0, 1, "S-1-5-11", false, 4, 0)[
-                0
-            ];
+            CommonAce ace = (CommonAce)
+                CommonAce_CreateTestData(0, 0, 1, "S-1-5-11", false, 4, 0)[0];
             AssertExtensions.Throws<ArgumentNullException>(
                 "binaryForm",
                 () => CommonAce.CreateFromBinaryForm(null, 1)
@@ -148,9 +147,8 @@ namespace System.Security.AccessControl.Tests
         [Fact]
         public void CommonAce_GetBinaryForm_Invalid()
         {
-            CommonAce ace = (CommonAce)CommonAce_CreateTestData(0, 0, 1, "S-1-5-11", false, 4, 0)[
-                0
-            ];
+            CommonAce ace = (CommonAce)
+                CommonAce_CreateTestData(0, 0, 1, "S-1-5-11", false, 4, 0)[0];
             AssertExtensions.Throws<ArgumentNullException>(
                 "binaryForm",
                 () => ace.GetBinaryForm(null, 1)

@@ -1918,10 +1918,8 @@ namespace System.Data
             )
                 return StorageType.String;
 
-            DataTypePrecedence higherPrec = (DataTypePrecedence)Math.Max(
-                leftPrecedence,
-                rightPrecedence
-            );
+            DataTypePrecedence higherPrec = (DataTypePrecedence)
+                Math.Max(leftPrecedence, rightPrecedence);
 
             StorageType result = GetPrecedenceType(higherPrec);
 
@@ -2064,10 +2062,8 @@ namespace System.Data
             // time types finished
             // continue with numerical types, numbers
 
-            DataTypePrecedence higherPrec = (DataTypePrecedence)Math.Max(
-                leftPrecedence,
-                rightPrecedence
-            );
+            DataTypePrecedence higherPrec = (DataTypePrecedence)
+                Math.Max(leftPrecedence, rightPrecedence);
 
             StorageType result = GetPrecedenceType(higherPrec);
             // if we have at least one Sql type, the intermediate result should be Sql type
@@ -2202,12 +2198,13 @@ namespace System.Data
 
                 if (vRight == DBNull.Value || DataStorage.IsObjectSqlNull(vRight))
                     return DBNull.Value;
-                string rightStr = (string)SqlConvert.ChangeType2(
-                    vRight,
-                    StorageType.String,
-                    typeof(string),
-                    FormatProvider
-                );
+                string rightStr = (string)
+                    SqlConvert.ChangeType2(
+                        vRight,
+                        StorageType.String,
+                        typeof(string),
+                        FormatProvider
+                    );
 
                 // need to convert like pattern to a string
 

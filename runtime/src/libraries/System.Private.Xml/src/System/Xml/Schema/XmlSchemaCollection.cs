@@ -197,9 +197,8 @@ namespace System.Xml.Schema
         {
             get
             {
-                XmlSchemaCollectionNode? node = (XmlSchemaCollectionNode?)_collection[
-                    (ns != null) ? ns : string.Empty
-                ];
+                XmlSchemaCollectionNode? node = (XmlSchemaCollectionNode?)
+                    _collection[(ns != null) ? ns : string.Empty];
                 return (node != null) ? node.Schema : null;
             }
         }
@@ -286,9 +285,8 @@ namespace System.Xml.Schema
 
         internal SchemaInfo? GetSchemaInfo(string? ns)
         {
-            XmlSchemaCollectionNode? node = (XmlSchemaCollectionNode?)_collection[
-                (ns != null) ? ns : string.Empty
-            ];
+            XmlSchemaCollectionNode? node = (XmlSchemaCollectionNode?)
+                _collection[(ns != null) ? ns : string.Empty];
             return (node != null) ? node.SchemaInfo : null;
         }
 

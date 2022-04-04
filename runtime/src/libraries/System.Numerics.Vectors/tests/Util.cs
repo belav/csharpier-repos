@@ -159,9 +159,8 @@ namespace System.Numerics.Tests
                 else if (left is long)
                     return (T)(ValueType)(long)((long)(ValueType)left * (long)(ValueType)right);
                 else if (left is ushort)
-                    return (T)(ValueType)(ushort)(
-                        (ushort)(ValueType)left * (ushort)(ValueType)right
-                    );
+                    return (T)
+                        (ValueType)(ushort)((ushort)(ValueType)left * (ushort)(ValueType)right);
                 else if (left is uint)
                     return (T)(ValueType)(uint)((uint)(ValueType)left * (uint)(ValueType)right);
                 else if (left is ulong)
@@ -173,9 +172,8 @@ namespace System.Numerics.Tests
                 else if (left is float)
                     return (T)(ValueType)(float)((float)(ValueType)left * (float)(ValueType)right);
                 else if (left is double)
-                    return (T)(ValueType)(double)(
-                        (double)(ValueType)left * (double)(ValueType)right
-                    );
+                    return (T)
+                        (ValueType)(double)((double)(ValueType)left * (double)(ValueType)right);
                 else
                     throw new NotImplementedException();
             }
@@ -218,9 +216,8 @@ namespace System.Numerics.Tests
                 else if (left is long)
                     return (T)(ValueType)(long)((long)(ValueType)left + (long)(ValueType)right);
                 else if (left is ushort)
-                    return (T)(ValueType)(ushort)(
-                        (ushort)(ValueType)left + (ushort)(ValueType)right
-                    );
+                    return (T)
+                        (ValueType)(ushort)((ushort)(ValueType)left + (ushort)(ValueType)right);
                 else if (left is uint)
                     return (T)(ValueType)(uint)((uint)(ValueType)left + (uint)(ValueType)right);
                 else if (left is ulong)
@@ -232,9 +229,8 @@ namespace System.Numerics.Tests
                 else if (left is float)
                     return (T)(ValueType)(float)((float)(ValueType)left + (float)(ValueType)right);
                 else if (left is double)
-                    return (T)(ValueType)(double)(
-                        (double)(ValueType)left + (double)(ValueType)right
-                    );
+                    return (T)
+                        (ValueType)(double)((double)(ValueType)left + (double)(ValueType)right);
                 else
                     throw new NotImplementedException();
             }
@@ -251,9 +247,8 @@ namespace System.Numerics.Tests
                 else if (left is long)
                     return (T)(ValueType)(long)((long)(ValueType)left - (long)(ValueType)right);
                 else if (left is ushort)
-                    return (T)(ValueType)(ushort)(
-                        (ushort)(ValueType)left - (ushort)(ValueType)right
-                    );
+                    return (T)
+                        (ValueType)(ushort)((ushort)(ValueType)left - (ushort)(ValueType)right);
                 else if (left is uint)
                     return (T)(ValueType)(uint)((uint)(ValueType)left - (uint)(ValueType)right);
                 else if (left is ulong)
@@ -265,9 +260,8 @@ namespace System.Numerics.Tests
                 else if (left is float)
                     return (T)(ValueType)(float)((float)(ValueType)left - (float)(ValueType)right);
                 else if (left is double)
-                    return (T)(ValueType)(double)(
-                        (double)(ValueType)left - (double)(ValueType)right
-                    );
+                    return (T)
+                        (ValueType)(double)((double)(ValueType)left - (double)(ValueType)right);
                 else
                     throw new NotImplementedException();
             }

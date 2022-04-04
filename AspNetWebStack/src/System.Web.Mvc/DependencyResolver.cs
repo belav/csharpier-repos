@@ -116,17 +116,19 @@ namespace System.Web.Mvc
             }
 
             var getService =
-                (Func<Type, object>)Delegate.CreateDelegate(
-                    typeof(Func<Type, object>),
-                    commonServiceLocator,
-                    getInstance
-                );
+                (Func<Type, object>)
+                    Delegate.CreateDelegate(
+                        typeof(Func<Type, object>),
+                        commonServiceLocator,
+                        getInstance
+                    );
             var getServices =
-                (Func<Type, IEnumerable<object>>)Delegate.CreateDelegate(
-                    typeof(Func<Type, IEnumerable<object>>),
-                    commonServiceLocator,
-                    getInstances
-                );
+                (Func<Type, IEnumerable<object>>)
+                    Delegate.CreateDelegate(
+                        typeof(Func<Type, IEnumerable<object>>),
+                        commonServiceLocator,
+                        getInstances
+                    );
 
             InnerSetResolver(new DelegateBasedDependencyResolver(getService, getServices));
         }

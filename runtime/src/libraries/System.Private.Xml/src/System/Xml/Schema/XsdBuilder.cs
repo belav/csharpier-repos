@@ -1849,20 +1849,14 @@ namespace System.Xml.Schema
 
         private static void BuildSchema_AttributeFormDefault(XsdBuilder builder, string value)
         {
-            builder._schema.AttributeFormDefault = (XmlSchemaForm)builder.ParseEnum(
-                value,
-                "attributeFormDefault",
-                s_formStringValues
-            );
+            builder._schema.AttributeFormDefault = (XmlSchemaForm)
+                builder.ParseEnum(value, "attributeFormDefault", s_formStringValues);
         }
 
         private static void BuildSchema_ElementFormDefault(XsdBuilder builder, string value)
         {
-            builder._schema.ElementFormDefault = (XmlSchemaForm)builder.ParseEnum(
-                value,
-                "elementFormDefault",
-                s_formStringValues
-            );
+            builder._schema.ElementFormDefault = (XmlSchemaForm)
+                builder.ParseEnum(value, "elementFormDefault", s_formStringValues);
         }
 
         private static void BuildSchema_TargetNamespace(XsdBuilder builder, string value)
@@ -1877,18 +1871,14 @@ namespace System.Xml.Schema
 
         private static void BuildSchema_FinalDefault(XsdBuilder builder, string value)
         {
-            builder._schema.FinalDefault = (XmlSchemaDerivationMethod)builder.ParseBlockFinalEnum(
-                value,
-                "finalDefault"
-            );
+            builder._schema.FinalDefault = (XmlSchemaDerivationMethod)
+                builder.ParseBlockFinalEnum(value, "finalDefault");
         }
 
         private static void BuildSchema_BlockDefault(XsdBuilder builder, string value)
         {
-            builder._schema.BlockDefault = (XmlSchemaDerivationMethod)builder.ParseBlockFinalEnum(
-                value,
-                "blockDefault"
-            );
+            builder._schema.BlockDefault = (XmlSchemaDerivationMethod)
+                builder.ParseBlockFinalEnum(value, "blockDefault");
         }
 
         private static void InitSchema(XsdBuilder builder, string? value)
@@ -2012,20 +2002,14 @@ namespace System.Xml.Schema
 
         private static void BuildAttribute_Form(XsdBuilder builder, string value)
         {
-            builder._attribute!.Form = (XmlSchemaForm)builder.ParseEnum(
-                value,
-                "form",
-                s_formStringValues
-            );
+            builder._attribute!.Form = (XmlSchemaForm)
+                builder.ParseEnum(value, "form", s_formStringValues);
         }
 
         private static void BuildAttribute_Use(XsdBuilder builder, string value)
         {
-            builder._attribute!.Use = (XmlSchemaUse)builder.ParseEnum(
-                value,
-                "use",
-                s_useStringValues
-            );
+            builder._attribute!.Use = (XmlSchemaUse)
+                builder.ParseEnum(value, "use", s_useStringValues);
         }
 
         private static void BuildAttribute_Ref(XsdBuilder builder, string value)
@@ -2094,10 +2078,8 @@ namespace System.Xml.Schema
 
         private static void BuildElement_Block(XsdBuilder builder, string value)
         {
-            builder._element!.Block = (XmlSchemaDerivationMethod)builder.ParseBlockFinalEnum(
-                value,
-                "block"
-            );
+            builder._element!.Block = (XmlSchemaDerivationMethod)
+                builder.ParseBlockFinalEnum(value, "block");
         }
 
         private static void BuildElement_Default(XsdBuilder builder, string value)
@@ -2107,11 +2089,8 @@ namespace System.Xml.Schema
 
         private static void BuildElement_Form(XsdBuilder builder, string value)
         {
-            builder._element!.Form = (XmlSchemaForm)builder.ParseEnum(
-                value,
-                "form",
-                s_formStringValues
-            );
+            builder._element!.Form = (XmlSchemaForm)
+                builder.ParseEnum(value, "form", s_formStringValues);
         }
 
         private static void BuildElement_SubstitutionGroup(XsdBuilder builder, string value)
@@ -2121,10 +2100,8 @@ namespace System.Xml.Schema
 
         private static void BuildElement_Final(XsdBuilder builder, string value)
         {
-            builder._element!.Final = (XmlSchemaDerivationMethod)builder.ParseBlockFinalEnum(
-                value,
-                "final"
-            );
+            builder._element!.Final = (XmlSchemaDerivationMethod)
+                builder.ParseBlockFinalEnum(value, "final");
         }
 
         private static void BuildElement_Fixed(XsdBuilder builder, string value)
@@ -2243,10 +2220,8 @@ namespace System.Xml.Schema
 
         private static void BuildSimpleType_Final(XsdBuilder builder, string value)
         {
-            builder._simpleType!.Final = (XmlSchemaDerivationMethod)builder.ParseBlockFinalEnum(
-                value,
-                "final"
-            );
+            builder._simpleType!.Final = (XmlSchemaDerivationMethod)
+                builder.ParseBlockFinalEnum(value, "final");
         }
 
         /*
@@ -2274,11 +2249,8 @@ namespace System.Xml.Schema
                 .DeriveByList(null);
             try
             {
-                builder._simpleTypeUnion!.MemberTypes = (XmlQualifiedName[])dt.ParseValue(
-                    value,
-                    builder._nameTable,
-                    builder._namespaceManager
-                );
+                builder._simpleTypeUnion!.MemberTypes = (XmlQualifiedName[])
+                    dt.ParseValue(value, builder._nameTable, builder._namespaceManager);
             }
             catch (XmlSchemaException e)
             {
@@ -2384,18 +2356,14 @@ namespace System.Xml.Schema
 
         private static void BuildComplexType_Block(XsdBuilder builder, string value)
         {
-            builder._complexType!.Block = (XmlSchemaDerivationMethod)builder.ParseBlockFinalEnum(
-                value,
-                "block"
-            );
+            builder._complexType!.Block = (XmlSchemaDerivationMethod)
+                builder.ParseBlockFinalEnum(value, "block");
         }
 
         private static void BuildComplexType_Final(XsdBuilder builder, string value)
         {
-            builder._complexType!.Final = (XmlSchemaDerivationMethod)builder.ParseBlockFinalEnum(
-                value,
-                "final"
-            );
+            builder._complexType!.Final = (XmlSchemaDerivationMethod)
+                builder.ParseBlockFinalEnum(value, "final");
         }
 
         private static void BuildComplexType_Mixed(XsdBuilder builder, string value)
@@ -2675,11 +2643,8 @@ namespace System.Xml.Schema
 
         private static void BuildAnyAttribute_ProcessContents(XsdBuilder builder, string value)
         {
-            builder._anyAttribute!.ProcessContents = (XmlSchemaContentProcessing)builder.ParseEnum(
-                value,
-                "processContents",
-                s_processContentsStringValues
-            );
+            builder._anyAttribute!.ProcessContents = (XmlSchemaContentProcessing)
+                builder.ParseEnum(value, "processContents", s_processContentsStringValues);
         }
 
         /*
@@ -2810,11 +2775,8 @@ namespace System.Xml.Schema
 
         private static void BuildAny_ProcessContents(XsdBuilder builder, string value)
         {
-            builder._anyElement!.ProcessContents = (XmlSchemaContentProcessing)builder.ParseEnum(
-                value,
-                "processContents",
-                s_processContentsStringValues
-            );
+            builder._anyElement!.ProcessContents = (XmlSchemaContentProcessing)
+                builder.ParseEnum(value, "processContents", s_processContentsStringValues);
         }
 
         /*

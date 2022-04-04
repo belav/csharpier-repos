@@ -137,8 +137,8 @@ namespace System.DirectoryServices.AccountManagement
                         "MoveNextLocal: got a value from the enumerator"
                     );
 
-                    UnsafeNativeMethods.IADs nativeMember =
-                        (UnsafeNativeMethods.IADs)_membersEnumerator.Current;
+                    UnsafeNativeMethods.IADs nativeMember = (UnsafeNativeMethods.IADs)
+                        _membersEnumerator.Current;
 
                     // If we encountered a group member corresponding to a fake principal such as
                     // NT AUTHORITY/NETWORK SERVICE, construct and prepare to return the fake principal.

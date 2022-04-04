@@ -170,9 +170,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             public IRequestHandler<RequestType, ResponseType> GetHandler<RequestType, ResponseType>(
                 string methodName
             ) =>
-                (IRequestHandler<RequestType, ResponseType>)_requestDispatcher._requestHandlers[
-                    methodName
-                ].Value;
+                (IRequestHandler<RequestType, ResponseType>)
+                    _requestDispatcher._requestHandlers[methodName].Value;
         }
     }
 }

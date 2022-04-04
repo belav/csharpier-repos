@@ -117,10 +117,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
             Diagnostic d,
             CancellationToken cancellationToken
         ) =>
-            (InvocationExpressionSyntax)d.AdditionalLocations[0].FindNode(
-                getInnermostNodeForTie: true,
-                cancellationToken
-            );
+            (InvocationExpressionSyntax)
+                d.AdditionalLocations[0].FindNode(getInnermostNodeForTie: true, cancellationToken);
 
         private static ExpressionSyntax FixOne(Result result, SyntaxGenerator generator)
         {

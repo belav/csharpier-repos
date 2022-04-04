@@ -43,8 +43,8 @@ public class ManagedAuthenticatedEncryptorConfigurationTests
         var configuration = new ManagedAuthenticatedEncryptorConfiguration();
 
         // Act
-        var descriptor =
-            (ManagedAuthenticatedEncryptorDescriptor)configuration.CreateNewDescriptor();
+        var descriptor = (ManagedAuthenticatedEncryptorDescriptor)
+            configuration.CreateNewDescriptor();
 
         // Assert
         Assert.Equal(configuration, descriptor.Configuration);

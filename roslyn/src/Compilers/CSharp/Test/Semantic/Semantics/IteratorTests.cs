@@ -321,10 +321,11 @@ namespace RoslynYield
             );
 
             var tree = comp.SyntaxTrees[0];
-            var yieldNode = (YieldStatementSyntax)tree.GetRoot()
-                .DescendantNodes()
-                .Where(n => n is YieldStatementSyntax)
-                .SingleOrDefault();
+            var yieldNode = (YieldStatementSyntax)
+                tree.GetRoot()
+                    .DescendantNodes()
+                    .Where(n => n is YieldStatementSyntax)
+                    .SingleOrDefault();
 
             Assert.NotNull(yieldNode);
             Assert.Equal(SyntaxKind.YieldReturnStatement, yieldNode.Kind());
@@ -348,10 +349,11 @@ namespace RoslynYield
             );
 
             var tree = comp.SyntaxTrees[0];
-            var yieldNode = (YieldStatementSyntax)tree.GetRoot()
-                .DescendantNodes()
-                .Where(n => n is YieldStatementSyntax)
-                .SingleOrDefault();
+            var yieldNode = (YieldStatementSyntax)
+                tree.GetRoot()
+                    .DescendantNodes()
+                    .Where(n => n is YieldStatementSyntax)
+                    .SingleOrDefault();
 
             Assert.NotNull(yieldNode);
             Assert.Equal(SyntaxKind.YieldBreakStatement, yieldNode.Kind());

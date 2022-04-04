@@ -196,12 +196,8 @@ namespace System.Threading
                     // value, otherwise create a two-element map with the additional key/value.
                     return ReferenceEquals(key, _key1)
                       ? new OneElementAsyncLocalValueMap(key, value)
-                      : (IAsyncLocalValueMap)new TwoElementAsyncLocalValueMap(
-                            _key1,
-                            _value1,
-                            key,
-                            value
-                        );
+                      : (IAsyncLocalValueMap)
+                            new TwoElementAsyncLocalValueMap(_key1, _value1, key, value);
                 }
                 else
                 {
@@ -261,14 +257,15 @@ namespace System.Threading
                       ? new TwoElementAsyncLocalValueMap(key, value, _key2, _value2)
                       : ReferenceEquals(key, _key2)
                           ? new TwoElementAsyncLocalValueMap(_key1, _value1, key, value)
-                          : (IAsyncLocalValueMap)new ThreeElementAsyncLocalValueMap(
-                                _key1,
-                                _value1,
-                                _key2,
-                                _value2,
-                                key,
-                                value
-                            );
+                          : (IAsyncLocalValueMap)
+                                new ThreeElementAsyncLocalValueMap(
+                                    _key1,
+                                    _value1,
+                                    _key2,
+                                    _value2,
+                                    key,
+                                    value
+                                );
                 }
                 else
                 {
@@ -488,14 +485,15 @@ namespace System.Threading
                                             _keyValues[3].Key,
                                             _keyValues[3].Value
                                         )
-                                      : (IAsyncLocalValueMap)new ThreeElementAsyncLocalValueMap(
-                                            _keyValues[0].Key,
-                                            _keyValues[0].Value,
-                                            _keyValues[1].Key,
-                                            _keyValues[1].Value,
-                                            _keyValues[2].Key,
-                                            _keyValues[2].Value
-                                        );
+                                      : (IAsyncLocalValueMap)
+                                            new ThreeElementAsyncLocalValueMap(
+                                                _keyValues[0].Key,
+                                                _keyValues[0].Value,
+                                                _keyValues[1].Key,
+                                                _keyValues[1].Value,
+                                                _keyValues[2].Key,
+                                                _keyValues[2].Value
+                                            );
                         }
                         else
                         {

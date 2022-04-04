@@ -133,10 +133,8 @@ namespace Microsoft.Interop.Analyzers
                 .ConfigureAwait(false);
             SyntaxGenerator generator = editor.Generator;
 
-            var dllImportSyntax =
-                (AttributeSyntax)dllImportAttr!.ApplicationSyntaxReference!.GetSyntax(
-                    cancellationToken
-                );
+            var dllImportSyntax = (AttributeSyntax)
+                dllImportAttr!.ApplicationSyntaxReference!.GetSyntax(cancellationToken);
 
             // Create GeneratedDllImport attribute based on the DllImport attribute
             SyntaxNode generatedDllImportSyntax = GetGeneratedDllImportAttribute(
@@ -225,8 +223,8 @@ namespace Microsoft.Interop.Analyzers
                 );
 
                 // Sort attribute arguments so that GeneratedDllImport and DllImport match
-                MethodDeclarationSyntax updatedDeclaration =
-                    (MethodDeclarationSyntax)generator.ReplaceNode(
+                MethodDeclarationSyntax updatedDeclaration = (MethodDeclarationSyntax)
+                    generator.ReplaceNode(
                         methodSyntax,
                         dllImportSyntax,
                         SortDllImportAttributeArguments(dllImportSyntax, generator)

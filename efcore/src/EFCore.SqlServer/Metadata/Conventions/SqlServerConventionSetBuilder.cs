@@ -157,10 +157,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             ReplaceConvention(conventionSet.ModelFinalizingConventions, storeGenerationConvention);
             ReplaceConvention(
                 conventionSet.ModelFinalizingConventions,
-                (SharedTableConvention)new SqlServerSharedTableConvention(
-                    Dependencies,
-                    RelationalDependencies
-                )
+                (SharedTableConvention)
+                    new SqlServerSharedTableConvention(Dependencies, RelationalDependencies)
             );
             conventionSet.ModelFinalizingConventions.Add(
                 new SqlServerDbFunctionConvention(Dependencies, RelationalDependencies)
@@ -168,10 +166,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             ReplaceConvention(
                 conventionSet.ModelFinalizedConventions,
-                (RuntimeModelConvention)new SqlServerRuntimeModelConvention(
-                    Dependencies,
-                    RelationalDependencies
-                )
+                (RuntimeModelConvention)
+                    new SqlServerRuntimeModelConvention(Dependencies, RelationalDependencies)
             );
 
             conventionSet.SkipNavigationForeignKeyChangedConventions.Add(

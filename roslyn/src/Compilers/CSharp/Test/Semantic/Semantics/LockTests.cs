@@ -47,9 +47,8 @@ class C
                 .DescendantNodes()
                 .OfType<LocalDeclarationStatementSyntax>()
                 .Single();
-            var localSymbol = (ILocalSymbol)model.GetDeclaredSymbol(
-                localDecl.Declaration.Variables.Single()
-            );
+            var localSymbol = (ILocalSymbol)
+                model.GetDeclaredSymbol(localDecl.Declaration.Variables.Single());
             Assert.Equal("o", localSymbol.Name);
             Assert.Equal(SpecialType.System_Object, localSymbol.Type.SpecialType);
 
@@ -688,9 +687,8 @@ partial class Test
                 .DescendantNodes()
                 .OfType<LocalDeclarationStatementSyntax>()
                 .Single();
-            var symbol = (ILocalSymbol)model.GetDeclaredSymbol(
-                localDecl.Declaration.Variables.Single()
-            );
+            var symbol = (ILocalSymbol)
+                model.GetDeclaredSymbol(localDecl.Declaration.Variables.Single());
             VerifySemanticInfoForLockStatements(
                 compilation,
                 symbol.Type.GetSymbol(),
@@ -722,9 +720,8 @@ class Test
                 .DescendantNodes()
                 .OfType<LocalDeclarationStatementSyntax>()
                 .Single();
-            var symbol = (ILocalSymbol)model.GetDeclaredSymbol(
-                localDecl.Declaration.Variables.Single()
-            );
+            var symbol = (ILocalSymbol)
+                model.GetDeclaredSymbol(localDecl.Declaration.Variables.Single());
             VerifySemanticInfoForLockStatements(compilation, symbol.Type.GetSymbol());
         }
 

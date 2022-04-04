@@ -110,8 +110,8 @@ namespace System.Text.Json
             {
                 Debug.Assert(parentClassType != null);
 
-                JsonConverterAttribute? converterAttribute =
-                    (JsonConverterAttribute?)GetAttributeThatCanHaveMultiple(
+                JsonConverterAttribute? converterAttribute = (JsonConverterAttribute?)
+                    GetAttributeThatCanHaveMultiple(
                         parentClassType!,
                         typeof(JsonConverterAttribute),
                         memberInfo
@@ -222,11 +222,8 @@ namespace System.Text.Json
             // Priority 3: Attempt to get converter from [JsonConverter] on the type being converted.
             if (converter == null)
             {
-                JsonConverterAttribute? converterAttribute =
-                    (JsonConverterAttribute?)GetAttributeThatCanHaveMultiple(
-                        typeToConvert,
-                        typeof(JsonConverterAttribute)
-                    );
+                JsonConverterAttribute? converterAttribute = (JsonConverterAttribute?)
+                    GetAttributeThatCanHaveMultiple(typeToConvert, typeof(JsonConverterAttribute));
 
                 if (converterAttribute != null)
                 {

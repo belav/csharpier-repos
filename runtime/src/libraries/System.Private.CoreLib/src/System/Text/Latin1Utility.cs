@@ -246,9 +246,8 @@ namespace System.Text
             // has value >= 0x0100 (non-Latin-1). Then we'll treat the vector as a BYTE vector in order
             // to extract the mask. Reminder: the 0x0080 bit of each WORD should be ignored.
 
-            currentMask = (uint)Sse2.MoveMask(
-                Sse2.AddSaturate(firstVector, latin1MaskForAddSaturate).AsByte()
-            );
+            currentMask = (uint)
+                Sse2.MoveMask(Sse2.AddSaturate(firstVector, latin1MaskForAddSaturate).AsByte());
 
             if ((currentMask & NonLatin1DataSeenMask) != 0)
             {
@@ -322,9 +321,10 @@ namespace System.Text
                     else
                     {
                         // See comment earlier in the method for an explanation of how the below logic works.
-                        currentMask = (uint)Sse2.MoveMask(
-                            Sse2.AddSaturate(combinedVector, latin1MaskForAddSaturate).AsByte()
-                        );
+                        currentMask = (uint)
+                            Sse2.MoveMask(
+                                Sse2.AddSaturate(combinedVector, latin1MaskForAddSaturate).AsByte()
+                            );
                         if ((currentMask & NonLatin1DataSeenMask) != 0)
                         {
                             goto FoundNonLatin1DataInFirstOrSecondVector;
@@ -367,9 +367,8 @@ namespace System.Text
             else
             {
                 // See comment earlier in the method for an explanation of how the below logic works.
-                currentMask = (uint)Sse2.MoveMask(
-                    Sse2.AddSaturate(firstVector, latin1MaskForAddSaturate).AsByte()
-                );
+                currentMask = (uint)
+                    Sse2.MoveMask(Sse2.AddSaturate(firstVector, latin1MaskForAddSaturate).AsByte());
                 if ((currentMask & NonLatin1DataSeenMask) != 0)
                 {
                     goto FoundNonLatin1DataInCurrentMask;
@@ -406,9 +405,10 @@ namespace System.Text
                 else
                 {
                     // See comment earlier in the method for an explanation of how the below logic works.
-                    currentMask = (uint)Sse2.MoveMask(
-                        Sse2.AddSaturate(firstVector, latin1MaskForAddSaturate).AsByte()
-                    );
+                    currentMask = (uint)
+                        Sse2.MoveMask(
+                            Sse2.AddSaturate(firstVector, latin1MaskForAddSaturate).AsByte()
+                        );
                     if ((currentMask & NonLatin1DataSeenMask) != 0)
                     {
                         goto FoundNonLatin1DataInCurrentMask;
@@ -442,9 +442,8 @@ namespace System.Text
             }
             else
             {
-                currentMask = (uint)Sse2.MoveMask(
-                    Sse2.AddSaturate(firstVector, latin1MaskForAddSaturate).AsByte()
-                );
+                currentMask = (uint)
+                    Sse2.MoveMask(Sse2.AddSaturate(firstVector, latin1MaskForAddSaturate).AsByte());
                 if ((currentMask & NonLatin1DataSeenMask) != 0)
                 {
                     goto FoundNonLatin1DataInCurrentMask;
@@ -459,9 +458,8 @@ namespace System.Text
             FoundNonLatin1DataInFirstVector:
 
             // See comment earlier in the method for an explanation of how the below logic works.
-            currentMask = (uint)Sse2.MoveMask(
-                Sse2.AddSaturate(firstVector, latin1MaskForAddSaturate).AsByte()
-            );
+            currentMask = (uint)
+                Sse2.MoveMask(Sse2.AddSaturate(firstVector, latin1MaskForAddSaturate).AsByte());
 
             FoundNonLatin1DataInCurrentMask:
 

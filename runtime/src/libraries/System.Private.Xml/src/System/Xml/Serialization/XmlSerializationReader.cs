@@ -1822,9 +1822,8 @@ namespace System.Xml.Serialization
                         else
                         {
                             elementType = fallbackElementType;
-                            XmlQualifiedName? newQname = (XmlQualifiedName?)_typesReverse[
-                                elementType
-                            ];
+                            XmlQualifiedName? newQname = (XmlQualifiedName?)
+                                _typesReverse[elementType];
                             if (newQname == null)
                             {
                                 newQname = XmlSerializationWriter.GetPrimitiveTypeNameInternal(
@@ -2048,9 +2047,8 @@ namespace System.Xml.Serialization
                             _r.NameTable.Add(ns!)
                         );
                 }
-                XmlSerializationReadCallback? callback = (XmlSerializationReadCallback?)_callbacks[
-                    typeId
-                ];
+                XmlSerializationReadCallback? callback = (XmlSerializationReadCallback?)
+                    _callbacks[typeId];
                 if (callback != null)
                 {
                     o = callback();

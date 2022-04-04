@@ -101,10 +101,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                 );
                 o["Member6"] = "Dummy text for error";
 
-                obj = (SerializationEventTestObject)JsonConvert.DeserializeObject(
-                    o.ToString(),
-                    obj.GetType()
-                );
+                obj = (SerializationEventTestObject)
+                    JsonConvert.DeserializeObject(o.ToString(), obj.GetType());
 
                 Assert.AreEqual(11, obj.Member1);
                 Assert.AreEqual(
@@ -463,9 +461,8 @@ OnSerialized_Derived_Derived",
             );
 
             DerivedDerivedSerializationEventOrderTestObject c =
-                (DerivedDerivedSerializationEventOrderTestObject)ss.ReadObject(
-                    new MemoryStream(Encoding.UTF8.GetBytes(xml))
-                );
+                (DerivedDerivedSerializationEventOrderTestObject)
+                    ss.ReadObject(new MemoryStream(Encoding.UTF8.GetBytes(xml)));
 
             MemoryStream ms = new MemoryStream();
             ss.WriteObject(ms, c);

@@ -254,9 +254,8 @@ class C1
 }
 ";
             var comp = CreateCompilation(Parse(text));
-            NamedTypeSymbol c1 = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace
-                .GetMembers("C1")
-                .Single();
+            NamedTypeSymbol c1 = (NamedTypeSymbol)
+                comp.SourceModule.GlobalNamespace.GetMembers("C1").Single();
             FieldSymbol ein = (FieldSymbol)c1.GetMembers("in").Single();
             Assert.Equal("in", ein.Name);
             Assert.Equal("C1.@in", ein.ToString());
@@ -277,9 +276,8 @@ class C
 }
 ";
             var comp = CreateCompilation(Parse(text));
-            NamedTypeSymbol type1 = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace
-                .GetMembers("C")
-                .Single();
+            NamedTypeSymbol type1 = (NamedTypeSymbol)
+                comp.SourceModule.GlobalNamespace.GetMembers("C").Single();
             FieldSymbol mem = (FieldSymbol)type1.GetMembers("x").Single();
             Assert.Equal("x", mem.Name);
             Assert.True(mem.IsConst);

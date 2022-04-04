@@ -234,9 +234,8 @@ namespace System.Data
                         }
 
                         _udSimpleTypes[type.QualifiedName.ToString()] = xmlSimpleType;
-                        DataColumn? dc = (DataColumn?)_existingSimpleTypeMap![
-                            type.QualifiedName.ToString()
-                        ];
+                        DataColumn? dc = (DataColumn?)
+                            _existingSimpleTypeMap![type.QualifiedName.ToString()];
                         // Assumption is that our simple type qualified name ihas the same output as XmlSchemaSimpleType type.QualifiedName.ToString()
                         SimpleType? tmpSimpleType = (dc != null) ? dc.SimpleType : null;
 
@@ -1142,9 +1141,8 @@ namespace System.Data
                     }
                     else
                     {
-                        attributeGroupResolved = (XmlSchemaAttributeGroup?)_attributeGroups![
-                            attributeGroupRef.RefName
-                        ];
+                        attributeGroupResolved = (XmlSchemaAttributeGroup?)
+                            _attributeGroups![attributeGroupRef.RefName];
                     }
                     if (attributeGroupResolved != null)
                     {
@@ -1633,9 +1631,8 @@ namespace System.Data
 
             if (0 < key.Length)
             {
-                UniqueConstraint? found = (UniqueConstraint?)key[
-                    0
-                ].Table!.Constraints.FindConstraint(new UniqueConstraint(name, key));
+                UniqueConstraint? found = (UniqueConstraint?)
+                    key[0].Table!.Constraints.FindConstraint(new UniqueConstraint(name, key));
 
                 if (found == null)
                 {
@@ -2227,11 +2224,12 @@ namespace System.Data
                         : FindTypeNode((XmlSchemaAnnotated)_elementsTable![el!.RefName]!);
             }
             else
-                typeNode = (XmlSchemaAnnotated?)_schemaTypes![
-                    isAttr
-                      ? ((XmlSchemaAttribute)node).SchemaTypeName
-                      : ((XmlSchemaElement)node).SchemaTypeName
-                ];
+                typeNode = (XmlSchemaAnnotated?)
+                    _schemaTypes![
+                        isAttr
+                          ? ((XmlSchemaAttribute)node).SchemaTypeName
+                          : ((XmlSchemaElement)node).SchemaTypeName
+                    ];
             return typeNode;
         }
 

@@ -15044,9 +15044,8 @@ partial class C
                         SemanticEditKind.Update,
                         c =>
                             (
-                                (IPropertySymbol)c.GetMember<INamedTypeSymbol>("C")
-                                    .GetMembers("P")
-                                    .First()
+                                (IPropertySymbol)
+                                    c.GetMember<INamedTypeSymbol>("C").GetMembers("P").First()
                             ).GetMethod
                     ),
                     SemanticEdit(

@@ -146,8 +146,8 @@ namespace System.Net.Security
             Interop.SspiCli.ContextFlags outContextFlags = Interop.SspiCli.ContextFlags.Zero;
             // There is only one SafeDeleteContext type on Windows which is SafeDeleteSslContext so this cast is safe.
             SafeDeleteSslContext? sslContext = (SafeDeleteSslContext?)securityContext;
-            Interop.SECURITY_STATUS winStatus =
-                (Interop.SECURITY_STATUS)SSPIWrapper.InitializeSecurityContext(
+            Interop.SECURITY_STATUS winStatus = (Interop.SECURITY_STATUS)
+                SSPIWrapper.InitializeSecurityContext(
                     GlobalSSPI.SSPIAuth,
                     ref credentialsHandle,
                     ref sslContext,
@@ -175,8 +175,8 @@ namespace System.Net.Security
                 incomingBlob,
                 SecurityBufferType.SECBUFFER_TOKEN
             );
-            Interop.SECURITY_STATUS winStatus =
-                (Interop.SECURITY_STATUS)SSPIWrapper.CompleteAuthToken(
+            Interop.SECURITY_STATUS winStatus = (Interop.SECURITY_STATUS)
+                SSPIWrapper.CompleteAuthToken(
                     GlobalSSPI.SSPIAuth,
                     ref sslContext,
                     in inSecurityBuffer
@@ -216,8 +216,8 @@ namespace System.Net.Security
             Interop.SspiCli.ContextFlags outContextFlags = Interop.SspiCli.ContextFlags.Zero;
             // There is only one SafeDeleteContext type on Windows which is SafeDeleteSslContext so this cast is safe.
             SafeDeleteSslContext? sslContext = (SafeDeleteSslContext?)securityContext;
-            Interop.SECURITY_STATUS winStatus =
-                (Interop.SECURITY_STATUS)SSPIWrapper.AcceptSecurityContext(
+            Interop.SECURITY_STATUS winStatus = (Interop.SECURITY_STATUS)
+                SSPIWrapper.AcceptSecurityContext(
                     GlobalSSPI.SSPIAuth,
                     credentialsHandle,
                     ref sslContext,

@@ -66,12 +66,8 @@ namespace JitTest
                                 else
                                     d.c =
                                         (
-                                            (Data)mtx[
-                                                ind[0] - 1,
-                                                ind[1] - 1,
-                                                ind[2] - 1,
-                                                ind[3] - 1
-                                            ]
+                                            (Data)
+                                                mtx[ind[0] - 1, ind[1] - 1, ind[2] - 1, ind[3] - 1]
                                         ).c + 1;
                                 d.b = RANK;
                                 mtx[ind[0], ind[1], ind[2], ind[3]] = d;

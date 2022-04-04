@@ -20,12 +20,10 @@ namespace System.Web.Http.Services
             ControllerServices cs = new ControllerServices(config.Services);
 
             // Act
-            IActionValueBinder localVal = (IActionValueBinder)cs.GetService(
-                typeof(IActionValueBinder)
-            );
-            IActionValueBinder globalVal = (IActionValueBinder)config.Services.GetService(
-                typeof(IActionValueBinder)
-            );
+            IActionValueBinder localVal = (IActionValueBinder)
+                cs.GetService(typeof(IActionValueBinder));
+            IActionValueBinder globalVal = (IActionValueBinder)
+                config.Services.GetService(typeof(IActionValueBinder));
 
             // Assert
             // Local controller didn't override, should get same value as global case.
@@ -42,12 +40,10 @@ namespace System.Web.Http.Services
             cs.Replace(typeof(IActionValueBinder), newLocalService);
 
             // Act
-            IActionValueBinder localVal = (IActionValueBinder)cs.GetService(
-                typeof(IActionValueBinder)
-            );
-            IActionValueBinder globalVal = (IActionValueBinder)config.Services.GetService(
-                typeof(IActionValueBinder)
-            );
+            IActionValueBinder localVal = (IActionValueBinder)
+                cs.GetService(typeof(IActionValueBinder));
+            IActionValueBinder globalVal = (IActionValueBinder)
+                config.Services.GetService(typeof(IActionValueBinder));
 
             // Assert
             // Local controller didn't override, should get same value as global case.
@@ -74,12 +70,10 @@ namespace System.Web.Http.Services
             cs.Replace(typeof(IActionValueBinder), newLocalService);
 
             // Act
-            IActionValueBinder localVal = (IActionValueBinder)cs.GetService(
-                typeof(IActionValueBinder)
-            );
-            IActionValueBinder globalVal = (IActionValueBinder)config.Services.GetService(
-                typeof(IActionValueBinder)
-            );
+            IActionValueBinder localVal = (IActionValueBinder)
+                cs.GetService(typeof(IActionValueBinder));
+            IActionValueBinder globalVal = (IActionValueBinder)
+                config.Services.GetService(typeof(IActionValueBinder));
 
             // Assert
             // Local controller didn't override, should get same value as global case.
@@ -126,12 +120,10 @@ namespace System.Web.Http.Services
             cs.Clear(typeof(IActionValueBinder));
 
             // Assert
-            IActionValueBinder localVal = (IActionValueBinder)cs.GetService(
-                typeof(IActionValueBinder)
-            );
-            IActionValueBinder globalVal = (IActionValueBinder)config.Services.GetService(
-                typeof(IActionValueBinder)
-            );
+            IActionValueBinder localVal = (IActionValueBinder)
+                cs.GetService(typeof(IActionValueBinder));
+            IActionValueBinder globalVal = (IActionValueBinder)
+                config.Services.GetService(typeof(IActionValueBinder));
 
             Assert.Same(globalVal, localVal);
         }
@@ -149,9 +141,8 @@ namespace System.Web.Http.Services
             cs.Replace(typeof(IActionValueBinder), null);
 
             // Assert
-            IActionValueBinder localVal = (IActionValueBinder)cs.GetService(
-                typeof(IActionValueBinder)
-            );
+            IActionValueBinder localVal = (IActionValueBinder)
+                cs.GetService(typeof(IActionValueBinder));
 
             Assert.Null(localVal);
         }

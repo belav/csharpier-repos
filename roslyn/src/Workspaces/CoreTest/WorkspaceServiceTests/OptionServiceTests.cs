@@ -284,10 +284,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
 
                 var currentOptionValue = optionSet.GetOption(option, LanguageNames.CSharp);
                 var newOptionValue = !currentOptionValue;
-                var newOptionSet = (SerializableOptionSet)optionSet.WithChangedOption(
-                    optionKey,
-                    newOptionValue
-                );
+                var newOptionSet = (SerializableOptionSet)
+                    optionSet.WithChangedOption(optionKey, newOptionValue);
 
                 optionService.SetOptions(newOptionSet);
                 var isOptionSet = (bool?)optionService.GetOptions().GetOption(optionKey);
@@ -303,11 +301,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
                 );
 
                 // Serialize/deserialize the option set to test round tripping.
-                serializableOptionSet =
-                    (SerializableOptionSet)serializableOptionSet.WithChangedOption(
-                        optionKey,
-                        newOptionValue
-                    );
+                serializableOptionSet = (SerializableOptionSet)
+                    serializableOptionSet.WithChangedOption(optionKey, newOptionValue);
                 using var memoryStream = new MemoryStream();
                 using var writer = new ObjectWriter(memoryStream, leaveOpen: true);
                 serializableOptionSet.Serialize(writer, CancellationToken.None);

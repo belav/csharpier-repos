@@ -284,9 +284,8 @@ namespace System.DirectoryServices.AccountManagement
                 // Only AuthenticablePrincipals can have PasswordInfo
                 Debug.Assert(p is AuthenticablePrincipal);
 
-                bool expireImmediately = (bool)p.GetValueForProperty(
-                    PropertyNames.PwdInfoExpireImmediately
-                );
+                bool expireImmediately = (bool)
+                    p.GetValueForProperty(PropertyNames.PwdInfoExpireImmediately);
 
                 if (expireImmediately)
                 {

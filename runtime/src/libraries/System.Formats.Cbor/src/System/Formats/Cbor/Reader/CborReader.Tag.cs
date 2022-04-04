@@ -296,11 +296,8 @@ namespace System.Formats.Cbor
         private CborTag PeekTagCore(out int bytesRead)
         {
             CborInitialByte header = PeekInitialByte(expectedType: CborMajorType.Tag);
-            CborTag result = (CborTag)DecodeUnsignedInteger(
-                header,
-                GetRemainingBytes(),
-                out bytesRead
-            );
+            CborTag result = (CborTag)
+                DecodeUnsignedInteger(header, GetRemainingBytes(), out bytesRead);
 
             if (
                 _isConformanceModeCheckEnabled

@@ -161,8 +161,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         case TypeKind.TypeParameter:
 
                             {
-                                var constraintTypeParameter =
-                                    (TypeParameterSymbol)constraintType.Type;
+                                var constraintTypeParameter = (TypeParameterSymbol)
+                                    constraintType.Type;
                                 ConsList<TypeParameterSymbol> constraintsInProgress;
 
                                 if (
@@ -281,8 +281,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                     constraintType.Type.GetNullableUnderlyingType();
                                 if (underlyingType.TypeKind == TypeKind.TypeParameter)
                                 {
-                                    var underlyingTypeParameter =
-                                        (TypeParameterSymbol)underlyingType;
+                                    var underlyingTypeParameter = (TypeParameterSymbol)
+                                        underlyingType;
                                     if (
                                         underlyingTypeParameter.ContainingSymbol
                                         == typeParameter.ContainingSymbol

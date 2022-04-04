@@ -884,7 +884,8 @@ namespace Microsoft.CodeAnalysis
                 (byte)SpecialType.System_Int32,
                 // System_Runtime_InteropServices_UnmanagedFunctionPointerAttribute__ctor
                 (byte)MemberFlags.Constructor, // Flags
-                (byte)WellKnownType.System_Runtime_InteropServices_UnmanagedFunctionPointerAttribute, // DeclaringTypeId
+                (byte)
+                    WellKnownType.System_Runtime_InteropServices_UnmanagedFunctionPointerAttribute, // DeclaringTypeId
                 0, // Arity
                 1, // Method Signature
                 (byte)SignatureTypeCode.TypeHandle,
@@ -893,50 +894,59 @@ namespace Microsoft.CodeAnalysis
                 (byte)WellKnownType.System_Runtime_InteropServices_CallingConvention,
                 // System_Runtime_InteropServices_WindowsRuntime_EventRegistrationTokenTable_T__AddEventHandler
                 (byte)MemberFlags.Method, // Flags
-                (byte)WellKnownType.System_Runtime_InteropServices_WindowsRuntime_EventRegistrationTokenTable_T, // DeclaringTypeId
+                (byte)
+                    WellKnownType.System_Runtime_InteropServices_WindowsRuntime_EventRegistrationTokenTable_T, // DeclaringTypeId
                 0, // Arity
                 1, // Method Signature
                 (byte)SignatureTypeCode.TypeHandle,
-                (byte)WellKnownType.System_Runtime_InteropServices_WindowsRuntime_EventRegistrationToken,
+                (byte)
+                    WellKnownType.System_Runtime_InteropServices_WindowsRuntime_EventRegistrationToken,
                 (byte)SignatureTypeCode.GenericTypeParameter,
                 0,
                 // System_Runtime_InteropServices_WindowsRuntime_EventRegistrationTokenTable_T__GetOrCreateEventRegistrationTokenTable
                 (byte)(MemberFlags.Method | MemberFlags.Static), // Flags
-                (byte)WellKnownType.System_Runtime_InteropServices_WindowsRuntime_EventRegistrationTokenTable_T, // DeclaringTypeId
+                (byte)
+                    WellKnownType.System_Runtime_InteropServices_WindowsRuntime_EventRegistrationTokenTable_T, // DeclaringTypeId
                 0, // Arity
                 1, // Method Signature
                 (byte)SignatureTypeCode.GenericTypeInstance, // Return Type
                 (byte)SignatureTypeCode.TypeHandle,
-                (byte)WellKnownType.System_Runtime_InteropServices_WindowsRuntime_EventRegistrationTokenTable_T,
+                (byte)
+                    WellKnownType.System_Runtime_InteropServices_WindowsRuntime_EventRegistrationTokenTable_T,
                 1,
                 (byte)SignatureTypeCode.GenericTypeParameter,
                 0,
                 (byte)SignatureTypeCode.ByReference,
                 (byte)SignatureTypeCode.GenericTypeInstance,
                 (byte)SignatureTypeCode.TypeHandle,
-                (byte)WellKnownType.System_Runtime_InteropServices_WindowsRuntime_EventRegistrationTokenTable_T,
+                (byte)
+                    WellKnownType.System_Runtime_InteropServices_WindowsRuntime_EventRegistrationTokenTable_T,
                 1,
                 (byte)SignatureTypeCode.GenericTypeParameter,
                 0,
                 // System_Runtime_InteropServices_WindowsRuntime_EventRegistrationTokenTable_T__InvocationList
                 (byte)MemberFlags.Property, // Flags
-                (byte)WellKnownType.System_Runtime_InteropServices_WindowsRuntime_EventRegistrationTokenTable_T, // DeclaringTypeId
+                (byte)
+                    WellKnownType.System_Runtime_InteropServices_WindowsRuntime_EventRegistrationTokenTable_T, // DeclaringTypeId
                 0, // Arity
                 0, // Method Signature
                 (byte)SignatureTypeCode.GenericTypeParameter,
                 0,
                 // System_Runtime_InteropServices_WindowsRuntime_EventRegistrationTokenTable_T__RemoveEventHandler
                 (byte)MemberFlags.Method, // Flags
-                (byte)WellKnownType.System_Runtime_InteropServices_WindowsRuntime_EventRegistrationTokenTable_T, // DeclaringTypeId
+                (byte)
+                    WellKnownType.System_Runtime_InteropServices_WindowsRuntime_EventRegistrationTokenTable_T, // DeclaringTypeId
                 0, // Arity
                 1, // Method Signature
                 (byte)SignatureTypeCode.TypeHandle,
                 (byte)SpecialType.System_Void, // Return Type
                 (byte)SignatureTypeCode.TypeHandle,
-                (byte)WellKnownType.System_Runtime_InteropServices_WindowsRuntime_EventRegistrationToken,
+                (byte)
+                    WellKnownType.System_Runtime_InteropServices_WindowsRuntime_EventRegistrationToken,
                 // System_Runtime_InteropServices_WindowsRuntime_WindowsRuntimeMarshal__AddEventHandler_T
                 (byte)(MemberFlags.Method | MemberFlags.Static), // Flags
-                (byte)WellKnownType.System_Runtime_InteropServices_WindowsRuntime_WindowsRuntimeMarshal, // DeclaringTypeId
+                (byte)
+                    WellKnownType.System_Runtime_InteropServices_WindowsRuntime_WindowsRuntimeMarshal, // DeclaringTypeId
                 1, // Arity
                 3, // Method Signature
                 (byte)SignatureTypeCode.TypeHandle,
@@ -948,18 +958,21 @@ namespace Microsoft.CodeAnalysis
                 (byte)SignatureTypeCode.GenericMethodParameter,
                 0,
                 (byte)SignatureTypeCode.TypeHandle,
-                (byte)WellKnownType.System_Runtime_InteropServices_WindowsRuntime_EventRegistrationToken,
+                (byte)
+                    WellKnownType.System_Runtime_InteropServices_WindowsRuntime_EventRegistrationToken,
                 (byte)SignatureTypeCode.GenericTypeInstance,
                 (byte)SignatureTypeCode.TypeHandle,
                 (byte)WellKnownType.System_Action_T,
                 1,
                 (byte)SignatureTypeCode.TypeHandle,
-                (byte)WellKnownType.System_Runtime_InteropServices_WindowsRuntime_EventRegistrationToken,
+                (byte)
+                    WellKnownType.System_Runtime_InteropServices_WindowsRuntime_EventRegistrationToken,
                 (byte)SignatureTypeCode.GenericMethodParameter,
                 0,
                 // System_Runtime_InteropServices_WindowsRuntime_WindowsRuntimeMarshal__RemoveAllEventHandlers
                 (byte)(MemberFlags.Method | MemberFlags.Static), // Flags
-                (byte)WellKnownType.System_Runtime_InteropServices_WindowsRuntime_WindowsRuntimeMarshal, // DeclaringTypeId
+                (byte)
+                    WellKnownType.System_Runtime_InteropServices_WindowsRuntime_WindowsRuntimeMarshal, // DeclaringTypeId
                 0, // Arity
                 1, // Method Signature
                 (byte)SignatureTypeCode.TypeHandle,
@@ -969,10 +982,12 @@ namespace Microsoft.CodeAnalysis
                 (byte)WellKnownType.System_Action_T,
                 1,
                 (byte)SignatureTypeCode.TypeHandle,
-                (byte)WellKnownType.System_Runtime_InteropServices_WindowsRuntime_EventRegistrationToken,
+                (byte)
+                    WellKnownType.System_Runtime_InteropServices_WindowsRuntime_EventRegistrationToken,
                 // System_Runtime_InteropServices_WindowsRuntime_WindowsRuntimeMarshal__RemoveEventHandler_T
                 (byte)(MemberFlags.Method | MemberFlags.Static), // Flags
-                (byte)WellKnownType.System_Runtime_InteropServices_WindowsRuntime_WindowsRuntimeMarshal, // DeclaringTypeId
+                (byte)
+                    WellKnownType.System_Runtime_InteropServices_WindowsRuntime_WindowsRuntimeMarshal, // DeclaringTypeId
                 1, // Arity
                 2, // Method Signature
                 (byte)SignatureTypeCode.TypeHandle,
@@ -982,7 +997,8 @@ namespace Microsoft.CodeAnalysis
                 (byte)WellKnownType.System_Action_T,
                 1,
                 (byte)SignatureTypeCode.TypeHandle,
-                (byte)WellKnownType.System_Runtime_InteropServices_WindowsRuntime_EventRegistrationToken,
+                (byte)
+                    WellKnownType.System_Runtime_InteropServices_WindowsRuntime_EventRegistrationToken,
                 (byte)SignatureTypeCode.GenericMethodParameter,
                 0,
                 // System_Runtime_CompilerServices_DateTimeConstantAttribute__ctor
@@ -1044,7 +1060,8 @@ namespace Microsoft.CodeAnalysis
                 (byte)SpecialType.System_Void, // Return Type
                 // System_Runtime_CompilerServices_AccessedThroughPropertyAttribute__ctor
                 (byte)MemberFlags.Constructor, // Flags
-                (byte)WellKnownType.System_Runtime_CompilerServices_AccessedThroughPropertyAttribute, // DeclaringTypeId
+                (byte)
+                    WellKnownType.System_Runtime_CompilerServices_AccessedThroughPropertyAttribute, // DeclaringTypeId
                 0, // Arity
                 1, // Method Signature
                 (byte)SignatureTypeCode.TypeHandle,
@@ -2557,7 +2574,8 @@ namespace Microsoft.CodeAnalysis
                 (byte)SpecialType.System_Void, // Return Type
                 // Microsoft_VisualBasic_CompilerServices_ObjectFlowControl_ForLoopControl__ForLoopInitObj
                 (byte)(MemberFlags.Method | MemberFlags.Static), // Flags
-                (byte)WellKnownType.Microsoft_VisualBasic_CompilerServices_ObjectFlowControl_ForLoopControl, // DeclaringTypeId
+                (byte)
+                    WellKnownType.Microsoft_VisualBasic_CompilerServices_ObjectFlowControl_ForLoopControl, // DeclaringTypeId
                 0, // Arity
                 6, // Method Signature
                 (byte)SignatureTypeCode.TypeHandle,
@@ -2578,7 +2596,8 @@ namespace Microsoft.CodeAnalysis
                 (byte)SpecialType.System_Object,
                 // Microsoft_VisualBasic_CompilerServices_ObjectFlowControl_ForLoopControl__ForNextCheckObj
                 (byte)(MemberFlags.Method | MemberFlags.Static), // Flags
-                (byte)WellKnownType.Microsoft_VisualBasic_CompilerServices_ObjectFlowControl_ForLoopControl, // DeclaringTypeId
+                (byte)
+                    WellKnownType.Microsoft_VisualBasic_CompilerServices_ObjectFlowControl_ForLoopControl, // DeclaringTypeId
                 0, // Arity
                 3, // Method Signature
                 (byte)SignatureTypeCode.TypeHandle,

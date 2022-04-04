@@ -914,18 +914,20 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 int arity
             )
             {
-                return (INamedTypeSymbol)candidateMembers.FirstOrDefault(
-                    s => s.Kind == SymbolKind.NamedType && ((INamedTypeSymbol)s).Arity == arity
-                );
+                return (INamedTypeSymbol)
+                    candidateMembers.FirstOrDefault(
+                        s => s.Kind == SymbolKind.NamedType && ((INamedTypeSymbol)s).Arity == arity
+                    );
             }
 
             private static INamespaceOrTypeSymbol GetFirstMatchingNamespaceOrType(
                 ImmutableArray<ISymbol> candidateMembers
             )
             {
-                return (INamespaceOrTypeSymbol)candidateMembers.FirstOrDefault(
-                    s => s.Kind is SymbolKind.Namespace or SymbolKind.NamedType
-                );
+                return (INamespaceOrTypeSymbol)
+                    candidateMembers.FirstOrDefault(
+                        s => s.Kind is SymbolKind.Namespace or SymbolKind.NamedType
+                    );
             }
 
             private static ITypeParameterSymbol GetNthTypeParameter(

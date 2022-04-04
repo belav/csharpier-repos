@@ -897,8 +897,8 @@ namespace System.Configuration
             out ConfigurationPropertyCollection result
         )
         {
-            ConfigurationPropertyCollection properties =
-                (ConfigurationPropertyCollection)s_propertyBags[type];
+            ConfigurationPropertyCollection properties = (ConfigurationPropertyCollection)
+                s_propertyBags[type];
             bool firstTimeInit = false;
             if (properties == null)
             {
@@ -1998,9 +1998,8 @@ namespace System.Configuration
                                     }
 
                                     nodeFound.Add(propertyName, propertyName);
-                                    ConfigurationElement childElement = (ConfigurationElement)this[
-                                        prop
-                                    ];
+                                    ConfigurationElement childElement = (ConfigurationElement)
+                                        this[prop];
                                     childElement.DeserializeElement(reader, serializeCollectionKey);
 
                                     // Validate the new element with the per-property Validator

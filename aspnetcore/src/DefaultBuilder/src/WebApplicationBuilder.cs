@@ -104,9 +104,8 @@ public sealed class WebApplicationBuilder
         _hostConfigurationValues = new(hostConfiguration.AsEnumerable());
 
         // Grab the WebHostBuilderContext from the property bag to use in the ConfigureWebHostBuilder
-        var webHostContext = (WebHostBuilderContext)hostContext.Properties[
-            typeof(WebHostBuilderContext)
-        ];
+        var webHostContext = (WebHostBuilderContext)
+            hostContext.Properties[typeof(WebHostBuilderContext)];
 
         // Grab the IWebHostEnvironment from the webHostContext. This also matches the instance in the IServiceCollection.
         Environment = webHostContext.HostingEnvironment;

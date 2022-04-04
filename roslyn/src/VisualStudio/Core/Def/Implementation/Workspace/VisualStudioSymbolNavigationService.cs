@@ -180,9 +180,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
             var documentCookie = vsRunningDocumentTable4.GetDocumentCookie(result.FilePath);
 
-            var vsTextBuffer = (IVsTextBuffer)vsRunningDocumentTable4.GetDocumentData(
-                documentCookie
-            );
+            var vsTextBuffer = (IVsTextBuffer)
+                vsRunningDocumentTable4.GetDocumentData(documentCookie);
 
             // Set the buffer to read only, just in case the file isn't
             ErrorHandler.ThrowOnFailure(vsTextBuffer.GetStateFlags(out var flags));

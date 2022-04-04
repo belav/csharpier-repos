@@ -61,11 +61,8 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
 
         public static async Task<InProcRemoteHostClient> GetTestClientAsync(Workspace workspace)
         {
-            var client = (InProcRemoteHostClient?)await TryGetClientAsync(
-                    workspace,
-                    CancellationToken.None
-                )
-                .ConfigureAwait(false);
+            var client = (InProcRemoteHostClient?)
+                await TryGetClientAsync(workspace, CancellationToken.None).ConfigureAwait(false);
             Contract.ThrowIfNull(client);
             return client;
         }

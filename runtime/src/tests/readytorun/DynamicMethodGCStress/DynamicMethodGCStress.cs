@@ -20,9 +20,8 @@ internal static class Program
                 for (uint i = 0; ; ++i)
                 {
                     DynamicMethod dynamicMethod = CreateDynamicMethod($"DynMethod{i}");
-                    var dynamicMethodDelegate = (Action)dynamicMethod.CreateDelegate(
-                        typeof(Action)
-                    );
+                    var dynamicMethodDelegate = (Action)
+                        dynamicMethod.CreateDelegate(typeof(Action));
                     dynamicMethodDelegate();
                 }
             }

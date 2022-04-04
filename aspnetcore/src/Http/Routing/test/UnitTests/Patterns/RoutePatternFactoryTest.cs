@@ -809,8 +809,8 @@ public class RoutePatternFactoryTest
         var z = new InlineConstraint("z");
         var constraints = new[] { x, y, z };
         var templatePart = TemplatePart.CreateParameter("t", false, false, null, constraints);
-        var routePatternParameterPart =
-            (RoutePatternParameterPart)templatePart.ToRoutePatternPart();
+        var routePatternParameterPart = (RoutePatternParameterPart)
+            templatePart.ToRoutePatternPart();
         var policies = routePatternParameterPart.ParameterPolicies.ToArray();
 
         // Act
@@ -842,8 +842,8 @@ public class RoutePatternFactoryTest
         var z = new InlineConstraint("z");
         var constraints = new[] { x, y, z };
         var templatePart = TemplatePart.CreateParameter("t", false, false, null, constraints);
-        var routePatternParameterPart =
-            (RoutePatternParameterPart)templatePart.ToRoutePatternPart();
+        var routePatternParameterPart = (RoutePatternParameterPart)
+            templatePart.ToRoutePatternPart();
         var policies = routePatternParameterPart.ParameterPolicies.ToList();
 
         // Act

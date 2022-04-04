@@ -773,9 +773,10 @@ namespace Microsoft.Extensions.DependencyInjection
             bool validateSingleType
         )
         {
-            var registry = (HttpClientMappingRegistry)builder.Services
-                .Single(sd => sd.ServiceType == typeof(HttpClientMappingRegistry))
-                .ImplementationInstance;
+            var registry = (HttpClientMappingRegistry)
+                builder.Services
+                    .Single(sd => sd.ServiceType == typeof(HttpClientMappingRegistry))
+                    .ImplementationInstance;
             Debug.Assert(registry != null);
 
             // Check for same name registered to two types. This won't work because we rely on named options for the configuration.

@@ -64,9 +64,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     cancellationToken
                 );
 
-                var shell = (IVsShell7?)await _serviceProvider
-                    .GetServiceAsync(typeof(SVsShell))
-                    .ConfigureAwait(true);
+                var shell = (IVsShell7?)
+                    await _serviceProvider.GetServiceAsync(typeof(SVsShell)).ConfigureAwait(true);
                 Assumes.Present(shell);
                 await shell.LoadPackageAsync(typeof(RoslynPackage).GUID);
 

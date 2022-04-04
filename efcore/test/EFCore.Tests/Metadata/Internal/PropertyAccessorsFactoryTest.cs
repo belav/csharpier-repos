@@ -46,10 +46,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Assert.Equal(
                 "ValueA",
                 (
-                    (Func<
-                        InternalEntityEntry,
-                        string
-                    >)propertyAccessors.PreStoreGeneratedCurrentValueGetter
+                    (Func<InternalEntityEntry, string>)
+                        propertyAccessors.PreStoreGeneratedCurrentValueGetter
                 )(entry)
             );
             Assert.Equal(
@@ -95,10 +93,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Assert.Equal(
                 "ValueA",
                 (
-                    (Func<
-                        InternalEntityEntry,
-                        string
-                    >)propertyAccessors.PreStoreGeneratedCurrentValueGetter
+                    (Func<InternalEntityEntry, string>)
+                        propertyAccessors.PreStoreGeneratedCurrentValueGetter
                 )(entry)
             );
             Assert.Equal(

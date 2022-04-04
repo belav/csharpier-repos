@@ -122,18 +122,16 @@ namespace System.Data.Odbc
         {
             add
             {
-                OdbcRowUpdatingEventHandler? handler = (OdbcRowUpdatingEventHandler?)Events[
-                    s_eventRowUpdating
-                ];
+                OdbcRowUpdatingEventHandler? handler = (OdbcRowUpdatingEventHandler?)
+                    Events[s_eventRowUpdating];
 
                 // MDAC 58177, 64513
                 // prevent someone from registering two different command builders on the adapter by
                 // silently removing the old one
                 if ((null != handler) && (value!.Target is OdbcCommandBuilder))
                 {
-                    OdbcRowUpdatingEventHandler? d = (OdbcRowUpdatingEventHandler?)ADP.FindBuilder(
-                        handler
-                    );
+                    OdbcRowUpdatingEventHandler? d = (OdbcRowUpdatingEventHandler?)
+                        ADP.FindBuilder(handler);
                     if (null != d)
                     {
                         Events.RemoveHandler(s_eventRowUpdating, d);
@@ -171,9 +169,8 @@ namespace System.Data.Odbc
 
         protected override void OnRowUpdated(RowUpdatedEventArgs value)
         {
-            OdbcRowUpdatedEventHandler? handler = (OdbcRowUpdatedEventHandler?)Events[
-                s_eventRowUpdated
-            ];
+            OdbcRowUpdatedEventHandler? handler = (OdbcRowUpdatedEventHandler?)
+                Events[s_eventRowUpdated];
             if ((null != handler) && (value is OdbcRowUpdatedEventArgs))
             {
                 handler(this, (OdbcRowUpdatedEventArgs)value);
@@ -183,9 +180,8 @@ namespace System.Data.Odbc
 
         protected override void OnRowUpdating(RowUpdatingEventArgs value)
         {
-            OdbcRowUpdatingEventHandler? handler = (OdbcRowUpdatingEventHandler?)Events[
-                s_eventRowUpdating
-            ];
+            OdbcRowUpdatingEventHandler? handler = (OdbcRowUpdatingEventHandler?)
+                Events[s_eventRowUpdating];
             if ((null != handler) && (value is OdbcRowUpdatingEventArgs))
             {
                 handler(this, (OdbcRowUpdatingEventArgs)value);

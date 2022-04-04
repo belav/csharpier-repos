@@ -74,27 +74,28 @@ namespace JIT.HardwareIntrinsics.General
             ValidateResult((Vector<Int64>)(Result), value);
 
             value =
-                (Vector128<Int64>)typeof(Vector128)
-                    .GetMethods()
-                    .Where(
-                        (methodInfo) =>
-                        {
-                            if (methodInfo.Name == nameof(Vector128.AsVector128))
+                (Vector128<Int64>)
+                    typeof(Vector128)
+                        .GetMethods()
+                        .Where(
+                            (methodInfo) =>
                             {
-                                var parameters = methodInfo.GetParameters();
-                                return (parameters.Length == 1)
-                                    && (parameters[0].ParameterType.IsGenericType)
-                                    && (
-                                        parameters[0].ParameterType.GetGenericTypeDefinition()
-                                        == typeof(Vector<>)
-                                    );
+                                if (methodInfo.Name == nameof(Vector128.AsVector128))
+                                {
+                                    var parameters = methodInfo.GetParameters();
+                                    return (parameters.Length == 1)
+                                        && (parameters[0].ParameterType.IsGenericType)
+                                        && (
+                                            parameters[0].ParameterType.GetGenericTypeDefinition()
+                                            == typeof(Vector<>)
+                                        );
+                                }
+                                return false;
                             }
-                            return false;
-                        }
-                    )
-                    .Single()
-                    .MakeGenericMethod(typeof(Int64))
-                    .Invoke(null, new object[] { Result });
+                        )
+                        .Single()
+                        .MakeGenericMethod(typeof(Int64))
+                        .Invoke(null, new object[] { Result });
             ValidateResult(value, (Vector<Int64>)(Result));
         }
 

@@ -2383,9 +2383,10 @@ public class Test2
             var tree = compilation.SyntaxTrees[0];
             var semanticModel = compilation.GetSemanticModel(tree);
 
-            SelectClauseSyntax selectClause = (SelectClauseSyntax)tree.GetCompilationUnitRoot()
-                .FindToken(sourceCode.IndexOf("select", StringComparison.Ordinal))
-                .Parent;
+            SelectClauseSyntax selectClause = (SelectClauseSyntax)
+                tree.GetCompilationUnitRoot()
+                    .FindToken(sourceCode.IndexOf("select", StringComparison.Ordinal))
+                    .Parent;
             var info = semanticModel.GetSemanticInfoSummary(selectClause.Expression);
             Assert.Equal(SpecialType.System_Int32, info.Type.SpecialType);
             Assert.Equal(SymbolKind.RangeVariable, info.Symbol.Kind);
@@ -2416,9 +2417,10 @@ public class Test2
             var tree = compilation.SyntaxTrees[0];
             var semanticModel = compilation.GetSemanticModel(tree);
 
-            SelectClauseSyntax selectClause = (SelectClauseSyntax)tree.GetCompilationUnitRoot()
-                .FindToken(sourceCode.IndexOf("select w", StringComparison.Ordinal))
-                .Parent;
+            SelectClauseSyntax selectClause = (SelectClauseSyntax)
+                tree.GetCompilationUnitRoot()
+                    .FindToken(sourceCode.IndexOf("select w", StringComparison.Ordinal))
+                    .Parent;
             var info = semanticModel.GetSemanticInfoSummary(selectClause.Expression);
             Assert.Equal(SpecialType.System_Int32, info.Type.SpecialType);
             Assert.Equal(SymbolKind.RangeVariable, info.Symbol.Kind);
@@ -2446,17 +2448,19 @@ public class Test2
             compilation.VerifyDiagnostics();
             var semanticModel = compilation.GetSemanticModel(tree);
 
-            var e = (IdentifierNameSyntax)tree.GetCompilationUnitRoot()
-                .FindToken(sourceCode.IndexOf("x+1", StringComparison.Ordinal))
-                .Parent;
+            var e = (IdentifierNameSyntax)
+                tree.GetCompilationUnitRoot()
+                    .FindToken(sourceCode.IndexOf("x+1", StringComparison.Ordinal))
+                    .Parent;
             var info = semanticModel.GetSemanticInfoSummary(e);
             Assert.Equal(SpecialType.System_Int32, info.Type.SpecialType);
             Assert.Equal(SymbolKind.RangeVariable, info.Symbol.Kind);
             Assert.Equal("x", info.Symbol.Name);
 
-            e = (IdentifierNameSyntax)tree.GetCompilationUnitRoot()
-                .FindToken(sourceCode.IndexOf("w+1", StringComparison.Ordinal))
-                .Parent;
+            e = (IdentifierNameSyntax)
+                tree.GetCompilationUnitRoot()
+                    .FindToken(sourceCode.IndexOf("w+1", StringComparison.Ordinal))
+                    .Parent;
             info = semanticModel.GetSemanticInfoSummary(e);
             Assert.Equal(SpecialType.System_Int32, info.Type.SpecialType);
             Assert.Equal(SymbolKind.RangeVariable, info.Symbol.Kind);
@@ -3819,9 +3823,8 @@ class Query
             from int y in c2
             select x + y;
 ";
-            var queryStatement = (LocalDeclarationStatementSyntax)SyntaxFactory.ParseStatement(
-                speculatedSource
-            );
+            var queryStatement = (LocalDeclarationStatementSyntax)
+                SyntaxFactory.ParseStatement(speculatedSource);
 
             var compilation = CreateCompilation(csSource);
             compilation.VerifyDiagnostics();
@@ -3841,9 +3844,8 @@ class Query
                 out speculativeModel
             );
             Assert.True(success);
-            var q = (QueryExpressionSyntax)queryStatement.Declaration.Variables[0]
-                .Initializer
-                .Value;
+            var q = (QueryExpressionSyntax)
+                queryStatement.Declaration.Variables[0].Initializer.Value;
 
             var info0 = speculativeModel.GetQueryClauseInfo(q.FromClause);
             Assert.Equal("Cast", info0.CastInfo.Symbol.Name);
@@ -3879,9 +3881,8 @@ class Query
             select x;
 ";
 
-            var queryStatement = (LocalDeclarationStatementSyntax)SyntaxFactory.ParseStatement(
-                speculatedSource
-            );
+            var queryStatement = (LocalDeclarationStatementSyntax)
+                SyntaxFactory.ParseStatement(speculatedSource);
 
             var compilation = CreateCompilation(csSource);
             compilation.VerifyDiagnostics();
@@ -3901,9 +3902,8 @@ class Query
                 out speculativeModel
             );
             Assert.True(success);
-            var q = (QueryExpressionSyntax)queryStatement.Declaration.Variables[0]
-                .Initializer
-                .Value;
+            var q = (QueryExpressionSyntax)
+                queryStatement.Declaration.Variables[0].Initializer.Value;
 
             var x = speculativeModel.GetDeclaredSymbol(q.FromClause);
             Assert.Equal(SymbolKind.RangeVariable, x.Kind);
@@ -3960,13 +3960,10 @@ public class Test
                 out speculativeModel
             );
 
-            var queryExpression = (QueryExpressionSyntax)(
-                (LocalDeclarationStatementSyntax)queryStatement
-            )
-                .Declaration
-                .Variables[0]
-                .Initializer
-                .Value;
+            var queryExpression = (QueryExpressionSyntax)
+                ((LocalDeclarationStatementSyntax)queryStatement).Declaration.Variables[0]
+                    .Initializer
+                    .Value;
             JoinIntoClauseSyntax joinInto = (
                 (JoinClauseSyntax)queryExpression.Body.Clauses[0]
             ).Into;
@@ -4018,13 +4015,10 @@ public class Test2
             );
             Assert.True(success);
 
-            var queryExpression = (QueryExpressionSyntax)(
-                (LocalDeclarationStatementSyntax)queryStatement
-            )
-                .Declaration
-                .Variables[0]
-                .Initializer
-                .Value;
+            var queryExpression = (QueryExpressionSyntax)
+                ((LocalDeclarationStatementSyntax)queryStatement).Declaration.Variables[0]
+                    .Initializer
+                    .Value;
             var queryContinuation = queryExpression.Body.Continuation;
             var symbol = speculativeModel.GetDeclaredSymbol(queryContinuation);
 

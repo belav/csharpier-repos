@@ -115,10 +115,11 @@ public sealed class LazyAssemblyLoader
         }
 
         var jsRuntime = (IJSUnmarshalledRuntime)_jsRuntime;
-        var count = (int)await jsRuntime.InvokeUnmarshalled<string[], Task<object>>(
-            GetLazyAssemblies,
-            newAssembliesToLoad.ToArray()
-        );
+        var count = (int)
+            await jsRuntime.InvokeUnmarshalled<string[], Task<object>>(
+                GetLazyAssemblies,
+                newAssembliesToLoad.ToArray()
+            );
 
         if (count == 0)
         {

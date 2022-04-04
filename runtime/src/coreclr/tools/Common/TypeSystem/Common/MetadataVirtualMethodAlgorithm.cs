@@ -952,8 +952,8 @@ namespace Internal.TypeSystem
                     consideredInterfaces,
                     currentType.RuntimeInterfaces.Length
                 );
-                consideredInterfaces[consideredInterfaces.Length - 1] =
-                    (DefType)currentType.InstantiateAsOpen();
+                consideredInterfaces[consideredInterfaces.Length - 1] = (DefType)
+                    currentType.InstantiateAsOpen();
             }
 
             foreach (MetadataType runtimeInterface in consideredInterfaces)

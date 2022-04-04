@@ -29,11 +29,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     BindingDiagnosticBag diagnostics = BindingDiagnosticBag.GetInstance();
                     if (
-                        (object)Interlocked.CompareExchange(
-                            ref _lazyEnumUnderlyingType,
-                            this.GetEnumUnderlyingType(diagnostics),
-                            ErrorTypeSymbol.UnknownResultType
-                        ) == (object)ErrorTypeSymbol.UnknownResultType
+                        (object)
+                            Interlocked.CompareExchange(
+                                ref _lazyEnumUnderlyingType,
+                                this.GetEnumUnderlyingType(diagnostics),
+                                ErrorTypeSymbol.UnknownResultType
+                            ) == (object)ErrorTypeSymbol.UnknownResultType
                     )
                     {
                         AddDeclarationDiagnostics(diagnostics);

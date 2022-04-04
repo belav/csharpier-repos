@@ -80,9 +80,8 @@ namespace System.Xml.Serialization
                 }
                 else
                 {
-                    XmlQualifiedName[] qnames = (XmlQualifiedName[])value.ToArray(
-                        typeof(XmlQualifiedName)
-                    );
+                    XmlQualifiedName[] qnames = (XmlQualifiedName[])
+                        value.ToArray(typeof(XmlQualifiedName));
                     _namespaces = new XmlSerializerNamespaces(qnames);
                 }
             }

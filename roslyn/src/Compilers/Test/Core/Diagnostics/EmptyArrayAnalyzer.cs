@@ -70,8 +70,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             context.RegisterOperationAction(
                 (operationContext) =>
                 {
-                    IArrayCreationOperation arrayCreation =
-                        (IArrayCreationOperation)operationContext.Operation;
+                    IArrayCreationOperation arrayCreation = (IArrayCreationOperation)
+                        operationContext.Operation;
 
                     // ToDo: Need to suppress analysis of array creation expressions within attribute applications.
 

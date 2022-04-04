@@ -947,11 +947,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 SyntaxNode exprSyntax = collectionExpr.Syntax;
 
-                MethodSymbol nullableValueGetter = (MethodSymbol)GetSpecialTypeMember(
-                    SpecialMember.System_Nullable_T_get_Value,
-                    diagnostics,
-                    exprSyntax
-                );
+                MethodSymbol nullableValueGetter = (MethodSymbol)
+                    GetSpecialTypeMember(
+                        SpecialMember.System_Nullable_T_get_Value,
+                        diagnostics,
+                        exprSyntax
+                    );
                 if ((object)nullableValueGetter != null)
                 {
                     nullableValueGetter = nullableValueGetter.AsMember(
@@ -1338,13 +1339,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     Debug.Assert(IsIAsyncEnumerable(collectionType.OriginalDefinition));
 
-                    getEnumeratorMethod = (MethodSymbol)GetWellKnownTypeMember(
-                        Compilation,
-                        WellKnownMember.System_Collections_Generic_IAsyncEnumerable_T__GetAsyncEnumerator,
-                        diagnostics,
-                        errorLocationSyntax.Location,
-                        isOptional: false
-                    );
+                    getEnumeratorMethod = (MethodSymbol)
+                        GetWellKnownTypeMember(
+                            Compilation,
+                            WellKnownMember.System_Collections_Generic_IAsyncEnumerable_T__GetAsyncEnumerator,
+                            diagnostics,
+                            errorLocationSyntax.Location,
+                            isOptional: false
+                        );
 
                     // Well-known members are matched by signature: we shouldn't find it if it doesn't have exactly 1 parameter.
                     Debug.Assert(getEnumeratorMethod is null or { ParameterCount: 1 });
@@ -1367,11 +1369,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                         collectionType.OriginalDefinition.SpecialType
                             == SpecialType.System_Collections_Generic_IEnumerable_T
                     );
-                    getEnumeratorMethod = (MethodSymbol)GetSpecialTypeMember(
-                        SpecialMember.System_Collections_Generic_IEnumerable_T__GetEnumerator,
-                        diagnostics,
-                        errorLocationSyntax
-                    );
+                    getEnumeratorMethod = (MethodSymbol)
+                        GetSpecialTypeMember(
+                            SpecialMember.System_Collections_Generic_IEnumerable_T__GetEnumerator,
+                            diagnostics,
+                            errorLocationSyntax
+                        );
                 }
 
                 MethodSymbol moveNextMethod = null;
@@ -1406,12 +1409,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                             )
                         );
 
-                        MethodSymbol moveNextAsync = (MethodSymbol)GetWellKnownTypeMember(
-                            WellKnownMember.System_Collections_Generic_IAsyncEnumerator_T__MoveNextAsync,
-                            diagnostics,
-                            errorLocationSyntax.Location,
-                            isOptional: false
-                        );
+                        MethodSymbol moveNextAsync = (MethodSymbol)
+                            GetWellKnownTypeMember(
+                                WellKnownMember.System_Collections_Generic_IAsyncEnumerator_T__MoveNextAsync,
+                                diagnostics,
+                                errorLocationSyntax.Location,
+                                isOptional: false
+                            );
 
                         if ((object)moveNextAsync != null)
                         {
@@ -1420,21 +1424,23 @@ namespace Microsoft.CodeAnalysis.CSharp
                             );
                         }
 
-                        currentPropertyGetter = (MethodSymbol)GetWellKnownTypeMember(
-                            Compilation,
-                            WellKnownMember.System_Collections_Generic_IAsyncEnumerator_T__get_Current,
-                            diagnostics,
-                            errorLocationSyntax.Location,
-                            isOptional: false
-                        );
+                        currentPropertyGetter = (MethodSymbol)
+                            GetWellKnownTypeMember(
+                                Compilation,
+                                WellKnownMember.System_Collections_Generic_IAsyncEnumerator_T__get_Current,
+                                diagnostics,
+                                errorLocationSyntax.Location,
+                                isOptional: false
+                            );
                     }
                     else
                     {
-                        currentPropertyGetter = (MethodSymbol)GetSpecialTypeMember(
-                            SpecialMember.System_Collections_Generic_IEnumerator_T__get_Current,
-                            diagnostics,
-                            errorLocationSyntax
-                        );
+                        currentPropertyGetter = (MethodSymbol)
+                            GetSpecialTypeMember(
+                                SpecialMember.System_Collections_Generic_IEnumerator_T__get_Current,
+                                diagnostics,
+                                errorLocationSyntax
+                            );
                     }
 
                     if ((object)currentPropertyGetter != null)
@@ -1448,11 +1454,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (!isAsync)
                 {
                     // NOTE: MoveNext is actually inherited from System.Collections.IEnumerator
-                    moveNextMethod = (MethodSymbol)GetSpecialTypeMember(
-                        SpecialMember.System_Collections_IEnumerator__MoveNext,
-                        diagnostics,
-                        errorLocationSyntax
-                    );
+                    moveNextMethod = (MethodSymbol)
+                        GetSpecialTypeMember(
+                            SpecialMember.System_Collections_IEnumerator__MoveNext,
+                            diagnostics,
+                            errorLocationSyntax
+                        );
                 }
 
                 // We're operating with well-known members: we know MoveNext/MoveNextAsync have no parameters
@@ -1475,11 +1482,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     errorLocationSyntax,
                     diagnostics
                 );
-                builder.CurrentPropertyGetter = (MethodSymbol)GetSpecialTypeMember(
-                    SpecialMember.System_Collections_IEnumerator__get_Current,
-                    diagnostics,
-                    errorLocationSyntax
-                );
+                builder.CurrentPropertyGetter = (MethodSymbol)
+                    GetSpecialTypeMember(
+                        SpecialMember.System_Collections_IEnumerator__get_Current,
+                        diagnostics,
+                        errorLocationSyntax
+                    );
                 builder.MoveNextInfo = GetParameterlessSpecialTypeMemberInfo(
                     SpecialMember.System_Collections_IEnumerator__MoveNext,
                     errorLocationSyntax,
@@ -1640,11 +1648,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 _syntax,
                 diagnostics
             );
-            builder.CurrentPropertyGetter = (MethodSymbol)GetSpecialTypeMember(
-                SpecialMember.System_Collections_IEnumerator__get_Current,
-                diagnostics,
-                _syntax
-            );
+            builder.CurrentPropertyGetter = (MethodSymbol)
+                GetSpecialTypeMember(
+                    SpecialMember.System_Collections_IEnumerator__get_Current,
+                    diagnostics,
+                    _syntax
+                );
             builder.MoveNextInfo = GetParameterlessSpecialTypeMemberInfo(
                 SpecialMember.System_Collections_IEnumerator__MoveNext,
                 _syntax,

@@ -78,8 +78,8 @@ namespace System.Configuration
             ProviderSettings pn
         )
         {
-            ProtectedConfigurationProvider provider =
-                (ProtectedConfigurationProvider)TypeUtil.CreateInstance(t);
+            ProtectedConfigurationProvider provider = (ProtectedConfigurationProvider)
+                TypeUtil.CreateInstance(t);
             NameValueCollection pars = pn.Parameters;
             NameValueCollection cloneParams = new NameValueCollection(pars.Count);
 

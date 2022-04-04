@@ -89,11 +89,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             if (
-                (object)Interlocked.CompareExchange(
-                    ref _lazySpecialTypes[(int)typeId],
-                    corType,
-                    null
-                ) != null
+                (object)
+                    Interlocked.CompareExchange(ref _lazySpecialTypes[(int)typeId], corType, null)
+                != null
             )
             {
                 Debug.Assert(

@@ -1068,9 +1068,8 @@ FROM [Customers]"
         public virtual async Task FromSqlRaw_queryable_simple_projection_composed(bool async)
         {
             using var context = CreateContext();
-            var boolMapping = (RelationalTypeMapping)context
-                .GetService<ITypeMappingSource>()
-                .FindMapping(typeof(bool));
+            var boolMapping = (RelationalTypeMapping)
+                context.GetService<ITypeMappingSource>().FindMapping(typeof(bool));
             var query = context
                 .Set<Product>()
                 .FromSqlRaw(

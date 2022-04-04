@@ -1846,8 +1846,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 {
                     Metadata.UpdatePrincipalEndConfigurationSource(configurationSource);
 
-                    builder =
-                        (InternalForeignKeyBuilder?)ModelBuilder.Metadata.ConventionDispatcher.OnForeignKeyPrincipalEndChanged(
+                    builder = (InternalForeignKeyBuilder?)
+                        ModelBuilder.Metadata.ConventionDispatcher.OnForeignKeyPrincipalEndChanged(
                             builder
                         );
                 }
@@ -1890,8 +1890,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 {
                     Metadata.UpdatePrincipalEndConfigurationSource(configurationSource);
 
-                    builder =
-                        (InternalForeignKeyBuilder?)ModelBuilder.Metadata.ConventionDispatcher.OnForeignKeyPrincipalEndChanged(
+                    builder = (InternalForeignKeyBuilder?)
+                        ModelBuilder.Metadata.ConventionDispatcher.OnForeignKeyPrincipalEndChanged(
                             builder
                         );
                 }
@@ -1965,9 +1965,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 principalEntityType.UpdateConfigurationSource(configurationSource);
                 dependentEntityType.UpdateConfigurationSource(configurationSource);
 
-                return (InternalForeignKeyBuilder?)ModelBuilder.Metadata.ConventionDispatcher.OnForeignKeyPrincipalEndChanged(
-                    this
-                );
+                return (InternalForeignKeyBuilder?)
+                    ModelBuilder.Metadata.ConventionDispatcher.OnForeignKeyPrincipalEndChanged(
+                        this
+                    );
             }
 
             if (
@@ -2369,8 +2370,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 {
                     Metadata.UpdatePrincipalEndConfigurationSource(configurationSource);
 
-                    builder =
-                        (InternalForeignKeyBuilder?)ModelBuilder.Metadata.ConventionDispatcher.OnForeignKeyPrincipalEndChanged(
+                    builder = (InternalForeignKeyBuilder?)
+                        ModelBuilder.Metadata.ConventionDispatcher.OnForeignKeyPrincipalEndChanged(
                             builder
                         );
                 }
@@ -2652,8 +2653,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 {
                     Metadata.UpdatePrincipalEndConfigurationSource(configurationSource);
 
-                    builder =
-                        (InternalForeignKeyBuilder?)ModelBuilder.Metadata.ConventionDispatcher.OnForeignKeyPrincipalEndChanged(
+                    builder = (InternalForeignKeyBuilder?)
+                        ModelBuilder.Metadata.ConventionDispatcher.OnForeignKeyPrincipalEndChanged(
                             builder
                         );
                 }

@@ -83,8 +83,8 @@ namespace System.Net.WebSockets.Client.Tests
                         .GetType()
                         .GetField("_innerWebSocket", BindingFlags.NonPublic | BindingFlags.Instance)
                         .GetValue(client);
-                    WebSocketDeflateOptions negotiatedDeflateOptions =
-                        (WebSocketDeflateOptions)webSocketHandle
+                    WebSocketDeflateOptions negotiatedDeflateOptions = (WebSocketDeflateOptions)
+                        webSocketHandle
                             .GetType()
                             .GetField(
                                 "_negotiatedDeflateOptions",

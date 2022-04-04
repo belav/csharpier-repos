@@ -308,65 +308,73 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.Equal(
                 base1,
                 module0.TypeRefHandleToTypeMap[
-                    (TypeReferenceHandle)module0.Module.GetBaseTypeOfTypeOrThrow(
-                        ((PENamedTypeSymbol)localTC1).Handle
-                    )
+                    (TypeReferenceHandle)
+                        module0.Module.GetBaseTypeOfTypeOrThrow(
+                            ((PENamedTypeSymbol)localTC1).Handle
+                        )
                 ]
             );
             Assert.Equal(
                 base2,
                 module0.TypeRefHandleToTypeMap[
-                    (TypeReferenceHandle)module0.Module.GetBaseTypeOfTypeOrThrow(
-                        ((PENamedTypeSymbol)localTC2).Handle
-                    )
+                    (TypeReferenceHandle)
+                        module0.Module.GetBaseTypeOfTypeOrThrow(
+                            ((PENamedTypeSymbol)localTC2).Handle
+                        )
                 ]
             );
             Assert.Equal(
                 base3,
                 module0.TypeRefHandleToTypeMap[
-                    (TypeReferenceHandle)module0.Module.GetBaseTypeOfTypeOrThrow(
-                        ((PENamedTypeSymbol)localTC3).Handle
-                    )
+                    (TypeReferenceHandle)
+                        module0.Module.GetBaseTypeOfTypeOrThrow(
+                            ((PENamedTypeSymbol)localTC3).Handle
+                        )
                 ]
             );
             Assert.Equal(
                 base4,
                 module0.TypeRefHandleToTypeMap[
-                    (TypeReferenceHandle)module0.Module.GetBaseTypeOfTypeOrThrow(
-                        ((PENamedTypeSymbol)localTC4).Handle
-                    )
+                    (TypeReferenceHandle)
+                        module0.Module.GetBaseTypeOfTypeOrThrow(
+                            ((PENamedTypeSymbol)localTC4).Handle
+                        )
                 ]
             );
             Assert.Equal(
                 base5,
                 module0.TypeRefHandleToTypeMap[
-                    (TypeReferenceHandle)module0.Module.GetBaseTypeOfTypeOrThrow(
-                        ((PENamedTypeSymbol)localTC5).Handle
-                    )
+                    (TypeReferenceHandle)
+                        module0.Module.GetBaseTypeOfTypeOrThrow(
+                            ((PENamedTypeSymbol)localTC5).Handle
+                        )
                 ]
             );
             Assert.Equal(
                 base6,
                 module0.TypeRefHandleToTypeMap[
-                    (TypeReferenceHandle)module0.Module.GetBaseTypeOfTypeOrThrow(
-                        ((PENamedTypeSymbol)localTC6).Handle
-                    )
+                    (TypeReferenceHandle)
+                        module0.Module.GetBaseTypeOfTypeOrThrow(
+                            ((PENamedTypeSymbol)localTC6).Handle
+                        )
                 ]
             );
             Assert.Equal(
                 base7,
                 module0.TypeRefHandleToTypeMap[
-                    (TypeReferenceHandle)module0.Module.GetBaseTypeOfTypeOrThrow(
-                        ((PENamedTypeSymbol)localTC7).Handle
-                    )
+                    (TypeReferenceHandle)
+                        module0.Module.GetBaseTypeOfTypeOrThrow(
+                            ((PENamedTypeSymbol)localTC7).Handle
+                        )
                 ]
             );
             Assert.Equal(
                 base8,
                 module0.TypeRefHandleToTypeMap[
-                    (TypeReferenceHandle)module0.Module.GetBaseTypeOfTypeOrThrow(
-                        ((PENamedTypeSymbol)localTC8).Handle
-                    )
+                    (TypeReferenceHandle)
+                        module0.Module.GetBaseTypeOfTypeOrThrow(
+                            ((PENamedTypeSymbol)localTC8).Handle
+                        )
                 ]
             );
 

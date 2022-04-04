@@ -28,10 +28,11 @@ namespace System.Collections.Generic
             if (typeof(IComparable<T>).IsAssignableFrom(typeof(T)))
             {
                 defaultArraySortHelper =
-                    (IArraySortHelper<T>)RuntimeTypeHandle.CreateInstanceForAnotherGenericParameter(
-                        (RuntimeType)typeof(GenericArraySortHelper<string>),
-                        (RuntimeType)typeof(T)
-                    );
+                    (IArraySortHelper<T>)
+                        RuntimeTypeHandle.CreateInstanceForAnotherGenericParameter(
+                            (RuntimeType)typeof(GenericArraySortHelper<string>),
+                            (RuntimeType)typeof(T)
+                        );
             }
             else
             {
@@ -64,14 +65,12 @@ namespace System.Collections.Generic
             if (typeof(IComparable<TKey>).IsAssignableFrom(typeof(TKey)))
             {
                 defaultArraySortHelper =
-                    (IArraySortHelper<
-                        TKey,
-                        TValue
-                    >)RuntimeTypeHandle.CreateInstanceForAnotherGenericParameter(
-                        (RuntimeType)typeof(GenericArraySortHelper<string, string>),
-                        (RuntimeType)typeof(TKey),
-                        (RuntimeType)typeof(TValue)
-                    );
+                    (IArraySortHelper<TKey, TValue>)
+                        RuntimeTypeHandle.CreateInstanceForAnotherGenericParameter(
+                            (RuntimeType)typeof(GenericArraySortHelper<string, string>),
+                            (RuntimeType)typeof(TKey),
+                            (RuntimeType)typeof(TValue)
+                        );
             }
             else
             {

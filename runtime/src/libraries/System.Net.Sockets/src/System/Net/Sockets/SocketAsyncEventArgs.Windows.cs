@@ -725,11 +725,8 @@ namespace System.Net.Sockets
             SocketError Core()
             {
                 // Fill in WSAMessageBuffer.
-                Interop.Winsock.WSAMsg* pMessage =
-                    (Interop.Winsock.WSAMsg*)Marshal.UnsafeAddrOfPinnedArrayElement(
-                        _wsaMessageBufferPinned,
-                        0
-                    );
+                Interop.Winsock.WSAMsg* pMessage = (Interop.Winsock.WSAMsg*)
+                    Marshal.UnsafeAddrOfPinnedArrayElement(_wsaMessageBufferPinned, 0);
                 pMessage->socketAddress = PtrSocketAddressBuffer;
                 pMessage->addressLength = (uint)_socketAddress.Size;
                 fixed (void* ptrWSARecvMsgWSABufferArray = &wsaRecvMsgWSABufferArray[0])
@@ -872,8 +869,8 @@ namespace System.Net.Sockets
         {
             // Cache copy to avoid problems with concurrent manipulation during the async operation.
             Debug.Assert(_sendPacketsElements != null);
-            SendPacketsElement[] sendPacketsElementsCopy =
-                (SendPacketsElement[])_sendPacketsElements.Clone();
+            SendPacketsElement[] sendPacketsElementsCopy = (SendPacketsElement[])
+                _sendPacketsElements.Clone();
 
             // TransmitPackets uses an array of TRANSMIT_PACKET_ELEMENT structs as
             // descriptors for buffers and files to be sent.  It also takes a send size
@@ -1284,8 +1281,8 @@ namespace System.Net.Sockets
                     if (spe.MemoryBuffer != null && spe.Count > 0)
                     {
                         // This element is a buffer.
-                        sendPacketsDescriptorPinned[descriptorIndex].buffer =
-                            (IntPtr)_multipleBufferMemoryHandles[bufferIndex].Pointer;
+                        sendPacketsDescriptorPinned[descriptorIndex].buffer = (IntPtr)
+                            _multipleBufferMemoryHandles[bufferIndex].Pointer;
                         sendPacketsDescriptorPinned[descriptorIndex].length = (uint)spe.Count;
                         sendPacketsDescriptorPinned[descriptorIndex].flags =
                             Interop.Winsock.TransmitPacketsElementFlags.Memory
@@ -1522,11 +1519,8 @@ namespace System.Net.Sockets
 
         private unsafe void FinishOperationReceiveMessageFrom()
         {
-            Interop.Winsock.WSAMsg* PtrMessage =
-                (Interop.Winsock.WSAMsg*)Marshal.UnsafeAddrOfPinnedArrayElement(
-                    _wsaMessageBufferPinned!,
-                    0
-                );
+            Interop.Winsock.WSAMsg* PtrMessage = (Interop.Winsock.WSAMsg*)
+                Marshal.UnsafeAddrOfPinnedArrayElement(_wsaMessageBufferPinned!, 0);
 
             if (_controlBufferPinned!.Length == sizeof(Interop.Winsock.ControlData))
             {

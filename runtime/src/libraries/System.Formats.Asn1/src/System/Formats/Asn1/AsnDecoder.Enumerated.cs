@@ -124,10 +124,11 @@ namespace System.Formats.Asn1
         {
             Type tEnum = typeof(TEnum);
 
-            return (TEnum)Enum.ToObject(
-                tEnum,
-                ReadEnumeratedValue(source, ruleSet, tEnum, out bytesConsumed, expectedTag)
-            );
+            return (TEnum)
+                Enum.ToObject(
+                    tEnum,
+                    ReadEnumeratedValue(source, ruleSet, tEnum, out bytesConsumed, expectedTag)
+                );
         }
 
         /// <summary>

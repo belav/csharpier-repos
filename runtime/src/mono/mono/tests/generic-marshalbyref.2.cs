@@ -68,9 +68,10 @@ public class Engine : MarshalByRefObject
 
     public static Engine CreateRemote(AppDomain domain)
     {
-        return (Engine)domain.CreateInstanceAndUnwrap(
-            typeof(Engine).Assembly.FullName,
-            typeof(Engine).FullName
-        );
+        return (Engine)
+            domain.CreateInstanceAndUnwrap(
+                typeof(Engine).Assembly.FullName,
+                typeof(Engine).FullName
+            );
     }
 }

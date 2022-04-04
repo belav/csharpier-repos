@@ -75,8 +75,8 @@ internal class DictionaryStringValuesWrapper : IHeaderDictionary
         {
             if (value.HasValue)
             {
-                Inner[HeaderNames.ContentLength] =
-                    (StringValues)HeaderUtilities.FormatNonNegativeInt64(value.GetValueOrDefault());
+                Inner[HeaderNames.ContentLength] = (StringValues)
+                    HeaderUtilities.FormatNonNegativeInt64(value.GetValueOrDefault());
             }
             else
             {

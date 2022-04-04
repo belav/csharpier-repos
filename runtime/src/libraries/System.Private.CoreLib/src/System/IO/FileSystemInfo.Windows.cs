@@ -24,11 +24,12 @@ namespace System.IO
         internal static unsafe FileSystemInfo Create(string fullPath, ref FileSystemEntry findData)
         {
             FileSystemInfo info = findData.IsDirectory
-                ? (FileSystemInfo)new DirectoryInfo(
-                      fullPath,
-                      fileName: findData.FileName.ToString(),
-                      isNormalized: true
-                  )
+                ? (FileSystemInfo)
+                      new DirectoryInfo(
+                          fullPath,
+                          fileName: findData.FileName.ToString(),
+                          isNormalized: true
+                      )
                 : new FileInfo(
                       fullPath,
                       fileName: findData.FileName.ToString(),

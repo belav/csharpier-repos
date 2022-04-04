@@ -80,12 +80,13 @@ internal sealed class AsyncEnumerableReader
                 var enumeratedObjectType = enumerableType.GetGenericArguments()[0];
 
                 var converter =
-                    (Func<object, CancellationToken, Task<ICollection>>)Converter
-                        .MakeGenericMethod(enumeratedObjectType)
-                        .CreateDelegate(
-                            typeof(Func<object, CancellationToken, Task<ICollection>>),
-                            this
-                        );
+                    (Func<object, CancellationToken, Task<ICollection>>)
+                        Converter
+                            .MakeGenericMethod(enumeratedObjectType)
+                            .CreateDelegate(
+                                typeof(Func<object, CancellationToken, Task<ICollection>>),
+                                this
+                            );
 
                 reader = converter;
                 _asyncEnumerableConverters.TryAdd(type, reader);

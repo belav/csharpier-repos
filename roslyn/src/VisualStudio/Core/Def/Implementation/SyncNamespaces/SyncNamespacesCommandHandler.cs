@@ -45,9 +45,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SyncNamespaces
             _serviceProvider = serviceProvider;
 
             // Hook up the "Remove Unused References" menu command for CPS based managed projects.
-            var menuCommandService = (IMenuCommandService)_serviceProvider.GetService(
-                typeof(IMenuCommandService)
-            );
+            var menuCommandService = (IMenuCommandService)
+                _serviceProvider.GetService(typeof(IMenuCommandService));
             if (menuCommandService != null)
             {
                 VisualStudioCommandHandlerHelpers.AddCommand(

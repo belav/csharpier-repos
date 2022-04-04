@@ -43,18 +43,17 @@ namespace Microsoft.NET.HostModel.ComHost
         {
             checked
             {
-                int typelibGuidEntryOffset = (int)BinaryPrimitives.ReadUInt32LittleEndian(
-                    fileContents.Slice(OffsetOfGuidOffset)
-                );
-                int infoRefsOffsetCount = (int)BinaryPrimitives.ReadUInt32LittleEndian(
-                    fileContents.Slice(OffsetOfTypeInfosCount)
-                );
+                int typelibGuidEntryOffset = (int)
+                    BinaryPrimitives.ReadUInt32LittleEndian(fileContents.Slice(OffsetOfGuidOffset));
+                int infoRefsOffsetCount = (int)
+                    BinaryPrimitives.ReadUInt32LittleEndian(
+                        fileContents.Slice(OffsetOfTypeInfosCount)
+                    );
                 int infoBytes = infoRefsOffsetCount * SizeOfTypeInfosCount;
                 int guidTableOffset =
                     OffsetOfTablesStart + infoBytes + SizeOfTableHeader * NumTablesToSkip;
-                int fileOffset = (int)BinaryPrimitives.ReadUInt32LittleEndian(
-                    fileContents.Slice(guidTableOffset)
-                );
+                int fileOffset = (int)
+                    BinaryPrimitives.ReadUInt32LittleEndian(fileContents.Slice(guidTableOffset));
                 return new Guid(
                     fileContents.Slice(fileOffset + typelibGuidEntryOffset, 16).ToArray()
                 );

@@ -239,16 +239,17 @@ static class S
 }";
             var compilation = CreateCompilation(source);
             var syntaxTree = compilation.SyntaxTrees.Single();
-            var gooSymbol = (IMethodSymbol)compilation
-                .GetSemanticModel(syntaxTree)
-                .GetSymbolInfo(
-                    syntaxTree
-                        .GetCompilationUnitRoot()
-                        .DescendantNodes()
-                        .OfType<MemberAccessExpressionSyntax>()
-                        .Single()
-                )
-                .Symbol;
+            var gooSymbol = (IMethodSymbol)
+                compilation
+                    .GetSemanticModel(syntaxTree)
+                    .GetSymbolInfo(
+                        syntaxTree
+                            .GetCompilationUnitRoot()
+                            .DescendantNodes()
+                            .OfType<MemberAccessExpressionSyntax>()
+                            .Single()
+                    )
+                    .Symbol;
             Assert.True(gooSymbol.IsExtensionMethod);
             Assert.Equal(MethodKind.ReducedExtension, gooSymbol.MethodKind);
             var gooOriginal = gooSymbol.ReducedFrom;
@@ -2670,9 +2671,8 @@ B"
             );
 
             var expr = (
-                (ExpressionStatementSyntax)(
-                    (GlobalStatementSyntax)tree.GetCompilationUnitRoot().Members[0]
-                ).Statement
+                (ExpressionStatementSyntax)
+                    ((GlobalStatementSyntax)tree.GetCompilationUnitRoot().Members[0]).Statement
             ).Expression;
             var model = compilation.GetSemanticModel(tree);
             var info = model.GetSymbolInfo(expr);
@@ -3201,9 +3201,8 @@ public struct MyStruct<T>
                 .GetMember<MethodSymbol>("M");
             Assert.True(extensionMethod.IsExtensionMethod);
 
-            var myStruct = (NamedTypeSymbol)compilation2.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                "MyStruct"
-            );
+            var myStruct = (NamedTypeSymbol)
+                compilation2.GlobalNamespace.GetMember<NamedTypeSymbol>("MyStruct");
             var int32Type = compilation2.GetSpecialType(SpecialType.System_Int32);
             var msi = myStruct.Construct(int32Type);
 
@@ -3236,9 +3235,8 @@ public struct MyStruct<T>
                 .GetMember<MethodSymbol>("M");
             Assert.True(extensionMethod.IsExtensionMethod);
 
-            myStruct = (NamedTypeSymbol)compilation2.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                "MyStruct"
-            );
+            myStruct = (NamedTypeSymbol)
+                compilation2.GlobalNamespace.GetMember<NamedTypeSymbol>("MyStruct");
             int32Type = compilation2.GetSpecialType(SpecialType.System_Int32);
             msi = myStruct.Construct(int32Type);
 
@@ -4240,12 +4238,13 @@ namespace ConsoleApplication22
             var syntaxTree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(syntaxTree);
 
-            var member = (MemberAccessExpressionSyntax)syntaxTree
-                .GetRoot()
-                .DescendantNodes()
-                .OfType<InvocationExpressionSyntax>()
-                .Single()
-                .Expression;
+            var member = (MemberAccessExpressionSyntax)
+                syntaxTree
+                    .GetRoot()
+                    .DescendantNodes()
+                    .OfType<InvocationExpressionSyntax>()
+                    .Single()
+                    .Expression;
             Assert.Equal("other.GetEnumerableDisposable1<T, TEnumerator>", member.ToString());
 
             var type = model.GetTypeInfo(member.Expression).Type;

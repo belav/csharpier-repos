@@ -626,20 +626,16 @@ namespace Microsoft.Extensions.Logging.Generators
                         switch (a.NameEquals.Name.ToString())
                         {
                             case "EventId":
-                                eventId = (int)sm.GetConstantValue(
-                                    a.Expression,
-                                    _cancellationToken
-                                ).Value!;
+                                eventId = (int)
+                                    sm.GetConstantValue(a.Expression, _cancellationToken).Value!;
                                 break;
                             case "EventName":
                                 eventName = sm.GetConstantValue(a.Expression, _cancellationToken)
                                     .ToString();
                                 break;
                             case "Level":
-                                level = (int)sm.GetConstantValue(
-                                    a.Expression,
-                                    _cancellationToken
-                                ).Value!;
+                                level = (int)
+                                    sm.GetConstantValue(a.Expression, _cancellationToken).Value!;
                                 break;
                             case "Message":
                                 message = sm.GetConstantValue(a.Expression, _cancellationToken)
@@ -652,17 +648,13 @@ namespace Microsoft.Extensions.Logging.Generators
                         switch (a.NameColon.Name.ToString())
                         {
                             case "eventId":
-                                eventId = (int)sm.GetConstantValue(
-                                    a.Expression,
-                                    _cancellationToken
-                                ).Value!;
+                                eventId = (int)
+                                    sm.GetConstantValue(a.Expression, _cancellationToken).Value!;
                                 break;
 
                             case "level":
-                                level = (int)sm.GetConstantValue(
-                                    a.Expression,
-                                    _cancellationToken
-                                ).Value!;
+                                level = (int)
+                                    sm.GetConstantValue(a.Expression, _cancellationToken).Value!;
                                 break;
 
                             case "message":
@@ -677,10 +669,8 @@ namespace Microsoft.Extensions.Logging.Generators
                         {
                             // event id
                             case 0:
-                                eventId = (int)sm.GetConstantValue(
-                                    a.Expression,
-                                    _cancellationToken
-                                ).Value!;
+                                eventId = (int)
+                                    sm.GetConstantValue(a.Expression, _cancellationToken).Value!;
                                 break;
 
                             // log level or message

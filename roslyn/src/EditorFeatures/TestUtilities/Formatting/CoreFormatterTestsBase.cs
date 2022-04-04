@@ -277,8 +277,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
                 workspace.Services.GetService<IHostDependentFormattingRuleFactoryService>();
             if (baseIndentation.HasValue)
             {
-                var factory =
-                    (TestFormattingRuleFactoryServiceFactory.Factory)formattingRuleProvider;
+                var factory = (TestFormattingRuleFactoryServiceFactory.Factory)
+                    formattingRuleProvider;
                 factory.BaseIndentation = baseIndentation.Value;
                 factory.TextSpan = spans.First();
             }

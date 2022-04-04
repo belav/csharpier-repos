@@ -788,8 +788,8 @@ namespace System.Diagnostics
                             object isMultiInstanceObject = key.GetValue("IsMultiInstance");
                             if (isMultiInstanceObject != null)
                             {
-                                categoryType =
-                                    (PerformanceCounterCategoryType)isMultiInstanceObject;
+                                categoryType = (PerformanceCounterCategoryType)
+                                    isMultiInstanceObject;
                                 if (
                                     categoryType < PerformanceCounterCategoryType.Unknown
                                     || categoryType > PerformanceCounterCategoryType.MultiInstance
@@ -1784,9 +1784,8 @@ namespace System.Diagnostics
                 {
                     if (string.Equals(counterName, counter, StringComparison.OrdinalIgnoreCase))
                     {
-                        CounterDefinitionSample sample = (CounterDefinitionSample)_counterTable[
-                            counterIndex
-                        ];
+                        CounterDefinitionSample sample = (CounterDefinitionSample)
+                            _counterTable[counterIndex];
                         if (sample == null)
                         {
                             //This is a base counter and has not been added to the table
@@ -1822,9 +1821,8 @@ namespace System.Diagnostics
                 string name = (string)_library.NameTable[counterIndex];
                 if (name != null && name != string.Empty)
                 {
-                    CounterDefinitionSample sample = (CounterDefinitionSample)_counterTable[
-                        counterIndex
-                    ];
+                    CounterDefinitionSample sample = (CounterDefinitionSample)
+                        _counterTable[counterIndex];
                     if (sample != null)
                         //If the current index refers to a counter base,
                         //the sample will be null

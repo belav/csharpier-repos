@@ -300,8 +300,8 @@ namespace Internal.Cryptography.Pal.Windows
                         case Oids.RsaOaep:
                             recipientEncodeInfo.dwRecipientChoice =
                                 CMsgCmsRecipientChoice.CMSG_KEY_TRANS_RECIPIENT;
-                            recipientEncodeInfo.pCmsRecipientEncodeInfo =
-                                (IntPtr)EncodeKeyTransRecipientInfo(recipient, hb);
+                            recipientEncodeInfo.pCmsRecipientEncodeInfo = (IntPtr)
+                                EncodeKeyTransRecipientInfo(recipient, hb);
                             break;
 
                         case Oids.Esdh:
@@ -309,8 +309,8 @@ namespace Internal.Cryptography.Pal.Windows
                         case Oids.DiffieHellmanPkcs3:
                             recipientEncodeInfo.dwRecipientChoice =
                                 CMsgCmsRecipientChoice.CMSG_KEY_AGREE_RECIPIENT;
-                            recipientEncodeInfo.pCmsRecipientEncodeInfo =
-                                (IntPtr)EncodeKeyAgreeRecipientInfo(
+                            recipientEncodeInfo.pCmsRecipientEncodeInfo = (IntPtr)
+                                EncodeKeyAgreeRecipientInfo(
                                     recipient,
                                     contentEncryptionAlgorithm,
                                     hb
@@ -386,8 +386,8 @@ namespace Internal.Cryptography.Pal.Windows
                         pEncodeInfo->KeyEncryptionAlgorithm.pszObjId = hb.AllocAsciiString(
                             Oids.Rsa
                         );
-                        pEncodeInfo->KeyEncryptionAlgorithm.Parameters.cbData =
-                            (uint)s_rsaPkcsParameters.Length;
+                        pEncodeInfo->KeyEncryptionAlgorithm.Parameters.cbData = (uint)
+                            s_rsaPkcsParameters.Length;
                         pEncodeInfo->KeyEncryptionAlgorithm.Parameters.pbData = hb.AllocBytes(
                             s_rsaPkcsParameters
                         );
@@ -397,8 +397,8 @@ namespace Internal.Cryptography.Pal.Windows
                         pEncodeInfo->KeyEncryptionAlgorithm.pszObjId = hb.AllocAsciiString(
                             Oids.RsaOaep
                         );
-                        pEncodeInfo->KeyEncryptionAlgorithm.Parameters.cbData =
-                            (uint)s_rsaOaepSha1Parameters.Length;
+                        pEncodeInfo->KeyEncryptionAlgorithm.Parameters.cbData = (uint)
+                            s_rsaOaepSha1Parameters.Length;
                         pEncodeInfo->KeyEncryptionAlgorithm.Parameters.pbData = hb.AllocBytes(
                             s_rsaOaepSha1Parameters
                         );
@@ -408,8 +408,8 @@ namespace Internal.Cryptography.Pal.Windows
                         pEncodeInfo->KeyEncryptionAlgorithm.pszObjId = hb.AllocAsciiString(
                             Oids.RsaOaep
                         );
-                        pEncodeInfo->KeyEncryptionAlgorithm.Parameters.cbData =
-                            (uint)s_rsaOaepSha256Parameters.Length;
+                        pEncodeInfo->KeyEncryptionAlgorithm.Parameters.cbData = (uint)
+                            s_rsaOaepSha256Parameters.Length;
                         pEncodeInfo->KeyEncryptionAlgorithm.Parameters.pbData = hb.AllocBytes(
                             s_rsaOaepSha256Parameters
                         );
@@ -419,8 +419,8 @@ namespace Internal.Cryptography.Pal.Windows
                         pEncodeInfo->KeyEncryptionAlgorithm.pszObjId = hb.AllocAsciiString(
                             Oids.RsaOaep
                         );
-                        pEncodeInfo->KeyEncryptionAlgorithm.Parameters.cbData =
-                            (uint)s_rsaOaepSha384Parameters.Length;
+                        pEncodeInfo->KeyEncryptionAlgorithm.Parameters.cbData = (uint)
+                            s_rsaOaepSha384Parameters.Length;
                         pEncodeInfo->KeyEncryptionAlgorithm.Parameters.pbData = hb.AllocBytes(
                             s_rsaOaepSha384Parameters
                         );
@@ -430,8 +430,8 @@ namespace Internal.Cryptography.Pal.Windows
                         pEncodeInfo->KeyEncryptionAlgorithm.pszObjId = hb.AllocAsciiString(
                             Oids.RsaOaep
                         );
-                        pEncodeInfo->KeyEncryptionAlgorithm.Parameters.cbData =
-                            (uint)s_rsaOaepSha512Parameters.Length;
+                        pEncodeInfo->KeyEncryptionAlgorithm.Parameters.cbData = (uint)
+                            s_rsaOaepSha512Parameters.Length;
                         pEncodeInfo->KeyEncryptionAlgorithm.Parameters.pbData = hb.AllocBytes(
                             s_rsaOaepSha512Parameters
                         );

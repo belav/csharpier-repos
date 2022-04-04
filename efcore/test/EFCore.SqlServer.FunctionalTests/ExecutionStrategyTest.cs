@@ -145,8 +145,8 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = CreateContext())
             {
-                var connection =
-                    (TestSqlServerConnection)context.GetService<ISqlServerConnection>();
+                var connection = (TestSqlServerConnection)
+                    context.GetService<ISqlServerConnection>();
 
                 connection.CommitFailures.Enqueue(new bool?[] { realFailure });
                 Fixture.TestSqlLoggerFactory.Clear();
@@ -323,8 +323,8 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = CreateContext())
             {
-                var connection =
-                    (TestSqlServerConnection)context.GetService<ISqlServerConnection>();
+                var connection = (TestSqlServerConnection)
+                    context.GetService<ISqlServerConnection>();
 
                 connection.CommitFailures.Enqueue(new bool?[] { realFailure });
                 Fixture.TestSqlLoggerFactory.Clear();
@@ -424,8 +424,8 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = CreateContext())
             {
-                var connection =
-                    (TestSqlServerConnection)context.GetService<ISqlServerConnection>();
+                var connection = (TestSqlServerConnection)
+                    context.GetService<ISqlServerConnection>();
 
                 connection.ExecutionFailures.Enqueue(new bool?[] { null, realFailure });
 
@@ -540,8 +540,8 @@ namespace Microsoft.EntityFrameworkCore
             {
                 using var auditContext = new AuditContext();
 
-                var connection =
-                    (TestSqlServerConnection)context.GetService<ISqlServerConnection>();
+                var connection = (TestSqlServerConnection)
+                    context.GetService<ISqlServerConnection>();
 
                 connection.ExecutionFailures.Enqueue(new bool?[] { null, realFailure });
 
@@ -723,8 +723,8 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = CreateContext())
             {
-                var connection =
-                    (TestSqlServerConnection)context.GetService<ISqlServerConnection>();
+                var connection = (TestSqlServerConnection)
+                    context.GetService<ISqlServerConnection>();
 
                 connection.ExecutionFailures.Enqueue(new bool?[] { true });
 
@@ -788,8 +788,8 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = CreateContext())
             {
-                var connection =
-                    (TestSqlServerConnection)context.GetService<ISqlServerConnection>();
+                var connection = (TestSqlServerConnection)
+                    context.GetService<ISqlServerConnection>();
 
                 connection.ExecutionFailures.Enqueue(new bool?[] { true });
 
@@ -964,8 +964,8 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = CreateContext())
             {
-                var connection =
-                    (TestSqlServerConnection)context.GetService<ISqlServerConnection>();
+                var connection = (TestSqlServerConnection)
+                    context.GetService<ISqlServerConnection>();
 
                 connection.ExecutionFailures.Enqueue(new bool?[] { true, null, true, true });
                 connection.CommitFailures.Enqueue(new bool?[] { true, true, true, true });

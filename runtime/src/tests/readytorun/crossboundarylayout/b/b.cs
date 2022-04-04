@@ -130,9 +130,8 @@ namespace CrossBoundaryLayout
 
             {
                 var a5 =
-                    (ABoringGeneric<ByteStruct>)Activator.CreateInstance(
-                        typeof(ABoringGeneric<ByteStruct>)
-                    );
+                    (ABoringGeneric<ByteStruct>)
+                        Activator.CreateInstance(typeof(ABoringGeneric<ByteStruct>));
                 a5._aVal = 1;
                 if (1 != (byte)typeof(ABoringGeneric<ByteStruct>).GetField("_aVal").GetValue(a5))
                 {
@@ -178,9 +177,8 @@ namespace CrossBoundaryLayout
 
             {
                 var b5 =
-                    (B_A_byte_Generic<byte>)Activator.CreateInstance(
-                        typeof(B_A_byte_Generic<byte>)
-                    );
+                    (B_A_byte_Generic<byte>)
+                        Activator.CreateInstance(typeof(B_A_byte_Generic<byte>));
                 b5._bVal = 1;
                 if (1 != (byte)typeof(B_A_byte_Generic<byte>).GetField("_bVal").GetValue(b5))
                 {
@@ -199,9 +197,8 @@ namespace CrossBoundaryLayout
 
             {
                 var b7 =
-                    (B_A_Generic<ByteStruct>)Activator.CreateInstance(
-                        typeof(B_A_Generic<ByteStruct>)
-                    );
+                    (B_A_Generic<ByteStruct>)
+                        Activator.CreateInstance(typeof(B_A_Generic<ByteStruct>));
                 b7._bVal._dVal = 1;
                 if (
                     1
@@ -216,16 +213,14 @@ namespace CrossBoundaryLayout
 
             {
                 var b8 =
-                    (B_A_byte_Generic<ByteStruct>)Activator.CreateInstance(
-                        typeof(B_A_byte_Generic<ByteStruct>)
-                    );
+                    (B_A_byte_Generic<ByteStruct>)
+                        Activator.CreateInstance(typeof(B_A_byte_Generic<ByteStruct>));
                 b8._bVal._dVal = 1;
                 if (
                     1
                     != (
-                        (ByteStruct)typeof(B_A_byte_Generic<ByteStruct>)
-                            .GetField("_bVal")
-                            .GetValue(b8)
+                        (ByteStruct)
+                            typeof(B_A_byte_Generic<ByteStruct>).GetField("_bVal").GetValue(b8)
                     )._dVal
                 )
                 {
@@ -235,9 +230,8 @@ namespace CrossBoundaryLayout
 
             {
                 var b9 =
-                    (B_A_D_Generic<ByteStruct>)Activator.CreateInstance(
-                        typeof(B_A_D_Generic<ByteStruct>)
-                    );
+                    (B_A_D_Generic<ByteStruct>)
+                        Activator.CreateInstance(typeof(B_A_D_Generic<ByteStruct>));
                 b9._bVal._dVal = 1;
                 if (
                     1

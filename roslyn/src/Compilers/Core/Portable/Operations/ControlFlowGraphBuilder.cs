@@ -4024,9 +4024,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
             Debug.Assert(ITypeSymbolHelpers.IsNullableType(valueType));
 
-            var method = (IMethodSymbol?)_compilation
-                .CommonGetSpecialTypeMember(nullableMember)
-                ?.GetISymbol();
+            var method = (IMethodSymbol?)
+                _compilation.CommonGetSpecialTypeMember(nullableMember)?.GetISymbol();
 
             if (method != null)
             {
@@ -5080,16 +5079,18 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                     disposeMethod
                     ?? (
                         isAsynchronous
-                            ? (IMethodSymbol?)_compilation
-                                  .CommonGetWellKnownTypeMember(
-                                      WellKnownMember.System_IAsyncDisposable__DisposeAsync
-                                  )
-                                  ?.GetISymbol()
-                            : (IMethodSymbol?)_compilation
-                                  .CommonGetSpecialTypeMember(
-                                      SpecialMember.System_IDisposable__Dispose
-                                  )
-                                  ?.GetISymbol()
+                            ? (IMethodSymbol?)
+                                  _compilation
+                                      .CommonGetWellKnownTypeMember(
+                                          WellKnownMember.System_IAsyncDisposable__DisposeAsync
+                                      )
+                                      ?.GetISymbol()
+                            : (IMethodSymbol?)
+                                  _compilation
+                                      .CommonGetSpecialTypeMember(
+                                          SpecialMember.System_IDisposable__Dispose
+                                      )
+                                      ?.GetISymbol()
                     );
 
                 if (method != null)
@@ -5231,17 +5232,21 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             lockedValue = PopOperand();
             PopStackFrame(frame);
 
-            var enterMethod = (IMethodSymbol?)_compilation
-                .CommonGetWellKnownTypeMember(WellKnownMember.System_Threading_Monitor__Enter2)
-                ?.GetISymbol();
+            var enterMethod = (IMethodSymbol?)
+                _compilation
+                    .CommonGetWellKnownTypeMember(WellKnownMember.System_Threading_Monitor__Enter2)
+                    ?.GetISymbol();
             bool legacyMode = (enterMethod == null);
 
             if (legacyMode)
             {
                 Debug.Assert(lockStatement.LockTakenSymbol == null);
-                enterMethod = (IMethodSymbol?)_compilation
-                    .CommonGetWellKnownTypeMember(WellKnownMember.System_Threading_Monitor__Enter)
-                    ?.GetISymbol();
+                enterMethod = (IMethodSymbol?)
+                    _compilation
+                        .CommonGetWellKnownTypeMember(
+                            WellKnownMember.System_Threading_Monitor__Enter
+                        )
+                        ?.GetISymbol();
 
                 // Monitor.Enter($lock);
                 if (enterMethod == null)
@@ -5362,9 +5367,10 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             }
 
             // Monitor.Exit($lock);
-            var exitMethod = (IMethodSymbol?)_compilation
-                .CommonGetWellKnownTypeMember(WellKnownMember.System_Threading_Monitor__Exit)
-                ?.GetISymbol();
+            var exitMethod = (IMethodSymbol?)
+                _compilation
+                    .CommonGetWellKnownTypeMember(WellKnownMember.System_Threading_Monitor__Exit)
+                    ?.GetISymbol();
             lockedValue = OperationCloner.CloneOperation(lockedValue);
 
             if (exitMethod == null)
@@ -5676,8 +5682,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 switch (operation.LoopControlVariable.Kind)
                 {
                     case OperationKind.VariableDeclarator:
-                        var declarator =
-                            (IVariableDeclaratorOperation)operation.LoopControlVariable;
+                        var declarator = (IVariableDeclaratorOperation)
+                            operation.LoopControlVariable;
                         ILocalSymbol local = declarator.Symbol;
                         current = applyConversion(info?.ElementConversion, current, local.Type);
 
@@ -5857,9 +5863,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                     isImplicit: true
                 );
 
-                var method = (IMethodSymbol?)_compilation
-                    .CommonGetWellKnownTypeMember(helper)
-                    ?.GetISymbol();
+                var method = (IMethodSymbol?)
+                    _compilation.CommonGetWellKnownTypeMember(helper)?.GetISymbol();
                 int parametersCount = WellKnownMembers.GetDescriptor(helper).ParametersCount;
 
                 if (method is null)
@@ -6673,8 +6678,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 switch (operation.LoopControlVariable.Kind)
                 {
                     case OperationKind.VariableDeclarator:
-                        var declarator =
-                            (IVariableDeclaratorOperation)operation.LoopControlVariable;
+                        var declarator = (IVariableDeclaratorOperation)
+                            operation.LoopControlVariable;
                         ILocalSymbol local = declarator.Symbol;
 
                         return new LocalReferenceOperation(
@@ -8474,8 +8479,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                             { RefKind: RefKind.Out, Type.SpecialType: SpecialType.System_Boolean }
                         }
                 );
-                outParameterPlaceholder =
-                    (IInterpolatedStringHandlerArgumentPlaceholderOperation)outParameterArgument.Value;
+                outParameterPlaceholder = (IInterpolatedStringHandlerArgumentPlaceholderOperation)
+                    outParameterArgument.Value;
             }
 
             var previousHandlerContext = _currentInterpolatedStringHandlerCreationContext;
@@ -9948,14 +9953,15 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             LeaveRegionsUpTo(resultCaptureRegion);
 
             // throw new SwitchExpressionException
-            var matchFailureCtor = (IMethodSymbol?)(
-                _compilation.CommonGetWellKnownTypeMember(
-                    WellKnownMember.System_Runtime_CompilerServices_SwitchExpressionException__ctor
-                )
-                ?? _compilation.CommonGetWellKnownTypeMember(
-                    WellKnownMember.System_InvalidOperationException__ctor
-                )
-            )?.GetISymbol();
+            var matchFailureCtor = (IMethodSymbol?)
+                (
+                    _compilation.CommonGetWellKnownTypeMember(
+                        WellKnownMember.System_Runtime_CompilerServices_SwitchExpressionException__ctor
+                    )
+                    ?? _compilation.CommonGetWellKnownTypeMember(
+                        WellKnownMember.System_InvalidOperationException__ctor
+                    )
+                )?.GetISymbol();
             var makeException =
                 (matchFailureCtor is null)
                     ? MakeInvalidOperation(

@@ -146,9 +146,8 @@ class C : IB, IC
             var compilation = CompileAndVerify(source);
             compilation.VerifyDiagnostics();
 
-            var globalNamespace = (NamespaceSymbol)(
-                (CSharpCompilation)compilation.Compilation
-            ).GlobalNamespace;
+            var globalNamespace = (NamespaceSymbol)
+                ((CSharpCompilation)compilation.Compilation).GlobalNamespace;
 
             var type = globalNamespace.GetMember<NamedTypeSymbol>("IA");
             CheckIndexer(
@@ -2605,9 +2604,8 @@ class Program
                 compilation,
                 symbolValidator: module =>
                 {
-                    var peIndexer = (PEPropertySymbol)module.GlobalNamespace
-                        .GetTypeMember("Program")
-                        .Indexers.Single();
+                    var peIndexer = (PEPropertySymbol)
+                        module.GlobalNamespace.GetTypeMember("Program").Indexers.Single();
                     Assert.True(peIndexer.IsIndexer);
                     Assert.Equal("A", peIndexer.MetadataName);
                     Assert.Empty(peIndexer.GetAttributes());

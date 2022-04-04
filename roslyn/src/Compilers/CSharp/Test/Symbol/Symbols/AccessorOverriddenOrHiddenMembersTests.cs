@@ -1214,9 +1214,8 @@ using System;
                 Assert.Equal("Disposable", localD.Type.Name);
                 Assert.Equal(classDisposable, localD.Type);
 
-                var methodDispose = (IMethodSymbol)semanticModel
-                    .GetSymbolInfo(memberAccessSyntax)
-                    .Symbol;
+                var methodDispose = (IMethodSymbol)
+                    semanticModel.GetSymbolInfo(memberAccessSyntax).Symbol;
                 Assert.Equal("Dispose", methodDispose.Name);
                 Assert.Equal(0, methodDispose.Arity);
                 Assert.Empty(methodDispose.Parameters);
@@ -1240,10 +1239,11 @@ using System;
                 var methodSymbol =
                     semanticModel.GetSymbolInfo(memberAccessed).Symbol as IMethodSymbol;
                 var type = methodSymbol.ContainingType;
-                var disposeMethod = (IMethodSymbol)compilation
-                    .GetSpecialType(SpecialType.System_IDisposable)
-                    .GetMembers("Dispose")
-                    .Single();
+                var disposeMethod = (IMethodSymbol)
+                    compilation
+                        .GetSpecialType(SpecialType.System_IDisposable)
+                        .GetMembers("Dispose")
+                        .Single();
                 var isDispose = methodSymbol.Equals(
                     type.FindImplementationForInterfaceMember(disposeMethod)
                 );

@@ -3858,10 +3858,8 @@ class C
             var @switch = tree.GetRoot().DescendantNodes().OfType<SwitchStatementSyntax>().Single();
             var model = (CSharpSemanticModel)comp.GetSemanticModel(tree);
             var binder = model.GetEnclosingBinder(@switch.SpanStart);
-            var boundSwitch = (BoundSwitchStatement)binder.BindStatement(
-                @switch,
-                BindingDiagnosticBag.Discarded
-            );
+            var boundSwitch = (BoundSwitchStatement)
+                binder.BindStatement(@switch, BindingDiagnosticBag.Discarded);
             AssertEx.Equal(
                 @"[0]: t0 is string ? [1] : [8]
 [1]: t1 = (string)t0; [2]
@@ -3937,10 +3935,8 @@ class C
             var @switch = tree.GetRoot().DescendantNodes().OfType<SwitchStatementSyntax>().Single();
             var model = (CSharpSemanticModel)comp.GetSemanticModel(tree);
             var binder = model.GetEnclosingBinder(@switch.SpanStart);
-            var boundSwitch = (BoundSwitchStatement)binder.BindStatement(
-                @switch,
-                BindingDiagnosticBag.Discarded
-            );
+            var boundSwitch = (BoundSwitchStatement)
+                binder.BindStatement(@switch, BindingDiagnosticBag.Discarded);
             AssertEx.Equal(
                 @"[0]: t0 == null ? [1] : [2]
 [1]: leaf `case null:`
@@ -4016,10 +4012,8 @@ class C : ITuple
             var @switch = tree.GetRoot().DescendantNodes().OfType<SwitchStatementSyntax>().Single();
             var model = (CSharpSemanticModel)comp.GetSemanticModel(tree);
             var binder = model.GetEnclosingBinder(@switch.SpanStart);
-            var boundSwitch = (BoundSwitchStatement)binder.BindStatement(
-                @switch,
-                BindingDiagnosticBag.Discarded
-            );
+            var boundSwitch = (BoundSwitchStatement)
+                binder.BindStatement(@switch, BindingDiagnosticBag.Discarded);
             AssertEx.Equal(
                 @"[0]: t0 is System.Runtime.CompilerServices.ITuple ? [1] : [28]
 [1]: t1 = t0.Length; [2]
@@ -4094,10 +4088,8 @@ class C
             var @is = tree.GetRoot().DescendantNodes().OfType<IsPatternExpressionSyntax>().Single();
             var model = (CSharpSemanticModel)comp.GetSemanticModel(tree);
             var binder = model.GetEnclosingBinder(@is.SpanStart);
-            var boundIsPattern = (BoundIsPatternExpression)binder.BindExpression(
-                @is,
-                BindingDiagnosticBag.Discarded
-            );
+            var boundIsPattern = (BoundIsPatternExpression)
+                binder.BindExpression(@is, BindingDiagnosticBag.Discarded);
             AssertEx.Equal(
                 @"[0]: t0 is int ? [1] : [3]
 [1]: t1 = (int)t0; [2]
@@ -4147,10 +4139,8 @@ class C
                 .Single();
             var model = (CSharpSemanticModel)comp.GetSemanticModel(tree);
             var binder = model.GetEnclosingBinder(@switch.SpanStart);
-            var boundSwitch = (BoundSwitchExpression)binder.BindExpression(
-                @switch,
-                BindingDiagnosticBag.Discarded
-            );
+            var boundSwitch = (BoundSwitchExpression)
+                binder.BindExpression(@switch, BindingDiagnosticBag.Discarded);
             AssertEx.Equal(
                 @"[0]: t0 is int ? [1] : [4]
 [1]: t1 = (int)t0; [2]

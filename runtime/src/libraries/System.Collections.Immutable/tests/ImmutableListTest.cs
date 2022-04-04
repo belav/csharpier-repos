@@ -956,10 +956,11 @@ namespace System.Collections.Immutable.Tests
             var list = (IEnumerable)createMethod.Invoke(null, null);
 
             var addMethod = list.GetType().GetMethod("Add");
-            list = (IEnumerable)addMethod.Invoke(
-                list,
-                new object[] { Activator.CreateInstance(dummType.AsType()) }
-            );
+            list = (IEnumerable)
+                addMethod.Invoke(
+                    list,
+                    new object[] { Activator.CreateInstance(dummType.AsType()) }
+                );
 
             list.GetEnumerator(); // ensure this doesn't throw
         }

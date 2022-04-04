@@ -198,9 +198,8 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor2_ShouldSetOriginToNull()
         {
-            var catalog = (ICompositionElement)new TypeCatalog(
-                PartFactory.GetAttributedExporterType()
-            );
+            var catalog = (ICompositionElement)
+                new TypeCatalog(PartFactory.GetAttributedExporterType());
 
             Assert.Null(catalog.Origin);
         }
@@ -208,9 +207,10 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor3_ShouldSetOriginToNull()
         {
-            var catalog = (ICompositionElement)new TypeCatalog(
-                (IEnumerable<Type>)new Type[] { PartFactory.GetAttributedExporterType() }
-            );
+            var catalog = (ICompositionElement)
+                new TypeCatalog(
+                    (IEnumerable<Type>)new Type[] { PartFactory.GetAttributedExporterType() }
+                );
 
             Assert.Null(catalog.Origin);
         }

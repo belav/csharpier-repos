@@ -131,9 +131,10 @@ public sealed class ManagedAuthenticatedEncryptorFactory : IAuthenticatedEncrypt
         public static Func<T> CreateFactory<T>(Type implementation)
         {
             return (
-                (IActivator<T>)Activator.CreateInstance(
-                    typeof(AlgorithmActivatorCore<>).MakeGenericType(implementation)
-                )!
+                (IActivator<T>)
+                    Activator.CreateInstance(
+                        typeof(AlgorithmActivatorCore<>).MakeGenericType(implementation)
+                    )!
             ).Creator;
         }
 

@@ -641,9 +641,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override BoundNode VisitObjectCreationExpression(BoundObjectCreationExpression node)
         {
-            var rewritten = (BoundObjectCreationExpression?)base.VisitObjectCreationExpression(
-                node
-            );
+            var rewritten = (BoundObjectCreationExpression?)
+                base.VisitObjectCreationExpression(node);
             Debug.Assert(rewritten != null);
             if (
                 !TypeSymbol.Equals(rewritten.Type, node.Type, TypeCompareKind.ConsiderEverything2)
@@ -726,9 +725,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (method.ContainingType.IsAnonymousType)
             {
                 //  Method of an anonymous type
-                var newType = (NamedTypeSymbol)TypeMap
-                    .SubstituteType(method.ContainingType)
-                    .AsTypeSymbolOnly();
+                var newType = (NamedTypeSymbol)
+                    TypeMap.SubstituteType(method.ContainingType).AsTypeSymbolOnly();
                 if (ReferenceEquals(newType, method.ContainingType))
                 {
                     //  Anonymous type symbol was not rewritten
@@ -751,9 +749,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 //  Method of a regular type
                 return ((MethodSymbol)method.OriginalDefinition)
                     .AsMember(
-                        (NamedTypeSymbol)TypeMap
-                            .SubstituteType(method.ContainingType)
-                            .AsTypeSymbolOnly()
+                        (NamedTypeSymbol)
+                            TypeMap.SubstituteType(method.ContainingType).AsTypeSymbolOnly()
                     )
                     .ConstructIfGeneric(
                         TypeMap.SubstituteTypes(method.TypeArgumentsWithAnnotations)
@@ -773,16 +770,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 //  Property of a regular type
                 return ((PropertySymbol)property.OriginalDefinition).AsMember(
-                    (NamedTypeSymbol)TypeMap
-                        .SubstituteType(property.ContainingType)
-                        .AsTypeSymbolOnly()
+                    (NamedTypeSymbol)
+                        TypeMap.SubstituteType(property.ContainingType).AsTypeSymbolOnly()
                 );
             }
 
             //  Method of an anonymous type
-            var newType = (NamedTypeSymbol)TypeMap
-                .SubstituteType(property.ContainingType)
-                .AsTypeSymbolOnly();
+            var newType = (NamedTypeSymbol)
+                TypeMap.SubstituteType(property.ContainingType).AsTypeSymbolOnly();
             if (ReferenceEquals(newType, property.ContainingType))
             {
                 //  Anonymous type symbol was not rewritten

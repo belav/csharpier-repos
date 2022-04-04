@@ -1211,19 +1211,20 @@ public class ComplexObjectModelBinderTest
         configureOptions?.Invoke(options.Value);
 
         var factory = TestModelBinderFactory.Create(options.Value.ModelBinderProviders.ToArray());
-        return (ComplexObjectModelBinder)factory.CreateBinder(
-            new ModelBinderFactoryContext()
-            {
-                Metadata = metadata,
-                BindingInfo = new BindingInfo()
+        return (ComplexObjectModelBinder)
+            factory.CreateBinder(
+                new ModelBinderFactoryContext()
                 {
-                    BinderModelName = metadata.BinderModelName,
-                    BinderType = metadata.BinderType,
-                    BindingSource = metadata.BindingSource,
-                    PropertyFilterProvider = metadata.PropertyFilterProvider,
-                },
-            }
-        );
+                    Metadata = metadata,
+                    BindingInfo = new BindingInfo()
+                    {
+                        BinderModelName = metadata.BinderModelName,
+                        BinderType = metadata.BinderType,
+                        BindingSource = metadata.BindingSource,
+                        PropertyFilterProvider = metadata.PropertyFilterProvider,
+                    },
+                }
+            );
     }
 
     private static DefaultModelBindingContext CreateContext(

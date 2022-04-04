@@ -193,8 +193,8 @@ namespace SerializationTestTypes
             );
             if (dataContractAttributes != null && dataContractAttributes.Length > 0)
             {
-                DataContractAttribute dataContractAttribute =
-                    (DataContractAttribute)dataContractAttributes[0];
+                DataContractAttribute dataContractAttribute = (DataContractAttribute)
+                    dataContractAttributes[0];
                 if (dataContractAttribute.IsReference)
                 {
                     return;

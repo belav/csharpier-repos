@@ -343,9 +343,8 @@ class C
             var model = comp.GetSemanticModel(tree);
             var c = (TypeDeclarationSyntax)tree.GetCompilationUnitRoot().Members[0];
             var main = (MethodDeclarationSyntax)c.Members[1];
-            var call = (InvocationExpressionSyntax)(
-                (ExpressionStatementSyntax)main.Body.Statements[1]
-            ).Expression;
+            var call = (InvocationExpressionSyntax)
+                ((ExpressionStatementSyntax)main.Body.Statements[1]).Expression;
             var arg = call.ArgumentList.Arguments[0].Expression;
 
             if (isExplicitConversion)
@@ -1410,9 +1409,8 @@ class C
 "
             );
             var tree = compilation.SyntaxTrees[0];
-            var methodDecl = (MethodDeclarationSyntax)(
-                (TypeDeclarationSyntax)tree.GetCompilationUnitRoot().Members[0]
-            ).Members[0];
+            var methodDecl = (MethodDeclarationSyntax)
+                ((TypeDeclarationSyntax)tree.GetCompilationUnitRoot().Members[0]).Members[0];
             var ifStatement = (IfStatementSyntax)methodDecl.Body.Statements[0];
             var condition = ifStatement.Condition;
             var model = compilation.GetSemanticModel(tree);
@@ -1441,9 +1439,8 @@ class C
 "
             );
             var tree = compilation.SyntaxTrees[0];
-            var methodDecl = (MethodDeclarationSyntax)(
-                (TypeDeclarationSyntax)tree.GetCompilationUnitRoot().Members[0]
-            ).Members[0];
+            var methodDecl = (MethodDeclarationSyntax)
+                ((TypeDeclarationSyntax)tree.GetCompilationUnitRoot().Members[0]).Members[0];
             var forStatement = (ForStatementSyntax)methodDecl.Body.Statements[0];
             var condition = forStatement.Condition;
             var model = compilation.GetSemanticModel(tree);
@@ -1868,11 +1865,12 @@ class C
 
         private static INamedTypeSymbol GetSystemActionType(Compilation comp)
         {
-            return (INamedTypeSymbol)comp.GlobalNamespace
-                .GetMember<INamespaceSymbol>("System")
-                .GetMembers("Action")
-                .Where(s => !((INamedTypeSymbol)s).IsGenericType)
-                .Single();
+            return (INamedTypeSymbol)
+                comp.GlobalNamespace
+                    .GetMember<INamespaceSymbol>("System")
+                    .GetMembers("Action")
+                    .Where(s => !((INamedTypeSymbol)s).IsGenericType)
+                    .Single();
         }
 
         [Fact]
@@ -2190,9 +2188,8 @@ class Program
             // This will implicitly bind "var" to determine type of options.
             // This calls LocalSymbol.GetType
             var bindInfo = model.GetSemanticInfoSummary(exprSyntaxToBind);
-            var varIdentifier = (IdentifierNameSyntax)tree.GetCompilationUnitRoot()
-                .DescendantNodes()
-                .First(n => n.ToString() == "var");
+            var varIdentifier = (IdentifierNameSyntax)
+                tree.GetCompilationUnitRoot().DescendantNodes().First(n => n.ToString() == "var");
             // var from line var options = CreateOptions;
             // Explicitly bind "var".
             // This path calls BindvariableDeclaration.
@@ -2413,9 +2410,8 @@ class C<T, U, V>
             var tree = Parse(text);
             var comp = CreateCompilation(tree);
             var model = comp.GetSemanticModel(tree);
-            var nameSyntaxToBind = (SimpleNameSyntax)GetExprSyntaxForBinding(
-                GetExprSyntaxList(tree)
-            );
+            var nameSyntaxToBind = (SimpleNameSyntax)
+                GetExprSyntaxForBinding(GetExprSyntaxList(tree));
 
             Assert.Equal(SyntaxKind.GenericName, nameSyntaxToBind.Kind());
             Assert.Equal(3, nameSyntaxToBind.Arity);
@@ -4035,10 +4031,8 @@ class Z
             var model = comp.GetSemanticModel(tree);
 
             var gType = comp.GlobalNamespace.GetMember<INamedTypeSymbol>("G");
-            var mngMethod = (IMethodSymbol)comp.GlobalNamespace
-                .GetMember<INamedTypeSymbol>("Z")
-                .GetMembers("MNG")
-                .First();
+            var mngMethod = (IMethodSymbol)
+                comp.GlobalNamespace.GetMember<INamedTypeSymbol>("Z").GetMembers("MNG").First();
             var gNullableType = mngMethod.GetParameterType(0);
             Assert.True(gNullableType.IsNullableType(), "MNG parameter is not a nullable type?");
             Assert.Equal(gType, gNullableType.StrippedType());
@@ -4105,10 +4099,8 @@ class Z
             var model = comp.GetSemanticModel(tree);
 
             var gType = comp.GlobalNamespace.GetMember<INamedTypeSymbol>("G");
-            var mngMethod = (IMethodSymbol)comp.GlobalNamespace
-                .GetMember<INamedTypeSymbol>("Z")
-                .GetMembers("MNG")
-                .First();
+            var mngMethod = (IMethodSymbol)
+                comp.GlobalNamespace.GetMember<INamedTypeSymbol>("Z").GetMembers("MNG").First();
             var gNullableType = mngMethod.GetParameterType(0);
             Assert.True(gNullableType.IsNullableType(), "MNG parameter is not a nullable type?");
             Assert.Equal(gType, gNullableType.StrippedType());
@@ -4680,11 +4672,12 @@ class C
 }
 ";
 
-            var compilation = (Compilation)CreateCompilation(
-                source2,
-                new[] { reference1 },
-                assemblyName: "SpeculativelyBindPropertyGroup"
-            );
+            var compilation = (Compilation)
+                CreateCompilation(
+                    source2,
+                    new[] { reference1 },
+                    assemblyName: "SpeculativelyBindPropertyGroup"
+                );
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 

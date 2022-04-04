@@ -160,8 +160,8 @@ class C
                 source,
                 composition: s_compositionWithMockDiagnosticUpdateSourceRegistrationService
             );
-            var compilerEngineCompilation =
-                (CSharpCompilation)compilerEngineWorkspace.CurrentSolution.Projects
+            var compilerEngineCompilation = (CSharpCompilation)
+                compilerEngineWorkspace.CurrentSolution.Projects
                     .Single()
                     .GetRequiredCompilationAsync(CancellationToken.None)
                     .Result;
@@ -454,8 +454,8 @@ class C
                 )
             )
             {
-                var compilerEngineCompilation =
-                    (CSharpCompilation)compilerEngineWorkspace.CurrentSolution.Projects
+                var compilerEngineCompilation = (CSharpCompilation)
+                    compilerEngineWorkspace.CurrentSolution.Projects
                         .Single()
                         .GetRequiredCompilationAsync(CancellationToken.None)
                         .Result;

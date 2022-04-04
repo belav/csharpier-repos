@@ -475,9 +475,8 @@ class C
             validate(model, tree);
 
             var newTree = SyntaxFactory.ParseSyntaxTree(text + " ", options: TestOptions.Regular9);
-            var mMethod = (MethodDeclarationSyntax)newTree
-                .FindNodeOrTokenByKind(SyntaxKind.MethodDeclaration, occurrence: 1)
-                .AsNode();
+            var mMethod = (MethodDeclarationSyntax)
+                newTree.FindNodeOrTokenByKind(SyntaxKind.MethodDeclaration, occurrence: 1).AsNode();
 
             Assert.True(
                 model.TryGetSpeculativeSemanticModelForMethodBody(
@@ -676,11 +675,8 @@ class C
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree);
 
-            var arg1 = (AttributeArgumentSyntax)tree.FindNodeOrTokenByKind(
-                    SyntaxKind.AttributeArgument,
-                    occurrence: 1
-                )
-                .AsNode();
+            var arg1 = (AttributeArgumentSyntax)
+                tree.FindNodeOrTokenByKind(SyntaxKind.AttributeArgument, occurrence: 1).AsNode();
             Assert.Equal(
                 "System.String s1",
                 model.GetSymbolInfo(arg1.Expression).Symbol.ToTestDisplayString()
@@ -690,22 +686,16 @@ class C
                 model.GetTypeInfo(arg1.Expression).Type.SpecialType
             );
 
-            var arg2 = (AttributeArgumentSyntax)tree.FindNodeOrTokenByKind(
-                    SyntaxKind.AttributeArgument,
-                    occurrence: 2
-                )
-                .AsNode();
+            var arg2 = (AttributeArgumentSyntax)
+                tree.FindNodeOrTokenByKind(SyntaxKind.AttributeArgument, occurrence: 2).AsNode();
             Assert.Null(model.GetSymbolInfo(arg2.Expression).Symbol);
             Assert.Equal(
                 SpecialType.System_String,
                 model.GetTypeInfo(arg2.Expression).Type.SpecialType
             );
 
-            var arg3 = (AttributeArgumentSyntax)tree.FindNodeOrTokenByKind(
-                    SyntaxKind.AttributeArgument,
-                    occurrence: 3
-                )
-                .AsNode();
+            var arg3 = (AttributeArgumentSyntax)
+                tree.FindNodeOrTokenByKind(SyntaxKind.AttributeArgument, occurrence: 3).AsNode();
             Assert.Equal(
                 "System.String s2",
                 model.GetSymbolInfo(arg3.Expression).Symbol.ToTestDisplayString()
@@ -763,22 +753,16 @@ class C
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree);
 
-            var arg = (AttributeArgumentSyntax)tree.FindNodeOrTokenByKind(
-                    SyntaxKind.AttributeArgument,
-                    occurrence: 1
-                )
-                .AsNode();
+            var arg = (AttributeArgumentSyntax)
+                tree.FindNodeOrTokenByKind(SyntaxKind.AttributeArgument, occurrence: 1).AsNode();
             Assert.Null(model.GetSymbolInfo(arg.Expression).Symbol);
             Assert.Equal(
                 SpecialType.System_Boolean,
                 model.GetTypeInfo(arg.Expression).Type.SpecialType
             );
 
-            var decl = (DeclarationPatternSyntax)tree.FindNodeOrTokenByKind(
-                    SyntaxKind.DeclarationPattern,
-                    occurrence: 1
-                )
-                .AsNode();
+            var decl = (DeclarationPatternSyntax)
+                tree.FindNodeOrTokenByKind(SyntaxKind.DeclarationPattern, occurrence: 1).AsNode();
             Assert.Equal(
                 "System.Int32 i",
                 model.GetDeclaredSymbol(decl.Designation).ToTestDisplayString()
@@ -838,11 +822,8 @@ class C
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree);
 
-            var arg = (AttributeArgumentSyntax)tree.FindNodeOrTokenByKind(
-                    SyntaxKind.AttributeArgument,
-                    occurrence: 1
-                )
-                .AsNode();
+            var arg = (AttributeArgumentSyntax)
+                tree.FindNodeOrTokenByKind(SyntaxKind.AttributeArgument, occurrence: 1).AsNode();
             Assert.Equal(
                 "System.Boolean C.M2(out System.Int32 x)",
                 model.GetSymbolInfo(arg.Expression).Symbol.ToTestDisplayString()
@@ -852,11 +833,9 @@ class C
                 model.GetTypeInfo(arg.Expression).Type.SpecialType
             );
 
-            var decl = (DeclarationExpressionSyntax)tree.FindNodeOrTokenByKind(
-                    SyntaxKind.DeclarationExpression,
-                    occurrence: 1
-                )
-                .AsNode();
+            var decl = (DeclarationExpressionSyntax)
+                tree.FindNodeOrTokenByKind(SyntaxKind.DeclarationExpression, occurrence: 1)
+                    .AsNode();
             Assert.Equal(
                 "System.Int32 i",
                 model.GetDeclaredSymbol(decl.Designation).ToTestDisplayString()
@@ -2100,8 +2079,9 @@ class C
         [Fact]
         public void TypeParameterAttributesInSemanticModel()
         {
-            var comp = (Compilation)CreateCompilation(
-                @"
+            var comp = (Compilation)
+                CreateCompilation(
+                    @"
 using System;
 class C
 {
@@ -2110,8 +2090,8 @@ class C
         void Local<[A]T, [CLSCompliant]U>() { }
     }
 }",
-                parseOptions: TestOptions.Regular9
-            );
+                    parseOptions: TestOptions.Regular9
+                );
             comp.VerifyDiagnostics(
                 // (7,21): error CS0246: The type or namespace name 'AAttribute' could not be found (are you missing a using directive or an assembly reference?)
                 //         void Local<[A]T, [CLSCompliant]U>() { }
@@ -2199,8 +2179,9 @@ class C
         [Fact]
         public void ParameterAttributesInSemanticModel()
         {
-            var comp = (Compilation)CreateCompilation(
-                @"
+            var comp = (Compilation)
+                CreateCompilation(
+                    @"
 using System;
 class C
 {
@@ -2209,8 +2190,8 @@ class C
         void Local([A]int x, [CLSCompliant]int y) { }
     }
 }",
-                parseOptions: TestOptions.Regular9
-            );
+                    parseOptions: TestOptions.Regular9
+                );
             comp.VerifyDiagnostics(
                 // (7,21): error CS0246: The type or namespace name 'AAttribute' could not be found (are you missing a using directive or an assembly reference?)
                 //         void Local([A]int x, [CLSCompliant]int y) { }
@@ -5989,10 +5970,8 @@ class C<T>
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree);
 
-            var localDecl = (LocalFunctionStatementSyntax)tree.FindNodeOrTokenByKind(
-                    SyntaxKind.LocalFunctionStatement
-                )
-                .AsNode();
+            var localDecl = (LocalFunctionStatementSyntax)
+                tree.FindNodeOrTokenByKind(SyntaxKind.LocalFunctionStatement).AsNode();
 
             var typeParameters = localDecl.TypeParameterList.Parameters;
             var parameters = localDecl.ParameterList.Parameters;
@@ -8058,9 +8037,8 @@ class C
                 options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: m =>
                 {
-                    var method = (MethodSymbol)m.GlobalNamespace.GetMember(
-                        "Program.<M>g__local|0_0"
-                    );
+                    var method = (MethodSymbol)
+                        m.GlobalNamespace.GetMember("Program.<M>g__local|0_0");
                     Assert.True(method.IsStatic);
                 }
             );
@@ -8090,9 +8068,8 @@ class C
                 expectedOutput: "System.Int32",
                 symbolValidator: m =>
                 {
-                    var method = (MethodSymbol)m.GlobalNamespace.GetMember(
-                        "Program.<M>g__local|0_0"
-                    );
+                    var method = (MethodSymbol)
+                        m.GlobalNamespace.GetMember("Program.<M>g__local|0_0");
                     Assert.True(method.IsStatic);
                     Assert.True(method.IsGenericMethod);
                     Assert.Equal(
@@ -8130,9 +8107,8 @@ class C
                 expectedOutput: "System.Int32",
                 symbolValidator: m =>
                 {
-                    var method = (MethodSymbol)m.GlobalNamespace.GetMember(
-                        "Program.<M>g__local|0_0"
-                    );
+                    var method = (MethodSymbol)
+                        m.GlobalNamespace.GetMember("Program.<M>g__local|0_0");
                     Assert.True(method.IsStatic);
                     Assert.True(method.IsGenericMethod);
                     Assert.Equal(

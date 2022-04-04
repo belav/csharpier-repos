@@ -496,9 +496,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     await (
                         exceptionalConsume
                             ? (Task)Assert.ThrowsAsync<FormatException>(() => bb.Completion)
-                            : (Task)Assert.ThrowsAsync<InvalidOperationException>(
-                                  () => bb.Completion
-                              )
+                            : (Task)
+                                  Assert.ThrowsAsync<InvalidOperationException>(() => bb.Completion)
                     );
                 }
         }

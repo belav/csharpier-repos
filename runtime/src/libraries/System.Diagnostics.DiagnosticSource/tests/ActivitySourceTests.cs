@@ -1745,18 +1745,12 @@ namespace System.Diagnostics.Tests
                         //
                         string[] parts = d.Split(',');
 
-                        ActivityIdFormat defaultId = (ActivityIdFormat)Enum.Parse(
-                            typeof(ActivityIdFormat),
-                            parts[0].Trim()
-                        );
-                        ActivityIdFormat idToForce = (ActivityIdFormat)Enum.Parse(
-                            typeof(ActivityIdFormat),
-                            parts[1].Trim()
-                        );
-                        ActivityIdFormat parentFormat = (ActivityIdFormat)Enum.Parse(
-                            typeof(ActivityIdFormat),
-                            parts[2].Trim()
-                        );
+                        ActivityIdFormat defaultId = (ActivityIdFormat)
+                            Enum.Parse(typeof(ActivityIdFormat), parts[0].Trim());
+                        ActivityIdFormat idToForce = (ActivityIdFormat)
+                            Enum.Parse(typeof(ActivityIdFormat), parts[1].Trim());
+                        ActivityIdFormat parentFormat = (ActivityIdFormat)
+                            Enum.Parse(typeof(ActivityIdFormat), parts[2].Trim());
                         string parentId = parts[3].Trim();
                         if (parentId == "null")
                         {
@@ -1773,17 +1767,13 @@ namespace System.Diagnostics.Tests
                         ActivityIdFormat expectedCreateFormat =
                             parts[6].Trim() == "Default"
                                 ? Activity.DefaultIdFormat
-                                : (ActivityIdFormat)Enum.Parse(
-                                      typeof(ActivityIdFormat),
-                                      parts[6].Trim()
-                                  );
+                                : (ActivityIdFormat)
+                                      Enum.Parse(typeof(ActivityIdFormat), parts[6].Trim());
                         ActivityIdFormat expectedStartFormat =
                             parts[7].Trim() == "Default"
                                 ? Activity.DefaultIdFormat
-                                : (ActivityIdFormat)Enum.Parse(
-                                      typeof(ActivityIdFormat),
-                                      parts[7].Trim()
-                                  );
+                                : (ActivityIdFormat)
+                                      Enum.Parse(typeof(ActivityIdFormat), parts[7].Trim());
 
                         using ActivitySource aSource = new ActivitySource("FormatIdSource");
                         ActivityTraceId traceId = default;

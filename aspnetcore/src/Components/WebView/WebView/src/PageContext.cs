@@ -40,8 +40,8 @@ internal class PageContext : IAsyncDisposable
         _serviceScope = serviceScope;
         var services = serviceScope.ServiceProvider;
 
-        NavigationManager =
-            (WebViewNavigationManager)services.GetRequiredService<NavigationManager>();
+        NavigationManager = (WebViewNavigationManager)
+            services.GetRequiredService<NavigationManager>();
         NavigationManager.AttachToWebView(ipcSender, baseUrl, startUrl);
 
         JSRuntime = (WebViewJSRuntime)services.GetRequiredService<IJSRuntime>();

@@ -414,8 +414,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 if (declarationBody.Parent.IsKind(SyntaxKind.ConstructorDeclaration))
                 {
                     var constructor = (ConstructorDeclarationSyntax)declarationBody.Parent;
-                    var partnerConstructor =
-                        (ConstructorDeclarationSyntax?)partnerDeclarationBody?.Parent;
+                    var partnerConstructor = (ConstructorDeclarationSyntax?)
+                        partnerDeclarationBody?.Parent;
 
                     if (
                         constructor.Initializer == null
@@ -472,10 +472,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                         case SyntaxKind.ForEachStatement:
                         case SyntaxKind.ForEachVariableStatement:
                             Debug.Assert(!isBody);
-                            statementPart = (int)GetStatementPart(
-                                (CommonForEachStatementSyntax)node,
-                                position
-                            );
+                            statementPart = (int)
+                                GetStatementPart((CommonForEachStatementSyntax)node, position);
                             return node;
 
                         case SyntaxKind.DoStatement:
@@ -942,11 +940,12 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 case SyntaxKind.ThisConstructorInitializer:
                 case SyntaxKind.BaseConstructorInitializer:
                 case SyntaxKind.ConstructorDeclaration:
-                    var newConstructor = (ConstructorDeclarationSyntax)(
-                        newBody.Parent.IsKind(SyntaxKind.ArrowExpressionClause)
-                          ? newBody.Parent.Parent
-                          : newBody.Parent
-                    )!;
+                    var newConstructor = (ConstructorDeclarationSyntax)
+                        (
+                            newBody.Parent.IsKind(SyntaxKind.ArrowExpressionClause)
+                              ? newBody.Parent.Parent
+                              : newBody.Parent
+                        )!;
                     newStatement = (SyntaxNode?)newConstructor.Initializer ?? newConstructor;
                     return true;
 
@@ -1898,10 +1897,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         )
         {
             var bodyExpression = LambdaUtilities.GetNestedFunctionBody(lambdaExpression);
-            return (IMethodSymbol)model.GetRequiredEnclosingSymbol(
-                bodyExpression.SpanStart,
-                cancellationToken
-            );
+            return (IMethodSymbol)
+                model.GetRequiredEnclosingSymbol(bodyExpression.SpanStart, cancellationToken);
         }
 
         internal override SyntaxNode? GetContainingQueryExpression(SyntaxNode node) =>
@@ -3537,9 +3534,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 )
             )
             {
-                var newLocalDeclaration = (LocalDeclarationStatementSyntax)insertedSuspensionPoint!
-                    .Parent!
-                    .Parent!;
+                var newLocalDeclaration = (LocalDeclarationStatementSyntax)
+                    insertedSuspensionPoint!.Parent!.Parent!;
 
                 diagnostics.Add(
                     new RudeEditDiagnostic(

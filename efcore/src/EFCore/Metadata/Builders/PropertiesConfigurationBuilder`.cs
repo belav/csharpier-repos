@@ -110,10 +110,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             TConversion,
             TComparer
         >() where TComparer : ValueComparer =>
-            (PropertiesConfigurationBuilder<TProperty>)base.HaveConversion<
-                TConversion,
-                TComparer
-            >();
+            (PropertiesConfigurationBuilder<TProperty>)
+                base.HaveConversion<TConversion, TComparer>();
 
         /// <summary>
         ///     Configures the property so that the property value is converted before
@@ -126,9 +124,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             Type conversionType,
             Type? comparerType
         ) =>
-            (PropertiesConfigurationBuilder<TProperty>)base.HaveConversion(
-                conversionType,
-                comparerType
-            );
+            (PropertiesConfigurationBuilder<TProperty>)
+                base.HaveConversion(conversionType, comparerType);
     }
 }

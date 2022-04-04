@@ -1415,9 +1415,8 @@ public static class C
             Compilation comp = CreateCompilation(csharp);
 
             var c = comp.GetMember<IMethodSymbol>("C.Test");
-            var testMethodSyntax = (MethodDeclarationSyntax)c.DeclaringSyntaxReferences
-                .Single()
-                .GetSyntax();
+            var testMethodSyntax = (MethodDeclarationSyntax)
+                c.DeclaringSyntaxReferences.Single().GetSyntax();
 
             var semanticModel = comp.GetSemanticModel(testMethodSyntax.SyntaxTree);
             var statements = testMethodSyntax.Body.Statements;
@@ -1433,12 +1432,11 @@ public static class C
             void testStatement(StatementSyntax statementSyntax, bool isEffectivelyReadOnly)
             {
                 var expressionStatement = (ExpressionStatementSyntax)statementSyntax;
-                var invocationExpression =
-                    (InvocationExpressionSyntax)expressionStatement.Expression;
+                var invocationExpression = (InvocationExpressionSyntax)
+                    expressionStatement.Expression;
 
-                var symbol = (IMethodSymbol)semanticModel
-                    .GetSymbolInfo(invocationExpression.Expression)
-                    .Symbol;
+                var symbol = (IMethodSymbol)
+                    semanticModel.GetSymbolInfo(invocationExpression.Expression).Symbol;
                 var reducedFrom = symbol.ReducedFrom;
 
                 Assert.Equal(isEffectivelyReadOnly, symbol.GetSymbol().IsEffectivelyReadOnly);

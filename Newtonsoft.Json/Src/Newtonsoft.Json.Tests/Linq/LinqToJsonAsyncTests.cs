@@ -59,10 +59,11 @@ namespace Newtonsoft.Json.Tests.Linq
             );
 
             JsonTextReader jsonReader = new JsonTextReader(textReader);
-            JArray a = (JArray)await JToken.ReadFromAsync(
-                jsonReader,
-                new JsonLoadSettings { CommentHandling = CommentHandling.Load }
-            );
+            JArray a = (JArray)
+                await JToken.ReadFromAsync(
+                    jsonReader,
+                    new JsonLoadSettings { CommentHandling = CommentHandling.Load }
+                );
 
             Assert.AreEqual(4, a.Count);
             Assert.AreEqual(JTokenType.Comment, a[0].Type);
@@ -103,10 +104,11 @@ namespace Newtonsoft.Json.Tests.Linq
             );
 
             JsonTextReader jsonReader = new JsonTextReader(textReader);
-            JValue v = (JValue)await JToken.ReadFromAsync(
-                jsonReader,
-                new JsonLoadSettings { CommentHandling = CommentHandling.Load }
-            );
+            JValue v = (JValue)
+                await JToken.ReadFromAsync(
+                    jsonReader,
+                    new JsonLoadSettings { CommentHandling = CommentHandling.Load }
+                );
 
             Assert.AreEqual(JTokenType.Comment, v.Type);
 
@@ -130,10 +132,11 @@ namespace Newtonsoft.Json.Tests.Linq
             );
 
             JsonTextReader jsonReader = new JsonTextReader(textReader);
-            JArray a = (JArray)await JToken.ReadFromAsync(
-                jsonReader,
-                new JsonLoadSettings { CommentHandling = CommentHandling.Ignore }
-            );
+            JArray a = (JArray)
+                await JToken.ReadFromAsync(
+                    jsonReader,
+                    new JsonLoadSettings { CommentHandling = CommentHandling.Ignore }
+                );
 
             Assert.AreEqual(JTokenType.Array, a.Type);
 

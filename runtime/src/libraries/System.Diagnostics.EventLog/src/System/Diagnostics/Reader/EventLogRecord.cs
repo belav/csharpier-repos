@@ -245,10 +245,11 @@ namespace System.Diagnostics.Eventing.Reader
                 {
                     if (_containerChannel == null)
                     {
-                        _containerChannel = (string)NativeWrapper.EvtGetEventInfo(
-                            this.Handle,
-                            UnsafeNativeMethods.EvtEventPropertyId.EvtEventPath
-                        );
+                        _containerChannel = (string)
+                            NativeWrapper.EvtGetEventInfo(
+                                this.Handle,
+                                UnsafeNativeMethods.EvtEventPropertyId.EvtEventPath
+                            );
                     }
                     return _containerChannel;
                 }
@@ -265,10 +266,11 @@ namespace System.Diagnostics.Eventing.Reader
                 {
                     if (_matchedQueryIds == null)
                     {
-                        _matchedQueryIds = (int[])NativeWrapper.EvtGetEventInfo(
-                            this.Handle,
-                            UnsafeNativeMethods.EvtEventPropertyId.EvtEventQueryIDs
-                        );
+                        _matchedQueryIds = (int[])
+                            NativeWrapper.EvtGetEventInfo(
+                                this.Handle,
+                                UnsafeNativeMethods.EvtEventPropertyId.EvtEventQueryIDs
+                            );
                     }
                     return _matchedQueryIds;
                 }

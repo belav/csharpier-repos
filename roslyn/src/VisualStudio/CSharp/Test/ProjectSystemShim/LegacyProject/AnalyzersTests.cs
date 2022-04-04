@@ -39,8 +39,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
             using var environment = new TestEnvironment();
             var project = CSharpHelpers.CreateCSharpProject(environment, "Test");
 
-            var options =
-                (CSharpCompilationOptions)environment.GetUpdatedCompilationOptionOfSingleProject();
+            var options = (CSharpCompilationOptions)
+                environment.GetUpdatedCompilationOptionOfSingleProject();
 
             Assert.Equal(
                 expected: ReportDiagnostic.Default,
@@ -49,8 +49,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
 
             ((IAnalyzerHost)project).SetRuleSetFile(ruleSetFile.Path);
 
-            options =
-                (CSharpCompilationOptions)environment.GetUpdatedCompilationOptionOfSingleProject();
+            options = (CSharpCompilationOptions)
+                environment.GetUpdatedCompilationOptionOfSingleProject();
 
             Assert.Equal(expected: ReportDiagnostic.Error, actual: options.GeneralDiagnosticOption);
         }
@@ -125,8 +125,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
 
             ((IAnalyzerHost)project).SetRuleSetFile(ruleSetFile.Path);
 
-            var options =
-                (CSharpCompilationOptions)environment.GetUpdatedCompilationOptionOfSingleProject();
+            var options = (CSharpCompilationOptions)
+                environment.GetUpdatedCompilationOptionOfSingleProject();
 
             var ca1012DiagnosticOption = options.SpecificDiagnosticOptions["CA1012"];
             Assert.Equal(expected: ReportDiagnostic.Error, actual: ca1012DiagnosticOption);
@@ -153,8 +153,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
             ((IAnalyzerHost)project).SetRuleSetFile(ruleSetFile.Path);
             project.SetOption(CompilerOptions.OPTID_WARNASERRORLIST, "1014");
 
-            var options =
-                (CSharpCompilationOptions)environment.GetUpdatedCompilationOptionOfSingleProject();
+            var options = (CSharpCompilationOptions)
+                environment.GetUpdatedCompilationOptionOfSingleProject();
 
             var ca1014DiagnosticOption = options.SpecificDiagnosticOptions["CS1014"];
             Assert.Equal(expected: ReportDiagnostic.Error, actual: ca1014DiagnosticOption);
@@ -297,8 +297,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
                 ((IAnalyzerHost)project).SetRuleSetFile(ruleSetFile.Path);
             }
 
-            var options =
-                (CSharpCompilationOptions)environment.GetUpdatedCompilationOptionOfSingleProject();
+            var options = (CSharpCompilationOptions)
+                environment.GetUpdatedCompilationOptionOfSingleProject();
 
             // Assert the value exists now
             Assert.Equal(expected: ReportDiagnostic.Error, actual: options.GeneralDiagnosticOption);
@@ -312,8 +312,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
             var waiter = listenerProvider.GetWaiter(FeatureAttribute.RuleSetEditor);
             waiter.ExpeditedWaitAsync().JoinUsingDispatcher(CancellationToken.None);
 
-            options =
-                (CSharpCompilationOptions)environment.GetUpdatedCompilationOptionOfSingleProject();
+            options = (CSharpCompilationOptions)
+                environment.GetUpdatedCompilationOptionOfSingleProject();
             Assert.Equal(expected: ReportDiagnostic.Warn, actual: options.GeneralDiagnosticOption);
         }
     }

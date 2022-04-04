@@ -130,7 +130,8 @@ namespace System.Diagnostics.CodeAnalysis
                 "Microsoft.CodeAnalysis.UnitTests.Diagnostics.SuppressMessageAttributeTests+ThrowExceptionForEachNamedTypeAnalyzer",
                 "System.Exception",
                 exception.Message,
-                (IFormattable)$@"{string.Format(CodeAnalysisResources.ExceptionContext, $@"Compilation: TestProject
+                (IFormattable)
+                    $@"{string.Format(CodeAnalysisResources.ExceptionContext, $@"Compilation: TestProject
 ISymbol: C (NamedType)")}
 
 {new LazyToString(() => exception.ToString())}
@@ -142,7 +143,8 @@ ISymbol: C (NamedType)")}
                 "Microsoft.CodeAnalysis.UnitTests.Diagnostics.SuppressMessageAttributeTests+ThrowExceptionForEachNamedTypeAnalyzer",
                 "System.Exception",
                 exception.Message,
-                (IFormattable)$@"{string.Format(CodeAnalysisResources.ExceptionContext, $@"Compilation: TestProject
+                (IFormattable)
+                    $@"{string.Format(CodeAnalysisResources.ExceptionContext, $@"Compilation: TestProject
 ISymbol: C1 (NamedType)")}
 
 {new LazyToString(() => exception.ToString())}
@@ -154,7 +156,8 @@ ISymbol: C1 (NamedType)")}
                 "Microsoft.CodeAnalysis.UnitTests.Diagnostics.SuppressMessageAttributeTests+ThrowExceptionForEachNamedTypeAnalyzer",
                 "System.Exception",
                 exception.Message,
-                (IFormattable)$@"{string.Format(CodeAnalysisResources.ExceptionContext, $@"Compilation: TestProject
+                (IFormattable)
+                    $@"{string.Format(CodeAnalysisResources.ExceptionContext, $@"Compilation: TestProject
 ISymbol: C2 (NamedType)")}
 
 {new LazyToString(() => exception.ToString())}
@@ -196,7 +199,8 @@ public class C2
                     "Microsoft.CodeAnalysis.UnitTests.Diagnostics.SuppressMessageAttributeTests+ThrowExceptionFromSupportedDiagnostics",
                     "System.Exception",
                     exception.Message,
-                    (IFormattable)$@"{new LazyToString(() => exception.ToString().Substring(0, exception.ToString().IndexOf("---")))}-----"
+                    (IFormattable)
+                        $@"{new LazyToString(() => exception.ToString().Substring(0, exception.ToString().IndexOf("---")))}-----"
                 )
                 .WithLocation(1, 1);
 

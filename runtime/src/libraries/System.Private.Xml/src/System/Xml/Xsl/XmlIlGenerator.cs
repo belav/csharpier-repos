@@ -194,10 +194,8 @@ namespace System.Xml.Xsl
                 _module.BakeMethods();
 
                 // Create delegate over "Execute" method
-                ExecuteDelegate delExec = (ExecuteDelegate)_module.CreateDelegate(
-                    "Execute",
-                    typeof(ExecuteDelegate)
-                );
+                ExecuteDelegate delExec = (ExecuteDelegate)
+                    _module.CreateDelegate("Execute", typeof(ExecuteDelegate));
                 return new XmlILCommand(delExec, staticData);
             }
         }

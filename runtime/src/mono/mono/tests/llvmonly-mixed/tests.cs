@@ -71,12 +71,13 @@ public class BitcodeMixedTests
     public static int test_2_entry_delegate_dynamic()
     {
         var func =
-            (Func<int, int>)Delegate.CreateDelegate(
-                typeof(Func<int, int>),
-                null,
-                typeof(InterpOnly).GetMethod("entry_1"),
-                true
-            );
+            (Func<int, int>)
+                Delegate.CreateDelegate(
+                    typeof(Func<int, int>),
+                    null,
+                    typeof(InterpOnly).GetMethod("entry_1"),
+                    true
+                );
 
         return func(1);
     }

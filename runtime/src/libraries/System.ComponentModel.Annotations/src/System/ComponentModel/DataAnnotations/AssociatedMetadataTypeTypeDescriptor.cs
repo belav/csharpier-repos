@@ -150,11 +150,8 @@ namespace System.ComponentModel.DataAnnotations
                 }
 
                 // Try association attribute
-                MetadataTypeAttribute? attribute =
-                    (MetadataTypeAttribute?)Attribute.GetCustomAttribute(
-                        type,
-                        typeof(MetadataTypeAttribute)
-                    );
+                MetadataTypeAttribute? attribute = (MetadataTypeAttribute?)
+                    Attribute.GetCustomAttribute(type, typeof(MetadataTypeAttribute));
                 if (attribute != null)
                 {
                     associatedMetadataType = attribute.MetadataClassType;

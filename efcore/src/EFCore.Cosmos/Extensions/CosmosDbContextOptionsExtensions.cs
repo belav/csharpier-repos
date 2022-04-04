@@ -39,13 +39,14 @@ namespace Microsoft.EntityFrameworkCore
             string databaseName,
             Action<CosmosDbContextOptionsBuilder>? cosmosOptionsAction = null
         ) where TContext : DbContext =>
-            (DbContextOptionsBuilder<TContext>)UseCosmos(
-                (DbContextOptionsBuilder)optionsBuilder,
-                accountEndpoint,
-                accountKey,
-                databaseName,
-                cosmosOptionsAction
-            );
+            (DbContextOptionsBuilder<TContext>)
+                UseCosmos(
+                    (DbContextOptionsBuilder)optionsBuilder,
+                    accountEndpoint,
+                    accountKey,
+                    databaseName,
+                    cosmosOptionsAction
+                );
 
         /// <summary>
         ///     Configures the context to connect to an Azure Cosmos database.
@@ -110,12 +111,13 @@ namespace Microsoft.EntityFrameworkCore
             string databaseName,
             Action<CosmosDbContextOptionsBuilder>? cosmosOptionsAction = null
         ) where TContext : DbContext =>
-            (DbContextOptionsBuilder<TContext>)UseCosmos(
-                (DbContextOptionsBuilder)optionsBuilder,
-                connectionString,
-                databaseName,
-                cosmosOptionsAction
-            );
+            (DbContextOptionsBuilder<TContext>)
+                UseCosmos(
+                    (DbContextOptionsBuilder)optionsBuilder,
+                    connectionString,
+                    databaseName,
+                    cosmosOptionsAction
+                );
 
         /// <summary>
         ///     Configures the context to connect to an Azure Cosmos database.

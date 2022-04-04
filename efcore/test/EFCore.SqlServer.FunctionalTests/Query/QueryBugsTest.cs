@@ -2272,9 +2272,13 @@ WHERE [e].[Name] IS NULL"
                 {
                     var compiledQueryCache = this.GetService<ICompiledQueryCache>();
 
-                    return (MemoryCache)typeof(CompiledQueryCache)
-                        .GetField("_memoryCache", BindingFlags.Instance | BindingFlags.NonPublic)
-                        ?.GetValue(compiledQueryCache);
+                    return (MemoryCache)
+                        typeof(CompiledQueryCache)
+                            .GetField(
+                                "_memoryCache",
+                                BindingFlags.Instance | BindingFlags.NonPublic
+                            )
+                            ?.GetValue(compiledQueryCache);
                 }
             }
 

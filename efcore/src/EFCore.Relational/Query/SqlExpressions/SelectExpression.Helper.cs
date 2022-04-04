@@ -909,8 +909,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                     }
 
                     // Now that we have SelectExpression, we visit all components and update table references inside columns
-                    newSelectExpression =
-                        (SelectExpression)new ColumnExpressionReplacingExpressionVisitor(
+                    newSelectExpression = (SelectExpression)
+                        new ColumnExpressionReplacingExpressionVisitor(
                             selectExpression,
                             newSelectExpression
                         ).Visit(newSelectExpression);
@@ -1032,10 +1032,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                                     // So we don't need to remap those columns, they will transfer automatically.
                                     var table = subquery._tables[i];
                                     var tableReference = subquery._tableReferences[i];
-                                    table =
-                                        (TableExpressionBase)columnExpressionReplacingExpressionVisitor.Visit(
-                                            table
-                                        );
+                                    table = (TableExpressionBase)
+                                        columnExpressionReplacingExpressionVisitor.Visit(table);
                                     tableReference.UpdateTableReference(
                                         subquery,
                                         _selectExpression
@@ -1084,10 +1082,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                     for (var i = 0; i < minProjectionCount; i++)
                     {
                         var projectionToCopy = source._projection[i];
-                        var transformedProjection =
-                            (ProjectionExpression)columnExpressionReplacingExpressionVisitor.Visit(
-                                projectionToCopy
-                            );
+                        var transformedProjection = (ProjectionExpression)
+                            columnExpressionReplacingExpressionVisitor.Visit(projectionToCopy);
                         if (!transformedProjection.Equals(target._projection[i]))
                         {
                             break;
@@ -1106,10 +1102,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                                 continue;
                             }
 
-                            var transformedProjection =
-                                (ConcreteColumnExpression)columnExpressionReplacingExpressionVisitor.Visit(
-                                    projectionToCopy
-                                );
+                            var transformedProjection = (ConcreteColumnExpression)
+                                columnExpressionReplacingExpressionVisitor.Visit(projectionToCopy);
                             if (
                                 target._projection.FindIndex(
                                     e => e.Expression.Equals(transformedProjection)
@@ -1131,9 +1125,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                                         e => e.Alias == columnToCopy.TableAlias
                                     );
                                     CopyOverOwnedJoinInSameTable(
-                                        (SelectExpression)UnwrapJoinExpression(
-                                            target._tables[tableIndex]
-                                        ),
+                                        (SelectExpression)
+                                            UnwrapJoinExpression(target._tables[tableIndex]),
                                         innerSelectExpression
                                     );
                                 }

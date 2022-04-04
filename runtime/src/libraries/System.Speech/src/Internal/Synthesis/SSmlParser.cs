@@ -507,8 +507,8 @@ namespace System.Speech.Internal.Synthesis
                                         != (int)EmphasisBreak.None
                                     )
                                     {
-                                        ssmlAttributes._fragmentState.Emphasis =
-                                            (int)s_breakEmphasis[pos];
+                                        ssmlAttributes._fragmentState.Emphasis = (int)
+                                            s_breakEmphasis[pos];
                                     }
                                 }
                             }

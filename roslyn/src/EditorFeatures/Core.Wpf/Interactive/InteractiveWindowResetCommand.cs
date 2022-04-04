@@ -214,9 +214,8 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
 
         private void ReportInvalidArguments(IInteractiveWindow window)
         {
-            var commands = (IInteractiveWindowCommands)window.Properties[
-                typeof(IInteractiveWindowCommands)
-            ];
+            var commands = (IInteractiveWindowCommands)
+                window.Properties[typeof(IInteractiveWindowCommands)];
             commands.DisplayCommandUsage(this, window.ErrorOutputWriter, displayDetails: false);
         }
     }

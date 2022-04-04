@@ -171,13 +171,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         private NonNullabilityConventionState GetOrInitializeState(
             IConventionModelBuilder modelBuilder
         ) =>
-            (NonNullabilityConventionState)(
-                modelBuilder.Metadata.FindAnnotation(StateAnnotationName)
-                ?? modelBuilder.Metadata.AddAnnotation(
-                    StateAnnotationName,
-                    new NonNullabilityConventionState()
-                )
-            ).Value!;
+            (NonNullabilityConventionState)
+                (
+                    modelBuilder.Metadata.FindAnnotation(StateAnnotationName)
+                    ?? modelBuilder.Metadata.AddAnnotation(
+                        StateAnnotationName,
+                        new NonNullabilityConventionState()
+                    )
+                ).Value!;
 
         /// <inheritdoc />
         public virtual void ProcessModelFinalizing(

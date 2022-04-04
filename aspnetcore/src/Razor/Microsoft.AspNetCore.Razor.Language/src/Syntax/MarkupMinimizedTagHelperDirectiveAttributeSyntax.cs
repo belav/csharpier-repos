@@ -44,9 +44,7 @@ internal sealed partial class MarkupMinimizedTagHelperDirectiveAttributeSyntax
 
         var newGreen = Green.WithAnnotationsGreen(annotations.ToArray());
 
-        return (MarkupMinimizedTagHelperDirectiveAttributeSyntax)newGreen.CreateRed(
-            Parent,
-            Position
-        );
+        return (MarkupMinimizedTagHelperDirectiveAttributeSyntax)
+            newGreen.CreateRed(Parent, Position);
     }
 }

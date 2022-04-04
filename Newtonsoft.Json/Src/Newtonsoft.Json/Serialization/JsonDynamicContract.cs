@@ -65,10 +65,8 @@ namespace Newtonsoft.Json.Serialization
 
         private static CallSite<Func<CallSite, object, object>> CreateCallSiteGetter(string name)
         {
-            GetMemberBinder getMemberBinder = (GetMemberBinder)DynamicUtils.BinderWrapper.GetMember(
-                name,
-                typeof(DynamicUtils)
-            );
+            GetMemberBinder getMemberBinder = (GetMemberBinder)
+                DynamicUtils.BinderWrapper.GetMember(name, typeof(DynamicUtils));
 
             return CallSite<Func<CallSite, object, object>>.Create(
                 new NoThrowGetBinderMember(getMemberBinder)
@@ -79,10 +77,8 @@ namespace Newtonsoft.Json.Serialization
             string name
         )
         {
-            SetMemberBinder binder = (SetMemberBinder)DynamicUtils.BinderWrapper.SetMember(
-                name,
-                typeof(DynamicUtils)
-            );
+            SetMemberBinder binder = (SetMemberBinder)
+                DynamicUtils.BinderWrapper.SetMember(name, typeof(DynamicUtils));
 
             return CallSite<Func<CallSite, object, object?, object>>.Create(
                 new NoThrowSetBinderMember(binder)

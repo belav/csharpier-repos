@@ -44,8 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             var directiveStack = Syntax.InternalSyntax.DirectiveStack.Empty;
             foreach (DirectiveTriviaSyntax directive in directives)
             {
-                var internalDirective =
-                    (Syntax.InternalSyntax.DirectiveTriviaSyntax)directive.Green;
+                var internalDirective = (Syntax.InternalSyntax.DirectiveTriviaSyntax)
+                    directive.Green;
                 directiveStack = internalDirective.ApplyDirectives(directiveStack);
             }
             return directiveStack;

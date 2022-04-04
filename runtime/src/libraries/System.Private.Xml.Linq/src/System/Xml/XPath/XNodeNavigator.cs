@@ -1067,11 +1067,8 @@ namespace System.Xml.XPath
         {
             if (node == null)
                 throw new ArgumentNullException(nameof(node));
-            return (IEnumerable<XElement>)default(XPathEvaluator).Evaluate<XElement>(
-                node,
-                expression,
-                resolver
-            );
+            return (IEnumerable<XElement>)
+                default(XPathEvaluator).Evaluate<XElement>(node, expression, resolver);
         }
 
         private static XText CalibrateText(XText n)

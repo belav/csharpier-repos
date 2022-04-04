@@ -277,9 +277,8 @@ namespace System.DirectoryServices.AccountManagement
             // Try to match each specified property in turn
             foreach (FilterBase filter in _propertiesToMatch.FiltersToApply)
             {
-                FilterPropertyTableEntry entry = (FilterPropertyTableEntry)s_filterPropertiesTable[
-                    filter.GetType()
-                ];
+                FilterPropertyTableEntry entry = (FilterPropertyTableEntry)
+                    s_filterPropertiesTable[filter.GetType()];
 
                 if (entry == null)
                 {
@@ -1000,8 +999,8 @@ namespace System.DirectoryServices.AccountManagement
             }
 
             // Enumerate the members of the group, looking for a match
-            UnsafeNativeMethods.IADsGroup iADsGroup =
-                (UnsafeNativeMethods.IADsGroup)groupDE.NativeObject;
+            UnsafeNativeMethods.IADsGroup iADsGroup = (UnsafeNativeMethods.IADsGroup)
+                groupDE.NativeObject;
             UnsafeNativeMethods.IADsMembers iADsMembers = iADsGroup.Members();
 
             foreach (UnsafeNativeMethods.IADs nativeMember in ((IEnumerable)iADsMembers))

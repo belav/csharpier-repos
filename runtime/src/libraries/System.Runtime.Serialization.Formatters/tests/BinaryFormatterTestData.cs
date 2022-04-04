@@ -1566,33 +1566,31 @@ namespace System.Runtime.Serialization.Formatters.Tests
                 }
             };
 
-            Exception contractException = (Exception)Type.GetType(
-                    "System.Diagnostics.Contracts.ContractException",
-                    true
-                )
-                .GetConstructor(
-                    BindingFlags.Public | BindingFlags.Instance,
-                    null,
-                    new Type[]
-                    {
-                        typeof(ContractFailureKind),
-                        typeof(string),
-                        typeof(string),
-                        typeof(string),
-                        typeof(Exception)
-                    },
-                    null
-                )
-                .Invoke(
-                    new object[]
-                    {
-                        ContractFailureKind.Invariant,
-                        "failure",
-                        "userMessage",
-                        "condition",
-                        exception
-                    }
-                );
+            Exception contractException = (Exception)
+                Type.GetType("System.Diagnostics.Contracts.ContractException", true)
+                    .GetConstructor(
+                        BindingFlags.Public | BindingFlags.Instance,
+                        null,
+                        new Type[]
+                        {
+                            typeof(ContractFailureKind),
+                            typeof(string),
+                            typeof(string),
+                            typeof(string),
+                            typeof(Exception)
+                        },
+                        null
+                    )
+                    .Invoke(
+                        new object[]
+                        {
+                            ContractFailureKind.Invariant,
+                            "failure",
+                            "userMessage",
+                            "condition",
+                            exception
+                        }
+                    );
             yield return new object[]
             {
                 PopulateException(contractException),
@@ -2649,15 +2647,16 @@ namespace System.Runtime.Serialization.Formatters.Tests
             };
 
             // The JsonReaderException is internal.
-            Exception jsonReaderException = (Exception)typeof(JsonException).Assembly
-                .GetType("System.Text.Json.JsonReaderException", throwOnError: true)
-                .GetConstructor(
-                    BindingFlags.Public | BindingFlags.Instance,
-                    null,
-                    new Type[] { typeof(string), typeof(long), typeof(long) },
-                    null
-                )
-                .Invoke(new object[] { "message", 1, 2 });
+            Exception jsonReaderException = (Exception)
+                typeof(JsonException).Assembly
+                    .GetType("System.Text.Json.JsonReaderException", throwOnError: true)
+                    .GetConstructor(
+                        BindingFlags.Public | BindingFlags.Instance,
+                        null,
+                        new Type[] { typeof(string), typeof(long), typeof(long) },
+                        null
+                    )
+                    .Invoke(new object[] { "message", 1, 2 });
 
             yield return new object[]
             {
@@ -3032,16 +3031,23 @@ namespace System.Runtime.Serialization.Formatters.Tests
 
             if (!PlatformDetection.IsBrowser) // all types in System.Data.Odbc throw PlatformNotSupportedException
             {
-                OdbcError odbcError = (OdbcError)typeof(OdbcError)
-                    .GetConstructor(
-                        BindingFlags.NonPublic | BindingFlags.Instance,
-                        null,
-                        new Type[] { typeof(string), typeof(string), typeof(string), typeof(int) },
-                        null
-                    )
-                    .Invoke(new object[] { "source", "message", "state", 0 });
-                OdbcErrorCollection odbcErrorCollection =
-                    (OdbcErrorCollection)typeof(OdbcErrorCollection)
+                OdbcError odbcError = (OdbcError)
+                    typeof(OdbcError)
+                        .GetConstructor(
+                            BindingFlags.NonPublic | BindingFlags.Instance,
+                            null,
+                            new Type[]
+                            {
+                                typeof(string),
+                                typeof(string),
+                                typeof(string),
+                                typeof(int)
+                            },
+                            null
+                        )
+                        .Invoke(new object[] { "source", "message", "state", 0 });
+                OdbcErrorCollection odbcErrorCollection = (OdbcErrorCollection)
+                    typeof(OdbcErrorCollection)
                         .GetConstructor(
                             BindingFlags.NonPublic | BindingFlags.Instance,
                             null,
@@ -3052,14 +3058,15 @@ namespace System.Runtime.Serialization.Formatters.Tests
                 typeof(OdbcErrorCollection)
                     .GetMethod("Add", BindingFlags.NonPublic | BindingFlags.Instance)
                     .Invoke(odbcErrorCollection, new object[] { odbcError });
-                OdbcException odbcException = (OdbcException)typeof(OdbcException)
-                    .GetConstructor(
-                        BindingFlags.NonPublic | BindingFlags.Instance,
-                        null,
-                        new Type[] { typeof(string), typeof(OdbcErrorCollection) },
-                        null
-                    )
-                    .Invoke(new object[] { "message", odbcErrorCollection });
+                OdbcException odbcException = (OdbcException)
+                    typeof(OdbcException)
+                        .GetConstructor(
+                            BindingFlags.NonPublic | BindingFlags.Instance,
+                            null,
+                            new Type[] { typeof(string), typeof(OdbcErrorCollection) },
+                            null
+                        )
+                        .Invoke(new object[] { "message", odbcErrorCollection });
                 // OdbcException sets its HResult itself therefore we pass setHResult as false.
                 yield return new object[]
                 {
@@ -3347,8 +3354,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
                 }
             };
 
-            RuntimeWrappedException runtimeWrappedException =
-                (RuntimeWrappedException)typeof(RuntimeWrappedException)
+            RuntimeWrappedException runtimeWrappedException = (RuntimeWrappedException)
+                typeof(RuntimeWrappedException)
                     .GetConstructor(
                         (
                             PlatformDetection.IsNetFramework
@@ -3893,8 +3900,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
                 }
             };
 
-            ThreadAbortException threadAbortException =
-                (ThreadAbortException)typeof(ThreadAbortException)
+            ThreadAbortException threadAbortException = (ThreadAbortException)
+                typeof(ThreadAbortException)
                     .GetConstructor(
                         BindingFlags.NonPublic | BindingFlags.Instance,
                         null,
@@ -3935,8 +3942,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
                 }
             };
 
-            ThreadStartException threadStartException =
-                (ThreadStartException)typeof(ThreadStartException)
+            ThreadStartException threadStartException = (ThreadStartException)
+                typeof(ThreadStartException)
                     .GetConstructor(
                         BindingFlags.NonPublic | BindingFlags.Instance,
                         null,
@@ -4342,7 +4349,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             };
             yield return new object[]
             {
-                (StructWithIntField?)new StructWithIntField() { X = 42 },
+                (StructWithIntField?)
+                    new StructWithIntField() { X = 42 },
                 new TypeSerializableValue[]
                 {
                     new TypeSerializableValue(

@@ -708,18 +708,21 @@ namespace System.Numerics.Tests
             {
                 if (Environment.Is64BitProcess)
                 {
-                    nuint value =
-                        (nuint)0b01010101_01010101_01010101_01010101_01010101_01010101_01010101_01010101ul;
+                    nuint value = (nuint)
+                        0b01010101_01010101_01010101_01010101_01010101_01010101_01010101_01010101ul;
                     Assert.Equal(
-                        (nuint)0b10101010_10101010_10101010_10101010_10101010_10101010_10101010_10101010ul,
+                        (nuint)
+                            0b10101010_10101010_10101010_10101010_10101010_10101010_10101010_10101010ul,
                         BitOperations.RotateLeft(value, 1)
                     );
                     Assert.Equal(
-                        (nuint)0b01010101_01010101_01010101_01010101_01010101_01010101_01010101_01010101ul,
+                        (nuint)
+                            0b01010101_01010101_01010101_01010101_01010101_01010101_01010101_01010101ul,
                         BitOperations.RotateLeft(value, 2)
                     );
                     Assert.Equal(
-                        (nuint)0b10101010_10101010_10101010_10101010_10101010_10101010_10101010_10101010ul,
+                        (nuint)
+                            0b10101010_10101010_10101010_10101010_10101010_10101010_10101010_10101010ul,
                         BitOperations.RotateLeft(value, 3)
                     );
                     Assert.Equal(value, BitOperations.RotateLeft(value, int.MinValue)); // % 64 = 0

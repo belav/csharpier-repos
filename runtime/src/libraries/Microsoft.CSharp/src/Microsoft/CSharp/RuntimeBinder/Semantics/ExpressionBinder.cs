@@ -1374,11 +1374,12 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                             // void Foo(int y, params int[] x);
                             // ...
                             // Foo(x:1, y:1);
-                            CType arrayType = (ArrayType)TypeManager.SubstType(
-                                mp.Params[mp.Params.Count - 1],
-                                type,
-                                pTypeArgs
-                            );
+                            CType arrayType = (ArrayType)
+                                TypeManager.SubstType(
+                                    mp.Params[mp.Params.Count - 1],
+                                    type,
+                                    pTypeArgs
+                                );
 
                             // Use an EK_ARRINIT even in the empty case so empty param arrays in attributes work.
                             ExprArrayInit arrayInit = ExprFactory.CreateArrayInit(

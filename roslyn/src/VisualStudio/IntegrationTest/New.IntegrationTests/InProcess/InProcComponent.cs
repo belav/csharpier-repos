@@ -35,14 +35,16 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var serviceProvider = (IAsyncServiceProvider2?)await AsyncServiceProvider.GlobalProvider
-                .GetServiceAsync(typeof(SAsyncServiceProvider))
-                .WithCancellation(cancellationToken);
+            var serviceProvider = (IAsyncServiceProvider2?)
+                await AsyncServiceProvider.GlobalProvider
+                    .GetServiceAsync(typeof(SAsyncServiceProvider))
+                    .WithCancellation(cancellationToken);
             Assumes.Present(serviceProvider);
 
-            var @interface = (TInterface?)await serviceProvider
-                .GetServiceAsync(typeof(TService))
-                .WithCancellation(cancellationToken);
+            var @interface = (TInterface?)
+                await serviceProvider
+                    .GetServiceAsync(typeof(TService))
+                    .WithCancellation(cancellationToken);
             Assumes.Present(@interface);
             return @interface;
         }

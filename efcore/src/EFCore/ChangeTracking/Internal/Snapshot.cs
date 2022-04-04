@@ -343,7 +343,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         T29
                     >,
                     T
-                >)_valueReaders[index]
+                >)
+                    _valueReaders[index]
             )(this);
 
         /// <summary>
@@ -702,7 +703,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         T28
                     >,
                     T
-                >)_valueReaders[index]
+                >)
+                    _valueReaders[index]
             )(this);
 
         /// <summary>
@@ -1051,7 +1053,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         T27
                     >,
                     T
-                >)_valueReaders[index]
+                >)
+                    _valueReaders[index]
             )(this);
 
         /// <summary>
@@ -1390,7 +1393,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         T26
                     >,
                     T
-                >)_valueReaders[index]
+                >)
+                    _valueReaders[index]
             )(this);
 
         /// <summary>
@@ -1719,7 +1723,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         T25
                     >,
                     T
-                >)_valueReaders[index]
+                >)
+                    _valueReaders[index]
             )(this);
 
         /// <summary>
@@ -2038,7 +2043,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         T24
                     >,
                     T
-                >)_valueReaders[index]
+                >)
+                    _valueReaders[index]
             )(this);
 
         /// <summary>
@@ -2347,7 +2353,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         T23
                     >,
                     T
-                >)_valueReaders[index]
+                >)
+                    _valueReaders[index]
             )(this);
 
         /// <summary>
@@ -2646,7 +2653,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         T22
                     >,
                     T
-                >)_valueReaders[index]
+                >)
+                    _valueReaders[index]
             )(this);
 
         /// <summary>
@@ -2935,7 +2943,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         T21
                     >,
                     T
-                >)_valueReaders[index]
+                >)
+                    _valueReaders[index]
             )(this);
 
         /// <summary>
@@ -3214,7 +3223,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         T20
                     >,
                     T
-                >)_valueReaders[index]
+                >)
+                    _valueReaders[index]
             )(this);
 
         /// <summary>
@@ -3483,7 +3493,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         T19
                     >,
                     T
-                >)_valueReaders[index]
+                >)
+                    _valueReaders[index]
             )(this);
 
         /// <summary>
@@ -3742,7 +3753,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         T18
                     >,
                     T
-                >)_valueReaders[index]
+                >)
+                    _valueReaders[index]
             )(this);
 
         /// <summary>
@@ -3972,7 +3984,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         T17
                     >,
                     T
-                >)_valueReaders[index]
+                >)
+                    _valueReaders[index]
             )(this);
 
         /// <summary>
@@ -4193,7 +4206,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         T16
                     >,
                     T
-                >)_valueReaders[index]
+                >)
+                    _valueReaders[index]
             )(this);
 
         /// <summary>
@@ -4388,7 +4402,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 (Func<
                     Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>,
                     T
-                >)_valueReaders[index]
+                >)
+                    _valueReaders[index]
             )(this);
 
         /// <summary>
@@ -4557,10 +4572,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         /// </summary>
         public T GetValue<T>(int index) =>
             (
-                (Func<
-                    Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>,
-                    T
-                >)_valueReaders[index]
+                (Func<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>, T>)
+                    _valueReaders[index]
             )(this);
 
         /// <summary>
@@ -4722,10 +4735,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         /// </summary>
         public T GetValue<T>(int index) =>
             (
-                (Func<
-                    Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>,
-                    T
-                >)_valueReaders[index]
+                (Func<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>, T>)
+                    _valueReaders[index]
             )(this);
 
         /// <summary>
@@ -4879,10 +4890,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         /// </summary>
         public T GetValue<T>(int index) =>
             (
-                (Func<
-                    Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>,
-                    T
-                >)_valueReaders[index]
+                (Func<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>, T>)
+                    _valueReaders[index]
             )(this);
 
         /// <summary>
@@ -5029,9 +5038,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         /// </summary>
         public T GetValue<T>(int index) =>
             (
-                (Func<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>, T>)_valueReaders[
-                    index
-                ]
+                (Func<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>, T>)
+                    _valueReaders[index]
             )(this);
 
         /// <summary>

@@ -235,9 +235,8 @@ public class DynamicObjectAdapter : IAdapter
         out string errorMessage
     )
     {
-        var jsonDynamicContract = (JsonDynamicContract)contractResolver.ResolveContract(
-            target.GetType()
-        );
+        var jsonDynamicContract = (JsonDynamicContract)
+            contractResolver.ResolveContract(target.GetType());
 
         var propertyName = jsonDynamicContract.PropertyNameResolver(segment);
 
@@ -275,9 +274,8 @@ public class DynamicObjectAdapter : IAdapter
         out string errorMessage
     )
     {
-        var jsonDynamicContract = (JsonDynamicContract)contractResolver.ResolveContract(
-            target.GetType()
-        );
+        var jsonDynamicContract = (JsonDynamicContract)
+            contractResolver.ResolveContract(target.GetType());
 
         var propertyName = jsonDynamicContract.PropertyNameResolver(segment);
 

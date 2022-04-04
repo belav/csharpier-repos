@@ -25,9 +25,8 @@ namespace System.Net.Http.Headers
         {
             get
             {
-                return (CacheControlHeaderValue?)_parent.GetParsedValues(
-                    KnownHeaders.CacheControl.Descriptor
-                );
+                return (CacheControlHeaderValue?)
+                    _parent.GetParsedValues(KnownHeaders.CacheControl.Descriptor);
             }
             set { _parent.SetOrRemoveParsedValue(KnownHeaders.CacheControl.Descriptor, value); }
         }

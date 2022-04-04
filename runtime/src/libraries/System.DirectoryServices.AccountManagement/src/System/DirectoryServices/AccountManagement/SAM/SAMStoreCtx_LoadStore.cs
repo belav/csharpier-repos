@@ -361,9 +361,8 @@ namespace System.DirectoryServices.AccountManagement
                 // Map each SAM attribute into the Principal in turn
                 foreach (string samAttribute in samAttributes)
                 {
-                    ArrayList entries = (ArrayList)propertyMappingTableByWinNT[
-                        samAttribute.ToLowerInvariant()
-                    ];
+                    ArrayList entries = (ArrayList)
+                        propertyMappingTableByWinNT[samAttribute.ToLowerInvariant()];
 
                     // If it's not in the table, it's not an SAM attribute we care about
                     if (entries == null)
@@ -1695,12 +1694,11 @@ namespace System.DirectoryServices.AccountManagement
         {
             Debug.Assert(group.fakePrincipal == false);
 
-            PrincipalCollection members = (PrincipalCollection)group.GetValueForProperty(
-                PropertyNames.GroupMembers
-            );
+            PrincipalCollection members = (PrincipalCollection)
+                group.GetValueForProperty(PropertyNames.GroupMembers);
 
-            UnsafeNativeMethods.IADsGroup iADsGroup =
-                (UnsafeNativeMethods.IADsGroup)de.NativeObject;
+            UnsafeNativeMethods.IADsGroup iADsGroup = (UnsafeNativeMethods.IADsGroup)
+                de.NativeObject;
 
             try
             {
@@ -1734,9 +1732,8 @@ namespace System.DirectoryServices.AccountManagement
                         if (hr == 0) // S_OK
                         {
                             // Found a member, remove it.
-                            UnsafeNativeMethods.IADs iADs = (UnsafeNativeMethods.IADs)nativeMembers[
-                                0
-                            ];
+                            UnsafeNativeMethods.IADs iADs = (UnsafeNativeMethods.IADs)
+                                nativeMembers[0];
                             iADsGroup.Remove(iADs.ADsPath);
                         }
                     } while (hr == 0);

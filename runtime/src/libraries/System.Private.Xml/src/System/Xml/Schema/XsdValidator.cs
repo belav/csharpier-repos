@@ -333,11 +333,8 @@ namespace System.Xml.Schema
                     {
                         if (Ref.Equal(objectName, _xsiSchemaLocation))
                         {
-                            xsiSchemaLocation = (string[])s_dtStringArray.ParseValue(
-                                reader.Value,
-                                NameTable,
-                                _nsManager
-                            );
+                            xsiSchemaLocation = (string[])
+                                s_dtStringArray.ParseValue(reader.Value, NameTable, _nsManager);
                         }
                         else if (Ref.Equal(objectName, _xsiNoNamespaceSchemaLocation))
                         {
@@ -345,11 +342,8 @@ namespace System.Xml.Schema
                         }
                         else if (Ref.Equal(objectName, _xsiType))
                         {
-                            xsiType = (XmlQualifiedName)s_dtQName.ParseValue(
-                                reader.Value,
-                                NameTable,
-                                _nsManager
-                            );
+                            xsiType = (XmlQualifiedName)
+                                s_dtQName.ParseValue(reader.Value, NameTable, _nsManager);
                         }
                         else if (Ref.Equal(objectName, _xsiNil))
                         {

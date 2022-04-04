@@ -187,11 +187,9 @@ namespace Microsoft.VisualStudio.Debugger.Clr
 
         private static System.Type GetProxyType(System.Type type)
         {
-            var attribute = (DebuggerTypeProxyAttribute)type.GetCustomAttributes(
-                    typeof(DebuggerTypeProxyAttribute),
-                    inherit: false
-                )
-                .FirstOrDefault();
+            var attribute = (DebuggerTypeProxyAttribute)
+                type.GetCustomAttributes(typeof(DebuggerTypeProxyAttribute), inherit: false)
+                    .FirstOrDefault();
             if (attribute == null)
             {
                 return null;
@@ -300,13 +298,15 @@ namespace Microsoft.VisualStudio.Debugger.Clr
 
             return new DkmClrDebuggerDisplayAttribute(type.AssemblyQualifiedName)
             {
-                Name = (string)attributeData.NamedArguments
-                    .SingleOrDefault(arg => arg.MemberName == "Name")
-                    .TypedValue.Value,
+                Name = (string)
+                    attributeData.NamedArguments
+                        .SingleOrDefault(arg => arg.MemberName == "Name")
+                        .TypedValue.Value,
                 Value = (string)attributeData.ConstructorArguments.Single().Value,
-                TypeName = (string)attributeData.NamedArguments
-                    .SingleOrDefault(arg => arg.MemberName == "Type")
-                    .TypedValue.Value,
+                TypeName = (string)
+                    attributeData.NamedArguments
+                        .SingleOrDefault(arg => arg.MemberName == "Type")
+                        .TypedValue.Value,
             };
         }
 

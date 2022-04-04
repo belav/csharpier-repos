@@ -2936,9 +2936,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     Assert.Same(principal, newDependent.Parent);
                     Assert.Same(newDependent, principal.Child);
                     Assert.Null(oldDependent.Parent);
-                    var oldDependentEntry = (PropertyEntry)context
-                        .Entry(oldDependent)
-                        .Property(c => c.ParentId);
+                    var oldDependentEntry = (PropertyEntry)
+                        context.Entry(oldDependent).Property(c => c.ParentId);
                     Assert.True(
                         oldDependentEntry
                             .GetInfrastructure()
@@ -3058,9 +3057,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 {
                     Assert.Equal(principal.Id, newDependent.ParentId);
                     Assert.Same(newDependent, principal.Child);
-                    var oldDependentEntry = (PropertyEntry)context
-                        .Entry(oldDependent)
-                        .Property(c => c.ParentId);
+                    var oldDependentEntry = (PropertyEntry)
+                        context.Entry(oldDependent).Property(c => c.ParentId);
                     Assert.True(
                         oldDependentEntry
                             .GetInfrastructure()
@@ -3178,9 +3176,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     Assert.Equal(principal.Id, newDependent.ParentId);
                     Assert.Same(principal, newDependent.Parent);
                     Assert.Null(oldDependent.Parent);
-                    var oldDependentEntry = (PropertyEntry)context
-                        .Entry(oldDependent)
-                        .Property(c => c.ParentId);
+                    var oldDependentEntry = (PropertyEntry)
+                        context.Entry(oldDependent).Property(c => c.ParentId);
                     Assert.True(
                         oldDependentEntry
                             .GetInfrastructure()
@@ -3230,9 +3227,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 () =>
                 {
                     Assert.Equal(principal.Id, newDependent.ParentId);
-                    var oldDependentEntry = (PropertyEntry)context
-                        .Entry(oldDependent)
-                        .Property(c => c.ParentId);
+                    var oldDependentEntry = (PropertyEntry)
+                        context.Entry(oldDependent).Property(c => c.ParentId);
                     Assert.True(
                         oldDependentEntry
                             .GetInfrastructure()

@@ -244,9 +244,8 @@ namespace System
 delegate void @out();
 ";
             var comp = CreateCompilation(Parse(text));
-            NamedTypeSymbol dout = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace
-                .GetMembers("out")
-                .Single();
+            NamedTypeSymbol dout = (NamedTypeSymbol)
+                comp.SourceModule.GlobalNamespace.GetMembers("out").Single();
             Assert.Equal("out", dout.Name);
             Assert.Equal("@out", dout.ToString());
         }
@@ -366,9 +365,8 @@ delegate int D(int x, ref int y, out int z);
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics();
 
-            NamedTypeSymbol d = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace
-                .GetMembers("D")
-                .Single();
+            NamedTypeSymbol d = (NamedTypeSymbol)
+                comp.SourceModule.GlobalNamespace.GetMembers("D").Single();
 
             MethodSymbol invoke = d.DelegateInvokeMethod;
             ImmutableArray<ParameterSymbol> invokeParameters = invoke.Parameters;
@@ -424,9 +422,8 @@ delegate void D(out int result);
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics();
 
-            NamedTypeSymbol d = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace
-                .GetMembers("D")
-                .Single();
+            NamedTypeSymbol d = (NamedTypeSymbol)
+                comp.SourceModule.GlobalNamespace.GetMembers("D").Single();
 
             MethodSymbol invoke = d.DelegateInvokeMethod;
             ImmutableArray<ParameterSymbol> invokeParameters = invoke.Parameters;
@@ -458,9 +455,8 @@ delegate void D(out int @__result);
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics();
 
-            NamedTypeSymbol d = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace
-                .GetMembers("D")
-                .Single();
+            NamedTypeSymbol d = (NamedTypeSymbol)
+                comp.SourceModule.GlobalNamespace.GetMembers("D").Single();
 
             MethodSymbol invoke = d.DelegateInvokeMethod;
             ImmutableArray<ParameterSymbol> invokeParameters = invoke.Parameters;
@@ -492,9 +488,8 @@ delegate void D(out int result, out int @__result);
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics();
 
-            NamedTypeSymbol d = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace
-                .GetMembers("D")
-                .Single();
+            NamedTypeSymbol d = (NamedTypeSymbol)
+                comp.SourceModule.GlobalNamespace.GetMembers("D").Single();
 
             MethodSymbol invoke = d.DelegateInvokeMethod;
             ImmutableArray<ParameterSymbol> invokeParameters = invoke.Parameters;
@@ -529,9 +524,8 @@ delegate void D(int callback, int @object);
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics();
 
-            NamedTypeSymbol d = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace
-                .GetMembers("D")
-                .Single();
+            NamedTypeSymbol d = (NamedTypeSymbol)
+                comp.SourceModule.GlobalNamespace.GetMembers("D").Single();
 
             MethodSymbol invoke = d.DelegateInvokeMethod;
             ImmutableArray<ParameterSymbol> invokeParameters = invoke.Parameters;

@@ -114,12 +114,13 @@ namespace IntelHardwareIntrinsicTest
 
                     // SDDD
                     vf3 =
-                        (Vector128<float>)typeof(Sse41)
-                            .GetMethod(
-                                nameof(Sse41.Blend),
-                                new Type[] { vf1.GetType(), vf2.GetType(), typeof(byte) }
-                            )
-                            .Invoke(null, new object[] { vf1, vf2, (byte)(1) });
+                        (Vector128<float>)
+                            typeof(Sse41)
+                                .GetMethod(
+                                    nameof(Sse41.Blend),
+                                    new Type[] { vf1.GetType(), vf2.GetType(), typeof(byte) }
+                                )
+                                .Invoke(null, new object[] { vf1, vf2, (byte)(1) });
                     Unsafe.Write(floatTable.outArrayPtr, vf3);
 
                     if (
@@ -212,12 +213,13 @@ namespace IntelHardwareIntrinsicTest
 
                     // SDDD
                     vf3 =
-                        (Vector128<double>)typeof(Sse41)
-                            .GetMethod(
-                                nameof(Sse41.Blend),
-                                new Type[] { vf1.GetType(), vf2.GetType(), typeof(byte) }
-                            )
-                            .Invoke(null, new object[] { vf1, vf2, (byte)(0) });
+                        (Vector128<double>)
+                            typeof(Sse41)
+                                .GetMethod(
+                                    nameof(Sse41.Blend),
+                                    new Type[] { vf1.GetType(), vf2.GetType(), typeof(byte) }
+                                )
+                                .Invoke(null, new object[] { vf1, vf2, (byte)(0) });
                     Unsafe.Write(doubleTable.outArrayPtr, vf3);
 
                     if (!doubleTable.CheckResult((x, y, z) => (z[0] == x[0]) && (z[1] == x[1])))
@@ -353,12 +355,13 @@ namespace IntelHardwareIntrinsicTest
 
                     // SDDD DDDD
                     vf3 =
-                        (Vector128<short>)typeof(Sse41)
-                            .GetMethod(
-                                nameof(Sse41.Blend),
-                                new Type[] { vf1.GetType(), vf2.GetType(), typeof(byte) }
-                            )
-                            .Invoke(null, new object[] { vf1, vf2, (byte)(1) });
+                        (Vector128<short>)
+                            typeof(Sse41)
+                                .GetMethod(
+                                    nameof(Sse41.Blend),
+                                    new Type[] { vf1.GetType(), vf2.GetType(), typeof(byte) }
+                                )
+                                .Invoke(null, new object[] { vf1, vf2, (byte)(1) });
                     Unsafe.Write(shortTable.outArrayPtr, vf3);
 
                     if (
@@ -506,12 +509,13 @@ namespace IntelHardwareIntrinsicTest
 
                     // SDDD DDDD
                     vf3 =
-                        (Vector128<ushort>)typeof(Sse41)
-                            .GetMethod(
-                                nameof(Sse41.Blend),
-                                new Type[] { vf1.GetType(), vf2.GetType(), typeof(byte) }
-                            )
-                            .Invoke(null, new object[] { vf1, vf2, (byte)(1) });
+                        (Vector128<ushort>)
+                            typeof(Sse41)
+                                .GetMethod(
+                                    nameof(Sse41.Blend),
+                                    new Type[] { vf1.GetType(), vf2.GetType(), typeof(byte) }
+                                )
+                                .Invoke(null, new object[] { vf1, vf2, (byte)(1) });
                     Unsafe.Write(ushortTable.outArrayPtr, vf3);
 
                     if (

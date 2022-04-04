@@ -68,9 +68,8 @@ namespace CoreXml.Test.XLinq
                 }
 
                 // get the filePath from the control file
-                filePath = (string)xDoc.Descendants(ns + "global")
-                    .Attributes("filePath")
-                    .FirstOrDefault();
+                filePath = (string)
+                    xDoc.Descendants(ns + "global").Attributes("filePath").FirstOrDefault();
                 if (filePath.StartsWith(@"$(DataPath)\StandardTests\"))
                 {
                     filePath = Path.Combine(
@@ -101,14 +100,16 @@ namespace CoreXml.Test.XLinq
                     IEnumerable<XElement> systemXml = e.Descendants(ns + "System.Xml");
                     if (resultNodes.Count() > 1 && systemXml.Count() > 0)
                     {
-                        string resultID = (string)systemXml
-                            .Select(x => x.Element(ns + "expectedResult"))
-                            .Attributes("id")
-                            .FirstOrDefault();
-                        status = (string)resultNodes
-                            .Where(x => x.Attribute("id").Value == resultID)
-                            .Attributes("expected")
-                            .FirstOrDefault();
+                        string resultID = (string)
+                            systemXml
+                                .Select(x => x.Element(ns + "expectedResult"))
+                                .Attributes("id")
+                                .FirstOrDefault();
+                        status = (string)
+                            resultNodes
+                                .Where(x => x.Attribute("id").Value == resultID)
+                                .Attributes("expected")
+                                .FirstOrDefault();
                     }
                     else
                         status = (string)resultNodes.Attributes("expected").FirstOrDefault();

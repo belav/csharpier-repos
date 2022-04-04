@@ -336,10 +336,11 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             System.Reflection.MethodInfo implementingMethod
         )
         {
-            return (ExplicitInterfaceInfo)typeof(ExplicitInterfaceInfo).Instantiate(
-                new MethodInfoImpl(interfaceMethod),
-                new MethodInfoImpl(implementingMethod)
-            );
+            return (ExplicitInterfaceInfo)
+                typeof(ExplicitInterfaceInfo).Instantiate(
+                    new MethodInfoImpl(interfaceMethod),
+                    new MethodInfoImpl(implementingMethod)
+                );
         }
 
         public override bool IsInstanceOfType(object o)
@@ -369,9 +370,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         public override Type MakeGenericType(params Type[] argTypes)
         {
-            return (TypeImpl)this.Type.MakeGenericType(
-                argTypes.Select(t => ((TypeImpl)t).Type).ToArray()
-            );
+            return (TypeImpl)
+                this.Type.MakeGenericType(argTypes.Select(t => ((TypeImpl)t).Type).ToArray());
         }
 
         public override Type MakePointerType()

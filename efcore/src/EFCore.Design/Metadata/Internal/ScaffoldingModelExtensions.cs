@@ -35,9 +35,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             this IReadOnlyModel model
         )
         {
-            var errors = (IDictionary<string, string>?)model[
-                ScaffoldingAnnotationNames.EntityTypeErrors
-            ];
+            var errors = (IDictionary<string, string>?)
+                model[ScaffoldingAnnotationNames.EntityTypeErrors];
             if (errors == null)
             {
                 errors = new Dictionary<string, string>();

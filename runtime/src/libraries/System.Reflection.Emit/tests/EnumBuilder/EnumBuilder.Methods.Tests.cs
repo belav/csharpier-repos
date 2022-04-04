@@ -285,9 +285,8 @@ namespace System.Reflection.Emit.Tests
             );
             enumBuilder.SetCustomAttribute(attributeConstructor, new byte[] { 01, 00, 01 });
 
-            Attribute[] objVals = (Attribute[])CustomAttributeExtensions
-                .GetCustomAttributes(enumBuilder, true)
-                .ToArray();
+            Attribute[] objVals = (Attribute[])
+                CustomAttributeExtensions.GetCustomAttributes(enumBuilder, true).ToArray();
             Assert.Equal(new BoolAttribute(true), objVals[0]);
         }
 

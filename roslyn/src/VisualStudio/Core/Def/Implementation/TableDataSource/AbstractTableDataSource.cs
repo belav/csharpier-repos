@@ -161,10 +161,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                     projectGuids.SortAndRemoveDuplicates(Comparer<Guid>.Default);
 
                     aggregateItems.Add(
-                        (TItem)firstItem.WithAggregatedData(
-                            GetOrCreateArray(ref stringArrayCache, projectNames),
-                            GetOrCreateArray(ref guidArrayCache, projectGuids)
-                        )
+                        (TItem)
+                            firstItem.WithAggregatedData(
+                                GetOrCreateArray(ref stringArrayCache, projectNames),
+                                GetOrCreateArray(ref guidArrayCache, projectGuids)
+                            )
                     );
                 }
 

@@ -376,10 +376,8 @@ namespace System.Xml.Xsl.Runtime
             if (objRet == null && extFunc.ClrReturnType == XsltConvert.VoidType)
                 return XmlQueryNodeSequence.Empty;
 
-            return (IList<XPathItem>)_runtime.ChangeTypeXsltResult(
-                XmlQueryTypeFactory.ItemS,
-                objRet
-            );
+            return (IList<XPathItem>)
+                _runtime.ChangeTypeXsltResult(XmlQueryTypeFactory.ItemS, objRet);
         }
 
         //-----------------------------------------------

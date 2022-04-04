@@ -429,10 +429,10 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             InteractiveScriptGlobals globals
         )
         {
-            var currentMetadataResolver =
-                (RuntimeMetadataReferenceResolver)options.MetadataResolver;
-            var currentSourceResolver =
-                (CommonCompiler.LoggingSourceFileResolver)options.SourceResolver;
+            var currentMetadataResolver = (RuntimeMetadataReferenceResolver)
+                options.MetadataResolver;
+            var currentSourceResolver = (CommonCompiler.LoggingSourceFileResolver)
+                options.SourceResolver;
 
             string newWorkingDirectory = Directory.GetCurrentDirectory();
             var newReferenceSearchPaths = ImmutableArray.CreateRange(globals.ReferencePaths);

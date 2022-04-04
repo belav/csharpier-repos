@@ -14,8 +14,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interop
         /// Factory object for creating IComWrapperFixed instances.
         /// Internal and not readonly so that unit tests can provide an alternative implementation.
         /// </summary>
-        internal static IComWrapperFactory s_ComWrapperFactory =
-            (IComWrapperFactory)PackageUtilities.CreateInstance(typeof(IComWrapperFactory).GUID);
+        internal static IComWrapperFactory s_ComWrapperFactory = (IComWrapperFactory)
+            PackageUtilities.CreateInstance(typeof(IComWrapperFactory).GUID);
 
         internal static object CreateAggregatedObject(object managedObject) =>
             s_ComWrapperFactory.CreateAggregatedObject(managedObject);

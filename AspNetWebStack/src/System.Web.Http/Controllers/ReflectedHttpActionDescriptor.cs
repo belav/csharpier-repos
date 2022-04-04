@@ -451,10 +451,11 @@ namespace System.Web.Http.Controllers
             {
                 Contract.Assert(taskValueType != null);
 
-                return (Func<object, Task<object>>)Delegate.CreateDelegate(
-                    typeof(Func<object, Task<object>>),
-                    _convertOfTMethod.MakeGenericMethod(taskValueType)
-                );
+                return (Func<object, Task<object>>)
+                    Delegate.CreateDelegate(
+                        typeof(Func<object, Task<object>>),
+                        _convertOfTMethod.MakeGenericMethod(taskValueType)
+                    );
             }
 
             private static Func<object, object[], Task<object>> GetExecutor(MethodInfo methodInfo)

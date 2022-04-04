@@ -1314,8 +1314,8 @@ class C { }";
                 SyntaxKind.ClassDeclaration,
                 tree.GetCompilationUnitRoot().ChildNodesAndTokens()[0].Kind()
             );
-            var classdecl = (TypeDeclarationSyntax)tree.GetCompilationUnitRoot()
-                .ChildNodesAndTokens()[0].AsNode();
+            var classdecl = (TypeDeclarationSyntax)
+                tree.GetCompilationUnitRoot().ChildNodesAndTokens()[0].AsNode();
             Assert.Equal("class C { }", classdecl.ToString());
             Assert.True(classdecl.HasLeadingTrivia);
             var leading = classdecl.GetLeadingTrivia();

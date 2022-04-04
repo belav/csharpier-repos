@@ -249,14 +249,14 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             {
                 case EntityShaperExpression entityShaperExpression:
                 {
-                    var projectionBindingExpression =
-                        (ProjectionBindingExpression)entityShaperExpression.ValueBufferExpression;
+                    var projectionBindingExpression = (ProjectionBindingExpression)
+                        entityShaperExpression.ValueBufferExpression;
                     VerifySelectExpression(projectionBindingExpression);
 
                     if (_clientEval)
                     {
-                        var entityProjection =
-                            (EntityProjectionExpression)_selectExpression.GetMappedProjection(
+                        var entityProjection = (EntityProjectionExpression)
+                            _selectExpression.GetMappedProjection(
                                 projectionBindingExpression.ProjectionMember
                             );
 
@@ -377,17 +377,16 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             switch (shaperExpression.ValueBufferExpression)
             {
                 case ProjectionBindingExpression innerProjectionBindingExpression:
-                    innerEntityProjection =
-                        (EntityProjectionExpression)_selectExpression.Projection[
+                    innerEntityProjection = (EntityProjectionExpression)
+                        _selectExpression.Projection[
                             innerProjectionBindingExpression.Index.Value
                         ].Expression;
                     break;
 
                 case UnaryExpression unaryExpression:
                     // Unwrap EntityProjectionExpression when the root entity is not projected
-                    innerEntityProjection = (EntityProjectionExpression)(
-                        (UnaryExpression)unaryExpression.Operand
-                    ).Operand;
+                    innerEntityProjection = (EntityProjectionExpression)
+                        ((UnaryExpression)unaryExpression.Operand).Operand;
                     break;
 
                 default:
@@ -607,16 +606,15 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 switch (shaperExpression.ValueBufferExpression)
                 {
                     case ProjectionBindingExpression innerProjectionBindingExpression:
-                        innerEntityProjection =
-                            (EntityProjectionExpression)_selectExpression.Projection[
+                        innerEntityProjection = (EntityProjectionExpression)
+                            _selectExpression.Projection[
                                 innerProjectionBindingExpression.Index.Value
                             ].Expression;
                         break;
 
                     case UnaryExpression unaryExpression:
-                        innerEntityProjection = (EntityProjectionExpression)(
-                            (UnaryExpression)unaryExpression.Operand
-                        ).Operand;
+                        innerEntityProjection = (EntityProjectionExpression)
+                            ((UnaryExpression)unaryExpression.Operand).Operand;
                         break;
 
                     default:

@@ -1447,19 +1447,20 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            return (BoundCall)MakeInvocationExpression(
-                node,
-                receiver,
-                methodName,
-                args,
-                diagnostics,
-                typeArgsSyntax,
-                typeArgs,
-                queryClause: node,
-                // Queries are syntactical rewrites, so we allow fields and properties of delegate types to be invoked,
-                // although no well-known non-generic query method is used atm.
-                allowFieldsAndProperties: true
-            );
+            return (BoundCall)
+                MakeInvocationExpression(
+                    node,
+                    receiver,
+                    methodName,
+                    args,
+                    diagnostics,
+                    typeArgsSyntax,
+                    typeArgs,
+                    queryClause: node,
+                    // Queries are syntactical rewrites, so we allow fields and properties of delegate types to be invoked,
+                    // although no well-known non-generic query method is used atm.
+                    allowFieldsAndProperties: true
+                );
 
             static BoundExpression updateUltimateReceiver(
                 BoundExpression receiver,

@@ -15,10 +15,8 @@ namespace System.Security.Cryptography.Xml.Tests
             xmlDoc.PreserveWhitespace = true;
             xmlDoc.LoadXml(xml);
 
-            var signatureNode = (XmlElement)xmlDoc.GetElementsByTagName(
-                "Signature",
-                SignedXml.XmlDsigNamespaceUrl
-            )[0];
+            var signatureNode = (XmlElement)
+                xmlDoc.GetElementsByTagName("Signature", SignedXml.XmlDsigNamespaceUrl)[0];
 
             SignedXml signedXml = new SignedXml(xmlDoc);
             if (loadXmlThrows)

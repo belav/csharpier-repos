@@ -174,11 +174,12 @@ namespace System.DirectoryServices.ActiveDirectory
                     );
                 }
 
-                schemaNC = (string)PropertyManager.GetPropertyValue(
-                    context,
-                    rootDSE,
-                    PropertyManager.SchemaNamingContext
-                )!;
+                schemaNC = (string)
+                    PropertyManager.GetPropertyValue(
+                        context,
+                        rootDSE,
+                        PropertyManager.SchemaNamingContext
+                    )!;
             }
             catch (COMException e)
             {
@@ -556,10 +557,11 @@ namespace System.DirectoryServices.ActiveDirectory
                 resCol = searcher.FindAll();
                 foreach (SearchResult res in resCol)
                 {
-                    string ldapDisplayName = (string)PropertyManager.GetSearchResultPropertyValue(
-                        res,
-                        PropertyManager.LdapDisplayName
-                    )!;
+                    string ldapDisplayName = (string)
+                        PropertyManager.GetSearchResultPropertyValue(
+                            res,
+                            PropertyManager.LdapDisplayName
+                        )!;
                     DirectoryEntry directoryEntry = res.GetDirectoryEntry();
 
                     directoryEntry.AuthenticationType = Utils.DefaultAuthType;
@@ -578,10 +580,8 @@ namespace System.DirectoryServices.ActiveDirectory
 
                     if (isDefunct)
                     {
-                        string commonName = (string)PropertyManager.GetSearchResultPropertyValue(
-                            res,
-                            PropertyManager.Cn
-                        )!;
+                        string commonName = (string)
+                            PropertyManager.GetSearchResultPropertyValue(res, PropertyManager.Cn)!;
                         propertyList.Add(
                             new ActiveDirectorySchemaProperty(
                                 context,
@@ -646,10 +646,11 @@ namespace System.DirectoryServices.ActiveDirectory
                 resCol = searcher.FindAll();
                 foreach (SearchResult res in resCol)
                 {
-                    string ldapDisplayName = (string)PropertyManager.GetSearchResultPropertyValue(
-                        res,
-                        PropertyManager.LdapDisplayName
-                    )!;
+                    string ldapDisplayName = (string)
+                        PropertyManager.GetSearchResultPropertyValue(
+                            res,
+                            PropertyManager.LdapDisplayName
+                        )!;
                     DirectoryEntry directoryEntry = res.GetDirectoryEntry();
 
                     directoryEntry.AuthenticationType = Utils.DefaultAuthType;
@@ -668,10 +669,8 @@ namespace System.DirectoryServices.ActiveDirectory
 
                     if (isDefunct)
                     {
-                        string commonName = (string)PropertyManager.GetSearchResultPropertyValue(
-                            res,
-                            PropertyManager.Cn
-                        )!;
+                        string commonName = (string)
+                            PropertyManager.GetSearchResultPropertyValue(res, PropertyManager.Cn)!;
                         classList.Add(
                             new ActiveDirectorySchemaClass(
                                 context,
@@ -722,11 +721,12 @@ namespace System.DirectoryServices.ActiveDirectory
                     // ADAM
                     string adamInstName = Utils.GetAdamDnsHostNameFromNTDSA(
                         context,
-                        (string)PropertyManager.GetPropertyValue(
-                            context,
-                            _schemaEntry,
-                            PropertyManager.FsmoRoleOwner
-                        )!
+                        (string)
+                            PropertyManager.GetPropertyValue(
+                                context,
+                                _schemaEntry,
+                                PropertyManager.FsmoRoleOwner
+                            )!
                     );
                     DirectoryContext adamInstContext = Utils.GetNewDirectoryContext(
                         adamInstName,
@@ -748,11 +748,12 @@ namespace System.DirectoryServices.ActiveDirectory
                     {
                         string dcName = Utils.GetDnsHostNameFromNTDSA(
                             context,
-                            (string)PropertyManager.GetPropertyValue(
-                                context,
-                                _schemaEntry,
-                                PropertyManager.FsmoRoleOwner
-                            )!
+                            (string)
+                                PropertyManager.GetPropertyValue(
+                                    context,
+                                    _schemaEntry,
+                                    PropertyManager.FsmoRoleOwner
+                                )!
                         );
                         DirectoryContext dcContext = Utils.GetNewDirectoryContext(
                             dcName,
@@ -766,11 +767,12 @@ namespace System.DirectoryServices.ActiveDirectory
                         // ADAM case again
                         string adamInstName = Utils.GetAdamDnsHostNameFromNTDSA(
                             context,
-                            (string)PropertyManager.GetPropertyValue(
-                                context,
-                                _schemaEntry,
-                                PropertyManager.FsmoRoleOwner
-                            )!
+                            (string)
+                                PropertyManager.GetPropertyValue(
+                                    context,
+                                    _schemaEntry,
+                                    PropertyManager.FsmoRoleOwner
+                                )!
                         );
                         DirectoryContext adamInstContext = Utils.GetNewDirectoryContext(
                             adamInstName,

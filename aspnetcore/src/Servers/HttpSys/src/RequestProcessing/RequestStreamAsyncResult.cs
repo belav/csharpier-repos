@@ -152,9 +152,8 @@ internal unsafe class RequestStreamAsyncResult : IAsyncResult, IDisposable
         NativeOverlapped* nativeOverlapped
     )
     {
-        var asyncResult = (RequestStreamAsyncResult)ThreadPoolBoundHandle.GetNativeOverlappedState(
-            nativeOverlapped
-        )!;
+        var asyncResult = (RequestStreamAsyncResult)
+            ThreadPoolBoundHandle.GetNativeOverlappedState(nativeOverlapped)!;
         IOCompleted(asyncResult, errorCode, numBytes);
     }
 

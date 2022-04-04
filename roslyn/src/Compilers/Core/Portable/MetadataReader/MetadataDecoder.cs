@@ -2713,11 +2713,8 @@ namespace Microsoft.CodeAnalysis
             TypeSymbol implementingTypeSymbol
         )
         {
-            return (MethodSymbol)GetSymbolForMemberRef(
-                methodRef,
-                implementingTypeSymbol,
-                methodsOnly: true
-            );
+            return (MethodSymbol)
+                GetSymbolForMemberRef(methodRef, implementingTypeSymbol, methodsOnly: true);
         }
 
         internal FieldSymbol GetFieldSymbolForMemberRef(
@@ -2725,11 +2722,8 @@ namespace Microsoft.CodeAnalysis
             TypeSymbol implementingTypeSymbol
         )
         {
-            return (FieldSymbol)GetSymbolForMemberRef(
-                methodRef,
-                implementingTypeSymbol,
-                methodsOnly: true
-            );
+            return (FieldSymbol)
+                GetSymbolForMemberRef(methodRef, implementingTypeSymbol, methodsOnly: true);
         }
 
         protected override bool IsContainingAssembly(AssemblyIdentity identity)

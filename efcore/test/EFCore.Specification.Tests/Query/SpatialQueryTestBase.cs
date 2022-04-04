@@ -733,9 +733,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 new
                                 {
                                     e.Id,
-                                    Distance = (double?)e.Point.Distance(
-                                        new Point(1, 1) { SRID = 4326 }
-                                    )
+                                    Distance = (double?)
+                                        e.Point.Distance(new Point(1, 1) { SRID = 4326 })
                                 }
                         ),
                 ss =>

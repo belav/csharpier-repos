@@ -292,14 +292,10 @@ public class Tests
     public static int test_0_unload_reset_abort()
     {
         AppDomain domain = AppDomain.CreateDomain("test_0_unload_reset_abort");
-        MBRObject mbro = (MBRObject)domain.CreateInstanceFromAndUnwrap(
-            typeof(Tests).Assembly.Location,
-            "MBRObject"
-        );
-        CBObject cbo = (CBObject)domain.CreateInstanceFromAndUnwrap(
-            typeof(Tests).Assembly.Location,
-            "CBObject"
-        );
+        MBRObject mbro = (MBRObject)
+            domain.CreateInstanceFromAndUnwrap(typeof(Tests).Assembly.Location, "MBRObject");
+        CBObject cbo = (CBObject)
+            domain.CreateInstanceFromAndUnwrap(typeof(Tests).Assembly.Location, "CBObject");
 
         new Thread(ThreadStart).Start(mbro);
         new Thread(ThreadStart).Start(cbo);

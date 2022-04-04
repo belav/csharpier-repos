@@ -106,9 +106,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     !IsAbstract
                     && !AssociatedEvent.IsWindowsRuntimeEvent
                     && !ContainingType.IsStructType()
-                    && (object)DeclaringCompilation.GetWellKnownTypeMember(
-                        WellKnownMember.System_Threading_Interlocked__CompareExchange_T
-                    ) == null
+                    && (object)
+                        DeclaringCompilation.GetWellKnownTypeMember(
+                            WellKnownMember.System_Threading_Interlocked__CompareExchange_T
+                        ) == null
                 )
                 {
                     // Under these conditions, this method needs to be synchronized.

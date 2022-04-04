@@ -918,10 +918,11 @@ namespace System.Transactions
                 lock (_internalTransaction)
                 {
                     _internalTransaction._transactionCompletedDelegate =
-                        (TransactionCompletedEventHandler?)System.Delegate.Remove(
-                            _internalTransaction._transactionCompletedDelegate,
-                            value
-                        );
+                        (TransactionCompletedEventHandler?)
+                            System.Delegate.Remove(
+                                _internalTransaction._transactionCompletedDelegate,
+                                value
+                            );
                 }
             }
         }

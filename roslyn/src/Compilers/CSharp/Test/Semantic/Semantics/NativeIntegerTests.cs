@@ -2064,25 +2064,24 @@ namespace System
                 Assert.Same(
                     underlyingType,
                     (
-                        (INamedTypeSymbol)type.WithNullableAnnotation(
-                            CodeAnalysis.NullableAnnotation.None
-                        )
+                        (INamedTypeSymbol)
+                            type.WithNullableAnnotation(CodeAnalysis.NullableAnnotation.None)
                     ).NativeIntegerUnderlyingType
                 );
                 Assert.Same(
                     underlyingType,
                     (
-                        (INamedTypeSymbol)type.WithNullableAnnotation(
-                            CodeAnalysis.NullableAnnotation.Annotated
-                        )
+                        (INamedTypeSymbol)
+                            type.WithNullableAnnotation(CodeAnalysis.NullableAnnotation.Annotated)
                     ).NativeIntegerUnderlyingType
                 );
                 Assert.Same(
                     underlyingType,
                     (
-                        (INamedTypeSymbol)type.WithNullableAnnotation(
-                            CodeAnalysis.NullableAnnotation.NotAnnotated
-                        )
+                        (INamedTypeSymbol)
+                            type.WithNullableAnnotation(
+                                CodeAnalysis.NullableAnnotation.NotAnnotated
+                            )
                     ).NativeIntegerUnderlyingType
                 );
             }

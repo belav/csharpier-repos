@@ -867,9 +867,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodSymbol callSiteFactoryGeneric = _factory.WellKnownMethod(
                 WellKnownMember.System_Runtime_CompilerServices_CallSite_T__Create
             );
-            FieldSymbol callSiteTargetFieldGeneric = (FieldSymbol)_factory.WellKnownMember(
-                WellKnownMember.System_Runtime_CompilerServices_CallSite_T__Target
-            );
+            FieldSymbol callSiteTargetFieldGeneric = (FieldSymbol)
+                _factory.WellKnownMember(
+                    WellKnownMember.System_Runtime_CompilerServices_CallSite_T__Target
+                );
             MethodSymbol? delegateInvoke;
 
             if (
@@ -908,8 +909,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
             }
 
-            var containerDef =
-                (SynthesizedContainer)_currentDynamicCallSiteContainer.OriginalDefinition;
+            var containerDef = (SynthesizedContainer)
+                _currentDynamicCallSiteContainer.OriginalDefinition;
             var methodToContainerTypeParametersMap = containerDef.TypeMap;
 
             ImmutableArray<LocalSymbol> temps = MakeTempsForDiscardArguments(ref loweredArguments);

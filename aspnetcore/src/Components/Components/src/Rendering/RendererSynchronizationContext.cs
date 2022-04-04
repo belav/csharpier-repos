@@ -133,10 +133,8 @@ internal class RendererSynchronizationContext : SynchronizationContext
             async (state) =>
             {
                 var completion =
-                    (RendererSynchronizationTaskCompletionSource<
-                        Func<Task<TResult>>,
-                        TResult
-                    >)state;
+                    (RendererSynchronizationTaskCompletionSource<Func<Task<TResult>>, TResult>)
+                        state;
                 try
                 {
                     var result = await completion.Callback();

@@ -262,8 +262,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
             );
 
             // Fix the leading trivia for the namespace declaration.
-            var namespaceDeclaration =
-                (BaseNamespaceDeclarationSyntax)compilationUnitWithoutBlankLine.Members[0];
+            var namespaceDeclaration = (BaseNamespaceDeclarationSyntax)
+                compilationUnitWithoutBlankLine.Members[0];
             var namespaceDeclarationWithBlankLine = EnsureLeadingBlankLineBeforeFirstMember(
                 namespaceDeclaration
             );

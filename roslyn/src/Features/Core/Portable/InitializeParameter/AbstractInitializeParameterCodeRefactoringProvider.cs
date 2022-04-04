@@ -210,10 +210,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
                 CancellationToken cancellationToken
             )
             {
-                parameter = (IParameterSymbol?)semanticModel.GetDeclaredSymbol(
-                    parameterNode,
-                    cancellationToken
-                );
+                parameter = (IParameterSymbol?)
+                    semanticModel.GetDeclaredSymbol(parameterNode, cancellationToken);
 
                 return parameter != null && parameter.Name != "";
             }

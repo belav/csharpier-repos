@@ -47,8 +47,8 @@ namespace NetClient
 
         public StringTests()
         {
-            this.server =
-                (Server.Contract.Servers.StringTesting)new Server.Contract.Servers.StringTestingClass();
+            this.server = (Server.Contract.Servers.StringTesting)
+                new Server.Contract.Servers.StringTestingClass();
         }
 
         public void Run()

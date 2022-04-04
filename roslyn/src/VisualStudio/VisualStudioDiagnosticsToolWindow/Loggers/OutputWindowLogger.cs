@@ -108,9 +108,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             {
                 _serviceProvider = ServiceProvider.GlobalProvider;
 
-                var componentModel = (IComponentModel)_serviceProvider.GetService(
-                    typeof(SComponentModel)
-                );
+                var componentModel = (IComponentModel)
+                    _serviceProvider.GetService(typeof(SComponentModel));
                 _threadingContext = componentModel.GetService<IThreadingContext>();
             }
 
@@ -144,9 +143,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
                                 return;
                             }
 
-                            var outputWindow = (IVsOutputWindow)_serviceProvider.GetService(
-                                typeof(SVsOutputWindow)
-                            );
+                            var outputWindow = (IVsOutputWindow)
+                                _serviceProvider.GetService(typeof(SVsOutputWindow));
 
                             // this should bring outout window to the front
                             _doNotAccessDirectlyOutputPane = CreateOutputPane(outputWindow);

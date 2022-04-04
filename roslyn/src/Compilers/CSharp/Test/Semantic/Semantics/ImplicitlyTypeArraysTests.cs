@@ -37,11 +37,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            var method = (SourceMemberMethodSymbol)compilation.GlobalNamespace
-                .GetTypeMembers("C")
-                .Single()
-                .GetMembers("F")
-                .Single();
+            var method = (SourceMemberMethodSymbol)
+                compilation.GlobalNamespace.GetTypeMembers("C").Single().GetMembers("F").Single();
             var diagnostics = new DiagnosticBag();
             var block = MethodCompiler.BindMethodBody(
                 method,

@@ -78,9 +78,8 @@ namespace Microsoft.Cci
         )
         {
             Debug.Assert(_metadataWriter != null);
-            var methodHandle = (MethodDefinitionHandle)_metadataWriter.GetMethodHandle(
-                methodBody.MethodDefinition
-            );
+            var methodHandle = (MethodDefinitionHandle)
+                _metadataWriter.GetMethodHandle(methodBody.MethodDefinition);
 
             // A state machine kickoff method doesn't have sequence points as it only contains generated code.
             // We could avoid emitting debug info for it if the corresponding MoveNext method had no sequence points,

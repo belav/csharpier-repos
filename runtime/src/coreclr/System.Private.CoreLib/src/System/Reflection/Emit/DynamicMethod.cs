@@ -272,8 +272,8 @@ namespace System.Reflection.Emit
                 );
 
                 // this always gets the internal module.
-                s_anonymouslyHostedDynamicMethodsModule =
-                    (InternalModuleBuilder)assembly.ManifestModule!;
+                s_anonymouslyHostedDynamicMethodsModule = (InternalModuleBuilder)
+                    assembly.ManifestModule!;
             }
 
             return s_anonymouslyHostedDynamicMethodsModule;
@@ -402,11 +402,8 @@ namespace System.Reflection.Emit
                 GC.KeepAlive(methodHandle);
             }
 
-            MulticastDelegate d = (MulticastDelegate)Delegate.CreateDelegateNoSecurityCheck(
-                delegateType,
-                null,
-                GetMethodDescriptor()
-            );
+            MulticastDelegate d = (MulticastDelegate)
+                Delegate.CreateDelegateNoSecurityCheck(delegateType, null, GetMethodDescriptor());
             // stash this MethodInfo by brute force.
             d.StoreDynamicMethod(GetMethodInfo());
             return d;
@@ -427,11 +424,8 @@ namespace System.Reflection.Emit
                 GC.KeepAlive(methodHandle);
             }
 
-            MulticastDelegate d = (MulticastDelegate)Delegate.CreateDelegateNoSecurityCheck(
-                delegateType,
-                target,
-                GetMethodDescriptor()
-            );
+            MulticastDelegate d = (MulticastDelegate)
+                Delegate.CreateDelegateNoSecurityCheck(delegateType, target, GetMethodDescriptor());
             // stash this MethodInfo by brute force.
             d.StoreDynamicMethod(GetMethodInfo());
             return d;

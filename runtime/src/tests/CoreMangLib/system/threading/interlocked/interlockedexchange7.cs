@@ -105,12 +105,13 @@ public class InterlockedExchange7
             retVal =
                 ExchangeObjects(
                     TestLibrary.Generator.GetString(-55, false, c_MIN_STRING_LEN, c_MAX_STRING_LEN),
-                    (object)TestLibrary.Generator.GetString(
-                        -55,
-                        false,
-                        c_MIN_STRING_LEN,
-                        c_MAX_STRING_LEN
-                    )
+                    (object)
+                        TestLibrary.Generator.GetString(
+                            -55,
+                            false,
+                            c_MIN_STRING_LEN,
+                            c_MAX_STRING_LEN
+                        )
                 ) && retVal;
 
             TestLibrary.TestFramework.BeginScenario("PosTest1: object == char");

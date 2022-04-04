@@ -218,10 +218,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestMergedNamespaces()
         {
-            NamespaceSymbol root1 = (NamespaceSymbol)CreateMockSymbol(
-                new NamespaceExtent(new MockAssemblySymbol("Assem1")),
-                XElement.Parse(
-                    @"<ns name=''> 
+            NamespaceSymbol root1 = (NamespaceSymbol)
+                CreateMockSymbol(
+                    new NamespaceExtent(new MockAssemblySymbol("Assem1")),
+                    XElement.Parse(
+                        @"<ns name=''> 
     <ns name='A'> 
          <ns name='D'/>
          <ns name='E'/>
@@ -234,13 +235,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
     <ns name='U'/>
     <class name='X'/>
 </ns>"
-                )
-            );
+                    )
+                );
 
-            NamespaceSymbol root2 = (NamespaceSymbol)CreateMockSymbol(
-                new NamespaceExtent(new MockAssemblySymbol("Assem2")),
-                XElement.Parse(
-                    @"<ns name=''>
+            NamespaceSymbol root2 = (NamespaceSymbol)
+                CreateMockSymbol(
+                    new NamespaceExtent(new MockAssemblySymbol("Assem2")),
+                    XElement.Parse(
+                        @"<ns name=''>
     <ns name='B'>
          <ns name='K'/>
     </ns>
@@ -248,13 +250,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
     <class name='X'/>
     <class name='Y'/>
 </ns>"
-                )
-            );
+                    )
+                );
 
-            NamespaceSymbol root3 = (NamespaceSymbol)CreateMockSymbol(
-                new NamespaceExtent(new MockAssemblySymbol("Assem3")),
-                XElement.Parse(
-                    @"<ns name=''> 
+            NamespaceSymbol root3 = (NamespaceSymbol)
+                CreateMockSymbol(
+                    new NamespaceExtent(new MockAssemblySymbol("Assem3")),
+                    XElement.Parse(
+                        @"<ns name=''> 
     <ns name='A'>
         <ns name='D'/>
         <ns name='E'>
@@ -269,8 +272,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
     </ns> 
     <class name='Z'/>
 </ns>"
-                )
-            );
+                    )
+                );
 
             NamespaceSymbol merged = MergedNamespaceSymbol.Create(
                 new NamespaceExtent(new MockAssemblySymbol("Merged")),

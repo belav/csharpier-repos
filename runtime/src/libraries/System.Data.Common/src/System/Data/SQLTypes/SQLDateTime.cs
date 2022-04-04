@@ -420,9 +420,8 @@ namespace System.Data.SqlTypes
             }
             catch (FormatException)
             {
-                DateTimeFormatInfo dtfi = (DateTimeFormatInfo)(
-                    CultureInfo.CurrentCulture.GetFormat(typeof(DateTimeFormatInfo))
-                )!;
+                DateTimeFormatInfo dtfi = (DateTimeFormatInfo)
+                    (CultureInfo.CurrentCulture.GetFormat(typeof(DateTimeFormatInfo)))!;
                 dt = DateTime.ParseExact(s, s_dateTimeFormats, dtfi, x_DateTimeStyle);
             }
 

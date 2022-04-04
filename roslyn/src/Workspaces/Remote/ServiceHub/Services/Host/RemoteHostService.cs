@@ -122,8 +122,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 {
                     var services = GetWorkspace().Services;
 
-                    var telemetryService =
-                        (RemoteWorkspaceTelemetryService)services.GetRequiredService<IWorkspaceTelemetryService>();
+                    var telemetryService = (RemoteWorkspaceTelemetryService)
+                        services.GetRequiredService<IWorkspaceTelemetryService>();
                     var telemetrySession = new TelemetrySession(serializedSession);
                     telemetrySession.Start();
 
@@ -259,11 +259,12 @@ namespace Microsoft.CodeAnalysis.Remote
                         try
                         {
                             set.Add(
-                                (FunctionId)Enum.Parse(
-                                    functionIdType,
-                                    functionIdString.Trim(),
-                                    ignoreCase: true
-                                )
+                                (FunctionId)
+                                    Enum.Parse(
+                                        functionIdType,
+                                        functionIdString.Trim(),
+                                        ignoreCase: true
+                                    )
                             );
                         }
                         catch

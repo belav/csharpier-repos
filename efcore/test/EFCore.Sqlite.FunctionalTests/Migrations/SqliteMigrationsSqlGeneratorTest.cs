@@ -1185,9 +1185,10 @@ PRAGMA foreign_keys = 1;
                 SqliteTestHelpers.Instance
                     .AddProviderOptions(
                         (
-                            (IRelationalDbContextOptionsBuilderInfrastructure)new SqliteDbContextOptionsBuilder(
-                                new DbContextOptionsBuilder()
-                            ).UseNetTopologySuite()
+                            (IRelationalDbContextOptionsBuilderInfrastructure)
+                                new SqliteDbContextOptionsBuilder(
+                                    new DbContextOptionsBuilder()
+                                ).UseNetTopologySuite()
                         ).OptionsBuilder
                     )
                     .Options

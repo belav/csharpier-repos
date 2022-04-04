@@ -23,11 +23,8 @@ namespace System.Xml
         {
             //CloneNode is deep for attributes irrespective of parameter
             XmlDocument doc = OwnerDocument;
-            XmlUnspecifiedAttribute attr = (XmlUnspecifiedAttribute)doc.CreateDefaultAttribute(
-                Prefix,
-                LocalName,
-                NamespaceURI
-            );
+            XmlUnspecifiedAttribute attr = (XmlUnspecifiedAttribute)
+                doc.CreateDefaultAttribute(Prefix, LocalName, NamespaceURI);
             attr.CopyChildren(doc, this, true);
             attr._fSpecified = true; //When clone, should return the specified attribute as default
             return attr;

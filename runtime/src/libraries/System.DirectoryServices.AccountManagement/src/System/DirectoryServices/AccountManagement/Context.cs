@@ -1414,9 +1414,8 @@ namespace System.DirectoryServices.AccountManagement
 
                 // Fill in the struct with the casted properties from the serach results.
                 // there will always be only 1 item on the rootDSE so all entry indexes are 0
-                properties.dnsHostName = (string)searchResponse.Entries[0].Attributes[
-                    "dnsHostName"
-                ][0];
+                properties.dnsHostName = (string)
+                    searchResponse.Entries[0].Attributes["dnsHostName"][0];
                 properties.SupportCapabilities = new string[
                     searchResponse.Entries[0].Attributes["supportedCapabilities"].Count
                 ];
@@ -1426,9 +1425,8 @@ namespace System.DirectoryServices.AccountManagement
                     i++
                 )
                 {
-                    properties.SupportCapabilities[i] = (string)searchResponse.Entries[
-                        0
-                    ].Attributes["supportedCapabilities"][i];
+                    properties.SupportCapabilities[i] = (string)
+                        searchResponse.Entries[0].Attributes["supportedCapabilities"][i];
                 }
 
                 foreach (string capability in properties.SupportCapabilities)
@@ -1446,10 +1444,13 @@ namespace System.DirectoryServices.AccountManagement
                 // If we can't determine the OS vesion so we must fall back to lowest level of functionality
                 if (searchResponse.Entries[0].Attributes.Contains("domainControllerFunctionality"))
                 {
-                    properties.OsVersion = (DomainControllerMode)Convert.ToInt32(
-                        searchResponse.Entries[0].Attributes["domainControllerFunctionality"][0],
-                        CultureInfo.InvariantCulture
-                    );
+                    properties.OsVersion = (DomainControllerMode)
+                        Convert.ToInt32(
+                            searchResponse.Entries[0].Attributes["domainControllerFunctionality"][
+                                0
+                            ],
+                            CultureInfo.InvariantCulture
+                        );
                 }
                 else
                 {

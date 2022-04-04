@@ -29,10 +29,10 @@ namespace System.Net.Http
     internal sealed class BrowserHttpHandler : HttpMessageHandler
     {
         // This partial implementation contains members common to Browser WebAssembly running on .NET Core.
-        private static readonly JSObject? s_fetch =
-            (JSObject)System.Runtime.InteropServices.JavaScript.Runtime.GetGlobalObject("fetch");
-        private static readonly JSObject? s_window =
-            (JSObject)System.Runtime.InteropServices.JavaScript.Runtime.GetGlobalObject("window");
+        private static readonly JSObject? s_fetch = (JSObject)
+            System.Runtime.InteropServices.JavaScript.Runtime.GetGlobalObject("fetch");
+        private static readonly JSObject? s_window = (JSObject)
+            System.Runtime.InteropServices.JavaScript.Runtime.GetGlobalObject("window");
 
         private static readonly HttpRequestOptionsKey<bool> EnableStreamingResponse =
             new HttpRequestOptionsKey<bool>("WebAssemblyEnableStreamingResponse");
@@ -299,9 +299,8 @@ namespace System.Net.Http
                 if (response == null)
                     throw new Exception(SR.net_http_marshalling_response_promise_from_fetch);
 
-                JSObject t = (JSObject)await response.ConfigureAwait(
-                    continueOnCapturedContext: true
-                );
+                JSObject t = (JSObject)
+                    await response.ConfigureAwait(continueOnCapturedContext: true);
 
                 var status = new WasmFetchResponse(t, abortController, abortCts, abortRegistration);
                 HttpResponseMessage httpResponse = new HttpResponseMessage(
@@ -353,9 +352,8 @@ namespace System.Net.Http
                                 {
                                     using (
                                         var resultValue =
-                                            (System.Runtime.InteropServices.JavaScript.Array)nextResult.GetObjectProperty(
-                                                "value"
-                                            )
+                                            (System.Runtime.InteropServices.JavaScript.Array)
+                                                nextResult.GetObjectProperty("value")
                                     )
                                     {
                                         var name = (string)resultValue[0];
@@ -487,9 +485,10 @@ namespace System.Net.Http
                 {
                     using (
                         System.Runtime.InteropServices.JavaScript.ArrayBuffer dataBuffer =
-                            (System.Runtime.InteropServices.JavaScript.ArrayBuffer)await _status
-                                .ArrayBuffer()
-                                .ConfigureAwait(continueOnCapturedContext: true)
+                            (System.Runtime.InteropServices.JavaScript.ArrayBuffer)
+                                await _status
+                                    .ArrayBuffer()
+                                    .ConfigureAwait(continueOnCapturedContext: true)
                     )
                     {
                         using (Uint8Array dataBinView = new Uint8Array(dataBuffer))

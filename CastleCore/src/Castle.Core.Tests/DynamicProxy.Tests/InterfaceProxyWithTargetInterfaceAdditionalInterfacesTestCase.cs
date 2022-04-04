@@ -71,12 +71,13 @@ namespace Castle.DynamicProxy.Tests
 
         private T GetProxy<T>(object target)
         {
-            return (T)generator.CreateInterfaceProxyWithTargetInterface(
-                typeof(IEmpty),
-                new[] { typeof(T) },
-                target,
-                new ProxyGenerationOptions(new ProxyNothingHook())
-            );
+            return (T)
+                generator.CreateInterfaceProxyWithTargetInterface(
+                    typeof(IEmpty),
+                    new[] { typeof(T) },
+                    target,
+                    new ProxyGenerationOptions(new ProxyNothingHook())
+                );
         }
     }
 }

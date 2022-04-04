@@ -1129,9 +1129,8 @@ namespace System.Net.Http
                 return;
             }
 
-            var protocolError = (Http2ProtocolErrorCode)BinaryPrimitives.ReadInt32BigEndian(
-                _incomingBuffer.ActiveSpan
-            );
+            var protocolError = (Http2ProtocolErrorCode)
+                BinaryPrimitives.ReadInt32BigEndian(_incomingBuffer.ActiveSpan);
             if (NetEventSource.Log.IsEnabled())
                 Trace(frameHeader.StreamId, $"{nameof(protocolError)}={protocolError}");
 
@@ -1171,10 +1170,8 @@ namespace System.Net.Http
             int lastStreamId = (int)(
                 BinaryPrimitives.ReadUInt32BigEndian(_incomingBuffer.ActiveSpan) & 0x7FFFFFFF
             );
-            Http2ProtocolErrorCode errorCode =
-                (Http2ProtocolErrorCode)BinaryPrimitives.ReadInt32BigEndian(
-                    _incomingBuffer.ActiveSpan.Slice(sizeof(int))
-                );
+            Http2ProtocolErrorCode errorCode = (Http2ProtocolErrorCode)
+                BinaryPrimitives.ReadInt32BigEndian(_incomingBuffer.ActiveSpan.Slice(sizeof(int)));
             if (NetEventSource.Log.IsEnabled())
                 Trace(
                     frameHeader.StreamId,

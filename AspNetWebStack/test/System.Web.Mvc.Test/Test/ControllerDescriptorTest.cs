@@ -44,10 +44,8 @@ namespace System.Web.Mvc.Test
             ControllerDescriptor cd = GetControllerDescriptor();
 
             // Act
-            ObsoleteAttribute[] attrs = (ObsoleteAttribute[])cd.GetCustomAttributes(
-                typeof(ObsoleteAttribute),
-                true
-            );
+            ObsoleteAttribute[] attrs = (ObsoleteAttribute[])
+                cd.GetCustomAttributes(typeof(ObsoleteAttribute), true);
 
             // Assert
             Assert.Empty(attrs);

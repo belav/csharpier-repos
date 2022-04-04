@@ -54,8 +54,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     Assert.Equal(expected, skid.RawData);
 
                     Assert.True(skid is X509SubjectKeyIdentifierExtension);
-                    X509SubjectKeyIdentifierExtension rich =
-                        (X509SubjectKeyIdentifierExtension)skid;
+                    X509SubjectKeyIdentifierExtension rich = (X509SubjectKeyIdentifierExtension)
+                        skid;
                     Assert.Equal(
                         "5971A65A334DDA980780FF841EBE87F9723241F2",
                         rich.SubjectKeyIdentifier

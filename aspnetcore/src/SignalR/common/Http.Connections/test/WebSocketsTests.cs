@@ -58,10 +58,8 @@ public class WebSocketsTests : VerifiableLoggedTest
                 // Send a frame, then close
                 await feature.Client.SendAsync(
                     buffer: new ArraySegment<byte>(Encoding.UTF8.GetBytes("Hello")),
-                    messageType: (WebSocketMessageType)Enum.Parse(
-                        typeof(WebSocketMessageType),
-                        webSocketMessageType
-                    ),
+                    messageType: (WebSocketMessageType)
+                        Enum.Parse(typeof(WebSocketMessageType), webSocketMessageType),
                     endOfMessage: true,
                     cancellationToken: CancellationToken.None
                 );
@@ -145,10 +143,8 @@ public class WebSocketsTests : VerifiableLoggedTest
                 Assert.Equal(1, clientSummary.Received.Count);
                 Assert.True(clientSummary.Received[0].EndOfMessage);
                 Assert.Equal(
-                    (WebSocketMessageType)Enum.Parse(
-                        typeof(WebSocketMessageType),
-                        expectedMessageType
-                    ),
+                    (WebSocketMessageType)
+                        Enum.Parse(typeof(WebSocketMessageType), expectedMessageType),
                     clientSummary.Received[0].MessageType
                 );
                 Assert.Equal("Hello", Encoding.UTF8.GetString(clientSummary.Received[0].Buffer));

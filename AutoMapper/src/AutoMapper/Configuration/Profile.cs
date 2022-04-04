@@ -170,10 +170,8 @@ namespace AutoMapper
         public IProjectionExpression<TSource, TDestination> CreateProjection<TSource, TDestination>(
             MemberList memberList
         ) =>
-            (IProjectionExpression<TSource, TDestination>)CreateMapCore<TSource, TDestination>(
-                memberList,
-                projection: true
-            );
+            (IProjectionExpression<TSource, TDestination>)
+                CreateMapCore<TSource, TDestination>(memberList, projection: true);
 
         public IMappingExpression<TSource, TDestination> CreateMap<TSource, TDestination>() =>
             CreateMapCore<TSource, TDestination>(MemberList.Destination);

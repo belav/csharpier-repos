@@ -292,10 +292,11 @@ namespace Microsoft.CodeAnalysis.InlineMethod
             var declarationsForVariableDeclarationArgumentQuery =
                 parametersWithVariableDeclarationArgument.Select(
                     parameterAndName =>
-                        (TStatementSyntax)syntaxGenerator.LocalDeclarationStatement(
-                            parameterAndName.parameterSymbol.Type,
-                            parameterAndName.identifierName
-                        )
+                        (TStatementSyntax)
+                            syntaxGenerator.LocalDeclarationStatement(
+                                parameterAndName.parameterSymbol.Type,
+                                parameterAndName.identifierName
+                            )
                 );
 
             return declarationsQuery
@@ -323,11 +324,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
             var name = renameTable.TryGetValue(parameterSymbol, out var newName)
               ? newName
               : parameterSymbol.Name;
-            return (TStatementSyntax)syntaxGenerator.LocalDeclarationStatement(
-                parameterSymbol.Type,
-                name,
-                expression
-            );
+            return (TStatementSyntax)
+                syntaxGenerator.LocalDeclarationStatement(parameterSymbol.Type, name, expression);
         }
 
         private static async Task<TExpressionSyntax> ReplaceAllSyntaxNodesForSymbolAsync(

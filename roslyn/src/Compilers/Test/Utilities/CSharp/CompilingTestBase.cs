@@ -27,11 +27,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         )
         {
             var compilation = CreateCompilation(program);
-            var method = (MethodSymbol)compilation.GlobalNamespace
-                .GetTypeMembers(typeName)
-                .Single()
-                .GetMembers(methodName)
-                .Single();
+            var method = (MethodSymbol)
+                compilation.GlobalNamespace
+                    .GetTypeMembers(typeName)
+                    .Single()
+                    .GetMembers(methodName)
+                    .Single();
 
             // Provide an Emit.Module so that the lowering passes will be run
             var module = new PEAssemblyBuilder(

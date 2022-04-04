@@ -72,9 +72,10 @@ namespace JIT.HardwareIntrinsics.General
             ValidateResult((Vector3)(Result), value);
 
             value =
-                (Vector128<Single>)typeof(Vector128)
-                    .GetMethod(nameof(Vector128.AsVector128), new Type[] { typeof(Vector3) })
-                    .Invoke(null, new object[] { Result });
+                (Vector128<Single>)
+                    typeof(Vector128)
+                        .GetMethod(nameof(Vector128.AsVector128), new Type[] { typeof(Vector3) })
+                        .Invoke(null, new object[] { Result });
             ValidateResult(value, (Vector3)(Result));
         }
 

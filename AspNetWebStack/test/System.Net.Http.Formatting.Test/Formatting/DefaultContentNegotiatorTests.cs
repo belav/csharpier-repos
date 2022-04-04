@@ -124,7 +124,8 @@ namespace System.Net.Http.Formatting
                         new string[] { "text/xml", "application/xml" },
                         "text/xml",
                         1.0,
-                        (int)MediaTypeFormatterMatchRanking.MatchOnRequestAcceptHeaderSubtypeMediaRange
+                        (int)
+                            MediaTypeFormatterMatchRanking.MatchOnRequestAcceptHeaderSubtypeMediaRange
                     },
                     {
                         new string[] { "text/*", "application/xml" },
@@ -138,14 +139,16 @@ namespace System.Net.Http.Formatting
                         new string[] { "text/xml", "application/xml" },
                         "text/xml",
                         1.0,
-                        (int)MediaTypeFormatterMatchRanking.MatchOnRequestAcceptHeaderSubtypeMediaRange
+                        (int)
+                            MediaTypeFormatterMatchRanking.MatchOnRequestAcceptHeaderSubtypeMediaRange
                     },
                     {
                         new string[] { "text/*; q=0.5" },
                         new string[] { "text/xml", "application/xml" },
                         "text/xml",
                         0.5,
-                        (int)MediaTypeFormatterMatchRanking.MatchOnRequestAcceptHeaderSubtypeMediaRange
+                        (int)
+                            MediaTypeFormatterMatchRanking.MatchOnRequestAcceptHeaderSubtypeMediaRange
                     },
                     {
                         new string[] { "text/*; q=0.5", "application/xml" },

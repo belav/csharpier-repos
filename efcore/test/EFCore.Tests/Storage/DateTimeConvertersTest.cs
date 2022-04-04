@@ -137,11 +137,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         }
 
         private static readonly CompositeValueConverter<DateTime, long, ulong> _dateTimeToUTicks =
-            (CompositeValueConverter<
-                DateTime,
-                long,
-                ulong
-            >)new DateTimeToTicksConverter().ComposeWith(new CastingConverter<long, ulong>());
+            (CompositeValueConverter<DateTime, long, ulong>)
+                new DateTimeToTicksConverter().ComposeWith(new CastingConverter<long, ulong>());
 
         [ConditionalFact]
         public void Can_convert_DateTime_to_unsigned_ticks()
@@ -196,11 +193,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         }
 
         private static readonly CompositeValueConverter<DateTime, long, ulong> _dateTimeToUBinary =
-            (CompositeValueConverter<
-                DateTime,
-                long,
-                ulong
-            >)new DateTimeToBinaryConverter().ComposeWith(new CastingConverter<long, ulong>());
+            (CompositeValueConverter<DateTime, long, ulong>)
+                new DateTimeToBinaryConverter().ComposeWith(new CastingConverter<long, ulong>());
 
         [ConditionalFact]
         public void Can_convert_DateTime_to_unsigned_binary()
@@ -326,11 +320,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         }
 
         private static readonly CompositeValueConverter<DateTime, long, byte[]> _dateTimeToBytes =
-            (CompositeValueConverter<
-                DateTime,
-                long,
-                byte[]
-            >)new DateTimeToBinaryConverter().ComposeWith(new NumberToBytesConverter<long>());
+            (CompositeValueConverter<DateTime, long, byte[]>)
+                new DateTimeToBinaryConverter().ComposeWith(new NumberToBytesConverter<long>());
 
         [ConditionalFact]
         public void Can_convert_DateTime_to_bytes()
@@ -398,9 +389,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Assert.Equal(new DateTime(1973, 9, 3, 0, 10, 15, DateTimeKind.Utc), utcKind);
             Assert.Equal(DateTimeKind.Utc, utcKind.Kind);
 
-            var unspecifiedKind = (DateTime)converter(
-                new byte[] { 8, 163, 157, 186, 146, 57, 205, 128 }
-            )!;
+            var unspecifiedKind = (DateTime)
+                converter(new byte[] { 8, 163, 157, 186, 146, 57, 205, 128 })!;
             Assert.Equal(
                 new DateTime(1973, 9, 3, 0, 10, 15, DateTimeKind.Unspecified),
                 unspecifiedKind

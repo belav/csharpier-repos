@@ -182,14 +182,10 @@ namespace System.Web.WebPages.Razor
             // Get the individual sections (we can only use GetSection in medium trust) and then reconstruct the section group
             return new RazorWebSectionGroup()
             {
-                Host = (HostSection)WebConfigurationManager.GetSection(
-                    HostSection.SectionName,
-                    virtualPath
-                ),
-                Pages = (RazorPagesSection)WebConfigurationManager.GetSection(
-                    RazorPagesSection.SectionName,
-                    virtualPath
-                )
+                Host = (HostSection)
+                    WebConfigurationManager.GetSection(HostSection.SectionName, virtualPath),
+                Pages = (RazorPagesSection)
+                    WebConfigurationManager.GetSection(RazorPagesSection.SectionName, virtualPath)
             };
         }
 

@@ -1516,8 +1516,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     return;
 
                 case SyntaxKind.ParenthesizedVariableDesignation:
-                    var parenthesizedVariableDesignation =
-                        (ParenthesizedVariableDesignationSyntax)designation;
+                    var parenthesizedVariableDesignation = (ParenthesizedVariableDesignationSyntax)
+                        designation;
                     foreach (var variableDesignation in parenthesizedVariableDesignation.Variables)
                     {
                         GetLocalNames(variableDesignation, ref result);

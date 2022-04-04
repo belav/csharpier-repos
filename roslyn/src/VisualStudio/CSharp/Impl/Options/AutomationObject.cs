@@ -1010,9 +1010,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
         {
             get
             {
-                return (int)_workspace.Options.GetOption(
-                    CSharpFormattingOptions2.SpacingAroundBinaryOperator
-                );
+                return (int)
+                    _workspace.Options.GetOption(
+                        CSharpFormattingOptions2.SpacingAroundBinaryOperator
+                    );
             }
             set
             {

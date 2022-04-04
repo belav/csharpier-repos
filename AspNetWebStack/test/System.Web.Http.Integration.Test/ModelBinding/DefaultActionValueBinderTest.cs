@@ -108,8 +108,8 @@ namespace System.Web.Http.ModelBinding
             await provider.BindValuesAsync(actionContext, CancellationToken.None);
 
             // Assert
-            ConvertEmptyStringContainer arg =
-                (ConvertEmptyStringContainer)actionContext.ActionArguments["x"];
+            ConvertEmptyStringContainer arg = (ConvertEmptyStringContainer)
+                actionContext.ActionArguments["x"];
 
             Assert.NotNull(arg);
             Assert.Equal(String.Empty, arg.A1);

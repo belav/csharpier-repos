@@ -169,8 +169,8 @@ namespace Microsoft.EntityFrameworkCore
                 >()
             );
 
-            var transactionManager =
-                (FakeDbContextTransactionManager)context.GetService<IDbContextTransactionManager>();
+            var transactionManager = (FakeDbContextTransactionManager)
+                context.GetService<IDbContextTransactionManager>();
 
             if (async)
             {

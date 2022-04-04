@@ -174,9 +174,8 @@ namespace System.Web.Razor.Test.Generator
 
             // Generate code
             CodeCompileUnit ccu = results.GeneratedCode;
-            CodeDomProvider codeProvider = (CodeDomProvider)Activator.CreateInstance(
-                host.CodeLanguage.CodeDomProviderType
-            );
+            CodeDomProvider codeProvider = (CodeDomProvider)
+                Activator.CreateInstance(host.CodeLanguage.CodeDomProviderType);
 
             CodeGeneratorOptions options = new CodeGeneratorOptions();
 

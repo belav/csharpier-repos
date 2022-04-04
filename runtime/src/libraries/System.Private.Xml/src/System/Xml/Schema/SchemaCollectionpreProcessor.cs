@@ -203,9 +203,8 @@ namespace System.Xml.Schema
                         Uri? subUri = null;
                         for (int j = 0; j < include.Schema.Includes.Count; ++j)
                         {
-                            XmlSchemaExternal subInc = (XmlSchemaExternal)include.Schema.Includes[
-                                j
-                            ];
+                            XmlSchemaExternal subInc = (XmlSchemaExternal)
+                                include.Schema.Includes[j];
                             if (subInc is XmlSchemaImport)
                             {
                                 XmlSchemaImport subImp = (XmlSchemaImport)subInc;
@@ -653,9 +652,8 @@ namespace System.Xml.Schema
                 }
                 else if (schema.Items[i] is XmlSchemaAttributeGroup)
                 {
-                    XmlSchemaAttributeGroup attributeGroup = (XmlSchemaAttributeGroup)schema.Items[
-                        i
-                    ];
+                    XmlSchemaAttributeGroup attributeGroup = (XmlSchemaAttributeGroup)
+                        schema.Items[i];
                     PreprocessAttributeGroup(attributeGroup);
                     AddToTable(
                         schema.AttributeGroups,
@@ -723,9 +721,8 @@ namespace System.Xml.Schema
                     else
                     {
                         AddToTable(redefine.Groups, group.QualifiedName, group);
-                        group.Redefined = (XmlSchemaGroup?)redefine.Schema!.Groups[
-                            group.QualifiedName
-                        ];
+                        group.Redefined = (XmlSchemaGroup?)
+                            redefine.Schema!.Groups[group.QualifiedName];
                         if (group.Redefined != null)
                         {
                             CheckRefinedGroup(group);
@@ -738,8 +735,8 @@ namespace System.Xml.Schema
                 }
                 else if (redefine.Items[i] is XmlSchemaAttributeGroup)
                 {
-                    XmlSchemaAttributeGroup attributeGroup =
-                        (XmlSchemaAttributeGroup)redefine.Items[i];
+                    XmlSchemaAttributeGroup attributeGroup = (XmlSchemaAttributeGroup)
+                        redefine.Items[i];
                     PreprocessAttributeGroup(attributeGroup);
                     if (redefine.AttributeGroups[attributeGroup.QualifiedName] != null)
                     {
@@ -752,9 +749,8 @@ namespace System.Xml.Schema
                             attributeGroup.QualifiedName,
                             attributeGroup
                         );
-                        attributeGroup.Redefined = (XmlSchemaAttributeGroup?)redefine
-                            .Schema!
-                            .AttributeGroups[attributeGroup.QualifiedName];
+                        attributeGroup.Redefined = (XmlSchemaAttributeGroup?)
+                            redefine.Schema!.AttributeGroups[attributeGroup.QualifiedName];
                         if (attributeGroup.Redefined != null)
                         {
                             CheckRefinedAttributeGroup(attributeGroup);
@@ -776,9 +772,8 @@ namespace System.Xml.Schema
                     else
                     {
                         AddToTable(redefine.SchemaTypes, complexType.QualifiedName, complexType);
-                        XmlSchemaType? type = (XmlSchemaType?)redefine.Schema!.SchemaTypes[
-                            complexType.QualifiedName
-                        ];
+                        XmlSchemaType? type = (XmlSchemaType?)
+                            redefine.Schema!.SchemaTypes[complexType.QualifiedName];
                         if (type != null)
                         {
                             if (type is XmlSchemaComplexType)
@@ -811,9 +806,8 @@ namespace System.Xml.Schema
                     else
                     {
                         AddToTable(redefine.SchemaTypes, simpleType.QualifiedName, simpleType);
-                        XmlSchemaType? type = (XmlSchemaType?)redefine.Schema!.SchemaTypes[
-                            simpleType.QualifiedName
-                        ];
+                        XmlSchemaType? type = (XmlSchemaType?)
+                            redefine.Schema!.SchemaTypes[simpleType.QualifiedName];
                         if (type != null)
                         {
                             if (type is XmlSchemaSimpleType)
@@ -923,8 +917,8 @@ namespace System.Xml.Schema
         {
             if (stype.Content != null && stype.Content is XmlSchemaSimpleTypeRestriction)
             {
-                XmlSchemaSimpleTypeRestriction restriction =
-                    (XmlSchemaSimpleTypeRestriction)stype.Content;
+                XmlSchemaSimpleTypeRestriction restriction = (XmlSchemaSimpleTypeRestriction)
+                    stype.Content;
                 if (restriction.BaseTypeName == stype.QualifiedName)
                 {
                     return;
@@ -1420,8 +1414,8 @@ namespace System.Xml.Schema
             }
             else if (simpleType.Content is XmlSchemaSimpleTypeRestriction)
             {
-                XmlSchemaSimpleTypeRestriction restriction =
-                    (XmlSchemaSimpleTypeRestriction)simpleType.Content;
+                XmlSchemaSimpleTypeRestriction restriction = (XmlSchemaSimpleTypeRestriction)
+                    simpleType.Content;
                 //SetParent
                 SetParent(restriction, simpleType);
                 for (int i = 0; i < restriction.Facets.Count; ++i)
@@ -1582,8 +1576,8 @@ namespace System.Xml.Schema
                 }
                 if (complexType.ContentModel is XmlSchemaSimpleContent)
                 {
-                    XmlSchemaSimpleContent content =
-                        (XmlSchemaSimpleContent)complexType.ContentModel;
+                    XmlSchemaSimpleContent content = (XmlSchemaSimpleContent)
+                        complexType.ContentModel;
                     if (content.Content == null)
                     {
                         if (complexType.QualifiedName == XmlQualifiedName.Empty)
@@ -1952,8 +1946,8 @@ namespace System.Xml.Schema
                 }
                 else
                 { // XmlSchemaAttributeGroupRef
-                    XmlSchemaAttributeGroupRef attributeGroupRef =
-                        (XmlSchemaAttributeGroupRef)attributes[i];
+                    XmlSchemaAttributeGroupRef attributeGroupRef = (XmlSchemaAttributeGroupRef)
+                        attributes[i];
                     if (attributeGroupRef.RefName.IsEmpty)
                     {
                         SendValidationEvent(SR.Sch_MissAttribute, "ref", attributeGroupRef);

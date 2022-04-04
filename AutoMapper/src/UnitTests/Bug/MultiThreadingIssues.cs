@@ -87,9 +87,8 @@ namespace AutoMapper.UnitTests.Bug
                 cfg => cfg.CreateMap(source.GetType(), typeof(DestType))
             );
 
-            DestType t2 = (DestType)config
-                .CreateMapper()
-                .Map(source, source.GetType(), typeof(DestType));
+            DestType t2 = (DestType)
+                config.CreateMapper().Map(source, source.GetType(), typeof(DestType));
         }
 
         static readonly Random _random = new Random();

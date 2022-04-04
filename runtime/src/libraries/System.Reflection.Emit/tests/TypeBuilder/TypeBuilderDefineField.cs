@@ -170,9 +170,8 @@ namespace System.Reflection.Emit.Tests
             {
                 // Verify MetadataToken
                 Assert.Equal(field.MetadataToken, fieldInfo.MetadataToken);
-                FieldInfo fieldFromToken = (FieldInfo)fieldInfo.Module.ResolveField(
-                    fieldInfo.MetadataToken
-                );
+                FieldInfo fieldFromToken = (FieldInfo)
+                    fieldInfo.Module.ResolveField(fieldInfo.MetadataToken);
                 Assert.Equal(fieldInfo, fieldFromToken);
             }
         }

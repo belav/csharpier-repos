@@ -176,9 +176,8 @@ internal sealed class GenericWebHostBuilder
 
                 foreach (var attribute in assembly.GetCustomAttributes<HostingStartupAttribute>())
                 {
-                    var hostingStartup = (IHostingStartup)Activator.CreateInstance(
-                        attribute.HostingStartupType
-                    )!;
+                    var hostingStartup = (IHostingStartup)
+                        Activator.CreateInstance(attribute.HostingStartupType)!;
                     hostingStartup.Configure(_hostingStartupWebHostBuilder);
                 }
             }
@@ -439,9 +438,8 @@ internal sealed class GenericWebHostBuilder
     ) where TContainer : notnull
     {
         var instance = context.Properties[_startupKey];
-        var builder = (ConfigureContainerBuilder)context.Properties[
-            typeof(ConfigureContainerBuilder)
-        ];
+        var builder = (ConfigureContainerBuilder)
+            context.Properties[typeof(ConfigureContainerBuilder)];
         builder.Build(instance)(container);
     }
 

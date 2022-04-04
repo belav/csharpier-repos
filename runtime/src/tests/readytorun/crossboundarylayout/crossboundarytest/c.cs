@@ -101,9 +101,8 @@ namespace CrossBoundaryLayout
 
             {
                 var a5 =
-                    (ABoringGeneric<ByteStruct>)Activator.CreateInstance(
-                        typeof(ABoringGeneric<ByteStruct>)
-                    );
+                    (ABoringGeneric<ByteStruct>)
+                        Activator.CreateInstance(typeof(ABoringGeneric<ByteStruct>));
                 a5._aVal = 1;
                 if (1 != (byte)typeof(ABoringGeneric<ByteStruct>).GetField("_aVal").GetValue(a5))
                 {
@@ -149,9 +148,8 @@ namespace CrossBoundaryLayout
 
             {
                 var b5 =
-                    (B_A_byte_Generic<byte>)Activator.CreateInstance(
-                        typeof(B_A_byte_Generic<byte>)
-                    );
+                    (B_A_byte_Generic<byte>)
+                        Activator.CreateInstance(typeof(B_A_byte_Generic<byte>));
                 b5._bVal = 1;
                 if (1 != (byte)typeof(B_A_byte_Generic<byte>).GetField("_bVal").GetValue(b5))
                 {
@@ -170,9 +168,8 @@ namespace CrossBoundaryLayout
 
             {
                 var b7 =
-                    (B_A_Generic<ByteStruct>)Activator.CreateInstance(
-                        typeof(B_A_Generic<ByteStruct>)
-                    );
+                    (B_A_Generic<ByteStruct>)
+                        Activator.CreateInstance(typeof(B_A_Generic<ByteStruct>));
                 b7._bVal._dVal = 1;
                 if (
                     1
@@ -187,16 +184,14 @@ namespace CrossBoundaryLayout
 
             {
                 var b8 =
-                    (B_A_byte_Generic<ByteStruct>)Activator.CreateInstance(
-                        typeof(B_A_byte_Generic<ByteStruct>)
-                    );
+                    (B_A_byte_Generic<ByteStruct>)
+                        Activator.CreateInstance(typeof(B_A_byte_Generic<ByteStruct>));
                 b8._bVal._dVal = 1;
                 if (
                     1
                     != (
-                        (ByteStruct)typeof(B_A_byte_Generic<ByteStruct>)
-                            .GetField("_bVal")
-                            .GetValue(b8)
+                        (ByteStruct)
+                            typeof(B_A_byte_Generic<ByteStruct>).GetField("_bVal").GetValue(b8)
                     )._dVal
                 )
                 {
@@ -206,9 +201,8 @@ namespace CrossBoundaryLayout
 
             {
                 var b9 =
-                    (B_A_D_Generic<ByteStruct>)Activator.CreateInstance(
-                        typeof(B_A_D_Generic<ByteStruct>)
-                    );
+                    (B_A_D_Generic<ByteStruct>)
+                        Activator.CreateInstance(typeof(B_A_D_Generic<ByteStruct>));
                 b9._bVal._dVal = 1;
                 if (
                     1
@@ -276,9 +270,8 @@ namespace CrossBoundaryLayout
             }
 
             {
-                var c5 = (C_B_A_byte_Generic_byte)Activator.CreateInstance(
-                    typeof(C_B_A_byte_Generic_byte)
-                );
+                var c5 = (C_B_A_byte_Generic_byte)
+                    Activator.CreateInstance(typeof(C_B_A_byte_Generic_byte));
                 c5._cVal = 1;
                 if (1 != (byte)typeof(C_B_A_byte_Generic_byte).GetField("_cVal").GetValue(c5))
                 {
@@ -287,9 +280,8 @@ namespace CrossBoundaryLayout
             }
 
             {
-                var c6 = (C_B_A_D_Generic_byte)Activator.CreateInstance(
-                    typeof(C_B_A_D_Generic_byte)
-                );
+                var c6 = (C_B_A_D_Generic_byte)
+                    Activator.CreateInstance(typeof(C_B_A_D_Generic_byte));
                 c6._cVal = 1;
                 if (1 != (byte)typeof(C_B_A_D_Generic_byte).GetField("_cVal").GetValue(c6))
                 {
@@ -307,9 +299,8 @@ namespace CrossBoundaryLayout
             }
 
             {
-                var c8 = (C_B_A_byte_Generic_D)Activator.CreateInstance(
-                    typeof(C_B_A_byte_Generic_D)
-                );
+                var c8 = (C_B_A_byte_Generic_D)
+                    Activator.CreateInstance(typeof(C_B_A_byte_Generic_D));
                 c8._cVal = 1;
                 if (1 != (byte)typeof(C_B_A_byte_Generic_D).GetField("_cVal").GetValue(c8))
                 {

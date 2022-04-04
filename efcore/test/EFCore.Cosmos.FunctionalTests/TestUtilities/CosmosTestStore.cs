@@ -41,8 +41,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             string name,
             Action<CosmosDbContextOptionsBuilder> extensionConfiguration = null
         ) =>
-            (CosmosTestStore)Create(name, extensionConfiguration)
-                .Initialize(null, (Func<DbContext>)null);
+            (CosmosTestStore)
+                Create(name, extensionConfiguration).Initialize(null, (Func<DbContext>)null);
 
         public static CosmosTestStore GetOrCreate(string name) => new(name);
 

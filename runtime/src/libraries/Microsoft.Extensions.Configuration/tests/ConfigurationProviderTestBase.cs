@@ -582,12 +582,13 @@ Section3:
                                                 ("Key3", (TestKeyValue)"Value123"),
                                                 (
                                                     "Key3a",
-                                                    (TestKeyValue)new[]
-                                                    {
-                                                        "ArrayValue0",
-                                                        "ArrayValue1",
-                                                        "ArrayValue2"
-                                                    }
+                                                    (TestKeyValue)
+                                                        new[]
+                                                        {
+                                                            "ArrayValue0",
+                                                            "ArrayValue1",
+                                                            "ArrayValue2"
+                                                        }
                                                 )
                                             },
                                         }
@@ -636,12 +637,13 @@ Section3:
                                                 ("Key3", (TestKeyValue)"-----"),
                                                 (
                                                     "Key3a",
-                                                    (TestKeyValue)new[]
-                                                    {
-                                                        "-----------",
-                                                        "-----------",
-                                                        "-----------"
-                                                    }
+                                                    (TestKeyValue)
+                                                        new[]
+                                                        {
+                                                            "-----------",
+                                                            "-----------",
+                                                            "-----------"
+                                                        }
                                                 )
                                             },
                                         }
@@ -735,12 +737,13 @@ Section3:
                                                 ("Key3", (TestKeyValue)"Value123"),
                                                 (
                                                     "Key3a",
-                                                    (TestKeyValue)new[]
-                                                    {
-                                                        "ArrayValue0",
-                                                        "ArrayValue1",
-                                                        "ArrayValue2"
-                                                    }
+                                                    (TestKeyValue)
+                                                        new[]
+                                                        {
+                                                            "ArrayValue0",
+                                                            "ArrayValue1",
+                                                            "ArrayValue2"
+                                                        }
                                                 )
                                             },
                                         }
@@ -774,12 +777,13 @@ Section3:
                                                 ("KeY3", (TestKeyValue)"Value123"),
                                                 (
                                                     "KeY3a",
-                                                    (TestKeyValue)new[]
-                                                    {
-                                                        "ArrayValue0",
-                                                        "ArrayValue1",
-                                                        "ArrayValue2"
-                                                    }
+                                                    (TestKeyValue)
+                                                        new[]
+                                                        {
+                                                            "ArrayValue0",
+                                                            "ArrayValue1",
+                                                            "ArrayValue2"
+                                                        }
                                                 )
                                             },
                                         }
@@ -832,12 +836,13 @@ Section3:
                                                 ("Key3", (TestKeyValue)"Value123"),
                                                 (
                                                     "Key3a",
-                                                    (TestKeyValue)new[]
-                                                    {
-                                                        "ArrayValue0",
-                                                        "ArrayValue1",
-                                                        "ArrayValue2"
-                                                    }
+                                                    (TestKeyValue)
+                                                        new[]
+                                                        {
+                                                            "ArrayValue0",
+                                                            "ArrayValue1",
+                                                            "ArrayValue2"
+                                                        }
                                                 )
                                             },
                                         }
@@ -851,12 +856,13 @@ Section3:
                                                 ("Key3", (TestKeyValue)"Value123"),
                                                 (
                                                     "Key3a",
-                                                    (TestKeyValue)new[]
-                                                    {
-                                                        "ArrayValue0",
-                                                        "ArrayValue1",
-                                                        "ArrayValue2"
-                                                    }
+                                                    (TestKeyValue)
+                                                        new[]
+                                                        {
+                                                            "ArrayValue0",
+                                                            "ArrayValue1",
+                                                            "ArrayValue2"
+                                                        }
                                                 )
                                             },
                                         }
@@ -909,12 +915,13 @@ Section3:
                                                 ("Key3", (TestKeyValue)"Value123"),
                                                 (
                                                     "Key3a",
-                                                    (TestKeyValue)new[]
-                                                    {
-                                                        "ArrayValue0",
-                                                        "ArrayValue1",
-                                                        "ArrayValue2"
-                                                    }
+                                                    (TestKeyValue)
+                                                        new[]
+                                                        {
+                                                            "ArrayValue0",
+                                                            "ArrayValue1",
+                                                            "ArrayValue2"
+                                                        }
                                                 )
                                             },
                                         }
@@ -928,12 +935,13 @@ Section3:
                                                 ("KeY3", (TestKeyValue)"Value123"),
                                                 (
                                                     "KeY3a",
-                                                    (TestKeyValue)new[]
-                                                    {
-                                                        "ArrayValue0",
-                                                        "ArrayValue1",
-                                                        "ArrayValue2"
-                                                    }
+                                                    (TestKeyValue)
+                                                        new[]
+                                                        {
+                                                            "ArrayValue0",
+                                                            "ArrayValue1",
+                                                            "ArrayValue2"
+                                                        }
                                                 )
                                             },
                                         }
@@ -1042,13 +1050,14 @@ Section3:
                                                 ("Key3", (TestKeyValue)"Value123"),
                                                 (
                                                     "Key3a",
-                                                    (TestKeyValue)new[]
-                                                    {
-                                                        "ArrayValue0",
-                                                        "ArrayValue1",
-                                                        "ArrayValue2",
-                                                        "ArrayValue2r"
-                                                    }
+                                                    (TestKeyValue)
+                                                        new[]
+                                                        {
+                                                            "ArrayValue0",
+                                                            "ArrayValue1",
+                                                            "ArrayValue2",
+                                                            "ArrayValue2r"
+                                                        }
                                                 ),
                                                 ("Key3ar", (TestKeyValue)new[] { "ArrayValue0r" })
                                             },

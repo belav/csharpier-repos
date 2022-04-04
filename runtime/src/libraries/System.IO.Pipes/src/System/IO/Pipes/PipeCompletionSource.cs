@@ -46,9 +46,8 @@ namespace System.IO.Pipes
                 (errorCode, numBytes, pOverlapped) =>
                 {
                     var completionSource =
-                        (PipeCompletionSource<TResult>)ThreadPoolBoundHandle.GetNativeOverlappedState(
-                            pOverlapped
-                        )!;
+                        (PipeCompletionSource<TResult>)
+                            ThreadPoolBoundHandle.GetNativeOverlappedState(pOverlapped)!;
                     Debug.Assert(completionSource.Overlapped == pOverlapped);
 
                     completionSource.AsyncCallback(errorCode, numBytes);

@@ -20,9 +20,8 @@ namespace System.Web.Http.ModelBinding.Binders
             }
 
             Type elementType = modelType.GetElementType();
-            return (IModelBinder)Activator.CreateInstance(
-                typeof(ArrayModelBinder<>).MakeGenericType(elementType)
-            );
+            return (IModelBinder)
+                Activator.CreateInstance(typeof(ArrayModelBinder<>).MakeGenericType(elementType));
         }
     }
 }

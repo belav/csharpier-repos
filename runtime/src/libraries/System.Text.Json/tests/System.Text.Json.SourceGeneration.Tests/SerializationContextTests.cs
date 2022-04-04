@@ -625,11 +625,14 @@ namespace System.Text.Json.SourceGeneration.Tests
                 typeof(object[]),
                 (JsonSerializerContext)context
             );
-            object[] arr = (object[])JsonSerializer.Deserialize(
-                json,
-                typeof(object[]),
-                (JsonSerializerContext)((ITestContext)MetadataWithPerTypeAttributeContext.Default)
-            );
+            object[] arr = (object[])
+                JsonSerializer.Deserialize(
+                    json,
+                    typeof(object[]),
+                    (JsonSerializerContext)(
+                        (ITestContext)MetadataWithPerTypeAttributeContext.Default
+                    )
+                );
 
             JsonElement hello = (JsonElement)arr[0];
             JsonElement world = (JsonElement)arr[1];

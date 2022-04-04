@@ -17,9 +17,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
 
         public IncrementalAnalyzerProviderMetadata(IDictionary<string, object> data) : base(data)
         {
-            this.HighPriorityForActiveFile = (bool)data.GetValueOrDefault(
-                "HighPriorityForActiveFile"
-            );
+            this.HighPriorityForActiveFile = (bool)
+                data.GetValueOrDefault("HighPriorityForActiveFile");
             this.Name = (string)data.GetValueOrDefault("Name");
         }
 

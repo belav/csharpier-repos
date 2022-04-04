@@ -749,9 +749,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         )
         {
             NamedTypeSymbol result;
-            PENamespaceSymbol scope = (PENamespaceSymbol)this.GlobalNamespace.LookupNestedNamespace(
-                emittedName.NamespaceSegments
-            );
+            PENamespaceSymbol scope = (PENamespaceSymbol)
+                this.GlobalNamespace.LookupNestedNamespace(emittedName.NamespaceSegments);
 
             if ((object)scope == null)
             {

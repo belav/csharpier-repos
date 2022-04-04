@@ -266,10 +266,11 @@ namespace Moq
         internal override bool Matches(object argument, Type parameterType)
         {
             var canCast =
-                (Predicate<object>)Delegate.CreateDelegate(
-                    typeof(Predicate<object>),
-                    canCastMethod.MakeGenericMethod(parameterType)
-                );
+                (Predicate<object>)
+                    Delegate.CreateDelegate(
+                        typeof(Predicate<object>),
+                        canCastMethod.MakeGenericMethod(parameterType)
+                    );
             return canCast(argument) && condition(argument, parameterType);
         }
 

@@ -26,11 +26,12 @@ namespace Internal.TypeSystem
         /// </summary>
         public MetadataType GetType(string nameSpace, string name, bool throwIfNotFound = true)
         {
-            return (MetadataType)GetType(
-                nameSpace,
-                name,
-                throwIfNotFound ? NotFoundBehavior.Throw : NotFoundBehavior.ReturnNull
-            );
+            return (MetadataType)
+                GetType(
+                    nameSpace,
+                    name,
+                    throwIfNotFound ? NotFoundBehavior.Throw : NotFoundBehavior.ReturnNull
+                );
         }
 
         /// <summary>

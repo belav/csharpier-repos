@@ -320,9 +320,8 @@ internal class TestApp
 
     private static byte test_3_3(byte num)
     {
-        return (byte)checked(
-            AA.aa_init[0, num - 1, num / 100].q - AA.aa_zero[0, num - 1, num / 100].q
-        );
+        return (byte)
+            checked(AA.aa_init[0, num - 1, num / 100].q - AA.aa_zero[0, num - 1, num / 100].q);
     }
 
     private static byte test_3_4(byte num)

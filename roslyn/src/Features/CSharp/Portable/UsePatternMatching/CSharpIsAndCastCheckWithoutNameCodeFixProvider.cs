@@ -63,10 +63,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
         {
             Debug.Assert(diagnostics.Length == 1);
             var location = diagnostics[0].Location;
-            var isExpression = (BinaryExpressionSyntax)location.FindNode(
-                getInnermostNodeForTie: true,
-                cancellationToken: cancellationToken
-            );
+            var isExpression = (BinaryExpressionSyntax)
+                location.FindNode(
+                    getInnermostNodeForTie: true,
+                    cancellationToken: cancellationToken
+                );
 
             var semanticModel = await document
                 .GetSemanticModelAsync(cancellationToken)

@@ -164,10 +164,8 @@ namespace ComWrappersTests
         )
         {
             IntPtr objRaw = WeakReferenceNative.CreateWeakReferencableObject();
-            var obj = (WeakReferenceableWrapper)cw.GetOrCreateObjectForComInstance(
-                objRaw,
-                CreateObjectFlags.None
-            );
+            var obj = (WeakReferenceableWrapper)
+                cw.GetOrCreateObjectForComInstance(objRaw, CreateObjectFlags.None);
             var wr = new WeakReference<WeakReferenceableWrapper>(obj);
             ValidateWeakReferenceState(wr, expectedIsAlive: true, cw);
             return (wr, objRaw);
@@ -179,10 +177,8 @@ namespace ComWrappersTests
         )
         {
             IntPtr objRaw = WeakReferenceNative.CreateWeakReferencableObject();
-            var obj = (WeakReferenceableWrapper)cw.GetOrCreateObjectForComInstance(
-                objRaw,
-                CreateObjectFlags.None
-            );
+            var obj = (WeakReferenceableWrapper)
+                cw.GetOrCreateObjectForComInstance(objRaw, CreateObjectFlags.None);
             wr.SetTarget(obj);
             ValidateWeakReferenceState(wr, expectedIsAlive: true, cw);
             return objRaw;

@@ -2004,9 +2004,10 @@ struct C
             var tree = compilation.SyntaxTrees.Single();
             var semanticModel = compilation.GetSemanticModel(tree);
             var graphM = ControlFlowGraph.Create(
-                (IMethodBodyOperation)semanticModel.GetOperation(
-                    tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().First()
-                )
+                (IMethodBodyOperation)
+                    semanticModel.GetOperation(
+                        tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().First()
+                    )
             );
 
             Assert.NotNull(graphM);
@@ -2074,9 +2075,10 @@ struct C
             var tree = compilation.SyntaxTrees.Single();
             var semanticModel = compilation.GetSemanticModel(tree);
             var graphM = ControlFlowGraph.Create(
-                (IMethodBodyOperation)semanticModel.GetOperation(
-                    tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().First()
-                )
+                (IMethodBodyOperation)
+                    semanticModel.GetOperation(
+                        tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().First()
+                    )
             );
 
             Assert.NotNull(graphM);

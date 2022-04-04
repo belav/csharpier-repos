@@ -96,7 +96,8 @@ namespace System.Diagnostics
                     while (bufCount > 0)
                     {
                         int bytesWritten = Interop.Sys.Write(
-                            (IntPtr)2 /* stderr */
+                            (IntPtr)
+                                2 /* stderr */
                             ,
                             buf + totalBytesWritten,
                             bufCount

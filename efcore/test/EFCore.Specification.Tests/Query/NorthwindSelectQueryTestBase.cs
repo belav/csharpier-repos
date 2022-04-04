@@ -596,16 +596,17 @@ namespace Microsoft.EntityFrameworkCore.Query
                     c =>
                         new
                         {
-                            Order = (int?)c.Orders
-                                .Where(o => o.OrderID < 10500)
-                                .Select(
-                                    o =>
-                                        o.OrderDetails
-                                            .Where(od => od.OrderID > 10)
-                                            .Select(od => od.ProductID)
-                                            .Count()
-                                )
-                                .FirstOrDefault()
+                            Order = (int?)
+                                c.Orders
+                                    .Where(o => o.OrderID < 10500)
+                                    .Select(
+                                        o =>
+                                            o.OrderDetails
+                                                .Where(od => od.OrderID > 10)
+                                                .Select(od => od.ProductID)
+                                                .Count()
+                                    )
+                                    .FirstOrDefault()
                         }
                 )
                 .ToList();
@@ -624,16 +625,17 @@ namespace Microsoft.EntityFrameworkCore.Query
                     c =>
                         new
                         {
-                            Order = (int?)c.Orders
-                                .Where(o => o.OrderID < 10500)
-                                .Select(
-                                    o =>
-                                        o.OrderDetails
-                                            .Where(od => od.OrderID != c.Orders.Count)
-                                            .Select(od => od.ProductID)
-                                            .FirstOrDefault()
-                                )
-                                .FirstOrDefault()
+                            Order = (int?)
+                                c.Orders
+                                    .Where(o => o.OrderID < 10500)
+                                    .Select(
+                                        o =>
+                                            o.OrderDetails
+                                                .Where(od => od.OrderID != c.Orders.Count)
+                                                .Select(od => od.ProductID)
+                                                .FirstOrDefault()
+                                    )
+                                    .FirstOrDefault()
                         }
                 )
                 .ToList();
@@ -652,16 +654,17 @@ namespace Microsoft.EntityFrameworkCore.Query
                     c =>
                         new
                         {
-                            Order = (int?)c.Orders
-                                .Where(o => o.OrderID < 10500)
-                                .Select(
-                                    o =>
-                                        o.OrderDetails
-                                            .Where(od => od.OrderID != c.CustomerID.Length)
-                                            .Select(od => od.ProductID)
-                                            .FirstOrDefault()
-                                )
-                                .FirstOrDefault()
+                            Order = (int?)
+                                c.Orders
+                                    .Where(o => o.OrderID < 10500)
+                                    .Select(
+                                        o =>
+                                            o.OrderDetails
+                                                .Where(od => od.OrderID != c.CustomerID.Length)
+                                                .Select(od => od.ProductID)
+                                                .FirstOrDefault()
+                                    )
+                                    .FirstOrDefault()
                         }
                 )
                 .ToList();
@@ -2090,11 +2093,12 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Customer>()
                         .Select(
                             c =>
-                                (int?)ss.Set<Order>()
-                                    .Where(o => o.CustomerID == "John Doe")
-                                    .Select(o => o.CustomerID)
-                                    .FirstOrDefault()
-                                    .Length
+                                (int?)
+                                    ss.Set<Order>()
+                                        .Where(o => o.CustomerID == "John Doe")
+                                        .Select(o => o.CustomerID)
+                                        .FirstOrDefault()
+                                        .Length
                         ),
                 ss =>
                     ss.Set<Customer>()
@@ -2863,11 +2867,12 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .OrderBy(c => c.CustomerID)
                         .Select(
                             c =>
-                                (int?)c.Orders
-                                    .OrderBy(o => o.OrderID)
-                                    .Select(o => o.CustomerID)
-                                    .FirstOrDefault()
-                                    .Length
+                                (int?)
+                                    c.Orders
+                                        .OrderBy(o => o.OrderID)
+                                        .Select(o => o.CustomerID)
+                                        .FirstOrDefault()
+                                        .Length
                         ),
                 ss =>
                     ss.Set<Customer>()

@@ -346,11 +346,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 throw new ArgumentOutOfRangeException(nameof(maxLength));
             }
 
-            return (int?)SetOrRemoveAnnotation(
-                CoreAnnotationNames.MaxLength,
-                maxLength,
-                configurationSource
-            )?.Value;
+            return (int?)
+                SetOrRemoveAnnotation(
+                    CoreAnnotationNames.MaxLength,
+                    maxLength,
+                    configurationSource
+                )?.Value;
         }
 
         /// <summary>
@@ -377,11 +378,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public virtual bool? SetIsUnicode(bool? unicode, ConfigurationSource configurationSource) =>
-            (bool?)SetOrRemoveAnnotation(
-                CoreAnnotationNames.Unicode,
-                unicode,
-                configurationSource
-            )?.Value;
+            (bool?)
+                SetOrRemoveAnnotation(
+                    CoreAnnotationNames.Unicode,
+                    unicode,
+                    configurationSource
+                )?.Value;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -413,11 +415,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 throw new ArgumentOutOfRangeException(nameof(precision));
             }
 
-            return (int?)SetOrRemoveAnnotation(
-                CoreAnnotationNames.Precision,
-                precision,
-                configurationSource
-            )?.Value;
+            return (int?)
+                SetOrRemoveAnnotation(
+                    CoreAnnotationNames.Precision,
+                    precision,
+                    configurationSource
+                )?.Value;
         }
 
         /// <summary>
@@ -450,11 +453,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 throw new ArgumentOutOfRangeException(nameof(scale));
             }
 
-            return (int?)SetOrRemoveAnnotation(
-                CoreAnnotationNames.Scale,
-                scale,
-                configurationSource
-            )?.Value;
+            return (int?)
+                SetOrRemoveAnnotation(CoreAnnotationNames.Scale, scale, configurationSource)?.Value;
         }
 
         /// <summary>
@@ -484,11 +484,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             PropertySaveBehavior? beforeSaveBehavior,
             ConfigurationSource configurationSource
         ) =>
-            (PropertySaveBehavior?)SetOrRemoveAnnotation(
-                CoreAnnotationNames.BeforeSaveBehavior,
-                beforeSaveBehavior,
-                configurationSource
-            )?.Value;
+            (PropertySaveBehavior?)
+                SetOrRemoveAnnotation(
+                    CoreAnnotationNames.BeforeSaveBehavior,
+                    beforeSaveBehavior,
+                    configurationSource
+                )?.Value;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -533,11 +534,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 }
             }
 
-            return (PropertySaveBehavior?)SetOrRemoveAnnotation(
-                CoreAnnotationNames.AfterSaveBehavior,
-                afterSaveBehavior,
-                configurationSource
-            )?.Value;
+            return (PropertySaveBehavior?)
+                SetOrRemoveAnnotation(
+                    CoreAnnotationNames.AfterSaveBehavior,
+                    afterSaveBehavior,
+                    configurationSource
+                )?.Value;
         }
 
         /// <summary>
@@ -588,11 +590,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         )
         {
             RemoveAnnotation(CoreAnnotationNames.ValueGeneratorFactoryType);
-            return (Func<IProperty, IEntityType, ValueGenerator>?)SetAnnotation(
-                CoreAnnotationNames.ValueGeneratorFactory,
-                factory,
-                configurationSource
-            )?.Value;
+            return (Func<IProperty, IEntityType, ValueGenerator>?)
+                SetAnnotation(
+                    CoreAnnotationNames.ValueGeneratorFactory,
+                    factory,
+                    configurationSource
+                )?.Value;
         }
 
         /// <summary>
@@ -635,11 +638,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             }
 
             RemoveAnnotation(CoreAnnotationNames.ValueGeneratorFactory);
-            return (Type?)SetAnnotation(
-                CoreAnnotationNames.ValueGeneratorFactoryType,
-                factoryType,
-                configurationSource
-            )?.Value;
+            return (Type?)
+                SetAnnotation(
+                    CoreAnnotationNames.ValueGeneratorFactoryType,
+                    factoryType,
+                    configurationSource
+                )?.Value;
         }
 
         /// <summary>
@@ -650,9 +654,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual Func<IProperty, IEntityType, ValueGenerator>? GetValueGeneratorFactory()
         {
-            var factory = (Func<IProperty, IEntityType, ValueGenerator>?)this[
-                CoreAnnotationNames.ValueGeneratorFactory
-            ];
+            var factory = (Func<IProperty, IEntityType, ValueGenerator>?)
+                this[CoreAnnotationNames.ValueGeneratorFactory];
             if (factory == null)
             {
                 var factoryType = (Type?)this[CoreAnnotationNames.ValueGeneratorFactoryType];
@@ -695,11 +698,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             }
 
             RemoveAnnotation(CoreAnnotationNames.ValueConverterType);
-            return (ValueConverter?)SetOrRemoveAnnotation(
-                CoreAnnotationNames.ValueConverter,
-                converter,
-                configurationSource
-            )?.Value;
+            return (ValueConverter?)
+                SetOrRemoveAnnotation(
+                    CoreAnnotationNames.ValueConverter,
+                    converter,
+                    configurationSource
+                )?.Value;
         }
 
         /// <summary>
@@ -797,11 +801,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Type? providerClrType,
             ConfigurationSource configurationSource
         ) =>
-            (Type?)SetOrRemoveAnnotation(
-                CoreAnnotationNames.ProviderClrType,
-                providerClrType,
-                configurationSource
-            )?.Value;
+            (Type?)
+                SetOrRemoveAnnotation(
+                    CoreAnnotationNames.ProviderClrType,
+                    providerClrType,
+                    configurationSource
+                )?.Value;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -890,11 +895,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             }
 
             RemoveAnnotation(CoreAnnotationNames.ValueComparerType);
-            return (ValueComparer?)SetOrRemoveAnnotation(
-                CoreAnnotationNames.ValueComparer,
-                comparer,
-                configurationSource
-            )?.Value;
+            return (ValueComparer?)
+                SetOrRemoveAnnotation(
+                    CoreAnnotationNames.ValueComparer,
+                    comparer,
+                    configurationSource
+                )?.Value;
         }
 
         /// <summary>
@@ -938,11 +944,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             }
 
             SetValueComparer(comparer, configurationSource);
-            return (Type?)SetOrRemoveAnnotation(
-                CoreAnnotationNames.ValueComparerType,
-                comparerType,
-                configurationSource
-            )?.Value;
+            return (Type?)
+                SetOrRemoveAnnotation(
+                    CoreAnnotationNames.ValueComparerType,
+                    comparerType,
+                    configurationSource
+                )?.Value;
         }
 
         /// <summary>

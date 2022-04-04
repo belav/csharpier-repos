@@ -129,7 +129,8 @@ namespace System.Threading
                         )
                         {
                             NativeRuntimeEventSource.Log.ThreadPoolWorkingThreadCount(
-                                (uint)threadPoolInstance.GetAndResetHighWatermarkCountOfThreadsProcessingUserCallbacks()
+                                (uint)
+                                    threadPoolInstance.GetAndResetHighWatermarkCountOfThreadsProcessingUserCallbacks()
                             );
                         }
 

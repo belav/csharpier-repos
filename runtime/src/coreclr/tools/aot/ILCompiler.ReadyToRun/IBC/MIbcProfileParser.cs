@@ -165,9 +165,8 @@ namespace ILCompiler.IBC
                 new CustomCanonResolver(tsc)
             );
 
-            var assemblyDictionary = (EcmaMethod)mibcModule
-                .GetGlobalModuleType()
-                .GetMethod("AssemblyDictionary", null);
+            var assemblyDictionary = (EcmaMethod)
+                mibcModule.GetGlobalModuleType().GetMethod("AssemblyDictionary", null);
             IEnumerable<MethodProfileData> loadedMethodProfileData =
                 Enumerable.Empty<MethodProfileData>();
 

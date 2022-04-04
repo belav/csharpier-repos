@@ -57,9 +57,8 @@ namespace System.ComponentModel
 
                     if (culture != null)
                     {
-                        formatInfo = (DateTimeFormatInfo?)culture.GetFormat(
-                            typeof(DateTimeFormatInfo)
-                        );
+                        formatInfo = (DateTimeFormatInfo?)
+                            culture.GetFormat(typeof(DateTimeFormatInfo));
                     }
 
                     if (formatInfo != null)
@@ -107,9 +106,8 @@ namespace System.ComponentModel
                     culture = CultureInfo.CurrentCulture;
                 }
 
-                DateTimeFormatInfo? formatInfo = (DateTimeFormatInfo?)culture.GetFormat(
-                    typeof(DateTimeFormatInfo)
-                );
+                DateTimeFormatInfo? formatInfo = (DateTimeFormatInfo?)
+                    culture.GetFormat(typeof(DateTimeFormatInfo));
 
                 if (culture == CultureInfo.InvariantCulture)
                 {

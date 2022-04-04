@@ -101,11 +101,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         }
 
         private static readonly CompositeValueConverter<TimeSpan, long, uint> _timeSpanToIntTicks =
-            (CompositeValueConverter<
-                TimeSpan,
-                long,
-                uint
-            >)new TimeSpanToTicksConverter().ComposeWith(new CastingConverter<long, uint>());
+            (CompositeValueConverter<TimeSpan, long, uint>)
+                new TimeSpanToTicksConverter().ComposeWith(new CastingConverter<long, uint>());
 
         [ConditionalFact]
         public void Can_convert_TimeSpan_to_int_ticks()

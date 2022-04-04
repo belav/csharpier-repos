@@ -84,10 +84,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             var semanticModel = await document
                 .GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
-            var ifOperation = (IConditionalOperation)semanticModel.GetOperation(
-                ifStatement,
-                cancellationToken
-            )!;
+            var ifOperation = (IConditionalOperation)
+                semanticModel.GetOperation(ifStatement, cancellationToken)!;
 
             if (
                 !UseConditionalExpressionForAssignmentHelpers.TryMatchPattern(
@@ -150,11 +148,15 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
         {
             var generator = editor.Generator;
             var ifStatement = (TIfStatementSyntax)ifOperation.Syntax;
-            var expressionStatement = (TStatementSyntax)generator
-                .ExpressionStatement(
-                    generator.AssignmentStatement(assignment.Target.Syntax, conditionalExpression)
-                )
-                .WithTriviaFrom(ifStatement);
+            var expressionStatement = (TStatementSyntax)
+                generator
+                    .ExpressionStatement(
+                        generator.AssignmentStatement(
+                            assignment.Target.Syntax,
+                            conditionalExpression
+                        )
+                    )
+                    .WithTriviaFrom(ifStatement);
 
             editor.ReplaceNode(
                 ifOperation.Syntax,

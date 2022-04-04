@@ -252,9 +252,10 @@ namespace System.Tests
 
             Assert.Equal(
                 "True, test, c, 2, -1, -3, 4, -5, 6, -7, 8, 9.1, 11.12",
-                (string)(new AllPrimitivesWithDefaultValues(AllPrimitivesMethod)).DynamicInvoke(
-                    parameters
-                )
+                (string)
+                    (new AllPrimitivesWithDefaultValues(AllPrimitivesMethod)).DynamicInvoke(
+                        parameters
+                    )
             );
         }
 
@@ -263,24 +264,25 @@ namespace System.Tests
         {
             Assert.Equal(
                 "False, value, d, 102, -101, -103, 104, -105, 106, -107, 108, 109.1, 111.12",
-                (string)(new AllPrimitivesWithDefaultValues(AllPrimitivesMethod)).DynamicInvoke(
-                    new object[13]
-                    {
-                        false,
-                        "value",
-                        'd',
-                        (byte)102,
-                        (sbyte)-101,
-                        (short)-103,
-                        (ushort)104,
-                        (int)-105,
-                        (uint)106,
-                        (long)-107,
-                        (ulong)108,
-                        (float)109.1,
-                        (double)111.12
-                    }
-                )
+                (string)
+                    (new AllPrimitivesWithDefaultValues(AllPrimitivesMethod)).DynamicInvoke(
+                        new object[13]
+                        {
+                            false,
+                            "value",
+                            'd',
+                            (byte)102,
+                            (sbyte)-101,
+                            (short)-103,
+                            (ushort)104,
+                            (int)-105,
+                            (uint)106,
+                            (long)-107,
+                            (ulong)108,
+                            (float)109.1,
+                            (double)111.12
+                        }
+                    )
             );
         }
 
@@ -289,24 +291,25 @@ namespace System.Tests
         {
             Assert.Equal(
                 "False, test, d, 2, -101, -3, 104, -5, 106, -7, 108, 9.1, 111.12",
-                (string)(new AllPrimitivesWithDefaultValues(AllPrimitivesMethod)).DynamicInvoke(
-                    new object[13]
-                    {
-                        false,
-                        Type.Missing,
-                        'd',
-                        Type.Missing,
-                        (sbyte)-101,
-                        Type.Missing,
-                        (ushort)104,
-                        Type.Missing,
-                        (uint)106,
-                        Type.Missing,
-                        (ulong)108,
-                        Type.Missing,
-                        (double)111.12
-                    }
-                )
+                (string)
+                    (new AllPrimitivesWithDefaultValues(AllPrimitivesMethod)).DynamicInvoke(
+                        new object[13]
+                        {
+                            false,
+                            Type.Missing,
+                            'd',
+                            Type.Missing,
+                            (sbyte)-101,
+                            Type.Missing,
+                            (ushort)104,
+                            Type.Missing,
+                            (uint)106,
+                            Type.Missing,
+                            (ulong)108,
+                            Type.Missing,
+                            (double)111.12
+                        }
+                    )
             );
         }
 
@@ -315,9 +318,10 @@ namespace System.Tests
         {
             Assert.Equal(
                 "test",
-                (string)(new StringWithDefaultValue(StringMethod)).DynamicInvoke(
-                    new object[] { Type.Missing }
-                )
+                (string)
+                    (new StringWithDefaultValue(StringMethod)).DynamicInvoke(
+                        new object[] { Type.Missing }
+                    )
             );
         }
 
@@ -326,9 +330,10 @@ namespace System.Tests
         {
             Assert.Equal(
                 "value",
-                (string)(new StringWithDefaultValue(StringMethod)).DynamicInvoke(
-                    new object[] { "value" }
-                )
+                (string)
+                    (new StringWithDefaultValue(StringMethod)).DynamicInvoke(
+                        new object[] { "value" }
+                    )
             );
         }
 
@@ -360,9 +365,10 @@ namespace System.Tests
             Assert.Equal(
                 0,
                 (
-                    (CustomValueType)(new ValueTypeWithDefaultValue(ValueTypeMethod)).DynamicInvoke(
-                        new object[] { Type.Missing }
-                    )
+                    (CustomValueType)
+                        (new ValueTypeWithDefaultValue(ValueTypeMethod)).DynamicInvoke(
+                            new object[] { Type.Missing }
+                        )
                 ).Id
             );
         }
@@ -373,9 +379,10 @@ namespace System.Tests
             Assert.Equal(
                 1,
                 (
-                    (CustomValueType)(new ValueTypeWithDefaultValue(ValueTypeMethod)).DynamicInvoke(
-                        new object[] { new CustomValueType { Id = 1 } }
-                    )
+                    (CustomValueType)
+                        (new ValueTypeWithDefaultValue(ValueTypeMethod)).DynamicInvoke(
+                            new object[] { new CustomValueType { Id = 1 } }
+                        )
                 ).Id
             );
         }
@@ -385,9 +392,10 @@ namespace System.Tests
         {
             Assert.Equal(
                 new DateTime(42),
-                (DateTime)(new DateTimeWithDefaultValueAttribute(DateTimeMethod)).DynamicInvoke(
-                    new object[] { Type.Missing }
-                )
+                (DateTime)
+                    (new DateTimeWithDefaultValueAttribute(DateTimeMethod)).DynamicInvoke(
+                        new object[] { Type.Missing }
+                    )
             );
         }
 
@@ -396,9 +404,10 @@ namespace System.Tests
         {
             Assert.Equal(
                 new DateTime(43),
-                (DateTime)(new DateTimeWithDefaultValueAttribute(DateTimeMethod)).DynamicInvoke(
-                    new object[] { new DateTime(43) }
-                )
+                (DateTime)
+                    (new DateTimeWithDefaultValueAttribute(DateTimeMethod)).DynamicInvoke(
+                        new object[] { new DateTime(43) }
+                    )
             );
         }
 
@@ -407,9 +416,10 @@ namespace System.Tests
         {
             Assert.Equal(
                 new decimal(4, 3, 2, true, 1),
-                (decimal)(new DecimalWithDefaultValueAttribute(DecimalMethod)).DynamicInvoke(
-                    new object[] { Type.Missing }
-                )
+                (decimal)
+                    (new DecimalWithDefaultValueAttribute(DecimalMethod)).DynamicInvoke(
+                        new object[] { Type.Missing }
+                    )
             );
         }
 
@@ -418,9 +428,10 @@ namespace System.Tests
         {
             Assert.Equal(
                 new decimal(12, 13, 14, true, 1),
-                (decimal)(new DecimalWithDefaultValueAttribute(DecimalMethod)).DynamicInvoke(
-                    new object[] { new decimal(12, 13, 14, true, 1) }
-                )
+                (decimal)
+                    (new DecimalWithDefaultValueAttribute(DecimalMethod)).DynamicInvoke(
+                        new object[] { new decimal(12, 13, 14, true, 1) }
+                    )
             );
         }
 
@@ -429,9 +440,10 @@ namespace System.Tests
         {
             Assert.Equal(
                 3.14m,
-                (decimal)(new DecimalWithDefaultValue(DecimalMethod)).DynamicInvoke(
-                    new object[] { Type.Missing }
-                )
+                (decimal)
+                    (new DecimalWithDefaultValue(DecimalMethod)).DynamicInvoke(
+                        new object[] { Type.Missing }
+                    )
             );
         }
 
@@ -440,9 +452,10 @@ namespace System.Tests
         {
             Assert.Equal(
                 103.14m,
-                (decimal)(new DecimalWithDefaultValue(DecimalMethod)).DynamicInvoke(
-                    new object[] { 103.14m }
-                )
+                (decimal)
+                    (new DecimalWithDefaultValue(DecimalMethod)).DynamicInvoke(
+                        new object[] { 103.14m }
+                    )
             );
         }
 
@@ -450,9 +463,10 @@ namespace System.Tests
         public static void DynamicInvoke_DefaultParameter_NullableIntWithMissingValue()
         {
             Assert.Null(
-                (int?)(new NullableIntWithDefaultValue(NullableIntMethod)).DynamicInvoke(
-                    new object[] { Type.Missing }
-                )
+                (int?)
+                    (new NullableIntWithDefaultValue(NullableIntMethod)).DynamicInvoke(
+                        new object[] { Type.Missing }
+                    )
             );
         }
 
@@ -461,9 +475,10 @@ namespace System.Tests
         {
             Assert.Equal(
                 (int?)42,
-                (int?)(new NullableIntWithDefaultValue(NullableIntMethod)).DynamicInvoke(
-                    new object[] { (int?)42 }
-                )
+                (int?)
+                    (new NullableIntWithDefaultValue(NullableIntMethod)).DynamicInvoke(
+                        new object[] { (int?)42 }
+                    )
             );
         }
 
@@ -472,9 +487,10 @@ namespace System.Tests
         {
             Assert.Equal(
                 IntEnum.Seven,
-                (IntEnum)(new EnumWithDefaultValue(EnumMethod)).DynamicInvoke(
-                    new object[] { Type.Missing }
-                )
+                (IntEnum)
+                    (new EnumWithDefaultValue(EnumMethod)).DynamicInvoke(
+                        new object[] { Type.Missing }
+                    )
             );
         }
 
@@ -1336,10 +1352,8 @@ namespace System.Tests
         {
             int? num = 123;
             MethodInfo mi = typeof(int?).GetMethod("ToString");
-            NullableIntToString toString = (NullableIntToString)Delegate.CreateDelegate(
-                typeof(NullableIntToString),
-                mi
-            );
+            NullableIntToString toString = (NullableIntToString)
+                Delegate.CreateDelegate(typeof(NullableIntToString), mi);
             string s = toString(ref num);
             Assert.Equal(num.ToString(), s);
         }

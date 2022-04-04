@@ -33,8 +33,8 @@ namespace Roslyn.Compilers.Extension
 
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var reg = (ILocalRegistry2)await GetServiceAsync(typeof(SLocalRegistry))
-                .ConfigureAwait(true);
+            var reg = (ILocalRegistry2)
+                await GetServiceAsync(typeof(SLocalRegistry)).ConfigureAwait(true);
             cancellationToken.ThrowIfCancellationRequested();
             Assumes.Present(reg);
 

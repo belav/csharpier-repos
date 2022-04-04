@@ -35,8 +35,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider
             Action<FakeRelationalDbContextOptionsBuilder> fakeRelationalOptionsAction = null
         )
         {
-            var extension = (FakeRelationalOptionsExtension)GetOrCreateExtension(optionsBuilder)
-                .WithConnection(connection);
+            var extension = (FakeRelationalOptionsExtension)
+                GetOrCreateExtension(optionsBuilder).WithConnection(connection);
             ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
                 extension
             );

@@ -45,11 +45,12 @@ internal class Program
         if (r != WasCalled.DerivedWasCalled)
             return 1;
         // should call Base.Foo not Derived.Foo
-        var boundDelegate = (Del2)Activator.CreateInstance(
-            typeof(Del2),
-            b,
-            typeof(Base).GetMethod(nameof(Base.Foo)).MethodHandle.GetFunctionPointer()
-        );
+        var boundDelegate = (Del2)
+            Activator.CreateInstance(
+                typeof(Del2),
+                b,
+                typeof(Base).GetMethod(nameof(Base.Foo)).MethodHandle.GetFunctionPointer()
+            );
         r = boundDelegate("Base.Foo");
         if (r != WasCalled.BaseWasCalled)
             return 2;

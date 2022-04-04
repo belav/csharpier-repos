@@ -353,14 +353,14 @@ internal partial class HttpSysListener : IDisposable
                     new HttpApiTypes.HTTP_RESPONSE_INFO[1];
                 gcHandle = GCHandle.Alloc(knownHeaderInfo, GCHandleType.Pinned);
                 pinnedHeaders.Add(gcHandle);
-                httpResponse.pResponseInfo =
-                    (HttpApiTypes.HTTP_RESPONSE_INFO*)gcHandle.AddrOfPinnedObject();
+                httpResponse.pResponseInfo = (HttpApiTypes.HTTP_RESPONSE_INFO*)
+                    gcHandle.AddrOfPinnedObject();
 
                 knownHeaderInfo[httpResponse.ResponseInfoCount].Type = HttpApiTypes
                     .HTTP_RESPONSE_INFO_TYPE
                     .HttpResponseInfoTypeMultipleKnownHeaders;
-                knownHeaderInfo[httpResponse.ResponseInfoCount].Length =
-                    (uint)Marshal.SizeOf<HttpApiTypes.HTTP_MULTIPLE_KNOWN_HEADERS>();
+                knownHeaderInfo[httpResponse.ResponseInfoCount].Length = (uint)
+                    Marshal.SizeOf<HttpApiTypes.HTTP_MULTIPLE_KNOWN_HEADERS>();
 
                 HttpApiTypes.HTTP_MULTIPLE_KNOWN_HEADERS header =
                     new HttpApiTypes.HTTP_MULTIPLE_KNOWN_HEADERS();
@@ -375,8 +375,8 @@ internal partial class HttpSysListener : IDisposable
                     new HttpApiTypes.HTTP_KNOWN_HEADER[authChallenges.Count];
                 gcHandle = GCHandle.Alloc(nativeHeaderValues, GCHandleType.Pinned);
                 pinnedHeaders.Add(gcHandle);
-                header.KnownHeaders =
-                    (HttpApiTypes.HTTP_KNOWN_HEADER*)gcHandle.AddrOfPinnedObject();
+                header.KnownHeaders = (HttpApiTypes.HTTP_KNOWN_HEADER*)
+                    gcHandle.AddrOfPinnedObject();
 
                 for (
                     int headerValueIndex = 0;
@@ -387,20 +387,20 @@ internal partial class HttpSysListener : IDisposable
                     // Add Value
                     string headerValue = authChallenges[headerValueIndex];
                     byte[] bytes = HeaderEncoding.GetBytes(headerValue);
-                    nativeHeaderValues[header.KnownHeaderCount].RawValueLength =
-                        (ushort)bytes.Length;
+                    nativeHeaderValues[header.KnownHeaderCount].RawValueLength = (ushort)
+                        bytes.Length;
                     gcHandle = GCHandle.Alloc(bytes, GCHandleType.Pinned);
                     pinnedHeaders.Add(gcHandle);
-                    nativeHeaderValues[header.KnownHeaderCount].pRawValue =
-                        (byte*)gcHandle.AddrOfPinnedObject();
+                    nativeHeaderValues[header.KnownHeaderCount].pRawValue = (byte*)
+                        gcHandle.AddrOfPinnedObject();
                     header.KnownHeaderCount++;
                 }
 
                 // This type is a struct, not an object, so pinning it causes a boxed copy to be created. We can't do that until after all the fields are set.
                 gcHandle = GCHandle.Alloc(header, GCHandleType.Pinned);
                 pinnedHeaders.Add(gcHandle);
-                knownHeaderInfo[0].pInfo =
-                    (HttpApiTypes.HTTP_MULTIPLE_KNOWN_HEADERS*)gcHandle.AddrOfPinnedObject();
+                knownHeaderInfo[0].pInfo = (HttpApiTypes.HTTP_MULTIPLE_KNOWN_HEADERS*)
+                    gcHandle.AddrOfPinnedObject();
 
                 httpResponse.ResponseInfoCount = 1;
             }

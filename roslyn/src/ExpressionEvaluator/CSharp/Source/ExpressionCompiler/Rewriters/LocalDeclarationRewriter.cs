@@ -120,9 +120,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 
             var typeType = compilation.GetWellKnownType(WellKnownType.System_Type);
             var stringType = compilation.GetSpecialType(SpecialType.System_String);
-            var guidConstructor = (MethodSymbol)compilation.GetWellKnownTypeMember(
-                WellKnownMember.System_Guid__ctor
-            );
+            var guidConstructor = (MethodSymbol)
+                compilation.GetWellKnownTypeMember(WellKnownMember.System_Guid__ctor);
             var type = new BoundTypeOfOperator(
                 syntax,
                 new BoundTypeExpression(syntax, aliasOpt: null, type: local.Type),

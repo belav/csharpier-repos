@@ -66,10 +66,11 @@ namespace Microsoft.Composition.Demos.ExtendedCollectionImports.OrderedCollectio
 
             return new[]
             {
-                (ExportDescriptorPromise)gimd.Invoke(
-                    null,
-                    new object[] { contract, elementContract, definitionAccessor, keyToOrderBy }
-                )
+                (ExportDescriptorPromise)
+                    gimd.Invoke(
+                        null,
+                        new object[] { contract, elementContract, definitionAccessor, keyToOrderBy }
+                    )
             };
         }
 

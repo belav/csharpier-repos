@@ -171,8 +171,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Preview
             var hostServices = EditorTestCompositions.EditorFeatures.GetHostServices();
             var exportProvider = (IMefHostExportProvider)hostServices;
 
-            var diagnosticService =
-                (IDiagnosticUpdateSource)exportProvider.GetExportedValue<IDiagnosticAnalyzerService>();
+            var diagnosticService = (IDiagnosticUpdateSource)
+                exportProvider.GetExportedValue<IDiagnosticAnalyzerService>();
             RoslynDebug.AssertNotNull(diagnosticService);
             var globalOptions = exportProvider.GetExportedValue<IGlobalOptionService>();
 
@@ -292,8 +292,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Preview
                 $"{nameof(TestPreviewDiagnosticTaggerInPreviewPane)} creates a {nameof(DifferenceViewerPreview)}"
             );
 
-            var previewFactoryService =
-                (PreviewFactoryService)workspace.ExportProvider.GetExportedValue<IPreviewFactoryService>();
+            var previewFactoryService = (PreviewFactoryService)
+                workspace.ExportProvider.GetExportedValue<IPreviewFactoryService>();
             using var diffView = await previewFactoryService.CreateChangedDocumentPreviewViewAsync(
                 oldDocument,
                 newDocument,

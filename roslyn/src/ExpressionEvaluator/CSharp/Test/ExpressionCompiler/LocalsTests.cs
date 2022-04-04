@@ -2465,9 +2465,8 @@ class C
 }",
                         expectedGeneric: true
                     );
-                    var method = (MethodSymbol)testData
-                        .GetMethodData("<>x<T, U, V>.<>m0<W>")
-                        .Method;
+                    var method = (MethodSymbol)
+                        testData.GetMethodData("<>x<T, U, V>.<>m0<W>").Method;
                     var containingType = method.ContainingType;
                     var returnType = (NamedTypeSymbol)method.ReturnType;
                     Assert.Equal(containingType.TypeParameters[1], returnType.TypeArguments()[0]);

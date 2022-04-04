@@ -736,9 +736,8 @@ namespace System.Xml.Serialization
 
                         for (int i = 0; i < serializers.Length; i++)
                         {
-                            serializers[i] = (XmlSerializer)contract.TypedSerializers[
-                                mappings[i].Key!
-                            ]!;
+                            serializers[i] = (XmlSerializer)
+                                contract.TypedSerializers[mappings[i].Key!]!;
                             serializers[i].SetTempAssembly(tempAssembly, mappings[i]);
                         }
 
@@ -883,9 +882,8 @@ namespace System.Xml.Serialization
                     foreach (XmlSerializerMappingKey mappingKey in pendingKeys.Keys)
                     {
                         index = pendingKeys[mappingKey];
-                        serializers[index] = (XmlSerializer)contract.TypedSerializers[
-                            mappingKey.Mapping.Key!
-                        ]!;
+                        serializers[index] = (XmlSerializer)
+                            contract.TypedSerializers[mappingKey.Mapping.Key!]!;
                         serializers[index]!.SetTempAssembly(tempAssembly, mappingKey.Mapping);
 
                         typedMappingTable[mappingKey] = serializers[index]!;

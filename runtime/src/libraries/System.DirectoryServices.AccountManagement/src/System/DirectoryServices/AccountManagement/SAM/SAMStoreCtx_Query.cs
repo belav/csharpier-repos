@@ -82,8 +82,8 @@ namespace System.DirectoryServices.AccountManagement
             // Build the description of the properties we'll filter by.  In SAMStoreCtx, the "native" searcher
             // is simply the QbeFilterDescription, which will be passed to the SAMQuerySet to use to
             // manually filter out non-matching results.
-            QbeFilterDescription propertiesToMatch =
-                (QbeFilterDescription)PushFilterToNativeSearcher(ps);
+            QbeFilterDescription propertiesToMatch = (QbeFilterDescription)
+                PushFilterToNativeSearcher(ps);
 
             // Get the entries we'll iterate over.  Write access to Children is controlled through the
             // ctxBaseLock, but we don't want to have to hold that lock while we're iterating over all

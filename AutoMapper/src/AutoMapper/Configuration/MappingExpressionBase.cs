@@ -422,9 +422,8 @@ namespace AutoMapper.Configuration
             ResolutionContext context
         ) =>
             (
-                (IMappingAction<TSource, TDestination>)context.CreateInstance(
-                    typeof(TMappingAction)
-                )
+                (IMappingAction<TSource, TDestination>)
+                    context.CreateInstance(typeof(TMappingAction))
             ).Process(source, destination, context);
 
         public TMappingExpression AfterMap(Action<TSource, TDestination> afterFunction)

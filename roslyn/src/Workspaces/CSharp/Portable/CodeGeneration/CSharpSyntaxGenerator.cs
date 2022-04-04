@@ -1120,20 +1120,16 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             {
                 case SyntaxKind.IdentifierName:
                     var id = (IdentifierNameSyntax)node;
-                    return (EnumMemberDeclarationSyntax)this.EnumMember(
-                        id.Identifier.ToString(),
-                        null
-                    );
+                    return (EnumMemberDeclarationSyntax)
+                        this.EnumMember(id.Identifier.ToString(), null);
 
                 case SyntaxKind.FieldDeclaration:
                     var fd = (FieldDeclarationSyntax)node;
                     if (fd.Declaration.Variables.Count == 1)
                     {
                         var vd = fd.Declaration.Variables[0];
-                        return (EnumMemberDeclarationSyntax)this.EnumMember(
-                            vd.Identifier.ToString(),
-                            vd.Initializer?.Value
-                        );
+                        return (EnumMemberDeclarationSyntax)
+                            this.EnumMember(vd.Identifier.ToString(), vd.Initializer?.Value);
                     }
 
                     break;

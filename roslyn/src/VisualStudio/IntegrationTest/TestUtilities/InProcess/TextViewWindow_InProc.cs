@@ -167,9 +167,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             return ExecuteOnActiveView(
                 view =>
                 {
-                    return (int)Math.Ceiling(
-                        view.ViewportWidth / Math.Max(view.FormattedLineSource.ColumnWidth, 1)
-                    );
+                    return (int)
+                        Math.Ceiling(
+                            view.ViewportWidth / Math.Max(view.FormattedLineSource.ColumnWidth, 1)
+                        );
                 }
             );
         }

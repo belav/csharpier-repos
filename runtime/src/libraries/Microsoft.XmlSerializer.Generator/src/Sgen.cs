@@ -483,25 +483,27 @@ namespace Microsoft.XmlSerializer.Generator
                         {
                             if (defaultNamespace == null)
                             {
-                                success = (bool)method.Invoke(
-                                    null,
-                                    new object[] { serializableTypes, allMappings, fs }
-                                );
+                                success = (bool)
+                                    method.Invoke(
+                                        null,
+                                        new object[] { serializableTypes, allMappings, fs }
+                                    );
                             }
                             else
                             {
-                                success = (bool)method.Invoke(
-                                    null,
-                                    new object[]
-                                    {
-                                        allMappings,
-                                        serializableTypes,
-                                        defaultNamespace,
-                                        assembly,
-                                        new Hashtable(),
-                                        fs
-                                    }
-                                );
+                                success = (bool)
+                                    method.Invoke(
+                                        null,
+                                        new object[]
+                                        {
+                                            allMappings,
+                                            serializableTypes,
+                                            defaultNamespace,
+                                            assembly,
+                                            new Hashtable(),
+                                            fs
+                                        }
+                                    );
                             }
                         }
                     }

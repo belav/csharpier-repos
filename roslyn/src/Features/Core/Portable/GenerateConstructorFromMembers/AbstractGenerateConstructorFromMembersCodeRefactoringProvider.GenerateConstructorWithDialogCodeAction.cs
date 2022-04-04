@@ -148,12 +148,13 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
                                   state,
                                   addNullChecks
                               )
-                            : (CodeAction)new FieldDelegatingCodeAction(
-                                  _service,
-                                  _document,
-                                  state,
-                                  addNullChecks
-                              );
+                            : (CodeAction)
+                                  new FieldDelegatingCodeAction(
+                                      _service,
+                                      _document,
+                                      state,
+                                      addNullChecks
+                                  );
 
                     return await codeAction
                         .GetOperationsAsync(cancellationToken)

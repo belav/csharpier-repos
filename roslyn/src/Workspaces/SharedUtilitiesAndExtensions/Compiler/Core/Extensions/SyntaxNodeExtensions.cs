@@ -606,9 +606,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                         if (nodesToReplace.TryGetValue(span, out var currentNode))
                         {
                             var original =
-                                (SyntaxNode?)retryAnnotations
-                                    .GetAnnotations(currentNode)
-                                    .SingleOrDefault() ?? currentNode;
+                                (SyntaxNode?)
+                                    retryAnnotations.GetAnnotations(currentNode).SingleOrDefault()
+                                ?? currentNode;
                             var newNode = await computeReplacementNodeAsync!(
                                 original,
                                 currentNode,
@@ -620,9 +620,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                         else if (tokensToReplace.TryGetValue(span, out var currentToken))
                         {
                             var original =
-                                (SyntaxToken?)retryAnnotations
-                                    .GetAnnotations(currentToken)
-                                    .SingleOrDefault() ?? currentToken;
+                                (SyntaxToken?)
+                                    retryAnnotations.GetAnnotations(currentToken).SingleOrDefault()
+                                ?? currentToken;
                             var newToken = await computeReplacementTokenAsync!(
                                 original,
                                 currentToken,
@@ -634,9 +634,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                         else if (triviaToReplace.TryGetValue(span, out var currentTrivia))
                         {
                             var original =
-                                (SyntaxTrivia?)retryAnnotations
-                                    .GetAnnotations(currentTrivia)
-                                    .SingleOrDefault() ?? currentTrivia;
+                                (SyntaxTrivia?)
+                                    retryAnnotations.GetAnnotations(currentTrivia).SingleOrDefault()
+                                ?? currentTrivia;
                             var newTrivia = await computeReplacementTriviaAsync!(
                                 original,
                                 currentTrivia,

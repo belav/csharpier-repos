@@ -148,12 +148,10 @@ namespace System.Threading.Tasks.Dataflow.Internal
             _targetCoreOptions = targetCoreOptions;
             _messages =
                 (dataflowBlockOptions.MaxDegreeOfParallelism == 1)
-                    ? (IProducerConsumerQueue<
-                          KeyValuePair<TInput, long>
-                      >)new SingleProducerSingleConsumerQueue<KeyValuePair<TInput, long>>()
-                    : (IProducerConsumerQueue<
-                          KeyValuePair<TInput, long>
-                      >)new MultiProducerMultiConsumerQueue<KeyValuePair<TInput, long>>();
+                    ? (IProducerConsumerQueue<KeyValuePair<TInput, long>>)
+                          new SingleProducerSingleConsumerQueue<KeyValuePair<TInput, long>>()
+                    : (IProducerConsumerQueue<KeyValuePair<TInput, long>>)
+                          new MultiProducerMultiConsumerQueue<KeyValuePair<TInput, long>>();
             if (
                 _dataflowBlockOptions.BoundedCapacity
                 != System.Threading.Tasks.Dataflow.DataflowBlockOptions.Unbounded

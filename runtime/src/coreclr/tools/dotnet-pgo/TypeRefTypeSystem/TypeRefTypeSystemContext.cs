@@ -224,8 +224,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
             }
             else if (typeReference.ResolutionScope.Kind == HandleKind.AssemblyReference)
             {
-                AssemblyReferenceHandle asmRefHandle =
-                    (AssemblyReferenceHandle)typeReference.ResolutionScope;
+                AssemblyReferenceHandle asmRefHandle = (AssemblyReferenceHandle)
+                    typeReference.ResolutionScope;
                 TypeRefTypeSystemModule module;
 
                 if (!peInfo.assemblyLookup.TryGetValue(asmRefHandle, out module))

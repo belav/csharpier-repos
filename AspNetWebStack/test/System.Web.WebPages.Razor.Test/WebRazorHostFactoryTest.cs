@@ -477,9 +477,10 @@ namespace System.Web.WebPages.Razor.Test
 
         private static RazorWebSectionGroup GetRazorGroup()
         {
-            return (RazorWebSectionGroup)ConfigurationManager
-                .OpenExeConfiguration(null)
-                .GetSectionGroup(RazorWebSectionGroup.GroupName);
+            return (RazorWebSectionGroup)
+                ConfigurationManager
+                    .OpenExeConfiguration(null)
+                    .GetSectionGroup(RazorWebSectionGroup.GroupName);
         }
     }
 }

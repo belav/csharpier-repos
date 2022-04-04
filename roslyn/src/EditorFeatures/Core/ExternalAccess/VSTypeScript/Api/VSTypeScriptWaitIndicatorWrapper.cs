@@ -20,11 +20,12 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
             bool allowCancel,
             Action<VSTypeScriptWaitContextWrapper> action
         ) =>
-            (VSTypeScriptWaitIndicatorResult)_underlyingObject.Wait(
-                title,
-                message,
-                allowCancel,
-                context => action(new VSTypeScriptWaitContextWrapper(context))
-            );
+            (VSTypeScriptWaitIndicatorResult)
+                _underlyingObject.Wait(
+                    title,
+                    message,
+                    allowCancel,
+                    context => action(new VSTypeScriptWaitContextWrapper(context))
+                );
     }
 }

@@ -70,10 +70,8 @@ namespace Microsoft.CodeAnalysis.GenerateOverrides
                 .ConfigureAwait(false);
 
             // Only supported on classes/structs.
-            var containingType = (INamedTypeSymbol)semanticModel.GetRequiredDeclaredSymbol(
-                typeDeclaration,
-                cancellationToken
-            );
+            var containingType = (INamedTypeSymbol)
+                semanticModel.GetRequiredDeclaredSymbol(typeDeclaration, cancellationToken);
 
             var overridableMembers = containingType.GetOverridableMembers(cancellationToken);
             if (overridableMembers.Length == 0)

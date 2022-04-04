@@ -130,11 +130,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
         /// <returns>The configured value.</returns>
         bool? SetDiscriminatorMappingComplete(bool? complete, bool fromDataAnnotation = false) =>
-            (bool?)SetOrRemoveAnnotation(
-                CoreAnnotationNames.DiscriminatorMappingComplete,
-                complete,
-                fromDataAnnotation
-            )?.Value;
+            (bool?)
+                SetOrRemoveAnnotation(
+                    CoreAnnotationNames.DiscriminatorMappingComplete,
+                    complete,
+                    fromDataAnnotation
+                )?.Value;
 
         /// <summary>
         ///     Gets the <see cref="ConfigurationSource" /> for the discriminator value completeness.
@@ -272,9 +273,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     or <see langword="null" /> if they have not common parent.
         /// </returns>
         new IConventionEntityType? FindClosestCommonParent(IReadOnlyEntityType otherEntityType) =>
-            (IConventionEntityType?)((IReadOnlyEntityType)this).FindClosestCommonParent(
-                otherEntityType
-            );
+            (IConventionEntityType?)
+                ((IReadOnlyEntityType)this).FindClosestCommonParent(otherEntityType);
 
         /// <summary>
         ///     Gets the least derived type between the specified two.
@@ -628,9 +628,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <param name="name">The name of the navigation property on the entity class.</param>
         /// <returns>The navigation property, or <see langword="null" /> if none is found.</returns>
         new IConventionNavigation? FindDeclaredNavigation(string name) =>
-            (IConventionNavigation?)((IReadOnlyEntityType)this).FindDeclaredNavigation(
-                Check.NotNull(name, nameof(name))
-            );
+            (IConventionNavigation?)
+                ((IReadOnlyEntityType)this).FindDeclaredNavigation(
+                    Check.NotNull(name, nameof(name))
+                );
 
         /// <summary>
         ///     Gets all navigation properties declared on this entity type.
@@ -713,9 +714,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <param name="name">The name of the navigation property on the entity class.</param>
         /// <returns>The navigation property, or <see langword="null" /> if none is found.</returns>
         new IConventionSkipNavigation? FindDeclaredSkipNavigation(string name) =>
-            (IConventionSkipNavigation?)((IReadOnlyEntityType)this).FindDeclaredSkipNavigation(
-                name
-            );
+            (IConventionSkipNavigation?)
+                ((IReadOnlyEntityType)this).FindDeclaredSkipNavigation(name);
 
         /// <summary>
         ///     Gets the skip navigation properties declared on this entity type.
@@ -1013,9 +1013,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         new IReadOnlyList<IConventionProperty>? FindProperties(
             IReadOnlyList<string> propertyNames
         ) =>
-            (IReadOnlyList<IConventionProperty>?)((IReadOnlyEntityType)this).FindProperties(
-                propertyNames
-            );
+            (IReadOnlyList<IConventionProperty>?)
+                ((IReadOnlyEntityType)this).FindProperties(propertyNames);
 
         /// <summary>
         ///     Gets a property with the given name.

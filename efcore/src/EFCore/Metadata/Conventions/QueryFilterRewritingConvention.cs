@@ -57,10 +57,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 if (queryFilter != null)
                 {
                     entityType.SetQueryFilter(
-                        (LambdaExpression)DbSetAccessRewriter.Rewrite(
-                            modelBuilder.Metadata,
-                            queryFilter
-                        )
+                        (LambdaExpression)
+                            DbSetAccessRewriter.Rewrite(modelBuilder.Metadata, queryFilter)
                     );
                 }
             }

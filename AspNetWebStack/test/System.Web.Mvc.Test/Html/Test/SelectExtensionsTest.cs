@@ -441,7 +441,8 @@ namespace System.Web.Mvc.Html.Test
                 {
                     helper.DropDownList(
                         String.Empty,
-                        (SelectList)null /* selectList */
+                        (SelectList)
+                            null /* selectList */
                         ,
                         (string)null /* optionLabel */
                     );
@@ -526,7 +527,8 @@ namespace System.Web.Mvc.Html.Test
                     helper.DropDownList(
                         null /* name */
                         ,
-                        (SelectList)null /* selectList */
+                        (SelectList)
+                            null /* selectList */
                         ,
                         (string)null /* optionLabel */
                     );

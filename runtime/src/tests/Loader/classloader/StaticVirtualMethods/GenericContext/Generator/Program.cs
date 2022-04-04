@@ -74,22 +74,27 @@ namespace VirtualStaticInterfaceMethodTestGen
             public static IEnumerable<TestScenario> GetScenarios()
             {
                 foreach (
-                    var constaintTypeScenario in (ConstrainedTypeScenario[])typeof(ConstrainedTypeScenario).GetEnumValues()
+                    var constaintTypeScenario in (ConstrainedTypeScenario[])
+                        typeof(ConstrainedTypeScenario).GetEnumValues()
                 )
                     foreach (
-                        var callerScenario in (CallerMethodScenario[])typeof(CallerMethodScenario).GetEnumValues()
+                        var callerScenario in (CallerMethodScenario[])
+                            typeof(CallerMethodScenario).GetEnumValues()
                     )
                         foreach (
-                            var interfaceScenario in (InterfaceType[])typeof(InterfaceType).GetEnumValues()
+                            var interfaceScenario in (InterfaceType[])
+                                typeof(InterfaceType).GetEnumValues()
                         )
                             foreach (
                                 var methodType in (MethodType[])typeof(MethodType).GetEnumValues()
                             )
                                 foreach (
-                                    var constrainedTypeDefinition in (ConstrainedTypeDefinition[])typeof(ConstrainedTypeDefinition).GetEnumValues()
+                                    var constrainedTypeDefinition in (ConstrainedTypeDefinition[])
+                                        typeof(ConstrainedTypeDefinition).GetEnumValues()
                                 )
                                     foreach (
-                                        var opTested in (OperationTested[])typeof(OperationTested).GetEnumValues()
+                                        var opTested in (OperationTested[])
+                                            typeof(OperationTested).GetEnumValues()
                                     )
                                     {
                                         TestScenario scenario = new TestScenario();
@@ -265,7 +270,8 @@ namespace VirtualStaticInterfaceMethodTestGen
         static void GenerateImplementations(TextWriter tw)
         {
             foreach (
-                var constrainedTypeDefinition in (ConstrainedTypeDefinition[])typeof(ConstrainedTypeDefinition).GetEnumValues()
+                var constrainedTypeDefinition in (ConstrainedTypeDefinition[])
+                    typeof(ConstrainedTypeDefinition).GetEnumValues()
             )
             {
                 string baseType = constrainedTypeDefinition.ToString().Contains("Valuetype")

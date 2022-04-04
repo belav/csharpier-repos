@@ -26,9 +26,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
             OptionStore optionStore
         )
         {
-            var componentModel = (IComponentModel)serviceProvider.GetService(
-                typeof(SComponentModel)
-            );
+            var componentModel = (IComponentModel)
+                serviceProvider.GetService(typeof(SComponentModel));
             var workspace = componentModel.GetService<VisualStudioWorkspace>();
             _notificationService = workspace.Services.GetService<INotificationService>();
 

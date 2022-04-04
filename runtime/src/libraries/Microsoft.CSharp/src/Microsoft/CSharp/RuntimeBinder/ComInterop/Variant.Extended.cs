@@ -198,9 +198,8 @@ namespace System.Runtime.InteropServices
                     _typeUnion._unionTypes._byref = (IntPtr)Unsafe.AsPointer(ref value._decimal);
                     break;
                 default:
-                    _typeUnion._unionTypes._byref = (IntPtr)Unsafe.AsPointer(
-                        ref value._typeUnion._unionTypes._byref
-                    );
+                    _typeUnion._unionTypes._byref = (IntPtr)
+                        Unsafe.AsPointer(ref value._typeUnion._unionTypes._byref);
                     break;
             }
             VariantType = (value.VariantType | VarEnum.VT_BYREF);

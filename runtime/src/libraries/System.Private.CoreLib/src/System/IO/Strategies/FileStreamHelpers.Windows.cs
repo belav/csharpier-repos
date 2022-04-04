@@ -511,8 +511,8 @@ namespace System.IO.Strategies
                 NativeOverlapped* pOVERLAP
             )
             {
-                var awaitable =
-                    (AsyncCopyToAwaitable?)ThreadPoolBoundHandle.GetNativeOverlappedState(pOVERLAP);
+                var awaitable = (AsyncCopyToAwaitable?)
+                    ThreadPoolBoundHandle.GetNativeOverlappedState(pOVERLAP);
                 Debug.Assert(awaitable != null);
 
                 Debug.Assert(

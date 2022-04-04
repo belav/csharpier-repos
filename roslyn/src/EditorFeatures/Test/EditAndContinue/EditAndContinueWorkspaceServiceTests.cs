@@ -190,8 +190,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
         private EditAndContinueWorkspaceService GetEditAndContinueService(Workspace workspace)
         {
-            var service =
-                (EditAndContinueWorkspaceService)workspace.Services.GetRequiredService<IEditAndContinueWorkspaceService>();
+            var service = (EditAndContinueWorkspaceService)
+                workspace.Services.GetRequiredService<IEditAndContinueWorkspaceService>();
             var accessor = service.GetTestAccessor();
             accessor.SetOutputProvider(project => _mockCompilationOutputsProvider(project));
             return service;

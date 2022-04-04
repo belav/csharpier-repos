@@ -14,11 +14,8 @@ namespace System.DirectoryServices.AccountManagement.Tests
             string identityValue
         )
         {
-            return (ExtendedUserPrincipal)FindByIdentityWithType(
-                context,
-                typeof(ExtendedUserPrincipal),
-                identityValue
-            );
+            return (ExtendedUserPrincipal)
+                FindByIdentityWithType(context, typeof(ExtendedUserPrincipal), identityValue);
         }
 
         [DirectoryProperty("jpegPhoto")]

@@ -62,8 +62,8 @@ internal static unsafe class TokenBindingUtil
         using (handle)
         {
             // Find the first 'provided' and 'referred' types.
-            TOKENBINDING_RESULT_LIST* pResultList =
-                (TOKENBINDING_RESULT_LIST*)handle.DangerousGetHandle();
+            TOKENBINDING_RESULT_LIST* pResultList = (TOKENBINDING_RESULT_LIST*)
+                handle.DangerousGetHandle();
             for (int i = 0; i < pResultList->resultCount; i++)
             {
                 TOKENBINDING_RESULT_DATA* pThisResultData = &pResultList->resultData[i];

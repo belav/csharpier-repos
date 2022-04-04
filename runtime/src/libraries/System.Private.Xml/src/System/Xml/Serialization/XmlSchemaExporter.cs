@@ -554,9 +554,8 @@ namespace System.Xml.Serialization
                                     && serializableMapping.XsiType.Namespace
                                         == schema.TargetNamespace
                                 )
-                                    type = (XmlSchemaType?)schema.SchemaTypes[
-                                        serializableMapping.XsiType
-                                    ];
+                                    type = (XmlSchemaType?)
+                                        schema.SchemaTypes[serializableMapping.XsiType];
                             }
                         }
                         if (element != null)
@@ -901,9 +900,8 @@ namespace System.Xml.Serialization
                         XmlSchemaSimpleTypeList list = new XmlSchemaSimpleTypeList();
                         if (pm.IsAnonymousType)
                         {
-                            list.ItemType = (XmlSchemaSimpleType)ExportAnonymousPrimitiveMapping(
-                                pm
-                            );
+                            list.ItemType = (XmlSchemaSimpleType)
+                                ExportAnonymousPrimitiveMapping(pm);
                         }
                         else
                         {
@@ -919,8 +917,8 @@ namespace System.Xml.Serialization
                     {
                         if (pm.IsAnonymousType)
                         {
-                            attribute.SchemaType =
-                                (XmlSchemaSimpleType)ExportAnonymousPrimitiveMapping(pm);
+                            attribute.SchemaType = (XmlSchemaSimpleType)
+                                ExportAnonymousPrimitiveMapping(pm);
                         }
                         else
                         {

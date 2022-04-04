@@ -1813,8 +1813,8 @@ namespace System.Xml.Tests
         //[Variation("XmlConvert.ToDateTime(null, XmlDateTimeSerializationMode.Utc", Param = XmlDateTimeSerializationMode.Utc)]
         public int ToType51()
         {
-            XmlDateTimeSerializationMode mode =
-                (XmlDateTimeSerializationMode)this.CurVariation.Param;
+            XmlDateTimeSerializationMode mode = (XmlDateTimeSerializationMode)
+                this.CurVariation.Param;
             try
             {
                 XmlConvert.ToDateTime(null, mode);

@@ -510,22 +510,21 @@ namespace Microsoft.Diagnostics.Tools.Pgo
         )
         {
             using var triggerErrors = new ModuleLoadLogger.LoadFailuresAsErrors();
-            EcmaAssembly ecmaAssembly = (EcmaAssembly)this.GetModuleForSimpleName(
-                metadataReader.GetString(
-                    metadataReader.GetAssemblyReference(assemblyReferenceHandle).Name
-                ),
-                false
-            );
+            EcmaAssembly ecmaAssembly = (EcmaAssembly)
+                this.GetModuleForSimpleName(
+                    metadataReader.GetString(
+                        metadataReader.GetAssemblyReference(assemblyReferenceHandle).Name
+                    ),
+                    false
+                );
             return new StandaloneAssemblyMetadata(ecmaAssembly.PEReader);
         }
 
         IAssemblyMetadata IAssemblyResolver.FindAssembly(string simpleName, string parentFile)
         {
             using var triggerErrors = new ModuleLoadLogger.LoadFailuresAsErrors();
-            EcmaAssembly ecmaAssembly = (EcmaAssembly)this.GetModuleForSimpleName(
-                simpleName,
-                false
-            );
+            EcmaAssembly ecmaAssembly = (EcmaAssembly)
+                this.GetModuleForSimpleName(simpleName, false);
             return new StandaloneAssemblyMetadata(ecmaAssembly.PEReader);
         }
     }

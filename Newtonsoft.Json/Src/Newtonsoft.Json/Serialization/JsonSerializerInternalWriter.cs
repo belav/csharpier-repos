@@ -250,8 +250,8 @@ namespace Newtonsoft.Json.Serialization
                     SerializeString(writer, value, (JsonStringContract)valueContract);
                     break;
                 case JsonContractType.Dictionary:
-                    JsonDictionaryContract dictionaryContract =
-                        (JsonDictionaryContract)valueContract;
+                    JsonDictionaryContract dictionaryContract = (JsonDictionaryContract)
+                        valueContract;
                     SerializeDictionary(
                         writer,
                         (value is IDictionary dictionary)

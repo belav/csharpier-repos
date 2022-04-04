@@ -1214,10 +1214,8 @@ namespace System.Runtime.Serialization
 
         internal virtual void AddOnDeserialization(DeserializationEventHandler handler)
         {
-            _onDeserializationHandler = (DeserializationEventHandler)Delegate.Combine(
-                _onDeserializationHandler,
-                handler
-            );
+            _onDeserializationHandler = (DeserializationEventHandler)
+                Delegate.Combine(_onDeserializationHandler, handler);
         }
 
         [RequiresUnreferencedCode(ObjectManagerUnreferencedCodeMessage)]

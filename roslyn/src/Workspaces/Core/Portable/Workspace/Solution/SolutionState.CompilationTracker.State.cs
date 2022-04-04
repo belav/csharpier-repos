@@ -118,11 +118,12 @@ namespace Microsoft.CodeAnalysis
                             generatedDocuments,
                             generatedDocumentsAreFinal: false
                         )
-                      : (State)new InProgressState(
-                            compilation,
-                            generatedDocuments,
-                            intermediateProjects
-                        );
+                      : (State)
+                            new InProgressState(
+                                compilation,
+                                generatedDocuments,
+                                intermediateProjects
+                            );
                 }
 
                 public static ValueSource<Optional<Compilation>> CreateValueSource(
@@ -132,9 +133,8 @@ namespace Microsoft.CodeAnalysis
                 {
                     return services.SupportsCachingRecoverableObjects
                       ? new WeakValueSource<Compilation>(compilation)
-                      : (ValueSource<Optional<Compilation>>)new ConstantValueSource<
-                            Optional<Compilation>
-                        >(compilation);
+                      : (ValueSource<Optional<Compilation>>)
+                            new ConstantValueSource<Optional<Compilation>>(compilation);
                 }
             }
 

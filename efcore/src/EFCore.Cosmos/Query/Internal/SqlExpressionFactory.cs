@@ -271,10 +271,11 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                     break;
             }
 
-            return (SqlBinaryExpression)ApplyTypeMapping(
-                new SqlBinaryExpression(operatorType, left, right, returnType, null),
-                typeMapping
-            );
+            return (SqlBinaryExpression)
+                ApplyTypeMapping(
+                    new SqlBinaryExpression(operatorType, left, right, returnType, null),
+                    typeMapping
+                );
         }
 
         /// <summary>
@@ -444,10 +445,11 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             CoreTypeMapping? typeMapping = null
         )
         {
-            return (SqlUnaryExpression)ApplyTypeMapping(
-                new SqlUnaryExpression(operatorType, operand, type, null),
-                typeMapping
-            );
+            return (SqlUnaryExpression)
+                ApplyTypeMapping(
+                    new SqlUnaryExpression(operatorType, operand, type, null),
+                    typeMapping
+                );
         }
 
         /// <summary>
@@ -611,9 +613,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 if (discriminatorProperty != null)
                 {
                     var discriminatorColumn = (
-                        (EntityProjectionExpression)selectExpression.GetMappedProjection(
-                            new ProjectionMember()
-                        )
+                        (EntityProjectionExpression)
+                            selectExpression.GetMappedProjection(new ProjectionMember())
                     ).BindProperty(discriminatorProperty, clientEval: false);
 
                     selectExpression.ApplyPredicate(
@@ -627,9 +628,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             else
             {
                 var discriminatorColumn = (
-                    (EntityProjectionExpression)selectExpression.GetMappedProjection(
-                        new ProjectionMember()
-                    )
+                    (EntityProjectionExpression)
+                        selectExpression.GetMappedProjection(new ProjectionMember())
                 ).BindProperty(
                     concreteEntityTypes[0].FindDiscriminatorProperty(),
                     clientEval: false

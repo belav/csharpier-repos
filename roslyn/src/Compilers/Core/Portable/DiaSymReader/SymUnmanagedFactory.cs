@@ -102,9 +102,8 @@ namespace Microsoft.DiaSymReader
                         var parameters = method.GetParameters();
                         if (parameters.Length == 1 && parameters[0].ParameterType == typeof(string))
                         {
-                            return (Func<string, string>)method.CreateDelegate(
-                                typeof(Func<string, string>)
-                            );
+                            return (Func<string, string>)
+                                method.CreateDelegate(typeof(Func<string, string>));
                         }
                     }
                 }
@@ -156,10 +155,8 @@ namespace Microsoft.DiaSymReader
                 }
 
 #if NET20 || NETSTANDARD1_1
-                var creator = (NativeFactory)Marshal.GetDelegateForFunctionPointer(
-                    createAddress,
-                    typeof(NativeFactory)
-                );
+                var creator = (NativeFactory)
+                    Marshal.GetDelegateForFunctionPointer(createAddress, typeof(NativeFactory));
 #else
                 var creator = Marshal.GetDelegateForFunctionPointer<NativeFactory>(createAddress);
 #endif

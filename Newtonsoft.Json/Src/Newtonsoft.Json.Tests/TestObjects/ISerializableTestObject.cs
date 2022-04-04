@@ -69,10 +69,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
         {
             _stringValue = info.GetString("stringValue");
             _intValue = info.GetInt32("intValue");
-            _dateTimeOffsetValue = (DateTimeOffset)info.GetValue(
-                "dateTimeOffsetValue",
-                typeof(DateTimeOffset)
-            );
+            _dateTimeOffsetValue = (DateTimeOffset)
+                info.GetValue("dateTimeOffsetValue", typeof(DateTimeOffset));
             _personValue = (Person)info.GetValue("personValue", typeof(Person));
             _nullPersonValue = (Person)info.GetValue("nullPersonValue", typeof(Person));
             _nullableInt = (int?)info.GetValue("nullableInt", typeof(int?));

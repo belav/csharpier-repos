@@ -115,11 +115,8 @@ namespace System.Net.Http.Headers
         public static RangeHeaderValue Parse(string? input)
         {
             int index = 0;
-            return (RangeHeaderValue)GenericHeaderParser.RangeParser.ParseValue(
-                input,
-                null,
-                ref index
-            );
+            return (RangeHeaderValue)
+                GenericHeaderParser.RangeParser.ParseValue(input, null, ref index);
         }
 
         public static bool TryParse(

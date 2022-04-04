@@ -52,12 +52,13 @@ internal class ClassifiedSpanVisitor : SyntaxWalker
                 if (comment.IsMissing)
                 {
                     // We need to generate a classified span at this position. So insert a marker in its place.
-                    comment = (SyntaxToken)SyntaxFactory
-                        .Token(SyntaxKind.Marker, string.Empty)
-                        .Green.CreateRed(
-                            razorCommentSyntax,
-                            razorCommentSyntax.StartCommentStar.EndPosition
-                        );
+                    comment = (SyntaxToken)
+                        SyntaxFactory
+                            .Token(SyntaxKind.Marker, string.Empty)
+                            .Green.CreateRed(
+                                razorCommentSyntax,
+                                razorCommentSyntax.StartCommentStar.EndPosition
+                            );
                 }
                 WriteSpan(comment, SpanKindInternal.Comment, AcceptedCharactersInternal.Any);
 

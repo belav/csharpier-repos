@@ -232,14 +232,15 @@ namespace System.ComponentModel.TypeConverterTests
         [MemberData(nameof(SizeData))]
         public void ConvertFromString(int width, int height)
         {
-            var point = (Size)Converter.ConvertFromString(
-                string.Format(
-                    "{0}{2} {1}",
-                    width,
-                    height,
-                    CultureInfo.CurrentCulture.TextInfo.ListSeparator
-                )
-            );
+            var point = (Size)
+                Converter.ConvertFromString(
+                    string.Format(
+                        "{0}{2} {1}",
+                        width,
+                        height,
+                        CultureInfo.CurrentCulture.TextInfo.ListSeparator
+                    )
+                );
             Assert.Equal(width, point.Width);
             Assert.Equal(height, point.Height);
         }

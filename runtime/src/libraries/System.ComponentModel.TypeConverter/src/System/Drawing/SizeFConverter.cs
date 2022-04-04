@@ -49,11 +49,8 @@ namespace System.Drawing
                 TypeConverter floatConverter = TypeDescriptor.GetConverterTrimUnsafe(typeof(float));
                 for (int i = 0; i < values.Length; i++)
                 {
-                    values[i] = (float)floatConverter.ConvertFromString(
-                        context,
-                        culture,
-                        tokens[i]
-                    )!;
+                    values[i] = (float)
+                        floatConverter.ConvertFromString(context, culture, tokens[i])!;
                 }
 
                 if (values.Length != 2)

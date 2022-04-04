@@ -140,10 +140,11 @@ public class C {
                 .AddDocument(did, "goo.cs", SourceText.From(text));
 
             var project = solution.Projects.First();
-            var symbol = (IFieldSymbol)(await project.GetCompilationAsync())
-                .GetTypeByMetadataName("C")
-                .GetMembers("X")
-                .First();
+            var symbol = (IFieldSymbol)
+                (await project.GetCompilationAsync())
+                    .GetTypeByMetadataName("C")
+                    .GetMembers("X")
+                    .First();
 
             var result = (await SymbolFinder.FindReferencesAsync(symbol.Type, solution)).ToList();
             Assert.Equal(9, result.Count);
@@ -420,10 +421,11 @@ namespace N2
             desktopProject = solution.GetProject(desktopProject.Id);
             var netStandardProject = solution.Projects.First(p => p.Name == "NetStandardProject");
 
-            var interfaceMethod = (IMethodSymbol)(await netStandardProject.GetCompilationAsync())
-                .GetTypeByMetadataName("N.I")
-                .GetMembers("Get")
-                .First();
+            var interfaceMethod = (IMethodSymbol)
+                (await netStandardProject.GetCompilationAsync())
+                    .GetTypeByMetadataName("N.I")
+                    .GetMembers("Get")
+                    .First();
 
             var references = (
                 await SymbolFinder.FindReferencesAsync(interfaceMethod, solution)

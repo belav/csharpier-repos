@@ -1491,9 +1491,8 @@ namespace System.Text.Json.Serialization.Tests
             {
                 Assert.Equal(
                     i,
-                    (int)typeof(Class_With_Ctor_With_64_Params)
-                        .GetProperty($"Int{i}")
-                        .GetValue(this)
+                    (int)
+                        typeof(Class_With_Ctor_With_64_Params).GetProperty($"Int{i}").GetValue(this)
                 );
             }
         }

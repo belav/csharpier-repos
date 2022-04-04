@@ -1840,16 +1840,14 @@ public class RenderTreeDiffBuilderTest : IDisposable
             renderTreeBuilder.GetFrames(),
             oldTree.GetFrames()
         );
-        var originalComponentInstance = (CaptureSetParametersComponent)oldTree.GetFrames().Array[
-            0
-        ].Component;
+        var originalComponentInstance = (CaptureSetParametersComponent)
+            oldTree.GetFrames().Array[0].Component;
         Assert.Equal(1, originalComponentInstance.SetParametersCallCount);
 
         // Act
         var renderBatch = GetRenderedBatch();
-        var newComponentInstance = (CaptureSetParametersComponent)oldTree.GetFrames().Array[
-            0
-        ].Component;
+        var newComponentInstance = (CaptureSetParametersComponent)
+            oldTree.GetFrames().Array[0].Component;
 
         // Assert
         Assert.Same(originalComponentInstance, newComponentInstance);
@@ -1880,9 +1878,8 @@ public class RenderTreeDiffBuilderTest : IDisposable
             renderTreeBuilder.GetFrames(),
             oldTree.GetFrames()
         );
-        var componentInstance = (CaptureSetParametersComponent)oldTree.GetFrames().Array[
-            0
-        ].Component;
+        var componentInstance = (CaptureSetParametersComponent)
+            oldTree.GetFrames().Array[0].Component;
         Assert.Equal(1, componentInstance.SetParametersCallCount);
 
         // Act

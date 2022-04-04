@@ -235,9 +235,12 @@ namespace Castle.Components.DictionaryAdapter
 
             var implementation = typeBuilder.CreateTypeInfo();
             var creator =
-                (Func<DictionaryAdapterInstance, IDictionaryAdapter>)implementation
-                    .GetDeclaredMethod("__Create")
-                    .CreateDelegate(typeof(Func<DictionaryAdapterInstance, IDictionaryAdapter>));
+                (Func<DictionaryAdapterInstance, IDictionaryAdapter>)
+                    implementation
+                        .GetDeclaredMethod("__Create")
+                        .CreateDelegate(
+                            typeof(Func<DictionaryAdapterInstance, IDictionaryAdapter>)
+                        );
 
             var meta = new DictionaryAdapterMeta(
                 type,

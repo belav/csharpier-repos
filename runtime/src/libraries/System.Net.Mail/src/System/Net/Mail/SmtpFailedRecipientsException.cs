@@ -39,10 +39,8 @@ namespace System.Net.Mail
         protected SmtpFailedRecipientsException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
-            _innerExceptions = (SmtpFailedRecipientException[])info.GetValue(
-                "innerExceptions",
-                typeof(SmtpFailedRecipientException[])
-            )!;
+            _innerExceptions = (SmtpFailedRecipientException[])
+                info.GetValue("innerExceptions", typeof(SmtpFailedRecipientException[]))!;
         }
 
         public SmtpFailedRecipientsException(

@@ -271,13 +271,19 @@ namespace System.Reflection.TypeLoading.Ecma
                 .ResolveAndSpecializeType(module, typeContext);
             EcmaMethodDecoder decoder = new EcmaMethodDecoder(handle, module);
             if (methodDefinition.IsConstructor(reader))
-                return (T)(object)(
-                    new RoDefinitionConstructor<EcmaMethodDecoder>(declaringType, decoder)
-                );
+                return (T)
+                    (object)(
+                        new RoDefinitionConstructor<EcmaMethodDecoder>(declaringType, decoder)
+                    );
             else
-                return (T)(object)(
-                    new RoDefinitionMethod<EcmaMethodDecoder>(declaringType, declaringType, decoder)
-                );
+                return (T)
+                    (object)(
+                        new RoDefinitionMethod<EcmaMethodDecoder>(
+                            declaringType,
+                            declaringType,
+                            decoder
+                        )
+                    );
         }
 
         private static RoInstantiationProviderType ResolveAndSpecializeType(

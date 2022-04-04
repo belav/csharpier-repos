@@ -175,9 +175,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindReferences
 
             private bool TryOpenFile()
             {
-                var shellOpenDocument = (IVsUIShellOpenDocument)_serviceProvider.GetService(
-                    typeof(SVsUIShellOpenDocument)
-                );
+                var shellOpenDocument = (IVsUIShellOpenDocument)
+                    _serviceProvider.GetService(typeof(SVsUIShellOpenDocument));
                 var textViewGuid = VSConstants.LOGVIEWID.TextView_guid;
                 if (
                     shellOpenDocument.OpenDocumentViaProject(
@@ -199,9 +198,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindReferences
 
             private bool TryNavigateToPosition()
             {
-                var docTable = (IVsRunningDocumentTable)_serviceProvider.GetService(
-                    typeof(SVsRunningDocumentTable)
-                );
+                var docTable = (IVsRunningDocumentTable)
+                    _serviceProvider.GetService(typeof(SVsRunningDocumentTable));
                 if (
                     docTable.FindAndLockDocument(
                         (uint)_VSRDTFLAGS.RDT_NoLock,
@@ -223,9 +221,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindReferences
                         return false;
                     }
 
-                    var textManager = (IVsTextManager)_serviceProvider.GetService(
-                        typeof(SVsTextManager)
-                    );
+                    var textManager = (IVsTextManager)
+                        _serviceProvider.GetService(typeof(SVsTextManager));
                     if (textManager == null)
                     {
                         return false;

@@ -407,9 +407,8 @@ namespace System.Text.Unicode.Tests
                         );
                     }
 
-                    return (GetPointerToFirstInvalidCharDel)methodInfo.CreateDelegate(
-                        typeof(GetPointerToFirstInvalidCharDel)
-                    );
+                    return (GetPointerToFirstInvalidCharDel)
+                        methodInfo.CreateDelegate(typeof(GetPointerToFirstInvalidCharDel));
                 }
             );
         }
@@ -429,11 +428,12 @@ namespace System.Text.Unicode.Tests
             {
                 input =
                     input[..idx]
-                    + (char)ushort.Parse(
-                        input.Substring(idx + 1, 4),
-                        NumberStyles.AllowHexSpecifier,
-                        CultureInfo.InvariantCulture
-                    )
+                    + (char)
+                        ushort.Parse(
+                            input.Substring(idx + 1, 4),
+                            NumberStyles.AllowHexSpecifier,
+                            CultureInfo.InvariantCulture
+                        )
                     + input[(idx + 6)..];
             }
 

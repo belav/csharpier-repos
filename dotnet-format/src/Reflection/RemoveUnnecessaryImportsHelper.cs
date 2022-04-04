@@ -32,10 +32,11 @@ namespace Microsoft.CodeAnalysis.Tools.Reflection
                 return document;
             }
 
-            return await (Task<Document>)s_removeUnnecessaryImportsAsyncMethod.Invoke(
-                obj: null,
-                new object[] { document, cancellationToken }
-            )!;
+            return await (Task<Document>)
+                s_removeUnnecessaryImportsAsyncMethod.Invoke(
+                    obj: null,
+                    new object[] { document, cancellationToken }
+                )!;
         }
     }
 }

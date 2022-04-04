@@ -115,15 +115,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <inheritdoc/>
         [DebuggerStepThrough]
         IPrincipalKeyValueFactory<TKey> IKey.GetPrincipalKeyValueFactory<TKey>() =>
-            (IPrincipalKeyValueFactory<TKey>)NonCapturingLazyInitializer.EnsureInitialized(
-                ref _principalKeyValueFactory,
-                this,
-                static key =>
-                {
-                    key.EnsureReadOnly();
-                    return new KeyValueFactoryFactory().Create<TKey>(key);
-                }
-            );
+            (IPrincipalKeyValueFactory<TKey>)
+                NonCapturingLazyInitializer.EnsureInitialized(
+                    ref _principalKeyValueFactory,
+                    this,
+                    static key =>
+                    {
+                        key.EnsureReadOnly();
+                        return new KeyValueFactoryFactory().Create<TKey>(key);
+                    }
+                );
 
         /// <inheritdoc/>
         [DebuggerStepThrough]

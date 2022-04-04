@@ -93,10 +93,11 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 _querySqlGeneratorFactory
                     .Create()
                     .GetSqlQuery(
-                        (SelectExpression)new InExpressionValuesExpandingExpressionVisitor(
-                            _sqlExpressionFactory,
-                            _cosmosQueryContext.ParameterValues
-                        ).Visit(_selectExpression),
+                        (SelectExpression)
+                            new InExpressionValuesExpandingExpressionVisitor(
+                                _sqlExpressionFactory,
+                                _cosmosQueryContext.ParameterValues
+                            ).Visit(_selectExpression),
                         _cosmosQueryContext.ParameterValues
                     );
 

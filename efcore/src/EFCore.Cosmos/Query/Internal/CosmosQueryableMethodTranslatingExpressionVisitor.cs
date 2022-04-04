@@ -380,9 +380,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 source = TranslateSelect(source, selector);
             }
 
-            var projection = (SqlExpression)selectExpression.GetMappedProjection(
-                new ProjectionMember()
-            );
+            var projection = (SqlExpression)
+                selectExpression.GetMappedProjection(new ProjectionMember());
             projection = _sqlExpressionFactory.Function(
                 "AVG",
                 new[] { projection },
@@ -754,9 +753,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 source = TranslateSelect(source, selector);
             }
 
-            var projection = (SqlExpression)selectExpression.GetMappedProjection(
-                new ProjectionMember()
-            );
+            var projection = (SqlExpression)
+                selectExpression.GetMappedProjection(new ProjectionMember());
 
             projection = _sqlExpressionFactory.Function(
                 "MAX",
@@ -795,9 +793,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 source = TranslateSelect(source, selector);
             }
 
-            var projection = (SqlExpression)selectExpression.GetMappedProjection(
-                new ProjectionMember()
-            );
+            var projection = (SqlExpression)
+                selectExpression.GetMappedProjection(new ProjectionMember());
 
             projection = _sqlExpressionFactory.Function(
                 "MIN",
@@ -865,8 +862,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 var derivedType = entityType
                     .GetDerivedTypes()
                     .Single(et => et.ClrType == resultType);
-                var projectionBindingExpression =
-                    (ProjectionBindingExpression)entityShaperExpression.ValueBufferExpression;
+                var projectionBindingExpression = (ProjectionBindingExpression)
+                    entityShaperExpression.ValueBufferExpression;
 
                 var projectionMember = projectionBindingExpression.ProjectionMember;
                 Check.DebugAssert(
@@ -874,10 +871,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                     "Invalid ProjectionMember when processing OfType"
                 );
 
-                var entityProjectionExpression =
-                    (EntityProjectionExpression)selectExpression.GetMappedProjection(
-                        projectionMember
-                    );
+                var entityProjectionExpression = (EntityProjectionExpression)
+                    selectExpression.GetMappedProjection(projectionMember);
                 selectExpression.ReplaceProjectionMapping(
                     new Dictionary<ProjectionMember, Expression>
                     {
@@ -1097,9 +1092,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             }
 
             var serverOutputType = resultType.UnwrapNullableType();
-            var projection = (SqlExpression)selectExpression.GetMappedProjection(
-                new ProjectionMember()
-            );
+            var projection = (SqlExpression)
+                selectExpression.GetMappedProjection(new ProjectionMember());
 
             projection = _sqlExpressionFactory.Function(
                 "SUM",

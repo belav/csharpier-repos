@@ -39,11 +39,8 @@ namespace System.Net.Http.Headers
         public static TransferCodingHeaderValue Parse(string? input)
         {
             int index = 0;
-            return (TransferCodingHeaderValue)TransferCodingHeaderParser.SingleValueParser.ParseValue(
-                input,
-                null,
-                ref index
-            );
+            return (TransferCodingHeaderValue)
+                TransferCodingHeaderParser.SingleValueParser.ParseValue(input, null, ref index);
         }
 
         public static bool TryParse(
@@ -110,7 +107,8 @@ namespace System.Net.Http.Headers
                     input,
                     current,
                     ';',
-                    (UnvalidatedObjectCollection<NameValueHeaderValue>)transferCodingHeader.Parameters
+                    (UnvalidatedObjectCollection<NameValueHeaderValue>)
+                        transferCodingHeader.Parameters
                 );
 
                 if (parameterLength == 0)

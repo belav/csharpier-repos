@@ -230,10 +230,8 @@ namespace System.Text.Json.Serialization.Tests
             var options = new JsonSerializerOptions();
             options.EnableDynamicTypes();
 
-            JsonDynamicObject obj = (JsonDynamicObject)JsonSerializer.Deserialize<object>(
-                DynamicTests.Json,
-                options
-            );
+            JsonDynamicObject obj = (JsonDynamicObject)
+                JsonSerializer.Deserialize<object>(DynamicTests.Json, options);
 
             // Change some primitives.
             obj["MyString"] = "Hello!";
@@ -269,10 +267,8 @@ namespace System.Text.Json.Serialization.Tests
             var options = new JsonSerializerOptions();
             options.EnableDynamicTypes();
 
-            JsonDynamicObject obj = (JsonDynamicObject)JsonSerializer.Deserialize<object>(
-                DynamicTests.Json,
-                options
-            );
+            JsonDynamicObject obj = (JsonDynamicObject)
+                JsonSerializer.Deserialize<object>(DynamicTests.Json, options);
             Verify();
 
             // Verify the values are round-trippable.

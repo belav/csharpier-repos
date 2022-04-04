@@ -716,12 +716,13 @@ namespace System.Data
                             if (StorageType.Single == storageType)
                             {
                                 return SqlConvert.ChangeType2(
-                                    (float)SqlConvert.ChangeType2(
-                                        argumentValues[0],
-                                        StorageType.Single,
-                                        typeof(float),
-                                        FormatProvider
-                                    ),
+                                    (float)
+                                        SqlConvert.ChangeType2(
+                                            argumentValues[0],
+                                            StorageType.Single,
+                                            typeof(float),
+                                            FormatProvider
+                                        ),
                                     mytype,
                                     type,
                                     FormatProvider
@@ -730,12 +731,13 @@ namespace System.Data
                             else if (StorageType.Double == storageType)
                             {
                                 return SqlConvert.ChangeType2(
-                                    (double)SqlConvert.ChangeType2(
-                                        argumentValues[0],
-                                        StorageType.Double,
-                                        typeof(double),
-                                        FormatProvider
-                                    ),
+                                    (double)
+                                        SqlConvert.ChangeType2(
+                                            argumentValues[0],
+                                            StorageType.Double,
+                                            typeof(double),
+                                            FormatProvider
+                                        ),
                                     mytype,
                                     type,
                                     FormatProvider
@@ -744,12 +746,13 @@ namespace System.Data
                             else if (StorageType.Decimal == storageType)
                             {
                                 return SqlConvert.ChangeType2(
-                                    (decimal)SqlConvert.ChangeType2(
-                                        argumentValues[0],
-                                        StorageType.Decimal,
-                                        typeof(decimal),
-                                        FormatProvider
-                                    ),
+                                    (decimal)
+                                        SqlConvert.ChangeType2(
+                                            argumentValues[0],
+                                            StorageType.Decimal,
+                                            typeof(decimal),
+                                            FormatProvider
+                                        ),
                                     mytype,
                                     type,
                                     FormatProvider

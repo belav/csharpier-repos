@@ -34,11 +34,8 @@ namespace System.Transactions
             {
                 lock (ClassSyncObject)
                 {
-                    s_distributedTransactionStartedDelegate =
-                        (TransactionStartedEventHandler?)System.Delegate.Combine(
-                            s_distributedTransactionStartedDelegate,
-                            value
-                        );
+                    s_distributedTransactionStartedDelegate = (TransactionStartedEventHandler?)
+                        System.Delegate.Combine(s_distributedTransactionStartedDelegate, value);
                     if (value != null)
                     {
                         ProcessExistingTransactions(value);
@@ -49,11 +46,8 @@ namespace System.Transactions
             {
                 lock (ClassSyncObject)
                 {
-                    s_distributedTransactionStartedDelegate =
-                        (TransactionStartedEventHandler?)System.Delegate.Remove(
-                            s_distributedTransactionStartedDelegate,
-                            value
-                        );
+                    s_distributedTransactionStartedDelegate = (TransactionStartedEventHandler?)
+                        System.Delegate.Remove(s_distributedTransactionStartedDelegate, value);
                 }
             }
         }
@@ -496,9 +490,8 @@ namespace System.Transactions
         internal static Transaction? FindPromotedTransaction(Guid transactionIdentifier)
         {
             Hashtable promotedTransactionTable = PromotedTransactionTable;
-            WeakReference? weakRef = (WeakReference?)promotedTransactionTable[
-                transactionIdentifier
-            ];
+            WeakReference? weakRef = (WeakReference?)
+                promotedTransactionTable[transactionIdentifier];
             if (null != weakRef)
             {
                 if (weakRef.Target is Transaction tx)
@@ -526,9 +519,8 @@ namespace System.Transactions
             Hashtable promotedTransactionTable = PromotedTransactionTable;
             lock (promotedTransactionTable)
             {
-                WeakReference? weakRef = (WeakReference?)promotedTransactionTable[
-                    transactionIdentifier
-                ];
+                WeakReference? weakRef = (WeakReference?)
+                    promotedTransactionTable[transactionIdentifier];
                 if (null != weakRef)
                 {
                     tx = weakRef.Target as Transaction;

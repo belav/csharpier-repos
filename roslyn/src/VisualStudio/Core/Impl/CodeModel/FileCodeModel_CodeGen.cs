@@ -244,11 +244,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 insertionIndex
             );
 
-            return (EnvDTE80.CodeAttributeArgument)CodeModelService.CreateInternalCodeElement(
-                this.State,
-                fileCodeModel: this,
-                node: newNode
-            );
+            return (EnvDTE80.CodeAttributeArgument)
+                CodeModelService.CreateInternalCodeElement(
+                    this.State,
+                    fileCodeModel: this,
+                    node: newNode
+                );
         }
 
         internal EnvDTE.CodeAttribute AddAttribute(
@@ -273,11 +274,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             var newNode = InsertAttribute(containerNode, attributeNode, insertionIndex);
 
-            return (EnvDTE.CodeAttribute)CodeModelService.CreateInternalCodeElement(
-                this.State,
-                fileCodeModel: this,
-                node: newNode
-            );
+            return (EnvDTE.CodeAttribute)
+                CodeModelService.CreateInternalCodeElement(
+                    this.State,
+                    fileCodeModel: this,
+                    node: newNode
+                );
         }
 
         internal EnvDTE.CodeParameter AddParameter(
@@ -343,11 +345,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             var baseTypeSymbol =
                 baseArray.Length == 1
-                    ? (INamedTypeSymbol?)CodeModelService.GetTypeSymbol(
-                          baseArray[0],
-                          semanticModel,
-                          containerNodePosition
-                      )
+                    ? (INamedTypeSymbol?)
+                          CodeModelService.GetTypeSymbol(
+                              baseArray[0],
+                              semanticModel,
+                              containerNodePosition
+                          )
                     : null;
 
             var implementedInterfaceArray = GetValidArray(
@@ -358,11 +361,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             var implementedInterfaceSymbols = Array.ConvertAll(
                 implementedInterfaceArray,
                 i =>
-                    (INamedTypeSymbol?)CodeModelService.GetTypeSymbol(
-                        i,
-                        semanticModel,
-                        containerNodePosition
-                    )
+                    (INamedTypeSymbol?)
+                        CodeModelService.GetTypeSymbol(i, semanticModel, containerNodePosition)
             );
 
             var newType = CreateTypeDeclaration(
@@ -382,11 +382,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             newType = InsertMember(containerNode, newType, insertionIndex);
 
-            return (EnvDTE.CodeClass)CreateInternalCodeMember(
-                this.State,
-                fileCodeModel: this,
-                node: newType
-            );
+            return (EnvDTE.CodeClass)
+                CreateInternalCodeMember(this.State, fileCodeModel: this, node: newType);
         }
 
         internal EnvDTE.CodeDelegate AddDelegate(
@@ -400,11 +397,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             var containerNodePosition = containerNode.SpanStart;
             var semanticModel = GetSemanticModel();
 
-            var returnType = (INamedTypeSymbol?)CodeModelService.GetTypeSymbol(
-                type,
-                semanticModel,
-                containerNodePosition
-            );
+            var returnType = (INamedTypeSymbol?)
+                CodeModelService.GetTypeSymbol(type, semanticModel, containerNodePosition);
 
             var newType = CreateDelegateTypeDeclaration(
                 containerNode,
@@ -420,11 +414,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             newType = InsertMember(containerNode, newType, insertionIndex);
 
-            return (EnvDTE.CodeDelegate)CreateInternalCodeMember(
-                this.State,
-                fileCodeModel: this,
-                node: newType
-            );
+            return (EnvDTE.CodeDelegate)
+                CreateInternalCodeMember(this.State, fileCodeModel: this, node: newType);
         }
 
 #pragma warning disable IDE0060 // Remove unused parameter - // TODO(DustinCa): "bases" is ignored in C# code model. Need to check VB.
@@ -446,11 +437,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             newType = InsertMember(containerNode, newType, insertionIndex);
 
-            return (EnvDTE.CodeEnum)CreateInternalCodeMember(
-                this.State,
-                fileCodeModel: this,
-                node: newType
-            );
+            return (EnvDTE.CodeEnum)
+                CreateInternalCodeMember(this.State, fileCodeModel: this, node: newType);
         }
 
         public EnvDTE.CodeVariable AddEnumMember(
@@ -487,11 +475,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             newField = InsertMember(containerNode, newField, insertionIndex);
 
-            return (EnvDTE.CodeVariable)CreateInternalCodeMember(
-                this.State,
-                fileCodeModel: this,
-                node: newField
-            );
+            return (EnvDTE.CodeVariable)
+                CreateInternalCodeMember(this.State, fileCodeModel: this, node: newField);
         }
 
         public EnvDTE80.CodeEvent AddEvent(
@@ -506,11 +491,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             var containerNodePosition = containerNode.SpanStart;
             var semanticModel = GetSemanticModel();
 
-            var eventType = (INamedTypeSymbol)CodeModelService.GetTypeSymbol(
-                fullDelegateName,
-                semanticModel,
-                containerNodePosition
-            );
+            var eventType = (INamedTypeSymbol)
+                CodeModelService.GetTypeSymbol(
+                    fullDelegateName,
+                    semanticModel,
+                    containerNodePosition
+                );
 
             var newEvent = CreateEventDeclaration(
                 containerNode,
@@ -527,11 +513,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             newEvent = InsertMember(containerNode, newEvent, insertionIndex);
 
-            return (EnvDTE80.CodeEvent)CreateInternalCodeMember(
-                this.State,
-                fileCodeModel: this,
-                node: newEvent
-            );
+            return (EnvDTE80.CodeEvent)
+                CreateInternalCodeMember(this.State, fileCodeModel: this, node: newEvent);
         }
 
         internal EnvDTE.CodeFunction AddFunction(
@@ -591,11 +574,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             newMember = InsertMember(containerNode, newMember, insertionIndex);
 
-            return (EnvDTE.CodeFunction)CreateInternalCodeMember(
-                this.State,
-                fileCodeModel: this,
-                node: newMember
-            );
+            return (EnvDTE.CodeFunction)
+                CreateInternalCodeMember(this.State, fileCodeModel: this, node: newMember);
         }
 
         internal EnvDTE80.CodeImport AddImport(
@@ -617,11 +597,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             var newNode = InsertImport(containerNode, importNode, insertionIndex);
 
-            return (EnvDTE80.CodeImport)CodeModelService.CreateInternalCodeElement(
-                this.State,
-                fileCodeModel: this,
-                node: newNode
-            );
+            return (EnvDTE80.CodeImport)
+                CodeModelService.CreateInternalCodeElement(
+                    this.State,
+                    fileCodeModel: this,
+                    node: newNode
+                );
         }
 
         internal EnvDTE.CodeInterface AddInterface(
@@ -640,11 +621,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             var implementedInterfaceSymbols = Array.ConvertAll(
                 implementedInterfaceArray,
                 i =>
-                    (INamedTypeSymbol)CodeModelService.GetTypeSymbol(
-                        i,
-                        semanticModel,
-                        containerNodePosition
-                    )
+                    (INamedTypeSymbol)
+                        CodeModelService.GetTypeSymbol(i, semanticModel, containerNodePosition)
             );
 
             var newType = CreateTypeDeclaration(
@@ -663,11 +641,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             newType = InsertMember(containerNode, newType, insertionIndex);
 
-            return (EnvDTE.CodeInterface)CreateInternalCodeMember(
-                this.State,
-                fileCodeModel: this,
-                node: newType
-            );
+            return (EnvDTE.CodeInterface)
+                CreateInternalCodeMember(this.State, fileCodeModel: this, node: newType);
         }
 
         internal EnvDTE.CodeNamespace AddNamespace(
@@ -685,11 +660,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             newNamespace = InsertMember(containerNode, newNamespace, insertionIndex);
 
-            return (EnvDTE.CodeNamespace)CreateInternalCodeMember(
-                this.State,
-                fileCodeModel: this,
-                node: newNamespace
-            );
+            return (EnvDTE.CodeNamespace)
+                CreateInternalCodeMember(this.State, fileCodeModel: this, node: newNamespace);
         }
 
         internal EnvDTE.CodeProperty AddProperty(
@@ -740,11 +712,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             newProperty = InsertMember(containerNode, newProperty, insertionIndex);
 
-            return (EnvDTE.CodeProperty)CreateInternalCodeMember(
-                this.State,
-                fileCodeModel: this,
-                node: newProperty
-            );
+            return (EnvDTE.CodeProperty)
+                CreateInternalCodeMember(this.State, fileCodeModel: this, node: newProperty);
         }
 
 #pragma warning disable IDE0060 // Remove unused parameter - // TODO(DustinCa): Old C# code base doesn't even check bases for validity -- does VB?
@@ -766,11 +735,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             var implementedInterfaceSymbols = Array.ConvertAll(
                 implementedInterfaceArray,
                 i =>
-                    (INamedTypeSymbol)CodeModelService.GetTypeSymbol(
-                        i,
-                        semanticModel,
-                        containerNodePosition
-                    )
+                    (INamedTypeSymbol)
+                        CodeModelService.GetTypeSymbol(i, semanticModel, containerNodePosition)
             );
 
             var newType = CreateTypeDeclaration(
@@ -789,11 +755,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             newType = InsertMember(containerNode, newType, insertionIndex);
 
-            return (EnvDTE.CodeStruct)CreateInternalCodeMember(
-                this.State,
-                fileCodeModel: this,
-                node: newType
-            );
+            return (EnvDTE.CodeStruct)
+                CreateInternalCodeMember(this.State, fileCodeModel: this, node: newType);
         }
 
         public EnvDTE.CodeVariable AddVariable(
@@ -826,11 +789,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             newField = InsertMember(containerNode, newField, insertionIndex);
 
-            return (EnvDTE.CodeVariable)CreateInternalCodeMember(
-                this.State,
-                fileCodeModel: this,
-                node: newField
-            );
+            return (EnvDTE.CodeVariable)
+                CreateInternalCodeMember(this.State, fileCodeModel: this, node: newField);
         }
 
         internal void UpdateAccess(SyntaxNode node, EnvDTE.vsCMAccess access)

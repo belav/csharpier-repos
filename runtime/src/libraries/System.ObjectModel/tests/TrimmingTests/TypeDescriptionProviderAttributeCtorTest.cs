@@ -37,9 +37,8 @@ class Program
 
         if (providerType != null && typeof(TypeDescriptionProvider).IsAssignableFrom(providerType))
         {
-            TypeDescriptionProvider provider = (TypeDescriptionProvider)Activator.CreateInstance(
-                providerType
-            );
+            TypeDescriptionProvider provider = (TypeDescriptionProvider)
+                Activator.CreateInstance(providerType);
             if (provider == null)
             {
                 return false;

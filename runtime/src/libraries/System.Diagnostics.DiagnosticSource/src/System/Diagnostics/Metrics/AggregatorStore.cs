@@ -339,7 +339,8 @@ namespace System.Diagnostics.Metrics
                         TStringSequence,
                         TObjectSequence,
                         TAggregator
-                    >)(object)Label1;
+                    >)
+                        (object)Label1;
 
                 case StringSequence2:
                     if (Label2 == null)
@@ -358,7 +359,8 @@ namespace System.Diagnostics.Metrics
                         TStringSequence,
                         TObjectSequence,
                         TAggregator
-                    >)(object)Label2;
+                    >)
+                        (object)Label2;
 
                 case StringSequence3:
                     if (Label3 == null)
@@ -377,7 +379,8 @@ namespace System.Diagnostics.Metrics
                         TStringSequence,
                         TObjectSequence,
                         TAggregator
-                    >)(object)Label3;
+                    >)
+                        (object)Label3;
 
                 case StringSequenceMany:
                     if (LabelMany == null)
@@ -396,7 +399,8 @@ namespace System.Diagnostics.Metrics
                         TStringSequence,
                         TObjectSequence,
                         TAggregator
-                    >)(object)LabelMany;
+                    >)
+                        (object)LabelMany;
 
                 default:
                     // we should never get here unless this library has a bug
@@ -599,9 +603,8 @@ namespace System.Diagnostics.Metrics
             TObjectSequence values = default;
             if (values is ObjectSequenceMany)
             {
-                values = (TObjectSequence)(object)new ObjectSequenceMany(
-                    new object[_expectedLabelCount]
-                );
+                values = (TObjectSequence)
+                    (object)new ObjectSequenceMany(new object[_expectedLabelCount]);
             }
 #if MEMORYMARSHAL_SUPPORT
             Span<object?> indexedValues = values.AsSpan();

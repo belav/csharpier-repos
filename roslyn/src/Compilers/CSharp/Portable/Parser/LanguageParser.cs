@@ -14766,17 +14766,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             }
 
             return type is null
-              ? (ExpressionSyntax)_syntaxFactory.ImplicitObjectCreationExpression(
-                    @new,
-                    argumentList,
-                    initializer
-                )
-              : (ExpressionSyntax)_syntaxFactory.ObjectCreationExpression(
-                    @new,
-                    type,
-                    argumentList,
-                    initializer
-                );
+              ? (ExpressionSyntax)
+                    _syntaxFactory.ImplicitObjectCreationExpression(@new, argumentList, initializer)
+              : (ExpressionSyntax)
+                    _syntaxFactory.ObjectCreationExpression(@new, type, argumentList, initializer);
         }
 
         private bool IsImplicitObjectCreation()

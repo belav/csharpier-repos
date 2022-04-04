@@ -1203,9 +1203,8 @@ L1: goto L0;";
             var tree = Parse(source, options: TestOptions.Script);
             var model = CreateCompilationWithMscorlib45(new[] { tree })
                 .GetSemanticModel(tree, ignoreAccessibility: false);
-            var label = (LabeledStatementSyntax)tree.FindNodeOrTokenByKind(
-                SyntaxKind.LabeledStatement
-            );
+            var label = (LabeledStatementSyntax)
+                tree.FindNodeOrTokenByKind(SyntaxKind.LabeledStatement);
             var symbol = model.GetDeclaredSymbol(label);
             Assert.Equal("L0", symbol.Name);
         }
@@ -1220,9 +1219,8 @@ C: \a\b\
             var tree = Parse(source, options: TestOptions.Script);
             var model = CreateCompilationWithMscorlib45(new[] { tree })
                 .GetSemanticModel(tree, ignoreAccessibility: false);
-            var label = (LabeledStatementSyntax)tree.FindNodeOrTokenByKind(
-                SyntaxKind.LabeledStatement
-            );
+            var label = (LabeledStatementSyntax)
+                tree.FindNodeOrTokenByKind(SyntaxKind.LabeledStatement);
             var symbol = model.GetDeclaredSymbol(label);
             Assert.Equal("C", symbol.Name);
         }

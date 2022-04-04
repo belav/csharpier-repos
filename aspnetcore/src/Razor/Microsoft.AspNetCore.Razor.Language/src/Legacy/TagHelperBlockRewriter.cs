@@ -671,8 +671,8 @@ internal static class TagHelperBlockRewriter
             {
                 var tokens = node.GetTokens();
                 var expression = SyntaxFactory.CSharpExpressionLiteral(tokens);
-                var rewrittenExpression =
-                    (CSharpExpressionLiteralSyntax)VisitCSharpExpressionLiteral(expression);
+                var rewrittenExpression = (CSharpExpressionLiteralSyntax)
+                    VisitCSharpExpressionLiteral(expression);
                 var newChildren = SyntaxListBuilder<RazorSyntaxNode>.Create();
                 newChildren.Add(rewrittenExpression);
 
@@ -739,14 +739,14 @@ internal static class TagHelperBlockRewriter
                         new SyntaxList<SyntaxToken>(node.Transition.Transition)
                     )
                     .WithSpanContext(newContext);
-                expression = (CSharpExpressionLiteralSyntax)VisitCSharpExpressionLiteral(
-                    expression
-                );
+                expression = (CSharpExpressionLiteralSyntax)
+                    VisitCSharpExpressionLiteral(expression);
                 builder.Add(expression);
 
-                var rewrittenBody = (CSharpCodeBlockSyntax)VisitCSharpCodeBlock(
-                    ((CSharpImplicitExpressionBodySyntax)node.Body).CSharpCode
-                );
+                var rewrittenBody = (CSharpCodeBlockSyntax)
+                    VisitCSharpCodeBlock(
+                        ((CSharpImplicitExpressionBodySyntax)node.Body).CSharpCode
+                    );
                 builder.AddRange(rewrittenBody.Children);
 
                 // Since the original transition is part of the body, we need something to take it's place.
@@ -788,9 +788,8 @@ internal static class TagHelperBlockRewriter
                         new SyntaxList<SyntaxToken>(node.Transition.Transition)
                     )
                     .WithSpanContext(newContext);
-                expression = (CSharpExpressionLiteralSyntax)VisitCSharpExpressionLiteral(
-                    expression
-                );
+                expression = (CSharpExpressionLiteralSyntax)
+                    VisitCSharpExpressionLiteral(expression);
                 builder.Add(expression);
 
                 // Since the original transition is part of the body, we need something to take it's place.

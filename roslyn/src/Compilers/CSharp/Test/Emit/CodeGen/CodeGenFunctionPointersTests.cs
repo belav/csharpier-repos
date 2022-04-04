@@ -13131,8 +13131,9 @@ unsafe class D
 
             Assert.True(
                 callConvCdecl!.Equals(
-                    (NamedTypeSymbol)m.GetUnmanagedCallersOnlyAttributeData(forceComplete: true)!
-                        .CallingConventionTypes.Single(),
+                    (NamedTypeSymbol)
+                        m.GetUnmanagedCallersOnlyAttributeData(forceComplete: true)!
+                            .CallingConventionTypes.Single(),
                     TypeCompareKind.ConsiderEverything
                 )
             );

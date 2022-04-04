@@ -252,14 +252,10 @@ namespace Internal.NativeCrypto
             uint flags
         )
         {
-            const uint VerifyContextFlag = (uint)Interop
-                .Advapi32
-                .CryptAcquireContextFlags
-                .CRYPT_VERIFYCONTEXT;
-            const uint MachineContextFlag = (uint)Interop
-                .Advapi32
-                .CryptAcquireContextFlags
-                .CRYPT_MACHINE_KEYSET;
+            const uint VerifyContextFlag = (uint)
+                Interop.Advapi32.CryptAcquireContextFlags.CRYPT_VERIFYCONTEXT;
+            const uint MachineContextFlag = (uint)
+                Interop.Advapi32.CryptAcquireContextFlags.CRYPT_MACHINE_KEYSET;
 
             int ret = S_OK;
             // Specifying both verify context (for an ephemeral key) and machine keyset (for a persisted machine key)

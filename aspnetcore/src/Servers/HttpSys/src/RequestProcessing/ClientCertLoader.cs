@@ -127,11 +127,8 @@ internal sealed unsafe partial class ClientCertLoader : IAsyncResult, IDisposabl
             boundHandle,
             boundHandle.AllocateNativeOverlapped(IOCallback, this, _backingBuffer)
         );
-        _memoryBlob =
-            (HttpApiTypes.HTTP_SSL_CLIENT_CERT_INFO*)Marshal.UnsafeAddrOfPinnedArrayElement(
-                _backingBuffer,
-                0
-            );
+        _memoryBlob = (HttpApiTypes.HTTP_SSL_CLIENT_CERT_INFO*)
+            Marshal.UnsafeAddrOfPinnedArrayElement(_backingBuffer, 0);
     }
 
     // When you use netsh to configure HTTP.SYS with clientcertnegotiation = enable
@@ -333,9 +330,8 @@ internal sealed unsafe partial class ClientCertLoader : IAsyncResult, IDisposabl
         NativeOverlapped* nativeOverlapped
     )
     {
-        var asyncResult = (ClientCertLoader)ThreadPoolBoundHandle.GetNativeOverlappedState(
-            nativeOverlapped
-        )!;
+        var asyncResult = (ClientCertLoader)
+            ThreadPoolBoundHandle.GetNativeOverlappedState(nativeOverlapped)!;
         IOCompleted(asyncResult, errorCode, numBytes);
     }
 

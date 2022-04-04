@@ -692,10 +692,11 @@ namespace JIT.HardwareIntrinsics.X86
                         != (
                             (i < 8)
                                 ? (sbyte)Math.Min(Math.Max(left[i], sbyte.MinValue), sbyte.MaxValue)
-                                : (sbyte)Math.Min(
-                                      Math.Max(right[i % 8], sbyte.MinValue),
-                                      sbyte.MaxValue
-                                  )
+                                : (sbyte)
+                                      Math.Min(
+                                          Math.Max(right[i % 8], sbyte.MinValue),
+                                          sbyte.MaxValue
+                                      )
                         )
                     )
                     {

@@ -431,10 +431,8 @@ namespace System.Transactions.Tests
         )
         {
             object[] parameters = new object[] { promotableNotification, promoterType };
-            bool returnVal = (bool)s_enlistPromotableSinglePhaseMethodInfo.Invoke(
-                txToEnlist,
-                parameters
-            );
+            bool returnVal = (bool)
+                s_enlistPromotableSinglePhaseMethodInfo.Invoke(txToEnlist, parameters);
             return returnVal;
         }
 
@@ -1544,15 +1542,16 @@ namespace System.Transactions.Tests
                             false
                         );
 
-                        pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(
-                            NonMsdtcPromoterTests.PromoterType1,
-                            NonMsdtcPromoterTests.PromotedToken1,
-                            pspeCompleted,
-                            /*nonMSDTC = */true,
-                            /*tx = */null,
-                            /*spcResponse=*/TransactionStatus.Committed,
-                            /*expectRejection=*/false
-                        );
+                        pspe = (NonMSDTCPromoterEnlistment)
+                            CreatePSPEEnlistment(
+                                NonMsdtcPromoterTests.PromoterType1,
+                                NonMsdtcPromoterTests.PromotedToken1,
+                                pspeCompleted,
+                                /*nonMSDTC = */true,
+                                /*tx = */null,
+                                /*spcResponse=*/TransactionStatus.Committed,
+                                /*expectRejection=*/false
+                            );
 
                         if (promote)
                         {
@@ -1604,15 +1603,16 @@ namespace System.Transactions.Tests
                     CreateDependentClone( /*blocking=*/
                         false
                     );
-                    pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(
-                        NonMsdtcPromoterTests.PromoterType1,
-                        NonMsdtcPromoterTests.PromotedToken1,
-                        pspeCompleted,
-                        /*nonMSDTC = */true,
-                        /*tx = */null,
-                        /*spcResponse=*/TransactionStatus.Committed,
-                        /*expectRejection=*/false
-                    );
+                    pspe = (NonMSDTCPromoterEnlistment)
+                        CreatePSPEEnlistment(
+                            NonMsdtcPromoterTests.PromoterType1,
+                            NonMsdtcPromoterTests.PromotedToken1,
+                            pspeCompleted,
+                            /*nonMSDTC = */true,
+                            /*tx = */null,
+                            /*spcResponse=*/TransactionStatus.Committed,
+                            /*expectRejection=*/false
+                        );
 
                     if (promote)
                     {
@@ -1669,15 +1669,16 @@ namespace System.Transactions.Tests
 
                     Task.Run(() => CompleteDependentCloneThread(clone));
 
-                    pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(
-                        NonMsdtcPromoterTests.PromoterType1,
-                        NonMsdtcPromoterTests.PromotedToken1,
-                        pspeCompleted,
-                        /*nonMSDTC = */true,
-                        /*tx = */null,
-                        /*spcResponse=*/TransactionStatus.Committed,
-                        /*expectRejection=*/false
-                    );
+                    pspe = (NonMSDTCPromoterEnlistment)
+                        CreatePSPEEnlistment(
+                            NonMsdtcPromoterTests.PromoterType1,
+                            NonMsdtcPromoterTests.PromotedToken1,
+                            pspeCompleted,
+                            /*nonMSDTC = */true,
+                            /*tx = */null,
+                            /*spcResponse=*/TransactionStatus.Committed,
+                            /*expectRejection=*/false
+                        );
 
                     if (promote)
                     {
@@ -1725,15 +1726,16 @@ namespace System.Transactions.Tests
                 {
                     CommittableTransaction tx = new CommittableTransaction(TimeSpan.FromSeconds(1));
 
-                    pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(
-                        NonMsdtcPromoterTests.PromoterType1,
-                        NonMsdtcPromoterTests.PromotedToken1,
-                        pspeCompleted,
-                        /*nonMSDTC = */true,
-                        tx,
-                        /*spcResponse=*/TransactionStatus.Committed,
-                        /*expectRejection=*/false
-                    );
+                    pspe = (NonMSDTCPromoterEnlistment)
+                        CreatePSPEEnlistment(
+                            NonMsdtcPromoterTests.PromoterType1,
+                            NonMsdtcPromoterTests.PromotedToken1,
+                            pspeCompleted,
+                            /*nonMSDTC = */true,
+                            tx,
+                            /*spcResponse=*/TransactionStatus.Committed,
+                            /*expectRejection=*/false
+                        );
 
                     if (promote)
                     {
@@ -1819,15 +1821,16 @@ namespace System.Transactions.Tests
                         Transaction.Current.EnlistVolatile(vol, firstOptions);
                     }
 
-                    pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(
-                        NonMsdtcPromoterTests.PromoterType1,
-                        NonMsdtcPromoterTests.PromotedToken1,
-                        pspeCompleted,
-                        /*nonMSDTC = */true,
-                        /*tx = */null,
-                        /*spcResponse=*/TransactionStatus.Committed,
-                        /*expectRejection=*/false
-                    );
+                    pspe = (NonMSDTCPromoterEnlistment)
+                        CreatePSPEEnlistment(
+                            NonMsdtcPromoterTests.PromoterType1,
+                            NonMsdtcPromoterTests.PromotedToken1,
+                            pspeCompleted,
+                            /*nonMSDTC = */true,
+                            /*tx = */null,
+                            /*spcResponse=*/TransactionStatus.Committed,
+                            /*expectRejection=*/false
+                        );
 
                     if (promote)
                     {
@@ -1902,15 +1905,16 @@ namespace System.Transactions.Tests
                     Guid distId = Transaction.Current.TransactionInformation.DistributedIdentifier;
                     Assert.Equal(Guid.Empty, distId);
 
-                    pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(
-                        NonMsdtcPromoterTests.PromoterType1,
-                        NonMsdtcPromoterTests.PromotedToken1,
-                        pspeCompleted,
-                        /*nonMSDTC = */true,
-                        /*tx = */null,
-                        /*spcResponse=*/TransactionStatus.Committed,
-                        /*expectRejection=*/false
-                    );
+                    pspe = (NonMSDTCPromoterEnlistment)
+                        CreatePSPEEnlistment(
+                            NonMsdtcPromoterTests.PromoterType1,
+                            NonMsdtcPromoterTests.PromotedToken1,
+                            pspeCompleted,
+                            /*nonMSDTC = */true,
+                            /*tx = */null,
+                            /*spcResponse=*/TransactionStatus.Committed,
+                            /*expectRejection=*/false
+                        );
 
                     txStatus = Transaction.Current.TransactionInformation.Status;
                     Assert.Equal(TransactionStatus.Active, txStatus);
@@ -1954,15 +1958,16 @@ namespace System.Transactions.Tests
                 CommittableTransaction tx = new CommittableTransaction(TimeSpan.FromMinutes(1));
                 savedTransaction = tx.Clone();
 
-                pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(
-                    NonMsdtcPromoterTests.PromoterType1,
-                    NonMsdtcPromoterTests.PromotedToken1,
-                    pspeCompleted,
-                    /*nonMSDTC = */true,
-                    tx,
-                    /*spcResponse=*/TransactionStatus.Committed,
-                    /*expectRejection=*/false
-                );
+                pspe = (NonMSDTCPromoterEnlistment)
+                    CreatePSPEEnlistment(
+                        NonMsdtcPromoterTests.PromoterType1,
+                        NonMsdtcPromoterTests.PromotedToken1,
+                        pspeCompleted,
+                        /*nonMSDTC = */true,
+                        tx,
+                        /*spcResponse=*/TransactionStatus.Committed,
+                        /*expectRejection=*/false
+                    );
 
                 if (promote)
                 {
@@ -2027,15 +2032,16 @@ namespace System.Transactions.Tests
                     );
                 };
 
-                pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(
-                    NonMsdtcPromoterTests.PromoterType1,
-                    NonMsdtcPromoterTests.PromotedToken1,
-                    pspeCompleted,
-                    /*nonMSDTC = */true,
-                    tx,
-                    /*spcResponse=*/TransactionStatus.Committed,
-                    /*expectRejection=*/false
-                );
+                pspe = (NonMSDTCPromoterEnlistment)
+                    CreatePSPEEnlistment(
+                        NonMsdtcPromoterTests.PromoterType1,
+                        NonMsdtcPromoterTests.PromotedToken1,
+                        pspeCompleted,
+                        /*nonMSDTC = */true,
+                        tx,
+                        /*spcResponse=*/TransactionStatus.Committed,
+                        /*expectRejection=*/false
+                    );
 
                 tx.TransactionCompleted += delegate(
                     object sender,
@@ -2116,15 +2122,16 @@ namespace System.Transactions.Tests
                 {
                     Assert.Equal(Guid.Empty, TxPromoterType(Transaction.Current));
 
-                    pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(
-                        NonMsdtcPromoterTests.PromoterType1,
-                        NonMsdtcPromoterTests.PromotedToken1,
-                        pspeCompleted,
-                        /*nonMSDTC = */true,
-                        /*tx = */null,
-                        /*spcResponse=*/TransactionStatus.Committed,
-                        /*expectRejection=*/false
-                    );
+                    pspe = (NonMSDTCPromoterEnlistment)
+                        CreatePSPEEnlistment(
+                            NonMsdtcPromoterTests.PromoterType1,
+                            NonMsdtcPromoterTests.PromotedToken1,
+                            pspeCompleted,
+                            /*nonMSDTC = */true,
+                            /*tx = */null,
+                            /*spcResponse=*/TransactionStatus.Committed,
+                            /*expectRejection=*/false
+                        );
 
                     Assert.Equal(
                         NonMsdtcPromoterTests.PromoterType1,
@@ -2212,21 +2219,22 @@ namespace System.Transactions.Tests
             {
                 using (TransactionScope ts = new TransactionScope())
                 {
-                    pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(
-                        NonMsdtcPromoterTests.PromoterType1,
-                        NonMsdtcPromoterTests.PromotedToken1,
-                        pspeCompleted,
-                        /*nonMSDTC = */true,
-                        /*tx = */null,
-                        /*spcResponse=*/TransactionStatus.Committed,
-                        /*expectRejection=*/false,
-                        /*comparePromotedToken=*/false,
-                        /*failInitialize=*/true,
-                        /*failPromote=*/false,
-                        /*failSPC=*/false,
-                        /*failGetPromoterType=*/false,
-                        /*failGetId=*/false
-                    );
+                    pspe = (NonMSDTCPromoterEnlistment)
+                        CreatePSPEEnlistment(
+                            NonMsdtcPromoterTests.PromoterType1,
+                            NonMsdtcPromoterTests.PromotedToken1,
+                            pspeCompleted,
+                            /*nonMSDTC = */true,
+                            /*tx = */null,
+                            /*spcResponse=*/TransactionStatus.Committed,
+                            /*expectRejection=*/false,
+                            /*comparePromotedToken=*/false,
+                            /*failInitialize=*/true,
+                            /*failPromote=*/false,
+                            /*failSPC=*/false,
+                            /*failGetPromoterType=*/false,
+                            /*failGetId=*/false
+                        );
                     bool shouldNotBeExecuted = true;
                     Assert.False(shouldNotBeExecuted);
                 }
@@ -2247,21 +2255,22 @@ namespace System.Transactions.Tests
             {
                 using (TransactionScope ts = new TransactionScope())
                 {
-                    pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(
-                        NonMsdtcPromoterTests.PromoterType1,
-                        NonMsdtcPromoterTests.PromotedToken1,
-                        pspeCompleted,
-                        /*nonMSDTC = */true,
-                        /*tx = */null,
-                        /*spcResponse=*/TransactionStatus.Committed,
-                        /*expectRejection=*/false,
-                        /*comparePromotedToken=*/false,
-                        /*failInitialize=*/false,
-                        /*failPromote=*/true,
-                        /*failSPC=*/false,
-                        /*failGetPromoterType=*/false,
-                        /*failGetId=*/false
-                    );
+                    pspe = (NonMSDTCPromoterEnlistment)
+                        CreatePSPEEnlistment(
+                            NonMsdtcPromoterTests.PromoterType1,
+                            NonMsdtcPromoterTests.PromotedToken1,
+                            pspeCompleted,
+                            /*nonMSDTC = */true,
+                            /*tx = */null,
+                            /*spcResponse=*/TransactionStatus.Committed,
+                            /*expectRejection=*/false,
+                            /*comparePromotedToken=*/false,
+                            /*failInitialize=*/false,
+                            /*failPromote=*/true,
+                            /*failSPC=*/false,
+                            /*failGetPromoterType=*/false,
+                            /*failGetId=*/false
+                        );
 
                     Promote(testCaseDescription, NonMsdtcPromoterTests.PromotedToken1);
                     ts.Complete();
@@ -2289,21 +2298,22 @@ namespace System.Transactions.Tests
             {
                 using (TransactionScope ts = new TransactionScope())
                 {
-                    pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(
-                        NonMsdtcPromoterTests.PromoterType1,
-                        NonMsdtcPromoterTests.PromotedToken1,
-                        pspeCompleted,
-                        /*nonMSDTC = */true,
-                        /*tx = */null,
-                        /*spcResponse=*/TransactionStatus.Committed,
-                        /*expectRejection=*/false,
-                        /*comparePromotedToken=*/false,
-                        /*failInitialize=*/false,
-                        /*failPromote=*/false,
-                        /*failSPC=*/true,
-                        /*failGetPromoterType=*/false,
-                        /*failGetId=*/false
-                    );
+                    pspe = (NonMSDTCPromoterEnlistment)
+                        CreatePSPEEnlistment(
+                            NonMsdtcPromoterTests.PromoterType1,
+                            NonMsdtcPromoterTests.PromotedToken1,
+                            pspeCompleted,
+                            /*nonMSDTC = */true,
+                            /*tx = */null,
+                            /*spcResponse=*/TransactionStatus.Committed,
+                            /*expectRejection=*/false,
+                            /*comparePromotedToken=*/false,
+                            /*failInitialize=*/false,
+                            /*failPromote=*/false,
+                            /*failSPC=*/true,
+                            /*failGetPromoterType=*/false,
+                            /*failGetId=*/false
+                        );
 
                     Promote(testCaseDescription, NonMsdtcPromoterTests.PromotedToken1);
                     ts.Complete();
@@ -2359,21 +2369,22 @@ namespace System.Transactions.Tests
                         )
                 );
 
-                pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(
-                    NonMsdtcPromoterTests.PromoterType1,
-                    NonMsdtcPromoterTests.PromotedToken1,
-                    pspeCompleted,
-                    /*nonMSDTC = */true,
-                    /*tx = */null,
-                    /*spcResponse=*/TransactionStatus.Committed,
-                    /*expectRejection=*/false,
-                    /*comparePromotedToken=*/false,
-                    /*failInitialize=*/false,
-                    /*failPromote=*/false,
-                    /*failSPC=*/false,
-                    /*failGetPromoterType=*/false,
-                    /*failGetId=*/false
-                );
+                pspe = (NonMSDTCPromoterEnlistment)
+                    CreatePSPEEnlistment(
+                        NonMsdtcPromoterTests.PromoterType1,
+                        NonMsdtcPromoterTests.PromotedToken1,
+                        pspeCompleted,
+                        /*nonMSDTC = */true,
+                        /*tx = */null,
+                        /*spcResponse=*/TransactionStatus.Committed,
+                        /*expectRejection=*/false,
+                        /*comparePromotedToken=*/false,
+                        /*failInitialize=*/false,
+                        /*failPromote=*/false,
+                        /*failSPC=*/false,
+                        /*failGetPromoterType=*/false,
+                        /*failGetId=*/false
+                    );
 
                 Trace("After EnlistPromotable");
                 ex = Assert.ThrowsAny<Exception>(
@@ -2428,22 +2439,23 @@ namespace System.Transactions.Tests
             {
                 using (TransactionScope ts = new TransactionScope())
                 {
-                    pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(
-                        NonMsdtcPromoterTests.PromoterType1,
-                        NonMsdtcPromoterTests.PromotedToken1,
-                        pspeCompleted,
-                        /*nonMSDTC = */true,
-                        /*tx = */null,
-                        /*spcResponse=*/TransactionStatus.Committed,
-                        /*expectRejection=*/false,
-                        /*comparePromotedToken=*/false,
-                        /*failInitialize=*/false,
-                        /*failPromote=*/false,
-                        /*failSPC=*/false,
-                        /*failGetPromoterType=*/false,
-                        /*failGetId=*/false,
-                        /*incorrectNotificationObjectToSetDistributedTransactionId=*/true
-                    );
+                    pspe = (NonMSDTCPromoterEnlistment)
+                        CreatePSPEEnlistment(
+                            NonMsdtcPromoterTests.PromoterType1,
+                            NonMsdtcPromoterTests.PromotedToken1,
+                            pspeCompleted,
+                            /*nonMSDTC = */true,
+                            /*tx = */null,
+                            /*spcResponse=*/TransactionStatus.Committed,
+                            /*expectRejection=*/false,
+                            /*comparePromotedToken=*/false,
+                            /*failInitialize=*/false,
+                            /*failPromote=*/false,
+                            /*failSPC=*/false,
+                            /*failGetPromoterType=*/false,
+                            /*failGetId=*/false,
+                            /*incorrectNotificationObjectToSetDistributedTransactionId=*/true
+                        );
 
                     Promote(testCaseDescription, NonMsdtcPromoterTests.PromotedToken1);
 

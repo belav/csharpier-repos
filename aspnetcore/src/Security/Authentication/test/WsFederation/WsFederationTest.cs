@@ -432,15 +432,17 @@ public class WsFederationTest
                                                 OnSecurityTokenValidated = context =>
                                                 {
                                                     Assert.True(
-                                                        (bool)context.HttpContext.Items[
-                                                            "MessageReceived"
-                                                        ],
+                                                        (bool)
+                                                            context.HttpContext.Items[
+                                                                "MessageReceived"
+                                                            ],
                                                         "MessageReceived notification not invoked"
                                                     );
                                                     Assert.True(
-                                                        (bool)context.HttpContext.Items[
-                                                            "SecurityTokenReceived"
-                                                        ],
+                                                        (bool)
+                                                            context.HttpContext.Items[
+                                                                "SecurityTokenReceived"
+                                                            ],
                                                         "SecurityTokenReceived notification not invoked"
                                                     );
 

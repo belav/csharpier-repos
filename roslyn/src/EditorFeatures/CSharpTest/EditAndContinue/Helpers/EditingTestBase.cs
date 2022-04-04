@@ -212,9 +212,8 @@ namespace System.Runtime.CompilerServices { class CreateNewOnMetadataUpdateAttri
 
             tree.GetDiagnostics().Verify();
 
-            var declaration = (BaseMethodDeclarationSyntax)(
-                (ClassDeclarationSyntax)((CompilationUnitSyntax)root).Members[0]
-            ).Members[0];
+            var declaration = (BaseMethodDeclarationSyntax)
+                ((ClassDeclarationSyntax)((CompilationUnitSyntax)root).Members[0]).Members[0];
 
             // We need to preserve the parent node to allow detection of state machine methods in the analyzer.
             // If we are not testing a state machine method we only use the body to avoid updating positions in all existing tests.
@@ -261,14 +260,16 @@ namespace System.Runtime.CompilerServices { class CreateNewOnMetadataUpdateAttri
             bool preserveLocalVariables
         )
         {
-            var decl1 = (MethodDeclarationSyntax)(
-                (ClassDeclarationSyntax)((CompilationUnitSyntax)edits.Match.OldRoot).Members[0]
-            ).Members[0];
+            var decl1 = (MethodDeclarationSyntax)
+                (
+                    (ClassDeclarationSyntax)((CompilationUnitSyntax)edits.Match.OldRoot).Members[0]
+                ).Members[0];
             var body1 = ((MethodDeclarationSyntax)SyntaxFactory.SyntaxTree(decl1).GetRoot()).Body;
 
-            var decl2 = (MethodDeclarationSyntax)(
-                (ClassDeclarationSyntax)((CompilationUnitSyntax)edits.Match.NewRoot).Members[0]
-            ).Members[0];
+            var decl2 = (MethodDeclarationSyntax)
+                (
+                    (ClassDeclarationSyntax)((CompilationUnitSyntax)edits.Match.NewRoot).Members[0]
+                ).Members[0];
             var body2 = ((MethodDeclarationSyntax)SyntaxFactory.SyntaxTree(decl2).GetRoot()).Body;
 
             var diagnostics = new ArrayBuilder<RudeEditDiagnostic>();

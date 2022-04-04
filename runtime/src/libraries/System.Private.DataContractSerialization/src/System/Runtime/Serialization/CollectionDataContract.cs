@@ -1047,10 +1047,11 @@ namespace System.Runtime.Serialization
                                 var buildIncrementCollectionCountDelegate =
                                     GetBuildIncrementCollectionCountGenericDelegate(ItemType);
                                 _incrementCollectionCountDelegate =
-                                    (IncrementCollectionCountDelegate)buildIncrementCollectionCountDelegate.Invoke(
-                                        null,
-                                        Array.Empty<object>()
-                                    )!;
+                                    (IncrementCollectionCountDelegate)
+                                        buildIncrementCollectionCountDelegate.Invoke(
+                                            null,
+                                            Array.Empty<object>()
+                                        )!;
                             }
                             break;
                         case CollectionKind.GenericDictionary:
@@ -1063,10 +1064,11 @@ namespace System.Runtime.Serialization
                                         )
                                     );
                                 _incrementCollectionCountDelegate =
-                                    (IncrementCollectionCountDelegate)buildIncrementCollectionCountDelegate.Invoke(
-                                        null,
-                                        Array.Empty<object>()
-                                    )!;
+                                    (IncrementCollectionCountDelegate)
+                                        buildIncrementCollectionCountDelegate.Invoke(
+                                            null,
+                                            Array.Empty<object>()
+                                        )!;
                             }
                             break;
                         default:
@@ -1139,10 +1141,11 @@ namespace System.Runtime.Serialization
                         MethodInfo buildCreateGenericDictionaryEnumerator =
                             GetBuildCreateGenericDictionaryEnumeratorGenericMethod(keyValueTypes);
                         _createGenericDictionaryEnumeratorDelegate =
-                            (CreateGenericDictionaryEnumeratorDelegate)buildCreateGenericDictionaryEnumerator.Invoke(
-                                null,
-                                Array.Empty<object>()
-                            )!;
+                            (CreateGenericDictionaryEnumeratorDelegate)
+                                buildCreateGenericDictionaryEnumerator.Invoke(
+                                    null,
+                                    Array.Empty<object>()
+                                )!;
                     }
 
                     enumerator = _createGenericDictionaryEnumeratorDelegate(enumerator);

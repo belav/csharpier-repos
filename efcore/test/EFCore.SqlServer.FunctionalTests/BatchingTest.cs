@@ -238,9 +238,8 @@ namespace Microsoft.EntityFrameworkCore
 
             void RemoveAndAddPosts(Blog blog)
             {
-                using var context = (BloggingContext)Fixture.CreateContext(
-                    useConnectionString: true
-                );
+                using var context = (BloggingContext)
+                    Fixture.CreateContext(useConnectionString: true);
 
                 context.Attach(blog);
                 blog.Posts.Clear();
@@ -292,9 +291,8 @@ namespace Microsoft.EntityFrameworkCore
                 owners,
                 owner =>
                 {
-                    using var context = (BloggingContext)Fixture.CreateContext(
-                        useConnectionString: true
-                    );
+                    using var context = (BloggingContext)
+                        Fixture.CreateContext(useConnectionString: true);
 
                     context.RemoveRange(context.Blogs.Where(b => b.OwnerId == owner.Id));
 

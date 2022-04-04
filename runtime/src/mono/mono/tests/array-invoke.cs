@@ -19,15 +19,16 @@ namespace Test
         public static int Main(string[] args)
         {
             Foo f = new Foo();
-            MethodInfo m = (MethodInfo)(
-                f.GetType()
-                    .FindMembers(
-                        MemberTypes.All,
-                        BindingFlags.Public | BindingFlags.Static,
-                        Type.FilterName,
-                        "Sum"
-                    )
-            )[0];
+            MethodInfo m = (MethodInfo)
+                (
+                    f.GetType()
+                        .FindMembers(
+                            MemberTypes.All,
+                            BindingFlags.Public | BindingFlags.Static,
+                            Type.FilterName,
+                            "Sum"
+                        )
+                )[0];
             int[] numbers = new int[3] { 4, 5, 6 };
             object[] parms = new object[1] { numbers };
             int sum = (int)m.Invoke(f, parms);

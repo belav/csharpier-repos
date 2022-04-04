@@ -48,9 +48,8 @@ namespace System.Configuration
                 string[] groups = group.Split(BaseConfigurationRecord.s_configPathSeparatorParams);
                 foreach (string groupPart in groups)
                 {
-                    SectionUpdates sectionUpdatesChild = (SectionUpdates)sectionUpdates._groups[
-                        groupPart
-                    ];
+                    SectionUpdates sectionUpdatesChild = (SectionUpdates)
+                        sectionUpdates._groups[groupPart];
                     if (sectionUpdatesChild == null)
                     {
                         sectionUpdatesChild = new SectionUpdates(groupPart);

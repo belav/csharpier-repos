@@ -247,10 +247,11 @@ class C
 
             Assert.IsType<RetargetingNamedTypeSymbol>(
                 (
-                    (RetargetingParameterSymbol)retargetingNamespace
-                        .GetMember<NamedTypeSymbol>("C")
-                        .GetMember<RetargetingMethodSymbol>("M")
-                        .Parameters[0]
+                    (RetargetingParameterSymbol)
+                        retargetingNamespace
+                            .GetMember<NamedTypeSymbol>("C")
+                            .GetMember<RetargetingMethodSymbol>("M")
+                            .Parameters[0]
                 ).MarshallingInformation.TryGetSafeArrayElementUserDefinedSubtype()
             );
         }
@@ -858,10 +859,8 @@ public class C<T> where T : int
             var compilation = CreateCompilation(code).VerifyDiagnostics();
             var sourceAssembly = (SourceAssemblySymbol)compilation.Assembly;
 
-            SourceTypeParameterSymbol sourceTypeParameter =
-                (SourceTypeParameterSymbol)sourceAssembly.GlobalNamespace
-                    .GetTypeMember("Test")
-                    .TypeParameters.Single();
+            SourceTypeParameterSymbol sourceTypeParameter = (SourceTypeParameterSymbol)
+                sourceAssembly.GlobalNamespace.GetTypeMember("Test").TypeParameters.Single();
             Assert.Equal(isUnmanaged, sourceTypeParameter.HasUnmanagedTypeConstraint);
 
             var retargetingAssembly = new RetargetingAssemblySymbol(
@@ -871,9 +870,10 @@ public class C<T> where T : int
             retargetingAssembly.SetCorLibrary(sourceAssembly.CorLibrary);
 
             RetargetingTypeParameterSymbol retargetingTypeParameter =
-                (RetargetingTypeParameterSymbol)retargetingAssembly.GlobalNamespace
-                    .GetTypeMember("Test")
-                    .TypeParameters.Single();
+                (RetargetingTypeParameterSymbol)
+                    retargetingAssembly.GlobalNamespace
+                        .GetTypeMember("Test")
+                        .TypeParameters.Single();
             Assert.Equal(isUnmanaged, retargetingTypeParameter.HasUnmanagedTypeConstraint);
         }
 

@@ -133,9 +133,8 @@ public class HtmlFormattableString : IHtmlContent
             //
             // First check for an ICustomFormatter - if the IFormatProvider is a CultureInfo, then it's likely
             // that ICustomFormatter will be null.
-            var customFormatter = (ICustomFormatter?)_formatProvider.GetFormat(
-                typeof(ICustomFormatter)
-            );
+            var customFormatter = (ICustomFormatter?)
+                _formatProvider.GetFormat(typeof(ICustomFormatter));
             if (customFormatter != null)
             {
                 var result = customFormatter.Format(format, arg, _formatProvider);

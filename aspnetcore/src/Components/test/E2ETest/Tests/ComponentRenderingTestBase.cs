@@ -483,9 +483,10 @@ public abstract class ComponentRenderingTestBase
 
         // A local helper that gets window.PageYOffset
         long getPageYOffset() =>
-            (long)((IJavaScriptExecutor)Browser).ExecuteScript(
-                "return Math.round(window.pageYOffset)"
-            );
+            (long)
+                ((IJavaScriptExecutor)Browser).ExecuteScript(
+                    "return Math.round(window.pageYOffset)"
+                );
     }
 
     [Theory]

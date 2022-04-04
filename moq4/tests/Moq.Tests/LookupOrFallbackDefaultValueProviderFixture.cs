@@ -200,9 +200,8 @@ namespace Moq.Tests
             provider.Register(typeof(float), (_, __) => expectedFloatResult);
             provider.Register(typeof(string), (_, __) => expectedStringResult);
 
-            var actual = ((int, float, string))provider.GetDefaultValue(
-                typeof(ValueTuple<int, float, string>)
-            );
+            var actual = ((int, float, string))
+                provider.GetDefaultValue(typeof(ValueTuple<int, float, string>));
 
             Assert.Equal(expectedIntResult, actual.Item1);
             Assert.Equal(expectedFloatResult, actual.Item2);

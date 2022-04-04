@@ -92,8 +92,8 @@ namespace System.ComponentModel.Tests
             );
             VerifyArraysEqual<SomeEnum>(new SomeEnum[1] { SomeEnum.Sub }, actual);
 
-            var actualInstanceDescriptor =
-                (InstanceDescriptor)EnumConverterTests.s_someEnumConverter.ConvertTo(
+            var actualInstanceDescriptor = (InstanceDescriptor)
+                EnumConverterTests.s_someEnumConverter.ConvertTo(
                     SomeEnum.Add,
                     typeof(InstanceDescriptor)
                 );
@@ -137,8 +137,8 @@ namespace System.ComponentModel.Tests
                 actual
             );
 
-            var actualInstanceDescriptor =
-                (InstanceDescriptor)EnumConverterTests.s_someFlagsEnumConverter.ConvertTo(
+            var actualInstanceDescriptor = (InstanceDescriptor)
+                EnumConverterTests.s_someFlagsEnumConverter.ConvertTo(
                     SomeFlagsEnum.Option1 | SomeFlagsEnum.Option2,
                     typeof(InstanceDescriptor)
                 );

@@ -2141,18 +2141,16 @@ namespace Microsoft.Cci
                 IMethodReference entryPoint = module.PEEntryPoint;
                 entryPointHandle =
                     entryPoint != null
-                        ? (MethodDefinitionHandle)GetMethodHandle(
-                              (IMethodDefinition)entryPoint.AsDefinition(Context)
-                          )
+                        ? (MethodDefinitionHandle)
+                              GetMethodHandle((IMethodDefinition)entryPoint.AsDefinition(Context))
                         : default(MethodDefinitionHandle);
 
                 // debug entry point may be different from PE entry point, it may also be set for libraries
                 IMethodReference debugEntryPoint = module.DebugEntryPoint;
                 if (debugEntryPoint != null && debugEntryPoint != entryPoint)
                 {
-                    debugEntryPointHandle = (MethodDefinitionHandle)GetMethodHandle(
-                        (IMethodDefinition)debugEntryPoint.AsDefinition(Context)
-                    );
+                    debugEntryPointHandle = (MethodDefinitionHandle)
+                        GetMethodHandle((IMethodDefinition)debugEntryPoint.AsDefinition(Context));
                 }
                 else
                 {
@@ -3708,8 +3706,8 @@ namespace Microsoft.Cci
                                 {
                                     case LiteralMethodDefinitionToken:
                                         // Crash the compiler if pseudo token fails to resolve to a MethodDefinitionHandle.
-                                        var handle =
-                                            (MethodDefinitionHandle)ResolveEntityHandleFromPseudoToken(
+                                        var handle = (MethodDefinitionHandle)
+                                            ResolveEntityHandleFromPseudoToken(
                                                 pseudoToken & 0x00ffffff
                                             );
                                         token = MetadataTokens.GetToken(handle) & 0x00ffffff;

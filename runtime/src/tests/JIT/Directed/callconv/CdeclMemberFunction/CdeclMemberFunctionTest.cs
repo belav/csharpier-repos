@@ -198,10 +198,8 @@ unsafe class CdeclMemberFunctionTest
         {
             if (unmanagedCallersOnlyVtable == null)
             {
-                unmanagedCallersOnlyVtable =
-                    (CdeclMemberFunctionNative.C.VtableLayout*)Marshal.AllocHGlobal(
-                        sizeof(CdeclMemberFunctionNative.C.VtableLayout)
-                    );
+                unmanagedCallersOnlyVtable = (CdeclMemberFunctionNative.C.VtableLayout*)
+                    Marshal.AllocHGlobal(sizeof(CdeclMemberFunctionNative.C.VtableLayout));
                 unmanagedCallersOnlyVtable->getSize = &GetSize;
                 unmanagedCallersOnlyVtable->getWidth = &GetWidth;
                 unmanagedCallersOnlyVtable->getHeightAsInt = &GetHeightAsInt;

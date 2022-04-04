@@ -226,10 +226,8 @@ internal sealed class AddResponseTypeAttributeCodeFixAction : CodeAction
         IList<DeclaredApiResponseMetadata> declaredResponseMetadata
     )
     {
-        var operation = (IMethodBodyBaseOperation)context.SemanticModel.GetOperation(
-            context.MethodSyntax,
-            context.CancellationToken
-        );
+        var operation = (IMethodBodyBaseOperation)
+            context.SemanticModel.GetOperation(context.MethodSyntax, context.CancellationToken);
 
         if (
             !ActualApiResponseMetadataFactory.TryGetActualResponseMetadata(

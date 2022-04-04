@@ -73,19 +73,21 @@ namespace System.ComponentModel.TypeConverterTests
         {
             Assert.Equal(
                 _imageFmt,
-                (ImageFormat)_imgFmtConv.ConvertFrom(
-                    null,
-                    CultureInfo.InvariantCulture,
-                    ImageFormat.Bmp.ToString()
-                )
+                (ImageFormat)
+                    _imgFmtConv.ConvertFrom(
+                        null,
+                        CultureInfo.InvariantCulture,
+                        ImageFormat.Bmp.ToString()
+                    )
             );
             Assert.Equal(
                 _imageFmt,
-                (ImageFormat)_imgFmtConvFrmTD.ConvertFrom(
-                    null,
-                    CultureInfo.InvariantCulture,
-                    ImageFormat.Bmp.ToString()
-                )
+                (ImageFormat)
+                    _imgFmtConvFrmTD.ConvertFrom(
+                        null,
+                        CultureInfo.InvariantCulture,
+                        ImageFormat.Bmp.ToString()
+                    )
             );
         }
 
@@ -136,11 +138,8 @@ namespace System.ComponentModel.TypeConverterTests
 
         private ImageFormat ConvertFromName(string imgFormatName)
         {
-            return (ImageFormat)_imgFmtConvFrmTD.ConvertFrom(
-                null,
-                CultureInfo.InvariantCulture,
-                imgFormatName
-            );
+            return (ImageFormat)
+                _imgFmtConvFrmTD.ConvertFrom(null, CultureInfo.InvariantCulture, imgFormatName);
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
@@ -214,23 +213,25 @@ namespace System.ComponentModel.TypeConverterTests
         {
             Assert.Equal(
                 _imageFmtStr,
-                (string)_imgFmtConv.ConvertTo(
-                    null,
-                    CultureInfo.InvariantCulture,
-                    _imageFmt,
-                    typeof(string)
-                )
+                (string)
+                    _imgFmtConv.ConvertTo(
+                        null,
+                        CultureInfo.InvariantCulture,
+                        _imageFmt,
+                        typeof(string)
+                    )
             );
             Assert.Equal(_imageFmtStr, (string)_imgFmtConv.ConvertTo(_imageFmt, typeof(string)));
 
             Assert.Equal(
                 _imageFmtStr,
-                (string)_imgFmtConvFrmTD.ConvertTo(
-                    null,
-                    CultureInfo.InvariantCulture,
-                    _imageFmt,
-                    typeof(string)
-                )
+                (string)
+                    _imgFmtConvFrmTD.ConvertTo(
+                        null,
+                        CultureInfo.InvariantCulture,
+                        _imageFmt,
+                        typeof(string)
+                    )
             );
             Assert.Equal(
                 _imageFmtStr,
@@ -240,23 +241,25 @@ namespace System.ComponentModel.TypeConverterTests
             Assert.Equal(string.Empty, (string)_imgFmtConv.ConvertTo(null, typeof(string)));
             Assert.Equal(
                 string.Empty,
-                (string)_imgFmtConv.ConvertTo(
-                    null,
-                    CultureInfo.CreateSpecificCulture("ru-RU"),
-                    null,
-                    typeof(string)
-                )
+                (string)
+                    _imgFmtConv.ConvertTo(
+                        null,
+                        CultureInfo.CreateSpecificCulture("ru-RU"),
+                        null,
+                        typeof(string)
+                    )
             );
 
             Assert.Equal(string.Empty, (string)_imgFmtConvFrmTD.ConvertTo(null, typeof(string)));
             Assert.Equal(
                 string.Empty,
-                (string)_imgFmtConvFrmTD.ConvertTo(
-                    null,
-                    CultureInfo.CreateSpecificCulture("de-DE"),
-                    null,
-                    typeof(string)
-                )
+                (string)
+                    _imgFmtConvFrmTD.ConvertTo(
+                        null,
+                        CultureInfo.CreateSpecificCulture("de-DE"),
+                        null,
+                        typeof(string)
+                    )
             );
         }
 

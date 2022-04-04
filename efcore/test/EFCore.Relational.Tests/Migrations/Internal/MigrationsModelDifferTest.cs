@@ -11490,9 +11490,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                 },
                 operations =>
                 {
-                    var dependentTableCreation = (CreateTableOperation)operations.Single(
-                        o => o is CreateTableOperation ct && ct.Name == "Dependent"
-                    );
+                    var dependentTableCreation = (CreateTableOperation)
+                        operations.Single(
+                            o => o is CreateTableOperation ct && ct.Name == "Dependent"
+                        );
 
                     Assert.Collection(
                         dependentTableCreation.Columns,

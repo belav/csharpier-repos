@@ -548,10 +548,8 @@ namespace Castle.DynamicProxy
                 throw new ArgumentNullException(nameof(assembly));
             }
 
-            var cacheMappings = (CacheMappingsAttribute[])assembly.GetCustomAttributes(
-                typeof(CacheMappingsAttribute),
-                false
-            );
+            var cacheMappings = (CacheMappingsAttribute[])
+                assembly.GetCustomAttributes(typeof(CacheMappingsAttribute), false);
 
             if (cacheMappings.Length == 0)
             {

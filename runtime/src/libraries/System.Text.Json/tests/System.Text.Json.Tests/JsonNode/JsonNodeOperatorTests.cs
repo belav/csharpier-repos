@@ -125,15 +125,8 @@ namespace System.Text.Json.Nodes.Tests
             );
             Assert.Equal(
                 new DateTimeOffset(2019, 1, 30, 12, 1, 2, new TimeSpan(1, 0, 0)),
-                (DateTimeOffset)(JsonNode)new DateTimeOffset(
-                    2019,
-                    1,
-                    30,
-                    12,
-                    1,
-                    2,
-                    new TimeSpan(1, 0, 0)
-                )
+                (DateTimeOffset)
+                    (JsonNode)new DateTimeOffset(2019, 1, 30, 12, 1, 2, new TimeSpan(1, 0, 0))
             );
             Assert.Equal(
                 new Guid("1B33498A-7B7D-4DDA-9C13-F6AA4AB449A6"),
@@ -184,15 +177,8 @@ namespace System.Text.Json.Nodes.Tests
                 (DateTime?)(JsonValue)new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc)
             );
             Assert.NotNull(
-                (DateTimeOffset?)(JsonValue)new DateTimeOffset(
-                    2019,
-                    1,
-                    30,
-                    12,
-                    1,
-                    2,
-                    new TimeSpan(1, 0, 0)
-                )
+                (DateTimeOffset?)
+                    (JsonValue)new DateTimeOffset(2019, 1, 30, 12, 1, 2, new TimeSpan(1, 0, 0))
             );
             Assert.NotNull((Guid?)(JsonValue)new Guid("1B33498A-7B7D-4DDA-9C13-F6AA4AB449A6"));
         }
@@ -239,15 +225,9 @@ namespace System.Text.Json.Nodes.Tests
                 (JsonValue?)(DateTime?)new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc)
             );
             Assert.NotNull(
-                (JsonValue?)(DateTimeOffset?)new DateTimeOffset(
-                    2019,
-                    1,
-                    30,
-                    12,
-                    1,
-                    2,
-                    new TimeSpan(1, 0, 0)
-                )
+                (JsonValue?)
+                    (DateTimeOffset?)
+                        new DateTimeOffset(2019, 1, 30, 12, 1, 2, new TimeSpan(1, 0, 0))
             );
             Assert.NotNull((JsonValue?)(Guid?)new Guid("1B33498A-7B7D-4DDA-9C13-F6AA4AB449A6"));
         }

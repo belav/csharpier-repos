@@ -48,9 +48,8 @@ namespace Internal.Cryptography.Pal
             }
             else if (typeof(T) == typeof(ECDiffieHellman))
             {
-                return (T)(object)(
-                    X509Pal.Instance.DecodeECDiffieHellmanPublicKey(certificate.Pal)
-                );
+                return (T)
+                    (object)(X509Pal.Instance.DecodeECDiffieHellmanPublicKey(certificate.Pal));
             }
 
             Debug.Fail("Expected GetExpectedOidValue() to have thrown before we got here.");

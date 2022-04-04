@@ -514,10 +514,11 @@ namespace R2RDump
                 mi.Name = method.SignatureString;
                 mi.HotRVA = (uint)method.RuntimeFunctions[0].StartAddress;
                 mi.HotLength = (uint)method.RuntimeFunctions[0].Size;
-                mi.MethodToken = (uint)MetadataTokens.GetToken(
-                    method.ComponentReader.MetadataReader,
-                    method.MethodHandle
-                );
+                mi.MethodToken = (uint)
+                    MetadataTokens.GetToken(
+                        method.ComponentReader.MetadataReader,
+                        method.MethodHandle
+                    );
                 mi.AssemblyName = method.ComponentReader.MetadataReader.GetString(
                     method.ComponentReader.MetadataReader.GetAssemblyDefinition().Name
                 );

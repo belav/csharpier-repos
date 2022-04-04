@@ -78,9 +78,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns>The database model.</returns>
         public static IRelationalModel GetRelationalModel(this IModel model)
         {
-            var databaseModel = (IRelationalModel?)model.FindRuntimeAnnotationValue(
-                RelationalAnnotationNames.RelationalModel
-            );
+            var databaseModel = (IRelationalModel?)
+                model.FindRuntimeAnnotationValue(RelationalAnnotationNames.RelationalModel);
             if (databaseModel == null)
             {
                 throw new InvalidOperationException(

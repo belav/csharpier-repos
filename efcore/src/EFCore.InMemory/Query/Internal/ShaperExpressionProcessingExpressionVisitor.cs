@@ -182,8 +182,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                         variable = Expression.Parameter(singleResultShaperExpression.Type);
                         _variables.Add(variable);
 
-                        var innerLambda =
-                            (LambdaExpression)singleResultShaperExpression.InnerShaper;
+                        var innerLambda = (LambdaExpression)
+                            singleResultShaperExpression.InnerShaper;
                         var innerShaper = new ShaperExpressionProcessingExpressionVisitor(
                             null,
                             innerLambda.Parameters[0]

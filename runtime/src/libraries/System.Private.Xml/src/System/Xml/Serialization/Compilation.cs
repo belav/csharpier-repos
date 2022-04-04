@@ -119,9 +119,10 @@ namespace System.Xml.Serialization
             {
                 if (_contract == null)
                 {
-                    _contract = (XmlSerializerImplementation)Activator.CreateInstance(
-                        GetTypeFromAssembly(_assembly!, "XmlSerializerContract")
-                    )!;
+                    _contract = (XmlSerializerImplementation)
+                        Activator.CreateInstance(
+                            GetTypeFromAssembly(_assembly!, "XmlSerializerContract")
+                        )!;
                 }
                 return _contract;
             }

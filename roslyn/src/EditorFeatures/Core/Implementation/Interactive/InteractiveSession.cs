@@ -189,10 +189,11 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
                     .ToImmutableArrayOrEmpty()
                     .SelectAsArray(
                         (path, metadataService) =>
-                            (MetadataReference)metadataService.GetReference(
-                                path,
-                                MetadataReferenceProperties.Assembly
-                            ),
+                            (MetadataReference)
+                                metadataService.GetReference(
+                                    path,
+                                    MetadataReferenceProperties.Assembly
+                                ),
                         metadataService
                     );
 
@@ -293,8 +294,8 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
                     .GetRequiredProject(previousSubmissionProjectId)
                     .CompilationOptions!;
 
-                var metadataResolver =
-                    (RuntimeMetadataReferenceResolver)compilationOptions.MetadataReferenceResolver!;
+                var metadataResolver = (RuntimeMetadataReferenceResolver)
+                    compilationOptions.MetadataReferenceResolver!;
                 if (
                     metadataResolver.PathResolver.BaseDirectory != _workingDirectory
                     || !metadataResolver.PathResolver.SearchPaths.SequenceEqual(
@@ -309,8 +310,8 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
                     );
                 }
 
-                var sourceResolver =
-                    (SourceFileResolver)compilationOptions.SourceReferenceResolver!;
+                var sourceResolver = (SourceFileResolver)
+                    compilationOptions.SourceReferenceResolver!;
                 if (
                     sourceResolver.BaseDirectory != _workingDirectory
                     || !sourceResolver.SearchPaths.SequenceEqual(_sourceSearchPaths)

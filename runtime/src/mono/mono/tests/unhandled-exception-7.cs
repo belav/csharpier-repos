@@ -42,10 +42,8 @@ class Driver
         if (Environment.GetEnvironmentVariable("TEST_UNHANDLED_EXCEPTION_HANDLER") != null)
             ad.UnhandledException += (s, e) => { };
 
-        var cd = (CrossDomain)ad.CreateInstanceAndUnwrap(
-            typeof(CrossDomain).Assembly.FullName,
-            "CrossDomain"
-        );
+        var cd = (CrossDomain)
+            ad.CreateInstanceAndUnwrap(typeof(CrossDomain).Assembly.FullName, "CrossDomain");
 
         var action = cd.NewDelegateWithoutTarget();
         var ares = action.BeginInvoke(Callback, null);

@@ -47,10 +47,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
             return new SerializableNamingRule()
             {
                 EnforcementLevel = (
-                    (DiagnosticSeverity)Enum.Parse(
-                        typeof(DiagnosticSeverity),
-                        namingRuleElement.Attribute(nameof(EnforcementLevel)).Value
-                    )
+                    (DiagnosticSeverity)
+                        Enum.Parse(
+                            typeof(DiagnosticSeverity),
+                            namingRuleElement.Attribute(nameof(EnforcementLevel)).Value
+                        )
                 ).ToReportDiagnostic(),
                 NamingStyleID = Guid.Parse(
                     namingRuleElement.Attribute(nameof(NamingStyleID)).Value

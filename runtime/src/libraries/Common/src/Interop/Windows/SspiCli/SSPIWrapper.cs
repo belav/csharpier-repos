@@ -497,11 +497,8 @@ namespace System.Net
                             {
                                 checked
                                 {
-                                    byte* bufferAddress =
-                                        (byte*)Marshal.UnsafeAddrOfPinnedArrayElement(
-                                            buffers[j],
-                                            0
-                                        );
+                                    byte* bufferAddress = (byte*)
+                                        Marshal.UnsafeAddrOfPinnedArrayElement(buffers[j], 0);
                                     if (
                                         (byte*)unmanagedBuffer[i].pvBuffer >= bufferAddress
                                         && (byte*)unmanagedBuffer[i].pvBuffer + iBuffer.size

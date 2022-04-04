@@ -232,9 +232,8 @@ internal partial class HubServerProxyGenerator
             var getProxySemanticModel = _compilation.GetSemanticModel(
                 methodDeclarationSyntax.SyntaxTree
             );
-            var getProxyMethodSymbol = (IMethodSymbol)getProxySemanticModel.GetDeclaredSymbol(
-                methodDeclarationSyntax
-            );
+            var getProxyMethodSymbol = (IMethodSymbol)
+                getProxySemanticModel.GetDeclaredSymbol(methodDeclarationSyntax);
             var getProxyClassSymbol = (INamedTypeSymbol)getProxyMethodSymbol.ContainingSymbol;
 
             // Populate spec with metadata on user-specific get proxy method and class

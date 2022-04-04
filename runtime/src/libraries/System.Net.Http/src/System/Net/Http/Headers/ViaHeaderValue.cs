@@ -147,11 +147,8 @@ namespace System.Net.Http.Headers
         public static ViaHeaderValue Parse(string? input)
         {
             int index = 0;
-            return (ViaHeaderValue)GenericHeaderParser.SingleValueViaParser.ParseValue(
-                input,
-                null,
-                ref index
-            );
+            return (ViaHeaderValue)
+                GenericHeaderParser.SingleValueViaParser.ParseValue(input, null, ref index);
         }
 
         public static bool TryParse(

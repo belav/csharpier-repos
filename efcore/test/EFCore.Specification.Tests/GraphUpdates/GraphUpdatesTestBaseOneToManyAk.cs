@@ -225,22 +225,18 @@ namespace Microsoft.EntityFrameworkCore
                     if (useExistingEntities)
                     {
                         new1 = context.Set<OptionalAk1>().Single(e => e.Id == new1.Id);
-                        new1d = (OptionalAk1Derived)context
-                            .Set<OptionalAk1>()
-                            .Single(e => e.Id == new1d.Id);
-                        new1dd = (OptionalAk1MoreDerived)context
-                            .Set<OptionalAk1>()
-                            .Single(e => e.Id == new1dd.Id);
+                        new1d = (OptionalAk1Derived)
+                            context.Set<OptionalAk1>().Single(e => e.Id == new1d.Id);
+                        new1dd = (OptionalAk1MoreDerived)
+                            context.Set<OptionalAk1>().Single(e => e.Id == new1dd.Id);
                         new2a = context.Set<OptionalAk2>().Single(e => e.Id == new2a.Id);
                         new2b = context.Set<OptionalAk2>().Single(e => e.Id == new2b.Id);
                         new2ca = context.Set<OptionalComposite2>().Single(e => e.Id == new2ca.Id);
                         new2cb = context.Set<OptionalComposite2>().Single(e => e.Id == new2cb.Id);
-                        new2d = (OptionalAk2Derived)context
-                            .Set<OptionalAk2>()
-                            .Single(e => e.Id == new2d.Id);
-                        new2dd = (OptionalAk2MoreDerived)context
-                            .Set<OptionalAk2>()
-                            .Single(e => e.Id == new2dd.Id);
+                        new2d = (OptionalAk2Derived)
+                            context.Set<OptionalAk2>().Single(e => e.Id == new2d.Id);
+                        new2dd = (OptionalAk2MoreDerived)
+                            context.Set<OptionalAk2>().Single(e => e.Id == new2dd.Id);
                     }
                     else
                     {
@@ -564,22 +560,18 @@ namespace Microsoft.EntityFrameworkCore
                     if (useExistingEntities)
                     {
                         new1 = context.Set<RequiredAk1>().Single(e => e.Id == new1.Id);
-                        new1d = (RequiredAk1Derived)context
-                            .Set<RequiredAk1>()
-                            .Single(e => e.Id == new1d.Id);
-                        new1dd = (RequiredAk1MoreDerived)context
-                            .Set<RequiredAk1>()
-                            .Single(e => e.Id == new1dd.Id);
+                        new1d = (RequiredAk1Derived)
+                            context.Set<RequiredAk1>().Single(e => e.Id == new1d.Id);
+                        new1dd = (RequiredAk1MoreDerived)
+                            context.Set<RequiredAk1>().Single(e => e.Id == new1dd.Id);
                         new2a = context.Set<RequiredAk2>().Single(e => e.Id == new2a.Id);
                         new2b = context.Set<RequiredAk2>().Single(e => e.Id == new2b.Id);
                         new2ca = context.Set<RequiredComposite2>().Single(e => e.Id == new2ca.Id);
                         new2cb = context.Set<RequiredComposite2>().Single(e => e.Id == new2cb.Id);
-                        new2d = (RequiredAk2Derived)context
-                            .Set<RequiredAk2>()
-                            .Single(e => e.Id == new2d.Id);
-                        new2dd = (RequiredAk2MoreDerived)context
-                            .Set<RequiredAk2>()
-                            .Single(e => e.Id == new2dd.Id);
+                        new2d = (RequiredAk2Derived)
+                            context.Set<RequiredAk2>().Single(e => e.Id == new2d.Id);
+                        new2dd = (RequiredAk2MoreDerived)
+                            context.Set<RequiredAk2>().Single(e => e.Id == new2dd.Id);
                     }
                     else
                     {

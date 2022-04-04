@@ -119,9 +119,10 @@ namespace System.Linq.Expressions
                 return typeof(LambdaExpression).GetMethod("Compile", Type.EmptyTypes)!;
             }
 
-            return (MethodInfo)lambdaExpressionType.GetMemberWithSameMetadataDefinitionAs(
-                s_expressionCompileMethodInfo
-            );
+            return (MethodInfo)
+                lambdaExpressionType.GetMemberWithSameMetadataDefinitionAs(
+                    s_expressionCompileMethodInfo
+                );
         }
 
         /// <summary>
@@ -211,9 +212,8 @@ namespace System.Linq.Expressions
 #if FEATURE_COMPILE
             return (TDelegate)(object)Compiler.LambdaCompiler.Compile(this);
 #else
-            return (TDelegate)(object)new Interpreter.LightCompiler()
-                .CompileTop(this)
-                .CreateDelegate();
+            return (TDelegate)
+                (object)new Interpreter.LightCompiler().CompileTop(this).CreateDelegate();
 #endif
         }
 
@@ -227,9 +227,8 @@ namespace System.Linq.Expressions
 #if FEATURE_COMPILE && FEATURE_INTERPRET
             if (preferInterpretation)
             {
-                return (TDelegate)(object)new Interpreter.LightCompiler()
-                    .CompileTop(this)
-                    .CreateDelegate();
+                return (TDelegate)
+                    (object)new Interpreter.LightCompiler().CompileTop(this).CreateDelegate();
             }
 #endif
             return Compile();
@@ -726,10 +725,8 @@ namespace System.Linq.Expressions
 #endif
                 if (delegateType.IsCollectible)
                 {
-                    return (LambdaExpression)create.Invoke(
-                        null,
-                        new object?[] { body, name, tailCall, parameters }
-                    )!;
+                    return (LambdaExpression)
+                        create.Invoke(null, new object?[] { body, name, tailCall, parameters })!;
                 }
 
                 factories[delegateType] = fastPath =
@@ -739,15 +736,16 @@ namespace System.Linq.Expressions
                         bool,
                         ReadOnlyCollection<ParameterExpression>,
                         LambdaExpression
-                    >)create.CreateDelegate(
-                        typeof(Func<
-                            Expression,
-                            string?,
-                            bool,
-                            ReadOnlyCollection<ParameterExpression>,
-                            LambdaExpression
-                        >)
-                    );
+                    >)
+                        create.CreateDelegate(
+                            typeof(Func<
+                                Expression,
+                                string?,
+                                bool,
+                                ReadOnlyCollection<ParameterExpression>,
+                                LambdaExpression
+                            >)
+                        );
             }
 
             return fastPath(body, name, tailCall, parameters);

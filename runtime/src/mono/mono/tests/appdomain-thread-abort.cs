@@ -19,10 +19,8 @@ public class Test1 : MarshalByRefObject
     {
         AppDomain d = AppDomain.CreateDomain("foo2");
 
-        var t2 = (Test2)d.CreateInstanceAndUnwrap(
-            Assembly.GetExecutingAssembly().FullName,
-            "Test2"
-        );
+        var t2 = (Test2)
+            d.CreateInstanceAndUnwrap(Assembly.GetExecutingAssembly().FullName, "Test2");
         try
         {
             t2.Run();
@@ -95,10 +93,8 @@ public static class Tests
 
     public static int test_0_abort_other_indirect()
     {
-        Test test = (Test)domain.CreateInstanceAndUnwrap(
-            typeof(Test).Assembly.FullName,
-            typeof(Test).FullName
-        );
+        Test test = (Test)
+            domain.CreateInstanceAndUnwrap(typeof(Test).Assembly.FullName, typeof(Test).FullName);
         Test testHere = new Test();
 
         if (!RemotingServices.IsTransparentProxy(test))
@@ -127,10 +123,8 @@ public static class Tests
 
     public static int test_0_abort_string()
     {
-        Test test = (Test)domain.CreateInstanceAndUnwrap(
-            typeof(Test).Assembly.FullName,
-            typeof(Test).FullName
-        );
+        Test test = (Test)
+            domain.CreateInstanceAndUnwrap(typeof(Test).Assembly.FullName, typeof(Test).FullName);
 
         if (!RemotingServices.IsTransparentProxy(test))
         {
@@ -184,10 +178,8 @@ public static class Tests
 
     public static int test_0_abort_proxy()
     {
-        Test test = (Test)domain.CreateInstanceAndUnwrap(
-            typeof(Test).Assembly.FullName,
-            typeof(Test).FullName
-        );
+        Test test = (Test)
+            domain.CreateInstanceAndUnwrap(typeof(Test).Assembly.FullName, typeof(Test).FullName);
 
         if (!RemotingServices.IsTransparentProxy(test))
         {
@@ -236,10 +228,8 @@ public static class Tests
 
     public static int test_0_abort_other()
     {
-        Test test = (Test)domain.CreateInstanceAndUnwrap(
-            typeof(Test).Assembly.FullName,
-            typeof(Test).FullName
-        );
+        Test test = (Test)
+            domain.CreateInstanceAndUnwrap(typeof(Test).Assembly.FullName, typeof(Test).FullName);
 
         if (!RemotingServices.IsTransparentProxy(test))
         {
@@ -299,10 +289,8 @@ public static class Tests
             {
                 AppDomain d = AppDomain.CreateDomain("foo");
 
-                var t = (Test1)d.CreateInstanceAndUnwrap(
-                    Assembly.GetExecutingAssembly().FullName,
-                    "Test1"
-                );
+                var t = (Test1)
+                    d.CreateInstanceAndUnwrap(Assembly.GetExecutingAssembly().FullName, "Test1");
                 res = t.Run();
             }
         );

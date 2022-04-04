@@ -1893,40 +1893,44 @@ class C
             );
 
             var p = compilation.GetTypeByMetadataName("Program");
-            var a1 = (IArrayTypeSymbol)p.GetMember<MethodSymbol>("Test1")
-                .GetAttributes()
-                .Single()
-                .ConstructorArguments.Single()
-                .Value;
+            var a1 = (IArrayTypeSymbol)
+                p.GetMember<MethodSymbol>("Test1")
+                    .GetAttributes()
+                    .Single()
+                    .ConstructorArguments.Single()
+                    .Value;
             Assert.Equal("System.Int32[]", a1.ToTestDisplayString());
             Assert.Equal(1, a1.Rank);
             Assert.True(a1.IsSZArray);
 
-            var a2 = (IArrayTypeSymbol)p.GetMember<MethodSymbol>("Test2")
-                .GetAttributes()
-                .Single()
-                .ConstructorArguments.Single()
-                .Value;
+            var a2 = (IArrayTypeSymbol)
+                p.GetMember<MethodSymbol>("Test2")
+                    .GetAttributes()
+                    .Single()
+                    .ConstructorArguments.Single()
+                    .Value;
             Assert.Equal("System.Int32[*]", a2.ToTestDisplayString());
             Assert.Equal(1, a2.Rank);
             Assert.False(a2.IsSZArray);
 
             Assert.True(
                 (
-                    (ITypeSymbol)p.GetMember<MethodSymbol>("Test3")
-                        .GetAttributes()
-                        .Single()
-                        .ConstructorArguments.Single()
-                        .Value
+                    (ITypeSymbol)
+                        p.GetMember<MethodSymbol>("Test3")
+                            .GetAttributes()
+                            .Single()
+                            .ConstructorArguments.Single()
+                            .Value
                 ).IsErrorType()
             );
             Assert.True(
                 (
-                    (ITypeSymbol)p.GetMember<MethodSymbol>("Test4")
-                        .GetAttributes()
-                        .Single()
-                        .ConstructorArguments.Single()
-                        .Value
+                    (ITypeSymbol)
+                        p.GetMember<MethodSymbol>("Test4")
+                            .GetAttributes()
+                            .Single()
+                            .ConstructorArguments.Single()
+                            .Value
                 ).IsErrorType()
             );
 

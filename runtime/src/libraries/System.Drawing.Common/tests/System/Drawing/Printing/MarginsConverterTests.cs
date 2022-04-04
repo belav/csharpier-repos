@@ -166,12 +166,13 @@ namespace System.Drawing.Printing.Tests
                 Assert.Equal(string.Empty, (string)mc.ConvertTo(null, typeof(string)));
                 Assert.Equal(
                     string.Empty,
-                    (string)mc.ConvertTo(
-                        context,
-                        CultureInfo.CreateSpecificCulture("ru-RU"),
-                        null,
-                        typeof(string)
-                    )
+                    (string)
+                        mc.ConvertTo(
+                            context,
+                            CultureInfo.CreateSpecificCulture("ru-RU"),
+                            null,
+                            typeof(string)
+                        )
                 );
             }
         }

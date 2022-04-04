@@ -65,9 +65,8 @@ public class SerializableErrorWrapperTests
         var serializer = new DataContractSerializer(typeof(SerializableErrorWrapper));
 
         // Act
-        var wrapper = (SerializableErrorWrapper)serializer.ReadObject(
-            new MemoryStream(Encoding.UTF8.GetBytes(serializableErrorXml))
-        );
+        var wrapper = (SerializableErrorWrapper)
+            serializer.ReadObject(new MemoryStream(Encoding.UTF8.GetBytes(serializableErrorXml)));
         var errors = wrapper.SerializableError;
 
         // Assert

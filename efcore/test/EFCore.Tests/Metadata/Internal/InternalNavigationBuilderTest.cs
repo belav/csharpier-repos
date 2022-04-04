@@ -334,9 +334,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         private InternalNavigationBuilder CreateInternalNavigationBuilder()
         {
-            var modelBuilder = (InternalModelBuilder)InMemoryTestHelpers.Instance
-                .CreateConventionBuilder()
-                .GetInfrastructure();
+            var modelBuilder = (InternalModelBuilder)
+                InMemoryTestHelpers.Instance.CreateConventionBuilder().GetInfrastructure();
             var orderEntityBuilder = modelBuilder.Entity(
                 typeof(Order),
                 ConfigurationSource.Convention

@@ -100,10 +100,8 @@ namespace System
         protected virtual object? DynamicInvokeImpl(object?[]? args)
         {
             RuntimeMethodHandleInternal method = new RuntimeMethodHandleInternal(GetInvokeMethod());
-            RuntimeMethodInfo invoke = (RuntimeMethodInfo)RuntimeType.GetMethodBase(
-                (RuntimeType)this.GetType(),
-                method
-            )!;
+            RuntimeMethodInfo invoke = (RuntimeMethodInfo)
+                RuntimeType.GetMethodBase((RuntimeType)this.GetType(), method)!;
 
             return invoke.Invoke(this, BindingFlags.Default, null, args, null);
         }

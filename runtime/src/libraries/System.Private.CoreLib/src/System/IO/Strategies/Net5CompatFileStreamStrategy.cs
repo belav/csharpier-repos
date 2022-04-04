@@ -182,15 +182,16 @@ namespace System.IO.Strategies
                 // Read is invoked asynchronously.  But we can do so using the base Stream's internal helper
                 // that bypasses delegating to BeginRead, since we already know this is FileStream rather
                 // than something derived from it and what our BeginRead implementation is going to do.
-                return (Task<int>)base.BeginReadInternal(
-                    buffer,
-                    offset,
-                    count,
-                    null,
-                    null,
-                    serializeAsynchronously: true,
-                    apm: false
-                );
+                return (Task<int>)
+                    base.BeginReadInternal(
+                        buffer,
+                        offset,
+                        count,
+                        null,
+                        null,
+                        serializeAsynchronously: true,
+                        apm: false
+                    );
             }
 
             return ReadAsyncTask(buffer, offset, count, cancellationToken);
@@ -209,15 +210,16 @@ namespace System.IO.Strategies
                 // rather than something derived from it and what our BeginRead implementation is going to do.
                 return MemoryMarshal.TryGetArray(buffer, out ArraySegment<byte> segment)
                   ? new ValueTask<int>(
-                        (Task<int>)base.BeginReadInternal(
-                            segment.Array!,
-                            segment.Offset,
-                            segment.Count,
-                            null,
-                            null,
-                            serializeAsynchronously: true,
-                            apm: false
-                        )
+                        (Task<int>)
+                            base.BeginReadInternal(
+                                segment.Array!,
+                                segment.Offset,
+                                segment.Count,
+                                null,
+                                null,
+                                serializeAsynchronously: true,
+                                apm: false
+                            )
                     )
                   : base.ReadAsync(buffer, cancellationToken);
             }
@@ -306,15 +308,16 @@ namespace System.IO.Strategies
                 // Write is invoked asynchronously.  But we can do so using the base Stream's internal helper
                 // that bypasses delegating to BeginWrite, since we already know this is FileStream rather
                 // than something derived from it and what our BeginWrite implementation is going to do.
-                return (Task)base.BeginWriteInternal(
-                    buffer,
-                    offset,
-                    count,
-                    null,
-                    null,
-                    serializeAsynchronously: true,
-                    apm: false
-                );
+                return (Task)
+                    base.BeginWriteInternal(
+                        buffer,
+                        offset,
+                        count,
+                        null,
+                        null,
+                        serializeAsynchronously: true,
+                        apm: false
+                    );
             }
 
             return WriteAsyncInternal(
@@ -337,15 +340,16 @@ namespace System.IO.Strategies
                 // rather than something derived from it and what our BeginWrite implementation is going to do.
                 return MemoryMarshal.TryGetArray(buffer, out ArraySegment<byte> segment)
                   ? new ValueTask(
-                        (Task)base.BeginWriteInternal(
-                            segment.Array!,
-                            segment.Offset,
-                            segment.Count,
-                            null,
-                            null,
-                            serializeAsynchronously: true,
-                            apm: false
-                        )
+                        (Task)
+                            base.BeginWriteInternal(
+                                segment.Array!,
+                                segment.Offset,
+                                segment.Count,
+                                null,
+                                null,
+                                serializeAsynchronously: true,
+                                apm: false
+                            )
                     )
                   : base.WriteAsync(buffer, cancellationToken);
             }

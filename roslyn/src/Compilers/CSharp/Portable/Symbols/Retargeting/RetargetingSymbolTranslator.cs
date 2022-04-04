@@ -73,9 +73,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                 var retargetedCorrespondingDefaultFieldOpt =
                     (correspondingTupleField == (object)tupleErrorField)
                         ? null
-                        : (TupleErrorFieldSymbol)RetargetingTranslator.Retarget(
-                              correspondingTupleField
-                          );
+                        : (TupleErrorFieldSymbol)
+                              RetargetingTranslator.Retarget(correspondingTupleField);
 
                 return new TupleErrorFieldSymbol(
                     RetargetingTranslator.Retarget(
@@ -227,10 +226,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
             public NamespaceSymbol Retarget(NamespaceSymbol ns)
             {
-                return (NamespaceSymbol)this.SymbolMap.GetOrAdd(
-                    ns,
-                    _retargetingModule._createRetargetingNamespace
-                );
+                return (NamespaceSymbol)
+                    this.SymbolMap.GetOrAdd(ns, _retargetingModule._createRetargetingNamespace);
             }
 
             private NamedTypeSymbol RetargetNamedTypeDefinition(
@@ -330,27 +327,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                         if (container.IsExplicitDefinitionOfNoPiaLocalType)
                         {
                             // Types nested into local types are not supported.
-                            return (NamedTypeSymbol)this.SymbolMap.GetOrAdd(
-                                type,
-                                new UnsupportedMetadataTypeSymbol()
-                            );
+                            return (NamedTypeSymbol)
+                                this.SymbolMap.GetOrAdd(type, new UnsupportedMetadataTypeSymbol());
                         }
 
                         container = container.ContainingType;
                     }
 
-                    return (NamedTypeSymbol)this.SymbolMap.GetOrAdd(
-                        type,
-                        _retargetingModule._createRetargetingNamedType
-                    );
+                    return (NamedTypeSymbol)
+                        this.SymbolMap.GetOrAdd(
+                            type,
+                            _retargetingModule._createRetargetingNamedType
+                        );
                 }
                 else
                 {
                     // The type is defined in one of the added modules
                     Debug.Assert(module.Ordinal > 0);
-                    PEModuleSymbol addedModule = (PEModuleSymbol)this.RetargetingAssembly.Modules[
-                        module.Ordinal
-                    ];
+                    PEModuleSymbol addedModule = (PEModuleSymbol)
+                        this.RetargetingAssembly.Modules[module.Ordinal];
                     Debug.Assert(
                         ReferenceEquals(((PEModuleSymbol)module).Module, addedModule.Module)
                     );
@@ -839,10 +834,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
             public virtual TypeParameterSymbol Retarget(TypeParameterSymbol typeParameter)
             {
-                return (TypeParameterSymbol)this.SymbolMap.GetOrAdd(
-                    typeParameter,
-                    _retargetingModule._createRetargetingTypeParameter
-                );
+                return (TypeParameterSymbol)
+                    this.SymbolMap.GetOrAdd(
+                        typeParameter,
+                        _retargetingModule._createRetargetingTypeParameter
+                    );
             }
 
             public ArrayTypeSymbol Retarget(ArrayTypeSymbol type)
@@ -1117,10 +1113,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                 Debug.Assert(ReferenceEquals(method.ContainingModule, this.UnderlyingModule));
                 Debug.Assert(ReferenceEquals(method, method.OriginalDefinition));
 
-                return (MethodSymbol)this.SymbolMap.GetOrAdd(
-                    method,
-                    _retargetingModule._createRetargetingMethod
-                );
+                return (MethodSymbol)
+                    this.SymbolMap.GetOrAdd(method, _retargetingModule._createRetargetingMethod);
             }
 
             public MethodSymbol Retarget(
@@ -1174,10 +1168,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
             public FieldSymbol Retarget(FieldSymbol field)
             {
-                return (FieldSymbol)this.SymbolMap.GetOrAdd(
-                    field,
-                    _retargetingModule._createRetargetingField
-                );
+                return (FieldSymbol)
+                    this.SymbolMap.GetOrAdd(field, _retargetingModule._createRetargetingField);
             }
 
             public PropertySymbol Retarget(PropertySymbol property)
@@ -1185,10 +1177,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                 Debug.Assert(ReferenceEquals(property.ContainingModule, this.UnderlyingModule));
                 Debug.Assert(ReferenceEquals(property, property.OriginalDefinition));
 
-                return (PropertySymbol)this.SymbolMap.GetOrAdd(
-                    property,
-                    _retargetingModule._createRetargetingProperty
-                );
+                return (PropertySymbol)
+                    this.SymbolMap.GetOrAdd(
+                        property,
+                        _retargetingModule._createRetargetingProperty
+                    );
             }
 
             public PropertySymbol Retarget(
@@ -1227,10 +1220,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                     && ReferenceEquals(@event, @event.OriginalDefinition)
                 )
                 {
-                    return (EventSymbol)this.SymbolMap.GetOrAdd(
-                        @event,
-                        _retargetingModule._createRetargetingEvent
-                    );
+                    return (EventSymbol)
+                        this.SymbolMap.GetOrAdd(@event, _retargetingModule._createRetargetingEvent);
                 }
 
                 var containingType = @event.ContainingType;

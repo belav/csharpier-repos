@@ -92,8 +92,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnreachableCode
             foreach (var diagnostic in diagnostics)
             {
                 var firstUnreachableStatementLocation = diagnostic.AdditionalLocations.First();
-                var firstUnreachableStatement =
-                    (StatementSyntax)firstUnreachableStatementLocation.FindNode(cancellationToken);
+                var firstUnreachableStatement = (StatementSyntax)
+                    firstUnreachableStatementLocation.FindNode(cancellationToken);
 
                 RemoveStatement(editor, firstUnreachableStatement);
 

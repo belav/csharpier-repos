@@ -117,19 +117,20 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
         {
             // ' Do not change this code...
             // Dispose(false)
-            var disposeStatement = (StatementSyntax)AddComment(
-                g,
-                string.Format(
-                    FeaturesResources.Do_not_change_this_code_Put_cleanup_code_in_0_method,
-                    disposeMethodDisplayString
-                ),
-                g.ExpressionStatement(
-                    g.InvocationExpression(
-                        g.IdentifierName(nameof(IDisposable.Dispose)),
-                        g.Argument(DisposingName, RefKind.None, g.FalseLiteralExpression())
+            var disposeStatement = (StatementSyntax)
+                AddComment(
+                    g,
+                    string.Format(
+                        FeaturesResources.Do_not_change_this_code_Put_cleanup_code_in_0_method,
+                        disposeMethodDisplayString
+                    ),
+                    g.ExpressionStatement(
+                        g.InvocationExpression(
+                            g.IdentifierName(nameof(IDisposable.Dispose)),
+                            g.Argument(DisposingName, RefKind.None, g.FalseLiteralExpression())
+                        )
                     )
-                )
-            );
+                );
 
             var methodDecl = SyntaxFactory
                 .DestructorDeclaration(classType.Name)

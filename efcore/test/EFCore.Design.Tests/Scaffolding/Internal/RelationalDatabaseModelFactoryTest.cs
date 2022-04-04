@@ -205,9 +205,10 @@ namespace Microsoft.EntityFrameworkCore.Internal
                 }
             };
 
-            var entityType = (EntityType)_factory
-                .Create(info, new ModelReverseEngineerOptions { NoPluralize = true })
-                .FindEntityType("Jobs");
+            var entityType = (EntityType)
+                _factory
+                    .Create(info, new ModelReverseEngineerOptions { NoPluralize = true })
+                    .FindEntityType("Jobs");
 
             Assert.Collection(
                 entityType.GetProperties(),
@@ -387,10 +388,11 @@ namespace Microsoft.EntityFrameworkCore.Internal
                 }
             };
 
-            var property = (Property)_factory
-                .Create(info, new ModelReverseEngineerOptions())
-                .FindEntityType("A")
-                .FindProperty("Col");
+            var property = (Property)
+                _factory
+                    .Create(info, new ModelReverseEngineerOptions())
+                    .FindEntityType("A")
+                    .FindProperty("Col");
 
             Assert.Equal(expectedColumnType, property.GetConfiguredColumnType());
         }
@@ -527,10 +529,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
                 info.Tables[0].PrimaryKey.Columns.Add(column);
             }
 
-            var model = (EntityType)_factory
-                .Create(info, new ModelReverseEngineerOptions())
-                .GetEntityTypes()
-                .Single();
+            var model = (EntityType)
+                _factory.Create(info, new ModelReverseEngineerOptions()).GetEntityTypes().Single();
 
             Assert.Equal("MyPk", model.FindPrimaryKey().GetName());
             Assert.Equal(
@@ -572,10 +572,11 @@ namespace Microsoft.EntityFrameworkCore.Internal
                 }
             };
 
-            var entityType = (EntityType)_factory
-                .Create(databaseModel, new ModelReverseEngineerOptions())
-                .GetEntityTypes()
-                .Single();
+            var entityType = (EntityType)
+                _factory
+                    .Create(databaseModel, new ModelReverseEngineerOptions())
+                    .GetEntityTypes()
+                    .Single();
             var index = entityType.GetIndexes().Single();
 
             Assert.True(index.IsUnique);
@@ -611,10 +612,11 @@ namespace Microsoft.EntityFrameworkCore.Internal
                 }
             };
 
-            var entityType = (EntityType)_factory
-                .Create(databaseModel, new ModelReverseEngineerOptions())
-                .GetEntityTypes()
-                .Single();
+            var entityType = (EntityType)
+                _factory
+                    .Create(databaseModel, new ModelReverseEngineerOptions())
+                    .GetEntityTypes()
+                    .Single();
             var index = entityType.GetIndexes().Single();
 
             Assert.True(index.IsUnique);
@@ -655,10 +657,11 @@ namespace Microsoft.EntityFrameworkCore.Internal
                 }
             };
 
-            var entityType = (EntityType)_factory
-                .Create(databaseModel, new ModelReverseEngineerOptions())
-                .GetEntityTypes()
-                .Single();
+            var entityType = (EntityType)
+                _factory
+                    .Create(databaseModel, new ModelReverseEngineerOptions())
+                    .GetEntityTypes()
+                    .Single();
             var index = entityType.GetIndexes().Single();
 
             Assert.True(index.IsUnique);

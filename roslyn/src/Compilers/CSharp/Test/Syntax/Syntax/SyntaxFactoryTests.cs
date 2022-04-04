@@ -358,10 +358,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal("a", singleton1.ToString());
 
             var singleton2 = SyntaxFactory.SeparatedList(
-                (System.Collections.Generic.IEnumerable<ExpressionSyntax>)new[]
-                {
-                    SyntaxFactory.IdentifierName("x")
-                }
+                (System.Collections.Generic.IEnumerable<ExpressionSyntax>)
+                    new[] { SyntaxFactory.IdentifierName("x") }
             );
 
             Assert.Equal(1, singleton2.Count);

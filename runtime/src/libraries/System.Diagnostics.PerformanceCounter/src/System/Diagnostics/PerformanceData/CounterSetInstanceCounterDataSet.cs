@@ -132,9 +132,8 @@ namespace System.Diagnostics.PerformanceData
                     );
                 }
 
-                _dataBlock = (byte*)Marshal.AllocHGlobal(
-                    _instance._counterSet._idToCounter.Count * sizeof(long)
-                );
+                _dataBlock = (byte*)
+                    Marshal.AllocHGlobal(_instance._counterSet._idToCounter.Count * sizeof(long));
                 if (_dataBlock == null)
                 {
                     throw new InsufficientMemoryException(

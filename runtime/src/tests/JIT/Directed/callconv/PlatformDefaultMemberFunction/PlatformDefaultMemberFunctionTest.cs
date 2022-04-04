@@ -204,8 +204,8 @@ unsafe class PlatformDefaultMemberFunctionTest
         {
             if (unmanagedCallersOnlyVtable == null)
             {
-                unmanagedCallersOnlyVtable =
-                    (PlatformDefaultMemberFunctionNative.C.VtableLayout*)Marshal.AllocHGlobal(
+                unmanagedCallersOnlyVtable = (PlatformDefaultMemberFunctionNative.C.VtableLayout*)
+                    Marshal.AllocHGlobal(
                         sizeof(PlatformDefaultMemberFunctionNative.C.VtableLayout)
                     );
                 unmanagedCallersOnlyVtable->getSize = &GetSize;

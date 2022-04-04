@@ -671,18 +671,18 @@ namespace System.Tests
         {
             Assembly element = typeof(AttributeGetCustomAttributes).Assembly;
             Type attributeType = typeof(AssemblyDescriptionAttribute);
-            AssemblyDescriptionAttribute attributeVal =
-                (AssemblyDescriptionAttribute)Attribute.GetCustomAttribute(element, attributeType);
+            AssemblyDescriptionAttribute attributeVal = (AssemblyDescriptionAttribute)
+                Attribute.GetCustomAttribute(element, attributeType);
             Assert.True(attributeVal != null);
 
             attributeType = typeof(AssemblyCopyrightAttribute);
-            AssemblyCopyrightAttribute attributeVal1 =
-                (AssemblyCopyrightAttribute)Attribute.GetCustomAttribute(element, attributeType);
+            AssemblyCopyrightAttribute attributeVal1 = (AssemblyCopyrightAttribute)
+                Attribute.GetCustomAttribute(element, attributeType);
             Assert.True(attributeVal1 != null);
 
             attributeType = typeof(AssemblyCompanyAttribute);
-            AssemblyCompanyAttribute attributeVal2 =
-                (AssemblyCompanyAttribute)Attribute.GetCustomAttribute(element, attributeType);
+            AssemblyCompanyAttribute attributeVal2 = (AssemblyCompanyAttribute)
+                Attribute.GetCustomAttribute(element, attributeType);
             Assert.True(attributeVal2 != null);
 
             attributeType = typeof(AssemblyKeyNameAttribute);
@@ -725,30 +725,18 @@ namespace System.Tests
         {
             Assembly element = typeof(AttributeGetCustomAttributes).Assembly;
             Type attributeType = typeof(AssemblyDescriptionAttribute);
-            AssemblyDescriptionAttribute attributeVal =
-                (AssemblyDescriptionAttribute)Attribute.GetCustomAttribute(
-                    element,
-                    attributeType,
-                    false
-                );
+            AssemblyDescriptionAttribute attributeVal = (AssemblyDescriptionAttribute)
+                Attribute.GetCustomAttribute(element, attributeType, false);
             Assert.True(attributeVal != null);
 
             attributeType = typeof(AssemblyCopyrightAttribute);
-            AssemblyCopyrightAttribute attributeVal1 =
-                (AssemblyCopyrightAttribute)Attribute.GetCustomAttribute(
-                    element,
-                    attributeType,
-                    false
-                );
+            AssemblyCopyrightAttribute attributeVal1 = (AssemblyCopyrightAttribute)
+                Attribute.GetCustomAttribute(element, attributeType, false);
             Assert.True(attributeVal1 != null);
 
             attributeType = typeof(AssemblyCompanyAttribute);
-            AssemblyCompanyAttribute attributeVal2 =
-                (AssemblyCompanyAttribute)Attribute.GetCustomAttribute(
-                    element,
-                    attributeType,
-                    false
-                );
+            AssemblyCompanyAttribute attributeVal2 = (AssemblyCompanyAttribute)
+                Attribute.GetCustomAttribute(element, attributeType, false);
             Assert.True(attributeVal2 != null);
 
             attributeType = typeof(AssemblyKeyNameAttribute);
@@ -792,10 +780,8 @@ namespace System.Tests
             Type clsType = typeof(TestClass);
             MethodInfo mInfo = clsType.GetMethod("method1");
             Type attributeType = typeof(ObsoleteAttribute);
-            ObsoleteAttribute obsAttr = (ObsoleteAttribute)Attribute.GetCustomAttribute(
-                mInfo,
-                attributeType
-            );
+            ObsoleteAttribute obsAttr = (ObsoleteAttribute)
+                Attribute.GetCustomAttribute(mInfo, attributeType);
             Assert.True(obsAttr != null);
 
             attributeType = typeof(AssemblyDescriptionAttribute);
@@ -804,10 +790,8 @@ namespace System.Tests
 
             attributeType = typeof(ObsoleteAttribute);
             MemberInfo[] memberinfos = clsType.GetMember("method*");
-            obsAttr = (ObsoleteAttribute)Attribute.GetCustomAttribute(
-                memberinfos[0],
-                attributeType
-            );
+            obsAttr = (ObsoleteAttribute)
+                Attribute.GetCustomAttribute(memberinfos[0], attributeType);
             Assert.True(obsAttr != null);
         }
 
@@ -847,11 +831,8 @@ namespace System.Tests
             Type clsType = typeof(TestClass);
             MethodInfo mInfo = clsType.GetMethod("method1");
             Type attributeType = typeof(ObsoleteAttribute);
-            ObsoleteAttribute obsAttr = (ObsoleteAttribute)Attribute.GetCustomAttribute(
-                mInfo,
-                attributeType,
-                false
-            );
+            ObsoleteAttribute obsAttr = (ObsoleteAttribute)
+                Attribute.GetCustomAttribute(mInfo, attributeType, false);
             Assert.True(obsAttr != null);
 
             attributeType = typeof(AssemblyDescriptionAttribute);
@@ -860,11 +841,8 @@ namespace System.Tests
 
             attributeType = typeof(ObsoleteAttribute);
             MemberInfo[] memberinfos = clsType.GetMember("method*");
-            obsAttr = (ObsoleteAttribute)Attribute.GetCustomAttribute(
-                memberinfos[0],
-                attributeType,
-                false
-            );
+            obsAttr = (ObsoleteAttribute)
+                Attribute.GetCustomAttribute(memberinfos[0], attributeType, false);
             Assert.True(obsAttr != null);
         }
 
@@ -906,24 +884,17 @@ namespace System.Tests
             Type attributeType;
 
             attributeType = typeof(DebuggableAttribute);
-            DebuggableAttribute dbgAttr = (DebuggableAttribute)Attribute.GetCustomAttribute(
-                clsType.Module,
-                attributeType
-            );
+            DebuggableAttribute dbgAttr = (DebuggableAttribute)
+                Attribute.GetCustomAttribute(clsType.Module, attributeType);
             Assert.True(dbgAttr != null);
 
             attributeType = typeof(AssemblyDescriptionAttribute);
-            dbgAttr = (DebuggableAttribute)Attribute.GetCustomAttribute(
-                clsType.Module,
-                attributeType
-            );
+            dbgAttr = (DebuggableAttribute)
+                Attribute.GetCustomAttribute(clsType.Module, attributeType);
             Assert.True(dbgAttr == null);
 
-            AssemblyDescriptionAttribute asmdbgAttr =
-                (AssemblyDescriptionAttribute)Attribute.GetCustomAttribute(
-                    clsType.Module,
-                    attributeType
-                );
+            AssemblyDescriptionAttribute asmdbgAttr = (AssemblyDescriptionAttribute)
+                Attribute.GetCustomAttribute(clsType.Module, attributeType);
             Assert.True(asmdbgAttr == null);
         }
 
@@ -957,27 +928,17 @@ namespace System.Tests
             Type attributeType;
 
             attributeType = typeof(DebuggableAttribute);
-            DebuggableAttribute dbgAttr = (DebuggableAttribute)Attribute.GetCustomAttribute(
-                clsType.Module,
-                attributeType,
-                false
-            );
+            DebuggableAttribute dbgAttr = (DebuggableAttribute)
+                Attribute.GetCustomAttribute(clsType.Module, attributeType, false);
             Assert.True(dbgAttr != null);
 
             attributeType = typeof(AssemblyDescriptionAttribute);
-            dbgAttr = (DebuggableAttribute)Attribute.GetCustomAttribute(
-                clsType.Module,
-                attributeType,
-                false
-            );
+            dbgAttr = (DebuggableAttribute)
+                Attribute.GetCustomAttribute(clsType.Module, attributeType, false);
             Assert.True(dbgAttr == null);
 
-            AssemblyDescriptionAttribute asmdbgAttr =
-                (AssemblyDescriptionAttribute)Attribute.GetCustomAttribute(
-                    clsType.Module,
-                    attributeType,
-                    false
-                );
+            AssemblyDescriptionAttribute asmdbgAttr = (AssemblyDescriptionAttribute)
+                Attribute.GetCustomAttribute(clsType.Module, attributeType, false);
             Assert.True(asmdbgAttr == null);
         }
 
@@ -995,21 +956,15 @@ namespace System.Tests
             attributeType = null;
             Assert.Throws<ArgumentNullException>(
                 () =>
-                    (DebuggableAttribute)Attribute.GetCustomAttribute(
-                        clsType.Module,
-                        attributeType,
-                        false
-                    )
+                    (DebuggableAttribute)
+                        Attribute.GetCustomAttribute(clsType.Module, attributeType, false)
             );
             attributeType = typeof(object);
             AssertExtensions.Throws<ArgumentException>(
                 null,
                 () =>
-                    (DebuggableAttribute)Attribute.GetCustomAttribute(
-                        clsType.Module,
-                        attributeType,
-                        false
-                    )
+                    (DebuggableAttribute)
+                        Attribute.GetCustomAttribute(clsType.Module, attributeType, false)
             );
         }
 
@@ -1020,23 +975,16 @@ namespace System.Tests
             MethodInfo minfo = clsType.GetMethod("TestMethod");
             ParameterInfo[] paramInfos = minfo.GetParameters();
 
-            ArgumentUsageAttribute usageAttr = (ArgumentUsageAttribute)Attribute.GetCustomAttribute(
-                paramInfos[0],
-                typeof(ArgumentUsageAttribute)
-            );
+            ArgumentUsageAttribute usageAttr = (ArgumentUsageAttribute)
+                Attribute.GetCustomAttribute(paramInfos[0], typeof(ArgumentUsageAttribute));
             Assert.True(usageAttr != null && usageAttr.Message == "for test");
 
-            usageAttr = (ArgumentUsageAttribute)Attribute.GetCustomAttribute(
-                paramInfos[1],
-                typeof(ArgumentUsageAttribute)
-            );
+            usageAttr = (ArgumentUsageAttribute)
+                Attribute.GetCustomAttribute(paramInfos[1], typeof(ArgumentUsageAttribute));
             Assert.True(usageAttr != null && usageAttr.Message == "for test again");
 
-            AssemblyFileVersionAttribute assemFileAttr =
-                (AssemblyFileVersionAttribute)Attribute.GetCustomAttribute(
-                    paramInfos[0],
-                    typeof(AssemblyFileVersionAttribute)
-                );
+            AssemblyFileVersionAttribute assemFileAttr = (AssemblyFileVersionAttribute)
+                Attribute.GetCustomAttribute(paramInfos[0], typeof(AssemblyFileVersionAttribute));
             Assert.True(assemFileAttr == null);
 
             Assert.True(usageAttr.TypeId == ArgumentUsageAttribute._guid);
@@ -1057,19 +1005,15 @@ namespace System.Tests
             attributeType = null;
             Assert.Throws<ArgumentNullException>(
                 () =>
-                    (ArgumentUsageAttribute)Attribute.GetCustomAttribute(
-                        paramInfos[0],
-                        attributeType
-                    )
+                    (ArgumentUsageAttribute)
+                        Attribute.GetCustomAttribute(paramInfos[0], attributeType)
             );
             attributeType = typeof(object);
             AssertExtensions.Throws<ArgumentException>(
                 null,
                 () =>
-                    (ArgumentUsageAttribute)Attribute.GetCustomAttribute(
-                        paramInfos[0],
-                        attributeType
-                    )
+                    (ArgumentUsageAttribute)
+                        Attribute.GetCustomAttribute(paramInfos[0], attributeType)
             );
         }
 
@@ -1080,36 +1024,24 @@ namespace System.Tests
             MethodInfo minfo = clsType.GetMethod("TestMethod");
             ParameterInfo[] paramInfos = minfo.GetParameters();
 
-            ArgumentUsageAttribute usageAttr = (ArgumentUsageAttribute)Attribute.GetCustomAttribute(
-                paramInfos[0],
-                typeof(ArgumentUsageAttribute),
-                false
-            );
+            ArgumentUsageAttribute usageAttr = (ArgumentUsageAttribute)
+                Attribute.GetCustomAttribute(paramInfos[0], typeof(ArgumentUsageAttribute), false);
             Assert.True(usageAttr == null);
 
-            usageAttr = (ArgumentUsageAttribute)Attribute.GetCustomAttribute(
-                paramInfos[0],
-                typeof(ArgumentUsageAttribute),
-                true
-            );
+            usageAttr = (ArgumentUsageAttribute)
+                Attribute.GetCustomAttribute(paramInfos[0], typeof(ArgumentUsageAttribute), true);
             Assert.True(usageAttr != null && usageAttr.Message == "for test");
 
-            usageAttr = (ArgumentUsageAttribute)Attribute.GetCustomAttribute(
-                paramInfos[1],
-                typeof(ArgumentUsageAttribute),
-                false
-            );
+            usageAttr = (ArgumentUsageAttribute)
+                Attribute.GetCustomAttribute(paramInfos[1], typeof(ArgumentUsageAttribute), false);
             Assert.True(usageAttr != null && usageAttr.Message == "for test again");
 
-            usageAttr = (ArgumentUsageAttribute)Attribute.GetCustomAttribute(
-                paramInfos[1],
-                typeof(ArgumentUsageAttribute),
-                true
-            );
+            usageAttr = (ArgumentUsageAttribute)
+                Attribute.GetCustomAttribute(paramInfos[1], typeof(ArgumentUsageAttribute), true);
             Assert.True(usageAttr != null && usageAttr.Message == "for test again");
 
-            AssemblyFileVersionAttribute assemFileAttr =
-                (AssemblyFileVersionAttribute)Attribute.GetCustomAttribute(
+            AssemblyFileVersionAttribute assemFileAttr = (AssemblyFileVersionAttribute)
+                Attribute.GetCustomAttribute(
                     paramInfos[0],
                     typeof(AssemblyFileVersionAttribute),
                     false
@@ -1128,30 +1060,21 @@ namespace System.Tests
 
             Assert.Throws<ArgumentNullException>(
                 () =>
-                    (ArgumentUsageAttribute)Attribute.GetCustomAttribute(
-                        element,
-                        attributeType,
-                        false
-                    )
+                    (ArgumentUsageAttribute)
+                        Attribute.GetCustomAttribute(element, attributeType, false)
             );
             attributeType = null;
             Assert.Throws<ArgumentNullException>(
                 () =>
-                    (ArgumentUsageAttribute)Attribute.GetCustomAttribute(
-                        paramInfos[0],
-                        attributeType,
-                        false
-                    )
+                    (ArgumentUsageAttribute)
+                        Attribute.GetCustomAttribute(paramInfos[0], attributeType, false)
             );
             attributeType = typeof(object);
             AssertExtensions.Throws<ArgumentException>(
                 null,
                 () =>
-                    (ArgumentUsageAttribute)Attribute.GetCustomAttribute(
-                        paramInfos[0],
-                        attributeType,
-                        false
-                    )
+                    (ArgumentUsageAttribute)
+                        Attribute.GetCustomAttribute(paramInfos[0], attributeType, false)
             );
         }
     }

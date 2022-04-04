@@ -189,20 +189,21 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             );
 
             return UseEntityVariable && entityVariable != null
-              ? (Expression)Expression.Block(
-                    new List<ParameterExpression> { entityVariable },
-                    new List<Expression>
-                    {
-                        Expression.Assign(
-                            entityVariable,
-                            Expression.Convert(
-                                Expression.Property(parameter, "Entity"),
-                                entityType!
-                            )
-                        ),
-                        constructorExpression
-                    }
-                )
+              ? (Expression)
+                    Expression.Block(
+                        new List<ParameterExpression> { entityVariable },
+                        new List<Expression>
+                        {
+                            Expression.Assign(
+                                entityVariable,
+                                Expression.Convert(
+                                    Expression.Property(parameter, "Entity"),
+                                    entityType!
+                                )
+                            ),
+                            constructorExpression
+                        }
+                    )
               : constructorExpression;
         }
 

@@ -172,9 +172,8 @@ namespace System.Xml.Xsl.XsltOld
                 foreach (AttributeSetAction srcAttSet in stylesheet.AttributeSetTable.Values)
                 {
                     ArrayList? srcAttList = srcAttSet.containedActions;
-                    AttributeSetAction? dstAttSet = (AttributeSetAction?)_attributeSetTable[
-                        srcAttSet.Name!
-                    ];
+                    AttributeSetAction? dstAttSet = (AttributeSetAction?)
+                        _attributeSetTable[srcAttSet.Name!];
                     if (dstAttSet == null)
                     {
                         dstAttSet = new AttributeSetAction();

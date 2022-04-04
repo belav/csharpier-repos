@@ -46,18 +46,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             ReplaceConvention(
                 conventionSet.ModelFinalizingConventions,
-                (SharedTableConvention)new SqliteSharedTableConvention(
-                    Dependencies,
-                    RelationalDependencies
-                )
+                (SharedTableConvention)
+                    new SqliteSharedTableConvention(Dependencies, RelationalDependencies)
             );
 
             ReplaceConvention(
                 conventionSet.ModelFinalizedConventions,
-                (RuntimeModelConvention)new SqliteRuntimeModelConvention(
-                    Dependencies,
-                    RelationalDependencies
-                )
+                (RuntimeModelConvention)
+                    new SqliteRuntimeModelConvention(Dependencies, RelationalDependencies)
             );
 
             return conventionSet;

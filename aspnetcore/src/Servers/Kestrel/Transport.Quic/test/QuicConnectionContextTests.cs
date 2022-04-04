@@ -520,8 +520,8 @@ public class QuicConnectionContextTests : TestApplicationErrorLoggerLoggedTest
             ((QuicStreamAbortedException)serverEx.InnerException).ErrorCode
         );
 
-        serverStream.Features.Get<IProtocolErrorCodeFeature>().Error =
-            (long)Http3ErrorCode.RequestRejected;
+        serverStream.Features.Get<IProtocolErrorCodeFeature>().Error = (long)
+            Http3ErrorCode.RequestRejected;
         serverStream.Abort(new ConnectionAbortedException("Test message."));
 
         // Complete server.

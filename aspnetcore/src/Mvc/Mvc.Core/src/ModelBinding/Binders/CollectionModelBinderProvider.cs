@@ -77,14 +77,15 @@ public class CollectionModelBinderProvider : IModelBinderProvider
 
         var loggerFactory = context.Services.GetRequiredService<ILoggerFactory>();
         var mvcOptions = context.Services.GetRequiredService<IOptions<MvcOptions>>().Value;
-        var binder = (IModelBinder)Activator.CreateInstance(
-            binderType,
-            elementBinder,
-            loggerFactory,
-            true /* allowValidatingTopLevelNodes */
-            ,
-            mvcOptions
-        )!;
+        var binder = (IModelBinder)
+            Activator.CreateInstance(
+                binderType,
+                elementBinder,
+                loggerFactory,
+                true /* allowValidatingTopLevelNodes */
+                ,
+                mvcOptions
+            )!;
 
         return binder;
     }

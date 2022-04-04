@@ -284,10 +284,8 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
             switch (container)
             {
                 case TNamespaceDeclarationSyntax namespaceNode:
-                    var containerSymbol = (INamespaceSymbol)semanticModel.GetDeclaredSymbol(
-                        container,
-                        cancellationToken
-                    );
+                    var containerSymbol = (INamespaceSymbol)
+                        semanticModel.GetDeclaredSymbol(container, cancellationToken);
                     return containerSymbol.GetMembers().SelectAsArray(m => (ISymbol)m);
 
                 case TCompilationUnitSyntax compilationUnit:

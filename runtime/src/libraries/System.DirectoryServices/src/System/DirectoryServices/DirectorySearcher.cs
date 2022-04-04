@@ -389,9 +389,8 @@ namespace System.DirectoryServices
 
                     //SECREVIEW: Searching the root of the DS will demand browse permissions
                     //                     on "*" or "LDAP://RootDSE".
-                    string defaultNamingContext = (string)rootDSE.Properties[
-                        "defaultNamingContext"
-                    ][0]!;
+                    string defaultNamingContext = (string)
+                        rootDSE.Properties["defaultNamingContext"][0]!;
                     rootDSE.Dispose();
 
                     _searchRoot = new DirectoryEntry(
@@ -696,8 +695,8 @@ namespace System.DirectoryServices
                 SearchRoot.Bind(true);
             }
 
-            UnsafeNativeMethods.IDirectorySearch adsSearch =
-                (UnsafeNativeMethods.IDirectorySearch)adsObject;
+            UnsafeNativeMethods.IDirectorySearch adsSearch = (UnsafeNativeMethods.IDirectorySearch)
+                adsObject;
             SetSearchPreferences(adsSearch, findMoreThanOne);
 
             string[]? properties = null;

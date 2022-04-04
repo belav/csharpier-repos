@@ -1498,9 +1498,8 @@ namespace System.Xml.Serialization
                 }
                 else
                 {
-                    IXmlSerializable serializable = (IXmlSerializable)Activator.CreateInstance(
-                        _type!
-                    )!;
+                    IXmlSerializable serializable = (IXmlSerializable)
+                        Activator.CreateInstance(_type!)!;
                     _schema = serializable.GetSchema();
 
                     if (_schema != null)

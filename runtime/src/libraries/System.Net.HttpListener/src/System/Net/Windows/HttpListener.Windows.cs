@@ -152,21 +152,16 @@ namespace System.Net
             Interop.HttpApi.HTTP_TIMEOUT_LIMIT_INFO timeoutinfo = default;
 
             timeoutinfo.Flags = Interop.HttpApi.HTTP_FLAGS.HTTP_PROPERTY_FLAG_PRESENT;
-            timeoutinfo.DrainEntityBody = (ushort)timeouts[
-                (int)Interop.HttpApi.HTTP_TIMEOUT_TYPE.DrainEntityBody
-            ];
-            timeoutinfo.EntityBody = (ushort)timeouts[
-                (int)Interop.HttpApi.HTTP_TIMEOUT_TYPE.EntityBody
-            ];
-            timeoutinfo.RequestQueue = (ushort)timeouts[
-                (int)Interop.HttpApi.HTTP_TIMEOUT_TYPE.RequestQueue
-            ];
-            timeoutinfo.IdleConnection = (ushort)timeouts[
-                (int)Interop.HttpApi.HTTP_TIMEOUT_TYPE.IdleConnection
-            ];
-            timeoutinfo.HeaderWait = (ushort)timeouts[
-                (int)Interop.HttpApi.HTTP_TIMEOUT_TYPE.HeaderWait
-            ];
+            timeoutinfo.DrainEntityBody = (ushort)
+                timeouts[(int)Interop.HttpApi.HTTP_TIMEOUT_TYPE.DrainEntityBody];
+            timeoutinfo.EntityBody = (ushort)
+                timeouts[(int)Interop.HttpApi.HTTP_TIMEOUT_TYPE.EntityBody];
+            timeoutinfo.RequestQueue = (ushort)
+                timeouts[(int)Interop.HttpApi.HTTP_TIMEOUT_TYPE.RequestQueue];
+            timeoutinfo.IdleConnection = (ushort)
+                timeouts[(int)Interop.HttpApi.HTTP_TIMEOUT_TYPE.IdleConnection];
+            timeoutinfo.HeaderWait = (ushort)
+                timeouts[(int)Interop.HttpApi.HTTP_TIMEOUT_TYPE.HeaderWait];
             timeoutinfo.MinSendRate = minSendBytesPerSecond;
 
             IntPtr infoptr = new IntPtr(&timeoutinfo);
@@ -2062,18 +2057,14 @@ namespace System.Net
                         {
                             headersArrayHandle = GCHandle.Alloc(headersArray, GCHandleType.Pinned);
                             httpResponse.Headers.pUnknownHeaders =
-                                (Interop.HttpApi.HTTP_UNKNOWN_HEADER*)Marshal.UnsafeAddrOfPinnedArrayElement(
-                                    headersArray!,
-                                    0
-                                );
+                                (Interop.HttpApi.HTTP_UNKNOWN_HEADER*)
+                                    Marshal.UnsafeAddrOfPinnedArrayElement(headersArray!, 0);
                             wwwAuthenticateHandle = GCHandle.Alloc(
                                 s_wwwAuthenticateBytes,
                                 GCHandleType.Pinned
                             );
-                            sbyte* wwwAuthenticate = (sbyte*)Marshal.UnsafeAddrOfPinnedArrayElement(
-                                s_wwwAuthenticateBytes,
-                                0
-                            );
+                            sbyte* wwwAuthenticate = (sbyte*)
+                                Marshal.UnsafeAddrOfPinnedArrayElement(s_wwwAuthenticateBytes, 0);
 
                             for (int i = 0; i < challengeHandles!.Length; i++)
                             {
@@ -2086,11 +2077,8 @@ namespace System.Net
                                 );
                                 headersArray![i].pName = wwwAuthenticate;
                                 headersArray[i].NameLength = (ushort)s_wwwAuthenticateBytes.Length;
-                                headersArray[i].pRawValue =
-                                    (sbyte*)Marshal.UnsafeAddrOfPinnedArrayElement(
-                                        byteChallenge,
-                                        0
-                                    );
+                                headersArray[i].pRawValue = (sbyte*)
+                                    Marshal.UnsafeAddrOfPinnedArrayElement(byteChallenge, 0);
                                 headersArray[i].RawValueLength = checked(
                                     (ushort)byteChallenge.Length
                                 );
@@ -2367,10 +2355,8 @@ namespace System.Net
                         $"errorCode: {errorCode}, numBytes: {numBytes}, nativeOverlapped: {(IntPtr)nativeOverlapped:x}"
                     );
                 // take the DisconnectAsyncResult object from the state
-                DisconnectAsyncResult asyncResult =
-                    (DisconnectAsyncResult)ThreadPoolBoundHandle.GetNativeOverlappedState(
-                        nativeOverlapped
-                    )!;
+                DisconnectAsyncResult asyncResult = (DisconnectAsyncResult)
+                    ThreadPoolBoundHandle.GetNativeOverlappedState(nativeOverlapped)!;
                 IOCompleted(asyncResult, errorCode, numBytes, nativeOverlapped);
             }
 

@@ -292,10 +292,8 @@ class C
                         out tupleElementNames
                     );
                     Assert.Equal(new[] { "A\u1234", "\u1234B" }, tupleElementNames);
-                    var method = (MethodSymbol)testData
-                        .GetExplicitlyDeclaredMethods()
-                        .Single()
-                        .Value.Method;
+                    var method = (MethodSymbol)
+                        testData.GetExplicitlyDeclaredMethods().Single().Value.Method;
                     CheckAttribute(
                         assembly,
                         method,
@@ -375,10 +373,8 @@ class C
                         out tupleElementNames
                     );
                     Assert.Equal(new[] { null, "A", "B", null }, tupleElementNames);
-                    var method = (MethodSymbol)testData
-                        .GetExplicitlyDeclaredMethods()
-                        .Single()
-                        .Value.Method;
+                    var method = (MethodSymbol)
+                        testData.GetExplicitlyDeclaredMethods().Single().Value.Method;
                     CheckAttribute(
                         assembly,
                         method,
@@ -655,10 +651,8 @@ class C
                         out tupleElementNames
                     );
                     Assert.Equal(aliasElementNames, tupleElementNames);
-                    var method = (MethodSymbol)testData
-                        .GetExplicitlyDeclaredMethods()
-                        .Single()
-                        .Value.Method;
+                    var method = (MethodSymbol)
+                        testData.GetExplicitlyDeclaredMethods().Single().Value.Method;
                     CheckAttribute(
                         assembly,
                         method,

@@ -1759,9 +1759,8 @@ namespace System.Reflection.Metadata.Ecma335
         internal MethodSemanticsAttributes GetSemantics(int rowId)
         {
             int rowOffset = (rowId - 1) * this.RowSize;
-            return (MethodSemanticsAttributes)this.Block.PeekUInt16(
-                rowOffset + _SemanticsFlagOffset
-            );
+            return (MethodSemanticsAttributes)
+                this.Block.PeekUInt16(rowOffset + _SemanticsFlagOffset);
         }
 
         internal EntityHandle GetAssociation(int rowId)
@@ -2052,9 +2051,8 @@ namespace System.Reflection.Metadata.Ecma335
         internal MethodImport GetImport(int rowId)
         {
             int rowOffset = (rowId - 1) * this.RowSize;
-            var pInvokeMapFlags = (MethodImportAttributes)Block.PeekUInt16(
-                rowOffset + _FlagsOffset
-            );
+            var pInvokeMapFlags = (MethodImportAttributes)
+                Block.PeekUInt16(rowOffset + _FlagsOffset);
             var importName = StringHandle.FromOffset(
                 Block.PeekHeapReference(rowOffset + _ImportNameOffset, _IsStringHeapRefSizeSmall)
             );

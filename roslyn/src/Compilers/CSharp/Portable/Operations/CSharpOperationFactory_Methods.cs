@@ -240,8 +240,8 @@ namespace Microsoft.CodeAnalysis.Operations
                     // this child as an IMethodBindingReference. Otherwise, we want to just delegate to the standard
                     // CSharpOperationFactory behavior. Note we don't check HasErrors here because if we have a method group,
                     // overload resolution succeeded, even if the resulting method isn't valid for some other reason.
-                    BoundMethodGroup boundMethodGroup =
-                        (BoundMethodGroup)boundDelegateCreationExpression.Argument;
+                    BoundMethodGroup boundMethodGroup = (BoundMethodGroup)
+                        boundDelegateCreationExpression.Argument;
                     return CreateBoundMethodGroupSingleMethodOperation(
                         boundMethodGroup,
                         boundDelegateCreationExpression.MethodOpt,
@@ -280,8 +280,8 @@ namespace Microsoft.CodeAnalysis.Operations
             {
                 case BoundKind.ObjectInitializerMember:
                 {
-                    var boundObjectInitializerMember =
-                        (BoundObjectInitializerMember)containingExpression;
+                    var boundObjectInitializerMember = (BoundObjectInitializerMember)
+                        containingExpression;
                     var property = (PropertySymbol?)boundObjectInitializerMember.MemberSymbol;
                     Debug.Assert(property is not null);
                     return DeriveArguments(
@@ -342,8 +342,8 @@ namespace Microsoft.CodeAnalysis.Operations
                 }
                 case BoundKind.CollectionElementInitializer:
                 {
-                    var boundCollectionElementInitializer =
-                        (BoundCollectionElementInitializer)containingExpression;
+                    var boundCollectionElementInitializer = (BoundCollectionElementInitializer)
+                        containingExpression;
                     return DeriveArguments(
                         boundCollectionElementInitializer.AddMethod,
                         boundCollectionElementInitializer.Arguments,
@@ -356,8 +356,8 @@ namespace Microsoft.CodeAnalysis.Operations
                 }
                 case BoundKind.FunctionPointerInvocation:
                 {
-                    var boundFunctionPointerInvocation =
-                        (BoundFunctionPointerInvocation)containingExpression;
+                    var boundFunctionPointerInvocation = (BoundFunctionPointerInvocation)
+                        containingExpression;
                     return DeriveArguments(
                         boundFunctionPointerInvocation.FunctionPointer.Signature,
                         boundFunctionPointerInvocation.Arguments,

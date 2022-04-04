@@ -43,11 +43,12 @@ namespace Castle.DynamicProxy.Tests
         public void ExplicitGenericInterface()
         {
             var proxy =
-                (GenInterface<int>)generator.CreateClassProxy(
-                    typeof(GenInterfaceExplicit),
-                    new[] { typeof(GenInterface<int>) },
-                    interceptor
-                );
+                (GenInterface<int>)
+                    generator.CreateClassProxy(
+                        typeof(GenInterfaceExplicit),
+                        new[] { typeof(GenInterface<int>) },
+                        interceptor
+                    );
 
             var result = proxy.DoSomething(4);
 
@@ -58,11 +59,12 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void ExplicitGenericMethod_with_base_call()
         {
-            var proxy = (IGenericInterface)generator.CreateClassProxy(
-                typeof(GenericMethodExplicit),
-                new[] { typeof(IGenericInterface) },
-                interceptor
-            );
+            var proxy = (IGenericInterface)
+                generator.CreateClassProxy(
+                    typeof(GenericMethodExplicit),
+                    new[] { typeof(IGenericInterface) },
+                    interceptor
+                );
 
             var result = proxy.GenericMethod<int>();
 
@@ -73,12 +75,13 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void ExplicitGenericMethod_without_base_call()
         {
-            var proxy = (IGenericInterface)generator.CreateClassProxy(
-                typeof(GenericMethodExplicit),
-                new[] { typeof(IGenericInterface) },
-                interceptor,
-                new SetReturnValueInterceptor(5)
-            );
+            var proxy = (IGenericInterface)
+                generator.CreateClassProxy(
+                    typeof(GenericMethodExplicit),
+                    new[] { typeof(IGenericInterface) },
+                    interceptor,
+                    new SetReturnValueInterceptor(5)
+                );
 
             var result = proxy.GenericMethod<int>();
 
@@ -89,11 +92,12 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void ExplicitInterface_AsAdditionalInterfaceToProxy_OnClassProxy_WithBaseCalls()
         {
-            var proxy = (ISimpleInterface)generator.CreateClassProxy(
-                typeof(SimpleInterfaceExplicit),
-                new[] { typeof(ISimpleInterface) },
-                interceptor
-            );
+            var proxy = (ISimpleInterface)
+                generator.CreateClassProxy(
+                    typeof(SimpleInterfaceExplicit),
+                    new[] { typeof(ISimpleInterface) },
+                    interceptor
+                );
 
             var result = proxy.Do();
 
@@ -107,11 +111,12 @@ namespace Castle.DynamicProxy.Tests
         {
             interceptor.Proceed = false;
 
-            var proxy = (SimpleInterfaceExplicit)generator.CreateClassProxy(
-                typeof(SimpleInterfaceExplicit),
-                new[] { typeof(ISimpleInterface) },
-                interceptor
-            );
+            var proxy = (SimpleInterfaceExplicit)
+                generator.CreateClassProxy(
+                    typeof(SimpleInterfaceExplicit),
+                    new[] { typeof(ISimpleInterface) },
+                    interceptor
+                );
 
             proxy.DoVirtual();
             var result = ((ISimpleInterface)proxy).Do();
@@ -149,11 +154,12 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void ExplicitMethodOutArguments()
         {
-            var proxy = (IWithRefOut)generator.CreateClassProxy(
-                typeof(WithRefOutExplicit),
-                new[] { typeof(IWithRefOut) },
-                interceptor
-            );
+            var proxy = (IWithRefOut)
+                generator.CreateClassProxy(
+                    typeof(WithRefOutExplicit),
+                    new[] { typeof(IWithRefOut) },
+                    interceptor
+                );
 
             int result;
             proxy.Do(out result);
@@ -165,11 +171,12 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void ExplicitMethodRefArguments()
         {
-            var proxy = (IWithRefOut)generator.CreateClassProxy(
-                typeof(WithRefOutExplicit),
-                new[] { typeof(IWithRefOut) },
-                interceptor
-            );
+            var proxy = (IWithRefOut)
+                generator.CreateClassProxy(
+                    typeof(WithRefOutExplicit),
+                    new[] { typeof(IWithRefOut) },
+                    interceptor
+                );
 
             var result = 0;
             proxy.Did(ref result);

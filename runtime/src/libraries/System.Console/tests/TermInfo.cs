@@ -269,10 +269,8 @@ public class TermInfo
             stringParams[i] = CreateFormatParam(parameters[i]);
 
         // Create the array of format params and then put the individual params in their location
-        Array typeArray = (Array)Activator.CreateInstance(
-            formatArrayType,
-            new object[] { stringParams.Length }
-        );
+        Array typeArray = (Array)
+            Activator.CreateInstance(formatArrayType, new object[] { stringParams.Length });
         for (int i = 0; i < parameters.Length; i++)
             typeArray.SetValue(stringParams[i], i);
 

@@ -34,8 +34,8 @@ namespace Microsoft.EntityFrameworkCore
 
         private ListLoggerFactory _listLoggerFactory;
         protected ListLoggerFactory ListLoggerFactory =>
-            _listLoggerFactory ??=
-                (ListLoggerFactory)ServiceProvider.GetRequiredService<ILoggerFactory>();
+            _listLoggerFactory ??= (ListLoggerFactory)
+                ServiceProvider.GetRequiredService<ILoggerFactory>();
 
         public virtual Task InitializeAsync() => Task.CompletedTask;
 
@@ -202,9 +202,10 @@ namespace Microsoft.EntityFrameworkCore
                 UsePooling = usePooling;
                 if (usePooling)
                 {
-                    ContextPool ??= (IDbContextPool)ServiceProvider.GetRequiredService(
-                        typeof(IDbContextPool<>).MakeGenericType(typeof(TContext))
-                    );
+                    ContextPool ??= (IDbContextPool)
+                        ServiceProvider.GetRequiredService(
+                            typeof(IDbContextPool<>).MakeGenericType(typeof(TContext))
+                        );
                 }
 
                 TestStore = testStore;

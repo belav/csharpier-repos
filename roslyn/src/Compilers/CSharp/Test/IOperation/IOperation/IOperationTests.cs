@@ -343,10 +343,11 @@ IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ...
                     InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
                     OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)"
             );
-            var op = (IForLoopOperation)comp.GetSemanticModel(tree)
-                .GetOperation(
-                    tree.GetRoot().DescendantNodes().OfType<ForStatementSyntax>().Single()
-                );
+            var op = (IForLoopOperation)
+                comp.GetSemanticModel(tree)
+                    .GetOperation(
+                        tree.GetRoot().DescendantNodes().OfType<ForStatementSyntax>().Single()
+                    );
             Assert.Equal(RefKind.RefReadOnly, op.Locals.Single().RefKind);
         }
 
@@ -420,10 +421,11 @@ IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ...
                     OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
     NextVariables(0)"
             );
-            var op = (IForEachLoopOperation)comp.GetSemanticModel(tree)
-                .GetOperation(
-                    tree.GetRoot().DescendantNodes().OfType<ForEachStatementSyntax>().Single()
-                );
+            var op = (IForEachLoopOperation)
+                comp.GetSemanticModel(tree)
+                    .GetOperation(
+                        tree.GetRoot().DescendantNodes().OfType<ForEachStatementSyntax>().Single()
+                    );
             Assert.Equal(RefKind.RefReadOnly, op.Locals.Single().RefKind);
         }
 
@@ -636,9 +638,8 @@ public class Test
             var model = comp.GetSemanticModel(tree);
 
             // Verify we return non-null operation only for topmost member access expression.
-            var expr = (MemberAccessExpressionSyntax)GetExprSyntaxForBinding(
-                GetExprSyntaxList(tree)
-            );
+            var expr = (MemberAccessExpressionSyntax)
+                GetExprSyntaxForBinding(GetExprSyntaxList(tree));
             Assert.Equal("a.b", expr.ToString());
             var operation = model.GetOperation(expr);
             Assert.NotNull(operation);
@@ -697,13 +698,14 @@ class C
 "
             );
 
-            var speculatedBlock = (BlockSyntax)SyntaxFactory.ParseStatement(
-                @"
+            var speculatedBlock = (BlockSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 { 
    int z = 0;
 }
 "
-            );
+                );
 
             var tree = compilation.SyntaxTrees[0];
             var root = tree.GetCompilationUnitRoot();

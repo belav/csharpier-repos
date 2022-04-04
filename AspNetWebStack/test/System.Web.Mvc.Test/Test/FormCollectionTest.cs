@@ -127,10 +127,8 @@ namespace System.Web.Mvc.Test
             mockControllerContext.Setup(c => c.HttpContext.Request.Form).Returns(nvc);
 
             // Act
-            FormCollection formCollection = (FormCollection)binder.BindModel(
-                mockControllerContext.Object,
-                null
-            );
+            FormCollection formCollection = (FormCollection)
+                binder.BindModel(mockControllerContext.Object, null);
 
             // Assert
             Assert.NotNull(formCollection);

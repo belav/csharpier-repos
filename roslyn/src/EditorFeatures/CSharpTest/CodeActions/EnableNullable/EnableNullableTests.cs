@@ -35,9 +35,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.EnableNulla
                     .Contains("#nullable enable")
             )
             {
-                var compilationOptions = (CSharpCompilationOptions)solution
-                    .GetRequiredProject(projectId)
-                    .CompilationOptions!;
+                var compilationOptions = (CSharpCompilationOptions)
+                    solution.GetRequiredProject(projectId).CompilationOptions!;
                 solution = solution.WithProjectCompilationOptions(
                     projectId,
                     compilationOptions.WithNullableContextOptions(NullableContextOptions.Enable)
@@ -487,9 +486,8 @@ class Example
                 {
                     (solution, projectId) =>
                     {
-                        var compilationOptions = (CSharpCompilationOptions)solution
-                            .GetRequiredProject(projectId)
-                            .CompilationOptions!;
+                        var compilationOptions = (CSharpCompilationOptions)
+                            solution.GetRequiredProject(projectId).CompilationOptions!;
                         return solution.WithProjectCompilationOptions(
                             projectId,
                             compilationOptions.WithNullableContextOptions(nullableContextOptions)

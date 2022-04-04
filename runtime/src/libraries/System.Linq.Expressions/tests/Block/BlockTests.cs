@@ -392,9 +392,8 @@ namespace System.Linq.Expressions.Tests
                                     )
                                 ),
                                 Expression.Constant(
-                                    (ValueTypeWithParameterlessConstructorThatThrows?)new ValueTypeWithParameterlessConstructorThatThrows(
-                                        value
-                                    ),
+                                    (ValueTypeWithParameterlessConstructorThatThrows?)
+                                        new ValueTypeWithParameterlessConstructorThatThrows(value),
                                     typeof(ValueTypeWithParameterlessConstructorThatThrows?)
                                 ),
                                 Expression.Constant(

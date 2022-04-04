@@ -50,10 +50,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
             var switchLocation = context.Diagnostics.First().AdditionalLocations[0];
-            var switchStatement = (SwitchStatementSyntax)switchLocation.FindNode(
-                getInnermostNodeForTie: true,
-                context.CancellationToken
-            );
+            var switchStatement = (SwitchStatementSyntax)
+                switchLocation.FindNode(getInnermostNodeForTie: true, context.CancellationToken);
             if (switchStatement.ContainsDirectives)
             {
                 // Avoid providing code fixes for switch statements containing directives
@@ -116,10 +114,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                         .GetSymbolType();
                 }
 
-                var switchStatement = (SwitchStatementSyntax)switchLocation.FindNode(
-                    getInnermostNodeForTie: true,
-                    cancellationToken
-                );
+                var switchStatement = (SwitchStatementSyntax)
+                    switchLocation.FindNode(getInnermostNodeForTie: true, cancellationToken);
 
                 var switchExpression = Rewriter.Rewrite(
                     switchStatement,

@@ -39,7 +39,8 @@ namespace System.Buffers
 
             var handle = UnsafeNativeMethods.VirtualAlloc(
                 lpAddress: IntPtr.Zero,
-                dwSize: (IntPtr)totalBytesToAllocate /* cast throws OverflowException if out of range */
+                dwSize: (IntPtr)
+                    totalBytesToAllocate /* cast throws OverflowException if out of range */
                 ,
                 flAllocationType: VirtualAllocAllocationType.MEM_RESERVE
                     | VirtualAllocAllocationType.MEM_COMMIT,

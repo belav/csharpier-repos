@@ -80,8 +80,8 @@ namespace System.ComponentModel.Composition
 
         public override void SetImport(ImportDefinition definition, IEnumerable<Export> exports)
         {
-            ContractBasedImportDefinition contractBasedDefinition =
-                (ContractBasedImportDefinition)definition;
+            ContractBasedImportDefinition contractBasedDefinition = (ContractBasedImportDefinition)
+                definition;
             this._setImports[contractBasedDefinition.ContractName] = exports;
 
             foreach (Export export in exports)

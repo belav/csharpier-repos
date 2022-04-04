@@ -359,9 +359,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         private static string? SimpleControlTypeName(IUIAutomationElement element)
         {
             var type = ControlType.LookupById(
-                (int)element.GetCurrentPropertyValue(
-                    AutomationElementIdentifiers.ControlTypeProperty.Id
-                )
+                (int)
+                    element.GetCurrentPropertyValue(
+                        AutomationElementIdentifiers.ControlTypeProperty.Id
+                    )
             );
             return type?.LocalizedControlType;
         }

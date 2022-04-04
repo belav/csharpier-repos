@@ -79,10 +79,11 @@ namespace Microsoft.CodeAnalysis.UseCollectionInitializer
             var originalObjectCreationNodes = new Stack<TObjectCreationExpressionSyntax>();
             foreach (var diagnostic in diagnostics)
             {
-                var objectCreation = (TObjectCreationExpressionSyntax)originalRoot.FindNode(
-                    diagnostic.AdditionalLocations[0].SourceSpan,
-                    getInnermostNodeForTie: true
-                );
+                var objectCreation = (TObjectCreationExpressionSyntax)
+                    originalRoot.FindNode(
+                        diagnostic.AdditionalLocations[0].SourceSpan,
+                        getInnermostNodeForTie: true
+                    );
                 originalObjectCreationNodes.Push(objectCreation);
             }
 

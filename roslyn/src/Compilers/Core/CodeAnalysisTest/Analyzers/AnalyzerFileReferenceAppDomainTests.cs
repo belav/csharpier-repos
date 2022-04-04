@@ -53,8 +53,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             try
             {
                 // Test analyzer load success.
-                var remoteTest =
-                    (RemoteAnalyzerFileReferenceTest)loadDomain.CreateInstanceAndUnwrap(
+                var remoteTest = (RemoteAnalyzerFileReferenceTest)
+                    loadDomain.CreateInstanceAndUnwrap(
                         typeof(RemoteAnalyzerFileReferenceTest).Assembly.FullName,
                         typeof(RemoteAnalyzerFileReferenceTest).FullName
                     );
@@ -123,8 +123,8 @@ public class TestAnalyzer : DiagnosticAnalyzer
             try
             {
                 // Test analyzer load failure.
-                var remoteTest =
-                    (RemoteAnalyzerFileReferenceTest)loadDomain.CreateInstanceAndUnwrap(
+                var remoteTest = (RemoteAnalyzerFileReferenceTest)
+                    loadDomain.CreateInstanceAndUnwrap(
                         typeof(RemoteAnalyzerFileReferenceTest).Assembly.FullName,
                         typeof(RemoteAnalyzerFileReferenceTest).FullName
                     );

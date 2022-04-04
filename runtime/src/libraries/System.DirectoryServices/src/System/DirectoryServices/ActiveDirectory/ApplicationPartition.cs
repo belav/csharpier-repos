@@ -785,11 +785,12 @@ namespace System.DirectoryServices.ActiveDirectory
                 DirectoryEntry rootDSE = directoryEntryMgr.GetCachedDirectoryEntry(
                     WellKnownDN.RootDSE
                 );
-                string primaryServerNtdsaName = (string)PropertyManager.GetPropertyValue(
-                    context,
-                    rootDSE,
-                    PropertyManager.DsServiceName
-                )!;
+                string primaryServerNtdsaName = (string)
+                    PropertyManager.GetPropertyValue(
+                        context,
+                        rootDSE,
+                        PropertyManager.DsServiceName
+                    )!;
 
                 // get the DN of the crossRef entry that needs to be replicated to the fsmo role
                 if (_appType == ApplicationPartitionType.ADApplicationPartition)
@@ -797,11 +798,12 @@ namespace System.DirectoryServices.ActiveDirectory
                     // for AD we may not have the crossRef entry yet
                     GetCrossRefEntry();
                 }
-                string crossRefDN = (string)PropertyManager.GetPropertyValue(
-                    context,
-                    _crossRefEntry!,
-                    PropertyManager.DistinguishedName
-                )!;
+                string crossRefDN = (string)
+                    PropertyManager.GetPropertyValue(
+                        context,
+                        _crossRefEntry!,
+                        PropertyManager.DistinguishedName
+                    )!;
 
                 // Now set the operational attribute "replicateSingleObject" on the Rootdse of the fsmo role
                 // to <ntdsa name of the source>:<DN of the crossRef object which needs to be replicated>
@@ -961,9 +963,10 @@ namespace System.DirectoryServices.ActiveDirectory
                             > 0
                         )
                         {
-                            return (string?)_crossRefEntry.Properties[
-                                PropertyManager.MsDSSDReferenceDomain
-                            ].Value;
+                            return (string?)
+                                _crossRefEntry.Properties[
+                                    PropertyManager.MsDSSDReferenceDomain
+                                ].Value;
                         }
                         else
                         {
@@ -1113,11 +1116,12 @@ namespace System.DirectoryServices.ActiveDirectory
                     DirectoryEntry rootDSEEntry = directoryEntryMgr.GetCachedDirectoryEntry(
                         WellKnownDN.RootDSE
                     );
-                    serverDnsName = (string?)PropertyManager.GetPropertyValue(
-                        this.context,
-                        rootDSEEntry,
-                        PropertyManager.DnsHostName
-                    );
+                    serverDnsName = (string?)
+                        PropertyManager.GetPropertyValue(
+                            this.context,
+                            rootDSEEntry,
+                            PropertyManager.DnsHostName
+                        );
                 }
                 catch (COMException e)
                 {
@@ -1285,11 +1289,12 @@ namespace System.DirectoryServices.ActiveDirectory
                     DirectoryEntry rootDSE = directoryEntryMgr.GetCachedDirectoryEntry(
                         WellKnownDN.RootDSE
                     );
-                    string ntdsaName = (string)PropertyManager.GetPropertyValue(
-                        context,
-                        rootDSE,
-                        PropertyManager.DsServiceName
-                    )!;
+                    string ntdsaName = (string)
+                        PropertyManager.GetPropertyValue(
+                            context,
+                            rootDSE,
+                            PropertyManager.DsServiceName
+                        )!;
                     dnsHostName = Utils.GetAdamHostNameAndPortsFromNTDSA(context, ntdsaName);
                 }
                 else
@@ -1411,22 +1416,24 @@ namespace System.DirectoryServices.ActiveDirectory
                 {
                     namingFsmo = Utils.GetDnsHostNameFromNTDSA(
                         context,
-                        (string)PropertyManager.GetPropertyValue(
-                            context,
-                            partitionsEntry,
-                            PropertyManager.FsmoRoleOwner
-                        )!
+                        (string)
+                            PropertyManager.GetPropertyValue(
+                                context,
+                                partitionsEntry,
+                                PropertyManager.FsmoRoleOwner
+                            )!
                     );
                 }
                 else
                 {
                     namingFsmo = Utils.GetAdamDnsHostNameFromNTDSA(
                         context,
-                        (string)PropertyManager.GetPropertyValue(
-                            context,
-                            partitionsEntry,
-                            PropertyManager.FsmoRoleOwner
-                        )!
+                        (string)
+                            PropertyManager.GetPropertyValue(
+                                context,
+                                partitionsEntry,
+                                PropertyManager.FsmoRoleOwner
+                            )!
                     );
                 }
             }

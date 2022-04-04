@@ -82,10 +82,8 @@ namespace System.Security.Cryptography.Xml
         internal XmlElement GetXml(XmlDocument document)
         {
             // Create the EncryptedData element
-            XmlElement encryptedDataElement = (XmlElement)document.CreateElement(
-                "EncryptedData",
-                EncryptedXml.XmlEncNamespaceUrl
-            );
+            XmlElement encryptedDataElement = (XmlElement)
+                document.CreateElement("EncryptedData", EncryptedXml.XmlEncNamespaceUrl);
 
             // Deal with attributes
             if (!string.IsNullOrEmpty(Id))

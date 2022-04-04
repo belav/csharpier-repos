@@ -1136,8 +1136,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                 ) != 0
             )
             {
-                methodFlags &=
-                    ~(uint)ReadyToRunMethodSigFlags.READYTORUN_METHOD_SIG_MethodInstantiation;
+                methodFlags &= ~(uint)
+                    ReadyToRunMethodSigFlags.READYTORUN_METHOD_SIG_MethodInstantiation;
                 uint typeArgCount = ReadUInt();
                 TType[] instantiationArgs = new TType[typeArgCount];
                 for (int typeArgIndex = 0; typeArgIndex < typeArgCount; typeArgIndex++)

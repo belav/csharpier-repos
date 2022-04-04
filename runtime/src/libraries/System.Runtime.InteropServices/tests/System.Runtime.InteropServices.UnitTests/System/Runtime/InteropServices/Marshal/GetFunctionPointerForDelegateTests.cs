@@ -54,9 +54,8 @@ namespace System.Runtime.InteropServices.Tests
                 nameof(Method),
                 BindingFlags.NonPublic | BindingFlags.Static
             );
-            NonGenericDelegate d = (NonGenericDelegate)targetMethod.CreateDelegate(
-                typeof(NonGenericDelegate)
-            );
+            NonGenericDelegate d = (NonGenericDelegate)
+                targetMethod.CreateDelegate(typeof(NonGenericDelegate));
 
             IntPtr pointer1 = Marshal.GetFunctionPointerForDelegate(d);
             IntPtr pointer2 = Marshal.GetFunctionPointerForDelegate(d);

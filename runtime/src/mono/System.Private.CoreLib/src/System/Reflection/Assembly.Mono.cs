@@ -104,9 +104,10 @@ namespace System.Reflection
 
         internal static uint GetAssemblyCount()
         {
-            return (uint)EventPipeInternal.GetRuntimeCounterValue(
-                EventPipeInternal.RuntimeCounters.ASSEMBLY_COUNT
-            );
+            return (uint)
+                EventPipeInternal.GetRuntimeCounterValue(
+                    EventPipeInternal.RuntimeCounters.ASSEMBLY_COUNT
+                );
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]

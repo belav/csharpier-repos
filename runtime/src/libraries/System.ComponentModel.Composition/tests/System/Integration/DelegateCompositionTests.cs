@@ -106,9 +106,8 @@ namespace Tests.Integration
             Assert.Equal(3, export(3, "a"));
 
             // Even though the string argument is optional it still cannot be cast to Func<int, int>.
-            var export2 = (ExportedDelegate)container.GetExportedValue<object>(
-                "FunctionWithDefaultValue"
-            );
+            var export2 = (ExportedDelegate)
+                container.GetExportedValue<object>("FunctionWithDefaultValue");
             var export3 = export2.CreateDelegate(typeof(Func<int, int>));
 
             Assert.Null(export3);

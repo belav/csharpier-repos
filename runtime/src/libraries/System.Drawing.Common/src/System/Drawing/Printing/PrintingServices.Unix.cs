@@ -643,10 +643,8 @@ namespace System.Drawing.Printing
                             IntPtr ptr_printers = dests;
                             for (int i = 0; i < n_printers; i++)
                             {
-                                var printer = (CUPS_DESTS)Marshal.PtrToStructure(
-                                    ptr_printers,
-                                    typeof(CUPS_DESTS)
-                                )!;
+                                var printer = (CUPS_DESTS)
+                                    Marshal.PtrToStructure(ptr_printers, typeof(CUPS_DESTS))!;
                                 string name = Marshal.PtrToStringAnsi(printer.name)!;
 
                                 if (

@@ -468,8 +468,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     if (temp != null)
                     {
                         Debug.Assert(temp.IsEarlyDecodedWellKnownAttributeDataComputed);
-                        var propertyData =
-                            (PropertyEarlyWellKnownAttributeData)temp.EarlyDecodedWellKnownAttributeData;
+                        var propertyData = (PropertyEarlyWellKnownAttributeData)
+                            temp.EarlyDecodedWellKnownAttributeData;
                         if (propertyData != null)
                         {
                             sourceName = propertyData.IndexerName;
@@ -1376,7 +1376,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 attributesBag = this.GetAttributesBag();
             }
 
-            return (PropertyEarlyWellKnownAttributeData)attributesBag.EarlyDecodedWellKnownAttributeData;
+            return (PropertyEarlyWellKnownAttributeData)
+                attributesBag.EarlyDecodedWellKnownAttributeData;
         }
 
         internal override void AddSynthesizedAttributes(
@@ -1543,7 +1544,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
                 {
                     return (
-                        (PropertyEarlyWellKnownAttributeData)lazyCustomAttributesBag.EarlyDecodedWellKnownAttributeData
+                        (PropertyEarlyWellKnownAttributeData)
+                            lazyCustomAttributesBag.EarlyDecodedWellKnownAttributeData
                     )?.ObsoleteAttributeData;
                 }
 
@@ -1721,8 +1723,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             FindAttributes(AttributeDescription.MemberNotNullWhenAttribute);
 
         private SourceAttributeData FindAttribute(AttributeDescription attributeDescription) =>
-            (SourceAttributeData)GetAttributes()
-                .First(a => a.IsTargetAttribute(this, attributeDescription));
+            (SourceAttributeData)
+                GetAttributes().First(a => a.IsTargetAttribute(this, attributeDescription));
 
         private ImmutableArray<SourceAttributeData> FindAttributes(
             AttributeDescription attributeDescription

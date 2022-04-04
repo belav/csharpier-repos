@@ -154,15 +154,14 @@ namespace System.Linq.Parallel
                 else
                 {
                     outputStream[i] =
-                        (QueryOperatorEnumerator<
-                            TInputOutput,
-                            TLeftKey
-                        >)(object)new ExceptQueryOperatorEnumerator<TLeftKey>(
-                            leftHashStream[i],
-                            rightHashStream[i],
-                            _comparer,
-                            cancellationToken
-                        );
+                        (QueryOperatorEnumerator<TInputOutput, TLeftKey>)
+                            (object)
+                                new ExceptQueryOperatorEnumerator<TLeftKey>(
+                                    leftHashStream[i],
+                                    rightHashStream[i],
+                                    _comparer,
+                                    cancellationToken
+                                );
                 }
             }
 

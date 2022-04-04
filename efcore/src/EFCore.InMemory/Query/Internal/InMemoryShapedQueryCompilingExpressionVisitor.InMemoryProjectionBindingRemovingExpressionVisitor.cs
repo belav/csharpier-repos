@@ -39,16 +39,14 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 {
                     var newExpression = (NewExpression)binaryExpression.Right;
 
-                    var projectionBindingExpression =
-                        (ProjectionBindingExpression)newExpression.Arguments[0];
-                    var queryExpression =
-                        (InMemoryQueryExpression)projectionBindingExpression.QueryExpression;
+                    var projectionBindingExpression = (ProjectionBindingExpression)
+                        newExpression.Arguments[0];
+                    var queryExpression = (InMemoryQueryExpression)
+                        projectionBindingExpression.QueryExpression;
 
                     _materializationContextBindings[parameterExpression] = (
-                        (IDictionary<IProperty, int>)GetProjectionIndex(
-                            queryExpression,
-                            projectionBindingExpression
-                        ),
+                        (IDictionary<IProperty, int>)
+                            GetProjectionIndex(queryExpression, projectionBindingExpression),
                         (
                             (InMemoryQueryExpression)projectionBindingExpression.QueryExpression
                         ).CurrentParameter
@@ -90,9 +88,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 {
                     var property = methodCallExpression.Arguments[2].GetConstantValue<IProperty?>();
                     var (indexMap, valueBuffer) = _materializationContextBindings[
-                        (ParameterExpression)(
-                            (MethodCallExpression)methodCallExpression.Arguments[0]
-                        ).Object!
+                        (ParameterExpression)
+                            ((MethodCallExpression)methodCallExpression.Arguments[0]).Object!
                     ];
 
                     Check.DebugAssert(
@@ -117,12 +114,10 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
                 if (extensionExpression is ProjectionBindingExpression projectionBindingExpression)
                 {
-                    var queryExpression =
-                        (InMemoryQueryExpression)projectionBindingExpression.QueryExpression;
-                    var projectionIndex = (int)GetProjectionIndex(
-                        queryExpression,
-                        projectionBindingExpression
-                    );
+                    var queryExpression = (InMemoryQueryExpression)
+                        projectionBindingExpression.QueryExpression;
+                    var projectionIndex = (int)
+                        GetProjectionIndex(queryExpression, projectionBindingExpression);
                     var valueBuffer = queryExpression.CurrentParameter;
                     var property = InferPropertyFromInner(
                         queryExpression.Projection[projectionIndex]

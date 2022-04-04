@@ -57,10 +57,8 @@ namespace Microsoft.EntityFrameworkCore
         )
             where TEntity : class
             where TRelatedEntity : class =>
-            (ReferenceCollectionBuilder<TEntity, TRelatedEntity>)HasConstraintName(
-                (ReferenceCollectionBuilder)referenceCollectionBuilder,
-                name
-            );
+            (ReferenceCollectionBuilder<TEntity, TRelatedEntity>)
+                HasConstraintName((ReferenceCollectionBuilder)referenceCollectionBuilder, name);
 
         /// <summary>
         ///     Configures the foreign key constraint name for this relationship when targeting a relational database.
@@ -103,10 +101,8 @@ namespace Microsoft.EntityFrameworkCore
         )
             where TEntity : class
             where TRelatedEntity : class =>
-            (ReferenceReferenceBuilder<TEntity, TRelatedEntity>)HasConstraintName(
-                (ReferenceReferenceBuilder)referenceReferenceBuilder,
-                name
-            );
+            (ReferenceReferenceBuilder<TEntity, TRelatedEntity>)
+                HasConstraintName((ReferenceReferenceBuilder)referenceReferenceBuilder, name);
 
         /// <summary>
         ///     Configures the foreign key constraint name for this relationship when targeting a relational database.
@@ -146,10 +142,8 @@ namespace Microsoft.EntityFrameworkCore
         >(this OwnershipBuilder<TEntity, TDependentEntity> ownershipBuilder, string? name)
             where TEntity : class
             where TDependentEntity : class =>
-            (OwnershipBuilder<TEntity, TDependentEntity>)HasConstraintName(
-                (OwnershipBuilder)ownershipBuilder,
-                name
-            );
+            (OwnershipBuilder<TEntity, TDependentEntity>)
+                HasConstraintName((OwnershipBuilder)ownershipBuilder, name);
 
         /// <summary>
         ///     Configures the foreign key constraint name for this relationship when targeting a relational database.

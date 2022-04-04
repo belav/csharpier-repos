@@ -31,8 +31,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             IVisualStudioDiagnosticListSuppressionStateService suppressionStateService
         )
         {
-            _suppressionStateService =
-                (VisualStudioDiagnosticListSuppressionStateService)suppressionStateService;
+            _suppressionStateService = (VisualStudioDiagnosticListSuppressionStateService)
+                suppressionStateService;
         }
 
         protected override EventProcessor CreateEventProcessor()

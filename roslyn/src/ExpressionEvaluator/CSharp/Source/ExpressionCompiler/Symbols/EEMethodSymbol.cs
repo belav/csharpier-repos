@@ -533,14 +533,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 try
                 {
                     // Rewrite local declaration statement.
-                    body = (BoundStatement)LocalDeclarationRewriter.Rewrite(
-                        compilation,
-                        _container,
-                        declaredLocals,
-                        body,
-                        declaredLocalsArray,
-                        diagnostics.DiagnosticBag
-                    );
+                    body = (BoundStatement)
+                        LocalDeclarationRewriter.Rewrite(
+                            compilation,
+                            _container,
+                            declaredLocals,
+                            body,
+                            declaredLocalsArray,
+                            diagnostics.DiagnosticBag
+                        );
 
                     // Verify local declaration names.
                     foreach (var local in declaredLocals)
@@ -559,13 +560,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                     }
 
                     // Rewrite references to placeholder "locals".
-                    body = (BoundStatement)PlaceholderLocalRewriter.Rewrite(
-                        compilation,
-                        _container,
-                        declaredLocals,
-                        body,
-                        diagnostics.DiagnosticBag
-                    );
+                    body = (BoundStatement)
+                        PlaceholderLocalRewriter.Rewrite(
+                            compilation,
+                            _container,
+                            declaredLocals,
+                            body,
+                            diagnostics.DiagnosticBag
+                        );
 
                     if (diagnostics.HasAnyErrors())
                     {
@@ -676,13 +678,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 
                     // Rewrite "this" and "base" references to parameter in this method.
                     // Rewrite variables within body to reference existing display classes.
-                    body = (BoundStatement)CapturedVariableRewriter.Rewrite(
-                        this.GenerateThisReference,
-                        compilation.Conversions,
-                        _displayClassVariables,
-                        body,
-                        diagnostics.DiagnosticBag
-                    );
+                    body = (BoundStatement)
+                        CapturedVariableRewriter.Rewrite(
+                            this.GenerateThisReference,
+                            compilation.Conversions,
+                            _displayClassVariables,
+                            body,
+                            diagnostics.DiagnosticBag
+                        );
 
                     if (body.HasErrors)
                     {

@@ -56,27 +56,28 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.ValueGeneration.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         protected override long GetNewLowValue() =>
-            (long)Convert.ChangeType(
-                _rawSqlCommandBuilder
-                    .Build(
-                        _sqlGenerator.GenerateNextSequenceValueOperation(
-                            _sequence.Name,
-                            _sequence.Schema
+            (long)
+                Convert.ChangeType(
+                    _rawSqlCommandBuilder
+                        .Build(
+                            _sqlGenerator.GenerateNextSequenceValueOperation(
+                                _sequence.Name,
+                                _sequence.Schema
+                            )
                         )
-                    )
-                    .ExecuteScalar(
-                        new RelationalCommandParameterObject(
-                            _connection,
-                            parameterValues: null,
-                            readerColumns: null,
-                            context: null,
-                            _commandLogger,
-                            CommandSource.ValueGenerator
-                        )
-                    ),
-                typeof(long),
-                CultureInfo.InvariantCulture
-            )!;
+                        .ExecuteScalar(
+                            new RelationalCommandParameterObject(
+                                _connection,
+                                parameterValues: null,
+                                readerColumns: null,
+                                context: null,
+                                _commandLogger,
+                                CommandSource.ValueGenerator
+                            )
+                        ),
+                    typeof(long),
+                    CultureInfo.InvariantCulture
+                )!;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -87,29 +88,30 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.ValueGeneration.Internal
         protected override async Task<long> GetNewLowValueAsync(
             CancellationToken cancellationToken = default
         ) =>
-            (long)Convert.ChangeType(
-                await _rawSqlCommandBuilder
-                    .Build(
-                        _sqlGenerator.GenerateNextSequenceValueOperation(
-                            _sequence.Name,
-                            _sequence.Schema
+            (long)
+                Convert.ChangeType(
+                    await _rawSqlCommandBuilder
+                        .Build(
+                            _sqlGenerator.GenerateNextSequenceValueOperation(
+                                _sequence.Name,
+                                _sequence.Schema
+                            )
                         )
-                    )
-                    .ExecuteScalarAsync(
-                        new RelationalCommandParameterObject(
-                            _connection,
-                            parameterValues: null,
-                            readerColumns: null,
-                            context: null,
-                            _commandLogger,
-                            CommandSource.ValueGenerator
-                        ),
-                        cancellationToken
-                    )
-                    .ConfigureAwait(false),
-                typeof(long),
-                CultureInfo.InvariantCulture
-            )!;
+                        .ExecuteScalarAsync(
+                            new RelationalCommandParameterObject(
+                                _connection,
+                                parameterValues: null,
+                                readerColumns: null,
+                                context: null,
+                                _commandLogger,
+                                CommandSource.ValueGenerator
+                            ),
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false),
+                    typeof(long),
+                    CultureInfo.InvariantCulture
+                )!;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

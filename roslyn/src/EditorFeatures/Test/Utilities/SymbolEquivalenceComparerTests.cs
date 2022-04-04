@@ -52,11 +52,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
 }";
 
             using var workspace = TestWorkspace.CreateCSharp(csharpCode);
-            var type = (ITypeSymbol)(
-                await workspace.CurrentSolution.Projects.Single().GetCompilationAsync()
-            ).GlobalNamespace
-                .GetTypeMembers("C")
-                .Single();
+            var type = (ITypeSymbol)
+                (
+                    await workspace.CurrentSolution.Projects.Single().GetCompilationAsync()
+                ).GlobalNamespace
+                    .GetTypeMembers("C")
+                    .Single();
 
             var intField1 = (IFieldSymbol)type.GetMembers("intField1").Single();
             var intArrayField1 = (IFieldSymbol)type.GetMembers("intArrayField1").Single();
@@ -194,11 +195,12 @@ end class";
 
             using var csharpWorkspace = TestWorkspace.CreateCSharp(csharpCode);
             using var vbWorkspace = TestWorkspace.CreateVisualBasic(vbCode);
-            var csharpType = (ITypeSymbol)(
-                await csharpWorkspace.CurrentSolution.Projects.Single().GetCompilationAsync()
-            ).GlobalNamespace
-                .GetTypeMembers("C")
-                .Single();
+            var csharpType = (ITypeSymbol)
+                (
+                    await csharpWorkspace.CurrentSolution.Projects.Single().GetCompilationAsync()
+                ).GlobalNamespace
+                    .GetTypeMembers("C")
+                    .Single();
             var vbType = (
                 await vbWorkspace.CurrentSolution.Projects.Single().GetCompilationAsync()
             ).GlobalNamespace
@@ -206,29 +208,23 @@ end class";
                 .Single();
 
             var csharpIntField1 = (IFieldSymbol)csharpType.GetMembers("intField1").Single();
-            var csharpIntArrayField1 = (IFieldSymbol)csharpType
-                .GetMembers("intArrayField1")
-                .Single();
-            var csharpStringArrayField1 = (IFieldSymbol)csharpType
-                .GetMembers("stringArrayField1")
-                .Single();
-            var csharpIntArrayArrayField1 = (IFieldSymbol)csharpType
-                .GetMembers("intArrayArrayField1")
-                .Single();
-            var csharpIntArrayRank2Field1 = (IFieldSymbol)csharpType
-                .GetMembers("intArrayRank2Field1")
-                .Single();
+            var csharpIntArrayField1 = (IFieldSymbol)
+                csharpType.GetMembers("intArrayField1").Single();
+            var csharpStringArrayField1 = (IFieldSymbol)
+                csharpType.GetMembers("stringArrayField1").Single();
+            var csharpIntArrayArrayField1 = (IFieldSymbol)
+                csharpType.GetMembers("intArrayArrayField1").Single();
+            var csharpIntArrayRank2Field1 = (IFieldSymbol)
+                csharpType.GetMembers("intArrayRank2Field1").Single();
             var csharpInt32Field1 = (IFieldSymbol)csharpType.GetMembers("int32Field1").Single();
 
             var vbIntField1 = (IFieldSymbol)vbType.GetMembers("intField1").Single();
             var vbIntArrayField1 = (IFieldSymbol)vbType.GetMembers("intArrayField1").Single();
             var vbStringArrayField1 = (IFieldSymbol)vbType.GetMembers("stringArrayField1").Single();
-            var vbIntArrayArrayField1 = (IFieldSymbol)vbType
-                .GetMembers("intArrayArrayField1")
-                .Single();
-            var vbIntArrayRank2Field1 = (IFieldSymbol)vbType
-                .GetMembers("intArrayRank2Field1")
-                .Single();
+            var vbIntArrayArrayField1 = (IFieldSymbol)
+                vbType.GetMembers("intArrayArrayField1").Single();
+            var vbIntArrayRank2Field1 = (IFieldSymbol)
+                vbType.GetMembers("intArrayRank2Field1").Single();
             var vbInt32Field1 = (IFieldSymbol)vbType.GetMembers("int32Field1").Single();
 
             Assert.True(
@@ -497,12 +493,10 @@ class D
                 .Single();
 
             var intInstantiation1 = (IFieldSymbol)typeC.GetMembers("intInstantiation1").Single();
-            var stringInstantiation = (IFieldSymbol)typeC
-                .GetMembers("stringInstantiation")
-                .Single();
-            var instanceInstantiation = (IFieldSymbol)typeC
-                .GetMembers("instanceInstantiation")
-                .Single();
+            var stringInstantiation = (IFieldSymbol)
+                typeC.GetMembers("stringInstantiation").Single();
+            var instanceInstantiation = (IFieldSymbol)
+                typeC.GetMembers("instanceInstantiation").Single();
             var intInstantiation2 = (IFieldSymbol)typeD.GetMembers("intInstantiation2").Single();
 
             var goo = typeC.GetMembers("goo").Single();
@@ -1247,16 +1241,18 @@ class Type1
 
             using var workspace1 = TestWorkspace.CreateCSharp(csharpCode1);
             using var workspace2 = TestWorkspace.CreateCSharp(csharpCode1);
-            var outer1 = (INamespaceSymbol)(
-                await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()
-            ).GlobalNamespace
-                .GetMembers("Outer")
-                .Single();
-            var outer2 = (INamespaceSymbol)(
-                await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()
-            ).GlobalNamespace
-                .GetMembers("Outer")
-                .Single();
+            var outer1 = (INamespaceSymbol)
+                (
+                    await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()
+                ).GlobalNamespace
+                    .GetMembers("Outer")
+                    .Single();
+            var outer2 = (INamespaceSymbol)
+                (
+                    await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()
+                ).GlobalNamespace
+                    .GetMembers("Outer")
+                    .Single();
 
             var inner1 = (INamespaceSymbol)outer1.GetMembers("Inner").Single();
             var inner2 = (INamespaceSymbol)outer2.GetMembers("Inner").Single();
@@ -2295,37 +2291,42 @@ End Class
             var sourceV2 =
                 "[assembly: System.Reflection.AssemblyVersion(\"2.0.0.0\")] public class T {}";
 
-            var a1 = (Compilation)CS.CSharpCompilation.Create(
-                "a",
-                new[] { CS.SyntaxFactory.ParseSyntaxTree(source) },
-                references,
-                CSharpDllOptions
-            );
-            var a2 = (Compilation)CS.CSharpCompilation.Create(
-                "a",
-                new[] { CS.SyntaxFactory.ParseSyntaxTree(source) },
-                references,
-                CSharpDllOptions
-            );
+            var a1 = (Compilation)
+                CS.CSharpCompilation.Create(
+                    "a",
+                    new[] { CS.SyntaxFactory.ParseSyntaxTree(source) },
+                    references,
+                    CSharpDllOptions
+                );
+            var a2 = (Compilation)
+                CS.CSharpCompilation.Create(
+                    "a",
+                    new[] { CS.SyntaxFactory.ParseSyntaxTree(source) },
+                    references,
+                    CSharpDllOptions
+                );
 
-            var b1 = (Compilation)CS.CSharpCompilation.Create(
-                "b",
-                new[] { CS.SyntaxFactory.ParseSyntaxTree(sourceV1) },
-                references,
-                CSharpSignedDllOptions
-            );
-            var b2 = (Compilation)CS.CSharpCompilation.Create(
-                "b",
-                new[] { CS.SyntaxFactory.ParseSyntaxTree(sourceV2) },
-                references,
-                CSharpSignedDllOptions
-            );
-            var b3 = (Compilation)CS.CSharpCompilation.Create(
-                "b",
-                new[] { CS.SyntaxFactory.ParseSyntaxTree(sourceV2) },
-                references,
-                CSharpSignedDllOptions
-            );
+            var b1 = (Compilation)
+                CS.CSharpCompilation.Create(
+                    "b",
+                    new[] { CS.SyntaxFactory.ParseSyntaxTree(sourceV1) },
+                    references,
+                    CSharpSignedDllOptions
+                );
+            var b2 = (Compilation)
+                CS.CSharpCompilation.Create(
+                    "b",
+                    new[] { CS.SyntaxFactory.ParseSyntaxTree(sourceV2) },
+                    references,
+                    CSharpSignedDllOptions
+                );
+            var b3 = (Compilation)
+                CS.CSharpCompilation.Create(
+                    "b",
+                    new[] { CS.SyntaxFactory.ParseSyntaxTree(sourceV2) },
+                    references,
+                    CSharpSignedDllOptions
+                );
 
             var ta1 = (ITypeSymbol)a1.GlobalNamespace.GetMembers("T").Single();
             var ta2 = (ITypeSymbol)a2.GlobalNamespace.GetMembers("T").Single();
@@ -2421,16 +2422,18 @@ End Class
                 r2 = MetadataReference.CreateFromImage(bytes);
             }
 
-            var c1 = (Compilation)CS.CSharpCompilation.Create(
-                "comp1",
-                Array.Empty<SyntaxTree>(),
-                new[] { TestMetadata.Net451.mscorlib, r1 }
-            );
-            var c2 = (Compilation)CS.CSharpCompilation.Create(
-                "comp2",
-                Array.Empty<SyntaxTree>(),
-                new[] { TestMetadata.Net451.mscorlib, r2 }
-            );
+            var c1 = (Compilation)
+                CS.CSharpCompilation.Create(
+                    "comp1",
+                    Array.Empty<SyntaxTree>(),
+                    new[] { TestMetadata.Net451.mscorlib, r1 }
+                );
+            var c2 = (Compilation)
+                CS.CSharpCompilation.Create(
+                    "comp2",
+                    Array.Empty<SyntaxTree>(),
+                    new[] { TestMetadata.Net451.mscorlib, r2 }
+                );
             var type1 = (ITypeSymbol)c1.GlobalNamespace.GetMembers("C").Single();
             var type2 = (ITypeSymbol)c2.GlobalNamespace.GetMembers("C").Single();
 

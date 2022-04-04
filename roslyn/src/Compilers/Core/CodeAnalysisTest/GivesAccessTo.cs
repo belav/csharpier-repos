@@ -47,18 +47,20 @@ Friend Class VB2
 End Class
 "
             );
-            var csc = (Compilation)CSharpCompilation.Create(
-                "CS",
-                new[] { csharpTree },
-                new MetadataReference[] { TestBase.MscorlibRef }
-            );
+            var csc = (Compilation)
+                CSharpCompilation.Create(
+                    "CS",
+                    new[] { csharpTree },
+                    new MetadataReference[] { TestBase.MscorlibRef }
+                );
             var CS = csc.GlobalNamespace.GetMembers("CS").First() as INamedTypeSymbol;
 
-            var csc2 = (Compilation)CSharpCompilation.Create(
-                "CS2",
-                new[] { csharpTree2 },
-                new MetadataReference[] { TestBase.MscorlibRef }
-            );
+            var csc2 = (Compilation)
+                CSharpCompilation.Create(
+                    "CS2",
+                    new[] { csharpTree2 },
+                    new MetadataReference[] { TestBase.MscorlibRef }
+                );
             var CS2 = csc2.GlobalNamespace.GetMembers("CS2").First() as INamedTypeSymbol;
 
             var vbc = VisualBasicCompilation.Create(

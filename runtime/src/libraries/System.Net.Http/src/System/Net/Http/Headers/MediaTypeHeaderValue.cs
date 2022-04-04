@@ -128,11 +128,8 @@ namespace System.Net.Http.Headers
         public static MediaTypeHeaderValue Parse(string? input)
         {
             int index = 0;
-            return (MediaTypeHeaderValue)MediaTypeHeaderParser.SingleValueParser.ParseValue(
-                input,
-                null,
-                ref index
-            );
+            return (MediaTypeHeaderValue)
+                MediaTypeHeaderParser.SingleValueParser.ParseValue(input, null, ref index);
         }
 
         public static bool TryParse(

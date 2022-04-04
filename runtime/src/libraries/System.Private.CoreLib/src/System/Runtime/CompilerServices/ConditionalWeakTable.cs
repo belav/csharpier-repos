@@ -246,9 +246,8 @@ namespace System.Runtime.CompilerServices
                 Container c = _container;
                 return c is null || c.FirstFreeEntry == 0
                   ? (
-                        (IEnumerable<KeyValuePair<TKey, TValue>>)Array.Empty<
-                            KeyValuePair<TKey, TValue>
-                        >()
+                        (IEnumerable<KeyValuePair<TKey, TValue>>)
+                            Array.Empty<KeyValuePair<TKey, TValue>>()
                     ).GetEnumerator()
                   : new Enumerator(this);
             }

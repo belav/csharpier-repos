@@ -1692,8 +1692,8 @@ namespace System.Runtime.Serialization
                         )
                     );
 #endif
-                collectionContractAttribute =
-                    (CollectionDataContractAttribute)collectionContractAttributes[0];
+                collectionContractAttribute = (CollectionDataContractAttribute)
+                    collectionContractAttributes[0];
                 if (collectionContractAttribute.IsNameSetExplicitly)
                 {
                     name = collectionContractAttribute.Name;
@@ -2076,9 +2076,8 @@ namespace System.Runtime.Serialization
             string? dataContractNs = null;
             for (int i = 0; i < nsAttributes.Length; i++)
             {
-                ContractNamespaceAttribute nsAttribute = (ContractNamespaceAttribute)nsAttributes[
-                    i
-                ];
+                ContractNamespaceAttribute nsAttribute = (ContractNamespaceAttribute)
+                    nsAttributes[i];
                 string? clrNsInAttribute = nsAttribute.ClrNamespace;
                 if (clrNsInAttribute == null)
                     clrNsInAttribute = string.Empty;
@@ -2749,9 +2748,8 @@ namespace System.Runtime.Serialization
         internal static bool IsAssemblyFriendOfSerialization(Assembly assembly)
         {
             InternalsVisibleToAttribute[] internalsVisibleAttributes =
-                (InternalsVisibleToAttribute[])assembly.GetCustomAttributes(
-                    typeof(InternalsVisibleToAttribute)
-                );
+                (InternalsVisibleToAttribute[])
+                    assembly.GetCustomAttributes(typeof(InternalsVisibleToAttribute));
             foreach (
                 InternalsVisibleToAttribute internalsVisibleAttribute in internalsVisibleAttributes
             )

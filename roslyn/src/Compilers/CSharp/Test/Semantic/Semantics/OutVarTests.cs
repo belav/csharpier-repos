@@ -4989,11 +4989,12 @@ public class X
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var statement = (DoStatementSyntax)SyntaxFactory.ParseStatement(
-                @"
+            var statement = (DoStatementSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 do {} while (Dummy(TakeOutParam(true, out var x1), x1));
 "
-            );
+                );
 
             bool success = model.TryGetSpeculativeSemanticModel(
                 GetReferences(tree, "SpeculateHere").Single().SpanStart,
@@ -6260,11 +6261,12 @@ public class X
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var statement = (ExpressionStatementSyntax)SyntaxFactory.ParseStatement(
-                @"
+            var statement = (ExpressionStatementSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 Dummy(TakeOutParam(true, out var x1), x1);
 "
-            );
+                );
 
             bool success = model.TryGetSpeculativeSemanticModel(
                 GetReferences(tree, "SpeculateHere").Single().SpanStart,
@@ -7072,9 +7074,10 @@ public class X
             Assert.Equal(
                 "System.Int32",
                 (
-                    (ILocalSymbol)compilation
-                        .GetSemanticModel(tree)
-                        .GetDeclaredSymbol(GetVariableDesignation(x1Decl))
+                    (ILocalSymbol)
+                        compilation
+                            .GetSemanticModel(tree)
+                            .GetDeclaredSymbol(GetVariableDesignation(x1Decl))
                 ).Type.ToTestDisplayString()
             );
         }
@@ -10486,11 +10489,12 @@ public class X
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var statement = (IfStatementSyntax)SyntaxFactory.ParseStatement(
-                @"
+            var statement = (IfStatementSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 if (Dummy(TakeOutParam(true, out var x1), x1));
 "
-            );
+                );
 
             bool success = model.TryGetSpeculativeSemanticModel(
                 GetReferences(tree, "SpeculateHere").Single().SpanStart,
@@ -11460,11 +11464,12 @@ public class X
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var statement = (LocalDeclarationStatementSyntax)SyntaxFactory.ParseStatement(
-                @"
+            var statement = (LocalDeclarationStatementSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 var y1 = Dummy(TakeOutParam(true, out var x1), x1);
 "
-            );
+                );
 
             bool success = model.TryGetSpeculativeSemanticModel(
                 GetReferences(tree, "SpeculateHere").Single().SpanStart,
@@ -12108,11 +12113,12 @@ public class X
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var statement = (ExpressionStatementSyntax)SyntaxFactory.ParseStatement(
-                @"
+            var statement = (ExpressionStatementSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 var (y1, dd) = (TakeOutParam(true, out var x1), x1);
 "
-            );
+                );
 
             bool success = model.TryGetSpeculativeSemanticModel(
                 GetReferences(tree, "SpeculateHere").Single().SpanStart,
@@ -12829,11 +12835,12 @@ public class X
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var statement = (LockStatementSyntax)SyntaxFactory.ParseStatement(
-                @"
+            var statement = (LockStatementSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 lock (Dummy(TakeOutParam(true, out var x1), x1)) ;
 "
-            );
+                );
 
             bool success = model.TryGetSpeculativeSemanticModel(
                 GetReferences(tree, "SpeculateHere").Single().SpanStart,
@@ -15264,9 +15271,10 @@ public class X
                 Assert.Equal(
                     "System.Int32",
                     (
-                        (ILocalSymbol)compilation
-                            .GetSemanticModel(tree)
-                            .GetDeclaredSymbol(GetVariableDesignation(yDecl))
+                        (ILocalSymbol)
+                            compilation
+                                .GetSemanticModel(tree)
+                                .GetDeclaredSymbol(GetVariableDesignation(yDecl))
                     ).Type.ToTestDisplayString()
                 );
             }
@@ -15790,11 +15798,12 @@ public class X
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var statement = (ReturnStatementSyntax)SyntaxFactory.ParseStatement(
-                @"
+            var statement = (ReturnStatementSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 return Dummy(TakeOutParam(true, out var x1), x1);
 "
-            );
+                );
 
             bool success = model.TryGetSpeculativeSemanticModel(
                 GetReferences(tree, "SpeculateHere").Single().SpanStart,
@@ -16235,11 +16244,12 @@ public class X
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var statement = (SwitchStatementSyntax)SyntaxFactory.ParseStatement(
-                @"
+            var statement = (SwitchStatementSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 switch (Dummy(TakeOutParam(true, out var x1), x1)) {}
 "
-            );
+                );
 
             bool success = model.TryGetSpeculativeSemanticModel(
                 GetReferences(tree, "SpeculateHere").Single().SpanStart,
@@ -17938,11 +17948,12 @@ public class X
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var statement = (ThrowStatementSyntax)SyntaxFactory.ParseStatement(
-                @"
+            var statement = (ThrowStatementSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 throw Dummy(TakeOutParam(true, out var x1), x1);
 "
-            );
+                );
 
             bool success = model.TryGetSpeculativeSemanticModel(
                 GetReferences(tree, "SpeculateHere").Single().SpanStart,
@@ -19358,11 +19369,12 @@ public class X
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var statement = (WhileStatementSyntax)SyntaxFactory.ParseStatement(
-                @"
+            var statement = (WhileStatementSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 while (Dummy(TakeOutParam(true, out var x1), x1));
 "
-            );
+                );
 
             bool success = model.TryGetSpeculativeSemanticModel(
                 GetReferences(tree, "SpeculateHere").Single().SpanStart,
@@ -19985,11 +19997,12 @@ public class X
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var statement = (YieldStatementSyntax)SyntaxFactory.ParseStatement(
-                @"
+            var statement = (YieldStatementSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 yield return Dummy(TakeOutParam(true, out var x1), x1);
 "
-            );
+                );
 
             bool success = model.TryGetSpeculativeSemanticModel(
                 GetReferences(tree, "SpeculateHere").Single().SpanStart,
@@ -20483,11 +20496,12 @@ public class X
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var statement = (LabeledStatementSyntax)SyntaxFactory.ParseStatement(
-                @"
+            var statement = (LabeledStatementSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 a: b: Dummy(TakeOutParam(true, out var x1), x1);
 "
-            );
+                );
 
             bool success = model.TryGetSpeculativeSemanticModel(
                 GetReferences(tree, "SpeculateHere").Single().SpanStart,
@@ -21578,9 +21592,10 @@ public class Cls
             Assert.Equal(
                 "System.Int32",
                 (
-                    (ILocalSymbol)compilation
-                        .GetSemanticModel(tree)
-                        .GetDeclaredSymbol(GetVariableDesignation(x1Decl))
+                    (ILocalSymbol)
+                        compilation
+                            .GetSemanticModel(tree)
+                            .GetDeclaredSymbol(GetVariableDesignation(x1Decl))
                 ).Type.ToTestDisplayString()
             );
 
@@ -21670,9 +21685,10 @@ public class Cls
             Assert.Equal(
                 "System.Int32",
                 (
-                    (ILocalSymbol)compilation
-                        .GetSemanticModel(tree)
-                        .GetDeclaredSymbol(GetVariableDesignation(x1Decl))
+                    (ILocalSymbol)
+                        compilation
+                            .GetSemanticModel(tree)
+                            .GetDeclaredSymbol(GetVariableDesignation(x1Decl))
                 ).Type.ToTestDisplayString()
             );
 
@@ -21739,9 +21755,10 @@ public class Cls
             Assert.Equal(
                 "System.Int32",
                 (
-                    (ILocalSymbol)compilation
-                        .GetSemanticModel(tree)
-                        .GetDeclaredSymbol(GetVariableDesignation(x1Decl))
+                    (ILocalSymbol)
+                        compilation
+                            .GetSemanticModel(tree)
+                            .GetDeclaredSymbol(GetVariableDesignation(x1Decl))
                 ).Type.ToTestDisplayString()
             );
         }
@@ -21794,9 +21811,10 @@ public class Cls
             Assert.Equal(
                 "System.Int32",
                 (
-                    (ILocalSymbol)compilation
-                        .GetSemanticModel(tree)
-                        .GetDeclaredSymbol(GetVariableDesignation(x1Decl))
+                    (ILocalSymbol)
+                        compilation
+                            .GetSemanticModel(tree)
+                            .GetDeclaredSymbol(GetVariableDesignation(x1Decl))
                 ).Type.ToTestDisplayString()
             );
         }
@@ -24965,11 +24983,12 @@ public class X
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var statement = (LocalDeclarationStatementSyntax)SyntaxFactory.ParseStatement(
-                @"
+            var statement = (LocalDeclarationStatementSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 var y, y1(Dummy(TakeOutParam(true, out var x1), x1));
 "
-            );
+                );
 
             bool success = model.TryGetSpeculativeSemanticModel(
                 GetReferences(tree, "SpeculateHere").Single().SpanStart,
@@ -30973,9 +30992,10 @@ class H
                 Assert.Equal(
                     "System.Int32",
                     (
-                        (IFieldSymbol)compilation
-                            .GetSemanticModel(tree)
-                            .GetDeclaredSymbol(x1Decl.VariableDesignation())
+                        (IFieldSymbol)
+                            compilation
+                                .GetSemanticModel(tree)
+                                .GetDeclaredSymbol(x1Decl.VariableDesignation())
                     ).Type.ToTestDisplayString()
                 );
 
@@ -31729,9 +31749,10 @@ class H
                 Assert.Equal(
                     "System.Int32",
                     (
-                        (IFieldSymbol)compilation
-                            .GetSemanticModel(tree)
-                            .GetDeclaredSymbol(x1Decl.VariableDesignation())
+                        (IFieldSymbol)
+                            compilation
+                                .GetSemanticModel(tree)
+                                .GetDeclaredSymbol(x1Decl.VariableDesignation())
                     ).Type.ToTestDisplayString()
                 );
 
@@ -38041,13 +38062,14 @@ class H
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var b = (IFieldSymbol)model.GetDeclaredSymbol(
-                tree.GetRoot()
-                    .DescendantNodes()
-                    .OfType<VariableDeclaratorSyntax>()
-                    .Where(d => d.Identifier.ValueText == "b")
-                    .Single()
-            );
+            var b = (IFieldSymbol)
+                model.GetDeclaredSymbol(
+                    tree.GetRoot()
+                        .DescendantNodes()
+                        .OfType<VariableDeclaratorSyntax>()
+                        .Where(d => d.Identifier.ValueText == "b")
+                        .Single()
+                );
             Assert.True(b.Type.IsErrorType());
 
             compilation.VerifyDiagnostics(
@@ -38094,13 +38116,14 @@ class H
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var b = (IFieldSymbol)model.GetDeclaredSymbol(
-                tree.GetRoot()
-                    .DescendantNodes()
-                    .OfType<VariableDeclaratorSyntax>()
-                    .Where(d => d.Identifier.ValueText == "b")
-                    .Single()
-            );
+            var b = (IFieldSymbol)
+                model.GetDeclaredSymbol(
+                    tree.GetRoot()
+                        .DescendantNodes()
+                        .OfType<VariableDeclaratorSyntax>()
+                        .Where(d => d.Identifier.ValueText == "b")
+                        .Single()
+                );
             Assert.True(b.Type.IsErrorType());
 
             compilation.VerifyDiagnostics(
@@ -38147,13 +38170,14 @@ class H
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var a = (IFieldSymbol)model.GetDeclaredSymbol(
-                tree.GetRoot()
-                    .DescendantNodes()
-                    .OfType<VariableDeclaratorSyntax>()
-                    .Where(d => d.Identifier.ValueText == "a")
-                    .Single()
-            );
+            var a = (IFieldSymbol)
+                model.GetDeclaredSymbol(
+                    tree.GetRoot()
+                        .DescendantNodes()
+                        .OfType<VariableDeclaratorSyntax>()
+                        .Where(d => d.Identifier.ValueText == "a")
+                        .Single()
+                );
             Assert.True(a.Type.IsErrorType());
 
             compilation.VerifyDiagnostics(

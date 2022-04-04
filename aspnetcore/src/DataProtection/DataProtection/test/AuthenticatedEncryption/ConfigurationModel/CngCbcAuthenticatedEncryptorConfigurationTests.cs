@@ -43,8 +43,8 @@ public class CngCbcAuthenticatedEncryptorConfigurationTests
         var configuration = new CngCbcAuthenticatedEncryptorConfiguration();
 
         // Act
-        var descriptor =
-            (CngCbcAuthenticatedEncryptorDescriptor)configuration.CreateNewDescriptor();
+        var descriptor = (CngCbcAuthenticatedEncryptorDescriptor)
+            configuration.CreateNewDescriptor();
 
         // Assert
         Assert.Equal(configuration, descriptor.Configuration);

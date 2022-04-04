@@ -238,8 +238,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                     CancellationToken cancellationToken
                 )
                 {
-                    var primarySnapshot =
-                        (IProjectionSnapshot)contentSpanOnPrimarySnapshot.Snapshot;
+                    var primarySnapshot = (IProjectionSnapshot)
+                        contentSpanOnPrimarySnapshot.Snapshot;
 
                     // map content span on the primary buffer to second buffer and for ones that can be mapped,
                     // get classification for those portion on secondary buffer and convert span on those to

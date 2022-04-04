@@ -128,13 +128,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             var comparisonLocation = diagnostic.AdditionalLocations[1];
             var asExpressionLocation = diagnostic.AdditionalLocations[2];
 
-            var declarator = (VariableDeclaratorSyntax)declaratorLocation.FindNode(
-                cancellationToken
-            );
+            var declarator = (VariableDeclaratorSyntax)
+                declaratorLocation.FindNode(cancellationToken);
             var comparison = (ExpressionSyntax)comparisonLocation.FindNode(cancellationToken);
-            var asExpression = (BinaryExpressionSyntax)asExpressionLocation.FindNode(
-                cancellationToken
-            );
+            var asExpression = (BinaryExpressionSyntax)
+                asExpressionLocation.FindNode(cancellationToken);
 
             var rightSideOfComparison = comparison is BinaryExpressionSyntax binaryExpression
                 ? (SyntaxNode)binaryExpression.Right

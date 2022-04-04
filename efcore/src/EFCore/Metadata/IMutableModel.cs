@@ -186,11 +186,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             string definingNavigationName,
             IMutableEntityType definingEntityType
         ) =>
-            (IMutableEntityType?)((IReadOnlyModel)this).FindEntityType(
-                type,
-                definingNavigationName,
-                definingEntityType
-            );
+            (IMutableEntityType?)
+                ((IReadOnlyModel)this).FindEntityType(
+                    type,
+                    definingNavigationName,
+                    definingEntityType
+                );
 
         /// <summary>
         ///     Removes an entity type from the model.

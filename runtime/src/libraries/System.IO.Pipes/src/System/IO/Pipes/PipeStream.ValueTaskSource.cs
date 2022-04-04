@@ -154,10 +154,8 @@ namespace System.IO.Pipes
                 NativeOverlapped* pOverlapped
             )
             {
-                PipeValueTaskSource? vts =
-                    (PipeValueTaskSource?)ThreadPoolBoundHandle.GetNativeOverlappedState(
-                        pOverlapped
-                    );
+                PipeValueTaskSource? vts = (PipeValueTaskSource?)
+                    ThreadPoolBoundHandle.GetNativeOverlappedState(pOverlapped);
                 Debug.Assert(vts is not null);
                 Debug.Assert(vts._overlapped == pOverlapped, "Overlaps don't match");
 

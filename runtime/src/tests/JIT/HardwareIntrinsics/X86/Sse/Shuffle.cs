@@ -114,12 +114,13 @@ namespace IntelHardwareIntrinsicTest
 
                     // XYZW
                     vf3 =
-                        (Vector128<float>)typeof(Sse)
-                            .GetMethod(
-                                nameof(Sse.Shuffle),
-                                new Type[] { vf1.GetType(), vf2.GetType(), typeof(byte) }
-                            )
-                            .Invoke(null, new object[] { vf1, vf2, (byte)(27) });
+                        (Vector128<float>)
+                            typeof(Sse)
+                                .GetMethod(
+                                    nameof(Sse.Shuffle),
+                                    new Type[] { vf1.GetType(), vf2.GetType(), typeof(byte) }
+                                )
+                                .Invoke(null, new object[] { vf1, vf2, (byte)(27) });
                     Unsafe.Write(floatTable.outArrayPtr, vf3);
 
                     if (

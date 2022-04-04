@@ -547,15 +547,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                         _handle,
                         moduleSymbol
                     );
-                    baseType = (NamedTypeSymbol)NullableTypeDecoder
-                        .TransformType(
-                            TypeWithAnnotations.Create(decodedType),
-                            _handle,
-                            moduleSymbol,
-                            accessSymbol: this,
-                            nullableContext: this
-                        )
-                        .Type;
+                    baseType = (NamedTypeSymbol)
+                        NullableTypeDecoder
+                            .TransformType(
+                                TypeWithAnnotations.Create(decodedType),
+                                _handle,
+                                moduleSymbol,
+                                accessSymbol: this,
+                                nullableContext: this
+                            )
+                            .Type;
                 }
 
                 Interlocked.CompareExchange(
@@ -594,10 +595,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     EntityHandle token = moduleSymbol.Module.GetBaseTypeOfTypeOrThrow(_handle);
                     if (!token.IsNil)
                     {
-                        return (NamedTypeSymbol)new MetadataDecoder(
-                            moduleSymbol,
-                            this
-                        ).GetTypeOfToken(token);
+                        return (NamedTypeSymbol)
+                            new MetadataDecoder(moduleSymbol, this).GetTypeOfToken(token);
                     }
                 }
                 catch (BadImageFormatException mrEx)

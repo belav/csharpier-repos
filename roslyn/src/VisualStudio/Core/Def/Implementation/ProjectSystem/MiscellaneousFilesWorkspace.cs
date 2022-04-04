@@ -88,9 +88,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 }
             );
 
-            var runningDocumentTable = (IVsRunningDocumentTable)serviceProvider.GetService(
-                typeof(SVsRunningDocumentTable)
-            );
+            var runningDocumentTable = (IVsRunningDocumentTable)
+                serviceProvider.GetService(typeof(SVsRunningDocumentTable));
             _runningDocumentTableEventTracker = new RunningDocumentTableEventTracker(
                 threadingContext,
                 editorAdaptersFactoryService,

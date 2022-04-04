@@ -93,11 +93,8 @@ namespace System.Net.Http.Headers
         public static EntityTagHeaderValue Parse(string? input)
         {
             int index = 0;
-            return (EntityTagHeaderValue)GenericHeaderParser.SingleValueEntityTagParser.ParseValue(
-                input,
-                null,
-                ref index
-            );
+            return (EntityTagHeaderValue)
+                GenericHeaderParser.SingleValueEntityTagParser.ParseValue(input, null, ref index);
         }
 
         public static bool TryParse(

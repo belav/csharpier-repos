@@ -359,9 +359,8 @@ internal unsafe partial class ResponseStreamAsyncResult : IAsyncResult, IDisposa
         NativeOverlapped* nativeOverlapped
     )
     {
-        var asyncResult = (ResponseStreamAsyncResult)ThreadPoolBoundHandle.GetNativeOverlappedState(
-            nativeOverlapped
-        )!;
+        var asyncResult = (ResponseStreamAsyncResult)
+            ThreadPoolBoundHandle.GetNativeOverlappedState(nativeOverlapped)!;
         IOCompleted(asyncResult, errorCode, numBytes);
     }
 

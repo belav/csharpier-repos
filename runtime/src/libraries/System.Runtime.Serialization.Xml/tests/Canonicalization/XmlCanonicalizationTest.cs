@@ -94,12 +94,8 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             {
                 count++;
                 string rwTypeStr = input.Arguments[0].Value;
-                ReaderWriterFactory.ReaderWriterType rwType =
-                    (ReaderWriterFactory.ReaderWriterType)Enum.Parse(
-                        typeof(ReaderWriterFactory.ReaderWriterType),
-                        rwTypeStr,
-                        true
-                    );
+                ReaderWriterFactory.ReaderWriterType rwType = (ReaderWriterFactory.ReaderWriterType)
+                    Enum.Parse(typeof(ReaderWriterFactory.ReaderWriterType), rwTypeStr, true);
                 Encoding encoding = Encoding.GetEncoding(input.Arguments[1].Value);
                 bool mustSupportV14N = input.Arguments[2].Value.ToLower() == "true";
 
@@ -220,11 +216,12 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
                         count++;
                         string rwTypeStr = input.Arguments[0].Value;
                         ReaderWriterFactory.ReaderWriterType rwType =
-                            (ReaderWriterFactory.ReaderWriterType)Enum.Parse(
-                                typeof(ReaderWriterFactory.ReaderWriterType),
-                                rwTypeStr,
-                                true
-                            );
+                            (ReaderWriterFactory.ReaderWriterType)
+                                Enum.Parse(
+                                    typeof(ReaderWriterFactory.ReaderWriterType),
+                                    rwTypeStr,
+                                    true
+                                );
                         Encoding encoding = Encoding.GetEncoding((string)input.Arguments[1].Value);
                         string sampleXmlFileName = input2.Arguments[0].Value;
                         bool mustSupportV14N = input.Arguments[2].Value == "true";
@@ -299,12 +296,8 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
                 count++;
                 string sampleXmlFileName = input.Arguments[3].Value;
                 string rwTypeStr = input.Arguments[0].Value;
-                ReaderWriterFactory.ReaderWriterType rwType =
-                    (ReaderWriterFactory.ReaderWriterType)Enum.Parse(
-                        typeof(ReaderWriterFactory.ReaderWriterType),
-                        rwTypeStr,
-                        true
-                    );
+                ReaderWriterFactory.ReaderWriterType rwType = (ReaderWriterFactory.ReaderWriterType)
+                    Enum.Parse(typeof(ReaderWriterFactory.ReaderWriterType), rwTypeStr, true);
                 Encoding encoding = Encoding.GetEncoding((string)input.Arguments[1].Value);
 
                 bool mustSupportV14N = input.Arguments[2].Value == "true";

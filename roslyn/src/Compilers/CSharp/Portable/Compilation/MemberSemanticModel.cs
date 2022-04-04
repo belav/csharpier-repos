@@ -232,14 +232,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                 binder = GetSpeculativeBinder(position, expression, bindingOption);
                 var boundRoot = binder.BindExpression(expression, BindingDiagnosticBag.Discarded);
                 ImmutableDictionary<Symbol, Symbol> ignored = null;
-                return (BoundExpression)NullableWalker.AnalyzeAndRewriteSpeculation(
-                    position,
-                    boundRoot,
-                    binder,
-                    snapshotManager,
-                    newSnapshots: out _,
-                    remappedSymbols: ref ignored
-                );
+                return (BoundExpression)
+                    NullableWalker.AnalyzeAndRewriteSpeculation(
+                        position,
+                        boundRoot,
+                        binder,
+                        snapshotManager,
+                        newSnapshots: out _,
+                        remappedSymbols: ref ignored
+                    );
             }
             else
             {
@@ -1188,7 +1189,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             return new AwaitExpressionInfo(
-                getAwaiter: (IMethodSymbol)awaitableInfo.GetAwaiter?.ExpressionSymbol.GetPublicSymbol(),
+                getAwaiter: (IMethodSymbol)
+                    awaitableInfo.GetAwaiter?.ExpressionSymbol.GetPublicSymbol(),
                 isCompleted: awaitableInfo.IsCompleted.GetPublicSymbol(),
                 getResult: awaitableInfo.GetResult.GetPublicSymbol(),
                 isDynamic: awaitableInfo.IsDynamic
@@ -1243,12 +1245,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                 else
                 {
                     disposeMethod = enumeratorInfoOpt.IsAsync
-                        ? (MethodSymbol)Compilation.GetWellKnownTypeMember(
-                              WellKnownMember.System_IAsyncDisposable__DisposeAsync
-                          )
-                        : (MethodSymbol)Compilation.GetSpecialTypeMember(
-                              SpecialMember.System_IDisposable__Dispose
-                          );
+                        ? (MethodSymbol)
+                              Compilation.GetWellKnownTypeMember(
+                                  WellKnownMember.System_IAsyncDisposable__DisposeAsync
+                              )
+                        : (MethodSymbol)
+                              Compilation.GetSpecialTypeMember(
+                                  SpecialMember.System_IDisposable__Dispose
+                              );
                 }
             }
 
@@ -1375,8 +1379,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             CheckSyntaxNode(declaratorSyntax);
-            var anonymousObjectCreation =
-                (AnonymousObjectCreationExpressionSyntax)declaratorSyntax.Parent;
+            var anonymousObjectCreation = (AnonymousObjectCreationExpressionSyntax)
+                declaratorSyntax.Parent;
             if (anonymousObjectCreation == null)
             {
                 return null;

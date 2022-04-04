@@ -133,11 +133,12 @@ namespace System.DirectoryServices.ActiveDirectory
                     );
                 }
 
-                configSetName = (string)PropertyManager.GetPropertyValue(
-                    context,
-                    rootDSE,
-                    PropertyManager.ConfigurationNamingContext
-                )!;
+                configSetName = (string)
+                    PropertyManager.GetPropertyValue(
+                        context,
+                        rootDSE,
+                        PropertyManager.ConfigurationNamingContext
+                    )!;
             }
             catch (COMException e)
             {
@@ -273,11 +274,12 @@ namespace System.DirectoryServices.ActiveDirectory
                     WellKnownDN.ConfigurationNamingContext
                 );
                 _cachedSecurityLevel = (ReplicationSecurityLevel)(
-                    (int)PropertyManager.GetPropertyValue(
-                        _context,
-                        configEntry,
-                        PropertyManager.MsDSReplAuthenticationMode
-                    )!
+                    (int)
+                        PropertyManager.GetPropertyValue(
+                            _context,
+                            configEntry,
+                            PropertyManager.MsDSReplAuthenticationMode
+                        )!
                 );
             }
             return _cachedSecurityLevel;
@@ -303,8 +305,8 @@ namespace System.DirectoryServices.ActiveDirectory
                 DirectoryEntry configEntry = _directoryEntryMgr.GetCachedDirectoryEntry(
                     WellKnownDN.ConfigurationNamingContext
                 );
-                configEntry.Properties[PropertyManager.MsDSReplAuthenticationMode].Value =
-                    (int)securityLevel;
+                configEntry.Properties[PropertyManager.MsDSReplAuthenticationMode].Value = (int)
+                    securityLevel;
                 configEntry.CommitChanges();
             }
             catch (COMException e)
@@ -445,11 +447,12 @@ namespace System.DirectoryServices.ActiveDirectory
                     forestContext,
                     WellKnownDN.RootDSE
                 );
-                string? isGCReady = (string?)PropertyManager.GetPropertyValue(
-                    forestContext,
-                    rootDSE,
-                    PropertyManager.IsGlobalCatalogReady
-                );
+                string? isGCReady = (string?)
+                    PropertyManager.GetPropertyValue(
+                        forestContext,
+                        rootDSE,
+                        PropertyManager.IsGlobalCatalogReady
+                    );
                 isGC = (Utils.Compare(isGCReady, "TRUE") == 0);
             }
 
@@ -512,11 +515,12 @@ namespace System.DirectoryServices.ActiveDirectory
                     );
                 }
 
-                string dnsHostName = (string?)PropertyManager.GetPropertyValue(
-                    context,
-                    rootDSE,
-                    PropertyManager.DnsHostName
-                )!;
+                string dnsHostName = (string?)
+                    PropertyManager.GetPropertyValue(
+                        context,
+                        rootDSE,
+                        PropertyManager.DnsHostName
+                    )!;
 
                 return new AdamInstance(context, dnsHostName, directoryEntryMgr);
             }
@@ -828,11 +832,12 @@ namespace System.DirectoryServices.ActiveDirectory
                 entry.RefreshCache();
                 adamInstName = Utils.GetAdamDnsHostNameFromNTDSA(
                     _context,
-                    (string)PropertyManager.GetPropertyValue(
-                        _context,
-                        entry,
-                        PropertyManager.FsmoRoleOwner
-                    )!
+                    (string)
+                        PropertyManager.GetPropertyValue(
+                            _context,
+                            entry,
+                            PropertyManager.FsmoRoleOwner
+                        )!
                 );
             }
             catch (COMException e)
@@ -891,10 +896,11 @@ namespace System.DirectoryServices.ActiveDirectory
                     sites.Add(
                         new ActiveDirectorySite(
                             _context,
-                            (string)PropertyManager.GetSearchResultPropertyValue(
-                                res,
-                                PropertyManager.Cn
-                            )!,
+                            (string)
+                                PropertyManager.GetSearchResultPropertyValue(
+                                    res,
+                                    PropertyManager.Cn
+                                )!,
                             true
                         )
                     );
@@ -961,25 +967,25 @@ namespace System.DirectoryServices.ActiveDirectory
             {
                 resCol = searcher.FindAll();
 
-                string? schemaNamingContext = (string?)PropertyManager.GetPropertyValue(
-                    _context,
-                    rootDSE,
-                    PropertyManager.SchemaNamingContext
-                );
-                string? configurationNamingContext = (string?)PropertyManager.GetPropertyValue(
-                    _context,
-                    rootDSE,
-                    PropertyManager.ConfigurationNamingContext
-                );
+                string? schemaNamingContext = (string?)
+                    PropertyManager.GetPropertyValue(
+                        _context,
+                        rootDSE,
+                        PropertyManager.SchemaNamingContext
+                    );
+                string? configurationNamingContext = (string?)
+                    PropertyManager.GetPropertyValue(
+                        _context,
+                        rootDSE,
+                        PropertyManager.ConfigurationNamingContext
+                    );
 
                 foreach (SearchResult res in resCol)
                 {
                     // add the name of the appNC only if it is not
                     // the Schema or Configuration partition
-                    string nCName = (string)PropertyManager.GetSearchResultPropertyValue(
-                        res,
-                        PropertyManager.NCName
-                    )!;
+                    string nCName = (string)
+                        PropertyManager.GetSearchResultPropertyValue(res, PropertyManager.NCName)!;
 
                     if (
                         (!(nCName.Equals(schemaNamingContext)))
@@ -993,9 +999,8 @@ namespace System.DirectoryServices.ActiveDirectory
                         {
                             string replicaName = Utils.GetAdamDnsHostNameFromNTDSA(
                                 _context,
-                                (string)replicaLocations[
-                                    Utils.GetRandomIndex(replicaLocations.Count)
-                                ]!
+                                (string)
+                                    replicaLocations[Utils.GetRandomIndex(replicaLocations.Count)]!
                             );
                             DirectoryContext appNCContext = Utils.GetNewDirectoryContext(
                                 replicaName,

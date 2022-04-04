@@ -37,13 +37,14 @@ public static class DynamicMethodJumpStubTests
             // precode. Then, when compiling the method, there would be a good chance that the code will be located far from
             // the precode, forcing the use of a jump stub.
             ReserveMemoryAround(
-                (RuntimeMethodHandle)typeof(DynamicMethod).InvokeMember(
-                    "GetMethodDescriptor",
-                    BindingFlags.Instance | BindingFlags.InvokeMethod | BindingFlags.NonPublic,
-                    null,
-                    dynamicMethod,
-                    null
-                )
+                (RuntimeMethodHandle)
+                    typeof(DynamicMethod).InvokeMember(
+                        "GetMethodDescriptor",
+                        BindingFlags.Instance | BindingFlags.InvokeMethod | BindingFlags.NonPublic,
+                        null,
+                        dynamicMethod,
+                        null
+                    )
             );
         }
 

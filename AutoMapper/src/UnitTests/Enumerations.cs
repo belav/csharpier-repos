@@ -409,11 +409,12 @@ namespace AutoMapper.Tests
             )
             {
                 return (
-                    (TOutputEnum)Enum.Parse(
-                        typeof(TOutputEnum),
-                        Enum.GetName(typeof(TInputEnum), source),
-                        false
-                    )
+                    (TOutputEnum)
+                        Enum.Parse(
+                            typeof(TOutputEnum),
+                            Enum.GetName(typeof(TInputEnum), source),
+                            false
+                        )
                 );
             }
         }

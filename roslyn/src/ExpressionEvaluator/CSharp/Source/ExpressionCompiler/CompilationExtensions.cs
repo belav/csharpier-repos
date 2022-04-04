@@ -101,10 +101,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             var reader = module.Module.MetadataReader;
             var typeHandle = reader.GetMethodDefinition(methodHandle).GetDeclaringType();
             var type = GetType(module, typeHandle);
-            var method = (PEMethodSymbol)new MetadataDecoder(
-                module,
-                type
-            ).GetMethodSymbolForMethodDefOrMemberRef(methodHandle, type);
+            var method = (PEMethodSymbol)
+                new MetadataDecoder(module, type).GetMethodSymbolForMethodDefOrMemberRef(
+                    methodHandle,
+                    type
+                );
             return method;
         }
 

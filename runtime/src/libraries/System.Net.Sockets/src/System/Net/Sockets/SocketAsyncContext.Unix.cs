@@ -959,9 +959,8 @@ namespace System.Net.Sockets
                 //   execute the operation because the sequence number won't match.
 
                 Debug.Assert(sizeof(QueueState) == sizeof(int));
-                QueueState state = (QueueState)Volatile.Read(
-                    ref Unsafe.As<QueueState, int>(ref _state)
-                );
+                QueueState state = (QueueState)
+                    Volatile.Read(ref Unsafe.As<QueueState, int>(ref _state));
                 observedSequenceNumber = Volatile.Read(ref _sequenceNumber);
 
                 bool isReady = state == QueueState.Ready || state == QueueState.Stopped;

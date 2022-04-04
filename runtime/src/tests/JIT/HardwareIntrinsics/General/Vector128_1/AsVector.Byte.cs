@@ -74,27 +74,28 @@ namespace JIT.HardwareIntrinsics.General
             ValidateResult((Vector<Byte>)(Result), value);
 
             value =
-                (Vector128<Byte>)typeof(Vector128)
-                    .GetMethods()
-                    .Where(
-                        (methodInfo) =>
-                        {
-                            if (methodInfo.Name == nameof(Vector128.AsVector128))
+                (Vector128<Byte>)
+                    typeof(Vector128)
+                        .GetMethods()
+                        .Where(
+                            (methodInfo) =>
                             {
-                                var parameters = methodInfo.GetParameters();
-                                return (parameters.Length == 1)
-                                    && (parameters[0].ParameterType.IsGenericType)
-                                    && (
-                                        parameters[0].ParameterType.GetGenericTypeDefinition()
-                                        == typeof(Vector<>)
-                                    );
+                                if (methodInfo.Name == nameof(Vector128.AsVector128))
+                                {
+                                    var parameters = methodInfo.GetParameters();
+                                    return (parameters.Length == 1)
+                                        && (parameters[0].ParameterType.IsGenericType)
+                                        && (
+                                            parameters[0].ParameterType.GetGenericTypeDefinition()
+                                            == typeof(Vector<>)
+                                        );
+                                }
+                                return false;
                             }
-                            return false;
-                        }
-                    )
-                    .Single()
-                    .MakeGenericMethod(typeof(Byte))
-                    .Invoke(null, new object[] { Result });
+                        )
+                        .Single()
+                        .MakeGenericMethod(typeof(Byte))
+                        .Invoke(null, new object[] { Result });
             ValidateResult(value, (Vector<Byte>)(Result));
         }
 

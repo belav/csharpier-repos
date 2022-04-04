@@ -133,10 +133,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             );
 
             var otherType = (FunctionTypeSymbol)other;
-            var delegateType = (NamedTypeSymbol)_delegateType.MergeEquivalentTypes(
-                otherType._delegateType,
-                variance
-            );
+            var delegateType = (NamedTypeSymbol)
+                _delegateType.MergeEquivalentTypes(otherType._delegateType, variance);
 
             return (object)_delegateType == delegateType
               ? this

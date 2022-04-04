@@ -515,9 +515,8 @@ namespace Microsoft.CodeAnalysis
             foreach (CommandLineAnalyzerReference cmdLineReference in AnalyzerReferences)
             {
                 yield return ResolveAnalyzerReference(cmdLineReference, analyzerLoader)
-                    ?? (AnalyzerReference)new UnresolvedAnalyzerReference(
-                        cmdLineReference.FilePath
-                    );
+                    ?? (AnalyzerReference)
+                        new UnresolvedAnalyzerReference(cmdLineReference.FilePath);
             }
         }
 

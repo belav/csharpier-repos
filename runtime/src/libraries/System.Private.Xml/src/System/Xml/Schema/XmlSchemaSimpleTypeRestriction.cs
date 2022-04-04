@@ -47,8 +47,8 @@ namespace System.Xml.Schema
 
         internal override XmlSchemaObject Clone()
         {
-            XmlSchemaSimpleTypeRestriction newRestriction =
-                (XmlSchemaSimpleTypeRestriction)MemberwiseClone();
+            XmlSchemaSimpleTypeRestriction newRestriction = (XmlSchemaSimpleTypeRestriction)
+                MemberwiseClone();
             newRestriction.BaseTypeName = _baseTypeName.Clone();
             return newRestriction;
         }

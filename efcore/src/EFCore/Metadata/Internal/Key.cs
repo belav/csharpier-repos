@@ -182,15 +182,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual IPrincipalKeyValueFactory<TKey> GetPrincipalKeyValueFactory<TKey>()
             where TKey : notnull =>
-            (IPrincipalKeyValueFactory<TKey>)NonCapturingLazyInitializer.EnsureInitialized(
-                ref _principalKeyValueFactory,
-                this,
-                static key =>
-                {
-                    key.EnsureReadOnly();
-                    return new KeyValueFactoryFactory().Create<TKey>(key);
-                }
-            );
+            (IPrincipalKeyValueFactory<TKey>)
+                NonCapturingLazyInitializer.EnsureInitialized(
+                    ref _principalKeyValueFactory,
+                    this,
+                    static key =>
+                    {
+                        key.EnsureReadOnly();
+                        return new KeyValueFactoryFactory().Create<TKey>(key);
+                    }
+                );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

@@ -564,11 +564,8 @@ namespace Microsoft.EntityFrameworkCore
         }
 
         private static string GetValue(Anais entity, string propertyName) =>
-            (string)entity
-                .GetType()
-                .GetTypeInfo()
-                .GetDeclaredProperty(propertyName)
-                .GetValue(entity);
+            (string)
+                entity.GetType().GetTypeInfo().GetDeclaredProperty(propertyName).GetValue(entity);
 
         [ConditionalFact]
         public virtual void Identity_key_with_read_only_before_save_throws_if_explicit_values_set()

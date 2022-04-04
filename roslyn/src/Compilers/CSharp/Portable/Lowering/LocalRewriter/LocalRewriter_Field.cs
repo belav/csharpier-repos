@@ -105,12 +105,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                     NamedTypeSymbol.ValueTupleRestPosition,
                     NamedTypeSymbol.ValueTupleRestPosition
                 );
-                var tupleRestField = (FieldSymbol?)NamedTypeSymbol.GetWellKnownMemberInType(
-                    currentLinkType.OriginalDefinition,
-                    wellKnownTupleRest,
-                    _diagnostics,
-                    syntax
-                );
+                var tupleRestField = (FieldSymbol?)
+                    NamedTypeSymbol.GetWellKnownMemberInType(
+                        currentLinkType.OriginalDefinition,
+                        wellKnownTupleRest,
+                        _diagnostics,
+                        syntax
+                    );
 
                 if (tupleRestField is null)
                 {
@@ -124,8 +125,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     FieldSymbol nestedFieldSymbol = tupleRestField.AsMember(currentLinkType);
                     rewrittenReceiver = _factory.Field(rewrittenReceiver, nestedFieldSymbol);
 
-                    currentLinkType =
-                        (NamedTypeSymbol)currentLinkType.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
+                    currentLinkType = (NamedTypeSymbol)
+                        currentLinkType.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
                             NamedTypeSymbol.ValueTupleRestPosition - 1
                         ].Type;
                 } while (

@@ -762,9 +762,8 @@ namespace System.Management
                     // May/may not have extended error info.
                     //
                     if (errorObject != null)
-                        errorObject = (ManagementBaseObject)(
-                            (ManagementException)e
-                        ).errorObject.Clone();
+                        errorObject = (ManagementBaseObject)
+                            ((ManagementException)e).errorObject.Clone();
                     else
                         errorObject = null;
                 }

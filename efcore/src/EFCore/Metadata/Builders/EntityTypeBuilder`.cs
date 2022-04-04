@@ -237,12 +237,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         public virtual EntityTypeBuilder<TEntity> Ignore(
             Expression<Func<TEntity, object?>> propertyExpression
         ) =>
-            (EntityTypeBuilder<TEntity>)base.Ignore(
-                Check
-                    .NotNull(propertyExpression, nameof(propertyExpression))
-                    .GetMemberAccess()
-                    .GetSimpleMemberName()
-            );
+            (EntityTypeBuilder<TEntity>)
+                base.Ignore(
+                    Check
+                        .NotNull(propertyExpression, nameof(propertyExpression))
+                        .GetMemberAccess()
+                        .GetSimpleMemberName()
+                );
 
         /// <summary>
         ///     Excludes the given property from the entity type. This method is typically used to remove properties
@@ -655,12 +656,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             string navigationName,
             Action<OwnedNavigationBuilder> buildAction
         ) =>
-            (EntityTypeBuilder<TEntity>)base.OwnsOne(
-                ownedTypeName,
-                ownedType,
-                navigationName,
-                buildAction
-            );
+            (EntityTypeBuilder<TEntity>)
+                base.OwnsOne(ownedTypeName, ownedType, navigationName, buildAction);
 
         /// <summary>
         ///     Configures a relationship where the target entity is owned by (or part of) this entity.
@@ -1072,12 +1069,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             string navigationName,
             Action<OwnedNavigationBuilder> buildAction
         ) =>
-            (EntityTypeBuilder<TEntity>)base.OwnsMany(
-                ownedTypeName,
-                ownedType,
-                navigationName,
-                buildAction
-            );
+            (EntityTypeBuilder<TEntity>)
+                base.OwnsMany(ownedTypeName, ownedType, navigationName, buildAction);
 
         /// <summary>
         ///     Configures a relationship where the target entity is owned by (or part of) this entity.

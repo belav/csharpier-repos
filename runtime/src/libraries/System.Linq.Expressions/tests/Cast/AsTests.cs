@@ -281,14 +281,16 @@ namespace System.Linq.Expressions.Tests
             Delegate[] array = new Delegate[]
             {
                 null,
-                (Func<object>)delegate()
-                {
-                    return null;
-                },
-                (Func<int, int>)delegate(int i)
-                {
-                    return i + 1;
-                },
+                (Func<object>)
+                    delegate()
+                    {
+                        return null;
+                    },
+                (Func<int, int>)
+                    delegate(int i)
+                    {
+                        return i + 1;
+                    },
                 (Action<object>)delegate { }
             };
             for (int i = 0; i < array.Length; i++)
@@ -303,14 +305,16 @@ namespace System.Linq.Expressions.Tests
             Delegate[] array = new Delegate[]
             {
                 null,
-                (Func<object>)delegate()
-                {
-                    return null;
-                },
-                (Func<int, int>)delegate(int i)
-                {
-                    return i + 1;
-                },
+                (Func<object>)
+                    delegate()
+                    {
+                        return null;
+                    },
+                (Func<int, int>)
+                    delegate(int i)
+                    {
+                        return i + 1;
+                    },
                 (Action<object>)delegate { }
             };
             for (int i = 0; i < array.Length; i++)
@@ -368,10 +372,11 @@ namespace System.Linq.Expressions.Tests
             Func<object>[] array = new Func<object>[]
             {
                 null,
-                (Func<object>)delegate()
-                {
-                    return null;
-                }
+                (Func<object>)
+                    delegate()
+                    {
+                        return null;
+                    }
             };
             for (int i = 0; i < array.Length; i++)
             {

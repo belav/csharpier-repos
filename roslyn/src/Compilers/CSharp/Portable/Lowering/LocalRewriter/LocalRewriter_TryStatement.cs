@@ -37,13 +37,14 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return (catchBlocks.IsDefaultOrEmpty && finallyBlockOpt == null)
               ? (BoundNode)tryBlock
-              : (BoundNode)node.Update(
-                    tryBlock,
-                    catchBlocks,
-                    finallyBlockOpt,
-                    node.FinallyLabelOpt,
-                    node.PreferFaultHandler
-                );
+              : (BoundNode)
+                    node.Update(
+                        tryBlock,
+                        catchBlocks,
+                        finallyBlockOpt,
+                        node.FinallyLabelOpt,
+                        node.PreferFaultHandler
+                    );
         }
 
         /// <summary>
@@ -96,15 +97,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return null;
             }
 
-            BoundExpression? rewrittenExceptionSourceOpt = (BoundExpression?)this.Visit(
-                node.ExceptionSourceOpt
-            );
-            BoundStatementList? rewrittenFilterPrologue = (BoundStatementList?)this.Visit(
-                node.ExceptionFilterPrologueOpt
-            );
-            BoundExpression? rewrittenFilter = (BoundExpression?)this.Visit(
-                node.ExceptionFilterOpt
-            );
+            BoundExpression? rewrittenExceptionSourceOpt = (BoundExpression?)
+                this.Visit(node.ExceptionSourceOpt);
+            BoundStatementList? rewrittenFilterPrologue = (BoundStatementList?)
+                this.Visit(node.ExceptionFilterPrologueOpt);
+            BoundExpression? rewrittenFilter = (BoundExpression?)
+                this.Visit(node.ExceptionFilterOpt);
             BoundBlock? rewrittenBody = (BoundBlock?)this.Visit(node.Body);
             Debug.Assert(rewrittenBody is { });
             TypeSymbol? rewrittenExceptionTypeOpt = this.VisitType(node.ExceptionTypeOpt);

@@ -39,9 +39,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             // SLocalRegistry service is free-threaded -- see https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1408594.
             // Note: not using IAsyncServiceProvider.GetServiceAsync<TService, TInterface> since the extension method might switch to UI thread.
             // See https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1408619/.
-            var localRegistry = (ILocalRegistry4?)await provider
-                .GetServiceAsync(typeof(SLocalRegistry))
-                .ConfigureAwait(false);
+            var localRegistry = (ILocalRegistry4?)
+                await provider.GetServiceAsync(typeof(SLocalRegistry)).ConfigureAwait(false);
             Contract.ThrowIfNull(localRegistry);
             Contract.ThrowIfFalse(
                 ErrorHandler.Succeeded(

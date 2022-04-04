@@ -61,9 +61,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.CorLibrary
                 new[] { NetCoreApp.SystemRuntime }
             );
 
-            MetadataOrSourceAssemblySymbol msCorLibRef = (MetadataOrSourceAssemblySymbol)assemblies[
-                0
-            ];
+            MetadataOrSourceAssemblySymbol msCorLibRef = (MetadataOrSourceAssemblySymbol)
+                assemblies[0];
 
             var knownMissingTypes = new HashSet<int>() { };
 
@@ -130,9 +129,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.CorLibrary
                 new[] { TestReferences.SymbolsTests.CorLibrary.FakeMsCorLib.dll }
             );
 
-            MetadataOrSourceAssemblySymbol msCorLibRef = (MetadataOrSourceAssemblySymbol)assemblies[
-                0
-            ];
+            MetadataOrSourceAssemblySymbol msCorLibRef = (MetadataOrSourceAssemblySymbol)
+                assemblies[0];
 
             for (int i = 1; i <= (int)SpecialType.Count; i++)
             {
@@ -173,8 +171,8 @@ namespace System
 
             Assert.Same(c1.Assembly, c1.Assembly.CorLibrary);
 
-            MetadataOrSourceAssemblySymbol msCorLibRef =
-                (MetadataOrSourceAssemblySymbol)c1.Assembly;
+            MetadataOrSourceAssemblySymbol msCorLibRef = (MetadataOrSourceAssemblySymbol)
+                c1.Assembly;
 
             for (int i = 1; i <= (int)SpecialType.Count; i++)
             {

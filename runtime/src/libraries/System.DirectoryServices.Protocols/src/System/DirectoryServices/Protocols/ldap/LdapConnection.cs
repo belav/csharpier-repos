@@ -1087,21 +1087,16 @@ namespace System.DirectoryServices.Protocols
             var list = new ArrayList();
             if (CAs != IntPtr.Zero)
             {
-                SecPkgContext_IssuerListInfoEx trustedCAs =
-                    (SecPkgContext_IssuerListInfoEx)Marshal.PtrToStructure(
-                        CAs,
-                        typeof(SecPkgContext_IssuerListInfoEx)
-                    );
+                SecPkgContext_IssuerListInfoEx trustedCAs = (SecPkgContext_IssuerListInfoEx)
+                    Marshal.PtrToStructure(CAs, typeof(SecPkgContext_IssuerListInfoEx));
                 int issuerNumber = trustedCAs.cIssuers;
                 for (int i = 0; i < issuerNumber; i++)
                 {
                     IntPtr tempPtr = (IntPtr)(
                         (long)trustedCAs.aIssuers + Marshal.SizeOf(typeof(CRYPTOAPI_BLOB)) * i
                     );
-                    CRYPTOAPI_BLOB info = (CRYPTOAPI_BLOB)Marshal.PtrToStructure(
-                        tempPtr,
-                        typeof(CRYPTOAPI_BLOB)
-                    );
+                    CRYPTOAPI_BLOB info = (CRYPTOAPI_BLOB)
+                        Marshal.PtrToStructure(tempPtr, typeof(CRYPTOAPI_BLOB));
                     int dataLength = info.cbData;
 
                     byte[] context = new byte[dataLength];
@@ -1482,8 +1477,8 @@ namespace System.DirectoryServices.Protocols
 
                 if (directoryAttributes is DirectoryAttributeModificationCollection)
                 {
-                    modificationCollection =
-                        (DirectoryAttributeModificationCollection)directoryAttributes;
+                    modificationCollection = (DirectoryAttributeModificationCollection)
+                        directoryAttributes;
                 }
                 else
                 {
@@ -1509,9 +1504,8 @@ namespace System.DirectoryServices.Protocols
                     // Write the operation type.
                     if (modAttribute is DirectoryAttributeModification)
                     {
-                        attributes[i].type = (int)(
-                            (DirectoryAttributeModification)modAttribute
-                        ).Operation;
+                        attributes[i].type = (int)
+                            ((DirectoryAttributeModification)modAttribute).Operation;
                     }
                     else
                     {

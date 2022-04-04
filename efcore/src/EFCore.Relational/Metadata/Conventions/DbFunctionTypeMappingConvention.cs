@@ -33,8 +33,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Dependencies = dependencies;
             RelationalDependencies = relationalDependencies;
 
-            _relationalTypeMappingSource =
-                (IRelationalTypeMappingSource)dependencies.TypeMappingSource;
+            _relationalTypeMappingSource = (IRelationalTypeMappingSource)
+                dependencies.TypeMappingSource;
         }
 
         /// <summary>

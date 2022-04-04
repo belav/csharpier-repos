@@ -20,9 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.VirtualChars
         private static SyntaxToken GetStringToken(string text, bool allowFailure)
         {
             var statement = _statementPrefix + text;
-            var parsedStatement = (LocalDeclarationStatementSyntax)SyntaxFactory.ParseStatement(
-                statement
-            );
+            var parsedStatement = (LocalDeclarationStatementSyntax)
+                SyntaxFactory.ParseStatement(statement);
             var expression = parsedStatement.Declaration.Variables[0].Initializer.Value;
 
             if (expression is LiteralExpressionSyntax literal)

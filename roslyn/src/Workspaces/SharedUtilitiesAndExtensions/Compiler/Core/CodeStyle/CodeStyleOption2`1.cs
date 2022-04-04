@@ -159,10 +159,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
 
             var parser = GetParser(typeAttribute.Value);
             var value = parser(valueAttribute.Value);
-            var severity = (DiagnosticSeverity)Enum.Parse(
-                typeof(DiagnosticSeverity),
-                severityAttribute.Value
-            );
+            var severity = (DiagnosticSeverity)
+                Enum.Parse(typeof(DiagnosticSeverity), severityAttribute.Value);
 
             return new CodeStyleOption2<T>(
                 value,

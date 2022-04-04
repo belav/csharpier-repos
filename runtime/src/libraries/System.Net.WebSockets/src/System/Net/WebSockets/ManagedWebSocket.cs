@@ -1071,10 +1071,13 @@ namespace System.Net.WebSockets
                             }
 
                             // Read directly into the appropriate buffer until we've hit a limit.
-                            int limit = (int)Math.Min(
-                                header.Compressed ? _inflater!.Span.Length : payloadBuffer.Length,
-                                header.PayloadLength
-                            );
+                            int limit = (int)
+                                Math.Min(
+                                    header.Compressed
+                                      ? _inflater!.Span.Length
+                                      : payloadBuffer.Length,
+                                    header.PayloadLength
+                                );
 
                             if (_receiveBufferCount > 0)
                             {
@@ -1218,20 +1221,19 @@ namespace System.Net.WebSockets
                 // Although it might seem that this will incur boxing of the struct,
                 // the JIT is smart enough to figure out it is unncessessary and will emit
                 // bytecode that returns the ValueWebSocketReceiveResult directly.
-                return (TResult)(object)new ValueWebSocketReceiveResult(
-                    count,
-                    messageType,
-                    endOfMessage
-                );
+                return (TResult)
+                    (object)new ValueWebSocketReceiveResult(count, messageType, endOfMessage);
             }
 
-            return (TResult)(object)new WebSocketReceiveResult(
-                count,
-                messageType,
-                endOfMessage,
-                _closeStatus,
-                _closeStatusDescription
-            );
+            return (TResult)
+                (object)
+                    new WebSocketReceiveResult(
+                        count,
+                        messageType,
+                        endOfMessage,
+                        _closeStatus,
+                        _closeStatusDescription
+                    );
         }
 
         /// <summary>Processes a received close message.</summary>

@@ -167,12 +167,8 @@ namespace Microsoft.EntityFrameworkCore
             LogLevel minimumLevel = LogLevel.Debug,
             DbContextLoggerOptions? options = null
         ) =>
-            (DbContextOptionsBuilder<TContext>)base.LogTo(
-                action,
-                categories,
-                minimumLevel,
-                options
-            );
+            (DbContextOptionsBuilder<TContext>)
+                base.LogTo(action, categories, minimumLevel, options);
 
         /// <summary>
         ///     Logs events filtered by a supplied custom filter delegate. The filter should return true to
@@ -336,9 +332,8 @@ namespace Microsoft.EntityFrameworkCore
         public new virtual DbContextOptionsBuilder<TContext> EnableSensitiveDataLogging(
             bool sensitiveDataLoggingEnabled = true
         ) =>
-            (DbContextOptionsBuilder<TContext>)base.EnableSensitiveDataLogging(
-                sensitiveDataLoggingEnabled
-            );
+            (DbContextOptionsBuilder<TContext>)
+                base.EnableSensitiveDataLogging(sensitiveDataLoggingEnabled);
 
         /// <summary>
         ///     Enables or disables caching of internal service providers. Disabling caching can
@@ -354,9 +349,8 @@ namespace Microsoft.EntityFrameworkCore
         public new virtual DbContextOptionsBuilder<TContext> EnableServiceProviderCaching(
             bool cacheServiceProvider = true
         ) =>
-            (DbContextOptionsBuilder<TContext>)base.EnableServiceProviderCaching(
-                cacheServiceProvider
-            );
+            (DbContextOptionsBuilder<TContext>)
+                base.EnableServiceProviderCaching(cacheServiceProvider);
 
         /// <summary>
         ///     Sets the tracking behavior for LINQ queries run against the context. Disabling change tracking
@@ -413,9 +407,8 @@ namespace Microsoft.EntityFrameworkCore
         public new virtual DbContextOptionsBuilder<TContext> ConfigureWarnings(
             Action<WarningsConfigurationBuilder> warningsConfigurationBuilderAction
         ) =>
-            (DbContextOptionsBuilder<TContext>)base.ConfigureWarnings(
-                warningsConfigurationBuilderAction
-            );
+            (DbContextOptionsBuilder<TContext>)
+                base.ConfigureWarnings(warningsConfigurationBuilderAction);
 
         /// <summary>
         ///     Replaces all internal Entity Framework implementations of a service contract with a different
@@ -471,11 +464,8 @@ namespace Microsoft.EntityFrameworkCore
         >()
             where TCurrentImplementation : TService
             where TNewImplementation : TService =>
-            (DbContextOptionsBuilder<TContext>)base.ReplaceService<
-                TService,
-                TCurrentImplementation,
-                TNewImplementation
-            >();
+            (DbContextOptionsBuilder<TContext>)
+                base.ReplaceService<TService, TCurrentImplementation, TNewImplementation>();
 
         /// <summary>
         ///     Adds <see cref="IInterceptor" /> instances to those registered on the context.

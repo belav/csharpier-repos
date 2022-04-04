@@ -63,10 +63,11 @@ public class TestRunner : MarshalByRefObject
                     AppDomain.Unload(domain);
                 domain = AppDomain.CreateDomain("domain-" + count);
 
-                runner = (TestRunner)domain.CreateInstanceAndUnwrap(
-                    typeof(TestRunner).Assembly.FullName,
-                    typeof(TestRunner).FullName
-                );
+                runner = (TestRunner)
+                    domain.CreateInstanceAndUnwrap(
+                        typeof(TestRunner).Assembly.FullName,
+                        typeof(TestRunner).FullName
+                    );
             }
 
             runner.RunTest(test);

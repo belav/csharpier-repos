@@ -25,22 +25,12 @@ class Test35000
     {
         var method = typeof(TestData0).GetMethod(nameof(TestData0.MyMethod));
         var func =
-            (Func<
-                TestData0,
-                int,
-                int,
-                int,
-                int,
-                int,
-                int,
-                int,
-                int,
-                object
-            >)Delegate.CreateDelegate(
-                typeof(Func<TestData0, int, int, int, int, int, int, int, int, object>),
-                null,
-                method
-            );
+            (Func<TestData0, int, int, int, int, int, int, int, int, object>)
+                Delegate.CreateDelegate(
+                    typeof(Func<TestData0, int, int, int, int, int, int, int, int, object>),
+                    null,
+                    method
+                );
 
         TestData0 data = new TestData0();
         TestData0 data1 = new TestData1();

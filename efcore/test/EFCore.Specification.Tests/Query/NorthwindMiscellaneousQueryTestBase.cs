@@ -7851,10 +7851,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                             c =>
                                 new
                                 {
-                                    Complex = (bool?)c.Orders
-                                        .OrderBy(e => e.OrderDate)
-                                        .FirstOrDefault()
-                                        .Customer.Orders.Any(e => e.OrderID < 11000)
+                                    Complex = (bool?)
+                                        c.Orders
+                                            .OrderBy(e => e.OrderDate)
+                                            .FirstOrDefault()
+                                            .Customer.Orders.Any(e => e.OrderID < 11000)
                                 }
                         ),
                 ss =>

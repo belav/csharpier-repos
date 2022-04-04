@@ -258,12 +258,10 @@ namespace System.Data.Odbc
                     {
                         case OdbcType.Decimal:
                         case OdbcType.Numeric:
-                            parameter.ScaleInternal = (byte)reader.GetInt16(
-                                ODBC32.DECIMAL_DIGITS - 1
-                            );
-                            parameter.PrecisionInternal = (byte)reader.GetInt16(
-                                ODBC32.NUM_PREC_RADIX - 1
-                            );
+                            parameter.ScaleInternal = (byte)
+                                reader.GetInt16(ODBC32.DECIMAL_DIGITS - 1);
+                            parameter.PrecisionInternal = (byte)
+                                reader.GetInt16(ODBC32.NUM_PREC_RADIX - 1);
                             break;
                     }
                     rParams.Add(parameter);

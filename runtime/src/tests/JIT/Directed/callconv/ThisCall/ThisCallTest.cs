@@ -286,9 +286,8 @@ unsafe class ThisCallTest
         {
             if (managedVtable == null)
             {
-                managedVtable = (ThisCallNative.C.VtableLayout*)Marshal.AllocHGlobal(
-                    sizeof(ThisCallNative.C.VtableLayout)
-                );
+                managedVtable = (ThisCallNative.C.VtableLayout*)
+                    Marshal.AllocHGlobal(sizeof(ThisCallNative.C.VtableLayout));
                 managedVtable->getSize = Marshal.GetFunctionPointerForDelegate(
                     (ThisCallNative.GetSizeFn)(
                         (ThisCallNative.C* c, int unused) =>
@@ -327,25 +326,21 @@ unsafe class ThisCallTest
         {
             if (unmanagedCallersOnlyVtable == null)
             {
-                unmanagedCallersOnlyVtable = (ThisCallNative.C.VtableLayout*)Marshal.AllocHGlobal(
-                    sizeof(ThisCallNative.C.VtableLayout)
-                );
-                unmanagedCallersOnlyVtable->getSize = (IntPtr)(delegate* unmanaged[Thiscall]<
-                    ThisCallNative.C*,
-                    int,
-                    ThisCallNative.SizeF>)&GetSize;
-                unmanagedCallersOnlyVtable->getWidth = (IntPtr)(delegate* unmanaged[Thiscall]<
-                    ThisCallNative.C*,
-                    ThisCallNative.Width>)&GetWidth;
-                unmanagedCallersOnlyVtable->getHeightAsInt = (IntPtr)(delegate* unmanaged[Thiscall]<
-                    ThisCallNative.C*,
-                    ThisCallNative.IntWrapper>)&GetHeightAsInt;
-                unmanagedCallersOnlyVtable->getE = (IntPtr)(delegate* unmanaged[Thiscall]<
-                    ThisCallNative.C*,
-                    ThisCallNative.E>)&GetE;
-                unmanagedCallersOnlyVtable->getWidthAsLong = (IntPtr)(delegate* unmanaged[Thiscall]<
-                    ThisCallNative.C*,
-                    CLong>)&GetWidthAsLong;
+                unmanagedCallersOnlyVtable = (ThisCallNative.C.VtableLayout*)
+                    Marshal.AllocHGlobal(sizeof(ThisCallNative.C.VtableLayout));
+                unmanagedCallersOnlyVtable->getSize = (IntPtr)
+                    (delegate* unmanaged[Thiscall]<ThisCallNative.C*, int, ThisCallNative.SizeF>)
+                        &GetSize;
+                unmanagedCallersOnlyVtable->getWidth = (IntPtr)
+                    (delegate* unmanaged[Thiscall]<ThisCallNative.C*, ThisCallNative.Width>)
+                        &GetWidth;
+                unmanagedCallersOnlyVtable->getHeightAsInt = (IntPtr)
+                    (delegate* unmanaged[Thiscall]<ThisCallNative.C*, ThisCallNative.IntWrapper>)
+                        &GetHeightAsInt;
+                unmanagedCallersOnlyVtable->getE = (IntPtr)
+                    (delegate* unmanaged[Thiscall]<ThisCallNative.C*, ThisCallNative.E>)&GetE;
+                unmanagedCallersOnlyVtable->getWidthAsLong = (IntPtr)
+                    (delegate* unmanaged[Thiscall]<ThisCallNative.C*, CLong>)&GetWidthAsLong;
             }
             return unmanagedCallersOnlyVtable;
         }

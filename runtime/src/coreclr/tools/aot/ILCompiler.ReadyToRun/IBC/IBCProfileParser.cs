@@ -457,11 +457,8 @@ namespace ILCompiler.IBC
                         if (!(m is EcmaModule))
                             continue;
 
-                        foundType = (EcmaType)m.GetType(
-                            typeNamespace,
-                            typeName,
-                            NotFoundBehavior.ReturnNull
-                        );
+                        foundType = (EcmaType)
+                            m.GetType(typeNamespace, typeName, NotFoundBehavior.ReturnNull);
                         if (foundType != null)
                         {
                             externalModule = foundType.EcmaModule;
@@ -471,11 +468,12 @@ namespace ILCompiler.IBC
                 }
                 else
                 {
-                    foundType = (EcmaType)externalModule.GetType(
-                        typeNamespace,
-                        typeName,
-                        NotFoundBehavior.ReturnNull
-                    );
+                    foundType = (EcmaType)
+                        externalModule.GetType(
+                            typeNamespace,
+                            typeName,
+                            NotFoundBehavior.ReturnNull
+                        );
                 }
 
                 if (foundType == null)
@@ -520,23 +518,18 @@ namespace ILCompiler.IBC
             Dictionary<IBCBlobKey, BlobEntry> blobs
         )
         {
-            var methodEntry = (BlobEntry.ExternalMethodEntry)blobs[
-                new IBCBlobKey(ibcToken, BlobType.ExternalMethodDef)
-            ];
-            var signatureEntry = (BlobEntry.ExternalSignatureEntry)blobs[
-                new IBCBlobKey(methodEntry.SignatureToken, BlobType.ExternalSignatureDef)
-            ];
+            var methodEntry = (BlobEntry.ExternalMethodEntry)
+                blobs[new IBCBlobKey(ibcToken, BlobType.ExternalMethodDef)];
+            var signatureEntry = (BlobEntry.ExternalSignatureEntry)
+                blobs[new IBCBlobKey(methodEntry.SignatureToken, BlobType.ExternalSignatureDef)];
 
             string methodName = Encoding.UTF8.GetString(methodEntry.Name);
 
             var ecmaType = (EcmaType)methodMetadataType.GetTypeDefinition();
 
             EcmaModule ecmaModule = ecmaType.EcmaModule;
-            var lookupClassTokenTypeDef = (int)LookupIbcTypeToken(
-                ref ecmaModule,
-                methodEntry.ClassToken,
-                blobs
-            );
+            var lookupClassTokenTypeDef = (int)
+                LookupIbcTypeToken(ref ecmaModule, methodEntry.ClassToken, blobs);
             if (lookupClassTokenTypeDef != ecmaType.MetadataReader.GetToken(ecmaType.Handle))
                 throw new Exception(
                     $"Ibc MethodToken {ibcToken:x} incosistent classToken '{ibcToken:x}' with specified exact type '{ecmaType}'"
@@ -824,9 +817,8 @@ namespace ILCompiler.IBC
             {
                 case CorElementType.ELEMENT_TYPE_CLASS:
                 case CorElementType.ELEMENT_TYPE_VALUETYPE:
-                    uint token = (uint)ibcModule.EcmaModule.MetadataReader.GetToken(
-                        sig.ReadTypeHandle()
-                    );
+                    uint token = (uint)
+                        ibcModule.EcmaModule.MetadataReader.GetToken(sig.ReadTypeHandle());
                     if (ecmaModule != ibcModule.EcmaModule)
                     {
                         // ibcExternalType tokens are actually encoded as mdtTypeDef tokens in the signature
@@ -848,9 +840,8 @@ namespace ILCompiler.IBC
                     if (Cor.Macros.IsNilToken(token))
                         return null;
 
-                    var result = (MetadataType)ecmaModule.GetType(
-                        MetadataTokens.EntityHandle((int)token)
-                    );
+                    var result = (MetadataType)
+                        ecmaModule.GetType(MetadataTokens.EntityHandle((int)token));
                     if ((typ == CorElementType.ELEMENT_TYPE_VALUETYPE) != result.IsValueType)
                     {
                         if (_logger.IsVerbose)

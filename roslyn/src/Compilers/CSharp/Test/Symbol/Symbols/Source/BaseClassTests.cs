@@ -1533,9 +1533,8 @@ namespace @if
     public class @float : @int<@break>, @if.@break { }
 }";
             var comp = CreateCompilation(Parse(text));
-            NamespaceSymbol nif = (NamespaceSymbol)comp.SourceModule.GlobalNamespace
-                .GetMembers("if")
-                .Single();
+            NamespaceSymbol nif = (NamespaceSymbol)
+                comp.SourceModule.GlobalNamespace.GetMembers("if").Single();
             Assert.Equal("if", nif.Name);
             Assert.Equal("@if", nif.ToString());
             NamedTypeSymbol cfloat = (NamedTypeSymbol)nif.GetMembers("float").Single();
@@ -1561,9 +1560,8 @@ namespace @if
     public class @float : @int<@break> : @if.@break { }
 }";
             var comp = CreateCompilation(Parse(text));
-            NamespaceSymbol nif = (NamespaceSymbol)comp.SourceModule.GlobalNamespace
-                .GetMembers("if")
-                .Single();
+            NamespaceSymbol nif = (NamespaceSymbol)
+                comp.SourceModule.GlobalNamespace.GetMembers("if").Single();
             Assert.Equal("if", nif.Name);
             Assert.Equal("@if", nif.ToString());
             NamedTypeSymbol cfloat = (NamedTypeSymbol)nif.GetMembers("float").Single();

@@ -82,15 +82,16 @@ namespace Microsoft.CodeAnalysis.SQLite.Interop
         {
             using var _ = db.Lease();
 
-            result = (Result)raw.sqlite3_blob_open(
-                db.DangerousGetWrapper(),
-                sdb,
-                table,
-                col,
-                rowid,
-                flags,
-                out var wrapper
-            );
+            result = (Result)
+                raw.sqlite3_blob_open(
+                    db.DangerousGetWrapper(),
+                    sdb,
+                    table,
+                    col,
+                    rowid,
+                    flags,
+                    out var wrapper
+                );
             if (result != (int)Result.OK)
             {
                 wrapper = null;

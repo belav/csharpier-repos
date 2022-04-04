@@ -56,9 +56,8 @@ namespace System.Text.Json.Serialization.Converters
             }
             else
             {
-                enumerator = (Dictionary<TKey, TValue>.Enumerator)state
-                    .Current
-                    .CollectionEnumerator;
+                enumerator = (Dictionary<TKey, TValue>.Enumerator)
+                    state.Current.CollectionEnumerator;
             }
 
             JsonTypeInfo typeInfo = state.Current.JsonTypeInfo;

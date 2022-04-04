@@ -557,8 +557,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             switch (fieldToken.TokenType)
             {
                 case CorTokenType.mdtMemberRef:
-                    fieldSigFlags |=
-                        (uint)ReadyToRunFieldSigFlags.READYTORUN_FIELD_SIG_MemberRefToken;
+                    fieldSigFlags |= (uint)
+                        ReadyToRunFieldSigFlags.READYTORUN_FIELD_SIG_MemberRefToken;
                     break;
 
                 case CorTokenType.mdtFieldDef:

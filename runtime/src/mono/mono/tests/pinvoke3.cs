@@ -1539,10 +1539,11 @@ public class Tests
         // FIXME: The appdomain unload hangs
         //return 0;
         AppDomain ad = AppDomain.CreateDomain("foo");
-        var c = (CallbackClass)ad.CreateInstanceAndUnwrap(
-            typeof(CallbackClass).Assembly.FullName,
-            "Tests/CallbackClass"
-        );
+        var c = (CallbackClass)
+            ad.CreateInstanceAndUnwrap(
+                typeof(CallbackClass).Assembly.FullName,
+                "Tests/CallbackClass"
+            );
         c.SetCallback();
         int domain_id = AppDomain.CurrentDomain.Id;
         int new_id = mono_test_marshal_call_callback();

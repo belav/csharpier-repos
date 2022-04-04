@@ -130,13 +130,14 @@ namespace System.Net.Http
                     // For now heart beat is used only for ping functionality.
                     if (_settings._keepAlivePingDelay != Timeout.InfiniteTimeSpan)
                     {
-                        long heartBeatInterval = (long)Math.Max(
-                            1000,
-                            Math.Min(
-                                _settings._keepAlivePingDelay.TotalMilliseconds,
-                                _settings._keepAlivePingTimeout.TotalMilliseconds
-                            ) / 4
-                        );
+                        long heartBeatInterval = (long)
+                            Math.Max(
+                                1000,
+                                Math.Min(
+                                    _settings._keepAlivePingDelay.TotalMilliseconds,
+                                    _settings._keepAlivePingTimeout.TotalMilliseconds
+                                ) / 4
+                            );
 
                         _heartBeatTimer = new Timer(
                             static state =>

@@ -189,10 +189,8 @@ public class C {
             );
             comp.VerifyDiagnostics(diagnostics);
             compilation = comp;
-            var syntaxNode = (AwaitExpressionSyntax)tree.FindNodeOrTokenByKind(
-                    SyntaxKind.AwaitExpression
-                )
-                .AsNode();
+            var syntaxNode = (AwaitExpressionSyntax)
+                tree.FindNodeOrTokenByKind(SyntaxKind.AwaitExpression).AsNode();
             var treeModel = comp.GetSemanticModel(tree);
             return treeModel.GetAwaitExpressionInfo(syntaxNode);
         }
@@ -352,8 +350,8 @@ class Program
             var comp = CreateCompilation(source);
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
-            var expr = (AwaitExpressionSyntax)tree.FindNodeOrTokenByKind(SyntaxKind.AwaitExpression)
-                .AsNode();
+            var expr = (AwaitExpressionSyntax)
+                tree.FindNodeOrTokenByKind(SyntaxKind.AwaitExpression).AsNode();
             var info = model.GetAwaitExpressionInfo(expr);
             Assert.True(info.IsDynamic);
             Assert.Null(info.GetAwaiterMethod);

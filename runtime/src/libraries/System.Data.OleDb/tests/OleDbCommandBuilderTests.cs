@@ -104,8 +104,8 @@ namespace System.Data.OleDb.Tests
                     command.CommandType = CommandType.StoredProcedure;
                     command.CommandText = @"SELECT * FROM " + tableName;
                     using (
-                        var builder =
-                            (OleDbCommandBuilder)OleDbFactory.Instance.CreateCommandBuilder()
+                        var builder = (OleDbCommandBuilder)
+                            OleDbFactory.Instance.CreateCommandBuilder()
                     )
                     {
                         if (PlatformDetection.IsNetFramework)

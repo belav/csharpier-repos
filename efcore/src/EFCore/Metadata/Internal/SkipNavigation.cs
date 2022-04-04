@@ -211,11 +211,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 _foreignKeyConfigurationSource = null;
 
                 return isChanging
-                  ? (ForeignKey?)DeclaringEntityType.Model.ConventionDispatcher.OnSkipNavigationForeignKeyChanged(
-                        Builder,
-                        foreignKey,
-                        oldForeignKey
-                    )
+                  ? (ForeignKey?)
+                        DeclaringEntityType.Model.ConventionDispatcher.OnSkipNavigationForeignKeyChanged(
+                            Builder,
+                            foreignKey,
+                            oldForeignKey
+                        )
                   : foreignKey;
             }
 
@@ -257,11 +258,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             }
 
             return isChanging
-              ? (ForeignKey?)DeclaringEntityType.Model.ConventionDispatcher.OnSkipNavigationForeignKeyChanged(
-                    Builder,
-                    foreignKey,
-                    oldForeignKey!
-                )
+              ? (ForeignKey?)
+                    DeclaringEntityType.Model.ConventionDispatcher.OnSkipNavigationForeignKeyChanged(
+                        Builder,
+                        foreignKey,
+                        oldForeignKey!
+                    )
               : foreignKey;
         }
 
@@ -308,11 +310,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 _inverseConfigurationSource = null;
 
                 return isChanging
-                  ? (SkipNavigation?)DeclaringEntityType.Model.ConventionDispatcher.OnSkipNavigationInverseChanged(
-                        Builder,
-                        inverse!,
-                        oldInverse!
-                    )
+                  ? (SkipNavigation?)
+                        DeclaringEntityType.Model.ConventionDispatcher.OnSkipNavigationInverseChanged(
+                            Builder,
+                            inverse!,
+                            oldInverse!
+                        )
                   : inverse;
             }
 
@@ -348,11 +351,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             UpdateInverseConfigurationSource(configurationSource);
 
             return isChanging
-              ? (SkipNavigation?)DeclaringEntityType.Model.ConventionDispatcher.OnSkipNavigationInverseChanged(
-                    Builder,
-                    inverse,
-                    oldInverse!
-                )
+              ? (SkipNavigation?)
+                    DeclaringEntityType.Model.ConventionDispatcher.OnSkipNavigationInverseChanged(
+                        Builder,
+                        inverse,
+                        oldInverse!
+                    )
               : inverse;
         }
 

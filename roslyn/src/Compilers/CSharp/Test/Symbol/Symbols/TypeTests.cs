@@ -1567,9 +1567,8 @@ class Bar : Bar.IGoo
             Assert.Empty(comp.GetDiagnostics());
             var bar = comp.GetTypeByMetadataName("Bar");
             var iGooGetGoo = comp.GetTypeByMetadataName("Bar+IGoo").GetMembers("GetGoo").Single();
-            MethodSymbol getGoo = (MethodSymbol)bar.FindImplementationForInterfaceMember(
-                iGooGetGoo
-            );
+            MethodSymbol getGoo = (MethodSymbol)
+                bar.FindImplementationForInterfaceMember(iGooGetGoo);
             Assert.Equal("Bar.GetGoo()", getGoo.ToString());
         }
 
@@ -1906,9 +1905,8 @@ class A
             var comp = (Compilation)CreateCompilation(tree);
             var model = comp.GetSemanticModel(tree);
 
-            var mnode = (MethodDeclarationSyntax)tree.FindNodeOrTokenByKind(
-                SyntaxKind.MethodDeclaration
-            );
+            var mnode = (MethodDeclarationSyntax)
+                tree.FindNodeOrTokenByKind(SyntaxKind.MethodDeclaration);
             var localvars = model.AnalyzeDataFlow(mnode.Body).VariablesDeclared;
             var locals = localvars.OrderBy(s => s.Name).Select(s => s).ToArray();
             // 4 locals + 2 lambda params
@@ -2003,10 +2001,8 @@ namespace NS
             var comp = (Compilation)CreateCompilation(tree);
             var model = comp.GetSemanticModel(tree);
 
-            var node1 = (LocalDeclarationStatementSyntax)tree.FindNodeOrTokenByKind(
-                SyntaxKind.LocalDeclarationStatement,
-                3
-            );
+            var node1 = (LocalDeclarationStatementSyntax)
+                tree.FindNodeOrTokenByKind(SyntaxKind.LocalDeclarationStatement, 3);
             var loc = node1.Declaration.Variables.First();
             var sym = model.GetDeclaredSymbol(node1.Declaration.Variables.First()) as ILocalSymbol;
             // --------------------

@@ -458,8 +458,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
                 var serviceProvider = CreateServiceProvider(serviceCollection);
 
                 // Act and Assert
-                var service =
-                    (CreationCountFakeService)ActivatorUtilities.GetServiceOrCreateInstance(
+                var service = (CreationCountFakeService)
+                    ActivatorUtilities.GetServiceOrCreateInstance(
                         serviceProvider,
                         typeof(CreationCountFakeService)
                     );

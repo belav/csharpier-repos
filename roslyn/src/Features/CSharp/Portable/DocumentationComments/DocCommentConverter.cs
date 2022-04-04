@@ -59,8 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
                 {
                     if (trivia.Kind() == SyntaxKind.SingleLineDocumentationCommentTrivia)
                     {
-                        var structuredTrivia =
-                            (DocumentationCommentTriviaSyntax)trivia.GetStructure();
+                        var structuredTrivia = (DocumentationCommentTriviaSyntax)
+                            trivia.GetStructure();
                         var commentLines = ConvertDocCommentToRegularComment(structuredTrivia)
                             .ToSyntaxTriviaList();
 

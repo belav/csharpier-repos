@@ -29,9 +29,8 @@ namespace System.Web.WebPages
             }
             else
             {
-                HttpWorkerRequest httpWorkerRequest = (HttpWorkerRequest)httpContext.GetService(
-                    typeof(HttpWorkerRequest)
-                );
+                HttpWorkerRequest httpWorkerRequest = (HttpWorkerRequest)
+                    httpContext.GetService(typeof(HttpWorkerRequest));
                 bool requestWasRewritten = (
                     httpWorkerRequest != null
                     && httpWorkerRequest.GetServerVariable(UrlWasRewrittenServerVar) != null
@@ -65,8 +64,8 @@ namespace System.Web.WebPages
                 {
                     if (!_urlRewriterIsTurnedOnCalculated)
                     {
-                        HttpWorkerRequest httpWorkerRequest =
-                            (HttpWorkerRequest)httpContext.GetService(typeof(HttpWorkerRequest));
+                        HttpWorkerRequest httpWorkerRequest = (HttpWorkerRequest)
+                            httpContext.GetService(typeof(HttpWorkerRequest));
                         bool urlRewriterIsEnabled = (
                             httpWorkerRequest != null
                             && httpWorkerRequest.GetServerVariable(UrlRewriterEnabledServerVar)

@@ -3892,9 +3892,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         continue;
                     }
 
-                    TypeParameterSymbol typeParameterSymbol = (TypeParameterSymbol)typeParameters[
-                        paramIndex
-                    ].Type;
+                    TypeParameterSymbol typeParameterSymbol = (TypeParameterSymbol)
+                        typeParameters[paramIndex].Type;
 
                     switch (typeParameterSymbol.Variance)
                     {

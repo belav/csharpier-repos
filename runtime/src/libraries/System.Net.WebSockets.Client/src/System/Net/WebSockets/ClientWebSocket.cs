@@ -69,11 +69,12 @@ namespace System.Net.WebSockets
 
             // Check that we have not started already.
             switch (
-                (InternalState)Interlocked.CompareExchange(
-                    ref _state,
-                    (int)InternalState.Connecting,
-                    (int)InternalState.Created
-                )
+                (InternalState)
+                    Interlocked.CompareExchange(
+                        ref _state,
+                        (int)InternalState.Connecting,
+                        (int)InternalState.Created
+                    )
             )
             {
                 case InternalState.Disposed:
@@ -107,11 +108,12 @@ namespace System.Net.WebSockets
             }
 
             if (
-                (InternalState)Interlocked.CompareExchange(
-                    ref _state,
-                    (int)InternalState.Connected,
-                    (int)InternalState.Connecting
-                ) != InternalState.Connecting
+                (InternalState)
+                    Interlocked.CompareExchange(
+                        ref _state,
+                        (int)InternalState.Connected,
+                        (int)InternalState.Connecting
+                    ) != InternalState.Connecting
             )
             {
                 Debug.Assert(_state == (int)InternalState.Disposed);

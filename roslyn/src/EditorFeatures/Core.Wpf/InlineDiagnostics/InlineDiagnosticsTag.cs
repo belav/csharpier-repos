@@ -129,9 +129,8 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
             };
 
             // This is used as a workaround to the moniker issues in blue theme
-            var editorBackground = (Color)_editorFormatMap.GetProperties("TextView Background")[
-                "BackgroundColor"
-            ];
+            var editorBackground = (Color)
+                _editorFormatMap.GetProperties("TextView Background")["BackgroundColor"];
             ImageThemingUtilities.SetImageBackgroundColor(border, editorBackground);
 
             border.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));

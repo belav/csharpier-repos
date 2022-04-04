@@ -47,11 +47,12 @@ namespace System.Net.Http.Headers
         public static new TransferCodingWithQualityHeaderValue Parse(string? input)
         {
             int index = 0;
-            return (TransferCodingWithQualityHeaderValue)TransferCodingHeaderParser.SingleValueWithQualityParser.ParseValue(
-                input,
-                null,
-                ref index
-            );
+            return (TransferCodingWithQualityHeaderValue)
+                TransferCodingHeaderParser.SingleValueWithQualityParser.ParseValue(
+                    input,
+                    null,
+                    ref index
+                );
         }
 
         public static bool TryParse(

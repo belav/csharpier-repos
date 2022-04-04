@@ -34,26 +34,28 @@ namespace System.ComponentModel.Composition.Registration.Tests
 
         public static PartBuilder PartBuilder(Predicate<Type> selectType)
         {
-            return (PartBuilder)typeof(PartBuilder)
-                .GetConstructor(
-                    BindingFlags.NonPublic | BindingFlags.Instance,
-                    null,
-                    new Type[] { typeof(Predicate<Type>) },
-                    null
-                )
-                .Invoke(new object[] { selectType });
+            return (PartBuilder)
+                typeof(PartBuilder)
+                    .GetConstructor(
+                        BindingFlags.NonPublic | BindingFlags.Instance,
+                        null,
+                        new Type[] { typeof(Predicate<Type>) },
+                        null
+                    )
+                    .Invoke(new object[] { selectType });
         }
 
         public static PartBuilder<T> PartBuilder<T>(Predicate<Type> selectType)
         {
-            return (PartBuilder<T>)typeof(PartBuilder<T>)
-                .GetConstructor(
-                    BindingFlags.NonPublic | BindingFlags.Instance,
-                    null,
-                    new Type[] { typeof(Predicate<Type>) },
-                    null
-                )
-                .Invoke(new object[] { selectType });
+            return (PartBuilder<T>)
+                typeof(PartBuilder<T>)
+                    .GetConstructor(
+                        BindingFlags.NonPublic | BindingFlags.Instance,
+                        null,
+                        new Type[] { typeof(Predicate<Type>) },
+                        null
+                    )
+                    .Invoke(new object[] { selectType });
         }
 
         public static IEnumerable<Attribute> BuildTypeAttributes(
@@ -61,13 +63,14 @@ namespace System.ComponentModel.Composition.Registration.Tests
             Type type
         )
         {
-            return (IEnumerable<Attribute>)builder
-                .GetType()
-                .GetMethod(
-                    nameof(BuildTypeAttributes),
-                    BindingFlags.NonPublic | BindingFlags.Instance
-                )
-                .Invoke(builder, new object[] { type });
+            return (IEnumerable<Attribute>)
+                builder
+                    .GetType()
+                    .GetMethod(
+                        nameof(BuildTypeAttributes),
+                        BindingFlags.NonPublic | BindingFlags.Instance
+                    )
+                    .Invoke(builder, new object[] { type });
         }
 
         public static bool BuildConstructorAttributes(
@@ -76,13 +79,14 @@ namespace System.ComponentModel.Composition.Registration.Tests
             ref List<Tuple<object, List<Attribute>>> configuredMembers
         )
         {
-            return (bool)builder
-                .GetType()
-                .GetMethod(
-                    nameof(BuildConstructorAttributes),
-                    BindingFlags.NonPublic | BindingFlags.Instance
-                )
-                .Invoke(builder, new object[] { type, configuredMembers });
+            return (bool)
+                builder
+                    .GetType()
+                    .GetMethod(
+                        nameof(BuildConstructorAttributes),
+                        BindingFlags.NonPublic | BindingFlags.Instance
+                    )
+                    .Invoke(builder, new object[] { type, configuredMembers });
         }
 
         public static void BuildPropertyAttributes(

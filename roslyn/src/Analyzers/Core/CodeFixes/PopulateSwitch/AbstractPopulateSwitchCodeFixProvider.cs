@@ -234,10 +234,8 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
                 .GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             // https://github.com/dotnet/roslyn/issues/40505
-            var switchStatement = (TSwitchOperation)model.GetOperation(
-                switchNode,
-                cancellationToken
-            )!;
+            var switchStatement = (TSwitchOperation)
+                model.GetOperation(switchNode, cancellationToken)!;
 
             FixOneDiagnostic(
                 document,
@@ -274,9 +272,10 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
             {
                 var missingArms =
                     from e in GetMissingEnumMembers(switchOperation)
-                    let caseLabel = (TMemberAccessExpression)generator
-                        .MemberAccessExpression(generator.TypeExpression(enumType), e.Name)
-                        .WithAdditionalAnnotations(Simplifier.Annotation)
+                    let caseLabel = (TMemberAccessExpression)
+                        generator
+                            .MemberAccessExpression(generator.TypeExpression(enumType), e.Name)
+                            .WithAdditionalAnnotations(Simplifier.Annotation)
                     select CreateSwitchArm(generator, semanticModel.Compilation, caseLabel);
 
                 newArms.AddRange(missingArms);

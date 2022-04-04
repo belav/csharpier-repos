@@ -189,8 +189,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             int numParams = destinationParameters.Length;
             for (int i = 0; i < numParams; i++)
             {
-                SourceParameterSymbolBase destinationParameter =
-                    (SourceParameterSymbolBase)destinationParameters[i];
+                SourceParameterSymbolBase destinationParameter = (SourceParameterSymbolBase)
+                    destinationParameters[i];
                 ParameterSymbol sourceParameter = sourceParameters[i];
 
                 if (

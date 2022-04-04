@@ -1443,10 +1443,8 @@ namespace System.Xml.Serialization
             if (scope == null)
                 return;
 
-            ElementAccessor? scopeElement = (ElementAccessor?)scope[
-                element.Name,
-                element.Namespace
-            ];
+            ElementAccessor? scopeElement = (ElementAccessor?)
+                scope[element.Name, element.Namespace];
             if (scopeElement != null)
             {
                 if (!allowDuplicates)
@@ -2006,9 +2004,8 @@ namespace System.Xml.Serialization
                         && items.Particle.Items[0] is XmlSchemaElement
                     )
                     {
-                        XmlSchemaElement innerRefElement = (XmlSchemaElement)items.Particle.Items[
-                            0
-                        ];
+                        XmlSchemaElement innerRefElement = (XmlSchemaElement)
+                            items.Particle.Items[0];
                         if (innerRefElement.IsMultipleOccurrence)
                         {
                             return IsCyclicReferencedType(innerRefElement, identifiers);
@@ -2377,13 +2374,14 @@ namespace System.Xml.Serialization
             else
                 identifier += CodeIdentifier.MakePascal(attribute.Name);
             if (!attribute.SchemaTypeName.IsEmpty)
-                mapping = (TypeMapping?)ImportType(
-                    attribute.SchemaTypeName,
-                    typeof(TypeMapping),
-                    null,
-                    TypeFlags.CanBeAttributeValue,
-                    false
-                );
+                mapping = (TypeMapping?)
+                    ImportType(
+                        attribute.SchemaTypeName,
+                        typeof(TypeMapping),
+                        null,
+                        TypeFlags.CanBeAttributeValue,
+                        false
+                    );
             else if (attribute.SchemaType != null)
                 mapping = ImportDataType(
                     (XmlSchemaSimpleType)attribute.SchemaType,
@@ -2463,8 +2461,8 @@ namespace System.Xml.Serialization
 
             if (dataType.Content is XmlSchemaSimpleTypeRestriction)
             {
-                XmlSchemaSimpleTypeRestriction restriction =
-                    (XmlSchemaSimpleTypeRestriction)dataType.Content;
+                XmlSchemaSimpleTypeRestriction restriction = (XmlSchemaSimpleTypeRestriction)
+                    dataType.Content;
                 foreach (object o in restriction.Facets)
                 {
                     if (o is XmlSchemaEnumerationFacet)
@@ -2592,8 +2590,8 @@ namespace System.Xml.Serialization
 
             if (content is XmlSchemaSimpleTypeRestriction)
             {
-                XmlSchemaSimpleTypeRestriction restriction =
-                    (XmlSchemaSimpleTypeRestriction)content;
+                XmlSchemaSimpleTypeRestriction restriction = (XmlSchemaSimpleTypeRestriction)
+                    content;
                 for (int i = 0; i < restriction.Facets.Count; i++)
                 {
                     object facet = restriction.Facets[i];
@@ -2729,10 +2727,8 @@ namespace System.Xml.Serialization
 
         private XmlSchemaAttributeGroup FindAttributeGroup(XmlQualifiedName name)
         {
-            XmlSchemaAttributeGroup? group = (XmlSchemaAttributeGroup?)Schemas.Find(
-                name,
-                typeof(XmlSchemaAttributeGroup)
-            );
+            XmlSchemaAttributeGroup? group = (XmlSchemaAttributeGroup?)
+                Schemas.Find(name, typeof(XmlSchemaAttributeGroup));
             if (group == null)
                 throw new InvalidOperationException(
                     SR.Format(SR.XmlMissingAttributeGroup, name.Name)
@@ -2792,10 +2788,8 @@ namespace System.Xml.Serialization
             if (typeDesc != null && typeDesc.DataType is XmlSchemaSimpleType)
                 return (XmlSchemaSimpleType)typeDesc.DataType;
 
-            XmlSchemaSimpleType? dataType = (XmlSchemaSimpleType?)Schemas.Find(
-                name,
-                typeof(XmlSchemaSimpleType)
-            );
+            XmlSchemaSimpleType? dataType = (XmlSchemaSimpleType?)
+                Schemas.Find(name, typeof(XmlSchemaSimpleType));
             if (dataType != null)
             {
                 return dataType;
@@ -2803,9 +2797,8 @@ namespace System.Xml.Serialization
 
             if (name.Namespace == XmlSchema.Namespace)
             {
-                return (XmlSchemaSimpleType?)Scope
-                    .GetTypeDesc("string", XmlSchema.Namespace, flags)!
-                    .DataType;
+                return (XmlSchemaSimpleType?)
+                    Scope.GetTypeDesc("string", XmlSchema.Namespace, flags)!.DataType;
             }
             else
             {
@@ -2839,10 +2832,8 @@ namespace System.Xml.Serialization
 
         private XmlSchemaElement FindElement(XmlQualifiedName name)
         {
-            XmlSchemaElement? element = (XmlSchemaElement?)Schemas.Find(
-                name,
-                typeof(XmlSchemaElement)
-            );
+            XmlSchemaElement? element = (XmlSchemaElement?)
+                Schemas.Find(name, typeof(XmlSchemaElement));
             if (element == null)
                 throw new InvalidOperationException(SR.Format(SR.XmlMissingElement, name));
             return element;
@@ -2850,10 +2841,8 @@ namespace System.Xml.Serialization
 
         private XmlSchemaAttribute FindAttribute(XmlQualifiedName name)
         {
-            XmlSchemaAttribute? attribute = (XmlSchemaAttribute?)Schemas.Find(
-                name,
-                typeof(XmlSchemaAttribute)
-            );
+            XmlSchemaAttribute? attribute = (XmlSchemaAttribute?)
+                Schemas.Find(name, typeof(XmlSchemaAttribute));
             if (attribute == null)
                 throw new InvalidOperationException(SR.Format(SR.XmlMissingAttribute, name.Name));
 

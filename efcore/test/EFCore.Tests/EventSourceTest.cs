@@ -252,9 +252,10 @@ namespace Microsoft.EntityFrameworkCore
         private static long TotalExecutionStrategyOperationFailures
         {
             get =>
-                (long)_totalExecutionStrategyOperationFailures.GetValue(
-                    EntityFrameworkEventSource.Log
-                );
+                (long)
+                    _totalExecutionStrategyOperationFailures.GetValue(
+                        EntityFrameworkEventSource.Log
+                    );
             set =>
                 _totalExecutionStrategyOperationFailures.SetValue(
                     EntityFrameworkEventSource.Log,
@@ -289,26 +290,29 @@ namespace Microsoft.EntityFrameworkCore
             _compiledQueryCacheInfo.FieldType.GetField("Hits", _bindingFlags);
 
         private static int CompiledQueryCacheInfoHits =>
-            (int)_compiledQueryCacheInfoHits.GetValue(
-                _compiledQueryCacheInfo.GetValue(EntityFrameworkEventSource.Log)
-            );
+            (int)
+                _compiledQueryCacheInfoHits.GetValue(
+                    _compiledQueryCacheInfo.GetValue(EntityFrameworkEventSource.Log)
+                );
 
         private static readonly FieldInfo _compiledQueryCacheInfoMisses =
             _compiledQueryCacheInfo.FieldType.GetField("Misses", _bindingFlags);
 
         private static int CompiledQueryCacheInfoMisses =>
-            (int)_compiledQueryCacheInfoMisses.GetValue(
-                _compiledQueryCacheInfo.GetValue(EntityFrameworkEventSource.Log)
-            );
+            (int)
+                _compiledQueryCacheInfoMisses.GetValue(
+                    _compiledQueryCacheInfo.GetValue(EntityFrameworkEventSource.Log)
+                );
 
         private static readonly MethodInfo _compiledQueryCacheInfoCalculateAndReset =
             _compiledQueryCacheInfo.FieldType.GetMethod("CalculateAndReset", _bindingFlags);
 
         private static double CompiledQueryCacheInfoCalculateAndReset() =>
-            (double)_compiledQueryCacheInfoCalculateAndReset.Invoke(
-                _compiledQueryCacheInfo.GetValue(EntityFrameworkEventSource.Log),
-                Array.Empty<object>()
-            );
+            (double)
+                _compiledQueryCacheInfoCalculateAndReset.Invoke(
+                    _compiledQueryCacheInfo.GetValue(EntityFrameworkEventSource.Log),
+                    Array.Empty<object>()
+                );
 
         private static void ResetCacheInfo() =>
             _resetCacheInfo.Invoke(EntityFrameworkEventSource.Log, null);

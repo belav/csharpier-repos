@@ -128,22 +128,18 @@ namespace Microsoft.EntityFrameworkCore
                     if (useExistingEntities)
                     {
                         new1 = context.Set<OptionalSingleAk1>().Single(e => e.Id == new1.Id);
-                        new1d = (OptionalSingleAk1Derived)context
-                            .Set<OptionalSingleAk1>()
-                            .Single(e => e.Id == new1d.Id);
-                        new1dd = (OptionalSingleAk1MoreDerived)context
-                            .Set<OptionalSingleAk1>()
-                            .Single(e => e.Id == new1dd.Id);
+                        new1d = (OptionalSingleAk1Derived)
+                            context.Set<OptionalSingleAk1>().Single(e => e.Id == new1d.Id);
+                        new1dd = (OptionalSingleAk1MoreDerived)
+                            context.Set<OptionalSingleAk1>().Single(e => e.Id == new1dd.Id);
                         new2 = context.Set<OptionalSingleAk2>().Single(e => e.Id == new2.Id);
                         new2c = context
                             .Set<OptionalSingleComposite2>()
                             .Single(e => e.Id == new2c.Id);
-                        new2d = (OptionalSingleAk2Derived)context
-                            .Set<OptionalSingleAk2>()
-                            .Single(e => e.Id == new2d.Id);
-                        new2dd = (OptionalSingleAk2MoreDerived)context
-                            .Set<OptionalSingleAk2>()
-                            .Single(e => e.Id == new2dd.Id);
+                        new2d = (OptionalSingleAk2Derived)
+                            context.Set<OptionalSingleAk2>().Single(e => e.Id == new2d.Id);
+                        new2dd = (OptionalSingleAk2MoreDerived)
+                            context.Set<OptionalSingleAk2>().Single(e => e.Id == new2dd.Id);
                     }
                     else
                     {
@@ -350,20 +346,16 @@ namespace Microsoft.EntityFrameworkCore
                     }
 
                     new1 = context.Set<OptionalSingleAk1>().Single(e => e.Id == new1.Id);
-                    new1d = (OptionalSingleAk1Derived)context
-                        .Set<OptionalSingleAk1>()
-                        .Single(e => e.Id == new1d.Id);
-                    new1dd = (OptionalSingleAk1MoreDerived)context
-                        .Set<OptionalSingleAk1>()
-                        .Single(e => e.Id == new1dd.Id);
+                    new1d = (OptionalSingleAk1Derived)
+                        context.Set<OptionalSingleAk1>().Single(e => e.Id == new1d.Id);
+                    new1dd = (OptionalSingleAk1MoreDerived)
+                        context.Set<OptionalSingleAk1>().Single(e => e.Id == new1dd.Id);
                     new2 = context.Set<OptionalSingleAk2>().Single(e => e.Id == new2.Id);
                     new2c = context.Set<OptionalSingleComposite2>().Single(e => e.Id == new2c.Id);
-                    new2d = (OptionalSingleAk2Derived)context
-                        .Set<OptionalSingleAk2>()
-                        .Single(e => e.Id == new2d.Id);
-                    new2dd = (OptionalSingleAk2MoreDerived)context
-                        .Set<OptionalSingleAk2>()
-                        .Single(e => e.Id == new2dd.Id);
+                    new2d = (OptionalSingleAk2Derived)
+                        context.Set<OptionalSingleAk2>().Single(e => e.Id == new2d.Id);
+                    new2dd = (OptionalSingleAk2MoreDerived)
+                        context.Set<OptionalSingleAk2>().Single(e => e.Id == new2dd.Id);
 
                     Assert.Equal(root.AlternateId, new1.RootId);
                     Assert.Equal(root.AlternateId, new1d.DerivedRootId);
@@ -718,8 +710,8 @@ namespace Microsoft.EntityFrameworkCore
 
                     old2 = root.RequiredNonPkSingleAk.Single;
                     old2d = (RequiredNonPkSingleAk2Derived)root.RequiredNonPkSingleAkDerived.Single;
-                    old2dd =
-                        (RequiredNonPkSingleAk2MoreDerived)root.RequiredNonPkSingleAkMoreDerived.Single;
+                    old2dd = (RequiredNonPkSingleAk2MoreDerived)
+                        root.RequiredNonPkSingleAkMoreDerived.Single;
 
                     context.Set<RequiredNonPkSingleAk1>().Remove(old1d);
                     context.Set<RequiredNonPkSingleAk1>().Remove(old1dd);
@@ -727,19 +719,15 @@ namespace Microsoft.EntityFrameworkCore
                     if (useExistingEntities)
                     {
                         new1 = context.Set<RequiredNonPkSingleAk1>().Single(e => e.Id == new1.Id);
-                        new1d = (RequiredNonPkSingleAk1Derived)context
-                            .Set<RequiredNonPkSingleAk1>()
-                            .Single(e => e.Id == new1d.Id);
-                        new1dd = (RequiredNonPkSingleAk1MoreDerived)context
-                            .Set<RequiredNonPkSingleAk1>()
-                            .Single(e => e.Id == new1dd.Id);
+                        new1d = (RequiredNonPkSingleAk1Derived)
+                            context.Set<RequiredNonPkSingleAk1>().Single(e => e.Id == new1d.Id);
+                        new1dd = (RequiredNonPkSingleAk1MoreDerived)
+                            context.Set<RequiredNonPkSingleAk1>().Single(e => e.Id == new1dd.Id);
                         new2 = context.Set<RequiredNonPkSingleAk2>().Single(e => e.Id == new2.Id);
-                        new2d = (RequiredNonPkSingleAk2Derived)context
-                            .Set<RequiredNonPkSingleAk2>()
-                            .Single(e => e.Id == new2d.Id);
-                        new2dd = (RequiredNonPkSingleAk2MoreDerived)context
-                            .Set<RequiredNonPkSingleAk2>()
-                            .Single(e => e.Id == new2dd.Id);
+                        new2d = (RequiredNonPkSingleAk2Derived)
+                            context.Set<RequiredNonPkSingleAk2>().Single(e => e.Id == new2d.Id);
+                        new2dd = (RequiredNonPkSingleAk2MoreDerived)
+                            context.Set<RequiredNonPkSingleAk2>().Single(e => e.Id == new2dd.Id);
 
                         new1d.RootId = old1d.RootId;
                         new1dd.RootId = old1dd.RootId;

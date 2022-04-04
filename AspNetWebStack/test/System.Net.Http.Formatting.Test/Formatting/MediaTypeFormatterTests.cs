@@ -292,9 +292,8 @@ namespace System.Net.Http.Formatting
         {
             TestStruct s = new TestStruct();
 
-            TestStruct result = (TestStruct)MediaTypeFormatter.GetDefaultValueForType(
-                typeof(TestStruct)
-            );
+            TestStruct result = (TestStruct)
+                MediaTypeFormatter.GetDefaultValueForType(typeof(TestStruct));
 
             Assert.Equal(s, result);
         }

@@ -65,9 +65,8 @@ namespace ILVerification.Tests
         private static IEnumerable<VerificationResult> Verify(TestCase testCase)
         {
             EcmaModule module = TestDataLoader.GetModuleForTestAssembly(testCase.ModuleName);
-            var typeHandle = (TypeDefinitionHandle)MetadataTokens.EntityHandle(
-                testCase.MetadataToken
-            );
+            var typeHandle = (TypeDefinitionHandle)
+                MetadataTokens.EntityHandle(testCase.MetadataToken);
             var type = (EcmaType)module.GetType(typeHandle);
             var verifier = new Verifier(
                 (ILVerifyTypeSystemContext)type.Context,

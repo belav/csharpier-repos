@@ -317,8 +317,8 @@ namespace System.Data.OleDb
             );
             if (property != null)
             {
-                dataSourceInformation[DbMetaDataColumnNames.DataSourceProductName] =
-                    (string)property;
+                dataSourceInformation[DbMetaDataColumnNames.DataSourceProductName] = (string)
+                    property;
             }
 
             // update the server version strings
@@ -378,8 +378,8 @@ namespace System.Data.OleDb
             );
             if (property != null)
             {
-                dataSourceInformation[DbMetaDataColumnNames.OrderByColumnsInSelect] =
-                    (bool)property;
+                dataSourceInformation[DbMetaDataColumnNames.OrderByColumnsInSelect] = (bool)
+                    property;
             }
 
             DataTable? infoLiterals = internalConnection.BuildInfoLiterals();
@@ -539,11 +539,12 @@ namespace System.Data.OleDb
                     }
                 }
 
-                short nativeDataType = (short)Convert.ChangeType(
-                    sourceRow[sourceOleDbType],
-                    typeof(short),
-                    CultureInfo.InvariantCulture
-                );
+                short nativeDataType = (short)
+                    Convert.ChangeType(
+                        sourceRow[sourceOleDbType],
+                        typeof(short),
+                        CultureInfo.InvariantCulture
+                    );
                 NativeDBType nativeType = NativeDBType.FromDBType(
                     nativeDataType,
                     (bool)newRow[isLong],
@@ -689,17 +690,17 @@ namespace System.Data.OleDb
                             foreach (DataRow row in metaDataCollectionsTable.Rows)
                             {
                                 string candidateCollectionName = (
-                                    (string)row[
-                                        DbMetaDataColumnNames.CollectionName,
-                                        DataRowVersion.Current
-                                    ]
+                                    (string)
+                                        row[
+                                            DbMetaDataColumnNames.CollectionName,
+                                            DataRowVersion.Current
+                                        ]
                                 );
 
                                 if (collectionName == candidateCollectionName)
                                 {
-                                    numberOfSupportedRestictions = (int)row[
-                                        DbMetaDataColumnNames.NumberOfRestrictions
-                                    ];
+                                    numberOfSupportedRestictions = (int)
+                                        row[DbMetaDataColumnNames.NumberOfRestrictions];
                                     if (numberOfSupportedRestictions < restrictions.Length)
                                     {
                                         throw ADP.TooManyRestrictions(collectionName);

@@ -626,14 +626,15 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             Debug.Assert((syntax != null) ^ (location != null));
 
-            symbol = (TSymbol)Binder.GetWellKnownTypeMember(
-                _compilation,
-                member,
-                _diagnostics,
-                syntax: syntax,
-                isOptional: isOptional,
-                location: location
-            );
+            symbol = (TSymbol)
+                Binder.GetWellKnownTypeMember(
+                    _compilation,
+                    member,
+                    _diagnostics,
+                    syntax: syntax,
+                    isOptional: isOptional,
+                    location: location
+                );
             return symbol is { };
         }
 

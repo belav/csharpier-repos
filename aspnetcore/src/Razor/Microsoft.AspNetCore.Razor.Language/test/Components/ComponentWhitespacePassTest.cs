@@ -14,17 +14,18 @@ public class ComponentWhitespacePassTest
     public ComponentWhitespacePassTest()
     {
         Pass = new ComponentWhitespacePass();
-        ProjectEngine = (DefaultRazorProjectEngine)RazorProjectEngine.Create(
-            RazorConfiguration.Default,
-            RazorProjectFileSystem.Create(Environment.CurrentDirectory),
-            b =>
-            {
-                if (b.Features.OfType<ComponentWhitespacePass>().Any())
+        ProjectEngine = (DefaultRazorProjectEngine)
+            RazorProjectEngine.Create(
+                RazorConfiguration.Default,
+                RazorProjectFileSystem.Create(Environment.CurrentDirectory),
+                b =>
                 {
-                    b.Features.Remove(b.Features.OfType<ComponentWhitespacePass>().Single());
+                    if (b.Features.OfType<ComponentWhitespacePass>().Any())
+                    {
+                        b.Features.Remove(b.Features.OfType<ComponentWhitespacePass>().Single());
+                    }
                 }
-            }
-        );
+            );
         Engine = ProjectEngine.Engine;
 
         Pass.Engine = Engine;

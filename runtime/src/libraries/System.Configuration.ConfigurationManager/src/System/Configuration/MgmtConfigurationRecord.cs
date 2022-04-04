@@ -466,11 +466,8 @@ namespace System.Configuration
             string configKey = configSection.SectionInformation.ConfigKey;
             ConfigurationSection parentSection = FindImmediateParentSection(configSection);
             SectionRecord sectionRecord = GetSectionRecord(configKey, false);
-            ConfigurationSection clone = (ConfigurationSection)UseParentResult(
-                configKey,
-                parentSection,
-                sectionRecord
-            );
+            ConfigurationSection clone = (ConfigurationSection)
+                UseParentResult(configKey, parentSection, sectionRecord);
             return clone;
         }
 
@@ -943,8 +940,8 @@ namespace System.Configuration
                 int i = 0;
                 while (i < _locationSections.Count)
                 {
-                    LocationSectionRecord locationSectionRecord =
-                        (LocationSectionRecord)_locationSections[i];
+                    LocationSectionRecord locationSectionRecord = (LocationSectionRecord)
+                        _locationSections[i];
                     if (locationSectionRecord.ConfigKey != configKey)
                         i++;
                     else
@@ -1983,8 +1980,8 @@ namespace System.Configuration
                     }
                     else
                     {
-                        ConfigurationSection configSection =
-                            (ConfigurationSection)sectionRecord.Result;
+                        ConfigurationSection configSection = (ConfigurationSection)
+                            sectionRecord.Result;
 
                         if (
                             (TargetFramework != null)
@@ -2470,8 +2467,8 @@ namespace System.Configuration
                 int i = 0;
                 while (i < _locationSections.Count)
                 {
-                    LocationSectionRecord locationSectionRecord =
-                        (LocationSectionRecord)_locationSections[i];
+                    LocationSectionRecord locationSectionRecord = (LocationSectionRecord)
+                        _locationSections[i];
                     if (_removedSections.Contains(locationSectionRecord.ConfigKey))
                         _locationSections.RemoveAt(i);
                     else
@@ -3761,9 +3758,8 @@ namespace System.Configuration
                             skip = false;
                             if (update.UpdatedXml != null)
                             {
-                                ConfigurationSection configSection = (ConfigurationSection)update
-                                    .SectionRecord
-                                    .Result;
+                                ConfigurationSection configSection = (ConfigurationSection)
+                                    update.SectionRecord.Result;
                                 if (
                                     string.IsNullOrEmpty(
                                         configSection.SectionInformation.ConfigSource
@@ -3869,9 +3865,8 @@ namespace System.Configuration
 
             if (update.SectionRecord.HasResult)
             {
-                ConfigurationSection configSection = (ConfigurationSection)update
-                    .SectionRecord
-                    .Result;
+                ConfigurationSection configSection = (ConfigurationSection)
+                    update.SectionRecord.Result;
                 configSourceStreamName = configSection.SectionInformation.ConfigSourceStreamName;
             }
             else

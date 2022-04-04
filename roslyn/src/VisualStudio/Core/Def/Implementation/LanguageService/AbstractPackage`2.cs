@@ -45,8 +45,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             var shell = (IVsShell7)await GetServiceAsync(typeof(SVsShell)).ConfigureAwait(true);
-            var solution = (IVsSolution)await GetServiceAsync(typeof(SVsSolution))
-                .ConfigureAwait(true);
+            var solution = (IVsSolution)
+                await GetServiceAsync(typeof(SVsSolution)).ConfigureAwait(true);
             cancellationToken.ThrowIfCancellationRequested();
             Assumes.Present(shell);
             Assumes.Present(solution);
@@ -120,9 +120,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                 ThreadHelper.ThrowIfNotOnUIThread();
 
                 if (_componentModel_doNotAccessDirectly == null)
-                    _componentModel_doNotAccessDirectly = (IComponentModel)GetService(
-                        typeof(SComponentModel)
-                    );
+                    _componentModel_doNotAccessDirectly = (IComponentModel)
+                        GetService(typeof(SComponentModel));
 
                 return _componentModel_doNotAccessDirectly;
             }

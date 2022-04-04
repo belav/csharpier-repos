@@ -53,10 +53,8 @@ namespace Internal.TypeSystem
             return (
                 _baseType =
                     (uninst != null)
-                        ? (MetadataType)uninst.InstantiateSignature(
-                              _instantiation,
-                              new Instantiation()
-                          )
+                        ? (MetadataType)
+                              uninst.InstantiateSignature(_instantiation, new Instantiation())
                         : null
             );
         }

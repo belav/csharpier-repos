@@ -136,9 +136,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             TypeDesc owningTypeOverride
         )
         {
-            var ecmaModule = (EcmaModule)_tsc.GetModuleForSimpleName(
-                reader.GetString(reader.GetAssemblyDefinition().Name)
-            );
+            var ecmaModule = (EcmaModule)
+                _tsc.GetModuleForSimpleName(reader.GetString(reader.GetAssemblyDefinition().Name));
             var method = (MethodDesc)ecmaModule.GetObject(handle, NotFoundBehavior.ReturnNull);
             if (method == null)
             {
@@ -160,9 +159,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             TypeDesc owningTypeOverride
         )
         {
-            var ecmaModule = (EcmaModule)_tsc.GetModuleForSimpleName(
-                reader.GetString(reader.GetAssemblyDefinition().Name)
-            );
+            var ecmaModule = (EcmaModule)
+                _tsc.GetModuleForSimpleName(reader.GetString(reader.GetAssemblyDefinition().Name));
             var method = (MethodDesc)ecmaModule.GetObject(handle, NotFoundBehavior.ReturnNull);
             if (method == null)
             {
@@ -305,9 +303,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             byte rawTypeKind
         )
         {
-            var ecmaModule = (EcmaModule)_tsc.GetModuleForSimpleName(
-                reader.GetString(reader.GetAssemblyDefinition().Name)
-            );
+            var ecmaModule = (EcmaModule)
+                _tsc.GetModuleForSimpleName(reader.GetString(reader.GetAssemblyDefinition().Name));
             return (TypeDesc)ecmaModule.GetObject(handle, NotFoundBehavior.ReturnNull);
         }
 
@@ -317,9 +314,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             byte rawTypeKind
         )
         {
-            var ecmaModule = (EcmaModule)_tsc.GetModuleForSimpleName(
-                reader.GetString(reader.GetAssemblyDefinition().Name)
-            );
+            var ecmaModule = (EcmaModule)
+                _tsc.GetModuleForSimpleName(reader.GetString(reader.GetAssemblyDefinition().Name));
             return (TypeDesc)ecmaModule.GetObject(handle, NotFoundBehavior.ReturnNull);
         }
 
@@ -330,9 +326,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             byte rawTypeKind
         )
         {
-            var ecmaModule = (EcmaModule)_tsc.GetModuleForSimpleName(
-                reader.GetString(reader.GetAssemblyDefinition().Name)
-            );
+            var ecmaModule = (EcmaModule)
+                _tsc.GetModuleForSimpleName(reader.GetString(reader.GetAssemblyDefinition().Name));
             return (TypeDesc)ecmaModule.GetObject(handle, NotFoundBehavior.ReturnNull);
         }
     }

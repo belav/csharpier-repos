@@ -50,10 +50,8 @@ public class Tests
     {
         IntPtr ptr = mono_test_marshal_return_delegate(new SimpleDelegate(delegate_test));
 
-        SimpleDelegate d = (SimpleDelegate)Marshal.GetDelegateForFunctionPointer(
-            ptr,
-            typeof(SimpleDelegate)
-        );
+        SimpleDelegate d = (SimpleDelegate)
+            Marshal.GetDelegateForFunctionPointer(ptr, typeof(SimpleDelegate));
 
         return d(5) == 6 ? 0 : 1;
     }
@@ -63,10 +61,8 @@ public class Tests
     {
         IntPtr ptr = mono_test_marshal_return_delegate_2();
 
-        SimpleDelegate d = (SimpleDelegate)Marshal.GetDelegateForFunctionPointer(
-            ptr,
-            typeof(SimpleDelegate)
-        );
+        SimpleDelegate d = (SimpleDelegate)
+            Marshal.GetDelegateForFunctionPointer(ptr, typeof(SimpleDelegate));
 
         return d(5) == 6 ? 0 : 1;
     }

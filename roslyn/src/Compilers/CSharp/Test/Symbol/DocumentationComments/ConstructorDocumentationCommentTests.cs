@@ -40,9 +40,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 "
             );
 
-            _acmeNamespace = (NamespaceSymbol)_compilation.GlobalNamespace
-                .GetMembers("Acme")
-                .Single();
+            _acmeNamespace = (NamespaceSymbol)
+                _compilation.GlobalNamespace.GetMembers("Acme").Single();
             _widgetClass = _acmeNamespace.GetTypeMembers("Widget").Single();
         }
 

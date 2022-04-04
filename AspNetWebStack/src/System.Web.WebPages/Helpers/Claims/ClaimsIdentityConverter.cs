@@ -81,10 +81,11 @@ namespace System.Web.Helpers.Claims
                         claimType
                     );
                 Func<IIdentity, ClaimsIdentity> converter =
-                    (Func<IIdentity, ClaimsIdentity>)Delegate.CreateDelegate(
-                        typeof(Func<IIdentity, ClaimsIdentity>),
-                        tryConvertClosedMethod
-                    );
+                    (Func<IIdentity, ClaimsIdentity>)
+                        Delegate.CreateDelegate(
+                            typeof(Func<IIdentity, ClaimsIdentity>),
+                            tryConvertClosedMethod
+                        );
                 converters.Add(converter);
             }
         }

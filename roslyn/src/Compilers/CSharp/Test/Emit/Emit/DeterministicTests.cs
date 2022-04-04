@@ -513,10 +513,8 @@ using System.Runtime.CompilerServices;
                 new MetadataReference[] { forwardedToReference2, forwardingReference }
             );
 
-            var retargeting =
-                (RetargetingAssemblySymbol)withRetargeting.GetReferencedAssemblySymbol(
-                    forwardingReference
-                );
+            var retargeting = (RetargetingAssemblySymbol)
+                withRetargeting.GetReferencedAssemblySymbol(forwardingReference);
             Assert.Equal(sortedFullNames, getNamesOfForwardedTypes(retargeting));
 
             foreach (var type in getForwardedTypes(retargeting))

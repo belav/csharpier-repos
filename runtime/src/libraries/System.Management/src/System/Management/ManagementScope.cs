@@ -55,10 +55,11 @@ namespace System.Management
                 }
 
                 return (
-                    (int)s_switchesRegKey.GetValue(
-                        c_WMIDisableCOMSecurity,
-                        -1 /* default */
-                    ) == 1
+                    (int)
+                        s_switchesRegKey.GetValue(
+                            c_WMIDisableCOMSecurity,
+                            -1 /* default */
+                        ) == 1
                 );
             }
             // ignore exceptions so that we don't crash the process if we can't read the switch value
@@ -1428,8 +1429,8 @@ namespace System.Management
                     ) || (Environment.OSVersion.Version.Major >= 6)
                 )
                 {
-                    threadParam.options.Flags |=
-                        (int)tag_WBEM_CONNECT_OPTIONS.WBEM_FLAG_CONNECT_USE_MAX_WAIT;
+                    threadParam.options.Flags |= (int)
+                        tag_WBEM_CONNECT_OPTIONS.WBEM_FLAG_CONNECT_USE_MAX_WAIT;
                 }
             }
 

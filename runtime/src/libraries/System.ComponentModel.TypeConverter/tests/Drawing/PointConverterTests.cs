@@ -232,9 +232,15 @@ namespace System.ComponentModel.TypeConverterTests
         [MemberData(nameof(PointData))]
         public void ConvertFromString(int x, int y)
         {
-            var point = (Point)Converter.ConvertFromString(
-                string.Format("{0}{2} {1}", x, y, CultureInfo.CurrentCulture.TextInfo.ListSeparator)
-            );
+            var point = (Point)
+                Converter.ConvertFromString(
+                    string.Format(
+                        "{0}{2} {1}",
+                        x,
+                        y,
+                        CultureInfo.CurrentCulture.TextInfo.ListSeparator
+                    )
+                );
             Assert.Equal(x, point.X);
             Assert.Equal(y, point.Y);
         }

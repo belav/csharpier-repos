@@ -54,8 +54,9 @@ namespace System.Dynamic.Tests
 
         private static Type GetDebugViewType(Type type)
         {
-            var att = (DebuggerTypeProxyAttribute)type.GetCustomAttributes()
-                .SingleOrDefault(at => at.TypeId.Equals(typeof(DebuggerTypeProxyAttribute)));
+            var att = (DebuggerTypeProxyAttribute)
+                type.GetCustomAttributes()
+                    .SingleOrDefault(at => at.TypeId.Equals(typeof(DebuggerTypeProxyAttribute)));
             if (att == null)
             {
                 return null;

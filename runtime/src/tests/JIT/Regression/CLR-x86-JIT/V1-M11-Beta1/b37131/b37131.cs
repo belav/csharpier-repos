@@ -32,13 +32,14 @@ namespace Test
         static void BB_Static2()
         {
             while (
-                (uint)BB_Static1(
-                    AA_Static2(
-                        AA_Static4(ref n, aa.an),
-                        false,
-                        AA_Static2(AA_Static4(ref aa.an[2], aa.an), (bool)aa.obj, 0)
-                    )
-                )[2] <= 0
+                (uint)
+                    BB_Static1(
+                        AA_Static2(
+                            AA_Static4(ref n, aa.an),
+                            false,
+                            AA_Static2(AA_Static4(ref aa.an[2], aa.an), (bool)aa.obj, 0)
+                        )
+                    )[2] <= 0
             ) { }
         }
 

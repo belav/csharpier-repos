@@ -400,9 +400,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         private static SortedDictionary<string, ICheckConstraint>? GetConstraintsDictionary(
             IReadOnlyEntityType entityType
         ) =>
-            (SortedDictionary<string, ICheckConstraint>?)entityType[
-                RelationalAnnotationNames.CheckConstraints
-            ];
+            (SortedDictionary<string, ICheckConstraint>?)
+                entityType[RelationalAnnotationNames.CheckConstraints];
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

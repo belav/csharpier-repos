@@ -577,12 +577,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 .ConfigureAwait(false);
 
             var service = document.GetRequiredLanguageService<ISyntaxContextService>();
-            return (TSyntaxContext)service.CreateContext(
-                document,
-                semanticModel,
-                position,
-                cancellationToken
-            );
+            return (TSyntaxContext)
+                service.CreateContext(document, semanticModel, position, cancellationToken);
         }
 
         private static Task<TSyntaxContext> GetOrCreateContextAsync(

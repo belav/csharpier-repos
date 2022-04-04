@@ -138,9 +138,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public static IEnumerable<ISequence> GetSequences(IReadOnlyModel model) =>
             (
-                (SortedDictionary<(string, string?), ISequence>?)model[
-                    RelationalAnnotationNames.Sequences
-                ]
+                (SortedDictionary<(string, string?), ISequence>?)
+                    model[RelationalAnnotationNames.Sequences]
             )?.Values ?? Enumerable.Empty<ISequence>();
 
         /// <summary>
@@ -151,9 +150,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public static ISequence? FindSequence(IReadOnlyModel model, string name, string? schema)
         {
-            var sequences = (SortedDictionary<(string, string?), ISequence>?)model[
-                RelationalAnnotationNames.Sequences
-            ];
+            var sequences = (SortedDictionary<(string, string?), ISequence>?)
+                model[RelationalAnnotationNames.Sequences];
             if (sequences == null || !sequences.TryGetValue((name, schema), out var sequence))
             {
                 return null;
@@ -176,9 +174,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         )
         {
             var sequence = new Sequence(name, schema, model, configurationSource);
-            var sequences = (SortedDictionary<(string, string?), ISequence>?)model[
-                RelationalAnnotationNames.Sequences
-            ];
+            var sequences = (SortedDictionary<(string, string?), ISequence>?)
+                model[RelationalAnnotationNames.Sequences];
             if (sequences == null)
             {
                 sequences = new SortedDictionary<(string, string?), ISequence>();
@@ -199,9 +196,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         {
             sequence.EnsureMutable();
 
-            var sequences = (SortedDictionary<(string, string?), ISequence>?)model[
-                RelationalAnnotationNames.Sequences
-            ];
+            var sequences = (SortedDictionary<(string, string?), ISequence>?)
+                model[RelationalAnnotationNames.Sequences];
             var tuple = (sequence.Name, sequence.Schema);
             if (sequences == null || !sequences.ContainsKey(tuple))
             {
@@ -225,9 +221,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public static Sequence? RemoveSequence(IMutableModel model, string name, string? schema)
         {
-            var sequences = (SortedDictionary<(string, string?), ISequence>?)model[
-                RelationalAnnotationNames.Sequences
-            ];
+            var sequences = (SortedDictionary<(string, string?), ISequence>?)
+                model[RelationalAnnotationNames.Sequences];
             if (sequences == null || !sequences.TryGetValue((name, schema), out var sequence))
             {
                 return null;

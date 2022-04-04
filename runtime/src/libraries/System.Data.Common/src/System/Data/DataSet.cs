@@ -459,10 +459,15 @@ namespace System.Data
                     //Tables, Columns, Rows
                     for (int i = 0; i < tableCount; i++)
                     {
-                        byte[] buffer = (byte[])info.GetValue(
-                            string.Format(CultureInfo.InvariantCulture, "DataSet.Tables_{0}", i),
-                            typeof(byte[])
-                        )!;
+                        byte[] buffer = (byte[])
+                            info.GetValue(
+                                string.Format(
+                                    CultureInfo.InvariantCulture,
+                                    "DataSet.Tables_{0}",
+                                    i
+                                ),
+                                typeof(byte[])
+                            )!;
                         MemoryStream memStream = new MemoryStream(buffer);
                         memStream.Position = 0;
                         BinaryFormatter bf = new BinaryFormatter(
@@ -571,10 +576,8 @@ namespace System.Data
             _enforceConstraints = info.GetBoolean("DataSet.EnforceConstraints");
 
             //ExtendedProperties
-            _extendedProperties = (PropertyCollection?)info.GetValue(
-                "DataSet.ExtendedProperties",
-                typeof(PropertyCollection)
-            );
+            _extendedProperties = (PropertyCollection?)
+                info.GetValue("DataSet.ExtendedProperties", typeof(PropertyCollection));
         }
 
         // Gets relation info from the dataset.
@@ -618,10 +621,8 @@ namespace System.Data
         // Relations -> [relationName]->[parentTableIndex, parentcolumnIndexes]->[childTableIndex, childColumnIndexes]->[Nested]->[extendedProperties]
         private void DeserializeRelations(SerializationInfo info, StreamingContext context)
         {
-            ArrayList relationList = (ArrayList)info.GetValue(
-                "DataSet.Relations",
-                typeof(ArrayList)
-            )!;
+            ArrayList relationList = (ArrayList)
+                info.GetValue("DataSet.Relations", typeof(ArrayList))!;
 
             foreach (ArrayList list in relationList)
             {

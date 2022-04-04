@@ -73,8 +73,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
         {
             GCHandle pinnedAsyncResult = GCHandle.Alloc(asyncResult, GCHandleType.Pinned);
             IntPtr statusInformation = pinnedAsyncResult.AddrOfPinnedObject();
-            uint statusInformationLength =
-                (uint)Marshal.SizeOf<Interop.WinHttp.WINHTTP_ASYNC_RESULT>();
+            uint statusInformationLength = (uint)
+                Marshal.SizeOf<Interop.WinHttp.WINHTTP_ASYNC_RESULT>();
 
             InvokeCallback(internetStatus, statusInformation, statusInformationLength);
 

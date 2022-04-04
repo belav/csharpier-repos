@@ -142,16 +142,17 @@ namespace System.Runtime.InteropServices
                 RuntimeMethodInfo? getInstanceMethod;
                 try
                 {
-                    getInstanceMethod = (RuntimeMethodInfo?)type.GetMethod(
-                        "GetInstance",
-                        BindingFlags.Static
-                            | BindingFlags.Public
-                            | BindingFlags.NonPublic
-                            | BindingFlags.InvokeMethod,
-                        null,
-                        new Type[] { typeof(string) },
-                        null
-                    );
+                    getInstanceMethod = (RuntimeMethodInfo?)
+                        type.GetMethod(
+                            "GetInstance",
+                            BindingFlags.Static
+                                | BindingFlags.Public
+                                | BindingFlags.NonPublic
+                                | BindingFlags.InvokeMethod,
+                            null,
+                            new Type[] { typeof(string) },
+                            null
+                        );
                 }
                 catch (AmbiguousMatchException)
                 {
@@ -173,11 +174,8 @@ namespace System.Runtime.InteropServices
                 Exception? exc;
                 try
                 {
-                    result = (ICustomMarshaler?)getInstanceMethod.InternalInvoke(
-                        null,
-                        new object[] { cookie },
-                        out exc
-                    );
+                    result = (ICustomMarshaler?)
+                        getInstanceMethod.InternalInvoke(null, new object[] { cookie }, out exc);
                 }
                 catch (Exception e)
                 {

@@ -1325,19 +1325,20 @@ public class ComplexTypeModelBinderTest
         options.Value.ModelBinderProviders.Add(new TestableComplexTypeModelBinderProvider());
 
         var factory = TestModelBinderFactory.Create(options.Value.ModelBinderProviders.ToArray());
-        return (TestableComplexTypeModelBinder)factory.CreateBinder(
-            new ModelBinderFactoryContext()
-            {
-                Metadata = metadata,
-                BindingInfo = new BindingInfo()
+        return (TestableComplexTypeModelBinder)
+            factory.CreateBinder(
+                new ModelBinderFactoryContext()
                 {
-                    BinderModelName = metadata.BinderModelName,
-                    BinderType = metadata.BinderType,
-                    BindingSource = metadata.BindingSource,
-                    PropertyFilterProvider = metadata.PropertyFilterProvider,
-                },
-            }
-        );
+                    Metadata = metadata,
+                    BindingInfo = new BindingInfo()
+                    {
+                        BinderModelName = metadata.BinderModelName,
+                        BinderType = metadata.BinderType,
+                        BindingSource = metadata.BindingSource,
+                        PropertyFilterProvider = metadata.PropertyFilterProvider,
+                    },
+                }
+            );
     }
 
     private static DefaultModelBindingContext CreateContext(

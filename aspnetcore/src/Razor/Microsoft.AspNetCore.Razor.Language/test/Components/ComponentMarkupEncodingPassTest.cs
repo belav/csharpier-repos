@@ -14,17 +14,20 @@ public class ComponentMarkupEncodingPassTest
     public ComponentMarkupEncodingPassTest()
     {
         Pass = new ComponentMarkupEncodingPass();
-        ProjectEngine = (DefaultRazorProjectEngine)RazorProjectEngine.Create(
-            RazorConfiguration.Default,
-            RazorProjectFileSystem.Create(Environment.CurrentDirectory),
-            b =>
-            {
-                if (b.Features.OfType<ComponentMarkupEncodingPass>().Any())
+        ProjectEngine = (DefaultRazorProjectEngine)
+            RazorProjectEngine.Create(
+                RazorConfiguration.Default,
+                RazorProjectFileSystem.Create(Environment.CurrentDirectory),
+                b =>
                 {
-                    b.Features.Remove(b.Features.OfType<ComponentMarkupEncodingPass>().Single());
+                    if (b.Features.OfType<ComponentMarkupEncodingPass>().Any())
+                    {
+                        b.Features.Remove(
+                            b.Features.OfType<ComponentMarkupEncodingPass>().Single()
+                        );
+                    }
                 }
-            }
-        );
+            );
         Engine = ProjectEngine.Engine;
 
         Pass.Engine = Engine;

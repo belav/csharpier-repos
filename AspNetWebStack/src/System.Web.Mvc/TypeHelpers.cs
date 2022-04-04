@@ -111,10 +111,8 @@ namespace System.Web.Mvc
                         keyType,
                         returnType
                     );
-                    result = (TryGetValueDelegate)Delegate.CreateDelegate(
-                        typeof(TryGetValueDelegate),
-                        strongImplInfo
-                    );
+                    result = (TryGetValueDelegate)
+                        Delegate.CreateDelegate(typeof(TryGetValueDelegate), strongImplInfo);
                 }
             }
 

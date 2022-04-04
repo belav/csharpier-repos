@@ -19,10 +19,8 @@ public class Tests
         // need to run the test in a domain so that we can deal with unhandled exceptions
         var ad = AppDomain.CreateDomain("Inner Domain");
         var helperType = typeof(TaskAwaiterOnCompletedHelper);
-        var helper = (TaskAwaiterOnCompletedHelper)ad.CreateInstanceAndUnwrap(
-            helperType.Assembly.ToString(),
-            helperType.FullName
-        );
+        var helper = (TaskAwaiterOnCompletedHelper)
+            ad.CreateInstanceAndUnwrap(helperType.Assembly.ToString(), helperType.FullName);
         var holder = new ResultHolder();
         helper.TheTest(holder);
         // HACK: If everything went well, a thread is running in the other domain and is blocked in OnUnhandled

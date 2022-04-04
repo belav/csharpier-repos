@@ -67,9 +67,8 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void ReadFrom()
         {
-            JObject o = (JObject)JToken.ReadFrom(
-                new JsonTextReader(new StringReader("{'pie':true}"))
-            );
+            JObject o = (JObject)
+                JToken.ReadFrom(new JsonTextReader(new StringReader("{'pie':true}")));
             Assert.AreEqual(true, (bool)o["pie"]);
 
             JArray a = (JArray)JToken.ReadFrom(new JsonTextReader(new StringReader("[1,2,3]")));
@@ -85,9 +84,8 @@ namespace Newtonsoft.Json.Tests.Linq
             Assert.AreEqual("pie", p.Name);
             Assert.AreEqual(true, (bool)p.Value);
 
-            JConstructor c = (JConstructor)JToken.ReadFrom(
-                new JsonTextReader(new StringReader("new Date(1)"))
-            );
+            JConstructor c = (JConstructor)
+                JToken.ReadFrom(new JsonTextReader(new StringReader("new Date(1)")));
             Assert.AreEqual("Date", c.Name);
             Assert.IsTrue(JToken.DeepEquals(new JValue(1), c.Values().ElementAt(0)));
 
@@ -103,12 +101,13 @@ namespace Newtonsoft.Json.Tests.Linq
             Assert.AreEqual(1.1, (double)v);
 
 #if !NET20
-            v = (JValue)JToken.ReadFrom(
-                new JsonTextReader(new StringReader(@"""1970-01-01T00:00:00+12:31"""))
-                {
-                    DateParseHandling = DateParseHandling.DateTimeOffset
-                }
-            );
+            v = (JValue)
+                JToken.ReadFrom(
+                    new JsonTextReader(new StringReader(@"""1970-01-01T00:00:00+12:31"""))
+                    {
+                        DateParseHandling = DateParseHandling.DateTimeOffset
+                    }
+                );
             Assert.AreEqual(typeof(DateTimeOffset), v.Value.GetType());
             Assert.AreEqual(
                 new DateTimeOffset(
@@ -270,9 +269,8 @@ namespace Newtonsoft.Json.Tests.Linq
             );
             Assert.AreEqual(
                 new DateTimeOffset(2000, 12, 20, 23, 50, 10, TimeSpan.Zero),
-                (DateTimeOffset)new JValue(
-                    new DateTimeOffset(2000, 12, 20, 23, 50, 10, TimeSpan.Zero)
-                )
+                (DateTimeOffset)
+                    new JValue(new DateTimeOffset(2000, 12, 20, 23, 50, 10, TimeSpan.Zero))
             );
             Assert.AreEqual(null, (DateTimeOffset?)new JValue((DateTimeOffset?)null));
             Assert.AreEqual(null, (DateTimeOffset?)(JValue?)null);

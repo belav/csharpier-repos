@@ -68,12 +68,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                     underlyingTupleTypeChain.Count * (NamedTypeSymbol.ValueTupleRestPosition - 1),
                     smallestType.Arity
                 );
-                var smallestCtor = (MethodSymbol?)NamedTypeSymbol.GetWellKnownMemberInType(
-                    smallestType.OriginalDefinition,
-                    NamedTypeSymbol.GetTupleCtor(smallestType.Arity),
-                    _diagnostics,
-                    syntax
-                );
+                var smallestCtor = (MethodSymbol?)
+                    NamedTypeSymbol.GetWellKnownMemberInType(
+                        smallestType.OriginalDefinition,
+                        NamedTypeSymbol.GetTupleCtor(smallestType.Arity),
+                        _diagnostics,
+                        syntax
+                    );
                 if (smallestCtor is null)
                 {
                     return _factory.BadExpression(type);
@@ -89,12 +90,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (underlyingTupleTypeChain.Count > 0)
                 {
                     NamedTypeSymbol tuple8Type = underlyingTupleTypeChain.Peek();
-                    var tuple8Ctor = (MethodSymbol?)NamedTypeSymbol.GetWellKnownMemberInType(
-                        tuple8Type.OriginalDefinition,
-                        NamedTypeSymbol.GetTupleCtor(NamedTypeSymbol.ValueTupleRestPosition),
-                        _diagnostics,
-                        syntax
-                    );
+                    var tuple8Ctor = (MethodSymbol?)
+                        NamedTypeSymbol.GetWellKnownMemberInType(
+                            tuple8Type.OriginalDefinition,
+                            NamedTypeSymbol.GetTupleCtor(NamedTypeSymbol.ValueTupleRestPosition),
+                            _diagnostics,
+                            syntax
+                        );
                     if (tuple8Ctor is null)
                     {
                         return _factory.BadExpression(type);

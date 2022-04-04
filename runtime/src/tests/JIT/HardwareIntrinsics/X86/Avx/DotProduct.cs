@@ -126,12 +126,13 @@ namespace IntelHardwareIntrinsicTest
                     }
 
                     vf3 =
-                        (Vector256<float>)typeof(Avx)
-                            .GetMethod(
-                                nameof(Avx.DotProduct),
-                                new Type[] { vf1.GetType(), vf2.GetType(), typeof(byte) }
-                            )
-                            .Invoke(null, new object[] { vf1, vf2, (byte)(255) });
+                        (Vector256<float>)
+                            typeof(Avx)
+                                .GetMethod(
+                                    nameof(Avx.DotProduct),
+                                    new Type[] { vf1.GetType(), vf2.GetType(), typeof(byte) }
+                                )
+                                .Invoke(null, new object[] { vf1, vf2, (byte)(255) });
                     Unsafe.Write(floatTable.outArrayPtr, vf3);
 
                     if (

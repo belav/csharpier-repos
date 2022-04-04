@@ -76,10 +76,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             var targetAdapter = new XmlAdapter(node.Save(), XmlAdapter.For(parent).References);
             if (sourceAdapter != null)
                 targetAdapter.References.UnionWith(sourceAdapter.References);
-            var component = (IDictionaryAdapter)parent.CreateChildAdapter(
-                node.ClrType,
-                targetAdapter
-            );
+            var component = (IDictionaryAdapter)
+                parent.CreateChildAdapter(node.ClrType, targetAdapter);
 
             // Copy value onto fresh component
             source.CopyTo(component);

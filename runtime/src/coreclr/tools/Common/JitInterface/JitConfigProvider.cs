@@ -189,12 +189,8 @@ namespace Internal.JitInterface
             void** callbacks = (void**)Marshal.AllocCoTaskMem(sizeof(IntPtr) * numCallbacks);
 
             callbacks[0] = (delegate* unmanaged<IntPtr, char*, int, int>)&getIntConfigValue;
-            callbacks[1] = (delegate* unmanaged<
-                IntPtr,
-                char*,
-                char*,
-                int,
-                int>)&getStringConfigValue;
+            callbacks[1] = (delegate* unmanaged<IntPtr, char*, char*, int, int>)
+                &getStringConfigValue;
 
             IntPtr instance = Marshal.AllocCoTaskMem(sizeof(IntPtr));
             *(IntPtr*)instance = (IntPtr)callbacks;

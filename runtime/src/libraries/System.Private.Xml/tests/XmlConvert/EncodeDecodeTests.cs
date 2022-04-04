@@ -64,9 +64,8 @@ namespace System.Xml.Tests
             string strUni = string.Empty;
             for (int i = 0; i < _dbyte.Length; i = i + 2)
             {
-                char c = (char)BinaryPrimitives.ReadUInt16LittleEndian(
-                    new Span<byte>(_dbyte, i, 2)
-                );
+                char c = (char)
+                    BinaryPrimitives.ReadUInt16LittleEndian(new Span<byte>(_dbyte, i, 2));
                 strUni += c.ToString();
             }
             CError.WriteLine(strUni + " " + XmlConvert.EncodeName(strUni));

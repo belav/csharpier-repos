@@ -92,8 +92,8 @@ namespace System.DirectoryServices.Protocols.Tests
         {
             var request = new ModifyRequest(distinguishedName, operation, attributeName, values);
             Assert.Empty(request.Controls);
-            DirectoryAttributeModification modification =
-                (DirectoryAttributeModification)Assert.Single(request.Modifications);
+            DirectoryAttributeModification modification = (DirectoryAttributeModification)
+                Assert.Single(request.Modifications);
             Assert.Equal(attributeName, modification.Name);
             Assert.Equal(operation, modification.Operation);
             Assert.Equal(values ?? Enumerable.Empty<object>(), modification.Cast<object>());

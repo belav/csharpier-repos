@@ -30,12 +30,13 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             // Currently we support all RSASignaturePaddings. However we want to make sure we fail properly
             // if an unsupported one is added later, so construct a bogus padding.
-            RSASignaturePadding badPadding = (RSASignaturePadding)typeof(RSASignaturePadding)
-                .GetConstructor(
-                    BindingFlags.NonPublic | BindingFlags.Instance,
-                    new Type[] { typeof(RSASignaturePaddingMode) }
-                )
-                .Invoke(new object[] { badMode });
+            RSASignaturePadding badPadding = (RSASignaturePadding)
+                typeof(RSASignaturePadding)
+                    .GetConstructor(
+                        BindingFlags.NonPublic | BindingFlags.Instance,
+                        new Type[] { typeof(RSASignaturePaddingMode) }
+                    )
+                    .Invoke(new object[] { badMode });
 
             // Test setter
             CmsSigner signer = new CmsSigner();

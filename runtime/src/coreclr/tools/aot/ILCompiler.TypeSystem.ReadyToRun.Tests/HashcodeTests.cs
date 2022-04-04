@@ -67,10 +67,8 @@ namespace TypeSystemTests
         public void TestNonGenericTypes()
         {
             DefType systemArrayType = _context.GetWellKnownType(WellKnownType.Array);
-            MetadataType nonNestedType = (MetadataType)_testModule.GetType(
-                "Hashcode",
-                "NonNestedType"
-            );
+            MetadataType nonNestedType = (MetadataType)
+                _testModule.GetType("Hashcode", "NonNestedType");
             TypeDesc nestedType = nonNestedType.GetNestedType("NestedType");
 
             int expectedNonNestedTypeHashcode = TypeHashingAlgorithms.ComputeNameHashCode(
@@ -91,10 +89,8 @@ namespace TypeSystemTests
         [Fact]
         void TestGenericTypes()
         {
-            MetadataType ilistType = (MetadataType)_testModule.GetType(
-                "System.Collections.Generic",
-                "IList`1"
-            );
+            MetadataType ilistType = (MetadataType)
+                _testModule.GetType("System.Collections.Generic", "IList`1");
             DefType systemArrayType = _context.GetWellKnownType(WellKnownType.Array);
             DefType ilistOfSystemArray = ilistType.MakeInstantiatedType(systemArrayType);
 
@@ -117,14 +113,10 @@ namespace TypeSystemTests
         [Fact]
         public void TestInstantiatedMethods()
         {
-            MetadataType nonNestedType = (MetadataType)_testModule.GetType(
-                "Hashcode",
-                "NonNestedType"
-            );
-            MetadataType genericType = (MetadataType)_testModule.GetType(
-                "Hashcode",
-                "GenericType`2"
-            );
+            MetadataType nonNestedType = (MetadataType)
+                _testModule.GetType("Hashcode", "NonNestedType");
+            MetadataType genericType = (MetadataType)
+                _testModule.GetType("Hashcode", "GenericType`2");
             DefType intType = _context.GetWellKnownType(WellKnownType.Int32);
             DefType stringType = _context.GetWellKnownType(WellKnownType.String);
 

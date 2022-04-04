@@ -1188,20 +1188,16 @@ namespace System.Collections
                         hashsize = siInfo.GetInt32(HashSizeName);
                         break;
                     case KeyComparerName:
-                        _keycomparer = (IEqualityComparer?)siInfo.GetValue(
-                            KeyComparerName,
-                            typeof(IEqualityComparer)
-                        );
+                        _keycomparer = (IEqualityComparer?)
+                            siInfo.GetValue(KeyComparerName, typeof(IEqualityComparer));
                         break;
                     case ComparerName:
                         c = (IComparer?)siInfo.GetValue(ComparerName, typeof(IComparer));
                         break;
                     case HashCodeProviderName:
 #pragma warning disable 618
-                        hcp = (IHashCodeProvider?)siInfo.GetValue(
-                            HashCodeProviderName,
-                            typeof(IHashCodeProvider)
-                        );
+                        hcp = (IHashCodeProvider?)
+                            siInfo.GetValue(HashCodeProviderName, typeof(IHashCodeProvider));
 #pragma warning restore 618
                         break;
                     case KeysName:

@@ -824,9 +824,10 @@ public class Derived : C<string>
                     .WithLocation(10, 9)
             );
 
-            var property = (PropertySymbol)comp.GlobalNamespace
-                .GetTypeMember("Derived")
-                .BaseTypeNoUseSiteDiagnostics.GetMember("Property");
+            var property = (PropertySymbol)
+                comp.GlobalNamespace
+                    .GetTypeMember("Derived")
+                    .BaseTypeNoUseSiteDiagnostics.GetMember("Property");
             Assert.False(property.GetMethod.IsInitOnly);
             Assert.False(property.GetPublicSymbol().GetMethod.IsInitOnly);
             Assert.True(property.SetMethod.IsInitOnly);
@@ -3946,15 +3947,16 @@ class C : R
 "
             );
 
-            var blockStatement = (BlockSyntax)SyntaxFactory.ParseStatement(
-                @"
+            var blockStatement = (BlockSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 {
    int z = 0;
 
    _p = 123L;
 }
 "
-            );
+                );
 
             var tree = compilation.SyntaxTrees[0];
             var root = tree.GetCompilationUnitRoot();
