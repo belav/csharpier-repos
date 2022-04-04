@@ -27,7 +27,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <returns>The same builder instance so that multiple calls can be chained.</returns>
         public static IRelationalCommandBuilder AppendLine(
             this IRelationalCommandBuilder commandBuilder,
-            string value)
+            string value
+        )
         {
             commandBuilder.Append(value).AppendLine();
 
@@ -45,7 +46,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public static IRelationalCommandBuilder AppendLines(
             this IRelationalCommandBuilder commandBuilder,
             string value,
-            bool skipFinalNewline = false)
+            bool skipFinalNewline = false
+        )
         {
             using (var reader = new StringReader(value))
             {
@@ -82,8 +84,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// </summary>
         /// <param name="commandBuilder">The command builder.</param>
         /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-        public static IDisposable Indent(this IRelationalCommandBuilder commandBuilder)
-            => new Indenter(commandBuilder);
+        public static IDisposable Indent(this IRelationalCommandBuilder commandBuilder) =>
+            new Indenter(commandBuilder);
 
         /// <summary>
         ///     Adds a parameter.
@@ -101,12 +103,15 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public static IRelationalCommandBuilder AddParameter(
             this IRelationalCommandBuilder commandBuilder,
             string invariantName,
-            string name)
-            => commandBuilder.AddParameter(
+            string name
+        ) =>
+            commandBuilder.AddParameter(
                 new DynamicRelationalParameter(
                     invariantName,
                     name,
-                    commandBuilder.TypeMappingSource));
+                    commandBuilder.TypeMappingSource
+                )
+            );
 
         /// <summary>
         ///     Adds a parameter.
@@ -132,13 +137,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
             string invariantName,
             string name,
             RelationalTypeMapping typeMapping,
-            bool nullable)
-            => commandBuilder.AddParameter(
-                new TypeMappedRelationalParameter(
-                    invariantName,
-                    name,
-                    typeMapping,
-                    nullable));
+            bool nullable
+        ) =>
+            commandBuilder.AddParameter(
+                new TypeMappedRelationalParameter(invariantName, name, typeMapping, nullable)
+            );
 
         /// <summary>
         ///     Adds a parameter.
@@ -159,13 +162,16 @@ namespace Microsoft.EntityFrameworkCore.Storage
             this IRelationalCommandBuilder commandBuilder,
             string invariantName,
             string name,
-            IProperty property)
-            => commandBuilder.AddParameter(
+            IProperty property
+        ) =>
+            commandBuilder.AddParameter(
                 new TypeMappedRelationalParameter(
                     invariantName,
                     name,
                     property.GetRelationalTypeMapping(),
-                    property.IsNullable));
+                    property.IsNullable
+                )
+            );
 
         /// <summary>
         ///     Adds a parameter.
@@ -187,13 +193,16 @@ namespace Microsoft.EntityFrameworkCore.Storage
             string invariantName,
             string name,
             RelationalTypeMapping relationalTypeMapping,
-            bool? nullable)
-            => commandBuilder.AddParameter(
+            bool? nullable
+        ) =>
+            commandBuilder.AddParameter(
                 new TypeMappedRelationalParameter(
                     invariantName,
                     name,
                     relationalTypeMapping,
-                    nullable));
+                    nullable
+                )
+            );
 
         /// <summary>
         ///     Adds a parameter that is ultimately represented as multiple <see cref="DbParameter" />s in the
@@ -210,14 +219,14 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public static IRelationalCommandBuilder AddCompositeParameter(
             this IRelationalCommandBuilder commandBuilder,
             string invariantName,
-            IReadOnlyList<IRelationalParameter> subParameters)
+            IReadOnlyList<IRelationalParameter> subParameters
+        )
         {
             if (subParameters.Count > 0)
             {
                 commandBuilder.AddParameter(
-                    new CompositeRelationalParameter(
-                        invariantName,
-                        subParameters));
+                    new CompositeRelationalParameter(invariantName, subParameters)
+                );
             }
 
             return commandBuilder;
@@ -237,9 +246,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public static IRelationalCommandBuilder AddRawParameter(
             this IRelationalCommandBuilder commandBuilder,
             string invariantName,
-            DbParameter dbParameter)
-            => commandBuilder.AddParameter(
-                new RawRelationalParameter(invariantName, dbParameter));
+            DbParameter dbParameter
+        ) => commandBuilder.AddParameter(new RawRelationalParameter(invariantName, dbParameter));
 
         /// <summary>
         ///     Adds a parameter.
@@ -262,13 +270,16 @@ namespace Microsoft.EntityFrameworkCore.Storage
             this IRelationalCommandBuilder commandBuilder,
             string invariantName,
             string name,
-            IProperty property)
-            => commandBuilder.AddParameter(
+            IProperty property
+        ) =>
+            commandBuilder.AddParameter(
                 new TypeMappedPropertyRelationalParameter(
                     invariantName,
                     name,
                     property.GetRelationalTypeMapping(),
-                    property));
+                    property
+                )
+            );
 
         private sealed class Indenter : IDisposable
         {
@@ -281,8 +292,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 _builder.IncrementIndent();
             }
 
-            public void Dispose()
-                => _builder.DecrementIndent();
+            public void Dispose() => _builder.DecrementIndent();
         }
     }
 }

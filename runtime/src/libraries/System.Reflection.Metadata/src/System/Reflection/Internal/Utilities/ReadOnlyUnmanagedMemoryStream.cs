@@ -36,9 +36,7 @@ namespace System.Reflection.Internal
             return bytesRead;
         }
 
-        public override void Flush()
-        {
-        }
+        public override void Flush() { }
 
         public override bool CanRead => true;
         public override bool CanSeek => true;
@@ -47,15 +45,8 @@ namespace System.Reflection.Internal
 
         public override long Position
         {
-            get
-            {
-                return _position;
-            }
-
-            set
-            {
-                Seek(value, SeekOrigin.Begin);
-            }
+            get { return _position; }
+            set { Seek(value, SeekOrigin.Begin); }
         }
 
         public override long Seek(long offset, SeekOrigin origin)

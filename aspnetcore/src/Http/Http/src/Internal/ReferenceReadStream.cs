@@ -61,7 +61,11 @@ internal sealed class ReferenceReadStream : Stream
             ThrowIfDisposed();
             if (value < 0 || value > Length)
             {
-                throw new ArgumentOutOfRangeException(nameof(value), value, $"The Position must be within the length of the Stream: {Length}");
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    value,
+                    $"The Position must be within the length of the Stream: {Length}"
+                );
             }
             VerifyPosition();
             _position = value;
@@ -75,7 +79,9 @@ internal sealed class ReferenceReadStream : Stream
     {
         if (_inner.Position != _innerOffset + _position)
         {
-            throw new InvalidOperationException("The inner stream position has changed unexpectedly.");
+            throw new InvalidOperationException(
+                "The inner stream position has changed unexpectedly."
+            );
         }
     }
 
@@ -106,10 +112,17 @@ internal sealed class ReferenceReadStream : Stream
         return read;
     }
 
-    public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-        => ReadAsync(buffer.AsMemory(offset, count), cancellationToken).AsTask();
+    public override Task<int> ReadAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    ) => ReadAsync(buffer.AsMemory(offset, count), cancellationToken).AsTask();
 
-    public override async ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken)
+    public override async ValueTask<int> ReadAsync(
+        Memory<byte> buffer,
+        CancellationToken cancellationToken
+    )
     {
         ThrowIfDisposed();
         VerifyPosition();
@@ -123,7 +136,13 @@ internal sealed class ReferenceReadStream : Stream
     {
         throw new NotSupportedException();
     }
-    public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+
+    public override Task WriteAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    )
     {
         throw new NotSupportedException();
     }
@@ -133,9 +152,7 @@ internal sealed class ReferenceReadStream : Stream
         throw new NotSupportedException();
     }
 
-    public override void Flush()
-    {
-    }
+    public override void Flush() { }
 
     public override Task FlushAsync(CancellationToken cancellationToken)
     {

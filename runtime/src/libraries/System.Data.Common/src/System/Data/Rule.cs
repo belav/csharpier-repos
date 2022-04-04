@@ -13,14 +13,17 @@ namespace System.Data
         /// No action occurs.
         /// </summary>
         None = 0,
+
         /// <summary>
         /// Changes are cascaded through the relationship.
         /// </summary>
         Cascade = 1,
+
         /// <summary>
         /// Null values are set in the rows affected by the deletion.
         /// </summary>
         SetNull = 2,
+
         /// <summary>
         /// Default values are set in the rows affected by the deletion.
         /// </summary>

@@ -12,6 +12,7 @@ namespace Internal.IL.Stubs
         public ILCodeStream ReturnValueMarshallingCodeStream { get; }
         public ILCodeStream UnmarshallingCodestream { get; }
         public ILCodeStream CleanupCodeStream { get; }
+
         public PInvokeILCodeStreams()
         {
             Emitter = new ILEmitter();
@@ -22,9 +23,9 @@ namespace Internal.IL.Stubs
             // store that into the local
             // - CallsiteSetupCodeStream is used to used to load each previously generated local
             // and call the actual target native method.
-            // - ReturnValueMarshallingCodeStream is used to convert the native return value 
+            // - ReturnValueMarshallingCodeStream is used to convert the native return value
             // to managed one.
-            // - UnmarshallingCodestream is used to propagate [out] native arguments values to 
+            // - UnmarshallingCodestream is used to propagate [out] native arguments values to
             // managed ones.
             // - CleanupCodestream is used to perform a guaranteed cleanup
             FunctionPointerLoadStream = Emitter.NewCodeStream();

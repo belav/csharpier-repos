@@ -33,14 +33,21 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
     protected static readonly int MaxRequestHeaderFieldSize = 16 * 1024;
     protected static readonly string _4kHeaderValue = new string('a', 4096);
 
-    protected static readonly IEnumerable<KeyValuePair<string, string>> _browserRequestHeaders = new[]
-    {
+    protected static readonly IEnumerable<KeyValuePair<string, string>> _browserRequestHeaders =
+        new[]
+        {
             new KeyValuePair<string, string>(HeaderNames.Method, "GET"),
             new KeyValuePair<string, string>(HeaderNames.Path, "/"),
             new KeyValuePair<string, string>(HeaderNames.Scheme, "http"),
             new KeyValuePair<string, string>(HeaderNames.Authority, "localhost:80"),
-            new KeyValuePair<string, string>("user-agent", "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:54.0) Gecko/20100101 Firefox/54.0"),
-            new KeyValuePair<string, string>("accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"),
+            new KeyValuePair<string, string>(
+                "user-agent",
+                "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:54.0) Gecko/20100101 Firefox/54.0"
+            ),
+            new KeyValuePair<string, string>(
+                "accept",
+                "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+            ),
             new KeyValuePair<string, string>("accept-language", "en-US,en;q=0.5"),
             new KeyValuePair<string, string>("accept-encoding", "gzip, deflate, br"),
             new KeyValuePair<string, string>("upgrade-insecure-requests", "1"),
@@ -48,56 +55,65 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
 
     protected static readonly IEnumerable<KeyValuePair<string, string>> _postRequestHeaders = new[]
     {
-            new KeyValuePair<string, string>(HeaderNames.Method, "POST"),
-            new KeyValuePair<string, string>(HeaderNames.Path, "/"),
-            new KeyValuePair<string, string>(HeaderNames.Scheme, "http"),
-            new KeyValuePair<string, string>(HeaderNames.Authority, "localhost:80"),
-        };
+        new KeyValuePair<string, string>(HeaderNames.Method, "POST"),
+        new KeyValuePair<string, string>(HeaderNames.Path, "/"),
+        new KeyValuePair<string, string>(HeaderNames.Scheme, "http"),
+        new KeyValuePair<string, string>(HeaderNames.Authority, "localhost:80"),
+    };
 
-    protected static readonly IEnumerable<KeyValuePair<string, string>> _expectContinueRequestHeaders = new[]
+    protected static readonly IEnumerable<
+        KeyValuePair<string, string>
+    > _expectContinueRequestHeaders = new[]
     {
-            new KeyValuePair<string, string>(HeaderNames.Method, "POST"),
-            new KeyValuePair<string, string>(HeaderNames.Path, "/"),
-            new KeyValuePair<string, string>(HeaderNames.Authority, "127.0.0.1"),
-            new KeyValuePair<string, string>(HeaderNames.Scheme, "http"),
-            new KeyValuePair<string, string>(HeaderNames.Expect, "100-continue"),
-        };
+        new KeyValuePair<string, string>(HeaderNames.Method, "POST"),
+        new KeyValuePair<string, string>(HeaderNames.Path, "/"),
+        new KeyValuePair<string, string>(HeaderNames.Authority, "127.0.0.1"),
+        new KeyValuePair<string, string>(HeaderNames.Scheme, "http"),
+        new KeyValuePair<string, string>(HeaderNames.Expect, "100-continue"),
+    };
 
     protected static readonly IEnumerable<KeyValuePair<string, string>> _requestTrailers = new[]
     {
-            new KeyValuePair<string, string>("trailer-one", "1"),
-            new KeyValuePair<string, string>("trailer-two", "2"),
-        };
+        new KeyValuePair<string, string>("trailer-one", "1"),
+        new KeyValuePair<string, string>("trailer-two", "2"),
+    };
 
-    protected static readonly IEnumerable<KeyValuePair<string, string>> _oneContinuationRequestHeaders = new[]
+    protected static readonly IEnumerable<
+        KeyValuePair<string, string>
+    > _oneContinuationRequestHeaders = new[]
     {
-            new KeyValuePair<string, string>(HeaderNames.Method, "GET"),
-            new KeyValuePair<string, string>(HeaderNames.Path, "/"),
-            new KeyValuePair<string, string>(HeaderNames.Scheme, "http"),
-            new KeyValuePair<string, string>(HeaderNames.Authority, "localhost:80"),
-            new KeyValuePair<string, string>("a", _4kHeaderValue),
-            new KeyValuePair<string, string>("b", _4kHeaderValue),
-            new KeyValuePair<string, string>("c", _4kHeaderValue),
-            new KeyValuePair<string, string>("d", _4kHeaderValue)
-        };
+        new KeyValuePair<string, string>(HeaderNames.Method, "GET"),
+        new KeyValuePair<string, string>(HeaderNames.Path, "/"),
+        new KeyValuePair<string, string>(HeaderNames.Scheme, "http"),
+        new KeyValuePair<string, string>(HeaderNames.Authority, "localhost:80"),
+        new KeyValuePair<string, string>("a", _4kHeaderValue),
+        new KeyValuePair<string, string>("b", _4kHeaderValue),
+        new KeyValuePair<string, string>("c", _4kHeaderValue),
+        new KeyValuePair<string, string>("d", _4kHeaderValue)
+    };
 
-    protected static readonly IEnumerable<KeyValuePair<string, string>> _twoContinuationsRequestHeaders = new[]
+    protected static readonly IEnumerable<
+        KeyValuePair<string, string>
+    > _twoContinuationsRequestHeaders = new[]
     {
-            new KeyValuePair<string, string>(HeaderNames.Method, "GET"),
-            new KeyValuePair<string, string>(HeaderNames.Path, "/"),
-            new KeyValuePair<string, string>(HeaderNames.Scheme, "http"),
-            new KeyValuePair<string, string>(HeaderNames.Authority, "localhost:80"),
-            new KeyValuePair<string, string>("a", _4kHeaderValue),
-            new KeyValuePair<string, string>("b", _4kHeaderValue),
-            new KeyValuePair<string, string>("c", _4kHeaderValue),
-            new KeyValuePair<string, string>("d", _4kHeaderValue),
-            new KeyValuePair<string, string>("e", _4kHeaderValue),
-            new KeyValuePair<string, string>("f", _4kHeaderValue),
-            new KeyValuePair<string, string>("g", _4kHeaderValue),
-        };
+        new KeyValuePair<string, string>(HeaderNames.Method, "GET"),
+        new KeyValuePair<string, string>(HeaderNames.Path, "/"),
+        new KeyValuePair<string, string>(HeaderNames.Scheme, "http"),
+        new KeyValuePair<string, string>(HeaderNames.Authority, "localhost:80"),
+        new KeyValuePair<string, string>("a", _4kHeaderValue),
+        new KeyValuePair<string, string>("b", _4kHeaderValue),
+        new KeyValuePair<string, string>("c", _4kHeaderValue),
+        new KeyValuePair<string, string>("d", _4kHeaderValue),
+        new KeyValuePair<string, string>("e", _4kHeaderValue),
+        new KeyValuePair<string, string>("f", _4kHeaderValue),
+        new KeyValuePair<string, string>("g", _4kHeaderValue),
+    };
 
-    protected static IEnumerable<KeyValuePair<string, string>> ReadRateRequestHeaders(int expectedBytes) => new[]
-    {
+    protected static IEnumerable<KeyValuePair<string, string>> ReadRateRequestHeaders(
+        int expectedBytes
+    ) =>
+        new[]
+        {
             new KeyValuePair<string, string>(HeaderNames.Method, "POST"),
             new KeyValuePair<string, string>(HeaderNames.Path, "/" + expectedBytes),
             new KeyValuePair<string, string>(HeaderNames.Scheme, "http"),
@@ -108,29 +124,46 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
     protected static readonly byte[] _worldBytes = Encoding.ASCII.GetBytes("world");
     protected static readonly byte[] _helloWorldBytes = Encoding.ASCII.GetBytes("hello, world");
     protected static readonly byte[] _noData = new byte[0];
-    protected static readonly byte[] _maxData = Encoding.ASCII.GetBytes(new string('a', Http2PeerSettings.MinAllowedMaxFrameSize));
+    protected static readonly byte[] _maxData = Encoding.ASCII.GetBytes(
+        new string('a', Http2PeerSettings.MinAllowedMaxFrameSize)
+    );
 
     private readonly MemoryPool<byte> _memoryPool = PinnedBlockMemoryPoolFactory.Create();
 
     internal readonly Http2PeerSettings _clientSettings = new Http2PeerSettings();
     internal readonly HPackDecoder _hpackDecoder;
     internal readonly DynamicHPackEncoder _hpackEncoder;
-    private readonly byte[] _headerEncodingBuffer = new byte[Http2PeerSettings.MinAllowedMaxFrameSize];
+    private readonly byte[] _headerEncodingBuffer = new byte[
+        Http2PeerSettings.MinAllowedMaxFrameSize
+    ];
 
     internal readonly TimeoutControl _timeoutControl;
-    protected readonly Mock<ConnectionContext> _mockConnectionContext = new Mock<ConnectionContext>();
+    protected readonly Mock<ConnectionContext> _mockConnectionContext =
+        new Mock<ConnectionContext>();
     internal readonly Mock<ITimeoutHandler> _mockTimeoutHandler = new Mock<ITimeoutHandler>();
     internal readonly Mock<MockTimeoutControlBase> _mockTimeoutControl;
 
-    protected readonly ConcurrentDictionary<int, TaskCompletionSource> _runningStreams = new ConcurrentDictionary<int, TaskCompletionSource>();
-    protected readonly Dictionary<string, string> _receivedHeaders = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-    protected readonly Dictionary<string, string> _receivedTrailers = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-    protected readonly Dictionary<string, string> _decodedHeaders = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+    protected readonly ConcurrentDictionary<int, TaskCompletionSource> _runningStreams =
+        new ConcurrentDictionary<int, TaskCompletionSource>();
+    protected readonly Dictionary<string, string> _receivedHeaders = new Dictionary<string, string>(
+        StringComparer.OrdinalIgnoreCase
+    );
+    protected readonly Dictionary<string, string> _receivedTrailers = new Dictionary<
+        string,
+        string
+    >(StringComparer.OrdinalIgnoreCase);
+    protected readonly Dictionary<string, string> _decodedHeaders = new Dictionary<string, string>(
+        StringComparer.OrdinalIgnoreCase
+    );
     protected readonly RequestFields _receivedRequestFields = new RequestFields();
     protected readonly HashSet<int> _abortedStreamIds = new HashSet<int>();
     protected readonly object _abortedStreamIdsLock = new object();
-    protected readonly TaskCompletionSource _closingStateReached = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-    protected readonly TaskCompletionSource _closedStateReached = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+    protected readonly TaskCompletionSource _closingStateReached = new TaskCompletionSource(
+        TaskCreationOptions.RunContinuationsAsynchronously
+    );
+    protected readonly TaskCompletionSource _closedStateReached = new TaskCompletionSource(
+        TaskCreationOptions.RunContinuationsAsynchronously
+    );
 
     protected readonly RequestDelegate _noopApplication;
     protected readonly RequestDelegate _readHeadersApplication;
@@ -157,22 +190,35 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
 
     public Http2TestBase()
     {
-        _hpackDecoder = new HPackDecoder((int)_clientSettings.HeaderTableSize, MaxRequestHeaderFieldSize);
+        _hpackDecoder = new HPackDecoder(
+            (int)_clientSettings.HeaderTableSize,
+            MaxRequestHeaderFieldSize
+        );
         _hpackEncoder = new DynamicHPackEncoder();
 
         _timeoutControl = new TimeoutControl(_mockTimeoutHandler.Object);
         _mockTimeoutControl = new Mock<MockTimeoutControlBase>(_timeoutControl) { CallBase = true };
         _timeoutControl.Debugger = Mock.Of<IDebugger>();
 
-        _mockConnectionContext.Setup(c => c.Abort(It.IsAny<ConnectionAbortedException>())).Callback<ConnectionAbortedException>(ex =>
-        {
-                // Emulate transport abort so the _connectionTask completes.
-                Task.Run(() =>
-            {
-                Logger.LogInformation(0, ex, "ConnectionContext.Abort() was called. Completing _pair.Application.Output.");
-                _pair.Application.Output.Complete(ex);
-            });
-        });
+        _mockConnectionContext
+            .Setup(c => c.Abort(It.IsAny<ConnectionAbortedException>()))
+            .Callback<ConnectionAbortedException>(
+                ex =>
+                {
+                    // Emulate transport abort so the _connectionTask completes.
+                    Task.Run(
+                        () =>
+                        {
+                            Logger.LogInformation(
+                                0,
+                                ex,
+                                "ConnectionContext.Abort() was called. Completing _pair.Application.Output."
+                            );
+                            _pair.Application.Output.Complete(ex);
+                        }
+                    );
+                }
+            );
 
         _noopApplication = context => Task.CompletedTask;
 
@@ -181,7 +227,9 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
             _receivedRequestFields.Method = context.Request.Method;
             _receivedRequestFields.Scheme = context.Request.Scheme;
             _receivedRequestFields.Path = context.Request.Path.Value;
-            _receivedRequestFields.RawTarget = context.Features.Get<IHttpRequestFeature>().RawTarget;
+            _receivedRequestFields.RawTarget = context.Features
+                .Get<IHttpRequestFeature>()
+                .RawTarget;
             foreach (var header in context.Request.Headers)
             {
                 _receivedHeaders[header.Key] = header.Value.ToString();
@@ -197,8 +245,8 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
 
             using (var ms = new MemoryStream())
             {
-                    // Consuming the entire request body guarantees trailers will be available
-                    await context.Request.Body.CopyToAsync(ms);
+                // Consuming the entire request body guarantees trailers will be available
+                await context.Request.Body.CopyToAsync(ms);
             }
 
             Assert.True(context.Request.SupportsTrailers(), "SupportsTrailers");
@@ -207,7 +255,9 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
             _receivedRequestFields.Method = context.Request.Method;
             _receivedRequestFields.Scheme = context.Request.Scheme;
             _receivedRequestFields.Path = context.Request.Path.Value;
-            _receivedRequestFields.RawTarget = context.Features.Get<IHttpRequestFeature>().RawTarget;
+            _receivedRequestFields.RawTarget = context.Features
+                .Get<IHttpRequestFeature>()
+                .RawTarget;
             foreach (var header in context.Request.Headers)
             {
                 _receivedHeaders[header.Key] = header.Value.ToString();
@@ -258,10 +308,12 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
 
             var sem = new SemaphoreSlim(0);
 
-            context.RequestAborted.Register(() =>
-            {
-                sem.Release();
-            });
+            context.RequestAborted.Register(
+                () =>
+                {
+                    sem.Release();
+                }
+            );
 
             await sem.WaitAsync().DefaultTimeout();
         };
@@ -281,15 +333,17 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
             var streamIdFeature = context.Features.Get<IHttp2StreamIdFeature>();
             var sem = new SemaphoreSlim(0);
 
-            context.RequestAborted.Register(() =>
-            {
-                lock (_abortedStreamIdsLock)
+            context.RequestAborted.Register(
+                () =>
                 {
-                    _abortedStreamIds.Add(streamIdFeature.StreamId);
-                }
+                    lock (_abortedStreamIdsLock)
+                    {
+                        _abortedStreamIds.Add(streamIdFeature.StreamId);
+                    }
 
-                sem.Release();
-            });
+                    sem.Release();
+                }
+            );
 
             await sem.WaitAsync().DefaultTimeout();
 
@@ -301,15 +355,17 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
             var streamIdFeature = context.Features.Get<IHttp2StreamIdFeature>();
             var sem = new SemaphoreSlim(0);
 
-            context.RequestAborted.Register(() =>
-            {
-                lock (_abortedStreamIdsLock)
+            context.RequestAborted.Register(
+                () =>
                 {
-                    _abortedStreamIds.Add(streamIdFeature.StreamId);
-                }
+                    lock (_abortedStreamIdsLock)
+                    {
+                        _abortedStreamIds.Add(streamIdFeature.StreamId);
+                    }
 
-                sem.Release();
-            });
+                    sem.Release();
+                }
+            );
 
             await sem.WaitAsync().DefaultTimeout();
 
@@ -320,7 +376,10 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
 
         _readRateApplication = async context =>
         {
-            var expectedBytes = int.Parse(context.Request.Path.Value.Substring(1), CultureInfo.InvariantCulture);
+            var expectedBytes = int.Parse(
+                context.Request.Path.Value.Substring(1),
+                CultureInfo.InvariantCulture
+            );
 
             var buffer = new byte[Http2PeerSettings.MinAllowedMaxFrameSize];
             var received = 0;
@@ -332,8 +391,8 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
 
             var stalledReadTask = context.Request.Body.ReadAsync(buffer, 0, buffer.Length);
 
-                // Write to the response so the test knows the app started the stalled read.
-                await context.Response.Body.WriteAsync(new byte[1], 0, 1);
+            // Write to the response so the test knows the app started the stalled read.
+            await context.Response.Body.WriteAsync(new byte[1], 0, 1);
 
             await stalledReadTask;
         };
@@ -359,7 +418,9 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
         {
             Assert.False(context.Request.Headers.ContainsKey(HeaderNames.Path));
             context.Response.Headers["path"] = context.Request.Path.ToString();
-            context.Response.Headers["rawtarget"] = context.Features.Get<IHttpRequestFeature>().RawTarget;
+            context.Response.Headers["rawtarget"] = context.Features
+                .Get<IHttpRequestFeature>()
+                .RawTarget;
 
             return Task.CompletedTask;
         };
@@ -379,7 +440,12 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
         };
     }
 
-    public override void Initialize(TestContext context, MethodInfo methodInfo, object[] testMethodArguments, ITestOutputHelper testOutputHelper)
+    public override void Initialize(
+        TestContext context,
+        MethodInfo methodInfo,
+        object[] testMethodArguments,
+        ITestOutputHelper testOutputHelper
+    )
     {
         base.Initialize(context, methodInfo, testMethodArguments, testOutputHelper);
 
@@ -415,7 +481,11 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
     void IHttpHeadersHandler.OnHeader(ReadOnlySpan<byte> name, ReadOnlySpan<byte> value)
     {
         var nameStr = name.GetHeaderName();
-        _decodedHeaders[nameStr] = value.GetRequestHeaderString(nameStr, _serviceContext.ServerOptions.RequestHeaderEncodingSelector, checkForNewlineChars: true);
+        _decodedHeaders[nameStr] = value.GetRequestHeaderString(
+            nameStr,
+            _serviceContext.ServerOptions.RequestHeaderEncodingSelector,
+            checkForNewlineChars: true
+        );
     }
 
     public void OnStaticIndexedHeader(int index)
@@ -440,8 +510,16 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
         // Always dispatch test code back to the ThreadPool. This prevents deadlocks caused by continuing
         // Http2Connection.ProcessRequestsAsync() loop with writer locks acquired. Run product code inline to make
         // it easier to verify request frames are processed correctly immediately after sending the them.
-        var inputPipeOptions = GetInputPipeOptions(_serviceContext, _memoryPool, PipeScheduler.ThreadPool);
-        var outputPipeOptions = GetOutputPipeOptions(_serviceContext, _memoryPool, PipeScheduler.ThreadPool);
+        var inputPipeOptions = GetInputPipeOptions(
+            _serviceContext,
+            _memoryPool,
+            PipeScheduler.ThreadPool
+        );
+        var outputPipeOptions = GetOutputPipeOptions(
+            _serviceContext,
+            _memoryPool,
+            PipeScheduler.ThreadPool
+        );
 
         _pair = DuplexPipe.CreateConnectionPair(inputPipeOptions, outputPipeOptions);
 
@@ -451,19 +529,25 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
             transport: _pair.Transport,
             memoryPool: _memoryPool,
             connectionFeatures: new FeatureCollection(),
-            timeoutControl: _mockTimeoutControl.Object);
+            timeoutControl: _mockTimeoutControl.Object
+        );
 
         _connection = new Http2Connection(httpConnectionContext);
 
         var httpConnection = new HttpConnection(httpConnectionContext);
         httpConnection.Initialize(_connection);
-        _mockTimeoutHandler.Setup(h => h.OnTimeout(It.IsAny<TimeoutReason>()))
-                           .Callback<TimeoutReason>(r => httpConnection.OnTimeout(r));
+        _mockTimeoutHandler
+            .Setup(h => h.OnTimeout(It.IsAny<TimeoutReason>()))
+            .Callback<TimeoutReason>(r => httpConnection.OnTimeout(r));
 
         _timeoutControl.Initialize(_serviceContext.SystemClock.UtcNow.Ticks);
     }
 
-    protected async Task InitializeConnectionAsync(RequestDelegate application, int expectedSettingsCount = 3, bool expectedWindowUpdate = true)
+    protected async Task InitializeConnectionAsync(
+        RequestDelegate application,
+        int expectedSettingsCount = 3,
+        bool expectedWindowUpdate = true
+    )
     {
         if (_connection == null)
         {
@@ -492,32 +576,49 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
         await SendPreambleAsync();
         await SendSettingsAsync();
 
-        await ExpectAsync(Http2FrameType.SETTINGS,
+        await ExpectAsync(
+            Http2FrameType.SETTINGS,
             withLength: expectedSettingsCount * Http2FrameReader.SettingSize,
             withFlags: 0,
-            withStreamId: 0);
+            withStreamId: 0
+        );
 
         if (expectedWindowUpdate)
         {
-            await ExpectAsync(Http2FrameType.WINDOW_UPDATE,
+            await ExpectAsync(
+                Http2FrameType.WINDOW_UPDATE,
                 withLength: 4,
                 withFlags: 0,
-                withStreamId: 0);
+                withStreamId: 0
+            );
         }
 
-        await ExpectAsync(Http2FrameType.SETTINGS,
+        await ExpectAsync(
+            Http2FrameType.SETTINGS,
             withLength: 0,
             withFlags: (byte)Http2SettingsFrameFlags.ACK,
-            withStreamId: 0);
+            withStreamId: 0
+        );
     }
 
-    protected Task StartStreamAsync(int streamId, IEnumerable<KeyValuePair<string, string>> headers, bool endStream, bool flushFrame = true)
+    protected Task StartStreamAsync(
+        int streamId,
+        IEnumerable<KeyValuePair<string, string>> headers,
+        bool endStream,
+        bool flushFrame = true
+    )
     {
         var writableBuffer = _pair.Application.Output;
         var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         _runningStreams[streamId] = tcs;
 
-        writableBuffer.WriteStartStream(streamId, _hpackEncoder, GetHeadersEnumerator(headers), _headerEncodingBuffer, endStream);
+        writableBuffer.WriteStartStream(
+            streamId,
+            _hpackEncoder,
+            GetHeadersEnumerator(headers),
+            _headerEncodingBuffer,
+            endStream
+        );
 
         if (flushFrame)
         {
@@ -545,7 +646,12 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
         |                           Padding (*)                       ...
         +---------------------------------------------------------------+
     */
-    protected Task SendHeadersWithPaddingAsync(int streamId, IEnumerable<KeyValuePair<string, string>> headers, byte padLength, bool endStream)
+    protected Task SendHeadersWithPaddingAsync(
+        int streamId,
+        IEnumerable<KeyValuePair<string, string>> headers,
+        byte padLength,
+        bool endStream
+    )
     {
         var writableBuffer = _pair.Application.Output;
         var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
@@ -553,16 +659,27 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
 
         var frame = new Http2Frame();
 
-        frame.PrepareHeaders(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.PADDED, streamId);
+        frame.PrepareHeaders(
+            Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.PADDED,
+            streamId
+        );
         frame.HeadersPadLength = padLength;
 
         var extendedHeaderLength = 1; // Padding length field
         var buffer = _headerEncodingBuffer.AsSpan();
         var extendedHeader = buffer.Slice(0, extendedHeaderLength);
         extendedHeader[0] = padLength;
-        var payload = buffer.Slice(extendedHeaderLength, buffer.Length - padLength - extendedHeaderLength);
+        var payload = buffer.Slice(
+            extendedHeaderLength,
+            buffer.Length - padLength - extendedHeaderLength
+        );
 
-        HPackHeaderWriter.BeginEncodeHeaders(_hpackEncoder, GetHeadersEnumerator(headers), payload, out var length);
+        HPackHeaderWriter.BeginEncodeHeaders(
+            _hpackEncoder,
+            GetHeadersEnumerator(headers),
+            payload,
+            out var length
+        );
         var padding = buffer.Slice(extendedHeaderLength + length, padLength);
         padding.Clear();
 
@@ -587,14 +704,23 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
         |                   Header Block Fragment (*)                 ...
         +---------------------------------------------------------------+
     */
-    protected Task SendHeadersWithPriorityAsync(int streamId, IEnumerable<KeyValuePair<string, string>> headers, byte priority, int streamDependency, bool endStream)
+    protected Task SendHeadersWithPriorityAsync(
+        int streamId,
+        IEnumerable<KeyValuePair<string, string>> headers,
+        byte priority,
+        int streamDependency,
+        bool endStream
+    )
     {
         var writableBuffer = _pair.Application.Output;
         var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         _runningStreams[streamId] = tcs;
 
         var frame = new Http2Frame();
-        frame.PrepareHeaders(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.PRIORITY, streamId);
+        frame.PrepareHeaders(
+            Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.PRIORITY,
+            streamId
+        );
         frame.HeadersPriorityWeight = priority;
         frame.HeadersStreamDependency = streamDependency;
 
@@ -605,7 +731,12 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
         extendedHeader[4] = priority;
         var payload = buffer.Slice(extendedHeaderLength);
 
-        HPackHeaderWriter.BeginEncodeHeaders(_hpackEncoder, GetHeadersEnumerator(headers), payload, out var length);
+        HPackHeaderWriter.BeginEncodeHeaders(
+            _hpackEncoder,
+            GetHeadersEnumerator(headers),
+            payload,
+            out var length
+        );
 
         frame.PayloadLength = extendedHeaderLength + length;
 
@@ -632,14 +763,26 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
         |                           Padding (*)                       ...
         +---------------------------------------------------------------+
     */
-    protected Task SendHeadersWithPaddingAndPriorityAsync(int streamId, IEnumerable<KeyValuePair<string, string>> headers, byte padLength, byte priority, int streamDependency, bool endStream)
+    protected Task SendHeadersWithPaddingAndPriorityAsync(
+        int streamId,
+        IEnumerable<KeyValuePair<string, string>> headers,
+        byte padLength,
+        byte priority,
+        int streamDependency,
+        bool endStream
+    )
     {
         var writableBuffer = _pair.Application.Output;
         var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         _runningStreams[streamId] = tcs;
 
         var frame = new Http2Frame();
-        frame.PrepareHeaders(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.PADDED | Http2HeadersFrameFlags.PRIORITY, streamId);
+        frame.PrepareHeaders(
+            Http2HeadersFrameFlags.END_HEADERS
+                | Http2HeadersFrameFlags.PADDED
+                | Http2HeadersFrameFlags.PRIORITY,
+            streamId
+        );
         frame.HeadersPadLength = padLength;
         frame.HeadersPriorityWeight = priority;
         frame.HeadersStreamDependency = streamDependency;
@@ -650,9 +793,17 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
         extendedHeader[0] = padLength;
         Bitshifter.WriteUInt31BigEndian(extendedHeader.Slice(1), (uint)streamDependency);
         extendedHeader[5] = priority;
-        var payload = buffer.Slice(extendedHeaderLength, buffer.Length - padLength - extendedHeaderLength);
+        var payload = buffer.Slice(
+            extendedHeaderLength,
+            buffer.Length - padLength - extendedHeaderLength
+        );
 
-        HPackHeaderWriter.BeginEncodeHeaders(_hpackEncoder, GetHeadersEnumerator(headers), payload, out var length);
+        HPackHeaderWriter.BeginEncodeHeaders(
+            _hpackEncoder,
+            GetHeadersEnumerator(headers),
+            payload,
+            out var length
+        );
         var padding = buffer.Slice(extendedHeaderLength + length, padLength);
         padding.Fill(0);
 
@@ -729,7 +880,10 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
         await SendAsync(payload);
     }
 
-    internal async Task SendSettingsWithInvalidParameterValueAsync(Http2SettingsParameter parameter, uint value)
+    internal async Task SendSettingsWithInvalidParameterValueAsync(
+        Http2SettingsParameter parameter,
+        uint value
+    )
     {
         var writableBuffer = _pair.Application.Output;
         var frame = new Http2Frame();
@@ -759,14 +913,23 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
         return FlushAsync(writableBuffer);
     }
 
-    internal async Task<bool> SendHeadersAsync(int streamId, Http2HeadersFrameFlags flags, Http2HeadersEnumerator headersEnumerator)
+    internal async Task<bool> SendHeadersAsync(
+        int streamId,
+        Http2HeadersFrameFlags flags,
+        Http2HeadersEnumerator headersEnumerator
+    )
     {
         var outputWriter = _pair.Application.Output;
         var frame = new Http2Frame();
 
         frame.PrepareHeaders(flags, streamId);
         var buffer = _headerEncodingBuffer.AsMemory();
-        var done = HPackHeaderWriter.BeginEncodeHeaders(_hpackEncoder, headersEnumerator, buffer.Span, out var length);
+        var done = HPackHeaderWriter.BeginEncodeHeaders(
+            _hpackEncoder,
+            headersEnumerator,
+            buffer.Span,
+            out var length
+        );
         frame.PayloadLength = length;
 
         Http2FrameWriter.WriteHeader(frame, outputWriter);
@@ -775,12 +938,20 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
         return done;
     }
 
-    internal Task<bool> SendHeadersAsync(int streamId, Http2HeadersFrameFlags flags, IEnumerable<KeyValuePair<string, string>> headers)
+    internal Task<bool> SendHeadersAsync(
+        int streamId,
+        Http2HeadersFrameFlags flags,
+        IEnumerable<KeyValuePair<string, string>> headers
+    )
     {
         return SendHeadersAsync(streamId, flags, GetHeadersEnumerator(headers));
     }
 
-    internal async Task SendHeadersAsync(int streamId, Http2HeadersFrameFlags flags, byte[] headerBlock)
+    internal async Task SendHeadersAsync(
+        int streamId,
+        Http2HeadersFrameFlags flags,
+        byte[] headerBlock
+    )
     {
         var outputWriter = _pair.Application.Output;
         var frame = new Http2Frame();
@@ -792,9 +963,16 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
         await SendAsync(headerBlock);
     }
 
-    protected async Task SendInvalidHeadersFrameAsync(int streamId, int payloadLength, byte padLength)
+    protected async Task SendInvalidHeadersFrameAsync(
+        int streamId,
+        int payloadLength,
+        byte padLength
+    )
     {
-        Assert.True(padLength >= payloadLength, $"{nameof(padLength)} must be greater than or equal to {nameof(payloadLength)} to create an invalid frame.");
+        Assert.True(
+            padLength >= payloadLength,
+            $"{nameof(padLength)} must be greater than or equal to {nameof(payloadLength)} to create an invalid frame."
+        );
 
         var outputWriter = _pair.Application.Output;
         var frame = new Http2Frame();
@@ -829,14 +1007,23 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
         await SendAsync(payload);
     }
 
-    internal async Task<bool> SendContinuationAsync(int streamId, Http2ContinuationFrameFlags flags, Http2HeadersEnumerator headersEnumerator)
+    internal async Task<bool> SendContinuationAsync(
+        int streamId,
+        Http2ContinuationFrameFlags flags,
+        Http2HeadersEnumerator headersEnumerator
+    )
     {
         var outputWriter = _pair.Application.Output;
         var frame = new Http2Frame();
 
         frame.PrepareContinuation(flags, streamId);
         var buffer = _headerEncodingBuffer.AsMemory();
-        var done = HPackHeaderWriter.ContinueEncodeHeaders(_hpackEncoder, headersEnumerator, buffer.Span, out var length);
+        var done = HPackHeaderWriter.ContinueEncodeHeaders(
+            _hpackEncoder,
+            headersEnumerator,
+            buffer.Span,
+            out var length
+        );
         frame.PayloadLength = length;
 
         Http2FrameWriter.WriteHeader(frame, outputWriter);
@@ -845,7 +1032,11 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
         return done;
     }
 
-    internal async Task SendContinuationAsync(int streamId, Http2ContinuationFrameFlags flags, byte[] payload)
+    internal async Task SendContinuationAsync(
+        int streamId,
+        Http2ContinuationFrameFlags flags,
+        byte[] payload
+    )
     {
         var outputWriter = _pair.Application.Output;
         var frame = new Http2Frame();
@@ -857,14 +1048,23 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
         await SendAsync(payload);
     }
 
-    internal async Task<bool> SendContinuationAsync(int streamId, Http2ContinuationFrameFlags flags, IEnumerable<KeyValuePair<string, string>> headers)
+    internal async Task<bool> SendContinuationAsync(
+        int streamId,
+        Http2ContinuationFrameFlags flags,
+        IEnumerable<KeyValuePair<string, string>> headers
+    )
     {
         var outputWriter = _pair.Application.Output;
         var frame = new Http2Frame();
 
         frame.PrepareContinuation(flags, streamId);
         var buffer = _headerEncodingBuffer.AsMemory();
-        var done = HPackHeaderWriter.BeginEncodeHeaders(_hpackEncoder, GetHeadersEnumerator(headers), buffer.Span, out var length);
+        var done = HPackHeaderWriter.BeginEncodeHeaders(
+            _hpackEncoder,
+            GetHeadersEnumerator(headers),
+            buffer.Span,
+            out var length
+        );
         frame.PayloadLength = length;
 
         Http2FrameWriter.WriteHeader(frame, outputWriter);
@@ -873,11 +1073,16 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
         return done;
     }
 
-    internal Http2HeadersEnumerator GetHeadersEnumerator(IEnumerable<KeyValuePair<string, string>> headers)
+    internal Http2HeadersEnumerator GetHeadersEnumerator(
+        IEnumerable<KeyValuePair<string, string>> headers
+    )
     {
         var dictionary = headers
             .GroupBy(g => g.Key)
-            .ToDictionary(g => g.Key, g => new StringValues(g.Select(values => values.Value).ToArray()));
+            .ToDictionary(
+                g => g.Key,
+                g => new StringValues(g.Select(values => values.Value).ToArray())
+            );
 
         var headersEnumerator = new Http2HeadersEnumerator();
         headersEnumerator.Initialize(dictionary);
@@ -914,7 +1119,12 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
         await SendAsync(payload);
     }
 
-    protected Task SendDataAsync(int streamId, Memory<byte> data, bool endStream, bool flushFrame = true)
+    protected Task SendDataAsync(
+        int streamId,
+        Memory<byte> data,
+        bool endStream,
+        bool flushFrame = true
+    )
     {
         var outputWriter = _pair.Application.Output;
         outputWriter.WriteData(streamId, data, endStream);
@@ -925,7 +1135,12 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
         return Task.CompletedTask;
     }
 
-    protected async Task SendDataWithPaddingAsync(int streamId, Memory<byte> data, byte padLength, bool endStream)
+    protected async Task SendDataWithPaddingAsync(
+        int streamId,
+        Memory<byte> data,
+        byte padLength,
+        bool endStream
+    )
     {
         var outputWriter = _pair.Application.Output;
         var frame = new Http2Frame();
@@ -947,7 +1162,10 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
 
     protected Task SendInvalidDataFrameAsync(int streamId, int frameLength, byte padLength)
     {
-        Assert.True(padLength >= frameLength, $"{nameof(padLength)} must be greater than or equal to {nameof(frameLength)} to create an invalid frame.");
+        Assert.True(
+            padLength >= frameLength,
+            $"{nameof(padLength)} must be greater than or equal to {nameof(frameLength)} to create an invalid frame."
+        );
 
         var outputWriter = _pair.Application.Output;
         var frame = new Http2Frame();
@@ -1007,7 +1225,12 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
     {
         var outputWriter = _pair.Application.Output;
         var priorityFrame = new Http2Frame();
-        priorityFrame.PreparePriority(streamId, streamDependency: streamDependency, exclusive: false, weight: 0);
+        priorityFrame.PreparePriority(
+            streamId,
+            streamDependency: streamDependency,
+            exclusive: false,
+            weight: 0
+        );
 
         var payload = new byte[priorityFrame.PayloadLength].AsSpan();
         Bitshifter.WriteUInt31BigEndian(payload, (uint)streamDependency);
@@ -1102,7 +1325,9 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
         return FlushAsync(outputWriter);
     }
 
-    internal async Task<Http2FrameWithPayload> ReceiveFrameAsync(uint maxFrameSize = Http2PeerSettings.DefaultMaxFrameSize)
+    internal async Task<Http2FrameWithPayload> ReceiveFrameAsync(
+        uint maxFrameSize = Http2PeerSettings.DefaultMaxFrameSize
+    )
     {
         var frame = new Http2FrameWithPayload();
 
@@ -1118,7 +1343,14 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
             {
                 Assert.True(buffer.Length > 0);
 
-                if (Http2FrameReader.TryReadFrame(ref buffer, frame, maxFrameSize, out var framePayload))
+                if (
+                    Http2FrameReader.TryReadFrame(
+                        ref buffer,
+                        frame,
+                        maxFrameSize,
+                        out var framePayload
+                    )
+                )
                 {
                     consumed = examined = framePayload.End;
                     frame.Payload = framePayload.ToArray();
@@ -1142,7 +1374,12 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
         }
     }
 
-    internal async Task<Http2FrameWithPayload> ExpectAsync(Http2FrameType type, int withLength, byte withFlags, int withStreamId)
+    internal async Task<Http2FrameWithPayload> ExpectAsync(
+        Http2FrameType type,
+        int withLength,
+        byte withFlags,
+        int withStreamId
+    )
     {
         var frame = await ReceiveFrameAsync((uint)withLength);
 
@@ -1163,10 +1400,19 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
 
     protected Task WaitForConnectionStopAsync(int expectedLastStreamId, bool ignoreNonGoAwayFrames)
     {
-        return WaitForConnectionErrorAsync<Exception>(ignoreNonGoAwayFrames, expectedLastStreamId, Http2ErrorCode.NO_ERROR, expectedErrorMessage: null);
+        return WaitForConnectionErrorAsync<Exception>(
+            ignoreNonGoAwayFrames,
+            expectedLastStreamId,
+            Http2ErrorCode.NO_ERROR,
+            expectedErrorMessage: null
+        );
     }
 
-    internal void VerifyGoAway(Http2Frame frame, int expectedLastStreamId, Http2ErrorCode expectedErrorCode)
+    internal void VerifyGoAway(
+        Http2Frame frame,
+        int expectedLastStreamId,
+        Http2ErrorCode expectedErrorCode
+    )
     {
         Assert.Equal(Http2FrameType.GOAWAY, frame.Type);
         Assert.Equal(8, frame.PayloadLength);
@@ -1176,15 +1422,28 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
         Assert.Equal(expectedErrorCode, frame.GoAwayErrorCode);
     }
 
-    internal async Task WaitForConnectionErrorAsync<TException>(bool ignoreNonGoAwayFrames, int expectedLastStreamId, Http2ErrorCode expectedErrorCode, params string[] expectedErrorMessage)
-        where TException : Exception
+    internal async Task WaitForConnectionErrorAsync<TException>(
+        bool ignoreNonGoAwayFrames,
+        int expectedLastStreamId,
+        Http2ErrorCode expectedErrorCode,
+        params string[] expectedErrorMessage
+    ) where TException : Exception
     {
-        await WaitForConnectionErrorAsyncDoNotCloseTransport<TException>(ignoreNonGoAwayFrames, expectedLastStreamId, expectedErrorCode, expectedErrorMessage);
+        await WaitForConnectionErrorAsyncDoNotCloseTransport<TException>(
+            ignoreNonGoAwayFrames,
+            expectedLastStreamId,
+            expectedErrorCode,
+            expectedErrorMessage
+        );
         _pair.Application.Output.Complete();
     }
 
-    internal async Task WaitForConnectionErrorAsyncDoNotCloseTransport<TException>(bool ignoreNonGoAwayFrames, int expectedLastStreamId, Http2ErrorCode expectedErrorCode, params string[] expectedErrorMessage)
-        where TException : Exception
+    internal async Task WaitForConnectionErrorAsyncDoNotCloseTransport<TException>(
+        bool ignoreNonGoAwayFrames,
+        int expectedLastStreamId,
+        Http2ErrorCode expectedErrorCode,
+        params string[] expectedErrorMessage
+    ) where TException : Exception
     {
         var frame = await ReceiveFrameAsync();
 
@@ -1202,7 +1461,10 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
         {
             var message = Assert.Single(LogMessages, m => m.Exception is TException);
 
-            Assert.Contains(expectedErrorMessage, expected => message.Exception.Message.Contains(expected));
+            Assert.Contains(
+                expectedErrorMessage,
+                expected => message.Exception.Message.Contains(expected)
+            );
         }
 
         Logger.LogInformation("Waiting for Connection task");
@@ -1210,7 +1472,11 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
         Logger.LogInformation("Stopping Connection From ConnectionErrorAsync");
     }
 
-    internal async Task WaitForStreamErrorAsync(int expectedStreamId, Http2ErrorCode expectedErrorCode, string expectedErrorMessage)
+    internal async Task WaitForStreamErrorAsync(
+        int expectedStreamId,
+        Http2ErrorCode expectedErrorCode,
+        string expectedErrorMessage
+    )
     {
         var frame = await ReceiveFrameAsync();
 
@@ -1222,11 +1488,16 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
 
         if (expectedErrorMessage != null)
         {
-            Assert.Contains(LogMessages, m => m.Exception?.Message.Contains(expectedErrorMessage) ?? false);
+            Assert.Contains(
+                LogMessages,
+                m => m.Exception?.Message.Contains(expectedErrorMessage) ?? false
+            );
         }
     }
 
-    protected void VerifyDecodedRequestHeaders(IEnumerable<KeyValuePair<string, string>> expectedHeaders)
+    protected void VerifyDecodedRequestHeaders(
+        IEnumerable<KeyValuePair<string, string>> expectedHeaders
+    )
     {
         foreach (var header in expectedHeaders)
         {
@@ -1236,7 +1507,10 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
             }
             else if (header.Key == HeaderNames.Authority)
             {
-                Assert.True(_receivedHeaders.TryGetValue(HeaderNames.Host, out var host), header.Key);
+                Assert.True(
+                    _receivedHeaders.TryGetValue(HeaderNames.Host, out var host),
+                    header.Key
+                );
                 Assert.Equal(header.Value, host);
             }
             else if (header.Key == HeaderNames.Scheme)
@@ -1276,27 +1550,35 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
         TriggerTick(endTime);
     }
 
-    private static PipeOptions GetInputPipeOptions(ServiceContext serviceContext, MemoryPool<byte> memoryPool, PipeScheduler writerScheduler) => new PipeOptions
-    (
-        pool: memoryPool,
-        readerScheduler: serviceContext.Scheduler,
-        writerScheduler: writerScheduler,
-        pauseWriterThreshold: serviceContext.ServerOptions.Limits.MaxRequestBufferSize ?? 0,
-        resumeWriterThreshold: serviceContext.ServerOptions.Limits.MaxRequestBufferSize ?? 0,
-        useSynchronizationContext: false,
-        minimumSegmentSize: memoryPool.GetMinimumSegmentSize()
-    );
+    private static PipeOptions GetInputPipeOptions(
+        ServiceContext serviceContext,
+        MemoryPool<byte> memoryPool,
+        PipeScheduler writerScheduler
+    ) =>
+        new PipeOptions(
+            pool: memoryPool,
+            readerScheduler: serviceContext.Scheduler,
+            writerScheduler: writerScheduler,
+            pauseWriterThreshold: serviceContext.ServerOptions.Limits.MaxRequestBufferSize ?? 0,
+            resumeWriterThreshold: serviceContext.ServerOptions.Limits.MaxRequestBufferSize ?? 0,
+            useSynchronizationContext: false,
+            minimumSegmentSize: memoryPool.GetMinimumSegmentSize()
+        );
 
-    private static PipeOptions GetOutputPipeOptions(ServiceContext serviceContext, MemoryPool<byte> memoryPool, PipeScheduler readerScheduler) => new PipeOptions
-    (
-        pool: memoryPool,
-        readerScheduler: readerScheduler,
-        writerScheduler: serviceContext.Scheduler,
-        pauseWriterThreshold: GetOutputResponseBufferSize(serviceContext),
-        resumeWriterThreshold: GetOutputResponseBufferSize(serviceContext),
-        useSynchronizationContext: false,
-        minimumSegmentSize: memoryPool.GetMinimumSegmentSize()
-    );
+    private static PipeOptions GetOutputPipeOptions(
+        ServiceContext serviceContext,
+        MemoryPool<byte> memoryPool,
+        PipeScheduler readerScheduler
+    ) =>
+        new PipeOptions(
+            pool: memoryPool,
+            readerScheduler: readerScheduler,
+            writerScheduler: serviceContext.Scheduler,
+            pauseWriterThreshold: GetOutputResponseBufferSize(serviceContext),
+            resumeWriterThreshold: GetOutputResponseBufferSize(serviceContext),
+            useSynchronizationContext: false,
+            minimumSegmentSize: memoryPool.GetMinimumSegmentSize()
+        );
 
     private static long GetOutputResponseBufferSize(ServiceContext serviceContext)
     {
@@ -1313,9 +1595,7 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
 
     internal class Http2FrameWithPayload : Http2Frame
     {
-        public Http2FrameWithPayload() : base()
-        {
-        }
+        public Http2FrameWithPayload() : base() { }
 
         // This does not contain extended headers
         public Memory<byte> Payload { get; set; }
@@ -1349,7 +1629,6 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
             _realTimeoutControl.CancelTimeout();
         }
 
-
         public virtual void InitializeHttp2(InputFlowControl connectionInputFlowControl)
         {
             _realTimeoutControl.InitializeHttp2(connectionInputFlowControl);
@@ -1379,7 +1658,6 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
         {
             _realTimeoutControl.BytesRead(count);
         }
-
 
         public virtual void StartTimingWrite()
         {

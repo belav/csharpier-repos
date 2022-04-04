@@ -73,8 +73,11 @@ namespace System.Security.Cryptography.Encryption.Tests.Symmetric
         }
 
         private class GenerateIvNotImplementedException : Exception { }
+
         private class GenerateKeyNotImplementedException : Exception { }
+
         private class CreateDecryptorNotImplementedException : Exception { }
+
         private class CreateEncryptorNotImplementedException : Exception { }
     }
 }

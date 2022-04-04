@@ -23,9 +23,7 @@ namespace System.CommandLine.Binding
 
         /// <param name="parseResult">The parse result used for binding to command line input.</param>
         /// <param name="console">A console instance used for writing output.</param>
-        public BindingContext(
-            ParseResult parseResult,
-            IConsole? console = default)
+        public BindingContext(ParseResult parseResult, IConsole? console = default)
         {
             _console = console ?? new SystemConsole();
 
@@ -40,7 +38,8 @@ namespace System.CommandLine.Binding
 
         internal IConsoleFactory? ConsoleFactory { get; set; }
 
-        internal IHelpBuilder HelpBuilder => (IHelpBuilder)ServiceProvider.GetService(typeof(IHelpBuilder))!;
+        internal IHelpBuilder HelpBuilder =>
+            (IHelpBuilder)ServiceProvider.GetService(typeof(IHelpBuilder))!;
 
         /// <summary>
         /// The console to which output should be written during the current invocation.
@@ -66,7 +65,7 @@ namespace System.CommandLine.Binding
         /// Adds a model binder which can be used to bind a specific type.
         /// </summary>
         /// <param name="binder">The model binder to add.</param>
-        public void AddModelBinder(ModelBinder binder) => 
+        public void AddModelBinder(ModelBinder binder) =>
             _modelBindersByValueDescriptor.Add(binder.ValueDescriptor.ValueType, binder);
 
         /// <summary>
@@ -76,7 +75,12 @@ namespace System.CommandLine.Binding
         /// <returns>A model binder for the specified value descriptor.</returns>
         public ModelBinder GetModelBinder(IValueDescriptor valueDescriptor)
         {
-            if (_modelBindersByValueDescriptor.TryGetValue(valueDescriptor.ValueType, out ModelBinder binder))
+            if (
+                _modelBindersByValueDescriptor.TryGetValue(
+                    valueDescriptor.ValueType,
+                    out ModelBinder binder
+                )
+            )
             {
                 return binder;
             }
@@ -110,7 +114,8 @@ namespace System.CommandLine.Binding
 
         internal bool TryGetValueSource(
             IValueDescriptor valueDescriptor,
-            [MaybeNullWhen(false)] out IValueSource valueSource)
+            [MaybeNullWhen(false)] out IValueSource valueSource
+        )
         {
             if (ServiceProvider.AvailableServiceTypes.Contains(valueDescriptor.ValueType))
             {
@@ -126,7 +131,8 @@ namespace System.CommandLine.Binding
             IValueDescriptor valueDescriptor,
             IValueSource valueSource,
             LocalizationResources localizationResources,
-            out BoundValue? boundValue)
+            out BoundValue? boundValue
+        )
         {
             if (valueSource.TryGetValue(valueDescriptor, this, out var value))
             {
@@ -138,10 +144,11 @@ namespace System.CommandLine.Binding
                 else
                 {
                     var parsed = ArgumentConverter.ConvertObject(
-                        valueDescriptor as IArgument ?? new Argument(valueDescriptor.ValueName), 
-                        valueDescriptor.ValueType, 
+                        valueDescriptor as IArgument ?? new Argument(valueDescriptor.ValueName),
+                        valueDescriptor.ValueType,
                         value,
-                        localizationResources);
+                        localizationResources
+                    );
 
                     if (parsed is SuccessfulArgumentConversionResult successful)
                     {

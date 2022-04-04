@@ -31,7 +31,10 @@ namespace Microsoft.EntityFrameworkCore
         {
             using var connection = new SqlServerConnection(CreateDependencies());
             using var master = connection.CreateMasterConnection();
-            Assert.Equal(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=master", master.ConnectionString);
+            Assert.Equal(
+                @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=master",
+                master.ConnectionString
+            );
             Assert.Equal(60, master.CommandTimeout);
         }
 
@@ -41,12 +44,16 @@ namespace Microsoft.EntityFrameworkCore
             var options = new DbContextOptionsBuilder()
                 .UseSqlServer(
                     @"Server=(localdb)\MSSQLLocalDB;Database=SqlServerConnectionTest;AttachDBFilename=C:\Narf.mdf",
-                    b => b.CommandTimeout(55))
+                    b => b.CommandTimeout(55)
+                )
                 .Options;
 
             using var connection = new SqlServerConnection(CreateDependencies(options));
             using var master = connection.CreateMasterConnection();
-            Assert.Equal(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=master", master.ConnectionString);
+            Assert.Equal(
+                @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=master",
+                master.ConnectionString
+            );
         }
 
         [ConditionalFact]
@@ -55,7 +62,8 @@ namespace Microsoft.EntityFrameworkCore
             var options = new DbContextOptionsBuilder()
                 .UseSqlServer(
                     @"Server=(localdb)\MSSQLLocalDB;Database=SqlServerConnectionTest",
-                    b => b.CommandTimeout(55))
+                    b => b.CommandTimeout(55)
+                )
                 .Options;
 
             using var connection = new SqlServerConnection(CreateDependencies(options));
@@ -63,7 +71,9 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(55, master.CommandTimeout);
         }
 
-        public static RelationalConnectionDependencies CreateDependencies(DbContextOptions options = null)
+        public static RelationalConnectionDependencies CreateDependencies(
+            DbContextOptions options = null
+        )
         {
             options ??= new DbContextOptionsBuilder()
                 .UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=SqlServerConnectionTest")
@@ -76,44 +86,52 @@ namespace Microsoft.EntityFrameworkCore
                     new LoggingOptions(),
                     new DiagnosticListener("FakeDiagnosticListener"),
                     new SqlServerLoggingDefinitions(),
-                    new NullDbContextLogger()),
+                    new NullDbContextLogger()
+                ),
                 new RelationalConnectionDiagnosticsLogger(
                     new LoggerFactory(),
                     new LoggingOptions(),
                     new DiagnosticListener("FakeDiagnosticListener"),
                     new SqlServerLoggingDefinitions(),
                     new NullDbContextLogger(),
-                    CreateOptions()),
+                    CreateOptions()
+                ),
                 new NamedConnectionStringResolver(options),
                 new RelationalTransactionFactory(
                     new RelationalTransactionFactoryDependencies(
                         new RelationalSqlGenerationHelper(
-                            new RelationalSqlGenerationHelperDependencies()))),
+                            new RelationalSqlGenerationHelperDependencies()
+                        )
+                    )
+                ),
                 new CurrentDbContext(new FakeDbContext()),
                 new RelationalCommandBuilderFactory(
                     new RelationalCommandBuilderDependencies(
                         new TestRelationalTypeMappingSource(
                             TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                            TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()))));
+                            TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+                        )
+                    )
+                )
+            );
         }
 
         private const string ConnectionString = "Fake Connection String";
 
         private static IDbContextOptions CreateOptions(
-            RelationalOptionsExtension optionsExtension = null)
+            RelationalOptionsExtension optionsExtension = null
+        )
         {
             var optionsBuilder = new DbContextOptionsBuilder();
 
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder)
-                .AddOrUpdateExtension(
-                    optionsExtension
-                    ?? new FakeRelationalOptionsExtension().WithConnectionString(ConnectionString));
+            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
+                optionsExtension
+                    ?? new FakeRelationalOptionsExtension().WithConnectionString(ConnectionString)
+            );
 
             return optionsBuilder.Options;
         }
 
-        private class FakeDbContext : DbContext
-        {
-        }
+        private class FakeDbContext : DbContext { }
     }
 }

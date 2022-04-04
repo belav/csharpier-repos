@@ -18,9 +18,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CaseCorrection
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpCaseCorrectionService()
-        {
-        }
+        public CSharpCaseCorrectionService() { }
 
         protected override void AddReplacements(
             SemanticModel? semanticModel,
@@ -28,7 +26,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CaseCorrection
             ImmutableArray<TextSpan> spans,
             Workspace workspace,
             ConcurrentDictionary<SyntaxToken, SyntaxToken> replacements,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // C# doesn't support case correction since we are a case sensitive language.
             return;

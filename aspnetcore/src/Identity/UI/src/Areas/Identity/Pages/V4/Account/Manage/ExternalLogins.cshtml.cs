@@ -54,19 +54,24 @@ public abstract class ExternalLoginsModel : PageModel
     ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
     ///     directly from your code. This API may change or be removed in future releases.
     /// </summary>
-    public virtual Task<IActionResult> OnPostRemoveLoginAsync(string loginProvider, string providerKey) => throw new NotImplementedException();
+    public virtual Task<IActionResult> OnPostRemoveLoginAsync(
+        string loginProvider,
+        string providerKey
+    ) => throw new NotImplementedException();
 
     /// <summary>
     ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
     ///     directly from your code. This API may change or be removed in future releases.
     /// </summary>
-    public virtual Task<IActionResult> OnPostLinkLoginAsync(string provider) => throw new NotImplementedException();
+    public virtual Task<IActionResult> OnPostLinkLoginAsync(string provider) =>
+        throw new NotImplementedException();
 
     /// <summary>
     ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
     ///     directly from your code. This API may change or be removed in future releases.
     /// </summary>
-    public virtual Task<IActionResult> OnGetLinkLoginCallbackAsync() => throw new NotImplementedException();
+    public virtual Task<IActionResult> OnGetLinkLoginCallbackAsync() =>
+        throw new NotImplementedException();
 }
 
 internal class ExternalLoginsModel<TUser> : ExternalLoginsModel where TUser : class
@@ -78,7 +83,8 @@ internal class ExternalLoginsModel<TUser> : ExternalLoginsModel where TUser : cl
     public ExternalLoginsModel(
         UserManager<TUser> userManager,
         SignInManager<TUser> signInManager,
-        IUserStore<TUser> userStore)
+        IUserStore<TUser> userStore
+    )
     {
         _userManager = userManager;
         _signInManager = signInManager;
@@ -101,14 +107,20 @@ internal class ExternalLoginsModel<TUser> : ExternalLoginsModel where TUser : cl
         string passwordHash = null;
         if (_userStore is IUserPasswordStore<TUser> userPasswordStore)
         {
-            passwordHash = await userPasswordStore.GetPasswordHashAsync(user, HttpContext.RequestAborted);
+            passwordHash = await userPasswordStore.GetPasswordHashAsync(
+                user,
+                HttpContext.RequestAborted
+            );
         }
 
         ShowRemoveButton = passwordHash != null || CurrentLogins.Count > 1;
         return Page();
     }
 
-    public override async Task<IActionResult> OnPostRemoveLoginAsync(string loginProvider, string providerKey)
+    public override async Task<IActionResult> OnPostRemoveLoginAsync(
+        string loginProvider,
+        string providerKey
+    )
     {
         var user = await _userManager.GetUserAsync(User);
         if (user == null)
@@ -135,7 +147,11 @@ internal class ExternalLoginsModel<TUser> : ExternalLoginsModel where TUser : cl
 
         // Request a redirect to the external login provider to link a login for the current user
         var redirectUrl = Url.Page("./ExternalLogins", pageHandler: "LinkLoginCallback");
-        var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl, _userManager.GetUserId(User));
+        var properties = _signInManager.ConfigureExternalAuthenticationProperties(
+            provider,
+            redirectUrl,
+            _userManager.GetUserId(User)
+        );
         return new ChallengeResult(provider, properties);
     }
 
@@ -151,13 +167,16 @@ internal class ExternalLoginsModel<TUser> : ExternalLoginsModel where TUser : cl
         var info = await _signInManager.GetExternalLoginInfoAsync(userId);
         if (info == null)
         {
-            throw new InvalidOperationException($"Unexpected error occurred loading external login info.");
+            throw new InvalidOperationException(
+                $"Unexpected error occurred loading external login info."
+            );
         }
 
         var result = await _userManager.AddLoginAsync(user, info);
         if (!result.Succeeded)
         {
-            StatusMessage = "The external login was not added. External logins can only be associated with one account.";
+            StatusMessage =
+                "The external login was not added. External logins can only be associated with one account.";
             return RedirectToPage();
         }
 

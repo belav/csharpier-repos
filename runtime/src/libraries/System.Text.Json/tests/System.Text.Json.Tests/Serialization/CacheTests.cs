@@ -30,31 +30,48 @@ namespace System.Text.Json.Serialization.Tests
             var options = new JsonSerializerOptions();
 
             // Verify the test class has >64 properties since that is a threshold for using the fallback dictionary.
-            Assert.True(typeof(SimpleTestClass).GetProperties(BindingFlags.Instance | BindingFlags.Public).Length > 64);
+            Assert.True(
+                typeof(SimpleTestClass)
+                    .GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                    .Length > 64
+            );
 
             void DeserializeObjectMinimal()
             {
-                SimpleTestClass obj = JsonSerializer.Deserialize<SimpleTestClass>(@"{""MyDecimal"" : 3.3}", options);
-            };
+                SimpleTestClass obj = JsonSerializer.Deserialize<SimpleTestClass>(
+                    @"{""MyDecimal"" : 3.3}",
+                    options
+                );
+            }
+            ;
 
             void DeserializeObjectFlipped()
             {
-                SimpleTestClass obj = JsonSerializer.Deserialize<SimpleTestClass>(SimpleTestClass.s_json_flipped, options);
+                SimpleTestClass obj = JsonSerializer.Deserialize<SimpleTestClass>(
+                    SimpleTestClass.s_json_flipped,
+                    options
+                );
                 obj.Verify();
-            };
+            }
+            ;
 
             void DeserializeObjectNormal()
             {
-                SimpleTestClass obj = JsonSerializer.Deserialize<SimpleTestClass>(SimpleTestClass.s_json, options);
+                SimpleTestClass obj = JsonSerializer.Deserialize<SimpleTestClass>(
+                    SimpleTestClass.s_json,
+                    options
+                );
                 obj.Verify();
-            };
+            }
+            ;
 
             void SerializeObject()
             {
                 var obj = new SimpleTestClass();
                 obj.Initialize();
                 JsonSerializer.Serialize(obj, options);
-            };
+            }
+            ;
 
             const int ThreadCount = 8;
             const int ConcurrentTestsCount = 4;
@@ -69,7 +86,8 @@ namespace System.Text.Json.Serialization.Tests
 
                 // Ensure no exceptions on serialization
                 tasks[i + 3] = Task.Run(() => SerializeObject());
-            };
+            }
+            ;
 
             await Task.WhenAll(tasks);
         }
@@ -110,9 +128,14 @@ namespace System.Text.Json.Serialization.Tests
 
                 string json = JsonSerializer.Serialize(testObjects[i], testClassType, options);
 
-                ITestClass obj = (ITestClass)JsonSerializer.Deserialize(json, testClassType, options);
+                ITestClass obj = (ITestClass)JsonSerializer.Deserialize(
+                    json,
+                    testClassType,
+                    options
+                );
                 obj.Verify();
-            };
+            }
+            ;
 
             const int OuterCount = 12;
             Task[] tasks = new Task[OuterCount * TestClassCount];
@@ -164,7 +187,10 @@ namespace System.Text.Json.Serialization.Tests
 
         // Use a common options instance to encourage additional metadata collisions across types. Also since
         // this options is not the default options instance the tests will not use previously cached metadata.
-        private static JsonSerializerOptions s_options = new JsonSerializerOptions { IncludeFields = true };
+        private static JsonSerializerOptions s_options = new JsonSerializerOptions
+        {
+            IncludeFields = true
+        };
 
         [Theory]
         [MemberData(nameof(WriteSuccessCases))]
@@ -184,13 +210,15 @@ namespace System.Text.Json.Serialization.Tests
                 localTestObj.Initialize();
                 localTestObj.Verify();
                 string json = JsonSerializer.Serialize(localTestObj, type, s_options);
-            };
+            }
+            ;
 
             void Deserialize()
             {
                 ITestClass obj = (ITestClass)JsonSerializer.Deserialize(json, type, s_options);
                 obj.Verify();
-            };
+            }
+            ;
 
             const int ThreadCount = 12;
             const int ConcurrentTestsCount = 2;
@@ -200,7 +228,8 @@ namespace System.Text.Json.Serialization.Tests
             {
                 tasks[i + 0] = Task.Run(() => Deserialize());
                 tasks[i + 1] = Task.Run(() => Serialize());
-            };
+            }
+            ;
 
             await Task.WhenAll(tasks);
         }
@@ -217,32 +246,43 @@ namespace System.Text.Json.Serialization.Tests
 
             var options = new JsonSerializerOptions();
 
-            FieldInfo classesField = options.GetType().GetField("_classes", BindingFlags.NonPublic | BindingFlags.Instance);
+            FieldInfo classesField = options
+                .GetType()
+                .GetField("_classes", BindingFlags.NonPublic | BindingFlags.Instance);
             Assert.NotNull(classesField);
             IDictionary classes = (IDictionary)classesField.GetValue(options);
             Assert.Equal(0, classes.Count);
 
             SimpleTestClass testObj = new SimpleTestClass();
             testObj.Initialize();
-            await JsonSerializer.SerializeAsync<SimpleTestClass>(new MemoryStream(), testObj, options);
+            await JsonSerializer.SerializeAsync<SimpleTestClass>(
+                new MemoryStream(),
+                testObj,
+                options
+            );
             Assert.NotEqual(0, classes.Count);
 
-            Type updateHandler = typeof(JsonSerializerOptions).Assembly.GetType("System.Text.Json.JsonSerializerOptionsUpdateHandler", throwOnError: true, ignoreCase: false);
+            Type updateHandler = typeof(JsonSerializerOptions).Assembly.GetType(
+                "System.Text.Json.JsonSerializerOptionsUpdateHandler",
+                throwOnError: true,
+                ignoreCase: false
+            );
             MethodInfo clearCache = updateHandler.GetMethod("ClearCache");
             Assert.NotNull(clearCache);
             clearCache.Invoke(null, new object[] { null });
             Assert.Equal(0, classes.Count);
 
-            await JsonSerializer.SerializeAsync<SimpleTestClass>(new MemoryStream(), testObj, options);
+            await JsonSerializer.SerializeAsync<SimpleTestClass>(
+                new MemoryStream(),
+                testObj,
+                options
+            );
             Assert.NotEqual(0, classes.Count);
         }
 
         public static IEnumerable<object[]> WriteSuccessCases
         {
-            get
-            {
-                return TestData.WriteSuccessCases;
-            }
+            get { return TestData.WriteSuccessCases; }
         }
     }
 }

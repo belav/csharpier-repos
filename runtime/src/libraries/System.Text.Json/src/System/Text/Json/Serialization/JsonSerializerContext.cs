@@ -55,24 +55,38 @@ namespace System.Text.Json.Serialization
                     {
                         _canUseSerializationLogic =
                             // Guard against unsupported features
-                            Options.Converters.Count == 0 &&
-                            Options.Encoder == null &&
+                            Options.Converters.Count == 0
+                            && Options.Encoder == null
+                            &&
                             // Disallow custom number handling we'd need to honor when writing.
                             // AllowReadingFromString and Strict are fine since there's no action to take when writing.
-                            (Options.NumberHandling & (JsonNumberHandling.WriteAsString | JsonNumberHandling.AllowNamedFloatingPointLiterals)) == 0 &&
-                            Options.ReferenceHandlingStrategy == ReferenceHandlingStrategy.None &&
+                            (
+                                Options.NumberHandling
+                                & (
+                                    JsonNumberHandling.WriteAsString
+                                    | JsonNumberHandling.AllowNamedFloatingPointLiterals
+                                )
+                            ) == 0
+                            && Options.ReferenceHandlingStrategy == ReferenceHandlingStrategy.None
+                            &&
 #pragma warning disable SYSLIB0020
-                            !Options.IgnoreNullValues && // This property is obsolete.
+                            !Options.IgnoreNullValues
+                            && // This property is obsolete.
 #pragma warning restore SYSLIB0020
 
                             // Ensure options values are consistent with expected defaults.
-                            Options.DefaultIgnoreCondition == GeneratedSerializerOptions.DefaultIgnoreCondition &&
-                            Options.IgnoreReadOnlyFields == GeneratedSerializerOptions.IgnoreReadOnlyFields &&
-                            Options.IgnoreReadOnlyProperties == GeneratedSerializerOptions.IgnoreReadOnlyProperties &&
-                            Options.IncludeFields == GeneratedSerializerOptions.IncludeFields &&
-                            Options.PropertyNamingPolicy == GeneratedSerializerOptions.PropertyNamingPolicy &&
-                            Options.DictionaryKeyPolicy == GeneratedSerializerOptions.DictionaryKeyPolicy &&
-                            Options.WriteIndented == GeneratedSerializerOptions.WriteIndented;
+                            Options.DefaultIgnoreCondition
+                                == GeneratedSerializerOptions.DefaultIgnoreCondition
+                            && Options.IgnoreReadOnlyFields
+                                == GeneratedSerializerOptions.IgnoreReadOnlyFields
+                            && Options.IgnoreReadOnlyProperties
+                                == GeneratedSerializerOptions.IgnoreReadOnlyProperties
+                            && Options.IncludeFields == GeneratedSerializerOptions.IncludeFields
+                            && Options.PropertyNamingPolicy
+                                == GeneratedSerializerOptions.PropertyNamingPolicy
+                            && Options.DictionaryKeyPolicy
+                                == GeneratedSerializerOptions.DictionaryKeyPolicy
+                            && Options.WriteIndented == GeneratedSerializerOptions.WriteIndented;
                     }
                 }
 

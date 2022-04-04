@@ -17,7 +17,12 @@ namespace Microsoft.CodeAnalysis.Classification
     internal interface IRemoteSemanticClassificationService
     {
         ValueTask<SerializableClassifiedSpans> GetSemanticClassificationsAsync(
-            PinnedSolutionInfo solutionInfo, DocumentId documentId, TextSpan span, ClassificationOptions options, CancellationToken cancellationToken);
+            PinnedSolutionInfo solutionInfo,
+            DocumentId documentId,
+            TextSpan span,
+            ClassificationOptions options,
+            CancellationToken cancellationToken
+        );
     }
 
     /// <summary>
@@ -34,13 +39,18 @@ namespace Microsoft.CodeAnalysis.Classification
         [DataMember(Order = 1)]
         public List<int>? ClassificationTriples;
 
-        internal static SerializableClassifiedSpans Dehydrate(ImmutableArray<ClassifiedSpan> classifiedSpans)
+        internal static SerializableClassifiedSpans Dehydrate(
+            ImmutableArray<ClassifiedSpan> classifiedSpans
+        )
         {
             using var _ = PooledDictionary<string, int>.GetInstance(out var classificationTypeToId);
             return Dehydrate(classifiedSpans, classificationTypeToId);
         }
 
-        private static SerializableClassifiedSpans Dehydrate(ImmutableArray<ClassifiedSpan> classifiedSpans, Dictionary<string, int> classificationTypeToId)
+        private static SerializableClassifiedSpans Dehydrate(
+            ImmutableArray<ClassifiedSpan> classifiedSpans,
+            Dictionary<string, int> classificationTypeToId
+        )
         {
             var classificationTypes = new List<string>();
             var classificationTriples = new List<int>(capacity: classifiedSpans.Length * 3);
@@ -75,11 +85,12 @@ namespace Microsoft.CodeAnalysis.Classification
 
             for (var i = 0; i < ClassificationTriples.Count; i += 3)
             {
-                classifiedSpans.Add(new ClassifiedSpan(
-                    ClassificationTypes[ClassificationTriples[i + 0]],
-                    new TextSpan(
-                        ClassificationTriples[i + 1],
-                        ClassificationTriples[i + 2])));
+                classifiedSpans.Add(
+                    new ClassifiedSpan(
+                        ClassificationTypes[ClassificationTriples[i + 0]],
+                        new TextSpan(ClassificationTriples[i + 1], ClassificationTriples[i + 2])
+                    )
+                );
             }
         }
     }

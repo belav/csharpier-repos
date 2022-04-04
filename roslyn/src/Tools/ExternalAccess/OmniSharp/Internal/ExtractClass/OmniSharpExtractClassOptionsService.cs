@@ -19,21 +19,32 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.Internal.ExtractClass
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public OmniSharpExtractClassOptionsService(IOmniSharpExtractClassOptionsService omniSharpExtractClassOptionsService)
+        public OmniSharpExtractClassOptionsService(
+            IOmniSharpExtractClassOptionsService omniSharpExtractClassOptionsService
+        )
         {
             _omniSharpExtractClassOptionsService = omniSharpExtractClassOptionsService;
         }
 
-        public async Task<ExtractClassOptions?> GetExtractClassOptionsAsync(Document document, INamedTypeSymbol originalType, ISymbol? selectedMember)
+        public async Task<ExtractClassOptions?> GetExtractClassOptionsAsync(
+            Document document,
+            INamedTypeSymbol originalType,
+            ISymbol? selectedMember
+        )
         {
-            var result = await _omniSharpExtractClassOptionsService.GetExtractClassOptionsAsync(document, originalType, selectedMember).ConfigureAwait(false);
+            var result = await _omniSharpExtractClassOptionsService
+                .GetExtractClassOptionsAsync(document, originalType, selectedMember)
+                .ConfigureAwait(false);
             return result == null
-                ? null
-                : new ExtractClassOptions(
+              ? null
+              : new ExtractClassOptions(
                     result.FileName,
                     result.TypeName,
                     result.SameFile,
-                    result.MemberAnalysisResults.SelectAsArray(m => new ExtractClassMemberAnalysisResult(m.Member, m.MakeAbstract)));
+                    result.MemberAnalysisResults.SelectAsArray(
+                        m => new ExtractClassMemberAnalysisResult(m.Member, m.MakeAbstract)
+                    )
+                );
         }
     }
 }

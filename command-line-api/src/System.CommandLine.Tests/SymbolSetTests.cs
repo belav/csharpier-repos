@@ -46,9 +46,7 @@ namespace System.CommandLine.Tests
 
             var set = CreateSet(option);
 
-            set.GetByAlias("-x")
-               .Should()
-               .NotBeNull();
+            set.GetByAlias("-x").Should().NotBeNull();
         }
 
         [Fact]
@@ -77,18 +75,11 @@ namespace System.CommandLine.Tests
         {
             var command = new Command("before");
 
-            var rootCommand = new RootCommand
-            {
-                command
-            };
+            var rootCommand = new RootCommand { command };
 
             command.Name = "after";
 
-            rootCommand
-                .Children
-                .ContainsAlias("after")
-                .Should()
-                .BeTrue();
+            rootCommand.Children.ContainsAlias("after").Should().BeTrue();
         }
 
         [Fact]
@@ -96,18 +87,11 @@ namespace System.CommandLine.Tests
         {
             var command = new Command("before");
 
-            var rootCommand = new RootCommand
-            {
-                command
-            };
+            var rootCommand = new RootCommand { command };
 
             command.Name = "after";
 
-            rootCommand
-                .Children
-                .ContainsAlias("before")
-                .Should()
-                .BeFalse();
+            rootCommand.Children.ContainsAlias("before").Should().BeFalse();
         }
 
         [Fact]
@@ -115,17 +99,11 @@ namespace System.CommandLine.Tests
         {
             var symbol = new Option<string>("original");
 
-            var command = new RootCommand
-            {
-                symbol
-            };
+            var command = new RootCommand { symbol };
 
             symbol.AddAlias("added");
 
-            command.Children
-                   .GetByAlias("added")
-                   .Should()
-                   .BeSameAs(symbol);
+            command.Children.GetByAlias("added").Should().BeSameAs(symbol);
         }
 
         [Fact]
@@ -133,17 +111,11 @@ namespace System.CommandLine.Tests
         {
             var symbol = new Command("original");
 
-            var command = new RootCommand
-            {
-                symbol
-            };
+            var command = new RootCommand { symbol };
 
             symbol.AddAlias("added");
 
-            command.Children
-                   .GetByAlias("added")
-                   .Should()
-                   .BeSameAs(symbol);
+            command.Children.GetByAlias("added").Should().BeSameAs(symbol);
         }
 
         [Fact]
@@ -167,9 +139,7 @@ namespace System.CommandLine.Tests
 
             option.Name = "--new";
 
-            set.GetByAlias("--new")
-               .Should()
-               .NotBeNull();
+            set.GetByAlias("--new").Should().NotBeNull();
         }
 
         [Fact]
@@ -181,17 +151,12 @@ namespace System.CommandLine.Tests
 
             option.AddAlias("--new");
 
-            set.GetByAlias("--new")
-               .Should()
-               .NotBeNull();
+            set.GetByAlias("--new").Should().NotBeNull();
         }
 
         public override SymbolSet CreateSet(Symbol symbol)
         {
-            return new RootCommand
-            {
-                symbol
-            }.Children;
+            return new RootCommand { symbol }.Children;
         }
     }
 
@@ -199,16 +164,14 @@ namespace System.CommandLine.Tests
     {
         public override SymbolResultSet CreateSet(Symbol symbol)
         {
-            var rootCommand = new RootCommand
-            {
-                symbol
-            };
+            var rootCommand = new RootCommand { symbol };
 
             var commandLine = symbol switch
             {
                 Command command => command.Name,
                 Option option => option.Aliases.First() + "  " + "argument-value",
-                Argument argument => "argument-value", _ => throw new ArgumentOutOfRangeException()
+                Argument argument => "argument-value",
+                _ => throw new ArgumentOutOfRangeException()
             };
 
             var parseResult = rootCommand.Parse(commandLine);

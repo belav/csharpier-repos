@@ -18,15 +18,17 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         public bool IsOriginalInput => this.Source is null;
 
-        public static BoundDagTemp ForOriginalInput(SyntaxNode syntax, TypeSymbol type) => new BoundDagTemp(syntax, type, null, 0);
+        public static BoundDagTemp ForOriginalInput(SyntaxNode syntax, TypeSymbol type) =>
+            new BoundDagTemp(syntax, type, null, 0);
 
         public override bool Equals(object? obj) => obj is BoundDagTemp other && this.Equals(other);
 
         public bool Equals(BoundDagTemp other)
         {
-            return other is { } &&
-                this.Type.Equals(other.Type, TypeCompareKind.AllIgnoreOptions) &&
-                object.Equals(this.Source, other.Source) && this.Index == other.Index;
+            return other is { }
+                && this.Type.Equals(other.Type, TypeCompareKind.AllIgnoreOptions)
+                && object.Equals(this.Source, other.Source)
+                && this.Index == other.Index;
         }
 
         /// <summary>
@@ -42,8 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return true;
             }
 
-            return current.Index == other.Index &&
-                (current.Source, other.Source) switch
+            return current.Index == other.Index
+                && (current.Source, other.Source) switch
                 {
                     (null, null) => true,
                     ({ } s1, { } s2) => s1.IsSameValueEvaluation(s2),
@@ -65,7 +67,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override int GetHashCode()
         {
-            return Hash.Combine(this.Type.GetHashCode(), Hash.Combine(this.Source?.GetHashCode() ?? 0, this.Index));
+            return Hash.Combine(
+                this.Type.GetHashCode(),
+                Hash.Combine(this.Source?.GetHashCode() ?? 0, this.Index)
+            );
         }
 
 #if DEBUG

@@ -59,11 +59,13 @@ namespace strswitch
                     default:
                         Console.WriteLine("Greater than five");
                         break;
-                };
+                }
+                ;
                 continue;
-            continueloop:
+                continueloop:
                 Console.WriteLine("Continuing");
-            };
+            }
+            ;
             s_testLog.StopRecording();
 
             return s_testLog.VerifyOutput();

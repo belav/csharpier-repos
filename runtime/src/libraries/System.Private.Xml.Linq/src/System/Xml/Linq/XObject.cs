@@ -32,9 +32,11 @@ namespace System.Xml.Linq
                     {
                         o = o.parent;
                     }
-                    if (o == null) break;
+                    if (o == null)
+                        break;
                     BaseUriAnnotation? a = o.Annotation<BaseUriAnnotation>();
-                    if (a != null) return a.baseUri;
+                    if (a != null)
+                        return a.baseUri;
                     o = o.parent;
                 }
                 return string.Empty;
@@ -49,7 +51,8 @@ namespace System.Xml.Linq
             get
             {
                 XObject n = this;
-                while (n.parent != null) n = n.parent;
+                while (n.parent != null)
+                    n = n.parent;
 
                 XDocument? doc = n as XDocument;
 
@@ -79,10 +82,11 @@ namespace System.Xml.Linq
         /// <param name="annotation">The annotation to add.</param>
         public void AddAnnotation(object annotation)
         {
-            if (annotation == null) throw new ArgumentNullException(nameof(annotation));
+            if (annotation == null)
+                throw new ArgumentNullException(nameof(annotation));
             if (annotations == null)
             {
-                annotations = annotation is object[]? new object[] { annotation } : annotation;
+                annotations = annotation is object[] ? new object[] { annotation } : annotation;
             }
             else
             {
@@ -94,7 +98,8 @@ namespace System.Xml.Linq
                 else
                 {
                     int i = 0;
-                    while (i < a.Length && a[i] != null) i++;
+                    while (i < a.Length && a[i] != null)
+                        i++;
                     if (i == a.Length)
                     {
                         Array.Resize(ref a, i * 2);
@@ -116,21 +121,25 @@ namespace System.Xml.Linq
         /// </returns>
         public object? Annotation(Type type)
         {
-            if (type == null) throw new ArgumentNullException(nameof(type));
+            if (type == null)
+                throw new ArgumentNullException(nameof(type));
             if (annotations != null)
             {
                 object?[]? a = annotations as object[];
                 if (a == null)
                 {
-                    if (XHelper.IsInstanceOfType(annotations, type)) return annotations;
+                    if (XHelper.IsInstanceOfType(annotations, type))
+                        return annotations;
                 }
                 else
                 {
                     for (int i = 0; i < a.Length; i++)
                     {
                         object? obj = a[i];
-                        if (obj == null) break;
-                        if (XHelper.IsInstanceOfType(obj, type)) return obj;
+                        if (obj == null)
+                            break;
+                        if (XHelper.IsInstanceOfType(obj, type))
+                            return obj;
                     }
                 }
             }
@@ -146,15 +155,18 @@ namespace System.Xml.Linq
                 object?[]? a = annotations as object[];
                 if (a == null)
                 {
-                    if (annotations.GetType() == type) return annotations;
+                    if (annotations.GetType() == type)
+                        return annotations;
                 }
                 else
                 {
                     for (int i = 0; i < a.Length; i++)
                     {
                         object? obj = a[i];
-                        if (obj == null) break;
-                        if (obj.GetType() == type) return obj;
+                        if (obj == null)
+                            break;
+                        if (obj.GetType() == type)
+                            return obj;
                     }
                 }
             }
@@ -175,13 +187,16 @@ namespace System.Xml.Linq
             if (annotations != null)
             {
                 object?[]? a = annotations as object[];
-                if (a == null) return annotations as T;
+                if (a == null)
+                    return annotations as T;
                 for (int i = 0; i < a.Length; i++)
                 {
                     object? obj = a[i];
-                    if (obj == null) break;
+                    if (obj == null)
+                        break;
                     T? result = obj as T;
-                    if (result != null) return result;
+                    if (result != null)
+                        return result;
                 }
             }
             return null;
@@ -195,7 +210,8 @@ namespace System.Xml.Linq
         /// <returns>An enumerable collection of annotations for this XObject.</returns>
         public IEnumerable<object> Annotations(Type type)
         {
-            if (type == null) throw new ArgumentNullException(nameof(type));
+            if (type == null)
+                throw new ArgumentNullException(nameof(type));
             return AnnotationsIterator(type);
         }
 
@@ -206,15 +222,18 @@ namespace System.Xml.Linq
                 object?[]? a = annotations as object[];
                 if (a == null)
                 {
-                    if (XHelper.IsInstanceOfType(annotations, type)) yield return annotations;
+                    if (XHelper.IsInstanceOfType(annotations, type))
+                        yield return annotations;
                 }
                 else
                 {
                     for (int i = 0; i < a.Length; i++)
                     {
                         object? obj = a[i];
-                        if (obj == null) break;
-                        if (XHelper.IsInstanceOfType(obj, type)) yield return obj;
+                        if (obj == null)
+                            break;
+                        if (XHelper.IsInstanceOfType(obj, type))
+                            yield return obj;
                     }
                 }
             }
@@ -234,16 +253,19 @@ namespace System.Xml.Linq
                 if (a == null)
                 {
                     T? result = annotations as T;
-                    if (result != null) yield return result;
+                    if (result != null)
+                        yield return result;
                 }
                 else
                 {
                     for (int i = 0; i < a.Length; i++)
                     {
                         object? obj = a[i];
-                        if (obj == null) break;
+                        if (obj == null)
+                            break;
                         T? result = obj as T;
-                        if (result != null) yield return result;
+                        if (result != null)
+                            yield return result;
                     }
                 }
             }
@@ -255,22 +277,27 @@ namespace System.Xml.Linq
         /// <param name="type">The type of annotations to remove.</param>
         public void RemoveAnnotations(Type type)
         {
-            if (type == null) throw new ArgumentNullException(nameof(type));
+            if (type == null)
+                throw new ArgumentNullException(nameof(type));
             if (annotations != null)
             {
                 object?[]? a = annotations as object[];
                 if (a == null)
                 {
-                    if (XHelper.IsInstanceOfType(annotations, type)) annotations = null;
+                    if (XHelper.IsInstanceOfType(annotations, type))
+                        annotations = null;
                 }
                 else
                 {
-                    int i = 0, j = 0;
+                    int i = 0,
+                        j = 0;
                     while (i < a.Length)
                     {
                         object? obj = a[i];
-                        if (obj == null) break;
-                        if (!XHelper.IsInstanceOfType(obj, type)) a[j++] = obj;
+                        if (obj == null)
+                            break;
+                        if (!XHelper.IsInstanceOfType(obj, type))
+                            a[j++] = obj;
                         i++;
                     }
                     if (j == 0)
@@ -279,7 +306,8 @@ namespace System.Xml.Linq
                     }
                     else
                     {
-                        while (j < i) a[j++] = null;
+                        while (j < i)
+                            a[j++] = null;
                     }
                 }
             }
@@ -296,16 +324,20 @@ namespace System.Xml.Linq
                 object?[]? a = annotations as object[];
                 if (a == null)
                 {
-                    if (annotations is T) annotations = null;
+                    if (annotations is T)
+                        annotations = null;
                 }
                 else
                 {
-                    int i = 0, j = 0;
+                    int i = 0,
+                        j = 0;
                     while (i < a.Length)
                     {
                         object? obj = a[i];
-                        if (obj == null) break;
-                        if (!(obj is T)) a[j++] = obj;
+                        if (obj == null)
+                            break;
+                        if (!(obj is T))
+                            a[j++] = obj;
                         i++;
                     }
                     if (j == 0)
@@ -314,7 +346,8 @@ namespace System.Xml.Linq
                     }
                     else
                     {
-                        while (j < i) a[j++] = null;
+                        while (j < i)
+                            a[j++] = null;
                     }
                 }
             }
@@ -327,7 +360,8 @@ namespace System.Xml.Linq
         {
             add
             {
-                if (value == null) return;
+                if (value == null)
+                    return;
                 XObjectChangeAnnotation? a = Annotation<XObjectChangeAnnotation>();
                 if (a == null)
                 {
@@ -338,9 +372,11 @@ namespace System.Xml.Linq
             }
             remove
             {
-                if (value == null) return;
+                if (value == null)
+                    return;
                 XObjectChangeAnnotation? a = Annotation<XObjectChangeAnnotation>();
-                if (a == null) return;
+                if (a == null)
+                    return;
                 a.changed -= value;
                 if (a.changing == null && a.changed == null)
                 {
@@ -356,7 +392,8 @@ namespace System.Xml.Linq
         {
             add
             {
-                if (value == null) return;
+                if (value == null)
+                    return;
                 XObjectChangeAnnotation? a = Annotation<XObjectChangeAnnotation>();
                 if (a == null)
                 {
@@ -367,9 +404,11 @@ namespace System.Xml.Linq
             }
             remove
             {
-                if (value == null) return;
+                if (value == null)
+                    return;
                 XObjectChangeAnnotation? a = Annotation<XObjectChangeAnnotation>();
-                if (a == null) return;
+                if (a == null)
+                    return;
                 a.changing -= value;
                 if (a.changing == null && a.changed == null)
                 {
@@ -388,7 +427,8 @@ namespace System.Xml.Linq
             get
             {
                 LineInfoAnnotation? a = Annotation<LineInfoAnnotation>();
-                if (a != null) return a.lineNumber;
+                if (a != null)
+                    return a.lineNumber;
                 return 0;
             }
         }
@@ -398,17 +438,15 @@ namespace System.Xml.Linq
             get
             {
                 LineInfoAnnotation? a = Annotation<LineInfoAnnotation>();
-                if (a != null) return a.linePosition;
+                if (a != null)
+                    return a.linePosition;
                 return 0;
             }
         }
 
         internal bool HasBaseUri
         {
-            get
-            {
-                return Annotation<BaseUriAnnotation>() != null;
-            }
+            get { return Annotation<BaseUriAnnotation>() != null; }
         }
 
         internal bool NotifyChanged(object sender, XObjectChangeEventArgs e)
@@ -421,7 +459,8 @@ namespace System.Xml.Linq
                 {
                     o = o.parent;
                 }
-                if (o == null) break;
+                if (o == null)
+                    break;
                 XObjectChangeAnnotation? a = o.Annotation<XObjectChangeAnnotation>();
                 if (a != null)
                 {
@@ -446,7 +485,8 @@ namespace System.Xml.Linq
                 {
                     o = o.parent;
                 }
-                if (o == null) break;
+                if (o == null)
+                    break;
                 XObjectChangeAnnotation? a = o.Annotation<XObjectChangeAnnotation>();
                 if (a != null)
                 {
@@ -480,8 +520,10 @@ namespace System.Xml.Linq
                 {
                     o = o.parent;
                 }
-                if (o == null) return true;
-                if (o.Annotation<XObjectChangeAnnotation>() != null) return false;
+                if (o == null)
+                    return true;
+                if (o.Annotation<XObjectChangeAnnotation>() != null)
+                    return false;
                 o = o.parent;
             }
         }

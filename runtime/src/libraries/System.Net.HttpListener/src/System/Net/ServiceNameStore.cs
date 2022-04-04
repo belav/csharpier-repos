@@ -85,7 +85,14 @@ namespace System.Net
 
                     // Loosely validate the port just to make sure it was a port and not something else
                     ushort portValue;
-                    if (!ushort.TryParse(port, NumberStyles.Integer, CultureInfo.InvariantCulture, out portValue))
+                    if (
+                        !ushort.TryParse(
+                            port,
+                            NumberStyles.Integer,
+                            CultureInfo.InvariantCulture,
+                            out portValue
+                        )
+                    )
                     {
                         return inputServiceName;
                     }
@@ -110,13 +117,21 @@ namespace System.Net
 
             Uri? constructedUri;
             // This shouldn't fail, but we need to avoid any unexpected exceptions on this code path.
-            if (!Uri.TryCreate(Uri.UriSchemeHttp + Uri.SchemeDelimiter + host, UriKind.Absolute, out constructedUri))
+            if (
+                !Uri.TryCreate(
+                    Uri.UriSchemeHttp + Uri.SchemeDelimiter + host,
+                    UriKind.Absolute,
+                    out constructedUri
+                )
+            )
             {
                 return inputServiceName;
             }
 
             string normalizedHost = constructedUri.GetComponents(
-                UriComponents.NormalizedHost, UriFormat.SafeUnescaped);
+                UriComponents.NormalizedHost,
+                UriFormat.SafeUnescaped
+            );
 
             string normalizedServiceName = prefix + normalizedHost + port + distinguisher;
 
@@ -156,7 +171,11 @@ namespace System.Net
                 {
                     addedAny = true;
 
-                    if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, SR.Format(SR.net_log_listener_spn_add, spn, uriPrefix));
+                    if (NetEventSource.Log.IsEnabled())
+                        NetEventSource.Info(
+                            this,
+                            SR.Format(SR.net_log_listener_spn_add, spn, uriPrefix)
+                        );
                 }
             }
 
@@ -190,11 +209,17 @@ namespace System.Net
             {
                 if (needToRemove)
                 {
-                    NetEventSource.Info(this, SR.Format(SR.net_log_listener_spn_remove, newServiceName, uriPrefix));
+                    NetEventSource.Info(
+                        this,
+                        SR.Format(SR.net_log_listener_spn_remove, newServiceName, uriPrefix)
+                    );
                 }
                 else
                 {
-                    NetEventSource.Info(this, SR.Format(SR.net_log_listener_spn_not_remove, uriPrefix));
+                    NetEventSource.Info(
+                        this,
+                        SR.Format(SR.net_log_listener_spn_not_remove, uriPrefix)
+                    );
                 }
             }
 
@@ -239,7 +264,11 @@ namespace System.Net
                 int j = i;
 
                 bool inSquareBrackets = false;
-                while (j < uriPrefix.Length && uriPrefix[j] != '/' && (uriPrefix[j] != ':' || inSquareBrackets))
+                while (
+                    j < uriPrefix.Length
+                    && uriPrefix[j] != '/'
+                    && (uriPrefix[j] != ':' || inSquareBrackets)
+                )
                 {
                     if (uriPrefix[j] == '[')
                     {
@@ -282,9 +311,11 @@ namespace System.Net
             string hostname = ExtractHostname(uriPrefix, true)!;
 
             IPAddress? ipAddress = null;
-            if (string.Equals(hostname, "*", StringComparison.OrdinalIgnoreCase) ||
-                string.Equals(hostname, "+", StringComparison.OrdinalIgnoreCase) ||
-                IPAddress.TryParse(hostname, out ipAddress))
+            if (
+                string.Equals(hostname, "*", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(hostname, "+", StringComparison.OrdinalIgnoreCase)
+                || IPAddress.TryParse(hostname, out ipAddress)
+            )
             {
                 // for a wildcard, register the machine name.  If the caller doesn't have DNS permission
                 // or the query fails for some reason, don't add an SPN.

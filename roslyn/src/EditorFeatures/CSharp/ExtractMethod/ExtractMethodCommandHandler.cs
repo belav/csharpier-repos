@@ -19,17 +19,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.ExtractMethod
     [ContentType(ContentTypeNames.CSharpContentType)]
     [Name(PredefinedCommandHandlerNames.ExtractMethod)]
     [Order(After = PredefinedCommandHandlerNames.DocumentationComments)]
-    internal class ExtractMethodCommandHandler :
-        AbstractExtractMethodCommandHandler
+    internal class ExtractMethodCommandHandler : AbstractExtractMethodCommandHandler
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public ExtractMethodCommandHandler(
             IThreadingContext threadingContext,
             ITextBufferUndoManagerProvider undoManager,
-            IInlineRenameService renameService)
-            : base(threadingContext, undoManager, renameService)
-        {
-        }
+            IInlineRenameService renameService
+        ) : base(threadingContext, undoManager, renameService) { }
     }
 }

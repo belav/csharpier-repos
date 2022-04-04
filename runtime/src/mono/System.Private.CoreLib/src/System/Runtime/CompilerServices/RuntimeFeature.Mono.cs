@@ -8,13 +8,13 @@ namespace System.Runtime.CompilerServices
     {
         public static bool IsDynamicCodeSupported
         {
-            [Intrinsic]  // the JIT/AOT compiler will change this flag to false for FullAOT scenarios, otherwise true
+            [Intrinsic] // the JIT/AOT compiler will change this flag to false for FullAOT scenarios, otherwise true
             get => IsDynamicCodeSupported;
         }
 
         public static bool IsDynamicCodeCompiled
         {
-            [Intrinsic]  // the JIT/AOT compiler will change this flag to false for FullAOT scenarios, otherwise true
+            [Intrinsic] // the JIT/AOT compiler will change this flag to false for FullAOT scenarios, otherwise true
             get => IsDynamicCodeCompiled;
         }
     }

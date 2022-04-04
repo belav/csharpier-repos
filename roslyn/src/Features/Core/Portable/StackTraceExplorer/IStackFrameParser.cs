@@ -8,6 +8,9 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
 {
     internal interface IStackFrameParser
     {
-        bool TryParseLine(string line, [NotNullWhen(returnValue: true)] out ParsedFrame? parsedFrame);
+        bool TryParseLine(
+            string line,
+            [NotNullWhen(returnValue: true)] out ParsedFrame? parsedFrame
+        );
     }
 }

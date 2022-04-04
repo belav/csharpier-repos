@@ -8,8 +8,15 @@ namespace System.Diagnostics.Eventing.Reader
     /// </summary>
     public sealed class EventRecordWrittenEventArgs : EventArgs
     {
-        internal EventRecordWrittenEventArgs(EventLogRecord record) { EventRecord = record; }
-        internal EventRecordWrittenEventArgs(Exception exception) { EventException = exception; }
+        internal EventRecordWrittenEventArgs(EventLogRecord record)
+        {
+            EventRecord = record;
+        }
+
+        internal EventRecordWrittenEventArgs(Exception exception)
+        {
+            EventException = exception;
+        }
 
         /// <summary>
         /// The EventRecord being notified.
@@ -24,5 +31,4 @@ namespace System.Diagnostics.Eventing.Reader
         /// </summary>
         public Exception EventException { get; }
     }
-
 }

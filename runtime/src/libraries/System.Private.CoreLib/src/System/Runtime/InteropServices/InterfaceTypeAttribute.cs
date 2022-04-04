@@ -10,6 +10,7 @@ namespace System.Runtime.InteropServices
         {
             Value = interfaceType;
         }
+
         public InterfaceTypeAttribute(short interfaceType)
         {
             Value = (ComInterfaceType)interfaceType;

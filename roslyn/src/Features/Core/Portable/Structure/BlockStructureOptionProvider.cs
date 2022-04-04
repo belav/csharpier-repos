@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.Structure
 
         public bool IsMetadataAsSource { get; }
 
-        public T GetOption<T>(PerLanguageOption2<T> option, string language)
-            => _options.GetOption(option, language);
+        public T GetOption<T>(PerLanguageOption2<T> option, string language) =>
+            _options.GetOption(option, language);
     }
 }

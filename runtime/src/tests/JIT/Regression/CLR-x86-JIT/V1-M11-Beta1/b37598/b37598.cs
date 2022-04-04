@@ -8,7 +8,10 @@ namespace Test
 
     class AA
     {
-        static uint Method1(__arglist) { return 0; }
+        static uint Method1(__arglist)
+        {
+            return 0;
+        }
 
         static void Static1(ref uint param1, ref bool[] param2, bool[] param3)
         {

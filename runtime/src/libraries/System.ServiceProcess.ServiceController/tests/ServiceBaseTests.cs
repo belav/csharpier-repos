@@ -10,17 +10,26 @@ using Xunit;
 /// </summary>
 namespace System.ServiceProcess.Tests
 {
-    [OuterLoop(/* Modifies machine state */)]
-    [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, "Persistent issues starting test service on NETFX")]
+    [OuterLoop( /* Modifies machine state */
+
+    )]
+    [SkipOnTargetFramework(
+        TargetFrameworkMonikers.NetFramework,
+        "Persistent issues starting test service on NETFX"
+    )]
     public class ServiceBaseTests : IDisposable
     {
         private const int connectionTimeout = 30000;
         private readonly TestServiceProvider _testService;
 
-        private static readonly Lazy<bool> s_isElevated = new Lazy<bool>(() => AdminHelpers.IsProcessElevated());
+        private static readonly Lazy<bool> s_isElevated = new Lazy<bool>(
+            () => AdminHelpers.IsProcessElevated()
+        );
         protected static bool IsProcessElevated => s_isElevated.Value;
-        protected static bool IsElevatedAndSupportsEventLogs => IsProcessElevated && PlatformDetection.IsNotWindowsNanoServer;
-        protected static bool IsElevatedAndWindows10OrLater => IsProcessElevated && PlatformDetection.IsWindows10OrLater;
+        protected static bool IsElevatedAndSupportsEventLogs =>
+            IsProcessElevated && PlatformDetection.IsNotWindowsNanoServer;
+        protected static bool IsElevatedAndWindows10OrLater =>
+            IsProcessElevated && PlatformDetection.IsWindows10OrLater;
 
         private bool _disposed;
 
@@ -31,7 +40,9 @@ namespace System.ServiceProcess.Tests
 
         private void AssertExpectedProperties(ServiceController testServiceController)
         {
-            var comparer = PlatformDetection.IsNetFramework ? StringComparer.OrdinalIgnoreCase : StringComparer.Ordinal; // .NET Framework upper cases the name
+            var comparer = PlatformDetection.IsNetFramework
+                ? StringComparer.OrdinalIgnoreCase
+                : StringComparer.Ordinal; // .NET Framework upper cases the name
             Assert.Equal(_testService.TestServiceName, testServiceController.ServiceName, comparer);
             Assert.Equal(_testService.TestServiceDisplayName, testServiceController.DisplayName);
             Assert.Equal(_testService.TestMachineName, testServiceController.MachineName);
@@ -200,7 +211,10 @@ namespace System.ServiceProcess.Tests
         }
 
         [ConditionalFact(nameof(IsProcessElevated))]
-        [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, ".NET Framework receives the Connected Byte Code after the Exception Thrown Byte Code")]
+        [SkipOnTargetFramework(
+            TargetFrameworkMonikers.NetFramework,
+            ".NET Framework receives the Connected Byte Code after the Exception Thrown Byte Code"
+        )]
         public void PropagateExceptionFromOnStart()
         {
             string serviceName = nameof(PropagateExceptionFromOnStart) + Guid.NewGuid().ToString();
@@ -216,7 +230,9 @@ namespace System.ServiceProcess.Tests
             TestServiceProvider.DebugTrace("ServiceBaseTests.ConnectToServer: connecting");
             _testService.Client.Connect(connectionTimeout);
             Assert.Equal((int)PipeMessageByteCode.Connected, _testService.GetByte());
-            TestServiceProvider.DebugTrace("ServiceBaseTests.ConnectToServer: received connect byte");
+            TestServiceProvider.DebugTrace(
+                "ServiceBaseTests.ConnectToServer: received connect byte"
+            );
 
             ServiceController controller = new ServiceController(_testService.TestServiceName);
             AssertExpectedProperties(controller);

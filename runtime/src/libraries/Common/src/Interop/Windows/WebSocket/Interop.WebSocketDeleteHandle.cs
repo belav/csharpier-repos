@@ -10,7 +10,6 @@ internal static partial class Interop
     internal static partial class WebSocket
     {
         [DllImport(Libraries.WebSocket)]
-        internal static extern void WebSocketDeleteHandle(
-            [In] IntPtr webSocketHandle);
+        internal static extern void WebSocketDeleteHandle([In] IntPtr webSocketHandle);
     }
 }

@@ -26,9 +26,14 @@ namespace System.Buffers.Text
         /// <exceptions>
         /// <cref>System.FormatException</cref> if the format is not valid for this data type.
         /// </exceptions>
-        public static bool TryParse(ReadOnlySpan<byte> source, out byte value, out int bytesConsumed, char standardFormat = default)
+        public static bool TryParse(
+            ReadOnlySpan<byte> source,
+            out byte value,
+            out int bytesConsumed,
+            char standardFormat = default
+        )
         {
-        FastPath:
+            FastPath:
             if (standardFormat == default)
             {
                 return TryParseByteD(source, out value, out bytesConsumed);
@@ -51,7 +56,11 @@ namespace System.Buffers.Text
                     return TryParseByteX(source, out value, out bytesConsumed);
 
                 default:
-                    return ParserHelpers.TryParseThrowFormatException(source, out value, out bytesConsumed);
+                    return ParserHelpers.TryParseThrowFormatException(
+                        source,
+                        out value,
+                        out bytesConsumed
+                    );
             }
         }
 
@@ -77,9 +86,14 @@ namespace System.Buffers.Text
         /// <cref>System.FormatException</cref> if the format is not valid for this data type.
         /// </exceptions>
         [CLSCompliant(false)]
-        public static bool TryParse(ReadOnlySpan<byte> source, out ushort value, out int bytesConsumed, char standardFormat = default)
+        public static bool TryParse(
+            ReadOnlySpan<byte> source,
+            out ushort value,
+            out int bytesConsumed,
+            char standardFormat = default
+        )
         {
-        FastPath:
+            FastPath:
             if (standardFormat == default)
             {
                 return TryParseUInt16D(source, out value, out bytesConsumed);
@@ -102,7 +116,11 @@ namespace System.Buffers.Text
                     return TryParseUInt16X(source, out value, out bytesConsumed);
 
                 default:
-                    return ParserHelpers.TryParseThrowFormatException(source, out value, out bytesConsumed);
+                    return ParserHelpers.TryParseThrowFormatException(
+                        source,
+                        out value,
+                        out bytesConsumed
+                    );
             }
         }
 
@@ -128,9 +146,14 @@ namespace System.Buffers.Text
         /// <cref>System.FormatException</cref> if the format is not valid for this data type.
         /// </exceptions>
         [CLSCompliant(false)]
-        public static bool TryParse(ReadOnlySpan<byte> source, out uint value, out int bytesConsumed, char standardFormat = default)
+        public static bool TryParse(
+            ReadOnlySpan<byte> source,
+            out uint value,
+            out int bytesConsumed,
+            char standardFormat = default
+        )
         {
-        FastPath:
+            FastPath:
             if (standardFormat == default)
             {
                 return TryParseUInt32D(source, out value, out bytesConsumed);
@@ -153,7 +176,11 @@ namespace System.Buffers.Text
                     return TryParseUInt32X(source, out value, out bytesConsumed);
 
                 default:
-                    return ParserHelpers.TryParseThrowFormatException(source, out value, out bytesConsumed);
+                    return ParserHelpers.TryParseThrowFormatException(
+                        source,
+                        out value,
+                        out bytesConsumed
+                    );
             }
         }
 
@@ -179,9 +206,14 @@ namespace System.Buffers.Text
         /// <cref>System.FormatException</cref> if the format is not valid for this data type.
         /// </exceptions>
         [CLSCompliant(false)]
-        public static bool TryParse(ReadOnlySpan<byte> source, out ulong value, out int bytesConsumed, char standardFormat = default)
+        public static bool TryParse(
+            ReadOnlySpan<byte> source,
+            out ulong value,
+            out int bytesConsumed,
+            char standardFormat = default
+        )
         {
-        FastPath:
+            FastPath:
             if (standardFormat == default)
             {
                 return TryParseUInt64D(source, out value, out bytesConsumed);
@@ -204,7 +236,11 @@ namespace System.Buffers.Text
                     return TryParseUInt64X(source, out value, out bytesConsumed);
 
                 default:
-                    return ParserHelpers.TryParseThrowFormatException(source, out value, out bytesConsumed);
+                    return ParserHelpers.TryParseThrowFormatException(
+                        source,
+                        out value,
+                        out bytesConsumed
+                    );
             }
         }
     }

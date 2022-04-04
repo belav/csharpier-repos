@@ -36,10 +36,7 @@ namespace WebServer
 
         public bool IsReusable
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
     }
 }

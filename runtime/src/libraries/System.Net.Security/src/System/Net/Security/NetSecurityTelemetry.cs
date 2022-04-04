@@ -14,7 +14,8 @@ namespace System.Net.Security
     internal sealed class NetSecurityTelemetry : EventSource
     {
 #if !ES_BUILD_STANDALONE
-        private const string EventSourceSuppressMessage = "Parameters to this method are primitive and are trimmer safe";
+        private const string EventSourceSuppressMessage =
+            "Parameters to this method are primitive and are trimmer safe";
 #endif
         public static readonly NetSecurityTelemetry Log = new NetSecurityTelemetry();
 
@@ -46,48 +47,86 @@ namespace System.Net.Security
         {
             if (command.Command == EventCommand.Enable)
             {
-                _tlsHandshakeRateCounter ??= new IncrementingPollingCounter("tls-handshake-rate", this, () => Interlocked.Read(ref _finishedTlsHandshakes))
+                _tlsHandshakeRateCounter ??= new IncrementingPollingCounter(
+                    "tls-handshake-rate",
+                    this,
+                    () => Interlocked.Read(ref _finishedTlsHandshakes)
+                )
                 {
                     DisplayName = "TLS handshakes completed",
                     DisplayRateTimeScale = TimeSpan.FromSeconds(1)
                 };
 
-                _totalTlsHandshakesCounter ??= new PollingCounter("total-tls-handshakes", this, () => Interlocked.Read(ref _finishedTlsHandshakes))
+                _totalTlsHandshakesCounter ??= new PollingCounter(
+                    "total-tls-handshakes",
+                    this,
+                    () => Interlocked.Read(ref _finishedTlsHandshakes)
+                )
                 {
                     DisplayName = "Total TLS handshakes completed"
                 };
 
-                _currentTlsHandshakesCounter ??= new PollingCounter("current-tls-handshakes", this, () => -Interlocked.Read(ref _finishedTlsHandshakes) + Interlocked.Read(ref _startedTlsHandshakes))
+                _currentTlsHandshakesCounter ??= new PollingCounter(
+                    "current-tls-handshakes",
+                    this,
+                    () =>
+                        -Interlocked.Read(ref _finishedTlsHandshakes)
+                        + Interlocked.Read(ref _startedTlsHandshakes)
+                )
                 {
                     DisplayName = "Current TLS handshakes"
                 };
 
-                _failedTlsHandshakesCounter ??= new PollingCounter("failed-tls-handshakes", this, () => Interlocked.Read(ref _failedTlsHandshakes))
+                _failedTlsHandshakesCounter ??= new PollingCounter(
+                    "failed-tls-handshakes",
+                    this,
+                    () => Interlocked.Read(ref _failedTlsHandshakes)
+                )
                 {
                     DisplayName = "Total TLS handshakes failed"
                 };
 
-                _sessionsOpenCounter ??= new PollingCounter("all-tls-sessions-open", this, () => Interlocked.Read(ref _sessionsOpen))
+                _sessionsOpenCounter ??= new PollingCounter(
+                    "all-tls-sessions-open",
+                    this,
+                    () => Interlocked.Read(ref _sessionsOpen)
+                )
                 {
                     DisplayName = "All TLS Sessions Active"
                 };
 
-                _sessionsOpenTls10Counter ??= new PollingCounter("tls10-sessions-open", this, () => Interlocked.Read(ref _sessionsOpenTls10))
+                _sessionsOpenTls10Counter ??= new PollingCounter(
+                    "tls10-sessions-open",
+                    this,
+                    () => Interlocked.Read(ref _sessionsOpenTls10)
+                )
                 {
                     DisplayName = "TLS 1.0 Sessions Active"
                 };
 
-                _sessionsOpenTls11Counter ??= new PollingCounter("tls11-sessions-open", this, () => Interlocked.Read(ref _sessionsOpenTls11))
+                _sessionsOpenTls11Counter ??= new PollingCounter(
+                    "tls11-sessions-open",
+                    this,
+                    () => Interlocked.Read(ref _sessionsOpenTls11)
+                )
                 {
                     DisplayName = "TLS 1.1 Sessions Active"
                 };
 
-                _sessionsOpenTls12Counter ??= new PollingCounter("tls12-sessions-open", this, () => Interlocked.Read(ref _sessionsOpenTls12))
+                _sessionsOpenTls12Counter ??= new PollingCounter(
+                    "tls12-sessions-open",
+                    this,
+                    () => Interlocked.Read(ref _sessionsOpenTls12)
+                )
                 {
                     DisplayName = "TLS 1.2 Sessions Active"
                 };
 
-                _sessionsOpenTls13Counter ??= new PollingCounter("tls13-sessions-open", this, () => Interlocked.Read(ref _sessionsOpenTls13))
+                _sessionsOpenTls13Counter ??= new PollingCounter(
+                    "tls13-sessions-open",
+                    this,
+                    () => Interlocked.Read(ref _sessionsOpenTls13)
+                )
                 {
                     DisplayName = "TLS 1.3 Sessions Active"
                 };
@@ -98,32 +137,43 @@ namespace System.Net.Security
                     DisplayUnits = "ms"
                 };
 
-                _handshakeDurationTls10Counter ??= new EventCounter("tls10-handshake-duration", this)
+                _handshakeDurationTls10Counter ??= new EventCounter(
+                    "tls10-handshake-duration",
+                    this
+                )
                 {
                     DisplayName = "TLS 1.0 Handshake Duration",
                     DisplayUnits = "ms"
                 };
 
-                _handshakeDurationTls11Counter ??= new EventCounter("tls11-handshake-duration", this)
+                _handshakeDurationTls11Counter ??= new EventCounter(
+                    "tls11-handshake-duration",
+                    this
+                )
                 {
                     DisplayName = "TLS 1.1 Handshake Duration",
                     DisplayUnits = "ms"
                 };
 
-                _handshakeDurationTls12Counter ??= new EventCounter("tls12-handshake-duration", this)
+                _handshakeDurationTls12Counter ??= new EventCounter(
+                    "tls12-handshake-duration",
+                    this
+                )
                 {
                     DisplayName = "TLS 1.2 Handshake Duration",
                     DisplayUnits = "ms"
                 };
 
-                _handshakeDurationTls13Counter ??= new EventCounter("tls13-handshake-duration", this)
+                _handshakeDurationTls13Counter ??= new EventCounter(
+                    "tls13-handshake-duration",
+                    this
+                )
                 {
                     DisplayName = "TLS 1.3 Handshake Duration",
                     DisplayUnits = "ms"
                 };
             }
         }
-
 
         [Event(1, Level = EventLevel.Informational)]
         public void HandshakeStart(bool isServer, string targetHost)
@@ -146,28 +196,43 @@ namespace System.Net.Security
         }
 
         [Event(3, Level = EventLevel.Error)]
-        private void HandshakeFailed(bool isServer, double elapsedMilliseconds, string exceptionMessage)
+        private void HandshakeFailed(
+            bool isServer,
+            double elapsedMilliseconds,
+            string exceptionMessage
+        )
         {
             WriteEvent(eventId: 3, isServer, elapsedMilliseconds, exceptionMessage);
         }
 
-
         [NonEvent]
-        public void HandshakeFailed(bool isServer, ValueStopwatch stopwatch, string exceptionMessage)
+        public void HandshakeFailed(
+            bool isServer,
+            ValueStopwatch stopwatch,
+            string exceptionMessage
+        )
         {
             Interlocked.Increment(ref _finishedTlsHandshakes);
             Interlocked.Increment(ref _failedTlsHandshakes);
 
             if (IsEnabled(EventLevel.Error, EventKeywords.None))
             {
-                HandshakeFailed(isServer, stopwatch.GetElapsedTime().TotalMilliseconds, exceptionMessage);
+                HandshakeFailed(
+                    isServer,
+                    stopwatch.GetElapsedTime().TotalMilliseconds,
+                    exceptionMessage
+                );
             }
 
             HandshakeStop(SslProtocols.None);
         }
 
         [NonEvent]
-        public void HandshakeCompleted(SslProtocols protocol, ValueStopwatch stopwatch, bool connectionOpen)
+        public void HandshakeCompleted(
+            SslProtocols protocol,
+            ValueStopwatch stopwatch,
+            bool connectionOpen
+        )
         {
             Interlocked.Increment(ref _finishedTlsHandshakes);
 
@@ -175,7 +240,10 @@ namespace System.Net.Security
             ref long protocolSessionsOpen = ref dummy;
             EventCounter? handshakeDurationCounter = null;
 
-            Debug.Assert(Enum.GetValues<SslProtocols>()[^1] == SslProtocols.Tls13, "Make sure to add a counter for new SslProtocols");
+            Debug.Assert(
+                Enum.GetValues<SslProtocols>()[^1] == SslProtocols.Tls13,
+                "Make sure to add a counter for new SslProtocols"
+            );
 
             switch (protocol)
             {
@@ -243,10 +311,12 @@ namespace System.Net.Security
             Debug.Assert(count >= 0);
         }
 
-
 #if !ES_BUILD_STANDALONE
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:UnrecognizedReflectionPattern",
-                   Justification = EventSourceSuppressMessage)]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:UnrecognizedReflectionPattern",
+            Justification = EventSourceSuppressMessage
+        )]
 #endif
         [NonEvent]
         private unsafe void WriteEvent(int eventId, bool arg1, string? arg2)
@@ -277,8 +347,11 @@ namespace System.Net.Security
         }
 
 #if !ES_BUILD_STANDALONE
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:UnrecognizedReflectionPattern",
-                   Justification = EventSourceSuppressMessage)]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:UnrecognizedReflectionPattern",
+            Justification = EventSourceSuppressMessage
+        )]
 #endif
         [NonEvent]
         private unsafe void WriteEvent(int eventId, SslProtocols arg1)
@@ -296,8 +369,11 @@ namespace System.Net.Security
         }
 
 #if !ES_BUILD_STANDALONE
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:UnrecognizedReflectionPattern",
-                   Justification = EventSourceSuppressMessage)]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:UnrecognizedReflectionPattern",
+            Justification = EventSourceSuppressMessage
+        )]
 #endif
         [NonEvent]
         private unsafe void WriteEvent(int eventId, bool arg1, double arg2, string? arg3)

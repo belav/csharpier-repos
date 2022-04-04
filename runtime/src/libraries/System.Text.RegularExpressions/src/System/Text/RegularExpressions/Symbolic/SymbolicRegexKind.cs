@@ -21,6 +21,7 @@ namespace System.Text.RegularExpressions.Symbolic
         WBAnchor = 0x1000,
         NWBAnchor = 0x2000,
         EndAnchorZ = 0x4000,
+
         /// <summary>Anchor for very first line or start-line after very first \n arises as the reverse of EndAnchorZ</summary>
         EndAnchorZRev = 0x8000,
     }

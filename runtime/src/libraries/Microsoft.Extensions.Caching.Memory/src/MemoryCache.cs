@@ -41,7 +41,10 @@ namespace Microsoft.Extensions.Caching.Memory
         /// </summary>
         /// <param name="optionsAccessor">The options of the cache.</param>
         /// <param name="loggerFactory">The factory used to create loggers.</param>
-        public MemoryCache(IOptions<MemoryCacheOptions> optionsAccessor, ILoggerFactory loggerFactory)
+        public MemoryCache(
+            IOptions<MemoryCacheOptions> optionsAccessor,
+            ILoggerFactory loggerFactory
+        )
         {
             if (optionsAccessor == null)
             {
@@ -78,7 +81,10 @@ namespace Microsoft.Extensions.Caching.Memory
         public int Count => _entries.Count;
 
         // internal for testing
-        internal long Size { get => Interlocked.Read(ref _cacheSize); }
+        internal long Size
+        {
+            get => Interlocked.Read(ref _cacheSize);
+        }
 
         internal bool TrackLinkedCacheEntries { get; }
 
@@ -103,7 +109,13 @@ namespace Microsoft.Extensions.Caching.Memory
 
             if (_options.SizeLimit.HasValue && !entry.Size.HasValue)
             {
-                throw new InvalidOperationException(SR.Format(SR.CacheEntryHasEmptySize, nameof(entry.Size), nameof(_options.SizeLimit)));
+                throw new InvalidOperationException(
+                    SR.Format(
+                        SR.CacheEntryHasEmptySize,
+                        nameof(entry.Size),
+                        nameof(_options.SizeLimit)
+                    )
+                );
             }
 
             DateTimeOffset utcNow = _options.Clock.UtcNow;
@@ -114,7 +126,10 @@ namespace Microsoft.Extensions.Caching.Memory
             if (entry.AbsoluteExpirationRelativeToNow.HasValue)
             {
                 var absoluteExpiration = utcNow + entry.AbsoluteExpirationRelativeToNow.Value;
-                if (!entry.AbsoluteExpiration.HasValue || absoluteExpiration < entry.AbsoluteExpiration.Value)
+                if (
+                    !entry.AbsoluteExpiration.HasValue
+                    || absoluteExpiration < entry.AbsoluteExpiration.Value
+                )
                 {
                     entry.AbsoluteExpiration = absoluteExpiration;
                 }
@@ -298,8 +313,13 @@ namespace Microsoft.Extensions.Caching.Memory
             void ScheduleTask(DateTimeOffset utcNow)
             {
                 _lastExpirationScan = utcNow;
-                Task.Factory.StartNew(state => ScanForExpiredItems((MemoryCache)state), this,
-                    CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+                Task.Factory.StartNew(
+                    state => ScanForExpiredItems((MemoryCache)state),
+                    this,
+                    CancellationToken.None,
+                    TaskCreationOptions.DenyChildAttach,
+                    TaskScheduler.Default
+                );
             }
         }
 
@@ -358,15 +378,20 @@ namespace Microsoft.Extensions.Caching.Memory
         {
             long currentSize = Interlocked.Read(ref cache._cacheSize);
 
-            cache._logger.LogDebug($"Overcapacity compaction executing. Current size {currentSize}");
+            cache._logger.LogDebug(
+                $"Overcapacity compaction executing. Current size {currentSize}"
+            );
 
-            double? lowWatermark = cache._options.SizeLimit * (1 - cache._options.CompactionPercentage);
+            double? lowWatermark =
+                cache._options.SizeLimit * (1 - cache._options.CompactionPercentage);
             if (currentSize > lowWatermark)
             {
                 cache.Compact(currentSize - (long)lowWatermark, entry => entry.Size.Value);
             }
 
-            cache._logger.LogDebug($"Overcapacity compaction executed. New size {Interlocked.Read(ref cache._cacheSize)}");
+            cache._logger.LogDebug(
+                $"Overcapacity compaction executed. New size {Interlocked.Read(ref cache._cacheSize)}"
+            );
         }
 
         /// Remove at least the given percentage (0.10 for 10%) of the total entries (or estimated memory?), according to the following policy:
@@ -421,9 +446,27 @@ namespace Microsoft.Extensions.Caching.Memory
                 }
             }
 
-            ExpirePriorityBucket(ref removedSize, removalSizeTarget, computeEntrySize, entriesToRemove, lowPriEntries);
-            ExpirePriorityBucket(ref removedSize, removalSizeTarget, computeEntrySize, entriesToRemove, normalPriEntries);
-            ExpirePriorityBucket(ref removedSize, removalSizeTarget, computeEntrySize, entriesToRemove, highPriEntries);
+            ExpirePriorityBucket(
+                ref removedSize,
+                removalSizeTarget,
+                computeEntrySize,
+                entriesToRemove,
+                lowPriEntries
+            );
+            ExpirePriorityBucket(
+                ref removedSize,
+                removalSizeTarget,
+                computeEntrySize,
+                entriesToRemove,
+                normalPriEntries
+            );
+            ExpirePriorityBucket(
+                ref removedSize,
+                removalSizeTarget,
+                computeEntrySize,
+                entriesToRemove,
+                highPriEntries
+            );
 
             foreach (CacheEntry entry in entriesToRemove)
             {
@@ -435,7 +478,13 @@ namespace Microsoft.Extensions.Caching.Memory
             // ?. Items with the soonest absolute expiration.
             // ?. Items with the soonest sliding expiration.
             // ?. Larger objects - estimated by object graph size, inaccurate.
-            static void ExpirePriorityBucket(ref long removedSize, long removalSizeTarget, Func<CacheEntry, long> computeEntrySize, List<CacheEntry> entriesToRemove, List<CacheEntry> priorityEntries)
+            static void ExpirePriorityBucket(
+                ref long removedSize,
+                long removalSizeTarget,
+                Func<CacheEntry, long> computeEntrySize,
+                List<CacheEntry> entriesToRemove,
+                List<CacheEntry> priorityEntries
+            )
             {
                 // Do we meet our quota by just removing expired entries?
                 if (removalSizeTarget <= removedSize)

@@ -21,6 +21,7 @@ internal static partial class Interop
             int Algid,
             SafeKeyHandle hKey,
             CryptCreateHashFlags dwFlags,
-            out SafeHashHandle phHash);
+            out SafeHashHandle phHash
+        );
     }
 }

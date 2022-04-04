@@ -13,14 +13,14 @@ internal abstract class ResourceCounter
     public abstract void ReleaseOne();
 
     public static ResourceCounter Unlimited { get; } = new UnlimitedCounter();
+
     public static ResourceCounter Quota(long amount) => new FiniteCounter(amount);
 
     private class UnlimitedCounter : ResourceCounter
     {
         public override bool TryLockOne() => true;
-        public override void ReleaseOne()
-        {
-        }
+
+        public override void ReleaseOne() { }
     }
 
     internal class FiniteCounter : ResourceCounter
@@ -63,7 +63,10 @@ internal abstract class ResourceCounter
         {
             Interlocked.Decrement(ref _count);
 
-            Debug.Assert(_count >= 0, "Resource count is negative. More resources were released than were locked.");
+            Debug.Assert(
+                _count >= 0,
+                "Resource count is negative. More resources were released than were locked."
+            );
         }
 
         // for testing

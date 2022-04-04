@@ -15,15 +15,9 @@ public class TemplateTargetExtensionTest
         // Arrange
         var node = new TemplateIntermediateNode()
         {
-            Children =
-                {
-                    new CSharpExpressionIntermediateNode()
-                }
+            Children = { new CSharpExpressionIntermediateNode() }
         };
-        var extension = new TemplateTargetExtension()
-        {
-            TemplateTypeName = "global::TestTemplate"
-        };
+        var extension = new TemplateTargetExtension() { TemplateTypeName = "global::TestTemplate" };
 
         var nodeWriter = new RuntimeNodeWriter()
         {
@@ -37,7 +31,8 @@ public class TemplateTargetExtensionTest
         extension.WriteTemplate(context, node);
 
         // Assert
-        var expected = @"item => new global::TestTemplate(async(__razor_template_writer) => {
+        var expected =
+            @"item => new global::TestTemplate(async(__razor_template_writer) => {
     TestPushWriter(__razor_template_writer);
     Render Children
     TestPopWriter();

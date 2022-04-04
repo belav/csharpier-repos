@@ -18,20 +18,39 @@ namespace System
         //
 
         public static bool IsWindows => RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
-        public static bool IsNetFramework => RuntimeInformation.FrameworkDescription.StartsWith(".NET Framework", StringComparison.OrdinalIgnoreCase);
-        public static bool HasWindowsShell => IsWindows && IsNotWindowsServerCore && IsNotWindowsNanoServer && IsNotWindowsIoTCore;
-        public static bool IsWindows7 => IsWindows && GetWindowsVersion() == 6 && GetWindowsMinorVersion() == 1;
-        public static bool IsWindows8x => IsWindows && GetWindowsVersion() == 6 && (GetWindowsMinorVersion() == 2 || GetWindowsMinorVersion() == 3);
+        public static bool IsNetFramework =>
+            RuntimeInformation.FrameworkDescription.StartsWith(
+                ".NET Framework",
+                StringComparison.OrdinalIgnoreCase
+            );
+        public static bool HasWindowsShell =>
+            IsWindows && IsNotWindowsServerCore && IsNotWindowsNanoServer && IsNotWindowsIoTCore;
+        public static bool IsWindows7 =>
+            IsWindows && GetWindowsVersion() == 6 && GetWindowsMinorVersion() == 1;
+        public static bool IsWindows8x =>
+            IsWindows
+            && GetWindowsVersion() == 6
+            && (GetWindowsMinorVersion() == 2 || GetWindowsMinorVersion() == 3);
         public static bool IsWindows8xOrLater => IsWindowsVersionOrLater(6, 2);
         public static bool IsWindows10OrLater => IsWindowsVersionOrLater(10, 0);
-        public static bool IsWindowsNanoServer => IsWindows && (IsNotWindowsIoTCore && GetWindowsInstallationType().Equals("Nano Server", StringComparison.OrdinalIgnoreCase));
-        public static bool IsWindowsServerCore => IsWindows && GetWindowsInstallationType().Equals("Server Core", StringComparison.OrdinalIgnoreCase);
+        public static bool IsWindowsNanoServer =>
+            IsWindows
+            && (
+                IsNotWindowsIoTCore
+                && GetWindowsInstallationType()
+                    .Equals("Nano Server", StringComparison.OrdinalIgnoreCase)
+            );
+        public static bool IsWindowsServerCore =>
+            IsWindows
+            && GetWindowsInstallationType()
+                .Equals("Server Core", StringComparison.OrdinalIgnoreCase);
         public static int WindowsVersion => IsWindows ? (int)GetWindowsVersion() : -1;
         public static bool IsNotWindows7 => !IsWindows7;
         public static bool IsNotWindows8x => !IsWindows8x;
         public static bool IsNotWindowsNanoServer => !IsWindowsNanoServer;
         public static bool IsNotWindowsServerCore => !IsWindowsServerCore;
-        public static bool IsNotWindowsNanoNorServerCore => IsNotWindowsNanoServer && IsNotWindowsServerCore;
+        public static bool IsNotWindowsNanoNorServerCore =>
+            IsNotWindowsNanoServer && IsNotWindowsServerCore;
         public static bool IsNotWindowsIoTCore => !IsWindowsIoTCore;
         public static bool IsNotWindowsHomeEdition => !IsWindowsHomeEdition;
         public static bool IsNotInAppContainer => !IsInAppContainer;
@@ -55,10 +74,12 @@ namespace System
         // >= Windows 10 20H1 Update
         public static bool IsWindows10Version2004OrGreater => IsWindowsVersionOrLater(10, 0, 19041);
 
-        public static bool IsWindows10Version2004Build19573OrGreater => IsWindowsVersionOrLater(10, 0, 19573);
+        public static bool IsWindows10Version2004Build19573OrGreater =>
+            IsWindowsVersionOrLater(10, 0, 19573);
 
         // Windows 11 aka 21H2
-        public static bool IsWindows10Version22000OrGreater => IsWindowsVersionOrLater(10, 0, 22000);
+        public static bool IsWindows10Version22000OrGreater =>
+            IsWindowsVersionOrLater(10, 0, 22000);
 
         public static bool IsWindowsIoTCore
         {
@@ -70,8 +91,7 @@ namespace System
                 }
 
                 int productType = GetWindowsProductType();
-                if ((productType == PRODUCT_IOTUAPCOMMERCIAL) ||
-                    (productType == PRODUCT_IOTUAP))
+                if ((productType == PRODUCT_IOTUAPCOMMERCIAL) || (productType == PRODUCT_IOTUAP))
                 {
                     return true;
                 }
@@ -115,16 +135,22 @@ namespace System
             {
                 value = (string)Registry.GetValue(key, "InstallationType", defaultValue: "");
             }
-            catch (Exception e) when (e is SecurityException || e is InvalidCastException)
-            {
-            }
+            catch (Exception e) when (e is SecurityException || e is InvalidCastException) { }
 
             return value;
         }
 
         private static int GetWindowsProductType()
         {
-            Assert.True(GetProductInfo(Environment.OSVersion.Version.Major, Environment.OSVersion.Version.Minor, 0, 0, out int productType));
+            Assert.True(
+                GetProductInfo(
+                    Environment.OSVersion.Version.Major,
+                    Environment.OSVersion.Version.Minor,
+                    0,
+                    0,
+                    out int productType
+                )
+            );
             return productType;
         }
 
@@ -149,15 +175,26 @@ namespace System
         );
 
         [DllImport("kernel32.dll", ExactSpelling = true)]
-        private static extern int GetCurrentApplicationUserModelId(ref uint applicationUserModelIdLength, byte[] applicationUserModelId);
+        private static extern int GetCurrentApplicationUserModelId(
+            ref uint applicationUserModelIdLength,
+            byte[] applicationUserModelId
+        );
 
         private static volatile Version s_windowsVersionObject;
+
         internal static Version GetWindowsVersionObject()
         {
             if (s_windowsVersionObject is null)
             {
-                Assert.Equal(0, Interop.NtDll.RtlGetVersionEx(out Interop.NtDll.RTL_OSVERSIONINFOEX osvi));
-                Version newObject = new Version(checked((int)osvi.dwMajorVersion), checked((int)osvi.dwMinorVersion), checked((int)osvi.dwBuildNumber));
+                Assert.Equal(
+                    0,
+                    Interop.NtDll.RtlGetVersionEx(out Interop.NtDll.RTL_OSVERSIONINFOEX osvi)
+                );
+                Version newObject = new Version(
+                    checked((int)osvi.dwMajorVersion),
+                    checked((int)osvi.dwMinorVersion),
+                    checked((int)osvi.dwBuildNumber)
+                );
                 s_windowsVersionObject = newObject;
             }
 
@@ -165,11 +202,14 @@ namespace System
         }
 
         internal static uint GetWindowsVersion() => (uint)GetWindowsVersionObject().Major;
+
         internal static uint GetWindowsMinorVersion() => (uint)GetWindowsVersionObject().Minor;
 
         internal static bool IsWindowsVersionOrLater(int major, int minor, int build = -1)
         {
-            return IsWindows && GetWindowsVersionObject() >= (build != -1 ? new Version(major, minor, build) : new Version(major, minor));
+            return IsWindows
+                && GetWindowsVersionObject()
+                    >= (build != -1 ? new Version(major, minor, build) : new Version(major, minor));
         }
 
         private static int s_isInAppContainer = -1;
@@ -198,28 +238,36 @@ namespace System
                     switch (result)
                     {
                         case 15703: // APPMODEL_ERROR_NO_APPLICATION
-                        case 120:   // ERROR_CALL_NOT_IMPLEMENTED
-                                    // This function is not supported on this system.
-                                    // In example on Windows Nano Server
+                        case 120: // ERROR_CALL_NOT_IMPLEMENTED
+                            // This function is not supported on this system.
+                            // In example on Windows Nano Server
                             s_isInAppContainer = 0;
                             break;
-                        case 0:     // ERROR_SUCCESS
-                        case 122:   // ERROR_INSUFFICIENT_BUFFER
-                                    // Success is actually insufficent buffer as we're really only looking for
-                                    // not NO_APPLICATION and we're not actually giving a buffer here. The
-                                    // API will always return NO_APPLICATION if we're not running under a
-                                    // WinRT process, no matter what size the buffer is.
+                        case 0: // ERROR_SUCCESS
+                        case 122: // ERROR_INSUFFICIENT_BUFFER
+                            // Success is actually insufficent buffer as we're really only looking for
+                            // not NO_APPLICATION and we're not actually giving a buffer here. The
+                            // API will always return NO_APPLICATION if we're not running under a
+                            // WinRT process, no matter what size the buffer is.
                             s_isInAppContainer = 1;
                             break;
                         default:
-                            throw new InvalidOperationException($"Failed to get AppId, result was {result}.");
+                            throw new InvalidOperationException(
+                                $"Failed to get AppId, result was {result}."
+                            );
                     }
                 }
                 catch (Exception e)
                 {
                     // We could catch this here, being friendly with older portable surface area should we
                     // desire to use this method elsewhere.
-                    if (e.GetType().FullName.Equals("System.EntryPointNotFoundException", StringComparison.Ordinal))
+                    if (
+                        e.GetType()
+                            .FullName.Equals(
+                                "System.EntryPointNotFoundException",
+                                StringComparison.Ordinal
+                            )
+                    )
                     {
                         // API doesn't exist, likely pre Win8
                         s_isInAppContainer = 0;

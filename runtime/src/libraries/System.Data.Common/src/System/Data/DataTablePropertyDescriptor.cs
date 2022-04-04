@@ -37,7 +37,8 @@ namespace System.Data
 
         public override object GetValue(object? component)
         {
-            DataViewManagerListItemTypeDescriptor dataViewManagerListItem = (DataViewManagerListItemTypeDescriptor)component!;
+            DataViewManagerListItemTypeDescriptor dataViewManagerListItem =
+                (DataViewManagerListItemTypeDescriptor)component!;
             return dataViewManagerListItem.GetDataView(Table);
         }
 

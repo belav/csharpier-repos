@@ -41,6 +41,7 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
         /// <returns>The generated model.</returns>
         public abstract ScaffoldedModel GenerateModel(
             IModel model,
-            ModelCodeGenerationOptions options);
+            ModelCodeGenerationOptions options
+        );
     }
 }

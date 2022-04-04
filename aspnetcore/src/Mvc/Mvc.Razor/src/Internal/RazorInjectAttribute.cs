@@ -13,6 +13,4 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Internal;
 /// </para>
 /// </summary>
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-public class RazorInjectAttribute : Attribute
-{
-}
+public class RazorInjectAttribute : Attribute { }

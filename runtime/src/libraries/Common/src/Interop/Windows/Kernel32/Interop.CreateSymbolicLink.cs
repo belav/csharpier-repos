@@ -20,8 +20,19 @@ internal static partial class Interop
         /// </summary>
         internal const int SYMBOLIC_LINK_FLAG_ALLOW_UNPRIVILEGED_CREATE = 0x2;
 
-        [DllImport(Libraries.Kernel32, EntryPoint = "CreateSymbolicLinkW", SetLastError = true, CharSet = CharSet.Unicode, BestFitMapping = false, ExactSpelling = true)]
-        private static extern bool CreateSymbolicLinkPrivate(string lpSymlinkFileName, string lpTargetFileName, int dwFlags);
+        [DllImport(
+            Libraries.Kernel32,
+            EntryPoint = "CreateSymbolicLinkW",
+            SetLastError = true,
+            CharSet = CharSet.Unicode,
+            BestFitMapping = false,
+            ExactSpelling = true
+        )]
+        private static extern bool CreateSymbolicLinkPrivate(
+            string lpSymlinkFileName,
+            string lpTargetFileName,
+            int dwFlags
+        );
 
         /// <summary>
         /// Creates a symbolic link.
@@ -30,7 +41,11 @@ internal static partial class Interop
         /// <param name="targetFileName">The name of the target for the symbolic link to be created.
         /// If it has a device name associated with it, the link is treated as an absolute link; otherwise, the link is treated as a relative link.</param>
         /// <param name="isDirectory"><see langword="true" /> if the link target is a directory; <see langword="false" /> otherwise.</param>
-        internal static void CreateSymbolicLink(string symlinkFileName, string targetFileName, bool isDirectory)
+        internal static void CreateSymbolicLink(
+            string symlinkFileName,
+            string targetFileName,
+            bool isDirectory
+        )
         {
             string originalPath = symlinkFileName;
             symlinkFileName = PathInternal.EnsureExtendedPrefixIfNeeded(symlinkFileName);
@@ -39,8 +54,9 @@ internal static partial class Interop
             int flags = 0;
 
             bool isAtLeastWin10Build14972 =
-                Environment.OSVersion.Version.Major == 10 && Environment.OSVersion.Version.Build >= 14972 ||
-                Environment.OSVersion.Version.Major >= 11;
+                Environment.OSVersion.Version.Major == 10
+                    && Environment.OSVersion.Version.Build >= 14972
+                || Environment.OSVersion.Version.Major >= 11;
 
             if (isAtLeastWin10Build14972)
             {

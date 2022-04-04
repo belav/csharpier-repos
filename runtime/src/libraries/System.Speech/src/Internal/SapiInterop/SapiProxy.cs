@@ -29,10 +29,7 @@ namespace System.Speech.Internal.SapiInterop
 
         internal ISpRecognizer Recognizer
         {
-            get
-            {
-                return _recognizer;
-            }
+            get { return _recognizer; }
         }
 
         internal ISpRecognizer2 Recognizer2
@@ -84,6 +81,7 @@ namespace System.Speech.Internal.SapiInterop
             {
                 Dispose(false);
             }
+
             public override void Dispose()
             {
                 try
@@ -142,11 +140,21 @@ namespace System.Speech.Internal.SapiInterop
 
                 if (type == SapiRecognizer.RecognizerType.InProc)
                 {
-                    Invoke2(delegate { _recognizer = (ISpRecognizer)new SpInprocRecognizer(); });
+                    Invoke2(
+                        delegate
+                        {
+                            _recognizer = (ISpRecognizer)new SpInprocRecognizer();
+                        }
+                    );
                 }
                 else
                 {
-                    Invoke2(delegate { _recognizer = (ISpRecognizer)new SpSharedRecognizer(); });
+                    Invoke2(
+                        delegate
+                        {
+                            _recognizer = (ISpRecognizer)new SpSharedRecognizer();
+                        }
+                    );
                 }
             }
 
@@ -214,7 +222,12 @@ namespace System.Speech.Internal.SapiInterop
                 {
                     _recognizer2 = null;
                     _speechRecognizer = null;
-                    Invoke2(delegate { Marshal.ReleaseComObject(_recognizer); });
+                    Invoke2(
+                        delegate
+                        {
+                            Marshal.ReleaseComObject(_recognizer);
+                        }
+                    );
                     ((IDisposable)_process).Dispose();
                     ((IDisposable)_done).Dispose();
                 }

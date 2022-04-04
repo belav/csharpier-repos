@@ -10,7 +10,8 @@ namespace JIT.HardwareIntrinsics.X86
     {
         static Program()
         {
-            TestList = new Dictionary<string, Action>() {
+            TestList = new Dictionary<string, Action>()
+            {
                 ["MultiplyWideningAndAdd.Byte"] = MultiplyWideningAndAddByte,
                 ["MultiplyWideningAndAdd.Int16"] = MultiplyWideningAndAddInt16,
                 ["MultiplyWideningAndAddSaturate.Byte"] = MultiplyWideningAndAddSaturateByte,

@@ -14,8 +14,10 @@ internal class StringLengthAttributeAdapter : AttributeAdapterBase<StringLengthA
     private readonly string _max;
     private readonly string _min;
 
-    public StringLengthAttributeAdapter(StringLengthAttribute attribute, IStringLocalizer? stringLocalizer)
-        : base(attribute, stringLocalizer)
+    public StringLengthAttributeAdapter(
+        StringLengthAttribute attribute,
+        IStringLocalizer? stringLocalizer
+    ) : base(attribute, stringLocalizer)
     {
         _max = Attribute.MaximumLength.ToString(CultureInfo.InvariantCulture);
         _min = Attribute.MinimumLength.ToString(CultureInfo.InvariantCulture);
@@ -55,6 +57,7 @@ internal class StringLengthAttributeAdapter : AttributeAdapterBase<StringLengthA
             validationContext.ModelMetadata,
             validationContext.ModelMetadata.GetDisplayName(),
             Attribute.MaximumLength,
-            Attribute.MinimumLength);
+            Attribute.MinimumLength
+        );
     }
 }

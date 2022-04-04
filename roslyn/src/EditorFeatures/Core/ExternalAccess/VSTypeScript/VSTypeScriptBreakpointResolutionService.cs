@@ -23,14 +23,30 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VSTypeScriptBreakpointResolutionService(IVSTypeScriptBreakpointResolutionServiceImplementation implementation)
-            => _implementation = implementation;
+        public VSTypeScriptBreakpointResolutionService(
+            IVSTypeScriptBreakpointResolutionServiceImplementation implementation
+        ) => _implementation = implementation;
 
-        public async Task<BreakpointResolutionResult?> ResolveBreakpointAsync(Document document, TextSpan textSpan, CancellationToken cancellationToken = default)
-            => (await _implementation.ResolveBreakpointAsync(document, textSpan, cancellationToken).ConfigureAwait(false)).UnderlyingObject;
+        public async Task<BreakpointResolutionResult?> ResolveBreakpointAsync(
+            Document document,
+            TextSpan textSpan,
+            CancellationToken cancellationToken = default
+        ) =>
+            (
+                await _implementation
+                    .ResolveBreakpointAsync(document, textSpan, cancellationToken)
+                    .ConfigureAwait(false)
+            ).UnderlyingObject;
 
-        public async Task<IEnumerable<BreakpointResolutionResult>> ResolveBreakpointsAsync(Solution solution, string name, CancellationToken cancellationToken = default)
-            => (await _implementation.ResolveBreakpointsAsync(solution, name, cancellationToken).ConfigureAwait(false)).Select(r => r.UnderlyingObject);
-
+        public async Task<IEnumerable<BreakpointResolutionResult>> ResolveBreakpointsAsync(
+            Solution solution,
+            string name,
+            CancellationToken cancellationToken = default
+        ) =>
+            (
+                await _implementation
+                    .ResolveBreakpointsAsync(solution, name, cancellationToken)
+                    .ConfigureAwait(false)
+            ).Select(r => r.UnderlyingObject);
     }
 }

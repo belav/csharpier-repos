@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 {
     [ExportRoslynLanguagesLspRequestHandlerProvider, Shared]
     [ProvidesMethod(Methods.TextDocumentFoldingRangeName)]
-    internal sealed class FoldingRangesHandler : AbstractStatelessRequestHandler<FoldingRangeParams, FoldingRange[]?>
+    internal sealed class FoldingRangesHandler
+        : AbstractStatelessRequestHandler<FoldingRangeParams, FoldingRange[]?>
     {
         public override string Method => Methods.TextDocumentFoldingRangeName;
 
@@ -28,25 +29,32 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public FoldingRangesHandler()
-        {
-        }
+        public FoldingRangesHandler() { }
 
-        public override TextDocumentIdentifier? GetTextDocumentIdentifier(FoldingRangeParams request) => request.TextDocument;
+        public override TextDocumentIdentifier? GetTextDocumentIdentifier(
+            FoldingRangeParams request
+        ) => request.TextDocument;
 
-        public override async Task<FoldingRange[]?> HandleRequestAsync(FoldingRangeParams request, RequestContext context, CancellationToken cancellationToken)
+        public override async Task<FoldingRange[]?> HandleRequestAsync(
+            FoldingRangeParams request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             var document = context.Document;
             if (document == null)
                 return null;
 
-            var blockStructureService = document.Project.LanguageServices.GetService<BlockStructureService>();
+            var blockStructureService =
+                document.Project.LanguageServices.GetService<BlockStructureService>();
             if (blockStructureService == null)
             {
                 return Array.Empty<FoldingRange>();
             }
 
-            var blockStructure = await blockStructureService.GetBlockStructureAsync(document, cancellationToken).ConfigureAwait(false);
+            var blockStructure = await blockStructureService
+                .GetBlockStructureAsync(document, cancellationToken)
+                .ConfigureAwait(false);
             if (blockStructure == null)
             {
                 return Array.Empty<FoldingRange>();
@@ -60,10 +68,16 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             SyntaxTree syntaxTree,
             HostLanguageServices languageServices,
             in BlockStructureOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var blockStructureService = (BlockStructureServiceWithProviders)languageServices.GetRequiredService<BlockStructureService>();
-            var blockStructure = blockStructureService.GetBlockStructure(syntaxTree, options, cancellationToken);
+            var blockStructureService =
+                (BlockStructureServiceWithProviders)languageServices.GetRequiredService<BlockStructureService>();
+            var blockStructure = blockStructureService.GetBlockStructure(
+                syntaxTree,
+                options,
+                cancellationToken
+            );
             if (blockStructure == null)
             {
                 return Array.Empty<FoldingRange>();
@@ -73,7 +87,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             return GetFoldingRanges(blockStructure, text);
         }
 
-        private static FoldingRange[] GetFoldingRanges(BlockStructure blockStructure, SourceText text)
+        private static FoldingRange[] GetFoldingRanges(
+            BlockStructure blockStructure,
+            SourceText text
+        )
         {
             if (blockStructure.Spans.IsEmpty)
             {
@@ -107,14 +124,16 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                     _ => null,
                 };
 
-                foldingRanges.Add(new FoldingRange()
-                {
-                    StartLine = linePositionSpan.Start.Line,
-                    StartCharacter = linePositionSpan.Start.Character,
-                    EndLine = linePositionSpan.End.Line,
-                    EndCharacter = linePositionSpan.End.Character,
-                    Kind = foldingRangeKind
-                });
+                foldingRanges.Add(
+                    new FoldingRange()
+                    {
+                        StartLine = linePositionSpan.Start.Line,
+                        StartCharacter = linePositionSpan.Start.Character,
+                        EndLine = linePositionSpan.End.Line,
+                        EndCharacter = linePositionSpan.End.Character,
+                        Kind = foldingRangeKind
+                    }
+                );
             }
 
             return foldingRanges.ToArray();

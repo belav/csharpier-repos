@@ -12,7 +12,8 @@ internal class RegistryPolicy
     public RegistryPolicy(
         AlgorithmConfiguration? configuration,
         IEnumerable<IKeyEscrowSink> keyEscrowSinks,
-        int? defaultKeyLifetime)
+        int? defaultKeyLifetime
+    )
     {
         EncryptorConfiguration = configuration;
         KeyEscrowSinks = keyEscrowSinks;

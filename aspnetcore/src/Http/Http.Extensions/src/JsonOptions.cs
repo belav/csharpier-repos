@@ -14,18 +14,20 @@ namespace Microsoft.AspNetCore.Http.Json;
 /// </summary>
 public class JsonOptions
 {
-    internal static readonly JsonSerializerOptions DefaultSerializerOptions = new JsonSerializerOptions(JsonSerializerDefaults.Web)
-    {
-        // Web defaults don't use the relex JSON escaping encoder.
-        //
-        // Because these options are for producing content that is written directly to the request
-        // (and not embedded in an HTML page for example), we can use UnsafeRelaxedJsonEscaping.
-        Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-    };
+    internal static readonly JsonSerializerOptions DefaultSerializerOptions =
+        new JsonSerializerOptions(JsonSerializerDefaults.Web)
+        {
+            // Web defaults don't use the relex JSON escaping encoder.
+            //
+            // Because these options are for producing content that is written directly to the request
+            // (and not embedded in an HTML page for example), we can use UnsafeRelaxedJsonEscaping.
+            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+        };
 
     // Use a copy so the defaults are not modified.
     /// <summary>
     /// Gets the <see cref="JsonSerializerOptions"/>.
     /// </summary>
-    public JsonSerializerOptions SerializerOptions { get; } = new JsonSerializerOptions(DefaultSerializerOptions);
+    public JsonSerializerOptions SerializerOptions { get; } =
+        new JsonSerializerOptions(DefaultSerializerOptions);
 }

@@ -14,8 +14,5 @@ public class StartupConfigureServicesThrows
         throw new Exception("Exception from ConfigureServices");
     }
 
-    public void Configure(IApplicationBuilder builder)
-    {
-
-    }
+    public void Configure(IApplicationBuilder builder) { }
 }

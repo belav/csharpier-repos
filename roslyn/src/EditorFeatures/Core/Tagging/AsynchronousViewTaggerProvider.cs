@@ -12,18 +12,18 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 namespace Microsoft.CodeAnalysis.Editor.Tagging
 {
-    internal abstract class AsynchronousViewTaggerProvider<TTag> : AbstractAsynchronousTaggerProvider<TTag>, IViewTaggerProvider
-        where TTag : ITag
+    internal abstract class AsynchronousViewTaggerProvider<TTag>
+        : AbstractAsynchronousTaggerProvider<TTag>,
+          IViewTaggerProvider where TTag : ITag
     {
         protected AsynchronousViewTaggerProvider(
             IThreadingContext threadingContext,
             IGlobalOptionService globalOptions,
-            IAsynchronousOperationListener asyncListener)
-            : base(threadingContext, globalOptions, asyncListener)
-        {
-        }
+            IAsynchronousOperationListener asyncListener
+        ) : base(threadingContext, globalOptions, asyncListener) { }
 
-        public ITagger<T>? CreateTagger<T>(ITextView textView, ITextBuffer subjectBuffer) where T : ITag
+        public ITagger<T>? CreateTagger<T>(ITextView textView, ITextBuffer subjectBuffer)
+            where T : ITag
         {
             if (textView == null)
                 throw new ArgumentNullException(nameof(subjectBuffer));
@@ -34,7 +34,7 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             return this.CreateTaggerWorker<T>(textView, subjectBuffer);
         }
 
-        ITagger<T>? IViewTaggerProvider.CreateTagger<T>(ITextView textView, ITextBuffer buffer)
-            => CreateTagger<T>(textView, buffer);
+        ITagger<T>? IViewTaggerProvider.CreateTagger<T>(ITextView textView, ITextBuffer buffer) =>
+            CreateTagger<T>(textView, buffer);
     }
 }

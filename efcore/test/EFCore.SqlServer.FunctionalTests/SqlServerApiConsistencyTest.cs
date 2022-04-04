@@ -12,42 +12,35 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.EntityFrameworkCore
 {
-    public class SqlServerApiConsistencyTest : ApiConsistencyTestBase<SqlServerApiConsistencyTest.SqlServerApiConsistencyFixture>
+    public class SqlServerApiConsistencyTest
+        : ApiConsistencyTestBase<SqlServerApiConsistencyTest.SqlServerApiConsistencyFixture>
     {
-        public SqlServerApiConsistencyTest(SqlServerApiConsistencyFixture fixture)
-            : base(fixture)
-        {
-        }
+        public SqlServerApiConsistencyTest(SqlServerApiConsistencyFixture fixture) : base(fixture)
+        { }
 
-        protected override void AddServices(ServiceCollection serviceCollection)
-            => serviceCollection.AddEntityFrameworkSqlServer();
+        protected override void AddServices(ServiceCollection serviceCollection) =>
+            serviceCollection.AddEntityFrameworkSqlServer();
 
-        protected override Assembly TargetAssembly
-            => typeof(SqlServerConnection).Assembly;
+        protected override Assembly TargetAssembly => typeof(SqlServerConnection).Assembly;
 
         public class SqlServerApiConsistencyFixture : ApiConsistencyFixtureBase
         {
-            public override HashSet<Type> FluentApiTypes { get; } = new()
-            {
-                typeof(SqlServerDbContextOptionsBuilder),
-                typeof(SqlServerDbContextOptionsExtensions),
-                typeof(SqlServerMigrationBuilderExtensions),
-                typeof(SqlServerIndexBuilderExtensions),
-                typeof(SqlServerKeyBuilderExtensions),
-                typeof(SqlServerModelBuilderExtensions),
-                typeof(SqlServerPropertyBuilderExtensions),
-                typeof(SqlServerEntityTypeBuilderExtensions),
-                typeof(SqlServerServiceCollectionExtensions)
-            };
+            public override HashSet<Type> FluentApiTypes { get; } =
+                new()
+                {
+                    typeof(SqlServerDbContextOptionsBuilder),
+                    typeof(SqlServerDbContextOptionsExtensions),
+                    typeof(SqlServerMigrationBuilderExtensions),
+                    typeof(SqlServerIndexBuilderExtensions),
+                    typeof(SqlServerKeyBuilderExtensions),
+                    typeof(SqlServerModelBuilderExtensions),
+                    typeof(SqlServerPropertyBuilderExtensions),
+                    typeof(SqlServerEntityTypeBuilderExtensions),
+                    typeof(SqlServerServiceCollectionExtensions)
+                };
 
-            public override
-                List<(Type Type,
-                    Type ReadonlyExtensions,
-                    Type MutableExtensions,
-                    Type ConventionExtensions,
-                    Type ConventionBuilderExtensions,
-                    Type RuntimeExtensions)> MetadataExtensionTypes { get; }
-                = new()
+            public override List<(Type Type, Type ReadonlyExtensions, Type MutableExtensions, Type ConventionExtensions, Type ConventionBuilderExtensions, Type RuntimeExtensions)> MetadataExtensionTypes { get; } =
+                new()
                 {
                     (
                         typeof(IReadOnlyModel),

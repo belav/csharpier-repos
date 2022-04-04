@@ -20,14 +20,21 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
         private readonly ISerializerService _serializerService;
         private readonly IReadOnlyDictionary<Checksum, object> _map;
 
-        public SimpleAssetSource(ISerializerService serializerService, IReadOnlyDictionary<Checksum, object> map)
+        public SimpleAssetSource(
+            ISerializerService serializerService,
+            IReadOnlyDictionary<Checksum, object> map
+        )
         {
             _serializerService = serializerService;
             _map = map;
         }
 
         public ValueTask<ImmutableArray<(Checksum, object)>> GetAssetsAsync(
-            int serviceId, ISet<Checksum> checksums, ISerializerService deserializerService, CancellationToken cancellationToken)
+            int serviceId,
+            ISet<Checksum> checksums,
+            ISerializerService deserializerService,
+            CancellationToken cancellationToken
+        )
         {
             var results = new List<(Checksum, object)>();
 
@@ -38,14 +45,24 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
                     using var stream = new MemoryStream();
                     using var context = SolutionReplicationContext.Create();
 
-                    using (var writer = new ObjectWriter(stream, leaveOpen: true, cancellationToken))
+                    using (
+                        var writer = new ObjectWriter(stream, leaveOpen: true, cancellationToken)
+                    )
                     {
                         _serializerService.Serialize(data, writer, context, cancellationToken);
                     }
 
                     stream.Position = 0;
-                    using var reader = ObjectReader.GetReader(stream, leaveOpen: true, cancellationToken);
-                    var asset = deserializerService.Deserialize<object>(data.GetWellKnownSynchronizationKind(), reader, cancellationToken);
+                    using var reader = ObjectReader.GetReader(
+                        stream,
+                        leaveOpen: true,
+                        cancellationToken
+                    );
+                    var asset = deserializerService.Deserialize<object>(
+                        data.GetWellKnownSynchronizationKind(),
+                        reader,
+                        cancellationToken
+                    );
                     Contract.ThrowIfTrue(asset is null);
                     results.Add((checksum, asset));
                 }

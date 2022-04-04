@@ -23,14 +23,13 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpKeywordHighlighting(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(CSharpKeywordHighlighting))
-        {
-        }
+            : base(instanceFactory, nameof(CSharpKeywordHighlighting)) { }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Classification)]
         public void Foreach()
         {
-            var input = @"class C
+            var input =
+                @"class C
 {
     void M()
     {
@@ -38,7 +37,11 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
     }
 }";
 
-            Roslyn.Test.Utilities.MarkupTestFile.GetSpans(input, out var text, out ImmutableArray<TextSpan> spans);
+            Roslyn.Test.Utilities.MarkupTestFile.GetSpans(
+                input,
+                out var text,
+                out ImmutableArray<TextSpan> spans
+            );
 
             VisualStudio.Editor.SetText(text);
 
@@ -51,7 +54,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         [WpfFact, Trait(Traits.Feature, Traits.Features.Classification)]
         public void PreprocessorConditionals()
         {
-            var input = @"
+            var input =
+                @"
 #define Debug
 #undef Trace
 class PurchaseTransaction
@@ -71,7 +75,8 @@ class PurchaseTransaction
             Test.Utilities.MarkupTestFile.GetSpans(
                 input,
                 out var text,
-                out IDictionary<string, ImmutableArray<TextSpan>> spans);
+                out IDictionary<string, ImmutableArray<TextSpan>> spans
+            );
 
             VisualStudio.Editor.SetText(text);
 
@@ -83,7 +88,8 @@ class PurchaseTransaction
         [WpfFact, Trait(Traits.Feature, Traits.Features.Classification)]
         public void PreprocessorRegions()
         {
-            var input = @"
+            var input =
+                @"
 class C
 {
     [|#region|] Main
@@ -96,7 +102,8 @@ class C
             Test.Utilities.MarkupTestFile.GetSpans(
                 input,
                 out var text,
-                out ImmutableArray<TextSpan> spans);
+                out ImmutableArray<TextSpan> spans
+            );
 
             VisualStudio.Editor.SetText(text);
 
@@ -113,7 +120,8 @@ class C
                 FeatureAttribute.SolutionCrawler,
                 FeatureAttribute.DiagnosticService,
                 FeatureAttribute.Classification,
-                FeatureAttribute.KeywordHighlighting);
+                FeatureAttribute.KeywordHighlighting
+            );
 
             Assert.Equal(expectedCount, VisualStudio.Editor.GetKeywordHighlightTags());
         }

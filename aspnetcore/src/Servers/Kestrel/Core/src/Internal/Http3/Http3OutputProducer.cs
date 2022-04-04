@@ -37,10 +37,11 @@ internal class Http3OutputProducer : IHttpOutputProducer, IHttpOutputAborter
     private byte[]? _fakeMemory;
 
     public Http3OutputProducer(
-         Http3FrameWriter frameWriter,
-         MemoryPool<byte> pool,
-         Http3Stream stream,
-         KestrelTrace log)
+        Http3FrameWriter frameWriter,
+        MemoryPool<byte> pool,
+        Http3Stream stream,
+        KestrelTrace log
+    )
     {
         _frameWriter = frameWriter;
         _memoryPool = pool;
@@ -105,7 +106,12 @@ internal class Http3OutputProducer : IHttpOutputProducer, IHttpOutputAborter
 
     void IHttpOutputAborter.OnInputOrOutputCompleted()
     {
-        _stream.Abort(new ConnectionAbortedException($"{nameof(Http3OutputProducer)}.{nameof(ProcessDataWrites)} has completed."), Http3ErrorCode.InternalError);
+        _stream.Abort(
+            new ConnectionAbortedException(
+                $"{nameof(Http3OutputProducer)}.{nameof(ProcessDataWrites)} has completed."
+            ),
+            Http3ErrorCode.InternalError
+        );
     }
 
     public void Advance(int bytes)
@@ -138,17 +144,37 @@ internal class Http3OutputProducer : IHttpOutputProducer, IHttpOutputAborter
         }
     }
 
-    public ValueTask<FlushResult> FirstWriteAsync(int statusCode, string? reasonPhrase, HttpResponseHeaders responseHeaders, bool autoChunk, ReadOnlySpan<byte> data, CancellationToken cancellationToken)
+    public ValueTask<FlushResult> FirstWriteAsync(
+        int statusCode,
+        string? reasonPhrase,
+        HttpResponseHeaders responseHeaders,
+        bool autoChunk,
+        ReadOnlySpan<byte> data,
+        CancellationToken cancellationToken
+    )
     {
         lock (_dataWriterLock)
         {
-            WriteResponseHeaders(statusCode, reasonPhrase, responseHeaders, autoChunk, appCompleted: false);
+            WriteResponseHeaders(
+                statusCode,
+                reasonPhrase,
+                responseHeaders,
+                autoChunk,
+                appCompleted: false
+            );
 
             return WriteDataToPipeAsync(data, cancellationToken);
         }
     }
 
-    public ValueTask<FlushResult> FirstWriteChunkedAsync(int statusCode, string? reasonPhrase, HttpResponseHeaders responseHeaders, bool autoChunk, ReadOnlySpan<byte> data, CancellationToken cancellationToken)
+    public ValueTask<FlushResult> FirstWriteChunkedAsync(
+        int statusCode,
+        string? reasonPhrase,
+        HttpResponseHeaders responseHeaders,
+        bool autoChunk,
+        ReadOnlySpan<byte> data,
+        CancellationToken cancellationToken
+    )
     {
         throw new NotImplementedException();
     }
@@ -198,7 +224,6 @@ internal class Http3OutputProducer : IHttpOutputProducer, IHttpOutputAborter
             return _pipeWriter.GetMemory(sizeHint);
         }
     }
-
 
     public Span<byte> GetSpan(int sizeHint = 0)
     {
@@ -274,9 +299,7 @@ internal class Http3OutputProducer : IHttpOutputProducer, IHttpOutputAborter
         throw new InvalidOperationException("Writing is not allowed after writer was completed.");
     }
 
-    public void Reset()
-    {
-    }
+    public void Reset() { }
 
     public void Stop()
     {
@@ -308,7 +331,10 @@ internal class Http3OutputProducer : IHttpOutputProducer, IHttpOutputAborter
         }
     }
 
-    public ValueTask<FlushResult> WriteChunkAsync(ReadOnlySpan<byte> data, CancellationToken cancellationToken)
+    public ValueTask<FlushResult> WriteChunkAsync(
+        ReadOnlySpan<byte> data,
+        CancellationToken cancellationToken
+    )
     {
         throw new NotImplementedException();
     }
@@ -338,7 +364,10 @@ internal class Http3OutputProducer : IHttpOutputProducer, IHttpOutputAborter
         }
     }
 
-    public ValueTask<FlushResult> WriteDataToPipeAsync(ReadOnlySpan<byte> data, CancellationToken cancellationToken)
+    public ValueTask<FlushResult> WriteDataToPipeAsync(
+        ReadOnlySpan<byte> data,
+        CancellationToken cancellationToken
+    )
     {
         if (cancellationToken.IsCancellationRequested)
         {
@@ -363,7 +392,13 @@ internal class Http3OutputProducer : IHttpOutputProducer, IHttpOutputAborter
         }
     }
 
-    public void WriteResponseHeaders(int statusCode, string? reasonPhrase, HttpResponseHeaders responseHeaders, bool autoChunk, bool appCompleted)
+    public void WriteResponseHeaders(
+        int statusCode,
+        string? reasonPhrase,
+        HttpResponseHeaders responseHeaders,
+        bool autoChunk,
+        bool appCompleted
+    )
     {
         // appCompleted flag is not used here. The write FIN is sent via the transport and not via the frame.
         // Headers are written to buffer and flushed with a FIN when Http3FrameWriter.CompleteAsync is called
@@ -418,7 +453,10 @@ internal class Http3OutputProducer : IHttpOutputProducer, IHttpOutputAborter
                     }
 
                     _stream.ResponseTrailers.SetReadOnly();
-                    flushResult = await _frameWriter.WriteResponseTrailersAsync(_stream.StreamId, _stream.ResponseTrailers);
+                    flushResult = await _frameWriter.WriteResponseTrailersAsync(
+                        _stream.StreamId,
+                        _stream.ResponseTrailers
+                    );
                 }
                 else if (readResult.IsCompleted)
                 {
@@ -449,7 +487,13 @@ internal class Http3OutputProducer : IHttpOutputProducer, IHttpOutputAborter
         }
         catch (Exception ex)
         {
-            _log.LogCritical(ex, nameof(Http3OutputProducer) + "." + nameof(ProcessDataWrites) + " observed an unexpected exception.");
+            _log.LogCritical(
+                ex,
+                nameof(Http3OutputProducer)
+                    + "."
+                    + nameof(ProcessDataWrites)
+                    + " observed an unexpected exception."
+            );
         }
 
         await _pipeReader.CompleteAsync();
@@ -458,19 +502,25 @@ internal class Http3OutputProducer : IHttpOutputProducer, IHttpOutputAborter
 
         static void ThrowUnexpectedState()
         {
-            throw new InvalidOperationException(nameof(Http3OutputProducer) + "." + nameof(ProcessDataWrites) + " observed an unexpected state where the streams output ended with data still remaining in the pipe.");
+            throw new InvalidOperationException(
+                nameof(Http3OutputProducer)
+                    + "."
+                    + nameof(ProcessDataWrites)
+                    + " observed an unexpected state where the streams output ended with data still remaining in the pipe."
+            );
         }
     }
 
-    private static Pipe CreateDataPipe(MemoryPool<byte> pool)
-        => new Pipe(new PipeOptions
-        (
-            pool: pool,
-            readerScheduler: PipeScheduler.Inline,
-            writerScheduler: PipeScheduler.ThreadPool,
-            pauseWriterThreshold: 1,
-            resumeWriterThreshold: 1,
-            useSynchronizationContext: false,
-            minimumSegmentSize: pool.GetMinimumSegmentSize()
-        ));
+    private static Pipe CreateDataPipe(MemoryPool<byte> pool) =>
+        new Pipe(
+            new PipeOptions(
+                pool: pool,
+                readerScheduler: PipeScheduler.Inline,
+                writerScheduler: PipeScheduler.ThreadPool,
+                pauseWriterThreshold: 1,
+                resumeWriterThreshold: 1,
+                useSynchronizationContext: false,
+                minimumSegmentSize: pool.GetMinimumSegmentSize()
+            )
+        );
 }

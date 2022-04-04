@@ -14,47 +14,47 @@ public class Program
 {
     static void Main(string[] args)
     {
-        WebHost.CreateDefaultBuilder()
+        WebHost
+            .CreateDefaultBuilder()
             .UseUrls("http://127.0.0.1:0")
-            .ConfigureServices((context, services) =>
-            {
-                services.AddSingleton(typeof(IService<>), typeof(Service<>));
-                services.AddScoped<IAnotherService, AnotherService>();
-            })
-            .Configure(app =>
-            {
-                app.Run(context =>
+            .ConfigureServices(
+                (context, services) =>
                 {
-                    try
-                    {
-                        context.RequestServices.GetService<IService<IAnotherService>>();
-                        return context.Response.WriteAsync("Success");
-                    }
-                    catch (Exception ex)
-                    {
-                        return context.Response.WriteAsync(ex.ToString());
-                    }
-                });
-            })
-            .Build().Run();
+                    services.AddSingleton(typeof(IService<>), typeof(Service<>));
+                    services.AddScoped<IAnotherService, AnotherService>();
+                }
+            )
+            .Configure(
+                app =>
+                {
+                    app.Run(
+                        context =>
+                        {
+                            try
+                            {
+                                context.RequestServices.GetService<IService<IAnotherService>>();
+                                return context.Response.WriteAsync("Success");
+                            }
+                            catch (Exception ex)
+                            {
+                                return context.Response.WriteAsync(ex.ToString());
+                            }
+                        }
+                    );
+                }
+            )
+            .Build()
+            .Run();
     }
 
-    interface IService<T>
+    interface IService<T> { }
+
+    interface IAnotherService { }
+
+    class Service<T> : IService<T>
     {
+        public Service(T t) { }
     }
 
-    interface IAnotherService
-    {
-    }
-
-    class Service<T>: IService<T>
-    {
-        public Service(T t)
-        {
-        }
-    }
-
-    class AnotherService: IAnotherService
-    {
-    }
+    class AnotherService : IAnotherService { }
 }

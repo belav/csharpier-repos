@@ -17,16 +17,15 @@ public class HeterogenousCollectionTests
     public void AddItemToList()
     {
         // Arrange
-        var targetObject = new Canvas()
-        {
-            Items = new List<Shape>()
-        };
+        var targetObject = new Canvas() { Items = new List<Shape>() };
 
-        var circleJObject = JObject.Parse(@"{
+        var circleJObject = JObject.Parse(
+            @"{
               Type: 'Circle',
               ShapeProperty: 'Shape property',
               CircleProperty: 'Circle property'
-            }");
+            }"
+        );
 
         var patchDocument = new JsonPatchDocument
         {
@@ -74,7 +73,8 @@ public class ShapeJsonConverter : CustomCreationConverter<Shape>
         JsonReader reader,
         Type objectType,
         object existingValue,
-        JsonSerializer serializer)
+        JsonSerializer serializer
+    )
     {
         var jObject = JObject.Load(reader);
 

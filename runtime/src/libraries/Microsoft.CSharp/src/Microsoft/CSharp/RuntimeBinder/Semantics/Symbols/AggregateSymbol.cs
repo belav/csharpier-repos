@@ -23,14 +23,14 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         // The instance type. Created when first needed.
         private AggregateType _atsInst;
 
-        private AggregateType _pBaseClass;     // For a class/struct/enum, the base class. For iface: unused.
+        private AggregateType _pBaseClass; // For a class/struct/enum, the base class. For iface: unused.
         private AggregateType _pUnderlyingType; // For enum, the underlying type. For iface, the resolved CoClass. Not used for class/struct.
 
-        private TypeArray _ifaces;         // The explicit base interfaces for a class or interface.
-        private TypeArray _ifacesAll;      // Recursive closure of base interfaces ordered so an iface appears before all of its base ifaces.
+        private TypeArray _ifaces; // The explicit base interfaces for a class or interface.
+        private TypeArray _ifacesAll; // Recursive closure of base interfaces ordered so an iface appears before all of its base ifaces.
 
         private TypeArray _typeVarsThis; // Type variables for this generic class, as declarations.
-        private TypeArray _typeVarsAll;     // The type variables for this generic class and all containing classes.
+        private TypeArray _typeVarsAll; // The type variables for this generic class and all containing classes.
 
         // First UD conversion operator. This chain is for this type only (not base types).
         // The hasConversion flag indicates whether this or any base types have UD conversions.
@@ -51,12 +51,12 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         // sure you use the correct variable for what you are trying to do!
 
         // Predefined
-        private bool _isPredefined;    // A special predefined type.
-        private PredefinedType _iPredef;        // index of the predefined type, if isPredefined.
+        private bool _isPredefined; // A special predefined type.
+        private PredefinedType _iPredef; // index of the predefined type, if isPredefined.
 
         // Flags
-        private bool _isAbstract;      // Can it be instantiated?
-        private bool _isSealed;        // Can it be derived from?
+        private bool _isAbstract; // Can it be instantiated?
+        private bool _isSealed; // Can it be derived from?
 
         // Constructors
         private bool _hasPubNoArgCtor; // Whether it has a public instance constructor taking no args
@@ -170,8 +170,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
         public bool IsRefType()
         {
-            return AggKind() == AggKindEnum.Class ||
-                AggKind() == AggKindEnum.Interface || AggKind() == AggKindEnum.Delegate;
+            return AggKind() == AggKindEnum.Class
+                || AggKind() == AggKindEnum.Interface
+                || AggKind() == AggKindEnum.Delegate;
         }
 
         public bool IsStatic()
@@ -353,6 +354,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             _pConvFirst = conv;
         }
 
-        public bool InternalsVisibleTo(Assembly assembly) => TypeManager.InternalsVisibleTo(AssociatedAssembly, assembly);
+        public bool InternalsVisibleTo(Assembly assembly) =>
+            TypeManager.InternalsVisibleTo(AssociatedAssembly, assembly);
     }
 }

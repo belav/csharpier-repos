@@ -11,16 +11,15 @@ namespace Microsoft.Extensions.Configuration.Ini.Test
     public class ConfigurationProviderIniTest : ConfigurationProviderTestBase
     {
         protected override (IConfigurationProvider Provider, Action Initializer) LoadThroughProvider(
-            TestSection testConfig)
+            TestSection testConfig
+        )
         {
             var iniBuilder = new StringBuilder();
             SectionToIni(iniBuilder, "", testConfig);
 
             var provider = new IniConfigurationProvider(
-                new IniConfigurationSource
-                {
-                    Optional = true
-                });
+                new IniConfigurationSource { Optional = true }
+            );
 
             var ini = iniBuilder.ToString();
             return (provider, () => provider.Load(TestStreamHelpers.StringToStream(ini)));

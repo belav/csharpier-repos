@@ -17,7 +17,9 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 /// <summary>
 /// A <see cref="IActionResultExecutor{VirtualFileResult}"/> for <see cref="VirtualFileResult"/>.
 /// </summary>
-public class VirtualFileResultExecutor : FileResultExecutorBase, IActionResultExecutor<VirtualFileResult>
+public class VirtualFileResultExecutor
+    : FileResultExecutorBase,
+      IActionResultExecutor<VirtualFileResult>
 {
     private readonly IWebHostEnvironment _hostingEnvironment;
 
@@ -26,8 +28,10 @@ public class VirtualFileResultExecutor : FileResultExecutorBase, IActionResultEx
     /// </summary>
     /// <param name="loggerFactory">The factory used to create loggers.</param>
     /// <param name="hostingEnvironment">The hosting enviornment</param>
-    public VirtualFileResultExecutor(ILoggerFactory loggerFactory, IWebHostEnvironment hostingEnvironment)
-        : base(CreateLogger<VirtualFileResultExecutor>(loggerFactory))
+    public VirtualFileResultExecutor(
+        ILoggerFactory loggerFactory,
+        IWebHostEnvironment hostingEnvironment
+    ) : base(CreateLogger<VirtualFileResultExecutor>(loggerFactory))
     {
         if (hostingEnvironment == null)
         {
@@ -54,7 +58,9 @@ public class VirtualFileResultExecutor : FileResultExecutorBase, IActionResultEx
         if (!fileInfo.Exists)
         {
             throw new FileNotFoundException(
-                Resources.FormatFileResult_InvalidPath(result.FileName), result.FileName);
+                Resources.FormatFileResult_InvalidPath(result.FileName),
+                result.FileName
+            );
         }
 
         Logger.ExecutingFileResult(result, result.FileName);
@@ -66,7 +72,8 @@ public class VirtualFileResultExecutor : FileResultExecutorBase, IActionResultEx
             fileInfo.Length,
             result.EnableRangeProcessing,
             lastModified,
-            result.EntityTag);
+            result.EntityTag
+        );
 
         if (serveBody)
         {
@@ -77,7 +84,13 @@ public class VirtualFileResultExecutor : FileResultExecutorBase, IActionResultEx
     }
 
     /// <inheritdoc/>
-    protected virtual Task WriteFileAsync(ActionContext context, VirtualFileResult result, IFileInfo fileInfo, RangeItemHeaderValue? range, long rangeLength)
+    protected virtual Task WriteFileAsync(
+        ActionContext context,
+        VirtualFileResult result,
+        IFileInfo fileInfo,
+        RangeItemHeaderValue? range,
+        long rangeLength
+    )
     {
         if (context == null)
         {
@@ -97,7 +110,8 @@ public class VirtualFileResultExecutor : FileResultExecutorBase, IActionResultEx
         IFileInfo fileInfo,
         RangeItemHeaderValue? range,
         long rangeLength,
-        ILogger logger)
+        ILogger logger
+    )
     {
         if (range != null && rangeLength == 0)
         {
@@ -113,22 +127,23 @@ public class VirtualFileResultExecutor : FileResultExecutorBase, IActionResultEx
 
         if (range != null)
         {
-            return response.SendFileAsync(fileInfo,
-                offset: range.From ?? 0L,
-                count: rangeLength);
+            return response.SendFileAsync(fileInfo, offset: range.From ?? 0L, count: rangeLength);
         }
 
-        return response.SendFileAsync(fileInfo,
-            offset: 0,
-            count: null);
+        return response.SendFileAsync(fileInfo, offset: 0, count: null);
     }
 
-    internal static IFileInfo GetFileInformation(VirtualFileResult result, IWebHostEnvironment hostingEnvironment)
+    internal static IFileInfo GetFileInformation(
+        VirtualFileResult result,
+        IWebHostEnvironment hostingEnvironment
+    )
     {
         var fileProvider = GetFileProvider(result, hostingEnvironment);
         if (fileProvider is NullFileProvider)
         {
-            throw new InvalidOperationException(Resources.VirtualFileResultExecutor_NoFileProviderConfigured);
+            throw new InvalidOperationException(
+                Resources.VirtualFileResultExecutor_NoFileProviderConfigured
+            );
         }
 
         var normalizedPath = result.FileName;
@@ -141,7 +156,10 @@ public class VirtualFileResultExecutor : FileResultExecutorBase, IActionResultEx
         return fileInfo;
     }
 
-    internal static IFileProvider GetFileProvider(VirtualFileResult result, IWebHostEnvironment hostingEnvironment)
+    internal static IFileProvider GetFileProvider(
+        VirtualFileResult result,
+        IWebHostEnvironment hostingEnvironment
+    )
     {
         if (result.FileProvider != null)
         {

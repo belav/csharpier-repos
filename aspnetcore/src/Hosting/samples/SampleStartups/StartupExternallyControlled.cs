@@ -21,26 +21,28 @@ public class StartupExternallyControlled : StartupBase
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public override void Configure(IApplicationBuilder app)
     {
-        app.Run(async (context) =>
-        {
-            await context.Response.WriteAsync("Hello World!");
-        });
+        app.Run(
+            async (context) =>
+            {
+                await context.Response.WriteAsync("Hello World!");
+            }
+        );
     }
 
-    public StartupExternallyControlled()
-    {
-    }
+    public StartupExternallyControlled() { }
 
     public void Start()
     {
         _host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                    .UseKestrel()
-                    .UseStartup<StartupExternallyControlled>()
-                    .UseUrls(_urls.ToArray());
-            })
+            .ConfigureWebHost(
+                webHostBuilder =>
+                {
+                    webHostBuilder
+                        .UseKestrel()
+                        .UseStartup<StartupExternallyControlled>()
+                        .UseUrls(_urls.ToArray());
+                }
+            )
             .Start();
     }
 

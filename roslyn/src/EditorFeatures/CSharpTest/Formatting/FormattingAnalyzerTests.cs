@@ -18,32 +18,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
 {
     public class FormattingAnalyzerTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public FormattingAnalyzerTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+        public FormattingAnalyzerTests(ITestOutputHelper logger) : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new FormattingDiagnosticAnalyzer(), new FormattingCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (new FormattingDiagnosticAnalyzer(), new FormattingCodeFixProvider());
 
         [Fact, Trait(Traits.Feature, Traits.Features.Formatting)]
         public async Task TrailingWhitespace()
         {
             var testCode =
-                "class X[| |]" + Environment.NewLine +
-                "{" + Environment.NewLine +
-                "}" + Environment.NewLine;
+                "class X[| |]"
+                + Environment.NewLine
+                + "{"
+                + Environment.NewLine
+                + "}"
+                + Environment.NewLine;
             var expected =
-                "class X" + Environment.NewLine +
-                "{" + Environment.NewLine +
-                "}" + Environment.NewLine;
+                "class X"
+                + Environment.NewLine
+                + "{"
+                + Environment.NewLine
+                + "}"
+                + Environment.NewLine;
             await TestInRegularAndScriptAsync(testCode, expected);
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Formatting)]
         public async Task TestMissingSpace()
         {
-            var testCode = @"
+            var testCode =
+                @"
 class TypeName
 {
     void Method()
@@ -52,7 +57,8 @@ class TypeName
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class TypeName
 {
     void Method()

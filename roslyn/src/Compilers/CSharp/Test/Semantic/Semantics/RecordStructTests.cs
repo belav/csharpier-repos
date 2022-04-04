@@ -23,30 +23,37 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
     [CompilerTrait(CompilerFeature.RecordStructs)]
     public class RecordStructTests : CompilingTestBase
     {
-        private static CSharpCompilation CreateCompilation(CSharpTestSource source)
-            => CSharpTestBase.CreateCompilation(new[] { source, IsExternalInitTypeDefinition },
-                parseOptions: TestOptions.RegularPreview);
+        private static CSharpCompilation CreateCompilation(CSharpTestSource source) =>
+            CSharpTestBase.CreateCompilation(
+                new[] { source, IsExternalInitTypeDefinition },
+                parseOptions: TestOptions.RegularPreview
+            );
 
         private CompilationVerifier CompileAndVerify(
             CSharpTestSource src,
             string? expectedOutput = null,
-            IEnumerable<MetadataReference>? references = null)
-            => base.CompileAndVerify(
+            IEnumerable<MetadataReference>? references = null
+        ) =>
+            base.CompileAndVerify(
                 new[] { src, IsExternalInitTypeDefinition },
                 expectedOutput: expectedOutput,
                 parseOptions: TestOptions.RegularPreview,
                 references: references,
                 // init-only is unverifiable
-                verify: Verification.Skipped);
+                verify: Verification.Skipped
+            );
 
         [Fact]
         public void StructRecord1()
         {
-            var src = @"
+            var src =
+                @"
 record struct Point(int X, int Y);";
 
             var verifier = CompileAndVerify(src).VerifyDiagnostics();
-            verifier.VerifyIL("Point.Equals(object)", @"
+            verifier.VerifyIL(
+                "Point.Equals(object)",
+                @"
 {
   // Code size       23 (0x17)
   .maxstack  2
@@ -60,8 +67,11 @@ record struct Point(int X, int Y);";
   IL_0014:  ret
   IL_0015:  ldc.i4.0
   IL_0016:  ret
-}");
-            verifier.VerifyIL("Point.Equals(Point)", @"
+}"
+            );
+            verifier.VerifyIL(
+                "Point.Equals(Point)",
+                @"
 {
   // Code size       49 (0x31)
   .maxstack  3
@@ -81,13 +91,15 @@ record struct Point(int X, int Y);";
   IL_002e:  ret
   IL_002f:  ldc.i4.0
   IL_0030:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void StructRecord2()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 record struct S(int X, int Y)
 {
@@ -101,16 +113,21 @@ record struct S(int X, int Y)
         Console.WriteLine(s1.Equals(new S(1, 0)));
     }
 }";
-            var verifier = CompileAndVerify(src, expectedOutput: @"0
+            var verifier = CompileAndVerify(
+                    src,
+                    expectedOutput: @"0
 1
 True
-False").VerifyDiagnostics();
+False"
+                )
+                .VerifyDiagnostics();
         }
 
         [Fact]
         public void StructRecord3()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 record struct S(int X, int Y)
 {
@@ -125,9 +142,14 @@ record struct S(int X, int Y)
                 .VerifyDiagnostics(
                     // (5,17): warning CS8851: 'S' defines 'Equals' but not 'GetHashCode'
                     //     public bool Equals(S s) => false;
-                    Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals").WithArguments("S").WithLocation(5, 17));
+                    Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
+                        .WithArguments("S")
+                        .WithLocation(5, 17)
+                );
 
-            verifier.VerifyIL("S.Main", @"
+            verifier.VerifyIL(
+                "S.Main",
+                @"
 {
   // Code size       23 (0x17)
   .maxstack  3
@@ -141,13 +163,15 @@ record struct S(int X, int Y)
   IL_000c:  call       ""bool S.Equals(S)""
   IL_0011:  call       ""void System.Console.WriteLine(bool)""
   IL_0016:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void StructRecord5()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 record struct S(int X, int Y)
 {
@@ -167,16 +191,21 @@ record struct S(int X, int Y)
                 .VerifyDiagnostics(
                     // (5,17): warning CS8851: 'S' defines 'Equals' but not 'GetHashCode'
                     //     public bool Equals(S s)
-                    Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals").WithArguments("S").WithLocation(5, 17));
+                    Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
+                        .WithArguments("S")
+                        .WithLocation(5, 17)
+                );
         }
 
         [Fact]
         public void StructRecordDefaultCtor()
         {
-            const string src = @"
+            const string src =
+                @"
 public record struct S(int X);";
 
-            const string src2 = @"
+            const string src2 =
+                @"
 class C
 {
     public S M() => new S();
@@ -193,7 +222,7 @@ class C
         public void Equality_01()
         {
             var source =
-@"using static System.Console;
+                @"using static System.Console;
 record struct S;
 
 class Program
@@ -206,19 +235,32 @@ class Program
         WriteLine(((object)x).Equals(y));
     }
 }";
-            var comp = CreateCompilation(source, parseOptions: TestOptions.RegularPreview, options: TestOptions.ReleaseExe);
+            var comp = CreateCompilation(
+                source,
+                parseOptions: TestOptions.RegularPreview,
+                options: TestOptions.ReleaseExe
+            );
 
-            var verifier = CompileAndVerify(comp, expectedOutput: @"True
-True").VerifyDiagnostics();
+            var verifier = CompileAndVerify(
+                    comp,
+                    expectedOutput: @"True
+True"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("S.Equals(S)", @"
+            verifier.VerifyIL(
+                "S.Equals(S)",
+                @"
 {
   // Code size        2 (0x2)
   .maxstack  1
   IL_0000:  ldc.i4.1
   IL_0001:  ret
-}");
-            verifier.VerifyIL("S.Equals(object)", @"
+}"
+            );
+            verifier.VerifyIL(
+                "S.Equals(object)",
+                @"
 {
   // Code size       23 (0x17)
   .maxstack  2
@@ -232,23 +274,31 @@ True").VerifyDiagnostics();
   IL_0014:  ret
   IL_0015:  ldc.i4.0
   IL_0016:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void RecordStructLanguageVersion()
         {
-            var src1 = @"
+            var src1 =
+                @"
 struct Point(int x, int y);
 ";
-            var src2 = @"
+            var src2 =
+                @"
 record struct Point { }
 ";
-            var src3 = @"
+            var src3 =
+                @"
 record struct Point(int x, int y);
 ";
 
-            var comp = CreateCompilation(new[] { src1, IsExternalInitTypeDefinition }, parseOptions: TestOptions.Regular9, options: TestOptions.ReleaseDll);
+            var comp = CreateCompilation(
+                new[] { src1, IsExternalInitTypeDefinition },
+                parseOptions: TestOptions.Regular9,
+                options: TestOptions.ReleaseDll
+            );
             comp.VerifyDiagnostics(
                 // (2,13): error CS1514: { expected
                 // struct Point(int x, int y);
@@ -258,42 +308,66 @@ record struct Point(int x, int y);
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "(").WithLocation(2, 13),
                 // (2,13): error CS8803: Top-level statements must precede namespace and type declarations.
                 // struct Point(int x, int y);
-                Diagnostic(ErrorCode.ERR_TopLevelStatementAfterNamespaceOrType, "(int x, int y);").WithLocation(2, 13),
+                Diagnostic(ErrorCode.ERR_TopLevelStatementAfterNamespaceOrType, "(int x, int y);")
+                    .WithLocation(2, 13),
                 // (2,13): error CS8805: Program using top-level statements must be an executable.
                 // struct Point(int x, int y);
-                Diagnostic(ErrorCode.ERR_SimpleProgramNotAnExecutable, "(int x, int y);").WithLocation(2, 13),
+                Diagnostic(ErrorCode.ERR_SimpleProgramNotAnExecutable, "(int x, int y);")
+                    .WithLocation(2, 13),
                 // (2,13): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
                 // struct Point(int x, int y);
                 Diagnostic(ErrorCode.ERR_IllegalStatement, "(int x, int y)").WithLocation(2, 13),
                 // (2,14): error CS8185: A declaration is not allowed in this context.
                 // struct Point(int x, int y);
-                Diagnostic(ErrorCode.ERR_DeclarationExpressionNotPermitted, "int x").WithLocation(2, 14),
+                Diagnostic(ErrorCode.ERR_DeclarationExpressionNotPermitted, "int x")
+                    .WithLocation(2, 14),
                 // (2,14): error CS0165: Use of unassigned local variable 'x'
                 // struct Point(int x, int y);
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "int x").WithArguments("x").WithLocation(2, 14),
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "int x")
+                    .WithArguments("x")
+                    .WithLocation(2, 14),
                 // (2,21): error CS8185: A declaration is not allowed in this context.
                 // struct Point(int x, int y);
-                Diagnostic(ErrorCode.ERR_DeclarationExpressionNotPermitted, "int y").WithLocation(2, 21),
+                Diagnostic(ErrorCode.ERR_DeclarationExpressionNotPermitted, "int y")
+                    .WithLocation(2, 21),
                 // (2,21): error CS0165: Use of unassigned local variable 'y'
                 // struct Point(int x, int y);
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "int y").WithArguments("y").WithLocation(2, 21)
-                );
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "int y")
+                    .WithArguments("y")
+                    .WithLocation(2, 21)
+            );
 
-            comp = CreateCompilation(new[] { src2, IsExternalInitTypeDefinition }, parseOptions: TestOptions.Regular9, options: TestOptions.ReleaseDll);
+            comp = CreateCompilation(
+                new[] { src2, IsExternalInitTypeDefinition },
+                parseOptions: TestOptions.Regular9,
+                options: TestOptions.ReleaseDll
+            );
             comp.VerifyDiagnostics(
                 // (2,8): error CS8773: Feature 'record structs' is not available in C# 9.0. Please use language version 10.0 or greater.
                 // record struct Point { }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "struct").WithArguments("record structs", "10.0").WithLocation(2, 8)
-                );
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "struct")
+                    .WithArguments("record structs", "10.0")
+                    .WithLocation(2, 8)
+            );
 
-            comp = CreateCompilation(new[] { src3, IsExternalInitTypeDefinition }, parseOptions: TestOptions.Regular9, options: TestOptions.ReleaseDll);
+            comp = CreateCompilation(
+                new[] { src3, IsExternalInitTypeDefinition },
+                parseOptions: TestOptions.Regular9,
+                options: TestOptions.ReleaseDll
+            );
             comp.VerifyDiagnostics(
                 // (2,8): error CS8773: Feature 'record structs' is not available in C# 9.0. Please use language version 10.0 or greater.
                 // record struct Point { }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "struct").WithArguments("record structs", "10.0").WithLocation(2, 8)
-                );
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "struct")
+                    .WithArguments("record structs", "10.0")
+                    .WithLocation(2, 8)
+            );
 
-            comp = CreateCompilation(new[] { src1, IsExternalInitTypeDefinition }, parseOptions: TestOptions.Regular10, options: TestOptions.ReleaseDll);
+            comp = CreateCompilation(
+                new[] { src1, IsExternalInitTypeDefinition },
+                parseOptions: TestOptions.Regular10,
+                options: TestOptions.ReleaseDll
+            );
             comp.VerifyDiagnostics(
                 // (2,13): error CS1514: { expected
                 // struct Point(int x, int y);
@@ -303,56 +377,76 @@ record struct Point(int x, int y);
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "(").WithLocation(2, 13),
                 // (2,13): error CS8803: Top-level statements must precede namespace and type declarations.
                 // struct Point(int x, int y);
-                Diagnostic(ErrorCode.ERR_TopLevelStatementAfterNamespaceOrType, "(int x, int y);").WithLocation(2, 13),
+                Diagnostic(ErrorCode.ERR_TopLevelStatementAfterNamespaceOrType, "(int x, int y);")
+                    .WithLocation(2, 13),
                 // (2,13): error CS8805: Program using top-level statements must be an executable.
                 // struct Point(int x, int y);
-                Diagnostic(ErrorCode.ERR_SimpleProgramNotAnExecutable, "(int x, int y);").WithLocation(2, 13),
+                Diagnostic(ErrorCode.ERR_SimpleProgramNotAnExecutable, "(int x, int y);")
+                    .WithLocation(2, 13),
                 // (2,13): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
                 // struct Point(int x, int y);
                 Diagnostic(ErrorCode.ERR_IllegalStatement, "(int x, int y)").WithLocation(2, 13),
                 // (2,14): error CS8185: A declaration is not allowed in this context.
                 // struct Point(int x, int y);
-                Diagnostic(ErrorCode.ERR_DeclarationExpressionNotPermitted, "int x").WithLocation(2, 14),
+                Diagnostic(ErrorCode.ERR_DeclarationExpressionNotPermitted, "int x")
+                    .WithLocation(2, 14),
                 // (2,14): error CS0165: Use of unassigned local variable 'x'
                 // struct Point(int x, int y);
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "int x").WithArguments("x").WithLocation(2, 14),
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "int x")
+                    .WithArguments("x")
+                    .WithLocation(2, 14),
                 // (2,21): error CS8185: A declaration is not allowed in this context.
                 // struct Point(int x, int y);
-                Diagnostic(ErrorCode.ERR_DeclarationExpressionNotPermitted, "int y").WithLocation(2, 21),
+                Diagnostic(ErrorCode.ERR_DeclarationExpressionNotPermitted, "int y")
+                    .WithLocation(2, 21),
                 // (2,21): error CS0165: Use of unassigned local variable 'y'
                 // struct Point(int x, int y);
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "int y").WithArguments("y").WithLocation(2, 21)
-                );
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "int y")
+                    .WithArguments("y")
+                    .WithLocation(2, 21)
+            );
 
-            comp = CreateCompilation(new[] { src2, IsExternalInitTypeDefinition }, parseOptions: TestOptions.Regular10, options: TestOptions.ReleaseDll);
+            comp = CreateCompilation(
+                new[] { src2, IsExternalInitTypeDefinition },
+                parseOptions: TestOptions.Regular10,
+                options: TestOptions.ReleaseDll
+            );
             comp.VerifyDiagnostics();
 
-            comp = CreateCompilation(new[] { src3, IsExternalInitTypeDefinition }, parseOptions: TestOptions.Regular10, options: TestOptions.ReleaseDll);
+            comp = CreateCompilation(
+                new[] { src3, IsExternalInitTypeDefinition },
+                parseOptions: TestOptions.Regular10,
+                options: TestOptions.ReleaseDll
+            );
             comp.VerifyDiagnostics();
         }
 
         [Fact]
         public void RecordStructLanguageVersion_Nested()
         {
-            var src1 = @"
+            var src1 =
+                @"
 class C
 {
     struct Point(int x, int y);
 }
 ";
-            var src2 = @"
+            var src2 =
+                @"
 class D
 {
     record struct Point { }
 }
 ";
-            var src3 = @"
+            var src3 =
+                @"
 struct E
 {
     record struct Point(int x, int y);
 }
 ";
-            var src4 = @"
+            var src4 =
+                @"
 namespace NS
 {
     record struct Point { }
@@ -368,32 +462,48 @@ namespace NS
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "(").WithLocation(4, 17),
                 // (4,31): error CS1519: Invalid token ';' in class, record, struct, or interface member declaration
                 //     struct Point(int x, int y);
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, ";").WithArguments(";").WithLocation(4, 31),
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, ";")
+                    .WithArguments(";")
+                    .WithLocation(4, 31),
                 // (4,31): error CS1519: Invalid token ';' in class, record, struct, or interface member declaration
                 //     struct Point(int x, int y);
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, ";").WithArguments(";").WithLocation(4, 31)
-                );
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, ";")
+                    .WithArguments(";")
+                    .WithLocation(4, 31)
+            );
 
-            comp = CreateCompilation(new[] { src2, IsExternalInitTypeDefinition }, parseOptions: TestOptions.Regular9);
+            comp = CreateCompilation(
+                new[] { src2, IsExternalInitTypeDefinition },
+                parseOptions: TestOptions.Regular9
+            );
             comp.VerifyDiagnostics(
                 // (4,12): error CS8773: Feature 'record structs' is not available in C# 9.0. Please use language version 10.0 or greater.
                 //     record struct Point { }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "struct").WithArguments("record structs", "10.0").WithLocation(4, 12)
-                );
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "struct")
+                    .WithArguments("record structs", "10.0")
+                    .WithLocation(4, 12)
+            );
 
-            comp = CreateCompilation(new[] { src3, IsExternalInitTypeDefinition }, parseOptions: TestOptions.Regular9);
+            comp = CreateCompilation(
+                new[] { src3, IsExternalInitTypeDefinition },
+                parseOptions: TestOptions.Regular9
+            );
             comp.VerifyDiagnostics(
                 // (4,12): error CS8773: Feature 'record structs' is not available in C# 9.0. Please use language version 10.0 or greater.
                 //     record struct Point(int x, int y);
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "struct").WithArguments("record structs", "10.0").WithLocation(4, 12)
-                );
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "struct")
+                    .WithArguments("record structs", "10.0")
+                    .WithLocation(4, 12)
+            );
 
             comp = CreateCompilation(src4, parseOptions: TestOptions.Regular9);
             comp.VerifyDiagnostics(
                 // (4,12): error CS8773: Feature 'record structs' is not available in C# 9.0. Please use language version 10.0 or greater.
                 //     record struct Point { }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "struct").WithArguments("record structs", "10.0").WithLocation(4, 12)
-                );
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "struct")
+                    .WithArguments("record structs", "10.0")
+                    .WithLocation(4, 12)
+            );
 
             comp = CreateCompilation(src1);
             comp.VerifyDiagnostics(
@@ -405,11 +515,15 @@ namespace NS
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "(").WithLocation(4, 17),
                 // (4,31): error CS1519: Invalid token ';' in class, record, struct, or interface member declaration
                 //     struct Point(int x, int y);
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, ";").WithArguments(";").WithLocation(4, 31),
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, ";")
+                    .WithArguments(";")
+                    .WithLocation(4, 31),
                 // (4,31): error CS1519: Invalid token ';' in class, record, struct, or interface member declaration
                 //     struct Point(int x, int y);
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, ";").WithArguments(";").WithLocation(4, 31)
-                );
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, ";")
+                    .WithArguments(";")
+                    .WithLocation(4, 31)
+            );
 
             comp = CreateCompilation(src2);
             comp.VerifyDiagnostics();
@@ -424,13 +538,18 @@ namespace NS
         [Fact]
         public void TypeDeclaration_IsStruct()
         {
-            var src = @"
+            var src =
+                @"
 record struct Point(int x, int y);
 ";
             var comp = CreateCompilation(src);
             comp.VerifyDiagnostics();
 
-            CompileAndVerify(comp, symbolValidator: validateModule, sourceSymbolValidator: validateModule);
+            CompileAndVerify(
+                comp,
+                symbolValidator: validateModule,
+                sourceSymbolValidator: validateModule
+            );
             Assert.True(SyntaxFacts.IsTypeDeclaration(SyntaxKind.RecordStructDeclaration));
 
             static void validateModule(ModuleSymbol module)
@@ -442,7 +561,10 @@ record struct Point(int x, int y);
                 Assert.False(point.IsReferenceType);
                 Assert.False(point.IsRecord);
                 Assert.Equal(TypeKind.Struct, point.TypeKind);
-                Assert.Equal(SpecialType.System_ValueType, point.BaseTypeNoUseSiteDiagnostics.SpecialType);
+                Assert.Equal(
+                    SpecialType.System_ValueType,
+                    point.BaseTypeNoUseSiteDiagnostics.SpecialType
+                );
                 Assert.Equal("Point", point.ToTestDisplayString());
 
                 if (isSourceSymbol)
@@ -450,14 +572,28 @@ record struct Point(int x, int y);
                     Assert.True(point is SourceNamedTypeSymbol);
                     Assert.True(point.IsRecordStruct);
                     Assert.True(point.GetPublicSymbol().IsRecord);
-                    Assert.Equal("record struct Point", point.ToDisplayString(SymbolDisplayFormat.TestFormat.AddKindOptions(SymbolDisplayKindOptions.IncludeTypeKeyword)));
+                    Assert.Equal(
+                        "record struct Point",
+                        point.ToDisplayString(
+                            SymbolDisplayFormat.TestFormat.AddKindOptions(
+                                SymbolDisplayKindOptions.IncludeTypeKeyword
+                            )
+                        )
+                    );
                 }
                 else
                 {
                     Assert.True(point is PENamedTypeSymbol);
                     Assert.False(point.IsRecordStruct);
                     Assert.False(point.GetPublicSymbol().IsRecord);
-                    Assert.Equal("struct Point", point.ToDisplayString(SymbolDisplayFormat.TestFormat.AddKindOptions(SymbolDisplayKindOptions.IncludeTypeKeyword)));
+                    Assert.Equal(
+                        "struct Point",
+                        point.ToDisplayString(
+                            SymbolDisplayFormat.TestFormat.AddKindOptions(
+                                SymbolDisplayKindOptions.IncludeTypeKeyword
+                            )
+                        )
+                    );
                 }
             }
         }
@@ -465,7 +601,8 @@ record struct Point(int x, int y);
         [Fact]
         public void TypeDeclaration_IsStruct_InConstraints()
         {
-            var src = @"
+            var src =
+                @"
 record struct Point(int x, int y);
 
 class C<T> where T : struct
@@ -487,14 +624,17 @@ class C3<T> where T : class
             comp.VerifyDiagnostics(
                 // (16,22): error CS0452: The type 'Point' must be a reference type in order to use it as parameter 'T' in the generic type or method 'C3<T>'
                 //     void M(C3<Point> c) { } // 1
-                Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "c").WithArguments("C3<T>", "T", "Point").WithLocation(16, 22)
-                );
+                Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "c")
+                    .WithArguments("C3<T>", "T", "Point")
+                    .WithLocation(16, 22)
+            );
         }
 
         [Fact]
         public void TypeDeclaration_IsStruct_Unmanaged()
         {
-            var src = @"
+            var src =
+                @"
 record struct Point(int x, int y);
 record struct Point2(string x, string y);
 
@@ -508,20 +648,27 @@ class C<T> where T : unmanaged
             comp.VerifyDiagnostics(
                 // (8,23): error CS8377: The type 'Point2' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'C<T>'
                 //     void M2(C<Point2> c) { } // 1
-                Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "c").WithArguments("C<T>", "T", "Point2").WithLocation(8, 23)
-                );
+                Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "c")
+                    .WithArguments("C<T>", "T", "Point2")
+                    .WithLocation(8, 23)
+            );
         }
 
         [Fact]
         public void IsRecord_Generic()
         {
-            var src = @"
+            var src =
+                @"
 record struct Point<T>(T x, T y);
 ";
             var comp = CreateCompilation(src);
             comp.VerifyDiagnostics();
 
-            CompileAndVerify(comp, symbolValidator: validateModule, sourceSymbolValidator: validateModule);
+            CompileAndVerify(
+                comp,
+                symbolValidator: validateModule,
+                sourceSymbolValidator: validateModule
+            );
 
             static void validateModule(ModuleSymbol module)
             {
@@ -532,7 +679,10 @@ record struct Point<T>(T x, T y);
                 Assert.False(point.IsReferenceType);
                 Assert.False(point.IsRecord);
                 Assert.Equal(TypeKind.Struct, point.TypeKind);
-                Assert.Equal(SpecialType.System_ValueType, point.BaseTypeNoUseSiteDiagnostics.SpecialType);
+                Assert.Equal(
+                    SpecialType.System_ValueType,
+                    point.BaseTypeNoUseSiteDiagnostics.SpecialType
+                );
                 Assert.True(SyntaxFacts.IsTypeDeclaration(SyntaxKind.RecordStructDeclaration));
 
                 if (isSourceSymbol)
@@ -553,11 +703,16 @@ record struct Point<T>(T x, T y);
         [Fact]
         public void IsRecord_Retargeting()
         {
-            var src = @"
+            var src =
+                @"
 public record struct Point(int x, int y);
 ";
             var comp = CreateCompilation(src, targetFramework: TargetFramework.Mscorlib40);
-            var comp2 = CreateCompilation("", targetFramework: TargetFramework.Mscorlib46, references: new[] { comp.ToMetadataReference() });
+            var comp2 = CreateCompilation(
+                "",
+                targetFramework: TargetFramework.Mscorlib46,
+                references: new[] { comp.ToMetadataReference() }
+            );
             var point = comp2.GlobalNamespace.GetTypeMember("Point");
 
             Assert.Equal("Point", point.ToTestDisplayString());
@@ -569,7 +724,8 @@ public record struct Point(int x, int y);
         [Fact]
         public void IsRecord_AnonymousType()
         {
-            var src = @"
+            var src =
+                @"
 class C
 {
     void M()
@@ -581,18 +737,24 @@ class C
             var comp = CreateCompilation(src);
             var tree = comp.SyntaxTrees.First();
             var model = comp.GetSemanticModel(tree, ignoreAccessibility: false);
-            var creation = tree.GetRoot().DescendantNodes().OfType<AnonymousObjectCreationExpressionSyntax>().Single();
+            var creation = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<AnonymousObjectCreationExpressionSyntax>()
+                .Single();
             var type = model.GetTypeInfo(creation).Type!;
 
             Assert.Equal("<anonymous type: System.Int32 X>", type.ToTestDisplayString());
-            Assert.IsType<AnonymousTypeManager.AnonymousTypePublicSymbol>(((Symbols.PublicModel.NonErrorNamedTypeSymbol)type).UnderlyingNamedTypeSymbol);
+            Assert.IsType<AnonymousTypeManager.AnonymousTypePublicSymbol>(
+                ((Symbols.PublicModel.NonErrorNamedTypeSymbol)type).UnderlyingNamedTypeSymbol
+            );
             Assert.False(type.IsRecord);
         }
 
         [Fact]
         public void IsRecord_ErrorType()
         {
-            var src = @"
+            var src =
+                @"
 class C
 {
     Error M() => throw null;
@@ -601,18 +763,24 @@ class C
             var comp = CreateCompilation(src);
             var tree = comp.SyntaxTrees.First();
             var model = comp.GetSemanticModel(tree, ignoreAccessibility: false);
-            var method = tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single();
+            var method = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<MethodDeclarationSyntax>()
+                .Single();
             var type = model.GetDeclaredSymbol(method)!.ReturnType;
 
             Assert.Equal("Error", type.ToTestDisplayString());
-            Assert.IsType<ExtendedErrorTypeSymbol>(((Symbols.PublicModel.ErrorTypeSymbol)type).UnderlyingNamedTypeSymbol);
+            Assert.IsType<ExtendedErrorTypeSymbol>(
+                ((Symbols.PublicModel.ErrorTypeSymbol)type).UnderlyingNamedTypeSymbol
+            );
             Assert.False(type.IsRecord);
         }
 
         [Fact]
         public void IsRecord_Pointer()
         {
-            var src = @"
+            var src =
+                @"
 class C
 {
     int* M() => throw null;
@@ -621,18 +789,24 @@ class C
             var comp = CreateCompilation(src, options: TestOptions.UnsafeReleaseDll);
             var tree = comp.SyntaxTrees.First();
             var model = comp.GetSemanticModel(tree, ignoreAccessibility: false);
-            var method = tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single();
+            var method = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<MethodDeclarationSyntax>()
+                .Single();
             var type = model.GetDeclaredSymbol(method)!.ReturnType;
 
             Assert.Equal("System.Int32*", type.ToTestDisplayString());
-            Assert.IsType<PointerTypeSymbol>(((Symbols.PublicModel.PointerTypeSymbol)type).UnderlyingTypeSymbol);
+            Assert.IsType<PointerTypeSymbol>(
+                ((Symbols.PublicModel.PointerTypeSymbol)type).UnderlyingTypeSymbol
+            );
             Assert.False(type.IsRecord);
         }
 
         [Fact]
         public void IsRecord_Dynamic()
         {
-            var src = @"
+            var src =
+                @"
 class C
 {
     void M(dynamic d)
@@ -643,18 +817,24 @@ class C
             var comp = CreateCompilation(src);
             var tree = comp.SyntaxTrees.First();
             var model = comp.GetSemanticModel(tree, ignoreAccessibility: false);
-            var method = tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single();
+            var method = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<MethodDeclarationSyntax>()
+                .Single();
             var type = model.GetDeclaredSymbol(method)!.GetParameterType(0);
 
             Assert.Equal("dynamic", type.ToTestDisplayString());
-            Assert.IsType<DynamicTypeSymbol>(((Symbols.PublicModel.DynamicTypeSymbol)type).UnderlyingTypeSymbol);
+            Assert.IsType<DynamicTypeSymbol>(
+                ((Symbols.PublicModel.DynamicTypeSymbol)type).UnderlyingTypeSymbol
+            );
             Assert.False(type.IsRecord);
         }
 
         [Fact]
         public void TypeDeclaration_MayNotHaveBaseType()
         {
-            var src = @"
+            var src =
+                @"
 record struct Point(int x, int y) : object;
 record struct Point2(int x, int y) : System.ValueType;
 ";
@@ -663,17 +843,22 @@ record struct Point2(int x, int y) : System.ValueType;
             comp.VerifyDiagnostics(
                 // (2,37): error CS0527: Type 'object' in interface list is not an interface
                 // record struct Point(int x, int y) : object;
-                Diagnostic(ErrorCode.ERR_NonInterfaceInInterfaceList, "object").WithArguments("object").WithLocation(2, 37),
+                Diagnostic(ErrorCode.ERR_NonInterfaceInInterfaceList, "object")
+                    .WithArguments("object")
+                    .WithLocation(2, 37),
                 // (3,38): error CS0527: Type 'ValueType' in interface list is not an interface
                 // record struct Point2(int x, int y) : System.ValueType;
-                Diagnostic(ErrorCode.ERR_NonInterfaceInInterfaceList, "System.ValueType").WithArguments("System.ValueType").WithLocation(3, 38)
-                );
+                Diagnostic(ErrorCode.ERR_NonInterfaceInInterfaceList, "System.ValueType")
+                    .WithArguments("System.ValueType")
+                    .WithLocation(3, 38)
+            );
         }
 
         [Fact]
         public void TypeDeclaration_MayNotHaveTypeConstraintsWithoutTypeParameters()
         {
-            var src = @"
+            var src =
+                @"
 record struct Point(int x, int y) where T : struct;
 ";
 
@@ -681,14 +866,16 @@ record struct Point(int x, int y) where T : struct;
             comp.VerifyDiagnostics(
                 // (2,35): error CS0080: Constraints are not allowed on non-generic declarations
                 // record struct Point(int x, int y) where T : struct;
-                Diagnostic(ErrorCode.ERR_ConstraintOnlyAllowedOnGenericDecl, "where").WithLocation(2, 35)
-                );
+                Diagnostic(ErrorCode.ERR_ConstraintOnlyAllowedOnGenericDecl, "where")
+                    .WithLocation(2, 35)
+            );
         }
 
         [Fact]
         public void TypeDeclaration_AllowedModifiers()
         {
-            var src = @"
+            var src =
+                @"
 readonly partial record struct S1;
 public record struct S2;
 internal record struct S3;
@@ -706,19 +893,39 @@ public class C : Base
 unsafe record struct S7;
 ";
 
-            var comp = CreateCompilation(src, parseOptions: TestOptions.RegularPreview, options: TestOptions.UnsafeDebugDll);
+            var comp = CreateCompilation(
+                src,
+                parseOptions: TestOptions.RegularPreview,
+                options: TestOptions.UnsafeDebugDll
+            );
             comp.VerifyDiagnostics();
-            Assert.Equal(Accessibility.Internal, comp.GlobalNamespace.GetTypeMember("S1").DeclaredAccessibility);
-            Assert.Equal(Accessibility.Public, comp.GlobalNamespace.GetTypeMember("S2").DeclaredAccessibility);
-            Assert.Equal(Accessibility.Internal, comp.GlobalNamespace.GetTypeMember("S3").DeclaredAccessibility);
-            Assert.Equal(Accessibility.ProtectedAndInternal, comp.GlobalNamespace.GetTypeMember("C").GetTypeMember("S4").DeclaredAccessibility);
-            Assert.Equal(Accessibility.ProtectedOrInternal, comp.GlobalNamespace.GetTypeMember("C").GetTypeMember("S5").DeclaredAccessibility);
+            Assert.Equal(
+                Accessibility.Internal,
+                comp.GlobalNamespace.GetTypeMember("S1").DeclaredAccessibility
+            );
+            Assert.Equal(
+                Accessibility.Public,
+                comp.GlobalNamespace.GetTypeMember("S2").DeclaredAccessibility
+            );
+            Assert.Equal(
+                Accessibility.Internal,
+                comp.GlobalNamespace.GetTypeMember("S3").DeclaredAccessibility
+            );
+            Assert.Equal(
+                Accessibility.ProtectedAndInternal,
+                comp.GlobalNamespace.GetTypeMember("C").GetTypeMember("S4").DeclaredAccessibility
+            );
+            Assert.Equal(
+                Accessibility.ProtectedOrInternal,
+                comp.GlobalNamespace.GetTypeMember("C").GetTypeMember("S5").DeclaredAccessibility
+            );
         }
 
         [Fact]
         public void TypeDeclaration_DisallowedModifiers()
         {
-            var src = @"
+            var src =
+                @"
 abstract record struct S1;
 volatile record struct S2;
 extern record struct S3;
@@ -735,41 +942,60 @@ sealed record struct S10;
             comp.VerifyDiagnostics(
                 // (2,24): error CS0106: The modifier 'abstract' is not valid for this item
                 // abstract record struct S1;
-                Diagnostic(ErrorCode.ERR_BadMemberFlag, "S1").WithArguments("abstract").WithLocation(2, 24),
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "S1")
+                    .WithArguments("abstract")
+                    .WithLocation(2, 24),
                 // (3,24): error CS0106: The modifier 'volatile' is not valid for this item
                 // volatile record struct S2;
-                Diagnostic(ErrorCode.ERR_BadMemberFlag, "S2").WithArguments("volatile").WithLocation(3, 24),
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "S2")
+                    .WithArguments("volatile")
+                    .WithLocation(3, 24),
                 // (4,22): error CS0106: The modifier 'extern' is not valid for this item
                 // extern record struct S3;
-                Diagnostic(ErrorCode.ERR_BadMemberFlag, "S3").WithArguments("extern").WithLocation(4, 22),
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "S3")
+                    .WithArguments("extern")
+                    .WithLocation(4, 22),
                 // (5,23): error CS0106: The modifier 'virtual' is not valid for this item
                 // virtual record struct S4;
-                Diagnostic(ErrorCode.ERR_BadMemberFlag, "S4").WithArguments("virtual").WithLocation(5, 23),
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "S4")
+                    .WithArguments("virtual")
+                    .WithLocation(5, 23),
                 // (6,24): error CS0106: The modifier 'override' is not valid for this item
                 // override record struct S5;
-                Diagnostic(ErrorCode.ERR_BadMemberFlag, "S5").WithArguments("override").WithLocation(6, 24),
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "S5")
+                    .WithArguments("override")
+                    .WithLocation(6, 24),
                 // (7,21): error CS0106: The modifier 'async' is not valid for this item
                 // async record struct S6;
-                Diagnostic(ErrorCode.ERR_BadMemberFlag, "S6").WithArguments("async").WithLocation(7, 21),
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "S6")
+                    .WithArguments("async")
+                    .WithLocation(7, 21),
                 // (8,19): error CS0106: The modifier 'ref' is not valid for this item
                 // ref record struct S7;
-                Diagnostic(ErrorCode.ERR_BadMemberFlag, "S7").WithArguments("ref").WithLocation(8, 19),
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "S7")
+                    .WithArguments("ref")
+                    .WithLocation(8, 19),
                 // (9,22): error CS0227: Unsafe code may only appear if compiling with /unsafe
                 // unsafe record struct S8;
                 Diagnostic(ErrorCode.ERR_IllegalUnsafe, "S8").WithLocation(9, 22),
                 // (10,22): error CS0106: The modifier 'static' is not valid for this item
                 // static record struct S9;
-                Diagnostic(ErrorCode.ERR_BadMemberFlag, "S9").WithArguments("static").WithLocation(10, 22),
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "S9")
+                    .WithArguments("static")
+                    .WithLocation(10, 22),
                 // (11,22): error CS0106: The modifier 'sealed' is not valid for this item
                 // sealed record struct S10;
-                Diagnostic(ErrorCode.ERR_BadMemberFlag, "S10").WithArguments("sealed").WithLocation(11, 22)
-                );
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "S10")
+                    .WithArguments("sealed")
+                    .WithLocation(11, 22)
+            );
         }
 
         [Fact]
         public void TypeDeclaration_DuplicatesModifiers()
         {
-            var src = @"
+            var src =
+                @"
 public public record struct S2;
 ";
 
@@ -777,14 +1003,17 @@ public public record struct S2;
             comp.VerifyDiagnostics(
                 // (2,8): error CS1004: Duplicate 'public' modifier
                 // public public record struct S2;
-                Diagnostic(ErrorCode.ERR_DuplicateModifier, "public").WithArguments("public").WithLocation(2, 8)
-                );
+                Diagnostic(ErrorCode.ERR_DuplicateModifier, "public")
+                    .WithArguments("public")
+                    .WithLocation(2, 8)
+            );
         }
 
         [Fact]
         public void TypeDeclaration_BeforeTopLevelStatement()
         {
-            var src = @"
+            var src =
+                @"
 record struct S;
 System.Console.WriteLine();
 ";
@@ -793,14 +1022,19 @@ System.Console.WriteLine();
             comp.VerifyDiagnostics(
                 // (3,1): error CS8803: Top-level statements must precede namespace and type declarations.
                 // System.Console.WriteLine();
-                Diagnostic(ErrorCode.ERR_TopLevelStatementAfterNamespaceOrType, "System.Console.WriteLine();").WithLocation(3, 1)
-                );
+                Diagnostic(
+                        ErrorCode.ERR_TopLevelStatementAfterNamespaceOrType,
+                        "System.Console.WriteLine();"
+                    )
+                    .WithLocation(3, 1)
+            );
         }
 
         [Fact]
         public void TypeDeclaration_WithTypeParameters()
         {
-            var src = @"
+            var src =
+                @"
 S<string> local = default;
 local.ToString();
 
@@ -809,13 +1043,17 @@ record struct S<T>;
 
             var comp = CreateCompilation(src);
             comp.VerifyDiagnostics();
-            Assert.Equal(new[] { "T" }, comp.GlobalNamespace.GetTypeMember("S").TypeParameters.ToTestDisplayStrings());
+            Assert.Equal(
+                new[] { "T" },
+                comp.GlobalNamespace.GetTypeMember("S").TypeParameters.ToTestDisplayStrings()
+            );
         }
 
         [Fact]
         public void TypeDeclaration_AllowedModifiersForMembers()
         {
-            var src = @"
+            var src =
+                @"
 record struct S
 {
     protected int Property { get; set; } // 1
@@ -828,26 +1066,37 @@ record struct S
             comp.VerifyDiagnostics(
                 // (4,19): error CS0666: 'S.Property': new protected member declared in struct
                 //     protected int Property { get; set; } // 1
-                Diagnostic(ErrorCode.ERR_ProtectedInStruct, "Property").WithArguments("S.Property").WithLocation(4, 19),
+                Diagnostic(ErrorCode.ERR_ProtectedInStruct, "Property")
+                    .WithArguments("S.Property")
+                    .WithLocation(4, 19),
                 // (5,31): error CS0666: 'S.field': new protected member declared in struct
                 //     internal protected string field; // 2, 3
-                Diagnostic(ErrorCode.ERR_ProtectedInStruct, "field").WithArguments("S.field").WithLocation(5, 31),
+                Diagnostic(ErrorCode.ERR_ProtectedInStruct, "field")
+                    .WithArguments("S.field")
+                    .WithLocation(5, 31),
                 // (5,31): warning CS0649: Field 'S.field' is never assigned to, and will always have its default value null
                 //     internal protected string field; // 2, 3
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "field").WithArguments("S.field", "null").WithLocation(5, 31),
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "field")
+                    .WithArguments("S.field", "null")
+                    .WithLocation(5, 31),
                 // (6,19): error CS0621: 'S.M()': virtual or abstract members cannot be private
                 //     abstract void M(); // 4
-                Diagnostic(ErrorCode.ERR_VirtualPrivate, "M").WithArguments("S.M()").WithLocation(6, 19),
+                Diagnostic(ErrorCode.ERR_VirtualPrivate, "M")
+                    .WithArguments("S.M()")
+                    .WithLocation(6, 19),
                 // (7,18): error CS0621: 'S.M2()': virtual or abstract members cannot be private
                 //     virtual void M2() { } // 5
-                Diagnostic(ErrorCode.ERR_VirtualPrivate, "M2").WithArguments("S.M2()").WithLocation(7, 18)
-                );
+                Diagnostic(ErrorCode.ERR_VirtualPrivate, "M2")
+                    .WithArguments("S.M2()")
+                    .WithLocation(7, 18)
+            );
         }
 
         [Fact]
         public void TypeDeclaration_ImplementInterface()
         {
-            var src = @"
+            var src =
+                @"
 I i = (I)default(S);
 System.Console.Write(i.M(""four""));
 
@@ -875,23 +1124,28 @@ public record struct S2 : I
 
             CompileAndVerify(comp, expectedOutput: "45");
 
-            AssertEx.Equal(new[] {
-                "System.Int32 S.M(System.String s)",
-                "readonly System.String S.ToString()",
-                "readonly System.Boolean S.PrintMembers(System.Text.StringBuilder builder)",
-                "System.Boolean S.op_Inequality(S left, S right)",
-                "System.Boolean S.op_Equality(S left, S right)",
-                "readonly System.Int32 S.GetHashCode()",
-                "readonly System.Boolean S.Equals(System.Object obj)",
-                "readonly System.Boolean S.Equals(S other)",
-                "S..ctor()" },
-                comp.GetMember<NamedTypeSymbol>("S").GetMembers().ToTestDisplayStrings());
+            AssertEx.Equal(
+                new[]
+                {
+                    "System.Int32 S.M(System.String s)",
+                    "readonly System.String S.ToString()",
+                    "readonly System.Boolean S.PrintMembers(System.Text.StringBuilder builder)",
+                    "System.Boolean S.op_Inequality(S left, S right)",
+                    "System.Boolean S.op_Equality(S left, S right)",
+                    "readonly System.Int32 S.GetHashCode()",
+                    "readonly System.Boolean S.Equals(System.Object obj)",
+                    "readonly System.Boolean S.Equals(S other)",
+                    "S..ctor()"
+                },
+                comp.GetMember<NamedTypeSymbol>("S").GetMembers().ToTestDisplayStrings()
+            );
         }
 
         [Fact]
         public void TypeDeclaration_SatisfiesStructConstraint()
         {
-            var src = @"
+            var src =
+                @"
 S s = default;
 System.Console.Write(M(s));
 
@@ -917,7 +1171,8 @@ public record struct S : I
         [Fact]
         public void TypeDeclaration_AccessingThis()
         {
-            var src = @"
+            var src =
+                @"
 S s = new S();
 System.Console.Write(s.M());
 
@@ -934,7 +1189,9 @@ public record struct S
             comp.VerifyDiagnostics();
 
             var verifier = CompileAndVerify(comp, expectedOutput: "42");
-            verifier.VerifyIL("S.M", @"
+            verifier.VerifyIL(
+                "S.M",
+                @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -942,13 +1199,15 @@ public record struct S
   IL_0001:  call       ""int S.Property.get""
   IL_0006:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void TypeDeclaration_NoBaseInitializer()
         {
-            var src = @"
+            var src =
+                @"
 public record struct S
 {
     public S(int i) : base() { }
@@ -958,15 +1217,17 @@ public record struct S
             comp.VerifyDiagnostics(
                 // (4,12): error CS0522: 'S': structs cannot call base class constructors
                 //     public S(int i) : base() { }
-                Diagnostic(ErrorCode.ERR_StructWithBaseConstructorCall, "S").WithArguments("S").WithLocation(4, 12)
-                );
+                Diagnostic(ErrorCode.ERR_StructWithBaseConstructorCall, "S")
+                    .WithArguments("S")
+                    .WithLocation(4, 12)
+            );
         }
 
         [Fact]
         public void TypeDeclaration_ParameterlessConstructor_01()
         {
             var src =
-@"record struct S0();
+                @"record struct S0();
 record struct S1;
 record struct S2
 {
@@ -977,38 +1238,51 @@ record struct S2
             comp.VerifyDiagnostics(
                 // (1,8): error CS8773: Feature 'record structs' is not available in C# 9.0. Please use language version 10.0 or greater.
                 // record struct S0();
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "struct").WithArguments("record structs", "10.0").WithLocation(1, 8),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "struct")
+                    .WithArguments("record structs", "10.0")
+                    .WithLocation(1, 8),
                 // (2,8): error CS8773: Feature 'record structs' is not available in C# 9.0. Please use language version 10.0 or greater.
                 // record struct S1;
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "struct").WithArguments("record structs", "10.0").WithLocation(2, 8),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "struct")
+                    .WithArguments("record structs", "10.0")
+                    .WithLocation(2, 8),
                 // (3,8): error CS8773: Feature 'record structs' is not available in C# 9.0. Please use language version 10.0 or greater.
                 // record struct S2
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "struct").WithArguments("record structs", "10.0").WithLocation(3, 8),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "struct")
+                    .WithArguments("record structs", "10.0")
+                    .WithLocation(3, 8),
                 // (5,12): error CS8773: Feature 'parameterless struct constructors' is not available in C# 9.0. Please use language version 10.0 or greater.
                 //     public S2() { }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "S2").WithArguments("parameterless struct constructors", "10.0").WithLocation(5, 12));
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "S2")
+                    .WithArguments("parameterless struct constructors", "10.0")
+                    .WithLocation(5, 12)
+            );
 
             var verifier = CompileAndVerify(src);
-            verifier.VerifyIL("S0..ctor()",
-@"{
+            verifier.VerifyIL(
+                "S0..ctor()",
+                @"{
   // Code size        1 (0x1)
   .maxstack  0
   IL_0000:  ret
-}");
+}"
+            );
             verifier.VerifyMissing("S1..ctor()");
-            verifier.VerifyIL("S2..ctor()",
-@"{
+            verifier.VerifyIL(
+                "S2..ctor()",
+                @"{
   // Code size        1 (0x1)
   .maxstack  0
   IL_0000:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void TypeDeclaration_ParameterlessConstructor_02()
         {
             var src =
-@"record struct S1
+                @"record struct S1
 {
     S1() { }
 }
@@ -1021,37 +1295,52 @@ record struct S2
             comp.VerifyDiagnostics(
                 // (1,8): error CS8773: Feature 'record structs' is not available in C# 9.0. Please use language version 10.0 or greater.
                 // record struct S1
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "struct").WithArguments("record structs", "10.0").WithLocation(1, 8),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "struct")
+                    .WithArguments("record structs", "10.0")
+                    .WithLocation(1, 8),
                 // (3,5): error CS8773: Feature 'parameterless struct constructors' is not available in C# 9.0. Please use language version 10.0 or greater.
                 //     S1() { }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "S1").WithArguments("parameterless struct constructors", "10.0").WithLocation(3, 5),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "S1")
+                    .WithArguments("parameterless struct constructors", "10.0")
+                    .WithLocation(3, 5),
                 // (3,5): error CS8938: The parameterless struct constructor must be 'public'.
                 //     S1() { }
-                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "S1").WithLocation(3, 5),
+                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "S1")
+                    .WithLocation(3, 5),
                 // (5,8): error CS8773: Feature 'record structs' is not available in C# 9.0. Please use language version 10.0 or greater.
                 // record struct S2
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "struct").WithArguments("record structs", "10.0").WithLocation(5, 8),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "struct")
+                    .WithArguments("record structs", "10.0")
+                    .WithLocation(5, 8),
                 // (7,14): error CS8773: Feature 'parameterless struct constructors' is not available in C# 9.0. Please use language version 10.0 or greater.
                 //     internal S2() { }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "S2").WithArguments("parameterless struct constructors", "10.0").WithLocation(7, 14),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "S2")
+                    .WithArguments("parameterless struct constructors", "10.0")
+                    .WithLocation(7, 14),
                 // (7,14): error CS8938: The parameterless struct constructor must be 'public'.
                 //     internal S2() { }
-                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "S2").WithLocation(7, 14));
+                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "S2")
+                    .WithLocation(7, 14)
+            );
 
             comp = CreateCompilation(src);
             comp.VerifyDiagnostics(
                 // (3,5): error CS8918: The parameterless struct constructor must be 'public'.
                 //     S1() { }
-                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "S1").WithLocation(3, 5),
+                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "S1")
+                    .WithLocation(3, 5),
                 // (7,14): error CS8918: The parameterless struct constructor must be 'public'.
                 //     internal S2() { }
-                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "S2").WithLocation(7, 14));
+                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "S2")
+                    .WithLocation(7, 14)
+            );
         }
 
         [Fact]
         public void TypeDeclaration_ParameterlessConstructor_OtherConstructors()
         {
-            var src = @"
+            var src =
+                @"
 record struct S1
 {
     public S1() { }
@@ -1082,17 +1371,20 @@ record struct S6(object o)
             comp.VerifyDiagnostics(
                 // (13,5): error CS8862: A constructor declared in a record with parameter list must have 'this' constructor initializer.
                 //     S3(object o) { } // 1
-                Diagnostic(ErrorCode.ERR_UnexpectedOrMissingConstructorInitializerInRecord, "S3").WithLocation(13, 5),
+                Diagnostic(ErrorCode.ERR_UnexpectedOrMissingConstructorInitializerInRecord, "S3")
+                    .WithLocation(13, 5),
                 // (21,12): error CS8862: A constructor declared in a record with parameter list must have 'this' constructor initializer.
                 //     public S5() { } // 2
-                Diagnostic(ErrorCode.ERR_UnexpectedOrMissingConstructorInitializerInRecord, "S5").WithLocation(21, 12)
-                );
+                Diagnostic(ErrorCode.ERR_UnexpectedOrMissingConstructorInitializerInRecord, "S5")
+                    .WithLocation(21, 12)
+            );
         }
 
         [Fact]
         public void TypeDeclaration_ParameterlessConstructor_Initializers()
         {
-            var src = @"
+            var src =
+                @"
 var s1 = new S1();
 var s2 = new S2(null);
 var s2b = new S2();
@@ -1135,13 +1427,17 @@ record struct S6(string other)
 ";
             var comp = CreateCompilation(src);
             comp.VerifyDiagnostics();
-            CompileAndVerify(comp, expectedOutput: "(s1, s2, True, s3, s4, s5, s6.field, s6.other)");
+            CompileAndVerify(
+                comp,
+                expectedOutput: "(s1, s2, True, s3, s4, s5, s6.field, s6.other)"
+            );
         }
 
         [Fact]
         public void TypeDeclaration_InstanceInitializers()
         {
-            var src = @"
+            var src =
+                @"
 public record struct S
 {
     public int field = 42;
@@ -1153,13 +1449,20 @@ public record struct S
             comp.VerifyDiagnostics(
                 // (2,15): error CS8773: Feature 'record structs' is not available in C# 9.0. Please use language version 10.0 or greater.
                 // public record struct S
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "struct").WithArguments("record structs", "10.0").WithLocation(2, 15),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "struct")
+                    .WithArguments("record structs", "10.0")
+                    .WithLocation(2, 15),
                 // (4,16): error CS8773: Feature 'struct field initializers' is not available in C# 9.0. Please use language version 10.0 or greater.
                 //     public int field = 42;
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "field").WithArguments("struct field initializers", "10.0").WithLocation(4, 16),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "field")
+                    .WithArguments("struct field initializers", "10.0")
+                    .WithLocation(4, 16),
                 // (5,16): error CS8773: Feature 'struct field initializers' is not available in C# 9.0. Please use language version 10.0 or greater.
                 //     public int Property { get; set; } = 43;
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "Property").WithArguments("struct field initializers", "10.0").WithLocation(5, 16));
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "Property")
+                    .WithArguments("struct field initializers", "10.0")
+                    .WithLocation(5, 16)
+            );
 
             comp = CreateCompilation(src);
             comp.VerifyDiagnostics();
@@ -1168,7 +1471,8 @@ public record struct S
         [Fact]
         public void TypeDeclaration_NoDestructor()
         {
-            var src = @"
+            var src =
+                @"
 public record struct S
 {
     ~S() { }
@@ -1178,14 +1482,17 @@ public record struct S
             comp.VerifyDiagnostics(
                 // (4,6): error CS0575: Only class types can contain destructors
                 //     ~S() { }
-                Diagnostic(ErrorCode.ERR_OnlyClassesCanContainDestructors, "S").WithArguments("S.~S()").WithLocation(4, 6)
-                );
+                Diagnostic(ErrorCode.ERR_OnlyClassesCanContainDestructors, "S")
+                    .WithArguments("S.~S()")
+                    .WithLocation(4, 6)
+            );
         }
 
         [Fact]
         public void TypeDeclaration_DifferentPartials()
         {
-            var src = @"
+            var src =
+                @"
 partial record struct S1;
 partial struct S1 { }
 
@@ -1224,41 +1531,62 @@ partial interface C5 { }
             comp.VerifyDiagnostics(
                 // (3,16): error CS0261: Partial declarations of 'S1' must be all classes, all record classes, all structs, all record structs, or all interfaces
                 // partial struct S1 { }
-                Diagnostic(ErrorCode.ERR_PartialTypeKindConflict, "S1").WithArguments("S1").WithLocation(3, 16),
+                Diagnostic(ErrorCode.ERR_PartialTypeKindConflict, "S1")
+                    .WithArguments("S1")
+                    .WithLocation(3, 16),
                 // (6,23): error CS0261: Partial declarations of 'S2' must be all classes, all record classes, all structs, all record structs, or all interfaces
                 // partial record struct S2;
-                Diagnostic(ErrorCode.ERR_PartialTypeKindConflict, "S2").WithArguments("S2").WithLocation(6, 23),
+                Diagnostic(ErrorCode.ERR_PartialTypeKindConflict, "S2")
+                    .WithArguments("S2")
+                    .WithLocation(6, 23),
                 // (9,16): error CS0261: Partial declarations of 'S3' must be all classes, all record classes, all structs, all record structs, or all interfaces
                 // partial record S3 { }
-                Diagnostic(ErrorCode.ERR_PartialTypeKindConflict, "S3").WithArguments("S3").WithLocation(9, 16),
+                Diagnostic(ErrorCode.ERR_PartialTypeKindConflict, "S3")
+                    .WithArguments("S3")
+                    .WithLocation(9, 16),
                 // (12,22): error CS0261: Partial declarations of 'S4' must be all classes, all record classes, all structs, all record structs, or all interfaces
                 // partial record class S4 { }
-                Diagnostic(ErrorCode.ERR_PartialTypeKindConflict, "S4").WithArguments("S4").WithLocation(12, 22),
+                Diagnostic(ErrorCode.ERR_PartialTypeKindConflict, "S4")
+                    .WithArguments("S4")
+                    .WithLocation(12, 22),
                 // (15,15): error CS0261: Partial declarations of 'S5' must be all classes, all record classes, all structs, all record structs, or all interfaces
                 // partial class S5 { }
-                Diagnostic(ErrorCode.ERR_PartialTypeKindConflict, "S5").WithArguments("S5").WithLocation(15, 15),
+                Diagnostic(ErrorCode.ERR_PartialTypeKindConflict, "S5")
+                    .WithArguments("S5")
+                    .WithLocation(15, 15),
                 // (18,19): error CS0261: Partial declarations of 'S6' must be all classes, all record classes, all structs, all record structs, or all interfaces
                 // partial interface S6 { }
-                Diagnostic(ErrorCode.ERR_PartialTypeKindConflict, "S6").WithArguments("S6").WithLocation(18, 19),
+                Diagnostic(ErrorCode.ERR_PartialTypeKindConflict, "S6")
+                    .WithArguments("S6")
+                    .WithLocation(18, 19),
                 // (21,16): error CS0261: Partial declarations of 'C1' must be all classes, all record classes, all structs, all record structs, or all interfaces
                 // partial struct C1 { }
-                Diagnostic(ErrorCode.ERR_PartialTypeKindConflict, "C1").WithArguments("C1").WithLocation(21, 16),
+                Diagnostic(ErrorCode.ERR_PartialTypeKindConflict, "C1")
+                    .WithArguments("C1")
+                    .WithLocation(21, 16),
                 // (24,23): error CS0261: Partial declarations of 'C2' must be all classes, all record classes, all structs, all record structs, or all interfaces
                 // partial record struct C2 { }
-                Diagnostic(ErrorCode.ERR_PartialTypeKindConflict, "C2").WithArguments("C2").WithLocation(24, 23),
+                Diagnostic(ErrorCode.ERR_PartialTypeKindConflict, "C2")
+                    .WithArguments("C2")
+                    .WithLocation(24, 23),
                 // (30,15): error CS0261: Partial declarations of 'C4' must be all classes, all record classes, all structs, all record structs, or all interfaces
                 // partial class C4 { }
-                Diagnostic(ErrorCode.ERR_PartialTypeKindConflict, "C4").WithArguments("C4").WithLocation(30, 15),
+                Diagnostic(ErrorCode.ERR_PartialTypeKindConflict, "C4")
+                    .WithArguments("C4")
+                    .WithLocation(30, 15),
                 // (33,19): error CS0261: Partial declarations of 'C5' must be all classes, all record classes, all structs, all record structs, or all interfaces
                 // partial interface C5 { }
-                Diagnostic(ErrorCode.ERR_PartialTypeKindConflict, "C5").WithArguments("C5").WithLocation(33, 19)
-                );
+                Diagnostic(ErrorCode.ERR_PartialTypeKindConflict, "C5")
+                    .WithArguments("C5")
+                    .WithLocation(33, 19)
+            );
         }
 
         [Fact]
         public void PartialRecord_OnlyOnePartialHasParameterList()
         {
-            var src = @"
+            var src =
+                @"
 partial record struct S(int i);
 partial record struct S(int i);
 
@@ -1272,20 +1600,22 @@ partial record struct S3();
             comp.VerifyDiagnostics(
                 // (3,24): error CS8863: Only a single record partial declaration may have a parameter list
                 // partial record struct S(int i);
-                Diagnostic(ErrorCode.ERR_MultipleRecordParameterLists, "(int i)").WithLocation(3, 24),
+                Diagnostic(ErrorCode.ERR_MultipleRecordParameterLists, "(int i)")
+                    .WithLocation(3, 24),
                 // (6,25): error CS8863: Only a single record partial declaration may have a parameter list
                 // partial record struct S2();
                 Diagnostic(ErrorCode.ERR_MultipleRecordParameterLists, "()").WithLocation(6, 25),
                 // (9,25): error CS8863: Only a single record partial declaration may have a parameter list
                 // partial record struct S3();
                 Diagnostic(ErrorCode.ERR_MultipleRecordParameterLists, "()").WithLocation(9, 25)
-                );
+            );
         }
 
         [Fact]
         public void PartialRecord_ParametersInScopeOfBothParts()
         {
-            var src = @"
+            var src =
+                @"
 var c = new C(2);
 System.Console.Write((c.P1, c.P2));
 
@@ -1299,18 +1629,25 @@ public partial record struct C
 }
 ";
             var comp = CreateCompilation(src);
-            CompileAndVerify(comp, expectedOutput: "(2, 2)", verify: Verification.Skipped /* init-only */)
+            CompileAndVerify(
+                    comp,
+                    expectedOutput: "(2, 2)",
+                    verify: Verification.Skipped /* init-only */
+                )
                 .VerifyDiagnostics(
                     // (5,30): warning CS0282: There is no defined ordering between fields in multiple declarations of partial struct 'C'. To specify an ordering, all instance fields must be in the same declaration.
                     // public partial record struct C(int X)
-                    Diagnostic(ErrorCode.WRN_SequentialOnPartialClass, "C").WithArguments("C").WithLocation(5, 30)
-                    );
+                    Diagnostic(ErrorCode.WRN_SequentialOnPartialClass, "C")
+                        .WithArguments("C")
+                        .WithLocation(5, 30)
+                );
         }
 
         [Fact]
         public void PartialRecord_DuplicateMemberNames()
         {
-            var src = @"
+            var src =
+                @"
 public partial record struct C(int X)
 {
     public void M(int i) { }
@@ -1340,13 +1677,17 @@ public partial record struct C
                 "Deconstruct",
                 ".ctor",
             };
-            AssertEx.Equal(expectedMemberNames, comp.GetMember<NamedTypeSymbol>("C").GetPublicSymbol().MemberNames);
+            AssertEx.Equal(
+                expectedMemberNames,
+                comp.GetMember<NamedTypeSymbol>("C").GetPublicSymbol().MemberNames
+            );
         }
 
         [Fact]
         public void RecordInsideGenericType()
         {
-            var src = @"
+            var src =
+                @"
 var c = new C<int>.Nested(2);
 System.Console.Write(c.T);
 
@@ -1363,7 +1704,8 @@ public class C<T>
         [Fact]
         public void PositionalMemberModifiers_RefOrOut()
         {
-            var src = @"
+            var src =
+                @"
 record struct R(ref int P1, out int P2);
 ";
 
@@ -1371,20 +1713,23 @@ record struct R(ref int P1, out int P2);
             comp.VerifyEmitDiagnostics(
                 // (2,15): error CS0177: The out parameter 'P2' must be assigned to before control leaves the current method
                 // record struct R(ref int P1, out int P2);
-                Diagnostic(ErrorCode.ERR_ParamUnassigned, "R").WithArguments("P2").WithLocation(2, 15),
+                Diagnostic(ErrorCode.ERR_ParamUnassigned, "R")
+                    .WithArguments("P2")
+                    .WithLocation(2, 15),
                 // (2,17): error CS0631: ref and out are not valid in this context
                 // record struct R(ref int P1, out int P2);
                 Diagnostic(ErrorCode.ERR_IllegalRefParam, "ref").WithLocation(2, 17),
                 // (2,29): error CS0631: ref and out are not valid in this context
                 // record struct R(ref int P1, out int P2);
                 Diagnostic(ErrorCode.ERR_IllegalRefParam, "out").WithLocation(2, 29)
-                );
+            );
         }
 
         [Fact, WorkItem(45008, "https://github.com/dotnet/roslyn/issues/45008")]
         public void PositionalMemberModifiers_This()
         {
-            var src = @"
+            var src =
+                @"
 record struct R(this int i);
 ";
 
@@ -1393,13 +1738,14 @@ record struct R(this int i);
                 // (2,17): error CS0027: Keyword 'this' is not available in the current context
                 // record struct R(this int i);
                 Diagnostic(ErrorCode.ERR_ThisInBadContext, "this").WithLocation(2, 17)
-                );
+            );
         }
 
         [Fact, WorkItem(45591, "https://github.com/dotnet/roslyn/issues/45591")]
         public void Clone_DisallowedInSource()
         {
-            var src = @"
+            var src =
+                @"
 record struct C1(string Clone); // 1
 record struct C2
 {
@@ -1446,7 +1792,9 @@ record struct C9 : System.ICloneable
                 Diagnostic(ErrorCode.ERR_CloneDisallowedInRecord, "Clone").WithLocation(5, 12),
                 // (5,12): warning CS0169: The field 'C2.Clone' is never used
                 //     string Clone; // 2
-                Diagnostic(ErrorCode.WRN_UnreferencedField, "Clone").WithArguments("C2.Clone").WithLocation(5, 12),
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "Clone")
+                    .WithArguments("C2.Clone")
+                    .WithLocation(5, 12),
                 // (9,12): error CS8859: Members named 'Clone' are disallowed in records.
                 //     string Clone { get; set; } // 3
                 Diagnostic(ErrorCode.ERR_CloneDisallowedInRecord, "Clone").WithLocation(9, 12),
@@ -1467,15 +1815,21 @@ record struct C9 : System.ICloneable
                 Diagnostic(ErrorCode.ERR_CloneDisallowedInRecord, "Clone").WithLocation(26, 25),
                 // (26,25): warning CS0067: The event 'C8.Clone' is never used
                 //     event System.Action Clone;  // 8
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "Clone").WithArguments("C8.Clone").WithLocation(26, 25)
-                );
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "Clone")
+                    .WithArguments("C8.Clone")
+                    .WithLocation(26, 25)
+            );
         }
 
-        [ConditionalFact(typeof(DesktopOnly), Reason = ConditionalSkipReason.RestrictedTypesNeedDesktop)]
+        [ConditionalFact(
+            typeof(DesktopOnly),
+            Reason = ConditionalSkipReason.RestrictedTypesNeedDesktop
+        )]
         [WorkItem(48115, "https://github.com/dotnet/roslyn/issues/48115")]
         public void RestrictedTypesAndPointerTypes()
         {
-            var src = @"
+            var src =
+                @"
 class C<T> { }
 static class C2 { }
 ref struct RefLike{}
@@ -1492,46 +1846,72 @@ unsafe record struct C( // 1
     RefLike P9); // 10
 ";
 
-            var comp = CreateCompilation(new[] { src, IsExternalInitTypeDefinition }, parseOptions: TestOptions.RegularPreview, options: TestOptions.UnsafeDebugDll);
+            var comp = CreateCompilation(
+                new[] { src, IsExternalInitTypeDefinition },
+                parseOptions: TestOptions.RegularPreview,
+                options: TestOptions.UnsafeDebugDll
+            );
             comp.VerifyEmitDiagnostics(
                 // (6,22): error CS0721: 'C2': static types cannot be used as parameters
                 // unsafe record struct C( // 1
-                Diagnostic(ErrorCode.ERR_ParameterIsStaticClass, "C").WithArguments("C2").WithLocation(6, 22),
+                Diagnostic(ErrorCode.ERR_ParameterIsStaticClass, "C")
+                    .WithArguments("C2")
+                    .WithLocation(6, 22),
                 // (7,10): error CS8908: The type 'int*' may not be used for a field of a record.
                 //     int* P1, // 2
-                Diagnostic(ErrorCode.ERR_BadFieldTypeInRecord, "P1").WithArguments("int*").WithLocation(7, 10),
+                Diagnostic(ErrorCode.ERR_BadFieldTypeInRecord, "P1")
+                    .WithArguments("int*")
+                    .WithLocation(7, 10),
                 // (8,12): error CS8908: The type 'int*[]' may not be used for a field of a record.
                 //     int*[] P2, // 3
-                Diagnostic(ErrorCode.ERR_BadFieldTypeInRecord, "P2").WithArguments("int*[]").WithLocation(8, 12),
+                Diagnostic(ErrorCode.ERR_BadFieldTypeInRecord, "P2")
+                    .WithArguments("int*[]")
+                    .WithLocation(8, 12),
                 // (10,25): error CS8908: The type 'delegate*<int, int>' may not be used for a field of a record.
                 //     delegate*<int, int> P4, // 4
-                Diagnostic(ErrorCode.ERR_BadFieldTypeInRecord, "P4").WithArguments("delegate*<int, int>").WithLocation(10, 25),
+                Diagnostic(ErrorCode.ERR_BadFieldTypeInRecord, "P4")
+                    .WithArguments("delegate*<int, int>")
+                    .WithLocation(10, 25),
                 // (11,5): error CS1536: Invalid parameter type 'void'
                 //     void P5, // 5
                 Diagnostic(ErrorCode.ERR_NoVoidParameter, "void").WithLocation(11, 5),
                 // (12,8): error CS0722: 'C2': static types cannot be used as return types
                 //     C2 P6, // 6, 7
-                Diagnostic(ErrorCode.ERR_ReturnTypeIsStaticClass, "P6").WithArguments("C2").WithLocation(12, 8),
+                Diagnostic(ErrorCode.ERR_ReturnTypeIsStaticClass, "P6")
+                    .WithArguments("C2")
+                    .WithLocation(12, 8),
                 // (12,8): error CS0721: 'C2': static types cannot be used as parameters
                 //     C2 P6, // 6, 7
-                Diagnostic(ErrorCode.ERR_ParameterIsStaticClass, "P6").WithArguments("C2").WithLocation(12, 8),
+                Diagnostic(ErrorCode.ERR_ParameterIsStaticClass, "P6")
+                    .WithArguments("C2")
+                    .WithLocation(12, 8),
                 // (13,5): error CS0610: Field or property cannot be of type 'ArgIterator'
                 //     System.ArgIterator P7, // 8
-                Diagnostic(ErrorCode.ERR_FieldCantBeRefAny, "System.ArgIterator").WithArguments("System.ArgIterator").WithLocation(13, 5),
+                Diagnostic(ErrorCode.ERR_FieldCantBeRefAny, "System.ArgIterator")
+                    .WithArguments("System.ArgIterator")
+                    .WithLocation(13, 5),
                 // (14,5): error CS0610: Field or property cannot be of type 'TypedReference'
                 //     System.TypedReference P8, // 9
-                Diagnostic(ErrorCode.ERR_FieldCantBeRefAny, "System.TypedReference").WithArguments("System.TypedReference").WithLocation(14, 5),
+                Diagnostic(ErrorCode.ERR_FieldCantBeRefAny, "System.TypedReference")
+                    .WithArguments("System.TypedReference")
+                    .WithLocation(14, 5),
                 // (15,5): error CS8345: Field or auto-implemented property cannot be of type 'RefLike' unless it is an instance member of a ref struct.
                 //     RefLike P9); // 10
-                Diagnostic(ErrorCode.ERR_FieldAutoPropCantBeByRefLike, "RefLike").WithArguments("RefLike").WithLocation(15, 5)
-                );
+                Diagnostic(ErrorCode.ERR_FieldAutoPropCantBeByRefLike, "RefLike")
+                    .WithArguments("RefLike")
+                    .WithLocation(15, 5)
+            );
         }
 
-        [ConditionalFact(typeof(DesktopOnly), Reason = ConditionalSkipReason.RestrictedTypesNeedDesktop)]
+        [ConditionalFact(
+            typeof(DesktopOnly),
+            Reason = ConditionalSkipReason.RestrictedTypesNeedDesktop
+        )]
         [WorkItem(48115, "https://github.com/dotnet/roslyn/issues/48115")]
         public void RestrictedTypesAndPointerTypes_NominalMembers()
         {
-            var src = @"
+            var src =
+                @"
 public class C<T> { }
 public static class C2 { }
 public ref struct RefLike{}
@@ -1550,40 +1930,62 @@ public unsafe record struct C
 }
 ";
 
-            var comp = CreateCompilation(new[] { src, IsExternalInitTypeDefinition }, parseOptions: TestOptions.RegularPreview, options: TestOptions.UnsafeDebugDll);
+            var comp = CreateCompilation(
+                new[] { src, IsExternalInitTypeDefinition },
+                parseOptions: TestOptions.RegularPreview,
+                options: TestOptions.UnsafeDebugDll
+            );
             comp.VerifyEmitDiagnostics(
                 // (8,17): error CS8908: The type 'int*' may not be used for a field of a record.
                 //     public int* f1; // 1
-                Diagnostic(ErrorCode.ERR_BadFieldTypeInRecord, "f1").WithArguments("int*").WithLocation(8, 17),
+                Diagnostic(ErrorCode.ERR_BadFieldTypeInRecord, "f1")
+                    .WithArguments("int*")
+                    .WithLocation(8, 17),
                 // (9,19): error CS8908: The type 'int*[]' may not be used for a field of a record.
                 //     public int*[] f2; // 2
-                Diagnostic(ErrorCode.ERR_BadFieldTypeInRecord, "f2").WithArguments("int*[]").WithLocation(9, 19),
+                Diagnostic(ErrorCode.ERR_BadFieldTypeInRecord, "f2")
+                    .WithArguments("int*[]")
+                    .WithLocation(9, 19),
                 // (11,32): error CS8908: The type 'delegate*<int, int>' may not be used for a field of a record.
                 //     public delegate*<int, int> f4; // 3
-                Diagnostic(ErrorCode.ERR_BadFieldTypeInRecord, "f4").WithArguments("delegate*<int, int>").WithLocation(11, 32),
+                Diagnostic(ErrorCode.ERR_BadFieldTypeInRecord, "f4")
+                    .WithArguments("delegate*<int, int>")
+                    .WithLocation(11, 32),
                 // (12,12): error CS0670: Field cannot have void type
                 //     public void f5; // 4
                 Diagnostic(ErrorCode.ERR_FieldCantHaveVoidType, "void").WithLocation(12, 12),
                 // (13,15): error CS0723: Cannot declare a variable of static type 'C2'
                 //     public C2 f6; // 5
-                Diagnostic(ErrorCode.ERR_VarDeclIsStaticClass, "f6").WithArguments("C2").WithLocation(13, 15),
+                Diagnostic(ErrorCode.ERR_VarDeclIsStaticClass, "f6")
+                    .WithArguments("C2")
+                    .WithLocation(13, 15),
                 // (14,12): error CS0610: Field or property cannot be of type 'ArgIterator'
                 //     public System.ArgIterator f7; // 6
-                Diagnostic(ErrorCode.ERR_FieldCantBeRefAny, "System.ArgIterator").WithArguments("System.ArgIterator").WithLocation(14, 12),
+                Diagnostic(ErrorCode.ERR_FieldCantBeRefAny, "System.ArgIterator")
+                    .WithArguments("System.ArgIterator")
+                    .WithLocation(14, 12),
                 // (15,12): error CS0610: Field or property cannot be of type 'TypedReference'
                 //     public System.TypedReference f8; // 7
-                Diagnostic(ErrorCode.ERR_FieldCantBeRefAny, "System.TypedReference").WithArguments("System.TypedReference").WithLocation(15, 12),
+                Diagnostic(ErrorCode.ERR_FieldCantBeRefAny, "System.TypedReference")
+                    .WithArguments("System.TypedReference")
+                    .WithLocation(15, 12),
                 // (16,12): error CS8345: Field or auto-implemented property cannot be of type 'RefLike' unless it is an instance member of a ref struct.
                 //     public RefLike f9; // 8
-                Diagnostic(ErrorCode.ERR_FieldAutoPropCantBeByRefLike, "RefLike").WithArguments("RefLike").WithLocation(16, 12)
-                );
+                Diagnostic(ErrorCode.ERR_FieldAutoPropCantBeByRefLike, "RefLike")
+                    .WithArguments("RefLike")
+                    .WithLocation(16, 12)
+            );
         }
 
-        [ConditionalFact(typeof(DesktopOnly), Reason = ConditionalSkipReason.RestrictedTypesNeedDesktop)]
+        [ConditionalFact(
+            typeof(DesktopOnly),
+            Reason = ConditionalSkipReason.RestrictedTypesNeedDesktop
+        )]
         [WorkItem(48115, "https://github.com/dotnet/roslyn/issues/48115")]
         public void RestrictedTypesAndPointerTypes_NominalMembers_AutoProperties()
         {
-            var src = @"
+            var src =
+                @"
 public class C<T> { }
 public static class C2 { }
 public ref struct RefLike{}
@@ -1602,43 +2004,66 @@ public unsafe record struct C
 }
 ";
 
-            var comp = CreateCompilation(new[] { src, IsExternalInitTypeDefinition }, parseOptions: TestOptions.RegularPreview, options: TestOptions.UnsafeDebugDll);
+            var comp = CreateCompilation(
+                new[] { src, IsExternalInitTypeDefinition },
+                parseOptions: TestOptions.RegularPreview,
+                options: TestOptions.UnsafeDebugDll
+            );
             comp.VerifyEmitDiagnostics(
                 // (8,17): error CS8908: The type 'int*' may not be used for a field of a record.
                 //     public int* f1 { get; set; } // 1
-                Diagnostic(ErrorCode.ERR_BadFieldTypeInRecord, "f1").WithArguments("int*").WithLocation(8, 17),
+                Diagnostic(ErrorCode.ERR_BadFieldTypeInRecord, "f1")
+                    .WithArguments("int*")
+                    .WithLocation(8, 17),
                 // (9,19): error CS8908: The type 'int*[]' may not be used for a field of a record.
                 //     public int*[] f2 { get; set; } // 2
-                Diagnostic(ErrorCode.ERR_BadFieldTypeInRecord, "f2").WithArguments("int*[]").WithLocation(9, 19),
+                Diagnostic(ErrorCode.ERR_BadFieldTypeInRecord, "f2")
+                    .WithArguments("int*[]")
+                    .WithLocation(9, 19),
                 // (11,32): error CS8908: The type 'delegate*<int, int>' may not be used for a field of a record.
                 //     public delegate*<int, int> f4 { get; set; } // 3
-                Diagnostic(ErrorCode.ERR_BadFieldTypeInRecord, "f4").WithArguments("delegate*<int, int>").WithLocation(11, 32),
+                Diagnostic(ErrorCode.ERR_BadFieldTypeInRecord, "f4")
+                    .WithArguments("delegate*<int, int>")
+                    .WithLocation(11, 32),
                 // (12,17): error CS0547: 'C.f5': property or indexer cannot have void type
                 //     public void f5 { get; set; } // 4
-                Diagnostic(ErrorCode.ERR_PropertyCantHaveVoidType, "f5").WithArguments("C.f5").WithLocation(12, 17),
+                Diagnostic(ErrorCode.ERR_PropertyCantHaveVoidType, "f5")
+                    .WithArguments("C.f5")
+                    .WithLocation(12, 17),
                 // (13,20): error CS0722: 'C2': static types cannot be used as return types
                 //     public C2 f6 { get; set; } // 5, 6
-                Diagnostic(ErrorCode.ERR_ReturnTypeIsStaticClass, "get").WithArguments("C2").WithLocation(13, 20),
+                Diagnostic(ErrorCode.ERR_ReturnTypeIsStaticClass, "get")
+                    .WithArguments("C2")
+                    .WithLocation(13, 20),
                 // (13,25): error CS0721: 'C2': static types cannot be used as parameters
                 //     public C2 f6 { get; set; } // 5, 6
-                Diagnostic(ErrorCode.ERR_ParameterIsStaticClass, "set").WithArguments("C2").WithLocation(13, 25),
+                Diagnostic(ErrorCode.ERR_ParameterIsStaticClass, "set")
+                    .WithArguments("C2")
+                    .WithLocation(13, 25),
                 // (14,12): error CS0610: Field or property cannot be of type 'ArgIterator'
                 //     public System.ArgIterator f7 { get; set; } // 6
-                Diagnostic(ErrorCode.ERR_FieldCantBeRefAny, "System.ArgIterator").WithArguments("System.ArgIterator").WithLocation(14, 12),
+                Diagnostic(ErrorCode.ERR_FieldCantBeRefAny, "System.ArgIterator")
+                    .WithArguments("System.ArgIterator")
+                    .WithLocation(14, 12),
                 // (15,12): error CS0610: Field or property cannot be of type 'TypedReference'
                 //     public System.TypedReference f8 { get; set; } // 7
-                Diagnostic(ErrorCode.ERR_FieldCantBeRefAny, "System.TypedReference").WithArguments("System.TypedReference").WithLocation(15, 12),
+                Diagnostic(ErrorCode.ERR_FieldCantBeRefAny, "System.TypedReference")
+                    .WithArguments("System.TypedReference")
+                    .WithLocation(15, 12),
                 // (16,12): error CS8345: Field or auto-implemented property cannot be of type 'RefLike' unless it is an instance member of a ref struct.
                 //     public RefLike f9 { get; set; } // 8
-                Diagnostic(ErrorCode.ERR_FieldAutoPropCantBeByRefLike, "RefLike").WithArguments("RefLike").WithLocation(16, 12)
-                );
+                Diagnostic(ErrorCode.ERR_FieldAutoPropCantBeByRefLike, "RefLike")
+                    .WithArguments("RefLike")
+                    .WithLocation(16, 12)
+            );
         }
 
         [Fact]
         [WorkItem(48115, "https://github.com/dotnet/roslyn/issues/48115")]
         public void RestrictedTypesAndPointerTypes_PointerTypeAllowedForParameterAndProperty()
         {
-            var src = @"
+            var src =
+                @"
 class C<T> { }
 
 unsafe record struct C(int* P1, int*[] P2, C<int*[]> P3)
@@ -1667,27 +2092,45 @@ unsafe record struct C(int* P1, int*[] P2, C<int*[]> P3)
     }
 }
 ";
-            var comp = CreateCompilation(new[] { src, IsExternalInitTypeDefinition }, parseOptions: TestOptions.RegularPreview, options: TestOptions.UnsafeDebugExe);
+            var comp = CreateCompilation(
+                new[] { src, IsExternalInitTypeDefinition },
+                parseOptions: TestOptions.RegularPreview,
+                options: TestOptions.UnsafeDebugExe
+            );
             comp.VerifyEmitDiagnostics(
                 // (4,29): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the property with that name?
                 // unsafe record struct C(int* P1, int*[] P2, C<int*[]> P3)
-                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P1").WithArguments("P1").WithLocation(4, 29),
+                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P1")
+                    .WithArguments("P1")
+                    .WithLocation(4, 29),
                 // (4,40): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the property with that name?
                 // unsafe record struct C(int* P1, int*[] P2, C<int*[]> P3)
-                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P2").WithArguments("P2").WithLocation(4, 40),
+                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P2")
+                    .WithArguments("P2")
+                    .WithLocation(4, 40),
                 // (4,54): warning CS8907: Parameter 'P3' is unread. Did you forget to use it to initialize the property with that name?
                 // unsafe record struct C(int* P1, int*[] P2, C<int*[]> P3)
-                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P3").WithArguments("P3").WithLocation(4, 54)
-                );
+                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P3")
+                    .WithArguments("P3")
+                    .WithLocation(4, 54)
+            );
 
-            CompileAndVerify(comp, expectedOutput: "P1 P2 P3 RAN", verify: Verification.Skipped /* pointers */);
+            CompileAndVerify(
+                comp,
+                expectedOutput: "P1 P2 P3 RAN",
+                verify: Verification.Skipped /* pointers */
+            );
         }
 
-        [ConditionalFact(typeof(DesktopOnly), Reason = ConditionalSkipReason.RestrictedTypesNeedDesktop)]
+        [ConditionalFact(
+            typeof(DesktopOnly),
+            Reason = ConditionalSkipReason.RestrictedTypesNeedDesktop
+        )]
         [WorkItem(48115, "https://github.com/dotnet/roslyn/issues/48115")]
         public void RestrictedTypesAndPointerTypes_StaticFields()
         {
-            var src = @"
+            var src =
+                @"
 public class C<T> { }
 public static class C2 { }
 public ref struct RefLike{}
@@ -1705,27 +2148,39 @@ public unsafe record C
 }
 ";
 
-            var comp = CreateCompilation(new[] { src, IsExternalInitTypeDefinition }, options: TestOptions.UnsafeDebugDll);
+            var comp = CreateCompilation(
+                new[] { src, IsExternalInitTypeDefinition },
+                options: TestOptions.UnsafeDebugDll
+            );
             comp.VerifyEmitDiagnostics(
                 // (12,22): error CS0723: Cannot declare a variable of static type 'C2'
                 //     public static C2 f6; // 1
-                Diagnostic(ErrorCode.ERR_VarDeclIsStaticClass, "f6").WithArguments("C2").WithLocation(12, 22),
+                Diagnostic(ErrorCode.ERR_VarDeclIsStaticClass, "f6")
+                    .WithArguments("C2")
+                    .WithLocation(12, 22),
                 // (13,19): error CS0610: Field or property cannot be of type 'ArgIterator'
                 //     public static System.ArgIterator f7; // 2
-                Diagnostic(ErrorCode.ERR_FieldCantBeRefAny, "System.ArgIterator").WithArguments("System.ArgIterator").WithLocation(13, 19),
+                Diagnostic(ErrorCode.ERR_FieldCantBeRefAny, "System.ArgIterator")
+                    .WithArguments("System.ArgIterator")
+                    .WithLocation(13, 19),
                 // (14,19): error CS0610: Field or property cannot be of type 'TypedReference'
                 //     public static System.TypedReference f8; // 3
-                Diagnostic(ErrorCode.ERR_FieldCantBeRefAny, "System.TypedReference").WithArguments("System.TypedReference").WithLocation(14, 19),
+                Diagnostic(ErrorCode.ERR_FieldCantBeRefAny, "System.TypedReference")
+                    .WithArguments("System.TypedReference")
+                    .WithLocation(14, 19),
                 // (15,19): error CS8345: Field or auto-implemented property cannot be of type 'RefLike' unless it is an instance member of a ref struct.
                 //     public static RefLike f9; // 4
-                Diagnostic(ErrorCode.ERR_FieldAutoPropCantBeByRefLike, "RefLike").WithArguments("RefLike").WithLocation(15, 19)
-                );
+                Diagnostic(ErrorCode.ERR_FieldAutoPropCantBeByRefLike, "RefLike")
+                    .WithArguments("RefLike")
+                    .WithLocation(15, 19)
+            );
         }
 
         [Fact]
         public void RecordProperties_01()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 record struct C(int X, int Y)
 {
@@ -1740,7 +2195,9 @@ record struct C(int X, int Y)
 }";
             var verifier = CompileAndVerify(src, expectedOutput: @"12345").VerifyDiagnostics();
 
-            verifier.VerifyIL("C..ctor(int, int)", @"
+            verifier.VerifyIL(
+                "C..ctor(int, int)",
+                @"
 {
   // Code size       26 (0x1a)
   .maxstack  2
@@ -1755,7 +2212,8 @@ record struct C(int X, int Y)
   IL_0014:  stfld      ""int C.Z""
   IL_0019:  ret
 }
-");
+"
+            );
 
             var c = verifier.Compilation.GlobalNamespace.GetTypeMember("C");
             Assert.False(c.IsReadOnly);
@@ -1772,7 +2230,8 @@ record struct C(int X, int Y)
         [Fact]
         public void RecordProperties_01_EmptyParameterList()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 record struct C()
 {
@@ -1789,7 +2248,8 @@ record struct C()
         [Fact]
         public void RecordProperties_01_Readonly()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 readonly record struct C(int X, int Y)
 {
@@ -1808,7 +2268,10 @@ readonly record struct C(int X, int Y)
             Assert.True(c.IsReadOnly);
             var x = (IPropertySymbol)c.GetMember("X");
             Assert.Equal("System.Int32 C.X.get", x.GetMethod.ToTestDisplayString());
-            Assert.Equal("void modreq(System.Runtime.CompilerServices.IsExternalInit) C.X.init", x.SetMethod.ToTestDisplayString());
+            Assert.Equal(
+                "void modreq(System.Runtime.CompilerServices.IsExternalInit) C.X.init",
+                x.SetMethod.ToTestDisplayString()
+            );
             Assert.True(x.SetMethod!.IsInitOnly);
 
             var xBackingField = (IFieldSymbol)c.GetMember("<X>k__BackingField");
@@ -1819,7 +2282,8 @@ readonly record struct C(int X, int Y)
         [Fact]
         public void RecordProperties_01_ReadonlyMismatch()
         {
-            var src = @"
+            var src =
+                @"
 readonly record struct C(int X)
 {
     public int X { get; set; } = X; // 1
@@ -1834,13 +2298,14 @@ record struct C2(int X)
                 // (4,16): error CS8341: Auto-implemented instance properties in readonly structs must be readonly.
                 //     public int X { get; set; } = X; // 1
                 Diagnostic(ErrorCode.ERR_AutoPropsInRoStruct, "X").WithLocation(4, 16)
-                );
+            );
         }
 
         [Fact]
         public void RecordProperties_02()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 record struct C(int X, int Y)
 {
@@ -1861,20 +2326,26 @@ record struct C(int X, int Y)
             comp.VerifyDiagnostics(
                 // (5,12): error CS0111: Type 'C' already defines a member called 'C' with the same parameter types
                 //     public C(int a, int b)
-                Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "C").WithArguments("C", "C").WithLocation(5, 12),
+                Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "C")
+                    .WithArguments("C", "C")
+                    .WithLocation(5, 12),
                 // (5,12): error CS8862: A constructor declared in a record with parameter list must have 'this' constructor initializer.
                 //     public C(int a, int b)
-                Diagnostic(ErrorCode.ERR_UnexpectedOrMissingConstructorInitializerInRecord, "C").WithLocation(5, 12),
+                Diagnostic(ErrorCode.ERR_UnexpectedOrMissingConstructorInitializerInRecord, "C")
+                    .WithLocation(5, 12),
                 // (11,21): error CS0121: The call is ambiguous between the following methods or properties: 'C.C(int, int)' and 'C.C(int, int)'
                 //         var c = new C(1, 2);
-                Diagnostic(ErrorCode.ERR_AmbigCall, "C").WithArguments("C.C(int, int)", "C.C(int, int)").WithLocation(11, 21)
-                );
+                Diagnostic(ErrorCode.ERR_AmbigCall, "C")
+                    .WithArguments("C.C(int, int)", "C.C(int, int)")
+                    .WithLocation(11, 21)
+            );
         }
 
         [Fact]
         public void RecordProperties_03()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 record struct C(int X, int Y)
 {
@@ -1891,17 +2362,22 @@ record struct C(int X, int Y)
             comp.VerifyEmitDiagnostics(
                 // (3,15): error CS0843: Auto-implemented property 'C.X' must be fully assigned before control is returned to the caller.
                 // record struct C(int X, int Y)
-                Diagnostic(ErrorCode.ERR_UnassignedThisAutoProperty, "C").WithArguments("C.X").WithLocation(3, 15),
+                Diagnostic(ErrorCode.ERR_UnassignedThisAutoProperty, "C")
+                    .WithArguments("C.X")
+                    .WithLocation(3, 15),
                 // (3,21): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
                 // record struct C(int X, int Y)
-                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X").WithArguments("X").WithLocation(3, 21)
-                );
+                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
+                    .WithArguments("X")
+                    .WithLocation(3, 21)
+            );
         }
 
         [Fact]
         public void RecordProperties_03_InitializedWithY()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 record struct C(int X, int Y)
 {
@@ -1918,14 +2394,17 @@ record struct C(int X, int Y)
                 .VerifyDiagnostics(
                     // (3,21): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
                     // record struct C(int X, int Y)
-                    Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X").WithArguments("X").WithLocation(3, 21)
-                    );
+                    Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
+                        .WithArguments("X")
+                        .WithLocation(3, 21)
+                );
         }
 
         [Fact]
         public void RecordProperties_04()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 record struct C(int X, int Y)
 {
@@ -1942,14 +2421,17 @@ record struct C(int X, int Y)
                 .VerifyDiagnostics(
                     // (3,21): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
                     // record struct C(int X, int Y)
-                    Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X").WithArguments("X").WithLocation(3, 21)
-                    );
+                    Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
+                        .WithArguments("X")
+                        .WithLocation(3, 21)
+                );
         }
 
         [Fact]
         public void RecordProperties_05()
         {
-            var src = @"
+            var src =
+                @"
 record struct C(int X, int X)
 {
 }";
@@ -1957,21 +2439,31 @@ record struct C(int X, int X)
             comp.VerifyDiagnostics(
                 // (2,28): error CS0100: The parameter name 'X' is a duplicate
                 // record struct C(int X, int X)
-                Diagnostic(ErrorCode.ERR_DuplicateParamName, "X").WithArguments("X").WithLocation(2, 28),
+                Diagnostic(ErrorCode.ERR_DuplicateParamName, "X")
+                    .WithArguments("X")
+                    .WithLocation(2, 28),
                 // (2,28): error CS0102: The type 'C' already contains a definition for 'X'
                 // record struct C(int X, int X)
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "X").WithArguments("C", "X").WithLocation(2, 28)
-                );
+                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "X")
+                    .WithArguments("C", "X")
+                    .WithLocation(2, 28)
+            );
 
             var expectedMembers = new[]
             {
                 "System.Int32 C.X { get; set; }",
                 "System.Int32 C.X { get; set; }"
             };
-            AssertEx.Equal(expectedMembers,
-                comp.GetMember<NamedTypeSymbol>("C").GetMembers().OfType<PropertySymbol>().ToTestDisplayStrings());
+            AssertEx.Equal(
+                expectedMembers,
+                comp.GetMember<NamedTypeSymbol>("C")
+                    .GetMembers()
+                    .OfType<PropertySymbol>()
+                    .ToTestDisplayStrings()
+            );
 
-            var expectedMemberNames = new[] {
+            var expectedMemberNames = new[]
+            {
                 ".ctor",
                 "<X>k__BackingField",
                 "get_X",
@@ -1991,13 +2483,17 @@ record struct C(int X, int X)
                 "Deconstruct",
                 ".ctor"
             };
-            AssertEx.Equal(expectedMemberNames, comp.GetMember<NamedTypeSymbol>("C").GetPublicSymbol().MemberNames);
+            AssertEx.Equal(
+                expectedMemberNames,
+                comp.GetMember<NamedTypeSymbol>("C").GetPublicSymbol().MemberNames
+            );
         }
 
         [Fact]
         public void RecordProperties_06()
         {
-            var src = @"
+            var src =
+                @"
 record struct C(int X, int Y)
 {
     public void get_X() { }
@@ -2009,13 +2505,19 @@ record struct C(int X, int Y)
             comp.VerifyDiagnostics(
                 // (2,21): error CS0082: Type 'C' already reserves a member called 'get_X' with the same parameter types
                 // record struct C(int X, int Y)
-                Diagnostic(ErrorCode.ERR_MemberReserved, "X").WithArguments("get_X", "C").WithLocation(2, 21),
+                Diagnostic(ErrorCode.ERR_MemberReserved, "X")
+                    .WithArguments("get_X", "C")
+                    .WithLocation(2, 21),
                 // (2,28): error CS0082: Type 'C' already reserves a member called 'set_Y' with the same parameter types
                 // record struct C(int X, int Y)
-                Diagnostic(ErrorCode.ERR_MemberReserved, "Y").WithArguments("set_Y", "C").WithLocation(2, 28)
-                );
+                Diagnostic(ErrorCode.ERR_MemberReserved, "Y")
+                    .WithArguments("set_Y", "C")
+                    .WithLocation(2, 28)
+            );
 
-            var actualMembers = comp.GetMember<NamedTypeSymbol>("C").GetMembers().ToTestDisplayStrings();
+            var actualMembers = comp.GetMember<NamedTypeSymbol>("C")
+                .GetMembers()
+                .ToTestDisplayStrings();
             var expectedMembers = new[]
             {
                 "C..ctor(System.Int32 X, System.Int32 Y)",
@@ -2047,35 +2549,44 @@ record struct C(int X, int Y)
         [Fact]
         public void RecordProperties_07()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 record struct C1(object P, object get_P);
-record struct C2(object get_P, object P);");
+record struct C2(object get_P, object P);"
+            );
             comp.VerifyDiagnostics(
                 // (2,25): error CS0102: The type 'C1' already contains a definition for 'get_P'
                 // record struct C1(object P, object get_P);
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "P").WithArguments("C1", "get_P").WithLocation(2, 25),
+                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "P")
+                    .WithArguments("C1", "get_P")
+                    .WithLocation(2, 25),
                 // (3,39): error CS0102: The type 'C2' already contains a definition for 'get_P'
                 // record struct C2(object get_P, object P);
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "P").WithArguments("C2", "get_P").WithLocation(3, 39)
-                );
+                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "P")
+                    .WithArguments("C2", "get_P")
+                    .WithLocation(3, 39)
+            );
         }
 
         [Fact]
         public void RecordProperties_08()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 record struct C1(object O1)
 {
     public object O1 { get; } = O1;
     public object O2 { get; } = O1;
-}");
+}"
+            );
             comp.VerifyDiagnostics();
         }
 
         [Fact]
         public void RecordProperties_09()
         {
-            var src = @"
+            var src =
+                @"
 record struct C(object P1, object P2, object P3, object P4)
 {
     class P1 { }
@@ -2087,23 +2598,32 @@ record struct C(object P1, object P2, object P3, object P4)
             comp.VerifyDiagnostics(
                 // (2,24): error CS0102: The type 'C' already contains a definition for 'P1'
                 // record struct C(object P1, object P2, object P3, object P4)
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "P1").WithArguments("C", "P1").WithLocation(2, 24),
+                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "P1")
+                    .WithArguments("C", "P1")
+                    .WithLocation(2, 24),
                 // (2,35): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the property with that name?
                 // record struct C(object P1, object P2, object P3, object P4)
-                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P2").WithArguments("P2").WithLocation(2, 35),
+                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P2")
+                    .WithArguments("P2")
+                    .WithLocation(2, 35),
                 // (6,9): error CS0102: The type 'C' already contains a definition for 'P3'
                 //     int P3(object o) => 3;
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "P3").WithArguments("C", "P3").WithLocation(6, 9),
+                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "P3")
+                    .WithArguments("C", "P3")
+                    .WithLocation(6, 9),
                 // (7,9): error CS0102: The type 'C' already contains a definition for 'P4'
                 //     int P4<T>(T t) => 4;
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "P4").WithArguments("C", "P4").WithLocation(7, 9)
-                );
+                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "P4")
+                    .WithArguments("C", "P4")
+                    .WithLocation(7, 9)
+            );
         }
 
         [Fact]
         public void RecordProperties_10()
         {
-            var src = @"
+            var src =
+                @"
 record struct C(object P)
 {
     const int P = 4;
@@ -2112,17 +2632,22 @@ record struct C(object P)
             comp.VerifyDiagnostics(
                 // (2,24): error CS8866: Record member 'C.P' must be a readable instance property or field of type 'object' to match positional parameter 'P'.
                 // record struct C(object P)
-                Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "P").WithArguments("C.P", "object", "P").WithLocation(2, 24),
+                Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "P")
+                    .WithArguments("C.P", "object", "P")
+                    .WithLocation(2, 24),
                 // (2,24): warning CS8907: Parameter 'P' is unread. Did you forget to use it to initialize the property with that name?
                 // record struct C(object P)
-                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P").WithArguments("P").WithLocation(2, 24)
-                );
+                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P")
+                    .WithArguments("P")
+                    .WithLocation(2, 24)
+            );
         }
 
         [Fact]
         public void RecordProperties_11_UnreadPositionalParameter()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 record struct C1(object O1, object O2, object O3) // 1, 2
 {
     public object O1 { get; init; }
@@ -2130,24 +2655,32 @@ record struct C1(object O1, object O2, object O3) // 1, 2
     public object O3 { get; init; } = M(O3 = null);
     private static object M(object o) => o;
 }
-");
+"
+            );
             comp.VerifyDiagnostics(
                 // (2,15): error CS0843: Auto-implemented property 'C1.O1' must be fully assigned before control is returned to the caller.
                 // record struct C1(object O1, object O2, object O3) // 1, 2
-                Diagnostic(ErrorCode.ERR_UnassignedThisAutoProperty, "C1").WithArguments("C1.O1").WithLocation(2, 15),
+                Diagnostic(ErrorCode.ERR_UnassignedThisAutoProperty, "C1")
+                    .WithArguments("C1.O1")
+                    .WithLocation(2, 15),
                 // (2,25): warning CS8907: Parameter 'O1' is unread. Did you forget to use it to initialize the property with that name?
                 // record struct C1(object O1, object O2, object O3) // 1, 2
-                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "O1").WithArguments("O1").WithLocation(2, 25),
+                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "O1")
+                    .WithArguments("O1")
+                    .WithLocation(2, 25),
                 // (2,47): warning CS8907: Parameter 'O3' is unread. Did you forget to use it to initialize the property with that name?
                 // record struct C1(object O1, object O2, object O3) // 1, 2
-                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "O3").WithArguments("O3").WithLocation(2, 47)
-                );
+                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "O3")
+                    .WithArguments("O3")
+                    .WithLocation(2, 47)
+            );
         }
 
         [Fact]
         public void RecordProperties_11_UnreadPositionalParameter_InRefOut()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 record struct C1(object O1, object O2, object O3) // 1
 {
     public object O1 { get; init; } = MIn(in O1);
@@ -2158,31 +2691,39 @@ record struct C1(object O1, object O2, object O3) // 1
     static object MRef(ref object o) => o;
     static object MOut(out object o) => throw null;
 }
-");
+"
+            );
             comp.VerifyDiagnostics(
                 // (2,47): warning CS8907: Parameter 'O3' is unread. Did you forget to use it to initialize the property with that name?
                 // record struct C1(object O1, object O2, object O3) // 1
-                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "O3").WithArguments("O3").WithLocation(2, 47)
-                );
+                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "O3")
+                    .WithArguments("O3")
+                    .WithLocation(2, 47)
+            );
         }
 
         [Fact]
         public void RecordProperties_SelfContainedStruct()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 record struct C(C c);
-");
+"
+            );
             comp.VerifyDiagnostics(
                 // (2,19): error CS0523: Struct member 'C.c' of type 'C' causes a cycle in the struct layout
                 // record struct C(C c);
-                Diagnostic(ErrorCode.ERR_StructLayoutCycle, "c").WithArguments("C.c", "C").WithLocation(2, 19)
-                );
+                Diagnostic(ErrorCode.ERR_StructLayoutCycle, "c")
+                    .WithArguments("C.c", "C")
+                    .WithLocation(2, 19)
+            );
         }
 
         [Fact]
         public void RecordProperties_PropertyInValueType()
         {
-            var corlib_cs = @"
+            var corlib_cs =
+                @"
 namespace System
 {
     public class Object
@@ -2225,7 +2766,8 @@ namespace System.Text
             var corlibRef = CreateEmptyCompilation(corlib_cs).EmitToImageReference();
 
             {
-                var src = @"
+                var src =
+                    @"
 record struct C(bool X)
 {
     bool M()
@@ -2234,22 +2776,36 @@ record struct C(bool X)
     }
 }
 ";
-                var comp = CreateEmptyCompilation(src, parseOptions: TestOptions.RegularPreview, references: new[] { corlibRef });
+                var comp = CreateEmptyCompilation(
+                    src,
+                    parseOptions: TestOptions.RegularPreview,
+                    references: new[] { corlibRef }
+                );
                 comp.VerifyEmitDiagnostics(
                     // (2,22): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
                     // record struct C(bool X)
-                    Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X").WithArguments("X").WithLocation(2, 22)
-                    );
+                    Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
+                        .WithArguments("X")
+                        .WithLocation(2, 22)
+                );
 
                 Assert.Null(comp.GlobalNamespace.GetTypeMember("C").GetMember("X"));
                 var tree = comp.SyntaxTrees.Single();
                 var model = comp.GetSemanticModel(tree, ignoreAccessibility: false);
-                var x = tree.GetRoot().DescendantNodes().OfType<ReturnStatementSyntax>().Single().Expression;
-                Assert.Equal("System.Boolean System.ValueType.X { get; set; }", model.GetSymbolInfo(x!).Symbol.ToTestDisplayString());
+                var x = tree.GetRoot()
+                    .DescendantNodes()
+                    .OfType<ReturnStatementSyntax>()
+                    .Single()
+                    .Expression;
+                Assert.Equal(
+                    "System.Boolean System.ValueType.X { get; set; }",
+                    model.GetSymbolInfo(x!).Symbol.ToTestDisplayString()
+                );
             }
 
             {
-                var src = @"
+                var src =
+                    @"
 readonly record struct C(bool X)
 {
     bool M()
@@ -2258,25 +2814,39 @@ readonly record struct C(bool X)
     }
 }
 ";
-                var comp = CreateEmptyCompilation(src, parseOptions: TestOptions.RegularPreview, references: new[] { corlibRef });
+                var comp = CreateEmptyCompilation(
+                    src,
+                    parseOptions: TestOptions.RegularPreview,
+                    references: new[] { corlibRef }
+                );
                 comp.VerifyEmitDiagnostics(
                     // (2,31): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
                     // readonly record struct C(bool X)
-                    Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X").WithArguments("X").WithLocation(2, 31)
-                    );
+                    Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
+                        .WithArguments("X")
+                        .WithLocation(2, 31)
+                );
 
                 Assert.Null(comp.GlobalNamespace.GetTypeMember("C").GetMember("X"));
                 var tree = comp.SyntaxTrees.Single();
                 var model = comp.GetSemanticModel(tree, ignoreAccessibility: false);
-                var x = tree.GetRoot().DescendantNodes().OfType<ReturnStatementSyntax>().Single().Expression;
-                Assert.Equal("System.Boolean System.ValueType.X { get; set; }", model.GetSymbolInfo(x!).Symbol.ToTestDisplayString());
+                var x = tree.GetRoot()
+                    .DescendantNodes()
+                    .OfType<ReturnStatementSyntax>()
+                    .Single()
+                    .Expression;
+                Assert.Equal(
+                    "System.Boolean System.ValueType.X { get; set; }",
+                    model.GetSymbolInfo(x!).Symbol.ToTestDisplayString()
+                );
             }
         }
 
         [Fact]
         public void RecordProperties_PropertyInValueType_Static()
         {
-            var corlib_cs = @"
+            var corlib_cs =
+                @"
 namespace System
 {
     public class Object
@@ -2317,7 +2887,8 @@ namespace System.Text
 }
 ";
             var corlibRef = CreateEmptyCompilation(corlib_cs).EmitToImageReference();
-            var src = @"
+            var src =
+                @"
 record struct C(bool X)
 {
     bool M()
@@ -2326,21 +2897,30 @@ record struct C(bool X)
     }
 }
 ";
-            var comp = CreateEmptyCompilation(src, parseOptions: TestOptions.RegularPreview, references: new[] { corlibRef });
+            var comp = CreateEmptyCompilation(
+                src,
+                parseOptions: TestOptions.RegularPreview,
+                references: new[] { corlibRef }
+            );
             comp.VerifyEmitDiagnostics(
                 // (2,22): error CS8866: Record member 'System.ValueType.X' must be a readable instance property or field of type 'bool' to match positional parameter 'X'.
                 // record struct C(bool X)
-                Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "X").WithArguments("System.ValueType.X", "bool", "X").WithLocation(2, 22),
+                Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "X")
+                    .WithArguments("System.ValueType.X", "bool", "X")
+                    .WithLocation(2, 22),
                 // (2,22): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
                 // record struct C(bool X)
-                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X").WithArguments("X").WithLocation(2, 22)
-                );
+                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
+                    .WithArguments("X")
+                    .WithLocation(2, 22)
+            );
         }
 
         [Fact]
         public void StaticCtor()
         {
-            var src = @"
+            var src =
+                @"
 record R(int x)
 {
     static void Main() { }
@@ -2352,15 +2932,24 @@ record R(int x)
 }
 ";
 
-            var comp = CreateCompilation(new[] { src, IsExternalInitTypeDefinition }, parseOptions: TestOptions.RegularPreview, options: TestOptions.DebugExe);
+            var comp = CreateCompilation(
+                new[] { src, IsExternalInitTypeDefinition },
+                parseOptions: TestOptions.RegularPreview,
+                options: TestOptions.DebugExe
+            );
             comp.VerifyEmitDiagnostics();
-            CompileAndVerify(comp, expectedOutput: "static ctor", verify: Verification.Skipped /* init-only */);
+            CompileAndVerify(
+                comp,
+                expectedOutput: "static ctor",
+                verify: Verification.Skipped /* init-only */
+            );
         }
 
         [Fact]
         public void StaticCtor_ParameterlessPrimaryCtor()
         {
-            var src = @"
+            var src =
+                @"
 record struct R(int I)
 {
     static R() { }
@@ -2374,7 +2963,8 @@ record struct R(int I)
         [Fact]
         public void StaticCtor_CopyCtor()
         {
-            var src = @"
+            var src =
+                @"
 record struct R(int I)
 {
     static R(R r) { }
@@ -2385,14 +2975,17 @@ record struct R(int I)
             comp.VerifyEmitDiagnostics(
                 // (4,12): error CS0132: 'R.R(R)': a static constructor must be parameterless
                 //     static R(R r) { }
-                Diagnostic(ErrorCode.ERR_StaticConstParam, "R").WithArguments("R.R(R)").WithLocation(4, 12)
-                );
+                Diagnostic(ErrorCode.ERR_StaticConstParam, "R")
+                    .WithArguments("R.R(R)")
+                    .WithLocation(4, 12)
+            );
         }
 
         [Fact]
         public void InterfaceImplementation_NotReadonly()
         {
-            var source = @"
+            var source =
+                @"
 I r = new R(42);
 r.P2 = 43;
 r.P3 = 44;
@@ -2418,7 +3011,8 @@ record struct R(int P1) : I
         [Fact]
         public void InterfaceImplementation_NotReadonly_InitOnlyInterface()
         {
-            var source = @"
+            var source =
+                @"
 interface I
 {
     int P1 { get; init; }
@@ -2429,14 +3023,17 @@ record struct R(int P1) : I;
             comp.VerifyEmitDiagnostics(
                 // (6,27): error CS8854: 'R' does not implement interface member 'I.P1.init'. 'R.P1.set' cannot implement 'I.P1.init'.
                 // record struct R(int P1) : I;
-                Diagnostic(ErrorCode.ERR_CloseUnimplementedInterfaceMemberWrongInitOnly, "I").WithArguments("R", "I.P1.init", "R.P1.set").WithLocation(6, 27)
-                );
+                Diagnostic(ErrorCode.ERR_CloseUnimplementedInterfaceMemberWrongInitOnly, "I")
+                    .WithArguments("R", "I.P1.init", "R.P1.set")
+                    .WithLocation(6, 27)
+            );
         }
 
         [Fact]
         public void InterfaceImplementation_Readonly()
         {
-            var source = @"
+            var source =
+                @"
 I r = new R(42) { P2 = 43 };
 System.Console.Write((r.P1, r.P2));
 
@@ -2452,13 +3049,18 @@ readonly record struct R(int P1) : I
 ";
             var comp = CreateCompilation(source);
             comp.VerifyEmitDiagnostics();
-            CompileAndVerify(comp, expectedOutput: "(42, 43)", verify: Verification.Skipped /* init-only */);
+            CompileAndVerify(
+                comp,
+                expectedOutput: "(42, 43)",
+                verify: Verification.Skipped /* init-only */
+            );
         }
 
         [Fact]
         public void InterfaceImplementation_Readonly_SetInterface()
         {
-            var source = @"
+            var source =
+                @"
 interface I
 {
     int P1 { get; set; }
@@ -2469,14 +3071,17 @@ readonly record struct R(int P1) : I;
             comp.VerifyEmitDiagnostics(
                 // (6,36): error CS8854: 'R' does not implement interface member 'I.P1.set'. 'R.P1.init' cannot implement 'I.P1.set'.
                 // readonly record struct R(int P1) : I;
-                Diagnostic(ErrorCode.ERR_CloseUnimplementedInterfaceMemberWrongInitOnly, "I").WithArguments("R", "I.P1.set", "R.P1.init").WithLocation(6, 36)
-                );
+                Diagnostic(ErrorCode.ERR_CloseUnimplementedInterfaceMemberWrongInitOnly, "I")
+                    .WithArguments("R", "I.P1.set", "R.P1.init")
+                    .WithLocation(6, 36)
+            );
         }
 
         [Fact]
         public void InterfaceImplementation_Readonly_PrivateImplementation()
         {
-            var source = @"
+            var source =
+                @"
 I r = new R(42) { P2 = 43, P3 = 44 };
 System.Console.Write((r.P1, r.P2, r.P3));
 
@@ -2496,14 +3101,17 @@ readonly record struct R(int P1) : I
             comp.VerifyEmitDiagnostics(
                 // (2,28): error CS0117: 'R' does not contain a definition for 'P3'
                 // I r = new R(42) { P2 = 43, P3 = 44 };
-                Diagnostic(ErrorCode.ERR_NoSuchMember, "P3").WithArguments("R", "P3").WithLocation(2, 28)
-                );
+                Diagnostic(ErrorCode.ERR_NoSuchMember, "P3")
+                    .WithArguments("R", "P3")
+                    .WithLocation(2, 28)
+            );
         }
 
         [Fact]
         public void Initializers_01()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 
 record struct C(int X)
@@ -2523,18 +3131,28 @@ record struct C(int X)
             var tree = comp.SyntaxTrees.First();
             var model = comp.GetSemanticModel(tree);
 
-            var x = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "X").First();
+            var x = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "X")
+                .First();
             Assert.Equal("= X + 1", x.Parent!.Parent!.ToString());
 
             var symbol = model.GetSymbolInfo(x).Symbol;
             Assert.Equal(SymbolKind.Parameter, symbol!.Kind);
             Assert.Equal("System.Int32 X", symbol.ToTestDisplayString());
             Assert.Equal("C..ctor(System.Int32 X)", symbol.ContainingSymbol.ToTestDisplayString());
-            Assert.Equal("System.Int32 C.Z", model.GetEnclosingSymbol(x.SpanStart).ToTestDisplayString());
+            Assert.Equal(
+                "System.Int32 C.Z",
+                model.GetEnclosingSymbol(x.SpanStart).ToTestDisplayString()
+            );
             Assert.Contains(symbol, model.LookupSymbols(x.SpanStart, name: "X"));
             Assert.Contains("X", model.LookupNames(x.SpanStart));
 
-            var recordDeclaration = tree.GetRoot().DescendantNodes().OfType<RecordDeclarationSyntax>().Single();
+            var recordDeclaration = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<RecordDeclarationSyntax>()
+                .Single();
             Assert.Equal("C", recordDeclaration.Identifier.ValueText);
             Assert.Null(model.GetOperation(recordDeclaration));
         }
@@ -2542,7 +3160,8 @@ record struct C(int X)
         [Fact]
         public void Initializers_02()
         {
-            var src = @"
+            var src =
+                @"
 record struct C(int X)
 {
     static int Z = X + 1;
@@ -2552,20 +3171,29 @@ record struct C(int X)
             comp.VerifyDiagnostics(
                 // (4,20): error CS0236: A field initializer cannot reference the non-static field, method, or property 'C.X'
                 //     static int Z = X + 1;
-                Diagnostic(ErrorCode.ERR_FieldInitRefNonstatic, "X").WithArguments("C.X").WithLocation(4, 20)
-                );
+                Diagnostic(ErrorCode.ERR_FieldInitRefNonstatic, "X")
+                    .WithArguments("C.X")
+                    .WithLocation(4, 20)
+            );
 
             var tree = comp.SyntaxTrees.First();
             var model = comp.GetSemanticModel(tree);
 
-            var x = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "X").First();
+            var x = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "X")
+                .First();
             Assert.Equal("= X + 1", x.Parent!.Parent!.ToString());
 
             var symbol = model.GetSymbolInfo(x).Symbol;
             Assert.Equal(SymbolKind.Property, symbol!.Kind);
             Assert.Equal("System.Int32 C.X { get; set; }", symbol.ToTestDisplayString());
             Assert.Equal("C", symbol.ContainingSymbol.ToTestDisplayString());
-            Assert.Equal("System.Int32 C.Z", model.GetEnclosingSymbol(x.SpanStart).ToTestDisplayString());
+            Assert.Equal(
+                "System.Int32 C.Z",
+                model.GetEnclosingSymbol(x.SpanStart).ToTestDisplayString()
+            );
             Assert.Contains(symbol, model.LookupSymbols(x.SpanStart, name: "X"));
             Assert.Contains("X", model.LookupNames(x.SpanStart));
         }
@@ -2573,7 +3201,8 @@ record struct C(int X)
         [Fact]
         public void Initializers_03()
         {
-            var src = @"
+            var src =
+                @"
 record struct C(int X)
 {
     const int Z = X + 1;
@@ -2583,20 +3212,29 @@ record struct C(int X)
             comp.VerifyDiagnostics(
                 // (4,19): error CS0236: A field initializer cannot reference the non-static field, method, or property 'C.X'
                 //     const int Z = X + 1;
-                Diagnostic(ErrorCode.ERR_FieldInitRefNonstatic, "X").WithArguments("C.X").WithLocation(4, 19)
-                );
+                Diagnostic(ErrorCode.ERR_FieldInitRefNonstatic, "X")
+                    .WithArguments("C.X")
+                    .WithLocation(4, 19)
+            );
 
             var tree = comp.SyntaxTrees.First();
             var model = comp.GetSemanticModel(tree);
 
-            var x = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "X").First();
+            var x = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "X")
+                .First();
             Assert.Equal("= X + 1", x.Parent!.Parent!.ToString());
 
             var symbol = model.GetSymbolInfo(x).Symbol;
             Assert.Equal(SymbolKind.Property, symbol!.Kind);
             Assert.Equal("System.Int32 C.X { get; set; }", symbol.ToTestDisplayString());
             Assert.Equal("C", symbol.ContainingSymbol.ToTestDisplayString());
-            Assert.Equal("System.Int32 C.Z", model.GetEnclosingSymbol(x.SpanStart).ToTestDisplayString());
+            Assert.Equal(
+                "System.Int32 C.Z",
+                model.GetEnclosingSymbol(x.SpanStart).ToTestDisplayString()
+            );
             Assert.Contains(symbol, model.LookupSymbols(x.SpanStart, name: "X"));
             Assert.Contains("X", model.LookupNames(x.SpanStart));
         }
@@ -2604,7 +3242,8 @@ record struct C(int X)
         [Fact]
         public void Initializers_04()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 
 record struct C(int X)
@@ -2624,14 +3263,21 @@ record struct C(int X)
             var tree = comp.SyntaxTrees.First();
             var model = comp.GetSemanticModel(tree);
 
-            var x = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "X").First();
+            var x = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "X")
+                .First();
             Assert.Equal("() => X + 1", x.Parent!.Parent!.ToString());
 
             var symbol = model.GetSymbolInfo(x).Symbol;
             Assert.Equal(SymbolKind.Parameter, symbol!.Kind);
             Assert.Equal("System.Int32 X", symbol.ToTestDisplayString());
             Assert.Equal("C..ctor(System.Int32 X)", symbol.ContainingSymbol.ToTestDisplayString());
-            Assert.Equal("lambda expression", model.GetEnclosingSymbol(x.SpanStart).ToTestDisplayString());
+            Assert.Equal(
+                "lambda expression",
+                model.GetEnclosingSymbol(x.SpanStart).ToTestDisplayString()
+            );
             Assert.Contains(symbol, model.LookupSymbols(x.SpanStart, name: "X"));
             Assert.Contains("X", model.LookupNames(x.SpanStart));
         }
@@ -2639,11 +3285,14 @@ record struct C(int X)
         [Fact]
         public void SynthesizedRecordPointerProperty()
         {
-            var src = @"
+            var src =
+                @"
 record struct R(int P1, int* P2, delegate*<int> P3);";
 
             var comp = CreateCompilation(src);
-            var p = comp.GlobalNamespace.GetTypeMember("R").GetMember<SourcePropertySymbolBase>("P1");
+            var p = comp.GlobalNamespace
+                .GetTypeMember("R")
+                .GetMember<SourcePropertySymbolBase>("P1");
             Assert.False(p.HasPointerType);
 
             p = comp.GlobalNamespace.GetTypeMember("R").GetMember<SourcePropertySymbolBase>("P2");
@@ -2656,7 +3305,8 @@ record struct R(int P1, int* P2, delegate*<int> P3);";
         [Fact]
         public void PositionalMemberModifiers_In()
         {
-            var src = @"
+            var src =
+                @"
 var r = new R(42);
 int i = 43;
 var r2 = new R(in i);
@@ -2669,19 +3319,17 @@ record struct R(in int P1);
             comp.VerifyDiagnostics();
             var verifier = CompileAndVerify(comp, expectedOutput: "(42, 43)");
 
-            var actualMembers = comp.GetMember<NamedTypeSymbol>("R").Constructors.ToTestDisplayStrings();
-            var expectedMembers = new[]
-            {
-                "R..ctor(in System.Int32 P1)",
-                "R..ctor()"
-            };
+            var actualMembers = comp.GetMember<NamedTypeSymbol>("R")
+                .Constructors.ToTestDisplayStrings();
+            var expectedMembers = new[] { "R..ctor(in System.Int32 P1)", "R..ctor()" };
             AssertEx.Equal(expectedMembers, actualMembers);
         }
 
         [Fact]
         public void PositionalMemberModifiers_Params()
         {
-            var src = @"
+            var src =
+                @"
 var r = new R(42, 43);
 var r2 = new R(new[] { 44, 45 });
 System.Console.Write((r.Array[0], r.Array[1], r2.Array[0], r2.Array[1]));
@@ -2693,19 +3341,17 @@ record struct R(params int[] Array);
             comp.VerifyDiagnostics();
             CompileAndVerify(comp, expectedOutput: "(42, 43, 44, 45)");
 
-            var actualMembers = comp.GetMember<NamedTypeSymbol>("R").Constructors.ToTestDisplayStrings();
-            var expectedMembers = new[]
-            {
-                "R..ctor(params System.Int32[] Array)",
-                "R..ctor()"
-            };
+            var actualMembers = comp.GetMember<NamedTypeSymbol>("R")
+                .Constructors.ToTestDisplayStrings();
+            var expectedMembers = new[] { "R..ctor(params System.Int32[] Array)", "R..ctor()" };
             AssertEx.Equal(expectedMembers, actualMembers);
         }
 
         [Fact]
         public void PositionalMemberDefaultValue()
         {
-            var src = @"
+            var src =
+                @"
 var r = new R(); // This uses the parameterless constructor
 System.Console.Write(r.P);
 
@@ -2720,7 +3366,8 @@ record struct R(int P = 42);
         [Fact]
         public void PositionalMemberDefaultValue_PassingOneArgument()
         {
-            var src = @"
+            var src =
+                @"
 var r = new R(41);
 System.Console.Write(r.O);
 System.Console.Write("" "");
@@ -2737,7 +3384,8 @@ record struct R(int O, int P = 42);
         [Fact]
         public void PositionalMemberDefaultValue_AndPropertyWithInitializer()
         {
-            var src = @"
+            var src =
+                @"
 var r = new R(0);
 System.Console.Write(r.P);
 
@@ -2750,11 +3398,19 @@ record struct R(int O, int P = 1)
             comp.VerifyDiagnostics(
                 // (5,28): warning CS8907: Parameter 'P' is unread. Did you forget to use it to initialize the property with that name?
                 // record struct R(int O, int P = 1)
-                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P").WithArguments("P").WithLocation(5, 28)
-                );
-            var verifier = CompileAndVerify(comp, expectedOutput: "42", verify: Verification.Skipped /* init-only */);
+                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P")
+                    .WithArguments("P")
+                    .WithLocation(5, 28)
+            );
+            var verifier = CompileAndVerify(
+                comp,
+                expectedOutput: "42",
+                verify: Verification.Skipped /* init-only */
+            );
 
-            verifier.VerifyIL("R..ctor(int, int)", @"
+            verifier.VerifyIL(
+                "R..ctor(int, int)",
+                @"
 {
   // Code size       16 (0x10)
   .maxstack  2
@@ -2765,13 +3421,15 @@ record struct R(int O, int P = 1)
   IL_0008:  ldc.i4.s   42
   IL_000a:  stfld      ""int R.<P>k__BackingField""
   IL_000f:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void PositionalMemberDefaultValue_AndPropertyWithoutInitializer()
         {
-            var src = @"
+            var src =
+                @"
 record struct R(int P = 42)
 {
     public int P { get; init; }
@@ -2787,17 +3445,22 @@ record struct R(int P = 42)
             comp.VerifyDiagnostics(
                 // (2,15): error CS0843: Auto-implemented property 'R.P' must be fully assigned before control is returned to the caller.
                 // record struct R(int P = 42)
-                Diagnostic(ErrorCode.ERR_UnassignedThisAutoProperty, "R").WithArguments("R.P").WithLocation(2, 15),
+                Diagnostic(ErrorCode.ERR_UnassignedThisAutoProperty, "R")
+                    .WithArguments("R.P")
+                    .WithLocation(2, 15),
                 // (2,21): warning CS8907: Parameter 'P' is unread. Did you forget to use it to initialize the property with that name?
                 // record struct R(int P = 42)
-                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P").WithArguments("P").WithLocation(2, 21)
-                );
+                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P")
+                    .WithArguments("P")
+                    .WithLocation(2, 21)
+            );
         }
 
         [Fact]
         public void PositionalMemberDefaultValue_AndPropertyWithInitializer_CopyingParameter()
         {
-            var src = @"
+            var src =
+                @"
 var r = new R(0);
 System.Console.Write(r.P);
 
@@ -2808,9 +3471,15 @@ record struct R(int O, int P = 42)
 ";
             var comp = CreateCompilation(src);
             comp.VerifyDiagnostics();
-            var verifier = CompileAndVerify(comp, expectedOutput: "42", verify: Verification.Skipped /* init-only */);
+            var verifier = CompileAndVerify(
+                comp,
+                expectedOutput: "42",
+                verify: Verification.Skipped /* init-only */
+            );
 
-            verifier.VerifyIL("R..ctor(int, int)", @"
+            verifier.VerifyIL(
+                "R..ctor(int, int)",
+                @"
 {
   // Code size       15 (0xf)
   .maxstack  2
@@ -2821,13 +3490,15 @@ record struct R(int O, int P = 42)
   IL_0008:  ldarg.2
   IL_0009:  stfld      ""int R.<P>k__BackingField""
   IL_000e:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void RecordWithConstraints_NullableWarning()
         {
-            var src = @"
+            var src =
+                @"
 #nullable enable
 var r = new R<string?>(""R"");
 var r2 = new R2<string?>(""R2"");
@@ -2841,18 +3512,29 @@ record struct R2<T>(T P) where T : class { }
             comp.VerifyDiagnostics(
                 // (3,15): warning CS8634: The type 'string?' cannot be used as type parameter 'T' in the generic type or method 'R<T>'. Nullability of type argument 'string?' doesn't match 'class' constraint.
                 // var r = new R<string?>("R");
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInTypeParameterReferenceTypeConstraint, "string?").WithArguments("R<T>", "T", "string?").WithLocation(3, 15),
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInTypeParameterReferenceTypeConstraint,
+                        "string?"
+                    )
+                    .WithArguments("R<T>", "T", "string?")
+                    .WithLocation(3, 15),
                 // (4,17): warning CS8634: The type 'string?' cannot be used as type parameter 'T' in the generic type or method 'R2<T>'. Nullability of type argument 'string?' doesn't match 'class' constraint.
                 // var r2 = new R2<string?>("R2");
-                Diagnostic(ErrorCode.WRN_NullabilityMismatchInTypeParameterReferenceTypeConstraint, "string?").WithArguments("R2<T>", "T", "string?").WithLocation(4, 17)
-                );
+                Diagnostic(
+                        ErrorCode.WRN_NullabilityMismatchInTypeParameterReferenceTypeConstraint,
+                        "string?"
+                    )
+                    .WithArguments("R2<T>", "T", "string?")
+                    .WithLocation(4, 17)
+            );
             CompileAndVerify(comp, expectedOutput: "(R, R2)");
         }
 
         [Fact]
         public void RecordWithConstraints_ConstraintError()
         {
-            var src = @"
+            var src =
+                @"
 record struct R<T>(T P) where T : class;
 record struct R2<T>(T P) where T : class { }
 
@@ -2869,18 +3551,22 @@ public class C
             comp.VerifyDiagnostics(
                 // (9,19): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T' in the generic type or method 'R<T>'
                 //         _ = new R<int>(1);
-                Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "int").WithArguments("R<T>", "T", "int").WithLocation(9, 19),
+                Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "int")
+                    .WithArguments("R<T>", "T", "int")
+                    .WithLocation(9, 19),
                 // (10,20): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T' in the generic type or method 'R2<T>'
                 //         _ = new R2<int>(2);
-                Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "int").WithArguments("R2<T>", "T", "int").WithLocation(10, 20)
-                );
+                Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "int")
+                    .WithArguments("R2<T>", "T", "int")
+                    .WithLocation(10, 20)
+            );
         }
 
         [Fact]
         public void CyclicBases4()
         {
             var text =
-@"
+                @"
 record struct A<T> : B<A<T>> { }
 record struct B<T> : A<B<T>>
 {
@@ -2888,20 +3574,26 @@ record struct B<T> : A<B<T>>
 }
 ";
             var comp = CreateCompilation(text);
-            comp.GetDeclarationDiagnostics().Verify(
-                // (3,22): error CS0527: Type 'A<B<T>>' in interface list is not an interface
-                // record struct B<T> : A<B<T>>
-                Diagnostic(ErrorCode.ERR_NonInterfaceInInterfaceList, "A<B<T>>").WithArguments("A<B<T>>").WithLocation(3, 22),
-                // (2,22): error CS0527: Type 'B<A<T>>' in interface list is not an interface
-                // record struct A<T> : B<A<T>> { }
-                Diagnostic(ErrorCode.ERR_NonInterfaceInInterfaceList, "B<A<T>>").WithArguments("B<A<T>>").WithLocation(2, 22)
+            comp.GetDeclarationDiagnostics()
+                .Verify(
+                    // (3,22): error CS0527: Type 'A<B<T>>' in interface list is not an interface
+                    // record struct B<T> : A<B<T>>
+                    Diagnostic(ErrorCode.ERR_NonInterfaceInInterfaceList, "A<B<T>>")
+                        .WithArguments("A<B<T>>")
+                        .WithLocation(3, 22),
+                    // (2,22): error CS0527: Type 'B<A<T>>' in interface list is not an interface
+                    // record struct A<T> : B<A<T>> { }
+                    Diagnostic(ErrorCode.ERR_NonInterfaceInInterfaceList, "B<A<T>>")
+                        .WithArguments("B<A<T>>")
+                        .WithLocation(2, 22)
                 );
         }
 
         [Fact]
         public void PartialClassWithDifferentTupleNamesInImplementedInterfaces()
         {
-            var source = @"
+            var source =
+                @"
 public interface I<T> { }
 public partial record C1 : I<(int a, int b)> { }
 public partial record C1 : I<(int notA, int notB)> { }
@@ -2919,92 +3611,117 @@ public partial record C4 : I<(int b, int a)> { }
             comp.VerifyDiagnostics(
                 // (3,23): error CS8140: 'I<(int notA, int notB)>' is already listed in the interface list on type 'C1' with different tuple element names, as 'I<(int a, int b)>'.
                 // public partial record C1 : I<(int a, int b)> { }
-                Diagnostic(ErrorCode.ERR_DuplicateInterfaceWithTupleNamesInBaseList, "C1").WithArguments("I<(int notA, int notB)>", "I<(int a, int b)>", "C1").WithLocation(3, 23),
+                Diagnostic(ErrorCode.ERR_DuplicateInterfaceWithTupleNamesInBaseList, "C1")
+                    .WithArguments("I<(int notA, int notB)>", "I<(int a, int b)>", "C1")
+                    .WithLocation(3, 23),
                 // (6,23): error CS8140: 'I<(int, int)>' is already listed in the interface list on type 'C2' with different tuple element names, as 'I<(int a, int b)>'.
                 // public partial record C2 : I<(int a, int b)> { }
-                Diagnostic(ErrorCode.ERR_DuplicateInterfaceWithTupleNamesInBaseList, "C2").WithArguments("I<(int, int)>", "I<(int a, int b)>", "C2").WithLocation(6, 23),
+                Diagnostic(ErrorCode.ERR_DuplicateInterfaceWithTupleNamesInBaseList, "C2")
+                    .WithArguments("I<(int, int)>", "I<(int a, int b)>", "C2")
+                    .WithLocation(6, 23),
                 // (12,23): error CS8140: 'I<(int b, int a)>' is already listed in the interface list on type 'C4' with different tuple element names, as 'I<(int a, int b)>'.
                 // public partial record C4 : I<(int a, int b)> { }
-                Diagnostic(ErrorCode.ERR_DuplicateInterfaceWithTupleNamesInBaseList, "C4").WithArguments("I<(int b, int a)>", "I<(int a, int b)>", "C4").WithLocation(12, 23)
-                );
+                Diagnostic(ErrorCode.ERR_DuplicateInterfaceWithTupleNamesInBaseList, "C4")
+                    .WithArguments("I<(int b, int a)>", "I<(int a, int b)>", "C4")
+                    .WithLocation(12, 23)
+            );
         }
 
         [Fact]
         public void CS0267ERR_PartialMisplaced()
         {
-            var test = @"
+            var test =
+                @"
 partial public record struct C  // CS0267
 {
 }
 ";
 
-            CreateCompilation(test).VerifyDiagnostics(
-                // (2,1): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
-                // partial public record struct C  // CS0267
-                Diagnostic(ErrorCode.ERR_PartialMisplaced, "partial").WithLocation(2, 1)
+            CreateCompilation(test)
+                .VerifyDiagnostics(
+                    // (2,1): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
+                    // partial public record struct C  // CS0267
+                    Diagnostic(ErrorCode.ERR_PartialMisplaced, "partial").WithLocation(2, 1)
                 );
         }
 
         [Fact]
         public void SealedStaticRecord()
         {
-            var source = @"
+            var source =
+                @"
 sealed static record struct R;
 ";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (2,29): error CS0106: The modifier 'sealed' is not valid for this item
-                // sealed static record struct R;
-                Diagnostic(ErrorCode.ERR_BadMemberFlag, "R").WithArguments("sealed").WithLocation(2, 29),
-                // (2,29): error CS0106: The modifier 'static' is not valid for this item
-                // sealed static record struct R;
-                Diagnostic(ErrorCode.ERR_BadMemberFlag, "R").WithArguments("static").WithLocation(2, 29)
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (2,29): error CS0106: The modifier 'sealed' is not valid for this item
+                    // sealed static record struct R;
+                    Diagnostic(ErrorCode.ERR_BadMemberFlag, "R")
+                        .WithArguments("sealed")
+                        .WithLocation(2, 29),
+                    // (2,29): error CS0106: The modifier 'static' is not valid for this item
+                    // sealed static record struct R;
+                    Diagnostic(ErrorCode.ERR_BadMemberFlag, "R")
+                        .WithArguments("static")
+                        .WithLocation(2, 29)
                 );
         }
 
         [Fact]
         public void CS0513ERR_AbstractInConcreteClass02()
         {
-            var text = @"
+            var text =
+                @"
 record struct C
 {
     public abstract event System.Action E;
     public abstract int this[int x] { get; set; }
 }
 ";
-            CreateCompilation(text).VerifyDiagnostics(
-                // (5,25): error CS0106: The modifier 'abstract' is not valid for this item
-                //     public abstract int this[int x] { get; set; }
-                Diagnostic(ErrorCode.ERR_BadMemberFlag, "this").WithArguments("abstract").WithLocation(5, 25),
-                // (4,41): error CS0106: The modifier 'abstract' is not valid for this item
-                //     public abstract event System.Action E;
-                Diagnostic(ErrorCode.ERR_BadMemberFlag, "E").WithArguments("abstract").WithLocation(4, 41)
+            CreateCompilation(text)
+                .VerifyDiagnostics(
+                    // (5,25): error CS0106: The modifier 'abstract' is not valid for this item
+                    //     public abstract int this[int x] { get; set; }
+                    Diagnostic(ErrorCode.ERR_BadMemberFlag, "this")
+                        .WithArguments("abstract")
+                        .WithLocation(5, 25),
+                    // (4,41): error CS0106: The modifier 'abstract' is not valid for this item
+                    //     public abstract event System.Action E;
+                    Diagnostic(ErrorCode.ERR_BadMemberFlag, "E")
+                        .WithArguments("abstract")
+                        .WithLocation(4, 41)
                 );
         }
 
         [Fact]
         public void CS0574ERR_BadDestructorName()
         {
-            var test = @"
+            var test =
+                @"
 public record struct iii
 {
     ~iiii(){}
 }
 ";
 
-            CreateCompilation(test).VerifyDiagnostics(
-                // (4,6): error CS0574: Name of destructor must match name of type
-                //     ~iiii(){}
-                Diagnostic(ErrorCode.ERR_BadDestructorName, "iiii").WithLocation(4, 6),
-                // (4,6): error CS0575: Only class types can contain destructors
-                //     ~iiii(){}
-                Diagnostic(ErrorCode.ERR_OnlyClassesCanContainDestructors, "iiii").WithArguments("iii.~iii()").WithLocation(4, 6)
+            CreateCompilation(test)
+                .VerifyDiagnostics(
+                    // (4,6): error CS0574: Name of destructor must match name of type
+                    //     ~iiii(){}
+                    Diagnostic(ErrorCode.ERR_BadDestructorName, "iiii").WithLocation(4, 6),
+                    // (4,6): error CS0575: Only class types can contain destructors
+                    //     ~iiii(){}
+                    Diagnostic(ErrorCode.ERR_OnlyClassesCanContainDestructors, "iiii")
+                        .WithArguments("iii.~iii()")
+                        .WithLocation(4, 6)
                 );
         }
 
         [Fact]
         public void StaticRecordWithConstructorAndDestructor()
         {
-            var text = @"
+            var text =
+                @"
 static record struct R(int I)
 {
     public R() : this(0) { }
@@ -3015,25 +3732,31 @@ static record struct R(int I)
             comp.VerifyDiagnostics(
                 // (2,22): error CS0106: The modifier 'static' is not valid for this item
                 // static record struct R(int I)
-                Diagnostic(ErrorCode.ERR_BadMemberFlag, "R").WithArguments("static").WithLocation(2, 22),
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "R")
+                    .WithArguments("static")
+                    .WithLocation(2, 22),
                 // (5,6): error CS0575: Only class types can contain destructors
                 //     ~R() { }
-                Diagnostic(ErrorCode.ERR_OnlyClassesCanContainDestructors, "R").WithArguments("R.~R()").WithLocation(5, 6)
-                );
+                Diagnostic(ErrorCode.ERR_OnlyClassesCanContainDestructors, "R")
+                    .WithArguments("R.~R()")
+                    .WithLocation(5, 6)
+            );
         }
 
         [Fact]
         public void RecordWithPartialMethodExplicitImplementation()
         {
             var source =
-@"record struct R
+                @"record struct R
 {
     partial void M();
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (3,18): error CS0751: A partial method must be declared within a partial type
-                //     partial void M();
-                Diagnostic(ErrorCode.ERR_PartialMethodOnlyInPartialClass, "M").WithLocation(3, 18)
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (3,18): error CS0751: A partial method must be declared within a partial type
+                    //     partial void M();
+                    Diagnostic(ErrorCode.ERR_PartialMethodOnlyInPartialClass, "M")
+                        .WithLocation(3, 18)
                 );
         }
 
@@ -3041,21 +3764,28 @@ static record struct R(int I)
         public void RecordWithPartialMethodRequiringBody()
         {
             var source =
-@"partial record struct R
+                @"partial record struct R
 {
     public partial int M();
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (3,24): error CS8795: Partial method 'R.M()' must have an implementation part because it has accessibility modifiers.
-                //     public partial int M();
-                Diagnostic(ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation, "M").WithArguments("R.M()").WithLocation(3, 24)
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (3,24): error CS8795: Partial method 'R.M()' must have an implementation part because it has accessibility modifiers.
+                    //     public partial int M();
+                    Diagnostic(
+                            ErrorCode.ERR_PartialMethodWithAccessibilityModsMustHaveImplementation,
+                            "M"
+                        )
+                        .WithArguments("R.M()")
+                        .WithLocation(3, 24)
                 );
         }
 
         [Fact]
         public void CanDeclareIteratorInRecord()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 
 foreach(var i in new X(42).GetItems())
@@ -3076,7 +3806,8 @@ public record struct X(int a)
         [Fact]
         public void ParameterlessConstructor()
         {
-            var src = @"
+            var src =
+                @"
 System.Console.Write(new C().Property);
 
 record struct C()
@@ -3091,7 +3822,8 @@ record struct C()
         [Fact]
         public void XmlDoc()
         {
-            var src = @"
+            var src =
+                @"
 /// <summary>Summary</summary>
 /// <param name=""I1"">Description for I1</param>
 public record struct C(int I1);
@@ -3105,23 +3837,33 @@ namespace System.Runtime.CompilerServices
 }
 ";
 
-            var comp = CreateCompilation(src, parseOptions: TestOptions.RegularWithDocumentationComments);
+            var comp = CreateCompilation(
+                src,
+                parseOptions: TestOptions.RegularWithDocumentationComments
+            );
             comp.VerifyDiagnostics();
 
             var cMember = comp.GetMember<NamedTypeSymbol>("C");
             Assert.Equal(
-@"<member name=""T:C"">
+                @"<member name=""T:C"">
     <summary>Summary</summary>
     <param name=""I1"">Description for I1</param>
 </member>
-", cMember.GetDocumentationCommentXml());
-            var constructor = cMember.GetMembers(".ctor").OfType<SynthesizedRecordConstructor>().Single();
+",
+                cMember.GetDocumentationCommentXml()
+            );
+            var constructor = cMember
+                .GetMembers(".ctor")
+                .OfType<SynthesizedRecordConstructor>()
+                .Single();
             Assert.Equal(
-@"<member name=""M:C.#ctor(System.Int32)"">
+                @"<member name=""M:C.#ctor(System.Int32)"">
     <summary>Summary</summary>
     <param name=""I1"">Description for I1</param>
 </member>
-", constructor.GetDocumentationCommentXml());
+",
+                constructor.GetDocumentationCommentXml()
+            );
 
             Assert.Equal("", constructor.GetParameters()[0].GetDocumentationCommentXml());
 
@@ -3132,7 +3874,8 @@ namespace System.Runtime.CompilerServices
         [Fact]
         public void XmlDoc_Cref()
         {
-            var src = @"
+            var src =
+                @"
 /// <summary>Summary</summary>
 /// <param name=""I1"">Description for <see cref=""I1""/></param>
 public record struct C(int I1)
@@ -3151,16 +3894,27 @@ namespace System.Runtime.CompilerServices
 }
 ";
 
-            var comp = CreateCompilation(src, parseOptions: TestOptions.RegularWithDocumentationComments);
+            var comp = CreateCompilation(
+                src,
+                parseOptions: TestOptions.RegularWithDocumentationComments
+            );
             comp.VerifyDiagnostics(
                 // (7,52): warning CS1574: XML comment has cref attribute 'x' that could not be resolved
                 //     /// <param name="x">Description for <see cref="x"/></param>
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "x").WithArguments("x").WithLocation(7, 52)
-                );
+            );
 
             var tree = comp.SyntaxTrees.Single();
-            var docComments = tree.GetCompilationUnitRoot().DescendantTrivia().Select(trivia => trivia.GetStructure()).OfType<DocumentationCommentTriviaSyntax>();
-            var cref = docComments.First().DescendantNodes().OfType<XmlCrefAttributeSyntax>().First().Cref;
+            var docComments = tree.GetCompilationUnitRoot()
+                .DescendantTrivia()
+                .Select(trivia => trivia.GetStructure())
+                .OfType<DocumentationCommentTriviaSyntax>();
+            var cref = docComments
+                .First()
+                .DescendantNodes()
+                .OfType<XmlCrefAttributeSyntax>()
+                .First()
+                .Cref;
             Assert.Equal("I1", cref.ToString());
 
             var model = comp.GetSemanticModel(tree, ignoreAccessibility: false);
@@ -3171,7 +3925,7 @@ namespace System.Runtime.CompilerServices
         public void Deconstruct_Simple()
         {
             var source =
-@"using System;
+                @"using System;
 
 record struct B(int X, int Y)
 {
@@ -3194,7 +3948,9 @@ record struct B(int X, int Y)
             var verifier = CompileAndVerify(source, expectedOutput: "12");
             verifier.VerifyDiagnostics();
 
-            verifier.VerifyIL("B.Deconstruct", @"
+            verifier.VerifyIL(
+                "B.Deconstruct",
+                @"
 {
   // Code size       17 (0x11)
   .maxstack  2
@@ -3207,9 +3963,12 @@ record struct B(int X, int Y)
   IL_000a:  call       ""readonly int B.Y.get""
   IL_000f:  stind.i4
   IL_0010:  ret
-}");
+}"
+            );
 
-            var deconstruct = ((CSharpCompilation)verifier.Compilation).GetMember<MethodSymbol>("B.Deconstruct");
+            var deconstruct = ((CSharpCompilation)verifier.Compilation).GetMember<MethodSymbol>(
+                "B.Deconstruct"
+            );
             Assert.Equal(2, deconstruct.ParameterCount);
 
             Assert.Equal(RefKind.Out, deconstruct.Parameters[0].RefKind);
@@ -3228,7 +3987,7 @@ record struct B(int X, int Y)
         public void Deconstruct_PositionalAndNominalProperty()
         {
             var source =
-@"using System;
+                @"using System;
 
 record struct B(int X)
 {
@@ -3254,14 +4013,17 @@ record struct B(int X)
 
             Assert.Equal(
                 "readonly void B.Deconstruct(out System.Int32 X)",
-                verifier.Compilation.GetMember("B.Deconstruct").ToTestDisplayString(includeNonNullable: false));
+                verifier.Compilation
+                    .GetMember("B.Deconstruct")
+                    .ToTestDisplayString(includeNonNullable: false)
+            );
         }
 
         [Fact]
         public void Deconstruct_Nested()
         {
             var source =
-@"using System;
+                @"using System;
 
 record struct B(int X, int Y);
 
@@ -3289,7 +4051,9 @@ record struct C(B B, int Z)
             var verifier = CompileAndVerify(source, expectedOutput: "123");
             verifier.VerifyDiagnostics();
 
-            verifier.VerifyIL("B.Deconstruct", @"
+            verifier.VerifyIL(
+                "B.Deconstruct",
+                @"
 {
   // Code size       17 (0x11)
   .maxstack  2
@@ -3302,9 +4066,12 @@ record struct C(B B, int Z)
   IL_000a:  call       ""readonly int B.Y.get""
   IL_000f:  stind.i4
   IL_0010:  ret
-}");
+}"
+            );
 
-            verifier.VerifyIL("C.Deconstruct", @"
+            verifier.VerifyIL(
+                "C.Deconstruct",
+                @"
 {
   // Code size       21 (0x15)
   .maxstack  2
@@ -3317,14 +4084,15 @@ record struct C(B B, int Z)
   IL_000e:  call       ""readonly int C.Z.get""
   IL_0013:  stind.i4
   IL_0014:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void Deconstruct_PropertyCollision()
         {
             var source =
-@"using System;
+                @"using System;
 
 record struct B(int X, int Y)
 {
@@ -3351,18 +4119,24 @@ record struct B(int X, int Y)
             verifier.VerifyDiagnostics(
                 // (3,21): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
                 // record struct B(int X, int Y)
-                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X").WithArguments("X").WithLocation(3, 21)
-                );
+                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
+                    .WithArguments("X")
+                    .WithLocation(3, 21)
+            );
 
             Assert.Equal(
                 "void B.Deconstruct(out System.Int32 X, out System.Int32 Y)",
-                verifier.Compilation.GetMember("B.Deconstruct").ToTestDisplayString(includeNonNullable: false));
+                verifier.Compilation
+                    .GetMember("B.Deconstruct")
+                    .ToTestDisplayString(includeNonNullable: false)
+            );
         }
 
         [Fact]
         public void Deconstruct_MethodCollision_01()
         {
-            var source = @"
+            var source =
+                @"
 record struct B(int X, int Y)
 {
     public int X() => 3;
@@ -3386,18 +4160,22 @@ record struct B(int X, int Y)
             comp.VerifyDiagnostics(
                 // (4,16): error CS0102: The type 'B' already contains a definition for 'X'
                 //     public int X() => 3;
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "X").WithArguments("B", "X").WithLocation(4, 16)
-                );
+                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "X")
+                    .WithArguments("B", "X")
+                    .WithLocation(4, 16)
+            );
 
             Assert.Equal(
                 "readonly void B.Deconstruct(out System.Int32 X, out System.Int32 Y)",
-                comp.GetMember("B.Deconstruct").ToTestDisplayString(includeNonNullable: false));
+                comp.GetMember("B.Deconstruct").ToTestDisplayString(includeNonNullable: false)
+            );
         }
 
         [Fact]
         public void Deconstruct_FieldCollision()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 record struct C(int X)
@@ -3424,20 +4202,27 @@ record struct C(int X)
             comp.VerifyDiagnostics(
                 // (4,21): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
                 // record struct C(int X)
-                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X").WithArguments("X").WithLocation(4, 21),
+                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
+                    .WithArguments("X")
+                    .WithLocation(4, 21),
                 // (6,9): warning CS0414: The field 'C.X' is assigned but its value is never used
                 //     int X = 0;
-                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "X").WithArguments("C.X").WithLocation(6, 9));
+                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "X")
+                    .WithArguments("C.X")
+                    .WithLocation(6, 9)
+            );
 
             Assert.Equal(
                 "readonly void C.Deconstruct(out System.Int32 X)",
-                comp.GetMember("C.Deconstruct").ToTestDisplayString(includeNonNullable: false));
+                comp.GetMember("C.Deconstruct").ToTestDisplayString(includeNonNullable: false)
+            );
         }
 
         [Fact]
         public void Deconstruct_Empty()
         {
-            var source = @"
+            var source =
+                @"
 record struct C
 {
     static void M(C c)
@@ -3459,10 +4244,15 @@ record struct C
             comp.VerifyDiagnostics(
                 // (8,19): error CS1061: 'C' does not contain a definition for 'Deconstruct' and no accessible extension method 'Deconstruct' accepting a first argument of type 'C' could be found (are you missing a using directive or an assembly reference?)
                 //             case C():
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "()").WithArguments("C", "Deconstruct").WithLocation(8, 19),
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "()")
+                    .WithArguments("C", "Deconstruct")
+                    .WithLocation(8, 19),
                 // (8,19): error CS8129: No suitable 'Deconstruct' instance or extension method was found for type 'C', with 0 out parameters and a void return type.
                 //             case C():
-                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "()").WithArguments("C", "0").WithLocation(8, 19));
+                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "()")
+                    .WithArguments("C", "0")
+                    .WithLocation(8, 19)
+            );
 
             Assert.Null(comp.GetMember("C.Deconstruct"));
         }
@@ -3470,7 +4260,8 @@ record struct C
         [Fact]
         public void Deconstruct_Conversion_02()
         {
-            var source = @"
+            var source =
+                @"
 #nullable enable
 using System;
 
@@ -3500,21 +4291,27 @@ record struct C(string? X, string Y)
             comp.VerifyDiagnostics(
                 // (5,25): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
                 // record struct C(string? X, string Y)
-                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X").WithArguments("X").WithLocation(5, 25),
+                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
+                    .WithArguments("X")
+                    .WithLocation(5, 25),
                 // (5,35): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the property with that name?
                 // record struct C(string? X, string Y)
-                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "Y").WithArguments("Y").WithLocation(5, 35)
-                );
+                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "Y")
+                    .WithArguments("Y")
+                    .WithLocation(5, 35)
+            );
 
             Assert.Equal(
                 "readonly void C.Deconstruct(out System.String? X, out System.String Y)",
-                comp.GetMember("C.Deconstruct").ToTestDisplayString(includeNonNullable: false));
+                comp.GetMember("C.Deconstruct").ToTestDisplayString(includeNonNullable: false)
+            );
         }
 
         [Fact]
         public void Deconstruct_Empty_WithParameterList()
         {
-            var source = @"
+            var source =
+                @"
 record struct C()
 {
     static void M(C c)
@@ -3536,30 +4333,39 @@ record struct C()
             comp.VerifyDiagnostics(
                 // (8,19): error CS1061: 'C' does not contain a definition for 'Deconstruct' and no accessible extension method 'Deconstruct' accepting a first argument of type 'C' could be found (are you missing a using directive or an assembly reference?)
                 //             case C():
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "()").WithArguments("C", "Deconstruct").WithLocation(8, 19),
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "()")
+                    .WithArguments("C", "Deconstruct")
+                    .WithLocation(8, 19),
                 // (8,19): error CS8129: No suitable 'Deconstruct' instance or extension method was found for type 'C', with 0 out parameters and a void return type.
                 //             case C():
-                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "()").WithArguments("C", "0").WithLocation(8, 19));
+                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "()")
+                    .WithArguments("C", "0")
+                    .WithLocation(8, 19)
+            );
 
-            AssertEx.Equal(new[] {
-                "C..ctor()",
-                "void C.M(C c)",
-                "void C.Main()",
-                "readonly System.String C.ToString()",
-                "readonly System.Boolean C.PrintMembers(System.Text.StringBuilder builder)",
-                "System.Boolean C.op_Inequality(C left, C right)",
-                "System.Boolean C.op_Equality(C left, C right)",
-                "readonly System.Int32 C.GetHashCode()",
-                "readonly System.Boolean C.Equals(System.Object obj)",
-                "readonly System.Boolean C.Equals(C other)" },
-                comp.GetMember<NamedTypeSymbol>("C").GetMembers().ToTestDisplayStrings());
+            AssertEx.Equal(
+                new[]
+                {
+                    "C..ctor()",
+                    "void C.M(C c)",
+                    "void C.Main()",
+                    "readonly System.String C.ToString()",
+                    "readonly System.Boolean C.PrintMembers(System.Text.StringBuilder builder)",
+                    "System.Boolean C.op_Inequality(C left, C right)",
+                    "System.Boolean C.op_Equality(C left, C right)",
+                    "readonly System.Int32 C.GetHashCode()",
+                    "readonly System.Boolean C.Equals(System.Object obj)",
+                    "readonly System.Boolean C.Equals(C other)"
+                },
+                comp.GetMember<NamedTypeSymbol>("C").GetMembers().ToTestDisplayStrings()
+            );
         }
 
         [Fact]
         public void Deconstruct_Empty_WithParameterList_UserDefined_01()
         {
             var source =
-@"using System;
+                @"using System;
 
 record struct C(int I)
 {
@@ -3590,7 +4396,8 @@ record struct C(int I)
         [Fact]
         public void Deconstruct_GeneratedAsReadOnly()
         {
-            var src = @"
+            var src =
+                @"
 record struct A(int I, string S);
 ";
             var comp = CreateCompilation(src);
@@ -3602,7 +4409,8 @@ record struct A(int I, string S);
         [Fact]
         public void Deconstruct_WihtNonReadOnlyGetter_GeneratedAsNonReadOnly()
         {
-            var src = @"
+            var src =
+                @"
 record struct A(int I, string S)
 {
     public int I { get => 0; }
@@ -3612,7 +4420,10 @@ record struct A(int I, string S)
             comp.VerifyDiagnostics(
                 // (2,21): warning CS8907: Parameter 'I' is unread. Did you forget to use it to initialize the property with that name?
                 // record struct A(int I, string S)
-                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "I").WithArguments("I").WithLocation(2, 21));
+                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "I")
+                    .WithArguments("I")
+                    .WithLocation(2, 21)
+            );
             var method = comp.GetMember<SynthesizedRecordDeconstruct>("A.Deconstruct");
             Assert.False(method.IsDeclaredReadOnly);
         }
@@ -3621,7 +4432,7 @@ record struct A(int I, string S)
         public void Deconstruct_UserDefined()
         {
             var source =
-@"using System;
+                @"using System;
 
 record struct B(int X, int Y)
 {
@@ -3656,7 +4467,7 @@ record struct B(int X, int Y)
         public void Deconstruct_UserDefined_DifferentSignature_02()
         {
             var source =
-@"using System;
+                @"using System;
 
 record struct B(int X)
 {
@@ -3682,12 +4493,20 @@ record struct B(int X)
             comp.VerifyDiagnostics(
                 // (5,16): error CS8874: Record member 'B.Deconstruct(out int)' must return 'void'.
                 //     public int Deconstruct(out int a) => throw null;
-                Diagnostic(ErrorCode.ERR_SignatureMismatchInRecord, "Deconstruct").WithArguments("B.Deconstruct(out int)", "void").WithLocation(5, 16),
+                Diagnostic(ErrorCode.ERR_SignatureMismatchInRecord, "Deconstruct")
+                    .WithArguments("B.Deconstruct(out int)", "void")
+                    .WithLocation(5, 16),
                 // (11,19): error CS8129: No suitable 'Deconstruct' instance or extension method was found for type 'B', with 1 out parameters and a void return type.
                 //             case B(int x):
-                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(int x)").WithArguments("B", "1").WithLocation(11, 19));
+                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(int x)")
+                    .WithArguments("B", "1")
+                    .WithLocation(11, 19)
+            );
 
-            Assert.Equal("System.Int32 B.Deconstruct(out System.Int32 a)", comp.GetMember("B.Deconstruct").ToTestDisplayString(includeNonNullable: false));
+            Assert.Equal(
+                "System.Int32 B.Deconstruct(out System.Int32 a)",
+                comp.GetMember("B.Deconstruct").ToTestDisplayString(includeNonNullable: false)
+            );
         }
 
         [Theory]
@@ -3697,10 +4516,10 @@ record struct B(int X)
         public void Deconstruct_UserDefined_Accessibility_07(string accessibility)
         {
             var source =
-$@"
+                $@"
 record struct A(int X)
 {{
-    { accessibility } void Deconstruct(out int a)
+    {accessibility} void Deconstruct(out int a)
         => throw null;
 }}
 ";
@@ -3708,15 +4527,17 @@ record struct A(int X)
             comp.VerifyEmitDiagnostics(
                 // (4,11): error CS8873: Record member 'A.Deconstruct(out int)' must be public.
                 //      void Deconstruct(out int a)
-                Diagnostic(ErrorCode.ERR_NonPublicAPIInRecord, "Deconstruct").WithArguments("A.Deconstruct(out int)").WithLocation(4, 11 + accessibility.Length)
-                );
+                Diagnostic(ErrorCode.ERR_NonPublicAPIInRecord, "Deconstruct")
+                    .WithArguments("A.Deconstruct(out int)")
+                    .WithLocation(4, 11 + accessibility.Length)
+            );
         }
 
         [Fact]
         public void Deconstruct_UserDefined_Static_08()
         {
             var source =
-@"
+                @"
 record struct A(int X)
 {
     public static void Deconstruct(out int a)
@@ -3727,15 +4548,17 @@ record struct A(int X)
             comp.VerifyEmitDiagnostics(
                 // (4,24): error CS8877: Record member 'A.Deconstruct(out int)' may not be static.
                 //     public static void Deconstruct(out int a)
-                Diagnostic(ErrorCode.ERR_StaticAPIInRecord, "Deconstruct").WithArguments("A.Deconstruct(out int)").WithLocation(4, 24)
-                );
+                Diagnostic(ErrorCode.ERR_StaticAPIInRecord, "Deconstruct")
+                    .WithArguments("A.Deconstruct(out int)")
+                    .WithLocation(4, 24)
+            );
         }
 
         [Fact]
         public void OutVarInPositionalParameterDefaultValue()
         {
             var source =
-@"
+                @"
 record struct A(int X = A.M(out int a) + a)
 {
     public static int M(out int a)
@@ -3746,14 +4569,17 @@ record struct A(int X = A.M(out int a) + a)
             comp.VerifyEmitDiagnostics(
                 // (2,25): error CS1736: Default parameter value for 'X' must be a compile-time constant
                 // record struct A(int X = A.M(out int a) + a)
-                Diagnostic(ErrorCode.ERR_DefaultValueMustBeConstant, "A.M(out int a) + a").WithArguments("X").WithLocation(2, 25)
-                );
+                Diagnostic(ErrorCode.ERR_DefaultValueMustBeConstant, "A.M(out int a) + a")
+                    .WithArguments("X")
+                    .WithLocation(2, 25)
+            );
         }
 
         [Fact]
         public void FieldConsideredUnassignedIfInitializationViaProperty()
         {
-            var source = @"
+            var source =
+                @"
 record struct Pos(int X)
 {
     private int x;
@@ -3770,18 +4596,22 @@ record struct Pos2(int X)
             comp.VerifyEmitDiagnostics(
                 // (2,15): error CS0171: Field 'Pos.x' must be fully assigned before control is returned to the caller
                 // record struct Pos(int X)
-                Diagnostic(ErrorCode.ERR_UnassignedThis, "Pos").WithArguments("Pos.x").WithLocation(2, 15),
+                Diagnostic(ErrorCode.ERR_UnassignedThis, "Pos")
+                    .WithArguments("Pos.x")
+                    .WithLocation(2, 15),
                 // (5,16): error CS8050: Only auto-implemented properties can have initializers.
                 //     public int X { get { return x; } set { x = value; } } = X;
-                Diagnostic(ErrorCode.ERR_InitializerOnNonAutoProperty, "X").WithArguments("Pos.X").WithLocation(5, 16)
-                );
+                Diagnostic(ErrorCode.ERR_InitializerOnNonAutoProperty, "X")
+                    .WithArguments("Pos.X")
+                    .WithLocation(5, 16)
+            );
         }
 
         [Fact]
         public void IEquatableT_01()
         {
             var source =
-@"record struct A<T>;
+                @"record struct A<T>;
 class Program
 {
     static void F<T>(System.IEquatable<T> t)
@@ -3793,15 +4623,14 @@ class Program
     }
 }";
             var comp = CreateCompilation(source);
-            comp.VerifyDiagnostics(
-                );
+            comp.VerifyDiagnostics();
         }
 
         [Fact]
         public void IEquatableT_02()
         {
             var source =
-@"using System;
+                @"using System;
 record struct A;
 record struct B<T>;
 
@@ -3817,7 +4646,11 @@ class Program
         Console.Write(F(new B<int>(), new B<int>()));
     }
 }";
-            var comp = CreateCompilation(new[] { source, IsExternalInitTypeDefinition }, parseOptions: TestOptions.RegularPreview, options: TestOptions.ReleaseExe);
+            var comp = CreateCompilation(
+                new[] { source, IsExternalInitTypeDefinition },
+                parseOptions: TestOptions.RegularPreview,
+                options: TestOptions.ReleaseExe
+            );
             CompileAndVerify(comp, expectedOutput: "TrueTrue").VerifyDiagnostics();
         }
 
@@ -3825,7 +4658,7 @@ class Program
         public void IEquatableT_02_ImplicitImplementation()
         {
             var source =
-@"using System;
+                @"using System;
 record struct A
 {
     public bool Equals(A other)
@@ -3856,14 +4689,23 @@ class Program
         Console.Write(F(new B<int>(), new B<int>()));
     }
 }";
-            var comp = CreateCompilation(new[] { source, IsExternalInitTypeDefinition }, parseOptions: TestOptions.RegularPreview, options: TestOptions.ReleaseExe);
-            CompileAndVerify(comp, expectedOutput: "A.Equals(A) False B.Equals(B) True").VerifyDiagnostics(
-                // (4,17): warning CS8851: 'A' defines 'Equals' but not 'GetHashCode'
-                //     public bool Equals(A other)
-                Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals").WithArguments("A").WithLocation(4, 17),
-                // (12,17): warning CS8851: 'B' defines 'Equals' but not 'GetHashCode'
-                //     public bool Equals(B<T> other)
-                Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals").WithArguments("B").WithLocation(12, 17)
+            var comp = CreateCompilation(
+                new[] { source, IsExternalInitTypeDefinition },
+                parseOptions: TestOptions.RegularPreview,
+                options: TestOptions.ReleaseExe
+            );
+            CompileAndVerify(comp, expectedOutput: "A.Equals(A) False B.Equals(B) True")
+                .VerifyDiagnostics(
+                    // (4,17): warning CS8851: 'A' defines 'Equals' but not 'GetHashCode'
+                    //     public bool Equals(A other)
+                    Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
+                        .WithArguments("A")
+                        .WithLocation(4, 17),
+                    // (12,17): warning CS8851: 'B' defines 'Equals' but not 'GetHashCode'
+                    //     public bool Equals(B<T> other)
+                    Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
+                        .WithArguments("B")
+                        .WithLocation(12, 17)
                 );
         }
 
@@ -3871,7 +4713,7 @@ class Program
         public void IEquatableT_02_ExplicitImplementation()
         {
             var source =
-@"using System;
+                @"using System;
 record struct A
 {
     bool IEquatable<A>.Equals(A other)
@@ -3902,50 +4744,74 @@ class Program
         Console.Write(F(new B<int>(), new B<int>()));
     }
 }";
-            var comp = CreateCompilation(new[] { source, IsExternalInitTypeDefinition }, parseOptions: TestOptions.RegularPreview, options: TestOptions.ReleaseExe);
-            CompileAndVerify(comp, expectedOutput: "A.Equals(A) False B.Equals(B) True").VerifyDiagnostics();
+            var comp = CreateCompilation(
+                new[] { source, IsExternalInitTypeDefinition },
+                parseOptions: TestOptions.RegularPreview,
+                options: TestOptions.ReleaseExe
+            );
+            CompileAndVerify(comp, expectedOutput: "A.Equals(A) False B.Equals(B) True")
+                .VerifyDiagnostics();
         }
 
         [Fact]
         public void IEquatableT_03()
         {
-            var source = @"
+            var source =
+                @"
 record struct A<T> : System.IEquatable<A<T>>;
 ";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics();
 
             var type = comp.GetMember<NamedTypeSymbol>("A");
-            AssertEx.Equal(new[] { "System.IEquatable<A<T>>" }, type.InterfacesNoUseSiteDiagnostics().ToTestDisplayStrings());
-            AssertEx.Equal(new[] { "System.IEquatable<A<T>>" }, type.AllInterfacesNoUseSiteDiagnostics.ToTestDisplayStrings());
+            AssertEx.Equal(
+                new[] { "System.IEquatable<A<T>>" },
+                type.InterfacesNoUseSiteDiagnostics().ToTestDisplayStrings()
+            );
+            AssertEx.Equal(
+                new[] { "System.IEquatable<A<T>>" },
+                type.AllInterfacesNoUseSiteDiagnostics.ToTestDisplayStrings()
+            );
         }
 
         [Fact]
         public void IEquatableT_MissingIEquatable()
         {
-            var source = @"
+            var source =
+                @"
 record struct A<T>;
 ";
             var comp = CreateCompilation(source);
             comp.MakeTypeMissing(WellKnownType.System_IEquatable_T);
             comp.VerifyEmitDiagnostics(
-                    // (2,15): error CS0518: Predefined type 'System.IEquatable`1' is not defined or imported
-                    // record struct A<T>;
-                    Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "A").WithArguments("System.IEquatable`1").WithLocation(2, 15),
-                    // (2,15): error CS0518: Predefined type 'System.IEquatable`1' is not defined or imported
-                    // record struct A<T>;
-                    Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "A").WithArguments("System.IEquatable`1").WithLocation(2, 15)
-                    );
+                // (2,15): error CS0518: Predefined type 'System.IEquatable`1' is not defined or imported
+                // record struct A<T>;
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "A")
+                    .WithArguments("System.IEquatable`1")
+                    .WithLocation(2, 15),
+                // (2,15): error CS0518: Predefined type 'System.IEquatable`1' is not defined or imported
+                // record struct A<T>;
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "A")
+                    .WithArguments("System.IEquatable`1")
+                    .WithLocation(2, 15)
+            );
 
             var type = comp.GetMember<NamedTypeSymbol>("A");
-            AssertEx.Equal(new[] { "System.IEquatable<A<T>>[missing]" }, type.InterfacesNoUseSiteDiagnostics().ToTestDisplayStrings());
-            AssertEx.Equal(new[] { "System.IEquatable<A<T>>[missing]" }, type.AllInterfacesNoUseSiteDiagnostics.ToTestDisplayStrings());
+            AssertEx.Equal(
+                new[] { "System.IEquatable<A<T>>[missing]" },
+                type.InterfacesNoUseSiteDiagnostics().ToTestDisplayStrings()
+            );
+            AssertEx.Equal(
+                new[] { "System.IEquatable<A<T>>[missing]" },
+                type.AllInterfacesNoUseSiteDiagnostics.ToTestDisplayStrings()
+            );
         }
 
         [Fact]
         public void RecordEquals_01()
         {
-            var source = @"
+            var source =
+                @"
 var a1 = new B();
 var a2 = new B();
 System.Console.WriteLine(a1.Equals(a2));
@@ -3963,20 +4829,25 @@ record struct B
             comp.VerifyDiagnostics(
                 // (8,17): warning CS8851: 'B' defines 'Equals' but not 'GetHashCode'
                 //     public bool Equals(B other)
-                Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals").WithArguments("B").WithLocation(8, 17)
-                );
+                Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
+                    .WithArguments("B")
+                    .WithLocation(8, 17)
+            );
 
-            CompileAndVerify(comp, expectedOutput:
-@"
+            CompileAndVerify(
+                comp,
+                expectedOutput: @"
 B.Equals(B)
 False
-");
+"
+            );
         }
 
         [Fact]
         public void RecordEquals_01_NoInParameters()
         {
-            var source = @"
+            var source =
+                @"
 var a1 = new B();
 var a2 = new B();
 System.Console.WriteLine(a1.Equals(in a2));
@@ -3987,8 +4858,10 @@ record struct B;
             comp.VerifyEmitDiagnostics(
                 // (4,39): error CS1615: Argument 1 may not be passed with the 'in' keyword
                 // System.Console.WriteLine(a1.Equals(in a2));
-                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "a2").WithArguments("1", "in").WithLocation(4, 39)
-                );
+                Diagnostic(ErrorCode.ERR_BadArgExtraRef, "a2")
+                    .WithArguments("1", "in")
+                    .WithLocation(4, 39)
+            );
         }
 
         [Theory]
@@ -3998,10 +4871,10 @@ record struct B;
         public void RecordEquals_10(string accessibility)
         {
             var source =
-$@"
+                $@"
 record struct A
 {{
-    { accessibility } bool Equals(A x)
+    {accessibility} bool Equals(A x)
         => throw null;
 
     bool System.IEquatable<A>.Equals(A x) => throw null;
@@ -4011,14 +4884,20 @@ record struct A
             comp.VerifyEmitDiagnostics(
                 // (4,29): error CS0666: 'A.Equals(A)': new protected member declared in struct
                 //     internal protected bool Equals(A x)
-                Diagnostic(ErrorCode.ERR_ProtectedInStruct, "Equals").WithArguments("A.Equals(A)").WithLocation(4, 11 + accessibility.Length),
+                Diagnostic(ErrorCode.ERR_ProtectedInStruct, "Equals")
+                    .WithArguments("A.Equals(A)")
+                    .WithLocation(4, 11 + accessibility.Length),
                 // (4,29): error CS8873: Record member 'A.Equals(A)' must be public.
                 //     internal protected bool Equals(A x)
-                Diagnostic(ErrorCode.ERR_NonPublicAPIInRecord, "Equals").WithArguments("A.Equals(A)").WithLocation(4, 11 + accessibility.Length),
+                Diagnostic(ErrorCode.ERR_NonPublicAPIInRecord, "Equals")
+                    .WithArguments("A.Equals(A)")
+                    .WithLocation(4, 11 + accessibility.Length),
                 // (4,29): warning CS8851: 'A' defines 'Equals' but not 'GetHashCode'
                 //     internal protected bool Equals(A x)
-                Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals").WithArguments("A").WithLocation(4, 11 + accessibility.Length)
-                );
+                Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
+                    .WithArguments("A")
+                    .WithLocation(4, 11 + accessibility.Length)
+            );
         }
 
         [Theory]
@@ -4028,10 +4907,10 @@ record struct A
         public void RecordEquals_11(string accessibility)
         {
             var source =
-$@"
+                $@"
 record struct A
 {{
-    { accessibility } bool Equals(A x)
+    {accessibility} bool Equals(A x)
         => throw null;
 
     bool System.IEquatable<A>.Equals(A x) => throw null;
@@ -4041,17 +4920,22 @@ record struct A
             comp.VerifyEmitDiagnostics(
                 // (4,...): error CS8873: Record member 'A.Equals(A)' must be public.
                 //      { accessibility } bool Equals(A x)
-                Diagnostic(ErrorCode.ERR_NonPublicAPIInRecord, "Equals").WithArguments("A.Equals(A)").WithLocation(4, 11 + accessibility.Length),
+                Diagnostic(ErrorCode.ERR_NonPublicAPIInRecord, "Equals")
+                    .WithArguments("A.Equals(A)")
+                    .WithLocation(4, 11 + accessibility.Length),
                 // (4,11): warning CS8851: 'A' defines 'Equals' but not 'GetHashCode'
                 //      bool Equals(A x)
-                Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals").WithArguments("A").WithLocation(4, 11 + accessibility.Length)
-                );
+                Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
+                    .WithArguments("A")
+                    .WithLocation(4, 11 + accessibility.Length)
+            );
         }
 
         [Fact]
         public void RecordEquals_12()
         {
-            var source = @"
+            var source =
+                @"
 A a1 = new A();
 A a2 = new A();
 
@@ -4069,15 +4953,20 @@ class B
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics();
             var verifier = CompileAndVerify(comp, expectedOutput: "TrueTrue");
-            verifier.VerifyIL("A.Equals(A)", @"
+            verifier.VerifyIL(
+                "A.Equals(A)",
+                @"
 {
   // Code size        2 (0x2)
   .maxstack  1
   IL_0000:  ldc.i4.1
   IL_0001:  ret
-}");
+}"
+            );
 
-            verifier.VerifyIL("A.Equals(object)", @"
+            verifier.VerifyIL(
+                "A.Equals(object)",
+                @"
 {
   // Code size       23 (0x17)
   .maxstack  2
@@ -4091,18 +4980,27 @@ class B
   IL_0014:  ret
   IL_0015:  ldc.i4.0
   IL_0016:  ret
-}");
+}"
+            );
 
-            verifier.VerifyIL("A.GetHashCode()", @"
+            verifier.VerifyIL(
+                "A.GetHashCode()",
+                @"
 {
   // Code size        2 (0x2)
   .maxstack  1
   IL_0000:  ldc.i4.0
   IL_0001:  ret
-}");
+}"
+            );
 
-            var recordEquals = comp.GetMembers("A.Equals").OfType<SynthesizedRecordEquals>().Single();
-            Assert.Equal("readonly System.Boolean A.Equals(A other)", recordEquals.ToTestDisplayString());
+            var recordEquals = comp.GetMembers("A.Equals")
+                .OfType<SynthesizedRecordEquals>()
+                .Single();
+            Assert.Equal(
+                "readonly System.Boolean A.Equals(A other)",
+                recordEquals.ToTestDisplayString()
+            );
             Assert.Equal(Accessibility.Public, recordEquals.DeclaredAccessibility);
             Assert.False(recordEquals.IsAbstract);
             Assert.False(recordEquals.IsVirtual);
@@ -4110,8 +5008,13 @@ class B
             Assert.False(recordEquals.IsSealed);
             Assert.True(recordEquals.IsImplicitlyDeclared);
 
-            var objectEquals = comp.GetMembers("A.Equals").OfType<SynthesizedRecordObjEquals>().Single();
-            Assert.Equal("readonly System.Boolean A.Equals(System.Object obj)", objectEquals.ToTestDisplayString());
+            var objectEquals = comp.GetMembers("A.Equals")
+                .OfType<SynthesizedRecordObjEquals>()
+                .Single();
+            Assert.Equal(
+                "readonly System.Boolean A.Equals(System.Object obj)",
+                objectEquals.ToTestDisplayString()
+            );
             Assert.Equal(Accessibility.Public, objectEquals.DeclaredAccessibility);
             Assert.False(objectEquals.IsAbstract);
             Assert.False(objectEquals.IsVirtual);
@@ -4119,8 +5022,15 @@ class B
             Assert.False(objectEquals.IsSealed);
             Assert.True(objectEquals.IsImplicitlyDeclared);
 
-            MethodSymbol gethashCode = comp.GetMembers("A." + WellKnownMemberNames.ObjectGetHashCode).OfType<SynthesizedRecordGetHashCode>().Single();
-            Assert.Equal("readonly System.Int32 A.GetHashCode()", gethashCode.ToTestDisplayString());
+            MethodSymbol gethashCode = comp.GetMembers(
+                    "A." + WellKnownMemberNames.ObjectGetHashCode
+                )
+                .OfType<SynthesizedRecordGetHashCode>()
+                .Single();
+            Assert.Equal(
+                "readonly System.Int32 A.GetHashCode()",
+                gethashCode.ToTestDisplayString()
+            );
             Assert.Equal(Accessibility.Public, gethashCode.DeclaredAccessibility);
             Assert.False(gethashCode.IsStatic);
             Assert.False(gethashCode.IsAbstract);
@@ -4133,7 +5043,8 @@ class B
         [Fact]
         public void RecordEquals_13()
         {
-            var source = @"
+            var source =
+                @"
 record struct A
 {
     public int Equals(A other)
@@ -4146,17 +5057,22 @@ record struct A
             comp.VerifyEmitDiagnostics(
                 // (4,16): error CS8874: Record member 'A.Equals(A)' must return 'bool'.
                 //     public int Equals(A other)
-                Diagnostic(ErrorCode.ERR_SignatureMismatchInRecord, "Equals").WithArguments("A.Equals(A)", "bool").WithLocation(4, 16),
+                Diagnostic(ErrorCode.ERR_SignatureMismatchInRecord, "Equals")
+                    .WithArguments("A.Equals(A)", "bool")
+                    .WithLocation(4, 16),
                 // (4,16): warning CS8851: 'A' defines 'Equals' but not 'GetHashCode'
                 //     public int Equals(A other)
-                Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals").WithArguments("A").WithLocation(4, 16)
-                );
+                Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
+                    .WithArguments("A")
+                    .WithLocation(4, 16)
+            );
         }
 
         [Fact]
         public void RecordEquals_14()
         {
-            var source = @"
+            var source =
+                @"
 record struct A
 {
     public bool Equals(A other)
@@ -4170,47 +5086,70 @@ record struct A
             comp.VerifyEmitDiagnostics(
                 // (2,1): error CS0518: Predefined type 'System.Boolean' is not defined or imported
                 // record struct A
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, @"record struct A
+                Diagnostic(
+                        ErrorCode.ERR_PredefinedTypeNotFound,
+                        @"record struct A
 {
     public bool Equals(A other)
         => throw null;
 
     System.Boolean System.IEquatable<A>.Equals(A x) => throw null;
-}").WithArguments("System.Boolean").WithLocation(2, 1),
+}"
+                    )
+                    .WithArguments("System.Boolean")
+                    .WithLocation(2, 1),
                 // (2,1): error CS0518: Predefined type 'System.Boolean' is not defined or imported
                 // record struct A
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, @"record struct A
+                Diagnostic(
+                        ErrorCode.ERR_PredefinedTypeNotFound,
+                        @"record struct A
 {
     public bool Equals(A other)
         => throw null;
 
     System.Boolean System.IEquatable<A>.Equals(A x) => throw null;
-}").WithArguments("System.Boolean").WithLocation(2, 1),
+}"
+                    )
+                    .WithArguments("System.Boolean")
+                    .WithLocation(2, 1),
                 // (2,15): error CS0518: Predefined type 'System.Boolean' is not defined or imported
                 // record struct A
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "A").WithArguments("System.Boolean").WithLocation(2, 15),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "A")
+                    .WithArguments("System.Boolean")
+                    .WithLocation(2, 15),
                 // (2,15): error CS0518: Predefined type 'System.Boolean' is not defined or imported
                 // record struct A
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "A").WithArguments("System.Boolean").WithLocation(2, 15),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "A")
+                    .WithArguments("System.Boolean")
+                    .WithLocation(2, 15),
                 // (2,15): error CS0518: Predefined type 'System.Boolean' is not defined or imported
                 // record struct A
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "A").WithArguments("System.Boolean").WithLocation(2, 15),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "A")
+                    .WithArguments("System.Boolean")
+                    .WithLocation(2, 15),
                 // (2,15): error CS0518: Predefined type 'System.Boolean' is not defined or imported
                 // record struct A
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "A").WithArguments("System.Boolean").WithLocation(2, 15),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "A")
+                    .WithArguments("System.Boolean")
+                    .WithLocation(2, 15),
                 // (4,12): error CS0518: Predefined type 'System.Boolean' is not defined or imported
                 //     public bool Equals(A other)
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "bool").WithArguments("System.Boolean").WithLocation(4, 12),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "bool")
+                    .WithArguments("System.Boolean")
+                    .WithLocation(4, 12),
                 // (4,17): warning CS8851: 'A' defines 'Equals' but not 'GetHashCode'
                 //     public bool Equals(A other)
-                Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals").WithArguments("A").WithLocation(4, 17)
-                );
+                Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
+                    .WithArguments("A")
+                    .WithLocation(4, 17)
+            );
         }
 
         [Fact]
         public void RecordEquals_19()
         {
-            var source = @"
+            var source =
+                @"
 record struct A
 {
     public static bool Equals(A x) => throw null;
@@ -4220,20 +5159,27 @@ record struct A
             comp.VerifyEmitDiagnostics(
                 // (2,15): error CS0736: 'A' does not implement interface member 'IEquatable<A>.Equals(A)'. 'A.Equals(A)' cannot implement an interface member because it is static.
                 // record struct A
-                Diagnostic(ErrorCode.ERR_CloseUnimplementedInterfaceMemberStatic, "A").WithArguments("A", "System.IEquatable<A>.Equals(A)", "A.Equals(A)").WithLocation(2, 15),
+                Diagnostic(ErrorCode.ERR_CloseUnimplementedInterfaceMemberStatic, "A")
+                    .WithArguments("A", "System.IEquatable<A>.Equals(A)", "A.Equals(A)")
+                    .WithLocation(2, 15),
                 // (4,24): error CS8877: Record member 'A.Equals(A)' may not be static.
                 //     public static bool Equals(A x) => throw null;
-                Diagnostic(ErrorCode.ERR_StaticAPIInRecord, "Equals").WithArguments("A.Equals(A)").WithLocation(4, 24),
+                Diagnostic(ErrorCode.ERR_StaticAPIInRecord, "Equals")
+                    .WithArguments("A.Equals(A)")
+                    .WithLocation(4, 24),
                 // (4,24): warning CS8851: 'A' defines 'Equals' but not 'GetHashCode'
                 //     public static bool Equals(A x) => throw null;
-                Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals").WithArguments("A").WithLocation(4, 24)
-                );
+                Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
+                    .WithArguments("A")
+                    .WithLocation(4, 24)
+            );
         }
 
         [Fact]
         public void RecordEquals_RecordEqualsInValueType()
         {
-            var src = @"
+            var src =
+                @"
 public record struct A;
 
 namespace System
@@ -4280,16 +5226,22 @@ namespace System.Text
             comp.VerifyEmitDiagnostics(
                 // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
                 Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1)
-                );
+            );
 
-            var recordEquals = comp.GetMembers("A.Equals").OfType<SynthesizedRecordEquals>().Single();
-            Assert.Equal("readonly System.Boolean A.Equals(A other)", recordEquals.ToTestDisplayString());
+            var recordEquals = comp.GetMembers("A.Equals")
+                .OfType<SynthesizedRecordEquals>()
+                .Single();
+            Assert.Equal(
+                "readonly System.Boolean A.Equals(A other)",
+                recordEquals.ToTestDisplayString()
+            );
         }
 
         [Fact]
         public void RecordEquals_FourFields()
         {
-            var source = @"
+            var source =
+                @"
 A a1 = new A(1, ""hello"");
 
 System.Console.Write(a1.Equals(a1));
@@ -4319,8 +5271,13 @@ record struct A(int I, string S)
 ";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics();
-            var verifier = CompileAndVerify(comp, expectedOutput: "TrueTrue - FalseFalseFalseFalse - FalseFalseFalseFalse");
-            verifier.VerifyIL("A.Equals(A)", @"
+            var verifier = CompileAndVerify(
+                comp,
+                expectedOutput: "TrueTrue - FalseFalseFalseFalse - FalseFalseFalseFalse"
+            );
+            verifier.VerifyIL(
+                "A.Equals(A)",
+                @"
 {
   // Code size       97 (0x61)
   .maxstack  3
@@ -4354,9 +5311,12 @@ record struct A(int I, string S)
   IL_005e:  ret
   IL_005f:  ldc.i4.0
   IL_0060:  ret
-}");
+}"
+            );
 
-            verifier.VerifyIL("A.Equals(object)", @"
+            verifier.VerifyIL(
+                "A.Equals(object)",
+                @"
 {
   // Code size       23 (0x17)
   .maxstack  2
@@ -4370,9 +5330,12 @@ record struct A(int I, string S)
   IL_0014:  ret
   IL_0015:  ldc.i4.0
   IL_0016:  ret
-}");
+}"
+            );
 
-            verifier.VerifyIL("A.GetHashCode()", @"
+            verifier.VerifyIL(
+                "A.GetHashCode()",
+                @"
 {
   // Code size       86 (0x56)
   .maxstack  3
@@ -4402,13 +5365,15 @@ record struct A(int I, string S)
   IL_004f:  callvirt   ""int System.Collections.Generic.EqualityComparer<string>.GetHashCode(string)""
   IL_0054:  add
   IL_0055:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void RecordEquals_StaticField()
         {
-            var source = @"
+            var source =
+                @"
 record struct A
 {
     public static int field = 42;
@@ -4417,39 +5382,49 @@ record struct A
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics();
             var verifier = CompileAndVerify(comp);
-            verifier.VerifyIL("A.Equals(A)", @"
+            verifier.VerifyIL(
+                "A.Equals(A)",
+                @"
 {
   // Code size        2 (0x2)
   .maxstack  1
   IL_0000:  ldc.i4.1
   IL_0001:  ret
-}");
+}"
+            );
 
-            verifier.VerifyIL("A.GetHashCode()", @"
+            verifier.VerifyIL(
+                "A.GetHashCode()",
+                @"
 {
   // Code size        2 (0x2)
   .maxstack  1
   IL_0000:  ldc.i4.0
   IL_0001:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void RecordEquals_GeneratedAsReadOnly()
         {
-            var src = @"
+            var src =
+                @"
 record struct A(int I, string S);
 ";
             var comp = CreateCompilation(src);
             comp.VerifyDiagnostics();
-            var recordEquals = comp.GetMembers("A.Equals").OfType<SynthesizedRecordEquals>().Single();
+            var recordEquals = comp.GetMembers("A.Equals")
+                .OfType<SynthesizedRecordEquals>()
+                .Single();
             Assert.True(recordEquals.IsDeclaredReadOnly);
         }
 
         [Fact]
         public void ObjectEquals_06()
         {
-            var source = @"
+            var source =
+                @"
 record struct A
 {
     public static new bool Equals(object obj) => throw null;
@@ -4459,14 +5434,17 @@ record struct A
             comp.VerifyEmitDiagnostics(
                 // (4,28): error CS0111: Type 'A' already defines a member called 'Equals' with the same parameter types
                 //     public static new bool Equals(object obj) => throw null;
-                Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "Equals").WithArguments("Equals", "A").WithLocation(4, 28)
-                );
+                Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "Equals")
+                    .WithArguments("Equals", "A")
+                    .WithLocation(4, 28)
+            );
         }
 
         [Fact]
         public void ObjectEquals_UserDefined()
         {
-            var source = @"
+            var source =
+                @"
 record struct A
 {
     public override bool Equals(object obj) => throw null;
@@ -4476,26 +5454,32 @@ record struct A
             comp.VerifyEmitDiagnostics(
                 // (4,26): error CS0111: Type 'A' already defines a member called 'Equals' with the same parameter types
                 //     public override bool Equals(object obj) => throw null;
-                Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "Equals").WithArguments("Equals", "A").WithLocation(4, 26)
-                );
+                Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "Equals")
+                    .WithArguments("Equals", "A")
+                    .WithLocation(4, 26)
+            );
         }
 
         [Fact]
         public void ObjectEquals_GeneratedAsReadOnly()
         {
-            var src = @"
+            var src =
+                @"
 record struct A(int I, string S);
 ";
             var comp = CreateCompilation(src);
             comp.VerifyDiagnostics();
-            var objectEquals = comp.GetMembers("A.Equals").OfType<SynthesizedRecordObjEquals>().Single();
+            var objectEquals = comp.GetMembers("A.Equals")
+                .OfType<SynthesizedRecordObjEquals>()
+                .Single();
             Assert.True(objectEquals.IsDeclaredReadOnly);
         }
 
         [Fact]
         public void GetHashCode_UserDefined()
         {
-            var source = @"
+            var source =
+                @"
 System.Console.Write(new A().GetHashCode());
 
 record struct A
@@ -4511,7 +5495,8 @@ record struct A
         [Fact]
         public void GetHashCode_GetHashCodeInValueType()
         {
-            var src = @"
+            var src =
+                @"
 public record struct A;
 
 namespace System
@@ -4559,14 +5544,17 @@ namespace System.Text
                 Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1),
                 // (2,22): error CS8869: 'A.GetHashCode()' does not override expected method from 'object'.
                 // public record struct A;
-                Diagnostic(ErrorCode.ERR_DoesNotOverrideMethodFromObject, "A").WithArguments("A.GetHashCode()").WithLocation(2, 22)
-                );
+                Diagnostic(ErrorCode.ERR_DoesNotOverrideMethodFromObject, "A")
+                    .WithArguments("A.GetHashCode()")
+                    .WithLocation(2, 22)
+            );
         }
 
         [Fact]
         public void GetHashCode_MissingEqualityComparer_EmptyRecord()
         {
-            var src = @"
+            var src =
+                @"
 public record struct A;
 ";
             var comp = CreateCompilation(src);
@@ -4577,7 +5565,8 @@ public record struct A;
         [Fact]
         public void GetHashCode_MissingEqualityComparer_NonEmptyRecord()
         {
-            var src = @"
+            var src =
+                @"
 public record struct A(int I);
 ";
             var comp = CreateCompilation(src);
@@ -4586,17 +5575,22 @@ public record struct A(int I);
             comp.VerifyEmitDiagnostics(
                 // (2,1): error CS0656: Missing compiler required member 'System.Collections.Generic.EqualityComparer`1.GetHashCode'
                 // public record struct A(int I);
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "public record struct A(int I);").WithArguments("System.Collections.Generic.EqualityComparer`1", "GetHashCode").WithLocation(2, 1),
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "public record struct A(int I);")
+                    .WithArguments("System.Collections.Generic.EqualityComparer`1", "GetHashCode")
+                    .WithLocation(2, 1),
                 // (2,1): error CS0656: Missing compiler required member 'System.Collections.Generic.EqualityComparer`1.get_Default'
                 // public record struct A(int I);
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "public record struct A(int I);").WithArguments("System.Collections.Generic.EqualityComparer`1", "get_Default").WithLocation(2, 1)
-                );
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "public record struct A(int I);")
+                    .WithArguments("System.Collections.Generic.EqualityComparer`1", "get_Default")
+                    .WithLocation(2, 1)
+            );
         }
 
         [Fact]
         public void GetHashCode_GeneratedAsReadOnly()
         {
-            var src = @"
+            var src =
+                @"
 record struct A(int I, string S);
 ";
             var comp = CreateCompilation(src);
@@ -4608,7 +5602,8 @@ record struct A(int I, string S);
         [Fact]
         public void GetHashCodeIsDefinedButEqualsIsNot()
         {
-            var src = @"
+            var src =
+                @"
 public record struct C
 {
     public object Data;
@@ -4621,7 +5616,8 @@ public record struct C
         [Fact]
         public void EqualsIsDefinedButGetHashCodeIsNot()
         {
-            var src = @"
+            var src =
+                @"
 public record struct C
 {
     public object Data;
@@ -4631,13 +5627,17 @@ public record struct C
             comp.VerifyDiagnostics(
                 // (5,17): warning CS8851: 'C' defines 'Equals' but not 'GetHashCode'
                 //     public bool Equals(C c) { return false; }
-                Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals").WithArguments("C").WithLocation(5, 17));
+                Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
+                    .WithArguments("C")
+                    .WithLocation(5, 17)
+            );
         }
 
         [Fact]
         public void EqualityOperators_01()
         {
-            var source = @"
+            var source =
+                @"
 record struct A(int X)
 {
     public bool Equals(ref A other)
@@ -4659,16 +5659,22 @@ record struct A(int X)
     }
 }
 ";
-            var verifier = CompileAndVerify(source, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    expectedOutput: @"
 True True False False
 True True False False
 True True False False
 False False True True
 True True False False
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
             var comp = (CSharpCompilation)verifier.Compilation;
-            MethodSymbol op = comp.GetMembers("A." + WellKnownMemberNames.EqualityOperatorName).OfType<SynthesizedRecordEqualityOperator>().Single();
+            MethodSymbol op = comp.GetMembers("A." + WellKnownMemberNames.EqualityOperatorName)
+                .OfType<SynthesizedRecordEqualityOperator>()
+                .Single();
             Assert.Equal("System.Boolean A.op_Equality(A left, A right)", op.ToTestDisplayString());
             Assert.Equal(Accessibility.Public, op.DeclaredAccessibility);
             Assert.True(op.IsStatic);
@@ -4678,8 +5684,13 @@ True True False False
             Assert.False(op.IsSealed);
             Assert.True(op.IsImplicitlyDeclared);
 
-            op = comp.GetMembers("A." + WellKnownMemberNames.InequalityOperatorName).OfType<SynthesizedRecordInequalityOperator>().Single();
-            Assert.Equal("System.Boolean A.op_Inequality(A left, A right)", op.ToTestDisplayString());
+            op = comp.GetMembers("A." + WellKnownMemberNames.InequalityOperatorName)
+                .OfType<SynthesizedRecordInequalityOperator>()
+                .Single();
+            Assert.Equal(
+                "System.Boolean A.op_Inequality(A left, A right)",
+                op.ToTestDisplayString()
+            );
             Assert.Equal(Accessibility.Public, op.DeclaredAccessibility);
             Assert.True(op.IsStatic);
             Assert.False(op.IsAbstract);
@@ -4688,7 +5699,9 @@ True True False False
             Assert.False(op.IsSealed);
             Assert.True(op.IsImplicitlyDeclared);
 
-            verifier.VerifyIL("bool A.op_Equality(A, A)", @"
+            verifier.VerifyIL(
+                "bool A.op_Equality(A, A)",
+                @"
 {
   // Code size        9 (0x9)
   .maxstack  2
@@ -4697,9 +5710,12 @@ True True False False
   IL_0003:  call       ""readonly bool A.Equals(A)""
   IL_0008:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("bool A.op_Inequality(A, A)", @"
+            verifier.VerifyIL(
+                "bool A.op_Inequality(A, A)",
+                @"
 {
   // Code size       11 (0xb)
   .maxstack  2
@@ -4710,14 +5726,15 @@ True True False False
   IL_0008:  ceq
   IL_000a:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void EqualityOperators_03()
         {
             var source =
-@"
+                @"
 record struct A
 {
     public static bool operator==(A r1, A r2)
@@ -4732,14 +5749,17 @@ record struct A
             comp.VerifyEmitDiagnostics(
                 // (4,32): error CS0111: Type 'A' already defines a member called 'op_Equality' with the same parameter types
                 //     public static bool operator==(A r1, A r2)
-                Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "==").WithArguments("op_Equality", "A").WithLocation(4, 32)
-                );
+                Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "==")
+                    .WithArguments("op_Equality", "A")
+                    .WithLocation(4, 32)
+            );
         }
 
         [Fact]
         public void EqualityOperators_04()
         {
-            var source = @"
+            var source =
+                @"
 record struct A
 {
     public static bool operator!=(A r1, A r2)
@@ -4754,14 +5774,17 @@ record struct A
             comp.VerifyEmitDiagnostics(
                 // (4,32): error CS0111: Type 'A' already defines a member called 'op_Inequality' with the same parameter types
                 //     public static bool operator!=(A r1, A r2)
-                Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "!=").WithArguments("op_Inequality", "A").WithLocation(4, 32)
-                );
+                Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "!=")
+                    .WithArguments("op_Inequality", "A")
+                    .WithLocation(4, 32)
+            );
         }
 
         [Fact]
         public void EqualityOperators_05()
         {
-            var source = @"
+            var source =
+                @"
 record struct A
 {
     public static bool op_Equality(A r1, A r2)
@@ -4774,14 +5797,17 @@ record struct A
             comp.VerifyEmitDiagnostics(
                 // (4,24): error CS0111: Type 'A' already defines a member called 'op_Equality' with the same parameter types
                 //     public static bool op_Equality(A r1, A r2)
-                Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "op_Equality").WithArguments("op_Equality", "A").WithLocation(4, 24)
-                );
+                Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "op_Equality")
+                    .WithArguments("op_Equality", "A")
+                    .WithLocation(4, 24)
+            );
         }
 
         [Fact]
         public void EqualityOperators_06()
         {
-            var source = @"
+            var source =
+                @"
 record struct A
 {
     public static bool op_Inequality(A r1, A r2)
@@ -4794,14 +5820,17 @@ record struct A
             comp.VerifyEmitDiagnostics(
                 // (4,24): error CS0111: Type 'A' already defines a member called 'op_Inequality' with the same parameter types
                 //     public static bool op_Inequality(A r1, A r2)
-                Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "op_Inequality").WithArguments("op_Inequality", "A").WithLocation(4, 24)
-                );
+                Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "op_Inequality")
+                    .WithArguments("op_Inequality", "A")
+                    .WithLocation(4, 24)
+            );
         }
 
         [Fact]
         public void EqualityOperators_07()
         {
-            var source = @"
+            var source =
+                @"
 record struct A
 {
     public static bool Equals(A other)
@@ -4812,27 +5841,34 @@ record struct A
             comp.VerifyEmitDiagnostics(
                 // (2,15): error CS0736: 'A' does not implement interface member 'IEquatable<A>.Equals(A)'. 'A.Equals(A)' cannot implement an interface member because it is static.
                 // record struct A
-                Diagnostic(ErrorCode.ERR_CloseUnimplementedInterfaceMemberStatic, "A").WithArguments("A", "System.IEquatable<A>.Equals(A)", "A.Equals(A)").WithLocation(2, 15),
+                Diagnostic(ErrorCode.ERR_CloseUnimplementedInterfaceMemberStatic, "A")
+                    .WithArguments("A", "System.IEquatable<A>.Equals(A)", "A.Equals(A)")
+                    .WithLocation(2, 15),
                 // (4,24): error CS8877: Record member 'A.Equals(A)' may not be static.
                 //     public static bool Equals(A other)
-                Diagnostic(ErrorCode.ERR_StaticAPIInRecord, "Equals").WithArguments("A.Equals(A)").WithLocation(4, 24),
+                Diagnostic(ErrorCode.ERR_StaticAPIInRecord, "Equals")
+                    .WithArguments("A.Equals(A)")
+                    .WithLocation(4, 24),
                 // (4,24): warning CS8851: 'A' defines 'Equals' but not 'GetHashCode'
                 //     public static bool Equals(A other)
-                Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals").WithArguments("A").WithLocation(4, 24)
-                );
+                Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
+                    .WithArguments("A")
+                    .WithLocation(4, 24)
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public void EqualityOperators_09(bool useImageReference)
         {
-            var source1 = @"
+            var source1 =
+                @"
 public record struct A(int X);
 ";
             var comp1 = CreateCompilation(source1);
 
             var source2 =
-@"
+                @"
 class Program
 {
     static void Main()
@@ -4849,30 +5885,44 @@ class Program
     }
 }
 ";
-            CompileAndVerify(source2, references: new[] { useImageReference ? comp1.EmitToImageReference() : comp1.ToMetadataReference() }, expectedOutput: @"
+            CompileAndVerify(
+                    source2,
+                    references: new[]
+                    {
+                        useImageReference
+                            ? comp1.EmitToImageReference()
+                            : comp1.ToMetadataReference()
+                    },
+                    expectedOutput: @"
 True True False False
 True True False False
 True True False False
 False False True True
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
         }
 
         [Fact]
         public void GetSimpleNonTypeMembers_DirectApiCheck()
         {
-            var src = @"
+            var src =
+                @"
 public record struct RecordB();
 ";
             var comp = CreateCompilation(src);
             var b = comp.GlobalNamespace.GetTypeMember("RecordB");
-            AssertEx.SetEqual(new[] { "System.Boolean RecordB.op_Equality(RecordB left, RecordB right)" },
-                b.GetSimpleNonTypeMembers("op_Equality").ToTestDisplayStrings());
+            AssertEx.SetEqual(
+                new[] { "System.Boolean RecordB.op_Equality(RecordB left, RecordB right)" },
+                b.GetSimpleNonTypeMembers("op_Equality").ToTestDisplayStrings()
+            );
         }
 
         [Fact]
         public void ToString_NestedRecord()
         {
-            var src = @"
+            var src =
+                @"
 var c1 = new Outer.C1(42);
 System.Console.Write(c1.ToString());
 
@@ -4882,8 +5932,16 @@ public class Outer
 }
 ";
 
-            var compDebug = CreateCompilation(new[] { src, IsExternalInitTypeDefinition }, parseOptions: TestOptions.RegularPreview, options: TestOptions.DebugExe);
-            var compRelease = CreateCompilation(new[] { src, IsExternalInitTypeDefinition }, parseOptions: TestOptions.RegularPreview, options: TestOptions.ReleaseExe);
+            var compDebug = CreateCompilation(
+                new[] { src, IsExternalInitTypeDefinition },
+                parseOptions: TestOptions.RegularPreview,
+                options: TestOptions.DebugExe
+            );
+            var compRelease = CreateCompilation(
+                new[] { src, IsExternalInitTypeDefinition },
+                parseOptions: TestOptions.RegularPreview,
+                options: TestOptions.ReleaseExe
+            );
             CompileAndVerify(compDebug, expectedOutput: "C1 { I1 = 42 }");
             compDebug.VerifyEmitDiagnostics();
 
@@ -4894,7 +5952,8 @@ public class Outer
         [Fact]
         public void ToString_TopLevelRecord_Empty()
         {
-            var src = @"
+            var src =
+                @"
 var c1 = new C1();
 System.Console.Write(c1.ToString());
 
@@ -4905,7 +5964,9 @@ record struct C1;
             comp.VerifyEmitDiagnostics();
             var v = CompileAndVerify(comp, expectedOutput: "C1 { }");
 
-            var print = comp.GetMember<MethodSymbol>("C1." + WellKnownMemberNames.PrintMembersMethodName);
+            var print = comp.GetMember<MethodSymbol>(
+                "C1." + WellKnownMemberNames.PrintMembersMethodName
+            );
             Assert.Equal(Accessibility.Private, print.DeclaredAccessibility);
             Assert.False(print.IsOverride);
             Assert.False(print.IsVirtual);
@@ -4913,7 +5974,9 @@ record struct C1;
             Assert.False(print.IsSealed);
             Assert.True(print.IsImplicitlyDeclared);
 
-            var toString = comp.GetMember<MethodSymbol>("C1." + WellKnownMemberNames.ObjectToString);
+            var toString = comp.GetMember<MethodSymbol>(
+                "C1." + WellKnownMemberNames.ObjectToString
+            );
             Assert.Equal(Accessibility.Public, toString.DeclaredAccessibility);
             Assert.True(toString.IsOverride);
             Assert.False(toString.IsVirtual);
@@ -4921,15 +5984,20 @@ record struct C1;
             Assert.False(toString.IsSealed);
             Assert.True(toString.IsImplicitlyDeclared);
 
-            v.VerifyIL("C1." + WellKnownMemberNames.PrintMembersMethodName, @"
+            v.VerifyIL(
+                "C1." + WellKnownMemberNames.PrintMembersMethodName,
+                @"
 {
   // Code size        2 (0x2)
   .maxstack  1
   IL_0000:  ldc.i4.0
   IL_0001:  ret
 }
-");
-            v.VerifyIL("C1." + WellKnownMemberNames.ObjectToString, @"
+"
+            );
+            v.VerifyIL(
+                "C1." + WellKnownMemberNames.ObjectToString,
+                @"
 {
   // Code size       64 (0x40)
   .maxstack  2
@@ -4960,13 +6028,15 @@ record struct C1;
   IL_003a:  callvirt   ""string object.ToString()""
   IL_003f:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void ToString_TopLevelRecord_MissingStringBuilder()
         {
-            var src = @"
+            var src =
+                @"
 record struct C1;
 ";
 
@@ -4975,20 +6045,27 @@ record struct C1;
             comp.VerifyEmitDiagnostics(
                 // (2,1): error CS0518: Predefined type 'System.Text.StringBuilder' is not defined or imported
                 // record struct C1;
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "record struct C1;").WithArguments("System.Text.StringBuilder").WithLocation(2, 1),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "record struct C1;")
+                    .WithArguments("System.Text.StringBuilder")
+                    .WithLocation(2, 1),
                 // (2,1): error CS0656: Missing compiler required member 'System.Text.StringBuilder..ctor'
                 // record struct C1;
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "record struct C1;").WithArguments("System.Text.StringBuilder", ".ctor").WithLocation(2, 1),
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "record struct C1;")
+                    .WithArguments("System.Text.StringBuilder", ".ctor")
+                    .WithLocation(2, 1),
                 // (2,15): error CS0518: Predefined type 'System.Text.StringBuilder' is not defined or imported
                 // record struct C1;
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "C1").WithArguments("System.Text.StringBuilder").WithLocation(2, 15)
-                );
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "C1")
+                    .WithArguments("System.Text.StringBuilder")
+                    .WithLocation(2, 15)
+            );
         }
 
         [Fact]
         public void ToString_TopLevelRecord_MissingStringBuilderCtor()
         {
-            var src = @"
+            var src =
+                @"
 record struct C1;
 ";
 
@@ -4997,14 +6074,17 @@ record struct C1;
             comp.VerifyEmitDiagnostics(
                 // (2,1): error CS0656: Missing compiler required member 'System.Text.StringBuilder..ctor'
                 // record struct C1;
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "record struct C1;").WithArguments("System.Text.StringBuilder", ".ctor").WithLocation(2, 1)
-                );
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "record struct C1;")
+                    .WithArguments("System.Text.StringBuilder", ".ctor")
+                    .WithLocation(2, 1)
+            );
         }
 
         [Fact]
         public void ToString_TopLevelRecord_MissingStringBuilderAppendString()
         {
-            var src = @"
+            var src =
+                @"
 record struct C1;
 ";
 
@@ -5013,14 +6093,17 @@ record struct C1;
             comp.VerifyEmitDiagnostics(
                 // (2,1): error CS0656: Missing compiler required member 'System.Text.StringBuilder.Append'
                 // record struct C1;
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "record struct C1;").WithArguments("System.Text.StringBuilder", "Append").WithLocation(2, 1)
-                );
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "record struct C1;")
+                    .WithArguments("System.Text.StringBuilder", "Append")
+                    .WithLocation(2, 1)
+            );
         }
 
         [Fact]
         public void ToString_TopLevelRecord_OneProperty_MissingStringBuilderAppendString()
         {
-            var src = @"
+            var src =
+                @"
 record struct C1(int P);
 ";
 
@@ -5029,17 +6112,22 @@ record struct C1(int P);
             comp.VerifyEmitDiagnostics(
                 // (2,1): error CS0656: Missing compiler required member 'System.Text.StringBuilder.Append'
                 // record struct C1(int P);
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "record struct C1(int P);").WithArguments("System.Text.StringBuilder", "Append").WithLocation(2, 1),
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "record struct C1(int P);")
+                    .WithArguments("System.Text.StringBuilder", "Append")
+                    .WithLocation(2, 1),
                 // (2,1): error CS0656: Missing compiler required member 'System.Text.StringBuilder.Append'
                 // record struct C1(int P);
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "record struct C1(int P);").WithArguments("System.Text.StringBuilder", "Append").WithLocation(2, 1)
-                );
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "record struct C1(int P);")
+                    .WithArguments("System.Text.StringBuilder", "Append")
+                    .WithLocation(2, 1)
+            );
         }
 
         [Fact]
         public void ToString_RecordWithIndexer()
         {
-            var src = @"
+            var src =
+                @"
 var c1 = new C1(42);
 System.Console.Write(c1.ToString());
 
@@ -5064,20 +6152,27 @@ record struct C1(int I1)
             comp.VerifyEmitDiagnostics(
                 // (7,17): warning CS0414: The field 'C1.field' is assigned but its value is never used
                 //     private int field = 44;
-                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "field").WithArguments("C1.field").WithLocation(7, 17),
+                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "field")
+                    .WithArguments("C1.field")
+                    .WithLocation(7, 17),
                 // (11,32): warning CS0414: The field 'C1.a' is assigned but its value is never used
                 //     public event System.Action a = null;
-                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "a").WithArguments("C1.a").WithLocation(11, 32),
+                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "a")
+                    .WithArguments("C1.a")
+                    .WithLocation(11, 32),
                 // (13,17): warning CS0414: The field 'C1.field1' is assigned but its value is never used
                 //     private int field1 = 100;
-                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "field1").WithArguments("C1.field1").WithLocation(13, 17)
-                );
+                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "field1")
+                    .WithArguments("C1.field1")
+                    .WithLocation(13, 17)
+            );
         }
 
         [Fact]
         public void ToString_PrivateGetter()
         {
-            var src = @"
+            var src =
+                @"
 var c1 = new C1();
 System.Console.Write(c1.ToString());
 
@@ -5095,7 +6190,8 @@ record struct C1
         [Fact]
         public void ToString_TopLevelRecord_OneField_ValueType()
         {
-            var src = @"
+            var src =
+                @"
 var c1 = new C1() { field = 42 };
 System.Console.Write(c1.ToString());
 
@@ -5109,7 +6205,9 @@ record struct C1
             comp.VerifyEmitDiagnostics();
             var v = CompileAndVerify(comp, expectedOutput: "C1 { field = 42 }");
 
-            var print = comp.GetMember<MethodSymbol>("C1." + WellKnownMemberNames.PrintMembersMethodName);
+            var print = comp.GetMember<MethodSymbol>(
+                "C1." + WellKnownMemberNames.PrintMembersMethodName
+            );
             Assert.Equal(Accessibility.Private, print.DeclaredAccessibility);
             Assert.False(print.IsOverride);
             Assert.False(print.IsVirtual);
@@ -5117,7 +6215,9 @@ record struct C1
             Assert.False(print.IsSealed);
             Assert.True(print.IsImplicitlyDeclared);
 
-            var toString = comp.GetMember<MethodSymbol>("C1." + WellKnownMemberNames.ObjectToString);
+            var toString = comp.GetMember<MethodSymbol>(
+                "C1." + WellKnownMemberNames.ObjectToString
+            );
             Assert.Equal(Accessibility.Public, toString.DeclaredAccessibility);
             Assert.True(toString.IsOverride);
             Assert.False(toString.IsVirtual);
@@ -5125,7 +6225,9 @@ record struct C1
             Assert.False(toString.IsSealed);
             Assert.True(toString.IsImplicitlyDeclared);
 
-            v.VerifyIL("C1." + WellKnownMemberNames.PrintMembersMethodName, @"
+            v.VerifyIL(
+                "C1." + WellKnownMemberNames.PrintMembersMethodName,
+                @"
 {
   // Code size       38 (0x26)
   .maxstack  2
@@ -5143,13 +6245,15 @@ record struct C1
   IL_0024:  ldc.i4.1
   IL_0025:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void ToString_TopLevelRecord_OneField_ConstrainedValueType()
         {
-            var src = @"
+            var src =
+                @"
 var c1 = new C1<int>() { field = 42 };
 System.Console.Write(c1.ToString());
 
@@ -5163,7 +6267,9 @@ record struct C1<T> where T : struct
             comp.VerifyEmitDiagnostics();
             var v = CompileAndVerify(comp, expectedOutput: "C1 { field = 42 }");
 
-            v.VerifyIL("C1<T>." + WellKnownMemberNames.PrintMembersMethodName, @"
+            v.VerifyIL(
+                "C1<T>." + WellKnownMemberNames.PrintMembersMethodName,
+                @"
 {
   // Code size       41 (0x29)
   .maxstack  2
@@ -5184,13 +6290,15 @@ record struct C1<T> where T : struct
   IL_0027:  ldc.i4.1
   IL_0028:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void ToString_TopLevelRecord_OneField_ReferenceType()
         {
-            var src = @"
+            var src =
+                @"
 var c1 = new C1() { field = ""hello"" };
 System.Console.Write(c1.ToString());
 
@@ -5204,7 +6312,9 @@ record struct C1
             comp.VerifyEmitDiagnostics();
             var v = CompileAndVerify(comp, expectedOutput: "C1 { field = hello }");
 
-            v.VerifyIL("C1." + WellKnownMemberNames.PrintMembersMethodName, @"
+            v.VerifyIL(
+                "C1." + WellKnownMemberNames.PrintMembersMethodName,
+                @"
 {
   // Code size       27 (0x1b)
   .maxstack  2
@@ -5220,13 +6330,15 @@ record struct C1
   IL_0019:  ldc.i4.1
   IL_001a:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void ToString_TopLevelRecord_TwoFields_ReferenceType()
         {
-            var src = @"
+            var src =
+                @"
 var c1 = new C1(42) { field1 = ""hi"", field2 = null };
 System.Console.Write(c1.ToString());
 
@@ -5244,11 +6356,15 @@ record struct C1(int I)
             comp.VerifyEmitDiagnostics(
                 // (10,20): warning CS0414: The field 'C1.field3' is assigned but its value is never used
                 //     private string field3 = null;
-                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "field3").WithArguments("C1.field3").WithLocation(10, 20)
-                );
+                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "field3")
+                    .WithArguments("C1.field3")
+                    .WithLocation(10, 20)
+            );
             var v = CompileAndVerify(comp, expectedOutput: "C1 { I = 42, field1 = hi, field2 =  }");
 
-            v.VerifyIL("C1." + WellKnownMemberNames.PrintMembersMethodName, @"
+            v.VerifyIL(
+                "C1." + WellKnownMemberNames.PrintMembersMethodName,
+                @"
 {
   // Code size       91 (0x5b)
   .maxstack  2
@@ -5287,13 +6403,15 @@ record struct C1(int I)
   IL_0059:  ldc.i4.1
   IL_005a:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void ToString_TopLevelRecord_Readonly()
         {
-            var src = @"
+            var src =
+                @"
 var c1 = new C1(42);
 System.Console.Write(c1.ToString());
 
@@ -5302,9 +6420,15 @@ readonly record struct C1(int I);
 
             var comp = CreateCompilation(src);
             comp.VerifyDiagnostics();
-            var v = CompileAndVerify(comp, expectedOutput: "C1 { I = 42 }", verify: Verification.Skipped /* init-only */);
+            var v = CompileAndVerify(
+                comp,
+                expectedOutput: "C1 { I = 42 }",
+                verify: Verification.Skipped /* init-only */
+            );
 
-            v.VerifyIL("C1." + WellKnownMemberNames.PrintMembersMethodName, @"
+            v.VerifyIL(
+                "C1." + WellKnownMemberNames.PrintMembersMethodName,
+                @"
 {
   // Code size       41 (0x29)
   .maxstack  2
@@ -5325,8 +6449,11 @@ readonly record struct C1(int I);
   IL_0027:  ldc.i4.1
   IL_0028:  ret
 }
-");
-            v.VerifyIL("C1." + WellKnownMemberNames.ObjectToString, @"
+"
+            );
+            v.VerifyIL(
+                "C1." + WellKnownMemberNames.ObjectToString,
+                @"
 {
   // Code size       64 (0x40)
   .maxstack  2
@@ -5357,13 +6484,15 @@ readonly record struct C1(int I);
   IL_003a:  callvirt   ""string object.ToString()""
   IL_003f:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void ToString_TopLevelRecord_UserDefinedToString()
         {
-            var src = @"
+            var src =
+                @"
 var c1 = new C1();
 System.Console.Write(c1.ToString());
 
@@ -5377,14 +6506,22 @@ record struct C1
             comp.VerifyEmitDiagnostics();
             CompileAndVerify(comp, expectedOutput: "RAN");
 
-            var print = comp.GetMember<MethodSymbol>("C1." + WellKnownMemberNames.PrintMembersMethodName);
-            Assert.Equal("readonly System.Boolean C1." + WellKnownMemberNames.PrintMembersMethodName + "(System.Text.StringBuilder builder)", print.ToTestDisplayString());
+            var print = comp.GetMember<MethodSymbol>(
+                "C1." + WellKnownMemberNames.PrintMembersMethodName
+            );
+            Assert.Equal(
+                "readonly System.Boolean C1."
+                    + WellKnownMemberNames.PrintMembersMethodName
+                    + "(System.Text.StringBuilder builder)",
+                print.ToTestDisplayString()
+            );
         }
 
         [Fact]
         public void ToString_TopLevelRecord_UserDefinedToString_New()
         {
-            var src = @"
+            var src =
+                @"
 record struct C1
 {
     public new string ToString() => throw null;
@@ -5395,14 +6532,17 @@ record struct C1
             comp.VerifyEmitDiagnostics(
                 // (4,23): error CS8869: 'C1.ToString()' does not override expected method from 'object'.
                 //     public new string ToString() => throw null;
-                Diagnostic(ErrorCode.ERR_DoesNotOverrideMethodFromObject, "ToString").WithArguments("C1.ToString()").WithLocation(4, 23)
-                );
+                Diagnostic(ErrorCode.ERR_DoesNotOverrideMethodFromObject, "ToString")
+                    .WithArguments("C1.ToString()")
+                    .WithLocation(4, 23)
+            );
         }
 
         [Fact]
         public void ToString_TopLevelRecord_UserDefinedToString_Sealed()
         {
-            var src = @"
+            var src =
+                @"
 record struct C1
 {
     public sealed override string ToString() => throw null;
@@ -5413,14 +6553,17 @@ record struct C1
             comp.VerifyEmitDiagnostics(
                 // (4,35): error CS0106: The modifier 'sealed' is not valid for this item
                 //     public sealed override string ToString() => throw null;
-                Diagnostic(ErrorCode.ERR_BadMemberFlag, "ToString").WithArguments("sealed").WithLocation(4, 35)
-                );
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "ToString")
+                    .WithArguments("sealed")
+                    .WithLocation(4, 35)
+            );
         }
 
         [Fact]
         public void ToString_UserDefinedPrintMembers_WithNullableStringBuilder()
         {
-            var src = @"
+            var src =
+                @"
 #nullable enable
 record struct C1
 {
@@ -5434,7 +6577,8 @@ record struct C1
         [Fact]
         public void ToString_UserDefinedPrintMembers_ErrorReturnType()
         {
-            var src = @"
+            var src =
+                @"
 record struct C1
 {
     private Error PrintMembers(System.Text.StringBuilder builder) => throw null;
@@ -5444,14 +6588,17 @@ record struct C1
             comp.VerifyEmitDiagnostics(
                 // (4,13): error CS0246: The type or namespace name 'Error' could not be found (are you missing a using directive or an assembly reference?)
                 //     private Error PrintMembers(System.Text.StringBuilder builder) => throw null;
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Error").WithArguments("Error").WithLocation(4, 13)
-                );
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Error")
+                    .WithArguments("Error")
+                    .WithLocation(4, 13)
+            );
         }
 
         [Fact]
         public void ToString_UserDefinedPrintMembers_WrongReturnType()
         {
-            var src = @"
+            var src =
+                @"
 record struct C1
 {
     private int PrintMembers(System.Text.StringBuilder builder) => throw null;
@@ -5461,14 +6608,17 @@ record struct C1
             comp.VerifyEmitDiagnostics(
                 // (4,17): error CS8874: Record member 'C1.PrintMembers(StringBuilder)' must return 'bool'.
                 //     private int PrintMembers(System.Text.StringBuilder builder) => throw null;
-                Diagnostic(ErrorCode.ERR_SignatureMismatchInRecord, "PrintMembers").WithArguments("C1.PrintMembers(System.Text.StringBuilder)", "bool").WithLocation(4, 17)
-                );
+                Diagnostic(ErrorCode.ERR_SignatureMismatchInRecord, "PrintMembers")
+                    .WithArguments("C1.PrintMembers(System.Text.StringBuilder)", "bool")
+                    .WithLocation(4, 17)
+            );
         }
 
         [Fact]
         public void ToString_UserDefinedPrintMembers()
         {
-            var src = @"
+            var src =
+                @"
 var c1 = new C1();
 System.Console.Write(c1.ToString());
 System.Console.Write("" - "");
@@ -5501,7 +6651,8 @@ record struct C1
         [Fact]
         public void ToString_CallingSynthesizedPrintMembers()
         {
-            var src = @"
+            var src =
+                @"
 var c1 = new C1(1, 2, 3);
 System.Console.Write(c1.ToString());
 System.Console.Write("" - "");
@@ -5522,13 +6673,17 @@ record struct C1(int I, int I2, int I3)
 
             var comp = CreateCompilation(src);
             comp.VerifyEmitDiagnostics();
-            CompileAndVerify(comp, expectedOutput: "C1 { I = 1, I2 = 2, I3 = 3 } - I = 1, I2 = 2, I3 = 3");
+            CompileAndVerify(
+                comp,
+                expectedOutput: "C1 { I = 1, I2 = 2, I3 = 3 } - I = 1, I2 = 2, I3 = 3"
+            );
         }
 
         [Fact]
         public void ToString_UserDefinedPrintMembers_WrongAccessibility()
         {
-            var src = @"
+            var src =
+                @"
 var c = new C1();
 System.Console.Write(c.ToString());
 
@@ -5542,14 +6697,17 @@ record struct C1
             comp.VerifyEmitDiagnostics(
                 // (7,19): error CS8879: Record member 'C1.PrintMembers(StringBuilder)' must be private.
                 //     internal bool PrintMembers(System.Text.StringBuilder builder) => throw null;
-                Diagnostic(ErrorCode.ERR_NonPrivateAPIInRecord, "PrintMembers").WithArguments("C1.PrintMembers(System.Text.StringBuilder)").WithLocation(7, 19)
-                );
+                Diagnostic(ErrorCode.ERR_NonPrivateAPIInRecord, "PrintMembers")
+                    .WithArguments("C1.PrintMembers(System.Text.StringBuilder)")
+                    .WithLocation(7, 19)
+            );
         }
 
         [Fact]
         public void ToString_UserDefinedPrintMembers_Static()
         {
-            var src = @"
+            var src =
+                @"
 record struct C1
 {
     static private bool PrintMembers(System.Text.StringBuilder builder) => throw null;
@@ -5560,14 +6718,17 @@ record struct C1
             comp.VerifyEmitDiagnostics(
                 // (4,25): error CS8877: Record member 'C1.PrintMembers(StringBuilder)' may not be static.
                 //     static private bool PrintMembers(System.Text.StringBuilder builder) => throw null;
-                Diagnostic(ErrorCode.ERR_StaticAPIInRecord, "PrintMembers").WithArguments("C1.PrintMembers(System.Text.StringBuilder)").WithLocation(4, 25)
-                );
+                Diagnostic(ErrorCode.ERR_StaticAPIInRecord, "PrintMembers")
+                    .WithArguments("C1.PrintMembers(System.Text.StringBuilder)")
+                    .WithLocation(4, 25)
+            );
         }
 
         [Fact]
         public void ToString_GeneratedAsReadOnly()
         {
-            var src = @"
+            var src =
+                @"
 record struct A(int I, string S);
 ";
             var comp = CreateCompilation(src);
@@ -5579,7 +6740,8 @@ record struct A(int I, string S);
         [Fact]
         public void ToString_WihtNonReadOnlyGetter_GeneratedAsNonReadOnly()
         {
-            var src = @"
+            var src =
+                @"
 record struct A(int I, string S)
 {
     public double T => 0.1;
@@ -5595,7 +6757,8 @@ record struct A(int I, string S)
         public void AmbigCtor_WithPropertyInitializer()
         {
             // Scenario causes ambiguous ctor for record class, but not record struct
-            var src = @"
+            var src =
+                @"
 record struct R(R X)
 {
     public R X { get; init; } = X;
@@ -5605,38 +6768,50 @@ record struct R(R X)
             comp.VerifyEmitDiagnostics(
                 // (4,14): error CS0523: Struct member 'R.X' of type 'R' causes a cycle in the struct layout
                 //     public R X { get; init; } = X;
-                Diagnostic(ErrorCode.ERR_StructLayoutCycle, "X").WithArguments("R.X", "R").WithLocation(4, 14)
-                );
+                Diagnostic(ErrorCode.ERR_StructLayoutCycle, "X")
+                    .WithArguments("R.X", "R")
+                    .WithLocation(4, 14)
+            );
 
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree, ignoreAccessibility: false);
-            var parameterSyntax = tree.GetRoot().DescendantNodes().OfType<ParameterSyntax>().Single();
+            var parameterSyntax = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<ParameterSyntax>()
+                .Single();
             var parameter = model.GetDeclaredSymbol(parameterSyntax)!;
             Assert.Equal("R X", parameter.ToTestDisplayString());
             Assert.Equal(SymbolKind.Parameter, parameter.Kind);
             Assert.Equal("R..ctor(R X)", parameter.ContainingSymbol.ToTestDisplayString());
 
-            var initializerSyntax = tree.GetRoot().DescendantNodes().OfType<EqualsValueClauseSyntax>().Single();
+            var initializerSyntax = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<EqualsValueClauseSyntax>()
+                .Single();
             var initializer = model.GetSymbolInfo(initializerSyntax.Value).Symbol!;
             Assert.Equal("R X", initializer.ToTestDisplayString());
             Assert.Equal(SymbolKind.Parameter, initializer.Kind);
             Assert.Equal("R..ctor(R X)", initializer.ContainingSymbol.ToTestDisplayString());
 
-            var src2 = @"
+            var src2 =
+                @"
 record struct R(R X);
 ";
             var comp2 = CreateCompilation(src2);
             comp2.VerifyEmitDiagnostics(
                 // (2,19): error CS0523: Struct member 'R.X' of type 'R' causes a cycle in the struct layout
                 // record struct R(R X);
-                Diagnostic(ErrorCode.ERR_StructLayoutCycle, "X").WithArguments("R.X", "R").WithLocation(2, 19)
-                );
+                Diagnostic(ErrorCode.ERR_StructLayoutCycle, "X")
+                    .WithArguments("R.X", "R")
+                    .WithLocation(2, 19)
+            );
         }
 
         [Fact]
         public void GetDeclaredSymbolOnAnOutLocalInPropertyInitializer()
         {
-            var src = @"
+            var src =
+                @"
 record struct R(int I)
 {
     public int I { get; init; } = M(out int i);
@@ -5647,23 +6822,32 @@ record struct R(int I)
             comp.VerifyEmitDiagnostics(
                 // (2,21): warning CS8907: Parameter 'I' is unread. Did you forget to use it to initialize the property with that name?
                 // record struct R(int I)
-                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "I").WithArguments("I").WithLocation(2, 21)
-                );
+                Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "I")
+                    .WithArguments("I")
+                    .WithLocation(2, 21)
+            );
 
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree, ignoreAccessibility: false);
-            var outVarSyntax = tree.GetRoot().DescendantNodes().OfType<SingleVariableDesignationSyntax>().Single();
+            var outVarSyntax = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<SingleVariableDesignationSyntax>()
+                .Single();
             var outVar = model.GetDeclaredSymbol(outVarSyntax)!;
             Assert.Equal("System.Int32 i", outVar.ToTestDisplayString());
             Assert.Equal(SymbolKind.Local, outVar.Kind);
-            Assert.Equal("System.Int32 R.<I>k__BackingField", outVar.ContainingSymbol.ToTestDisplayString());
+            Assert.Equal(
+                "System.Int32 R.<I>k__BackingField",
+                outVar.ContainingSymbol.ToTestDisplayString()
+            );
         }
 
         [Fact]
         public void AnalyzerActions_01()
         {
             // Test RegisterSyntaxNodeAction
-            var text1 = @"
+            var text1 =
+                @"
 record struct A([Attr1]int X = 0) : I1
 {
     private int M() => 3;
@@ -5709,11 +6893,19 @@ class Attr1 : System.Attribute {}
             public int FireCount11;
             public int FireCount12;
 
-            private static readonly DiagnosticDescriptor Descriptor =
-               new DiagnosticDescriptor("XY0000", "Test", "Test", "Test", DiagnosticSeverity.Warning, true, "Test", "Test");
+            private static readonly DiagnosticDescriptor Descriptor = new DiagnosticDescriptor(
+                "XY0000",
+                "Test",
+                "Test",
+                "Test",
+                DiagnosticSeverity.Warning,
+                true,
+                "Test",
+                "Test"
+            );
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
-            => ImmutableArray.Create(Descriptor);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(Descriptor);
 
             public override void Initialize(AnalysisContext context)
             {
@@ -5738,22 +6930,34 @@ class Attr1 : System.Attribute {}
                 {
                     case "0":
                         Interlocked.Increment(ref FireCount0);
-                        Assert.Equal("A..ctor([System.Int32 X = 0])", context.ContainingSymbol.ToTestDisplayString());
+                        Assert.Equal(
+                            "A..ctor([System.Int32 X = 0])",
+                            context.ContainingSymbol.ToTestDisplayString()
+                        );
                         break;
                     case "3":
                         Interlocked.Increment(ref FireCount7);
-                        Assert.Equal("System.Int32 A.M()", context.ContainingSymbol.ToTestDisplayString());
+                        Assert.Equal(
+                            "System.Int32 A.M()",
+                            context.ContainingSymbol.ToTestDisplayString()
+                        );
                         break;
                     case "4":
                         Interlocked.Increment(ref FireCount12);
-                        Assert.Equal("A..ctor(System.String S)", context.ContainingSymbol.ToTestDisplayString());
+                        Assert.Equal(
+                            "A..ctor(System.String S)",
+                            context.ContainingSymbol.ToTestDisplayString()
+                        );
                         break;
                     default:
                         Assert.True(false);
                         break;
                 }
 
-                Assert.Same(literal.SyntaxTree, context.ContainingSymbol!.DeclaringSyntaxReferences.Single().SyntaxTree);
+                Assert.Same(
+                    literal.SyntaxTree,
+                    context.ContainingSymbol!.DeclaringSyntaxReferences.Single().SyntaxTree
+                );
             }
 
             protected void Handle2(SyntaxNodeAnalysisContext context)
@@ -5764,14 +6968,20 @@ class Attr1 : System.Attribute {}
                 {
                     case "= 0":
                         Interlocked.Increment(ref FireCount3);
-                        Assert.Equal("A..ctor([System.Int32 X = 0])", context.ContainingSymbol.ToTestDisplayString());
+                        Assert.Equal(
+                            "A..ctor([System.Int32 X = 0])",
+                            context.ContainingSymbol.ToTestDisplayString()
+                        );
                         break;
                     default:
                         Assert.True(false);
                         break;
                 }
 
-                Assert.Same(equalsValue.SyntaxTree, context.ContainingSymbol!.DeclaringSyntaxReferences.Single().SyntaxTree);
+                Assert.Same(
+                    equalsValue.SyntaxTree,
+                    context.ContainingSymbol!.DeclaringSyntaxReferences.Single().SyntaxTree
+                );
             }
 
             protected void Handle3(SyntaxNodeAnalysisContext context)
@@ -5782,20 +6992,29 @@ class Attr1 : System.Attribute {}
                 {
                     case ": this(4)":
                         Interlocked.Increment(ref FireCountThisConstructorInitializer);
-                        Assert.Equal("A..ctor(System.String S)", context.ContainingSymbol.ToTestDisplayString());
+                        Assert.Equal(
+                            "A..ctor(System.String S)",
+                            context.ContainingSymbol.ToTestDisplayString()
+                        );
                         break;
                     default:
                         Assert.True(false);
                         break;
                 }
 
-                Assert.Same(initializer.SyntaxTree, context.ContainingSymbol!.DeclaringSyntaxReferences.Single().SyntaxTree);
+                Assert.Same(
+                    initializer.SyntaxTree,
+                    context.ContainingSymbol!.DeclaringSyntaxReferences.Single().SyntaxTree
+                );
             }
 
             protected void Handle4(SyntaxNodeAnalysisContext context)
             {
                 Interlocked.Increment(ref FireCountConstructorDeclaration);
-                Assert.Equal("A..ctor(System.String S)", context.ContainingSymbol.ToTestDisplayString());
+                Assert.Equal(
+                    "A..ctor(System.String S)",
+                    context.ContainingSymbol.ToTestDisplayString()
+                );
             }
 
             protected void Fail(SyntaxNodeAnalysisContext context)
@@ -5821,7 +7040,10 @@ class Attr1 : System.Attribute {}
                         break;
                 }
 
-                Assert.Same(record.SyntaxTree, context.ContainingSymbol!.DeclaringSyntaxReferences.Single().SyntaxTree);
+                Assert.Same(
+                    record.SyntaxTree,
+                    context.ContainingSymbol!.DeclaringSyntaxReferences.Single().SyntaxTree
+                );
             }
 
             protected void Handle7(SyntaxNodeAnalysisContext context)
@@ -5832,7 +7054,10 @@ class Attr1 : System.Attribute {}
                 {
                     case "Attr1":
                         Interlocked.Increment(ref FireCount5);
-                        Assert.Equal("A..ctor([System.Int32 X = 0])", context.ContainingSymbol.ToTestDisplayString());
+                        Assert.Equal(
+                            "A..ctor([System.Int32 X = 0])",
+                            context.ContainingSymbol.ToTestDisplayString()
+                        );
                         break;
                 }
             }
@@ -5872,11 +7097,17 @@ class Attr1 : System.Attribute {}
                 {
                     case "([Attr1]int X = 0)":
                         Interlocked.Increment(ref FireCountParameterListAPrimaryCtor);
-                        Assert.Equal("A..ctor([System.Int32 X = 0])", context.ContainingSymbol.ToTestDisplayString());
+                        Assert.Equal(
+                            "A..ctor([System.Int32 X = 0])",
+                            context.ContainingSymbol.ToTestDisplayString()
+                        );
                         break;
                     case "(string S)":
                         Interlocked.Increment(ref FireCountStringParameterList);
-                        Assert.Equal("A..ctor(System.String S)", context.ContainingSymbol.ToTestDisplayString());
+                        Assert.Equal(
+                            "A..ctor(System.String S)",
+                            context.ContainingSymbol.ToTestDisplayString()
+                        );
                         break;
                     case "()":
                         break;
@@ -5894,7 +7125,10 @@ class Attr1 : System.Attribute {}
                 {
                     case "(4)":
                         Interlocked.Increment(ref FireCount11);
-                        Assert.Equal("A..ctor(System.String S)", context.ContainingSymbol.ToTestDisplayString());
+                        Assert.Equal(
+                            "A..ctor(System.String S)",
+                            context.ContainingSymbol.ToTestDisplayString()
+                        );
                         break;
                     default:
                         Assert.True(false);
@@ -5907,7 +7141,8 @@ class Attr1 : System.Attribute {}
         public void AnalyzerActions_02()
         {
             // Test RegisterSymbolAction
-            var text1 = @"
+            var text1 =
+                @"
 record struct A(int X = 0)
 {}
 
@@ -5941,11 +7176,19 @@ record struct C
             public int FireCount6;
             public int FireCount7;
 
-            private static readonly DiagnosticDescriptor Descriptor =
-               new DiagnosticDescriptor("XY0000", "Test", "Test", "Test", DiagnosticSeverity.Warning, true, "Test", "Test");
+            private static readonly DiagnosticDescriptor Descriptor = new DiagnosticDescriptor(
+                "XY0000",
+                "Test",
+                "Test",
+                "Test",
+                DiagnosticSeverity.Warning,
+                true,
+                "Test",
+                "Test"
+            );
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
-            => ImmutableArray.Create(Descriptor);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(Descriptor);
 
             public override void Initialize(AnalysisContext context)
             {
@@ -5993,7 +7236,8 @@ record struct C
         public void AnalyzerActions_03()
         {
             // Test RegisterSymbolStartAction
-            var text1 = @"
+            var text1 =
+                @"
 readonly record struct A(int X = 0)
 {}
 
@@ -6037,11 +7281,19 @@ readonly record struct C
             public int FireCount11;
             public int FireCount12;
 
-            private static readonly DiagnosticDescriptor Descriptor =
-               new DiagnosticDescriptor("XY0000", "Test", "Test", "Test", DiagnosticSeverity.Warning, true, "Test", "Test");
+            private static readonly DiagnosticDescriptor Descriptor = new DiagnosticDescriptor(
+                "XY0000",
+                "Test",
+                "Test",
+                "Test",
+                DiagnosticSeverity.Warning,
+                true,
+                "Test",
+                "Test"
+            );
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
-            => ImmutableArray.Create(Descriptor);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(Descriptor);
 
             public override void Initialize(AnalysisContext context)
             {
@@ -6107,7 +7359,10 @@ readonly record struct C
 
             private void Handle3(SymbolAnalysisContext context)
             {
-                Assert.Equal("System.Int32 A.X { get; init; }", context.Symbol.ToTestDisplayString());
+                Assert.Equal(
+                    "System.Int32 A.X { get; init; }",
+                    context.Symbol.ToTestDisplayString()
+                );
                 Interlocked.Increment(ref FireCount7);
             }
 
@@ -6142,7 +7397,8 @@ readonly record struct C
         public void AnalyzerActions_04()
         {
             // Test RegisterOperationAction
-            var text1 = @"
+            var text1 =
+                @"
 record struct A([Attr1(100)]int X = 0) : I1
 {}
 
@@ -6166,18 +7422,32 @@ interface I1 {}
             public int FireCount7;
             public int FireCount14;
 
-            private static readonly DiagnosticDescriptor Descriptor =
-               new DiagnosticDescriptor("XY0000", "Test", "Test", "Test", DiagnosticSeverity.Warning, true, "Test", "Test");
+            private static readonly DiagnosticDescriptor Descriptor = new DiagnosticDescriptor(
+                "XY0000",
+                "Test",
+                "Test",
+                "Test",
+                DiagnosticSeverity.Warning,
+                true,
+                "Test",
+                "Test"
+            );
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
-            => ImmutableArray.Create(Descriptor);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(Descriptor);
 
             public override void Initialize(AnalysisContext context)
             {
-                context.RegisterOperationAction(HandleConstructorBody, OperationKind.ConstructorBody);
+                context.RegisterOperationAction(
+                    HandleConstructorBody,
+                    OperationKind.ConstructorBody
+                );
                 context.RegisterOperationAction(HandleInvocation, OperationKind.Invocation);
                 context.RegisterOperationAction(HandleLiteral, OperationKind.Literal);
-                context.RegisterOperationAction(HandleParameterInitializer, OperationKind.ParameterInitializer);
+                context.RegisterOperationAction(
+                    HandleParameterInitializer,
+                    OperationKind.ParameterInitializer
+                );
                 context.RegisterOperationAction(Fail, OperationKind.PropertyInitializer);
                 context.RegisterOperationAction(Fail, OperationKind.FieldInitializer);
             }
@@ -6189,7 +7459,11 @@ interface I1 {}
                     case "A..ctor([System.Int32 X = 0])":
                         Interlocked.Increment(ref FireCount1);
                         Assert.Equal(SyntaxKind.RecordDeclaration, context.Operation.Syntax.Kind());
-                        VerifyOperationTree((CSharpCompilation)context.Compilation, context.Operation, @"");
+                        VerifyOperationTree(
+                            (CSharpCompilation)context.Compilation,
+                            context.Operation,
+                            @""
+                        );
 
                         break;
                     default:
@@ -6208,11 +7482,17 @@ interface I1 {}
                 switch (context.Operation.Syntax.ToString())
                 {
                     case "100":
-                        Assert.Equal("A..ctor([System.Int32 X = 0])", context.ContainingSymbol.ToTestDisplayString());
+                        Assert.Equal(
+                            "A..ctor([System.Int32 X = 0])",
+                            context.ContainingSymbol.ToTestDisplayString()
+                        );
                         Interlocked.Increment(ref FireCount6);
                         break;
                     case "0":
-                        Assert.Equal("A..ctor([System.Int32 X = 0])", context.ContainingSymbol.ToTestDisplayString());
+                        Assert.Equal(
+                            "A..ctor([System.Int32 X = 0])",
+                            context.ContainingSymbol.ToTestDisplayString()
+                        );
                         Interlocked.Increment(ref FireCount7);
                         break;
                     default:
@@ -6226,7 +7506,10 @@ interface I1 {}
                 switch (context.Operation.Syntax.ToString())
                 {
                     case "= 0":
-                        Assert.Equal("A..ctor([System.Int32 X = 0])", context.ContainingSymbol.ToTestDisplayString());
+                        Assert.Equal(
+                            "A..ctor([System.Int32 X = 0])",
+                            context.ContainingSymbol.ToTestDisplayString()
+                        );
                         Interlocked.Increment(ref FireCount14);
                         break;
                     default:
@@ -6245,7 +7528,8 @@ interface I1 {}
         public void AnalyzerActions_05()
         {
             // Test RegisterOperationBlockAction
-            var text1 = @"
+            var text1 =
+                @"
 record struct A([Attr1(100)]int X = 0) : I1
 {}
 
@@ -6263,11 +7547,19 @@ interface I1 {}
         {
             public int FireCount1;
 
-            private static readonly DiagnosticDescriptor Descriptor =
-               new DiagnosticDescriptor("XY0000", "Test", "Test", "Test", DiagnosticSeverity.Warning, true, "Test", "Test");
+            private static readonly DiagnosticDescriptor Descriptor = new DiagnosticDescriptor(
+                "XY0000",
+                "Test",
+                "Test",
+                "Test",
+                DiagnosticSeverity.Warning,
+                true,
+                "Test",
+                "Test"
+            );
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
-            => ImmutableArray.Create(Descriptor);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(Descriptor);
 
             public override void Initialize(AnalysisContext context)
             {
@@ -6282,7 +7574,10 @@ interface I1 {}
                         Interlocked.Increment(ref FireCount1);
                         Assert.Equal(2, context.OperationBlocks.Length);
 
-                        Assert.Equal(OperationKind.ParameterInitializer, context.OperationBlocks[0].Kind);
+                        Assert.Equal(
+                            OperationKind.ParameterInitializer,
+                            context.OperationBlocks[0].Kind
+                        );
                         Assert.Equal("= 0", context.OperationBlocks[0].Syntax.ToString());
 
                         Assert.Equal(OperationKind.None, context.OperationBlocks[1].Kind);
@@ -6300,7 +7595,8 @@ interface I1 {}
         public void AnalyzerActions_07()
         {
             // Test RegisterCodeBlockAction
-            var text1 = @"
+            var text1 =
+                @"
 record struct A([Attr1(100)]int X = 0) : I1
 {
     int M() => 3;
@@ -6321,11 +7617,19 @@ interface I1 {}
             public int FireCount1;
             public int FireCount4;
 
-            private static readonly DiagnosticDescriptor Descriptor =
-               new DiagnosticDescriptor("XY0000", "Test", "Test", "Test", DiagnosticSeverity.Warning, true, "Test", "Test");
+            private static readonly DiagnosticDescriptor Descriptor = new DiagnosticDescriptor(
+                "XY0000",
+                "Test",
+                "Test",
+                "Test",
+                DiagnosticSeverity.Warning,
+                true,
+                "Test",
+                "Test"
+            );
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
-            => ImmutableArray.Create(Descriptor);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(Descriptor);
 
             public override void Initialize(AnalysisContext context)
             {
@@ -6370,7 +7674,8 @@ interface I1 {}
         public void AnalyzerActions_08()
         {
             // Test RegisterCodeBlockStartAction
-            var text1 = @"
+            var text1 =
+                @"
 record struct A([Attr1]int X = 0) : I1
 {
     private int M() => 3;
@@ -6415,11 +7720,19 @@ interface I1 {}
             public int FireCount4000;
             public int FireCount5000;
 
-            private static readonly DiagnosticDescriptor Descriptor =
-               new DiagnosticDescriptor("XY0000", "Test", "Test", "Test", DiagnosticSeverity.Warning, true, "Test", "Test");
+            private static readonly DiagnosticDescriptor Descriptor = new DiagnosticDescriptor(
+                "XY0000",
+                "Test",
+                "Test",
+                "Test",
+                DiagnosticSeverity.Warning,
+                true,
+                "Test",
+                "Test"
+            );
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
-            => ImmutableArray.Create(Descriptor);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(Descriptor);
 
             public override void Initialize(AnalysisContext context)
             {
@@ -6531,7 +7844,8 @@ interface I1 {}
         [Fact]
         public void AnalyzerActions_09()
         {
-            var text1 = @"
+            var text1 =
+                @"
 record A([Attr1(100)]int X = 0) : I1
 {}
 
@@ -6576,11 +7890,19 @@ interface I1 {}
             public int FireCount8;
             public int FireCount9;
 
-            private static readonly DiagnosticDescriptor Descriptor =
-               new DiagnosticDescriptor("XY0000", "Test", "Test", "Test", DiagnosticSeverity.Warning, true, "Test", "Test");
+            private static readonly DiagnosticDescriptor Descriptor = new DiagnosticDescriptor(
+                "XY0000",
+                "Test",
+                "Test",
+                "Test",
+                DiagnosticSeverity.Warning,
+                true,
+                "Test",
+                "Test"
+            );
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
-            => ImmutableArray.Create(Descriptor);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(Descriptor);
 
             public override void Initialize(AnalysisContext context)
             {
@@ -6650,7 +7972,8 @@ interface I1 {}
         [Fact]
         public void WithExprOnStruct_LangVersion()
         {
-            var src = @"
+            var src =
+                @"
 var b = new B() { X = 1 };
 var b2 = b.M();
 System.Console.Write(b2.X);
@@ -6669,13 +7992,17 @@ public struct B
             comp.VerifyEmitDiagnostics(
                 // (13,16): error CS8773: Feature 'with on structs' is not available in C# 9.0. Please use language version 10.0 or greater.
                 //         return this with { X = 42 };
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "this with { X = 42 }").WithArguments("with on structs", "10.0").WithLocation(13, 16)
-                );
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "this with { X = 42 }")
+                    .WithArguments("with on structs", "10.0")
+                    .WithLocation(13, 16)
+            );
 
             comp = CreateCompilation(src);
             comp.VerifyDiagnostics();
             var verifier = CompileAndVerify(comp, expectedOutput: "42 1");
-            verifier.VerifyIL("B.M", @"
+            verifier.VerifyIL(
+                "B.M",
+                @"
 {
   // Code size       18 (0x12)
   .maxstack  2
@@ -6688,7 +8015,8 @@ public struct B
   IL_000b:  call       ""void B.X.set""
   IL_0010:  ldloc.0
   IL_0011:  ret
-}");
+}"
+            );
 
             var tree = comp.SyntaxTrees.First();
             var model = comp.GetSemanticModel(tree, ignoreAccessibility: false);
@@ -6698,7 +8026,10 @@ public struct B
 
             var operation = model.GetOperation(with);
 
-            VerifyOperationTree(comp, operation, @"
+            VerifyOperationTree(
+                comp,
+                operation,
+                @"
 IWithOperation (OperationKind.With, Type: B) (Syntax: 'this with { X = 42 }')
   Operand:
     IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKind.InstanceReference, Type: B) (Syntax: 'this')
@@ -6713,9 +8044,11 @@ IWithOperation (OperationKind.With, Type: B) (Syntax: 'this with { X = 42 }')
                   IInstanceReferenceOperation (ReferenceKind: ImplicitReceiver) (OperationKind.InstanceReference, Type: B, IsImplicit) (Syntax: 'X')
             Right:
               ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 42) (Syntax: '42')
-");
+"
+            );
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -6746,13 +8079,19 @@ Block[B2] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(src, expectedFlowGraph, expectedDiagnostics, parseOptions: TestOptions.RegularPreview);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                src,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                parseOptions: TestOptions.RegularPreview
+            );
         }
 
         [Fact]
         public void WithExprOnStruct_ControlFlow_DuplicateInitialization()
         {
-            var src = @"
+            var src =
+                @"
 public struct B
 {
     public int X { get; set; }
@@ -6766,12 +8105,15 @@ public struct B
             {
                 // (8,36): error CS1912: Duplicate initialization of member 'X'
                 //         return this with { X = 42, X = 43 };
-                Diagnostic(ErrorCode.ERR_MemberAlreadyInitialized, "X").WithArguments("X").WithLocation(8, 36)
+                Diagnostic(ErrorCode.ERR_MemberAlreadyInitialized, "X")
+                    .WithArguments("X")
+                    .WithLocation(8, 36)
             };
             var comp = CreateCompilation(src);
             comp.VerifyEmitDiagnostics(expectedDiagnostics);
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -6807,13 +8149,19 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(src, expectedFlowGraph, expectedDiagnostics, parseOptions: TestOptions.RegularPreview);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                src,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                parseOptions: TestOptions.RegularPreview
+            );
         }
 
         [Fact]
         public void WithExprOnStruct_ControlFlow_NestedInitializer()
         {
-            var src = @"
+            var src =
+                @"
 public struct C
 {
     public int Y { get; set; }
@@ -6832,7 +8180,9 @@ public struct B
             {
                 // (12,32): error CS1525: Invalid expression term '{'
                 //         return this with { X = { Y = 1 } };
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "{").WithArguments("{").WithLocation(12, 32),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "{")
+                    .WithArguments("{")
+                    .WithLocation(12, 32),
                 // (12,32): error CS1513: } expected
                 //         return this with { X = { Y = 1 } };
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "{").WithLocation(12, 32),
@@ -6841,7 +8191,9 @@ public struct B
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "{").WithLocation(12, 32),
                 // (12,34): error CS0103: The name 'Y' does not exist in the current context
                 //         return this with { X = { Y = 1 } };
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "Y").WithArguments("Y").WithLocation(12, 34),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "Y")
+                    .WithArguments("Y")
+                    .WithLocation(12, 34),
                 // (12,34): warning CS0162: Unreachable code detected
                 //         return this with { X = { Y = 1 } };
                 Diagnostic(ErrorCode.WRN_UnreachableCode, "Y").WithLocation(12, 34),
@@ -6858,7 +8210,8 @@ public struct B
             var comp = CreateCompilation(src);
             comp.VerifyEmitDiagnostics(expectedDiagnostics);
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -6900,13 +8253,19 @@ Block[B3] - Exit
     Predecessors: [B1] [B2]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(src, expectedFlowGraph, expectedDiagnostics, parseOptions: TestOptions.RegularPreview);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                src,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                parseOptions: TestOptions.RegularPreview
+            );
         }
 
         [Fact]
         public void WithExprOnStruct_ControlFlow_NonAssignmentExpression()
         {
-            var src = @"
+            var src =
+                @"
 public struct B
 {
     public int X { get; set; }
@@ -6922,18 +8281,22 @@ public struct B
             {
                 // (8,28): error CS0747: Invalid initializer member declarator
                 //         return this with { i, j++, M2(), X = 2};
-                Diagnostic(ErrorCode.ERR_InvalidInitializerElementInitializer, "i").WithLocation(8, 28),
+                Diagnostic(ErrorCode.ERR_InvalidInitializerElementInitializer, "i")
+                    .WithLocation(8, 28),
                 // (8,31): error CS0747: Invalid initializer member declarator
                 //         return this with { i, j++, M2(), X = 2};
-                Diagnostic(ErrorCode.ERR_InvalidInitializerElementInitializer, "j++").WithLocation(8, 31),
+                Diagnostic(ErrorCode.ERR_InvalidInitializerElementInitializer, "j++")
+                    .WithLocation(8, 31),
                 // (8,36): error CS0747: Invalid initializer member declarator
                 //         return this with { i, j++, M2(), X = 2};
-                Diagnostic(ErrorCode.ERR_InvalidInitializerElementInitializer, "M2()").WithLocation(8, 36)
+                Diagnostic(ErrorCode.ERR_InvalidInitializerElementInitializer, "M2()")
+                    .WithLocation(8, 36)
             };
             var comp = CreateCompilation(src);
             comp.VerifyEmitDiagnostics(expectedDiagnostics);
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -6976,13 +8339,19 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(src, expectedFlowGraph, expectedDiagnostics, parseOptions: TestOptions.RegularPreview);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                src,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                parseOptions: TestOptions.RegularPreview
+            );
         }
 
         [Fact]
         public void ObjectCreationInitializer_ControlFlow_WithCoalescingExpressionForValue()
         {
-            var src = @"
+            var src =
+                @"
 public struct B
 {
     public string X;
@@ -6997,7 +8366,8 @@ public struct B
 
             var comp = CreateCompilation(src);
             comp.VerifyDiagnostics();
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -7099,13 +8469,18 @@ Block[B7] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(src, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                src,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void WithExprOnStruct_ControlFlow_WithCoalescingExpressionForValue()
         {
-            var src = @"
+            var src =
+                @"
 var b = new B() { X = string.Empty };
 var b2 = b.M(""hello"");
 System.Console.Write(b2.X);
@@ -7125,7 +8500,8 @@ public struct B
             var comp = CreateCompilation(src);
             comp.VerifyDiagnostics();
             CompileAndVerify(comp, expectedOutput: "hello");
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -7237,13 +8613,19 @@ Block[B7] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(src, expectedFlowGraph, expectedDiagnostics, parseOptions: TestOptions.RegularPreview);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                src,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                parseOptions: TestOptions.RegularPreview
+            );
         }
 
         [Fact]
         public void WithExprOnStruct_OnParameter()
         {
-            var src = @"
+            var src =
+                @"
 var b = new B() { X = 1 };
 var b2 = B.M(b);
 System.Console.Write(b2.X);
@@ -7260,7 +8642,9 @@ public struct B
             var comp = CreateCompilation(src);
             comp.VerifyDiagnostics();
             var verifier = CompileAndVerify(comp, expectedOutput: "42");
-            verifier.VerifyIL("B.M", @"
+            verifier.VerifyIL(
+                "B.M",
+                @"
 {
   // Code size       13 (0xd)
   .maxstack  2
@@ -7272,13 +8656,15 @@ public struct B
   IL_0006:  call       ""void B.X.set""
   IL_000b:  ldloc.0
   IL_000c:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void WithExprOnStruct_OnThis()
         {
-            var src = @"
+            var src =
+                @"
 record struct C
 {
     public int X { get; set; }
@@ -7295,14 +8681,17 @@ record struct C
             comp.VerifyDiagnostics(
                 // (8,13): error CS0188: The 'this' object cannot be used before all of its fields have been assigned
                 //         _ = this with { X = 42 }; // 1
-                Diagnostic(ErrorCode.ERR_UseDefViolationThis, "this").WithArguments("this").WithLocation(8, 13)
-                );
+                Diagnostic(ErrorCode.ERR_UseDefViolationThis, "this")
+                    .WithArguments("this")
+                    .WithLocation(8, 13)
+            );
         }
 
         [Fact]
         public void WithExprOnStruct_OnTStructParameter()
         {
-            var src = @"
+            var src =
+                @"
 var b = new B() { X = 1 };
 var b2 = B.M(b);
 System.Console.Write(b2.X);
@@ -7324,7 +8713,9 @@ public struct B : I
             var comp = CreateCompilation(src);
             comp.VerifyDiagnostics();
             var verifier = CompileAndVerify(comp, expectedOutput: "42");
-            verifier.VerifyIL("B.M<T>(T)", @"
+            verifier.VerifyIL(
+                "B.M<T>(T)",
+                @"
 {
   // Code size       19 (0x13)
   .maxstack  2
@@ -7337,7 +8728,8 @@ public struct B : I
   IL_000c:  callvirt   ""void I.X.set""
   IL_0011:  ldloc.0
   IL_0012:  ret
-}");
+}"
+            );
 
             var tree = comp.SyntaxTrees.First();
             var model = comp.GetSemanticModel(tree, ignoreAccessibility: false);
@@ -7349,7 +8741,8 @@ public struct B : I
         [Fact]
         public void WithExprOnStruct_OnRecordStructParameter()
         {
-            var src = @"
+            var src =
+                @"
 var b = new B(1);
 var b2 = B.M(b);
 System.Console.Write(b2.X);
@@ -7365,7 +8758,9 @@ public record struct B(int X)
             var comp = CreateCompilation(src);
             comp.VerifyDiagnostics();
             var verifier = CompileAndVerify(comp, expectedOutput: "42");
-            verifier.VerifyIL("B.M", @"
+            verifier.VerifyIL(
+                "B.M",
+                @"
 {
   // Code size       13 (0xd)
   .maxstack  2
@@ -7377,13 +8772,15 @@ public record struct B(int X)
   IL_0006:  call       ""void B.X.set""
   IL_000b:  ldloc.0
   IL_000c:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void WithExprOnStruct_OnRecordStructParameter_Readonly()
         {
-            var src = @"
+            var src =
+                @"
 var b = new B(1, 2);
 var b2 = B.M(b);
 System.Console.Write(b2.X);
@@ -7399,8 +8796,14 @@ public readonly record struct B(int X, int Y)
 
             var comp = CreateCompilation(src);
             comp.VerifyDiagnostics();
-            var verifier = CompileAndVerify(comp, expectedOutput: "4243", verify: Verification.Skipped /* init-only */);
-            verifier.VerifyIL("B.M", @"
+            var verifier = CompileAndVerify(
+                comp,
+                expectedOutput: "4243",
+                verify: Verification.Skipped /* init-only */
+            );
+            verifier.VerifyIL(
+                "B.M",
+                @"
 {
   // Code size       22 (0x16)
   .maxstack  2
@@ -7415,13 +8818,15 @@ public readonly record struct B(int X, int Y)
   IL_000f:  call       ""void B.Y.init""
   IL_0014:  ldloc.0
   IL_0015:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void WithExprOnStruct_OnTuple()
         {
-            var src = @"
+            var src =
+                @"
 class C
 {
     static void Main()
@@ -7437,10 +8842,16 @@ class C
         return b with { Item1 = 42, Item2 = 43 };
     }
 }";
-            var comp = CreateCompilation(src, parseOptions: TestOptions.RegularPreview, options: TestOptions.ReleaseExe);
+            var comp = CreateCompilation(
+                src,
+                parseOptions: TestOptions.RegularPreview,
+                options: TestOptions.ReleaseExe
+            );
             comp.VerifyDiagnostics();
             var verifier = CompileAndVerify(comp, expectedOutput: "4243");
-            verifier.VerifyIL("C.M", @"
+            verifier.VerifyIL(
+                "C.M",
+                @"
 {
   // Code size       22 (0x16)
   .maxstack  2
@@ -7455,13 +8866,15 @@ class C
   IL_000f:  stfld      ""int System.ValueTuple<int, int>.Item2""
   IL_0014:  ldloc.0
   IL_0015:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void WithExprOnStruct_OnTuple_WithNames()
         {
-            var src = @"
+            var src =
+                @"
 var b = (1, 2);
 var b2 = M(b);
 System.Console.Write(b2.Item1);
@@ -7474,7 +8887,9 @@ static (int, int) M((int X, int Y) b)
             var comp = CreateCompilation(src);
             comp.VerifyDiagnostics();
             var verifier = CompileAndVerify(comp, expectedOutput: "4243");
-            verifier.VerifyIL("Program.<<Main>$>g__M|0_0(System.ValueTuple<int, int>)", @"
+            verifier.VerifyIL(
+                "Program.<<Main>$>g__M|0_0(System.ValueTuple<int, int>)",
+                @"
 {
   // Code size       22 (0x16)
   .maxstack  2
@@ -7489,13 +8904,15 @@ static (int, int) M((int X, int Y) b)
   IL_000f:  stfld      ""int System.ValueTuple<int, int>.Item2""
   IL_0014:  ldloc.0
   IL_0015:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void WithExprOnStruct_OnTuple_LongTuple()
         {
-            var src = @"
+            var src =
+                @"
 var b = (1, 2, 3, 4, 5, 6, 7, 8);
 var b2 = M(b);
 System.Console.Write(b2.Item7);
@@ -7508,7 +8925,9 @@ static (int, int, int, int, int, int, int, int) M((int, int, int, int, int, int,
             var comp = CreateCompilation(src);
             comp.VerifyDiagnostics();
             var verifier = CompileAndVerify(comp, expectedOutput: "4243");
-            verifier.VerifyIL("Program.<<Main>$>g__M|0_0(System.ValueTuple<int, int, int, int, int, int, int, System.ValueTuple<int>>)", @"
+            verifier.VerifyIL(
+                "Program.<<Main>$>g__M|0_0(System.ValueTuple<int, int, int, int, int, int, int, System.ValueTuple<int>>)",
+                @"
 {
   // Code size       27 (0x1b)
   .maxstack  2
@@ -7524,13 +8943,15 @@ static (int, int, int, int, int, int, int, int) M((int, int, int, int, int, int,
   IL_0014:  stfld      ""int System.ValueTuple<int>.Item1""
   IL_0019:  ldloc.0
   IL_001a:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void WithExprOnStruct_OnReadonlyField()
         {
-            var src = @"
+            var src =
+                @"
 var b = new B { X = 1 }; // 1
 
 public struct B
@@ -7564,13 +8985,14 @@ public struct B
                 // (18,25): error CS0191: A readonly field cannot be assigned to (except in a constructor or init-only setter of the type in which the field is defined or a variable initializer)
                 //         _ = this with { X = 42 }; // 4
                 Diagnostic(ErrorCode.ERR_AssgReadonly, "X").WithLocation(18, 25)
-                );
+            );
         }
 
         [Fact]
         public void WithExprOnStruct_OnEnum()
         {
-            var src = @"
+            var src =
+                @"
 public enum E { }
 class C
 {
@@ -7586,7 +9008,8 @@ class C
         [Fact]
         public void WithExprOnStruct_OnPointer()
         {
-            var src = @"
+            var src =
+                @"
 unsafe class C
 {
     static int* M(int* i)
@@ -7594,18 +9017,25 @@ unsafe class C
         return i with { };
     }
 }";
-            var comp = CreateCompilation(src, options: TestOptions.UnsafeReleaseDll, parseOptions: TestOptions.RegularPreview);
+            var comp = CreateCompilation(
+                src,
+                options: TestOptions.UnsafeReleaseDll,
+                parseOptions: TestOptions.RegularPreview
+            );
             comp.VerifyEmitDiagnostics(
                 // (6,16): error CS8858: The receiver type 'int*' is not a valid record type and is not a struct type.
                 //         return i with { };
-                Diagnostic(ErrorCode.ERR_CannotClone, "i").WithArguments("int*").WithLocation(6, 16)
-                );
+                Diagnostic(ErrorCode.ERR_CannotClone, "i")
+                    .WithArguments("int*")
+                    .WithLocation(6, 16)
+            );
         }
 
         [Fact]
         public void WithExprOnStruct_OnInterface()
         {
-            var src = @"
+            var src =
+                @"
 public interface I
 {
     int X { get; set; }
@@ -7622,14 +9052,15 @@ class C
                 // (10,16): error CS8858: The receiver type 'I' is not a valid record type and is not a value type.
                 //         return i with { X = 42 };
                 Diagnostic(ErrorCode.ERR_CannotClone, "i").WithArguments("I").WithLocation(10, 16)
-                );
+            );
         }
 
         [Fact]
         public void WithExprOnStruct_OnRefStruct()
         {
             // Similar to test RefLikeObjInitializers but with `with` expressions
-            var text = @"
+            var text =
+                @"
 using System;
 
 class Program
@@ -7676,13 +9107,18 @@ class Program
     }
 }
 ";
-            CreateCompilationWithMscorlibAndSpan(text, parseOptions: TestOptions.RegularPreview).VerifyDiagnostics(
-                // (12,48): error CS8352: Cannot use local 'inner' in this context because it may expose referenced variables outside of their declaration scope
-                //         return new S2() with { Field1 = outer, Field2 = inner };
-                Diagnostic(ErrorCode.ERR_EscapeLocal, "Field2 = inner").WithArguments("inner").WithLocation(12, 48),
-                // (23,34): error CS8352: Cannot use local 'inner' in this context because it may expose referenced variables outside of their declaration scope
-                //         result = new S2() with { Field1 = inner, Field2 = outer };
-                Diagnostic(ErrorCode.ERR_EscapeLocal, "Field1 = inner").WithArguments("inner").WithLocation(23, 34)
+            CreateCompilationWithMscorlibAndSpan(text, parseOptions: TestOptions.RegularPreview)
+                .VerifyDiagnostics(
+                    // (12,48): error CS8352: Cannot use local 'inner' in this context because it may expose referenced variables outside of their declaration scope
+                    //         return new S2() with { Field1 = outer, Field2 = inner };
+                    Diagnostic(ErrorCode.ERR_EscapeLocal, "Field2 = inner")
+                        .WithArguments("inner")
+                        .WithLocation(12, 48),
+                    // (23,34): error CS8352: Cannot use local 'inner' in this context because it may expose referenced variables outside of their declaration scope
+                    //         result = new S2() with { Field1 = inner, Field2 = outer };
+                    Diagnostic(ErrorCode.ERR_EscapeLocal, "Field1 = inner")
+                        .WithArguments("inner")
+                        .WithLocation(23, 34)
                 );
         }
 
@@ -7690,7 +9126,8 @@ class Program
         public void WithExprOnStruct_OnRefStruct_ReceiverMayWrap()
         {
             // Similar to test LocalWithNoInitializerEscape but wrapping method is used as receiver for `with` expression
-            var text = @"
+            var text =
+                @"
 using System;
 class Program
 {
@@ -7712,20 +9149,26 @@ class Program
     }
 }
 ";
-            CreateCompilationWithMscorlibAndSpan(text, parseOptions: TestOptions.RegularPreview).VerifyDiagnostics(
-                // (9,26): error CS8352: Cannot use local 'local' in this context because it may expose referenced variables outside of their declaration scope
-                //         sp = MayWrap(ref local) with { }; // 1, 2
-                Diagnostic(ErrorCode.ERR_EscapeLocal, "local").WithArguments("local").WithLocation(9, 26),
-                // (9,14): error CS8347: Cannot use a result of 'Program.MayWrap(ref Span<int>)' in this context because it may expose variables referenced by parameter 'arg' outside of their declaration scope
-                //         sp = MayWrap(ref local) with { }; // 1, 2
-                Diagnostic(ErrorCode.ERR_EscapeCall, "MayWrap(ref local)").WithArguments("Program.MayWrap(ref System.Span<int>)", "arg").WithLocation(9, 14)
+            CreateCompilationWithMscorlibAndSpan(text, parseOptions: TestOptions.RegularPreview)
+                .VerifyDiagnostics(
+                    // (9,26): error CS8352: Cannot use local 'local' in this context because it may expose referenced variables outside of their declaration scope
+                    //         sp = MayWrap(ref local) with { }; // 1, 2
+                    Diagnostic(ErrorCode.ERR_EscapeLocal, "local")
+                        .WithArguments("local")
+                        .WithLocation(9, 26),
+                    // (9,14): error CS8347: Cannot use a result of 'Program.MayWrap(ref Span<int>)' in this context because it may expose variables referenced by parameter 'arg' outside of their declaration scope
+                    //         sp = MayWrap(ref local) with { }; // 1, 2
+                    Diagnostic(ErrorCode.ERR_EscapeCall, "MayWrap(ref local)")
+                        .WithArguments("Program.MayWrap(ref System.Span<int>)", "arg")
+                        .WithLocation(9, 14)
                 );
         }
 
         [Fact]
         public void WithExprOnStruct_OnRefStruct_ReceiverMayWrap_02()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 class Program
 {
@@ -7746,13 +9189,15 @@ class Program
     }
 }
 ";
-            CreateCompilationWithMscorlibAndSpan(text, parseOptions: TestOptions.RegularPreview).VerifyDiagnostics();
+            CreateCompilationWithMscorlibAndSpan(text, parseOptions: TestOptions.RegularPreview)
+                .VerifyDiagnostics();
         }
 
         [Fact]
         public void WithExpr_NullableAnalysis_01()
         {
-            var src = @"
+            var src =
+                @"
 #nullable enable
 record struct B(int X)
 {
@@ -7772,7 +9217,8 @@ record struct B(int X)
         [Fact]
         public void WithExpr_NullableAnalysis_02()
         {
-            var src = @"
+            var src =
+                @"
 #nullable enable
 record struct B(string X)
 {
@@ -7787,13 +9233,15 @@ record struct B(string X)
             comp.VerifyDiagnostics(
                 // (8,26): warning CS8601: Possible null reference assignment.
                 //         _ = b with { X = s }; // 1
-                Diagnostic(ErrorCode.WRN_NullReferenceAssignment, "s").WithLocation(8, 26));
+                Diagnostic(ErrorCode.WRN_NullReferenceAssignment, "s").WithLocation(8, 26)
+            );
         }
 
         [Fact]
         public void WithExpr_NullableAnalysis_03()
         {
-            var src = @"
+            var src =
+                @"
 #nullable enable
 record struct B(string? X)
 {
@@ -7821,13 +9269,15 @@ record struct B(string? X)
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "b.X").WithLocation(9, 21),
                 // (14,21): warning CS8602: Dereference of a possibly null reference.
                 //         if (flag) { b.X.ToString(); } // 3
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "b.X").WithLocation(14, 21));
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "b.X").WithLocation(14, 21)
+            );
         }
 
         [Fact, WorkItem(44763, "https://github.com/dotnet/roslyn/issues/44763")]
         public void WithExpr_NullableAnalysis_05()
         {
-            var src = @"
+            var src =
+                @"
 #nullable enable
 record struct B(string? X, string? Y)
 {
@@ -7858,13 +9308,15 @@ record struct B(string? X, string? Y)
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "b.Y").WithLocation(11, 13),
                 // (15,9): warning CS8602: Dereference of a possibly null reference.
                 //         b.X.ToString(); // shouldn't warn
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "b.X").WithLocation(15, 9));
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "b.X").WithLocation(15, 9)
+            );
         }
 
         [Fact]
         public void WithExpr_NullableAnalysis_06()
         {
-            var src = @"
+            var src =
+                @"
 #nullable enable
 struct B
 {
@@ -7897,7 +9349,8 @@ struct B
         [Fact]
         public void WithExprAssignToRef1()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 record struct C(int Y)
 {
@@ -7912,11 +9365,17 @@ record struct C(int Y)
         Console.WriteLine(c.X);
     }
 }";
-            var verifier = CompileAndVerify(src, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    src,
+                    expectedOutput: @"
 5
-1").VerifyDiagnostics();
+1"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("C.Main", @"
+            verifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       59 (0x3b)
   .maxstack  2
@@ -7948,13 +9407,15 @@ record struct C(int Y)
   IL_0034:  ldind.i4
   IL_0035:  call       ""void System.Console.WriteLine(int)""
   IL_003a:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void WithExpressionSameLHS()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 record struct C(int X)
 {
     public static void Main()
@@ -7962,18 +9423,22 @@ record struct C(int X)
         var c = new C(0);
         c = c with { X = 1, X = 2};
     }
-}");
+}"
+            );
             comp.VerifyDiagnostics(
                 // (7,29): error CS1912: Duplicate initialization of member 'X'
                 //         c = c with { X = 1, X = 2};
-                Diagnostic(ErrorCode.ERR_MemberAlreadyInitialized, "X").WithArguments("X").WithLocation(7, 29)
+                Diagnostic(ErrorCode.ERR_MemberAlreadyInitialized, "X")
+                    .WithArguments("X")
+                    .WithLocation(7, 29)
             );
         }
 
         [Fact]
         public void WithExpr_AnonymousType_ChangeAllProperties()
         {
-            var src = @"
+            var src =
+                @"
 C.M();
 
 public class C
@@ -7995,13 +9460,23 @@ public class C
             comp.VerifyEmitDiagnostics(
                 // (9,17): error CS8773: Feature 'with on anonymous types' is not available in C# 9.0. Please use language version 10.0 or greater.
                 //         var b = Identity(a) with { A = Identity(30), B = Identity(40) };
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "Identity(a) with { A = Identity(30), B = Identity(40) }").WithArguments("with on anonymous types", "10.0").WithLocation(9, 17)
-                );
+                Diagnostic(
+                        ErrorCode.ERR_FeatureNotAvailableInVersion9,
+                        "Identity(a) with { A = Identity(30), B = Identity(40) }"
+                    )
+                    .WithArguments("with on anonymous types", "10.0")
+                    .WithLocation(9, 17)
+            );
 
             comp = CreateCompilation(src, parseOptions: TestOptions.Regular10);
             comp.VerifyEmitDiagnostics();
-            var verifier = CompileAndVerify(comp, expectedOutput: "Identity({ A = 10, B = 20 }) Identity(30) Identity(40) { A = 30, B = 40 }");
-            verifier.VerifyIL("C.M", @"
+            var verifier = CompileAndVerify(
+                comp,
+                expectedOutput: "Identity({ A = 10, B = 20 }) Identity(30) Identity(40) { A = 30, B = 40 }"
+            );
+            verifier.VerifyIL(
+                "C.M",
+                @"
 {
   // Code size       42 (0x2a)
   .maxstack  2
@@ -8021,8 +9496,10 @@ public class C
   IL_0024:  call       ""void System.Console.Write(object)""
   IL_0029:  ret
 }
-");
-            var expectedFlowGraph = @"
+"
+            );
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -8149,13 +9626,19 @@ Block[B4] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(src, expectedFlowGraph, expectedDiagnostics, parseOptions: TestOptions.RegularPreview);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                src,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                parseOptions: TestOptions.RegularPreview
+            );
         }
 
         [Fact]
         public void WithExpr_AnonymousType_ChangeAllProperties_ReverseOrder()
         {
-            var src = @"
+            var src =
+                @"
 C.M();
 
 public class C
@@ -8176,8 +9659,13 @@ public class C
 
             var comp = CreateCompilation(src, parseOptions: TestOptions.RegularPreview);
             comp.VerifyEmitDiagnostics();
-            var verifier = CompileAndVerify(comp, expectedOutput: "Identity({ A = 10, B = 20 }) Identity(40) Identity(30) { A = 30, B = 40 }");
-            verifier.VerifyIL("C.M", @"
+            var verifier = CompileAndVerify(
+                comp,
+                expectedOutput: "Identity({ A = 10, B = 20 }) Identity(40) Identity(30) { A = 30, B = 40 }"
+            );
+            verifier.VerifyIL(
+                "C.M",
+                @"
 {
   // Code size       42 (0x2a)
   .maxstack  2
@@ -8197,8 +9685,10 @@ public class C
   IL_0024:  call       ""void System.Console.Write(object)""
   IL_0029:  ret
 }
-");
-            var expectedFlowGraph = @"
+"
+            );
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -8325,13 +9815,19 @@ Block[B4] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(src, expectedFlowGraph, expectedDiagnostics, parseOptions: TestOptions.RegularPreview);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                src,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                parseOptions: TestOptions.RegularPreview
+            );
         }
 
         [Fact]
         public void WithExpr_AnonymousType_ChangeNoProperty()
         {
-            var src = @"
+            var src =
+                @"
 C.M();
 
 public class C
@@ -8352,7 +9848,9 @@ public class C
             var comp = CreateCompilation(src, parseOptions: TestOptions.RegularPreview);
             comp.VerifyEmitDiagnostics();
             var verifier = CompileAndVerify(comp, expectedOutput: "M2 { A = 10, B = 20 }");
-            verifier.VerifyIL("C.M", @"
+            verifier.VerifyIL(
+                "C.M",
+                @"
 {
   // Code size       38 (0x26)
   .maxstack  2
@@ -8370,9 +9868,11 @@ public class C
   IL_0020:  call       ""void System.Console.Write(object)""
   IL_0025:  ret
 }
-");
+"
+            );
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -8500,13 +10000,19 @@ Block[B5] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(src, expectedFlowGraph, expectedDiagnostics, parseOptions: TestOptions.RegularPreview);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                src,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                parseOptions: TestOptions.RegularPreview
+            );
         }
 
         [Fact]
         public void WithExpr_AnonymousType_ChangeOneProperty()
         {
-            var src = @"
+            var src =
+                @"
 C.M();
 
 public class C
@@ -8523,7 +10029,9 @@ public class C
             var comp = CreateCompilation(src, parseOptions: TestOptions.RegularPreview);
             comp.VerifyEmitDiagnostics();
             var verifier = CompileAndVerify(comp, expectedOutput: "{ A = 10, B = 30 }");
-            verifier.VerifyIL("C.M", @"
+            verifier.VerifyIL(
+                "C.M",
+                @"
 {
   // Code size       34 (0x22)
   .maxstack  2
@@ -8540,14 +10048,18 @@ public class C
   IL_001c:  call       ""void System.Console.Write(object)""
   IL_0021:  ret
 }
-");
+"
+            );
 
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree, ignoreAccessibility: false);
             var withExpr = tree.GetRoot().DescendantNodes().OfType<WithExpressionSyntax>().Single();
             var operation = model.GetOperation(withExpr);
 
-            VerifyOperationTree(comp, operation, @"
+            VerifyOperationTree(
+                comp,
+                operation,
+                @"
 IWithOperation (OperationKind.With, Type: <anonymous type: System.Int32 A, System.Int32 B>) (Syntax: 'a with { B  ... ntity(30) }')
   Operand:
     ILocalReferenceOperation: a (OperationKind.LocalReference, Type: <anonymous type: System.Int32 A, System.Int32 B>) (Syntax: 'a')
@@ -8569,9 +10081,11 @@ IWithOperation (OperationKind.With, Type: <anonymous type: System.Int32 A, Syste
                       ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 30) (Syntax: '30')
                       InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
                       OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
-");
+"
+            );
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -8697,13 +10211,19 @@ Block[B5] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(src, expectedFlowGraph, expectedDiagnostics, parseOptions: TestOptions.RegularPreview);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                src,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                parseOptions: TestOptions.RegularPreview
+            );
         }
 
         [Fact]
         public void WithExpr_AnonymousType_ChangeOneProperty_WithMethodCallForTarget()
         {
-            var src = @"
+            var src =
+                @"
 C.M();
 
 public class C
@@ -8720,7 +10240,9 @@ public class C
             var comp = CreateCompilation(src, parseOptions: TestOptions.RegularPreview);
             comp.VerifyEmitDiagnostics();
             var verifier = CompileAndVerify(comp, expectedOutput: "{ A = 10, B = 30 }");
-            verifier.VerifyIL("C.M", @"
+            verifier.VerifyIL(
+                "C.M",
+                @"
 {
   // Code size       34 (0x22)
   .maxstack  2
@@ -8737,9 +10259,11 @@ public class C
   IL_001c:  call       ""void System.Console.Write(object)""
   IL_0021:  ret
 }
-");
+"
+            );
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -8865,13 +10389,19 @@ Block[B5] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(src, expectedFlowGraph, expectedDiagnostics, parseOptions: TestOptions.RegularPreview);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                src,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                parseOptions: TestOptions.RegularPreview
+            );
         }
 
         [Fact]
         public void WithExpr_AnonymousType_ChangeOneProperty_WithCoalescingExpressionForTarget()
         {
-            var src = @"
+            var src =
+                @"
 C.M();
 
 public class C
@@ -8890,7 +10420,8 @@ public class C
             comp.VerifyEmitDiagnostics();
             CompileAndVerify(comp, expectedOutput: "{ A = 10, B = 30 }");
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -9051,13 +10582,19 @@ Block[B0] - Entry
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(src, expectedFlowGraph, expectedDiagnostics, parseOptions: TestOptions.RegularPreview);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                src,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                parseOptions: TestOptions.RegularPreview
+            );
         }
 
         [Fact]
         public void WithExpr_AnonymousType_ChangeOneProperty_WithCoalescingExpressionForValue()
         {
-            var src = @"
+            var src =
+                @"
 C.M(""hello"", ""world"");
 
 public class C
@@ -9076,7 +10613,8 @@ public class C
             comp.VerifyEmitDiagnostics();
             CompileAndVerify(comp, expectedOutput: "{ A = hello, B = world }");
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -9248,13 +10786,19 @@ Block[B9] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(src, expectedFlowGraph, expectedDiagnostics, parseOptions: TestOptions.RegularPreview);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                src,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                parseOptions: TestOptions.RegularPreview
+            );
         }
 
         [Fact]
         public void WithExpr_AnonymousType_ErrorMember()
         {
-            var src = @"
+            var src =
+                @"
 public class C
 {
     public static void M()
@@ -9271,11 +10815,14 @@ public class C
             {
                 // (7,26): error CS0117: '<anonymous type: int A>' does not contain a definition for 'Error'
                 //         var b = a with { Error = Identity(20) };
-                Diagnostic(ErrorCode.ERR_NoSuchMember, "Error").WithArguments("<anonymous type: int A>", "Error").WithLocation(7, 26)
+                Diagnostic(ErrorCode.ERR_NoSuchMember, "Error")
+                    .WithArguments("<anonymous type: int A>", "Error")
+                    .WithLocation(7, 26)
             };
             comp.VerifyEmitDiagnostics(expectedDiagnostics);
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -9361,13 +10908,19 @@ Block[B4] - Exit
     Predecessors: [B3]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(src, expectedFlowGraph, expectedDiagnostics, parseOptions: TestOptions.RegularPreview);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                src,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                parseOptions: TestOptions.RegularPreview
+            );
         }
 
         [Fact]
         public void WithExpr_AnonymousType_ToString()
         {
-            var src = @"
+            var src =
+                @"
 public class C
 {
     public static void M()
@@ -9384,11 +10937,14 @@ public class C
             {
                 // (7,26): error CS1913: Member 'ToString' cannot be initialized. It is not a field or property.
                 //         var b = a with { ToString = Identity(20) };
-                Diagnostic(ErrorCode.ERR_MemberCannotBeInitialized, "ToString").WithArguments("ToString").WithLocation(7, 26)
+                Diagnostic(ErrorCode.ERR_MemberCannotBeInitialized, "ToString")
+                    .WithArguments("ToString")
+                    .WithLocation(7, 26)
             };
             comp.VerifyEmitDiagnostics(expectedDiagnostics);
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -9474,13 +11030,19 @@ Block[B4] - Exit
     Predecessors: [B3]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(src, expectedFlowGraph, expectedDiagnostics, parseOptions: TestOptions.RegularPreview);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                src,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                parseOptions: TestOptions.RegularPreview
+            );
         }
 
         [Fact]
         public void WithExpr_AnonymousType_NestedInitializer()
         {
-            var src = @"
+            var src =
+                @"
 C.M();
 
 public class C
@@ -9497,7 +11059,9 @@ public class C
             {
                 // (10,35): error CS1525: Invalid expression term '{'
                 //         var b = a with { Nested = { A = 20 } };
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "{").WithArguments("{").WithLocation(10, 35),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "{")
+                    .WithArguments("{")
+                    .WithLocation(10, 35),
                 // (10,35): error CS1513: } expected
                 //         var b = a with { Nested = { A = 20 } };
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "{").WithLocation(10, 35),
@@ -9506,7 +11070,9 @@ public class C
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "{").WithLocation(10, 35),
                 // (10,37): error CS0103: The name 'A' does not exist in the current context
                 //         var b = a with { Nested = { A = 20 } };
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "A").WithArguments("A").WithLocation(10, 37),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "A")
+                    .WithArguments("A")
+                    .WithLocation(10, 37),
                 // (10,44): error CS1002: ; expected
                 //         var b = a with { Nested = { A = 20 } };
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "}").WithLocation(10, 44),
@@ -9515,13 +11081,17 @@ public class C
                 Diagnostic(ErrorCode.ERR_UnexpectedSemicolon, ";").WithLocation(10, 47),
                 // (11,29): error CS1519: Invalid token '(' in class, record, struct, or interface member declaration
                 //         System.Console.Write(b);
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "(").WithArguments("(").WithLocation(11, 29),
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "(")
+                    .WithArguments("(")
+                    .WithLocation(11, 29),
                 // (11,31): error CS8124: Tuple must contain at least two elements.
                 //         System.Console.Write(b);
                 Diagnostic(ErrorCode.ERR_TupleTooFewElements, ")").WithLocation(11, 31),
                 // (11,32): error CS1519: Invalid token ';' in class, record, struct, or interface member declaration
                 //         System.Console.Write(b);
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, ";").WithArguments(";").WithLocation(11, 32),
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, ";")
+                    .WithArguments(";")
+                    .WithLocation(11, 32),
                 // (13,1): error CS1022: Type or namespace definition, or end-of-file expected
                 // }
                 Diagnostic(ErrorCode.ERR_EOFExpected, "}").WithLocation(13, 1)
@@ -9529,7 +11099,8 @@ public class C
             var comp = CreateCompilation(src, parseOptions: TestOptions.RegularPreview);
             comp.VerifyEmitDiagnostics(expectedDiagnostics);
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -9634,13 +11205,19 @@ Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(src, expectedFlowGraph, expectedDiagnostics, parseOptions: TestOptions.RegularPreview);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                src,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                parseOptions: TestOptions.RegularPreview
+            );
         }
 
         [Fact]
         public void WithExpr_AnonymousType_NonAssignmentExpression()
         {
-            var src = @"
+            var src =
+                @"
 public class C
 {
     public static void M(int i, int j)
@@ -9657,17 +11234,21 @@ public class C
             {
                 // (7,26): error CS0747: Invalid initializer member declarator
                 //         var b = a with { i, j++, M2(), A = 20 };
-                Diagnostic(ErrorCode.ERR_InvalidInitializerElementInitializer, "i").WithLocation(7, 26),
+                Diagnostic(ErrorCode.ERR_InvalidInitializerElementInitializer, "i")
+                    .WithLocation(7, 26),
                 // (7,29): error CS0747: Invalid initializer member declarator
                 //         var b = a with { i, j++, M2(), A = 20 };
-                Diagnostic(ErrorCode.ERR_InvalidInitializerElementInitializer, "j++").WithLocation(7, 29),
+                Diagnostic(ErrorCode.ERR_InvalidInitializerElementInitializer, "j++")
+                    .WithLocation(7, 29),
                 // (7,34): error CS0747: Invalid initializer member declarator
                 //         var b = a with { i, j++, M2(), A = 20 };
-                Diagnostic(ErrorCode.ERR_InvalidInitializerElementInitializer, "M2()").WithLocation(7, 34)
+                Diagnostic(ErrorCode.ERR_InvalidInitializerElementInitializer, "M2()")
+                    .WithLocation(7, 34)
             };
             comp.VerifyEmitDiagnostics(expectedDiagnostics);
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -9746,13 +11327,19 @@ Block[B3] - Exit
     Predecessors: [B2]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(src, expectedFlowGraph, expectedDiagnostics, parseOptions: TestOptions.RegularPreview);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                src,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                parseOptions: TestOptions.RegularPreview
+            );
         }
 
         [Fact]
         public void WithExpr_AnonymousType_IndexerAccess()
         {
-            var src = @"
+            var src =
+                @"
 public class C
 {
     public static void M()
@@ -9778,7 +11365,9 @@ public class C
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "0").WithLocation(7, 27),
                 // (7,27): error CS1003: Syntax error, ']' expected
                 //         var b = a with { [0] = 20 };
-                Diagnostic(ErrorCode.ERR_SyntaxError, "0").WithArguments("]", "").WithLocation(7, 27),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "0")
+                    .WithArguments("]", "")
+                    .WithLocation(7, 27),
                 // (7,28): error CS1002: ; expected
                 //         var b = a with { [0] = 20 };
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "]").WithLocation(7, 28),
@@ -9787,7 +11376,9 @@ public class C
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "]").WithLocation(7, 28),
                 // (7,30): error CS1525: Invalid expression term '='
                 //         var b = a with { [0] = 20 };
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "=").WithArguments("=").WithLocation(7, 30),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "=")
+                    .WithArguments("=")
+                    .WithLocation(7, 30),
                 // (7,35): error CS1002: ; expected
                 //         var b = a with { [0] = 20 };
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "}").WithLocation(7, 35),
@@ -9801,7 +11392,8 @@ public class C
             var comp = CreateCompilation(src, parseOptions: TestOptions.RegularPreview);
             comp.VerifyEmitDiagnostics(expectedDiagnostics);
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -9906,13 +11498,19 @@ Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(src, expectedFlowGraph, expectedDiagnostics, parseOptions: TestOptions.RegularPreview);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                src,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                parseOptions: TestOptions.RegularPreview
+            );
         }
 
         [Fact]
         public void WithExpr_AnonymousType_CannotSet()
         {
-            var src = @"
+            var src =
+                @"
 public class C
 {
     public static void M()
@@ -9928,17 +11526,22 @@ public class C
             comp.VerifyEmitDiagnostics(
                 // (7,9): error CS0200: Property or indexer '<anonymous type: int A>.A' cannot be assigned to -- it is read only
                 //         a.A = 20;
-                Diagnostic(ErrorCode.ERR_AssgReadonlyProp, "a.A").WithArguments("<anonymous type: int A>.A").WithLocation(7, 9),
+                Diagnostic(ErrorCode.ERR_AssgReadonlyProp, "a.A")
+                    .WithArguments("<anonymous type: int A>.A")
+                    .WithLocation(7, 9),
                 // (10,9): error CS0200: Property or indexer '<anonymous type: int A>.A' cannot be assigned to -- it is read only
                 //         b.B.A = 30;
-                Diagnostic(ErrorCode.ERR_AssgReadonlyProp, "b.B.A").WithArguments("<anonymous type: int A>.A").WithLocation(10, 9)
-                );
+                Diagnostic(ErrorCode.ERR_AssgReadonlyProp, "b.B.A")
+                    .WithArguments("<anonymous type: int A>.A")
+                    .WithLocation(10, 9)
+            );
         }
 
         [Fact]
         public void WithExpr_AnonymousType_DuplicateMemberInDeclaration()
         {
-            var src = @"
+            var src =
+                @"
 public class C
 {
     public static void M()
@@ -9954,13 +11557,15 @@ public class C
             {
                 // (6,31): error CS0833: An anonymous type cannot have multiple properties with the same name
                 //         var a = new { A = 10, A = 20 };
-                Diagnostic(ErrorCode.ERR_AnonymousTypeDuplicatePropertyName, "A = 20").WithLocation(6, 31)
+                Diagnostic(ErrorCode.ERR_AnonymousTypeDuplicatePropertyName, "A = 20")
+                    .WithLocation(6, 31)
             };
 
             var comp = CreateCompilation(src, parseOptions: TestOptions.RegularPreview);
             comp.VerifyEmitDiagnostics(expectedDiagnostics);
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -10092,13 +11697,19 @@ Block[B5] - Exit
     Statements (0)
 ";
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(src, expectedFlowGraph, expectedDiagnostics, parseOptions: TestOptions.RegularPreview);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                src,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                parseOptions: TestOptions.RegularPreview
+            );
         }
 
         [Fact]
         public void WithExpr_AnonymousType_DuplicateInitialization()
         {
-            var src = @"
+            var src =
+                @"
 public class C
 {
     public static void M()
@@ -10113,13 +11724,16 @@ public class C
             {
                 // (7,54): error CS1912: Duplicate initialization of member 'A'
                 //         var b = Identity(a) with { A = Identity(30), A = Identity(40) };
-                Diagnostic(ErrorCode.ERR_MemberAlreadyInitialized, "A").WithArguments("A").WithLocation(7, 54)
+                Diagnostic(ErrorCode.ERR_MemberAlreadyInitialized, "A")
+                    .WithArguments("A")
+                    .WithLocation(7, 54)
             };
 
             var comp = CreateCompilation(src, parseOptions: TestOptions.RegularPreview);
             comp.VerifyEmitDiagnostics(expectedDiagnostics);
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -10207,13 +11821,19 @@ Block[B3] - Exit
     Statements (0)
 ";
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(src, expectedFlowGraph, expectedDiagnostics, parseOptions: TestOptions.RegularPreview);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                src,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                parseOptions: TestOptions.RegularPreview
+            );
         }
 
         [Fact, WorkItem(53849, "https://github.com/dotnet/roslyn/issues/53849")]
         public void WithExpr_AnonymousType_ValueIsLoweredToo()
         {
-            var src = @"
+            var src =
+                @"
 var x = new { Property = 42 };
 var adjusted = x with { Property = x.Property + 2 };
 
@@ -10227,7 +11847,8 @@ System.Console.WriteLine(adjusted);
         [Fact, WorkItem(53849, "https://github.com/dotnet/roslyn/issues/53849")]
         public void WithExpr_AnonymousType_ValueIsLoweredToo_NestedWith()
         {
-            var src = @"
+            var src =
+                @"
 var x = new { Property = 42 };
 var container = new { Item = x };
 var adjusted = container with { Item = x with { Property = x.Property + 2 } };
@@ -10242,7 +11863,8 @@ System.Console.WriteLine(adjusted);
         [Fact]
         public void AttributesOnPrimaryConstructorParameters_01()
         {
-            string source = @"
+            string source =
+                @"
 [System.AttributeUsage(System.AttributeTargets.Field, AllowMultiple = true) ]
 public class A : System.Attribute
 {
@@ -10281,28 +11903,42 @@ public readonly record struct Test(
                 var field1 = @class.GetMember<FieldSymbol>("<P1>k__BackingField");
                 AssertEx.SetEqual(new[] { "A" }, getAttributeStrings(field1));
 
-                var param1 = @class.GetMembers(".ctor").OfType<MethodSymbol>().Where(m => m.Parameters.AsSingleton()?.Name == "P1").Single().Parameters[0];
+                var param1 = @class
+                    .GetMembers(".ctor")
+                    .OfType<MethodSymbol>()
+                    .Where(m => m.Parameters.AsSingleton()?.Name == "P1")
+                    .Single()
+                    .Parameters[0];
                 AssertEx.SetEqual(new[] { "C", "D" }, getAttributeStrings(param1));
             };
 
-            var comp = CompileAndVerify(new[] { source, IsExternalInitTypeDefinition }, sourceSymbolValidator: symbolValidator, symbolValidator: symbolValidator,
+            var comp = CompileAndVerify(
+                new[] { source, IsExternalInitTypeDefinition },
+                sourceSymbolValidator: symbolValidator,
+                symbolValidator: symbolValidator,
                 parseOptions: TestOptions.RegularPreview,
                 // init-only is unverifiable
                 verify: Verification.Skipped,
-                options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All));
+                options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All)
+            );
 
             comp.VerifyDiagnostics();
 
             IEnumerable<string> getAttributeStrings(Symbol symbol)
             {
-                return GetAttributeStrings(symbol.GetAttributes().Where(a => a.AttributeClass!.Name is "A" or "B" or "C" or "D"));
+                return GetAttributeStrings(
+                    symbol
+                        .GetAttributes()
+                        .Where(a => a.AttributeClass!.Name is "A" or "B" or "C" or "D")
+                );
             }
         }
 
         [Fact]
         public void FieldAsPositionalMember()
         {
-            var source = @"
+            var source =
+                @"
 var a = new A(42);
 System.Console.Write(a.X);
 System.Console.Write("" - "");
@@ -10318,16 +11954,22 @@ record struct A(int X)
             comp.VerifyEmitDiagnostics(
                 // (8,8): error CS8773: Feature 'record structs' is not available in C# 9.0. Please use language version 10.0 or greater.
                 // record struct A(int X)
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "struct").WithArguments("record structs", "10.0").WithLocation(8, 8),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "struct")
+                    .WithArguments("record structs", "10.0")
+                    .WithLocation(8, 8),
                 // (8,17): error CS8773: Feature 'positional fields in records' is not available in C# 9.0. Please use language version 10.0 or greater.
                 // record struct A(int X)
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "int X").WithArguments("positional fields in records", "10.0").WithLocation(8, 17)
-                );
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "int X")
+                    .WithArguments("positional fields in records", "10.0")
+                    .WithLocation(8, 17)
+            );
 
             comp = CreateCompilation(source, parseOptions: TestOptions.Regular10);
             comp.VerifyDiagnostics();
             var verifier = CompileAndVerify(comp, expectedOutput: "42 - 42");
-            verifier.VerifyIL("A.Deconstruct", @"
+            verifier.VerifyIL(
+                "A.Deconstruct",
+                @"
 {
   // Code size        9 (0x9)
   .maxstack  2
@@ -10337,13 +11979,15 @@ record struct A(int X)
   IL_0007:  stind.i4
   IL_0008:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void FieldAsPositionalMember_Readonly()
         {
-            var source = @"
+            var source =
+                @"
 readonly record struct A(int X)
 {
     public int X = X; // 1
@@ -10359,33 +12003,43 @@ readonly record struct B(int X)
                 // (4,16): error CS8340: Instance fields of readonly structs must be readonly.
                 //     public int X = X; // 1
                 Diagnostic(ErrorCode.ERR_FieldsInRoStruct, "X").WithLocation(4, 16)
-                );
+            );
         }
 
         [Fact]
         public void FieldAsPositionalMember_Fixed()
         {
-            var src = @"
+            var src =
+                @"
 unsafe record struct C(int[] P)
 {
     public fixed int P[2];
     public int[] X = P;
 }";
-            var comp = CreateCompilation(src, options: TestOptions.UnsafeReleaseDll, parseOptions: TestOptions.RegularPreview);
+            var comp = CreateCompilation(
+                src,
+                options: TestOptions.UnsafeReleaseDll,
+                parseOptions: TestOptions.RegularPreview
+            );
             comp.VerifyEmitDiagnostics(
                 // (2,30): error CS8866: Record member 'C.P' must be a readable instance property or field of type 'int[]' to match positional parameter 'P'.
                 // unsafe record struct C(int[] P)
-                Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "P").WithArguments("C.P", "int[]", "P").WithLocation(2, 30),
+                Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "P")
+                    .WithArguments("C.P", "int[]", "P")
+                    .WithLocation(2, 30),
                 // (4,22): error CS8908: The type 'int*' may not be used for a field of a record.
                 //     public fixed int P[2];
-                Diagnostic(ErrorCode.ERR_BadFieldTypeInRecord, "P").WithArguments("int*").WithLocation(4, 22)
-                );
+                Diagnostic(ErrorCode.ERR_BadFieldTypeInRecord, "P")
+                    .WithArguments("int*")
+                    .WithLocation(4, 22)
+            );
         }
 
         [Fact]
         public void FieldAsPositionalMember_WrongType()
         {
-            var source = @"
+            var source =
+                @"
 record struct A(int X)
 {
     public string X = null;
@@ -10397,14 +12051,17 @@ record struct A(int X)
             comp.VerifyDiagnostics(
                 // (2,21): error CS8866: Record member 'A.X' must be a readable instance property or field of type 'int' to match positional parameter 'X'.
                 // record struct A(int X)
-                Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "X").WithArguments("A.X", "int", "X").WithLocation(2, 21)
-                );
+                Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "X")
+                    .WithArguments("A.X", "int", "X")
+                    .WithLocation(2, 21)
+            );
         }
 
         [Fact]
         public void FieldAsPositionalMember_DuplicateFields()
         {
-            var source = @"
+            var source =
+                @"
 record struct A(int X)
 {
     public int X = 0;
@@ -10417,23 +12074,33 @@ record struct A(int X)
             comp.VerifyDiagnostics(
                 // (5,16): error CS0102: The type 'A' already contains a definition for 'X'
                 //     public int X = 0;
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "X").WithArguments("A", "X").WithLocation(5, 16)
-                );
+                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "X")
+                    .WithArguments("A", "X")
+                    .WithLocation(5, 16)
+            );
         }
 
         [Fact]
         public void SyntaxFactory_TypeDeclaration()
         {
-            var expected = @"record struct Point
+            var expected =
+                @"record struct Point
 {
 }";
-            AssertEx.AssertEqualToleratingWhitespaceDifferences(expected, SyntaxFactory.TypeDeclaration(SyntaxKind.RecordStructDeclaration, "Point").NormalizeWhitespace().ToString());
+            AssertEx.AssertEqualToleratingWhitespaceDifferences(
+                expected,
+                SyntaxFactory
+                    .TypeDeclaration(SyntaxKind.RecordStructDeclaration, "Point")
+                    .NormalizeWhitespace()
+                    .ToString()
+            );
         }
 
         [Fact]
         public void InterfaceWithParameters()
         {
-            var src = @"
+            var src =
+                @"
 public interface I
 {
 }
@@ -10454,13 +12121,14 @@ record struct R2(int X) : I(X)
                 // (10,28): error CS8861: Unexpected argument list.
                 // record struct R2(int X) : I(X)
                 Diagnostic(ErrorCode.ERR_UnexpectedArgumentList, "(X)").WithLocation(10, 28)
-                );
+            );
         }
 
         [Fact]
         public void InterfaceWithParameters_NoPrimaryConstructor()
         {
-            var src = @"
+            var src =
+                @"
 public interface I
 {
 }
@@ -10481,13 +12149,14 @@ record struct R2 : I(0)
                 // (10,21): error CS8861: Unexpected argument list.
                 // record struct R2 : I(0)
                 Diagnostic(ErrorCode.ERR_UnexpectedArgumentList, "(0)").WithLocation(10, 21)
-                );
+            );
         }
 
         [Fact]
         public void InterfaceWithParameters_Struct()
         {
-            var src = @"
+            var src =
+                @"
 public interface I
 {
 }
@@ -10508,13 +12177,14 @@ struct C2 : I(0)
                 // (10,14): error CS8861: Unexpected argument list.
                 // struct C2 : I(0)
                 Diagnostic(ErrorCode.ERR_UnexpectedArgumentList, "(0)").WithLocation(10, 14)
-                );
+            );
         }
 
         [Fact]
         public void BaseArguments_Speculation()
         {
-            var src = @"
+            var src =
+                @"
 record struct R1(int X) : Error1(0, 1)
 {
 }
@@ -10529,50 +12199,86 @@ record struct R3(int X) : Error3
             comp.VerifyDiagnostics(
                 // (2,27): error CS0246: The type or namespace name 'Error1' could not be found (are you missing a using directive or an assembly reference?)
                 // record struct R1(int X) : Error1(0, 1)
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Error1").WithArguments("Error1").WithLocation(2, 27),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Error1")
+                    .WithArguments("Error1")
+                    .WithLocation(2, 27),
                 // (2,33): error CS8861: Unexpected argument list.
                 // record struct R1(int X) : Error1(0, 1)
                 Diagnostic(ErrorCode.ERR_UnexpectedArgumentList, "(0, 1)").WithLocation(2, 33),
                 // (5,27): error CS0246: The type or namespace name 'Error2' could not be found (are you missing a using directive or an assembly reference?)
                 // record struct R2(int X) : Error2()
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Error2").WithArguments("Error2").WithLocation(5, 27),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Error2")
+                    .WithArguments("Error2")
+                    .WithLocation(5, 27),
                 // (5,33): error CS8861: Unexpected argument list.
                 // record struct R2(int X) : Error2()
                 Diagnostic(ErrorCode.ERR_UnexpectedArgumentList, "()").WithLocation(5, 33),
                 // (8,27): error CS0246: The type or namespace name 'Error3' could not be found (are you missing a using directive or an assembly reference?)
                 // record struct R3(int X) : Error3
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Error3").WithArguments("Error3").WithLocation(8, 27)
-                );
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Error3")
+                    .WithArguments("Error3")
+                    .WithLocation(8, 27)
+            );
 
             var tree = comp.SyntaxTrees.First();
             var model = comp.GetSemanticModel(tree);
 
-            var baseWithargs =
-                tree.GetRoot().DescendantNodes().OfType<PrimaryConstructorBaseTypeSyntax>().First();
+            var baseWithargs = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<PrimaryConstructorBaseTypeSyntax>()
+                .First();
             Assert.Equal("Error1(0, 1)", baseWithargs.ToString());
 
-            var speculativeBase =
-                baseWithargs.WithArgumentList(baseWithargs.ArgumentList.WithArguments(baseWithargs.ArgumentList.Arguments.RemoveAt(1)));
+            var speculativeBase = baseWithargs.WithArgumentList(
+                baseWithargs.ArgumentList.WithArguments(
+                    baseWithargs.ArgumentList.Arguments.RemoveAt(1)
+                )
+            );
             Assert.Equal("Error1(0)", speculativeBase.ToString());
 
-            Assert.False(model.TryGetSpeculativeSemanticModel(baseWithargs.ArgumentList.OpenParenToken.SpanStart, speculativeBase, out _));
+            Assert.False(
+                model.TryGetSpeculativeSemanticModel(
+                    baseWithargs.ArgumentList.OpenParenToken.SpanStart,
+                    speculativeBase,
+                    out _
+                )
+            );
 
-            var baseWithoutargs =
-                tree.GetRoot().DescendantNodes().OfType<PrimaryConstructorBaseTypeSyntax>().Skip(1).First();
+            var baseWithoutargs = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<PrimaryConstructorBaseTypeSyntax>()
+                .Skip(1)
+                .First();
             Assert.Equal("Error2()", baseWithoutargs.ToString());
 
-            Assert.False(model.TryGetSpeculativeSemanticModel(baseWithoutargs.ArgumentList.OpenParenToken.SpanStart, speculativeBase, out _));
+            Assert.False(
+                model.TryGetSpeculativeSemanticModel(
+                    baseWithoutargs.ArgumentList.OpenParenToken.SpanStart,
+                    speculativeBase,
+                    out _
+                )
+            );
 
-            var baseWithoutParens = tree.GetRoot().DescendantNodes().OfType<SimpleBaseTypeSyntax>().Single();
+            var baseWithoutParens = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<SimpleBaseTypeSyntax>()
+                .Single();
             Assert.Equal("Error3", baseWithoutParens.ToString());
 
-            Assert.False(model.TryGetSpeculativeSemanticModel(baseWithoutParens.SpanStart + 2, speculativeBase, out _));
+            Assert.False(
+                model.TryGetSpeculativeSemanticModel(
+                    baseWithoutParens.SpanStart + 2,
+                    speculativeBase,
+                    out _
+                )
+            );
         }
 
         [Fact, WorkItem(54413, "https://github.com/dotnet/roslyn/issues/54413")]
         public void ValueTypeCopyConstructorLike_NoThisInitializer()
         {
-            var src = @"
+            var src =
+                @"
 record struct Value(string Text)
 {
     private Value(int X) { } // 1
@@ -10589,23 +12295,29 @@ record class Boxed(string Text)
             comp.VerifyEmitDiagnostics(
                 // (4,13): error CS8862: A constructor declared in a record with parameter list must have 'this' constructor initializer.
                 //     private Value(int X) { } // 1
-                Diagnostic(ErrorCode.ERR_UnexpectedOrMissingConstructorInitializerInRecord, "Value").WithLocation(4, 13),
+                Diagnostic(ErrorCode.ERR_UnexpectedOrMissingConstructorInitializerInRecord, "Value")
+                    .WithLocation(4, 13),
                 // (5,13): error CS8862: A constructor declared in a record with parameter list must have 'this' constructor initializer.
                 //     private Value(Value original) { } // 2
-                Diagnostic(ErrorCode.ERR_UnexpectedOrMissingConstructorInitializerInRecord, "Value").WithLocation(5, 13),
+                Diagnostic(ErrorCode.ERR_UnexpectedOrMissingConstructorInitializerInRecord, "Value")
+                    .WithLocation(5, 13),
                 // (10,13): error CS8862: A constructor declared in a record with parameter list must have 'this' constructor initializer.
                 //     private Boxed(int X) { } // 3
-                Diagnostic(ErrorCode.ERR_UnexpectedOrMissingConstructorInitializerInRecord, "Boxed").WithLocation(10, 13),
+                Diagnostic(ErrorCode.ERR_UnexpectedOrMissingConstructorInitializerInRecord, "Boxed")
+                    .WithLocation(10, 13),
                 // (11,13): error CS8878: A copy constructor 'Boxed.Boxed(Boxed)' must be public or protected because the record is not sealed.
                 //     private Boxed(Boxed original) { } // 4
-                Diagnostic(ErrorCode.ERR_CopyConstructorWrongAccessibility, "Boxed").WithArguments("Boxed.Boxed(Boxed)").WithLocation(11, 13)
-                );
+                Diagnostic(ErrorCode.ERR_CopyConstructorWrongAccessibility, "Boxed")
+                    .WithArguments("Boxed.Boxed(Boxed)")
+                    .WithLocation(11, 13)
+            );
         }
 
         [Fact]
         public void ValueTypeCopyConstructorLike()
         {
-            var src = @"
+            var src =
+                @"
 System.Console.Write(new Value(new Value(0)));
 
 record struct Value(int I)

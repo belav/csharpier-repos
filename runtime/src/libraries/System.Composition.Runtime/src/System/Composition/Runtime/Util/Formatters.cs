@@ -22,7 +22,8 @@ namespace System.Composition.Runtime.Util
 
         public static string Format(Type type)
         {
-            if (type == null) throw new ArgumentNullException(nameof(type));
+            if (type == null)
+                throw new ArgumentNullException(nameof(type));
 
             if (type.IsConstructedGenericType)
                 return FormatClosedGeneric(type);
@@ -35,7 +36,9 @@ namespace System.Composition.Runtime.Util
             Debug.Assert(closedGenericType != null);
             Debug.Assert(closedGenericType.IsConstructedGenericType);
             var name = closedGenericType.Name.Substring(0, closedGenericType.Name.IndexOf('`'));
-            IEnumerable<string> args = closedGenericType.GenericTypeArguments.Select(t => Format(t));
+            IEnumerable<string> args = closedGenericType.GenericTypeArguments.Select(
+                t => Format(t)
+            );
             return $"{name}<{string.Join(SR.Formatter_ListSeparatorWithSpace, args)}>";
         }
     }

@@ -11,7 +11,8 @@ namespace System.Text.Json.Serialization.Tests
 {
     public abstract class NodeInteropTests : SerializerTests
     {
-        public NodeInteropTests(JsonSerializerWrapperForString serializerWrapper) : base(serializerWrapper) { }
+        public NodeInteropTests(JsonSerializerWrapperForString serializerWrapper)
+            : base(serializerWrapper) { }
 
         [Fact]
         public async Task CompareResultsAgainstSerializer()
@@ -19,7 +20,9 @@ namespace System.Text.Json.Serialization.Tests
             List<Order> obj = JsonTestHelper.PopulateLargeObject(2);
             string expected = await JsonSerializerWrapperForString.SerializeWrapper(obj);
 
-            JsonArray jArray = await JsonSerializerWrapperForString.DeserializeWrapper<JsonArray>(expected);
+            JsonArray jArray = await JsonSerializerWrapperForString.DeserializeWrapper<JsonArray>(
+                expected
+            );
             string actual = jArray.ToJsonString();
             Assert.Equal(expected, actual);
 
@@ -41,7 +44,8 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public async Task NodesAsPocoProperties()
         {
-            const string Expected = "{\"MyString\":null,\"Node\":42,\"Array\":[43],\"Value\":44,\"IntValue\":45,\"Object\":{\"Property\":46}}";
+            const string Expected =
+                "{\"MyString\":null,\"Node\":42,\"Array\":[43],\"Value\":44,\"IntValue\":45,\"Object\":{\"Property\":46}}";
 
             var poco = new Poco
             {
@@ -49,10 +53,7 @@ namespace System.Text.Json.Serialization.Tests
                 Array = new JsonArray(43),
                 Value = (JsonValue)44,
                 IntValue = (JsonValue)45,
-                Object = new JsonObject
-                {
-                    ["Property"] = 46
-                }
+                Object = new JsonObject { ["Property"] = 46 }
             };
 
             string json = await JsonSerializerWrapperForString.SerializeWrapper(poco);

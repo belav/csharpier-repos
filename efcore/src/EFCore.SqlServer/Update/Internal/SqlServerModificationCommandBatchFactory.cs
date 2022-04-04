@@ -26,7 +26,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
         /// </summary>
         public SqlServerModificationCommandBatchFactory(
             ModificationCommandBatchFactoryDependencies dependencies,
-            IDbContextOptions options)
+            IDbContextOptions options
+        )
         {
             Dependencies = dependencies;
             _options = options;
@@ -45,9 +46,14 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
         /// </summary>
         public virtual ModificationCommandBatch Create()
         {
-            var optionsExtension = _options.Extensions.OfType<SqlServerOptionsExtension>().FirstOrDefault();
+            var optionsExtension = _options.Extensions
+                .OfType<SqlServerOptionsExtension>()
+                .FirstOrDefault();
 
-            return new SqlServerModificationCommandBatch(Dependencies, optionsExtension?.MaxBatchSize);
+            return new SqlServerModificationCommandBatch(
+                Dependencies,
+                optionsExtension?.MaxBatchSize
+            );
         }
     }
 }

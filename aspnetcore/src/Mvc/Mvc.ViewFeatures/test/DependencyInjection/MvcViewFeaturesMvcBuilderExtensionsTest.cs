@@ -22,17 +22,22 @@ public class MvcViewFeaturesMvcBuilderExtensionsTest
         var builder = CreateBuilder();
 
         MvcViewFeaturesMvcCoreBuilderExtensions.AddViewServices(builder.Services);
-        builder.ConfigureApplicationPartManager(manager =>
-        {
-            manager.ApplicationParts.Add(new TestApplicationPart());
-            manager.FeatureProviders.Add(new ViewComponentFeatureProvider());
-        });
+        builder.ConfigureApplicationPartManager(
+            manager =>
+            {
+                manager.ApplicationParts.Add(new TestApplicationPart());
+                manager.FeatureProviders.Add(new ViewComponentFeatureProvider());
+            }
+        );
 
         // Act
         builder.AddViewComponentsAsServices();
 
         // Assert
-        var descriptor = Assert.Single(builder.Services.ToList(), d => d.ServiceType == typeof(IViewComponentActivator));
+        var descriptor = Assert.Single(
+            builder.Services.ToList(),
+            d => d.ServiceType == typeof(IViewComponentActivator)
+        );
         Assert.Equal(typeof(ServiceBasedViewComponentActivator), descriptor.ImplementationType);
     }
 
@@ -46,7 +51,10 @@ public class MvcViewFeaturesMvcBuilderExtensionsTest
         builder.AddCookieTempDataProvider();
 
         // Assert
-        var descriptor = Assert.Single(builder.Services, item => item.ServiceType == typeof(ITempDataProvider));
+        var descriptor = Assert.Single(
+            builder.Services,
+            item => item.ServiceType == typeof(ITempDataProvider)
+        );
         Assert.Equal(typeof(CookieTempDataProvider), descriptor.ImplementationType);
     }
 
@@ -62,7 +70,8 @@ public class MvcViewFeaturesMvcBuilderExtensionsTest
         // Assert
         Assert.DoesNotContain(
             builder.Services,
-            item => item.ServiceType == typeof(IConfigureOptions<CookieTempDataProviderOptions>));
+            item => item.ServiceType == typeof(IConfigureOptions<CookieTempDataProviderOptions>)
+        );
     }
 
     [Fact]
@@ -75,7 +84,10 @@ public class MvcViewFeaturesMvcBuilderExtensionsTest
         builder.AddCookieTempDataProvider(options => { });
 
         // Assert
-        var descriptor = Assert.Single(builder.Services, item => item.ServiceType == typeof(ITempDataProvider));
+        var descriptor = Assert.Single(
+            builder.Services,
+            item => item.ServiceType == typeof(ITempDataProvider)
+        );
         Assert.Equal(typeof(CookieTempDataProvider), descriptor.ImplementationType);
     }
 
@@ -91,7 +103,8 @@ public class MvcViewFeaturesMvcBuilderExtensionsTest
         // Assert
         Assert.Single(
             builder.Services,
-            item => item.ServiceType == typeof(IConfigureOptions<CookieTempDataProviderOptions>));
+            item => item.ServiceType == typeof(IConfigureOptions<CookieTempDataProviderOptions>)
+        );
     }
 
     [Fact]
@@ -105,7 +118,10 @@ public class MvcViewFeaturesMvcBuilderExtensionsTest
         builder.AddCookieTempDataProvider();
 
         // Assert
-        var descriptor = Assert.Single(builder.Services, item => item.ServiceType == typeof(ITempDataProvider));
+        var descriptor = Assert.Single(
+            builder.Services,
+            item => item.ServiceType == typeof(ITempDataProvider)
+        );
         Assert.Equal(typeof(CookieTempDataProvider), descriptor.ImplementationType);
     }
 
@@ -120,7 +136,10 @@ public class MvcViewFeaturesMvcBuilderExtensionsTest
         builder.AddCookieTempDataProvider(options => { });
 
         // Assert
-        var descriptor = Assert.Single(builder.Services, item => item.ServiceType == typeof(ITempDataProvider));
+        var descriptor = Assert.Single(
+            builder.Services,
+            item => item.ServiceType == typeof(ITempDataProvider)
+        );
         Assert.Equal(typeof(CookieTempDataProvider), descriptor.ImplementationType);
     }
 
@@ -131,9 +150,12 @@ public class MvcViewFeaturesMvcBuilderExtensionsTest
         var services = new ServiceCollection();
 
         var manager = new ApplicationPartManager();
-        manager.ApplicationParts.Add(new TestApplicationPart(
-            typeof(ConventionsViewComponent),
-            typeof(AttributeViewComponent)));
+        manager.ApplicationParts.Add(
+            new TestApplicationPart(
+                typeof(ConventionsViewComponent),
+                typeof(AttributeViewComponent)
+            )
+        );
 
         manager.FeatureProviders.Add(new TestProvider());
 
@@ -180,9 +202,14 @@ public class MvcViewFeaturesMvcBuilderExtensionsTest
 
     private class TestProvider : IApplicationFeatureProvider<ViewComponentFeature>
     {
-        public void PopulateFeature(IEnumerable<ApplicationPart> parts, ViewComponentFeature feature)
+        public void PopulateFeature(
+            IEnumerable<ApplicationPart> parts,
+            ViewComponentFeature feature
+        )
         {
-            foreach (var type in parts.OfType<IApplicationPartTypeProvider>().SelectMany(p => p.Types))
+            foreach (
+                var type in parts.OfType<IApplicationPartTypeProvider>().SelectMany(p => p.Types)
+            )
             {
                 feature.ViewComponents.Add(type);
             }

@@ -9,7 +9,6 @@ namespace System.Text.Json.Tests
 {
     public static class JsonPropertyTests
     {
-
         [Fact]
         public static void CheckByPassingNullWriter()
         {
@@ -17,7 +16,10 @@ namespace System.Text.Json.Tests
             {
                 foreach (JsonProperty property in doc.RootElement.EnumerateObject())
                 {
-                    AssertExtensions.Throws<ArgumentNullException>("writer", () => property.WriteTo(null));
+                    AssertExtensions.Throws<ArgumentNullException>(
+                        "writer",
+                        () => property.WriteTo(null)
+                    );
                 }
             }
         }
@@ -31,10 +33,7 @@ namespace System.Text.Json.Tests
             using (JsonDocument doc = JsonDocument.Parse("{\"First\":1}", default))
             {
                 JsonElement root = doc.RootElement;
-                var options = new JsonWriterOptions
-                {
-                    SkipValidation = skipValidation,
-                };
+                var options = new JsonWriterOptions { SkipValidation = skipValidation, };
                 using var writer = new Utf8JsonWriter(buffer, options);
                 if (skipValidation)
                 {
@@ -49,10 +48,12 @@ namespace System.Text.Json.Tests
                 {
                     foreach (JsonProperty property in root.EnumerateObject())
                     {
-                        Assert.Throws<InvalidOperationException>(() =>
-                        {
-                            property.WriteTo(writer);
-                        });
+                        Assert.Throws<InvalidOperationException>(
+                            () =>
+                            {
+                                property.WriteTo(writer);
+                            }
+                        );
                     }
                     writer.Flush();
                     AssertContents("", buffer);
@@ -86,9 +87,10 @@ namespace System.Text.Json.Tests
                 Encoding.UTF8.GetString(
                     buffer.WrittenSpan
 #if NETFRAMEWORK
-                        .ToArray()
+                    .ToArray()
 #endif
-                    ));
+                )
+            );
         }
 
         [Theory]
@@ -99,10 +101,19 @@ namespace System.Text.Json.Tests
         {
             string ErrorMessage = new InvalidOperationException().Message;
             JsonProperty prop = default;
-            AssertExtensions.Throws<InvalidOperationException>(() => prop.NameEquals(text), ErrorMessage);
-            AssertExtensions.Throws<InvalidOperationException>(() => prop.NameEquals(text.AsSpan()), ErrorMessage);
+            AssertExtensions.Throws<InvalidOperationException>(
+                () => prop.NameEquals(text),
+                ErrorMessage
+            );
+            AssertExtensions.Throws<InvalidOperationException>(
+                () => prop.NameEquals(text.AsSpan()),
+                ErrorMessage
+            );
             byte[] expectedGetBytes = text == null ? null : Encoding.UTF8.GetBytes(text);
-            AssertExtensions.Throws<InvalidOperationException>(() => prop.NameEquals(expectedGetBytes), ErrorMessage);
+            AssertExtensions.Throws<InvalidOperationException>(
+                () => prop.NameEquals(expectedGetBytes),
+                ErrorMessage
+            );
         }
 
         [Theory]

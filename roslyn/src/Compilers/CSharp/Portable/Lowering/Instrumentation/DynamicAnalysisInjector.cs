@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntheticBoundNodeFactory methodBodyFactory,
             BindingDiagnosticBag diagnostics,
             DebugDocumentProvider debugDocumentProvider,
-            Instrumenter previous)
+            Instrumenter previous
+        )
         {
             // Do not instrument implicitly-declared methods, except for constructors.
             // Instrument implicit constructors in order to instrument member initializers.
@@ -60,23 +61,31 @@ namespace Microsoft.CodeAnalysis.CSharp
                 methodBodyFactory.Compilation,
                 WellKnownMember.Microsoft_CodeAnalysis_Runtime_Instrumentation__CreatePayloadForMethodsSpanningSingleFile,
                 methodBody.Syntax,
-                diagnostics);
+                diagnostics
+            );
 
             MethodSymbol createPayloadForMethodsSpanningMultipleFiles = GetCreatePayloadOverload(
                 methodBodyFactory.Compilation,
                 WellKnownMember.Microsoft_CodeAnalysis_Runtime_Instrumentation__CreatePayloadForMethodsSpanningMultipleFiles,
                 methodBody.Syntax,
-                diagnostics);
+                diagnostics
+            );
 
             // Do not instrument any methods if CreatePayload is not present.
-            if ((object)createPayloadForMethodsSpanningSingleFile == null || (object)createPayloadForMethodsSpanningMultipleFiles == null)
+            if (
+                (object)createPayloadForMethodsSpanningSingleFile == null
+                || (object)createPayloadForMethodsSpanningMultipleFiles == null
+            )
             {
                 return null;
             }
 
             // Do not instrument CreatePayload if it is part of the current compilation (which occurs only during testing).
             // CreatePayload will fail at run time with an infinite recursion if it is instrumented.
-            if (method.Equals(createPayloadForMethodsSpanningSingleFile) || method.Equals(createPayloadForMethodsSpanningMultipleFiles))
+            if (
+                method.Equals(createPayloadForMethodsSpanningSingleFile)
+                || method.Equals(createPayloadForMethodsSpanningMultipleFiles)
+            )
             {
                 return null;
             }
@@ -89,7 +98,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 createPayloadForMethodsSpanningMultipleFiles,
                 diagnostics,
                 debugDocumentProvider,
-                previous);
+                previous
+            );
         }
 
         private DynamicAnalysisInjector(
@@ -100,15 +110,22 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodSymbol createPayloadForMethodsSpanningMultipleFiles,
             BindingDiagnosticBag diagnostics,
             DebugDocumentProvider debugDocumentProvider,
-            Instrumenter previous) : base(previous)
+            Instrumenter previous
+        ) : base(previous)
         {
             _createPayloadForMethodsSpanningSingleFile = createPayloadForMethodsSpanningSingleFile;
-            _createPayloadForMethodsSpanningMultipleFiles = createPayloadForMethodsSpanningMultipleFiles;
+            _createPayloadForMethodsSpanningMultipleFiles =
+                createPayloadForMethodsSpanningMultipleFiles;
             _method = method;
             _methodBody = methodBody;
             _spansBuilder = ArrayBuilder<SourceSpan>.GetInstance();
-            TypeSymbol payloadElementType = methodBodyFactory.SpecialType(SpecialType.System_Boolean);
-            _payloadType = ArrayTypeSymbol.CreateCSharpArray(methodBodyFactory.Compilation.Assembly, TypeWithAnnotations.Create(payloadElementType));
+            TypeSymbol payloadElementType = methodBodyFactory.SpecialType(
+                SpecialType.System_Boolean
+            );
+            _payloadType = ArrayTypeSymbol.CreateCSharpArray(
+                methodBodyFactory.Compilation.Assembly,
+                TypeWithAnnotations.Create(payloadElementType)
+            );
             _diagnostics = diagnostics;
             _debugDocumentProvider = debugDocumentProvider;
             _methodBodyFactory = methodBodyFactory;
@@ -117,12 +134,23 @@ namespace Microsoft.CodeAnalysis.CSharp
             var oldMethod = methodBodyFactory.CurrentFunction;
             methodBodyFactory.CurrentFunction = method;
 
-            _methodPayload = methodBodyFactory.SynthesizedLocal(_payloadType, kind: SynthesizedLocalKind.InstrumentationPayload, syntax: methodBody.Syntax);
+            _methodPayload = methodBodyFactory.SynthesizedLocal(
+                _payloadType,
+                kind: SynthesizedLocalKind.InstrumentationPayload,
+                syntax: methodBody.Syntax
+            );
             // The first point indicates entry into the method and has the span of the method definition.
             SyntaxNode syntax = MethodDeclarationIfAvailable(methodBody.Syntax);
-            if (!method.IsImplicitlyDeclared && !(method is SynthesizedSimpleProgramEntryPointSymbol))
+            if (
+                !method.IsImplicitlyDeclared
+                && !(method is SynthesizedSimpleProgramEntryPointSymbol)
+            )
             {
-                _methodEntryInstrumentation = AddAnalysisPoint(syntax, SkipAttributes(syntax), methodBodyFactory);
+                _methodEntryInstrumentation = AddAnalysisPoint(
+                    syntax,
+                    SkipAttributes(syntax),
+                    methodBodyFactory
+                );
             }
 
             // Restore context
@@ -131,7 +159,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private static bool IsExcludedFromCodeCoverage(MethodSymbol method)
         {
-            Debug.Assert(method.MethodKind != MethodKind.LocalFunction && method.MethodKind != MethodKind.AnonymousFunction);
+            Debug.Assert(
+                method.MethodKind != MethodKind.LocalFunction
+                    && method.MethodKind != MethodKind.AnonymousFunction
+            );
 
             var containingType = method.ContainingType;
             while ((object)containingType != null)
@@ -147,8 +178,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             return method switch
             {
                 { IsDirectlyExcludedFromCodeCoverage: true } => true,
-                { AssociatedSymbol: PropertySymbol { IsDirectlyExcludedFromCodeCoverage: true } } => true,
-                { AssociatedSymbol: EventSymbol { IsDirectlyExcludedFromCodeCoverage: true } } => true,
+                { AssociatedSymbol: PropertySymbol { IsDirectlyExcludedFromCodeCoverage: true } }
+                  => true,
+                { AssociatedSymbol: EventSymbol { IsDirectlyExcludedFromCodeCoverage: true } }
+                  => true,
                 _ => false
             };
         }
@@ -163,7 +196,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression methodToken,
             BoundExpression payloadSlot,
             SyntheticBoundNodeFactory methodBodyFactory,
-            DebugDocumentProvider debugDocumentProvider)
+            DebugDocumentProvider debugDocumentProvider
+        )
         {
             MethodSymbol createPayloadOverload;
             BoundExpression fileIndexOrIndicesArgument;
@@ -207,7 +241,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // Order of elements in fileIndices should be deterministic because these
                     // elements were added based on order of spans in dynamicAnalysisSpans above.
                     fileIndexOrIndicesArgument = methodBodyFactory.Array(
-                        methodBodyFactory.SpecialType(SpecialType.System_Int32), fileIndices.ToImmutable());
+                        methodBodyFactory.SpecialType(SpecialType.System_Int32),
+                        fileIndices.ToImmutable()
+                    );
                 }
 
                 fileIndices.Free();
@@ -222,22 +258,32 @@ namespace Microsoft.CodeAnalysis.CSharp
                     methodToken,
                     fileIndexOrIndicesArgument,
                     payloadSlot,
-                    methodBodyFactory.Literal(dynamicAnalysisSpans.Length)));
+                    methodBodyFactory.Literal(dynamicAnalysisSpans.Length)
+                )
+            );
         }
 
 #nullable enable
-        public override BoundStatement? CreateBlockPrologue(BoundBlock original, out LocalSymbol? synthesizedLocal)
+        public override BoundStatement? CreateBlockPrologue(
+            BoundBlock original,
+            out LocalSymbol? synthesizedLocal
+        )
 #nullable disable
         {
-            BoundStatement previousPrologue = base.CreateBlockPrologue(original, out synthesizedLocal);
+            BoundStatement previousPrologue = base.CreateBlockPrologue(
+                original,
+                out synthesizedLocal
+            );
             if (_methodBody == original)
             {
                 _dynamicAnalysisSpans = _spansBuilder.ToImmutableAndFree();
                 // In the future there will be multiple analysis kinds.
                 const int analysisKind = 0;
 
-                ArrayTypeSymbol modulePayloadType =
-                    ArrayTypeSymbol.CreateCSharpArray(_methodBodyFactory.Compilation.Assembly, TypeWithAnnotations.Create(_payloadType));
+                ArrayTypeSymbol modulePayloadType = ArrayTypeSymbol.CreateCSharpArray(
+                    _methodBodyFactory.Compilation.Assembly,
+                    TypeWithAnnotations.Create(_payloadType)
+                );
 
                 // Synthesize the initialization of the instrumentation payload array, using concurrency-safe code:
                 //
@@ -245,47 +291,55 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // if (payload == null)
                 //     payload = Instrumentation.CreatePayload(mvid, methodIndex, fileIndexOrIndices, ref PID.PayloadRootField[methodIndex], payloadLength);
 
-                BoundStatement payloadInitialization =
-                    _methodBodyFactory.Assignment(
-                        _methodBodyFactory.Local(_methodPayload),
-                        _methodBodyFactory.ArrayAccess(
-                            _methodBodyFactory.InstrumentationPayloadRoot(analysisKind, modulePayloadType),
-                            ImmutableArray.Create(_methodBodyFactory.MethodDefIndex(_method))));
+                BoundStatement payloadInitialization = _methodBodyFactory.Assignment(
+                    _methodBodyFactory.Local(_methodPayload),
+                    _methodBodyFactory.ArrayAccess(
+                        _methodBodyFactory.InstrumentationPayloadRoot(
+                            analysisKind,
+                            modulePayloadType
+                        ),
+                        ImmutableArray.Create(_methodBodyFactory.MethodDefIndex(_method))
+                    )
+                );
 
                 BoundExpression mvid = _methodBodyFactory.ModuleVersionId();
                 BoundExpression methodToken = _methodBodyFactory.MethodDefIndex(_method);
 
-                BoundExpression payloadSlot =
-                    _methodBodyFactory.ArrayAccess(
-                        _methodBodyFactory.InstrumentationPayloadRoot(analysisKind, modulePayloadType),
-                        ImmutableArray.Create(_methodBodyFactory.MethodDefIndex(_method)));
+                BoundExpression payloadSlot = _methodBodyFactory.ArrayAccess(
+                    _methodBodyFactory.InstrumentationPayloadRoot(analysisKind, modulePayloadType),
+                    ImmutableArray.Create(_methodBodyFactory.MethodDefIndex(_method))
+                );
 
-                BoundStatement createPayloadCall =
-                    GetCreatePayloadStatement(
-                        _dynamicAnalysisSpans,
-                        _methodBody.Syntax,
-                        _methodPayload,
-                        _createPayloadForMethodsSpanningSingleFile,
-                        _createPayloadForMethodsSpanningMultipleFiles,
-                        mvid,
-                        methodToken,
-                        payloadSlot,
-                        _methodBodyFactory,
-                        _debugDocumentProvider);
+                BoundStatement createPayloadCall = GetCreatePayloadStatement(
+                    _dynamicAnalysisSpans,
+                    _methodBody.Syntax,
+                    _methodPayload,
+                    _createPayloadForMethodsSpanningSingleFile,
+                    _createPayloadForMethodsSpanningMultipleFiles,
+                    mvid,
+                    methodToken,
+                    payloadSlot,
+                    _methodBodyFactory,
+                    _debugDocumentProvider
+                );
 
-                BoundExpression payloadNullTest =
-                    _methodBodyFactory.Binary(
-                        BinaryOperatorKind.ObjectEqual,
-                        _methodBodyFactory.SpecialType(SpecialType.System_Boolean),
-                        _methodBodyFactory.Local(_methodPayload),
-                        _methodBodyFactory.Null(_payloadType));
+                BoundExpression payloadNullTest = _methodBodyFactory.Binary(
+                    BinaryOperatorKind.ObjectEqual,
+                    _methodBodyFactory.SpecialType(SpecialType.System_Boolean),
+                    _methodBodyFactory.Local(_methodPayload),
+                    _methodBodyFactory.Null(_payloadType)
+                );
 
-                BoundStatement payloadIf = _methodBodyFactory.If(payloadNullTest, createPayloadCall);
+                BoundStatement payloadIf = _methodBodyFactory.If(
+                    payloadNullTest,
+                    createPayloadCall
+                );
 
                 Debug.Assert(synthesizedLocal == null);
                 synthesizedLocal = _methodPayload;
 
-                ArrayBuilder<BoundStatement> prologueStatements = ArrayBuilder<BoundStatement>.GetInstance(previousPrologue == null ? 3 : 4);
+                ArrayBuilder<BoundStatement> prologueStatements =
+                    ArrayBuilder<BoundStatement>.GetInstance(previousPrologue == null ? 3 : 4);
                 prologueStatements.Add(payloadInitialization);
                 prologueStatements.Add(payloadIf);
                 if (_methodEntryInstrumentation != null)
@@ -306,82 +360,166 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public ImmutableArray<SourceSpan> DynamicAnalysisSpans => _dynamicAnalysisSpans;
 
-        public override BoundStatement InstrumentNoOpStatement(BoundNoOpStatement original, BoundStatement rewritten)
+        public override BoundStatement InstrumentNoOpStatement(
+            BoundNoOpStatement original,
+            BoundStatement rewritten
+        )
         {
             return AddDynamicAnalysis(original, base.InstrumentNoOpStatement(original, rewritten));
         }
 
-        public override BoundStatement InstrumentBreakStatement(BoundBreakStatement original, BoundStatement rewritten)
+        public override BoundStatement InstrumentBreakStatement(
+            BoundBreakStatement original,
+            BoundStatement rewritten
+        )
         {
             return AddDynamicAnalysis(original, base.InstrumentBreakStatement(original, rewritten));
         }
 
-        public override BoundStatement InstrumentContinueStatement(BoundContinueStatement original, BoundStatement rewritten)
+        public override BoundStatement InstrumentContinueStatement(
+            BoundContinueStatement original,
+            BoundStatement rewritten
+        )
         {
-            return AddDynamicAnalysis(original, base.InstrumentContinueStatement(original, rewritten));
+            return AddDynamicAnalysis(
+                original,
+                base.InstrumentContinueStatement(original, rewritten)
+            );
         }
 
-        public override BoundStatement InstrumentExpressionStatement(BoundExpressionStatement original, BoundStatement rewritten)
+        public override BoundStatement InstrumentExpressionStatement(
+            BoundExpressionStatement original,
+            BoundStatement rewritten
+        )
         {
-            return AddDynamicAnalysis(original, base.InstrumentExpressionStatement(original, rewritten));
+            return AddDynamicAnalysis(
+                original,
+                base.InstrumentExpressionStatement(original, rewritten)
+            );
         }
 
-        public override BoundStatement InstrumentFieldOrPropertyInitializer(BoundStatement original, BoundStatement rewritten)
+        public override BoundStatement InstrumentFieldOrPropertyInitializer(
+            BoundStatement original,
+            BoundStatement rewritten
+        )
         {
-            return AddDynamicAnalysis(original, base.InstrumentFieldOrPropertyInitializer(original, rewritten));
+            return AddDynamicAnalysis(
+                original,
+                base.InstrumentFieldOrPropertyInitializer(original, rewritten)
+            );
         }
 
-        public override BoundStatement InstrumentGotoStatement(BoundGotoStatement original, BoundStatement rewritten)
+        public override BoundStatement InstrumentGotoStatement(
+            BoundGotoStatement original,
+            BoundStatement rewritten
+        )
         {
             return AddDynamicAnalysis(original, base.InstrumentGotoStatement(original, rewritten));
         }
 
-        public override BoundStatement InstrumentThrowStatement(BoundThrowStatement original, BoundStatement rewritten)
+        public override BoundStatement InstrumentThrowStatement(
+            BoundThrowStatement original,
+            BoundStatement rewritten
+        )
         {
             return AddDynamicAnalysis(original, base.InstrumentThrowStatement(original, rewritten));
         }
 
-        public override BoundStatement InstrumentYieldBreakStatement(BoundYieldBreakStatement original, BoundStatement rewritten)
+        public override BoundStatement InstrumentYieldBreakStatement(
+            BoundYieldBreakStatement original,
+            BoundStatement rewritten
+        )
         {
-            return AddDynamicAnalysis(original, base.InstrumentYieldBreakStatement(original, rewritten));
+            return AddDynamicAnalysis(
+                original,
+                base.InstrumentYieldBreakStatement(original, rewritten)
+            );
         }
 
-        public override BoundStatement InstrumentYieldReturnStatement(BoundYieldReturnStatement original, BoundStatement rewritten)
+        public override BoundStatement InstrumentYieldReturnStatement(
+            BoundYieldReturnStatement original,
+            BoundStatement rewritten
+        )
         {
-            return AddDynamicAnalysis(original, base.InstrumentYieldReturnStatement(original, rewritten));
+            return AddDynamicAnalysis(
+                original,
+                base.InstrumentYieldReturnStatement(original, rewritten)
+            );
         }
 
-        public override BoundStatement InstrumentForEachStatementIterationVarDeclaration(BoundForEachStatement original, BoundStatement iterationVarDecl)
+        public override BoundStatement InstrumentForEachStatementIterationVarDeclaration(
+            BoundForEachStatement original,
+            BoundStatement iterationVarDecl
+        )
         {
-            return AddDynamicAnalysis(original, base.InstrumentForEachStatementIterationVarDeclaration(original, iterationVarDecl));
+            return AddDynamicAnalysis(
+                original,
+                base.InstrumentForEachStatementIterationVarDeclaration(original, iterationVarDecl)
+            );
         }
 
-        public override BoundStatement InstrumentForEachStatementDeconstructionVariablesDeclaration(BoundForEachStatement original, BoundStatement iterationVarDecl)
+        public override BoundStatement InstrumentForEachStatementDeconstructionVariablesDeclaration(
+            BoundForEachStatement original,
+            BoundStatement iterationVarDecl
+        )
         {
-            return AddDynamicAnalysis(original, base.InstrumentForEachStatementDeconstructionVariablesDeclaration(original, iterationVarDecl));
+            return AddDynamicAnalysis(
+                original,
+                base.InstrumentForEachStatementDeconstructionVariablesDeclaration(
+                    original,
+                    iterationVarDecl
+                )
+            );
         }
 
-        public override BoundStatement InstrumentIfStatement(BoundIfStatement original, BoundStatement rewritten)
+        public override BoundStatement InstrumentIfStatement(
+            BoundIfStatement original,
+            BoundStatement rewritten
+        )
         {
             return AddDynamicAnalysis(original, base.InstrumentIfStatement(original, rewritten));
         }
 
-        public override BoundStatement InstrumentWhileStatementConditionalGotoStartOrBreak(BoundWhileStatement original, BoundStatement ifConditionGotoStart)
+        public override BoundStatement InstrumentWhileStatementConditionalGotoStartOrBreak(
+            BoundWhileStatement original,
+            BoundStatement ifConditionGotoStart
+        )
         {
-            return AddDynamicAnalysis(original, base.InstrumentWhileStatementConditionalGotoStartOrBreak(original, ifConditionGotoStart));
+            return AddDynamicAnalysis(
+                original,
+                base.InstrumentWhileStatementConditionalGotoStartOrBreak(
+                    original,
+                    ifConditionGotoStart
+                )
+            );
         }
 
-        public override BoundStatement InstrumentLocalInitialization(BoundLocalDeclaration original, BoundStatement rewritten)
+        public override BoundStatement InstrumentLocalInitialization(
+            BoundLocalDeclaration original,
+            BoundStatement rewritten
+        )
         {
-            return AddDynamicAnalysis(original, base.InstrumentLocalInitialization(original, rewritten));
+            return AddDynamicAnalysis(
+                original,
+                base.InstrumentLocalInitialization(original, rewritten)
+            );
         }
 
-        public override BoundStatement InstrumentLockTargetCapture(BoundLockStatement original, BoundStatement lockTargetCapture)
+        public override BoundStatement InstrumentLockTargetCapture(
+            BoundLockStatement original,
+            BoundStatement lockTargetCapture
+        )
         {
-            return AddDynamicAnalysis(original, base.InstrumentLockTargetCapture(original, lockTargetCapture));
+            return AddDynamicAnalysis(
+                original,
+                base.InstrumentLockTargetCapture(original, lockTargetCapture)
+            );
         }
 
-        public override BoundStatement InstrumentReturnStatement(BoundReturnStatement original, BoundStatement rewritten)
+        public override BoundStatement InstrumentReturnStatement(
+            BoundReturnStatement original,
+            BoundStatement rewritten
+        )
         {
             rewritten = base.InstrumentReturnStatement(original, rewritten);
 
@@ -398,11 +536,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             return AddDynamicAnalysis(original, rewritten);
         }
 
-        private static bool ReturnsValueWithinExpressionBodiedConstruct(BoundReturnStatement returnStatement)
+        private static bool ReturnsValueWithinExpressionBodiedConstruct(
+            BoundReturnStatement returnStatement
+        )
         {
-            if (returnStatement.WasCompilerGenerated &&
-                returnStatement.ExpressionOpt != null &&
-                returnStatement.ExpressionOpt.Syntax != null)
+            if (
+                returnStatement.WasCompilerGenerated
+                && returnStatement.ExpressionOpt != null
+                && returnStatement.ExpressionOpt.Syntax != null
+            )
             {
                 SyntaxKind parentKind = returnStatement.ExpressionOpt.Syntax.Parent.Kind();
                 switch (parentKind)
@@ -417,27 +559,53 @@ namespace Microsoft.CodeAnalysis.CSharp
             return false;
         }
 
-        public override BoundStatement InstrumentSwitchStatement(BoundSwitchStatement original, BoundStatement rewritten)
+        public override BoundStatement InstrumentSwitchStatement(
+            BoundSwitchStatement original,
+            BoundStatement rewritten
+        )
         {
-            return AddDynamicAnalysis(original, base.InstrumentSwitchStatement(original, rewritten));
+            return AddDynamicAnalysis(
+                original,
+                base.InstrumentSwitchStatement(original, rewritten)
+            );
         }
 
-        public override BoundStatement InstrumentSwitchWhenClauseConditionalGotoBody(BoundExpression original, BoundStatement ifConditionGotoBody)
+        public override BoundStatement InstrumentSwitchWhenClauseConditionalGotoBody(
+            BoundExpression original,
+            BoundStatement ifConditionGotoBody
+        )
         {
-            ifConditionGotoBody = base.InstrumentSwitchWhenClauseConditionalGotoBody(original, ifConditionGotoBody);
+            ifConditionGotoBody = base.InstrumentSwitchWhenClauseConditionalGotoBody(
+                original,
+                ifConditionGotoBody
+            );
             WhenClauseSyntax whenClause = original.Syntax.FirstAncestorOrSelf<WhenClauseSyntax>();
             Debug.Assert(whenClause != null);
 
             // Instrument the statement using a factory with the same syntax as the clause, so that the instrumentation appears to be part of the clause.
-            SyntheticBoundNodeFactory statementFactory = new SyntheticBoundNodeFactory(_method, whenClause, _methodBodyFactory.CompilationState, _diagnostics);
+            SyntheticBoundNodeFactory statementFactory = new SyntheticBoundNodeFactory(
+                _method,
+                whenClause,
+                _methodBodyFactory.CompilationState,
+                _diagnostics
+            );
 
             // Instrument using the span of the expression
-            return statementFactory.StatementList(AddAnalysisPoint(whenClause, statementFactory), ifConditionGotoBody);
+            return statementFactory.StatementList(
+                AddAnalysisPoint(whenClause, statementFactory),
+                ifConditionGotoBody
+            );
         }
 
-        public override BoundStatement InstrumentUsingTargetCapture(BoundUsingStatement original, BoundStatement usingTargetCapture)
+        public override BoundStatement InstrumentUsingTargetCapture(
+            BoundUsingStatement original,
+            BoundStatement usingTargetCapture
+        )
         {
-            return AddDynamicAnalysis(original, base.InstrumentUsingTargetCapture(original, usingTargetCapture));
+            return AddDynamicAnalysis(
+                original,
+                base.InstrumentUsingTargetCapture(original, usingTargetCapture)
+            );
         }
 
         private BoundStatement AddDynamicAnalysis(BoundStatement original, BoundStatement rewritten)
@@ -445,7 +613,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (!original.WasCompilerGenerated)
             {
                 // Do not instrument implicit constructor initializers
-                if (!original.IsConstructorInitializer() || original.Syntax.Kind() != SyntaxKind.ConstructorDeclaration)
+                if (
+                    !original.IsConstructorInitializer()
+                    || original.Syntax.Kind() != SyntaxKind.ConstructorDeclaration
+                )
                 {
                     return CollectDynamicAnalysis(original, rewritten);
                 }
@@ -454,19 +625,41 @@ namespace Microsoft.CodeAnalysis.CSharp
             return rewritten;
         }
 
-        private BoundStatement CollectDynamicAnalysis(BoundStatement original, BoundStatement rewritten)
+        private BoundStatement CollectDynamicAnalysis(
+            BoundStatement original,
+            BoundStatement rewritten
+        )
         {
             // Instrument the statement using a factory with the same syntax as the statement, so that the instrumentation appears to be part of the statement.
-            SyntheticBoundNodeFactory statementFactory = new SyntheticBoundNodeFactory(_method, original.Syntax, _methodBodyFactory.CompilationState, _diagnostics);
-            return statementFactory.StatementList(AddAnalysisPoint(SyntaxForSpan(original), statementFactory), rewritten);
+            SyntheticBoundNodeFactory statementFactory = new SyntheticBoundNodeFactory(
+                _method,
+                original.Syntax,
+                _methodBodyFactory.CompilationState,
+                _diagnostics
+            );
+            return statementFactory.StatementList(
+                AddAnalysisPoint(SyntaxForSpan(original), statementFactory),
+                rewritten
+            );
         }
 
-        private static Cci.DebugSourceDocument GetSourceDocument(DebugDocumentProvider debugDocumentProvider, SyntaxNode syntax)
+        private static Cci.DebugSourceDocument GetSourceDocument(
+            DebugDocumentProvider debugDocumentProvider,
+            SyntaxNode syntax
+        )
         {
-            return GetSourceDocument(debugDocumentProvider, syntax, syntax.GetLocation().GetMappedLineSpan());
+            return GetSourceDocument(
+                debugDocumentProvider,
+                syntax,
+                syntax.GetLocation().GetMappedLineSpan()
+            );
         }
 
-        private static Cci.DebugSourceDocument GetSourceDocument(DebugDocumentProvider debugDocumentProvider, SyntaxNode syntax, FileLinePositionSpan span)
+        private static Cci.DebugSourceDocument GetSourceDocument(
+            DebugDocumentProvider debugDocumentProvider,
+            SyntaxNode syntax,
+            FileLinePositionSpan span
+        )
         {
             string path = span.Path;
             // If the path for the syntax node is empty, try the path for the entire syntax tree.
@@ -478,32 +671,54 @@ namespace Microsoft.CodeAnalysis.CSharp
             return debugDocumentProvider.Invoke(path, basePath: "");
         }
 
-        private BoundStatement AddAnalysisPoint(SyntaxNode syntaxForSpan, Text.TextSpan alternateSpan, SyntheticBoundNodeFactory statementFactory)
+        private BoundStatement AddAnalysisPoint(
+            SyntaxNode syntaxForSpan,
+            Text.TextSpan alternateSpan,
+            SyntheticBoundNodeFactory statementFactory
+        )
         {
-            return AddAnalysisPoint(syntaxForSpan, syntaxForSpan.SyntaxTree.GetMappedLineSpan(alternateSpan), statementFactory);
+            return AddAnalysisPoint(
+                syntaxForSpan,
+                syntaxForSpan.SyntaxTree.GetMappedLineSpan(alternateSpan),
+                statementFactory
+            );
         }
 
-        private BoundStatement AddAnalysisPoint(SyntaxNode syntaxForSpan, SyntheticBoundNodeFactory statementFactory)
+        private BoundStatement AddAnalysisPoint(
+            SyntaxNode syntaxForSpan,
+            SyntheticBoundNodeFactory statementFactory
+        )
         {
-            return AddAnalysisPoint(syntaxForSpan, syntaxForSpan.GetLocation().GetMappedLineSpan(), statementFactory);
+            return AddAnalysisPoint(
+                syntaxForSpan,
+                syntaxForSpan.GetLocation().GetMappedLineSpan(),
+                statementFactory
+            );
         }
 
-        private BoundStatement AddAnalysisPoint(SyntaxNode syntaxForSpan, FileLinePositionSpan span, SyntheticBoundNodeFactory statementFactory)
+        private BoundStatement AddAnalysisPoint(
+            SyntaxNode syntaxForSpan,
+            FileLinePositionSpan span,
+            SyntheticBoundNodeFactory statementFactory
+        )
         {
             // Add an entry in the spans array.
             int spansIndex = _spansBuilder.Count;
-            _spansBuilder.Add(new SourceSpan(
-                GetSourceDocument(_debugDocumentProvider, syntaxForSpan, span),
-                span.StartLinePosition.Line,
-                span.StartLinePosition.Character,
-                span.EndLinePosition.Line,
-                span.EndLinePosition.Character));
+            _spansBuilder.Add(
+                new SourceSpan(
+                    GetSourceDocument(_debugDocumentProvider, syntaxForSpan, span),
+                    span.StartLinePosition.Line,
+                    span.StartLinePosition.Character,
+                    span.EndLinePosition.Line,
+                    span.EndLinePosition.Character
+                )
+            );
 
             // Generate "_payload[pointIndex] = true".
-            BoundArrayAccess payloadCell =
-                statementFactory.ArrayAccess(
-                    statementFactory.Local(_methodPayload),
-                    statementFactory.Literal(spansIndex));
+            BoundArrayAccess payloadCell = statementFactory.ArrayAccess(
+                statementFactory.Local(_methodPayload),
+                statementFactory.Literal(spansIndex)
+            );
 
             return statementFactory.Assignment(payloadCell, statementFactory.Literal(true));
         }
@@ -527,11 +742,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                     syntaxForSpan = ((BoundDoStatement)statement).Condition.Syntax;
                     break;
                 case BoundKind.UsingStatement:
-                    {
-                        BoundUsingStatement usingStatement = (BoundUsingStatement)statement;
-                        syntaxForSpan = ((BoundNode)usingStatement.ExpressionOpt ?? usingStatement.DeclarationsOpt).Syntax;
-                        break;
-                    }
+                {
+                    BoundUsingStatement usingStatement = (BoundUsingStatement)statement;
+                    syntaxForSpan = (
+                        (BoundNode)usingStatement.ExpressionOpt ?? usingStatement.DeclarationsOpt
+                    ).Syntax;
+                    break;
+                }
                 case BoundKind.FixedStatement:
                     syntaxForSpan = ((BoundFixedStatement)statement).Declarations.Syntax;
                     break;
@@ -549,9 +766,19 @@ namespace Microsoft.CodeAnalysis.CSharp
             return syntaxForSpan;
         }
 
-        private static MethodSymbol GetCreatePayloadOverload(CSharpCompilation compilation, WellKnownMember overload, SyntaxNode syntax, BindingDiagnosticBag diagnostics)
+        private static MethodSymbol GetCreatePayloadOverload(
+            CSharpCompilation compilation,
+            WellKnownMember overload,
+            SyntaxNode syntax,
+            BindingDiagnosticBag diagnostics
+        )
         {
-            return (MethodSymbol)Binder.GetWellKnownTypeMember(compilation, overload, diagnostics, syntax: syntax);
+            return (MethodSymbol)Binder.GetWellKnownTypeMember(
+                compilation,
+                overload,
+                diagnostics,
+                syntax: syntax
+            );
         }
 
         private static SyntaxNode MethodDeclarationIfAvailable(SyntaxNode body)
@@ -584,37 +811,80 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 case SyntaxKind.MethodDeclaration:
                     MethodDeclarationSyntax methodSyntax = (MethodDeclarationSyntax)syntax;
-                    return SkipAttributes(syntax, methodSyntax.AttributeLists, methodSyntax.Modifiers, default(SyntaxToken), methodSyntax.ReturnType);
+                    return SkipAttributes(
+                        syntax,
+                        methodSyntax.AttributeLists,
+                        methodSyntax.Modifiers,
+                        default(SyntaxToken),
+                        methodSyntax.ReturnType
+                    );
 
                 case SyntaxKind.PropertyDeclaration:
                     PropertyDeclarationSyntax propertySyntax = (PropertyDeclarationSyntax)syntax;
-                    return SkipAttributes(syntax, propertySyntax.AttributeLists, propertySyntax.Modifiers, default(SyntaxToken), propertySyntax.Type);
+                    return SkipAttributes(
+                        syntax,
+                        propertySyntax.AttributeLists,
+                        propertySyntax.Modifiers,
+                        default(SyntaxToken),
+                        propertySyntax.Type
+                    );
 
                 case SyntaxKind.GetAccessorDeclaration:
                 case SyntaxKind.SetAccessorDeclaration:
                 case SyntaxKind.InitAccessorDeclaration:
                     AccessorDeclarationSyntax accessorSyntax = (AccessorDeclarationSyntax)syntax;
-                    return SkipAttributes(syntax, accessorSyntax.AttributeLists, accessorSyntax.Modifiers, accessorSyntax.Keyword, null);
+                    return SkipAttributes(
+                        syntax,
+                        accessorSyntax.AttributeLists,
+                        accessorSyntax.Modifiers,
+                        accessorSyntax.Keyword,
+                        null
+                    );
 
                 case SyntaxKind.ConstructorDeclaration:
-                    ConstructorDeclarationSyntax constructorSyntax = (ConstructorDeclarationSyntax)syntax;
-                    return SkipAttributes(syntax, constructorSyntax.AttributeLists, constructorSyntax.Modifiers, constructorSyntax.Identifier, null);
+                    ConstructorDeclarationSyntax constructorSyntax =
+                        (ConstructorDeclarationSyntax)syntax;
+                    return SkipAttributes(
+                        syntax,
+                        constructorSyntax.AttributeLists,
+                        constructorSyntax.Modifiers,
+                        constructorSyntax.Identifier,
+                        null
+                    );
 
                 case SyntaxKind.OperatorDeclaration:
                     OperatorDeclarationSyntax operatorSyntax = (OperatorDeclarationSyntax)syntax;
-                    return SkipAttributes(syntax, operatorSyntax.AttributeLists, operatorSyntax.Modifiers, operatorSyntax.OperatorKeyword, null);
+                    return SkipAttributes(
+                        syntax,
+                        operatorSyntax.AttributeLists,
+                        operatorSyntax.Modifiers,
+                        operatorSyntax.OperatorKeyword,
+                        null
+                    );
             }
 
             return syntax.Span;
         }
 
-        private static Text.TextSpan SkipAttributes(SyntaxNode syntax, SyntaxList<AttributeListSyntax> attributes, SyntaxTokenList modifiers, SyntaxToken keyword, TypeSyntax type)
+        private static Text.TextSpan SkipAttributes(
+            SyntaxNode syntax,
+            SyntaxList<AttributeListSyntax> attributes,
+            SyntaxTokenList modifiers,
+            SyntaxToken keyword,
+            TypeSyntax type
+        )
         {
             Text.TextSpan originalSpan = syntax.Span;
             if (attributes.Count > 0)
             {
-                Text.TextSpan startSpan = modifiers.Node != null ? modifiers.Span : (keyword.Node != null ? keyword.Span : type.Span);
-                return new Text.TextSpan(startSpan.Start, originalSpan.Length - (startSpan.Start - originalSpan.Start));
+                Text.TextSpan startSpan =
+                    modifiers.Node != null
+                        ? modifiers.Span
+                        : (keyword.Node != null ? keyword.Span : type.Span);
+                return new Text.TextSpan(
+                    startSpan.Start,
+                    originalSpan.Length - (startSpan.Start - originalSpan.Start)
+                );
             }
 
             return originalSpan;

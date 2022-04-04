@@ -47,8 +47,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
         ///     the constructor at any point in this process.
         /// </remarks>
         [EntityFrameworkInternal]
-        public RelationalCommandBuilderDependencies(
-            IRelationalTypeMappingSource typeMappingSource)
+        public RelationalCommandBuilderDependencies(IRelationalTypeMappingSource typeMappingSource)
         {
             TypeMappingSource = typeMappingSource;
         }

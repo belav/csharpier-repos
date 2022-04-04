@@ -11,7 +11,5 @@ namespace Microsoft.EntityFrameworkCore
     ///     Extension methods for <see cref="IConventionAnnotatable" />.
     /// </summary>
     [Obsolete("Use IConventionAnnotatable")]
-    public static class ConventionAnnotatableExtensions
-    {
-    }
+    public static class ConventionAnnotatableExtensions { }
 }

@@ -53,7 +53,9 @@ namespace System.ComponentModel.Tests
         {
             Assert.Throws<NotSupportedException>(() => s_converter.ConvertFrom("1"));
             Assert.Throws<NotSupportedException>(() => s_converter.ConvertFrom(null));
-            Assert.Throws<NotSupportedException>(() => s_converter.ConvertFrom(s_context, null, "1"));
+            Assert.Throws<NotSupportedException>(
+                () => s_converter.ConvertFrom(s_context, null, "1")
+            );
         }
 
         [Fact]
@@ -74,17 +76,32 @@ namespace System.ComponentModel.Tests
             using (new ThreadCultureChange("fr-FR"))
             {
                 DateTime testDateAndTime = DateTime.UtcNow;
-                ConstructorInfo ctor = typeof(DateTime).GetConstructor(new Type[]
-                {
-                    typeof(int), typeof(int), typeof(int), typeof(int),
-                    typeof(int), typeof(int), typeof(int)
-                });
+                ConstructorInfo ctor = typeof(DateTime).GetConstructor(
+                    new Type[]
+                    {
+                        typeof(int),
+                        typeof(int),
+                        typeof(int),
+                        typeof(int),
+                        typeof(int),
+                        typeof(int),
+                        typeof(int)
+                    }
+                );
 
-                InstanceDescriptor descriptor = new InstanceDescriptor(ctor, new object[]
-                {
-                    testDateAndTime.Year, testDateAndTime.Month, testDateAndTime.Day, testDateAndTime.Hour,
-                    testDateAndTime.Minute, testDateAndTime.Second, testDateAndTime.Millisecond
-                });
+                InstanceDescriptor descriptor = new InstanceDescriptor(
+                    ctor,
+                    new object[]
+                    {
+                        testDateAndTime.Year,
+                        testDateAndTime.Month,
+                        testDateAndTime.Day,
+                        testDateAndTime.Hour,
+                        testDateAndTime.Minute,
+                        testDateAndTime.Second,
+                        testDateAndTime.Millisecond
+                    }
+                );
 
                 const string format = "dd MMM yyyy hh:mm";
                 object o = s_converter.ConvertFrom(descriptor);
@@ -96,7 +113,8 @@ namespace System.ComponentModel.Tests
         public static void ConvertFromString_WithContext()
         {
             Assert.Throws<NotSupportedException>(
-                () => s_converter.ConvertFromString(s_context, null, "1"));
+                () => s_converter.ConvertFromString(s_context, null, "1")
+            );
         }
 
         [Fact]
@@ -112,24 +130,45 @@ namespace System.ComponentModel.Tests
             using (new ThreadCultureChange("pl-PL"))
             {
                 Assert.Throws<ArgumentNullException>(
-                    () => s_converter.ConvertTo(s_context, null, c_conversionInputValue, null));
+                    () => s_converter.ConvertTo(s_context, null, c_conversionInputValue, null)
+                );
 
                 Assert.Throws<NotSupportedException>(
-                    () => s_converter.ConvertTo(s_context, null, c_conversionInputValue, typeof(int)));
+                    () =>
+                        s_converter.ConvertTo(s_context, null, c_conversionInputValue, typeof(int))
+                );
 
-                object o = s_converter.ConvertTo(s_context, null, c_conversionInputValue, typeof(string));
+                object o = s_converter.ConvertTo(
+                    s_context,
+                    null,
+                    c_conversionInputValue,
+                    typeof(string)
+                );
                 VerifyConversionToString(o);
 
                 o = s_converter.ConvertTo(
-                    s_context, CultureInfo.CurrentCulture, c_conversionInputValue, typeof(string));
+                    s_context,
+                    CultureInfo.CurrentCulture,
+                    c_conversionInputValue,
+                    typeof(string)
+                );
                 VerifyConversionToString(o);
 
                 o = s_converter.ConvertTo(
-                    s_context, CultureInfo.InvariantCulture, c_conversionInputValue, typeof(string));
+                    s_context,
+                    CultureInfo.InvariantCulture,
+                    c_conversionInputValue,
+                    typeof(string)
+                );
                 VerifyConversionToString(o);
 
-                string s = s_converter.ConvertTo(
-                    s_context, CultureInfo.InvariantCulture, new FormattableClass(), typeof(string)) as string;
+                string s =
+                    s_converter.ConvertTo(
+                        s_context,
+                        CultureInfo.InvariantCulture,
+                        new FormattableClass(),
+                        typeof(string)
+                    ) as string;
                 Assert.NotNull(s);
                 Assert.Equal(FormattableClass.Token, s);
             }
@@ -182,10 +221,16 @@ namespace System.ComponentModel.Tests
 
                 Assert.Throws<NotSupportedException>(() => GetConvertFromException(null));
                 Assert.Throws<NotSupportedException>(() => GetConvertFromException("1"));
-                Assert.Throws<NotSupportedException>(() => GetConvertFromException(new BaseClass()));
-                Assert.Throws<NotSupportedException>(() => GetConvertToException(null, typeof(int)));
+                Assert.Throws<NotSupportedException>(
+                    () => GetConvertFromException(new BaseClass())
+                );
+                Assert.Throws<NotSupportedException>(
+                    () => GetConvertToException(null, typeof(int))
+                );
                 Assert.Throws<NotSupportedException>(() => GetConvertToException("1", typeof(int)));
-                Assert.Throws<NotSupportedException>(() => GetConvertToException(new BaseClass(), typeof(BaseClass)));
+                Assert.Throws<NotSupportedException>(
+                    () => GetConvertToException(new BaseClass(), typeof(BaseClass))
+                );
             }
         }
     }

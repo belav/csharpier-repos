@@ -13,18 +13,22 @@ namespace Microsoft.CodeAnalysis.Remote
     /// and then calls into OOP to tell it to start analyzing the solution.  At that point we'll get
     /// created and added to the solution crawler.
     /// </remarks>
-    internal sealed class RemoteTodoCommentsIncrementalAnalyzerProvider : IIncrementalAnalyzerProvider
+    internal sealed class RemoteTodoCommentsIncrementalAnalyzerProvider
+        : IIncrementalAnalyzerProvider
     {
         private readonly RemoteCallback<IRemoteTodoCommentsDiscoveryService.ICallback> _callback;
         private readonly RemoteServiceCallbackId _callbackId;
 
-        public RemoteTodoCommentsIncrementalAnalyzerProvider(RemoteCallback<IRemoteTodoCommentsDiscoveryService.ICallback> callback, RemoteServiceCallbackId callbackId)
+        public RemoteTodoCommentsIncrementalAnalyzerProvider(
+            RemoteCallback<IRemoteTodoCommentsDiscoveryService.ICallback> callback,
+            RemoteServiceCallbackId callbackId
+        )
         {
             _callback = callback;
             _callbackId = callbackId;
         }
 
-        public IIncrementalAnalyzer CreateIncrementalAnalyzer(Workspace workspace)
-            => new RemoteTodoCommentsIncrementalAnalyzer(_callback, _callbackId);
+        public IIncrementalAnalyzer CreateIncrementalAnalyzer(Workspace workspace) =>
+            new RemoteTodoCommentsIncrementalAnalyzer(_callback, _callbackId);
     }
 }

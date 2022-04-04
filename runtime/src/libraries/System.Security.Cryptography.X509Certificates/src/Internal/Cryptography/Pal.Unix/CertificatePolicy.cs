@@ -238,17 +238,23 @@ namespace Internal.Cryptography.Pal
 
             if (policyData.ApplicationCertPolicies != null)
             {
-                applicationCertPolicies = ReadCertPolicyExtension(policyData.ApplicationCertPolicies);
+                applicationCertPolicies = ReadCertPolicyExtension(
+                    policyData.ApplicationCertPolicies
+                );
             }
 
             if (policyData.CertPolicies != null)
             {
-                policy.DeclaredCertificatePolicies = ReadCertPolicyExtension(policyData.CertPolicies);
+                policy.DeclaredCertificatePolicies = ReadCertPolicyExtension(
+                    policyData.CertPolicies
+                );
             }
 
-            if (policyData.CertPolicyMappings!= null)
+            if (policyData.CertPolicyMappings != null)
             {
-                policy.PolicyMapping = ReadCertPolicyMappingsExtension(policyData.CertPolicyMappings);
+                policy.PolicyMapping = ReadCertPolicyMappingsExtension(
+                    policyData.CertPolicyMappings
+                );
             }
 
             if (policyData.CertPolicyConstraints != null)
@@ -264,7 +270,9 @@ namespace Internal.Cryptography.Pal
 
             if (policyData.InhibitAnyPolicyExtension != null)
             {
-                policy.InhibitAnyDepth = ReadInhibitAnyPolicyExtension(policyData.InhibitAnyPolicyExtension);
+                policy.InhibitAnyDepth = ReadInhibitAnyPolicyExtension(
+                    policyData.InhibitAnyPolicyExtension
+                );
             }
 
             policy.DeclaredApplicationPolicies = applicationCertPolicies ?? ekus;
@@ -272,8 +280,12 @@ namespace Internal.Cryptography.Pal
             policy.ImplicitAnyApplicationPolicy = policy.DeclaredApplicationPolicies == null;
             policy.ImplicitAnyCertificatePolicy = policy.DeclaredCertificatePolicies == null;
 
-            policy.SpecifiedAnyApplicationPolicy = CheckExplicitAnyPolicy(policy.DeclaredApplicationPolicies);
-            policy.SpecifiedAnyCertificatePolicy = CheckExplicitAnyPolicy(policy.DeclaredCertificatePolicies);
+            policy.SpecifiedAnyApplicationPolicy = CheckExplicitAnyPolicy(
+                policy.DeclaredApplicationPolicies
+            );
+            policy.SpecifiedAnyCertificatePolicy = CheckExplicitAnyPolicy(
+                policy.DeclaredCertificatePolicies
+            );
 
             return policy;
         }
@@ -304,11 +316,15 @@ namespace Internal.Cryptography.Pal
             }
         }
 
-        private static void ReadCertPolicyConstraintsExtension(byte[] rawData, CertificatePolicy policy)
+        private static void ReadCertPolicyConstraintsExtension(
+            byte[] rawData,
+            CertificatePolicy policy
+        )
         {
             PolicyConstraintsAsn constraints = PolicyConstraintsAsn.Decode(
                 rawData,
-                AsnEncodingRules.DER);
+                AsnEncodingRules.DER
+            );
 
             policy.RequireExplicitPolicyDepth = constraints.RequireExplicitPolicyDepth;
             policy.InhibitMappingDepth = constraints.InhibitMappingDepth;
@@ -349,7 +365,11 @@ namespace Internal.Cryptography.Pal
                 HashSet<string> policies = new HashSet<string>();
                 while (sequenceReader.HasData)
                 {
-                    PolicyInformationAsn.Decode(ref sequenceReader, rawData, out PolicyInformationAsn policyInformation);
+                    PolicyInformationAsn.Decode(
+                        ref sequenceReader,
+                        rawData,
+                        out PolicyInformationAsn policyInformation
+                    );
                     policies.Add(policyInformation.PolicyIdentifier);
 
                     // There is an optional policy qualifier here, but it is for information
@@ -367,7 +387,9 @@ namespace Internal.Cryptography.Pal
             }
         }
 
-        private static List<CertificatePolicyMappingAsn> ReadCertPolicyMappingsExtension(byte[] rawData)
+        private static List<CertificatePolicyMappingAsn> ReadCertPolicyMappingsExtension(
+            byte[] rawData
+        )
         {
             try
             {
@@ -375,10 +397,15 @@ namespace Internal.Cryptography.Pal
                 AsnValueReader sequenceReader = reader.ReadSequence();
                 reader.ThrowIfNotEmpty();
 
-                List<CertificatePolicyMappingAsn> mappings = new List<CertificatePolicyMappingAsn>();
+                List<CertificatePolicyMappingAsn> mappings =
+                    new List<CertificatePolicyMappingAsn>();
                 while (sequenceReader.HasData)
                 {
-                    CertificatePolicyMappingAsn.Decode(ref sequenceReader, rawData, out CertificatePolicyMappingAsn mapping);
+                    CertificatePolicyMappingAsn.Decode(
+                        ref sequenceReader,
+                        rawData,
+                        out CertificatePolicyMappingAsn mapping
+                    );
                     mappings.Add(mapping);
                 }
 

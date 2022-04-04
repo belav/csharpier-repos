@@ -16,9 +16,20 @@ namespace System.Data.SqlTypes
     [XmlSchemaProvider("GetXsdType")]
     public sealed class SqlXml : INullable, IXmlSerializable
     {
-        private static readonly Func<Stream, XmlReaderSettings, XmlParserContext?, XmlReader> s_sqlReaderDelegate = CreateSqlReaderDelegate();
-        private static readonly XmlReaderSettings s_defaultXmlReaderSettings = new XmlReaderSettings() { ConformanceLevel = ConformanceLevel.Fragment };
-        private static readonly XmlReaderSettings s_defaultXmlReaderSettingsCloseInput = new XmlReaderSettings() { ConformanceLevel = ConformanceLevel.Fragment, CloseInput = true };
+        private static readonly Func<
+            Stream,
+            XmlReaderSettings,
+            XmlParserContext?,
+            XmlReader
+        > s_sqlReaderDelegate = CreateSqlReaderDelegate();
+        private static readonly XmlReaderSettings s_defaultXmlReaderSettings =
+            new XmlReaderSettings() { ConformanceLevel = ConformanceLevel.Fragment };
+        private static readonly XmlReaderSettings s_defaultXmlReaderSettingsCloseInput =
+            new XmlReaderSettings()
+            {
+                ConformanceLevel = ConformanceLevel.Fragment,
+                CloseInput = true
+            };
         private static MethodInfo? s_createSqlReaderMethodInfo;
         private MethodInfo? _createSqlReaderMethodInfo;
 
@@ -89,17 +100,26 @@ namespace System.Data.SqlTypes
             {
                 _createSqlReaderMethodInfo = CreateSqlReaderMethodInfo;
             }
-            Debug.Assert(_createSqlReaderMethodInfo != null, "MethodInfo reference for XmlReader.CreateSqlReader should not be null.");
+            Debug.Assert(
+                _createSqlReaderMethodInfo != null,
+                "MethodInfo reference for XmlReader.CreateSqlReader should not be null."
+            );
 
             XmlReader r = CreateSqlXmlReader(stream);
             _firstCreateReader = false;
             return r;
         }
 
-        internal static XmlReader CreateSqlXmlReader(Stream stream, bool closeInput = false, bool throwTargetInvocationExceptions = false)
+        internal static XmlReader CreateSqlXmlReader(
+            Stream stream,
+            bool closeInput = false,
+            bool throwTargetInvocationExceptions = false
+        )
         {
             // Call the internal delegate
-            XmlReaderSettings settingsToUse = closeInput ? s_defaultXmlReaderSettingsCloseInput : s_defaultXmlReaderSettings;
+            XmlReaderSettings settingsToUse = closeInput
+                ? s_defaultXmlReaderSettingsCloseInput
+                : s_defaultXmlReaderSettings;
             try
             {
                 return s_sqlReaderDelegate(stream, settingsToUse, null);
@@ -118,11 +138,21 @@ namespace System.Data.SqlTypes
             }
         }
 
-        private static Func<Stream, XmlReaderSettings, XmlParserContext?, XmlReader> CreateSqlReaderDelegate()
+        private static Func<
+            Stream,
+            XmlReaderSettings,
+            XmlParserContext?,
+            XmlReader
+        > CreateSqlReaderDelegate()
         {
-            Debug.Assert(CreateSqlReaderMethodInfo != null, "MethodInfo reference for XmlReader.CreateSqlReader should not be null.");
+            Debug.Assert(
+                CreateSqlReaderMethodInfo != null,
+                "MethodInfo reference for XmlReader.CreateSqlReader should not be null."
+            );
 
-            return CreateSqlReaderMethodInfo.CreateDelegate<Func<Stream, XmlReaderSettings, XmlParserContext?, XmlReader>>();
+            return CreateSqlReaderMethodInfo.CreateDelegate<
+                Func<Stream, XmlReaderSettings, XmlParserContext?, XmlReader>
+            >();
         }
 
         private static MethodInfo CreateSqlReaderMethodInfo
@@ -131,7 +161,10 @@ namespace System.Data.SqlTypes
             {
                 if (s_createSqlReaderMethodInfo == null)
                 {
-                    s_createSqlReaderMethodInfo = typeof(System.Xml.XmlReader).GetMethod("CreateSqlReader", BindingFlags.Static | BindingFlags.NonPublic)!;
+                    s_createSqlReaderMethodInfo = typeof(System.Xml.XmlReader).GetMethod(
+                        "CreateSqlReader",
+                        BindingFlags.Static | BindingFlags.NonPublic
+                    )!;
                 }
 
                 return s_createSqlReaderMethodInfo;
@@ -153,7 +186,7 @@ namespace System.Data.SqlTypes
 
                 StringWriter sw = new StringWriter((System.IFormatProvider)null!);
                 XmlWriterSettings writerSettings = new XmlWriterSettings();
-                writerSettings.CloseOutput = false;     // don't close the memory stream
+                writerSettings.CloseOutput = false; // don't close the memory stream
                 writerSettings.ConformanceLevel = ConformanceLevel.Fragment;
                 XmlWriter ww = XmlWriter.Create(sw, writerSettings);
 
@@ -174,10 +207,7 @@ namespace System.Data.SqlTypes
 
         public static SqlXml Null
         {
-            get
-            {
-                return new SqlXml(true);
-            }
+            get { return new SqlXml(true); }
         }
 
         private void SetNull()
@@ -190,7 +220,7 @@ namespace System.Data.SqlTypes
         private Stream CreateMemoryStreamFromXmlReader(XmlReader reader)
         {
             XmlWriterSettings writerSettings = new XmlWriterSettings();
-            writerSettings.CloseOutput = false;     // don't close the memory stream
+            writerSettings.CloseOutput = false; // don't close the memory stream
             writerSettings.ConformanceLevel = ConformanceLevel.Fragment;
             writerSettings.Encoding = Encoding.GetEncoding("utf-16");
             writerSettings.OmitXmlDeclaration = true;
@@ -528,7 +558,11 @@ namespace System.Data.SqlTypes
         {
             // Check the .CanRead and .CanWrite and .CanSeek properties to make sure stream is really closed
 
-            if (_isClosed || _stream == null || (!_stream.CanRead && !_stream.CanWrite && !_stream.CanSeek))
+            if (
+                _isClosed
+                || _stream == null
+                || (!_stream.CanRead && !_stream.CanWrite && !_stream.CanSeek)
+            )
                 return true;
             else
                 return false;

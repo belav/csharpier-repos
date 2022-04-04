@@ -22,20 +22,21 @@ namespace Microsoft.NET.HostModel.Tests
 
         private void RunTheApp(string path)
         {
-            Command.Create(path)
+            Command
+                .Create(path)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining("Wow! We now say hello to the big world and you.");
+                .And.HaveStdOutContaining("Wow! We now say hello to the big world and you.");
         }
 
         private void CheckFileSigned(string path)
         {
             // Check if the file is signed (it should have been signed by the bundler)
-            Command.Create("codesign", $"-v {path}")
+            Command
+                .Create("codesign", $"-v {path}")
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
@@ -46,12 +47,14 @@ namespace Microsoft.NET.HostModel.Tests
         private string MakeUniversalBinary(string path, string rid)
         {
             string fatApp = path + ".fat";
-            string arch = BundleHelper.GetTargetArch(rid) == Architecture.Arm64 ? "arm64" : "x86_64";
+            string arch =
+                BundleHelper.GetTargetArch(rid) == Architecture.Arm64 ? "arm64" : "x86_64";
 
             // We will create a universal binary with just one arch slice and run it.
             // It is enough for testing purposes. The code that finds the releavant slice
             // would work the same regardless if there is 1, 2, 3 or more slices.
-            Command.Create("lipo", $"-create -arch {arch} {path} -output {fatApp}")
+            Command
+                .Create("lipo", $"-create -arch {arch} {path} -output {fatApp}")
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
@@ -93,7 +96,7 @@ namespace Microsoft.NET.HostModel.Tests
         private string RelativePath(string path)
         {
             return Path.GetRelativePath(Directory.GetCurrentDirectory(), path)
-                       .TrimEnd(Path.DirectorySeparatorChar);
+                .TrimEnd(Path.DirectorySeparatorChar);
         }
 
         [Fact]
@@ -116,7 +119,8 @@ namespace Microsoft.NET.HostModel.Tests
         public void TestWithRelativePathsDirSeparator()
         {
             var fixture = sharedTestState.TestFixture.Copy();
-            string publishDir = RelativePath(BundleHelper.GetPublishPath(fixture)) + Path.DirectorySeparatorChar;
+            string publishDir =
+                RelativePath(BundleHelper.GetPublishPath(fixture)) + Path.DirectorySeparatorChar;
             BundleRun(fixture, publishDir);
         }
 
@@ -134,8 +138,10 @@ namespace Microsoft.NET.HostModel.Tests
                 BundleHelper.AddLongNameContentToAppWithSubDirs(TestFixture);
                 TestFixture
                     .EnsureRestoredForRid(TestFixture.CurrentRid)
-                    .PublishProject(runtime: TestFixture.CurrentRid,
-                                    outputDirectory: BundleHelper.GetPublishPath(TestFixture));
+                    .PublishProject(
+                        runtime: TestFixture.CurrentRid,
+                        outputDirectory: BundleHelper.GetPublishPath(TestFixture)
+                    );
             }
 
             public void Dispose()

@@ -17,20 +17,24 @@ internal static partial class Interop
     {
         [DllImport(Libraries.AppleCryptoNative)]
         private static extern int AppleCryptoNative_SecKeychainEnumerateCerts(
-            out SafeCFArrayHandle matches);
+            out SafeCFArrayHandle matches
+        );
 
         [DllImport(Libraries.AppleCryptoNative)]
         private static extern int AppleCryptoNative_SecKeychainEnumerateIdentities(
-            out SafeCFArrayHandle matches);
+            out SafeCFArrayHandle matches
+        );
 
         [DllImport(Libraries.AppleCryptoNative)]
         private static extern int AppleCryptoNative_X509StoreAddCertificate(
-            SafeHandle certOrIdentity);
+            SafeHandle certOrIdentity
+        );
 
         [DllImport(Libraries.AppleCryptoNative)]
         private static extern int AppleCryptoNative_X509StoreRemoveCertificate(
             SafeHandle certOrIdentity,
-            bool isReadOnlyMode);
+            bool isReadOnlyMode
+        );
 
         internal static SafeCFArrayHandle KeychainEnumerateCerts()
         {
@@ -70,11 +74,17 @@ internal static partial class Interop
             }
         }
 
-        internal static void X509StoreRemoveCertificate(SafeHandle certOrIdentity, bool isReadOnlyMode)
+        internal static void X509StoreRemoveCertificate(
+            SafeHandle certOrIdentity,
+            bool isReadOnlyMode
+        )
         {
             const int errSecItemNotFound = -25300;
 
-            int osStatus = AppleCryptoNative_X509StoreRemoveCertificate(certOrIdentity, isReadOnlyMode);
+            int osStatus = AppleCryptoNative_X509StoreRemoveCertificate(
+                certOrIdentity,
+                isReadOnlyMode
+            );
 
             if (osStatus == 0 && isReadOnlyMode)
             {

@@ -70,7 +70,8 @@ public class ByteArrayModelBinder : IModelBinder
             bindingContext.ModelState.TryAddModelError(
                 bindingContext.ModelName,
                 exception,
-                bindingContext.ModelMetadata);
+                bindingContext.ModelMetadata
+            );
         }
 
         _logger.DoneAttemptingToBindModel(bindingContext);

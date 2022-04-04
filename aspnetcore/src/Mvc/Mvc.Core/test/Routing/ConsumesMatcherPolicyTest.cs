@@ -75,7 +75,11 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             // Arrange
             var endpoints = new[]
             {
-                CreateEndpoint("/", new ConsumesMetadata(Array.Empty<string>()), new DynamicEndpointMetadata()),
+                CreateEndpoint(
+                    "/",
+                    new ConsumesMetadata(Array.Empty<string>()),
+                    new DynamicEndpointMetadata()
+                ),
                 CreateEndpoint("/", new ConsumesMetadata(new[] { "application/json", })),
             };
 
@@ -109,7 +113,11 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             // Arrange
             var endpoints = new[]
             {
-                CreateEndpoint("/", new ConsumesMetadata(Array.Empty<string>()), new DynamicEndpointMetadata()),
+                CreateEndpoint(
+                    "/",
+                    new ConsumesMetadata(Array.Empty<string>()),
+                    new DynamicEndpointMetadata()
+                ),
             };
 
             var policy = (IEndpointSelectorPolicy)CreatePolicy();
@@ -127,7 +135,11 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             // Arrange
             var endpoints = new[]
             {
-                CreateEndpoint("/", new ConsumesMetadata(Array.Empty<string>()), new DynamicEndpointMetadata()),
+                CreateEndpoint(
+                    "/",
+                    new ConsumesMetadata(Array.Empty<string>()),
+                    new DynamicEndpointMetadata()
+                ),
                 CreateEndpoint("/", new ConsumesMetadata(new[] { "application/json", })),
             };
 
@@ -167,11 +179,17 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             {
                 // These are arrange in an order that we won't actually see in a product scenario. It's done
                 // this way so we can verify that ordering is preserved by GetEdges.
-                CreateEndpoint("/", new ConsumesMetadata(new[] { "application/json", "application/*+json", })),
+                CreateEndpoint(
+                    "/",
+                    new ConsumesMetadata(new[] { "application/json", "application/*+json", })
+                ),
                 CreateEndpoint("/", new ConsumesMetadata(Array.Empty<string>())),
-                CreateEndpoint("/", new ConsumesMetadata(new[] { "application/xml", "application/*+xml", })),
+                CreateEndpoint(
+                    "/",
+                    new ConsumesMetadata(new[] { "application/xml", "application/*+xml", })
+                ),
                 CreateEndpoint("/", new ConsumesMetadata(new[] { "application/*", })),
-                CreateEndpoint("/", new ConsumesMetadata(new[]{ "*/*", })),
+                CreateEndpoint("/", new ConsumesMetadata(new[] { "*/*", })),
             };
 
             var policy = CreatePolicy();
@@ -195,28 +213,44 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 e =>
                 {
                     Assert.Equal("application/*", e.State);
-                    Assert.Equal(new[] { endpoints[1], endpoints[3], endpoints[4], }, e.Endpoints.ToArray());
+                    Assert.Equal(
+                        new[] { endpoints[1], endpoints[3], endpoints[4], },
+                        e.Endpoints.ToArray()
+                    );
                 },
                 e =>
                 {
                     Assert.Equal("application/*+json", e.State);
-                    Assert.Equal(new[] { endpoints[0], endpoints[1], endpoints[3], endpoints[4], }, e.Endpoints.ToArray());
+                    Assert.Equal(
+                        new[] { endpoints[0], endpoints[1], endpoints[3], endpoints[4], },
+                        e.Endpoints.ToArray()
+                    );
                 },
                 e =>
                 {
                     Assert.Equal("application/*+xml", e.State);
-                    Assert.Equal(new[] { endpoints[1], endpoints[2], endpoints[3], endpoints[4], }, e.Endpoints.ToArray());
+                    Assert.Equal(
+                        new[] { endpoints[1], endpoints[2], endpoints[3], endpoints[4], },
+                        e.Endpoints.ToArray()
+                    );
                 },
                 e =>
                 {
                     Assert.Equal("application/json", e.State);
-                    Assert.Equal(new[] { endpoints[0], endpoints[1], endpoints[3], endpoints[4], }, e.Endpoints.ToArray());
+                    Assert.Equal(
+                        new[] { endpoints[0], endpoints[1], endpoints[3], endpoints[4], },
+                        e.Endpoints.ToArray()
+                    );
                 },
                 e =>
                 {
                     Assert.Equal("application/xml", e.State);
-                    Assert.Equal(new[] { endpoints[1], endpoints[2], endpoints[3], endpoints[4], }, e.Endpoints.ToArray());
-                });
+                    Assert.Equal(
+                        new[] { endpoints[1], endpoints[2], endpoints[3], endpoints[4], },
+                        e.Endpoints.ToArray()
+                    );
+                }
+            );
         }
 
         [Fact] // See explanation in GetEdges for how this case is different
@@ -227,8 +261,14 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             {
                 // These are arrange in an order that we won't actually see in a product scenario. It's done
                 // this way so we can verify that ordering is preserved by GetEdges.
-                CreateEndpoint("/", new ConsumesMetadata(new[] { "application/json", "application/*+json", })),
-                CreateEndpoint("/", new ConsumesMetadata(new[] { "application/xml", "application/*+xml", })),
+                CreateEndpoint(
+                    "/",
+                    new ConsumesMetadata(new[] { "application/json", "application/*+json", })
+                ),
+                CreateEndpoint(
+                    "/",
+                    new ConsumesMetadata(new[] { "application/xml", "application/*+xml", })
+                ),
                 CreateEndpoint("/", new ConsumesMetadata(new[] { "application/*", })),
             };
 
@@ -243,12 +283,18 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 e =>
                 {
                     Assert.Equal(string.Empty, e.State);
-                    Assert.Equal(new[] { endpoints[0], endpoints[1], endpoints[2], }, e.Endpoints.ToArray());
+                    Assert.Equal(
+                        new[] { endpoints[0], endpoints[1], endpoints[2], },
+                        e.Endpoints.ToArray()
+                    );
                 },
                 e =>
                 {
                     Assert.Equal("*/*", e.State);
-                    Assert.Equal(ConsumesMatcherPolicy.Http415EndpointDisplayName, Assert.Single(e.Endpoints).DisplayName);
+                    Assert.Equal(
+                        ConsumesMatcherPolicy.Http415EndpointDisplayName,
+                        Assert.Single(e.Endpoints).DisplayName
+                    );
                 },
                 e =>
                 {
@@ -274,8 +320,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 {
                     Assert.Equal("application/xml", e.State);
                     Assert.Equal(new[] { endpoints[1], endpoints[2], }, e.Endpoints.ToArray());
-                });
-
+                }
+            );
         }
 
         [Theory]
@@ -320,10 +366,7 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         public async Task ApplyAsync_EndpointWithoutMetadata_MatchWithoutContentType()
         {
             // Arrange
-            var endpoints = new[]
-            {
-                CreateEndpoint("/", null),
-            };
+            var endpoints = new[] { CreateEndpoint("/", null), };
 
             var candidates = CreateCandidateSet(endpoints);
             var httpContext = new DefaultHttpContext();
@@ -383,18 +426,12 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         public async Task ApplyAsync_EndpointWithoutMetadata_MatchWithAnyContentType()
         {
             // Arrange
-            var endpoints = new[]
-            {
-                CreateEndpoint("/", null),
-            };
+            var endpoints = new[] { CreateEndpoint("/", null), };
 
             var candidates = CreateCandidateSet(endpoints);
             var httpContext = new DefaultHttpContext()
             {
-                Request =
-                {
-                    ContentType = "text/plain",
-                },
+                Request = { ContentType = "text/plain", },
             };
 
             var policy = CreatePolicy();
@@ -418,10 +455,7 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             var candidates = CreateCandidateSet(endpoints);
             var httpContext = new DefaultHttpContext()
             {
-                Request =
-                {
-                    ContentType = "text/plain",
-                },
+                Request = { ContentType = "text/plain", },
             };
 
             var policy = CreatePolicy();
@@ -445,10 +479,7 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             var candidates = CreateCandidateSet(endpoints);
             var httpContext = new DefaultHttpContext()
             {
-                Request =
-                {
-                    ContentType = "text/plain",
-                },
+                Request = { ContentType = "text/plain", },
             };
 
             var policy = CreatePolicy();
@@ -472,10 +503,7 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             var candidates = CreateCandidateSet(endpoints);
             var httpContext = new DefaultHttpContext()
             {
-                Request =
-                {
-                    ContentType = "application/project+json",
-                },
+                Request = { ContentType = "application/project+json", },
             };
 
             var policy = CreatePolicy();
@@ -493,16 +521,16 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             // Arrange
             var endpoints = new[]
             {
-                CreateEndpoint("/", new ConsumesMetadata(new string[] { "text/xml", "application/xml", })),
+                CreateEndpoint(
+                    "/",
+                    new ConsumesMetadata(new string[] { "text/xml", "application/xml", })
+                ),
             };
 
             var candidates = CreateCandidateSet(endpoints);
             var httpContext = new DefaultHttpContext()
             {
-                Request =
-                {
-                    ContentType = "application/xml",
-                },
+                Request = { ContentType = "application/xml", },
             };
 
             var policy = CreatePolicy();
@@ -520,16 +548,16 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             // Arrange
             var endpoints = new[]
             {
-                CreateEndpoint("/", new ConsumesMetadata(new string[] { "text/xml", "application/xml", })),
+                CreateEndpoint(
+                    "/",
+                    new ConsumesMetadata(new string[] { "text/xml", "application/xml", })
+                ),
             };
 
             var candidates = CreateCandidateSet(endpoints);
             var httpContext = new DefaultHttpContext()
             {
-                Request =
-                {
-                    ContentType = "application/json",
-                },
+                Request = { ContentType = "application/json", },
             };
 
             var policy = CreatePolicy();
@@ -548,17 +576,17 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             // Arrange
             var endpoints = new[]
             {
-                CreateEndpoint("/", new ConsumesMetadata(new string[] { "text/xml", "application/xml", })),
+                CreateEndpoint(
+                    "/",
+                    new ConsumesMetadata(new string[] { "text/xml", "application/xml", })
+                ),
                 CreateEndpoint("/", null)
             };
 
             var candidates = CreateCandidateSet(endpoints);
             var httpContext = new DefaultHttpContext()
             {
-                Request =
-                {
-                    ContentType = "application/json",
-                },
+                Request = { ContentType = "application/json", },
             };
 
             var policy = CreatePolicy();
@@ -577,17 +605,17 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             // Arrange
             var endpoints = new[]
             {
-                CreateEndpoint("/", new ConsumesMetadata(new string[] { "text/xml", "application/xml", })),
+                CreateEndpoint(
+                    "/",
+                    new ConsumesMetadata(new string[] { "text/xml", "application/xml", })
+                ),
                 CreateEndpoint("/", new ConsumesMetadata(new string[] { "*/*", }))
             };
 
             var candidates = CreateCandidateSet(endpoints);
             var httpContext = new DefaultHttpContext()
             {
-                Request =
-                {
-                    ContentType = "application/json",
-                },
+                Request = { ContentType = "application/json", },
             };
 
             var policy = CreatePolicy();
@@ -601,7 +629,11 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             Assert.Null(httpContext.GetEndpoint());
         }
 
-        private static RouteEndpoint CreateEndpoint(string template, ConsumesMetadata consumesMetadata, params object[] more)
+        private static RouteEndpoint CreateEndpoint(
+            string template,
+            ConsumesMetadata consumesMetadata,
+            params object[] more
+        )
         {
             var metadata = new List<object>();
             if (consumesMetadata != null)
@@ -619,12 +651,17 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 RoutePatternFactory.Parse(template),
                 0,
                 new EndpointMetadataCollection(metadata),
-                $"test: {template} - {string.Join(", ", consumesMetadata?.ContentTypes ?? Array.Empty<string>())}");
+                $"test: {template} - {string.Join(", ", consumesMetadata?.ContentTypes ?? Array.Empty<string>())}"
+            );
         }
 
         private static CandidateSet CreateCandidateSet(Endpoint[] endpoints)
         {
-            return new CandidateSet(endpoints, new RouteValueDictionary[endpoints.Length], new int[endpoints.Length]);
+            return new CandidateSet(
+                endpoints,
+                new RouteValueDictionary[endpoints.Length],
+                new int[endpoints.Length]
+            );
         }
 
         private static ConsumesMatcherPolicy CreatePolicy()

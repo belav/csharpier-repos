@@ -25,16 +25,25 @@ namespace Microsoft.CodeAnalysis.UnitTests
     public class AssemblyLoadTestFixtureCollection : ICollectionFixture<AssemblyLoadTestFixture>
     {
         public const string Name = nameof(AssemblyLoadTestFixtureCollection);
+
         private AssemblyLoadTestFixtureCollection() { }
     }
 
     [Collection(AssemblyLoadTestFixtureCollection.Name)]
     public sealed class DefaultAnalyzerAssemblyLoaderTests : TestBase
     {
-        private static readonly CSharpCompilationOptions s_dllWithMaxWarningLevel = new(OutputKind.DynamicallyLinkedLibrary, warningLevel: CodeAnalysis.Diagnostic.MaxWarningLevel);
+        private static readonly CSharpCompilationOptions s_dllWithMaxWarningLevel =
+            new(
+                OutputKind.DynamicallyLinkedLibrary,
+                warningLevel: CodeAnalysis.Diagnostic.MaxWarningLevel
+            );
         private readonly ITestOutputHelper _output;
         private readonly AssemblyLoadTestFixture _testFixture;
-        public DefaultAnalyzerAssemblyLoaderTests(ITestOutputHelper output, AssemblyLoadTestFixture testFixture)
+
+        public DefaultAnalyzerAssemblyLoaderTests(
+            ITestOutputHelper output,
+            AssemblyLoadTestFixture testFixture
+        )
         {
             _output = output;
             _testFixture = testFixture;
@@ -49,9 +58,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
             loader.AddDependencyLocation(analyzerDependencyFile.Path);
 
             var analyzerMainReference = new AnalyzerFileReference(analyzerMainFile.Path, loader);
-            analyzerMainReference.AnalyzerLoadFailed += (_, e) => AssertEx.Fail(e.Exception!.Message);
-            var analyzerDependencyReference = new AnalyzerFileReference(analyzerDependencyFile.Path, loader);
-            analyzerDependencyReference.AnalyzerLoadFailed += (_, e) => AssertEx.Fail(e.Exception!.Message);
+            analyzerMainReference.AnalyzerLoadFailed += (_, e) =>
+                AssertEx.Fail(e.Exception!.Message);
+            var analyzerDependencyReference = new AnalyzerFileReference(
+                analyzerDependencyFile.Path,
+                loader
+            );
+            analyzerDependencyReference.AnalyzerLoadFailed += (_, e) =>
+                AssertEx.Fail(e.Exception!.Message);
 
             var analyzers = analyzerMainReference.GetAnalyzersForAllLanguages();
             Assert.Equal(1, analyzers.Length);
@@ -67,7 +81,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             var loader = new DefaultAnalyzerAssemblyLoader();
 
-            Assert.Throws<ArgumentNullException>("fullPath", () => loader.AddDependencyLocation(null));
+            Assert.Throws<ArgumentNullException>(
+                "fullPath",
+                () => loader.AddDependencyLocation(null)
+            );
             Assert.Throws<ArgumentException>("fullPath", () => loader.AddDependencyLocation("a"));
         }
 
@@ -112,7 +129,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var b = beta.CreateInstance("Beta.B")!;
             b.GetType().GetMethod("Write")!.Invoke(b, new object[] { sb, "Test B" });
 
-            var expected = @"Delta: Gamma: Alpha: Test A
+            var expected =
+                @"Delta: Gamma: Alpha: Test A
 Delta: Gamma: Beta: Test B
 ";
 
@@ -144,16 +162,32 @@ Delta: Gamma: Beta: Test B
             var b = beta.CreateInstance("Beta.B")!;
             var writeMethod = b.GetType().GetMethod("Write")!;
             var exception = Assert.Throws<TargetInvocationException>(
-                () => writeMethod.Invoke(b, new object[] { sb, "Test B" }));
+                () => writeMethod.Invoke(b, new object[] { sb, "Test B" })
+            );
             Assert.IsAssignableFrom<FileNotFoundException>(exception.InnerException);
 
             var actual = sb.ToString();
             Assert.Equal(@"", actual);
         }
 
-        private static void VerifyAssemblies(IEnumerable<Assembly> assemblies, params (string simpleName, string version, string path)[] expected)
+        private static void VerifyAssemblies(
+            IEnumerable<Assembly> assemblies,
+            params (string simpleName, string version, string path)[] expected
+        )
         {
-            Assert.Equal(expected, assemblies.Select(assembly => (assembly.GetName().Name!, assembly.GetName().Version!.ToString(), assembly.Location)).Order());
+            Assert.Equal(
+                expected,
+                assemblies
+                    .Select(
+                        assembly =>
+                            (
+                                assembly.GetName().Name!,
+                                assembly.GetName().Version!.ToString(),
+                                assembly.Location
+                            )
+                    )
+                    .Order()
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
@@ -164,7 +198,9 @@ Delta: Gamma: Beta: Test B
 
             var tempDir = Temp.CreateDirectory();
 
-            var deltaFile = tempDir.CreateFile("Delta.dll").CopyContentFrom(_testFixture.Delta1.Path);
+            var deltaFile = tempDir
+                .CreateFile("Delta.dll")
+                .CopyContentFrom(_testFixture.Delta1.Path);
             loader.AddDependencyLocation(deltaFile.Path);
             loader.AddDependencyLocation(_testFixture.Gamma.Path);
             Assembly gamma = loader.LoadFromPath(_testFixture.Gamma.Path);
@@ -174,8 +210,11 @@ Delta: Gamma: Beta: Test B
             writeMethod.Invoke(b, new object[] { sb, "Test G" });
 
             var actual = sb.ToString();
-            Assert.Equal(@"Delta: Gamma: Test G
-", actual);
+            Assert.Equal(
+                @"Delta: Gamma: Test G
+",
+                actual
+            );
 
 #if NETCOREAPP
             var alcs = DefaultAnalyzerAssemblyLoader.TestAccessor.GetOrderedLoadContexts(loader);
@@ -221,25 +260,28 @@ Delta: Gamma: Beta: Test B
             VerifyAssemblies(
                 alcs[1].Assemblies,
                 ("Delta", "2.0.0.0", _testFixture.Delta2.Path),
-                ("Epsilon", "0.0.0.0", _testFixture.Epsilon.Path));
+                ("Epsilon", "0.0.0.0", _testFixture.Epsilon.Path)
+            );
 #endif
 
             var actual = sb.ToString();
             if (ExecutionConditionUtil.IsCoreClr)
             {
                 Assert.Equal(
-@"Delta: Gamma: Test G
+                    @"Delta: Gamma: Test G
 Delta.2: Epsilon: Test E
 ",
-                    actual);
+                    actual
+                );
             }
             else
             {
                 Assert.Equal(
-@"Delta: Gamma: Test G
+                    @"Delta: Gamma: Test G
 Delta: Epsilon: Test E
 ",
-                    actual);
+                    actual
+                );
             }
         }
 
@@ -264,23 +306,26 @@ Delta: Epsilon: Test E
             VerifyAssemblies(
                 alcs[0].Assemblies,
                 ("Delta", "3.0.0.0", _testFixture.Delta3.Path),
-                ("Epsilon", "0.0.0.0", _testFixture.Epsilon.Path));
+                ("Epsilon", "0.0.0.0", _testFixture.Epsilon.Path)
+            );
 #endif
 
             var actual = sb.ToString();
             if (ExecutionConditionUtil.IsCoreClr)
             {
                 Assert.Equal(
-@"Delta.3: Epsilon: Test E
+                    @"Delta.3: Epsilon: Test E
 ",
-                    actual);
+                    actual
+                );
             }
             else
             {
                 Assert.Equal(
-@"Delta: Epsilon: Test E
+                    @"Delta: Epsilon: Test E
 ",
-                    actual);
+                    actual
+                );
             }
         }
 
@@ -306,23 +351,26 @@ Delta: Epsilon: Test E
             VerifyAssemblies(
                 alcs[0].Assemblies,
                 ("Delta", "2.0.0.0", _testFixture.Delta2.Path),
-                ("Epsilon", "0.0.0.0", _testFixture.Epsilon.Path));
+                ("Epsilon", "0.0.0.0", _testFixture.Epsilon.Path)
+            );
 #endif
 
             var actual = sb.ToString();
             if (ExecutionConditionUtil.IsCoreClr)
             {
                 Assert.Equal(
-@"Delta.2: Epsilon: Test E
+                    @"Delta.2: Epsilon: Test E
 ",
-                    actual);
+                    actual
+                );
             }
             else
             {
                 Assert.Equal(
-@"Delta: Epsilon: Test E
+                    @"Delta: Epsilon: Test E
 ",
-                    actual);
+                    actual
+                );
             }
         }
 
@@ -347,23 +395,26 @@ Delta: Epsilon: Test E
             VerifyAssemblies(
                 alcs[0].Assemblies,
                 ("Delta", "2.0.0.0", _testFixture.Delta2B.Path),
-                ("Epsilon", "0.0.0.0", _testFixture.Epsilon.Path));
+                ("Epsilon", "0.0.0.0", _testFixture.Epsilon.Path)
+            );
 #endif
 
             var actual = sb.ToString();
             if (ExecutionConditionUtil.IsCoreClr)
             {
                 Assert.Equal(
-@"Delta.2B: Epsilon: Test E
+                    @"Delta.2B: Epsilon: Test E
 ",
-                    actual);
+                    actual
+                );
             }
             else
             {
                 Assert.Equal(
-@"Delta: Epsilon: Test E
+                    @"Delta: Epsilon: Test E
 ",
-                    actual);
+                    actual
+                );
             }
         }
 
@@ -373,8 +424,12 @@ Delta: Epsilon: Test E
             StringBuilder sb = new StringBuilder();
 
             var tempDir = Temp.CreateDirectory();
-            var epsilonFile = tempDir.CreateFile("Epsilon.dll").CopyContentFrom(_testFixture.Epsilon.Path);
-            var delta1File = tempDir.CreateFile("Delta.dll").CopyContentFrom(_testFixture.Delta1.Path);
+            var epsilonFile = tempDir
+                .CreateFile("Epsilon.dll")
+                .CopyContentFrom(_testFixture.Epsilon.Path);
+            var delta1File = tempDir
+                .CreateFile("Delta.dll")
+                .CopyContentFrom(_testFixture.Delta1.Path);
 
             // Epsilon wants Delta2, but since Delta1 is in the same directory, we prefer Delta1 over Delta2.
             var loader = new DefaultAnalyzerAssemblyLoader();
@@ -393,14 +448,16 @@ Delta: Epsilon: Test E
             VerifyAssemblies(
                 alcs[0].Assemblies,
                 ("Delta", "1.0.0.0", delta1File.Path),
-                ("Epsilon", "0.0.0.0", epsilonFile.Path));
+                ("Epsilon", "0.0.0.0", epsilonFile.Path)
+            );
 #endif
 
             var actual = sb.ToString();
             Assert.Equal(
-@"Delta: Epsilon: Test E
+                @"Delta: Epsilon: Test E
 ",
-                actual);
+                actual
+            );
         }
 
         [Fact]
@@ -431,7 +488,8 @@ Delta: Epsilon: Test E
             VerifyAssemblies(
                 alcs1[0].Assemblies,
                 ("Delta", "1.0.0.0", _testFixture.Delta1.Path),
-                ("Gamma", "0.0.0.0", _testFixture.Gamma.Path));
+                ("Gamma", "0.0.0.0", _testFixture.Gamma.Path)
+            );
 
             var alcs2 = DefaultAnalyzerAssemblyLoader.TestAccessor.GetOrderedLoadContexts(loader2);
             Assert.Equal(1, alcs2.Length);
@@ -439,25 +497,28 @@ Delta: Epsilon: Test E
             VerifyAssemblies(
                 alcs2[0].Assemblies,
                 ("Delta", "2.0.0.0", _testFixture.Delta2.Path),
-                ("Epsilon", "0.0.0.0", _testFixture.Epsilon.Path));
+                ("Epsilon", "0.0.0.0", _testFixture.Epsilon.Path)
+            );
 #endif
 
             var actual = sb.ToString();
             if (ExecutionConditionUtil.IsCoreClr)
             {
                 Assert.Equal(
-@"Delta: Gamma: Test G
+                    @"Delta: Gamma: Test G
 Delta.2: Epsilon: Test E
 ",
-                    actual);
+                    actual
+                );
             }
             else
             {
                 Assert.Equal(
-@"Delta: Gamma: Test G
+                    @"Delta: Gamma: Test G
 Delta: Epsilon: Test E
 ",
-                    actual);
+                    actual
+                );
             }
         }
 
@@ -482,9 +543,10 @@ Delta: Epsilon: Test E
             var actual = sb.ToString();
             eWrite.Invoke(e, new object[] { sb, "Test E" });
             Assert.Equal(
-@"Delta: Gamma: Test G
+                @"Delta: Gamma: Test G
 ",
-                actual);
+                actual
+            );
         }
 
         [Fact]
@@ -494,15 +556,28 @@ Delta: Epsilon: Test E
 
             var loader = new DefaultAnalyzerAssemblyLoader();
             loader.AddDependencyLocation(_testFixture.UserSystemCollectionsImmutable.Path);
-            loader.AddDependencyLocation(_testFixture.AnalyzerReferencesSystemCollectionsImmutable1.Path);
+            loader.AddDependencyLocation(
+                _testFixture.AnalyzerReferencesSystemCollectionsImmutable1.Path
+            );
 
-            Assembly analyzerAssembly = loader.LoadFromPath(_testFixture.AnalyzerReferencesSystemCollectionsImmutable1.Path);
+            Assembly analyzerAssembly = loader.LoadFromPath(
+                _testFixture.AnalyzerReferencesSystemCollectionsImmutable1.Path
+            );
             var analyzer = analyzerAssembly.CreateInstance("Analyzer")!;
 
             if (ExecutionConditionUtil.IsCoreClr)
             {
-                var ex = Assert.ThrowsAny<Exception>(() => analyzer.GetType().GetMethod("Method")!.Invoke(analyzer, new object[] { sb }));
-                Assert.True(ex is MissingMethodException or TargetInvocationException, $@"Unexpected exception type: ""{ex.GetType()}""");
+                var ex = Assert.ThrowsAny<Exception>(
+                    () =>
+                        analyzer
+                            .GetType()
+                            .GetMethod("Method")!
+                            .Invoke(analyzer, new object[] { sb })
+                );
+                Assert.True(
+                    ex is MissingMethodException or TargetInvocationException,
+                    $@"Unexpected exception type: ""{ex.GetType()}"""
+                );
             }
             else
             {
@@ -518,9 +593,13 @@ Delta: Epsilon: Test E
 
             var loader = new DefaultAnalyzerAssemblyLoader();
             loader.AddDependencyLocation(_testFixture.UserSystemCollectionsImmutable.Path);
-            loader.AddDependencyLocation(_testFixture.AnalyzerReferencesSystemCollectionsImmutable2.Path);
+            loader.AddDependencyLocation(
+                _testFixture.AnalyzerReferencesSystemCollectionsImmutable2.Path
+            );
 
-            Assembly analyzerAssembly = loader.LoadFromPath(_testFixture.AnalyzerReferencesSystemCollectionsImmutable2.Path);
+            Assembly analyzerAssembly = loader.LoadFromPath(
+                _testFixture.AnalyzerReferencesSystemCollectionsImmutable2.Path
+            );
             var analyzer = analyzerAssembly.CreateInstance("Analyzer")!;
             analyzer.GetType().GetMethod("Method")!.Invoke(analyzer, new object[] { sb });
             Assert.Equal(ExecutionConditionUtil.IsCoreClr ? "1" : "42", sb.ToString());
@@ -532,9 +611,14 @@ Delta: Epsilon: Test E
             var loader = new DefaultAnalyzerAssemblyLoader();
             loader.AddDependencyLocation(_testFixture.AnalyzerWithNativeDependency.Path);
 
-            Assembly analyzerAssembly = loader.LoadFromPath(_testFixture.AnalyzerWithNativeDependency.Path);
+            Assembly analyzerAssembly = loader.LoadFromPath(
+                _testFixture.AnalyzerWithNativeDependency.Path
+            );
             var analyzer = analyzerAssembly.CreateInstance("Class1")!;
-            var result = analyzer.GetType().GetMethod("GetFileAttributes")!.Invoke(analyzer, new[] { _testFixture.AnalyzerWithNativeDependency.Path });
+            var result = analyzer
+                .GetType()
+                .GetMethod("GetFileAttributes")!
+                .Invoke(analyzer, new[] { _testFixture.AnalyzerWithNativeDependency.Path });
             Assert.Equal(0, Marshal.GetLastWin32Error());
             Assert.Equal(FileAttributes.Archive, (FileAttributes)result!);
         }
@@ -547,7 +631,9 @@ Delta: Epsilon: Test E
             var loader = new DefaultAnalyzerAssemblyLoader();
 
             var tempDir = Temp.CreateDirectory();
-            var deltaCopy = tempDir.CreateFile("Delta.dll").CopyContentFrom(_testFixture.Delta1.Path);
+            var deltaCopy = tempDir
+                .CreateFile("Delta.dll")
+                .CopyContentFrom(_testFixture.Delta1.Path);
             loader.AddDependencyLocation(deltaCopy.Path);
             Assembly delta = loader.LoadFromPath(deltaCopy.Path);
 
@@ -568,9 +654,10 @@ Delta: Epsilon: Test E
 
             var actual = sb.ToString();
             Assert.Equal(
-@"Delta: Test D
+                @"Delta: Test D
 ",
-                actual);
+                actual
+            );
         }
 
 #if NETCOREAPP
@@ -580,14 +667,20 @@ Delta: Epsilon: Test E
             var caAssembly = typeof(Microsoft.CodeAnalysis.SyntaxNode).Assembly;
             var caReferences = caAssembly.GetReferencedAssemblies();
             var allReferenceSimpleNames = ArrayBuilder<string>.GetInstance();
-            allReferenceSimpleNames.Add(caAssembly.GetName().Name ?? throw new InvalidOperationException());
+            allReferenceSimpleNames.Add(
+                caAssembly.GetName().Name ?? throw new InvalidOperationException()
+            );
             foreach (var reference in caReferences)
             {
-                allReferenceSimpleNames.Add(reference.Name ?? throw new InvalidOperationException());
+                allReferenceSimpleNames.Add(
+                    reference.Name ?? throw new InvalidOperationException()
+                );
             }
 
             var csAssembly = typeof(Microsoft.CodeAnalysis.CSharp.CSharpSyntaxNode).Assembly;
-            allReferenceSimpleNames.Add(csAssembly.GetName().Name ?? throw new InvalidOperationException());
+            allReferenceSimpleNames.Add(
+                csAssembly.GetName().Name ?? throw new InvalidOperationException()
+            );
             var csReferences = csAssembly.GetReferencedAssemblies();
             foreach (var reference in csReferences)
             {
@@ -598,9 +691,12 @@ Delta: Epsilon: Test E
                 }
             }
 
-            var vbAssembly = typeof(Microsoft.CodeAnalysis.VisualBasic.VisualBasicSyntaxNode).Assembly;
+            var vbAssembly =
+                typeof(Microsoft.CodeAnalysis.VisualBasic.VisualBasicSyntaxNode).Assembly;
             var vbReferences = vbAssembly.GetReferencedAssemblies();
-            allReferenceSimpleNames.Add(vbAssembly.GetName().Name ?? throw new InvalidOperationException());
+            allReferenceSimpleNames.Add(
+                vbAssembly.GetName().Name ?? throw new InvalidOperationException()
+            );
             foreach (var reference in vbReferences)
             {
                 var name = reference.Name ?? throw new InvalidOperationException();
@@ -610,16 +706,28 @@ Delta: Epsilon: Test E
                 }
             }
 
-            if (!DefaultAnalyzerAssemblyLoader.CompilerAssemblySimpleNames.SetEquals(allReferenceSimpleNames))
+            if (
+                !DefaultAnalyzerAssemblyLoader.CompilerAssemblySimpleNames.SetEquals(
+                    allReferenceSimpleNames
+                )
+            )
             {
                 allReferenceSimpleNames.Sort();
-                var allNames = string.Join(",\r\n                ", allReferenceSimpleNames.Select(name => $@"""{name}"""));
-                _output.WriteLine("        internal static readonly ImmutableHashSet<string> CompilerAssemblySimpleNames =");
+                var allNames = string.Join(
+                    ",\r\n                ",
+                    allReferenceSimpleNames.Select(name => $@"""{name}""")
+                );
+                _output.WriteLine(
+                    "        internal static readonly ImmutableHashSet<string> CompilerAssemblySimpleNames ="
+                );
                 _output.WriteLine("            ImmutableHashSet.Create(");
                 _output.WriteLine("                StringComparer.OrdinalIgnoreCase,");
                 _output.WriteLine($"                {allNames});");
                 allReferenceSimpleNames.Free();
-                Assert.True(false, $"{nameof(DefaultAnalyzerAssemblyLoader)}.{nameof(DefaultAnalyzerAssemblyLoader.CompilerAssemblySimpleNames)} is not up to date. Paste in the standard output of this test to update it.");
+                Assert.True(
+                    false,
+                    $"{nameof(DefaultAnalyzerAssemblyLoader)}.{nameof(DefaultAnalyzerAssemblyLoader.CompilerAssemblySimpleNames)} is not up to date. Paste in the standard output of this test to update it."
+                );
             }
             else
             {
@@ -635,15 +743,34 @@ Delta: Epsilon: Test E
             // its own `DirectoryLoadContext` would use the bogus S.C.I loaded in the compiler load context instead of the real one
             // in the default context.
             var compilerContext = new System.Runtime.Loader.AssemblyLoadContext("compilerContext");
-            _ = compilerContext.LoadFromAssemblyPath(_testFixture.UserSystemCollectionsImmutable.Path);
-            _ = compilerContext.LoadFromAssemblyPath(typeof(DefaultAnalyzerAssemblyLoader).GetTypeInfo().Assembly.Location);
+            _ = compilerContext.LoadFromAssemblyPath(
+                _testFixture.UserSystemCollectionsImmutable.Path
+            );
+            _ = compilerContext.LoadFromAssemblyPath(
+                typeof(DefaultAnalyzerAssemblyLoader).GetTypeInfo().Assembly.Location
+            );
 
-            var testAssembly = compilerContext.LoadFromAssemblyPath(typeof(DefaultAnalyzerAssemblyLoaderTests).GetTypeInfo().Assembly.Location);
-            var testObject = testAssembly.CreateInstance(typeof(DefaultAnalyzerAssemblyLoaderTests).FullName!,
-                ignoreCase: false, BindingFlags.Default, binder: null, args: new object[] { _output, _testFixture }, null, null)!;
+            var testAssembly = compilerContext.LoadFromAssemblyPath(
+                typeof(DefaultAnalyzerAssemblyLoaderTests).GetTypeInfo().Assembly.Location
+            );
+            var testObject = testAssembly.CreateInstance(
+                typeof(DefaultAnalyzerAssemblyLoaderTests).FullName!,
+                ignoreCase: false,
+                BindingFlags.Default,
+                binder: null,
+                args: new object[] { _output, _testFixture },
+                null,
+                null
+            )!;
 
             StringBuilder sb = new StringBuilder();
-            testObject.GetType().GetMethod(nameof(AssemblyLoadingInNonDefaultContextHelper1), BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(testObject, new object[] { sb });
+            testObject
+                .GetType()
+                .GetMethod(
+                    nameof(AssemblyLoadingInNonDefaultContextHelper1),
+                    BindingFlags.Instance | BindingFlags.NonPublic
+                )!
+                .Invoke(testObject, new object[] { sb });
             Assert.Equal("42", sb.ToString());
         }
 
@@ -652,9 +779,13 @@ Delta: Epsilon: Test E
         {
             var loader = new DefaultAnalyzerAssemblyLoader();
             loader.AddDependencyLocation(_testFixture.UserSystemCollectionsImmutable.Path);
-            loader.AddDependencyLocation(_testFixture.AnalyzerReferencesSystemCollectionsImmutable1.Path);
+            loader.AddDependencyLocation(
+                _testFixture.AnalyzerReferencesSystemCollectionsImmutable1.Path
+            );
 
-            Assembly analyzerAssembly = loader.LoadFromPath(_testFixture.AnalyzerReferencesSystemCollectionsImmutable1.Path);
+            Assembly analyzerAssembly = loader.LoadFromPath(
+                _testFixture.AnalyzerReferencesSystemCollectionsImmutable1.Path
+            );
             var analyzer = analyzerAssembly.CreateInstance("Analyzer")!;
             analyzer.GetType().GetMethod("Method")!.Invoke(analyzer, new object[] { sb });
         }
@@ -665,20 +796,40 @@ Delta: Epsilon: Test E
             // Load the V2 of Delta to default ALC, then create a separate ALC for compiler and load compiler assembly.
             // Next use compiler context to load and run `AssemblyLoadingInNonDefaultContextHelper2` below. We expect the analyzer running in
             // its own `DirectoryLoadContext` would load and use Delta V1 located in its directory instead of V2 already loaded in the default context.
-            _ = System.Runtime.Loader.AssemblyLoadContext.Default.LoadFromAssemblyPath(_testFixture.Delta2.Path);
+            _ = System.Runtime.Loader.AssemblyLoadContext.Default.LoadFromAssemblyPath(
+                _testFixture.Delta2.Path
+            );
             var compilerContext = new System.Runtime.Loader.AssemblyLoadContext("compilerContext");
-            _ = compilerContext.LoadFromAssemblyPath(typeof(DefaultAnalyzerAssemblyLoader).GetTypeInfo().Assembly.Location);
+            _ = compilerContext.LoadFromAssemblyPath(
+                typeof(DefaultAnalyzerAssemblyLoader).GetTypeInfo().Assembly.Location
+            );
 
-            var testAssembly = compilerContext.LoadFromAssemblyPath(typeof(DefaultAnalyzerAssemblyLoaderTests).GetTypeInfo().Assembly.Location);
-            var testObject = testAssembly.CreateInstance(typeof(DefaultAnalyzerAssemblyLoaderTests).FullName!,
-                ignoreCase: false, BindingFlags.Default, binder: null, args: new object[] { _output, _testFixture }, null, null)!;
+            var testAssembly = compilerContext.LoadFromAssemblyPath(
+                typeof(DefaultAnalyzerAssemblyLoaderTests).GetTypeInfo().Assembly.Location
+            );
+            var testObject = testAssembly.CreateInstance(
+                typeof(DefaultAnalyzerAssemblyLoaderTests).FullName!,
+                ignoreCase: false,
+                BindingFlags.Default,
+                binder: null,
+                args: new object[] { _output, _testFixture },
+                null,
+                null
+            )!;
 
             StringBuilder sb = new StringBuilder();
-            testObject.GetType().GetMethod(nameof(AssemblyLoadingInNonDefaultContextHelper2), BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(testObject, new object[] { sb });
+            testObject
+                .GetType()
+                .GetMethod(
+                    nameof(AssemblyLoadingInNonDefaultContextHelper2),
+                    BindingFlags.Instance | BindingFlags.NonPublic
+                )!
+                .Invoke(testObject, new object[] { sb });
             Assert.Equal(
-@"Delta: Hello
+                @"Delta: Hello
 ",
-                sb.ToString());
+                sb.ToString()
+            );
         }
 
         private void AssemblyLoadingInNonDefaultContextHelper2(StringBuilder sb)
@@ -687,7 +838,9 @@ Delta: Epsilon: Test E
             loader.AddDependencyLocation(_testFixture.AnalyzerReferencesDelta1.Path);
             loader.AddDependencyLocation(_testFixture.Delta1.Path);
 
-            Assembly analyzerAssembly = loader.LoadFromPath(_testFixture.AnalyzerReferencesDelta1.Path);
+            Assembly analyzerAssembly = loader.LoadFromPath(
+                _testFixture.AnalyzerReferencesDelta1.Path
+            );
             var analyzer = analyzerAssembly.CreateInstance("Analyzer")!;
             analyzer.GetType().GetMethod("Method")!.Invoke(analyzer, new object[] { sb });
         }

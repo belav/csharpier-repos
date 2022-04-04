@@ -14,23 +14,33 @@ namespace Microsoft.CodeAnalysis.Formatting
 {
     internal abstract class AbstractNewDocumentFormattingService : INewDocumentFormattingService
     {
-        private readonly IEnumerable<Lazy<INewDocumentFormattingProvider, LanguageMetadata>> _providers;
+        private readonly IEnumerable<
+            Lazy<INewDocumentFormattingProvider, LanguageMetadata>
+        > _providers;
         private IEnumerable<INewDocumentFormattingProvider>? _providerValues;
 
         protected abstract string Language { get; }
 
-        protected AbstractNewDocumentFormattingService(IEnumerable<Lazy<INewDocumentFormattingProvider, LanguageMetadata>> providers)
+        protected AbstractNewDocumentFormattingService(
+            IEnumerable<Lazy<INewDocumentFormattingProvider, LanguageMetadata>> providers
+        )
         {
             _providers = providers;
         }
 
         private IEnumerable<INewDocumentFormattingProvider> GetProviders()
         {
-            _providerValues ??= _providers.Where(p => p.Metadata.Language == Language).Select(p => p.Value);
+            _providerValues ??= _providers
+                .Where(p => p.Metadata.Language == Language)
+                .Select(p => p.Value);
             return _providerValues;
         }
 
-        public async Task<Document> FormatNewDocumentAsync(Document document, Document? hintDocument, CancellationToken cancellationToken)
+        public async Task<Document> FormatNewDocumentAsync(
+            Document document,
+            Document? hintDocument,
+            CancellationToken cancellationToken
+        )
         {
             foreach (var provider in GetProviders())
             {
@@ -41,11 +51,12 @@ namespace Microsoft.CodeAnalysis.Formatting
                 // other, so this shouldn't cause problems.
                 try
                 {
-                    document = await provider.FormatNewDocumentAsync(document, hintDocument, cancellationToken).ConfigureAwait(false);
+                    document = await provider
+                        .FormatNewDocumentAsync(document, hintDocument, cancellationToken)
+                        .ConfigureAwait(false);
                 }
-                catch (Exception ex) when (FatalError.ReportAndCatchUnlessCanceled(ex, cancellationToken))
-                {
-                }
+                catch (Exception ex)
+                    when (FatalError.ReportAndCatchUnlessCanceled(ex, cancellationToken)) { }
             }
 
             return document;

@@ -13,7 +13,11 @@ internal partial class WebSocketsAsyncIOEngine
     internal sealed class WebSocketWriteOperation : AsyncWriteOperationBase
     {
         [UnmanagedCallersOnly]
-        private static NativeMethods.REQUEST_NOTIFICATION_STATUS WriteCallback(IntPtr httpContext, IntPtr completionInfo, IntPtr completionContext)
+        private static NativeMethods.REQUEST_NOTIFICATION_STATUS WriteCallback(
+            IntPtr httpContext,
+            IntPtr completionInfo,
+            IntPtr completionContext
+        )
         {
             var context = (WebSocketWriteOperation)GCHandle.FromIntPtr(completionContext).Target!;
 
@@ -33,10 +37,22 @@ internal partial class WebSocketsAsyncIOEngine
             _engine = engine;
         }
 
-        protected override unsafe int WriteChunks(NativeSafeHandle requestHandler, int chunkCount, HttpApiTypes.HTTP_DATA_CHUNK* dataChunks, out bool completionExpected)
+        protected override unsafe int WriteChunks(
+            NativeSafeHandle requestHandler,
+            int chunkCount,
+            HttpApiTypes.HTTP_DATA_CHUNK* dataChunks,
+            out bool completionExpected
+        )
         {
             _thisHandle = GCHandle.Alloc(this);
-            return NativeMethods.HttpWebsocketsWriteBytes(requestHandler, dataChunks, chunkCount, &WriteCallback, (IntPtr)_thisHandle, out completionExpected);
+            return NativeMethods.HttpWebsocketsWriteBytes(
+                requestHandler,
+                dataChunks,
+                chunkCount,
+                &WriteCallback,
+                (IntPtr)_thisHandle,
+                out completionExpected
+            );
         }
 
         protected override void ResetOperation()

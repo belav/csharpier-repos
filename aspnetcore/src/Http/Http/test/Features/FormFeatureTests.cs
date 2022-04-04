@@ -35,15 +35,14 @@ public class FormFeatureTests
     {
         var context = new DefaultHttpContext();
         context.Request.ContentType = "application/x-www-form-urlencoded; charset=utf-8";
-        context.FormOptions = new FormOptions
-        {
-            ValueCountLimit = 1
-        };
+        context.FormOptions = new FormOptions { ValueCountLimit = 1 };
 
         var formContent = Encoding.UTF8.GetBytes("foo=bar&baz=2");
         context.Request.Body = new NonSeekableReadStream(formContent);
 
-        var exception = await Assert.ThrowsAsync<InvalidDataException>(() => context.Request.ReadFormAsync());
+        var exception = await Assert.ThrowsAsync<InvalidDataException>(
+            () => context.Request.ReadFormAsync()
+        );
 
         Assert.Equal("Form value count limit 1 exceeded.", exception.Message);
     }
@@ -60,7 +59,10 @@ public class FormFeatureTests
         context.Request.ContentType = "application/x-www-form-urlencoded; charset=utf-8";
         context.Request.Body = new NonSeekableReadStream(formContent);
 
-        IFormFeature formFeature = new FormFeature(context.Request, new FormOptions() { BufferBody = bufferRequest });
+        IFormFeature formFeature = new FormFeature(
+            context.Request,
+            new FormOptions() { BufferBody = bufferRequest }
+        );
         context.Features.Set<IFormFeature>(formFeature);
 
         var formCollection = await context.Request.ReadFormAsync();
@@ -86,7 +88,9 @@ public class FormFeatureTests
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
-    public async Task ReadFormAsync_SimpleData_ReplacePipeReader_ReturnsParsedFormCollection(bool bufferRequest)
+    public async Task ReadFormAsync_SimpleData_ReplacePipeReader_ReturnsParsedFormCollection(
+        bool bufferRequest
+    )
     {
         var formContent = Encoding.UTF8.GetBytes("foo=bar&baz=2");
         var context = new DefaultHttpContext();
@@ -102,7 +106,10 @@ public class FormFeatureTests
         mockFeature.Reader = pipe.Reader;
         context.Features.Set<IRequestBodyPipeFeature>(mockFeature);
 
-        IFormFeature formFeature = new FormFeature(context.Request, new FormOptions() { BufferBody = bufferRequest });
+        IFormFeature formFeature = new FormFeature(
+            context.Request,
+            new FormOptions() { BufferBody = bufferRequest }
+        );
         context.Features.Set<IFormFeature>(formFeature);
 
         var formCollection = await context.Request.ReadFormAsync();
@@ -125,72 +132,72 @@ public class FormFeatureTests
         public PipeReader Reader { get; set; }
     }
 
-    private const string MultipartContentType = "multipart/form-data; boundary=WebKitFormBoundary5pDRpGheQXaM8k3T";
+    private const string MultipartContentType =
+        "multipart/form-data; boundary=WebKitFormBoundary5pDRpGheQXaM8k3T";
 
-    private const string MultipartContentTypeWithSpecialCharacters = "multipart/form-data; boundary=\"WebKitFormBoundary/:5pDRpGheQXaM8k3T\"";
+    private const string MultipartContentTypeWithSpecialCharacters =
+        "multipart/form-data; boundary=\"WebKitFormBoundary/:5pDRpGheQXaM8k3T\"";
 
     private const string EmptyMultipartForm = "--WebKitFormBoundary5pDRpGheQXaM8k3T--";
 
     // Note that CRLF (\r\n) is required. You can't use multi-line C# strings here because the line breaks on Linux are just LF.
     private const string MultipartFormEnd = "--WebKitFormBoundary5pDRpGheQXaM8k3T--\r\n";
 
-    private const string MultipartFormEndWithSpecialCharacters = "--WebKitFormBoundary/:5pDRpGheQXaM8k3T--\r\n";
+    private const string MultipartFormEndWithSpecialCharacters =
+        "--WebKitFormBoundary/:5pDRpGheQXaM8k3T--\r\n";
 
-    private const string MultipartFormField = "--WebKitFormBoundary5pDRpGheQXaM8k3T\r\n" +
-"Content-Disposition: form-data; name=\"description\"\r\n" +
-"\r\n" +
-"Foo\r\n";
+    private const string MultipartFormField =
+        "--WebKitFormBoundary5pDRpGheQXaM8k3T\r\n"
+        + "Content-Disposition: form-data; name=\"description\"\r\n"
+        + "\r\n"
+        + "Foo\r\n";
 
-    private const string MultipartFormFile = "--WebKitFormBoundary5pDRpGheQXaM8k3T\r\n" +
-"Content-Disposition: form-data; name=\"myfile1\"; filename=\"temp.html\"\r\n" +
-"Content-Type: text/html\r\n" +
-"\r\n" +
-"<html><body>Hello World</body></html>\r\n";
+    private const string MultipartFormFile =
+        "--WebKitFormBoundary5pDRpGheQXaM8k3T\r\n"
+        + "Content-Disposition: form-data; name=\"myfile1\"; filename=\"temp.html\"\r\n"
+        + "Content-Type: text/html\r\n"
+        + "\r\n"
+        + "<html><body>Hello World</body></html>\r\n";
 
-    private const string MultipartFormEncodedFilename = "--WebKitFormBoundary5pDRpGheQXaM8k3T\r\n" +
-"Content-Disposition: form-data; name=\"myfile1\"; filename=\"temp.html\"; filename*=utf-8\'\'t%c3%a9mp.html\r\n" +
-"Content-Type: text/html\r\n" +
-"\r\n" +
-"<html><body>Hello World</body></html>\r\n";
+    private const string MultipartFormEncodedFilename =
+        "--WebKitFormBoundary5pDRpGheQXaM8k3T\r\n"
+        + "Content-Disposition: form-data; name=\"myfile1\"; filename=\"temp.html\"; filename*=utf-8\'\'t%c3%a9mp.html\r\n"
+        + "Content-Type: text/html\r\n"
+        + "\r\n"
+        + "<html><body>Hello World</body></html>\r\n";
 
-    private const string MultipartFormFileSpecialCharacters = "--WebKitFormBoundary/:5pDRpGheQXaM8k3T\r\n" +
-"Content-Disposition: form-data; name=\"description\"\r\n" +
-"\r\n" +
-"Foo\r\n";
+    private const string MultipartFormFileSpecialCharacters =
+        "--WebKitFormBoundary/:5pDRpGheQXaM8k3T\r\n"
+        + "Content-Disposition: form-data; name=\"description\"\r\n"
+        + "\r\n"
+        + "Foo\r\n";
 
-    private const string InvalidContentDispositionValue = "form-data; name=\"description\" - filename=\"temp.html\"";
+    private const string InvalidContentDispositionValue =
+        "form-data; name=\"description\" - filename=\"temp.html\"";
 
-    private const string MultipartFormFileInvalidContentDispositionValue = "--WebKitFormBoundary5pDRpGheQXaM8k3T\r\n" +
-"Content-Disposition: " +
-InvalidContentDispositionValue +
-"\r\n" +
-"\r\n" +
-"Foo\r\n";
+    private const string MultipartFormFileInvalidContentDispositionValue =
+        "--WebKitFormBoundary5pDRpGheQXaM8k3T\r\n"
+        + "Content-Disposition: "
+        + InvalidContentDispositionValue
+        + "\r\n"
+        + "\r\n"
+        + "Foo\r\n";
 
-    private const string MultipartFormWithField =
-        MultipartFormField +
-        MultipartFormEnd;
+    private const string MultipartFormWithField = MultipartFormField + MultipartFormEnd;
 
-    private const string MultipartFormWithFile =
-        MultipartFormFile +
-        MultipartFormEnd;
+    private const string MultipartFormWithFile = MultipartFormFile + MultipartFormEnd;
 
     private const string MultipartFormWithFieldAndFile =
-        MultipartFormField +
-        MultipartFormFile +
-        MultipartFormEnd;
+        MultipartFormField + MultipartFormFile + MultipartFormEnd;
 
     private const string MultipartFormWithEncodedFilename =
-        MultipartFormEncodedFilename +
-        MultipartFormEnd;
+        MultipartFormEncodedFilename + MultipartFormEnd;
 
     private const string MultipartFormWithSpecialCharacters =
-        MultipartFormFileSpecialCharacters +
-        MultipartFormEndWithSpecialCharacters;
+        MultipartFormFileSpecialCharacters + MultipartFormEndWithSpecialCharacters;
 
     private const string MultipartFormWithInvalidContentDispositionValue =
-        MultipartFormFileInvalidContentDispositionValue +
-        MultipartFormEnd;
+        MultipartFormFileInvalidContentDispositionValue + MultipartFormEnd;
 
     [Theory]
     [InlineData(true)]
@@ -204,7 +211,10 @@ InvalidContentDispositionValue +
         context.Request.ContentType = MultipartContentType;
         context.Request.Body = new NonSeekableReadStream(formContent);
 
-        IFormFeature formFeature = new FormFeature(context.Request, new FormOptions() { BufferBody = bufferRequest });
+        IFormFeature formFeature = new FormFeature(
+            context.Request,
+            new FormOptions() { BufferBody = bufferRequest }
+        );
         context.Features.Set<IFormFeature>(formFeature);
 
         var formCollection = context.Request.Form;
@@ -239,7 +249,10 @@ InvalidContentDispositionValue +
         context.Request.ContentType = MultipartContentType;
         context.Request.Body = new NonSeekableReadStream(formContent);
 
-        IFormFeature formFeature = new FormFeature(context.Request, new FormOptions() { BufferBody = bufferRequest });
+        IFormFeature formFeature = new FormFeature(
+            context.Request,
+            new FormOptions() { BufferBody = bufferRequest }
+        );
         context.Features.Set<IFormFeature>(formFeature);
 
         var formCollection = context.Request.Form;
@@ -267,7 +280,9 @@ InvalidContentDispositionValue +
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
-    public async Task ReadFormAsync_MultipartWithFile_ReturnsParsedFormCollection(bool bufferRequest)
+    public async Task ReadFormAsync_MultipartWithFile_ReturnsParsedFormCollection(
+        bool bufferRequest
+    )
     {
         var formContent = Encoding.UTF8.GetBytes(MultipartFormWithFile);
         var context = new DefaultHttpContext();
@@ -276,7 +291,10 @@ InvalidContentDispositionValue +
         context.Request.ContentType = MultipartContentType;
         context.Request.Body = new NonSeekableReadStream(formContent);
 
-        IFormFeature formFeature = new FormFeature(context.Request, new FormOptions() { BufferBody = bufferRequest });
+        IFormFeature formFeature = new FormFeature(
+            context.Request,
+            new FormOptions() { BufferBody = bufferRequest }
+        );
         context.Features.Set<IFormFeature>(formFeature);
 
         var formCollection = await context.Request.ReadFormAsync();
@@ -300,7 +318,10 @@ InvalidContentDispositionValue +
         Assert.Equal("myfile1", file.Name);
         Assert.Equal("temp.html", file.FileName);
         Assert.Equal("text/html", file.ContentType);
-        Assert.Equal(@"form-data; name=""myfile1""; filename=""temp.html""", file.ContentDisposition);
+        Assert.Equal(
+            @"form-data; name=""myfile1""; filename=""temp.html""",
+            file.ContentDisposition
+        );
         var body = file.OpenReadStream();
         using (var reader = new StreamReader(body))
         {
@@ -315,7 +336,9 @@ InvalidContentDispositionValue +
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
-    public async Task ReadFormAsync_MultipartWithFileAndQuotedBoundaryString_ReturnsParsedFormCollection(bool bufferRequest)
+    public async Task ReadFormAsync_MultipartWithFileAndQuotedBoundaryString_ReturnsParsedFormCollection(
+        bool bufferRequest
+    )
     {
         var formContent = Encoding.UTF8.GetBytes(MultipartFormWithSpecialCharacters);
         var context = new DefaultHttpContext();
@@ -324,7 +347,10 @@ InvalidContentDispositionValue +
         context.Request.ContentType = MultipartContentTypeWithSpecialCharacters;
         context.Request.Body = new NonSeekableReadStream(formContent);
 
-        IFormFeature formFeature = new FormFeature(context.Request, new FormOptions() { BufferBody = bufferRequest });
+        IFormFeature formFeature = new FormFeature(
+            context.Request,
+            new FormOptions() { BufferBody = bufferRequest }
+        );
         context.Features.Set<IFormFeature>(formFeature);
 
         var formCollection = context.Request.Form;
@@ -352,7 +378,9 @@ InvalidContentDispositionValue +
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
-    public async Task ReadFormAsync_MultipartWithEncodedFilename_ReturnsParsedFormCollection(bool bufferRequest)
+    public async Task ReadFormAsync_MultipartWithEncodedFilename_ReturnsParsedFormCollection(
+        bool bufferRequest
+    )
     {
         var formContent = Encoding.UTF8.GetBytes(MultipartFormWithEncodedFilename);
         var context = new DefaultHttpContext();
@@ -361,7 +389,10 @@ InvalidContentDispositionValue +
         context.Request.ContentType = MultipartContentType;
         context.Request.Body = new NonSeekableReadStream(formContent);
 
-        IFormFeature formFeature = new FormFeature(context.Request, new FormOptions() { BufferBody = bufferRequest });
+        IFormFeature formFeature = new FormFeature(
+            context.Request,
+            new FormOptions() { BufferBody = bufferRequest }
+        );
         context.Features.Set<IFormFeature>(formFeature);
 
         var formCollection = await context.Request.ReadFormAsync();
@@ -385,7 +416,10 @@ InvalidContentDispositionValue +
         Assert.Equal("myfile1", file.Name);
         Assert.Equal("t\u00e9mp.html", file.FileName);
         Assert.Equal("text/html", file.ContentType);
-        Assert.Equal(@"form-data; name=""myfile1""; filename=""temp.html""; filename*=utf-8''t%c3%a9mp.html", file.ContentDisposition);
+        Assert.Equal(
+            @"form-data; name=""myfile1""; filename=""temp.html""; filename*=utf-8''t%c3%a9mp.html",
+            file.ContentDisposition
+        );
         var body = file.OpenReadStream();
         using (var reader = new StreamReader(body))
         {
@@ -400,7 +434,9 @@ InvalidContentDispositionValue +
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
-    public async Task ReadFormAsync_MultipartWithFieldAndFile_ReturnsParsedFormCollection(bool bufferRequest)
+    public async Task ReadFormAsync_MultipartWithFieldAndFile_ReturnsParsedFormCollection(
+        bool bufferRequest
+    )
     {
         var formContent = Encoding.UTF8.GetBytes(MultipartFormWithFieldAndFile);
         var context = new DefaultHttpContext();
@@ -409,7 +445,10 @@ InvalidContentDispositionValue +
         context.Request.ContentType = MultipartContentType;
         context.Request.Body = new NonSeekableReadStream(formContent);
 
-        IFormFeature formFeature = new FormFeature(context.Request, new FormOptions() { BufferBody = bufferRequest });
+        IFormFeature formFeature = new FormFeature(
+            context.Request,
+            new FormOptions() { BufferBody = bufferRequest }
+        );
         context.Features.Set<IFormFeature>(formFeature);
 
         var formCollection = await context.Request.ReadFormAsync();
@@ -432,7 +471,10 @@ InvalidContentDispositionValue +
 
         var file = formCollection.Files["myfile1"];
         Assert.Equal("text/html", file.ContentType);
-        Assert.Equal(@"form-data; name=""myfile1""; filename=""temp.html""", file.ContentDisposition);
+        Assert.Equal(
+            @"form-data; name=""myfile1""; filename=""temp.html""",
+            file.ContentDisposition
+        );
         var body = file.OpenReadStream();
         using (var reader = new StreamReader(body))
         {
@@ -461,10 +503,15 @@ InvalidContentDispositionValue +
         context.Request.ContentType = MultipartContentType;
         context.Request.Body = new NonSeekableReadStream(formContent.ToArray());
 
-        IFormFeature formFeature = new FormFeature(context.Request, new FormOptions() { BufferBody = bufferRequest, ValueCountLimit = 2 });
+        IFormFeature formFeature = new FormFeature(
+            context.Request,
+            new FormOptions() { BufferBody = bufferRequest, ValueCountLimit = 2 }
+        );
         context.Features.Set<IFormFeature>(formFeature);
 
-        var exception = await Assert.ThrowsAsync<InvalidDataException>(() => context.Request.ReadFormAsync());
+        var exception = await Assert.ThrowsAsync<InvalidDataException>(
+            () => context.Request.ReadFormAsync()
+        );
         Assert.Equal("Form value count limit 2 exceeded.", exception.Message);
     }
 
@@ -479,17 +526,21 @@ InvalidContentDispositionValue +
         formContent.AddRange(Encoding.UTF8.GetBytes(MultipartFormFile));
         formContent.AddRange(Encoding.UTF8.GetBytes(MultipartFormEnd));
 
-
         var context = new DefaultHttpContext();
         var responseFeature = new FakeResponseFeature();
         context.Features.Set<IHttpResponseFeature>(responseFeature);
         context.Request.ContentType = MultipartContentType;
         context.Request.Body = new NonSeekableReadStream(formContent.ToArray());
 
-        IFormFeature formFeature = new FormFeature(context.Request, new FormOptions() { BufferBody = bufferRequest, ValueCountLimit = 2 });
+        IFormFeature formFeature = new FormFeature(
+            context.Request,
+            new FormOptions() { BufferBody = bufferRequest, ValueCountLimit = 2 }
+        );
         context.Features.Set<IFormFeature>(formFeature);
 
-        var exception = await Assert.ThrowsAsync<InvalidDataException>(() => context.Request.ReadFormAsync());
+        var exception = await Assert.ThrowsAsync<InvalidDataException>(
+            () => context.Request.ReadFormAsync()
+        );
         Assert.Equal("Form value count limit 2 exceeded.", exception.Message);
     }
 
@@ -501,7 +552,10 @@ InvalidContentDispositionValue +
     [InlineData(false, 40 * 1024)]
     [InlineData(true, 4 * 1024 * 1024)]
     [InlineData(false, 4 * 1024 * 1024)]
-    public async Task ReadFormAsync_MultipartWithFieldAndMediumFile_ReturnsParsedFormCollection(bool bufferRequest, int fileSize)
+    public async Task ReadFormAsync_MultipartWithFieldAndMediumFile_ReturnsParsedFormCollection(
+        bool bufferRequest,
+        int fileSize
+    )
     {
         var fileContents = CreateFile(fileSize);
         var formContent = CreateMultipartWithFormAndFile(fileContents);
@@ -511,7 +565,10 @@ InvalidContentDispositionValue +
         context.Request.ContentType = MultipartContentType;
         context.Request.Body = new NonSeekableReadStream(formContent);
 
-        IFormFeature formFeature = new FormFeature(context.Request, new FormOptions() { BufferBody = bufferRequest });
+        IFormFeature formFeature = new FormFeature(
+            context.Request,
+            new FormOptions() { BufferBody = bufferRequest }
+        );
         context.Features.Set<IFormFeature>(formFeature);
 
         var formCollection = await context.Request.ReadFormAsync();
@@ -534,7 +591,10 @@ InvalidContentDispositionValue +
 
         var file = formCollection.Files["myfile1"];
         Assert.Equal("text/html", file.ContentType);
-        Assert.Equal(@"form-data; name=""myfile1""; filename=""temp.html""", file.ContentDisposition);
+        Assert.Equal(
+            @"form-data; name=""myfile1""; filename=""temp.html""",
+            file.ContentDisposition
+        );
         using (var body = file.OpenReadStream())
         {
             Assert.True(body.CanSeek);
@@ -557,15 +617,22 @@ InvalidContentDispositionValue +
         IFormFeature formFeature = new FormFeature(context.Request, new FormOptions());
         context.Features.Set<IFormFeature>(formFeature);
 
-        var exception = await Assert.ThrowsAsync<InvalidDataException>(() => context.Request.ReadFormAsync());
+        var exception = await Assert.ThrowsAsync<InvalidDataException>(
+            () => context.Request.ReadFormAsync()
+        );
 
-        Assert.Equal("Form section has invalid Content-Disposition value: " + InvalidContentDispositionValue, exception.Message);
+        Assert.Equal(
+            "Form section has invalid Content-Disposition value: " + InvalidContentDispositionValue,
+            exception.Message
+        );
     }
 
     private Stream CreateFile(int size)
     {
         var stream = new MemoryStream(size);
-        var bytes = Encoding.ASCII.GetBytes("HelloWorld_ABCDEFGHIJKLMNOPQRSTUVWXYZ.abcdefghijklmnopqrstuvwxyz,0123456789;");
+        var bytes = Encoding.ASCII.GetBytes(
+            "HelloWorld_ABCDEFGHIJKLMNOPQRSTUVWXYZ.abcdefghijklmnopqrstuvwxyz,0123456789;"
+        );
         int written = 0;
         while (written < size)
         {
@@ -581,13 +648,12 @@ InvalidContentDispositionValue +
     {
         var stream = new MemoryStream();
         var header =
-MultipartFormField +
-"--WebKitFormBoundary5pDRpGheQXaM8k3T\r\n" +
-"Content-Disposition: form-data; name=\"myfile1\"; filename=\"temp.html\"\r\n" +
-"Content-Type: text/html\r\n" +
-"\r\n";
-        var footer =
-"\r\n--WebKitFormBoundary5pDRpGheQXaM8k3T--";
+            MultipartFormField
+            + "--WebKitFormBoundary5pDRpGheQXaM8k3T\r\n"
+            + "Content-Disposition: form-data; name=\"myfile1\"; filename=\"temp.html\"\r\n"
+            + "Content-Type: text/html\r\n"
+            + "\r\n";
+        var footer = "\r\n--WebKitFormBoundary5pDRpGheQXaM8k3T--";
 
         var bytes = Encoding.ASCII.GetBytes(header);
         stream.Write(bytes, 0, bytes.Length);
@@ -604,7 +670,8 @@ MultipartFormField +
     private void CompareStreams(Stream streamA, Stream streamB)
     {
         Assert.Equal(streamA.Length, streamB.Length);
-        byte[] bytesA = new byte[1024], bytesB = new byte[1024];
+        byte[] bytesA = new byte[1024],
+            bytesB = new byte[1024];
         var readA = streamA.Read(bytesA, 0, bytesA.Length);
         var readB = streamB.Read(bytesB, 0, bytesB.Length);
         Assert.Equal(readA, readB);
@@ -615,7 +682,9 @@ MultipartFormField +
             {
                 if (bytesA[i] != bytesB[i])
                 {
-                    throw new Exception($"Value mismatch at loop {loops}, index {i}; A:{bytesA[i]}, B:{bytesB[i]}");
+                    throw new Exception(
+                        $"Value mismatch at loop {loops}, index {i}; A:{bytesA[i]}, B:{bytesB[i]}"
+                    );
                 }
             }
 

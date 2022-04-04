@@ -37,7 +37,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
                 // reasonable TLS protocol version for outgoing connections.
 #pragma warning disable CA5364 // Do Not Use Deprecated Security Protocols
 #pragma warning disable CS0618 // Type or member is obsolete
-                if (ServicePointManager.SecurityProtocol == (SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls))
+                if (
+                    ServicePointManager.SecurityProtocol
+                    == (SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls)
+                )
 #pragma warning restore CS0618 // Type or member is obsolete
 #pragma warning restore CA5364 // Do Not Use Deprecated Security Protocols
                 {
@@ -51,17 +54,33 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
 
                 MarkupOptions = Testing.MarkupOptions.UseFirstDescriptor;
 
-                SolutionTransforms.Add((solution, projectId) =>
-                {
-                    var parseOptions = (CSharpParseOptions)solution.GetProject(projectId)!.ParseOptions!;
-                    solution = solution.WithProjectParseOptions(projectId, parseOptions.WithLanguageVersion(LanguageVersion));
+                SolutionTransforms.Add(
+                    (solution, projectId) =>
+                    {
+                        var parseOptions = (CSharpParseOptions)solution
+                            .GetProject(projectId)!
+                            .ParseOptions!;
+                        solution = solution.WithProjectParseOptions(
+                            projectId,
+                            parseOptions.WithLanguageVersion(LanguageVersion)
+                        );
 
-                    var compilationOptions = solution.GetProject(projectId)!.CompilationOptions!;
-                    compilationOptions = compilationOptions.WithSpecificDiagnosticOptions(compilationOptions.SpecificDiagnosticOptions.SetItems(CSharpVerifierHelper.NullableWarnings));
-                    solution = solution.WithProjectCompilationOptions(projectId, compilationOptions);
+                        var compilationOptions = solution
+                            .GetProject(projectId)!
+                            .CompilationOptions!;
+                        compilationOptions = compilationOptions.WithSpecificDiagnosticOptions(
+                            compilationOptions.SpecificDiagnosticOptions.SetItems(
+                                CSharpVerifierHelper.NullableWarnings
+                            )
+                        );
+                        solution = solution.WithProjectCompilationOptions(
+                            projectId,
+                            compilationOptions
+                        );
 
-                    return solution;
-                });
+                        return solution;
+                    }
+                );
             }
 
             /// <summary>
@@ -84,11 +103,16 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
 
             public Action<ImmutableArray<CodeAction>>? CodeActionsVerifier { get; set; }
 
-            protected override async Task RunImplAsync(CancellationToken cancellationToken = default)
+            protected override async Task RunImplAsync(
+                CancellationToken cancellationToken = default
+            )
             {
                 if (DiagnosticSelector is object)
                 {
-                    Assert.True(CodeFixTestBehaviors.HasFlag(Testing.CodeFixTestBehaviors.FixOne), $"'{nameof(DiagnosticSelector)}' can only be used with '{nameof(Testing.CodeFixTestBehaviors)}.{nameof(Testing.CodeFixTestBehaviors.FixOne)}'");
+                    Assert.True(
+                        CodeFixTestBehaviors.HasFlag(Testing.CodeFixTestBehaviors.FixOne),
+                        $"'{nameof(DiagnosticSelector)}' can only be used with '{nameof(Testing.CodeFixTestBehaviors)}.{nameof(Testing.CodeFixTestBehaviors.FixOne)}'"
+                    );
                 }
 
                 _sharedState.Apply();
@@ -96,17 +120,21 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             }
 
 #if !CODE_STYLE
-            protected override AnalyzerOptions GetAnalyzerOptions(Project project)
-                => new WorkspaceAnalyzerOptions(base.GetAnalyzerOptions(project), project.Solution);
+            protected override AnalyzerOptions GetAnalyzerOptions(Project project) =>
+                new WorkspaceAnalyzerOptions(base.GetAnalyzerOptions(project), project.Solution);
 #endif
 
-            protected override Diagnostic? TrySelectDiagnosticToFix(ImmutableArray<Diagnostic> fixableDiagnostics)
+            protected override Diagnostic? TrySelectDiagnosticToFix(
+                ImmutableArray<Diagnostic> fixableDiagnostics
+            )
             {
                 return DiagnosticSelector?.Invoke(fixableDiagnostics)
                     ?? base.TrySelectDiagnosticToFix(fixableDiagnostics);
             }
 
-            protected override ImmutableArray<CodeAction> FilterCodeActions(ImmutableArray<CodeAction> actions)
+            protected override ImmutableArray<CodeAction> FilterCodeActions(
+                ImmutableArray<CodeAction> actions
+            )
             {
                 CodeActionsVerifier?.Invoke(actions);
                 return base.FilterCodeActions(actions);

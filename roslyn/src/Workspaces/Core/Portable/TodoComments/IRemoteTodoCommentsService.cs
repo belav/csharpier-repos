@@ -20,25 +20,39 @@ namespace Microsoft.CodeAnalysis.TodoComments
     {
         internal interface ICallback
         {
-            ValueTask ReportTodoCommentDataAsync(RemoteServiceCallbackId callbackId, DocumentId documentId, ImmutableArray<TodoCommentData> data, CancellationToken cancellationToken);
+            ValueTask ReportTodoCommentDataAsync(
+                RemoteServiceCallbackId callbackId,
+                DocumentId documentId,
+                ImmutableArray<TodoCommentData> data,
+                CancellationToken cancellationToken
+            );
         }
 
-        ValueTask ComputeTodoCommentsAsync(RemoteServiceCallbackId callbackId, CancellationToken cancellation);
+        ValueTask ComputeTodoCommentsAsync(
+            RemoteServiceCallbackId callbackId,
+            CancellationToken cancellation
+        );
     }
 
     [ExportRemoteServiceCallbackDispatcher(typeof(IRemoteTodoCommentsDiscoveryService)), Shared]
-    internal sealed class RemoteTodoCommentsDiscoveryCallbackDispatcher : RemoteServiceCallbackDispatcher, IRemoteTodoCommentsDiscoveryService.ICallback
+    internal sealed class RemoteTodoCommentsDiscoveryCallbackDispatcher
+        : RemoteServiceCallbackDispatcher,
+          IRemoteTodoCommentsDiscoveryService.ICallback
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RemoteTodoCommentsDiscoveryCallbackDispatcher()
-        {
-        }
+        public RemoteTodoCommentsDiscoveryCallbackDispatcher() { }
 
-        private ITodoCommentsListener GetLogService(RemoteServiceCallbackId callbackId)
-            => (ITodoCommentsListener)GetCallback(callbackId);
+        private ITodoCommentsListener GetLogService(RemoteServiceCallbackId callbackId) =>
+            (ITodoCommentsListener)GetCallback(callbackId);
 
-        public ValueTask ReportTodoCommentDataAsync(RemoteServiceCallbackId callbackId, DocumentId documentId, ImmutableArray<TodoCommentData> data, CancellationToken cancellationToken)
-            => GetLogService(callbackId).ReportTodoCommentDataAsync(documentId, data, cancellationToken);
+        public ValueTask ReportTodoCommentDataAsync(
+            RemoteServiceCallbackId callbackId,
+            DocumentId documentId,
+            ImmutableArray<TodoCommentData> data,
+            CancellationToken cancellationToken
+        ) =>
+            GetLogService(callbackId)
+                .ReportTodoCommentDataAsync(documentId, data, cancellationToken);
     }
 }

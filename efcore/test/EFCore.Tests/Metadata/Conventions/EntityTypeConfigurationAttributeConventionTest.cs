@@ -28,8 +28,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var builder = InMemoryTestHelpers.Instance.CreateConventionBuilder();
 
-            Assert.Equal(CoreStrings.InvalidEntityTypeConfigurationAttribute(nameof(UserConfiguration), nameof(User)),
-                Assert.Throws<InvalidOperationException>(() => builder.Entity<User>()).Message);
+            Assert.Equal(
+                CoreStrings.InvalidEntityTypeConfigurationAttribute(
+                    nameof(UserConfiguration),
+                    nameof(User)
+                ),
+                Assert.Throws<InvalidOperationException>(() => builder.Entity<User>()).Message
+            );
         }
 
         [ConditionalFact]
@@ -37,16 +42,20 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var builder = InMemoryTestHelpers.Instance.CreateConventionBuilder();
 
-            Assert.Equal(CoreStrings.InvalidEntityTypeConfigurationAttribute(nameof(CustomerConfiguration), nameof(InvalidCustomer)),
-                Assert.Throws<InvalidOperationException>(() => builder.Entity<InvalidCustomer>()).Message);
+            Assert.Equal(
+                CoreStrings.InvalidEntityTypeConfigurationAttribute(
+                    nameof(CustomerConfiguration),
+                    nameof(InvalidCustomer)
+                ),
+                Assert
+                    .Throws<InvalidOperationException>(() => builder.Entity<InvalidCustomer>())
+                    .Message
+            );
         }
 
-        private static IMutableModel CreateModel()
-            => new Model();
+        private static IMutableModel CreateModel() => new Model();
 
-        private class UserConfiguration
-        {
-        }
+        private class UserConfiguration { }
 
         [EntityTypeConfiguration(typeof(UserConfiguration))]
         private class User

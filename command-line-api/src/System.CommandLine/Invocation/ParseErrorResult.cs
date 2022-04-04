@@ -31,9 +31,11 @@ namespace System.CommandLine.Invocation
 
             context.Console.ResetTerminalForegroundColor();
 
-            context.BindingContext
-                   .HelpBuilder
-                   .Write(context.ParseResult.CommandResult.Command, StandardStreamWriter.Create(context.Console.Out), context.ParseResult);
+            context.BindingContext.HelpBuilder.Write(
+                context.ParseResult.CommandResult.Command,
+                StandardStreamWriter.Create(context.Console.Out),
+                context.ParseResult
+            );
         }
     }
 }

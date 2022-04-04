@@ -16,9 +16,7 @@ namespace System.Xml
         private XmlReader? _reader;
         private bool _preserveWhitespace;
 
-        public XmlLoader()
-        {
-        }
+        public XmlLoader() { }
 
         internal void Load(XmlDocument doc, XmlReader reader, bool preserveWhitespace)
         {
@@ -38,8 +36,7 @@ namespace System.Xml
             if (reader == null)
                 throw new ArgumentException(SR.Xdom_Load_NoReader);
             doc.SetBaseURI(reader.BaseURI!);
-            if (reader.Settings != null
-                && reader.Settings.ValidationType == ValidationType.Schema)
+            if (reader.Settings != null && reader.Settings.ValidationType == ValidationType.Schema)
             {
                 doc.Schemas = reader.Settings.Schemas;
             }
@@ -117,8 +114,7 @@ namespace System.Xml
                             {
                                 XmlAttribute attr = LoadAttributeNode();
                                 attributes.Append(attr); // special case for load
-                            }
-                            while (r.MoveToNextAttribute());
+                            } while (r.MoveToNextAttribute());
                             r.MoveToElement();
                         }
 
@@ -137,7 +133,12 @@ namespace System.Xml
                             schemaInfo = r.SchemaInfo;
                             if (schemaInfo != null)
                             {
-                                element.XmlName = _doc.AddXmlName(element.Prefix, element.LocalName, element.NamespaceURI, schemaInfo);
+                                element.XmlName = _doc.AddXmlName(
+                                    element.Prefix,
+                                    element.LocalName,
+                                    element.NamespaceURI,
+                                    schemaInfo
+                                );
                             }
                             node = element;
                             break;
@@ -155,7 +156,12 @@ namespace System.Xml
                             element = parent as XmlElement;
                             if (element != null)
                             {
-                                element.XmlName = _doc!.AddXmlName(element.Prefix, element.LocalName, element.NamespaceURI, schemaInfo);
+                                element.XmlName = _doc!.AddXmlName(
+                                    element.Prefix,
+                                    element.LocalName,
+                                    element.NamespaceURI,
+                                    schemaInfo
+                                );
                             }
                         }
                         if (parent.ParentNode == null)
@@ -204,7 +210,6 @@ namespace System.Xml
                         node = _doc!.CreateCDataSection(r.Value);
                         break;
 
-
                     case XmlNodeType.XmlDeclaration:
                         node = LoadDeclarationNode();
                         break;
@@ -234,8 +239,7 @@ namespace System.Xml
                 {
                     return node;
                 }
-            }
-            while (r.Read());
+            } while (r.Read());
 
             // when the reader ended before full subtree is read, return whatever we have created so far
             if (parent != null)
@@ -263,7 +267,12 @@ namespace System.Xml
             IXmlSchemaInfo? schemaInfo = r.SchemaInfo;
             if (schemaInfo != null)
             {
-                attr.XmlName = _doc.AddAttrXmlName(attr.Prefix, attr.LocalName, attr.NamespaceURI, schemaInfo);
+                attr.XmlName = _doc.AddAttrXmlName(
+                    attr.Prefix,
+                    attr.LocalName,
+                    attr.NamespaceURI,
+                    schemaInfo
+                );
             }
 
             while (r.ReadAttributeValue())
@@ -308,7 +317,12 @@ namespace System.Xml
             IXmlSchemaInfo? schemaInfo = r.SchemaInfo;
             if (schemaInfo != null)
             {
-                attr.XmlName = _doc.AddAttrXmlName(attr.Prefix, attr.LocalName, attr.NamespaceURI, schemaInfo);
+                attr.XmlName = _doc.AddAttrXmlName(
+                    attr.Prefix,
+                    attr.LocalName,
+                    attr.NamespaceURI,
+                    schemaInfo
+                );
             }
 
             LoadAttributeValue(attr, false);
@@ -335,7 +349,9 @@ namespace System.Xml
                     case XmlNodeType.EndEntity:
                         return;
                     case XmlNodeType.EntityReference:
-                        node = direct ? new XmlEntityReference(_reader!.LocalName, _doc!) : _doc!.CreateEntityReference(_reader!.LocalName);
+                        node = direct
+                            ? new XmlEntityReference(_reader!.LocalName, _doc!)
+                            : _doc!.CreateEntityReference(_reader!.LocalName);
                         if (r.CanResolveEntity)
                         {
                             r.ResolveEntity();
@@ -344,7 +360,12 @@ namespace System.Xml
                             // if the reader does not present any children for the ent-ref
                             if (node.FirstChild == null)
                             {
-                                node.AppendChildForLoad(direct ? new XmlText(string.Empty) : _doc!.CreateTextNode(string.Empty), _doc!);
+                                node.AppendChildForLoad(
+                                    direct
+                                      ? new XmlText(string.Empty)
+                                      : _doc!.CreateTextNode(string.Empty),
+                                    _doc!
+                                );
                             }
                         }
                         break;
@@ -360,7 +381,9 @@ namespace System.Xml
         private XmlEntityReference LoadEntityReferenceNode(bool direct)
         {
             Debug.Assert(_reader!.NodeType == XmlNodeType.EntityReference);
-            XmlEntityReference eref = direct ? new XmlEntityReference(_reader.Name, _doc!) : _doc!.CreateEntityReference(_reader.Name);
+            XmlEntityReference eref = direct
+                ? new XmlEntityReference(_reader.Name, _doc!)
+                : _doc!.CreateEntityReference(_reader.Name);
             if (_reader.CanResolveEntity)
             {
                 _reader.ResolveEntity();
@@ -439,7 +462,12 @@ namespace System.Xml
                 }
             }
 
-            XmlDocumentType dtNode = _doc!.CreateDocumentType(localName, publicId, systemId, internalSubset);
+            XmlDocumentType dtNode = _doc!.CreateDocumentType(
+                localName,
+                publicId,
+                systemId,
+                internalSubset
+            );
 
             IDtdInfo? dtdInfo = _reader.DtdInfo;
             if (dtdInfo != null)
@@ -468,7 +496,12 @@ namespace System.Xml
                 {
                     case XmlNodeType.Element:
                         bool fEmptyElement = _reader!.IsEmptyElement;
-                        XmlElement element = new XmlElement(_reader.Prefix, _reader.LocalName, _reader.NamespaceURI, _doc!);
+                        XmlElement element = new XmlElement(
+                            _reader.Prefix,
+                            _reader.LocalName,
+                            _reader.NamespaceURI,
+                            _doc!
+                        );
                         element.IsEmpty = fEmptyElement;
 
                         if (_reader.MoveToFirstAttribute())
@@ -559,8 +592,7 @@ namespace System.Xml
                 {
                     return node;
                 }
-            }
-            while (r.Read());
+            } while (r.Read());
 
             return null;
         }
@@ -571,7 +603,12 @@ namespace System.Xml
             XmlAttribute attr;
             if (r.IsDefault)
             {
-                XmlUnspecifiedAttribute defattr = new XmlUnspecifiedAttribute(r.Prefix, r.LocalName, r.NamespaceURI, _doc!);
+                XmlUnspecifiedAttribute defattr = new XmlUnspecifiedAttribute(
+                    r.Prefix,
+                    r.LocalName,
+                    r.NamespaceURI,
+                    _doc!
+                );
                 LoadAttributeValue(defattr, true);
                 defattr.SetSpecified(false);
                 return defattr;
@@ -594,10 +631,24 @@ namespace System.Xml
                 ParseDocumentType(dtNode, false, null);
         }
 
-        private void ParseDocumentType(XmlDocumentType dtNode, bool bUseResolver, XmlResolver? resolver)
+        private void ParseDocumentType(
+            XmlDocumentType dtNode,
+            bool bUseResolver,
+            XmlResolver? resolver
+        )
         {
             _doc = dtNode.OwnerDocument;
-            XmlParserContext pc = new XmlParserContext(null, new XmlNamespaceManager(_doc!.NameTable), null, null, null, null, _doc.BaseURI, string.Empty, XmlSpace.None);
+            XmlParserContext pc = new XmlParserContext(
+                null,
+                new XmlNamespaceManager(_doc!.NameTable),
+                null,
+                null,
+                null,
+                null,
+                _doc.BaseURI,
+                string.Empty,
+                XmlSpace.None
+            );
             XmlTextReaderImpl tr = new XmlTextReaderImpl("", XmlNodeType.Element, pc);
             tr.Namespaces = dtNode.ParseWithNamespaces;
             if (bUseResolver)
@@ -608,7 +659,14 @@ namespace System.Xml
             IDtdParser dtdParser = DtdParser.Create();
             XmlTextReaderImpl.DtdParserProxy proxy = new XmlTextReaderImpl.DtdParserProxy(tr);
 
-            IDtdInfo dtdInfo = dtdParser.ParseFreeFloatingDtd(_doc.BaseURI, dtNode.Name, dtNode.PublicId, dtNode.SystemId, dtNode.InternalSubset, proxy);
+            IDtdInfo dtdInfo = dtdParser.ParseFreeFloatingDtd(
+                _doc.BaseURI,
+                dtNode.Name,
+                dtNode.PublicId,
+                dtNode.SystemId,
+                dtNode.InternalSubset,
+                proxy
+            );
             LoadDocumentType(dtdInfo, dtNode);
         }
 
@@ -631,7 +689,9 @@ namespace System.Xml
                 {
                     foreach (SchemaNotation scNot in schInfo.Notations.Values)
                     {
-                        dtNode.Notations.SetNamedItem(new XmlNotation(scNot.Name.Name, scNot.Pubid, scNot.SystemLiteral, _doc));
+                        dtNode.Notations.SetNamedItem(
+                            new XmlNotation(scNot.Name.Name, scNot.Pubid, scNot.SystemLiteral, _doc)
+                        );
                     }
                 }
 
@@ -640,7 +700,14 @@ namespace System.Xml
                 {
                     foreach (SchemaEntity scEnt in schInfo.GeneralEntities.Values)
                     {
-                        XmlEntity ent = new XmlEntity(scEnt.Name.Name, scEnt.Text, scEnt.Pubid, scEnt.Url, scEnt.NData.IsEmpty ? null : scEnt.NData.Name, _doc);
+                        XmlEntity ent = new XmlEntity(
+                            scEnt.Name.Name,
+                            scEnt.Text,
+                            scEnt.Pubid,
+                            scEnt.Url,
+                            scEnt.NData.IsEmpty ? null : scEnt.NData.Name,
+                            _doc
+                        );
                         ent.SetBaseURI(scEnt.DeclaredURI);
                         dtNode.Entities.SetNamedItem(ent);
                     }
@@ -650,7 +717,14 @@ namespace System.Xml
                 {
                     foreach (SchemaEntity scEnt in schInfo.ParameterEntities.Values)
                     {
-                        XmlEntity ent = new XmlEntity(scEnt.Name.Name, scEnt.Text, scEnt.Pubid, scEnt.Url, scEnt.NData.IsEmpty ? null : scEnt.NData.Name, _doc);
+                        XmlEntity ent = new XmlEntity(
+                            scEnt.Name.Name,
+                            scEnt.Text,
+                            scEnt.Pubid,
+                            scEnt.Url,
+                            scEnt.NData.IsEmpty ? null : scEnt.NData.Name,
+                            _doc
+                        );
                         ent.SetBaseURI(scEnt.DeclaredURI);
                         dtNode.Entities.SetNamedItem(ent);
                     }
@@ -658,20 +732,41 @@ namespace System.Xml
                 _doc.Entities = dtNode.Entities;
 
                 //extract the elements which has attribute defined as ID from the element declarations
-                foreach (KeyValuePair<XmlQualifiedName, SchemaElementDecl> elementDecls in schInfo.ElementDecls)
+                foreach (
+                    KeyValuePair<
+                        XmlQualifiedName,
+                        SchemaElementDecl
+                    > elementDecls in schInfo.ElementDecls
+                )
                 {
                     SchemaElementDecl elementDecl = elementDecls.Value;
                     if (elementDecl.AttDefs != null)
                     {
-                        foreach (KeyValuePair<XmlQualifiedName, SchemaAttDef> attDefs in elementDecl.AttDefs)
+                        foreach (
+                            KeyValuePair<
+                                XmlQualifiedName,
+                                SchemaAttDef
+                            > attDefs in elementDecl.AttDefs
+                        )
                         {
                             SchemaAttDef attdef = attDefs.Value;
                             if (attdef.Datatype.TokenizedType == XmlTokenizedType.ID)
                             {
                                 //we only register the XmlElement based on their Prefix/LocalName and skip the namespace
                                 _doc.AddIdInfo(
-                                    _doc.AddXmlName(elementDecl.Prefix, elementDecl.Name.Name, string.Empty, null),
-                                    _doc.AddAttrXmlName(attdef.Prefix, attdef.Name.Name, string.Empty, null));
+                                    _doc.AddXmlName(
+                                        elementDecl.Prefix,
+                                        elementDecl.Name.Name,
+                                        string.Empty,
+                                        null
+                                    ),
+                                    _doc.AddAttrXmlName(
+                                        attdef.Prefix,
+                                        attdef.Name.Name,
+                                        string.Empty,
+                                        null
+                                    )
+                                );
                                 break;
                             }
                         }
@@ -708,13 +803,21 @@ namespace System.Xml
                             prefixes.Add(attr.LocalName);
                             mgr.AddNamespace(attr.LocalName, attr.Value);
                         }
-                        else if (!bHasDefXmlnsAttr && attr.Prefix.Length == 0 && attr.LocalName == _doc.strXmlns)
+                        else if (
+                            !bHasDefXmlnsAttr
+                            && attr.Prefix.Length == 0
+                            && attr.LocalName == _doc.strXmlns
+                        )
                         {
                             // Save the case xmlns="..." where xmlns is the LocalName
                             mgr.AddNamespace(string.Empty, attr.Value);
                             bHasDefXmlnsAttr = true;
                         }
-                        else if (spaceMode == XmlSpace.None && attr.Prefix == _doc.strXml && attr.LocalName == _doc.strSpace)
+                        else if (
+                            spaceMode == XmlSpace.None
+                            && attr.Prefix == _doc.strXml
+                            && attr.LocalName == _doc.strSpace
+                        )
                         {
                             // Save xml:space context
                             if (attr.Value == "default")
@@ -722,7 +825,11 @@ namespace System.Xml
                             else if (attr.Value == "preserve")
                                 spaceMode = XmlSpace.Preserve;
                         }
-                        else if (lang == null && attr.Prefix == _doc.strXml && attr.LocalName == _doc.strLang)
+                        else if (
+                            lang == null
+                            && attr.Prefix == _doc.strXml
+                            && attr.LocalName == _doc.strLang
+                        )
                         {
                             // Save xml:lag context
                             lang = attr.Value;
@@ -742,12 +849,14 @@ namespace System.Xml
                 baseURI,
                 lang,
                 spaceMode
-                );
+            );
         }
 
-
-
-        internal XmlNamespaceManager ParsePartialContent(XmlNode parentNode, string innerxmltext, XmlNodeType nt)
+        internal XmlNamespaceManager ParsePartialContent(
+            XmlNode parentNode,
+            string innerxmltext,
+            XmlNodeType nt
+        )
         {
             //the function shouldn't be used to set innerxml for XmlDocument node
             Debug.Assert(parentNode.NodeType != XmlNodeType.Document);
@@ -802,8 +911,11 @@ namespace System.Xml
             ParsePartialContent(node, innerxmltext, XmlNodeType.Attribute);
         }
 
-
-        private void RemoveDuplicateNamespace(XmlElement elem, XmlNamespaceManager mgr, bool fCheckElemAttrs)
+        private void RemoveDuplicateNamespace(
+            XmlElement elem,
+            XmlNamespaceManager mgr,
+            bool fCheckElemAttrs
+        )
         {
             //remove the duplicate attributes on current node first
             mgr.PushScope();
@@ -929,7 +1041,12 @@ namespace System.Xml
 
 #pragma warning disable 618
         // Creates a XmlValidatingReader suitable for parsing InnerXml strings
-        private XmlReader CreateInnerXmlReader(string xmlFragment, XmlNodeType nt, XmlParserContext context, XmlDocument doc)
+        private XmlReader CreateInnerXmlReader(
+            string xmlFragment,
+            XmlNodeType nt,
+            XmlParserContext context,
+            XmlDocument doc
+        )
         {
             XmlNodeType contentNT = nt;
             if (contentNT == XmlNodeType.Entity || contentNT == XmlNodeType.EntityReference)
@@ -958,9 +1075,18 @@ namespace System.Xml
                 else
                 {
                     IDtdParser dtdParser = DtdParser.Create();
-                    XmlTextReaderImpl.DtdParserProxy proxy = new XmlTextReaderImpl.DtdParserProxy(tr);
+                    XmlTextReaderImpl.DtdParserProxy proxy = new XmlTextReaderImpl.DtdParserProxy(
+                        tr
+                    );
 
-                    IDtdInfo dtdInfo = dtdParser.ParseFreeFloatingDtd(context.BaseURI, context.DocTypeName, context.PublicId, context.SystemId, context.InternalSubset, proxy);
+                    IDtdInfo dtdInfo = dtdParser.ParseFreeFloatingDtd(
+                        context.BaseURI,
+                        context.DocTypeName,
+                        context.PublicId,
+                        context.SystemId,
+                        context.InternalSubset,
+                        proxy
+                    );
 
                     dtdNode.DtdSchemaInfo = dtdInfo as SchemaInfo;
                     tr.SetDtdInfo(dtdInfo);
@@ -976,7 +1102,12 @@ namespace System.Xml
         }
 #pragma warning restore 618
 
-        internal static void ParseXmlDeclarationValue(string strValue, out string? version, out string? encoding, out string? standalone)
+        internal static void ParseXmlDeclarationValue(
+            string strValue,
+            out string? version,
+            out string? encoding,
+            out string? standalone
+        )
         {
             version = null;
             encoding = null;
@@ -1003,7 +1134,13 @@ namespace System.Xml
 
         internal static Exception UnexpectedNodeType(XmlNodeType nodetype)
         {
-            return new InvalidOperationException(SR.Format(CultureInfo.InvariantCulture, SR.Xml_UnexpectedNodeType, nodetype.ToString()));
+            return new InvalidOperationException(
+                SR.Format(
+                    CultureInfo.InvariantCulture,
+                    SR.Xml_UnexpectedNodeType,
+                    nodetype.ToString()
+                )
+            );
         }
     }
 }

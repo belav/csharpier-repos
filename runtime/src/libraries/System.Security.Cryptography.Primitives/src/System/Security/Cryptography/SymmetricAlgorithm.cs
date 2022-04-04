@@ -14,7 +14,11 @@ namespace System.Security.Cryptography
             PaddingValue = PaddingMode.PKCS7;
         }
 
-        [Obsolete(Obsoletions.DefaultCryptoAlgorithmsMessage, DiagnosticId = Obsoletions.DefaultCryptoAlgorithmsDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.DefaultCryptoAlgorithmsMessage,
+            DiagnosticId = Obsoletions.DefaultCryptoAlgorithmsDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public static SymmetricAlgorithm Create() =>
             throw new PlatformNotSupportedException(SR.Cryptography_DefaultAlgorithm_NotSupported);
 
@@ -24,10 +28,7 @@ namespace System.Security.Cryptography
 
         public virtual int FeedbackSize
         {
-            get
-            {
-                return FeedbackSizeValue;
-            }
+            get { return FeedbackSizeValue; }
             set
             {
                 if (value <= 0 || value > BlockSizeValue || (value % 8) != 0)
@@ -38,11 +39,7 @@ namespace System.Security.Cryptography
 
         public virtual int BlockSize
         {
-            get
-            {
-                return BlockSizeValue;
-            }
-
+            get { return BlockSizeValue; }
             set
             {
                 bool validatedByZeroSkipSizeKeySizes;
@@ -66,7 +63,6 @@ namespace System.Security.Cryptography
                     GenerateIV();
                 return IVValue.CloneByteArray()!;
             }
-
             set
             {
                 if (value == null)
@@ -86,7 +82,6 @@ namespace System.Security.Cryptography
                     GenerateKey();
                 return KeyValue.CloneByteArray()!;
             }
-
             set
             {
                 if (value == null)
@@ -104,11 +99,7 @@ namespace System.Security.Cryptography
 
         public virtual int KeySize
         {
-            get
-            {
-                return KeySizeValue;
-            }
-
+            get { return KeySizeValue; }
             set
             {
                 if (!ValidKeySize(value))
@@ -139,14 +130,12 @@ namespace System.Security.Cryptography
 
         public virtual CipherMode Mode
         {
-            get
-            {
-                return ModeValue;
-            }
-
+            get { return ModeValue; }
             set
             {
-                if (!(value == CipherMode.CBC || value == CipherMode.ECB || value == CipherMode.CFB))
+                if (
+                    !(value == CipherMode.CBC || value == CipherMode.ECB || value == CipherMode.CFB)
+                )
                     throw new CryptographicException(SR.Cryptography_InvalidCipherMode);
 
                 ModeValue = value;
@@ -155,11 +144,7 @@ namespace System.Security.Cryptography
 
         public virtual PaddingMode Padding
         {
-            get
-            {
-                return PaddingValue;
-            }
-
+            get { return PaddingValue; }
             set
             {
                 if ((value < PaddingMode.None) || (value > PaddingMode.ISO10126))
@@ -307,13 +292,18 @@ namespace System.Security.Cryptography
         ///   is not a whole number of blocks.
         ///   </para>
         /// </exception>
-        public int GetCiphertextLengthCbc(int plaintextLength, PaddingMode paddingMode = PaddingMode.PKCS7) =>
-            GetCiphertextLengthBlockAligned(plaintextLength, paddingMode);
+        public int GetCiphertextLengthCbc(
+            int plaintextLength,
+            PaddingMode paddingMode = PaddingMode.PKCS7
+        ) => GetCiphertextLengthBlockAligned(plaintextLength, paddingMode);
 
         private int GetCiphertextLengthBlockAligned(int plaintextLength, PaddingMode paddingMode)
         {
             if (plaintextLength < 0)
-                throw new ArgumentOutOfRangeException(nameof(plaintextLength), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(plaintextLength),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
 
             int blockSizeBits = BlockSize; // The BlockSize property is in bits.
 
@@ -321,12 +311,16 @@ namespace System.Security.Cryptography
                 throw new InvalidOperationException(SR.InvalidOperation_UnsupportedBlockSize);
 
             int blockSizeBytes = blockSizeBits >> 3;
-            int wholeBlocks = Math.DivRem(plaintextLength, blockSizeBytes, out int remainder) * blockSizeBytes;
+            int wholeBlocks =
+                Math.DivRem(plaintextLength, blockSizeBytes, out int remainder) * blockSizeBytes;
 
             switch (paddingMode)
             {
                 case PaddingMode.None when remainder != 0:
-                    throw new ArgumentException(SR.Cryptography_MatchBlockSize, nameof(plaintextLength));
+                    throw new ArgumentException(
+                        SR.Cryptography_MatchBlockSize,
+                        nameof(plaintextLength)
+                    );
                 case PaddingMode.None:
                 case PaddingMode.Zeros when remainder == 0:
                     return plaintextLength;
@@ -336,12 +330,18 @@ namespace System.Security.Cryptography
                 case PaddingMode.ISO10126:
                     if (int.MaxValue - wholeBlocks < blockSizeBytes)
                     {
-                        throw new ArgumentOutOfRangeException(nameof(plaintextLength), SR.Cryptography_PlaintextTooLarge);
+                        throw new ArgumentOutOfRangeException(
+                            nameof(plaintextLength),
+                            SR.Cryptography_PlaintextTooLarge
+                        );
                     }
 
                     return wholeBlocks + blockSizeBytes;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(paddingMode), SR.Cryptography_InvalidPaddingMode);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(paddingMode),
+                        SR.Cryptography_InvalidPaddingMode
+                    );
             }
         }
 
@@ -392,24 +392,42 @@ namespace System.Security.Cryptography
         /// <paramref name="feedbackSizeInBits" /> accepts any value that is a valid feedback size, regardless if the algorithm
         /// supports the specified feedback size.
         /// </remarks>
-        public int GetCiphertextLengthCfb(int plaintextLength, PaddingMode paddingMode = PaddingMode.None, int feedbackSizeInBits = 8)
+        public int GetCiphertextLengthCfb(
+            int plaintextLength,
+            PaddingMode paddingMode = PaddingMode.None,
+            int feedbackSizeInBits = 8
+        )
         {
             if (plaintextLength < 0)
-                throw new ArgumentOutOfRangeException(nameof(plaintextLength), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(plaintextLength),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
 
             if (feedbackSizeInBits <= 0)
-                throw new ArgumentOutOfRangeException(nameof(feedbackSizeInBits), SR.ArgumentOutOfRange_NeedPosNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(feedbackSizeInBits),
+                    SR.ArgumentOutOfRange_NeedPosNum
+                );
 
             if ((feedbackSizeInBits & 0b111) != 0)
-                throw new ArgumentException(SR.Argument_BitsMustBeWholeBytes, nameof(feedbackSizeInBits));
+                throw new ArgumentException(
+                    SR.Argument_BitsMustBeWholeBytes,
+                    nameof(feedbackSizeInBits)
+                );
 
             int feedbackSizeInBytes = feedbackSizeInBits >> 3;
-            int feedbackAligned = Math.DivRem(plaintextLength, feedbackSizeInBytes, out int remainder) * feedbackSizeInBytes;
+            int feedbackAligned =
+                Math.DivRem(plaintextLength, feedbackSizeInBytes, out int remainder)
+                * feedbackSizeInBytes;
 
             switch (paddingMode)
             {
                 case PaddingMode.None when remainder != 0:
-                    throw new ArgumentException(SR.Cryptography_MatchFeedbackSize, nameof(plaintextLength));
+                    throw new ArgumentException(
+                        SR.Cryptography_MatchFeedbackSize,
+                        nameof(plaintextLength)
+                    );
                 case PaddingMode.None:
                 case PaddingMode.Zeros when remainder == 0:
                     return plaintextLength;
@@ -419,12 +437,18 @@ namespace System.Security.Cryptography
                 case PaddingMode.ISO10126:
                     if (int.MaxValue - feedbackAligned < feedbackSizeInBytes)
                     {
-                        throw new ArgumentOutOfRangeException(nameof(plaintextLength), SR.Cryptography_PlaintextTooLarge);
+                        throw new ArgumentOutOfRangeException(
+                            nameof(plaintextLength),
+                            SR.Cryptography_PlaintextTooLarge
+                        );
                     }
 
                     return feedbackAligned + feedbackSizeInBytes;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(paddingMode), SR.Cryptography_InvalidPaddingMode);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(paddingMode),
+                        SR.Cryptography_InvalidPaddingMode
+                    );
             }
         }
 
@@ -435,7 +459,11 @@ namespace System.Security.Cryptography
         protected int BlockSizeValue;
         protected int FeedbackSizeValue;
         protected int KeySizeValue;
-        [MaybeNull] protected KeySizes[] LegalBlockSizesValue = null!;
-        [MaybeNull] protected KeySizes[] LegalKeySizesValue = null!;
+
+        [MaybeNull]
+        protected KeySizes[] LegalBlockSizesValue = null!;
+
+        [MaybeNull]
+        protected KeySizes[] LegalKeySizesValue = null!;
     }
 }

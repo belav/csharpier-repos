@@ -17,7 +17,9 @@ public static class RazorCompiledItemExtensions
     /// </summary>
     /// <param name="item">The <see cref="RazorCompiledItem"/>.</param>
     /// <returns>A list of <see cref="IRazorSourceChecksumMetadata"/>.</returns>
-    public static IReadOnlyList<IRazorSourceChecksumMetadata> GetChecksumMetadata(this RazorCompiledItem item)
+    public static IReadOnlyList<IRazorSourceChecksumMetadata> GetChecksumMetadata(
+        this RazorCompiledItem item
+    )
     {
         if (item == null)
         {

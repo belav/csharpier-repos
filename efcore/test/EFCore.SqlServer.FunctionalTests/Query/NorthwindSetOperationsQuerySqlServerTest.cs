@@ -9,20 +9,21 @@ using Xunit.Abstractions;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class NorthwindSetOperationsQuerySqlServerTest : NorthwindSetOperationsQueryRelationalTestBase<
-        NorthwindQuerySqlServerFixture<NoopModelCustomizer>>
+    public class NorthwindSetOperationsQuerySqlServerTest
+        : NorthwindSetOperationsQueryRelationalTestBase<
+              NorthwindQuerySqlServerFixture<NoopModelCustomizer>
+          >
     {
         public NorthwindSetOperationsQuerySqlServerTest(
             NorthwindQuerySqlServerFixture<NoopModelCustomizer> fixture,
-            ITestOutputHelper testOutputHelper)
-            : base(fixture)
+            ITestOutputHelper testOutputHelper
+        ) : base(fixture)
         {
             ClearLog();
             //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
         }
 
-        protected override bool CanExecuteQueryString
-            => true;
+        protected override bool CanExecuteQueryString => true;
 
         public override async Task Union(bool async)
         {
@@ -35,7 +36,8 @@ WHERE [c].[City] = N'Berlin'
 UNION
 SELECT [c0].[CustomerID], [c0].[Address], [c0].[City], [c0].[CompanyName], [c0].[ContactName], [c0].[ContactTitle], [c0].[Country], [c0].[Fax], [c0].[Phone], [c0].[PostalCode], [c0].[Region]
 FROM [Customers] AS [c0]
-WHERE [c0].[City] = N'London'");
+WHERE [c0].[City] = N'London'"
+            );
         }
 
         public override async Task Concat(bool async)
@@ -49,7 +51,8 @@ WHERE [c].[City] = N'Berlin'
 UNION ALL
 SELECT [c0].[CustomerID], [c0].[Address], [c0].[City], [c0].[CompanyName], [c0].[ContactName], [c0].[ContactTitle], [c0].[Country], [c0].[Fax], [c0].[Phone], [c0].[PostalCode], [c0].[Region]
 FROM [Customers] AS [c0]
-WHERE [c0].[City] = N'London'");
+WHERE [c0].[City] = N'London'"
+            );
         }
 
         public override async Task Intersect(bool async)
@@ -63,7 +66,8 @@ WHERE [c].[City] = N'London'
 INTERSECT
 SELECT [c0].[CustomerID], [c0].[Address], [c0].[City], [c0].[CompanyName], [c0].[ContactName], [c0].[ContactTitle], [c0].[Country], [c0].[Fax], [c0].[Phone], [c0].[PostalCode], [c0].[Region]
 FROM [Customers] AS [c0]
-WHERE [c0].[ContactName] LIKE N'%Thomas%'");
+WHERE [c0].[ContactName] LIKE N'%Thomas%'"
+            );
         }
 
         public override async Task Except(bool async)
@@ -77,7 +81,8 @@ WHERE [c].[City] = N'London'
 EXCEPT
 SELECT [c0].[CustomerID], [c0].[Address], [c0].[City], [c0].[CompanyName], [c0].[ContactName], [c0].[ContactTitle], [c0].[Country], [c0].[Fax], [c0].[Phone], [c0].[PostalCode], [c0].[Region]
 FROM [Customers] AS [c0]
-WHERE [c0].[ContactName] LIKE N'%Thomas%'");
+WHERE [c0].[ContactName] LIKE N'%Thomas%'"
+            );
         }
 
         public override async Task Union_OrderBy_Skip_Take(bool async)
@@ -98,7 +103,8 @@ FROM (
     WHERE [c0].[City] = N'London'
 ) AS [t]
 ORDER BY [t].[ContactName]
-OFFSET @__p_0 ROWS FETCH NEXT @__p_0 ROWS ONLY");
+OFFSET @__p_0 ROWS FETCH NEXT @__p_0 ROWS ONLY"
+            );
         }
 
         public override async Task Union_Where(bool async)
@@ -116,7 +122,8 @@ FROM (
     FROM [Customers] AS [c0]
     WHERE [c0].[City] = N'London'
 ) AS [t]
-WHERE [t].[ContactName] LIKE N'%Thomas%'");
+WHERE [t].[ContactName] LIKE N'%Thomas%'"
+            );
         }
 
         public override async Task Union_Skip_Take_OrderBy_ThenBy_Where(bool async)
@@ -142,7 +149,8 @@ FROM (
     OFFSET @__p_0 ROWS
 ) AS [t0]
 WHERE [t0].[ContactName] LIKE N'%Thomas%'
-ORDER BY [t0].[Region], [t0].[City]");
+ORDER BY [t0].[Region], [t0].[City]"
+            );
         }
 
         public override async Task Union_Union(bool async)
@@ -160,7 +168,8 @@ WHERE [c0].[City] = N'London'
 UNION
 SELECT [c1].[CustomerID], [c1].[Address], [c1].[City], [c1].[CompanyName], [c1].[ContactName], [c1].[ContactTitle], [c1].[Country], [c1].[Fax], [c1].[Phone], [c1].[PostalCode], [c1].[Region]
 FROM [Customers] AS [c1]
-WHERE [c1].[City] = N'Mannheim'");
+WHERE [c1].[City] = N'Mannheim'"
+            );
         }
 
         public override async Task Union_Intersect(bool async)
@@ -180,7 +189,8 @@ WHERE [c1].[City] = N'Mannheim'");
 INTERSECT
 SELECT [c1].[CustomerID], [c1].[Address], [c1].[City], [c1].[CompanyName], [c1].[ContactName], [c1].[ContactTitle], [c1].[Country], [c1].[Fax], [c1].[Phone], [c1].[PostalCode], [c1].[Region]
 FROM [Customers] AS [c1]
-WHERE [c1].[ContactName] LIKE N'%Thomas%'");
+WHERE [c1].[ContactName] LIKE N'%Thomas%'"
+            );
         }
 
         [ConditionalTheory]
@@ -215,7 +225,8 @@ FROM (
         WHERE [c1].[City] = N'Mannheim'
     ) AS [t1]
 ) AS [t2]
-ORDER BY [t2].[CustomerID]");
+ORDER BY [t2].[CustomerID]"
+            );
         }
 
         public override async Task Select_Union(bool async)
@@ -229,7 +240,8 @@ WHERE [c].[City] = N'Berlin'
 UNION
 SELECT [c0].[Address]
 FROM [Customers] AS [c0]
-WHERE [c0].[City] = N'London'");
+WHERE [c0].[City] = N'London'"
+            );
         }
 
         public override async Task Union_Select(bool async)
@@ -247,7 +259,8 @@ FROM (
     FROM [Customers] AS [c0]
     WHERE [c0].[City] = N'London'
 ) AS [t]
-WHERE [t].[Address] LIKE N'%Hanover%'");
+WHERE [t].[Address] LIKE N'%Hanover%'"
+            );
         }
 
         public override async Task Union_Select_scalar(bool async)
@@ -262,7 +275,8 @@ FROM (
     EXCEPT
     SELECT [c0].[CustomerID], [c0].[Address], [c0].[City], [c0].[CompanyName], [c0].[ContactName], [c0].[ContactTitle], [c0].[Country], [c0].[Fax], [c0].[Phone], [c0].[PostalCode], [c0].[Region]
     FROM [Customers] AS [c0]
-) AS [t]");
+) AS [t]"
+            );
         }
 
         public override async Task Union_with_anonymous_type_projection(bool async)
@@ -279,7 +293,8 @@ FROM (
     SELECT [c0].[CustomerID], [c0].[Address], [c0].[City], [c0].[CompanyName], [c0].[ContactName], [c0].[ContactTitle], [c0].[Country], [c0].[Fax], [c0].[Phone], [c0].[PostalCode], [c0].[Region]
     FROM [Customers] AS [c0]
     WHERE [c0].[CompanyName] IS NOT NULL AND ([c0].[CompanyName] LIKE N'B%')
-) AS [t]");
+) AS [t]"
+            );
         }
 
         public override async Task Select_Union_unrelated(bool async)
@@ -296,10 +311,13 @@ FROM (
     FROM [Products] AS [p]
 ) AS [t]
 WHERE [t].[ContactName] IS NOT NULL AND ([t].[ContactName] LIKE N'C%')
-ORDER BY [t].[ContactName]");
+ORDER BY [t].[ContactName]"
+            );
         }
 
-        public override async Task Select_Union_different_fields_in_anonymous_with_subquery(bool async)
+        public override async Task Select_Union_different_fields_in_anonymous_with_subquery(
+            bool async
+        )
         {
             await base.Select_Union_different_fields_in_anonymous_with_subquery(async);
 
@@ -323,7 +341,8 @@ FROM (
     OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
 ) AS [t0]
 WHERE [t0].[Foo] = N'Berlin'
-ORDER BY [t0].[Foo]");
+ORDER BY [t0].[Foo]"
+            );
         }
 
         public override async Task Union_Include(bool async)
@@ -342,7 +361,8 @@ FROM (
     WHERE [c0].[City] = N'London'
 ) AS [t]
 LEFT JOIN [Orders] AS [o] ON [t].[CustomerID] = [o].[CustomerID]
-ORDER BY [t].[CustomerID]");
+ORDER BY [t].[CustomerID]"
+            );
         }
 
         public override async Task Include_Union(bool async)
@@ -361,7 +381,8 @@ FROM (
     WHERE [c0].[City] = N'London'
 ) AS [t]
 LEFT JOIN [Orders] AS [o] ON [t].[CustomerID] = [o].[CustomerID]
-ORDER BY [t].[CustomerID]");
+ORDER BY [t].[CustomerID]"
+            );
         }
 
         public override async Task Select_Except_reference_projection(bool async)
@@ -376,7 +397,8 @@ EXCEPT
 SELECT [c0].[CustomerID], [c0].[Address], [c0].[City], [c0].[CompanyName], [c0].[ContactName], [c0].[ContactTitle], [c0].[Country], [c0].[Fax], [c0].[Phone], [c0].[PostalCode], [c0].[Region]
 FROM [Orders] AS [o0]
 LEFT JOIN [Customers] AS [c0] ON [o0].[CustomerID] = [c0].[CustomerID]
-WHERE [o0].[CustomerID] = N'ALFKI'");
+WHERE [o0].[CustomerID] = N'ALFKI'"
+            );
         }
 
         public override async Task SubSelect_Union(bool async)
@@ -394,7 +416,8 @@ SELECT [c0].[CustomerID], [c0].[Address], [c0].[City], [c0].[CompanyName], [c0].
     SELECT COUNT(*)
     FROM [Orders] AS [o0]
     WHERE [c0].[CustomerID] = [o0].[CustomerID]) AS [Orders]
-FROM [Customers] AS [c0]");
+FROM [Customers] AS [c0]"
+            );
         }
 
         public override async Task GroupBy_Select_Union(bool async)
@@ -410,7 +433,8 @@ UNION
 SELECT [c0].[CustomerID], COUNT(*) AS [Count]
 FROM [Customers] AS [c0]
 WHERE [c0].[City] = N'London'
-GROUP BY [c0].[CustomerID]");
+GROUP BY [c0].[CustomerID]"
+            );
         }
 
         public override async Task Union_over_columns_with_different_nullability(bool async)
@@ -422,7 +446,8 @@ GROUP BY [c0].[CustomerID]");
 FROM [Customers] AS [c]
 UNION ALL
 SELECT NULL AS [c]
-FROM [Customers] AS [c0]");
+FROM [Customers] AS [c0]"
+            );
         }
 
         public override async Task Union_over_column_column(bool async)
@@ -434,7 +459,8 @@ FROM [Customers] AS [c0]");
 FROM [Orders] AS [o]
 UNION
 SELECT [o0].[OrderID]
-FROM [Orders] AS [o0]");
+FROM [Orders] AS [o0]"
+            );
         }
 
         public override async Task Union_over_column_function(bool async)
@@ -447,7 +473,8 @@ FROM [Orders] AS [o]
 UNION
 SELECT COUNT(*) AS [OrderID]
 FROM [Orders] AS [o0]
-GROUP BY [o0].[OrderID]");
+GROUP BY [o0].[OrderID]"
+            );
         }
 
         public override async Task Union_over_column_constant(bool async)
@@ -459,7 +486,8 @@ GROUP BY [o0].[OrderID]");
 FROM [Orders] AS [o]
 UNION
 SELECT 8 AS [OrderID]
-FROM [Orders] AS [o0]");
+FROM [Orders] AS [o0]"
+            );
         }
 
         public override async Task Union_over_column_unary(bool async)
@@ -471,7 +499,8 @@ FROM [Orders] AS [o0]");
 FROM [Orders] AS [o]
 UNION
 SELECT -[o0].[OrderID] AS [OrderID]
-FROM [Orders] AS [o0]");
+FROM [Orders] AS [o0]"
+            );
         }
 
         public override async Task Union_over_column_binary(bool async)
@@ -483,7 +512,8 @@ FROM [Orders] AS [o0]");
 FROM [Orders] AS [o]
 UNION
 SELECT [o0].[OrderID] + 1 AS [OrderID]
-FROM [Orders] AS [o0]");
+FROM [Orders] AS [o0]"
+            );
         }
 
         public override async Task Union_over_column_scalarsubquery(bool async)
@@ -498,7 +528,8 @@ SELECT (
     SELECT COUNT(*)
     FROM [Order Details] AS [o1]
     WHERE [o0].[OrderID] = [o1].[OrderID]) AS [OrderID]
-FROM [Orders] AS [o0]");
+FROM [Orders] AS [o0]"
+            );
         }
 
         public override async Task Union_over_function_column(bool async)
@@ -511,7 +542,8 @@ FROM [Orders] AS [o]
 GROUP BY [o].[OrderID]
 UNION
 SELECT [o0].[OrderID] AS [c]
-FROM [Orders] AS [o0]");
+FROM [Orders] AS [o0]"
+            );
         }
 
         public override async Task Union_over_function_function(bool async)
@@ -525,7 +557,8 @@ GROUP BY [o].[OrderID]
 UNION
 SELECT COUNT(*) AS [c]
 FROM [Orders] AS [o0]
-GROUP BY [o0].[OrderID]");
+GROUP BY [o0].[OrderID]"
+            );
         }
 
         public override async Task Union_over_function_constant(bool async)
@@ -538,7 +571,8 @@ FROM [Orders] AS [o]
 GROUP BY [o].[OrderID]
 UNION
 SELECT 8 AS [c]
-FROM [Orders] AS [o0]");
+FROM [Orders] AS [o0]"
+            );
         }
 
         public override async Task Union_over_function_unary(bool async)
@@ -551,7 +585,8 @@ FROM [Orders] AS [o]
 GROUP BY [o].[OrderID]
 UNION
 SELECT -[o0].[OrderID] AS [c]
-FROM [Orders] AS [o0]");
+FROM [Orders] AS [o0]"
+            );
         }
 
         public override async Task Union_over_function_binary(bool async)
@@ -564,7 +599,8 @@ FROM [Orders] AS [o]
 GROUP BY [o].[OrderID]
 UNION
 SELECT [o0].[OrderID] + 1 AS [c]
-FROM [Orders] AS [o0]");
+FROM [Orders] AS [o0]"
+            );
         }
 
         public override async Task Union_over_function_scalarsubquery(bool async)
@@ -580,7 +616,8 @@ SELECT (
     SELECT COUNT(*)
     FROM [Order Details] AS [o1]
     WHERE [o0].[OrderID] = [o1].[OrderID]) AS [c]
-FROM [Orders] AS [o0]");
+FROM [Orders] AS [o0]"
+            );
         }
 
         public override async Task Union_over_constant_column(bool async)
@@ -592,7 +629,8 @@ FROM [Orders] AS [o0]");
 FROM [Orders] AS [o]
 UNION
 SELECT [o0].[OrderID] AS [c]
-FROM [Orders] AS [o0]");
+FROM [Orders] AS [o0]"
+            );
         }
 
         public override async Task Union_over_constant_function(bool async)
@@ -605,7 +643,8 @@ FROM [Orders] AS [o]
 UNION
 SELECT COUNT(*) AS [c]
 FROM [Orders] AS [o0]
-GROUP BY [o0].[OrderID]");
+GROUP BY [o0].[OrderID]"
+            );
         }
 
         public override async Task Union_over_constant_constant(bool async)
@@ -617,7 +656,8 @@ GROUP BY [o0].[OrderID]");
 FROM [Orders] AS [o]
 UNION
 SELECT 8 AS [c]
-FROM [Orders] AS [o0]");
+FROM [Orders] AS [o0]"
+            );
         }
 
         public override async Task Union_over_constant_unary(bool async)
@@ -629,7 +669,8 @@ FROM [Orders] AS [o0]");
 FROM [Orders] AS [o]
 UNION
 SELECT -[o0].[OrderID] AS [c]
-FROM [Orders] AS [o0]");
+FROM [Orders] AS [o0]"
+            );
         }
 
         public override async Task Union_over_constant_binary(bool async)
@@ -641,7 +682,8 @@ FROM [Orders] AS [o0]");
 FROM [Orders] AS [o]
 UNION
 SELECT [o0].[OrderID] + 1 AS [c]
-FROM [Orders] AS [o0]");
+FROM [Orders] AS [o0]"
+            );
         }
 
         public override async Task Union_over_constant_scalarsubquery(bool async)
@@ -656,7 +698,8 @@ SELECT (
     SELECT COUNT(*)
     FROM [Order Details] AS [o1]
     WHERE [o0].[OrderID] = [o1].[OrderID]) AS [c]
-FROM [Orders] AS [o0]");
+FROM [Orders] AS [o0]"
+            );
         }
 
         public override async Task Union_over_unary_column(bool async)
@@ -668,7 +711,8 @@ FROM [Orders] AS [o0]");
 FROM [Orders] AS [o]
 UNION
 SELECT [o0].[OrderID] AS [c]
-FROM [Orders] AS [o0]");
+FROM [Orders] AS [o0]"
+            );
         }
 
         public override async Task Union_over_unary_function(bool async)
@@ -681,7 +725,8 @@ FROM [Orders] AS [o]
 UNION
 SELECT COUNT(*) AS [c]
 FROM [Orders] AS [o0]
-GROUP BY [o0].[OrderID]");
+GROUP BY [o0].[OrderID]"
+            );
         }
 
         public override async Task Union_over_unary_constant(bool async)
@@ -693,7 +738,8 @@ GROUP BY [o0].[OrderID]");
 FROM [Orders] AS [o]
 UNION
 SELECT 8 AS [c]
-FROM [Orders] AS [o0]");
+FROM [Orders] AS [o0]"
+            );
         }
 
         public override async Task Union_over_unary_unary(bool async)
@@ -705,7 +751,8 @@ FROM [Orders] AS [o0]");
 FROM [Orders] AS [o]
 UNION
 SELECT -[o0].[OrderID] AS [c]
-FROM [Orders] AS [o0]");
+FROM [Orders] AS [o0]"
+            );
         }
 
         public override async Task Union_over_unary_binary(bool async)
@@ -717,7 +764,8 @@ FROM [Orders] AS [o0]");
 FROM [Orders] AS [o]
 UNION
 SELECT [o0].[OrderID] + 1 AS [c]
-FROM [Orders] AS [o0]");
+FROM [Orders] AS [o0]"
+            );
         }
 
         public override async Task Union_over_unary_scalarsubquery(bool async)
@@ -732,7 +780,8 @@ SELECT (
     SELECT COUNT(*)
     FROM [Order Details] AS [o1]
     WHERE [o0].[OrderID] = [o1].[OrderID]) AS [c]
-FROM [Orders] AS [o0]");
+FROM [Orders] AS [o0]"
+            );
         }
 
         public override async Task Union_over_binary_column(bool async)
@@ -744,7 +793,8 @@ FROM [Orders] AS [o0]");
 FROM [Orders] AS [o]
 UNION
 SELECT [o0].[OrderID] AS [c]
-FROM [Orders] AS [o0]");
+FROM [Orders] AS [o0]"
+            );
         }
 
         public override async Task Union_over_binary_function(bool async)
@@ -757,7 +807,8 @@ FROM [Orders] AS [o]
 UNION
 SELECT COUNT(*) AS [c]
 FROM [Orders] AS [o0]
-GROUP BY [o0].[OrderID]");
+GROUP BY [o0].[OrderID]"
+            );
         }
 
         public override async Task Union_over_binary_constant(bool async)
@@ -769,7 +820,8 @@ GROUP BY [o0].[OrderID]");
 FROM [Orders] AS [o]
 UNION
 SELECT 8 AS [c]
-FROM [Orders] AS [o0]");
+FROM [Orders] AS [o0]"
+            );
         }
 
         public override async Task Union_over_binary_unary(bool async)
@@ -781,7 +833,8 @@ FROM [Orders] AS [o0]");
 FROM [Orders] AS [o]
 UNION
 SELECT -[o0].[OrderID] AS [c]
-FROM [Orders] AS [o0]");
+FROM [Orders] AS [o0]"
+            );
         }
 
         public override async Task Union_over_binary_binary(bool async)
@@ -793,7 +846,8 @@ FROM [Orders] AS [o0]");
 FROM [Orders] AS [o]
 UNION
 SELECT [o0].[OrderID] + 1 AS [c]
-FROM [Orders] AS [o0]");
+FROM [Orders] AS [o0]"
+            );
         }
 
         public override async Task Union_over_binary_scalarsubquery(bool async)
@@ -808,7 +862,8 @@ SELECT (
     SELECT COUNT(*)
     FROM [Order Details] AS [o1]
     WHERE [o0].[OrderID] = [o1].[OrderID]) AS [c]
-FROM [Orders] AS [o0]");
+FROM [Orders] AS [o0]"
+            );
         }
 
         public override async Task Union_over_scalarsubquery_column(bool async)
@@ -823,7 +878,8 @@ FROM [Orders] AS [o0]");
 FROM [Orders] AS [o]
 UNION
 SELECT [o1].[OrderID] AS [c]
-FROM [Orders] AS [o1]");
+FROM [Orders] AS [o1]"
+            );
         }
 
         public override async Task Union_over_scalarsubquery_function(bool async)
@@ -839,7 +895,8 @@ FROM [Orders] AS [o]
 UNION
 SELECT COUNT(*) AS [c]
 FROM [Orders] AS [o1]
-GROUP BY [o1].[OrderID]");
+GROUP BY [o1].[OrderID]"
+            );
         }
 
         public override async Task Union_over_scalarsubquery_constant(bool async)
@@ -854,7 +911,8 @@ GROUP BY [o1].[OrderID]");
 FROM [Orders] AS [o]
 UNION
 SELECT 8 AS [c]
-FROM [Orders] AS [o1]");
+FROM [Orders] AS [o1]"
+            );
         }
 
         public override async Task Union_over_scalarsubquery_unary(bool async)
@@ -869,7 +927,8 @@ FROM [Orders] AS [o1]");
 FROM [Orders] AS [o]
 UNION
 SELECT -[o1].[OrderID] AS [c]
-FROM [Orders] AS [o1]");
+FROM [Orders] AS [o1]"
+            );
         }
 
         public override async Task Union_over_scalarsubquery_binary(bool async)
@@ -884,7 +943,8 @@ FROM [Orders] AS [o1]");
 FROM [Orders] AS [o]
 UNION
 SELECT [o1].[OrderID] + 1 AS [c]
-FROM [Orders] AS [o1]");
+FROM [Orders] AS [o1]"
+            );
         }
 
         public override async Task Union_over_scalarsubquery_scalarsubquery(bool async)
@@ -902,7 +962,8 @@ SELECT (
     SELECT COUNT(*)
     FROM [Order Details] AS [o2]
     WHERE [o1].[OrderID] = [o2].[OrderID]) AS [c]
-FROM [Orders] AS [o1]");
+FROM [Orders] AS [o1]"
+            );
         }
 
         public override async Task OrderBy_Take_Union(bool async)
@@ -924,7 +985,8 @@ FROM (
     SELECT TOP(@__p_0) [c0].[CustomerID], [c0].[Address], [c0].[City], [c0].[CompanyName], [c0].[ContactName], [c0].[ContactTitle], [c0].[Country], [c0].[Fax], [c0].[Phone], [c0].[PostalCode], [c0].[Region]
     FROM [Customers] AS [c0]
     ORDER BY [c0].[ContactName]
-) AS [t1]");
+) AS [t1]"
+            );
         }
 
         public override async Task Collection_projection_after_set_operation(bool async)
@@ -943,7 +1005,8 @@ FROM (
     WHERE [c0].[CustomerID] LIKE N'F%'
 ) AS [t]
 LEFT JOIN [Orders] AS [o] ON [t].[CustomerID] = [o].[CustomerID]
-ORDER BY [t].[CustomerID]");
+ORDER BY [t].[CustomerID]"
+            );
         }
 
         public override async Task Concat_with_one_side_being_GroupBy_aggregate(bool async)
@@ -958,7 +1021,8 @@ WHERE [c].[City] = N'Seatte'
 UNION
 SELECT MAX([o0].[OrderDate]) AS [OrderDate]
 FROM [Orders] AS [o0]
-GROUP BY [o0].[CustomerID]");
+GROUP BY [o0].[CustomerID]"
+            );
         }
 
         public override async Task Union_on_entity_with_correlated_collection(bool async)
@@ -979,10 +1043,13 @@ FROM (
     WHERE [o0].[OrderID] < 10250
 ) AS [t]
 LEFT JOIN [Orders] AS [o1] ON [t].[CustomerID] = [o1].[CustomerID]
-ORDER BY [t].[CustomerID]");
+ORDER BY [t].[CustomerID]"
+            );
         }
 
-        public override async Task Union_on_entity_plus_other_column_with_correlated_collection(bool async)
+        public override async Task Union_on_entity_plus_other_column_with_correlated_collection(
+            bool async
+        )
         {
             await base.Union_on_entity_plus_other_column_with_correlated_collection(async);
 
@@ -1000,13 +1067,13 @@ FROM (
     WHERE [o0].[OrderID] < 10250
 ) AS [t]
 LEFT JOIN [Orders] AS [o1] ON [t].[CustomerID] = [o1].[CustomerID]
-ORDER BY [t].[CustomerID], [t].[OrderDate]");
+ORDER BY [t].[CustomerID], [t].[OrderDate]"
+            );
         }
 
-        private void AssertSql(params string[] expected)
-            => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+        private void AssertSql(params string[] expected) =>
+            Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
-        protected override void ClearLog()
-            => Fixture.TestSqlLoggerFactory.Clear();
+        protected override void ClearLog() => Fixture.TestSqlLoggerFactory.Clear();
     }
 }

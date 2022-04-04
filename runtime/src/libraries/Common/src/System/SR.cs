@@ -8,7 +8,12 @@ namespace System
 {
     internal static partial class SR
     {
-        private static readonly bool s_usingResourceKeys = AppContext.TryGetSwitch("System.Resources.UseSystemResourceKeys", out bool usingResourceKeys) ? usingResourceKeys : false;
+        private static readonly bool s_usingResourceKeys = AppContext.TryGetSwitch(
+            "System.Resources.UseSystemResourceKeys",
+            out bool usingResourceKeys
+        )
+          ? usingResourceKeys
+          : false;
 
         // This method is used to decide if we need to append the exception message parameters to the message when calling SR.Format.
         // by default it returns the value of System.Resources.UseSystemResourceKeys AppContext switch or false if not specified.
@@ -28,9 +33,9 @@ namespace System
             {
                 resourceString =
 #if SYSTEM_PRIVATE_CORELIB
-                    InternalGetResourceString(resourceKey);
+                InternalGetResourceString(resourceKey);
 #else
-                    ResourceManager.GetString(resourceKey);
+                ResourceManager.GetString(resourceKey);
 #endif
             }
             catch (MissingManifestResourceException) { }
@@ -42,7 +47,9 @@ namespace System
         {
             string resourceString = GetResourceString(resourceKey);
 
-            return resourceKey == resourceString || resourceString == null ? defaultString : resourceString;
+            return resourceKey == resourceString || resourceString == null
+              ? defaultString
+              : resourceString;
         }
 
         internal static string Format(string resourceFormat, object? p1)
@@ -100,7 +107,12 @@ namespace System
             return string.Format(provider, resourceFormat, p1);
         }
 
-        internal static string Format(IFormatProvider? provider, string resourceFormat, object? p1, object? p2)
+        internal static string Format(
+            IFormatProvider? provider,
+            string resourceFormat,
+            object? p1,
+            object? p2
+        )
         {
             if (UsingResourceKeys())
             {
@@ -110,7 +122,13 @@ namespace System
             return string.Format(provider, resourceFormat, p1, p2);
         }
 
-        internal static string Format(IFormatProvider? provider, string resourceFormat, object? p1, object? p2, object? p3)
+        internal static string Format(
+            IFormatProvider? provider,
+            string resourceFormat,
+            object? p1,
+            object? p2,
+            object? p3
+        )
         {
             if (UsingResourceKeys())
             {
@@ -120,7 +138,11 @@ namespace System
             return string.Format(provider, resourceFormat, p1, p2, p3);
         }
 
-        internal static string Format(IFormatProvider? provider, string resourceFormat, params object?[]? args)
+        internal static string Format(
+            IFormatProvider? provider,
+            string resourceFormat,
+            params object?[]? args
+        )
         {
             if (args != null)
             {

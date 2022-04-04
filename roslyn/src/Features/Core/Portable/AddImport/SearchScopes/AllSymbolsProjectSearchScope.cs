@@ -24,16 +24,22 @@ namespace Microsoft.CodeAnalysis.AddImport
                 AbstractAddImportFeatureService<TSimpleNameSyntax> provider,
                 Project project,
                 bool exact,
-                CancellationToken cancellationToken)
-                : base(provider, project, exact, cancellationToken)
-            {
-            }
+                CancellationToken cancellationToken
+            ) : base(provider, project, exact, cancellationToken) { }
 
             protected override async Task<ImmutableArray<ISymbol>> FindDeclarationsAsync(
-                SymbolFilter filter, SearchQuery searchQuery)
+                SymbolFilter filter,
+                SearchQuery searchQuery
+            )
             {
-                var declarations = await DeclarationFinder.FindAllDeclarationsWithNormalQueryAsync(
-                    _project, searchQuery, filter, CancellationToken).ConfigureAwait(false);
+                var declarations = await DeclarationFinder
+                    .FindAllDeclarationsWithNormalQueryAsync(
+                        _project,
+                        searchQuery,
+                        filter,
+                        CancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 return declarations;
             }

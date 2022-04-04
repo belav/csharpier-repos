@@ -9,7 +9,6 @@ using Microsoft.CodeAnalysis.Test.Utilities;
 using Roslyn.Test.Utilities;
 using Xunit;
 
-
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public class IOperationTests_IForLoopStatement : SemanticModelTestBase
@@ -18,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForLoopStatement_ForSimpleLoop()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Main()
@@ -32,7 +32,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'for (int i  ... }')
   Locals: Local_1: System.Int32 i
   Condition: 
@@ -84,7 +85,8 @@ IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (Operat
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForLoopStatement_TrueCondition()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Main()
@@ -100,7 +102,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'for (j = 0; ... }')
   Condition: 
     ILiteralOperation (OperationKind.Literal, Type: System.Boolean, Constant: True) (Syntax: 'true')
@@ -146,7 +149,8 @@ IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (Operat
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForLoopStatement_FalseCondition()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Main()
@@ -162,7 +166,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'for (j = 0; ... }')
   Condition: 
     ILiteralOperation (OperationKind.Literal, Type: System.Boolean, Constant: False) (Syntax: 'false')
@@ -208,7 +213,8 @@ IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (Operat
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForLoopStatement_WithContinue()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Main()
@@ -224,7 +230,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'for (i = 0, ... }')
   Condition: 
     IBinaryOperation (BinaryOperatorKind.LessThan) (OperationKind.Binary, Type: System.Boolean) (Syntax: 'i < 5')
@@ -291,7 +298,8 @@ IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (Operat
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForLoopStatement_WithBreak()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Main()
@@ -307,7 +315,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'for (i = 0, ... }')
   Condition: 
     IBinaryOperation (BinaryOperatorKind.LessThan) (OperationKind.Binary, Type: System.Boolean) (Syntax: 'i < 5')
@@ -374,7 +383,8 @@ IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (Operat
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForLoopStatement_WithNoStatement()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Main()
@@ -389,7 +399,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'for (;;) ... }')
   Condition: 
     null
@@ -427,7 +438,8 @@ IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (Operat
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForLoopStatement_MultipleInitializer()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Main()
@@ -441,7 +453,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'for (i = i  ... }')
   Condition: 
     IBinaryOperation (BinaryOperatorKind.LessThan) (OperationKind.Binary, Type: System.Boolean) (Syntax: 'j < 2')
@@ -505,7 +518,8 @@ IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (Operat
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForLoopStatement_InitializerMissing()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Main(string[] args)
@@ -518,7 +532,8 @@ class C
 }
 
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'for (; i <  ... }')
   Condition: 
     IBinaryOperation (BinaryOperatorKind.LessThan) (OperationKind.Binary, Type: System.Boolean) (Syntax: 'i < 10')
@@ -549,7 +564,8 @@ IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (Operat
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForLoopStatement_DecreasingIterator()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Main(string[] args)
@@ -561,7 +577,8 @@ class C
 }
 
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'for (int k  ... }')
   Locals: Local_1: System.Int32 k
   Condition: 
@@ -602,7 +619,8 @@ IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (Operat
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForLoopStatement_MethodCall()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Main(string[] args)
@@ -618,7 +636,8 @@ class C
 }
 
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'for (Initia ... }')
   Condition: 
     IInvocationOperation (System.Boolean C.Conditional()) (OperationKind.Invocation, Type: System.Boolean) (Syntax: 'Conditional()')
@@ -649,7 +668,8 @@ IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (Operat
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForLoopStatement_MissingForBody()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Main(string[] args)
@@ -658,7 +678,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'for (int i  ...  = i + 1) ;')
   Locals: Local_1: System.Int32 i
   Condition: 
@@ -699,7 +720,8 @@ IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (Operat
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForLoopStatement_Nested()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Main(string[] args)
@@ -713,7 +735,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'for (int i  ... }')
   Locals: Local_1: System.Int32 i
   Condition: 
@@ -786,7 +809,8 @@ IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (Operat
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForLoopStatement_ChangeOuterVariableInInnerLoop()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Main(string[] args)
@@ -802,7 +826,8 @@ class C
 }
 
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'for (int i  ... }')
   Locals: Local_1: System.Int32 i
   Condition: 
@@ -882,7 +907,8 @@ IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (Operat
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForLoopStatement_InnerLoopRefOuterIteration()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Main(string[] args)
@@ -897,7 +923,8 @@ class C
 }
 
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'for (int i  ... }')
   Locals: Local_1: System.Int32 i
   Condition: 
@@ -974,7 +1001,8 @@ IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (Operat
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForLoopStatement_BreakFromNestedLoop()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Main(string[] args)
@@ -991,7 +1019,8 @@ class C
 }
 
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'for (int i  ... }')
   Locals: Local_1: System.Int32 i
   Condition: 
@@ -1075,7 +1104,8 @@ IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (Operat
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForLoopStatement_ContinueForNestedLoop()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1093,7 +1123,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'for (int i  ... }')
   Locals: Local_1: System.Int32 i
   Condition: 
@@ -1202,7 +1233,8 @@ IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (Operat
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForLoopStatement_GotoForNestedLoop_1()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1220,7 +1252,8 @@ class C
 }
 
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'for (int i  ... }')
   Locals: Local_1: System.Int32 i
   Condition: 
@@ -1307,7 +1340,8 @@ IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (Operat
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForLoopStatement_ThrowException()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1323,7 +1357,8 @@ class C
 }
 
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'for (int i  ... }')
   Locals: Local_1: System.Int32 i
   Condition: 
@@ -1390,7 +1425,8 @@ IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (Operat
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForLoopStatement_ReturnInFor()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1406,7 +1442,8 @@ class C
 }
 
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'for (int i  ... }')
   Locals: Local_1: System.Int32 i
   Condition: 
@@ -1460,7 +1497,8 @@ IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (Operat
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForLoopStatement_ChangeValueOfInit()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1473,7 +1511,8 @@ class C
 }
 
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'for (int i  ... }')
   Locals: Local_1: System.Int32 i
     Local_2: System.Int32 j
@@ -1526,7 +1565,8 @@ IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (Operat
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForLoopStatement_ChangeValueOfCondition()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1541,7 +1581,8 @@ class C
 }
 
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'for (int i  ... }')
   Locals: Local_1: System.Int32 i
   Condition: 
@@ -1608,7 +1649,8 @@ IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (Operat
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForLoopStatement_UnreachableCode1()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1620,7 +1662,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'for (; fals ... }')
   Condition: 
     ILiteralOperation (OperationKind.Literal, Type: System.Boolean, Constant: False) (Syntax: 'false')
@@ -1646,7 +1689,8 @@ IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (Operat
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForLoopStatement_ObjectInitAsInitializer()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1663,7 +1707,8 @@ public class F
 }
 
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'for (F f =  ... }')
   Locals: Local_1: F f
   Condition: 
@@ -1728,7 +1773,8 @@ IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (Operat
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForLoopStatement_DynamicInFor()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1765,7 +1811,8 @@ public class myFor
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'for (d.Init ... }')
   Condition: 
     IUnaryOperation (UnaryOperatorKind.True) (OperationKind.Unary, Type: System.Boolean, IsImplicit) (Syntax: 'd.Done')
@@ -1810,7 +1857,8 @@ IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (Operat
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForLoopStatement_VarInFor()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Main(string[] args)
@@ -1820,7 +1868,8 @@ class C
 }
 
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'for (var i  ...  = i + 1) ;')
   Locals: Local_1: System.Int32 i
   Condition: 
@@ -1861,7 +1910,8 @@ IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (Operat
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForLoopStatement_QueryInInit()
         {
-            string source = @"
+            string source =
+                @"
 using System.Linq;
 using System.Collections.Generic;
 class C
@@ -1882,7 +1932,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'for (IEnume ... }')
   Locals: Local_1: System.Collections.Generic.IEnumerable<System.String> str
   Condition: 
@@ -2011,7 +2062,8 @@ IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (Operat
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForLoopStatement_QueryInBody()
         {
-            string source = @"
+            string source =
+                @"
 using System.Linq;
 using System.Collections.Generic;
 class C
@@ -2038,7 +2090,8 @@ class C
 }
 
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'for (int i  ... }')
   Locals: Local_1: System.Int32 i
   Condition: 
@@ -2147,7 +2200,8 @@ IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (Operat
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForLoopStatement_ExpressiontreeInInit()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Main(string[] args)
@@ -2163,7 +2217,8 @@ class C
 }
 
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'for (e = x  ... }')
   Condition: 
     IBinaryOperation (BinaryOperatorKind.LessThan) (OperationKind.Binary, Type: System.Boolean) (Syntax: 'i < 5')
@@ -2236,7 +2291,8 @@ IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (Operat
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForLoopStatement_ExpressiontreeInIterator()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Main(string[] args)
@@ -2251,7 +2307,8 @@ class C
 }
 
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'for (int i  ... }')
   Locals: Local_1: System.Int32 i
   Condition: 
@@ -2340,7 +2397,8 @@ IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (Operat
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForLoopStatement_CustomerTypeInFor()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Main(string[] args)
@@ -2356,7 +2414,8 @@ public class C1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'for (C1 i = ... l; i++) { }')
   Locals: Local_1: C1 i
   Condition: 
@@ -2400,7 +2459,8 @@ IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (Operat
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForLoopStatement_PostFixIncrementInFor()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -2413,7 +2473,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'for (int j  ... }')
   Locals: Local_1: System.Int32 j
   Condition: 
@@ -2460,7 +2521,8 @@ IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (Operat
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForLoopStatement_PreFixIncrementInFor()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -2474,7 +2536,8 @@ class Program
 }
 
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'for (int j  ... }')
   Locals: Local_1: System.Int32 j
   Condition: 
@@ -2521,7 +2584,8 @@ IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (Operat
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForLoopStatement_PreFixIncrementInCondition()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -2533,7 +2597,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'for (int i  ... }')
   Locals: Local_1: System.Int32 i
   Condition: 
@@ -2575,7 +2640,8 @@ IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (Operat
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForLoopStatement_PostFixDecrementInCondition()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -2592,7 +2658,8 @@ class Program
 }
 
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'for (int i  ... }')
   Locals: Local_1: System.Int32 i
   Condition: 
@@ -2643,7 +2710,8 @@ IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (Operat
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForLoopStatement_InfiniteLoopVerify()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -2655,7 +2723,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'for (; true ... }')
   Condition: 
     ILiteralOperation (OperationKind.Literal, Type: System.Boolean, Constant: True) (Syntax: 'true')
@@ -2681,7 +2750,8 @@ IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (Operat
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForLoopStatement_InvalidExpression()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Main(string[] args)
@@ -2692,7 +2762,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null, IsInvalid) (Syntax: 'for (int k  ... 100, j > 5;')
   Locals: Local_1: System.Int32 k
     Local_2: System.Int32 j
@@ -2738,7 +2809,8 @@ IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (Operat
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForLoopStatement_ConditionOutVar()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     private void M()
@@ -2751,7 +2823,8 @@ class P
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'for (var j  ... }')
   Locals: Local_1: System.Int32 j
     Local_2: System.Int32 i
@@ -2836,7 +2909,8 @@ IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (Operat
         [Fact]
         public void IForLoopStatement_InvalidIterationVariableDeclaration()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -2849,7 +2923,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null, IsInvalid) (Syntax: 'for (int i  ... }')
   Locals: Local_1: System.Int32 i
   Condition: 
@@ -2886,7 +2961,8 @@ IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (Operat
         [Fact]
         public void IForLoopStatement_CollectionLocals()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -2903,7 +2979,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'for (; GetB ... }')
   ConditionLocals: Local_1: System.Int32 a
   Condition: 
@@ -2946,14 +3023,19 @@ IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (Operat
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ForStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ForStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IForLoopStatement_MultipleIncrements()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -2971,7 +3053,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'for (;; Get ... }')
   Condition: 
     null
@@ -3010,14 +3093,19 @@ IForLoopOperation (LoopKind.For, Continue Label Id: 0, Exit Label Id: 1) (Operat
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ForStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ForStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ForFlow_01()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(int result)
@@ -3036,7 +3124,8 @@ public sealed class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3169,14 +3258,19 @@ Block[B9] - Exit
     Predecessors: [B3]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ForFlow_02()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(int result, int a, int b, bool c)
@@ -3190,7 +3284,8 @@ public sealed class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3272,14 +3367,19 @@ Block[B7] - Exit [UnReachable]
     Predecessors (0)
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ForFlow_03()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(int result, int a, int b, bool c, int i, int j)
@@ -3298,7 +3398,8 @@ public sealed class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3405,14 +3506,19 @@ Block[B9] - Exit
     Predecessors: [B7]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ForFlow_04()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result, bool a, bool b, bool c)
@@ -3426,7 +3532,8 @@ public sealed class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3467,14 +3574,19 @@ Block[B5] - Exit
     Predecessors: [B2] [B3]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ForFlow_05()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(int result, MyClass a, MyClass b)
@@ -3490,7 +3602,8 @@ public sealed class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3594,14 +3707,19 @@ Block[B8] - Exit
     Predecessors: [B2]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ForFlow_06()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result, bool x)
@@ -3616,7 +3734,8 @@ public sealed class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3682,14 +3801,19 @@ Block[B6] - Exit
     Predecessors: [B2]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ForFlow_07()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result, bool x)
@@ -3704,7 +3828,8 @@ public sealed class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3767,7 +3892,11 @@ Block[B5] - Exit
     Predecessors: [B2] [B3]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
     }
 }

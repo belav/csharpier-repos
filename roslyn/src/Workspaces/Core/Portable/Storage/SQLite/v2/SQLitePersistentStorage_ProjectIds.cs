@@ -12,17 +12,22 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
     {
         /// <summary>
         /// Mapping from the workspace's ID for a project, to the ID we use in the DB for the project.
-        /// Kept locally so we don't have to hit the DB for the common case of trying to determine the 
+        /// Kept locally so we don't have to hit the DB for the common case of trying to determine the
         /// DB id for a project.
         /// </summary>
         private readonly ConcurrentDictionary<ProjectId, int> _projectIdToIdMap = new();
 
         /// <summary>
-        /// Given a project, and the name of a stream to read/write, gets the integral DB ID to 
+        /// Given a project, and the name of a stream to read/write, gets the integral DB ID to
         /// use to find the data inside the ProjectData table.
         /// </summary>
         private bool TryGetProjectDataId(
-            SqlConnection connection, ProjectKey project, string name, bool allowWrite, out long dataId)
+            SqlConnection connection,
+            ProjectKey project,
+            string name,
+            bool allowWrite,
+            out long dataId
+        )
         {
             dataId = 0;
 
@@ -57,7 +62,11 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             return id;
         }
 
-        private int? TryGetProjectIdFromDatabase(SqlConnection connection, ProjectKey project, bool allowWrite)
+        private int? TryGetProjectIdFromDatabase(
+            SqlConnection connection,
+            ProjectKey project,
+            bool allowWrite
+        )
         {
             // Key the project off both its path and name.  That way we work properly
             // in host and test scenarios.
@@ -68,7 +77,10 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                 return null;
 
             return TryGetStringId(
-                connection, GetProjectIdString(projectPathId.Value, projectNameId.Value), allowWrite);
+                connection,
+                GetProjectIdString(projectPathId.Value, projectNameId.Value),
+                allowWrite
+            );
         }
     }
 }

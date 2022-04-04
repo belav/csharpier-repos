@@ -13,14 +13,23 @@ namespace Microsoft.CodeAnalysis.Navigation
 {
     internal class DefaultSymbolNavigationService : ISymbolNavigationService
     {
-        public bool TryNavigateToSymbol(ISymbol symbol, Project project, OptionSet? options = null, CancellationToken cancellationToken = default)
-            => false;
+        public bool TryNavigateToSymbol(
+            ISymbol symbol,
+            Project project,
+            OptionSet? options = null,
+            CancellationToken cancellationToken = default
+        ) => false;
 
-        public Task<bool> TrySymbolNavigationNotifyAsync(ISymbol symbol, Project project, CancellationToken cancellationToken)
-            => SpecializedTasks.False;
+        public Task<bool> TrySymbolNavigationNotifyAsync(
+            ISymbol symbol,
+            Project project,
+            CancellationToken cancellationToken
+        ) => SpecializedTasks.False;
 
         public Task<(string filePath, LinePosition linePosition)?> GetExternalNavigationSymbolLocationAsync(
-            DefinitionItem definitionItem, CancellationToken cancellationToken)
+            DefinitionItem definitionItem,
+            CancellationToken cancellationToken
+        )
         {
             return Task.FromResult<(string filePath, LinePosition linePosition)?>(null);
         }

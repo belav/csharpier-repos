@@ -10,13 +10,13 @@ using System.Threading;
 
 /************************
  * Regression test for bug Bug 749068:WatsonCrash: coreclr.dll!Thread::DoAppropriateWaitWorker -- APPLICATION_HANG_BlockedOn_EventHandle c0000194
- * 
+ *
  * Should be run with complus_GCStress=3
- * 
- * During GC, no IO completion threads are created. So if there was no IO completion thread to begin with, 
- * there will be no threads monitoring the event which signals to schedule the corresponding callback, 
+ *
+ * During GC, no IO completion threads are created. So if there was no IO completion thread to begin with,
+ * there will be no threads monitoring the event which signals to schedule the corresponding callback,
  * this blocks whatever code, which is waiting for the callback to finish or unregister it, indefinitely
- * 
+ *
  ************************/
 namespace Prog
 {
@@ -33,18 +33,18 @@ namespace Prog
 
         public void ServiceCallbackOnPositionAvailable(Object state, bool timedOut)
         {
-
             if (this.sessionRegisteredWait == null)
             {
                 this.sessionNotification.Reset();
                 this.sessionRegisteredWait.Unregister(null);
 
-                this.sessionRegisteredWait =
-                        ThreadPool.RegisterWaitForSingleObject(this.sessionNotification,
-                                                                ServiceCallbackOnPositionAvailable,
-                                                                this,   /* object state */
-                                                                -1,     /* INFINITE */
-                                                                true    /* ExecuteOnlyOnce */);
+                this.sessionRegisteredWait = ThreadPool.RegisterWaitForSingleObject(
+                    this.sessionNotification,
+                    ServiceCallbackOnPositionAvailable,
+                    this, /* object state */
+                    -1, /* INFINITE */
+                    true /* ExecuteOnlyOnce */
+                );
             }
 
             Console.WriteLine("callback running");
@@ -59,13 +59,14 @@ namespace Prog
         public void register()
         {
             this.sessionNotification = new ManualResetEvent(false);
-      
+
             this.sessionRegisteredWait = ThreadPool.RegisterWaitForSingleObject(
-                                                            this.sessionNotification,
-                                                            ServiceCallbackOnPositionAvailable,
-                                                            this,   /* object state */
-                                                            -1,     /* INFINITE */
-                                                            true    /* ExecuteOnlyOnce */);
+                this.sessionNotification,
+                ServiceCallbackOnPositionAvailable,
+                this, /* object state */
+                -1, /* INFINITE */
+                true /* ExecuteOnlyOnce */
+            );
         }
 
         public void unregister()

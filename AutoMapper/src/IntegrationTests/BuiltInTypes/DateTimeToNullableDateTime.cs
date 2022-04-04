@@ -12,28 +12,38 @@ namespace AutoMapper.UnitTests.Projection
         {
             public int Id { get; set; }
             public int Value { get; set; }
-                
         }
+
         public class ParentDto
         {
             public int? Value { get; set; }
             public DateTime? Date { get; set; }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg => 
-            cfg.CreateProjection<Parent, ParentDto>().ForMember(dto => dto.Date, opt => opt.MapFrom(src => DateTime.MaxValue)));
+
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                    cfg.CreateProjection<Parent, ParentDto>()
+                        .ForMember(dto => dto.Date, opt => opt.MapFrom(src => DateTime.MaxValue))
+            );
+
         public class TestContext : DbContext
         {
-            public TestContext(): base() => Database.SetInitializer<TestContext>(new DatabaseInitializer());
+            public TestContext() : base() =>
+                Database.SetInitializer<TestContext>(new DatabaseInitializer());
+
             public DbSet<Parent> Parents { get; set; }
         }
+
         public class DatabaseInitializer : DropCreateDatabaseAlways<TestContext>
         {
             protected override void Seed(TestContext testContext)
             {
-                testContext.Parents.Add(new Parent{ Value = 5 });
+                testContext.Parents.Add(new Parent { Value = 5 });
                 base.Seed(testContext);
             }
         }
+
         [Fact]
         public void Should_not_fail()
         {

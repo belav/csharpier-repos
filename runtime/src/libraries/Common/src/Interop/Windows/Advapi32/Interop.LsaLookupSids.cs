@@ -9,7 +9,11 @@ internal static partial class Interop
 {
     internal static partial class Advapi32
     {
-        [GeneratedDllImport(Interop.Libraries.Advapi32, EntryPoint = "LsaLookupSids", SetLastError = true)]
+        [GeneratedDllImport(
+            Interop.Libraries.Advapi32,
+            EntryPoint = "LsaLookupSids",
+            SetLastError = true
+        )]
         internal static partial uint LsaLookupSids(
             SafeLsaPolicyHandle handle,
             int count,

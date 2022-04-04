@@ -15,6 +15,7 @@ namespace System.Drawing.Internal
     {
         // when I tried the self host, it went over 500 but never over 1000.
         private const int INITIAL_SIZE = 200;
+
         // If it gets this big, I seriously miscalculated the performance of this object.
         private const int WARNING_SIZE = 100000;
         private const float EXPAND_THRESHOLD = 0.75f;
@@ -41,7 +42,9 @@ namespace System.Drawing.Internal
                 {
                     Debug.Assert(RuntimeInformation.IsOSPlatform(OSPlatform.Windows));
                     addedTracker = true;
-                    SystemEvents.UserPreferenceChanged += new UserPreferenceChangedEventHandler(OnUserPreferenceChanged);
+                    SystemEvents.UserPreferenceChanged += new UserPreferenceChangedEventHandler(
+                        OnUserPreferenceChanged
+                    );
                 }
 
                 // Strictly speaking, we should grab a lock on this class.  But since the chances
@@ -55,7 +58,10 @@ namespace System.Drawing.Internal
                     list[index] = new WeakReference(obj);
                 else
                 {
-                    Debug.Assert(list[index].Target == null, $"Trying to reuse a weak reference that isn't broken yet: list[{index}], length = {list.Length}");
+                    Debug.Assert(
+                        list[index].Target == null,
+                        $"Trying to reuse a weak reference that isn't broken yet: list[{index}], length = {list.Length}"
+                    );
                     list[index].Target = obj;
                 }
             }
@@ -126,7 +132,10 @@ namespace System.Drawing.Internal
                 list.CopyTo(newList, 0);
                 list = newList;
 
-                Debug.Assert(list.Length < WARNING_SIZE, "SystemColorTracker is using way more memory than expected.");
+                Debug.Assert(
+                    list.Length < WARNING_SIZE,
+                    "SystemColorTracker is using way more memory than expected."
+                );
             }
         }
 

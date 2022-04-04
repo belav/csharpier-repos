@@ -24,9 +24,7 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Update.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public SqliteUpdateSqlGenerator(UpdateSqlGeneratorDependencies dependencies)
-            : base(dependencies)
-        {
-        }
+            : base(dependencies) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -34,14 +32,16 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Update.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected override void AppendIdentityWhereCondition(StringBuilder commandStringBuilder, IColumnModification columnModification)
+        protected override void AppendIdentityWhereCondition(
+            StringBuilder commandStringBuilder,
+            IColumnModification columnModification
+        )
         {
             Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
             Check.NotNull(columnModification, nameof(columnModification));
 
             SqlGenerationHelper.DelimitIdentifier(commandStringBuilder, "rowid");
-            commandStringBuilder.Append(" = ")
-                .Append("last_insert_rowid()");
+            commandStringBuilder.Append(" = ").Append("last_insert_rowid()");
         }
 
         /// <summary>
@@ -54,7 +54,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Update.Internal
             StringBuilder commandStringBuilder,
             string name,
             string? schema,
-            int commandPosition)
+            int commandPosition
+        )
         {
             Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
             Check.NotEmpty(name, nameof(name));
@@ -73,7 +74,10 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Update.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected override void AppendRowsAffectedWhereCondition(StringBuilder commandStringBuilder, int expectedRowsAffected)
+        protected override void AppendRowsAffectedWhereCondition(
+            StringBuilder commandStringBuilder,
+            int expectedRowsAffected
+        )
         {
             Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
 
@@ -86,7 +90,7 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Update.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override string GenerateNextSequenceValueOperation(string name, string? schema)
-            => throw new NotSupportedException(SqliteStrings.SequencesNotSupported);
+        public override string GenerateNextSequenceValueOperation(string name, string? schema) =>
+            throw new NotSupportedException(SqliteStrings.SequencesNotSupported);
     }
 }

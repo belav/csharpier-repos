@@ -11,13 +11,24 @@ internal partial class ResponseStreamAsyncResult
     private static class Log
     {
         private static readonly Action<ILogger, uint, Exception?> _writeCancelled =
-            LoggerMessage.Define<uint>(LogLevel.Debug, LoggerEventIds.WriteCancelled, "FlushAsync.IOCompleted; Write cancelled with error code: {ErrorCode}");
+            LoggerMessage.Define<uint>(
+                LogLevel.Debug,
+                LoggerEventIds.WriteCancelled,
+                "FlushAsync.IOCompleted; Write cancelled with error code: {ErrorCode}"
+            );
 
-        private static readonly Action<ILogger, Exception?> _writeError =
-            LoggerMessage.Define(LogLevel.Error, LoggerEventIds.WriteError, "FlushAsync.IOCompleted");
+        private static readonly Action<ILogger, Exception?> _writeError = LoggerMessage.Define(
+            LogLevel.Error,
+            LoggerEventIds.WriteError,
+            "FlushAsync.IOCompleted"
+        );
 
         private static readonly Action<ILogger, uint, Exception?> _writeErrorIgnored =
-            LoggerMessage.Define<uint>(LogLevel.Debug, LoggerEventIds.WriteErrorIgnored, "FlushAsync.IOCompleted; Ignored write exception: {ErrorCode}");
+            LoggerMessage.Define<uint>(
+                LogLevel.Debug,
+                LoggerEventIds.WriteErrorIgnored,
+                "FlushAsync.IOCompleted; Ignored write exception: {ErrorCode}"
+            );
 
         public static void WriteCancelled(ILogger logger, uint errorCode)
         {

@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 /// Database abstraction for a combined <see cref="DbContext"/> using ASP.NET Identity and Identity Server.
 /// </summary>
 /// <typeparam name="TUser"></typeparam>
-public class ApiAuthorizationDbContext<TUser> : IdentityDbContext<TUser>, IPersistedGrantDbContext where TUser : IdentityUser
+public class ApiAuthorizationDbContext<TUser> : IdentityDbContext<TUser>, IPersistedGrantDbContext
+    where TUser : IdentityUser
 {
     private readonly IOptions<OperationalStoreOptions> _operationalStoreOptions;
 
@@ -29,8 +30,8 @@ public class ApiAuthorizationDbContext<TUser> : IdentityDbContext<TUser>, IPersi
     /// <param name="operationalStoreOptions">The <see cref="IOptions{OperationalStoreOptions}"/>.</param>
     public ApiAuthorizationDbContext(
         DbContextOptions options,
-        IOptions<OperationalStoreOptions> operationalStoreOptions)
-        : base(options)
+        IOptions<OperationalStoreOptions> operationalStoreOptions
+    ) : base(options)
     {
         _operationalStoreOptions = operationalStoreOptions;
     }

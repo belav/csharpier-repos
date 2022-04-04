@@ -119,11 +119,19 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             Assert.Equal(
                 "money",
-                GetMapping(mapper, model.FindEntityType(typeof(MyType)).FindProperty("Id")).StoreType);
+                GetMapping(
+                    mapper,
+                    model.FindEntityType(typeof(MyType)).FindProperty("Id")
+                ).StoreType
+            );
 
             Assert.Equal(
                 "money",
-                GetMapping(mapper, model.FindEntityType(typeof(MyRelatedType1)).FindProperty("Relationship1Id")).StoreType);
+                GetMapping(
+                    mapper,
+                    model.FindEntityType(typeof(MyRelatedType1)).FindProperty("Relationship1Id")
+                ).StoreType
+            );
         }
 
         [ConditionalFact]
@@ -134,7 +142,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             Assert.Equal(
                 "default_decimal_mapping",
-                GetMapping(mapper, model.FindEntityType(typeof(MyPrecisionType)).FindProperty("Id")).StoreType);
+                GetMapping(
+                    mapper,
+                    model.FindEntityType(typeof(MyPrecisionType)).FindProperty("Id")
+                ).StoreType
+            );
         }
 
         [ConditionalFact]
@@ -145,7 +157,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             Assert.Equal(
                 "decimal_mapping(16)",
-                GetMapping(mapper, model.FindEntityType(typeof(MyPrecisionType)).FindProperty("PrecisionOnly")).StoreType);
+                GetMapping(
+                    mapper,
+                    model.FindEntityType(typeof(MyPrecisionType)).FindProperty("PrecisionOnly")
+                ).StoreType
+            );
         }
 
         [ConditionalFact]
@@ -156,19 +172,25 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             Assert.Equal(
                 "decimal_mapping(18,7)",
-                GetMapping(mapper, model.FindEntityType(typeof(MyPrecisionType)).FindProperty("PrecisionAndScale")).StoreType);
+                GetMapping(
+                    mapper,
+                    model.FindEntityType(typeof(MyPrecisionType)).FindProperty("PrecisionAndScale")
+                ).StoreType
+            );
         }
 
         [ConditionalFact]
         public void Does_type_mapping_from_string_with_configuration()
         {
-            var mapping = GetTypeMapping(typeof(string),
+            var mapping = GetTypeMapping(
+                typeof(string),
                 maxLength: 666,
                 precision: 66,
                 scale: 6,
                 unicode: false,
                 fixedLength: true,
-                useConfiguration: true);
+                useConfiguration: true
+            );
 
             Assert.Equal("ansi_string_fixed(666)", mapping.StoreType);
             Assert.Equal("ansi_string_fixed", mapping.StoreTypeNameBase);
@@ -182,9 +204,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
         [ConditionalFact]
         public void Does_type_mapping_from_string_type_with_configuration()
         {
-            var mapping = GetTypeMapping(typeof(string),
+            var mapping = GetTypeMapping(
+                typeof(string),
                 storeTypeName: "ansi_string_fixed(666)",
-                useConfiguration: true);
+                useConfiguration: true
+            );
 
             Assert.Equal("ansi_string_fixed(666)", mapping.StoreType);
             Assert.Equal("ansi_string_fixed", mapping.StoreTypeNameBase);
@@ -197,13 +221,15 @@ namespace Microsoft.EntityFrameworkCore.Storage
         [ConditionalFact]
         public void Does_type_mapping_from_decimal_with_configuration()
         {
-            var mapping = GetTypeMapping(typeof(decimal),
+            var mapping = GetTypeMapping(
+                typeof(decimal),
                 maxLength: 666,
                 precision: 66,
                 scale: 6,
                 unicode: false,
                 fixedLength: true,
-                useConfiguration: true);
+                useConfiguration: true
+            );
 
             Assert.Equal("decimal_mapping(66,6)", mapping.StoreType);
             Assert.Equal("decimal_mapping", mapping.StoreTypeNameBase);
@@ -217,9 +243,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
         [ConditionalFact]
         public void Does_type_mapping_from_decimal_type_with_configuration()
         {
-            var mapping = GetTypeMapping(typeof(decimal),
+            var mapping = GetTypeMapping(
+                typeof(decimal),
                 storeTypeName: "decimal_mapping(66,6)",
-                useConfiguration: true);
+                useConfiguration: true
+            );
 
             Assert.Equal("decimal_mapping(66,6)", mapping.StoreType);
             Assert.Equal("decimal_mapping", mapping.StoreTypeNameBase);
@@ -230,16 +258,17 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Assert.False(mapping.IsFixedLength);
         }
 
-        protected override IRelationalTypeMappingSource CreateRelationalTypeMappingSource()
-            => new TestRelationalTypeMappingSource(
+        protected override IRelationalTypeMappingSource CreateRelationalTypeMappingSource() =>
+            new TestRelationalTypeMappingSource(
                 TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>());
+                TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+            );
 
-        public RelationalTypeMapping GetMapping(Type type)
-            => CreateRelationalTypeMappingSource().FindMapping(type);
+        public RelationalTypeMapping GetMapping(Type type) =>
+            CreateRelationalTypeMappingSource().FindMapping(type);
 
-        public RelationalTypeMapping GetMapping(IProperty property)
-            => CreateRelationalTypeMappingSource().FindMapping(property);
+        public RelationalTypeMapping GetMapping(IProperty property) =>
+            CreateRelationalTypeMappingSource().FindMapping(property);
 
         [ConditionalFact]
         public void String_key_with_max_fixed_length_is_picked_up_by_FK()
@@ -249,11 +278,19 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             Assert.Equal(
                 "just_string_fixed(200)",
-                GetMapping(mapper, model.FindEntityType(typeof(MyRelatedType1)).FindProperty("Id")).StoreType);
+                GetMapping(
+                    mapper,
+                    model.FindEntityType(typeof(MyRelatedType1)).FindProperty("Id")
+                ).StoreType
+            );
 
             Assert.Equal(
                 "just_string_fixed(200)",
-                GetMapping(mapper, model.FindEntityType(typeof(MyRelatedType2)).FindProperty("Relationship1Id")).StoreType);
+                GetMapping(
+                    mapper,
+                    model.FindEntityType(typeof(MyRelatedType2)).FindProperty("Relationship1Id")
+                ).StoreType
+            );
         }
 
         [ConditionalFact]
@@ -264,11 +301,19 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             Assert.Equal(
                 "just_binary_fixed(100)",
-                GetMapping(mapper, model.FindEntityType(typeof(MyRelatedType2)).FindProperty("Id")).StoreType);
+                GetMapping(
+                    mapper,
+                    model.FindEntityType(typeof(MyRelatedType2)).FindProperty("Id")
+                ).StoreType
+            );
 
             Assert.Equal(
                 "just_binary_fixed(100)",
-                GetMapping(mapper, model.FindEntityType(typeof(MyRelatedType3)).FindProperty("Relationship1Id")).StoreType);
+                GetMapping(
+                    mapper,
+                    model.FindEntityType(typeof(MyRelatedType3)).FindProperty("Relationship1Id")
+                ).StoreType
+            );
         }
 
         [ConditionalFact]
@@ -279,11 +324,19 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             Assert.Equal(
                 "ansi_string(900)",
-                GetMapping(mapper, model.FindEntityType(typeof(MyRelatedType3)).FindProperty("Id")).StoreType);
+                GetMapping(
+                    mapper,
+                    model.FindEntityType(typeof(MyRelatedType3)).FindProperty("Id")
+                ).StoreType
+            );
 
             Assert.Equal(
                 "ansi_string(900)",
-                GetMapping(mapper, model.FindEntityType(typeof(MyRelatedType4)).FindProperty("Relationship1Id")).StoreType);
+                GetMapping(
+                    mapper,
+                    model.FindEntityType(typeof(MyRelatedType4)).FindProperty("Relationship1Id")
+                ).StoreType
+            );
         }
 
         [ConditionalFact]
@@ -294,11 +347,19 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             Assert.Equal(
                 "money",
-                GetMapping(mapper, model.FindEntityType(typeof(MyType)).FindProperty("Id")).StoreType);
+                GetMapping(
+                    mapper,
+                    model.FindEntityType(typeof(MyType)).FindProperty("Id")
+                ).StoreType
+            );
 
             Assert.Equal(
                 "decimal_mapping(6,1)",
-                GetMapping(mapper, model.FindEntityType(typeof(MyRelatedType1)).FindProperty("Relationship2Id")).StoreType);
+                GetMapping(
+                    mapper,
+                    model.FindEntityType(typeof(MyRelatedType1)).FindProperty("Relationship2Id")
+                ).StoreType
+            );
         }
 
         [ConditionalFact]
@@ -309,11 +370,19 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             Assert.Equal(
                 "just_string_fixed(200)",
-                GetMapping(mapper, model.FindEntityType(typeof(MyRelatedType1)).FindProperty("Id")).StoreType);
+                GetMapping(
+                    mapper,
+                    model.FindEntityType(typeof(MyRelatedType1)).FindProperty("Id")
+                ).StoreType
+            );
 
             Assert.Equal(
                 "just_string_fixed(787)",
-                GetMapping(mapper, model.FindEntityType(typeof(MyRelatedType2)).FindProperty("Relationship2Id")).StoreType);
+                GetMapping(
+                    mapper,
+                    model.FindEntityType(typeof(MyRelatedType2)).FindProperty("Relationship2Id")
+                ).StoreType
+            );
         }
 
         [ConditionalFact]
@@ -324,11 +393,19 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             Assert.Equal(
                 "just_binary_fixed(100)",
-                GetMapping(mapper, model.FindEntityType(typeof(MyRelatedType2)).FindProperty("Id")).StoreType);
+                GetMapping(
+                    mapper,
+                    model.FindEntityType(typeof(MyRelatedType2)).FindProperty("Id")
+                ).StoreType
+            );
 
             Assert.Equal(
                 "just_binary_fixed(767)",
-                GetMapping(mapper, model.FindEntityType(typeof(MyRelatedType3)).FindProperty("Relationship2Id")).StoreType);
+                GetMapping(
+                    mapper,
+                    model.FindEntityType(typeof(MyRelatedType3)).FindProperty("Relationship2Id")
+                ).StoreType
+            );
         }
 
         [ConditionalFact]
@@ -339,19 +416,28 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             Assert.Equal(
                 "ansi_string(900)",
-                GetMapping(mapper, model.FindEntityType(typeof(MyRelatedType3)).FindProperty("Id")).StoreType);
+                GetMapping(
+                    mapper,
+                    model.FindEntityType(typeof(MyRelatedType3)).FindProperty("Id")
+                ).StoreType
+            );
 
             Assert.Equal(
                 "just_string(450)",
-                GetMapping(mapper, model.FindEntityType(typeof(MyRelatedType4)).FindProperty("Relationship2Id")).StoreType);
+                GetMapping(
+                    mapper,
+                    model.FindEntityType(typeof(MyRelatedType4)).FindProperty("Relationship2Id")
+                ).StoreType
+            );
         }
 
         public static RelationalTypeMapping GetMapping(
             IRelationalTypeMappingSource typeMappingSource,
-            IProperty property)
-            => typeMappingSource.FindMapping(property);
+            IProperty property
+        ) => typeMappingSource.FindMapping(property);
 
-        protected override ModelBuilder CreateModelBuilder(Action<ModelConfigurationBuilder> configure = null)
-            => RelationalTestHelpers.Instance.CreateConventionBuilder(configure: configure);
+        protected override ModelBuilder CreateModelBuilder(
+            Action<ModelConfigurationBuilder> configure = null
+        ) => RelationalTestHelpers.Instance.CreateConventionBuilder(configure: configure);
     }
 }

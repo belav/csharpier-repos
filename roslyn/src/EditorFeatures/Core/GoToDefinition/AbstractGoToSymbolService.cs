@@ -10,12 +10,14 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
 {
     // Ctrl+Click (GoToSymbol)
-    internal abstract class AbstractGoToSymbolService : ForegroundThreadAffinitizedObject, IGoToSymbolService
+    internal abstract class AbstractGoToSymbolService
+        : ForegroundThreadAffinitizedObject,
+          IGoToSymbolService
     {
-        protected AbstractGoToSymbolService(IThreadingContext threadingContext, bool assertIsForeground = false)
-            : base(threadingContext, assertIsForeground)
-        {
-        }
+        protected AbstractGoToSymbolService(
+            IThreadingContext threadingContext,
+            bool assertIsForeground = false
+        ) : base(threadingContext, assertIsForeground) { }
 
         public async Task GetSymbolsAsync(GoToSymbolContext context)
         {
@@ -27,7 +29,14 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
             // [includeType: false]
             // Enable Ctrl+Click on tokens with aliased, referenced or declared symbol.
             // If the token has none of those but does have a type (mostly literals), we're not interested
-            var (symbol, span) = await service.GetSymbolAndBoundSpanAsync(document, position, includeType: false, cancellationToken).ConfigureAwait(false);
+            var (symbol, span) = await service
+                .GetSymbolAndBoundSpanAsync(
+                    document,
+                    position,
+                    includeType: false,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             if (symbol == null)
             {
@@ -35,11 +44,22 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
             }
 
             var solution = document.Project.Solution;
-            var definitions = await GoToDefinitionHelpers.GetDefinitionsAsync(symbol, solution, thirdPartyNavigationAllowed: true, cancellationToken).ConfigureAwait(false);
+            var definitions = await GoToDefinitionHelpers
+                .GetDefinitionsAsync(
+                    symbol,
+                    solution,
+                    thirdPartyNavigationAllowed: true,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             foreach (var definition in definitions)
             {
-                if (await definition.CanNavigateToAsync(solution.Workspace, cancellationToken).ConfigureAwait(false))
+                if (
+                    await definition
+                        .CanNavigateToAsync(solution.Workspace, cancellationToken)
+                        .ConfigureAwait(false)
+                )
                     context.AddItem(WellKnownSymbolTypes.Definition, definition);
             }
 

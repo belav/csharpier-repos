@@ -17,7 +17,8 @@ internal class ScopeStack
     private readonly Stack<ScopeEntry> _stack = new Stack<ScopeEntry>();
     private int _builderVarNumber = 1;
 
-    public string BuilderVarName { get; private set; } = ComponentsApi.RenderTreeBuilder.BuilderParameter;
+    public string BuilderVarName { get; private set; } =
+        ComponentsApi.RenderTreeBuilder.BuilderParameter;
 
     public int Depth => _stack.Count;
 
@@ -62,9 +63,10 @@ internal class ScopeStack
     private void OffsetBuilderVarNumber(int delta)
     {
         _builderVarNumber += delta;
-        BuilderVarName = _builderVarNumber == 1
-            ? ComponentsApi.RenderTreeBuilder.BuilderParameter
-            : $"{ComponentsApi.RenderTreeBuilder.BuilderParameter}{_builderVarNumber}";
+        BuilderVarName =
+            _builderVarNumber == 1
+                ? ComponentsApi.RenderTreeBuilder.BuilderParameter
+                : $"{ComponentsApi.RenderTreeBuilder.BuilderParameter}{_builderVarNumber}";
     }
 
     private class ScopeEntry

@@ -22,19 +22,25 @@ namespace System.ComponentModel.Composition
         {
             var definition = ExportDefinitionFactory.Create();
 
-            Assert.Throws<ArgumentNullException>("exportedValueGetter", () =>
-            {
-                new Export(definition, (Func<object>)null);
-            });
+            Assert.Throws<ArgumentNullException>(
+                "exportedValueGetter",
+                () =>
+                {
+                    new Export(definition, (Func<object>)null);
+                }
+            );
         }
 
         [Fact]
         public void Constructor3_NullAsExportedValueGetterArgument_ShouldThrowArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>("exportedValueGetter", () =>
-            {
-                new Export("ContractName", (Func<object>)null);
-            });
+            Assert.Throws<ArgumentNullException>(
+                "exportedValueGetter",
+                () =>
+                {
+                    new Export("ContractName", (Func<object>)null);
+                }
+            );
         }
 
         [Fact]
@@ -42,19 +48,25 @@ namespace System.ComponentModel.Composition
         {
             var metadata = new Dictionary<string, object>();
 
-            Assert.Throws<ArgumentNullException>("exportedValueGetter", () =>
-            {
-                new Export("ContractName", metadata, (Func<object>)null);
-            });
+            Assert.Throws<ArgumentNullException>(
+                "exportedValueGetter",
+                () =>
+                {
+                    new Export("ContractName", metadata, (Func<object>)null);
+                }
+            );
         }
 
         [Fact]
         public void Constructor2_NullAsDefinitionArgument_ShouldThrowArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>("definition", () =>
-            {
-                new Export((ExportDefinition)null, () => null);
-            });
+            Assert.Throws<ArgumentNullException>(
+                "definition",
+                () =>
+                {
+                    new Export((ExportDefinition)null, () => null);
+                }
+            );
         }
 
         [Fact]
@@ -70,37 +82,49 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor3_NullAsContractNameArgument_ShouldThrowArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>("contractName", () =>
-            {
-                new Export((string)null, () => null);
-            });
+            Assert.Throws<ArgumentNullException>(
+                "contractName",
+                () =>
+                {
+                    new Export((string)null, () => null);
+                }
+            );
         }
 
         [Fact]
         public void Constructor4_NullAsContractNameArgument_ShouldThrowArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>("contractName", () =>
-            {
-                new Export((string)null, new Dictionary<string, object>(), () => null);
-            });
+            Assert.Throws<ArgumentNullException>(
+                "contractName",
+                () =>
+                {
+                    new Export((string)null, new Dictionary<string, object>(), () => null);
+                }
+            );
         }
 
         [Fact]
         public void Constructor3_EmptyStringAsContractNameArgument_ShouldThrowArgument()
         {
-            Assert.Throws<ArgumentException>("contractName", () =>
-            {
-                new Export(string.Empty, () => null);
-            });
+            Assert.Throws<ArgumentException>(
+                "contractName",
+                () =>
+                {
+                    new Export(string.Empty, () => null);
+                }
+            );
         }
 
         [Fact]
         public void Constructor4_EmptyStringAsContractNameArgument_ShouldThrowArgument()
         {
-            Assert.Throws<ArgumentException>("contractName", () =>
-            {
-                new Export(string.Empty, new Dictionary<string, object>(), () => null);
-            });
+            Assert.Throws<ArgumentException>(
+                "contractName",
+                () =>
+                {
+                    new Export(string.Empty, new Dictionary<string, object>(), () => null);
+                }
+            );
         }
 
         [Fact]
@@ -150,10 +174,12 @@ namespace System.ComponentModel.Composition
         {
             var export = new Export("ContractName", () => null);
 
-            ExceptionAssert.Throws<NotSupportedException>(() =>
-            {
-                export.Metadata["Value"] = "Value";
-            });
+            ExceptionAssert.Throws<NotSupportedException>(
+                () =>
+                {
+                    export.Metadata["Value"] = "Value";
+                }
+            );
         }
 
         [Fact]
@@ -161,10 +187,12 @@ namespace System.ComponentModel.Composition
         {
             var export = new Export("ContractName", (IDictionary<string, object>)null, () => null);
 
-            ExceptionAssert.Throws<NotSupportedException>(() =>
-            {
-                export.Metadata["Value"] = "Value";
-            });
+            ExceptionAssert.Throws<NotSupportedException>(
+                () =>
+                {
+                    export.Metadata["Value"] = "Value";
+                }
+            );
         }
 
         [Fact]
@@ -172,10 +200,12 @@ namespace System.ComponentModel.Composition
         {
             var export = new Export("ContractName", new Dictionary<string, object>(), () => null);
 
-            ExceptionAssert.Throws<NotSupportedException>(() =>
-            {
-                export.Metadata["Value"] = "Value";
-            });
+            ExceptionAssert.Throws<NotSupportedException>(
+                () =>
+                {
+                    export.Metadata["Value"] = "Value";
+                }
+            );
         }
 
         [Fact]
@@ -212,10 +242,12 @@ namespace System.ComponentModel.Composition
         {
             var export = new Export("ContractName", () => null);
 
-            ExceptionAssert.Throws<NotSupportedException>(() =>
-            {
-                export.Definition.Metadata["Value"] = "Value";
-            });
+            ExceptionAssert.Throws<NotSupportedException>(
+                () =>
+                {
+                    export.Definition.Metadata["Value"] = "Value";
+                }
+            );
         }
 
         [Fact]
@@ -223,10 +255,12 @@ namespace System.ComponentModel.Composition
         {
             var export = new Export("ContractName", (IDictionary<string, object>)null, () => null);
 
-            ExceptionAssert.Throws<NotSupportedException>(() =>
-            {
-                export.Definition.Metadata["Value"] = "Value";
-            });
+            ExceptionAssert.Throws<NotSupportedException>(
+                () =>
+                {
+                    export.Definition.Metadata["Value"] = "Value";
+                }
+            );
         }
 
         [Fact]
@@ -234,10 +268,12 @@ namespace System.ComponentModel.Composition
         {
             var export = new Export("ContractName", new Dictionary<string, object>(), () => null);
 
-            ExceptionAssert.Throws<NotSupportedException>(() =>
-            {
-                export.Definition.Metadata["Value"] = "Value";
-            });
+            ExceptionAssert.Throws<NotSupportedException>(
+                () =>
+                {
+                    export.Definition.Metadata["Value"] = "Value";
+                }
+            );
         }
 
         [Fact]
@@ -274,7 +310,11 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor4_FuncReturningAStringAsExportedValueGetter_ShouldBeReturnedByGetExportedValue()
         {
-            var export = new Export("ContractName", new Dictionary<string, object>(), () => "Value");
+            var export = new Export(
+                "ContractName",
+                new Dictionary<string, object>(),
+                () => "Value"
+            );
 
             Assert.Equal("Value", export.Value);
         }
@@ -325,10 +365,12 @@ namespace System.ComponentModel.Composition
         {
             var export = new NoOverridesExport();
 
-            ExceptionAssert.Throws<NotImplementedException>(() =>
-            {
-                var definition = export.Definition;
-            });
+            ExceptionAssert.Throws<NotImplementedException>(
+                () =>
+                {
+                    var definition = export.Definition;
+                }
+            );
         }
 
         [Fact]
@@ -336,10 +378,12 @@ namespace System.ComponentModel.Composition
         {
             var export = new NoOverridesExport();
 
-            ExceptionAssert.Throws<NotImplementedException>(() =>
-            {
-                var definition = export.Metadata;
-            });
+            ExceptionAssert.Throws<NotImplementedException>(
+                () =>
+                {
+                    var definition = export.Metadata;
+                }
+            );
         }
 
         [Fact]
@@ -347,10 +391,12 @@ namespace System.ComponentModel.Composition
         {
             var export = new NoOverridesExport();
 
-            ExceptionAssert.Throws<NotImplementedException>(() =>
-            {
-                var value = export.Value;
-            });
+            ExceptionAssert.Throws<NotImplementedException>(
+                () =>
+                {
+                    var value = export.Value;
+                }
+            );
         }
 
         [Fact]
@@ -358,11 +404,14 @@ namespace System.ComponentModel.Composition
         {
             int count = 0;
 
-            var export = new Export("ContractName", () =>
+            var export = new Export(
+                "ContractName",
+                () =>
                 {
                     count++;
                     return count;
-                });
+                }
+            );
 
             Assert.Equal(1, export.Value);
             Assert.Equal(1, export.Value);
@@ -374,11 +423,13 @@ namespace System.ComponentModel.Composition
         {
             int count = 0;
 
-            var export = new DerivedExport(() =>
-            {
-                count++;
-                return count;
-            });
+            var export = new DerivedExport(
+                () =>
+                {
+                    count++;
+                    return count;
+                }
+            );
 
             Assert.Equal(1, export.Value);
             Assert.Equal(1, export.Value);
@@ -390,20 +441,26 @@ namespace System.ComponentModel.Composition
         {
             var exceptionToThrow = new Exception();
 
-            var export = new Export("ContractName", new Dictionary<string, object>(), () =>
-            {
-                throw exceptionToThrow;
-            });
+            var export = new Export(
+                "ContractName",
+                new Dictionary<string, object>(),
+                () =>
+                {
+                    throw exceptionToThrow;
+                }
+            );
 
-            ExceptionAssert.Throws(exceptionToThrow, RetryMode.Retry, () =>
-            {
-                var value = export.Value;
-            });
+            ExceptionAssert.Throws(
+                exceptionToThrow,
+                RetryMode.Retry,
+                () =>
+                {
+                    var value = export.Value;
+                }
+            );
         }
 
-        private class NoOverridesExport : Export
-        {
-        }
+        private class NoOverridesExport : Export { }
 
         private class DerivedExport : Export
         {

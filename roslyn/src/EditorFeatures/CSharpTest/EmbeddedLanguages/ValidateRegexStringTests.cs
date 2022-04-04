@@ -20,13 +20,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EmbeddedLanguages
 {
     public class ValidateRegexStringTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public ValidateRegexStringTests(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+        public ValidateRegexStringTests(ITestOutputHelper logger) : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpRegexDiagnosticAnalyzer(), null);
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (new CSharpRegexDiagnosticAnalyzer(), null);
 
         private static OptionsCollection OptionOn()
         {
@@ -38,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EmbeddedLanguages
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateRegexString)]
         public async Task TestWarning1()
         {
-            await TestDiagnosticInfoAsync(@"
+            await TestDiagnosticInfoAsync(
+                @"
 using System.Text.RegularExpressions;
 
 class Program
@@ -51,13 +50,18 @@ class Program
                 options: OptionOn(),
                 diagnosticId: AbstractRegexDiagnosticAnalyzer.DiagnosticId,
                 diagnosticSeverity: DiagnosticSeverity.Warning,
-                diagnosticMessage: string.Format(FeaturesResources.Regex_issue_0, FeaturesResources.Too_many_close_parens));
+                diagnosticMessage: string.Format(
+                    FeaturesResources.Regex_issue_0,
+                    FeaturesResources.Too_many_close_parens
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateRegexString)]
         public async Task TestWarning2()
         {
-            await TestDiagnosticInfoAsync(@"
+            await TestDiagnosticInfoAsync(
+                @"
 using System.Text.RegularExpressions;
 
 class Program
@@ -70,13 +74,18 @@ class Program
                 options: OptionOn(),
                 diagnosticId: AbstractRegexDiagnosticAnalyzer.DiagnosticId,
                 diagnosticSeverity: DiagnosticSeverity.Warning,
-                diagnosticMessage: string.Format(FeaturesResources.Regex_issue_0, FeaturesResources.Too_many_close_parens));
+                diagnosticMessage: string.Format(
+                    FeaturesResources.Regex_issue_0,
+                    FeaturesResources.Too_many_close_parens
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateRegexString)]
         public async Task TestWarningMissing1()
         {
-            await TestDiagnosticMissingAsync(@"
+            await TestDiagnosticMissingAsync(
+                @"
 using System.Text.RegularExpressions;
 
 class Program
@@ -85,7 +94,8 @@ class Program
     {
         var r = new Regex(@""[|\u0029|]"");
     }     
-}");
+}"
+            );
         }
     }
 }

@@ -26,10 +26,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     SelectionResult selectionResult,
                     AnalyzerResult analyzerResult,
                     OptionSet options,
-                    bool localFunction)
-                    : base(insertionPoint, selectionResult, analyzerResult, options, localFunction)
-                {
-                }
+                    bool localFunction
+                ) : base(insertionPoint, selectionResult, analyzerResult, options, localFunction)
+                { }
 
                 public static bool IsExtractMethodOnSingleStatement(SelectionResult code)
                 {
@@ -37,10 +36,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     var firstStatement = result.GetFirstStatement();
                     var lastStatement = result.GetLastStatement();
 
-                    return firstStatement == lastStatement || firstStatement.Span.Contains(lastStatement.Span);
+                    return firstStatement == lastStatement
+                        || firstStatement.Span.Contains(lastStatement.Span);
                 }
 
-                protected override SyntaxToken CreateMethodName() => GenerateMethodNameForStatementGenerators();
+                protected override SyntaxToken CreateMethodName() =>
+                    GenerateMethodNameForStatementGenerators();
 
                 protected override ImmutableArray<StatementSyntax> GetInitialStatementsForMethodDefinitions()
                 {
@@ -49,9 +50,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     return ImmutableArray.Create(CSharpSelectionResult.GetFirstStatement());
                 }
 
-                protected override SyntaxNode GetOutermostCallSiteContainerToProcess(CancellationToken cancellationToken)
+                protected override SyntaxNode GetOutermostCallSiteContainerToProcess(
+                    CancellationToken cancellationToken
+                )
                 {
-                    var callSiteContainer = GetCallSiteContainerFromOutermostMoveInVariable(cancellationToken);
+                    var callSiteContainer = GetCallSiteContainerFromOutermostMoveInVariable(
+                        cancellationToken
+                    );
                     if (callSiteContainer != null)
                     {
                         return callSiteContainer;
@@ -63,8 +68,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     }
                 }
 
-                protected override SyntaxNode GetFirstStatementOrInitializerSelectedAtCallSite()
-                    => CSharpSelectionResult.GetFirstStatement();
+                protected override SyntaxNode GetFirstStatementOrInitializerSelectedAtCallSite() =>
+                    CSharpSelectionResult.GetFirstStatement();
 
                 protected override SyntaxNode GetLastStatementOrInitializerSelectedAtCallSite()
                 {
@@ -73,10 +78,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     return CSharpSelectionResult.GetFirstStatement();
                 }
 
-                protected override Task<SyntaxNode> GetStatementOrInitializerContainingInvocationToExtractedMethodAsync(CancellationToken cancellationToken)
+                protected override Task<SyntaxNode> GetStatementOrInitializerContainingInvocationToExtractedMethodAsync(
+                    CancellationToken cancellationToken
+                )
                 {
                     var statement = GetStatementContainingInvocationToExtractedMethodWorker();
-                    return Task.FromResult<SyntaxNode>(statement.WithAdditionalAnnotations(CallSiteAnnotation));
+                    return Task.FromResult<SyntaxNode>(
+                        statement.WithAdditionalAnnotations(CallSiteAnnotation)
+                    );
                 }
             }
         }

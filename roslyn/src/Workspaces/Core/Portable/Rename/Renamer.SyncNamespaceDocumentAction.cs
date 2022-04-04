@@ -19,11 +19,11 @@ namespace Microsoft.CodeAnalysis.Rename
     public static partial class Renamer
     {
         /// <summary>
-        /// Action that will sync the namespace of the document to match the folders property 
+        /// Action that will sync the namespace of the document to match the folders property
         /// of that document, similar to if a user performed the "Sync Namespace" code refactoring.
-        /// 
+        ///
         /// For example, if a document is moved from "Bat/Bar/Baz" folder structure to "Bat/Bar/Baz/Bat" and contains
-        /// a namespace definition of Bat.Bar.Baz in the document, then it would update that definition to 
+        /// a namespace definition of Bat.Bar.Baz in the document, then it would update that definition to
         /// Bat.Bar.Baz.Bat and update the solution to reflect these changes. Uses <see cref="IChangeNamespaceService"/>
         /// </summary>
         internal sealed class SyncNamespaceDocumentAction : RenameDocumentAction
@@ -36,13 +36,27 @@ namespace Microsoft.CodeAnalysis.Rename
                 _analysis = analysis;
             }
 
-            public override string GetDescription(CultureInfo? culture)
-                => WorkspacesResources.ResourceManager.GetString("Sync_namespace_to_folder_structure", culture ?? WorkspacesResources.Culture)!;
+            public override string GetDescription(CultureInfo? culture) =>
+                WorkspacesResources.ResourceManager.GetString(
+                    "Sync_namespace_to_folder_structure",
+                    culture ?? WorkspacesResources.Culture
+                )!;
 
-            internal override async Task<Solution> GetModifiedSolutionAsync(Document document, OptionSet _, CancellationToken cancellationToken)
+            internal override async Task<Solution> GetModifiedSolutionAsync(
+                Document document,
+                OptionSet _,
+                CancellationToken cancellationToken
+            )
             {
-                var changeNamespaceService = document.GetRequiredLanguageService<IChangeNamespaceService>();
-                var solution = await changeNamespaceService.TryChangeTopLevelNamespacesAsync(document, _analysis.TargetNamespace, cancellationToken).ConfigureAwait(false);
+                var changeNamespaceService =
+                    document.GetRequiredLanguageService<IChangeNamespaceService>();
+                var solution = await changeNamespaceService
+                    .TryChangeTopLevelNamespacesAsync(
+                        document,
+                        _analysis.TargetNamespace,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 // If the solution fails to update fail silently. The user will see no large
                 // negative impact from not doing this modification, and it's possible the document
@@ -50,7 +64,11 @@ namespace Microsoft.CodeAnalysis.Rename
                 return solution ?? document.Project.Solution;
             }
 
-            public static SyncNamespaceDocumentAction? TryCreate(Document document, IReadOnlyList<string> newFolders, CancellationToken _)
+            public static SyncNamespaceDocumentAction? TryCreate(
+                Document document,
+                IReadOnlyList<string> newFolders,
+                CancellationToken _
+            )
             {
                 var analysisResult = Analyze(document, newFolders);
 
@@ -62,14 +80,21 @@ namespace Microsoft.CodeAnalysis.Rename
                 return null;
             }
 
-            private static AnalysisResult? Analyze(Document document, IReadOnlyCollection<string> newFolders)
+            private static AnalysisResult? Analyze(
+                Document document,
+                IReadOnlyCollection<string> newFolders
+            )
             {
                 // https://github.com/dotnet/roslyn/issues/41841
                 // VB implementation is incomplete for sync namespace
                 if (document.Project.Language == LanguageNames.CSharp)
                 {
                     var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
-                    var targetNamespace = PathMetadataUtilities.TryBuildNamespaceFromFolders(newFolders, syntaxFacts, document.Project.DefaultNamespace);
+                    var targetNamespace = PathMetadataUtilities.TryBuildNamespaceFromFolders(
+                        newFolders,
+                        syntaxFacts,
+                        document.Project.DefaultNamespace
+                    );
 
                     if (targetNamespace is null)
                     {

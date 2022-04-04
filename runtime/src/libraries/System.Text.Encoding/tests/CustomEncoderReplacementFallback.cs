@@ -22,11 +22,11 @@ namespace System.Text.Encodings.Tests
 
             public override int Remaining => _remaining.Length - _remainingIdx;
 
-            public override bool Fallback(char charUnknownHigh, char charUnknownLow, int index)
-                => FallbackCommon((uint)char.ConvertToUtf32(charUnknownHigh, charUnknownLow));
+            public override bool Fallback(char charUnknownHigh, char charUnknownLow, int index) =>
+                FallbackCommon((uint)char.ConvertToUtf32(charUnknownHigh, charUnknownLow));
 
-            public override bool Fallback(char charUnknown, int index)
-                => FallbackCommon(charUnknown);
+            public override bool Fallback(char charUnknown, int index) =>
+                FallbackCommon(charUnknown);
 
             private bool FallbackCommon(uint codePoint)
             {
@@ -39,8 +39,9 @@ namespace System.Text.Encodings.Tests
             public override char GetNextChar()
             {
                 return (_remainingIdx < _remaining.Length)
-                    ? _remaining[_remainingIdx++]
-                    : '\0' /* end of string reached */;
+                  ? _remaining[_remainingIdx++]
+                  : '\0' /* end of string reached */
+                ;
             }
 
             public override bool MovePrevious()

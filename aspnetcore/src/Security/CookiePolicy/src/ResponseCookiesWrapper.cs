@@ -19,7 +19,12 @@ internal class ResponseCookiesWrapper : IResponseCookies, ITrackingConsentFeatur
     private bool? _isConsentNeeded;
     private bool? _hasConsent;
 
-    public ResponseCookiesWrapper(HttpContext context, CookiePolicyOptions options, IResponseCookiesFeature feature, ILogger logger)
+    public ResponseCookiesWrapper(
+        HttpContext context,
+        CookiePolicyOptions options,
+        IResponseCookiesFeature feature,
+        ILogger logger
+    )
     {
         Context = context;
         Feature = feature;
@@ -41,8 +46,10 @@ internal class ResponseCookiesWrapper : IResponseCookies, ITrackingConsentFeatur
         {
             if (!_isConsentNeeded.HasValue)
             {
-                _isConsentNeeded = Options.CheckConsentNeeded == null ? false
-                    : Options.CheckConsentNeeded(Context);
+                _isConsentNeeded =
+                    Options.CheckConsentNeeded == null
+                        ? false
+                        : Options.CheckConsentNeeded(Context);
                 _logger.NeedsConsent(_isConsentNeeded.Value);
             }
 
@@ -103,7 +110,8 @@ internal class ResponseCookiesWrapper : IResponseCookies, ITrackingConsentFeatur
 
         var setCookieHeaderValue = new Net.Http.Headers.SetCookieHeaderValue(
             Uri.EscapeDataString(key),
-            Uri.EscapeDataString(value))
+            Uri.EscapeDataString(value)
+        )
         {
             Domain = options.Domain,
             Path = options.Path,
@@ -154,7 +162,10 @@ internal class ResponseCookiesWrapper : IResponseCookies, ITrackingConsentFeatur
         }
     }
 
-    public void Append(ReadOnlySpan<KeyValuePair<string, string>> keyValuePairs, CookieOptions options)
+    public void Append(
+        ReadOnlySpan<KeyValuePair<string, string>> keyValuePairs,
+        CookieOptions options
+    )
     {
         if (options == null)
         {
@@ -292,7 +303,9 @@ internal class ResponseCookiesWrapper : IResponseCookies, ITrackingConsentFeatur
             case HttpOnlyPolicy.None:
                 break;
             default:
-                throw new InvalidOperationException($"Unrecognized {nameof(HttpOnlyPolicy)} value {Options.HttpOnly.ToString()}");
+                throw new InvalidOperationException(
+                    $"Unrecognized {nameof(HttpOnlyPolicy)} value {Options.HttpOnly.ToString()}"
+                );
         }
     }
 }

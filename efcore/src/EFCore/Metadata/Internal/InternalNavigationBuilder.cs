@@ -15,7 +15,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public class InternalNavigationBuilder : InternalPropertyBaseBuilder<Navigation>, IConventionNavigationBuilder
+    public class InternalNavigationBuilder
+        : InternalPropertyBaseBuilder<Navigation>,
+          IConventionNavigationBuilder
     {
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -24,9 +26,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public InternalNavigationBuilder(Navigation metadata, InternalModelBuilder modelBuilder)
-            : base(metadata, modelBuilder)
-        {
-        }
+            : base(metadata, modelBuilder) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -34,8 +34,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public new virtual InternalNavigationBuilder? HasField(string? fieldName, ConfigurationSource configurationSource)
-            => (InternalNavigationBuilder?)base.HasField(fieldName, configurationSource);
+        public new virtual InternalNavigationBuilder? HasField(
+            string? fieldName,
+            ConfigurationSource configurationSource
+        ) => (InternalNavigationBuilder?)base.HasField(fieldName, configurationSource);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -43,8 +45,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public new virtual InternalNavigationBuilder? HasField(FieldInfo? fieldInfo, ConfigurationSource configurationSource)
-            => (InternalNavigationBuilder?)base.HasField(fieldInfo, configurationSource);
+        public new virtual InternalNavigationBuilder? HasField(
+            FieldInfo? fieldInfo,
+            ConfigurationSource configurationSource
+        ) => (InternalNavigationBuilder?)base.HasField(fieldInfo, configurationSource);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -54,8 +58,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public new virtual InternalNavigationBuilder? UsePropertyAccessMode(
             PropertyAccessMode? propertyAccessMode,
-            ConfigurationSource configurationSource)
-            => (InternalNavigationBuilder?)base.UsePropertyAccessMode(propertyAccessMode, configurationSource);
+            ConfigurationSource configurationSource
+        ) =>
+            (InternalNavigationBuilder?)base.UsePropertyAccessMode(
+                propertyAccessMode,
+                configurationSource
+            );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -63,11 +71,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual bool CanSetAutoInclude(bool? autoInclude, ConfigurationSource configurationSource)
+        public virtual bool CanSetAutoInclude(
+            bool? autoInclude,
+            ConfigurationSource configurationSource
+        )
         {
             IConventionNavigation conventionNavigation = Metadata;
 
-            return configurationSource.Overrides(conventionNavigation.GetIsEagerLoadedConfigurationSource())
+            return configurationSource.Overrides(
+                    conventionNavigation.GetIsEagerLoadedConfigurationSource()
+                )
                 || conventionNavigation.IsEagerLoaded == autoInclude;
         }
 
@@ -77,7 +90,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual InternalNavigationBuilder? AutoInclude(bool? autoInclude, ConfigurationSource configurationSource)
+        public virtual InternalNavigationBuilder? AutoInclude(
+            bool? autoInclude,
+            ConfigurationSource configurationSource
+        )
         {
             if (CanSetAutoInclude(autoInclude, configurationSource))
             {
@@ -88,7 +104,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 else
                 {
                     ((IConventionNavigation)Metadata).SetIsEagerLoaded(
-                        autoInclude, configurationSource == ConfigurationSource.DataAnnotation);
+                        autoInclude,
+                        configurationSource == ConfigurationSource.DataAnnotation
+                    );
                 }
 
                 return this;
@@ -103,18 +121,21 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual bool CanSetIsRequired(bool? required, ConfigurationSource configurationSource)
+        public virtual bool CanSetIsRequired(
+            bool? required,
+            ConfigurationSource configurationSource
+        )
         {
             var foreignKey = Metadata.ForeignKey;
             return foreignKey.IsUnique
-                ? foreignKey.GetPrincipalEndConfigurationSource() == null
-                    ? false
-                    : Metadata.IsOnDependent
-                        ? foreignKey.Builder.CanSetIsRequired(required, configurationSource)
-                        : foreignKey.Builder.CanSetIsRequiredDependent(required, configurationSource)
-                : Metadata.IsOnDependent
-                    ? foreignKey.Builder.CanSetIsRequired(required, configurationSource)
-                    : false;
+              ? foreignKey.GetPrincipalEndConfigurationSource() == null
+                  ? false
+                  : Metadata.IsOnDependent
+                      ? foreignKey.Builder.CanSetIsRequired(required, configurationSource)
+                      : foreignKey.Builder.CanSetIsRequiredDependent(required, configurationSource)
+              : Metadata.IsOnDependent
+                  ? foreignKey.Builder.CanSetIsRequired(required, configurationSource)
+                  : false;
         }
 
         /// <summary>
@@ -123,10 +144,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual InternalNavigationBuilder? IsRequired(bool? required, ConfigurationSource configurationSource)
+        public virtual InternalNavigationBuilder? IsRequired(
+            bool? required,
+            ConfigurationSource configurationSource
+        )
         {
-            if (configurationSource == ConfigurationSource.Explicit
-                || CanSetIsRequired(required, configurationSource))
+            if (
+                configurationSource == ConfigurationSource.Explicit
+                || CanSetIsRequired(required, configurationSource)
+            )
             {
                 var foreignKey = Metadata.ForeignKey;
                 if (foreignKey.IsUnique)
@@ -137,25 +163,33 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                             CoreStrings.AmbiguousEndRequiredDependentNavigation(
                                 Metadata.DeclaringEntityType.DisplayName(),
                                 Metadata.Name,
-                                foreignKey.Properties.Format()));
+                                foreignKey.Properties.Format()
+                            )
+                        );
                     }
 
                     return Metadata.IsOnDependent
-                        ? foreignKey.Builder.IsRequired(required, configurationSource)!
-                            .Metadata.DependentToPrincipal!.Builder
-                        : foreignKey.Builder.IsRequiredDependent(required, configurationSource)!
-                            .Metadata.PrincipalToDependent!.Builder;
+                      ? foreignKey.Builder
+                        .IsRequired(required, configurationSource)!
+                        .Metadata.DependentToPrincipal!.Builder
+                      : foreignKey.Builder
+                        .IsRequiredDependent(required, configurationSource)!
+                        .Metadata.PrincipalToDependent!.Builder;
                 }
 
                 if (Metadata.IsOnDependent)
                 {
-                    return foreignKey.Builder.IsRequired(required, configurationSource)!
+                    return foreignKey.Builder
+                        .IsRequired(required, configurationSource)!
                         .Metadata.DependentToPrincipal!.Builder;
                 }
 
                 throw new InvalidOperationException(
                     CoreStrings.NonUniqueRequiredDependentNavigation(
-                        foreignKey.PrincipalEntityType.DisplayName(), Metadata.Name));
+                        foreignKey.PrincipalEntityType.DisplayName(),
+                        Metadata.Name
+                    )
+                );
             }
 
             return null;
@@ -175,86 +209,171 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         /// <inheritdoc />
         [DebuggerStepThrough]
-        bool IConventionPropertyBaseBuilder.CanSetPropertyAccessMode(PropertyAccessMode? propertyAccessMode, bool fromDataAnnotation)
-            => CanSetPropertyAccessMode(
-                propertyAccessMode, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+        bool IConventionPropertyBaseBuilder.CanSetPropertyAccessMode(
+            PropertyAccessMode? propertyAccessMode,
+            bool fromDataAnnotation
+        ) =>
+            CanSetPropertyAccessMode(
+                propertyAccessMode,
+                fromDataAnnotation
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
+            );
 
         /// <inheritdoc />
         [DebuggerStepThrough]
         IConventionPropertyBaseBuilder? IConventionPropertyBaseBuilder.UsePropertyAccessMode(
             PropertyAccessMode? propertyAccessMode,
-            bool fromDataAnnotation)
-            => UsePropertyAccessMode(
-                propertyAccessMode, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+            bool fromDataAnnotation
+        ) =>
+            UsePropertyAccessMode(
+                propertyAccessMode,
+                fromDataAnnotation
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
+            );
 
         /// <inheritdoc />
         [DebuggerStepThrough]
         IConventionNavigationBuilder? IConventionNavigationBuilder.UsePropertyAccessMode(
             PropertyAccessMode? propertyAccessMode,
-            bool fromDataAnnotation)
-            => UsePropertyAccessMode(
-                propertyAccessMode, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+            bool fromDataAnnotation
+        ) =>
+            UsePropertyAccessMode(
+                propertyAccessMode,
+                fromDataAnnotation
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
+            );
 
         /// <inheritdoc />
         [DebuggerStepThrough]
-        bool IConventionPropertyBaseBuilder.CanSetField(string? fieldName, bool fromDataAnnotation)
-            => CanSetField(
+        bool IConventionPropertyBaseBuilder.CanSetField(
+            string? fieldName,
+            bool fromDataAnnotation
+        ) =>
+            CanSetField(
                 fieldName,
-                fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+                fromDataAnnotation
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
+            );
 
         /// <inheritdoc />
         [DebuggerStepThrough]
-        IConventionPropertyBaseBuilder? IConventionPropertyBaseBuilder.HasField(string? fieldName, bool fromDataAnnotation)
-            => HasField(
+        IConventionPropertyBaseBuilder? IConventionPropertyBaseBuilder.HasField(
+            string? fieldName,
+            bool fromDataAnnotation
+        ) =>
+            HasField(
                 fieldName,
-                fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+                fromDataAnnotation
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
+            );
 
         /// <inheritdoc />
         [DebuggerStepThrough]
-        IConventionNavigationBuilder? IConventionNavigationBuilder.HasField(string? fieldName, bool fromDataAnnotation)
-            => HasField(
+        IConventionNavigationBuilder? IConventionNavigationBuilder.HasField(
+            string? fieldName,
+            bool fromDataAnnotation
+        ) =>
+            HasField(
                 fieldName,
-                fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+                fromDataAnnotation
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
+            );
 
         /// <inheritdoc />
         [DebuggerStepThrough]
-        bool IConventionPropertyBaseBuilder.CanSetField(FieldInfo? fieldInfo, bool fromDataAnnotation)
-            => CanSetField(
+        bool IConventionPropertyBaseBuilder.CanSetField(
+            FieldInfo? fieldInfo,
+            bool fromDataAnnotation
+        ) =>
+            CanSetField(
                 fieldInfo,
-                fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+                fromDataAnnotation
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
+            );
 
         /// <inheritdoc />
         [DebuggerStepThrough]
-        IConventionPropertyBaseBuilder? IConventionPropertyBaseBuilder.HasField(FieldInfo? fieldInfo, bool fromDataAnnotation)
-            => HasField(
+        IConventionPropertyBaseBuilder? IConventionPropertyBaseBuilder.HasField(
+            FieldInfo? fieldInfo,
+            bool fromDataAnnotation
+        ) =>
+            HasField(
                 fieldInfo,
-                fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+                fromDataAnnotation
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
+            );
 
         /// <inheritdoc />
         [DebuggerStepThrough]
-        IConventionNavigationBuilder? IConventionNavigationBuilder.HasField(FieldInfo? fieldInfo, bool fromDataAnnotation)
-            => HasField(
+        IConventionNavigationBuilder? IConventionNavigationBuilder.HasField(
+            FieldInfo? fieldInfo,
+            bool fromDataAnnotation
+        ) =>
+            HasField(
                 fieldInfo,
-                fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+                fromDataAnnotation
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
+            );
 
         /// <inheritdoc />
         [DebuggerStepThrough]
-        bool IConventionNavigationBuilder.CanSetAutoInclude(bool? autoInclude, bool fromDataAnnotation)
-            => CanSetAutoInclude(autoInclude, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+        bool IConventionNavigationBuilder.CanSetAutoInclude(
+            bool? autoInclude,
+            bool fromDataAnnotation
+        ) =>
+            CanSetAutoInclude(
+                autoInclude,
+                fromDataAnnotation
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
+            );
 
         /// <inheritdoc />
         [DebuggerStepThrough]
-        IConventionNavigationBuilder? IConventionNavigationBuilder.AutoInclude(bool? autoInclude, bool fromDataAnnotation)
-            => AutoInclude(autoInclude, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+        IConventionNavigationBuilder? IConventionNavigationBuilder.AutoInclude(
+            bool? autoInclude,
+            bool fromDataAnnotation
+        ) =>
+            AutoInclude(
+                autoInclude,
+                fromDataAnnotation
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
+            );
 
         /// <inheritdoc />
         [DebuggerStepThrough]
-        bool IConventionNavigationBuilder.CanSetIsRequired(bool? required, bool fromDataAnnotation)
-            => CanSetIsRequired(required, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+        bool IConventionNavigationBuilder.CanSetIsRequired(
+            bool? required,
+            bool fromDataAnnotation
+        ) =>
+            CanSetIsRequired(
+                required,
+                fromDataAnnotation
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
+            );
 
         /// <inheritdoc />
         [DebuggerStepThrough]
-        IConventionNavigationBuilder? IConventionNavigationBuilder.IsRequired(bool? required, bool fromDataAnnotation)
-            => IsRequired(required, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+        IConventionNavigationBuilder? IConventionNavigationBuilder.IsRequired(
+            bool? required,
+            bool fromDataAnnotation
+        ) =>
+            IsRequired(
+                required,
+                fromDataAnnotation
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
+            );
     }
 }

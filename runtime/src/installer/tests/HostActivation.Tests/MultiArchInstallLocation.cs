@@ -23,50 +23,60 @@ namespace HostActivation.Tests
         [Fact]
         public void EnvironmentVariable_CurrentArchitectureIsUsedIfEnvVarSet()
         {
-            var fixture = sharedTestState.PortableAppFixture
-                .Copy();
+            var fixture = sharedTestState.PortableAppFixture.Copy();
 
             var appExe = fixture.TestProject.AppExe;
             var arch = fixture.RepoDirProvider.BuildArchitecture.ToUpper();
-            Command.Create(appExe)
+            Command
+                .Create(appExe)
                 .EnableTracingAndCaptureOutputs()
                 .DotNetRoot(fixture.BuiltDotnet.BinPath, arch)
                 .Execute()
-                .Should().Pass()
-                .And.HaveUsedDotNetRootInstallLocation(fixture.BuiltDotnet.BinPath, fixture.CurrentRid, arch);
+                .Should()
+                .Pass()
+                .And.HaveUsedDotNetRootInstallLocation(
+                    fixture.BuiltDotnet.BinPath,
+                    fixture.CurrentRid,
+                    arch
+                );
         }
 
         [Fact]
         public void EnvironmentVariable_IfNoArchSpecificEnvVarIsFoundDotnetRootIsUsed()
         {
-            var fixture = sharedTestState.PortableAppFixture
-                .Copy();
+            var fixture = sharedTestState.PortableAppFixture.Copy();
 
             var appExe = fixture.TestProject.AppExe;
             var arch = fixture.RepoDirProvider.BuildArchitecture.ToUpper();
-            Command.Create(appExe)
+            Command
+                .Create(appExe)
                 .EnableTracingAndCaptureOutputs()
                 .DotNetRoot(fixture.BuiltDotnet.BinPath)
                 .Execute()
-                .Should().Pass()
-                .And.HaveUsedDotNetRootInstallLocation(fixture.BuiltDotnet.BinPath, fixture.CurrentRid);
+                .Should()
+                .Pass()
+                .And.HaveUsedDotNetRootInstallLocation(
+                    fixture.BuiltDotnet.BinPath,
+                    fixture.CurrentRid
+                );
         }
 
         [Fact]
         public void EnvironmentVariable_ArchSpecificDotnetRootIsUsedOverDotnetRoot()
         {
-            var fixture = sharedTestState.PortableAppFixture
-                .Copy();
+            var fixture = sharedTestState.PortableAppFixture.Copy();
 
             var appExe = fixture.TestProject.AppExe;
             var arch = fixture.RepoDirProvider.BuildArchitecture.ToUpper();
             var dotnet = fixture.BuiltDotnet.BinPath;
-            Command.Create(appExe)
+            Command
+                .Create(appExe)
                 .EnableTracingAndCaptureOutputs()
                 .DotNetRoot("non_existent_path")
                 .DotNetRoot(dotnet, arch)
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveUsedDotNetRootInstallLocation(dotnet, fixture.CurrentRid, arch)
                 .And.NotHaveStdErrContaining("Using environment variable DOTNET_ROOT=");
         }
@@ -74,23 +84,30 @@ namespace HostActivation.Tests
         [Fact]
         public void EnvironmentVariable_DotNetRootIsUsedOverInstallLocationIfSet()
         {
-            var fixture = sharedTestState.PortableAppFixture
-                .Copy();
+            var fixture = sharedTestState.PortableAppFixture.Copy();
 
             var appExe = fixture.TestProject.AppExe;
             var arch = fixture.RepoDirProvider.BuildArchitecture.ToUpper();
             var dotnet = fixture.BuiltDotnet.BinPath;
 
-            using (var registeredInstallLocationOverride = new RegisteredInstallLocationOverride(appExe))
+            using (
+                var registeredInstallLocationOverride = new RegisteredInstallLocationOverride(
+                    appExe
+                )
+            )
             {
-                registeredInstallLocationOverride.SetInstallLocation((arch, "some/install/location"));
+                registeredInstallLocationOverride.SetInstallLocation(
+                    (arch, "some/install/location")
+                );
 
-                Command.Create(appExe)
+                Command
+                    .Create(appExe)
                     .EnableTracingAndCaptureOutputs()
                     .ApplyRegisteredInstallLocationOverride(registeredInstallLocationOverride)
                     .DotNetRoot(dotnet, arch)
                     .Execute()
-                    .Should().Pass()
+                    .Should()
+                    .Pass()
                     .And.HaveUsedDotNetRootInstallLocation(dotnet, fixture.CurrentRid, arch)
                     .And.NotHaveStdErrContaining("Using global install location");
             }
@@ -99,22 +116,26 @@ namespace HostActivation.Tests
         [Fact]
         public void EnvironmentVariable_DotnetRootPathDoesNotExist()
         {
-            var fixture = sharedTestState.PortableAppFixture
-                .Copy();
+            var fixture = sharedTestState.PortableAppFixture.Copy();
 
             var appExe = fixture.TestProject.AppExe;
             using (TestOnlyProductBehavior.Enable(appExe))
             {
-                Command.Create(appExe)
+                Command
+                    .Create(appExe)
                     .EnableTracingAndCaptureOutputs()
                     .DotNetRoot("non_existent_path")
                     .MultilevelLookup(false)
                     .EnvironmentVariable(
                         Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath,
-                        sharedTestState.InstallLocation)
+                        sharedTestState.InstallLocation
+                    )
                     .Execute()
-                    .Should().Pass()
-                    .And.HaveStdErrContaining("Did not find [DOTNET_ROOT] directory [non_existent_path]")
+                    .Should()
+                    .Pass()
+                    .And.HaveStdErrContaining(
+                        "Did not find [DOTNET_ROOT] directory [non_existent_path]"
+                    )
                     // If DOTNET_ROOT points to a folder that does not exist, we fall back to the global install path.
                     .And.HaveUsedGlobalInstallLocation(sharedTestState.InstallLocation)
                     .And.HaveStdOutContaining("Hello World");
@@ -124,33 +145,36 @@ namespace HostActivation.Tests
         [Fact]
         public void EnvironmentVariable_DotnetRootPathExistsButHasNoHost()
         {
-            var fixture = sharedTestState.PortableAppFixture
-                .Copy();
+            var fixture = sharedTestState.PortableAppFixture.Copy();
 
             var appExe = fixture.TestProject.AppExe;
             var projDir = fixture.TestProject.ProjectDirectory;
             using (TestOnlyProductBehavior.Enable(appExe))
             {
-                Command.Create(appExe)
-                .EnableTracingAndCaptureOutputs()
-                .DotNetRoot(projDir)
-                .MultilevelLookup(false)
-                .EnvironmentVariable(
-                    Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath,
-                    sharedTestState.InstallLocation)
-                .Execute()
-                .Should().Fail()
-                .And.HaveUsedDotNetRootInstallLocation(projDir, fixture.CurrentRid)
-                // If DOTNET_ROOT points to a folder that exists we assume that there's a dotnet installation in it
-                .And.HaveStdErrContaining($"A fatal error occurred. The required library {RuntimeInformationExtensions.GetSharedLibraryFileNameForCurrentPlatform ("hostfxr")} could not be found.");
+                Command
+                    .Create(appExe)
+                    .EnableTracingAndCaptureOutputs()
+                    .DotNetRoot(projDir)
+                    .MultilevelLookup(false)
+                    .EnvironmentVariable(
+                        Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath,
+                        sharedTestState.InstallLocation
+                    )
+                    .Execute()
+                    .Should()
+                    .Fail()
+                    .And.HaveUsedDotNetRootInstallLocation(projDir, fixture.CurrentRid)
+                    // If DOTNET_ROOT points to a folder that exists we assume that there's a dotnet installation in it
+                    .And.HaveStdErrContaining(
+                        $"A fatal error occurred. The required library {RuntimeInformationExtensions.GetSharedLibraryFileNameForCurrentPlatform("hostfxr")} could not be found."
+                    );
             }
         }
 
         [Fact]
         public void InstallLocationFile_ArchSpecificLocationIsPickedFirst()
         {
-            var fixture = sharedTestState.PortableAppFixture
-                .Copy();
+            var fixture = sharedTestState.PortableAppFixture.Copy();
 
             var appExe = fixture.TestProject.AppExe;
             var arch1 = "someArch";
@@ -158,15 +182,18 @@ namespace HostActivation.Tests
             var arch2 = fixture.RepoDirProvider.BuildArchitecture;
             var path2 = "a/b/c";
 
-            using (var registeredInstallLocationOverride = new RegisteredInstallLocationOverride(appExe))
+            using (
+                var registeredInstallLocationOverride = new RegisteredInstallLocationOverride(
+                    appExe
+                )
+            )
             {
-                registeredInstallLocationOverride.SetInstallLocation(new (string, string)[] {
-                    (string.Empty, path1),
-                    (arch1, path1),
-                    (arch2, path2)
-                });
+                registeredInstallLocationOverride.SetInstallLocation(
+                    new (string, string)[] { (string.Empty, path1), (arch1, path1), (arch2, path2) }
+                );
 
-                CommandResult result = Command.Create(appExe)
+                CommandResult result = Command
+                    .Create(appExe)
                     .EnableTracingAndCaptureOutputs()
                     .ApplyRegisteredInstallLocationOverride(registeredInstallLocationOverride)
                     .DotNetRoot(null)
@@ -174,8 +201,12 @@ namespace HostActivation.Tests
 
                 if (!OperatingSystem.IsWindows())
                 {
-                    result.Should()
-                        .HaveLookedForArchitectureSpecificInstallLocation(registeredInstallLocationOverride.PathValueOverride, arch2);
+                    result
+                        .Should()
+                        .HaveLookedForArchitectureSpecificInstallLocation(
+                            registeredInstallLocationOverride.PathValueOverride,
+                            arch2
+                        );
                 }
 
                 result.Should().HaveUsedGlobalInstallLocation(path2);
@@ -183,59 +214,86 @@ namespace HostActivation.Tests
         }
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.Windows, "This test targets the install_location config file which is only used on Linux and macOS.")]
+        [SkipOnPlatform(
+            TestPlatforms.Windows,
+            "This test targets the install_location config file which is only used on Linux and macOS."
+        )]
         public void InstallLocationFile_ReallyLongInstallPathIsParsedCorrectly()
         {
-            var fixture = sharedTestState.PortableAppFixture
-                .Copy();
+            var fixture = sharedTestState.PortableAppFixture.Copy();
 
             var appExe = fixture.TestProject.AppExe;
-            using (var registeredInstallLocationOverride = new RegisteredInstallLocationOverride(appExe))
+            using (
+                var registeredInstallLocationOverride = new RegisteredInstallLocationOverride(
+                    appExe
+                )
+            )
             {
                 var reallyLongPath =
-                    "reallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreally" +
-                    "reallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreally" +
-                    "reallyreallyreallyreallyreallyreallyreallyreallyreallyreallylongpath";
-                registeredInstallLocationOverride.SetInstallLocation((string.Empty, reallyLongPath));
+                    "reallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreally"
+                    + "reallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreally"
+                    + "reallyreallyreallyreallyreallyreallyreallyreallyreallyreallylongpath";
+                registeredInstallLocationOverride.SetInstallLocation(
+                    (string.Empty, reallyLongPath)
+                );
 
-                Command.Create(appExe)
+                Command
+                    .Create(appExe)
                     .EnableTracingAndCaptureOutputs()
                     .ApplyRegisteredInstallLocationOverride(registeredInstallLocationOverride)
                     .DotNetRoot(null)
                     .Execute()
-                    .Should().HaveLookedForDefaultInstallLocation(registeredInstallLocationOverride.PathValueOverride)
+                    .Should()
+                    .HaveLookedForDefaultInstallLocation(
+                        registeredInstallLocationOverride.PathValueOverride
+                    )
                     .And.HaveUsedConfigFileInstallLocation(reallyLongPath);
             }
         }
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.Windows, "This test targets the install_location config file which is only used on Linux and macOS.")]
+        [SkipOnPlatform(
+            TestPlatforms.Windows,
+            "This test targets the install_location config file which is only used on Linux and macOS."
+        )]
         public void InstallLocationFile_MissingFile()
         {
             var fixture = sharedTestState.PortableAppFixture.Copy();
 
             var appExe = fixture.TestProject.AppExe;
-            string testArtifactsPath = SharedFramework.CalculateUniqueTestDirectory(Path.Combine(TestArtifact.TestArtifactsPath, "missingInstallLocation"));
+            string testArtifactsPath = SharedFramework.CalculateUniqueTestDirectory(
+                Path.Combine(TestArtifact.TestArtifactsPath, "missingInstallLocation")
+            );
             using (new TestArtifact(testArtifactsPath))
             using (var testOnlyProductBehavior = TestOnlyProductBehavior.Enable(appExe))
             {
                 Directory.CreateDirectory(testArtifactsPath);
 
-                string installLocationDirectory = Path.Combine(testArtifactsPath, "installLocationOverride");
+                string installLocationDirectory = Path.Combine(
+                    testArtifactsPath,
+                    "installLocationOverride"
+                );
                 Directory.CreateDirectory(installLocationDirectory);
-                string defaultInstallLocation = Path.Combine(testArtifactsPath, "defaultInstallLocation");
+                string defaultInstallLocation = Path.Combine(
+                    testArtifactsPath,
+                    "defaultInstallLocation"
+                );
 
-                Command.Create(appExe)
+                Command
+                    .Create(appExe)
                     .CaptureStdErr()
                     .EnvironmentVariable(
                         Constants.TestOnlyEnvironmentVariables.InstallLocationPath,
-                        installLocationDirectory)
+                        installLocationDirectory
+                    )
                     .EnvironmentVariable(
                         Constants.TestOnlyEnvironmentVariables.DefaultInstallPath,
-                        defaultInstallLocation)
+                        defaultInstallLocation
+                    )
                     .DotNetRoot(null)
                     .Execute()
-                    .Should().NotHaveStdErrContaining("The install_location file");
+                    .Should()
+                    .NotHaveStdErrContaining("The install_location file");
             }
         }
 
@@ -256,7 +314,9 @@ namespace HostActivation.Tests
                     .PublishProject(extraArgs: "/p:UseAppHost=true");
 
                 PortableAppFixture = fixture;
-                BaseDirectory = Path.GetDirectoryName(PortableAppFixture.SdkDotnet.GreatestVersionHostFxrFilePath);
+                BaseDirectory = Path.GetDirectoryName(
+                    PortableAppFixture.SdkDotnet.GreatestVersionHostFxrFilePath
+                );
                 InstallLocation = fixture.BuiltDotnet.BinPath;
             }
 

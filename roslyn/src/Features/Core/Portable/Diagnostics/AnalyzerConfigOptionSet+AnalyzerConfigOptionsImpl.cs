@@ -13,7 +13,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             private readonly AnalyzerConfigOptions _options;
             private readonly AnalyzerConfigOptions _fallbackOptions;
 
-            public AnalyzerConfigOptionsImpl(AnalyzerConfigOptions options, AnalyzerConfigOptions fallbackOptions)
+            public AnalyzerConfigOptionsImpl(
+                AnalyzerConfigOptions options,
+                AnalyzerConfigOptions fallbackOptions
+            )
             {
                 _options = options;
                 _fallbackOptions = fallbackOptions;

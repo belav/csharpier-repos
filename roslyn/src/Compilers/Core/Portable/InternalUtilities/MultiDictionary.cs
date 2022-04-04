@@ -12,8 +12,8 @@ using System.Diagnostics.CodeAnalysis;
 namespace Roslyn.Utilities
 {
     // Note that this is not threadsafe for concurrent reading and writing.
-    internal sealed class MultiDictionary<K, V> : IEnumerable<KeyValuePair<K, MultiDictionary<K, V>.ValueSet>>
-        where K : notnull
+    internal sealed class MultiDictionary<K, V>
+        : IEnumerable<KeyValuePair<K, MultiDictionary<K, V>.ValueSet>> where K : notnull
     {
         public struct ValueSet : IEnumerable<V>
         {
@@ -53,9 +53,7 @@ namespace Roslyn.Utilities
                     }
                 }
 
-                public void Dispose()
-                {
-                }
+                public void Dispose() { }
 
                 public void Reset()
                 {
@@ -68,10 +66,7 @@ namespace Roslyn.Utilities
                 // has been called or after the end of the set has been reached.
                 public V Current
                 {
-                    get
-                    {
-                        return _count > 1 ? _values.Current : _value;
-                    }
+                    get { return _count > 1 ? _values.Current : _value; }
                 }
 
                 public bool MoveNext()
@@ -112,9 +107,9 @@ namespace Roslyn.Utilities
                     }
 
                     // The following code used to be written like so:
-                    //    
+                    //
                     //    return (_value as ImmutableHashSet<V>)?.Count ?? 1;
-                    // 
+                    //
                     // This code pattern triggered a code-gen bug on Mac:
                     // https://github.com/dotnet/coreclr/issues/4801
 
@@ -220,10 +215,7 @@ namespace Roslyn.Utilities
         // Returns an empty set if there is no such key in the dictionary.
         public ValueSet this[K k]
         {
-            get
-            {
-                return _dictionary.TryGetValue(k, out var set) ? set : _emptySet;
-            }
+            get { return _dictionary.TryGetValue(k, out var set) ? set : _emptySet; }
         }
 
         public MultiDictionary()
@@ -236,7 +228,11 @@ namespace Roslyn.Utilities
             _dictionary = new Dictionary<K, ValueSet>(comparer);
         }
 
-        public MultiDictionary(int capacity, IEqualityComparer<K> comparer, IEqualityComparer<V>? valueComparer = null)
+        public MultiDictionary(
+            int capacity,
+            IEqualityComparer<K> comparer,
+            IEqualityComparer<V>? valueComparer = null
+        )
         {
             _dictionary = new Dictionary<K, ValueSet>(capacity, comparer);
             _valueComparer = valueComparer;
@@ -273,7 +269,9 @@ namespace Roslyn.Utilities
             return _dictionary.GetEnumerator();
         }
 
-        IEnumerator<KeyValuePair<K, ValueSet>> IEnumerable<KeyValuePair<K, ValueSet>>.GetEnumerator()
+        IEnumerator<KeyValuePair<K, ValueSet>> IEnumerable<
+            KeyValuePair<K, ValueSet>
+        >.GetEnumerator()
         {
             return GetEnumerator();
         }

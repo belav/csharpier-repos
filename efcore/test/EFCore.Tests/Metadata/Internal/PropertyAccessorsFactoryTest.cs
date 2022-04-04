@@ -28,13 +28,36 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             var stateManager = contextServices.GetRequiredService<IStateManager>();
 
             var entity = new IndexedClass();
-            var entry = new InternalEntityEntry(stateManager, (IEntityType)entityTypeBuilder.Metadata, entity);
+            var entry = new InternalEntityEntry(
+                stateManager,
+                (IEntityType)entityTypeBuilder.Metadata,
+                entity
+            );
 
             var propertyAccessors = new PropertyAccessorsFactory().Create((IProperty)propertyA);
-            Assert.Equal("ValueA", ((Func<InternalEntityEntry, string>)propertyAccessors.CurrentValueGetter)(entry));
-            Assert.Equal("ValueA", ((Func<InternalEntityEntry, string>)propertyAccessors.OriginalValueGetter)(entry));
-            Assert.Equal("ValueA", ((Func<InternalEntityEntry, string>)propertyAccessors.PreStoreGeneratedCurrentValueGetter)(entry));
-            Assert.Equal("ValueA", ((Func<InternalEntityEntry, string>)propertyAccessors.RelationshipSnapshotGetter)(entry));
+            Assert.Equal(
+                "ValueA",
+                ((Func<InternalEntityEntry, string>)propertyAccessors.CurrentValueGetter)(entry)
+            );
+            Assert.Equal(
+                "ValueA",
+                ((Func<InternalEntityEntry, string>)propertyAccessors.OriginalValueGetter)(entry)
+            );
+            Assert.Equal(
+                "ValueA",
+                (
+                    (Func<
+                        InternalEntityEntry,
+                        string
+                    >)propertyAccessors.PreStoreGeneratedCurrentValueGetter
+                )(entry)
+            );
+            Assert.Equal(
+                "ValueA",
+                ((Func<InternalEntityEntry, string>)propertyAccessors.RelationshipSnapshotGetter)(
+                    entry
+                )
+            );
 
             var valueBuffer = new ValueBuffer(new object[] { 1, "ValueA" });
             Assert.Equal("ValueA", propertyAccessors.ValueBufferGetter(valueBuffer));
@@ -54,13 +77,36 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             var stateManager = contextServices.GetRequiredService<IStateManager>();
 
             var entity = new NonIndexedClass();
-            var entry = new InternalEntityEntry(stateManager, (IEntityType)entityTypeBuilder.Metadata, entity);
+            var entry = new InternalEntityEntry(
+                stateManager,
+                (IEntityType)entityTypeBuilder.Metadata,
+                entity
+            );
 
             var propertyAccessors = new PropertyAccessorsFactory().Create((IProperty)propA);
-            Assert.Equal("ValueA", ((Func<InternalEntityEntry, string>)propertyAccessors.CurrentValueGetter)(entry));
-            Assert.Equal("ValueA", ((Func<InternalEntityEntry, string>)propertyAccessors.OriginalValueGetter)(entry));
-            Assert.Equal("ValueA", ((Func<InternalEntityEntry, string>)propertyAccessors.PreStoreGeneratedCurrentValueGetter)(entry));
-            Assert.Equal("ValueA", ((Func<InternalEntityEntry, string>)propertyAccessors.RelationshipSnapshotGetter)(entry));
+            Assert.Equal(
+                "ValueA",
+                ((Func<InternalEntityEntry, string>)propertyAccessors.CurrentValueGetter)(entry)
+            );
+            Assert.Equal(
+                "ValueA",
+                ((Func<InternalEntityEntry, string>)propertyAccessors.OriginalValueGetter)(entry)
+            );
+            Assert.Equal(
+                "ValueA",
+                (
+                    (Func<
+                        InternalEntityEntry,
+                        string
+                    >)propertyAccessors.PreStoreGeneratedCurrentValueGetter
+                )(entry)
+            );
+            Assert.Equal(
+                "ValueA",
+                ((Func<InternalEntityEntry, string>)propertyAccessors.RelationshipSnapshotGetter)(
+                    entry
+                )
+            );
 
             var valueBuffer = new ValueBuffer(new object[] { 1, "ValueA" });
             Assert.Equal("ValueA", propertyAccessors.ValueBufferGetter(valueBuffer));
@@ -68,7 +114,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         private class IndexedClass
         {
-            private readonly Dictionary<string, object> _internalValues = new() { { "PropertyA", "ValueA" } };
+            private readonly Dictionary<string, object> _internalValues =
+                new() { { "PropertyA", "ValueA" } };
 
             internal int Id { get; set; }
 

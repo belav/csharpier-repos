@@ -29,7 +29,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         /// </summary>
         public CosmosMethodCallTranslatorProvider(
             ISqlExpressionFactory sqlExpressionFactory,
-            IEnumerable<IMethodCallTranslatorPlugin> plugins)
+            IEnumerable<IMethodCallTranslatorPlugin> plugins
+        )
         {
             _plugins.AddRange(plugins.SelectMany(p => p.Translators));
 
@@ -45,7 +46,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                     //new EnumHasFlagTranslator(sqlExpressionFactory),
                     //new GetValueOrDefaultTranslator(sqlExpressionFactory),
                     //new ComparisonTranslator(sqlExpressionFactory),
-                });
+                }
+            );
         }
 
         /// <summary>
@@ -59,8 +61,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             SqlExpression? instance,
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
-            => _plugins.Concat(_translators)
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        ) =>
+            _plugins
+                .Concat(_translators)
                 .Select(t => t.Translate(instance, method, arguments, logger))
                 .FirstOrDefault(t => t != null);
 
@@ -70,7 +74,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected virtual void AddTranslators(IEnumerable<IMethodCallTranslator> translators)
-            => _translators.InsertRange(0, translators);
+        protected virtual void AddTranslators(IEnumerable<IMethodCallTranslator> translators) =>
+            _translators.InsertRange(0, translators);
     }
 }

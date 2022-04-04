@@ -16,7 +16,6 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Tagging
 {
-
     /// <summary>
     /// Tagger event that fires once the compilation is available in the remote OOP process for a particular project.
     /// Used to trigger things such as:
@@ -41,12 +40,14 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
         /// <summary>
         /// Cancellation tokens controlling background computation of the compilation.
         /// </summary>
-        private readonly ReferenceCountedDisposable<CancellationSeries> _cancellationSeries = new(new CancellationSeries());
+        private readonly ReferenceCountedDisposable<CancellationSeries> _cancellationSeries =
+            new(new CancellationSeries());
 
         public CompilationAvailableTaggerEventSource(
             ITextBuffer subjectBuffer,
             IAsynchronousOperationListener asyncListener,
-            params ITaggerEventSource[] eventSources)
+            params ITaggerEventSource[] eventSources
+        )
         {
             _subjectBuffer = subjectBuffer;
             _asyncListener = asyncListener;
@@ -74,7 +75,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             // First, notify anyone listening to us that something definitely changed.
             this.Changed?.Invoke(this, args);
 
-            var document = _subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document =
+                _subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
                 return;
 
@@ -93,39 +95,60 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             var cancellationToken = cancellationSeries.Target.CreateNext();
 
             var token = _asyncListener.BeginAsyncOperation(nameof(OnEventSourceChanged));
-            var task = Task.Run(async () =>
-            {
-                // Support cancellation without throwing
-                await _asyncListener.Delay(TimeSpan.FromMilliseconds(500), cancellationToken).NoThrowAwaitable(captureContext: false);
-                if (cancellationToken.IsCancellationRequested)
-                    return;
-
-                var client = await RemoteHostClient.TryGetClientAsync(document.Project, cancellationToken).ConfigureAwait(false);
-                if (client != null)
+            var task = Task.Run(
+                async () =>
                 {
-                    var result = await client.TryInvokeAsync<IRemoteCompilationAvailableService>(
-                        document.Project,
-                        (service, solutionInfo, cancellationToken) => service.ComputeCompilationAsync(solutionInfo, document.Project.Id, cancellationToken),
-                        cancellationToken).ConfigureAwait(false);
-
-                    if (!result)
+                    // Support cancellation without throwing
+                    await _asyncListener
+                        .Delay(TimeSpan.FromMilliseconds(500), cancellationToken)
+                        .NoThrowAwaitable(captureContext: false);
+                    if (cancellationToken.IsCancellationRequested)
                         return;
-                }
-                else
-                {
-                    // if we can't get the client, just compute the compilation locally and fire the event once we have it.
-                    await ComputeCompilationInCurrentProcessAsync(document.Project, cancellationToken).ConfigureAwait(false);
-                }
 
-                // now that we know we have an full compilation, retrigger the tagger so it can show accurate results with the 
-                // full information about this project.
-                this.Changed?.Invoke(this, new TaggerEventArgs());
-            }, cancellationToken);
+                    var client = await RemoteHostClient
+                        .TryGetClientAsync(document.Project, cancellationToken)
+                        .ConfigureAwait(false);
+                    if (client != null)
+                    {
+                        var result = await client
+                            .TryInvokeAsync<IRemoteCompilationAvailableService>(
+                                document.Project,
+                                (service, solutionInfo, cancellationToken) =>
+                                    service.ComputeCompilationAsync(
+                                        solutionInfo,
+                                        document.Project.Id,
+                                        cancellationToken
+                                    ),
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
+
+                        if (!result)
+                            return;
+                    }
+                    else
+                    {
+                        // if we can't get the client, just compute the compilation locally and fire the event once we have it.
+                        await ComputeCompilationInCurrentProcessAsync(
+                                document.Project,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
+                    }
+
+                    // now that we know we have an full compilation, retrigger the tagger so it can show accurate results with the
+                    // full information about this project.
+                    this.Changed?.Invoke(this, new TaggerEventArgs());
+                },
+                cancellationToken
+            );
             task.CompletesAsyncOperation(token);
         }
 
         // this method is super basic.  but it ensures that the remote impl and the local impl always agree.
-        public static Task ComputeCompilationInCurrentProcessAsync(Project project, CancellationToken cancellationToken)
-            => project.GetCompilationAsync(cancellationToken);
+        public static Task ComputeCompilationInCurrentProcessAsync(
+            Project project,
+            CancellationToken cancellationToken
+        ) => project.GetCompilationAsync(cancellationToken);
     }
 }

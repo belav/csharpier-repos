@@ -41,7 +41,8 @@ public class CookieTempDataProvider : ITempDataProvider
         IDataProtectionProvider dataProtectionProvider,
         ILoggerFactory loggerFactory,
         IOptions<CookieTempDataProviderOptions> options,
-        TempDataSerializer tempDataSerializer)
+        TempDataSerializer tempDataSerializer
+    )
     {
         _dataProtector = dataProtectionProvider.CreateProtector(Purpose);
         _logger = loggerFactory.CreateLogger<CookieTempDataProvider>();
@@ -72,7 +73,10 @@ public class CookieTempDataProvider : ITempDataProvider
             // cookie to no longer be available.
             try
             {
-                var encodedValue = _chunkingCookieManager.GetRequestCookie(context, _options.Cookie.Name);
+                var encodedValue = _chunkingCookieManager.GetRequestCookie(
+                    context,
+                    _options.Cookie.Name
+                );
                 if (!string.IsNullOrEmpty(encodedValue))
                 {
                     var protectedData = WebEncoders.Base64UrlDecode(encodedValue);
@@ -91,7 +95,11 @@ public class CookieTempDataProvider : ITempDataProvider
                 // over and over.
                 if (!context.Response.HasStarted)
                 {
-                    _chunkingCookieManager.DeleteCookie(context, _options.Cookie.Name, _options.Cookie.Build(context));
+                    _chunkingCookieManager.DeleteCookie(
+                        context,
+                        _options.Cookie.Name,
+                        _options.Cookie.Build(context)
+                    );
                 }
             }
         }
@@ -121,7 +129,12 @@ public class CookieTempDataProvider : ITempDataProvider
             var bytes = _tempDataSerializer.Serialize(values);
             bytes = _dataProtector.Protect(bytes);
             var encodedValue = WebEncoders.Base64UrlEncode(bytes);
-            _chunkingCookieManager.AppendResponseCookie(context, _options.Cookie.Name, encodedValue, cookieOptions);
+            _chunkingCookieManager.AppendResponseCookie(
+                context,
+                _options.Cookie.Name,
+                encodedValue,
+                cookieOptions
+            );
         }
         else
         {

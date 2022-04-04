@@ -21,9 +21,18 @@ internal abstract class InvocationRequest : IDisposable
     public string InvocationId { get; }
     public HubConnection HubConnection { get; private set; }
 
-    protected InvocationRequest(CancellationToken cancellationToken, Type resultType, string invocationId, ILogger logger, HubConnection hubConnection)
+    protected InvocationRequest(
+        CancellationToken cancellationToken,
+        Type resultType,
+        string invocationId,
+        ILogger logger,
+        HubConnection hubConnection
+    )
     {
-        _cancellationTokenRegistration = cancellationToken.Register(self => ((InvocationRequest)self!).Cancel(), this);
+        _cancellationTokenRegistration = cancellationToken.Register(
+            self => ((InvocationRequest)self!).Cancel(),
+            this
+        );
 
         InvocationId = invocationId;
         CancellationToken = cancellationToken;
@@ -34,17 +43,42 @@ internal abstract class InvocationRequest : IDisposable
         Log.InvocationCreated(Logger, InvocationId);
     }
 
-    public static InvocationRequest Invoke(CancellationToken cancellationToken, Type resultType, string invocationId, ILoggerFactory loggerFactory, HubConnection hubConnection, out Task<object?> result)
+    public static InvocationRequest Invoke(
+        CancellationToken cancellationToken,
+        Type resultType,
+        string invocationId,
+        ILoggerFactory loggerFactory,
+        HubConnection hubConnection,
+        out Task<object?> result
+    )
     {
-        var req = new NonStreaming(cancellationToken, resultType, invocationId, loggerFactory, hubConnection);
+        var req = new NonStreaming(
+            cancellationToken,
+            resultType,
+            invocationId,
+            loggerFactory,
+            hubConnection
+        );
         result = req.Result;
         return req;
     }
 
-    public static InvocationRequest Stream(CancellationToken cancellationToken, Type resultType, string invocationId,
-        ILoggerFactory loggerFactory, HubConnection hubConnection, out ChannelReader<object?> result)
+    public static InvocationRequest Stream(
+        CancellationToken cancellationToken,
+        Type resultType,
+        string invocationId,
+        ILoggerFactory loggerFactory,
+        HubConnection hubConnection,
+        out ChannelReader<object?> result
+    )
     {
-        var req = new Streaming(cancellationToken, resultType, invocationId, loggerFactory, hubConnection);
+        var req = new Streaming(
+            cancellationToken,
+            resultType,
+            invocationId,
+            loggerFactory,
+            hubConnection
+        );
         result = req.Result;
         return req;
     }
@@ -69,10 +103,20 @@ internal abstract class InvocationRequest : IDisposable
     {
         private readonly Channel<object?> _channel = Channel.CreateUnbounded<object?>();
 
-        public Streaming(CancellationToken cancellationToken, Type resultType, string invocationId, ILoggerFactory loggerFactory, HubConnection hubConnection)
-            : base(cancellationToken, resultType, invocationId, loggerFactory.CreateLogger<Streaming>(), hubConnection)
-        {
-        }
+        public Streaming(
+            CancellationToken cancellationToken,
+            Type resultType,
+            string invocationId,
+            ILoggerFactory loggerFactory,
+            HubConnection hubConnection
+        )
+            : base(
+                cancellationToken,
+                resultType,
+                invocationId,
+                loggerFactory.CreateLogger<Streaming>(),
+                hubConnection
+            ) { }
 
         public ChannelReader<object?> Result => _channel.Reader;
 
@@ -82,7 +126,11 @@ internal abstract class InvocationRequest : IDisposable
             if (completionMessage.Result != null)
             {
                 Log.ReceivedUnexpectedComplete(Logger, InvocationId);
-                _channel.Writer.TryComplete(new InvalidOperationException("Server provided a result in a completion response to a streamed invocation."));
+                _channel.Writer.TryComplete(
+                    new InvalidOperationException(
+                        "Server provided a result in a completion response to a streamed invocation."
+                    )
+                );
             }
 
             if (!string.IsNullOrEmpty(completionMessage.Error))
@@ -127,12 +175,23 @@ internal abstract class InvocationRequest : IDisposable
 
     private class NonStreaming : InvocationRequest
     {
-        private readonly TaskCompletionSource<object?> _completionSource = new TaskCompletionSource<object?>(TaskCreationOptions.RunContinuationsAsynchronously);
+        private readonly TaskCompletionSource<object?> _completionSource =
+            new TaskCompletionSource<object?>(TaskCreationOptions.RunContinuationsAsynchronously);
 
-        public NonStreaming(CancellationToken cancellationToken, Type resultType, string invocationId, ILoggerFactory loggerFactory, HubConnection hubConnection)
-            : base(cancellationToken, resultType, invocationId, loggerFactory.CreateLogger<NonStreaming>(), hubConnection)
-        {
-        }
+        public NonStreaming(
+            CancellationToken cancellationToken,
+            Type resultType,
+            string invocationId,
+            ILoggerFactory loggerFactory,
+            HubConnection hubConnection
+        )
+            : base(
+                cancellationToken,
+                resultType,
+                invocationId,
+                loggerFactory.CreateLogger<NonStreaming>(),
+                hubConnection
+            ) { }
 
         public Task<object?> Result => _completionSource.Task;
 
@@ -157,7 +216,11 @@ internal abstract class InvocationRequest : IDisposable
         public override ValueTask<bool> StreamItem(object? item)
         {
             Log.StreamItemOnNonStreamInvocation(Logger, InvocationId);
-            _completionSource.TrySetException(new InvalidOperationException($"Streaming hub methods must be invoked with the '{nameof(HubConnection)}.{nameof(HubConnectionExtensions.StreamAsChannelAsync)}' method."));
+            _completionSource.TrySetException(
+                new InvalidOperationException(
+                    $"Streaming hub methods must be invoked with the '{nameof(HubConnection)}.{nameof(HubConnectionExtensions.StreamAsChannelAsync)}' method."
+                )
+            );
 
             // We "delivered" the stream item successfully as far as the caller cares
             return new ValueTask<bool>(true);
@@ -173,27 +236,58 @@ internal abstract class InvocationRequest : IDisposable
     {
         // Category: Streaming and NonStreaming
         private static readonly Action<ILogger, string, Exception?> _invocationCreated =
-            LoggerMessage.Define<string>(LogLevel.Trace, new EventId(1, "InvocationCreated"), "Invocation {InvocationId} created.");
+            LoggerMessage.Define<string>(
+                LogLevel.Trace,
+                new EventId(1, "InvocationCreated"),
+                "Invocation {InvocationId} created."
+            );
 
         private static readonly Action<ILogger, string, Exception?> _invocationDisposed =
-            LoggerMessage.Define<string>(LogLevel.Trace, new EventId(2, "InvocationDisposed"), "Invocation {InvocationId} disposed.");
+            LoggerMessage.Define<string>(
+                LogLevel.Trace,
+                new EventId(2, "InvocationDisposed"),
+                "Invocation {InvocationId} disposed."
+            );
 
         private static readonly Action<ILogger, string, Exception?> _invocationCompleted =
-            LoggerMessage.Define<string>(LogLevel.Trace, new EventId(3, "InvocationCompleted"), "Invocation {InvocationId} marked as completed.");
+            LoggerMessage.Define<string>(
+                LogLevel.Trace,
+                new EventId(3, "InvocationCompleted"),
+                "Invocation {InvocationId} marked as completed."
+            );
 
         private static readonly Action<ILogger, string, Exception?> _invocationFailed =
-            LoggerMessage.Define<string>(LogLevel.Trace, new EventId(4, "InvocationFailed"), "Invocation {InvocationId} marked as failed.");
+            LoggerMessage.Define<string>(
+                LogLevel.Trace,
+                new EventId(4, "InvocationFailed"),
+                "Invocation {InvocationId} marked as failed."
+            );
 
         // Category: Streaming
         private static readonly Action<ILogger, string, Exception> _errorWritingStreamItem =
-            LoggerMessage.Define<string>(LogLevel.Error, new EventId(5, "ErrorWritingStreamItem"), "Invocation {InvocationId} caused an error trying to write a stream item.");
+            LoggerMessage.Define<string>(
+                LogLevel.Error,
+                new EventId(5, "ErrorWritingStreamItem"),
+                "Invocation {InvocationId} caused an error trying to write a stream item."
+            );
 
         private static readonly Action<ILogger, string, Exception?> _receivedUnexpectedComplete =
-            LoggerMessage.Define<string>(LogLevel.Error, new EventId(6, "ReceivedUnexpectedComplete"), "Invocation {InvocationId} received a completion result, but was invoked as a streaming invocation.");
+            LoggerMessage.Define<string>(
+                LogLevel.Error,
+                new EventId(6, "ReceivedUnexpectedComplete"),
+                "Invocation {InvocationId} received a completion result, but was invoked as a streaming invocation."
+            );
 
         // Category: NonStreaming
-        private static readonly Action<ILogger, string, Exception?> _streamItemOnNonStreamInvocation =
-            LoggerMessage.Define<string>(LogLevel.Error, new EventId(5, "StreamItemOnNonStreamInvocation"), "Invocation {InvocationId} received stream item but was invoked as a non-streamed invocation.");
+        private static readonly Action<
+            ILogger,
+            string,
+            Exception?
+        > _streamItemOnNonStreamInvocation = LoggerMessage.Define<string>(
+            LogLevel.Error,
+            new EventId(5, "StreamItemOnNonStreamInvocation"),
+            "Invocation {InvocationId} received stream item but was invoked as a non-streamed invocation."
+        );
 
         public static void InvocationCreated(ILogger logger, string invocationId)
         {
@@ -215,7 +309,11 @@ internal abstract class InvocationRequest : IDisposable
             _invocationFailed(logger, invocationId, null);
         }
 
-        public static void ErrorWritingStreamItem(ILogger logger, string invocationId, Exception exception)
+        public static void ErrorWritingStreamItem(
+            ILogger logger,
+            string invocationId,
+            Exception exception
+        )
         {
             _errorWritingStreamItem(logger, invocationId, exception);
         }

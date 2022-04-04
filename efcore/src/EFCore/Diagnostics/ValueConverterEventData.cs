@@ -27,8 +27,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             EventDefinitionBase eventDefinition,
             Func<EventDefinitionBase, EventData, string> messageGenerator,
             Type mappingClrType,
-            ValueConverter valueConverter)
-            : base(eventDefinition, messageGenerator)
+            ValueConverter valueConverter
+        ) : base(eventDefinition, messageGenerator)
         {
             MappingClrType = mappingClrType;
             ValueConverter = valueConverter;

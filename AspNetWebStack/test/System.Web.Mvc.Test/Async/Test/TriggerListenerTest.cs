@@ -16,7 +16,12 @@ namespace System.Web.Mvc.Async.Test
             Trigger trigger = listener.CreateTrigger();
 
             // Act & assert (hasn't fired yet)
-            listener.SetContinuation(() => { count++; });
+            listener.SetContinuation(
+                () =>
+                {
+                    count++;
+                }
+            );
             listener.Activate();
             Assert.Equal(0, count);
 

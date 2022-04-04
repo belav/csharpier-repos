@@ -14,7 +14,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.UnitTests.CodeModel
     public class FileCodeClassWithMissingBraceTests : AbstractFileCodeElementTests
     {
         public FileCodeClassWithMissingBraceTests()
-            : base(@"using System;
+            : base(
+                @"using System;
 
 
 public abstract class Goo : IDisposable, ICloneable
@@ -41,9 +42,8 @@ namespace N
 class Baz
 {
 
-")
-        {
-        }
+"
+            ) { }
 
         private CodeClass GetCodeClass(params object[] path)
         {

@@ -22,8 +22,12 @@ namespace System.Web.Mvc.Test
 
             // Act
             Assert.ThrowsArgumentNull(
-                delegate { handler.PublicVerifyAndProcessRequest(null, null); },
-                "httpHandler");
+                delegate
+                {
+                    handler.PublicVerifyAndProcessRequest(null, null);
+                },
+                "httpHandler"
+            );
         }
 
         [Fact]
@@ -56,7 +60,10 @@ namespace System.Web.Mvc.Test
 
         private sealed class PublicMvcHttpHandler : MvcHttpHandler
         {
-            public void PublicVerifyAndProcessRequest(IHttpHandler httpHandler, HttpContextBase httpContext)
+            public void PublicVerifyAndProcessRequest(
+                IHttpHandler httpHandler,
+                HttpContextBase httpContext
+            )
             {
                 base.VerifyAndProcessRequest(httpHandler, httpContext);
             }

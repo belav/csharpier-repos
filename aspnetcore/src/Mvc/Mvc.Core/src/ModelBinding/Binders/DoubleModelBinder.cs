@@ -90,7 +90,9 @@ public class DoubleModelBinder : IModelBinder
                 modelState.TryAddModelError(
                     modelName,
                     metadata.ModelBindingMessageProvider.ValueMustNotBeNullAccessor(
-                        valueProviderResult.ToString()));
+                        valueProviderResult.ToString()
+                    )
+                );
             }
             else
             {

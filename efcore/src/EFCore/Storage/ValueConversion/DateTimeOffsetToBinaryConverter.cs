@@ -20,10 +20,7 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         /// <remarks>
         ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information.
         /// </remarks>
-        public DateTimeOffsetToBinaryConverter()
-            : this(null)
-        {
-        }
+        public DateTimeOffsetToBinaryConverter() : this(null) { }
 
         /// <summary>
         ///     Creates a new instance of this converter.
@@ -38,17 +35,22 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         public DateTimeOffsetToBinaryConverter(ConverterMappingHints? mappingHints)
             : base(
                 v => ((v.Ticks / 1000) << 11) | ((long)v.Offset.TotalMinutes & 0x7FF),
-                v => new DateTimeOffset(
-                    new DateTime((v >> 11) * 1000),
-                    new TimeSpan(0, (int)((v << 53) >> 53), 0)),
-                mappingHints)
-        {
-        }
+                v =>
+                    new DateTimeOffset(
+                        new DateTime((v >> 11) * 1000),
+                        new TimeSpan(0, (int)((v << 53) >> 53), 0)
+                    ),
+                mappingHints
+            ) { }
 
         /// <summary>
         ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.
         /// </summary>
-        public static ValueConverterInfo DefaultInfo { get; }
-            = new(typeof(DateTimeOffset), typeof(long), i => new DateTimeOffsetToBinaryConverter(i.MappingHints));
+        public static ValueConverterInfo DefaultInfo { get; } =
+            new(
+                typeof(DateTimeOffset),
+                typeof(long),
+                i => new DateTimeOffsetToBinaryConverter(i.MappingHints)
+            );
     }
 }

@@ -27,9 +27,7 @@ internal sealed class MultipartReaderStream : Stream
     /// <param name="stream">The <see cref="BufferedReadStream"/>.</param>
     /// <param name="boundary">The boundary pattern to use.</param>
     public MultipartReaderStream(BufferedReadStream stream, MultipartBoundary boundary)
-        : this(stream, boundary, ArrayPool<byte>.Shared)
-    {
-    }
+        : this(stream, boundary, ArrayPool<byte>.Shared) { }
 
     /// <summary>
     /// Creates a stream that reads until it reaches the given boundary pattern.
@@ -37,7 +35,11 @@ internal sealed class MultipartReaderStream : Stream
     /// <param name="stream">The <see cref="BufferedReadStream"/>.</param>
     /// <param name="boundary">The boundary pattern to use.</param>
     /// <param name="bytePool">The ArrayPool pool to use for temporary byte arrays.</param>
-    public MultipartReaderStream(BufferedReadStream stream, MultipartBoundary boundary, ArrayPool<byte> bytePool)
+    public MultipartReaderStream(
+        BufferedReadStream stream,
+        MultipartBoundary boundary,
+        ArrayPool<byte> bytePool
+    )
     {
         if (stream == null)
         {
@@ -86,11 +88,19 @@ internal sealed class MultipartReaderStream : Stream
         {
             if (value < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(value), value, "The Position must be positive.");
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    value,
+                    "The Position must be positive."
+                );
             }
             if (value > _observedLength)
             {
-                throw new ArgumentOutOfRangeException(nameof(value), value, "The Position must be less than length.");
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    value,
+                    "The Position must be less than length."
+                );
             }
             _position = value;
             if (_position < _observedLength)
@@ -127,7 +137,12 @@ internal sealed class MultipartReaderStream : Stream
         throw new NotSupportedException();
     }
 
-    public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+    public override Task WriteAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    )
     {
         throw new NotSupportedException();
     }
@@ -153,7 +168,9 @@ internal sealed class MultipartReaderStream : Stream
             _observedLength = _position;
             if (LengthLimit.HasValue && _observedLength > LengthLimit.GetValueOrDefault())
             {
-                throw new InvalidDataException($"Multipart body length limit {LengthLimit.GetValueOrDefault()} exceeded.");
+                throw new InvalidDataException(
+                    $"Multipart body length limit {LengthLimit.GetValueOrDefault()} exceeded."
+                );
             }
         }
         return read;
@@ -169,18 +186,26 @@ internal sealed class MultipartReaderStream : Stream
         PositionInnerStream();
         if (!_innerStream.EnsureBuffered(_boundary.FinalBoundaryLength))
         {
-            throw new IOException("Unexpected end of Stream, the content may have already been read by another component. ");
+            throw new IOException(
+                "Unexpected end of Stream, the content may have already been read by another component. "
+            );
         }
         var bufferedData = _innerStream.BufferedData;
 
         // scan for a boundary match, full or partial.
         int read;
-        if (SubMatch(bufferedData, _boundary.BoundaryBytes, out var matchOffset, out var matchCount))
+        if (
+            SubMatch(bufferedData, _boundary.BoundaryBytes, out var matchOffset, out var matchCount)
+        )
         {
             // We found a possible match, return any data before it.
             if (matchOffset > bufferedData.Offset)
             {
-                read = _innerStream.Read(buffer, offset, Math.Min(count, matchOffset - bufferedData.Offset));
+                read = _innerStream.Read(
+                    buffer,
+                    offset,
+                    Math.Min(count, matchOffset - bufferedData.Offset)
+                );
                 return UpdatePosition(read);
             }
 
@@ -201,7 +226,11 @@ internal sealed class MultipartReaderStream : Stream
             {
                 FinalBoundaryFound = true;
             }
-            Debug.Assert(FinalBoundaryFound || string.Equals(string.Empty, remainder, StringComparison.Ordinal), "Un-expected data found on the boundary line: " + remainder);
+            Debug.Assert(
+                FinalBoundaryFound
+                    || string.Equals(string.Empty, remainder, StringComparison.Ordinal),
+                "Un-expected data found on the boundary line: " + remainder
+            );
             _finished = true;
             return 0;
         }
@@ -211,7 +240,12 @@ internal sealed class MultipartReaderStream : Stream
         return UpdatePosition(read);
     }
 
-    public override async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+    public override async Task<int> ReadAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    )
     {
         if (_finished)
         {
@@ -219,9 +253,16 @@ internal sealed class MultipartReaderStream : Stream
         }
 
         PositionInnerStream();
-        if (!await _innerStream.EnsureBufferedAsync(_boundary.FinalBoundaryLength, cancellationToken))
+        if (
+            !await _innerStream.EnsureBufferedAsync(
+                _boundary.FinalBoundaryLength,
+                cancellationToken
+            )
+        )
         {
-            throw new IOException("Unexpected end of Stream, the content may have already been read by another component. ");
+            throw new IOException(
+                "Unexpected end of Stream, the content may have already been read by another component. "
+            );
         }
         var bufferedData = _innerStream.BufferedData;
 
@@ -235,7 +276,11 @@ internal sealed class MultipartReaderStream : Stream
             if (matchOffset > bufferedData.Offset)
             {
                 // Sync, it's already buffered
-                read = _innerStream.Read(buffer, offset, Math.Min(count, matchOffset - bufferedData.Offset));
+                read = _innerStream.Read(
+                    buffer,
+                    offset,
+                    Math.Min(count, matchOffset - bufferedData.Offset)
+                );
                 return UpdatePosition(read);
             }
 
@@ -250,13 +295,20 @@ internal sealed class MultipartReaderStream : Stream
             _bytePool.Return(boundary);
             Debug.Assert(read == length); // It should have all been buffered
 
-            var remainder = await _innerStream.ReadLineAsync(lengthLimit: 100, cancellationToken: cancellationToken); // Whitespace may exceed the buffer.
+            var remainder = await _innerStream.ReadLineAsync(
+                lengthLimit: 100,
+                cancellationToken: cancellationToken
+            ); // Whitespace may exceed the buffer.
             remainder = remainder.Trim();
             if (string.Equals("--", remainder, StringComparison.Ordinal))
             {
                 FinalBoundaryFound = true;
             }
-            Debug.Assert(FinalBoundaryFound || string.Equals(string.Empty, remainder, StringComparison.Ordinal), "Un-expected data found on the boundary line: " + remainder);
+            Debug.Assert(
+                FinalBoundaryFound
+                    || string.Equals(string.Empty, remainder, StringComparison.Ordinal),
+                "Un-expected data found on the boundary line: " + remainder
+            );
 
             _finished = true;
             return 0;
@@ -273,7 +325,12 @@ internal sealed class MultipartReaderStream : Stream
     // Or:
     // 1: AAAAABBB
     // 2:      BBBBB
-    private bool SubMatch(ArraySegment<byte> segment1, byte[] matchBytes, out int matchOffset, out int matchCount)
+    private bool SubMatch(
+        ArraySegment<byte> segment1,
+        byte[] matchBytes,
+        out int matchOffset,
+        out int matchCount
+    )
     {
         // clear matchCount to zero
         matchCount = 0;
@@ -282,14 +339,23 @@ internal sealed class MultipartReaderStream : Stream
         {
             var matchBytesLengthMinusOne = matchBytes.Length - 1;
             var matchBytesLastByte = matchBytes[matchBytesLengthMinusOne];
-            var segmentEndMinusMatchBytesLength = segment1.Offset + segment1.Count - matchBytes.Length;
+            var segmentEndMinusMatchBytesLength =
+                segment1.Offset + segment1.Count - matchBytes.Length;
 
             matchOffset = segment1.Offset;
             while (matchOffset < segmentEndMinusMatchBytesLength)
             {
                 var lookaheadTailChar = segment1.Array![matchOffset + matchBytesLengthMinusOne];
-                if (lookaheadTailChar == matchBytesLastByte &&
-                    CompareBuffers(segment1.Array, matchOffset, matchBytes, 0, matchBytesLengthMinusOne) == 0)
+                if (
+                    lookaheadTailChar == matchBytesLastByte
+                    && CompareBuffers(
+                        segment1.Array,
+                        matchOffset,
+                        matchBytes,
+                        0,
+                        matchBytesLengthMinusOne
+                    ) == 0
+                )
                 {
                     matchCount = matchBytes.Length;
                     return true;
@@ -305,7 +371,11 @@ internal sealed class MultipartReaderStream : Stream
         for (; matchOffset < segmentEnd; matchOffset++)
         {
             var countLimit = segmentEnd - matchOffset;
-            for (matchCount = 0; matchCount < matchBytes.Length && matchCount < countLimit; matchCount++)
+            for (
+                matchCount = 0;
+                matchCount < matchBytes.Length && matchCount < countLimit;
+                matchCount++
+            )
             {
                 if (matchBytes[matchCount] != segment1.Array![matchOffset + matchCount])
                 {
@@ -321,7 +391,13 @@ internal sealed class MultipartReaderStream : Stream
         return matchCount > 0;
     }
 
-    private static int CompareBuffers(byte[] buffer1, int offset1, byte[] buffer2, int offset2, int count)
+    private static int CompareBuffers(
+        byte[] buffer1,
+        int offset1,
+        byte[] buffer2,
+        int offset2,
+        int count
+    )
     {
         for (; count-- > 0; offset1++, offset2++)
         {

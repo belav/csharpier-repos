@@ -23,7 +23,8 @@ namespace HttpStress
         private FileStream _log;
         private Channel<string> _messagesChannel = Channel.CreateUnbounded<string>();
         private Task _processMessages;
-        private DefaultObjectPool<StringBuilder> _stringBuilderPool = new DefaultObjectPool<StringBuilder>(new StringBuilderPooledObjectPolicy());
+        private DefaultObjectPool<StringBuilder> _stringBuilderPool =
+            new DefaultObjectPool<StringBuilder>(new StringBuilderPooledObjectPolicy());
 
         private FileStream CreateNextLogFileStream()
         {
@@ -47,7 +48,8 @@ namespace HttpStress
                 try
                 {
                     File.Delete(filename);
-                } catch {}
+                }
+                catch { }
             }
             _log = CreateNextLogFileStream();
             _messagesChannel = Channel.CreateUnbounded<string>();
@@ -56,8 +58,10 @@ namespace HttpStress
 
         protected override void OnEventSourceCreated(EventSource eventSource)
         {
-            if (eventSource.Name == "Private.InternalDiagnostics.System.Net.Http" ||
-                eventSource.Name == "Private.InternalDiagnostics.System.Net.Quic")
+            if (
+                eventSource.Name == "Private.InternalDiagnostics.System.Net.Http"
+                || eventSource.Name == "Private.InternalDiagnostics.System.Net.Quic"
+            )
             {
                 EnableEvents(eventSource, EventLevel.LogAlways);
             }

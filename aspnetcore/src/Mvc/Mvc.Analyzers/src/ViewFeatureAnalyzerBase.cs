@@ -22,19 +22,23 @@ public abstract class ViewFeatureAnalyzerBase : DiagnosticAnalyzer
     public sealed override void Initialize(AnalysisContext context)
     {
         context.EnableConcurrentExecution();
-        context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.Analyze | GeneratedCodeAnalysisFlags.ReportDiagnostics);
-        context.RegisterCompilationStartAction(compilationContext =>
-        {
-            var analyzerContext = new ViewFeaturesAnalyzerContext(compilationContext);
+        context.ConfigureGeneratedCodeAnalysis(
+            GeneratedCodeAnalysisFlags.Analyze | GeneratedCodeAnalysisFlags.ReportDiagnostics
+        );
+        context.RegisterCompilationStartAction(
+            compilationContext =>
+            {
+                var analyzerContext = new ViewFeaturesAnalyzerContext(compilationContext);
 
                 // Only do work if we can locate IHtmlHelper.
                 if (analyzerContext.HtmlHelperType == null)
-            {
-                return;
-            }
+                {
+                    return;
+                }
 
-            InitializeWorker(analyzerContext);
-        });
+                InitializeWorker(analyzerContext);
+            }
+        );
     }
 
     protected abstract void InitializeWorker(ViewFeaturesAnalyzerContext analyzerContext);

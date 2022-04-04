@@ -14,42 +14,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
 {
     public class RegionHighlighterTests : AbstractCSharpKeywordHighlighterTests
     {
-        internal override Type GetHighlighterType()
-            => typeof(RegionHighlighter);
+        internal override Type GetHighlighterType() => typeof(RegionHighlighter);
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestExample1_1()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     {|Cursor:[|#region|]|} Main
     static void Main()
     {
     }
     [|#endregion|]
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestExample1_2()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     [|#region|] Main
     static void Main()
     {
     }
     {|Cursor:[|#endregion|]|}
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestNestedExample1_1()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     {|Cursor:[|#region|]|} Main
     static void Main()
@@ -58,14 +59,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         #endregion
     }
     [|#endregion|]
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestNestedExample1_2()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     #region Main
     static void Main()
@@ -74,14 +76,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         [|#endregion|]
     }
     #endregion
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestNestedExample1_3()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     #region Main
     static void Main()
@@ -90,14 +93,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {|Cursor:[|#endregion|]|}
     }
     #endregion
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestNestedExample1_4()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     [|#region|] Main
     static void Main()
@@ -106,7 +110,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         #endregion
     }
     {|Cursor:[|#endregion|]|}
-}");
+}"
+            );
         }
     }
 }

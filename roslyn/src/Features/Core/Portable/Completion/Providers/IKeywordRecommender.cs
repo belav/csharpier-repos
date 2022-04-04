@@ -8,9 +8,12 @@ using Microsoft.CodeAnalysis.Shared.Extensions.ContextQuery;
 
 namespace Microsoft.CodeAnalysis.Completion.Providers
 {
-    internal interface IKeywordRecommender<TContext>
-        where TContext : SyntaxContext
+    internal interface IKeywordRecommender<TContext> where TContext : SyntaxContext
     {
-        ImmutableArray<RecommendedKeyword> RecommendKeywords(int position, TContext context, CancellationToken cancellationToken);
+        ImmutableArray<RecommendedKeyword> RecommendKeywords(
+            int position,
+            TContext context,
+            CancellationToken cancellationToken
+        );
     }
 }

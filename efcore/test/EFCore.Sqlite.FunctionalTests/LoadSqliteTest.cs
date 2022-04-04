@@ -7,15 +7,12 @@ namespace Microsoft.EntityFrameworkCore
 {
     public class LoadSqliteTest : LoadTestBase<LoadSqliteTest.LoadSqliteFixture>
     {
-        public LoadSqliteTest(LoadSqliteFixture fixture)
-            : base(fixture)
-        {
-        }
+        public LoadSqliteTest(LoadSqliteFixture fixture) : base(fixture) { }
 
         public class LoadSqliteFixture : LoadFixtureBase
         {
-            protected override ITestStoreFactory TestStoreFactory
-                => SqliteTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                SqliteTestStoreFactory.Instance;
         }
     }
 }

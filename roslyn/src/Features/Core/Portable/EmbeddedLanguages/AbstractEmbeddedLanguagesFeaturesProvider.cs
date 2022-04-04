@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages
     /// <summary>
     /// Abstract implementation of the C# and VB embedded language providers.
     /// </summary>
-    internal abstract class AbstractEmbeddedLanguageFeaturesProvider : AbstractEmbeddedLanguagesProvider
+    internal abstract class AbstractEmbeddedLanguageFeaturesProvider
+        : AbstractEmbeddedLanguagesProvider
     {
         public override ImmutableArray<IEmbeddedLanguage> Languages { get; }
 
@@ -23,10 +24,11 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages
             Languages = ImmutableArray.Create<IEmbeddedLanguage>(
                 new DateAndTimeEmbeddedLanguageFeatures(info),
                 new RegexEmbeddedLanguage(this, info),
-                new FallbackEmbeddedLanguage(info));
+                new FallbackEmbeddedLanguage(info)
+            );
         }
 
-        /// <summary>Escapes <paramref name="text"/> appropriately so it can be inserted into 
+        /// <summary>Escapes <paramref name="text"/> appropriately so it can be inserted into
         /// <paramref name="token"/>.  For example if inserting `\p{Number}` into a normal C#
         /// string token, the `\` would have to be escaped into `\\`.  However in a verbatim-string
         /// literal (i.e. `@"..."`) it would not have to be escaped.

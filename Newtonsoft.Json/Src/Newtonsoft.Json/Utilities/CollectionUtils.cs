@@ -116,19 +116,34 @@ namespace Newtonsoft.Json.Utilities
             return false;
         }
 
-        public static ConstructorInfo? ResolveEnumerableCollectionConstructor(Type collectionType, Type collectionItemType)
+        public static ConstructorInfo? ResolveEnumerableCollectionConstructor(
+            Type collectionType,
+            Type collectionItemType
+        )
         {
             Type genericConstructorArgument = typeof(IList<>).MakeGenericType(collectionItemType);
 
-            return ResolveEnumerableCollectionConstructor(collectionType, collectionItemType, genericConstructorArgument);
+            return ResolveEnumerableCollectionConstructor(
+                collectionType,
+                collectionItemType,
+                genericConstructorArgument
+            );
         }
 
-        public static ConstructorInfo? ResolveEnumerableCollectionConstructor(Type collectionType, Type collectionItemType, Type constructorArgumentType)
+        public static ConstructorInfo? ResolveEnumerableCollectionConstructor(
+            Type collectionType,
+            Type collectionItemType,
+            Type constructorArgumentType
+        )
         {
             Type genericEnumerable = typeof(IEnumerable<>).MakeGenericType(collectionItemType);
             ConstructorInfo? match = null;
 
-            foreach (ConstructorInfo constructor in collectionType.GetConstructors(BindingFlags.Public | BindingFlags.Instance))
+            foreach (
+                ConstructorInfo constructor in collectionType.GetConstructors(
+                    BindingFlags.Public | BindingFlags.Instance
+                )
+            )
             {
                 IList<ParameterInfo> parameters = constructor.GetParameters();
 
@@ -162,7 +177,11 @@ namespace Newtonsoft.Json.Utilities
             return list.AddDistinct(value, EqualityComparer<T>.Default);
         }
 
-        public static bool AddDistinct<T>(this IList<T> list, T value, IEqualityComparer<T> comparer)
+        public static bool AddDistinct<T>(
+            this IList<T> list,
+            T value,
+            IEqualityComparer<T> comparer
+        )
         {
             if (list.ContainsValue(value, comparer))
             {
@@ -174,7 +193,11 @@ namespace Newtonsoft.Json.Utilities
         }
 
         // this is here because LINQ Bridge doesn't support Contains with IEqualityComparer<T>
-        public static bool ContainsValue<TSource>(this IEnumerable<TSource> source, TSource value, IEqualityComparer<TSource> comparer)
+        public static bool ContainsValue<TSource>(
+            this IEnumerable<TSource> source,
+            TSource value,
+            IEqualityComparer<TSource> comparer
+        )
         {
             if (comparer == null)
             {
@@ -197,7 +220,11 @@ namespace Newtonsoft.Json.Utilities
             return false;
         }
 
-        public static bool AddRangeDistinct<T>(this IList<T> list, IEnumerable<T> values, IEqualityComparer<T> comparer)
+        public static bool AddRangeDistinct<T>(
+            this IList<T> list,
+            IEnumerable<T> values,
+            IEqualityComparer<T> comparer
+        )
         {
             bool allAdded = true;
             foreach (T value in values)
@@ -303,7 +330,11 @@ namespace Newtonsoft.Json.Utilities
             return dimensions;
         }
 
-        private static void CopyFromJaggedToMultidimensionalArray(IList values, Array multidimensionalArray, int[] indices)
+        private static void CopyFromJaggedToMultidimensionalArray(
+            IList values,
+            Array multidimensionalArray,
+            int[] indices
+        )
         {
             int dimension = indices.Length;
             if (dimension == multidimensionalArray.Rank)
@@ -317,7 +348,9 @@ namespace Newtonsoft.Json.Utilities
             int currentValuesLength = list.Count;
             if (currentValuesLength != dimensionLength)
             {
-                throw new Exception("Cannot deserialize non-cubical array as multidimensional array.");
+                throw new Exception(
+                    "Cannot deserialize non-cubical array as multidimensional array."
+                );
             }
 
             int[] newIndices = new int[dimension + 1];

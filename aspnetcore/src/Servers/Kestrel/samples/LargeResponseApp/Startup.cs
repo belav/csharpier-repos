@@ -20,37 +20,45 @@ public class Startup
 
     public void Configure(IApplicationBuilder app)
     {
-        app.Run(async (context) =>
-        {
-            var path = context.Request.Path;
-            if (!path.HasValue || !int.TryParse(path.Value.AsSpan(1), out var numChunks))
+        app.Run(
+            async (context) =>
             {
-                numChunks = _defaultNumChunks;
-            }
+                var path = context.Request.Path;
+                if (!path.HasValue || !int.TryParse(path.Value.AsSpan(1), out var numChunks))
+                {
+                    numChunks = _defaultNumChunks;
+                }
 
-            context.Response.ContentLength = _chunkSize * numChunks;
-            context.Response.ContentType = "text/plain";
+                context.Response.ContentLength = _chunkSize * numChunks;
+                context.Response.ContentType = "text/plain";
 
-            for (int i = 0; i < numChunks; i++)
-            {
-                await context.Response.Body.WriteAsync(_chunk, 0, _chunkSize).ConfigureAwait(false);
+                for (int i = 0; i < numChunks; i++)
+                {
+                    await context.Response.Body
+                        .WriteAsync(_chunk, 0, _chunkSize)
+                        .ConfigureAwait(false);
+                }
             }
-        });
+        );
     }
 
     public static Task Main(string[] args)
     {
         var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                    .UseKestrel(options =>
-                    {
-                        options.Listen(IPAddress.Loopback, 5001);
-                    })
-                    .UseContentRoot(Directory.GetCurrentDirectory())
-                    .UseStartup<Startup>();
-            })
+            .ConfigureWebHost(
+                webHostBuilder =>
+                {
+                    webHostBuilder
+                        .UseKestrel(
+                            options =>
+                            {
+                                options.Listen(IPAddress.Loopback, 5001);
+                            }
+                        )
+                        .UseContentRoot(Directory.GetCurrentDirectory())
+                        .UseStartup<Startup>();
+                }
+            )
             .Build();
 
         return host.RunAsync();

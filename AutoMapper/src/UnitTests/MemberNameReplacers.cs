@@ -25,13 +25,15 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_map_properties_with_different_names()
         {
-            var config = new MapperConfiguration(c =>
-            {
-                c.ReplaceMemberName("Ä", "A");
-                c.ReplaceMemberName("í", "i");
-                c.ReplaceMemberName("Airlina", "Airline");
-                c.CreateMap<Source, Destination>();
-            });
+            var config = new MapperConfiguration(
+                c =>
+                {
+                    c.ReplaceMemberName("Ä", "A");
+                    c.ReplaceMemberName("í", "i");
+                    c.ReplaceMemberName("Airlina", "Airline");
+                    c.CreateMap<Source, Destination>();
+                }
+            );
 
             var source = new Source()
             {
@@ -49,5 +51,4 @@ namespace AutoMapper.UnitTests
             Assert.Equal(source.SubAirlinaFlight, destination.SubAirlineFlight);
         }
     }
-
 }

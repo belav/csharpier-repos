@@ -38,7 +38,6 @@ public class TimeoutControlTests
         _mockTimeoutHandler.Verify(h => h.OnTimeout(It.IsAny<TimeoutReason>()), Times.Never);
     }
 
-
     [Fact]
     public void DoesNotTimeOutWhenRequestBodyDoesNotSatisfyMinimumDataRateButDebuggerIsAttached()
     {
@@ -151,7 +150,6 @@ public class TimeoutControlTests
         // Timed out
         _mockTimeoutHandler.Verify(h => h.OnTimeout(TimeoutReason.ReadDataRate), Times.Once);
     }
-
 
     [Fact]
     public void RequestBodyDataRateNotComputedOnPausedTime()
@@ -470,7 +468,11 @@ public class TimeoutControlTests
 
         // Move the clock forward Heartbeat.Interval + MinDataRate.GracePeriod + 4 seconds.
         // The grace period should only be added for the first write. The subsequent 4 100 byte writes should add 1 second each to the timeout given the 100 byte/s min rate.
-        AdvanceClock(Heartbeat.Interval + minRate.GracePeriod + TimeSpan.FromSeconds((numWrites - 1) * writeSize / minRate.BytesPerSecond));
+        AdvanceClock(
+            Heartbeat.Interval
+                + minRate.GracePeriod
+                + TimeSpan.FromSeconds((numWrites - 1) * writeSize / minRate.BytesPerSecond)
+        );
 
         _mockTimeoutHandler.Verify(h => h.OnTimeout(It.IsAny<TimeoutReason>()), Times.Never);
 

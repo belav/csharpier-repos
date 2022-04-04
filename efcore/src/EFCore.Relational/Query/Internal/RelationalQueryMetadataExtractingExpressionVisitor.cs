@@ -22,7 +22,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public RelationalQueryMetadataExtractingExpressionVisitor(
-            RelationalQueryCompilationContext relationalQueryCompilationContext)
+            RelationalQueryCompilationContext relationalQueryCompilationContext
+        )
         {
             _relationalQueryCompilationContext = relationalQueryCompilationContext;
         }
@@ -35,22 +36,30 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         /// </summary>
         protected override Expression VisitMethodCall(MethodCallExpression methodCallExpression)
         {
-            if (methodCallExpression.Method.IsGenericMethod
-                && methodCallExpression.Method.GetGenericMethodDefinition() == RelationalQueryableExtensions.AsSplitQueryMethodInfo)
+            if (
+                methodCallExpression.Method.IsGenericMethod
+                && methodCallExpression.Method.GetGenericMethodDefinition()
+                    == RelationalQueryableExtensions.AsSplitQueryMethodInfo
+            )
             {
                 var innerQueryable = Visit(methodCallExpression.Arguments[0]);
 
-                _relationalQueryCompilationContext.QuerySplittingBehavior = QuerySplittingBehavior.SplitQuery;
+                _relationalQueryCompilationContext.QuerySplittingBehavior =
+                    QuerySplittingBehavior.SplitQuery;
 
                 return innerQueryable;
             }
 
-            if (methodCallExpression.Method.IsGenericMethod
-                && methodCallExpression.Method.GetGenericMethodDefinition() == RelationalQueryableExtensions.AsSingleQueryMethodInfo)
+            if (
+                methodCallExpression.Method.IsGenericMethod
+                && methodCallExpression.Method.GetGenericMethodDefinition()
+                    == RelationalQueryableExtensions.AsSingleQueryMethodInfo
+            )
             {
                 var innerQueryable = Visit(methodCallExpression.Arguments[0]);
 
-                _relationalQueryCompilationContext.QuerySplittingBehavior = QuerySplittingBehavior.SingleQuery;
+                _relationalQueryCompilationContext.QuerySplittingBehavior =
+                    QuerySplittingBehavior.SingleQuery;
 
                 return innerQueryable;
             }

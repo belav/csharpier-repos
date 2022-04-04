@@ -19,10 +19,8 @@ namespace Microsoft.Data.Sqlite
         /// </summary>
         /// <param name="message">The message to display for the exception. Can be null.</param>
         /// <param name="errorCode">The SQLite error code.</param>
-        public SqliteException(string? message, int errorCode)
-            : this(message, errorCode, errorCode)
-        {
-        }
+        public SqliteException(string? message, int errorCode) : this(message, errorCode, errorCode)
+        { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="SqliteException" /> class.
@@ -61,18 +59,14 @@ namespace Microsoft.Data.Sqlite
         /// </remarks>
         public static void ThrowExceptionForRC(int rc, sqlite3? db)
         {
-            if (rc == SQLITE_OK
-                || rc == SQLITE_ROW
-                || rc == SQLITE_DONE)
+            if (rc == SQLITE_OK || rc == SQLITE_ROW || rc == SQLITE_DONE)
             {
                 return;
             }
 
             string message;
             int extendedErrorCode;
-            if (db == null
-                || db.IsInvalid
-                || rc != sqlite3_errcode(db))
+            if (db == null || db.IsInvalid || rc != sqlite3_errcode(db))
             {
                 message = sqlite3_errstr(rc).utf8_to_string() + " " + Resources.DefaultNativeError;
                 extendedErrorCode = rc;
@@ -83,7 +77,11 @@ namespace Microsoft.Data.Sqlite
                 extendedErrorCode = sqlite3_extended_errcode(db);
             }
 
-            throw new SqliteException(Resources.SqliteNativeError(rc, message), rc, extendedErrorCode);
+            throw new SqliteException(
+                Resources.SqliteNativeError(rc, message),
+                rc,
+                extendedErrorCode
+            );
         }
     }
 }

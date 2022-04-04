@@ -13,21 +13,27 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.ExtractInterface
 {
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, LanguageNames.VisualBasic,
-        Name = PredefinedCodeRefactoringProviderNames.ExtractInterface), Shared]
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            LanguageNames.VisualBasic,
+            Name = PredefinedCodeRefactoringProviderNames.ExtractInterface
+        ),
+        Shared
+    ]
     internal class ExtractInterfaceCodeRefactoringProvider : CodeRefactoringProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ExtractInterfaceCodeRefactoringProvider()
-        {
-        }
+        public ExtractInterfaceCodeRefactoringProvider() { }
 
         public sealed override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {
             var (document, textSpan, cancellationToken) = context;
             var service = document.GetLanguageService<AbstractExtractInterfaceService>();
-            var actions = await service.GetExtractInterfaceCodeActionAsync(document, textSpan, cancellationToken).ConfigureAwait(false);
+            var actions = await service
+                .GetExtractInterfaceCodeActionAsync(document, textSpan, cancellationToken)
+                .ConfigureAwait(false);
             context.RegisterRefactorings(actions);
         }
     }

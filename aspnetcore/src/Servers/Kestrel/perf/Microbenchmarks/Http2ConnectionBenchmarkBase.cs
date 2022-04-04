@@ -45,7 +45,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
             _memoryPool = PinnedBlockMemoryPoolFactory.Create();
             _httpFrame = new Http2Frame();
 
-            var options = new PipeOptions(_memoryPool, readerScheduler: PipeScheduler.Inline, writerScheduler: PipeScheduler.Inline, useSynchronizationContext: false);
+            var options = new PipeOptions(
+                _memoryPool,
+                readerScheduler: PipeScheduler.Inline,
+                writerScheduler: PipeScheduler.Inline,
+                useSynchronizationContext: false
+            );
 
             _connectionPair = DuplexPipe.CreateConnectionPair(options, options);
 
@@ -62,7 +67,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
                 serverOptions: new KestrelServerOptions(),
                 dateHeaderValueManager: new DateHeaderValueManager(),
                 systemClock: new MockSystemClock(),
-                log: new MockTrace());
+                log: new MockTrace()
+            );
             serviceContext.DateHeaderValueManager.OnHeartbeat(default);
 
             var connectionContext = TestContextFactory.CreateHttpConnectionContext(
@@ -71,7 +77,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
                 transport: _connectionPair.Transport,
                 timeoutControl: new MockTimeoutControl(),
                 memoryPool: _memoryPool,
-                connectionFeatures: new FeatureCollection());
+                connectionFeatures: new FeatureCollection()
+            );
 
             _connection = new Http2Connection(connectionContext);
 
@@ -79,21 +86,28 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
 
             _currentStreamId = 1;
 
-            _ = _connection.ProcessRequestsAsync(new DummyApplication(ProcessRequest, new MockHttpContextFactory()));
+            _ = _connection.ProcessRequestsAsync(
+                new DummyApplication(ProcessRequest, new MockHttpContextFactory())
+            );
 
             _connectionPair.Application.Output.Write(Http2Connection.ClientPreface);
-            _connectionPair.Application.Output.WriteSettings(new Http2PeerSettings
-            {
-                InitialWindowSize = 2147483647
-            });
+            _connectionPair.Application.Output.WriteSettings(
+                new Http2PeerSettings { InitialWindowSize = 2147483647 }
+            );
             _connectionPair.Application.Output.FlushAsync().GetAwaiter().GetResult();
 
             // Read past connection setup frames
-            ReceiveFrameAsync(_connectionPair.Application.Input, _httpFrame).GetAwaiter().GetResult();
+            ReceiveFrameAsync(_connectionPair.Application.Input, _httpFrame)
+                .GetAwaiter()
+                .GetResult();
             Debug.Assert(_httpFrame.Type == Http2FrameType.SETTINGS);
-            ReceiveFrameAsync(_connectionPair.Application.Input, _httpFrame).GetAwaiter().GetResult();
+            ReceiveFrameAsync(_connectionPair.Application.Input, _httpFrame)
+                .GetAwaiter()
+                .GetResult();
             Debug.Assert(_httpFrame.Type == Http2FrameType.WINDOW_UPDATE);
-            ReceiveFrameAsync(_connectionPair.Application.Input, _httpFrame).GetAwaiter().GetResult();
+            ReceiveFrameAsync(_connectionPair.Application.Input, _httpFrame)
+                .GetAwaiter()
+                .GetResult();
             Debug.Assert(_httpFrame.Type == Http2FrameType.SETTINGS);
         }
 
@@ -102,7 +116,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
         {
             _requestHeadersEnumerator.Initialize(_httpRequestHeaders);
             _requestHeadersEnumerator.MoveNext();
-            _connectionPair.Application.Output.WriteStartStream(streamId: _currentStreamId, _hpackEncoder, _requestHeadersEnumerator, _headersBuffer, endStream: true, frame: _httpFrame);
+            _connectionPair.Application.Output.WriteStartStream(
+                streamId: _currentStreamId,
+                _hpackEncoder,
+                _requestHeadersEnumerator,
+                _headersBuffer,
+                endStream: true,
+                frame: _httpFrame
+            );
             await _connectionPair.Application.Output.FlushAsync();
 
             while (true)
@@ -121,13 +142,20 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
 
                 if (_dataWritten > 1024 * 32)
                 {
-                    _connectionPair.Application.Output.WriteWindowUpdateAsync(streamId: 0, _dataWritten, _httpFrame);
+                    _connectionPair.Application.Output.WriteWindowUpdateAsync(
+                        streamId: 0,
+                        _dataWritten,
+                        _httpFrame
+                    );
                     await _connectionPair.Application.Output.FlushAsync();
 
                     _dataWritten = 0;
                 }
 
-                if ((_httpFrame.HeadersFlags & Http2HeadersFrameFlags.END_STREAM) == Http2HeadersFrameFlags.END_STREAM)
+                if (
+                    (_httpFrame.HeadersFlags & Http2HeadersFrameFlags.END_STREAM)
+                    == Http2HeadersFrameFlags.END_STREAM
+                )
                 {
                     break;
                 }
@@ -136,7 +164,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
             _currentStreamId += 2;
         }
 
-        internal async ValueTask ReceiveFrameAsync(PipeReader pipeReader, Http2Frame frame, uint maxFrameSize = Http2PeerSettings.DefaultMaxFrameSize)
+        internal async ValueTask ReceiveFrameAsync(
+            PipeReader pipeReader,
+            Http2Frame frame,
+            uint maxFrameSize = Http2PeerSettings.DefaultMaxFrameSize
+        )
         {
             while (true)
             {
@@ -147,7 +179,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
 
                 try
                 {
-                    if (Http2FrameReader.TryReadFrame(ref buffer, frame, maxFrameSize, out var framePayload))
+                    if (
+                        Http2FrameReader.TryReadFrame(
+                            ref buffer,
+                            frame,
+                            maxFrameSize,
+                            out var framePayload
+                        )
+                    )
                     {
                         consumed = examined = framePayload.End;
                         return;

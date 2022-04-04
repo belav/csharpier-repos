@@ -2,25 +2,31 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+
 public struct T : IComparable
 {
     public int x;
     public int y;
     public int z;
+
     public T(int ix, int iy, int iz)
     {
         x = ix;
         y = iy;
         z = iz;
     }
+
     public int CompareTo(object b)
     {
         if (b is T)
         {
             T temp = (T)b;
-            if (temp.x != x) return 1;
-            if (temp.y != y) return 1;
-            if (temp.z != z) return 1;
+            if (temp.x != x)
+                return 1;
+            if (temp.y != y)
+                return 1;
+            if (temp.z != z)
+                return 1;
         }
         return 0;
     }
@@ -52,4 +58,3 @@ internal class bar<B> where B : System.IComparable
         return 100;
     }
 }
-

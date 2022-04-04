@@ -21,9 +21,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             : base(
                 GetEqualsExpression(),
                 CreateDefaultHashCodeExpression(favorStructuralComparisons: false),
-                GetSnapshotExpression())
-        {
-        }
+                GetSnapshotExpression()
+            ) { }
 
         private static Expression<Func<TGeometry?, TGeometry?, bool>> GetEqualsExpression()
         {
@@ -52,10 +51,19 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                                 Expression.IsFalse(yNull),
                                 Expression.Call(
                                     x,
-                                    typeof(TGeometry).GetRequiredRuntimeMethod("EqualsExact", typeof(TGeometry)),
-                                    y))))),
+                                    typeof(TGeometry).GetRequiredRuntimeMethod(
+                                        "EqualsExact",
+                                        typeof(TGeometry)
+                                    ),
+                                    y
+                                )
+                            )
+                        )
+                    )
+                ),
                 left,
-                right);
+                right
+            );
         }
 
         private static Expression<Func<TGeometry, TGeometry>> GetSnapshotExpression()
@@ -64,7 +72,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 
             Expression body = Expression.Call(
                 instance,
-                typeof(TGeometry).GetRequiredRuntimeMethod("Copy", Type.EmptyTypes));
+                typeof(TGeometry).GetRequiredRuntimeMethod("Copy", Type.EmptyTypes)
+            );
 
             if (typeof(TGeometry).FullName != "NetTopologySuite.Geometries.Geometry")
             {

@@ -13,7 +13,8 @@ public partial class DisallowReturningActionResultsFromMapMethodsTest
     public async Task MinimalAction_ReturningIResult_Works()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -32,7 +33,8 @@ webApp.MapGet(""/"", () => Results.Ok(""Hello""));
     public async Task MinimalAction_ReturningCustomIResult_Works()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -57,7 +59,8 @@ class CustomResult : IResult
     public async Task MinimalAction_ReturningIResultConditionallyWorks()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -85,7 +88,8 @@ webApp.MapGet(""/"", (int id) =>
     public async Task MinimalAction_ReturningTypeThatImplementsIResultAndActionResultDoesNotProduceDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -112,7 +116,8 @@ class CustomResult : IResult, IActionResult
     public async Task MinimalAction_ReturningActionResult_ProducesDiagnostics()
     {
         // Arrange
-        var source = TestSource.Read(@"
+        var source = TestSource.Read(
+            @"
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -120,22 +125,30 @@ using Microsoft.AspNetCore.Mvc;
 
 var webApp = WebApplication.Create();
 webApp.MapGet(""/"", () => /*MM*/new OkObjectResult(""cool story""));
-");
+"
+        );
         // Act
         var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
 
         // Assert
         var diagnostic = Assert.Single(diagnostics);
-        Assert.Same(DiagnosticDescriptors.DoNotReturnActionResultsFromRouteHandlers, diagnostic.Descriptor);
+        Assert.Same(
+            DiagnosticDescriptors.DoNotReturnActionResultsFromRouteHandlers,
+            diagnostic.Descriptor
+        );
         AnalyzerAssert.DiagnosticLocation(source.DefaultMarkerLocation, diagnostic.Location);
-        Assert.Equal("IActionResult instances should not be returned from a MapGet Delegate parameter. Consider returning an equivalent result from Microsoft.AspNetCore.Http.Results.", diagnostic.GetMessage());
+        Assert.Equal(
+            "IActionResult instances should not be returned from a MapGet Delegate parameter. Consider returning an equivalent result from Microsoft.AspNetCore.Http.Results.",
+            diagnostic.GetMessage()
+        );
     }
 
     [Fact]
     public async Task MinimalAction_ReturningActionResultConditionally_ProducesDiagnostics()
     {
         // Arrange
-        var source = TestSource.Read(@"
+        var source = TestSource.Read(
+            @"
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -143,22 +156,30 @@ using Microsoft.AspNetCore.Mvc;
 
 var webApp = WebApplication.Create();
 webApp.MapGet(""/"", (int id) => /*MM*/id == 0 ? (ActionResult)new NotFoundResult() : new OkObjectResult(""cool story""));
-");
+"
+        );
         // Act
         var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
 
         // Assert
         var diagnostic = Assert.Single(diagnostics);
-        Assert.Same(DiagnosticDescriptors.DoNotReturnActionResultsFromRouteHandlers, diagnostic.Descriptor);
+        Assert.Same(
+            DiagnosticDescriptors.DoNotReturnActionResultsFromRouteHandlers,
+            diagnostic.Descriptor
+        );
         AnalyzerAssert.DiagnosticLocation(source.DefaultMarkerLocation, diagnostic.Location);
-        Assert.Equal("IActionResult instances should not be returned from a MapGet Delegate parameter. Consider returning an equivalent result from Microsoft.AspNetCore.Http.Results.", diagnostic.GetMessage());
+        Assert.Equal(
+            "IActionResult instances should not be returned from a MapGet Delegate parameter. Consider returning an equivalent result from Microsoft.AspNetCore.Http.Results.",
+            diagnostic.GetMessage()
+        );
     }
 
     [Fact]
     public async Task MinimalAction_ReturningActionResultFromMethodReference_ProducesDiagnostics()
     {
         // Arrange
-        var source = TestSource.Read(@"
+        var source = TestSource.Read(
+            @"
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -171,22 +192,30 @@ static object OkObjectResultReturningMethod()
 {
     /*MM*/return new OkObjectResult(""ok"");
 }
-");
+"
+        );
         // Act
         var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
 
         // Assert
         var diagnostic = Assert.Single(diagnostics);
-        Assert.Same(DiagnosticDescriptors.DoNotReturnActionResultsFromRouteHandlers, diagnostic.Descriptor);
+        Assert.Same(
+            DiagnosticDescriptors.DoNotReturnActionResultsFromRouteHandlers,
+            diagnostic.Descriptor
+        );
         AnalyzerAssert.DiagnosticLocation(source.DefaultMarkerLocation, diagnostic.Location);
-        Assert.Equal("IActionResult instances should not be returned from a MapPost Delegate parameter. Consider returning an equivalent result from Microsoft.AspNetCore.Http.Results.", diagnostic.GetMessage());
+        Assert.Equal(
+            "IActionResult instances should not be returned from a MapPost Delegate parameter. Consider returning an equivalent result from Microsoft.AspNetCore.Http.Results.",
+            diagnostic.GetMessage()
+        );
     }
 
     [Fact]
     public async Task MinimalAction_ReturningActionResultOfTFromMethodReference_ProducesDiagnostics()
     {
         // Arrange
-        var source = TestSource.Read(@"
+        var source = TestSource.Read(
+            @"
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -203,30 +232,40 @@ static async Task<ActionResult<Person>> ActionResultMethod(int id)
 }
 
 public record Person(string Name);
-");
+"
+        );
         // Act
         var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
 
         // Assert
         var diagnostic = Assert.Single(diagnostics);
-        Assert.Same(DiagnosticDescriptors.DoNotReturnActionResultsFromRouteHandlers, diagnostic.Descriptor);
+        Assert.Same(
+            DiagnosticDescriptors.DoNotReturnActionResultsFromRouteHandlers,
+            diagnostic.Descriptor
+        );
         AnalyzerAssert.DiagnosticLocation(source.DefaultMarkerLocation, diagnostic.Location);
-        Assert.Equal("IActionResult instances should not be returned from a MapPost Delegate parameter. Consider returning an equivalent result from Microsoft.AspNetCore.Http.Results.", diagnostic.GetMessage());
+        Assert.Equal(
+            "IActionResult instances should not be returned from a MapPost Delegate parameter. Consider returning an equivalent result from Microsoft.AspNetCore.Http.Results.",
+            diagnostic.GetMessage()
+        );
     }
 
     [Fact]
     public async Task MinimalAction_ReturningActionResultOfTFromANonLocalFunction_ProducesDiagnostics()
     {
         // Arrange
-        var source = TestSource.Read(@"
+        var source = TestSource.Read(
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 
 var webApp = WebApplication.Create();
 webApp.MapPost(""/"", /*MM*/new MyController().ActionResultMethod);
-");
+"
+        );
 
-        var controllerSource = @"
+        var controllerSource =
+            @"
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
@@ -247,9 +286,14 @@ public class MyController
 
         // Assert
         var diagnostic = Assert.Single(diagnostics);
-        Assert.Same(DiagnosticDescriptors.DoNotReturnActionResultsFromRouteHandlers, diagnostic.Descriptor);
+        Assert.Same(
+            DiagnosticDescriptors.DoNotReturnActionResultsFromRouteHandlers,
+            diagnostic.Descriptor
+        );
         AnalyzerAssert.DiagnosticLocation(source.DefaultMarkerLocation, diagnostic.Location);
-        Assert.Equal("IActionResult instances should not be returned from a MapPost Delegate parameter. Consider returning an equivalent result from Microsoft.AspNetCore.Http.Results.", diagnostic.GetMessage());
+        Assert.Equal(
+            "IActionResult instances should not be returned from a MapPost Delegate parameter. Consider returning an equivalent result from Microsoft.AspNetCore.Http.Results.",
+            diagnostic.GetMessage()
+        );
     }
 }
-

@@ -18,14 +18,12 @@ struct FooBarStruct_ : IValue
         return 0;
     }
 
-    public void SetValue(int val)
-    {
-    }
+    public void SetValue(int val) { }
 
     public int Add(int a)
     {
         // Force cast and boxing
-        IValue valueIntf = this as IValue; 
+        IValue valueIntf = this as IValue;
         int val = valueIntf.GetValue();
         val += a;
         valueIntf.SetValue(val);
@@ -51,7 +49,7 @@ struct FooBarStruct : IValue
     {
         // Dummy
         return 0;
-    }   
+    }
 }
 
 class Program
@@ -62,7 +60,7 @@ class Program
 
         fooBar._val = 10;
 
-        IValue foo = (IValue) fooBar;
+        IValue foo = (IValue)fooBar;
 
         Console.WriteLine("Calling IFoo.Foo on FooBarStruct");
         Test.Assert(foo.Add(10) == 20, "Calling default method IValue.Add on FooBarStruct failed");
@@ -78,7 +76,7 @@ class Test
 
     public static int Ret()
     {
-        return Pass? 100 : 101;
+        return Pass ? 100 : 101;
     }
 
     public static void Assert(bool cond, string msg)
@@ -93,5 +91,4 @@ class Test
             Pass = false;
         }
     }
-}                    
-
+}

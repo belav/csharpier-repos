@@ -72,8 +72,8 @@ namespace Microsoft.Extensions.DependencyInjection
             this IServiceCollection serviceCollection,
             string connectionString,
             Action<SqlServerDbContextOptionsBuilder>? sqlServerOptionsAction = null,
-            Action<DbContextOptionsBuilder>? optionsAction = null)
-            where TContext : DbContext
+            Action<DbContextOptionsBuilder>? optionsAction = null
+        ) where TContext : DbContext
         {
             Check.NotEmpty(connectionString, nameof(connectionString));
 
@@ -82,7 +82,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 {
                     optionsAction?.Invoke(options);
                     options.UseSqlServer(connectionString, sqlServerOptionsAction);
-                });
+                }
+            );
         }
 
         /// <summary>
@@ -107,22 +108,31 @@ namespace Microsoft.Extensions.DependencyInjection
         ///     The same service collection so that multiple calls can be chained.
         /// </returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static IServiceCollection AddEntityFrameworkSqlServer(this IServiceCollection serviceCollection)
+        public static IServiceCollection AddEntityFrameworkSqlServer(
+            this IServiceCollection serviceCollection
+        )
         {
             new EntityFrameworkRelationalServicesBuilder(serviceCollection)
                 .TryAdd<LoggingDefinitions, SqlServerLoggingDefinitions>()
                 .TryAdd<IDatabaseProvider, DatabaseProvider<SqlServerOptionsExtension>>()
-                .TryAdd<IValueGeneratorCache>(p => p.GetRequiredService<ISqlServerValueGeneratorCache>())
+                .TryAdd<IValueGeneratorCache>(
+                    p => p.GetRequiredService<ISqlServerValueGeneratorCache>()
+                )
                 .TryAdd<IRelationalTypeMappingSource, SqlServerTypeMappingSource>()
                 .TryAdd<ISqlGenerationHelper, SqlServerSqlGenerationHelper>()
                 .TryAdd<IRelationalAnnotationProvider, SqlServerAnnotationProvider>()
                 .TryAdd<IMigrationsAnnotationProvider, SqlServerMigrationsAnnotationProvider>()
                 .TryAdd<IModelValidator, SqlServerModelValidator>()
                 .TryAdd<IProviderConventionSetBuilder, SqlServerConventionSetBuilder>()
-                .TryAdd<IUpdateSqlGenerator>(p => p.GetRequiredService<ISqlServerUpdateSqlGenerator>())
+                .TryAdd<IUpdateSqlGenerator>(
+                    p => p.GetRequiredService<ISqlServerUpdateSqlGenerator>()
+                )
                 .TryAdd<IEvaluatableExpressionFilter, SqlServerEvaluatableExpressionFilter>()
                 .TryAdd<IRelationalTransactionFactory, SqlServerTransactionFactory>()
-                .TryAdd<IModificationCommandBatchFactory, SqlServerModificationCommandBatchFactory>()
+                .TryAdd<
+                    IModificationCommandBatchFactory,
+                    SqlServerModificationCommandBatchFactory
+                >()
                 .TryAdd<IValueGeneratorSelector, SqlServerValueGeneratorSelector>()
                 .TryAdd<IRelationalConnection>(p => p.GetRequiredService<ISqlServerConnection>())
                 .TryAdd<IMigrationsSqlGenerator, SqlServerMigrationsSqlGenerator>()
@@ -135,16 +145,38 @@ namespace Microsoft.Extensions.DependencyInjection
                 .TryAdd<IMethodCallTranslatorProvider, SqlServerMethodCallTranslatorProvider>()
                 .TryAdd<IMemberTranslatorProvider, SqlServerMemberTranslatorProvider>()
                 .TryAdd<IQuerySqlGeneratorFactory, SqlServerQuerySqlGeneratorFactory>()
-                .TryAdd<IRelationalSqlTranslatingExpressionVisitorFactory, SqlServerSqlTranslatingExpressionVisitorFactory>()
-                .TryAdd<IRelationalParameterBasedSqlProcessorFactory, SqlServerParameterBasedSqlProcessorFactory>()
-                .TryAdd<INavigationExpansionExtensibilityHelper, SqlServerNavigationExpansionExtensibilityHelper>()
-                .TryAdd<IQueryableMethodTranslatingExpressionVisitorFactory, SqlServerQueryableMethodTranslatingExpressionVisitorFactory>()
+                .TryAdd<
+                    IRelationalSqlTranslatingExpressionVisitorFactory,
+                    SqlServerSqlTranslatingExpressionVisitorFactory
+                >()
+                .TryAdd<
+                    IRelationalParameterBasedSqlProcessorFactory,
+                    SqlServerParameterBasedSqlProcessorFactory
+                >()
+                .TryAdd<
+                    INavigationExpansionExtensibilityHelper,
+                    SqlServerNavigationExpansionExtensibilityHelper
+                >()
+                .TryAdd<
+                    IQueryableMethodTranslatingExpressionVisitorFactory,
+                    SqlServerQueryableMethodTranslatingExpressionVisitorFactory
+                >()
                 .TryAddProviderSpecificServices(
-                    b => b
-                        .TryAddSingleton<ISqlServerValueGeneratorCache, SqlServerValueGeneratorCache>()
-                        .TryAddSingleton<ISqlServerUpdateSqlGenerator, SqlServerUpdateSqlGenerator>()
-                        .TryAddSingleton<ISqlServerSequenceValueGeneratorFactory, SqlServerSequenceValueGeneratorFactory>()
-                        .TryAddScoped<ISqlServerConnection, SqlServerConnection>())
+                    b =>
+                        b.TryAddSingleton<
+                            ISqlServerValueGeneratorCache,
+                            SqlServerValueGeneratorCache
+                        >()
+                            .TryAddSingleton<
+                                ISqlServerUpdateSqlGenerator,
+                                SqlServerUpdateSqlGenerator
+                            >()
+                            .TryAddSingleton<
+                                ISqlServerSequenceValueGeneratorFactory,
+                                SqlServerSequenceValueGeneratorFactory
+                            >()
+                            .TryAddScoped<ISqlServerConnection, SqlServerConnection>()
+                )
                 .TryAddCoreServices();
 
             return serviceCollection;

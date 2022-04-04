@@ -9,14 +9,12 @@ namespace Microsoft.AspNetCore.Server.HttpSys;
 // This class is a wrapper for Http.sys V2 request queue handle.
 internal sealed class HttpRequestQueueV2Handle : SafeHandleZeroOrMinusOneIsInvalid
 {
-    private HttpRequestQueueV2Handle()
-        : base(true)
-    {
-    }
+    private HttpRequestQueueV2Handle() : base(true) { }
 
     protected override bool ReleaseHandle()
     {
-        return (HttpApi.HttpCloseRequestQueue(handle) ==
-                    UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS);
+        return (
+            HttpApi.HttpCloseRequestQueue(handle) == UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS
+        );
     }
 }

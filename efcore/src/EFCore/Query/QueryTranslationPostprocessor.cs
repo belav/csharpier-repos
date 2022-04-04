@@ -29,7 +29,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <param name="queryCompilationContext">The query compilation context object to use.</param>
         public QueryTranslationPostprocessor(
             QueryTranslationPostprocessorDependencies dependencies,
-            QueryCompilationContext queryCompilationContext)
+            QueryCompilationContext queryCompilationContext
+        )
         {
             Dependencies = dependencies;
             QueryCompilationContext = queryCompilationContext;
@@ -50,7 +51,6 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// </summary>
         /// <param name="query">The query to process.</param>
         /// <returns>A query expression after transformations.</returns>
-        public virtual Expression Process(Expression query)
-            => query;
+        public virtual Expression Process(Expression query) => query;
     }
 }

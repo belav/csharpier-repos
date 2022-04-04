@@ -30,8 +30,15 @@ namespace Microsoft.Extensions.Hosting
         internal void Initialize(IConfiguration configuration)
         {
             var timeoutSeconds = configuration["shutdownTimeoutSeconds"];
-            if (!string.IsNullOrEmpty(timeoutSeconds)
-                && int.TryParse(timeoutSeconds, NumberStyles.None, CultureInfo.InvariantCulture, out var seconds))
+            if (
+                !string.IsNullOrEmpty(timeoutSeconds)
+                && int.TryParse(
+                    timeoutSeconds,
+                    NumberStyles.None,
+                    CultureInfo.InvariantCulture,
+                    out var seconds
+                )
+            )
             {
                 ShutdownTimeout = TimeSpan.FromSeconds(seconds);
             }

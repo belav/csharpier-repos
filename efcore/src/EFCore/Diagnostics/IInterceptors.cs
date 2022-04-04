@@ -34,7 +34,6 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// </summary>
         /// <typeparam name="TInterceptor">The interceptor type to resolve.</typeparam>
         /// <returns>The resolved interceptor, which may be <see langword="null" /> if none are registered.</returns>
-        TInterceptor? Aggregate<TInterceptor>()
-            where TInterceptor : class, IInterceptor;
+        TInterceptor? Aggregate<TInterceptor>() where TInterceptor : class, IInterceptor;
     }
 }

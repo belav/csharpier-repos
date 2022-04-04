@@ -12,7 +12,8 @@ internal class Http3PeerSettings
     public const uint DefaultMaxRequestHeaderFieldSize = uint.MaxValue;
 
     public uint HeaderTableSize { get; internal set; } = DefaultHeaderTableSize;
-    public uint MaxRequestHeaderFieldSectionSize { get; internal set; } = DefaultMaxRequestHeaderFieldSize;
+    public uint MaxRequestHeaderFieldSectionSize { get; internal set; } =
+        DefaultMaxRequestHeaderFieldSize;
 
     // Gets the settings that are different from the protocol defaults (as opposed to the server defaults).
     internal List<Http3PeerSetting> GetNonProtocolDefaults()
@@ -28,7 +29,12 @@ internal class Http3PeerSettings
 
         if (MaxRequestHeaderFieldSectionSize != DefaultMaxRequestHeaderFieldSize)
         {
-            list.Add(new Http3PeerSetting(Http3SettingType.MaxFieldSectionSize, MaxRequestHeaderFieldSectionSize));
+            list.Add(
+                new Http3PeerSetting(
+                    Http3SettingType.MaxFieldSectionSize,
+                    MaxRequestHeaderFieldSectionSize
+                )
+            );
         }
 
         return list;

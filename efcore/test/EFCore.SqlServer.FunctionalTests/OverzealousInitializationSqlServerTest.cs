@@ -8,15 +8,15 @@ namespace Microsoft.EntityFrameworkCore
     public class OverzealousInitializationSqlServerTest
         : OverzealousInitializationTestBase<OverzealousInitializationSqlServerTest.OverzealousInitializationSqlServerFixture>
     {
-        public OverzealousInitializationSqlServerTest(OverzealousInitializationSqlServerFixture fixture)
-            : base(fixture)
-        {
-        }
+        public OverzealousInitializationSqlServerTest(
+            OverzealousInitializationSqlServerFixture fixture
+        ) : base(fixture) { }
 
-        public class OverzealousInitializationSqlServerFixture : OverzealousInitializationFixtureBase
+        public class OverzealousInitializationSqlServerFixture
+            : OverzealousInitializationFixtureBase
         {
-            protected override ITestStoreFactory TestStoreFactory
-                => SqlServerTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                SqlServerTestStoreFactory.Instance;
         }
     }
 }

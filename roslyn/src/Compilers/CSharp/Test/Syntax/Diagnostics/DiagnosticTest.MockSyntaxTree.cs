@@ -20,10 +20,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             public override string FilePath
             {
-                get
-                {
-                    return "";
-                }
+                get { return ""; }
             }
 
             public override SourceText GetText(CancellationToken cancellationToken)
@@ -38,10 +35,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             public override Encoding Encoding
             {
-                get
-                {
-                    throw new NotImplementedException();
-                }
+                get { throw new NotImplementedException(); }
             }
 
             public override int Length
@@ -51,10 +45,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             public override CSharpParseOptions Options
             {
-                get
-                {
-                    throw new NotImplementedException();
-                }
+                get { throw new NotImplementedException(); }
             }
 
             public override CSharpSyntaxNode GetRoot(CancellationToken cancellationToken)
@@ -81,6 +72,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             {
                 throw new NotImplementedException();
             }
+
             public override bool HasCompilationUnitRoot
             {
                 get { throw new NotImplementedException(); }

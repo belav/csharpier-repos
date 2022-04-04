@@ -28,7 +28,8 @@ public class CircuitHostTest
         var remoteRenderer = GetRemoteRenderer();
         var circuitHost = TestCircuitHost.Create(
             serviceScope: new AsyncServiceScope(serviceScope.Object),
-            remoteRenderer: remoteRenderer);
+            remoteRenderer: remoteRenderer
+        );
 
         // Act
         await circuitHost.DisposeAsync();
@@ -53,7 +54,8 @@ public class CircuitHostTest
         var remoteRenderer = GetRemoteRenderer();
         var circuitHost = TestCircuitHost.Create(
             serviceScope: new AsyncServiceScope(serviceScope.Object),
-            remoteRenderer: remoteRenderer);
+            remoteRenderer: remoteRenderer
+        );
 
         // Act
         await circuitHost.DisposeAsync();
@@ -78,7 +80,8 @@ public class CircuitHostTest
         var circuitHost = TestCircuitHost.Create(
             serviceScope: new AsyncServiceScope(serviceScope.Object),
             remoteRenderer: remoteRenderer,
-            handlers: new[] { handler.Object });
+            handlers: new[] { handler.Object }
+        );
 
         var throwOnDisposeComponent = new ThrowOnDisposeComponent();
         circuitHost.Renderer.AssignRootComponentId(throwOnDisposeComponent);
@@ -100,7 +103,8 @@ public class CircuitHostTest
         var remoteRenderer = GetRemoteRenderer();
         var circuitHost = TestCircuitHost.Create(
             serviceScope: new AsyncServiceScope(serviceScope.Object),
-            remoteRenderer: remoteRenderer);
+            remoteRenderer: remoteRenderer
+        );
 
         var component = new DispatcherComponent(circuitHost.Renderer.Dispatcher);
         circuitHost.Renderer.AssignRootComponentId(component);
@@ -130,7 +134,8 @@ public class CircuitHostTest
         var remoteRenderer = GetRemoteRenderer();
         var circuitHost = TestCircuitHost.Create(
             serviceScope: new AsyncServiceScope(serviceScope.Object),
-            remoteRenderer: remoteRenderer);
+            remoteRenderer: remoteRenderer
+        );
 
         var component = new PerformJSInteropOnDisposeComponent(circuitHost.JSRuntime);
         circuitHost.Renderer.AssignRootComponentId(component);
@@ -145,13 +150,18 @@ public class CircuitHostTest
         await circuitHost.DisposeAsync();
 
         // Assert: Component disposal logic sees the exception
-        var componentException = Assert.IsType<JSDisconnectedException>(component.ExceptionDuringDisposeAsync);
+        var componentException = Assert.IsType<JSDisconnectedException>(
+            component.ExceptionDuringDisposeAsync
+        );
 
         // Assert: Circuit host notifies about the exception
-        Assert.Collection(circuitUnhandledExceptions, eventArgs =>
-        {
-            Assert.Same(componentException, eventArgs.ExceptionObject);
-        });
+        Assert.Collection(
+            circuitUnhandledExceptions,
+            eventArgs =>
+            {
+                Assert.Same(componentException, eventArgs.ExceptionObject);
+            }
+        );
     }
 
     [Fact]
@@ -187,10 +197,15 @@ public class CircuitHostTest
             .Returns(Task.CompletedTask)
             .Verifiable();
 
-        var circuitHost = TestCircuitHost.Create(handlers: new[] { handler1.Object, handler2.Object });
+        var circuitHost = TestCircuitHost.Create(
+            handlers: new[] { handler1.Object, handler2.Object }
+        );
 
         // Act
-        await circuitHost.InitializeAsync(new ProtectedPrerenderComponentApplicationStore(Mock.Of<IDataProtectionProvider>()), cancellationToken);
+        await circuitHost.InitializeAsync(
+            new ProtectedPrerenderComponentApplicationStore(Mock.Of<IDataProtectionProvider>()),
+            cancellationToken
+        );
 
         // Assert
         handler1.VerifyAll();
@@ -219,25 +234,35 @@ public class CircuitHostTest
         RenderInParallelComponent.Setup(componentCount);
         for (var i = 0; i < componentCount; i++)
         {
-            descriptors.Add(new()
-            {
-                ComponentType = typeof(RenderInParallelComponent),
-                Parameters = ParameterView.Empty,
-                Sequence = 0
-            });
+            descriptors.Add(
+                new()
+                {
+                    ComponentType = typeof(RenderInParallelComponent),
+                    Parameters = ParameterView.Empty,
+                    Sequence = 0
+                }
+            );
         }
         var circuitHost = TestCircuitHost.Create(
             serviceScope: new AsyncServiceScope(serviceScope.Object),
-            descriptors: descriptors);
+            descriptors: descriptors
+        );
 
         // Act
         object initializeException = null;
-        circuitHost.UnhandledException += (sender, eventArgs) => initializeException = eventArgs.ExceptionObject;
-        var initializeTask = circuitHost.InitializeAsync(new ProtectedPrerenderComponentApplicationStore(Mock.Of<IDataProtectionProvider>()), cancellationToken);
+        circuitHost.UnhandledException += (sender, eventArgs) =>
+            initializeException = eventArgs.ExceptionObject;
+        var initializeTask = circuitHost.InitializeAsync(
+            new ProtectedPrerenderComponentApplicationStore(Mock.Of<IDataProtectionProvider>()),
+            cancellationToken
+        );
         await initializeTask.WaitAsync(initializeTimeout);
 
         // Assert: This was not reached only because an exception was thrown in InitializeAsync()
-        Assert.True(initializeException is null, $"An exception was thrown in {nameof(TestCircuitHost.InitializeAsync)}(): {initializeException}");
+        Assert.True(
+            initializeException is null,
+            $"An exception was thrown in {nameof(TestCircuitHost.InitializeAsync)}(): {initializeException}"
+        );
     }
 
     [Fact]
@@ -261,7 +286,10 @@ public class CircuitHostTest
         };
 
         // Act
-        var initializeAsyncTask = circuitHost.InitializeAsync(new ProtectedPrerenderComponentApplicationStore(Mock.Of<IDataProtectionProvider>()), new CancellationToken());
+        var initializeAsyncTask = circuitHost.InitializeAsync(
+            new ProtectedPrerenderComponentApplicationStore(Mock.Of<IDataProtectionProvider>()),
+            new CancellationToken()
+        );
 
         // Assert: No synchronous exceptions
         handler.VerifyAll();
@@ -314,7 +342,9 @@ public class CircuitHostTest
             .Returns(Task.CompletedTask)
             .Verifiable();
 
-        var circuitHost = TestCircuitHost.Create(handlers: new[] { handler1.Object, handler2.Object });
+        var circuitHost = TestCircuitHost.Create(
+            handlers: new[] { handler1.Object, handler2.Object }
+        );
 
         // Act
         await circuitHost.DisposeAsync();
@@ -330,30 +360,30 @@ public class CircuitHostTest
         serviceCollection.AddSingleton(new Mock<IJSRuntime>().Object);
         return new TestRemoteRenderer(
             serviceCollection.BuildServiceProvider(),
-            Mock.Of<IClientProxy>());
+            Mock.Of<IClientProxy>()
+        );
     }
 
     private class TestRemoteRenderer : RemoteRenderer
     {
         public TestRemoteRenderer(IServiceProvider serviceProvider, IClientProxy client)
             : base(
-                  serviceProvider,
-                  NullLoggerFactory.Instance,
-                  new CircuitOptions(),
-                  new CircuitClientProxy(client, "connection"),
-                  NullLogger.Instance,
-                  CreateJSRuntime(new CircuitOptions()),
-                  new CircuitJSComponentInterop(new CircuitOptions()))
-        {
-        }
+                serviceProvider,
+                NullLoggerFactory.Instance,
+                new CircuitOptions(),
+                new CircuitClientProxy(client, "connection"),
+                NullLogger.Instance,
+                CreateJSRuntime(new CircuitOptions()),
+                new CircuitJSComponentInterop(new CircuitOptions())
+            ) { }
 
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
         }
 
-        private static RemoteJSRuntime CreateJSRuntime(CircuitOptions options)
-            => new RemoteJSRuntime(Options.Create(options), Options.Create(new HubOptions()), null);
+        private static RemoteJSRuntime CreateJSRuntime(CircuitOptions options) =>
+            new RemoteJSRuntime(Options.Create(options), Options.Create(new HubOptions()), null);
     }
 
     private class DispatcherComponent : ComponentBase, IDisposable
@@ -376,10 +406,10 @@ public class CircuitHostTest
     private class ThrowOnDisposeComponent : IComponent, IDisposable
     {
         public bool DidCallDispose { get; private set; }
+
         public void Attach(RenderHandle renderHandle) { }
 
-        public Task SetParametersAsync(ParameterView parameters)
-            => Task.CompletedTask;
+        public Task SetParametersAsync(ParameterView parameters) => Task.CompletedTask;
 
         public void Dispose()
         {
@@ -400,8 +430,9 @@ public class CircuitHostTest
             if (_instanceCount > 0)
             {
                 throw new InvalidOperationException(
-                    $"Cannot call '{nameof(Setup)}' when there are still " +
-                    $"{nameof(RenderInParallelComponent)} instances active.");
+                    $"Cannot call '{nameof(Setup)}' when there are still "
+                        + $"{nameof(RenderInParallelComponent)} instances active."
+                );
             }
 
             _renderTcsArray = new TaskCompletionSource[numComponents];
@@ -416,15 +447,15 @@ public class CircuitHostTest
         {
             if (_instanceCount >= _renderTcsArray.Length)
             {
-                throw new InvalidOperationException("Created more test component instances than expected.");
+                throw new InvalidOperationException(
+                    "Created more test component instances than expected."
+                );
             }
 
             _id = _instanceCount++;
         }
 
-        public void Attach(RenderHandle renderHandle)
-        {
-        }
+        public void Attach(RenderHandle renderHandle) { }
 
         public async Task SetParametersAsync(ParameterView parameters)
         {
@@ -449,12 +480,9 @@ public class CircuitHostTest
 
         public Exception ExceptionDuringDisposeAsync { get; private set; }
 
-        public void Attach(RenderHandle renderHandle)
-        {
-        }
+        public void Attach(RenderHandle renderHandle) { }
 
-        public Task SetParametersAsync(ParameterView parameters)
-            => Task.CompletedTask;
+        public Task SetParametersAsync(ParameterView parameters) => Task.CompletedTask;
 
         public async ValueTask DisposeAsync()
         {

@@ -46,7 +46,8 @@ namespace Microsoft.EntityFrameworkCore.Update
         void AppendNextSequenceValueOperation(
             StringBuilder commandStringBuilder,
             string name,
-            string? schema);
+            string? schema
+        );
 
         /// <summary>
         ///     Appends a SQL fragment for the start of a batch to
@@ -65,7 +66,8 @@ namespace Microsoft.EntityFrameworkCore.Update
         ResultSetMapping AppendDeleteOperation(
             StringBuilder commandStringBuilder,
             IReadOnlyModificationCommand command,
-            int commandPosition);
+            int commandPosition
+        );
 
         /// <summary>
         ///     Appends a SQL command for inserting a row to the commands being built.
@@ -77,7 +79,8 @@ namespace Microsoft.EntityFrameworkCore.Update
         ResultSetMapping AppendInsertOperation(
             StringBuilder commandStringBuilder,
             IReadOnlyModificationCommand command,
-            int commandPosition);
+            int commandPosition
+        );
 
         /// <summary>
         ///     Appends a SQL command for updating a row to the commands being built.
@@ -89,6 +92,7 @@ namespace Microsoft.EntityFrameworkCore.Update
         ResultSetMapping AppendUpdateOperation(
             StringBuilder commandStringBuilder,
             IReadOnlyModificationCommand command,
-            int commandPosition);
+            int commandPosition
+        );
     }
 }

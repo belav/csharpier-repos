@@ -31,8 +31,10 @@ namespace System.Collections.Immutable
             /// <remarks>
             /// We utilize this resource pool to make "allocation free" enumeration achievable.
             /// </remarks>
-            private static readonly SecureObjectPool<Stack<RefAsValueType<Node>>, Enumerator> s_enumeratingStacks =
-                new SecureObjectPool<Stack<RefAsValueType<Node>>, Enumerator>();
+            private static readonly SecureObjectPool<
+                Stack<RefAsValueType<Node>>,
+                Enumerator
+            > s_enumeratingStacks = new SecureObjectPool<Stack<RefAsValueType<Node>>, Enumerator>();
 
             /// <summary>
             /// The builder being enumerated, if applicable.
@@ -84,7 +86,10 @@ namespace System.Collections.Immutable
                 {
                     if (!s_enumeratingStacks.TryTake(this, out _stack))
                     {
-                        _stack = s_enumeratingStacks.PrepNew(this, new Stack<RefAsValueType<Node>>(root.Height));
+                        _stack = s_enumeratingStacks.PrepNew(
+                            this,
+                            new Stack<RefAsValueType<Node>>(root.Height)
+                        );
                     }
 
                     this.PushLeft(_root);
@@ -129,7 +134,10 @@ namespace System.Collections.Immutable
             {
                 _root = null!;
                 _current = null;
-                if (_stack != null && _stack.TryUse(ref this, out Stack<RefAsValueType<Node>>? stack))
+                if (
+                    _stack != null
+                    && _stack.TryUse(ref this, out Stack<RefAsValueType<Node>>? stack)
+                )
                 {
                     stack.ClearFastWhenEmpty();
                     s_enumeratingStacks.TryAdd(this, _stack!);

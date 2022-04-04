@@ -8,15 +8,17 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Diagnostics.FunctionalTests;
 
-public class DeveloperExceptionPageSampleTest : IClassFixture<TestFixture<DeveloperExceptionPageSample.Startup>>
+public class DeveloperExceptionPageSampleTest
+    : IClassFixture<TestFixture<DeveloperExceptionPageSample.Startup>>
 {
-    public DeveloperExceptionPageSampleTest(TestFixture<DeveloperExceptionPageSample.Startup> fixture)
+    public DeveloperExceptionPageSampleTest(
+        TestFixture<DeveloperExceptionPageSample.Startup> fixture
+    )
     {
         Client = fixture.Client;
     }
 
     public HttpClient Client { get; }
-
 
     [Fact]
     public async Task DeveloperExceptionPage_ShowsError()

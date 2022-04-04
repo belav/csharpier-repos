@@ -32,8 +32,8 @@ public class AcceptedAtActionResult : ObjectResult
         string? actionName,
         string? controllerName,
         object? routeValues,
-        [ActionResultObjectValue] object? value)
-        : base(value)
+        [ActionResultObjectValue] object? value
+    ) : base(value)
     {
         ActionName = actionName;
         ControllerName = controllerName;
@@ -85,7 +85,8 @@ public class AcceptedAtActionResult : ObjectResult
             ControllerName,
             RouteValues,
             request.Scheme,
-            request.Host.ToUriComponent());
+            request.Host.ToUriComponent()
+        );
 
         if (string.IsNullOrEmpty(url))
         {

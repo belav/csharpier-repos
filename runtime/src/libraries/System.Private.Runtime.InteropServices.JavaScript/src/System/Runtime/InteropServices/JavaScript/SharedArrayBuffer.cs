@@ -11,11 +11,9 @@ namespace System.Runtime.InteropServices.JavaScript
         /// Initializes a new instance of the JavaScript Core SharedArrayBuffer class.
         /// </summary>
         /// <param name="length">The size, in bytes, of the array buffer to create.</param>
-        public SharedArrayBuffer(int length) : base(nameof(SharedArrayBuffer), length)
-        { }
+        public SharedArrayBuffer(int length) : base(nameof(SharedArrayBuffer), length) { }
 
-        internal SharedArrayBuffer(IntPtr jsHandle) : base(jsHandle)
-        { }
+        internal SharedArrayBuffer(IntPtr jsHandle) : base(jsHandle) { }
 
         /// <summary>
         /// The size, in bytes, of the array. This is established when the array is constructed and cannot be changed.
@@ -46,6 +44,7 @@ namespace System.Runtime.InteropServices.JavaScript
         /// <returns>a new JavaScript Core SharedArrayBuffer</returns>
         /// <param name="begin">Beginning index of copy.</param>
         /// <param name="end">Ending index, exclusive.</param>
-        public SharedArrayBuffer Slice(int begin, int end) => (SharedArrayBuffer)Invoke("slice", begin, end);
+        public SharedArrayBuffer Slice(int begin, int end) =>
+            (SharedArrayBuffer)Invoke("slice", begin, end);
     }
 }

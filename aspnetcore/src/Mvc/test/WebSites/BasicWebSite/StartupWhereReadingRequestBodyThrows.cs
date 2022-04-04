@@ -28,17 +28,21 @@ public class StartupWhereReadingRequestBodyThrows
         app.UseDeveloperExceptionPage();
 
         // Initializes the RequestId service for each request
-        app.Use((context, next) =>
-        {
-            context.Request.Body = new ThrowingStream();
-            return next(context);
-        });
+        app.Use(
+            (context, next) =>
+            {
+                context.Request.Body = new ThrowingStream();
+                return next(context);
+            }
+        );
 
         app.UseRouting();
-        app.UseEndpoints(endpoints =>
-        {
-            endpoints.MapDefaultControllerRoute();
-        });
+        app.UseEndpoints(
+            endpoints =>
+            {
+                endpoints.MapDefaultControllerRoute();
+            }
+        );
     }
 
     private class ThrowingStream : Stream
@@ -59,12 +63,20 @@ public class StartupWhereReadingRequestBodyThrows
             throw new NotSupportedException();
         }
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             throw new ConnectionResetException("Some error");
         }
 
-        public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
+        public override ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             throw new ConnectionResetException("Some error");
         }

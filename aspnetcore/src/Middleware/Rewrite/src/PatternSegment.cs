@@ -5,5 +5,9 @@ namespace Microsoft.AspNetCore.Rewrite;
 
 internal abstract class PatternSegment
 {
-    public abstract string? Evaluate(RewriteContext context, BackReferenceCollection? ruleBackReferences, BackReferenceCollection? conditionBackReferences);
+    public abstract string? Evaluate(
+        RewriteContext context,
+        BackReferenceCollection? ruleBackReferences,
+        BackReferenceCollection? conditionBackReferences
+    );
 }

@@ -16,7 +16,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQueryableMethodTranslatingExpressionVisitor
+    public class SqlServerQueryableMethodTranslatingExpressionVisitor
+        : RelationalQueryableMethodTranslatingExpressionVisitor
     {
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -27,10 +28,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         public SqlServerQueryableMethodTranslatingExpressionVisitor(
             QueryableMethodTranslatingExpressionVisitorDependencies dependencies,
             RelationalQueryableMethodTranslatingExpressionVisitorDependencies relationalDependencies,
-            QueryCompilationContext queryCompilationContext)
-            : base(dependencies, relationalDependencies, queryCompilationContext)
-        {
-        }
+            QueryCompilationContext queryCompilationContext
+        ) : base(dependencies, relationalDependencies, queryCompilationContext) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -39,10 +38,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         protected SqlServerQueryableMethodTranslatingExpressionVisitor(
-            SqlServerQueryableMethodTranslatingExpressionVisitor parentVisitor)
-            : base(parentVisitor)
-        {
-        }
+            SqlServerQueryableMethodTranslatingExpressionVisitor parentVisitor
+        ) : base(parentVisitor) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -50,8 +47,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected override QueryableMethodTranslatingExpressionVisitor CreateSubqueryVisitor()
-            => new SqlServerQueryableMethodTranslatingExpressionVisitor(this);
+        protected override QueryableMethodTranslatingExpressionVisitor CreateSubqueryVisitor() =>
+            new SqlServerQueryableMethodTranslatingExpressionVisitor(this);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -67,18 +64,27 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                 var table = queryRootExpression.EntityType.GetTableMappings().Single().Table;
                 var temporalTableExpression = queryRootExpression switch
                 {
-                    TemporalAllQueryRootExpression _ => (TemporalTableExpression)new TemporalAllTableExpression(table),
-                    TemporalAsOfQueryRootExpression asOf => new TemporalAsOfTableExpression(table, asOf.PointInTime),
-                    TemporalBetweenQueryRootExpression between => new TemporalBetweenTableExpression(table, between.From, between.To),
-                    TemporalContainedInQueryRootExpression containedIn => new TemporalContainedInTableExpression(
-                        table, containedIn.From, containedIn.To),
-                    TemporalFromToQueryRootExpression fromTo => new TemporalFromToTableExpression(table, fromTo.From, fromTo.To),
+                    TemporalAllQueryRootExpression _
+                      => (TemporalTableExpression)new TemporalAllTableExpression(table),
+                    TemporalAsOfQueryRootExpression asOf
+                      => new TemporalAsOfTableExpression(table, asOf.PointInTime),
+                    TemporalBetweenQueryRootExpression between
+                      => new TemporalBetweenTableExpression(table, between.From, between.To),
+                    TemporalContainedInQueryRootExpression containedIn
+                      => new TemporalContainedInTableExpression(
+                          table,
+                          containedIn.From,
+                          containedIn.To
+                      ),
+                    TemporalFromToQueryRootExpression fromTo
+                      => new TemporalFromToTableExpression(table, fromTo.From, fromTo.To),
                     _ => throw new InvalidOperationException(queryRootExpression.Print())
                 };
 
                 var selectExpression = RelationalDependencies.SqlExpressionFactory.Select(
                     queryRootExpression.EntityType,
-                    temporalTableExpression);
+                    temporalTableExpression
+                );
 
                 return new ShapedQueryExpression(
                     selectExpression,
@@ -87,8 +93,11 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                         new ProjectionBindingExpression(
                             selectExpression,
                             new ProjectionMember(),
-                            typeof(ValueBuffer)),
-                        false));
+                            typeof(ValueBuffer)
+                        ),
+                        false
+                    )
+                );
             }
 
             return base.VisitExtension(extensionExpression);

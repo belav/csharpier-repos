@@ -15,14 +15,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         {
             static SyntaxTokenWithValueAndTrivia()
             {
-                ObjectBinder.RegisterTypeReader(typeof(SyntaxTokenWithValueAndTrivia<T>), r => new SyntaxTokenWithValueAndTrivia<T>(r));
+                ObjectBinder.RegisterTypeReader(
+                    typeof(SyntaxTokenWithValueAndTrivia<T>),
+                    r => new SyntaxTokenWithValueAndTrivia<T>(r)
+                );
             }
 
             private readonly GreenNode _leading;
             private readonly GreenNode _trailing;
 
-            internal SyntaxTokenWithValueAndTrivia(SyntaxKind kind, string text, T value, GreenNode leading, GreenNode trailing)
-                : base(kind, text, value)
+            internal SyntaxTokenWithValueAndTrivia(
+                SyntaxKind kind,
+                string text,
+                T value,
+                GreenNode leading,
+                GreenNode trailing
+            ) : base(kind, text, value)
             {
                 if (leading != null)
                 {
@@ -43,8 +51,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 GreenNode leading,
                 GreenNode trailing,
                 DiagnosticInfo[] diagnostics,
-                SyntaxAnnotation[] annotations)
-                : base(kind, text, value, diagnostics, annotations)
+                SyntaxAnnotation[] annotations
+            ) : base(kind, text, value, diagnostics, annotations)
             {
                 if (leading != null)
                 {
@@ -58,8 +66,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 }
             }
 
-            internal SyntaxTokenWithValueAndTrivia(ObjectReader reader)
-                : base(reader)
+            internal SyntaxTokenWithValueAndTrivia(ObjectReader reader) : base(reader)
             {
                 var leading = (GreenNode)reader.ReadValue();
                 if (leading != null)
@@ -94,22 +101,54 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
             public override SyntaxToken TokenWithLeadingTrivia(GreenNode trivia)
             {
-                return new SyntaxTokenWithValueAndTrivia<T>(this.Kind, this.TextField, this.ValueField, trivia, _trailing, this.GetDiagnostics(), this.GetAnnotations());
+                return new SyntaxTokenWithValueAndTrivia<T>(
+                    this.Kind,
+                    this.TextField,
+                    this.ValueField,
+                    trivia,
+                    _trailing,
+                    this.GetDiagnostics(),
+                    this.GetAnnotations()
+                );
             }
 
             public override SyntaxToken TokenWithTrailingTrivia(GreenNode trivia)
             {
-                return new SyntaxTokenWithValueAndTrivia<T>(this.Kind, this.TextField, this.ValueField, _leading, trivia, this.GetDiagnostics(), this.GetAnnotations());
+                return new SyntaxTokenWithValueAndTrivia<T>(
+                    this.Kind,
+                    this.TextField,
+                    this.ValueField,
+                    _leading,
+                    trivia,
+                    this.GetDiagnostics(),
+                    this.GetAnnotations()
+                );
             }
 
             internal override GreenNode SetDiagnostics(DiagnosticInfo[] diagnostics)
             {
-                return new SyntaxTokenWithValueAndTrivia<T>(this.Kind, this.TextField, this.ValueField, _leading, _trailing, diagnostics, this.GetAnnotations());
+                return new SyntaxTokenWithValueAndTrivia<T>(
+                    this.Kind,
+                    this.TextField,
+                    this.ValueField,
+                    _leading,
+                    _trailing,
+                    diagnostics,
+                    this.GetAnnotations()
+                );
             }
 
             internal override GreenNode SetAnnotations(SyntaxAnnotation[] annotations)
             {
-                return new SyntaxTokenWithValueAndTrivia<T>(this.Kind, this.TextField, this.ValueField, _leading, _trailing, this.GetDiagnostics(), annotations);
+                return new SyntaxTokenWithValueAndTrivia<T>(
+                    this.Kind,
+                    this.TextField,
+                    this.ValueField,
+                    _leading,
+                    _trailing,
+                    this.GetDiagnostics(),
+                    annotations
+                );
             }
         }
     }

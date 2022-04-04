@@ -69,16 +69,12 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <param name="context">The context on which the operations will be invoked.</param>
         /// <param name="maxRetryCount">The maximum number of retry attempts.</param>
         /// <param name="maxRetryDelay">The maximum delay between retries.</param>
-        protected ExecutionStrategy(
-            DbContext context,
-            int maxRetryCount,
-            TimeSpan maxRetryDelay)
+        protected ExecutionStrategy(DbContext context, int maxRetryCount, TimeSpan maxRetryDelay)
             : this(
                 context.GetService<ExecutionStrategyDependencies>(),
                 maxRetryCount,
-                maxRetryDelay)
-        {
-        }
+                maxRetryDelay
+            ) { }
 
         /// <summary>
         ///     Creates a new instance of <see cref="ExecutionStrategy" />.
@@ -93,7 +89,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         protected ExecutionStrategy(
             ExecutionStrategyDependencies dependencies,
             int maxRetryCount,
-            TimeSpan maxRetryDelay)
+            TimeSpan maxRetryDelay
+        )
         {
             if (maxRetryCount < 0)
             {
@@ -214,7 +211,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public virtual TResult Execute<TState, TResult>(
             TState state,
             Func<DbContext, TState, TResult> operation,
-            Func<DbContext, TState, ExecutionResult<TResult>>? verifySucceeded)
+            Func<DbContext, TState, ExecutionResult<TResult>>? verifySucceeded
+        )
         {
             Check.NotNull(operation, nameof(operation));
 
@@ -229,13 +227,15 @@ namespace Microsoft.EntityFrameworkCore.Storage
             return ExecuteImplementation(
                 (context, state) => new ExecutionResult<TResult>(true, operation(context, state)),
                 verifySucceeded,
-                state).Result;
+                state
+            ).Result;
         }
 
         private ExecutionResult<TResult> ExecuteImplementation<TState, TResult>(
             Func<DbContext, TState, ExecutionResult<TResult>> operation,
             Func<DbContext, TState, ExecutionResult<TResult>>? verifySucceeded,
-            TState state)
+            TState state
+        )
         {
             while (true)
             {
@@ -254,8 +254,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
                     EntityFrameworkEventSource.Log.ExecutionStrategyOperationFailure();
 
-                    if (verifySucceeded != null
-                        && CallOnWrappedException(ex, ShouldVerifySuccessOn))
+                    if (
+                        verifySucceeded != null && CallOnWrappedException(ex, ShouldVerifySuccessOn)
+                    )
                     {
                         var result = ExecuteImplementation(verifySucceeded, null, state);
                         if (result.IsSuccessful)
@@ -274,10 +275,17 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     var delay = GetNextDelay(ex);
                     if (delay == null)
                     {
-                        throw new RetryLimitExceededException(CoreStrings.RetryLimitExceeded(MaxRetryCount, GetType().Name), ex);
+                        throw new RetryLimitExceededException(
+                            CoreStrings.RetryLimitExceeded(MaxRetryCount, GetType().Name),
+                            ex
+                        );
                     }
 
-                    Dependencies.Logger.ExecutionStrategyRetrying(ExceptionsEncountered, delay.Value, async: true);
+                    Dependencies.Logger.ExecutionStrategyRetrying(
+                        ExceptionsEncountered,
+                        delay.Value,
+                        async: true
+                    );
 
                     OnRetry();
 
@@ -317,33 +325,55 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public virtual async Task<TResult> ExecuteAsync<TState, TResult>(
             TState state,
             Func<DbContext, TState, CancellationToken, Task<TResult>> operation,
-            Func<DbContext, TState, CancellationToken, Task<ExecutionResult<TResult>>>? verifySucceeded,
-            CancellationToken cancellationToken = default)
+            Func<
+                DbContext,
+                TState,
+                CancellationToken,
+                Task<ExecutionResult<TResult>>
+            >? verifySucceeded,
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(operation, nameof(operation));
 
             if (Current != null)
             {
-                return await operation(Dependencies.CurrentContext.Context, state, cancellationToken).ConfigureAwait(false);
+                return await operation(
+                        Dependencies.CurrentContext.Context,
+                        state,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
 
             OnFirstExecution();
 
             // In order to avoid infinite recursive generics, wrap operation with ExecutionResult
             var result = await ExecuteImplementationAsync(
-                async (context, state, cancellationToken) => new ExecutionResult<TResult>(
-                    true, await operation(context, state, cancellationToken).ConfigureAwait(false)),
-                verifySucceeded,
-                state,
-                cancellationToken).ConfigureAwait(false);
+                    async (context, state, cancellationToken) =>
+                        new ExecutionResult<TResult>(
+                            true,
+                            await operation(context, state, cancellationToken).ConfigureAwait(false)
+                        ),
+                    verifySucceeded,
+                    state,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             return result.Result;
         }
 
         private async Task<ExecutionResult<TResult>> ExecuteImplementationAsync<TState, TResult>(
             Func<DbContext, TState, CancellationToken, Task<ExecutionResult<TResult>>> operation,
-            Func<DbContext, TState, CancellationToken, Task<ExecutionResult<TResult>>>? verifySucceeded,
+            Func<
+                DbContext,
+                TState,
+                CancellationToken,
+                Task<ExecutionResult<TResult>>
+            >? verifySucceeded,
             TState state,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             while (true)
             {
@@ -354,7 +384,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     Check.DebugAssert(Current == null, "Current != null");
 
                     Current = this;
-                    var result = await operation(Dependencies.CurrentContext.Context, state, cancellationToken)
+                    var result = await operation(
+                            Dependencies.CurrentContext.Context,
+                            state,
+                            cancellationToken
+                        )
                         .ConfigureAwait(false);
                     Current = null;
                     return result;
@@ -365,10 +399,16 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
                     EntityFrameworkEventSource.Log.ExecutionStrategyOperationFailure();
 
-                    if (verifySucceeded != null
-                        && CallOnWrappedException(ex, ShouldVerifySuccessOn))
+                    if (
+                        verifySucceeded != null && CallOnWrappedException(ex, ShouldVerifySuccessOn)
+                    )
                     {
-                        var result = await ExecuteImplementationAsync(verifySucceeded, null, state, cancellationToken)
+                        var result = await ExecuteImplementationAsync(
+                                verifySucceeded,
+                                null,
+                                state,
+                                cancellationToken
+                            )
                             .ConfigureAwait(false);
                         if (result.IsSuccessful)
                         {
@@ -386,10 +426,17 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     var delay = GetNextDelay(ex);
                     if (delay == null)
                     {
-                        throw new RetryLimitExceededException(CoreStrings.RetryLimitExceeded(MaxRetryCount, GetType().Name), ex);
+                        throw new RetryLimitExceededException(
+                            CoreStrings.RetryLimitExceeded(MaxRetryCount, GetType().Name),
+                            ex
+                        );
                     }
 
-                    Dependencies.Logger.ExecutionStrategyRetrying(ExceptionsEncountered, delay.Value, async: true);
+                    Dependencies.Logger.ExecutionStrategyRetrying(
+                        ExceptionsEncountered,
+                        delay.Value,
+                        async: true
+                    );
 
                     OnRetry();
 
@@ -407,22 +454,37 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// </remarks>
         protected virtual void OnFirstExecution()
         {
-            if (RetriesOnFailure
-                && (Dependencies.CurrentContext.Context.Database.CurrentTransaction is not null
-                    || Dependencies.CurrentContext.Context.Database.GetEnlistedTransaction() is not null
-                    || (((IDatabaseFacadeDependenciesAccessor)Dependencies.CurrentContext.Context.Database).Dependencies
-                        .TransactionManager as
-                        ITransactionEnlistmentManager)?.CurrentAmbientTransaction is not null))
+            if (
+                RetriesOnFailure
+                && (
+                    Dependencies.CurrentContext.Context.Database.CurrentTransaction is not null
+                    || Dependencies.CurrentContext.Context.Database.GetEnlistedTransaction()
+                        is not null
+                    || (
+                        (
+                            (IDatabaseFacadeDependenciesAccessor)Dependencies
+                                .CurrentContext
+                                .Context
+                                .Database
+                        )
+                            .Dependencies
+                            .TransactionManager as ITransactionEnlistmentManager
+                    )?.CurrentAmbientTransaction
+                        is not null
+                )
+            )
             {
                 throw new InvalidOperationException(
                     CoreStrings.ExecutionStrategyExistingTransaction(
                         GetType().Name,
                         nameof(DbContext)
-                        + "."
-                        + nameof(DbContext.Database)
-                        + "."
-                        + nameof(DatabaseFacade.CreateExecutionStrategy)
-                        + "()"));
+                            + "."
+                            + nameof(DbContext.Database)
+                            + "."
+                            + nameof(DatabaseFacade.CreateExecutionStrategy)
+                            + "()"
+                    )
+                );
             }
 
             ExceptionsEncountered.Clear();
@@ -435,9 +497,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
         ///     See <see href="https://aka.ms/efcore-docs-connection-resiliency">Connection resiliency and database retries</see>
         ///     for more information.
         /// </remarks>
-        protected virtual void OnRetry()
-        {
-        }
+        protected virtual void OnRetry() { }
 
         /// <summary>
         ///     Determines whether the operation should be retried and the delay before the next attempt.
@@ -456,12 +516,14 @@ namespace Microsoft.EntityFrameworkCore.Storage
             var currentRetryCount = ExceptionsEncountered.Count - 1;
             if (currentRetryCount < MaxRetryCount)
             {
-                var delta = (Math.Pow(DefaultExponentialBase, currentRetryCount) - 1.0)
+                var delta =
+                    (Math.Pow(DefaultExponentialBase, currentRetryCount) - 1.0)
                     * (1.0 + Random.NextDouble() * (DefaultRandomFactor - 1.0));
 
                 var delay = Math.Min(
                     _defaultCoefficient.TotalMilliseconds * delta,
-                    MaxRetryDelay.TotalMilliseconds);
+                    MaxRetryDelay.TotalMilliseconds
+                );
 
                 return TimeSpan.FromMilliseconds(delay);
             }
@@ -480,8 +542,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <returns>
         ///     <see langword="true" /> if the specified exception could be thrown after a successful execution, otherwise <see langword="false" />.
         /// </returns>
-        protected internal virtual bool ShouldVerifySuccessOn(Exception exception)
-            => ShouldRetryOn(exception);
+        protected internal virtual bool ShouldVerifySuccessOn(Exception exception) =>
+            ShouldRetryOn(exception);
 
         /// <summary>
         ///     Determines whether the specified exception represents a transient failure that can be compensated by a retry.
@@ -512,10 +574,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// </returns>
         public static TResult CallOnWrappedException<TResult>(
             Exception exception,
-            Func<Exception, TResult> exceptionHandler)
-            => exception is DbUpdateException dbUpdateException
-                && dbUpdateException.InnerException != null
-                    ? CallOnWrappedException(dbUpdateException.InnerException, exceptionHandler)
-                    : exceptionHandler(exception);
+            Func<Exception, TResult> exceptionHandler
+        ) =>
+            exception is DbUpdateException dbUpdateException
+            && dbUpdateException.InnerException != null
+                ? CallOnWrappedException(dbUpdateException.InnerException, exceptionHandler)
+                : exceptionHandler(exception);
     }
 }

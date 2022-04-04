@@ -35,7 +35,8 @@ internal class DefaultViewComponentInvoker : IViewComponentInvoker
         IViewComponentFactory viewComponentFactory,
         ViewComponentInvokerCache viewComponentInvokerCache,
         DiagnosticListener diagnosticListener,
-        ILogger logger)
+        ILogger logger
+    )
     {
         if (viewComponentFactory == null)
         {
@@ -107,7 +108,11 @@ internal class DefaultViewComponentInvoker : IViewComponentInvoker
         await result.ExecuteAsync(context);
     }
 
-    private async Task<IViewComponentResult> InvokeAsyncCore(ObjectMethodExecutor executor, object component, ViewComponentContext context)
+    private async Task<IViewComponentResult> InvokeAsyncCore(
+        ObjectMethodExecutor executor,
+        object component,
+        ViewComponentContext context
+    )
     {
         using (_logger.ViewComponentScope(context))
         {
@@ -164,7 +169,11 @@ internal class DefaultViewComponentInvoker : IViewComponentInvoker
         }
     }
 
-    private IViewComponentResult InvokeSyncCore(ObjectMethodExecutor executor, object component, ViewComponentContext context)
+    private IViewComponentResult InvokeSyncCore(
+        ObjectMethodExecutor executor,
+        object component,
+        ViewComponentContext context
+    )
     {
         using (_logger.ViewComponentScope(context))
         {
@@ -208,15 +217,19 @@ internal class DefaultViewComponentInvoker : IViewComponentInvoker
             return new HtmlContentViewComponentResult(htmlContent);
         }
 
-        throw new InvalidOperationException(Resources.FormatViewComponent_InvalidReturnValue(
-            typeof(string).Name,
-            typeof(IHtmlContent).Name,
-            typeof(IViewComponentResult).Name));
+        throw new InvalidOperationException(
+            Resources.FormatViewComponent_InvalidReturnValue(
+                typeof(string).Name,
+                typeof(IHtmlContent).Name,
+                typeof(IViewComponentResult).Name
+            )
+        );
     }
 
     private static object?[]? PrepareArguments(
         IDictionary<string, object?> parameters,
-        ObjectMethodExecutor objectMethodExecutor)
+        ObjectMethodExecutor objectMethodExecutor
+    )
     {
         var declaredParameterInfos = objectMethodExecutor.MethodParameters;
         var count = declaredParameterInfos.Length;

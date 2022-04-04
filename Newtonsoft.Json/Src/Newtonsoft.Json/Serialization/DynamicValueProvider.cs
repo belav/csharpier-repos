@@ -66,7 +66,9 @@ namespace Newtonsoft.Json.Serialization
             {
                 if (_setter == null)
                 {
-                    _setter = DynamicReflectionDelegateFactory.Instance.CreateSet<object>(_memberInfo);
+                    _setter = DynamicReflectionDelegateFactory.Instance.CreateSet<object>(
+                        _memberInfo
+                    );
                 }
 
 #if DEBUG
@@ -89,7 +91,14 @@ namespace Newtonsoft.Json.Serialization
             }
             catch (Exception ex)
             {
-                throw new JsonSerializationException("Error setting value to '{0}' on '{1}'.".FormatWith(CultureInfo.InvariantCulture, _memberInfo.Name, target.GetType()), ex);
+                throw new JsonSerializationException(
+                    "Error setting value to '{0}' on '{1}'.".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        _memberInfo.Name,
+                        target.GetType()
+                    ),
+                    ex
+                );
             }
         }
 
@@ -104,14 +113,23 @@ namespace Newtonsoft.Json.Serialization
             {
                 if (_getter == null)
                 {
-                    _getter = DynamicReflectionDelegateFactory.Instance.CreateGet<object>(_memberInfo);
+                    _getter = DynamicReflectionDelegateFactory.Instance.CreateGet<object>(
+                        _memberInfo
+                    );
                 }
 
                 return _getter(target);
             }
             catch (Exception ex)
             {
-                throw new JsonSerializationException("Error getting value from '{0}' on '{1}'.".FormatWith(CultureInfo.InvariantCulture, _memberInfo.Name, target.GetType()), ex);
+                throw new JsonSerializationException(
+                    "Error getting value from '{0}' on '{1}'.".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        _memberInfo.Name,
+                        target.GetType()
+                    ),
+                    ex
+                );
             }
         }
     }

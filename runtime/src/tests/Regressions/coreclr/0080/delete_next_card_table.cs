@@ -24,9 +24,8 @@ public class delete_next_card_table
     // relocated, etc...
     void DoMemoryChurn()
     {
-
         Random r = new Random();
-        for (int j=0; j<10; j++)
+        for (int j = 0; j < 10; j++)
         {
             Console.Write("Churn loop {0}", j);
 
@@ -36,7 +35,7 @@ public class delete_next_card_table
                 List<object> al = new List<object>();
                 int len = 1;
 
-                for (int i = 0; i < 32; i++)        // todo: this should be based upon size of IntPtr (32 bits on 32 bit platforms, 64 on 64 bit platforms)
+                for (int i = 0; i < 32; i++) // todo: this should be based upon size of IntPtr (32 bits on 32 bit platforms, 64 on 64 bit platforms)
                 {
                     Console.Write(".");
 
@@ -58,4 +57,3 @@ public class delete_next_card_table
         }
     }
 }
-

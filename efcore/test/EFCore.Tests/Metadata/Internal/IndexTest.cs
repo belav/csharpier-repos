@@ -23,19 +23,33 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(() => entityType.AddIndex(new[] { property })).Message);
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => entityType.AddIndex(new[] { property })
+                    )
+                    .Message
+            );
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(() => entityType.AddIndex(new[] { property }, "Name")).Message);
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => entityType.AddIndex(new[] { property }, "Name")
+                    )
+                    .Message
+            );
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(() => entityType.RemoveIndex(index)).Message);
+                Assert
+                    .Throws<InvalidOperationException>(() => entityType.RemoveIndex(index))
+                    .Message
+            );
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(() => index.IsUnique = false).Message);
+                Assert.Throws<InvalidOperationException>(() => index.IsUnique = false).Message
+            );
         }
 
         [ConditionalFact]
@@ -66,8 +80,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Assert.True(index.IsUnique);
         }
 
-        private static IMutableModel CreateModel()
-            => new Model();
+        private static IMutableModel CreateModel() => new Model();
 
         private class Customer
         {

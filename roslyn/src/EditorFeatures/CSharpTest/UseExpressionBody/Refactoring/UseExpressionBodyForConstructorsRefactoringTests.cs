@@ -18,123 +18,157 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
 {
     public class UseExpressionBodyForConstructorsRefactoringTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new UseExpressionBodyCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new UseExpressionBodyCodeRefactoringProvider();
 
         private OptionsCollection UseExpressionBody =>
-            this.Option(CSharpCodeStyleOptions.PreferExpressionBodiedConstructors, CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement);
+            this.Option(
+                CSharpCodeStyleOptions.PreferExpressionBodiedConstructors,
+                CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement
+            );
 
         private OptionsCollection UseExpressionBodyDisabledDiagnostic =>
-            this.Option(CSharpCodeStyleOptions.PreferExpressionBodiedConstructors, new CodeStyleOption2<ExpressionBodyPreference>(ExpressionBodyPreference.WhenPossible, NotificationOption2.None));
+            this.Option(
+                CSharpCodeStyleOptions.PreferExpressionBodiedConstructors,
+                new CodeStyleOption2<ExpressionBodyPreference>(
+                    ExpressionBodyPreference.WhenPossible,
+                    NotificationOption2.None
+                )
+            );
 
         private OptionsCollection UseBlockBody =>
-            this.Option(CSharpCodeStyleOptions.PreferExpressionBodiedConstructors, CSharpCodeStyleOptions.NeverWithSilentEnforcement);
+            this.Option(
+                CSharpCodeStyleOptions.PreferExpressionBodiedConstructors,
+                CSharpCodeStyleOptions.NeverWithSilentEnforcement
+            );
 
         private OptionsCollection UseBlockBodyDisabledDiagnostic =>
-            this.Option(CSharpCodeStyleOptions.PreferExpressionBodiedConstructors, new CodeStyleOption2<ExpressionBodyPreference>(ExpressionBodyPreference.Never, NotificationOption2.None));
+            this.Option(
+                CSharpCodeStyleOptions.PreferExpressionBodiedConstructors,
+                new CodeStyleOption2<ExpressionBodyPreference>(
+                    ExpressionBodyPreference.Never,
+                    NotificationOption2.None
+                )
+            );
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestNotOfferedIfUserPrefersExpressionBodiesAndInBlockBody()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     public C()
     {
         [||]Bar();
     }
-}", parameters: new TestParameters(options: UseExpressionBody));
+}",
+                parameters: new TestParameters(options: UseExpressionBody)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestOfferedIfUserPrefersExpressionBodiesWithoutDiagnosticAndInBlockBody()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     public C()
     {
         [||]Bar();
     }
 }",
-@"class C
+                @"class C
 {
     public C() => Bar();
-}", parameters: new TestParameters(options: UseExpressionBodyDisabledDiagnostic));
+}",
+                parameters: new TestParameters(options: UseExpressionBodyDisabledDiagnostic)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestOfferedIfUserPrefersBlockBodiesAndInBlockBody()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     public C()
     {
         [||]Bar();
     }
 }",
-@"class C
+                @"class C
 {
     public C() => Bar();
-}", parameters: new TestParameters(options: UseBlockBody));
+}",
+                parameters: new TestParameters(options: UseBlockBody)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestNotOfferedInLambda()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     public C()
     {
         return () => { [||] };
     }
-}", parameters: new TestParameters(options: UseBlockBody));
+}",
+                parameters: new TestParameters(options: UseBlockBody)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestNotOfferedIfUserPrefersBlockBodiesAndInExpressionBody()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     public C() => [||]Bar();
-}", parameters: new TestParameters(options: UseBlockBody));
+}",
+                parameters: new TestParameters(options: UseBlockBody)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestOfferedIfUserPrefersBlockBodiesWithoutDiagnosticAndInExpressionBody()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     public C() => [||]Bar();
 }",
-@"class C
+                @"class C
 {
     public C()
     {
         Bar();
     }
-}", parameters: new TestParameters(options: UseBlockBodyDisabledDiagnostic));
+}",
+                parameters: new TestParameters(options: UseBlockBodyDisabledDiagnostic)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestOfferedIfUserPrefersExpressionBodiesAndInExpressionBody()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     public C() => [||]Bar();
 }",
-@"class C
+                @"class C
 {
     public C()
     {
         Bar();
     }
-}", parameters: new TestParameters(options: UseExpressionBody));
+}",
+                parameters: new TestParameters(options: UseExpressionBody)
+            );
         }
     }
 }

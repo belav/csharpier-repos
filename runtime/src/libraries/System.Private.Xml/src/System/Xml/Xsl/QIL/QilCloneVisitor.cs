@@ -16,21 +16,17 @@ namespace System.Xml.Xsl.Qil
         private readonly QilFactory _fac;
         private readonly SubstitutionList _subs;
 
-
         //-----------------------------------------------
         // Constructors
         //-----------------------------------------------
 
-        public QilCloneVisitor(QilFactory fac) : this(fac, new SubstitutionList())
-        {
-        }
+        public QilCloneVisitor(QilFactory fac) : this(fac, new SubstitutionList()) { }
 
         public QilCloneVisitor(QilFactory fac, SubstitutionList subs)
         {
             _fac = fac;
             _subs = subs;
         }
-
 
         //-----------------------------------------------
         // Entry
@@ -42,7 +38,6 @@ namespace System.Xml.Xsl.Qil
             // Assume that iterator nodes at the top-level are references rather than definitions
             return VisitAssumeReference(node);
         }
-
 
         //-----------------------------------------------
         // QilVisitor overrides
@@ -110,7 +105,6 @@ namespace System.Xml.Xsl.Qil
             return base.VisitReference(newNode == null ? oldNode : newNode);
         }
 
-
         //-----------------------------------------------
         // QilScopedVisitor methods
         //-----------------------------------------------
@@ -130,7 +124,6 @@ namespace System.Xml.Xsl.Qil
         {
             _subs.RemoveLastSubstitutionPair();
         }
-
 
         //-----------------------------------------------
         // QilCloneVisitor methods

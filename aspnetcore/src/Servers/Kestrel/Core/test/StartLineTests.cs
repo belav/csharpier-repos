@@ -38,7 +38,9 @@ public class StartLineTests : IDisposable
         Assert.Null(Http1Connection.Path);
         Assert.Null(Http1Connection.QueryString);
 
-        var ros = new ReadOnlySequence<byte>(Encoding.ASCII.GetBytes($"POST {rawTarget} HTTP/1.1\r\n"));
+        var ros = new ReadOnlySequence<byte>(
+            Encoding.ASCII.GetBytes($"POST {rawTarget} HTTP/1.1\r\n")
+        );
         var reader = new SequenceReader<byte>(ros);
         Assert.True(Parser.ParseRequestLine(ParsingHandler, ref reader));
 
@@ -65,7 +67,9 @@ public class StartLineTests : IDisposable
         Assert.Null(Http1Connection.Path);
         Assert.Null(Http1Connection.QueryString);
 
-        var ros = new ReadOnlySequence<byte>(Encoding.ASCII.GetBytes($"CONNECT {rawTarget} HTTP/1.1\r\n"));
+        var ros = new ReadOnlySequence<byte>(
+            Encoding.ASCII.GetBytes($"CONNECT {rawTarget} HTTP/1.1\r\n")
+        );
         var reader = new SequenceReader<byte>(ros);
         Assert.True(Parser.ParseRequestLine(ParsingHandler, ref reader));
 
@@ -93,7 +97,9 @@ public class StartLineTests : IDisposable
         Assert.Null(Http1Connection.Path);
         Assert.Null(Http1Connection.QueryString);
 
-        var ros = new ReadOnlySequence<byte>(Encoding.ASCII.GetBytes($"CONNECT {rawTarget} HTTP/1.1\r\n"));
+        var ros = new ReadOnlySequence<byte>(
+            Encoding.ASCII.GetBytes($"CONNECT {rawTarget} HTTP/1.1\r\n")
+        );
         var reader = new SequenceReader<byte>(ros);
         Assert.True(Parser.ParseRequestLine(ParsingHandler, ref reader));
 
@@ -120,7 +126,9 @@ public class StartLineTests : IDisposable
         Assert.Null(Http1Connection.Path);
         Assert.Null(Http1Connection.QueryString);
 
-        var ros = new ReadOnlySequence<byte>(Encoding.ASCII.GetBytes($"OPTIONS {rawTarget} HTTP/1.1\r\n"));
+        var ros = new ReadOnlySequence<byte>(
+            Encoding.ASCII.GetBytes($"OPTIONS {rawTarget} HTTP/1.1\r\n")
+        );
         var reader = new SequenceReader<byte>(ros);
         Assert.True(Parser.ParseRequestLine(ParsingHandler, ref reader));
 
@@ -144,7 +152,9 @@ public class StartLineTests : IDisposable
         var path = "/a path with spaces";
         var query = "?q=123&w=xyzw12";
         Http1Connection.Reset();
-        var ros = new ReadOnlySequence<byte>(Encoding.ASCII.GetBytes($"POST {rawTarget} HTTP/1.1\r\n"));
+        var ros = new ReadOnlySequence<byte>(
+            Encoding.ASCII.GetBytes($"POST {rawTarget} HTTP/1.1\r\n")
+        );
         var reader = new SequenceReader<byte>(ros);
         Assert.True(Parser.ParseRequestLine(ParsingHandler, ref reader));
 
@@ -189,7 +199,9 @@ public class StartLineTests : IDisposable
     public void OriginForms(string rawTarget, string path, string query)
     {
         Http1Connection.Reset();
-        var ros = new ReadOnlySequence<byte>(Encoding.ASCII.GetBytes($"GET {rawTarget} HTTP/1.1\r\n"));
+        var ros = new ReadOnlySequence<byte>(
+            Encoding.ASCII.GetBytes($"GET {rawTarget} HTTP/1.1\r\n")
+        );
         var reader = new SequenceReader<byte>(ros);
         Assert.True(Parser.ParseRequestLine(ParsingHandler, ref reader));
 
@@ -207,7 +219,9 @@ public class StartLineTests : IDisposable
             Assert.Null(Http1Connection.QueryString);
 
             // Parser decodes % encoding in place, so we need to recreate the ROS
-            ros = new ReadOnlySequence<byte>(Encoding.ASCII.GetBytes($"GET {rawTarget} HTTP/1.1\r\n"));
+            ros = new ReadOnlySequence<byte>(
+                Encoding.ASCII.GetBytes($"GET {rawTarget} HTTP/1.1\r\n")
+            );
             reader = new SequenceReader<byte>(ros);
             Assert.True(Parser.ParseRequestLine(ParsingHandler, ref reader));
 
@@ -279,11 +293,17 @@ public class StartLineTests : IDisposable
     [InlineData("http://localhost?q=123&w=xyz", "/", "?q=123&w=xyz")]
     [InlineData("http://localhost/?q=123&w=xyz", "/", "?q=123&w=xyz")]
     [InlineData("http://localhost/path?q=123&w=xyz", "/path", "?q=123&w=xyz")]
-    [InlineData("http://localhost/path%20with%20space?q=abc%20123", "/path with space", "?q=abc%20123")]
+    [InlineData(
+        "http://localhost/path%20with%20space?q=abc%20123",
+        "/path with space",
+        "?q=abc%20123"
+    )]
     public void AbsoluteForms(string rawTarget, string path, string query)
     {
         Http1Connection.Reset();
-        var ros = new ReadOnlySequence<byte>(Encoding.ASCII.GetBytes($"GET {rawTarget} HTTP/1.1\r\n"));
+        var ros = new ReadOnlySequence<byte>(
+            Encoding.ASCII.GetBytes($"GET {rawTarget} HTTP/1.1\r\n")
+        );
         var reader = new SequenceReader<byte>(ros);
         Assert.True(Parser.ParseRequestLine(ParsingHandler, ref reader));
 
@@ -300,7 +320,9 @@ public class StartLineTests : IDisposable
             Assert.Null(Http1Connection.Path);
             Assert.Null(Http1Connection.QueryString);
 
-            ros = new ReadOnlySequence<byte>(Encoding.ASCII.GetBytes($"GET {rawTarget} HTTP/1.1\r\n"));
+            ros = new ReadOnlySequence<byte>(
+                Encoding.ASCII.GetBytes($"GET {rawTarget} HTTP/1.1\r\n")
+            );
             reader = new SequenceReader<byte>(ros);
             Assert.True(Parser.ParseRequestLine(ParsingHandler, ref reader));
 
@@ -364,7 +386,9 @@ public class StartLineTests : IDisposable
         var query = string.Empty;
 
         Http1Connection.Reset();
-        var ros = new ReadOnlySequence<byte>(Encoding.ASCII.GetBytes($"OPTIONS {rawTarget} HTTP/1.1\r\n"));
+        var ros = new ReadOnlySequence<byte>(
+            Encoding.ASCII.GetBytes($"OPTIONS {rawTarget} HTTP/1.1\r\n")
+        );
         var reader = new SequenceReader<byte>(ros);
         Assert.True(Parser.ParseRequestLine(ParsingHandler, ref reader));
 
@@ -381,7 +405,9 @@ public class StartLineTests : IDisposable
             Assert.Null(Http1Connection.Path);
             Assert.Null(Http1Connection.QueryString);
 
-            ros = new ReadOnlySequence<byte>(Encoding.ASCII.GetBytes($"OPTIONS {rawTarget} HTTP/1.1\r\n"));
+            ros = new ReadOnlySequence<byte>(
+                Encoding.ASCII.GetBytes($"OPTIONS {rawTarget} HTTP/1.1\r\n")
+            );
             reader = new SequenceReader<byte>(ros);
             Assert.True(Parser.ParseRequestLine(ParsingHandler, ref reader));
 
@@ -446,7 +472,9 @@ public class StartLineTests : IDisposable
     public void AuthorityForms(string rawTarget, string path, string query)
     {
         Http1Connection.Reset();
-        var ros = new ReadOnlySequence<byte>(Encoding.ASCII.GetBytes($"CONNECT {rawTarget} HTTP/1.1\r\n"));
+        var ros = new ReadOnlySequence<byte>(
+            Encoding.ASCII.GetBytes($"CONNECT {rawTarget} HTTP/1.1\r\n")
+        );
         var reader = new SequenceReader<byte>(ros);
         Assert.True(Parser.ParseRequestLine(ParsingHandler, ref reader));
 
@@ -463,7 +491,9 @@ public class StartLineTests : IDisposable
             Assert.Null(Http1Connection.Path);
             Assert.Null(Http1Connection.QueryString);
 
-            ros = new ReadOnlySequence<byte>(Encoding.ASCII.GetBytes($"CONNECT {rawTarget} HTTP/1.1\r\n"));
+            ros = new ReadOnlySequence<byte>(
+                Encoding.ASCII.GetBytes($"CONNECT {rawTarget} HTTP/1.1\r\n")
+            );
             reader = new SequenceReader<byte>(ros);
             Assert.True(Parser.ParseRequestLine(ParsingHandler, ref reader));
 
@@ -495,7 +525,9 @@ public class StartLineTests : IDisposable
         query = "";
 
         Http1Connection.Reset();
-        ros = new ReadOnlySequence<byte>(Encoding.ASCII.GetBytes($"CONNECT {rawTarget} HTTP/1.1\r\n"));
+        ros = new ReadOnlySequence<byte>(
+            Encoding.ASCII.GetBytes($"CONNECT {rawTarget} HTTP/1.1\r\n")
+        );
         reader = new SequenceReader<byte>(ros);
         Parser.ParseRequestLine(ParsingHandler, ref reader);
 
@@ -519,13 +551,19 @@ public class StartLineTests : IDisposable
     public StartLineTests()
     {
         MemoryPool = PinnedBlockMemoryPoolFactory.Create();
-        var options = new PipeOptions(MemoryPool, readerScheduler: PipeScheduler.Inline, writerScheduler: PipeScheduler.Inline, useSynchronizationContext: false);
+        var options = new PipeOptions(
+            MemoryPool,
+            readerScheduler: PipeScheduler.Inline,
+            writerScheduler: PipeScheduler.Inline,
+            useSynchronizationContext: false
+        );
         var pair = DuplexPipe.CreateConnectionPair(options, options);
         Transport = pair.Transport;
 
         var serviceContext = TestContextFactory.CreateServiceContext(
             serverOptions: new KestrelServerOptions(),
-            httpParser: new HttpParser<Http1ParsingHandler>());
+            httpParser: new HttpParser<Http1ParsingHandler>()
+        );
 
         var connectionContext = TestContextFactory.CreateHttpConnectionContext(
             serviceContext: serviceContext,
@@ -533,7 +571,8 @@ public class StartLineTests : IDisposable
             transport: Transport,
             timeoutControl: new TimeoutControl(timeoutHandler: null),
             memoryPool: MemoryPool,
-            connectionFeatures: new FeatureCollection());
+            connectionFeatures: new FeatureCollection()
+        );
 
         Http1Connection = new Http1Connection(connectionContext);
 

@@ -38,7 +38,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             Type clrType,
             bool propagatesNullability,
             string storeType,
-            RelationalTypeMapping? typeMapping)
+            RelationalTypeMapping? typeMapping
+        )
         {
             _name = name;
             Function = function;
@@ -68,14 +69,20 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <returns>The type mapping.</returns>
         public virtual RelationalTypeMapping? TypeMapping
         {
-            get => NonCapturingLazyInitializer.EnsureInitialized(
-                ref _typeMapping, this, static parameter =>
+            get =>
+                NonCapturingLazyInitializer.EnsureInitialized(
+                    ref _typeMapping,
+                    this,
+                    static parameter =>
                     {
-                        var relationalTypeMappingSource =
-                            (IRelationalTypeMappingSource)((IModel)parameter.Function.Model).GetModelDependencies().TypeMappingSource;
+                        var relationalTypeMappingSource = (IRelationalTypeMappingSource)(
+                            (IModel)parameter.Function.Model
+                        )
+                            .GetModelDependencies()
+                            .TypeMappingSource;
                         return relationalTypeMappingSource.FindMapping(parameter._storeType)!;
-                    });
-
+                    }
+                );
             set => _typeMapping = value;
         }
 
@@ -83,8 +90,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     Returns a string that represents the current object.
         /// </summary>
         /// <returns>A string that represents the current object.</returns>
-        public override string ToString()
-            => ((IDbFunctionParameter)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+        public override string ToString() =>
+            ((IDbFunctionParameter)this).ToDebugString(
+                MetadataDebugStringOptions.SingleLineDefault
+            );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -93,10 +102,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [EntityFrameworkInternal]
-        public virtual DebugView DebugView
-            => new(
+        public virtual DebugView DebugView =>
+            new(
                 () => ((IDbFunctionParameter)this).ToDebugString(),
-                () => ((IDbFunctionParameter)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
+                () =>
+                    ((IDbFunctionParameter)this).ToDebugString(
+                        MetadataDebugStringOptions.LongDefault
+                    )
+            );
 
         /// <inheritdoc />
         IReadOnlyDbFunction IReadOnlyDbFunctionParameter.Function
