@@ -2338,8 +2338,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
 
                             var targetColumn = targetTable.FindColumn(targetProperty);
                             var sourceColumn = diffContext.FindSource(targetColumn);
-                            var sourceProperty = sourceColumn
-                                ?.PropertyMappings.Select(m => m.Property)
+                            var sourceProperty = sourceColumn?.PropertyMappings
+                                .Select(m => m.Property)
                                 .FirstOrDefault(
                                     p => p.DeclaringEntityType.IsAssignableFrom(sourceEntityType)
                                 );
