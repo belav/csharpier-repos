@@ -16,15 +16,22 @@ namespace System.Reflection.Metadata.Tests
             }
         }
 
-        internal static IEnumerable<StringHandle> GetReferencedModuleNames(this MetadataReader reader)
+        internal static IEnumerable<StringHandle> GetReferencedModuleNames(
+            this MetadataReader reader
+        )
         {
             for (int i = 1, n = reader.GetTableRowCount(TableIndex.ModuleRef); i <= n; i++)
             {
-                yield return reader.GetModuleReference(MetadataTokens.ModuleReferenceHandle(i)).Name;
+                yield return reader
+                    .GetModuleReference(MetadataTokens.ModuleReferenceHandle(i))
+                    .Name;
             }
         }
 
-        internal static ClassLayoutRow GetTypeLayout(this MetadataReader reader, TypeDefinitionHandle typeDef)
+        internal static ClassLayoutRow GetTypeLayout(
+            this MetadataReader reader,
+            TypeDefinitionHandle typeDef
+        )
         {
             int rowId = reader.ClassLayoutTable.FindRow(typeDef);
             if (rowId == 0)
@@ -40,7 +47,8 @@ namespace System.Reflection.Metadata.Tests
             return new ClassLayoutRow(
                 reader.ClassLayoutTable.GetPackingSize(rowId),
                 reader.ClassLayoutTable.GetClassSize(rowId),
-                reader.ClassLayoutTable.GetParent(rowId));
+                reader.ClassLayoutTable.GetParent(rowId)
+            );
         }
     }
 }

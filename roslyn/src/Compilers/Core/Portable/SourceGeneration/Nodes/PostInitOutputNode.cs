@@ -18,9 +18,17 @@ namespace Microsoft.CodeAnalysis
 
         public IncrementalGeneratorOutputKind Kind => IncrementalGeneratorOutputKind.PostInit;
 
-        public void AppendOutputs(IncrementalExecutionContext context, CancellationToken cancellationToken)
+        public void AppendOutputs(
+            IncrementalExecutionContext context,
+            CancellationToken cancellationToken
+        )
         {
-            _callback(new IncrementalGeneratorPostInitializationContext(context.Sources, cancellationToken));
+            _callback(
+                new IncrementalGeneratorPostInitializationContext(
+                    context.Sources,
+                    cancellationToken
+                )
+            );
         }
     }
 }

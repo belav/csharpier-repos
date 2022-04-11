@@ -7,7 +7,6 @@ namespace Microsoft.EntityFrameworkCore.Query
 {
     public class TPTManyToManyQuerySqlServerFixture : TPTManyToManyQueryRelationalFixture
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => SqlServerTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
     }
 }

@@ -22,7 +22,8 @@ internal static partial class Interop
             X509ContentType contentType,
             SafeCreateHandle cfPfxPassphrase,
             out SafeSecCertificateHandle pCertOut,
-            out SafeSecIdentityHandle pPrivateKeyOut)
+            out SafeSecIdentityHandle pPrivateKeyOut
+        )
         {
             return AppleCryptoNative_X509ImportCertificate(
                 ref MemoryMarshal.GetReference(keyBlob),
@@ -30,7 +31,8 @@ internal static partial class Interop
                 contentType,
                 cfPfxPassphrase,
                 out pCertOut,
-                out pPrivateKeyOut);
+                out pPrivateKeyOut
+            );
         }
 
         [DllImport(Libraries.AppleCryptoNative)]
@@ -40,7 +42,8 @@ internal static partial class Interop
             X509ContentType contentType,
             SafeCreateHandle cfPfxPassphrase,
             out SafeSecCertificateHandle pCertOut,
-            out SafeSecIdentityHandle pPrivateKeyOut);
+            out SafeSecIdentityHandle pPrivateKeyOut
+        );
 
         [DllImport(Libraries.AppleCryptoNative)]
         private static extern int AppleCryptoNative_X509ImportCollection(
@@ -48,13 +51,15 @@ internal static partial class Interop
             int cbKeyBlob,
             X509ContentType contentType,
             SafeCreateHandle cfPfxPassphrase,
-            out SafeCFArrayHandle pCollectionOut);
+            out SafeCFArrayHandle pCollectionOut
+        );
 
         internal static SafeSecCertificateHandle X509ImportCertificate(
             ReadOnlySpan<byte> bytes,
             X509ContentType contentType,
             SafePasswordHandle importPassword,
-            out SafeSecIdentityHandle identityHandle)
+            out SafeSecIdentityHandle identityHandle
+        )
         {
             SafeCreateHandle? cfPassphrase = null;
             bool releasePassword = false;
@@ -64,14 +69,12 @@ internal static partial class Interop
                 if (!importPassword.IsInvalid)
                 {
                     importPassword.DangerousAddRef(ref releasePassword);
-                    cfPassphrase = CoreFoundation.CFStringCreateFromSpan(importPassword.DangerousGetSpan());
+                    cfPassphrase = CoreFoundation.CFStringCreateFromSpan(
+                        importPassword.DangerousGetSpan()
+                    );
                 }
 
-                return X509ImportCertificate(
-                    bytes,
-                    contentType,
-                    cfPassphrase,
-                    out identityHandle);
+                return X509ImportCertificate(bytes, contentType, cfPassphrase, out identityHandle);
             }
             finally
             {
@@ -88,7 +91,8 @@ internal static partial class Interop
             ReadOnlySpan<byte> bytes,
             X509ContentType contentType,
             SafeCreateHandle? importPassword,
-            out SafeSecIdentityHandle identityHandle)
+            out SafeSecIdentityHandle identityHandle
+        )
         {
             SafeSecCertificateHandle certHandle;
             SafeCreateHandle cfPassphrase = importPassword ?? s_emptyExportString;
@@ -98,7 +102,8 @@ internal static partial class Interop
                 contentType,
                 cfPassphrase,
                 out certHandle,
-                out identityHandle);
+                out identityHandle
+            );
 
             if (osStatus == 0)
             {
@@ -114,7 +119,8 @@ internal static partial class Interop
         internal static SafeCFArrayHandle X509ImportCollection(
             ReadOnlySpan<byte> bytes,
             X509ContentType contentType,
-            SafePasswordHandle importPassword)
+            SafePasswordHandle importPassword
+        )
         {
             SafeCreateHandle cfPassphrase = s_emptyExportString;
             bool releasePassword = false;
@@ -139,7 +145,8 @@ internal static partial class Interop
                     bytes.Length,
                     contentType,
                     cfPassphrase,
-                    out collectionHandle);
+                    out collectionHandle
+                );
 
                 if (osStatus == 0)
                 {
@@ -163,7 +170,9 @@ internal static partial class Interop
             throw CreateExceptionForOSStatus(osStatus);
         }
 
-        internal static SafeSecCertificateHandle X509GetCertFromIdentity(SafeSecIdentityHandle identity)
+        internal static SafeSecCertificateHandle X509GetCertFromIdentity(
+            SafeSecIdentityHandle identity
+        )
         {
             SafeSecCertificateHandle cert;
             int osStatus = AppleCryptoNative_X509CopyCertFromIdentity(identity, out cert);
@@ -186,9 +195,14 @@ internal static partial class Interop
         internal static bool X509DemuxAndRetainHandle(
             IntPtr handle,
             out SafeSecCertificateHandle certHandle,
-            out SafeSecIdentityHandle identityHandle)
+            out SafeSecIdentityHandle identityHandle
+        )
         {
-            int result = AppleCryptoNative_X509DemuxAndRetainHandle(handle, out certHandle, out identityHandle);
+            int result = AppleCryptoNative_X509DemuxAndRetainHandle(
+                handle,
+                out certHandle,
+                out identityHandle
+            );
 
             switch (result)
             {
@@ -208,10 +222,7 @@ namespace System.Security.Cryptography.X509Certificates
 {
     internal sealed class SafeSecIdentityHandle : SafeHandle
     {
-        public SafeSecIdentityHandle()
-            : base(IntPtr.Zero, ownsHandle: true)
-        {
-        }
+        public SafeSecIdentityHandle() : base(IntPtr.Zero, ownsHandle: true) { }
 
         protected override bool ReleaseHandle()
         {
@@ -225,10 +236,7 @@ namespace System.Security.Cryptography.X509Certificates
 
     internal sealed class SafeSecCertificateHandle : SafeHandle
     {
-        public SafeSecCertificateHandle()
-            : base(IntPtr.Zero, ownsHandle: true)
-        {
-        }
+        public SafeSecCertificateHandle() : base(IntPtr.Zero, ownsHandle: true) { }
 
         protected override bool ReleaseHandle()
         {

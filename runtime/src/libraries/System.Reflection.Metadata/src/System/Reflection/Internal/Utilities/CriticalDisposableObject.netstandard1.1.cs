@@ -10,18 +10,13 @@ namespace System.Reflection.Internal
     // just the fact that CriticalHandle derives from CriticalFinalizerObject to ensure critical finalizer.
     internal abstract class CriticalDisposableObject : CriticalHandle
     {
-        public CriticalDisposableObject()
-            : base(IntPtr.Zero)
-        {
-        }
+        public CriticalDisposableObject() : base(IntPtr.Zero) { }
 
         public sealed override bool IsInvalid => true;
 
-        protected sealed override bool ReleaseHandle() =>
-            throw ExceptionUtilities.Unreachable;
+        protected sealed override bool ReleaseHandle() => throw ExceptionUtilities.Unreachable;
 
-        protected new void SetHandle(IntPtr handle) =>
-            throw ExceptionUtilities.Unreachable;
+        protected new void SetHandle(IntPtr handle) => throw ExceptionUtilities.Unreachable;
 
         protected sealed override void Dispose(bool disposing)
         {

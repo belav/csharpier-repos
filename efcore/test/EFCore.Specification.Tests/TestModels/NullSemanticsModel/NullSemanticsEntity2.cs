@@ -3,7 +3,5 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.NullSemanticsModel
 {
-    public class NullSemanticsEntity2 : NullSemanticsEntityBase
-    {
-    }
+    public class NullSemanticsEntity2 : NullSemanticsEntityBase { }
 }

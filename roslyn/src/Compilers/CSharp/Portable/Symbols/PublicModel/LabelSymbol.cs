@@ -20,10 +20,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         IMethodSymbol ILabelSymbol.ContainingMethod
         {
-            get
-            {
-                return _underlying.ContainingMethod.GetPublicSymbol();
-            }
+            get { return _underlying.ContainingMethod.GetPublicSymbol(); }
         }
 
         #region ISymbol Members

@@ -17,10 +17,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 {
     internal class EditorVerifierInProcess : InProcComponent
     {
-        public EditorVerifierInProcess(TestServices testServices)
-            : base(testServices)
-        {
-        }
+        public EditorVerifierInProcess(TestServices testServices) : base(testServices) { }
 
         public async Task CodeActionAsync(
             string expectedItem,
@@ -29,7 +26,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             bool ensureExpectedItemsAreOrdered = false,
             FixAllScope? fixAllScope = null,
             bool blockUntilComplete = true,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             var expectedItems = new[] { expectedItem };
 
@@ -38,8 +36,15 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                applied = await CodeActionsAsync(expectedItems, applyFix ? expectedItem : null, verifyNotShowing,
-                    ensureExpectedItemsAreOrdered, fixAllScope, blockUntilComplete, cancellationToken);
+                applied = await CodeActionsAsync(
+                    expectedItems,
+                    applyFix ? expectedItem : null,
+                    verifyNotShowing,
+                    ensureExpectedItemsAreOrdered,
+                    fixAllScope,
+                    blockUntilComplete,
+                    cancellationToken
+                );
             } while (applied is false);
         }
 
@@ -57,7 +62,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             bool ensureExpectedItemsAreOrdered = false,
             FixAllScope? fixAllScope = null,
             bool blockUntilComplete = true,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             await TestServices.Editor.ShowLightBulbAsync(cancellationToken);
 
@@ -73,15 +79,11 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             {
                 if (ensureExpectedItemsAreOrdered)
                 {
-                    TestUtilities.ThrowIfExpectedItemNotFoundInOrder(
-                        actions,
-                        expectedItems);
+                    TestUtilities.ThrowIfExpectedItemNotFoundInOrder(actions, expectedItems);
                 }
                 else
                 {
-                    TestUtilities.ThrowIfExpectedItemNotFound(
-                        actions,
-                        expectedItems);
+                    TestUtilities.ThrowIfExpectedItemNotFound(actions, expectedItems);
                 }
             }
 
@@ -92,12 +94,20 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 
             if (!RoslynString.IsNullOrEmpty(applyFix))
             {
-                var result = await TestServices.Editor.ApplyLightBulbActionAsync(applyFix, fixAllScope, blockUntilComplete, cancellationToken);
+                var result = await TestServices.Editor.ApplyLightBulbActionAsync(
+                    applyFix,
+                    fixAllScope,
+                    blockUntilComplete,
+                    cancellationToken
+                );
 
                 if (blockUntilComplete)
                 {
                     // wait for action to complete
-                    await TestServices.Workspace.WaitForAsyncOperationsAsync(FeatureAttribute.LightBulb, cancellationToken);
+                    await TestServices.Workspace.WaitForAsyncOperationsAsync(
+                        FeatureAttribute.LightBulb,
+                        cancellationToken
+                    );
                 }
 
                 return result;
@@ -110,7 +120,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
         {
             if (await TestServices.Editor.IsLightBulbSessionExpandedAsync(cancellationToken))
             {
-                throw new InvalidOperationException("Expected no light bulb session, but one was found.");
+                throw new InvalidOperationException(
+                    "Expected no light bulb session, but one was found."
+                );
             }
         }
     }

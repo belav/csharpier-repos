@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
@@ -21,8 +21,10 @@ public class UsePathBaseExtensionsTests
     {
         // Arrange
         var useCalled = false;
-        var builder = new ApplicationBuilderWrapper(CreateBuilder(), () => useCalled = true)
-            .UsePathBase(pathBase);
+        var builder = new ApplicationBuilderWrapper(
+            CreateBuilder(),
+            () => useCalled = true
+        ).UsePathBase(pathBase);
 
         // Act
         builder.Build();
@@ -56,9 +58,10 @@ public class UsePathBaseExtensionsTests
 
         public IDictionary<string, object?> Properties => _wrappedBuilder.Properties;
         public IFeatureCollection ServerFeatures => _wrappedBuilder.ServerFeatures;
-        public RequestDelegate Build() => _wrappedBuilder.Build();
-        public IApplicationBuilder New() => _wrappedBuilder.New();
 
+        public RequestDelegate Build() => _wrappedBuilder.Build();
+
+        public IApplicationBuilder New() => _wrappedBuilder.New();
     }
 
     [Theory]
@@ -74,11 +77,35 @@ public class UsePathBaseExtensionsTests
     [InlineData("/base", "/oldbase", "/base/something", "/oldbase/base", "/something")]
     [InlineData("/base", "/oldbase", "/base/something/", "/oldbase/base", "/something/")]
     [InlineData("/base/more", "/oldbase", "/base/more", "/oldbase/base/more", "")]
-    [InlineData("/base/more", "/oldbase", "/base/more/something", "/oldbase/base/more", "/something")]
-    [InlineData("/base/more", "/oldbase", "/base/more/something/", "/oldbase/base/more", "/something/")]
-    public Task RequestPathBaseContainingPathBase_IsSplit(string registeredPathBase, string pathBase, string requestPath, string expectedPathBase, string expectedPath)
+    [InlineData(
+        "/base/more",
+        "/oldbase",
+        "/base/more/something",
+        "/oldbase/base/more",
+        "/something"
+    )]
+    [InlineData(
+        "/base/more",
+        "/oldbase",
+        "/base/more/something/",
+        "/oldbase/base/more",
+        "/something/"
+    )]
+    public Task RequestPathBaseContainingPathBase_IsSplit(
+        string registeredPathBase,
+        string pathBase,
+        string requestPath,
+        string expectedPathBase,
+        string expectedPath
+    )
     {
-        return TestPathBase(registeredPathBase, pathBase, requestPath, expectedPathBase, expectedPath);
+        return TestPathBase(
+            registeredPathBase,
+            pathBase,
+            requestPath,
+            expectedPathBase,
+            expectedPath
+        );
     }
 
     [Theory]
@@ -90,9 +117,21 @@ public class UsePathBaseExtensionsTests
     [InlineData("/base", "/oldbase", "/baseandsomething", "/oldbase", "/baseandsomething")]
     [InlineData("/base", "/oldbase", "/ba", "/oldbase", "/ba")]
     [InlineData("/base", "/oldbase", "/ba/se", "/oldbase", "/ba/se")]
-    public Task RequestPathBaseNotContainingPathBase_IsNotSplit(string registeredPathBase, string pathBase, string requestPath, string expectedPathBase, string expectedPath)
+    public Task RequestPathBaseNotContainingPathBase_IsNotSplit(
+        string registeredPathBase,
+        string pathBase,
+        string requestPath,
+        string expectedPathBase,
+        string expectedPath
+    )
     {
-        return TestPathBase(registeredPathBase, pathBase, requestPath, expectedPathBase, expectedPath);
+        return TestPathBase(
+            registeredPathBase,
+            pathBase,
+            requestPath,
+            expectedPathBase,
+            expectedPath
+        );
     }
 
     [Theory]
@@ -106,17 +145,41 @@ public class UsePathBaseExtensionsTests
     [InlineData("/base", "/oldbase", "/base/", "/oldbase/base", "/")]
     [InlineData("/base/", "/oldbase", "/base", "/oldbase/base", "")]
     [InlineData("/base/", "/oldbase", "/base/", "/oldbase/base", "/")]
-    public Task PathBaseNeverEndsWithSlash(string registeredPathBase, string pathBase, string requestPath, string expectedPathBase, string expectedPath)
+    public Task PathBaseNeverEndsWithSlash(
+        string registeredPathBase,
+        string pathBase,
+        string requestPath,
+        string expectedPathBase,
+        string expectedPath
+    )
     {
-        return TestPathBase(registeredPathBase, pathBase, requestPath, expectedPathBase, expectedPath);
+        return TestPathBase(
+            registeredPathBase,
+            pathBase,
+            requestPath,
+            expectedPathBase,
+            expectedPath
+        );
     }
 
     [Theory]
     [InlineData("/base", "", "/Base/Something", "/Base", "/Something")]
     [InlineData("/base", "/OldBase", "/Base/Something", "/OldBase/Base", "/Something")]
-    public Task PathBaseAndPathPreserveRequestCasing(string registeredPathBase, string pathBase, string requestPath, string expectedPathBase, string expectedPath)
+    public Task PathBaseAndPathPreserveRequestCasing(
+        string registeredPathBase,
+        string pathBase,
+        string requestPath,
+        string expectedPathBase,
+        string expectedPath
+    )
     {
-        return TestPathBase(registeredPathBase, pathBase, requestPath, expectedPathBase, expectedPath);
+        return TestPathBase(
+            registeredPathBase,
+            pathBase,
+            requestPath,
+            expectedPathBase,
+            expectedPath
+        );
     }
 
     [Theory]
@@ -126,27 +189,49 @@ public class UsePathBaseExtensionsTests
     [InlineData("/b♫se", "/oldb♫se", "/b♫se/something", "/oldb♫se/b♫se", "/something")]
     [InlineData("/b♫se", "/oldb♫se", "/b♫se/Something", "/oldb♫se/b♫se", "/Something")]
     [InlineData("/b♫se", "/oldb♫se", "/B♫se/something", "/oldb♫se/B♫se", "/something")]
-    public Task PathBaseCanHaveUnicodeCharacters(string registeredPathBase, string pathBase, string requestPath, string expectedPathBase, string expectedPath)
+    public Task PathBaseCanHaveUnicodeCharacters(
+        string registeredPathBase,
+        string pathBase,
+        string requestPath,
+        string expectedPathBase,
+        string expectedPath
+    )
     {
-        return TestPathBase(registeredPathBase, pathBase, requestPath, expectedPathBase, expectedPath);
+        return TestPathBase(
+            registeredPathBase,
+            pathBase,
+            requestPath,
+            expectedPathBase,
+            expectedPath
+        );
     }
 
-    private static async Task TestPathBase(string registeredPathBase, string pathBase, string requestPath, string expectedPathBase, string expectedPath)
+    private static async Task TestPathBase(
+        string registeredPathBase,
+        string pathBase,
+        string requestPath,
+        string expectedPathBase,
+        string expectedPath
+    )
     {
         HttpContext requestContext = CreateRequest(pathBase, requestPath);
-        var builder = CreateBuilder()
-            .UsePathBase(registeredPathBase);
-        builder.Run(context =>
-        {
-            context.Items["test.Path"] = context.Request.Path;
-            context.Items["test.PathBase"] = context.Request.PathBase;
-            return Task.FromResult(0);
-        });
+        var builder = CreateBuilder().UsePathBase(registeredPathBase);
+        builder.Run(
+            context =>
+            {
+                context.Items["test.Path"] = context.Request.Path;
+                context.Items["test.PathBase"] = context.Request.PathBase;
+                return Task.FromResult(0);
+            }
+        );
         await builder.Build().Invoke(requestContext);
 
         // Assert path and pathBase are split after middleware
         Assert.Equal(expectedPath, ((PathString?)requestContext.Items["test.Path"])!.Value.Value);
-        Assert.Equal(expectedPathBase, ((PathString?)requestContext.Items["test.PathBase"])!.Value.Value);
+        Assert.Equal(
+            expectedPathBase,
+            ((PathString?)requestContext.Items["test.PathBase"])!.Value.Value
+        );
 
         // Assert path and pathBase are reset after request
         Assert.Equal(pathBase, requestContext.Request.PathBase.Value);

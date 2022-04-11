@@ -39,16 +39,14 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         public virtual bool IsAscending { get; }
 
         /// <inheritdoc />
-        public sealed override ExpressionType NodeType
-            => ExpressionType.Extension;
+        public sealed override ExpressionType NodeType => ExpressionType.Extension;
 
         /// <inheritdoc />
-        public override Type Type
-            => Expression.Type;
+        public override Type Type => Expression.Type;
 
         /// <inheritdoc />
-        protected override Expression VisitChildren(ExpressionVisitor visitor)
-            => Update((SqlExpression)visitor.Visit(Expression));
+        protected override Expression VisitChildren(ExpressionVisitor visitor) =>
+            Update((SqlExpression)visitor.Visit(Expression));
 
         /// <summary>
         ///     Creates a new expression that is like this one, but using the supplied children. If all of the children are the same, it will
@@ -56,10 +54,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// </summary>
         /// <param name="expression">The <see cref="Expression" /> property of the result.</param>
         /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
-        public virtual OrderingExpression Update(SqlExpression expression)
-            => expression != Expression
-                ? new OrderingExpression(expression, IsAscending)
-                : this;
+        public virtual OrderingExpression Update(SqlExpression expression) =>
+            expression != Expression ? new OrderingExpression(expression, IsAscending) : this;
 
         /// <inheritdoc />
         void IPrintableExpression.Print(ExpressionPrinter expressionPrinter)
@@ -70,18 +66,18 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         }
 
         /// <inheritdoc />
-        public override bool Equals(object? obj)
-            => obj != null
-                && (ReferenceEquals(this, obj)
-                    || obj is OrderingExpression orderingExpression
-                    && Equals(orderingExpression));
+        public override bool Equals(object? obj) =>
+            obj != null
+            && (
+                ReferenceEquals(this, obj)
+                || obj is OrderingExpression orderingExpression && Equals(orderingExpression)
+            );
 
-        private bool Equals(OrderingExpression orderingExpression)
-            => Expression.Equals(orderingExpression.Expression)
-                && IsAscending == orderingExpression.IsAscending;
+        private bool Equals(OrderingExpression orderingExpression) =>
+            Expression.Equals(orderingExpression.Expression)
+            && IsAscending == orderingExpression.IsAscending;
 
         /// <inheritdoc />
-        public override int GetHashCode()
-            => HashCode.Combine(Expression, IsAscending);
+        public override int GetHashCode() => HashCode.Combine(Expression, IsAscending);
     }
 }

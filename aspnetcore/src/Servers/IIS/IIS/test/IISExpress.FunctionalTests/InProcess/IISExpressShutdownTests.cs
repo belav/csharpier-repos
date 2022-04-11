@@ -18,10 +18,7 @@ namespace Microsoft.AspNetCore.Server.IIS.IISExpress.FunctionalTests;
 [Collection(PublishedSitesCollection.Name)]
 public class IISExpressShutdownTests : IISFunctionalTestBase
 {
-
-    public IISExpressShutdownTests(PublishedSitesFixture fixture) : base(fixture)
-    {
-    }
+    public IISExpressShutdownTests(PublishedSitesFixture fixture) : base(fixture) { }
 
     [ConditionalFact]
     public async Task ServerShutsDownWhenMainExits()
@@ -40,25 +37,32 @@ public class IISExpressShutdownTests : IISFunctionalTestBase
         deploymentResult.AssertWorkerProcessStop();
     }
 
-
     [ConditionalFact]
     public async Task ServerShutsDownWhenMainExitsStress()
     {
         var parameters = Fixture.GetBaseDeploymentParameters();
         var deploymentResult = await StartAsync(parameters);
 
-        var load = Helpers.StressLoad(deploymentResult.HttpClient, "/HelloWorld", response =>
-        {
-            var statusCode = (int)response.StatusCode;
-            Assert.True(statusCode == 200 || statusCode == 503, "Status code was " + statusCode);
-        });
+        var load = Helpers.StressLoad(
+            deploymentResult.HttpClient,
+            "/HelloWorld",
+            response =>
+            {
+                var statusCode = (int)response.StatusCode;
+                Assert.True(
+                    statusCode == 200 || statusCode == 503,
+                    "Status code was " + statusCode
+                );
+            }
+        );
 
         try
         {
             await deploymentResult.HttpClient.GetAsync("/Shutdown");
             await load;
         }
-        catch (HttpRequestException ex) when (ex.InnerException is IOException | ex.InnerException is SocketException)
+        catch (HttpRequestException ex)
+            when (ex.InnerException is IOException | ex.InnerException is SocketException)
         {
             // Server might close a connection before request completes
         }

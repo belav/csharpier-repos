@@ -67,7 +67,17 @@ public class MyProgram
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static int Check1(int w, int i1, int i2, int i3, int i4, int i5, int i6, int i7, MyStruct1 s1)
+    public static int Check1(
+        int w,
+        int i1,
+        int i2,
+        int i3,
+        int i4,
+        int i5,
+        int i6,
+        int i7,
+        MyStruct1 s1
+    )
     {
         if ((w != 1) || (s1.f1 != i1) || (s1.f2 != i2) || (s1.f3 != i3) || (s1.f4 != i4))
         {
@@ -81,7 +91,10 @@ public class MyProgram
     public static int TestStruct1()
     {
         MyStruct1 s1;
-        s1.f1 = GetByte(1); s1.f2 = GetByte(2); s1.f3 = GetShort(3); s1.f4 = GetShort(4);
+        s1.f1 = GetByte(1);
+        s1.f2 = GetByte(2);
+        s1.f3 = GetShort(3);
+        s1.f4 = GetShort(4);
         int x = (s1.f1 * s1.f2 * s1.f3 * s1.f4);
         int y = (s1.f1 - s1.f2) * (s1.f3 - s1.f4);
         int z = (s1.f1 + s1.f2) * (s1.f3 + s1.f4);
@@ -91,7 +104,17 @@ public class MyProgram
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static int Check2(int w, int i1, int i2, int i3, int i4, int i5, int i6, int i7, MyStruct2 s2)
+    public static int Check2(
+        int w,
+        int i1,
+        int i2,
+        int i3,
+        int i4,
+        int i5,
+        int i6,
+        int i7,
+        MyStruct2 s2
+    )
     {
         if ((w != 2) || (s2.f1 != i1) || (s2.f2 != i2) || (s2.f3 != i3) || (i4 != 4))
         {
@@ -105,7 +128,9 @@ public class MyProgram
     public static int TestStruct2()
     {
         MyStruct2 s2;
-        s2.f1 = GetByte(1); s2.f2 = GetByte(2); s2.f3 = GetByte(3);
+        s2.f1 = GetByte(1);
+        s2.f2 = GetByte(2);
+        s2.f3 = GetByte(3);
         int x = s2.f1 * s2.f2 * s2.f3;
         int y = (s2.f1 + s2.f2) * s2.f3;
         int z = s2.f1 + s2.f2 + s2.f3;
@@ -115,7 +140,17 @@ public class MyProgram
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static int Check3(int w, int i1, int i2, int i3, int i4, int i5, int i6, int i7, MyStruct3 s3)
+    public static int Check3(
+        int w,
+        int i1,
+        int i2,
+        int i3,
+        int i4,
+        int i5,
+        int i6,
+        int i7,
+        MyStruct3 s3
+    )
     {
         if ((w != 2) || (s3.f1 != i1) || (s3.f2 != i2) || (s3.f3 != i3) || (i4 != 4))
         {
@@ -129,7 +164,9 @@ public class MyProgram
     public static int TestStruct3()
     {
         MyStruct3 s3;
-        s3.f1 = GetByte(1); s3.f2 = GetByte(2); s3.f3 = GetByte(3);
+        s3.f1 = GetByte(1);
+        s3.f2 = GetByte(2);
+        s3.f3 = GetByte(3);
         int x = s3.f1 * s3.f2 * s3.f3;
         int y = (s3.f1 + s3.f2) * s3.f3;
         int z = s3.f1 + s3.f2 + s3.f3;
@@ -139,7 +176,17 @@ public class MyProgram
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static int Check4(int w, int i1, int i2, int i3, int i4, int i5, int i6, int i7, MyStruct4 s4)
+    public static int Check4(
+        int w,
+        int i1,
+        int i2,
+        int i3,
+        int i4,
+        int i5,
+        int i6,
+        int i7,
+        MyStruct4 s4
+    )
     {
         if ((w != 2) || (s4.f1 != i1) || (s4.f2 != i2) || (s4.f3 != i3) || (i4 != 4))
         {
@@ -153,7 +200,9 @@ public class MyProgram
     public static int TestStruct4()
     {
         MyStruct4 s4;
-        s4.f1 = GetInt(1); s4.f2 = GetInt(2); s4.f3 = GetShort(3);
+        s4.f1 = GetInt(1);
+        s4.f2 = GetInt(2);
+        s4.f3 = GetShort(3);
         int x = s4.f1 * s4.f2 * s4.f3;
         int y = (s4.f1 + s4.f2) * s4.f3;
         int z = s4.f1 + s4.f2 + s4.f3;

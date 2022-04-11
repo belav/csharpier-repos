@@ -11,8 +11,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// Represents a token provider that generates time-based codes using the user's security stamp.
 /// </summary>
 /// <typeparam name="TUser">The type encapsulating a user.</typeparam>
-public abstract class TotpSecurityStampBasedTokenProvider<TUser> : IUserTwoFactorTokenProvider<TUser>
-    where TUser : class
+public abstract class TotpSecurityStampBasedTokenProvider<TUser>
+    : IUserTwoFactorTokenProvider<TUser> where TUser : class
 {
     /// <summary>
     /// Generates a token for the specified <paramref name="user"/> and <paramref name="purpose"/>.
@@ -21,19 +21,23 @@ public abstract class TotpSecurityStampBasedTokenProvider<TUser> : IUserTwoFacto
     /// <param name="manager">The <see cref="UserManager{TUser}"/> that can be used to retrieve user properties.</param>
     /// <param name="user">The user a token should be generated for.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents the asynchronous operation, containing the token for the specified 
+    /// The <see cref="Task"/> that represents the asynchronous operation, containing the token for the specified
     /// <paramref name="user"/> and <paramref name="purpose"/>.
     /// </returns>
     /// <remarks>
     /// The <paramref name="purpose"/> parameter allows a token generator to be used for multiple types of token whilst
-    /// insuring a token for one purpose cannot be used for another. For example if you specified a purpose of "Email" 
+    /// insuring a token for one purpose cannot be used for another. For example if you specified a purpose of "Email"
     /// and validated it with the same purpose a token with the purpose of TOTP would not pass the check even if it was
     /// for the same user.
-    /// 
+    ///
     /// Implementations of <see cref="IUserTwoFactorTokenProvider{TUser}"/> should validate that purpose is not null or empty to
     /// help with token separation.
     /// </remarks>
-    public virtual async Task<string> GenerateAsync(string purpose, UserManager<TUser> manager, TUser user)
+    public virtual async Task<string> GenerateAsync(
+        string purpose,
+        UserManager<TUser> manager,
+        TUser user
+    )
     {
         if (manager == null)
         {
@@ -42,7 +46,9 @@ public abstract class TotpSecurityStampBasedTokenProvider<TUser> : IUserTwoFacto
         var token = await manager.CreateSecurityTokenAsync(user);
         var modifier = await GetUserModifierAsync(purpose, manager, user);
 
-        return Rfc6238AuthenticationService.GenerateCode(token, modifier).ToString("D6", CultureInfo.InvariantCulture);
+        return Rfc6238AuthenticationService
+            .GenerateCode(token, modifier)
+            .ToString("D6", CultureInfo.InvariantCulture);
     }
 
     /// <summary>
@@ -58,7 +64,12 @@ public abstract class TotpSecurityStampBasedTokenProvider<TUser> : IUserTwoFacto
     /// of validating the <paramref name="token"> for the specified </paramref><paramref name="user"/> and <paramref name="purpose"/>.
     /// The task will return true if the token is valid, otherwise false.
     /// </returns>
-    public virtual async Task<bool> ValidateAsync(string purpose, string token, UserManager<TUser> manager, TUser user)
+    public virtual async Task<bool> ValidateAsync(
+        string purpose,
+        string token,
+        UserManager<TUser> manager,
+        TUser user
+    )
     {
         if (manager == null)
         {
@@ -72,7 +83,8 @@ public abstract class TotpSecurityStampBasedTokenProvider<TUser> : IUserTwoFacto
         var securityToken = await manager.CreateSecurityTokenAsync(user);
         var modifier = await GetUserModifierAsync(purpose, manager, user);
 
-        return securityToken != null && Rfc6238AuthenticationService.ValidateCode(securityToken, code, modifier);
+        return securityToken != null
+            && Rfc6238AuthenticationService.ValidateCode(securityToken, code, modifier);
     }
 
     /// <summary>
@@ -82,10 +94,14 @@ public abstract class TotpSecurityStampBasedTokenProvider<TUser> : IUserTwoFacto
     /// <param name="manager">The <see cref="UserManager{TUser}"/> that can be used to retrieve user properties.</param>
     /// <param name="user">The user a token should be generated for.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents the asynchronous operation, containing a constant modifier for the specified 
+    /// The <see cref="Task"/> that represents the asynchronous operation, containing a constant modifier for the specified
     /// <paramref name="user"/> and <paramref name="purpose"/>.
     /// </returns>
-    public virtual async Task<string> GetUserModifierAsync(string purpose, UserManager<TUser> manager, TUser user)
+    public virtual async Task<string> GetUserModifierAsync(
+        string purpose,
+        UserManager<TUser> manager,
+        TUser user
+    )
     {
         if (manager == null)
         {
@@ -107,5 +123,8 @@ public abstract class TotpSecurityStampBasedTokenProvider<TUser> : IUserTwoFacto
     /// factor token could be generated by this provider for the specified <paramref name="user"/>.
     /// The task will return true if a two-factor authentication token could be generated, otherwise false.
     /// </returns>
-    public abstract Task<bool> CanGenerateTwoFactorTokenAsync(UserManager<TUser> manager, TUser user);
+    public abstract Task<bool> CanGenerateTwoFactorTokenAsync(
+        UserManager<TUser> manager,
+        TUser user
+    );
 }

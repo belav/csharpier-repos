@@ -16,7 +16,8 @@ namespace Microsoft.Interop
         public const string FreeNativeMethodName = "FreeNative";
         public const string ManagedValuesPropertyName = "ManagedValues";
         public const string NativeValueStoragePropertyName = "NativeValueStorage";
-        public const string SetUnmarshalledCollectionLengthMethodName = "SetUnmarshalledCollectionLength";
+        public const string SetUnmarshalledCollectionLengthMethodName =
+            "SetUnmarshalledCollectionLength";
 
         public static class MarshalUsingProperties
         {
@@ -33,25 +34,30 @@ namespace Microsoft.Interop
 
         public static bool HasToManagedMethod(ITypeSymbol nativeType, ITypeSymbol managedType)
         {
-            return nativeType.GetMembers(ToManagedMethodName)
-                    .OfType<IMethodSymbol>()
-                    .Any(m => m.Parameters.IsEmpty
+            return nativeType
+                .GetMembers(ToManagedMethodName)
+                .OfType<IMethodSymbol>()
+                .Any(
+                    m =>
+                        m.Parameters.IsEmpty
                         && !m.ReturnsByRef
                         && !m.ReturnsByRefReadonly
                         && SymbolEqualityComparer.Default.Equals(m.ReturnType, managedType)
-                        && !m.IsStatic);
+                        && !m.IsStatic
+                );
         }
 
         public static bool IsManagedToNativeConstructor(
             IMethodSymbol ctor,
             ITypeSymbol managedType,
-            NativeTypeMarshallingVariant variant)
+            NativeTypeMarshallingVariant variant
+        )
         {
             if (variant == NativeTypeMarshallingVariant.ContiguousCollection)
             {
                 return ctor.Parameters.Length == 2
-                && SymbolEqualityComparer.Default.Equals(managedType, ctor.Parameters[0].Type)
-                && ctor.Parameters[1].Type.SpecialType == SpecialType.System_Int32;
+                    && SymbolEqualityComparer.Default.Equals(managedType, ctor.Parameters[0].Type)
+                    && ctor.Parameters[1].Type.SpecialType == SpecialType.System_Int32;
             }
             return ctor.Parameters.Length == 1
                 && SymbolEqualityComparer.Default.Equals(managedType, ctor.Parameters[0].Type);
@@ -61,14 +67,15 @@ namespace Microsoft.Interop
             IMethodSymbol ctor,
             ITypeSymbol managedType,
             ITypeSymbol spanOfByte,
-            NativeTypeMarshallingVariant variant)
+            NativeTypeMarshallingVariant variant
+        )
         {
             if (variant == NativeTypeMarshallingVariant.ContiguousCollection)
             {
                 return ctor.Parameters.Length == 3
-                && SymbolEqualityComparer.Default.Equals(managedType, ctor.Parameters[0].Type)
-                && SymbolEqualityComparer.Default.Equals(spanOfByte, ctor.Parameters[1].Type)
-                && ctor.Parameters[2].Type.SpecialType == SpecialType.System_Int32;
+                    && SymbolEqualityComparer.Default.Equals(managedType, ctor.Parameters[0].Type)
+                    && SymbolEqualityComparer.Default.Equals(spanOfByte, ctor.Parameters[1].Type)
+                    && ctor.Parameters[2].Type.SpecialType == SpecialType.System_Int32;
             }
             return ctor.Parameters.Length == 2
                 && SymbolEqualityComparer.Default.Equals(managedType, ctor.Parameters[0].Type)
@@ -83,8 +90,12 @@ namespace Microsoft.Interop
             // https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-7.3/pattern-based-fixed
             return type.GetMembers(GetPinnableReferenceName)
                 .OfType<IMethodSymbol>()
-                .FirstOrDefault(m => m is { Parameters: { Length: 0 } } and
-                    ({ ReturnsByRef: true } or { ReturnsByRefReadonly: true }));
+                .FirstOrDefault(
+                    m =>
+                        m
+                            is { Parameters: { Length: 0 } }
+                                and ({ ReturnsByRef: true } or { ReturnsByRefReadonly: true })
+                );
         }
 
         public static IPropertySymbol? FindValueProperty(ITypeSymbol type)
@@ -98,19 +109,41 @@ namespace Microsoft.Interop
         {
             return type.GetMembers(FreeNativeMethodName)
                 .OfType<IMethodSymbol>()
-                .Any(m => m is { IsStatic: false, Parameters: { Length: 0 }, ReturnType: { SpecialType: SpecialType.System_Void } });
+                .Any(
+                    m =>
+                        m
+                            is {
+                                IsStatic: false,
+                                Parameters: { Length: 0 },
+                                ReturnType: { SpecialType: SpecialType.System_Void }
+                            }
+                );
         }
 
-        public static bool TryGetManagedValuesProperty(ITypeSymbol type, out IPropertySymbol managedValuesProperty)
+        public static bool TryGetManagedValuesProperty(
+            ITypeSymbol type,
+            out IPropertySymbol managedValuesProperty
+        )
         {
-            managedValuesProperty = type
-                .GetMembers(ManagedValuesPropertyName)
+            managedValuesProperty = type.GetMembers(ManagedValuesPropertyName)
                 .OfType<IPropertySymbol>()
-                .FirstOrDefault(p => p is { IsStatic: false, GetMethod: not null, ReturnsByRef: false, ReturnsByRefReadonly: false });
+                .FirstOrDefault(
+                    p =>
+                        p
+                            is {
+                                IsStatic: false,
+                                GetMethod: not null,
+                                ReturnsByRef: false,
+                                ReturnsByRefReadonly: false
+                            }
+                );
             return managedValuesProperty is not null;
         }
 
-        public static bool TryGetElementTypeFromContiguousCollectionMarshaller(ITypeSymbol type, out ITypeSymbol elementType)
+        public static bool TryGetElementTypeFromContiguousCollectionMarshaller(
+            ITypeSymbol type,
+            out ITypeSymbol elementType
+        )
         {
             if (!TryGetManagedValuesProperty(type, out IPropertySymbol managedValuesProperty))
             {
@@ -126,21 +159,33 @@ namespace Microsoft.Interop
         {
             return type.GetMembers(SetUnmarshalledCollectionLengthMethodName)
                 .OfType<IMethodSymbol>()
-                .Any(m => m is
-                {
-                    IsStatic: false,
-                    Parameters: { Length: 1 },
-                    ReturnType: { SpecialType: SpecialType.System_Void }
-                } && m.Parameters[0].Type.SpecialType == SpecialType.System_Int32);
+                .Any(
+                    m =>
+                        m
+                            is {
+                                IsStatic: false,
+                                Parameters: { Length: 1 },
+                                ReturnType: { SpecialType: SpecialType.System_Void }
+                            }
+                        && m.Parameters[0].Type.SpecialType == SpecialType.System_Int32
+                );
         }
 
         public static bool HasNativeValueStorageProperty(ITypeSymbol type, ITypeSymbol spanOfByte)
         {
-            return type
-                .GetMembers(NativeValueStoragePropertyName)
+            return type.GetMembers(NativeValueStoragePropertyName)
                 .OfType<IPropertySymbol>()
-                .Any(p => p is { IsStatic: false, GetMethod: not null, ReturnsByRef: false, ReturnsByRefReadonly: false }
-                    && SymbolEqualityComparer.Default.Equals(p.Type, spanOfByte));
+                .Any(
+                    p =>
+                        p
+                            is {
+                                IsStatic: false,
+                                GetMethod: not null,
+                                ReturnsByRef: false,
+                                ReturnsByRefReadonly: false
+                            }
+                        && SymbolEqualityComparer.Default.Equals(p.Type, spanOfByte)
+                );
         }
     }
 }

@@ -22,7 +22,12 @@ namespace Microsoft.CodeAnalysis.InheritanceMargin
         [DataMember(Order = 3)]
         public readonly ImmutableArray<SerializableInheritanceTargetItem> TargetItems;
 
-        public SerializableInheritanceMarginItem(int lineNumber, ImmutableArray<TaggedText> displayTexts, Glyph glyph, ImmutableArray<SerializableInheritanceTargetItem> targetItems)
+        public SerializableInheritanceMarginItem(
+            int lineNumber,
+            ImmutableArray<TaggedText> displayTexts,
+            Glyph glyph,
+            ImmutableArray<SerializableInheritanceTargetItem> targetItems
+        )
         {
             LineNumber = lineNumber;
             DisplayTexts = displayTexts;

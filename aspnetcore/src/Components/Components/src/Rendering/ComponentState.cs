@@ -31,7 +31,12 @@ internal class ComponentState : IDisposable
     /// <param name="componentId">The externally visible identifier for the <see cref="IComponent"/>. The identifier must be unique in the context of the <see cref="Renderer"/>.</param>
     /// <param name="component">The <see cref="IComponent"/> whose state is being tracked.</param>
     /// <param name="parentComponentState">The <see cref="ComponentState"/> for the parent component, or null if this is a root component.</param>
-    public ComponentState(Renderer renderer, int componentId, IComponent component, ComponentState parentComponentState)
+    public ComponentState(
+        Renderer renderer,
+        int componentId,
+        IComponent component,
+        ComponentState parentComponentState
+    )
     {
         ComponentId = componentId;
         ParentComponentState = parentComponentState;
@@ -54,7 +59,11 @@ internal class ComponentState : IDisposable
     public ComponentState ParentComponentState { get; }
     public RenderTreeBuilder CurrentRenderTree { get; private set; }
 
-    public void RenderIntoBatch(RenderBatchBuilder batchBuilder, RenderFragment renderFragment, out Exception? renderFragmentException)
+    public void RenderIntoBatch(
+        RenderBatchBuilder batchBuilder,
+        RenderFragment renderFragment,
+        out Exception? renderFragmentException
+    )
     {
         renderFragmentException = null;
 
@@ -91,12 +100,16 @@ internal class ComponentState : IDisposable
             batchBuilder,
             ComponentId,
             _nextRenderTree.GetFrames(),
-            CurrentRenderTree.GetFrames());
+            CurrentRenderTree.GetFrames()
+        );
         batchBuilder.UpdatedComponentDiffs.Append(diff);
         batchBuilder.InvalidateParameterViews();
     }
 
-    public bool TryDisposeInBatch(RenderBatchBuilder batchBuilder, [NotNullWhen(false)] out Exception? exception)
+    public bool TryDisposeInBatch(
+        RenderBatchBuilder batchBuilder,
+        [NotNullWhen(false)] out Exception? exception
+    )
     {
         _componentWasDisposed = true;
         exception = null;
@@ -184,9 +197,10 @@ internal class ComponentState : IDisposable
 
     public void NotifyCascadingValueChanged(in ParameterViewLifetime lifetime)
     {
-        var directParams = _latestDirectParametersSnapshot != null
-            ? new ParameterView(lifetime, _latestDirectParametersSnapshot.Buffer, 0)
-            : ParameterView.Empty;
+        var directParams =
+            _latestDirectParametersSnapshot != null
+                ? new ParameterView(lifetime, _latestDirectParametersSnapshot.Buffer, 0)
+                : ParameterView.Empty;
         var allParams = directParams.WithCascadingParameters(_cascadingParameters!);
         SupplyCombinedParameters(allParams);
     }

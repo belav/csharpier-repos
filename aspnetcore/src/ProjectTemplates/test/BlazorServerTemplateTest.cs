@@ -16,10 +16,7 @@ namespace Templates.Test;
 
 public class BlazorServerTemplateTest : BlazorTemplateTest
 {
-    public BlazorServerTemplateTest(ProjectFactoryFixture projectFactory)
-        : base(projectFactory)
-    {
-    }
+    public BlazorServerTemplateTest(ProjectFactoryFixture projectFactory) : base(projectFactory) { }
 
     public override string ProjectType { get; } = "blazorserver";
 
@@ -30,16 +27,34 @@ public class BlazorServerTemplateTest : BlazorTemplateTest
     [InlineData(true)]
     [InlineData(false)]
     [SkipOnHelix("https://github.com/dotnet/aspnetcore/issues/30825", Queues = "All.OSX")]
-    public Task BlazorServerTemplateWorks_IndividualAuth(bool useLocalDB) => CreateBuildPublishAsync("blazorserverindividual" + (useLocalDB ? "uld" : ""));
+    public Task BlazorServerTemplateWorks_IndividualAuth(bool useLocalDB) =>
+        CreateBuildPublishAsync("blazorserverindividual" + (useLocalDB ? "uld" : ""));
 
     [Theory]
     [InlineData("IndividualB2C", null)]
-    [InlineData("IndividualB2C", new string[] { "--called-api-url \"https://graph.microsoft.com\"", "--called-api-scopes user.readwrite" })]
+    [InlineData(
+        "IndividualB2C",
+        new string[]
+        {
+            "--called-api-url \"https://graph.microsoft.com\"",
+            "--called-api-scopes user.readwrite"
+        }
+    )]
     [InlineData("SingleOrg", null)]
-    [InlineData("SingleOrg", new string[] { "--called-api-url \"https://graph.microsoft.com\"", "--called-api-scopes user.readwrite" })]
+    [InlineData(
+        "SingleOrg",
+        new string[]
+        {
+            "--called-api-url \"https://graph.microsoft.com\"",
+            "--called-api-scopes user.readwrite"
+        }
+    )]
     [InlineData("SingleOrg", new string[] { "--calls-graph" })]
     [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/30882")]
-    public Task BlazorServerTemplate_IdentityWeb_BuildAndPublish(string auth, string[] args)
-        => CreateBuildPublishAsync("blazorserveridweb" + Guid.NewGuid().ToString().Substring(0, 10).ToLowerInvariant(), auth, args);
-
+    public Task BlazorServerTemplate_IdentityWeb_BuildAndPublish(string auth, string[] args) =>
+        CreateBuildPublishAsync(
+            "blazorserveridweb" + Guid.NewGuid().ToString().Substring(0, 10).ToLowerInvariant(),
+            auth,
+            args
+        );
 }

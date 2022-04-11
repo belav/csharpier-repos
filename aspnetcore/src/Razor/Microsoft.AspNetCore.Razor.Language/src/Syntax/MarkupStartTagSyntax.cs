@@ -9,10 +9,7 @@ internal partial class MarkupStartTagSyntax
 {
     public bool IsMarkupTransition
     {
-        get
-        {
-            return ((InternalSyntax.MarkupStartTagSyntax)Green).IsMarkupTransition;
-        }
+        get { return ((InternalSyntax.MarkupStartTagSyntax)Green).IsMarkupTransition; }
     }
 
     public SyntaxList<RazorSyntaxNode> Children => GetLegacyChildren();
@@ -24,9 +21,7 @@ internal partial class MarkupStartTagSyntax
 
     public bool IsSelfClosing()
     {
-        return ForwardSlash != null &&
-            !ForwardSlash.IsMissing &&
-            !CloseAngle.IsMissing;
+        return ForwardSlash != null && !ForwardSlash.IsMissing && !CloseAngle.IsMissing;
     }
 
     public bool IsVoidElement()
@@ -44,7 +39,10 @@ internal partial class MarkupStartTagSyntax
 
         // We want to know if this tag contains non-whitespace attribute content to set the appropriate AcceptedCharacters.
         // The prefix of a start tag(E.g '|<foo| attr>') will have 'Any' accepted characters if non-whitespace attribute content exists.
-        var acceptsAnyContext = new SpanContext(context.ChunkGenerator, SpanEditHandler.CreateDefault());
+        var acceptsAnyContext = new SpanContext(
+            context.ChunkGenerator,
+            SpanEditHandler.CreateDefault()
+        );
         acceptsAnyContext.EditHandler.AcceptedCharacters = AcceptedCharactersInternal.Any;
         var containsAttributesContent = false;
         foreach (var attribute in Attributes)
@@ -62,19 +60,30 @@ internal partial class MarkupStartTagSyntax
         }
         if (Bang != null)
         {
-            builder.Add(SyntaxFactory.MarkupTextLiteral(tokens.Consume()).WithSpanContext(acceptsAnyContext));
+            builder.Add(
+                SyntaxFactory.MarkupTextLiteral(tokens.Consume()).WithSpanContext(acceptsAnyContext)
+            );
 
             tokens.Add(Bang);
-            var acceptsNoneContext = new SpanContext(context.ChunkGenerator, SpanEditHandler.CreateDefault());
+            var acceptsNoneContext = new SpanContext(
+                context.ChunkGenerator,
+                SpanEditHandler.CreateDefault()
+            );
             acceptsNoneContext.EditHandler.AcceptedCharacters = AcceptedCharactersInternal.None;
-            builder.Add(SyntaxFactory.RazorMetaCode(tokens.Consume()).WithSpanContext(acceptsNoneContext));
+            builder.Add(
+                SyntaxFactory.RazorMetaCode(tokens.Consume()).WithSpanContext(acceptsNoneContext)
+            );
         }
         if (!Name.IsMissing)
         {
             tokens.Add(Name);
         }
 
-        builder.Add(SyntaxFactory.MarkupTextLiteral(tokens.Consume()).WithSpanContext(containsAttributesContent ? acceptsAnyContext : context));
+        builder.Add(
+            SyntaxFactory
+                .MarkupTextLiteral(tokens.Consume())
+                .WithSpanContext(containsAttributesContent ? acceptsAnyContext : context)
+        );
 
         builder.AddRange(Attributes);
 

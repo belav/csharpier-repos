@@ -18,12 +18,16 @@ using Microsoft.CodeAnalysis.Internal.Log;
 namespace Microsoft.CodeAnalysis.Remote.Diagnostics
 {
     /// <summary>
-    /// Track diagnostic performance 
+    /// Track diagnostic performance
     /// </summary>
     [ExportWorkspaceService(typeof(IPerformanceTrackerService), WorkspaceKind.Host), Shared]
     internal class PerformanceTrackerService : IPerformanceTrackerService
     {
-        private static readonly Func<IEnumerable<AnalyzerPerformanceInfo>, int, string> s_snapshotLogger = SnapshotLogger;
+        private static readonly Func<
+            IEnumerable<AnalyzerPerformanceInfo>,
+            int,
+            string
+        > s_snapshotLogger = SnapshotLogger;
 
         private const double DefaultMinLOFValue = 20;
         private const double DefaultAverageThreshold = 100;
@@ -38,20 +42,29 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
 
         private readonly object _gate;
         private readonly PerformanceQueue _queue;
-        private readonly ConcurrentDictionary<string, bool> _builtInMap = new ConcurrentDictionary<string, bool>(concurrencyLevel: 2, capacity: 10);
+        private readonly ConcurrentDictionary<string, bool> _builtInMap = new ConcurrentDictionary<
+            string,
+            bool
+        >(concurrencyLevel: 2, capacity: 10);
 
         public event EventHandler SnapshotAdded;
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public PerformanceTrackerService()
-            : this(DefaultMinLOFValue, DefaultAverageThreshold, DefaultStddevThreshold)
-        {
-        }
+            : this(DefaultMinLOFValue, DefaultAverageThreshold, DefaultStddevThreshold) { }
 
         // internal for testing
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0034:Exported parts should have [ImportingConstructor]", Justification = "Used incorrectly by tests")]
-        internal PerformanceTrackerService(double minLOFValue, double averageThreshold, double stddevThreshold)
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0034:Exported parts should have [ImportingConstructor]",
+            Justification = "Used incorrectly by tests"
+        )]
+        internal PerformanceTrackerService(
+            double minLOFValue,
+            double averageThreshold,
+            double stddevThreshold
+        )
         {
             _minLOFValue = minLOFValue;
             _averageThreshold = averageThreshold;
@@ -63,7 +76,12 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
 
         public void AddSnapshot(IEnumerable<AnalyzerPerformanceInfo> snapshot, int unitCount)
         {
-            Logger.Log(FunctionId.PerformanceTrackerService_AddSnapshot, s_snapshotLogger, snapshot, unitCount);
+            Logger.Log(
+                FunctionId.PerformanceTrackerService_AddSnapshot,
+                s_snapshotLogger,
+                snapshot,
+                unitCount
+            );
 
             RecordBuiltInAnalyzers(snapshot);
 
@@ -77,7 +95,9 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
 
         public void GenerateReport(List<ExpensiveAnalyzerInfo> badAnalyzers)
         {
-            using var pooledRaw = SharedPools.Default<Dictionary<string, (double average, double stddev)>>().GetPooledObject();
+            using var pooledRaw = SharedPools
+                .Default<Dictionary<string, (double average, double stddev)>>()
+                .GetPooledObject();
 
             var rawPerformanceData = pooledRaw.Object;
 
@@ -93,7 +113,13 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
                 return;
             }
 
-            using var generator = new ReportGenerator(this, _minLOFValue, _averageThreshold, _stddevThreshold, badAnalyzers);
+            using var generator = new ReportGenerator(
+                this,
+                _minLOFValue,
+                _averageThreshold,
+                _stddevThreshold,
+                badAnalyzers
+            );
             generator.Report(rawPerformanceData);
         }
 
@@ -115,10 +141,12 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
             return false;
         }
 
-        private void OnSnapshotAdded()
-            => SnapshotAdded?.Invoke(this, EventArgs.Empty);
+        private void OnSnapshotAdded() => SnapshotAdded?.Invoke(this, EventArgs.Empty);
 
-        private static string SnapshotLogger(IEnumerable<AnalyzerPerformanceInfo> snapshots, int unitCount)
+        private static string SnapshotLogger(
+            IEnumerable<AnalyzerPerformanceInfo> snapshots,
+            int unitCount
+        )
         {
             using var pooledObject = SharedPools.Default<StringBuilder>().GetPooledObject();
             var sb = pooledObject.Object;
@@ -155,7 +183,8 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
                 double minLOFValue,
                 double averageThreshold,
                 double stddevThreshold,
-                List<ExpensiveAnalyzerInfo> badAnalyzers)
+                List<ExpensiveAnalyzerInfo> badAnalyzers
+            )
             {
                 _pooledObjects = SharedPools.Default<List<IDisposable>>().GetPooledObject();
 
@@ -168,16 +197,21 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
                 _badAnalyzers = badAnalyzers;
             }
 
-            public void Report(Dictionary<string, (double average, double stddev)> rawPerformanceData)
+            public void Report(
+                Dictionary<string, (double average, double stddev)> rawPerformanceData
+            )
             {
                 // this is implementation of local outlier factor (LOF)
-                // see the wiki (https://en.wikipedia.org/wiki/Local_outlier_factor) for more information 
+                // see the wiki (https://en.wikipedia.org/wiki/Local_outlier_factor) for more information
 
                 // convert string (analyzerId) to index
                 var analyzerIdIndex = GetAnalyzerIdIndex(rawPerformanceData.Keys);
 
                 // now calculate normalized value per analyzer
-                var normalizedMap = GetNormalizedPerformanceMap(analyzerIdIndex, rawPerformanceData);
+                var normalizedMap = GetNormalizedPerformanceMap(
+                    analyzerIdIndex,
+                    rawPerformanceData
+                );
 
                 // get k value
                 var k_value = (int)(rawPerformanceData.Count * K_Value_Ratio);
@@ -207,7 +241,12 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
                     }
 
                     // possible bad analyzer, calculate LOF
-                    var lof_value = TryGetLocalOutlierFactor(allDistances, kNeighborIndices, kDistances, index);
+                    var lof_value = TryGetLocalOutlierFactor(
+                        allDistances,
+                        kNeighborIndices,
+                        kDistances,
+                        index
+                    );
                     if (!lof_value.HasValue)
                     {
                         // this analyzer doesn't have lof value
@@ -221,14 +260,26 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
                     }
 
                     // report found possible bad analyzers
-                    _badAnalyzers.Add(new ExpensiveAnalyzerInfo(_owner.AllowTelemetry(analyzerId), analyzerId, lof_value.Value, average, stddev));
+                    _badAnalyzers.Add(
+                        new ExpensiveAnalyzerInfo(
+                            _owner.AllowTelemetry(analyzerId),
+                            analyzerId,
+                            lof_value.Value,
+                            average,
+                            stddev
+                        )
+                    );
                 }
 
                 _badAnalyzers.Sort(this);
             }
 
             private static double? TryGetLocalOutlierFactor(
-                List<List<double>> allDistances, List<List<int>> kNeighborIndices, List<double> kDistances, int analyzerIndex)
+                List<List<double>> allDistances,
+                List<List<int>> kNeighborIndices,
+                List<double> kDistances,
+                int analyzerIndex
+            )
             {
                 var rowKNeighborsIndices = kNeighborIndices[analyzerIndex];
                 if (rowKNeighborsIndices.Count == 0)
@@ -237,7 +288,12 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
                     return null;
                 }
 
-                var lrda = TryGetLocalReachabilityDensity(allDistances, kNeighborIndices, kDistances, analyzerIndex);
+                var lrda = TryGetLocalReachabilityDensity(
+                    allDistances,
+                    kNeighborIndices,
+                    kDistances,
+                    analyzerIndex
+                );
                 if (!lrda.HasValue)
                 {
                     // can't calculate reachability for the analyzer. can't calculate lof for this analyzer
@@ -247,7 +303,12 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
                 var lrdb = 0D;
                 foreach (var neighborIndex in rowKNeighborsIndices)
                 {
-                    var reachability = TryGetLocalReachabilityDensity(allDistances, kNeighborIndices, kDistances, neighborIndex);
+                    var reachability = TryGetLocalReachabilityDensity(
+                        allDistances,
+                        kNeighborIndices,
+                        kDistances,
+                        neighborIndex
+                    );
                     if (!reachability.HasValue)
                     {
                         // this neighbor analyzer doesn't have its own neighbor. skip it
@@ -261,13 +322,24 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
             }
 
             private static double GetReachabilityDistance(
-                List<List<double>> allDistances, List<double> kDistances, int analyzerIndex1, int analyzerIndex2)
+                List<List<double>> allDistances,
+                List<double> kDistances,
+                int analyzerIndex1,
+                int analyzerIndex2
+            )
             {
-                return Math.Max(allDistances[analyzerIndex1][analyzerIndex2], kDistances[analyzerIndex2]);
+                return Math.Max(
+                    allDistances[analyzerIndex1][analyzerIndex2],
+                    kDistances[analyzerIndex2]
+                );
             }
 
             private static double? TryGetLocalReachabilityDensity(
-                List<List<double>> allDistances, List<List<int>> kNeighborIndices, List<double> kDistances, int analyzerIndex)
+                List<List<double>> allDistances,
+                List<List<int>> kNeighborIndices,
+                List<double> kDistances,
+                int analyzerIndex
+            )
             {
                 var rowKNeighborsIndices = kNeighborIndices[analyzerIndex];
                 if (rowKNeighborsIndices.Count == 0)
@@ -279,13 +351,21 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
                 var distanceSum = 0.0;
                 foreach (var neighborIndex in rowKNeighborsIndices)
                 {
-                    distanceSum += GetReachabilityDistance(allDistances, kDistances, analyzerIndex, neighborIndex);
+                    distanceSum += GetReachabilityDistance(
+                        allDistances,
+                        kDistances,
+                        analyzerIndex,
+                        neighborIndex
+                    );
                 }
 
                 return 1 / distanceSum / rowKNeighborsIndices.Count;
             }
 
-            private List<List<int>> GetKNeighborIndices(List<List<double>> allDistances, List<double> kDistances)
+            private List<List<int>> GetKNeighborIndices(
+                List<List<double>> allDistances,
+                List<double> kDistances
+            )
             {
                 var analyzerCount = kDistances.Count;
                 var kNeighborIndices = GetPooledListAndSetCapacity<List<int>>(analyzerCount);
@@ -333,7 +413,9 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
                 return kDistances;
             }
 
-            private List<List<double>> GetAllDistances(List<(double normalizedAverage, double normalizedStddev)> normalizedMap)
+            private List<List<double>> GetAllDistances(
+                List<(double normalizedAverage, double normalizedStddev)> normalizedMap
+            )
             {
                 var analyzerCount = normalizedMap.Count;
                 var allDistances = GetPooledListAndSetCapacity<List<double>>(analyzerCount);
@@ -346,8 +428,10 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
                     for (var colIndex = 0; colIndex < analyzerCount; colIndex++)
                     {
                         var colAnalyzer = normalizedMap[colIndex];
-                        var distance = Math.Sqrt(Math.Pow(colAnalyzer.normalizedAverage - normaliedAverage, 2) +
-                                                 Math.Pow(colAnalyzer.normalizedStddev - normalizedStddev, 2));
+                        var distance = Math.Sqrt(
+                            Math.Pow(colAnalyzer.normalizedAverage - normaliedAverage, 2)
+                                + Math.Pow(colAnalyzer.normalizedStddev - normalizedStddev, 2)
+                        );
 
                         rowDistances[colIndex] = distance;
                     }
@@ -359,7 +443,9 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
             }
 
             private List<(double normaliedAverage, double normalizedStddev)> GetNormalizedPerformanceMap(
-                List<string> analyzerIdIndex, Dictionary<string, (double average, double stddev)> rawPerformanceData)
+                List<string> analyzerIdIndex,
+                Dictionary<string, (double average, double stddev)> rawPerformanceData
+            )
             {
                 var averageMin = rawPerformanceData.Values.Select(kv => kv.average).Min();
                 var averageMax = rawPerformanceData.Values.Select(kv => kv.average).Max();
@@ -375,7 +461,10 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
 
                 // calculate normalized average and stddev and convert analyzerId string to index
                 var analyzerCount = analyzerIdIndex.Count;
-                var normalizedMap = GetPooledListAndSetCapacity<(double normalizedAverage, double normalizedStddev)>(analyzerCount);
+                var normalizedMap =
+                    GetPooledListAndSetCapacity<(double normalizedAverage, double normalizedStddev)>(
+                        analyzerCount
+                    );
 
                 for (var index = 0; index < analyzerCount; index++)
                 {

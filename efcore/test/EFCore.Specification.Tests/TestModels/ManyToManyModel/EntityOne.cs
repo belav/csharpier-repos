@@ -21,7 +21,9 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyModel
         public virtual ICollection<EntityTwo> TwoSkipShared { get; set; }
 
         public virtual ICollection<EntityThree> ThreeSkipPayloadFullShared { get; set; }
-        public virtual ICollection<Dictionary<string, object>> JoinThreePayloadFullShared { get; set; }
+        public virtual ICollection<
+            Dictionary<string, object>
+        > JoinThreePayloadFullShared { get; set; }
         public virtual ICollection<EntityOne> SelfSkipPayloadLeft { get; set; }
         public virtual ICollection<JoinOneSelfPayload> JoinSelfPayloadLeft { get; set; }
         public virtual ICollection<EntityOne> SelfSkipPayloadRight { get; set; }

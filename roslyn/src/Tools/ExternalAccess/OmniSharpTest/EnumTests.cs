@@ -15,10 +15,18 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.UnitTests
     public class EnumTests
     {
         [Theory]
-        [InlineData(typeof(ExtractInterfaceOptionsResult.ExtractLocation),
-                    typeof(OmniSharpExtractInterfaceOptionsResult.OmniSharpExtractLocation))]
-        [InlineData(typeof(ImplementTypeInsertionBehavior), typeof(OmniSharpImplementTypeInsertionBehavior))]
-        [InlineData(typeof(ImplementTypePropertyGenerationBehavior), typeof(OmniSharpImplementTypePropertyGenerationBehavior))]
+        [InlineData(
+            typeof(ExtractInterfaceOptionsResult.ExtractLocation),
+            typeof(OmniSharpExtractInterfaceOptionsResult.OmniSharpExtractLocation)
+        )]
+        [InlineData(
+            typeof(ImplementTypeInsertionBehavior),
+            typeof(OmniSharpImplementTypeInsertionBehavior)
+        )]
+        [InlineData(
+            typeof(ImplementTypePropertyGenerationBehavior),
+            typeof(OmniSharpImplementTypePropertyGenerationBehavior)
+        )]
         public void AssertEnumsInSync(Type internalType, Type externalType)
         {
             var internalValues = Enum.GetValues(internalType).Cast<int>().ToArray();

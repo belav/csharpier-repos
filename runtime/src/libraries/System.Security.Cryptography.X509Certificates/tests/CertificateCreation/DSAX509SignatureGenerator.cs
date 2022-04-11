@@ -132,12 +132,11 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             byte[] r = EncodeUnsignedInteger(ieeeFormat, 0, segmentLength);
             byte[] s = EncodeUnsignedInteger(ieeeFormat, segmentLength, segmentLength);
 
-            return
-                new byte[] { 0x30 }.
-                Concat(EncodeLength(r.Length + s.Length)).
-                Concat(r).
-                Concat(s).
-                ToArray();
+            return new byte[] { 0x30 }
+                .Concat(EncodeLength(r.Length + s.Length))
+                .Concat(r)
+                .Concat(s)
+                .ToArray();
         }
 
         protected override PublicKey BuildPublicKey()
@@ -157,20 +156,20 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             byte[] q = EncodeUnsignedInteger(dsaParameters.Q);
             byte[] g = EncodeUnsignedInteger(dsaParameters.G);
 
-            byte[] algParameters =
-                new byte[] { 0x30 }.
-                    Concat(EncodeLength(p.Length + q.Length + g.Length)).
-                    Concat(p).
-                    Concat(q).
-                    Concat(g).
-                    ToArray();
+            byte[] algParameters = new byte[] { 0x30 }
+                .Concat(EncodeLength(p.Length + q.Length + g.Length))
+                .Concat(p)
+                .Concat(q)
+                .Concat(g)
+                .ToArray();
 
             byte[] keyValue = EncodeUnsignedInteger(dsaParameters.Y);
 
             return new PublicKey(
                 oid,
                 new AsnEncodedData(oid, algParameters),
-                new AsnEncodedData(oid, keyValue));
+                new AsnEncodedData(oid, keyValue)
+            );
         }
     }
 }

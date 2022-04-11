@@ -10,7 +10,8 @@ namespace System.IO
         private static string? s_defaultTempPath;
 
         private static string DefaultTempPath =>
-            s_defaultTempPath ?? (s_defaultTempPath = Interop.Sys.SearchPathTempDirectory()) ??
-            throw new InvalidOperationException();
+            s_defaultTempPath
+            ?? (s_defaultTempPath = Interop.Sys.SearchPathTempDirectory())
+            ?? throw new InvalidOperationException();
     }
 }

@@ -6,21 +6,23 @@ using Xunit.Abstractions;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class CompositeKeysQuerySqlServerTest : CompositeKeysQueryRelationalTestBase<CompositeKeysQuerySqlServerFixture>
+    public class CompositeKeysQuerySqlServerTest
+        : CompositeKeysQueryRelationalTestBase<CompositeKeysQuerySqlServerFixture>
     {
         public CompositeKeysQuerySqlServerTest(
             CompositeKeysQuerySqlServerFixture fixture,
-            ITestOutputHelper testOutputHelper)
-            : base(fixture)
+            ITestOutputHelper testOutputHelper
+        ) : base(fixture)
         {
             Fixture.TestSqlLoggerFactory.Clear();
             //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
         }
 
-        protected override bool CanExecuteQueryString
-            => true;
+        protected override bool CanExecuteQueryString => true;
 
-        public override async Task Projecting_multiple_collections_same_level_top_level_ordering(bool async)
+        public override async Task Projecting_multiple_collections_same_level_top_level_ordering(
+            bool async
+        )
         {
             await base.Projecting_multiple_collections_same_level_top_level_ordering(async);
 
@@ -29,22 +31,30 @@ namespace Microsoft.EntityFrameworkCore.Query
 FROM [CompositeOnes] AS [c]
 LEFT JOIN [CompositeTwos] AS [c0] ON ([c].[Id1] = [c0].[OneToMany_Optional_Inverse2Id1]) AND ([c].[Id2] = [c0].[OneToMany_Optional_Inverse2Id2])
 LEFT JOIN [CompositeTwos] AS [c1] ON ([c].[Id1] = [c1].[OneToMany_Required_Inverse2Id1]) AND ([c].[Id2] = [c1].[OneToMany_Required_Inverse2Id2])
-ORDER BY [c].[Id2], [c].[Id1], [c0].[Id1], [c0].[Id2], [c1].[Id1]");
+ORDER BY [c].[Id2], [c].[Id1], [c0].[Id1], [c0].[Id2], [c1].[Id1]"
+            );
         }
 
-        public override async Task Projecting_multiple_collections_same_level_top_level_ordering_using_entire_composite_key(bool async)
+        public override async Task Projecting_multiple_collections_same_level_top_level_ordering_using_entire_composite_key(
+            bool async
+        )
         {
-            await base.Projecting_multiple_collections_same_level_top_level_ordering_using_entire_composite_key(async);
+            await base.Projecting_multiple_collections_same_level_top_level_ordering_using_entire_composite_key(
+                async
+            );
 
             AssertSql(
                 @"SELECT [c].[Name], [c].[Id1], [c].[Id2], [c0].[Id1], [c0].[Id2], [c0].[Date], [c0].[Level1_Optional_Id1], [c0].[Level1_Optional_Id2], [c0].[Level1_Required_Id1], [c0].[Level1_Required_Id2], [c0].[Name], [c0].[OneToMany_Optional_Inverse2Id1], [c0].[OneToMany_Optional_Inverse2Id2], [c0].[OneToMany_Optional_Self_Inverse2Id1], [c0].[OneToMany_Optional_Self_Inverse2Id2], [c0].[OneToMany_Required_Inverse2Id1], [c0].[OneToMany_Required_Inverse2Id2], [c0].[OneToMany_Required_Self_Inverse2Id1], [c0].[OneToMany_Required_Self_Inverse2Id2], [c0].[OneToOne_Optional_PK_Inverse2Id1], [c0].[OneToOne_Optional_PK_Inverse2Id2], [c0].[OneToOne_Optional_Self2Id1], [c0].[OneToOne_Optional_Self2Id2], [c1].[Id1], [c1].[Id2], [c1].[Date], [c1].[Level1_Optional_Id1], [c1].[Level1_Optional_Id2], [c1].[Level1_Required_Id1], [c1].[Level1_Required_Id2], [c1].[Name], [c1].[OneToMany_Optional_Inverse2Id1], [c1].[OneToMany_Optional_Inverse2Id2], [c1].[OneToMany_Optional_Self_Inverse2Id1], [c1].[OneToMany_Optional_Self_Inverse2Id2], [c1].[OneToMany_Required_Inverse2Id1], [c1].[OneToMany_Required_Inverse2Id2], [c1].[OneToMany_Required_Self_Inverse2Id1], [c1].[OneToMany_Required_Self_Inverse2Id2], [c1].[OneToOne_Optional_PK_Inverse2Id1], [c1].[OneToOne_Optional_PK_Inverse2Id2], [c1].[OneToOne_Optional_Self2Id1], [c1].[OneToOne_Optional_Self2Id2]
 FROM [CompositeOnes] AS [c]
 LEFT JOIN [CompositeTwos] AS [c0] ON ([c].[Id1] = [c0].[OneToMany_Optional_Inverse2Id1]) AND ([c].[Id2] = [c0].[OneToMany_Optional_Inverse2Id2])
 LEFT JOIN [CompositeTwos] AS [c1] ON ([c].[Id1] = [c1].[OneToMany_Required_Inverse2Id1]) AND ([c].[Id2] = [c1].[OneToMany_Required_Inverse2Id2])
-ORDER BY [c].[Id2], [c].[Id1] DESC, [c0].[Id1], [c0].[Id2], [c1].[Id1]");
+ORDER BY [c].[Id2], [c].[Id1] DESC, [c0].[Id1], [c0].[Id2], [c1].[Id1]"
+            );
         }
 
-        public override async Task Projecting_multiple_collections_with_ordering_same_level(bool async)
+        public override async Task Projecting_multiple_collections_with_ordering_same_level(
+            bool async
+        )
         {
             await base.Projecting_multiple_collections_with_ordering_same_level(async);
 
@@ -53,19 +63,25 @@ ORDER BY [c].[Id2], [c].[Id1] DESC, [c0].[Id1], [c0].[Id2], [c1].[Id1]");
 FROM [CompositeOnes] AS [c]
 LEFT JOIN [CompositeTwos] AS [c0] ON ([c].[Id1] = [c0].[OneToMany_Optional_Inverse2Id1]) AND ([c].[Id2] = [c0].[OneToMany_Optional_Inverse2Id2])
 LEFT JOIN [CompositeTwos] AS [c1] ON ([c].[Id1] = [c1].[OneToMany_Required_Inverse2Id1]) AND ([c].[Id2] = [c1].[OneToMany_Required_Inverse2Id2])
-ORDER BY [c].[Id1], [c].[Id2], [c0].[Id2], [c0].[Id1], [c1].[Name] DESC, [c1].[Id1]");
+ORDER BY [c].[Id1], [c].[Id2], [c0].[Id2], [c0].[Id1], [c1].[Name] DESC, [c1].[Id1]"
+            );
         }
 
-        public override async Task Projecting_multiple_collections_with_ordering_same_level_top_level_ordering(bool async)
+        public override async Task Projecting_multiple_collections_with_ordering_same_level_top_level_ordering(
+            bool async
+        )
         {
-            await base.Projecting_multiple_collections_with_ordering_same_level_top_level_ordering(async);
+            await base.Projecting_multiple_collections_with_ordering_same_level_top_level_ordering(
+                async
+            );
 
             AssertSql(
                 @"SELECT [c].[Name], [c].[Id1], [c].[Id2], [c0].[Id1], [c0].[Id2], [c0].[Date], [c0].[Level1_Optional_Id1], [c0].[Level1_Optional_Id2], [c0].[Level1_Required_Id1], [c0].[Level1_Required_Id2], [c0].[Name], [c0].[OneToMany_Optional_Inverse2Id1], [c0].[OneToMany_Optional_Inverse2Id2], [c0].[OneToMany_Optional_Self_Inverse2Id1], [c0].[OneToMany_Optional_Self_Inverse2Id2], [c0].[OneToMany_Required_Inverse2Id1], [c0].[OneToMany_Required_Inverse2Id2], [c0].[OneToMany_Required_Self_Inverse2Id1], [c0].[OneToMany_Required_Self_Inverse2Id2], [c0].[OneToOne_Optional_PK_Inverse2Id1], [c0].[OneToOne_Optional_PK_Inverse2Id2], [c0].[OneToOne_Optional_Self2Id1], [c0].[OneToOne_Optional_Self2Id2], [c1].[Id1], [c1].[Id2], [c1].[Date], [c1].[Level1_Optional_Id1], [c1].[Level1_Optional_Id2], [c1].[Level1_Required_Id1], [c1].[Level1_Required_Id2], [c1].[Name], [c1].[OneToMany_Optional_Inverse2Id1], [c1].[OneToMany_Optional_Inverse2Id2], [c1].[OneToMany_Optional_Self_Inverse2Id1], [c1].[OneToMany_Optional_Self_Inverse2Id2], [c1].[OneToMany_Required_Inverse2Id1], [c1].[OneToMany_Required_Inverse2Id2], [c1].[OneToMany_Required_Self_Inverse2Id1], [c1].[OneToMany_Required_Self_Inverse2Id2], [c1].[OneToOne_Optional_PK_Inverse2Id1], [c1].[OneToOne_Optional_PK_Inverse2Id2], [c1].[OneToOne_Optional_Self2Id1], [c1].[OneToOne_Optional_Self2Id2]
 FROM [CompositeOnes] AS [c]
 LEFT JOIN [CompositeTwos] AS [c0] ON ([c].[Id1] = [c0].[OneToMany_Optional_Inverse2Id1]) AND ([c].[Id2] = [c0].[OneToMany_Optional_Inverse2Id2])
 LEFT JOIN [CompositeTwos] AS [c1] ON ([c].[Id1] = [c1].[OneToMany_Required_Inverse2Id1]) AND ([c].[Id2] = [c1].[OneToMany_Required_Inverse2Id2])
-ORDER BY [c].[Id2], [c].[Id1], [c0].[Id2], [c0].[Id1], [c1].[Name] DESC, [c1].[Id1]");
+ORDER BY [c].[Id2], [c].[Id1], [c0].[Id2], [c0].[Id1], [c1].[Name] DESC, [c1].[Id1]"
+            );
         }
 
         public override async Task Projecting_collections_multi_level(bool async)
@@ -80,12 +96,17 @@ LEFT JOIN (
     FROM [CompositeTwos] AS [c0]
     LEFT JOIN [CompositeThrees] AS [c1] ON ([c0].[Id1] = [c1].[OneToMany_Required_Inverse3Id1]) AND ([c0].[Id2] = [c1].[OneToMany_Required_Inverse3Id2])
 ) AS [t] ON ([c].[Id1] = [t].[OneToMany_Optional_Inverse2Id1]) AND ([c].[Id2] = [t].[OneToMany_Optional_Inverse2Id2])
-ORDER BY [c].[Id2], [c].[Id1], [t].[Id2], [t].[Id1], [t].[Id20] DESC");
+ORDER BY [c].[Id2], [c].[Id1], [t].[Id2], [t].[Id1], [t].[Id20] DESC"
+            );
         }
 
-        public override async Task Projecting_multiple_collections_on_multiple_levels_no_explicit_ordering(bool async)
+        public override async Task Projecting_multiple_collections_on_multiple_levels_no_explicit_ordering(
+            bool async
+        )
         {
-            await base.Projecting_multiple_collections_on_multiple_levels_no_explicit_ordering(async);
+            await base.Projecting_multiple_collections_on_multiple_levels_no_explicit_ordering(
+                async
+            );
 
             AssertSql(
                 @"SELECT [c].[Name], [c].[Id1], [c].[Id2], [t1].[Name], [t1].[Id1], [t1].[Id2], [t1].[Name0], [t1].[Id10], [t1].[Id20], [t1].[Id100], [t1].[Id200], [t1].[Level3_Optional_Id1], [t1].[Level3_Optional_Id2], [t1].[Level3_Required_Id1], [t1].[Level3_Required_Id2], [t1].[Name00], [t1].[OneToMany_Optional_Inverse4Id1], [t1].[OneToMany_Optional_Inverse4Id2], [t1].[OneToMany_Optional_Self_Inverse4Id1], [t1].[OneToMany_Optional_Self_Inverse4Id2], [t1].[OneToMany_Required_Inverse4Id1], [t1].[OneToMany_Required_Inverse4Id2], [t1].[OneToMany_Required_Self_Inverse4Id1], [t1].[OneToMany_Required_Self_Inverse4Id2], [t1].[OneToOne_Optional_PK_Inverse4Id1], [t1].[OneToOne_Optional_PK_Inverse4Id2], [t1].[OneToOne_Optional_Self4Id1], [t1].[OneToOne_Optional_Self4Id2], [t1].[Id11], [t1].[Id21], [t1].[Level3_Optional_Id10], [t1].[Level3_Optional_Id20], [t1].[Level3_Required_Id10], [t1].[Level3_Required_Id20], [t1].[Name1], [t1].[OneToMany_Optional_Inverse4Id10], [t1].[OneToMany_Optional_Inverse4Id20], [t1].[OneToMany_Optional_Self_Inverse4Id10], [t1].[OneToMany_Optional_Self_Inverse4Id20], [t1].[OneToMany_Required_Inverse4Id10], [t1].[OneToMany_Required_Inverse4Id20], [t1].[OneToMany_Required_Self_Inverse4Id10], [t1].[OneToMany_Required_Self_Inverse4Id20], [t1].[OneToOne_Optional_PK_Inverse4Id10], [t1].[OneToOne_Optional_PK_Inverse4Id20], [t1].[OneToOne_Optional_Self4Id10], [t1].[OneToOne_Optional_Self4Id20], [t1].[Name2], [t1].[Id12], [t1].[Id22], [t1].[Id101], [t1].[Id201], [t1].[Level3_Optional_Id11], [t1].[Level3_Optional_Id21], [t1].[Level3_Required_Id11], [t1].[Level3_Required_Id21], [t1].[Name01], [t1].[OneToMany_Optional_Inverse4Id11], [t1].[OneToMany_Optional_Inverse4Id21], [t1].[OneToMany_Optional_Self_Inverse4Id11], [t1].[OneToMany_Optional_Self_Inverse4Id21], [t1].[OneToMany_Required_Inverse4Id11], [t1].[OneToMany_Required_Inverse4Id21], [t1].[OneToMany_Required_Self_Inverse4Id11], [t1].[OneToMany_Required_Self_Inverse4Id21], [t1].[OneToOne_Optional_PK_Inverse4Id11], [t1].[OneToOne_Optional_PK_Inverse4Id21], [t1].[OneToOne_Optional_Self4Id11], [t1].[OneToOne_Optional_Self4Id21], [t1].[Id110], [t1].[Id210], [t1].[Level3_Optional_Id100], [t1].[Level3_Optional_Id200], [t1].[Level3_Required_Id100], [t1].[Level3_Required_Id200], [t1].[Name10], [t1].[OneToMany_Optional_Inverse4Id100], [t1].[OneToMany_Optional_Inverse4Id200], [t1].[OneToMany_Optional_Self_Inverse4Id100], [t1].[OneToMany_Optional_Self_Inverse4Id200], [t1].[OneToMany_Required_Inverse4Id100], [t1].[OneToMany_Required_Inverse4Id200], [t1].[OneToMany_Required_Self_Inverse4Id100], [t1].[OneToMany_Required_Self_Inverse4Id200], [t1].[OneToOne_Optional_PK_Inverse4Id100], [t1].[OneToOne_Optional_PK_Inverse4Id200], [t1].[OneToOne_Optional_Self4Id100], [t1].[OneToOne_Optional_Self4Id200], [t2].[Name], [t2].[Id1], [t2].[Id2], [t2].[Name0], [t2].[Id10], [t2].[Id20], [t2].[Id100], [t2].[Id200], [t2].[Level3_Optional_Id1], [t2].[Level3_Optional_Id2], [t2].[Level3_Required_Id1], [t2].[Level3_Required_Id2], [t2].[Name00], [t2].[OneToMany_Optional_Inverse4Id1], [t2].[OneToMany_Optional_Inverse4Id2], [t2].[OneToMany_Optional_Self_Inverse4Id1], [t2].[OneToMany_Optional_Self_Inverse4Id2], [t2].[OneToMany_Required_Inverse4Id1], [t2].[OneToMany_Required_Inverse4Id2], [t2].[OneToMany_Required_Self_Inverse4Id1], [t2].[OneToMany_Required_Self_Inverse4Id2], [t2].[OneToOne_Optional_PK_Inverse4Id1], [t2].[OneToOne_Optional_PK_Inverse4Id2], [t2].[OneToOne_Optional_Self4Id1], [t2].[OneToOne_Optional_Self4Id2], [t2].[Id11], [t2].[Id21], [t2].[Level3_Optional_Id10], [t2].[Level3_Optional_Id20], [t2].[Level3_Required_Id10], [t2].[Level3_Required_Id20], [t2].[Name1], [t2].[OneToMany_Optional_Inverse4Id10], [t2].[OneToMany_Optional_Inverse4Id20], [t2].[OneToMany_Optional_Self_Inverse4Id10], [t2].[OneToMany_Optional_Self_Inverse4Id20], [t2].[OneToMany_Required_Inverse4Id10], [t2].[OneToMany_Required_Inverse4Id20], [t2].[OneToMany_Required_Self_Inverse4Id10], [t2].[OneToMany_Required_Self_Inverse4Id20], [t2].[OneToOne_Optional_PK_Inverse4Id10], [t2].[OneToOne_Optional_PK_Inverse4Id20], [t2].[OneToOne_Optional_Self4Id10], [t2].[OneToOne_Optional_Self4Id20], [t2].[Name2], [t2].[Id12], [t2].[Id22], [t2].[Id101], [t2].[Id201], [t2].[Level3_Optional_Id11], [t2].[Level3_Optional_Id21], [t2].[Level3_Required_Id11], [t2].[Level3_Required_Id21], [t2].[Name01], [t2].[OneToMany_Optional_Inverse4Id11], [t2].[OneToMany_Optional_Inverse4Id21], [t2].[OneToMany_Optional_Self_Inverse4Id11], [t2].[OneToMany_Optional_Self_Inverse4Id21], [t2].[OneToMany_Required_Inverse4Id11], [t2].[OneToMany_Required_Inverse4Id21], [t2].[OneToMany_Required_Self_Inverse4Id11], [t2].[OneToMany_Required_Self_Inverse4Id21], [t2].[OneToOne_Optional_PK_Inverse4Id11], [t2].[OneToOne_Optional_PK_Inverse4Id21], [t2].[OneToOne_Optional_Self4Id11], [t2].[OneToOne_Optional_Self4Id21], [t2].[Id110], [t2].[Id210], [t2].[Level3_Optional_Id100], [t2].[Level3_Optional_Id200], [t2].[Level3_Required_Id100], [t2].[Level3_Required_Id200], [t2].[Name10], [t2].[OneToMany_Optional_Inverse4Id100], [t2].[OneToMany_Optional_Inverse4Id200], [t2].[OneToMany_Optional_Self_Inverse4Id100], [t2].[OneToMany_Optional_Self_Inverse4Id200], [t2].[OneToMany_Required_Inverse4Id100], [t2].[OneToMany_Required_Inverse4Id200], [t2].[OneToMany_Required_Self_Inverse4Id100], [t2].[OneToMany_Required_Self_Inverse4Id200], [t2].[OneToOne_Optional_PK_Inverse4Id100], [t2].[OneToOne_Optional_PK_Inverse4Id200], [t2].[OneToOne_Optional_Self4Id100], [t2].[OneToOne_Optional_Self4Id200]
@@ -122,12 +143,17 @@ LEFT JOIN (
         LEFT JOIN [CompositeFours] AS [c13] ON ([c11].[Id1] = [c13].[OneToMany_Required_Inverse4Id1]) AND ([c11].[Id2] = [c13].[OneToMany_Required_Inverse4Id2])
     ) AS [t4] ON ([c7].[Id1] = [t4].[OneToMany_Optional_Inverse3Id1]) AND ([c7].[Id2] = [t4].[OneToMany_Optional_Inverse3Id2])
 ) AS [t2] ON ([c].[Id1] = [t2].[OneToMany_Required_Inverse2Id1]) AND ([c].[Id2] = [t2].[OneToMany_Required_Inverse2Id2])
-ORDER BY [c].[Id1], [c].[Id2], [t1].[Id1], [t1].[Id2], [t1].[Id10], [t1].[Id20], [t1].[Id100], [t1].[Id200], [t1].[Id11], [t1].[Id21], [t1].[Id12], [t1].[Id22], [t1].[Id101], [t1].[Id201], [t1].[Id110], [t1].[Id210], [t2].[Id1], [t2].[Id2], [t2].[Id10], [t2].[Id20], [t2].[Id100], [t2].[Id200], [t2].[Id11], [t2].[Id21], [t2].[Id12], [t2].[Id22], [t2].[Id101], [t2].[Id201], [t2].[Id110]");
+ORDER BY [c].[Id1], [c].[Id2], [t1].[Id1], [t1].[Id2], [t1].[Id10], [t1].[Id20], [t1].[Id100], [t1].[Id200], [t1].[Id11], [t1].[Id21], [t1].[Id12], [t1].[Id22], [t1].[Id101], [t1].[Id201], [t1].[Id110], [t1].[Id210], [t2].[Id1], [t2].[Id2], [t2].[Id10], [t2].[Id20], [t2].[Id100], [t2].[Id200], [t2].[Id11], [t2].[Id21], [t2].[Id12], [t2].[Id22], [t2].[Id101], [t2].[Id201], [t2].[Id110]"
+            );
         }
 
-        public override async Task Projecting_multiple_collections_on_multiple_levels_some_explicit_ordering(bool async)
+        public override async Task Projecting_multiple_collections_on_multiple_levels_some_explicit_ordering(
+            bool async
+        )
         {
-            await base.Projecting_multiple_collections_on_multiple_levels_some_explicit_ordering(async);
+            await base.Projecting_multiple_collections_on_multiple_levels_some_explicit_ordering(
+                async
+            );
 
             AssertSql(
                 @"SELECT [c].[Id1], [c].[Id2], [t1].[Name], [t1].[Id1], [t1].[Id2], [t1].[Id10], [t1].[Id20], [t1].[Id100], [t1].[Id200], [t1].[Level3_Optional_Id1], [t1].[Level3_Optional_Id2], [t1].[Level3_Required_Id1], [t1].[Level3_Required_Id2], [t1].[Name0], [t1].[OneToMany_Optional_Inverse4Id1], [t1].[OneToMany_Optional_Inverse4Id2], [t1].[OneToMany_Optional_Self_Inverse4Id1], [t1].[OneToMany_Optional_Self_Inverse4Id2], [t1].[OneToMany_Required_Inverse4Id1], [t1].[OneToMany_Required_Inverse4Id2], [t1].[OneToMany_Required_Self_Inverse4Id1], [t1].[OneToMany_Required_Self_Inverse4Id2], [t1].[OneToOne_Optional_PK_Inverse4Id1], [t1].[OneToOne_Optional_PK_Inverse4Id2], [t1].[OneToOne_Optional_Self4Id1], [t1].[OneToOne_Optional_Self4Id2], [t1].[Id11], [t1].[Id21], [t1].[Level3_Optional_Id10], [t1].[Level3_Optional_Id20], [t1].[Level3_Required_Id10], [t1].[Level3_Required_Id20], [t1].[Name00], [t1].[OneToMany_Optional_Inverse4Id10], [t1].[OneToMany_Optional_Inverse4Id20], [t1].[OneToMany_Optional_Self_Inverse4Id10], [t1].[OneToMany_Optional_Self_Inverse4Id20], [t1].[OneToMany_Required_Inverse4Id10], [t1].[OneToMany_Required_Inverse4Id20], [t1].[OneToMany_Required_Self_Inverse4Id10], [t1].[OneToMany_Required_Self_Inverse4Id20], [t1].[OneToOne_Optional_PK_Inverse4Id10], [t1].[OneToOne_Optional_PK_Inverse4Id20], [t1].[OneToOne_Optional_Self4Id10], [t1].[OneToOne_Optional_Self4Id20], [t1].[Name1], [t1].[Id12], [t1].[Id22], [t1].[Id101], [t1].[Id201], [t1].[Level3_Optional_Id11], [t1].[Level3_Optional_Id21], [t1].[Level3_Required_Id11], [t1].[Level3_Required_Id21], [t1].[Name01], [t1].[OneToMany_Optional_Inverse4Id11], [t1].[OneToMany_Optional_Inverse4Id21], [t1].[OneToMany_Optional_Self_Inverse4Id11], [t1].[OneToMany_Optional_Self_Inverse4Id21], [t1].[OneToMany_Required_Inverse4Id11], [t1].[OneToMany_Required_Inverse4Id21], [t1].[OneToMany_Required_Self_Inverse4Id11], [t1].[OneToMany_Required_Self_Inverse4Id21], [t1].[OneToOne_Optional_PK_Inverse4Id11], [t1].[OneToOne_Optional_PK_Inverse4Id21], [t1].[OneToOne_Optional_Self4Id11], [t1].[OneToOne_Optional_Self4Id21], [t1].[Id110], [t1].[Id210], [t1].[Level3_Optional_Id100], [t1].[Level3_Optional_Id200], [t1].[Level3_Required_Id100], [t1].[Level3_Required_Id200], [t1].[Name10], [t1].[OneToMany_Optional_Inverse4Id100], [t1].[OneToMany_Optional_Inverse4Id200], [t1].[OneToMany_Optional_Self_Inverse4Id100], [t1].[OneToMany_Optional_Self_Inverse4Id200], [t1].[OneToMany_Required_Inverse4Id100], [t1].[OneToMany_Required_Inverse4Id200], [t1].[OneToMany_Required_Self_Inverse4Id100], [t1].[OneToMany_Required_Self_Inverse4Id200], [t1].[OneToOne_Optional_PK_Inverse4Id100], [t1].[OneToOne_Optional_PK_Inverse4Id200], [t1].[OneToOne_Optional_Self4Id100], [t1].[OneToOne_Optional_Self4Id200], [t2].[Name], [t2].[Id1], [t2].[Id2], [t2].[Name0], [t2].[Id10], [t2].[Id20], [t2].[Id100], [t2].[Id200], [t2].[Level3_Optional_Id1], [t2].[Level3_Optional_Id2], [t2].[Level3_Required_Id1], [t2].[Level3_Required_Id2], [t2].[Name00], [t2].[OneToMany_Optional_Inverse4Id1], [t2].[OneToMany_Optional_Inverse4Id2], [t2].[OneToMany_Optional_Self_Inverse4Id1], [t2].[OneToMany_Optional_Self_Inverse4Id2], [t2].[OneToMany_Required_Inverse4Id1], [t2].[OneToMany_Required_Inverse4Id2], [t2].[OneToMany_Required_Self_Inverse4Id1], [t2].[OneToMany_Required_Self_Inverse4Id2], [t2].[OneToOne_Optional_PK_Inverse4Id1], [t2].[OneToOne_Optional_PK_Inverse4Id2], [t2].[OneToOne_Optional_Self4Id1], [t2].[OneToOne_Optional_Self4Id2], [t2].[Id11], [t2].[Id21], [t2].[Level3_Optional_Id10], [t2].[Level3_Optional_Id20], [t2].[Level3_Required_Id10], [t2].[Level3_Required_Id20], [t2].[Name1], [t2].[OneToMany_Optional_Inverse4Id10], [t2].[OneToMany_Optional_Inverse4Id20], [t2].[OneToMany_Optional_Self_Inverse4Id10], [t2].[OneToMany_Optional_Self_Inverse4Id20], [t2].[OneToMany_Required_Inverse4Id10], [t2].[OneToMany_Required_Inverse4Id20], [t2].[OneToMany_Required_Self_Inverse4Id10], [t2].[OneToMany_Required_Self_Inverse4Id20], [t2].[OneToOne_Optional_PK_Inverse4Id10], [t2].[OneToOne_Optional_PK_Inverse4Id20], [t2].[OneToOne_Optional_Self4Id10], [t2].[OneToOne_Optional_Self4Id20], [t2].[Name2], [t2].[Id12], [t2].[Id22], [t2].[Id101], [t2].[Id201], [t2].[Level3_Optional_Id11], [t2].[Level3_Optional_Id21], [t2].[Level3_Required_Id11], [t2].[Level3_Required_Id21], [t2].[Name01], [t2].[OneToMany_Optional_Inverse4Id11], [t2].[OneToMany_Optional_Inverse4Id21], [t2].[OneToMany_Optional_Self_Inverse4Id11], [t2].[OneToMany_Optional_Self_Inverse4Id21], [t2].[OneToMany_Required_Inverse4Id11], [t2].[OneToMany_Required_Inverse4Id21], [t2].[OneToMany_Required_Self_Inverse4Id11], [t2].[OneToMany_Required_Self_Inverse4Id21], [t2].[OneToOne_Optional_PK_Inverse4Id11], [t2].[OneToOne_Optional_PK_Inverse4Id21], [t2].[OneToOne_Optional_Self4Id11], [t2].[OneToOne_Optional_Self4Id21], [t2].[Id110], [t2].[Id210], [t2].[Level3_Optional_Id100], [t2].[Level3_Optional_Id200], [t2].[Level3_Required_Id100], [t2].[Level3_Required_Id200], [t2].[Name10], [t2].[OneToMany_Optional_Inverse4Id100], [t2].[OneToMany_Optional_Inverse4Id200], [t2].[OneToMany_Optional_Self_Inverse4Id100], [t2].[OneToMany_Optional_Self_Inverse4Id200], [t2].[OneToMany_Required_Inverse4Id100], [t2].[OneToMany_Required_Inverse4Id200], [t2].[OneToMany_Required_Self_Inverse4Id100], [t2].[OneToMany_Required_Self_Inverse4Id200], [t2].[OneToOne_Optional_PK_Inverse4Id100], [t2].[OneToOne_Optional_PK_Inverse4Id200], [t2].[OneToOne_Optional_Self4Id100], [t2].[OneToOne_Optional_Self4Id200]
@@ -164,10 +190,11 @@ LEFT JOIN (
         LEFT JOIN [CompositeFours] AS [c13] ON ([c11].[Id1] = [c13].[OneToMany_Required_Inverse4Id1]) AND ([c11].[Id2] = [c13].[OneToMany_Required_Inverse4Id2])
     ) AS [t4] ON ([c7].[Id1] = [t4].[OneToMany_Optional_Inverse3Id1]) AND ([c7].[Id2] = [t4].[OneToMany_Optional_Inverse3Id2])
 ) AS [t2] ON ([c].[Id1] = [t2].[OneToMany_Required_Inverse2Id1]) AND ([c].[Id2] = [t2].[OneToMany_Required_Inverse2Id2])
-ORDER BY [c].[Name], [c].[Id1], [c].[Id2], [t1].[Id1], [t1].[Id2], [t1].[Id20] DESC, [t1].[Id10] DESC, [t1].[Id100], [t1].[Id200], [t1].[Id11], [t1].[Id21], [t1].[Id12], [t1].[Id22], [t1].[Id101], [t1].[Id201], [t1].[Id110], [t1].[Id210], [t2].[c], [t2].[Id1], [t2].[Id2], [t2].[Id10], [t2].[Id20], [t2].[Id100], [t2].[Id200], [t2].[Id11], [t2].[Id21], [t2].[Id12], [t2].[Id22], [t2].[Id101], [t2].[Id201], [t2].[c0] DESC, [t2].[Id110]");
+ORDER BY [c].[Name], [c].[Id1], [c].[Id2], [t1].[Id1], [t1].[Id2], [t1].[Id20] DESC, [t1].[Id10] DESC, [t1].[Id100], [t1].[Id200], [t1].[Id11], [t1].[Id21], [t1].[Id12], [t1].[Id22], [t1].[Id101], [t1].[Id201], [t1].[Id110], [t1].[Id210], [t2].[c], [t2].[Id1], [t2].[Id2], [t2].[Id10], [t2].[Id20], [t2].[Id100], [t2].[Id200], [t2].[Id11], [t2].[Id21], [t2].[Id12], [t2].[Id22], [t2].[Id101], [t2].[Id201], [t2].[c0] DESC, [t2].[Id110]"
+            );
         }
 
-        private void AssertSql(params string[] expected)
-            => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+        private void AssertSql(params string[] expected) =>
+            Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
     }
 }

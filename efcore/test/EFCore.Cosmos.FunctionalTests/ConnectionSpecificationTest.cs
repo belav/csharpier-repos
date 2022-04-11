@@ -39,9 +39,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                 optionsBuilder.UseCosmos(_connectionString, _name, b => b.ApplyConfiguration());
             }
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-            {
-            }
+            protected override void OnModelCreating(ModelBuilder modelBuilder) { }
 
             public DbSet<Blog> Blogs { get; set; }
         }
@@ -55,7 +53,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
 
             Assert.Equal(
                 CosmosStrings.ConnectionStringConflictingConfiguration,
-                Assert.Throws<InvalidOperationException>(() => context.GetService<IDatabaseCreator>()).Message);
+                Assert
+                    .Throws<InvalidOperationException>(() => context.GetService<IDatabaseCreator>())
+                    .Message
+            );
         }
 
         public class BloggingContextWithConnectionConflict : DbContext
@@ -75,17 +76,12 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
 
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
-                optionsBuilder.UseCosmos(_connectionString, _name, b => b.ApplyConfiguration())
-                    .UseCosmos(
-                        _connectionUri,
-                        _authToken,
-                        _name,
-                        b => b.ApplyConfiguration());
+                optionsBuilder
+                    .UseCosmos(_connectionString, _name, b => b.ApplyConfiguration())
+                    .UseCosmos(_connectionUri, _authToken, _name, b => b.ApplyConfiguration());
             }
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-            {
-            }
+            protected override void OnModelCreating(ModelBuilder modelBuilder) { }
 
             public DbSet<Blog> Blogs { get; set; }
         }

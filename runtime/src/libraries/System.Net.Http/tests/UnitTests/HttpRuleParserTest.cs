@@ -11,7 +11,8 @@ namespace System.Net.Http.Tests
 {
     public class HttpRuleParserTest
     {
-        private const string ValidTokenChars = "!#$%&'*+-.0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz^_`|~";
+        private const string ValidTokenChars =
+            "!#$%&'*+-.0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz^_`|~";
 
         public static IEnumerable<object[]> ValidTokenCharsArguments
         {
@@ -174,7 +175,12 @@ namespace System.Net.Http.Tests
         public void GetQuotedStringLength_SetOfValidQuotedStrings_AllConsideredValid()
         {
             AssertGetQuotedStringLength("\"x\"", 0, 3, HttpParseResult.Parsed);
-            AssertGetQuotedStringLength("token \"quoted string\" token", 6, 15, HttpParseResult.Parsed);
+            AssertGetQuotedStringLength(
+                "token \"quoted string\" token",
+                6,
+                15,
+                HttpParseResult.Parsed
+            );
             AssertGetQuotedStringLength("\"\\x\"", 0, 4, HttpParseResult.Parsed); // "\x"
             AssertGetQuotedStringLength("\"\\\"\"", 0, 4, HttpParseResult.Parsed); // "\""
             AssertGetQuotedStringLength("\"before \\\" after\"", 0, 17, HttpParseResult.Parsed); // "before \" after"
@@ -189,7 +195,12 @@ namespace System.Net.Http.Tests
             AssertGetQuotedStringLength("\"\\xx\"", 0, 5, HttpParseResult.Parsed); // "\xx"
             AssertGetQuotedStringLength("\"(x)\"", 0, 5, HttpParseResult.Parsed); // "(x)"
             AssertGetQuotedStringLength(" \" (x) \" ", 1, 7, HttpParseResult.Parsed); // " (x) "
-            AssertGetQuotedStringLength("\"a\\\u00FC\\\"b\\\"c\\\"\\\"d\\\"\"", 0, 18, HttpParseResult.Parsed); // "a\\u00FC\"b\"c\"\"d\""
+            AssertGetQuotedStringLength(
+                "\"a\\\u00FC\\\"b\\\"c\\\"\\\"d\\\"\"",
+                0,
+                18,
+                HttpParseResult.Parsed
+            ); // "a\\u00FC\"b\"c\"\"d\""
             AssertGetQuotedStringLength("\"\\\" \"", 0, 5, HttpParseResult.Parsed); // "\" "
         }
 
@@ -198,7 +209,12 @@ namespace System.Net.Http.Tests
         {
             AssertGetQuotedStringLength("\"x", 0, 0, HttpParseResult.InvalidFormat); // "x
             AssertGetQuotedStringLength(" \"x ", 1, 0, HttpParseResult.InvalidFormat); // ' "x '
-            AssertGetQuotedStringLength("\"text\r\n new line\"", 0, 0, HttpParseResult.InvalidFormat); // "text<crlf> new line"
+            AssertGetQuotedStringLength(
+                "\"text\r\n new line\"",
+                0,
+                0,
+                HttpParseResult.InvalidFormat
+            ); // "text<crlf> new line"
         }
 
         [Fact]
@@ -234,7 +250,12 @@ namespace System.Net.Http.Tests
             AssertGetCommentLength("( (\\)x) )", 0, 9, HttpParseResult.Parsed);
             AssertGetCommentLength("(\\) (\\(x) )", 0, 11, HttpParseResult.Parsed);
             AssertGetCommentLength("((((((x))))))", 0, 13, HttpParseResult.Parsed);
-            AssertGetCommentLength("((x) (x) ((x)x) ((((x)x)x)x(x(x))))", 0, 35, HttpParseResult.Parsed);
+            AssertGetCommentLength(
+                "((x) (x) ((x)x) ((((x)x)x)x(x(x))))",
+                0,
+                35,
+                HttpParseResult.Parsed
+            );
             AssertGetCommentLength("((x) (\\(x\\())", 0, 13, HttpParseResult.Parsed); // ((x) (\(x\()))
             AssertGetCommentLength("((\\)))", 0, 6, HttpParseResult.Parsed); // ((\))) -> quoted-pair )
             AssertGetCommentLength("((\\())", 0, 6, HttpParseResult.Parsed); // ((\()) -> quoted-pair (
@@ -324,9 +345,18 @@ namespace System.Net.Http.Tests
 
             // GetNumberLength doesn't have any size restrictions. The caller needs to decide whether a value is
             // outside the valid range or not.
-            Assert.Equal(30, HttpRuleParser.GetNumberLength("123456789012345678901234567890", 0, false));
-            Assert.Equal(61, HttpRuleParser.GetNumberLength(
-                "123456789012345678901234567890.123456789012345678901234567890", 0, true));
+            Assert.Equal(
+                30,
+                HttpRuleParser.GetNumberLength("123456789012345678901234567890", 0, false)
+            );
+            Assert.Equal(
+                61,
+                HttpRuleParser.GetNumberLength(
+                    "123456789012345678901234567890.123456789012345678901234567890",
+                    0,
+                    true
+                )
+            );
         }
 
         [Fact]
@@ -344,28 +374,48 @@ namespace System.Net.Http.Tests
             Assert.Equal(expectedLength, HttpRuleParser.GetTokenLength(input, startIndex));
         }
 
-        private static void AssertGetQuotedPairLength(string input, int startIndex, int expectedLength,
-            HttpParseResult expectedResult)
+        private static void AssertGetQuotedPairLength(
+            string input,
+            int startIndex,
+            int expectedLength,
+            HttpParseResult expectedResult
+        )
         {
             int length = 0;
-            HttpParseResult result = HttpRuleParser.GetQuotedPairLength(input, startIndex, out length);
+            HttpParseResult result = HttpRuleParser.GetQuotedPairLength(
+                input,
+                startIndex,
+                out length
+            );
 
             Assert.Equal(expectedResult, result);
             Assert.Equal(expectedLength, length);
         }
 
-        private static void AssertGetQuotedStringLength(string input, int startIndex, int expectedLength,
-            HttpParseResult expectedResult)
+        private static void AssertGetQuotedStringLength(
+            string input,
+            int startIndex,
+            int expectedLength,
+            HttpParseResult expectedResult
+        )
         {
             int length = 0;
-            HttpParseResult result = HttpRuleParser.GetQuotedStringLength(input, startIndex, out length);
+            HttpParseResult result = HttpRuleParser.GetQuotedStringLength(
+                input,
+                startIndex,
+                out length
+            );
 
             Assert.Equal(expectedResult, result);
             Assert.Equal(expectedLength, length);
         }
 
-        private static void AssertGetCommentLength(string input, int startIndex, int expectedLength,
-            HttpParseResult expectedResult)
+        private static void AssertGetCommentLength(
+            string input,
+            int startIndex,
+            int expectedLength,
+            HttpParseResult expectedResult
+        )
         {
             int length = 0;
             HttpParseResult result = HttpRuleParser.GetCommentLength(input, startIndex, out length);
@@ -374,11 +424,19 @@ namespace System.Net.Http.Tests
             Assert.Equal(expectedLength, length);
         }
 
-        private static void AssertGetHostLength(string input, int startIndex, int expectedLength, bool allowToken,
-            string expectedResult)
+        private static void AssertGetHostLength(
+            string input,
+            int startIndex,
+            int expectedLength,
+            bool allowToken,
+            string expectedResult
+        )
         {
             string result = null;
-            Assert.Equal(expectedLength, HttpRuleParser.GetHostLength(input, startIndex, allowToken, out result));
+            Assert.Equal(
+                expectedLength,
+                HttpRuleParser.GetHostLength(input, startIndex, allowToken, out result)
+            );
             Assert.Equal(expectedResult, result);
         }
         #endregion

@@ -29,9 +29,7 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public PropertyChangedInterceptor(
-            IEntityType entityType,
-            bool checkEquality)
+        public PropertyChangedInterceptor(IEntityType entityType, bool checkEquality)
             : base(entityType)
         {
             _checkEquality = checkEquality;
@@ -51,13 +49,13 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
             {
                 if (methodName == $"add_{nameof(INotifyPropertyChanged.PropertyChanged)}")
                 {
-                    _handler = (PropertyChangedEventHandler)Delegate.Combine(
-                        _handler, (Delegate)invocation.Arguments[0]);
+                    _handler = (PropertyChangedEventHandler)
+                        Delegate.Combine(_handler, (Delegate)invocation.Arguments[0]);
                 }
                 else if (methodName == $"remove_{nameof(INotifyPropertyChanged.PropertyChanged)}")
                 {
-                    _handler = (PropertyChangedEventHandler?)Delegate.Remove(
-                        _handler, (Delegate)invocation.Arguments[0]);
+                    _handler = (PropertyChangedEventHandler?)
+                        Delegate.Remove(_handler, (Delegate)invocation.Arguments[0]);
                 }
             }
             else if (methodName.StartsWith("set_", StringComparison.Ordinal))
@@ -71,12 +69,17 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
                 }
                 else
                 {
-                    var navigation = EntityType.FindNavigation(propertyName)
+                    var navigation =
+                        EntityType.FindNavigation(propertyName)
                         ?? (INavigationBase?)EntityType.FindSkipNavigation(propertyName);
 
                     if (navigation != null)
                     {
-                        HandleChanged(invocation, navigation, LegacyReferenceEqualityComparer.Instance);
+                        HandleChanged(
+                            invocation,
+                            navigation,
+                            LegacyReferenceEqualityComparer.Instance
+                        );
                     }
                     else
                     {
@@ -90,7 +93,11 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
             }
         }
 
-        private void HandleChanged(IInvocation invocation, IPropertyBase property, IEqualityComparer? comparer)
+        private void HandleChanged(
+            IInvocation invocation,
+            IPropertyBase property,
+            IEqualityComparer? comparer
+        )
         {
             var newValue = invocation.Arguments[^1];
 
@@ -116,7 +123,7 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
             }
         }
 
-        private void NotifyPropertyChanged(string propertyName, object proxy)
-            => _handler?.Invoke(proxy, new PropertyChangedEventArgs(propertyName));
+        private void NotifyPropertyChanged(string propertyName, object proxy) =>
+            _handler?.Invoke(proxy, new PropertyChangedEventArgs(propertyName));
     }
 }

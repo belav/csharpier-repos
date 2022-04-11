@@ -15,8 +15,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 /// Provides a expression based way to provide include properties.
 /// </summary>
 /// <typeparam name="TModel">The target model Type.</typeparam>
-public class DefaultPropertyFilterProvider<TModel> : IPropertyFilterProvider
-    where TModel : class
+public class DefaultPropertyFilterProvider<TModel> : IPropertyFilterProvider where TModel : class
 {
     private static readonly Func<ModelMetadata, bool> _default = (m) => true;
 
@@ -29,7 +28,8 @@ public class DefaultPropertyFilterProvider<TModel> : IPropertyFilterProvider
     /// Expressions which can be used to generate property filter which can filter model
     /// properties.
     /// </summary>
-    public virtual IEnumerable<Expression<Func<TModel, object>>>? PropertyIncludeExpressions => null;
+    public virtual IEnumerable<Expression<Func<TModel, object>>>? PropertyIncludeExpressions =>
+        null;
 
     /// <inheritdoc />
     public virtual Func<ModelMetadata, bool> PropertyFilter
@@ -47,9 +47,12 @@ public class DefaultPropertyFilterProvider<TModel> : IPropertyFilterProvider
     }
 
     private Func<ModelMetadata, bool> GetPropertyFilterFromExpression(
-        IEnumerable<Expression<Func<TModel, object>>> includeExpressions)
+        IEnumerable<Expression<Func<TModel, object>>> includeExpressions
+    )
     {
-        var expression = ModelBindingHelper.GetPropertyFilterExpression(includeExpressions.ToArray());
+        var expression = ModelBindingHelper.GetPropertyFilterExpression(
+            includeExpressions.ToArray()
+        );
         return expression.Compile();
     }
 }

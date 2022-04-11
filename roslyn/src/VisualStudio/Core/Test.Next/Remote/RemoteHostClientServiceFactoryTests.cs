@@ -26,10 +26,10 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
     [Trait(Traits.Feature, Traits.Features.RemoteHost)]
     public class RemoteHostClientServiceFactoryTests
     {
-        private static readonly TestComposition s_composition = FeaturesTestCompositions.Features.WithTestHostParts(TestHost.OutOfProcess);
+        private static readonly TestComposition s_composition =
+            FeaturesTestCompositions.Features.WithTestHostParts(TestHost.OutOfProcess);
 
-        private static AdhocWorkspace CreateWorkspace()
-            => new(s_composition.GetHostServices());
+        private static AdhocWorkspace CreateWorkspace() => new(s_composition.GetHostServices());
 
         [Fact]
         public async Task UpdaterService()
@@ -37,22 +37,37 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
             using var workspace = CreateWorkspace();
 
             var exportProvider = (IMefHostExportProvider)workspace.Services.HostServices;
-            var listenerProvider = exportProvider.GetExportedValue<AsynchronousOperationListenerProvider>();
+            var listenerProvider =
+                exportProvider.GetExportedValue<AsynchronousOperationListenerProvider>();
             var globalOptions = exportProvider.GetExportedValue<IGlobalOptionService>();
 
-            globalOptions.SetGlobalOption(RemoteHostOptions.SolutionChecksumMonitorBackOffTimeSpanInMS, 1);
+            globalOptions.SetGlobalOption(
+                RemoteHostOptions.SolutionChecksumMonitorBackOffTimeSpanInMS,
+                1
+            );
 
-            var checksumUpdater = new SolutionChecksumUpdater(workspace, globalOptions, listenerProvider, CancellationToken.None);
+            var checksumUpdater = new SolutionChecksumUpdater(
+                workspace,
+                globalOptions,
+                listenerProvider,
+                CancellationToken.None
+            );
             var service = workspace.Services.GetRequiredService<IRemoteHostClientProvider>();
 
             // make sure client is ready
             using var client = await service.TryGetRemoteHostClientAsync(CancellationToken.None);
 
             // add solution, change document
-            workspace.AddSolution(SolutionInfo.Create(SolutionId.CreateNewId(), VersionStamp.Default));
+            workspace.AddSolution(
+                SolutionInfo.Create(SolutionId.CreateNewId(), VersionStamp.Default)
+            );
             var project = workspace.AddProject("proj", LanguageNames.CSharp);
             var document = workspace.AddDocument(project.Id, "doc.cs", SourceText.From("code"));
-            workspace.ApplyTextChanges(document.Id, new[] { new TextChange(new TextSpan(0, 1), "abc") }, CancellationToken.None);
+            workspace.ApplyTextChanges(
+                document.Id,
+                new[] { new TextChange(new TextSpan(0, 1), "abc") },
+                CancellationToken.None
+            );
 
             // wait for listener
             var workspaceListener = listenerProvider.GetWaiter(FeatureAttribute.Workspace);
@@ -77,17 +92,26 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
             var mock = new MockLogService();
             var client = await service.TryGetRemoteHostClientAsync(CancellationToken.None);
 
-            using var connection = client.CreateConnection<IRemoteSymbolSearchUpdateService>(callbackTarget: mock);
-            Assert.True(await connection.TryInvokeAsync(
-                (service, callbackId, cancellationToken) => service.UpdateContinuouslyAsync(callbackId, "emptySource", Path.GetTempPath(), cancellationToken),
-                CancellationToken.None));
+            using var connection = client.CreateConnection<IRemoteSymbolSearchUpdateService>(
+                callbackTarget: mock
+            );
+            Assert.True(
+                await connection.TryInvokeAsync(
+                    (service, callbackId, cancellationToken) =>
+                        service.UpdateContinuouslyAsync(
+                            callbackId,
+                            "emptySource",
+                            Path.GetTempPath(),
+                            cancellationToken
+                        ),
+                    CancellationToken.None
+                )
+            );
         }
 
         private class NullAssemblyAnalyzerLoader : IAnalyzerAssemblyLoader
         {
-            public void AddDependencyLocation(string fullPath)
-            {
-            }
+            public void AddDependencyLocation(string fullPath) { }
 
             public Assembly LoadFromPath(string fullPath)
             {
@@ -98,8 +122,14 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
 
         private class MockLogService : ISymbolSearchLogService
         {
-            public ValueTask LogExceptionAsync(string exception, string text, CancellationToken cancellationToken) => default;
-            public ValueTask LogInfoAsync(string text, CancellationToken cancellationToken) => default;
+            public ValueTask LogExceptionAsync(
+                string exception,
+                string text,
+                CancellationToken cancellationToken
+            ) => default;
+
+            public ValueTask LogInfoAsync(string text, CancellationToken cancellationToken) =>
+                default;
         }
     }
 }

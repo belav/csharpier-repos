@@ -17,7 +17,8 @@ internal class ControllerActionInvokerCacheEntry
         Func<ControllerContext, object, ValueTask>? controllerReleaser,
         ControllerBinderDelegate? controllerBinderDelegate,
         ObjectMethodExecutor objectMethodExecutor,
-        ActionMethodExecutor actionMethodExecutor)
+        ActionMethodExecutor actionMethodExecutor
+    )
     {
         ControllerFactory = controllerFactory;
         ControllerReleaser = controllerReleaser;

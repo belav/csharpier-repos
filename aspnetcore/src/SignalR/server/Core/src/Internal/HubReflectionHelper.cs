@@ -15,7 +15,9 @@ internal static class HubReflectionHelper
     public static IEnumerable<MethodInfo> GetHubMethods(Type hubType)
     {
         var methods = hubType.GetMethods(BindingFlags.Public | BindingFlags.Instance);
-        var allInterfaceMethods = _excludeInterfaces.SelectMany(i => GetInterfaceMethods(hubType, i));
+        var allInterfaceMethods = _excludeInterfaces.SelectMany(
+            i => GetInterfaceMethods(hubType, i)
+        );
 
         return methods.Except(allInterfaceMethods).Where(m => IsHubMethod(m));
     }
@@ -38,7 +40,9 @@ internal static class HubReflectionHelper
             return false;
         }
 
-        var baseType = baseDefinition.IsGenericType ? baseDefinition.GetGenericTypeDefinition() : baseDefinition;
+        var baseType = baseDefinition.IsGenericType
+            ? baseDefinition.GetGenericTypeDefinition()
+            : baseDefinition;
         return typeof(Hub) != baseType;
     }
 }

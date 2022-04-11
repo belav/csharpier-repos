@@ -67,7 +67,8 @@ namespace System.Security.Cryptography.Tests
             using (HashAlgorithm hash = new SummingTestHashAlgorithm())
             {
                 await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                    () => hash.ComputeHashAsync(stream, cancellationSource.Token));
+                    () => hash.ComputeHashAsync(stream, cancellationSource.Token)
+                );
             }
         }
 
@@ -84,7 +85,8 @@ namespace System.Security.Cryptography.Tests
                     {
                         // Not returning or awaiting the Task, it never got created.
                         hash.ComputeHashAsync(stream);
-                    });
+                    }
+                );
             }
         }
 
@@ -99,7 +101,8 @@ namespace System.Security.Cryptography.Tests
                     {
                         // Not returning or awaiting the Task, it never got created.
                         hash.ComputeHashAsync(null);
-                    });
+                    }
+                );
             }
         }
 
@@ -107,13 +110,14 @@ namespace System.Security.Cryptography.Tests
         {
             private long _sum;
 
-            public SummingTestHashAlgorithm() => HashSizeValue = sizeof(long)*8;
+            public SummingTestHashAlgorithm() => HashSizeValue = sizeof(long) * 8;
 
             public override void Initialize() => _sum = 0;
 
             protected override void HashCore(byte[] array, int ibStart, int cbSize)
             {
-                for (int i = ibStart; i < ibStart + cbSize; i++) _sum += array[i];
+                for (int i = ibStart; i < ibStart + cbSize; i++)
+                    _sum += array[i];
             }
 
             protected override byte[] HashFinal() => BitConverter.GetBytes(_sum);
@@ -125,9 +129,7 @@ namespace System.Security.Cryptography.Tests
 
         private class SlowPositionValueStream : PositionValueStream
         {
-            public SlowPositionValueStream(int totalCount) : base(totalCount)
-            {
-            }
+            public SlowPositionValueStream(int totalCount) : base(totalCount) { }
 
             public override int Read(byte[] buffer, int offset, int count)
             {

@@ -16,12 +16,10 @@ namespace System.Runtime.InteropServices.JavaScript
     ///
     /// Host objects are treated differently in the bridge code as they are not guaranteed to exist.
     /// </remarks>
-    public interface IHostObject
-    { }
+    public interface IHostObject { }
 
     public class HostObject : JSObject, IHostObject
     {
-        public HostObject(string typeName, params object[] _params) : base(typeName, _params)
-        { }
+        public HostObject(string typeName, params object[] _params) : base(typeName, _params) { }
     }
 }

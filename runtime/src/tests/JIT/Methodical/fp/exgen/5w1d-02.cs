@@ -2,11 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+
 internal unsafe class testout1
 {
     private static double[] s_arr1d_0 = new double[6];
     private static double s_a2_0 = 128.0;
-
 
     public static double Func_0()
     {

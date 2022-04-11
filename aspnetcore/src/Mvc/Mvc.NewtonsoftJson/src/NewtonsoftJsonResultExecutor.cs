@@ -46,7 +46,8 @@ internal class NewtonsoftJsonResultExecutor : IActionResultExecutor<JsonResult>
         ILogger<NewtonsoftJsonResultExecutor> logger,
         IOptions<MvcOptions> mvcOptions,
         IOptions<MvcNewtonsoftJsonOptions> jsonOptions,
-        ArrayPool<char> charPool)
+        ArrayPool<char> charPool
+    )
     {
         if (writerFactory == null)
         {
@@ -104,7 +105,8 @@ internal class NewtonsoftJsonResultExecutor : IActionResultExecutor<JsonResult>
             (DefaultContentType, Encoding.UTF8),
             MediaType.GetEncoding,
             out var resolvedContentType,
-            out var resolvedContentTypeEncoding);
+            out var resolvedContentTypeEncoding
+        );
 
         response.ContentType = resolvedContentType;
 
@@ -126,7 +128,10 @@ internal class NewtonsoftJsonResultExecutor : IActionResultExecutor<JsonResult>
         try
         {
             var value = result.Value;
-            if (value != null && _asyncEnumerableReaderFactory.TryGetReader(value.GetType(), out var reader))
+            if (
+                value != null
+                && _asyncEnumerableReaderFactory.TryGetReader(value.GetType(), out var reader)
+            )
             {
                 Log.BufferingAsyncEnumerable(_logger, value);
                 try
@@ -140,7 +145,12 @@ internal class NewtonsoftJsonResultExecutor : IActionResultExecutor<JsonResult>
                 }
             }
 
-            await using (var writer = _writerFactory.CreateWriter(responseStream, resolvedContentTypeEncoding))
+            await using (
+                var writer = _writerFactory.CreateWriter(
+                    responseStream,
+                    resolvedContentTypeEncoding
+                )
+            )
             {
                 using var jsonWriter = new JsonTextWriter(writer);
                 jsonWriter.ArrayPool = _charPool;
@@ -177,10 +187,13 @@ internal class NewtonsoftJsonResultExecutor : IActionResultExecutor<JsonResult>
         {
             if (!(serializerSettings is JsonSerializerSettings settingsFromResult))
             {
-                throw new InvalidOperationException(Resources.FormatProperty_MustBeInstanceOfType(
-                    nameof(JsonResult),
-                    nameof(JsonResult.SerializerSettings),
-                    typeof(JsonSerializerSettings)));
+                throw new InvalidOperationException(
+                    Resources.FormatProperty_MustBeInstanceOfType(
+                        nameof(JsonResult),
+                        nameof(JsonResult.SerializerSettings),
+                        typeof(JsonSerializerSettings)
+                    )
+                );
             }
 
             return settingsFromResult;
@@ -189,19 +202,24 @@ internal class NewtonsoftJsonResultExecutor : IActionResultExecutor<JsonResult>
 
     private static class Log
     {
-        private static readonly LogDefineOptions SkipEnabledCheckLogOptions = new() { SkipEnabledCheck = true };
+        private static readonly LogDefineOptions SkipEnabledCheckLogOptions =
+            new() { SkipEnabledCheck = true };
 
-        private static readonly Action<ILogger, string?, Exception?> _jsonResultExecuting = LoggerMessage.Define<string?>(
-            LogLevel.Information,
-            new EventId(1, "JsonResultExecuting"),
-            "Executing JsonResult, writing value of type '{Type}'.",
-            SkipEnabledCheckLogOptions);
+        private static readonly Action<ILogger, string?, Exception?> _jsonResultExecuting =
+            LoggerMessage.Define<string?>(
+                LogLevel.Information,
+                new EventId(1, "JsonResultExecuting"),
+                "Executing JsonResult, writing value of type '{Type}'.",
+                SkipEnabledCheckLogOptions
+            );
 
-        private static readonly Action<ILogger, string?, Exception?> _bufferingAsyncEnumerable = LoggerMessage.Define<string?>(
-            LogLevel.Debug,
-            new EventId(1, "BufferingAsyncEnumerable"),
-            "Buffering IAsyncEnumerable instance of type '{Type}'.",
-            SkipEnabledCheckLogOptions);
+        private static readonly Action<ILogger, string?, Exception?> _bufferingAsyncEnumerable =
+            LoggerMessage.Define<string?>(
+                LogLevel.Debug,
+                new EventId(1, "BufferingAsyncEnumerable"),
+                "Buffering IAsyncEnumerable instance of type '{Type}'.",
+                SkipEnabledCheckLogOptions
+            );
 
         public static void JsonResultExecuting(ILogger logger, object? value)
         {

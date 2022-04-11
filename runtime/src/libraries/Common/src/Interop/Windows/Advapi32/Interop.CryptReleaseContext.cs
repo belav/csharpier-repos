@@ -9,8 +9,6 @@ internal static partial class Interop
     internal static partial class Advapi32
     {
         [GeneratedDllImport(Libraries.Advapi32, SetLastError = true)]
-        public static partial bool CryptReleaseContext(
-            IntPtr hProv,
-            int dwFlags);
+        public static partial bool CryptReleaseContext(IntPtr hProv, int dwFlags);
     }
 }

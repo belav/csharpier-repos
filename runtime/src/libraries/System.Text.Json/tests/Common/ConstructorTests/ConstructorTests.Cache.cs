@@ -25,38 +25,54 @@ namespace System.Text.Json.Serialization.Tests
         public async Task MultipleThreads()
         {
             // Verify the test class has >32 properties since that is a threshold for using the fallback dictionary.
-            Assert.True(typeof(ObjWCtorMixedParams).GetProperties(BindingFlags.Instance | BindingFlags.Public).Length > 32);
+            Assert.True(
+                typeof(ObjWCtorMixedParams)
+                    .GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                    .Length > 32
+            );
 
             async Task DeserializeObjectAsync(string json, Type type, JsonSerializerOptions options)
             {
-                var obj = await JsonSerializerWrapperForString.DeserializeWrapper(json, type, options);
+                var obj = await JsonSerializerWrapperForString.DeserializeWrapper(
+                    json,
+                    type,
+                    options
+                );
                 ((ITestClassWithParameterizedCtor)obj).Verify();
             }
 
             async Task DeserializeObjectMinimalAsync(Type type, JsonSerializerOptions options)
             {
                 string json = (string)type.GetProperty("s_json_minimal").GetValue(null);
-                var obj = await JsonSerializerWrapperForString.DeserializeWrapper(json, type, options);
+                var obj = await JsonSerializerWrapperForString.DeserializeWrapper(
+                    json,
+                    type,
+                    options
+                );
                 ((ITestClassWithParameterizedCtor)obj).VerifyMinimal();
-            };
+            }
+            ;
 
             async Task DeserializeObjectFlippedAsync(Type type, JsonSerializerOptions options)
             {
                 string json = (string)type.GetProperty("s_json_flipped").GetValue(null);
                 await DeserializeObjectAsync(json, type, options);
-            };
+            }
+            ;
 
             async Task DeserializeObjectNormalAsync(Type type, JsonSerializerOptions options)
             {
                 string json = (string)type.GetProperty("s_json").GetValue(null);
                 await DeserializeObjectAsync(json, type, options);
-            };
+            }
+            ;
 
             async Task SerializeObject(Type type, JsonSerializerOptions options)
             {
                 var obj = ObjWCtorMixedParams.GetInstance();
                 await JsonSerializerWrapperForString.SerializeWrapper(obj, options);
-            };
+            }
+            ;
 
             async Task RunTestAsync(Type type)
             {
@@ -76,7 +92,8 @@ namespace System.Text.Json.Serialization.Tests
 
                     // Ensure no exceptions on serialization
                     tasks[i + 3] = Task.Run(() => SerializeObject(type, options));
-                };
+                }
+                ;
 
                 await Task.WhenAll(tasks);
             }
@@ -93,13 +110,19 @@ namespace System.Text.Json.Serialization.Tests
             var options = new JsonSerializerOptions();
 
             string json = "{}";
-            await JsonSerializerWrapperForString.DeserializeWrapper<ObjWCtorMixedParams>(json, options);
+            await JsonSerializerWrapperForString.DeserializeWrapper<ObjWCtorMixedParams>(
+                json,
+                options
+            );
 
             ObjWCtorMixedParams testObj = ObjWCtorMixedParams.GetInstance();
             testObj.Verify();
 
             json = await JsonSerializerWrapperForString.SerializeWrapper(testObj, options);
-            testObj = await JsonSerializerWrapperForString.DeserializeWrapper<ObjWCtorMixedParams>(json, options);
+            testObj = await JsonSerializerWrapperForString.DeserializeWrapper<ObjWCtorMixedParams>(
+                json,
+                options
+            );
             testObj.Verify();
         }
 
@@ -113,11 +136,17 @@ namespace System.Text.Json.Serialization.Tests
             testObj.Verify();
 
             string json = await JsonSerializerWrapperForString.SerializeWrapper(testObj, options);
-            testObj = await JsonSerializerWrapperForString.DeserializeWrapper<ObjWCtorMixedParams>(json, options);
+            testObj = await JsonSerializerWrapperForString.DeserializeWrapper<ObjWCtorMixedParams>(
+                json,
+                options
+            );
             testObj.Verify();
 
             json = "{}";
-            await JsonSerializerWrapperForString.DeserializeWrapper<ObjWCtorMixedParams>(json, options);
+            await JsonSerializerWrapperForString.DeserializeWrapper<ObjWCtorMixedParams>(
+                json,
+                options
+            );
         }
 
         // Use a common options instance to encourage additional metadata collisions across types. Also since
@@ -125,7 +154,10 @@ namespace System.Text.Json.Serialization.Tests
         private JsonSerializerOptions s_options = new JsonSerializerOptions();
 
         [Fact]
-        [SkipOnCoreClr("https://github.com/dotnet/runtime/issues/45464", RuntimeConfiguration.Checked)]
+        [SkipOnCoreClr(
+            "https://github.com/dotnet/runtime/issues/45464",
+            RuntimeConfiguration.Checked
+        )]
         public async Task MultipleTypes()
         {
             async Task Serialize<T>(object[] args)
@@ -135,14 +167,20 @@ namespace System.Text.Json.Serialization.Tests
                 T localTestObj = (T)Activator.CreateInstance(type, args);
                 ((ITestClass)localTestObj).Initialize();
                 ((ITestClass)localTestObj).Verify();
-                string json = await JsonSerializerWrapperForString.SerializeWrapper(localTestObj, s_options);
-            };
+                string json = await JsonSerializerWrapperForString.SerializeWrapper(
+                    localTestObj,
+                    s_options
+                );
+            }
+            ;
 
             async Task DeserializeAsync<T>(string json)
             {
-                ITestClass obj = (ITestClass)await JsonSerializerWrapperForString.DeserializeWrapper<T>(json, s_options);
+                ITestClass obj = (ITestClass)
+                    await JsonSerializerWrapperForString.DeserializeWrapper<T>(json, s_options);
                 obj.Verify();
-            };
+            }
+            ;
 
             async Task RunTestAsync<T>(T testObj, object[] args)
             {
@@ -159,7 +197,8 @@ namespace System.Text.Json.Serialization.Tests
                 {
                     tasks[i + 0] = Task.Run(() => DeserializeAsync<T>(json));
                     tasks[i + 1] = Task.Run(() => Serialize<T>(args));
-                };
+                }
+                ;
 
                 await Task.WhenAll(tasks);
             }

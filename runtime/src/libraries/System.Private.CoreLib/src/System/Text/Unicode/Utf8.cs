@@ -17,7 +17,7 @@ namespace System.Text.Unicode
 #else
     internal
 #endif
-        static class Utf8
+    static class Utf8
     {
         /*
          * OperationStatus-based APIs for transcoding of chunked data.
@@ -47,7 +47,14 @@ namespace System.Text.Unicode
         /// in <paramref name="source"/> will be replaced with U+FFFD in <paramref name="destination"/>, and
         /// this method will not return <see cref="OperationStatus.InvalidData"/>.
         /// </remarks>
-        public static unsafe OperationStatus FromUtf16(ReadOnlySpan<char> source, Span<byte> destination, out int charsRead, out int bytesWritten, bool replaceInvalidSequences = true, bool isFinalBlock = true)
+        public static unsafe OperationStatus FromUtf16(
+            ReadOnlySpan<char> source,
+            Span<byte> destination,
+            out int charsRead,
+            out int bytesWritten,
+            bool replaceInvalidSequences = true,
+            bool isFinalBlock = true
+        )
         {
             // Throwaway span accesses - workaround for https://github.com/dotnet/runtime/issues/12332
 
@@ -70,19 +77,24 @@ namespace System.Text.Unicode
                     // It's safe for us to use Unsafe.AsPointer on them during this loop.
 
                     operationStatus = Utf8Utility.TranscodeToUtf8(
-                        pInputBuffer: (char*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(source)),
+                        pInputBuffer: (char*)
+                            Unsafe.AsPointer(ref MemoryMarshal.GetReference(source)),
                         inputLength: source.Length,
-                        pOutputBuffer: (byte*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(destination)),
+                        pOutputBuffer: (byte*)
+                            Unsafe.AsPointer(ref MemoryMarshal.GetReference(destination)),
                         outputBytesRemaining: destination.Length,
                         pInputBufferRemaining: out pInputBufferRemaining,
-                        pOutputBufferRemaining: out pOutputBufferRemaining);
+                        pOutputBufferRemaining: out pOutputBufferRemaining
+                    );
 
                     // If we finished the operation entirely or we ran out of space in the destination buffer,
                     // or if we need more input data and the caller told us that there's possibly more data
                     // coming, return immediately.
 
-                    if (operationStatus <= OperationStatus.DestinationTooSmall
-                        || (operationStatus == OperationStatus.NeedMoreData && !isFinalBlock))
+                    if (
+                        operationStatus <= OperationStatus.DestinationTooSmall
+                        || (operationStatus == OperationStatus.NeedMoreData && !isFinalBlock)
+                    )
                     {
                         break;
                     }
@@ -100,7 +112,12 @@ namespace System.Text.Unicode
                     // We're going to attempt to write U+FFFD to the destination buffer.
                     // Do we even have enough space to do so?
 
-                    destination = destination.Slice((int)(pOutputBufferRemaining - (byte*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(destination))));
+                    destination = destination.Slice(
+                        (int)(
+                            pOutputBufferRemaining
+                            - (byte*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(destination))
+                        )
+                    );
 
                     if (destination.Length <= 2)
                     {
@@ -115,11 +132,18 @@ namespace System.Text.Unicode
 
                     // Invalid UTF-16 sequences are always of length 1. Just skip the next character.
 
-                    source = source.Slice((int)(pInputBufferRemaining - (char*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(source))) + 1);
+                    source = source.Slice(
+                        (int)(
+                            pInputBufferRemaining
+                            - (char*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(source))
+                        ) + 1
+                    );
 
                     operationStatus = OperationStatus.Done; // we patched the error - if we're about to break out of the loop this is a success case
-                    pInputBufferRemaining = (char*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(source));
-                    pOutputBufferRemaining = (byte*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(destination));
+                    pInputBufferRemaining = (char*)
+                        Unsafe.AsPointer(ref MemoryMarshal.GetReference(source));
+                    pOutputBufferRemaining = (byte*)
+                        Unsafe.AsPointer(ref MemoryMarshal.GetReference(destination));
                 }
 
                 // Not possible to make any further progress - report to our caller how far we got.
@@ -138,7 +162,14 @@ namespace System.Text.Unicode
         /// in <paramref name="source"/> will be replaced with U+FFFD in <paramref name="destination"/>, and
         /// this method will not return <see cref="OperationStatus.InvalidData"/>.
         /// </remarks>
-        public static unsafe OperationStatus ToUtf16(ReadOnlySpan<byte> source, Span<char> destination, out int bytesRead, out int charsWritten, bool replaceInvalidSequences = true, bool isFinalBlock = true)
+        public static unsafe OperationStatus ToUtf16(
+            ReadOnlySpan<byte> source,
+            Span<char> destination,
+            out int bytesRead,
+            out int charsWritten,
+            bool replaceInvalidSequences = true,
+            bool isFinalBlock = true
+        )
         {
             // Throwaway span accesses - workaround for https://github.com/dotnet/runtime/issues/12332
 
@@ -163,19 +194,24 @@ namespace System.Text.Unicode
                     // It's safe for us to use Unsafe.AsPointer on them during this loop.
 
                     operationStatus = Utf8Utility.TranscodeToUtf16(
-                        pInputBuffer: (byte*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(source)),
+                        pInputBuffer: (byte*)
+                            Unsafe.AsPointer(ref MemoryMarshal.GetReference(source)),
                         inputLength: source.Length,
-                        pOutputBuffer: (char*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(destination)),
+                        pOutputBuffer: (char*)
+                            Unsafe.AsPointer(ref MemoryMarshal.GetReference(destination)),
                         outputCharsRemaining: destination.Length,
                         pInputBufferRemaining: out pInputBufferRemaining,
-                        pOutputBufferRemaining: out pOutputBufferRemaining);
+                        pOutputBufferRemaining: out pOutputBufferRemaining
+                    );
 
                     // If we finished the operation entirely or we ran out of space in the destination buffer,
                     // or if we need more input data and the caller told us that there's possibly more data
                     // coming, return immediately.
 
-                    if (operationStatus <= OperationStatus.DestinationTooSmall
-                        || (operationStatus == OperationStatus.NeedMoreData && !isFinalBlock))
+                    if (
+                        operationStatus <= OperationStatus.DestinationTooSmall
+                        || (operationStatus == OperationStatus.NeedMoreData && !isFinalBlock)
+                    )
                     {
                         break;
                     }
@@ -193,7 +229,12 @@ namespace System.Text.Unicode
                     // We're going to attempt to write U+FFFD to the destination buffer.
                     // Do we even have enough space to do so?
 
-                    destination = destination.Slice((int)(pOutputBufferRemaining - (char*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(destination))));
+                    destination = destination.Slice(
+                        (int)(
+                            pOutputBufferRemaining
+                            - (char*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(destination))
+                        )
+                    );
 
                     if (destination.IsEmpty)
                     {
@@ -207,15 +248,22 @@ namespace System.Text.Unicode
                     // Now figure out how many bytes of the source we must skip over before we should retry
                     // the operation. This might be more than 1 byte.
 
-                    source = source.Slice((int)(pInputBufferRemaining - (byte*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(source))));
+                    source = source.Slice(
+                        (int)(
+                            pInputBufferRemaining
+                            - (byte*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(source))
+                        )
+                    );
                     Debug.Assert(!source.IsEmpty, "Expected 'Done' if source is fully consumed.");
 
                     Rune.DecodeFromUtf8(source, out _, out int bytesConsumedJustNow);
                     source = source.Slice(bytesConsumedJustNow);
 
                     operationStatus = OperationStatus.Done; // we patched the error - if we're about to break out of the loop this is a success case
-                    pInputBufferRemaining = (byte*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(source));
-                    pOutputBufferRemaining = (char*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(destination));
+                    pInputBufferRemaining = (byte*)
+                        Unsafe.AsPointer(ref MemoryMarshal.GetReference(source));
+                    pOutputBufferRemaining = (char*)
+                        Unsafe.AsPointer(ref MemoryMarshal.GetReference(destination));
                 }
 
                 // Not possible to make any further progress - report to our caller how far we got.

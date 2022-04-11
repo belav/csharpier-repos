@@ -26,7 +26,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
         /// </summary>
         /// <param name="windowCaption">The name of the window. Generally this will be something like
         /// "'Alpha' references" or "'Beta' implementations".</param>
-        /// <returns>An array of <see cref="Reference"/> items capturing the current contents of the 
+        /// <returns>An array of <see cref="Reference"/> items capturing the current contents of the
         /// Find References window.</returns>
         public Reference[] GetContents(string windowCaption)
         {
@@ -34,7 +34,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
             // Go to Definition/Go to Implementation are synchronous so we don't need to wait for them
             // (and currently can't, anyway); if they are made asynchronous we will need to wait for
             // them here as well.
-            VisualStudioInstance.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.FindReferences);
+            VisualStudioInstance.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.FindReferences
+            );
 
             return _inProc.GetContents(windowCaption);
         }

@@ -23,7 +23,9 @@ namespace Microsoft.EntityFrameworkCore
                 context.Database.EnsureCreated();
 
                 context.AddRange(
-                    new Blog { Name = "One Unicorn" }, new Blog { Name = "Two Unicorns" });
+                    new Blog { Name = "One Unicorn" },
+                    new Blog { Name = "Two Unicorns" }
+                );
 
                 context.SaveChanges();
             }
@@ -39,29 +41,34 @@ namespace Microsoft.EntityFrameworkCore
 
         public class BlogContextIdentity : ContextBase
         {
-            public BlogContextIdentity(string databaseName)
-                : base(databaseName)
-            {
-            }
+            public BlogContextIdentity(string databaseName) : base(databaseName) { }
         }
 
         [ConditionalFact]
         public void Insert_uint_to_Identity_column_using_value_converter()
         {
-            using (var context = new BlogContextUIntToIdentityUsingValueConverter(
-                nameof(Insert_uint_to_Identity_column_using_value_converter)))
+            using (
+                var context = new BlogContextUIntToIdentityUsingValueConverter(
+                    nameof(Insert_uint_to_Identity_column_using_value_converter)
+                )
+            )
             {
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
 
                 context.AddRange(
-                    new BlogWithUIntKey { Name = "One Unicorn" }, new BlogWithUIntKey { Name = "Two Unicorns" });
+                    new BlogWithUIntKey { Name = "One Unicorn" },
+                    new BlogWithUIntKey { Name = "Two Unicorns" }
+                );
 
                 context.SaveChanges();
             }
 
-            using (var context = new BlogContextUIntToIdentityUsingValueConverter(
-                nameof(Insert_uint_to_Identity_column_using_value_converter)))
+            using (
+                var context = new BlogContextUIntToIdentityUsingValueConverter(
+                    nameof(Insert_uint_to_Identity_column_using_value_converter)
+                )
+            )
             {
                 var blogs = context.UnsignedBlogs.OrderBy(e => e.Id).ToList();
 
@@ -73,9 +80,7 @@ namespace Microsoft.EntityFrameworkCore
         public class BlogContextUIntToIdentityUsingValueConverter : ContextBase
         {
             public BlogContextUIntToIdentityUsingValueConverter(string databaseName)
-                : base(databaseName)
-            {
-            }
+                : base(databaseName) { }
 
             public DbSet<BlogWithUIntKey> UnsignedBlogs { get; set; }
 
@@ -83,10 +88,7 @@ namespace Microsoft.EntityFrameworkCore
             {
                 base.OnModelCreating(modelBuilder);
 
-                modelBuilder
-                    .Entity<BlogWithUIntKey>()
-                    .Property(e => e.Id)
-                    .HasConversion<int>();
+                modelBuilder.Entity<BlogWithUIntKey>().Property(e => e.Id).HasConversion<int>();
             }
         }
 
@@ -99,18 +101,28 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Insert_int_enum_to_Identity_column()
         {
-            using (var context = new BlogContextIntEnumToIdentity(nameof(Insert_int_enum_to_Identity_column)))
+            using (
+                var context = new BlogContextIntEnumToIdentity(
+                    nameof(Insert_int_enum_to_Identity_column)
+                )
+            )
             {
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
 
                 context.AddRange(
-                    new BlogWithIntEnumKey { Name = "One Unicorn" }, new BlogWithIntEnumKey { Name = "Two Unicorns" });
+                    new BlogWithIntEnumKey { Name = "One Unicorn" },
+                    new BlogWithIntEnumKey { Name = "Two Unicorns" }
+                );
 
                 context.SaveChanges();
             }
 
-            using (var context = new BlogContextIntEnumToIdentity(nameof(Insert_int_enum_to_Identity_column)))
+            using (
+                var context = new BlogContextIntEnumToIdentity(
+                    nameof(Insert_int_enum_to_Identity_column)
+                )
+            )
             {
                 var blogs = context.EnumBlogs.OrderBy(e => e.Id).ToList();
 
@@ -121,10 +133,7 @@ namespace Microsoft.EntityFrameworkCore
 
         public class BlogContextIntEnumToIdentity : ContextBase
         {
-            public BlogContextIntEnumToIdentity(string databaseName)
-                : base(databaseName)
-            {
-            }
+            public BlogContextIntEnumToIdentity(string databaseName) : base(databaseName) { }
 
             public DbSet<BlogWithIntEnumKey> EnumBlogs { get; set; }
 
@@ -132,10 +141,7 @@ namespace Microsoft.EntityFrameworkCore
             {
                 base.OnModelCreating(modelBuilder);
 
-                modelBuilder
-                    .Entity<BlogWithIntEnumKey>()
-                    .Property(e => e.Id)
-                    .ValueGeneratedOnAdd();
+                modelBuilder.Entity<BlogWithIntEnumKey>().Property(e => e.Id).ValueGeneratedOnAdd();
             }
         }
 
@@ -145,25 +151,33 @@ namespace Microsoft.EntityFrameworkCore
             public string Name { get; set; }
         }
 
-        public enum IntKey
-        {
-        }
+        public enum IntKey { }
 
         [ConditionalFact]
         public void Insert_ushort_enum_to_Identity_column()
         {
-            using (var context = new BlogContextUShortEnumToIdentity(nameof(Insert_ushort_enum_to_Identity_column)))
+            using (
+                var context = new BlogContextUShortEnumToIdentity(
+                    nameof(Insert_ushort_enum_to_Identity_column)
+                )
+            )
             {
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
 
                 context.AddRange(
-                    new BlogWithUShortEnumKey { Name = "One Unicorn" }, new BlogWithUShortEnumKey { Name = "Two Unicorns" });
+                    new BlogWithUShortEnumKey { Name = "One Unicorn" },
+                    new BlogWithUShortEnumKey { Name = "Two Unicorns" }
+                );
 
                 context.SaveChanges();
             }
 
-            using (var context = new BlogContextUShortEnumToIdentity(nameof(Insert_ushort_enum_to_Identity_column)))
+            using (
+                var context = new BlogContextUShortEnumToIdentity(
+                    nameof(Insert_ushort_enum_to_Identity_column)
+                )
+            )
             {
                 var blogs = context.EnumBlogs.OrderBy(e => e.Id).ToList();
 
@@ -174,10 +188,7 @@ namespace Microsoft.EntityFrameworkCore
 
         public class BlogContextUShortEnumToIdentity : ContextBase
         {
-            public BlogContextUShortEnumToIdentity(string databaseName)
-                : base(databaseName)
-            {
-            }
+            public BlogContextUShortEnumToIdentity(string databaseName) : base(databaseName) { }
 
             public DbSet<BlogWithUShortEnumKey> EnumBlogs { get; set; }
 
@@ -198,27 +209,33 @@ namespace Microsoft.EntityFrameworkCore
             public string Name { get; set; }
         }
 
-        public enum UShortKey : ushort
-        {
-        }
+        public enum UShortKey : ushort { }
 
         [ConditionalFact]
         public void Insert_string_to_Identity_column_using_value_converter()
         {
-            using (var context = new BlogContextStringToIdentityUsingValueConverter(
-                nameof(Insert_string_to_Identity_column_using_value_converter)))
+            using (
+                var context = new BlogContextStringToIdentityUsingValueConverter(
+                    nameof(Insert_string_to_Identity_column_using_value_converter)
+                )
+            )
             {
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
 
                 context.AddRange(
-                    new BlogWithStringKey { Name = "One Unicorn" }, new BlogWithStringKey { Name = "Two Unicorns" });
+                    new BlogWithStringKey { Name = "One Unicorn" },
+                    new BlogWithStringKey { Name = "Two Unicorns" }
+                );
 
                 context.SaveChanges();
             }
 
-            using (var context = new BlogContextStringToIdentityUsingValueConverter(
-                nameof(Insert_string_to_Identity_column_using_value_converter)))
+            using (
+                var context = new BlogContextStringToIdentityUsingValueConverter(
+                    nameof(Insert_string_to_Identity_column_using_value_converter)
+                )
+            )
             {
                 var blogs = context.StringyBlogs.OrderBy(e => e.Id).ToList();
 
@@ -230,9 +247,7 @@ namespace Microsoft.EntityFrameworkCore
         public class BlogContextStringToIdentityUsingValueConverter : ContextBase
         {
             public BlogContextStringToIdentityUsingValueConverter(string databaseName)
-                : base(databaseName)
-            {
-            }
+                : base(databaseName) { }
 
             public DbSet<BlogWithStringKey> StringyBlogs { get; set; }
 
@@ -246,10 +261,9 @@ namespace Microsoft.EntityFrameworkCore
                     .Property(e => e.Id)
                     .HasValueGenerator<TemporaryStringValueGenerator>()
                     .HasConversion(
-                        v => Guid.TryParse(v, out guid)
-                            ? default
-                            : int.Parse(v),
-                        v => v.ToString())
+                        v => Guid.TryParse(v, out guid) ? default : int.Parse(v),
+                        v => v.ToString()
+                    )
                     .ValueGeneratedOnAdd();
             }
         }
@@ -263,18 +277,28 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Insert_with_explicit_non_default_keys()
         {
-            using (var context = new BlogContextNoKeyGeneration(nameof(Insert_with_explicit_non_default_keys)))
+            using (
+                var context = new BlogContextNoKeyGeneration(
+                    nameof(Insert_with_explicit_non_default_keys)
+                )
+            )
             {
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
 
                 context.AddRange(
-                    new Blog { Id = 66, Name = "One Unicorn" }, new Blog { Id = 67, Name = "Two Unicorns" });
+                    new Blog { Id = 66, Name = "One Unicorn" },
+                    new Blog { Id = 67, Name = "Two Unicorns" }
+                );
 
                 context.SaveChanges();
             }
 
-            using (var context = new BlogContextNoKeyGeneration(nameof(Insert_with_explicit_non_default_keys)))
+            using (
+                var context = new BlogContextNoKeyGeneration(
+                    nameof(Insert_with_explicit_non_default_keys)
+                )
+            )
             {
                 var blogs = context.Blogs.OrderBy(e => e.Id).ToList();
 
@@ -285,38 +309,41 @@ namespace Microsoft.EntityFrameworkCore
 
         public class BlogContextNoKeyGeneration : ContextBase
         {
-            public BlogContextNoKeyGeneration(string databaseName)
-                : base(databaseName)
-            {
-            }
+            public BlogContextNoKeyGeneration(string databaseName) : base(databaseName) { }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
                 base.OnModelCreating(modelBuilder);
 
-                modelBuilder
-                    .Entity<Blog>()
-                    .Property(e => e.Id)
-                    .ValueGeneratedNever();
+                modelBuilder.Entity<Blog>().Property(e => e.Id).ValueGeneratedNever();
             }
         }
 
         [ConditionalFact]
         public void Insert_with_explicit_with_default_keys()
         {
-            using (var context = new BlogContextNoKeyGenerationNullableKey(nameof(Insert_with_explicit_with_default_keys)))
+            using (
+                var context = new BlogContextNoKeyGenerationNullableKey(
+                    nameof(Insert_with_explicit_with_default_keys)
+                )
+            )
             {
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
 
                 context.AddRange(
                     new NullableKeyBlog { Id = 0, Name = "One Unicorn" },
-                    new NullableKeyBlog { Id = 1, Name = "Two Unicorns" });
+                    new NullableKeyBlog { Id = 1, Name = "Two Unicorns" }
+                );
 
                 context.SaveChanges();
             }
 
-            using (var context = new BlogContextNoKeyGenerationNullableKey(nameof(Insert_with_explicit_with_default_keys)))
+            using (
+                var context = new BlogContextNoKeyGenerationNullableKey(
+                    nameof(Insert_with_explicit_with_default_keys)
+                )
+            )
             {
                 var blogs = context.NullableKeyBlogs.OrderBy(e => e.Id).ToList();
 
@@ -327,26 +354,25 @@ namespace Microsoft.EntityFrameworkCore
 
         public class BlogContextNoKeyGenerationNullableKey : ContextBase
         {
-            public BlogContextNoKeyGenerationNullableKey(string databaseName)
-                : base(databaseName)
-            {
-            }
+            public BlogContextNoKeyGenerationNullableKey(string databaseName) : base(databaseName)
+            { }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
                 base.OnModelCreating(modelBuilder);
 
-                modelBuilder
-                    .Entity<NullableKeyBlog>()
-                    .Property(e => e.Id)
-                    .ValueGeneratedNever();
+                modelBuilder.Entity<NullableKeyBlog>().Property(e => e.Id).ValueGeneratedNever();
             }
         }
 
         [ConditionalFact]
         public void Insert_with_non_key_default_value()
         {
-            using (var context = new BlogContextNonKeyDefaultValue(nameof(Insert_with_non_key_default_value)))
+            using (
+                var context = new BlogContextNonKeyDefaultValue(
+                    nameof(Insert_with_non_key_default_value)
+                )
+            )
             {
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
@@ -371,7 +397,11 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Equal(111, blogs[1].NeedsConverter.Value);
             }
 
-            using (var context = new BlogContextNonKeyDefaultValue(nameof(Insert_with_non_key_default_value)))
+            using (
+                var context = new BlogContextNonKeyDefaultValue(
+                    nameof(Insert_with_non_key_default_value)
+                )
+            )
             {
                 var blogs = context.Blogs.OrderBy(e => e.Name).ToList();
                 Assert.Equal(3, blogs.Count);
@@ -391,7 +421,11 @@ namespace Microsoft.EntityFrameworkCore
                 context.SaveChanges();
             }
 
-            using (var context = new BlogContextNonKeyDefaultValue(nameof(Insert_with_non_key_default_value)))
+            using (
+                var context = new BlogContextNonKeyDefaultValue(
+                    nameof(Insert_with_non_key_default_value)
+                )
+            )
             {
                 var blogs = context.Blogs.OrderBy(e => e.Name).ToList();
                 Assert.Equal(3, blogs.Count);
@@ -406,10 +440,7 @@ namespace Microsoft.EntityFrameworkCore
 
         public class BlogContextNonKeyDefaultValue : ContextBase
         {
-            public BlogContextNonKeyDefaultValue(string databaseName)
-                : base(databaseName)
-            {
-            }
+            public BlogContextNonKeyDefaultValue(string databaseName) : base(databaseName) { }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
@@ -427,22 +458,29 @@ namespace Microsoft.EntityFrameworkCore
                                 Name = "W Unicorns",
                                 CreatedOn = new DateTime(1974, 8, 3, 0, 10, 0),
                                 NeedsConverter = new NeedsConverter(111),
-                            });
-                    });
+                            }
+                        );
+                    }
+                );
             }
         }
 
         [ConditionalFact]
         public void Insert_with_non_key_default_value_readonly()
         {
-            using (var context = new BlogContextNonKeyReadOnlyDefaultValue(nameof(Insert_with_non_key_default_value_readonly)))
+            using (
+                var context = new BlogContextNonKeyReadOnlyDefaultValue(
+                    nameof(Insert_with_non_key_default_value_readonly)
+                )
+            )
             {
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
 
                 context.AddRange(
                     new Blog { Name = "One Unicorn" },
-                    new Blog { Name = "Two Unicorns" });
+                    new Blog { Name = "Two Unicorns" }
+                );
 
                 context.SaveChanges();
 
@@ -451,7 +489,11 @@ namespace Microsoft.EntityFrameworkCore
 
             DateTime dateTime0;
 
-            using (var context = new BlogContextNonKeyReadOnlyDefaultValue(nameof(Insert_with_non_key_default_value_readonly)))
+            using (
+                var context = new BlogContextNonKeyReadOnlyDefaultValue(
+                    nameof(Insert_with_non_key_default_value_readonly)
+                )
+            )
             {
                 var blogs = context.Blogs.OrderBy(e => e.Id).ToList();
 
@@ -466,7 +508,11 @@ namespace Microsoft.EntityFrameworkCore
                 context.SaveChanges();
             }
 
-            using (var context = new BlogContextNonKeyReadOnlyDefaultValue(nameof(Insert_with_non_key_default_value_readonly)))
+            using (
+                var context = new BlogContextNonKeyReadOnlyDefaultValue(
+                    nameof(Insert_with_non_key_default_value_readonly)
+                )
+            )
             {
                 var blogs = context.Blogs.OrderBy(e => e.Id).ToList();
 
@@ -477,16 +523,15 @@ namespace Microsoft.EntityFrameworkCore
 
         public class BlogContextNonKeyReadOnlyDefaultValue : ContextBase
         {
-            public BlogContextNonKeyReadOnlyDefaultValue(string databaseName)
-                : base(databaseName)
-            {
-            }
+            public BlogContextNonKeyReadOnlyDefaultValue(string databaseName) : base(databaseName)
+            { }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
                 base.OnModelCreating(modelBuilder);
 
-                modelBuilder.Entity<Blog>()
+                modelBuilder
+                    .Entity<Blog>()
                     .Property(e => e.CreatedOn)
                     .HasDefaultValueSql("CURRENT_TIMESTAMP")
                     .Metadata.SetBeforeSaveBehavior(PropertySaveBehavior.Throw);
@@ -497,13 +542,16 @@ namespace Microsoft.EntityFrameworkCore
         public void Insert_with_client_generated_GUID_key()
         {
             Guid afterSave;
-            using (var context = new BlogContextClientGuidKey(nameof(Insert_with_client_generated_GUID_key)))
+            using (
+                var context = new BlogContextClientGuidKey(
+                    nameof(Insert_with_client_generated_GUID_key)
+                )
+            )
             {
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
 
-                var blog = context.Add(
-                    new GuidBlog { Name = "One Unicorn" }).Entity;
+                var blog = context.Add(new GuidBlog { Name = "One Unicorn" }).Entity;
 
                 var beforeSave = blog.Id;
                 var beforeSaveNotId = blog.NotId;
@@ -520,7 +568,11 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Equal(beforeSaveNotId, afterSaveNotId);
             }
 
-            using (var context = new BlogContextClientGuidKey(nameof(Insert_with_client_generated_GUID_key)))
+            using (
+                var context = new BlogContextClientGuidKey(
+                    nameof(Insert_with_client_generated_GUID_key)
+                )
+            )
             {
                 Assert.Equal(afterSave, context.GuidBlogs.Single().Id);
             }
@@ -528,10 +580,7 @@ namespace Microsoft.EntityFrameworkCore
 
         public class BlogContextClientGuidKey : ContextBase
         {
-            public BlogContextClientGuidKey(string databaseName)
-                : base(databaseName)
-            {
-            }
+            public BlogContextClientGuidKey(string databaseName) : base(databaseName) { }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
@@ -542,16 +591,14 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         eb.HasAlternateKey(e => e.NotId);
                         eb.Property(e => e.NotId).ValueGeneratedOnAdd();
-                    });
+                    }
+                );
             }
         }
 
         public class BlogContextClientGuidNonKey : ContextBase
         {
-            public BlogContextClientGuidNonKey(string databaseName)
-                : base(databaseName)
-            {
-            }
+            public BlogContextClientGuidNonKey(string databaseName) : base(databaseName) { }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
@@ -569,7 +616,9 @@ namespace Microsoft.EntityFrameworkCore
             context.Database.EnsureCreated();
 
             context.AddRange(
-                new Blog { Id = 0, Name = "One Unicorn" }, new Blog { Id = 1, Name = "Two Unicorns" });
+                new Blog { Id = 0, Name = "One Unicorn" },
+                new Blog { Id = 1, Name = "Two Unicorns" }
+            );
 
             // DbUpdateException : An error occurred while updating the entries. See the
             // inner exception for details.
@@ -581,27 +630,34 @@ namespace Microsoft.EntityFrameworkCore
 
         public class BlogContext : ContextBase
         {
-            public BlogContext(string databaseName)
-                : base(databaseName)
-            {
-            }
+            public BlogContext(string databaseName) : base(databaseName) { }
         }
 
         [ConditionalFact]
         public void Insert_with_implicit_default_keys()
         {
-            using (var context = new BlogContextSpecifyKeysUsingDefault(nameof(Insert_with_implicit_default_keys)))
+            using (
+                var context = new BlogContextSpecifyKeysUsingDefault(
+                    nameof(Insert_with_implicit_default_keys)
+                )
+            )
             {
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
 
                 context.AddRange(
-                    new Blog { Id = 0, Name = "One Unicorn" }, new Blog { Id = 1, Name = "Two Unicorns" });
+                    new Blog { Id = 0, Name = "One Unicorn" },
+                    new Blog { Id = 1, Name = "Two Unicorns" }
+                );
 
                 context.SaveChanges();
             }
 
-            using (var context = new BlogContextSpecifyKeysUsingDefault(nameof(Insert_with_implicit_default_keys)))
+            using (
+                var context = new BlogContextSpecifyKeysUsingDefault(
+                    nameof(Insert_with_implicit_default_keys)
+                )
+            )
             {
                 var blogs = context.Blogs.OrderBy(e => e.Id).ToList();
 
@@ -612,38 +668,36 @@ namespace Microsoft.EntityFrameworkCore
 
         public class BlogContextSpecifyKeysUsingDefault : ContextBase
         {
-            public BlogContextSpecifyKeysUsingDefault(string databaseName)
-                : base(databaseName)
-            {
-            }
+            public BlogContextSpecifyKeysUsingDefault(string databaseName) : base(databaseName) { }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
                 base.OnModelCreating(modelBuilder);
 
-                modelBuilder
-                    .Entity<Blog>()
-                    .Property(e => e.Id)
-                    .ValueGeneratedNever();
+                modelBuilder.Entity<Blog>().Property(e => e.Id).ValueGeneratedNever();
             }
         }
 
         [ConditionalFact]
         public void Insert_explicit_value_throws_when_readonly_before_save()
         {
-            using var context = new BlogContextNonKeyReadOnlyDefaultValue(nameof(Insert_explicit_value_throws_when_readonly_before_save));
+            using var context = new BlogContextNonKeyReadOnlyDefaultValue(
+                nameof(Insert_explicit_value_throws_when_readonly_before_save)
+            );
             context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
 
             context.AddRange(
                 new Blog { Name = "One Unicorn" },
-                new Blog { Name = "Two Unicorns", CreatedOn = new DateTime(1969, 8, 3, 0, 10, 0) });
+                new Blog { Name = "Two Unicorns", CreatedOn = new DateTime(1969, 8, 3, 0, 10, 0) }
+            );
 
             // The property 'CreatedOn' on entity type 'Blog' is defined to be read-only before it is
             // saved, but its value has been set to something other than a temporary or default value.
             Assert.Equal(
                 CoreStrings.PropertyReadOnlyBeforeSave("CreatedOn", "Blog"),
-                Assert.Throws<InvalidOperationException>(() => context.SaveChanges()).Message);
+                Assert.Throws<InvalidOperationException>(() => context.SaveChanges()).Message
+            );
         }
 
         public class Blog
@@ -657,16 +711,13 @@ namespace Microsoft.EntityFrameworkCore
 
         public class NeedsConverter
         {
-            public NeedsConverter(int value)
-                => Value = value;
+            public NeedsConverter(int value) => Value = value;
 
             public int Value { get; }
 
-            public override bool Equals(object obj)
-                => throw new InvalidOperationException();
+            public override bool Equals(object obj) => throw new InvalidOperationException();
 
-            public override int GetHashCode()
-                => throw new InvalidOperationException();
+            public override int GetHashCode() => throw new InvalidOperationException();
         }
 
         public class NullableKeyBlog
@@ -715,7 +766,8 @@ namespace Microsoft.EntityFrameworkCore
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Blog>()
+                modelBuilder
+                    .Entity<Blog>()
                     .Property(e => e.NeedsConverter)
                     .HasConversion(
                         v => v.Value,
@@ -723,12 +775,14 @@ namespace Microsoft.EntityFrameworkCore
                         new ValueComparer<NeedsConverter>(
                             (l, r) => l.Value == r.Value,
                             v => v.Value.GetHashCode(),
-                            v => new NeedsConverter(v.Value)))
+                            v => new NeedsConverter(v.Value)
+                        )
+                    )
                     .HasDefaultValue(new NeedsConverter(999));
             }
 
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder
+            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+                optionsBuilder
                     .EnableServiceProviderCaching(false)
                     .UseSqlite($"DataSource = {_databaseName}.db");
         }

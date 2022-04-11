@@ -15,10 +15,16 @@ internal static partial class Interop
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_RecursiveFreeX509Stack")]
         internal static extern void RecursiveFreeX509Stack(IntPtr stack);
 
-        [GeneratedDllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_GetX509StackFieldCount")]
+        [GeneratedDllImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_GetX509StackFieldCount"
+        )]
         internal static partial int GetX509StackFieldCount(SafeX509StackHandle stack);
 
-        [GeneratedDllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_GetX509StackFieldCount")]
+        [GeneratedDllImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_GetX509StackFieldCount"
+        )]
         internal static partial int GetX509StackFieldCount(SafeSharedX509StackHandle stack);
 
         /// <summary>
@@ -36,7 +42,10 @@ internal static partial class Interop
         internal static partial IntPtr GetX509StackField(SafeSharedX509StackHandle stack, int loc);
 
         [GeneratedDllImport(Libraries.CryptoNative, CharSet = CharSet.Ansi)]
-        private static partial int CryptoNative_X509StackAddDirectoryStore(SafeX509StackHandle stack, string storePath);
+        private static partial int CryptoNative_X509StackAddDirectoryStore(
+            SafeX509StackHandle stack,
+            string storePath
+        );
 
         internal static void X509StackAddDirectoryStore(SafeX509StackHandle stack, string storePath)
         {
@@ -47,7 +56,10 @@ internal static partial class Interop
         }
 
         [GeneratedDllImport(Libraries.CryptoNative)]
-        private static partial int CryptoNative_X509StackAddMultiple(SafeX509StackHandle dest, SafeX509StackHandle src);
+        private static partial int CryptoNative_X509StackAddMultiple(
+            SafeX509StackHandle dest,
+            SafeX509StackHandle src
+        );
 
         internal static void X509StackAddMultiple(SafeX509StackHandle dest, SafeX509StackHandle src)
         {
@@ -63,10 +75,7 @@ namespace Microsoft.Win32.SafeHandles
 {
     internal sealed class SafeX509StackHandle : SafeHandle
     {
-        public SafeX509StackHandle() :
-            base(IntPtr.Zero, ownsHandle: true)
-        {
-        }
+        public SafeX509StackHandle() : base(IntPtr.Zero, ownsHandle: true) { }
 
         protected override bool ReleaseHandle()
         {
@@ -98,11 +107,9 @@ namespace Microsoft.Win32.SafeHandles
     /// </summary>
     internal sealed class SafeSharedX509StackHandle : SafeInteriorHandle
     {
-        internal static readonly SafeSharedX509StackHandle InvalidHandle = new SafeSharedX509StackHandle();
+        internal static readonly SafeSharedX509StackHandle InvalidHandle =
+            new SafeSharedX509StackHandle();
 
-        public SafeSharedX509StackHandle() :
-            base(IntPtr.Zero, ownsHandle: true)
-        {
-        }
+        public SafeSharedX509StackHandle() : base(IntPtr.Zero, ownsHandle: true) { }
     }
 }

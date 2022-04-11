@@ -16,17 +16,19 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     {
         private const string FeatureName = "DiagnosticOptions";
 
-        public static readonly Option2<bool> LspPullDiagnosticsFeatureFlag = new(
-            FeatureName, nameof(LspPullDiagnosticsFeatureFlag), defaultValue: false,
-            new FeatureFlagStorageLocation("Lsp.PullDiagnostics"));
+        public static readonly Option2<bool> LspPullDiagnosticsFeatureFlag =
+            new(
+                FeatureName,
+                nameof(LspPullDiagnosticsFeatureFlag),
+                defaultValue: false,
+                new FeatureFlagStorageLocation("Lsp.PullDiagnostics")
+            );
 
-        public ImmutableArray<IOption> Options { get; } = ImmutableArray.Create<IOption>(
-            LspPullDiagnosticsFeatureFlag);
+        public ImmutableArray<IOption> Options { get; } =
+            ImmutableArray.Create<IOption>(LspPullDiagnosticsFeatureFlag);
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DiagnosticOptions()
-        {
-        }
+        public DiagnosticOptions() { }
     }
 }

@@ -18,11 +18,14 @@ namespace System.IO.Pipelines.Tests
             _maxWrites = maxWrites;
         }
 
-        public override void Write(byte[] buffer, int offset, int count)
-        {
-        }
+        public override void Write(byte[] buffer, int offset, int count) { }
 
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             if (_writes >= _maxWrites)
             {
@@ -33,7 +36,10 @@ namespace System.IO.Pipelines.Tests
         }
 
 #if NETCOREAPP
-        public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
+        public override ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             if (_writes >= _maxWrites)
             {

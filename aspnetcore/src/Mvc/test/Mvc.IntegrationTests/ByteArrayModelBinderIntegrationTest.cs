@@ -41,7 +41,8 @@ public class ByteArrayModelBinderIntegrationTest
             request =>
             {
                 request.QueryString = QueryString.Create(queryStringKey, value);
-            });
+            }
+        );
         var modelState = testContext.ModelState;
 
         // Act
@@ -77,11 +78,7 @@ public class ByteArrayModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "Parameter1",
-            BindingInfo = new BindingInfo()
-            {
-                BinderModelName = "CustomParameter",
-            },
-
+            BindingInfo = new BindingInfo() { BinderModelName = "CustomParameter", },
             ParameterType = typeof(byte[])
         };
 
@@ -110,10 +107,7 @@ public class ByteArrayModelBinderIntegrationTest
         var parameter = new ParameterDescriptor
         {
             Name = "Parameter1",
-            BindingInfo = new BindingInfo
-            {
-                BinderModelName = "CustomParameter",
-            },
+            BindingInfo = new BindingInfo { BinderModelName = "CustomParameter", },
             ParameterType = typeof(byte[])
         };
 
@@ -124,7 +118,8 @@ public class ByteArrayModelBinderIntegrationTest
             request =>
             {
                 request.QueryString = QueryString.Create("CustomParameter", value);
-            });
+            }
+        );
 
         var modelState = testContext.ModelState;
 

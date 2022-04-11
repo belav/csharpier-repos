@@ -13,31 +13,38 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
     {
         public const int CommandTimeout = 30;
 
-        public static SqliteTestStore GetOrCreate(string name, bool sharedCache = true)
-            => new(name, sharedCache: sharedCache);
+        public static SqliteTestStore GetOrCreate(string name, bool sharedCache = true) =>
+            new(name, sharedCache: sharedCache);
 
-        public static SqliteTestStore GetOrCreateInitialized(string name)
-            => new SqliteTestStore(name).InitializeSqlite(
-                new ServiceCollection().AddEntityFrameworkSqlite().BuildServiceProvider(validateScopes: true),
+        public static SqliteTestStore GetOrCreateInitialized(string name) =>
+            new SqliteTestStore(name).InitializeSqlite(
+                new ServiceCollection()
+                    .AddEntityFrameworkSqlite()
+                    .BuildServiceProvider(validateScopes: true),
                 (Func<DbContext>)null,
-                null);
+                null
+            );
 
-        public static SqliteTestStore GetExisting(string name)
-            => new(name, seed: false);
+        public static SqliteTestStore GetExisting(string name) => new(name, seed: false);
 
-        public static SqliteTestStore Create(string name, bool sharedCache = true)
-            => new(name, sharedCache: sharedCache, shared: false);
+        public static SqliteTestStore Create(string name, bool sharedCache = true) =>
+            new(name, sharedCache: sharedCache, shared: false);
 
         private readonly bool _seed;
 
-        private SqliteTestStore(string name, bool seed = true, bool sharedCache = true, bool shared = true)
-            : base(name, shared)
+        private SqliteTestStore(
+            string name,
+            bool seed = true,
+            bool sharedCache = true,
+            bool shared = true
+        ) : base(name, shared)
         {
             _seed = seed;
 
             ConnectionString = new SqliteConnectionStringBuilder
             {
-                DataSource = Name + ".db", Cache = sharedCache ? SqliteCacheMode.Shared : SqliteCacheMode.Private
+                DataSource = Name + ".db",
+                Cache = sharedCache ? SqliteCacheMode.Shared : SqliteCacheMode.Private
             }.ToString();
 
             var connection = new SqliteConnection(ConnectionString);
@@ -46,28 +53,39 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
         public virtual DbContextOptionsBuilder AddProviderOptions(
             DbContextOptionsBuilder builder,
-            Action<SqliteDbContextOptionsBuilder> configureSqlite)
-            => builder.UseSqlite(
-                Connection, b =>
+            Action<SqliteDbContextOptionsBuilder> configureSqlite
+        ) =>
+            builder.UseSqlite(
+                Connection,
+                b =>
                 {
                     b.CommandTimeout(CommandTimeout);
                     b.UseQuerySplittingBehavior(QuerySplittingBehavior.SingleQuery);
                     configureSqlite?.Invoke(b);
-                });
+                }
+            );
 
-        public override DbContextOptionsBuilder AddProviderOptions(DbContextOptionsBuilder builder)
-            => AddProviderOptions(builder, configureSqlite: null);
+        public override DbContextOptionsBuilder AddProviderOptions(
+            DbContextOptionsBuilder builder
+        ) => AddProviderOptions(builder, configureSqlite: null);
 
-        public SqliteTestStore InitializeSqlite(IServiceProvider serviceProvider, Func<DbContext> createContext, Action<DbContext> seed)
-            => (SqliteTestStore)Initialize(serviceProvider, createContext, seed);
+        public SqliteTestStore InitializeSqlite(
+            IServiceProvider serviceProvider,
+            Func<DbContext> createContext,
+            Action<DbContext> seed
+        ) => (SqliteTestStore)Initialize(serviceProvider, createContext, seed);
 
         public SqliteTestStore InitializeSqlite(
             IServiceProvider serviceProvider,
             Func<SqliteTestStore, DbContext> createContext,
-            Action<DbContext> seed)
-            => (SqliteTestStore)Initialize(serviceProvider, () => createContext(this), seed);
+            Action<DbContext> seed
+        ) => (SqliteTestStore)Initialize(serviceProvider, () => createContext(this), seed);
 
-        protected override void Initialize(Func<DbContext> createContext, Action<DbContext> seed, Action<DbContext> clean)
+        protected override void Initialize(
+            Func<DbContext> createContext,
+            Action<DbContext> seed,
+            Action<DbContext> clean
+        )
         {
             if (!_seed)
             {
@@ -84,8 +102,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             seed?.Invoke(context);
         }
 
-        public override void Clean(DbContext context)
-            => context.Database.EnsureClean();
+        public override void Clean(DbContext context) => context.Database.EnsureClean();
 
         public int ExecuteNonQuery(string sql, params object[] parameters)
         {

@@ -8,37 +8,55 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 public static class DocumentIntermediateNodeExtensions
 {
-    public static ClassDeclarationIntermediateNode FindPrimaryClass(this DocumentIntermediateNode node)
+    public static ClassDeclarationIntermediateNode FindPrimaryClass(
+        this DocumentIntermediateNode node
+    )
     {
         if (node == null)
         {
             throw new ArgumentNullException(nameof(node));
         }
 
-        return FindWithAnnotation<ClassDeclarationIntermediateNode>(node, CommonAnnotations.PrimaryClass);
+        return FindWithAnnotation<ClassDeclarationIntermediateNode>(
+            node,
+            CommonAnnotations.PrimaryClass
+        );
     }
 
-    public static MethodDeclarationIntermediateNode FindPrimaryMethod(this DocumentIntermediateNode node)
+    public static MethodDeclarationIntermediateNode FindPrimaryMethod(
+        this DocumentIntermediateNode node
+    )
     {
         if (node == null)
         {
             throw new ArgumentNullException(nameof(node));
         }
 
-        return FindWithAnnotation<MethodDeclarationIntermediateNode>(node, CommonAnnotations.PrimaryMethod);
+        return FindWithAnnotation<MethodDeclarationIntermediateNode>(
+            node,
+            CommonAnnotations.PrimaryMethod
+        );
     }
 
-    public static NamespaceDeclarationIntermediateNode FindPrimaryNamespace(this DocumentIntermediateNode node)
+    public static NamespaceDeclarationIntermediateNode FindPrimaryNamespace(
+        this DocumentIntermediateNode node
+    )
     {
         if (node == null)
         {
             throw new ArgumentNullException(nameof(node));
         }
 
-        return FindWithAnnotation<NamespaceDeclarationIntermediateNode>(node, CommonAnnotations.PrimaryNamespace);
+        return FindWithAnnotation<NamespaceDeclarationIntermediateNode>(
+            node,
+            CommonAnnotations.PrimaryNamespace
+        );
     }
 
-    public static IReadOnlyList<IntermediateNodeReference> FindDirectiveReferences(this DocumentIntermediateNode node, DirectiveDescriptor directive)
+    public static IReadOnlyList<IntermediateNodeReference> FindDirectiveReferences(
+        this DocumentIntermediateNode node,
+        DirectiveDescriptor directive
+    )
     {
         if (node == null)
         {
@@ -55,8 +73,9 @@ public static class DocumentIntermediateNodeExtensions
         return visitor.Directives;
     }
 
-    public static IReadOnlyList<IntermediateNodeReference> FindDescendantReferences<TNode>(this DocumentIntermediateNode document)
-        where TNode : IntermediateNode
+    public static IReadOnlyList<IntermediateNodeReference> FindDescendantReferences<TNode>(
+        this DocumentIntermediateNode document
+    ) where TNode : IntermediateNode
     {
         if (document == null)
         {
@@ -68,7 +87,8 @@ public static class DocumentIntermediateNodeExtensions
         return visitor.References;
     }
 
-    private static T FindWithAnnotation<T>(IntermediateNode node, object annotation) where T : IntermediateNode
+    private static T FindWithAnnotation<T>(IntermediateNode node, object annotation)
+        where T : IntermediateNode
     {
         if (node is T target && object.ReferenceEquals(target.Annotations[annotation], annotation))
         {
@@ -109,8 +129,7 @@ public static class DocumentIntermediateNodeExtensions
         }
     }
 
-    private class ReferenceVisitor<TNode> : IntermediateNodeWalker
-        where TNode : IntermediateNode
+    private class ReferenceVisitor<TNode> : IntermediateNodeWalker where TNode : IntermediateNode
     {
         public List<IntermediateNodeReference> References = new List<IntermediateNodeReference>();
 

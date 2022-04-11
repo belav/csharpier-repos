@@ -13,13 +13,18 @@ public class QuarantinedTestTraitDiscoverer : ITraitDiscoverer
 {
     public IEnumerable<KeyValuePair<string, string>> GetTraits(IAttributeInfo traitAttribute)
     {
-        if (traitAttribute is ReflectionAttributeInfo attribute && attribute.Attribute is QuarantinedTestAttribute quarantinedTestAttribute)
+        if (
+            traitAttribute is ReflectionAttributeInfo attribute
+            && attribute.Attribute is QuarantinedTestAttribute quarantinedTestAttribute
+        )
         {
             yield return new KeyValuePair<string, string>("Quarantined", "true");
         }
         else
         {
-            throw new InvalidOperationException("The 'QuarantinedTest' attribute is only supported via reflection.");
+            throw new InvalidOperationException(
+                "The 'QuarantinedTest' attribute is only supported via reflection."
+            );
         }
     }
 }

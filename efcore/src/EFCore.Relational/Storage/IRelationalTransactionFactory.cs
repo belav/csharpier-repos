@@ -45,6 +45,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
             DbTransaction transaction,
             Guid transactionId,
             IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> logger,
-            bool transactionOwned);
+            bool transactionOwned
+        );
     }
 }

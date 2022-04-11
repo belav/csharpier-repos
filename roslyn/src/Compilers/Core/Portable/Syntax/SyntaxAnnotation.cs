@@ -9,8 +9,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis
 {
     /// <summary>
-    /// A SyntaxAnnotation is used to annotate syntax elements with additional information. 
-    /// 
+    /// A SyntaxAnnotation is used to annotate syntax elements with additional information.
+    ///
     /// Since syntax elements are immutable, annotating them requires creating new instances of them
     /// with the annotations attached.
     /// </summary>
@@ -40,14 +40,12 @@ namespace Microsoft.CodeAnalysis
             _id = System.Threading.Interlocked.Increment(ref s_nextId);
         }
 
-        public SyntaxAnnotation(string? kind)
-            : this()
+        public SyntaxAnnotation(string? kind) : this()
         {
             this.Kind = kind;
         }
 
-        public SyntaxAnnotation(string? kind, string? data)
-            : this(kind)
+        public SyntaxAnnotation(string? kind, string? data) : this(kind)
         {
             this.Data = data;
         }
@@ -70,7 +68,11 @@ namespace Microsoft.CodeAnalysis
 
         private string GetDebuggerDisplay()
         {
-            return string.Format("Annotation: Kind='{0}' Data='{1}'", this.Kind ?? "", this.Data ?? "");
+            return string.Format(
+                "Annotation: Kind='{0}' Data='{1}'",
+                this.Kind ?? "",
+                this.Data ?? ""
+            );
         }
 
         public bool Equals(SyntaxAnnotation? other)

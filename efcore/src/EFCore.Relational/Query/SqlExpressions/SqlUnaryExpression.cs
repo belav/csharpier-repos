@@ -31,8 +31,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             ExpressionType.Negate
         };
 
-        internal static bool IsValidOperator(ExpressionType operatorType)
-            => _allowedOperators.Contains(operatorType);
+        internal static bool IsValidOperator(ExpressionType operatorType) =>
+            _allowedOperators.Contains(operatorType);
 
         /// <summary>
         ///     Creates a new instance of the <see cref="SqlUnaryExpression" /> class.
@@ -45,14 +45,17 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             ExpressionType operatorType,
             SqlExpression operand,
             Type type,
-            RelationalTypeMapping? typeMapping)
-            : base(type, typeMapping)
+            RelationalTypeMapping? typeMapping
+        ) : base(type, typeMapping)
         {
             if (!IsValidOperator(operatorType))
             {
                 throw new InvalidOperationException(
                     RelationalStrings.UnsupportedOperatorForSqlExpression(
-                        operatorType, typeof(SqlUnaryExpression).ShortDisplayName()));
+                        operatorType,
+                        typeof(SqlUnaryExpression).ShortDisplayName()
+                    )
+                );
             }
 
             OperatorType = operatorType;
@@ -70,8 +73,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         public virtual SqlExpression Operand { get; }
 
         /// <inheritdoc />
-        protected override Expression VisitChildren(ExpressionVisitor visitor)
-            => Update((SqlExpression)visitor.Visit(Operand));
+        protected override Expression VisitChildren(ExpressionVisitor visitor) =>
+            Update((SqlExpression)visitor.Visit(Operand));
 
         /// <summary>
         ///     Creates a new expression that is like this one, but using the supplied children. If all of the children are the same, it will
@@ -79,16 +82,15 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// </summary>
         /// <param name="operand">The <see cref="Operand" /> property of the result.</param>
         /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
-        public virtual SqlUnaryExpression Update(SqlExpression operand)
-            => operand != Operand
+        public virtual SqlUnaryExpression Update(SqlExpression operand) =>
+            operand != Operand
                 ? new SqlUnaryExpression(OperatorType, operand, Type, TypeMapping)
                 : this;
 
         /// <inheritdoc />
         protected override void Print(ExpressionPrinter expressionPrinter)
         {
-            if (OperatorType == ExpressionType.Convert
-                && TypeMapping != null)
+            if (OperatorType == ExpressionType.Convert && TypeMapping != null)
             {
                 expressionPrinter.Append("CAST(");
                 expressionPrinter.Visit(Operand);
@@ -106,19 +108,20 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         }
 
         /// <inheritdoc />
-        public override bool Equals(object? obj)
-            => obj != null
-                && (ReferenceEquals(this, obj)
-                    || obj is SqlUnaryExpression sqlUnaryExpression
-                    && Equals(sqlUnaryExpression));
+        public override bool Equals(object? obj) =>
+            obj != null
+            && (
+                ReferenceEquals(this, obj)
+                || obj is SqlUnaryExpression sqlUnaryExpression && Equals(sqlUnaryExpression)
+            );
 
-        private bool Equals(SqlUnaryExpression sqlUnaryExpression)
-            => base.Equals(sqlUnaryExpression)
-                && OperatorType == sqlUnaryExpression.OperatorType
-                && Operand.Equals(sqlUnaryExpression.Operand);
+        private bool Equals(SqlUnaryExpression sqlUnaryExpression) =>
+            base.Equals(sqlUnaryExpression)
+            && OperatorType == sqlUnaryExpression.OperatorType
+            && Operand.Equals(sqlUnaryExpression.Operand);
 
         /// <inheritdoc />
-        public override int GetHashCode()
-            => HashCode.Combine(base.GetHashCode(), OperatorType, Operand);
+        public override int GetHashCode() =>
+            HashCode.Combine(base.GetHashCode(), OperatorType, Operand);
     }
 }

@@ -34,7 +34,15 @@ namespace System.Net.NameResolution.PalTests
         [InlineData(true)]
         public void TryGetAddrInfo_LocalHost(bool justAddresses)
         {
-            SocketError error = NameResolutionPal.TryGetAddrInfo("localhost", justAddresses, AddressFamily.Unspecified, out string hostName, out string[] aliases, out IPAddress[] addresses, out int nativeErrorCode);
+            SocketError error = NameResolutionPal.TryGetAddrInfo(
+                "localhost",
+                justAddresses,
+                AddressFamily.Unspecified,
+                out string hostName,
+                out string[] aliases,
+                out IPAddress[] addresses,
+                out int nativeErrorCode
+            );
             Assert.Equal(SocketError.Success, error);
             if (!justAddresses)
             {
@@ -50,7 +58,15 @@ namespace System.Net.NameResolution.PalTests
         [InlineData(true)]
         public void TryGetAddrInfo_EmptyHost(bool justAddresses)
         {
-            SocketError error = NameResolutionPal.TryGetAddrInfo("", justAddresses, AddressFamily.Unspecified, out string hostName, out string[] aliases, out IPAddress[] addresses, out int nativeErrorCode);
+            SocketError error = NameResolutionPal.TryGetAddrInfo(
+                "",
+                justAddresses,
+                AddressFamily.Unspecified,
+                out string hostName,
+                out string[] aliases,
+                out IPAddress[] addresses,
+                out int nativeErrorCode
+            );
             if (error == SocketError.HostNotFound && !OperatingSystem.IsWindows())
             {
                 // On Unix, we are not guaranteed to be able to resove the local host. The ability to do so depends on the
@@ -77,7 +93,15 @@ namespace System.Net.NameResolution.PalTests
             string hostName = NameResolutionPal.GetHostName();
             Assert.NotNull(hostName);
 
-            SocketError error = NameResolutionPal.TryGetAddrInfo(hostName, justAddresses, AddressFamily.Unspecified, out hostName, out string[] aliases, out IPAddress[] addresses, out int nativeErrorCode);
+            SocketError error = NameResolutionPal.TryGetAddrInfo(
+                hostName,
+                justAddresses,
+                AddressFamily.Unspecified,
+                out hostName,
+                out string[] aliases,
+                out IPAddress[] addresses,
+                out int nativeErrorCode
+            );
             if (error == SocketError.HostNotFound && !OperatingSystem.IsWindows())
             {
                 // On Unix, we are not guaranteed to be able to resove the local host. The ability to do so depends on the
@@ -102,7 +126,15 @@ namespace System.Net.NameResolution.PalTests
         {
             string hostName = "microsoft.com";
 
-            SocketError error = NameResolutionPal.TryGetAddrInfo(hostName, justAddresses, AddressFamily.Unspecified, out hostName, out string[] aliases, out IPAddress[] addresses, out _);
+            SocketError error = NameResolutionPal.TryGetAddrInfo(
+                hostName,
+                justAddresses,
+                AddressFamily.Unspecified,
+                out hostName,
+                out string[] aliases,
+                out IPAddress[] addresses,
+                out _
+            );
             Assert.Equal(SocketError.Success, error);
             Assert.NotNull(aliases);
             Assert.NotNull(addresses);
@@ -115,7 +147,15 @@ namespace System.Net.NameResolution.PalTests
         [OuterLoop("Uses external servers")]
         public void TryGetAddrInfo_UnknownHost(bool justAddresses)
         {
-            SocketError error = NameResolutionPal.TryGetAddrInfo("test.123", justAddresses, AddressFamily.Unspecified, out string? _, out string[] _, out IPAddress[] _, out int nativeErrorCode);
+            SocketError error = NameResolutionPal.TryGetAddrInfo(
+                "test.123",
+                justAddresses,
+                AddressFamily.Unspecified,
+                out string? _,
+                out string[] _,
+                out IPAddress[] _,
+                out int nativeErrorCode
+            );
 
             Assert.Equal(SocketError.HostNotFound, error);
             Assert.NotEqual(0, nativeErrorCode);
@@ -126,7 +166,11 @@ namespace System.Net.NameResolution.PalTests
         {
             SocketError error;
             int nativeErrorCode;
-            string name = NameResolutionPal.TryGetNameInfo(new IPAddress(new byte[] { 127, 0, 0, 1 }), out error, out nativeErrorCode);
+            string name = NameResolutionPal.TryGetNameInfo(
+                new IPAddress(new byte[] { 127, 0, 0, 1 }),
+                out error,
+                out nativeErrorCode
+            );
             Assert.Equal(SocketError.Success, error);
             Assert.NotNull(name);
         }
@@ -136,7 +180,11 @@ namespace System.Net.NameResolution.PalTests
         {
             SocketError error;
             int nativeErrorCode;
-            string name = NameResolutionPal.TryGetNameInfo(new IPAddress(new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 }), out error, out nativeErrorCode);
+            string name = NameResolutionPal.TryGetNameInfo(
+                new IPAddress(new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 }),
+                out error,
+                out nativeErrorCode
+            );
             if (SocketError.Success != error && Environment.OSVersion.Platform == PlatformID.Unix)
             {
                 LogUnixInfo();
@@ -149,13 +197,25 @@ namespace System.Net.NameResolution.PalTests
         [Fact]
         public void TryGetAddrInfo_LocalHost_TryGetNameInfo()
         {
-            SocketError error = NameResolutionPal.TryGetAddrInfo("localhost", justAddresses: false, AddressFamily.Unspecified, out string hostName, out string[] aliases, out IPAddress[] addresses, out int nativeErrorCode);
+            SocketError error = NameResolutionPal.TryGetAddrInfo(
+                "localhost",
+                justAddresses: false,
+                AddressFamily.Unspecified,
+                out string hostName,
+                out string[] aliases,
+                out IPAddress[] addresses,
+                out int nativeErrorCode
+            );
             Assert.Equal(SocketError.Success, error);
             Assert.NotNull(hostName);
             Assert.NotNull(aliases);
             Assert.NotNull(addresses);
 
-            string name = NameResolutionPal.TryGetNameInfo(addresses[0], out error, out nativeErrorCode);
+            string name = NameResolutionPal.TryGetNameInfo(
+                addresses[0],
+                out error,
+                out nativeErrorCode
+            );
             Assert.Equal(SocketError.Success, error);
             Assert.NotNull(name);
         }
@@ -167,7 +227,15 @@ namespace System.Net.NameResolution.PalTests
             string hostName = NameResolutionPal.GetHostName();
             Assert.NotNull(hostName);
 
-            SocketError error = NameResolutionPal.TryGetAddrInfo(hostName, justAddresses: false, AddressFamily.Unspecified, out hostName, out string[] aliases, out IPAddress[] addresses, out int nativeErrorCode);
+            SocketError error = NameResolutionPal.TryGetAddrInfo(
+                hostName,
+                justAddresses: false,
+                AddressFamily.Unspecified,
+                out hostName,
+                out string[] aliases,
+                out IPAddress[] addresses,
+                out int nativeErrorCode
+            );
             if (error == SocketError.HostNotFound)
             {
                 // On Unix, getaddrinfo returns host not found, if all the machine discovery settings on the local network
@@ -181,7 +249,11 @@ namespace System.Net.NameResolution.PalTests
             Assert.NotNull(aliases);
             Assert.NotNull(addresses);
 
-            string name = NameResolutionPal.TryGetNameInfo(addresses[0], out error, out nativeErrorCode);
+            string name = NameResolutionPal.TryGetNameInfo(
+                addresses[0],
+                out error,
+                out nativeErrorCode
+            );
             if (error == SocketError.HostNotFound)
             {
                 // On Unix, getaddrinfo returns private ipv4 address for hostname. If the OS doesn't have the
@@ -199,11 +271,23 @@ namespace System.Net.NameResolution.PalTests
         [InlineData(true)]
         public void TryGetNameInfo_LocalHost_IPv4_TryGetAddrInfo(bool justAddresses)
         {
-            string name = NameResolutionPal.TryGetNameInfo(new IPAddress(new byte[] { 127, 0, 0, 1 }), out SocketError error, out _);
+            string name = NameResolutionPal.TryGetNameInfo(
+                new IPAddress(new byte[] { 127, 0, 0, 1 }),
+                out SocketError error,
+                out _
+            );
             Assert.Equal(SocketError.Success, error);
             Assert.NotNull(name);
 
-            error = NameResolutionPal.TryGetAddrInfo(name, justAddresses, AddressFamily.Unspecified, out string hostName, out string[] aliases, out IPAddress[] addresses, out _);
+            error = NameResolutionPal.TryGetAddrInfo(
+                name,
+                justAddresses,
+                AddressFamily.Unspecified,
+                out string hostName,
+                out string[] aliases,
+                out IPAddress[] addresses,
+                out _
+            );
             Assert.Equal(SocketError.Success, error);
             Assert.NotNull(aliases);
             Assert.NotNull(addresses);
@@ -216,7 +300,11 @@ namespace System.Net.NameResolution.PalTests
         {
             SocketError error;
             int nativeErrorCode;
-            string name = NameResolutionPal.TryGetNameInfo(new IPAddress(new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 }), out error, out nativeErrorCode);
+            string name = NameResolutionPal.TryGetNameInfo(
+                new IPAddress(new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 }),
+                out error,
+                out nativeErrorCode
+            );
             if (SocketError.Success != error && Environment.OSVersion.Platform == PlatformID.Unix)
             {
                 LogUnixInfo();
@@ -225,7 +313,15 @@ namespace System.Net.NameResolution.PalTests
             Assert.Equal(SocketError.Success, error);
             Assert.NotNull(name);
 
-            error = NameResolutionPal.TryGetAddrInfo(name, justAddresses, AddressFamily.Unspecified, out string hostName, out string[] aliases, out IPAddress[] addresses, out _);
+            error = NameResolutionPal.TryGetAddrInfo(
+                name,
+                justAddresses,
+                AddressFamily.Unspecified,
+                out string hostName,
+                out string[] aliases,
+                out IPAddress[] addresses,
+                out _
+            );
             if (SocketError.Success != error && Environment.OSVersion.Platform == PlatformID.Unix)
             {
                 LogUnixInfo();
@@ -256,14 +352,30 @@ namespace System.Net.NameResolution.PalTests
 
             if (justAddresses)
             {
-                IPAddress[] addresses = await ((Task<IPAddress[]>)NameResolutionPal.GetAddrInfoAsync("localhost", justAddresses, AddressFamily.Unspecified, CancellationToken.None)).ConfigureAwait(false);
+                IPAddress[] addresses = await (
+                    (Task<IPAddress[]>)
+                        NameResolutionPal.GetAddrInfoAsync(
+                            "localhost",
+                            justAddresses,
+                            AddressFamily.Unspecified,
+                            CancellationToken.None
+                        )
+                ).ConfigureAwait(false);
 
                 Assert.NotNull(addresses);
                 Assert.True(addresses.Length > 0);
             }
             else
             {
-                IPHostEntry hostEntry = await ((Task<IPHostEntry>)NameResolutionPal.GetAddrInfoAsync("localhost", justAddresses, AddressFamily.Unspecified, CancellationToken.None)).ConfigureAwait(false);
+                IPHostEntry hostEntry = await (
+                    (Task<IPHostEntry>)
+                        NameResolutionPal.GetAddrInfoAsync(
+                            "localhost",
+                            justAddresses,
+                            AddressFamily.Unspecified,
+                            CancellationToken.None
+                        )
+                ).ConfigureAwait(false);
 
                 Assert.NotNull(hostEntry);
                 Assert.True(hostEntry.AddressList.Length > 0);
@@ -281,7 +393,12 @@ namespace System.Net.NameResolution.PalTests
                 return;
             }
 
-            Task task = NameResolutionPal.GetAddrInfoAsync("", justAddresses, AddressFamily.Unspecified, CancellationToken.None);
+            Task task = NameResolutionPal.GetAddrInfoAsync(
+                "",
+                justAddresses,
+                AddressFamily.Unspecified,
+                CancellationToken.None
+            );
 
             try
             {
@@ -331,7 +448,12 @@ namespace System.Net.NameResolution.PalTests
             string hostName = NameResolutionPal.GetHostName();
             Assert.NotNull(hostName);
 
-            Task task = NameResolutionPal.GetAddrInfoAsync(hostName, justAddresses, AddressFamily.Unspecified, CancellationToken.None);
+            Task task = NameResolutionPal.GetAddrInfoAsync(
+                hostName,
+                justAddresses,
+                AddressFamily.Unspecified,
+                CancellationToken.None
+            );
 
             try
             {
@@ -386,14 +508,30 @@ namespace System.Net.NameResolution.PalTests
 
             if (justAddresses)
             {
-                IPAddress[] addresses = await ((Task<IPAddress[]>)NameResolutionPal.GetAddrInfoAsync(hostName, justAddresses, AddressFamily.Unspecified, CancellationToken.None)).ConfigureAwait(false);
+                IPAddress[] addresses = await (
+                    (Task<IPAddress[]>)
+                        NameResolutionPal.GetAddrInfoAsync(
+                            hostName,
+                            justAddresses,
+                            AddressFamily.Unspecified,
+                            CancellationToken.None
+                        )
+                ).ConfigureAwait(false);
 
                 Assert.NotNull(addresses);
                 Assert.True(addresses.Length > 0);
             }
             else
             {
-                IPHostEntry hostEntry = await ((Task<IPHostEntry>)NameResolutionPal.GetAddrInfoAsync(hostName, justAddresses, AddressFamily.Unspecified, CancellationToken.None)).ConfigureAwait(false);
+                IPHostEntry hostEntry = await (
+                    (Task<IPHostEntry>)
+                        NameResolutionPal.GetAddrInfoAsync(
+                            hostName,
+                            justAddresses,
+                            AddressFamily.Unspecified,
+                            CancellationToken.None
+                        )
+                ).ConfigureAwait(false);
 
                 Assert.NotNull(hostEntry);
                 Assert.True(hostEntry.AddressList.Length > 0);
@@ -413,7 +551,17 @@ namespace System.Net.NameResolution.PalTests
 
             const string hostName = "test.123";
 
-            SocketException socketException = await Assert.ThrowsAnyAsync<SocketException>(() => NameResolutionPal.GetAddrInfoAsync(hostName, justAddresses, AddressFamily.Unspecified, CancellationToken.None)).ConfigureAwait(false);
+            SocketException socketException = await Assert
+                .ThrowsAnyAsync<SocketException>(
+                    () =>
+                        NameResolutionPal.GetAddrInfoAsync(
+                            hostName,
+                            justAddresses,
+                            AddressFamily.Unspecified,
+                            CancellationToken.None
+                        )
+                )
+                .ConfigureAwait(false);
             SocketError socketError = socketException.SocketErrorCode;
 
             Assert.Equal(SocketError.HostNotFound, socketError);

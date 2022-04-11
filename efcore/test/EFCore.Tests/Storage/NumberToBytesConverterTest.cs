@@ -32,7 +32,13 @@ namespace Microsoft.EntityFrameworkCore.Storage
         [ConditionalFact]
         public void Ordering_preserved_for_byte_to_bytes()
         {
-            ValueConverterTest.OrderingTest(_byteToBytesConverter, (byte)0, (byte)7, (byte)77, (byte)255);
+            ValueConverterTest.OrderingTest(
+                _byteToBytesConverter,
+                (byte)0,
+                (byte)7,
+                (byte)77,
+                (byte)255
+            );
         }
 
         private static readonly NumberToBytesConverter<byte?> _nullableByteToBytesConverter = new();
@@ -58,7 +64,13 @@ namespace Microsoft.EntityFrameworkCore.Storage
         [ConditionalFact]
         public void Ordering_preserved_for_nullable_byte_to_bytes()
         {
-            ValueConverterTest.OrderingTest(_nullableByteToBytesConverter, (byte?)0, (byte?)7, (byte?)77, (byte?)255);
+            ValueConverterTest.OrderingTest(
+                _nullableByteToBytesConverter,
+                (byte?)0,
+                (byte?)7,
+                (byte?)77,
+                (byte?)255
+            );
         }
 
         private static readonly NumberToBytesConverter<short> _shortToBytesConverter = new();
@@ -133,7 +145,10 @@ namespace Microsoft.EntityFrameworkCore.Storage
             var converter = _longToBytesConverter.ConvertToProviderExpression.Compile();
 
             Assert.Equal(new byte[] { 0, 0, 0, 181, 23, 43, 12, 113 }, converter(777777777777));
-            Assert.Equal(new byte[] { 255, 255, 255, 74, 232, 212, 243, 143 }, converter(-777777777777));
+            Assert.Equal(
+                new byte[] { 255, 255, 255, 74, 232, 212, 243, 143 },
+                converter(-777777777777)
+            );
         }
 
         [ConditionalFact]
@@ -142,7 +157,10 @@ namespace Microsoft.EntityFrameworkCore.Storage
             var converter = _longToBytesConverter.ConvertFromProviderExpression.Compile();
 
             Assert.Equal(777777777777, converter(new byte[] { 0, 0, 0, 181, 23, 43, 12, 113 }));
-            Assert.Equal(-777777777777, converter(new byte[] { 255, 255, 255, 74, 232, 212, 243, 143 }));
+            Assert.Equal(
+                -777777777777,
+                converter(new byte[] { 255, 255, 255, 74, 232, 212, 243, 143 })
+            );
             Assert.Equal(0, converter(null));
         }
 
@@ -167,7 +185,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Assert.Equal(0, converter(null));
         }
 
-        private static readonly NumberToBytesConverter<sbyte?> _nullableSbyteToBytesConverter = new();
+        private static readonly NumberToBytesConverter<sbyte?> _nullableSbyteToBytesConverter =
+            new();
 
         [ConditionalFact]
         public void Can_convert_nullable_sbyte_to_bytes()
@@ -211,7 +230,13 @@ namespace Microsoft.EntityFrameworkCore.Storage
         [ConditionalFact]
         public void Ordering_preserved_for_ushort_to_bytes()
         {
-            ValueConverterTest.OrderingTest(_ushortToBytesConverter, (ushort)0, (ushort)7, (ushort)777, (ushort)7777);
+            ValueConverterTest.OrderingTest(
+                _ushortToBytesConverter,
+                (ushort)0,
+                (ushort)7,
+                (ushort)777,
+                (ushort)7777
+            );
         }
 
         private static readonly NumberToBytesConverter<uint> _uintToBytesConverter = new();
@@ -256,7 +281,13 @@ namespace Microsoft.EntityFrameworkCore.Storage
         [ConditionalFact]
         public void Ordering_preserved_for_uint_to_bytes()
         {
-            ValueConverterTest.OrderingTest(_uintToBytesConverter, (uint)0, (uint)7, (uint)777777, (uint)77777777);
+            ValueConverterTest.OrderingTest(
+                _uintToBytesConverter,
+                (uint)0,
+                (uint)7,
+                (uint)777777,
+                (uint)77777777
+            );
         }
 
         private static readonly NumberToBytesConverter<ulong> _ulongToBytesConverter = new();
@@ -274,14 +305,23 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             var converter = _ulongToBytesConverter.ConvertFromProviderExpression.Compile();
 
-            Assert.Equal((ulong)777777777777, converter(new byte[] { 0, 0, 0, 181, 23, 43, 12, 113 }));
+            Assert.Equal(
+                (ulong)777777777777,
+                converter(new byte[] { 0, 0, 0, 181, 23, 43, 12, 113 })
+            );
             Assert.Equal((ulong)0, converter(null));
         }
 
         [ConditionalFact]
         public void Ordering_preserved_for_ulong_to_bytes()
         {
-            ValueConverterTest.OrderingTest(_ulongToBytesConverter, (ulong)0, (ulong)777, (ulong)77777777, (ulong)7777777777777777);
+            ValueConverterTest.OrderingTest(
+                _ulongToBytesConverter,
+                (ulong)0,
+                (ulong)777,
+                (ulong)77777777,
+                (ulong)7777777777777777
+            );
         }
 
         private static readonly NumberToBytesConverter<char> _charToBytesConverter = new();
@@ -317,29 +357,181 @@ namespace Microsoft.EntityFrameworkCore.Storage
             var converter = _decimalToBytesConverter.ConvertToProviderExpression.Compile();
 
             Assert.Equal(
-                new byte[] { 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF },
-                converter(decimal.MaxValue));
+                new byte[]
+                {
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF
+                },
+                converter(decimal.MaxValue)
+            );
             Assert.Equal(
-                new byte[] { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x7F, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF },
-                converter(long.MaxValue));
+                new byte[]
+                {
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x7F,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF
+                },
+                converter(long.MaxValue)
+            );
             Assert.Equal(
-                new byte[] { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x7F, 0xFF, 0xFF, 0xFF },
-                converter(int.MaxValue));
+                new byte[]
+                {
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x7F,
+                    0xFF,
+                    0xFF,
+                    0xFF
+                },
+                converter(int.MaxValue)
+            );
             Assert.Equal(
-                new byte[] { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x7F, 0xFF },
-                converter(short.MaxValue));
+                new byte[]
+                {
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x7F,
+                    0xFF
+                },
+                converter(short.MaxValue)
+            );
             Assert.Equal(
-                new byte[] { 0x80, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF },
-                converter(decimal.MinValue));
+                new byte[]
+                {
+                    0x80,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF
+                },
+                converter(decimal.MinValue)
+            );
             Assert.Equal(
-                new byte[] { 0x00, 0x09, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01 },
-                converter((decimal)0.000000001));
+                new byte[]
+                {
+                    0x00,
+                    0x09,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x01
+                },
+                converter((decimal)0.000000001)
+            );
             Assert.Equal(
-                new byte[] { 0x00, 0x14, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01 },
-                converter((decimal)0.00000000000000000001));
+                new byte[]
+                {
+                    0x00,
+                    0x14,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x01
+                },
+                converter((decimal)0.00000000000000000001)
+            );
             Assert.Equal(
-                new byte[] { 0x80, 0x14, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01 },
-                converter((decimal)-0.00000000000000000001));
+                new byte[]
+                {
+                    0x80,
+                    0x14,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x01
+                },
+                converter((decimal)-0.00000000000000000001)
+            );
         }
 
         [ConditionalFact]
@@ -349,31 +541,200 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             Assert.Equal(
                 decimal.MaxValue,
-                converter(new byte[] { 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF }));
+                converter(
+                    new byte[]
+                    {
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF
+                    }
+                )
+            );
             Assert.Equal(
                 long.MaxValue,
-                converter(new byte[] { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x7F, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF }));
+                converter(
+                    new byte[]
+                    {
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x7F,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF
+                    }
+                )
+            );
             Assert.Equal(
                 int.MaxValue,
-                converter(new byte[] { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x7F, 0xFF, 0xFF, 0xFF }));
+                converter(
+                    new byte[]
+                    {
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x7F,
+                        0xFF,
+                        0xFF,
+                        0xFF
+                    }
+                )
+            );
             Assert.Equal(
                 short.MaxValue,
-                converter(new byte[] { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x7F, 0xFF }));
+                converter(
+                    new byte[]
+                    {
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x7F,
+                        0xFF
+                    }
+                )
+            );
             Assert.Equal(
                 decimal.MinValue,
-                converter(new byte[] { 0x80, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF }));
+                converter(
+                    new byte[]
+                    {
+                        0x80,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF
+                    }
+                )
+            );
             Assert.Equal(
                 (decimal)0.000000001,
-                converter(new byte[] { 0x00, 0x09, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01 }));
+                converter(
+                    new byte[]
+                    {
+                        0x00,
+                        0x09,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x01
+                    }
+                )
+            );
             Assert.Equal(
                 (decimal)0.00000000000000000001,
-                converter(new byte[] { 0x00, 0x14, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01 }));
+                converter(
+                    new byte[]
+                    {
+                        0x00,
+                        0x14,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x01
+                    }
+                )
+            );
             Assert.Equal(
                 (decimal)-0.00000000000000000001,
-                converter(new byte[] { 0x80, 0x14, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01 }));
+                converter(
+                    new byte[]
+                    {
+                        0x80,
+                        0x14,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x01
+                    }
+                )
+            );
         }
 
-        private static readonly NumberToBytesConverter<decimal?> _nullableDecimalToBytesConverter = new();
+        private static readonly NumberToBytesConverter<decimal?> _nullableDecimalToBytesConverter =
+            new();
 
         [ConditionalFact]
         public void Can_convert_nullable_decimal_to_bytes()
@@ -381,61 +742,382 @@ namespace Microsoft.EntityFrameworkCore.Storage
             var converter = _nullableDecimalToBytesConverter.ConvertToProviderExpression.Compile();
 
             Assert.Equal(
-                new byte[] { 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF },
-                converter(decimal.MaxValue));
+                new byte[]
+                {
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF
+                },
+                converter(decimal.MaxValue)
+            );
             Assert.Equal(
-                new byte[] { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x7F, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF },
-                converter(long.MaxValue));
+                new byte[]
+                {
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x7F,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF
+                },
+                converter(long.MaxValue)
+            );
             Assert.Equal(
-                new byte[] { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x7F, 0xFF, 0xFF, 0xFF },
-                converter(int.MaxValue));
+                new byte[]
+                {
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x7F,
+                    0xFF,
+                    0xFF,
+                    0xFF
+                },
+                converter(int.MaxValue)
+            );
             Assert.Equal(
-                new byte[] { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x7F, 0xFF },
-                converter(short.MaxValue));
+                new byte[]
+                {
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x7F,
+                    0xFF
+                },
+                converter(short.MaxValue)
+            );
             Assert.Equal(
-                new byte[] { 0x80, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF },
-                converter(decimal.MinValue));
+                new byte[]
+                {
+                    0x80,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF
+                },
+                converter(decimal.MinValue)
+            );
             Assert.Equal(
-                new byte[] { 0x00, 0x09, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01 },
-                converter((decimal?)0.000000001));
+                new byte[]
+                {
+                    0x00,
+                    0x09,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x01
+                },
+                converter((decimal?)0.000000001)
+            );
             Assert.Equal(
-                new byte[] { 0x00, 0x14, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01 },
-                converter((decimal?)0.00000000000000000001));
+                new byte[]
+                {
+                    0x00,
+                    0x14,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x01
+                },
+                converter((decimal?)0.00000000000000000001)
+            );
             Assert.Equal(
-                new byte[] { 0x80, 0x14, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01 },
-                converter((decimal?)-0.00000000000000000001));
+                new byte[]
+                {
+                    0x80,
+                    0x14,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x01
+                },
+                converter((decimal?)-0.00000000000000000001)
+            );
             Assert.Null(converter(null));
         }
 
         [ConditionalFact]
         public void Can_convert_bytes_to_nullable_decimal()
         {
-            var converter = _nullableDecimalToBytesConverter.ConvertFromProviderExpression.Compile();
+            var converter =
+                _nullableDecimalToBytesConverter.ConvertFromProviderExpression.Compile();
 
             Assert.Equal(
                 decimal.MaxValue,
-                converter(new byte[] { 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF }));
+                converter(
+                    new byte[]
+                    {
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF
+                    }
+                )
+            );
             Assert.Equal(
                 long.MaxValue,
-                converter(new byte[] { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x7F, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF }));
+                converter(
+                    new byte[]
+                    {
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x7F,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF
+                    }
+                )
+            );
             Assert.Equal(
                 int.MaxValue,
-                converter(new byte[] { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x7F, 0xFF, 0xFF, 0xFF }));
+                converter(
+                    new byte[]
+                    {
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x7F,
+                        0xFF,
+                        0xFF,
+                        0xFF
+                    }
+                )
+            );
             Assert.Equal(
                 short.MaxValue,
-                converter(new byte[] { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x7F, 0xFF }));
+                converter(
+                    new byte[]
+                    {
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x7F,
+                        0xFF
+                    }
+                )
+            );
             Assert.Equal(
                 decimal.MinValue,
-                converter(new byte[] { 0x80, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF }));
+                converter(
+                    new byte[]
+                    {
+                        0x80,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0xFF
+                    }
+                )
+            );
             Assert.Equal(
                 (decimal?)0.000000001,
-                converter(new byte[] { 0x00, 0x09, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01 }));
+                converter(
+                    new byte[]
+                    {
+                        0x00,
+                        0x09,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x01
+                    }
+                )
+            );
             Assert.Equal(
                 (decimal?)0.00000000000000000001,
-                converter(new byte[] { 0x00, 0x14, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01 }));
+                converter(
+                    new byte[]
+                    {
+                        0x00,
+                        0x14,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x01
+                    }
+                )
+            );
             Assert.Equal(
                 (decimal?)-0.00000000000000000001,
-                converter(new byte[] { 0x80, 0x14, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01 }));
+                converter(
+                    new byte[]
+                    {
+                        0x80,
+                        0x14,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x01
+                    }
+                )
+            );
             Assert.Null(converter(null));
         }
 
@@ -467,8 +1149,14 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             var converter = _doubleToBytesConverter.ConvertToProviderExpression.Compile();
 
-            Assert.Equal(new byte[] { 65, 93, 171, 124, 113, 198, 251, 210 }, converter(7777777.77777));
-            Assert.Equal(new byte[] { 193, 93, 171, 124, 113, 198, 251, 210 }, converter(-7777777.77777));
+            Assert.Equal(
+                new byte[] { 65, 93, 171, 124, 113, 198, 251, 210 },
+                converter(7777777.77777)
+            );
+            Assert.Equal(
+                new byte[] { 193, 93, 171, 124, 113, 198, 251, 210 },
+                converter(-7777777.77777)
+            );
         }
 
         [ConditionalFact]
@@ -476,8 +1164,14 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             var converter = _doubleToBytesConverter.ConvertFromProviderExpression.Compile();
 
-            Assert.Equal(7777777.77777, converter(new byte[] { 65, 93, 171, 124, 113, 198, 251, 210 }));
-            Assert.Equal(-7777777.77777, converter(new byte[] { 193, 93, 171, 124, 113, 198, 251, 210 }));
+            Assert.Equal(
+                7777777.77777,
+                converter(new byte[] { 65, 93, 171, 124, 113, 198, 251, 210 })
+            );
+            Assert.Equal(
+                -7777777.77777,
+                converter(new byte[] { 193, 93, 171, 124, 113, 198, 251, 210 })
+            );
             Assert.Equal(0, converter(null));
         }
 
@@ -488,9 +1182,12 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 CoreStrings.ConverterBadType(
                     "NumberToBytesConverter<Guid>",
                     "Guid",
-                    "'double', 'float', 'decimal', 'char', 'int', 'long', 'short', 'byte', 'uint', 'ulong', 'ushort', 'sbyte'"),
-                Assert.Throws<InvalidOperationException>(
-                    () => new NumberToBytesConverter<Guid>()).Message);
+                    "'double', 'float', 'decimal', 'char', 'int', 'long', 'short', 'byte', 'uint', 'ulong', 'ushort', 'sbyte'"
+                ),
+                Assert
+                    .Throws<InvalidOperationException>(() => new NumberToBytesConverter<Guid>())
+                    .Message
+            );
         }
     }
 }

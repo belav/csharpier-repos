@@ -56,7 +56,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         InterceptionResult<DbTransaction> TransactionStarting(
             DbConnection connection,
             TransactionStartingEventData eventData,
-            InterceptionResult<DbTransaction> result);
+            InterceptionResult<DbTransaction> result
+        );
 
         /// <summary>
         ///     Called immediately after EF calls <see cref="DbConnection.BeginTransaction(IsolationLevel)" />.
@@ -79,7 +80,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         DbTransaction TransactionStarted(
             DbConnection connection,
             TransactionEndEventData eventData,
-            DbTransaction result);
+            DbTransaction result
+        );
 
         /// <summary>
         ///     Called just before EF intends to call
@@ -106,7 +108,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             DbConnection connection,
             TransactionStartingEventData eventData,
             InterceptionResult<DbTransaction> result,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         ///     Called immediately after EF calls <see cref="DbConnection.BeginTransactionAsync(IsolationLevel,CancellationToken)" />.
@@ -133,7 +136,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             DbConnection connection,
             TransactionEndEventData eventData,
             DbTransaction result,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         ///     Called immediately after <see cref="O:RelationalDatabaseFacadeExtensions.UseTransaction" /> is called.
@@ -152,7 +156,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         DbTransaction TransactionUsed(
             DbConnection connection,
             TransactionEventData eventData,
-            DbTransaction result);
+            DbTransaction result
+        );
 
         /// <summary>
         ///     Called immediately after <see cref="O:RelationalDatabaseFacadeExtensions.UseTransactionAsync" /> is called.
@@ -175,7 +180,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             DbConnection connection,
             TransactionEventData eventData,
             DbTransaction result,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         ///     Called just before EF intends to call <see cref="DbTransaction.Commit" />.
@@ -198,16 +204,15 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         InterceptionResult TransactionCommitting(
             DbTransaction transaction,
             TransactionEventData eventData,
-            InterceptionResult result);
+            InterceptionResult result
+        );
 
         /// <summary>
         ///     Called immediately after EF calls <see cref="DbTransaction.Commit" />.
         /// </summary>
         /// <param name="transaction">The transaction.</param>
         /// <param name="eventData">Contextual information about connection and transaction.</param>
-        void TransactionCommitted(
-            DbTransaction transaction,
-            TransactionEndEventData eventData);
+        void TransactionCommitted(DbTransaction transaction, TransactionEndEventData eventData);
 
         /// <summary>
         ///     Called just before EF intends to call
@@ -234,7 +239,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             DbTransaction transaction,
             TransactionEventData eventData,
             InterceptionResult result,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         ///     Called immediately after EF calls <see cref="DbTransaction.CommitAsync" />.
@@ -247,7 +253,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         Task TransactionCommittedAsync(
             DbTransaction transaction,
             TransactionEndEventData eventData,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         ///     Called just before EF intends to call <see cref="DbTransaction.Rollback()" />.
@@ -270,16 +277,15 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         InterceptionResult TransactionRollingBack(
             DbTransaction transaction,
             TransactionEventData eventData,
-            InterceptionResult result);
+            InterceptionResult result
+        );
 
         /// <summary>
         ///     Called immediately after EF calls <see cref="DbTransaction.Rollback()" />.
         /// </summary>
         /// <param name="transaction">The transaction.</param>
         /// <param name="eventData">Contextual information about connection and transaction.</param>
-        void TransactionRolledBack(
-            DbTransaction transaction,
-            TransactionEndEventData eventData);
+        void TransactionRolledBack(DbTransaction transaction, TransactionEndEventData eventData);
 
         /// <summary>
         ///     Called just before EF intends to call
@@ -306,7 +312,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             DbTransaction transaction,
             TransactionEventData eventData,
             InterceptionResult result,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         ///     Called immediately after EF calls <see cref="DbTransaction.RollbackAsync(CancellationToken)" />.
@@ -319,7 +326,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         Task TransactionRolledBackAsync(
             DbTransaction transaction,
             TransactionEndEventData eventData,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         ///     Called just before EF intends to create a transaction savepoint.
@@ -342,16 +350,15 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         InterceptionResult CreatingSavepoint(
             DbTransaction transaction,
             TransactionEventData eventData,
-            InterceptionResult result);
+            InterceptionResult result
+        );
 
         /// <summary>
         ///     Called immediately after EF creates a transaction savepoint.
         /// </summary>
         /// <param name="transaction">The transaction.</param>
         /// <param name="eventData">Contextual information about connection and transaction.</param>
-        void CreatedSavepoint(
-            DbTransaction transaction,
-            TransactionEventData eventData);
+        void CreatedSavepoint(DbTransaction transaction, TransactionEventData eventData);
 
         /// <summary>
         ///     Called just before EF intends to create a transaction savepoint.
@@ -377,7 +384,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             DbTransaction transaction,
             TransactionEventData eventData,
             InterceptionResult result,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         ///     Called immediately after EF calls <see cref="DbTransaction.CommitAsync" />.
@@ -390,7 +398,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         Task CreatedSavepointAsync(
             DbTransaction transaction,
             TransactionEventData eventData,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         ///     Called just before EF intends to roll back to a transaction savepoint.
@@ -413,16 +422,15 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         InterceptionResult RollingBackToSavepoint(
             DbTransaction transaction,
             TransactionEventData eventData,
-            InterceptionResult result);
+            InterceptionResult result
+        );
 
         /// <summary>
         ///     Called immediately after EF rolls back to a transaction savepoint.
         /// </summary>
         /// <param name="transaction">The transaction.</param>
         /// <param name="eventData">Contextual information about connection and transaction.</param>
-        void RolledBackToSavepoint(
-            DbTransaction transaction,
-            TransactionEventData eventData);
+        void RolledBackToSavepoint(DbTransaction transaction, TransactionEventData eventData);
 
         /// <summary>
         ///     Called just before EF intends to roll back to a transaction savepoint.
@@ -448,7 +456,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             DbTransaction transaction,
             TransactionEventData eventData,
             InterceptionResult result,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         ///     Called immediately after EF rolls back to a transaction savepoint.
@@ -461,7 +470,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         Task RolledBackToSavepointAsync(
             DbTransaction transaction,
             TransactionEventData eventData,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         ///     Called just before EF intends to release a transaction savepoint.
@@ -484,16 +494,15 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         InterceptionResult ReleasingSavepoint(
             DbTransaction transaction,
             TransactionEventData eventData,
-            InterceptionResult result);
+            InterceptionResult result
+        );
 
         /// <summary>
         ///     Called immediately after EF releases a transaction savepoint.
         /// </summary>
         /// <param name="transaction">The transaction.</param>
         /// <param name="eventData">Contextual information about connection and transaction.</param>
-        void ReleasedSavepoint(
-            DbTransaction transaction,
-            TransactionEventData eventData);
+        void ReleasedSavepoint(DbTransaction transaction, TransactionEventData eventData);
 
         /// <summary>
         ///     Called just before EF intends to release a transaction savepoint.
@@ -519,7 +528,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             DbTransaction transaction,
             TransactionEventData eventData,
             InterceptionResult result,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         ///     Called immediately after EF releases a transaction savepoint.
@@ -532,16 +542,15 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         Task ReleasedSavepointAsync(
             DbTransaction transaction,
             TransactionEventData eventData,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         ///     Called when use of a <see cref="DbTransaction" /> has failed with an exception.
         /// </summary>
         /// <param name="transaction">The transaction.</param>
         /// <param name="eventData">Contextual information about connection and transaction.</param>
-        void TransactionFailed(
-            DbTransaction transaction,
-            TransactionErrorEventData eventData);
+        void TransactionFailed(DbTransaction transaction, TransactionErrorEventData eventData);
 
         /// <summary>
         ///     Called when use of a <see cref="DbTransaction" /> has failed with an exception.
@@ -554,6 +563,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         Task TransactionFailedAsync(
             DbTransaction transaction,
             TransactionErrorEventData eventData,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
     }
 }

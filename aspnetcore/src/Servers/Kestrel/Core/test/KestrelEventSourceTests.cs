@@ -22,7 +22,10 @@ public class KestrelEventSourceTests
         Assert.NotNull(esType);
 
         Assert.Equal("Microsoft-AspNetCore-Server-Kestrel", EventSource.GetName(esType));
-        Assert.Equal(Guid.Parse("bdeb4676-a36e-5442-db99-4764e2326c7d"), EventSource.GetGuid(esType));
+        Assert.Equal(
+            Guid.Parse("bdeb4676-a36e-5442-db99-4764e2326c7d"),
+            EventSource.GetGuid(esType)
+        );
         Assert.NotEmpty(EventSource.GenerateManifest(esType, "assemblyPathToIncludeInManifest"));
     }
 }

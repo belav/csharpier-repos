@@ -120,7 +120,8 @@ namespace System.MemoryTests
             Assert.True(Memory<int>.Empty.Span == srcMemory.Span);
         }
 
-        private static void Cast<T>(Memory<T> memory, params T[] expected) where T : struct, IEquatable<T>
+        private static void Cast<T>(Memory<T> memory, params T[] expected)
+            where T : struct, IEquatable<T>
         {
             memory.Validate(expected);
         }
@@ -130,12 +131,14 @@ namespace System.MemoryTests
             memory.ValidateReferenceType(expected);
         }
 
-        private static void CastReadOnly<T>(ReadOnlyMemory<T> memory, params T[] expected) where T : struct, IEquatable<T>
+        private static void CastReadOnly<T>(ReadOnlyMemory<T> memory, params T[] expected)
+            where T : struct, IEquatable<T>
         {
             memory.Validate(expected);
         }
 
-        private static void CastReadOnlyReference<T>(ReadOnlyMemory<T> memory, params T[] expected) where T : class
+        private static void CastReadOnlyReference<T>(ReadOnlyMemory<T> memory, params T[] expected)
+            where T : class
         {
             memory.ValidateReferenceType(expected);
         }

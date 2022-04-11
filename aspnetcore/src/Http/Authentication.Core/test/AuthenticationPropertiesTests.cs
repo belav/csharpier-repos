@@ -15,15 +15,9 @@ public class AuthenticationPropertiesTests
     [Fact]
     public void Clone_Copies()
     {
-        var items = new Dictionary<string, string?>
-        {
-            ["foo"] = "bar",
-        };
+        var items = new Dictionary<string, string?> { ["foo"] = "bar", };
         var value = "value";
-        var parameters = new Dictionary<string, object?>
-        {
-            ["foo2"] = value,
-        };
+        var parameters = new Dictionary<string, object?> { ["foo2"] = value, };
         var props = new AuthenticationProperties(items, parameters);
         Assert.Same(items, props.Items);
         Assert.Same(parameters, props.Parameters);
@@ -50,10 +44,7 @@ public class AuthenticationPropertiesTests
     [Fact]
     public void ItemsConstructor_ReusesItemsDictionary()
     {
-        var items = new Dictionary<string, string?>
-        {
-            ["foo"] = "bar",
-        };
+        var items = new Dictionary<string, string?> { ["foo"] = "bar", };
         var props = new AuthenticationProperties(items);
         Assert.Same(items, props.Items);
         Assert.Empty(props.Parameters);
@@ -62,10 +53,7 @@ public class AuthenticationPropertiesTests
     [Fact]
     public void FullConstructor_ReusesDictionaries()
     {
-        var items = new Dictionary<string, string?>
-        {
-            ["foo"] = "bar",
-        };
+        var items = new Dictionary<string, string?> { ["foo"] = "bar", };
         var parameters = new Dictionary<string, object?>
         {
             ["number"] = 1234,
@@ -156,7 +144,10 @@ public class AuthenticationPropertiesTests
 
         var list = new string[] { "a", "b", "c" };
         props.SetParameter<ICollection<string>>("foo", list);
-        Assert.Equal(new string[] { "a", "b", "c" }, props.GetParameter<ICollection<string>>("foo"));
+        Assert.Equal(
+            new string[] { "a", "b", "c" },
+            props.GetParameter<ICollection<string>>("foo")
+        );
         Assert.Same(list, props.Parameters["foo"]);
         Assert.Equal(1, props.Parameters.Count);
 
@@ -201,7 +192,10 @@ public class AuthenticationPropertiesTests
         Assert.Null(props.IssuedUtc);
 
         props.IssuedUtc = new DateTimeOffset(new DateTime(2018, 03, 21, 0, 0, 0, DateTimeKind.Utc));
-        Assert.Equal(new DateTimeOffset(new DateTime(2018, 03, 21, 0, 0, 0, DateTimeKind.Utc)), props.IssuedUtc);
+        Assert.Equal(
+            new DateTimeOffset(new DateTime(2018, 03, 21, 0, 0, 0, DateTimeKind.Utc)),
+            props.IssuedUtc
+        );
         Assert.Equal("Wed, 21 Mar 2018 00:00:00 GMT", props.Items.First().Value);
 
         props.Items.Clear();
@@ -214,8 +208,13 @@ public class AuthenticationPropertiesTests
         var props = new AuthenticationProperties();
         Assert.Null(props.ExpiresUtc);
 
-        props.ExpiresUtc = new DateTimeOffset(new DateTime(2018, 03, 19, 12, 34, 56, DateTimeKind.Utc));
-        Assert.Equal(new DateTimeOffset(new DateTime(2018, 03, 19, 12, 34, 56, DateTimeKind.Utc)), props.ExpiresUtc);
+        props.ExpiresUtc = new DateTimeOffset(
+            new DateTime(2018, 03, 19, 12, 34, 56, DateTimeKind.Utc)
+        );
+        Assert.Equal(
+            new DateTimeOffset(new DateTime(2018, 03, 19, 12, 34, 56, DateTimeKind.Utc)),
+            props.ExpiresUtc
+        );
         Assert.Equal("Mon, 19 Mar 2018 12:34:56 GMT", props.Items.First().Value);
 
         props.Items.Clear();
@@ -245,7 +244,10 @@ public class AuthenticationPropertiesTests
     {
         var props = new MyAuthenticationProperties();
 
-        props.SetDateTimeOffset("foo", new DateTimeOffset(new DateTime(2018, 03, 19, 12, 34, 56, DateTimeKind.Utc)));
+        props.SetDateTimeOffset(
+            "foo",
+            new DateTimeOffset(new DateTime(2018, 03, 19, 12, 34, 56, DateTimeKind.Utc))
+        );
         Assert.Equal("Mon, 19 Mar 2018 12:34:56 GMT", props.Items["foo"]);
 
         props.SetDateTimeOffset("foo", null);
@@ -259,7 +261,9 @@ public class AuthenticationPropertiesTests
     public void GetDateTimeOffset()
     {
         var props = new MyAuthenticationProperties();
-        var dateTimeOffset = new DateTimeOffset(new DateTime(2018, 03, 19, 12, 34, 56, DateTimeKind.Utc));
+        var dateTimeOffset = new DateTimeOffset(
+            new DateTime(2018, 03, 19, 12, 34, 56, DateTimeKind.Utc)
+        );
 
         props.Items["foo"] = dateTimeOffset.ToString("r", CultureInfo.InvariantCulture);
         Assert.Equal(dateTimeOffset, props.GetDateTimeOffset("foo"));
@@ -380,7 +384,8 @@ public class AuthenticationPropertiesTests
         var json = JsonSerializer.Serialize(props, options);
 
         // Verify that the payload doesn't duplicate the properties backed by Items
-        Assert.Equal(@"{
+        Assert.Equal(
+            @"{
   ""Items"": {
     "".refresh"": ""True"",
     "".expires"": ""Sun, 28 Mar 2021 13:47:00 GMT"",
@@ -389,7 +394,10 @@ public class AuthenticationPropertiesTests
     "".redirect"": ""/foo/bar"",
     ""foo"": ""bar""
   }
-}", json, ignoreLineEndingDifferences: true);
+}",
+            json,
+            ignoreLineEndingDifferences: true
+        );
     }
 
     public class MyAuthenticationProperties : AuthenticationProperties

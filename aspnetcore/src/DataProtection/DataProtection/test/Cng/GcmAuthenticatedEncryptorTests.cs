@@ -20,7 +20,11 @@ public class GcmAuthenticatedEncryptorTests
     {
         // Arrange
         Secret kdk = new Secret(new byte[512 / 8]);
-        CngGcmAuthenticatedEncryptor encryptor = new CngGcmAuthenticatedEncryptor(kdk, CachedAlgorithmHandles.AES_GCM, symmetricAlgorithmKeySizeInBytes: 256 / 8);
+        CngGcmAuthenticatedEncryptor encryptor = new CngGcmAuthenticatedEncryptor(
+            kdk,
+            CachedAlgorithmHandles.AES_GCM,
+            symmetricAlgorithmKeySizeInBytes: 256 / 8
+        );
         ArraySegment<byte> plaintext = new ArraySegment<byte>(Encoding.UTF8.GetBytes("plaintext"));
         ArraySegment<byte> aad = new ArraySegment<byte>(Encoding.UTF8.GetBytes("aad"));
 
@@ -38,7 +42,11 @@ public class GcmAuthenticatedEncryptorTests
     {
         // Arrange
         Secret kdk = new Secret(new byte[512 / 8]);
-        CngGcmAuthenticatedEncryptor encryptor = new CngGcmAuthenticatedEncryptor(kdk, CachedAlgorithmHandles.AES_GCM, symmetricAlgorithmKeySizeInBytes: 256 / 8);
+        CngGcmAuthenticatedEncryptor encryptor = new CngGcmAuthenticatedEncryptor(
+            kdk,
+            CachedAlgorithmHandles.AES_GCM,
+            symmetricAlgorithmKeySizeInBytes: 256 / 8
+        );
         ArraySegment<byte> plaintext = new ArraySegment<byte>(Encoding.UTF8.GetBytes("plaintext"));
         ArraySegment<byte> aad = new ArraySegment<byte>(Encoding.UTF8.GetBytes("aad"));
         byte[] validCiphertext = encryptor.Encrypt(plaintext, aad);
@@ -46,34 +54,45 @@ public class GcmAuthenticatedEncryptorTests
         // Act & assert - 1
         // Ciphertext is too short to be a valid payload
         byte[] invalidCiphertext_tooShort = new byte[10];
-        Assert.Throws<CryptographicException>(() =>
-        {
-            encryptor.Decrypt(new ArraySegment<byte>(invalidCiphertext_tooShort), aad);
-        });
+        Assert.Throws<CryptographicException>(
+            () =>
+            {
+                encryptor.Decrypt(new ArraySegment<byte>(invalidCiphertext_tooShort), aad);
+            }
+        );
 
         // Act & assert - 2
         // Ciphertext has been manipulated
         byte[] invalidCiphertext_manipulated = (byte[])validCiphertext.Clone();
         invalidCiphertext_manipulated[0] ^= 0x01;
-        Assert.Throws<CryptographicException>(() =>
-        {
-            encryptor.Decrypt(new ArraySegment<byte>(invalidCiphertext_manipulated), aad);
-        });
+        Assert.Throws<CryptographicException>(
+            () =>
+            {
+                encryptor.Decrypt(new ArraySegment<byte>(invalidCiphertext_manipulated), aad);
+            }
+        );
 
         // Act & assert - 3
         // Ciphertext is too long
         byte[] invalidCiphertext_tooLong = validCiphertext.Concat(new byte[] { 0 }).ToArray();
-        Assert.Throws<CryptographicException>(() =>
-        {
-            encryptor.Decrypt(new ArraySegment<byte>(invalidCiphertext_tooLong), aad);
-        });
+        Assert.Throws<CryptographicException>(
+            () =>
+            {
+                encryptor.Decrypt(new ArraySegment<byte>(invalidCiphertext_tooLong), aad);
+            }
+        );
 
         // Act & assert - 4
         // AAD is incorrect
-        Assert.Throws<CryptographicException>(() =>
-        {
-            encryptor.Decrypt(new ArraySegment<byte>(validCiphertext), new ArraySegment<byte>(Encoding.UTF8.GetBytes("different aad")));
-        });
+        Assert.Throws<CryptographicException>(
+            () =>
+            {
+                encryptor.Decrypt(
+                    new ArraySegment<byte>(validCiphertext),
+                    new ArraySegment<byte>(Encoding.UTF8.GetBytes("different aad"))
+                );
+            }
+        );
     }
 
     [ConditionalFact]
@@ -82,16 +101,30 @@ public class GcmAuthenticatedEncryptorTests
     {
         // Arrange
         Secret kdk = new Secret(Encoding.UTF8.GetBytes("master key"));
-        CngGcmAuthenticatedEncryptor encryptor = new CngGcmAuthenticatedEncryptor(kdk, CachedAlgorithmHandles.AES_GCM, symmetricAlgorithmKeySizeInBytes: 128 / 8, genRandom: new SequentialGenRandom());
-        ArraySegment<byte> plaintext = new ArraySegment<byte>(new byte[] { 0, 1, 2, 3, 4, 5, 6, 7 }, 2, 3);
-        ArraySegment<byte> aad = new ArraySegment<byte>(new byte[] { 7, 6, 5, 4, 3, 2, 1, 0 }, 1, 4);
+        CngGcmAuthenticatedEncryptor encryptor = new CngGcmAuthenticatedEncryptor(
+            kdk,
+            CachedAlgorithmHandles.AES_GCM,
+            symmetricAlgorithmKeySizeInBytes: 128 / 8,
+            genRandom: new SequentialGenRandom()
+        );
+        ArraySegment<byte> plaintext = new ArraySegment<byte>(
+            new byte[] { 0, 1, 2, 3, 4, 5, 6, 7 },
+            2,
+            3
+        );
+        ArraySegment<byte> aad = new ArraySegment<byte>(
+            new byte[] { 7, 6, 5, 4, 3, 2, 1, 0 },
+            1,
+            4
+        );
 
         // Act
         byte[] retVal = encryptor.Encrypt(
             plaintext: plaintext,
             additionalAuthenticatedData: aad,
             preBufferSize: 3,
-            postBufferSize: 4);
+            postBufferSize: 4
+        );
 
         // Assert
 
@@ -103,6 +136,9 @@ public class GcmAuthenticatedEncryptorTests
         //         | 00 00 00 00 (postBuffer)
 
         string retValAsString = Convert.ToBase64String(retVal);
-        Assert.Equal("AAAAAAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaG0O2kY0NZtmh2UQtXY5B2jlgnOgAAAAA", retValAsString);
+        Assert.Equal(
+            "AAAAAAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaG0O2kY0NZtmh2UQtXY5B2jlgnOgAAAAA",
+            retValAsString
+        );
     }
 }

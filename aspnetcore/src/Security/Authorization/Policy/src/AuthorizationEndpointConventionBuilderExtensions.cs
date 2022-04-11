@@ -20,7 +20,8 @@ public static class AuthorizationEndpointConventionBuilderExtensions
     /// </summary>
     /// <param name="builder">The endpoint convention builder.</param>
     /// <returns>The original convention builder parameter.</returns>
-    public static TBuilder RequireAuthorization<TBuilder>(this TBuilder builder) where TBuilder : IEndpointConventionBuilder
+    public static TBuilder RequireAuthorization<TBuilder>(this TBuilder builder)
+        where TBuilder : IEndpointConventionBuilder
     {
         if (builder == null)
         {
@@ -36,7 +37,10 @@ public static class AuthorizationEndpointConventionBuilderExtensions
     /// <param name="builder">The endpoint convention builder.</param>
     /// <param name="policyNames">A collection of policy names. If empty, the default authorization policy will be used.</param>
     /// <returns>The original convention builder parameter.</returns>
-    public static TBuilder RequireAuthorization<TBuilder>(this TBuilder builder, params string[] policyNames) where TBuilder : IEndpointConventionBuilder
+    public static TBuilder RequireAuthorization<TBuilder>(
+        this TBuilder builder,
+        params string[] policyNames
+    ) where TBuilder : IEndpointConventionBuilder
     {
         if (builder == null)
         {
@@ -48,7 +52,9 @@ public static class AuthorizationEndpointConventionBuilderExtensions
             throw new ArgumentNullException(nameof(policyNames));
         }
 
-        return builder.RequireAuthorization(policyNames.Select(n => new AuthorizeAttribute(n)).ToArray());
+        return builder.RequireAuthorization(
+            policyNames.Select(n => new AuthorizeAttribute(n)).ToArray()
+        );
     }
 
     /// <summary>
@@ -59,8 +65,10 @@ public static class AuthorizationEndpointConventionBuilderExtensions
     /// A collection of <paramref name="authorizeData"/>. If empty, the default authorization policy will be used.
     /// </param>
     /// <returns>The original convention builder parameter.</returns>
-    public static TBuilder RequireAuthorization<TBuilder>(this TBuilder builder, params IAuthorizeData[] authorizeData)
-        where TBuilder : IEndpointConventionBuilder
+    public static TBuilder RequireAuthorization<TBuilder>(
+        this TBuilder builder,
+        params IAuthorizeData[] authorizeData
+    ) where TBuilder : IEndpointConventionBuilder
     {
         if (builder == null)
         {
@@ -87,24 +95,31 @@ public static class AuthorizationEndpointConventionBuilderExtensions
     /// </summary>
     /// <param name="builder">The endpoint convention builder.</param>
     /// <returns>The original convention builder parameter.</returns>
-    public static TBuilder AllowAnonymous<TBuilder>(this TBuilder builder) where TBuilder : IEndpointConventionBuilder
+    public static TBuilder AllowAnonymous<TBuilder>(this TBuilder builder)
+        where TBuilder : IEndpointConventionBuilder
     {
-        builder.Add(endpointBuilder =>
-        {
-            endpointBuilder.Metadata.Add(_allowAnonymousMetadata);
-        });
+        builder.Add(
+            endpointBuilder =>
+            {
+                endpointBuilder.Metadata.Add(_allowAnonymousMetadata);
+            }
+        );
         return builder;
     }
 
-    private static void RequireAuthorizationCore<TBuilder>(TBuilder builder, IEnumerable<IAuthorizeData> authorizeData)
-        where TBuilder : IEndpointConventionBuilder
+    private static void RequireAuthorizationCore<TBuilder>(
+        TBuilder builder,
+        IEnumerable<IAuthorizeData> authorizeData
+    ) where TBuilder : IEndpointConventionBuilder
     {
-        builder.Add(endpointBuilder =>
-        {
-            foreach (var data in authorizeData)
+        builder.Add(
+            endpointBuilder =>
             {
-                endpointBuilder.Metadata.Add(data);
+                foreach (var data in authorizeData)
+                {
+                    endpointBuilder.Metadata.Add(data);
+                }
             }
-        });
+        );
     }
 }

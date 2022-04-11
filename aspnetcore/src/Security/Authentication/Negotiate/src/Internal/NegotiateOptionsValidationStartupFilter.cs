@@ -22,8 +22,10 @@ internal class NegotiateOptionsValidationStartupFilter : IStartupFilter
     {
         return builder =>
         {
-                // Resolve NegotiateOptions on startup to trigger post configuration and bind LdapConnection if needed
-                var options = builder.ApplicationServices.GetRequiredService<IOptionsMonitor<NegotiateOptions>>().Get(_authenticationScheme);
+            // Resolve NegotiateOptions on startup to trigger post configuration and bind LdapConnection if needed
+            var options = builder.ApplicationServices
+                .GetRequiredService<IOptionsMonitor<NegotiateOptions>>()
+                .Get(_authenticationScheme);
             next(builder);
         };
     }

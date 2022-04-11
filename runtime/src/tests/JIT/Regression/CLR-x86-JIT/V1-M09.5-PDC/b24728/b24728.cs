@@ -14,16 +14,14 @@
 // </Description>
 //<Expects Status=success></Expects>
 
-// <Code> 
+// <Code>
 
 using System;
 
 class MyClass
 {
-
     public static int Main()
     {
-
         float test1 = 2.0f;
         float test2 = test1++;
         float test3 = ++test1;
@@ -40,4 +38,4 @@ class MyClass
         //return 1;
     }
 }
-// </Code> 
+// </Code>

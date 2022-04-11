@@ -10,15 +10,21 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
 {
-    internal class AnalyzerSettingsUpdater : SettingsUpdaterBase<AnalyzerSetting, DiagnosticSeverity>
+    internal class AnalyzerSettingsUpdater
+        : SettingsUpdaterBase<AnalyzerSetting, DiagnosticSeverity>
     {
-        public AnalyzerSettingsUpdater(Workspace workspace, string editorconfigPath) : base(workspace, editorconfigPath)
-        {
-        }
+        public AnalyzerSettingsUpdater(Workspace workspace, string editorconfigPath)
+            : base(workspace, editorconfigPath) { }
 
-        protected override SourceText? GetNewText(SourceText sourceText,
-                                                  IReadOnlyList<(AnalyzerSetting option, DiagnosticSeverity value)> settingsToUpdate,
-                                                  CancellationToken token)
-            => SettingsUpdateHelper.TryUpdateAnalyzerConfigDocument(sourceText, EditorconfigPath, settingsToUpdate);
+        protected override SourceText? GetNewText(
+            SourceText sourceText,
+            IReadOnlyList<(AnalyzerSetting option, DiagnosticSeverity value)> settingsToUpdate,
+            CancellationToken token
+        ) =>
+            SettingsUpdateHelper.TryUpdateAnalyzerConfigDocument(
+                sourceText,
+                EditorconfigPath,
+                settingsToUpdate
+            );
     }
 }

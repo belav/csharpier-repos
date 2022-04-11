@@ -3,5 +3,13 @@
 
 using Xunit;
 
-[assembly: ActiveIssue("https://github.com/dotnet/runtime/issues/34690", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
-[assembly: SkipOnPlatform(TestPlatforms.Browser, "System.Net.WebClient is not recommended for new development and not supported on Browser")] 
+[assembly: ActiveIssue(
+    "https://github.com/dotnet/runtime/issues/34690",
+    TestPlatforms.Windows,
+    TargetFrameworkMonikers.Netcoreapp,
+    TestRuntimes.Mono
+)]
+[assembly: SkipOnPlatform(
+    TestPlatforms.Browser,
+    "System.Net.WebClient is not recommended for new development and not supported on Browser"
+)]

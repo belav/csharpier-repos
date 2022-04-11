@@ -16,7 +16,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public void Can_get_all_properties_and_navigations()
         {
             var entityType = CreateModel().AddEntityType(nameof(SelfRef));
-            var pk = entityType.SetPrimaryKey(entityType.AddProperty(nameof(SelfRef.Id), typeof(int)));
+            var pk = entityType.SetPrimaryKey(
+                entityType.AddProperty(nameof(SelfRef.Id), typeof(int))
+            );
             var fkProp = entityType.AddProperty(nameof(SelfRef.SelfRefId), typeof(int?));
 
             var fk = entityType.AddForeignKey(new[] { fkProp }, pk, entityType);
@@ -25,8 +27,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             var principalToDependent = fk.SetPrincipalToDependent(nameof(SelfRef.SelfRefDependent));
 
             Assert.Equal(
-                new IReadOnlyPropertyBase[] { pk.Properties.Single(), fkProp, principalToDependent, dependentToPrincipal },
-                ((IEntityType)entityType).GetPropertiesAndNavigations().ToArray());
+                new IReadOnlyPropertyBase[]
+                {
+                    pk.Properties.Single(),
+                    fkProp,
+                    principalToDependent,
+                    dependentToPrincipal
+                },
+                ((IEntityType)entityType).GetPropertiesAndNavigations().ToArray()
+            );
         }
 
         [ConditionalFact]
@@ -35,7 +44,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             var entityType = CreateModel().AddEntityType("Customer");
             var idProperty = entityType.AddProperty("id", typeof(int));
             var fkProperty = entityType.AddProperty("fk", typeof(int));
-            var fk = entityType.AddForeignKey(fkProperty, entityType.SetPrimaryKey(idProperty), entityType);
+            var fk = entityType.AddForeignKey(
+                fkProperty,
+                entityType.SetPrimaryKey(idProperty),
+                entityType
+            );
 
             Assert.Same(fk, entityType.GetReferencingForeignKeys().Single());
         }
@@ -97,9 +110,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var entityType = CreateModel().AddEntityType(typeof(A<int>));
 
-            Assert.Equal(
-                "A<int>",
-                entityType.DisplayName());
+            Assert.Equal("A<int>", entityType.DisplayName());
         }
 
         [ConditionalFact]
@@ -107,19 +118,20 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = new ModelBuilder();
 
-            var entityType = modelBuilder
-                .Entity<Customer>()
-                .Metadata;
+            var entityType = modelBuilder.Entity<Customer>().Metadata;
             var property = entityType.AddProperty("D", typeof(string));
 
-            var derivedType = modelBuilder
-                .Entity<SpecialCustomer>()
-                .Metadata;
+            var derivedType = modelBuilder.Entity<SpecialCustomer>().Metadata;
             derivedType.BaseType = entityType;
 
             Assert.Equal(
                 CoreStrings.DiscriminatorPropertyMustBeOnRoot(nameof(SpecialCustomer)),
-                Assert.Throws<InvalidOperationException>(() => derivedType.SetDiscriminatorProperty(property)).Message);
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => derivedType.SetDiscriminatorProperty(property)
+                    )
+                    .Message
+            );
         }
 
         [ConditionalFact]
@@ -127,19 +139,20 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = new ModelBuilder();
 
-            var entityType = modelBuilder
-                .Entity<Customer>()
-                .Metadata;
+            var entityType = modelBuilder.Entity<Customer>().Metadata;
 
-            var otherType = modelBuilder
-                .Entity<SpecialCustomer>()
-                .Metadata;
+            var otherType = modelBuilder.Entity<SpecialCustomer>().Metadata;
 
             var property = entityType.AddProperty("D", typeof(string));
 
             Assert.Equal(
                 CoreStrings.DiscriminatorPropertyNotFound("D", nameof(SpecialCustomer)),
-                Assert.Throws<InvalidOperationException>(() => otherType.SetDiscriminatorProperty(property)).Message);
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => otherType.SetDiscriminatorProperty(property)
+                    )
+                    .Message
+            );
         }
 
         [ConditionalFact]
@@ -147,9 +160,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = new ModelBuilder();
 
-            var entityType = modelBuilder
-                .Entity<Customer>()
-                .Metadata;
+            var entityType = modelBuilder.Entity<Customer>().Metadata;
 
             var property = entityType.AddProperty("D", typeof(string));
             entityType.SetDiscriminatorProperty(property);
@@ -170,14 +181,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = new ModelBuilder();
 
-            var entityType = modelBuilder
-                .Entity<Customer>()
-                .Metadata;
+            var entityType = modelBuilder.Entity<Customer>().Metadata;
 
             Assert.Equal(
                 CoreStrings.NoDiscriminatorForValue("Customer", "Customer"),
-                Assert.Throws<InvalidOperationException>(
-                    () => entityType.SetDiscriminatorValue("V")).Message);
+                Assert
+                    .Throws<InvalidOperationException>(() => entityType.SetDiscriminatorValue("V"))
+                    .Message
+            );
         }
 
         [ConditionalFact]
@@ -185,32 +196,31 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = new ModelBuilder();
 
-            var entityType = modelBuilder
-                .Entity<Customer>()
-                .Metadata;
+            var entityType = modelBuilder.Entity<Customer>().Metadata;
 
             var property = entityType.AddProperty("D", typeof(int));
             entityType.SetDiscriminatorProperty(property);
 
             Assert.Equal(
                 CoreStrings.DiscriminatorValueIncompatible("V", "D", typeof(int)),
-                Assert.Throws<InvalidOperationException>(
-                    () => entityType.SetDiscriminatorValue("V")).Message);
+                Assert
+                    .Throws<InvalidOperationException>(() => entityType.SetDiscriminatorValue("V"))
+                    .Message
+            );
 
             entityType.SetDiscriminatorValue(null);
         }
 
-        private static IMutableModel CreateModel()
-            => new Model();
+        private static IMutableModel CreateModel() => new Model();
 
-        private class A<T>
-        {
-        }
+        private class A<T> { }
 
         private class SelfRef
         {
             public static readonly PropertyInfo IdProperty = typeof(SelfRef).GetProperty("Id");
-            public static readonly PropertyInfo SelfRefIdProperty = typeof(SelfRef).GetProperty("SelfRefId");
+            public static readonly PropertyInfo SelfRefIdProperty = typeof(SelfRef).GetProperty(
+                "SelfRefId"
+            );
 
             public int Id { get; set; }
             public SelfRef SelfRefPrincipal { get; set; }
@@ -225,8 +235,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             public Guid AlternateId { get; set; }
         }
 
-        private class SpecialCustomer : Customer
-        {
-        }
+        private class SpecialCustomer : Customer { }
     }
 }

@@ -11,19 +11,22 @@ using Microsoft.CodeAnalysis.UseThrowExpression;
 namespace Microsoft.CodeAnalysis.CSharp.UseThrowExpression
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal class CSharpUseThrowExpressionDiagnosticAnalyzer : AbstractUseThrowExpressionDiagnosticAnalyzer
+    internal class CSharpUseThrowExpressionDiagnosticAnalyzer
+        : AbstractUseThrowExpressionDiagnosticAnalyzer
     {
         public CSharpUseThrowExpressionDiagnosticAnalyzer()
-            : base(CSharpCodeStyleOptions.PreferThrowExpression, LanguageNames.CSharp)
-        {
-        }
+            : base(CSharpCodeStyleOptions.PreferThrowExpression, LanguageNames.CSharp) { }
 
         protected override bool IsSupported(Compilation compilation)
         {
             return ((CSharpCompilation)compilation).LanguageVersion >= LanguageVersion.CSharp7;
         }
 
-        protected override bool IsInExpressionTree(SemanticModel semanticModel, SyntaxNode node, INamedTypeSymbol? expressionTypeOpt, CancellationToken cancellationToken)
-            => node.IsInExpressionTree(semanticModel, expressionTypeOpt, cancellationToken);
+        protected override bool IsInExpressionTree(
+            SemanticModel semanticModel,
+            SyntaxNode node,
+            INamedTypeSymbol? expressionTypeOpt,
+            CancellationToken cancellationToken
+        ) => node.IsInExpressionTree(semanticModel, expressionTypeOpt, cancellationToken);
     }
 }

@@ -27,8 +27,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         public ExistsExpression(
             SelectExpression subquery,
             bool negated,
-            RelationalTypeMapping? typeMapping)
-            : base(typeof(bool), typeMapping)
+            RelationalTypeMapping? typeMapping
+        ) : base(typeof(bool), typeMapping)
         {
             Subquery = subquery;
             IsNegated = negated;
@@ -45,8 +45,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         public virtual bool IsNegated { get; }
 
         /// <inheritdoc />
-        protected override Expression VisitChildren(ExpressionVisitor visitor)
-            => Update((SelectExpression)visitor.Visit(Subquery));
+        protected override Expression VisitChildren(ExpressionVisitor visitor) =>
+            Update((SelectExpression)visitor.Visit(Subquery));
 
         /// <summary>
         ///     Creates a new expression that is like this one, but using the supplied children. If all of the children are the same, it will
@@ -54,10 +54,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// </summary>
         /// <param name="subquery">The <see cref="Subquery" /> property of the result.</param>
         /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
-        public virtual ExistsExpression Update(SelectExpression subquery)
-            => subquery != Subquery
-                ? new ExistsExpression(subquery, IsNegated, TypeMapping)
-                : this;
+        public virtual ExistsExpression Update(SelectExpression subquery) =>
+            subquery != Subquery ? new ExistsExpression(subquery, IsNegated, TypeMapping) : this;
 
         /// <inheritdoc />
         protected override void Print(ExpressionPrinter expressionPrinter)
@@ -77,19 +75,20 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         }
 
         /// <inheritdoc />
-        public override bool Equals(object? obj)
-            => obj != null
-                && (ReferenceEquals(this, obj)
-                    || obj is ExistsExpression existsExpression
-                    && Equals(existsExpression));
+        public override bool Equals(object? obj) =>
+            obj != null
+            && (
+                ReferenceEquals(this, obj)
+                || obj is ExistsExpression existsExpression && Equals(existsExpression)
+            );
 
-        private bool Equals(ExistsExpression existsExpression)
-            => base.Equals(existsExpression)
-                && Subquery.Equals(existsExpression.Subquery)
-                && IsNegated == existsExpression.IsNegated;
+        private bool Equals(ExistsExpression existsExpression) =>
+            base.Equals(existsExpression)
+            && Subquery.Equals(existsExpression.Subquery)
+            && IsNegated == existsExpression.IsNegated;
 
         /// <inheritdoc />
-        public override int GetHashCode()
-            => HashCode.Combine(base.GetHashCode(), Subquery, IsNegated);
+        public override int GetHashCode() =>
+            HashCode.Combine(base.GetHashCode(), Subquery, IsNegated);
     }
 }

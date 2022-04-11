@@ -42,49 +42,95 @@ namespace System.Text.Json.SourceGeneration.Tests
     [JsonSerializable(typeof(StructWithBadCustomConverter))]
     internal partial class MetadataAndSerializationContext : JsonSerializerContext, ITestContext
     {
-        public JsonSourceGenerationMode JsonSourceGenerationMode => JsonSourceGenerationMode.Default;
+        public JsonSourceGenerationMode JsonSourceGenerationMode =>
+            JsonSourceGenerationMode.Default;
     }
 
     public sealed class MetadataAndSerializationContextTests : RealWorldContextTests
     {
-        public MetadataAndSerializationContextTests() : base(MetadataAndSerializationContext.Default, (options) => new MetadataAndSerializationContext(options)) { }
+        public MetadataAndSerializationContextTests()
+            : base(
+                MetadataAndSerializationContext.Default,
+                (options) => new MetadataAndSerializationContext(options)
+            ) { }
 
         [Fact]
         public override void EnsureFastPathGeneratedAsExpected()
         {
             Assert.NotNull(MetadataAndSerializationContext.Default.Location.SerializeHandler);
             Assert.NotNull(MetadataAndSerializationContext.Default.NumberTypes.SerializeHandler);
-            Assert.NotNull(MetadataAndSerializationContext.Default.RepeatedLocation.SerializeHandler);
-            Assert.NotNull(MetadataAndSerializationContext.Default.ActiveOrUpcomingEvent.SerializeHandler);
-            Assert.NotNull(MetadataAndSerializationContext.Default.CampaignSummaryViewModel.SerializeHandler);
+            Assert.NotNull(
+                MetadataAndSerializationContext.Default.RepeatedLocation.SerializeHandler
+            );
+            Assert.NotNull(
+                MetadataAndSerializationContext.Default.ActiveOrUpcomingEvent.SerializeHandler
+            );
+            Assert.NotNull(
+                MetadataAndSerializationContext.Default.CampaignSummaryViewModel.SerializeHandler
+            );
             Assert.NotNull(MetadataAndSerializationContext.Default.IndexViewModel.SerializeHandler);
-            Assert.NotNull(MetadataAndSerializationContext.Default.WeatherForecastWithPOCOs.SerializeHandler);
+            Assert.NotNull(
+                MetadataAndSerializationContext.Default.WeatherForecastWithPOCOs.SerializeHandler
+            );
             Assert.NotNull(MetadataAndSerializationContext.Default.EmptyPoco.SerializeHandler);
             Assert.NotNull(MetadataAndSerializationContext.Default.HighLowTemps.SerializeHandler);
             Assert.NotNull(MetadataAndSerializationContext.Default.MyType.SerializeHandler);
             Assert.NotNull(MetadataAndSerializationContext.Default.MyType2.SerializeHandler);
-            Assert.NotNull(MetadataAndSerializationContext.Default.MyTypeWithCallbacks.SerializeHandler);
-            Assert.NotNull(MetadataAndSerializationContext.Default.MyTypeWithPropertyOrdering.SerializeHandler);
-            Assert.NotNull(MetadataAndSerializationContext.Default.MyIntermediateType.SerializeHandler);
-            Assert.NotNull(MetadataAndSerializationContext.Default.HighLowTempsImmutable.SerializeHandler);
+            Assert.NotNull(
+                MetadataAndSerializationContext.Default.MyTypeWithCallbacks.SerializeHandler
+            );
+            Assert.NotNull(
+                MetadataAndSerializationContext.Default.MyTypeWithPropertyOrdering.SerializeHandler
+            );
+            Assert.NotNull(
+                MetadataAndSerializationContext.Default.MyIntermediateType.SerializeHandler
+            );
+            Assert.NotNull(
+                MetadataAndSerializationContext.Default.HighLowTempsImmutable.SerializeHandler
+            );
             Assert.NotNull(MetadataAndSerializationContext.Default.MyNestedClass.SerializeHandler);
-            Assert.NotNull(MetadataAndSerializationContext.Default.MyNestedNestedClass.SerializeHandler);
+            Assert.NotNull(
+                MetadataAndSerializationContext.Default.MyNestedNestedClass.SerializeHandler
+            );
             Assert.Null(MetadataAndSerializationContext.Default.ObjectArray.SerializeHandler);
             Assert.Null(MetadataAndSerializationContext.Default.SampleEnum.SerializeHandler);
             Assert.Null(MetadataAndSerializationContext.Default.String.SerializeHandler);
-            Assert.NotNull(MetadataAndSerializationContext.Default.ValueTupleStringInt32Boolean.SerializeHandler);
-            Assert.NotNull(MetadataAndSerializationContext.Default.ClassWithEnumAndNullable.SerializeHandler);
-            Assert.NotNull(MetadataAndSerializationContext.Default.ClassWithNullableProperties.SerializeHandler);
+            Assert.NotNull(
+                MetadataAndSerializationContext
+                    .Default
+                    .ValueTupleStringInt32Boolean
+                    .SerializeHandler
+            );
+            Assert.NotNull(
+                MetadataAndSerializationContext.Default.ClassWithEnumAndNullable.SerializeHandler
+            );
+            Assert.NotNull(
+                MetadataAndSerializationContext.Default.ClassWithNullableProperties.SerializeHandler
+            );
             Assert.NotNull(MetadataAndSerializationContext.Default.ClassWithCustomConverter);
             Assert.NotNull(MetadataAndSerializationContext.Default.StructWithCustomConverter);
             Assert.NotNull(MetadataAndSerializationContext.Default.ClassWithCustomConverterFactory);
-            Assert.NotNull(MetadataAndSerializationContext.Default.StructWithCustomConverterFactory);
-            Assert.NotNull(MetadataAndSerializationContext.Default.ClassWithCustomConverterProperty);
-            Assert.NotNull(MetadataAndSerializationContext.Default.StructWithCustomConverterProperty);
-            Assert.NotNull(MetadataAndSerializationContext.Default.ClassWithCustomConverterPropertyFactory);
-            Assert.NotNull(MetadataAndSerializationContext.Default.StructWithCustomConverterPropertyFactory);
-            Assert.Throws<InvalidOperationException>(() => MetadataAndSerializationContext.Default.ClassWithBadCustomConverter);
-            Assert.Throws<InvalidOperationException>(() => MetadataAndSerializationContext.Default.StructWithBadCustomConverter);
+            Assert.NotNull(
+                MetadataAndSerializationContext.Default.StructWithCustomConverterFactory
+            );
+            Assert.NotNull(
+                MetadataAndSerializationContext.Default.ClassWithCustomConverterProperty
+            );
+            Assert.NotNull(
+                MetadataAndSerializationContext.Default.StructWithCustomConverterProperty
+            );
+            Assert.NotNull(
+                MetadataAndSerializationContext.Default.ClassWithCustomConverterPropertyFactory
+            );
+            Assert.NotNull(
+                MetadataAndSerializationContext.Default.StructWithCustomConverterPropertyFactory
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => MetadataAndSerializationContext.Default.ClassWithBadCustomConverter
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => MetadataAndSerializationContext.Default.StructWithBadCustomConverter
+            );
         }
     }
 }

@@ -29,7 +29,10 @@ public class CSharpFunctionsTest : ParserTestBase
         if (message != null) @@SomeGitHubUserName <strong>@message</strong>
     }
 }
-", new[] { FunctionsDirective.Directive, }, designTime: false);
+",
+            new[] { FunctionsDirective.Directive, },
+            designTime: false
+        );
     }
 
     [Fact]
@@ -44,7 +47,10 @@ public class CSharpFunctionsTest : ParserTestBase
         if (message.Length > 0) return ""Anouncement: "" + message;
     }
 }
-", new[] { FunctionsDirective.Directive, }, designTime: false);
+",
+            new[] { FunctionsDirective.Directive, },
+            designTime: false
+        );
     }
 
     [Fact]
@@ -59,7 +65,10 @@ public class CSharpFunctionsTest : ParserTestBase
         <h3>@message</h3>
     }
 }
-", new[] { FunctionsDirective.Directive, }, designTime: false);
+",
+            new[] { FunctionsDirective.Directive, },
+            designTime: false
+        );
     }
 
     [Fact]
@@ -74,7 +83,10 @@ public class CSharpFunctionsTest : ParserTestBase
         <h3>@message</h3>
     }
 }
-", new[] { FunctionsDirective.Directive, }, designTime: false);
+",
+            new[] { FunctionsDirective.Directive, },
+            designTime: false
+        );
     }
 
     // This will parse correctly in Razor, but will generate invalid C#.
@@ -87,7 +99,10 @@ public class CSharpFunctionsTest : ParserTestBase
 @functions {
     void Announcment(string message) => <h3>@message</h3>
 }
-", new[] { FunctionsDirective.Directive, }, designTime: false);
+",
+            new[] { FunctionsDirective.Directive, },
+            designTime: false
+        );
     }
 
     [Fact]
@@ -99,7 +114,10 @@ public class CSharpFunctionsTest : ParserTestBase
 @functions {
     void Announcment(string message) => ""<h3>@message</h3>"";
 }
-", new[] { FunctionsDirective.Directive, }, designTime: false);
+",
+            new[] { FunctionsDirective.Directive, },
+            designTime: false
+        );
     }
 
     [Fact]
@@ -111,7 +129,10 @@ public class CSharpFunctionsTest : ParserTestBase
 @functions {
     void Announcment(string message) => @""<h3>@message</h3>"";
 }
-", new[] { FunctionsDirective.Directive, }, designTime: false);
+",
+            new[] { FunctionsDirective.Directive, },
+            designTime: false
+        );
     }
 
     [Fact]
@@ -131,7 +152,10 @@ public class CSharpFunctionsTest : ParserTestBase
         </div>
     }
 }
-", new[] { FunctionsDirective.Directive, }, designTime: false);
+",
+            new[] { FunctionsDirective.Directive, },
+            designTime: false
+        );
     }
 
     [Fact]
@@ -151,7 +175,10 @@ public class CSharpFunctionsTest : ParserTestBase
         </div>
     }
 }
-", new[] { FunctionsDirective.Directive, }, designTime: false);
+",
+            new[] { FunctionsDirective.Directive, },
+            designTime: false
+        );
     }
 
     [Fact]
@@ -169,6 +196,9 @@ public class CSharpFunctionsTest : ParserTestBase
         }
     }
 }
-", new[] { FunctionsDirective.Directive, }, designTime: false);
+",
+            new[] { FunctionsDirective.Directive, },
+            designTime: false
+        );
     }
 }

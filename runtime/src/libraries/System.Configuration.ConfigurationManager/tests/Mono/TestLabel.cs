@@ -32,10 +32,8 @@ using System.Collections.Generic;
 
 namespace MonoTests.System.Configuration.Util
 {
-
     public class TestLabel
     {
-
         List<Scope> scopes;
         string delimiter;
         Style defaultStyle;
@@ -47,10 +45,7 @@ namespace MonoTests.System.Configuration.Util
             HexNumer
         }
 
-        public TestLabel(string prefix)
-            : this(prefix, ".", Style.Letter)
-        {
-        }
+        public TestLabel(string prefix) : this(prefix, ".", Style.Letter) { }
 
         public TestLabel(string prefix, string delimiter, Style style)
         {

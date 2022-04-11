@@ -13,11 +13,13 @@ namespace Microsoft.Win32.RegistryTests
         [Fact]
         public void ShoudThrowIfDisposed()
         {
-            Assert.Throws<ObjectDisposedException>(() =>
-            {
-                TestRegistryKey.Dispose();
-                return TestRegistryKey.SubKeyCount;
-            });
+            Assert.Throws<ObjectDisposedException>(
+                () =>
+                {
+                    TestRegistryKey.Dispose();
+                    return TestRegistryKey.SubKeyCount;
+                }
+            );
         }
 
         [Fact]
@@ -44,7 +46,10 @@ namespace Microsoft.Win32.RegistryTests
         public void SubKeyCountTest2()
         {
             // [] Add multiple keys and test for SubKeyCount
-            string[] testSubKeys = Enumerable.Range(1, 9).Select(x => "BLAH_" + x.ToString()).ToArray();
+            string[] testSubKeys = Enumerable
+                .Range(1, 9)
+                .Select(x => "BLAH_" + x.ToString())
+                .ToArray();
             foreach (var subKey in testSubKeys)
             {
                 TestRegistryKey.CreateSubKey(subKey);

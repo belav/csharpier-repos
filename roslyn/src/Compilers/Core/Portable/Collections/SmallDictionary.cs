@@ -13,8 +13,8 @@ namespace Microsoft.CodeAnalysis
 {
     /// <summary>
     /// Dictionary designed to hold small number of items.
-    /// Compared to the regular Dictionary, average overhead per-item is roughly the same, but 
-    /// unlike regular dictionary, this one is based on an AVL tree and as such does not require 
+    /// Compared to the regular Dictionary, average overhead per-item is roughly the same, but
+    /// unlike regular dictionary, this one is based on an AVL tree and as such does not require
     /// rehashing when items are added.
     /// It does require rebalancing, but that is allocation-free.
     ///
@@ -29,11 +29,10 @@ namespace Microsoft.CodeAnalysis
     ///
     /// Generally, this dictionary is a win if number of elements is small, not known beforehand or both.
     ///
-    /// If the size of the dictionary is known at creation and it is likely to contain more than 10 elements, 
+    /// If the size of the dictionary is known at creation and it is likely to contain more than 10 elements,
     /// then regular Dictionary is a better choice.
     /// </summary>
-    internal sealed class SmallDictionary<K, V> : IEnumerable<KeyValuePair<K, V>>
-        where K : notnull
+    internal sealed class SmallDictionary<K, V> : IEnumerable<KeyValuePair<K, V>> where K : notnull
     {
         private AvlNode? _root;
         public readonly IEqualityComparer<K> Comparer;
@@ -96,11 +95,7 @@ namespace Microsoft.CodeAnalysis
 
                 return value;
             }
-
-            set
-            {
-                this.Insert(GetHashCode(key), key, value, add: false);
-            }
+            set { this.Insert(GetHashCode(key), key, value, add: false); }
         }
 
         public bool ContainsKey(K key)
@@ -133,8 +128,7 @@ namespace Microsoft.CodeAnalysis
 
         private sealed class NodeLinked : Node
         {
-            public NodeLinked(K key, V value, Node next)
-                : base(key, value)
+            public NodeLinked(K key, V value, Node next) : base(key, value)
             {
                 this.Next = next;
             }
@@ -146,8 +140,7 @@ namespace Microsoft.CodeAnalysis
         {
             public Node next;
 
-            public AvlNodeHead(int hashCode, K key, V value, Node next)
-                : base(hashCode, key, value)
+            public AvlNodeHead(int hashCode, K key, V value, Node next) : base(hashCode, key, value)
             {
                 this.next = next;
             }
@@ -155,7 +148,7 @@ namespace Microsoft.CodeAnalysis
             public override Node Next => next;
         }
 
-        // separate class to ensure that HashCode field 
+        // separate class to ensure that HashCode field
         // is located before other AvlNode fields
         // Balance is also here for better packing of AvlNode on 64bit
         private abstract class HashedNode : Node
@@ -163,8 +156,7 @@ namespace Microsoft.CodeAnalysis
             public readonly int HashCode;
             public sbyte Balance;
 
-            protected HashedNode(int hashCode, K key, V value)
-                : base(key, value)
+            protected HashedNode(int hashCode, K key, V value) : base(key, value)
             {
                 this.HashCode = hashCode;
             }
@@ -175,20 +167,18 @@ namespace Microsoft.CodeAnalysis
             public AvlNode? Left;
             public AvlNode? Right;
 
-            public AvlNode(int hashCode, K key, V value)
-                : base(hashCode, key, value)
-            { }
+            public AvlNode(int hashCode, K key, V value) : base(hashCode, key, value) { }
 
 #if DEBUG
             public static int AssertBalanced(AvlNode? V)
             {
-                if (V == null) return 0;
+                if (V == null)
+                    return 0;
 
                 int a = AssertBalanced(V.Left);
                 int b = AssertBalanced(V.Right);
 
-                if (a - b != V.Balance ||
-                    Math.Abs(a - b) >= 2)
+                if (a - b != V.Balance || Math.Abs(a - b) >= 2)
                 {
                     throw new InvalidOperationException();
                 }
@@ -198,7 +188,11 @@ namespace Microsoft.CodeAnalysis
 #endif
         }
 
-        private bool TryGetValue(int hashCode, K key, [MaybeNullWhen(returnValue: false)] out V value)
+        private bool TryGetValue(
+            int hashCode,
+            K key,
+            [MaybeNullWhen(returnValue: false)] out V value
+        )
         {
             RoslynDebug.Assert(_root is object);
             AvlNode? b = _root;
@@ -222,7 +216,7 @@ namespace Microsoft.CodeAnalysis
             value = default!;
             return false;
 
-hasBucket:
+            hasBucket:
             if (CompareKeys(b.Key, key))
             {
                 value = b.Value;
@@ -270,7 +264,7 @@ hasBucket:
             // either way nodes above unbalanced do not change their balance
             for (; ; )
             {
-                // schedule hk read 
+                // schedule hk read
                 var hc = currentNode.HashCode;
 
                 if (currentNode.Balance != 0)
@@ -330,23 +324,24 @@ hasBucket:
                     n.Balance++;
                     n = n.Left!;
                 }
-            }
-            while (n != currentNode);
+            } while (n != currentNode);
 
             // ====== rotate unbalanced node if needed
             AvlNode rotated;
             var balance = unbalanced.Balance;
             if (balance == -2)
             {
-                rotated = unbalanced.Right!.Balance < 0 ?
-                    LeftSimple(unbalanced) :
-                    LeftComplex(unbalanced);
+                rotated =
+                    unbalanced.Right!.Balance < 0
+                        ? LeftSimple(unbalanced)
+                        : LeftComplex(unbalanced);
             }
             else if (balance == 2)
             {
-                rotated = unbalanced.Left!.Balance > 0 ?
-                    RightSimple(unbalanced) :
-                    RightComplex(unbalanced);
+                rotated =
+                    unbalanced.Left!.Balance > 0
+                        ? RightSimple(unbalanced)
+                        : RightComplex(unbalanced);
             }
             else
             {
@@ -448,7 +443,6 @@ hasBucket:
             return leftRight;
         }
 
-
         private void HandleInsert(AvlNode node, AvlNode? parent, K key, V value, bool add)
         {
             Node? currentNode = node;
@@ -519,8 +513,7 @@ hasBucket:
                 private Node? _next;
                 private Node? _current;
 
-                public Enumerator(SmallDictionary<K, V> dict)
-                    : this()
+                public Enumerator(SmallDictionary<K, V> dict) : this()
                 {
                     var root = dict._root;
                     if (root != null)
@@ -589,9 +582,7 @@ hasBucket:
 
                 K IEnumerator<K>.Current => _e.Current;
 
-                void IDisposable.Dispose()
-                {
-                }
+                void IDisposable.Dispose() { }
 
                 object IEnumerator.Current => _e.Current;
 
@@ -634,8 +625,7 @@ hasBucket:
                 private Node? _next;
                 private Node? _current;
 
-                public Enumerator(SmallDictionary<K, V> dict)
-                    : this()
+                public Enumerator(SmallDictionary<K, V> dict) : this()
                 {
                     var root = dict._root;
                     if (root == null)
@@ -706,9 +696,7 @@ hasBucket:
 
                 V IEnumerator<V>.Current => _e.Current;
 
-                void IDisposable.Dispose()
-                {
-                }
+                void IDisposable.Dispose() { }
 
                 object? IEnumerator.Current => _e.Current;
 
@@ -740,8 +728,7 @@ hasBucket:
             private Node? _next;
             private Node? _current;
 
-            public Enumerator(SmallDictionary<K, V> dict)
-                : this()
+            public Enumerator(SmallDictionary<K, V> dict) : this()
             {
                 var root = dict._root;
                 if (root == null)
@@ -761,7 +748,8 @@ hasBucket:
                 }
             }
 
-            public KeyValuePair<K, V> Current => new KeyValuePair<K, V>(_current!.Key, _current!.Value);
+            public KeyValuePair<K, V> Current =>
+                new KeyValuePair<K, V>(_current!.Key, _current!.Value);
 
             public bool MoveNext()
             {
@@ -812,9 +800,7 @@ hasBucket:
 
             KeyValuePair<K, V> IEnumerator<KeyValuePair<K, V>>.Current => _e.Current;
 
-            void IDisposable.Dispose()
-            {
-            }
+            void IDisposable.Dispose() { }
 
             object IEnumerator.Current => _e.Current;
 

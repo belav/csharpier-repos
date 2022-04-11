@@ -12,9 +12,7 @@ namespace System
     /// <summary>Defines an integer type that is represented in a base-2 format.</summary>
     /// <typeparam name="TSelf">The type that implements the interface.</typeparam>
     [RequiresPreviewFeatures(Number.PreviewFeatureMessage, Url = Number.PreviewFeatureUrl)]
-    public interface IBinaryInteger<TSelf>
-        : IBinaryNumber<TSelf>,
-          IShiftOperators<TSelf, TSelf>
+    public interface IBinaryInteger<TSelf> : IBinaryNumber<TSelf>, IShiftOperators<TSelf, TSelf>
         where TSelf : IBinaryInteger<TSelf>
     {
         /// <summary>Computes the number of leading zeros in a value.</summary>

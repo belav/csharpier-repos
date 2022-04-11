@@ -40,6 +40,7 @@ namespace System.Text.RegularExpressions
         internal ReadOnlyMemory<char> GetLeftSubstring() => Text.AsMemory(0, Index);
 
         /// <summary>The substring to the right of the capture</summary>
-        internal ReadOnlyMemory<char> GetRightSubstring() => Text.AsMemory(Index + Length, Text.Length - Index - Length);
+        internal ReadOnlyMemory<char> GetRightSubstring() =>
+            Text.AsMemory(Index + Length, Text.Length - Index - Length);
     }
 }

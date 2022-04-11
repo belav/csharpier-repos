@@ -39,10 +39,20 @@ internal sealed class PageRequestDelegateFactory : IRequestDelegateFactory
         IPageHandlerMethodSelector selector,
         DiagnosticListener diagnosticListener,
         ILoggerFactory loggerFactory,
-        IActionResultTypeMapper mapper)
-        : this(cache, modelMetadataProvider, tempDataFactory, mvcOptions, mvcViewOptions, selector, diagnosticListener, loggerFactory, mapper, null)
-    {
-    }
+        IActionResultTypeMapper mapper
+    )
+        : this(
+            cache,
+            modelMetadataProvider,
+            tempDataFactory,
+            mvcOptions,
+            mvcViewOptions,
+            selector,
+            diagnosticListener,
+            loggerFactory,
+            mapper,
+            null
+        ) { }
 
     public PageRequestDelegateFactory(
         PageActionInvokerCache cache,
@@ -54,7 +64,8 @@ internal sealed class PageRequestDelegateFactory : IRequestDelegateFactory
         DiagnosticListener diagnosticListener,
         ILoggerFactory loggerFactory,
         IActionResultTypeMapper mapper,
-        IActionContextAccessor? actionContextAccessor)
+        IActionContextAccessor? actionContextAccessor
+    )
     {
         _cache = cache;
         _valueProviderFactories = mvcOptions.Value.ValueProviderFactories.ToArray();
@@ -69,7 +80,10 @@ internal sealed class PageRequestDelegateFactory : IRequestDelegateFactory
         _actionContextAccessor = actionContextAccessor ?? ActionContextAccessor.Null;
     }
 
-    public RequestDelegate? CreateRequestDelegate(ActionDescriptor actionDescriptor, RouteValueDictionary? dataTokens)
+    public RequestDelegate? CreateRequestDelegate(
+        ActionDescriptor actionDescriptor,
+        RouteValueDictionary? dataTokens
+    )
     {
         if (_enableActionInvokers || actionDescriptor is not CompiledPageActionDescriptor page)
         {
@@ -99,8 +113,13 @@ internal sealed class PageRequestDelegateFactory : IRequestDelegateFactory
             var pageContext = new PageContext(actionContext)
             {
                 ActionDescriptor = cacheEntry.ActionDescriptor,
-                ValueProviderFactories = new CopyOnWriteList<IValueProviderFactory>(_valueProviderFactories),
-                ViewData = cacheEntry.ViewDataFactory(_modelMetadataProvider, actionContext.ModelState),
+                ValueProviderFactories = new CopyOnWriteList<IValueProviderFactory>(
+                    _valueProviderFactories
+                ),
+                ViewData = cacheEntry.ViewDataFactory(
+                    _modelMetadataProvider,
+                    actionContext.ModelState
+                ),
                 ViewStartFactories = cacheEntry.ViewStartFactories.ToList(),
             };
 
@@ -114,7 +133,8 @@ internal sealed class PageRequestDelegateFactory : IRequestDelegateFactory
                 filters,
                 cacheEntry,
                 _tempDataFactory,
-                _mvcViewOptions.HtmlHelperOptions);
+                _mvcViewOptions.HtmlHelperOptions
+            );
 
             return pageInvoker.InvokeAsync();
         };

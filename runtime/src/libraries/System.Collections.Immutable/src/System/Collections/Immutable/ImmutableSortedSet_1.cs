@@ -20,9 +20,24 @@ namespace System.Collections.Immutable
     [DebuggerDisplay("Count = {Count}")]
     [DebuggerTypeProxy(typeof(ImmutableEnumerableDebuggerProxy<>))]
 #if NET5_0_OR_GREATER
-    public sealed partial class ImmutableSortedSet<T> : IImmutableSet<T>, ISortKeyCollection<T>, IReadOnlySet<T>, IReadOnlyList<T>, IList<T>, ISet<T>, IList, IStrongEnumerable<T, ImmutableSortedSet<T>.Enumerator>
+    public sealed partial class ImmutableSortedSet<T>
+        : IImmutableSet<T>,
+          ISortKeyCollection<T>,
+          IReadOnlySet<T>,
+          IReadOnlyList<T>,
+          IList<T>,
+          ISet<T>,
+          IList,
+          IStrongEnumerable<T, ImmutableSortedSet<T>.Enumerator>
 #else
-    public sealed partial class ImmutableSortedSet<T> : IImmutableSet<T>, ISortKeyCollection<T>, IReadOnlyList<T>, IList<T>, ISet<T>, IList, IStrongEnumerable<T, ImmutableSortedSet<T>.Enumerator>
+    public sealed partial class ImmutableSortedSet<T>
+        : IImmutableSet<T>,
+          ISortKeyCollection<T>,
+          IReadOnlyList<T>,
+          IList<T>,
+          ISet<T>,
+          IList,
+          IStrongEnumerable<T, ImmutableSortedSet<T>.Enumerator>
 #endif
     {
         /// <summary>
@@ -147,10 +162,7 @@ namespace System.Collections.Immutable
         /// <returns>The element at the given position.</returns>
         public T this[int index]
         {
-            get
-            {
-                return _root.ItemRef(index);
-            }
+            get { return _root.ItemRef(index); }
         }
 
         /// <summary>
@@ -305,7 +317,10 @@ namespace System.Collections.Immutable
             Requires.NotNull(other, nameof(other));
 
             ImmutableSortedSet<T>? immutableSortedSet;
-            if (TryCastToImmutableSortedSet(other, out immutableSortedSet) && immutableSortedSet.KeyComparer == this.KeyComparer) // argument is a compatible immutable sorted set
+            if (
+                TryCastToImmutableSortedSet(other, out immutableSortedSet)
+                && immutableSortedSet.KeyComparer == this.KeyComparer
+            ) // argument is a compatible immutable sorted set
             {
                 if (immutableSortedSet.IsEmpty)
                 {
@@ -325,7 +340,13 @@ namespace System.Collections.Immutable
             }
 
             int count;
-            if (this.IsEmpty || (other.TryGetCount(out count) && (this.Count + count) * RefillOverIncrementalThreshold > this.Count))
+            if (
+                this.IsEmpty
+                || (
+                    other.TryGetCount(out count)
+                    && (this.Count + count) * RefillOverIncrementalThreshold > this.Count
+                )
+            )
             {
                 // The payload being added is so large compared to this collection's current size
                 // that we likely won't see much memory reuse in the node tree by performing an
@@ -940,9 +961,7 @@ namespace System.Collections.Immutable
         /// </returns>
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
-            return this.IsEmpty ?
-                Enumerable.Empty<T>().GetEnumerator() :
-                this.GetEnumerator();
+            return this.IsEmpty ? Enumerable.Empty<T>().GetEnumerator() : this.GetEnumerator();
         }
 
         #endregion
@@ -983,7 +1002,10 @@ namespace System.Collections.Immutable
         /// <summary>
         /// Discovers an immutable sorted set for a given value, if possible.
         /// </summary>
-        private static bool TryCastToImmutableSortedSet(IEnumerable<T> sequence, [NotNullWhen(true)] out ImmutableSortedSet<T>? other)
+        private static bool TryCastToImmutableSortedSet(
+            IEnumerable<T> sequence,
+            [NotNullWhen(true)] out ImmutableSortedSet<T>? other
+        )
         {
             other = sequence as ImmutableSortedSet<T>;
             if (other != null)
@@ -1010,8 +1032,8 @@ namespace System.Collections.Immutable
         private static ImmutableSortedSet<T> Wrap(Node root, IComparer<T> comparer)
         {
             return root.IsEmpty
-                ? ImmutableSortedSet<T>.Empty.WithComparer(comparer)
-                : new ImmutableSortedSet<T>(root, comparer);
+              ? ImmutableSortedSet<T>.Empty.WithComparer(comparer)
+              : new ImmutableSortedSet<T>(root, comparer);
         }
 
         /// <summary>

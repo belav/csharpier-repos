@@ -38,7 +38,8 @@ namespace JIT.HardwareIntrinsics.General
     {
         private static readonly int LargestVectorSize = 16;
 
-        private static readonly int ElementCount = Unsafe.SizeOf<Vector128<UInt16>>() / sizeof(UInt16);
+        private static readonly int ElementCount =
+            Unsafe.SizeOf<Vector128<UInt16>>() / sizeof(UInt16);
 
         public bool Succeeded { get; set; } = true;
 
@@ -53,7 +54,16 @@ namespace JIT.HardwareIntrinsics.General
                 values[i] = TestLibrary.Generator.GetUInt16();
             }
 
-            Vector128<UInt16> value = Vector128.Create(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7]);
+            Vector128<UInt16> value = Vector128.Create(
+                values[0],
+                values[1],
+                values[2],
+                values[3],
+                values[4],
+                values[5],
+                values[6],
+                values[7]
+            );
 
             UInt16 result = value.ToScalar();
             ValidateResult(result, values);
@@ -70,22 +80,39 @@ namespace JIT.HardwareIntrinsics.General
                 values[i] = TestLibrary.Generator.GetUInt16();
             }
 
-            Vector128<UInt16> value = Vector128.Create(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7]);
+            Vector128<UInt16> value = Vector128.Create(
+                values[0],
+                values[1],
+                values[2],
+                values[3],
+                values[4],
+                values[5],
+                values[6],
+                values[7]
+            );
 
             object result = typeof(Vector128)
-                                .GetMethod(nameof(Vector128.ToScalar))
-                                .MakeGenericMethod(typeof(UInt16))
-                                .Invoke(null, new object[] { value });
+                .GetMethod(nameof(Vector128.ToScalar))
+                .MakeGenericMethod(typeof(UInt16))
+                .Invoke(null, new object[] { value });
 
             ValidateResult((UInt16)(result), values);
         }
 
-        private void ValidateResult(UInt16 result, UInt16[] values, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            UInt16 result,
+            UInt16[] values,
+            [CallerMemberName] string method = ""
+        )
         {
             if (result != values[0])
             {
-                TestLibrary.TestFramework.LogInformation($"Vector128<UInt16>.ToScalar(): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"  values: ({string.Join(", ", values)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector128<UInt16>.ToScalar(): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  values: ({string.Join(", ", values)})"
+                );
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 

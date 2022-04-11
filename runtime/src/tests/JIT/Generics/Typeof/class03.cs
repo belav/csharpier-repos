@@ -5,20 +5,35 @@
 using System;
 
 public struct ValX0 { }
+
 public struct ValY0 { }
+
 public struct ValX1<T> { }
+
 public struct ValY1<T> { }
+
 public struct ValX2<T, U> { }
+
 public struct ValY2<T, U> { }
+
 public struct ValX3<T, U, V> { }
+
 public struct ValY3<T, U, V> { }
+
 public class RefX0 { }
+
 public class RefY0 { }
+
 public class RefX1<T> { }
+
 public class RefY1<T> { }
+
 public class RefX2<T, U> { }
+
 public class RefY2<T, U> { }
+
 public class RefX3<T, U, V> { }
+
 public class RefY3<T, U, V> { }
 
 public class Gen<T, U, V>
@@ -64,6 +79,7 @@ public class Test_class03
 {
     public static int counter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;
@@ -72,17 +88,60 @@ public class Test_class03
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-
     }
 
     public static int Main()
     {
-        Eval((new Gen<int, double, Guid>(new int(), new double(), new Guid())).InstVerify(typeof(int), typeof(double), typeof(Guid)));
-        Eval((new Gen<double, Guid, string>(new double(), new Guid(), "string")).InstVerify(typeof(double), typeof(Guid), typeof(string)));
-        Eval((new Gen<Guid, string, object>(new Guid(), "string", new object())).InstVerify(typeof(Guid), typeof(string), typeof(object)));
-        Eval((new Gen<string, object, int[]>("string", new object(), new int[1])).InstVerify(typeof(string), typeof(object), typeof(int[])));
-        Eval((new Gen<object, int[], RefX1<ValX1<int>>>(new object(), new int[1], new RefX1<ValX1<int>>())).InstVerify(typeof(object), typeof(int[]), typeof(RefX1<ValX1<int>>)));
-        Eval((new Gen<int[], RefX1<ValX1<int>>, ValX1<RefX2<int, double>>>(new int[1], new RefX1<ValX1<int>>(), new ValX1<RefX2<int, double>>())).InstVerify(typeof(int[]), typeof(RefX1<ValX1<int>>), typeof(ValX1<RefX2<int, double>>)));
+        Eval(
+            (new Gen<int, double, Guid>(new int(), new double(), new Guid())).InstVerify(
+                typeof(int),
+                typeof(double),
+                typeof(Guid)
+            )
+        );
+        Eval(
+            (new Gen<double, Guid, string>(new double(), new Guid(), "string")).InstVerify(
+                typeof(double),
+                typeof(Guid),
+                typeof(string)
+            )
+        );
+        Eval(
+            (new Gen<Guid, string, object>(new Guid(), "string", new object())).InstVerify(
+                typeof(Guid),
+                typeof(string),
+                typeof(object)
+            )
+        );
+        Eval(
+            (new Gen<string, object, int[]>("string", new object(), new int[1])).InstVerify(
+                typeof(string),
+                typeof(object),
+                typeof(int[])
+            )
+        );
+        Eval(
+            (
+                new Gen<object, int[], RefX1<ValX1<int>>>(
+                    new object(),
+                    new int[1],
+                    new RefX1<ValX1<int>>()
+                )
+            ).InstVerify(typeof(object), typeof(int[]), typeof(RefX1<ValX1<int>>))
+        );
+        Eval(
+            (
+                new Gen<int[], RefX1<ValX1<int>>, ValX1<RefX2<int, double>>>(
+                    new int[1],
+                    new RefX1<ValX1<int>>(),
+                    new ValX1<RefX2<int, double>>()
+                )
+            ).InstVerify(
+                typeof(int[]),
+                typeof(RefX1<ValX1<int>>),
+                typeof(ValX1<RefX2<int, double>>)
+            )
+        );
 
         if (result)
         {
@@ -95,5 +154,4 @@ public class Test_class03
             return 1;
         }
     }
-
 }

@@ -38,7 +38,9 @@ namespace Microsoft.CodeAnalysis.Remote
                 // Server GC runs processor-affinitized threads with high priority. To avoid interfering with other
                 // applications while still allowing efficient out-of-process execution, slightly reduce the process
                 // priority when using server GC.
-                Process.GetCurrentProcess().TrySetPriorityClass(ProcessPriorityClass.BelowNormal);
+                Process
+                    .GetCurrentProcess()
+                    .TrySetPriorityClass(ProcessPriorityClass.BelowNormal);
             }
 
             // Make encodings that is by default present in desktop framework but not in corefx available to runtime.
@@ -55,11 +57,13 @@ namespace Microsoft.CodeAnalysis.Remote
 
         protected BrokeredServiceBase(in ServiceConstructionArguments arguments)
         {
-            var traceSource = (TraceSource?)arguments.ServiceProvider.GetService(typeof(TraceSource));
+            var traceSource = (TraceSource?)
+                arguments.ServiceProvider.GetService(typeof(TraceSource));
             Contract.ThrowIfNull(traceSource);
             TraceLogger = traceSource;
 
-            TestData = (RemoteHostTestData?)arguments.ServiceProvider.GetService(typeof(RemoteHostTestData));
+            TestData = (RemoteHostTestData?)
+                arguments.ServiceProvider.GetService(typeof(RemoteHostTestData));
             WorkspaceManager = TestData?.WorkspaceManager ?? RemoteWorkspaceManager.Default;
 
 #pragma warning disable VSTHRD012 // Provide JoinableTaskFactory where allowed
@@ -69,56 +73,81 @@ namespace Microsoft.CodeAnalysis.Remote
             SolutionAssetSource = new SolutionAssetSource(ServiceBrokerClient);
         }
 
-        public void Dispose()
-            => ServiceBrokerClient.Dispose();
+        public void Dispose() => ServiceBrokerClient.Dispose();
 
-        public RemoteWorkspace GetWorkspace()
-            => WorkspaceManager.GetWorkspace();
+        public RemoteWorkspace GetWorkspace() => WorkspaceManager.GetWorkspace();
 
-        public HostWorkspaceServices GetWorkspaceServices()
-            => GetWorkspace().Services;
+        public HostWorkspaceServices GetWorkspaceServices() => GetWorkspace().Services;
 
-        protected void Log(TraceEventType errorType, string message)
-            => TraceLogger.TraceEvent(errorType, 0, $"{GetType()}: {message}");
+        protected void Log(TraceEventType errorType, string message) =>
+            TraceLogger.TraceEvent(errorType, 0, $"{GetType()}: {message}");
 
-        protected ValueTask<Solution> GetSolutionAsync(PinnedSolutionInfo solutionInfo, CancellationToken cancellationToken)
+        protected ValueTask<Solution> GetSolutionAsync(
+            PinnedSolutionInfo solutionInfo,
+            CancellationToken cancellationToken
+        )
         {
             var workspace = GetWorkspace();
-            var assetProvider = workspace.CreateAssetProvider(solutionInfo, WorkspaceManager.SolutionAssetCache, SolutionAssetSource);
-            return workspace.GetSolutionAsync(assetProvider, solutionInfo.SolutionChecksum, solutionInfo.FromPrimaryBranch, solutionInfo.WorkspaceVersion, solutionInfo.ProjectId, cancellationToken);
+            var assetProvider = workspace.CreateAssetProvider(
+                solutionInfo,
+                WorkspaceManager.SolutionAssetCache,
+                SolutionAssetSource
+            );
+            return workspace.GetSolutionAsync(
+                assetProvider,
+                solutionInfo.SolutionChecksum,
+                solutionInfo.FromPrimaryBranch,
+                solutionInfo.WorkspaceVersion,
+                solutionInfo.ProjectId,
+                cancellationToken
+            );
         }
 
-        protected ValueTask<T> RunServiceAsync<T>(Func<CancellationToken, ValueTask<T>> implementation, CancellationToken cancellationToken)
+        protected ValueTask<T> RunServiceAsync<T>(
+            Func<CancellationToken, ValueTask<T>> implementation,
+            CancellationToken cancellationToken
+        )
         {
             WorkspaceManager.SolutionAssetCache.UpdateLastActivityTime();
             return RunServiceImplAsync(implementation, cancellationToken);
         }
 
-        internal static async ValueTask<T> RunServiceImplAsync<T>(Func<CancellationToken, ValueTask<T>> implementation, CancellationToken cancellationToken)
+        internal static async ValueTask<T> RunServiceImplAsync<T>(
+            Func<CancellationToken, ValueTask<T>> implementation,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
                 return await implementation(cancellationToken).ConfigureAwait(false);
             }
-            catch (Exception ex) when (FatalError.ReportAndPropagateUnlessCanceled(ex, cancellationToken))
+            catch (Exception ex)
+                when (FatalError.ReportAndPropagateUnlessCanceled(ex, cancellationToken))
             {
                 throw ExceptionUtilities.Unreachable;
             }
         }
 
-        protected ValueTask RunServiceAsync(Func<CancellationToken, ValueTask> implementation, CancellationToken cancellationToken)
+        protected ValueTask RunServiceAsync(
+            Func<CancellationToken, ValueTask> implementation,
+            CancellationToken cancellationToken
+        )
         {
             WorkspaceManager.SolutionAssetCache.UpdateLastActivityTime();
             return RunServiceImplAsync(implementation, cancellationToken);
         }
 
-        internal static async ValueTask RunServiceImplAsync(Func<CancellationToken, ValueTask> implementation, CancellationToken cancellationToken)
+        internal static async ValueTask RunServiceImplAsync(
+            Func<CancellationToken, ValueTask> implementation,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
                 await implementation(cancellationToken).ConfigureAwait(false);
             }
-            catch (Exception ex) when (FatalError.ReportAndPropagateUnlessCanceled(ex, cancellationToken))
+            catch (Exception ex)
+                when (FatalError.ReportAndPropagateUnlessCanceled(ex, cancellationToken))
             {
                 throw ExceptionUtilities.Unreachable;
             }
@@ -152,7 +181,10 @@ namespace Microsoft.CodeAnalysis.Remote
                 catch (EntryPointNotFoundException)
                 {
                     // AddDllDirectory API might not be available on Windows 7.
-                    Environment.SetEnvironmentVariable("MICROSOFT_DIASYMREADER_NATIVE_ALT_LOAD_PATH", loadDir);
+                    Environment.SetEnvironmentVariable(
+                        "MICROSOFT_DIASYMREADER_NATIVE_ALT_LOAD_PATH",
+                        loadDir
+                    );
                 }
             }
         }

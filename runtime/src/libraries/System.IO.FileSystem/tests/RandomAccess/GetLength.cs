@@ -8,8 +8,11 @@ namespace System.IO.Tests
 {
     public class RandomAccess_GetLength : RandomAccess_Base<long>
     {
-        protected override long MethodUnderTest(SafeFileHandle handle, byte[] bytes, long fileOffset)
-            => RandomAccess.GetLength(handle);
+        protected override long MethodUnderTest(
+            SafeFileHandle handle,
+            byte[] bytes,
+            long fileOffset
+        ) => RandomAccess.GetLength(handle);
 
         protected override bool UsesOffsets => false;
 
@@ -17,7 +20,14 @@ namespace System.IO.Tests
         [MemberData(nameof(GetSyncAsyncOptions))]
         public void ReturnsZeroForEmptyFile(FileOptions options)
         {
-            using (SafeFileHandle handle = File.OpenHandle(GetTestFilePath(), FileMode.CreateNew, FileAccess.Write, options: options))
+            using (
+                SafeFileHandle handle = File.OpenHandle(
+                    GetTestFilePath(),
+                    FileMode.CreateNew,
+                    FileAccess.Write,
+                    options: options
+                )
+            )
             {
                 Assert.Equal(0, RandomAccess.GetLength(handle));
             }
@@ -31,7 +41,9 @@ namespace System.IO.Tests
             string filePath = GetTestFilePath();
             File.WriteAllBytes(filePath, new byte[fileSize]);
 
-            using (SafeFileHandle handle = File.OpenHandle(filePath, FileMode.Open, options: options))
+            using (
+                SafeFileHandle handle = File.OpenHandle(filePath, FileMode.Open, options: options)
+            )
             {
                 Assert.Equal(fileSize, RandomAccess.GetLength(handle));
             }

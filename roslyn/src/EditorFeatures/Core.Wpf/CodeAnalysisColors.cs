@@ -17,80 +17,38 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
 
         public static object SystemCaptionTextColorKey
         {
-            get
-            {
-                return s_systemCaptionTextColorKey;
-            }
-
-            set
-            {
-                s_systemCaptionTextColorKey = value;
-            }
+            get { return s_systemCaptionTextColorKey; }
+            set { s_systemCaptionTextColorKey = value; }
         }
 
         public static object SystemCaptionTextBrushKey
         {
-            get
-            {
-                return s_systemCaptionTextBrushKey;
-            }
-
-            set
-            {
-                s_systemCaptionTextBrushKey = value;
-            }
+            get { return s_systemCaptionTextBrushKey; }
+            set { s_systemCaptionTextBrushKey = value; }
         }
 
         public static object CheckBoxTextBrushKey
         {
-            get
-            {
-                return s_checkBoxTextBrushKey;
-            }
-
-            set
-            {
-                s_checkBoxTextBrushKey = value;
-            }
+            get { return s_checkBoxTextBrushKey; }
+            set { s_checkBoxTextBrushKey = value; }
         }
 
         public static object BackgroundBrushKey
         {
-            get
-            {
-                return s_backgroundBrushKey;
-            }
-
-            set
-            {
-                s_backgroundBrushKey = value;
-            }
+            get { return s_backgroundBrushKey; }
+            set { s_backgroundBrushKey = value; }
         }
 
         public static object ButtonStyleKey
         {
-            get
-            {
-                return s_buttonStyleKey;
-            }
-
-            set
-            {
-                s_buttonStyleKey = value;
-            }
+            get { return s_buttonStyleKey; }
+            set { s_buttonStyleKey = value; }
         }
 
         public static object AccentBarColorKey
         {
-            get
-            {
-                return s_accentBarColorKey;
-            }
-
-            set
-            {
-                s_accentBarColorKey = value;
-            }
+            get { return s_accentBarColorKey; }
+            set { s_accentBarColorKey = value; }
         }
     }
 }

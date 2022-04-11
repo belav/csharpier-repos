@@ -15,14 +15,12 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         {
             private readonly Compilation _compilation;
 
-            public AnonymousTypeRemover(Compilation compilation)
-                => _compilation = compilation;
+            public AnonymousTypeRemover(Compilation compilation) => _compilation = compilation;
 
-            public override ITypeSymbol DefaultVisit(ISymbol node)
-                => throw new NotImplementedException();
+            public override ITypeSymbol DefaultVisit(ISymbol node) =>
+                throw new NotImplementedException();
 
-            public override ITypeSymbol VisitDynamicType(IDynamicTypeSymbol symbol)
-                => symbol;
+            public override ITypeSymbol VisitDynamicType(IDynamicTypeSymbol symbol) => symbol;
 
             public override ITypeSymbol VisitArrayType(IArrayTypeSymbol symbol)
             {
@@ -45,8 +43,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
             public override ITypeSymbol VisitNamedType(INamedTypeSymbol symbol)
             {
-                if (symbol.IsNormalAnonymousType() ||
-                    symbol.IsAnonymousDelegateType())
+                if (symbol.IsNormalAnonymousType() || symbol.IsAnonymousDelegateType())
                 {
                     return _compilation.ObjectType;
                 }
@@ -71,8 +68,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 return _compilation.CreatePointerTypeSymbol(elementType);
             }
 
-            public override ITypeSymbol VisitTypeParameter(ITypeParameterSymbol symbol)
-                => symbol;
+            public override ITypeSymbol VisitTypeParameter(ITypeParameterSymbol symbol) => symbol;
         }
     }
 }

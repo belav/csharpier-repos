@@ -22,9 +22,7 @@ namespace System.IO.IsolatedStorage
         public void GetFileNames_ThrowsObjectDisposed()
         {
             IsolatedStorageFile isf;
-            using (isf = IsolatedStorageFile.GetUserStoreForAssembly())
-            {
-            }
+            using (isf = IsolatedStorageFile.GetUserStoreForAssembly()) { }
 
             Assert.Throws<ObjectDisposedException>(() => isf.GetFileNames("foo"));
         }
@@ -73,7 +71,10 @@ namespace System.IO.IsolatedStorage
                 Assert.Equal(new string[] { "A", "B" }, isf.GetFileNames().OrderBy(s => s));
                 Assert.Equal(new string[] { "A", "B" }, isf.GetFileNames("*").OrderBy(s => s));
                 Assert.Equal(new string[] { "A" }, isf.GetFileNames("A"));
-                Assert.Equal(new string[] { "D", "E" }, isf.GetFileNames(Path.Combine("C", "*")).OrderBy(s => s));
+                Assert.Equal(
+                    new string[] { "D", "E" },
+                    isf.GetFileNames(Path.Combine("C", "*")).OrderBy(s => s)
+                );
                 Assert.Equal(new string[] { "D" }, isf.GetFileNames(Path.Combine("C", "D")));
             }
         }

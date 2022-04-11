@@ -13,7 +13,9 @@ namespace Microsoft.CodeAnalysis
 {
     internal static class GeneratorTimerExtensions
     {
-        public static RunTimer CreateGeneratorDriverRunTimer(this CodeAnalysisEventSource eventSource)
+        public static RunTimer CreateGeneratorDriverRunTimer(
+            this CodeAnalysisEventSource eventSource
+        )
         {
             if (eventSource.IsEnabled(EventLevel.Informational, Keywords.Performance))
             {
@@ -27,14 +29,25 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        public static RunTimer CreateSingleGeneratorRunTimer(this CodeAnalysisEventSource eventSource, ISourceGenerator generator)
+        public static RunTimer CreateSingleGeneratorRunTimer(
+            this CodeAnalysisEventSource eventSource,
+            ISourceGenerator generator
+        )
         {
             if (eventSource.IsEnabled(EventLevel.Informational, Keywords.Performance))
             {
                 var id = Guid.NewGuid().ToString();
                 var type = generator.GetGeneratorType();
                 eventSource.StartSingleGeneratorRunTime(type.FullName!, type.Assembly.Location, id);
-                return new RunTimer(t => eventSource.StopSingleGeneratorRunTime(type.FullName!, type.Assembly.Location, t.Ticks, id));
+                return new RunTimer(
+                    t =>
+                        eventSource.StopSingleGeneratorRunTime(
+                            type.FullName!,
+                            type.Assembly.Location,
+                            t.Ticks,
+                            id
+                        )
+                );
             }
             else
             {
@@ -51,14 +64,13 @@ namespace Microsoft.CodeAnalysis
 
             public RunTimer()
             {
-                // start twice to improve accuracy. See AnalyzerExecutor.ExecuteAndCatchIfThrows for more details 
+                // start twice to improve accuracy. See AnalyzerExecutor.ExecuteAndCatchIfThrows for more details
                 _ = SharedStopwatch.StartNew();
                 _timer = SharedStopwatch.StartNew();
                 _callback = null;
             }
 
-            public RunTimer(Action<TimeSpan> callback)
-                : this()
+            public RunTimer(Action<TimeSpan> callback) : this()
             {
                 _callback = callback;
             }

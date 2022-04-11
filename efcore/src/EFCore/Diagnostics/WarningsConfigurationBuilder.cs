@@ -49,8 +49,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// </remarks>
         /// <param name="warningBehavior">The desired behavior.</param>
         /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-        public virtual WarningsConfigurationBuilder Default(WarningBehavior warningBehavior)
-            => WithOption(e => e.WithDefaultBehavior(warningBehavior));
+        public virtual WarningsConfigurationBuilder Default(WarningBehavior warningBehavior) =>
+            WithOption(e => e.WithDefaultBehavior(warningBehavior));
 
         /// <summary>
         ///     Causes an exception to be thrown when the specified event occurs, regardless of default configuration.
@@ -69,8 +69,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         ///     The IDs for events to configure.
         /// </param>
         /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-        public virtual WarningsConfigurationBuilder Throw(
-            params EventId[] eventIds)
+        public virtual WarningsConfigurationBuilder Throw(params EventId[] eventIds)
         {
             Check.NotNull(eventIds, nameof(eventIds));
 
@@ -94,8 +93,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         ///     The IDs for events to configure.
         /// </param>
         /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-        public virtual WarningsConfigurationBuilder Log(
-            params EventId[] eventIds)
+        public virtual WarningsConfigurationBuilder Log(params EventId[] eventIds)
         {
             Check.NotNull(eventIds, nameof(eventIds));
 
@@ -120,7 +118,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// </param>
         /// <returns>The same builder instance so that multiple calls can be chained.</returns>
         public virtual WarningsConfigurationBuilder Log(
-            params (EventId Id, LogLevel Level)[] eventsAndLevels)
+            params (EventId Id, LogLevel Level)[] eventsAndLevels
+        )
         {
             Check.NotNull(eventsAndLevels, nameof(eventsAndLevels));
 
@@ -144,20 +143,26 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         ///     The IDs for events to configure.
         /// </param>
         /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-        public virtual WarningsConfigurationBuilder Ignore(
-            params EventId[] eventIds)
+        public virtual WarningsConfigurationBuilder Ignore(params EventId[] eventIds)
         {
             Check.NotNull(eventIds, nameof(eventIds));
 
             return WithOption(e => e.WithExplicit(eventIds, WarningBehavior.Ignore));
         }
 
-        private WarningsConfigurationBuilder WithOption(Func<WarningsConfiguration, WarningsConfiguration> withFunc)
+        private WarningsConfigurationBuilder WithOption(
+            Func<WarningsConfiguration, WarningsConfiguration> withFunc
+        )
         {
-            var coreOptionsExtension = _optionsBuilder.Options.FindExtension<CoreOptionsExtension>() ?? new CoreOptionsExtension();
+            var coreOptionsExtension =
+                _optionsBuilder.Options.FindExtension<CoreOptionsExtension>()
+                ?? new CoreOptionsExtension();
 
             ((IDbContextOptionsBuilderInfrastructure)_optionsBuilder).AddOrUpdateExtension(
-                coreOptionsExtension.WithWarningsConfiguration(withFunc(coreOptionsExtension.WarningsConfiguration)));
+                coreOptionsExtension.WithWarningsConfiguration(
+                    withFunc(coreOptionsExtension.WarningsConfiguration)
+                )
+            );
 
             return this;
         }

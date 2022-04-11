@@ -10,22 +10,27 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.FindUsages
     {
         private readonly Microsoft.CodeAnalysis.FindUsages.SourceReferenceItem _roslynSourceReferenceItem;
 
-        private FSharpSourceReferenceItem(Microsoft.CodeAnalysis.FindUsages.SourceReferenceItem roslynDefinitionItem)
+        private FSharpSourceReferenceItem(
+            Microsoft.CodeAnalysis.FindUsages.SourceReferenceItem roslynDefinitionItem
+        )
         {
             _roslynSourceReferenceItem = roslynDefinitionItem;
         }
 
-        public FSharpSourceReferenceItem(FSharpDefinitionItem definition, FSharpDocumentSpan sourceSpan)
+        public FSharpSourceReferenceItem(
+            FSharpDefinitionItem definition,
+            FSharpDocumentSpan sourceSpan
+        )
         {
-            _roslynSourceReferenceItem = new Microsoft.CodeAnalysis.FindUsages.SourceReferenceItem(definition.RoslynDefinitionItem, sourceSpan.ToRoslynDocumentSpan());
+            _roslynSourceReferenceItem = new Microsoft.CodeAnalysis.FindUsages.SourceReferenceItem(
+                definition.RoslynDefinitionItem,
+                sourceSpan.ToRoslynDocumentSpan()
+            );
         }
 
         internal Microsoft.CodeAnalysis.FindUsages.SourceReferenceItem RoslynSourceReferenceItem
         {
-            get
-            {
-                return _roslynSourceReferenceItem;
-            }
+            get { return _roslynSourceReferenceItem; }
         }
     }
 }

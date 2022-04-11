@@ -9,22 +9,44 @@ namespace CoreclrTestLib
 {
     public class MobileAppHandler
     {
-        public int InstallMobileApp(string platform, string category, string testBinaryBase, string reportBase)
+        public int InstallMobileApp(
+            string platform,
+            string category,
+            string testBinaryBase,
+            string reportBase
+        )
         {
             return HandleMobileApp("install", platform, category, testBinaryBase, reportBase);
         }
 
-        public int UninstallMobileApp(string platform, string category, string testBinaryBase, string reportBase)
+        public int UninstallMobileApp(
+            string platform,
+            string category,
+            string testBinaryBase,
+            string reportBase
+        )
         {
             return HandleMobileApp("uninstall", platform, category, testBinaryBase, reportBase);
         }
 
-        private static int HandleMobileApp(string action, string platform, string category, string testBinaryBase, string reportBase)
+        private static int HandleMobileApp(
+            string action,
+            string platform,
+            string category,
+            string testBinaryBase,
+            string reportBase
+        )
         {
             //install or uninstall mobile app
             int exitCode = -100;
 
-            if (action == "install" && (File.Exists($"{testBinaryBase}/.retry") || File.Exists($"{testBinaryBase}/.reboot")))
+            if (
+                action == "install"
+                && (
+                    File.Exists($"{testBinaryBase}/.retry")
+                    || File.Exists($"{testBinaryBase}/.reboot")
+                )
+            )
             {
                 return exitCode;
             }
@@ -44,23 +66,35 @@ namespace CoreclrTestLib
                 //Validate inputs
                 if ((platform != "android") && (platform != "apple"))
                 {
-                    outputWriter.WriteLine($"Incorrect value of platform. Provided {platform}. Valid strings are android and apple.");
+                    outputWriter.WriteLine(
+                        $"Incorrect value of platform. Provided {platform}. Valid strings are android and apple."
+                    );
                     platformValueFlag = false;
                 }
 
                 if ((action != "install") && (action != "uninstall"))
                 {
-                    outputWriter.WriteLine($"Incorrect value of action. Provided {action}. Valid strings are install and uninstall.");
+                    outputWriter.WriteLine(
+                        $"Incorrect value of action. Provided {action}. Valid strings are install and uninstall."
+                    );
                     actionValueFlag = false;
                 }
 
                 if (platformValueFlag && actionValueFlag)
                 {
                     int timeout = 240000; // Set timeout to 4 mins, because the installation on Android arm64/32 devices could take up to 10 mins on CI
-                    string dotnetCmd_raw = System.Environment.GetEnvironmentVariable("__TestDotNetCmd");
-                    string xharnessCmd_raw = System.Environment.GetEnvironmentVariable("XHARNESS_CLI_PATH");
-                    string dotnetCmd = string.IsNullOrEmpty(dotnetCmd_raw) ? "dotnet" : dotnetCmd_raw;
-                    string xharnessCmd = string.IsNullOrEmpty(xharnessCmd_raw) ? "xharness" : $"exec {xharnessCmd_raw}";
+                    string dotnetCmd_raw = System.Environment.GetEnvironmentVariable(
+                        "__TestDotNetCmd"
+                    );
+                    string xharnessCmd_raw = System.Environment.GetEnvironmentVariable(
+                        "XHARNESS_CLI_PATH"
+                    );
+                    string dotnetCmd = string.IsNullOrEmpty(dotnetCmd_raw)
+                      ? "dotnet"
+                      : dotnetCmd_raw;
+                    string xharnessCmd = string.IsNullOrEmpty(xharnessCmd_raw)
+                      ? "xharness"
+                      : $"exec {xharnessCmd_raw}";
                     string appExtension = platform == "android" ? "apk" : "app";
 
                     string cmdStr = $"{dotnetCmd} {xharnessCmd} {platform} {action}";
@@ -71,12 +105,14 @@ namespace CoreclrTestLib
 
                         if (action == "install")
                         {
-                            cmdStr += $" --app={testBinaryBase}/{category}.{appExtension} --output-directory={reportBase}/{action}";
+                            cmdStr +=
+                                $" --app={testBinaryBase}/{category}.{appExtension} --output-directory={reportBase}/{action}";
                         }
                     }
                     else // platform is apple
                     {
-                        cmdStr += $" --output-directory={reportBase}/{action} --target=ios-simulator-64"; //To Do: target should be either emulator or device
+                        cmdStr +=
+                            $" --output-directory={reportBase}/{action} --target=ios-simulator-64"; //To Do: target should be either emulator or device
 
                         if (action == "install")
                         {
@@ -113,8 +149,16 @@ namespace CoreclrTestLib
                         process.Start();
 
                         var cts = new CancellationTokenSource();
-                        Task copyOutput = process.StandardOutput.BaseStream.CopyToAsync(outputStream, 4096, cts.Token);
-                        Task copyError = process.StandardError.BaseStream.CopyToAsync(errorStream, 4096, cts.Token);
+                        Task copyOutput = process.StandardOutput.BaseStream.CopyToAsync(
+                            outputStream,
+                            4096,
+                            cts.Token
+                        );
+                        Task copyError = process.StandardError.BaseStream.CopyToAsync(
+                            errorStream,
+                            4096,
+                            cts.Token
+                        );
 
                         if (process.WaitForExit(timeout))
                         {
@@ -147,12 +191,22 @@ namespace CoreclrTestLib
                             {
                                 cts.Cancel();
                             }
-                            catch {}
+                            catch { }
 
-                            outputWriter.WriteLine("\ncmdLine:{0} Timed Out (timeout in milliseconds: {1}, start: {2}, end: {3})",
-                                    cmdStr, timeout, startTime.ToString(), endTime.ToString());
-                            errorWriter.WriteLine("\ncmdLine:{0} Timed Out (timeout in milliseconds: {1}, start: {2}, end: {3})",
-                                    cmdStr, timeout, startTime.ToString(), endTime.ToString());
+                            outputWriter.WriteLine(
+                                "\ncmdLine:{0} Timed Out (timeout in milliseconds: {1}, start: {2}, end: {3})",
+                                cmdStr,
+                                timeout,
+                                startTime.ToString(),
+                                endTime.ToString()
+                            );
+                            errorWriter.WriteLine(
+                                "\ncmdLine:{0} Timed Out (timeout in milliseconds: {1}, start: {2}, end: {3})",
+                                cmdStr,
+                                timeout,
+                                startTime.ToString(),
+                                endTime.ToString()
+                            );
 
                             process.Kill(entireProcessTree: true);
                         }
@@ -172,7 +226,7 @@ namespace CoreclrTestLib
             cmd.Replace("\"", "\"\"");
 
             string cmdPrefix;
-            if(OperatingSystem.IsWindows())
+            if (OperatingSystem.IsWindows())
             {
                 cmdPrefix = "/c";
             }
@@ -186,9 +240,9 @@ namespace CoreclrTestLib
 
         private static void CreateRetryFile(string fileName, int exitCode, string appName)
         {
-            using (StreamWriter writer = new StreamWriter(fileName))  
+            using (StreamWriter writer = new StreamWriter(fileName))
             {
-                writer.WriteLine($"appName: {appName}; exitCode: {exitCode}"); 
+                writer.WriteLine($"appName: {appName}; exitCode: {exitCode}");
             }
         }
     }

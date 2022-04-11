@@ -19,19 +19,36 @@ namespace System.Text.Tests
         // The delegate definitions and members below provide us access to CoreLib's internals.
         // We use UIntPtr instead of nuint everywhere here since we don't know what our target arch is.
 
-        private delegate UIntPtr FnGetIndexOfFirstNonLatin1Char(char* pBuffer, UIntPtr bufferLength);
-        private static readonly UnsafeLazyDelegate<FnGetIndexOfFirstNonLatin1Char> _fnGetIndexOfFirstNonLatin1Char = new UnsafeLazyDelegate<FnGetIndexOfFirstNonLatin1Char>("GetIndexOfFirstNonLatin1Char");
+        private delegate UIntPtr FnGetIndexOfFirstNonLatin1Char(
+            char* pBuffer,
+            UIntPtr bufferLength
+        );
+        private static readonly UnsafeLazyDelegate<FnGetIndexOfFirstNonLatin1Char> _fnGetIndexOfFirstNonLatin1Char =
+            new UnsafeLazyDelegate<FnGetIndexOfFirstNonLatin1Char>("GetIndexOfFirstNonLatin1Char");
 
-        private delegate UIntPtr FnNarrowUtf16ToLatin1(char* pUtf16Buffer, byte* pLatin1Buffer, UIntPtr elementCount);
-        private static readonly UnsafeLazyDelegate<FnNarrowUtf16ToLatin1> _fnNarrowUtf16ToLatin1 = new UnsafeLazyDelegate<FnNarrowUtf16ToLatin1>("NarrowUtf16ToLatin1");
+        private delegate UIntPtr FnNarrowUtf16ToLatin1(
+            char* pUtf16Buffer,
+            byte* pLatin1Buffer,
+            UIntPtr elementCount
+        );
+        private static readonly UnsafeLazyDelegate<FnNarrowUtf16ToLatin1> _fnNarrowUtf16ToLatin1 =
+            new UnsafeLazyDelegate<FnNarrowUtf16ToLatin1>("NarrowUtf16ToLatin1");
 
-        private delegate void FnWidenLatin1ToUtf16(byte* pLatin1Buffer, char* pUtf16Buffer, UIntPtr elementCount);
-        private static readonly UnsafeLazyDelegate<FnWidenLatin1ToUtf16> _fnWidenLatin1ToUtf16 = new UnsafeLazyDelegate<FnWidenLatin1ToUtf16>("WidenLatin1ToUtf16");
+        private delegate void FnWidenLatin1ToUtf16(
+            byte* pLatin1Buffer,
+            char* pUtf16Buffer,
+            UIntPtr elementCount
+        );
+        private static readonly UnsafeLazyDelegate<FnWidenLatin1ToUtf16> _fnWidenLatin1ToUtf16 =
+            new UnsafeLazyDelegate<FnWidenLatin1ToUtf16>("WidenLatin1ToUtf16");
 
         [Fact]
         public static void GetIndexOfFirstNonLatin1Char_EmptyInput_NullReference()
         {
-            Assert.Equal(UIntPtr.Zero, _fnGetIndexOfFirstNonLatin1Char.Delegate(null, UIntPtr.Zero));
+            Assert.Equal(
+                UIntPtr.Zero,
+                _fnGetIndexOfFirstNonLatin1Char.Delegate(null, UIntPtr.Zero)
+            );
         }
 
         [Fact]
@@ -88,7 +105,11 @@ namespace System.Text.Tests
             // paddsw instead of paddusw, U+FF80 will incorrectly show up as Latin-1,
             // causing our test to produce a false negative.
 
-            using (BoundedMemory<char> mem = BoundedMemory.Allocate<char>(5 * Vector<byte>.Count / sizeof(char)))
+            using (
+                BoundedMemory<char> mem = BoundedMemory.Allocate<char>(
+                    5 * Vector<byte>.Count / sizeof(char)
+                )
+            )
             {
                 Span<char> chars = mem.Span;
 
@@ -176,7 +197,10 @@ namespace System.Text.Tests
 
                 // First, transcode the data from Latin-1 to UTF-16.
 
-                CallWidenLatin1ToUtf16(latin1Span.Slice(i, WindowSize), utf16Span.Slice(i, WindowSize));
+                CallWidenLatin1ToUtf16(
+                    latin1Span.Slice(i, WindowSize),
+                    utf16Span.Slice(i, WindowSize)
+                );
 
                 // Then, validate that the data was transcoded properly.
 
@@ -202,7 +226,10 @@ namespace System.Text.Tests
             fixed (char* pUtf16 = &MemoryMarshal.GetReference(utf16Mem.Span))
             fixed (byte* pLatin1 = &MemoryMarshal.GetReference(latin1Mem.Span))
             {
-                Assert.Equal(UIntPtr.Zero, _fnNarrowUtf16ToLatin1.Delegate(pUtf16, pLatin1, UIntPtr.Zero));
+                Assert.Equal(
+                    UIntPtr.Zero,
+                    _fnNarrowUtf16ToLatin1.Delegate(pUtf16, pLatin1, UIntPtr.Zero)
+                );
             }
         }
 
@@ -233,7 +260,10 @@ namespace System.Text.Tests
 
                 // First, validate that the workhorse saw the incoming data as all-Latin-1.
 
-                Assert.Equal(128 - i, CallNarrowUtf16ToLatin1(utf16Span.Slice(i), latin1Span.Slice(i)));
+                Assert.Equal(
+                    128 - i,
+                    CallNarrowUtf16ToLatin1(utf16Span.Slice(i), latin1Span.Slice(i))
+                );
 
                 // Then, validate that the data was transcoded properly.
 
@@ -296,7 +326,9 @@ namespace System.Text.Tests
             fixed (char* pBuffer = &MemoryMarshal.GetReference(buffer))
             {
                 // Conversions between UIntPtr <-> int are not checked by default.
-                return checked((int)_fnGetIndexOfFirstNonLatin1Char.Delegate(pBuffer, (UIntPtr)buffer.Length));
+                return checked(
+                    (int)_fnGetIndexOfFirstNonLatin1Char.Delegate(pBuffer, (UIntPtr)buffer.Length)
+                );
             }
         }
 
@@ -308,7 +340,9 @@ namespace System.Text.Tests
             fixed (byte* pLatin1 = &MemoryMarshal.GetReference(latin1))
             {
                 // Conversions between UIntPtr <-> int are not checked by default.
-                return checked((int)_fnNarrowUtf16ToLatin1.Delegate(pUtf16, pLatin1, (UIntPtr)utf16.Length));
+                return checked(
+                    (int)_fnNarrowUtf16ToLatin1.Delegate(pUtf16, pLatin1, (UIntPtr)utf16.Length)
+                );
             }
         }
 
@@ -336,19 +370,29 @@ namespace System.Text.Tests
 
             public UnsafeLazyDelegate(string methodName)
             {
-                _lazyDelegate = new Lazy<TDelegate>(() =>
-                {
-                    Assert.True(typeof(TDelegate).IsSubclassOf(typeof(MulticastDelegate)));
+                _lazyDelegate = new Lazy<TDelegate>(
+                    () =>
+                    {
+                        Assert.True(typeof(TDelegate).IsSubclassOf(typeof(MulticastDelegate)));
 
-                    // Get the MethodInfo for the target method
+                        // Get the MethodInfo for the target method
 
-                    MethodInfo methodInfo = GetLatin1UtilityType().GetMethod(methodName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static);
-                    Assert.NotNull(methodInfo);
+                        MethodInfo methodInfo = GetLatin1UtilityType()
+                            .GetMethod(
+                                methodName,
+                                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static
+                            );
+                        Assert.NotNull(methodInfo);
 
-                    // Construct the TDelegate pointing to this method
+                        // Construct the TDelegate pointing to this method
 
-                    return (TDelegate)Activator.CreateInstance(typeof(TDelegate), new object[] { null, methodInfo.MethodHandle.GetFunctionPointer() });
-                });
+                        return (TDelegate)
+                            Activator.CreateInstance(
+                                typeof(TDelegate),
+                                new object[] { null, methodInfo.MethodHandle.GetFunctionPointer() }
+                            );
+                    }
+                );
             }
 
             public TDelegate Delegate => _lazyDelegate.Value;

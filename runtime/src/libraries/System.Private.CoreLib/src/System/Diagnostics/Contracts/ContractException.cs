@@ -6,7 +6,9 @@ using System.Runtime.Serialization;
 namespace System.Diagnostics.Contracts
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     // Needs to be public to support binary serialization compatibility
     public sealed class ContractException : Exception
     {
@@ -25,8 +27,13 @@ namespace System.Diagnostics.Contracts
             HResult = HResults.COR_E_CODECONTRACTFAILED;
         }
 
-        public ContractException(ContractFailureKind kind, string? failure, string? userMessage, string? condition, Exception? innerException)
-            : base(failure, innerException)
+        public ContractException(
+            ContractFailureKind kind,
+            string? failure,
+            string? userMessage,
+            string? condition,
+            Exception? innerException
+        ) : base(failure, innerException)
         {
             HResult = HResults.COR_E_CODECONTRACTFAILED;
             _kind = kind;
@@ -41,7 +48,6 @@ namespace System.Diagnostics.Contracts
             _userMessage = info.GetString("UserMessage");
             _condition = info.GetString("Condition");
         }
-
 
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {

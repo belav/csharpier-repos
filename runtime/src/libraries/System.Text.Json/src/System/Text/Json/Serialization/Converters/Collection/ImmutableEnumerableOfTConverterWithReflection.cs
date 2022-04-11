@@ -12,19 +12,29 @@ namespace System.Text.Json.Serialization.Converters
         : ImmutableEnumerableOfTConverter<TCollection, TElement>
         where TCollection : IEnumerable<TElement>
     {
-        [RequiresUnreferencedCode(IEnumerableConverterFactoryHelpers.ImmutableConvertersUnreferencedCodeMessage)]
-        public ImmutableEnumerableOfTConverterWithReflection()
-        {
-        }
+        [RequiresUnreferencedCode(
+            IEnumerableConverterFactoryHelpers.ImmutableConvertersUnreferencedCodeMessage
+        )]
+        public ImmutableEnumerableOfTConverterWithReflection() { }
 
         internal override bool RequiresDynamicMemberAccessors => true;
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "The ctor is marked RequiresUnreferencedCode.")]
-        internal override void Initialize(JsonSerializerOptions options, JsonTypeInfo? jsonTypeInfo = null)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "The ctor is marked RequiresUnreferencedCode."
+        )]
+        internal override void Initialize(
+            JsonSerializerOptions options,
+            JsonTypeInfo? jsonTypeInfo = null
+        )
         {
             Debug.Assert(jsonTypeInfo != null);
-            jsonTypeInfo.CreateObjectWithArgs = options.MemberAccessorStrategy.CreateImmutableEnumerableCreateRangeDelegate<TCollection, TElement>();
+            jsonTypeInfo.CreateObjectWithArgs =
+                options.MemberAccessorStrategy.CreateImmutableEnumerableCreateRangeDelegate<
+                    TCollection,
+                    TElement
+                >();
         }
     }
 }

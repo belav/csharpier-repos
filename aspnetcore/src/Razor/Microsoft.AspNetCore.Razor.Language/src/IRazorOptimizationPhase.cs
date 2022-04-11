@@ -18,6 +18,4 @@ namespace Microsoft.AspNetCore.Razor.Language;
 /// <see cref="IRazorOptimizationPass.Order"/> property.
 /// </para>
 /// </remarks>
-public interface IRazorOptimizationPhase : IRazorEnginePhase
-{
-}
+public interface IRazorOptimizationPhase : IRazorEnginePhase { }

@@ -47,7 +47,11 @@ namespace System.IO.Compression.Tests
             yield return new string[] { "InvalidChar2.zip", @"sample.:xt" };
             yield return new string[] { "InvalidChar3.zip", "System.ArgumentException" };
             yield return new string[] { "EncodedDotDots.zip", "lib/%2E%2E/%2E%2E/%2E%2E/bad.exe" };
-            yield return new string[] { "SpacedRelative.zip", "System.IO.DirectoryNotFoundException" };
+            yield return new string[]
+            {
+                "SpacedRelative.zip",
+                "System.IO.DirectoryNotFoundException"
+            };
         }
 
         [Theory]
@@ -63,7 +67,11 @@ namespace System.IO.Compression.Tests
                         foreach (ZipArchiveEntry entry in archive.Entries)
                         {
                             entry.ExtractRelativeToDirectory(destinationDirectory.Path, false);
-                            Assert.True(File.Exists(Path.Combine(destinationDirectory.Path, expectedOutPath)));
+                            Assert.True(
+                                File.Exists(
+                                    Path.Combine(destinationDirectory.Path, expectedOutPath)
+                                )
+                            );
                         }
                     }
                 }
@@ -83,7 +91,9 @@ namespace System.IO.Compression.Tests
                 try
                 {
                     ZipFile.ExtractToDirectory(zipFile, destinationDirectory.Path);
-                    Assert.True(File.Exists(Path.Combine(destinationDirectory.Path, expectedOutPath)));
+                    Assert.True(
+                        File.Exists(Path.Combine(destinationDirectory.Path, expectedOutPath))
+                    );
                 }
                 catch (Exception e)
                 {

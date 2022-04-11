@@ -27,38 +27,52 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public VisualStudioWorkspaceTelemetryService(
             VisualStudioWorkspace workspace,
-            IGlobalOptionService optionsService)
+            IGlobalOptionService optionsService
+        )
         {
             _workspace = workspace;
             _optionsService = optionsService;
         }
 
-        protected override ILogger CreateLogger(TelemetrySession telemetrySession)
-            => AggregateLogger.Create(
+        protected override ILogger CreateLogger(TelemetrySession telemetrySession) =>
+            AggregateLogger.Create(
                 CodeMarkerLogger.Instance,
                 new EtwLogger(_optionsService),
                 new VSTelemetryLogger(telemetrySession),
                 new FileLogger(_optionsService),
-                Logger.GetLogger());
+                Logger.GetLogger()
+            );
 
         protected override void TelemetrySessionInitialized()
         {
-            _ = Task.Run(async () =>
-            {
-                var client = await RemoteHostClient.TryGetClientAsync(_workspace, CancellationToken.None).ConfigureAwait(false);
-                if (client == null)
+            _ = Task.Run(
+                async () =>
                 {
-                    return;
+                    var client = await RemoteHostClient
+                        .TryGetClientAsync(_workspace, CancellationToken.None)
+                        .ConfigureAwait(false);
+                    if (client == null)
+                    {
+                        return;
+                    }
+
+                    var settings = SerializeCurrentSessionSettings();
+                    Contract.ThrowIfNull(settings);
+
+                    // initialize session in the remote service
+                    _ = await client
+                        .TryInvokeAsync<IRemoteProcessTelemetryService>(
+                            (service, cancellationToken) =>
+                                service.InitializeTelemetrySessionAsync(
+                                    Process.GetCurrentProcess().Id,
+                                    settings,
+                                    cancellationToken
+                                ),
+                            CancellationToken.None
+                        )
+                        .ConfigureAwait(false);
                 }
-
-                var settings = SerializeCurrentSessionSettings();
-                Contract.ThrowIfNull(settings);
-
-                // initialize session in the remote service
-                _ = await client.TryInvokeAsync<IRemoteProcessTelemetryService>(
-                    (service, cancellationToken) => service.InitializeTelemetrySessionAsync(Process.GetCurrentProcess().Id, settings, cancellationToken),
-                    CancellationToken.None).ConfigureAwait(false);
-            });
+            );
         }
     }
 }

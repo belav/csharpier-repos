@@ -6,6 +6,7 @@ class test
 {
     static sbyte si8;
     static char sc;
+
     static int Main()
     {
         sbyte i8 = -1;

@@ -29,7 +29,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
             IEntityFinderSource entityFinderSource,
             IStateManager stateManager,
             IDbSetSource setSource,
-            IDbSetCache setCache)
+            IDbSetCache setCache
+        )
         {
             _entityFinderSource = entityFinderSource;
             _stateManager = stateManager;
@@ -43,7 +44,7 @@ namespace Microsoft.EntityFrameworkCore.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual IEntityFinder Create(IEntityType type)
-            => _entityFinderSource.Create(_stateManager, _setSource, _setCache, type);
+        public virtual IEntityFinder Create(IEntityType type) =>
+            _entityFinderSource.Create(_stateManager, _setSource, _setCache, type);
     }
 }

@@ -11,7 +11,10 @@ namespace System.Globalization.Tests
         [Fact]
         public void ShortestDayNames_InvariantInfo()
         {
-            Assert.Equal(new string[] { "Su", "Mo", "Tu", "We", "Th", "Fr", "Sa" }, DateTimeFormatInfo.InvariantInfo.ShortestDayNames);
+            Assert.Equal(
+                new string[] { "Su", "Mo", "Tu", "We", "Th", "Fr", "Sa" },
+                DateTimeFormatInfo.InvariantInfo.ShortestDayNames
+            );
         }
 
         [Fact]
@@ -46,20 +49,29 @@ namespace System.Globalization.Tests
         public void ShortestDayNames_SetNulValue_ThrowsArgumentNullException()
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>("value", () => format.ShortestDayNames = null);
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => format.ShortestDayNames = null
+            );
         }
 
         [Fact]
         public void ShortestDayNames_SetNulValueInValue_ThrowsArgumentNullException()
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>("value", () => format.ShortestDayNames = new string[] { "1", "2", "3", null, "5", "6", "7" });
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => format.ShortestDayNames = new string[] { "1", "2", "3", null, "5", "6", "7" }
+            );
         }
 
         public static IEnumerable<object[]> ShortestDayNames_SetInvalidLength_TestData()
         {
             yield return new object[] { new string[] { "Sun" } };
-            yield return new object[] { new string[] { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Additional" } };
+            yield return new object[]
+            {
+                new string[] { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Additional" }
+            };
         }
 
         [Theory]
@@ -67,13 +79,28 @@ namespace System.Globalization.Tests
         public void ShortestDayNames_SetInvalidLength_ThrowsArgumentException(string[] value)
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentException>("value", (() => format.ShortestDayNames = value));
+            AssertExtensions.Throws<ArgumentException>(
+                "value",
+                (() => format.ShortestDayNames = value)
+            );
         }
 
         [Fact]
         public void ShortestDayNames_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() => DateTimeFormatInfo.InvariantInfo.ShortestDayNames = new string[] { "1", "2", "3", "4", "5", "6", "7" });
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    DateTimeFormatInfo.InvariantInfo.ShortestDayNames = new string[]
+                    {
+                        "1",
+                        "2",
+                        "3",
+                        "4",
+                        "5",
+                        "6",
+                        "7"
+                    }
+            );
         }
     }
 }

@@ -18,7 +18,8 @@ namespace System.Diagnostics
             _method = stackFrameHelper.GetMethodBase(skipFrames);
             _nativeOffset = stackFrameHelper.GetOffset(skipFrames);
             _ilOffset = stackFrameHelper.GetILOffset(skipFrames);
-            _isLastFrameFromForeignExceptionStackTrace = stackFrameHelper.IsLastFrameFromForeignExceptionStackTrace(skipFrames);
+            _isLastFrameFromForeignExceptionStackTrace =
+                stackFrameHelper.IsLastFrameFromForeignExceptionStackTrace(skipFrames);
 
             if (needFileInfo)
             {

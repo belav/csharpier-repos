@@ -31,9 +31,7 @@ public static class MvcApplicationBuilderExtensions
             throw new ArgumentNullException(nameof(app));
         }
 
-        return app.UseMvc(routes =>
-        {
-        });
+        return app.UseMvc(routes => { });
     }
 
     /// <summary>
@@ -50,12 +48,15 @@ public static class MvcApplicationBuilderExtensions
             throw new ArgumentNullException(nameof(app));
         }
 
-        return app.UseMvc(routes =>
-        {
-            routes.MapRoute(
-                name: "default",
-                template: "{controller=Home}/{action=Index}/{id?}");
-        });
+        return app.UseMvc(
+            routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}"
+                );
+            }
+        );
     }
 
     /// <summary>
@@ -66,7 +67,8 @@ public static class MvcApplicationBuilderExtensions
     /// <returns>A reference to this instance after the operation has completed.</returns>
     public static IApplicationBuilder UseMvc(
         this IApplicationBuilder app,
-        Action<IRouteBuilder> configureRoutes)
+        Action<IRouteBuilder> configureRoutes
+    )
     {
         if (app == null)
         {
@@ -85,9 +87,9 @@ public static class MvcApplicationBuilderExtensions
         if (options.Value.EnableEndpointRouting)
         {
             var message =
-                "Endpoint Routing does not support 'IApplicationBuilder.UseMvc(...)'. To use " +
-                "'IApplicationBuilder.UseMvc' set 'MvcOptions.EnableEndpointRouting = false' inside " +
-                "'ConfigureServices(...).";
+                "Endpoint Routing does not support 'IApplicationBuilder.UseMvc(...)'. To use "
+                + "'IApplicationBuilder.UseMvc' set 'MvcOptions.EnableEndpointRouting = false' inside "
+                + "'ConfigureServices(...).";
             throw new InvalidOperationException(message);
         }
 
@@ -135,10 +137,13 @@ public static class MvcApplicationBuilderExtensions
         // We use the MvcMarkerService to make sure if all the services were added.
         if (app.ApplicationServices.GetService(typeof(MvcMarkerService)) == null)
         {
-            throw new InvalidOperationException(Resources.FormatUnableToFindServices(
-                nameof(IServiceCollection),
-                "AddMvc",
-                "ConfigureServices(...)"));
+            throw new InvalidOperationException(
+                Resources.FormatUnableToFindServices(
+                    nameof(IServiceCollection),
+                    "AddMvc",
+                    "ConfigureServices(...)"
+                )
+            );
         }
     }
 }

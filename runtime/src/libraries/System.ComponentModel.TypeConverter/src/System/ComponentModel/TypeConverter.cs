@@ -13,7 +13,8 @@ namespace System.ComponentModel
     /// </summary>
     public class TypeConverter
     {
-        internal const string RequiresUnreferencedCodeMessage = "Generic TypeConverters may require the generic types to be annotated. For example, NullableConverter requires the underlying type to be DynamicallyAccessedMembers All.";
+        internal const string RequiresUnreferencedCodeMessage =
+            "Generic TypeConverters may require the generic types to be annotated. For example, NullableConverter requires the underlying type to be DynamicallyAccessedMembers All.";
 
         /// <summary>
         /// Gets a value indicating whether this converter can convert an object in the
@@ -25,8 +26,8 @@ namespace System.ComponentModel
         /// Gets a value indicating whether this converter can convert an object in the given
         /// source type to the native type of the converter using the context.
         /// </summary>
-        public virtual bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
-            => sourceType == typeof(InstanceDescriptor);
+        public virtual bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType) =>
+            sourceType == typeof(InstanceDescriptor);
 
         /// <summary>
         /// Gets a value indicating whether this converter can convert an object to the given
@@ -46,12 +47,17 @@ namespace System.ComponentModel
         /// <summary>
         /// Converts the given value to the converter's native type.
         /// </summary>
-        public object? ConvertFrom(object value) => ConvertFrom(null, CultureInfo.CurrentCulture, value);
+        public object? ConvertFrom(object value) =>
+            ConvertFrom(null, CultureInfo.CurrentCulture, value);
 
         /// <summary>
         /// Converts the given object to the converter's native type.
         /// </summary>
-        public virtual object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object value)
+        public virtual object? ConvertFrom(
+            ITypeDescriptorContext? context,
+            CultureInfo? culture,
+            object value
+        )
         {
             if (value is InstanceDescriptor instanceDescriptor)
             {
@@ -92,7 +98,11 @@ namespace System.ComponentModel
         /// <summary>
         /// Converts the specified text into an object.
         /// </summary>
-        public object? ConvertFromString(ITypeDescriptorContext? context, CultureInfo? culture, string text)
+        public object? ConvertFromString(
+            ITypeDescriptorContext? context,
+            CultureInfo? culture,
+            string text
+        )
         {
             return ConvertFrom(context, culture, text);
         }
@@ -110,7 +120,12 @@ namespace System.ComponentModel
         /// Converts the given value object to
         /// the specified destination type using the specified context and arguments.
         /// </summary>
-        public virtual object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
+        public virtual object? ConvertTo(
+            ITypeDescriptorContext? context,
+            CultureInfo? culture,
+            object? value,
+            Type destinationType
+        )
         {
             if (destinationType == null)
             {
@@ -171,7 +186,11 @@ namespace System.ComponentModel
         /// <summary>
         /// Converts the specified value to a string representation.
         /// </summary>
-        public string? ConvertToString(ITypeDescriptorContext? context, CultureInfo? culture, object? value)
+        public string? ConvertToString(
+            ITypeDescriptorContext? context,
+            CultureInfo? culture,
+            object? value
+        )
         {
             return (string?)ConvertTo(context, culture, value, typeof(string));
         }
@@ -187,7 +206,10 @@ namespace System.ComponentModel
         /// <summary>
         /// Re-creates an <see cref='object'/> given a set of property values for the object.
         /// </summary>
-        public virtual object? CreateInstance(ITypeDescriptorContext? context, IDictionary propertyValues) => null;
+        public virtual object? CreateInstance(
+            ITypeDescriptorContext? context,
+            IDictionary propertyValues
+        ) => null;
 
         /// <summary>
         /// Gets a suitable exception to throw when a conversion cannot be performed.
@@ -195,7 +217,9 @@ namespace System.ComponentModel
         protected Exception GetConvertFromException(object? value)
         {
             string? valueTypeName = value == null ? SR.Null : value.GetType().FullName;
-            throw new NotSupportedException(SR.Format(SR.ConvertFromException, GetType().Name, valueTypeName));
+            throw new NotSupportedException(
+                SR.Format(SR.ConvertFromException, GetType().Name, valueTypeName)
+            );
         }
 
         /// <summary>
@@ -205,7 +229,14 @@ namespace System.ComponentModel
         protected Exception GetConvertToException(object? value, Type destinationType)
         {
             string? valueTypeName = value == null ? SR.Null : value.GetType().FullName;
-            throw new NotSupportedException(SR.Format(SR.ConvertToException, GetType().Name, valueTypeName, destinationType.FullName));
+            throw new NotSupportedException(
+                SR.Format(
+                    SR.ConvertToException,
+                    GetType().Name,
+                    valueTypeName,
+                    destinationType.FullName
+                )
+            );
         }
 
         /// <summary>
@@ -227,7 +258,8 @@ namespace System.ComponentModel
         /// Gets a collection of properties for the type of array specified by the value parameter.
         /// </summary>
         [RequiresUnreferencedCode("The Type of value cannot be statically discovered.")]
-        public PropertyDescriptorCollection? GetProperties(object value) => GetProperties(null, value);
+        public PropertyDescriptorCollection? GetProperties(object value) =>
+            GetProperties(null, value);
 
         /// <summary>
         ///
@@ -236,8 +268,15 @@ namespace System.ComponentModel
         ///
         /// </summary>
         [RequiresUnreferencedCode("The Type of value cannot be statically discovered.")]
-        [DynamicDependency(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor | DynamicallyAccessedMemberTypes.PublicFields, typeof(BrowsableAttribute))]
-        public PropertyDescriptorCollection? GetProperties(ITypeDescriptorContext? context, object value)
+        [DynamicDependency(
+            DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+                | DynamicallyAccessedMemberTypes.PublicFields,
+            typeof(BrowsableAttribute)
+        )]
+        public PropertyDescriptorCollection? GetProperties(
+            ITypeDescriptorContext? context,
+            object value
+        )
         {
             return GetProperties(context, value, new Attribute[] { BrowsableAttribute.Yes });
         }
@@ -248,8 +287,15 @@ namespace System.ComponentModel
         /// the specified context and attributes.
         ///
         /// </summary>
-        [RequiresUnreferencedCode("The Type of value cannot be statically discovered. " + AttributeCollection.FilterRequiresUnreferencedCodeMessage)]
-        public virtual PropertyDescriptorCollection? GetProperties(ITypeDescriptorContext? context, object value, Attribute[]? attributes)
+        [RequiresUnreferencedCode(
+            "The Type of value cannot be statically discovered. "
+                + AttributeCollection.FilterRequiresUnreferencedCodeMessage
+        )]
+        public virtual PropertyDescriptorCollection? GetProperties(
+            ITypeDescriptorContext? context,
+            object value,
+            Attribute[]? attributes
+        )
         {
             return null;
         }
@@ -272,7 +318,9 @@ namespace System.ComponentModel
         /// <summary>
         /// Gets a collection of standard values for the data type this type converter is designed for.
         /// </summary>
-        public virtual StandardValuesCollection? GetStandardValues(ITypeDescriptorContext? context) => null;
+        public virtual StandardValuesCollection? GetStandardValues(
+            ITypeDescriptorContext? context
+        ) => null;
 
         /// <summary>
         /// Gets a value indicating whether the collection of standard values returned from
@@ -335,7 +383,10 @@ namespace System.ComponentModel
         /// <summary>
         /// Sorts a collection of properties.
         /// </summary>
-        protected PropertyDescriptorCollection SortProperties(PropertyDescriptorCollection props, string[] names)
+        protected PropertyDescriptorCollection SortProperties(
+            PropertyDescriptorCollection props,
+            string[] names
+        )
         {
             props.Sort(names);
             return props;
@@ -349,14 +400,18 @@ namespace System.ComponentModel
             /// <summary>
             /// Initializes a new instance of the <see cref='System.ComponentModel.TypeConverter.SimplePropertyDescriptor'/> class.
             /// </summary>
-            protected SimplePropertyDescriptor(Type componentType, string name, Type propertyType) : this(componentType, name, propertyType, Array.Empty<Attribute>())
-            {
-            }
+            protected SimplePropertyDescriptor(Type componentType, string name, Type propertyType)
+                : this(componentType, name, propertyType, Array.Empty<Attribute>()) { }
 
             /// <summary>
             /// Initializes a new instance of the <see cref='System.ComponentModel.TypeConverter.SimplePropertyDescriptor'/> class.
             /// </summary>
-            protected SimplePropertyDescriptor(Type componentType, string name, Type propertyType, Attribute[]? attributes) : base(name, attributes)
+            protected SimplePropertyDescriptor(
+                Type componentType,
+                string name,
+                Type propertyType,
+                Attribute[]? attributes
+            ) : base(name, attributes)
             {
                 ComponentType = componentType;
                 PropertyType = propertyType;
@@ -372,8 +427,16 @@ namespace System.ComponentModel
             /// </summary>
             public override bool IsReadOnly
             {
-                [DynamicDependency(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor | DynamicallyAccessedMemberTypes.PublicFields, typeof(ReadOnlyAttribute))]
-                [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode", Justification = "The DynamicDependency ensures the correct members are preserved.")]
+                [DynamicDependency(
+                    DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+                        | DynamicallyAccessedMemberTypes.PublicFields,
+                    typeof(ReadOnlyAttribute)
+                )]
+                [UnconditionalSuppressMessage(
+                    "ReflectionAnalysis",
+                    "IL2026:RequiresUnreferencedCode",
+                    Justification = "The DynamicDependency ensures the correct members are preserved."
+                )]
                 get { return Attributes.Contains(ReadOnlyAttribute.Yes); }
             }
 
@@ -387,7 +450,8 @@ namespace System.ComponentModel
             /// </summary>
             public override bool CanResetValue(object component)
             {
-                DefaultValueAttribute? attr = (DefaultValueAttribute?)Attributes[typeof(DefaultValueAttribute)];
+                DefaultValueAttribute? attr = (DefaultValueAttribute?)
+                    Attributes[typeof(DefaultValueAttribute)];
                 if (attr == null)
                 {
                     return false;
@@ -401,7 +465,8 @@ namespace System.ComponentModel
             /// </summary>
             public override void ResetValue(object component)
             {
-                DefaultValueAttribute? attr = (DefaultValueAttribute?)Attributes[typeof(DefaultValueAttribute)];
+                DefaultValueAttribute? attr = (DefaultValueAttribute?)
+                    Attributes[typeof(DefaultValueAttribute)];
                 if (attr != null)
                 {
                     SetValue(component, attr.Value);

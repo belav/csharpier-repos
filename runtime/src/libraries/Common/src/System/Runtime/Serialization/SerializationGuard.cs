@@ -10,8 +10,12 @@ namespace System.Runtime.Serialization
     /// </summary>
     internal static partial class SerializationGuard
     {
-        private delegate void ThrowIfDeserializationInProgressWithSwitchDel(string switchName, ref int cachedValue);
-        private static readonly ThrowIfDeserializationInProgressWithSwitchDel? s_throwIfDeserializationInProgressWithSwitch = CreateThrowIfDeserializationInProgressWithSwitchDelegate();
+        private delegate void ThrowIfDeserializationInProgressWithSwitchDel(
+            string switchName,
+            ref int cachedValue
+        );
+        private static readonly ThrowIfDeserializationInProgressWithSwitchDel? s_throwIfDeserializationInProgressWithSwitch =
+            CreateThrowIfDeserializationInProgressWithSwitchDelegate();
 
         /// <summary>
         /// Builds a wrapper delegate for SerializationInfo.ThrowIfDeserializationInProgress(string, ref int),
@@ -19,13 +23,20 @@ namespace System.Runtime.Serialization
         /// </summary>
         private static ThrowIfDeserializationInProgressWithSwitchDel? CreateThrowIfDeserializationInProgressWithSwitchDelegate()
         {
-            ThrowIfDeserializationInProgressWithSwitchDel? throwIfDeserializationInProgressDelegate = null;
-            MethodInfo? throwMethod = typeof(SerializationInfo).GetMethod("ThrowIfDeserializationInProgress",
-                BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public, null, new Type[] { typeof(string), typeof(int).MakeByRefType() }, Array.Empty<ParameterModifier>());
+            ThrowIfDeserializationInProgressWithSwitchDel? throwIfDeserializationInProgressDelegate =
+                null;
+            MethodInfo? throwMethod = typeof(SerializationInfo).GetMethod(
+                "ThrowIfDeserializationInProgress",
+                BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public,
+                null,
+                new Type[] { typeof(string), typeof(int).MakeByRefType() },
+                Array.Empty<ParameterModifier>()
+            );
 
             if (throwMethod != null)
             {
-                throwIfDeserializationInProgressDelegate = throwMethod.CreateDelegate<ThrowIfDeserializationInProgressWithSwitchDel>();
+                throwIfDeserializationInProgressDelegate =
+                    throwMethod.CreateDelegate<ThrowIfDeserializationInProgressWithSwitchDel>();
             }
 
             return throwIfDeserializationInProgressDelegate;
@@ -35,7 +46,10 @@ namespace System.Runtime.Serialization
         /// Provides access to the internal "ThrowIfDeserializationInProgress" method on <see cref="SerializationInfo"/>.
         /// No-ops if the Serialization Guard feature is disabled or unavailable.
         /// </summary>
-        public static void ThrowIfDeserializationInProgress(string switchSuffix, ref int cachedValue)
+        public static void ThrowIfDeserializationInProgress(
+            string switchSuffix,
+            ref int cachedValue
+        )
         {
             s_throwIfDeserializationInProgressWithSwitch?.Invoke(switchSuffix, ref cachedValue);
         }

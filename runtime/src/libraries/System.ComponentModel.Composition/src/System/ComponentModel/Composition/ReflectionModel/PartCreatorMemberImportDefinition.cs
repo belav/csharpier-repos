@@ -8,16 +8,29 @@ using System.Text;
 
 namespace System.ComponentModel.Composition.ReflectionModel
 {
-    internal sealed class PartCreatorMemberImportDefinition : ReflectionMemberImportDefinition, IPartCreatorImportDefinition
+    internal sealed class PartCreatorMemberImportDefinition
+        : ReflectionMemberImportDefinition,
+          IPartCreatorImportDefinition
     {
         private readonly ContractBasedImportDefinition _productImportDefinition;
 
         public PartCreatorMemberImportDefinition(
             LazyMemberInfo importingLazyMember,
             ICompositionElement? origin,
-            ContractBasedImportDefinition productImportDefinition)
-            : base(importingLazyMember, CompositionConstants.PartCreatorContractName, CompositionConstants.PartCreatorTypeIdentity,
-                productImportDefinition.RequiredMetadata, productImportDefinition.Cardinality, productImportDefinition.IsRecomposable, false, productImportDefinition.RequiredCreationPolicy, MetadataServices.EmptyMetadata, origin)
+            ContractBasedImportDefinition productImportDefinition
+        )
+            : base(
+                importingLazyMember,
+                CompositionConstants.PartCreatorContractName,
+                CompositionConstants.PartCreatorTypeIdentity,
+                productImportDefinition.RequiredMetadata,
+                productImportDefinition.Cardinality,
+                productImportDefinition.IsRecomposable,
+                false,
+                productImportDefinition.RequiredCreationPolicy,
+                MetadataServices.EmptyMetadata,
+                origin
+            )
         {
             if (productImportDefinition == null)
             {
@@ -26,7 +39,11 @@ namespace System.ComponentModel.Composition.ReflectionModel
             _productImportDefinition = productImportDefinition;
         }
 
-        public ContractBasedImportDefinition ProductImportDefinition { get { return _productImportDefinition; } }
+        public ContractBasedImportDefinition ProductImportDefinition
+        {
+            get { return _productImportDefinition; }
+        }
+
         public override bool IsConstraintSatisfiedBy(ExportDefinition exportDefinition)
         {
             if (!base.IsConstraintSatisfiedBy(exportDefinition))
@@ -34,14 +51,20 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 return false;
             }
 
-            return PartCreatorExportDefinition.IsProductConstraintSatisfiedBy(_productImportDefinition, exportDefinition);
+            return PartCreatorExportDefinition.IsProductConstraintSatisfiedBy(
+                _productImportDefinition,
+                exportDefinition
+            );
         }
 
         public override Expression<Func<ExportDefinition, bool>> Constraint
         {
             get
             {
-                return ConstraintServices.CreatePartCreatorConstraint(base.Constraint, _productImportDefinition);
+                return ConstraintServices.CreatePartCreatorConstraint(
+                    base.Constraint,
+                    _productImportDefinition
+                );
             }
         }
 

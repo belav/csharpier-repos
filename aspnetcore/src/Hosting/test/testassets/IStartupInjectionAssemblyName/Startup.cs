@@ -11,9 +11,7 @@ namespace IStartupInjectionAssemblyName;
 
 public class Startup : IStartup
 {
-    public void Configure(IApplicationBuilder app)
-    {
-    }
+    public void Configure(IApplicationBuilder app) { }
 
     public IServiceProvider ConfigureServices(IServiceCollection services)
     {

@@ -17,7 +17,8 @@ public class ServerComponentDeserializerTest
 {
     private readonly IDataProtectionProvider _ephemeralDataProtectionProvider;
     private readonly ITimeLimitedDataProtector _protector;
-    private readonly ServerComponentInvocationSequence _invocationSequence = new ServerComponentInvocationSequence();
+    private readonly ServerComponentInvocationSequence _invocationSequence =
+        new ServerComponentInvocationSequence();
 
     public ServerComponentDeserializerTest()
     {
@@ -35,7 +36,12 @@ public class ServerComponentDeserializerTest
         var serverComponentDeserializer = CreateServerComponentDeserializer();
 
         // Act & assert
-        Assert.True(serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(markers, out var descriptors));
+        Assert.True(
+            serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(
+                markers,
+                out var descriptors
+            )
+        );
         var deserializedDescriptor = Assert.Single(descriptors);
         Assert.Equal(typeof(TestComponent).FullName, deserializedDescriptor.ComponentType.FullName);
         Assert.Equal(0, deserializedDescriptor.Sequence);
@@ -45,12 +51,20 @@ public class ServerComponentDeserializerTest
     public void CanParseSingleMarkerWithParameters()
     {
         // Arrange
-        var markers = SerializeMarkers(CreateMarkers(
-            (typeof(TestComponent), new Dictionary<string, object> { ["Parameter"] = "Value" })));
+        var markers = SerializeMarkers(
+            CreateMarkers(
+                (typeof(TestComponent), new Dictionary<string, object> { ["Parameter"] = "Value" })
+            )
+        );
         var serverComponentDeserializer = CreateServerComponentDeserializer();
 
         // Act & assert
-        Assert.True(serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(markers, out var descriptors));
+        Assert.True(
+            serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(
+                markers,
+                out var descriptors
+            )
+        );
         var deserializedDescriptor = Assert.Single(descriptors);
         Assert.Equal(typeof(TestComponent).FullName, deserializedDescriptor.ComponentType.FullName);
         Assert.Equal(0, deserializedDescriptor.Sequence);
@@ -64,12 +78,20 @@ public class ServerComponentDeserializerTest
     public void CanParseSingleMarkerWithNullParameters()
     {
         // Arrange
-        var markers = SerializeMarkers(CreateMarkers(
-            (typeof(TestComponent), new Dictionary<string, object> { ["Parameter"] = null })));
+        var markers = SerializeMarkers(
+            CreateMarkers(
+                (typeof(TestComponent), new Dictionary<string, object> { ["Parameter"] = null })
+            )
+        );
         var serverComponentDeserializer = CreateServerComponentDeserializer();
 
         // Act & assert
-        Assert.True(serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(markers, out var descriptors));
+        Assert.True(
+            serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(
+                markers,
+                out var descriptors
+            )
+        );
         var deserializedDescriptor = Assert.Single(descriptors);
         Assert.Equal(typeof(TestComponent).FullName, deserializedDescriptor.ComponentType.FullName);
         Assert.Equal(0, deserializedDescriptor.Sequence);
@@ -88,7 +110,12 @@ public class ServerComponentDeserializerTest
         var serverComponentDeserializer = CreateServerComponentDeserializer();
 
         // Act & assert
-        Assert.True(serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(markers, out var descriptors));
+        Assert.True(
+            serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(
+                markers,
+                out var descriptors
+            )
+        );
         Assert.Equal(2, descriptors.Count);
 
         var firstDescriptor = descriptors[0];
@@ -104,13 +131,21 @@ public class ServerComponentDeserializerTest
     public void CanParseMultipleMarkersWithParameters()
     {
         // Arrange
-        var markers = SerializeMarkers(CreateMarkers(
-            (typeof(TestComponent), new Dictionary<string, object> { ["First"] = "Value" }),
-            (typeof(TestComponent), new Dictionary<string, object> { ["Second"] = null })));
+        var markers = SerializeMarkers(
+            CreateMarkers(
+                (typeof(TestComponent), new Dictionary<string, object> { ["First"] = "Value" }),
+                (typeof(TestComponent), new Dictionary<string, object> { ["Second"] = null })
+            )
+        );
         var serverComponentDeserializer = CreateServerComponentDeserializer();
 
         // Act & assert
-        Assert.True(serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(markers, out var descriptors));
+        Assert.True(
+            serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(
+                markers,
+                out var descriptors
+            )
+        );
         Assert.Equal(2, descriptors.Count);
 
         var firstDescriptor = descriptors[0];
@@ -120,7 +155,6 @@ public class ServerComponentDeserializerTest
         Assert.Single(firstParameters);
         Assert.Contains("First", firstParameters.Keys);
         Assert.Equal("Value", firstParameters["First"]);
-
 
         var secondDescriptor = descriptors[1];
         Assert.Equal(typeof(TestComponent).FullName, secondDescriptor.ComponentType.FullName);
@@ -135,13 +169,21 @@ public class ServerComponentDeserializerTest
     public void CanParseMultipleMarkersWithAndWithoutParameters()
     {
         // Arrange
-        var markers = SerializeMarkers(CreateMarkers(
-            (typeof(TestComponent), new Dictionary<string, object> { ["First"] = "Value" }),
-            (typeof(TestComponent), null)));
+        var markers = SerializeMarkers(
+            CreateMarkers(
+                (typeof(TestComponent), new Dictionary<string, object> { ["First"] = "Value" }),
+                (typeof(TestComponent), null)
+            )
+        );
         var serverComponentDeserializer = CreateServerComponentDeserializer();
 
         // Act & assert
-        Assert.True(serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(markers, out var descriptors));
+        Assert.True(
+            serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(
+                markers,
+                out var descriptors
+            )
+        );
         Assert.Equal(2, descriptors.Count);
 
         var firstDescriptor = descriptors[0];
@@ -151,7 +193,6 @@ public class ServerComponentDeserializerTest
         Assert.Single(firstParameters);
         Assert.Contains("First", firstParameters.Keys);
         Assert.Equal("Value", firstParameters["First"]);
-
 
         var secondDescriptor = descriptors[1];
         Assert.Equal(typeof(TestComponent).FullName, secondDescriptor.ComponentType.FullName);
@@ -163,11 +204,18 @@ public class ServerComponentDeserializerTest
     public void DoesNotParseOutOfOrderMarkers()
     {
         // Arrange
-        var markers = SerializeMarkers(CreateMarkers(typeof(TestComponent), typeof(TestComponent)).Reverse().ToArray());
+        var markers = SerializeMarkers(
+            CreateMarkers(typeof(TestComponent), typeof(TestComponent)).Reverse().ToArray()
+        );
         var serverComponentDeserializer = CreateServerComponentDeserializer();
 
         // Act & assert
-        Assert.False(serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(markers, out var descriptors));
+        Assert.False(
+            serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(
+                markers,
+                out var descriptors
+            )
+        );
         Assert.Empty(descriptors);
     }
 
@@ -176,12 +224,22 @@ public class ServerComponentDeserializerTest
     {
         // Arrange
         var firstChain = CreateMarkers(typeof(TestComponent));
-        var secondChain = CreateMarkers(new ServerComponentInvocationSequence(), typeof(TestComponent), typeof(TestComponent)).Skip(1);
+        var secondChain = CreateMarkers(
+                new ServerComponentInvocationSequence(),
+                typeof(TestComponent),
+                typeof(TestComponent)
+            )
+            .Skip(1);
         var markers = SerializeMarkers(firstChain.Concat(secondChain).ToArray());
         var serverComponentDeserializer = CreateServerComponentDeserializer();
 
         // Act & assert
-        Assert.False(serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(markers, out var descriptors));
+        Assert.False(
+            serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(
+                markers,
+                out var descriptors
+            )
+        );
         Assert.Empty(descriptors);
     }
 
@@ -189,11 +247,18 @@ public class ServerComponentDeserializerTest
     public void DoesNotParseMarkersWhoseSequenceDoesNotStartAtZero()
     {
         // Arrange
-        var markers = SerializeMarkers(CreateMarkers(typeof(TestComponent), typeof(TestComponent)).Skip(1).ToArray());
+        var markers = SerializeMarkers(
+            CreateMarkers(typeof(TestComponent), typeof(TestComponent)).Skip(1).ToArray()
+        );
         var serverComponentDeserializer = CreateServerComponentDeserializer();
 
         // Act & assert
-        Assert.False(serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(markers, out var descriptors));
+        Assert.False(
+            serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(
+                markers,
+                out var descriptors
+            )
+        );
         Assert.Empty(descriptors);
     }
 
@@ -201,7 +266,11 @@ public class ServerComponentDeserializerTest
     public void DoesNotParseMarkersWithGapsInTheSequence()
     {
         // Arrange
-        var brokenChain = CreateMarkers(typeof(TestComponent), typeof(TestComponent), typeof(TestComponent))
+        var brokenChain = CreateMarkers(
+                typeof(TestComponent),
+                typeof(TestComponent),
+                typeof(TestComponent)
+            )
             .Where(m => m.Sequence != 1)
             .ToArray();
 
@@ -209,7 +278,12 @@ public class ServerComponentDeserializerTest
         var serverComponentDeserializer = CreateServerComponentDeserializer();
 
         // Act & assert
-        Assert.False(serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(markers, out var descriptors));
+        Assert.False(
+            serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(
+                markers,
+                out var descriptors
+            )
+        );
         Assert.Empty(descriptors);
     }
 
@@ -224,7 +298,12 @@ public class ServerComponentDeserializerTest
         var serverComponentDeserializer = CreateServerComponentDeserializer();
 
         // Act & assert
-        Assert.False(serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(markers, out var descriptors));
+        Assert.False(
+            serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(
+                markers,
+                out var descriptors
+            )
+        );
         Assert.Empty(descriptors);
     }
 
@@ -239,7 +318,12 @@ public class ServerComponentDeserializerTest
         var serverComponentDeserializer = CreateServerComponentDeserializer();
 
         // Act & assert
-        Assert.False(serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(markers, out var descriptors));
+        Assert.False(
+            serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(
+                markers,
+                out var descriptors
+            )
+        );
         Assert.Empty(descriptors);
     }
 
@@ -256,7 +340,12 @@ public class ServerComponentDeserializerTest
         var serverComponentDeserializer = CreateServerComponentDeserializer();
 
         // Act & assert
-        Assert.True(serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(markers, out var descriptors));
+        Assert.True(
+            serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(
+                markers,
+                out var descriptors
+            )
+        );
         Assert.Equal(2, descriptors.Count);
     }
 
@@ -268,13 +357,19 @@ public class ServerComponentDeserializerTest
         var missingUnknownComponentTypeMarker = CreateMarkers(typeof(TestComponent));
         missingUnknownComponentTypeMarker[0].Descriptor = _protector.Protect(
             SerializeComponent("UnknownAssembly", "System.String"),
-            TimeSpan.FromSeconds(30));
+            TimeSpan.FromSeconds(30)
+        );
 
         var markers = SerializeMarkers(missingUnknownComponentTypeMarker);
         var serverComponentDeserializer = CreateServerComponentDeserializer();
 
         // Act & assert
-        Assert.False(serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(markers, out var descriptors));
+        Assert.False(
+            serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(
+                markers,
+                out var descriptors
+            )
+        );
         Assert.Empty(descriptors);
     }
 
@@ -285,13 +380,19 @@ public class ServerComponentDeserializerTest
         var missingUnknownComponentTypeMarker = CreateMarkers(typeof(TestComponent));
         missingUnknownComponentTypeMarker[0].Descriptor = _protector.Protect(
             SerializeComponent(typeof(TestComponent).Assembly.GetName().Name, "Unknown.Type"),
-            TimeSpan.FromSeconds(30));
+            TimeSpan.FromSeconds(30)
+        );
 
         var markers = SerializeMarkers(missingUnknownComponentTypeMarker);
         var serverComponentDeserializer = CreateServerComponentDeserializer();
 
         // Act & assert
-        Assert.False(serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(markers, out var descriptors));
+        Assert.False(
+            serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(
+                markers,
+                out var descriptors
+            )
+        );
         Assert.Empty(descriptors);
     }
 
@@ -306,14 +407,27 @@ public class ServerComponentDeserializerTest
         var serverComponentDeserializer = CreateServerComponentDeserializer();
 
         // Act & assert
-        Assert.False(serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(markers, out var descriptors));
+        Assert.False(
+            serverComponentDeserializer.TryDeserializeComponentDescriptorCollection(
+                markers,
+                out var descriptors
+            )
+        );
         Assert.Empty(descriptors);
     }
 
     private string SerializeComponent(string assembly, string type) =>
         JsonSerializer.Serialize(
-            new ServerComponent(0, assembly, type, Array.Empty<ComponentParameter>(), Array.Empty<object>(), Guid.NewGuid()),
-            ServerComponentSerializationSettings.JsonSerializationOptions);
+            new ServerComponent(
+                0,
+                assembly,
+                type,
+                Array.Empty<ComponentParameter>(),
+                Array.Empty<object>(),
+                Guid.NewGuid()
+            ),
+            ServerComponentSerializationSettings.JsonSerializationOptions
+        );
 
     private ServerComponentDeserializer CreateServerComponentDeserializer()
     {
@@ -321,11 +435,18 @@ public class ServerComponentDeserializerTest
             _ephemeralDataProtectionProvider,
             NullLogger<ServerComponentDeserializer>.Instance,
             new RootComponentTypeCache(),
-            new ComponentParameterDeserializer(NullLogger<ComponentParameterDeserializer>.Instance, new ComponentParametersTypeCache()));
+            new ComponentParameterDeserializer(
+                NullLogger<ComponentParameterDeserializer>.Instance,
+                new ComponentParametersTypeCache()
+            )
+        );
     }
 
     private string SerializeMarkers(ServerComponentMarker[] markers) =>
-        JsonSerializer.Serialize(markers, ServerComponentSerializationSettings.JsonSerializationOptions);
+        JsonSerializer.Serialize(
+            markers,
+            ServerComponentSerializationSettings.JsonSerializationOptions
+        );
 
     private ServerComponentMarker[] CreateMarkers(params Type[] types)
     {
@@ -333,7 +454,12 @@ public class ServerComponentDeserializerTest
         var markers = new ServerComponentMarker[types.Length];
         for (var i = 0; i < types.Length; i++)
         {
-            markers[i] = serializer.SerializeInvocation(_invocationSequence, types[i], ParameterView.Empty, false);
+            markers[i] = serializer.SerializeInvocation(
+                _invocationSequence,
+                types[i],
+                ParameterView.Empty,
+                false
+            );
         }
 
         return markers;
@@ -350,19 +476,28 @@ public class ServerComponentDeserializerTest
                 _invocationSequence,
                 type,
                 parameters == null ? ParameterView.Empty : ParameterView.FromDictionary(parameters),
-                false);
+                false
+            );
         }
 
         return markers;
     }
 
-    private ServerComponentMarker[] CreateMarkers(ServerComponentInvocationSequence sequence, params Type[] types)
+    private ServerComponentMarker[] CreateMarkers(
+        ServerComponentInvocationSequence sequence,
+        params Type[] types
+    )
     {
         var serializer = new ServerComponentSerializer(_ephemeralDataProtectionProvider);
         var markers = new ServerComponentMarker[types.Length];
         for (var i = 0; i < types.Length; i++)
         {
-            markers[i] = serializer.SerializeInvocation(sequence, types[i], ParameterView.Empty, false);
+            markers[i] = serializer.SerializeInvocation(
+                sequence,
+                types[i],
+                ParameterView.Empty,
+                false
+            );
         }
 
         return markers;
@@ -372,6 +507,7 @@ public class ServerComponentDeserializerTest
     {
         public void Attach(RenderHandle renderHandle) => throw new NotImplementedException();
 
-        public Task SetParametersAsync(ParameterView parameters) => throw new NotImplementedException();
+        public Task SetParametersAsync(ParameterView parameters) =>
+            throw new NotImplementedException();
     }
 }

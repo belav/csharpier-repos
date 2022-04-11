@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void NamespaceWithNoNameSemicolonOrBraces()
         {
             UsingNode(
-@"namespace", TestOptions.RegularPreview,
+                @"namespace",
+                TestOptions.RegularPreview,
                 // (1,10): error CS1001: Identifier expected
                 // namespace
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(1, 10),
@@ -38,7 +39,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 Diagnostic(ErrorCode.ERR_LbraceExpected, "").WithLocation(1, 10),
                 // (1,10): error CS1513: } expected
                 // namespace
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 10));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 10)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -61,13 +63,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void NamespaceWithNoSemicolonOrBraces1()
         {
             UsingNode(
-@"namespace A", TestOptions.RegularPreview,
+                @"namespace A",
+                TestOptions.RegularPreview,
                 // (1,12): error CS1514: { expected
                 // namespace A
                 Diagnostic(ErrorCode.ERR_LbraceExpected, "").WithLocation(1, 12),
                 // (1,12): error CS1513: } expected
                 // namespace A
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 12));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 12)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -90,7 +94,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void NamespaceWithNoSemicolonOrBraces2()
         {
             UsingNode(
-@"namespace A.", TestOptions.RegularPreview,
+                @"namespace A.",
+                TestOptions.RegularPreview,
                 // (1,13): error CS1001: Identifier expected
                 // namespace A.
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(1, 13),
@@ -99,7 +104,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 Diagnostic(ErrorCode.ERR_LbraceExpected, "").WithLocation(1, 13),
                 // (1,13): error CS1513: } expected
                 // namespace A.
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 13));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 13)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -130,13 +136,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void NamespaceWithNoSemicolonOrBraces3()
         {
             UsingNode(
-@"namespace A.B", TestOptions.RegularPreview,
+                @"namespace A.B",
+                TestOptions.RegularPreview,
                 // (1,14): error CS1514: { expected
                 // namespace A.B
                 Diagnostic(ErrorCode.ERR_LbraceExpected, "").WithLocation(1, 14),
                 // (1,14): error CS1513: } expected
                 // namespace A.B
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 14));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 14)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -166,8 +174,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void NamespaceWithSemicolon1()
         {
-            UsingNode(
-@"namespace A;", TestOptions.RegularPreview);
+            UsingNode(@"namespace A;", TestOptions.RegularPreview);
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -189,10 +196,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void NamespaceWithSemicolon_CSharp9()
         {
             UsingNode(
-@"namespace A;", TestOptions.Regular9,
+                @"namespace A;",
+                TestOptions.Regular9,
                 // (1,1): error CS8773: Feature 'file-scoped namespace' is not available in C# 9.0. Please use language version 10.0 or greater.
                 // namespace A;
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "namespace").WithArguments("file-scoped namespace", "10.0").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "namespace")
+                    .WithArguments("file-scoped namespace", "10.0")
+                    .WithLocation(1, 1)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -214,10 +225,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void NamespaceWithSemicolon2()
         {
             UsingNode(
-@"namespace A.;", TestOptions.RegularPreview,
+                @"namespace A.;",
+                TestOptions.RegularPreview,
                 // (1,13): error CS1001: Identifier expected
                 // namespace A.;
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, ";").WithLocation(1, 13));
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, ";").WithLocation(1, 13)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -246,8 +259,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void NamespaceWithSemicolon3()
         {
-            UsingNode(
-@"namespace A.B;", TestOptions.RegularPreview);
+            UsingNode(@"namespace A.B;", TestOptions.RegularPreview);
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -277,10 +289,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void NamespaceWithSemicolonAndOpenBrace()
         {
             UsingNode(
-@"namespace A; {", TestOptions.RegularPreview,
+                @"namespace A; {",
+                TestOptions.RegularPreview,
                 // (1,14): error CS1022: Type or namespace definition, or end-of-file expected
                 // namespace A; {
-                Diagnostic(ErrorCode.ERR_EOFExpected, "{").WithLocation(1, 14));
+                Diagnostic(ErrorCode.ERR_EOFExpected, "{").WithLocation(1, 14)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -302,13 +316,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void NamespaceWithSemicolonAndBraces()
         {
             UsingNode(
-@"namespace A; { }", TestOptions.RegularPreview,
+                @"namespace A; { }",
+                TestOptions.RegularPreview,
                 // (1,14): error CS1022: Type or namespace definition, or end-of-file expected
                 // namespace A; { }
                 Diagnostic(ErrorCode.ERR_EOFExpected, "{").WithLocation(1, 14),
                 // (1,16): error CS1022: Type or namespace definition, or end-of-file expected
                 // namespace A; { }
-                Diagnostic(ErrorCode.ERR_EOFExpected, "}").WithLocation(1, 16));
+                Diagnostic(ErrorCode.ERR_EOFExpected, "}").WithLocation(1, 16)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -330,10 +346,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void NamespaceWithSemicolonAndCloseBrace()
         {
             UsingNode(
-@"namespace A; }", TestOptions.RegularPreview,
+                @"namespace A; }",
+                TestOptions.RegularPreview,
                 // (1,14): error CS1022: Type or namespace definition, or end-of-file expected
                 // namespace A; }
-                Diagnostic(ErrorCode.ERR_EOFExpected, "}").WithLocation(1, 14));
+                Diagnostic(ErrorCode.ERR_EOFExpected, "}").WithLocation(1, 14)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -355,8 +373,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void MultipleFileScopedNamespaces()
         {
             UsingNode(
-@"namespace A;
-namespace B;", TestOptions.RegularPreview);
+                @"namespace A;
+namespace B;",
+                TestOptions.RegularPreview
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -387,10 +407,12 @@ namespace B;", TestOptions.RegularPreview);
         public void FileScopedNamespaceNestedInNormalNamespace()
         {
             UsingNode(
-@"namespace A
+                @"namespace A
 {
     namespace B;
-}", TestOptions.RegularPreview);
+}",
+                TestOptions.RegularPreview
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -422,10 +444,12 @@ namespace B;", TestOptions.RegularPreview);
         public void NormalAndFileScopedNamespace1()
         {
             UsingNode(
-@"namespace A;
+                @"namespace A;
 namespace B
 {
-}", TestOptions.RegularPreview);
+}",
+                TestOptions.RegularPreview
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -457,10 +481,12 @@ namespace B
         public void NormalAndFileScopedNamespace2()
         {
             UsingNode(
-@"namespace A
+                @"namespace A
 {
 }
-namespace B;", TestOptions.RegularPreview);
+namespace B;",
+                TestOptions.RegularPreview
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -492,8 +518,10 @@ namespace B;", TestOptions.RegularPreview);
         public void NamespaceWithPrecedingUsing()
         {
             UsingNode(
-@"using X;
-namespace A;", TestOptions.RegularPreview);
+                @"using X;
+namespace A;",
+                TestOptions.RegularPreview
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -524,8 +552,10 @@ namespace A;", TestOptions.RegularPreview);
         public void NamespaceWithFollowingUsing()
         {
             UsingNode(
-@"namespace A;
-using X;", TestOptions.RegularPreview);
+                @"namespace A;
+using X;",
+                TestOptions.RegularPreview
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -556,8 +586,10 @@ using X;", TestOptions.RegularPreview);
         public void NamespaceWithPrecedingType()
         {
             UsingNode(
-@"class X { }
-namespace A;", TestOptions.RegularPreview);
+                @"class X { }
+namespace A;",
+                TestOptions.RegularPreview
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -586,8 +618,10 @@ namespace A;", TestOptions.RegularPreview);
         public void NamespaceWithFollowingType()
         {
             UsingNode(
-@"namespace A;
-class X { }", TestOptions.RegularPreview);
+                @"namespace A;
+class X { }",
+                TestOptions.RegularPreview
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -616,8 +650,10 @@ class X { }", TestOptions.RegularPreview);
         public void NamespaceWithPrecedingExtern()
         {
             UsingNode(
-@"extern alias X;
-namespace A;", TestOptions.RegularPreview);
+                @"extern alias X;
+namespace A;",
+                TestOptions.RegularPreview
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -646,8 +682,10 @@ namespace A;", TestOptions.RegularPreview);
         public void NamespaceWithFollowingExtern()
         {
             UsingNode(
-@"namespace A;
-extern alias X;", TestOptions.RegularPreview);
+                @"namespace A;
+extern alias X;",
+                TestOptions.RegularPreview
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -676,10 +714,12 @@ extern alias X;", TestOptions.RegularPreview);
         public void NamespaceWithExtraSemicolon()
         {
             UsingNode(
-@"namespace A;;", TestOptions.RegularPreview,
+                @"namespace A;;",
+                TestOptions.RegularPreview,
                 // (1,13): error CS1022: Type or namespace definition, or end-of-file expected
                 // namespace A;;
-                Diagnostic(ErrorCode.ERR_EOFExpected, ";").WithLocation(1, 13));
+                Diagnostic(ErrorCode.ERR_EOFExpected, ";").WithLocation(1, 13)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -700,8 +740,7 @@ extern alias X;", TestOptions.RegularPreview);
         [Fact]
         public void NamespaceWithGenericName()
         {
-            UsingNode(
-@"namespace A<X>;", TestOptions.RegularPreview);
+            UsingNode(@"namespace A<X>;", TestOptions.RegularPreview);
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -731,8 +770,7 @@ extern alias X;", TestOptions.RegularPreview);
         [Fact]
         public void NamespaceWithAlias()
         {
-            UsingNode(
-@"namespace A::B;", TestOptions.RegularPreview);
+            UsingNode(@"namespace A::B;", TestOptions.RegularPreview);
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -761,8 +799,7 @@ extern alias X;", TestOptions.RegularPreview);
         [Fact]
         public void NamespaceWithModifiers()
         {
-            UsingNode(
-@"public namespace A;", TestOptions.RegularPreview);
+            UsingNode(@"public namespace A;", TestOptions.RegularPreview);
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -784,8 +821,7 @@ extern alias X;", TestOptions.RegularPreview);
         [Fact]
         public void NamespaceWithAttributes()
         {
-            UsingNode(
-@"[X] namespace A;", TestOptions.RegularPreview);
+            UsingNode(@"[X] namespace A;", TestOptions.RegularPreview);
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -818,8 +854,7 @@ extern alias X;", TestOptions.RegularPreview);
         [Fact]
         public void NamespaceFollowedByVariable()
         {
-            UsingNode(
-@"namespace A; int x;", TestOptions.RegularPreview);
+            UsingNode(@"namespace A; int x;", TestOptions.RegularPreview);
 
             N(SyntaxKind.CompilationUnit);
             {

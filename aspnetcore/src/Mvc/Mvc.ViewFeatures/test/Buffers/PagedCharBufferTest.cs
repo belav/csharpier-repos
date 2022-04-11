@@ -38,9 +38,11 @@ public class PagedCharBufferTest
         buffer.Append(charToAppend);
 
         // Assert
-        Assert.Collection(buffer.Pages,
+        Assert.Collection(
+            buffer.Pages,
             page => Assert.Equal(stringToAppend.ToCharArray(), page),
-            page => Assert.Equal(charToAppend, page[0]));
+            page => Assert.Equal(charToAppend, page[0])
+        );
         Assert.Equal(1 + PagedCharBuffer.PageSize, buffer.Length);
     }
 
@@ -101,9 +103,11 @@ public class PagedCharBufferTest
 
         // Assert
         Assert.Equal(2 * PagedCharBuffer.PageSize + 1, buffer.Length);
-        Assert.Collection(buffer.Pages,
+        Assert.Collection(
+            buffer.Pages,
             page => Assert.Equal(stringToAppend.ToCharArray(), page),
-            page => Assert.Equal(charToAppend, page[0]));
+            page => Assert.Equal(charToAppend, page[0])
+        );
     }
 
     [Fact]
@@ -165,7 +169,8 @@ public class PagedCharBufferTest
             buffer.Pages,
             page => Assert.Equal(expected, page),
             page => Assert.Equal(expected, page),
-            page => Assert.Equal('d', page[0]));
+            page => Assert.Equal('d', page[0])
+        );
     }
 
     [Fact]
@@ -196,7 +201,8 @@ public class PagedCharBufferTest
         Assert.Collection(
             buffer.Pages,
             page => Assert.Equal(expected1, page),
-            page => Assert.Equal(expected2, page.Take(PagedCharBuffer.PageSize + 1)));
+            page => Assert.Equal(expected2, page.Take(PagedCharBuffer.PageSize + 1))
+        );
     }
 
     [Fact]
@@ -226,7 +232,8 @@ public class PagedCharBufferTest
         Assert.Collection(
             buffer.Pages,
             page => Assert.Equal(expected, page),
-            page => Assert.Equal('d', page[0]));
+            page => Assert.Equal('d', page[0])
+        );
     }
 
     [Fact]
@@ -255,7 +262,8 @@ public class PagedCharBufferTest
         Assert.Collection(
             buffer.Pages,
             page => Assert.Equal(expected, page),
-            page => Assert.Equal('d', page[0]));
+            page => Assert.Equal('d', page[0])
+        );
     }
 
     [Fact]
@@ -307,7 +315,8 @@ public class PagedCharBufferTest
 
         // Assert
         Assert.Equal(length, buffer.Length);
-        Assert.Collection(buffer.Pages,
+        Assert.Collection(
+            buffer.Pages,
             page => Assert.Equal(expected, page),
             page => Assert.Equal(expected, page),
             page =>
@@ -315,7 +324,8 @@ public class PagedCharBufferTest
                 Assert.Equal(ch, page[0]);
                 Assert.Equal(ch, page[1]);
                 Assert.Equal(ch, page[2]);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -346,7 +356,8 @@ public class PagedCharBufferTest
         Assert.Collection(
             buffer.Pages,
             page => Assert.Equal(expected1, page),
-            page => Assert.Equal(expected2, page.Take(PagedCharBuffer.PageSize + 1)));
+            page => Assert.Equal(expected2, page.Take(PagedCharBuffer.PageSize + 1))
+        );
     }
 
     [Fact]
@@ -376,7 +387,8 @@ public class PagedCharBufferTest
         Assert.Collection(
             buffer.Pages,
             page => Assert.Equal(expected, page),
-            page => Assert.Equal('d', page[0]));
+            page => Assert.Equal('d', page[0])
+        );
     }
 
     [Fact]
@@ -405,7 +417,8 @@ public class PagedCharBufferTest
         Assert.Collection(
             buffer.Pages,
             page => Assert.Equal(expected, page),
-            page => Assert.Equal('d', page[0]));
+            page => Assert.Equal('d', page[0])
+        );
     }
 
     [Fact]
@@ -443,7 +456,8 @@ public class PagedCharBufferTest
     {
         // Arrange
         var bufferSource = new Mock<ICharBufferSource>();
-        bufferSource.Setup(s => s.Rent(PagedCharBuffer.PageSize))
+        bufferSource
+            .Setup(s => s.Rent(PagedCharBuffer.PageSize))
             .Returns(new char[PagedCharBuffer.PageSize]);
         var buffer = new PagedCharBuffer(bufferSource.Object);
 

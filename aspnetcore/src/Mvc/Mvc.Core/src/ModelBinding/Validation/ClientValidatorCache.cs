@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 /// </summary>
 public class ClientValidatorCache
 {
-    private readonly ConcurrentDictionary<ModelMetadata, CacheEntry> _cacheEntries = new ConcurrentDictionary<ModelMetadata, CacheEntry>();
+    private readonly ConcurrentDictionary<ModelMetadata, CacheEntry> _cacheEntries =
+        new ConcurrentDictionary<ModelMetadata, CacheEntry>();
 
     /// <summary>
     /// Gets the <see cref="IClientModelValidator"/> for the metadata from the cache, using the validatorProvider to create when needed.
@@ -24,11 +25,19 @@ public class ClientValidatorCache
     /// <param name="metadata">The <see cref="ModelMetadata"/> being validated.</param>
     /// <param name="validatorProvider">The <see cref="IClientModelValidatorProvider"/> which will be used to create validators when needed.</param>
     /// <returns>The list of <see cref="IClientModelValidator"/>s.</returns>
-    public IReadOnlyList<IClientModelValidator> GetValidators(ModelMetadata metadata, IClientModelValidatorProvider validatorProvider)
+    public IReadOnlyList<IClientModelValidator> GetValidators(
+        ModelMetadata metadata,
+        IClientModelValidatorProvider validatorProvider
+    )
     {
-        if (metadata.MetadataKind == ModelMetadataKind.Property &&
-            metadata.ContainerMetadata?.BoundConstructor != null &&
-            metadata.ContainerMetadata.BoundConstructorPropertyMapping.TryGetValue(metadata, out var parameter))
+        if (
+            metadata.MetadataKind == ModelMetadataKind.Property
+            && metadata.ContainerMetadata?.BoundConstructor != null
+            && metadata.ContainerMetadata.BoundConstructorPropertyMapping.TryGetValue(
+                metadata,
+                out var parameter
+            )
+        )
         {
             // "metadata" typically points to properties. When working with record types, we want to read validation details from the
             // constructor parameter instead. So let's switch it out.
@@ -75,7 +84,11 @@ public class ClientValidatorCache
         return validators;
     }
 
-    private IReadOnlyList<IClientModelValidator> GetValidatorsFromEntry(CacheEntry entry, ModelMetadata metadata, IClientModelValidatorProvider validationProvider)
+    private IReadOnlyList<IClientModelValidator> GetValidatorsFromEntry(
+        CacheEntry entry,
+        ModelMetadata metadata,
+        IClientModelValidatorProvider validationProvider
+    )
     {
         if (entry.Validators != null)
         {
@@ -103,7 +116,11 @@ public class ClientValidatorCache
         return ExtractValidators(items);
     }
 
-    private void ExecuteProvider(IClientModelValidatorProvider validatorProvider, ModelMetadata metadata, List<ClientValidatorItem> items)
+    private void ExecuteProvider(
+        IClientModelValidatorProvider validatorProvider,
+        ModelMetadata metadata,
+        List<ClientValidatorItem> items
+    )
     {
         var context = new ClientValidatorProviderContext(metadata, items);
 

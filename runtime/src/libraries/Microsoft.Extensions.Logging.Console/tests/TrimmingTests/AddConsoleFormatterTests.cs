@@ -15,19 +15,25 @@ class Program
     static int Main(string[] args)
     {
         IServiceCollection descriptors = new ServiceCollection();
-        descriptors.AddLogging(builder =>
-        {
-            builder.AddConsoleFormatter<CustomFormatter, CustomOptions>();
-            builder.AddConsole(o => { o.FormatterName = "custom"; });
-        });
+        descriptors.AddLogging(
+            builder =>
+            {
+                builder.AddConsoleFormatter<CustomFormatter, CustomOptions>();
+                builder.AddConsole(
+                    o =>
+                    {
+                        o.FormatterName = "custom";
+                    }
+                );
+            }
+        );
 
         ServiceProvider provider = descriptors.BuildServiceProvider();
 
         ILoggerProvider logger = provider.GetRequiredService<ILoggerProvider>();
         logger.CreateLogger("log").LogError("Hello");
 
-        if (ConstructorCallCount != 1 ||
-            WriteCallCount != 1)
+        if (ConstructorCallCount != 1 || WriteCallCount != 1)
         {
             return -1;
         }
@@ -41,7 +47,12 @@ class Program
         {
             ConstructorCallCount++;
         }
-        public override void Write<TState>(in LogEntry<TState> logEntry, IExternalScopeProvider scopeProvider, TextWriter textWriter)
+
+        public override void Write<TState>(
+            in LogEntry<TState> logEntry,
+            IExternalScopeProvider scopeProvider,
+            TextWriter textWriter
+        )
         {
             WriteCallCount++;
         }

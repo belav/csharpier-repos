@@ -11,9 +11,7 @@ internal class DirectiveHtmlTokenizer : HtmlTokenizer
     private bool _visitedFirstTokenStart;
     private SourceLocation _firstTokenVisitLocation = SourceLocation.Undefined;
 
-    public DirectiveHtmlTokenizer(ITextDocument source) : base(source)
-    {
-    }
+    public DirectiveHtmlTokenizer(ITextDocument source) : base(source) { }
 
     protected override StateResult Dispatch()
     {
@@ -51,11 +49,11 @@ internal class DirectiveHtmlTokenizer : HtmlTokenizer
 
     private bool IsValidTokenType(SyntaxKind kind)
     {
-        return kind != SyntaxKind.Whitespace &&
-            kind != SyntaxKind.NewLine &&
-            kind != SyntaxKind.RazorCommentLiteral &&
-            kind != SyntaxKind.RazorCommentStar &&
-            kind != SyntaxKind.RazorCommentTransition &&
-            kind != SyntaxKind.Transition;
+        return kind != SyntaxKind.Whitespace
+            && kind != SyntaxKind.NewLine
+            && kind != SyntaxKind.RazorCommentLiteral
+            && kind != SyntaxKind.RazorCommentStar
+            && kind != SyntaxKind.RazorCommentTransition
+            && kind != SyntaxKind.Transition;
     }
 }

@@ -29,8 +29,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         public RowNumberExpression(
             IReadOnlyList<SqlExpression>? partitions,
             IReadOnlyList<OrderingExpression> orderings,
-            RelationalTypeMapping? typeMapping)
-            : base(typeof(long), typeMapping)
+            RelationalTypeMapping? typeMapping
+        ) : base(typeof(long), typeMapping)
         {
             Partitions = partitions ?? Array.Empty<SqlExpression>();
             Orderings = orderings;
@@ -66,9 +66,7 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                 orderings.Add(newOrdering);
             }
 
-            return changed
-                ? new RowNumberExpression(partitions, orderings, TypeMapping)
-                : this;
+            return changed ? new RowNumberExpression(partitions, orderings, TypeMapping) : this;
         }
 
         /// <summary>
@@ -80,12 +78,16 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
         public virtual RowNumberExpression Update(
             IReadOnlyList<SqlExpression>? partitions,
-            IReadOnlyList<OrderingExpression> orderings)
-            => ((Partitions == null && partitions == null)
-                    || (Partitions != null && partitions != null && Partitions.SequenceEqual(partitions)))
-                && Orderings.SequenceEqual(orderings)
-                    ? this
-                    : new RowNumberExpression(partitions, orderings, TypeMapping);
+            IReadOnlyList<OrderingExpression> orderings
+        ) =>
+            (
+                (Partitions == null && partitions == null)
+                || (
+                    Partitions != null && partitions != null && Partitions.SequenceEqual(partitions)
+                )
+            ) && Orderings.SequenceEqual(orderings)
+                ? this
+                : new RowNumberExpression(partitions, orderings, TypeMapping);
 
         /// <inheritdoc />
         protected override void Print(ExpressionPrinter expressionPrinter)
@@ -104,16 +106,21 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         }
 
         /// <inheritdoc />
-        public override bool Equals(object? obj)
-            => obj != null
-                && (ReferenceEquals(this, obj)
-                    || obj is RowNumberExpression rowNumberExpression
-                    && Equals(rowNumberExpression));
+        public override bool Equals(object? obj) =>
+            obj != null
+            && (
+                ReferenceEquals(this, obj)
+                || obj is RowNumberExpression rowNumberExpression && Equals(rowNumberExpression)
+            );
 
-        private bool Equals(RowNumberExpression rowNumberExpression)
-            => base.Equals(rowNumberExpression)
-                && (Partitions == null ? rowNumberExpression.Partitions == null : Partitions.SequenceEqual(rowNumberExpression.Partitions))
-                && Orderings.SequenceEqual(rowNumberExpression.Orderings);
+        private bool Equals(RowNumberExpression rowNumberExpression) =>
+            base.Equals(rowNumberExpression)
+            && (
+                Partitions == null
+                    ? rowNumberExpression.Partitions == null
+                    : Partitions.SequenceEqual(rowNumberExpression.Partitions)
+            )
+            && Orderings.SequenceEqual(rowNumberExpression.Orderings);
 
         /// <inheritdoc />
         public override int GetHashCode()

@@ -32,7 +32,8 @@ namespace Microsoft.Extensions.Http
 
         public override HttpMessageHandler PrimaryHandler { get; set; } = new HttpClientHandler();
 
-        public override IList<DelegatingHandler> AdditionalHandlers { get; } = new List<DelegatingHandler>();
+        public override IList<DelegatingHandler> AdditionalHandlers { get; } =
+            new List<DelegatingHandler>();
 
         public override IServiceProvider Services { get; }
 
@@ -40,7 +41,10 @@ namespace Microsoft.Extensions.Http
         {
             if (PrimaryHandler == null)
             {
-                string message = SR.Format(SR.HttpMessageHandlerBuilder_PrimaryHandlerIsNull, nameof(PrimaryHandler));
+                string message = SR.Format(
+                    SR.HttpMessageHandlerBuilder_PrimaryHandlerIsNull,
+                    nameof(PrimaryHandler)
+                );
                 throw new InvalidOperationException(message);
             }
 

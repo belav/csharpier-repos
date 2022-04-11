@@ -47,7 +47,10 @@ namespace System.Text
         /// also in machine-endian order.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static void NarrowFourUtf16CharsToLatin1AndWriteToBuffer(ref byte outputBuffer, ulong value)
+        private static void NarrowFourUtf16CharsToLatin1AndWriteToBuffer(
+            ref byte outputBuffer,
+            ulong value
+        )
         {
             Debug.Assert(AllCharsInUInt64AreLatin1(value));
 
@@ -91,7 +94,10 @@ namespace System.Text
         /// machine-endian order.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static void NarrowTwoUtf16CharsToLatin1AndWriteToBuffer(ref byte outputBuffer, uint value)
+        private static void NarrowTwoUtf16CharsToLatin1AndWriteToBuffer(
+            ref byte outputBuffer,
+            uint value
+        )
         {
             Debug.Assert(AllCharsInUInt32AreLatin1(value));
 

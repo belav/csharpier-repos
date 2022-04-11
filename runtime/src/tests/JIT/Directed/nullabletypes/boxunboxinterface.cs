@@ -4,14 +4,16 @@
 using System.Runtime.InteropServices;
 using System;
 
-
 internal class NullableTest1
 {
     private static bool BoxUnboxToNQ(IEmpty o)
     {
         try
         {
-            return Helper.Compare((ImplementOneInterface)o, Helper.Create(default(ImplementOneInterface)));
+            return Helper.Compare(
+                (ImplementOneInterface)o,
+                Helper.Create(default(ImplementOneInterface))
+            );
         }
         catch (NullReferenceException)
         {
@@ -21,14 +23,19 @@ internal class NullableTest1
 
     private static bool BoxUnboxToQ(IEmpty o)
     {
-        return Helper.Compare((ImplementOneInterface?)o, Helper.Create(default(ImplementOneInterface)));
+        return Helper.Compare(
+            (ImplementOneInterface?)o,
+            Helper.Create(default(ImplementOneInterface))
+        );
     }
 
     public static void Run()
     {
         ImplementOneInterface? s = Helper.Create(default(ImplementOneInterface));
 
-        Console.WriteLine("--- ImplementOneInterface? s = Helper.Create(default(ImplementOneInterface)) ---");
+        Console.WriteLine(
+            "--- ImplementOneInterface? s = Helper.Create(default(ImplementOneInterface)) ---"
+        );
         Assert.IsTrue(BoxUnboxToNQ(s));
 
         Assert.IsTrue(BoxUnboxToQ(s));
@@ -41,13 +48,13 @@ internal class NullableTest1
 
         ImplementOneInterface u = Helper.Create(default(ImplementOneInterface));
 
-        Console.WriteLine("--- ImplementOneInterface u = Helper.Create(default(ImplementOneInterface)) ----");
+        Console.WriteLine(
+            "--- ImplementOneInterface u = Helper.Create(default(ImplementOneInterface)) ----"
+        );
         Assert.IsTrue(BoxUnboxToNQ(u));
         Assert.IsTrue(BoxUnboxToQ(u));
     }
 }
-
-
 
 internal class NullableTest2
 {
@@ -55,7 +62,10 @@ internal class NullableTest2
     {
         try
         {
-            return Helper.Compare((ImplementTwoInterface)o, Helper.Create(default(ImplementTwoInterface)));
+            return Helper.Compare(
+                (ImplementTwoInterface)o,
+                Helper.Create(default(ImplementTwoInterface))
+            );
         }
         catch (NullReferenceException)
         {
@@ -65,14 +75,19 @@ internal class NullableTest2
 
     private static bool BoxUnboxToQ(IEmpty o)
     {
-        return Helper.Compare((ImplementTwoInterface?)o, Helper.Create(default(ImplementTwoInterface)));
+        return Helper.Compare(
+            (ImplementTwoInterface?)o,
+            Helper.Create(default(ImplementTwoInterface))
+        );
     }
 
     public static void Run()
     {
         ImplementTwoInterface? s = Helper.Create(default(ImplementTwoInterface));
 
-        Console.WriteLine("--- ImplementTwoInterface? s = Helper.Create(default(ImplementTwoInterface)) ---");
+        Console.WriteLine(
+            "--- ImplementTwoInterface? s = Helper.Create(default(ImplementTwoInterface)) ---"
+        );
         Assert.IsTrue(BoxUnboxToNQ(s));
 
         Assert.IsTrue(BoxUnboxToQ(s));
@@ -85,13 +100,13 @@ internal class NullableTest2
 
         ImplementTwoInterface u = Helper.Create(default(ImplementTwoInterface));
 
-        Console.WriteLine("--- ImplementTwoInterface u = Helper.Create(default(ImplementTwoInterface)) ----");
+        Console.WriteLine(
+            "--- ImplementTwoInterface u = Helper.Create(default(ImplementTwoInterface)) ----"
+        );
         Assert.IsTrue(BoxUnboxToNQ(u));
         Assert.IsTrue(BoxUnboxToQ(u));
     }
 }
-
-
 
 internal class NullableTest3
 {
@@ -99,7 +114,10 @@ internal class NullableTest3
     {
         try
         {
-            return Helper.Compare((ImplementOneInterfaceGen<int>)o, Helper.Create(default(ImplementOneInterfaceGen<int>)));
+            return Helper.Compare(
+                (ImplementOneInterfaceGen<int>)o,
+                Helper.Create(default(ImplementOneInterfaceGen<int>))
+            );
         }
         catch (NullReferenceException)
         {
@@ -109,14 +127,19 @@ internal class NullableTest3
 
     private static bool BoxUnboxToQ(IEmptyGen<int> o)
     {
-        return Helper.Compare((ImplementOneInterfaceGen<int>?)o, Helper.Create(default(ImplementOneInterfaceGen<int>)));
+        return Helper.Compare(
+            (ImplementOneInterfaceGen<int>?)o,
+            Helper.Create(default(ImplementOneInterfaceGen<int>))
+        );
     }
 
     public static void Run()
     {
         ImplementOneInterfaceGen<int>? s = Helper.Create(default(ImplementOneInterfaceGen<int>));
 
-        Console.WriteLine("--- ImplementOneInterfaceGen<int>? s = Helper.Create(default(ImplementOneInterfaceGen<int>)) ---");
+        Console.WriteLine(
+            "--- ImplementOneInterfaceGen<int>? s = Helper.Create(default(ImplementOneInterfaceGen<int>)) ---"
+        );
         Assert.IsTrue(BoxUnboxToNQ(s));
 
         Assert.IsTrue(BoxUnboxToQ(s));
@@ -129,13 +152,13 @@ internal class NullableTest3
 
         ImplementOneInterfaceGen<int> u = Helper.Create(default(ImplementOneInterfaceGen<int>));
 
-        Console.WriteLine("--- ImplementOneInterfaceGen<int> u = Helper.Create(default(ImplementOneInterfaceGen<int>)) ----");
+        Console.WriteLine(
+            "--- ImplementOneInterfaceGen<int> u = Helper.Create(default(ImplementOneInterfaceGen<int>)) ----"
+        );
         Assert.IsTrue(BoxUnboxToNQ(u));
         Assert.IsTrue(BoxUnboxToQ(u));
     }
 }
-
-
 
 internal class NullableTest4
 {
@@ -143,7 +166,10 @@ internal class NullableTest4
     {
         try
         {
-            return Helper.Compare((ImplementTwoInterfaceGen<int>)o, Helper.Create(default(ImplementTwoInterfaceGen<int>)));
+            return Helper.Compare(
+                (ImplementTwoInterfaceGen<int>)o,
+                Helper.Create(default(ImplementTwoInterfaceGen<int>))
+            );
         }
         catch (NullReferenceException)
         {
@@ -153,14 +179,19 @@ internal class NullableTest4
 
     private static bool BoxUnboxToQ(IEmptyGen<int> o)
     {
-        return Helper.Compare((ImplementTwoInterfaceGen<int>?)o, Helper.Create(default(ImplementTwoInterfaceGen<int>)));
+        return Helper.Compare(
+            (ImplementTwoInterfaceGen<int>?)o,
+            Helper.Create(default(ImplementTwoInterfaceGen<int>))
+        );
     }
 
     public static void Run()
     {
         ImplementTwoInterfaceGen<int>? s = Helper.Create(default(ImplementTwoInterfaceGen<int>));
 
-        Console.WriteLine("--- ImplementTwoInterfaceGen<int>? s = Helper.Create(default(ImplementTwoInterfaceGen<int>)) ---");
+        Console.WriteLine(
+            "--- ImplementTwoInterfaceGen<int>? s = Helper.Create(default(ImplementTwoInterfaceGen<int>)) ---"
+        );
         Assert.IsTrue(BoxUnboxToNQ(s));
 
         Assert.IsTrue(BoxUnboxToQ(s));
@@ -173,13 +204,13 @@ internal class NullableTest4
 
         ImplementTwoInterfaceGen<int> u = Helper.Create(default(ImplementTwoInterfaceGen<int>));
 
-        Console.WriteLine("--- ImplementTwoInterfaceGen<int> u = Helper.Create(default(ImplementTwoInterfaceGen<int>)) ----");
+        Console.WriteLine(
+            "--- ImplementTwoInterfaceGen<int> u = Helper.Create(default(ImplementTwoInterfaceGen<int>)) ----"
+        );
         Assert.IsTrue(BoxUnboxToNQ(u));
         Assert.IsTrue(BoxUnboxToQ(u));
     }
 }
-
-
 
 internal class NullableTest5
 {
@@ -187,7 +218,10 @@ internal class NullableTest5
     {
         try
         {
-            return Helper.Compare((ImplementAllInterface<int>)o, Helper.Create(default(ImplementAllInterface<int>)));
+            return Helper.Compare(
+                (ImplementAllInterface<int>)o,
+                Helper.Create(default(ImplementAllInterface<int>))
+            );
         }
         catch (NullReferenceException)
         {
@@ -197,14 +231,19 @@ internal class NullableTest5
 
     private static bool BoxUnboxToQ(IEmpty o)
     {
-        return Helper.Compare((ImplementAllInterface<int>?)o, Helper.Create(default(ImplementAllInterface<int>)));
+        return Helper.Compare(
+            (ImplementAllInterface<int>?)o,
+            Helper.Create(default(ImplementAllInterface<int>))
+        );
     }
 
     public static void Run()
     {
         ImplementAllInterface<int>? s = Helper.Create(default(ImplementAllInterface<int>));
 
-        Console.WriteLine("--- ImplementAllInterface<int>? s = Helper.Create(default(ImplementAllInterface<int>)) ---");
+        Console.WriteLine(
+            "--- ImplementAllInterface<int>? s = Helper.Create(default(ImplementAllInterface<int>)) ---"
+        );
         Assert.IsTrue(BoxUnboxToNQ(s));
 
         Assert.IsTrue(BoxUnboxToQ(s));
@@ -217,13 +256,13 @@ internal class NullableTest5
 
         ImplementAllInterface<int> u = Helper.Create(default(ImplementAllInterface<int>));
 
-        Console.WriteLine("--- ImplementAllInterface<int> u = Helper.Create(default(ImplementAllInterface<int>)) ----");
+        Console.WriteLine(
+            "--- ImplementAllInterface<int> u = Helper.Create(default(ImplementAllInterface<int>)) ----"
+        );
         Assert.IsTrue(BoxUnboxToNQ(u));
         Assert.IsTrue(BoxUnboxToQ(u));
     }
 }
-
-
 
 internal class NullableTest6
 {
@@ -267,8 +306,6 @@ internal class NullableTest6
     }
 }
 
-
-
 internal class NullableTest7
 {
     private static bool BoxUnboxToNQ(IComparable o)
@@ -310,8 +347,6 @@ internal class NullableTest7
         Assert.IsTrue(BoxUnboxToQ(u));
     }
 }
-
-
 
 internal class NullableTest8
 {
@@ -355,8 +390,6 @@ internal class NullableTest8
     }
 }
 
-
-
 internal class NullableTest9
 {
     private static bool BoxUnboxToNQ(IComparable o)
@@ -398,8 +431,6 @@ internal class NullableTest9
         Assert.IsTrue(BoxUnboxToQ(u));
     }
 }
-
-
 
 internal class NullableTest10
 {
@@ -443,8 +474,6 @@ internal class NullableTest10
     }
 }
 
-
-
 internal class NullableTest11
 {
     private static bool BoxUnboxToNQ(IComparable o)
@@ -486,8 +515,6 @@ internal class NullableTest11
         Assert.IsTrue(BoxUnboxToQ(u));
     }
 }
-
-
 
 internal class NullableTest12
 {
@@ -531,8 +558,6 @@ internal class NullableTest12
     }
 }
 
-
-
 internal class NullableTest13
 {
     private static bool BoxUnboxToNQ(IComparable o)
@@ -574,8 +599,6 @@ internal class NullableTest13
         Assert.IsTrue(BoxUnboxToQ(u));
     }
 }
-
-
 
 internal class NullableTest14
 {
@@ -619,8 +642,6 @@ internal class NullableTest14
     }
 }
 
-
-
 internal class NullableTest15
 {
     private static bool BoxUnboxToNQ(IComparable o)
@@ -662,8 +683,6 @@ internal class NullableTest15
         Assert.IsTrue(BoxUnboxToQ(u));
     }
 }
-
-
 
 internal class NullableTest16
 {
@@ -707,8 +726,6 @@ internal class NullableTest16
     }
 }
 
-
-
 internal class NullableTest17
 {
     private static bool BoxUnboxToNQ(IComparable o)
@@ -750,8 +767,6 @@ internal class NullableTest17
         Assert.IsTrue(BoxUnboxToQ(u));
     }
 }
-
-
 
 internal class NullableTest18
 {
@@ -795,8 +810,6 @@ internal class NullableTest18
     }
 }
 
-
-
 internal class Test_boxunboxinterface
 {
     private static int Main()
@@ -832,4 +845,3 @@ internal class Test_boxunboxinterface
         return 100;
     }
 }
-

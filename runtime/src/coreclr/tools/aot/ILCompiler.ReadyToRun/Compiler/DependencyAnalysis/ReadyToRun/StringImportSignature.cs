@@ -25,7 +25,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             {
                 dataBuilder.AddSymbol(this);
 
-                dataBuilder.EmitFixup(factory, ReadyToRunFixupKind.StringHandle, _token.Module, factory.SignatureContext);
+                dataBuilder.EmitFixup(
+                    factory,
+                    ReadyToRunFixupKind.StringHandle,
+                    _token.Module,
+                    factory.SignatureContext
+                );
                 dataBuilder.EmitUInt(_token.TokenRid);
             }
 

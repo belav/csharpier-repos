@@ -17,22 +17,23 @@ namespace AutoMapper.UnitTests
             {
                 public int Value { get; set; }
             }
+
             public class Destination
             {
                 public int Value { get; set; }
             }
 
-            protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap(typeof (Source), typeof (Destination)).ReverseMap();
-            });
+            protected override MapperConfiguration Configuration { get; } =
+                new MapperConfiguration(
+                    cfg =>
+                    {
+                        cfg.CreateMap(typeof(Source), typeof(Destination)).ReverseMap();
+                    }
+                );
 
             protected override void Because_of()
             {
-                var dest = new Destination
-                {
-                    Value = 10
-                };
+                var dest = new Destination { Value = 10 };
                 _source = Mapper.Map<Destination, Source>(dest);
             }
 
@@ -56,17 +57,22 @@ namespace AutoMapper.UnitTests
                 public int Ignored { get; set; }
             }
 
-            protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap(typeof (Source), typeof (Dest))
-                    .ForMember("Ignored", opt => opt.Ignore())
-                    .ReverseMap();
-            });
+            protected override MapperConfiguration Configuration { get; } =
+                new MapperConfiguration(
+                    cfg =>
+                    {
+                        cfg.CreateMap(typeof(Source), typeof(Dest))
+                            .ForMember("Ignored", opt => opt.Ignore())
+                            .ReverseMap();
+                    }
+                );
 
             [Fact]
             public void Should_show_valid()
             {
-                typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(() => Configuration.AssertConfigurationIsValid());
+                typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(
+                    () => Configuration.AssertConfigurationIsValid()
+                );
             }
         }
 
@@ -88,12 +94,15 @@ namespace AutoMapper.UnitTests
             public void GetUnmappedPropertyNames_ShouldReturnBoo()
             {
                 //Arrange
-                var config = new MapperConfiguration(cfg =>
-                {
-                    cfg.CreateMap(typeof(Foo), typeof(Foo2));
-                });
-                var typeMap = config.GetAllTypeMaps()
-                          .First(x => x.SourceType == typeof(Foo) && x.DestinationType == typeof(Foo2));
+                var config = new MapperConfiguration(
+                    cfg =>
+                    {
+                        cfg.CreateMap(typeof(Foo), typeof(Foo2));
+                    }
+                );
+                var typeMap = config
+                    .GetAllTypeMaps()
+                    .First(x => x.SourceType == typeof(Foo) && x.DestinationType == typeof(Foo2));
                 //Act
                 var unmappedPropertyNames = typeMap.GetUnmappedPropertyNames();
                 //Assert
@@ -104,12 +113,15 @@ namespace AutoMapper.UnitTests
             public void WhenSecondCallTo_GetUnmappedPropertyNames_ShouldReturnBoo()
             {
                 //Arrange
-                var config = new MapperConfiguration(cfg =>
-                {
-                    cfg.CreateMap(typeof (Foo), typeof (Foo2)).ReverseMap();
-                });
-                var typeMap = config.GetAllTypeMaps()
-                          .First(x => x.SourceType == typeof(Foo2) && x.DestinationType == typeof(Foo));
+                var config = new MapperConfiguration(
+                    cfg =>
+                    {
+                        cfg.CreateMap(typeof(Foo), typeof(Foo2)).ReverseMap();
+                    }
+                );
+                var typeMap = config
+                    .GetAllTypeMaps()
+                    .First(x => x.SourceType == typeof(Foo2) && x.DestinationType == typeof(Foo));
                 //Act
                 var unmappedPropertyNames = typeMap.GetUnmappedPropertyNames();
                 //Assert

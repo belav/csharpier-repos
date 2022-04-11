@@ -26,7 +26,10 @@ namespace System.Reflection.Emit.Tests
             string[] typeParamNames = new string[] { "TFirst" };
             GenericTypeParameterBuilder[] typeParams = type.DefineGenericParameters(typeParamNames);
 
-            AssertExtensions.Throws<ArgumentNullException>("con", () => typeParams[0].SetCustomAttribute(null, new byte[128]));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "con",
+                () => typeParams[0].SetCustomAttribute(null, new byte[128])
+            );
         }
 
         [Fact]
@@ -35,9 +38,14 @@ namespace System.Reflection.Emit.Tests
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
             string[] typeParamNames = new string[] { "TFirst" };
             GenericTypeParameterBuilder[] typeParams = type.DefineGenericParameters(typeParamNames);
-            ConstructorInfo attributeConstructor = typeof(HelperAttribute).GetConstructor(new Type[0]);
+            ConstructorInfo attributeConstructor = typeof(HelperAttribute).GetConstructor(
+                new Type[0]
+            );
 
-            AssertExtensions.Throws<ArgumentNullException>("binaryAttribute", () => typeParams[0].SetCustomAttribute(attributeConstructor, null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "binaryAttribute",
+                () => typeParams[0].SetCustomAttribute(attributeConstructor, null)
+            );
         }
 
         [Fact]
@@ -46,8 +54,13 @@ namespace System.Reflection.Emit.Tests
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
             string[] typeParamNames = new string[] { "TFirst" };
             GenericTypeParameterBuilder[] typeParams = type.DefineGenericParameters(typeParamNames);
-            ConstructorInfo constructorinfo = typeof(HelperAttribute).GetConstructor(new Type[] { typeof(string) });
-            CustomAttributeBuilder attributeBuilder = new CustomAttributeBuilder(constructorinfo, new object[] { "TestString" });
+            ConstructorInfo constructorinfo = typeof(HelperAttribute).GetConstructor(
+                new Type[] { typeof(string) }
+            );
+            CustomAttributeBuilder attributeBuilder = new CustomAttributeBuilder(
+                constructorinfo,
+                new object[] { "TestString" }
+            );
 
             typeParams[0].SetCustomAttribute(attributeBuilder);
         }
@@ -59,13 +72,17 @@ namespace System.Reflection.Emit.Tests
             string[] typeParamNames = new string[] { "TFirst" };
             GenericTypeParameterBuilder[] typeParams = type.DefineGenericParameters(typeParamNames);
 
-            AssertExtensions.Throws<ArgumentNullException>("customBuilder", () => typeParams[0].SetCustomAttribute(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "customBuilder",
+                () => typeParams[0].SetCustomAttribute(null)
+            );
         }
     }
 
     public class HelperAttribute
     {
         public HelperAttribute() { }
+
         public HelperAttribute(string str) { }
     }
 }

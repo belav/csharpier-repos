@@ -5,6 +5,7 @@
 
 using System;
 using System.Runtime.CompilerServices;
+
 public class BringUpTest_Ne1
 {
     const int Pass = 100;
@@ -19,7 +20,9 @@ public class BringUpTest_Ne1
     public static int Main()
     {
         bool y = Ne1(1);
-        if (y == false) return Pass;
-        else return Fail;
+        if (y == false)
+            return Pass;
+        else
+            return Fail;
     }
 }

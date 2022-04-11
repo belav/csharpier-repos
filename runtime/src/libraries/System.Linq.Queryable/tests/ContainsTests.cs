@@ -56,7 +56,10 @@ namespace System.Linq.Tests
             IQueryable<int> source = null;
 
             AssertExtensions.Throws<ArgumentNullException>("source", () => source.Contains(42));
-            AssertExtensions.Throws<ArgumentNullException>("source", () => source.Contains(42, EqualityComparer<int>.Default));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => source.Contains(42, EqualityComparer<int>.Default)
+            );
         }
 
         [Fact]
@@ -69,7 +72,9 @@ namespace System.Linq.Tests
         [Fact]
         public void Contains2()
         {
-            var val = (new int[] { 0, 2, 1 }).AsQueryable().Contains(1, EqualityComparer<int>.Default);
+            var val = (new int[] { 0, 2, 1 })
+                .AsQueryable()
+                .Contains(1, EqualityComparer<int>.Default);
             Assert.True(val);
         }
     }

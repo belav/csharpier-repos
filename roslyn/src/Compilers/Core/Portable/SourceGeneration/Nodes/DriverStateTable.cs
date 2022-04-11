@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis
     {
         private readonly ImmutableSegmentedDictionary<object, IStateTable> _tables;
 
-        internal static DriverStateTable Empty { get; } = new DriverStateTable(ImmutableSegmentedDictionary<object, IStateTable>.Empty);
+        internal static DriverStateTable Empty { get; } =
+            new DriverStateTable(ImmutableSegmentedDictionary<object, IStateTable>.Empty);
 
         private DriverStateTable(ImmutableSegmentedDictionary<object, IStateTable> tables)
         {
@@ -34,9 +35,21 @@ namespace Microsoft.CodeAnalysis
 
         public sealed class Builder
         {
-            private readonly ImmutableSegmentedDictionary<object, IStateTable>.Builder _tableBuilder = ImmutableSegmentedDictionary.CreateBuilder<object, IStateTable>();
+            private readonly ImmutableSegmentedDictionary<
+                object,
+                IStateTable
+            >.Builder _tableBuilder = ImmutableSegmentedDictionary.CreateBuilder<
+                object,
+                IStateTable
+            >();
             private readonly ImmutableArray<ISyntaxInputNode> _syntaxInputNodes;
-            private readonly ImmutableDictionary<ISyntaxInputNode, Exception>.Builder _syntaxExceptions = ImmutableDictionary.CreateBuilder<ISyntaxInputNode, Exception>();
+            private readonly ImmutableDictionary<
+                ISyntaxInputNode,
+                Exception
+            >.Builder _syntaxExceptions = ImmutableDictionary.CreateBuilder<
+                ISyntaxInputNode,
+                Exception
+            >();
             private readonly DriverStateTable _previousTable;
             private readonly CancellationToken _cancellationToken;
 
@@ -44,7 +57,12 @@ namespace Microsoft.CodeAnalysis
 
             public Compilation Compilation { get; }
 
-            public Builder(Compilation compilation, GeneratorDriverState driverState, ImmutableArray<ISyntaxInputNode> syntaxInputNodes, CancellationToken cancellationToken = default)
+            public Builder(
+                Compilation compilation,
+                GeneratorDriverState driverState,
+                ImmutableArray<ISyntaxInputNode> syntaxInputNodes,
+                CancellationToken cancellationToken = default
+            )
             {
                 Compilation = compilation;
                 DriverState = driverState;
@@ -62,13 +80,20 @@ namespace Microsoft.CodeAnalysis
                 {
                     // CONSIDER: when the compilation is the same as previous, the syntax trees must also be the same.
                     // if we have a previous state table for a node, we can just short circuit knowing that it is up to date
-                    var compilationIsCached = GetLatestStateTableForNode(SharedInputNodes.Compilation).IsCached;
+                    var compilationIsCached = GetLatestStateTableForNode(
+                        SharedInputNodes.Compilation
+                    ).IsCached;
 
                     // get a builder for each input node
-                    var builders = ArrayBuilder<ISyntaxInputBuilder>.GetInstance(_syntaxInputNodes.Length);
+                    var builders = ArrayBuilder<ISyntaxInputBuilder>.GetInstance(
+                        _syntaxInputNodes.Length
+                    );
                     foreach (var node in _syntaxInputNodes)
                     {
-                        if (compilationIsCached && _previousTable._tables.TryGetValue(node, out var previousStateTable))
+                        if (
+                            compilationIsCached
+                            && _previousTable._tables.TryGetValue(node, out var previousStateTable)
+                        )
                         {
                             _tableBuilder.Add(node, previousStateTable);
                         }
@@ -81,15 +106,24 @@ namespace Microsoft.CodeAnalysis
                     if (builders.Count == 0)
                     {
                         // bring over the previously cached syntax tree inputs
-                        _tableBuilder[SharedInputNodes.SyntaxTrees] = _previousTable._tables[SharedInputNodes.SyntaxTrees];
+                        _tableBuilder[SharedInputNodes.SyntaxTrees] = _previousTable._tables[
+                            SharedInputNodes.SyntaxTrees
+                        ];
                     }
                     else
                     {
                         // update each tree for the builders, sharing the semantic model
-                        foreach ((var tree, var state) in GetLatestStateTableForNode(SharedInputNodes.SyntaxTrees))
+                        foreach (
+                            (var tree, var state) in GetLatestStateTableForNode(
+                                SharedInputNodes.SyntaxTrees
+                            )
+                        )
                         {
                             var root = new Lazy<SyntaxNode>(() => tree.GetRoot(_cancellationToken));
-                            var model = state != EntryState.Removed ? Compilation.GetSemanticModel(tree) : null;
+                            var model =
+                                state != EntryState.Removed
+                                    ? Compilation.GetSemanticModel(tree)
+                                    : null;
                             for (int i = 0; i < builders.Count; i++)
                             {
                                 try
@@ -128,7 +162,9 @@ namespace Microsoft.CodeAnalysis
                 return _tableBuilder[syntaxInputNode];
             }
 
-            public NodeStateTable<T> GetLatestStateTableForNode<T>(IIncrementalGeneratorNode<T> source)
+            public NodeStateTable<T> GetLatestStateTableForNode<T>(
+                IIncrementalGeneratorNode<T> source
+            )
             {
                 // if we've already evaluated a node during this build, we can just return the existing result
                 if (_tableBuilder.ContainsKey(source))

@@ -22,6 +22,7 @@ namespace Microsoft.AspNetCore.Server.HttpSys;
 internal sealed class Request
 {
     private X509Certificate2? _clientCert;
+
     // TODO: https://github.com/aspnet/HttpSysServer/issues/231
     // private byte[] _providedTokenBindingId;
     // private byte[] _referredTokenBindingId;
@@ -65,14 +66,19 @@ internal sealed class Request
         Path = originalPath;
 
         // 'OPTIONS * HTTP/1.1'
-        if (KnownMethod == HttpApiTypes.HTTP_VERB.HttpVerbOPTIONS && string.Equals(RawUrl, "*", StringComparison.Ordinal))
+        if (
+            KnownMethod == HttpApiTypes.HTTP_VERB.HttpVerbOPTIONS
+            && string.Equals(RawUrl, "*", StringComparison.Ordinal)
+        )
         {
             PathBase = string.Empty;
             Path = string.Empty;
         }
         else
         {
-            var prefix = requestContext.Server.Options.UrlPrefixes.GetPrefix((int)requestContext.UrlContext);
+            var prefix = requestContext.Server.Options.UrlPrefixes.GetPrefix(
+                (int)requestContext.UrlContext
+            );
             // Prefix may be null if the requested has been transfered to our queue
             if (!(prefix is null))
             {
@@ -90,7 +96,15 @@ internal sealed class Request
                     Path = originalPath.Substring(prefix.PathWithoutTrailingSlash.Length);
                 }
             }
-            else if (requestContext.Server.Options.UrlPrefixes.TryMatchLongestPrefix(IsHttps, cookedUrl.GetHost()!, originalPath, out var pathBase, out var path))
+            else if (
+                requestContext.Server.Options.UrlPrefixes.TryMatchLongestPrefix(
+                    IsHttps,
+                    cookedUrl.GetHost()!,
+                    originalPath,
+                    out var pathBase,
+                    out var path
+                )
+            )
             {
                 PathBase = pathBase;
                 Path = path;
@@ -139,15 +153,28 @@ internal sealed class Request
             {
                 // Note Http.Sys adds the Transfer-Encoding: chunked header to HTTP/2 requests with bodies for back compat.
                 var transferEncoding = Headers[HeaderNames.TransferEncoding].ToString();
-                if (string.Equals("chunked", transferEncoding.Trim(), StringComparison.OrdinalIgnoreCase))
+                if (
+                    string.Equals(
+                        "chunked",
+                        transferEncoding.Trim(),
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     _contentBoundaryType = BoundaryType.Chunked;
                 }
                 else
                 {
                     string? length = Headers[HeaderNames.ContentLength];
-                    if (length != null &&
-                        long.TryParse(length.Trim(), NumberStyles.None, CultureInfo.InvariantCulture.NumberFormat, out var value))
+                    if (
+                        length != null
+                        && long.TryParse(
+                            length.Trim(),
+                            NumberStyles.None,
+                            CultureInfo.InvariantCulture.NumberFormat,
+                            out var value
+                        )
+                    )
                     {
                         _contentBoundaryType = BoundaryType.ContentLength;
                         _contentLength = value;
@@ -212,7 +239,11 @@ internal sealed class Request
         get
         {
             // accessing the ContentLength property delay creates _contentBoundaryType
-            return (ContentLength.HasValue && ContentLength.Value > 0 && _contentBoundaryType == BoundaryType.ContentLength)
+            return (
+                    ContentLength.HasValue
+                    && ContentLength.Value > 0
+                    && _contentBoundaryType == BoundaryType.ContentLength
+                )
                 || _contentBoundaryType == BoundaryType.Chunked;
         }
     }
@@ -255,7 +286,8 @@ internal sealed class Request
     public string Scheme => IsHttps ? Constants.HttpsScheme : Constants.HttpScheme;
 
     // HTTP.Sys allows you to upgrade anything to opaque unless content-length > 0 or chunked are specified.
-    internal bool IsUpgradable => ProtocolVersion < HttpVersion.Version20 && !HasEntityBody && ComNetOS.IsWin8orLater;
+    internal bool IsUpgradable =>
+        ProtocolVersion < HttpVersion.Version20 && !HasEntityBody && ComNetOS.IsWin8orLater;
 
     internal WindowsPrincipal User { get; }
 
@@ -358,7 +390,9 @@ internal sealed class Request
     // Populates the client certificate.  The result may be null if there is no client cert.
     // TODO: Does it make sense for this to be invoked multiple times (e.g. renegotiate)? Client and server code appear to
     // enable this, but it's unclear what Http.Sys would do.
-    public async Task<X509Certificate2?> GetClientCertificateAsync(CancellationToken cancellationToken = default(CancellationToken))
+    public async Task<X509Certificate2?> GetClientCertificateAsync(
+        CancellationToken cancellationToken = default(CancellationToken)
+    )
     {
         if (SslStatus == SslStatus.Insecure)
         {
@@ -393,6 +427,7 @@ internal sealed class Request
         }
         return _clientCert;
     }
+
     /* TODO: https://github.com/aspnet/WebListener/issues/231
     private byte[] GetProvidedTokenBindingId()
     {
@@ -429,9 +464,21 @@ internal sealed class Request
         }
     }
     */
-    internal uint GetChunks(ref int dataChunkIndex, ref uint dataChunkOffset, byte[] buffer, int offset, int size)
+    internal uint GetChunks(
+        ref int dataChunkIndex,
+        ref uint dataChunkOffset,
+        byte[] buffer,
+        int offset,
+        int size
+    )
     {
-        return RequestContext.GetChunks(ref dataChunkIndex, ref dataChunkOffset, buffer, offset, size);
+        return RequestContext.GetChunks(
+            ref dataChunkIndex,
+            ref dataChunkOffset,
+            buffer,
+            offset,
+            size
+        );
     }
 
     // should only be called from RequestContext
@@ -459,7 +506,11 @@ internal sealed class Request
     private static class Log
     {
         private static readonly Action<ILogger, Exception?> _errorInReadingCertificate =
-            LoggerMessage.Define(LogLevel.Debug, LoggerEventIds.ErrorInReadingCertificate, "An error occurred reading the client certificate.");
+            LoggerMessage.Define(
+                LogLevel.Debug,
+                LoggerEventIds.ErrorInReadingCertificate,
+                "An error occurred reading the client certificate."
+            );
 
         public static void ErrorInReadingCertificate(ILogger logger, Exception exception)
         {

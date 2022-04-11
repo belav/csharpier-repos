@@ -19,8 +19,16 @@ namespace Microsoft.EntityFrameworkCore
             using var context = _fixture.CreateContext();
             context.ConfigAction = modelBuilder =>
             {
-                modelBuilder.Entity<GoTPerson>().HasMany(p => p.Siblings).WithOne(p => p.SiblingReverse).IsRequired(false);
-                modelBuilder.Entity<GoTPerson>().HasOne(p => p.Lover).WithOne(p => p.LoverReverse).IsRequired(false);
+                modelBuilder
+                    .Entity<GoTPerson>()
+                    .HasMany(p => p.Siblings)
+                    .WithOne(p => p.SiblingReverse)
+                    .IsRequired(false);
+                modelBuilder
+                    .Entity<GoTPerson>()
+                    .HasOne(p => p.Lover)
+                    .WithOne(p => p.LoverReverse)
+                    .IsRequired(false);
                 return 0;
             };
 
@@ -29,11 +37,13 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 "ForeignKey: GoTPerson {'LoverId'} -> GoTPerson {'Id'} Unique ToDependent: LoverReverse ToPrincipal: Lover ClientSetNull",
-                entityType.GetForeignKeys().First().ToString());
+                entityType.GetForeignKeys().First().ToString()
+            );
 
             Assert.Equal(
                 "ForeignKey: GoTPerson {'SiblingReverseId'} -> GoTPerson {'Id'} ToDependent: Siblings ToPrincipal: SiblingReverse ClientSetNull",
-                entityType.GetForeignKeys().Skip(1).First().ToString());
+                entityType.GetForeignKeys().Skip(1).First().ToString()
+            );
         }
 
         [ConditionalFact]
@@ -42,8 +52,16 @@ namespace Microsoft.EntityFrameworkCore
             using var context = _fixture.CreateContext();
             context.ConfigAction = modelBuilder =>
             {
-                modelBuilder.Entity<GoTPerson>().HasOne(p => p.SiblingReverse).WithMany(p => p.Siblings).IsRequired(false);
-                modelBuilder.Entity<GoTPerson>().HasOne(p => p.Lover).WithOne(p => p.LoverReverse).IsRequired(false);
+                modelBuilder
+                    .Entity<GoTPerson>()
+                    .HasOne(p => p.SiblingReverse)
+                    .WithMany(p => p.Siblings)
+                    .IsRequired(false);
+                modelBuilder
+                    .Entity<GoTPerson>()
+                    .HasOne(p => p.Lover)
+                    .WithOne(p => p.LoverReverse)
+                    .IsRequired(false);
                 return 0;
             };
 
@@ -52,17 +70,18 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 "ForeignKey: GoTPerson {'LoverId'} -> GoTPerson {'Id'} Unique ToDependent: LoverReverse ToPrincipal: Lover ClientSetNull",
-                entityType.GetForeignKeys().First().ToString());
+                entityType.GetForeignKeys().First().ToString()
+            );
 
             Assert.Equal(
                 "ForeignKey: GoTPerson {'SiblingReverseId'} -> GoTPerson {'Id'} ToDependent: Siblings ToPrincipal: SiblingReverse ClientSetNull",
-                entityType.GetForeignKeys().Skip(1).First().ToString());
+                entityType.GetForeignKeys().Skip(1).First().ToString()
+            );
         }
 
         private readonly NavigationTestFixture _fixture;
 
-        public NavigationTest(NavigationTestFixture fixture)
-            => _fixture = fixture;
+        public NavigationTest(NavigationTestFixture fixture) => _fixture = fixture;
     }
 
     public class GoTPerson
@@ -78,16 +97,13 @@ namespace Microsoft.EntityFrameworkCore
 
     public class GoTContext : DbContext
     {
-        public GoTContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+        public GoTContext(DbContextOptions options) : base(options) { }
 
         public DbSet<GoTPerson> People { get; set; }
         public Func<ModelBuilder, int> ConfigAction { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => ConfigAction.Invoke(modelBuilder);
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            ConfigAction.Invoke(modelBuilder);
     }
 
     public class NavigationTestFixture
@@ -113,7 +129,6 @@ namespace Microsoft.EntityFrameworkCore
                 .Options;
         }
 
-        public virtual GoTContext CreateContext()
-            => new(_options);
+        public virtual GoTContext CreateContext() => new(_options);
     }
 }

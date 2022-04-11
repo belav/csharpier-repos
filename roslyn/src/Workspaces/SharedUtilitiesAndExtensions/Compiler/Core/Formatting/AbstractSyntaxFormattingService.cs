@@ -21,17 +21,33 @@ namespace Microsoft.CodeAnalysis.Formatting
         private static readonly Func<TextSpan, bool> s_notEmpty = s => !s.IsEmpty;
         private static readonly Func<TextSpan, int> s_spanLength = s => s.Length;
 
-        protected AbstractSyntaxFormattingService()
-        {
-        }
+        protected AbstractSyntaxFormattingService() { }
 
         public abstract IEnumerable<AbstractFormattingRule> GetDefaultFormattingRules();
 
-        protected abstract IFormattingResult CreateAggregatedFormattingResult(SyntaxNode node, IList<AbstractFormattingResult> results, SimpleIntervalTree<TextSpan, TextSpanIntervalIntrospector>? formattingSpans = null);
+        protected abstract IFormattingResult CreateAggregatedFormattingResult(
+            SyntaxNode node,
+            IList<AbstractFormattingResult> results,
+            SimpleIntervalTree<TextSpan, TextSpanIntervalIntrospector>? formattingSpans = null
+        );
 
-        protected abstract AbstractFormattingResult Format(SyntaxNode node, AnalyzerConfigOptions options, IEnumerable<AbstractFormattingRule> rules, SyntaxToken token1, SyntaxToken token2, CancellationToken cancellationToken);
+        protected abstract AbstractFormattingResult Format(
+            SyntaxNode node,
+            AnalyzerConfigOptions options,
+            IEnumerable<AbstractFormattingRule> rules,
+            SyntaxToken token1,
+            SyntaxToken token2,
+            CancellationToken cancellationToken
+        );
 
-        public IFormattingResult Format(SyntaxNode node, IEnumerable<TextSpan> spans, bool shouldUseFormattingSpanCollapse, AnalyzerConfigOptions options, IEnumerable<AbstractFormattingRule> rules, CancellationToken cancellationToken)
+        public IFormattingResult Format(
+            SyntaxNode node,
+            IEnumerable<TextSpan> spans,
+            bool shouldUseFormattingSpanCollapse,
+            AnalyzerConfigOptions options,
+            IEnumerable<AbstractFormattingRule> rules,
+            CancellationToken cancellationToken
+        )
         {
             CheckArguments(node, spans, options, rules);
 
@@ -39,7 +55,10 @@ namespace Microsoft.CodeAnalysis.Formatting
             var spansToFormat = new NormalizedTextSpanCollection(spans.Where(s_notEmpty));
             if (spansToFormat.Count == 0)
             {
-                return CreateAggregatedFormattingResult(node, SpecializedCollections.EmptyList<AbstractFormattingResult>());
+                return CreateAggregatedFormattingResult(
+                    node,
+                    SpecializedCollections.EmptyList<AbstractFormattingResult>()
+                );
             }
 
             // check what kind of formatting strategy to use
@@ -52,23 +71,43 @@ namespace Microsoft.CodeAnalysis.Formatting
         }
 
         private IFormattingResult FormatMergedSpan(
-            SyntaxNode node, AnalyzerConfigOptions options, IEnumerable<AbstractFormattingRule> rules, IList<TextSpan> spansToFormat, CancellationToken cancellationToken)
+            SyntaxNode node,
+            AnalyzerConfigOptions options,
+            IEnumerable<AbstractFormattingRule> rules,
+            IList<TextSpan> spansToFormat,
+            CancellationToken cancellationToken
+        )
         {
-            var spanToFormat = TextSpan.FromBounds(spansToFormat[0].Start, spansToFormat[spansToFormat.Count - 1].End);
+            var spanToFormat = TextSpan.FromBounds(
+                spansToFormat[0].Start,
+                spansToFormat[spansToFormat.Count - 1].End
+            );
             var pair = node.ConvertToTokenPair(spanToFormat);
 
             if (node.IsInvalidTokenRange(pair.Item1, pair.Item2))
             {
-                return CreateAggregatedFormattingResult(node, SpecializedCollections.EmptyList<AbstractFormattingResult>());
+                return CreateAggregatedFormattingResult(
+                    node,
+                    SpecializedCollections.EmptyList<AbstractFormattingResult>()
+                );
             }
 
             // more expensive case
             var result = Format(node, options, rules, pair.Item1, pair.Item2, cancellationToken);
-            return CreateAggregatedFormattingResult(node, new List<AbstractFormattingResult>(1) { result }, SimpleIntervalTree.Create(new TextSpanIntervalIntrospector(), spanToFormat));
+            return CreateAggregatedFormattingResult(
+                node,
+                new List<AbstractFormattingResult>(1) { result },
+                SimpleIntervalTree.Create(new TextSpanIntervalIntrospector(), spanToFormat)
+            );
         }
 
         private IFormattingResult FormatIndividually(
-            SyntaxNode node, AnalyzerConfigOptions options, IEnumerable<AbstractFormattingRule> rules, IList<TextSpan> spansToFormat, CancellationToken cancellationToken)
+            SyntaxNode node,
+            AnalyzerConfigOptions options,
+            IEnumerable<AbstractFormattingRule> rules,
+            IList<TextSpan> spansToFormat,
+            CancellationToken cancellationToken
+        )
         {
             List<AbstractFormattingResult>? results = null;
             foreach (var pair in node.ConvertToTokenPairs(spansToFormat))
@@ -79,13 +118,18 @@ namespace Microsoft.CodeAnalysis.Formatting
                 }
 
                 results ??= new List<AbstractFormattingResult>();
-                results.Add(Format(node, options, rules, pair.Item1, pair.Item2, cancellationToken));
+                results.Add(
+                    Format(node, options, rules, pair.Item1, pair.Item2, cancellationToken)
+                );
             }
 
             // quick simple case check
             if (results == null)
             {
-                return CreateAggregatedFormattingResult(node, SpecializedCollections.EmptyList<AbstractFormattingResult>());
+                return CreateAggregatedFormattingResult(
+                    node,
+                    SpecializedCollections.EmptyList<AbstractFormattingResult>()
+                );
             }
 
             if (results.Count == 1)
@@ -97,7 +141,10 @@ namespace Microsoft.CodeAnalysis.Formatting
             return CreateAggregatedFormattingResult(node, results);
         }
 
-        private static bool AllowDisjointSpanMerging(IList<TextSpan> list, bool shouldUseFormattingSpanCollapse)
+        private static bool AllowDisjointSpanMerging(
+            IList<TextSpan> list,
+            bool shouldUseFormattingSpanCollapse
+        )
         {
             // If the user is specific about the formatting specific spans then honor users settings
             if (!shouldUseFormattingSpanCollapse)
@@ -130,7 +177,12 @@ namespace Microsoft.CodeAnalysis.Formatting
             return (formattingSpan.Length / Math.Max(actualFormattingSize, 1)) < 2;
         }
 
-        private static void CheckArguments(SyntaxNode node, IEnumerable<TextSpan> spans, AnalyzerConfigOptions options, IEnumerable<AbstractFormattingRule> rules)
+        private static void CheckArguments(
+            SyntaxNode node,
+            IEnumerable<TextSpan> spans,
+            AnalyzerConfigOptions options,
+            IEnumerable<AbstractFormattingRule> rules
+        )
         {
             if (node == null)
             {

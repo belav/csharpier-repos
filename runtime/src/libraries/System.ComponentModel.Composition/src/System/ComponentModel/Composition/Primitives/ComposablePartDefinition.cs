@@ -13,14 +13,14 @@ namespace System.ComponentModel.Composition.Primitives
     /// </summary>
     public abstract class ComposablePartDefinition
     {
-        internal static readonly IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> _EmptyExports = Enumerable.Empty<Tuple<ComposablePartDefinition, ExportDefinition>>();
+        internal static readonly IEnumerable<
+            Tuple<ComposablePartDefinition, ExportDefinition>
+        > _EmptyExports = Enumerable.Empty<Tuple<ComposablePartDefinition, ExportDefinition>>();
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ComposablePartDefinition"/> class.
         /// </summary>
-        protected ComposablePartDefinition()
-        {
-        }
+        protected ComposablePartDefinition() { }
 
         /// <summary>
         ///     Gets the export definitions that describe the exported values provided by parts
@@ -102,7 +102,11 @@ namespace System.ComponentModel.Composition.Primitives
         /// </remarks>
         public abstract ComposablePart CreatePart();
 
-        internal virtual bool TryGetExports(ImportDefinition definition, out Tuple<ComposablePartDefinition, ExportDefinition>? singleMatch, out IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>>? multipleMatches)
+        internal virtual bool TryGetExports(
+            ImportDefinition definition,
+            out Tuple<ComposablePartDefinition, ExportDefinition>? singleMatch,
+            out IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>>? multipleMatches
+        )
         {
             singleMatch = null;
             multipleMatches = null;
@@ -117,16 +121,22 @@ namespace System.ComponentModel.Composition.Primitives
                     matchesFound = true;
                     if (singleExport == null)
                     {
-                        singleExport = new Tuple<ComposablePartDefinition, ExportDefinition>(this, export);
+                        singleExport = new Tuple<ComposablePartDefinition, ExportDefinition>(
+                            this,
+                            export
+                        );
                     }
                     else
                     {
                         if (multipleExports == null)
                         {
-                            multipleExports = new List<Tuple<ComposablePartDefinition, ExportDefinition>>();
+                            multipleExports =
+                                new List<Tuple<ComposablePartDefinition, ExportDefinition>>();
                             multipleExports.Add(singleExport);
                         }
-                        multipleExports.Add(new Tuple<ComposablePartDefinition, ExportDefinition>(this, export));
+                        multipleExports.Add(
+                            new Tuple<ComposablePartDefinition, ExportDefinition>(this, export)
+                        );
                     }
                 }
             }

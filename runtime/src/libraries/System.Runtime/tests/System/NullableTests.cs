@@ -90,7 +90,10 @@ namespace System.Tests
         [Fact]
         public static void GetUnderlyingType_NullType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("nullableType", () => Nullable.GetUnderlyingType((Type)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "nullableType",
+                () => Nullable.GetUnderlyingType((Type)null)
+            );
         }
 
         public static IEnumerable<object[]> Compare_Equals_TestData()
@@ -148,8 +151,11 @@ namespace System.Tests
         private struct MutatingStruct
         {
             public int Value;
+
             public override string ToString() => Value++.ToString();
+
             public override bool Equals(object obj) => Value++.Equals(null);
+
             public override int GetHashCode() => Value++.GetHashCode();
         }
 

@@ -13,16 +13,20 @@ namespace AutoMapper.UnitTests.Bug
         {
             public string[] ArrayOfItems { get; set; }
         }
+
         class Destination
         {
             public string[] ArrayOfItems { get; set; }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.AllowNullCollections = false;
-            cfg.CreateMap<Source, Destination>();
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.AllowNullCollections = false;
+                    cfg.CreateMap<Source, Destination>();
+                }
+            );
 
         protected override void Because_of()
         {

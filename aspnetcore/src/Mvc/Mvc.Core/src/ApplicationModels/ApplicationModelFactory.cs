@@ -23,7 +23,8 @@ internal class ApplicationModelFactory
 
     public ApplicationModelFactory(
         IEnumerable<IApplicationModelProvider> applicationModelProviders,
-        IOptions<MvcOptions> options)
+        IOptions<MvcOptions> options
+    )
     {
         if (applicationModelProviders == null)
         {
@@ -65,13 +66,16 @@ internal class ApplicationModelFactory
 
     public static List<TResult> Flatten<TResult>(
         ApplicationModel application,
-        Func<ApplicationModel, ControllerModel, ActionModel, SelectorModel, TResult> flattener)
+        Func<ApplicationModel, ControllerModel, ActionModel, SelectorModel, TResult> flattener
+    )
     {
         var results = new List<TResult>();
         var errors = new Dictionary<MethodInfo, IList<string>>();
 
         var actionsByMethod = new Dictionary<MethodInfo, List<(ActionModel, SelectorModel)>>();
-        var actionsByRouteName = new Dictionary<string, List<(ActionModel, SelectorModel)>>(StringComparer.OrdinalIgnoreCase);
+        var actionsByRouteName = new Dictionary<string, List<(ActionModel, SelectorModel)>>(
+            StringComparer.OrdinalIgnoreCase
+        );
 
         var routeTemplateErrors = new List<string>();
 
@@ -99,15 +103,14 @@ internal class ApplicationModelFactory
         var attributeRoutingConfigurationErrors = new Dictionary<MethodInfo, string>();
         foreach (var (method, actions) in actionsByMethod)
         {
-            ValidateActionGroupConfiguration(
-                method,
-                actions,
-                attributeRoutingConfigurationErrors);
+            ValidateActionGroupConfiguration(method, actions, attributeRoutingConfigurationErrors);
         }
 
         if (attributeRoutingConfigurationErrors.Count > 0)
         {
-            var message = CreateAttributeRoutingAggregateErrorMessage(attributeRoutingConfigurationErrors.Values);
+            var message = CreateAttributeRoutingAggregateErrorMessage(
+                attributeRoutingConfigurationErrors.Values
+            );
 
             throw new InvalidOperationException(message);
         }
@@ -125,7 +128,6 @@ internal class ApplicationModelFactory
             throw new InvalidOperationException(message);
         }
 
-
         return results;
     }
 
@@ -133,7 +135,8 @@ internal class ApplicationModelFactory
         ControllerModel controller,
         ActionModel action,
         SelectorModel selector,
-        List<string> errors)
+        List<string> errors
+    )
     {
         if (selector.AttributeRouteModel == null)
         {
@@ -143,10 +146,10 @@ internal class ApplicationModelFactory
         try
         {
             var routeValues = new Dictionary<string, string?>(StringComparer.OrdinalIgnoreCase)
-                {
-                    { "action", action.ActionName },
-                    { "controller", controller.ControllerName },
-                };
+            {
+                { "action", action.ActionName },
+                { "controller", controller.ControllerName },
+            };
 
             foreach (var kvp in action.RouteValues)
             {
@@ -161,14 +164,16 @@ internal class ApplicationModelFactory
             selector.AttributeRouteModel.Template = AttributeRouteModel.ReplaceTokens(
                 selector.AttributeRouteModel.Template!,
                 routeValues,
-                action.RouteParameterTransformer);
+                action.RouteParameterTransformer
+            );
 
             if (selector.AttributeRouteModel.Name != null)
             {
                 selector.AttributeRouteModel.Name = AttributeRouteModel.ReplaceTokens(
                     selector.AttributeRouteModel.Name,
                     routeValues,
-                    action.RouteParameterTransformer);
+                    action.RouteParameterTransformer
+                );
             }
         }
         catch (InvalidOperationException ex)
@@ -178,7 +183,8 @@ internal class ApplicationModelFactory
             var message = Resources.FormatAttributeRoute_IndividualErrorMessage(
                 action.DisplayName,
                 Environment.NewLine,
-                ex.Message);
+                ex.Message
+            );
 
             errors.Add(message);
         }
@@ -187,7 +193,8 @@ internal class ApplicationModelFactory
     private static void AddActionToMethodInfoMap(
         Dictionary<MethodInfo, List<(ActionModel, SelectorModel)>> actionsByMethod,
         ActionModel action,
-        SelectorModel selector)
+        SelectorModel selector
+    )
     {
         if (!actionsByMethod.TryGetValue(action.ActionMethod, out var actions))
         {
@@ -201,7 +208,8 @@ internal class ApplicationModelFactory
     private static void AddActionToRouteNameMap(
         Dictionary<string, List<(ActionModel action, SelectorModel selector)>> actionsByRouteName,
         ActionModel action,
-        SelectorModel selector)
+        SelectorModel selector
+    )
     {
         var routeName = selector.AttributeRouteModel?.Name;
         if (routeName == null)
@@ -221,16 +229,20 @@ internal class ApplicationModelFactory
     private static List<string> AddErrorNumbers(IEnumerable<string> namedRoutedErrors)
     {
         return namedRoutedErrors
-            .Select((error, i) =>
-                Resources.FormatAttributeRoute_AggregateErrorMessage_ErrorNumber(
-                    i + 1,
-                    Environment.NewLine,
-                    error))
+            .Select(
+                (error, i) =>
+                    Resources.FormatAttributeRoute_AggregateErrorMessage_ErrorNumber(
+                        i + 1,
+                        Environment.NewLine,
+                        error
+                    )
+            )
             .ToList();
     }
 
     private static List<string> ValidateNamedAttributeRoutedActions(
-        Dictionary<string, List<(ActionModel action, SelectorModel selector)>> actionsByRouteName)
+        Dictionary<string, List<(ActionModel action, SelectorModel selector)>> actionsByRouteName
+    )
     {
         var namedRouteErrors = new List<string>();
 
@@ -251,12 +263,21 @@ internal class ApplicationModelFactory
 
                 if (!template.Equals(other, StringComparison.OrdinalIgnoreCase))
                 {
-                    var descriptions = actions.Select(a =>
-                    {
-                        return Resources.FormatAttributeRoute_DuplicateNames_Item(a.action.DisplayName, a.selector.AttributeRouteModel!.Template);
-                    });
+                    var descriptions = actions.Select(
+                        a =>
+                        {
+                            return Resources.FormatAttributeRoute_DuplicateNames_Item(
+                                a.action.DisplayName,
+                                a.selector.AttributeRouteModel!.Template
+                            );
+                        }
+                    );
 
-                    var message = Resources.FormatAttributeRoute_DuplicateNames(routeName, Environment.NewLine, string.Join(Environment.NewLine, descriptions));
+                    var message = Resources.FormatAttributeRoute_DuplicateNames(
+                        routeName,
+                        Environment.NewLine,
+                        string.Join(Environment.NewLine, descriptions)
+                    );
                     namedRouteErrors.Add(message);
                     break;
                 }
@@ -269,7 +290,8 @@ internal class ApplicationModelFactory
     private static void ValidateActionGroupConfiguration(
         MethodInfo method,
         List<(ActionModel action, SelectorModel selector)> actions,
-        IDictionary<MethodInfo, string> routingConfigurationErrors)
+        IDictionary<MethodInfo, string> routingConfigurationErrors
+    )
     {
         var hasAttributeRoutedActions = false;
         var hasConventionallyRoutedActions = false;
@@ -303,7 +325,8 @@ internal class ApplicationModelFactory
 
     private static string CreateMixedRoutedActionDescriptorsErrorMessage(
         MethodInfo method,
-        List<(ActionModel action, SelectorModel selector)> actions)
+        List<(ActionModel action, SelectorModel selector)> actions
+    )
     {
         // Text to show as the attribute route template for conventionally routed actions.
         var nullTemplate = Resources.AttributeRoute_NullTemplateRepresentation;
@@ -314,18 +337,26 @@ internal class ApplicationModelFactory
             var (action, selector) = actions[i];
             var routeTemplate = selector.AttributeRouteModel?.Template ?? nullTemplate;
 
-            var verbs = selector.ActionConstraints?.OfType<HttpMethodActionConstraint>().FirstOrDefault()?.HttpMethods;
+            var verbs = selector.ActionConstraints
+                ?.OfType<HttpMethodActionConstraint>()
+                .FirstOrDefault()
+                ?.HttpMethods;
 
             var formattedVerbs = string.Empty;
             if (verbs != null)
             {
-                formattedVerbs = string.Join(", ", verbs.OrderBy(v => v, StringComparer.OrdinalIgnoreCase));
+                formattedVerbs = string.Join(
+                    ", ",
+                    verbs.OrderBy(v => v, StringComparer.OrdinalIgnoreCase)
+                );
             }
 
-            var description = Resources.FormatAttributeRoute_MixedAttributeAndConventionallyRoutedActions_ForMethod_Item(
-                action.DisplayName,
-                routeTemplate,
-                formattedVerbs);
+            var description =
+                Resources.FormatAttributeRoute_MixedAttributeAndConventionallyRoutedActions_ForMethod_Item(
+                    action.DisplayName,
+                    routeTemplate,
+                    formattedVerbs
+                );
 
             actionDescriptions.Add(description);
         }
@@ -341,20 +372,25 @@ internal class ApplicationModelFactory
         // or set a route template in all attributes that constrain HTTP verbs.
 
         var type = method.ReflectedType!;
-        var formattedMethodInfo = $"{TypeNameHelper.GetTypeDisplayName(type)}.{method.Name} ({type.Assembly.GetName().Name})";
+        var formattedMethodInfo =
+            $"{TypeNameHelper.GetTypeDisplayName(type)}.{method.Name} ({type.Assembly.GetName().Name})";
         return Resources.FormatAttributeRoute_MixedAttributeAndConventionallyRoutedActions_ForMethod(
-                formattedMethodInfo,
-                Environment.NewLine,
-                string.Join(Environment.NewLine, actionDescriptions));
+            formattedMethodInfo,
+            Environment.NewLine,
+            string.Join(Environment.NewLine, actionDescriptions)
+        );
     }
 
-    private static string CreateAttributeRoutingAggregateErrorMessage(IEnumerable<string> individualErrors)
+    private static string CreateAttributeRoutingAggregateErrorMessage(
+        IEnumerable<string> individualErrors
+    )
     {
         var errorMessages = AddErrorNumbers(individualErrors);
 
         var message = Resources.FormatAttributeRoute_AggregateErrorMessage(
             Environment.NewLine,
-            string.Join(Environment.NewLine + Environment.NewLine, errorMessages));
+            string.Join(Environment.NewLine + Environment.NewLine, errorMessages)
+        );
         return message;
     }
 }

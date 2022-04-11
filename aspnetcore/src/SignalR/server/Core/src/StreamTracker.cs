@@ -15,9 +15,12 @@ namespace Microsoft.AspNetCore.SignalR;
 
 internal class StreamTracker
 {
-    private static readonly MethodInfo _buildConverterMethod = typeof(StreamTracker).GetMethods(BindingFlags.NonPublic | BindingFlags.Static).Single(m => m.Name.Equals("BuildStream"));
+    private static readonly MethodInfo _buildConverterMethod = typeof(StreamTracker)
+        .GetMethods(BindingFlags.NonPublic | BindingFlags.Static)
+        .Single(m => m.Name.Equals("BuildStream"));
     private readonly object[] _streamConverterArgs;
-    private readonly ConcurrentDictionary<string, IStreamConverter> _lookup = new ConcurrentDictionary<string, IStreamConverter>();
+    private readonly ConcurrentDictionary<string, IStreamConverter> _lookup =
+        new ConcurrentDictionary<string, IStreamConverter>();
 
     public StreamTracker(int streamBufferCapacity)
     {
@@ -29,12 +32,16 @@ internal class StreamTracker
     /// </summary>
     public object AddStream(string streamId, Type itemType, Type targetType)
     {
-        var newConverter = (IStreamConverter)_buildConverterMethod.MakeGenericMethod(itemType).Invoke(null, _streamConverterArgs)!;
+        var newConverter = (IStreamConverter)
+            _buildConverterMethod.MakeGenericMethod(itemType).Invoke(null, _streamConverterArgs)!;
         _lookup[streamId] = newConverter;
         return newConverter.GetReaderAsObject(targetType);
     }
 
-    private bool TryGetConverter(string streamId, [NotNullWhen(true)] out IStreamConverter? converter)
+    private bool TryGetConverter(
+        string streamId,
+        [NotNullWhen(true)] out IStreamConverter? converter
+    )
     {
         if (_lookup.TryGetValue(streamId, out converter))
         {
@@ -73,7 +80,9 @@ internal class StreamTracker
         {
             return false;
         }
-        converter.TryComplete(message.HasResult || message.Error == null ? null : new Exception(message.Error));
+        converter.TryComplete(
+            message.HasResult || message.Error == null ? null : new Exception(message.Error)
+        );
         return true;
     }
 

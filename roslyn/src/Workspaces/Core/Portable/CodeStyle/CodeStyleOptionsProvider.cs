@@ -16,10 +16,9 @@ namespace Microsoft.CodeAnalysis.CodeStyle
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CodeStyleOptionsProvider()
-        {
-        }
+        public CodeStyleOptionsProvider() { }
 
-        public ImmutableArray<IOption> Options { get; } = CodeStyleOptions2.AllOptions.As<IOption>();
+        public ImmutableArray<IOption> Options { get; } =
+            CodeStyleOptions2.AllOptions.As<IOption>();
     }
 }

@@ -16,7 +16,8 @@ public unsafe class SecretTests
         ExceptionAssert.ThrowsArgument(
             testCode: () => new Secret(default(ArraySegment<byte>)),
             paramName: "array",
-            exceptionMessage: null);
+            exceptionMessage: null
+        );
     }
 
     [Fact]
@@ -92,7 +93,8 @@ public unsafe class SecretTests
         // Act & assert
         ExceptionAssert.ThrowsArgumentNull(
             testCode: () => new Secret(null, 0),
-            paramName: "secret");
+            paramName: "secret"
+        );
     }
 
     [Fact]
@@ -106,7 +108,8 @@ public unsafe class SecretTests
                 new Secret(&dummy, -1);
             },
             paramName: "secretLength",
-            exceptionMessage: Resources.Common_ValueMustBeNonNegative);
+            exceptionMessage: Resources.Common_ValueMustBeNonNegative
+        );
     }
 
     [Fact]
@@ -206,7 +209,8 @@ public unsafe class SecretTests
         ExceptionAssert.ThrowsArgument(
             testCode: () => secret.WriteSecretIntoBuffer(new ArraySegment<byte>(new byte[100])),
             paramName: "buffer",
-            exceptionMessage: Resources.FormatCommon_BufferIncorrectlySized(100, 16));
+            exceptionMessage: Resources.FormatCommon_BufferIncorrectlySized(100, 16)
+        );
     }
 
     [Fact]
@@ -218,7 +222,8 @@ public unsafe class SecretTests
 
         // Act & assert
         Assert.Throws<ObjectDisposedException>(
-            testCode: () => secret.WriteSecretIntoBuffer(new ArraySegment<byte>(new byte[16])));
+            testCode: () => secret.WriteSecretIntoBuffer(new ArraySegment<byte>(new byte[16]))
+        );
     }
 
     [Fact]
@@ -230,7 +235,8 @@ public unsafe class SecretTests
         // Act & assert
         ExceptionAssert.ThrowsArgumentNull(
             testCode: () => secret.WriteSecretIntoBuffer(null, 100),
-            paramName: "buffer");
+            paramName: "buffer"
+        );
     }
 
     [Fact]
@@ -247,7 +253,8 @@ public unsafe class SecretTests
                 secret.WriteSecretIntoBuffer(pBuffer, 100);
             },
             paramName: "bufferLength",
-            exceptionMessage: Resources.FormatCommon_BufferIncorrectlySized(100, 16));
+            exceptionMessage: Resources.FormatCommon_BufferIncorrectlySized(100, 16)
+        );
     }
 
     [Fact]
@@ -263,6 +270,7 @@ public unsafe class SecretTests
             {
                 byte* pBuffer = stackalloc byte[16];
                 secret.WriteSecretIntoBuffer(pBuffer, 16);
-            });
+            }
+        );
     }
 }

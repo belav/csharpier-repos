@@ -14,15 +14,17 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers;
 
 public class TagHelpersInCodeBlocksAnalyzerTest
 {
-    private readonly DiagnosticDescriptor DiagnosticDescriptor = DiagnosticDescriptors.MVC1006_FunctionsContainingTagHelpersMustBeAsyncAndReturnTask;
+    private readonly DiagnosticDescriptor DiagnosticDescriptor =
+        DiagnosticDescriptors.MVC1006_FunctionsContainingTagHelpersMustBeAsyncAndReturnTask;
 
-    private static readonly DiagnosticResult CS4033Result = new ("CS4033", DiagnosticSeverity.Error);
-    private static readonly DiagnosticResult CS4034Result = new ("CS4034", DiagnosticSeverity.Error);
+    private static readonly DiagnosticResult CS4033Result = new("CS4033", DiagnosticSeverity.Error);
+    private static readonly DiagnosticResult CS4034Result = new("CS4034", DiagnosticSeverity.Error);
 
     [Fact]
     public Task DiagnosticsAreReturned_ForUseOfTagHelpersInActions()
     {
-        var source = @"
+        var source =
+            @"
 namespace AspNetCore
 {
     #line hidden
@@ -109,14 +111,19 @@ namespace AspNetCore
             .WithLocation(0)
             .WithArguments("lambda expression", "System.Func<System.Threading.Tasks.Task>");
 
-        return VerifyAnalyzerAsync(source, diagnosticResult, CS4034Result.WithLocation(1), CS4034Result.WithLocation(2));
+        return VerifyAnalyzerAsync(
+            source,
+            diagnosticResult,
+            CS4034Result.WithLocation(1),
+            CS4034Result.WithLocation(2)
+        );
     }
-
 
     [Fact]
     public Task DiagnosticsAreReturned_ForUseOfTagHelpersInNonAsyncFunc()
     {
-        var source = @"
+        var source =
+            @"
 namespace AspNetCore
 {
     #line hidden
@@ -199,16 +206,21 @@ namespace AspNetCore
 }
 #pragma warning restore 1591
 ";
-        var diagnosticResult = new DiagnosticResult(DiagnosticDescriptor)
-            .WithLocation(0);
+        var diagnosticResult = new DiagnosticResult(DiagnosticDescriptor).WithLocation(0);
 
-        return VerifyAnalyzerAsync(source, diagnosticResult, CS4034Result.WithLocation(1), CS4034Result.WithLocation(2));
+        return VerifyAnalyzerAsync(
+            source,
+            diagnosticResult,
+            CS4034Result.WithLocation(1),
+            CS4034Result.WithLocation(2)
+        );
     }
 
     [Fact]
     public Task DiagnosticsAreReturned_ForUseOfTagHelpersInVoidClassMethods()
     {
-        var source = @"
+        var source =
+            @"
 namespace AspNetCore
 {
     #line hidden
@@ -292,16 +304,21 @@ namespace AspNetCore
 }
 #pragma warning restore 1591
 ";
-        var diagnosticResult = new DiagnosticResult(DiagnosticDescriptor)
-            .WithLocation(0);
+        var diagnosticResult = new DiagnosticResult(DiagnosticDescriptor).WithLocation(0);
 
-        return VerifyAnalyzerAsync(source, diagnosticResult, CS4033Result.WithLocation(1), CS4033Result.WithLocation(2));
+        return VerifyAnalyzerAsync(
+            source,
+            diagnosticResult,
+            CS4033Result.WithLocation(1),
+            CS4033Result.WithLocation(2)
+        );
     }
 
     [Fact]
     public Task DiagnosticsAreReturned_ForUseOfTagHelpersInVoidDelegates()
     {
-        var source = @"
+        var source =
+            @"
 namespace AspNetCore
 {
     #line hidden
@@ -387,16 +404,21 @@ namespace AspNetCore
 }
 #pragma warning restore 1591
 ";
-        var diagnosticResult = new DiagnosticResult(DiagnosticDescriptor)
-            .WithLocation(0);
+        var diagnosticResult = new DiagnosticResult(DiagnosticDescriptor).WithLocation(0);
 
-        return VerifyAnalyzerAsync(source, diagnosticResult, CS4034Result.WithLocation(1), CS4034Result.WithLocation(2));
+        return VerifyAnalyzerAsync(
+            source,
+            diagnosticResult,
+            CS4034Result.WithLocation(1),
+            CS4034Result.WithLocation(2)
+        );
     }
 
     [Fact]
     public Task DiagnosticsAreReturned_ForUseOfTagHelpersInVoidLocalFunctions()
     {
-        var source = @"
+        var source =
+            @"
 namespace AspNetCore
 {
     #line hidden
@@ -477,16 +499,21 @@ namespace AspNetCore
 }
 #pragma warning restore 1591
 ";
-        var diagnosticResult = new DiagnosticResult(DiagnosticDescriptor)
-            .WithLocation(0);
+        var diagnosticResult = new DiagnosticResult(DiagnosticDescriptor).WithLocation(0);
 
-        return VerifyAnalyzerAsync(source, diagnosticResult, CS4033Result.WithLocation(1), CS4033Result.WithLocation(2));
+        return VerifyAnalyzerAsync(
+            source,
+            diagnosticResult,
+            CS4033Result.WithLocation(1),
+            CS4033Result.WithLocation(2)
+        );
     }
 
     [Fact]
     public Task NoDiagnosticsAreReturned_ForUseOfTagHelpersInAsyncClassMethods()
     {
-        var source = @"
+        var source =
+            @"
 namespace AspNetCore
 {
     #line hidden
@@ -576,7 +603,8 @@ namespace AspNetCore
     [Fact]
     public Task NoDiagnosticsAreReturned_ForUseOfTagHelpersInAsyncDelegates()
     {
-        var source = @"
+        var source =
+            @"
 namespace AspNetCore
 {
     #line hidden
@@ -668,7 +696,8 @@ namespace AspNetCore
     [Fact]
     public Task NoDiagnosticsAreReturned_ForUseOfTagHelpersInAsyncLocalFunctions()
     {
-        var source = @"
+        var source =
+            @"
 #pragma checksum ""C:\Users\nimullen\Documents\Projects\AnalyzerTest\NoDiagnosticsAreReturned_ForUseOfTagHelpersInAsyncLocalFunctions..cshtml"" ""{ff1816ec-aa5e-4d10-87f7-6f4963833460}"" ""d5d5a28106f24c1bb31f07635157a3503dfdcb2d""
 // <auto-generated/>
 #pragma warning disable 1591
@@ -760,7 +789,8 @@ namespace AspNetCore
     [Fact]
     public Task SingleDiagnosticIsReturned_ForMultipleTagHelpersInVoidMethod()
     {
-        var source = @"
+        var source =
+            @"
 namespace AspNetCore
 {
     #line hidden
@@ -885,18 +915,18 @@ namespace AspNetCore
 }
 #pragma warning restore 1591
 ";
-        var diagnosticResult = new DiagnosticResult(DiagnosticDescriptor)
-            .WithLocation(0);
+        var diagnosticResult = new DiagnosticResult(DiagnosticDescriptor).WithLocation(0);
 
-
-        return VerifyAnalyzerAsync(source,
+        return VerifyAnalyzerAsync(
+            source,
             diagnosticResult,
             CS4033Result.WithLocation(1),
             CS4033Result.WithLocation(2),
             CS4033Result.WithLocation(3),
             CS4033Result.WithLocation(4),
             CS4033Result.WithLocation(5),
-            CS4033Result.WithLocation(6));
+            CS4033Result.WithLocation(6)
+        );
     }
 
     private static Task VerifyAnalyzerAsync(string source, params DiagnosticResult[] expected)
@@ -911,13 +941,17 @@ namespace AspNetCore
         return test.RunAsync();
     }
 
-    private sealed class TagHelpersInCodeBlocksCSharpAnalzyerTest : CSharpAnalyzerTest<AttributesShouldNotBeAppliedToPageModelAnalyzer, XUnitVerifier>
+    private sealed class TagHelpersInCodeBlocksCSharpAnalzyerTest
+        : CSharpAnalyzerTest<AttributesShouldNotBeAppliedToPageModelAnalyzer, XUnitVerifier>
     {
-        public TagHelpersInCodeBlocksCSharpAnalzyerTest(ImmutableArray<MetadataReference> metadataReferences)
+        public TagHelpersInCodeBlocksCSharpAnalzyerTest(
+            ImmutableArray<MetadataReference> metadataReferences
+        )
         {
             TestState.AdditionalReferences.AddRange(metadataReferences);
         }
 
-        protected override IEnumerable<DiagnosticAnalyzer> GetDiagnosticAnalyzers() => new[] { new TagHelpersInCodeBlocksAnalyzer() };
+        protected override IEnumerable<DiagnosticAnalyzer> GetDiagnosticAnalyzers() =>
+            new[] { new TagHelpersInCodeBlocksAnalyzer() };
     }
 }

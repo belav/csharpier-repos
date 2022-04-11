@@ -5,11 +5,20 @@ using Xunit;
 
 namespace System.IO.Tests
 {
-    [ActiveIssue("https://github.com/dotnet/runtime/issues/34583", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+    [ActiveIssue(
+        "https://github.com/dotnet/runtime/issues/34583",
+        TestPlatforms.Windows,
+        TargetFrameworkMonikers.Netcoreapp,
+        TestRuntimes.Mono
+    )]
     [ConditionalClass(typeof(SymbolicLink_Changed_Tests), nameof(CanCreateSymbolicLinks))]
     public class SymbolicLink_Changed_Tests : FileSystemWatcherTest
     {
-        private string CreateSymbolicLinkToTarget(string targetPath, bool isDirectory, string linkPath = null)
+        private string CreateSymbolicLinkToTarget(
+            string targetPath,
+            bool isDirectory,
+            string linkPath = null
+        )
         {
             linkPath ??= GetTestFilePath();
             Assert.True(CreateSymLink(targetPath, linkPath, isDirectory));
@@ -70,10 +79,13 @@ namespace System.IO.Tests
             string subDirPath = Path.Combine(tempDir.Path, subDirName);
 
             // Act - Assert
-            ExpectEvent(watcher, WatcherChangeTypes.Created,
+            ExpectEvent(
+                watcher,
+                WatcherChangeTypes.Created,
                 action: () => Directory.CreateDirectory(subDirPath),
                 cleanup: () => Directory.Delete(subDirPath),
-                expectedPath: Path.Combine(linkPath, subDirName));
+                expectedPath: Path.Combine(linkPath, subDirName)
+            );
         }
 
         [Fact]
@@ -92,17 +104,23 @@ namespace System.IO.Tests
             string subDirLv2Path = Path.Combine(tempSubDir.Path, subDirLv2);
 
             // Act - Assert
-            ExpectNoEvent(watcher, WatcherChangeTypes.Created,
+            ExpectNoEvent(
+                watcher,
+                WatcherChangeTypes.Created,
                 action: () => Directory.CreateDirectory(subDirLv2Path),
-                cleanup: () => Directory.Delete(subDirLv2Path));
+                cleanup: () => Directory.Delete(subDirLv2Path)
+            );
 
             // Turn include subdirectories on.
             watcher.IncludeSubdirectories = true;
 
-            ExpectEvent(watcher, WatcherChangeTypes.Created,
+            ExpectEvent(
+                watcher,
+                WatcherChangeTypes.Created,
                 action: () => Directory.CreateDirectory(subDirLv2Path),
                 cleanup: () => Directory.Delete(subDirLv2Path),
-                expectedPath: Path.Combine(linkPath, subDir, subDirLv2));
+                expectedPath: Path.Combine(linkPath, subDir, subDirLv2)
+            );
         }
 
         [Fact]
@@ -122,9 +140,12 @@ namespace System.IO.Tests
             string subDirPath = Path.Combine(linkPath, GetTestFileName());
 
             // Act - Assert
-            ExpectNoEvent(watcher, WatcherChangeTypes.Created,
+            ExpectNoEvent(
+                watcher,
+                WatcherChangeTypes.Created,
                 action: () => Directory.CreateDirectory(subDirPath),
-                cleanup: () => Directory.Delete(subDirPath));
+                cleanup: () => Directory.Delete(subDirPath)
+            );
         }
     }
 }

@@ -9,11 +9,7 @@ public class Misc
 { //Only append content to this class as the test suite depends on line info
     public static int CreateObject(int foo, int bar)
     {
-        var f = new Fancy()
-        {
-            Foo = foo,
-            Bar = bar,
-        };
+        var f = new Fancy() { Foo = foo, Bar = bar, };
 
         Console.WriteLine($"{f.Foo} {f.Bar}");
         return f.Foo + f.Bar;
@@ -24,6 +20,7 @@ public class Fancy
 {
     public int Foo;
     public int Bar { get; set; }
+
     public static void Types()
     {
         double dPI = System.Math.PI;
@@ -52,7 +49,8 @@ public class Fancy
     }
 }
 
-public class UserBreak {
+public class UserBreak
+{
     public static void BreakOnDebuggerBreakCommand()
     {
         int a = 10;
@@ -80,10 +78,13 @@ public class InspectTask
     {
         WeatherForecast[] forecasts = null;
         var httpClient = new System.Net.Http.HttpClient();
-        var getJsonTask = httpClient.GetFromJsonAsync<WeatherForecast[]>("http://localhost:9400/weather.json");
+        var getJsonTask = httpClient.GetFromJsonAsync<WeatherForecast[]>(
+            "http://localhost:9400/weather.json"
+        );
         try
         {
-            await getJsonTask.ContinueWith(t =>
+            await getJsonTask.ContinueWith(
+                t =>
                 {
                     int a = 10;
                     Console.WriteLine(a);
@@ -92,7 +93,8 @@ public class InspectTask
 
                     if (t.IsFaulted)
                         throw t.Exception!;
-                });
+                }
+            );
         }
         catch (Exception ex)
         {
@@ -118,10 +120,12 @@ public class TestChild : TestParent
 {
     public int i = 50;
     public int GetI => i;
+
     public TestChild()
     {
         Console.WriteLine("Hi");
     }
+
     public static void TestWatchWithInheritance()
     {
         TestChild test = new TestChild();

@@ -31,10 +31,15 @@ public class TestApplicationErrorLoggerLoggedTest : LoggedTest
 
     public List<Type> IgnoredCriticalLogExceptions => TestApplicationErrorLogger.IgnoredExceptions;
 
-    public Task<LogMessage> WaitForLogMessage(Func<LogMessage, bool> messageFilter)
-        => TestApplicationErrorLogger.WaitForMessage(messageFilter);
+    public Task<LogMessage> WaitForLogMessage(Func<LogMessage, bool> messageFilter) =>
+        TestApplicationErrorLogger.WaitForMessage(messageFilter);
 
-    public override void Initialize(TestContext context, MethodInfo methodInfo, object[] testMethodArguments, ITestOutputHelper testOutputHelper)
+    public override void Initialize(
+        TestContext context,
+        MethodInfo methodInfo,
+        object[] testMethodArguments,
+        ITestOutputHelper testOutputHelper
+    )
     {
         base.Initialize(context, methodInfo, testMethodArguments, testOutputHelper);
 

@@ -17,7 +17,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.ValueGeneration
     public class IdValueGeneratorFactory : ValueGeneratorFactory
     {
         /// <inheritdoc />
-        public override ValueGenerator Create(IProperty property, IEntityType entityType)
-            => new IdValueGenerator();
+        public override ValueGenerator Create(IProperty property, IEntityType entityType) =>
+            new IdValueGenerator();
     }
 }

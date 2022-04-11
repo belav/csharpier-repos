@@ -104,7 +104,11 @@ namespace System.Linq.Expressions.Tests
         public static void EmitConstantsToIL_ShareReferences()
         {
             var o = new object();
-            VerifyEmitConstantsToIL(Expression.Equal(Expression.Constant(o), Expression.Constant(o)), 1, true);
+            VerifyEmitConstantsToIL(
+                Expression.Equal(Expression.Constant(o), Expression.Constant(o)),
+                1,
+                true
+            );
         }
 
         [Fact]
@@ -156,7 +160,8 @@ namespace System.Linq.Expressions.Tests
                     IL_0000: ldc.i4.s   42
                     IL_0002: call       int32 class [System.Private.CoreLib]System.Math::Abs(int32)
                     IL_0007: ret
-                  }");
+                  }"
+            );
         }
 
         [Fact]
@@ -164,24 +169,17 @@ namespace System.Linq.Expressions.Tests
         public static void VerifyIL_Exceptions()
         {
             ParameterExpression x = Expression.Parameter(typeof(int), "x");
-            Expression<Func<int, int>> f =
-                Expression.Lambda<Func<int, int>>(
-                    Expression.TryCatchFinally(
-                        Expression.Call(
-                            typeof(Math).GetMethod(nameof(Math.Abs), new[] { typeof(int) }),
-                            Expression.Divide(
-                                Expression.Constant(42),
-                                x
-                            )
-                        ),
-                        Expression.Empty(),
-                        Expression.Catch(
-                            typeof(DivideByZeroException),
-                            Expression.Constant(-1)
-                        )
+            Expression<Func<int, int>> f = Expression.Lambda<Func<int, int>>(
+                Expression.TryCatchFinally(
+                    Expression.Call(
+                        typeof(Math).GetMethod(nameof(Math.Abs), new[] { typeof(int) }),
+                        Expression.Divide(Expression.Constant(42), x)
                     ),
-                    x
-                );
+                    Expression.Empty(),
+                    Expression.Catch(typeof(DivideByZeroException), Expression.Constant(-1))
+                ),
+                x
+            );
 
             f.VerifyIL(
                 @".method int32 ::lambda_method(class [System.Linq.Expressions]System.Runtime.CompilerServices.Closure,int32)
@@ -217,7 +215,8 @@ namespace System.Linq.Expressions.Tests
                     }
                     IL_001d: ldloc.0
                     IL_001e: ret
-                  }");
+                  }"
+            );
         }
 
         [Fact]
@@ -252,7 +251,8 @@ namespace System.Linq.Expressions.Tests
                     IL_0000: ldc.i4.s   42
                     IL_0002: ret
                   }",
-                appendInnerLambdas: true);
+                appendInnerLambdas: true
+            );
         }
 
         [Fact]
@@ -310,7 +310,8 @@ namespace System.Linq.Expressions.Tests
                     IL_000f: ldfld      class [System.Private.CoreLib]System.Runtime.CompilerServices.StrongBox`1<int32>::Value
                     IL_0014: ret
                   }",
-                appendInnerLambdas: true);
+                appendInnerLambdas: true
+            );
         }
 
         [Fact]
@@ -371,10 +372,15 @@ namespace System.Linq.Expressions.Tests
                     IL_0015: add
                     IL_0016: ret
                   }",
-                appendInnerLambdas: true);
+                appendInnerLambdas: true
+            );
         }
 
-        internal static void VerifyIL(this LambdaExpression expression, string expected, bool appendInnerLambdas = false)
+        internal static void VerifyIL(
+            this LambdaExpression expression,
+            string expected,
+            bool appendInnerLambdas = false
+        )
         {
             string actual = expression.GetIL(appendInnerLambdas);
 
@@ -386,15 +392,17 @@ namespace System.Linq.Expressions.Tests
 
         private static string Normalize(string s)
         {
-            Collections.Generic.IEnumerable<string> lines =
-                s
-                .Replace("\r\n", "\n")
+            Collections.Generic.IEnumerable<string> lines = s.Replace("\r\n", "\n")
                 .Split(new[] { '\n' })
                 .Select(line => line.Trim())
                 .Where(line => line != "" && !line.StartsWith("//"));
 
             string beforeLambdaUniquifierRemoval = string.Join("\n", lines);
-            return Regex.Replace(beforeLambdaUniquifierRemoval, "lambda_method[0-9]*", "lambda_method");
+            return Regex.Replace(
+                beforeLambdaUniquifierRemoval,
+                "lambda_method[0-9]*",
+                "lambda_method"
+            );
         }
 
         private static void VerifyEmitConstantsToIL<T>(T value)
@@ -407,7 +415,11 @@ namespace System.Linq.Expressions.Tests
             VerifyEmitConstantsToIL(Expression.Constant(value, typeof(T)), expectedCount, value);
         }
 
-        private static void VerifyEmitConstantsToIL(Expression e, int expectedCount, object expectedValue)
+        private static void VerifyEmitConstantsToIL(
+            Expression e,
+            int expectedCount,
+            object expectedValue
+        )
         {
             Delegate f = Expression.Lambda(e).Compile();
 
@@ -421,13 +433,9 @@ namespace System.Linq.Expressions.Tests
 
         private static void Verify_VariableBinder_CatchBlock_Filter(CatchBlock @catch)
         {
-            Expression<Action> e =
-                Expression.Lambda<Action>(
-                    Expression.TryCatch(
-                        Expression.Empty(),
-                        @catch
-                    )
-                );
+            Expression<Action> e = Expression.Lambda<Action>(
+                Expression.TryCatch(Expression.Empty(), @catch)
+            );
 
             Assert.Throws<InvalidOperationException>(() => e.Compile());
         }

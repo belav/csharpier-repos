@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Editor.NavigableSymbols
                 IThreadingContext threadingContext,
                 IStreamingFindUsagesPresenter streamingPresenter,
                 IUIThreadOperationExecutor uiThreadOperationExecutor,
-                IAsynchronousOperationListenerProvider listenerProvider)
+                IAsynchronousOperationListenerProvider listenerProvider
+            )
             {
                 Contract.ThrowIfFalse(definitions.Length > 0);
 
@@ -52,7 +53,9 @@ namespace Microsoft.CodeAnalysis.Editor.NavigableSymbols
             public SnapshotSpan SymbolSpan { get; }
 
             public IEnumerable<INavigableRelationship> Relationships =>
-                SpecializedCollections.SingletonEnumerable(PredefinedNavigableRelationships.Definition);
+                SpecializedCollections.SingletonEnumerable(
+                    PredefinedNavigableRelationships.Definition
+                );
 
             public void Navigate(INavigableRelationship relationship)
             {
@@ -69,20 +72,20 @@ namespace Microsoft.CodeAnalysis.Editor.NavigableSymbols
                         title: EditorFeaturesResources.Go_to_Definition,
                         defaultDescription: EditorFeaturesResources.Navigating_to_definition,
                         allowCancellation: true,
-                        showProgress: false);
-                    await _presenter.TryNavigateToOrPresentItemsAsync(
-                        _threadingContext,
-                        _document.Project.Solution.Workspace,
-                        _definitions[0].NameDisplayParts.GetFullText(),
-                        _definitions,
-                        context.UserCancellationToken).ConfigureAwait(false);
+                        showProgress: false
+                    );
+                    await _presenter
+                        .TryNavigateToOrPresentItemsAsync(
+                            _threadingContext,
+                            _document.Project.Solution.Workspace,
+                            _definitions[0].NameDisplayParts.GetFullText(),
+                            _definitions,
+                            context.UserCancellationToken
+                        )
+                        .ConfigureAwait(false);
                 }
-                catch (OperationCanceledException)
-                {
-                }
-                catch (Exception ex) when (FatalError.ReportAndCatch(ex))
-                {
-                }
+                catch (OperationCanceledException) { }
+                catch (Exception ex) when (FatalError.ReportAndCatch(ex)) { }
             }
         }
     }

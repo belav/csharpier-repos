@@ -16,24 +16,29 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public InlineDiagnosticsOptions()
-        {
-        }
+        public InlineDiagnosticsOptions() { }
 
-        ImmutableArray<IOption> IOptionProvider.Options { get; } = ImmutableArray.Create<IOption>(
-            EnableInlineDiagnostics,
-            Location);
+        ImmutableArray<IOption> IOptionProvider.Options { get; } =
+            ImmutableArray.Create<IOption>(EnableInlineDiagnostics, Location);
 
         public static readonly PerLanguageOption2<bool> EnableInlineDiagnostics =
-            new("InlineDiagnosticsOptions",
+            new(
+                "InlineDiagnosticsOptions",
                 "EnableInlineDiagnostics",
                 defaultValue: false,
-                storageLocation: new RoamingProfileStorageLocation("TextEditor.%LANGUAGE%.Specific.InlineDiagnostics"));
+                storageLocation: new RoamingProfileStorageLocation(
+                    "TextEditor.%LANGUAGE%.Specific.InlineDiagnostics"
+                )
+            );
 
         public static readonly PerLanguageOption2<InlineDiagnosticsLocations> Location =
-            new("InlineDiagnosticsOptions",
+            new(
+                "InlineDiagnosticsOptions",
                 "Location",
                 defaultValue: InlineDiagnosticsLocations.PlacedAtEndOfCode,
-                storageLocation: new RoamingProfileStorageLocation("TextEditor.%LANGUAGE%.Specific.InlineDiagnostics.LocationOption"));
+                storageLocation: new RoamingProfileStorageLocation(
+                    "TextEditor.%LANGUAGE%.Specific.InlineDiagnostics.LocationOption"
+                )
+            );
     }
 }

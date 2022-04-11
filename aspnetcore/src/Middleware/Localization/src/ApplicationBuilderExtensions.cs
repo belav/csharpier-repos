@@ -37,7 +37,8 @@ public static class ApplicationBuilderExtensions
     /// <returns>The <see cref="IApplicationBuilder"/>.</returns>
     public static IApplicationBuilder UseRequestLocalization(
         this IApplicationBuilder app,
-        RequestLocalizationOptions options)
+        RequestLocalizationOptions options
+    )
     {
         if (app == null)
         {
@@ -64,7 +65,8 @@ public static class ApplicationBuilderExtensions
     /// <returns>The <see cref="IApplicationBuilder"/>.</returns>
     public static IApplicationBuilder UseRequestLocalization(
         this IApplicationBuilder app,
-        Action<RequestLocalizationOptions> optionsAction)
+        Action<RequestLocalizationOptions> optionsAction
+    )
     {
         if (app == null)
         {
@@ -94,7 +96,8 @@ public static class ApplicationBuilderExtensions
     /// </remarks>
     public static IApplicationBuilder UseRequestLocalization(
         this IApplicationBuilder app,
-        params string[] cultures)
+        params string[] cultures
+    )
     {
         if (app == null)
         {

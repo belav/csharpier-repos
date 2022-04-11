@@ -14,14 +14,16 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             private readonly SQLiteConnectionPool _connectionPool;
             public readonly SqlConnection Connection;
 
-            public PooledConnection(SQLiteConnectionPool connectionPool, SqlConnection sqlConnection)
+            public PooledConnection(
+                SQLiteConnectionPool connectionPool,
+                SqlConnection sqlConnection
+            )
             {
                 _connectionPool = connectionPool;
                 Connection = sqlConnection;
             }
 
-            public void Dispose()
-                => _connectionPool.ReleaseConnection(Connection);
+            public void Dispose() => _connectionPool.ReleaseConnection(Connection);
         }
     }
 }

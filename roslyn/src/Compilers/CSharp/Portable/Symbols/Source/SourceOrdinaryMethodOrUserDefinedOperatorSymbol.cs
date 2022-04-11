@@ -14,17 +14,20 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal abstract class SourceOrdinaryMethodOrUserDefinedOperatorSymbol : SourceMemberMethodSymbol
+    internal abstract class SourceOrdinaryMethodOrUserDefinedOperatorSymbol
+        : SourceMemberMethodSymbol
     {
         private ImmutableArray<MethodSymbol> _lazyExplicitInterfaceImplementations;
         private ImmutableArray<CustomModifier> _lazyRefCustomModifiers;
         private ImmutableArray<ParameterSymbol> _lazyParameters;
         private TypeWithAnnotations _lazyReturnType;
 
-        protected SourceOrdinaryMethodOrUserDefinedOperatorSymbol(NamedTypeSymbol containingType, SyntaxReference syntaxReferenceOpt, Location location, bool isIterator)
-            : base(containingType, syntaxReferenceOpt, location, isIterator)
-        {
-        }
+        protected SourceOrdinaryMethodOrUserDefinedOperatorSymbol(
+            NamedTypeSymbol containingType,
+            SyntaxReference syntaxReferenceOpt,
+            Location location,
+            bool isIterator
+        ) : base(containingType, syntaxReferenceOpt, location, isIterator) { }
 
         protected abstract Location ReturnTypeLocation { get; }
 
@@ -37,7 +40,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        protected MethodSymbol? MethodChecks(TypeWithAnnotations returnType, ImmutableArray<ParameterSymbol> parameters, BindingDiagnosticBag diagnostics)
+        protected MethodSymbol? MethodChecks(
+            TypeWithAnnotations returnType,
+            ImmutableArray<ParameterSymbol> parameters,
+            BindingDiagnosticBag diagnostics
+        )
         {
             _lazyReturnType = returnType;
             _lazyParameters = parameters;
@@ -49,7 +56,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             var location = locations[0];
             // Checks taken from MemberDefiner::defineMethod
-            if (this.Name == WellKnownMemberNames.DestructorName && this.ParameterCount == 0 && this.Arity == 0 && this.ReturnsVoid)
+            if (
+                this.Name == WellKnownMemberNames.DestructorName
+                && this.ParameterCount == 0
+                && this.Arity == 0
+                && this.ReturnsVoid
+            )
             {
                 diagnostics.Add(ErrorCode.WRN_FinalizeMethod, location);
             }
@@ -82,7 +94,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // that there can only be one such method, so there are no conflicts.)  This is
             // unnecessary for implicit implementations because, if the custom modifiers don't match,
             // we'll insert a bridge method (an explicit implementation that delegates to the implicit
-            // implementation) with the correct custom modifiers 
+            // implementation) with the correct custom modifiers
             // (see SourceMemberContainerTypeSymbol.SynthesizeInterfaceMemberImplementation).
 
             // This value may not be correct, but we need something while we compute this.OverriddenMethod.
@@ -116,33 +128,63 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                     if ((object)overriddenOrExplicitlyImplementedMethod != null)
                     {
-                        CustomModifierUtils.CopyMethodCustomModifiers(overriddenOrExplicitlyImplementedMethod, this, out _lazyReturnType,
-                                                                      out _lazyRefCustomModifiers,
-                                                                      out _lazyParameters, alsoCopyParamsModifier: true);
+                        CustomModifierUtils.CopyMethodCustomModifiers(
+                            overriddenOrExplicitlyImplementedMethod,
+                            this,
+                            out _lazyReturnType,
+                            out _lazyRefCustomModifiers,
+                            out _lazyParameters,
+                            alsoCopyParamsModifier: true
+                        );
                     }
                 }
                 else if (RefKind == RefKind.RefReadOnly)
                 {
-                    var modifierType = Binder.GetWellKnownType(DeclaringCompilation, WellKnownType.System_Runtime_InteropServices_InAttribute, diagnostics, ReturnTypeLocation);
+                    var modifierType = Binder.GetWellKnownType(
+                        DeclaringCompilation,
+                        WellKnownType.System_Runtime_InteropServices_InAttribute,
+                        diagnostics,
+                        ReturnTypeLocation
+                    );
 
-                    _lazyRefCustomModifiers = ImmutableArray.Create(CSharpCustomModifier.CreateRequired(modifierType));
+                    _lazyRefCustomModifiers = ImmutableArray.Create(
+                        CSharpCustomModifier.CreateRequired(modifierType)
+                    );
                 }
             }
             else if (ExplicitInterfaceType is not null)
             {
                 //do this last so that it can assume the method symbol is constructed (except for ExplicitInterfaceImplementation)
-                overriddenOrExplicitlyImplementedMethod = FindExplicitlyImplementedMethod(diagnostics);
+                overriddenOrExplicitlyImplementedMethod = FindExplicitlyImplementedMethod(
+                    diagnostics
+                );
 
                 if (overriddenOrExplicitlyImplementedMethod is not null)
                 {
                     Debug.Assert(_lazyExplicitInterfaceImplementations.IsDefault);
-                    _lazyExplicitInterfaceImplementations = ImmutableArray.Create<MethodSymbol>(overriddenOrExplicitlyImplementedMethod);
+                    _lazyExplicitInterfaceImplementations = ImmutableArray.Create<MethodSymbol>(
+                        overriddenOrExplicitlyImplementedMethod
+                    );
 
-                    CustomModifierUtils.CopyMethodCustomModifiers(overriddenOrExplicitlyImplementedMethod, this, out _lazyReturnType,
-                                                                  out _lazyRefCustomModifiers,
-                                                                  out _lazyParameters, alsoCopyParamsModifier: false);
-                    this.FindExplicitlyImplementedMemberVerification(overriddenOrExplicitlyImplementedMethod, diagnostics);
-                    TypeSymbol.CheckNullableReferenceTypeMismatchOnImplementingMember(this.ContainingType, this, overriddenOrExplicitlyImplementedMethod, isExplicit: true, diagnostics);
+                    CustomModifierUtils.CopyMethodCustomModifiers(
+                        overriddenOrExplicitlyImplementedMethod,
+                        this,
+                        out _lazyReturnType,
+                        out _lazyRefCustomModifiers,
+                        out _lazyParameters,
+                        alsoCopyParamsModifier: false
+                    );
+                    this.FindExplicitlyImplementedMemberVerification(
+                        overriddenOrExplicitlyImplementedMethod,
+                        diagnostics
+                    );
+                    TypeSymbol.CheckNullableReferenceTypeMismatchOnImplementingMember(
+                        this.ContainingType,
+                        this,
+                        overriddenOrExplicitlyImplementedMethod,
+                        isExplicit: true,
+                        diagnostics
+                    );
                 }
                 else
                 {
@@ -158,7 +200,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         protected abstract void ExtensionMethodChecks(BindingDiagnosticBag diagnostics);
 
-        protected abstract MethodSymbol? FindExplicitlyImplementedMethod(BindingDiagnosticBag diagnostics);
+        protected abstract MethodSymbol? FindExplicitlyImplementedMethod(
+            BindingDiagnosticBag diagnostics
+        );
 
         protected abstract TypeSymbol? ExplicitInterfaceType { get; }
 
@@ -199,10 +243,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal sealed override bool IsExplicitInterfaceImplementation
         {
-            get
-            {
-                return MethodKind == MethodKind.ExplicitInterfaceImplementation;
-            }
+            get { return MethodKind == MethodKind.ExplicitInterfaceImplementation; }
         }
 
         public sealed override ImmutableArray<MethodSymbol> ExplicitInterfaceImplementations
@@ -223,7 +264,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        internal override void AfterAddingTypeMembersChecks(ConversionsBase conversions, BindingDiagnosticBag diagnostics)
+        internal override void AfterAddingTypeMembersChecks(
+            ConversionsBase conversions,
+            BindingDiagnosticBag diagnostics
+        )
         {
             base.AfterAddingTypeMembersChecks(conversions, diagnostics);
 
@@ -237,38 +281,82 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // type errors but for parameter errors, we'll use the parameter location.
             CheckConstraintsForExplicitInterfaceType(conversions, diagnostics);
 
-            this.ReturnType.CheckAllConstraints(compilation, conversions, this.Locations[0], diagnostics);
+            this.ReturnType.CheckAllConstraints(
+                compilation,
+                conversions,
+                this.Locations[0],
+                diagnostics
+            );
 
             foreach (var parameter in this.Parameters)
             {
-                parameter.Type.CheckAllConstraints(compilation, conversions, parameter.Locations[0], diagnostics);
+                parameter.Type.CheckAllConstraints(
+                    compilation,
+                    conversions,
+                    parameter.Locations[0],
+                    diagnostics
+                );
             }
 
             PartialMethodChecks(diagnostics);
 
             if (RefKind == RefKind.RefReadOnly)
             {
-                compilation.EnsureIsReadOnlyAttributeExists(diagnostics, location, modifyCompilation: true);
+                compilation.EnsureIsReadOnlyAttributeExists(
+                    diagnostics,
+                    location,
+                    modifyCompilation: true
+                );
             }
 
-            ParameterHelpers.EnsureIsReadOnlyAttributeExists(compilation, Parameters, diagnostics, modifyCompilation: true);
+            ParameterHelpers.EnsureIsReadOnlyAttributeExists(
+                compilation,
+                Parameters,
+                diagnostics,
+                modifyCompilation: true
+            );
 
             if (ReturnType.ContainsNativeInteger())
             {
-                compilation.EnsureNativeIntegerAttributeExists(diagnostics, location, modifyCompilation: true);
+                compilation.EnsureNativeIntegerAttributeExists(
+                    diagnostics,
+                    location,
+                    modifyCompilation: true
+                );
             }
 
-            ParameterHelpers.EnsureNativeIntegerAttributeExists(compilation, Parameters, diagnostics, modifyCompilation: true);
+            ParameterHelpers.EnsureNativeIntegerAttributeExists(
+                compilation,
+                Parameters,
+                diagnostics,
+                modifyCompilation: true
+            );
 
-            if (compilation.ShouldEmitNullableAttributes(this) && ReturnTypeWithAnnotations.NeedsNullableAttribute())
+            if (
+                compilation.ShouldEmitNullableAttributes(this)
+                && ReturnTypeWithAnnotations.NeedsNullableAttribute()
+            )
             {
-                compilation.EnsureNullableAttributeExists(diagnostics, location, modifyCompilation: true);
+                compilation.EnsureNullableAttributeExists(
+                    diagnostics,
+                    location,
+                    modifyCompilation: true
+                );
             }
 
-            ParameterHelpers.EnsureNullableAttributeExists(compilation, this, Parameters, diagnostics, modifyCompilation: true);
+            ParameterHelpers.EnsureNullableAttributeExists(
+                compilation,
+                this,
+                Parameters,
+                diagnostics,
+                modifyCompilation: true
+            );
         }
 
-        protected abstract void CheckConstraintsForExplicitInterfaceType(ConversionsBase conversions, BindingDiagnosticBag diagnostics);
+        protected abstract void CheckConstraintsForExplicitInterfaceType(
+            ConversionsBase conversions,
+            BindingDiagnosticBag diagnostics
+        );
 
         protected abstract void PartialMethodChecks(BindingDiagnosticBag diagnostics);
     }

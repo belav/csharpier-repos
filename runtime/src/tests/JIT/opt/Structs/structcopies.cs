@@ -1,7 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-// The program tests different cases that could cause issues with aggresive 
+// The program tests different cases that could cause issues with aggresive
 // struct optimizations with existing retyping or missing field sequences.
 
 using System;
@@ -11,16 +11,12 @@ using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
 using System.Numerics;
 
-
 namespace TestStructFields
 {
     class Program
     {
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static void blockPromotion<T>(ref T s)
-        {
-
-        }
+        static void blockPromotion<T>(ref T s) { }
 
         #region S4 tests
 
@@ -47,25 +43,35 @@ namespace TestStructFields
         [StructLayout(LayoutKind.Explicit)]
         struct S4Corrupted1
         {
-            [FieldOffset(0)] public int i;
-            [FieldOffset(0)] public bool b0;
-            [FieldOffset(1)] public bool b1;
+            [FieldOffset(0)]
+            public int i;
+
+            [FieldOffset(0)]
+            public bool b0;
+
+            [FieldOffset(1)]
+            public bool b1;
         }
 
         [StructLayout(LayoutKind.Explicit)]
         struct S4Corrupted2
         {
-            [FieldOffset(0)] public int i;
-            [FieldOffset(0)] public bool b0;
+            [FieldOffset(0)]
+            public int i;
+
+            [FieldOffset(0)]
+            public bool b0;
         }
 
         [StructLayout(LayoutKind.Explicit)]
         struct S4Corrupted3
         {
-            [FieldOffset(0)] public byte b0;
-            [FieldOffset(3)] public byte b1;
-        }
+            [FieldOffset(0)]
+            public byte b0;
 
+            [FieldOffset(3)]
+            public byte b1;
+        }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static int TestS4_Simple()
@@ -474,24 +480,37 @@ namespace TestStructFields
         [StructLayout(LayoutKind.Explicit)]
         struct S8Corrupted1
         {
-            [FieldOffset(0)] public int i1;
-            [FieldOffset(4)] public int i2;
-            [FieldOffset(7)] public bool b0;
-            [FieldOffset(5)] public bool b1;
+            [FieldOffset(0)]
+            public int i1;
+
+            [FieldOffset(4)]
+            public int i2;
+
+            [FieldOffset(7)]
+            public bool b0;
+
+            [FieldOffset(5)]
+            public bool b1;
         }
 
         [StructLayout(LayoutKind.Explicit)]
         struct S8Corrupted2
         {
-            [FieldOffset(0)] public int i1;
-            [FieldOffset(7)] public byte b1;
+            [FieldOffset(0)]
+            public int i1;
+
+            [FieldOffset(7)]
+            public byte b1;
         }
 
         [StructLayout(LayoutKind.Explicit)]
         struct S8Corrupted3
         {
-            [FieldOffset(0)] public object o1;
-            [FieldOffset(0)] public long i1;
+            [FieldOffset(0)]
+            public object o1;
+
+            [FieldOffset(0)]
+            public long i1;
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -957,10 +976,7 @@ namespace TestStructFields
                 }
                 failed = true;
             }
-            catch
-            {
-
-            }
+            catch { }
 
             if (failed)
             {
@@ -999,7 +1015,6 @@ namespace TestStructFields
             public int i3;
             public int i4;
         }
-
 
         struct S16WithS4
         {

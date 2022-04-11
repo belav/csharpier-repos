@@ -11,11 +11,14 @@ namespace System.Xml.Tests
     [TestCase(Name = "MaxCharacters Settings", Desc = "MaxCharacters Settings")]
     public partial class TCMaxSettings : TCXMLReaderBaseGeneral
     {
-        private long _defaultCharsEnt = (long)1e7;  // By default, entity resolving is limited to 10 million characters (On .NET Framework the default used to be zero (=unlimited) as LegacyXmlSettings was enabled)
+        private long _defaultCharsEnt = (long)1e7; // By default, entity resolving is limited to 10 million characters (On .NET Framework the default used to be zero (=unlimited) as LegacyXmlSettings was enabled)
         private long _defaultCharsDoc = 0;
         private long _maxVal = long.MaxValue;
         private long _bigVal = 100000;
-        private string _path = Path.Combine(FilePathUtil.GetStandardPath(), @"xml10\entityexpansion\");
+        private string _path = Path.Combine(
+            FilePathUtil.GetStandardPath(),
+            @"xml10\entityexpansion\"
+        );
         private string _path2 = Path.Combine(FilePathUtil.GetStandardPath(), @"XML10\ms_xml\");
 
         private string[] _skipFiles =
@@ -65,7 +68,10 @@ namespace System.Xml.Tests
             return TEST_PASS;
         }
 
-        [Variation(Pri = 2, Desc = "MaxSettings: set negative, get default values, set 10 and get 10")]
+        [Variation(
+            Pri = 2,
+            Desc = "MaxSettings: set negative, get default values, set 10 and get 10"
+        )]
         public int v3()
         {
             string xml = "<a/>";
@@ -89,7 +95,8 @@ namespace System.Xml.Tests
             rs.MaxCharactersInDocument = 10;
             using (XmlReader r = ReaderHelper.Create(new StringReader(xml), rs))
             {
-                while (r.Read()) ;
+                while (r.Read())
+                    ;
                 CError.Compare((int)r.Settings.MaxCharactersFromEntities, 10, "Error");
                 CError.Compare((int)r.Settings.MaxCharactersInDocument, 10, "Error");
             }
@@ -228,8 +235,13 @@ namespace System.Xml.Tests
             rs.DtdProcessing = DtdProcessing.Ignore;
             using (XmlReader reader = ReaderHelper.Create(new StringReader(xml), rs))
             {
-                while (reader.Read()) ;
-                CError.Compare(reader.Settings.MaxCharactersFromEntities, _defaultCharsEnt, "Error");
+                while (reader.Read())
+                    ;
+                CError.Compare(
+                    reader.Settings.MaxCharactersFromEntities,
+                    _defaultCharsEnt,
+                    "Error"
+                );
                 CError.Compare((int)reader.Settings.MaxCharactersInDocument, val, "Error");
             }
             return TEST_PASS;
@@ -263,7 +275,8 @@ namespace System.Xml.Tests
 
             using (XmlReader reader = ReaderHelper.Create(new StringReader(xml), rs))
             {
-                while (reader.Read()) ;
+                while (reader.Read())
+                    ;
                 CError.Compare((int)reader.Settings.MaxCharactersFromEntities, 1, "Error");
                 CError.Compare((int)reader.Settings.MaxCharactersInDocument, val, "Error");
             }
@@ -297,7 +310,8 @@ namespace System.Xml.Tests
 
             using (XmlReader reader = ReaderHelper.Create(new StringReader(xml), rs))
             {
-                while (reader.Read()) ;
+                while (reader.Read())
+                    ;
                 CError.Compare((int)reader.Settings.MaxCharactersFromEntities, 0, "Error");
                 CError.Compare((int)reader.Settings.MaxCharactersInDocument, 0, "Error");
             }
@@ -328,9 +342,18 @@ namespace System.Xml.Tests
 
             using (XmlReader reader = ReaderHelper.Create(new StringReader(xml), rs))
             {
-                while (reader.Read()) ;
-                CError.Compare((long)reader.Settings.MaxCharactersFromEntities, _defaultCharsEnt, "Error");
-                CError.Compare((long)reader.Settings.MaxCharactersInDocument, _defaultCharsDoc, "Error");
+                while (reader.Read())
+                    ;
+                CError.Compare(
+                    (long)reader.Settings.MaxCharactersFromEntities,
+                    _defaultCharsEnt,
+                    "Error"
+                );
+                CError.Compare(
+                    (long)reader.Settings.MaxCharactersInDocument,
+                    _defaultCharsDoc,
+                    "Error"
+                );
             }
             return TEST_PASS;
         }
@@ -354,7 +377,8 @@ namespace System.Xml.Tests
             {
                 try
                 {
-                    while (reader.Read()) ;
+                    while (reader.Read())
+                        ;
                 }
                 catch (XmlException)
                 {
@@ -384,7 +408,8 @@ namespace System.Xml.Tests
             {
                 using (XmlReader reader = ReaderHelper.Create(new StringReader(xml), rs))
                 {
-                    while (reader.Read()) ;
+                    while (reader.Read())
+                        ;
                 }
             }
             catch (XmlException)
@@ -396,10 +421,12 @@ namespace System.Xml.Tests
             return TEST_FAIL;
         }
 
-        private string _xml = @"<!DOCTYPE r [<!ENTITY e SYSTEM '" + Path.Combine(FilePathUtil.GetTestDataPath(), "XmlReader", "ent.ent") + @"'>]><r>&e;</r>";
+        private string _xml =
+            @"<!DOCTYPE r [<!ENTITY e SYSTEM '"
+            + Path.Combine(FilePathUtil.GetTestDataPath(), "XmlReader", "ent.ent")
+            + @"'>]><r>&e;</r>";
     }
 }
-
 
 internal class OneByteStream : Stream
 {
@@ -437,14 +464,8 @@ internal class OneByteStream : Stream
 
     public override long Position
     {
-        get
-        {
-            throw new Exception("The method or operation is not implemented.");
-        }
-        set
-        {
-            throw new Exception("The method or operation is not implemented.");
-        }
+        get { throw new Exception("The method or operation is not implemented."); }
+        set { throw new Exception("The method or operation is not implemented."); }
     }
 
     public override int Read(byte[] buffer, int offset, int count)

@@ -4,7 +4,6 @@ using System.Security;
 using System;
 using System.Runtime.InteropServices; // For SafeHandle
 
-
 /// <summary>
 ///SetHandle
 /// </summary>
@@ -37,12 +36,11 @@ public class SafeHandleSetHandle
             IntPtr myIptr = new IntPtr(1000);
             msh.MySetHandle(myIptr);
 
-            if (msh.GetHandle()!=myIptr)
+            if (msh.GetHandle() != myIptr)
             {
                 TestLibrary.TestFramework.LogError("001.1", "SetHandle has error ");
                 retVal = false;
             }
-
         }
         catch (Exception e)
         {
@@ -82,41 +80,47 @@ public class SafeHandleSetHandle
 
 [SecurityCritical]
 public class MySafeHandle : SafeHandle
-{   [SecurityCritical]
-    public MySafeHandle()
-        : base(IntPtr.Zero, true)
+{
+    [SecurityCritical]
+    public MySafeHandle() : base(IntPtr.Zero, true)
     {
         this.handle = new IntPtr(100);
     }
+
     bool InvalidValue = true;
     public override bool IsInvalid
     {
         [SecurityCritical]
         get { return InvalidValue; }
-
     }
+
     public bool MyReleaseInvoke()
     {
         return ReleaseHandle();
     }
+
     public void MySetHandle(IntPtr iptr)
     {
         this.SetHandle(iptr);
     }
+
     public IntPtr GetHandle()
     {
         return this.handle;
     }
+
     [DllImport("kernel32")]
     private static extern bool CloseHandle(IntPtr handle);
 
     [SecurityCritical]
     protected override bool ReleaseHandle()
     {
-        if (handle == IntPtr.Zero) return true;
+        if (handle == IntPtr.Zero)
+            return true;
         this.SetHandle(IntPtr.Zero);
         return true;
     }
+
     public bool CheckHandleIsRelease()
     {
         if (handle != IntPtr.Zero)
@@ -128,5 +132,4 @@ public class MySafeHandle : SafeHandle
             return false;
         }
     }
-   
 }

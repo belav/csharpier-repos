@@ -13,13 +13,8 @@ namespace Sample
 {
     public partial class Test
     {
-        List<BenchTask> tasks = new()
-        {
-            new AppStartTask(),
-            new ExceptionsTask(),
-            new JsonTask(),
-            new WebSocketTask()
-        };
+        List<BenchTask> tasks =
+            new() { new AppStartTask(), new ExceptionsTask(), new JsonTask(), new WebSocketTask() };
         static Test instance = new Test();
         Formatter formatter = new HTMLFormatter();
 
@@ -108,7 +103,10 @@ namespace Sample
             {
                 measurementIdx++;
 
-                if (Task.pattern == null || Task.pattern.Match(Task.Measurements[measurementIdx].Name).Success)
+                if (
+                    Task.pattern == null
+                    || Task.pattern.Match(Task.Measurements[measurementIdx].Name).Success
+                )
                     return true;
             }
 
@@ -131,7 +129,11 @@ namespace Sample
             if (measurementIdx == -1)
                 return ResultsSummary();
 
-            if (runIdx >= Task.Measurements[measurementIdx].NumberOfRuns && !NextMeasurement() && !NextTask())
+            if (
+                runIdx >= Task.Measurements[measurementIdx].NumberOfRuns
+                && !NextMeasurement()
+                && !NextTask()
+            )
                 return ResultsSummary();
 
             runIdx++;
@@ -161,7 +163,9 @@ namespace Sample
                 sb.Append($"{key}: {minTimes[key]}ms{formatter.NewLine}");
             }
 
-            sb.Append($"{formatter.NewLine}.md{formatter.NewLine}{formatter.CodeStart}| measurement | time |{formatter.NewLine}|-:|-:|{formatter.NewLine}");
+            sb.Append(
+                $"{formatter.NewLine}.md{formatter.NewLine}{formatter.CodeStart}| measurement | time |{formatter.NewLine}|-:|-:|{formatter.NewLine}"
+            );
             foreach (var key in minTimes.Keys)
             {
                 var time = minTimes[key];
@@ -171,7 +175,12 @@ namespace Sample
                     time *= 1000;
                     unit = "us";
                 }
-                sb.Append($"| {key.Replace('_', ' '),38} | {time,10:F4}{unit} |{formatter.NewLine}".Replace(" ", formatter.NonBreakingSpace));
+                sb.Append(
+                    $"| {key.Replace('_', ' '), 38} | {time, 10:F4}{unit} |{formatter.NewLine}".Replace(
+                        " ",
+                        formatter.NonBreakingSpace
+                    )
+                );
             }
             sb.Append($"{formatter.CodeEnd}");
 

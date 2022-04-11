@@ -17,11 +17,11 @@ namespace System.Net.Http
             this.HResult = ConvertErrorCodeToHR(error);
         }
 
-        public WinHttpException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        public WinHttpException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
-        public WinHttpException(int error, string message, Exception innerException) : base(message, innerException)
+        public WinHttpException(int error, string message, Exception innerException)
+            : base(message, innerException)
         {
             this.HResult = ConvertErrorCodeToHR(error);
         }
@@ -35,7 +35,8 @@ namespace System.Net.Http
             // the exception.
             unchecked((uint)error) switch
             {
-                Interop.WinHttp.ERROR_WINHTTP_CONNECTION_ERROR => unchecked((int)Interop.WinHttp.WININET_E_CONNECTION_RESET),
+                Interop.WinHttp.ERROR_WINHTTP_CONNECTION_ERROR
+                  => unchecked((int)Interop.WinHttp.WININET_E_CONNECTION_RESET),
 
                 // Marshal.GetHRForLastWin32Error can't be used as not all error codes originate from native code.
                 _ => Interop.HRESULT_FROM_WIN32(error),
@@ -52,16 +53,27 @@ namespace System.Net.Http
             return CreateExceptionUsingError(lastError, nameOfCalledFunction);
         }
 
-        public static WinHttpException CreateExceptionUsingError(int error, string nameOfCalledFunction)
+        public static WinHttpException CreateExceptionUsingError(
+            int error,
+            string nameOfCalledFunction
+        )
         {
             var e = new WinHttpException(error, GetErrorMessage(error, nameOfCalledFunction));
             ExceptionStackTrace.AddCurrentStack(e);
             return e;
         }
 
-        public static WinHttpException CreateExceptionUsingError(int error, string nameOfCalledFunction, Exception innerException)
+        public static WinHttpException CreateExceptionUsingError(
+            int error,
+            string nameOfCalledFunction,
+            Exception innerException
+        )
         {
-            var e = new WinHttpException(error, GetErrorMessage(error, nameOfCalledFunction), innerException);
+            var e = new WinHttpException(
+                error,
+                GetErrorMessage(error, nameOfCalledFunction),
+                innerException
+            );
             ExceptionStackTrace.AddCurrentStack(e);
             return e;
         }

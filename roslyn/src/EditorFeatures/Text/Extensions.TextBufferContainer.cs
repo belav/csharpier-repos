@@ -30,15 +30,28 @@ namespace Microsoft.CodeAnalysis.Text
                 Contract.ThrowIfNull(editorBuffer);
 
                 _weakEditorBuffer = new WeakReference<ITextBuffer>(editorBuffer);
-                editorBuffer.Properties.TryGetProperty(typeof(ITextBufferCloneService), out _textBufferCloneService);
-                _currentText = SnapshotSourceText.From(_textBufferCloneService, editorBuffer.CurrentSnapshot, this);
+                editorBuffer.Properties.TryGetProperty(
+                    typeof(ITextBufferCloneService),
+                    out _textBufferCloneService
+                );
+                _currentText = SnapshotSourceText.From(
+                    _textBufferCloneService,
+                    editorBuffer.CurrentSnapshot,
+                    this
+                );
             }
 
             /// <summary>
             /// A weak map of all Editor ITextBuffers and their associated SourceTextContainer
             /// </summary>
-            private static readonly ConditionalWeakTable<ITextBuffer, TextBufferContainer> s_textContainerMap = new ConditionalWeakTable<ITextBuffer, TextBufferContainer>();
-            private static readonly ConditionalWeakTable<ITextBuffer, TextBufferContainer>.CreateValueCallback s_createContainerCallback = CreateContainer;
+            private static readonly ConditionalWeakTable<
+                ITextBuffer,
+                TextBufferContainer
+            > s_textContainerMap = new ConditionalWeakTable<ITextBuffer, TextBufferContainer>();
+            private static readonly ConditionalWeakTable<
+                ITextBuffer,
+                TextBufferContainer
+            >.CreateValueCallback s_createContainerCallback = CreateContainer;
 
             public static TextBufferContainer From(ITextBuffer buffer)
             {
@@ -50,11 +63,10 @@ namespace Microsoft.CodeAnalysis.Text
                 return s_textContainerMap.GetValue(buffer, s_createContainerCallback);
             }
 
-            private static TextBufferContainer CreateContainer(ITextBuffer editorBuffer)
-                => new TextBufferContainer(editorBuffer);
+            private static TextBufferContainer CreateContainer(ITextBuffer editorBuffer) =>
+                new TextBufferContainer(editorBuffer);
 
-            public ITextBuffer? TryFindEditorTextBuffer()
-                => _weakEditorBuffer.GetTarget();
+            public ITextBuffer? TryFindEditorTextBuffer() => _weakEditorBuffer.GetTarget();
 
             public override SourceText CurrentText
             {
@@ -62,8 +74,8 @@ namespace Microsoft.CodeAnalysis.Text
                 {
                     var editorBuffer = this.TryFindEditorTextBuffer();
                     return editorBuffer != null
-                        ? editorBuffer.CurrentSnapshot.AsText()
-                        : _currentText;
+                      ? editorBuffer.CurrentSnapshot.AsText()
+                      : _currentText;
                 }
             }
 
@@ -82,7 +94,6 @@ namespace Microsoft.CodeAnalysis.Text
                         this.EtextChanged += value;
                     }
                 }
-
                 remove
                 {
                     lock (_gate)
@@ -114,7 +125,15 @@ namespace Microsoft.CodeAnalysis.Text
                 var newText = SnapshotSourceText.From(_textBufferCloneService, args.After);
                 _currentText = newText;
 
-                var changes = ImmutableArray.CreateRange(args.Changes.Select(c => new TextChangeRange(new TextSpan(c.OldSpan.Start, c.OldSpan.Length), c.NewLength)));
+                var changes = ImmutableArray.CreateRange(
+                    args.Changes.Select(
+                        c =>
+                            new TextChangeRange(
+                                new TextSpan(c.OldSpan.Start, c.OldSpan.Length),
+                                c.NewLength
+                            )
+                    )
+                );
                 var eventArgs = new TextChangeEventArgs(oldText, newText, changes);
 
                 this.LastEventArgs = eventArgs;

@@ -13,16 +13,25 @@ using Microsoft.JSInterop;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
-[UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026", Justification = "This type loads resx files. We don't expect it's dependencies to be trimmed in the ordinary case.")]
+[UnconditionalSuppressMessage(
+    "ReflectionAnalysis",
+    "IL2026",
+    Justification = "This type loads resx files. We don't expect it's dependencies to be trimmed in the ordinary case."
+)]
 internal class WebAssemblyCultureProvider
 {
     internal const string GetSatelliteAssemblies = "window.Blazor._internal.getSatelliteAssemblies";
-    internal const string ReadSatelliteAssemblies = "window.Blazor._internal.readSatelliteAssemblies";
+    internal const string ReadSatelliteAssemblies =
+        "window.Blazor._internal.readSatelliteAssemblies";
 
     private readonly IJSUnmarshalledRuntime _invoker;
 
     // For unit testing.
-    internal WebAssemblyCultureProvider(IJSUnmarshalledRuntime invoker, CultureInfo initialCulture, CultureInfo initialUICulture)
+    internal WebAssemblyCultureProvider(
+        IJSUnmarshalledRuntime invoker,
+        CultureInfo initialCulture,
+        CultureInfo initialUICulture
+    )
     {
         _invoker = invoker;
         InitialCulture = initialCulture;
@@ -40,7 +49,8 @@ internal class WebAssemblyCultureProvider
         Instance = new WebAssemblyCultureProvider(
             DefaultWebAssemblyJSRuntime.Instance,
             initialCulture: CultureInfo.CurrentCulture,
-            initialUICulture: CultureInfo.CurrentUICulture);
+            initialUICulture: CultureInfo.CurrentUICulture
+        );
     }
 
     public void ThrowIfCultureChangeIsUnsupported()
@@ -54,12 +64,26 @@ internal class WebAssemblyCultureProvider
         // It allows us to capture the initial .NET culture that is configured based on the browser language.
         // The current method is invoked as part of WebAssemblyHost.RunAsync i.e. after user code in Program.MainAsync has run
         // thus allows us to detect if the culture was changed by user code.
-        if (Environment.GetEnvironmentVariable("__BLAZOR_SHARDED_ICU") == "1" &&
-            ((!CultureInfo.CurrentCulture.Name.Equals(InitialCulture.Name, StringComparison.Ordinal) ||
-              !CultureInfo.CurrentUICulture.Name.Equals(InitialUICulture.Name, StringComparison.Ordinal))))
+        if (
+            Environment.GetEnvironmentVariable("__BLAZOR_SHARDED_ICU") == "1"
+            && (
+                (
+                    !CultureInfo.CurrentCulture.Name.Equals(
+                        InitialCulture.Name,
+                        StringComparison.Ordinal
+                    )
+                    || !CultureInfo.CurrentUICulture.Name.Equals(
+                        InitialUICulture.Name,
+                        StringComparison.Ordinal
+                    )
+                )
+            )
+        )
         {
-            throw new InvalidOperationException("Blazor detected a change in the application's culture that is not supported with the current project configuration. " +
-                "To change culture dynamically during startup, set <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData> in the application's project file.");
+            throw new InvalidOperationException(
+                "Blazor detected a change in the application's culture that is not supported with the current project configuration. "
+                    + "To change culture dynamically during startup, set <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData> in the application's project file."
+            );
         }
     }
 
@@ -76,11 +100,13 @@ internal class WebAssemblyCultureProvider
         // assemblies. We effectively want to resovle a Task<byte[][]> but there is no way to express this
         // using interop. We'll instead do this in two parts:
         // getSatelliteAssemblies resolves when all satellite assemblies to be loaded in .NET are fetched and available in memory.
-        var count = (int)await _invoker.InvokeUnmarshalled<string[], object?, object?, Task<object>>(
-            GetSatelliteAssemblies,
-            culturesToLoad.ToArray(),
-            null,
-            null);
+        var count = (int)
+            await _invoker.InvokeUnmarshalled<string[], object?, object?, Task<object>>(
+                GetSatelliteAssemblies,
+                culturesToLoad.ToArray(),
+                null,
+                null
+            );
 
         if (count == 0)
         {
@@ -92,7 +118,8 @@ internal class WebAssemblyCultureProvider
             ReadSatelliteAssemblies,
             null,
             null,
-            null);
+            null
+        );
 
         for (var i = 0; i < assemblies.Length; i++)
         {

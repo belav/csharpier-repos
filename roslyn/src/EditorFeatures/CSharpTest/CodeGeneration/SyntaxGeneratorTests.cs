@@ -23,14 +23,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeGeneration
         {
             var g = CSharpSyntaxGenerator.Instance;
 
-            using var workspace = TestWorkspace.CreateCSharp(@"
+            using var workspace = TestWorkspace.CreateCSharp(
+                @"
 class C
 {
     string M()
     {
         return ""a"";
     }
-}");
+}"
+            );
 
             var solution = workspace.CurrentSolution;
             var document = solution.Projects.Single().Documents.Single();
@@ -56,14 +58,16 @@ class C
         {
             var g = CSharpSyntaxGenerator.Instance;
 
-            using var workspace = TestWorkspace.CreateCSharp(@"
+            using var workspace = TestWorkspace.CreateCSharp(
+                @"
 class C
 {
     string M()
     {
         return ""a"";
     }
-}");
+}"
+            );
 
             var solution = workspace.CurrentSolution;
             var document = solution.Projects.Single().Documents.Single();
@@ -79,10 +83,15 @@ class C
 
             Assert.Empty(diagnostics);
 
-            var replacement = (ReturnStatementSyntax)g.ReturnStatement(g.NameOfExpression(g.IdentifierName("M")));
-            Assert.True(semanticModel.TryGetSpeculativeSemanticModel(
-                statement.SpanStart, replacement,
-                out var speculativeModel));
+            var replacement = (ReturnStatementSyntax)
+                g.ReturnStatement(g.NameOfExpression(g.IdentifierName("M")));
+            Assert.True(
+                semanticModel.TryGetSpeculativeSemanticModel(
+                    statement.SpanStart,
+                    replacement,
+                    out var speculativeModel
+                )
+            );
 
             // Make sure even in the speculative model that the compiler understands that this is a
             // the special `nameof` construct.

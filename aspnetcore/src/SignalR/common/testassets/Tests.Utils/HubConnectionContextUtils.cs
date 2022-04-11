@@ -10,14 +10,19 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.SignalR.Tests;
+
 #if TESTUTILS
 public
 #else
 internal
 #endif
-    static class HubConnectionContextUtils
+static class HubConnectionContextUtils
 {
-    public static HubConnectionContext Create(ConnectionContext connection, IHubProtocol protocol = null, string userIdentifier = null)
+    public static HubConnectionContext Create(
+        ConnectionContext connection,
+        IHubProtocol protocol = null,
+        string userIdentifier = null
+    )
     {
         var contextOptions = new HubConnectionContextOptions()
         {
@@ -44,12 +49,16 @@ internal
 
     public class MockHubConnectionContext : HubConnectionContext
     {
-        public MockHubConnectionContext(ConnectionContext connectionContext, HubConnectionContextOptions contextOptions, ILoggerFactory loggerFactory)
-            : base(connectionContext, contextOptions, loggerFactory)
-        {
-        }
+        public MockHubConnectionContext(
+            ConnectionContext connectionContext,
+            HubConnectionContextOptions contextOptions,
+            ILoggerFactory loggerFactory
+        ) : base(connectionContext, contextOptions, loggerFactory) { }
 
-        public override ValueTask WriteAsync(HubMessage message, CancellationToken cancellationToken = default)
+        public override ValueTask WriteAsync(
+            HubMessage message,
+            CancellationToken cancellationToken = default
+        )
         {
             throw new Exception();
         }

@@ -48,7 +48,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         Expression CreateMaterializeExpression(
             IEntityType entityType,
             string entityInstanceName,
-            Expression materializationExpression);
+            Expression materializationExpression
+        );
 
         /// <summary>
         ///     <para>

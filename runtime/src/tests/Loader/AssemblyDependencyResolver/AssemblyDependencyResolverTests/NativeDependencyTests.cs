@@ -17,7 +17,10 @@ namespace AssemblyDependencyResolverTests
         protected override void Initialize()
         {
             HostPolicyMock.Initialize(TestBasePath, CoreRoot);
-            _componentDirectory = Path.Combine(TestBasePath, $"TestComponent_{Guid.NewGuid().ToString().Substring(0, 8)}");
+            _componentDirectory = Path.Combine(
+                TestBasePath,
+                $"TestComponent_{Guid.NewGuid().ToString().Substring(0, 8)}"
+            );
 
             Directory.CreateDirectory(_componentDirectory);
             _componentAssemblyPath = CreateMockFile("TestComponent.dll");
@@ -71,7 +74,11 @@ namespace AssemblyDependencyResolverTests
         public void TestNameWithSuffixAndNoPrefixAndSuffix()
         {
             ValidateNativeLibraryResolutions("{0}.dll", "{0}.dll", OS.Windows | OS.OSX | OS.Linux);
-            ValidateNativeLibraryResolutions("{0}.dylib", "{0}.dylib", OS.Windows | OS.OSX | OS.Linux);
+            ValidateNativeLibraryResolutions(
+                "{0}.dylib",
+                "{0}.dylib",
+                OS.Windows | OS.OSX | OS.Linux
+            );
             ValidateNativeLibraryResolutions("{0}.so", "{0}.so", OS.Windows | OS.OSX | OS.Linux);
         }
 
@@ -144,15 +151,30 @@ namespace AssemblyDependencyResolverTests
 
         private void TestLookupWithSuffixPrefersUnmodifiedSuffixOnUnixes()
         {
-            ValidateNativeLibraryResolutionsWithTwoFiles("{0}.dylib", "lib{0}.dylib", "{0}.dylib", OS.OSX);
+            ValidateNativeLibraryResolutionsWithTwoFiles(
+                "{0}.dylib",
+                "lib{0}.dylib",
+                "{0}.dylib",
+                OS.OSX
+            );
             ValidateNativeLibraryResolutionsWithTwoFiles("{0}.so", "lib{0}.so", "{0}.so", OS.Linux);
-            ValidateNativeLibraryResolutionsWithTwoFiles("{0}.dylib", "{0}.dylib.dylib", "{0}.dylib", OS.OSX);
+            ValidateNativeLibraryResolutionsWithTwoFiles(
+                "{0}.dylib",
+                "{0}.dylib.dylib",
+                "{0}.dylib",
+                OS.OSX
+            );
             ValidateNativeLibraryResolutionsWithTwoFiles("{0}.so", "{0}.so.so", "{0}.so", OS.Linux);
         }
 
         private void TestLookupWithoutSuffixPrefersWithSuffixOnUnixes()
         {
-            ValidateNativeLibraryResolutionsWithTwoFiles("{0}.dylib", "lib{0}.dylib", "{0}", OS.OSX);
+            ValidateNativeLibraryResolutionsWithTwoFiles(
+                "{0}.dylib",
+                "lib{0}.dylib",
+                "{0}",
+                OS.OSX
+            );
             ValidateNativeLibraryResolutionsWithTwoFiles("{0}.so", "lib{0}.so", "{0}", OS.Linux);
             ValidateNativeLibraryResolutionsWithTwoFiles("{0}.dylib", "{0}", "{0}", OS.OSX);
             ValidateNativeLibraryResolutionsWithTwoFiles("{0}.so", "{0}", "{0}", OS.Linux);
@@ -163,13 +185,41 @@ namespace AssemblyDependencyResolverTests
         public void TestFullPathLookupWithMatchingFileName()
         {
             ValidateFullPathNativeLibraryResolutions("{0}", "{0}", OS.Windows | OS.OSX | OS.Linux);
-            ValidateFullPathNativeLibraryResolutions("{0}.dll", "{0}.dll", OS.Windows | OS.OSX | OS.Linux);
-            ValidateFullPathNativeLibraryResolutions("{0}.dylib", "{0}.dylib", OS.Windows | OS.OSX | OS.Linux);
-            ValidateFullPathNativeLibraryResolutions("{0}.so", "{0}.so", OS.Windows | OS.OSX | OS.Linux);
-            ValidateFullPathNativeLibraryResolutions("lib{0}", "lib{0}", OS.Windows | OS.OSX | OS.Linux);
-            ValidateFullPathNativeLibraryResolutions("lib{0}.dll", "lib{0}.dll", OS.Windows | OS.OSX | OS.Linux);
-            ValidateFullPathNativeLibraryResolutions("lib{0}.dylib", "lib{0}.dylib", OS.Windows | OS.OSX | OS.Linux);
-            ValidateFullPathNativeLibraryResolutions("lib{0}.so", "lib{0}.so", OS.Windows | OS.OSX | OS.Linux);
+            ValidateFullPathNativeLibraryResolutions(
+                "{0}.dll",
+                "{0}.dll",
+                OS.Windows | OS.OSX | OS.Linux
+            );
+            ValidateFullPathNativeLibraryResolutions(
+                "{0}.dylib",
+                "{0}.dylib",
+                OS.Windows | OS.OSX | OS.Linux
+            );
+            ValidateFullPathNativeLibraryResolutions(
+                "{0}.so",
+                "{0}.so",
+                OS.Windows | OS.OSX | OS.Linux
+            );
+            ValidateFullPathNativeLibraryResolutions(
+                "lib{0}",
+                "lib{0}",
+                OS.Windows | OS.OSX | OS.Linux
+            );
+            ValidateFullPathNativeLibraryResolutions(
+                "lib{0}.dll",
+                "lib{0}.dll",
+                OS.Windows | OS.OSX | OS.Linux
+            );
+            ValidateFullPathNativeLibraryResolutions(
+                "lib{0}.dylib",
+                "lib{0}.dylib",
+                OS.Windows | OS.OSX | OS.Linux
+            );
+            ValidateFullPathNativeLibraryResolutions(
+                "lib{0}.so",
+                "lib{0}.so",
+                OS.Windows | OS.OSX | OS.Linux
+            );
         }
 
         public void TestFullPathLookupWithDifferentFileName()
@@ -197,75 +247,101 @@ namespace AssemblyDependencyResolverTests
         private void ValidateNativeLibraryResolutions(
             string fileNamePattern,
             string lookupNamePattern,
-            OS resolvesOnOSes)
+            OS resolvesOnOSes
+        )
         {
             string newDirectory = Guid.NewGuid().ToString().Substring(0, 8);
-            string nativeLibraryPath = CreateMockFile(Path.Combine(newDirectory, string.Format(fileNamePattern, "NativeLibrary")));
+            string nativeLibraryPath = CreateMockFile(
+                Path.Combine(newDirectory, string.Format(fileNamePattern, "NativeLibrary"))
+            );
             ValidateNativeLibraryResolutions(
                 Path.GetDirectoryName(nativeLibraryPath),
                 nativeLibraryPath,
                 string.Format(lookupNamePattern, "NativeLibrary"),
-                resolvesOnOSes);
+                resolvesOnOSes
+            );
         }
 
         private void ValidateNativeLibraryWithRelativeLookupResolutions(
             string fileNamePattern,
             string lookupNamePattern,
-            OS resolvesOnOSes)
+            OS resolvesOnOSes
+        )
         {
             string newDirectory = Guid.NewGuid().ToString().Substring(0, 8);
-            string nativeLibraryPath = CreateMockFile(Path.Combine(newDirectory, string.Format(fileNamePattern, "NativeLibrary")));
+            string nativeLibraryPath = CreateMockFile(
+                Path.Combine(newDirectory, string.Format(fileNamePattern, "NativeLibrary"))
+            );
             ValidateNativeLibraryResolutions(
                 Path.GetDirectoryName(Path.GetDirectoryName(nativeLibraryPath)),
                 nativeLibraryPath,
                 Path.Combine(newDirectory, string.Format(lookupNamePattern, "NativeLibrary")),
-                resolvesOnOSes);
+                resolvesOnOSes
+            );
         }
 
         private void ValidateFullPathNativeLibraryResolutions(
             string fileNamePattern,
             string lookupNamePattern,
-            OS resolvesOnOSes)
+            OS resolvesOnOSes
+        )
         {
             string newDirectory = Guid.NewGuid().ToString().Substring(0, 8);
-            string nativeLibraryPath = CreateMockFile(Path.Combine(newDirectory, string.Format(fileNamePattern, "NativeLibrary")));
+            string nativeLibraryPath = CreateMockFile(
+                Path.Combine(newDirectory, string.Format(fileNamePattern, "NativeLibrary"))
+            );
             ValidateNativeLibraryResolutions(
                 Path.GetDirectoryName(nativeLibraryPath),
                 nativeLibraryPath,
-                Path.Combine(Path.GetDirectoryName(nativeLibraryPath), string.Format(lookupNamePattern, "NativeLibrary")),
-                resolvesOnOSes);
+                Path.Combine(
+                    Path.GetDirectoryName(nativeLibraryPath),
+                    string.Format(lookupNamePattern, "NativeLibrary")
+                ),
+                resolvesOnOSes
+            );
         }
 
         private void ValidateNativeLibraryResolutionsWithTwoFiles(
             string fileNameToResolvePattern,
             string otherFileNamePattern,
             string lookupNamePattern,
-            OS resolvesOnOSes)
+            OS resolvesOnOSes
+        )
         {
             string newDirectory = Guid.NewGuid().ToString().Substring(0, 8);
-            string nativeLibraryPath = CreateMockFile(Path.Combine(newDirectory, string.Format(fileNameToResolvePattern, "NativeLibrary")));
-            CreateMockFile(Path.Combine(newDirectory, string.Format(otherFileNamePattern, "NativeLibrary")));
+            string nativeLibraryPath = CreateMockFile(
+                Path.Combine(newDirectory, string.Format(fileNameToResolvePattern, "NativeLibrary"))
+            );
+            CreateMockFile(
+                Path.Combine(newDirectory, string.Format(otherFileNamePattern, "NativeLibrary"))
+            );
             ValidateNativeLibraryResolutions(
                 Path.GetDirectoryName(nativeLibraryPath),
                 nativeLibraryPath,
                 string.Format(lookupNamePattern, "NativeLibrary"),
-                resolvesOnOSes);
+                resolvesOnOSes
+            );
         }
 
         private void ValidateNativeLibraryResolutions(
             string nativeLibraryPaths,
             string expectedResolvedFilePath,
             string lookupName,
-            OS resolvesOnOSes)
+            OS resolvesOnOSes
+        )
         {
-            using (HostPolicyMock.Mock_corehost_resolve_component_dependencies(
-                0,
-                "",
-                $"{nativeLibraryPaths}",
-                ""))
+            using (
+                HostPolicyMock.Mock_corehost_resolve_component_dependencies(
+                    0,
+                    "",
+                    $"{nativeLibraryPaths}",
+                    ""
+                )
+            )
             {
                 AssemblyDependencyResolver resolver = new AssemblyDependencyResolver(
-                    Path.Combine(TestBasePath, _componentAssemblyPath));
+                    Path.Combine(TestBasePath, _componentAssemblyPath)
+                );
 
                 string result = resolver.ResolveUnmanagedDllToPath(lookupName);
                 if (OperatingSystem.IsWindows())

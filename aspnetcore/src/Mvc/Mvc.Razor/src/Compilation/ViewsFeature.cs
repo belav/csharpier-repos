@@ -13,5 +13,6 @@ public class ViewsFeature
     /// <summary>
     /// A list of <see cref="CompiledViewDescriptor"/>.
     /// </summary>
-    public IList<CompiledViewDescriptor> ViewDescriptors { get; } = new List<CompiledViewDescriptor>();
+    public IList<CompiledViewDescriptor> ViewDescriptors { get; } =
+        new List<CompiledViewDescriptor>();
 }

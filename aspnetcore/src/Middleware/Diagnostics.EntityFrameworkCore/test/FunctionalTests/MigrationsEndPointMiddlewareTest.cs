@@ -29,14 +29,17 @@ public class MigrationsEndPointMiddlewareTest
     public async Task Non_migration_requests_pass_thru()
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
-                .Configure(app => app
-                .UseMigrationsEndPoint()
-                .UseMiddleware<SuccessMiddleware>());
-            }).Build();
+            .ConfigureWebHost(
+                webHostBuilder =>
+                {
+                    webHostBuilder
+                        .UseTestServer()
+                        .Configure(
+                            app => app.UseMigrationsEndPoint().UseMiddleware<SuccessMiddleware>()
+                        );
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 
@@ -50,8 +53,7 @@ public class MigrationsEndPointMiddlewareTest
 
     class SuccessMiddleware
     {
-        public SuccessMiddleware(RequestDelegate next)
-        { }
+        public SuccessMiddleware(RequestDelegate next) { }
 
         public virtual async Task Invoke(HttpContext context)
         {
@@ -83,51 +85,71 @@ public class MigrationsEndPointMiddlewareTest
             var optionsBuilder = new DbContextOptionsBuilder();
             optionsBuilder.UseSqlite(database.ConnectionString);
 
-            var path = useCustomPath ? new PathString("/EndPoints/ApplyMyMigrations") : MigrationsEndPointOptions.DefaultPath;
+            var path = useCustomPath
+                ? new PathString("/EndPoints/ApplyMyMigrations")
+                : MigrationsEndPointOptions.DefaultPath;
 
             using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    if (useCustomPath)
+                .ConfigureWebHost(
+                    webHostBuilder =>
                     {
-                        app.UseMigrationsEndPoint(new MigrationsEndPointOptions
-                        {
-                            Path = path
-                        });
+                        webHostBuilder
+                            .UseTestServer()
+                            .Configure(
+                                app =>
+                                {
+                                    if (useCustomPath)
+                                    {
+                                        app.UseMigrationsEndPoint(
+                                            new MigrationsEndPointOptions { Path = path }
+                                        );
+                                    }
+                                    else
+                                    {
+                                        app.UseMigrationsEndPoint();
+                                    }
+                                }
+                            )
+                            .ConfigureServices(
+                                services =>
+                                {
+                                    services.AddDbContext<BloggingContextWithMigrations>(
+                                        options =>
+                                        {
+                                            options.UseSqlite(database.ConnectionString);
+                                        }
+                                    );
+                                }
+                            );
                     }
-                    else
-                    {
-                        app.UseMigrationsEndPoint();
-                    }
-                })
-                .ConfigureServices(services =>
-                {
-                    services.AddDbContext<BloggingContextWithMigrations>(options =>
-                    {
-                        options.UseSqlite(database.ConnectionString);
-                    });
-                });
-            }).Build();
+                )
+                .Build();
 
             await host.StartAsync();
 
             var server = host.GetTestServer();
 
-            using (var db = BloggingContextWithMigrations.CreateWithoutExternalServiceProvider(optionsBuilder.Options))
+            using (
+                var db = BloggingContextWithMigrations.CreateWithoutExternalServiceProvider(
+                    optionsBuilder.Options
+                )
+            )
             {
                 var databaseCreator = db.GetService<IRelationalDatabaseCreator>();
                 Assert.False(databaseCreator.Exists());
 
-                var formData = new FormUrlEncodedContent(new List<KeyValuePair<string, string>>
+                var formData = new FormUrlEncodedContent(
+                    new List<KeyValuePair<string, string>>
                     {
-                        new KeyValuePair<string, string>("context", typeof(BloggingContextWithMigrations).AssemblyQualifiedName)
-                    });
+                        new KeyValuePair<string, string>(
+                            "context",
+                            typeof(BloggingContextWithMigrations).AssemblyQualifiedName
+                        )
+                    }
+                );
 
-                HttpResponseMessage response = await server.CreateClient()
+                HttpResponseMessage response = await server
+                    .CreateClient()
                     .PostAsync("http://localhost" + path, formData);
 
                 Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
@@ -137,8 +159,14 @@ public class MigrationsEndPointMiddlewareTest
                 var historyRepository = db.GetService<IHistoryRepository>();
                 var appliedMigrations = historyRepository.GetAppliedMigrations();
                 Assert.Equal(2, appliedMigrations.Count);
-                Assert.Equal("111111111111111_MigrationOne", appliedMigrations.ElementAt(0).MigrationId);
-                Assert.Equal("222222222222222_MigrationTwo", appliedMigrations.ElementAt(1).MigrationId);
+                Assert.Equal(
+                    "111111111111111_MigrationOne",
+                    appliedMigrations.ElementAt(0).MigrationId
+                );
+                Assert.Equal(
+                    "222222222222222_MigrationTwo",
+                    appliedMigrations.ElementAt(1).MigrationId
+                );
             }
         }
     }
@@ -147,15 +175,20 @@ public class MigrationsEndPointMiddlewareTest
     public async Task Context_type_not_specified()
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
+            .ConfigureWebHost(
+                webHostBuilder =>
                 {
-                    app.UseMigrationsEndPoint();
-                });
-            }).Build();
+                    webHostBuilder
+                        .UseTestServer()
+                        .Configure(
+                            app =>
+                            {
+                                app.UseMigrationsEndPoint();
+                            }
+                        );
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 
@@ -163,11 +196,16 @@ public class MigrationsEndPointMiddlewareTest
 
         var formData = new FormUrlEncodedContent(new List<KeyValuePair<string, string>>());
 
-        var response = await server.CreateClient().PostAsync("http://localhost" + MigrationsEndPointOptions.DefaultPath, formData);
+        var response = await server
+            .CreateClient()
+            .PostAsync("http://localhost" + MigrationsEndPointOptions.DefaultPath, formData);
         var content = await response.Content.ReadAsStringAsync();
 
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
-        Assert.StartsWith(StringsHelpers.GetResourceString("MigrationsEndPointMiddleware_NoContextType"), content);
+        Assert.StartsWith(
+            StringsHelpers.GetResourceString("MigrationsEndPointMiddleware_NoContextType"),
+            content
+        );
         Assert.True(content.Length > 512);
     }
 
@@ -175,31 +213,46 @@ public class MigrationsEndPointMiddlewareTest
     public async Task Invalid_context_type_specified()
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
+            .ConfigureWebHost(
+                webHostBuilder =>
                 {
-                    app.UseMigrationsEndPoint();
-                });
-            }).Build();
+                    webHostBuilder
+                        .UseTestServer()
+                        .Configure(
+                            app =>
+                            {
+                                app.UseMigrationsEndPoint();
+                            }
+                        );
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 
         var server = host.GetTestServer();
 
         var typeName = "You won't find this type ;)";
-        var formData = new FormUrlEncodedContent(new List<KeyValuePair<string, string>>
-                {
-                    new KeyValuePair<string, string>("context", typeName)
-                });
+        var formData = new FormUrlEncodedContent(
+            new List<KeyValuePair<string, string>>
+            {
+                new KeyValuePair<string, string>("context", typeName)
+            }
+        );
 
-        var response = await server.CreateClient().PostAsync("http://localhost" + MigrationsEndPointOptions.DefaultPath, formData);
+        var response = await server
+            .CreateClient()
+            .PostAsync("http://localhost" + MigrationsEndPointOptions.DefaultPath, formData);
         var content = await response.Content.ReadAsStringAsync();
 
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
-        Assert.StartsWith(StringsHelpers.GetResourceString("FormatMigrationsEndPointMiddleware_ContextNotRegistered", typeName), content);
+        Assert.StartsWith(
+            StringsHelpers.GetResourceString(
+                "FormatMigrationsEndPointMiddleware_ContextNotRegistered",
+                typeName
+            ),
+            content
+        );
         Assert.True(content.Length > 512);
     }
 
@@ -207,28 +260,44 @@ public class MigrationsEndPointMiddlewareTest
     public async Task Context_not_registered_in_services()
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
-                .Configure(app => app.UseMigrationsEndPoint())
-                .ConfigureServices(services => services.AddEntityFrameworkSqlite());
-            }).Build();
+            .ConfigureWebHost(
+                webHostBuilder =>
+                {
+                    webHostBuilder
+                        .UseTestServer()
+                        .Configure(app => app.UseMigrationsEndPoint())
+                        .ConfigureServices(services => services.AddEntityFrameworkSqlite());
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 
         var server = host.GetTestServer();
 
-        var formData = new FormUrlEncodedContent(new List<KeyValuePair<string, string>>
-                {
-                    new KeyValuePair<string, string>("context", typeof(BloggingContext).AssemblyQualifiedName)
-                });
+        var formData = new FormUrlEncodedContent(
+            new List<KeyValuePair<string, string>>
+            {
+                new KeyValuePair<string, string>(
+                    "context",
+                    typeof(BloggingContext).AssemblyQualifiedName
+                )
+            }
+        );
 
-        var response = await server.CreateClient().PostAsync("http://localhost" + MigrationsEndPointOptions.DefaultPath, formData);
+        var response = await server
+            .CreateClient()
+            .PostAsync("http://localhost" + MigrationsEndPointOptions.DefaultPath, formData);
         var content = await response.Content.ReadAsStringAsync();
 
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
-        Assert.StartsWith(StringsHelpers.GetResourceString("FormatMigrationsEndPointMiddleware_ContextNotRegistered", typeof(BloggingContext).AssemblyQualifiedName), content);
+        Assert.StartsWith(
+            StringsHelpers.GetResourceString(
+                "FormatMigrationsEndPointMiddleware_ContextNotRegistered",
+                typeof(BloggingContext).AssemblyQualifiedName
+            ),
+            content
+        );
         Assert.True(content.Length > 512);
     }
 
@@ -240,33 +309,58 @@ public class MigrationsEndPointMiddlewareTest
         using (var database = SqlTestStore.CreateScratch())
         {
             using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
-                .Configure(app => app.UseMigrationsEndPoint())
-                .ConfigureServices(services =>
-                {
-                    services.AddDbContext<BloggingContextWithSnapshotThatThrows>(optionsBuilder =>
+                .ConfigureWebHost(
+                    webHostBuilder =>
                     {
-                        optionsBuilder.UseSqlite(database.ConnectionString);
-                    });
-                });
-            }).Build();
+                        webHostBuilder
+                            .UseTestServer()
+                            .Configure(app => app.UseMigrationsEndPoint())
+                            .ConfigureServices(
+                                services =>
+                                {
+                                    services.AddDbContext<BloggingContextWithSnapshotThatThrows>(
+                                        optionsBuilder =>
+                                        {
+                                            optionsBuilder.UseSqlite(database.ConnectionString);
+                                        }
+                                    );
+                                }
+                            );
+                    }
+                )
+                .Build();
 
             await host.StartAsync();
 
             var server = host.GetTestServer();
 
-            var formData = new FormUrlEncodedContent(new List<KeyValuePair<string, string>>
-                    {
-                        new KeyValuePair<string, string>("context", typeof(BloggingContextWithSnapshotThatThrows).AssemblyQualifiedName)
-                    });
+            var formData = new FormUrlEncodedContent(
+                new List<KeyValuePair<string, string>>
+                {
+                    new KeyValuePair<string, string>(
+                        "context",
+                        typeof(BloggingContextWithSnapshotThatThrows).AssemblyQualifiedName
+                    )
+                }
+            );
 
-            var ex = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await server.CreateClient().PostAsync("http://localhost" + MigrationsEndPointOptions.DefaultPath, formData));
+            var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
+                    await server
+                        .CreateClient()
+                        .PostAsync(
+                            "http://localhost" + MigrationsEndPointOptions.DefaultPath,
+                            formData
+                        )
+            );
 
-            Assert.StartsWith(StringsHelpers.GetResourceString("FormatMigrationsEndPointMiddleware_Exception", typeof(BloggingContextWithSnapshotThatThrows)), ex.Message);
+            Assert.StartsWith(
+                StringsHelpers.GetResourceString(
+                    "FormatMigrationsEndPointMiddleware_Exception",
+                    typeof(BloggingContextWithSnapshotThatThrows)
+                ),
+                ex.Message
+            );
             Assert.Equal("Welcome to the invalid migration!", ex.InnerException.Message);
         }
     }

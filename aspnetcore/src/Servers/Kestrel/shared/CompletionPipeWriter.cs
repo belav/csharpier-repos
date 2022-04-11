@@ -44,7 +44,10 @@ internal sealed class CompletionPipeWriter : PipeWriter
         return _inner.CompleteAsync(exception);
     }
 
-    public override ValueTask<FlushResult> WriteAsync(ReadOnlyMemory<byte> source, CancellationToken cancellationToken = default)
+    public override ValueTask<FlushResult> WriteAsync(
+        ReadOnlyMemory<byte> source,
+        CancellationToken cancellationToken = default
+    )
     {
         return _inner.WriteAsync(source, cancellationToken);
     }

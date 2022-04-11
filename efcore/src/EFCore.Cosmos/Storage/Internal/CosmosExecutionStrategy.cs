@@ -24,11 +24,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public CosmosExecutionStrategy(
-            DbContext context)
-            : this(context, DefaultMaxRetryCount)
-        {
-        }
+        public CosmosExecutionStrategy(DbContext context) : this(context, DefaultMaxRetryCount) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -36,11 +32,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public CosmosExecutionStrategy(
-            ExecutionStrategyDependencies dependencies)
-            : this(dependencies, DefaultMaxRetryCount)
-        {
-        }
+        public CosmosExecutionStrategy(ExecutionStrategyDependencies dependencies)
+            : this(dependencies, DefaultMaxRetryCount) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -48,12 +41,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public CosmosExecutionStrategy(
-            DbContext context,
-            int maxRetryCount)
-            : this(context, maxRetryCount, DefaultMaxDelay)
-        {
-        }
+        public CosmosExecutionStrategy(DbContext context, int maxRetryCount)
+            : this(context, maxRetryCount, DefaultMaxDelay) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -63,10 +52,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         /// </summary>
         public CosmosExecutionStrategy(
             ExecutionStrategyDependencies dependencies,
-            int maxRetryCount)
-            : this(dependencies, maxRetryCount, DefaultMaxDelay)
-        {
-        }
+            int maxRetryCount
+        ) : this(dependencies, maxRetryCount, DefaultMaxDelay) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -75,9 +62,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public CosmosExecutionStrategy(DbContext context, int maxRetryCount, TimeSpan maxRetryDelay)
-            : base(context, maxRetryCount, maxRetryDelay)
-        {
-        }
+            : base(context, maxRetryCount, maxRetryDelay) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -85,10 +70,11 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public CosmosExecutionStrategy(ExecutionStrategyDependencies dependencies, int maxRetryCount, TimeSpan maxRetryDelay)
-            : base(dependencies, maxRetryCount, maxRetryDelay)
-        {
-        }
+        public CosmosExecutionStrategy(
+            ExecutionStrategyDependencies dependencies,
+            int maxRetryCount,
+            TimeSpan maxRetryDelay
+        ) : base(dependencies, maxRetryCount, maxRetryDelay) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -102,13 +88,14 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             {
                 CosmosException cosmosException => IsTransient(cosmosException.StatusCode),
                 HttpException httpException => IsTransient(httpException.Response.StatusCode),
-                WebException webException => IsTransient(((HttpWebResponse)webException.Response!).StatusCode),
+                WebException webException
+                  => IsTransient(((HttpWebResponse)webException.Response!).StatusCode),
                 _ => false
             };
 
-            static bool IsTransient(HttpStatusCode statusCode)
-                => statusCode == HttpStatusCode.ServiceUnavailable
-                    || statusCode == HttpStatusCode.TooManyRequests;
+            static bool IsTransient(HttpStatusCode statusCode) =>
+                statusCode == HttpStatusCode.ServiceUnavailable
+                || statusCode == HttpStatusCode.TooManyRequests;
         }
 
         /// <summary>
@@ -121,9 +108,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         {
             var baseDelay = base.GetNextDelay(lastException);
             return baseDelay == null
-                ? null
-                : (CallOnWrappedException(lastException, GetDelayFromException)
-                    ?? baseDelay);
+              ? null
+              : (CallOnWrappedException(lastException, GetDelayFromException) ?? baseDelay);
         }
 
         private static TimeSpan? GetDelayFromException(Exception exception)
@@ -135,14 +121,20 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
 
                 case HttpException httpException:
                 {
-                    if (httpException.Response.Headers.TryGetValues("x-ms-retry-after-ms", out var values)
-                        && TryParseMsRetryAfter(values.FirstOrDefault(), out var delay))
+                    if (
+                        httpException.Response.Headers.TryGetValues(
+                            "x-ms-retry-after-ms",
+                            out var values
+                        ) && TryParseMsRetryAfter(values.FirstOrDefault(), out var delay)
+                    )
                     {
                         return delay;
                     }
 
-                    if (httpException.Response.Headers.TryGetValues("Retry-After", out values)
-                        && TryParseRetryAfter(values.FirstOrDefault(), out delay))
+                    if (
+                        httpException.Response.Headers.TryGetValues("Retry-After", out values)
+                        && TryParseRetryAfter(values.FirstOrDefault(), out delay)
+                    )
                     {
                         return delay;
                     }
@@ -154,7 +146,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
                 {
                     var response = (HttpWebResponse)webException.Response!;
 
-                    var delayString = response.Headers.GetValues("x-ms-retry-after-ms")?.FirstOrDefault();
+                    var delayString = response.Headers
+                        .GetValues("x-ms-retry-after-ms")
+                        ?.FirstOrDefault();
                     if (TryParseMsRetryAfter(delayString, out var delay))
                     {
                         return delay;
@@ -204,7 +198,14 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
                     return true;
                 }
 
-                if (DateTimeOffset.TryParse(delayString, CultureInfo.InvariantCulture, DateTimeStyles.None, out var retryDate))
+                if (
+                    DateTimeOffset.TryParse(
+                        delayString,
+                        CultureInfo.InvariantCulture,
+                        DateTimeStyles.None,
+                        out var retryDate
+                    )
+                )
                 {
                     delay = retryDate.Subtract(DateTimeOffset.Now);
                     delay = delay <= TimeSpan.Zero ? TimeSpan.FromMilliseconds(1) : delay;

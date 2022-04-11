@@ -45,7 +45,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             bool async,
             bool logParameterValues,
             DateTimeOffset startTime,
-            TimeSpan duration)
+            TimeSpan duration
+        )
             : base(
                 eventDefinition,
                 messageGenerator,
@@ -58,7 +59,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                 async,
                 logParameterValues,
                 startTime,
-                duration)
+                duration
+            )
         {
             Exception = exception;
         }
@@ -94,7 +96,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             bool logParameterValues,
             DateTimeOffset startTime,
             TimeSpan duration,
-            CommandSource commandSource)
+            CommandSource commandSource
+        )
             : base(
                 eventDefinition,
                 messageGenerator,
@@ -108,7 +111,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                 logParameterValues,
                 startTime,
                 duration,
-                commandSource)
+                commandSource
+            )
         {
             Exception = exception;
         }

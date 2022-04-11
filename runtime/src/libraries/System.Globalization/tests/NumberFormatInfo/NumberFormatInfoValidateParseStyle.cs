@@ -33,7 +33,10 @@ namespace System.Globalization.Tests
         {
             if (!valid)
             {
-                AssertExtensions.Throws<ArgumentException>(paramName, () => float.Parse("0", style));
+                AssertExtensions.Throws<ArgumentException>(
+                    paramName,
+                    () => float.Parse("0", style)
+                );
             }
             else
             {

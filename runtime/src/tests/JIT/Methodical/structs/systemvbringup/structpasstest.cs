@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 using System;
 using System.Runtime.CompilerServices;
+
 namespace structinreg
 {
     public class Program
@@ -34,7 +35,7 @@ namespace structinreg
                     return ret;
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
             }
@@ -67,6 +68,7 @@ namespace structinreg
         public object o3;
         public object o4;
     }
+
     struct Test23
     {
         public int i1;
@@ -105,7 +107,10 @@ namespace structinreg
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         static int test20(Test20 t1)
         {
-            Console.WriteLine("test1Res: {0}", t1.i1 + t1.i2 + t1.i3 + t1.i4 + t1.i5 + t1.i6 + t1.i7 + t1.i8);
+            Console.WriteLine(
+                "test1Res: {0}",
+                t1.i1 + t1.i2 + t1.i3 + t1.i4 + t1.i5 + t1.i6 + t1.i7 + t1.i8
+            );
             return t1.i1 + t1.i2 + t1.i3 + t1.i4 + t1.i5 + t1.i6 + t1.i7 + t1.i8;
         }
 
@@ -120,18 +125,67 @@ namespace structinreg
         static int test22(Test22 t3)
         {
             Console.WriteLine("test3Res: {0} {1} {2} {3}", t3.o1, t3.o2, t3.o3, t3.o4);
-            return (int)(t3.o1.GetHashCode() + t3.o2.GetHashCode() + t3.o3.GetHashCode() + t3.o4.GetHashCode());
+            return (int)(
+                t3.o1.GetHashCode()
+                + t3.o2.GetHashCode()
+                + t3.o3.GetHashCode()
+                + t3.o4.GetHashCode()
+            );
         }
 
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         static int test23(Test23 t4)
         {
-            Console.WriteLine("test4Res: {0}", t4.i1 + t4.i2, +t4.i3 + t4.i4 + t4.i5 + t4.i6 + t4.i7 + t4.i8 +
-                t4.i9 + t4.i10 + t4.i11 + t4.i12 + t4.i13 + t4.i14 +
-                t4.i15 + t4.i16 + t4.i17 + t4.i18 + t4.i19 + t4.i20 + t4.i21 + t4.i22 + t4.i23 + t4.i24);
-            return t4.i1 + t4.i2 + t4.i3 + t4.i4 + t4.i5 + t4.i6 + t4.i7 +
-                t4.i8 + t4.i9 + t4.i10 + t4.i11 + t4.i12 + t4.i13 + t4.i14 +
-                t4.i15 + t4.i16 + t4.i17 + t4.i18 + t4.i19 + t4.i20 + t4.i21 + t4.i22 + t4.i23 + t4.i24;
+            Console.WriteLine(
+                "test4Res: {0}",
+                t4.i1 + t4.i2,
+                +t4.i3
+                    + t4.i4
+                    + t4.i5
+                    + t4.i6
+                    + t4.i7
+                    + t4.i8
+                    + t4.i9
+                    + t4.i10
+                    + t4.i11
+                    + t4.i12
+                    + t4.i13
+                    + t4.i14
+                    + t4.i15
+                    + t4.i16
+                    + t4.i17
+                    + t4.i18
+                    + t4.i19
+                    + t4.i20
+                    + t4.i21
+                    + t4.i22
+                    + t4.i23
+                    + t4.i24
+            );
+            return t4.i1
+                + t4.i2
+                + t4.i3
+                + t4.i4
+                + t4.i5
+                + t4.i6
+                + t4.i7
+                + t4.i8
+                + t4.i9
+                + t4.i10
+                + t4.i11
+                + t4.i12
+                + t4.i13
+                + t4.i14
+                + t4.i15
+                + t4.i16
+                + t4.i17
+                + t4.i18
+                + t4.i19
+                + t4.i20
+                + t4.i21
+                + t4.i22
+                + t4.i23
+                + t4.i24;
         }
 
         [MethodImplAttribute(MethodImplOptions.NoInlining)]

@@ -20,7 +20,8 @@ internal class DynamicPageRouteValueTransformerMetadata : IDynamicEndpointMetada
         {
             throw new ArgumentException(
                 $"The provided type must be a subclass of {typeof(DynamicRouteValueTransformer)}",
-                nameof(selectorType));
+                nameof(selectorType)
+            );
         }
 
         SelectorType = selectorType;

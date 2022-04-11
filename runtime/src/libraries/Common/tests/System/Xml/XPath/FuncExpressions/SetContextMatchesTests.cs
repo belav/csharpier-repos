@@ -29,8 +29,13 @@ namespace XPathTests.FunctionalTests.Expressions.SetContextFunctionalTests
             namespaceManager.AddNamespace("NSbook", "http://book.htm");
             var expected = true;
 
-            Utils.XPathMatchTest(xml, testExpression, expected, namespaceManager: namespaceManager,
-                startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                xml,
+                testExpression,
+                expected,
+                namespaceManager: namespaceManager,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -62,8 +67,13 @@ namespace XPathTests.FunctionalTests.Expressions.SetContextFunctionalTests
             namespaceManager.AddNamespace("prefix2", "http://prefix2.htm");
             var expected = true;
 
-            Utils.XPathMatchTest(xml, testExpression, expected, namespaceManager: namespaceManager,
-                startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                xml,
+                testExpression,
+                expected,
+                namespaceManager: namespaceManager,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -81,8 +91,13 @@ namespace XPathTests.FunctionalTests.Expressions.SetContextFunctionalTests
             namespaceManager.AddNamespace("NSbook", "http://notbook.htm");
             var expected = false;
 
-            Utils.XPathMatchTest(xml, testExpression, expected, namespaceManager: namespaceManager,
-                startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                xml,
+                testExpression,
+                expected,
+                namespaceManager: namespaceManager,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -99,8 +114,12 @@ namespace XPathTests.FunctionalTests.Expressions.SetContextFunctionalTests
 
             namespaceManager.AddNamespace("", "http://book.htm");
 
-            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(xml, testExpression,
-                namespaceManager: namespaceManager, startingNodePath: startingNodePath);
+            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(
+                xml,
+                testExpression,
+                namespaceManager: namespaceManager,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -118,8 +137,13 @@ namespace XPathTests.FunctionalTests.Expressions.SetContextFunctionalTests
             namespaceManager.AddNamespace("", "http://default.htm");
             var expected = false;
 
-            Utils.XPathMatchTest(xml, testExpression, expected, namespaceManager: namespaceManager,
-                startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                xml,
+                testExpression,
+                expected,
+                namespaceManager: namespaceManager,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -137,8 +161,13 @@ namespace XPathTests.FunctionalTests.Expressions.SetContextFunctionalTests
             namespaceManager.AddNamespace("foo", "http://default.htm");
             var expected = true;
 
-            Utils.XPathMatchTest(xml, testExpression, expected, namespaceManager: namespaceManager,
-                startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                xml,
+                testExpression,
+                expected,
+                namespaceManager: namespaceManager,
+                startingNodePath: startingNodePath
+            );
         }
     }
 }

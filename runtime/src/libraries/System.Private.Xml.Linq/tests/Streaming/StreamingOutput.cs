@@ -45,10 +45,7 @@ namespace XDocumentTests.Streaming
 
         private XmlDiff Diff
         {
-            get
-            {
-                return _diff ?? (_diff = new XmlDiff());
-            }
+            get { return _diff ?? (_diff = new XmlDiff()); }
         }
 
         [Fact]
@@ -60,7 +57,10 @@ namespace XDocumentTests.Streaming
         [Fact]
         public void XNameAsEmptyStringConstructor()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () => new XStreamingElement(string.Empty));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new XStreamingElement(string.Empty)
+            );
             Assert.Throws<XmlException>(() => new XStreamingElement(" "));
         }
 
@@ -95,7 +95,10 @@ namespace XDocumentTests.Streaming
         public void XNameAndXElementObjectConstructor()
         {
             XElement contact = new XElement("contact", new XElement("phone", "925-555-0134"));
-            XStreamingElement streamElement = new XStreamingElement("contact", contact.Element("phone"));
+            XStreamingElement streamElement = new XStreamingElement(
+                "contact",
+                contact.Element("phone")
+            );
             GetFreshStream();
             streamElement.Save(_sourceStream);
             contact.Save(_targetStream);
@@ -122,7 +125,8 @@ namespace XDocumentTests.Streaming
                 "DOCTYPE",
                 "note",
                 "SYSTEM",
-                "<!ELEMENT note (to,from,heading,body)><!ELEMENT to (#PCDATA)><!ELEMENT from (#PCDATA)><!ELEMENT heading (#PCDATA)><!ELEMENT body (#PCDATA)>");
+                "<!ELEMENT note (to,from,heading,body)><!ELEMENT to (#PCDATA)><!ELEMENT from (#PCDATA)><!ELEMENT heading (#PCDATA)><!ELEMENT body (#PCDATA)>"
+            );
 
             XStreamingElement streamElement = new XStreamingElement("Root", node);
             Assert.Throws<InvalidOperationException>(() => streamElement.Save(new MemoryStream()));
@@ -181,7 +185,8 @@ namespace XDocumentTests.Streaming
             XElement contact = new XElement(
                 "contacts",
                 new XElement("contact1", "jane"),
-                new XElement("contact2", "john"));
+                new XElement("contact2", "john")
+            );
             List<object> list = new List<object>();
             list.Add(contact.Element("contact1"));
             list.Add(contact.Element("contact2"));
@@ -199,10 +204,12 @@ namespace XDocumentTests.Streaming
             XElement contact = new XElement(
                 "contact",
                 new XElement("name", "jane"),
-                new XElement("phone", new XAttribute("type", "home"), "925-555-0134"));
+                new XElement("phone", new XAttribute("type", "home"), "925-555-0134")
+            );
             XStreamingElement streamElement = new XStreamingElement(
                 "contact",
-                new object[] { contact.Element("name"), contact.Element("phone") });
+                new object[] { contact.Element("name"), contact.Element("phone") }
+            );
             GetFreshStream();
             streamElement.Save(_sourceStream);
             contact.Save(_targetStream);
@@ -236,8 +243,14 @@ namespace XDocumentTests.Streaming
         public void XMLPropertyGet()
         {
             XElement contact = new XElement("contact", new XElement("phone", "925-555-0134"));
-            XStreamingElement streamElement = new XStreamingElement("contact", contact.Element("phone"));
-            Assert.Equal(contact.ToString(SaveOptions.None), streamElement.ToString(SaveOptions.None));
+            XStreamingElement streamElement = new XStreamingElement(
+                "contact",
+                contact.Element("phone")
+            );
+            Assert.Equal(
+                contact.ToString(SaveOptions.None),
+                streamElement.ToString(SaveOptions.None)
+            );
         }
 
         [Fact]
@@ -280,7 +293,11 @@ namespace XDocumentTests.Streaming
         [Fact]
         public void AddAttribute()
         {
-            XElement contact = new XElement("phone", new XAttribute("type", "home"), "925-555-0134");
+            XElement contact = new XElement(
+                "phone",
+                new XAttribute("type", "home"),
+                "925-555-0134"
+            );
             XStreamingElement streamElement = new XStreamingElement("phone");
             streamElement.Add(contact.Attribute("type"));
             streamElement.Add("925-555-0134");
@@ -295,7 +312,11 @@ namespace XDocumentTests.Streaming
         [Fact]
         public void AddAttributeAfterContent()
         {
-            XElement contact = new XElement("phone", new XAttribute("type", "home"), "925-555-0134");
+            XElement contact = new XElement(
+                "phone",
+                new XAttribute("type", "home"),
+                "925-555-0134"
+            );
             XStreamingElement streamElement = new XStreamingElement("phone", "925-555-0134");
             streamElement.Add(contact.Attribute("type"));
             using (XmlWriter w = XmlWriter.Create(new MemoryStream(), null))
@@ -368,7 +389,11 @@ namespace XDocumentTests.Streaming
         public void AddIEnumerableOfXNodesPlusString()
         {
             InputSpace.Contacts(ref _xDoc, ref _xmlDoc);
-            XElement element = new XElement("contacts", _xDoc.Root.DescendantNodes(), "This String");
+            XElement element = new XElement(
+                "contacts",
+                _xDoc.Root.DescendantNodes(),
+                "This String"
+            );
             XStreamingElement streamElement = new XStreamingElement("contacts");
             streamElement.Add(_xDoc.Root.DescendantNodes(), "This String");
             GetFreshStream();
@@ -406,7 +431,8 @@ namespace XDocumentTests.Streaming
             XElement contact = new XElement(
                 "contacts",
                 new XElement("contact", "jane"),
-                new XElement("contact", "john"));
+                new XElement("contact", "john")
+            );
             XStreamingElement streamElement = new XStreamingElement("contacts", contact.Elements());
             GetFreshStream();
             TextWriter w = new StreamWriter(_sourceStream);
@@ -423,7 +449,8 @@ namespace XDocumentTests.Streaming
             XElement contact = new XElement(
                 "contacts",
                 new XElement("contact", "jane"),
-                new XElement("contact", "john"));
+                new XElement("contact", "john")
+            );
             XStreamingElement streamElement = new XStreamingElement("contacts", contact.Elements());
             GetFreshStream();
             streamElement.Save(_sourceStream);
@@ -447,8 +474,12 @@ namespace XDocumentTests.Streaming
             XElement contact = new XElement(
                 "contact",
                 new XElement("name", "jane"),
-                new XElement("phone", new XAttribute("type", "home"), "925-555-0134"));
-            XStreamingElement streamElement = new XStreamingElement("contact", new object[] { contact.Elements() });
+                new XElement("phone", new XAttribute("type", "home"), "925-555-0134")
+            );
+            XStreamingElement streamElement = new XStreamingElement(
+                "contact",
+                new object[] { contact.Elements() }
+            );
             foreach (XElement x in contact.Elements())
             {
                 x.Remove();
@@ -469,7 +500,8 @@ namespace XDocumentTests.Streaming
             XStreamingElement streamElement = new XStreamingElement(
                 "contact",
                 name,
-                new XStreamingElement("phones", phone));
+                new XStreamingElement("phones", phone)
+            );
             GetFreshStream();
             streamElement.Save(_sourceStream);
             contact.Save(_targetStream);
@@ -481,9 +513,16 @@ namespace XDocumentTests.Streaming
         public void NestedXStreamingElementPlusIEnumerable()
         {
             InputSpace.Contacts(ref _xDoc, ref _xmlDoc);
-            XElement element = new XElement("contacts", new XElement("Element", "Value"), _xDoc.Root.DescendantNodes());
+            XElement element = new XElement(
+                "contacts",
+                new XElement("Element", "Value"),
+                _xDoc.Root.DescendantNodes()
+            );
             XStreamingElement streamElement = new XStreamingElement("contacts");
-            streamElement.Add(new XStreamingElement("Element", "Value"), _xDoc.Root.DescendantNodes());
+            streamElement.Add(
+                new XStreamingElement("Element", "Value"),
+                _xDoc.Root.DescendantNodes()
+            );
             GetFreshStream();
             streamElement.Save(_sourceStream);
             element.Save(_targetStream);
@@ -500,7 +539,10 @@ namespace XDocumentTests.Streaming
             IEnumerable<XElement> elements = contact.Elements();
             name.Remove();
             phone.Remove();
-            XStreamingElement streamElement = new XStreamingElement("contact", new object[] { elements });
+            XStreamingElement streamElement = new XStreamingElement(
+                "contact",
+                new object[] { elements }
+            );
             GetFreshStream();
             streamElement.Save(_sourceStream);
             contact.Save(_targetStream);
@@ -516,7 +558,10 @@ namespace XDocumentTests.Streaming
             XElement contact = new XElement("contact", name, phone);
             // During debug this test will not work correctly since ToString() of
             // streamElement gets called for displaying the value in debugger local window.
-            XStreamingElement streamElement = new XStreamingElement("contact", GetElements(contact));
+            XStreamingElement streamElement = new XStreamingElement(
+                "contact",
+                GetElements(contact)
+            );
             GetFreshStream();
             contact.Save(_targetStream);
             _invokeStatus = true;

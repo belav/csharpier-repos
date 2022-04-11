@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Authorization;
 /// </summary>
 public class AuthorizationOptions
 {
-    private Dictionary<string, AuthorizationPolicy> PolicyMap { get; } = new Dictionary<string, AuthorizationPolicy>(StringComparer.OrdinalIgnoreCase);
+    private Dictionary<string, AuthorizationPolicy> PolicyMap { get; } =
+        new Dictionary<string, AuthorizationPolicy>(StringComparer.OrdinalIgnoreCase);
 
     /// <summary>
     /// Determines whether authentication handlers should be invoked after <see cref="AuthorizationHandlerContext.HasFailed"/>.
@@ -25,7 +26,8 @@ public class AuthorizationOptions
     /// <remarks>
     /// The default policy used when evaluating <see cref="IAuthorizeData"/> with no policy name specified.
     /// </remarks>
-    public AuthorizationPolicy DefaultPolicy { get; set; } = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+    public AuthorizationPolicy DefaultPolicy { get; set; } =
+        new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
 
     /// <summary>
     /// Gets or sets the fallback authorization policy used by <see cref="AuthorizationPolicy.CombineAsync(IAuthorizationPolicyProvider, IEnumerable{IAuthorizeData})"/>

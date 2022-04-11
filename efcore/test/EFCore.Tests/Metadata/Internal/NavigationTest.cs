@@ -36,7 +36,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             var fk = keylessType.AddForeignKey(fkProperty, key, entityType);
             Assert.Equal(
                 CoreStrings.NavigationToKeylessType(nameof(B.ManyAs), nameof(A)),
-                Assert.Throws<InvalidOperationException>(() => fk.SetPrincipalToDependent(nameof(B.ManyAs))).Message);
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => fk.SetPrincipalToDependent(nameof(B.ManyAs))
+                    )
+                    .Message
+            );
         }
 
         private IMutableForeignKey CreateForeignKey()
@@ -75,7 +80,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         private class E
         {
-            public static readonly PropertyInfo DeceptionProperty = typeof(E).GetProperty(nameof(Deception));
+            public static readonly PropertyInfo DeceptionProperty = typeof(E).GetProperty(
+                nameof(Deception)
+            );
 
             public E Deception { get; set; }
         }

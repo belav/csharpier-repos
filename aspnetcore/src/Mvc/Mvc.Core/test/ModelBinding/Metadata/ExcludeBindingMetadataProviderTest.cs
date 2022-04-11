@@ -18,9 +18,13 @@ public class ExcludeBindingMetadataProviderTest
         var key = ModelMetadataIdentity.ForProperty(
             typeof(Person).GetProperty(nameof(Person.Age)),
             typeof(int),
-            typeof(Person));
+            typeof(Person)
+        );
 
-        var context = new BindingMetadataProviderContext(key, new ModelAttributes(new object[0], new object[0], null));
+        var context = new BindingMetadataProviderContext(
+            key,
+            new ModelAttributes(new object[0], new object[0], null)
+        );
 
         context.BindingMetadata.IsBindingAllowed = initialValue;
 
@@ -42,9 +46,13 @@ public class ExcludeBindingMetadataProviderTest
         var key = ModelMetadataIdentity.ForProperty(
             typeof(Person).GetProperty(nameof(Person.Age)),
             typeof(int),
-            typeof(Person));
+            typeof(Person)
+        );
 
-        var context = new BindingMetadataProviderContext(key, new ModelAttributes(new object[0], new object[0], null));
+        var context = new BindingMetadataProviderContext(
+            key,
+            new ModelAttributes(new object[0], new object[0], null)
+        );
 
         context.BindingMetadata.IsBindingAllowed = initialValue;
 

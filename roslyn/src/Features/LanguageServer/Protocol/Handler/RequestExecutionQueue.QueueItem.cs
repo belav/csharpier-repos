@@ -71,7 +71,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 RequestTelemetryLogger telemetryLogger,
                 Action<Exception> handleQueueFailure,
                 Func<RequestContext?, CancellationToken, Task> callbackAsync,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 Metrics = new RequestMetrics(methodName, telemetryLogger);
 
@@ -92,7 +93,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             /// <summary>
             /// Processes the queued request. Exceptions that occur will be sent back to the requesting client, then re-thrown
             /// </summary>
-            public async Task CallbackAsync(RequestContext? context, CancellationToken cancellationToken)
+            public async Task CallbackAsync(
+                RequestContext? context,
+                CancellationToken cancellationToken
+            )
             {
                 // Restore our activity id so that logging/tracking works.
                 Trace.CorrelationManager.ActivityId = ActivityId;

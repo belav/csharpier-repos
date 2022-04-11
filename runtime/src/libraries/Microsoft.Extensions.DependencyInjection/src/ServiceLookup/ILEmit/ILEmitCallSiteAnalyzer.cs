@@ -6,7 +6,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
     // This class walks the service call site tree and tries to calculate approximate
     // code size to avoid array resizings during IL generation
     // It also detects if lock is required for scoped services resolution
-    internal sealed class ILEmitCallSiteAnalyzer : CallSiteVisitor<object, ILEmitCallSiteAnalysisResult>
+    internal sealed class ILEmitCallSiteAnalyzer
+        : CallSiteVisitor<object, ILEmitCallSiteAnalysisResult>
     {
         private const int ConstructorILSize = 6;
 
@@ -20,9 +21,15 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 
         internal static ILEmitCallSiteAnalyzer Instance { get; } = new ILEmitCallSiteAnalyzer();
 
-        protected override ILEmitCallSiteAnalysisResult VisitDisposeCache(ServiceCallSite transientCallSite, object argument) => VisitCallSiteMain(transientCallSite, argument);
+        protected override ILEmitCallSiteAnalysisResult VisitDisposeCache(
+            ServiceCallSite transientCallSite,
+            object argument
+        ) => VisitCallSiteMain(transientCallSite, argument);
 
-        protected override ILEmitCallSiteAnalysisResult VisitConstructor(ConstructorCallSite constructorCallSite, object argument)
+        protected override ILEmitCallSiteAnalysisResult VisitConstructor(
+            ConstructorCallSite constructorCallSite,
+            object argument
+        )
         {
             var result = new ILEmitCallSiteAnalysisResult(ConstructorILSize);
             foreach (ServiceCallSite callSite in constructorCallSite.ParameterCallSites)
@@ -32,20 +39,40 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             return result;
         }
 
-        protected override ILEmitCallSiteAnalysisResult VisitRootCache(ServiceCallSite singletonCallSite, object argument) => VisitCallSiteMain(singletonCallSite, argument);
+        protected override ILEmitCallSiteAnalysisResult VisitRootCache(
+            ServiceCallSite singletonCallSite,
+            object argument
+        ) => VisitCallSiteMain(singletonCallSite, argument);
 
-        protected override ILEmitCallSiteAnalysisResult VisitScopeCache(ServiceCallSite scopedCallSite, object argument)
+        protected override ILEmitCallSiteAnalysisResult VisitScopeCache(
+            ServiceCallSite scopedCallSite,
+            object argument
+        )
         {
-            return new ILEmitCallSiteAnalysisResult(ScopedILSize, hasScope: true).Add(VisitCallSiteMain(scopedCallSite, argument));
+            return new ILEmitCallSiteAnalysisResult(ScopedILSize, hasScope: true).Add(
+                VisitCallSiteMain(scopedCallSite, argument)
+            );
         }
 
-        protected override ILEmitCallSiteAnalysisResult VisitConstant(ConstantCallSite constantCallSite, object argument) => new ILEmitCallSiteAnalysisResult(ConstantILSize);
+        protected override ILEmitCallSiteAnalysisResult VisitConstant(
+            ConstantCallSite constantCallSite,
+            object argument
+        ) => new ILEmitCallSiteAnalysisResult(ConstantILSize);
 
-        protected override ILEmitCallSiteAnalysisResult VisitServiceProvider(ServiceProviderCallSite serviceProviderCallSite, object argument) => new ILEmitCallSiteAnalysisResult(ServiceProviderSize);
+        protected override ILEmitCallSiteAnalysisResult VisitServiceProvider(
+            ServiceProviderCallSite serviceProviderCallSite,
+            object argument
+        ) => new ILEmitCallSiteAnalysisResult(ServiceProviderSize);
 
-        protected override ILEmitCallSiteAnalysisResult VisitServiceScopeFactory(ServiceScopeFactoryCallSite serviceScopeFactoryCallSite, object argument) => new ILEmitCallSiteAnalysisResult(ConstantILSize);
+        protected override ILEmitCallSiteAnalysisResult VisitServiceScopeFactory(
+            ServiceScopeFactoryCallSite serviceScopeFactoryCallSite,
+            object argument
+        ) => new ILEmitCallSiteAnalysisResult(ConstantILSize);
 
-        protected override ILEmitCallSiteAnalysisResult VisitIEnumerable(IEnumerableCallSite enumerableCallSite, object argument)
+        protected override ILEmitCallSiteAnalysisResult VisitIEnumerable(
+            IEnumerableCallSite enumerableCallSite,
+            object argument
+        )
         {
             var result = new ILEmitCallSiteAnalysisResult(ConstructorILSize);
             foreach (ServiceCallSite callSite in enumerableCallSite.ServiceCallSites)
@@ -55,8 +82,12 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             return result;
         }
 
-        protected override ILEmitCallSiteAnalysisResult VisitFactory(FactoryCallSite factoryCallSite, object argument) => new ILEmitCallSiteAnalysisResult(FactoryILSize);
+        protected override ILEmitCallSiteAnalysisResult VisitFactory(
+            FactoryCallSite factoryCallSite,
+            object argument
+        ) => new ILEmitCallSiteAnalysisResult(FactoryILSize);
 
-        public ILEmitCallSiteAnalysisResult CollectGenerationInfo(ServiceCallSite callSite) => VisitCallSite(callSite, null);
+        public ILEmitCallSiteAnalysisResult CollectGenerationInfo(ServiceCallSite callSite) =>
+            VisitCallSite(callSite, null);
     }
 }

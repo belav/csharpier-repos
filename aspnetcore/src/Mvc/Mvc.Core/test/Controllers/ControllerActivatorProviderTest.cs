@@ -19,7 +19,8 @@ public class ControllerActivatorProviderTest
         // Arrange
         var expected = new object();
         var activator = new Mock<IControllerActivator>();
-        activator.Setup(a => a.Create(It.IsAny<ControllerContext>()))
+        activator
+            .Setup(a => a.Create(It.IsAny<ControllerContext>()))
             .Returns(expected)
             .Verifiable();
         var activatorProvider = new ControllerActivatorProvider(activator.Object);
@@ -48,15 +49,10 @@ public class ControllerActivatorProviderTest
         {
             ControllerTypeInfo = typeof(TestController).GetTypeInfo(),
         };
-        var serviceProvider = new ServiceCollection()
-            .AddSingleton(expected)
-            .BuildServiceProvider();
+        var serviceProvider = new ServiceCollection().AddSingleton(expected).BuildServiceProvider();
         var context = new ControllerContext
         {
-            HttpContext = new DefaultHttpContext
-            {
-                RequestServices = serviceProvider,
-            },
+            HttpContext = new DefaultHttpContext { RequestServices = serviceProvider, },
         };
 
         // Act
@@ -74,8 +70,7 @@ public class ControllerActivatorProviderTest
         // Arrange
         var expected = new object();
         var activator = new Mock<IControllerActivator>();
-        activator.Setup(a => a.Release(It.IsAny<ControllerContext>(), expected))
-            .Verifiable();
+        activator.Setup(a => a.Release(It.IsAny<ControllerContext>(), expected)).Verifiable();
         var activatorProvider = new ControllerActivatorProvider(activator.Object);
         var descriptor = new ControllerActionDescriptor
         {
@@ -149,8 +144,5 @@ public class ControllerActivatorProviderTest
         }
     }
 
-    private class TestService
-    {
-
-    }
+    private class TestService { }
 }

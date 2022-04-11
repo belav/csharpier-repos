@@ -42,16 +42,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             }
         }
 
-        private class DerivedWithoutPrivates : BaseWithPrivates
-        {
-        }
+        private class DerivedWithoutPrivates : BaseWithPrivates { }
 
         private class WithPrivatesContext : DbContext
         {
             public DbSet<DerivedWithoutPrivates> Entities { get; set; }
 
-            protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder
+            protected internal override void OnConfiguring(
+                DbContextOptionsBuilder optionsBuilder
+            ) =>
+                optionsBuilder
                     .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                     .UseInMemoryDatabase(nameof(WithPrivatesContext));
         }
@@ -111,15 +111,24 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
                 Assert.Equal(id, context.Entry(entity).Property(e => e.Id).CurrentValue);
                 Assert.Equal("Foo!", context.Entry(entity).Property(e => e.Code).CurrentValue);
-                Assert.Equal("Bar!", context.Entry(entity).Property(e => e.Description).CurrentValue);
+                Assert.Equal(
+                    "Bar!",
+                    context.Entry(entity).Property(e => e.Description).CurrentValue
+                );
 
                 context.Entry(entity).Property(e => e.Code).CurrentValue = "Foooo!";
                 context.Entry(entity).Property(e => e.Description).CurrentValue = "Barrr!";
 
                 Assert.Equal("Foo!", context.Entry(entity).Property(e => e.Code).OriginalValue);
-                Assert.Equal("Bar!", context.Entry(entity).Property(e => e.Description).OriginalValue);
+                Assert.Equal(
+                    "Bar!",
+                    context.Entry(entity).Property(e => e.Description).OriginalValue
+                );
                 Assert.Equal("Foooo!", context.Entry(entity).Property(e => e.Code).CurrentValue);
-                Assert.Equal("Barrr!", context.Entry(entity).Property(e => e.Description).CurrentValue);
+                Assert.Equal(
+                    "Barrr!",
+                    context.Entry(entity).Property(e => e.Description).CurrentValue
+                );
             }
         }
 
@@ -211,10 +220,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             RunConvention(entityBuilder);
 
             Assert.Equal(
-                typeof(EntityWithEveryPrimitive)
-                    .GetRuntimeProperties()
-                    .Select(p => p.Name),
-                entityBuilder.Metadata.GetProperties().Select(p => p.Name));
+                typeof(EntityWithEveryPrimitive).GetRuntimeProperties().Select(p => p.Name),
+                entityBuilder.Metadata.GetProperties().Select(p => p.Name)
+            );
         }
 
         private class EntityWithNoPrimitives
@@ -234,16 +242,22 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
         private void RunConvention(InternalEntityTypeBuilder entityTypeBuilder)
         {
-            var context = new ConventionContext<IConventionEntityTypeBuilder>(entityTypeBuilder.Metadata.Model.ConventionDispatcher);
+            var context = new ConventionContext<IConventionEntityTypeBuilder>(
+                entityTypeBuilder.Metadata.Model.ConventionDispatcher
+            );
 
-            new PropertyDiscoveryConvention(CreateDependencies())
-                .ProcessEntityTypeAdded(entityTypeBuilder, context);
+            new PropertyDiscoveryConvention(CreateDependencies()).ProcessEntityTypeAdded(
+                entityTypeBuilder,
+                context
+            );
 
             Assert.False(context.ShouldStopProcessing());
         }
 
-        private ProviderConventionSetBuilderDependencies CreateDependencies()
-            => InMemoryTestHelpers.Instance.CreateContextServices().GetRequiredService<ProviderConventionSetBuilderDependencies>();
+        private ProviderConventionSetBuilderDependencies CreateDependencies() =>
+            InMemoryTestHelpers.Instance
+                .CreateContextServices()
+                .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
         private InternalEntityTypeBuilder CreateInternalEntityBuilder<T>()
         {

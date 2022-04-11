@@ -28,8 +28,8 @@ public class PageHandlerExecutingContext : FilterContext
         IList<IFilterMetadata> filters,
         HandlerMethodDescriptor? handlerMethod,
         IDictionary<string, object?> handlerArguments,
-        object handlerInstance)
-        : base(pageContext, filters)
+        object handlerInstance
+    ) : base(pageContext, filters)
     {
         if (handlerArguments == null)
         {

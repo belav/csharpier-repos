@@ -32,7 +32,17 @@ internal static class SpaProxy
     // Don't forward User-Agent/Accept because of https://github.com/aspnet/JavaScriptServices/issues/1469
     // Others just aren't applicable in proxy scenarios
     private static readonly HashSet<string> NotForwardedWebSocketHeaders = new HashSet<string>(
-        new[] { "Accept", "Connection", "Host", "User-Agent", "Upgrade", "Sec-WebSocket-Key", "Sec-WebSocket-Protocol", "Sec-WebSocket-Version" },
+        new[]
+        {
+            "Accept",
+            "Connection",
+            "Host",
+            "User-Agent",
+            "Upgrade",
+            "Sec-WebSocket-Key",
+            "Sec-WebSocket-Protocol",
+            "Sec-WebSocket-Version"
+        },
         StringComparer.OrdinalIgnoreCase
     );
 
@@ -44,16 +54,9 @@ internal static class SpaProxy
 
     public static HttpClient CreateHttpClientForProxy(TimeSpan requestTimeout)
     {
-        var handler = new HttpClientHandler
-        {
-            AllowAutoRedirect = false,
-            UseCookies = false,
-        };
+        var handler = new HttpClientHandler { AllowAutoRedirect = false, UseCookies = false, };
 
-        return new HttpClient(handler)
-        {
-            Timeout = requestTimeout
-        };
+        return new HttpClient(handler) { Timeout = requestTimeout };
     }
 
     public static async Task<bool> PerformProxyRequest(
@@ -61,36 +64,42 @@ internal static class SpaProxy
         HttpClient httpClient,
         Task<Uri> baseUriTask,
         CancellationToken applicationStoppingToken,
-        bool proxy404s)
+        bool proxy404s
+    )
     {
         // Stop proxying if either the server or client wants to disconnect
-        var proxyCancellationToken = CancellationTokenSource.CreateLinkedTokenSource(
-            context.RequestAborted,
-            applicationStoppingToken).Token;
+        var proxyCancellationToken = CancellationTokenSource
+            .CreateLinkedTokenSource(context.RequestAborted, applicationStoppingToken)
+            .Token;
 
         // We allow for the case where the target isn't known ahead of time, and want to
         // delay proxied requests until the target becomes known. This is useful, for example,
         // when proxying to Angular CLI middleware: we won't know what port it's listening
         // on until it finishes starting up.
         var baseUri = await baseUriTask;
-        var targetUri = new Uri(
-            baseUri,
-            context.Request.Path + context.Request.QueryString);
+        var targetUri = new Uri(baseUri, context.Request.Path + context.Request.QueryString);
 
         try
         {
             if (context.WebSockets.IsWebSocketRequest)
             {
-                await AcceptProxyWebSocketRequest(context, ToWebSocketScheme(targetUri), proxyCancellationToken);
+                await AcceptProxyWebSocketRequest(
+                    context,
+                    ToWebSocketScheme(targetUri),
+                    proxyCancellationToken
+                );
                 return true;
             }
             else
             {
                 using (var requestMessage = CreateProxyHttpRequest(context, targetUri))
-                using (var responseMessage = await httpClient.SendAsync(
-                    requestMessage,
-                    HttpCompletionOption.ResponseHeadersRead,
-                    proxyCancellationToken))
+                using (
+                    var responseMessage = await httpClient.SendAsync(
+                        requestMessage,
+                        HttpCompletionOption.ResponseHeadersRead,
+                        proxyCancellationToken
+                    )
+                )
                 {
                     if (!proxy404s)
                     {
@@ -122,11 +131,13 @@ internal static class SpaProxy
         catch (HttpRequestException ex)
         {
             throw new HttpRequestException(
-                $"Failed to proxy the request to {targetUri.ToString()}, because the request to " +
-                $"the proxy target failed. Check that the proxy target server is running and " +
-                $"accepting requests to {baseUri.ToString()}.\n\n" +
-                $"The underlying exception message was '{ex.Message}'." +
-                $"Check the InnerException for more details.", ex);
+                $"Failed to proxy the request to {targetUri.ToString()}, because the request to "
+                    + $"the proxy target failed. Check that the proxy target server is running and "
+                    + $"accepting requests to {baseUri.ToString()}.\n\n"
+                    + $"The underlying exception message was '{ex.Message}'."
+                    + $"Check the InnerException for more details.",
+                ex
+            );
         }
     }
 
@@ -136,10 +147,12 @@ internal static class SpaProxy
 
         var requestMessage = new HttpRequestMessage();
         var requestMethod = request.Method;
-        if (!HttpMethods.IsGet(requestMethod) &&
-            !HttpMethods.IsHead(requestMethod) &&
-            !HttpMethods.IsDelete(requestMethod) &&
-            !HttpMethods.IsTrace(requestMethod))
+        if (
+            !HttpMethods.IsGet(requestMethod)
+            && !HttpMethods.IsHead(requestMethod)
+            && !HttpMethods.IsDelete(requestMethod)
+            && !HttpMethods.IsTrace(requestMethod)
+        )
         {
             var streamContent = new StreamContent(request.Body);
             requestMessage.Content = streamContent;
@@ -153,9 +166,15 @@ internal static class SpaProxy
                 continue;
             }
 
-            if (!requestMessage.Headers.TryAddWithoutValidation(header.Key, header.Value.ToArray()) && requestMessage.Content != null)
+            if (
+                !requestMessage.Headers.TryAddWithoutValidation(header.Key, header.Value.ToArray())
+                && requestMessage.Content != null
+            )
             {
-                requestMessage.Content?.Headers.TryAddWithoutValidation(header.Key, header.Value.ToArray());
+                requestMessage.Content?.Headers.TryAddWithoutValidation(
+                    header.Key,
+                    header.Value.ToArray()
+                );
             }
         }
 
@@ -166,13 +185,21 @@ internal static class SpaProxy
         return requestMessage;
     }
 
-    private static async Task CopyProxyHttpResponse(HttpContext context, HttpResponseMessage responseMessage, CancellationToken cancellationToken)
+    private static async Task CopyProxyHttpResponse(
+        HttpContext context,
+        HttpResponseMessage responseMessage,
+        CancellationToken cancellationToken
+    )
     {
         context.Response.StatusCode = (int)responseMessage.StatusCode;
         foreach (var header in responseMessage.Headers)
         {
-            if ((HttpProtocol.IsHttp2(context.Request.Protocol) || HttpProtocol.IsHttp3(context.Request.Protocol))
-                && InvalidH2H3Headers.Contains(header.Key))
+            if (
+                (
+                    HttpProtocol.IsHttp2(context.Request.Protocol)
+                    || HttpProtocol.IsHttp3(context.Request.Protocol)
+                ) && InvalidH2H3Headers.Contains(header.Key)
+            )
             {
                 continue;
             }
@@ -187,9 +214,15 @@ internal static class SpaProxy
         // SendAsync removes chunking from the response. This removes the header so it doesn't expect a chunked response.
         context.Response.Headers.Remove("transfer-encoding");
 
-        using (var responseStream = await responseMessage.Content.ReadAsStreamAsync(cancellationToken))
+        using (
+            var responseStream = await responseMessage.Content.ReadAsStreamAsync(cancellationToken)
+        )
         {
-            await responseStream.CopyToAsync(context.Response.Body, StreamCopyBufferSize, cancellationToken);
+            await responseStream.CopyToAsync(
+                context.Response.Body,
+                StreamCopyBufferSize,
+                cancellationToken
+            );
         }
     }
 
@@ -213,7 +246,11 @@ internal static class SpaProxy
         return uriBuilder.Uri;
     }
 
-    private static async Task<bool> AcceptProxyWebSocketRequest(HttpContext context, Uri destinationUri, CancellationToken cancellationToken)
+    private static async Task<bool> AcceptProxyWebSocketRequest(
+        HttpContext context,
+        Uri destinationUri,
+        CancellationToken cancellationToken
+    )
     {
         if (context == null)
         {
@@ -276,14 +313,20 @@ internal static class SpaProxy
                 var bufferSize = DefaultWebSocketBufferSize;
                 await Task.WhenAll(
                     PumpWebSocket(client, server, bufferSize, cancellationToken),
-                    PumpWebSocket(server, client, bufferSize, cancellationToken));
+                    PumpWebSocket(server, client, bufferSize, cancellationToken)
+                );
             }
 
             return true;
         }
     }
 
-    private static async Task PumpWebSocket(WebSocket source, WebSocket destination, int bufferSize, CancellationToken cancellationToken)
+    private static async Task PumpWebSocket(
+        WebSocket source,
+        WebSocket destination,
+        int bufferSize,
+        CancellationToken cancellationToken
+    )
     {
         if (bufferSize <= 0)
         {
@@ -316,15 +359,27 @@ internal static class SpaProxy
             var result = resultTask.Result; // We know it's completed already
             if (result.MessageType == WebSocketMessageType.Close)
             {
-                if (destination.State == WebSocketState.Open || destination.State == WebSocketState.CloseReceived)
+                if (
+                    destination.State == WebSocketState.Open
+                    || destination.State == WebSocketState.CloseReceived
+                )
                 {
-                    await destination.CloseOutputAsync(source.CloseStatus!.Value, source.CloseStatusDescription, cancellationToken);
+                    await destination.CloseOutputAsync(
+                        source.CloseStatus!.Value,
+                        source.CloseStatusDescription,
+                        cancellationToken
+                    );
                 }
 
                 return;
             }
 
-            await destination.SendAsync(new ArraySegment<byte>(buffer, 0, result.Count), result.MessageType, result.EndOfMessage, cancellationToken);
+            await destination.SendAsync(
+                new ArraySegment<byte>(buffer, 0, result.Count),
+                result.MessageType,
+                result.EndOfMessage,
+                cancellationToken
+            );
         }
     }
 }

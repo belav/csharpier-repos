@@ -15,8 +15,11 @@ namespace System.Web.Http.Controllers
         private readonly IAuthorizationFilter[] _filters;
         private readonly IHttpActionResult _innerResult;
 
-        public AuthorizationFilterResult(HttpActionContext context, IAuthorizationFilter[] filters,
-            IHttpActionResult innerResult)
+        public AuthorizationFilterResult(
+            HttpActionContext context,
+            IAuthorizationFilter[] filters,
+            IHttpActionResult innerResult
+        )
         {
             Contract.Assert(context != null);
             Contract.Assert(filters != null);
@@ -31,16 +34,24 @@ namespace System.Web.Http.Controllers
         {
             // We need to reverse the filter list so that least specific filters (Global) get run first and the most
             // specific filters (Action) get run last.
-            Func<Task<HttpResponseMessage>> result = () => _innerResult.ExecuteAsync(cancellationToken);
+            Func<Task<HttpResponseMessage>> result = () =>
+                _innerResult.ExecuteAsync(cancellationToken);
             for (int i = _filters.Length - 1; i >= 0; i--)
             {
                 IAuthorizationFilter filter = _filters[i];
-                Func<Func<Task<HttpResponseMessage>>, IAuthorizationFilter, Func<Task<HttpResponseMessage>>>
-                    chainContinuation = (continuation, innerFilter) =>
-                    {
-                        return () => innerFilter.ExecuteAuthorizationFilterAsync(_context, cancellationToken,
-                            continuation);
-                    };
+                Func<
+                    Func<Task<HttpResponseMessage>>,
+                    IAuthorizationFilter,
+                    Func<Task<HttpResponseMessage>>
+                > chainContinuation = (continuation, innerFilter) =>
+                {
+                    return () =>
+                        innerFilter.ExecuteAuthorizationFilterAsync(
+                            _context,
+                            cancellationToken,
+                            continuation
+                        );
+                };
                 result = chainContinuation(result, filter);
             }
 
