@@ -3656,7 +3656,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                         select gear
                     ).AsTracking()
                     join tag in ss.Set<CogTag>() on gear.Nickname equals tag.GearNickName
-                    orderby gear.Nickname ,tag.Id
+                    orderby gear.Nickname, tag.Id
                     select gear.Nickname,
                 assertOrder: true
             );
@@ -3773,7 +3773,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 async,
                 ss =>
                     from g in ss.Set<Gear>().Where(g => !g.HasSoulPatch).Take(999)
-                    orderby g.FullName ,g.Rank
+                    orderby g.FullName, g.Rank
                     select g.FullName,
                 assertOrder: true
             );
@@ -4202,7 +4202,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     from g in ss.Set<Gear>()
                     from o in ss.Set<Gear>().OfType<Officer>()
                     where g.Equals(o)
-                    orderby g.Nickname ,o.Nickname
+                    orderby g.Nickname, o.Nickname
                     select new { Nickname1 = g.Nickname, Nickname2 = o.Nickname },
                 assertOrder: true
             );
@@ -5182,7 +5182,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 async,
                 ss =>
                     from o in ss.Set<Gear>().OfType<Officer>()
-                    orderby o.HasSoulPatch descending,o.Tag.Note
+                    orderby o.HasSoulPatch descending, o.Tag.Note
                     where o.Reports.Any()
                     select o.FullName,
                 assertOrder: true
@@ -5199,14 +5199,14 @@ namespace Microsoft.EntityFrameworkCore.Query
                 async,
                 ss =>
                     from o in ss.Set<Gear>().OfType<Officer>()
-                    orderby o.HasSoulPatch descending,o.Tag.Note
+                    orderby o.HasSoulPatch descending, o.Tag.Note
                     where o.Reports.Any()
                     select new
                     {
                         o.FullName,
                         OuterCollection2 = (
                             from www in o.Tag.Gear.Weapons
-                            orderby www.IsAutomatic ,www.Owner.Nickname descending
+                            orderby www.IsAutomatic, www.Owner.Nickname descending
                             select www
                         ).ToList()
                     },
@@ -5229,15 +5229,15 @@ namespace Microsoft.EntityFrameworkCore.Query
                 async,
                 ss =>
                     from o in ss.Set<Gear>().OfType<Officer>()
-                    orderby o.HasSoulPatch descending,o.Tag.Note
+                    orderby o.HasSoulPatch descending, o.Tag.Note
                     where o.Reports.Any()
                     select new
                     {
                         o.FullName,
                         OuterCollection2 = (
                             from www in o.Tag.Gear.Weapons
-                            orderby www.IsAutomatic ,www.Owner.Nickname descending
-                            orderby www.IsAutomatic ,www.Owner.Nickname descending
+                            orderby www.IsAutomatic, www.Owner.Nickname descending
+                            orderby www.IsAutomatic, www.Owner.Nickname descending
                             select www
                         ).ToList()
                     },
@@ -5260,14 +5260,14 @@ namespace Microsoft.EntityFrameworkCore.Query
                 async,
                 ss =>
                     from o in ss.Set<Gear>().OfType<Officer>()
-                    orderby o.HasSoulPatch descending,o.Tag.Note
+                    orderby o.HasSoulPatch descending, o.Tag.Note
                     where o.Reports.Any()
                     select new
                     {
                         o.FullName,
                         OuterCollection2 = (
                             from www in o.Tag.Gear.Weapons
-                            orderby www.Id descending,www.Owner.Weapons.Count
+                            orderby www.Id descending, www.Owner.Weapons.Count
                             select www
                         ).ToList()
                     },
@@ -5288,7 +5288,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 async,
                 ss =>
                     from o in ss.Set<Gear>().OfType<Officer>()
-                    orderby o.HasSoulPatch descending,o.Tag.Note
+                    orderby o.HasSoulPatch descending, o.Tag.Note
                     where o.Reports.Any()
                     select new
                     {
@@ -5320,7 +5320,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                         ).ToList(),
                         OuterCollection2 = (
                             from www in o.Tag.Gear.Weapons
-                            orderby www.IsAutomatic ,www.Owner.Nickname descending
+                            orderby www.IsAutomatic, www.Owner.Nickname descending
                             select www
                         ).ToList()
                     },
@@ -5524,7 +5524,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     from g in ss.Set<Gear>()
                     from s in ss.Set<Squad>()
                     where g.HasSoulPatch
-                    orderby g.Nickname ,s.Id descending
+                    orderby g.Nickname, s.Id descending
                     select new
                     {
                         GearNickname = g.Nickname,
@@ -5708,7 +5708,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     from t in ss.Set<CogTag>()
                     join g in ss.Set<Gear>() on t.GearNickName equals g.Nickname into grouping
                     from g in grouping.DefaultIfEmpty()
-                    orderby t.Note ,g.Nickname descending
+                    orderby t.Note, g.Nickname descending
                     select g.Squad.Members
                         .Where(m => m.HasSoulPatch)
                         .Select(
@@ -5724,7 +5724,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     from t in ss.Set<CogTag>()
                     join g in ss.Set<Gear>() on t.GearNickName equals g.Nickname into grouping
                     from g in grouping.DefaultIfEmpty()
-                    orderby t.Note ,g.Nickname descending
+                    orderby t.Note, g.Nickname descending
                     select g != null
                         ? g.Squad.Members
                           .Where(m => m.HasSoulPatch)
@@ -5954,7 +5954,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 async,
                 ss =>
                     from r in ss.Set<Gear>()
-                    orderby r.FullName ,r.Nickname descending,r.FullName
+                    orderby r.FullName, r.Nickname descending, r.FullName
                     select new
                     {
                         r.FullName,
@@ -6000,19 +6000,19 @@ namespace Microsoft.EntityFrameworkCore.Query
                 async,
                 ss =>
                     from o in ss.Set<Gear>().OfType<Officer>()
-                    orderby o.HasSoulPatch ,o.LeaderNickname ,o.HasSoulPatch descending,o.LeaderNickname descending,o.FullName
+                    orderby o.HasSoulPatch, o.LeaderNickname, o.HasSoulPatch descending, o.LeaderNickname descending, o.FullName
                     select new
                     {
                         o.FullName,
                         OuterCollection = (
                             from r in o.Reports
-                            orderby r.FullName ,r.HasSoulPatch descending,r.FullName descending
+                            orderby r.FullName, r.HasSoulPatch descending, r.FullName descending
                             select new
                             {
                                 r.FullName,
                                 InnerCollection = (
                                     from w in r.Weapons
-                                    orderby w.IsAutomatic ,w.Name descending,w.Name ,w.IsAutomatic descending,w.IsAutomatic descending
+                                    orderby w.IsAutomatic, w.Name descending, w.Name, w.IsAutomatic descending, w.IsAutomatic descending
                                     select new
                                     {
                                         w.Id,
@@ -7616,7 +7616,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 ss =>
                     from g in ss.Set<Gear>()
                     from m in ss.Set<Mission>()
-                    orderby g.Nickname ,m.Id
+                    orderby g.Nickname, m.Id
                     select new
                     {
                         HasSoulPatch = string.Concat(
@@ -10136,7 +10136,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 ss =>
                     from g in ss.Set<Gear>()
                     from w in ss.Set<Weapon>().Where(x => x.OwnerFullName != g.FullName)
-                    orderby g.Nickname ,w.Id
+                    orderby g.Nickname, w.Id
                     select new { g, w },
                 assertOrder: true,
                 elementAsserter: (e, a) =>
@@ -10160,7 +10160,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     from w in ss.Set<Weapon>()
                         .Where(x => x.OwnerFullName != g.FullName)
                         .DefaultIfEmpty()
-                    orderby g.Nickname ,w.Id
+                    orderby g.Nickname, w.Id
                     select new { g, w },
                 assertOrder: true,
                 elementAsserter: (e, a) =>
@@ -10185,7 +10185,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Select(x => x.SynergyWith)
                         .Where(x => x.OwnerFullName != g.FullName)
                         .DefaultIfEmpty()
-                    orderby g.Nickname ,w.Id
+                    orderby g.Nickname, w.Id
                     select new { g, w },
                 ss =>
                     from g in ss.Set<Gear>()
@@ -10193,7 +10193,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Select(x => x.SynergyWith)
                         .Where(x => x.OwnerFullName != g.FullName)
                         .MaybeDefaultIfEmpty()
-                    orderby g.Nickname ,w.MaybeScalar(xx => xx.Id)
+                    orderby g.Nickname, w.MaybeScalar(xx => xx.Id)
                     select new { g, w },
                 assertOrder: true,
                 elementAsserter: (e, a) =>
@@ -10288,7 +10288,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Where(x => x.OwnerFullName != g.FullName)
                         .OrderBy(x => x.Id)
                         .Take(3)
-                    orderby g.Nickname ,w.Id
+                    orderby g.Nickname, w.Id
                     select new { g, w },
                 assertOrder: true,
                 elementAsserter: (e, a) =>

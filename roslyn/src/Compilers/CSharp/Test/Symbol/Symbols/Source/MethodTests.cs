@@ -625,7 +625,7 @@ namespace N1.N2  {
             var mems = type1.GetMembers();
             Assert.Equal(7, mems.Length);
             // var sorted = mems.Orderby(m => m.Name).ToArray();
-            var sorted = (from m in mems orderby m.Name  select m).ToArray();
+            var sorted = (from m in mems orderby m.Name select m).ToArray();
 
             var m0 = sorted[0] as MethodSymbol;
             Assert.Equal(WellKnownMemberNames.InstanceConstructorName, m0.Name);
@@ -684,7 +684,7 @@ namespace N1.N2  {
             mems = type2.GetMembers();
 
             Assert.Equal(8, mems.Length);
-            sorted = (from m in mems orderby m.Name  select m).ToArray();
+            sorted = (from m in mems orderby m.Name select m).ToArray();
 
             var mm = sorted[2] as FieldSymbol;
             Assert.Equal("M1", mm.Name);
@@ -825,7 +825,7 @@ namespace N1.N2  {
             var mems = type1.GetMembers();
             Assert.Equal(7, mems.Length);
             // var sorted = mems.Orderby(m => m.Name).ToArray();
-            var sorted = (from m in mems orderby m.Name  select m).ToArray();
+            var sorted = (from m in mems orderby m.Name select m).ToArray();
 
             var m0 = sorted[0] as MethodSymbol;
             Assert.Equal(WellKnownMemberNames.InstanceConstructorName, m0.Name);
@@ -883,7 +883,7 @@ namespace N1.N2  {
             Assert.Equal("Abc", type2.Name);
             mems = type2.GetMembers();
             Assert.Equal(8, mems.Length);
-            sorted = (from m in mems orderby m.Name  select m).ToArray();
+            sorted = (from m in mems orderby m.Name select m).ToArray();
 
             var mm = sorted[2] as FieldSymbol;
             Assert.Equal("M1", mm.Name);
@@ -1016,7 +1016,7 @@ namespace NS  {
             list.AddRange(mems);
             list.AddRange(mems1);
             list.AddRange(mems2);
-            var sorted = (from m in list orderby m.Name  select m).ToArray();
+            var sorted = (from m in list orderby m.Name select m).ToArray();
 
             var m0 = sorted[0] as MethodSymbol;
             Assert.Equal(WellKnownMemberNames.InstanceConstructorName, m0.Name);
@@ -1143,7 +1143,7 @@ namespace NS  {
             list.AddRange(mems);
             list.AddRange(mems1);
             list.AddRange(mems2);
-            var sorted = (from m in list orderby m.Name  select m).ToArray();
+            var sorted = (from m in list orderby m.Name select m).ToArray();
 
             var m0 = sorted[0] as MethodSymbol;
             Assert.Equal(WellKnownMemberNames.InstanceConstructorName, m0.Name);
@@ -1241,7 +1241,7 @@ namespace NS
 
             var mems = type1.GetMembers();
             Assert.Equal(5, mems.Length);
-            var sorted = (from m in mems orderby m.Name  select m).ToArray();
+            var sorted = (from m in mems orderby m.Name select m).ToArray();
 
             var m0 = sorted[0] as MethodSymbol;
             Assert.Equal(WellKnownMemberNames.InstanceConstructorName, m0.Name);
@@ -1276,7 +1276,7 @@ namespace NS
 
             mems = type2.GetMembers();
             // Assert.Equal(3, mems.Count());
-            sorted = (from m in mems orderby m.Name  select m).ToArray();
+            sorted = (from m in mems orderby m.Name select m).ToArray();
 
             m0 = sorted[0] as MethodSymbol;
             Assert.Equal(WellKnownMemberNames.InstanceConstructorName, m0.Name);
@@ -1332,7 +1332,7 @@ namespace NS
             var mems = type1.GetMembers();
             // Bug: actual 5
             Assert.Equal(3, mems.Length);
-            var sorted = (from m in mems orderby m.Name  select m).ToArray();
+            var sorted = (from m in mems orderby m.Name select m).ToArray();
 
             var m1 = sorted[0] as MethodSymbol;
             Assert.Equal(WellKnownMemberNames.InstanceConstructorName, m1.Name);

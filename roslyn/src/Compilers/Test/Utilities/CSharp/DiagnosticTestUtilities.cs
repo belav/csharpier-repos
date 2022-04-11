@@ -178,13 +178,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                                 : Array.Empty<string>()
                     }
                 )
-                orderby ae.Code ,ae.Line ,ae.Column
+                orderby ae.Code, ae.Line, ae.Column
                 select ae
             ).ToList();
 
             var expectedSortedDesp = (
                 from ee in expectedErrorDesp
-                orderby ee.Code ,ee.Line ,ee.Column
+                orderby ee.Code, ee.Line, ee.Column
                 select ee
             ).ToList();
 
@@ -262,7 +262,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 group e by e.Code
             ).ToList();
 
-            var actualCodes = (from e in actualErrors orderby e.Code  group e by e.Code).ToList();
+            var actualCodes = (from e in actualErrors orderby e.Code group e by e.Code).ToList();
 
             foreach (var expectedGroup in expectedCodes)
             {

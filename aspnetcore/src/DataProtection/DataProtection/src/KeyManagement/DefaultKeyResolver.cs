@@ -88,7 +88,7 @@ internal sealed class DefaultKeyResolver : IDefaultKeyResolver
         var preferredDefaultKey = (
             from key in allKeys
             where key.ActivationDate <= now + _maxServerToServerClockSkew
-            orderby key.ActivationDate descending,key.KeyId ascending
+            orderby key.ActivationDate descending, key.KeyId ascending
             select key
         ).FirstOrDefault();
 

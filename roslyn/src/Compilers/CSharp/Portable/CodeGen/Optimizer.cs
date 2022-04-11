@@ -156,7 +156,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             var ordered =
                 from i in info
                 from d in i.Value.LocalDefs
-                orderby d.End - d.Start ,d.End ascending
+                orderby d.End - d.Start, d.End ascending
                 select new { i = i.Key, d = d };
 
             // collect non-intersecting def-use spans.

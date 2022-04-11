@@ -2072,7 +2072,7 @@ WHERE ""b"".""Id"" = 13"
             var expected = (
                 from dt1 in context.Set<BuiltInDataTypes>().ToList()
                 from dt2 in context.Set<BuiltInDataTypes>().ToList()
-                orderby dt1.Id ,dt2.Id
+                orderby dt1.Id, dt2.Id
                 select new
                 {
                     add = dt1.TestDecimal + dt2.TestDecimal,
@@ -2088,7 +2088,7 @@ WHERE ""b"".""Id"" = 13"
             var actual = (
                 from dt1 in context.Set<BuiltInDataTypes>()
                 from dt2 in context.Set<BuiltInDataTypes>()
-                orderby dt1.Id ,dt2.Id
+                orderby dt1.Id, dt2.Id
                 select new
                 {
                     add = dt1.TestDecimal + dt2.TestDecimal,

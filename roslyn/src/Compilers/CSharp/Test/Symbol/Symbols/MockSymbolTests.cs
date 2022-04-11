@@ -186,7 +186,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             if (sym is NamespaceOrTypeSymbol namespaceOrType && namespaceOrType.GetMembers().Any())
             {
                 builder.AppendLine(" { ");
-                var q = from c in namespaceOrType.GetMembers() orderby c.Name  select c;
+                var q = from c in namespaceOrType.GetMembers() orderby c.Name select c;
 
                 foreach (Symbol child in q)
                 {

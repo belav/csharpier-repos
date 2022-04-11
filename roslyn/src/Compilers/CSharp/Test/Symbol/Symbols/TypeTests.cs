@@ -148,7 +148,7 @@ interface B {
             var type1 = ns.GetTypeMembers("C", 0).SingleOrDefault() as NamedTypeSymbol;
             Assert.Equal(0, type1.Interfaces().Length);
             Assert.Equal(3, type1.AllInterfaces().Length);
-            var sorted = (from i in type1.AllInterfaces() orderby i.Name  select i).ToArray();
+            var sorted = (from i in type1.AllInterfaces() orderby i.Name select i).ToArray();
             var i1 = sorted[0] as NamedTypeSymbol;
             var i2 = sorted[1] as NamedTypeSymbol;
             var i3 = sorted[2] as NamedTypeSymbol;
@@ -236,7 +236,7 @@ interface B {
             Assert.Equal(0, type1.Interfaces().Length);
             //
             Assert.Equal(4, type1.AllInterfaces().Length);
-            var sorted = (from i in type1.AllInterfaces() orderby i.Name  select i).ToArray();
+            var sorted = (from i in type1.AllInterfaces() orderby i.Name select i).ToArray();
             var i1 = sorted[0] as NamedTypeSymbol;
             var i2 = sorted[1] as NamedTypeSymbol;
             var i3 = sorted[2] as NamedTypeSymbol;

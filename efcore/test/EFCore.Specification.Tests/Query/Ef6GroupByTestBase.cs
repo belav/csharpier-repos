@@ -778,7 +778,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     select person2
                     join Shoes shoes in ss.Set<Shoes>() on person1.Age equals shoes.Age
                     group shoes by new { person1.Id, shoes.Style, shoes.Age } into temp
-                    orderby temp.Key.Id ,temp.Key.Style ,temp.Key.Age
+                    orderby temp.Key.Id, temp.Key.Style, temp.Key.Age
                     select new
                     {
                         temp.Key.Id,
