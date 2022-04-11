@@ -1036,7 +1036,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 oldDispatches.Add(
                     dispatchLabel,
-                    new List<int>(from kv in _dispatches.Values from n in kv orderby n  select n)
+                    new List<int>(from kv in _dispatches.Values from n in kv orderby n select n)
                 );
             }
 

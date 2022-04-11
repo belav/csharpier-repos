@@ -1979,7 +1979,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 var orders = (
                     from c in context.Customers
                     from r in context.GetCustomerOrderCountByYear(c.Id)
-                    orderby c.Id ,r.Year
+                    orderby c.Id, r.Year
                     select new { c.Id, c.LastName, r.Year, r.Count }
                 ).ToList();
 
@@ -2309,7 +2309,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 var orders = (
                     from c in context.Customers
                     from r in context.GetCustomerOrderCountByYear(c.Id)
-                    orderby r.Count descending,r.Year descending
+                    orderby r.Count descending, r.Year descending
                     select r
                 ).ToList();
 
@@ -2464,7 +2464,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 var orders = (
                     from c in context.Customers
                     from r in context.GetCustomerOrderCountByYear(c.Id).DefaultIfEmpty()
-                    orderby c.Id ,r.Year
+                    orderby c.Id, r.Year
                     select r
                 ).ToList();
 
@@ -2497,7 +2497,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     from c in context.Customers
                     from r in context.GetCustomerOrderCountByYear(c.Id).DefaultIfEmpty()
                     where r.Year == 2000
-                    orderby c.Id ,r.Year
+                    orderby c.Id, r.Year
                     select c
                 ).ToList();
 
@@ -2518,7 +2518,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 var orders = (
                     from c in context.Customers
                     from r in context.GetCustomerOrderCountByYear(c.Id).DefaultIfEmpty()
-                    orderby c.Id ,r.Year
+                    orderby c.Id, r.Year
                     select new { c.Id, c.LastName, r.Year, r.Count }
                 ).ToList();
 
@@ -2709,7 +2709,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     Count = x.Count()
                                 }
                         )
-                    orderby a.Id ,r.Year
+                    orderby a.Id, r.Year
                     select r
                 ).ToList();
 
@@ -2718,7 +2718,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 var query = (
                     from a in context.Addresses
                     from r in context.GetCustomerOrderCountByYearOnlyFrom2000(1, a.City == a.State)
-                    orderby a.Id ,r.Year
+                    orderby a.Id, r.Year
                     select r
                 ).ToList();
 

@@ -1335,7 +1335,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     join l2 in ss.Set<Level2>() on l1.Id equals l2.Level1_Optional_Id into groupJoin
                     from l2 in groupJoin.DefaultIfEmpty()
 #pragma warning disable IDE0031 // Use null propagation
-                    orderby l2 == null ? null : l2.Name ,l1.Id
+                    orderby l2 == null ? null : l2.Name, l1.Id
 #pragma warning restore IDE0031 // Use null propagation
                     select l1.Id,
                 assertOrder: true
@@ -3130,7 +3130,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     from l1 in ss.Set<Level1>()
                     join l2 in ss.Set<Level2>() on l1.Id equals l2.Level1_Optional_Id into groupJoin
                     from l2 in groupJoin.DefaultIfEmpty()
-                    orderby ClientMethodNullableInt(l1.Id) ,ClientMethodNullableInt(
+                    orderby ClientMethodNullableInt(l1.Id), ClientMethodNullableInt(
                         l2 != null ? l2.Id : (int?)null
                     )
                     select l1.Id,
@@ -3693,7 +3693,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     select new
                     {
                         Key = l1.Id,
-                        Subquery = (from l3 in ss.Set<Level3>() orderby l3.Id  select l3)
+                        Subquery = (from l3 in ss.Set<Level3>() orderby l3.Id select l3)
                             .Distinct()
                             .Skip(1)
                             .FirstOrDefault()

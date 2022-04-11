@@ -61,7 +61,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 async,
                 ss =>
                     from e1 in ss.Set<CompositeOne>()
-                    orderby e1.Id2 ,e1.Id1 descending
+                    orderby e1.Id2, e1.Id1 descending
                     select new
                     {
                         e1.Name,

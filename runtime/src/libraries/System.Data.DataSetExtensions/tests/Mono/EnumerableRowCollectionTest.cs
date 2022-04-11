@@ -173,7 +173,7 @@ namespace MonoTests.System.Data
             var q =
                 from line in table.AsEnumerable()
                 where line.Field<int>("Score") >= 80
-                orderby line.Field<bool>("Gender") ,line.Field<int>("ID")
+                orderby line.Field<bool>("Gender"), line.Field<int>("ID")
                 select new
                 {
                     StudentID = line.Field<int>("ID"),
@@ -208,7 +208,7 @@ namespace MonoTests.System.Data
             var q =
                 from line in table.AsEnumerable()
                 where line.Field<int>("Score") >= 80
-                orderby line.Field<bool>("Gender") ,line.Field<int>("ID") descending
+                orderby line.Field<bool>("Gender"), line.Field<int>("ID") descending
                 select new
                 {
                     StudentID = line.Field<int>("ID"),

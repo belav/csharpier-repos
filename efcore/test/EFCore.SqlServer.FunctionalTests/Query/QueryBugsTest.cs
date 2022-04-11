@@ -10798,7 +10798,7 @@ ORDER BY [t].[Id]"
 
             ClearLog();
 
-            var q = from m in context.Message orderby m.Id  select m;
+            var q = from m in context.Message orderby m.Id select m;
 
             var q2 =
                 from m in q.Take(10)

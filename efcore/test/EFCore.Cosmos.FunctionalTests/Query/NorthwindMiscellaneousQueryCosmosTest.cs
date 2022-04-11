@@ -1715,7 +1715,7 @@ WHERE (c[""Discriminator""] = ""Customer"")"
                     (
                         from c in ss.Set<Customer>().Where(cu => cu.CustomerID == "ALFKI")
                         from o in ss.Set<Order>().Where(or => or.OrderID < 10300)
-                        orderby c.CustomerID ,o.OrderID
+                        orderby c.CustomerID, o.OrderID
                         select new { c, o }
                     )
                         .Take(1)
@@ -2976,7 +2976,7 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""City""] = ""London""))"
                         .Where(o => o.CustomerID == c.CustomerID)
                         .DefaultIfEmpty()
                     where o1 != null && o2 != null
-                    orderby o1.OrderID ,o2.OrderDate
+                    orderby o1.OrderID, o2.OrderDate
                     select new { c.CustomerID, o1.OrderID, o2.OrderDate },
                 elementSorter: e => (e.CustomerID, e.OrderID)
             );
@@ -3880,7 +3880,7 @@ WHERE (c[""Discriminator""] = ""Customer"")"
                     where o1.CustomerID.StartsWith("A")
                     from o2 in ss.Set<Order>()
                     where o1.Customer.Equals(o2.Customer)
-                    orderby o1.OrderID ,o2.OrderID
+                    orderby o1.OrderID, o2.OrderID
                     select new { Id1 = o1.OrderID, Id2 = o2.OrderID },
                 elementSorter: e => (e.Id1, e.Id2)
             );
@@ -3902,7 +3902,7 @@ WHERE (c[""Discriminator""] = ""Order"")"
                     where o1.CustomerID.StartsWith("A")
                     from o2 in ss.Set<Order>()
                     where Equals(o1.Customer, o2.Customer)
-                    orderby o1.OrderID ,o2.OrderID
+                    orderby o1.OrderID, o2.OrderID
                     select new { Id1 = o1.OrderID, Id2 = o2.OrderID },
                 elementSorter: e => (e.Id1, e.Id2)
             );

@@ -195,7 +195,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     (
                         from od in ss.Set<OrderDetail>()
                         where od.Order.Customer.City == "Seattle"
-                        orderby od.OrderID ,od.ProductID
+                        orderby od.OrderID, od.ProductID
                         select od
                     ).Take(1),
                 entryCount: 1
@@ -648,7 +648,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 async,
                 ss =>
                     from od in ss.Set<OrderDetail>()
-                    orderby od.OrderID ,od.ProductID
+                    orderby od.OrderID, od.ProductID
                     where od.Order.CustomerID == "ALFKI" || od.Order.CustomerID == "ANTON"
                     select new { od.Order.Customer.Orders },
                 assertOrder: true,
@@ -839,10 +839,10 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => from c in ss.Set<Customer>() orderby c.Orders.Count() ,c.CustomerID  select c,
+                ss => from c in ss.Set<Customer>() orderby c.Orders.Count(), c.CustomerID select c,
                 ss =>
                     from c in ss.Set<Customer>()
-                    orderby (c.Orders ?? new List<Order>()).Count() ,c.CustomerID
+                    orderby (c.Orders ?? new List<Order>()).Count(), c.CustomerID
                     select c,
                 assertOrder: true,
                 entryCount: 91

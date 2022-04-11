@@ -336,7 +336,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                             .Id equals s.ThreeSkipFull.OrderBy(e => e.Id).FirstOrDefault().Id
                         into grouping
                     from s in grouping.DefaultIfEmpty()
-                    orderby t.Key1 ,s.Key1 ,t.Key2 ,s.Key2
+                    orderby t.Key1, s.Key1, t.Key2, s.Key2
                     select new { t, s },
                 ss =>
                     from t in ss.Set<EntityCompositeKey>()
@@ -350,7 +350,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                             .MaybeScalar(e => e.Id)
                         into grouping
                     from s in grouping.DefaultIfEmpty()
-                    orderby t.Key1 ,s.MaybeScalar(e => e.Key1) ,t.Key2 ,s.Key2
+                    orderby t.Key1, s.MaybeScalar(e => e.Key1), t.Key2, s.Key2
                     select new { t, s },
                 assertOrder: true,
                 elementAsserter: (e, a) =>
@@ -460,7 +460,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => from r in ss.Set<EntityOne>() orderby r.Id  select r.SelfSkipPayloadLeft,
+                ss => from r in ss.Set<EntityOne>() orderby r.Id select r.SelfSkipPayloadLeft,
                 assertOrder: true,
                 elementAsserter: (e, a) => AssertCollection(e, a),
                 entryCount: 13
